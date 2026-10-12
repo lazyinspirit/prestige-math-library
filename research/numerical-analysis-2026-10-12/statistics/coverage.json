@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-12",
+  "research_only": true,
+  "scope": "Interpolation/approximation; deterministic and randomized integration; MLMC; numerical SDE rates; optimization and inverse-problem interfaces for statistical computation.",
+  "interfaces": {
+    "supplies": [
+      "Generic interpolation, quadrature, random-integration and solver-error contracts.",
+      "Abstract MLMC complexity and separately qualified numerical SDE rates.",
+      "Convex optimization and inverse-problem contracts reusable by statistical consumers."
+    ],
+    "consumer_owned": [
+      "BCS retains posterior/Laplace approximation, inferential calibration and the full statistical error ledger.",
+      "MSF-26 retains its natural-cubic and Sobolev spline approximation proof.",
+      "ML-58/60/61 retain exact-flow and learned-score/model claims; P-NUM-ODE-01/02 own generic ODE error theorems."
+    ]
+  },
+  "coverage": [
+    {
+      "topic": "Lagrange interpolation and approximation",
+      "status": "established-result-local-supplier-needed",
+      "contracts": [
+        "For distinct real nodes x_0,...,x_n, I_n f=sum_j f(x_j) ell_j, ell_j(x)=product_{k!=j}(x-x_k)/(x_j-x_k), is the unique degree-at-most-n interpolant.",
+        "For f in C^(n+1)[a,b], at each non-node x, f(x)-I_n f(x)=f^(n+1)(xi_x)/(n+1)! times product_j(x-x_j).",
+        "For Chebyshev-root or Chebyshev-Lobatto nodes, Lambda_n=||I_n||_(C to C)=O(log n), and ||f-I_n f||<=(1+Lambda_n)E_n(f)."
+      ],
+      "proof_route": [
+        "Cardinal identities give existence; n+1 roots give uniqueness.",
+        "Use divided differences or repeated Rolle for the interpolation remainder.",
+        "Bound trigonometric cardinal sums for Chebyshev nodes; use I_n p=p for the best-approximation inequality."
+      ],
+      "guardrails": [
+        "A logarithmic Lebesgue bound alone does not give convergence for every continuous f without a rate on E_n(f).",
+        "Equispaced interpolation can diverge; Weierstrass density is not arbitrary-node convergence."
+      ],
+      "existing_suppliers": [
+        "cor-weierstrass-approximation-on-the-unit-interval",
+        "cor-weierstrass-approximation-on-a-closed-interval",
+        "def-chebyshev-polynomials-first-and-second-kind",
+        "cor-runge-polynomial-approximation"
+      ],
+      "source_limit": "ATAP Ch. 2 states uniqueness as known; Ch. 5 proves barycentric evaluation. The sample does not prove the general remainder or Chebyshev Lebesgue bound."
+    },
+    {
+      "topic": "Deterministic and Gaussian quadrature",
+      "status": "established-result-local-proof-supplier-needed",
+      "contracts": [
+        "For f in C^2[a,b] and uniform h=(b-a)/n: midpoint error <= (b-a)h^2||f''||_infinity/24; trapezoid error <= (b-a)h^2||f''||_infinity/12.",
+        "For even n and f in C^4[a,b], composite Simpson error <= (b-a)h^4||f^(4)||_infinity/180; the rule is exact through degree three.",
+        "For positive d-mu=w(x)dx, finite moments through 2m-1, and positive-definite polynomial inner product through degree m, the m-node Gaussian rule at roots of monic orthogonal p_m has positive weights, degree-2m-1 exactness, and for f in C^(2m) error f^(2m)(xi)/(2m)! times integral p_m^2 d-mu."
+      ],
+      "proof_route": [
+        "Midpoint: integrate panelwise Taylor remainder. Trapezoid: integrate piecewise-linear interpolation error and sum.",
+        "Simpson: derive weights, verify cubic symmetry cancellation, sum fourth-order Peano/Taylor remainders.",
+        "Gaussian: prove simple interior roots by sign changes; divide q=p_m r+s; apply orthogonality and Lagrange interpolation; use exactness on ell_i^2 for positive weights; use double-node Hermite interpolation for the remainder."
+      ],
+      "guardrails": [
+        "Owen Ch. 7 states Gaussian exactness/error but does not prove them; root and Hermite steps are local obligations.",
+        "Tensor-product Gaussian node counts grow exponentially in dimension."
+      ]
+    },
+    {
+      "topic": "Adaptive integration and embedded ODE estimates",
+      "status": "algorithm-interface-no-generic-certificate",
+      "contract": "Adaptive Simpson/Richardson and embedded Runge-Kutta estimate local defects and refine; a certified global bound additionally needs a posteriori remainder/defect bounds, stability propagation and controlled arithmetic.",
+      "proof_route": [
+        "Specify estimator, decision rule, termination and floating-point model.",
+        "Prove a local remainder bound, propagate it through stability, and account for roundoff."
+      ],
+      "source_limit": "FNC adaptive Simpson gives an example where actual error exceeds the requested tolerance. Embedded RK tolerance is a target, not a universal guarantee."
+    },
+    {
+      "topic": "IID Monte Carlo, QMC and RQMC",
+      "status": "generic-contracts-inferential-calibration-stays-with-BCS",
+      "contracts": [
+        "For IID Y_i with finite variance sigma^2, the sample mean is unbiased with variance sigma^2/n and RMSE sigma/sqrt(n); the CLT additionally requires sigma^2>0.",
+        "Koksma-Hlawka: for finite anchored Hardy-Krause variation on [0,1]^d, absolute QMC error <= star discrepancy times variation.",
+        "RQMC needs uniform point marginals, not independent points. A nested uniform scramble of a (0,m,d)-net, base b>=max(d,2), n=b^m, f in L^2 gives Var(I_hat)<= (b/(b-1))^min(m,d-1) sigma^2/n <= e sigma^2/n.",
+        "For R independent RQMC replicates mu_r, variance estimate=sum_r(mu_r-mu_bar)^2/[R(R-1)]; it estimates randomization variability, not data-sampling error."
+      ],
+      "proof_route": [
+        "Derive IID mean/variance by independence; keep the CLT as separate asymptotic sampling calibration.",
+        "Use summation by parts in one dimension and anchored mixed-variation decomposition in d dimensions for Koksma-Hlawka.",
+        "RQMC unbiasedness follows from uniform marginals; the scramble-variance proof needs ANOVA components and elementary-interval covariance cancellation."
+      ],
+      "source_limit": "Owen Ch. 15 cites the multidimensional Koksma-Hlawka proof. Ch. 17 cites the nested-scramble variance, smooth-rate and CLT proofs externally. Unknown discrepancy/variation are generally not empirical error bars."
+    },
+    {
+      "topic": "Multilevel Monte Carlo",
+      "status": "established-theorem-full-proof-read",
+      "contract": "For h_l=M^-l T, independent unbiased level estimators, |E(P_l-P)|<=c_1 h_l^alpha with alpha>=1/2, Var(Y_l)<=c_2 N_l^-1 h_l^beta with beta>0, and cost C_l<=c_3 N_l h_l^-1: work for MSE epsilon^2 is O(epsilon^-2) if beta>1, O(epsilon^-2 log^2(epsilon^-1)) if beta=1, and O(epsilon^(-2-(1-beta)/alpha)) if beta<1.",
+      "proof_route": [
+        "Choose terminal level from bias; choose N_l proportional to sqrt(V_l/C_l) under the variance budget; evaluate geometric sums."
+      ],
+      "guardrails": [
+        "SDE rates and fine/coarse coupling are separate prerequisites.",
+        "Giles's adaptive bias/level stopping is heuristic, not a guaranteed theorem."
+      ],
+      "source": "Giles (2008), Theorem 3.1 and complete proof, read in full."
+    },
+    {
+      "topic": "Euler-Maruyama strong and weak rates",
+      "status": "strong-source-theorem-weak-local-proof-design",
+      "contracts": [
+        "Higham-Mao-Stuart Theorem 4.4: autonomous C^1 drift/diffusion; one-sided-Lipschitz drift; globally Lipschitz diffusion; polynomial local-Lipschitz drift; uniform finite moments of every order for exact solution, step process and continuous interpolation. Then E sup_{t<=T}|X-Y|^2=O(h).",
+        "Separate P-NUM-SDE-01 local route: X_0 is adapted at time zero, has E|X_0|^2<infinity and is independent of future Brownian increments; coefficients are Borel in time, globally Lipschitz and linear-growth in state uniformly, and have the stated 1/2-Hölder time modulus with linear growth. Its local interpolation proof gives finite second moments and E sup error squared O(h).",
+        "Weak order-one local design: bounded payoff phi; backward u(t,x)=E[phi(X_T^(t,x))] in C^2 time/C^4 space with derivatives bounded by C(1+|x|^q); exact/Euler processes have uniform moments p>=2q+8. One-step expected remainder O(h^2)(1+|x|^(q+4)) telescopes to weak bias O(h)."
+      ],
+      "proof_route": [
+        "Strong source route: localization, all-order moments, EM interpolation defect, Itô/BDG and Gronwall.",
+        "Weak design: conditional Gaussian Taylor expansion through cubic order, odd-moment and backward-PDE cancellation, polynomial remainder and telescoping."
+      ],
+      "guardrails": [
+        "Do not weaken Higham-Mao-Stuart to X_0 in L^2 or time-dependent coefficients.",
+        "The checked sources do not prove the weak contract; deriving backward-solution regularity is separate.",
+        "P-NUM-SDE-01's finite-L2 global-Lipschitz/time-Hölder route is distinct and not an H-M-S corollary.",
+        "P-NUM-SDE-01 states the temporal modulus qualitatively; specify its norm and constants in the final theorem before authoring.",
+        "The published Itô-integral, isometry and multidimensional Itô suppliers carry AC and standing hypothesis (H) from def-elementary-predictable-brownian-integrand; preserve those inherited premises."
+      ]
+    },
+    {
+      "topic": "Optimization and numerical likelihood",
+      "status": "convex-source-contracts-only",
+      "contracts": [
+        "For C^2 f with mI<=Hessian<=MI on the initial sublevel set and attained minimum, exact-line-search gradient descent objective gap contracts by 1-m/M. Armijo backtracking with alpha in (0,1/2), beta in (0,1) has factor 1-min(2m alpha,2 beta alpha m/M).",
+        "Damped Newton for C^2 strongly convex f with Lipschitz Hessian on the sublevel set has a finite damped phase followed by full steps and quadratic convergence.",
+        "If f is mu-strongly convex and ||grad f(x_tilde)||<=eta, then ||x_tilde-x*||<=eta/mu; an approximate-gradient error delta changes eta to eta+delta."
+      ],
+      "proof_route": [
+        "Use the descent lemma, strong convexity and Armijo accepted-step bound.",
+        "For Newton, prove finite decrease away from the solution and use the Hessian-Lipschitz remainder for local full-step acceptance/quadratic convergence.",
+        "For approximate gradient, use strong monotonicity and Cauchy-Schwarz."
+      ],
+      "guardrails": [
+        "These convex results do not give global optimization for multimodal/nonconvex likelihoods.",
+        "An approximate objective/normalizer can be biased even if its approximate gradient is solved exactly."
+      ],
+      "source": "Boyd-Vandenberghe Ch. 9 §§9.2-9.3 and §9.5.1-9.5.3; proofs read."
+    },
+    {
+      "topic": "Inverse problems and regularization",
+      "status": "reuse-published-library-spine",
+      "contract": "With b=A x_dagger+e and Tikhonov inverse A_lambda_sharp, x_dagger-A_lambda_sharp b=(I-A_lambda_sharp A)x_dagger-A_lambda_sharp e separates regularization bias from data perturbation.",
+      "proof_route": [
+        "Substitute b and distribute the regularized inverse.",
+        "Keep operator discretization, data error, regularization/truncation, iterative stopping and roundoff as separate terms."
+      ],
+      "existing_suppliers": [
+        "thm-least-squares-solutions-and-normal-equation",
+        "thm-normal-equations-square-the-spectral-condition-number",
+        "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+        "def-condition-number-of-a-nonsingular-linear-system",
+        "def-absolute-and-relative-local-condition-numbers-of-a-problem-map",
+        "def-standard-relative-floating-point-model-and-unit-roundoff",
+        "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+        "def-tikhonov-regularised-least-squares",
+        "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+        "prop-tikhonov-regularisation-has-singular-filter-factors",
+        "prop-truncated-svd-and-tikhonov-are-hard-and-smooth-spectral-filters",
+        "thm-gradient-and-hessian-of-the-frobenius-least-squares-functional"
+      ],
+      "guardrails": [
+        "Use library convention lambda>0 in ||Ax-b||^2+lambda||x||^2; Hansen's slides use lambda^2.",
+        "Discrepancy, L-curve, GCV and residual-spectrum criteria are not universal regularization guarantees.",
+        "No parallel statistical inverse theorem is needed."
+      ]
+    }
+  ],
+  "error_ledger": {
+    "rule": "Compose adjacent target differences with the pathwise triangle inequality. A sum of variances/root-sum-square requires centering, covariance or independence.",
+    "separate_terms": [
+      "data-sampling error",
+      "Monte Carlo/RQMC estimation error",
+      "deterministic quadrature error",
+      "ODE/SDE solver or time-discretization error",
+      "truncation error",
+      "optimization residual and approximate-gradient error",
+      "conditioning and floating-point error",
+      "regularization bias and data perturbation",
+      "posterior/Laplace approximation bias owned by BCS",
+      "model/learned-score bias that may persist as step tends to zero"
+    ],
+    "replicates": "RQMC replicate estimates quantify randomization uncertainty only, not data-sampling error or model bias."
+  },
+  "existing_published_suppliers_inspected": [
+    "cor-weierstrass-approximation-on-the-unit-interval",
+    "cor-weierstrass-approximation-on-a-closed-interval",
+    "def-chebyshev-polynomials-first-and-second-kind",
+    "cor-runge-polynomial-approximation",
+    "def-absolute-and-relative-local-condition-numbers-of-a-problem-map",
+    "def-condition-number-of-a-nonsingular-linear-system",
+    "def-standard-relative-floating-point-model-and-unit-roundoff",
+    "lem-product-of-one-plus-deltas-gives-theta-n",
+    "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+    "thm-householder-qr-is-backward-stable-in-the-standard-floating-point-model",
+    "thm-least-squares-solutions-and-normal-equation",
+    "thm-normal-equations-square-the-spectral-condition-number",
+    "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+    "def-tikhonov-regularised-least-squares",
+    "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+    "prop-tikhonov-regularisation-has-singular-filter-factors",
+    "prop-truncated-svd-and-tikhonov-are-hard-and-smooth-spectral-filters",
+    "thm-gradient-and-hessian-of-the-frobenius-least-squares-functional",
+    "thm-determinant-differential-and-jacobis-formula",
+    "def-ito-integral-for-square-integrable-predictable-processes",
+    "thm-multidimensional-ito-formula-for-brownian-driven-processes"
+  ],
+  "planned_consumers_inspected": [
+    "BCS-20",
+    "BCS-23",
+    "BCS-25",
+    "BCS-54",
+    "BCS-55",
+    "BCS-56",
+    "BCS-57",
+    "BCS-59",
+    "ML-37",
+    "ML-38",
+    "ML-39",
+    "ML-58",
+    "ML-60",
+    "ML-61",
+    "MSF-26",
+    "SME-02",
+    "SME-04",
+    "SME-16",
+    "SME-36"
+  ],
+  "open_problem_candidate": {
+    "id": "op-optimal-star-discrepancy-order-dimension-at-least-three",
+    "status": "genuine-unresolved-question",
+    "claim": "For fixed dimension d>=3, determine the exact asymptotic order of the smallest star discrepancy achievable by n points in [0,1]^d.",
+    "boundary": "Published lower and upper bounds do not match. No proof is supplied; represent only with the new op- kind if an open-problem lesson is wanted.",
+    "source": "Owen, Practical QMC, Ch. 15 discrepancy discussion and cited Roth lower bound."
+  },
+  "open_problem_policy": "Missing local suppliers in this dossier concern established mathematics, not open problems. The d>=3 optimal star-discrepancy order is genuinely unresolved and optional."
+}

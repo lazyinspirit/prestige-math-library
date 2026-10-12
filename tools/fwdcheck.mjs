@@ -85,7 +85,7 @@ if (itemScope.selected !== null && writeLedger)
   throw new Error('--ledger cannot be combined with --items-file; ledger output is a full-corpus artifact');
 
 /** Kinds that may rest on later material. Everything else is the spine. */
-const CONSEQUENCE_KINDS = new Set(['example', 'counterexample', 'false-statement', 'remark', 'corollary']);
+const CONSEQUENCE_KINDS = new Set(['open-problem', 'example', 'counterexample', 'false-statement', 'remark', 'corollary']);
 
 const errors = [];
 const warns = [];

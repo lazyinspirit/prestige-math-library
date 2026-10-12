@@ -1,0 +1,358 @@
+{
+  "version": 1,
+  "task": "Local supplier map and prerequisite designs for variational/FEM/spectral numerical PDEs",
+  "date": "2026-10-12",
+  "production_authoring": false,
+  "existing_published_suppliers_inspected": [
+    {
+      "id": "def-sobolev-space-wkp-and-its-norm",
+      "status": "published",
+      "scope": "Integer-order W^{k,p} spaces and norms; componentwise derivatives and vector-valued conventions must be handled explicitly.",
+      "numerical_reuse": "State trial/test spaces, elementwise regularity, and norms for interpolation/error results."
+    },
+    {
+      "id": "def-wkp-zero-as-a-sobolev-closure",
+      "status": "published",
+      "scope": "W^{k,p}_0 as a norm closure; it fixes the meaning of essential zero boundary data.",
+      "numerical_reuse": "Use for H^1_0 conformity and zero extension arguments, with the source's domain assumptions."
+    },
+    {
+      "id": "def-bounded-coercive-and-symmetric-sesquilinear-forms",
+      "status": "published",
+      "scope": "Boundedness, coercivity and symmetry definitions for forms.",
+      "numerical_reuse": "Base for Lax–Milgram, energy norms and symmetric Ritz projections."
+    },
+    {
+      "id": "thm-poincare-inequality-for-w-one-p-zero",
+      "status": "published",
+      "scope": "Zero-boundary W^{1,p}_0 Poincare inequality on open domains bounded in one direction; p<∞ and its stated choice assumptions.",
+      "numerical_reuse": "Coercivity of homogeneous Dirichlet energy; do not replace its domain condition with merely bounded Lipschitz without checking."
+    },
+    {
+      "id": "thm-rellich-compactness-from-w-one-p-zero-to-lp",
+      "status": "published",
+      "scope": "W^{1,p}_0(Ω) compactly embeds into L^p(Ω) for bounded open Ω, no boundary regularity required; p<∞ and its AC/choice dependencies.",
+      "numerical_reuse": "Compactness of the Dirichlet solution operator and duality arguments on bounded domains."
+    },
+    {
+      "id": "thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain",
+      "status": "published",
+      "scope": "W^{1,p}(Ω) compactly embeds into L^p(Ω) on bounded W^{1,p}-extension domains.",
+      "numerical_reuse": "Use for full-space H^1 compactness only when extension-domain hypotheses are verified."
+    },
+    {
+      "id": "thm-sharp-trace-theorem-for-w-one-p",
+      "status": "published",
+      "scope": "Bounded C^1 domain, 1<p<∞; bounded trace onto the fractional Slobodeckij space and a bounded right inverse.",
+      "numerical_reuse": "Continuous boundary trace and lifting. This does not supply discrete face inverse-trace estimates on shape-regular meshes."
+    },
+    {
+      "id": "thm-lax-milgram",
+      "status": "published",
+      "scope": "Bounded coercive form on a Hilbert space gives unique solution and an operator estimate; its exact scalar-field and choice assumptions remain attached.",
+      "numerical_reuse": "Continuous and finite-dimensional elliptic variational solvability."
+    },
+    {
+      "id": "thm-lax-milgram-solvability-for-coercive-divergence-form-equations",
+      "status": "published",
+      "scope": "Coercive divergence-form weak equations under the carrier's stated coefficient and domain assumptions.",
+      "numerical_reuse": "Alternative PDE-specific solvability supplier; inspect its assumptions instead of importing it as a generic FEM theorem."
+    },
+    {
+      "id": "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+      "status": "published",
+      "scope": "Weak zero-Dirichlet Poisson solution for Ω open, nonempty and bounded in one direction, F∈H^{-1}; inherits the Poincare supplier and its AC/CC assumptions.",
+      "numerical_reuse": "Continuous model-problem well-posedness and energy estimate, not discrete approximation."
+    },
+    {
+      "id": "thm-global-h-two-dirichlet-regularity",
+      "status": "published",
+      "scope": "Global H^2 estimate under Countable Choice, bounded C^2 domain, uniformly elliptic coefficients with principal coefficients W^{1,∞}, lower-order coefficients L∞, f∈L²; estimate retains ||u||_{L²}.",
+      "numerical_reuse": "Dual regularity with s=1 only under these assumptions."
+    },
+    {
+      "id": "cor-global-h-two-estimate-without-the-ltwo-term-under-uniqueness",
+      "status": "published",
+      "scope": "Removes the lower-order L² term only with the stated uniqueness/invertibility hypothesis.",
+      "numerical_reuse": "Do not silently simplify the global H² estimate absent that hypothesis."
+    },
+    {
+      "id": "cex-boundary-h-two-regularity-needs-domain-regularity",
+      "status": "published",
+      "scope": "A reentrant-corner sector example shows H² regularity can fail on nonsmooth domains.",
+      "numerical_reuse": "Supports a regularity-index s formulation rather than unconditional h^{k+1} L² rates."
+    },
+    {
+      "id": "thm-symmetric-elliptic-form-operator-is-self-adjoint-with-compact-resolvent",
+      "status": "published",
+      "scope": "Operator associated with a symmetric lower-bounded elliptic form; compactness assumptions and choice principles are explicit.",
+      "numerical_reuse": "Continuous spectral problem foundation."
+    },
+    {
+      "id": "thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator",
+      "status": "published",
+      "scope": "Compact positive shifted solution operator yields a discrete real eigenbasis, multiplicity and eigenvalue growth under bounded-domain and AC/CC assumptions.",
+      "numerical_reuse": "Continuous exact eigenpairs and eigenbasis only."
+    },
+    {
+      "id": "thm-courant-fischer-minimax-for-elliptic-eigenvalues",
+      "status": "published",
+      "scope": "Continuous symmetric elliptic eigenvalue min-max and max-min, with attainment and the stated AC/CC assumptions.",
+      "numerical_reuse": "Combine with conforming discrete min-max to show discrete eigenvalues are upper bounds."
+    },
+    {
+      "id": "thm-spectral-theorem-for-compact-self-adjoint-operators",
+      "status": "published",
+      "scope": "Compact self-adjoint operator spectral theorem, finite multiplicities and eigenvector completeness on the orthogonal complement of the kernel.",
+      "numerical_reuse": "Continuous compact-operator theory; does not prove convergence of discrete eigenpairs."
+    },
+    {
+      "id": "def-symmetric-elliptic-weak-eigenpair",
+      "status": "published",
+      "scope": "Weak eigenpair contract for the symmetric elliptic form.",
+      "numerical_reuse": "Exact continuous eigenproblem notation."
+    },
+    {
+      "id": "thm-form-generated-sectorial-elliptic-semigroups",
+      "status": "published",
+      "scope": "Sectorial semigroup generated from an elliptic form under the carrier's accretivity and form-domain assumptions.",
+      "numerical_reuse": "Continuous-time evolution and semigroup background only."
+    },
+    {
+      "id": "cor-dirichlet-laplacian-generates-an-analytic-heat-semigroup",
+      "status": "published",
+      "scope": "Analytic heat-semigroup result for the Dirichlet Laplacian under its form/operator assumptions.",
+      "numerical_reuse": "Continuous heat-flow context, not a finite-element error theorem."
+    },
+    {
+      "id": "cor-abstract-parabolic-smoothing",
+      "status": "published",
+      "scope": "Abstract parabolic smoothing corollary under its semigroup assumptions.",
+      "numerical_reuse": "Possible continuous adjoint-smoothing supplier after exact assumption matching."
+    }
+  ],
+  "missing_prerequisite_designs": [
+    {
+      "topic": "Finite element meshes, reference cells and finite element spaces",
+      "proposed_carriers": [
+        {"kind":"definition","suggested_id":"def-matching-affine-mesh-family"},
+        {"kind":"definition","suggested_id":"def-shape-regular-mesh-family"},
+        {"kind":"definition","suggested_id":"def-reference-finite-element-with-unisolvent-dofs"},
+        {"kind":"definition","suggested_id":"def-conforming-and-broken-polynomial-finite-element-spaces"}
+      ],
+      "facts_to_state": [
+        "Cell maps, exact coverage, matching intersections, local polynomial degree, global continuity/traces and essential boundary constraints.",
+        "Shape regularity as uniform control of h_K/rho_K or affine-map condition numbers; explicitly distinguish shape regularity from quasi-uniformity.",
+        "Finite-dimensional unisolvence and the polynomial invariance/reproduction needed by the particular interpolation theorem."
+      ],
+      "local_inputs": ["def-sobolev-space-wkp-and-its-norm","def-wkp-zero-as-a-sobolev-closure","thm-sharp-trace-theorem-for-w-one-p"],
+      "proof_route": "Finite element definitions are algebraic/reference-map contracts; prove global conformity by matching face degrees of freedom and trace identities. Prove mesh scaling from affine Jacobian bounds and reference-cell norm equivalence."
+    },
+    {
+      "topic": "Deny–Lions/Bramble–Hilbert, local interpolation, inverse and trace estimates",
+      "proposed_carriers": [
+        {"kind":"lemma","suggested_id":"lem-deny-lions-reference-cell-polynomial-approximation"},
+        {"kind":"theorem","suggested_id":"thm-local-finite-element-interpolation-estimate"},
+        {"kind":"theorem","suggested_id":"thm-local-inverse-and-discrete-trace-estimates"},
+        {"kind":"algorithm-or-definition","suggested_id":"def-clément-or-scott-zhang-quasi-interpolant"}
+      ],
+      "facts_to_state": [
+        "Exact reference-cell domain and polynomial kernel, mesh shape-regularity and degree k.",
+        "Interpolation functionals, Sobolev regularity, reproduction, and the point-value threshold when using Lagrange nodes.",
+        "Broken-cell and face norms, p/q exponents and scaling powers in each inverse/trace inequality."
+      ],
+      "local_inputs": ["def-sobolev-space-wkp-and-its-norm","def-wkp-zero-as-a-sobolev-closure","thm-poincare-inequality-for-w-one-p-zero","thm-sharp-trace-theorem-for-w-one-p"],
+      "proof_route": "Reference-domain polynomial approximation and finite-dimensional norm equivalence; affine scaling; local trace theorem; bounded overlap when summing element neighborhoods. The source Bramble–Hilbert/Deny–Lions proof uses Rellich compactness and a finite-dimensional polynomial kernel."
+    },
+    {
+      "topic": "Galerkin orthogonality, Cea and duality error estimates",
+      "proposed_carriers": [
+        {"kind":"lemma","suggested_id":"lem-galerkin-orthogonality"},
+        {"kind":"theorem","suggested_id":"thm-cea-galerkin-quasioptimality"},
+        {"kind":"theorem","suggested_id":"thm-aubin-nitsche-ltwo-error-estimate"}
+      ],
+      "facts_to_state": [
+        "Bounded/coercive form constants and the norm in which coercivity holds.",
+        "Conformity V_h⊂V for the standard Galerkin orthogonality and Cea proof.",
+        "For the L2 gain, exact adjoint problem, dual regularity exponent s, and any boundary/compatibility assumptions."
+      ],
+      "local_inputs": ["def-bounded-coercive-and-symmetric-sesquilinear-forms","thm-lax-milgram","thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem","thm-global-h-two-dirichlet-regularity","cex-boundary-h-two-regularity-needs-domain-regularity"],
+      "proof_route": "Subtract the continuous and discrete variational identities; test by the discrete error minus an arbitrary approximant; use coercivity and boundedness. For L2, solve the adjoint equation, invoke orthogonality, and insert its stated H^{1+s} approximation bound."
+    },
+    {
+      "topic": "Variational crimes, quadrature, nonconformity and Strang estimates",
+      "proposed_carriers": [
+        {"kind":"definition","suggested_id":"def-discrete-consistency-defect"},
+        {"kind":"theorem","suggested_id":"thm-first-and-second-strang-lemmas"},
+        {"kind":"theorem","suggested_id":"thm-fem-quadrature-consistency-bound"}
+      ],
+      "facts_to_state": [
+        "Continuous/discrete trial and test spaces, comparison norm, extension of a_h, and exact discrete stability constant.",
+        "Consistency defect and operator/data quadrature errors separately; a change of integration rule is not invisible in a_h.",
+        "For a rate, degree k, quadrature exactness, coefficient/data smoothness and any small-h threshold."
+      ],
+      "local_inputs": ["def-bounded-coercive-and-symmetric-sesquilinear-forms","thm-lax-milgram"],
+      "proof_route": "Add/subtract an arbitrary discrete comparison function, use stability, boundedness, and the explicit consistency defect; apply the same argument to the lifted nonconforming space."
+    },
+    {
+      "topic": "Babuška–Brezzi theorem, Fortin criterion and stable mixed FEM error",
+      "proposed_carriers": [
+        {"kind":"theorem","suggested_id":"thm-babuska-brezzi-kernel-coercivity-and-constraint-infsup"},
+        {"kind":"definition","suggested_id":"def-fortin-operator-for-a-discrete-constraint"},
+        {"kind":"lemma","suggested_id":"lem-fortin-operator-transfers-infsup"},
+        {"kind":"theorem","suggested_id":"thm-mixed-galerkin-quasioptimality"}
+      ],
+      "facts_to_state": [
+        "Reflexive/Banach or Hilbert setting and dual-space convention.",
+        "Inf-sup or isomorphism condition for a on ker B plus its adjoint kernel condition; constraint inf-sup for b.",
+        "At the discrete level use ker B_h, not ker B, unless a separate inclusion is proved; require constants uniform in h for uniform convergence.",
+        "Fortin map boundedness and exact b-pairing preservation; pressure normalization and data compatibility."
+      ],
+      "local_inputs": ["def-bounded-coercive-and-symmetric-sesquilinear-forms","thm-lax-milgram","thm-poincare-inequality-for-w-one-p-zero"],
+      "proof_route": "Use closed range and the BNB theorem to prove continuous well-posedness; for discrete stability show constraint surjectivity / a Fortin right inverse; subtract the two saddle point systems and estimate on ker B_h, then recover pressure with the discrete constraint inf-sup."
+    },
+    {
+      "topic": "Stokes continuous divergence right inverse and concrete stable-pair theorems",
+      "proposed_carriers": [
+        {"kind":"theorem","suggested_id":"thm-divergence-right-inverse-on-lipschitz-domains"},
+        {"kind":"theorem","suggested_id":"thm-korn-coercivity-for-stokes-velocity-space"},
+        {"kind":"theorem","suggested_id":"thm-mini-element-uniform-infsup"},
+        {"kind":"theorem","suggested_id":"thm-taylor-hood-uniform-infsup-under-mesh-hypotheses"},
+        {"kind":"counterexample","suggested_id":"cex-checkerboard-pressure-modes-for-unstable-pairs"}
+      ],
+      "facts_to_state": [
+        "Domain dimension, boundary partition, pressure mean-zero condition and mass compatibility.",
+        "Mesh family, element polynomial spaces, bubble enrichment or macroelement partition, singular-vertex exclusions, and dimension-specific restrictions.",
+        "State whether ker B_h⊂ker B; do not infer pointwise divergence-free from weak discrete divergence-free."
+      ],
+      "local_inputs": ["thm-sharp-trace-theorem-for-w-one-p","thm-poincare-inequality-for-w-one-p-zero","thm-lax-milgram"],
+      "proof_route": "Prove continuous stability using Korn and a right inverse of divergence. For each discrete pair construct a Fortin map, prove a pressure-gradient bound, or verify the finite-dimensional macroelement kernel condition. Then invoke the mixed error theorem with its beta_h factors."
+    },
+    {
+      "topic": "CR, Nitsche and SIP-DG discrete stability and error contracts",
+      "proposed_carriers": [
+        {"kind":"definition","suggested_id":"def-broken-sobolev-space-jumps-and-broken-gradient"},
+        {"kind":"theorem","suggested_id":"thm-discrete-poincare-for-crouzeix-raviart"},
+        {"kind":"theorem","suggested_id":"thm-nitsche-penalty-coercivity-and-error"},
+        {"kind":"theorem","suggested_id":"thm-sip-dg-coercivity-consistency-and-error"}
+      ],
+      "facts_to_state": [
+        "Matching affine mesh and shape regularity, local polynomial degree and boundary treatment.",
+        "Method-specific broken norm, penalty scaling and lower threshold.",
+        "Exact solution regularity sufficient for flux/normal traces; adjoint regularity for L2 estimates."
+      ],
+      "local_inputs": ["thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem","thm-global-h-two-dirichlet-regularity","cex-boundary-h-two-regularity-needs-domain-regularity","thm-sharp-trace-theorem-for-w-one-p"],
+      "proof_route": "Prove norm definiteness/discrete Poincare, use inverse-trace bounds for coercivity, derive elementwise consistency identity, bound its dual norm, and apply Strang. Use a duality lemma only with the exact adjoint smoothing index."
+    },
+    {
+      "topic": "Residual estimators and adaptive convergence/complexity",
+      "proposed_carriers": [
+        {"kind":"definition","suggested_id":"def-residual-estimator-and-data-oscillation"},
+        {"kind":"theorem","suggested_id":"thm-residual-estimator-reliability-and-local-efficiency"},
+        {"kind":"algorithm","suggested_id":"alg-dorfler-marking-and-conforming-refinement"},
+        {"kind":"theorem","suggested_id":"thm-afem-linear-contraction-under-orthogonality-or-quasiorthogonality"},
+        {"kind":"theorem","suggested_id":"thm-afem-optimal-complexity-under-approximation-class-assumptions"}
+      ],
+      "facts_to_state": [
+        "PDE coefficient/data regularity and oscillation terms, bubble enrichment or local lower-bound mesh assumptions.",
+        "Marking parameter, Dörfler bulk criterion, refinement closure, shape regularity, interior-node/mesh-reduction properties.",
+        "Symmetric versus nonsymmetric form; for convection include the small initial mesh condition from the proof.",
+        "Optimal complexity requires an explicit approximation class and a mesh-count estimate; the source's general theorem proof is imported, not contained in the read notes."
+      ],
+      "local_inputs": ["thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem","thm-poincare-inequality-for-w-one-p-zero"],
+      "proof_route": "Residual representation → Clément/trace reliability → bubble efficiency with oscillation → marked local lower bound → estimator/oscillation reduction → error contraction → refinement-complexity accumulation."
+    },
+    {
+      "topic": "Parabolic evolution triple and spatial/temporal Galerkin estimates",
+      "proposed_carriers": [
+        {"kind":"definition","suggested_id":"def-gelfand-triple-and-parabolic-energy-space"},
+        {"kind":"theorem","suggested_id":"thm-parabolic-variational-wellposedness-under-uniform-coercivity"},
+        {"kind":"theorem","suggested_id":"thm-semidiscrete-parabolic-fem-energy-and-error-estimate"},
+        {"kind":"algorithm-or-theorem","suggested_id":"def-continuous-and-discontinuous-galerkin-in-time"},
+        {"kind":"theorem","suggested_id":"thm-parabolic-dg-in-time-a-priori-error-under-regularity"}
+      ],
+      "facts_to_state": [
+        "V↪H↪V*, time-space regularity and continuous H-valued trace at t=0.",
+        "Measurability, uniform boundedness and coercivity of a(t;·,·), forcing space and initial datum.",
+        "For semidiscrete FEM, Ritz projection and projected time-derivative defect; for fully discrete schemes, time-step polynomial degree, jump convention and temporal regularity.",
+        "L2-in-space error needs a backward adjoint smoothing estimate; do not infer it from semigroup generation alone."
+      ],
+      "local_inputs": ["thm-form-generated-sectorial-elliptic-semigroups","cor-dirichlet-laplacian-generates-an-analytic-heat-semigroup","cor-abstract-parabolic-smoothing","thm-rellich-compactness-from-w-one-p-zero-to-lp"],
+      "proof_route": "Evolution-triple trace and integration by parts → space-time BNB or energy argument → discrete energy estimate → Ritz projection error equation → dual backward problem and spatial/time interpolation."
+    },
+    {
+      "topic": "Conforming and compact-operator eigenproblem approximation",
+      "proposed_carriers": [
+        {"kind":"theorem","suggested_id":"thm-conforming-fem-eigenvalue-upper-bound-and-best-approximation-error"},
+        {"kind":"theorem","suggested_id":"thm-eigenfunction-error-for-simple-or-multiple-eigenvalues"},
+        {"kind":"theorem","suggested_id":"thm-babuska-osborn-compact-operator-eigenapproximation"}
+      ],
+      "facts_to_state": [
+        "Conforming symmetric generalized eigenproblem, compact solution operator and multiplicity convention.",
+        "For nonnormal/nonconforming settings: operator norm convergence, uniform stability, primal and adjoint regularity on generalized eigenspaces, ascent and spectral isolation.",
+        "Distinguish eigenvalue averages, individual eigenvalues, invariant-subspace gap and eigenvectors; rates differ."
+      ],
+      "local_inputs": ["def-symmetric-elliptic-weak-eigenpair","thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator","thm-courant-fischer-minimax-for-elliptic-eigenvalues","thm-spectral-theorem-for-compact-self-adjoint-operators","thm-rellich-compactness-from-w-one-p-zero-to-lp"],
+      "proof_route": "Use min-max for one-sided conforming bounds; represent the discrete solution as a Ritz projection and bound on the first-m eigenspace; for general compact operators prove norm convergence and apply generalized eigenspace perturbation estimates."
+    },
+    {
+      "topic": "Spectral approximation on bounded intervals and periodic domains",
+      "proposed_carriers": [
+        {"kind":"theorem","suggested_id":"thm-jacobi-spectral-projection-and-gauss-lobatto-interpolation-rates"},
+        {"kind":"algorithm","suggested_id":"alg-chebyshev-or-fourier-collocation-differentiation-matrix"},
+        {"kind":"theorem","suggested_id":"thm-spectral-galerkin-convergence-under-weighted-regularity"},
+        {"kind":"proposition","suggested_id":"prop-pseudospectral-conditioning-and-aliasing-limits"}
+      ],
+      "facts_to_state": [
+        "Interval, boundary conditions, Jacobi weights and the precise weighted Sobolev class.",
+        "For Fourier collocation, periodicity; for Chebyshev, boundary-node treatment and quadrature rule.",
+        "Analyticity/smoothness assumptions for exponential rates; polynomial degree and quadrature exactness for Galerkin matrix identities.",
+        "Numerical spectral-radius/conditioning observations must be separated from proved stability/error theorems."
+      ],
+      "local_inputs": ["def-sobolev-space-wkp-and-its-norm","thm-lax-milgram","thm-courant-fischer-minimax-for-elliptic-eigenvalues"],
+      "proof_route": "Orthogonal-polynomial coefficient decay and Jacobi projection identities; interpolation remainder at Gauss–Lobatto nodes; for BVP collocation, derive differentiation matrices and eliminate boundary unknowns before establishing stability/error."
+    }
+  ],
+  "established_results_awaiting_local_proof": [
+    "Cea and Strang estimates, with their stated stability/conformity/consistency assumptions.",
+    "Uniformly stable classical Stokes pairs under the exact polynomial, dimension and mesh assumptions reviewed in the source notes.",
+    "Residual reliability/efficiency and adaptive contraction under the source's estimator, oscillation and refinement hypotheses.",
+    "Finite-element eigenvalue/eigenfunction convergence under compactness, conformity or Babuška–Osborn operator hypotheses.",
+    "Parabolic Galerkin energy and error estimates under the stated evolution-triple and regularity conditions."
+  ],
+  "open_problem_candidates": [
+    {
+      "id_candidate": "op-cmi-3d-navier-stokes-global-smoothness-or-breakdown",
+      "statement": "Prove at least one of the four alternatives A–D in the CMI Fefferman problem statement: global smooth solution for all smooth admissible unforced data on R^3 or the periodic torus, or an admissible forced breakdown example on the corresponding domain.",
+      "source_ids": ["cmi-fefferman-official-ns-problem-and-current-status"],
+      "status_evidence": {
+        "official_problem_page": "The fetched CMI problem page says Active (HTTP 200, retrieved 2026-10-12).",
+        "announcement": "The 2026 CMI article reports an apparent settlement and says the process is deliberately unhurried; the article identifies no proof artifact, submitter or A–D alternative.",
+        "classification": "Pending announcement; no verified resolution is recorded."
+      },
+      "logical_supplier_dependencies": [],
+      "outgoing_logical_supplier_use": [],
+      "scope_exclusions": [
+        "steady Stokes well-posedness and discrete Stokes stability",
+        "two-dimensional global regularity",
+        "three-dimensional small-data global regularity",
+        "three-dimensional arbitrary-data local-in-time smooth solutions",
+        "Leray weak existence and CKN partial regularity",
+        "numerical computations and pressure-splitting algorithms"
+      ]
+    }
+  ],
+  "source_specific_unverified_claims": [
+    {
+      "claim": "Second-order error estimate for the consistent pressure-splitting scheme in Shen–Tang §7.4.",
+      "evidence": "The source reports numerical evidence and says a rigorous proof was not available at its publication time.",
+      "treatment": "Do not tag as a current open problem without newer authoritative status evidence; do not treat it as an established theorem on this source alone."
+    }
+  ],
+  "dependency_policy": [
+    "Reuse a local published item only when its exact hypotheses and declared assumptions match the numerical claim.",
+    "A source book/lecture theorem is not itself a local logical supplier; every new theorem needs local definitions and proof dependencies.",
+    "Keep the CMI open-problem candidate's logical supplier dependency list empty. Numerical schemes, weak solutions, Stokes results and partial-regularity theorems do not feed into the global regularity claim as proof dependencies.",
+    "An established theorem awaiting local proof is not intrinsically an open problem."
+  ]
+}

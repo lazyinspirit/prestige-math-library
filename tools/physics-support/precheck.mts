@@ -40,6 +40,13 @@ const results: Array<Record<string, unknown>> = [];
 for (const file of files) {
   const md = readFileSync(file, 'utf8');
   const kind = parseFrontmatter(splitFrontmatter(md).fm).kind;
+  if (kind === 'open-problem') {
+    const invalid = /^## (Proof|Refutation|Verification|Counterexample)\s*$/m.test(md);
+    if (invalid) failed++;
+    results.push({ file, status: invalid ? 'fail' : 'not-applicable', ...(invalid ? { error: 'open problem may not have a claimed proof' } : {}) });
+    continue;
+  }
+
   if (NONPROOF_KINDS.has(kind)) {
     checked++;
     if (/^## (Proof|Refutation|Verification|Counterexample)\s*$/m.test(md)) { failed++; results.push({ file, status: 'fail', error: 'nonproof item has a proof section' }); }

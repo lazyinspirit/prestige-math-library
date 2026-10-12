@@ -87,6 +87,17 @@ for (const id of Object.keys(document.contracts ?? {})) {
 await finish({ scope: selected, checked });
 
 function validateItem(id, item, entry) {
+  if (item.kind === 'open-problem') {
+    for (const field of ['formulation', 'status', 'sources']) {
+      const row = entry.open_problem_review?.[field];
+      if (row?.verdict !== 'pass' || typeof row.evidence !== 'string' || !row.evidence.trim())
+        error('open-problem-review', `open_problem_review.${field} requires pass and concrete evidence`, id);
+    }
+    if (entry.derivations?.length || entry.routine_steps?.length || entry.boundaries?.length)
+      error('open-problem-review', 'an open problem must not manufacture proof-step worksheets', id);
+    return;
+  }
+
   const facts = factsByLabel(item.body);
   const steps = numberedSteps(item.body);
   // A load-bearing citation to a later page is deliberately declared in

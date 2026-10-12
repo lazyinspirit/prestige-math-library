@@ -47,6 +47,13 @@ let failed = 0, checked = 0;
 const results: Array<Record<string, unknown>> = [];
 for (const file of files) {
   const md = readFileSync(file, 'utf8');
+  if (/^kind:\s*['\"]?open-problem['\"]?\s*$/m.test(md)) {
+    const invalid = /^## (Proof|Refutation|Verification|Counterexample)\s*$/m.test(md);
+    if (invalid) failed++;
+    results.push({ file, status: invalid ? 'fail' : 'not-applicable', ...(invalid ? { error: 'open problem may not have a claimed proof' } : {}) });
+    continue;
+  }
+
   const text = checkableText(md);
   const item_id = file.replaceAll('\\', '/').split('/').at(-1)?.replace(/\.md$/, '');
   if (text === null) {

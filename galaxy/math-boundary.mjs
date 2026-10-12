@@ -1,6 +1,6 @@
 // Fail closed: a mathematical view contains only mathematical items whose
 // known prerequisite closure is mathematical, including aliases.
-const mathematicalKinds = new Set(['definition', 'algorithm', 'theorem', 'lemma', 'proposition', 'corollary', 'example', 'counterexample', 'false-statement', 'remark', 'def', 'alg', 'thm', 'lem', 'prop', 'cor', 'ex', 'cex', 'fs', 'rem', 'false statement']);
+const mathematicalKinds = new Set(['definition', 'algorithm', 'theorem', 'lemma', 'proposition', 'corollary', 'example', 'counterexample', 'false-statement', 'remark', 'open-problem', 'op', 'open problem', 'def', 'alg', 'thm', 'lem', 'prop', 'cor', 'ex', 'cex', 'fs', 'rem', 'false statement']);
 export const isMathematicalItem = item =>
   !/^(post|exp|pthm|texp)-/.test(item.id) &&
   (item.domain === undefined || item.domain === 'mathematics') && mathematicalKinds.has(item.kind ?? 'remark');
@@ -15,6 +15,9 @@ export function mathematicalItems(rows) {
     for (const dependency of [...(item.deps ?? []), ...(item.justifiedBy ?? item.justified_by ?? []), ...(item.forwardRefs ?? item.forward_refs ?? [])]) {
       const id = canonical.has(dependency) ? dependency : aliases.get(dependency);
       if (!id) continue; // Unauthored mathematics retains its existing handling.
+      const supplier = canonical.get(id);
+      if (supplier?.kind === 'open-problem'
+        && [...(item.deps ?? []), ...(item.justifiedBy ?? item.justified_by ?? [])].includes(dependency)) excluded.add(item.id);
       if (!consumers.has(id)) consumers.set(id, []);
       consumers.get(id).push(item.id);
     }

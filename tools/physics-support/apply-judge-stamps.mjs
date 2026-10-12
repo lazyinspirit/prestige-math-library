@@ -63,6 +63,7 @@ import { parseTerminalResolutions, terminalResolutionStatus } from './step5-term
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { loadStep5ClosureCertification, currentStep5Certification, stripStep5JudgeStamp } from './step5-certification-consumer.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
+import { parseFrontmatter } from './content-policy-lib.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
@@ -263,6 +264,23 @@ for (const id of ids) {
     continue;
   }
   const text = readFileSync(file, 'utf8');
+  // A source/status review never certifies an unresolved solution. Parse
+  // question candidates only: ordinary legacy items retain the duplicate-key
+  // repair path in writeBlock below.
+  const frontmatter = text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '';
+  if (id.startsWith('op-') || /(?:^|[,{]\s*)["']?kind["']?\s*:\s*["']?open-problem\b/m.test(frontmatter)) {
+    let metadata;
+    try { metadata = parseFrontmatter(frontmatter); }
+    catch (cause) { problems.push(`${id}: invalid frontmatter — ${cause.message}`); continue; }
+    if (metadata.kind !== 'open-problem') {
+      problems.push(`${id}: the op- prefix requires kind open-problem`);
+      continue;
+    }
+    if (metadata.verification?.judge !== undefined) problems.push(`${id}: an open problem must not carry a proof judge stamp; remove it through an explicit source repair`);
+    result.skipped.push({ id, reason: 'open-problem-source-review-only' });
+    continue;
+  }
+
   if (step5Certificate?.items.some(row => row.id === id)) {
     let certified;
     try { certified = currentStep5Certification(step5Certificate, id, text, contextHash(id)); }

@@ -5,8 +5,8 @@ export function statementHash(text) {
   const body=text.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/,'');
   const physical = physicalInterface(text);
   const pattern = physical
-    ? /^##[ \t]+(?:Statement|Definition|Postulate|Observations|Uncertainty|Setup|Procedure|Interpretation)[ \t]*\r?\n([\s\S]*?)(?=^##[ \t]+|(?![\s\S]))/gm
-    : /^##[ \t]+(?:Statement|Definition)[ \t]*\r?\n([\s\S]*?)(?=^##[ \t]+|(?![\s\S]))/gm;
+    ? /^##[ \t]+(?:Statement|Definition|Open problem|Status|Postulate|Observations|Uncertainty|Setup|Procedure|Interpretation)[ \t]*\r?\n([\s\S]*?)(?=^##[ \t]+|(?![\s\S]))/gm
+    : /^##[ \t]+(?:Statement|Definition|Open problem|Status)[ \t]*\r?\n([\s\S]*?)(?=^##[ \t]+|(?![\s\S]))/gm;
   const sections=[...body.matchAll(pattern)].map(match=>match[0].replace(/\r\n/g,'\n').trim());
   return createHash('sha256').update(JSON.stringify(physical ? { sections, physical } : sections)).digest('hex');
 }

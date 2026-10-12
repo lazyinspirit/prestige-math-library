@@ -1,0 +1,366 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-12",
+  "category": "numerical-analysis",
+  "plan": "research/plan-numerical-analysis-track.md",
+  "research_only": true,
+  "source_packets": [
+    "research/numerical-analysis-2026-10-12/direct",
+    "research/numerical-analysis-2026-10-12/iterative",
+    "research/numerical-analysis-2026-10-12/ode",
+    "research/numerical-analysis-2026-10-12/fd-fv",
+    "research/numerical-analysis-2026-10-12/fem-spectral",
+    "research/numerical-analysis-2026-10-12/statistics"
+  ],
+  "topic_coverage": {
+    "direct": {
+      "packet_status": "research complete; five published Linear Algebra A/B pairs and their 118 published items/58 examples inspected; no numerical-analysis carriers authored",
+      "coverage": [
+        {
+          "promise": "Floating arithmetic, unit roundoff, conditioning, stability, residuals, and error propagation",
+          "plan_pairs": ["NA-01"],
+          "reused_suppliers": ["linear-algebra/matrix-norms-condition-numbers-and-numerical-stability"],
+          "boundary": "Reuse exact published definitions and theorems. Preserve normal-range premises and condition-number dependence; do not duplicate local contracts."
+        },
+        {
+          "promise": "Direct triangular solves, LU/PLU, Cholesky, QR, and computed least-squares stability",
+          "plan_pairs": ["NA-02"],
+          "reused_suppliers": ["linear-algebra/direct-matrix-factorisations-lu-cholesky-and-qr", "linear-algebra/the-moore-penrose-pseudoinverse-and-regularised-least-squares"],
+          "boundary": "Cholesky recurrence and backward error are missing local suppliers. Published Householder stability has an explicit undischarged A1 premise. Any computed least-squares solution theorem must include Q*b and rounded triangular solve."
+        },
+        {
+          "promise": "Exact spectral theorem, SVD existence, pseudoinverse, least-squares minimizers, and eigenvalue iterations",
+          "plan_pairs": ["NA-02", "NA-05", "NA-08"],
+          "reused_suppliers": [
+            "linear-algebra/the-spectral-theorem-and-singular-value-decomposition",
+            "linear-algebra/the-moore-penrose-pseudoinverse-and-regularised-least-squares",
+            "linear-algebra/eigenvalue-iterations-and-the-qr-algorithm"
+          ],
+          "boundary": "These are exact-arithmetic suppliers. They do not certify a numerical SVD or finite-precision QR eigenvalue algorithm."
+        },
+        {
+          "promise": "Numerical SVD algorithm and finite-precision stability",
+          "plan_pairs": [],
+          "reused_suppliers": ["linear-algebra/the-spectral-theorem-and-singular-value-decomposition"],
+          "boundary": "Exact SVD is covered by a published proof. A numerical bidiagonal-SVD procedure is explicitly deferred because no full-text algorithm/stability source was read in the direct packet."
+        }
+      ]
+    },
+    "iterative": {
+      "packet_status": "research complete; existing Krylov, CG/MINRES/preconditioning, eigen-iteration, norm, and spectral pages inspected",
+      "coverage": [
+        {
+          "promise": "Sparse formats, matrix-free access, sparse storage and matvec/solver costs",
+          "plan_pairs": ["NA-03", "NA-05", "NA-06"],
+          "reused_suppliers": ["linear-algebra/direct-matrix-factorisations-lu-cholesky-and-qr"],
+          "boundary": "Arithmetic and storage complexity is separate from convergence, fill, wall-clock time, and memory bandwidth. Sparse direct costs require an explicit graph and ordering."
+        },
+        {
+          "promise": "Stationary splitting, Richardson/Jacobi/Gauss–Seidel/SOR, and convergence hypotheses",
+          "plan_pairs": ["NA-04"],
+          "reused_suppliers": ["linear-algebra/krylov-subspaces-arnoldi-and-gmres"],
+          "boundary": "Use the published all-start equivalence rho(G)<1. Diagonal dominance and SOR results keep their sufficient/class-specific assumptions; nonnormal transient growth remains possible."
+        },
+        {
+          "promise": "Arnoldi, GMRES, CG, MINRES, Krylov complexity, and Lanczos Ritz convergence",
+          "plan_pairs": ["NA-05"],
+          "reused_suppliers": [
+            "linear-algebra/krylov-subspaces-arnoldi-and-gmres",
+            "linear-algebra/conjugate-gradients-minres-and-preconditioning",
+            "linear-algebra/eigenvalue-iterations-and-the-qr-algorithm"
+          ],
+          "boundary": "Existing convergence and termination proofs are exact arithmetic. New sparse cost and extremal Lanczos claims have separate proofs and starting-angle/spectral-gap factors."
+        },
+        {
+          "promise": "Left/right/SPD preconditioning, flexible GMRES, and incomplete-factor setup/application costs",
+          "plan_pairs": ["NA-06"],
+          "reused_suppliers": ["linear-algebra/conjugate-gradients-minres-and-preconditioning"],
+          "boundary": "The existing counterexample forbids a universal improvement claim. ILU(0) is defined with zero-pivot failure and graph-specific work only."
+        },
+        {
+          "promise": "Geometric/algebraic multigrid",
+          "plan_pairs": ["NA-07"],
+          "reused_suppliers": ["linear-algebra/matrix-norms-condition-numbers-and-numerical-stability"],
+          "boundary": "The two-grid contraction requires uniform smoothing and approximation constants; cycle complexity is a separate recursion proof. Arbitrary AMG coarsening is not asserted convergent."
+        },
+        {
+          "promise": "Randomized low-rank approximation",
+          "plan_pairs": ["NA-08"],
+          "reused_suppliers": ["linear-algebra/the-spectral-theorem-and-singular-value-decomposition"],
+          "boundary": "The expected Gaussian range-finder bound is in scope. Local Gaussian pseudoinverse-moment/tail and norm lemmas must be supplied. SRFT and a-posteriori estimator results are excluded."
+        }
+      ]
+    },
+    "ode": {
+      "packet_status": "research complete; recovery role independently reread only the exact ranges recorded in ode/sources.json",
+      "coverage": [
+        {
+          "promise": "Generic one-step defect/stability and fixed-interval global ODE error",
+          "plan_pairs": [],
+          "reused_suppliers": ["P-NUM-ODE-01", "P-NUM-ODE-02"],
+          "boundary": "These are independent planned pre-category suppliers in plan-machine-learning-track.md, not existing published items and not Category 4 claims. They must finish their local proof/source obligations before use."
+        },
+        {
+          "promise": "Nonlinear equations and ordinary variable-Jacobian Newton",
+          "plan_pairs": ["NA-09"],
+          "reused_suppliers": ["thm-banach-fixed-point", "lem-newton-contraction-near-an-invertible-derivative"],
+          "boundary": "The frozen-Jacobian contraction item does not prove ordinary Newton convergence. The new theorem is only local for C3 F, invertible derivative near the root, and sufficiently close start."
+        },
+        {
+          "promise": "Runge–Kutta order/stability functions, multistep zero-stability and Dahlquist equivalence",
+          "plan_pairs": ["NA-15", "NA-16", "NA-17"],
+          "reused_suppliers": ["P-NUM-ODE-01", "P-NUM-ODE-02", "thm-first-order-ode-initial-value-problem-and-solution"],
+          "boundary": "Multistep root condition is distinct from one-step stability; repeated interior roots are allowed and repeated unit roots are not. Variable-step convergence is not included."
+        },
+        {
+          "promise": "Stiff stability regions and adaptive ODE estimation",
+          "plan_pairs": ["NA-17", "NA-18"],
+          "reused_suppliers": ["P-NUM-ODE-01", "P-NUM-ODE-02"],
+          "boundary": "A/L stability are scalar test-equation contracts. Embedded estimates are not certified global error bounds; fixed-step P-NUM-ODE-02 does not certify adaptive meshes."
+        },
+        {
+          "promise": "Linear and nonlinear BVP solvers",
+          "plan_pairs": ["NA-20", "NA-21"],
+          "reused_suppliers": ["thm-first-order-ode-initial-value-problem-and-solution", "thm-continuous-dependence-of-odes-on-initial-data-and-parameters"],
+          "boundary": "The linear row proves one fixed 1D Dirichlet model with boundary consistency and uniform inverse control. Nonlinear shooting/collocation carries IVP, Jacobian and discretization errors separately."
+        },
+        {
+          "promise": "Geometric integration",
+          "plan_pairs": ["NA-22"],
+          "reused_suppliers": [
+            "def-symplectic-form-and-symplectic-manifold",
+            "def-symplectomorphism-local-symplectomorphism-and-symplectic-embedding",
+            "def-hamiltonian-vector-field-and-hamiltonian-function",
+            "prop-a-hamiltonian-is-conserved-along-its-own-flow",
+            "prop-time-dependent-hamiltonian-evolution-is-symplectic"
+          ],
+          "boundary": "The time-dependent Hamiltonian supplier retains its stated AC_omega premise. Formal modified series must be truncated for finite-order estimates."
+        }
+      ]
+    },
+    "fd-fv": {
+      "packet_status": "research complete; Süli note was read in full; source-limited Trefethen and nonlinear-FV proof boundaries retained",
+      "coverage": [
+        {
+          "promise": "Linear consistency, stability, convergence and Lax–Richtmyer equivalence",
+          "plan_pairs": ["NA-19"],
+          "reused_suppliers": ["thm-uniform-boundedness-principle"],
+          "boundary": "Trefethen gives the theorem contract but marks proof and essential rigor unwritten. Supply a local common-Banach-space proof and mesh embedding/norm comparison."
+        },
+        {
+          "promise": "Elliptic finite differences",
+          "plan_pairs": ["NA-23"],
+          "reused_suppliers": ["pde/lax-milgram-and-weak-elliptic-solutions", "pde/sobolev-poincare-and-morrey-inequalities"],
+          "boundary": "Boundary closure, discrete summation by parts, and a mesh-uniform inverse/maximum-principle bound are mandatory."
+        },
+        {
+          "promise": "Parabolic finite differences",
+          "plan_pairs": ["NA-24"],
+          "reused_suppliers": ["pde/heat-equation-maximum-principles-duhamel-and-smoothing"],
+          "boundary": "Fourier stability on periodic/infinite grids does not prove finite-boundary or nonnormal stability; L2 stability does not imply a discrete maximum principle."
+        },
+        {
+          "promise": "Hyperbolic finite differences, energy and CFL",
+          "plan_pairs": ["NA-25"],
+          "reused_suppliers": ["pde/wave-energy-finite-propagation-and-huygens"],
+          "boundary": "Derive scheme-specific energy/Fourier estimates and include inflow boundary data. CFL alone is not a universal sufficiency theorem."
+        },
+        {
+          "promise": "Conservative finite-volume weak limits and scalar entropy convergence",
+          "plan_pairs": ["NA-26", "NA-27"],
+          "reused_suppliers": ["pde/scalar-conservation-laws-and-entropy-solutions", "thm-frechet-kolmogorov-compactness-criterion-in-lp"],
+          "boundary": "NA-26 assumes strong L1loc convergence and proves only the weak equation. NA-27 separately supplies monotonicity, discrete entropy, local Helly/BV compactness, CFL, and Kruzhkov uniqueness; global L1 requires tail control. No systems theorem is claimed."
+        }
+      ]
+    },
+    "fem-spectral": {
+      "packet_status": "research complete; continuous PDE/functional suppliers inspected; all numerical FEM claims remain local authoring obligations",
+      "coverage": [
+        {
+          "promise": "Meshes, reference elements, local interpolation, inverse and trace estimates",
+          "plan_pairs": ["NA-28"],
+          "reused_suppliers": ["thm-poincare-inequality-for-w-one-p-zero", "thm-sharp-trace-theorem-for-w-one-p", "def-sobolev-space-wkp-and-its-norm"],
+          "boundary": "State affine mesh, shape regularity, conformity, reference functional and Sobolev embedding hypotheses."
+        },
+        {
+          "promise": "Conforming Galerkin, Cea, Aubin–Nitsche, quadrature and Strang",
+          "plan_pairs": ["NA-29", "NA-30"],
+          "reused_suppliers": ["thm-lax-milgram", "thm-global-h-two-dirichlet-regularity"],
+          "boundary": "L2 gain is limited by adjoint regularity; local H2 results require their C2-domain/coefficient hypotheses. Quadrature replaces exact Galerkin orthogonality with a defect."
+        },
+        {
+          "promise": "Nonconforming CR, Nitsche and SIP-DG",
+          "plan_pairs": ["NA-31", "NA-32", "NA-33"],
+          "reused_suppliers": ["published Sobolev trace/Poincare suppliers"],
+          "boundary": "CR normal traces need r>1/2 in the cited theorem; Nitsche penalty must exceed the inverse-trace threshold; DG penalty and L2 claims require their stated coercivity/adjoint assumptions."
+        },
+        {
+          "promise": "Mixed FEM, inf-sup/Fortin, and Stokes stable pairs",
+          "plan_pairs": ["NA-34"],
+          "reused_suppliers": ["thm-lax-milgram", "thm-poincare-inequality-for-w-one-p-zero"],
+          "boundary": "Current local library lacks Babuška–Brezzi, divergence right inverse, Korn/Fortin, and stable-pair proofs. Pair-specific dimension, mesh and polynomial restrictions are mandatory."
+        },
+        {
+          "promise": "Residual estimators and adaptive FEM",
+          "plan_pairs": ["NA-35"],
+          "reused_suppliers": ["thm-lax-milgram"],
+          "boundary": "Reliability, local efficiency, oscillation, mesh closure, contraction, and complexity have separate assumptions. General coefficient-dependent complexity proof was deferred by the read source."
+        },
+        {
+          "promise": "Parabolic FEM and space/time error",
+          "plan_pairs": ["NA-36"],
+          "reused_suppliers": ["thm-form-generated-sectorial-elliptic-semigroups", "cor-dirichlet-laplacian-generates-an-analytic-heat-semigroup"],
+          "boundary": "Continuous semigroup suppliers do not supply the evolution-triple variational theorem or FEM/Ritz/time-discretization error."
+        },
+        {
+          "promise": "Finite-element eigenproblems",
+          "plan_pairs": ["NA-37"],
+          "reused_suppliers": [
+            "thm-symmetric-elliptic-form-operator-is-self-adjoint-with-compact-resolvent",
+            "thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator",
+            "thm-courant-fischer-minimax-for-elliptic-eigenvalues",
+            "thm-spectral-theorem-for-compact-self-adjoint-operators"
+          ],
+          "boundary": "Conforming symmetric min–max is distinct from nonnormal/nonconforming compact-operator perturbation; multiple eigenvalues require eigenspace comparisons."
+        },
+        {
+          "promise": "Spectral collocation/Galerkin and PDE spectral methods",
+          "plan_pairs": ["NA-38"],
+          "reused_suppliers": ["def-chebyshev-polynomials-first-and-second-kind"],
+          "boundary": "Rates require weighted regularity or analyticity and matching boundary/quadrature hypotheses. The Shen–Tang pressure-splitting estimate has an unavailable source proof only; it is not labelled open."
+        },
+        {
+          "promise": "3D periodic Navier–Stokes global regularity context",
+          "plan_pairs": [],
+          "reused_suppliers": ["items/op-periodic-three-dimensional-navier-stokes-global-regularity.md"],
+          "boundary": "This is the existing root-drafted exact periodic B formulation with its pressure errata, used only as a contextual open question. The fetched CMI page says Active as of 2026-10-12; the 2026-09-11 announcement reports an apparent settlement pending evaluation and supplies no identified proof artifact. Numerical Stokes/spectral results do not depend on it or prove it."
+        }
+      ]
+    },
+    "statistics": {
+      "packet_status": "research complete; numerical contracts are separated from inferential/statistical ownership",
+      "coverage": [
+        {
+          "promise": "Polynomial interpolation, approximation, Chebyshev stability and Runge behavior",
+          "plan_pairs": ["NA-10", "NA-11"],
+          "reused_suppliers": ["thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots", "thm-rolle", "lem-higher-order-rolle", "cor-weierstrass-approximation-on-a-closed-interval"],
+          "boundary": "General interpolation remainder and Chebyshev Lebesgue bound require local proofs; polynomial density alone does not establish arbitrary-node interpolation convergence."
+        },
+        {
+          "promise": "Composite/Gaussian quadrature and adaptive indicators",
+          "plan_pairs": ["NA-12", "NA-13", "NA-14"],
+          "reused_suppliers": ["thm-first-fundamental-theorem-of-calculus-for-l-one", "thm-continuous-on-a-rectangle-is-riemann-integrable"],
+          "boundary": "Gaussian root, positivity and remainder proofs are local obligations. Adaptive indicators do not certify error without a-posteriori remainder, stability, regularity, and controlled arithmetic."
+        },
+        {
+          "promise": "IID Monte Carlo, deterministic QMC, RQMC and MLMC",
+          "plan_pairs": ["NA-39", "NA-40", "NA-41", "NA-42"],
+          "reused_suppliers": [
+            "probability/probability-spaces-random-variables-and-expectation",
+            "probability/independence-borel-cantelli-and-zero-one-laws",
+            "probability/central-limit-theorems",
+            "Giles-2008-Theorem-3.1"
+          ],
+          "boundary": "CLT is reused from Probability. Koksma–Hlawka and nested-scramble variance need local proofs because the read Owen chapters cite them. Giles proves only abstract rate-to-cost implications; adaptive stopping remains heuristic."
+        },
+        {
+          "promise": "Numerical SDEs and strong/weak Euler–Maruyama rates",
+          "plan_pairs": [],
+          "reused_suppliers": ["P-NUM-SDE-01", "P-NUM-SDE-02"],
+          "boundary": "These are independent planned pre-category pages in plan-machine-learning-track.md and must not be duplicated. Carry AC and standing hypothesis (H) for the imported Itô integral/isometry/multidimensional Itô suppliers. The exact time-Hölder modulus norm/constants in P-NUM-SDE-01 remain a final-theorem specification gap. The P-NUM-SDE-02 weak design assumes u in C^2 time/C^4 space with derivatives bounded by C(1+|x|^q) and uniform exact/Euler moments p≥2q+8; deriving that backward regularity is a separate proof obligation. The finite-L2 time-dependent route is distinct from the autonomous all-moment Higham–Mao–Stuart strong theorem."
+        },
+        {
+          "promise": "Numerical optimization and inverse-problem regularization",
+          "plan_pairs": ["NA-43", "NA-44"],
+          "reused_suppliers": [
+            "linear-algebra/matrix-norms-condition-numbers-and-numerical-stability",
+            "linear-algebra/direct-matrix-factorisations-lu-cholesky-and-qr",
+            "linear-algebra/the-moore-penrose-pseudoinverse-and-regularised-least-squares"
+          ],
+          "boundary": "Optimization results are for stated convex regimes only. Reuse existing Tikhonov/least-squares proofs; separate data, discretization, regularization, iterative, and roundoff error."
+        },
+        {
+          "promise": "Numerical error ledger for likelihoods/inference and learned coefficients",
+          "plan_pairs": ["NA-45"],
+          "reused_suppliers": ["P-NUM-ODE-01", "P-NUM-ODE-02", "P-NUM-SDE-01", "P-NUM-SDE-02"],
+          "boundary": "The pathwise triangle decomposition is a computational identity, not a posterior-coverage or inference theorem. Model/score bias may persist under refinement."
+        },
+        {
+          "promise": "Optimal star-discrepancy order for fixed dimension d≥3",
+          "plan_pairs": ["NA-46"],
+          "reused_suppliers": ["NA-40 definition of star discrepancy"],
+          "boundary": "Genuine unresolved candidate on 2026-10-12: lower and upper asymptotic orders do not match. The open-problem item has no proof and is never a supplier."
+        }
+      ]
+    }
+  },
+  "canonical_home_reuse_recommendations": [
+    {
+      "consumer": "BCS-23",
+      "owner_scope": "Laplace-approximation error and asymptotics",
+      "numerical_provider": "NA-12/NA-13",
+      "recommendation": "Keep BCS-23 as owner; consume quadrature bounds without duplicating or rehoming the existing pair."
+    },
+    {
+      "consumer": "BCS-25, BCS-56, BCS-57",
+      "owner_scope": "inferential calibration and randomized-replicate interpretation",
+      "numerical_provider": "NA-39/NA-40/NA-41",
+      "recommendation": "Keep the existing statistical owners; use generic numerical contracts as inputs without duplicating or rehoming those plans."
+    },
+    {
+      "consumer": "BCS-55",
+      "owner_scope": "statistical MLMC error-budget interpretation",
+      "numerical_provider": "NA-42 plus P-NUM-SDE-01/02 where exact hypotheses match",
+      "recommendation": "Reuse Giles's abstract cost theorem and separately qualified SDE suppliers; do not infer SDE rates from MLMC or rehome BCS-55."
+    },
+    {
+      "consumer": "BCS-54 and BCS-59",
+      "owner_scope": "full inferential error ledger and predictive/statistical claims",
+      "numerical_provider": "NA-45",
+      "recommendation": "NA-45 supplies computational pathwise bookkeeping only; preserve the existing BCS owners."
+    },
+    {
+      "consumer": "BCS-20",
+      "owner_scope": "latent likelihood/KL/EM/VI interpretation",
+      "numerical_provider": "NA-43 and published least-squares interfaces",
+      "recommendation": "Keep the statistical interpretation in BCS-20; do not duplicate or rehome its design."
+    },
+    {
+      "consumer": "ML-37–39, ML-58, ML-60–61",
+      "owner_scope": "learning-specific computation and statistical claims",
+      "numerical_provider": "NA-01 and independent P-NUM-ODE/SDE contracts",
+      "recommendation": "Treat ML pages as downstream consumers only; no numerical provider depends on Category 4."
+    },
+    {
+      "consumer": "MSF-26",
+      "owner_scope": "natural-cubic interpolation and Sobolev spline rates",
+      "numerical_provider": "NA-10",
+      "recommendation": "Reuse generic Lagrange interpolation only; keep spline claims in MSF-26."
+    },
+    {
+      "consumer": "SME-02/04/16/36",
+      "owner_scope": "GLM/Fisher-scoring, design, measurement, and inferential claims",
+      "numerical_provider": "NA-01/NA-02/NA-43/NA-44",
+      "recommendation": "Reuse numerical interfaces without rehoming those existing statistical designs."
+    }
+  ],
+  "open_problem_policy": {
+    "new_open_candidate": {
+      "pair": "NA-46",
+      "id": "op-optimal-star-discrepancy-order-dimension-at-least-three",
+      "status_date": "2026-10-12",
+      "logical_dependencies": ["NA-40 definition of star discrepancy"],
+      "outgoing_logical_uses": [],
+      "source": "Owen, Practical QMC, Ch. 15 discrepancy discussion and cited Roth lower bound; source details in statistics/sources.json."
+    },
+    "context_only_existing_draft": {
+      "id": "op-periodic-three-dimensional-navier-stokes-global-regularity",
+      "source_status_date": "2026-10-12",
+      "official_status": "CMI problem page says Active.",
+      "announcement": "CMI 2026-09-11 announcement reports an apparent settlement and a deliberately unhurried evaluation process; the article identifies no proof artifact, submitter, or A–D alternative.",
+      "logical_suppliers": [],
+      "outgoing_logical_uses": [],
+      "role": "Contextual link only; exact periodic B formulation and pressure errata remain in the existing root draft."
+    }
+  }
+}

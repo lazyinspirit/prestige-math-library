@@ -63,7 +63,7 @@ const pendingAuditOk = itemScope.args.includes('--pending-audit-ok');
 const PREFIX_OF_KIND = {
   definition: 'def', algorithm: 'alg', theorem: 'thm', lemma: 'lem', proposition: 'prop',
   corollary: 'cor', example: 'ex', counterexample: 'cex',
-  'false-statement': 'fs', remark: 'rem',
+  'false-statement': 'fs', remark: 'rem', 'open-problem': 'op',
   postulate: 'post', 'physics-theorem': 'pthm', experiment: 'exp', 'thought-experiment': 'texp',
 };
 const AUTHORSHIP_VALUES = new Set(['ai-generated', 'ai-altered', 'literature-derived']);
@@ -153,8 +153,8 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     err('provenance-statement-invalid', `${file}: provenance.statement must be ai-generated, ai-altered, or literature-derived`);
   if (selectedFile && provenancePresent && !PROOF_PROVENANCE_VALUES.has(provenanceProof))
     err('provenance-proof-invalid', `${file}: provenance.proof must be ai-generated, ai-altered, literature-derived, not-supplied, or not-applicable`);
-  if (selectedFile && provenanceProof === 'not-applicable' && !['definition', 'algorithm', 'remark', 'postulate', 'experiment'].includes(kind))
-    err('provenance-proof-applicability', `${file}: provenance.proof: not-applicable is reserved for definitions, algorithms and remarks`);
+  if (selectedFile && provenanceProof === 'not-applicable' && !['open-problem', 'definition', 'algorithm', 'remark', 'postulate', 'experiment'].includes(kind))
+    err('provenance-proof-applicability', `${file}: provenance.proof: not-applicable is reserved for nonproof kinds, including definitions, algorithms, remarks and open problems`);
 
   const links = [...body.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g)].map((m) => m[1].trim());
 
@@ -301,6 +301,16 @@ for (let i = 0; i < graphQueue.length; i++) {
     }
   }
 }
+// An unresolved question cannot establish a claim, including through aliases
+// or an indirect prerequisite's well-definedness discharge.
+for (const id of graphContext.keys()) {
+  const consumer = items.get(id);
+  for (const [field, refs] of [['deps', consumer.deps], ['justified_by', consumer.justified]]) {
+    for (const raw of refs) if (items.get(resolve(raw))?.kind === 'open-problem' || resolve(raw)?.startsWith('op-'))
+      err('open-problem-dependency', `${consumer.file}: ${field} may not use open problem ${raw} as a logical supplier`);
+  }
+}
+
 const graphOrigin = id => itemScope.selected === null || includesItem(itemScope, id)
   ? '' : `${items.get(graphContext.get(id)).file}: prerequisite ${id}: `;
 
@@ -315,14 +325,16 @@ for (const it of items.values()) {
   // `audited` is the OWNER's own read; `verified` is a delegated subagent's, on the
   // owner's instruction (SCHEMA §3, amended 2026-07-26). Either gates publication;
   // they are kept distinct so the corpus never loses track of which is which.
-  if (it.status === 'published' && it.provedHere && !it.audited && !it.verified) {
+  if (it.status === 'published' && it.provedHere && it.kind !== 'open-problem' && !it.audited && !it.verified) {
     const repair = recordedPublishedRepair(REPO, it.id, it.source, it.repair);
     if (repair.ok)
       warn('published-local-repair', `${it.file}: recorded local repair (${repair.receipt}); no whole-item audit is claimed`);
     else
       (pendingAuditOk && !it.repair ? warn : err)('published-unaudited', `${it.file}: status published but neither verification.audited nor verification.verified is set; ${repair.reason}`);
   }
-  if (it.provedHere && it.sourcesChecked)
+  if (it.kind === 'open-problem' && it.status === 'published' && !it.sourcesChecked)
+    err('published-unchecked', `${it.file}: open-problem publication requires verification.sources_checked`);
+  if (it.provedHere && it.kind !== 'open-problem' && it.sourcesChecked)
     err('sources-checked-on-proved', `${it.file}: verification.sources_checked is only for proved_here: false items`);
   if (it.status === 'published' && !homeOf.has(it.id))
     warn('orphan', `${it.id} is published but appears on no page (dropped from page-level Prerequisites)`);

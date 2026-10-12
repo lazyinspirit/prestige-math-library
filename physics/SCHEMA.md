@@ -11,7 +11,7 @@
   Keep IDs and aliases unique; `aliases: [old-id]` preserves old links.
 - `kind` determines the ID prefix: `definition` → `def-`, `algorithm` → `alg-`, `theorem` → `thm-`,
   `lemma` → `lem-`, `proposition` → `prop-`, `corollary` → `cor-`, `example` →
-  `ex-`, `counterexample` → `cex-`, `false-statement` → `fs-`, `remark` → `rem-`.
+  `ex-`, `counterexample` → `cex-`, `false-statement` → `fs-`, `remark` → `rem-`, `open-problem` → `op-`.
 - `title` is the display name. `status` is `draft` or `published`; a missing or
   other status renders as draft. `origin` is `pipeline` or `session`; the renderer
   defaults to session. `short` is an optional display label and `landmark: true`
@@ -40,7 +40,7 @@
 - Authored build batch items checked by `tools/physics-support/content-policy.mjs` without
   `--audit` or `--manifest-only` require `provenance.statement` (`ai-generated`,
   `ai-altered`, or `literature-derived`) and `provenance.proof` (those values,
-  `not-supplied`, or `not-applicable`). Only definitions, algorithms and remarks may use
+  `not-supplied`, or `not-applicable`). Only definitions, algorithms, remarks and open problems may use
   `not-applicable`. Either component marked `literature-derived` or `ai-altered`
   requires a `sources.references` URL. Legacy `authorship` is still readable;
   audited retagging removes it.
@@ -54,8 +54,8 @@
   `alpha_concurred: true` permits an `ai-altered` statement without a URL, with
   a warning.
 - In a build batch, an `ai-generated` statement is allowed only for a
-  corollary, example, or counterexample. Set `generation.role` to
-  `direct-corollary`, `example`, or `counterexample`, respectively. Such a
+  corollary, example, counterexample, or open problem. Set `generation.role` to
+  `direct-corollary`, `example`, `counterexample`, or `open-problem`, respectively. Such a
   statement cannot be a `deps` target.
   Omit `generation` for other statement provenance.
 
@@ -109,6 +109,40 @@
   missing or mismatched evidence remains an error. There is no item gate,
   rejudgment or adjudication duty for this recorded repair state.
 
+### Open problems
+
+An `open-problem` (displayed as **Open problem**) records a precise unresolved
+question or conjectural claim, not an established result. Use an `op-` ID,
+`## Open problem` for its formulation and hypotheses, and `## Status` for its
+unresolved status, date, known partial results and authoritative sources.
+Omit legacy `proved_here: false`, `external_refs`, and `external_dependency`
+fallback records; the class itself records the unproved status. Include an HTTP(S) source for the formulation/status and
+`provenance.proof: not-applicable`; `verification.precheck`, if present, is `n/a`.
+Do not supply a claimed Proof/Refutation/Verification/Counterexample section,
+`proof_strategy`, or proof-acceptance `judge`, `audited`, or `verified` stamps.
+Publication requires structured `verification.sources_checked` with `date`,
+`scope`, and `by`; it records source/status review, not a solution.
+
+An open problem may depend on established definitions/results needed to
+formulate it. It may never be a target of another item's `deps` or
+`justified_by`, including through aliases or indirect prerequisite chains.
+Proofs and Facts & Assumptions may not cite it as a premise. Contextual
+wikilinks belong in Remarks; nonlogical later references retain the ordinary
+`forward_refs` ordering rules. Proved partial results are separate ordinary
+result items and never assume the open conclusion.
+
+All genuinely unproved claims belong in this class. An established theorem
+whose local proof has not yet been authored is an authoring obligation, not
+an unresolved mathematical problem. Definitions, adopted physical postulates,
+and reported observations retain their existing nonproof classes. For example,
+Navier–Stokes equations are a model/formulation; the exact three-dimensional
+global existence/regularity question is an open problem. Claimed solutions
+awaiting scrutiny do not become established proof suppliers.
+
+An open-problem item contract uses `open_problem_review` with `formulation`,
+`status`, and `sources`, each `{verdict: pass, evidence: ...}`. It has no
+proof-step derivations, routine steps, or boundary worksheets.
+
 ### Algorithms
 
 An `algorithm` is a definition of a procedure, with the same provenance,
@@ -147,7 +181,7 @@ not report an observed experimental outcome.
   theorem, lemma, proposition, or corollary; `## Example` and optional
   `## Verification` for an example; `## Statement refuted` and
   `## Counterexample` for a counterexample; `## Statement` and
-  `## Refutation` for a false statement. Remarks may use prose headings.
+  `## Refutation` for a false statement. Open problems use `## Open problem` and `## Status`. Remarks may use prose headings.
   The renderer splits at level-two headings; this mapping is an authoring
   convention rather than a renderer type check.
 - `## Facts & Assumptions` holds blank-line-separated `[F1]`, `[A1]`, or
@@ -238,7 +272,7 @@ New kinds and ID prefixes:
 
 Every locally authored item requires `domain: mathematics` or `domain: physics`.
 The four new kinds require physics; theorem/lemma/proposition/corollary require
-mathematics. Definitions, algorithms, examples, and remarks may have either domain.
+mathematics. Definitions, algorithms, examples, remarks, and open problems may have either domain. An open problem retains its no-logical-supplier rule in both domains.
 Mathematical items may never depend on physical items, including through aliases
 or `justified_by` or load-bearing `forward_refs`. Physical items may depend on either domain. All `deps` remain
 acyclic; existing well-definedness rules for `justified_by` still apply.

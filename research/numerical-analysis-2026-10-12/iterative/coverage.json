@@ -1,0 +1,427 @@
+{
+  "version": 1,
+  "date": "2026-10-12",
+  "topic": "Iterative numerical linear algebra",
+  "scope": [
+    "stationary iterations",
+    "CG/MINRES/GMRES and Krylov methods",
+    "preconditioning",
+    "sparse systems and costs",
+    "eigenvalue iterations",
+    "geometric and algebraic multigrid",
+    "randomized low-rank approximation"
+  ],
+  "status_summary": {
+    "existing_local_theory": "The general stationary splitting criterion, Arnoldi/GMRES, CG/MINRES, preconditioning transformations, classical eigen-iterations, numerical rank, SVD, and operator-norm foundations are already published.",
+    "substantial_local_gaps": [
+      "multigrid definitions and convergence theory",
+      "randomized range finding and probabilistic guarantees",
+      "Lanczos convergence as an eigenvalue solver",
+      "general sparse-kernel cost contracts"
+    ],
+    "open_problem_claims": 0,
+    "open_problem_reason": "These are established numerical-analysis results with full-text sources. Missing local authoring is a prerequisite gap, not evidence of an unresolved mathematical problem."
+  },
+  "published_scaffolds": [
+    {
+      "page": "krylov-subspaces-arnoldi-and-gmres",
+      "title": "Krylov Subspaces, Arnoldi and GMRES",
+      "status": "published",
+      "path": "library/linear-algebra/krylov-subspaces-arnoldi-and-gmres.md",
+      "inventory": [
+        "def-krylov-subspace-of-a-matrix-and-start-vector",
+        "def-grade-and-relative-minimal-polynomial-of-a-start-vector",
+        "prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector",
+        "thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise",
+        "cor-for-invertible-a-the-exact-solution-enters-the-krylov-space-at-the-grade",
+        "def-arnoldi-process",
+        "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+        "prop-lucky-arnoldi-breakdown-is-equivalent-to-krylov-invariance",
+        "def-ritz-values-and-ritz-vectors-from-arnoldi",
+        "prop-ritz-residual-formula-for-an-arnoldi-ritz-pair",
+        "def-gmres-iterate",
+        "thm-arnoldi-reduces-gmres-to-a-small-hessenberg-least-squares-problem",
+        "cor-gmres-minimizes-the-residual-over-the-affine-krylov-space",
+        "cor-unrestarted-gmres-residual-norms-are-nonincreasing",
+        "prop-gmres-residuals-are-polynomials-in-a-applied-to-the-initial-residual",
+        "thm-unrestarted-gmres-terminates-in-at-most-the-relative-grade-in-exact-arithmetic",
+        "prop-diagonalizable-gmres-residual-bound-keeps-the-eigenvector-conditioning-factor",
+        "def-restarted-gmres-m",
+        "prop-restarted-gmres-preserves-cyclewise-minimization-but-not-full-termination",
+        "def-matrix-free-access-model-for-krylov-methods"
+      ],
+      "summary": "This page builds the nonsymmetric Krylov route in the order the later proofs\nactually spend it. First come the Krylov spaces themselves, the relative\nminimal polynomial and the grade, because those control when the subspaces stop\ngrowing and when exact termination is even possible.\n\nArnoldi then turns that abstract Krylov filtration into an orthonormal basis\nand an upper Hessenberg reduction. Ritz data and GMRES are read off from that\nfactorization. The page closes with the exact-arithmetic termination theorem,\nthe diagonalizable residual bound that keeps the eigenvector-conditioning\nfactor, the restart warning, and the matrix-free access model that explains\nwhich operations Krylov methods actually need."
+    },
+    {
+      "page": "conjugate-gradients-minres-and-preconditioning",
+      "title": "Conjugate Gradients, MINRES and Preconditioning",
+      "status": "published",
+      "path": "library/linear-algebra/conjugate-gradients-minres-and-preconditioning.md",
+      "inventory": [
+        "def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix",
+        "def-quadratic-energy-of-a-hermitian-positive-definite-linear-system",
+        "thm-hermitian-positive-definite-linear-system-has-a-unique-energy-minimizer",
+        "def-krylov-galerkin-iterate-for-a-hermitian-positive-definite-system",
+        "prop-galerkin-orthogonality-for-a-krylov-galerkin-iterate",
+        "def-conjugate-gradient-recurrence",
+        "prop-conjugate-gradient-denominators-are-positive-before-convergence",
+        "thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate",
+        "thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error",
+        "thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic",
+        "thm-conjugate-gradient-chebyshev-bound-in-the-a-norm",
+        "rem-floating-point-conjugate-gradients-can-lose-orthogonality-conjugacy-and-finite-termination",
+        "def-lanczos-process-as-hermitian-arnoldi",
+        "thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence",
+        "def-minres-iterate-from-the-lanczos-tridiagonalization",
+        "thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space",
+        "def-stationary-iteration-from-a-matrix-splitting",
+        "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one",
+        "def-left-right-and-symmetric-positive-definite-preconditioning",
+        "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+        "thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem"
+      ],
+      "summary": "This page follows the Hermitian Krylov route that the preceding Arnoldi and\nGMRES page leaves open. It begins with the quadratic energy behind conjugate\ngradients, identifies the Galerkin condition that characterizes the affine\nKrylov iterate, and then proves the exact-arithmetic CG structure: positivity\nof the denominators, residual orthogonality, $A$-conjugacy, finite termination,\nand the standard Chebyshev bound.\n\nThe second half specializes Arnoldi to Lanczos, defines MINRES from the\ntridiagonal least-squares problem, and closes with stationary splittings and\npreconditioning. The page keeps the central trap explicit: CG needs Hermitian\npositive definiteness, while MINRES needs only Hermitian structure and\npreconditioning must be analyzed through the transformed operator rather than\npraised generically."
+    },
+    {
+      "page": "eigenvalue-iterations-and-the-qr-algorithm",
+      "title": "Eigenvalue Iterations and the QR Algorithm",
+      "status": "published",
+      "path": "library/linear-algebra/eigenvalue-iterations-and-the-qr-algorithm.md",
+      "inventory": [
+        "def-eigenpair-residual-and-normwise-backward-error",
+        "thm-eigenpair-residual-realises-the-minimum-norm-backward-error",
+        "def-power-iteration",
+        "thm-power-iteration-converges-projectively-under-a-simple-strictly-dominant-eigenvalue",
+        "def-inverse-and-shifted-inverse-iteration",
+        "thm-shifted-inverse-iteration-converges-to-the-simple-eigenvalue-nearest-the-shift",
+        "def-rayleigh-quotient-iteration",
+        "prop-hermitian-rayleigh-quotient-stationary-points-and-residual-gradient",
+        "prop-rayleigh-quotient-and-residual-converge-along-hermitian-power-iteration",
+        "thm-hermitian-rayleigh-quotient-iteration-has-local-cubic-convergence",
+        "def-subspace-iteration-and-the-dominant-invariant-subspace",
+        "thm-subspace-iteration-converges-to-the-dominant-invariant-subspace-under-a-spectral-gap",
+        "def-upper-hessenberg-and-real-symmetric-tridiagonal-matrices",
+        "thm-householder-similarity-reduces-to-hessenberg-and-tridiagonal-form",
+        "def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift",
+        "prop-unshifted-qr-is-orthonormalised-simultaneous-iteration-and-preserves-unitary-similarity",
+        "thm-unshifted-qr-converges-under-separated-moduli-and-leading-minor-hypotheses",
+        "prop-shifted-qr-preserves-upper-hessenberg-form",
+        "thm-wilkinson-shifted-symmetric-tridiagonal-qr-has-local-deflation-away-from-ties",
+        "prop-eigenpair-residual-thresholds-give-backward-error-stopping-rules"
+      ],
+      "summary": "This page treats the classical exact-arithmetic eigenvalue iterations with all\nof their hypotheses stated. Power iteration, shifted inverse iteration,\nRayleigh-quotient iteration, and subspace iteration are written as convergence\nresults only under the spectral separation and nondegeneracy conditions that\nactually make those conclusions true.\n\nThe QR section keeps the same discipline. It reduces matrices to Hessenberg or\ntridiagonal form first, identifies unshifted QR with orthonormalised\nsimultaneous iteration, states the extra hypotheses needed for unshifted QR\nconvergence, and records both the Hessenberg-preservation mechanism and the\nsymmetry-preserving Wilkinson-shift step together with a concrete\ntridiagonal-tail deflation computation."
+    },
+    {
+      "page": "matrix-norms-condition-numbers-and-numerical-stability",
+      "title": "Matrix Norms, Condition Numbers and Numerical Stability",
+      "status": "published",
+      "path": "library/linear-algebra/matrix-norms-condition-numbers-and-numerical-stability.md",
+      "inventory": [
+        "def-absolute-and-relative-forward-error-for-a-problem-map",
+        "def-absolute-and-relative-local-condition-numbers-of-a-problem-map",
+        "def-induced-matrix-p-norm",
+        "thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized",
+        "thm-induced-one-and-infinity-matrix-norms-are-max-column-and-row-sums",
+        "def-frobenius-matrix-norm",
+        "thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison",
+        "def-condition-number-of-a-nonsingular-linear-system",
+        "thm-right-hand-side-perturbation-bound-for-ax-equals-b",
+        "thm-matrix-perturbation-bound-for-ax-equals-b",
+        "thm-reciprocal-spectral-condition-number-is-the-relative-distance-to-singularity",
+        "thm-residual-to-forward-error-bounds-for-linear-systems",
+        "def-normwise-and-componentwise-backward-error-for-linear-systems",
+        "prop-explicit-formulas-for-normwise-and-componentwise-backward-error",
+        "def-standard-relative-floating-point-model-and-unit-roundoff",
+        "def-forward-and-backward-stability-for-a-problem-family",
+        "lem-product-of-one-plus-deltas-gives-theta-n",
+        "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+        "thm-local-conditioning-times-backward-error-controls-forward-error-to-first-order",
+        "thm-normal-equations-square-the-spectral-condition-number",
+        "thm-exact-rank-is-locally-constant-at-full-rank-and-discontinuous-at-nonmaximal-rank-matrices",
+        "def-numerical-rank-relative-to-a-norm-scale-and-tolerance",
+        "prop-spectral-numerical-rank-counts-singular-values-above-the-declared-threshold"
+      ],
+      "summary": "The published $p$-norms on $\\mathbb R^n$ and their norm axioms, the operator\nnorm and the singular value decomposition with the rank and Eckart–Young\nconsequences, matrix multiplication and invertibility, the geometric series,\nand the least-squares normal equation supply the machinery this page uses; the\npublished spectral page owns singular values and the operator $2$-norm, and\nthis page cites them rather than re-minting them.\n\nThe page separates the three questions that numerical analysis keeps apart.\nFirst it fixes the vocabulary of problem conditioning: absolute and relative\nforward error, and the absolute and relative local condition numbers of a\nproblem map. Second it builds the matrix-norm tools: the norm induced by a\npublished vector $p$-norm with its compatibility, submultiplicativity and\nnormalisation; the induced $1$-norm as the maximum column sum and the induced\n$\\infty$-norm as the maximum row sum; and the Frobenius norm with the spectral\nand Frobenius singular-value formulas, unitary invariance and the sharp rank\ncomparison. Third it runs the linear-system spine: the condition number\n$\\kappa_p(A)$, the right-hand-side and matrix perturbation bounds, the\nreciprocal spectral condition number as the relative distance to singularity,\nresidual-to-forward-error bounds, and normwise and componentwise backward\nerror with their explicit residual formulas.\n\nThe page then makes the arithmetic model explicit: the standard relative\nfloating-point model and unit roundoff with its stated exclusions, forward and\nbackward stability for a problem family, the product-of-errors lemma giving\n$\\gamma_n=nu/(1-nu)$, the componentwise and normwise dot-product bounds, and\nthe first-order principle that conditioning times backward error controls\nforward error. It closes by separating exact rank from numerical rank:\nexact rank is locally constant at maximal-rank matrices and discontinuous at\nnonmaximal-rank ones, numerical rank is declared against a norm, scale and\ntolerance, and in the spectral norm it counts the singular values above the\ndeclared threshold."
+    },
+    {
+      "page": "the-spectral-theorem-and-singular-value-decomposition",
+      "title": "The Spectral Theorem, Positive Operators and Singular Value Decomposition",
+      "status": "published",
+      "path": "library/linear-algebra/the-spectral-theorem-and-singular-value-decomposition.md",
+      "inventory": [
+        "def-self-adjoint-and-normal-endomorphism",
+        "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+        "thm-schur-triangularisation",
+        "lem-normal-upper-triangular-matrix-is-diagonal",
+        "thm-complex-spectral-theorem-for-normal-endomorphisms",
+        "thm-real-normal-endomorphism-classification",
+        "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+        "thm-spectral-resolution-and-polynomial-spectral-projections",
+        "def-functional-calculus-for-a-normal-endomorphism",
+        "prop-functional-calculus-for-normal-endomorphisms",
+        "def-semisimple-and-nilpotent-endomorphisms",
+        "thm-additive-jordan-chevalley-decomposition",
+        "def-non-negative-and-positive-operator",
+        "prop-operator-positivity-agrees-with-form-positivity-over-the-reals",
+        "thm-non-negative-operator-characterisations",
+        "thm-non-negative-square-root-exists-and-is-unique",
+        "prop-non-negative-square-root-is-a-polynomial-in-the-operator",
+        "def-singular-values-of-an-endomorphism",
+        "prop-singular-values-are-well-defined",
+        "thm-singular-value-decomposition",
+        "cor-rank-equals-number-of-nonzero-singular-values",
+        "cor-adjoint-has-the-same-singular-values",
+        "thm-polar-decomposition",
+        "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+        "thm-operator-norm-is-the-largest-singular-value",
+        "cor-operator-norm-submultiplicative-and-t-star-t-identity",
+        "thm-eckart-young-best-rank-k-approximation",
+        "def-rayleigh-quotient",
+        "thm-courant-fischer-min-max-principle",
+        "cor-rayleigh-quotient-extreme-eigenvalue-characterisation",
+        "thm-cauchy-interlacing-for-self-adjoint-compressions",
+        "thm-weyl-inequalities-for-self-adjoint-sums",
+        "def-gershgorin-disks",
+        "thm-gershgorin-disk-theorem"
+      ],
+      "summary": "The adjoint, orthonormal bases, orthogonal projections, Jordan form, and the\nfundamental theorem of algebra are already in place. This page adds the\nfinite-dimensional spectral package that those prerequisites make cheap:\nSchur triangularisation, the complex spectral theorem for normal operators, the\nreal block classification for normal operators, the real spectral theorem for\nself-adjoint operators, spectral projections, functional calculus, and the\nfinite-dimensional Jordan-Chevalley decomposition over a perfect field.\n\nFrom that point onward the route stays algebraic. The page develops\nnon-negative operators and their unique non-negative square roots, singular\nvalues, the singular value decomposition, polar decomposition, the operator\nnorm and Eckart-Young, then the Rayleigh quotient, Courant-Fischer,\ninterlacing, Weyl inequalities, and Gershgorin's disks. The companion page\nworks these statements on explicit matrices and records the common false\nfield-free or over-strong variants."
+    }
+  ],
+  "coverage": [
+    {
+      "area": "Stationary iterations",
+      "coverage": "General theorem present; named splitting algorithms and useful sufficient conditions are incomplete.",
+      "local_suppliers": [
+        "def-stationary-iteration-from-a-matrix-splitting",
+        "thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one"
+      ],
+      "source_ranges": [
+        "Saad 2e, Ch. 4, §§4.1–4.2, printed pp. 105–126",
+        "Cornell CS6210 notes 31 and 33, complete PDFs"
+      ],
+      "exact_guarantees_and_conditions": [
+        "For the stationary iteration x_(j+1)=Gx_j+f, convergence to the unique fixed point for every start and right-hand side iff rho(G)<1.",
+        "A norm condition ||G||<1 is sufficient and yields a per-step geometric contraction in that norm.",
+        "Jacobi and forward Gauss–Seidel converge for strictly or irreducibly diagonally dominant matrices; this is sufficient, not necessary.",
+        "For symmetric A with positive diagonal, SOR converges for every start iff A is positive definite when 0<omega<2.",
+        "SOR/Jacobi spectral relations require consistent ordering; the usual optimal-omega formula is not a generic theorem for arbitrary sparse matrices."
+      ],
+      "exact_vs_roundoff": "These are exact-arithmetic iteration claims. For nonnormal G, transient growth and Jordan polynomial factors can delay the asymptotic spectral-radius rate.",
+      "missing_local_design": [
+        "Add exact definitions for Richardson, Jacobi, Gauss–Seidel, and SOR as matrix splittings, then prove only the convergence tests whose assumptions are declared.",
+        "Keep convergence-factor/iteration-count results separate from the algorithm definitions."
+      ]
+    },
+    {
+      "area": "Krylov methods: Arnoldi, GMRES, CG, MINRES",
+      "coverage": "The main exact-arithmetic theory is already published; complexity and implementation properties are not fully represented as separate theorem contracts.",
+      "local_suppliers": [
+        "def-krylov-subspace-of-a-matrix-and-start-vector",
+        "def-grade-and-relative-minimal-polynomial-of-a-start-vector",
+        "thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise",
+        "thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization",
+        "prop-lucky-arnoldi-breakdown-is-equivalent-to-krylov-invariance",
+        "cor-gmres-minimizes-the-residual-over-the-affine-krylov-space",
+        "thm-unrestarted-gmres-terminates-in-at-most-the-relative-grade-in-exact-arithmetic",
+        "thm-conjugate-gradient-is-the-krylov-galerkin-method-and-minimizes-the-energy-error",
+        "thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic",
+        "thm-conjugate-gradient-chebyshev-bound-in-the-a-norm",
+        "thm-minres-minimizes-the-euclidean-residual-over-the-hermitian-krylov-space",
+        "rem-floating-point-conjugate-gradients-can-lose-orthogonality-conjugacy-and-finite-termination"
+      ],
+      "source_ranges": [
+        "Saad 2e, Ch. 6, §§6.1–6.12, printed pp. 157–228, complete",
+        "Cornell notes 34, 35, and 37, complete PDFs",
+        "Cornell note 38–39, complete PDF"
+      ],
+      "exact_guarantees_and_conditions": [
+        "Unrestarted GMRES exact termination is at most the relative grade for invertible A.",
+        "CG exact-arithmetic positivity, orthogonality, conjugacy, Galerkin minimization, grade termination, and Chebyshev error bound require Hermitian positive-definite A.",
+        "MINRES exact residual minimization requires Hermitian A and permits the indefinite case.",
+        "Restarted GMRES has cyclewise minimization but not the full unrestarted grade-termination guarantee.",
+        "The diagonalizable GMRES bound must retain the eigenvector condition factor."
+      ],
+      "complexity": "For a sparse CSR operator, one matrix-vector product is O(n+nnz(A)). For square patterns with at least one stored entry per row, an m-step unrestarted Arnoldi/GMRES implementation has O(m nnz(A)+m^2 n) arithmetic, O(mn) basis storage, plus the small least-squares solve. This property should be a separate cost result, not folded into the convergence theorem.",
+      "exact_vs_roundoff": "Exact breakdown and exact finite termination are exact-arithmetic results. In floating point, orthogonality and A-conjugacy can be lost, residual recurrences can drift from true residuals, and the theoretical n/grade-step termination is not guaranteed. Reorthogonalization is an implementation property with cost.",
+      "missing_local_design": [
+        "If complexity is in scope, prove a sparse-kernel count under an explicit storage/operator model.",
+        "If restarted-GMRES stagnation, inexact matvecs, or reorthogonalization bounds are added, give separate hypotheses and avoid converting numerical observations into exact guarantees."
+      ]
+    },
+    {
+      "area": "Preconditioning",
+      "coverage": "Core transformations and SPD-preconditioned CG bound are present; practical cost/quality results and nonstationary preconditioning are not fully local.",
+      "local_suppliers": [
+        "def-left-right-and-symmetric-positive-definite-preconditioning",
+        "prop-invertible-preconditioners-give-equivalent-linear-systems-with-explicit-residual-maps",
+        "thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem",
+        "cex-a-preconditioner-can-worsen-the-preconditioned-condition-number"
+      ],
+      "source_ranges": [
+        "Saad 2e, Ch. 9, §§9.1–9.6, printed pp. 275–296, complete",
+        "Saad 2e, Ch. 10, §§10.1–10.8, printed pp. 297–368, complete"
+      ],
+      "exact_guarantees_and_conditions": [
+        "Left and right transformations have the same solution set for invertible preconditioners but optimize different residuals.",
+        "For SPD A and SPD M=CC*, symmetric preconditioning C^(-1)AC^(-*) is SPD and CG uses the transformed spectral condition number.",
+        "A preconditioner is not guaranteed to improve convergence merely because it is invertible or called a preconditioner.",
+        "Flexible GMRES is the justified route when the right-preconditioning operation changes by step; its iterate minimizes over the span of the actual preconditioned vectors."
+      ],
+      "exact_vs_roundoff": "All algebraic equivalences are exact. Implementation costs of applying M^(-1), setup, fill, and residual recomputation are separate; left-preconditioned residual norms are not physical residual norms.",
+      "missing_local_design": [
+        "Only add an ILU or approximate-inverse algorithm if its admissible inputs, breakdown behavior, storage pattern, and application cost are explicit.",
+        "Do not claim a universal iteration improvement or convergence theorem for ILU/AMG without the actual matrix-class hypotheses."
+      ]
+    },
+    {
+      "area": "Sparse systems and computational costs",
+      "coverage": "Qualitative sparse-graph and fill-in content exists; explicit complexity contracts for iterative kernels are missing.",
+      "local_suppliers": [
+        "def-matrix-free-access-model-for-krylov-methods",
+        "ex-sparse-gaussian-elimination-can-create-fill-in"
+      ],
+      "source_ranges": [
+        "Saad 2e, Ch. 3, §§3.1–3.7, printed pp. 75–104, complete",
+        "Saad 2e, Ch. 6, especially §6.4.2 and §6.5, printed pp. 167–180",
+        "Cornell notes 31–33, complete PDFs"
+      ],
+      "exact_guarantees_and_conditions": [
+        "CSR storage uses O(nnz(A)) values/indices plus O(m) row pointers; CSR matrix-vector multiplication costs O(m+nnz(A)) by counting row initialization and nonzero visits.",
+        "Sparse direct factorization cost depends on graph and ordering because elimination creates fill; no dimension-only bound is valid for arbitrary sparsity patterns.",
+        "Krylov methods need matrix-vector products and vector operations in the matrix-free access model; explicit matrix storage is optional."
+      ],
+      "missing_local_design": [
+        "A concise sparse-storage/CSR-matvec algorithm contract and operation-count proposition can be proved by counting loop iterations.",
+        "Any sparse direct factorization bound must specify a graph/model family and ordering."
+      ]
+    },
+    {
+      "area": "Eigenvalue iterations",
+      "coverage": "Power, inverse/shifted inverse, Rayleigh quotient, subspace, QR, and residual/backward-error results are present; Lanczos extremal-Ritz convergence is missing.",
+      "local_suppliers": [
+        "def-power-iteration",
+        "thm-power-iteration-converges-projectively-under-a-simple-strictly-dominant-eigenvalue",
+        "def-inverse-and-shifted-inverse-iteration",
+        "thm-shifted-inverse-iteration-converges-to-the-simple-eigenvalue-nearest-the-shift",
+        "thm-hermitian-rayleigh-quotient-iteration-has-local-cubic-convergence",
+        "def-subspace-iteration-and-the-dominant-invariant-subspace",
+        "thm-subspace-iteration-converges-to-the-dominant-invariant-subspace-under-a-spectral-gap",
+        "prop-ritz-residual-formula-for-an-arnoldi-ritz-pair",
+        "thm-eigenpair-residual-realises-the-minimum-norm-backward-error"
+      ],
+      "source_ranges": [
+        "Saad 2e, Ch. 6 §§6.3, 6.6, 6.11, printed pp. 160–164, 193–195, 208–218",
+        "Cornell notes 24–26, 28–29, and 38–39, all complete PDFs"
+      ],
+      "exact_guarantees_and_conditions": [
+        "Power iteration requires a diagonalizable matrix, a simple eigenvalue of strictly largest modulus, and nonzero starting coefficient in its eigendirection.",
+        "Shifted inverse iteration requires a non-eigenvalue shift and a uniquely nearest simple eigenvalue with nonzero starting component.",
+        "Subspace iteration requires diagonalizability, a spectral gap at dimension p, and an invertible initial leading-eigenspace block.",
+        "Lanczos is Arnoldi specialized to Hermitian matrices; its Ritz residual has an exact computable formula."
+      ],
+      "exact_vs_roundoff": "The gap/rate results are exact-arithmetic. In floating-point Lanczos, loss of orthogonality can generate ghost Ritz values; reorthogonalization is required for stronger eigenvector orthogonality guarantees.",
+      "missing_local_design": [
+        "Add an extremal Lanczos/Ritz convergence theorem only with the exact start-angle, spectral-gap, and no-breakdown assumptions. Cornell note 38–39 gives a proof route via Chebyshev polynomial approximation and an explicit starting-angle factor.",
+        "Keep backward-error residual stopping separate from forward eigenvector accuracy, which also depends on spectral separation/conditioning."
+      ]
+    },
+    {
+      "area": "Geometric and algebraic multigrid",
+      "coverage": "No active local multigrid definitions, algorithms, or theorem contracts were found.",
+      "source_ranges": [
+        "Saad 2e, Ch. 13, §§13.1–13.7, printed pp. 423–468, complete",
+        "Cornell notes 32–33, complete PDFs, for the 1D/2D Poisson model and exact grid-dependent work comparison"
+      ],
+      "design": [
+        {
+          "proposed_carrier": "definition/algorithm package",
+          "content": "Define a grid hierarchy, prolongation P, restriction R, Galerkin operator A_H=R A_h P, and a smoother error operator. Define the two-grid error operator in the declared pre/post order."
+        },
+        {
+          "proposed_carrier": "proposition",
+          "content": "For SPD A_h with Galerkin A_H and compatible restriction/prolongation, prove coarse correction is an A_h-orthogonal projector onto the complement of Ran(P)."
+        },
+        {
+          "proposed_carrier": "theorem",
+          "content": "State and prove the two-grid bound from the smoothing inequality and approximation property; require α,β uniform in mesh level for a mesh-independent rate."
+        },
+        {
+          "proposed_carrier": "algorithm plus separate complexity theorem",
+          "content": "Define recursive V/W cycles operationally. Prove work from T(N)=cN+γT(N/2^d), with base and per-level sparsity costs stated. Prove convergence separately from work."
+        },
+        {
+          "proposed_carrier": "conditional FMG theorem",
+          "content": "Optional: state the discretization-error, interlevel approximation, uniform contraction, and transfer-operator bounds before claiming FMG error of discretization order."
+        },
+        {
+          "proposed_carrier": "AMG definition/remark",
+          "content": "Define strong connections/coarse-fine sets and one interpolation rule as an algorithm. Treat coarse selection as a heuristic unless the smoothing and approximation properties are proved for the matrix class."
+        }
+      ],
+      "proof_routes": [
+        "Saad Lemma 13.1 proves the Galerkin projector identity.",
+        "Saad Theorem 13.3 proves ||S_h T_h^H||_A ≤ sqrt(1−α/β) from the smoothing and approximation inequalities.",
+        "Saad Theorem 13.2 proves the FMG discretization-order bound under explicit level-uniform assumptions.",
+        "A recursion-tree proof gives cycle work and can be authored independently of the convergence argument."
+      ],
+      "hypothesis_guardrails": [
+        "Do not state mesh-independent convergence without level-uniform smoothing and approximation constants.",
+        "Do not identify a rediscretized coarse matrix with a Galerkin matrix unless equality is shown for the chosen PDE/grid/transfers.",
+        "Do not attribute a universal convergence theorem to AMG setup heuristics."
+      ]
+    },
+    {
+      "area": "Randomized low-rank approximation",
+      "coverage": "No active local algorithm or probabilistic guarantee was found; HMT supplies detailed Gaussian theorem derivations, but several Gaussian matrix estimates/concentration results remain required local suppliers.",
+      "source_ranges": [
+        "Halko–Martinsson–Tropp, §§1, 3–5, 8–10 and Appendix A, arXiv PDF pp. 1–10, 17–38, 46–61, 64–69; the entire 74-page source was read."
+      ],
+      "design": [
+        {
+          "proposed_carrier": "algorithm",
+          "content": "Gaussian range finder: fixed real A; independent standard Gaussian Ω∈R^(n×(k+p)); Y=AΩ; stable orthonormalization Q=orth(Y); return Q and QQ^*A."
+        },
+        {
+          "proposed_carrier": "theorem",
+          "content": "State the expected spectral-error bound for k≥2, p≥2, k+p≤min(m,n), real fixed A and expectation over Ω."
+        },
+        {
+          "proposed_carrier": "theorem",
+          "content": "Optionally state a high-probability bound with p≥4 and its explicit failure probability; keep the full tail-Frobenius term or derive any simplification explicitly."
+        },
+        {
+          "proposed_carrier": "algorithm and separate theorem",
+          "content": "Define the power scheme B=(AA^*)^q A and reorthogonalized alternating A/A^* passes; prove its expected error bound as a separate result."
+        },
+        {
+          "proposed_carrier": "proposition",
+          "content": "Optional: derive the sparse matrix-vector, orthogonalization, memory, and pass counts from the algorithm under an explicit access model."
+        }
+      ],
+      "key_source_formulas": {
+        "expected_range_finder": "E||A−QQ^*A||₂ ≤ (1+sqrt(k/(p−1)))σ_(k+1) + e sqrt(k+p)/p · (Σ_(j>k)σ_j²)^(1/2).",
+        "high_probability_range_finder": "For p≥4: ||A−QQ^*A||₂ ≤ (1+8 sqrt((k+p) p log p))σ_(k+1) + 3 sqrt(k+p)(Σ_(j>k)σ_j²)^(1/2), with failure probability ≤6 p^(−p).",
+        "power_scheme_expected": "E||A−QQ^*A||₂ ≤ [(1+sqrt(k/(p−1)))σ_(k+1)^(2q+1) + e sqrt(k+p)/p · (Σ_(j>k)σ_j^(2(2q+1)))^(1/2)]^(1/(2q+1))."
+      },
+      "proof_status": [
+        "HMT proves the deterministic SVD-partition bound and power inequality in full.",
+        "The expected/high-probability range-finder derivations are present, but they rely on Gaussian norm, pseudoinverse, and concentration facts that HMT states or cites without complete proofs in that source.",
+        "The pseudoinverse Frobenius moment and tail arguments are developed in Appendix A; some spectral-norm estimates are cited.",
+        "The SRFT embedding theorem is stated but its proof is omitted; the a-posteriori estimator points to an external proof."
+      ],
+      "hypothesis_guardrails": [
+        "Use real matrices and exact arithmetic for the stated HMT bounds unless the complex variant is separately proved.",
+        "The probability is over independent Gaussian test entries; do not convert a high-probability theorem into a deterministic one.",
+        "The σ_(k+1) lower bound is supplied by the published local Eckart–Young theorem.",
+        "Numerical rank must declare norm, scale, and tolerance using the published local definition."
+      ]
+    }
+  ],
+  "complexity_and_behavior_separation": {
+    "algorithms": "Definitions specify input/output/admissibility and operational steps only.",
+    "mathematical_properties": "Convergence, residual optimality, termination, error bounds, and complexity belong in separate proved result items that depend on the algorithm.",
+    "floating_point": "Roundoff caveats or stability theorems are separate from exact-arithmetic results.",
+    "probability": "Randomized statements must identify the distribution, independence, dimensions, parameter constraints, event, and failure probability."
+  },
+  "open_problem_candidates": []
+}

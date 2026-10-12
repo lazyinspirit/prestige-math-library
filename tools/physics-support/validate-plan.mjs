@@ -132,7 +132,7 @@ function die(msg) { console.error(msg); process.exit(2); }
 const PREFIX_OF_KIND = {
   definition: 'def', algorithm: 'alg', theorem: 'thm', lemma: 'lem', proposition: 'prop',
   corollary: 'cor', example: 'ex', counterexample: 'cex',
-  'false-statement': 'fs', remark: 'rem',
+  'false-statement': 'fs', remark: 'rem', 'open-problem': 'op',
   postulate: 'post', 'physics-theorem': 'pthm', experiment: 'exp', 'thought-experiment': 'texp',
 };
 
@@ -144,6 +144,8 @@ const importedIds = new Set((existsSync(join(repo, 'research/math-imports.json')
 /** ids already published/drafted in the repo, plus their aliases */
 const existing = new Set();
 const canonicalExisting = new Map();
+const existingKinds = new Map();
+const existingJustifications = new Map();
 const existingItemEdges = new Map();
 const existingPrerequisiteEdges = new Map();
 try {
@@ -153,7 +155,9 @@ try {
     existing.add(id);
     canonicalExisting.set(id, id);
     const src = readFileSync(join(repo, 'items', f), 'utf8');
+    existingKinds.set(id, src.match(/^kind:\s*['\"]?([^'\"\s]+)['\"]?\s*$/m)?.[1]);
     existingPrerequisiteEdges.set(id, frontmatterList(src, 'deps'));
+    existingJustifications.set(id, frontmatterList(src, 'justified_by'));
     existingItemEdges.set(id, [
       ...frontmatterList(src, 'deps'),
       ...frontmatterList(src, 'justified_by'),
@@ -229,6 +233,14 @@ if (selectedItemIds) for (const id of selectedItemIds)
     err('frontier-selection', `current manifest item ${id} is absent from the selected plan pages`);
 
 const pageOrder = new Map(pages.map((p, i) => [p.id, i]));
+for (const page of pages) if (selectedPage(page.id)) for (const item of page.items ?? []) {
+  for (const field of ['deps', 'justified_by']) for (const raw of item[field] ?? []) {
+    const canonical = canonicalExisting.get(raw) ?? raw;
+    if ((itemById.get(canonical)?.kind ?? existingKinds.get(canonical)) === 'open-problem' || canonical.startsWith('op-'))
+      err('open-problem-dependency', `${item.id}: ${field} may not use open problem ${raw}`);
+  }
+}
+
 
 // ---------------------------------------------------------------- checks 1,4,5,6,7
 
@@ -397,6 +409,20 @@ function reachableContext(roots, succ) {
 const scopedItems = pages.filter(p => selectedPage(p.id)).flatMap(p =>
   (p.items ?? []).map(it => [it.id, p.id]));
 const itemContext = reachableContext(scopedItems, itemSucc);
+const logicalContext = reachableContext(scopedItems, id => [...new Set([
+  ...(itemById.get(id)?.deps ?? []), ...(itemById.get(id)?.justified_by ?? []),
+  ...(existingPrerequisiteEdges.get(id) ?? []), ...(existingJustifications.get(id) ?? []),
+])].map(canonicalItem).filter(target => itemById.has(target) || existing.has(target)));
+for (const [id, root] of logicalContext) {
+  const refs = [...(itemById.get(id)?.deps ?? []), ...(itemById.get(id)?.justified_by ?? []),
+    ...(existingPrerequisiteEdges.get(id) ?? []), ...(existingJustifications.get(id) ?? [])];
+  for (const raw of refs) {
+    const target = canonicalItem(raw);
+    if ((itemById.get(target)?.kind ?? existingKinds.get(target)) === 'open-problem' || target.startsWith('op-'))
+      err('open-problem-dependency', `page ${root}: prerequisite ${id} may not use open problem ${raw}`);
+  }
+}
+
 const itemRoots = selectedPages === null ? [...itemById.keys()] : [...itemContext.keys()];
 if (selectedPages !== null) for (const [id, root] of itemContext) {
   const local = selectedPage(pageOfItem.get(id)?.id);

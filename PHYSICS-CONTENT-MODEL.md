@@ -209,6 +209,23 @@ gates enforce the boundary without changing mathematics tools.
 
 ## Item classes
 
+### Open problem
+
+The shared `open-problem` kind (`op-`, display **Open problem**) records an
+unresolved mathematical or physical question with explicit hypotheses,
+source-backed formulation and dated status. It has no claimed proof and is
+never a logical supplier: no item's `deps` or `justified_by` may target it,
+even through aliases; proof/fact premises may not invoke its conclusion.
+Established partial results remain separate proved items. Its publication
+review checks formulation, status and sources rather than accepting a proof.
+A physical open problem still declares its framework/domain and physical scope.
+Definitions, postulates and experiments retain their respective existing roles.
+For Navier–Stokes, distinguish the equations and proved local/weak/two-dimensional
+results from the precise three-dimensional global existence/regularity problem.
+An announced or proposed solution is not an established proof until its status
+has been authoritatively resolved. See both library schemas for the item format.
+
+
 ### Postulate
 
 A postulate is an explicitly adopted physical assumption within a specified

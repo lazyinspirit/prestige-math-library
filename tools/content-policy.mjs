@@ -15,7 +15,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseFrontmatter, nested, referenceUrls } from './content-policy-lib.mjs';
+import { parseFrontmatter, nested, referenceUrls, openProblemErrors } from './content-policy-lib.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -95,6 +95,7 @@ const GENERATED_ROLE = new Map([
   ['corollary', 'direct-corollary'],
   ['example', 'example'],
   ['counterexample', 'counterexample'],
+  ['open-problem', 'open-problem'],
 ]);
 // Owner policy, 2026-08-01: each Beta owns at most two A/B pairs.  This is a
 // future-scope gate, so historical three-pair manifests remain readable.
@@ -270,10 +271,34 @@ for (const file of files) {
           pageKind: page?.kind,
           order: page?.order,
           itemIndex,
+          kind: planned?.kind,
+          justified: Array.isArray(planned?.justified_by) ? planned.justified_by : [],
           deps: Array.isArray(planned?.deps) ? planned.deps : [],
         });
       }
       scope.push(id);
+    }
+  }
+}
+
+// Reject open suppliers throughout the selected consumers' logical closure.
+// Audit mode never weakens this boundary. Outside suppliers remain context.
+if ([...items.values(), ...plannedItems.values()].some(item => item.kind === 'open-problem')) {
+  for (const root of scope) {
+    const seen = new Set(), queue = [root];
+    for (let i = 0; i < queue.length; i++) {
+      const id = resolve(queue[i]) ?? queue[i];
+      if (seen.has(id)) continue;
+      seen.add(id);
+      const item = manifestOnly ? (plannedItems.get(id) ?? items.get(id)) : items.get(id);
+      if (!item) continue;
+      const justified = item.justified ?? list(item.metadata ?? {}, 'justified_by');
+      for (const raw of [...(item.deps ?? []), ...justified]) {
+        const targetId = resolve(raw) ?? raw;
+        const target = manifestOnly ? (plannedItems.get(targetId) ?? items.get(targetId)) : items.get(targetId);
+        if (target?.kind === 'open-problem') error('open-problem-dependency', `${root}: prerequisite ${id} may not use open problem ${raw} as a logical supplier`, root);
+        else if (target) queue.push(targetId);
+      }
     }
   }
 }
@@ -370,6 +395,8 @@ if (!manifestOnly) for (const id of scope) {
     break;   // one finding per item; the fix is a pass over the file, not per hit
   }
 
+  for (const finding of openProblemErrors(item.metadata, item.body)) error(finding.code, `${item.file}: ${finding.message}`, item.id);
+
   const statement = item.provenance.statement;
   const proof = item.provenance.proof;
   if (!statement) error('provenance-statement-missing', `${item.file}: every in-flight mathematical-content item needs provenance.statement`, item.id);
@@ -423,9 +450,10 @@ if (!manifestOnly) for (const id of scope) {
   // Only that component controls this rule: a literature-derived or AI-altered
   // statement stays eligible even if its local proof is AI-generated, while an
   // AI-generated statement stays ineligible even if its proof is sourced.
-  for (const raw of item.deps) {
+  for (const raw of [...item.deps, ...list(item.metadata, 'justified_by')]) {
     const targetId = resolve(raw);
     const target = targetId && items.get(targetId);
+    if (target?.kind === 'open-problem') error('open-problem-dependency', `${item.file}: may not use open problem ${target.id} as a logical supplier`, item.id);
     if (target && !target.provedHere) {
       error('unproved-dependency-retired', `${item.file}: depends on retired unproved record ${target.id}; supply a proved local replacement`, item.id);
     }

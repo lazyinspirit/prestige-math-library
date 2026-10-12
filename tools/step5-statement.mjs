@@ -2,7 +2,7 @@
 import {createHash} from 'node:crypto';
 export function statementHash(text) {
   const body=text.replace(/^---\r?\n[\s\S]*?\r?\n---(?:\r?\n|$)/,'');
-  const sections=[...body.matchAll(/^##[ \t]+(?:Statement|Definition)[ \t]*\r?\n([\s\S]*?)(?=^##[ \t]+|(?![\s\S]))/gm)].map(match=>match[0].replace(/\r\n/g,'\n').trim());
+  const sections=[...body.matchAll(/^##[ \t]+(?:Statement|Definition|Open problem|Status)[ \t]*\r?\n([\s\S]*?)(?=^##[ \t]+|(?![\s\S]))/gm)].map(match=>match[0].replace(/\r\n/g,'\n').trim());
   return createHash('sha256').update(JSON.stringify(sections)).digest('hex');
 }
 

@@ -345,3 +345,14 @@ workflow inputs.
 Worker supporting hashes for shared defect ledgers also bind immutable archived
 bytes at collection. Later ledger additions preserve that historical support;
 they do not replace validation of the current ledger.
+
+## Open problems
+
+Use `kind: open-problem`, an `op-` ID, `## Open problem` and `## Status` for
+unresolved claims. Review exact formulation, dated status, sources and partial
+results; do not invent a proof or proof-acceptance stamp. Contracts use
+`open_problem_review` instead of proof worksheets. Open problems can consume
+formulation prerequisites but never supply `deps`, `justified_by` or proof
+premises, including alias-resolved or indirect uses. Source/status review
+does not certify a solution. Keep established results awaiting local authoring
+as separate proof obligations, and preserve physical postulates/observations.

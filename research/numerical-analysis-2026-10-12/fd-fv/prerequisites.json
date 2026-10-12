@@ -1,0 +1,200 @@
+{
+  "reader": "fd-fv",
+  "status": "completed",
+  "scope": "Logical prerequisites and existing local suppliers for a future numerical-PDE scaffold. The references below are inspected published library material, not merely titles found by search.",
+  "source_record": "research/numerical-analysis-2026-10-12/fd-fv/sources.json",
+  "dependency_groups": [
+    {
+      "id": "continuum-pde-and-functional-analysis-base",
+      "needed_for": ["elliptic residual estimates", "heat/wave model and boundary estimates", "weak conservation law and entropy limit"],
+      "existing_published_suppliers": [
+        {
+          "page": "library/pde/weak-derivatives-and-sobolev-spaces.md",
+          "items": ["def-weak-derivative-of-a-locally-integrable-function", "def-sobolev-space-wkp-and-its-norm", "thm-sobolev-spaces-are-banach-spaces"],
+          "role": "Continuum weak derivatives and Sobolev spaces."
+        },
+        {
+          "page": "library/pde/sobolev-traces-and-zero-boundary-values.md",
+          "items": ["thm-lp-trace-operator-on-a-bounded-c-one-domain", "thm-kernel-of-the-trace-is-w-one-p-zero", "thm-sobolev-gauss-green-formula-on-c-one-domains"],
+          "role": "Boundary values, zero trace and weak integration by parts."
+        },
+        {
+          "page": "library/pde/sobolev-poincare-and-morrey-inequalities.md",
+          "items": ["thm-poincare-inequality-for-w-one-p-zero", "thm-poincare-wirtinger-on-bounded-connected-extension-domains", "thm-morrey-inequality-for-p-greater-than-n"],
+          "role": "Continuum inequalities used in weak energy estimates; no discrete Poincare inequality is thereby supplied."
+        },
+        {
+          "page": "library/pde/lax-milgram-and-weak-elliptic-solutions.md",
+          "items": ["thm-lax-milgram", "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem", "thm-lax-milgram-solvability-for-coercive-divergence-form-equations", "cor-weak-solution-depends-continuously-on-data"],
+          "role": "Weak continuum elliptic existence, uniqueness and energy stability."
+        }
+      ],
+      "new_prerequisites_required": ["A chosen continuous PDE well-posedness statement for the linear Lax theorem, if not treated as its theorem hypothesis.", "An explicit grid/cell mesh family, approximation map, discrete norm and reconstruction."]
+    },
+    {
+      "id": "linear-finite-difference-consistency-stability-convergence",
+      "needed_for": ["finite-difference convergence for linear IVPs and elliptic BVPs"],
+      "new_local_suppliers_required_in_order": [
+        {
+          "stage": 1,
+          "content": "Define mesh families, grid functions, weighted discrete norms, sampling/cell-average maps, reconstructions, and boundary closures.",
+          "source_basis": "Oxford 2025 §3; MIT lectures 5–6; Waterloo Chapter 2.",
+          "must_state": ["domain and mesh geometry", "initial and boundary index sets", "discrete norm", "comparison/interpolation map"]
+        },
+        {
+          "stage": 2,
+          "content": "Define local truncation residual and spatial/temporal/boundary consistency order.",
+          "source_basis": "Oxford 2025 §§3–6; MIT lectures 5 and 15.",
+          "must_state": ["regularity required for Taylor expansion", "residual norm", "boundary residual", "dt-to-h regime"]
+        },
+        {
+          "stage": 3,
+          "content": "Define h-uniform finite-time stability for the discrete propagator, including initial, forcing and boundary perturbations.",
+          "source_basis": "Oxford 2025 §3 and scheme sections; Waterloo Chapter 2.",
+          "must_state": ["one fixed norm used for consistency and stability", "uniformity in mesh refinement", "time horizon", "boundary/source maps"]
+        },
+        {
+          "stage": 4,
+          "content": "Prove the linear error recursion theorem: stability plus consistency gives a mesh-uniform convergence/error estimate.",
+          "source_basis": "Oxford 2025 §3 abstract theorem and model proofs.",
+          "must_state": ["well-posed linear continuum problem", "compatible initial projection", "boundary consistency", "time accumulation of local residuals"]
+        },
+        {
+          "stage": 5,
+          "content": "State and prove Lax–Richtmyer equivalence for linear finite-difference approximations of a well-posed linear IVP.",
+          "source_basis": "Trefethen, full Chapter 4 §4.2/Theorem 4.1, gives the exact abstract Banach-space contract but explicitly marks its proof unwritten; MIT lecture 14 and Waterloo AM452 state summaries without proving both directions. The local published uniform boundedness principle supplies the converse step in the common-Banach setting.",
+          "must_state": ["B is a Banach space and u_t=Au is a well-posed linear IVP for every u0 in B", "each mesh/time parameter k fixes h=h(k) and a bounded linear one-step operator S_k:B->B", "consistency ||u(t+k)-S_k u(t)||=O(k^(p+1)) for sufficiently smooth exact solutions, p>0", "convergence for every initial datum at fixed finite times as k->0 and nk->t", "stability ||S_k^n||<=C_T uniformly over 0<=nk<=T", "the same norm for consistency, convergence and stability", "convergence iff stability for a consistent approximation", "multistep/vector augmentation where used", "common-grid embedding or norm equivalence if discrete states live in varying X_h"],
+          "proof_route": ["stability=>convergence by the error recursion/Duhamel sum, then density and continuum continuous dependence", "convergence=>stability by pointwise boundedness of {S_k^n} over a fixed time interval and the published Banach-space uniform boundedness principle"]
+        }
+      ],
+      "existing_supplier_boundary": "No checked local numerical item supplies the grid/numerical definitions or Lax theorem. `items/thm-uniform-boundedness-principle.md` is a real published functional-analysis supplier for the converse, but not for the common-space grid interface. Continuum Lax–Milgram and energy estimates are contextual suppliers only.",
+      "must_not_collapse": ["Lax–Richtmyer IVP equivalence", "stationary elliptic residual estimate", "nonlinear FV entropy convergence"]
+    },
+    {
+      "id": "elliptic-discrete-energy-and-boundary",
+      "needed_for": ["elliptic finite-difference consistency and convergence"],
+      "new_local_suppliers_required": [
+        "Discrete gradient/divergence and summation-by-parts identity with boundary terms.",
+        "Discrete Poincare inequality for the chosen grid and homogeneous boundary closure.",
+        "Discrete elliptic coercivity/inverse bound or discrete maximum principle under explicit stencil-sign hypotheses.",
+        "A model error theorem: interior plus boundary residuals and a discrete stability estimate imply the stated global error rate."
+      ],
+      "source_basis": ["Oxford 2025 §§2–3, PDF pp. 7–53", "MIT OCW lectures 5–6"],
+      "existing_suppliers": [
+        {"item": "thm-lax-milgram-solvability-for-coercive-divergence-form-equations", "role": "Continuum coercive variational problem only."},
+        {"item": "thm-poincare-inequality-for-w-one-p-zero", "role": "Continuum Poincare inequality only."},
+        {"item": "thm-sobolev-gauss-green-formula-on-c-one-domains", "role": "Continuum weak integration by parts only."}
+      ],
+      "authoring_caution": "Do not claim discrete coercivity from continuum Lax–Milgram; calculate the actual mesh form and boundary terms. Do not claim a global order from the interior stencil if boundary closure or solution regularity is weaker."
+    },
+    {
+      "id": "parabolic-hyperbolic-scheme-stability",
+      "needed_for": ["heat/wave/advection finite-difference schemes"],
+      "new_local_suppliers_required": [
+        "Fourier symbol and von Neumann stability theorem with periodic/infinite uniform-grid assumptions.",
+        "Scheme-specific heat theta-method consistency and L2 stability result, separate from a discrete maximum-principle result.",
+        "Wave/advection discrete energy identity with boundary fluxes and the exact mesh-dependent CFL condition.",
+        "Inflow/outflow boundary treatment for the chosen hyperbolic scheme."
+      ],
+      "source_basis": ["Oxford 2025 §§4–6", "MIT OCW lectures 14–18 and 21"],
+      "existing_suppliers": [
+        {"item": "thm-energy-uniqueness-for-the-homogeneous-heat-equation", "role": "Continuous heat energy uniqueness; no discrete stability."},
+        {"item": "thm-conservation-of-total-wave-energy", "role": "Continuous wave energy; no discrete summation by parts."},
+        {"item": "thm-energy-continuous-dependence-for-the-forced-wave-equation", "role": "Continuous wave stability; no numerical scheme bound."},
+        {"item": "thm-linfinity-stability-for-the-inhomogeneous-heat-equation", "role": "Continuous heat maximum-norm estimate; not a discrete maximum principle."}
+      ],
+      "authoring_caution": "CFL alone is neither a scheme-independent sufficiency theorem nor nonlinear entropy convergence. Fourier analysis does not automatically include finite boundaries, variable coefficients or non-normal amplification matrices."
+    },
+    {
+      "id": "scalar-finite-volume-definition-and-monotone-estimates",
+      "needed_for": ["monotone scalar FV convergence"],
+      "existing_continuum_suppliers": [
+        {
+          "page": "library/pde/scalar-conservation-laws-and-entropy-solutions.md",
+          "items": ["def-scalar-conservation-law-and-flux", "def-distributional-weak-solution-of-a-scalar-conservation-law", "thm-rankine-hugoniot-jump-condition", "def-kruzhkov-entropy-solution"],
+          "role": "Continuum scalar PDE, weak formulation, shock balance and entropy-solution definition."
+        },
+        {
+          "page": "library/pde/scalar-conservation-laws-and-entropy-solutions.md",
+          "items": ["thm-kruzhkov-local-l1-contraction", "cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions", "thm-existence-of-bounded-kruzhkov-entropy-solutions"],
+          "role": "Continuum uniqueness/existence and limit identification; these do not prove a discrete approximation converges."
+        }
+      ],
+      "new_local_suppliers_required_in_order": [
+        "Define a mesh/cell partition, cell averages, time levels and piecewise-constant/linear reconstruction.",
+        "Define a consistent numerical flux F(a,a)=f(a) and conservative FV update; prove internal flux cancellation.",
+        "Define monotone flux signs and prove the stated CFL makes the update map monotone.",
+        "Derive the invariant interval/L-infinity estimate and, for BV data, TVD plus temporal translation control.",
+        "Define the numerical entropy flux Q_k and prove the discrete Kruzhkov inequality.",
+        "Prove compactness (Helly/BV selection or a complete translation-compactness substitute with tails).",
+        "Pass the conservative weak equation and discrete entropy inequality to the limit.",
+        "Invoke the existing local Kruzhkov uniqueness supplier to upgrade subsequential convergence to full-family convergence."
+      ],
+      "source_basis": ["Droniou, full note pp. 1–39", "ETH Chapters 1–4, PDF pp. 7–58, especially Theorem 4.19", "MIT OCW lectures 17 and 19 for introductory context"],
+      "exact_monotone_theorem_assumptions_from_eth": ["f in C1", "u0 in BV(R)", "consistent conservative monotone two-point flux", "locally Lipschitz numerical flux", "source CFL condition", "dt/dx >= c > 0 along family", "piecewise-linear time interpolant"],
+      "external_or_missing_prerequisites": [
+        "Helly selection compactness for one-dimensional uniformly bounded-variation families is cited by ETH/Droniou and was not found as a local published theorem.",
+        "If replacing Helly by Frechet–Kolmogorov, prove uniform translations for the discrete space-time interpolants and either uniform tails or restrict to compact cylinders with a diagonal extraction.",
+        "A non-BV-data theorem needs the entropy-process/Young-measure or another compactness theory; Droniou's no-BV discussion is only a sketch."
+      ],
+      "existing_compactness_supplier": {
+        "item": "thm-frechet-kolmogorov-compactness-criterion-in-lp",
+        "role": "A general Lp compactness criterion once boundedness, uniform translations and tails are established; those scheme-specific estimates remain new."
+      },
+      "authoring_caution": "The local vanishing-viscosity compactness lemma is not a discrete FV compactness theorem. Do not transfer scalar monotonicity to systems."
+    },
+    {
+      "id": "lax-wendroff-weak-limit",
+      "needed_for": ["a general conservative finite-volume weak-limit theorem, if included"],
+      "new_local_suppliers_required": ["Either select a complete authoritative source and state its exact boundedness/compactness/strong-convergence hypotheses, then prove the weak limit via cell summation and flux consistency; or prove only the specific monotone scalar special case needed."],
+      "source_basis": ["Waterloo Chapter 3 states a version without hypotheses/proof and is not a supplier", "ETH/Droniou give a more specialized entropy convergence route"],
+      "existing_continuum_supplier": "def-distributional-weak-solution-of-a-scalar-conservation-law",
+      "authoring_caution": "Lax–Wendroff yields a weak solution under its hypotheses, not an entropy solution. A discrete entropy inequality and uniqueness are separate."
+    },
+    {
+      "id": "systems-and-high-resolution-methods",
+      "needed_for": ["any extension from scalar monotone FV methods to systems or high order"],
+      "source_basis": ["ETH Chapters 5–9, PDF pp. 59–121", "MIT OCW lectures 16, 19 and 21"],
+      "available_scope": ["TVD/SSP and ENO/WENO construction overview", "system entropy pairs and local small-data Riemann solvers under strict hyperbolicity with genuinely nonlinear or linearly degenerate fields"],
+      "missing_prerequisites": ["system-specific entropy stability and compactness/convergence theorem", "small-data/front-tracking or other global control if a global system result is desired", "method-specific high-order stability and entropy proof"],
+      "authoring_caution": "No generic global nonlinear system convergence claim is licensed by scalar monotone convergence or a local Riemann solver."
+    },
+    {
+      "id": "operator-splitting",
+      "needed_for": ["Lie/Strang splitting order statements for evolution equations"],
+      "existing_published_suppliers": [
+        "library/pde/analytic-semigroups-and-linear-evolution-equations.md",
+        "library/pde/strongly-continuous-semigroups-and-hille-yosida.md"
+      ],
+      "new_local_suppliers_required": ["Commutator expansion for Lie splitting", "nested-commutator expansion for Strang splitting", "stability/global accumulation argument", "invariance of operator domains and regularity hypotheses for unbounded PDE operators"],
+      "source_basis": "MIT OCW lecture 20, complete 3-page note.",
+      "authoring_caution": "The finite-dimensional formal BCH order is not a theorem for arbitrary unbounded PDE generators."
+    },
+    {
+      "id": "navier-stokes-formulation-and-open-scope",
+      "needed_for": ["only if the numerical lane includes Navier–Stokes as an example or an explicitly labeled open problem"],
+      "established_material": "Standard incompressible Navier–Stokes model equations and projection-method discretization examples are established formulations (MIT OCW lecture 23).",
+      "separate_open_claim": "Global smoothness and uniqueness for 3D classical solutions from smooth data, in the exact standard setting, is the unresolved problem. It is not the formulation of the PDE and cannot serve as a logical supplier.",
+      "authoring_caution": "Do not conflate established local-in-time or 2D results, weak solution existence, numerical convergence, and the distinct 3D global regularity question."
+    }
+  ],
+  "checked_existing_library_and_plan_files": [
+    "library/pde/scalar-conservation-laws-and-entropy-solutions.md",
+    "library/pde/lax-milgram-and-weak-elliptic-solutions.md",
+    "library/pde/heat-equation-maximum-principles-duhamel-and-smoothing.md",
+    "library/pde/wave-energy-finite-propagation-and-huygens.md",
+    "library/pde/weak-derivatives-and-sobolev-spaces.md",
+    "library/pde/sobolev-traces-and-zero-boundary-values.md",
+    "library/pde/sobolev-poincare-and-morrey-inequalities.md",
+    "library/pde/rellich-kondrachov-and-sobolev-compactness.md",
+    "library/real-analysis/bounded-variation-and-riemann-stieltjes.md",
+    "research/plan-pde-track.md"
+  ],
+  "plan_reuse": {
+    "file": "research/plan-pde-track.md",
+    "scope_decisions": ["§3 explicitly excludes numerical PDE and reserves it for a dedicated track.", "PDE-26 is scalar conservation law/entropy theory; its prose marks nonlinear systems and BV wave-interaction theory for later hyperbolic-systems work."],
+    "reusable_content": ["continuum scalar weak and entropy definitions", "continuum Kruzhkov uniqueness/existence and local contraction", "continuum heat/wave/elliptic energy and boundary prerequisites"],
+    "not_reusable_as_proved_facts": ["numerical CFL or stability", "discrete entropy inequality", "finite-volume compactness/convergence", "Lax–Wendroff theorem", "global nonlinear system convergence"]
+  },
+  "open_problem_policy": "An unresolved problem statement is not a proof supplier. The Navier–Stokes model is established; only the exact 3D global smoothness/uniqueness claim is open and must be separated from model formulation and numerical analysis."
+}

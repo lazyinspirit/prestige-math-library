@@ -1,0 +1,296 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-10-12",
+  "scope": "Prerequisite routes and missing local suppliers for the numerical-statistics research dossier.",
+  "page_prerequisite_route": [
+    {
+      "page_id": "interpolation-and-approximation",
+      "proposed_status": "new numerical-analysis provider",
+      "requires": [
+        "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+        "thm-rolle",
+        "cor-mean-value-theorem",
+        "thm-bernstein-polynomials-converge-uniformly",
+        "cor-weierstrass-approximation-on-a-closed-interval"
+      ],
+      "provides": [
+        "Lagrange interpolation existence/uniqueness and remainder.",
+        "Chebyshev interpolation stability/error relation if its Lebesgue-constant proof is locally supplied.",
+        "A clean upstream input for MSF-26 spline interpolation and numerical quadrature."
+      ],
+      "fences": [
+        "Do not turn polynomial density into a claim that arbitrary interpolation nodes converge.",
+        "MSF-26 retains the separate natural-cubic and Sobolev spline-rate proofs."
+      ]
+    },
+    {
+      "page_id": "deterministic-quadrature",
+      "proposed_status": "new numerical-analysis provider",
+      "requires": [
+        "interpolation-and-approximation",
+        "thm-first-fundamental-theorem-of-calculus-for-l-one",
+        "thm-continuous-on-a-rectangle-is-riemann-integrable",
+        "thm-rolle"
+      ],
+      "provides": [
+        "Composite midpoint/trapezoid/Simpson bounds.",
+        "Positive-weight Gaussian quadrature exactness and remainder."
+      ],
+      "fences": [
+        "BCS-23 consumes quadrature error but owns Laplace approximation error.",
+        "Adaptive error estimators do not supply certified error bounds without an additional remainder/stability theorem."
+      ]
+    },
+    {
+      "page_id": "iid-mc-qmc-rqmc",
+      "proposed_status": "generic numerical integration provider; BCS statistical consumers",
+      "requires": [
+        "probability expectation and variance definitions",
+        "independence/covariance identities",
+        "product-space integration and Fubini/Tonelli where used",
+        "a definition of star discrepancy and anchored Hardy-Krause variation"
+      ],
+      "provides": [
+        "IID MC unbiasedness, variance and RMSE.",
+        "Deterministic Koksma-Hlawka and RQMC marginal-unbiasedness contracts.",
+        "Nested-scramble variance contract only after a local proof is supplied."
+      ],
+      "fences": [
+        "BCS-25 owns CLT interval calibration.",
+        "BCS-56/57 own plan organization and statistical interpretation of randomized replicates.",
+        "Replicate variance estimates do not become data-sampling or model-bias estimates."
+      ]
+    },
+    {
+      "page_id": "multilevel-mc",
+      "proposed_status": "generic numerical/statistical computation provider",
+      "requires": [
+        "iid-mc-qmc-rqmc",
+        "level coupling and telescoping identity",
+        "P-NUM-SDE-01/02 only for conditional Euler examples"
+      ],
+      "provides": [
+        "Giles abstract MLMC cost theorem under explicit alpha/beta/work assumptions."
+      ],
+      "fences": [
+        "Do not infer SDE convergence from the abstract theorem.",
+        "BCS-55 owns its statistical error-budget interpretation.",
+        "Adaptive level and bias stopping remain heuristic without a separate guarantee."
+      ]
+    },
+    {
+      "page_id": "euler-maruyama-convergence",
+      "proposed_status": "independent numerical-SDE provider",
+      "requires": [
+        "def-brownian-motion",
+        "def-ito-integral-for-square-integrable-predictable-processes",
+        "thm-ito-isometry-and-linearity-in-predictable-l2",
+        "thm-multidimensional-ito-formula-for-brownian-driven-processes",
+        "P-SDE-01 strong-solution/moment interface",
+        "def-axiom-of-choice",
+        "def-elementary-predictable-brownian-integrand"
+      ],
+      "provides": [
+        "P-NUM-SDE-01 local finite-L2 route: adapted L2 initial state independent of future Brownian increments; Borel-time, globally Lipschitz/linear-growth state coefficients with the stated 1/2-Hölder time modulus; derive moment bounds and strong error locally.",
+        "P-NUM-SDE-02 exact Higham-Mao-Stuart strong theorem and the separately stated weak-order local proof design."
+      ],
+      "fences": [
+        "The H-M-S all-moment autonomous theorem and finite-L2 time-dependent local route are distinct contracts.",
+        "Weak regularity of the backward Kolmogorov solution must be separately proved.",
+        "No learned-score/model error is covered by a numerical SDE convergence theorem.",
+        "The plan states the P-NUM-SDE-01 time modulus qualitatively; its norm and constants must be made explicit before authoring a theorem.",
+        "Published Itô-integral and multidimensional Itô suppliers explicitly carry AC and standing hypothesis (H) from def-elementary-predictable-brownian-integrand; preserve these inherited premises or prove an alternate interface."
+      ]
+    },
+    {
+      "page_id": "optimization-inverse-problem-consumers",
+      "proposed_status": "reuse direct/iterative numerical-linear-algebra suppliers",
+      "requires": [
+        "thm-gradient-and-hessian-of-the-frobenius-least-squares-functional",
+        "thm-hessian-characterises-convexity",
+        "thm-multivariable-taylor-formula-with-lagrange-remainder",
+        "thm-cholesky-factorisation-exists-iff-hermitian-positive-definite-and-is-unique",
+        "thm-least-squares-solutions-and-normal-equation",
+        "def-condition-number-of-a-nonsingular-linear-system",
+        "def-standard-relative-floating-point-model-and-unit-roundoff",
+        "def-tikhonov-regularised-least-squares",
+        "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser"
+      ],
+      "provides": [
+        "BCS-20 convex optimization input.",
+        "SME-02/04 least-squares and Fisher-scoring numerical input.",
+        "An exact regularization-bias/data-perturbation identity."
+      ],
+      "fences": [
+        "Reuse published algebraic least-squares, QR, condition and regularization items; no parallel statistical inverse theory.",
+        "No global optimizer result for nonconvex likelihoods."
+      ]
+    }
+  ],
+  "supplier_layers": [
+    {
+      "layer": "real-analysis-and-polynomial-foundation",
+      "status": "published",
+      "items": [
+        "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+        "thm-rolle",
+        "lem-higher-order-rolle",
+        "cor-mean-value-theorem",
+        "thm-bernstein-polynomials-converge-uniformly",
+        "cor-weierstrass-approximation-on-the-unit-interval",
+        "cor-weierstrass-approximation-on-a-closed-interval"
+      ],
+      "role": "Polynomial uniqueness/remainder prerequisites and uniform polynomial approximation."
+    },
+    {
+      "layer": "quadrature-and-random-integration",
+      "status": "local supplier missing",
+      "items": [
+        "thm-lagrange-interpolation-remainder",
+        "thm-composite-midpoint-trapezoid-error-bounds",
+        "thm-composite-simpson-fourth-order-error-bound",
+        "thm-gaussian-quadrature-exactness-positive-weights-and-error",
+        "def-star-discrepancy",
+        "def-anchored-hardy-krause-variation",
+        "thm-koksma-hlawka-inequality",
+        "thm-nested-uniform-scramble-net-variance-bound"
+      ],
+      "role": "Candidate stable research slugs; all listed theorem results are established mathematics with local proof obligations, not open problems."
+    },
+    {
+      "layer": "stochastic-solver-and-mlmc",
+      "status": "source proof plus local proof designs",
+      "items": [
+        "thm-multilevel-monte-carlo-complexity-under-bias-variance-and-work-rates",
+        "thm-euler-maruyama-strong-order-half",
+        "thm-euler-maruyama-weak-order-one-under-backward-solution-regularity"
+      ],
+      "role": "MLMC abstract result is fully proved in Giles. Strong EM has two noninterchangeable proof routes. Weak EM is a local design whose regularity and remainder obligations are explicit."
+    },
+    {
+      "layer": "published-linear-algebra-and-conditioning",
+      "status": "published; reuse",
+      "items": [
+        "def-absolute-and-relative-local-condition-numbers-of-a-problem-map",
+        "def-condition-number-of-a-nonsingular-linear-system",
+        "def-standard-relative-floating-point-model-and-unit-roundoff",
+        "lem-product-of-one-plus-deltas-gives-theta-n",
+        "thm-floating-point-dot-product-componentwise-and-normwise-error-bounds",
+        "thm-least-squares-solutions-and-normal-equation",
+        "thm-normal-equations-square-the-spectral-condition-number",
+        "thm-reduced-qr-solves-full-column-rank-least-squares-without-squaring-the-condition-number",
+        "def-tikhonov-regularised-least-squares",
+        "thm-tikhonov-regularised-least-squares-has-a-unique-minimiser",
+        "prop-tikhonov-regularisation-has-singular-filter-factors"
+      ],
+      "role": "Conditioning, exact least squares, QR, floating-point and regularization contracts; no duplicate numerical inverse chapter."
+    }
+  ],
+  "missing_supplier_designs": [
+    {
+      "id": "thm-lagrange-interpolation-remainder",
+      "kind": "theorem",
+      "status": "established-result-local-proof-supplier-missing",
+      "open_problem": false,
+      "hypotheses": "Distinct real nodes x_0,...,x_n; f in C^(n+1)[a,b].",
+      "proof_route": [
+        "Use the interpolating polynomial and an auxiliary multiple of the node product.",
+        "Apply repeated Rolle to obtain the pointwise derivative remainder."
+      ],
+      "prerequisites": [
+        "thm-nonzero-real-polynomial-has-at-most-degree-many-distinct-roots",
+        "thm-rolle",
+        "lem-higher-order-rolle"
+      ]
+    },
+    {
+      "id": "thm-gaussian-quadrature-exactness-positive-weights-and-error",
+      "kind": "theorem",
+      "status": "established-result-local-proof-supplier-missing",
+      "open_problem": false,
+      "hypotheses": "Positive measure on [a,b], moments through degree 2m-1, positive-definite polynomial inner product through degree m; f in C^(2m) for the remainder.",
+      "proof_route": [
+        "Construct monic orthogonal p_m by Gram-Schmidt.",
+        "Prove m simple interior roots by a sign-change argument.",
+        "Use q=p_m r+s division for exactness and ell_i^2 for weight positivity.",
+        "Use Hermite double-node interpolation and Rolle for the error."
+      ],
+      "intermediates": [
+        "Existence/uniqueness of the orthogonal polynomial.",
+        "Root count and simplicity.",
+        "Lagrange weights and the Gaussian remainder identity."
+      ]
+    },
+    {
+      "id": "thm-koksma-hlawka-inequality",
+      "kind": "theorem",
+      "status": "established-result-local-proof-supplier-missing",
+      "open_problem": false,
+      "hypotheses": "Points in [0,1]^d and finite anchored Hardy-Krause variation in the source's convention.",
+      "proof_route": [
+        "Prove the one-dimensional Stieltjes/summation-by-parts discrepancy bound.",
+        "Use anchored mixed-variation decomposition to reduce to box indicators.",
+        "Bound each box discrepancy by star discrepancy."
+      ],
+      "guardrails": [
+        "Do not call the product a computable empirical error bar when discrepancy or variation is unavailable."
+      ]
+    },
+    {
+      "id": "thm-nested-uniform-scramble-net-variance-bound",
+      "kind": "theorem",
+      "status": "established-result-external-proof-cited-local-proof-required",
+      "open_problem": false,
+      "hypotheses": "Nested uniform scramble of a (0,m,d)-net, b>=max(d,2), n=b^m, f in L^2.",
+      "proof_route": [
+        "Prove the scramble ANOVA variance decomposition.",
+        "Bound component covariance via elementary interval occupancy.",
+        "Sum the component bounds to obtain factor (b/(b-1))^min(m,d-1)."
+      ],
+      "source_limit": "Owen Ch. 17 Theorem 17.3 cites Owen (1997a) instead of proving it; do not broaden to arbitrary randomizations."
+    },
+    {
+      "id": "thm-euler-maruyama-weak-order-one-under-backward-solution-regularity",
+      "kind": "theorem",
+      "status": "established-result-local-proof-design",
+      "open_problem": false,
+      "hypotheses": "Bounded payoff; backward u in C^2 time/C^4 space with derivatives bounded by C(1+|x|^q); uniform exact/Euler moments p>=2q+8.",
+      "proof_route": [
+        "Conditional one-step Gaussian Taylor expansion and cubic odd-moment cancellation.",
+        "Use backward Kolmogorov cancellation.",
+        "Bound remainder O(h^2)(1+|x|^(q+4)) and telescope."
+      ],
+      "missing_intermediate": "A theorem deriving the stated backward-solution regularity from coefficient/payoff smoothness, if such a route is claimed.",
+      "source_limit": "Särkkä-Solin and Higham expositions do not prove weak order one under a matching explicit contract."
+    },
+    {
+      "id": "adaptive-quadrature-error-certificate",
+      "kind": "optional-theorem",
+      "status": "not-covered-without-stronger-premises",
+      "open_problem": false,
+      "hypotheses": "A posteriori remainder/defect bound, stability propagation, integrand/method regularity, and controlled arithmetic.",
+      "proof_route": [
+        "Bound each accepted panel's true defect.",
+        "Propagate panel defects through the integral or ODE stability operator.",
+        "Include floating-point error."
+      ],
+      "source_limit": "Adaptive estimators as presented in FNC are heuristic. This is not a mathematical open problem; omit a certificate theorem unless these premises are supplied."
+    }
+  ],
+  "dependency_fences": [
+    "BCS-54 remains the statistical/inferential error ledger owner; this dossier supplies only component definitions and pathwise composition.",
+    "BCS-23 consumes deterministic quadrature bounds but owns Laplace approximation error.",
+    "BCS-25/56/57 consume generic numerical contracts and retain inferential calibration.",
+    "BCS-55 consumes MLMC cost plus separately qualified SDE rates; no inference claim belongs in the abstract theorem.",
+    "P-NUM-SDE-01 finite-L2 and H-M-S all-moment strong contracts are separate; weak order is another separate proof.",
+    "Learned-score/model bias does not disappear under numerical refinement and is not covered by solver convergence.",
+    "All missing theorem suppliers above concern established mathematics. Only the optional star-discrepancy order question is genuinely open."
+  ],
+  "open_problem_candidate": {
+    "id": "op-optimal-star-discrepancy-order-dimension-at-least-three",
+    "status": "unresolved",
+    "claim": "For fixed d>=3, determine the exact asymptotic order of the minimum star discrepancy over n-point subsets of [0,1]^d.",
+    "boundary": "Lower and upper bounds do not match; supply no proof and use the new op- kind only if an open-problem item is deliberately included.",
+    "source": "Owen, Practical QMC, Ch. 15 discrepancy discussion and cited Roth lower bound."
+  }
+}

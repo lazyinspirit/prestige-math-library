@@ -151,6 +151,15 @@ export function proofLayoutInputs(run, root = REPO) {
   return { scope, inputs, dependencies, fingerprint: sha256(JSON.stringify({ scope, inputs, dependencies })) };
 }
 
+export function noProofRequired(scope, root = REPO) {
+  return scope.files.length > 0 && scope.files.every(file => {
+    const raw = readFileSync(join(root, file), 'utf8');
+    const { frontmatter, body } = splitFrontmatter(raw);
+    return /^kind:\s*['"]?open-problem['"]?\s*$/m.test(frontmatter)
+      && !/^## (Proof|Refutation|Verification|Counterexample)\s*$/m.test(body);
+  });
+}
+
 export function verifyProofLayout(run, root = REPO, gate = null) {
   const receipt = JSON.parse(readFileSync(proofLayoutPath(run, root), 'utf8'));
   const current = proofLayoutInputs(run, root);
@@ -161,7 +170,7 @@ export function verifyProofLayout(run, root = REPO, gate = null) {
   if (!Array.isArray(receipt.items) || receipt.items.length !== current.scope.files.length
     || receipt.items.some((item, i) => item.file !== current.scope.files[i] || !Array.isArray(item.rows) || !Array.isArray(item.errors))) throw Error('proof-layout: incomplete item coverage');
   const count = receipt.items.reduce((n, item) => n + item.rows.reduce((m, row) => m + row.sourceSteps, 0), 0);
-  if (!Number.isInteger(count) || count < 1 || count !== receipt.steps) throw Error('proof-layout: invalid or empty step coverage');
+  if (!Number.isInteger(count) || (count < 1 && !noProofRequired(current.scope, root)) || count !== receipt.steps) throw Error('proof-layout: invalid or empty step coverage');
   for (const id of gate ? [gate] : LAYOUT_GATES) {
     if (!LAYOUT_GATES.includes(id) || receipt.gates?.[id] !== 'pass'
       || receipt.items.some(item => item.errors.some(error => error.gate === id))) throw Error(`proof-layout: ${id} has not passed`);

@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "date": "2026-10-12",
+  "topic": "Numerical ODE methods, nonlinear solvers, BVPs, and geometric integration",
+  "scope": ["One-step IVP error", "Linear multistep methods", "Stiff/A/L-stability", "Adaptive error estimation", "Newton solves", "BVP/shooting/collocation", "Geometric integration"],
+  "status_summary": {
+    "existing_published_theory": "Continuous ODE existence, uniqueness, stability, and dependence; Hamiltonian-flow properties; Banach fixed point; and a frozen-Jacobian Newton contraction are published.",
+    "reusable_plan_contracts": "P-NUM-ODE-01/02 already correctly state one-step uniform defect/stability and discrete-Grönwall contracts in research/plan-machine-learning-track.md lines 513–519.",
+    "missing_local_theory": ["No published numerical ODE method or multistep convergence items.", "No stability-region/A/L-stability theorem.", "No adaptive global-error guarantee.", "No BVP discrete-stability/convergence item.", "No usual variable-Jacobian Newton theorem.", "No numerical symplectic/backward-error result."],
+    "open_problem_candidates": [],
+    "classification": "These are established results awaiting local authoring, not open problems."
+  },
+  "coverage": [
+    {
+      "area": "One-step IVP accuracy",
+      "claim_contract": "On a fixed interval and compact tube, a uniform exact-solution defect C h^(p+1) and one-step Lipschitz bound 1+Lh imply global O(h^p) error for O(h^(-1)) steps.",
+      "source_evidence": ["Hairer–Wanner Ch. III §§III.2–III.3, printed pp. 60–65, proof of one-step error propagation.", "FNC Ch. 6 euler.md, Local truncation error and Convergence, complete scalar recurrence proof."],
+      "hypotheses": ["Same norm for local defect and stability.", "Uniform constants on a fixed finite time interval and compact tube.", "Initial data error stated explicitly.", "For Euler, bounded first derivatives; for RK, method-specific order conditions and sufficient derivatives."],
+      "proof_route": ["Derive method-specific local defect by Taylor expansion.", "Prove the step-map Lipschitz estimate.", "Iterate e_(n+1) <= (1+Lh)e_n+C h^(p+1); prove discrete Grönwall locally if no exact supplier exists.", "Bound log-density or augmented components separately."],
+      "existing_published_supplier_ids": ["def-first-order-ode-initial-value-problem-and-solution", "thm-picard-lindelof-local-existence-and-uniqueness", "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation", "cor-lipschitz-ode-uniqueness-and-stability-estimate", "thm-gronwall-integral-inequality", "thm-multivariable-taylor-formula-with-lagrange-remainder"],
+      "missing_design": ["Reuse P-NUM-ODE-01/02; do not duplicate or weaken them.", "Supply the discrete Grönwall proof and each method-specific defect/stability argument."]
+    },
+    {
+      "area": "Multistep consistency, root condition, zero-stability, and equivalence",
+      "claim_contract": "For an equal-step k-step formula, order p is exact-solution recurrence residual O(h^(p+1)); the root condition is all roots of rho in |zeta|<=1 with unit-circle roots simple. With Lipschitz field, O(h^p) starter error, and uniform O(h^(p+1)) recurrence defect, the method has fixed-interval global O(h^p) error. Dahlquist equivalence also requires the converse for a precisely declared convergence class.",
+      "source_evidence": ["Hairer–Wanner Ch. III §§III.5–III.8, printed pp. 67–74; theorem/proof for equally spaced methods.", "FNC Ch. 6 multistep.md and zerostability.md state the root criterion/equivalence; its root proof explicitly omits repeated roots and its equivalence theorem is unproved."],
+      "hypotheses": ["One coefficient convention for rho and sigma; order conditions derived from exact recurrence.", "Equal steps for the cited convergence proof.", "Starting values O(h^p), local defect O(h^(p+1)), selected implicit branch exists.", "All unit roots simple; repeated roots strictly inside the disk remain allowed."],
+      "proof_route": ["Define method, local truncation error, order, consistency, and zero-stability separately.", "Use the companion recurrence/Jordan form to prove bounded zero-dynamics powers exactly under the root condition.", "Use variation of constants to sum residuals and obtain O(h^p) global error.", "Prove necessity of consistency/root condition separately for the stated equivalence theorem; do not cite the theorem statement as proof."],
+      "existing_published_supplier_ids": ["def-first-order-ode-initial-value-problem-and-solution", "thm-picard-lindelof-local-existence-and-uniqueness", "thm-gronwall-integral-inequality"],
+      "missing_design": ["Author multistep definitions and consistency order conditions.", "Complete repeated-root proof and Dahlquist equivalence proof.", "Keep multistep root conditions outside the generic one-step P-NUM-ODE contracts."]
+    },
+    {
+      "area": "Stiffness, A-stability, and L-stability",
+      "claim_contract": "On y'=lambda y, Re(lambda)<=0, define the stability region by bounded iterates. A-stability includes the closed left half-plane. For a rational one-step R(z), L-stability adds R(z)->0 in the stiff limit at infinity in the left half-plane. These test-equation properties do not certify accuracy for general systems.",
+      "source_evidence": ["Hairer–Wanner Ch. III §III.9, printed pp. 75–79, A-stability and RK/multistep stability regions.", "FNC Ch. 6 implicit.md, Implicit methods/Stiff problems, operational example only."],
+      "hypotheses": ["Separate one-step R(z) from multistep root polynomial rho(zeta)-z sigma(zeta).", "Stiffness is a model-dependent efficiency notion; do not make disparate time scales a necessary-and-sufficient criterion."],
+      "proof_route": ["Derive explicit Euler and backward Euler stability regions from the test equation.", "Prove backward Euler A- and L-stability from R(z)=1/(1-z).", "Show trapezoidal rule is A-stable but its stiff-limit value is not zero.", "State multistep root-locus conditions separately."],
+      "existing_published_supplier_ids": ["def-first-order-ode-initial-value-problem-and-solution", "thm-existence-and-uniqueness-of-a-maximal-ode-solution"],
+      "missing_design": ["No local stability function/region item exists.", "L-stability is not named in the read sources and needs an explicit local definition and proof."]
+    },
+    {
+      "area": "Adaptive Runge–Kutta estimates",
+      "claim_contract": "An embedded p/(p+1) pair's output difference estimates the lower-order local defect when its leading error term is present and the asymptotic regime is reached. The step controller is heuristic; it does not certify global error.",
+      "source_evidence": ["Hairer–Wanner Ch. III §III.4, printed pp. 65–67.", "FNC Ch. 6 adaptive-rk.md, Step size prediction and Embedded formulas; it labels the scaling model a guess and notes differing local/global exponents."],
+      "hypotheses": ["Reliable leading defect term, correct norm/scaling, and stated rejection/update rules."],
+      "proof_route": ["Define embedded outputs and exact target local error.", "Derive the estimator asymptotics for the selected pair.", "For any global tolerance theorem, prove estimator reliability plus mesh regularity and global error accumulation."],
+      "existing_published_supplier_ids": ["def-first-order-ode-initial-value-problem-and-solution", "thm-continuous-dependence-of-odes-on-initial-data-and-parameters"],
+      "missing_design": ["Keep the adaptive algorithm definition separate from estimator reliability.", "Do not describe tolerance, accepted steps, or controller output as a global certificate."]
+    },
+    {
+      "area": "Newton and quasi-Newton solves",
+      "claim_contract": "Usual Newton solves DF(x_k)s_k=-F(x_k) and updates x_(k+1)=x_k+s_k. Local quadratic convergence needs a regular root, sufficient smoothness, invertible Jacobian near the root, and an initial iterate in a local basin; no generic global convergence follows.",
+      "source_evidence": ["Hairer–Wanner Ch. VI §VI.3, printed pp. 138–140, Taylor error recurrence and local theorem.", "FNC Ch. 4 newton.md/newtonsys.md, method and convergence qualifications."],
+      "hypotheses": ["Hairer's theorem uses F in C^3, DF invertible in a neighborhood, and a sufficiently close starting iterate."],
+      "proof_route": ["Define residual, variable Jacobian, solve, and update.", "Use Taylor expansion and uniform inverse-Jacobian bounds to prove a local quadratic recurrence and invariant basin.", "Treat line search, frozen/inexact Jacobians, and inner linear solves separately."],
+      "existing_published_supplier_ids": ["thm-banach-fixed-point", "cor-banach-error-estimates", "lem-newton-contraction-near-an-invertible-derivative", "thm-multivariable-taylor-formula-with-lagrange-remainder"],
+      "missing_design": ["The published Newton-contraction lemma freezes Df(a); it is not a theorem for variable-Jacobian Newton.", "No general-start or global-convergence claim is supported."]
+    },
+    {
+      "area": "BVP consistency, stability, shooting, and nonlinear collocation",
+      "claim_contract": "For A_h U_h=b_h, exact-sample residual tau_h and a uniform ||A_h^(-1)|| bound imply error of the same order as the full residual, including boundary rows. Shooting/nonlinear collocation add IVP sensitivity, root conditioning, and nonlinear-solver errors.",
+      "source_evidence": ["FNC Ch. 10 linear.md, Collocation and Accuracy/stability: e=A^(-1)tau; source explicitly omits the stability proof.", "FNC Ch. 10 shooting.md: root residual through the IVP flow and unstable shooting example.", "FNC Ch. 10 nonlinear.md: nonlinear collocation residual and quasi-Newton implementation."],
+      "hypotheses": ["Fix the BVP, mesh family, norm, boundary closure, reconstruction, and solution regularity.", "For nonlinear BVP, require a discrete solution branch and uniform Jacobian/inverse control."],
+      "proof_route": ["Prove interior and boundary consistency.", "Prove a uniform inverse or discrete maximum-principle bound for the selected scheme.", "Apply e=A^(-1)tau.", "Bound nonlinear solve error separately; for shooting, differentiate the residual through the IVP sensitivity map."],
+      "existing_published_supplier_ids": ["thm-picard-lindelof-local-existence-and-uniqueness", "thm-continuous-dependence-of-odes-on-initial-data-and-parameters", "lem-newton-contraction-near-an-invertible-derivative"],
+      "missing_design": ["No numerical BVP error or stability theorem is published.", "Do not use continuous ODE well-posedness as a substitute for discrete BVP stability."]
+    },
+    {
+      "area": "Geometric integration and backward error",
+      "claim_contract": "Symplectic methods preserve the canonical two-form, not generally the original Hamiltonian. Under smooth H, a symplectic method, globally defined modified Hamiltonian, and compact numerical orbit, Hairer lecture 3 proves modified-energy drift O(t h^N) and original-energy error O(h^r) for t=nh<=C h^(−N+r).",
+      "source_evidence": ["Hairer lecture 1 pp. 6–8: variational-equation proof of symplectic Hamiltonian flow.", "Hairer lecture 2 pp. 2, 4–6: symplectic Euler/Verlet and RK coefficient condition.", "Hairer lecture 3 pp. 1–2, 6–7: finite modified equation/Hamiltonian theorem; theorem page visually checked."],
+      "hypotheses": ["The numerical method is symplectic and order r.", "The finite-order modified Hamiltonian is globally defined on U.", "The numerical orbit remains in a compact K subset of U."],
+      "proof_route": ["Reuse published Hamiltonian/symplectic definitions and continuous-flow theorem.", "Prove RK condition and symplectic Euler/Verlet properties locally.", "Construct a finite modified equation; do not claim the infinite series converges.", "Sum the one-step truncation error on K and state the exact time interval."],
+      "existing_published_supplier_ids": ["def-symplectic-form-and-symplectic-manifold", "def-symplectomorphism-local-symplectomorphism-and-symplectic-embedding", "def-hamiltonian-vector-field-and-hamiltonian-function", "prop-a-hamiltonian-is-conserved-along-its-own-flow", "prop-time-dependent-hamiltonian-evolution-is-symplectic", "cor-hamiltonian-flow-has-zero-divergence-with-respect-to-symplectic-volume"],
+      "missing_design": ["No numerical symplectic or modified-energy result is published.", "Do not infer exact energy conservation from symplecticity or volume preservation."]
+    }
+  ],
+  "exact_arithmetic_vs_empirical": {
+    "theorem_claims": "Convergence, root conditions, stability regions, local Newton convergence, and backward-error bounds require the stated assumptions.",
+    "empirical_or_controller_claims": "Observed adaptive steps, practical implicit-method efficiency, Newton iteration counts, and BVP plots are not general proofs.",
+    "floating_point": "The source set establishes no finite-precision ODE solver stability theorem."
+  },
+  "open_problem_candidates": []
+}

@@ -1,14 +1,14 @@
 // Physics-only content policy. Pure functions are shared by planning and gates.
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
-import { parseFrontmatter, referenceUrls } from './content-policy-lib.mjs';
+import { parseFrontmatter, referenceUrls, openProblemErrors } from './content-policy-lib.mjs';
 import { splitFrontmatter, sectionText } from './facts-block.mjs';
 
 export const PHYSICS_PREFIXES = Object.freeze({ postulate: 'post', 'physics-theorem': 'pthm', experiment: 'exp', 'thought-experiment': 'texp' });
 export const PHYSICS_KINDS = new Set(Object.keys(PHYSICS_PREFIXES));
 export const PHYSICAL_PROOF_KINDS = new Set(['physics-theorem', 'thought-experiment']);
 export const NONPROOF_KINDS = new Set(['postulate', 'experiment']);
-export const MATH_PREFIXES = Object.freeze({ definition: 'def', algorithm: 'alg', theorem: 'thm', lemma: 'lem', proposition: 'prop', corollary: 'cor', example: 'ex', counterexample: 'cex', 'false-statement': 'fs', remark: 'rem' });
+export const MATH_PREFIXES = Object.freeze({ definition: 'def', algorithm: 'alg', theorem: 'thm', lemma: 'lem', proposition: 'prop', corollary: 'cor', example: 'ex', counterexample: 'cex', 'false-statement': 'fs', remark: 'rem', 'open-problem': 'op' });
 export const PREFIXES = { ...MATH_PREFIXES, ...PHYSICS_PREFIXES };
 export const DEPENDENCY_ROLES = new Set(['mathematical-premise', 'physical-assumption', 'physical-result', 'empirical-premise', 'operational-prerequisite', 'formulation-prerequisite']);
 export const RELATION_FIELDS = new Set(['supported_by', 'tested_by', 'motivated_by', 'replicates', 'challenges']);
@@ -29,7 +29,7 @@ export function markdownFiles(dir) {
 export function validatePhysicsContent({ items, pages = [], importedIds = new Set(), requireBodies = true, selectedItems = null, selectedPages = null, importedReferenceContext = null }) {
   const errors = [];
   const graphContext = new Set();
-  const structural = new Set(['edge-shape', 'edge-unresolved', 'math-physics-dependency', 'item-cycle', 'item-frontmatter-invalid', 'domain-required', 'physical-kind-domain', 'mathematical-kind-domain', 'role-supplier', 'mathematical-role']);
+  const structural = new Set(['edge-shape', 'edge-unresolved', 'math-physics-dependency', 'item-cycle', 'item-frontmatter-invalid', 'domain-required', 'physical-kind-domain', 'mathematical-kind-domain', 'role-supplier', 'mathematical-role', 'open-problem-dependency']);
   const error = (code, id, message) => {
     const subject = selectedItems === null || selectedItems.has(id) || selectedPages?.has(id);
     if (subject || (structural.has(code) && graphContext.has(id))) errors.push({ code, id, message });
@@ -91,6 +91,7 @@ export function validatePhysicsContent({ items, pages = [], importedIds = new Se
         const supplier = resolve(id) ?? (importedIds.has(item.id) && ['forward_refs', 'external_refs'].includes(field)
           ? importedReferenceContext?.(item.id, id) : null);
         if (!supplier) { error('edge-unresolved', item.id, `${field}: ${id}`); continue; }
+        if (['deps', 'justified_by'].includes(field) && supplier.kind === 'open-problem') error('open-problem-dependency', item.id, `${field} may not use open problem ${id} as a logical supplier`);
         if (d === 'mathematics' && domain(supplier) === 'physics' && ['deps', 'justified_by', 'forward_refs'].includes(field)) error('math-physics-dependency', item.id, `${field} may not use physical supplier ${id}`);
       }
     }
@@ -125,6 +126,7 @@ export function validatePhysicsContent({ items, pages = [], importedIds = new Se
       }
     }
     if (!requireBodies || importedIds.has(item.id) || (selectedItems !== null && !selectedItems.has(item.id))) continue;
+    for (const finding of openProblemErrors(item, item.body)) error(finding.code, item.id, finding.message);
     if (d === 'physics' && !text(item.physical_scope)) error('physical-scope', item.id, 'state physical_scope explicitly');
     if (PHYSICS_KINDS.has(item.kind)) {
       if (!referenceUrls(item).some(url => /^https?:\/\//.test(url))) error('physics-source', item.id, 'physical items require an HTTP(S) source reference');

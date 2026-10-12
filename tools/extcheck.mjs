@@ -19,7 +19,7 @@
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parseFrontmatter } from './content-policy-lib.mjs';
+import { parseFrontmatter, openProblemErrors } from './content-policy-lib.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { includesItem, parseItemScope, unknownItems } from './item-scope.mjs';
 
@@ -89,6 +89,7 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
     precheck: nested(fm, 'verification', 'precheck'),
     hasJudge: /^\s+judge:/m.test(fm),
     hasRefs: /^\s+references:/m.test(fm) && /^\s+-\s+title:/m.test(fm),
+    metadata,
     body,
     // where a citation is load bearing: everything except Remarks
     loadBearing: body.replace(/\n## Remarks[\s\S]*?(?=\n## |$)/g, '\n'),
@@ -96,6 +97,13 @@ for (const f of readdirSync(join(REPO, 'items')).sort()) {
   for (const a of list(fm, 'aliases')) aliasTo.set(a, id);
 }
 const resolve = (x) => (items.has(x) ? x : aliasTo.get(x));
+for (const it of items.values()) if (includesItem(itemScope, it.id)) {
+  for (const finding of openProblemErrors(it.metadata, it.body)) err(finding.code, `${it.file}: ${finding.message}`);
+  const proofSections = [...it.body.matchAll(/^## (?:Proof|Refutation|Verification|Counterexample|Facts & Assumptions)\s*\n([\s\S]*?)(?=^## |(?![\s\S]))/gm)].map(m => m[1]).join('\n');
+  for (const m of proofSections.matchAll(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g))
+    if (items.get(resolve(m[1].trim()))?.kind === 'open-problem' || resolve(m[1].trim())?.startsWith('op-')) err('open-problem-proof-use', `${it.file}: proof/facts may not use open problem ${m[1]} as a premise; put contextual discussion in Remarks`);
+}
+
 for (const id of unknownItems(itemScope, items.keys()))
   err('focus-item-unknown', `--items-file names unknown item "${id}"`);
 
@@ -350,10 +358,11 @@ if (writeLedger) {
 // ---------------------------------------------------------------------- report
 
 const checkedItems = [...items.values()].filter((it) => includesItem(itemScope, it.id)).length;
-const summary = { items: checkedItems, unproved: unproved.length, consequences: consequences.length, errors: errors.length, warnings: warns.length };
+const openProblems = [...items.values()].filter(it => includesItem(itemScope, it.id) && it.kind === 'open-problem').map(it => it.id);
+const summary = { items: checkedItems, unproved: unproved.length, open_problems: openProblems.length, consequences: consequences.length, errors: errors.length, warnings: warns.length };
 
 if (asJson) {
-  console.log(JSON.stringify({ summary, unproved, consequences, errors, warns }, null, 2));
+  console.log(JSON.stringify({ summary, unproved, open_problems: openProblems, consequences, errors, warns }, null, 2));
 } else {
   if (!quiet) {
     console.log(`extcheck: ${checkedItems} items, ${unproved.length} recorded-not-proved, ${consequences.length} resting on them`);

@@ -1,0 +1,210 @@
+{
+  "version": 1,
+  "task": "Variational, finite-element, spectral, adaptive, parabolic and mixed numerical PDE coverage",
+  "date": "2026-10-12",
+  "scope": [
+    "Galerkin and finite element methods for elliptic PDEs",
+    "mesh regularity, interpolation, quadrature and a priori/a posteriori error estimates",
+    "mixed methods and inf-sup stability, including Stokes discretizations",
+    "parabolic variational theory and FEM in space and time",
+    "compact elliptic eigenproblems and spectral/pseudospectral approximation",
+    "adaptive finite element convergence and complexity",
+    "numerical incompressible flow, with the 3D global Navier-Stokes problem kept separate"
+  ],
+  "areas": [
+    {
+      "area": "Conforming elliptic Galerkin finite elements",
+      "external_status": "Established results; proof obligations are standard, not open problems.",
+      "source_coverage": [
+        "Guermond Chapters 24–27, 2019 Chapters 32–33, and the relevant interpolation chapters were read in full. Clason Chapter 9 was read for mixed methods; it is not the source of the conforming elliptic FEM claims listed here.",
+        "The model Poisson problem is posed on a bounded Lipschitz/polyhedral domain with H^1_0 trial/test space. For symmetric coercive a, the conforming Galerkin solution is the energy projection and satisfies Céa/quasi-optimality; for nonsymmetric coercive forms the constant is continuity/coercivity.",
+        "Piecewise polynomial rates require an affine, matching mesh family with uniform shape regularity and a stated local approximation operator. For u in H^{1+r}, degree k, the H^1 error is O(h^r), 0≤r≤k. The L^2 Aubin–Nitsche gain is h^s only when the adjoint solution has H^{1+s} regularity; h^{r+1} requires s=1."
+      ],
+      "proof_route": "Weak formulation and Lax–Milgram → Galerkin orthogonality → best-approximation estimate → Bramble–Hilbert/Deny–Lions plus mesh scaling for interpolation → dual adjoint problem for the L^2 bound.",
+      "important_hypotheses": [
+        "bounded sesquilinear/bilinear form and uniform coercivity on the trial space; for mixed or Petrov settings use a discrete inf-sup condition instead",
+        "conformity V_h⊂V for the plain Céa statement",
+        "shape-regular affine meshes; matching interfaces for the source estimates used here",
+        "Sobolev regularity of u and, for duality, a separately stated adjoint regularity pickup"
+      ],
+      "local_published_suppliers": [
+        "def-sobolev-space-wkp-and-its-norm",
+        "def-wkp-zero-as-a-sobolev-closure",
+        "thm-poincare-inequality-for-w-one-p-zero",
+        "thm-lax-milgram",
+        "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem"
+      ],
+      "local_gap": "No local mesh/reference-element definitions, Bramble–Hilbert estimate, interpolation operator, Céa theorem for a finite-dimensional Galerkin space, Ritz projection, or FEM error-rate theorem was found."
+    },
+    {
+      "area": "Mesh interpolation, inverse estimates, quadrature and variational crimes",
+      "external_status": "Established, conditional estimates.",
+      "source_coverage": [
+        "Guermond Chapter 8 specifies matching affine mesh coverage and mesh geometry; Chapter 11 states a shape-regularity ratio h_K/rho_K≤sigma and proves local interpolation estimates through a reference-cell operator; Chapter 12 gives inverse and discrete trace inequalities.",
+        "Guermond 2019 Chapters 32–33 give H^1-conforming approximation, inhomogeneous boundary lifting, and quadrature perturbation conditions. Exact quadrature or a variational-crime estimate is needed; the quadrature theorem requires polynomial degree, quadrature order, coefficient regularity and a small-mesh/stability condition.",
+        "Pointwise Lagrange interpolation requires enough Sobolev regularity for nodal values. For weaker regularity the source uses averaged quasi-interpolation or an L^2 projection; these are different operators with different assumptions."
+      ],
+      "proof_route": "Reference-cell mapping and finite-dimensional norm equivalence → Deny–Lions/Bramble–Hilbert approximation → scaling by the affine Jacobian → trace/inverse estimates under shape regularity → Strang perturbation estimate for quadrature or nonconformity.",
+      "important_hypotheses": [
+        "uniformly bounded element-map condition numbers / shape regularity",
+        "polynomial reproduction and boundedness of the chosen local interpolation functional",
+        "nodal interpolation only above the relevant Sobolev embedding threshold",
+        "quadrature order and coefficient regularity explicitly matched to the target rate"
+      ],
+      "local_published_suppliers": [
+        "thm-sharp-trace-theorem-for-w-one-p",
+        "thm-poincare-inequality-for-w-one-p-zero"
+      ],
+      "local_gap": "No mesh shape-regularity, local reference-map, Bramble–Hilbert, finite-element inverse/trace, Fortin interpolation, quadrature consistency, or Strang variational-crime supplier was found. The local sharp trace theorem is only for bounded C^1 domains and 1<p<∞; it does not supply polyhedral face inverse estimates."
+    },
+    {
+      "area": "Nonconforming elliptic methods: Crouzeix–Raviart, Nitsche and SIP-DG",
+      "external_status": "Established under explicit consistency, coercivity and regularity hypotheses.",
+      "source_coverage": [
+        "Guermond Chapters 36–38 were read completely. CR uses piecewise affine functions with zero mean jumps on interior faces and zero boundary face means; the broken gradient norm is coercive, with discrete Poincare and jump bounds.",
+        "Nitsche's method requires a penalty gamma(h_F)=gamma_0/h_F above a trace-constant threshold; consistency plus stability yields a quasi-optimal broken energy error.",
+        "SIP-DG requires a matching shape-regular affine mesh, polynomial degree k≥1, jump penalty gamma_0/h_F, and gamma_0 above the inverse-trace threshold. Exact consistency and adjoint consistency support energy and L^2 estimates. The L^2 rate is limited by the elliptic regularity index s; non-symmetric/incomplete variants can lose the adjoint-consistency gain."
+      ],
+      "proof_route": "Define a broken energy norm → prove discrete coercivity via inverse trace inequality and penalty threshold → integrate the exact PDE by parts cellwise for consistency → bound consistency defect in a larger comparison norm → apply the abstract nonconforming Strang lemma → use a dual problem for L^2 error.",
+      "important_hypotheses": [
+        "cellwise polynomial approximation and controlled face jumps",
+        "penalty scaled like h_F^{-1} with a method-specific threshold",
+        "for CR energy analysis, u∈H^{1+r} with r>1/2 so normal-derivative traces are defined",
+        "for L^2 error, adjoint elliptic smoothing H^{1+s}, s>1/2 in the displayed source result"
+      ],
+      "local_published_suppliers": [
+        "thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem",
+        "thm-global-h-two-dirichlet-regularity",
+        "cex-boundary-h-two-regularity-needs-domain-regularity"
+      ],
+      "local_gap": "No local FE definitions or theorem carriers for CR, Nitsche, SIP-DG, broken norms, penalty coercivity, Strang consistency, flux recovery or DG eigenapproximation were found."
+    },
+    {
+      "area": "A posteriori estimation and adaptive FEM",
+      "external_status": "Established reliability, efficiency and convergence results under method-specific assumptions; optimal complexity is conditional and not universal.",
+      "source_coverage": [
+        "Nochetto Lectures 1–4 were read completely. For linear elliptic problems the residual estimator combines element residuals h_K^2||R_K||^2 and face flux jumps h_F||J_F||^2; a local lower bound includes data oscillation.",
+        "Dorfler bulk marking plus mesh refinement that creates interior nodes yields error reduction in the symmetric model. Oscillation must be reduced separately for rough data.",
+        "For nonsymmetric convection forms, quasi-orthogonality is perturbative and the convergence theorem assumes an initial mesh sufficiently fine relative to ||b||; a combined error/oscillation quantity contracts.",
+        "The optimal-complexity result for the simplest case assumes the Laplacian, P1, piecewise constant f and membership in an approximation class. The more general coefficient-dependent optimality theorem is stated with proof referred to an external paper; it must not be advertised as a proved universal result from these four notes."
+      ],
+      "proof_route": "Elementwise integration by parts → residual representation → Clément approximation and trace estimates for reliability → element/face bubble functions for local efficiency up to oscillation → Dörfler marking and refinement reduction → orthogonality/quasi-orthogonality plus oscillation contraction → approximation-class and bisection complexity arguments.",
+      "important_hypotheses": [
+        "ellipticity, coefficient regularity or coefficient oscillation terms, and source data class stated",
+        "shape-regular conforming triangulations and a refinement rule with a uniform reduction factor",
+        "oscillation controlled alongside residual indicators",
+        "for nonsymmetric convection, the stated small-initial-mesh condition",
+        "optimal complexity requires a specified approximation class and mesh-closure/complexity estimates"
+      ],
+      "local_gap": "No residual estimator, reliability/efficiency theorem, Dörfler marking, adaptive convergence, mesh-closure, or approximation-class complexity result is local."
+    },
+    {
+      "area": "Mixed methods and Stokes FEM",
+      "external_status": "Established under the Babuška–Brezzi conditions; stable pairs are mesh- and dimension-sensitive.",
+      "source_coverage": [
+        "Guermond Chapter 49 §49.4 and Chapter 50 provide the abstract kernel-coercivity plus constraint inf-sup conditions, Fortin operator transfer, mixed Céa estimate, Schur complement and solver proofs. Clason Chapter 9 independently gives the Brezzi splitting/Fortin criterion and Raviart–Thomas mixed Poisson construction.",
+        "Guermond Chapters 53–55 derive Stokes weak well-posedness from Korn coercivity and surjectivity of divergence, then show the discrete problem is well-posed iff the discrete divergence inf-sup constant is positive. Error bounds carry beta_h and the Fortin norm; pressure robustness is tied to ker(B_h)⊂ker(B).",
+        "Reviewed stable examples include mini (P1+bubble,P1), Taylor–Hood (P2,P1), selected higher-order pairs, Scott–Vogelius on specified non-singular/specially refined meshes, (P2,P0) in 2D, (P2-bubble,P1-discontinuous), and Crouzeix–Raviart/P0. The sources also construct checkerboard modes for unstable Q1/P0 and P1/P1, and explain P1/P0 locking."
+      ],
+      "proof_route": "For continuous Stokes, use Korn plus a bounded right inverse of divergence; for discrete stability, prove a uniform inf-sup by Fortin preservation, pressure-gradient control, or macroelement decomposition. Then apply mixed error estimates and explicit approximation rates.",
+      "important_hypotheses": [
+        "velocity space enforces essential boundary data and pressure normalization/mean-zero compatibility is correct",
+        "uniform discrete inf-sup constant beta_0>0, not merely solvability on one mesh",
+        "stable pair results retain their dimension, mesh geometry, polynomial degree, and boundary hypotheses",
+        "smoothness-dependent rates require exact and adjoint Stokes regularity; nonsmooth domains lower rates"
+      ],
+      "local_published_suppliers": [
+        "thm-lax-milgram",
+        "thm-poincare-inequality-for-w-one-p-zero",
+        "thm-sharp-trace-theorem-for-w-one-p"
+      ],
+      "local_gap": "No local Babuška–Brezzi theorem, divergence right inverse, Korn inequality, Fortin lemma, mixed Galerkin theorem, stable Stokes pair, pressure-robustness result, or mixed error estimate was found."
+    },
+    {
+      "area": "Parabolic variational theory and finite elements",
+      "external_status": "Established well-posedness and stability under evolution-triple, measurability, boundedness and coercivity assumptions; error rates need added spatial/time regularity.",
+      "source_coverage": [
+        "Clason Chapters 11–12 provide the Gelfand triple V↪H↪V*, W(0,T;V)↪C([0,T];H), weak time integration by parts, BNB well-posedness, and cG/dG time-space methods.",
+        "Long Chen's full note develops heat-equation energy estimates, semidiscrete FEM stability, Ritz projection error equation, duality-based L2 superconvergence, and Euler/CN and time-Galerkin methods. The note explicitly assumes well-posedness by reference to Evans rather than proving it.",
+        "Time-discontinuous Galerkin stability and endpoint error estimates require a coercive symmetric spatial form, a finite-dimensional polynomial-in-time space, jump terms and stated temporal/spatial regularity; the general variable-space/time-dependent case is referred elsewhere."
+      ],
+      "proof_route": "Evolution-triple trace theorem and integration-by-parts identity → BNB for space-time bilinear form → test by u for energy stability → Ritz projection and commuting consistency identity for semidiscrete error → dual backward problem for L2 estimates → time-polynomial approximation plus dG jump energy for fully discrete estimates.",
+      "important_hypotheses": [
+        "V reflexive/dense in H and continuous embedding H↪V*",
+        "a(t;·,·) measurable, uniformly bounded and coercive a.e.",
+        "initial datum in H with trace meaningful through W(0,T;V)↪C([0,T];H)",
+        "spatial elliptic regularity, time derivatives, and initial projection error explicitly tracked"
+      ],
+      "local_published_suppliers": [
+        "thm-form-generated-sectorial-elliptic-semigroups",
+        "cor-dirichlet-laplacian-generates-an-analytic-heat-semigroup",
+        "cor-abstract-parabolic-smoothing"
+      ],
+      "local_gap": "The local semigroup suppliers do not provide the evolution-triple variational existence theorem, spatial Galerkin stability/error estimates, Ritz projection identity, time discretization theorem, or a posteriori estimate. No general finite-element parabolic theorem was found."
+    },
+    {
+      "area": "Elliptic spectral and pseudospectral approximation",
+      "external_status": "Established approximation theory under compactness, stability, conformity/consistency, and smoothness assumptions.",
+      "source_coverage": [
+        "Guermond Chapters 46–47 treat compact self-adjoint solution operators, conforming symmetric eigenvalue approximation, min-max, upper bounds, and eigenfunction/eigenvalue estimates. For fixed eigenvalue index m and sufficiently small h, conforming Galerkin eigenvalues are upper bounds and the eigenvalue error is quadratic in the best energy approximation; smoothness can give double the H1 eigenfunction rate.",
+        "Chapter 48 applies compact-operator perturbation to nonsymmetric, multiple and nonconforming eigenproblems. It requires operator norm convergence, uniform discrete stability, primal/adjoint smoothing and approximation on generalized eigenspaces; eigenvalue average, eigenspace gap and individual eigenvector estimates have distinct exponents involving ascent and adjoint regularity.",
+        "Shen–Tang Chapters 2–3 and §1.8 provide polynomial collocation/Galerkin constructions, weighted Sobolev approximation, boundary treatment, quadrature, conditioning and higher-order/Petrov examples. Exponential rates require analytic/sufficiently smooth data and appropriate nodes; periodic Fourier collocation assumes periodicity."
+      ],
+      "proof_route": "Continuous compact solution operator via Rellich → compact self-adjoint spectral theorem or compact nonnormal operator perturbation → Galerkin operator convergence from primal and adjoint approximation → spectral gap/min-max or generalized-eigenspace perturbation → weighted polynomial interpolation/projection estimates for spectral rates.",
+      "important_hypotheses": [
+        "compactness of the continuous solution operator; for the local Dirichlet setting, bounded-domain Rellich compactness is available for H^1_0",
+        "conforming symmetric Ritz eigenproblems for guaranteed upper bounds",
+        "for Babuška–Osborn rates, operator norm convergence and both primal/adjoint regularity indices are required",
+        "spectral polynomial rates depend on regularity class, boundary treatment, nodes/weights and quadrature exactness"
+      ],
+      "local_published_suppliers": [
+        "def-symmetric-elliptic-weak-eigenpair",
+        "thm-symmetric-elliptic-form-operator-is-self-adjoint-with-compact-resolvent",
+        "thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator",
+        "thm-courant-fischer-minimax-for-elliptic-eigenvalues",
+        "thm-spectral-theorem-for-compact-self-adjoint-operators",
+        "thm-rellich-compactness-from-w-one-p-zero-to-lp"
+      ],
+      "local_gap": "The continuous operator/eigenbasis/min-max suppliers exist, but no local finite-element eigenvalue/eigenfunction convergence theorem, Babuška–Osborn perturbation theorem, spectral collocation/Galerkin approximation theorem, weighted polynomial interpolation estimate, or aliasing/dealiasing result was found."
+    },
+    {
+      "area": "Navier–Stokes global smoothness versus numerical flow methods",
+      "external_status": "CMI problem remains officially marked Active in the fetched official page; a 2026 announcement reports that it apparently has been settled but provides no proof details or identified alternative in the article. Status is pending verification, not an established theorem.",
+      "source_coverage": [
+        "The original official CMI statement asks for one of four exact alternatives A–D: global smoothness for unforced data on R^3 or the periodic torus, or a forced breakdown example on the corresponding domain.",
+        "The same statement records established adjacent results: 2D global smoothness, 3D small-data global smoothness, 3D arbitrary-data local smoothness, Leray weak existence, and Caffarelli–Kohn–Nirenberg partial regularity. None is the full 3D global claim.",
+        "Stokes FE theory and periodic Fourier pseudospectral computations are separate numerical/existence topics and do not prove or discharge the CMI global regularity statement."
+      ],
+      "exact_claim_boundary": "Keep the smooth 3D global existence/breakdown alternative separate from Stokes solvability, local-in-time strong solutions, 2D global regularity, small-data global regularity, Leray weak solutions, and numerical simulations.",
+      "local_gap": "No local Navier–Stokes weak-solution, local-strong-solution, 2D global, regularity criterion, partial-regularity, or 3D global-regularity result was found. Do not make any numerical method or CMI announcement a logical supplier to the open problem.",
+      "open_problem_class_candidate": {
+        "id_prefix": "op-",
+        "id_candidate": "op-cmi-3d-navier-stokes-global-smoothness-or-breakdown",
+        "statement_source": "CMI official Fefferman statement, alternatives A–D, PDF pp. 1–2.",
+        "status_evidence": "Official CMI problem page retrieved 2026-10-12 says Active. The 2026 announcement reports an apparent settlement but says the process is deliberately unhurried and promises updates; it does not identify a proof artifact, submitter or alternative in its article text.",
+        "logical_supplier_dependencies": [],
+        "outgoing_logical_suppliers": [],
+        "note": "This is a research-catalogue candidate only, not a production carrier authored here. The announcement is not evidence that the theorem has been verified."
+      }
+    }
+  ],
+  "source_specific_non_open_proof_gap": {
+    "claim": "A second-order consistent pressure-splitting scheme for unsteady Navier–Stokes has a second-order error estimate.",
+    "source_observation": "Shen–Tang §7.4 reports numerical evidence for second-order accuracy and says a rigorous proof was unavailable at the time of writing.",
+    "classification": "Historical source-limited proof gap. Its current research status was not independently established here; do not classify it as a recognized open problem or an established theorem from this source alone."
+  },
+  "numerical_prose_reuse": {
+    "reusable_local_foundation": [
+      "Use the published local weak-Sobolev, zero-boundary closure, Poincare, Lax–Milgram and weak Dirichlet Poisson statements for the common elliptic variational prelude.",
+      "Use the local Rellich, compact self-adjoint, symmetric elliptic operator and Courant–Fischer statements for continuous eigenproblem foundations.",
+      "Use the local analytic heat semigroup and abstract sectorial-semigroup statements only for continuous semigroup claims; do not present them as finite-element convergence suppliers."
+    ],
+    "reuse_boundary": "Numerical prose may explain established algorithms and source theorems, but a literature citation or source chapter is not a local proof dependency. A claim becomes a logical supplier only after the library has an exact published carrier with matching hypotheses."
+  },
+  "coverage_gaps_summary": [
+    "Mesh, finite-element, interpolation, quadrature and inverse-estimate definitions/theorems are absent locally.",
+    "No local Galerkin/Cea/Strang, residual a posteriori, AFEM, mixed inf-sup/Fortin/Stokes, parabolic FEM, or finite-element/spectral eigenapproximation theorem exists.",
+    "The available global H2 theorem is for bounded C2 domains and its exact coefficient hypotheses; the local corner counterexample rules out treating H2 as automatic on Lipschitz/polyhedral domains.",
+    "No local Navier–Stokes result supplies the exact CMI three-dimensional global claim."
+  ]
+}
