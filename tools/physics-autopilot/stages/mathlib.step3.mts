@@ -4,6 +4,7 @@
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
 import { MAX_RUN_BATCHES } from '../src/capacity.mjs';
 import { holdStep3 } from './step3-hold.mts';
+import { withRefuterContinuation } from './refuter-continuations.mts';
 import { prepareStep3AdjudicationOrder } from '../../physics-support/step3-adjudication-order.mjs';
 import { batchAdjudicator, step3Adjudicators } from '../../physics-support/step3-adjudicators.mjs';
 
@@ -209,7 +210,7 @@ export function step3Stages(d: any) {
       }],
       gatesWaived: 'The close tool reruns exact Step-3a routing, plan and ledger checks then freezes immutable Step-3a history. A nonzero check produces no successful result.',
     },
-  ];
+  ].map(withRefuterContinuation);
 }
 
 export default { step3Stages };
