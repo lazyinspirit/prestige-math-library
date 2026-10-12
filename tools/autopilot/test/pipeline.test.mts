@@ -529,8 +529,8 @@ test('the group budgets a lane it shares, rather than letting each stage fill it
   // live. In a group it stops doing so: two stages at 2 is 4 against a cap of 2.
   //
   // The arrangement is deliberate. One unit is still owed at s1 and two are
-  // ready at s2, so a correct engine overlaps the stages (which is the feature)
-  // and admits exactly one of the two ready units (which is the cap).
+  // ready at s2. Both ready downstream units take the shared lane; the
+  // pending upstream unit waits without exceeding the cap.
   const fx = fixture();
   const stages: any = pipelinedStages(fx, { units: ['1', '2', '3'] });
   stages[0].role = 'beta'; stages[0].concurrency = 2;
@@ -545,9 +545,9 @@ test('the group budgets a lane it shares, rather than letting each stage fill it
   cover(fx, 'worker', 'a2', ['2']);                       // units 1,2 ready for s2; 3 still owed at s1
 
   await ex.tick();
-  assert.equal(inflightAt(ex, 's1').length, 1, 's1 still owes unit 3');
-  assert.equal(inflightAt(ex, 's2').length, 1,
-    's2 overlaps s1, and takes ONE of its two ready units because the lane already holds one');
+  assert.equal(inflightAt(ex, 's1').length, 0, 'upstream work waits for the shared lane');
+  assert.equal(inflightAt(ex, 's2').length, 2,
+    'ready downstream work takes both available shared-role slots');
   assert.equal(ex.inflight.size, 2, `the beta lane cap is 2, got ${ex.inflight.size}`);
   assert.ok([...ex.inflight.values()].every((d: any) => d.meta.role === 'beta'));
 });
