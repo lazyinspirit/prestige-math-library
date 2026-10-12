@@ -89,18 +89,24 @@ export function verifyMathematicsImports(root, { run = null, planning = false } 
     .filter(file => !file.split('/').at(-1).startsWith('_')).map(file => ({ ...readItem(file), path: relative(receipt.source_root, file) })) : [];
   const scope = run ? frontierMathematicsImportScope(root, run, { planning, receipt, originals: { items: originals, pages: sourcePages } }) : null;
   for (const file of receipt.files) if (scope === null || scope.paths.has(file.path)) {
+    if (file.path.endsWith('/_category.md')) {
+      const pinned = parseFrontmatter(splitFrontmatter(readFileSync(join(root,file.path),'utf8')).fm);
+      const prefix = file.path.slice(0,file.path.lastIndexOf('/')+1);
+      const pages = receipt.files.filter(row => row.path.startsWith(prefix) && !row.path.endsWith('/_category.md')
+        && (scope === null || scope.paths.has(row.path)));
+      for (const page of pages) {
+        const category = join(dirname(originalImportPath(receipt,page)),'_category.md');
+        if (!existsSync(category))throw Error(`missing mathematics source category: ${page.path}`);
+        const current = parseFrontmatter(splitFrontmatter(readFileSync(category,'utf8')).fm);
+        if ((current.library??'mathematics')!==(pinned.library??'mathematics')
+          || (current.domain??'mathematics')!=='mathematics')throw Error(`mathematics category classification changed: ${page.path}`);
+      }
+      continue;
+    }
     const original = originalImportPath(receipt, file);
     if (!existsSync(original)) throw Error(`missing mathematics source original: ${file.path}`);
     let originalBytes = readFileSync(original);
-    if (file.path.endsWith('/_category.md')) {
-      // Category prose is editorial context. Its metadata must retain classification;
-      // actual mathematical items and prerequisite pages remain fully byte-pinned.
-      const pinned = parseFrontmatter(splitFrontmatter(readFileSync(join(root,file.path),'utf8')).fm);
-      const current = parseFrontmatter(splitFrontmatter(originalBytes.toString('utf8')).fm);
-      if (file.source_path) current.name = pinned.name;
-      const stable = doc => JSON.stringify(Object.fromEntries(Object.entries(doc).sort(([a],[b])=>a.localeCompare(b))));
-      if (stable(pinned)!==stable(current))throw Error(`mathematics category metadata changed: ${file.path}`);
-    } else if (hash(originalBytes) !== file.sha256)
+    if (hash(originalBytes) !== file.sha256)
       throw Error(`mathematics import changed: ${file.path}; reconcile and re-import before a new run`);
     if (file.path.startsWith('items/')) {
       const item = readItem(original);

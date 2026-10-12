@@ -1,7 +1,7 @@
 // This boundary certifies formatting and metadata only; native content gates
 // retain their mathematical and physical review responsibilities.
 import { existsSync, readFileSync, readdirSync, mkdirSync, writeFileSync, renameSync } from 'node:fs';
-import { basename, join, resolve } from 'node:path';
+import { basename, dirname, join, resolve } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { frontierGateScope } from '../../physics-support/frontier-gate-scope.mjs';
 import { markdownFiles, readItem } from '../../physics-support/physics-content.mjs';
@@ -130,7 +130,11 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     const imports = readJSON(importsPath);
     for (const row of imports.files ?? []) {
       const local = join(ctx.repo, row.path);
-      if (inputs.has(local)) bind(originalImportPath(imports, row));
+      if (inputs.has(local)) {
+        const original = originalImportPath(imports,row);
+        bind(original);
+        if (row.path.startsWith('library/') && !basename(row.path).startsWith('_'))bind(join(dirname(original),'_category.md'));
+      }
     }
   }
   bind(join(research, 'plan-spec.json'));
