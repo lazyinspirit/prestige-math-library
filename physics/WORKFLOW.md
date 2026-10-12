@@ -68,8 +68,9 @@ Failed processes and retries do not reset successful review/repair counters.
 There is no prerequisite-completion dispatch barrier in Step 2. Share up to
 30 active engine workers only among reviews and local repairs, and refill each
 available slot immediately. There is no automatic owner-repair dispatch.
-Independent assigned source write/read scopes may run concurrently; overlapping
-source or consumer scopes wait for the active writer to finish. Repairers write
+Independent assigned source scopes run concurrently; only overlapping authorized
+write files wait for an active writer. Read-only consumer context does not reserve
+worker slots or block another pair. Repairers write
 directly to their assigned source files, without private workspaces. Inspect
 actual suppliers before their consumers within each repair. Imported sources
 remain read-only. Preserve approved claims, inventory promises and pair/page

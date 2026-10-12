@@ -127,11 +127,11 @@ export function repairScope(ctx,batch,library=null){
 export function repairCohort(ctx,batch){
   const s=loopState(ctx.repo,ctx.run,batch),cohort=new Set([String(batch)]);
   if(s.phase!=='repair')return [...cohort];
-  const homes=new Set(repairScope(ctx,batch).batches);
+  const files=new Set(repairScope(ctx,batch).files);
   for(const b of new Set(snapshot(ctx).pages.map(p=>p.batch))){
     if(b===String(batch))continue;
     const p=loopState(ctx.repo,ctx.run,b).prepared;
-    if(p?.write_batches?.some(home=>homes.has(home)))cohort.add(b);
+    if(p?.write_files?.some(file=>files.has(file)))cohort.add(b);
   }
   return [...cohort];
 }
@@ -139,7 +139,7 @@ export function batchPlans(ctx,batches,slots=30){
   const selected=[],reserved=new Set();
   for(const batch of batches){
     const s=loopState(ctx.repo,ctx.run,batch),writes=s.phase==='repair';
-    const locks=writes?repairScope(ctx,batch).batches:[];if(locks.some(b=>reserved.has(b)))continue;
+    const locks=writes?repairScope(ctx,batch).files:[];if(locks.some(b=>reserved.has(b)))continue;
     const p=batchPlan(ctx,batch);if(p){selected.push(p);for(const b of locks)reserved.add(b);}
     if(selected.length>=slots)break;
   }
