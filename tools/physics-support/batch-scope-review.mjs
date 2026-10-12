@@ -92,8 +92,8 @@ export function prerequisiteBatches(root, run, batch, pass=null) {
 }
 
 /** Full transitive consumer cone, including definitions and nonlogical uses. */
-export function consumers(root, changed, extra = []) {
-  const items = readLibraryItems(root), byId = new Map(items.map(item => [item.id, item]));
+export function consumers(root, changed, extra = [], current = null) {
+  const items = current??readLibraryItems(root), byId = new Map(items.map(item => [item.id, item]));
   for (const item of extra) {
     const current=byId.get(item.id);
     byId.set(item.id,current?{...current,deps:[...new Set([...(item.deps??[]),...(current.deps??[])])],
@@ -221,7 +221,7 @@ function changedInterfaces(root, prepared) {
   const after = readLibraryItems(root), now = new Map(after.map(item => [item.id,item]));
   const owned=prepared.write_files?new Set(prepared.write_files.filter(p=>p.startsWith('items/')).map(p=>p.slice(6,-3))):null;
   const changed = prepared.before_items.filter(item => (!owned||owned.has(item.id)) && (!now.has(item.id) || now.get(item.id).statement_sha256 !== item.statement_sha256)).map(item => item.id);
-  return { changed, affected: consumers(root, changed, prepared.before_items) };
+  return { changed, affected: consumers(root, changed, prepared.before_items,after) };
 }
 
 /** Called only after that batch's worker drains. Failed processes never advance. */
@@ -347,7 +347,7 @@ export function repairScope(ctx,batch,library=null) {
     const rows=phase==='owner'?state.owner_repairs??[]:state[phase==='review'?'reviews':'repairs'];const last=rows.at(-1);
     if(last)for(const f of read(reportPath(ctx.repo,ctx.run,batch,phase,last.round)).findings??[])if(known.has(f.id))roots.add(f.id);
   }
-  const affected=consumers(ctx.repo,[...roots],library), lockIds=new Set([...roots,...affected.map(row=>row.id)]);
+  const affected=consumers(ctx.repo,[...roots],library,library), lockIds=new Set([...roots,...affected.map(row=>row.id)]);
   const writeIds=owner?lockIds:new Set(input.inventory.items);
   const files=new Set([...writeIds].map(id=>`items/${id}.md`)), locks=new Set([String(batch)]), homes=new Set([String(batch)]);
   for(const id of lockIds){const home=input.snapshot.items.get(id)?.page.batch;if(home){locks.add(home);if(owner)homes.add(home);}}

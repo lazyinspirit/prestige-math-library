@@ -872,7 +872,8 @@ export class Executor {
     // long synchronous manifest scan and wake in the same event-loop turn;
     // measuring from the previous ACTUAL launch avoids that stampede. DeepSeek
     // dispatches use the owner's one-second interval; other lanes retain three
-    // seconds. Test harnesses may disable pacing with dispatchStaggerMs: 0.
+    // seconds. Step 2 starts its shared worker pool immediately. Test harnesses
+    // may disable pacing elsewhere with dispatchStaggerMs: 0.
     const staggerMs = stage.id === '2-scope-review' ? 0 : String(vars.profile).startsWith('deepseek-')
       ? (this.config.deepseekDispatchStaggerMs ?? (this.config.dispatchStaggerMs === 0 ? 0 : 1000))
       : (this.config.dispatchStaggerMs ?? 3000);
