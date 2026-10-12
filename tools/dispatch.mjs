@@ -15,12 +15,14 @@ import { spawn } from 'node:child_process';
 // shadowed there and silently settled the promise instead of building a path.
 import { dirname, join, relative, resolve, resolve as pathResolve } from 'node:path';
 import { homedir } from 'node:os';
-import { REPO } from './paths.mjs';
+import { REPO, APP_DIR } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
 import { workflowAgentBudget } from './workflow-agent-budget.mjs';
 import { parseCodexOutput, validateCodexOutput, validateCodexOutputSchema } from './codex-output-schema.mjs';
 import { findRollout, readDispatchUsage, readDispatchTerminal } from './dispatch-usage.mjs';
-import { captureRepairControl, verifyRepairControl } from './batch-scope-review.mjs';
+import { captureRepairControl, verifyRepairControl, loopState } from './batch-scope-review.mjs';
+import { prepareRepairWorkspace } from './scope-repair-workspace.mjs';
+let workerRepo=REPO;
 import { configureDeepSeekCodexHome } from './deepseek-codex.mjs';
 import { persistRotatedCodexAuth } from './dispatch-auth.mjs';
 import { resolveDispatchProfile } from './model-profile-overrides.mjs';
@@ -41,8 +43,8 @@ const AUTO_COMPACT_TOKEN_LIMIT = 500_000;
 
 // lane caps: how many of this role may run at once across every process.
 const ROLES = Object.freeze({
-  'scope-reviewer': { ...lane('agentic'), sandbox:'read-only', effort:'max', cap:MAX_RUN_BATCHES, web:true, requiresTask:true, why:'whole-batch scope/prerequisite review' },
-  'scope-repairer': { ...lane('agentic'), sandbox:'workspace-write', effort:'max', cap:MAX_RUN_BATCHES, web:true, requiresTask:true, why:'batch-owned scope/prerequisite repair' },
+  'scope-reviewer': { ...lane('agentic'), sandbox:'read-only', effort:'max', cap:30, web:true, requiresTask:true, why:'whole-batch scope/prerequisite review' },
+  'scope-repairer': { ...lane('agentic'), sandbox:'workspace-write', effort:'max', cap:30, web:true, requiresTask:true, why:'batch-owned scope/prerequisite repair' },
   // `web: true` on the two source-reading build lanes (owner, 2026-08-11). Every
   // source-review roles already had it; the build roles that LEVELS.md §Step 1 orders to
   // "search reputable mathematical sources on the web" did not. A probe on
@@ -539,6 +541,7 @@ const buildCodexResume = (sessionHome) => [
     '--model', spec.model,
     ...(spec.provider !== 'openai' ? ['-c', `model_provider="${spec.provider}"`] : []),
     '-c', `sandbox_mode="${spec.sandbox}"`,
+    ...(workerRepo!==REPO?['-c',`sandbox_workspace_write.writable_roots=${JSON.stringify([workerRepo])}`]:[]),
     ...sourceNetworkArgs,
     '-c', `model_reasoning_effort="${spec.effort ?? 'xhigh'}"`,
     ...contextArgs,
@@ -578,12 +581,13 @@ const buildCodex = (temporaryHome) => [
     // seven of which evaporated once someone with a working fetch looked.
     '-c', 'tools.web_search=true',
     '--sandbox', spec.sandbox,
+    ...(workerRepo!==REPO?['-c',`sandbox_workspace_write.writable_roots=${JSON.stringify([workerRepo])}`]:[]),
     ...sourceNetworkArgs,
     ...imagePaths.flatMap((image) => ['--image', resolveFile(image)]),
     ...(outputSchemaPath ? ['--output-schema', resolveFile(outputSchemaPath)] : []),
     ...(resultArtifactPath ? ['--output-last-message', lastMessagePath] : []),
     '--skip-git-repo-check',
-    '--cd', REPO,
+    '--cd', workerRepo,
     '-',
   ],
   { CODEX_HOME: temporaryHome },
@@ -675,7 +679,8 @@ const codexSessionId = (result) => {
   return found[0].id;
 };
 
-const repairControl = role === 'scope-repairer' ? captureRepairControl(REPO,run,covers[0]) : null;
+if(role==='scope-repairer'){const prepared=loopState(REPO,run,covers[0]).prepared;if(prepared?.write_files)workerRepo=prepareRepairWorkspace(REPO,run,covers[0],prepared);}
+const repairControl = role === 'scope-repairer' && workerRepo===REPO ? captureRepairControl(REPO,run,covers[0]) : null;
 const result = await new Promise((resolve) => {
   let bin, args, extraEnv;
   // Give each agent an isolated home containing only its auth record so
@@ -710,9 +715,9 @@ const result = await new Promise((resolve) => {
   [bin, args, extraEnv] = resumeSession ? buildCodexResume(activeHome) : buildCodex(activeHome);
 
   const child = spawn(bin, args, {
-    cwd: REPO,
+    cwd: workerRepo,
     stdio: ['pipe', 'pipe', 'pipe'],
-    env: { ...process.env, ...extraEnv },
+    env: { ...process.env, ...extraEnv, ...(APP_DIR?{PRESTIGE_APP_DIR:APP_DIR}:{}), ...(workerRepo!==REPO?{PHYSICS_REPO:workerRepo,PRESTIGE_MATH_REPO:workerRepo}:{}) },
   });
 
   const stdout = boundedOutput();

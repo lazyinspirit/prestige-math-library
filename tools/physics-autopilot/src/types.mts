@@ -182,7 +182,7 @@ export interface Stage {
   concurrency?: number;
   maxAttempts?: number;
   fallbackCount?: number;
-  plan?: (ctx: Ctx, pending: Unit[]) => Plan[];
+  plan?: (ctx: Ctx, pending: Unit[], slots?: number) => Plan[];
   /** Dispatch ready item handoffs while the owning stage's workers wait. */
   onProgress?: (args: { ctx: Ctx; executor: any; stage: Stage }) => void | Promise<void>;
   gates?: (ctx: Ctx) => Gate[];

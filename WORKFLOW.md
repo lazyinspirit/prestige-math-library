@@ -67,42 +67,36 @@ through crashes, retries and redispatches. Worker process retries never reset
 these counters. A failed process cannot advance the loop. Owner resolution never
 refunds rounds or falsifies a worker's acceptance.
 
-Repairers may add, delete or edit locally owned items in their batch, maintaining
+Repairers may add or edit locally owned items in their batch, maintaining
 owned manifests, pages, coverage, contracts and dependency inputs. Preserve the
 approved claims and pair/page identities; do not delete promised scope merely
 to clear a finding. Desired outside-batch edits escalate. The dispatcher protects
 native loop history and reports; native collection rejects outside-batch edits.
-Reviewers can run concurrently on independent batches; repair write waves drain
-other batch workers and run singly so write boundaries have unambiguous ownership.
+Reviewers and repairers run concurrently when their assigned write/consumer
+scopes are disjoint. The controller integrates checked private repair proposals.
 The existing 30-agent global limit and 80-pair frontier limit remain.
 
-Use the actual logical supplier graph to finish prerequisite batches before
-consumer batches; within a batch follow the recorded item levels and pair order.
-Keep up to 30 agents processing ready pairs, preferring lower dependency levels
-and filling remaining slots from higher levels whose actual prerequisites are
-already accepted. Do not wait for unrelated pairs at a lower level. Refill a slot
-as soon as its agent finishes; there is no whole-level barrier. Planning shares
-one fresh item inventory within each pass and discards it before the next pass.
-Scheduling reuses lightweight loop-state views only while file stamps match;
-full before images remain available to repair collection and input hashes remain
-current. A native
-owner hold blocks its own batch and its dependent batches; independent ready
-batches continue. Held batches remain owed and must be resolved before the
-stage's full gate battery. The existing repair write-wave isolation still applies.
-After the frontier pass reaches accepted, escalated, or explicitly prerequisite-
-blocked dispositions and all workers drain, the engine writes
-`research/RUN-step2-owner-pass.json` and pauses before attempting Step 2's
-battery. A blocked disposition records unreviewed work honestly. Native bounded
-review/repair loops and escalation histories remain intact. The owner resolves
-escalations with hash-bound owner acceptance, without another engine review, and
-chooses when to
-run the full battery. Owner resume and any armed post-Step-2 pause control
-progression to Step 3.
-If the owner resumes remaining native loops, their completion produces a fresh
-`RUN-step2-owner-battery-ready.json` handoff and pauses again before the battery.
-Recompute and reconcile dependencies after edits. Blocked suppliers hold their
-consumers. Acceptance binds transitive supplier bytes; changed inputs invalidate
-it and require owner resolution before another handoff.
+Step 2 is the exception to prerequisite-completion scheduling: dispatch pairs
+without waiting for supplier-pair acceptance. Share up to 30 active engine workers
+among whole-batch reviews, native local repairs, and delegated escalation repairs;
+refill each available slot immediately. Retain the native three-review/two-repair
+loop. Escalations use at most two delegated GPT-6.1 Sol medium repair rounds and
+are accepted directly when resolved, without another engine review.
+
+Within each repair, inspect suppliers before consumers and preserve sound claims.
+Independent repairers use private copies of their assigned files; the controller
+validates and integrates their edits. Overlapping write/consumer scopes wait for
+the active writer to finish. This protects shared files without requiring
+prerequisite-pair acceptance. Imported sources remain read-only. Scheduling keeps
+lightweight state views while file stamps match; collection retains full before
+images and acceptance binds current transitive supplier bytes.
+
+Process every pair through its bounded loops, then drain workers and write
+`research/RUN-step2-owner-pass.json` before pausing. Exhausted escalations remain
+explicit owner holds and must be resolved before the full battery. The owner
+chooses when to authorize that battery and progression to Step 3. If further work
+is resumed, its completion produces a fresh `RUN-step2-owner-battery-ready.json`
+and pauses again before the battery. Reconcile dependencies after source edits.
 
 Whenever an original Statement/Definition changes, **both roles trace and check
 all direct and indirect consumers**, using the union of old/current dependencies

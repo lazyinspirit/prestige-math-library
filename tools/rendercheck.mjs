@@ -59,7 +59,7 @@ import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { katexCandidates, yamlCandidates } from "./paths.mjs";
 
-const REPO = join(fileURLToPath(new URL(".", import.meta.url)), "..");
+const REPO = process.env.PRESTIGE_MATH_REPO ?? join(fileURLToPath(new URL(".", import.meta.url)), "..");
 
 // KaTeX lives in the app repo; this repo has no node_modules of its own. Same
 // sibling-repo pattern the precheck runner uses for tsx.

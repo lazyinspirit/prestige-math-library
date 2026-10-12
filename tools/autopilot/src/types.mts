@@ -193,7 +193,7 @@ export interface Stage {
   concurrency?: number;
   maxAttempts?: number;
   fallbackCount?: number;
-  plan?: (ctx: Ctx, pending: Unit[]) => Plan[];
+  plan?: (ctx: Ctx, pending: Unit[], slots?: number) => Plan[];
   /** Opt-in native refresh; never authorizes reopening a completed stage. */
   refreshPlan?: (ctx: Ctx, unit: Unit, request: Pick<NativeRefresh, 'id' | 'reason' | 'requestedAt'>) => Plan;
   /** Dispatch ready item handoffs while the owning stage's workers wait. */

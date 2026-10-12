@@ -1738,11 +1738,11 @@ export class Executor {
     if (need.length && slots > 0) {
       let plans;
       try {
-        const selected = need.slice(0, slots);
+        const selected = stage.id === '2-scope-review' ? need : need.slice(0, slots);
         const refreshes = this.pendingRefreshes(stage, ctx).filter(r => selected.includes(r.unit));
         plans = [
           ...refreshes.map(r => r.plan),
-          ...stage.plan(ctx, selected.filter(unit => !refreshes.some(r => r.unit === unit))),
+          ...stage.plan(ctx, selected.filter(unit => !refreshes.some(r => r.unit === unit)), slots - refreshes.length),
         ];
         // Drop any plan whose own dispatch key has exhausted its attempts.
         const exhaustedPlans: any[] = [];

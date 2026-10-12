@@ -1615,7 +1615,7 @@ export class Executor {
     if (need.length && slots > 0) {
       let plans;
       try {
-        plans = stage.plan(ctx, need.slice(0, slots));
+        plans = stage.plan(ctx, stage.id==='2-scope-review'?need:need.slice(0,slots),slots);
         // Drop any plan whose own dispatch key has exhausted its attempts.
         const exhaustedPlans: any[] = [];
         plans = plans.filter((p: any) => {

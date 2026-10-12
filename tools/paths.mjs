@@ -25,7 +25,7 @@ import { existsSync, realpathSync } from 'node:fs';
 import { delimiter, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-export const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
+export const REPO = process.env.PRESTIGE_MATH_REPO ?? join(fileURLToPath(new URL('.', import.meta.url)), '..');
 
 const APP_CANDIDATES = [
   process.env.PRESTIGE_APP_DIR,
