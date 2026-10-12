@@ -26,8 +26,23 @@ const fileHashes = root => Object.fromEntries([...files(root, 'items'), ...files
   ...readdirSync(join(root, 'research')).filter(name => name === 'plan-spec.json' || /-batch-\d+\.(?:pages|coverage|proof-contracts|cross-batch-dependencies)\.json$/.test(name)).map(name => `research/${name}`)]
   .sort().map(path => [path, digest(readFileSync(join(root, path), 'utf8'))]));
 
-export function batchInput(root, run, batch) {
-  const snapshot = loadStep3(root, run), pages = snapshot.pages.filter(page => page.batch === String(batch));
+export function batchInput(root, run, batch, pass=null) {
+  const snapshot = loadStep3(root, run);
+  const stamp = id => {try{const s=statSync(join(root,'items',`${id}.md`),{bigint:true});return `${s.ino}:${s.size}:${s.mtimeNs}:${s.ctimeNs}`;}catch{return null;}};
+  const metadata=pass?digest([snapshot.pages,[...snapshot.planned]]):null;
+  const prior=pass?.scopeHashCache;
+  if(prior&&prior.metadata===metadata){
+    for(const [id,node] of prior.cache)if(prior.stamps.get(id)===stamp(id))snapshot.cache.set(id,node);
+  }
+  if(pass){
+    const library=pass.scopeLibrary??=readLibraryItems(root), ids=new Set(library.map(item=>item.id));
+    snapshot.aliases=new Map();
+    for(const item of library)for(const alias of item.aliases??[])if(!ids.has(alias)){
+      assert(!snapshot.aliases.has(alias)||snapshot.aliases.get(alias)===item.id,`Ambiguous alias ${alias}`);
+      snapshot.aliases.set(alias,item.id);
+    }
+  }
+  const pages = snapshot.pages.filter(page => page.batch === String(batch));
   assert(pages.length && pages.every(page => page.items?.length), `Batch ${batch}: empty inventory`);
   const items = pages.flatMap(page => page.items.map(item => item.id));
   assert(items.every(id => existsSync(join(root, 'items', `${id}.md`))), `Batch ${batch}: missing authored item`);
@@ -38,6 +53,7 @@ export function batchInput(root, run, batch) {
       ? digest(readFileSync(join(root, 'library', page.category, `${page.id}.md`), 'utf8')) : null]),
     contracts: read(join(root, 'research', `${run}-batch-${batch}.proof-contracts.json`)),
     coverage: read(join(root, 'research', `${run}-batch-${batch}.coverage.json`)) };
+  if(pass)pass.scopeHashCache={metadata,cache:snapshot.cache,stamps:new Map([...snapshot.cache.keys()].map(id=>[id,stamp(id)]))};
   return { sha256: digest(input), inventory, snapshot };
 }
 
@@ -176,7 +192,7 @@ export function accepted(root,run,batch,pass=null) {
     if(state.phase!=='accepted')return false;
     for(const [phase,rows] of [['review',state.reviews],['repair',state.repairs],['owner',state.owner_repairs??[]]])for(const row of rows)
       if(digest(read(reportPath(root,run,batch,phase,row.round)))!==row.report_sha256)return false;
-    return state.phase === 'accepted' && state.accepted_sha256 === batchInput(root,run,batch).sha256;
+    return state.phase === 'accepted' && state.accepted_sha256 === batchInput(root,run,batch,pass).sha256;
   }
   catch { return false; }
 }
@@ -211,7 +227,7 @@ function changedInterfaces(root, prepared) {
 /** Called only after that batch's worker drains. Failed processes never advance. */
 export function collectBatch(ctx,batch) {
   const state = loopState(ctx.repo,ctx.run,batch), p = state.prepared;
-  if (state.phase === 'accepted' && !accepted(ctx.repo,ctx.run,batch)) { state.phase='held'; state.reason='Accepted inputs changed; owner resolution required'; save(ctx.repo,ctx.run,batch,state); }
+  if (state.phase === 'accepted' && !accepted(ctx.repo,ctx.run,batch,ctx)) { state.phase='held'; state.reason='Accepted inputs changed; owner resolution required'; save(ctx.repo,ctx.run,batch,state); }
   if (!p || state.phase === 'held'&&p.phase!=='owner' || state.phase === 'accepted' || !existsSync(receipt(ctx,p))) return state;
   const done=read(receipt(ctx,p));
   if (done.ok !== true) return state;
@@ -260,7 +276,7 @@ export function collectBatch(ctx,batch) {
       assert(row.decision==='escalate','Unresolved consumer repair or uncertainty requires escalation');
     assert(row.decision!=='accept'||!row.findings.length,'Completed repair has unresolved findings');
     assert(row.decision!=='repair','Repairer must report completion or escalation, not request another repair');
-    if(proposal)integrateRepairWorkspace(proposal);
+    if(proposal){integrateRepairWorkspace(proposal);delete ctx.scopeSnapshot;delete ctx.scopeLibrary;delete ctx.scopeOrderedItems;delete ctx.scopeHashCache;}
     input=batchInput(ctx.repo,ctx.run,batch);
     const entry={round:p.round,report_sha256:digest(row),changed:impact.changed,consumers:impact.affected};
     if(p.phase==='owner'){
@@ -318,7 +334,7 @@ export function loopPattern(ctx,batches) {
 export function repairScope(ctx,batch,library=null) {
   const state=loopState(ctx.repo,ctx.run,batch,ctx);
   if(state.prepared?.write_files)return {files:state.prepared.write_files,batches:state.prepared.write_batches};
-  const input=batchInput(ctx.repo,ctx.run,batch), owner=state.phase==='held';
+  const input=batchInput(ctx.repo,ctx.run,batch,ctx), owner=state.phase==='held';
   library??=ctx.scopeLibrary??=readLibraryItems(ctx.repo);
   const known=new Set(library.map(item=>item.id)), roots=new Set(input.inventory.items);
   if(owner)for(const phase of ['owner','review','repair']){
@@ -348,12 +364,12 @@ export function repairCohort(ctx,batch){
   return [...cohort];
 }
 export function batchPlans(ctx,batches,slots=30) {
-  const library=ctx.scopeLibrary??readLibraryItems(ctx.repo), selected=[], reserved=new Set();
+  const library=ctx.scopeLibrary??readLibraryItems(ctx.repo), selected=[], reserved=new Set(), planning={...ctx,scopePlanning:true};
   for(const batch of batches){
     const state=loopState(ctx.repo,ctx.run,batch,ctx), writes=state.phase==='repair'||state.phase==='held';
     const locks=writes?repairScope(ctx,batch,library).batches:[String(batch)];
     if(locks.some(b=>reserved.has(b)))continue;
-    const plan=batchPlan(ctx,batch,library);if(plan){selected.push(plan);for(const b of locks)reserved.add(b);}
+    const plan=batchPlan(planning,batch,library);if(plan){selected.push(plan);for(const b of locks)reserved.add(b);}
     if(selected.length>=slots)break;
   }
   return selected;
@@ -362,14 +378,16 @@ export function batchPlans(ctx,batches,slots=30) {
 export function batchPlan(ctx,batch,library=null) {
   const state=loopState(ctx.repo,ctx.run,batch);
   if(state.phase==='held'&&!engineRepairEligible(ctx,batch))throw Error(`Batch ${batch} held for owner after two escalation repairs: ${state.reason}`);
-  if(accepted(ctx.repo,ctx.run,batch))return null;
+  if(accepted(ctx.repo,ctx.run,batch,ctx))return null;
   const phase=state.phase==='held'?'owner':state.phase, round=phase==='review'?state.reviews.length:phase==='owner'?(state.owner_repairs??[]).length+1:state.repairs.length+1;
   assert(phase==='review'?round<3:round<=2,'Batch repair budget exhausted; owner resolution required');
-  const input=batchInput(ctx.repo,ctx.run,batch), role=phase==='review'?'scope-reviewer':'scope-repairer';
+  library??=readLibraryItems(ctx.repo);
+  const input=batchInput(ctx.repo,ctx.run,batch,ctx.scopePlanning?ctx:{scopeLibrary:library}), role=phase==='review'?'scope-reviewer':'scope-repairer';
   // Review order must agree with the actual authored logical dependencies.
   library??=readLibraryItems(ctx.repo);
   const byId=new Map(library.map(item=>[item.id,item]));
   const aliases=new Map(library.flatMap(item=>(item.aliases??[]).map(alias=>[alias,item.id])));
+  const ordered=ctx.scopePlanning&&ctx.scopePlanOrders ? ctx.scopePlanOrders : (()=>{
   const actual=input.snapshot.pages.map(page=>({...page,items:page.items.map(item=>{
     const text=readFileSync(join(ctx.repo,'items',`${item.id}.md`),'utf8');
     const fm=yaml().parse(text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1]??'')??{};
@@ -378,7 +396,10 @@ export function batchPlan(ctx,batch,library=null) {
     assert(same(body,manifest),`${item.id}: authored logical deps differ from its manifest; reconcile before reviewing`);
     return {...item,deps:body};
   })}));
-  const order=orderedItems(actual).filter(item=>item.batch===String(batch));
+  return orderedItems(actual);
+  })();
+  if(ctx.scopePlanning)ctx.scopePlanOrders=ordered;
+  const order=ordered.filter(item=>item.batch===String(batch));
   const dir=loopDir(ctx.repo,ctx.run,batch), task=join(dir,`${phase}-${round}.task.md`);
   if(!state.prepared){
     const p={phase,round,role,label:label(batch,phase,round),input_sha256:input.sha256,inventory:input.inventory,
