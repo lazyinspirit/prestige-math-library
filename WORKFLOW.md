@@ -10,7 +10,7 @@ worker prompts, supporting tools, content and run state.
 | Step | Work | Agents and handoff |
 |---|---|---|
 | 1 | Prerequisite drift, scaffolding and complete initial authoring | Existing drift and scaffolding agents; authored items, A/B pages, contracts, source evidence and manifests |
-| 2 | Scope and prerequisite review/repair only | Luna-max native reviewers/repairers; Sol 6.1 medium escalation repairs; orchestrator owns metadata and recertification |
+| 2 | Review, one local repair and owner escalation | Luna-max reviewers/local repairers; at most two reviews and one repair; owner/orchestrator resolves escalations and runs gates |
 | 3 | Independent review | Batch readers, refuters and adjudicators, final validation and mechanical closure |
 | 4 | Batch review and judging | Exactly one read-only Sol 6.1/high reviewer per batch plus the judge sweep |
 | 5 | Adjudication and repair | Existing native repair, consumer maintenance, certification and gate routes |
@@ -53,74 +53,72 @@ nonlogical links are hash-bound context, not extra logical scheduling edges.
 
 ## Whole-batch scope/prerequisite loop
 
-Step 2 workers perform only scope/prerequisite review, source repair and
-escalation. Each batch has a read-only `scope-reviewer` and a native
+Step 2 workers perform only substantive scope/prerequisite review, local source
+repair and escalation. Each batch has a read-only `scope-reviewer` and a local
 `scope-repairer`, both `gpt-6-luna-max`; reuse their respective sessions where
-available. Every review covers the entire current batch, including additions
-and complete A/B pages, before returning one consolidated substantive report.
-Significant unmet prerequisites, insufficient scope, desired outside changes
-and unresolved uncertainty escalate to the owner.
+available. Each review covers the entire current batch, including additions and
+complete A/B pages, before returning one consolidated result.
 
-The native sequence is review/accept -> repair -> review/accept -> repair ->
-final review/accept: at most three reviews and two local repairs. A failed third
-review holds for escalation resolution. Delegated escalation repair uses
-GPT-6.1 Sol medium and at most two owner-repair rounds. A resolved escalation is
-accepted directly without another engine review. Failed processes and retries
-do not spend or reset successful review/repair counters, and owner resolution
-never refunds rounds or falsifies a worker verdict.
+The sequence is review/accept -> ONE local repair -> final review/accept ->
+escalate to the OWNER. The engine permits at most two complete reviews and one
+local repair. Escalate immediately when a significant prerequisite gap cannot be
+rigorously resolved locally on the same page. Other page-local defects receive
+the single repair and final review. If the second review remains unsatisfied for
+any reason, escalate; there is no second local repair or third engine review.
+Failed processes and retries do not reset successful review/repair counters.
 
-There is no prerequisite-acceptance dispatch barrier in Step 2. Share up to
-30 active workers among reviews, native repairs and delegated escalation
-repairs, and refill each available slot immediately. Inspect actual suppliers
-before their consumers within each repair. Independent write/read scopes may
-run concurrently; overlapping source or consumer scopes wait for the active
-writer to finish. Repairers work in private copies of authorized source files,
-and the controller integrates their source edits. Imported sources remain
-read-only. Preserve approved claims, inventory promises and pair/page identities;
-necessary intermediate results must be proved rather than difficult scope dropped.
+There is no prerequisite-completion dispatch barrier in Step 2. Share up to
+30 active engine workers only among reviews and local repairs, and refill each
+available slot immediately. There is no automatic owner-repair dispatch.
+Independent assigned source write/read scopes may run concurrently; overlapping
+source or consumer scopes wait for the active writer to finish. Repairers write
+directly to their assigned source files, without private workspaces. Inspect
+actual suppliers before their consumers within each repair. Imported sources
+remain read-only. Preserve approved claims, inventory promises and pair/page
+identities; prove necessary intermediate results rather than dropping scope.
 
 Whenever an original Statement/Definition changes, the same agent traces and
 checks all direct and indirect consumers using old/current dependencies, aliases
 and nonlogical uses. Physical public-interface changes have the same duty in
-physics. Review actual supplier uses and assumptions; make necessary surgical
-repairs within the authorized source scope and escalate required outside edits.
-Every affected consumer appears in the substantive result, and a subsequent
-native reviewer checks the preceding local repair's consumer dispositions.
+physics. Check actual supplier uses and assumptions; repair consumers within the
+assigned source scope and report required outside repairs to the owner. Every
+affected consumer appears in the substantive result, and the final reviewer
+checks the local repair's consumer dispositions.
 
 Workers have no hashing, rehashing, certification, recertification, numeric-level
 reconciliation, manifest/coverage/proof-contract maintenance, evidence-ledger or
 automated formatting/validator duties in Step 2. Their lightweight result contains
 only identity, prepared inventory, round, decision, defect types, concise findings
-and required consumer dispositions. The optional legacy `input_sha256` schema
-field exists only to accept already-running workers' old reports; new workers do
-not compute or report it. Honest uncertainty, rigorous complete arguments and
-faithful source use remain substantive obligations.
+and required consumer dispositions. The optional legacy hash report field serves
+only already-running old workers; new workers do not compute or report hashes.
+Honest uncertainty, rigorous complete arguments and faithful source use remain
+substantive obligations. Existing manifests are navigation context, not worker
+maintenance assignments.
 
-The engine retains only the scheduling, private-write integration, routing and
-bounded-loop counters needed to coordinate this work. Minimal pass receipts
-record dispositions and counts. The orchestrator owns all metadata reconciliation,
-formatting/certification and pre-battery recertification after source workers drain;
-these are not extra worker tasks or review rounds. Existing manifests can serve
-as navigation context without becoming worker maintenance obligations.
+The engine retains simple dispatch, routing, overlap coordination and the bounded
+two-review/one-repair counters. Minimal pass receipts record dispositions and
+counts. After the engine pass and worker drain, pause for the owner before the
+Step-2 battery. Escalated pairs remain explicit holds. The owner/orchestrator
+alone resolves escalations, handles metadata and recertification, and runs the
+Step-2 gates. Preserve CLAUDE.md's maximum of two outside escalation-resolution
+cycles; they are not additional engine review/local-repair rounds. Resolved owner
+escalations receive direct acceptance without an engine re-review or counter reset.
+The owner controls the battery and advancement to Step 3.
 
-Process every pair through its bounded loops, then drain workers and write
-`research/RUN-step2-owner-pass.json` before pausing. Exhausted escalations remain
-explicit holds and must be resolved before the full battery. The owner alone
-authorizes that battery and advancement to Step 3 after the orchestrator's work.
-If further substantive work is resumed, its completion produces
-`RUN-step2-owner-battery-ready.json` and pauses again before the battery.
-
-After resolving a hold, the owner may record direct acceptance from the content
-workspace:
+The engine writes `research/RUN-step2-owner-pass.json` before the owner pause.
+If remaining local work resumes, it drains and produces
+`RUN-step2-owner-battery-ready.json`, pausing again before the battery. Neither
+handoff performs recertification or grants gate authorization. The owner may
+record resolved escalation acceptance from the content workspace:
 
 ```bash
 node tools/batch-scope-review.mjs owner-resolve --run RUN --batch N --decision accept --reviewer OWNER --reason 'Exact resolution'
 ```
 
-This records resolved defects and affected consumers without another engine
-review or a counter reset. Historical `--decision continue` commands also accept
-directly. Apply owner resolution only after active repair writers drain; minimal
-engine completion coverage follows at the next controller tick.
+Historical `--decision continue` commands also accept directly. Apply owner
+resolution only after source writers drain. This never dispatches another engine
+review, restores a spent local repair, or replaces the orchestrator's pre-battery
+work.
 
 ## Independent review through closeout
 

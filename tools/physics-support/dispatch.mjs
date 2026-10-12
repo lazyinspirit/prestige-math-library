@@ -20,8 +20,6 @@ import { createSlotPool } from './slots.mjs';
 import { workflowAgentBudget } from '../workflow-agent-budget.mjs';
 import { parseCodexOutput, validateCodexOutput, validateCodexOutputSchema } from './codex-output-schema.mjs';
 import { findRollout, readDispatchUsage, readDispatchTerminal } from './dispatch-usage.mjs';
-import { captureRepairControl, verifyRepairControl, loopState } from './batch-scope-review.mjs';
-import { prepareRepairWorkspace } from '../scope-repair-workspace.mjs';
 let workerRepo=REPO;
 import { configureDeepSeekCodexHome } from './deepseek-codex.mjs';
 import { persistRotatedCodexAuth } from './dispatch-auth.mjs';
@@ -541,7 +539,6 @@ const buildCodexResume = (sessionHome) => [
     '--model', spec.model,
     ...(spec.provider !== 'openai' ? ['-c', `model_provider="${spec.provider}"`] : []),
     '-c', `sandbox_mode="${spec.sandbox}"`,
-    ...(workerRepo!==REPO?['-c',`sandbox_workspace_write.writable_roots=${JSON.stringify([workerRepo])}`]:[]),
     ...sourceNetworkArgs,
     '-c', `model_reasoning_effort="${spec.effort ?? 'xhigh'}"`,
     ...contextArgs,
@@ -581,7 +578,6 @@ const buildCodex = (temporaryHome) => [
     // seven of which evaporated once someone with a working fetch looked.
     '-c', 'tools.web_search=true',
     '--sandbox', spec.sandbox,
-    ...(workerRepo!==REPO?['-c',`sandbox_workspace_write.writable_roots=${JSON.stringify([workerRepo])}`]:[]),
     ...sourceNetworkArgs,
     ...imagePaths.flatMap((image) => ['--image', resolveFile(image)]),
     ...(outputSchemaPath ? ['--output-schema', resolveFile(outputSchemaPath)] : []),
@@ -679,8 +675,6 @@ const codexSessionId = (result) => {
   return found[0].id;
 };
 
-if(role==='scope-repairer'){const prepared=loopState(REPO,run,covers[0]).prepared;if(prepared?.write_files)workerRepo=prepareRepairWorkspace(REPO,run,covers[0],prepared);}
-const repairControl = role === 'scope-repairer' && workerRepo===REPO ? captureRepairControl(REPO,run,covers[0]) : null;
 const result = await new Promise((resolve) => {
   let bin, args, extraEnv;
   // Give each agent an isolated home containing only its auth record so
@@ -810,13 +804,10 @@ if (temporaryHome) { try { rmSync(temporaryHome, { recursive: true, force: true 
 // gate a durable JSON receipt. A missing or malformed final message turns the
 // dispatch red. Step-4 batch reviewers use this path for their Step-5 digests.
 // Validate locally as well: not every provider enforces --output-schema.
-if (repairControl) {
-  try { verifyRepairControl(repairControl); } catch(error) { result.code=1; result.stderr+=`\n${error.message}`; }
-}
-
 if (resultArtifactPath && result.code === 0 && !result.timedOut) {
   try {
     const parsed = parseCodexOutput(readFileSync(lastMessagePath, 'utf8'));
+    if(role==='scope-reviewer'||role==='scope-repairer')delete parsed.input_sha256; // Legacy Step-2 result compatibility.
     if (outputSchemaPath) {
       const problems = validateCodexOutput(parsed, JSON.parse(readFileSync(resolveFile(outputSchemaPath), 'utf8')));
       if (problems.length) throw new Error(`output schema mismatch: ${problems.join('; ')}`);

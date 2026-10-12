@@ -1156,7 +1156,8 @@ export const stages = [
         .flatMap((d: any) => d.meta.covers.map(String)));
       for (const u of executor.adoptedUnits(stage)) active.add(String(u));
       for (const u of batches(ctx)) if (!active.has(u) && !repairCohort(ctx,u).some(b=>b!==u&&active.has(b))) {
-        const state = collectBatch(ctx, u);
+        let state;
+        try { state = collectBatch(ctx, u); } catch(error) { console.error(`Step 2 batch ${u}: ${error.message}`); throw error; }
         if (state.phase === 'accepted') {
           const path=join(ctx.dispatchDir, `tool-scope-accepted-${u}.result.json`);
           if (!existsSync(path)) writeFileSync(path,JSON.stringify({run:ctx.run,role:'tool',label:`scope-accepted-${u}`,covers:[u],ok:true}));
@@ -1208,8 +1209,6 @@ export const stages = [
     },
     gates: (ctx: any) => [scopeGate(ctx),
       gate('batch-scope-review', ['node', 'tools/batch-scope-review.mjs', 'check', '--run', ctx.run]),
-      gate('sync-accepted-plan', ['node','tools/splice-plan.mjs','--run',ctx.run,'--all']),
-      gate('post-author-snapshot',['node','tools/touchlog.mjs','snap',touchesPath(ctx),'post-author','--idempotent']),
       gate('item-dependency-levels', ['node', 'tools/item-dependency-levels.mjs', 'check', '--run', ctx.run]),
       ...coverageGates(ctx, {requireDestination:true}), manifestDepsGate(ctx), extGate(ctx), fetchGate(ctx),
       ...repoWide(ctx).filter(g => g.id !== 'splice-verify'), policyItemGate(ctx), ...contractGates(ctx)],

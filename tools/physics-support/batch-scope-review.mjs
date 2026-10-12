@@ -5,9 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { loadStep3 } from './frontier-snapshot.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { yaml } from './pathway-lib.mjs';
-import { repairWorkspacePath, repairWorkspaceChanges, integrateRepairWorkspace } from '../scope-repair-workspace.mjs';
 import { physicalInterface } from './physics-interface.mjs';
-import { MODEL_PROFILE_NAMES } from '../models.mjs';
 const read=path=>JSON.parse(readFileSync(path,'utf8'));
 const assert=(ok,message)=>{if(!ok)throw Error(message);};
 const safe=value=>{assert(/^[a-zA-Z0-9_-]+$/.test(value??''),'Invalid identity');return String(value);};
@@ -35,14 +33,16 @@ export function batchInput(root,run,batch,pass=null){
 }
 export function loopState(root,run,batch,pass=null){
   const path=join(loopDir(root,run,batch),'state.json');
-  return existsSync(path)?read(path):{version:1,run,batch:String(batch),reviews:[],repairs:[],phase:'review'};
+  const state=existsSync(path)?read(path):{version:1,run,batch:String(batch),reviews:[],repairs:[],phase:'review'};
+  if(state.phase==='review'&&state.reviews.length>=2||state.phase==='repair'&&state.repairs.length>=1){state.phase='held';state.reason='Single local repair exhausted; owner resolution required';}
+  return state;
 }
 function save(ctx,batch,state){atomic(join(loopDir(ctx.repo,ctx.run,batch),'state.json'),state);}
 export function accepted(root,run,batch){return loopState(root,run,batch).phase==='accepted';}
-export function engineRepairEligible(ctx,batch){const s=loopState(ctx.repo,ctx.run,batch);return s.phase!=='held'||(s.owner_repairs??[]).length<2;}
+export function engineRepairEligible(ctx,batch){return loopState(ctx.repo,ctx.run,batch).phase!=='held';}
 export function loopPattern(ctx,batches){
   const labels=[];
-  for(const batch of batches){const s=loopState(ctx.repo,ctx.run,batch);if(s.phase==='accepted')labels.push(`tool-scope-accepted-${batch}`);if(s.prepared)labels.push(`${s.prepared.role}-${s.prepared.label}`);}
+  for(const batch of batches){const s=loopState(ctx.repo,ctx.run,batch);if(s.phase==='accepted')labels.push(`tool-scope-accepted-${batch}`);if(s.prepared&&s.phase!=='held')labels.push(`${s.prepared.role}-${s.prepared.label}`);}
   return labels.length?new RegExp(`^(?:${labels.join('|')})\\.result\\.json$`):/^(?!)$/;
 }
 /** Actual item and page prerequisites; never infer order from batch numbers. */
@@ -109,34 +109,8 @@ export function consumers(root, changed, extra = [], current = null) {
   return [...paths].map(([id,all]) => ({ id,path:all[0],paths:all })).sort((a,b)=>a.id.localeCompare(b.id));
 }
 
-export function captureRepairControl(root,run,batch) {
-  const dir=loopDir(root,run,batch);
-  const protectedFiles=readdirSync(join(root,'research')).filter(name=>name.startsWith(`${run}-`)
-    && !name.startsWith(`${run}-dispatch`) && /\.(?:json|jsonl)$/.test(name)
-    && !name.startsWith(`${run}-batch-${batch}.`)).map(name=>join(root,'research',name));
-  const parent=resolve(dir,'..');
-  for(const sibling of readdirSync(parent).filter(name=>/^batch-\d+$/.test(name)))
-    for(const name of readdirSync(join(parent,sibling)))
-      if(/^(?:state\.json|owner-[a-f0-9]+\.json|(?:review|repair)-\d+\.(?:input\.json|task\.md|json))$/.test(name))protectedFiles.push(join(parent,sibling,name));
-  const guard=protectedFiles.map(path=>({path,bytes:readFileSync(path)}));
-  guard.root=root;guard.run=run;guard.batch=batch;
-  return guard;
-}
-export function verifyRepairControl(guard) {
-  const changed=guard.filter(row=>!existsSync(row.path)||!readFileSync(row.path).equals(row.bytes));
-  // Restore only controller-owned loop bookkeeping; keep content defects visible.
-  for(const row of changed.filter(row=>/-scope-review\/batch-/.test(row.path))){
-    mkdirSync(resolve(row.path,'..'),{recursive:true});writeFileSync(row.path,row.bytes);
-  }
-  const now=captureRepairControl(guard.root,guard.run,guard.batch), before=new Set(guard.map(row=>row.path));
-  const added=now.filter(row=>!before.has(row.path));
-  for(const row of added.filter(row=>/-scope-review\/batch-/.test(row.path)))unlinkSync(row.path);
-  assert(!changed.length&&!added.length,`Repair changed protected controller/review evidence: ${[...changed,...added].map(row=>row.path).join(', ')}`);
-}
-
-
 export function repairScope(ctx,batch,library=null){
-  const s=loopState(ctx.repo,ctx.run,batch);if(s.prepared?.bookkeeping_free&&s.prepared.write_files)return {files:s.prepared.write_files,batches:s.prepared.write_batches,consumers:s.prepared.consumer_scope??[]};
+  const s=loopState(ctx.repo,ctx.run,batch);if(s.prepared?.simple_loop&&s.prepared.write_files)return {files:s.prepared.write_files,batches:s.prepared.write_batches,consumers:s.prepared.consumer_scope??[]};
   const input=batchInput(ctx.repo,ctx.run,batch,ctx),owner=s.phase==='held', roots=new Set(input.inventory.items);
   library??=ctx.scopeLibrary??=readScopeItems(ctx.repo);
   const known=new Set(library.map(i=>i.id));
@@ -153,7 +127,7 @@ export function repairScope(ctx,batch,library=null){
 }
 export function repairCohort(ctx,batch){
   const s=loopState(ctx.repo,ctx.run,batch),cohort=new Set([String(batch)]);
-  if(s.phase!=='repair'&&s.phase!=='held')return [...cohort];
+  if(s.phase!=='repair')return [...cohort];
   const homes=new Set(repairScope(ctx,batch).batches);
   for(const b of new Set(snapshot(ctx).pages.map(p=>p.batch))){
     if(b===String(batch))continue;
@@ -165,7 +139,7 @@ export function repairCohort(ctx,batch){
 export function batchPlans(ctx,batches,slots=30){
   const selected=[],reserved=new Set();
   for(const batch of batches){
-    const s=loopState(ctx.repo,ctx.run,batch),writes=s.phase==='repair'||s.phase==='held';
+    const s=loopState(ctx.repo,ctx.run,batch),writes=s.phase==='repair';
     const locks=writes?repairScope(ctx,batch).batches:[];if(locks.some(b=>reserved.has(b)))continue;
     const p=batchPlan(ctx,batch);if(p){selected.push(p);for(const b of locks)reserved.add(b);}
     if(selected.length>=slots)break;
@@ -174,64 +148,63 @@ export function batchPlans(ctx,batches,slots=30){
 }
 export function batchPlan(ctx,batch,library=null){
   const s=loopState(ctx.repo,ctx.run,batch);if(s.phase==='accepted')return null;
-  assert(engineRepairEligible(ctx,batch),`Batch ${batch} held for owner after two escalation repairs`);
-  const phase=s.phase==='held'?'owner':s.phase,round=phase==='review'?s.reviews.length:phase==='owner'?(s.owner_repairs??[]).length+1:s.repairs.length+1;
-  assert(phase==='review'?round<3:round<=2,'Native repair budget exhausted');
+  assert(engineRepairEligible(ctx,batch),`Batch ${batch} held for owner resolution`);
+  const phase=s.phase,round=phase==='review'?s.reviews.length:s.repairs.length+1;
+  assert(phase==='review'?round<2:round<=1,'Single local repair budget exhausted; owner resolution required');
   const dir=loopDir(ctx.repo,ctx.run,batch),task=join(dir,`${phase}-${round}.task.md`),role=phase==='review'?'scope-reviewer':'scope-repairer';
-  if(!s.prepared?.bookkeeping_free){
-    const input=batchInput(ctx.repo,ctx.run,batch,ctx),p={phase,round,role,label:label(batch,phase,round),inventory:input.inventory,bookkeeping_free:true};
+  if(!s.prepared?.simple_loop){
+    const input=batchInput(ctx.repo,ctx.run,batch,ctx),p={phase,round,role,label:label(batch,phase,round),inventory:input.inventory,simple_loop:true};
     if(phase!=='review'){
       const scope=repairScope(ctx,batch,library);Object.assign(p,{write_files:scope.files,write_batches:scope.batches,consumer_scope:scope.consumers});
       p.before_interfaces=Object.fromEntries(scope.files.filter(f=>f.startsWith('items/')).map(f=>[f.slice(6,-3),publicInterface(readFileSync(join(ctx.repo,f),'utf8'))]));
     }
     s.prepared=p;atomic(join(dir,`${phase}-${round}.input.json`),p);save(ctx,batch,s);
-    const prior=s.reviews.at(-1),previousOwner=s.owner_repairs?.at(-1);
+    const prior=s.reviews.at(-1);
     writeFileSync(task,`# Batch ${batch}: ${phase} ${round}\n\nRun: ${ctx.run}\nBatch: ${batch}\nRound: ${round}\n`
       +`Read the complete assigned A/B pages and items, approved scope and actual supplier claims/proofs. Review the whole batch before reporting.\n`
       +`Pages: ${p.inventory.pages.join(', ')}\nItems: ${p.inventory.items.join(', ')}\n`
-      +(prior?`Consolidated findings: ${relative(ctx.repo,reportPath(ctx.repo,ctx.run,batch,'review',prior.round))}\n`:'')
-      +(previousOwner?`Previous escalation repair: ${relative(ctx.repo,reportPath(ctx.repo,ctx.run,batch,'owner',previousOwner.round))}\n`:'')
-      +(phase!=='review'?`Authorized source files: ${JSON.stringify(p.write_files)}. Work in the private repair workspace; necessary new batch-owned prerequisites may be authored locally.\n`:'')
+      +(prior?`Consolidated findings: ${JSON.stringify(read(reportPath(ctx.repo,ctx.run,batch,'review',prior.round)).findings)}\n`:'')
+      +(phase!=='review'?`Authorized source files: ${JSON.stringify(p.write_files)}. Edit these assigned source files directly. Resolve prerequisite gaps locally on the same page where possible.\n`:'')
       +`Repair suppliers before their affected consumers; pair dispatch has no prerequisite-completion requirement. Preserve sound approved claims and avoid Statement/Definition changes when possible. If a public interface changes, the same repairer owns all affected direct/indirect consumer checks and authorized repairs.\n`
       +`Your duties are review, repair and escalation only. Do not hash, recertify, reconcile dependency levels, maintain manifests/coverage/contracts/ledgers, or run formatting/gate batteries. The owner orchestrator handles that work.\n`
       +`Return only the result schema with prepared reviewed_items/reviewed_pages, verdict, concise findings and consumer_checks. Do not edit reports or engine state.\n`
-      +(phase==='owner'?`Resolve this escalation directly; successful resolution is accepted without another engine review.\n`:'')
+      +`Escalate to the owner if the final second review remains unsatisfied, or a significant prerequisite gap cannot be resolved locally on the same page. Otherwise use the single local repair and final review.\n`
       +`Previous repair consumers: ${JSON.stringify(s.repairs.at(-1)?.consumers??[])}.\n`);
   }
-  const p=s.prepared,previous=(phase==='owner'?s.owner_repairs??[]:s[phase==='review'?'reviews':'repairs']).at(-1);
+  const p=s.prepared,previous=s[phase==='review'?'reviews':'repairs'].at(-1);
   const receipt=previous?join(ctx.dispatchDir,`${role}-${label(batch,phase,previous.round)}.result.json`):null,session=receipt&&existsSync(receipt)?read(receipt).session_id:null;
-  return {role,label:p.label,job:phase==='review'?'audit':'authoring',covers:[String(batch)],...(phase==='owner'?{profile:MODEL_PROFILE_NAMES.sol61Medium}:{}),brief:`briefs/scope-${phase==='review'?'reviewer':phase==='owner'?'owner-repairer':'repairer'}.md`,task:relative(ctx.repo,task),outputSchema:'briefs/schemas/batch-scope-review.json',resultArtifact:relative(ctx.repo,reportPath(ctx.repo,ctx.run,batch,phase,round)),sessionHome:join(dir,`${role}-session`),...(session?{resumeSession:session}:{}),timeout:14400};
+  return {role,label:p.label,job:phase==='review'?'audit':'authoring',covers:[String(batch)],brief:`briefs/scope-${phase==='review'?'reviewer':'repairer'}.md`,task:relative(ctx.repo,task),outputSchema:'briefs/schemas/batch-scope-review.json',resultArtifact:relative(ctx.repo,reportPath(ctx.repo,ctx.run,batch,phase,round)),sessionHome:join(dir,`${role}-session`),...(session?{resumeSession:session}:{}),timeout:14400};
 }
 export function collectBatch(ctx,batch){
-  const s=loopState(ctx.repo,ctx.run,batch),p=s.prepared;if(!p||s.phase==='accepted'||s.phase==='held'&&p.phase!=='owner')return s;
+  const s=loopState(ctx.repo,ctx.run,batch),p=s.prepared;if(!p||s.phase==='accepted'||s.phase==='held')return s;
   const receipt=join(ctx.dispatchDir,`${p.role}-${p.label}.result.json`);if(!existsSync(receipt)||read(receipt).ok!==true)return s;
   const done=read(receipt);assert(done.run===ctx.run&&done.role===p.role&&same(done.covers??[],[String(batch)]),'Wrong worker receipt');
   const row=read(reportPath(ctx.repo,ctx.run,batch,p.phase,p.round));
+  if(row.decision==='escalate'&&!row.reviewed_items?.length&&!row.reviewed_pages?.length){
+    // An unreadable sandbox is a dispatch failure, not a completed mathematical round.
+    s.reason=row.reason;s.phase='held';delete s.prepared;save(ctx,batch,s);return s;
+  }
   assert(row.version===1&&row.run===ctx.run&&row.batch===String(batch)&&row.round===p.round,'Wrong batch report identity');
   assert(same(row.reviewed_items,p.inventory.items)&&row.reviewed_items.length===p.inventory.items.length&&same(row.reviewed_pages,p.inventory.pages)&&row.reviewed_pages.length===p.inventory.pages.length,'Incomplete batch report');
   assert(['accept','repair','escalate'].includes(row.decision)&&Array.isArray(row.findings)&&Array.isArray(row.consumer_checks),'Invalid batch verdict');
   assert(row.decision!=='accept'||!row.findings.length,'Acceptance has unresolved findings');
   if(p.phase==='review'){
-    assert(!row.findings.some(f=>['prerequisite','scope','outside-batch','uncertainty'].includes(f.type))||row.decision==='escalate','Significant gap requires escalation');
     const required=s.repairs.at(-1)?.consumers??[];assert(required.every(i=>row.consumer_checks.some(c=>c.id===i.id)),'Reviewer omitted affected consumers');
-    s.reviews.push({round:p.round,decision:row.decision});s.phase=row.decision==='accept'?'accepted':row.decision==='escalate'||s.reviews.length===3?'held':'repair';
+    s.reviews.push({round:p.round,decision:row.decision});s.phase=row.decision==='accept'?'accepted':row.decision==='escalate'||s.reviews.length>=2?'held':'repair';
   }else{
-    const work=repairWorkspacePath(ctx.repo,ctx.run,batch,p);assert(existsSync(work),'Repair omitted private workspace');
-    const added=readdirSync(join(work,'items'),{withFileTypes:true}).filter(e=>e.isFile()&&!existsSync(join(ctx.repo,'items',e.name))).map(e=>`items/${e.name}`);
-    const proposal=repairWorkspaceChanges(ctx.repo,ctx.run,batch,p,added),changed=[];
+    const changed=[];
     for(const [id,before] of Object.entries(p.before_interfaces??{})){
-      const file=join(work,'items',`${id}.md`);assert(existsSync(file),'Repair removed approved source scope');if(JSON.stringify(publicInterface(readFileSync(file,'utf8')))!==JSON.stringify(before))changed.push(id);
+      const file=join(ctx.repo,'items',`${id}.md`);assert(existsSync(file),'Repair removed approved source scope');
+      if(JSON.stringify(publicInterface(readFileSync(file,'utf8')))!==JSON.stringify(before))changed.push(id);
     }
-    const affected=changed.length?consumers(work,changed):[];
+    const affected=changed.length?consumers(ctx.repo,changed):[];
     for(const old of p.consumer_scope??[])if(old.paths.some(path=>changed.includes(path[0]))&&!affected.some(i=>i.id===old.id))affected.push(old);
     assert(affected.every(i=>row.consumer_checks.some(c=>c.id===i.id)),'Repair omitted affected consumers');
     assert(row.consumer_checks.every(c=>c.decision==='accept')||row.decision==='escalate','Unresolved consumer repair requires escalation');
     assert(row.decision!=='repair','Repairer must finish or escalate');
-    integrateRepairWorkspace(proposal);delete ctx.scopeLibrary;delete ctx.scopeSnapshot;
-    s.added_items=[...new Set([...(s.added_items??[]),...added.map(f=>f.slice(6,-3))])];
+    delete ctx.scopeLibrary;delete ctx.scopeSnapshot;
     const entry={round:p.round,changed,consumers:affected};
-    if(p.phase==='owner'){(s.owner_repairs??=[]).push(entry);s.phase=row.decision==='accept'?'accepted':'held';}
-    else{s.repairs.push(entry);s.phase=row.decision==='escalate'?'held':'review';}
+    s.repairs.push(entry);s.phase=row.decision==='escalate'?'held':'review';
   }
   s.reason=row.reason;delete s.prepared;save(ctx,batch,s);
   if(s.phase==='accepted')atomic(join(ctx.dispatchDir,`tool-scope-accepted-${batch}.result.json`),{run:ctx.run,role:'tool',label:`scope-accepted-${batch}`,covers:[String(batch)],ok:true});
