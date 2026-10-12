@@ -1189,7 +1189,7 @@ export const stages = [
           owner_repairs:(state.owner_repairs??[]).length};
       });
       writeFileSync(join(ctx.repo,receipt),JSON.stringify({version:1,run:ctx.run,at,dispositions,
-        battery_attempted:false,next:'Owner resolves escalations and resumes remaining native loops as needed; owner authorizes the full battery and progression to Step 3.'},null,2)+'\n');
+        battery_attempted:false,next:'Owner orchestrator handles metadata and recertification; owner authorizes the full battery and progression to Step 3.'},null,2)+'\n');
       if (firstPass) {
         stageState.ownerPassPausedAt = at;
         stageState.ownerPassReceipt = receipt;

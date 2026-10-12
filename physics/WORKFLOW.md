@@ -10,7 +10,7 @@ worker prompts, supporting tools, content and run state.
 | Step | Work | Agents and handoff |
 |---|---|---|
 | 1 | Prerequisite drift, scaffolding and complete initial authoring | Existing drift and scaffolding agents; authored items, A/B pages, contracts, source evidence and manifests |
-| 2 | Scope and prerequisite review/repair | One Luna-max reviewer and one Luna-max repairer per batch; complete current batch acceptance |
+| 2 | Scope and prerequisite review/repair only | Luna-max native reviewers/repairers; Sol 6.1 medium escalation repairs; orchestrator owns metadata and recertification |
 | 3 | Independent review | Batch readers, refuters and adjudicators, followed by cross-batch review and closure |
 | 4 | Batch review and judging | Exactly one read-only Sol 6.1/high reviewer per batch plus the judge sweep |
 | 5 | Adjudication and repair | Existing native repair, consumer maintenance, certification and gate routes |
@@ -51,95 +51,74 @@ nonlogical links are hash-bound context, not extra logical scheduling edges.
 
 ## Whole-batch scope/prerequisite loop
 
-Each batch has two roles: `scope-reviewer` (read-only) and `scope-repairer`
-(batch-owned writes), both `gpt-6-luna-max`. Reuse their respective sessions
-where available. The reviewer examines the **entire current batch on every
-round**, including added items and A/B pages, before returning one consolidated
-report. Significant unmet prerequisites, insufficient scope, desired outside
-changes and unresolved uncertainty escalate directly to the owner.
+Step 2 workers perform only scope/prerequisite review, source repair and
+escalation. Each batch has a read-only `scope-reviewer` and a native
+`scope-repairer`, both `gpt-6-luna-max`; reuse their respective sessions where
+available. Every review covers the entire current batch, including additions
+and complete A/B pages, before returning one consolidated substantive report.
+Significant unmet prerequisites, insufficient scope, desired outside changes
+and unresolved uncertainty escalate to the owner.
 
-The sequence is review/accept -> repair -> review/accept -> repair -> final
-review/accept. A failed third review holds for the owner. Native history under
-`research/RUN-scope-review/batch-N/` persists the three-review/two-repair cap
-through crashes, retries and redispatches. Worker process retries never reset
-these counters. A failed process cannot advance the loop. Owner resolution never
-refunds rounds or falsifies a worker's acceptance.
+The native sequence is review/accept -> repair -> review/accept -> repair ->
+final review/accept: at most three reviews and two local repairs. A failed third
+review holds for escalation resolution. Delegated escalation repair uses
+GPT-6.1 Sol medium and at most two owner-repair rounds. A resolved escalation is
+accepted directly without another engine review. Failed processes and retries
+do not spend or reset successful review/repair counters, and owner resolution
+never refunds rounds or falsifies a worker verdict.
 
-Repairers may add or edit locally owned items in their batch, maintaining
-owned manifests, pages, coverage, contracts and dependency inputs. Preserve the
-approved claims and pair/page identities; do not delete promised scope merely
-to clear a finding. Desired outside-batch edits escalate. The dispatcher protects
-native loop history and reports; native collection rejects outside-batch edits.
-Reviewers and repairers run concurrently when their assigned write/consumer
-scopes are disjoint. The controller integrates checked private repair proposals.
-The existing 30-agent global limit and 80-pair frontier limit remain.
+There is no prerequisite-acceptance dispatch barrier in Step 2. Share up to
+30 active workers among reviews, native repairs and delegated escalation
+repairs, and refill each available slot immediately. Inspect actual suppliers
+before their consumers within each repair. Independent write/read scopes may
+run concurrently; overlapping source or consumer scopes wait for the active
+writer to finish. Repairers work in private copies of authorized source files,
+and the controller integrates their source edits. Imported sources remain
+read-only. Preserve approved claims, inventory promises and pair/page identities;
+necessary intermediate results must be proved rather than difficult scope dropped.
 
-Step 2 is the exception to prerequisite-completion scheduling: dispatch pairs
-without waiting for supplier-pair acceptance. Share up to 30 active engine workers
-among whole-batch reviews, native local repairs, and delegated escalation repairs;
-refill each available slot immediately. Retain the native three-review/two-repair
-loop. Escalations use at most two delegated GPT-6.1 Sol medium repair rounds and
-are accepted directly when resolved, without another engine review.
+Whenever an original Statement/Definition changes, the same agent traces and
+checks all direct and indirect consumers using old/current dependencies, aliases
+and nonlogical uses. Physical public-interface changes have the same duty in
+physics. Review actual supplier uses and assumptions; make necessary surgical
+repairs within the authorized source scope and escalate required outside edits.
+Every affected consumer appears in the substantive result, and a subsequent
+native reviewer checks the preceding local repair's consumer dispositions.
 
-Within each repair, inspect suppliers before consumers and preserve sound claims.
-Independent repairers use private copies of their assigned files; the controller
-validates and integrates their edits. Overlapping write/consumer scopes wait for
-the active writer to finish. This protects shared files without requiring
-prerequisite-pair acceptance. Imported sources remain read-only. Scheduling keeps
-lightweight state views while file stamps match; collection retains full before
-images and acceptance binds current transitive supplier bytes.
+Workers have no hashing, rehashing, certification, recertification, numeric-level
+reconciliation, manifest/coverage/proof-contract maintenance, evidence-ledger or
+automated formatting/validator duties in Step 2. Their lightweight result contains
+only identity, prepared inventory, round, decision, defect types, concise findings
+and required consumer dispositions. The optional legacy `input_sha256` schema
+field exists only to accept already-running workers' old reports; new workers do
+not compute or report it. Honest uncertainty, rigorous complete arguments and
+faithful source use remain substantive obligations.
+
+The engine retains only the scheduling, private-write integration, routing and
+bounded-loop counters needed to coordinate this work. Minimal pass receipts
+record dispositions and counts. The orchestrator owns all metadata reconciliation,
+formatting/certification and pre-battery recertification after source workers drain;
+these are not extra worker tasks or review rounds. Existing manifests can serve
+as navigation context without becoming worker maintenance obligations.
 
 Process every pair through its bounded loops, then drain workers and write
 `research/RUN-step2-owner-pass.json` before pausing. Exhausted escalations remain
-explicit owner holds and must be resolved before the full battery. The owner
-chooses when to authorize that battery and progression to Step 3. If further work
-is resumed, its completion produces a fresh `RUN-step2-owner-battery-ready.json`
-and pauses again before the battery. Reconcile dependencies after source edits.
+explicit holds and must be resolved before the full battery. The owner alone
+authorizes that battery and advancement to Step 3 after the orchestrator's work.
+If further substantive work is resumed, its completion produces
+`RUN-step2-owner-battery-ready.json` and pauses again before the battery.
 
-Scheduling reads current manifests and the relevant authored carriers. Canonical
-dependency IDs resolve directly; the corpus alias index is loaded only when a
-used dependency requires alias resolution. Empty pre-authoring inventories do
-not require a corpus item scan. Each call observes current bytes; no dependency
-cache survives changes between controller ticks.
-
-Construction readiness reuses a run-local snapshot and per-item decisions across
-controller contexts while their inputs remain unchanged. Every use checks current
-manifest, coverage, plan, consumed supplier and missing-dependency file stamps;
-receipt stamps also invalidate cached decisions. Changed inputs clear dependency
-bytes and decisions together. If alias lookup was needed, the entire item inventory
-is stamp-bound and its change also rebuilds alias resolution. This cache accelerates
-scheduling without keeping acceptance current after an input change. A failed
-artifact pass discards its cache, including any partially built alias index.
-Recompute and reconcile dependencies after edits. Blocked suppliers hold their
-consumers. Acceptance binds transitive supplier bytes; changed inputs invalidate
-it and require owner resolution before another handoff.
-
-Whenever an original Statement/Definition changes, **both roles trace and check
-all direct and indirect consumers**, using the union of old/current dependencies
-and aliases. Physical public-interface changes have the same duty in physics.
-Repair affected owned consumers and escalate desired outside changes. Every
-required consumer must appear in the repair and subsequent reviewer report.
-
-Receipts are lightweight: exact identity/inventory, round, verdict, current input
-hash, defect types and one-sentence findings/repairs. No detailed per-item audit
-narratives or self-awarded judge stamps. Both prompts require unbiased assessment,
-honest uncertainty, complete authoritative source reading when needed, and logical
-validity overriding literature authority.
-
-After the owner resolves a hold, from the content workspace run:
+After resolving a hold, the owner may record direct acceptance from the content
+workspace:
 
 ```bash
 node tools/physics-support/batch-scope-review.mjs owner-resolve --run RUN --batch N --decision accept --reviewer OWNER --reason 'Exact resolution'
 ```
 
-Owner resolution confirms the flagged defects and affected consumers are resolved
-and accepts the exact current hash and inventory. It does not dispatch another
-engine review or reset native counters. `accept` is the default; historical
-`--decision continue` commands also accept directly. Historical owner
-continuations can be finalized with the same command after cancelling any
-redundant re-review. Apply resolutions only after active native repair writers drain.
-Resume/retry the same controller only after this explicit resolution. An owner
-acceptance receives native completion coverage at the next controller tick.
+This records resolved defects and affected consumers without another engine
+review or a counter reset. Historical `--decision continue` commands also accept
+directly. Apply owner resolution only after active repair writers drain; minimal
+engine completion coverage follows at the next controller tick.
 
 ## Independent review through closeout
 

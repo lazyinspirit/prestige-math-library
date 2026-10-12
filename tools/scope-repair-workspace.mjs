@@ -1,11 +1,10 @@
 // Repair agents write private copies; only the controller integrates checked edits.
 import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync, lstatSync, copyFileSync, symlinkSync, renameSync, unlinkSync } from 'node:fs';
 import { join, dirname, relative, resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 
-const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+const contents = bytes => bytes.toString('base64');
 const safe = file => { if (file.startsWith('/') || file.split('/').includes('..')) throw Error(`Unsafe repair path ${file}`); return file; };
-export const repairWorkspacePath = (root, run, batch, p) => join(root,'research',`${run}-scope-review`,`batch-${batch}`,`${p.phase}-${p.round}.workspace`,'work');
+export const repairWorkspacePath = (root, run, batch, p) => join(root,'research',`${run}-scope-review`,`batch-${batch}`,`${p.bookkeeping_free?'source-':''}${p.phase}-${p.round}.workspace`,'work');
 
 export function prepareRepairWorkspace(root, run, batch, p) {
   const work = repairWorkspacePath(root,run,batch,p), baseline = join(dirname(work),'baseline.json');
@@ -19,7 +18,7 @@ export function prepareRepairWorkspace(root, run, batch, p) {
       const contains = [...writable].some(path=>path.startsWith(file+'/'));
       if (entry.isDirectory() && contains) { mkdirSync(target,{recursive:true});mirror(source,file); }
       else if (writable.has(file) && existsSync(source)) {
-        mkdirSync(dirname(target),{recursive:true});copyFileSync(source,target);before[file]=hash(readFileSync(source));
+        mkdirSync(dirname(target),{recursive:true});copyFileSync(source,target);before[file]=contents(readFileSync(source));
       } else symlinkSync(source,target,entry.isDirectory()?'dir':'file');
     }
   }
@@ -30,7 +29,7 @@ export function prepareRepairWorkspace(root, run, batch, p) {
     for(const entry of readdirSync(source,{withFileTypes:true})) {
       const file=`${dir}/${entry.name}`, target=join(work,file);
       if(entry.isDirectory() && [...writable].some(path=>path.startsWith(file+'/'))){mkdirSync(target,{recursive:true});mirror(join(root,file),file);}
-      else if(writable.has(file)){copyFileSync(join(root,file),target);before[file]=hash(readFileSync(join(root,file)));}
+      else if(writable.has(file)){copyFileSync(join(root,file),target);before[file]=contents(readFileSync(join(root,file)));}
       else symlinkSync(join(root,file),target,entry.isDirectory()?'dir':'file');
     }
   }
@@ -40,7 +39,7 @@ export function prepareRepairWorkspace(root, run, batch, p) {
   }
   // Stop repository discovery from widening a worker's writable project root.
   mkdirSync(join(work,'.git'),{recursive:true});
-  writeFileSync(baseline,JSON.stringify({before,writable:[...writable]},null,2)+'\n');
+  writeFileSync(baseline,JSON.stringify({encoding:"bytes",before,writable:[...writable]},null,2)+'\n');
   return work;
 }
 
@@ -64,15 +63,15 @@ export function repairWorkspaceChanges(root,run,batch,p,additional=[]) {
     const target=join(work,file), original=baseline.before[file]??null;
     const bytes=existsSync(target)?readFileSync(target):null;
     if(bytes && lstatSync(target).isSymbolicLink())continue;
-    if((bytes?hash(bytes):null)!==original)changes.push({file,before:original,bytes});
+    if((bytes?contents(bytes):null)!==original)changes.push({file,before:original,bytes});
   }
-  for(const row of changes){const target=join(root,row.file), current=existsSync(target)?hash(readFileSync(target)):null;if(current!==row.before)throw Error(`Canonical repair input changed: ${row.file}`);}
+  for(const row of changes){const target=join(root,row.file), current=existsSync(target)?contents(readFileSync(target)):null;if(current!==row.before)throw Error(`Canonical repair input changed: ${row.file}`);}
   return {root,work,changes};
 }
 
 export function integrateRepairWorkspace(proposal) {
   for(const row of proposal.changes){
-    const target=resolve(proposal.root,safe(row.file)), current=existsSync(target)?hash(readFileSync(target)):null;
+    const target=resolve(proposal.root,safe(row.file)), current=existsSync(target)?contents(readFileSync(target)):null;
     if(current!==row.before)throw Error(`Canonical repair input changed: ${row.file}`);
   }
   for(const {file,bytes} of proposal.changes){
