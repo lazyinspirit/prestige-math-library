@@ -1,65 +1,42 @@
-# Mandatory physics instructions
+# Step 1 — physics scaffolding and authoring
 
-Read `CLAUDE.md`, `SCHEMA.md`, and `../PHYSICS-CONTENT-MODEL.md`. Follow the assigned role and scope. These rules apply to every physics framework.
+- Read `CLAUDE.md`, `SCHEMA.md`, `WORKFLOW.md`, `../PHYSICS-CONTENT-MODEL.md`, assigned tasks/designs, the current plan and batch evidence. Read `research/<run>-owner-authoring-direction.md` if present; it overrides stale tasks/designs. The plan controls other design conflicts; record them.
+- Work in `physics/`; edit only assigned draft items, A/B pages and batch evidence. Imported mathematics and root mathematical originals are read-only; leave published content, shared plans, engine state and verdicts to the owner.
+- **Mathematical soundness is non-negotiable.** Never pretend to understand an argument. If unsure, consult authoritative sources and read the complete relevant reasoning. Logical validity overrides source authority. Escalate unresolved uncertainty to the owner with exact evidence.
+- Identify **all prerequisites**, including implicit assumptions, definitions, well-definedness and transitive dependencies. Read supplier statements and proofs; verify hypotheses, conventions, direction and axiom strength.
+- Read `research/<run>-batch-dependency-levels.json`; determine the item inventory, `deps` and levels before writing carriers. **Author suppliers before consumers within the assigned batch.** Set `dependency_level` to zero without in-run suppliers, otherwise one plus their maximum level. Recompute after changes; escalate cycles.
+- Create missing local definitions and intermediate results as new items on the **A page**, with explicit dependencies and complete proofs, before using them.
+- Escalate significant prerequisite theory that cannot be resolved locally, cross-batch changes and page-capacity problems to the owner. State the gap, affected claims, proposed suppliers and placement. Never weaken claims or omit prerequisites to fit.
+- Define every technical term or cite an exact earlier definition and state its relevant content. Specify objects, domains, regularity, hypotheses, units and conventions.
+- Fully justify **every proof step**. Write complete conditional proofs, refutations, counterexamples and verification arguments; a strategy or citation alone does not supply a missing argument.
+- **Proof format:** Label facts and hypotheses in `## Facts & Assumptions` with `[F1]`, `[A1]`, or `[L1]` entries and exact supplier wikilinks. Supply `proof_strategy` and `**Given:**`; write at least two `phase.step` steps (`1.1`, `1.2`, …), separated by blank lines. End every step with valid justification tags naming its inputs; cite only earlier steps. Put punctuation before tags and `∎` after the final group. Match labels and step numbers exactly in the proof contract.
+- Distinguish adopted postulates, derived predictions, reported observations and statistical inference. Physics proofs are conditional deductions; experiments do not prove models. Preserve apparatus assumptions, sampling conditions, uncertainty and empirical qualifications. Never invent measurements or precision.
+- Preserve `domain`, `library`, `dependency_roles` and `physical_scope`. Mathematical items use only mathematical prerequisites; develop missing mathematics locally. Treat draft/planned suppliers at their actual inspected statement, hypotheses and proof status, never as proved by their label.
+- Read authoritative full-text sources; normally use two independent treatments per A page, including a book or full lecture notes. Record URLs, locators, supported items and each harvested result’s disposition. Verify retrieval by inspection and `source-fetch-check --stamp`; never invent reading or fetch evidence.
+- After a retrieval failure, search alternatives and make at most five recovery retries, stopping on success; reuse prior attempts. After five failures, supply complete alternative proofs or escalate. Preserve source history; record attempts, searches and per-item arguments/dependencies in `source_resolution` under `tools/physics-support/source-resolution.mjs`. Mark `dropped` only with justified certainty; otherwise `owner-escalation`. Dropping a source never waives mathematical coverage.
+- Complete assigned items, A/B pages, manifests, proof contracts, coverage, notes, readiness records and cross-batch dependency inputs. Preserve unchanged ready content; respect the 100-item page cap and schema requirements.
+- Generate proof contracts from finished arguments, with actual steps, claims, inputs, exact supplier excerpts, boundary cases and applicable finite checks. Keep manifests, pages, coverage and dependency records consistent.
+- Run required scoped checks, including dependency levels and `node tools/physics-support/proof-layout.mjs` on explicitly changed items after final edits. Record actual results and blockers. Use `node tools/physics-support/step1-decisions.mjs record` to mark each final item `ready` only with complete prerequisites, placement and contract; otherwise `escalated`. Include examined dependencies and evidence; never use `--owner` or overwrite an escalation.
+- Keep proofs concise: retain essential reasoning and caveats; remove repetition and filler. Report defects with exact item IDs and evidence. Completion records do not constitute independent approval.
 
-**Define, do not merely name.** Be as mathematically rigorous and explicit as possible. Before using a technical term, give its mathematical definition or identify an exact earlier definition and state its relevant content. Specify objects, domains, maps, regularity, hypotheses, and conventions. Use published, draft or planned mathematics suppliers with exact statements, hypotheses and honest proof status; complete remaining gaps locally.
+## Proof example
 
-**Example—classical EM:** write $\mathbf E,\mathbf B:\Omega\times I\to\mathbb R^3$, with spatial region $\Omega\subseteq\mathbb R^3$, time interval $I$, and stated regularity; at fixed time these are spatial vector fields. Specify units. Do not assume smoothness across point charges or surface sources; state exclusions or use an appropriate weak/distributional formulation. Likewise, define a worldline as a curve with specified domain and conditions, and a reference frame as a precise geometric object appropriate to the framework.
-
-**Model deductions and empirical observations are distinct.** A physics proof establishes a logical consequence of explicitly stated model postulates, mathematical hypotheses and idealizations; it does not establish that the model or its postulates describe nature. Experiments report source-backed observations with apparatus, calibration, sampling and uncertainty qualifications. Comparing predictions with observations tests the combined model and apparatus assumptions; agreement is evidence, not a deductive proof of the model. Explicitly distinguish adopted assumptions, derived predictions, reported observations and statistical inference. If a deduction uses measured inputs, state them as qualified empirical premises and carry their uncertainty and conditions into the conclusion.
-
-**Evidence is statistical.** Separate predictions, observations, and inference. State preparation, apparatus assumptions, sampling model, uncertainty, and source limitations. Never invent measurements or statistical precision. Carry empirical qualifications into downstream conclusions.
-
-**Example—double slit:** each detection is localized; fringes concern the accumulated distribution. A finite sample can lack visible fringes with nonzero probability under ordinary coherent sampling models. Agreement does not prove quantum mechanics; missing fringes do not automatically falsify it. Test a specified competing model, not “all classical physics.” A p-value is not the probability that a theory is false. Classical waves also interfere, and reviewer confidence is not empirical certainty.
-
-Postulates are adopted assumptions; experiments report source-backed observations, not proofs. Physics theorems and thought experiments require complete conditional deductions. Use schema classifications, dependency roles, uncertainty records, and nonproof reviews. Keep evidence links separate from acyclic prerequisites. Mathematical items cannot depend on physics; imports and the root mathematics workspace are read-only. Physical public-interface changes require consumer review.
-
-Authors supply definitions and prerequisites; reviewers and adjudicators check them, source fidelity, and statistical qualifications. Reject undefined reasoning and fabricated certainty.
-
-**Algorithms.** Use `kind: algorithm`, an `alg-` ID and `## Definition`; algorithms function identically to definitions. Specify inputs, outputs, admissible conditions and exact instructions, including branches, calls and loops. A larger algorithm may compose or repeatedly invoke earlier smaller algorithms/procedures: put those supplier IDs in the larger algorithm's `deps`. Repetition in an execution does not create a self-edge or permit a prerequisite cycle. State correctness, termination, complexity and other properties in separate proved lemmas, theorems, propositions or corollaries; use `justified_by` for results establishing well-definedness under the ordinary definition rule. Procedure instructions are not a phase proof. Review the defining procedure and its actual prerequisites; changes to its Definition trigger the ordinary direct/indirect consumer checks. In physics, algorithms may have either domain like definitions. Pure mathematical properties use mathematical result kinds and only mathematical prerequisites; consequences relying on physical premises use `physics-theorem` (or `thought-experiment`). Preserve physical scope and empirical qualifications.
-
+```markdown
+---
+proof_strategy: direct
 ---
 
-# Step 1 — scaffolding and complete initial authoring
+## Facts & Assumptions
 
-**Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
+**Given:** Time interval $I\subseteq\mathbb R$ open, $t_0\in I$, constant mass $m>0$, scalar velocity $v\in C^1(I,\mathbb R)$ and force $F=0$. Use SI units.
 
-- Read CLAUDE.md, SCHEMA.md, WORKFLOW.md, the assigned task/designs, current plan and batch evidence. If `research/<run>-owner-authoring-direction.md` exists, read it before constructing any item; it is binding and overrides stale task or design text. The plan controls other design conflicts; record the conflict.
-- Write assigned manifests, items, complete A/B pages, proof contracts, coverage, notes, item-readiness records and consumer-batch dependency inputs. Do not edit published content, shared plans, engine state or verdicts.
-- Read `research/<run>-batch-dependency-levels.json` before construction. The engine computes batch levels mechanically before dispatch and releases consumers only after their suppliers are complete.
-- Determine the planned item dependency graph and levels before writing any item or page carrier. Author suppliers before consumers in ascending item dependency order; update the graph/levels before continuing after a dependency change.
-- Build each item once in prerequisite order. Preserve unchanged ready items. Record an outcome before moving to the next item.
-- Label every scaffold manifest item with `dependency_level`. Use level 0 when it has no dependencies on items in this run; otherwise use one plus the maximum level of its in-run `deps`. Published and other out-of-run suppliers do not raise this level. Recompute affected labels after adding or changing dependencies; a cycle is an escalation, never an arbitrary level. Run `node tools/physics-support/item-dependency-levels.mjs check --run RUN` after the batch's suppliers are scaffolded.
-- Verify actual transitive proof dependencies, including implicit uses and well-definedness. Read the necessary statements and proofs; check hypotheses, direction, conventions and axiom strength. Allow no missing, circular, forward or inadequate dependency; page membership and publication status are not proof checks.
-- Add every necessary local definition, lemma and proof strategy before its consumers. Use stable unused IDs and explicit `deps` arrays. Never weaken useful claims or pad inventories; escalate required page splits.
-- You are responsible for mathematical closure of every assigned pair. Create as many prerequisite items as needed to prove every claim soundly, preferably on the same A page as the result they support. Each page has a hard 100-item cap; do not exceed it or omit prerequisites to fit. Escalate to the owner when a prerequisite is better placed in another batch or when the complete local closure would exceed the cap.
-- Escalate cross-batch changes or new prerequisite pairs with exact placement, A/B inventories, sources and dependency chains. Do not change selected pairs or treat planned suppliers as published.
-- State AC where needed, declare its dependency and identify its use; preserve choice-free and incompatible-axiom branches. Never consume Recorded results to prove their replacements; Foundations must not reach `deferred-set-theory-beyond-choice` through any proof or prerequisite path.
-- Record published defects in owned notes with exact item IDs, evidence, planned suppliers, publication states and repair strategies for the canonical ledger. Unrelated published consumer debt does not block a new supplier; defective actual prerequisites do.
-- Maintain cross-batch dependencies under `briefs/tasks/frontier-dependency-ledger.md`.
+[A1] Adopted model equation: $mv'(t)=F(t)$ on $I$.
 
-## Sources
+[F1] [[cor-zero-derivative-implies-constant]]: a continuous interval function with zero interior derivative is constant.
 
-- Search authoritative web sources for unfamiliar mathematics and read complete relevant arguments. Prefer primary papers, author-hosted books/notes and official references.
-- Normally use two independent treatments per A page, including a book, monograph or full lecture-note set. Record URLs, exact locators and supported items.
-- Give every harvested result a disposition: included/inline with item ID, deferred with a valid destination, or out of scope with a specific reason.
-- Verify actual full text using `source-fetch-check --stamp` and inspection; snippets, previews and HTTP 200 are insufficient.
-- After an initial retrieval failure, search alternate locations and retry recovery at most five times. Stop on success. Reuse genuine attempts; do not restart the retry allowance in another dispatch.
-- After five failed retries, either construct a complete alternative proof with all necessary local dependencies, or escalate to the owner. Use accessible authoritative treatments when helpful. Do not claim an outage proves permanent unavailability.
-- Use an alternative only with full mathematical confidence. Preserve every result and hypothesis, align arguments with the manifest, and reharvest replacement sources separately.
-- Retain the original source and dispositions as history. A confident alternative requires `source_resolution`: `status: dropped`, `decided_by: step-1-scaffolder`, `confidence: certain`, `reason`, `search_summary`, `searches: [{query, outcome}]`, `attempts: [{url, at, outcome}]` (initial failure plus five retries), and `alternatives: [{item, argument, deps}]` for every included/inline result.
-- Otherwise set `source_resolution.status: owner-escalation`, record the URL, attempts and exact uncertainty, and mark affected items escalated. Continue other items.
-- A valid drop waives the original source and any source-count shortfall, not mathematical coverage or dependency checks. Never fabricate confidence or fetch evidence.
+## Proof
 
-## Completion
+1.1 Divide [A1] by $m>0$: $v'(t)=0$ throughout $I$. [given, A1, algebra]
 
-- Record `ready` only after the complete authored item, adequate met prerequisites, page placement and proof contract exist; otherwise record `escalated`. Include examined dependency IDs and evidence in each record.
-- Use `node tools/physics-support/step1-decisions.mjs record --run RUN --item ID --decision ready|escalated --dependencies JSON --reason TEXT`. Never use `--owner` or overwrite an escalation.
-- Run coverage, whole-run manifest dependencies/policy, plan, external-reference and source checks. Record actual results and unresolved findings in batch notes.
-- Owner/operator reconciliation and the full engine gate follow construction; neither a worker exit nor a readiness record is independent mathematical approval. Step 3 provides that review.
-
-## Complete initial authoring
-
-You own every initial item and A/B page in your batch. Write complete conditional proofs, refutations, counterexamples and verification arguments, explicit definitions, and source-backed postulates/observations according to SCHEMA.md. A proof strategy is not an authored proof. Logical validity overrides literature authority; independently check claims and actual supplier uses. Never pretend to understand unfamiliar reasoning. Preserve approved claims and empirical qualifications. Escalate significant unmet prerequisites directly to the owner, even when their proposed placement is inside your batch; do not bury them in unfinished prose. Preserve all existing source-recovery, capacity, scope and owner-held escalation procedures.
-
-Generate item-specific proof contracts from the finished arguments, including actual numbered steps, claims, inputs, exact citation excerpts, boundary cases and genuine finite checks where applicable. Register every item in its manifest, coverage, contracts and page; update dependency levels after changes. Run proof-layout on explicitly changed item paths after final edits. Maintain concise checkpoint notes and batch-owned dependency evidence. Record readiness only after writing the final carrier so its input hash is current. Handoff requires nonempty item/page carriers and the batch proof-contract file; no later step supplies missing initial authoring. Independent review follows in Step 2.
+1.2 Apply [F1] to $v$: $v(t)=v(t_0)$ on $I$. This is a model deduction. [given, F1, step 1.1] ∎
+```

@@ -324,12 +324,12 @@ if (taskPath) {
 }
 
 const resolvedBrief = pathResolve(resolveFile(briefPath));
+if (resolvedBrief !== join(REPO, 'briefs/beta-scaffold.md')) {
 prompt += `\n\n## Mathematical honesty\n\nBe honest about your understanding of the mathematics. If unsure, search the web
 and consult authoritative sources, reading the complete relevant argument.
 Report unresolved uncertainty and potentially defective published items to the
 owner with exact evidence. Never invent confidence, source reading or proof
 completion. This rule applies to every workflow role, including reviewers.\n`;
-if (resolvedBrief !== join(REPO, 'briefs/beta-scaffold.md')) {
 prompt += `\n\n## Mathematical context continuity\n\nRead exact task paths first. Search current owned artifacts before historical runs;
 exclude dispatch logs from routine content searches. Fetch complete relevant source
 sections and dependency statements, using bounded output chunks. A truncated result

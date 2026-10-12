@@ -293,7 +293,7 @@ for (const b of batches) {
 
   const pages = aPagesOf(b);
   const cats = [...new Set(pages.map((p) => p.category))];
-  const lines = ['# Physics content contract', '', 'Read SCHEMA.md and CLAUDE.md. Apply the class-specific source/proof rules; imported mathematical suppliers are read-only. Preserve domain, library, dependency_roles, physical_scope, and empirical qualifications.', ''];
+  const lines = [];
   lines.push(`# Batch ${b} of run \`${run}\` — ${pages.map((p) => p.title).join(' · ')}`);
   lines.push('');
   lines.push(`${pages.length} A/B pair${pages.length === 1 ? '' : 's'} in ${cats.join(' and ')}. Own only these pairs.`);
@@ -324,10 +324,9 @@ for (const b of batches) {
       lines.push('Read every listed design location. Record which one controls and why.');
       lines.push('');
     }
-    lines.push('Step 1 must fully author every item, A/B page and proof contract; preserve escalation mechanisms and escalate significant unmet prerequisites to the owner.');
-    lines.push('Read the complete design section and preserve its scope, conventions, warnings, and proof route. This generated file contains no mathematical review.');
+    lines.push('- Read the complete design section; preserve its scope, conventions, warnings and proof route.');
     lines.push('');
-    lines.push('Compare the design with `research/plan-spec.json`. The current plan controls this run; record every conflict in the batch notes.');
+    lines.push('- Compare the design with `research/plan-spec.json`; record conflicts in batch notes.');
     lines.push('');
   }
 

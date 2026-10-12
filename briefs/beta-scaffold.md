@@ -1,44 +1,39 @@
-# Step 1 — scaffolding and complete initial authoring
+# Step 1 — mathematics scaffolding and authoring
 
-**Proof repair quality for item editors.** When editing an item file, make every proof repair mathematically sound and as concise as the argument allows. State essential hypotheses and important caveats clearly; remove repeated talking points, filler, and padding that add no mathematical content. Add intermediate lemmas to satisfy unmet prerequisite if possible.
+- Read `CLAUDE.md`, `SCHEMA.md`, `WORKFLOW.md`, assigned tasks/designs, the current plan and batch evidence. Read `research/<run>-owner-authoring-direction.md` if present; it overrides stale tasks/designs. The plan controls other design conflicts; record them.
+- Edit only assigned draft items, A/B pages and batch evidence; leave published content, shared plans, engine state and verdicts to the owner.
+- **Mathematical soundness is non-negotiable.** Never pretend to understand an argument. If unsure, consult authoritative sources and read the complete relevant reasoning. Logical validity overrides source authority. Escalate unresolved uncertainty to the owner with exact evidence.
+- Identify **all prerequisites**, including implicit assumptions, definitions, well-definedness and transitive dependencies. Read supplier statements and proofs; verify hypotheses, conventions, direction and axiom strength.
+- Read `research/<run>-batch-dependency-levels.json`; determine the item inventory, `deps` and levels before writing carriers. **Author suppliers before consumers within the assigned batch.** Set `dependency_level` to zero without in-run suppliers, otherwise one plus their maximum level. Recompute after changes; escalate cycles.
+- Create missing local definitions and intermediate results as new items on the **A page**, with explicit dependencies and complete proofs, before using them.
+- Escalate significant prerequisite theory that cannot be resolved locally, cross-batch changes and page-capacity problems to the owner. State the gap, affected claims, proposed suppliers and placement. Never weaken claims or omit prerequisites to fit.
+- Define every technical term or cite an exact earlier definition and state its relevant content. Specify objects, domains, hypotheses and conventions.
+- Fully justify **every proof step**. Write complete proofs, refutations, counterexamples and verification arguments; a strategy or citation alone does not supply a missing argument.
+- **Proof format:** Label facts and hypotheses in `## Facts & Assumptions` with `[F1]`, `[A1]`, or `[L1]` entries and exact supplier wikilinks. Supply `proof_strategy` and `**Given:**`; write at least two `phase.step` steps (`1.1`, `1.2`, …), separated by blank lines. End every step with valid justification tags naming its inputs; cite only earlier steps. Put punctuation before tags and `∎` after the final group. Match labels and step numbers exactly in the proof contract.
+- State required axioms, declare their dependencies and identify their uses. Preserve choice-free arguments and distinct axiom branches. Never use a result to prove its own replacement; follow schema restrictions on unproved suppliers.
+- Read authoritative full-text sources; normally use two independent treatments per A page, including a book or full lecture notes. Record URLs, locators, supported items and each harvested result’s disposition. Verify retrieval by inspection and `source-fetch-check --stamp`; never invent reading or fetch evidence.
+- After a retrieval failure, search alternatives and make at most five recovery retries, stopping on success; reuse prior attempts. After five failures, supply complete alternative proofs or escalate. Preserve source history; record attempts, searches and per-item arguments/dependencies in `source_resolution` under `tools/source-resolution.mjs`. Mark `dropped` only with justified certainty; otherwise `owner-escalation`. Dropping a source never waives mathematical coverage.
+- Complete assigned items, A/B pages, manifests, proof contracts, coverage, notes, readiness records and cross-batch dependency inputs. Preserve unchanged ready content; respect the 100-item page cap and schema requirements.
+- Generate proof contracts from finished arguments, with actual steps, claims, inputs, exact supplier excerpts, boundary cases and applicable finite checks. Keep manifests, pages, coverage and dependency records consistent.
+- Run required scoped checks, including dependency levels and `node tools/proof-layout.mjs` on explicitly changed items after final edits. Record actual results and blockers. Use `node tools/step1-decisions.mjs record` to mark each final item `ready` only with complete prerequisites, placement and contract; otherwise `escalated`. Include examined dependencies and evidence; never use `--owner` or overwrite an escalation.
+- Keep proofs concise: retain essential reasoning and caveats; remove repetition and filler. Report defects with exact item IDs and evidence. Completion records do not constitute independent approval.
 
-- Read CLAUDE.md, SCHEMA.md, WORKFLOW.md, the assigned task/designs, current plan and batch evidence. If `research/<run>-owner-authoring-direction.md` exists, read it before constructing any item; it is binding and overrides stale task or design text. The plan controls other design conflicts; record the conflict.
-- Write assigned manifests, items, complete A/B pages, proof contracts, coverage, notes, item-readiness records and consumer-batch dependency inputs. Do not edit published content, shared plans, engine state or verdicts.
-- Read the current `research/<run>-batch-dependency-levels.json` row and dispatch task metadata for your batch. Batch levels are calculated before construction and refreshed from current prerequisites before dispatch; external suppliers remain context. Supplier readiness and writer-drain checks still control release.
-- Build each item once in prerequisite order. Preserve unchanged ready items. Record an outcome before moving to the next item.
-- Before writing any item carriers, determine the scaffold inventory and logical `deps`, then label every scaffold manifest item with `dependency_level`. Use level 0 when it has no dependencies on items in this run; otherwise use one plus the maximum level of its in-run `deps`. Author carriers in ascending item level, suppliers before consumers; item levels cannot be determined before the item inventory exists. Published and other out-of-run suppliers do not raise this level. Recompute affected labels after adding or changing dependencies; a cycle is an escalation, never an arbitrary level. Run `node tools/item-dependency-levels.mjs check --run RUN` after the batch's suppliers are scaffolded.
-- Verify actual transitive proof dependencies, including implicit uses and well-definedness. Read the necessary statements and proofs; check hypotheses, direction, conventions and axiom strength. Allow no missing, circular, forward or inadequate dependency; page membership and publication status are not proof checks.
-- Add every necessary local definition, lemma and proof strategy before its consumers. Use stable unused IDs and explicit `deps` arrays. Never weaken useful claims or pad inventories; escalate required page splits.
-- You are responsible for mathematical closure of every assigned pair. Create as many prerequisite items as needed to prove every claim soundly, preferably on the same A page as the result they support. Each page has a hard 100-item cap; do not exceed it or omit prerequisites to fit. Escalate to the owner when a prerequisite is better placed in another batch or when the complete local closure would exceed the cap.
-- Escalate cross-batch changes or new prerequisite pairs with exact placement, A/B inventories, sources and dependency chains. Do not change selected pairs or treat planned suppliers as published.
-- State AC where needed, declare its dependency and identify its use; preserve choice-free and incompatible-axiom branches. Never consume Recorded results to prove their replacements; Foundations must not reach `deferred-set-theory-beyond-choice` through any proof or prerequisite path.
-- Record published defects in owned notes with exact item IDs, evidence, planned suppliers, publication states and repair strategies for the canonical ledger. Unrelated published consumer debt does not block a new supplier; defective actual prerequisites do.
-- Maintain cross-batch dependencies under `briefs/tasks/frontier-dependency-ledger.md`.
+## Proof example
 
-## Sources
+```markdown
+---
+proof_strategy: direct
+---
 
-- Search authoritative web sources for unfamiliar mathematics and read complete relevant arguments. Prefer primary papers, author-hosted books/notes and official references.
-- Normally use two independent treatments per A page, including a book, monograph or full lecture-note set. Record URLs, exact locators and supported items.
-- Give every harvested result a disposition: included/inline with item ID, deferred with a valid destination, or out of scope with a specific reason.
-- Verify actual full text using `source-fetch-check --stamp` and inspection; snippets, previews and HTTP 200 are insufficient.
-- After an initial retrieval failure, search alternate locations and retry recovery at most five times. Stop on success. Reuse genuine attempts; do not restart the retry allowance in another dispatch.
-- After five failed retries, either construct a complete alternative proof with all necessary local dependencies, or escalate to the owner. Use accessible authoritative treatments when helpful. Do not claim an outage proves permanent unavailability.
-- Use an alternative only with full mathematical confidence. Preserve every result and hypothesis, align arguments with the manifest, and reharvest replacement sources separately.
-- Retain the original source and dispositions as history. A confident alternative requires `source_resolution`: `status: dropped`, `decided_by: step-1-scaffolder`, `confidence: certain`, `reason`, `search_summary`, `searches: [{query, outcome}]`, `attempts: [{url, at, outcome}]` (initial failure plus five retries), and `alternatives: [{item, argument, deps}]` for every included/inline result.
-- Otherwise set `source_resolution.status: owner-escalation`, record the URL, attempts and exact uncertainty, and mark affected items escalated. Continue other items.
-- A valid drop waives the original source and any source-count shortfall, not mathematical coverage or dependency checks. Never fabricate confidence or fetch evidence.
+## Facts & Assumptions
 
-## Completion
+**Given:** A nonempty open interval $I$, $f\in C^1(I,\mathbb R)$ and $f'=0$. Prove $f$ constant.
 
-- Record `ready` only after the complete authored item, adequate met prerequisites, page placement and proof contract exist; otherwise record `escalated`. Include examined dependency IDs and evidence in each record.
-- Use `node tools/step1-decisions.mjs record --run RUN --item ID --decision ready|escalated --dependencies JSON --reason TEXT`. Never use `--owner` or overwrite an escalation.
-- Run coverage, whole-run manifest dependencies/policy, plan, external-reference and source checks. Record actual results and unresolved findings in batch notes.
-- Owner/operator reconciliation and the full engine gate follow construction; neither a worker exit nor a readiness record is independent mathematical approval. Step 3 provides that review.
+[F1] [[cor-mean-value-theorem]]: continuity on $[a,b]$ and differentiability on $(a,b)$ imply $f(b)-f(a)=f'(c)(b-a)$ for some $c\in(a,b)$.
 
-## Complete initial authoring
+## Proof
 
-You own every initial item and A/B page in your batch. Write complete conditional proofs, refutations, counterexamples and verification arguments, explicit definitions, and source-backed postulates/observations according to SCHEMA.md. A proof strategy is not an authored proof. Logical validity overrides literature authority; independently check claims and actual supplier uses. Never pretend to understand unfamiliar reasoning. Preserve approved claims and empirical qualifications. Escalate significant unmet prerequisites directly to the owner, even when their proposed placement is inside your batch; do not bury them in unfinished prose. Preserve all existing source-recovery, capacity, scope and owner-held escalation procedures.
+1.1 Choose arbitrary $a<b$ in $I$. The restriction satisfies [F1], so $f(b)-f(a)=f'(c)(b-a)$ for some $c\in(a,b)$. [given, F1, choose]
 
-Generate item-specific proof contracts from the finished arguments, including actual numbered steps, claims, inputs, exact citation excerpts, boundary cases and genuine finite checks where applicable. Register every item in its manifest, coverage, contracts and page; update dependency levels after changes. Run proof-layout on explicitly changed item paths after final edits. Maintain concise checkpoint notes and batch-owned dependency evidence. Record readiness only after writing the final carrier so its input hash is current. Handoff requires nonempty item/page carriers and the batch proof-contract file; no later step supplies missing initial authoring. Independent review follows in Step 2.
-
-**Algorithms.** Use `kind: algorithm`, an `alg-` ID and `## Definition`; algorithms function identically to definitions. Specify inputs, outputs, admissible conditions and exact instructions, including branches, calls and loops. A larger algorithm may compose or repeatedly invoke earlier smaller algorithms/procedures: put those supplier IDs in the larger algorithm's `deps`. Repetition in an execution does not create a self-edge or permit a prerequisite cycle. State correctness, termination, complexity and other properties in separate proved lemmas, theorems, propositions or corollaries; use `justified_by` for results establishing well-definedness under the ordinary definition rule. Procedure instructions are not a phase proof. Review the defining procedure and its actual prerequisites; changes to its Definition trigger the ordinary direct/indirect consumer checks.
+1.2 Since $f'(c)=0$, $f(b)=f(a)$. Arbitrary endpoints give constancy on $I$. [given, step 1.1, algebra] ∎
+```

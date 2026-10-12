@@ -319,10 +319,9 @@ for (const b of batches) {
       lines.push('Read every listed design location. Record which one controls and why.');
       lines.push('');
     }
-    lines.push('Step 1 must fully author every item, A/B page and proof contract; preserve escalation mechanisms and escalate significant unmet prerequisites to the owner.');
-    lines.push('Read the complete design section and preserve its scope, conventions, warnings, and proof route. This generated file contains no mathematical review.');
+    lines.push('- Read the complete design section; preserve its scope, conventions, warnings and proof route.');
     lines.push('');
-    lines.push('Compare the design with `research/plan-spec.json`. The current plan controls this run; record every conflict in the batch notes.');
+    lines.push('- Compare the design with `research/plan-spec.json`; record conflicts in batch notes.');
     lines.push('');
   }
 
