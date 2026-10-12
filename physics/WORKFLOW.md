@@ -184,7 +184,9 @@ requests are excluded from this input selection.
 Imported snapshots remain immutable when an upstream mathematics folder is
 renamed. An import receipt may record `source_path` for the same page filename;
 the import gate checks its canonical page identity and original pinned bytes.
-For a relocated category only its folder `name` may differ. Owner gate requests
+Category metadata remains pinned; for a relocation only its folder `name` may
+differ. Editorial category prose is context, while mathematical item and page
+bytes retain their full pin checks. Owner gate requests
 bind the current original path. Item prose may link to actual page IDs, with
 ordinary forward-reference checks still applying to later pages.
 Published prerequisite pages remain earlier context when absent from the run plan.

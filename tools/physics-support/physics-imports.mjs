@@ -7,6 +7,8 @@ import { pathToFileURL } from 'node:url';
 import { markdownFiles, readItem, PHYSICS_KINDS } from './physics-content.mjs';
 import { REPO } from './paths.mjs';
 import { frontierMathematicsImportScope } from './frontier-import-scope.mjs';
+import { parseFrontmatter } from './content-policy-lib.mjs';
+import { splitFrontmatter } from './facts-block.mjs';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 // A source folder rename does not move the immutable local snapshot.
 export function originalImportPath(receipt, file) {
@@ -90,13 +92,15 @@ export function verifyMathematicsImports(root, { run = null, planning = false } 
     const original = originalImportPath(receipt, file);
     if (!existsSync(original)) throw Error(`missing mathematics source original: ${file.path}`);
     let originalBytes = readFileSync(original);
-    if (file.source_path && file.path.endsWith('/_category.md')) {
-      // Only the folder identifier may differ; title, classification and body remain pinned.
-      const name = readFileSync(join(root, file.path), 'utf8').match(/^name:.*$/m)?.[0];
-      if (!name) throw Error(`invalid pinned category ${file.path}`);
-      originalBytes = Buffer.from(originalBytes.toString('utf8').replace(/^name:.*$/m, name));
-    }
-    if (hash(originalBytes) !== file.sha256)
+    if (file.path.endsWith('/_category.md')) {
+      // Category prose is editorial context. Its metadata must retain classification;
+      // actual mathematical items and prerequisite pages remain fully byte-pinned.
+      const pinned = parseFrontmatter(splitFrontmatter(readFileSync(join(root,file.path),'utf8')).fm);
+      const current = parseFrontmatter(splitFrontmatter(originalBytes.toString('utf8')).fm);
+      if (file.source_path) current.name = pinned.name;
+      const stable = doc => JSON.stringify(Object.fromEntries(Object.entries(doc).sort(([a],[b])=>a.localeCompare(b))));
+      if (stable(pinned)!==stable(current))throw Error(`mathematics category metadata changed: ${file.path}`);
+    } else if (hash(originalBytes) !== file.sha256)
       throw Error(`mathematics import changed: ${file.path}; reconcile and re-import before a new run`);
     if (file.path.startsWith('items/')) {
       const item = readItem(original);
