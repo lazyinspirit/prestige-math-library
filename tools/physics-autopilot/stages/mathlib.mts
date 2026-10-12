@@ -1144,17 +1144,17 @@ export const stages = [
     modelProfile: MODEL_PROFILE_NAMES.lunaMax,
     units: batches,
     unitPrerequisites: (ctx: any, u: string) => prerequisiteBatches(ctx.repo, ctx.run, u, ctx),
-    unitEligible: (ctx: any, u: string) => loopState(ctx.repo, ctx.run, u).phase !== 'held',
+    unitEligible: (ctx: any, u: string) => loopState(ctx.repo,ctx.run,u,ctx).phase !== 'held',
     pattern: (ctx: any) => loopPattern(ctx, batches(ctx)),
-    artifacts: (ctx: any, u: string) => accepted(ctx.repo, ctx.run, u)
+    artifacts: (ctx: any, u: string) => accepted(ctx.repo,ctx.run,u,ctx)
       ? `research/${ctx.run}-scope-review/batch-${u}/state.json`
       : `research/${ctx.run}-scope-review/batch-${u}/acceptance-missing`,
     concurrency: 30,
     // Repairs have unrestricted local item inventory authority. Isolate each
     // write wave so its outside-batch byte guard cannot blame another writer.
     exclusiveCohort: (ctx: any, u: string) => batches(ctx).some(b =>
-      loopState(ctx.repo, ctx.run, b).prepared?.phase === 'repair')
-      || loopState(ctx.repo, ctx.run, u).phase === 'repair' ? batches(ctx) : [u],
+      loopState(ctx.repo,ctx.run,b,ctx).prepared?.phase === 'repair')
+      || loopState(ctx.repo,ctx.run,u,ctx).phase === 'repair' ? batches(ctx) : [u],
     onProgress: ({ctx, executor, stage}: any) => {
       const active = new Set([...executor.inflight.values()].filter((d: any) => d.meta.stage === stage.id)
         .flatMap((d: any) => d.meta.covers.map(String)));
@@ -1178,20 +1178,20 @@ export const stages = [
       if (active.size || !executor.state) return;
       const stageState = executor.state.stage(stage.id);
       const owed = batches(ctx);
-      const allAccepted = owed.length>0 && owed.every(u => loopState(ctx.repo,ctx.run,u).phase === 'accepted');
+      const allAccepted = owed.length>0 && owed.every(u => loopState(ctx.repo,ctx.run,u,ctx).phase === 'accepted');
       const firstPass = !stageState.ownerPassPausedAt;
       if (!firstPass && (!allAccepted || stageState.ownerGatePausedAt)) return;
-      const pending = owed.filter(u => !['accepted','held'].includes(loopState(ctx.repo,ctx.run,u).phase));
+      const pending = owed.filter(u => !['accepted','held'].includes(loopState(ctx.repo,ctx.run,u,ctx).phase));
       const readiness = executor.unitReadiness(stage,ctx,pending);
       if (readiness.problem || readiness.deferred || readiness.ready.length) return;
       const at = new Date().toISOString();
       const receipt = `research/${ctx.run}-step2-owner-${firstPass ? 'pass' : 'battery-ready'}.json`;
       const dispositions = owed.map(batch => {
-        const state = loopState(ctx.repo,ctx.run,batch);
+        const state = loopState(ctx.repo,ctx.run,batch,ctx);
         return {batch,disposition:state.phase === 'accepted' ? 'accepted' : state.phase === 'held' ? 'owner-escalation' : 'prerequisite-blocked',
           reviewed:state.reviews.length>0,reviews:state.reviews.length,repairs:state.repairs.length,
           ...(state.phase === 'held' ? {reason:state.reason} : {}),
-          ...(state.phase !== 'accepted' && state.phase !== 'held' ? {blocked_by:prerequisiteBatches(ctx.repo,ctx.run,batch).filter(b => !accepted(ctx.repo,ctx.run,b))} : {})};
+          ...(state.phase !== 'accepted' && state.phase !== 'held' ? {blocked_by:prerequisiteBatches(ctx.repo,ctx.run,batch).filter(b => !accepted(ctx.repo,ctx.run,b,ctx))} : {})};
       });
       writeFileSync(join(ctx.repo,receipt),JSON.stringify({version:1,run:ctx.run,at,dispositions,
         battery_attempted:false,next:'Owner resolves escalations and resumes remaining native loops as needed; owner authorizes the full battery and progression to Step 3.'},null,2)+'\n');
@@ -1207,8 +1207,8 @@ export const stages = [
       if (ctx.doctor) return pending.map(u => ({role:'scope-reviewer',label:`scope-review-${u}-0`,job:'audit',covers:[u],
         brief:'briefs/scope-reviewer.md',task:'briefs/tasks/scope-review-batch.md',
         outputSchema:'briefs/schemas/batch-scope-review.json',resultArtifact:`research/${ctx.run}-scope-review/batch-${u}/review-0.json`}));
-      const eligible = pending.filter(u => loopState(ctx.repo, ctx.run, u).phase !== 'held');
-      const repair = eligible.find(u => loopState(ctx.repo, ctx.run, u).phase === 'repair');
+      const eligible = pending.filter(u => loopState(ctx.repo,ctx.run,u,ctx).phase !== 'held');
+      const repair = eligible.find(u => loopState(ctx.repo,ctx.run,u,ctx).phase === 'repair');
       return batchPlans(ctx, repair ? [repair] : eligible);
     },
     gates: (ctx: any) => [scopeGate(ctx),

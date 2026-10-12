@@ -82,7 +82,10 @@ Keep up to 30 agents processing ready pairs, preferring lower dependency levels
 and filling remaining slots from higher levels whose actual prerequisites are
 already accepted. Do not wait for unrelated pairs at a lower level. Refill a slot
 as soon as its agent finishes; there is no whole-level barrier. Planning shares
-one fresh item inventory within each pass and discards it before the next pass. A native
+one fresh item inventory within each pass and discards it before the next pass.
+Scheduling reuses lightweight loop-state views only while file stamps match;
+full before images remain available to repair collection and input hashes remain
+current. A native
 owner hold blocks its own batch and its dependent batches; independent ready
 batches continue. Held batches remain owed and must be resolved before the
 stage's full gate battery. The existing repair write-wave isolation still applies.

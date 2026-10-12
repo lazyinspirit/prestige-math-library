@@ -1,6 +1,6 @@
 // One native, durable batch loop: three whole-batch reviews, at most two repairs.
 // Workers return evidence; the controller alone advances the loop.
-import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, unlinkSync } from 'node:fs';
+import { existsSync, statSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, unlinkSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
@@ -102,12 +102,25 @@ export function consumers(root, changed, extra = []) {
   return [...paths].map(([id,all]) => ({ id,path:all[0],paths:all })).sort((a,b)=>a.id.localeCompare(b.id));
 }
 
-export function loopState(root, run, batch) {
+export function loopState(root, run, batch, pass=null) {
   const path = join(loopDir(root,run,batch),'state.json');
+  const stamp = pass && existsSync(path) ? statSync(path,{bigint:true}) : null;
+  const key = stamp ? `${stamp.ino}:${stamp.size}:${stamp.mtimeNs}:${stamp.ctimeNs}` : 'missing';
+  const cached = pass?.scopeStates?.get(path);
+  if(cached?.key===key)return cached.state;
   const state = existsSync(path) ? read(path) : { version:1, run, batch:String(batch), reviews:[], repairs:[], phase:'review' };
   assert(state.version === 1 && state.run === run && state.batch === String(batch)
     && Array.isArray(state.reviews) && state.reviews.length <= 3 && Array.isArray(state.repairs) && state.repairs.length <= 2,
     `Batch ${batch}: invalid loop history`);
+  if(pass){
+    // Scheduling needs phase/inventory, not the multi-megabyte before image.
+    // Collectors still load full evidence; stamps invalidate every state edit.
+    if(state.prepared){
+      const {before_items,before_files,...prepared}=state.prepared;
+      state.prepared=prepared;
+    }
+    (pass.scopeStates??=new Map()).set(path,{key,state});
+  }
   return state;
 }
 const save = (root,run,batch,state) => atomic(join(loopDir(root,run,batch),'state.json'),state);
@@ -142,9 +155,10 @@ export function verifyRepairControl(guard) {
   assert(!changed.length&&!added.length,`Repair changed protected controller/review evidence: ${[...changed,...added].map(row=>row.path).join(', ')}`);
 }
 
-export function accepted(root,run,batch) {
+export function accepted(root,run,batch,pass=null) {
   try {
-    const state = loopState(root,run,batch);
+    const state = loopState(root,run,batch,pass);
+    if(state.phase!=='accepted')return false;
     for(const [phase,rows] of [['review',state.reviews],['repair',state.repairs]])for(const row of rows)
       if(digest(read(reportPath(root,run,batch,phase,row.round)))!==row.report_sha256)return false;
     return state.phase === 'accepted' && state.accepted_sha256 === batchInput(root,run,batch).sha256;
@@ -245,8 +259,8 @@ export function resolveOwner(root,run,batch,{decision='accept',reason,reviewer})
 export function loopPattern(ctx,batches) {
   const labels=[];
   for(const batch of batches){
-    if(accepted(ctx.repo,ctx.run,batch))labels.push(`tool-scope-accepted-${batch}`);
-    const state=loopState(ctx.repo,ctx.run,batch);
+    if(accepted(ctx.repo,ctx.run,batch,ctx))labels.push(`tool-scope-accepted-${batch}`);
+    const state=loopState(ctx.repo,ctx.run,batch,ctx);
     if(state.prepared)labels.push(`${state.prepared.role}-${state.prepared.label}`);
   }
   return labels.length?new RegExp(`^(?:${labels.join('|')})\\.result\\.json$`):/^(?!)$/;

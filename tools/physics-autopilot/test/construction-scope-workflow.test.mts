@@ -180,6 +180,17 @@ test('two repairs and three whole-batch reviews exhaust durably across reload an
   assert.equal(loopState(f.repo,'demo','1').repairs.length,2);
 });
 
+test('scheduling state views observe holds, owner resolution and changed supplier bytes',t=>{
+  const f=fixture(t),loop:any=stages.find(s=>s.id==='2-scope-review');
+  assert.equal(loop.unitEligible(f.ctx,'1'),true);
+  complete(f,'1','escalate');assert.equal(loop.unitEligible(f.ctx,'1'),false);
+  resolveOwner(f.repo,'demo','1',{reviewer:'owner',reason:'Escalation resolved.'});
+  assert.equal(loop.unitEligible(f.ctx,'1'),true);
+  assert.match(loop.artifacts(f.ctx,'1'),/state\.json$/);
+  f.writeItem('lem-a',[],'Changed supplier after acceptance');
+  assert.match(loop.artifacts(f.ctx,'1'),/acceptance-missing$/);
+});
+
 test('owner resolution accepts current inputs without another review and preserves history',t=>{
   const f=fixture(t);complete(f,'1','escalate');
   const before=loopState(f.repo,'demo','1');
