@@ -1,13 +1,15 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync, existsSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync, existsSync, symlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, relative } from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { batchInput, batchPlan, collectBatch, loopState, loopDir, accepted, loopPattern, prerequisiteBatches,
   consumers, checkBatches, resolveOwner, captureRepairControl, verifyRepairControl } from '../../physics-support/batch-scope-review.mjs';
 import { stages, workflowRevision } from '../stages/mathlib.mts';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
+import { assertCognitive } from '../src/roles.mts';
 import { recordStep1 } from '../../physics-support/step1-decisions.mjs';
 import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
@@ -61,6 +63,34 @@ function readyScaffold(f:any,batch:string) {
   for(const page of pages)for(const item of page.items)recordStep1(f.repo,{run:'demo',item:item.id,
     decision:'ready',owner:true,reason:'Fixture carrier inputs recorded for readiness currency.',dependencies:item.deps});
 }
+
+test('scope acceptance CLI executes and fails closed through the workspace tools symlink', t => {
+  const f=fixture(t);
+  symlinkSync(fileURLToPath(new URL('../../',import.meta.url)),join(f.repo,'tools'),'dir');
+  const args=['tools/physics-support/batch-scope-review.mjs','check','--run','demo'];
+  const held=spawnSync(process.execPath,args,{cwd:f.repo,encoding:'utf8'});
+  assert.equal(held.status,1);
+  assert.match(held.stderr,/Batch 1 lacks current whole-batch acceptance/);
+  complete(f,'1');complete(f,'2');
+  const accepted=spawnSync(process.execPath,args,{cwd:f.repo,encoding:'utf8'});
+  assert.equal(accepted.status,0,accepted.stderr);
+  assert.match(accepted.stdout,/2 batch\(es\) accepted/);
+});
+
+test('owner continuation CLI resolves a genuine hold through the workspace tools symlink', t => {
+  const f=fixture(t);
+  symlinkSync(fileURLToPath(new URL('../../',import.meta.url)),join(f.repo,'tools'),'dir');
+  complete(f,'1','escalate');
+  const result=spawnSync(process.execPath,['tools/physics-support/batch-scope-review.mjs',
+    'owner-resolve','--run','demo','--batch','1','--decision','continue',
+    '--reviewer','owner','--reason','Supplier repaired; resume the remaining native review.'],
+    {cwd:f.repo,encoding:'utf8'});
+  assert.equal(result.status,0,result.stderr);
+  const receipt=JSON.parse(result.stdout);
+  assert.equal(receipt.decision,'continue');
+  assert.equal(receipt.review_count,1);assert.equal(receipt.repair_count,0);
+  assert.equal(loopState(f.repo,'demo','1').phase,'review');
+});
 function scaffoldComplete(f:any,batch:string) {
   const stage:any=stages.find(s=>s.id==='1-scaffold');
   // The executor creates a fresh context on successive status/readiness calls.
@@ -116,6 +146,7 @@ test('whole-batch review -> repair -> whole-batch acceptance reuses roles and se
   const f=fixture(t);const first=complete(f,'1','repair');assert.equal(first.state.phase,'repair');
   assert.equal(loopPattern(f.ctx,['1','2']).test(`${first.p.role}-${first.p.label}.result.json`),false);
   const repair=batchPlan(f.ctx,'1');assert.equal(repair.role,'scope-repairer');
+  assert.equal(repair.job,'authoring');assert.equal(assertCognitive(repair.job),true);
   f.writeItem('lem-a',[],'Original statement');
   complete(f,'1');assert.equal(loopState(f.repo,'demo','1').repairs.length,1);
   const next=batchPlan(f.ctx,'1');assert.equal(next.role,'scope-reviewer');assert.equal(next.resumeSession,'session-scope-reviewer');

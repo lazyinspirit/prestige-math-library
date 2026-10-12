@@ -1,6 +1,6 @@
 // One native, durable batch loop: three whole-batch reviews, at most two repairs.
 // Workers return evidence; the controller alone advances the loop.
-import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, unlinkSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, renameSync, readdirSync, unlinkSync, realpathSync as physicsRealpath } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
@@ -296,7 +296,7 @@ export function batchPlan(ctx,batch) {
   const previous=state[phase==='review'?'reviews':'repairs'].at(-1);
   const priorReceipt=previous?join(ctx.dispatchDir,`${role}-${label(batch,phase,previous.round)}.result.json`):null;
   const session=priorReceipt&&existsSync(priorReceipt)?read(priorReceipt).session_id:null;
-  return {role,label:prepared.label,job:phase==='review'?'audit':'repair',covers:[String(batch)],
+  return {role,label:prepared.label,job:phase==='review'?'audit':'authoring',covers:[String(batch)],
     brief:`briefs/scope-${phase==='review'?'reviewer':'repairer'}.md`,task:relative(ctx.repo,task),
     outputSchema:'briefs/schemas/batch-scope-review.json', resultArtifact:relative(ctx.repo,reportPath(ctx.repo,ctx.run,batch,phase,round)),
     sessionHome:join(dir,`${role}-session`), ...(session?{resumeSession:session}:{}), timeout:14400};
@@ -310,7 +310,7 @@ export function checkBatches(root,run) {
   return batches.length;
 }
 
-if(process.argv[1] && import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
+if(process.argv[1] && import.meta.url===pathToFileURL(physicsRealpath(resolve(process.argv[1]))).href){
   try{
     const args=process.argv.slice(2),run=args[args.indexOf('--run')+1];
     const option=name=>args[args.indexOf(`--${name}`)+1];
