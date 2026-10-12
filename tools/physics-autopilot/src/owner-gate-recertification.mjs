@@ -5,6 +5,7 @@ import { basename, join, resolve } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { frontierGateScope } from '../../physics-support/frontier-gate-scope.mjs';
 import { markdownFiles, readItem } from '../../physics-support/physics-content.mjs';
+import { originalImportPath } from '../../physics-support/physics-imports.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const json = value => JSON.stringify(value);
@@ -129,7 +130,7 @@ export function gateReviewSnapshot(ctx, gates, stages) {
     const imports = readJSON(importsPath);
     for (const row of imports.files ?? []) {
       const local = join(ctx.repo, row.path);
-      if (inputs.has(local)) bind(join(imports.source_root, row.path));
+      if (inputs.has(local)) bind(originalImportPath(imports, row));
     }
   }
   bind(join(research, 'plan-spec.json'));

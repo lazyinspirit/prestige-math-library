@@ -103,9 +103,9 @@ export function frontierMathematicsImportScope(root, run, { planning = false, re
   const homes = (rows, id) => rows.filter(page => [...(page.items ?? []), ...(page.examples ?? [])].includes(id))
     .map(page => page.path).sort();
   for (const id of relevantItemIds) {
-    const before = homes(localPages, id), after = homes(sourcePages, id);
+    const before = homes(localPages, id).map(path => pins.get(path).source_path ?? path).sort(), after = homes(sourcePages, id);
     if (JSON.stringify(before) !== JSON.stringify(after)) throw Error(`mathematics source home changed: ${id}`);
-    for (const path of before) relevant.add(path);
+    for (const path of homes(localPages, id)) relevant.add(path);
   }
   // Page prerequisites are graph context, not permission to pull unrelated
   // sibling items into the mathematical supplier closure.
@@ -121,7 +121,7 @@ export function frontierMathematicsImportScope(root, run, { planning = false, re
     if (pinned.length > 1 || plan.pages.filter(row => row.id === id).length > 1) throw Error(`ambiguous prerequisite page ${id}`);
     if (pinned.length) {
       const sourcePage = sourcePages.filter(row => (row.page ?? row.id) === id);
-      if (sourcePage.length !== 1 || sourcePage[0].path !== pinned[0].path)
+      if (sourcePage.length !== 1 || sourcePage[0].path !== (pins.get(pinned[0].path).source_path ?? pinned[0].path))
         throw Error(`mathematics source page identity changed: ${id}`);
       relevant.add(pinned[0].path);
     }

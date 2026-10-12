@@ -254,7 +254,7 @@ for (const it of items.values()) {
   const fwd = new Set(it.forward);
   for (const l of it.links) {
     if (fwd.has(l)) continue;
-    if (!resolve(l) && !isOriginalMathContext(it.id, l)) err('link-unresolved', `${it.file}: wikilink [[${l}]] resolves to nothing`);
+    if (!resolve(l) && !pages.some(page => page.page === l) && !isOriginalMathContext(it.id, l)) err('link-unresolved', `${it.file}: wikilink [[${l}]] resolves to nothing`);
   }
 }
 

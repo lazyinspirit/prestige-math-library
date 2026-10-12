@@ -167,6 +167,7 @@ const resolve = (x) => (items.has(x) ? x : aliasTo.get(x));
 const actualHome = new Map();        // itemId -> pageId, from library/
 const pageBodies = [];               // {rel, body} — scanned after all ids known
 const realPages = new Set();
+const publishedPages = new Set();
 (function walk(dir) {
   for (const e of readdirSync(dir, { withFileTypes: true }).sort((a, b) => a.name.localeCompare(b.name))) {
     const fp = join(dir, e.name);
@@ -175,6 +176,7 @@ const realPages = new Set();
     const { fm, body } = split(readFileSync(fp, 'utf8'));
     const pid = scalar(fm, 'page') ?? basename(e.name, '.md');
     realPages.add(pid);
+    if (scalar(fm, 'status') === 'published') publishedPages.add(pid);
     pageBodies.push({ pid, rel: fp.slice(REPO.length + 1), body,
       itemIds: [...list(fm, 'items'), ...list(fm, 'examples')],
     });
@@ -184,7 +186,7 @@ const realPages = new Set();
 })(join(REPO, 'library'));
 
 const homeOf = (id) => actualHome.get(id) ?? plannedHome.get(id);
-const orderOf = (pid) => planPage.get(pid)?.order ?? Infinity;
+const orderOf = (pid) => publishedPages.has(pid) ? -Infinity : planPage.get(pid)?.order ?? Infinity;
 const selectedRoots = itemScope.selected === null ? [...items.keys()]
   : [...itemScope.selected].filter(id => items.has(id));
 const selectedPages = new Set(itemScope.selected === null ? realPages
@@ -271,7 +273,8 @@ for (const it of items.values()) {
   for (const l of it.links) {
     if (sanctioned.has(l)) continue;
     const r = resolve(l);
-    const lh = r ? homeOf(r) : plannedHome.get(l);
+    const pageLink = realPages.has(l);
+    const lh = r ? homeOf(r) : pageLink ? l : plannedHome.get(l);
     if (!lh) {
       if (!r) err('link-unplanned', `${it.file}: wikilink [[${l}]] resolves to nothing and is planned nowhere`);
       continue;                                      // resolves but sits on no page yet
@@ -279,7 +282,7 @@ for (const it of items.values()) {
     if (lh === home) continue;                       // ordinary intra-page link
     if (orderOf(lh) > orderOf(home))
       err('forward-undeclared', `${it.file}: wikilink [[${l}]] points forward to ${lh} (#${orderOf(lh)}); declare it in forward_refs so it is marked as a forward reference`);
-    else if (!r)
+    else if (!r && !pageLink)
       err('link-unplanned', `${it.file}: wikilink [[${l}]] points at ${lh}, which is NOT later; it should already exist`);
   }
 }

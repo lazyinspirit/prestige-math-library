@@ -8,6 +8,14 @@ import { markdownFiles, readItem, PHYSICS_KINDS } from './physics-content.mjs';
 import { REPO } from './paths.mjs';
 import { frontierMathematicsImportScope } from './frontier-import-scope.mjs';
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+// A source folder rename does not move the immutable local snapshot.
+export function originalImportPath(receipt, file) {
+  const path = file.source_path ?? file.path;
+  if (file.source_path && (path.split('/').includes('..') || !/^library\/[\w.-]+\/[\w.-]+\.md$/.test(path)
+    || !file.path.startsWith('library/') || path.split('/').at(-1) !== file.path.split('/').at(-1)))
+    throw Error(`invalid original import relocation: ${file.path}`);
+  return join(receipt.source_root, path);
+}
 export function importMathematics(root, sourceRoot) {
   root = resolve(root); sourceRoot = resolve(sourceRoot);
   if (root === sourceRoot) throw Error('physics workspace and mathematics source must differ');
@@ -79,11 +87,19 @@ export function verifyMathematicsImports(root, { run = null, planning = false } 
     .filter(file => !file.split('/').at(-1).startsWith('_')).map(file => ({ ...readItem(file), path: relative(receipt.source_root, file) })) : [];
   const scope = run ? frontierMathematicsImportScope(root, run, { planning, receipt, originals: { items: originals, pages: sourcePages } }) : null;
   for (const file of receipt.files) if (scope === null || scope.paths.has(file.path)) {
-    if (!existsSync(join(receipt.source_root, file.path))) throw Error(`missing mathematics source original: ${file.path}`);
-    if (hash(readFileSync(join(receipt.source_root, file.path))) !== file.sha256)
+    const original = originalImportPath(receipt, file);
+    if (!existsSync(original)) throw Error(`missing mathematics source original: ${file.path}`);
+    let originalBytes = readFileSync(original);
+    if (file.source_path && file.path.endsWith('/_category.md')) {
+      // Only the folder identifier may differ; title, classification and body remain pinned.
+      const name = readFileSync(join(root, file.path), 'utf8').match(/^name:.*$/m)?.[0];
+      if (!name) throw Error(`invalid pinned category ${file.path}`);
+      originalBytes = Buffer.from(originalBytes.toString('utf8').replace(/^name:.*$/m, name));
+    }
+    if (hash(originalBytes) !== file.sha256)
       throw Error(`mathematics import changed: ${file.path}; reconcile and re-import before a new run`);
     if (file.path.startsWith('items/')) {
-      const item = readItem(join(receipt.source_root, file.path));
+      const item = readItem(original);
       if (item.status !== 'published') throw Error(`mathematics source publication withdrawn: ${file.path}`);
     }
   }
