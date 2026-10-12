@@ -1156,7 +1156,11 @@ export const stages = [
       for (const u of executor.adoptedUnits(stage)) active.add(String(u));
       for (const u of batches(ctx)) if (!active.has(u) && !repairCohort(ctx,u).some(b=>b!==u&&active.has(b))) {
         let state;
-        try { state = collectBatch(ctx, u); } catch(error) { console.error(`Step 2 batch ${u}: ${error.message}`); throw error; }
+        try { state = collectBatch(ctx, u); } catch(error) {
+          state = loopState(ctx.repo,ctx.run,u);
+          state.phase='held';state.reason=`Worker report requires owner resolution: ${error.message}`;
+          writeFileSync(join(ctx.repo,`research/${ctx.run}-scope-review/batch-${u}/state.json`),JSON.stringify(state,null,2)+'\n');
+        }
         if (state.phase === 'accepted') {
           const path=join(ctx.dispatchDir, `tool-scope-accepted-${u}.result.json`);
           if (!existsSync(path)) writeFileSync(path,JSON.stringify({run:ctx.run,role:'tool',label:`scope-accepted-${u}`,covers:[u],ok:true}));

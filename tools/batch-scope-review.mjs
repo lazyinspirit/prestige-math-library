@@ -186,8 +186,8 @@ export function collectBatch(ctx,batch){
   assert(row.version===1&&row.run===ctx.run&&row.batch===String(batch)&&row.round===p.round,'Wrong batch report identity');
   assert(same(row.reviewed_items,p.inventory.items)&&row.reviewed_items.length===p.inventory.items.length&&same(row.reviewed_pages,p.inventory.pages)&&row.reviewed_pages.length===p.inventory.pages.length,'Incomplete batch report');
   assert(['accept','repair','escalate'].includes(row.decision)&&Array.isArray(row.findings)&&Array.isArray(row.consumer_checks),'Invalid batch verdict');
-  assert(row.decision!=='accept'||!row.findings.length,'Acceptance has unresolved findings');
   if(p.phase==='review'){
+    assert(row.decision!=='accept'||!row.findings.length,'Acceptance has unresolved findings');
     const required=s.repairs.at(-1)?.consumers??[];assert(required.every(i=>row.consumer_checks.some(c=>c.id===i.id)),'Reviewer omitted affected consumers');
     s.reviews.push({round:p.round,decision:row.decision});s.phase=row.decision==='accept'?'accepted':row.decision==='escalate'||s.reviews.length>=2?'held':'repair';
   }else{
