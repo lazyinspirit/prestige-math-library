@@ -329,8 +329,9 @@ export function resolveOwner(root,run,batch,{decision='accept',reason,reviewer})
 export function loopPattern(ctx,batches) {
   const labels=[];
   for(const batch of batches){
-    if(accepted(ctx.repo,ctx.run,batch,ctx))labels.push(`tool-scope-accepted-${batch}`);
     const state=loopState(ctx.repo,ctx.run,batch,ctx);
+    // Patterns identify workers; artifact checks verify current acceptance hashes.
+    if(state.phase==='accepted')labels.push(`tool-scope-accepted-${batch}`);
     if(state.prepared)labels.push(`${state.prepared.role}-${state.prepared.label}`);
   }
   return labels.length?new RegExp(`^(?:${labels.join('|')})\\.result\\.json$`):/^(?!)$/;
