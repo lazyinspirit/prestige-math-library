@@ -248,7 +248,7 @@ function validateStepEntries(entries, field, id, facts, steps, classified) {
       if (classified.has(entry.step)) error('step-entry-overlap', `${entry.step} is mapped by both ${classified.get(entry.step)} and ${entry.id ?? '?'}`, id);
       else classified.set(entry.step, entry.id ?? field);
       const inputs = new Set(entry.inputs ?? []);
-      for (const token of explicitTokens(step.text)) {
+      for (const token of explicitTokens(step.text, steps)) {
         const acceptable = inputs.has(token) || inputs.has(`step ${token}`);
         if (!acceptable) error('step-entry-input-omitted', `${entry.id ?? field} omits ${token}, cited by ${entry.step}`, id);
       }
@@ -334,9 +334,13 @@ function factsByLabel(body) { return factParagraphs(body); }
 function numberedSteps(body) {
   return new Map(numberedProofSteps(body).map((step) => [step.id, step]));
 }
-function explicitTokens(text) {
+function explicitTokens(text, steps = null) {
   const out = new Set();
-  for (const match of text.matchAll(/\b(?:step\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) out.add(match[1] ?? match[2]);
+  for (const match of text.matchAll(/\b(?:step\s+)?(\d+\.\d+)\b|\b([FAL]\d+)\b/g)) {
+    // Bare decimals are numeric constants unless they identify a real step.
+    // Explicit "step p.q" references remain visible even when missing.
+    if (match[2] || !steps || /^step\s/.test(match[0]) || steps.has(match[1])) out.add(match[1] ?? match[2]);
+  }
   return out;
 }
 function normalise(value) {

@@ -197,7 +197,7 @@ export function gateReviewSnapshot(ctx, gates, stages) {
   }
   const names = readdirSync(research).sort();
   if (toolNames.has('step3-scope.mjs')) for (const name of names) {
-    if (name.startsWith(`${ctx.run}-`) && /(?:-step3-(?:hash|scope|auditor-certifications|published-claims)|-refute-\d+|-reader-findings-\d+|-alpha-.*-3a-decisions)\b/.test(name)) implicit.push(name);
+    if (name.startsWith(`${ctx.run}-`) && /(?:-step3-(?:hash|scope|historical-dependencies|auditor-certifications|published-claims)|-refute-\d+|-reader-findings-\d+|-alpha-.*-3a-decisions)\b/.test(name)) implicit.push(name);
   }
   // Coverage is consumed implicitly by scaffold/item decision loaders too.
   if (toolNames.has('step1-decisions.mjs') || toolNames.has('step3-decisions.mjs'))

@@ -453,6 +453,121 @@ function findingDependencies(batch, consumers, findings, manifests = manifestIte
   return inRunDependencies(batch, consumers, manifests);
 }
 
+/** A repaired consumer may legitimately stop using a supplier it actually
+ * reviewed. Keep that observation in scope only through explicit owner evidence;
+ * never add an edge to the current graph or use this during split/collection. */
+function reviewedHistoricalDependencies(batch, consumers, findings, manifests, scope, reportError) {
+  const dependencies = findingDependencies(batch, consumers, findings, manifests);
+  const receiptPath = R('research', `${run}-step3-historical-dependencies-${batch}.json`);
+  if (!existsSync(receiptPath)) return dependencies;
+  try {
+    const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
+    const assert = (condition, message) => { if (!condition) throw new Error(message); };
+    const boundFile = (binding, context) => {
+      assert(typeof binding?.path === 'string' && binding.path.startsWith('research/')
+        && !binding.path.split('/').includes('..') && /^[a-f0-9]{64}$/.test(binding.sha256 ?? ''), `${context}: invalid research file binding`);
+      assert(receipt.inputs?.[binding.path] === binding.sha256, `${context}: evidence is absent from gate input bindings`);
+      const bytes = readFileSync(R(binding.path));
+      assert(sha256(bytes) === binding.sha256, `${context}: file hash changed`);
+      return bytes;
+    };
+    assert(receipt.version === 1 && receipt.run === run && String(receipt.batch) === batch
+      && typeof receipt.reviewer === 'string' && receipt.reviewer.trim()
+      && typeof receipt.reason === 'string' && receipt.reason.trim().length >= 40
+      && Array.isArray(receipt.findings) && receipt.findings.length, 'invalid historical dependency receipt');
+    assert(receipt.scope_sha256 === sha256(readFileSync(scopePath(batch)))
+      && receipt.reader_report_sha256 === scope.reader_report_sha256
+      && receipt.refuter_report_sha256 === scope.refuter_report_sha256,
+    'receipt does not bind the unchanged routed scope and reports');
+    assert(sha256(readFileSync(readerFindingsPath(batch))) === receipt.reader_report_sha256
+      && sha256(readFileSync(refuterPath(batch))) === receipt.refuter_report_sha256,
+    'original reader/refuter report bytes changed');
+    const ledger = readFileSync(ledgerPath, 'utf8').split(/\r?\n/).filter(Boolean).map(line => JSON.parse(line));
+    const ownershipErrors = [];
+    const active = taxonomyOwnership(ledger.filter(row => row.run === run), ownershipErrors).activeRows;
+    assert(!ownershipErrors.length, 'ledger ownership is invalid');
+    const seen = new Set();
+    for (const entry of receipt.findings) {
+      assert(!seen.has(entry.obligation), 'receipt repeats an obligation'); seen.add(entry.obligation);
+      const frozen = [...(scope.reader_findings ?? []), ...(scope.refuter_findings ?? [])]
+        .find(row => row.obligation === entry.obligation);
+      assert(frozen?.subject_type === 'in-run-dependency' && hashValue(frozen) === entry.finding_sha256,
+        `${entry.obligation}: receipt does not bind the exact frozen finding`);
+      assert(consumers.includes(frozen.consumer_id), `${entry.obligation}: consumer is not assigned`);
+      const ids = frozen.dependency_path?.map(row => row.id);
+      assert(Array.isArray(ids) && ids.length >= 2 && unique(ids)
+        && ids[0] === frozen.consumer_id && ids.at(-1) === frozen.id
+        && Array.isArray(entry.path_carriers) && entry.path_carriers.length === ids.length,
+      `${entry.obligation}: invalid archived path`);
+      for (let i = 0; i < ids.length; i++) {
+        const binding = entry.path_carriers[i];
+        assert(binding.id === ids[i], `${entry.obligation}: archived carrier identity differs`);
+        let item;
+        if (binding.manifest && binding.snapshot) {
+          // If source bytes were not retained, do not reconstruct them. An exact
+          // native pre/post snapshot binds the old raw item hash and authored
+          // manifest row; that row can establish only the historical deps edge.
+          const match = binding.snapshot.path?.match(new RegExp(`^research/${run}-step3-hash-(\\d+)-(pre|post)\\.json$`));
+          assert(match, `${entry.obligation}: invalid historical native snapshot path`);
+          const snapshot = JSON.parse(boundFile(binding.snapshot, entry.obligation));
+          assert(!hashSnapshotErrors(snapshot, match[1], match[2]).length,
+            `${entry.obligation}: invalid historical native snapshot`);
+          assert(snapshot.hashes?.[ids[i]]?.item_sha256 === frozen.dependency_path[i].item_sha256,
+            `${entry.obligation}: snapshot does not bind the frozen raw item hash`);
+          const manifest = JSON.parse(boundFile(binding.manifest, entry.obligation));
+          const matches = (Array.isArray(manifest) ? manifest : manifest.pages ?? []).flatMap(page =>
+            (page.items ?? []).filter(row => row?.id === ids[i])
+              .map(row => ({ ...row, __step4_page_id: String(page.id) })));
+          assert(matches.length === 1 && hashValue(matches[0]) === snapshot.hashes[ids[i]].manifest_sha256,
+            `${entry.obligation}: authored manifest row does not match its native snapshot`);
+          item = matches[0];
+        } else {
+          assert(binding.sha256 === frozen.dependency_path[i].item_sha256,
+            `${entry.obligation}: archived path carrier differs from the frozen bytes`);
+          item = yaml().parse(split(boundFile(binding, entry.obligation).toString('utf8')).fm) ?? {};
+          assert(item.id === ids[i], `${entry.obligation}: archived carrier identity differs`);
+        }
+        if (i + 1 < ids.length) assert([...(item.deps ?? []), ...(item.justified_by ?? [])].includes(ids[i + 1]),
+          `${entry.obligation}: archived bytes do not establish the historical edge`);
+      }
+      for (const id of [frozen.consumer_id, frozen.id]) {
+        assert(entry.current_carriers?.[id] === sha256(readFileSync(R('items', `${id}.md`))),
+          `${entry.obligation}: current reviewed carrier changed`);
+      }
+      assert(typeof entry.review?.note === 'string' && entry.review.note.trim().length >= 40,
+        `${entry.obligation}: missing focused current replacement/supplier review`);
+      boundFile(entry.review, entry.obligation);
+      assert(entry.decision_path === `research/${run}-alpha-batch-${batch}-3a-decisions.json`
+        || entry.decision_path === `research/${run}-alpha-${scope.group}-3a-decisions.json`,
+      `${entry.obligation}: decision path is not the assigned adjudication`);
+      const doc = JSON.parse(readFileSync(R(entry.decision_path), 'utf8'));
+      const decision = doc.decisions?.find(row => row.obligation === frozen.obligation);
+      assert(doc.run === run && decision?.id === frozen.id
+        && decision.consumer_id === frozen.consumer_id && decision.producer_batch === frozen.producer_batch
+        && ['confirmed_fatal', 'confirmed_nonfatal'].includes(decision.verdict)
+        && decision.repair_confidence === 1 && typeof decision.evidence === 'string' && decision.evidence.trim(),
+      `${entry.obligation}: no exact completed current owner adjudication`);
+      assert(Array.isArray(decision.defect_ids) && decision.defect_ids.length
+        && decision.defect_ids.every(id => active.some(row => row.defect_id === id && row.subject === frozen.id
+          && row.disposition === 'fixed' && row.caught_at_stage === '3a-adjudicate'
+          && row.adjudication_ref?.some(ref => ref.path === entry.decision_path && ref.obligation === frozen.obligation))),
+      `${entry.obligation}: exact closed ledger ownership is missing`);
+      // bindInRunFinding still verifies the unique CURRENT manifest producer,
+      // contract and immutable producer-pre snapshot; only reachability is historical.
+      if (!dependencies.get(frozen.id)?.consumers.has(frozen.consumer_id)) {
+        if (!dependencies.has(frozen.id)) dependencies.set(frozen.id,
+          { producer_batch: frozen.producer_batch, consumers: new Map() });
+        const route = dependencies.get(frozen.id);
+        assert(route.producer_batch === frozen.producer_batch, `${entry.obligation}: producer ownership changed`);
+        route.consumers.set(frozen.consumer_id, ids);
+      }
+    }
+  } catch (cause) {
+    reportError(`historical dependency receipt invalid: ${cause.message}`);
+  }
+  return dependencies;
+}
+
 function definitionWithoutProofContract(id) {
   const path = R('items', `${id}.md`);
   if (!existsSync(path)) return false;
@@ -987,8 +1102,8 @@ if (command === 'check') {
           const allRunIds = new Set(Object.values(manifests).flat());
           const published = preserveClaimedPublishedBindings(
             publishedDependencies(derived.manifestPost, allRunIds), scope);
-          const inRun = findingDependencies(batch, derived.manifestPost,
-            [...(Array.isArray(report.findings) ? report.findings : []), ...(scope.reader_findings ?? [])], manifests);
+          const inRun = reviewedHistoricalDependencies(batch, derived.manifestPost,
+            [...(Array.isArray(report.findings) ? report.findings : []), ...(scope.reader_findings ?? [])], manifests, scope, reportError);
           const normalized = normalizeFindings(Array.isArray(report.findings) ? report.findings : [], batch,
             new Set([...derived.manifestPost, ...derived.pageManifestPost, ...published.keys(), ...inRun.keys()]), reportError, 'reader');
           const stored = (scope.reader_findings ?? []).map(finding => reportOnlyFinding(finding));
@@ -1025,7 +1140,7 @@ if (command === 'check') {
           const normalized = normalizeRefuterFindings(flagged, batch, new Set(opened), reportError);
           const stored = (scope.refuter_findings ?? []).map(finding => reportOnlyFinding(finding, true));
           if (JSON.stringify(normalized) !== JSON.stringify(stored)) reportError('findings no longer match the collected obligations');
-          const inRun = findingDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? [], manifests);
+          const inRun = reviewedHistoricalDependencies(batch, scope.manifest_post ?? [], scope.reader_findings ?? [], manifests, scope, reportError);
           for (const finding of scope.refuter_findings ?? []) {
             if (finding.subject_type === 'in-run-dependency') { validateInRunFinding(finding, batch, inRun, reportError); continue; }
             if (!/^[a-f0-9]{64}$/.test(finding.observed_sha256 ?? '')) reportError(`${finding.obligation} has no valid observed carrier hash`);

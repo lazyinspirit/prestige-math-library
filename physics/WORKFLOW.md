@@ -165,6 +165,10 @@ current-hash-bound and formatting/metadata-only under CLAUDE.md.
 
 ## Pre-gate recertification
 
+Proof-contract inputs treat a bare decimal as a step reference only when that
+number identifies an actual proof step. Explicit `step p.q` references are
+checked even when the named step is missing.
+
 Every production native gate join holds **before** attempting its complete
 battery, after all native and adopted writers drain. `pause-at` remains a stop
 after a stage and cannot replace this boundary. Under CLAUDE.md rule 7, this
@@ -271,3 +275,67 @@ formulation prerequisites but never supply `deps`, `justified_by` or proof
 premises, including alias-resolved or indirect uses. Source/status review
 does not certify a solution. Keep established results awaiting local authoring
 as separate proof obligations, and preserve physical postulates/observations.
+
+## Retaining an adjudicated historical dependency after repair
+
+A Step-3 consumer repair can correctly remove an old logical supplier. Keep the
+original reader/refuter reports, routed scope, dependency path and producer
+snapshots unchanged. Do not add a false current dependency to preserve routing.
+For `step3-scope check` only, an owner may provide
+`research/RUN-step3-historical-dependencies-BATCH.json` with this version-1 shape:
+
+```json
+{
+  "version": 1,
+  "run": "RUN",
+  "batch": "BATCH",
+  "reviewer": "owner reviewer",
+  "reason": "Concrete explanation of the repaired consumer's replacement and the retained genuine observation.",
+  "scope_sha256": "RAW_SHA256_OF_UNCHANGED_ROUTED_SCOPE",
+  "reader_report_sha256": "ORIGINAL_RAW_READER_REPORT_SHA256",
+  "refuter_report_sha256": "ORIGINAL_RAW_REFUTER_REPORT_SHA256",
+  "inputs": { "research/exact-before.md": "RAW_SHA256", "research/exact-supplier-before.md": "RAW_SHA256", "research/current-owner-review.md": "RAW_SHA256" },
+  "findings": [{
+    "obligation": "reader:BATCH:1",
+    "finding_sha256": "SHA256_OF_RECURSIVELY_KEY_SORTED_FROZEN_FINDING_JSON",
+    "path_carriers": [
+      { "id": "consumer-id", "path": "research/exact-before.md", "sha256": "FROZEN_PATH_RAW_ITEM_SHA256" },
+      { "id": "supplier-id", "path": "research/exact-supplier-before.md", "sha256": "FROZEN_PATH_RAW_ITEM_SHA256" }
+    ],
+    "current_carriers": { "consumer-id": "CURRENT_RAW_SHA256", "supplier-id": "CURRENT_RAW_SHA256" },
+    "review": { "path": "research/current-owner-review.md", "sha256": "RAW_SHA256", "note": "Exact current supplier and replacement-consumer review with retained claim and hypotheses." },
+    "decision_path": "research/RUN-alpha-batch-BATCH-3a-decisions.json"
+  }]
+}
+```
+
+The `inputs` map must bind every archived carrier, manifest, snapshot and review
+file named by a path/hash pair; native gate evidence traversal includes these
+files. Every original path edge must be authenticated. When the raw consumer preimage
+was not retained, use this explicit alternative for that `path_carriers` entry:
+
+```json
+{
+  "id": "consumer-id",
+  "manifest": { "path": "research/archived-original.pages.json", "sha256": "RAW_SHA256" },
+  "snapshot": { "path": "research/RUN-step3-hash-BATCH-post.json", "sha256": "RAW_SHA256" }
+}
+```
+
+The native pre/post snapshot must bind the frozen raw item hash and the exact
+original authored manifest row, including its private `__step4_page_id` hash
+convention. The manifest row must contain the old edge. This alternative proves
+historical dependency scope; it does not reconstruct or attest reading absent
+source bytes. Each intermediate path carrier needs one of these two forms.
+
+The guard also requires the assigned consumer, the same unique current manifest
+producer, its exact immutable pre-reader snapshot, unchanged original report
+bytes, current reviewed consumer/supplier hashes, an evidence file with a
+concrete review note, a completed `confirmed_fatal` or `confirmed_nonfatal`
+decision with confidence 1, and active fixed ledger rows referencing that exact
+decision and obligation. All ordinary routing, source, proof, risk and ledger
+checks still apply. A missing or stale receipt fails closed. These receipts do
+not widen split or collect, alter the current dependency graph, close an open
+finding, or authorize a gate. Rebind current hashes only after actual owner
+review when either reviewed carrier changes; native gate requests must include
+this receipt among their inputs.
