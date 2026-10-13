@@ -27,6 +27,7 @@ const manifestsArg = option('--manifests');
 const modelsArg = option('--models');
 const lineupArg = option('--lineup');
 const effortArg = option('--effort');
+const strictContext = argv.includes('--strict-context');
 const limitArg = option('--limit');
 // Kept as run metadata for callers and logs. Stateless judging deliberately
 // does not use it as a session namespace.
@@ -40,7 +41,7 @@ const contextCache = option('--context-cache') || (/-judge\.jsonl$/.test(ledger)
 if (!ledger || !cost || (!pagesArg && !itemsArg && !manifestsArg)) {
   console.error('usage: node tools/physics-support/judge-sweep.mjs --ledger FILE --cost FILE '
     + '(--pages PAGE,... | --items ID,... | --manifests FILE,...) '
-    + '[--lineup sol|sol61|luna] [--effort low|medium|high|xhigh|max] [--models MODEL,...] [--limit N] [--run RUN]');
+    + '[--lineup sol|sol61|luna] [--effort low|medium|high|xhigh|max] [--models MODEL,...] [--limit N] [--run RUN] [--strict-context]');
   process.exit(2);
 }
 if (manifestsArg && (pagesArg || itemsArg)) {
@@ -136,7 +137,7 @@ for (const model of models) {
     const current = currentHashes.get(id);
     if (!current) throw new Error(`${id}: missing current context hash`);
     return !(history.get(`${id}\0${model}`) ?? []).some((row) =>
-      typeof row.keep === 'boolean' && verdictIsCurrent(row, current));
+      typeof row.keep === 'boolean' && verdictIsCurrent(row, current, { strictContext }));
   }).slice(0, limit);
   console.log(`[judge-sweep] ${model}: pending ${owed.length}/${ids.length}, cap ${caps[model]}`);
   pending.push(...owed.map((id) => ({ id, model })));

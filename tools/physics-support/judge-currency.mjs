@@ -5,7 +5,7 @@
 //   tools/physics-support/judge-sweep.mjs    decides which items to SPEND a judge call on.
 //   tools/physics-support/level-coverage.mjs decides whether the receipt gate is satisfied.
 //
-// A verdict is current when EITHER
+// The legacy/default policy accepts a verdict when EITHER
 //
 //   (a) it was cast against the item's current frozen PAIR context, or
 //   (b) it was cast against byte-identical text of THAT ITEM.
@@ -25,6 +25,10 @@
 // both clauses; only its unedited page-mates are spared. Nothing that needs a
 // fresh verdict escapes through this.
 //
+// Native Step 5 opts into strictContext: both hashes must match. A supplier
+// change invalidates that exact frozen prompt even when this item is unchanged.
+// The sweep and Step-5 closure therefore use the same currency rule.
+//
 // The hashes here are the JUDGE form (`itemHashJudge`): the whole file with only
 // the `judge:` stamp removed. Writing the stamp must not invalidate the verdict
 // the stamp records.
@@ -34,10 +38,13 @@
  *        a verdict row from the judge ledger
  * @param {{context: string, item: string|null}} current
  *        the item's current context hash and current judge-form item hash
+ * @param {{strictContext?: boolean}} [options] require both current hashes
  * @returns {boolean}
  */
-export function verdictIsCurrent(row, current) {
+export function verdictIsCurrent(row, current, { strictContext = false } = {}) {
   if (!row || !current) return false;
+  if (strictContext) return Boolean(current.context && current.item)
+    && row.context_sha256 === current.context && row.item_sha256 === current.item;
   if (row.context_sha256 && row.context_sha256 === current.context) return true;
   // A ledger written before `item_sha256` existed carries none, and `null`
   // must never match `undefined` into a false pass.

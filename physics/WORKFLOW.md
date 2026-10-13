@@ -147,7 +147,13 @@ Step 5 retains the round-based adjudication/repair engine, supplier-before-consu
 maintenance, frozen frontier guards and its complete gate battery. The
 native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
 Collection binds its genuine dispatch receipts while retaining historical lane
-identities for older evidence. Step 5 rejudgment always uses GPT-6.1 Sol at high
+identities for older evidence. Native Step-5 sweeps use `--strict-context`:
+a resumed verdict must match both the current judge-form item hash and its
+current frozen prompt context. A changed supplier context requires a fresh
+verdict even if this item's own bytes are unchanged; exact current verdicts
+remain reusable on resume. Other sweep callers retain the existing default
+currency policy. This changes selection only, never rewrites verdicts or
+invalidates an otherwise current context-hash cache. Step 5 rejudgment always uses GPT-6.1 Sol at high
 reasoning effort, independent of the Step-4 judge model. Repeated adjudication
 consumes the actual rejudge verdicts. The
 judgment/adjudication rounds continue until the latest round's unique confirmed
