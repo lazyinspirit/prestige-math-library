@@ -339,6 +339,20 @@ duplicate, unpublished or stale context entries fail closed.
 
 ## Pre-gate recertification
 
+An owner-supervised run may select `tools/autopilot/stages/owner-supervised.mts`
+through its run-local `config.json`. This preserves the native stage table,
+dispatches and full gate batteries, and pauses after writers drain before each
+battery. The supervisor resolves all escalations, then runs
+`node tools/owner-gate-supervision.mjs --run RUN --state-dir .autopilot/RUN
+--escalations-resolved`. The tool hashes the current manifest frontier and its
+supplier context, checks dependency labels and actual-renderer proof formatting
+in dependency order, and records a single-battery permission. The supervisor
+resumes the native controller. Changed inputs or a consumed permission require
+a fresh pass; no review verdict, certification history or gate is waived.
+Drift planning boundaries record page metadata only because content does not
+yet exist; authored boundaries reject empty inventories. This optional wrapper
+does not affect other runs or change their worker prompts.
+
 Outside Codex supervisors follow CLAUDE.md: resolve escalations before gates and
 perform a fresh dependency-ordered formatting/metadata-only pass immediately
 before every attempt. This pass is not a detailed mathematical review. Only
