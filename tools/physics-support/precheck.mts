@@ -11,24 +11,13 @@ import { parseFrontmatter } from './content-policy-lib.mjs';
 import { splitFrontmatter } from './facts-block.mjs';
 import { NONPROOF_KINDS } from './physics-content.mjs';
 import { precheckSource } from './paths.mjs';
+import { checkableText } from './precheck-text.mjs';
 
 // The normative checker lives in the app repo, whose location is resolved at run
 // time rather than hardcoded (tools/physics-support/paths.mjs). A static import cannot take a
 // computed path, so this is a top-level dynamic import; tsx resolves the .ts.
 const { proposedPrecheck } = await import(pathToFileURL(precheckSource()).href);
 
-const BODY_MARKER = /\n## (Proof|Refutation|Verification|Counterexample)\n/;
-
-/** Extract the checkable text: facts declarations + steps. New format = the
- *  "## Facts & Assumptions" section onward with markdown headings stripped;
- *  old format = the body after the proof-section heading. */
-function checkableText(md: string): string | null {
-  const fa = md.split(/\n## Facts & Assumptions\n/);
-  if (fa.length >= 2) return fa[fa.length - 1].replace(/^## .*$/gm, '').trim();
-  const m = md.split(BODY_MARKER);
-  if (m.length >= 3) return m[m.length - 1].trim();
-  return null;
-}
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
 const files = argv.filter(arg => arg !== '--json').length

@@ -192,6 +192,12 @@ the changed carrier for a fresh native owner review before closure or
 certification. It cannot satisfy adjudication, strict collection, or a gate;
 unknown changes and mismatched or stale grants still fail the existing checks.
 
+Physics precheck presents each numbered Markdown paragraph as a complete step
+to the normative application checker: single newlines within that paragraph
+become spaces in checker input, retaining all mathematics, citations and tags.
+Blank paragraph boundaries and separate numbered steps stay intact; source files
+are unchanged, and normative errors or proposed repairs still fail precheck.
+
 The additional
 `proof-contract-coverage` mechanical check still requires a contract for each
 actual proof-bearing carrier. No new substantive review gate is added. Step 6
