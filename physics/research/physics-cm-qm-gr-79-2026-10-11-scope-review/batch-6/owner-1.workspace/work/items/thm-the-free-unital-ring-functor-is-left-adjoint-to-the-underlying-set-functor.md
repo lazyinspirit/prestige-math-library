@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-free-unital-ring-functor-is-left-adjoint-to-the-underlying-set-functor.md

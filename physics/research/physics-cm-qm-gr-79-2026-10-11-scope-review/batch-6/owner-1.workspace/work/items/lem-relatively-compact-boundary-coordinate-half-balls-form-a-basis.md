@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relatively-compact-boundary-coordinate-half-balls-form-a-basis.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sublinear-triangle-minsize-implies-hyperbolicity.md

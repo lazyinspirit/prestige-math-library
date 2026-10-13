@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-vanishing-viscosity-families-are-locally-precompact-in-lone.md

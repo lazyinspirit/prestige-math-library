@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-plancherel-measure-is-not-uniform-on-partitions.md

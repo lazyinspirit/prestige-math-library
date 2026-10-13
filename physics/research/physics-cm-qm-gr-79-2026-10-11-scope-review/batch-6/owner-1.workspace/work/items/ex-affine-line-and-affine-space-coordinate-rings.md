@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-affine-line-and-affine-space-coordinate-rings.md

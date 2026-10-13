@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-straight-line-continuity-tests-do-not-imply-continuity.md

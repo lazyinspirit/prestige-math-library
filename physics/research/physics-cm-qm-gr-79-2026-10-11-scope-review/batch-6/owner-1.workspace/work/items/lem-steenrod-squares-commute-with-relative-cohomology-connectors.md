@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-steenrod-squares-commute-with-relative-cohomology-connectors.md

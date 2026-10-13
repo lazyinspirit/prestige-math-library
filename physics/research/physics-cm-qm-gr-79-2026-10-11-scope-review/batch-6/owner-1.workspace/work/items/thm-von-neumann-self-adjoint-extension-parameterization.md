@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-von-neumann-self-adjoint-extension-parameterization.md

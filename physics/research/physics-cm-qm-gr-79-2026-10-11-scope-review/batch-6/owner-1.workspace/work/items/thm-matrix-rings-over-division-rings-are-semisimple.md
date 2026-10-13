@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-matrix-rings-over-division-rings-are-semisimple.md

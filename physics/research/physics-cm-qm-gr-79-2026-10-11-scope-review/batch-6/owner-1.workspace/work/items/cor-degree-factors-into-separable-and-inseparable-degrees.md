@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-degree-factors-into-separable-and-inseparable-degrees.md

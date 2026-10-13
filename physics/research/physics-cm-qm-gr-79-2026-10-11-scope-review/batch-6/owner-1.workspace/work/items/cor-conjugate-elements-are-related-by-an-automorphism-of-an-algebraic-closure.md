@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-conjugate-elements-are-related-by-an-automorphism-of-an-algebraic-closure.md

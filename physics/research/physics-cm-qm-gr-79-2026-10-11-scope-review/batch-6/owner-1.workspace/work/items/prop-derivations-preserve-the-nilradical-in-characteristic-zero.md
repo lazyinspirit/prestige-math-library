@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-derivations-preserve-the-nilradical-in-characteristic-zero.md

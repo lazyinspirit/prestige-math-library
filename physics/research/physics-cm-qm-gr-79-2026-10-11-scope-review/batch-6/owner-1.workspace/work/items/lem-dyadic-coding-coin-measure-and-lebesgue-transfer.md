@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dyadic-coding-coin-measure-and-lebesgue-transfer.md

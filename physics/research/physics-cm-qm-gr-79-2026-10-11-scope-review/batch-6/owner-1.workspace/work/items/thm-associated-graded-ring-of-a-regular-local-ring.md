@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-associated-graded-ring-of-a-regular-local-ring.md

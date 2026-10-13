@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-real-hardy-space-equals-lp-for-p-greater-than-one.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-monomial-induced-representations-transversal-model-properties.md

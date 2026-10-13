@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-intersection-form-not-negative-definite-on-all-divisors.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-changing-a-framing-can-change-the-pontryagin-thom-class.md

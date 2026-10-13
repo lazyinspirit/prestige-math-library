@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-uniqueness-of-invariant-factors-and-elementary-divisors-over-a-pid.md

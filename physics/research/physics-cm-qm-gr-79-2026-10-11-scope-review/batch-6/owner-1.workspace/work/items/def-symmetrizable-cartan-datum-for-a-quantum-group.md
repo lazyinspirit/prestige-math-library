@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-symmetrizable-cartan-datum-for-a-quantum-group.md

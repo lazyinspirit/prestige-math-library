@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-generator-of-a-unitary-group-is-skew-adjoint.md

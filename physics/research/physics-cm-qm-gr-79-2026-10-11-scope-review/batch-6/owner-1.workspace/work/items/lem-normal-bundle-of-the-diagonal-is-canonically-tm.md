@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normal-bundle-of-the-diagonal-is-canonically-tm.md

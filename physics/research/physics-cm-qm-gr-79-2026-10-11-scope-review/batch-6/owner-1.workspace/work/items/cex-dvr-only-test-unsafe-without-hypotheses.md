@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-dvr-only-test-unsafe-without-hypotheses.md

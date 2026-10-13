@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-neron-model-uniqueness-etale-base-change-and-local-nature.md

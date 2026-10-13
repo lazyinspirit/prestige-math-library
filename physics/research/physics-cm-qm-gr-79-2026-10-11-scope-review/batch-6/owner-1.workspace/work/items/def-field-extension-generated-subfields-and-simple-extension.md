@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-field-extension-generated-subfields-and-simple-extension.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tail-curve-tangents-and-homoclinic-transversality.md

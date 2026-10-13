@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-orthogonal-complement-counting-for-the-commutator-pairing.md

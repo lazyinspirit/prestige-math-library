@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-double-of-a-smooth-manifold-with-boundary.md

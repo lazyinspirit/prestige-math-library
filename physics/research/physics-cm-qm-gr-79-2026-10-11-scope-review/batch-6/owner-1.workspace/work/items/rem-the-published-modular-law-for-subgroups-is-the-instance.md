@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-the-published-modular-law-for-subgroups-is-the-instance.md

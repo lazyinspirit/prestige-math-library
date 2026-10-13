@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-irreducible-symmetric-group-character-values-are-power-sum-coefficients.md

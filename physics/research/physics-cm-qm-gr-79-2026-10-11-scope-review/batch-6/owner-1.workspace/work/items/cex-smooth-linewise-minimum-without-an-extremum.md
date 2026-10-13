@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-smooth-linewise-minimum-without-an-extremum.md

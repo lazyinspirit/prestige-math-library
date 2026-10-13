@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-augmentation-map-and-augmentation-ideal-of-a-group-ring.md

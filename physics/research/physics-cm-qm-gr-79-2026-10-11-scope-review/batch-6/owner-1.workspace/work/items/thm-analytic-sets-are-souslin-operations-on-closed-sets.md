@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-analytic-sets-are-souslin-operations-on-closed-sets.md

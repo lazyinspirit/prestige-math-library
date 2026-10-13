@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/library/non-relativistic-classical-mechanics/cm15-scattering-and-impulse-model-boundaries.md

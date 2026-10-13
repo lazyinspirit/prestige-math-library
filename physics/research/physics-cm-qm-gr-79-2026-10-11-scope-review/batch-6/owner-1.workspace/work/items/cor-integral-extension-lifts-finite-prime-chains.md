@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-integral-extension-lifts-finite-prime-chains.md

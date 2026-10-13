@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fundamental-theorem-of-finite-abelian-groups-elementary-divisor-form.md

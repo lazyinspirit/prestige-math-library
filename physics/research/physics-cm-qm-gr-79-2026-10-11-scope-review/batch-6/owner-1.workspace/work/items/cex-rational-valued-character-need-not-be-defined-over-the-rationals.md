@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-rational-valued-character-need-not-be-defined-over-the-rationals.md

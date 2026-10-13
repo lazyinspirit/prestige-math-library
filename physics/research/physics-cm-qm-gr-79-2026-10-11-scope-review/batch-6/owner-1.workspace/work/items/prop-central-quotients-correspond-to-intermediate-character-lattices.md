@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-central-quotients-correspond-to-intermediate-character-lattices.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-flat-smooth-function-has-no-holomorphic-extension.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-gr-scalar-field-stress-energy-conservation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-setting-a-to-zero-in-a-closed-kr-factorization-gives-the-wide-edge-koszul-complex.md

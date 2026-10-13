@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-shapovalov-determinant-on-a-weight-space.md

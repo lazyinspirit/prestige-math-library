@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-polar-decomposition-of-an-invertible-matrix.md

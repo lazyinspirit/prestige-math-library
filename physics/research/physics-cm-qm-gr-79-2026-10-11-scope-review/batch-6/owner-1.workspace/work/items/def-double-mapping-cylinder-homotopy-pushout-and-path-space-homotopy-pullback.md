@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-double-mapping-cylinder-homotopy-pushout-and-path-space-homotopy-pullback.md

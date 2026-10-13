@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-linear-functional-on-smooth-germs-is-a-tangent-vector.md

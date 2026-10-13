@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-ore-fraction-group-of-positive-braids-is-the-artin-braid-group.md

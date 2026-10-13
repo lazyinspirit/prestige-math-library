@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-compactly-supported-smooth-euclidean-vector-field-is-complete.md

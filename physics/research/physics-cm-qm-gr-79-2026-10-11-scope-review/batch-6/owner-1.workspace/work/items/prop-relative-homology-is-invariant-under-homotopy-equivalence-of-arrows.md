@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-relative-homology-is-invariant-under-homotopy-equivalence-of-arrows.md

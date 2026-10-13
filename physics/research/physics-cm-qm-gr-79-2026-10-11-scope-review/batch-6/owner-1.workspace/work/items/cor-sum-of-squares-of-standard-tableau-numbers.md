@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-sum-of-squares-of-standard-tableau-numbers.md

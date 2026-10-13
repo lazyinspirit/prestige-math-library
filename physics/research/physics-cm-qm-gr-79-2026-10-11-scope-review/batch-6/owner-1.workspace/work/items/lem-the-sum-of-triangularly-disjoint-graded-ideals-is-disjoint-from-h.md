@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-sum-of-triangularly-disjoint-graded-ideals-is-disjoint-from-h.md

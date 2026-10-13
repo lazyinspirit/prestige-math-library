@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-minimal-parabolic-flag-projection-is-p1-bundle.md

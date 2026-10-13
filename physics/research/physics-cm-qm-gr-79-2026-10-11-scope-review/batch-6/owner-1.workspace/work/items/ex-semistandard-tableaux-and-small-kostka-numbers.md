@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-semistandard-tableaux-and-small-kostka-numbers.md

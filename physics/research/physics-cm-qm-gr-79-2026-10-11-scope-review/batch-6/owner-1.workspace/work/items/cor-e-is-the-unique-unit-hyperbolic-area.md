@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-e-is-the-unique-unit-hyperbolic-area.md

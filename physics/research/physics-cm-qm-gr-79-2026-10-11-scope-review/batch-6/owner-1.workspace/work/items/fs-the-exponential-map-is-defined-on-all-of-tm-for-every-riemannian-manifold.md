@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-exponential-map-is-defined-on-all-of-tm-for-every-riemannian-manifold.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-collapse-map-is-continuous-and-smooth-away-from-the-basepoint.md

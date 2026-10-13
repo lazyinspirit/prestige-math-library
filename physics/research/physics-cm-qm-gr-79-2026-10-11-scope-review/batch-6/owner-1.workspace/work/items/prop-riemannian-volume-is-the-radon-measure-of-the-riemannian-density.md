@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density.md

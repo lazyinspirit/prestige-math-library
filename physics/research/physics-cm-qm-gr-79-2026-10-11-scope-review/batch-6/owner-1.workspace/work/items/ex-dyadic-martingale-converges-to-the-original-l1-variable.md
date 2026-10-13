@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-dyadic-martingale-converges-to-the-original-l1-variable.md

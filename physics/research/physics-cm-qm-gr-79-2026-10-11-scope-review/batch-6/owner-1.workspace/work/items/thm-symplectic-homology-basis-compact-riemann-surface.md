@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-symplectic-homology-basis-compact-riemann-surface.md

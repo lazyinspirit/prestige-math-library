@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-characteristic-disk-with-essential-boundary-data-produces-a-vanishing-cycle.md

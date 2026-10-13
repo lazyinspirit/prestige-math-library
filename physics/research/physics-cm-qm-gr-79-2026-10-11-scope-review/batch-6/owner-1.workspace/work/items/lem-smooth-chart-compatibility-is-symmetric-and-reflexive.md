@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-smooth-chart-compatibility-is-symmetric-and-reflexive.md

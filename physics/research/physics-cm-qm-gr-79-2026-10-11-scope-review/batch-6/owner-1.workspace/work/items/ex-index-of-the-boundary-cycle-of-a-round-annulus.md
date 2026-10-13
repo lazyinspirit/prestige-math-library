@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-index-of-the-boundary-cycle-of-a-round-annulus.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-representation-theory-of-noncompact-real-reductive-groups.md

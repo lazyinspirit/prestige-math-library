@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-boundary-and-interior-partition-glues-local-h-two-estimates.md

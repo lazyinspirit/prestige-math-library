@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-vertex-and-edge-stabilizers-and-their-incidence-inclusions.md

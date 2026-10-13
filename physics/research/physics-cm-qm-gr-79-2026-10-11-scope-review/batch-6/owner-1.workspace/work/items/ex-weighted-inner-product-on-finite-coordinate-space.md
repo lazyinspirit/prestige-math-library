@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-weighted-inner-product-on-finite-coordinate-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tangential-h-two-estimate-near-a-flat-dirichlet-boundary.md

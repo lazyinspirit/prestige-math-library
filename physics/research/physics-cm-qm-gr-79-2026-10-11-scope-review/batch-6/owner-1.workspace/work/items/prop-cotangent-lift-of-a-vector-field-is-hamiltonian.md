@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cotangent-lift-of-a-vector-field-is-hamiltonian.md

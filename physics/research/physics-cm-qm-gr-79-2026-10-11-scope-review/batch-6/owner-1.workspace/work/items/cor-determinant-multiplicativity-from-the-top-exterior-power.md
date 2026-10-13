@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-determinant-multiplicativity-from-the-top-exterior-power.md

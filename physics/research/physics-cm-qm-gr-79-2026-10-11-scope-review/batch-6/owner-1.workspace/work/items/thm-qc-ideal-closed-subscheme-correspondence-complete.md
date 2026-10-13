@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-qc-ideal-closed-subscheme-correspondence-complete.md

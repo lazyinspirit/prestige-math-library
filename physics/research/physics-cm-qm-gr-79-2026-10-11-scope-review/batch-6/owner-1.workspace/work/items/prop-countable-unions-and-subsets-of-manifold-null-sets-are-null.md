@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-countable-unions-and-subsets-of-manifold-null-sets-are-null.md

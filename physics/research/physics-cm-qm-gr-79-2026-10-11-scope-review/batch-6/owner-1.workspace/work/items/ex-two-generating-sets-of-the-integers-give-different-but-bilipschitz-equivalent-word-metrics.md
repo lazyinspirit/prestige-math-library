@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-generating-sets-of-the-integers-give-different-but-bilipschitz-equivalent-word-metrics.md

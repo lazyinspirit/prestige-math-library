@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-complex-k-theory-of-even-and-odd-spheres.md

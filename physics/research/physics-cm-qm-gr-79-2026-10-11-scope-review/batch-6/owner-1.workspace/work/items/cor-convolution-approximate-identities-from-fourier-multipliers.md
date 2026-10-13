@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-convolution-approximate-identities-from-fourier-multipliers.md

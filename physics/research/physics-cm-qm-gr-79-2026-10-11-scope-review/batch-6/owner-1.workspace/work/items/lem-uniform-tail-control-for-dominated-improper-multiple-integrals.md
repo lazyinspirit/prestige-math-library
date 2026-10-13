@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-uniform-tail-control-for-dominated-improper-multiple-integrals.md

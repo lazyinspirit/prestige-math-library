@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-line-bundles-on-projective-three-space-restrict-by-degree.md

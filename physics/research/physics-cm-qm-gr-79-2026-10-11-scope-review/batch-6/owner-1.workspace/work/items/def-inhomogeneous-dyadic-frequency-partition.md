@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-inhomogeneous-dyadic-frequency-partition.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-leray-hirsch-for-a-trivial-product-bundle.md

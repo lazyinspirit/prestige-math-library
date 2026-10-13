@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-embedded-deformations-of-a-closed-subscheme.md

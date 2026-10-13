@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-injective-resolutions-of-the-same-object-are-homotopy-equivalent-under-that-object.md

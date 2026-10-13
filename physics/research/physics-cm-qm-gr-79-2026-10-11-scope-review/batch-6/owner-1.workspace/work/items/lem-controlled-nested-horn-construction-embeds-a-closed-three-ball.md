@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-controlled-nested-horn-construction-embeds-a-closed-three-ball.md

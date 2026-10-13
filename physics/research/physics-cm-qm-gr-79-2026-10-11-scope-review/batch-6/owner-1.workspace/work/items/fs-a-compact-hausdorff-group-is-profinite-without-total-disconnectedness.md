@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-compact-hausdorff-group-is-profinite-without-total-disconnectedness.md

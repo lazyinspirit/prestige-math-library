@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-moments-give-derivatives-of-the-characteristic-function.md

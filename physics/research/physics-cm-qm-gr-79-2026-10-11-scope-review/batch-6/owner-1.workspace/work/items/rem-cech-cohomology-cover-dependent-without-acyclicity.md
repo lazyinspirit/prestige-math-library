@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-cech-cohomology-cover-dependent-without-acyclicity.md

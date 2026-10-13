@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-riemannian-isometries-preserve-length-and-distance.md

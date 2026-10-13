@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sigma-algebra-generated-by-a-countable-partition.md

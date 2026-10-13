@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-extension-from-subobjects-of-a-generator-detects-injectivity.md

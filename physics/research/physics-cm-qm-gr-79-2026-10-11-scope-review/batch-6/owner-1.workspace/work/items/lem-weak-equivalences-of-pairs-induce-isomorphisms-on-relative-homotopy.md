@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-equivalences-of-pairs-induce-isomorphisms-on-relative-homotopy.md

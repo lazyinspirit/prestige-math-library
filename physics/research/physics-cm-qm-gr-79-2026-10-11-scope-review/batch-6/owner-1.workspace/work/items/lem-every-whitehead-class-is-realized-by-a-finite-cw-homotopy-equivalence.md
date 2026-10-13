@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-every-whitehead-class-is-realized-by-a-finite-cw-homotopy-equivalence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-an-x-sparse-blockade-iteration-yields-further-sparsification-or-a-pure-blockade.md

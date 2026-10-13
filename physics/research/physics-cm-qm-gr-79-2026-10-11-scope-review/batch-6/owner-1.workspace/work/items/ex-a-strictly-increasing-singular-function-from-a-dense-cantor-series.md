@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-strictly-increasing-singular-function-from-a-dense-cantor-series.md

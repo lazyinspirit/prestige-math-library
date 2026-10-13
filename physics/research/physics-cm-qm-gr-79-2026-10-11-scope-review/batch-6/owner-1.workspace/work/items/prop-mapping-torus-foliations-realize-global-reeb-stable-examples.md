@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-mapping-torus-foliations-realize-global-reeb-stable-examples.md

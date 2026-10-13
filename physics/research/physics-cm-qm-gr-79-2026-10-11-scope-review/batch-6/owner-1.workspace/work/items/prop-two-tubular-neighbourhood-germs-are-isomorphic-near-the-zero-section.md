@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-two-tubular-neighbourhood-germs-are-isomorphic-near-the-zero-section.md

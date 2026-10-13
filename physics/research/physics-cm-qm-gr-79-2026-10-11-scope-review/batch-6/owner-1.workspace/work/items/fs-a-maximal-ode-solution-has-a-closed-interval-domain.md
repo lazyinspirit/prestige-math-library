@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-maximal-ode-solution-has-a-closed-interval-domain.md

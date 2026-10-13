@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gitik-expanded-proper-class-forcing-theorem.md

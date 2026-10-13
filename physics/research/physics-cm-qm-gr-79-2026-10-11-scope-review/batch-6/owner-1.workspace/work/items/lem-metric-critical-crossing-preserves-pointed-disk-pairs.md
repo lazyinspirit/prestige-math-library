@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-metric-critical-crossing-preserves-pointed-disk-pairs.md

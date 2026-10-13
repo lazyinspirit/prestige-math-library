@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-syntactic-properties-lie-outside-rices-theorem.md

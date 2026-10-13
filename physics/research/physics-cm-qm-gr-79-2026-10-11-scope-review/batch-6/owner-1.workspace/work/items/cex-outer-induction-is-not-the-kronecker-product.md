@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-outer-induction-is-not-the-kronecker-product.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sr-endpoint-displacement-of-a-future-timelike-worldline.md

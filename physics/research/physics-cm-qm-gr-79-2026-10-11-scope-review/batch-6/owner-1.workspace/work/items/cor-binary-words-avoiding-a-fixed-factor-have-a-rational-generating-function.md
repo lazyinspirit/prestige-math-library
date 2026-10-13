@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-binary-words-avoiding-a-fixed-factor-have-a-rational-generating-function.md

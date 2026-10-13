@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-k-four-is-planar-but-not-three-colourable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-principal-bundle-classification-can-fail-without-numerability.md

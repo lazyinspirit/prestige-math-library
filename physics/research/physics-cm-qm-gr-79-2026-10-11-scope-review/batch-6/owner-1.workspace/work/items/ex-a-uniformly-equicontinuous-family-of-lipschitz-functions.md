@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-uniformly-equicontinuous-family-of-lipschitz-functions.md

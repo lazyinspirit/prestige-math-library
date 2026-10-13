@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-orbit-circles-of-rotation-as-a-foliation-away-from-the-origin.md

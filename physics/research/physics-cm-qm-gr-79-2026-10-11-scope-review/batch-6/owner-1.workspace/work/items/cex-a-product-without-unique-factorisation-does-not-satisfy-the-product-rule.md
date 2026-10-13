@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-product-without-unique-factorisation-does-not-satisfy-the-product-rule.md

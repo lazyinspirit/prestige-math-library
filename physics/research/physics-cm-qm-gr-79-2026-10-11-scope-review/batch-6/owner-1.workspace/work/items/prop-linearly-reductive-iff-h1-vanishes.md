@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-linearly-reductive-iff-h1-vanishes.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compactly-supported-continuous-functions-are-translation-continuous-in-l-p.md

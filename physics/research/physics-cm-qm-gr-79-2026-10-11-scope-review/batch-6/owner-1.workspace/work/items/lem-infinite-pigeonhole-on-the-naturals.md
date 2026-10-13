@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-infinite-pigeonhole-on-the-naturals.md

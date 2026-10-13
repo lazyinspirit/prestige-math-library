@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-chern-classes-from-the-projective-bundle-relation.md

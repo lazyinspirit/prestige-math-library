@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-twice-differentiable-local-minimiser-has-nonnegative-second-variation.md

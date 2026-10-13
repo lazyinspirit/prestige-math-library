@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-variable-rank-involutive-family-outside-regular-frobenius.md

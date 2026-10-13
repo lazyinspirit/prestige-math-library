@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-projective-modules-are-flat-is-supplied-by-mod-three.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-symmetric-torus-height-flow-is-not-morse-smale.md

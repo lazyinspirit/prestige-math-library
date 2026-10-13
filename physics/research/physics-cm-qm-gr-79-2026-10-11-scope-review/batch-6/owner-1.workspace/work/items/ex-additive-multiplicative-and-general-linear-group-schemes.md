@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-additive-multiplicative-and-general-linear-group-schemes.md

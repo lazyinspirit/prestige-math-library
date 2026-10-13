@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-kurepa-equivalence-of-suslin-trees-lines-and-algebras.md

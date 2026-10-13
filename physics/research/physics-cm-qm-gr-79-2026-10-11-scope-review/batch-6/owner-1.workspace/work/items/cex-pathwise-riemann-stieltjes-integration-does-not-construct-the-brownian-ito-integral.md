@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-pathwise-riemann-stieltjes-integration-does-not-construct-the-brownian-ito-integral.md

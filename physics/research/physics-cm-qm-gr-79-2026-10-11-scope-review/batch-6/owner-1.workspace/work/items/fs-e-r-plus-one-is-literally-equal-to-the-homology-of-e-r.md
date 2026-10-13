@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-e-r-plus-one-is-literally-equal-to-the-homology-of-e-r.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-companion-matrix-iterates-a-linear-recurrence.md

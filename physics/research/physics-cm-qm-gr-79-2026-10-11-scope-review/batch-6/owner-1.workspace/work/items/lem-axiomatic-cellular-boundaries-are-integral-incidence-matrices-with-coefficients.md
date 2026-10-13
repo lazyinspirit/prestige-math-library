@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-axiomatic-cellular-boundaries-are-integral-incidence-matrices-with-coefficients.md

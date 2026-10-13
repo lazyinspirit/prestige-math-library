@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cg-weak-order-meet-semilattice-and-finite-lattice.md

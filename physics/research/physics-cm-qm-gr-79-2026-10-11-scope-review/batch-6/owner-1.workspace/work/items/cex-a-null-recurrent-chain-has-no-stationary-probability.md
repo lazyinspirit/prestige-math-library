@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-null-recurrent-chain-has-no-stationary-probability.md

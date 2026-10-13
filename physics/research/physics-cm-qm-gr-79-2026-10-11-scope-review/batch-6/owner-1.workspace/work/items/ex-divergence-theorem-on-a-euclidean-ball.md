@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-divergence-theorem-on-a-euclidean-ball.md

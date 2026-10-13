@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-real-projective-space-cellular-homology-and-pinch-map.md

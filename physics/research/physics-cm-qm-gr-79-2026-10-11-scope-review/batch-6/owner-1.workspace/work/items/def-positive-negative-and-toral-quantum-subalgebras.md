@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-positive-negative-and-toral-quantum-subalgebras.md

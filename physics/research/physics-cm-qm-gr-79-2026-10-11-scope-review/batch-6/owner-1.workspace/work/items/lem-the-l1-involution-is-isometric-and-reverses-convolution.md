@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-l1-involution-is-isometric-and-reverses-convolution.md

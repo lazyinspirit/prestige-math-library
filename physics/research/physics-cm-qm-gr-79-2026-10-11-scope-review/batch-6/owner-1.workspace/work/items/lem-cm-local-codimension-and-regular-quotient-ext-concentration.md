@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-local-codimension-and-regular-quotient-ext-concentration.md

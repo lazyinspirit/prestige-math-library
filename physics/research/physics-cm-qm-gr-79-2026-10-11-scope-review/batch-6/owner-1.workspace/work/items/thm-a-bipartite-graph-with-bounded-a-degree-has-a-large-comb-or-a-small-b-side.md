@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-bipartite-graph-with-bounded-a-degree-has-a-large-comb-or-a-small-b-side.md

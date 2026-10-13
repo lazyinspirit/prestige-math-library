@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-gaussian-family-is-an-l-one-approximate-identity.md

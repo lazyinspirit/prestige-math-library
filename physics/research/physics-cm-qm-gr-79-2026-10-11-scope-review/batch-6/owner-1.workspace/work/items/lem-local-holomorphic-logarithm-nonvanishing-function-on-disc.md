@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-holomorphic-logarithm-nonvanishing-function-on-disc.md

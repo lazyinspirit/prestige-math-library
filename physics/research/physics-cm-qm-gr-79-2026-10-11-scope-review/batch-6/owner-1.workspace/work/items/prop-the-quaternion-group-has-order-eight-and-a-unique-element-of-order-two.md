@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-quaternion-group-has-order-eight-and-a-unique-element-of-order-two.md

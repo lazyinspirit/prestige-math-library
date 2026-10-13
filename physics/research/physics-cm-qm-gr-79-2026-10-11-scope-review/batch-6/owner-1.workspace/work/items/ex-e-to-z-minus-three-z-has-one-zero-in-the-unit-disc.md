@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-e-to-z-minus-three-z-has-one-zero-in-the-unit-disc.md

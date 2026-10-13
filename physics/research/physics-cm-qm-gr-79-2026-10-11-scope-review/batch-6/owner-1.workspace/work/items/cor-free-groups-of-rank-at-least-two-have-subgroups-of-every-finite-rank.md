@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-free-groups-of-rank-at-least-two-have-subgroups-of-every-finite-rank.md

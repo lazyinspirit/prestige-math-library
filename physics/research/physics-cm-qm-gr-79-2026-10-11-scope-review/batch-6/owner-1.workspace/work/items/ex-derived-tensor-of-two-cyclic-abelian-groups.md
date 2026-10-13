@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-derived-tensor-of-two-cyclic-abelian-groups.md

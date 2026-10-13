@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cartan-coherence-for-higher-diagonal-approximations.md

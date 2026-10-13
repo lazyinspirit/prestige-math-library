@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-setwise-endpoints-do-not-make-a-braid-pure.md

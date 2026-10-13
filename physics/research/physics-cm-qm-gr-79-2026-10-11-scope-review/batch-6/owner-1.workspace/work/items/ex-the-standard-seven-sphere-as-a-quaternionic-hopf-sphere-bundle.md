@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-standard-seven-sphere-as-a-quaternionic-hopf-sphere-bundle.md

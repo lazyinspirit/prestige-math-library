@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c1-local-diffeomorphisms-preserve-null-sets-locally.md

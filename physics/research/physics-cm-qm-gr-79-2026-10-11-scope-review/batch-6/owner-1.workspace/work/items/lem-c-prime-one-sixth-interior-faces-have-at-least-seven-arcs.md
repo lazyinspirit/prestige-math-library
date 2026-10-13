@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c-prime-one-sixth-interior-faces-have-at-least-seven-arcs.md

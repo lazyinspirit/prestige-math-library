@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-three-dimensional-radial-carleman-integer-weight.md

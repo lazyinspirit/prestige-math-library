@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sigma-cellular-base-yields-a-compatible-metric.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complexification-dichotomy-for-a-real-simple-lie-algebra.md

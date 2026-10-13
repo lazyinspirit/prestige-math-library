@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fourier-transform-converts-allowed-tempered-convolutions-to-products.md

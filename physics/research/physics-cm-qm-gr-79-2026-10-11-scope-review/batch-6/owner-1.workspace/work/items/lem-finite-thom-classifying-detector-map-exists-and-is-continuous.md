@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-thom-classifying-detector-map-exists-and-is-continuous.md

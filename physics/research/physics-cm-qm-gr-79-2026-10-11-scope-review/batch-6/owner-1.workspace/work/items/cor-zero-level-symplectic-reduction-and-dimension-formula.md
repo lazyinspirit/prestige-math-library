@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-zero-level-symplectic-reduction-and-dimension-formula.md

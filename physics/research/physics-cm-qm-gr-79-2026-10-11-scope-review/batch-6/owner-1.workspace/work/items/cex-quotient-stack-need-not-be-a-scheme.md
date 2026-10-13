@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-quotient-stack-need-not-be-a-scheme.md

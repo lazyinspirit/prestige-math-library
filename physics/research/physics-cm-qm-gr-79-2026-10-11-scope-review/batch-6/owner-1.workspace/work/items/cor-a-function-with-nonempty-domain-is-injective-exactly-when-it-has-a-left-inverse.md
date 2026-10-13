@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-function-with-nonempty-domain-is-injective-exactly-when-it-has-a-left-inverse.md

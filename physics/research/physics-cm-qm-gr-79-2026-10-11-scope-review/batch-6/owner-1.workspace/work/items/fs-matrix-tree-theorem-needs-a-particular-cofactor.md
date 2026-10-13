@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-matrix-tree-theorem-needs-a-particular-cofactor.md

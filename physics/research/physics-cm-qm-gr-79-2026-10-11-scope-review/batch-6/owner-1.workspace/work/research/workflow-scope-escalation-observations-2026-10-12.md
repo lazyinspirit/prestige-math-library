@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/workflow-scope-escalation-observations-2026-10-12.md

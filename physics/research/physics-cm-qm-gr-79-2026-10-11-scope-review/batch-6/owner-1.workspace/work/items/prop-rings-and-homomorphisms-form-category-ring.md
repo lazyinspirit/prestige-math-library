@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-rings-and-homomorphisms-form-category-ring.md

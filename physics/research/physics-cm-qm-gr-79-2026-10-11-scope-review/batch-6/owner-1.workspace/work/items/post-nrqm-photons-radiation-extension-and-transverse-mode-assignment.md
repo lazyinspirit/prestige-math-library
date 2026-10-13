@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/post-nrqm-photons-radiation-extension-and-transverse-mode-assignment.md

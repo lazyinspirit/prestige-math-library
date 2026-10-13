@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-arbitrary-pullback-does-not-define-a-chow-operation.md

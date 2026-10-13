@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-enflo-separable-reflexive-banach-space-without-the-approximation-property.md

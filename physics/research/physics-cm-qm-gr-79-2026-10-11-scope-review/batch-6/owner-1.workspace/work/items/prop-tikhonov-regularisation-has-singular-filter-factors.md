@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-tikhonov-regularisation-has-singular-filter-factors.md

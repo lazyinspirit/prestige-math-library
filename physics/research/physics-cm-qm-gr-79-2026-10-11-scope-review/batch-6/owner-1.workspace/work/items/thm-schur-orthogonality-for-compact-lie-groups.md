@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-schur-orthogonality-for-compact-lie-groups.md

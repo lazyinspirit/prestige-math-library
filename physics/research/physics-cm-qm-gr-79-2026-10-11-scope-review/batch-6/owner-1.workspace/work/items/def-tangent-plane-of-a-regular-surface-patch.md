@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-tangent-plane-of-a-regular-surface-patch.md

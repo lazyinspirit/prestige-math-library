@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-zero-th-lie-algebra-cohomology-is-invariants.md

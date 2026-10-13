@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-serre-polynomial-cohomology-of-mod-two-eilenberg-maclane-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fixed-leafwise-cap-gives-a-joint-transverse-product-with-exact-collar.md

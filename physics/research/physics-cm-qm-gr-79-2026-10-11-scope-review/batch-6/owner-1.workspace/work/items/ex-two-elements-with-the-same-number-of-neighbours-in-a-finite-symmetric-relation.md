@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-elements-with-the-same-number-of-neighbours-in-a-finite-symmetric-relation.md

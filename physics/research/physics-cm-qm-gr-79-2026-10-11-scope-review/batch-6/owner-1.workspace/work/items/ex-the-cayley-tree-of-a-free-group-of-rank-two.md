@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-cayley-tree-of-a-free-group-of-rank-two.md

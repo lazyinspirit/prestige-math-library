@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-bracket-relations-and-killing-signs-in-a-cartan-decomposition.md

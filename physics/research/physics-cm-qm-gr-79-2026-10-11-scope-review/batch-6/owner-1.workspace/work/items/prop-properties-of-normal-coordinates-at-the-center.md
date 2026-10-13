@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-properties-of-normal-coordinates-at-the-center.md

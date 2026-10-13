@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-symmetric-and-hereditarily-symmetric-sets.md

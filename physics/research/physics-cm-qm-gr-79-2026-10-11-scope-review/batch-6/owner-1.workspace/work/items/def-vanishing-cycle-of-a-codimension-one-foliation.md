@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-vanishing-cycle-of-a-codimension-one-foliation.md

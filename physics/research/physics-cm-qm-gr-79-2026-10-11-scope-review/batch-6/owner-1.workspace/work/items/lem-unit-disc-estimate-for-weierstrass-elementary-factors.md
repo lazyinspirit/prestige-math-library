@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-unit-disc-estimate-for-weierstrass-elementary-factors.md

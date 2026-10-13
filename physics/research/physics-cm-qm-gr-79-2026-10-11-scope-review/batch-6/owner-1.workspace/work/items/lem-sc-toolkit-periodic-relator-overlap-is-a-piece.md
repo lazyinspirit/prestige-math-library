@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sc-toolkit-periodic-relator-overlap-is-a-piece.md

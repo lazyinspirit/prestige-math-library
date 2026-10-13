@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-graphs-of-exact-and-closed-one-forms-as-lagrangians.md

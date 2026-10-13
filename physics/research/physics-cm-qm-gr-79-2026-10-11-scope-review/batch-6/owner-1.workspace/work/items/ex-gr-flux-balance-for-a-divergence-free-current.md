@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gr-flux-balance-for-a-divergence-free-current.md

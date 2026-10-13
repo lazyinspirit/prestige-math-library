@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-monotone-functions-are-differentiable-almost-everywhere-via-rising-sun.md

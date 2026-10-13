@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-essential-supremum-equals-the-pointwise-supremum.md

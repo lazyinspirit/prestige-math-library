@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-angle-derivative-formula-for-geodesic-curvature.md

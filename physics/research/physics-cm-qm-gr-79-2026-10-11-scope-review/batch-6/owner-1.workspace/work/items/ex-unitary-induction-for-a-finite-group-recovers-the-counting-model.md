@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-unitary-induction-for-a-finite-group-recovers-the-counting-model.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-riesz-product-for-a-hadamard-lacunary-set.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-principal-value-convergence-implies-improper-convergence.md

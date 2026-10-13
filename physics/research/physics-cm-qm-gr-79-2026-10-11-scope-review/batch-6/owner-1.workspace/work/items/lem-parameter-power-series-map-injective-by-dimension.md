@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-parameter-power-series-map-injective-by-dimension.md

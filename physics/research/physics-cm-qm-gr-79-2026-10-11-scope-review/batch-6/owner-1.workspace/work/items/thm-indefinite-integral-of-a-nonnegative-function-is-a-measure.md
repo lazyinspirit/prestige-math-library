@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-indefinite-integral-of-a-nonnegative-function-is-a-measure.md

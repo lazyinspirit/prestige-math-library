@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-analytic-noncharacteristic-hypersurfaces-flatten-to-a-coordinate-hyperplane.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cyclic-shift-positivity-is-a-strict-right-minimum-of-the-partial-sums.md

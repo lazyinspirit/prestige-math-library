@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-invariant-factor-decomposition-over-a-pid.md

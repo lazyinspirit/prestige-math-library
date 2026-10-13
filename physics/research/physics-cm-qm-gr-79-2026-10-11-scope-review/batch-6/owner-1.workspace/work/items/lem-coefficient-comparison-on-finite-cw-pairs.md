@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coefficient-comparison-on-finite-cw-pairs.md

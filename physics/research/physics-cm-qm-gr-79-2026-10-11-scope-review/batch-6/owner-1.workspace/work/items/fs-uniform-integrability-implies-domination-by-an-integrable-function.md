@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-uniform-integrability-implies-domination-by-an-integrable-function.md

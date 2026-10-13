@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-depth-bounded-by-number-of-ideal-generators.md

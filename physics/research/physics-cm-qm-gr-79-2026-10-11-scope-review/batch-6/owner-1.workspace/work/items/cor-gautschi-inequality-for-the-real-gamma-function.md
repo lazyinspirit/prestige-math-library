@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-gautschi-inequality-for-the-real-gamma-function.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sine-of-one-over-x-has-no-limit-at-zero.md

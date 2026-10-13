@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-positive-restricted-roots-and-nilpotent-n-algebra.md

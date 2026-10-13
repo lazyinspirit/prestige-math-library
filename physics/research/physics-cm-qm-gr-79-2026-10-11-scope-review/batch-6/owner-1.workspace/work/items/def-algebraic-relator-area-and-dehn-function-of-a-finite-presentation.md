@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation.md

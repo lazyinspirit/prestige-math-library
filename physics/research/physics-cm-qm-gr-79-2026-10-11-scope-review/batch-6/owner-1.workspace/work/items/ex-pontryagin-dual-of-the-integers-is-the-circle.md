@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-pontryagin-dual-of-the-integers-is-the-circle.md

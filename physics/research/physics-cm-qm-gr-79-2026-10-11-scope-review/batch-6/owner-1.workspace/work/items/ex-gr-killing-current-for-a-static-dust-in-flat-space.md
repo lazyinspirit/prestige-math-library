@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gr-killing-current-for-a-static-dust-in-flat-space.md

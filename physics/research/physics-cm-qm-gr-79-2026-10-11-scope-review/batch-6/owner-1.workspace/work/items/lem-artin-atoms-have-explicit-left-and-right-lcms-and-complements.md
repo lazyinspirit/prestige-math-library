@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-artin-atoms-have-explicit-left-and-right-lcms-and-complements.md

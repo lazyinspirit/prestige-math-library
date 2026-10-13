@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-real-frechet-derivative-on-real-and-complex-matrix-spaces.md

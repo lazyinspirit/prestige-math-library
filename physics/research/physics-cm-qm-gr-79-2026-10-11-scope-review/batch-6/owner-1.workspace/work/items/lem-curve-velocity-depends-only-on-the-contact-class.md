@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-curve-velocity-depends-only-on-the-contact-class.md

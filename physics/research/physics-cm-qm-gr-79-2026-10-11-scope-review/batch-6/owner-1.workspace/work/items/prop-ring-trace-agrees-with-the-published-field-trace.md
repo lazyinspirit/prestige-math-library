@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-ring-trace-agrees-with-the-published-field-trace.md

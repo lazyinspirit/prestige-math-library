@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fourier-stieltjes-transform-of-a-positive-measure-is-positive-definite.md

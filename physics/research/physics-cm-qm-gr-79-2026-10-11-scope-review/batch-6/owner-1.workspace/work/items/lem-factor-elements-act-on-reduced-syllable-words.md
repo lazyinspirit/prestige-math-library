@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-factor-elements-act-on-reduced-syllable-words.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-eisenstein-applied-to-the-translate-of-the-seventh-cyclotomic-polynomial.md

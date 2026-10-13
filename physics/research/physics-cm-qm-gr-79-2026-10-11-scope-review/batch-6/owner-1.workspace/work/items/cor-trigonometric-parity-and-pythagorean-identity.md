@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-trigonometric-parity-and-pythagorean-identity.md

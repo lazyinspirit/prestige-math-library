@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-dolbeault-cohomology-is-independent-of-hermitian-metric.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-seven-cycle-and-its-complement-have-the-erdos-hajnal-property.md

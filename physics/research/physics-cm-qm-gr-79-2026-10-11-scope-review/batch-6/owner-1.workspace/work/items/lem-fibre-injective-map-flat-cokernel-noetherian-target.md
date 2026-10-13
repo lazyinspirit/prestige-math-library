@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fibre-injective-map-flat-cokernel-noetherian-target.md

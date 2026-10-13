@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-primitive-ideals-are-partitioned-by-dot-orbit-central-character.md

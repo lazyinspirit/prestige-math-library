@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-standard-specializations-of-the-labelled-symbolic-method.md

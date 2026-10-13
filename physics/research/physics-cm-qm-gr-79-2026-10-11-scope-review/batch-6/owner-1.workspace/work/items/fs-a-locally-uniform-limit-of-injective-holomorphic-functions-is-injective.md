@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-locally-uniform-limit-of-injective-holomorphic-functions-is-injective.md

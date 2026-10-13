@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-two-term-complex-and-its-kernel-and-cokernel-homology.md

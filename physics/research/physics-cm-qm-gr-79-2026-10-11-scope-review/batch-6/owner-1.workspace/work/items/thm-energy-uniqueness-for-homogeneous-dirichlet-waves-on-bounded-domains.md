@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-energy-uniqueness-for-homogeneous-dirichlet-waves-on-bounded-domains.md

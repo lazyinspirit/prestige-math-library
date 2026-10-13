@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-second-derivative-newtonian-kernels-fit-the-cz-framework.md

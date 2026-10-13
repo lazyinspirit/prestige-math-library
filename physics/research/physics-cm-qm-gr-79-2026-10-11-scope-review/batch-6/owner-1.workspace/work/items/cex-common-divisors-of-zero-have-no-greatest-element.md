@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-common-divisors-of-zero-have-no-greatest-element.md

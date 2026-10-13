@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-bch-truncation-fails-when-higher-commutators-do-not-vanish.md

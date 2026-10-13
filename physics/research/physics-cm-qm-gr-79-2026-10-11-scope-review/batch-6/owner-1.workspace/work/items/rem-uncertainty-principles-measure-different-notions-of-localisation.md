@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-uncertainty-principles-measure-different-notions-of-localisation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-bilinear-form-neither-symmetric-nor-alternating.md

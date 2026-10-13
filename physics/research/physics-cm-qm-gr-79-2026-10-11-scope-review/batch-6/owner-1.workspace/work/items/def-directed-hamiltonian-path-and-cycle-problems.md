@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-directed-hamiltonian-path-and-cycle-problems.md

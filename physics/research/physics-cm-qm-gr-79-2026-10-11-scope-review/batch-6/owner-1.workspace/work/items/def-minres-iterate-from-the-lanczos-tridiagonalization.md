@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-minres-iterate-from-the-lanczos-tridiagonalization.md

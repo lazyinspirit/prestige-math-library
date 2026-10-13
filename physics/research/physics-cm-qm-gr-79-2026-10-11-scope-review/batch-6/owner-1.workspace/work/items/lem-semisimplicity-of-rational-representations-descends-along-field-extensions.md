@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-semisimplicity-of-rational-representations-descends-along-field-extensions.md

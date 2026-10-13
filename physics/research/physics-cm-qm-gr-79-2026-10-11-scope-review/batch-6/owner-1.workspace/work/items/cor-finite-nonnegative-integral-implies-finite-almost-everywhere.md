@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-nonnegative-integral-implies-finite-almost-everywhere.md

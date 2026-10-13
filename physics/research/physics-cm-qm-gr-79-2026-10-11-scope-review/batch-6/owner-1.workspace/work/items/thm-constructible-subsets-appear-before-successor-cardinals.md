@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-constructible-subsets-appear-before-successor-cardinals.md

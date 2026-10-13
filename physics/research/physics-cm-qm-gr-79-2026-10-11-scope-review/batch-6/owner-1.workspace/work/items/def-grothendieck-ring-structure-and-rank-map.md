@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-grothendieck-ring-structure-and-rank-map.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-inseparable-map-riemann-hurwitz-naive-fails.md

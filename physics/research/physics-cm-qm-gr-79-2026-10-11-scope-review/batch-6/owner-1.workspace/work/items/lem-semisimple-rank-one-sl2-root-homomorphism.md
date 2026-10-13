@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-semisimple-rank-one-sl2-root-homomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relative-homology-of-an-h-cobordism-vanishes-at-both-ends.md

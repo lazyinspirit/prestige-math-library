@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rudin-neighborhoods-of-initial-top-slices-contain-tails.md

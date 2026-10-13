@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gaussians-and-polynomials-times-gaussians-are-schwartz.md

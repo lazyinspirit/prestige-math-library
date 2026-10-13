@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-unshifted-and-shifted-qr-iteration-with-deflation-and-wilkinson-shift.md

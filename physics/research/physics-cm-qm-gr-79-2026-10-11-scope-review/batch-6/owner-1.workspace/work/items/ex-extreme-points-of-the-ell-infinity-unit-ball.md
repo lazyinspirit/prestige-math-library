@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-extreme-points-of-the-ell-infinity-unit-ball.md

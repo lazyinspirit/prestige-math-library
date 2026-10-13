@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-diagonal-bar-coinvariants-compute-group-homology.md

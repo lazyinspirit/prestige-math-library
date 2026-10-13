@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-weyl-dimension-formula-for-a-fundamental-sl3-module.md

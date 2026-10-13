@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-total-fractions-split-over-hypersurface-branches.md

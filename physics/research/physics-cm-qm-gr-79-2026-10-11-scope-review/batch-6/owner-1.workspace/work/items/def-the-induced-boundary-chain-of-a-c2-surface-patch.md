@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-the-induced-boundary-chain-of-a-c2-surface-patch.md

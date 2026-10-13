@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-symplectic-period-formula-for-wedge-integrals.md

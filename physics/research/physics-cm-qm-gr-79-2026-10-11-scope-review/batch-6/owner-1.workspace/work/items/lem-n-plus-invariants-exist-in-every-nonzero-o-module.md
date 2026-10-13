@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-n-plus-invariants-exist-in-every-nonzero-o-module.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-every-conjugacy-class-contains-a-cyclically-britton-reduced-word.md

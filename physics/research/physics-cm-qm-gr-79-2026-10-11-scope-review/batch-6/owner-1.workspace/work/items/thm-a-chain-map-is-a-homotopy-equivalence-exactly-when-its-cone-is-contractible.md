@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-chain-map-is-a-homotopy-equivalence-exactly-when-its-cone-is-contractible.md

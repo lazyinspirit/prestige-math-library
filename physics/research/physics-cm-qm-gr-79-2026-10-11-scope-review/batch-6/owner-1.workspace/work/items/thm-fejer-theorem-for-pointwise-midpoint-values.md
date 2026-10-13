@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fejer-theorem-for-pointwise-midpoint-values.md

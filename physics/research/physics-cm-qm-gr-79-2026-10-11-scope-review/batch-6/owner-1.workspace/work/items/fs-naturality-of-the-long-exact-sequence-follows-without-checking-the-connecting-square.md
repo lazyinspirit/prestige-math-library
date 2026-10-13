@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-naturality-of-the-long-exact-sequence-follows-without-checking-the-connecting-square.md

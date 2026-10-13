@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-real-rotation-changes-diagonalisability-after-complex-scalar-extension.md

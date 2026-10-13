@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-extremal-length-conformal-invariance-and-monotonicity.md

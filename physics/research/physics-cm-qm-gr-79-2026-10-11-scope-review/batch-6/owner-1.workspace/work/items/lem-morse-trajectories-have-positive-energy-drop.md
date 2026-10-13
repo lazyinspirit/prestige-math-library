@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-morse-trajectories-have-positive-energy-drop.md

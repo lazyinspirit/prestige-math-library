@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-lie-derivative-of-the-euclidean-metric-under-dilations.md

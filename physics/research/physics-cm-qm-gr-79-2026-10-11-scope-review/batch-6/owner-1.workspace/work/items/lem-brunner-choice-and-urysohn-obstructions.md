@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-brunner-choice-and-urysohn-obstructions.md

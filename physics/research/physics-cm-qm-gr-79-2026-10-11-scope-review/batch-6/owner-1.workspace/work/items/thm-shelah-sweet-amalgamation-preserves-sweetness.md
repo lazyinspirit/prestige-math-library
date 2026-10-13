@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-shelah-sweet-amalgamation-preserves-sweetness.md

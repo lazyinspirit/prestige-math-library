@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-binary-trees-satisfy-b-equals-one-plus-z-b-squared.md

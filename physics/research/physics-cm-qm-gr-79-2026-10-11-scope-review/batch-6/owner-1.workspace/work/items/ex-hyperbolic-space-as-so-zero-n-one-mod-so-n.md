@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hyperbolic-space-as-so-zero-n-one-mod-so-n.md

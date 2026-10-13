@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-deck-group-of-a-universal-cover-is-the-fundamental-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-fiber-homology-local-system-of-a-serre-fibration.md

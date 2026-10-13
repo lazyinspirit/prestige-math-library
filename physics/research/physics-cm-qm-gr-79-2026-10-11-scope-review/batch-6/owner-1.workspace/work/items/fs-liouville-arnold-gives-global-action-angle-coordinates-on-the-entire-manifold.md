@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-liouville-arnold-gives-global-action-angle-coordinates-on-the-entire-manifold.md

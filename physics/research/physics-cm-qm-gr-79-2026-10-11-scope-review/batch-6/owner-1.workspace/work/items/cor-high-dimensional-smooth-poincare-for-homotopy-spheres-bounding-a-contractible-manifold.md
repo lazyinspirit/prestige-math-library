@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-high-dimensional-smooth-poincare-for-homotopy-spheres-bounding-a-contractible-manifold.md

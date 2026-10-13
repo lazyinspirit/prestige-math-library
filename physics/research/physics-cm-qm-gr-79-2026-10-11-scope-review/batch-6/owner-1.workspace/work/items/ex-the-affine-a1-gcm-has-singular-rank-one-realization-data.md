@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-affine-a1-gcm-has-singular-rank-one-realization-data.md

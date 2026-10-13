@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-householder-similarity-reduces-to-hessenberg-and-tridiagonal-form.md

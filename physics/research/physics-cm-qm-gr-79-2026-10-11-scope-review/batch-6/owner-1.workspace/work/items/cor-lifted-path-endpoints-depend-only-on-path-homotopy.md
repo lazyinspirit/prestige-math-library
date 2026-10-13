@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-lifted-path-endpoints-depend-only-on-path-homotopy.md

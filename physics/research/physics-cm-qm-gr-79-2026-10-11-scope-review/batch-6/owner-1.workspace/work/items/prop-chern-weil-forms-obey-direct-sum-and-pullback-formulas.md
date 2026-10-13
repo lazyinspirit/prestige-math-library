@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-chern-weil-forms-obey-direct-sum-and-pullback-formulas.md

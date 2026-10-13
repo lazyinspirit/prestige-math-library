@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-clt-can-fail-with-infinite-variance-under-square-root-n-scaling.md

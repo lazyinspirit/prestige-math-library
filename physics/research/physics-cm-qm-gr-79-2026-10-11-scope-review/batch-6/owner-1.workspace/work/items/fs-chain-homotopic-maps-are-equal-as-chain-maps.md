@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-chain-homotopic-maps-are-equal-as-chain-maps.md

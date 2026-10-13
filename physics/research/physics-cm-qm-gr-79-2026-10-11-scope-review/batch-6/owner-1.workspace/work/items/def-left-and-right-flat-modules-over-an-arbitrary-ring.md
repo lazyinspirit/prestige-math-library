@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-left-and-right-flat-modules-over-an-arbitrary-ring.md

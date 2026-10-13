@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dunford-pettis-for-l-one-on-a-finite-measure-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid.md

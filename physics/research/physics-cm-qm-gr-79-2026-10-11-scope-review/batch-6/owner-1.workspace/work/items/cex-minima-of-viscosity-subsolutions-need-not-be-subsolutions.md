@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-minima-of-viscosity-subsolutions-need-not-be-subsolutions.md

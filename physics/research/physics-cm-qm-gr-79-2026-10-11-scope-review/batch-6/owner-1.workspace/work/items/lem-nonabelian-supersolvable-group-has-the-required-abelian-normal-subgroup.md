@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonabelian-supersolvable-group-has-the-required-abelian-normal-subgroup.md

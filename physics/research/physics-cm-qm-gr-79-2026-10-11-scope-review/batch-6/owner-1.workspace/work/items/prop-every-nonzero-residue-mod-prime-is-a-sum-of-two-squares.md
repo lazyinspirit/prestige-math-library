@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-every-nonzero-residue-mod-prime-is-a-sum-of-two-squares.md

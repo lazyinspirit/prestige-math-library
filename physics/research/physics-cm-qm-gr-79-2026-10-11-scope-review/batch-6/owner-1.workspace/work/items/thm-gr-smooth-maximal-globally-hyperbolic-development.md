@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gr-smooth-maximal-globally-hyperbolic-development.md

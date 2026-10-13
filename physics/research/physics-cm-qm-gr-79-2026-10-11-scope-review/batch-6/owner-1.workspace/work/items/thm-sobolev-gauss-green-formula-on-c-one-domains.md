@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sobolev-gauss-green-formula-on-c-one-domains.md

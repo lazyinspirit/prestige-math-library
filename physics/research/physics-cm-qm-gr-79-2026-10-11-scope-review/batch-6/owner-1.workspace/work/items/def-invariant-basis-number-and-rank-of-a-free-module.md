@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-invariant-basis-number-and-rank-of-a-free-module.md

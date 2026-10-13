@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-characteristic-functions-of-bernoulli-binomial-and-poisson-laws.md

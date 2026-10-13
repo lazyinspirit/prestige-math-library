@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-product-and-opposite-symplectic-moment-maps.md

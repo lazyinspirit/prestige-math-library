@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-twisted-loop-algebra-from-a-diagram-automorphism.md

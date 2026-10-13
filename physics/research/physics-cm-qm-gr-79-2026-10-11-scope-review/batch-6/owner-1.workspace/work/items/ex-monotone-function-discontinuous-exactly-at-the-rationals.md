@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-monotone-function-discontinuous-exactly-at-the-rationals.md

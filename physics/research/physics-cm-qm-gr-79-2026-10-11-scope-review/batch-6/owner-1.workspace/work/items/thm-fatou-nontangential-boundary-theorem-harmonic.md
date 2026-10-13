@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fatou-nontangential-boundary-theorem-harmonic.md

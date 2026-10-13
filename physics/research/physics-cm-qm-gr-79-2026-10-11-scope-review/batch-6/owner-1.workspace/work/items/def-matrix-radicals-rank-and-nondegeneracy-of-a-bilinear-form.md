@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form.md

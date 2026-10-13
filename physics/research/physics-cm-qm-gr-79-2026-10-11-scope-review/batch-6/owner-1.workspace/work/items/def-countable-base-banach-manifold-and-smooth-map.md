@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-countable-base-banach-manifold-and-smooth-map.md

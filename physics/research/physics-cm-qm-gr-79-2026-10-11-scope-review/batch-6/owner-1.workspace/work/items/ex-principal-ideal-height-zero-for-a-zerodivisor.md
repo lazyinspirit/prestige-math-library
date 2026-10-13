@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-principal-ideal-height-zero-for-a-zerodivisor.md

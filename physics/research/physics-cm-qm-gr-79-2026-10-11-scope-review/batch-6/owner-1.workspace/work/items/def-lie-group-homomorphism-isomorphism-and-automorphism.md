@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-lie-group-homomorphism-isomorphism-and-automorphism.md

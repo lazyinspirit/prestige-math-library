@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-excision-and-mayer-vietoris-with-local-coefficients.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-product-cobordisms-have-critical-point-free-presentations.md

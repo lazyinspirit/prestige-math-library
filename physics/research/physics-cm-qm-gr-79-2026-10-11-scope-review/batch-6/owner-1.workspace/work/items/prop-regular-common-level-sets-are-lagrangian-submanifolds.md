@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-regular-common-level-sets-are-lagrangian-submanifolds.md

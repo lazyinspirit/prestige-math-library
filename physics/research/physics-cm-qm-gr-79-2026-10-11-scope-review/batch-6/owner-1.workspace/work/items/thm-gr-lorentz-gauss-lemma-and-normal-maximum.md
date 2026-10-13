@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gr-lorentz-gauss-lemma-and-normal-maximum.md

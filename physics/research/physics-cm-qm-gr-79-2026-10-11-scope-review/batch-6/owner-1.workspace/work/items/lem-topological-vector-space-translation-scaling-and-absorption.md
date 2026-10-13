@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-topological-vector-space-translation-scaling-and-absorption.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-zeta-minus-one-is-the-ordinary-sum-one-plus-two-plus-three-and-so-on.md

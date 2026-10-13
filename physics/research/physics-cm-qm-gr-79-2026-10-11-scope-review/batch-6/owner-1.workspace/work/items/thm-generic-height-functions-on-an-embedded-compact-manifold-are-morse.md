@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-generic-height-functions-on-an-embedded-compact-manifold-are-morse.md

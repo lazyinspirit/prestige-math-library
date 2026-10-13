@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-normalized-khovanov-rozansky-homflypt-bigraded-euler-series.md

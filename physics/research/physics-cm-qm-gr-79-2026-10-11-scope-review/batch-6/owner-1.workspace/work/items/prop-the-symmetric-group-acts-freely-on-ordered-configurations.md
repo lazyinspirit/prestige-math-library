@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-symmetric-group-acts-freely-on-ordered-configurations.md

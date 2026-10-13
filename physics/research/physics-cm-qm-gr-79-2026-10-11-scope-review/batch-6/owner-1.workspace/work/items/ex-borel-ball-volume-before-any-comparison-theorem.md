@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-borel-ball-volume-before-any-comparison-theorem.md

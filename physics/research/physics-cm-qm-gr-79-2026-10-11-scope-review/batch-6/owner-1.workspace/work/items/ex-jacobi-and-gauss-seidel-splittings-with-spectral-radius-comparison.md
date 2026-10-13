@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-jacobi-and-gauss-seidel-splittings-with-spectral-radius-comparison.md

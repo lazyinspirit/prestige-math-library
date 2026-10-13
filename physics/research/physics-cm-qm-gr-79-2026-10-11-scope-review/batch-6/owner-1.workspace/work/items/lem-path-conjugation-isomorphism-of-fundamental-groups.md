@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-path-conjugation-isomorphism-of-fundamental-groups.md

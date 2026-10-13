@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compatible-local-orientation-classes-exist-over-compact-subsets.md

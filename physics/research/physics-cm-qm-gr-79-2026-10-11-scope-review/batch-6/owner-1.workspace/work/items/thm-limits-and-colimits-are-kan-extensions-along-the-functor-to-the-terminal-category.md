@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-limits-and-colimits-are-kan-extensions-along-the-functor-to-the-terminal-category.md

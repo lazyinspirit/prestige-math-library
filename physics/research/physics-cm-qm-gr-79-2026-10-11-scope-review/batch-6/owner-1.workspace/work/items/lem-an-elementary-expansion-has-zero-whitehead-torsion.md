@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-an-elementary-expansion-has-zero-whitehead-torsion.md

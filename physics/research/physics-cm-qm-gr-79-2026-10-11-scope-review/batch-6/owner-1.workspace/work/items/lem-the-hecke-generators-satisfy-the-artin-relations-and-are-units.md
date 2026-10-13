@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-hecke-generators-satisfy-the-artin-relations-and-are-units.md

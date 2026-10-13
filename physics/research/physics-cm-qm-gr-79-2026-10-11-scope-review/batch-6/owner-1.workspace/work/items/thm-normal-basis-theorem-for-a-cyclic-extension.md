@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-normal-basis-theorem-for-a-cyclic-extension.md

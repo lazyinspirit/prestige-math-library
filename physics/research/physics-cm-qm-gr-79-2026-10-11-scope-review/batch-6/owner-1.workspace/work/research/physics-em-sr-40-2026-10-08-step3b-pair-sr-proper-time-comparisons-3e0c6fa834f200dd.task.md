@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3b-pair-sr-proper-time-comparisons-3e0c6fa834f200dd.task.md

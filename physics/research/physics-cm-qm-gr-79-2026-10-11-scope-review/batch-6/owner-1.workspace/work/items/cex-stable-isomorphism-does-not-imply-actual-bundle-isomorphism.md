@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-stable-isomorphism-does-not-imply-actual-bundle-isomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-local-defining-map-for-an-embedded-submanifold.md

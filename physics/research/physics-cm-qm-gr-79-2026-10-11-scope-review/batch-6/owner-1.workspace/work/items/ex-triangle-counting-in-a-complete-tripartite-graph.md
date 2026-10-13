@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-triangle-counting-in-a-complete-tripartite-graph.md

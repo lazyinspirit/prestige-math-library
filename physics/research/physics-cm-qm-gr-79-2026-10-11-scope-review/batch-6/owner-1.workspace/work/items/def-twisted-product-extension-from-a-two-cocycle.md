@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-twisted-product-extension-from-a-two-cocycle.md

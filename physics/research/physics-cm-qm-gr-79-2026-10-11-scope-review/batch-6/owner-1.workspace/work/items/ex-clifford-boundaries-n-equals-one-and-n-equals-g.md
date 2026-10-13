@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-clifford-boundaries-n-equals-one-and-n-equals-g.md

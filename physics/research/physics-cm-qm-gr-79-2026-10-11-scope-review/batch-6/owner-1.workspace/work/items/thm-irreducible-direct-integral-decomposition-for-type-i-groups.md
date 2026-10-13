@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-irreducible-direct-integral-decomposition-for-type-i-groups.md

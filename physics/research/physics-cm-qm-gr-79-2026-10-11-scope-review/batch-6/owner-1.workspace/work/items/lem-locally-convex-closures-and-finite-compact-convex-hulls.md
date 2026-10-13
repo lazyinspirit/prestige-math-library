@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-locally-convex-closures-and-finite-compact-convex-hulls.md

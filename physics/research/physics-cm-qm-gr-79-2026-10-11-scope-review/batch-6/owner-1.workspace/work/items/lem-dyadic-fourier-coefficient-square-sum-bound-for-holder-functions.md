@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dyadic-fourier-coefficient-square-sum-bound-for-holder-functions.md

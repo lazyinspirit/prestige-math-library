@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-em-minkowski-mathematical-prerequisites-hypothesis-boundaries.md

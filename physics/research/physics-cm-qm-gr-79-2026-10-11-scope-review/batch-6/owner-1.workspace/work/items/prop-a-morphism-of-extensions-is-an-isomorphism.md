@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-morphism-of-extensions-is-an-isomorphism.md

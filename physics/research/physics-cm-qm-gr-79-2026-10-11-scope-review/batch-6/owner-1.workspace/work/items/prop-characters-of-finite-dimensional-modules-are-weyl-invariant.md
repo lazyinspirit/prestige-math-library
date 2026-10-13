@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-characters-of-finite-dimensional-modules-are-weyl-invariant.md

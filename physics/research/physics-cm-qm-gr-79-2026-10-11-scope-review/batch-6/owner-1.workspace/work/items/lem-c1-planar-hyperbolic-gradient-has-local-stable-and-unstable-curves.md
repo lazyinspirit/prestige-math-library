@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c1-planar-hyperbolic-gradient-has-local-stable-and-unstable-curves.md

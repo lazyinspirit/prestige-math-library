@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-supercompact-consistency-of-no-s-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-em-boundary-of-a-bounded-smooth-domain-is-a-compact-embedded-hypersurface.md

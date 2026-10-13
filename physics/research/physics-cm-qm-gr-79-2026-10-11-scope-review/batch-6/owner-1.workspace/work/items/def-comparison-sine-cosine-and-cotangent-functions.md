@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-comparison-sine-cosine-and-cotangent-functions.md

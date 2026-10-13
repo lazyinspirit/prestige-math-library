@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-degree-two-g-plus-one-line-bundle-very-ample.md

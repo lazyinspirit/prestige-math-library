@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-polynomial-ring-is-a-commutative-ring.md

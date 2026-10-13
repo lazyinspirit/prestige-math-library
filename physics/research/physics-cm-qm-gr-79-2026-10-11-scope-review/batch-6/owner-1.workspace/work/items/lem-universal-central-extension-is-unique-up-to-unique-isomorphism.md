@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-universal-central-extension-is-unique-up-to-unique-isomorphism.md

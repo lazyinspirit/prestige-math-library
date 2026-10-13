@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-lie-bracket-on-the-tangent-space-of-a-lie-group.md

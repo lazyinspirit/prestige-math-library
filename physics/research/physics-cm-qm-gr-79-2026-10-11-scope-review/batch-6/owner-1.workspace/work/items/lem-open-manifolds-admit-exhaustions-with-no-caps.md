@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-open-manifolds-admit-exhaustions-with-no-caps.md

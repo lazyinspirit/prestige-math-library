@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-morse-cancellation-criterion-via-a-unique-connecting-orbit.md

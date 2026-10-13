@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-c-prime-one-sixth-means-every-relator-has-length-at-most-six.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-cross-ratio-is-preserved-by-every-sphere-homeomorphism.md

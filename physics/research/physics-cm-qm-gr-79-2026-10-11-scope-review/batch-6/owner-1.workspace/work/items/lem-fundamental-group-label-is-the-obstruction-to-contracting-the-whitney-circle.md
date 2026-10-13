@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fundamental-group-label-is-the-obstruction-to-contracting-the-whitney-circle.md

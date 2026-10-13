@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-square-integrable-discrete-series-matrix-coefficient.md

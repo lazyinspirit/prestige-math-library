@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lower-central-quotients-of-finitely-generated-nilpotent-groups-are-finitely-generated-abelian.md

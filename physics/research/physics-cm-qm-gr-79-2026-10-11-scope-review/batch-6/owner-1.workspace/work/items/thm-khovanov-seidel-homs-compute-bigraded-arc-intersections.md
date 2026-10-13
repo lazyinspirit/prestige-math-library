@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-khovanov-seidel-homs-compute-bigraded-arc-intersections.md

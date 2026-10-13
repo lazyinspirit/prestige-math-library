@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-cw-basepoints-have-explicit-homotopy-extension.md

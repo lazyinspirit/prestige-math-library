@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-mechanical-chart-lagrangian-is-hyperregular.md

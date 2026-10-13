@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-general-position-makes-a-whitney-disk-embedded-and-interior-disjoint-in-the-stable-range.md

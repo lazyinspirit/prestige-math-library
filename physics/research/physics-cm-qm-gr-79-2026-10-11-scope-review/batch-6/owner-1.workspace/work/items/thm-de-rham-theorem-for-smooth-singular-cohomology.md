@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-de-rham-theorem-for-smooth-singular-cohomology.md

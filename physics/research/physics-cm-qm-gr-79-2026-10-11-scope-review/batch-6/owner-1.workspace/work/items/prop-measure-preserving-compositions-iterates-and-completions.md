@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-measure-preserving-compositions-iterates-and-completions.md

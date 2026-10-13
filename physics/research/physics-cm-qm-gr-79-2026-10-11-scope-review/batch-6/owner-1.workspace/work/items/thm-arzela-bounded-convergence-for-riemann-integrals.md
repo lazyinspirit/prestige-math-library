@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-arzela-bounded-convergence-for-riemann-integrals.md

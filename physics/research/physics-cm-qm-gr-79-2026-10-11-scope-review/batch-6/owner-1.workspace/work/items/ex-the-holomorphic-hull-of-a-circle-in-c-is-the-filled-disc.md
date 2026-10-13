@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-holomorphic-hull-of-a-circle-in-c-is-the-filled-disc.md

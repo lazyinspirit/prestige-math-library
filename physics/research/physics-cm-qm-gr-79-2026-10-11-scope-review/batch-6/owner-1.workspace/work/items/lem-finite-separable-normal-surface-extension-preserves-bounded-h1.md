@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-separable-normal-surface-extension-preserves-bounded-h1.md

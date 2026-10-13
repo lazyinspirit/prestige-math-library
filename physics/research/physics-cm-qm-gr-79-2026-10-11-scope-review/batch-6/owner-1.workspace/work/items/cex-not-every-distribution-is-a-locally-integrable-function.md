@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-not-every-distribution-is-a-locally-integrable-function.md

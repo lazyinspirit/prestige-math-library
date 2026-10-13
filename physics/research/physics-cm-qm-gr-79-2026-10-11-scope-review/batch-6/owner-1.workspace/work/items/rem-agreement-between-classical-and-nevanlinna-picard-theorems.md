@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-agreement-between-classical-and-nevanlinna-picard-theorems.md

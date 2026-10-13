@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-unitary-groups-converge-under-strong-resolvent-convergence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-analytic-cauchy-data-reduce-to-zero-data-in-normal-form.md

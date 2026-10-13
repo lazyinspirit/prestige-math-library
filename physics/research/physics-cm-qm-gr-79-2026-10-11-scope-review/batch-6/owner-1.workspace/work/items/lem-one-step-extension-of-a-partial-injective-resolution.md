@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-one-step-extension-of-a-partial-injective-resolution.md

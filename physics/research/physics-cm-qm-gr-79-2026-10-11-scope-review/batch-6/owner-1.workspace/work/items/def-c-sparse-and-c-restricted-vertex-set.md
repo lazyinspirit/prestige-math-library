@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-c-sparse-and-c-restricted-vertex-set.md

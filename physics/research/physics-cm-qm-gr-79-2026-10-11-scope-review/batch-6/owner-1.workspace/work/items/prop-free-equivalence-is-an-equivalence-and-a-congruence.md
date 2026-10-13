@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-free-equivalence-is-an-equivalence-and-a-congruence.md

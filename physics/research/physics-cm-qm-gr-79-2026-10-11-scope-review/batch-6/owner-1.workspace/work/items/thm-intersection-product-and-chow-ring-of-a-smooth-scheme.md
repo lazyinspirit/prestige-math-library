@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-intersection-product-and-chow-ring-of-a-smooth-scheme.md

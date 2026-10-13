@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3b-pair-em-electrostatic-boundaries-and-conductors-86ec5f8bcd302f59.task.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-connecting-morphism-computed-for-a-short-exact-sequence-of-abelian-groups.md

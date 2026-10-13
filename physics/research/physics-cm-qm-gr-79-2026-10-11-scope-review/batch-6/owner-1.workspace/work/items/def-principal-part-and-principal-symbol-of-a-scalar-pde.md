@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-principal-part-and-principal-symbol-of-a-scalar-pde.md

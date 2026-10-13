@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space.md

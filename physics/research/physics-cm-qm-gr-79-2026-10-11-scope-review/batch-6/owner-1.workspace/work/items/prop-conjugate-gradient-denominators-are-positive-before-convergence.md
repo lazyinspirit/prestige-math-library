@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-conjugate-gradient-denominators-are-positive-before-convergence.md

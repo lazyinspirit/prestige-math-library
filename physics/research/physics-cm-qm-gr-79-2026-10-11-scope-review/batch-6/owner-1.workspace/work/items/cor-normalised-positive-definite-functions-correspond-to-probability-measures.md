@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-normalised-positive-definite-functions-correspond-to-probability-measures.md

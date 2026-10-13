@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-same-represented-integers-do-not-imply-proper-equivalence.md

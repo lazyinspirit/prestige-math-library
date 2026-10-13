@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hall-malcev-finite-collection-alphabets-include-torsion-carries.md

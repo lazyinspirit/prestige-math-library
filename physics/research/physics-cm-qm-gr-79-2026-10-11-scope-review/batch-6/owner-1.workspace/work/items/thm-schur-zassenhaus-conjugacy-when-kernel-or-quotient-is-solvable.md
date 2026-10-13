@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-schur-zassenhaus-conjugacy-when-kernel-or-quotient-is-solvable.md

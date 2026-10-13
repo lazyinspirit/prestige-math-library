@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-relative-fundamental-class-and-boundary-orientation.md

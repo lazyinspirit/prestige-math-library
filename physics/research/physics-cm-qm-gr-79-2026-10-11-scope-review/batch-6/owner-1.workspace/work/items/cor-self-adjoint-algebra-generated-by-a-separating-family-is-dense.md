@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-self-adjoint-algebra-generated-by-a-separating-family-is-dense.md

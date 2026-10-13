@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-stiefel-manifolds-are-connected-and-simply-connected-in-positive-codimension.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-verifier-and-nondeterministic-definitions-of-np-agree.md

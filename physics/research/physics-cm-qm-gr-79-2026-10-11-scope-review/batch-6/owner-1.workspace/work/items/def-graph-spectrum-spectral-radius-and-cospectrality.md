@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-graph-spectrum-spectral-radius-and-cospectrality.md

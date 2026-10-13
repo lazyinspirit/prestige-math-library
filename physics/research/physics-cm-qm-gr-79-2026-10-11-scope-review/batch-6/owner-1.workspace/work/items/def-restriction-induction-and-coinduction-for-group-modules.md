@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-restriction-induction-and-coinduction-for-group-modules.md

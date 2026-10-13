@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-necklace-count-agrees-with-the-published-cycle-construction.md

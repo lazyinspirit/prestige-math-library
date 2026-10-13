@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-scaling-distinguishes-sublinear-minsize-from-bounded-perimeter.md

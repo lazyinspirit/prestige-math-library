@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-regular-level-slices-for-unparametrized-trajectories.md

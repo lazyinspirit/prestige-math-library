@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-several-variable-identity-theorem-from-an-accumulation-point.md

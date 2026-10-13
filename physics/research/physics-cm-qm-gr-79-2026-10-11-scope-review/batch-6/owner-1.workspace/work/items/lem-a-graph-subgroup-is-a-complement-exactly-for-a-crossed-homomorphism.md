@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-graph-subgroup-is-a-complement-exactly-for-a-crossed-homomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-height-preserved-under-going-down-integral-extensions.md

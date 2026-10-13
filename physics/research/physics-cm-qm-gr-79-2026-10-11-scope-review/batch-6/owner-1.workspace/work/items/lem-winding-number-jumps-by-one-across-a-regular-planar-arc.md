@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-winding-number-jumps-by-one-across-a-regular-planar-arc.md

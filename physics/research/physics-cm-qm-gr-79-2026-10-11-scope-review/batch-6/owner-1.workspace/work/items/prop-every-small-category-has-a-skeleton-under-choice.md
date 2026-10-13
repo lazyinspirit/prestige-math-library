@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-every-small-category-has-a-skeleton-under-choice.md

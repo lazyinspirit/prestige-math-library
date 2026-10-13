@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-nondistributive-weak-interval-of-a-non-fully-commutative-element.md

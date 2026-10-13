@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-differential-forms-form-a-graded-commutative-algebra.md

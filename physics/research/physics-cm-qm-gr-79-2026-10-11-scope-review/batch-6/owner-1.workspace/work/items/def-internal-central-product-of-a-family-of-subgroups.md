@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-internal-central-product-of-a-family-of-subgroups.md

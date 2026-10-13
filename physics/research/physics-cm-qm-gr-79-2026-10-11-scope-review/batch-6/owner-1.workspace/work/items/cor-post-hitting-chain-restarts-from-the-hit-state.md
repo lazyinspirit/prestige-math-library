@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-post-hitting-chain-restarts-from-the-hit-state.md

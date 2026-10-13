@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3a-pair-em-retarded-point-prerequisites-9e07a8a93c6507aa.task.md

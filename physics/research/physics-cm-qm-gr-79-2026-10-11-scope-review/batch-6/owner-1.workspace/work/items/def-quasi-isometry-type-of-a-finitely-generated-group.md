@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-quasi-isometry-type-of-a-finitely-generated-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-interval-congruence-criterion-on-a-chain-and-a-diamond.md

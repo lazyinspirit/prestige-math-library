@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-four-square-roots-modulo-a-power-of-two.md

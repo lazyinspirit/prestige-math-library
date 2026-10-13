@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rmk-representing-measure-is-inner-regular-on-open-sets.md

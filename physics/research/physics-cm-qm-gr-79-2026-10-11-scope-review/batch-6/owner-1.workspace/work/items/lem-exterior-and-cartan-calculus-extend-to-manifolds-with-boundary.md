@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-exterior-and-cartan-calculus-extend-to-manifolds-with-boundary.md

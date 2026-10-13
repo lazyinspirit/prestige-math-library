@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-common-jump-prevents-riemann-stieltjes-integrability.md

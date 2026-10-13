@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-ordinal-addition-is-strictly-monotone-in-the-left-argument.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-doob-lp-maximal-inequality-excludes-p-equals-one.md

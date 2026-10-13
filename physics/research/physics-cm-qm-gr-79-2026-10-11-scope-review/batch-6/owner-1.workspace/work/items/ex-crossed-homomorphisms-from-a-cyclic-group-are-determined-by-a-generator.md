@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-crossed-homomorphisms-from-a-cyclic-group-are-determined-by-a-generator.md

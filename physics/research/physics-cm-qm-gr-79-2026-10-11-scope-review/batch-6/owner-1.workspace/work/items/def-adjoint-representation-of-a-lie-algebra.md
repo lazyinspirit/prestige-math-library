@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-adjoint-representation-of-a-lie-algebra.md

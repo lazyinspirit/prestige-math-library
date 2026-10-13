@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-eilenberg-watts-for-arbitrary-unital-rings.md

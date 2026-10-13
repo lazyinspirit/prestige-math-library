@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-filtration-on-homology-is-h-n-of-the-filtered-subcomplex.md

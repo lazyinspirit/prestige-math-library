@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-cancelling-disk-triad-has-an-exact-c2-boundary-scalar.md

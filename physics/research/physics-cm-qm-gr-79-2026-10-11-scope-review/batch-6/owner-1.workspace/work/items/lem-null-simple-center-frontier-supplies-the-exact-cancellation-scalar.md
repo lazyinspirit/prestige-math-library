@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-null-simple-center-frontier-supplies-the-exact-cancellation-scalar.md

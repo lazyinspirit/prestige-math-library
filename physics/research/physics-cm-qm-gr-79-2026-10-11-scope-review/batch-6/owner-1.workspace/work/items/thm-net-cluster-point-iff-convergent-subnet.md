@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-net-cluster-point-iff-convergent-subnet.md

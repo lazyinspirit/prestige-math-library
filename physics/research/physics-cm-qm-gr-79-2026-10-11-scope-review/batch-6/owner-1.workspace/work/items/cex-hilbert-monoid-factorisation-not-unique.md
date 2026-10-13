@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-hilbert-monoid-factorisation-not-unique.md

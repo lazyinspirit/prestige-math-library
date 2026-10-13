@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-space-of-jacobi-fields-along-a-geodesic-has-dimension-two-n.md

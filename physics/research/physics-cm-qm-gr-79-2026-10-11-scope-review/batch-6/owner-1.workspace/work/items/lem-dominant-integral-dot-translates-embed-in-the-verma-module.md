@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dominant-integral-dot-translates-embed-in-the-verma-module.md

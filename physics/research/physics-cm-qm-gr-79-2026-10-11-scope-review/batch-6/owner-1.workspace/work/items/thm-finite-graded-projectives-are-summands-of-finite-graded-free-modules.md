@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-graded-projectives-are-summands-of-finite-graded-free-modules.md

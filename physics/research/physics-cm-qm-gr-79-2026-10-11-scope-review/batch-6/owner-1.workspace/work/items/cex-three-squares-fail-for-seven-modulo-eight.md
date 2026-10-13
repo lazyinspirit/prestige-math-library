@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-three-squares-fail-for-seven-modulo-eight.md

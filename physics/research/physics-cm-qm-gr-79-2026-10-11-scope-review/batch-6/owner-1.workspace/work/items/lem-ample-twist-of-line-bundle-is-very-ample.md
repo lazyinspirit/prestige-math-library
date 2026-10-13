@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ample-twist-of-line-bundle-is-very-ample.md

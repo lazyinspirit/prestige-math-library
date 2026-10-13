@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-unit-circle-is-a-compact-metrizable-topological-group.md

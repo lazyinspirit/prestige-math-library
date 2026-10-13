@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-interior-point-boundary-point-interior-and-boundary-of-a-manifold.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-amenability-is-a-quasi-isometry-invariant-for-finitely-generated-groups.md

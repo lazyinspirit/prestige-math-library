@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-product-h-cobordisms-have-zero-whitehead-torsion.md

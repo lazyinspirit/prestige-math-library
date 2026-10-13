@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-double-edge-quantum-serre-relation-for-affine-a-one.md

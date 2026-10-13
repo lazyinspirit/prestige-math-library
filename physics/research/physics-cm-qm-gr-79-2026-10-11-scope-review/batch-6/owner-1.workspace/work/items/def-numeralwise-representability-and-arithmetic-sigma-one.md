@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-numeralwise-representability-and-arithmetic-sigma-one.md

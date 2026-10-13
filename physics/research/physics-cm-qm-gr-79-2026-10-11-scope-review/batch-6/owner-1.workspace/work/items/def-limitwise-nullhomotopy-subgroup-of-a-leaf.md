@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-limitwise-nullhomotopy-subgroup-of-a-leaf.md

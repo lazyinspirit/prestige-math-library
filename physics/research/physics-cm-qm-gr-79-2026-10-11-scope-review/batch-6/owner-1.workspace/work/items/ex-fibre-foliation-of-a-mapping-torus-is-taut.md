@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-fibre-foliation-of-a-mapping-torus-is-taut.md

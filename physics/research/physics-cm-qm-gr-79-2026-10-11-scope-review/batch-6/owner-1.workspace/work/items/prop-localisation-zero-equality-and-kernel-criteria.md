@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-localisation-zero-equality-and-kernel-criteria.md

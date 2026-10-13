@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-banach-space-no-countably-infinite-hamel-basis.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-broken-trajectories-are-limits-of-ordinary-trajectories.md

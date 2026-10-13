@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-mod-two-evenness-does-not-by-itself-supply-a-whitney-move.md

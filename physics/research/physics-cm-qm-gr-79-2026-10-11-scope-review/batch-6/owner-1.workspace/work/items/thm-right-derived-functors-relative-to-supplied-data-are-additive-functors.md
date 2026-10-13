@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-right-derived-functors-relative-to-supplied-data-are-additive-functors.md

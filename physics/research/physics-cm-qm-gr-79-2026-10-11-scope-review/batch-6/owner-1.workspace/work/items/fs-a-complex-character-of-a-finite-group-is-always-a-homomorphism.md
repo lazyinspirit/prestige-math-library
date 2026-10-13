@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-complex-character-of-a-finite-group-is-always-a-homomorphism.md

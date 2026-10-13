@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-levy-prokhorov-distance-is-a-metric.md

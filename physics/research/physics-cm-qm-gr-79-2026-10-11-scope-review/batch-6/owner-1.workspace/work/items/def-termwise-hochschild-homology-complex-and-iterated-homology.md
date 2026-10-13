@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-termwise-hochschild-homology-complex-and-iterated-homology.md

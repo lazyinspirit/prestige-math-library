@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-standard-circle-loops-have-their-integer-degrees.md

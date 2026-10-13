@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-exponential-formula-for-set-partitions-and-bell-numbers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-koszul-euler-characteristic-and-degree-indexed-multiplicity.md

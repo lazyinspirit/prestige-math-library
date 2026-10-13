@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly.md

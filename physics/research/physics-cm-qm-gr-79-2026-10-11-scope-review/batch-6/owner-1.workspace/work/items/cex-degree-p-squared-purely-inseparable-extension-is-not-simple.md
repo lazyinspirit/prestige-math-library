@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-degree-p-squared-purely-inseparable-extension-is-not-simple.md

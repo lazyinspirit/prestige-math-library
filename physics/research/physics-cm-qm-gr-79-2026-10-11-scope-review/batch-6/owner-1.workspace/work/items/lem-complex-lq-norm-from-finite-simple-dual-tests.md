@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-complex-lq-norm-from-finite-simple-dual-tests.md

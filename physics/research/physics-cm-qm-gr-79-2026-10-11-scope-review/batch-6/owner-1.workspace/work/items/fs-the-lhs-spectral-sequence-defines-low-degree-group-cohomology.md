@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-lhs-spectral-sequence-defines-low-degree-group-cohomology.md

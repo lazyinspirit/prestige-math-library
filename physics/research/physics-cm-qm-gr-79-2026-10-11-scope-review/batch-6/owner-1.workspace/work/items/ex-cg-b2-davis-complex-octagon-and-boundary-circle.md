@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-b2-davis-complex-octagon-and-boundary-circle.md

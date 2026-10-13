@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-path-independent-field-has-a-potential-by-line-integrals.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-graph-of-the-sine-function-as-an-embedded-submanifold.md

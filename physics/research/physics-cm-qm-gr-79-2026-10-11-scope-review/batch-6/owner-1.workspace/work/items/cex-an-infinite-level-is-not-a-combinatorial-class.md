@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-infinite-level-is-not-a-combinatorial-class.md

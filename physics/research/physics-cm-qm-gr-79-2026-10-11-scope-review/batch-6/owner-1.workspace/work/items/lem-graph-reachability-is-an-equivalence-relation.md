@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-graph-reachability-is-an-equivalence-relation.md

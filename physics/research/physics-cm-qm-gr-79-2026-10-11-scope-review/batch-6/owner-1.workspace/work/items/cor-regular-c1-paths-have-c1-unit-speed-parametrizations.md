@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-regular-c1-paths-have-c1-unit-speed-parametrizations.md

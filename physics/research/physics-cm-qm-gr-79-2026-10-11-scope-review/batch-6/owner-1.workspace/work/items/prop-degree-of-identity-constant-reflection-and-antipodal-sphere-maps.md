@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps.md

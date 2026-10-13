@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-volume-coordinate-expression-changes-sign-under-a-reflection.md

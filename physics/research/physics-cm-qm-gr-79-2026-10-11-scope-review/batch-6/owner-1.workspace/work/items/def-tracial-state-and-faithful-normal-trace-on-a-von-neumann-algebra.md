@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-tracial-state-and-faithful-normal-trace-on-a-von-neumann-algebra.md

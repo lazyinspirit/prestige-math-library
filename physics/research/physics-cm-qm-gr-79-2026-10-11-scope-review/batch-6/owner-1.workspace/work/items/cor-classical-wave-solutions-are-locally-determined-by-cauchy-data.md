@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-classical-wave-solutions-are-locally-determined-by-cauchy-data.md

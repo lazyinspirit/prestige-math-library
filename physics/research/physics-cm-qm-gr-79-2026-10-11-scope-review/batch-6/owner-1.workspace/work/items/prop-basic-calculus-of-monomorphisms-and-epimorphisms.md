@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-basic-calculus-of-monomorphisms-and-epimorphisms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-colouring-embeds-a-graph-in-a-balanced-blowup.md

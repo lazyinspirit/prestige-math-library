@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-baumslag-solitar-groups-as-hnn-extensions.md

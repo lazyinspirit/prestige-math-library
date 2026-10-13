@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-kinematics-plane-wave-generalized-eigenfunction.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-a-monad-is-a-monoid-in-the-endofunctor-category-only-when-that-category-exists.md

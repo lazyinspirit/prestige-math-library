@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces.md

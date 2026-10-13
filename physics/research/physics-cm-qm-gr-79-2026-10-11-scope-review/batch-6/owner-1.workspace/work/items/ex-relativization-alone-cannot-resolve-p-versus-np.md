@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-relativization-alone-cannot-resolve-p-versus-np.md

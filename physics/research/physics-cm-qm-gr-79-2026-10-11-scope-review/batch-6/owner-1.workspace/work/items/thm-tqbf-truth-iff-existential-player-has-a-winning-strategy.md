@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-tqbf-truth-iff-existential-player-has-a-winning-strategy.md

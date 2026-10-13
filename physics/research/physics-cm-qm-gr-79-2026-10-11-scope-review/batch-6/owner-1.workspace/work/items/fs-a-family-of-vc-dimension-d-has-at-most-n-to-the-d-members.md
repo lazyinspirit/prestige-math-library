@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-family-of-vc-dimension-d-has-at-most-n-to-the-d-members.md

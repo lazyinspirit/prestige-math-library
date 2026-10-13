@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tail-events-are-independent-of-every-finite-initial-sigma-algebra.md

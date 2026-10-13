@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium.md

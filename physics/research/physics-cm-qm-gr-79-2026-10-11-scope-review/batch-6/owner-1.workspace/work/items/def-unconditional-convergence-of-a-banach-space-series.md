@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-unconditional-convergence-of-a-banach-space-series.md

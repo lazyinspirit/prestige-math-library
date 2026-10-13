@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-matrix-ring-decomposition-into-minimal-left-ideals.md

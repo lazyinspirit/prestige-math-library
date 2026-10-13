@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-euler-product-agrees-with-the-published-multiset-corollary.md

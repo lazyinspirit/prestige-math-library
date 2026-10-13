@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-monomial-integrals-over-disc-ball-and-polydisc.md

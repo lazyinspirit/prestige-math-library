@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-universal-real-thom-spaces-are-r-minus-one-connected.md

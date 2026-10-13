@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normal-projective-surface-dualizing-module-over-regular-local-base.md

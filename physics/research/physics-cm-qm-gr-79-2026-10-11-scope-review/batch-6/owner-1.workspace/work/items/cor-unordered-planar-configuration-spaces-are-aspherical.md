@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-unordered-planar-configuration-spaces-are-aspherical.md

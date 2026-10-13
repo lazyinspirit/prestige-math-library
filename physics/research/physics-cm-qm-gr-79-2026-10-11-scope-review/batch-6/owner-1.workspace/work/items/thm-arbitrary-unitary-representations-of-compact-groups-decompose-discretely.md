@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-arbitrary-unitary-representations-of-compact-groups-decompose-discretely.md

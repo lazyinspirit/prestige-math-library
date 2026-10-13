@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-gr-dust-electric-magnetic-weyl-variables-and-schouten.md

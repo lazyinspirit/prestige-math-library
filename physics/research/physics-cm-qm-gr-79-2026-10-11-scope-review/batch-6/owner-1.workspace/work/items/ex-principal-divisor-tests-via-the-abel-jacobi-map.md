@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-principal-divisor-tests-via-the-abel-jacobi-map.md

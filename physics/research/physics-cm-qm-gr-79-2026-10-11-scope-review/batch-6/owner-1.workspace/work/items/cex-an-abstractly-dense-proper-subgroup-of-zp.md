@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-abstractly-dense-proper-subgroup-of-zp.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-linear-isometry-and-orthogonal-or-unitary-operator.md

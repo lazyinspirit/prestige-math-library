@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sr-divergence-free-stress-energy-with-varying-slice-momentum.md

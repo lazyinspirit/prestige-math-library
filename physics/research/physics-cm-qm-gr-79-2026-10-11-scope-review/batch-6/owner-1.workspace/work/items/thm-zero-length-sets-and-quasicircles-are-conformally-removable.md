@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-zero-length-sets-and-quasicircles-are-conformally-removable.md

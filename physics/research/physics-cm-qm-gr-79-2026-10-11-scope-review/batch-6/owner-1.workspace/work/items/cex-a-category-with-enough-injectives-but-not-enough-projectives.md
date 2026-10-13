@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-category-with-enough-injectives-but-not-enough-projectives.md

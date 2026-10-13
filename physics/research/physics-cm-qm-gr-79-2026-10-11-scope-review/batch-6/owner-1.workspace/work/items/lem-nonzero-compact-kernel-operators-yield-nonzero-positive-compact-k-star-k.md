@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonzero-compact-kernel-operators-yield-nonzero-positive-compact-k-star-k.md

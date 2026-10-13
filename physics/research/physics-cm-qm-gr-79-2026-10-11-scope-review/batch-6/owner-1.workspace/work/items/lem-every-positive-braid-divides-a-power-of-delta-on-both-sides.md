@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-every-positive-braid-divides-a-power-of-delta-on-both-sides.md

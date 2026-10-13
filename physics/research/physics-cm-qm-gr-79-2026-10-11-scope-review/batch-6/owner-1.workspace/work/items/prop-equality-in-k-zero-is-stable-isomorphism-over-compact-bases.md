@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-equality-in-k-zero-is-stable-isomorphism-over-compact-bases.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sine-harmonic-series-pointwise-not-uniform.md

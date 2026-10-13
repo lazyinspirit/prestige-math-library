@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-koebe-function-realizes-the-quarter-disc-bound.md

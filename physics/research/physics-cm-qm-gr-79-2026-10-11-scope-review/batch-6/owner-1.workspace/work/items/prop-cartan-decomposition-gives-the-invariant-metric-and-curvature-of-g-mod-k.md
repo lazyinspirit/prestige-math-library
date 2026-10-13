@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cartan-decomposition-gives-the-invariant-metric-and-curvature-of-g-mod-k.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sigma-finite-ergodic-oscillation-sets-have-finite-measure.md

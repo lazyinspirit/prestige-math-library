@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonreal-roots-of-a-real-polynomial-occur-in-conjugate-pairs.md

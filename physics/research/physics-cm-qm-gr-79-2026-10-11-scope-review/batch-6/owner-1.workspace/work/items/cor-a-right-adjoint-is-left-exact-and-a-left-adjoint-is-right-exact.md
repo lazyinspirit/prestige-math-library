@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-right-adjoint-is-left-exact-and-a-left-adjoint-is-right-exact.md

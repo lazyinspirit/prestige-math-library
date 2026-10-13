@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-noncrossing-partitions-and-kreweras-complements-in-s4.md

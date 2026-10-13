@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-thom-space-of-zero-and-trivial-bundles.md

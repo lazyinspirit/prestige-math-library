@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-omitting-cross-block-purity-breaks-the-transversal-conclusion.md

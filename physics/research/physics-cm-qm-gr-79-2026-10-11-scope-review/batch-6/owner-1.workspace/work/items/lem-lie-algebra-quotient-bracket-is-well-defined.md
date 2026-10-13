@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lie-algebra-quotient-bracket-is-well-defined.md

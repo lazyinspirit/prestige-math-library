@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-scaled-caccioppoli-inequality-on-concentric-balls.md

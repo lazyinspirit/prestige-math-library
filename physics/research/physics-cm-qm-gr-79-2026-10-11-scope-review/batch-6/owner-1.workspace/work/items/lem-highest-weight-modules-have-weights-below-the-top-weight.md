@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-highest-weight-modules-have-weights-below-the-top-weight.md

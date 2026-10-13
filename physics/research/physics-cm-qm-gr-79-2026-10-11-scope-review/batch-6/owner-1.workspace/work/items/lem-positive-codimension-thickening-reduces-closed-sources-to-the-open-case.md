@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-positive-codimension-thickening-reduces-closed-sources-to-the-open-case.md

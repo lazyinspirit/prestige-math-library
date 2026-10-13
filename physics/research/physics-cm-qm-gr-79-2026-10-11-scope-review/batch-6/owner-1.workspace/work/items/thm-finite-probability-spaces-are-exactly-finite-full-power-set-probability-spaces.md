@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-degree-one-representations-are-exactly-homomorphisms-to-k-times-and-form-an-abelian-group.md

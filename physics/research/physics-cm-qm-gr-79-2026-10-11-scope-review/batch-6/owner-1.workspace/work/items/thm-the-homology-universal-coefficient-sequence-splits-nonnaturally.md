@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-homology-universal-coefficient-sequence-splits-nonnaturally.md

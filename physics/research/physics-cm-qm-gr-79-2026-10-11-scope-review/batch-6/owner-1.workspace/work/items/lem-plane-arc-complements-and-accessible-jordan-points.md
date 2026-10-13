@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-plane-arc-complements-and-accessible-jordan-points.md

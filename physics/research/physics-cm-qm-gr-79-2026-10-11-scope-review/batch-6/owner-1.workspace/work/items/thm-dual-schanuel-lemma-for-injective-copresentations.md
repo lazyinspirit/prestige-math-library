@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dual-schanuel-lemma-for-injective-copresentations.md

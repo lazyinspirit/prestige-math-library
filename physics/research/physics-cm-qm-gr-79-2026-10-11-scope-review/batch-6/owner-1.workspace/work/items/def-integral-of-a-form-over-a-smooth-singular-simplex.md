@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-integral-of-a-form-over-a-smooth-singular-simplex.md

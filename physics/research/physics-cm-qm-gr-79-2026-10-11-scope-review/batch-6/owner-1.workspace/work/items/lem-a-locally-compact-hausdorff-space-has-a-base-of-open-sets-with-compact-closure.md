@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-locally-compact-hausdorff-space-has-a-base-of-open-sets-with-compact-closure.md

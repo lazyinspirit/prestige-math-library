@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-lagrange-multiplier-rule-needs-a-regular-constraint.md

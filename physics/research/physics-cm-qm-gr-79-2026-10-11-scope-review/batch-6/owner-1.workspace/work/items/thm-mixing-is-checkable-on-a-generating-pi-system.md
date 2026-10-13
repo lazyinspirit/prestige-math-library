@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-mixing-is-checkable-on-a-generating-pi-system.md

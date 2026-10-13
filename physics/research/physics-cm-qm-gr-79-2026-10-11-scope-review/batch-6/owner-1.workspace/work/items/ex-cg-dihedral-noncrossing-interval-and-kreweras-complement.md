@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-dihedral-noncrossing-interval-and-kreweras-complement.md

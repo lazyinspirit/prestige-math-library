@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gaussian-smoothing-of-finite-complex-measures.md

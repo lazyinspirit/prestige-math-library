@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-baire-property-sigma-algebra-and-borel-regularity.md

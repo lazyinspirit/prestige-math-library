@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-strong-law-of-large-numbers-for-a-sequence.md

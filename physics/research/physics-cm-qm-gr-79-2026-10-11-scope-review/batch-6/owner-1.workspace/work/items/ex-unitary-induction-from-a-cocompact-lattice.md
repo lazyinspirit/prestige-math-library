@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-unitary-induction-from-a-cocompact-lattice.md

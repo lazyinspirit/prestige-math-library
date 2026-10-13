@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-seminormal-and-orthogonal-block-for-shape-two-one.md

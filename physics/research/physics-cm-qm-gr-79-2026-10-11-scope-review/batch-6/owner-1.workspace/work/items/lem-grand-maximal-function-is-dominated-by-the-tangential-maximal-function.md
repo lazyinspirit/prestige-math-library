@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-grand-maximal-function-is-dominated-by-the-tangential-maximal-function.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relative-hahn-banach-separates-an-open-convex-set-from-a-point.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-trigonometric-identities-worked-at-pi-over-twelve.md

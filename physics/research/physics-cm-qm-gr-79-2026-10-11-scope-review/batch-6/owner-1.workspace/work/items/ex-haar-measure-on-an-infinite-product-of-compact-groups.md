@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-haar-measure-on-an-infinite-product-of-compact-groups.md

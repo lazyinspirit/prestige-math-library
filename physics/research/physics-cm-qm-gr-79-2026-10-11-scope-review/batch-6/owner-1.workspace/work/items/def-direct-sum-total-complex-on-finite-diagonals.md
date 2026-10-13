@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-direct-sum-total-complex-on-finite-diagonals.md

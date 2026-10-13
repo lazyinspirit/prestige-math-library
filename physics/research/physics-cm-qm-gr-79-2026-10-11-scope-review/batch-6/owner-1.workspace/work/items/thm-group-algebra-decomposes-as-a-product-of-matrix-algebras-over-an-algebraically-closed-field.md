@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field.md

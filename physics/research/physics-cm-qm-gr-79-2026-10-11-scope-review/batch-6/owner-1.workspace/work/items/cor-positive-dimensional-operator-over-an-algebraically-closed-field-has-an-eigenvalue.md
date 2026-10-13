@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-zero-derivative-on-connected-open-euclidean-set-iff-constant.md

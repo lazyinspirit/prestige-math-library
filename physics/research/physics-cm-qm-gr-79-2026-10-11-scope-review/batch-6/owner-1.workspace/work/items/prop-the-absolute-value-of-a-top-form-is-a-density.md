@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-absolute-value-of-a-top-form-is-a-density.md

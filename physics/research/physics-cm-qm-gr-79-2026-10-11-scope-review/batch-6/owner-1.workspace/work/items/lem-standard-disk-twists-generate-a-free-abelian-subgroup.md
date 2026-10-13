@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-standard-disk-twists-generate-a-free-abelian-subgroup.md

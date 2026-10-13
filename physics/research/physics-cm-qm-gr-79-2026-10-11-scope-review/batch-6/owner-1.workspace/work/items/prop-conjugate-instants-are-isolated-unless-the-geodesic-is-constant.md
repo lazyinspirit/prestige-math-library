@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-conjugate-instants-are-isolated-unless-the-geodesic-is-constant.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-factor-elements-act-on-amalgamated-normal-words.md

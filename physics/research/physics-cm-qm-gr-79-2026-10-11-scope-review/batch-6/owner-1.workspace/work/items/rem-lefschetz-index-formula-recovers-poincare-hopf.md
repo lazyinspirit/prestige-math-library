@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-lefschetz-index-formula-recovers-poincare-hopf.md

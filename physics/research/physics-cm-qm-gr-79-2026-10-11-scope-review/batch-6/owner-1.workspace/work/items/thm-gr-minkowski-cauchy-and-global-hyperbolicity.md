@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gr-minkowski-cauchy-and-global-hyperbolicity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-coarsely-dense-subset-and-quasi-isometry.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-two-by-two-unit-pivot-fixes-the-minus-schur-sign.md

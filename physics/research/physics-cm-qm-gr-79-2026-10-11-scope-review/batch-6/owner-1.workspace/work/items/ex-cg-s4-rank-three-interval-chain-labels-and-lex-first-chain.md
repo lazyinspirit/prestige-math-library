@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-s4-rank-three-interval-chain-labels-and-lex-first-chain.md

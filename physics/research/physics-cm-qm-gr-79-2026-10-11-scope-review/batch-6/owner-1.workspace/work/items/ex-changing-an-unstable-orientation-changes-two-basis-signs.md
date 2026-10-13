@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-changing-an-unstable-orientation-changes-two-basis-signs.md

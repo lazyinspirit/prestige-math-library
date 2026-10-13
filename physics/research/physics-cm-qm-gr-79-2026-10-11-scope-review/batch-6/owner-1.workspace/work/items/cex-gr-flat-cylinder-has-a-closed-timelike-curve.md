@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-gr-flat-cylinder-has-a-closed-timelike-curve.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-root-bound-for-polynomials-over-a-domain.md

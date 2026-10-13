@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-blass-model-has-only-principal-ultrafilters.md

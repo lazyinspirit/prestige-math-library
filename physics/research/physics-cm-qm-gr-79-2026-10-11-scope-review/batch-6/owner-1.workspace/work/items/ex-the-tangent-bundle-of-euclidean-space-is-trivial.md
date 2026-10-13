@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-tangent-bundle-of-euclidean-space-is-trivial.md

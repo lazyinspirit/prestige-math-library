@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-free-action-always-has-a-manifold-orbit-space.md

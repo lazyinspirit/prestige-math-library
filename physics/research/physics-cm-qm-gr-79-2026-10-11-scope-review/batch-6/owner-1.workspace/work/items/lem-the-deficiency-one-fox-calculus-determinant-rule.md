@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-deficiency-one-fox-calculus-determinant-rule.md

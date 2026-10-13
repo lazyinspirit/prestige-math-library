@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-mackey-little-group-reduction-for-an-abelian-normal-subgroup.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-complex-numbers-are-an-algebraic-closure-of-the-reals.md

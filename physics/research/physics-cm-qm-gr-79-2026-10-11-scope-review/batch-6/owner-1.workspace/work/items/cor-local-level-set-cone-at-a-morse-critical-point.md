@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-local-level-set-cone-at-a-morse-critical-point.md

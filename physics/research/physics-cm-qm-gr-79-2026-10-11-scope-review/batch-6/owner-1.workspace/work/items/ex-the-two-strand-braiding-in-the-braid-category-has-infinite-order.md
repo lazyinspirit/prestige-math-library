@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-two-strand-braiding-in-the-braid-category-has-infinite-order.md

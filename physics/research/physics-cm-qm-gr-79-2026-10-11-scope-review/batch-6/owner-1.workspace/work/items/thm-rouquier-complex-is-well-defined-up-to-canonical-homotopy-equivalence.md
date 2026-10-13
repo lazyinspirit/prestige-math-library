@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rouquier-complex-is-well-defined-up-to-canonical-homotopy-equivalence.md

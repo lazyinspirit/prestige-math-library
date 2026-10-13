@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-bgg-bruhat-verma-sum-in-degree-k.md

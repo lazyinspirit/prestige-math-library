@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-deleted-row-minors-of-a-matrix-with-zero-column-sums.md

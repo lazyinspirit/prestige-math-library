@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cw-homotopy-equivalence-inclusions-are-strong-deformation-retracts.md

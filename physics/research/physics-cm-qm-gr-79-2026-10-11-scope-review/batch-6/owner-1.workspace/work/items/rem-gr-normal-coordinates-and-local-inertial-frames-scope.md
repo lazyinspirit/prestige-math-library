@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-gr-normal-coordinates-and-local-inertial-frames-scope.md

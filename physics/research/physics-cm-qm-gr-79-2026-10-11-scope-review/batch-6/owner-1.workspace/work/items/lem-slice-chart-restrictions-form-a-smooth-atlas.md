@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-slice-chart-restrictions-form-a-smooth-atlas.md

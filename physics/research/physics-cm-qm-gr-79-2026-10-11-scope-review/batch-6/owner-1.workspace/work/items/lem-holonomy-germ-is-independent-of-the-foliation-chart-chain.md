@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-holonomy-germ-is-independent-of-the-foliation-chart-chain.md

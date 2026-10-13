@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event.md

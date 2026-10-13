@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-refining-small-diameter-covers-of-compact-metric-spaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-choice-costs-of-vitali-bernstein-and-free-ultrafilters.md

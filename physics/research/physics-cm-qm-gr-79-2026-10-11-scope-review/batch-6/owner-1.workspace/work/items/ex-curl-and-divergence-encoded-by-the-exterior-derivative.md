@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-curl-and-divergence-encoded-by-the-exterior-derivative.md

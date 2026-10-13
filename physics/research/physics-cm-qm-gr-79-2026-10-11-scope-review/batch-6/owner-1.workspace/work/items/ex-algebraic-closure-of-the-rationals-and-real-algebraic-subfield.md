@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-algebraic-closure-of-the-rationals-and-real-algebraic-subfield.md

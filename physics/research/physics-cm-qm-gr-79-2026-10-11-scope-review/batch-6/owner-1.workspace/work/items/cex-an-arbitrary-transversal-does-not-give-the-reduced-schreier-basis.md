@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-arbitrary-transversal-does-not-give-the-reduced-schreier-basis.md

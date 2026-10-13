@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-generalized-decomposition-columns-have-corresponding-block-support.md

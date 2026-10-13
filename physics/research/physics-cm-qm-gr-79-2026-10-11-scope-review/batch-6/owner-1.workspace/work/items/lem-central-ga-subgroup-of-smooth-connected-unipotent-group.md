@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-central-ga-subgroup-of-smooth-connected-unipotent-group.md

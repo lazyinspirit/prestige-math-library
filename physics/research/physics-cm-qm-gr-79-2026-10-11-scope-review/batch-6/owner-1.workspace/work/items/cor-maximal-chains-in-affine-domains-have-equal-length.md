@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-maximal-chains-in-affine-domains-have-equal-length.md

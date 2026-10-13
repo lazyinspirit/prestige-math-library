@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-enriched-yoneda-embedding-is-fully-faithful.md

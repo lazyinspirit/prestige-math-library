@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-extensionality-is-needed-for-injective-collapse.md

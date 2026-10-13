@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-uniform-sine-integral-bound-and-dirichlet-value.md

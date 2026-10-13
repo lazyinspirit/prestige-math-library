@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-harmonic-complex-power-series-on-the-unit-circle.md

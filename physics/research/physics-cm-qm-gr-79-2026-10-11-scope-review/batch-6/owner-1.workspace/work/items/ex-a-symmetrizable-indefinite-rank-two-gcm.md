@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-symmetrizable-indefinite-rank-two-gcm.md

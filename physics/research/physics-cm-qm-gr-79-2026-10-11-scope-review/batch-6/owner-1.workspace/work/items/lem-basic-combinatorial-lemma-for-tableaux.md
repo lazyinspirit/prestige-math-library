@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-basic-combinatorial-lemma-for-tableaux.md

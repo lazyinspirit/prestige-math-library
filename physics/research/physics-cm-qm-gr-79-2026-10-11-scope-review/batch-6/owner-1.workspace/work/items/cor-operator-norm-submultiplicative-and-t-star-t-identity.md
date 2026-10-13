@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-operator-norm-submultiplicative-and-t-star-t-identity.md

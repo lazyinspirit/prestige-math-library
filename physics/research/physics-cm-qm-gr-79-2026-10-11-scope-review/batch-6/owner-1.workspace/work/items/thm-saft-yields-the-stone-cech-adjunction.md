@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-saft-yields-the-stone-cech-adjunction.md

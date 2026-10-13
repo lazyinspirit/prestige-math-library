@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-convergence-in-probability-need-not-be-almost-sure.md

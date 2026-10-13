@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-noetherian-rings-have-a-uniform-bound-on-ideal-generators.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-complex-homotopy-and-contractibility-in-an-additive-category.md

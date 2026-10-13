@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-e-graph-and-the-bird-are-leaf-reducible.md

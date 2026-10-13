@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-number-field-completions-as-local-polynomial-factors.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-positive-degree-cup-products-on-a-suspension-vanish.md

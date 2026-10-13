@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-dolbeault-h-zero-one-of-the-riemann-sphere-vanishes.md

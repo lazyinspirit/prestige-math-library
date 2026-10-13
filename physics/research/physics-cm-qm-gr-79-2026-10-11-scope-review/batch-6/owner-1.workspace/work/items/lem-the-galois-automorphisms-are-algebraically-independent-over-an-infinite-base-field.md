@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-galois-automorphisms-are-algebraically-independent-over-an-infinite-base-field.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-exact-np-hardness-implies-no-constant-approximation.md

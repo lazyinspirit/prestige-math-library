@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-noncompact-flow-completeness-is-an-extra-hypothesis.md

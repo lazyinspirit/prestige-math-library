@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cheeger-inequalities-for-finite-regular-graphs.md

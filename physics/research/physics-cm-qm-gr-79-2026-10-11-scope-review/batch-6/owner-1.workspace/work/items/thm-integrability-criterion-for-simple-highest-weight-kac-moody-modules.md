@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-integrability-criterion-for-simple-highest-weight-kac-moody-modules.md

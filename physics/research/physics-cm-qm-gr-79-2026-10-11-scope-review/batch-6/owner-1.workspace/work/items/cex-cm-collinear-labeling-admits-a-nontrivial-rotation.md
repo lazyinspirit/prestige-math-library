@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cm-collinear-labeling-admits-a-nontrivial-rotation.md

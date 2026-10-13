@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-associated-variety-of-a-finite-dimensional-simple-annihilator.md

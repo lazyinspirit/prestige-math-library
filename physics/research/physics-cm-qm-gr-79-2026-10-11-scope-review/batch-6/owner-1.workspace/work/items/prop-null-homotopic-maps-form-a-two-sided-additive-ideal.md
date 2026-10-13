@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-null-homotopic-maps-form-a-two-sided-additive-ideal.md

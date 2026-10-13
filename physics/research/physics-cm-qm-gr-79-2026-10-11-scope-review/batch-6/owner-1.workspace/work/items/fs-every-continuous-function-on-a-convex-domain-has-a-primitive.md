@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-continuous-function-on-a-convex-domain-has-a-primitive.md

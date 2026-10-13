@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-long-exact-tor-sequence-in-the-left-module-variable.md

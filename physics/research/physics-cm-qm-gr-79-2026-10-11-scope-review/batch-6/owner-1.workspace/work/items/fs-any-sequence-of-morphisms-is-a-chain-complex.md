@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-any-sequence-of-morphisms-is-a-chain-complex.md

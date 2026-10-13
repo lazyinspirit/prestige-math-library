@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-full-lattice-fundamental-domain-and-bounded-points.md

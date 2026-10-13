@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-noetherian-approximation-proper-fp-flat-sheaf.md

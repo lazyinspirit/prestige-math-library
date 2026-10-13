@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-quantum-serre-sums-vanish-in-the-formal-quantum-shuffle-algebra.md

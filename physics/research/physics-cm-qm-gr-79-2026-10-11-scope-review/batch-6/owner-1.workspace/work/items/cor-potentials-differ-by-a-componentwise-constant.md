@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-potentials-differ-by-a-componentwise-constant.md

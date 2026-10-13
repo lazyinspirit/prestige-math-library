@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-factorial-gap-series-has-the-unit-circle-as-a-natural-boundary.md

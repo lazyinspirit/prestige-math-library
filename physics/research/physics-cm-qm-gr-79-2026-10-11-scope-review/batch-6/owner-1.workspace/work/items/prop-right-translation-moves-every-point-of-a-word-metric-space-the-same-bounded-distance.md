@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-right-translation-moves-every-point-of-a-word-metric-space-the-same-bounded-distance.md

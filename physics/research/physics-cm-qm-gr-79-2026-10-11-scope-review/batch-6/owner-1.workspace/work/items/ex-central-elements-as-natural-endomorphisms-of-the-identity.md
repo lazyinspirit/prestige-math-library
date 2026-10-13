@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-central-elements-as-natural-endomorphisms-of-the-identity.md

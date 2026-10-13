@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-small-total-copy-expectation-forces-many-homogeneous-k-sets.md

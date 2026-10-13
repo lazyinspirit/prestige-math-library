@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-dense-open-subset-of-the-unit-interval-of-small-measure.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-being-braided-is-a-property-of-a-monoidal-functor.md

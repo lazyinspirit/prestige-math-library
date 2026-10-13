@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-krylov-chain-with-early-stabilisation-and-its-relative-minimal-polynomial.md

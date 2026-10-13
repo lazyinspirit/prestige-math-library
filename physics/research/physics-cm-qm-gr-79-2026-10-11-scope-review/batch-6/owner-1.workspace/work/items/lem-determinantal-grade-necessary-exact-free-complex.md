@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-determinantal-grade-necessary-exact-free-complex.md

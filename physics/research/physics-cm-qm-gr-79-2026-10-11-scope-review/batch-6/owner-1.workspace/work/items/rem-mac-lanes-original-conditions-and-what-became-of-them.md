@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-mac-lanes-original-conditions-and-what-became-of-them.md

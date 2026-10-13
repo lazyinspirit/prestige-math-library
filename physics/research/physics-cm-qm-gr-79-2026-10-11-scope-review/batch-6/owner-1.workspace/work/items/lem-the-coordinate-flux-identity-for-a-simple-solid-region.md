@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-coordinate-flux-identity-for-a-simple-solid-region.md

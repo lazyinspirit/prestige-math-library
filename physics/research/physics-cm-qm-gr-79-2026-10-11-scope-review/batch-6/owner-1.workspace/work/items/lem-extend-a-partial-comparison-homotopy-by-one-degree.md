@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-extend-a-partial-comparison-homotopy-by-one-degree.md

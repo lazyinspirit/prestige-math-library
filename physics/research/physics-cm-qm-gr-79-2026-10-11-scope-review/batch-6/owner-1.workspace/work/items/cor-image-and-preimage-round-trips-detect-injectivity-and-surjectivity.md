@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-image-and-preimage-round-trips-detect-injectivity-and-surjectivity.md

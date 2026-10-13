@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-automorphisms-of-a-finite-rank-free-abelian-group.md

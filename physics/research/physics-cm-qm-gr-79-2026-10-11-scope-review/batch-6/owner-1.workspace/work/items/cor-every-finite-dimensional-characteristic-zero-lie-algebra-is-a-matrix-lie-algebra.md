@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-finite-dimensional-characteristic-zero-lie-algebra-is-a-matrix-lie-algebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-normal-inseparable-extension-with-trivial-automorphism-group.md

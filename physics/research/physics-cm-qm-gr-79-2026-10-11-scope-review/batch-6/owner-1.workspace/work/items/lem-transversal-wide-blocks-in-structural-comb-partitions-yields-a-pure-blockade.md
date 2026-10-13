@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-transversal-wide-blocks-in-structural-comb-partitions-yields-a-pure-blockade.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-an-extension-of-nilpotent-groups-is-nilpotent.md

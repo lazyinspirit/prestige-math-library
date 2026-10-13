@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-truncated-singular-value-pseudoinverse-at-a-declared-threshold.md

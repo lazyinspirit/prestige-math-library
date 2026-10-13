@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-brownian-paths-are-not-holder-of-order-one-half-on-any-interval.md

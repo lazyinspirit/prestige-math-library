@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-c2-holomorphic-function-has-holomorphic-derivative.md

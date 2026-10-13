@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-p-poly-equals-p-with-polynomial-advice.md

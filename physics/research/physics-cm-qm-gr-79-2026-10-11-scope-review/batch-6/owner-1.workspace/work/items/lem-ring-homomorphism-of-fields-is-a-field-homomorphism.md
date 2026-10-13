@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ring-homomorphism-of-fields-is-a-field-homomorphism.md

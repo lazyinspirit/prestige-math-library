@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-radial-normalization-retracts-the-punctured-disk-but-not-the-disk.md

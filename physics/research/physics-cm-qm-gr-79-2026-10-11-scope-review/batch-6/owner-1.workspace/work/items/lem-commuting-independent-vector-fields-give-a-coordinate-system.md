@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-commuting-independent-vector-fields-give-a-coordinate-system.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-an-adjoint-triple-induces-adjunctions-between-its-endofunctors.md

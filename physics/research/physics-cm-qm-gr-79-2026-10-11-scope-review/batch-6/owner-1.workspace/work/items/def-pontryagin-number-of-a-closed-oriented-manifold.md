@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-pontryagin-number-of-a-closed-oriented-manifold.md

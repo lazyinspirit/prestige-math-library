@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-prokhorov-tightness-theorem-on-polish-spaces.md

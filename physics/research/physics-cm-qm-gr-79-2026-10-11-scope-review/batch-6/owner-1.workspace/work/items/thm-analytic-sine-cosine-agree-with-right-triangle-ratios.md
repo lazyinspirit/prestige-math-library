@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-analytic-sine-cosine-agree-with-right-triangle-ratios.md

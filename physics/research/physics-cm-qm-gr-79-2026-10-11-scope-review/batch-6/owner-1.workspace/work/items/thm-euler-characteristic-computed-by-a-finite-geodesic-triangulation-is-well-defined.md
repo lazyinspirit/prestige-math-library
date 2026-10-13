@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-euler-characteristic-computed-by-a-finite-geodesic-triangulation-is-well-defined.md

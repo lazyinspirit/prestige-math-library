@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-addition-and-multiplication-of-marked-ideals.md

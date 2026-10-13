@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-rectangular-weierstrass-function-and-elliptic-integral.md

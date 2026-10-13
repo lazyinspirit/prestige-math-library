@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-projective-dimension-of-a-cyclic-abelian-group.md

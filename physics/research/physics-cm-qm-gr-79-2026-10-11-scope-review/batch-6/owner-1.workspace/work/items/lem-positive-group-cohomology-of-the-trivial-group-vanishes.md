@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-positive-group-cohomology-of-the-trivial-group-vanishes.md

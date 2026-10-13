@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-khovanov-rozansky-complex-and-trigraded-braid-homology.md

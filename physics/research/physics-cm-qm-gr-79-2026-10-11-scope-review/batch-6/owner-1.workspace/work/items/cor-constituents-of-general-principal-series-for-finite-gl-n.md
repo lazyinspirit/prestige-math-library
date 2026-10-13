@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-constituents-of-general-principal-series-for-finite-gl-n.md

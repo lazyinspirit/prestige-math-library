@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-the-direct-image-and-inverse-image-of-a-subobject.md

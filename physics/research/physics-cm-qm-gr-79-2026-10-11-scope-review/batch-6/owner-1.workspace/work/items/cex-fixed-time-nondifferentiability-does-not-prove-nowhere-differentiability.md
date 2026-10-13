@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-fixed-time-nondifferentiability-does-not-prove-nowhere-differentiability.md

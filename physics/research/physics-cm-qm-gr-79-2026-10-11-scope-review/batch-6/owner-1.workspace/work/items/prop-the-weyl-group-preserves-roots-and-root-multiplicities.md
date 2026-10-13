@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-weyl-group-preserves-roots-and-root-multiplicities.md

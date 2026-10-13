@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-conjugate-gradient-residuals-are-orthogonal-and-search-directions-are-a-conjugate.md

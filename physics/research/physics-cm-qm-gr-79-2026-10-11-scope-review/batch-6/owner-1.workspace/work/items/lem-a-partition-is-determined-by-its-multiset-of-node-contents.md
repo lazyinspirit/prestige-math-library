@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-partition-is-determined-by-its-multiset-of-node-contents.md

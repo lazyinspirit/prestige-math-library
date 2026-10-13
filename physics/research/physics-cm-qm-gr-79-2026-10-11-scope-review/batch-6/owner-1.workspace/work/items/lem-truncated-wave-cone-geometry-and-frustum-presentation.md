@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-truncated-wave-cone-geometry-and-frustum-presentation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-derived-subgroup-and-solvable-algebraic-group.md

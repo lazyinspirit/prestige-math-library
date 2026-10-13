@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-modulus-is-nowhere-complex-differentiable.md

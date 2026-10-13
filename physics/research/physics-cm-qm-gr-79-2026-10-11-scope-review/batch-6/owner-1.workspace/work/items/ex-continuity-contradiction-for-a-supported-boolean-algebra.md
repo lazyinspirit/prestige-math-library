@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-continuity-contradiction-for-a-supported-boolean-algebra.md

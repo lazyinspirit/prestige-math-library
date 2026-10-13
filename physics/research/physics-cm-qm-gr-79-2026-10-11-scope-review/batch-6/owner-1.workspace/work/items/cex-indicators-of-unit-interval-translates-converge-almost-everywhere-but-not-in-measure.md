@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-indicators-of-unit-interval-translates-converge-almost-everywhere-but-not-in-measure.md

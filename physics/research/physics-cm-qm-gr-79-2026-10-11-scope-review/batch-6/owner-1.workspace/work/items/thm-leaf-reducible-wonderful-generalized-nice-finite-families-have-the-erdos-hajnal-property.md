@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-leaf-reducible-wonderful-generalized-nice-finite-families-have-the-erdos-hajnal-property.md

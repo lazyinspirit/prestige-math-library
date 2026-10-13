@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relative-homotopy-compares-with-the-cw-quotient-in-the-connectivity-range.md

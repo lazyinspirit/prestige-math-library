@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-zero-set-filter-and-zero-set-ultrafilter.md

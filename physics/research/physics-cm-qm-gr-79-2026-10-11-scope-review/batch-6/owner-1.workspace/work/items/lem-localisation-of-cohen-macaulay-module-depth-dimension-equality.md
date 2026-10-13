@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-localisation-of-cohen-macaulay-module-depth-dimension-equality.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-handle-slide-realizes-an-elementary-row-operation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-k-form-on-an-n-manifold-can-be-nonzero-when-k-is-greater-than-n.md

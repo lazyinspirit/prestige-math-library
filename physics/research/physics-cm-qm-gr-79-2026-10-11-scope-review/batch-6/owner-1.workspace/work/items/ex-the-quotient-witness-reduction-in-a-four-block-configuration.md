@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-quotient-witness-reduction-in-a-four-block-configuration.md

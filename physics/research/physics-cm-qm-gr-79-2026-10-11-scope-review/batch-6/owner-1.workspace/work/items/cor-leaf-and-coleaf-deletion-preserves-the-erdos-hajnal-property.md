@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-leaf-and-coleaf-deletion-preserves-the-erdos-hajnal-property.md

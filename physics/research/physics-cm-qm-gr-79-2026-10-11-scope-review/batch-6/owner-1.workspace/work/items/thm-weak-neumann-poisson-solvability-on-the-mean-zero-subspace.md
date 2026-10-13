@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-weak-neumann-poisson-solvability-on-the-mean-zero-subspace.md

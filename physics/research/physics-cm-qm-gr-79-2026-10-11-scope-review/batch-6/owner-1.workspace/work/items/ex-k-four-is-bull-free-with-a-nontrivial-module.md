@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-k-four-is-bull-free-with-a-nontrivial-module.md

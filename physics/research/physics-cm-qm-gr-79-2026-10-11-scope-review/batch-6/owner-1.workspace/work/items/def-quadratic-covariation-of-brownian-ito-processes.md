@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-quadratic-covariation-of-brownian-ito-processes.md

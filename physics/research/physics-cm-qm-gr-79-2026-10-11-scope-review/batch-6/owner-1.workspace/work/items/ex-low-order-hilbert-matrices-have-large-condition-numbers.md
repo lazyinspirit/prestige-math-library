@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-low-order-hilbert-matrices-have-large-condition-numbers.md

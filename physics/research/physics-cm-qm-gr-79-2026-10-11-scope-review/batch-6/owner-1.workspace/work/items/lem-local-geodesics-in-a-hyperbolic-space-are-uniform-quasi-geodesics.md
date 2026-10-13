@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-geodesics-in-a-hyperbolic-space-are-uniform-quasi-geodesics.md

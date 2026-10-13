@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-delta-slim-geodesic-triangle-and-hyperbolic-space.md

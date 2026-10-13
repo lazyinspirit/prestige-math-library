@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-one-variable-alexander-module-of-an-oriented-link.md

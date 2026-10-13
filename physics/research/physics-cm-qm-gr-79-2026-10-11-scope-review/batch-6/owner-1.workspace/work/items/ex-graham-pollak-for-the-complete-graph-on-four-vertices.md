@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-graham-pollak-for-the-complete-graph-on-four-vertices.md

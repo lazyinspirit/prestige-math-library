@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-vanishing-viscosity-convergence-for-hamilton-jacobi-equations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-determinantal-grade-criterion-free-complex-exactness.md

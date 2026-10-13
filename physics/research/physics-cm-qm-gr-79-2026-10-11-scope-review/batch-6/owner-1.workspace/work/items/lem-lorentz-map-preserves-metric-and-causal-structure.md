@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lorentz-map-preserves-metric-and-causal-structure.md

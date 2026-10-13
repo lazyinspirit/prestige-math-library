@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-balls-and-polydiscs-in-complex-euclidean-space.md

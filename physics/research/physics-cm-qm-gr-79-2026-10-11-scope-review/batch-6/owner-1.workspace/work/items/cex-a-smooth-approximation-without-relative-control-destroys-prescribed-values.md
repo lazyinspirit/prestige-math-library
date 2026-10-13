@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-smooth-approximation-without-relative-control-destroys-prescribed-values.md

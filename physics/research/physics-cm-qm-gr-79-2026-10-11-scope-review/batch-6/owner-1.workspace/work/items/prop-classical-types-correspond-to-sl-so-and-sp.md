@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-classical-types-correspond-to-sl-so-and-sp.md

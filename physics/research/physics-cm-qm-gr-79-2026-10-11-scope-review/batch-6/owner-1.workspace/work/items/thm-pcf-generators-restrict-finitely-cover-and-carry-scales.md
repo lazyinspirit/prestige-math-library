@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pcf-generators-restrict-finitely-cover-and-carry-scales.md

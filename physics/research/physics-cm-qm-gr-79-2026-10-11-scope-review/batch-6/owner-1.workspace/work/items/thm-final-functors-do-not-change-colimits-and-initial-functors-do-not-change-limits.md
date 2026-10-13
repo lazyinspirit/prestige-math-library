@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-final-functors-do-not-change-colimits-and-initial-functors-do-not-change-limits.md

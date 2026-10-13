@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-canonical-map-from-free-product-to-direct-product.md

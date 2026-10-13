@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-suslin-hypothesis-is-equivalent-to-continuum-hypothesis.md

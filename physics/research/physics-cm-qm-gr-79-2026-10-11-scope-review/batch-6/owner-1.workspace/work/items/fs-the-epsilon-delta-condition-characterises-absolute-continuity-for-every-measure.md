@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-epsilon-delta-condition-characterises-absolute-continuity-for-every-measure.md

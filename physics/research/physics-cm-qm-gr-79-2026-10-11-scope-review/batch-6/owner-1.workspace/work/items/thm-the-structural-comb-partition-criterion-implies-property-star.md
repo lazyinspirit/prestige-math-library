@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-structural-comb-partition-criterion-implies-property-star.md

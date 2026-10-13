@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-an-irreducible-chain-is-either-recurrent-or-transient.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-brownian-law-of-the-iterated-logarithm-at-zero.md

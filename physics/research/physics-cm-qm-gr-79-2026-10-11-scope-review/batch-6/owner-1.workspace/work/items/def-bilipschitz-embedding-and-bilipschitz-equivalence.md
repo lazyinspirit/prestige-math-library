@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-bilipschitz-embedding-and-bilipschitz-equivalence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-inverse-limit-of-finite-discrete-groups-is-hausdorff-compact-and-totally-disconnected.md

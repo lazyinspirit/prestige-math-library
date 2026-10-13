@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-homology-factors-uniquely-through-the-homotopy-category.md

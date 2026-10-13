@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cm-sine-tail-bound-fails-for-rough-data.md

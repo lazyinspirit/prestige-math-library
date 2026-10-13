@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-co-bird-e-free-comb-singleton-partition.md

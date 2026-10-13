@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hh-hecke-anti-involution-bar-and-normalization.md

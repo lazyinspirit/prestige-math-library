@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-closed-subsets-of-the-line-as-zero-sets-and-g-delta-sets.md

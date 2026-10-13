@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-discriminant-of-a-number-field-basis-and-order.md

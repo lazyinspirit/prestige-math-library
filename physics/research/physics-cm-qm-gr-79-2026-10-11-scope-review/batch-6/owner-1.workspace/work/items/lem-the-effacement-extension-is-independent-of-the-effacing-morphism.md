@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-effacement-extension-is-independent-of-the-effacing-morphism.md

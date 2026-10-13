@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-box-volume-is-additive-over-grid-subdivisions.md

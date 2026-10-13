@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-radial-r-squared-sine-one-over-r-is-differentiable-with-discontinuous-gradient.md

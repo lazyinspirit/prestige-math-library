@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-logan-shepp-vershik-kerov-limit-profile.md

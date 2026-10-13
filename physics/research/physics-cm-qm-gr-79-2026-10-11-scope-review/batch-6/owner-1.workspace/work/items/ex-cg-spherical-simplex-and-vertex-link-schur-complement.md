@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-spherical-simplex-and-vertex-link-schur-complement.md

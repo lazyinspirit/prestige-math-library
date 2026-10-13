@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-deck-transformations-correspond-to-normalizer-cosets.md

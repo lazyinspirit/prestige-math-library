@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-freyd-axioms-imply-the-additive-axioms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-integral-of-an-oriented-chart-supported-top-form.md

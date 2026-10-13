@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-schreier-coset-graph-and-its-tree-basis.md

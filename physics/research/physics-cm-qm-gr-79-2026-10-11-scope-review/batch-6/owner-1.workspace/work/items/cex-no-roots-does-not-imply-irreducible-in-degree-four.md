@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-no-roots-does-not-imply-irreducible-in-degree-four.md

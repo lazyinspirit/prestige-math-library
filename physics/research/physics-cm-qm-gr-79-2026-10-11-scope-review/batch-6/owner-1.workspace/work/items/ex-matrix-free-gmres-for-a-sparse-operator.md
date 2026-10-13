@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-matrix-free-gmres-for-a-sparse-operator.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/library/non-relativistic-classical-mechanics/cm05-two-body-central-forces-and-gravitation-examples.md

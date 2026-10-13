@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-order-continuous-homomorphisms-extend-to-boolean-completions.md

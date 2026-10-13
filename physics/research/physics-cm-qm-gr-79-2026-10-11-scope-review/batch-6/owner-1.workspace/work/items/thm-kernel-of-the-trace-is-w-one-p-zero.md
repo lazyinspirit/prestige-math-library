@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-kernel-of-the-trace-is-w-one-p-zero.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-translations-are-diffeomorphisms-and-their-differentials-trivialize-the-tangent-bundle.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-vector-field-can-be-pushed-forward-by-every-smooth-map.md

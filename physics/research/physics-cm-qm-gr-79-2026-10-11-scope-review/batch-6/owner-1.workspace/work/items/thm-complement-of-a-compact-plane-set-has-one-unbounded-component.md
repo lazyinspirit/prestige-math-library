@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complement-of-a-compact-plane-set-has-one-unbounded-component.md

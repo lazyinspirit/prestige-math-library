@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-reidemeister-schreier-for-a-surface-subgroup.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-subobject-classifier-represents-the-subobject-functor.md

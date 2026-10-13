@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-semisimple-lie-algebras-are-centerless-and-perfect.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-torsion-theorem-for-c-prime-one-sixth-groups.md

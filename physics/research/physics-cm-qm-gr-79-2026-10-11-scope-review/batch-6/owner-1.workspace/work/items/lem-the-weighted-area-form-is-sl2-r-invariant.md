@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-weighted-area-form-is-sl2-r-invariant.md

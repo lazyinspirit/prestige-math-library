@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-coulomb-atomic-dipole-matrix-element-domain.md

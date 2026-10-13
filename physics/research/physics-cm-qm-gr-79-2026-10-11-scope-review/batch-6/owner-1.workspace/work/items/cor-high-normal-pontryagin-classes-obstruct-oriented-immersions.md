@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-high-normal-pontryagin-classes-obstruct-oriented-immersions.md

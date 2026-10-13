@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-glaisher-bijection-between-odd-and-distinct-partitions.md

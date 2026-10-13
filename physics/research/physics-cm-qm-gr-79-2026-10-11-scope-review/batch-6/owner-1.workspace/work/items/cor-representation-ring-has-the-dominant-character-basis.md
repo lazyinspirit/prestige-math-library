@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-representation-ring-has-the-dominant-character-basis.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-stabilizing-a-normal-bundle-suspends-its-thom-space.md

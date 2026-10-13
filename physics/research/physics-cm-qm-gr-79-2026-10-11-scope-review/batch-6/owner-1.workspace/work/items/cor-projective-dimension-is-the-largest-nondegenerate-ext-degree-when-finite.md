@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-projective-dimension-is-the-largest-nondegenerate-ext-degree-when-finite.md

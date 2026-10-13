@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-smooth-up-to-the-boundary-density-on-smooth-domains.md

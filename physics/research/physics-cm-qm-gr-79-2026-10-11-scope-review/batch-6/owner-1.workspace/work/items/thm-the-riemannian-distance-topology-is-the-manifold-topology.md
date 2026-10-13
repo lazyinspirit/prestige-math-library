@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-riemannian-distance-topology-is-the-manifold-topology.md

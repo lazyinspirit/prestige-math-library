@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-sign-twist-corresponds-to-the-omega-involution.md

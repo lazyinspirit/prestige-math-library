@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-pointed-sets-equivalent-to-sets-and-partial-functions.md

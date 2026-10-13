@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hall-malcev-upper-central-factors-are-torsion-free.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-change-of-base-along-the-underlying-set-functor.md

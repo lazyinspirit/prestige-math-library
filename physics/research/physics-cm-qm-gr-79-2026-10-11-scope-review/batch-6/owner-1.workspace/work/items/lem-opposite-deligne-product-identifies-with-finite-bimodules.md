@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-opposite-deligne-product-identifies-with-finite-bimodules.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-greendlinger-cell-in-a-van-kampen-diagram.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-graded-invariants-of-localization-at-an-invariant-element.md

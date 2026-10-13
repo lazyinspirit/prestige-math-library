@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-zeros-of-e4-and-e6-at-the-elliptic-points.md

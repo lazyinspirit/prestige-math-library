@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-incomparability-in-a-quadratic-integral-extension.md

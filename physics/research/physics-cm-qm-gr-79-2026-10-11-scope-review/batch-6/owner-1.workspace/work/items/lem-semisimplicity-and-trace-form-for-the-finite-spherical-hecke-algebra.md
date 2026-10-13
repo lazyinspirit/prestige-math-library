@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-semisimplicity-and-trace-form-for-the-finite-spherical-hecke-algebra.md

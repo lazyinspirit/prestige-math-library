@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-effective-metacompact-discrete-metrics-implies-ac.md

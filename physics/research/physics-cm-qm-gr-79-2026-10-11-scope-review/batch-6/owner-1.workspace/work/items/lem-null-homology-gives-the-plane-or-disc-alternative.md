@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-null-homology-gives-the-plane-or-disc-alternative.md

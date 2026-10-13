@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compactly-supported-riemann-integral-is-well-defined.md

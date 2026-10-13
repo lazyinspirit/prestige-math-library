@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-unbracketed-tensor-strings-are-well-defined-expressions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-geometric-power-series-not-uniform-on-its-open-interval.md

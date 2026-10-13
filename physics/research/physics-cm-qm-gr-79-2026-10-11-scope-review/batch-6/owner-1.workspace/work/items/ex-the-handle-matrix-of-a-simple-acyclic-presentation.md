@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-handle-matrix-of-a-simple-acyclic-presentation.md

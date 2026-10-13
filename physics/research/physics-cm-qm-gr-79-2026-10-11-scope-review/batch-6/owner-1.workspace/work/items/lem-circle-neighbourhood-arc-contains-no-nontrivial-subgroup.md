@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-circle-neighbourhood-arc-contains-no-nontrivial-subgroup.md

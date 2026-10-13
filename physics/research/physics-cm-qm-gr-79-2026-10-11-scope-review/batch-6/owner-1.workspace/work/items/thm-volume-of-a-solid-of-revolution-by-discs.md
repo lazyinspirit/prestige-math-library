@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-volume-of-a-solid-of-revolution-by-discs.md

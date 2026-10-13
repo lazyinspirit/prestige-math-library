@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-full-column-rank-pseudoinverse-from-reduced-qr.md

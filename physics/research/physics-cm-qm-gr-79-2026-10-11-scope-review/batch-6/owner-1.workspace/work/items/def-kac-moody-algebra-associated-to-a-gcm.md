@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-kac-moody-algebra-associated-to-a-gcm.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-gr-spacelike-hypersurface-need-not-be-cauchy.md

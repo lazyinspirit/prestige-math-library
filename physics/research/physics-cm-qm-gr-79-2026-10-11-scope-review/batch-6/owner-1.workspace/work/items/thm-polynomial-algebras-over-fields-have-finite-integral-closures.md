@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-polynomial-algebras-over-fields-have-finite-integral-closures.md

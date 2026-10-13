@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nevanlinna-poisson-jensen-derivative-bound.md

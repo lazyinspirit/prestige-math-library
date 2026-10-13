@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-vortex-field-is-closed-but-not-exact-on-the-punctured-plane.md

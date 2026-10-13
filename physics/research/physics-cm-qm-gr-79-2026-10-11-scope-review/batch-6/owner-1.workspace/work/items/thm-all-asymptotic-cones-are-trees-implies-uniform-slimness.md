@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-all-asymptotic-cones-are-trees-implies-uniform-slimness.md

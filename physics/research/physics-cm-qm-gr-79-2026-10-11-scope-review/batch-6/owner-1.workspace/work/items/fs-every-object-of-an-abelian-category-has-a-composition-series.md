@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-object-of-an-abelian-category-has-a-composition-series.md

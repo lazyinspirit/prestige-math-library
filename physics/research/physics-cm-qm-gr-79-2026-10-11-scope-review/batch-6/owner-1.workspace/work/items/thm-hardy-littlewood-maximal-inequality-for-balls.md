@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hardy-littlewood-maximal-inequality-for-balls.md

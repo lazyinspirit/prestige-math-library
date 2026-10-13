@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-first-lie-algebra-cohomology-is-derivations-modulo-inner-derivations.md

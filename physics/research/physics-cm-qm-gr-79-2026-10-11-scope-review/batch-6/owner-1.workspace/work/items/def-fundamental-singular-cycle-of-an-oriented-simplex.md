@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-fundamental-singular-cycle-of-an-oriented-simplex.md

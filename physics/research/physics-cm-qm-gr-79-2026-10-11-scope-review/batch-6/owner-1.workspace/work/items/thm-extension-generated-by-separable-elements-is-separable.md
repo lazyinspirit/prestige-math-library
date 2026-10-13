@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-extension-generated-by-separable-elements-is-separable.md

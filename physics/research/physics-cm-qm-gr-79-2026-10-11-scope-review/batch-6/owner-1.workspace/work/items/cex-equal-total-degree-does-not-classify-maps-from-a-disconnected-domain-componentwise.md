@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-equal-total-degree-does-not-classify-maps-from-a-disconnected-domain-componentwise.md

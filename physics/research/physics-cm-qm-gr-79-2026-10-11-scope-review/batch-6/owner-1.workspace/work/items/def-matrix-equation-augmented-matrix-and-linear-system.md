@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-matrix-equation-augmented-matrix-and-linear-system.md

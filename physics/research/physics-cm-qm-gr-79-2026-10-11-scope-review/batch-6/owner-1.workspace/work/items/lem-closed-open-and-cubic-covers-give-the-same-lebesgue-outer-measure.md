@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-closed-open-and-cubic-covers-give-the-same-lebesgue-outer-measure.md

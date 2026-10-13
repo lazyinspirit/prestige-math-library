@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-flatness-is-not-constant-fibre-isomorphism.md

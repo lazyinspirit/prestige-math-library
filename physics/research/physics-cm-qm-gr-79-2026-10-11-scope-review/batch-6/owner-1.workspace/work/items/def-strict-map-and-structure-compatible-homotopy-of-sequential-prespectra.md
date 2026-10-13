@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-strict-map-and-structure-compatible-homotopy-of-sequential-prespectra.md

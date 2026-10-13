@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-boundary-monomorphisms-from-stabilizers-are-well-defined.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ramsey-logarithmic-homogeneous-set-bound.md

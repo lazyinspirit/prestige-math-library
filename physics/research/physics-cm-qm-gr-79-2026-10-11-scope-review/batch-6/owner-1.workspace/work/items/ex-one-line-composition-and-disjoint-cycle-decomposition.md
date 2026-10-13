@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-one-line-composition-and-disjoint-cycle-decomposition.md

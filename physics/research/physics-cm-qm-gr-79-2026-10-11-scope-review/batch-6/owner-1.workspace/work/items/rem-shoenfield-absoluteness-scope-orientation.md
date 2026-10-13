@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-shoenfield-absoluteness-scope-orientation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-casimir-operator-relative-to-an-invariant-form.md

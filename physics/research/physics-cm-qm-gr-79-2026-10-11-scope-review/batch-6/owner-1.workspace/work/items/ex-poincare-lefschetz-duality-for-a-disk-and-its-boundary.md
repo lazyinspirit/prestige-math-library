@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-poincare-lefschetz-duality-for-a-disk-and-its-boundary.md

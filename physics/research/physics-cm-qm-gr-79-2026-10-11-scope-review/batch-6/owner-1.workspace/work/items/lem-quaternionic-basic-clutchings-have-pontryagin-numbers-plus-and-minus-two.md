@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-quaternionic-basic-clutchings-have-pontryagin-numbers-plus-and-minus-two.md

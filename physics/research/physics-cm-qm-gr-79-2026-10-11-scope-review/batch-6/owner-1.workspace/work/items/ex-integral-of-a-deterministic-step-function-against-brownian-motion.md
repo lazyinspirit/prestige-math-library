@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-integral-of-a-deterministic-step-function-against-brownian-motion.md

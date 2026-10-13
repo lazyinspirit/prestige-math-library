@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-p-elementary-characters-are-induced-from-linear-characters.md

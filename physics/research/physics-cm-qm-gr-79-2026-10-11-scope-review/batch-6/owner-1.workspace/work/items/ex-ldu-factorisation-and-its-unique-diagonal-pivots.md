@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-ldu-factorisation-and-its-unique-diagonal-pivots.md

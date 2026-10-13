@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cotangent-lift-is-hamiltonian-with-tautological-moment-map.md

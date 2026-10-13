@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-comparison-for-first-order-hamilton-jacobi-equations.md

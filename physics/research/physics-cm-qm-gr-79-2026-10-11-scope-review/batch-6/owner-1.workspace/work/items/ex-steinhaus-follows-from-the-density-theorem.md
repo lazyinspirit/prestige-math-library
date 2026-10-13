@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-steinhaus-follows-from-the-density-theorem.md

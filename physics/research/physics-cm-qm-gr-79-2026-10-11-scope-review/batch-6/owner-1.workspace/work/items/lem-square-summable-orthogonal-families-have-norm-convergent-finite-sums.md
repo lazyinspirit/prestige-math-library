@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums.md

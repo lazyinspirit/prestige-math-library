@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-one-dimensional-obstacle-reaction-is-supported-on-the-contact-set.md

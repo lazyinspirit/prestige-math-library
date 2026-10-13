@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-squarefree-power-basis-discriminant-gives-ring-of-integers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-frattini-subgroup-of-a-cyclic-p-group.md

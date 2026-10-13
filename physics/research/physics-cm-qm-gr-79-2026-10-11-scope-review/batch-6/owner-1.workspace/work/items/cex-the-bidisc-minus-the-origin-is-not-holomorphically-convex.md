@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-bidisc-minus-the-origin-is-not-holomorphically-convex.md

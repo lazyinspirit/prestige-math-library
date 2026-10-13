@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-small-finite-and-large-limits-completeness-and-cocompleteness.md

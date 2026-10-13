@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3a-pair-em-scattering-and-scalar-diffraction-79d97abed3a2e3d7.task.md

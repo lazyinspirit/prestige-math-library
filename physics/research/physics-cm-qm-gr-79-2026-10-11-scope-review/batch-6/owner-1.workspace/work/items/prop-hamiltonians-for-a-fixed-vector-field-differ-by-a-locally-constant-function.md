@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-hamiltonians-for-a-fixed-vector-field-differ-by-a-locally-constant-function.md

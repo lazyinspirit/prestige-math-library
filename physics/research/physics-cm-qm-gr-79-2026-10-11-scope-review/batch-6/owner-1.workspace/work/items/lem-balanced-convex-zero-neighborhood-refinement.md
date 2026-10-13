@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-balanced-convex-zero-neighborhood-refinement.md

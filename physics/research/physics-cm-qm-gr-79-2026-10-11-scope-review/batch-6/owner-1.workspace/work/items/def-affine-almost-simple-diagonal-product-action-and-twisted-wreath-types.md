@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-fractional-slobodeckij-space-on-euclidean-space.md

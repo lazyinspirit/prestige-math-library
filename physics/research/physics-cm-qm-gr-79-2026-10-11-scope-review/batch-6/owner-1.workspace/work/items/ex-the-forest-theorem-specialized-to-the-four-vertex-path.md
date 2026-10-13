@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-forest-theorem-specialized-to-the-four-vertex-path.md

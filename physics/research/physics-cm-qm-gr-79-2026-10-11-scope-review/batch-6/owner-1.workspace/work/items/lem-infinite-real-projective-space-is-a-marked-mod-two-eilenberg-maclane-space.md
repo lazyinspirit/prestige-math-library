@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-infinite-real-projective-space-is-a-marked-mod-two-eilenberg-maclane-space.md

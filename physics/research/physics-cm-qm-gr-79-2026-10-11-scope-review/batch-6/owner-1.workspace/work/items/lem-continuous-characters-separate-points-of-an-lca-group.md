@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-continuous-characters-separate-points-of-an-lca-group.md

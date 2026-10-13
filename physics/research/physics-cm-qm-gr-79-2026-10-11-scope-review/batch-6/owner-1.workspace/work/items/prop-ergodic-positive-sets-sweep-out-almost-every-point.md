@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-ergodic-positive-sets-sweep-out-almost-every-point.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-set-arithmetic-isomorphisms-are-natural.md

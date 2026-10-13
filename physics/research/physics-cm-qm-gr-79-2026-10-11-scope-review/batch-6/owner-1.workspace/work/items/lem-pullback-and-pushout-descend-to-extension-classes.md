@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pullback-and-pushout-descend-to-extension-classes.md

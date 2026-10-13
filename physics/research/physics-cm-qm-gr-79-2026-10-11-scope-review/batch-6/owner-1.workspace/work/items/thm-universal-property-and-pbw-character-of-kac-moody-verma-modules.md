@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-universal-property-and-pbw-character-of-kac-moody-verma-modules.md

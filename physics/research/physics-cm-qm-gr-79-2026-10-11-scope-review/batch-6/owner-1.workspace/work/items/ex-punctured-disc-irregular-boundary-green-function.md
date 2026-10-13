@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-punctured-disc-irregular-boundary-green-function.md

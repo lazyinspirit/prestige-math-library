@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-defect-zero-blocks-are-simple-algebras.md

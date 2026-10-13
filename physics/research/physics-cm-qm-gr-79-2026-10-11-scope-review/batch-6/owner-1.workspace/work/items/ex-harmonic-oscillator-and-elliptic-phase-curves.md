@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-harmonic-oscillator-and-elliptic-phase-curves.md

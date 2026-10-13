@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-quasi-isometry-of-geodesic-spaces-has-a-controlled-coarse-inverse.md

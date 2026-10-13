@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-quasi-isomorphism-is-an-isomorphism-of-complexes.md

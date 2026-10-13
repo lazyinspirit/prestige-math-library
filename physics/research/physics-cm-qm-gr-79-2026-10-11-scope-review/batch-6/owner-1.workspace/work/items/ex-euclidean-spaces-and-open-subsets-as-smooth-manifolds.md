@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds.md

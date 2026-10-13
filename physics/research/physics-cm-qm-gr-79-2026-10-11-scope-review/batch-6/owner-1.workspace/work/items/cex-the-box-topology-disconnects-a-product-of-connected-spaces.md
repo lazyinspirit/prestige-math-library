@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-box-topology-disconnects-a-product-of-connected-spaces.md

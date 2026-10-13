@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-relative-simplicial-approximation-fixed-on-the-endpoints.md

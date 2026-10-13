@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-eigenvalue-eigenvector-eigenspace-and-spectrum.md

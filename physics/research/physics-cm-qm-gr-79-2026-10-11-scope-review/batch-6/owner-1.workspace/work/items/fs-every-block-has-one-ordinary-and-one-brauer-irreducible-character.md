@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-block-has-one-ordinary-and-one-brauer-irreducible-character.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-same-sequence-in-real-and-p-adic-metrics.md

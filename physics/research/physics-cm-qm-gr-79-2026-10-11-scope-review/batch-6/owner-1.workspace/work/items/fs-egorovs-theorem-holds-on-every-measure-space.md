@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-egorovs-theorem-holds-on-every-measure-space.md

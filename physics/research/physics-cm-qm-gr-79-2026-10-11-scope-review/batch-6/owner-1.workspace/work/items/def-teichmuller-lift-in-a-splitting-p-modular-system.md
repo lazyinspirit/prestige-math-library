@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-teichmuller-lift-in-a-splitting-p-modular-system.md

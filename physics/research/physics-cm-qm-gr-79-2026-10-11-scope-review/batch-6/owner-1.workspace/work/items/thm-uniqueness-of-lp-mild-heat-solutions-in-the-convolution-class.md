@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-uniqueness-of-lp-mild-heat-solutions-in-the-convolution-class.md

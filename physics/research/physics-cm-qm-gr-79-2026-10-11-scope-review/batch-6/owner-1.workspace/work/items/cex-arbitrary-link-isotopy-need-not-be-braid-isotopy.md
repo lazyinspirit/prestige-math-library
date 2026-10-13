@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-arbitrary-link-isotopy-need-not-be-braid-isotopy.md

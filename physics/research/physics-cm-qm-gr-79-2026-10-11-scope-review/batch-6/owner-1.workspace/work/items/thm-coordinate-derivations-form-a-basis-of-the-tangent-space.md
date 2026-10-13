@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-coordinate-derivations-form-a-basis-of-the-tangent-space.md

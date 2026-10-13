@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-conjugates-of-proper-subgroup-do-not-cover-finite-group.md

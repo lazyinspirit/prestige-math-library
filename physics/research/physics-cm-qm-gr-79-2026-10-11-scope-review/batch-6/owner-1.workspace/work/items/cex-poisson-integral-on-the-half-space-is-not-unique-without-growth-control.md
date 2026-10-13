@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-poisson-integral-on-the-half-space-is-not-unique-without-growth-control.md

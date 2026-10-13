@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-star-expansion-of-a-forest-containing-a-long-path-contains-the-corresponding-cycle.md

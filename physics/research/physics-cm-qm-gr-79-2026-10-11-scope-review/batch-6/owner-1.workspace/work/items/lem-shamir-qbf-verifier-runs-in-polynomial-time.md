@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-shamir-qbf-verifier-runs-in-polynomial-time.md

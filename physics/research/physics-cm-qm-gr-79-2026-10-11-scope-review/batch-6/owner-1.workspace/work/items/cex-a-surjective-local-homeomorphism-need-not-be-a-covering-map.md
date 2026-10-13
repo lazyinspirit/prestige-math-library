@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-surjective-local-homeomorphism-need-not-be-a-covering-map.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-poisson-kernel-on-the-circle-is-a-positive-approximate-identity.md

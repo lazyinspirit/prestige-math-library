@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-second-borel-cantelli-lemma-under-pairwise-independence.md

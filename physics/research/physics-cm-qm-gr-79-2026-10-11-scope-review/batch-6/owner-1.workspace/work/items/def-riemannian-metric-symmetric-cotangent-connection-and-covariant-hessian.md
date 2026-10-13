@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian.md

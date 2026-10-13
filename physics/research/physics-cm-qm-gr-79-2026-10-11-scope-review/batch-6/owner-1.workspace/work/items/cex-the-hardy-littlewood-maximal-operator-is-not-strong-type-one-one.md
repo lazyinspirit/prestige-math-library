@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-hardy-littlewood-maximal-operator-is-not-strong-type-one-one.md

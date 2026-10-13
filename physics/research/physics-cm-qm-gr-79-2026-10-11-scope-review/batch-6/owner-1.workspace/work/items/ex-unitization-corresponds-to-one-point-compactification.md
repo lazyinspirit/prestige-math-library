@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-unitization-corresponds-to-one-point-compactification.md

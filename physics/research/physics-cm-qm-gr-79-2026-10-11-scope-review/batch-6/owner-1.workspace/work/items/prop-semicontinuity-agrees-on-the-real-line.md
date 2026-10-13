@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-semicontinuity-agrees-on-the-real-line.md

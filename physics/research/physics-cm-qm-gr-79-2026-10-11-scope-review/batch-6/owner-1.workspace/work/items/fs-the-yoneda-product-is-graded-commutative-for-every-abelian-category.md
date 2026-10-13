@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-yoneda-product-is-graded-commutative-for-every-abelian-category.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-subset-of-r-of-positive-outer-measure-contains-a-nonmeasurable-subset.md

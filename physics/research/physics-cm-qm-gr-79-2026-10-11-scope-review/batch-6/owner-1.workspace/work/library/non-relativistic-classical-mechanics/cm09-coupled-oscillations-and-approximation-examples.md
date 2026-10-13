@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/library/non-relativistic-classical-mechanics/cm09-coupled-oscillations-and-approximation-examples.md

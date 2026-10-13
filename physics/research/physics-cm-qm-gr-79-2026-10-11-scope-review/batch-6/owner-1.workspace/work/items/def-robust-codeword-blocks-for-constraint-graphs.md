@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-robust-codeword-blocks-for-constraint-graphs.md

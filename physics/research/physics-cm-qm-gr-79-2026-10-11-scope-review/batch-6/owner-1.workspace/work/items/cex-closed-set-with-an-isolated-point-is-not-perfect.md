@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-closed-set-with-an-isolated-point-is-not-perfect.md

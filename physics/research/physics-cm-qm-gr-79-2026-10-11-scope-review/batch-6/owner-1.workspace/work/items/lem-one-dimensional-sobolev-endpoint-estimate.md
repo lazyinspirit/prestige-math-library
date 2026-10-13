@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-one-dimensional-sobolev-endpoint-estimate.md

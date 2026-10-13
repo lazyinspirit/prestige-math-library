@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-real-beta-symmetry-and-trigonometric-form.md

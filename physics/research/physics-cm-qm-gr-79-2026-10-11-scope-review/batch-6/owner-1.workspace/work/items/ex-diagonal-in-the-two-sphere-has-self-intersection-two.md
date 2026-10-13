@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-diagonal-in-the-two-sphere-has-self-intersection-two.md

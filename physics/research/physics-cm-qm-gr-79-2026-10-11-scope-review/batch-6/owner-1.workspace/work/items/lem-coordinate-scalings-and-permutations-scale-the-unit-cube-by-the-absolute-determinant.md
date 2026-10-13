@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coordinate-scalings-and-permutations-scale-the-unit-cube-by-the-absolute-determinant.md

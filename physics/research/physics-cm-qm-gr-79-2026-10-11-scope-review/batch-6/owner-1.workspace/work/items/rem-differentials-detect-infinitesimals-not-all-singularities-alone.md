@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-differentials-detect-infinitesimals-not-all-singularities-alone.md

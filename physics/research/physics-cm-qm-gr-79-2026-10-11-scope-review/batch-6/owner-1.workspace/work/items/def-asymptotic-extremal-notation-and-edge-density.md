@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-asymptotic-extremal-notation-and-edge-density.md

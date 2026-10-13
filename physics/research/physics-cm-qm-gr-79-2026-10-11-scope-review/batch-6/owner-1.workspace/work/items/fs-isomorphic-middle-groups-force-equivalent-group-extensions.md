@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-isomorphic-middle-groups-force-equivalent-group-extensions.md

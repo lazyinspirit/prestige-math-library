@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-convex-maximum-set-need-not-be-a-face.md

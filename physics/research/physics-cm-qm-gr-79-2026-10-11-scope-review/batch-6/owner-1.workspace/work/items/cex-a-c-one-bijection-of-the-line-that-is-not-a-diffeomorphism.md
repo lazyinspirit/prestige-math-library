@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism.md

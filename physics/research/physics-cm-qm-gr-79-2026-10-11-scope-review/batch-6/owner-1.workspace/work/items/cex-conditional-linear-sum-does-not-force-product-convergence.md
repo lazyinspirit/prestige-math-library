@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-conditional-linear-sum-does-not-force-product-convergence.md

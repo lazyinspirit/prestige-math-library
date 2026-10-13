@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-total-length-of-a-zero-dimensional-projective-scheme.md

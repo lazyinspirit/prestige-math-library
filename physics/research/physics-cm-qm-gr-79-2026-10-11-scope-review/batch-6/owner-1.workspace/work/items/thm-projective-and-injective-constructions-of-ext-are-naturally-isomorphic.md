@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-projective-and-injective-constructions-of-ext-are-naturally-isomorphic.md

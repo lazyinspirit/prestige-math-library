@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-localisation-for-functions-equal-on-an-arc.md

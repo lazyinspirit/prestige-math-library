@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-proper-measurable-subgroups-of-the-line-are-lebesgue-null.md

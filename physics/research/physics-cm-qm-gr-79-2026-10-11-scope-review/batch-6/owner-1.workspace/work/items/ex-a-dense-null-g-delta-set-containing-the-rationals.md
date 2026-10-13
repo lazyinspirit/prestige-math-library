@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-dense-null-g-delta-set-containing-the-rationals.md

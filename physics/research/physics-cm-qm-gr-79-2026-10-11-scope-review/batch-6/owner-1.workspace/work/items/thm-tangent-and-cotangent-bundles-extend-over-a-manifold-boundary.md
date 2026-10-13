@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-tangent-and-cotangent-bundles-extend-over-a-manifold-boundary.md

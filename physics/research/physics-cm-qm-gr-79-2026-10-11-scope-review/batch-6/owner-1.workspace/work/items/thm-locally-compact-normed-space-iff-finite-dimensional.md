@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-locally-compact-normed-space-iff-finite-dimensional.md

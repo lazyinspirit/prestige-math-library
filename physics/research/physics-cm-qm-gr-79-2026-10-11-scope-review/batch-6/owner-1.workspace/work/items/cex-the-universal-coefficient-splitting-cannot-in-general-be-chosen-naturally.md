@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-universal-coefficient-splitting-cannot-in-general-be-chosen-naturally.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-urysohns-lemma-closes-the-separation-chain.md

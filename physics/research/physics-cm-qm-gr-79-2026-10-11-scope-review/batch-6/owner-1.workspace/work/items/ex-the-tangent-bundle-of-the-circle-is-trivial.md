@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-tangent-bundle-of-the-circle-is-trivial.md

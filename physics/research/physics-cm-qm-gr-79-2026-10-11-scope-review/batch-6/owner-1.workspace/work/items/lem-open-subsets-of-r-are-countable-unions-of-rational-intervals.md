@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-open-subsets-of-r-are-countable-unions-of-rational-intervals.md

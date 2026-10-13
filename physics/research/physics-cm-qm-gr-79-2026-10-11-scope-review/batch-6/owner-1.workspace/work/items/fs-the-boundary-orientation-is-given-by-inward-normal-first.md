@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-boundary-orientation-is-given-by-inward-normal-first.md

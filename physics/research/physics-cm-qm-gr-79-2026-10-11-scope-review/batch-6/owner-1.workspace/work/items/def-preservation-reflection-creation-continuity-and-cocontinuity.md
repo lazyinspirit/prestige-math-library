@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-preservation-reflection-creation-continuity-and-cocontinuity.md

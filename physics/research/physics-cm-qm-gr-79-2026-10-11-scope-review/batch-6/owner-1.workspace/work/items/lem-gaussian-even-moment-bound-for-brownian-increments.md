@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gaussian-even-moment-bound-for-brownian-increments.md

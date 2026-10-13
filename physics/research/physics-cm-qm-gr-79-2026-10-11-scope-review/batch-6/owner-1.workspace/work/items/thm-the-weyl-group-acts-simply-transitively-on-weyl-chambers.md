@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-weyl-group-acts-simply-transitively-on-weyl-chambers.md

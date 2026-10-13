@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-complete-connected-scheme-to-affine-scheme-morphism-is-constant.md

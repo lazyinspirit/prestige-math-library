@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-sparse-co-p-five-free-graph-has-a-large-nearly-covered-sparse-pair.md

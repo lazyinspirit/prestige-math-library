@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-self-conjugate-partitions-correspond-to-distinct-odd-partitions.md

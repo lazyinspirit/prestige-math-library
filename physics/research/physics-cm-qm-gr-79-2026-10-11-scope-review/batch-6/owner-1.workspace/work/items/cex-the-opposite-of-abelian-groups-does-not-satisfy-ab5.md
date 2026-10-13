@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-opposite-of-abelian-groups-does-not-satisfy-ab5.md

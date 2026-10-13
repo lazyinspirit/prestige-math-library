@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-morse-handle-chain-complex-computes-singular-homology.md

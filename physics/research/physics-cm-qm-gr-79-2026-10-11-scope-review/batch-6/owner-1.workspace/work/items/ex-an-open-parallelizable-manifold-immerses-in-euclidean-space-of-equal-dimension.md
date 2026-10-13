@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-open-parallelizable-manifold-immerses-in-euclidean-space-of-equal-dimension.md

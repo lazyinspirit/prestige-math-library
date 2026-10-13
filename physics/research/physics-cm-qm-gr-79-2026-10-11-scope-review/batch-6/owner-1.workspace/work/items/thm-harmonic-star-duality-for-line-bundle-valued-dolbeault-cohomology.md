@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-harmonic-star-duality-for-line-bundle-valued-dolbeault-cohomology.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-torsion-splits-from-the-free-part-over-a-pid.md

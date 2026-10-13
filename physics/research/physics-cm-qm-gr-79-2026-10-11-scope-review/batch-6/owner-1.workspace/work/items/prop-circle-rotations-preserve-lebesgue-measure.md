@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-circle-rotations-preserve-lebesgue-measure.md

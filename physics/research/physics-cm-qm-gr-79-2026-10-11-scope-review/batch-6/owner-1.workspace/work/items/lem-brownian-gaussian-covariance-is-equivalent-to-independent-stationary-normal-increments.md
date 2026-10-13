@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-brownian-gaussian-covariance-is-equivalent-to-independent-stationary-normal-increments.md

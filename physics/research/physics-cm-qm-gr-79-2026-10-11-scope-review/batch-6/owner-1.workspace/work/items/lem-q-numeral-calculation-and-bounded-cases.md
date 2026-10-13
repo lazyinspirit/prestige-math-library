@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-q-numeral-calculation-and-bounded-cases.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-f-sigma-and-g-delta-sets-are-borel.md

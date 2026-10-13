@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-standard-circle-and-its-annular-tubular-neighbourhood.md

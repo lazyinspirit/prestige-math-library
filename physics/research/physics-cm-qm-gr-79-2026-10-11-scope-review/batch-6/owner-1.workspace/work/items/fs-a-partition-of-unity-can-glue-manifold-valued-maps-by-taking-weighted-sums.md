@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-partition-of-unity-can-glue-manifold-valued-maps-by-taking-weighted-sums.md

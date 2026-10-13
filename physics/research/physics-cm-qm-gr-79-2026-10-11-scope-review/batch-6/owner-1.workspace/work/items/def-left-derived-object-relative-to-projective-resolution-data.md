@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-left-derived-object-relative-to-projective-resolution-data.md

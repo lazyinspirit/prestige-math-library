@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-euclidean-balls-are-bounded-c-one-domains.md

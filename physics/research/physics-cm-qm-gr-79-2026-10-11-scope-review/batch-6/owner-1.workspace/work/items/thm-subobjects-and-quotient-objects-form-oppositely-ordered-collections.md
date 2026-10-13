@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-subobjects-and-quotient-objects-form-oppositely-ordered-collections.md

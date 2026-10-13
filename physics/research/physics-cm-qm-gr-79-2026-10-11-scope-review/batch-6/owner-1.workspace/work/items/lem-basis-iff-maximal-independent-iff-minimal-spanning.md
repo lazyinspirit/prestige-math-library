@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-basis-iff-maximal-independent-iff-minimal-spanning.md

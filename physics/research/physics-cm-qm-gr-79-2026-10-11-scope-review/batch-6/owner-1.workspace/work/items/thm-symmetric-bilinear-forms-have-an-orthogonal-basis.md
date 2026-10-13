@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-symmetric-bilinear-forms-have-an-orthogonal-basis.md

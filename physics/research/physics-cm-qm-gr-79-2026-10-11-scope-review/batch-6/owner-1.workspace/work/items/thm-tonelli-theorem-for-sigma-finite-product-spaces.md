@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-tonelli-theorem-for-sigma-finite-product-spaces.md

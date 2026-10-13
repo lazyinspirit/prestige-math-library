@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bessel-potentials-shift-sobolev-order-isometrically.md

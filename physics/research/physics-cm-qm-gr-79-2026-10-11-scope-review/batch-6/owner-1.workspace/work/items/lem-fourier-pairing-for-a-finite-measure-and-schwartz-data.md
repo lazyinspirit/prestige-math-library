@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fourier-pairing-for-a-finite-measure-and-schwartz-data.md

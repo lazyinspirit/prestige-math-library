@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-minkowski-constants-change-under-scaled-embedding.md

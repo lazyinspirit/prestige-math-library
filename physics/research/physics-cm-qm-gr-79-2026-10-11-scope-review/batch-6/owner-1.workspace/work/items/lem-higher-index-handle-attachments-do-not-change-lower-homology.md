@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-higher-index-handle-attachments-do-not-change-lower-homology.md

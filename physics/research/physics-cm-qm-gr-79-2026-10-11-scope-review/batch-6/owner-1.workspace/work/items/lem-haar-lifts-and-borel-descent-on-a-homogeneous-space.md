@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-haar-lifts-and-borel-descent-on-a-homogeneous-space.md

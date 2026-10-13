@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-brunner-urysohn-obstruction-is-injectively-boundable.md

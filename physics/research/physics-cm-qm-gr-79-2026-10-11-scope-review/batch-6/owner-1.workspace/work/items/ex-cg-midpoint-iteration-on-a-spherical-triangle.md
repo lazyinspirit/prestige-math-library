@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-midpoint-iteration-on-a-spherical-triangle.md

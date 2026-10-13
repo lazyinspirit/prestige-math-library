@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-nullity-and-nowhere-density-remain-independent-for-lebesgue-measure.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bruhat-covers-give-unique-verma-embeddings.md

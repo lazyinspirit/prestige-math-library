@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-kernel-of-a-lie-group-homomorphism-is-a-closed-embedded-normal-lie-subgroup.md

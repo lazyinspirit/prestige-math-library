@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-p-adic-absolute-value-is-nonarchimedean.md

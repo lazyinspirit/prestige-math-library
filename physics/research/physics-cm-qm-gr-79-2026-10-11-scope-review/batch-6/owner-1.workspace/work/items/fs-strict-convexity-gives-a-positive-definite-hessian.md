@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-strict-convexity-gives-a-positive-definite-hessian.md

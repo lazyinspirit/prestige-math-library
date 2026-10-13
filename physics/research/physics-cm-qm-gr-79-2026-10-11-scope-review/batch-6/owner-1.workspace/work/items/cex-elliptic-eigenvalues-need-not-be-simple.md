@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-elliptic-eigenvalues-need-not-be-simple.md

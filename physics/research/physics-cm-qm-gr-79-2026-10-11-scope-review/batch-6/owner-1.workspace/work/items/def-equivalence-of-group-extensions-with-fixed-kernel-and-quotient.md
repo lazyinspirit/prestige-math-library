@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-equivalence-of-group-extensions-with-fixed-kernel-and-quotient.md

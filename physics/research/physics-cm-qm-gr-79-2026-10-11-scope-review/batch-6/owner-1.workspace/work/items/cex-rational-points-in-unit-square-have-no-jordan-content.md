@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-rational-points-in-unit-square-have-no-jordan-content.md

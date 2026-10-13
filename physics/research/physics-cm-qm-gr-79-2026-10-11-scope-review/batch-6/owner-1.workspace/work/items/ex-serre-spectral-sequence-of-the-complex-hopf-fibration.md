@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-serre-spectral-sequence-of-the-complex-hopf-fibration.md

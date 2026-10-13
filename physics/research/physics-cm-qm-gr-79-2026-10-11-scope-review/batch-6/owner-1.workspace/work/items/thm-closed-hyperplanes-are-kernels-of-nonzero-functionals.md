@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-closed-hyperplanes-are-kernels-of-nonzero-functionals.md

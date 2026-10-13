@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sum-of-variances-condition-is-sufficient-not-necessary-without-further-hypotheses.md

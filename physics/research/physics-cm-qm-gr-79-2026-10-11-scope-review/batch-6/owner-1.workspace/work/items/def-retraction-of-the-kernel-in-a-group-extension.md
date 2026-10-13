@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-retraction-of-the-kernel-in-a-group-extension.md

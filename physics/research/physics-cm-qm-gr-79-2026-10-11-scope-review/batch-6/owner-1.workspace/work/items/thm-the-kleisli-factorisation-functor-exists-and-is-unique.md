@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-kleisli-factorisation-functor-exists-and-is-unique.md

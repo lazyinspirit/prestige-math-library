@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-components-are-anticomplete-and-anticomponents-complete.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-homotopy-equivalence-is-an-equivalence-relation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-degree-one-holomorphic-map-of-compact-riemann-surfaces-is-an-isomorphism.md

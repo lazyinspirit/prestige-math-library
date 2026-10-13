@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-solvable-galois-group-implies-solvable-by-radicals.md

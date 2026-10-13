@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-zariski-lemma-one-variable-localisation-not-finite.md

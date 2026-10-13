@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-positive-ext-does-not-vanish-for-an-injective-first-variable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-contact-equivalence-is-chart-independent-and-an-equivalence-relation.md

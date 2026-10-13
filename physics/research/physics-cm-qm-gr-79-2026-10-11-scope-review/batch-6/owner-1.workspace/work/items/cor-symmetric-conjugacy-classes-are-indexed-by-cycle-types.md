@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-symmetric-conjugacy-classes-are-indexed-by-cycle-types.md

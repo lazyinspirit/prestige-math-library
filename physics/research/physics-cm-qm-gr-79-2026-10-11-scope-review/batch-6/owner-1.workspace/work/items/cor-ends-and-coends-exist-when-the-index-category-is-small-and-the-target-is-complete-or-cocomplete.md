@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-ends-and-coends-exist-when-the-index-category-is-small-and-the-target-is-complete-or-cocomplete.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cancellation-modification-can-be-supported-in-a-trajectory-neighbourhood.md

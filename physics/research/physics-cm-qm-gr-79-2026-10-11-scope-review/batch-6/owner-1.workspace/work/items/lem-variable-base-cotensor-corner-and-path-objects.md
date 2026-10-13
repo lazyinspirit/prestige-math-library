@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-variable-base-cotensor-corner-and-path-objects.md

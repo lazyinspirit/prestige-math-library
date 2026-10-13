@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-semigroup-generator-commutes-with-orbits-on-its-domain.md

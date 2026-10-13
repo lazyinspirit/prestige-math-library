@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-skolem-witness-closure-on-a-cardinal.md

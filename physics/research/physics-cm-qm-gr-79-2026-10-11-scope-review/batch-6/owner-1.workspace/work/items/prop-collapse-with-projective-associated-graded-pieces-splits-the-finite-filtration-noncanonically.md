@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-collapse-with-projective-associated-graded-pieces-splits-the-finite-filtration-noncanonically.md

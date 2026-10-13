@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cauchy-estimates-computed-on-a-bidisc.md

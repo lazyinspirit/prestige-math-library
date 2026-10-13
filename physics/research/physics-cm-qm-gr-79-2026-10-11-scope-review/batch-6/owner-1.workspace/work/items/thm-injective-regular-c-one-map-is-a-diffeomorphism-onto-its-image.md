@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-injective-regular-c-one-map-is-a-diffeomorphism-onto-its-image.md

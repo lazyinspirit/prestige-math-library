@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-semisimple-object-and-semisimple-abelian-category.md

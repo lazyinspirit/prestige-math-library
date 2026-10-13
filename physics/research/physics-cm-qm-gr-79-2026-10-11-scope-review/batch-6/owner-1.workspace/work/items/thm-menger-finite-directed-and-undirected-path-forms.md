@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-menger-finite-directed-and-undirected-path-forms.md

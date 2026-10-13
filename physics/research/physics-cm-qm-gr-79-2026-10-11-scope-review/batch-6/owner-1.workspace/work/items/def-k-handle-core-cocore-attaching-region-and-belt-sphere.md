@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-k-handle-core-cocore-attaching-region-and-belt-sphere.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-vanishing-group-ring-coefficient-sum-pairs-off-opposite-signed-equal-labels.md

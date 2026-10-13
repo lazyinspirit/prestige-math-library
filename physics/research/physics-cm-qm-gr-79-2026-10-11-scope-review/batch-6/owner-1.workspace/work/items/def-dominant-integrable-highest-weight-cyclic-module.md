@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-dominant-integrable-highest-weight-cyclic-module.md

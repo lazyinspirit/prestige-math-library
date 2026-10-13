@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-high-sobolev-norms-share-base-lifespan.md

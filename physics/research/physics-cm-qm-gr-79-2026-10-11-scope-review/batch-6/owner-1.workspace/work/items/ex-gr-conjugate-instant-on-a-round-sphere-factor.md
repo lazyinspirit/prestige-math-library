@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gr-conjugate-instant-on-a-round-sphere-factor.md

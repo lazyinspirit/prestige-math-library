@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-remaining-closure-koszul-complex-is-the-diagonal-hochschild-complex.md

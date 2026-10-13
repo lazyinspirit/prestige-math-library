@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-zero-derivative-almost-everywhere-implies-constancy.md

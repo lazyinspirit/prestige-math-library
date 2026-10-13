@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-circle-rotation-is-ergodic-iff-angle-is-irrational.md

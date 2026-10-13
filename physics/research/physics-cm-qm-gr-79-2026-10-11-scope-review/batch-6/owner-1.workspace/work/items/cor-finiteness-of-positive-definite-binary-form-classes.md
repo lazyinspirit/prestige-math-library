@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finiteness-of-positive-definite-binary-form-classes.md

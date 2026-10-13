@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-curve-residue-duality-is-the-dimension-one-case.md

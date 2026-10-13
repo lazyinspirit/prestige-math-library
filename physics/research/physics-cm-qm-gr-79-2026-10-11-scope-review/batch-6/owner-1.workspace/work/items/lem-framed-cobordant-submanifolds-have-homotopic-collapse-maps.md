@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-framed-cobordant-submanifolds-have-homotopic-collapse-maps.md

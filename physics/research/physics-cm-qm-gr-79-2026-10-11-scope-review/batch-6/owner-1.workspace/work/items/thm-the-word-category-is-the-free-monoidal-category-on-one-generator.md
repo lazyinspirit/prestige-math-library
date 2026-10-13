@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-word-category-is-the-free-monoidal-category-on-one-generator.md

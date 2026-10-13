@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-khintchine-inequality-for-finite-rademacher-sums.md

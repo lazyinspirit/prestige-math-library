@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dual-family-does-not-span-in-infinite-dimension.md

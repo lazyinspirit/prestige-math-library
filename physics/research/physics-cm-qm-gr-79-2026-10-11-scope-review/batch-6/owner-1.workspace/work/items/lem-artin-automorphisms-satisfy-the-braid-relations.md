@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-artin-automorphisms-satisfy-the-braid-relations.md

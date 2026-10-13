@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-plane-arc-has-a-rectangular-neighborhood-by-schoenflies.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-pbw-for-countably-presented-kac-moody-lie-algebras.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-an-abelian-group-has-an-abelian-automorphism-group.md

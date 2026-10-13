@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-induced-dirichlet-l-finite-euler-factors.md

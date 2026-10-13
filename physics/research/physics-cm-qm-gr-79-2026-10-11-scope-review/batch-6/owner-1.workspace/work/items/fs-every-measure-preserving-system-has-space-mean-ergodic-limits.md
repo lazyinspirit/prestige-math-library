@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-measure-preserving-system-has-space-mean-ergodic-limits.md

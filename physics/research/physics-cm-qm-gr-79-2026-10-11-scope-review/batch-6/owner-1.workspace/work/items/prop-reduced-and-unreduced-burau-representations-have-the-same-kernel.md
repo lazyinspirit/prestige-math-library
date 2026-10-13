@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-reduced-and-unreduced-burau-representations-have-the-same-kernel.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra.md

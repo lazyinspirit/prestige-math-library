@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-chart-gluing-recovers-euclidean-lebesgue-measure.md

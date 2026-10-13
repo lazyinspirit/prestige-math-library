@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-nowhere-zero-section-forces-the-euler-class-to-vanish.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-square-roots-of-a-non-negative-operator-are-unique.md

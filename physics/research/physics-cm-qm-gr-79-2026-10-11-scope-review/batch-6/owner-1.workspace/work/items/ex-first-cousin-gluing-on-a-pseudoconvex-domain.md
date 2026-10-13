@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-first-cousin-gluing-on-a-pseudoconvex-domain.md

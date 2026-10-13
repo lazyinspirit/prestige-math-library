@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-smooth-arcs-and-circles-are-removable-for-quasiconformal-maps.md

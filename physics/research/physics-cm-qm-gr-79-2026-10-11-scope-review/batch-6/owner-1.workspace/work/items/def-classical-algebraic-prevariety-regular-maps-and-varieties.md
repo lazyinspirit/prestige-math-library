@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-classical-algebraic-prevariety-regular-maps-and-varieties.md

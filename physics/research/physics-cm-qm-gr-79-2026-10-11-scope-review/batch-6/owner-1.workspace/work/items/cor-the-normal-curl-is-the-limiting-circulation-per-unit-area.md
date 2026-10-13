@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-normal-curl-is-the-limiting-circulation-per-unit-area.md

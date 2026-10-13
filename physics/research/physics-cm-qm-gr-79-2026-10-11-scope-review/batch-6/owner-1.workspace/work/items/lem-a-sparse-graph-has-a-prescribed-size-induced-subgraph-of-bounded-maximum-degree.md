@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-sparse-graph-has-a-prescribed-size-induced-subgraph-of-bounded-maximum-degree.md

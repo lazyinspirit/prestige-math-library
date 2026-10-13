@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-transience-of-simple-symmetric-random-walk-in-dimension-at-least-three.md

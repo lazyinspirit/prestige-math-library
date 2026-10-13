@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-dense-bipartite-side-has-a-small-hitting-set.md

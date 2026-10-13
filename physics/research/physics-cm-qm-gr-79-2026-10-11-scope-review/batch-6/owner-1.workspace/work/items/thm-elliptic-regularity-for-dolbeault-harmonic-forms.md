@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-elliptic-regularity-for-dolbeault-harmonic-forms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-graded-chern-character-by-suspension-and-bott-periodicity.md

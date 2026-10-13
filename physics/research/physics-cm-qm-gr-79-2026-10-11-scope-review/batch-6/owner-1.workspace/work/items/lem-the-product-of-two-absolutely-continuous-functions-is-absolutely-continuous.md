@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous.md

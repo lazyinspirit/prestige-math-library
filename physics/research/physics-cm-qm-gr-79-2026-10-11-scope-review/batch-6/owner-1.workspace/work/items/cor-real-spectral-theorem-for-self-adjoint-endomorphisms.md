@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-real-spectral-theorem-for-self-adjoint-endomorphisms.md

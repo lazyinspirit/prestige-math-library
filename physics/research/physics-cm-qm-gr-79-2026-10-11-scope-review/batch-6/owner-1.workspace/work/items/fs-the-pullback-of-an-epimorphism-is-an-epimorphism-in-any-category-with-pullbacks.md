@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-pullback-of-an-epimorphism-is-an-epimorphism-in-any-category-with-pullbacks.md

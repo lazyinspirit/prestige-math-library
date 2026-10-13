@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-integral-closure-in-a-purely-inseparable-rational-envelope-is-finite.md

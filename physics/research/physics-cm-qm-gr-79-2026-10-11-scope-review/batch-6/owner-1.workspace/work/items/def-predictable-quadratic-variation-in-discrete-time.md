@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-predictable-quadratic-variation-in-discrete-time.md

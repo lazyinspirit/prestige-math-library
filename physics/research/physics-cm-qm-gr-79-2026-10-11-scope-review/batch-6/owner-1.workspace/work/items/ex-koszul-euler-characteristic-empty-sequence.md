@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-koszul-euler-characteristic-empty-sequence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-maximal-ideals-are-points-over-algebraically-closed-field.md

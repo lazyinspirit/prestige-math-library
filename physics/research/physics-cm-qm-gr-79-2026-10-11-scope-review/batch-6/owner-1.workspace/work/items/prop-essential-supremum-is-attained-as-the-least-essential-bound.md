@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-essential-supremum-is-attained-as-the-least-essential-bound.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-schreier-coset-graph-is-connected-and-deterministic.md

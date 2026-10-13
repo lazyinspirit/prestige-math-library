@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-plane-wave-shows-the-characteristic-speed-is-sharp.md

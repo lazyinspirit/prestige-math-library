@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-eilenberg-watts-for-right-exact-linear-functors.md

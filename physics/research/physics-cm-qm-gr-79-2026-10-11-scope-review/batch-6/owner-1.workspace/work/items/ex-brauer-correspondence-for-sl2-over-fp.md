@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-brauer-correspondence-for-sl2-over-fp.md

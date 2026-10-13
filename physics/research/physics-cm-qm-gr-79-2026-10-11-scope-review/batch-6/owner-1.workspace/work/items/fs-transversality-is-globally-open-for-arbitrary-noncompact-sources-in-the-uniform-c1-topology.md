@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-transversality-is-globally-open-for-arbitrary-noncompact-sources-in-the-uniform-c1-topology.md

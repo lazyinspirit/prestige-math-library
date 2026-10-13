@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-circle-and-path-loop-models-for-eilenberg-maclane-induction.md

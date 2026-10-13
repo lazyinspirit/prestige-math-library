@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-two-roofs-are-equal-whenever-their-right-hand-arrows-are-equal.md

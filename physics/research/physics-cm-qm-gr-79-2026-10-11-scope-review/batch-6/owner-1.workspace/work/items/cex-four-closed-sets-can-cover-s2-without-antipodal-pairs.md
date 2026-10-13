@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-four-closed-sets-can-cover-s2-without-antipodal-pairs.md

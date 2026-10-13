@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-circular-dilatation-quasisymmetry-and-analytic-quasiconformality.md

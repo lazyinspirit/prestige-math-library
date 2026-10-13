@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-monotone-lattice-paths-in-a-rectangle-are-counted-by-a-binomial-coefficient.md

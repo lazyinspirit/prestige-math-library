@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-functor-with-a-left-adjoint-is-monadic.md

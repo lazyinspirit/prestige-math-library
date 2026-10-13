@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-deterministic-ito-integrals-are-gaussian.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-homogeneous-sets-in-pure-blockade-patterns-lift-to-homogeneous-blockades.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-knuth-equivalence-classes-are-insertion-tableau-fibers.md

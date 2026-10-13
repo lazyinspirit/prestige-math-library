@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-kleisli-adjunction-for-the-maybe-monad-is-monadic-but-not-strictly-monadic.md

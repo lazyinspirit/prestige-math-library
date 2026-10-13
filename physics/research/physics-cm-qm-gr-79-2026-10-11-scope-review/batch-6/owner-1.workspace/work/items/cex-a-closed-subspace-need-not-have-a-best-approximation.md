@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-closed-subspace-need-not-have-a-best-approximation.md

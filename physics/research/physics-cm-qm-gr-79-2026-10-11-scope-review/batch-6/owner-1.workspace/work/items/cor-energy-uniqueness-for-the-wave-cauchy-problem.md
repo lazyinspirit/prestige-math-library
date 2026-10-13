@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-energy-uniqueness-for-the-wave-cauchy-problem.md

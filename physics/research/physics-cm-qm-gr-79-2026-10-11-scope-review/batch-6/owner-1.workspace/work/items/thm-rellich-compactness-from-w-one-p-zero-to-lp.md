@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rellich-compactness-from-w-one-p-zero-to-lp.md

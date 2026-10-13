@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-inversion-crossed-homomorphism-of-c-two-to-z-is-not-a-homomorphism.md

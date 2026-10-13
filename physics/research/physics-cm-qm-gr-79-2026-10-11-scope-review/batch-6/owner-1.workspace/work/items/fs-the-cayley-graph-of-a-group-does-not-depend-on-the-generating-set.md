@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-cayley-graph-of-a-group-does-not-depend-on-the-generating-set.md

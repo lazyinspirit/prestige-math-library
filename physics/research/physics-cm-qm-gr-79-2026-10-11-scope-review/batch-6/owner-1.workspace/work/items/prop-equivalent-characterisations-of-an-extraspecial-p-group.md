@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-equivalent-characterisations-of-an-extraspecial-p-group.md

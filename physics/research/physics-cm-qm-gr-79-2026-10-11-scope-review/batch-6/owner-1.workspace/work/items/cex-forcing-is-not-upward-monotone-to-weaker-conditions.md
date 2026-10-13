@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-forcing-is-not-upward-monotone-to-weaker-conditions.md

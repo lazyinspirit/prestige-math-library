@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-smooth-morphism-formally-smooth-finite-presentation.md

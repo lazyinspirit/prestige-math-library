@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-quasinilpotent-operator-need-not-be-zero.md

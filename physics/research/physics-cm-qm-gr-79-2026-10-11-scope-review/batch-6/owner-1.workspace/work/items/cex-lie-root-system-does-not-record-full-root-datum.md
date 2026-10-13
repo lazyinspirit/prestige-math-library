@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-lie-root-system-does-not-record-full-root-datum.md

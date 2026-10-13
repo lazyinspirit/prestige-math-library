@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-noncompact-domain-breaks-arzela-ascoli.md

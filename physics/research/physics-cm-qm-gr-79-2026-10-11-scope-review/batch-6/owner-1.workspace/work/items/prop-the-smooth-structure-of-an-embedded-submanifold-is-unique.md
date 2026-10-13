@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-smooth-structure-of-an-embedded-submanifold-is-unique.md

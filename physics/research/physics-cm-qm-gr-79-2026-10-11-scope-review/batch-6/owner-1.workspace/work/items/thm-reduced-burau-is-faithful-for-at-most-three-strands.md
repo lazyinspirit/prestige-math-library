@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-reduced-burau-is-faithful-for-at-most-three-strands.md

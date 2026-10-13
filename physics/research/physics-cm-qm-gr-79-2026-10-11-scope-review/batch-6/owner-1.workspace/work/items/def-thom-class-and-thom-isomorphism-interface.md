@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-thom-class-and-thom-isomorphism-interface.md

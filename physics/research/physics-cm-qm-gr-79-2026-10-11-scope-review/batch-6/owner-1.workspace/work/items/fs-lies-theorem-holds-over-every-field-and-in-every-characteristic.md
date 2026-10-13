@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-lies-theorem-holds-over-every-field-and-in-every-characteristic.md

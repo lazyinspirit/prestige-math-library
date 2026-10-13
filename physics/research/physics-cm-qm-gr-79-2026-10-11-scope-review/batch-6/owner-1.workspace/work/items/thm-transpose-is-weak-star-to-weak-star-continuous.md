@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-transpose-is-weak-star-to-weak-star-continuous.md

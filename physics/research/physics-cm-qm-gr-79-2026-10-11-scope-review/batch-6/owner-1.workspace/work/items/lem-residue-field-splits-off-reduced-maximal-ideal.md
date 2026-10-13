@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-residue-field-splits-off-reduced-maximal-ideal.md

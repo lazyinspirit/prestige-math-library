@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-radial-and-nontangential-maximal-functions-of-a-tempered-distribution.md

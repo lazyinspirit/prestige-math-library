@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-gr-negative-sound-speed-derivative-breaks-evolution.md

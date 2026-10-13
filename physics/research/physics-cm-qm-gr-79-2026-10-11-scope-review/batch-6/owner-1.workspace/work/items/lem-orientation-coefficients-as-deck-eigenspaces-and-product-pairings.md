@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-orientation-coefficients-as-deck-eigenspaces-and-product-pairings.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-j-uniformizes-the-level-one-modular-curve.md

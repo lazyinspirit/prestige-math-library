@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-maximal-abelian-subspaces-of-p-are-conjugate-by-k.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-odd-dimensional-wave-formula-by-spherical-means.md

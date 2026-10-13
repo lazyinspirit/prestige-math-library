@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-solvable-by-radicals-does-not-force-an-abelian-galois-group.md

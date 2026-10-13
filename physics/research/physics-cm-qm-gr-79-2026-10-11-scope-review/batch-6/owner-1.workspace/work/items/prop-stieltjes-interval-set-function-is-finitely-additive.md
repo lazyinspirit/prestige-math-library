@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-stieltjes-interval-set-function-is-finitely-additive.md

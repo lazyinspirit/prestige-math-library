@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-trigonometric-integral-one-over-a-plus-cos-theta.md

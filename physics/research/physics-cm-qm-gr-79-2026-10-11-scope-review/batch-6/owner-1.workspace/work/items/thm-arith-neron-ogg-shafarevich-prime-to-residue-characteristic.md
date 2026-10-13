@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-arith-neron-ogg-shafarevich-prime-to-residue-characteristic.md

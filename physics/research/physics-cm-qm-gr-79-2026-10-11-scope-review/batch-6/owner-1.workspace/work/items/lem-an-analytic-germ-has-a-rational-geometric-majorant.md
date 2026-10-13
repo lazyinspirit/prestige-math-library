@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-an-analytic-germ-has-a-rational-geometric-majorant.md

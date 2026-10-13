@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-vertex-connectivity-at-most-edge-connectivity.md

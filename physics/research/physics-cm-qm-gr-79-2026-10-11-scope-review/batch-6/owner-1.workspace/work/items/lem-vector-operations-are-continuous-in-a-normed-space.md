@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-vector-operations-are-continuous-in-a-normed-space.md

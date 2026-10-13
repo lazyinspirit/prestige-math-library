@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-heisenberg-lie-algebra-is-two-step-nilpotent.md

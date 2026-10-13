@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonempty-regular-locus-reduced-variety-perfect-field.md

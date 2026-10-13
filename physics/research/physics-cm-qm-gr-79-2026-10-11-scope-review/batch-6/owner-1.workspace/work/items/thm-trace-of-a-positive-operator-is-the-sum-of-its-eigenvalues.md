@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues.md

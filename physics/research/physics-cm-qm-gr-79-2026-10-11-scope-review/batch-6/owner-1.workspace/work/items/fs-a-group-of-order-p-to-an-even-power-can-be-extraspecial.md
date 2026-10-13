@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-group-of-order-p-to-an-even-power-can-be-extraspecial.md

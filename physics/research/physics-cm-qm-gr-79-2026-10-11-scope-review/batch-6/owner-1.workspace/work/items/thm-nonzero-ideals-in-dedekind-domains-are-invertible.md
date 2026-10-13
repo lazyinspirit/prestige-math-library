@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonzero-ideals-in-dedekind-domains-are-invertible.md

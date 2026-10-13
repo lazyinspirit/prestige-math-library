@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-compactly-supported-distributions-have-global-finite-order.md

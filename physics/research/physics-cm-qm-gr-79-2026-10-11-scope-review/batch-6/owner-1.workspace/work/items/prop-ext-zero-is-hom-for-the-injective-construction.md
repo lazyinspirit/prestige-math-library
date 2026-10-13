@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-ext-zero-is-hom-for-the-injective-construction.md

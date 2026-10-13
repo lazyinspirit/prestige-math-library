@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-braid-isotopy-relative-top-and-bottom.md

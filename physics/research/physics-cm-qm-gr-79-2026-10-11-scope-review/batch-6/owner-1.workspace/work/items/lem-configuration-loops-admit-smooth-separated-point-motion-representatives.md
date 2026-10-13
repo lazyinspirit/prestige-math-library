@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-configuration-loops-admit-smooth-separated-point-motion-representatives.md

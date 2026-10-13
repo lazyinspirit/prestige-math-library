@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-chacon-transformation-is-weakly-mixing-but-not-mixing.md

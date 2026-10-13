@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-intersection-as-vanishing-order-on-smooth-curve.md

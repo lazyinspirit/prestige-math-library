@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-two-element-indexed-product-is-in-bijection-with-a-cartesian-product.md

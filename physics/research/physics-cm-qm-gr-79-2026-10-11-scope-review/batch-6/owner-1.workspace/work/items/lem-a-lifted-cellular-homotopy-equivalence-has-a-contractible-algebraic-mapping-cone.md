@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-lifted-cellular-homotopy-equivalence-has-a-contractible-algebraic-mapping-cone.md

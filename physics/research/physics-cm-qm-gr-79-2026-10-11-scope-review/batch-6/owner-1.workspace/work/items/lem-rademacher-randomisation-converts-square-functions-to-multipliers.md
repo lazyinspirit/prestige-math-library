@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rademacher-randomisation-converts-square-functions-to-multipliers.md

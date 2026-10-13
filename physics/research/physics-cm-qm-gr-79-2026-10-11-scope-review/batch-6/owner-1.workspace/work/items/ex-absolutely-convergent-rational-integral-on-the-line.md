@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-absolutely-convergent-rational-integral-on-the-line.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-an-extraspecial-p-group-is-an-internal-central-product-of-subgroups-of-order-p-cubed.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-solovay-homogeneous-truth-has-borel-representatives.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-regular-oriented-surface-region-with-piecewise-smooth-boundary.md

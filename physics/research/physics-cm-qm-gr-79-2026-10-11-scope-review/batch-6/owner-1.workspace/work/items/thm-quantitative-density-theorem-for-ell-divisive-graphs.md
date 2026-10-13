@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-quantitative-density-theorem-for-ell-divisive-graphs.md

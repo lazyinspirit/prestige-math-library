@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gitik-intermediate-model-zf-minus-power-set.md

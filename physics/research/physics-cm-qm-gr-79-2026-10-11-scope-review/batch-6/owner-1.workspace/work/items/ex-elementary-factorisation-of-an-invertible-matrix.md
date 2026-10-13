@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-elementary-factorisation-of-an-invertible-matrix.md

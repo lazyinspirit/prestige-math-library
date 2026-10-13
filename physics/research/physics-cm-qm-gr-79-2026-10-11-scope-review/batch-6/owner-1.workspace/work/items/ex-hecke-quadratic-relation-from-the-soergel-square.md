@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hecke-quadratic-relation-from-the-soergel-square.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-wedge-monomials-in-a-dual-basis-form-a-basis.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-transverse-oriented-normal-bundle-orients-an-embedded-submanifold.md

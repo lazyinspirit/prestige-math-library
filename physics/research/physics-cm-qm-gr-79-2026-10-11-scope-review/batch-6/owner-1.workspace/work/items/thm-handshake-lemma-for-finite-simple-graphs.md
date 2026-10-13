@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-handshake-lemma-for-finite-simple-graphs.md

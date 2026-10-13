@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-locally-finite-linear-combinations-of-sections-are-smooth.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sparse-gaussian-elimination-can-create-fill-in.md

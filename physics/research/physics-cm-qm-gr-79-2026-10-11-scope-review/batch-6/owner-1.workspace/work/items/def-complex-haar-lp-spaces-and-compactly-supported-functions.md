@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-complex-haar-lp-spaces-and-compactly-supported-functions.md

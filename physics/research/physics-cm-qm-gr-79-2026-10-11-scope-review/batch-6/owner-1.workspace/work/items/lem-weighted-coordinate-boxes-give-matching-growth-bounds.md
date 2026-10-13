@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weighted-coordinate-boxes-give-matching-growth-bounds.md

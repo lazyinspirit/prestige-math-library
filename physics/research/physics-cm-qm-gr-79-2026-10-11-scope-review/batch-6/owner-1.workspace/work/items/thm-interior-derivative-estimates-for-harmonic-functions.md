@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-interior-derivative-estimates-for-harmonic-functions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-diagonal-in-the-cofinite-and-cocountable-topologies.md

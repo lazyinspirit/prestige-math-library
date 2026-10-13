@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-calderon-zygmund-operators-map-hone-to-lone-under-cancellation.md

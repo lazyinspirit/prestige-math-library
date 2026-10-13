@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-graph-notions-agree-with-the-published-finite-graph-theory.md

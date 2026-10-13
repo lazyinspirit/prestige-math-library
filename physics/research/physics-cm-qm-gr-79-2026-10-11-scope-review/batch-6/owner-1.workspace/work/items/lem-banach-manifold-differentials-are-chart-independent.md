@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-banach-manifold-differentials-are-chart-independent.md

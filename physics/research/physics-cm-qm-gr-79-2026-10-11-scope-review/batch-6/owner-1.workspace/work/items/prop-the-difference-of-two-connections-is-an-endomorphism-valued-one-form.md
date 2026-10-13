@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-difference-of-two-connections-is-an-endomorphism-valued-one-form.md

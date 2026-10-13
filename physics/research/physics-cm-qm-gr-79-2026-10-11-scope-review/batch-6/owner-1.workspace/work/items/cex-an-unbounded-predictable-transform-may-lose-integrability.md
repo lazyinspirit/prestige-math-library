@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-unbounded-predictable-transform-may-lose-integrability.md

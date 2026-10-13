@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-strict-blowup-increases-finite-normalization-subalgebra-at-singular-center.md

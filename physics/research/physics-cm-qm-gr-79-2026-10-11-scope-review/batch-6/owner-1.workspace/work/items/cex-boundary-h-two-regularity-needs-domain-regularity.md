@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-boundary-h-two-regularity-needs-domain-regularity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-connected-groups-of-rank-zero-are-unipotent.md

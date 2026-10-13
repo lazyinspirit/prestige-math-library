@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-zero-lefschetz-number-does-not-imply-no-fixed-points.md

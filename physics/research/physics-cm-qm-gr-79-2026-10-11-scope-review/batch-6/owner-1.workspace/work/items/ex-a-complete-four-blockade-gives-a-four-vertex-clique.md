@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-complete-four-blockade-gives-a-four-vertex-clique.md

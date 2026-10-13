@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-collapse-with-a-noncanonical-extension-choice.md

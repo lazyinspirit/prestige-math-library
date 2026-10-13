@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3a-pair-em-wave-interfaces-and-conductors-05ed2659fe0f1d2b.task.md

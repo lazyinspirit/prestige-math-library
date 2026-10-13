@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-signature-is-additive-under-disjoint-union-and-orientation-reversal.md

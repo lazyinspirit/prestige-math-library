@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cyclic-sylow-does-not-alone-imply-a-normal-p-complement.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-compact-real-form-of-a-complex-semisimple-lie-algebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-limit-exists-implies-bounded-on-the-domain.md

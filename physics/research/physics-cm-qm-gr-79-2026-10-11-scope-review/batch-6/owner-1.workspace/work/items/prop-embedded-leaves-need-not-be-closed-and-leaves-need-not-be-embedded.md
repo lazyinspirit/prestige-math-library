@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-embedded-leaves-need-not-be-closed-and-leaves-need-not-be-embedded.md

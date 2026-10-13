@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-ma-and-not-ch-implies-suslin-hypothesis.md

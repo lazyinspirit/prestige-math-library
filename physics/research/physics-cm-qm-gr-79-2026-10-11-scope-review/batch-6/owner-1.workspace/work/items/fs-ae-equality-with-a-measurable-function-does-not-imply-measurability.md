@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-ae-equality-with-a-measurable-function-does-not-imply-measurability.md

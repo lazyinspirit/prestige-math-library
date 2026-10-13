@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-proper-morse-exhaustions-exist-on-smooth-manifolds.md

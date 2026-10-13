@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weak-derivatives-are-polynomial-fourier-multipliers.md

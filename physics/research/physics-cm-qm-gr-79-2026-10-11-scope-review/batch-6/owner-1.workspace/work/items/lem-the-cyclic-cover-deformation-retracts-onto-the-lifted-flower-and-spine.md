@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-cyclic-cover-deformation-retracts-onto-the-lifted-flower-and-spine.md

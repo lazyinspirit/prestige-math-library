@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3a-pair-em-minkowski-mathematical-prerequisites-f7c95d2b34eed934.task.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-gr-flat-slab-coordinate-time-flow-incomplete.md

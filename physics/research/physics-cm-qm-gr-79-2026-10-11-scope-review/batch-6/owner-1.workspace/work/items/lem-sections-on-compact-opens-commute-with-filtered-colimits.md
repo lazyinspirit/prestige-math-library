@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sections-on-compact-opens-commute-with-filtered-colimits.md

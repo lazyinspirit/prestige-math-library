@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-legendre-symbol-on-units-is-homomorphism.md

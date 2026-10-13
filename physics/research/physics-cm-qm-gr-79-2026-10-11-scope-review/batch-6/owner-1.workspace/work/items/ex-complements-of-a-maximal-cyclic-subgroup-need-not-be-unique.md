@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-complements-of-a-maximal-cyclic-subgroup-need-not-be-unique.md

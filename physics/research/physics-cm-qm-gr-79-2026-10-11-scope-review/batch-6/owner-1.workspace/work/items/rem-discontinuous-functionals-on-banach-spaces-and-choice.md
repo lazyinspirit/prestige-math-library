@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-discontinuous-functionals-on-banach-spaces-and-choice.md

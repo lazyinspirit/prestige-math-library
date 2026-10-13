@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/plan-quantum-statistical-mechanics-track.md

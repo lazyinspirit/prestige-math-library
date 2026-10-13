@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-bmo-seminorm-is-unchanged-by-adding-a-constant.md

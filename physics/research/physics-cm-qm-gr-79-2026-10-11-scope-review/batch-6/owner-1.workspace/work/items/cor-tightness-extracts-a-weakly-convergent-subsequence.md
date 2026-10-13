@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-tightness-extracts-a-weakly-convergent-subsequence.md

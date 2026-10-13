@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-random-walk-on-a-finite-undirected-graph-is-reversible.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-quasi-isomorphism-that-is-not-an-isomorphism-of-complexes.md

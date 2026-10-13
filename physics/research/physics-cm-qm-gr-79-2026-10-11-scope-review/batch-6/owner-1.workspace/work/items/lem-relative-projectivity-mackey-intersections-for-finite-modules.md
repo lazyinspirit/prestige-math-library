@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-relative-projectivity-mackey-intersections-for-finite-modules.md

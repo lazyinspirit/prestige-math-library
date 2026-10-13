@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-laplacian-is-the-oriented-incidence-product.md

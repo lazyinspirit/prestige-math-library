@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-uniformly-elliptic-divergence-form-operator.md

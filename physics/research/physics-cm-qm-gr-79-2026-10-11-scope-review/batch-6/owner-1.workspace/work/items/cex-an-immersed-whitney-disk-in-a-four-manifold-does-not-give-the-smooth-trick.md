@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-immersed-whitney-disk-in-a-four-manifold-does-not-give-the-smooth-trick.md

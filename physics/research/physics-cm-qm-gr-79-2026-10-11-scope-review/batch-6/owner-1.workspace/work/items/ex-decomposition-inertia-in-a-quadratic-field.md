@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-decomposition-inertia-in-a-quadratic-field.md

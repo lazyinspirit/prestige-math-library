@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-line-segment-scalar-and-vector-line-integrals.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-weighted-fourier-images-of-schwartz-functions-are-dense-in-ltwo.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fixed-point-sum-of-the-two-lifts-of-a-self-map.md

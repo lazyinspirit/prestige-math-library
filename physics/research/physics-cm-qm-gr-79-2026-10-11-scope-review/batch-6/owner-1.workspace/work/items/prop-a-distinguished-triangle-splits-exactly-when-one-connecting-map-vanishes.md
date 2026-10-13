@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-distinguished-triangle-splits-exactly-when-one-connecting-map-vanishes.md

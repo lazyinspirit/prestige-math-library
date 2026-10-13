@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-principal-divisors-have-vanishing-abel-jacobi-class.md

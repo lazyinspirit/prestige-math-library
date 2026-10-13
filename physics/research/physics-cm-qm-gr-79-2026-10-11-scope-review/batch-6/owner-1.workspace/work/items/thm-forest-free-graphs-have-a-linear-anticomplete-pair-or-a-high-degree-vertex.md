@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-forest-free-graphs-have-a-linear-anticomplete-pair-or-a-high-degree-vertex.md

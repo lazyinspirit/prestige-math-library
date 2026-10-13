@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-there-is-in-general-no-constant-enriched-functor.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-seminorm-bound-characterizes-tempered-distributions.md

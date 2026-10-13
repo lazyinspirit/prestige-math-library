@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-identity-maps-and-composites-of-smooth-maps-are-smooth.md

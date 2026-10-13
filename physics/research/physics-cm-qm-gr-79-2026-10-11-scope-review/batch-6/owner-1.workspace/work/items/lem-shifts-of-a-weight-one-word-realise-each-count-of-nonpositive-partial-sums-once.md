@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-shifts-of-a-weight-one-word-realise-each-count-of-nonpositive-partial-sums-once.md

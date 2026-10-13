@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-formal-power-series-ring-and-polynomial-embedding.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-equivariant-maps-descend-to-smooth-maps-on-free-proper-quotients.md

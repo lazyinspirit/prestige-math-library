@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-diagonal-affine-variety-cut-out-by-coordinate-differences.md

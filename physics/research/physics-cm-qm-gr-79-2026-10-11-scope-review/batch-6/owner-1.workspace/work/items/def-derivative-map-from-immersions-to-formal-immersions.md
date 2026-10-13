@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-derivative-map-from-immersions-to-formal-immersions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-odd-chern-classes-of-a-complexified-real-bundle-are-two-torsion.md

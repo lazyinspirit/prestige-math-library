@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-endpoint-interpolation-for-a-finite-matrix.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-finite-counting-measure-on-n-points-recovers-rn-p-norms.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-many-good-two-t-vertex-sets-force-many-homogeneous-k-sets.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-markov-stabilization-preserves-the-unknot-closure.md

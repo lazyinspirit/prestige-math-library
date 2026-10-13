@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-boolean-circuits-reduce-to-quadratic-equation-systems-with-a-fixed-input-prefix.md

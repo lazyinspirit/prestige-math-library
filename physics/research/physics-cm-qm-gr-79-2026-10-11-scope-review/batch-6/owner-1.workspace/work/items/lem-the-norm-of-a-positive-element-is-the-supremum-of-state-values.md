@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-norm-of-a-positive-element-is-the-supremum-of-state-values.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-not-every-quintic-is-insoluble-by-radicals.md

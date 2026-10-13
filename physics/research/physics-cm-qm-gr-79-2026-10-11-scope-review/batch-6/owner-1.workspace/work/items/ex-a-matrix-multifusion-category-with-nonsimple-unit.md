@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-matrix-multifusion-category-with-nonsimple-unit.md

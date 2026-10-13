@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-quotient-is-an-induced-subgraph-on-a-transversal.md

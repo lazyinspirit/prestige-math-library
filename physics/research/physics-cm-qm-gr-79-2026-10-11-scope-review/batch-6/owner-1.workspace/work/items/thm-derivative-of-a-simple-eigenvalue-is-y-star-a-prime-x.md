@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-derivative-of-a-simple-eigenvalue-is-y-star-a-prime-x.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-continuous-logarithmic-functions-form-a-one-parameter-family.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-inverse-image-preserves-meets-and-direct-image-preserves-joins.md

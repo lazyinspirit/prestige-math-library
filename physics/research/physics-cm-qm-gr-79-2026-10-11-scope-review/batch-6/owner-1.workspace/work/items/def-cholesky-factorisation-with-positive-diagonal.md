@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cholesky-factorisation-with-positive-diagonal.md

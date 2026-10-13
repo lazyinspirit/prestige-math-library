@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-change-of-projective-resolution-isomorphisms-are-natural.md

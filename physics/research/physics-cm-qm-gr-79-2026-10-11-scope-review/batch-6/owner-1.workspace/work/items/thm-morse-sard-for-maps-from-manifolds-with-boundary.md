@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-morse-sard-for-maps-from-manifolds-with-boundary.md

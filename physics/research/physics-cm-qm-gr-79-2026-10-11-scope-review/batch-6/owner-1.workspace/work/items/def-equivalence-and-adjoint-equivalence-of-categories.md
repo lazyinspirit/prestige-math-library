@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-equivalence-and-adjoint-equivalence-of-categories.md

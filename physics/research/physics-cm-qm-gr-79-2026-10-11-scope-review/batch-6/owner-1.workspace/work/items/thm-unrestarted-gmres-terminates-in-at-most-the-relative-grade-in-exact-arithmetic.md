@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-unrestarted-gmres-terminates-in-at-most-the-relative-grade-in-exact-arithmetic.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-frattini-subgroup-monotonicity-for-subgroups-of-finite-p-groups.md

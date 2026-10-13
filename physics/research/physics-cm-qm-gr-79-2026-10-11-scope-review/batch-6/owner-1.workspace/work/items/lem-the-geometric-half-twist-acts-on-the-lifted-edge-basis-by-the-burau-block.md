@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-geometric-half-twist-acts-on-the-lifted-edge-basis-by-the-burau-block.md

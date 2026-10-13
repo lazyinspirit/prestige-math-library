@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-universal-cover-cellular-boundary-and-lifted-maps-are-right-group-ring-linear.md

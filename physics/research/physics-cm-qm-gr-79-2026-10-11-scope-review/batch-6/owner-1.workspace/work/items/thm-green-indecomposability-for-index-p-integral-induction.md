@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-green-indecomposability-for-index-p-integral-induction.md

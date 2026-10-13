@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-harish-chandra-induction-and-restriction-for-finite-gl-n.md

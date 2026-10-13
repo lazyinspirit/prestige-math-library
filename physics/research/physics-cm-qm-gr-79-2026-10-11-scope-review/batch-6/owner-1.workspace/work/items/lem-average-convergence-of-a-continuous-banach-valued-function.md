@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-average-convergence-of-a-continuous-banach-valued-function.md

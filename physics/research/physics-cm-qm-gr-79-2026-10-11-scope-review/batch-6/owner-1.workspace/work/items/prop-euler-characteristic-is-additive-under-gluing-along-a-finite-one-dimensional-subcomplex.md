@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-euler-characteristic-is-additive-under-gluing-along-a-finite-one-dimensional-subcomplex.md

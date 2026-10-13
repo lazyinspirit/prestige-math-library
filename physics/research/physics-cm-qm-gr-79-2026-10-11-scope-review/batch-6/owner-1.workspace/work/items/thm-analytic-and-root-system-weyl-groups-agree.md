@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-analytic-and-root-system-weyl-groups-agree.md

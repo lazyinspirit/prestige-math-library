@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-slim-triangles-imply-the-gromov-product-inequality.md

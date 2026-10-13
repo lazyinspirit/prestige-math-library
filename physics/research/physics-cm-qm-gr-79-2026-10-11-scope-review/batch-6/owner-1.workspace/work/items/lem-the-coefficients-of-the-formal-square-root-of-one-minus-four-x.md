@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-coefficients-of-the-formal-square-root-of-one-minus-four-x.md

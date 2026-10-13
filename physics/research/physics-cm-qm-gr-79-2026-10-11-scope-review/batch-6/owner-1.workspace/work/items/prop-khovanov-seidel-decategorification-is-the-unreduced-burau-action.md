@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-khovanov-seidel-decategorification-is-the-unreduced-burau-action.md

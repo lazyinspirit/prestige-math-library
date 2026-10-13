@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rescaled-ultradistance-is-a-quotient-metric.md

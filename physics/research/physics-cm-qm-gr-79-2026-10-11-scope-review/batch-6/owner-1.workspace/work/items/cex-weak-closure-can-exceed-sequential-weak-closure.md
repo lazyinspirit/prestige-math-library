@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-weak-closure-can-exceed-sequential-weak-closure.md

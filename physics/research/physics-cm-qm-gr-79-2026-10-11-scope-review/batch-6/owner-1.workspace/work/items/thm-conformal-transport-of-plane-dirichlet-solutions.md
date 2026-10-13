@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-conformal-transport-of-plane-dirichlet-solutions.md

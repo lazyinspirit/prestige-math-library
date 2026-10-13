@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-depth-two-excludes-finite-punctured-extension.md

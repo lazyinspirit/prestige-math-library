@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-erdos-hajnal-property-is-monotone-under-induced-pattern-containment.md

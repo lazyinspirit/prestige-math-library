@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-unit-complex-sum-strict-with-distinct-summands.md

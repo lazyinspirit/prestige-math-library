@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-chern-pontryagin-and-euler-characteristic-forms.md

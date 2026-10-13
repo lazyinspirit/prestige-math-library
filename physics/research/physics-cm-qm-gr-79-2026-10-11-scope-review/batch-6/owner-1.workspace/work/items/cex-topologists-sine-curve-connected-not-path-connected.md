@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-topologists-sine-curve-connected-not-path-connected.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-reversing-boundary-orientation-reverses-flux.md

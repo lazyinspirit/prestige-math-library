@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-degree-one-maps-and-quotient-action-are-well-defined.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-analytic-closed-projection-and-continuous-image-equivalence.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-tor-takes-two-left-modules-over-an-arbitrary-ring.md

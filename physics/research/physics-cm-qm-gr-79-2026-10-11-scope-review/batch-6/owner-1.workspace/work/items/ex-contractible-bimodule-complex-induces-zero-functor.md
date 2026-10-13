@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-contractible-bimodule-complex-induces-zero-functor.md

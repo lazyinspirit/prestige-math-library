@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-negative-absolute-value-solves-the-eikonal-equation-in-viscosity-sense.md

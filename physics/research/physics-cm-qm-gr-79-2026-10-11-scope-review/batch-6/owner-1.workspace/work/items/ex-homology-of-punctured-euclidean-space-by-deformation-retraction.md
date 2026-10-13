@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-homology-of-punctured-euclidean-space-by-deformation-retraction.md

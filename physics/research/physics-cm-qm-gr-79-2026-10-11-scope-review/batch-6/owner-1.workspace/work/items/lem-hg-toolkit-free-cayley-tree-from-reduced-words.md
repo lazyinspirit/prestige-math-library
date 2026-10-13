@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hg-toolkit-free-cayley-tree-from-reduced-words.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language.md

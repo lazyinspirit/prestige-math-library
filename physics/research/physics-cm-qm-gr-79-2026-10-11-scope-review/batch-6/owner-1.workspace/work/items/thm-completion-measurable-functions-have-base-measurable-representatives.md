@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-completion-measurable-functions-have-base-measurable-representatives.md

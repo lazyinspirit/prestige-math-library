@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-first-difference-order-on-a-binary-branching-tree.md

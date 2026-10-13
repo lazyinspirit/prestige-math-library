@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-winding-number-is-locally-constant-via-integral-estimate.md

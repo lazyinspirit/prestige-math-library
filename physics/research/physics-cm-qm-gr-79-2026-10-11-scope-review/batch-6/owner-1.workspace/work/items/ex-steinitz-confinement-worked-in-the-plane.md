@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-steinitz-confinement-worked-in-the-plane.md

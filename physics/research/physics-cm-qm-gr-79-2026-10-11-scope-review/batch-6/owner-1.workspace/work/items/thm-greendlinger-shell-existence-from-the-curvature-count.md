@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-greendlinger-shell-existence-from-the-curvature-count.md

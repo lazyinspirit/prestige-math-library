@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-bounded-total-derivative-on-a-nonconvex-domain-need-not-give-global-lipschitz.md

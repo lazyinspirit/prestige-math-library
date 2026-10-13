@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-quasi-isomorphism-criterion-from-a-filtered-map.md

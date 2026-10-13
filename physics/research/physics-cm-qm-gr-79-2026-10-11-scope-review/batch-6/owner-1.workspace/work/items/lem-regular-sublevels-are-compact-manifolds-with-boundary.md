@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-regular-sublevels-are-compact-manifolds-with-boundary.md

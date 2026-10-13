@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-period-pairing-is-well-defined-and-computed-by-integration.md

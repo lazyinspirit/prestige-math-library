@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-both-supports-cannot-be-singletons-when-n-is-greater-than-one.md

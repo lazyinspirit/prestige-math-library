@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-smooth-functions-and-tensor-fields-extend-locally-across-the-boundary.md

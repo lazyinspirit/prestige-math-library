@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-continuation-along-same-endpoint-paths-always-agrees.md

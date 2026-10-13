@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-relative-handle-chain-complex-of-a-cobordism.md

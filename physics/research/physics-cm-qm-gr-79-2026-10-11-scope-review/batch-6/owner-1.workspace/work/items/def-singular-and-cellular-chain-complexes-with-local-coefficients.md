@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-singular-and-cellular-chain-complexes-with-local-coefficients.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-closed-half-space-as-a-manifold-with-boundary.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-column-antisymmetrizer-polytabloid-and-specht-module.md

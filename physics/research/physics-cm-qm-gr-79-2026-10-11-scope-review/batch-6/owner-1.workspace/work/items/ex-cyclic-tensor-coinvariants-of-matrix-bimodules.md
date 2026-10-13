@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cyclic-tensor-coinvariants-of-matrix-bimodules.md

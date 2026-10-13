@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-bounded-map-into-h-one-zero-followed-by-rellich-is-compact-on-ltwo.md

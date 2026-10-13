@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/post-nrqm-light-matter-vacuum-preparation-and-emission-assumption.md

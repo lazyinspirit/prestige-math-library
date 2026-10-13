@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-power-series-convergence-at-one-point-forces-global-convergence.md

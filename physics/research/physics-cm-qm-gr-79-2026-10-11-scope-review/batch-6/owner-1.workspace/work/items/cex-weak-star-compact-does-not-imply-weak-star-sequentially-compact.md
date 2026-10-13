@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-weak-star-compact-does-not-imply-weak-star-sequentially-compact.md

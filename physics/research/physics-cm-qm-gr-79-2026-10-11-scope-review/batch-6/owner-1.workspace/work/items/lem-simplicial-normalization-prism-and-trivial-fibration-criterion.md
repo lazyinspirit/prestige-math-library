@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-simplicial-normalization-prism-and-trivial-fibration-criterion.md

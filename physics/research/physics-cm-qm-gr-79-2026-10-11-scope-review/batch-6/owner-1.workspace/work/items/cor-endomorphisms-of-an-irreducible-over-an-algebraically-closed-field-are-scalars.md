@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-endomorphisms-of-an-irreducible-over-an-algebraically-closed-field-are-scalars.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-laplacian-matrix-of-a-finite-simple-graph.md

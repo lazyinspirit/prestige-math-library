@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-yoneda-product-agrees-with-the-derived-ext-composition-product.md

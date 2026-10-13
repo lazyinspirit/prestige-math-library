@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-octahedral-axiom-is-the-associativity-of-composition.md

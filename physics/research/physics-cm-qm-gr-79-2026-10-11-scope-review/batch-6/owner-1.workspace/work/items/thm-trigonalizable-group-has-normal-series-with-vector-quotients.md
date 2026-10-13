@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-trigonalizable-group-has-normal-series-with-vector-quotients.md

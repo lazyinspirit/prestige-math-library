@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-regular-level-set-is-an-embedded-submanifold.md

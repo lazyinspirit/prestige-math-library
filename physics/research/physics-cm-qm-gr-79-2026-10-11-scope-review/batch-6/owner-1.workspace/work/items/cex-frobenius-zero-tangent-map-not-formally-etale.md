@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-frobenius-zero-tangent-map-not-formally-etale.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-abscissa-need-not-be-a-line-of-convergence.md

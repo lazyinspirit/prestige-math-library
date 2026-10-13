@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-strongly-continuous-one-parameter-unitary-group.md

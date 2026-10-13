@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-half-relaxed-limit-stability-for-viscosity-solutions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-real-two-dimensional-irreducible-of-c-three-has-endomorphism-ring-c.md

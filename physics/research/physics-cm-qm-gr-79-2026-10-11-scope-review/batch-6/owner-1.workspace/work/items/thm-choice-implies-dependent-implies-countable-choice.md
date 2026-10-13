@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-choice-implies-dependent-implies-countable-choice.md

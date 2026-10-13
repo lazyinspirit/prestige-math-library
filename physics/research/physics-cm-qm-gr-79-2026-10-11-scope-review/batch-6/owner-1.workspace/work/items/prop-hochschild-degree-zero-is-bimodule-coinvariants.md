@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-hochschild-degree-zero-is-bimodule-coinvariants.md

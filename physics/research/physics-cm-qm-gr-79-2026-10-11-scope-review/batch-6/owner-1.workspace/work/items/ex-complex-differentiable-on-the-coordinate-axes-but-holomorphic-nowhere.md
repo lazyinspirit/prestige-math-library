@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-complex-differentiable-on-the-coordinate-axes-but-holomorphic-nowhere.md

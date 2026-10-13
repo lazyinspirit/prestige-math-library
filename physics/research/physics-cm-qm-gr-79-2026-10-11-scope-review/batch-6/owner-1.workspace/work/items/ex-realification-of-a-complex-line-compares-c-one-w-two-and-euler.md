@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-realification-of-a-complex-line-compares-c-one-w-two-and-euler.md

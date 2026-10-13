@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-feferman-levy-omega-one-is-ground-aleph-omega.md

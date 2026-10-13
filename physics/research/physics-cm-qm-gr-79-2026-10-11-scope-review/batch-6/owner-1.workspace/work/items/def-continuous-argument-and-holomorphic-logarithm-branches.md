@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-continuous-argument-and-holomorphic-logarithm-branches.md

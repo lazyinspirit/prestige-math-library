@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-polar-form-of-the-metric-in-normal-coordinates.md

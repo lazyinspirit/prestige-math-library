@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-highest-weight-characters-are-unitriangular-in-weyl-orbit-sums.md

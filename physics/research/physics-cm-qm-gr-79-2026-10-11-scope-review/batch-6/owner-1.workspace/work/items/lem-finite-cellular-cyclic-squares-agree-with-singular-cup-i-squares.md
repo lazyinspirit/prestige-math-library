@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-cellular-cyclic-squares-agree-with-singular-cup-i-squares.md

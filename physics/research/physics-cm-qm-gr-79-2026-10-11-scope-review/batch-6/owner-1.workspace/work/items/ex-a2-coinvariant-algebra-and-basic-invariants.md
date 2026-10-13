@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a2-coinvariant-algebra-and-basic-invariants.md

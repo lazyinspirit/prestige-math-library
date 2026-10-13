@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-eigenvector-branch-cannot-stay-differentiable-through-a-symmetric-crossing.md

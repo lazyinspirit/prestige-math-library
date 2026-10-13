@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-two-extensions-with-the-same-ext-class-are-equivalent.md

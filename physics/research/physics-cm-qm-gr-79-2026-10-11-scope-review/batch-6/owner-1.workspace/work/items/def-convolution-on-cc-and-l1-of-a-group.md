@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-convolution-on-cc-and-l1-of-a-group.md

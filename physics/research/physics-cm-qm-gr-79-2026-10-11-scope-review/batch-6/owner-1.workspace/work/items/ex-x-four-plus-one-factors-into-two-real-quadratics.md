@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-x-four-plus-one-factors-into-two-real-quadratics.md

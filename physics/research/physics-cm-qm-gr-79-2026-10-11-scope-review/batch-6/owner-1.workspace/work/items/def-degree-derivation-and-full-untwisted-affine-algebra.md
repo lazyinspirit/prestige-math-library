@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-degree-derivation-and-full-untwisted-affine-algebra.md

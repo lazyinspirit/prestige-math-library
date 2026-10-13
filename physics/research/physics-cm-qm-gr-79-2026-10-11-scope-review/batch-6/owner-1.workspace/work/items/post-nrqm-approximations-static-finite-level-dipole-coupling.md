@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/post-nrqm-approximations-static-finite-level-dipole-coupling.md

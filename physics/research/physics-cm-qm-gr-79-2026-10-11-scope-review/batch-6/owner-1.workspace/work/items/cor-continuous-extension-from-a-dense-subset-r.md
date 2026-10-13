@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-continuous-extension-from-a-dense-subset-r.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-recursive-dehn-function-implies-solvable-word-problem.md

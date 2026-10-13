@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cross-product-norm-is-the-two-vector-gram-determinant.md

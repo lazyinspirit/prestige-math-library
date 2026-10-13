@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lifts-of-circle-loop-concatenation-and-reversal.md

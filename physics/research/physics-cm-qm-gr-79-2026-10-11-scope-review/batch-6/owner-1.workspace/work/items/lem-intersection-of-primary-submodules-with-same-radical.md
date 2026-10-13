@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-intersection-of-primary-submodules-with-same-radical.md

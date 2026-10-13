@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-shapovalov-radical-is-the-maximal-submodule.md

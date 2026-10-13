@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-continuous-fourier-series-need-not-converge-everywhere.md

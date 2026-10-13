@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bpi-equivalent-to-compact-hausdorff-tychonoff.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nonzero-elements-of-a-ring-need-not-form-a-multiplicative-set.md

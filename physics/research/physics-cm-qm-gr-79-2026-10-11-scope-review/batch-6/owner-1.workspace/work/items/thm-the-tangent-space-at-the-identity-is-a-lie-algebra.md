@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-tangent-space-at-the-identity-is-a-lie-algebra.md

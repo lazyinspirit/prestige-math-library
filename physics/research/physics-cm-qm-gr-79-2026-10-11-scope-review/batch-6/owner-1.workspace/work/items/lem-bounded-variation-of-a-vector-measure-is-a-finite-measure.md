@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bounded-variation-of-a-vector-measure-is-a-finite-measure.md

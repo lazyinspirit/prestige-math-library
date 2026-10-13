@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-spherical-surface-integrals-project-onto-weighted-ball-integrals.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-noether-conservation-law-for-hamiltonian-actions.md

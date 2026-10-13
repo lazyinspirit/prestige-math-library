@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-negative-gradient-trajectory-of-a-morse-function.md

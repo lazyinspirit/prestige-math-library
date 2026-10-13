@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-generic-shapovalov-radical-on-a-casimir-hyperplane.md

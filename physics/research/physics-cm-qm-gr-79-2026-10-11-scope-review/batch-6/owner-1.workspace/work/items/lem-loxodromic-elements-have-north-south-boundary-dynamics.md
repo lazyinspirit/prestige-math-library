@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-loxodromic-elements-have-north-south-boundary-dynamics.md

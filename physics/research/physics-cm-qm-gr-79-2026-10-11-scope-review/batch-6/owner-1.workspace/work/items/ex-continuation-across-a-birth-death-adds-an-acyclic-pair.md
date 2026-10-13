@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-continuation-across-a-birth-death-adds-an-acyclic-pair.md

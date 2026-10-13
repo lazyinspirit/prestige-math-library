@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-projective-normal-surface-modification-h1-injects-off-special-fibre.md

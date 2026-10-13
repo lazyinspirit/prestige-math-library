@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-cartesian-square-over-an-epimorphism-is-also-cocartesian.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-regularity-of-a-moment-map-is-equivalent-to-local-freeness.md

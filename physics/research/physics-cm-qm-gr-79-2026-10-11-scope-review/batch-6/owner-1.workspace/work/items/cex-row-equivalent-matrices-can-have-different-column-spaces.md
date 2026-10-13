@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-row-equivalent-matrices-can-have-different-column-spaces.md

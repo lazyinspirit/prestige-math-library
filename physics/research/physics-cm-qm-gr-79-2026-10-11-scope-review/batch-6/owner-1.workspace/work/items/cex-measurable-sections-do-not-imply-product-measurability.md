@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-measurable-sections-do-not-imply-product-measurability.md

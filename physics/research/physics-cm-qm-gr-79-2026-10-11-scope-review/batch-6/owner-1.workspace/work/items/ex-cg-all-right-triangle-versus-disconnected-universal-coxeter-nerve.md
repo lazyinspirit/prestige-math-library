@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-all-right-triangle-versus-disconnected-universal-coxeter-nerve.md

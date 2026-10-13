@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cw-quotients-and-collapse-of-a-contractible-subcomplex.md

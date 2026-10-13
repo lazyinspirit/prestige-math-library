@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-large-almost-pure-pair-extends-an-anticomplete-blockade.md

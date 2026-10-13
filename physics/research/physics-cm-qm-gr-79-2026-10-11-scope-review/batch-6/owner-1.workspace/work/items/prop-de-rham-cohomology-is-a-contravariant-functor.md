@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-de-rham-cohomology-is-a-contravariant-functor.md

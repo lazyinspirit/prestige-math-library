@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-dimension-of-a-vector-space-is-its-linear-dimension.md

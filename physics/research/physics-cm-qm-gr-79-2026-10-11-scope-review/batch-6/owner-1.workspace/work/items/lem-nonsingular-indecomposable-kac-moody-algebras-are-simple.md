@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonsingular-indecomposable-kac-moody-algebras-are-simple.md

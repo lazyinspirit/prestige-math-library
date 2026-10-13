@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-ae-equality-can-fail-on-an-incomplete-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-parenthesised-words-of-a-given-length-are-counted-by-the-catalan-numbers.md

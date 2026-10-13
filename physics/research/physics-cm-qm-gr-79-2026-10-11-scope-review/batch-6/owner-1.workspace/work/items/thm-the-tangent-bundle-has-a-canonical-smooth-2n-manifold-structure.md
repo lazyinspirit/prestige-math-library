@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure.md

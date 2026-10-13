@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-one-more-than-n-divides-the-central-binomial-coefficient.md

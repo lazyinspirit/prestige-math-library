@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-modification-lemma-for-embedded-spheres-in-a-handle-presentation.md

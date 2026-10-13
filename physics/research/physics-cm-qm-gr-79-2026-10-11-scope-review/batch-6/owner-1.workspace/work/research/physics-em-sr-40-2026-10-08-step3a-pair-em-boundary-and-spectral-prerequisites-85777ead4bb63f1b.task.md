@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3a-pair-em-boundary-and-spectral-prerequisites-85777ead4bb63f1b.task.md

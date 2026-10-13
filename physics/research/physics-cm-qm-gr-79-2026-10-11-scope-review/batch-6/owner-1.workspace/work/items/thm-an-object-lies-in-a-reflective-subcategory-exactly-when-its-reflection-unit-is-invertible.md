@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-an-object-lies-in-a-reflective-subcategory-exactly-when-its-reflection-unit-is-invertible.md

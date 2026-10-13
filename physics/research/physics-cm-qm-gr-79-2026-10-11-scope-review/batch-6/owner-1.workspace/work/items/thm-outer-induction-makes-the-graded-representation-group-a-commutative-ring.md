@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-outer-induction-makes-the-graded-representation-group-a-commutative-ring.md

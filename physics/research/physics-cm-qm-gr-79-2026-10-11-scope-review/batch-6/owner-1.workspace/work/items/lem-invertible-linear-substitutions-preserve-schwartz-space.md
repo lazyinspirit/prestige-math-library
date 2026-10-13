@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-invertible-linear-substitutions-preserve-schwartz-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-local-finiteness-means-finite-total-density-measure.md

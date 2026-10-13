@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-frattini-subgroup-formula-for-a-finite-p-group.md

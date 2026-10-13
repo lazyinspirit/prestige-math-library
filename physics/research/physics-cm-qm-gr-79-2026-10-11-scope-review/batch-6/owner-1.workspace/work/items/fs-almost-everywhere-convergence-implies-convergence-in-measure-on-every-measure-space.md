@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-almost-everywhere-convergence-implies-convergence-in-measure-on-every-measure-space.md

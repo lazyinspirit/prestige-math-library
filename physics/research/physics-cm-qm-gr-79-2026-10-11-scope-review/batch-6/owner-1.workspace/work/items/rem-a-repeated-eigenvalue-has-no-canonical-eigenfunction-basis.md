@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-a-repeated-eigenvalue-has-no-canonical-eigenfunction-basis.md

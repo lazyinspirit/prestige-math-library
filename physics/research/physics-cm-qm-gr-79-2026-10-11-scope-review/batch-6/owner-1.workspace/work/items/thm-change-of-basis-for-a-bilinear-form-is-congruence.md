@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-change-of-basis-for-a-bilinear-form-is-congruence.md

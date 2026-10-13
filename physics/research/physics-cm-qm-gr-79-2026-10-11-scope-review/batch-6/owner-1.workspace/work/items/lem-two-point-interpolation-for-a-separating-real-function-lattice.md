@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-two-point-interpolation-for-a-separating-real-function-lattice.md

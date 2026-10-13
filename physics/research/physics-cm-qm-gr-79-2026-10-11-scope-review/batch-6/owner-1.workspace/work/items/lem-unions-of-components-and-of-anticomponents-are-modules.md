@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-unions-of-components-and-of-anticomponents-are-modules.md

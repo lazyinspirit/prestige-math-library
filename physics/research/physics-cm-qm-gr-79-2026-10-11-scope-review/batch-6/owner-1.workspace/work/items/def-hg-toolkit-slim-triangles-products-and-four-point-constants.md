@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-hg-toolkit-slim-triangles-products-and-four-point-constants.md

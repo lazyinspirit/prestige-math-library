@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-euclidean-semicontinuous-extreme-value-theorem.md

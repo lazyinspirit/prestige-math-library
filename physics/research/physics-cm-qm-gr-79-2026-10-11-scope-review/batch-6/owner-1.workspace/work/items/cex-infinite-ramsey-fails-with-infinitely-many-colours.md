@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-infinite-ramsey-fails-with-infinitely-many-colours.md

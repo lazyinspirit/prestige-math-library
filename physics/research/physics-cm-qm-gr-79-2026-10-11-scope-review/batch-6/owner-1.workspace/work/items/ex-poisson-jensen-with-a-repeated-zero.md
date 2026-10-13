@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-poisson-jensen-with-a-repeated-zero.md

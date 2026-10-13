@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-endomorphisms-of-the-unit-form-a-commutative-monoid.md

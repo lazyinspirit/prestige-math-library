@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-i2m-invariants-and-coinvariant-hilbert-series.md

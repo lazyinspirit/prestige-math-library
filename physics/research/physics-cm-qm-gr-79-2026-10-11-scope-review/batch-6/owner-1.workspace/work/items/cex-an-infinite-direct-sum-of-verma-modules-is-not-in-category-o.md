@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-infinite-direct-sum-of-verma-modules-is-not-in-category-o.md

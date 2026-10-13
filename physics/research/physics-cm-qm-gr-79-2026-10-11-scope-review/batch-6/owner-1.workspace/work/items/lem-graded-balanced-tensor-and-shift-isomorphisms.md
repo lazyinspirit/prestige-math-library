@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-graded-balanced-tensor-and-shift-isomorphisms.md

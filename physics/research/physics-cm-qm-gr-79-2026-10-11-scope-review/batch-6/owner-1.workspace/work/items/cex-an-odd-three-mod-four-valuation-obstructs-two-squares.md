@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-odd-three-mod-four-valuation-obstructs-two-squares.md

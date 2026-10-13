@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-eberlein-smulian-metrization-on-the-relevant-dual-ball.md

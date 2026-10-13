@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c2-spherical-leaf-stability-on-a-closed-manifold-needs-only-countable-choice.md

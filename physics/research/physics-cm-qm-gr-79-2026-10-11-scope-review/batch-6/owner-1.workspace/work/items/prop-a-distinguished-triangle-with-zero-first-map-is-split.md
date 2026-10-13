@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-distinguished-triangle-with-zero-first-map-is-split.md

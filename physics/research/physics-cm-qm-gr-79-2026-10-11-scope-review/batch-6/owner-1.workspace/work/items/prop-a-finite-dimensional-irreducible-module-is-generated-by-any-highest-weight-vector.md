@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-finite-dimensional-irreducible-module-is-generated-by-any-highest-weight-vector.md

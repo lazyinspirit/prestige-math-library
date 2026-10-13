@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-positive-reaction-restores-coercivity-without-dirichlet-poincare.md

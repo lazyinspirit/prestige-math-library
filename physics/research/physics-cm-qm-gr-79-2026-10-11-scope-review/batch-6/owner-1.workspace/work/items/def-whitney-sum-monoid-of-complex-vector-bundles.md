@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-whitney-sum-monoid-of-complex-vector-bundles.md

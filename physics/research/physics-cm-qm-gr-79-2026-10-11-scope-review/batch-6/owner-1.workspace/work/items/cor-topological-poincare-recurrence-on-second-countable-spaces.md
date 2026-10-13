@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-topological-poincare-recurrence-on-second-countable-spaces.md

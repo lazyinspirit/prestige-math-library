@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-riesz-potential-integral-can-diverge-at-the-upper-endpoint.md

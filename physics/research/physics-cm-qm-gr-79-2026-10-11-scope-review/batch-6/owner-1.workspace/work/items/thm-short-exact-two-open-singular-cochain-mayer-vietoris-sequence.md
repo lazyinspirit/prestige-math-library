@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-short-exact-two-open-singular-cochain-mayer-vietoris-sequence.md

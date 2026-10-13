@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-map-is-zero-exactly-when-the-corresponding-representable-map-vanishes.md

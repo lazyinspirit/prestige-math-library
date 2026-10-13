@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-diagonal-schatten-class-criteria-on-ell-two.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-infinite-separated-subset-of-the-unit-sphere.md

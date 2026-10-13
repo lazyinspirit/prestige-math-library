@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-k-finite-vectors-are-dense-and-stable-under-the-derived-action.md

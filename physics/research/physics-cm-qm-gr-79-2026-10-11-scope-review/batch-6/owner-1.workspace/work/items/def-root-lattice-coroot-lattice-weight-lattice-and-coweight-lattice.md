@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-root-lattice-coroot-lattice-weight-lattice-and-coweight-lattice.md

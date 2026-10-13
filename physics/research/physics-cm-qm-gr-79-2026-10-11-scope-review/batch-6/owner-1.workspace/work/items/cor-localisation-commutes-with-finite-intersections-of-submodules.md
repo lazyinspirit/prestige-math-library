@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-localisation-commutes-with-finite-intersections-of-submodules.md

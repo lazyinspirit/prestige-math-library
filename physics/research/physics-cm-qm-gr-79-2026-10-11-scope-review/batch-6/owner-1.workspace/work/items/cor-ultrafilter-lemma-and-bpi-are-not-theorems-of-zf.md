@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-ultrafilter-lemma-and-bpi-are-not-theorems-of-zf.md

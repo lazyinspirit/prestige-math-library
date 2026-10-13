@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-maximum-principles-need-domain-and-boundary-hypotheses.md

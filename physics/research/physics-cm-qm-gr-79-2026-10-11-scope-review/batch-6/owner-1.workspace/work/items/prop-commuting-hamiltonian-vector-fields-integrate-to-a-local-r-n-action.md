@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action.md

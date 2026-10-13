@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-transgression-for-the-integral-heisenberg-extension.md

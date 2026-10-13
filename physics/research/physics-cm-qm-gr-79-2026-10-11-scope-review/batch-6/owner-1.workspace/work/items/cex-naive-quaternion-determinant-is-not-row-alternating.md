@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-naive-quaternion-determinant-is-not-row-alternating.md

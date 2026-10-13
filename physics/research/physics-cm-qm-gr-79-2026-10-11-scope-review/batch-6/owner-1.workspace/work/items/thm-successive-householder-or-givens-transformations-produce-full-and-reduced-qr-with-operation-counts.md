@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-successive-householder-or-givens-transformations-produce-full-and-reduced-qr-with-operation-counts.md

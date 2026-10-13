@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-absolutely-continuous-functions-have-luzin-property-n.md

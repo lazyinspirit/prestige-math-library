@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cm-uniform-convergence-with-derivatives-on-a-rectangle.md

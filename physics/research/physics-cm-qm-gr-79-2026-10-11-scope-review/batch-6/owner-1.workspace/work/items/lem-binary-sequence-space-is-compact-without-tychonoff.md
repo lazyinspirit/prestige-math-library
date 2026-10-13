@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-binary-sequence-space-is-compact-without-tychonoff.md

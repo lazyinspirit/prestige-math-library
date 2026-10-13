@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-leray-hirsch-isomorphism-on-associated-graded-modules-lifts-without-extension-ambiguity.md

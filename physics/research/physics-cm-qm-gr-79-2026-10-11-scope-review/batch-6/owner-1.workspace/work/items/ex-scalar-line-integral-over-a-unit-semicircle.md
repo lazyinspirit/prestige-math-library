@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-scalar-line-integral-over-a-unit-semicircle.md

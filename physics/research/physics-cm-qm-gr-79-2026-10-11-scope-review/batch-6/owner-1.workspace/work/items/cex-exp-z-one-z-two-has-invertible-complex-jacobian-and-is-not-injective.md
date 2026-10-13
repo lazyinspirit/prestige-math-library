@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-exp-z-one-z-two-has-invertible-complex-jacobian-and-is-not-injective.md

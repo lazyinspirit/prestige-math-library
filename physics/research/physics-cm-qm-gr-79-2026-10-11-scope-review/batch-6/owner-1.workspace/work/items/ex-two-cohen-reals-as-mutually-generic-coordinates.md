@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-cohen-reals-as-mutually-generic-coordinates.md

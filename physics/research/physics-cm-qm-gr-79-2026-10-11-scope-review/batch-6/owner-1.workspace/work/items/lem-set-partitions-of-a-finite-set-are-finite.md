@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-set-partitions-of-a-finite-set-are-finite.md

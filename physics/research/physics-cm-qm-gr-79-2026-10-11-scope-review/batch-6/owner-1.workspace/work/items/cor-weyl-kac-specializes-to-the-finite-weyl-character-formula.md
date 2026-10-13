@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-weyl-kac-specializes-to-the-finite-weyl-character-formula.md

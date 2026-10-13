@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-kernel-conjugate-complements-differ-by-a-principal-crossed-homomorphism.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-degenerate-isolated-fixed-point-with-nonzero-local-index.md

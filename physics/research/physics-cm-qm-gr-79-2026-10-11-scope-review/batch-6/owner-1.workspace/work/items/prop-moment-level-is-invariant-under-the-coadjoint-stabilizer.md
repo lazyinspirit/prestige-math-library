@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-moment-level-is-invariant-under-the-coadjoint-stabilizer.md

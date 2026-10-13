@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-sr-twin-acceleration-and-synchronization-caveats.md

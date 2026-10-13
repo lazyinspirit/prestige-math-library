@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-euclidean-algorithm-on-consecutive-fibonacci-numbers.md

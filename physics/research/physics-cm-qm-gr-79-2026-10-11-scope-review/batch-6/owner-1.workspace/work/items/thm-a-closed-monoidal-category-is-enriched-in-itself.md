@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-closed-monoidal-category-is-enriched-in-itself.md

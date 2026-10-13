@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases.md

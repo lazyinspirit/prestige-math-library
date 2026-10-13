@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-frattini-formula-for-finitely-generated-pro-p-groups.md

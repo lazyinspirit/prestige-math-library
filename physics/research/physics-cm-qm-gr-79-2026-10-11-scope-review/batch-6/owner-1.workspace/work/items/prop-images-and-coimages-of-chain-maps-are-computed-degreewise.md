@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-images-and-coimages-of-chain-maps-are-computed-degreewise.md

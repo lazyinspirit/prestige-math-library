@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-natural-transformations-of-base-functors-give-morphisms-of-derived-delta-functors.md

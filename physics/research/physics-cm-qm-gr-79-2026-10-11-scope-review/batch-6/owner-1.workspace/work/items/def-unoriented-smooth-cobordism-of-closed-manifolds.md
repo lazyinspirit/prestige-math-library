@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-unoriented-smooth-cobordism-of-closed-manifolds.md

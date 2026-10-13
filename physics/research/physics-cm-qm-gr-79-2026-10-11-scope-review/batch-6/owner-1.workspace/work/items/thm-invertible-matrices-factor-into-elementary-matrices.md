@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-invertible-matrices-factor-into-elementary-matrices.md

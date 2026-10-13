@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-row-insertion-and-reverse-deletion-are-inverse.md

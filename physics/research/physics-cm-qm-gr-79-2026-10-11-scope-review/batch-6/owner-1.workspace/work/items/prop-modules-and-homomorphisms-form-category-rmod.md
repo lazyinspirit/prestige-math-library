@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-modules-and-homomorphisms-form-category-rmod.md

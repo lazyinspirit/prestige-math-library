@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-quotient-graph-determines-the-acting-group-without-stabilizer-data.md

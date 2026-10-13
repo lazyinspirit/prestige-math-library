@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-archimedean-embeddings-and-number-field-signature.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-left-adjoint-exists-exactly-when-every-comma-category-has-an-initial-object.md

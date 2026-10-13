@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kak-integration-formula-for-k-bi-invariant-functions-on-sl2-r.md

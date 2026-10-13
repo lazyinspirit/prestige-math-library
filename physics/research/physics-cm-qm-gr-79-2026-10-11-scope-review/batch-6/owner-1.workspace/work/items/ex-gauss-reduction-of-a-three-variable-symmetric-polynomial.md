@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gauss-reduction-of-a-three-variable-symmetric-polynomial.md

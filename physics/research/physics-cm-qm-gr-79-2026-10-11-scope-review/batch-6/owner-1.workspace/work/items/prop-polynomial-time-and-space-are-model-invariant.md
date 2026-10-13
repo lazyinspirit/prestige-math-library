@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-polynomial-time-and-space-are-model-invariant.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-distributive-weak-intervals-of-fully-commutative-elements.md

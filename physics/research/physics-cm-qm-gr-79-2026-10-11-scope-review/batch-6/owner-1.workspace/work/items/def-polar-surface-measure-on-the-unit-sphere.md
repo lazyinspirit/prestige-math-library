@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-polar-surface-measure-on-the-unit-sphere.md

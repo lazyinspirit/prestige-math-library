@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-stochastic-process-and-finite-dimensional-distributions.md

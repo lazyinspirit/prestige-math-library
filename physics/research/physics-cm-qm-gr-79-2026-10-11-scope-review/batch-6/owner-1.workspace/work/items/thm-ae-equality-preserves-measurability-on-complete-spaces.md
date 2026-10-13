@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ae-equality-preserves-measurability-on-complete-spaces.md

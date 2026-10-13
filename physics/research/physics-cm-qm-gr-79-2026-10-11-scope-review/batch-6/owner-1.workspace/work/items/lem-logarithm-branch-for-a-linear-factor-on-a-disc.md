@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-logarithm-branch-for-a-linear-factor-on-a-disc.md

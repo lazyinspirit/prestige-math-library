@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nonsingular-principal-minor-of-the-symmetrized-cartan-matrix.md

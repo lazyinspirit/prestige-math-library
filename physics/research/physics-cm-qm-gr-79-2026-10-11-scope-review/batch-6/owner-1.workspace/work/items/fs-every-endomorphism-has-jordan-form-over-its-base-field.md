@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-endomorphism-has-jordan-form-over-its-base-field.md

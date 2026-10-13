@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-equal-dominant-moduli-can-make-power-iteration-cycle.md

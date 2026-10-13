@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-underlying-category-of-a-cat-enriched-category-forgets-the-two-cells.md

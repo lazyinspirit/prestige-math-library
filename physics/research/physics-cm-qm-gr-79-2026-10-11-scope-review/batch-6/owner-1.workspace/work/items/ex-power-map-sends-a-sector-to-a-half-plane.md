@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-power-map-sends-a-sector-to-a-half-plane.md

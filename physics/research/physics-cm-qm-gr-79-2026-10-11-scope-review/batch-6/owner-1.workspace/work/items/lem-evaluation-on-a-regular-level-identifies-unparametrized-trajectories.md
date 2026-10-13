@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-evaluation-on-a-regular-level-identifies-unparametrized-trajectories.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-bruhat-order-on-a-finite-weyl-group.md

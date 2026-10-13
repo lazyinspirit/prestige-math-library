@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-consistent-theory-with-an-internal-false-proof.md

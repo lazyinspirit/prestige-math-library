@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bordism-of-regular-preimages-produces-a-homotopy-of-sphere-maps.md

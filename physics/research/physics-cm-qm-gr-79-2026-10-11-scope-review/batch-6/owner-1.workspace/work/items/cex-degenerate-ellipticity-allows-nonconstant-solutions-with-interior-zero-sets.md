@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-degenerate-ellipticity-allows-nonconstant-solutions-with-interior-zero-sets.md

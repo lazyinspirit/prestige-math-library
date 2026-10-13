@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-torsion-in-a-free-product-is-conjugate-into-a-factor.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-p-sections-and-brauer-subsections-in-a-small-finite-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-finite-maximum-of-affine-functions-and-its-subdifferential.md

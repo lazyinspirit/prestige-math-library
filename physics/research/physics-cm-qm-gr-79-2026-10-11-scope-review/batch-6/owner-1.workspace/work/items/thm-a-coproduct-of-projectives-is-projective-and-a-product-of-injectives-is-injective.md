@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-coproduct-of-projectives-is-projective-and-a-product-of-injectives-is-injective.md

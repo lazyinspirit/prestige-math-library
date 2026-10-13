@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-crossed-homomorphisms-from-diagonalizable-to-unipotent-are-principal.md

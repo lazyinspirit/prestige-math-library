@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-isotypic-decomposition-of-a-completely-reducible-representation-is-unique.md

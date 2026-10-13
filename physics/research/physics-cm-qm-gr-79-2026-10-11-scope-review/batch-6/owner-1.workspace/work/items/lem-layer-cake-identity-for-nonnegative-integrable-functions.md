@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-layer-cake-identity-for-nonnegative-integrable-functions.md

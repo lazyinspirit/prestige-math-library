@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-irreducible-real-polynomials-have-degree-one-or-two.md

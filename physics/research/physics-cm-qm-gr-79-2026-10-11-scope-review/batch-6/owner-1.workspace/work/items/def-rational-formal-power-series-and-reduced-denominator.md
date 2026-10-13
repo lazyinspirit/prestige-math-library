@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-rational-formal-power-series-and-reduced-denominator.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-propagation-and-gluing-of-hartogs-extensions.md

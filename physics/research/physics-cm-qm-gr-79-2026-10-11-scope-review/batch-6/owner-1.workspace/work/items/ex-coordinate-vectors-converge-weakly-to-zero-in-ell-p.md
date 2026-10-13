@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-coordinate-vectors-converge-weakly-to-zero-in-ell-p.md

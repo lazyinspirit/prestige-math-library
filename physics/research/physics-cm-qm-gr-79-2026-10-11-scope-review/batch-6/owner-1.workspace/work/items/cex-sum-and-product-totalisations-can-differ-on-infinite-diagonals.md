@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sum-and-product-totalisations-can-differ-on-infinite-diagonals.md

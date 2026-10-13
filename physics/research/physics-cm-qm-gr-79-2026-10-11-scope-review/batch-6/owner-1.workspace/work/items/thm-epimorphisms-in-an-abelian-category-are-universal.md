@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-epimorphisms-in-an-abelian-category-are-universal.md

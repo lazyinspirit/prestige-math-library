@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-split-grothendieck-group-of-an-additive-category.md

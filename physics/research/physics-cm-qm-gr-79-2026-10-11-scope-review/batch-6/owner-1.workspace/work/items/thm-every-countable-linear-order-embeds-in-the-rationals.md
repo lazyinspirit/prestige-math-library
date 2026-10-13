@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-countable-linear-order-embeds-in-the-rationals.md

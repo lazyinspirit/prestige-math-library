@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-mollification-commutes-with-weak-derivatives-in-the-interior.md

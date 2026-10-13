@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-cg-faithful-canonical-realization-need-not-be-reflection-faithful.md

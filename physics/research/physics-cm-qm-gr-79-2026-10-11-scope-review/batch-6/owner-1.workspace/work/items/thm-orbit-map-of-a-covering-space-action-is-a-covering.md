@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-orbit-map-of-a-covering-space-action-is-a-covering.md

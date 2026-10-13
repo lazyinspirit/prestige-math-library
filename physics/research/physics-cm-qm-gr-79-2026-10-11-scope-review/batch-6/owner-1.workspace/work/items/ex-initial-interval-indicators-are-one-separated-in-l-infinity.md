@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-initial-interval-indicators-are-one-separated-in-l-infinity.md

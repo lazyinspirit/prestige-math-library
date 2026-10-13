@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-the-p-one-difference-quotient-converse-leads-to-bv-not-w-one-one.md

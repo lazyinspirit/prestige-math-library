@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-maximal-dbar-operator-and-hilbert-adjoint-on-a-compact-riemann-surface.md

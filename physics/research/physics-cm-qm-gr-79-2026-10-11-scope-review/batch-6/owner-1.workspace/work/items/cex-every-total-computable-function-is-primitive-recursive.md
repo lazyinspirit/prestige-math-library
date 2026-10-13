@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-every-total-computable-function-is-primitive-recursive.md

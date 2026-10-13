@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-compactly-supported-time-dependent-vector-fields-have-global-evolution-on-a-compact-time-interval.md

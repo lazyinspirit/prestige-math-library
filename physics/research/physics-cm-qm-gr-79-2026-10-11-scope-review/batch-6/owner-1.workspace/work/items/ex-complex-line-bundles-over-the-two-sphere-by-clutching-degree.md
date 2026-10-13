@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-complex-line-bundles-over-the-two-sphere-by-clutching-degree.md

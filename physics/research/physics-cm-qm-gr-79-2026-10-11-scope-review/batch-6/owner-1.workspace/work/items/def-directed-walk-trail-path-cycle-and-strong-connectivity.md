@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-directed-walk-trail-path-cycle-and-strong-connectivity.md

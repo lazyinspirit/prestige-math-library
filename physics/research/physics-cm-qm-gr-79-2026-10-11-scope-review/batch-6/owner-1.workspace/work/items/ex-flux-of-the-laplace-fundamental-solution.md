@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-flux-of-the-laplace-fundamental-solution.md

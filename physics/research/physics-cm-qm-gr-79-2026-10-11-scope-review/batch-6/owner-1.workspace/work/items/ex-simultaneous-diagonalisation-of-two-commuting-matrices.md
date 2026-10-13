@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-simultaneous-diagonalisation-of-two-commuting-matrices.md

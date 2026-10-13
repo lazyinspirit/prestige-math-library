@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-limitwise-nullhomotopy-predicate-descends-to-a-normal-subgroup.md

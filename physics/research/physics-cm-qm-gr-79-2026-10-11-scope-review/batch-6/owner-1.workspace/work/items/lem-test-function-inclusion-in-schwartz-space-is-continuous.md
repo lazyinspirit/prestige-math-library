@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-test-function-inclusion-in-schwartz-space-is-continuous.md

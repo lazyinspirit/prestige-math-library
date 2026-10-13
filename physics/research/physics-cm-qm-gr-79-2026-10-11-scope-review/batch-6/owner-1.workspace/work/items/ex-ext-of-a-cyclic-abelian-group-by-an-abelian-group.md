@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-ext-of-a-cyclic-abelian-group-by-an-abelian-group.md

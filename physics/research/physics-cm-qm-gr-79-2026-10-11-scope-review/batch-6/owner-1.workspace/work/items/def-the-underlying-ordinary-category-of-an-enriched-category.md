@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-the-underlying-ordinary-category-of-an-enriched-category.md

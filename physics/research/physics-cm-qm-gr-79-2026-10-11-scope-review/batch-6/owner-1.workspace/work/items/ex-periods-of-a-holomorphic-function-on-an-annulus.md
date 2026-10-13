@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-periods-of-a-holomorphic-function-on-an-annulus.md

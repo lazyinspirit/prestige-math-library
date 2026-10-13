@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-suslin-tree-yields-nonproductive-ccc.md

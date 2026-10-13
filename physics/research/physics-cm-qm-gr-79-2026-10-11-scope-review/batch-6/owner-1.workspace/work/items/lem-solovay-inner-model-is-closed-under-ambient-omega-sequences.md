@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-solovay-inner-model-is-closed-under-ambient-omega-sequences.md

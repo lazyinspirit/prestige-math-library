@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-equicontinuity-and-pointwise-boundedness-give-uniform-boundedness.md

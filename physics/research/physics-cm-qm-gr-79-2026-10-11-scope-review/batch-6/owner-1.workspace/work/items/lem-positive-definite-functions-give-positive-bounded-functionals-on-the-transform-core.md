@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-positive-definite-functions-give-positive-bounded-functionals-on-the-transform-core.md

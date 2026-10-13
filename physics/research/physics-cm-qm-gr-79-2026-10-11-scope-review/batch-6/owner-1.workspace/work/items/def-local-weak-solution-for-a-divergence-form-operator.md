@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-local-weak-solution-for-a-divergence-form-operator.md

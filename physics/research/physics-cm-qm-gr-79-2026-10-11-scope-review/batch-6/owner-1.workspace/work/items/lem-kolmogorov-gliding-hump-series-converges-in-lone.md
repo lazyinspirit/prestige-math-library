@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kolmogorov-gliding-hump-series-converges-in-lone.md

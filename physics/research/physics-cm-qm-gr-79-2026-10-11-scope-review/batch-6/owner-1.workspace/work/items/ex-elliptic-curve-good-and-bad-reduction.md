@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-elliptic-curve-good-and-bad-reduction.md

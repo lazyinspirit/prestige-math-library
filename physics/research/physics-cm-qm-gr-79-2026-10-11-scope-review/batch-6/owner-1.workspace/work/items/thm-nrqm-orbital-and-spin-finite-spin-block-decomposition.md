@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-orbital-and-spin-finite-spin-block-decomposition.md

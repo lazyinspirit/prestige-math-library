@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-smooth-handle-attachment-is-independent-of-corner-rounding-up-to-diffeomorphism.md

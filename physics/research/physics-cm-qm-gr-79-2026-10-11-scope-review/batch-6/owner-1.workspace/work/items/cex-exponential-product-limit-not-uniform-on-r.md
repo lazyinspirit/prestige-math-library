@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-exponential-product-limit-not-uniform-on-r.md

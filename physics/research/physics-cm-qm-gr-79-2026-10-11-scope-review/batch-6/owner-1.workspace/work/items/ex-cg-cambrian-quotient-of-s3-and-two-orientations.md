@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-cambrian-quotient-of-s3-and-two-orientations.md

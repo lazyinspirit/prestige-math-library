@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-braids-lift-to-the-lkb-cover-and-act-lambda-linearly.md

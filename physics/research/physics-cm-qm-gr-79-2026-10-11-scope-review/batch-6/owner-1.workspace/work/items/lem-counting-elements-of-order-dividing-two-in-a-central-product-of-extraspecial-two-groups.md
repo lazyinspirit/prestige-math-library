@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-counting-elements-of-order-dividing-two-in-a-central-product-of-extraspecial-two-groups.md

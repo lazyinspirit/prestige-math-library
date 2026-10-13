@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-holonomy-acts-on-a-small-transverse-disk.md

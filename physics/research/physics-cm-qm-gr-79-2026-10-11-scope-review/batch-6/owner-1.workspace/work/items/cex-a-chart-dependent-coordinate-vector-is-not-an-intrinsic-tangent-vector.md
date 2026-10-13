@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-chart-dependent-coordinate-vector-is-not-an-intrinsic-tangent-vector.md

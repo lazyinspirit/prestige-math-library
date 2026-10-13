@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-property-t-is-equivalent-to-isolation-of-the-trivial-representation.md

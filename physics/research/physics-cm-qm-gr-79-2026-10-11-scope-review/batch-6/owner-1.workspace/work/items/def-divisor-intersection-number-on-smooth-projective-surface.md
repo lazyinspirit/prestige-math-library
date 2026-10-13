@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-divisor-intersection-number-on-smooth-projective-surface.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-first-quadrant-support-alone-identifies-the-abutment-without-a-filtration.md

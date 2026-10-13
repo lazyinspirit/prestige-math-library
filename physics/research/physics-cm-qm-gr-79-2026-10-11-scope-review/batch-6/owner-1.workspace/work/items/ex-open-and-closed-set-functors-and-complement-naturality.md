@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-open-and-closed-set-functors-and-complement-naturality.md

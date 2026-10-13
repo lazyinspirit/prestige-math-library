@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-dmc-versus-dc-over-zf-is-open.md

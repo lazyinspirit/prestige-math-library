@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-fixed-point-index-is-invariant-under-diffeomorphism-conjugation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-caccioppoli-inequality-for-truncated-subsolutions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-sigma-n-and-pi-n-are-disjoint.md

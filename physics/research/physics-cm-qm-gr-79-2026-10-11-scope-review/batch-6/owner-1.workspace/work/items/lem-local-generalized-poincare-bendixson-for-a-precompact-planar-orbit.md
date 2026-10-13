@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-generalized-poincare-bendixson-for-a-precompact-planar-orbit.md

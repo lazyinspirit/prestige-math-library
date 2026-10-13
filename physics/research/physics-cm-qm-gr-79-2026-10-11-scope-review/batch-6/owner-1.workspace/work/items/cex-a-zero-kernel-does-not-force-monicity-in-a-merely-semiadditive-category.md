@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-zero-kernel-does-not-force-monicity-in-a-merely-semiadditive-category.md

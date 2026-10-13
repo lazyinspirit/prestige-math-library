@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-transitive-imprimitive-groups-embed-in-an-imprimitive-wreath-product.md

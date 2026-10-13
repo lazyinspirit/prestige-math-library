@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-measure-l-r-includes-into-l-p-for-p-less-r.md

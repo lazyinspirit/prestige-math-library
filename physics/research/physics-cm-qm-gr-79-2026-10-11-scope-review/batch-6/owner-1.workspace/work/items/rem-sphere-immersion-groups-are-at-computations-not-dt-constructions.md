@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-sphere-immersion-groups-are-at-computations-not-dt-constructions.md

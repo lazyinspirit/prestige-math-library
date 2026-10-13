@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights.md

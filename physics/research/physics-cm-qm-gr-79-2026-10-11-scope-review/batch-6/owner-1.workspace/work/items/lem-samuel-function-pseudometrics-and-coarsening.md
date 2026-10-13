@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-samuel-function-pseudometrics-and-coarsening.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-affine-denominator-separates-real-and-imaginary-root-factors.md

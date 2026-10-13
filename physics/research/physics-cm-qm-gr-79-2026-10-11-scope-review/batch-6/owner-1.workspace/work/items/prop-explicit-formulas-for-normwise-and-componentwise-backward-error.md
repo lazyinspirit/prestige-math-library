@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-explicit-formulas-for-normwise-and-componentwise-backward-error.md

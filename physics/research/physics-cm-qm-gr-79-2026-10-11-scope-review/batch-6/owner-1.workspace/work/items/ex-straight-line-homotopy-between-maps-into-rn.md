@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-straight-line-homotopy-between-maps-into-rn.md

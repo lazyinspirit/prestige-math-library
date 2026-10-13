@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-distributional-laplacian-commutes-with-mollification.md

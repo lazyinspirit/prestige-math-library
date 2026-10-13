@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-constant-rank-source-coordinate-map-is-locally-invertible.md

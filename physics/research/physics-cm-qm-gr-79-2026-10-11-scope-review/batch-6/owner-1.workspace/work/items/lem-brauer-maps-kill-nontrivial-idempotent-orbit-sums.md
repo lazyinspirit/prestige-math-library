@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-brauer-maps-kill-nontrivial-idempotent-orbit-sums.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cg-euclidean-cone-and-spherical-join-metrics.md

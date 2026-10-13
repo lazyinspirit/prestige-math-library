@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary.md

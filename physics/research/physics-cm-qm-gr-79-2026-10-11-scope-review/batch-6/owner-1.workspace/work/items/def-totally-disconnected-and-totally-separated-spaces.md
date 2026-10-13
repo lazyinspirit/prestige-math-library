@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-totally-disconnected-and-totally-separated-spaces.md

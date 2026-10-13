@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-logarithmic-derivative-of-a-normally-convergent-product.md

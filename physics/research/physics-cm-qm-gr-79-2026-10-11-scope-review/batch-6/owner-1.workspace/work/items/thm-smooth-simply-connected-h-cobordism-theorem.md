@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-smooth-simply-connected-h-cobordism-theorem.md

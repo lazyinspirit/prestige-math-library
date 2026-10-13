@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-quadratic-hamilton-jacobi-data-produce-explicit-caustic-time.md

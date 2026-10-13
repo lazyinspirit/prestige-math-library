@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-monic-resultant-root-product-and-common-root-criterion.md

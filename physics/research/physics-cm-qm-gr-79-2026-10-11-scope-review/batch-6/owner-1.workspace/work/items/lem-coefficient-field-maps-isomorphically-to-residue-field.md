@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coefficient-field-maps-isomorphically-to-residue-field.md

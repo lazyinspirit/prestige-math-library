@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-the-classical-zeta-region-is-not-a-uniform-dirichlet-l-region.md

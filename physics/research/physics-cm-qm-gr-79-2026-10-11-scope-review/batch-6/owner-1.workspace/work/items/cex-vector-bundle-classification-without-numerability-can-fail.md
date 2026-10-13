@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-vector-bundle-classification-without-numerability-can-fail.md

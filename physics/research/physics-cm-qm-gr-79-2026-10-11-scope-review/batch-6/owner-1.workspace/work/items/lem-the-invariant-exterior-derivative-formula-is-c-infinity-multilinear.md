@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-invariant-exterior-derivative-formula-is-c-infinity-multilinear.md

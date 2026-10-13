@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-successive-p-layers-read-a-cyclic-decomposition.md

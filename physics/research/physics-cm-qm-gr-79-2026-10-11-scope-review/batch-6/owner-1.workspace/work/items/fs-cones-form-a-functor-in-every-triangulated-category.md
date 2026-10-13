@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-cones-form-a-functor-in-every-triangulated-category.md

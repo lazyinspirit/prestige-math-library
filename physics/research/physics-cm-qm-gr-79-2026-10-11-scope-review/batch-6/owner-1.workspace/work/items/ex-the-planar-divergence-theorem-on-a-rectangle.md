@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-planar-divergence-theorem-on-a-rectangle.md

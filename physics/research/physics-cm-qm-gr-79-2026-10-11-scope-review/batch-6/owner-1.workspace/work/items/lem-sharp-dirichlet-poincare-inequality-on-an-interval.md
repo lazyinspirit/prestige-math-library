@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sharp-dirichlet-poincare-inequality-on-an-interval.md

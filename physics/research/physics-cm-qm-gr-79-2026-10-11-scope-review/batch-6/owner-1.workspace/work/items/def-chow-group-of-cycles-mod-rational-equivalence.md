@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-chow-group-of-cycles-mod-rational-equivalence.md

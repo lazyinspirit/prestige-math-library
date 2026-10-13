@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-radial-majorized-kernels-recover-lebesgue-point-values.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-all-charts-compatible-with-a-smooth-atlas-form-a-smooth-atlas.md

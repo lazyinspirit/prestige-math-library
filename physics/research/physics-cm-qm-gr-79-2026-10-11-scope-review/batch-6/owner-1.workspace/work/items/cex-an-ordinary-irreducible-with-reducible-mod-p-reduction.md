@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-ordinary-irreducible-with-reducible-mod-p-reduction.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-space-bounded-machines-have-exponentially-many-configurations.md

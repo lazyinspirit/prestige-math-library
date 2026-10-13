@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-primary-projections-are-polynomials-in-the-endomorphism.md

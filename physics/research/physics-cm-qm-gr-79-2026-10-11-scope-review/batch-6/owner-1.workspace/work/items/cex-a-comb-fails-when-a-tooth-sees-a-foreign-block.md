@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-comb-fails-when-a-tooth-sees-a-foreign-block.md

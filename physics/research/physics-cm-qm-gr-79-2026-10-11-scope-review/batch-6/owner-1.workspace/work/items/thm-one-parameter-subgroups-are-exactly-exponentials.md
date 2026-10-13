@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-one-parameter-subgroups-are-exactly-exponentials.md

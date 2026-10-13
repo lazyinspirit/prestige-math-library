@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-fixed-point-congruence-for-an-action-of-z-two.md

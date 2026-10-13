@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-divisor-of-the-group-order-is-an-irreducible-character-degree.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-punctured-disk-is-path-connected-locally-path-connected-and-semilocally-simply-connected.md

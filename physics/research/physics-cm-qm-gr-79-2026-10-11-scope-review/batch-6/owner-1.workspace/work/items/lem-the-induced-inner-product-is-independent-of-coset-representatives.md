@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-induced-inner-product-is-independent-of-coset-representatives.md

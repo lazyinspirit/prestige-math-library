@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rudin-discrete-families-have-discrete-ambient-closures.md

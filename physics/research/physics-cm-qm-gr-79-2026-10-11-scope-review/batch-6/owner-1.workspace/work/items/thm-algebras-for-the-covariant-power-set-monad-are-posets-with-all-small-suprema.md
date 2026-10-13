@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-algebras-for-the-covariant-power-set-monad-are-posets-with-all-small-suprema.md

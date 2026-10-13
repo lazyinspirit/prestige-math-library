@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-continuous-bijection-from-a-compact-space-has-continuous-inverse.md

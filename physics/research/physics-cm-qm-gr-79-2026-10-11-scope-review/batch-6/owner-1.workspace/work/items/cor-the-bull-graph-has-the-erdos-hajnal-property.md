@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-bull-graph-has-the-erdos-hajnal-property.md

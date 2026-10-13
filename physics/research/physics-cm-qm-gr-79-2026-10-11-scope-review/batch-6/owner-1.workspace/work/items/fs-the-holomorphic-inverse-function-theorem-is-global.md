@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-holomorphic-inverse-function-theorem-is-global.md

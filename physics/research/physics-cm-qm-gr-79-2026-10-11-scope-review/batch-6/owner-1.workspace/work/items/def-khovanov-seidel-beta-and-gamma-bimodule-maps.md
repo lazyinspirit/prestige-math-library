@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-khovanov-seidel-beta-and-gamma-bimodule-maps.md

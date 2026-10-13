@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-submartingale-need-not-have-increasing-sample-paths.md

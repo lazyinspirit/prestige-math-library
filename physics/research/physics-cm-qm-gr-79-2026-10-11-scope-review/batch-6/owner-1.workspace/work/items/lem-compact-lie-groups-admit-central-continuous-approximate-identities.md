@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-lie-groups-admit-central-continuous-approximate-identities.md

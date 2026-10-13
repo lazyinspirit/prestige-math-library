@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-etale-over-algebraically-closed-field-discrete-smooth-points.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-positive-weighted-volume-on-an-open-interval.md

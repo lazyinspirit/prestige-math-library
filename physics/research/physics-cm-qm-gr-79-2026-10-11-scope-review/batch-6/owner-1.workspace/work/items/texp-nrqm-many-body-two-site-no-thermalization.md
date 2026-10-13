@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/texp-nrqm-many-body-two-site-no-thermalization.md

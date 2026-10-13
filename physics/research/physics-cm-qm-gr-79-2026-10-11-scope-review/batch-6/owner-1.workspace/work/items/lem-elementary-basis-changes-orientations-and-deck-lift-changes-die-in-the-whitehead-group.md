@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-elementary-basis-changes-orientations-and-deck-lift-changes-die-in-the-whitehead-group.md

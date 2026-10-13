@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rational-hurewicz-for-arbitrary-wedges-of-high-dimensional-spheres.md

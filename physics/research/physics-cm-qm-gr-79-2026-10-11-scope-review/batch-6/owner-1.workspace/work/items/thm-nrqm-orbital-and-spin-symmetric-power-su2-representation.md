@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-orbital-and-spin-symmetric-power-su2-representation.md

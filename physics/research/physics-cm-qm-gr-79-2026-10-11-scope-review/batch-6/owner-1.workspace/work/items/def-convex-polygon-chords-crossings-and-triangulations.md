@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-convex-polygon-chords-crossings-and-triangulations.md

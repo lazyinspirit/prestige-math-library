@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nonsymmetric-elliptic-operators-need-not-have-an-orthonormal-eigenbasis.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-convolution-of-two-tempered-distributions-need-not-exist.md

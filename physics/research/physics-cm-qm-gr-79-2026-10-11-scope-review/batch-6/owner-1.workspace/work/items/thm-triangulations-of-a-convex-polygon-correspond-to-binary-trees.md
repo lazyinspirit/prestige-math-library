@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-triangulations-of-a-convex-polygon-correspond-to-binary-trees.md

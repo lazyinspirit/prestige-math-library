@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sylvesters-criterion-for-a-three-by-three-matrix.md

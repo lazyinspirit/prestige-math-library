@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-pointwise-cdf-convergence-at-a-jump-is-not-required.md

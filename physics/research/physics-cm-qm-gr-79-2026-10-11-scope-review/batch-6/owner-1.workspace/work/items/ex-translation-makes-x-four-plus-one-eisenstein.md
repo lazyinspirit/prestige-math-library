@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-translation-makes-x-four-plus-one-eisenstein.md

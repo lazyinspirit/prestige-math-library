@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group.md

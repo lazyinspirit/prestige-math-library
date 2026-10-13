@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-right-adjoint-preserves-ends-and-a-left-adjoint-preserves-coends.md

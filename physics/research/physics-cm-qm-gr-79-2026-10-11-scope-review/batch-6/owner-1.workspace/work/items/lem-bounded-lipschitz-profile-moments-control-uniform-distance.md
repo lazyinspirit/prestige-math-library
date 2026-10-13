@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bounded-lipschitz-profile-moments-control-uniform-distance.md

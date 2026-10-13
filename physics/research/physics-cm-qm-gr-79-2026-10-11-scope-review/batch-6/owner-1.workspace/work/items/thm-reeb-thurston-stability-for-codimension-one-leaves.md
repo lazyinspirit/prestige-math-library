@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-reeb-thurston-stability-for-codimension-one-leaves.md

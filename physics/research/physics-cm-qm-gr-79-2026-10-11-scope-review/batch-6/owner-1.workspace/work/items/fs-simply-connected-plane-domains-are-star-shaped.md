@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-simply-connected-plane-domains-are-star-shaped.md

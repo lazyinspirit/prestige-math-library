@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-kac-moody-root-spaces-are-finite-dimensional.md

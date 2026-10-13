@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-noetherian-ring-maximal-element-annihilator-exists.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-mean-curvature-and-minimal-submanifolds.md

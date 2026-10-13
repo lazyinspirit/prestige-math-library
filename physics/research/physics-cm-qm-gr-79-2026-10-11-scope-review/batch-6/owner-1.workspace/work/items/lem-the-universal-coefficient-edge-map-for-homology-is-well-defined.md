@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-universal-coefficient-edge-map-for-homology-is-well-defined.md

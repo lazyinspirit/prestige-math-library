@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-continuous-compactly-supported-functions-differentiate-by-ball-averages.md

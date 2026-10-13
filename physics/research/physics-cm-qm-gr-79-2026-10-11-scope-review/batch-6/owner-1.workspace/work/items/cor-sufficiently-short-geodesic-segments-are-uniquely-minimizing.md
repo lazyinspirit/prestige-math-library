@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-sufficiently-short-geodesic-segments-are-uniquely-minimizing.md

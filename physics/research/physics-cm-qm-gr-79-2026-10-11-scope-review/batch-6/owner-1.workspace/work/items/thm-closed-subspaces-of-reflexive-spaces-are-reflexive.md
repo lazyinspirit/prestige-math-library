@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-closed-subspaces-of-reflexive-spaces-are-reflexive.md

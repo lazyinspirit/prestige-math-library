@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-pid-kunneth-over-a-field-has-no-tor-correction.md

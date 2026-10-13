@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-irrational-flow-on-a-symplectic-torus-is-symplectic-but-not-hamiltonian.md

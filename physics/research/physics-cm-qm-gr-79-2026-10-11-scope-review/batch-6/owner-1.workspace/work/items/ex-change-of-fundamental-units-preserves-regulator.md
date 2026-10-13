@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-change-of-fundamental-units-preserves-regulator.md

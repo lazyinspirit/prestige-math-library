@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-morphism-of-short-exact-sequences-of-complexes.md

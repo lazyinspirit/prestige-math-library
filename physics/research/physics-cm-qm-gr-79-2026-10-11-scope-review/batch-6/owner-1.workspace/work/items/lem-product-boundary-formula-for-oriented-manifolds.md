@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-product-boundary-formula-for-oriented-manifolds.md

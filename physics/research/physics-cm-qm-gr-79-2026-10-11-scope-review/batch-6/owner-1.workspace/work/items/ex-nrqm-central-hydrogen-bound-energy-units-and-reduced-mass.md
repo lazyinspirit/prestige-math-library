@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-central-hydrogen-bound-energy-units-and-reduced-mass.md

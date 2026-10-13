@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-central-spectral-models-transport-and-intertwiners-disintegrate.md

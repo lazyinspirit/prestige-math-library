@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cohomological-kunneth-isomorphism-under-finite-free-hypotheses.md

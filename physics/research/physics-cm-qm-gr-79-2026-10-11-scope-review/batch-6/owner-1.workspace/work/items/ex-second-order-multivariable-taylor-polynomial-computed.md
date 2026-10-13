@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-second-order-multivariable-taylor-polynomial-computed.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-central-idempotents-under-the-brauer-homomorphism.md

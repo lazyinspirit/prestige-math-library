@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ordered-planar-configuration-spaces-are-aspherical.md

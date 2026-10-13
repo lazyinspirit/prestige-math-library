@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-strictly-psh-exhaustion-of-a-convex-domain.md

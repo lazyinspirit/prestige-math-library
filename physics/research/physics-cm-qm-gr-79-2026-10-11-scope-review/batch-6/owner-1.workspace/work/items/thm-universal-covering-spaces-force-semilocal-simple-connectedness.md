@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-universal-covering-spaces-force-semilocal-simple-connectedness.md

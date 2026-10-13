@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-no-nonconstant-map-proper-variety-to-affine-line.md

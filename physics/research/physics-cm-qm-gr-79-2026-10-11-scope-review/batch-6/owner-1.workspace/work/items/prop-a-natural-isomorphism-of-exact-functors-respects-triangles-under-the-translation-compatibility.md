@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-a-natural-isomorphism-of-exact-functors-respects-triangles-under-the-translation-compatibility.md

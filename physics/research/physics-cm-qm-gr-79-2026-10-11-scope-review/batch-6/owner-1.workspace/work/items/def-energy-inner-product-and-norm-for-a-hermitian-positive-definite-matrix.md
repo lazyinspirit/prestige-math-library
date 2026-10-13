@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-energy-inner-product-and-norm-for-a-hermitian-positive-definite-matrix.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-path-ring-of-a-finite-quiver-over-the-integers.md

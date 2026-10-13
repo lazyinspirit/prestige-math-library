@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-almost-sure-martingale-convergence-need-not-preserve-expectation.md

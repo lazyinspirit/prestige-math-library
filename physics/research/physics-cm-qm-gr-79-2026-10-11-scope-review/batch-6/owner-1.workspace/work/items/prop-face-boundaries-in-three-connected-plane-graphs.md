@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-face-boundaries-in-three-connected-plane-graphs.md

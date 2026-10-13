@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-peter-weyl-says-every-continuous-function-is-a-finite-sum-of-matrix-coefficients.md

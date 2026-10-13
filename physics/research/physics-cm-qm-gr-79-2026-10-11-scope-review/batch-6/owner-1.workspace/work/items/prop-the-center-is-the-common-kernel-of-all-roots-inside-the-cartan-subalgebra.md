@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-center-is-the-common-kernel-of-all-roots-inside-the-cartan-subalgebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-exterior-derivative-of-a-function-is-its-differential.md

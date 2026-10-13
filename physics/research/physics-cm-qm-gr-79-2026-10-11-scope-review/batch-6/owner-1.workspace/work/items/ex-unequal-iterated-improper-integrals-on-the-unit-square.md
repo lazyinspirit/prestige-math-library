@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-unequal-iterated-improper-integrals-on-the-unit-square.md

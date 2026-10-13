@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-special-values-of-riemann-zeta-at-integers.md

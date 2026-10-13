@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-injective-resolution-of-an-abelian-group-beginning-with-a-divisible-envelope.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-distributional-weak-solution-of-a-scalar-conservation-law.md

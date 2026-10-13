@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-chain-map-is-determined-by-its-maps-on-homology.md

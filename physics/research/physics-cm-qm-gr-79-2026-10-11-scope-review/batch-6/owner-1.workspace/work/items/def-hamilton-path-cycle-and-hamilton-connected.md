@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-hamilton-path-cycle-and-hamilton-connected.md

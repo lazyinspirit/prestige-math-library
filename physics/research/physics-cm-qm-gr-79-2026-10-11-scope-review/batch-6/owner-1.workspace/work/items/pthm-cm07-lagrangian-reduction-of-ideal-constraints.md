@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-cm07-lagrangian-reduction-of-ideal-constraints.md

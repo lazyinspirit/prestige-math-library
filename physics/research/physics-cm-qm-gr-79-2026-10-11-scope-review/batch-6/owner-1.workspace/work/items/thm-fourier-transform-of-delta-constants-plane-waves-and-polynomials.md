@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fourier-transform-of-delta-constants-plane-waves-and-polynomials.md

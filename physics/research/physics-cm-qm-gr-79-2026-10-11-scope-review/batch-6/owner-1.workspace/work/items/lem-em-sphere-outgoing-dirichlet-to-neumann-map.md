@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-em-sphere-outgoing-dirichlet-to-neumann-map.md

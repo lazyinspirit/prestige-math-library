@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-tightness-from-characteristic-function-equicontinuity-at-zero.md

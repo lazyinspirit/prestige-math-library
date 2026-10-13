@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-arith-group-model-with-abelian-generic-fibre-quasiprojective.md

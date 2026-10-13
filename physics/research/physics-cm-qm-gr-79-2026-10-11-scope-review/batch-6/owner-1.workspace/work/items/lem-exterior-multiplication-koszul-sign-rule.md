@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-exterior-multiplication-koszul-sign-rule.md

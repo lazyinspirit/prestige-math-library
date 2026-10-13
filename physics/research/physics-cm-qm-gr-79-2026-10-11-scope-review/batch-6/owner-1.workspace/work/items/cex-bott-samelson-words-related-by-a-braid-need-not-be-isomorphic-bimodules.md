@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-bott-samelson-words-related-by-a-braid-need-not-be-isomorphic-bimodules.md

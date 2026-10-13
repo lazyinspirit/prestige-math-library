@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence.md

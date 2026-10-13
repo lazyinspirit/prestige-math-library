@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-joint-convergence-and-normalized-cycle-character-observables.md

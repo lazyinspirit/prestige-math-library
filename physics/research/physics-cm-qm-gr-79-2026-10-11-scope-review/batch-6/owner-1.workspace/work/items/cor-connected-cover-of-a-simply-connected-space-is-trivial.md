@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-connected-cover-of-a-simply-connected-space-is-trivial.md

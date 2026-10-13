@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-amenability-does-not-imply-subexponential-growth.md

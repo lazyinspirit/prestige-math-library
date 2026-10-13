@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-odd-rank-euler-class-need-not-vanish-with-two-torsion-coefficients.md

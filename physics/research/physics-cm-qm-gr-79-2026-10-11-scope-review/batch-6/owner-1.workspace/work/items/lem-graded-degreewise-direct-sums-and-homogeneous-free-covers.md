@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-graded-degreewise-direct-sums-and-homogeneous-free-covers.md

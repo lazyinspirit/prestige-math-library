@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-eberlein-smulian-countable-compactness-closes-in-the-bidual.md

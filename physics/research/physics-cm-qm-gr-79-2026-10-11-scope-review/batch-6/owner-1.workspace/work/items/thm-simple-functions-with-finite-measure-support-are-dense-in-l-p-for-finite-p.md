@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p.md

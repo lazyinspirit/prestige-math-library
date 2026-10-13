@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-derived-functor-is-canonical-without-supplied-replacement-data.md

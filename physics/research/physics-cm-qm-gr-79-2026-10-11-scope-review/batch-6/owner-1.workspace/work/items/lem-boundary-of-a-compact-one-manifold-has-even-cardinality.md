@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-boundary-of-a-compact-one-manifold-has-even-cardinality.md

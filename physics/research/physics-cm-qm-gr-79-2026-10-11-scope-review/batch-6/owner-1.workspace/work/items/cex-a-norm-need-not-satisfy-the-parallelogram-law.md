@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-norm-need-not-satisfy-the-parallelogram-law.md

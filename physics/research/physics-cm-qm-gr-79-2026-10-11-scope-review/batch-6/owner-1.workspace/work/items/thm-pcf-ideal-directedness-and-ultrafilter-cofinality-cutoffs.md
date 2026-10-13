@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pcf-ideal-directedness-and-ultrafilter-cofinality-cutoffs.md

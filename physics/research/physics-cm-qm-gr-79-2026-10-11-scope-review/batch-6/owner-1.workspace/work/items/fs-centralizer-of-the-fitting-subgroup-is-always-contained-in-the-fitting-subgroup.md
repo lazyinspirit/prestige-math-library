@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-centralizer-of-the-fitting-subgroup-is-always-contained-in-the-fitting-subgroup.md

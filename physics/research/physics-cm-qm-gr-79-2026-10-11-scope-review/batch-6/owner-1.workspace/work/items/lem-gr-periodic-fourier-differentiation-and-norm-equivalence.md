@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gr-periodic-fourier-differentiation-and-norm-equivalence.md

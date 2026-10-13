@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-representations-of-affine-group-schemes-are-comodules.md

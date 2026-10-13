@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-noetherian-from-finitely-many-noetherian-quotients.md

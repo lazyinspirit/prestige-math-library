@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-closed-exact-and-conservative-equivalence-on-star-shaped-domains.md

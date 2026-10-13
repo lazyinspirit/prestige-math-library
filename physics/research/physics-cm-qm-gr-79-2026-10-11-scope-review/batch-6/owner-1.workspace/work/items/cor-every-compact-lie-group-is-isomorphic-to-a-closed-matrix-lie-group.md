@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-compact-lie-group-is-isomorphic-to-a-closed-matrix-lie-group.md

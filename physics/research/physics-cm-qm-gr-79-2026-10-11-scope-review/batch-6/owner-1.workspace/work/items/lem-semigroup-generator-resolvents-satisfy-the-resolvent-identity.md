@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-semigroup-generator-resolvents-satisfy-the-resolvent-identity.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-self-adjoint-extensions-and-deficiency-indices.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cm-finite-time-tangent-growth-rate-and-lyapunov-exponent.md

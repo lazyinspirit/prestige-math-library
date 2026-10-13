@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-uniform-approximation-is-the-right-global-notion-on-every-noncompact-manifold.md

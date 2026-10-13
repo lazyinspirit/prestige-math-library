@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-norm-of-a-self-adjoint-operator-from-its-quadratic-form.md

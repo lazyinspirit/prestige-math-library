@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-singular-dot-weights-have-zero-line-bundle-cohomology.md

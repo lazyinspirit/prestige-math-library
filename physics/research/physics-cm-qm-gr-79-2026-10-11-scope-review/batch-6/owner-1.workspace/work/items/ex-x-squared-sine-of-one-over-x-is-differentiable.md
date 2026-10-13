@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-x-squared-sine-of-one-over-x-is-differentiable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-determinantal-divisors-of-a-matrix-over-a-pid.md

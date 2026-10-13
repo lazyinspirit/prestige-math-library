@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-type-a-graph-bimodule-extension-vanishing.md

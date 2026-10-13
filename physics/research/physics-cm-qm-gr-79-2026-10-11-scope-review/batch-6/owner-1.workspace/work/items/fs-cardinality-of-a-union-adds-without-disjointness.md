@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-cardinality-of-a-union-adds-without-disjointness.md

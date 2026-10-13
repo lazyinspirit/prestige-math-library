@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-primitive-sums-of-two-squares-closed-under-products.md

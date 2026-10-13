@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hausdorff-n-measure-is-proportional-to-lebesgue-measure.md

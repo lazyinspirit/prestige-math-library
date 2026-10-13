@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-failed-principal-parts-problem-detected-by-residues.md

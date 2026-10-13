@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-mean-zero-poincare-estimate-on-bounded-connected-extension-domains-for-p-less-than-n.md

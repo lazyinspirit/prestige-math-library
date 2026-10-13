@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-highest-weight-of-a-finite-dimensional-module-is-dominant-integral.md

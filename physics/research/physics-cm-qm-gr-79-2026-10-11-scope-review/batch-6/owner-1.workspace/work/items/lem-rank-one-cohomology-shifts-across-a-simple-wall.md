@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rank-one-cohomology-shifts-across-a-simple-wall.md

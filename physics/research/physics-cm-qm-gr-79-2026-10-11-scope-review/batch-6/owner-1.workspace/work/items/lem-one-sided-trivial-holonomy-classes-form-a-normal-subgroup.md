@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-one-sided-trivial-holonomy-classes-form-a-normal-subgroup.md

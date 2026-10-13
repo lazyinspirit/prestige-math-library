@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-solovay-model-has-no-vitali-or-bernstein-set.md

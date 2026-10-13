@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-full-faithful-essentially-surjective-small-target-characterises-equivalence.md

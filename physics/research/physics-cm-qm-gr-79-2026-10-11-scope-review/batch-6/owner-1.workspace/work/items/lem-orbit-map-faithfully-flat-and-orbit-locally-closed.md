@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-orbit-map-faithfully-flat-and-orbit-locally-closed.md

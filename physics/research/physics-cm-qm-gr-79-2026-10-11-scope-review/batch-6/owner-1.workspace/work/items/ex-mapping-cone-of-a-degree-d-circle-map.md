@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-mapping-cone-of-a-degree-d-circle-map.md

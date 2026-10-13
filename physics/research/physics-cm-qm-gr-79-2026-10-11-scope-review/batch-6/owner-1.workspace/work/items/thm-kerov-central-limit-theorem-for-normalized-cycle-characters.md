@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-kerov-central-limit-theorem-for-normalized-cycle-characters.md

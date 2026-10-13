@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-wave-support-from-pure-displacement-versus-pure-velocity-data.md

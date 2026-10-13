@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-largest-summand-bound-for-symmetric-independent-variables.md

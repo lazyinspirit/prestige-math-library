@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-product-foliation-near-a-compact-trivial-holonomy-leaf.md

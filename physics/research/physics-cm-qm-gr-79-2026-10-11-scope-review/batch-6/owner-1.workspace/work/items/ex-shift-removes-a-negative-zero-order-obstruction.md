@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-shift-removes-a-negative-zero-order-obstruction.md

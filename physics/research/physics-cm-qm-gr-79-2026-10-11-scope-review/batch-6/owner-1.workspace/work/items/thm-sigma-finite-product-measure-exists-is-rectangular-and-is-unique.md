@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique.md

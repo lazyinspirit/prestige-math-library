@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-diamond-and-pentagon-lattices-are-not-distributive.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-cartesian-product-computed-inside-the-double-power-set.md

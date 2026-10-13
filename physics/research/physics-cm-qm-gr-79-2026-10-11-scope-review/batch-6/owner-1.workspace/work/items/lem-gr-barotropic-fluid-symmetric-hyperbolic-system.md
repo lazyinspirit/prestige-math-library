@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gr-barotropic-fluid-symmetric-hyperbolic-system.md

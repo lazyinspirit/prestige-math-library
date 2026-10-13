@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-positive-degree-integral-homology-of-a-finite-group-is-annihilated-by-its-order.md

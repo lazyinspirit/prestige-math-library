@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-levi-decomposition-of-the-euclidean-motion-algebra.md

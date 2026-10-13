@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-diagram-built-from-the-associator-and-the-braiding-commutes.md

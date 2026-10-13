@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-continuity-of-the-right-hand-side-guarantees-unique-ode-solutions.md

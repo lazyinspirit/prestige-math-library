@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-algebra-operations-on-smooth-germs-are-representative-independent.md

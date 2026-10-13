@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-dualizing-real-vector-space-sequences-and-the-choice-boundary.md

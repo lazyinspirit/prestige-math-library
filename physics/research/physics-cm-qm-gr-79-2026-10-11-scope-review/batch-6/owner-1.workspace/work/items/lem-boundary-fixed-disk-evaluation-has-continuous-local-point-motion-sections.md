@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-boundary-fixed-disk-evaluation-has-continuous-local-point-motion-sections.md

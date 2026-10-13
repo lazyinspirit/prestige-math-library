@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-normal-p-subgroups-act-trivially-on-simple-modules.md

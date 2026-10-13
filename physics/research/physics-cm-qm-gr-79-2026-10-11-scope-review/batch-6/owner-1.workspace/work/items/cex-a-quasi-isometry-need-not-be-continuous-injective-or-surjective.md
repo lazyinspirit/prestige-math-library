@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-quasi-isometry-need-not-be-continuous-injective-or-surjective.md

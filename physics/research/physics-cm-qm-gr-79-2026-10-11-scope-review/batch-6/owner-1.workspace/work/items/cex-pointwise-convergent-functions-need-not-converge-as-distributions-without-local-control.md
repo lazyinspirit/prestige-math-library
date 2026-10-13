@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-pointwise-convergent-functions-need-not-converge-as-distributions-without-local-control.md

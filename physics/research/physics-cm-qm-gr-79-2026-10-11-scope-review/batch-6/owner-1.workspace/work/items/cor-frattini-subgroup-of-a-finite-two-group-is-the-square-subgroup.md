@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-frattini-subgroup-of-a-finite-two-group-is-the-square-subgroup.md

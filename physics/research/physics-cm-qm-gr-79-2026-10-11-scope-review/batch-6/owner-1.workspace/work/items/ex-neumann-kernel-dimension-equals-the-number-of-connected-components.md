@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-neumann-kernel-dimension-equals-the-number-of-connected-components.md

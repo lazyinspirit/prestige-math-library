@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-abelianisation-of-a-free-group-is-free-abelian.md

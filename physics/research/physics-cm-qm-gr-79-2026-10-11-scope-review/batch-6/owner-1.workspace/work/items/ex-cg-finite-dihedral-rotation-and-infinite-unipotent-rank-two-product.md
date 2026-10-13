@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-finite-dihedral-rotation-and-infinite-unipotent-rank-two-product.md

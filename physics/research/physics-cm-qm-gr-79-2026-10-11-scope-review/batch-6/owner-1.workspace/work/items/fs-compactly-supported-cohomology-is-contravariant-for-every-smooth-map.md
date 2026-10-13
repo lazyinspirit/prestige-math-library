@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-compactly-supported-cohomology-is-contravariant-for-every-smooth-map.md

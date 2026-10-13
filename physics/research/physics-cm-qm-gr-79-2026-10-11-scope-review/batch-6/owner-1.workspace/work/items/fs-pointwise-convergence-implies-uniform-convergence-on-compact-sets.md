@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-pointwise-convergence-implies-uniform-convergence-on-compact-sets.md

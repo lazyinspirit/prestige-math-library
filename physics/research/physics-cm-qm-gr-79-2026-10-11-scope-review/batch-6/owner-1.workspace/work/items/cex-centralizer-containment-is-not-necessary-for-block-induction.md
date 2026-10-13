@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-centralizer-containment-is-not-necessary-for-block-induction.md

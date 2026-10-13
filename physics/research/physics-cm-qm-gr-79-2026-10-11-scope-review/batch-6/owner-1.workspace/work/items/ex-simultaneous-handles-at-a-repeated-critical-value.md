@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-simultaneous-handles-at-a-repeated-critical-value.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c2-leaf-intersection-with-a-box-transversal-is-countable.md

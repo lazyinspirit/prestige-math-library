@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-finite-length-and-finite-hom-do-not-imply-finite-category.md

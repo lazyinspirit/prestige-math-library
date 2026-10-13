@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-hh-s3-hecke-multiplication-table-in-both-normalizations.md

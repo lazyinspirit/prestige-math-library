@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-p-ideals-pid-pseudointersection-number-and-s-spaces.md

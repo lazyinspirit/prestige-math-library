@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-grothendieck-abelian-category-has-functorial-injective-embeddings.md

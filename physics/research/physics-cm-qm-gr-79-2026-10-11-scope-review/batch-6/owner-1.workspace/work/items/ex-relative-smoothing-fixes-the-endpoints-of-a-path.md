@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-relative-smoothing-fixes-the-endpoints-of-a-path.md

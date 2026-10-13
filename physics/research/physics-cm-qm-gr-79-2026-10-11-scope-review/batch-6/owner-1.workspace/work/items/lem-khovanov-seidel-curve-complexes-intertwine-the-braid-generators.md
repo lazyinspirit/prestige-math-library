@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-khovanov-seidel-curve-complexes-intertwine-the-braid-generators.md

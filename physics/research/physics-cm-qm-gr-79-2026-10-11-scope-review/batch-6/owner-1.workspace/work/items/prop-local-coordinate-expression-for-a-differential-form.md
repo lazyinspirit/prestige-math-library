@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-local-coordinate-expression-for-a-differential-form.md

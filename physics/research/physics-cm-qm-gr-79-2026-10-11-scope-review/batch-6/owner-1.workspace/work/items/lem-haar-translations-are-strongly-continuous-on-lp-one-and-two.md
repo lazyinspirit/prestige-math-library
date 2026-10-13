@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-haar-translations-are-strongly-continuous-on-lp-one-and-two.md

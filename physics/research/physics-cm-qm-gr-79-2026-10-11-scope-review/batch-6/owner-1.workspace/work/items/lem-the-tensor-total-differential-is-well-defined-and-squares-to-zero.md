@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-tensor-total-differential-is-well-defined-and-squares-to-zero.md

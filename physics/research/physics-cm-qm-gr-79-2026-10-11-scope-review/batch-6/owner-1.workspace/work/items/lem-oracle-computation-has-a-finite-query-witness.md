@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-oracle-computation-has-a-finite-query-witness.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-unitary-intertwiners-preserve-direct-integral-fiber-dimension.md

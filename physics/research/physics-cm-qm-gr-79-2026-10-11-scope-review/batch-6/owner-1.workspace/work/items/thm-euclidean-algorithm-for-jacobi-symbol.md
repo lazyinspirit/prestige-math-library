@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-euclidean-algorithm-for-jacobi-symbol.md

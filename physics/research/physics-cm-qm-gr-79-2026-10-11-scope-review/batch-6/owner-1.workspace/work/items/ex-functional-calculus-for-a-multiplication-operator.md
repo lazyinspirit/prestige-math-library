@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-functional-calculus-for-a-multiplication-operator.md

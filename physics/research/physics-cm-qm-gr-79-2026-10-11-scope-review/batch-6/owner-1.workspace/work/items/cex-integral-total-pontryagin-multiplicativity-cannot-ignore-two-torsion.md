@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-integral-total-pontryagin-multiplicativity-cannot-ignore-two-torsion.md

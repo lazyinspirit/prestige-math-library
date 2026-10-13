@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-rational-series-are-closed-under-sums-and-products.md

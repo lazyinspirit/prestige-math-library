@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-path-independence-iff-zero-closed-loop-integrals.md

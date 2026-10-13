@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-distribution-function-of-a-borel-measure-on-r.md

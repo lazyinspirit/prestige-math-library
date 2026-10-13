@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cauchy-kovalevskaya-for-a-second-order-normal-form.md

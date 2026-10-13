@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-downward-flux-on-the-graph-z-equals-xy.md

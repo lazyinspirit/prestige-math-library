@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-right-inverse-in-the-half-space-by-poisson-type-extension.md

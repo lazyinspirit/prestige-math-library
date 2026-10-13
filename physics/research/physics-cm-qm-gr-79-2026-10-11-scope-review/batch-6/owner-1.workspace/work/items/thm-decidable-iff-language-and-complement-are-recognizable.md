@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-decidable-iff-language-and-complement-are-recognizable.md

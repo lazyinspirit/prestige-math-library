@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rouquier-generator-complexes-have-canonical-derived-graph-models.md

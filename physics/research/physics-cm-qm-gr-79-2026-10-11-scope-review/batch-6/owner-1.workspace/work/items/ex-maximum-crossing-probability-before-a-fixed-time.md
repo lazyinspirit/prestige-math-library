@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-maximum-crossing-probability-before-a-fixed-time.md

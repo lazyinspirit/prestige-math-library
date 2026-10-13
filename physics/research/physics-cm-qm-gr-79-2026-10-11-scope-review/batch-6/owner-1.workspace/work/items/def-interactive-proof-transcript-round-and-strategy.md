@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-interactive-proof-transcript-round-and-strategy.md

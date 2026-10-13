@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-jantzen-deformation-and-filtration-of-a-verma-module.md

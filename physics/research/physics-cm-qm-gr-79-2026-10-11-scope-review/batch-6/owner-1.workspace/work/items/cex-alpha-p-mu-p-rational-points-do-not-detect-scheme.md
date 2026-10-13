@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-alpha-p-mu-p-rational-points-do-not-detect-scheme.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-minkowski-gauge-of-an-open-convex-zero-neighborhood.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-young-orthogonal-form-from-seminormal-rescaling.md

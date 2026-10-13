@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nrqm-magnetic-and-detection-position-and-momentum-operators.md

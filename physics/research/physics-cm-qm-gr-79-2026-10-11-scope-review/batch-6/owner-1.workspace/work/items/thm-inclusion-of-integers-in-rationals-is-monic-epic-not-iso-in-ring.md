@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-inclusion-of-integers-in-rationals-is-monic-epic-not-iso-in-ring.md

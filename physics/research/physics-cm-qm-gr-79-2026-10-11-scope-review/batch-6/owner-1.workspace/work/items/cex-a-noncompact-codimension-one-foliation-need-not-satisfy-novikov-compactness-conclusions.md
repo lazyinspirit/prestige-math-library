@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-noncompact-codimension-one-foliation-need-not-satisfy-novikov-compactness-conclusions.md

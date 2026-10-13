@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-right-shift-powers-converge-in-wot-not-sot.md

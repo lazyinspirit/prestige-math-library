@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-quotient-manifold-by-a-closed-lie-subgroup.md

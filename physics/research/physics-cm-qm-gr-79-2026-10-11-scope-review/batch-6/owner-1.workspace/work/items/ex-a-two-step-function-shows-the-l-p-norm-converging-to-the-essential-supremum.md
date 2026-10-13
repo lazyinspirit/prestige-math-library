@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-two-step-function-shows-the-l-p-norm-converging-to-the-essential-supremum.md

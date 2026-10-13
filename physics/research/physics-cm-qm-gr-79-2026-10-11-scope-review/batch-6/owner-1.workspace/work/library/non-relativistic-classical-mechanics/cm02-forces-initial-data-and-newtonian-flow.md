@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/library/non-relativistic-classical-mechanics/cm02-forces-initial-data-and-newtonian-flow.md

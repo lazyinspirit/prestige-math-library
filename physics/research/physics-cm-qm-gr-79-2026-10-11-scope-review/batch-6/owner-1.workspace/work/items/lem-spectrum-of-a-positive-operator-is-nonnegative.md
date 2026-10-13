@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-spectrum-of-a-positive-operator-is-nonnegative.md

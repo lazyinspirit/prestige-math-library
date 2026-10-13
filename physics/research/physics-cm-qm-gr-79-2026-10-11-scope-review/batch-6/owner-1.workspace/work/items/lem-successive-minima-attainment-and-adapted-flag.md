@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-successive-minima-attainment-and-adapted-flag.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-bounded-discontinuous-elliptic-coefficients-do-not-force-h-two-regularity.md

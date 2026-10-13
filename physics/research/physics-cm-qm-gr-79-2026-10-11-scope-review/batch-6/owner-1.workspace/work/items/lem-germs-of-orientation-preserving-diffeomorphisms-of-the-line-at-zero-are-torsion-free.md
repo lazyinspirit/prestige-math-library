@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-germs-of-orientation-preserving-diffeomorphisms-of-the-line-at-zero-are-torsion-free.md

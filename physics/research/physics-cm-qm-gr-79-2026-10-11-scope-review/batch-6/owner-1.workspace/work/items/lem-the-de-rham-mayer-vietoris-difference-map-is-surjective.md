@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-de-rham-mayer-vietoris-difference-map-is-surjective.md

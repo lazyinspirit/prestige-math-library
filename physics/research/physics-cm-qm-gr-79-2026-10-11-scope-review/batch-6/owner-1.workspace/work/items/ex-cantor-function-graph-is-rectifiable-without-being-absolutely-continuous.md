@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cantor-function-graph-is-rectifiable-without-being-absolutely-continuous.md

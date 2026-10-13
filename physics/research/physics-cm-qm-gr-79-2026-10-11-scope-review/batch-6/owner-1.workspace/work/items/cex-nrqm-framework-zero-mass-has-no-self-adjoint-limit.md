@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nrqm-framework-zero-mass-has-no-self-adjoint-limit.md

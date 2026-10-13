@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-riemann-stieltjes-existence-bv-continuous.md

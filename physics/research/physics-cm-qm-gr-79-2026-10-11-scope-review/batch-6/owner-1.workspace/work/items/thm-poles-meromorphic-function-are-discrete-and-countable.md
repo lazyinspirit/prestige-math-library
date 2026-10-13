@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-poles-meromorphic-function-are-discrete-and-countable.md

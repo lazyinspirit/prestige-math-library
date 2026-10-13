@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-uniform-integrability-of-conditional-expectations-of-one-variable.md

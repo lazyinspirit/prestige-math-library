@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation.md

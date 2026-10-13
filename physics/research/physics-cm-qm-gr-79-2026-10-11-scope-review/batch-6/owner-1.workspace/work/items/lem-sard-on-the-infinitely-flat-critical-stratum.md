@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sard-on-the-infinitely-flat-critical-stratum.md

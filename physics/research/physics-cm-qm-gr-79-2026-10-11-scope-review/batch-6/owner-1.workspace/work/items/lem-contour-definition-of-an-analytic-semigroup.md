@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-contour-definition-of-an-analytic-semigroup.md

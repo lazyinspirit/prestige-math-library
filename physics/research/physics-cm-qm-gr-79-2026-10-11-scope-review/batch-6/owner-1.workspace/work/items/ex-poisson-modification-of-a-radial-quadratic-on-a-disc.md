@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-poisson-modification-of-a-radial-quadratic-on-a-disc.md

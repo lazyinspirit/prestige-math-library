@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nevanlinna-error-bound-without-exceptional-radii.md

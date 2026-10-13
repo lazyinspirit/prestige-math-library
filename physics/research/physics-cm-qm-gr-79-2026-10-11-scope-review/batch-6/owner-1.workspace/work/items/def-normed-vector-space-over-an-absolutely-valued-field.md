@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-normed-vector-space-over-an-absolutely-valued-field.md

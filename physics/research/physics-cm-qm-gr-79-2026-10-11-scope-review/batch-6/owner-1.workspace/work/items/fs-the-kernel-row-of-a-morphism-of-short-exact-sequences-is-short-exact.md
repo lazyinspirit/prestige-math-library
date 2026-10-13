@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-kernel-row-of-a-morphism-of-short-exact-sequences-is-short-exact.md

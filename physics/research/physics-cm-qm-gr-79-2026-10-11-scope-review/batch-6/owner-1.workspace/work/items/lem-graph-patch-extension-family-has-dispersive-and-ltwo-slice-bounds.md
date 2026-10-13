@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-graph-patch-extension-family-has-dispersive-and-ltwo-slice-bounds.md

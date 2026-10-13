@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-lax-shock-inequalities-for-convex-scalar-laws.md

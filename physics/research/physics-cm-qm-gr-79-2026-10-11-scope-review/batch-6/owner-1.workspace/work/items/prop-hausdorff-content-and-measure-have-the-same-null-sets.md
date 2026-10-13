@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-hausdorff-content-and-measure-have-the-same-null-sets.md

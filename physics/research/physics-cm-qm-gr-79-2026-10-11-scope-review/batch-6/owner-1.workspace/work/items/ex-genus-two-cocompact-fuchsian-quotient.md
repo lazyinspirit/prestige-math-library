@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-genus-two-cocompact-fuchsian-quotient.md

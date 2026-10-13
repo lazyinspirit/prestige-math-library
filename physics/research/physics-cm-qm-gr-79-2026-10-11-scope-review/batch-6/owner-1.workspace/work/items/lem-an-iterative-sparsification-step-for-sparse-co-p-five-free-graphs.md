@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-an-iterative-sparsification-step-for-sparse-co-p-five-free-graphs.md

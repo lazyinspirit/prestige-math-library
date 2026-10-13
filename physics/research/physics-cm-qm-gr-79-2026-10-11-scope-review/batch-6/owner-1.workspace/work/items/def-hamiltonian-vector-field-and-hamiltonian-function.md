@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-hamiltonian-vector-field-and-hamiltonian-function.md

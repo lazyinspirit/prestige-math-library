@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one.md

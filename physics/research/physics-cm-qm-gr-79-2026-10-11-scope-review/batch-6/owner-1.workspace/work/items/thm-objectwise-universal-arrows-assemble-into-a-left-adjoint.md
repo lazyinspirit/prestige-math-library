@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-objectwise-universal-arrows-assemble-into-a-left-adjoint.md

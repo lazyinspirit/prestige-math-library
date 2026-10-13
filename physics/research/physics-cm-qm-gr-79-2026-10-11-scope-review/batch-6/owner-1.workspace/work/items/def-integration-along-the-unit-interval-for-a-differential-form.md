@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-integration-along-the-unit-interval-for-a-differential-form.md

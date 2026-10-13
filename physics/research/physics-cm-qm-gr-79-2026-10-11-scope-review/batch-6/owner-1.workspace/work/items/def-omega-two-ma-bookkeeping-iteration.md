@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-omega-two-ma-bookkeeping-iteration.md

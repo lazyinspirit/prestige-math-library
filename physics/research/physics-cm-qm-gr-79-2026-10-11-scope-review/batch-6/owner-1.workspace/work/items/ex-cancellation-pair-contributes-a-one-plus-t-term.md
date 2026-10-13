@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cancellation-pair-contributes-a-one-plus-t-term.md

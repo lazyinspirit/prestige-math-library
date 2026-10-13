@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-linear-primary-companion-block-is-similar-to-a-jordan-block.md

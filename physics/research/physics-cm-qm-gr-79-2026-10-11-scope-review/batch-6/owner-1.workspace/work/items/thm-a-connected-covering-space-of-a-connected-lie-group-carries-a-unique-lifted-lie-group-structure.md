@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-connected-covering-space-of-a-connected-lie-group-carries-a-unique-lifted-lie-group-structure.md

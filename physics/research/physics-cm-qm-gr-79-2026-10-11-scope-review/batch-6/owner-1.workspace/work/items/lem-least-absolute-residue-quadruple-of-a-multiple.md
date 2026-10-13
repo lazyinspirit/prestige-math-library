@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-least-absolute-residue-quadruple-of-a-multiple.md

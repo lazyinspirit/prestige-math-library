@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-central-extensions-of-perfect-groups-are-controlled-by-hom-from-the-schur-multiplier.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-underlying-set-functor-on-rings-strictly-creates-split-coequalizers.md

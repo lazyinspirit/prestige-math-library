@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-last-vertex-map-is-carried-by-original-simplices.md

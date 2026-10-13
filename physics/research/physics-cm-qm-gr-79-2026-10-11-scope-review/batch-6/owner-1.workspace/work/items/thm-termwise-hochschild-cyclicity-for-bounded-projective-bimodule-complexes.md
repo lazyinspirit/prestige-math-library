@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-termwise-hochschild-cyclicity-for-bounded-projective-bimodule-complexes.md

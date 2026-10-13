@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-whitney-disjunction-removes-algebraically-cancelling-double-points-in-the-stable-range.md

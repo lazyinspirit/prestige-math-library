@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-real-quarter-turn-has-no-real-eigenvalues.md

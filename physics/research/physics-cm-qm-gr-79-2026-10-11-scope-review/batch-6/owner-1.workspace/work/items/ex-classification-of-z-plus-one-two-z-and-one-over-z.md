@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-classification-of-z-plus-one-two-z-and-one-over-z.md

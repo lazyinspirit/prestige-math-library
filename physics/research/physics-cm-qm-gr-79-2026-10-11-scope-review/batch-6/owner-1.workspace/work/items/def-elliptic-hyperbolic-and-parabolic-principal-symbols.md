@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-elliptic-hyperbolic-and-parabolic-principal-symbols.md

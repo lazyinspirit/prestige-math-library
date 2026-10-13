@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-block-idempotents-are-fixed-by-normal-p-subgroup-brauer-projection.md

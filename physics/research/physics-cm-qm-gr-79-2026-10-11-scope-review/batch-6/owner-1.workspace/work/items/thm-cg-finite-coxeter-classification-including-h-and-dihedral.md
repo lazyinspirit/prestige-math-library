@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cg-finite-coxeter-classification-including-h-and-dihedral.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-fixed-point-free-ball-map-produces-a-boundary-retraction.md

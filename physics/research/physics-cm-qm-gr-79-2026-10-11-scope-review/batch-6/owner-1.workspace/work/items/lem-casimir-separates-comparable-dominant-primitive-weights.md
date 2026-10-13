@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-casimir-separates-comparable-dominant-primitive-weights.md

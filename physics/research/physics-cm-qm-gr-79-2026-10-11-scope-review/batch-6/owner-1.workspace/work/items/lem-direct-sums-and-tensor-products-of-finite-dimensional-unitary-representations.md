@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-direct-sums-and-tensor-products-of-finite-dimensional-unitary-representations.md

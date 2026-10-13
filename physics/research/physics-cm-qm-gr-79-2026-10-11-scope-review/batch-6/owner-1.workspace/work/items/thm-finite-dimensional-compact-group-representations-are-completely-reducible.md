@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-finite-dimensional-compact-group-representations-are-completely-reducible.md

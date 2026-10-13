@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-stationary-splitting-converges-iff-the-iteration-matrix-has-spectral-radius-below-one.md

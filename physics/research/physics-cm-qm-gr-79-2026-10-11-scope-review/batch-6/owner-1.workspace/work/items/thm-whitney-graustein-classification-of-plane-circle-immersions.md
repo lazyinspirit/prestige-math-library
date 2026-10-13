@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-whitney-graustein-classification-of-plane-circle-immersions.md

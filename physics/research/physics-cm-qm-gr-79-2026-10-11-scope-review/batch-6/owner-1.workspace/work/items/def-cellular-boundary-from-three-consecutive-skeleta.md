@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cellular-boundary-from-three-consecutive-skeleta.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-well-posed-abstract-cauchy-problem-if-and-only-if-generation.md

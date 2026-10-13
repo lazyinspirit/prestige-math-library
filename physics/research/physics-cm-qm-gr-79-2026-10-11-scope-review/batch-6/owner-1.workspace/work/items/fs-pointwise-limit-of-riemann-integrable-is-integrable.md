@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-pointwise-limit-of-riemann-integrable-is-integrable.md

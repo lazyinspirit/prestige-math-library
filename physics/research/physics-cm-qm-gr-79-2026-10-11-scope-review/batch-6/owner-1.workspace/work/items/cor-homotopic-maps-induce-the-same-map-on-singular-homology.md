@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-homotopic-maps-induce-the-same-map-on-singular-homology.md

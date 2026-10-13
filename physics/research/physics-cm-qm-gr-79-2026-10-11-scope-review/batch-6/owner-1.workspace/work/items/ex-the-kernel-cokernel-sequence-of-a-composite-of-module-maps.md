@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-kernel-cokernel-sequence-of-a-composite-of-module-maps.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-posets-and-monotone-maps-form-category-poset.md

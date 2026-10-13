@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-fields-of-fractions-are-unique-over-the-domain.md

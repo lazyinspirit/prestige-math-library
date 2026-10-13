@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-finite-group-fixing-the-centre-of-a-tree.md

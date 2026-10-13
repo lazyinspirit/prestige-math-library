@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-l-p-of-a-sigma-finite-countably-generated-measure-space-is-separable.md

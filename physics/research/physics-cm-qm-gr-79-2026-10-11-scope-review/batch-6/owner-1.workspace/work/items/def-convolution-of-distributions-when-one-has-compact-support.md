@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-convolution-of-distributions-when-one-has-compact-support.md

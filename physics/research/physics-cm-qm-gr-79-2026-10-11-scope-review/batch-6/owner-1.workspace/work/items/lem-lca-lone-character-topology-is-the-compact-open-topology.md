@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lca-lone-character-topology-is-the-compact-open-topology.md

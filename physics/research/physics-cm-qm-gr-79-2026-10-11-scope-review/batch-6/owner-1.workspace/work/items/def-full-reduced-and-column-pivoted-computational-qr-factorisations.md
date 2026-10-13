@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-full-reduced-and-column-pivoted-computational-qr-factorisations.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-representative-functions-form-a-self-adjoint-translation-invariant-algebra.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-oriented-real-two-plane-splitting-with-injective-real-pullback.md

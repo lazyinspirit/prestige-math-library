@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-averages-over-probability-densities-attain-the-essential-supremum.md

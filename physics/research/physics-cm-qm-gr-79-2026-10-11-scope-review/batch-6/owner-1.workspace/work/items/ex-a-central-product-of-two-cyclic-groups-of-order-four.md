@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-central-product-of-two-cyclic-groups-of-order-four.md

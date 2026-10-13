@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-torsion-of-a-two-term-based-contractible-complex.md

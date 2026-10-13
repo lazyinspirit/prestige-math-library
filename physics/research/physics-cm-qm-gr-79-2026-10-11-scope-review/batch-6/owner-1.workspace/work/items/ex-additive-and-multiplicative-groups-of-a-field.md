@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-additive-and-multiplicative-groups-of-a-field.md

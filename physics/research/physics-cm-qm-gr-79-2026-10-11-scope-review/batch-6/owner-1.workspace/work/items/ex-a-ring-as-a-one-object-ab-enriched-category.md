@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-ring-as-a-one-object-ab-enriched-category.md

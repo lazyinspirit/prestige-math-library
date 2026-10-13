@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-thom-identity-for-stiefel-whitney-classes.md

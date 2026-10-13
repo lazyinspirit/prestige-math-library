@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-solovay-model-has-no-banach-tarski-decomposition.md

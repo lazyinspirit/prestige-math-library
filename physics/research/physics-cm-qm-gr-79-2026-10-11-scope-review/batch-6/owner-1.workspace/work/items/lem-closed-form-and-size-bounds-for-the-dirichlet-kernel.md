@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-closed-form-and-size-bounds-for-the-dirichlet-kernel.md

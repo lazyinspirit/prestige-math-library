@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cardinal-functions-of-an-uncountable-discrete-space.md

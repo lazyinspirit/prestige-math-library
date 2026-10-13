@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonnegative-continuous-with-zero-integral-vanishes.md

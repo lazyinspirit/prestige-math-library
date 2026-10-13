@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-punctured-euclidean-plane-is-geodesically-incomplete.md

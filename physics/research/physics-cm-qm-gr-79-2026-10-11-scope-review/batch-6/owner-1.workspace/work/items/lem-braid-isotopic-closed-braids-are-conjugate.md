@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-braid-isotopic-closed-braids-are-conjugate.md

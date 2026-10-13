@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-lebesgue-set-of-the-rationals-indicator-is-all-of-r.md

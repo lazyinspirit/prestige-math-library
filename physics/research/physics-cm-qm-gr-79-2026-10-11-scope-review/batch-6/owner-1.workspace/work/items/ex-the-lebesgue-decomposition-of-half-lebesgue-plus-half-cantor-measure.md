@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-lebesgue-decomposition-of-half-lebesgue-plus-half-cantor-measure.md

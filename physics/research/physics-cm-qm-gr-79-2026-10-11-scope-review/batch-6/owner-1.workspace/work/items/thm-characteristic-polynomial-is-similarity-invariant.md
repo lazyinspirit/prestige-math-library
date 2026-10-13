@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-characteristic-polynomial-is-similarity-invariant.md

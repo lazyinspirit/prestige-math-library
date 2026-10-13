@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-cm-coordinate-covariance-of-the-euler-lagrange-expression.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nrqm-orbital-and-spin-example-coupled-triplet-and-singlet.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-singularities-at-infinity-for-polynomials-and-reciprocals.md

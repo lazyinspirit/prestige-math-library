@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-indicator-of-a-fat-cantor-set-is-not-integrable.md

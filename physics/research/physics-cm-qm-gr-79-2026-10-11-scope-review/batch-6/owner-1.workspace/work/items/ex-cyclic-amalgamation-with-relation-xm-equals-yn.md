@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cyclic-amalgamation-with-relation-xm-equals-yn.md

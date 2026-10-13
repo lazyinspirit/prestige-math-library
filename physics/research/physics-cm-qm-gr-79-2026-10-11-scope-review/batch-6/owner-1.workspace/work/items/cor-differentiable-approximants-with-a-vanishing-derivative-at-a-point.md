@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-differentiable-approximants-with-a-vanishing-derivative-at-a-point.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-to-sqrt-two-by-two-real-power-constructions.md

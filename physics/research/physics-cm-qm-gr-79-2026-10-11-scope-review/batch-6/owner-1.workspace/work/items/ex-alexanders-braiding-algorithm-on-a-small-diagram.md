@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-alexanders-braiding-algorithm-on-a-small-diagram.md

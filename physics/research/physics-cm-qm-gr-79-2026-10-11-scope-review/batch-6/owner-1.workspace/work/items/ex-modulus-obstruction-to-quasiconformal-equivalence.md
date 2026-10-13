@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-modulus-obstruction-to-quasiconformal-equivalence.md

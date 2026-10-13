@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-oriented-boundaries-have-zero-pontryagin-numbers.md

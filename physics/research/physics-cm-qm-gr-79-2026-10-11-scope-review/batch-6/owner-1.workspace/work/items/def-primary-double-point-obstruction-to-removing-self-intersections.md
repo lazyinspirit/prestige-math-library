@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-primary-double-point-obstruction-to-removing-self-intersections.md

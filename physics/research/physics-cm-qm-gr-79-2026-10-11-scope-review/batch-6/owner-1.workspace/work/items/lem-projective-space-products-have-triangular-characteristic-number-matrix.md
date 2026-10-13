@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-projective-space-products-have-triangular-characteristic-number-matrix.md

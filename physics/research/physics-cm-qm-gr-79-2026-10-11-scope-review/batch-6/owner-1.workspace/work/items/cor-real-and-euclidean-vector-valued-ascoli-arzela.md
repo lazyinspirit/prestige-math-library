@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-real-and-euclidean-vector-valued-ascoli-arzela.md

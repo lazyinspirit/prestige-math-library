@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-gr-scalar-einstein-symmetric-hyperbolic-reduction.md

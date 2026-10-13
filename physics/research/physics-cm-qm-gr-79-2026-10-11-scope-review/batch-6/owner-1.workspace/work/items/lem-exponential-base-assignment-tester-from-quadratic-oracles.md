@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-exponential-base-assignment-tester-from-quadratic-oracles.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-complement-in-a-semidirect-product-need-not-be-normal.md

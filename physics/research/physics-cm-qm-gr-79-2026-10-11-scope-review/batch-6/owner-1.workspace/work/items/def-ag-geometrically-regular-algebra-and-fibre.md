@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-ag-geometrically-regular-algebra-and-fibre.md

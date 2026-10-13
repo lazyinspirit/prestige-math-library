@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-projective-comparison-maps-are-unique-up-to-chain-homotopy.md

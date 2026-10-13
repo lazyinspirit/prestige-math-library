@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-riemann-stieltjes-integral-agrees-with-lebesgue-stieltjes-integral.md

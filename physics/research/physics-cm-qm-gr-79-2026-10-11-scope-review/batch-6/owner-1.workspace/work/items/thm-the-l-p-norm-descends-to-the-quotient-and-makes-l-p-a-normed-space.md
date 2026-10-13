@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-root-systems-decompose-uniquely-into-irreducible-components.md

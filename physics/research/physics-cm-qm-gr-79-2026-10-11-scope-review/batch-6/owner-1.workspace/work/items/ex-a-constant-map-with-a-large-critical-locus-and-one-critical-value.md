@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-constant-map-with-a-large-critical-locus-and-one-critical-value.md

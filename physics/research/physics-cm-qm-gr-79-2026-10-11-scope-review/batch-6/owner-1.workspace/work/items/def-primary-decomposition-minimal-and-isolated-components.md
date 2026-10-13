@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-primary-decomposition-minimal-and-isolated-components.md

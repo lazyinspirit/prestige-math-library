@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-local-path-connectedness-lifts-and-descends-along-coverings.md

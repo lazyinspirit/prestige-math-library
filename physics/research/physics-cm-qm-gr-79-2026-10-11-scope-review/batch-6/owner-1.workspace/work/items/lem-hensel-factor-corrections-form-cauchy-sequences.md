@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hensel-factor-corrections-form-cauchy-sequences.md

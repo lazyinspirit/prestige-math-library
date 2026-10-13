@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-khovanov-seidel-algebra-has-the-four-m-plus-one-path-basis.md

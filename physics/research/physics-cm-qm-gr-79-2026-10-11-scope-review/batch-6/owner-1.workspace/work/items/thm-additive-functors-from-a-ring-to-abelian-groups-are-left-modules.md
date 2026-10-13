@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-additive-functors-from-a-ring-to-abelian-groups-are-left-modules.md

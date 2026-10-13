@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-killing-form-pairs-only-opposite-root-spaces.md

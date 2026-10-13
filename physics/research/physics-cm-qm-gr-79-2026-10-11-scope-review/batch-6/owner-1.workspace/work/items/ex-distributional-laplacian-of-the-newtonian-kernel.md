@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-distributional-laplacian-of-the-newtonian-kernel.md

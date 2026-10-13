@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-maximal-chains-irreducible-variety-dimension.md

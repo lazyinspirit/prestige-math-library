@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-effaceable-cohomological-delta-functor-in-positive-degrees.md

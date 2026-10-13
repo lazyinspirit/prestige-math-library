@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-characteristics-are-covectors-before-they-are-curves.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-closed-unit-box-is-an-elementary-solid-region.md

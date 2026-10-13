@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-gr-linearized-curvature-of-the-diagonal-perturbation.md

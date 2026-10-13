@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-regular-nonhereditarily-lindelof-space-yields-ideal-witness.md

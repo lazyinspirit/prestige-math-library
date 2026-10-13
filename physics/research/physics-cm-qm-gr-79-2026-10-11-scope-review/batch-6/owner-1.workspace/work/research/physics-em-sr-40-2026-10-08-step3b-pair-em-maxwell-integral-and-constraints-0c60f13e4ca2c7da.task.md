@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3b-pair-em-maxwell-integral-and-constraints-0c60f13e4ca2c7da.task.md

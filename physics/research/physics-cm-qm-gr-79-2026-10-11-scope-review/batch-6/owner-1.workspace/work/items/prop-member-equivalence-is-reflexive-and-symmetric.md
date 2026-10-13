@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-member-equivalence-is-reflexive-and-symmetric.md

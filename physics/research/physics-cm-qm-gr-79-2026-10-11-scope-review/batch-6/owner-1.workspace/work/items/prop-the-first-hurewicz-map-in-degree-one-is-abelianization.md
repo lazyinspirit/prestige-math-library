@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-the-first-hurewicz-map-in-degree-one-is-abelianization.md

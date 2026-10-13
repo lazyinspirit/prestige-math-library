@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-trace-forms-are-symmetric-and-invariant.md

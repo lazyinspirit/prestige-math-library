@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-abel-summability-does-not-imply-ordinary-convergence.md

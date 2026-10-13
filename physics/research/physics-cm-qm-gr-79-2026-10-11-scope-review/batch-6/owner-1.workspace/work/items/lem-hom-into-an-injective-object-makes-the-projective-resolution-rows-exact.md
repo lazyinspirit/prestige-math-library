@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hom-into-an-injective-object-makes-the-projective-resolution-rows-exact.md

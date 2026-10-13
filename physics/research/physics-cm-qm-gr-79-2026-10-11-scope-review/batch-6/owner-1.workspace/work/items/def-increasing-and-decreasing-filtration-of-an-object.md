@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-increasing-and-decreasing-filtration-of-an-object.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-socle-is-characteristic-and-admits-a-direct-product-decomposition.md

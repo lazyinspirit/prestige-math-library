@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-index-of-a-unit-relative-to-a-primitive-root.md

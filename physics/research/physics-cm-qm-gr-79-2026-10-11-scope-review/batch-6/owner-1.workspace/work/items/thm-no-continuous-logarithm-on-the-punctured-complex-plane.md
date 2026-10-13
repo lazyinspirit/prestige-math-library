@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-no-continuous-logarithm-on-the-punctured-complex-plane.md

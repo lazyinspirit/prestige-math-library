@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology.md

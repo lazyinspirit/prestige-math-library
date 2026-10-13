@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-properness-can-replace-compactness-only-when-the-intersection-trace-is-compact.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-balance-of-ext-requires-the-spectral-sequence-pages.md

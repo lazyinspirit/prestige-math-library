@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-milnor-sphere-bundles-with-euler-number-plus-or-minus-one-are-simply-connected.md

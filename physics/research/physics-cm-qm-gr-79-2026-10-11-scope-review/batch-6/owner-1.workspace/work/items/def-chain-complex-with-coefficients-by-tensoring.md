@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-chain-complex-with-coefficients-by-tensoring.md

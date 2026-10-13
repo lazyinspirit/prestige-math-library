@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-skeleton-of-set-cannot-be-made-strict-by-identification.md

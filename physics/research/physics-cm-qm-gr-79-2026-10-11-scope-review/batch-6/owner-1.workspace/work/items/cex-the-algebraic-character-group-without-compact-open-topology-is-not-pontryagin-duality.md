@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-algebraic-character-group-without-compact-open-topology-is-not-pontryagin-duality.md

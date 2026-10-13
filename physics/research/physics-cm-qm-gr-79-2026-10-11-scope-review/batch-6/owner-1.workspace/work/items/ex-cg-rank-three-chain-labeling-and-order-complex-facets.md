@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-rank-three-chain-labeling-and-order-complex-facets.md

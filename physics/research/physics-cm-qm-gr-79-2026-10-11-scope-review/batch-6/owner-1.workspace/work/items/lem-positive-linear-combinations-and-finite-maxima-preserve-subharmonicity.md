@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-positive-linear-combinations-and-finite-maxima-preserve-subharmonicity.md

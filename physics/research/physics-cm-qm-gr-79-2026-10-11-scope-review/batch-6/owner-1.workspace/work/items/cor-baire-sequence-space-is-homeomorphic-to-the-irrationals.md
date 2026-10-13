@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-baire-sequence-space-is-homeomorphic-to-the-irrationals.md

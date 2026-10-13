@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms.md

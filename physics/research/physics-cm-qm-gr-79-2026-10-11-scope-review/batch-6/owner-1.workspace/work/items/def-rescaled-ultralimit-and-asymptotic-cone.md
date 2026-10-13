@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-rescaled-ultralimit-and-asymptotic-cone.md

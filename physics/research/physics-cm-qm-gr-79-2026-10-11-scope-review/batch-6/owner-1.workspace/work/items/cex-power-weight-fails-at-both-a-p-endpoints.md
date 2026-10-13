@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-power-weight-fails-at-both-a-p-endpoints.md

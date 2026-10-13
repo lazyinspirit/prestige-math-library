@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-basic-cohen-search-and-shift-prime-ideal-construction.md

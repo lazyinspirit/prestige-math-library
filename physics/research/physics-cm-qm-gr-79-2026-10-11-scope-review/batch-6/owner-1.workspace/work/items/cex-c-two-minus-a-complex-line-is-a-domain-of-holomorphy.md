@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-c-two-minus-a-complex-line-is-a-domain-of-holomorphy.md

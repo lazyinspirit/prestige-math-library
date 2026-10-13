@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-independent-events-need-not-be-closed-under-unions-of-overlapping-pairs.md

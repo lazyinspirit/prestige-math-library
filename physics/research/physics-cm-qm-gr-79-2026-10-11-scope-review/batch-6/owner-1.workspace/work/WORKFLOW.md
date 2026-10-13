@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/WORKFLOW.md

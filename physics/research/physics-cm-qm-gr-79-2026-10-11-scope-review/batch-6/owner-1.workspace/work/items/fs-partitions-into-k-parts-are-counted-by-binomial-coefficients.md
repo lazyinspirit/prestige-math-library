@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-partitions-into-k-parts-are-counted-by-binomial-coefficients.md

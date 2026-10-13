@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-krylov-dimensions-grow-by-one-until-the-grade-and-then-stabilise.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-p-bases-and-degree-in-exponent-one-purely-inseparable-extensions.md

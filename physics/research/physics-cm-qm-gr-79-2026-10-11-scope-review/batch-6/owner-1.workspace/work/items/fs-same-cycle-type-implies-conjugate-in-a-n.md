@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-same-cycle-type-implies-conjugate-in-a-n.md

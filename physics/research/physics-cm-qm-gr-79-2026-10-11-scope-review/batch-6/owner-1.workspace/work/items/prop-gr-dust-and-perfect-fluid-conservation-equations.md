@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-gr-dust-and-perfect-fluid-conservation-equations.md

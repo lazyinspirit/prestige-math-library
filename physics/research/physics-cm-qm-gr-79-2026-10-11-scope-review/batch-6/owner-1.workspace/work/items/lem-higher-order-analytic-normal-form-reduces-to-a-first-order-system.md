@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-higher-order-analytic-normal-form-reduces-to-a-first-order-system.md

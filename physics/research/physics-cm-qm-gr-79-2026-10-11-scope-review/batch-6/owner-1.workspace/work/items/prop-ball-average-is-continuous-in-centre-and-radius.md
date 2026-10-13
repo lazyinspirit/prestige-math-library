@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-ball-average-is-continuous-in-centre-and-radius.md

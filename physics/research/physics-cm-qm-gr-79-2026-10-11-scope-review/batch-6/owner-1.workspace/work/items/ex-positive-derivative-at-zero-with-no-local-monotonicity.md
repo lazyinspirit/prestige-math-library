@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-positive-derivative-at-zero-with-no-local-monotonicity.md

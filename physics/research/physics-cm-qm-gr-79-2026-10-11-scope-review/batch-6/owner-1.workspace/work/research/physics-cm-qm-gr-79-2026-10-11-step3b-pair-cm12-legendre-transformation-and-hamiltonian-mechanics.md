@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-cm-qm-gr-79-2026-10-11-step3b-pair-cm12-legendre-transformation-and-hamiltonian-mechanics.md

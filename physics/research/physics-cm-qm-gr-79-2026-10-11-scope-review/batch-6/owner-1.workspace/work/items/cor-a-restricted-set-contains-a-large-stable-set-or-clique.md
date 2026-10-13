@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-restricted-set-contains-a-large-stable-set-or-clique.md

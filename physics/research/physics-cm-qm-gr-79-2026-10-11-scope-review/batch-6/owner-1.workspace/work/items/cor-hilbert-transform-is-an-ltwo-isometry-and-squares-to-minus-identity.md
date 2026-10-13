@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-hilbert-transform-is-an-ltwo-isometry-and-squares-to-minus-identity.md

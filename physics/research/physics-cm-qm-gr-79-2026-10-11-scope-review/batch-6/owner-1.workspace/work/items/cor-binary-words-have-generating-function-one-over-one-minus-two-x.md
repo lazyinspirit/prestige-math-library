@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-binary-words-have-generating-function-one-over-one-minus-two-x.md

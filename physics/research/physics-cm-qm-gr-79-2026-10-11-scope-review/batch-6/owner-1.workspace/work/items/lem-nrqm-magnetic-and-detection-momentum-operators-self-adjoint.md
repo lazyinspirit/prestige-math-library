@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint.md

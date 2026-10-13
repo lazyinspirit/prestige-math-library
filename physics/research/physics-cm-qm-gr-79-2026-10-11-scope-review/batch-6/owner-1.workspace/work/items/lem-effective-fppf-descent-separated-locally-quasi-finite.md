@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-effective-fppf-descent-separated-locally-quasi-finite.md

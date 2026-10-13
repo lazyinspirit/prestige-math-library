@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-primitive-recursive-functions-by-initial-functions-and-schemes.md

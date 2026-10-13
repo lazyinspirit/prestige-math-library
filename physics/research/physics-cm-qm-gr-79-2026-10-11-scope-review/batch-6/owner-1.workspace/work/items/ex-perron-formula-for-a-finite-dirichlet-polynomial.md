@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-perron-formula-for-a-finite-dirichlet-polynomial.md

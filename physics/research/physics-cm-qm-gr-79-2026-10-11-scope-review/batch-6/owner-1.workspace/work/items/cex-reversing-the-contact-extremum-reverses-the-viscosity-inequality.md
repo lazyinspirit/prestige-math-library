@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-reversing-the-contact-extremum-reverses-the-viscosity-inequality.md

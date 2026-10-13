@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-orbit-set-need-not-represent-quotient-sheaf.md

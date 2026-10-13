@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-continuation-trajectories-are-compact-up-to-breaking.md

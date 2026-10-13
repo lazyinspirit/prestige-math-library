@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-every-nonconstant-polynomial-has-a-root-in-an-extension.md

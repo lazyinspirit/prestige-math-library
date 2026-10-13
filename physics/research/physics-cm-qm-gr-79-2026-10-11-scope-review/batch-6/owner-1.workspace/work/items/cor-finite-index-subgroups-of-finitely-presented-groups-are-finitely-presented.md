@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-index-subgroups-of-finitely-presented-groups-are-finitely-presented.md

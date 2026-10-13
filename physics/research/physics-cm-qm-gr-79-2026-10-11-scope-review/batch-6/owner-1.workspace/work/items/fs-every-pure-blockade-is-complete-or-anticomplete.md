@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-pure-blockade-is-complete-or-anticomplete.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-lp-bounded-martingale-with-an-lp-terminal-value.md

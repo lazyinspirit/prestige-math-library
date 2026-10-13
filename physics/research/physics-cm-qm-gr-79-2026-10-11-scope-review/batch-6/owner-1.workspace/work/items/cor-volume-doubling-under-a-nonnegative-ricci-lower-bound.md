@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-volume-doubling-under-a-nonnegative-ricci-lower-bound.md

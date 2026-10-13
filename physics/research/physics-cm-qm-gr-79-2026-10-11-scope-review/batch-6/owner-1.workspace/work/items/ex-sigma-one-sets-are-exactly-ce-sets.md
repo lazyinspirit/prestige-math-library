@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sigma-one-sets-are-exactly-ce-sets.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-homology-of-the-loop-space-of-an-odd-sphere.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-real-banach-spaces-require-complexification-for-analyticity.md

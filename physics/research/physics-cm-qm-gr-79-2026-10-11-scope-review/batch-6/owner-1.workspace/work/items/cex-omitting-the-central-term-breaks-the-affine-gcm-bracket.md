@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-omitting-the-central-term-breaks-the-affine-gcm-bracket.md

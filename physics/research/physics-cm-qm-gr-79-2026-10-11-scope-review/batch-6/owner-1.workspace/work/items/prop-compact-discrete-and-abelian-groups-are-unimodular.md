@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-compact-discrete-and-abelian-groups-are-unimodular.md

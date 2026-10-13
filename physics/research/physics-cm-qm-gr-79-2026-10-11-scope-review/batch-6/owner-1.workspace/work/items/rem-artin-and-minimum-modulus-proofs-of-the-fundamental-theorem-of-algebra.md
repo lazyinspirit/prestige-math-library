@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-artin-and-minimum-modulus-proofs-of-the-fundamental-theorem-of-algebra.md

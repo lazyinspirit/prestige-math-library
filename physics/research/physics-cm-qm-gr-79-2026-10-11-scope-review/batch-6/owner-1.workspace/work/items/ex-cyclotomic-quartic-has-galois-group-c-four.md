@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cyclotomic-quartic-has-galois-group-c-four.md

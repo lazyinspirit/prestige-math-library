@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-euler-characteristic-of-a-tensor-product-complex.md

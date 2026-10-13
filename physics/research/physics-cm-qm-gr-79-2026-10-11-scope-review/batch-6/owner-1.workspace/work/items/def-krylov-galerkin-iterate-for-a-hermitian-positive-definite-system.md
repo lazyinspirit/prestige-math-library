@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-krylov-galerkin-iterate-for-a-hermitian-positive-definite-system.md

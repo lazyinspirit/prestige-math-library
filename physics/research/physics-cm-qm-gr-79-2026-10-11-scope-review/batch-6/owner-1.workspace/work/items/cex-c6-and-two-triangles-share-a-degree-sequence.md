@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-c6-and-two-triangles-share-a-degree-sequence.md

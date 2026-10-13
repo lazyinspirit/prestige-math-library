@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-surface-integral-is-independent-of-c-one-boundary-charts.md

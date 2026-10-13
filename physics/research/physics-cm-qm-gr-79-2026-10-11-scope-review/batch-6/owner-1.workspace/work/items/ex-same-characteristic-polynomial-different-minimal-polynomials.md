@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-same-characteristic-polynomial-different-minimal-polynomials.md

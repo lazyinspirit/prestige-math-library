@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-structure-of-a-compact-connected-abelian-lie-group.md

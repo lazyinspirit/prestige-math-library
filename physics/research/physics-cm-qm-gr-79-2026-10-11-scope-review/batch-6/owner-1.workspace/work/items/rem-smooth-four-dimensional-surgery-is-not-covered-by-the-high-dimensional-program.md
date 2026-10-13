@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-smooth-four-dimensional-surgery-is-not-covered-by-the-high-dimensional-program.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-absorbing-balanced-and-absolutely-convex-set.md

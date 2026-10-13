@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-cauchy-sequence-in-the-additive-p-adic-metric.md

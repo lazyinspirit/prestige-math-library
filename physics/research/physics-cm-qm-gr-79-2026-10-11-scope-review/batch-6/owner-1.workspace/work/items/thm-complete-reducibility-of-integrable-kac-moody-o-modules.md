@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complete-reducibility-of-integrable-kac-moody-o-modules.md

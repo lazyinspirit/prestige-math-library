@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-minimal-polynomial-of-an-invariant-restriction-divides-the-original.md

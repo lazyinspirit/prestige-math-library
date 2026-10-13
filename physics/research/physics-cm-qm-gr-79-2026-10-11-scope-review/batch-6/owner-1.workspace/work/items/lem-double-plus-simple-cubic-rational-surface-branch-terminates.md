@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-double-plus-simple-cubic-rational-surface-branch-terminates.md

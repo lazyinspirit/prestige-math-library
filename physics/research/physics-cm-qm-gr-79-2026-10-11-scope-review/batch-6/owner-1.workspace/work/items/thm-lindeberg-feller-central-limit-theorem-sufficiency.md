@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-lindeberg-feller-central-limit-theorem-sufficiency.md

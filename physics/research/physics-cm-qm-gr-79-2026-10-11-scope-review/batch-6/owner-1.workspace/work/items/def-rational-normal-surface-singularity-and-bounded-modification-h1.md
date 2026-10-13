@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-rational-normal-surface-singularity-and-bounded-modification-h1.md

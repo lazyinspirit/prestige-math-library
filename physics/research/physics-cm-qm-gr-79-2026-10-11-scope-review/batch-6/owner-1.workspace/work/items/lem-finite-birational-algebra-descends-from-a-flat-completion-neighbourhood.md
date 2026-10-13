@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-birational-algebra-descends-from-a-flat-completion-neighbourhood.md

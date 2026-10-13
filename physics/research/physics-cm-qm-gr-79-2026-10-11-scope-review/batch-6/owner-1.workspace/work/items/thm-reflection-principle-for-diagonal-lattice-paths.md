@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-reflection-principle-for-diagonal-lattice-paths.md

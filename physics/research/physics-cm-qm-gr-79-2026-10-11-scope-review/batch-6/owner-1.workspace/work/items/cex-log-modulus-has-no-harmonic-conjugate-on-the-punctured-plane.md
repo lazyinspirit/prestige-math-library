@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-log-modulus-has-no-harmonic-conjugate-on-the-punctured-plane.md

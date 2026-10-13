@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-only-countably-many-fourier-coefficients-are-nonzero.md

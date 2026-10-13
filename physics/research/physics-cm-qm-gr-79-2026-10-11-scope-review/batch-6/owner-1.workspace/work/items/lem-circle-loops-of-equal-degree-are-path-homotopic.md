@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-circle-loops-of-equal-degree-are-path-homotopic.md

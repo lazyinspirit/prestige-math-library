@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-morphisms-agree-closed-equalizer-separated-target.md

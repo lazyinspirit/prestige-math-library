@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-one-surgery-on-a-three-manifold-as-framed-knot-surgery.md

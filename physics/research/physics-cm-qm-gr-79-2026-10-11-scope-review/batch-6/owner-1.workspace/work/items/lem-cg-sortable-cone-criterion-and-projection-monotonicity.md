@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cg-sortable-cone-criterion-and-projection-monotonicity.md

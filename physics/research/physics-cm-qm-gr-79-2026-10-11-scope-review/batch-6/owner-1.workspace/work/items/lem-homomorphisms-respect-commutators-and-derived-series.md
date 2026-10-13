@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-homomorphisms-respect-commutators-and-derived-series.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-wilkinson-shifted-qr-deflates-a-symmetric-tridiagonal-tail.md

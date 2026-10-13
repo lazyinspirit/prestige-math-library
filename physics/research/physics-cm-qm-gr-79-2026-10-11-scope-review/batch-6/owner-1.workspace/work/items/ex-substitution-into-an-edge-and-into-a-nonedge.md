@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-substitution-into-an-edge-and-into-a-nonedge.md

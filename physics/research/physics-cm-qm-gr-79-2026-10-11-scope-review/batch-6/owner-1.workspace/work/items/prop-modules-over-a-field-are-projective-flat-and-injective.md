@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-modules-over-a-field-are-projective-flat-and-injective.md

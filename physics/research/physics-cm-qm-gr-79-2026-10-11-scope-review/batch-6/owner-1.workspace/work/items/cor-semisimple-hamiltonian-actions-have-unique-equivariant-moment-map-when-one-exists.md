@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-semisimple-hamiltonian-actions-have-unique-equivariant-moment-map-when-one-exists.md

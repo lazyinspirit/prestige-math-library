@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sierpinski-space-is-normal-and-not-completely-regular.md

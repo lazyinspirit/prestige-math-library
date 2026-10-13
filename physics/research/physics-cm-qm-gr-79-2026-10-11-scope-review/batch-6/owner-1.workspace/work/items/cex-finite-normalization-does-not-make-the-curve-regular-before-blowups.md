@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-finite-normalization-does-not-make-the-curve-regular-before-blowups.md

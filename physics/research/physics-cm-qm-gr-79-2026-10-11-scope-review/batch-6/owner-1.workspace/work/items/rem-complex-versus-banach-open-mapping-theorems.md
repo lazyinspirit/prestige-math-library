@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-complex-versus-banach-open-mapping-theorems.md

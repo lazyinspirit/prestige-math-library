@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-symplectomorphism-local-symplectomorphism-and-symplectic-embedding.md

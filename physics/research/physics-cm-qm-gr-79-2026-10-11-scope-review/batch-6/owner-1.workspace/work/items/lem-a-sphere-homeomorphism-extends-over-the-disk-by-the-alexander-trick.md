@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-sphere-homeomorphism-extends-over-the-disk-by-the-alexander-trick.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-restricted-sets-in-a-complete-bipartite-graph.md

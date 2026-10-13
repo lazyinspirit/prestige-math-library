@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-unit-n-ball-volumes-through-eight-from-gamma.md

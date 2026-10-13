@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-regular-homotopy-allows-self-intersections-but-never-rank-drop.md

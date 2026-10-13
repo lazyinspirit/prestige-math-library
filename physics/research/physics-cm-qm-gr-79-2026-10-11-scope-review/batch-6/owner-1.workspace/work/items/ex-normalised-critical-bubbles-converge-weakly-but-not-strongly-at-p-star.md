@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-normalised-critical-bubbles-converge-weakly-but-not-strongly-at-p-star.md

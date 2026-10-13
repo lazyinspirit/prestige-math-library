@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-fourier-transform-of-an-l-one-function-need-not-be-integrable.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-casselman-osborne-nilradical-cohomology-constraint.md

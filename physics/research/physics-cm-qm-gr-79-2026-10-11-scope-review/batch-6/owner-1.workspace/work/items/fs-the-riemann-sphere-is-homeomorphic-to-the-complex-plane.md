@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-riemann-sphere-is-homeomorphic-to-the-complex-plane.md

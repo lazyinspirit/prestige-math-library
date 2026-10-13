@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-syzygies-from-two-projective-resolutions-are-stably-isomorphic.md

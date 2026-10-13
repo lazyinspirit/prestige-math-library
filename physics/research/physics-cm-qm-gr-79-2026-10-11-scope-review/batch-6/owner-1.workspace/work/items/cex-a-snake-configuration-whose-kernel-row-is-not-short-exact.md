@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-snake-configuration-whose-kernel-row-is-not-short-exact.md

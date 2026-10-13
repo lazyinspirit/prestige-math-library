@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-any-sequence-of-functors-with-long-exact-sequences-is-a-delta-functor.md

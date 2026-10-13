@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-pointwise-limit-discontinuous-at-zero-signals-mass-escape.md

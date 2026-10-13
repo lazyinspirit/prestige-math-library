@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-curvilinear-triangulation-of-a-compact-surface.md

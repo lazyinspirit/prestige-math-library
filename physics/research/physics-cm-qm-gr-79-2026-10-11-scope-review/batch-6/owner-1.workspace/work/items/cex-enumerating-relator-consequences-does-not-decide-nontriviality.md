@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-enumerating-relator-consequences-does-not-decide-nontriviality.md

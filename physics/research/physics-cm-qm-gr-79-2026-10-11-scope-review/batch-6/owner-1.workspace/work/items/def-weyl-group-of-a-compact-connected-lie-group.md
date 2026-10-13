@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-weyl-group-of-a-compact-connected-lie-group.md

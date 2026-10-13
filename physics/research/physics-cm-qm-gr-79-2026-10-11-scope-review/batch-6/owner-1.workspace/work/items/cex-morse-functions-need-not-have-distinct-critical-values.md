@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-morse-functions-need-not-have-distinct-critical-values.md

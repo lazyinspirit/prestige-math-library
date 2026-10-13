@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-spectral-multiplicity-function-in-the-separable-case.md

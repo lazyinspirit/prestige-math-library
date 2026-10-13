@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-cap-product-order-awaits-the-at-sign-convention.md

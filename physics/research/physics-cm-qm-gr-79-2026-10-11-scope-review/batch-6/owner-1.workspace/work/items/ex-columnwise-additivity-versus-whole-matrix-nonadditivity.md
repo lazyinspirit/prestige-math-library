@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-columnwise-additivity-versus-whole-matrix-nonadditivity.md

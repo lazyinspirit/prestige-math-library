@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-rearrangement-sums-of-a-non-absolutely-convergent-series-fill-the-space.md

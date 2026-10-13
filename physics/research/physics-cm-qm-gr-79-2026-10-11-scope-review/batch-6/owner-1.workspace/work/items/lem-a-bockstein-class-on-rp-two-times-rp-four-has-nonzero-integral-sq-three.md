@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-bockstein-class-on-rp-two-times-rp-four-has-nonzero-integral-sq-three.md

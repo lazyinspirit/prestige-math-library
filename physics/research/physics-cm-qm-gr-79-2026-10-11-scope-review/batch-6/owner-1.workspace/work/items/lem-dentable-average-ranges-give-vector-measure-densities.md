@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-dentable-average-ranges-give-vector-measure-densities.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-classical-godbillon-vey-requires-at-least-c-two-regularity.md

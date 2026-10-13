@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-transverse-and-tangent-intersections-of-plane-curves.md

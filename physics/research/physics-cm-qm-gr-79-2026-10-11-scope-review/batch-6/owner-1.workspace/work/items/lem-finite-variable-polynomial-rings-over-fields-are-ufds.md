@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-variable-polynomial-rings-over-fields-are-ufds.md

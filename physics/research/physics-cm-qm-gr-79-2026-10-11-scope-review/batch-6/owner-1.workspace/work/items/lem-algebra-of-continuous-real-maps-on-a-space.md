@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-algebra-of-continuous-real-maps-on-a-space.md

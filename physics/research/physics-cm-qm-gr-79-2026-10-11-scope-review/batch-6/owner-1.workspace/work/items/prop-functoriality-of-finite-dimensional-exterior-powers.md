@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-functoriality-of-finite-dimensional-exterior-powers.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-stopped-random-variable-is-measurable-at-the-stopping-time.md

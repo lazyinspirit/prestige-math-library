@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-thom-isomorphism-for-a-trivial-oriented-bundle.md

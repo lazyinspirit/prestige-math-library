@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-gr-first-order-vacuum-is-not-exact-vacuum.md

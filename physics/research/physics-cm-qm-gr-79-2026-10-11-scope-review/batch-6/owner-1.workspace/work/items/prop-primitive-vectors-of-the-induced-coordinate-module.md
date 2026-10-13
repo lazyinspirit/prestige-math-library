@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-primitive-vectors-of-the-induced-coordinate-module.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-xn-minus-p-is-irreducible-over-q.md

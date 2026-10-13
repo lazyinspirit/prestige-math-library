@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dc-iff-products-compact-hausdorff-are-baire.md

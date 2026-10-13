@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-classical-counterparts-for-trigonometry-free-oscillators.md

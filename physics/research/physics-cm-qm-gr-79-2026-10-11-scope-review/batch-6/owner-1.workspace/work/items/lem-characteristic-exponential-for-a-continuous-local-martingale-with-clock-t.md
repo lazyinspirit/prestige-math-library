@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-characteristic-exponential-for-a-continuous-local-martingale-with-clock-t.md

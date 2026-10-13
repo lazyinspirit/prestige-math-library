@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-group-ring-modification-lemma-for-embedded-spheres.md

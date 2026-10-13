@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group.md

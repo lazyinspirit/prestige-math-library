@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-support-is-union-of-closures-of-associated-primes.md

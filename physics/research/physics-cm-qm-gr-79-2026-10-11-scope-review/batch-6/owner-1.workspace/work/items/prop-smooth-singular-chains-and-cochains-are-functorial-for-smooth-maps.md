@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-smooth-singular-chains-and-cochains-are-functorial-for-smooth-maps.md

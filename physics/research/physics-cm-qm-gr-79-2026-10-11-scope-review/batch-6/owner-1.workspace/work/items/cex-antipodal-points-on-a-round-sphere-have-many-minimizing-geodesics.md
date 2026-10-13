@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-antipodal-points-on-a-round-sphere-have-many-minimizing-geodesics.md

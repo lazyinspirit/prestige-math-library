@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-dimensions-of-matrix-and-linear-map-spaces.md

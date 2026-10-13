@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-suspension-of-a-circle-diffeomorphism.md

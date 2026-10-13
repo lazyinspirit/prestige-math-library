@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-blowup-multiplicity-euler-characteristic-drop.md

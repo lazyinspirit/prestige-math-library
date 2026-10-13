@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-positive-braid-monoid-is-left-and-right-cancellative.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-tangent-vector-at-p-is-a-vector-whose-tail-is-drawn-at-p.md

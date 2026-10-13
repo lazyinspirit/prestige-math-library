@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-spherical-complement-characterization-of-plane-simple-connectivity.md

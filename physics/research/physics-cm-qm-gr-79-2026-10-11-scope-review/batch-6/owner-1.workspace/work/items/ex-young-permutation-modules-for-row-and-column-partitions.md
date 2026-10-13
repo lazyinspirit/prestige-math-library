@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-young-permutation-modules-for-row-and-column-partitions.md

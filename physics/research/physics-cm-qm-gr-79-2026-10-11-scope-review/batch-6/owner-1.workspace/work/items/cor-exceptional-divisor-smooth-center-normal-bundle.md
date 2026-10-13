@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-exceptional-divisor-smooth-center-normal-bundle.md

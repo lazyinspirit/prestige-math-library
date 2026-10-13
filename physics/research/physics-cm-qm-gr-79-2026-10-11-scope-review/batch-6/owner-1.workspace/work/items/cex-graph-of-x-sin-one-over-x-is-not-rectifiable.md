@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-graph-of-x-sin-one-over-x-is-not-rectifiable.md

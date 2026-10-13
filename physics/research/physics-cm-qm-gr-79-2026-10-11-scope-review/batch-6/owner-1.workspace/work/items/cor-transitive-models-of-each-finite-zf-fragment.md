@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-transitive-models-of-each-finite-zf-fragment.md

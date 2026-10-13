@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-radial-mollification-fixes-local-mean-value-functions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics.md

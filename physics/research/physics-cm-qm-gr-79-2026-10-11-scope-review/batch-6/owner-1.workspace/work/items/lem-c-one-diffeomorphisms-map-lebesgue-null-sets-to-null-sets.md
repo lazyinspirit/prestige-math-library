@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets.md

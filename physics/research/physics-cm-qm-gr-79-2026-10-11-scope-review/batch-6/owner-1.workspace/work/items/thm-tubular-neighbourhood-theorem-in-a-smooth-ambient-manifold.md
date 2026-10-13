@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-continuous-dependence-of-odes-on-initial-data-and-parameters.md

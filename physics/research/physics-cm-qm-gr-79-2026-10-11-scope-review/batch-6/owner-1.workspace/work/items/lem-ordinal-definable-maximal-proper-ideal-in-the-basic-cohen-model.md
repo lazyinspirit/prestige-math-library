@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ordinal-definable-maximal-proper-ideal-in-the-basic-cohen-model.md

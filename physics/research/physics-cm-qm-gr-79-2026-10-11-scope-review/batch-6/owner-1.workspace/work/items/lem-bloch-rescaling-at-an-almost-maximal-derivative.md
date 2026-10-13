@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bloch-rescaling-at-an-almost-maximal-derivative.md

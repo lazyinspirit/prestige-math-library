@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-split-exact-complex-contracts-degree-by-degree.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-fibre-numerable-bundle-totals-are-paracompact-hausdorff-of-cw-type.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-coordinate-hopf-algebra-of-affine-group-scheme.md

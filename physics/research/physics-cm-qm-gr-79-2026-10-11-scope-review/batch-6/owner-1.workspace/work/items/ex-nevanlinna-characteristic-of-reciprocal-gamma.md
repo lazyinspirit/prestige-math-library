@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-nevanlinna-characteristic-of-reciprocal-gamma.md

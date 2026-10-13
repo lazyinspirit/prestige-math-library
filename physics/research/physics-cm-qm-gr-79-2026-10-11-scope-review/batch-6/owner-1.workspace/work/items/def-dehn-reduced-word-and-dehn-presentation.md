@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-dehn-reduced-word-and-dehn-presentation.md

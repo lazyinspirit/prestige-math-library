@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-relative-floating-point-model-excludes-overflow-underflow-and-invalid-operations.md

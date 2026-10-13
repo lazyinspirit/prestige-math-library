@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-generalised-eigenspaces-and-algebraic-multiplicity.md

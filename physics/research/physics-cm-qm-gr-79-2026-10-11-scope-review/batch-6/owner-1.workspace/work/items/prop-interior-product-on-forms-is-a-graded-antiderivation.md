@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-interior-product-on-forms-is-a-graded-antiderivation.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-map-of-nonzero-degree-between-spheres-is-surjective.md

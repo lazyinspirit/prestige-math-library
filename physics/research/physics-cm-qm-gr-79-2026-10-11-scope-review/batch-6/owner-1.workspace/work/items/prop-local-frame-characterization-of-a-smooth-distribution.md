@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-local-frame-characterization-of-a-smooth-distribution.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-beta-of-the-naturals-as-an-ultrafilter-algebra.md

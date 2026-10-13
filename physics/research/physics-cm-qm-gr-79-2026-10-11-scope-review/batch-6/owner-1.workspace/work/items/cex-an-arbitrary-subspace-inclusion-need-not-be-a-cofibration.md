@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-arbitrary-subspace-inclusion-need-not-be-a-cofibration.md

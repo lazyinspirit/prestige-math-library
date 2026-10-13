@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compensated-band-kinks-decompose-into-ordinary-markov-moves.md

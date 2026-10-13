@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-quotient-of-f-three-by-a-line-and-canonical-projection.md

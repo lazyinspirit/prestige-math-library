@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-changing-the-line-bundle-sign-dualizes-the-borel-weil-answer.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-separately-real-analytic-functions-are-jointly-continuous.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-eilenberg-steenrod-uniqueness-on-all-cw-pairs.md

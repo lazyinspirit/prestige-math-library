@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-arith-symmetric-homomorphism-is-a-mumford-map.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-modular-trace-functions-of-simple-modules-are-linearly-independent.md

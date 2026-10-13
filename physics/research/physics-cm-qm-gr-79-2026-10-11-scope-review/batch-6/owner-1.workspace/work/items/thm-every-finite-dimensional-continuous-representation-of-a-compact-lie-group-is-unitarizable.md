@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-finite-dimensional-continuous-representation-of-a-compact-lie-group-is-unitarizable.md

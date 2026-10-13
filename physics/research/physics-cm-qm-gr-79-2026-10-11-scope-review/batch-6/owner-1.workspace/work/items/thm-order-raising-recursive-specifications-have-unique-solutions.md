@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-order-raising-recursive-specifications-have-unique-solutions.md

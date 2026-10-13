@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-highest-weight-classification-of-finite-dimensional-irreducible-representations.md

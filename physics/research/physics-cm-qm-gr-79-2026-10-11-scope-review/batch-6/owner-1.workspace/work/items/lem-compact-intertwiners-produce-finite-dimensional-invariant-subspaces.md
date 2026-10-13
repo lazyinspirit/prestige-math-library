@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-compact-intertwiners-produce-finite-dimensional-invariant-subspaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-disc-algebra-is-not-dense-without-self-adjointness.md

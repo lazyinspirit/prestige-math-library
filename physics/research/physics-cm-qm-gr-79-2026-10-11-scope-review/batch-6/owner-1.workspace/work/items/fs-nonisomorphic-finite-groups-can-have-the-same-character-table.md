@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-nonisomorphic-finite-groups-can-have-the-same-character-table.md

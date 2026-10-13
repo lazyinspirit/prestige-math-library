@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-rn-is-polygonally-connected-and-locally-path-connected.md

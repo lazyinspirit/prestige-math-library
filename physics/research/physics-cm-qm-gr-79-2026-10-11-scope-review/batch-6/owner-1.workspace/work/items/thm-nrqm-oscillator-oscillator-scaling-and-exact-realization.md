@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nrqm-oscillator-oscillator-scaling-and-exact-realization.md

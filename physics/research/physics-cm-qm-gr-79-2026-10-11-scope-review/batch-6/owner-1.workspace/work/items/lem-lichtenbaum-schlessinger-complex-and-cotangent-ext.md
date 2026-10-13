@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-lichtenbaum-schlessinger-complex-and-cotangent-ext.md

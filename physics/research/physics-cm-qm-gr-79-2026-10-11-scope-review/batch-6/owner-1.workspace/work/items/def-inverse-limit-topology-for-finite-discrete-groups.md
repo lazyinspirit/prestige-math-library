@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-inverse-limit-topology-for-finite-discrete-groups.md

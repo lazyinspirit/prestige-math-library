@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-rationalization-is-exact-and-commutes-with-singular-homology.md

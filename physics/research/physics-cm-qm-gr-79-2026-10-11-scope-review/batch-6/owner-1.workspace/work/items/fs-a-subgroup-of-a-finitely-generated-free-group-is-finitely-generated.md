@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-a-subgroup-of-a-finitely-generated-free-group-is-finitely-generated.md

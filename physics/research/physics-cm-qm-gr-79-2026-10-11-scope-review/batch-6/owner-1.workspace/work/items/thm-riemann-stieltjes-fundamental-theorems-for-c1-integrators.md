@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-riemann-stieltjes-fundamental-theorems-for-c1-integrators.md

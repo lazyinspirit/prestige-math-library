@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-c-k-boundary-flattening-preserves-wkp-locally.md

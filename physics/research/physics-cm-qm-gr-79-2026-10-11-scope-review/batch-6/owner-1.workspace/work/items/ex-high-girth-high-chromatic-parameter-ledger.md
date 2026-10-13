@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-high-girth-high-chromatic-parameter-ledger.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-coordinatewise-addition-and-negation-make-zp-a-topological-abelian-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-root-free-polynomial-circle-loops-are-nullhomotopic.md

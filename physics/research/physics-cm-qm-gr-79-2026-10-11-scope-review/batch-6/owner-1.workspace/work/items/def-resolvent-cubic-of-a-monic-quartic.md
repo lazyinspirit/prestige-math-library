@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-resolvent-cubic-of-a-monic-quartic.md

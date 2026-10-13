@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-exponential-domain-is-open-and-the-exponential-map-is-smooth.md

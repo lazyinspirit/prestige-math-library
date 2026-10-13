@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-generic-borel-half-and-opposite-half-form-a-dj-crossed-double.md

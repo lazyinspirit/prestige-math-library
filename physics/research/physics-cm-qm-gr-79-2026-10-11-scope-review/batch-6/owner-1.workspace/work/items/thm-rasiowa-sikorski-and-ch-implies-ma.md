@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-rasiowa-sikorski-and-ch-implies-ma.md

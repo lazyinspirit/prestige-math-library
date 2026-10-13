@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-factorization-of-birational-morphisms-of-smooth-surfaces.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-stiefel-whitney-class-of-the-universal-real-line.md

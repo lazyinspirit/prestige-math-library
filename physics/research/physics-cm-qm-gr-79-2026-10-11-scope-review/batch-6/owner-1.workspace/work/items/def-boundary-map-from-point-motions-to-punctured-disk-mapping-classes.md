@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-boundary-map-from-point-motions-to-punctured-disk-mapping-classes.md

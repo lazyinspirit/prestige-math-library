@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-minimal-cyclic-power-diagram-and-relator-root.md

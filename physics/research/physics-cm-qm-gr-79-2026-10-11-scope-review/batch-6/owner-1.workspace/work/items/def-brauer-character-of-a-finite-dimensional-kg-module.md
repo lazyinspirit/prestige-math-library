@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-brauer-character-of-a-finite-dimensional-kg-module.md

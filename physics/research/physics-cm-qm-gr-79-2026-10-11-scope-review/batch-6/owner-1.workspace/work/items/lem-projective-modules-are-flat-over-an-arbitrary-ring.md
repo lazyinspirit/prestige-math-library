@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-projective-modules-are-flat-over-an-arbitrary-ring.md

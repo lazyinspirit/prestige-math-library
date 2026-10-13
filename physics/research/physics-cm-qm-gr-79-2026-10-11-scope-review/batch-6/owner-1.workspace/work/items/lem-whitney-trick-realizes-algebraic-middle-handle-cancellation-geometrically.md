@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-whitney-trick-realizes-algebraic-middle-handle-cancellation-geometrically.md

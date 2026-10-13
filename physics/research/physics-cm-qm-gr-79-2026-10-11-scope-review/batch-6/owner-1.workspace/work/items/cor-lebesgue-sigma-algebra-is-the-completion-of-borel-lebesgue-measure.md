@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure.md

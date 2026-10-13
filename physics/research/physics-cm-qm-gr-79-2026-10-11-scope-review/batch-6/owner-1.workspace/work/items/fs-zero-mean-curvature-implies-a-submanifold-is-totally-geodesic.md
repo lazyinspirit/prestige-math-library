@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-zero-mean-curvature-implies-a-submanifold-is-totally-geodesic.md

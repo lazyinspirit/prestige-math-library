@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-lefschetz-number-of-the-identity-is-euler-characteristic.md

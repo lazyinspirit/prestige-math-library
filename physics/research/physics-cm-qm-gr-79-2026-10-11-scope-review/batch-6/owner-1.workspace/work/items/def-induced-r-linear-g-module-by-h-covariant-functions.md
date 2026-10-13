@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-induced-r-linear-g-module-by-h-covariant-functions.md

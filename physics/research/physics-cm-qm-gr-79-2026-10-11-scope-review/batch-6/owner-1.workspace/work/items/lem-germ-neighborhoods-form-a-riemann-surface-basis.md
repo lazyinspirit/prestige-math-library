@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-germ-neighborhoods-form-a-riemann-surface-basis.md

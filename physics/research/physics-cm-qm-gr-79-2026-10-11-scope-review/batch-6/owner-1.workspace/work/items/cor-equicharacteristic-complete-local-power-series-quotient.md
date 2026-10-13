@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-equicharacteristic-complete-local-power-series-quotient.md

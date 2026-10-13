@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-coextension-of-scalars-is-right-adjoint-to-restriction-of-scalars.md

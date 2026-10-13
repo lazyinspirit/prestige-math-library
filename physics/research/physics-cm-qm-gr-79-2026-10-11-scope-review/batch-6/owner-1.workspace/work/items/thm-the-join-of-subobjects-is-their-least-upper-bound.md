@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-join-of-subobjects-is-their-least-upper-bound.md

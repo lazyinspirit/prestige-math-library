@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/research/physics-em-sr-40-2026-10-08-step3b-pair-em-causal-wave-kernel-prerequisites-d4dbdfefc4484ecc.task.md

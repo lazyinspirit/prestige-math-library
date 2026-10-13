@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-character-ring-of-a-direct-product-is-the-tensor-product.md

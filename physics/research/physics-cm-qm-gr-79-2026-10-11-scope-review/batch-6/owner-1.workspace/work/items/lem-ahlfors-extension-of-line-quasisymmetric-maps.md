@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ahlfors-extension-of-line-quasisymmetric-maps.md

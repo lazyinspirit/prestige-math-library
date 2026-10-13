@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cycles-trees-and-forests-in-a-simple-graph.md

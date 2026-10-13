@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-chain-map-carries-cycles-to-cycles-and-boundaries-to-boundaries.md

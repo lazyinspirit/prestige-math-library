@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-generalized-dihedral-group-of-the-klein-four-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-trivial-one-braid-hhh-grading-normalization.md

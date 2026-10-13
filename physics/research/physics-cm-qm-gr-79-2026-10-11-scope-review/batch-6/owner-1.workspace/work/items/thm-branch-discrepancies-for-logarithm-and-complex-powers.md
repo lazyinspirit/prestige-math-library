@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-branch-discrepancies-for-logarithm-and-complex-powers.md

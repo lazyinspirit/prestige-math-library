@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-zero-homology-does-not-make-an-object-zero-in-the-homotopy-category.md

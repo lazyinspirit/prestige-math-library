@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-derived-hom-of-cyclic-abelian-groups.md

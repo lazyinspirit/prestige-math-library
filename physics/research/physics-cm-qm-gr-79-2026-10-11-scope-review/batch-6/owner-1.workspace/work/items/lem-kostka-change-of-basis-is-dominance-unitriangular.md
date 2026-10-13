@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kostka-change-of-basis-is-dominance-unitriangular.md

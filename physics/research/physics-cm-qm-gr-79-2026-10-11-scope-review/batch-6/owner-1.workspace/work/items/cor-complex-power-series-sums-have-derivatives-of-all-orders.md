@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-complex-power-series-sums-have-derivatives-of-all-orders.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-basic-wedge-is-multilinear-and-alternating.md

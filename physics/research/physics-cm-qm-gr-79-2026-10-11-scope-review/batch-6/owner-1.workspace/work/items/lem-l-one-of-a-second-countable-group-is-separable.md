@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-l-one-of-a-second-countable-group-is-separable.md

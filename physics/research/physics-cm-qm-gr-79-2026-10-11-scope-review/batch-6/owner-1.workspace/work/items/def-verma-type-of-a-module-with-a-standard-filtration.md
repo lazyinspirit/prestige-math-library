@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-verma-type-of-a-module-with-a-standard-filtration.md

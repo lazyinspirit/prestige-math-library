@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-version-can-fail-a-pointwise-identity-on-a-null-set.md

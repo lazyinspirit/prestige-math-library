@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-splitting-cofinal-branch-gives-antichain.md

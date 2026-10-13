@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-induced-modules-from-finite-dimensional-b-modules-have-type-the-weights.md

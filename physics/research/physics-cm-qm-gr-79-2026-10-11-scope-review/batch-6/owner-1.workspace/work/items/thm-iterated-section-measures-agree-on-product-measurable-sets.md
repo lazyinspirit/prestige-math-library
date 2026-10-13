@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-iterated-section-measures-agree-on-product-measurable-sets.md

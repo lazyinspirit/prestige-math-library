@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-formal-quantum-shuffle-borel-for-a-symmetrizable-cartan-datum.md

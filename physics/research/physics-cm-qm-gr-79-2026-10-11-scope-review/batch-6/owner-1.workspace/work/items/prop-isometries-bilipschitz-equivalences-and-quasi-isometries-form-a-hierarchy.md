@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-isometries-bilipschitz-equivalences-and-quasi-isometries-form-a-hierarchy.md

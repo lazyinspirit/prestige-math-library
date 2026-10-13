@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-naive-distribution-to-cnf-is-always-polynomial.md

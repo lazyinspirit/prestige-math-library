@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-serre-classes-are-stable-under-finite-filtrations.md

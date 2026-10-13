@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-word-problem-for-free-products-and-amalgams-with-decidable-membership.md

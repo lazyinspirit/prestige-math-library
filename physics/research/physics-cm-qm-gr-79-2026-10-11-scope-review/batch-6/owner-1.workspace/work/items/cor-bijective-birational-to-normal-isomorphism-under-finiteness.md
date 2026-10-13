@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-bijective-birational-to-normal-isomorphism-under-finiteness.md

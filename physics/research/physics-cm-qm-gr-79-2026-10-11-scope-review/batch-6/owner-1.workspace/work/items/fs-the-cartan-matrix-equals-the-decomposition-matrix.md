@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-cartan-matrix-equals-the-decomposition-matrix.md

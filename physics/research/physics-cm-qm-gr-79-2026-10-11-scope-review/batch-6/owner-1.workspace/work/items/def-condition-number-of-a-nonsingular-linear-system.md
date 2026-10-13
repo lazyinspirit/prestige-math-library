@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-condition-number-of-a-nonsingular-linear-system.md

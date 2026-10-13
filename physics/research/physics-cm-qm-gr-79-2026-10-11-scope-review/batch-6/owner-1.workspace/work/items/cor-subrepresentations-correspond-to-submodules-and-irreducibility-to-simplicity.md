@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-subrepresentations-correspond-to-submodules-and-irreducibility-to-simplicity.md

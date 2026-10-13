@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complex-lp-completeness-and-almost-everywhere-subsequences.md

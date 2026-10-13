@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-density-measure-integration-agrees-with-smooth-density-integration.md

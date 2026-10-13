@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-strictification-of-a-viscosity-test-function-by-a-quartic-perturbation.md

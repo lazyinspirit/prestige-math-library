@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-a-morphism-of-short-exact-sequences-with-invertible-outer-maps-is-invertible.md

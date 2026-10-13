@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-thom-disk-sphere-quotient-identifies-relative-and-reduced-cohomology.md

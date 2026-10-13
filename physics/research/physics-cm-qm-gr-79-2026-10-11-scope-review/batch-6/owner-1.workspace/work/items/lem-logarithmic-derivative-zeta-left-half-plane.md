@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-logarithmic-derivative-zeta-left-half-plane.md

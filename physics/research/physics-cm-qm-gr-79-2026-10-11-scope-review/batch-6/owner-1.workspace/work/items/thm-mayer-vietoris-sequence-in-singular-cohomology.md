@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-mayer-vietoris-sequence-in-singular-cohomology.md

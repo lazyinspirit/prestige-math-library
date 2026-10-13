@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-delete-only-relator-rewriting-is-order-dependent.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-gysin-pushforward-for-an-oriented-vector-bundle-zero-section.md

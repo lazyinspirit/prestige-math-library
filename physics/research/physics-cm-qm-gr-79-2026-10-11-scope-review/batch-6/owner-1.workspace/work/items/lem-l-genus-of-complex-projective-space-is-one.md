@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-l-genus-of-complex-projective-space-is-one.md

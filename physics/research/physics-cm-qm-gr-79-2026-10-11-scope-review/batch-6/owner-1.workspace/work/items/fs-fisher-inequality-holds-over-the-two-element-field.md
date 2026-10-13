@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-fisher-inequality-holds-over-the-two-element-field.md

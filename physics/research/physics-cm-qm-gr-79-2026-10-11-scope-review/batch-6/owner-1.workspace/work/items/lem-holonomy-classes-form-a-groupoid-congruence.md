@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-holonomy-classes-form-a-groupoid-congruence.md

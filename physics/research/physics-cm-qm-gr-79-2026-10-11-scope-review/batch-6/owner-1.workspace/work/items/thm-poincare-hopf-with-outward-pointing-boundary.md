@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-poincare-hopf-with-outward-pointing-boundary.md

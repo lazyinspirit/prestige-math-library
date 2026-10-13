@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-pullback-fibre-product-is-a-smooth-vector-bundle.md

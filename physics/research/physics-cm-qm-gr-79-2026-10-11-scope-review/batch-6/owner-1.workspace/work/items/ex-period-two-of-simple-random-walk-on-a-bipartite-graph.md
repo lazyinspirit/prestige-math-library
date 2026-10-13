@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-period-two-of-simple-random-walk-on-a-bipartite-graph.md

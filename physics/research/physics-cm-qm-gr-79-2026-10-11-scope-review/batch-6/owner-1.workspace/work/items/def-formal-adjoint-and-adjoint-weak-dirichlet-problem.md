@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-formal-adjoint-and-adjoint-weak-dirichlet-problem.md

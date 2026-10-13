@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-x-to-the-minus-one-half-is-unbounded-but-integrable.md

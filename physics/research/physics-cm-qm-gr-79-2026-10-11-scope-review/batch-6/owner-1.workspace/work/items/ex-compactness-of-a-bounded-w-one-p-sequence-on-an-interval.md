@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-compactness-of-a-bounded-w-one-p-sequence-on-an-interval.md

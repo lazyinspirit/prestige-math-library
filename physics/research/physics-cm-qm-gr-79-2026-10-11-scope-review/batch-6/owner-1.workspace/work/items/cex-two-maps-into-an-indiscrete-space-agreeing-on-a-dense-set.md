@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-two-maps-into-an-indiscrete-space-agreeing-on-a-dense-set.md

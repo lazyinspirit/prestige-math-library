@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-connecting-morphism-depends-on-the-choices-made-in-its-construction.md

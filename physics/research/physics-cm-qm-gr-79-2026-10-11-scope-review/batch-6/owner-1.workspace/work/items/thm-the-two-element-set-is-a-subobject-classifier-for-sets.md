@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-two-element-set-is-a-subobject-classifier-for-sets.md

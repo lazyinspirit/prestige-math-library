@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-nonintegrable-observable-has-divergent-ergodic-averages.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-irreducible-holomorphic-germ-is-prime.md

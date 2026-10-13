@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-biproduct-of-morphisms-is-the-diagonal-matrix.md

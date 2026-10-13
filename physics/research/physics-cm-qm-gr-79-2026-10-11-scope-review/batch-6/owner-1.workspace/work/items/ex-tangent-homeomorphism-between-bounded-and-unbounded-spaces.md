@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-tangent-homeomorphism-between-bounded-and-unbounded-spaces.md

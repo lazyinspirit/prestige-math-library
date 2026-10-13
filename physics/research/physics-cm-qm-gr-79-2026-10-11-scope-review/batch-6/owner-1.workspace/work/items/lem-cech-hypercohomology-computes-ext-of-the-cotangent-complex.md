@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-cech-hypercohomology-computes-ext-of-the-cotangent-complex.md

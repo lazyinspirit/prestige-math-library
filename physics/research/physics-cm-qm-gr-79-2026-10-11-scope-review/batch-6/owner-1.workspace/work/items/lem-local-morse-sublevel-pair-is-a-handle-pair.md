@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-local-morse-sublevel-pair-is-a-handle-pair.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-differential-of-a-diffeomorphism-is-an-isomorphism.md

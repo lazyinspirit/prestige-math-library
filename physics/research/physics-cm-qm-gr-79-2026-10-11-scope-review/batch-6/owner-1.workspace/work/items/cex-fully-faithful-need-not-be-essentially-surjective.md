@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-fully-faithful-need-not-be-essentially-surjective.md

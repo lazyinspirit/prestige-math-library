@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-fusion-rules-for-a-supplied-finite-simple-family.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-complete-reducibility-and-reynolds-operator-for-complex-reductive-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-same-complex-lie-algebra-with-distinct-global-groups-sl-two-and-pgl-two.md

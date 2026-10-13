@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-prime-spectrum-insensitive-to-nilpotents.md

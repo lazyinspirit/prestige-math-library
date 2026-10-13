@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-change-of-variables-with-a-degenerate-parameter-boundary.md

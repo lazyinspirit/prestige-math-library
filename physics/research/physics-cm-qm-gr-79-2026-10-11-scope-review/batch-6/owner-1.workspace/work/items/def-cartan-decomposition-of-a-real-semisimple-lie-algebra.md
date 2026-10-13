@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cartan-decomposition-of-a-real-semisimple-lie-algebra.md

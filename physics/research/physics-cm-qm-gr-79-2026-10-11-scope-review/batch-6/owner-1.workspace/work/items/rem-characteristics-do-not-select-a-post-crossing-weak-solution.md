@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-characteristics-do-not-select-a-post-crossing-weak-solution.md

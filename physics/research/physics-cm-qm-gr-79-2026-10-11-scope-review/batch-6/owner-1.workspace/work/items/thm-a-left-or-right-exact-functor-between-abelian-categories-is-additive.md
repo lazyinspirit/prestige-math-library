@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-left-or-right-exact-functor-between-abelian-categories-is-additive.md

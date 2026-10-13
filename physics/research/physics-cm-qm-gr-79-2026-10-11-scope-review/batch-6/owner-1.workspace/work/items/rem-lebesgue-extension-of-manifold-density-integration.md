@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-lebesgue-extension-of-manifold-density-integration.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-restricted-duality-is-an-exact-involution-on-category-o.md

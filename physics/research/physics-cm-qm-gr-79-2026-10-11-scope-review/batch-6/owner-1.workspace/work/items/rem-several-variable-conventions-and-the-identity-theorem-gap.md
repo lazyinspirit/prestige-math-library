@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-several-variable-conventions-and-the-identity-theorem-gap.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-there-is-exactly-one-extraspecial-group-of-each-admissible-order.md

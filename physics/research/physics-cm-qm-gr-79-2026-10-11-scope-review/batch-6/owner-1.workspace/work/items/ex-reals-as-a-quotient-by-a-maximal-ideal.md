@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-reals-as-a-quotient-by-a-maximal-ideal.md

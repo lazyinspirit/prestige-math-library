@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-radial-boundary-limit-does-not-force-tangential-limit.md

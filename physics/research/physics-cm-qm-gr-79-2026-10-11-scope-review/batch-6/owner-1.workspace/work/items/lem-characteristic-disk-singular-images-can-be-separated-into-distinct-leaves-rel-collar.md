@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-characteristic-disk-singular-images-can-be-separated-into-distinct-leaves-rel-collar.md

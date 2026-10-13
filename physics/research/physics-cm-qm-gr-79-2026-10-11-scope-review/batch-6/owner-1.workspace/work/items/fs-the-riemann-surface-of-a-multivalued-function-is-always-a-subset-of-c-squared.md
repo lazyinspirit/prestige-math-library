@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-riemann-surface-of-a-multivalued-function-is-always-a-subset-of-c-squared.md

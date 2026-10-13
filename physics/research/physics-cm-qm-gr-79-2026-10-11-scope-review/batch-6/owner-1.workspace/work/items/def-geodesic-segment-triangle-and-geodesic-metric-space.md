@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-geodesic-segment-triangle-and-geodesic-metric-space.md

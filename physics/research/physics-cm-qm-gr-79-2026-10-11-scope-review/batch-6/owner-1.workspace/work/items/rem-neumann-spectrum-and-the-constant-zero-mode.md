@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-neumann-spectrum-and-the-constant-zero-mode.md

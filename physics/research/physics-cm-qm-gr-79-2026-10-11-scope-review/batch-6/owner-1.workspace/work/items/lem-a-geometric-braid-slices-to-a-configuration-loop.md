@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-geometric-braid-slices-to-a-configuration-loop.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-hh-universal-coxeter-hecke-parameters-and-presentation.md

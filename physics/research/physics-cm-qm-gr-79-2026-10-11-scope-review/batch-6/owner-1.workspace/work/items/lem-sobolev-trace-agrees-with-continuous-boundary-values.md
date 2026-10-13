@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sobolev-trace-agrees-with-continuous-boundary-values.md

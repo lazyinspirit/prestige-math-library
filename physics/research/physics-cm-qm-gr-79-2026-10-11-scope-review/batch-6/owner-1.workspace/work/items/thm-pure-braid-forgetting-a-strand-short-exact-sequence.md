@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pure-braid-forgetting-a-strand-short-exact-sequence.md

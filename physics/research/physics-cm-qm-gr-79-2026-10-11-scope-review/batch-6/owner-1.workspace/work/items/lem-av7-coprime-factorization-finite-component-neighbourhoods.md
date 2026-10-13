@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-av7-coprime-factorization-finite-component-neighbourhoods.md

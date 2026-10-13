@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hamiltonian-flows-preserve-the-symplectic-form.md

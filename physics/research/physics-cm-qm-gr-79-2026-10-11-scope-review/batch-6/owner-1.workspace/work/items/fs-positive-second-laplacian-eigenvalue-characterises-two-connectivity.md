@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-positive-second-laplacian-eigenvalue-characterises-two-connectivity.md

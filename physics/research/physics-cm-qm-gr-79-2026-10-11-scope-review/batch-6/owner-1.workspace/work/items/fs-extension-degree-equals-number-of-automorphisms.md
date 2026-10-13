@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-extension-degree-equals-number-of-automorphisms.md

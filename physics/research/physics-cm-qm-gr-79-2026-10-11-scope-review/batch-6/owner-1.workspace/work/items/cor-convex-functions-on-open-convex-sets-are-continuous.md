@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-convex-functions-on-open-convex-sets-are-continuous.md

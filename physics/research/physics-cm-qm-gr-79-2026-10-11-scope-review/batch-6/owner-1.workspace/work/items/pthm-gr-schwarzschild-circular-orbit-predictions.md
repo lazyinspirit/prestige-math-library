@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/pthm-gr-schwarzschild-circular-orbit-predictions.md

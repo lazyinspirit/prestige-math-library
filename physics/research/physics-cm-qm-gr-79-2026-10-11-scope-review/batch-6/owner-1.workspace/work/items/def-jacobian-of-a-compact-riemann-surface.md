@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-jacobian-of-a-compact-riemann-surface.md

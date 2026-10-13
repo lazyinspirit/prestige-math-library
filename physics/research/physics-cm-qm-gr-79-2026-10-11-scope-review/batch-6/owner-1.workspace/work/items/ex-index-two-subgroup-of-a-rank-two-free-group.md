@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-index-two-subgroup-of-a-rank-two-free-group.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-graded-derivation-of-the-algebra-of-differential-forms.md

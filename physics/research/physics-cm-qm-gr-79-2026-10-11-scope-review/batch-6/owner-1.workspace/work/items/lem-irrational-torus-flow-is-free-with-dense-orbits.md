@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-irrational-torus-flow-is-free-with-dense-orbits.md

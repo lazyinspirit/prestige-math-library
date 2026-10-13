@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-completion-preserves-cohen-macaulayness-two-directions.md

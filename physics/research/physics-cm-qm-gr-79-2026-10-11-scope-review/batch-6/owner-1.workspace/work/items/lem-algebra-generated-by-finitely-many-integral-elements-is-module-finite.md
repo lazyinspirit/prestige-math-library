@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-algebra-generated-by-finitely-many-integral-elements-is-module-finite.md

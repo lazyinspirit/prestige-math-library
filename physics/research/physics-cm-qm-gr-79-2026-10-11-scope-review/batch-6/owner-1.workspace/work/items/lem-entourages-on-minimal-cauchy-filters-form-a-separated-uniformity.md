@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-entourages-on-minimal-cauchy-filters-form-a-separated-uniformity.md

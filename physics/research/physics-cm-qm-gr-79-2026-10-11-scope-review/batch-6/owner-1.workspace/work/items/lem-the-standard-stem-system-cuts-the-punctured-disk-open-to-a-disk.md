@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-standard-stem-system-cuts-the-punctured-disk-open-to-a-disk.md

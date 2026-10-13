@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-uniform-closure-of-a-general-real-function-algebra-is-a-lattice.md

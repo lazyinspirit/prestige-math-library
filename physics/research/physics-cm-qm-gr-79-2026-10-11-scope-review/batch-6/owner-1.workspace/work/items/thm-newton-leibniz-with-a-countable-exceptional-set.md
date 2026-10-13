@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-newton-leibniz-with-a-countable-exceptional-set.md

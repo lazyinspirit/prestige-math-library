@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-morphisms-from-the-constant-sheaf-are-global-sections.md

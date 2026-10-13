@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-one-subdivision-depth-does-not-make-all-singular-simplices-cover-small.md

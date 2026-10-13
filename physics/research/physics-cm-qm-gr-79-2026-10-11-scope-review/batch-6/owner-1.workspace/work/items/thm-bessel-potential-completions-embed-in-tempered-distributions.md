@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bessel-potential-completions-embed-in-tempered-distributions.md

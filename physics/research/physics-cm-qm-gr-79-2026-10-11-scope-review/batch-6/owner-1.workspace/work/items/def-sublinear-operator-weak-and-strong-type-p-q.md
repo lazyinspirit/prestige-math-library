@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-sublinear-operator-weak-and-strong-type-p-q.md

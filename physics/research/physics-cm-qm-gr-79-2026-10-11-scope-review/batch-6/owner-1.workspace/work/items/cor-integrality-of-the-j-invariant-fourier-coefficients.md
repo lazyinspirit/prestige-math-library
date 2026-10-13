@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-integrality-of-the-j-invariant-fourier-coefficients.md

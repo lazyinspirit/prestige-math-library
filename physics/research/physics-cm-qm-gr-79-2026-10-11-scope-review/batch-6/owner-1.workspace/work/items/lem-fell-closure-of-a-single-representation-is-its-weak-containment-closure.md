@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fell-closure-of-a-single-representation-is-its-weak-containment-closure.md

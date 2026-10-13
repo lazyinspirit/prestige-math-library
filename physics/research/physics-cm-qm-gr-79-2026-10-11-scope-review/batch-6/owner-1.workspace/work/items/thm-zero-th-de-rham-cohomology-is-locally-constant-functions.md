@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-zero-th-de-rham-cohomology-is-locally-constant-functions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-nonorientable-manifold-has-no-ordinary-integral-fundamental-class.md

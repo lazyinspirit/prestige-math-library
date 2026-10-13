@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-reduced-resolvent-or-group-inverse-at-a-simple-eigenvalue.md

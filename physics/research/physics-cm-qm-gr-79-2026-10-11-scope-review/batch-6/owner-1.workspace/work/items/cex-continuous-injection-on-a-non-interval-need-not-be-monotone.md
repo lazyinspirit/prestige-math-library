@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-continuous-injection-on-a-non-interval-need-not-be-monotone.md

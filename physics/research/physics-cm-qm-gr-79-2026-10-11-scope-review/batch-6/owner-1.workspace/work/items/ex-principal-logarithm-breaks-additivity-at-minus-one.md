@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-principal-logarithm-breaks-additivity-at-minus-one.md

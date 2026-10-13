@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-the-two-dimensional-affine-lie-algebra-is-solvable-not-nilpotent.md

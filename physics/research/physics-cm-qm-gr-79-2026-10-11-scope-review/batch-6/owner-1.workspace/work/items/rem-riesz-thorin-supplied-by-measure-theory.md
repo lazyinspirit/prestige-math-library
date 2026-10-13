@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-riesz-thorin-supplied-by-measure-theory.md

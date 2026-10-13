@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-galois-extension-has-finitely-many-intermediate-fields.md

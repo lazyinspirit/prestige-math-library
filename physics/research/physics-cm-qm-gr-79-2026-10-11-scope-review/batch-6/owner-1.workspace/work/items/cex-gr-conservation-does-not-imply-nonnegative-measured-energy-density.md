@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-gr-conservation-does-not-imply-nonnegative-measured-energy-density.md

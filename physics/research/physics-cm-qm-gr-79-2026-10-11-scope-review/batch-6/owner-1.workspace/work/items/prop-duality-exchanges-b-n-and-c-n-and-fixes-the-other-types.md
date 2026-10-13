@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-duality-exchanges-b-n-and-c-n-and-fixes-the-other-types.md

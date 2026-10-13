@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cohomology-of-a-finite-cyclic-group-from-the-periodic-resolution.md

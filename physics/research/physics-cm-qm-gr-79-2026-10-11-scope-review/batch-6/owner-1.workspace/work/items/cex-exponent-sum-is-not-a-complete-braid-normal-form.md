@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-exponent-sum-is-not-a-complete-braid-normal-form.md

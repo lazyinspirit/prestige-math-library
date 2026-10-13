@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-sine-sends-a-half-strip-to-the-upper-half-plane.md

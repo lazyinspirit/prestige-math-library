@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-sigma-algebras-are-lambda-systems-and-monotone-classes.md

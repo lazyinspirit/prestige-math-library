@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-cg-crossing-interval-and-non-lattice-absolute-order.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound.md

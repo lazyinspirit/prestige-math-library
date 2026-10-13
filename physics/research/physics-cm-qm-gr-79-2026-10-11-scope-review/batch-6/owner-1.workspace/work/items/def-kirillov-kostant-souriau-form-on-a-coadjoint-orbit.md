@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-kirillov-kostant-souriau-form-on-a-coadjoint-orbit.md

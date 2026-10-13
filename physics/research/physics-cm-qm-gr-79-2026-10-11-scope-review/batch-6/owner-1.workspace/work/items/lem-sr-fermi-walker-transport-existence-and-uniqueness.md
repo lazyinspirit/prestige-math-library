@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-sr-fermi-walker-transport-existence-and-uniqueness.md

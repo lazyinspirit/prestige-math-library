@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-exact-module-tensor-functors-correspond-to-right-flat-bimodules.md

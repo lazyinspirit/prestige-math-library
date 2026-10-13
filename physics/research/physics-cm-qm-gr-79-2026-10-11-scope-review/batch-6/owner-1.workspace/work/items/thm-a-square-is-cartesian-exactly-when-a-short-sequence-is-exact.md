@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-square-is-cartesian-exactly-when-a-short-sequence-is-exact.md

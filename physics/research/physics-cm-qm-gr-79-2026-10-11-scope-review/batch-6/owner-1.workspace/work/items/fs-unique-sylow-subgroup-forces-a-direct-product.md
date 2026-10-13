@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-unique-sylow-subgroup-forces-a-direct-product.md

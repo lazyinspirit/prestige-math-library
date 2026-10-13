@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kneser-glaeser-rough-composition-on-flat-sets.md

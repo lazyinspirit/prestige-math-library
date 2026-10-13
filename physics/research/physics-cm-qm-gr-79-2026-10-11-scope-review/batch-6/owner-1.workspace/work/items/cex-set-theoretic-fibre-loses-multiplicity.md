@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-set-theoretic-fibre-loses-multiplicity.md

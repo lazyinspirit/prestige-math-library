@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-cg-abstract-isometric-polyhedral-gluing-and-chain-metric.md

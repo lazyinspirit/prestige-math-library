@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-closed-null-fence-word-has-an-essential-lower-endpoint.md

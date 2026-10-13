@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-ito-isometry-and-linearity-in-predictable-l2.md

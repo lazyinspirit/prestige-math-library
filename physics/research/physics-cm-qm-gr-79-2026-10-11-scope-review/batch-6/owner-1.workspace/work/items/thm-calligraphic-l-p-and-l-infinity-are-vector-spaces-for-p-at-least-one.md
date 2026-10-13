@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one.md

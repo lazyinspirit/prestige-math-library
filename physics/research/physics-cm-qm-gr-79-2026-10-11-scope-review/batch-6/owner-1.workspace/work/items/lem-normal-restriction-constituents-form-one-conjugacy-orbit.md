@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-normal-restriction-constituents-form-one-conjugacy-orbit.md

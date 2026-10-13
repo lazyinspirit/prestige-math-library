@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-nonaffine-generic-scheme-quotient-flat-equivalence-relation.md

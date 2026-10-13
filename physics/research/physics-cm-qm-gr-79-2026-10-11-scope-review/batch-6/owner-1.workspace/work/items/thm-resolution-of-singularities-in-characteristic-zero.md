@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-resolution-of-singularities-in-characteristic-zero.md

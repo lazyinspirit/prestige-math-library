@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bender-knuth-involutions-on-semistandard-tableaux.md

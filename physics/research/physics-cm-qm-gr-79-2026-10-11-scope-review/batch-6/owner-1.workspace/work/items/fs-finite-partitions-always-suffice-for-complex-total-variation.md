@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-finite-partitions-always-suffice-for-complex-total-variation.md

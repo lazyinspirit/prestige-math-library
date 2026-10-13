@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-hawaiian-earring-is-compact-and-path-connected.md

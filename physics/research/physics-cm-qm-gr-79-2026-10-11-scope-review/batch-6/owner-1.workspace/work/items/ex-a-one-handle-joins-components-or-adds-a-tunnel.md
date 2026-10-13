@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-one-handle-joins-components-or-adds-a-tunnel.md

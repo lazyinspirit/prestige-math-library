@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-hodge-star-is-a-smooth-bundle-isomorphism.md

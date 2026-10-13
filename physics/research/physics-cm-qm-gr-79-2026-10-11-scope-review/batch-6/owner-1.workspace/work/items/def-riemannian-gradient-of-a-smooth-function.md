@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-riemannian-gradient-of-a-smooth-function.md

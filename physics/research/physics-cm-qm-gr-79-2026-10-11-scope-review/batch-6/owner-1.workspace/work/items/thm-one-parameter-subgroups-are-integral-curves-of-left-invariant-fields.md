@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-one-parameter-subgroups-are-integral-curves-of-left-invariant-fields.md

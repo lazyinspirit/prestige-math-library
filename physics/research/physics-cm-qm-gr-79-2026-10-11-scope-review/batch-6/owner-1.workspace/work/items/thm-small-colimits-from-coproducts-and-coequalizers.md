@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-small-colimits-from-coproducts-and-coequalizers.md

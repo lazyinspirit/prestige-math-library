@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-cubic-image-curve-has-winding-number-three-about-the-origin.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-vogan-and-satake-diagrams-give-equivalent-real-form-classifications.md

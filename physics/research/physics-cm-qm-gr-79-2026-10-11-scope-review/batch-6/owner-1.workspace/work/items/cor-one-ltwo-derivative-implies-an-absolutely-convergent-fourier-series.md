@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-one-ltwo-derivative-implies-an-absolutely-convergent-fourier-series.md

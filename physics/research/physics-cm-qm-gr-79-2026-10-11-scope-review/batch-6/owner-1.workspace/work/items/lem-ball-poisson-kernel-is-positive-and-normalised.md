@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-ball-poisson-kernel-is-positive-and-normalised.md

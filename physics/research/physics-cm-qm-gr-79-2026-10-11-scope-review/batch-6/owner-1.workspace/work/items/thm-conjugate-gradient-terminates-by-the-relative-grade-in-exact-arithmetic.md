@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-conjugate-gradient-terminates-by-the-relative-grade-in-exact-arithmetic.md

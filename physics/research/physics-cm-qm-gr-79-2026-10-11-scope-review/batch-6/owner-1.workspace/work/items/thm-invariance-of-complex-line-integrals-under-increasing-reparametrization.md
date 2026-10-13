@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-invariance-of-complex-line-integrals-under-increasing-reparametrization.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-coordinate-random-elements-on-a-countable-product-are-independent.md

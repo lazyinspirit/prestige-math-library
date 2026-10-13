@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-classical-affine-line-coordinate-local-and-function-field-dictionary.md

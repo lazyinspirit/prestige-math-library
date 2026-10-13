@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex.md

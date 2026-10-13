@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cylindrical-shell-formula-for-solids-of-revolution.md

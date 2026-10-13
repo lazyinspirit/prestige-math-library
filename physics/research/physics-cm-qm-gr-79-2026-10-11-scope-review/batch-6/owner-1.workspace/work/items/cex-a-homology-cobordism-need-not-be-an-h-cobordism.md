@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-homology-cobordism-need-not-be-an-h-cobordism.md

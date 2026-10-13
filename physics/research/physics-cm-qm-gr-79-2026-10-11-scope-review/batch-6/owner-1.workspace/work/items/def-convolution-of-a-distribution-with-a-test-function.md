@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-convolution-of-a-distribution-with-a-test-function.md

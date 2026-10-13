@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-walsh-hadamard-encoding-and-relative-distance.md

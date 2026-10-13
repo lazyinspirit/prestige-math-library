@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-the-union-of-two-domains-of-holomorphy-is-a-domain-of-holomorphy.md

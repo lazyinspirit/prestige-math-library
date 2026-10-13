@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-graded-tensor-equivalences-induce-laurent-linear-k-zero-actions.md

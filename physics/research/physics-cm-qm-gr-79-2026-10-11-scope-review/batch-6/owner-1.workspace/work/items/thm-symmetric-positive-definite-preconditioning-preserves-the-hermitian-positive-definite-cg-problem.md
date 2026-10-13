@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-symmetric-positive-definite-preconditioning-preserves-the-hermitian-positive-definite-cg-problem.md

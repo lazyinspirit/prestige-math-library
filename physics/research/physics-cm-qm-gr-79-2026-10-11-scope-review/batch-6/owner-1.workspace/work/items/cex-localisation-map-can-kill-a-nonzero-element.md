@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-localisation-map-can-kill-a-nonzero-element.md

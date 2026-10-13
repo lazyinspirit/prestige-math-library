@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-continuous-finite-dimensional-representations-of-profinite-groups-factor-through-finite-quotients.md

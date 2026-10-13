@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-parametrized-morse-trajectory-space-is-a-manifold.md

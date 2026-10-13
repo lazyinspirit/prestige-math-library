@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-a-coend-is-a-colimit-weighted-by-the-hom-bifunctor.md

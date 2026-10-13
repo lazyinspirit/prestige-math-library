@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-uniqueness-of-multivariable-power-series-coefficients.md

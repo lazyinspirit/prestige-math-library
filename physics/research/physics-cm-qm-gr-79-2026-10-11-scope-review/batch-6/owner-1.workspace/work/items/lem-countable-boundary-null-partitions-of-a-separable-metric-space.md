@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-countable-boundary-null-partitions-of-a-separable-metric-space.md

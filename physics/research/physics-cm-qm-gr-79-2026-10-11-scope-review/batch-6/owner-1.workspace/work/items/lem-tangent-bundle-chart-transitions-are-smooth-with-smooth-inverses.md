@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tangent-bundle-chart-transitions-are-smooth-with-smooth-inverses.md

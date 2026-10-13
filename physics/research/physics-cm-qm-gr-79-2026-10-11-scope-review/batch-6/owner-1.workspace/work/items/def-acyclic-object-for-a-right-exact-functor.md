@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-acyclic-object-for-a-right-exact-functor.md

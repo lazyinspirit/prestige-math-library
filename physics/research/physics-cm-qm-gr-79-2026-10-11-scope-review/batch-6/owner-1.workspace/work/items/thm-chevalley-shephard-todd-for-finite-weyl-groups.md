@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-chevalley-shephard-todd-for-finite-weyl-groups.md

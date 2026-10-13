@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-rank-jumping-kernel-is-not-a-vector-subbundle.md

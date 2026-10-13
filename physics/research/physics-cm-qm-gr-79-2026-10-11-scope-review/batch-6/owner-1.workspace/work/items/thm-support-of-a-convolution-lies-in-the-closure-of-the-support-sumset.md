@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset.md

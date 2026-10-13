@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-completed-formal-character-ring-for-downward-cones.md

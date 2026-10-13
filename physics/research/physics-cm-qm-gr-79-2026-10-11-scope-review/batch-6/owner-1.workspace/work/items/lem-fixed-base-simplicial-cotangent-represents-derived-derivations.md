@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-fixed-base-simplicial-cotangent-represents-derived-derivations.md

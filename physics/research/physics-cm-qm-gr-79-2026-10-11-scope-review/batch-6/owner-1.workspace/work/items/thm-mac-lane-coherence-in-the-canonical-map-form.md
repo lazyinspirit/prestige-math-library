@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-mac-lane-coherence-in-the-canonical-map-form.md

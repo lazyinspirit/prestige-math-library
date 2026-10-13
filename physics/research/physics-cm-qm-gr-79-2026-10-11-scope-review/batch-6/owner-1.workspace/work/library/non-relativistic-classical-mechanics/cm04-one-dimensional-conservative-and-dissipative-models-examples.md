@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/library/non-relativistic-classical-mechanics/cm04-one-dimensional-conservative-and-dissipative-models-examples.md

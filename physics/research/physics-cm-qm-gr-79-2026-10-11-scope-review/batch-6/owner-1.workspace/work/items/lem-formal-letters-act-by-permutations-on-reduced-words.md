@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-formal-letters-act-by-permutations-on-reduced-words.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-canonical-truncations-fit-a-distinguished-triangle.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-riemannian-length-is-invariant-under-orientation-preserving-piecewise-c-one-reparametrization.md

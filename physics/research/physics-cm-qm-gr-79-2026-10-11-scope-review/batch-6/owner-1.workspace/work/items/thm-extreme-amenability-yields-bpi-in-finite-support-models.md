@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-extreme-amenability-yields-bpi-in-finite-support-models.md

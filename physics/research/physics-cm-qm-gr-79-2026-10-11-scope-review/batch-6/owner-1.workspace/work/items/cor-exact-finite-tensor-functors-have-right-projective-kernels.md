@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-exact-finite-tensor-functors-have-right-projective-kernels.md

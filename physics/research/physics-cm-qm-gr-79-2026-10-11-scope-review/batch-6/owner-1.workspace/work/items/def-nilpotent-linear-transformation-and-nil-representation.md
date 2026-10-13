@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-nilpotent-linear-transformation-and-nil-representation.md

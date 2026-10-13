@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-pid-kunneth-splitting-from-cycle-boundary-presentations.md

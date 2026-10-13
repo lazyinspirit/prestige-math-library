@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-wedge-product-descends-to-de-rham-cohomology.md

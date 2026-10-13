@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-density-computed-for-a-presheaf-on-a-two-object-category.md

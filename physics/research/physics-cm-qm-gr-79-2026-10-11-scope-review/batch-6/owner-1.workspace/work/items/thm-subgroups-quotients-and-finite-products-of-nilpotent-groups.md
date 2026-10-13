@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-subgroups-quotients-and-finite-products-of-nilpotent-groups.md

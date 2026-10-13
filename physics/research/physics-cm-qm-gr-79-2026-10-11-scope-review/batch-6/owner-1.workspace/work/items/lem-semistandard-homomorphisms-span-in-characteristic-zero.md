@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-semistandard-homomorphisms-span-in-characteristic-zero.md

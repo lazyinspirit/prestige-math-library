@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-connected-cobordisms-admit-presentations-without-superfluous-zero-handles.md

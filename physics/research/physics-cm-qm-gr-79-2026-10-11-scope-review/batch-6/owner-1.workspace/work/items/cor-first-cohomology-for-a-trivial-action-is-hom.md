@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-first-cohomology-for-a-trivial-action-is-hom.md

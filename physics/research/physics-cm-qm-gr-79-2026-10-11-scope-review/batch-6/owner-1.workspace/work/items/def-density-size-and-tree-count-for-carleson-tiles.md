@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-density-size-and-tree-count-for-carleson-tiles.md

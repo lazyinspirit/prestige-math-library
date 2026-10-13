@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-defect-group-and-numerical-defect-of-a-block.md

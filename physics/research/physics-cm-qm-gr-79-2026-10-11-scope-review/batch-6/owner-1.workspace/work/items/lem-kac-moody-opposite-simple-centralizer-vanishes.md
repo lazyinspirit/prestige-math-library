@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-kac-moody-opposite-simple-centralizer-vanishes.md

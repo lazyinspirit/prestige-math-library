@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-disjoint-coordinate-neighborhoods-evenly-cover-unordered-configurations.md

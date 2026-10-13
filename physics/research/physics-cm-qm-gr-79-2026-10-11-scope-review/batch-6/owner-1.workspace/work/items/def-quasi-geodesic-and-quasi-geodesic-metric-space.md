@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-quasi-geodesic-and-quasi-geodesic-metric-space.md

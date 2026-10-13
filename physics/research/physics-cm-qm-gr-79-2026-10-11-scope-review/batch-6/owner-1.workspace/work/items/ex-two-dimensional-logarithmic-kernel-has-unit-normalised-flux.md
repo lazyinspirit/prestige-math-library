@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-two-dimensional-logarithmic-kernel-has-unit-normalised-flux.md

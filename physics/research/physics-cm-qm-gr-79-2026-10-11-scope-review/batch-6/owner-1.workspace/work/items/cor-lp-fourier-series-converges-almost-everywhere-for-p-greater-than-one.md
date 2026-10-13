@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-lp-fourier-series-converges-almost-everywhere-for-p-greater-than-one.md

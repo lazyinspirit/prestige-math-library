@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-coherent-needs-noetherian-or-coherent-ring-care.md

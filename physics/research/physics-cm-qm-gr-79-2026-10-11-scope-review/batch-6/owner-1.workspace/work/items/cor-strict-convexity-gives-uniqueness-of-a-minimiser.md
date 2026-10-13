@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-strict-convexity-gives-uniqueness-of-a-minimiser.md

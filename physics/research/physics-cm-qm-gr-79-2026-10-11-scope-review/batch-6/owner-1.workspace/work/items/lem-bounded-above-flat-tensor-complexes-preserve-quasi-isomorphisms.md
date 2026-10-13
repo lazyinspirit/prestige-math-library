@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bounded-above-flat-tensor-complexes-preserve-quasi-isomorphisms.md

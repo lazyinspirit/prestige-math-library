@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-augmentation-preserving-map-of-projective-resolutions.md

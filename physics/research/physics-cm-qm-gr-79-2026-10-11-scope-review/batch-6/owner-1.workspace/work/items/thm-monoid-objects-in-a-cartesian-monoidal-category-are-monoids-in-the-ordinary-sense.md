@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-monoid-objects-in-a-cartesian-monoidal-category-are-monoids-in-the-ordinary-sense.md

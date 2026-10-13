@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-large-schroder-numbers-as-a-binomial-sum-of-catalan-numbers.md

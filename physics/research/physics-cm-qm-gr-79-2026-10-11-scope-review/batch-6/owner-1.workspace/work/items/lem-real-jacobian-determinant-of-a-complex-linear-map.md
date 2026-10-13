@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-real-jacobian-determinant-of-a-complex-linear-map.md

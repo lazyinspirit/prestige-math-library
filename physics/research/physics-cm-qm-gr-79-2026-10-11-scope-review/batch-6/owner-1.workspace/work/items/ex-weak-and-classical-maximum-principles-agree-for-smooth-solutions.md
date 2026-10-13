@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-weak-and-classical-maximum-principles-agree-for-smooth-solutions.md

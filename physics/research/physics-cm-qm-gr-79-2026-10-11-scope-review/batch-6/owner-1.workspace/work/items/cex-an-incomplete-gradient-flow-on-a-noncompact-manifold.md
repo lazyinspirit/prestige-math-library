@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-an-incomplete-gradient-flow-on-a-noncompact-manifold.md

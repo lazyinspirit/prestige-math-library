@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-noether-normalisation-finite-field-exponent-substitution.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-limsup-and-liminf-of-nonnegative-extended-sequences.md

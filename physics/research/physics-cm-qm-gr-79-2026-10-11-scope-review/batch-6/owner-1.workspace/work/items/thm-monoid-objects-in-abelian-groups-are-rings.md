@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-monoid-objects-in-abelian-groups-are-rings.md

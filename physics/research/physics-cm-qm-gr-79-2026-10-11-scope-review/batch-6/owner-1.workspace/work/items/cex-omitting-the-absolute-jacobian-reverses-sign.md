@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-omitting-the-absolute-jacobian-reverses-sign.md

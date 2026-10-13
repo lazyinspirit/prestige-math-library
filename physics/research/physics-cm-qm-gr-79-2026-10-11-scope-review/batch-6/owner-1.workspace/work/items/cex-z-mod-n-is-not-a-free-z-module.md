@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-z-mod-n-is-not-a-free-z-module.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hh-tensor-injections-quotients-and-kernels-over-a-field.md

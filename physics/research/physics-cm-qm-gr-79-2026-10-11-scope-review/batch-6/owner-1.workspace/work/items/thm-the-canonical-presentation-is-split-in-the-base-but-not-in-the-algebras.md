@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-canonical-presentation-is-split-in-the-base-but-not-in-the-algebras.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-outer-multiplicity-is-not-the-semistandard-tableau-count.md

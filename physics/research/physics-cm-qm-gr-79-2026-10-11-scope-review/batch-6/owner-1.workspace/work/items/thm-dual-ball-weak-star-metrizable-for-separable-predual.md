@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-dual-ball-weak-star-metrizable-for-separable-predual.md

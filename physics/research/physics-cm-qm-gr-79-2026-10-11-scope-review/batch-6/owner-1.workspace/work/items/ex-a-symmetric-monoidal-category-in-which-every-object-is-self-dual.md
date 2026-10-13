@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-symmetric-monoidal-category-in-which-every-object-is-self-dual.md

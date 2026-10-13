@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-reduced-noetherian-total-fractions-and-normal-components.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-frattini-subgroup-of-an-elementary-abelian-p-group.md

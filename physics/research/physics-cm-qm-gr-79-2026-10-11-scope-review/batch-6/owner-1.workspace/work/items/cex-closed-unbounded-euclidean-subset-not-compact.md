@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-closed-unbounded-euclidean-subset-not-compact.md

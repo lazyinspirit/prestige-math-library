@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-fourier-transform-is-a-topological-automorphism-of-tempered-distributions.md

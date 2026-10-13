@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-group-ring-is-commutative-iff-the-group-is-abelian.md

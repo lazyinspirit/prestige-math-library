@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-brauer-images-of-primitive-idempotent-decompositions.md

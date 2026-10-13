@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-hensel-factor-lifting-over-a-complete-valued-field.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-trace-theorem-fails-on-a-standard-outward-cusp-without-domain-control.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-finite-abelian-group-is-the-galois-group-of-a-cyclotomic-field.md

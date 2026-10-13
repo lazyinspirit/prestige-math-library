@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-finite-subgroups-of-units-in-a-domain-are-cyclic.md

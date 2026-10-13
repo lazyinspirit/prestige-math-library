@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-galois-group-of-a-rational-cyclotomic-field.md

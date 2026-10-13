@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-decomposition-numbers-are-nonnegative-integers.md

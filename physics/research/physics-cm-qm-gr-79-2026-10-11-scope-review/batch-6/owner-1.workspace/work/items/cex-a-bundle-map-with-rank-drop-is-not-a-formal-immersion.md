@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-a-bundle-map-with-rank-drop-is-not-a-formal-immersion.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-interpolation-of-an-integral-averaging-operator.md

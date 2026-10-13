@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-k-transitive-and-k-homogeneous-actions.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-winding-numbers-of-a-keyhole-contour.md

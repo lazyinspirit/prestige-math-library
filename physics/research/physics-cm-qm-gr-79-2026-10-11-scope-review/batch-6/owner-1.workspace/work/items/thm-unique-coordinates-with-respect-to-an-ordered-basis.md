@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-unique-coordinates-with-respect-to-an-ordered-basis.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-tangent-space-of-a-regular-level-set-is-the-kernel.md

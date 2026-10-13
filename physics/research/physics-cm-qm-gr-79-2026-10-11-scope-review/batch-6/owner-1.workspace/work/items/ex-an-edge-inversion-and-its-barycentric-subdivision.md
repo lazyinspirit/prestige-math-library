@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-edge-inversion-and-its-barycentric-subdivision.md

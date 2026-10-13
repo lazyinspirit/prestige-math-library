@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-smooth-functions-defined-locally-can-be-glued-by-a-partition-of-unity.md

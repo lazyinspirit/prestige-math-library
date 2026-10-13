@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-every-level-set-of-a-smooth-map-is-a-graph.md

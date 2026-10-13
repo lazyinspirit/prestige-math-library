@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-surface-completion-base-change-preserves-closed-fibre-local-completions.md

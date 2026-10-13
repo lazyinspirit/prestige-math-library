@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-birkhoff-limit-identification-on-finite-measure-spaces.md

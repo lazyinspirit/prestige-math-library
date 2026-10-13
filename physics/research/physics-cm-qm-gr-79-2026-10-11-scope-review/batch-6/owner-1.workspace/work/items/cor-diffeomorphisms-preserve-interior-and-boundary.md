@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-diffeomorphisms-preserve-interior-and-boundary.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-disconnected-neumann-domain-has-multiple-zero-eigenvalue.md

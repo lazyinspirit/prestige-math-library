@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-generating-pair-decomposition-of-an-extraspecial-group-of-order-thirty-two.md

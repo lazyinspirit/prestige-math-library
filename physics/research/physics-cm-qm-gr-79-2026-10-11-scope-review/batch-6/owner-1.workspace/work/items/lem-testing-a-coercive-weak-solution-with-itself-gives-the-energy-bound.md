@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-testing-a-coercive-weak-solution-with-itself-gives-the-energy-bound.md

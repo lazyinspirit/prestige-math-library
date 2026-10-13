@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-borel-measure-finite-on-compact-sets-on-r.md

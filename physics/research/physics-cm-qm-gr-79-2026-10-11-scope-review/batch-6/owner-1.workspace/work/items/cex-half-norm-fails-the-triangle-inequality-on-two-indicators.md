@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-half-norm-fails-the-triangle-inequality-on-two-indicators.md

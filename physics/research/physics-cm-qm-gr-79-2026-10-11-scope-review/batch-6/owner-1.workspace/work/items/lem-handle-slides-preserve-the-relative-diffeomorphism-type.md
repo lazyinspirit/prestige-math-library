@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-handle-slides-preserve-the-relative-diffeomorphism-type.md

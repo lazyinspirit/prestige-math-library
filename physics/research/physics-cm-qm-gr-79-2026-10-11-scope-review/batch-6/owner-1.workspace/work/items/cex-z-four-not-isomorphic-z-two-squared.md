@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-z-four-not-isomorphic-z-two-squared.md

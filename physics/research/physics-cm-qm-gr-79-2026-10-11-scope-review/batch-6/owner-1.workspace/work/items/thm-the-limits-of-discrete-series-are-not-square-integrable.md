@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-the-limits-of-discrete-series-are-not-square-integrable.md

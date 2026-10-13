@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-sums-of-three-squares-are-not-closed-under-products.md

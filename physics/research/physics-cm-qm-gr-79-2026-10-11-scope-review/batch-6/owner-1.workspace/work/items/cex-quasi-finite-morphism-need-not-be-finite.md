@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-quasi-finite-morphism-need-not-be-finite.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-tensoring-preserves-relative-projectivity-for-finite-group-modules.md

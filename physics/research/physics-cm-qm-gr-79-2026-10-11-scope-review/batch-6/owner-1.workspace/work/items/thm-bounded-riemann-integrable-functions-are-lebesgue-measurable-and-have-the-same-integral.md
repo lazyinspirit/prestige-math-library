@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral.md

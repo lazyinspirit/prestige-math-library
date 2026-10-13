@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-the-eta-series-represents-the-continuation-where-the-dirichlet-series-diverges.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-pure-mapping-class-group-of-a-punctured-disk.md

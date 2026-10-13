@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-zf-arithmetic-interpretation-and-effective-axioms.md

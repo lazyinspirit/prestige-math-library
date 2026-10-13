@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-word-whose-weight-is-coprime-to-its-length-has-a-trivial-shift-stabiliser.md

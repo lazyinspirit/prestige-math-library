@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-complete-boolean-algebra-and-regular-open-sets.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-compact-function-families-are-equicontinuous-on-a-locally-compact-hausdorff-domain.md

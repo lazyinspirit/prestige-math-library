@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-gr-cauchy-surface-implies-globally-hyperbolic.md

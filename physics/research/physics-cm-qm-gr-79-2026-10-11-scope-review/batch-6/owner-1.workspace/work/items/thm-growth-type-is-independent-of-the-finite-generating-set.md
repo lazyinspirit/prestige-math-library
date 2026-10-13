@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-growth-type-is-independent-of-the-finite-generating-set.md

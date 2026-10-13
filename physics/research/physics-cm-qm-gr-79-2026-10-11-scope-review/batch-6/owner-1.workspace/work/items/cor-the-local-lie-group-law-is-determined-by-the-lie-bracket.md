@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-local-lie-group-law-is-determined-by-the-lie-bracket.md

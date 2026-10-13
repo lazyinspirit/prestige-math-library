@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-powers-expand-in-the-falling-factorial-basis.md

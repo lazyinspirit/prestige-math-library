@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-a-preadditive-category-with-two-objects-and-a-nonzero-hom-group.md

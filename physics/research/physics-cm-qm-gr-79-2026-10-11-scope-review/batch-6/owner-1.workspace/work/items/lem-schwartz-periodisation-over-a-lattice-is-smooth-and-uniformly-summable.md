@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-schwartz-periodisation-over-a-lattice-is-smooth-and-uniformly-summable.md

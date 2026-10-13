@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-a-proper-verma-submodule-misses-the-highest-weight-line.md

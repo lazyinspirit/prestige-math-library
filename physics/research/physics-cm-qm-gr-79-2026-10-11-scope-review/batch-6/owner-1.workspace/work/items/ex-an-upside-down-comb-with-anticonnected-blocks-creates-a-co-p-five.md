@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-an-upside-down-comb-with-anticonnected-blocks-creates-a-co-p-five.md

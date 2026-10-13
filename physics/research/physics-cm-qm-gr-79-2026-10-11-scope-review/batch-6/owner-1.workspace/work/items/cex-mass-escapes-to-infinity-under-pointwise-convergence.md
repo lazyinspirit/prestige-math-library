@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cex-mass-escapes-to-infinity-under-pointwise-convergence.md

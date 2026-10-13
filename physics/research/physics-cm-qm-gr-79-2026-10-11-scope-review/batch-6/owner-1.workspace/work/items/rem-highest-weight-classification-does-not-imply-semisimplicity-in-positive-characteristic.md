@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/rem-highest-weight-classification-does-not-imply-semisimplicity-in-positive-characteristic.md

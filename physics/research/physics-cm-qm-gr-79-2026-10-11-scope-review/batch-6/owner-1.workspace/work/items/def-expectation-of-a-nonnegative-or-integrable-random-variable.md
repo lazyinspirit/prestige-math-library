@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/def-expectation-of-a-nonnegative-or-integrable-random-variable.md

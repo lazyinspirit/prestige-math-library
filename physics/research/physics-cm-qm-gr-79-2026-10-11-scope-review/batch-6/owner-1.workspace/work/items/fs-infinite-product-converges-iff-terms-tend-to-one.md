@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/fs-infinite-product-converges-iff-terms-tend-to-one.md

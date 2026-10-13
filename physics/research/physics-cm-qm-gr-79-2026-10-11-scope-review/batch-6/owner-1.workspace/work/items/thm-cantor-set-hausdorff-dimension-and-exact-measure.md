@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-cantor-set-hausdorff-dimension-and-exact-measure.md

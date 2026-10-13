@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-bgg-euler-character-gives-the-weyl-numerator.md

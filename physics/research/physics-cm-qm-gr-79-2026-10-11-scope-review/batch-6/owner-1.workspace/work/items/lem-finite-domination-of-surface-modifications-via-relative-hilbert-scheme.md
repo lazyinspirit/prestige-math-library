@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-finite-domination-of-surface-modifications-via-relative-hilbert-scheme.md

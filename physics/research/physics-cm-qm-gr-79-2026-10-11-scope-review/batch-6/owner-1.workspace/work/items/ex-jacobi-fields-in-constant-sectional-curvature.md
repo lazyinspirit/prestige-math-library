@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-jacobi-fields-in-constant-sectional-curvature.md

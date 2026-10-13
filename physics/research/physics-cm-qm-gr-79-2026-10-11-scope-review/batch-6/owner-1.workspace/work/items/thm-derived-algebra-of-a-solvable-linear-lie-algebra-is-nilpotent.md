@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-derived-algebra-of-a-solvable-linear-lie-algebra-is-nilpotent.md

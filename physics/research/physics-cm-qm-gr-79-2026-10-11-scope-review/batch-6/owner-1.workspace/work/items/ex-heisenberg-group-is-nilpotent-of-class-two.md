@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-heisenberg-group-is-nilpotent-of-class-two.md

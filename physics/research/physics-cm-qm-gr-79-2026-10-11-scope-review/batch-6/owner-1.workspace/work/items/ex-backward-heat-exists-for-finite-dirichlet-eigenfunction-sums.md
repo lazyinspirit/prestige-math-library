@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-backward-heat-exists-for-finite-dirichlet-eigenfunction-sums.md

@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/cor-the-class-of-all-graphs-is-not-erdos-hajnal.md

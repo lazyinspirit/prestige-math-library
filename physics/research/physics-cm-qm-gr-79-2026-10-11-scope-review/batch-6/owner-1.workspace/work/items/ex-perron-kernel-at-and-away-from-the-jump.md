@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-perron-kernel-at-and-away-from-the-jump.md

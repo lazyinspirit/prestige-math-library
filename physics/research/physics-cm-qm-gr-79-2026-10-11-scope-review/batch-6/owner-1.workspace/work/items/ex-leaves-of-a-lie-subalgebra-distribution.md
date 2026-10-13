@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-leaves-of-a-lie-subalgebra-distribution.md

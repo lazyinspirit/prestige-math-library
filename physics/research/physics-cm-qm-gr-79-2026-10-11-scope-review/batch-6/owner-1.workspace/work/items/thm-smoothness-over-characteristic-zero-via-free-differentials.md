@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-smoothness-over-characteristic-zero-via-free-differentials.md

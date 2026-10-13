@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/ex-subharmonic-quartic-and-harmonic-saddle.md

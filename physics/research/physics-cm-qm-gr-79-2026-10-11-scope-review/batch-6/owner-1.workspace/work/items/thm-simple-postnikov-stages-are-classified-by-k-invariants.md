@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-simple-postnikov-stages-are-classified-by-k-invariants.md

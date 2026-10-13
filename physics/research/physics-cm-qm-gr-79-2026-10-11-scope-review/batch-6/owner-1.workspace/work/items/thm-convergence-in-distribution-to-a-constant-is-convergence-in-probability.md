@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-convergence-in-distribution-to-a-constant-is-convergence-in-probability.md

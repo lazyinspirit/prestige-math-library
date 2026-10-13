@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/lem-the-associated-graded-of-filtered-homology-is-a-subquotient-of-chain-level-data.md

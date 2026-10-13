@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/prop-geodesic-curvature-under-orientation-and-parameter-reversal.md

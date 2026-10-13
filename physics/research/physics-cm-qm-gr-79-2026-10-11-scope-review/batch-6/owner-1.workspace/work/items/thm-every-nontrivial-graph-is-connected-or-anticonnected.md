@@ -1,1 +1,0 @@
-/home/lazyinspirit/Projects/prestige-math-library/physics/items/thm-every-nontrivial-graph-is-connected-or-anticonnected.md
