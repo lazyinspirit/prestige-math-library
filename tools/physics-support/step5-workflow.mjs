@@ -19,6 +19,7 @@ import { syncMaintenance, maintenanceStatus, prepareMaintenance, collectMaintena
 import { orderedItems, runPages } from './item-dependency-levels.mjs';
 import { ownerRepairHandoffs, ownerHandoffPhase } from './step5-owner-repair-handoffs.mjs';
 import { ownerFormatRepair } from './step5-owner-format-repair.mjs';
+import { certificationEvidenceTransition } from './step5-certification-transition.mjs';
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -759,7 +760,7 @@ export function prepareGateRepairPack(root,run,phase,round,failures) {
   frozen(path,pack);writeTasks(root,pack,'repair');return pack;
 }
 
-export function verifyCertification(root,run,{allowMissing=true}={}) {
+function readCertification(root,run,{allowMissing=true}={}) {
   const path=join(workflowDir(root,run),'certification.json');
   if(!existsSync(path)){if(allowMissing)return null;throw Error('Step 5 certification missing');}
   const row=read(path);
@@ -768,7 +769,12 @@ export function verifyCertification(root,run,{allowMissing=true}={}) {
   requireValue(sha256===digest(payload),'Step 5 certification payload changed');
   const seen=new Set();for(const item of row.items){requireValue(!seen.has(item.id)&&['item_sha256','context_sha256','guard_sha256'].every(k=>/^[a-f0-9]{64}$/.test(item[k]??'')),`malformed Step 5 certificate item ${item.id}`);seen.add(item.id);}
   const created=new Set();for(const item of row.creations??[]){requireValue(!created.has(item.id)&&seen.has(item.id)&&typeof item.author_result==='string',`malformed Step 5 creation ${item.id}`);created.add(item.id);creationRegistration(root,run,item);}
-  verifyEvidence(row.evidence);
+  return row;
+}
+
+export function verifyCertification(root,run,options={}) {
+  const row=readCertification(root,run,options);
+  if(row)verifyEvidence(row.evidence);
   return row;
 }
 
@@ -787,8 +793,11 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const dir=workflowDir(root,run), closedPath=impactClosedPath(root,run,phase,round),result=read(closedPath);
   verifyEvidence(result.evidence);
   const source=phase==='impact-initial'?'initial':'repeat';
-  const prior=verifyCertification(root,run);
+  const prior=readCertification(root,run);
   const sourceResult=phase==='gate'?null:read(join(dir,`${source}-${round}-collected.json`));
+  verifyEvidence(sourceResult?.evidence);
+  const transition=certificationEvidenceTransition(root,run,phase,round,prior,sourceResult,result);
+  verifyEvidence({...prior?.evidence,...transition.evidence});
   const allReviews=[...(sourceResult?.reviews??[]),...result.reviews];
   const eligible=gateFrontier(root,run),createdIds=new Set([...(prior?.creations??[]),...(sourceResult?.created_items??[]),...(result.created_items??[])].map(row=>row.id));
   const certifiedScope=id=>eligible.has(id)||createdIds.has(id);
@@ -813,7 +822,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const contexts=contextHasher(root,ids); // One corpus read, after every writer drains.
   for(const id of ids)requireValue(contexts.has(id),`missing certification context: ${id}`);
   if(JSON.stringify(rawBefore)!==JSON.stringify(rawHashes(root)))throw Error('item writer overlapped certification');
-  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence};
+  const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence,...transition.evidence};
   evidence[closedPath]=digest(readFileSync(closedPath,'utf8'));
   for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
   const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??priorItems.get(id)?.reason}));
@@ -822,6 +831,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   const creations=[...creationById.values()].sort((a,b)=>a.id.localeCompare(b.id));
   for(const row of creations){creationRegistration(root,run,row);requireValue(current[row.id],`created item missing at certification: ${row.id}`);}
   const certificate={version:2,run,phase,round,at:new Date().toISOString(),items,creations,evidence,changed,
+    ...(transition.transitions.length||prior?.evidence_transitions?.length?{evidence_transitions:[...(prior?.evidence_transitions??[]),...transition.transitions]}:{}),
     latest_adjudication_round:phase==='impact-repeat'?round:(prior?.latest_adjudication_round??null)};
   if(phase==='impact-repeat') {
     const frontier=read(join(dir,'frontier.json'));

@@ -242,6 +242,23 @@ owner's behalf, reopens a certified wave, authorizes Step 5.9 reopening, or chan
 the terminal paid-judge budget. After repair the ordinary fresh formatting and
 metadata recertification and full native gate battery remain required.
 
+A later native certificate may carry forward a legitimately repaired canonical
+`research/RUN-batch-N.proof-contracts.json` that an earlier certificate bound at
+its old bytes. Ordinary/current certificate verification remains strict. At the
+native certification transition only, the engine checks the immutable prior
+certificate's payload and every static evidence hash; an old live contract
+binding may evolve only with bound current native owning repair reports,
+assignments, current reviews and Sol 6.1 high dispatch authority, plus the
+consumed predecessor owner-gate history. That gate must cover the complete
+frozen/current manifest item selection, contain passing formatting and metadata
+records, and bind the exact current contract and item bytes. Unknown files,
+reports, snapshots and unlicensed or stale metadata still fail verification.
+The new certificate binds the immutable prior certificate and consumed gate
+history, records `evidence_transitions` with the unchanged old hash, current hash
+and native report basis, and uses the current contract hash. It never edits or
+reseals the old certificate, closure, report or supporting evidence, and does
+not claim that missing historical contract bytes have been recovered.
+
 Physics precheck presents each numbered Markdown paragraph as a complete step
 to the normative application checker: single newlines within that paragraph
 become spaces in checker input, retaining all mathematics, citations and tags.
