@@ -1,7 +1,7 @@
 ---
 id: thm-cm-local-momentum-balance
 kind: theorem
-title: "Local momentum balance: $\\rho D_tu=\\rho b+\\operatorname{div}\\sigma$ from the integral balance on every material subregion"
+title: "Local momentum balance: $\\rho D_tu=\\rho b+\\operatorname{div}\\sigma$ from the integral balance on admissible material subregions"
 status: draft
 origin: pipeline
 domain: mathematics
@@ -44,9 +44,9 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]), as used by the transport and divergence theorems. Let $I\subseteq\mathbb R$ be a nonempty open interval, let $B\subseteq\mathbb R^3$ be a material region, let $\chi$ be a motion of $B$ on $I$ with spatial velocity $u$ and material derivative $D_t$ ([[def-cm-continuum-motion]], [[def-cm-euclidean-spatial-calculus]]), let $J_0\subseteq I$ be an open interval with $\overline{J_0}\subseteq I$, and let $U$ contain the swept region $\Sigma=\{(t,x):t\in\overline{J_0},\ x\in\chi_t(\overline B)\}$.
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]), as used by the transport and divergence theorems. Let $I\subseteq\mathbb R$ be a nonempty open interval, let $B\subseteq\mathbb R^3$ be a material region, let $\chi:I\times O\to\mathbb R^3$ be a motion of $B$ on $I$ with spatial velocity $u$ and material derivative $D_t$ ([[def-cm-continuum-motion]], [[def-cm-euclidean-spatial-calculus]]), and let $J_0\subseteq I$ be an open interval with $\overline{J_0}\subseteq I$. Define the swept region $\Sigma=\{(t,x):t\in\overline{J_0},\ x\in\chi_t(\overline B)\}$.
 
-Let $\rho:U\to(0,\infty)$ be a $C^1$ density field, let $\sigma:U\to M_3(\mathbb R)$ be a $C^1$ field (the stress field of [[def-cm-traction-and-stress]]), and let $b:U\to\mathbb R^3$ be continuous. Suppose:
+Write $\mathcal D_\chi:=\{(t,x):t\in I,\ x\in\chi_t(O)\}$ for the open domain of the spatial velocity $u$ ([[def-cm-continuum-motion]]), and take $U\subseteq\mathcal D_\chi$ open and containing $\Sigma$. Let $\rho:U\to(0,\infty)$ be a $C^1$ density field, let $\sigma:U\to M_3(\mathbb R)$ be a $C^1$ field (the stress field of [[def-cm-traction-and-stress]]), and let $b:U\to\mathbb R^3$ be continuous. Suppose:
 
 **(K)** $\rho$ satisfies $\partial_t\rho+\operatorname{div}(\rho u)=0$ at every $(t,x)$ with $t\in J_0$ and $x\in\chi_t(B)$;
 

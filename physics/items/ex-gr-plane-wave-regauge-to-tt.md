@@ -58,15 +58,15 @@ in the order $(0,1,2,3)$. Then:
 
 **Given:** The inertial chart, $k^a=(1,0,0,1)$, $k_a=(-1,0,0,1)$, the amplitude $X$ above and the vector $Z=(1,2,0,1)$.
 
-[L1] A symmetric amplitude $X$ is in $V_0$ exactly when $k^a\bar X_{ab}=0$ for every $b$, and the unique TT representative is obtained by the explicit formula $Z_0=-X_{00}/(2\omega)$, $Z_1=-X_{01}/\omega$, $Z_2=-X_{02}/\omega$, $Z_3=Z_0-X_{03}/\omega$ ([[lem-gr-plane-wave-gauge-decomposition]] clauses (b)-(c)).
+[L1] A symmetric amplitude $X$ is in $V_0$ exactly when $k^a\bar X_{ab}=0$ for every $b$. For $X\in V_0$ and $\omega\ne0$ in the adapted frame, its unique TT representative is $X'_{ab}=X_{ab}-k_aZ_b-k_bZ_a$, where $Z_0=-X_{00}/(2\omega)$, $Z_1=-X_{01}/\omega$, $Z_2=-X_{02}/\omega$, $Z_3=Z_0-X_{03}/\omega$ ([[lem-gr-plane-wave-gauge-decomposition]] clauses (b)-(c)).
 
 [L2] For $h_{ab}=X_{ab}\cos(k\cdot x)$ and $\xi_b=Z_b\sin(k\cdot x)$ one has $\partial_a\xi_b=k_aZ_b\cos(k\cdot x)$ and $h'=X'\cos(k\cdot x)$ with $X'=X-kZ-kZ$ ([[lem-gr-plane-wave-gauge-decomposition]] clause (d), [[thm-sine-and-cosine-derivatives]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[def-derivative]], [[def-gr-plane-wave-perturbation]] clauses (c)-(d)).
 
 1.1 (Membership in $V_0$ and failure of TT.) The trace is $\operatorname{tr}X=\eta^{ab}X_{ab}=-X_{00}+X_{11}+X_{22}+X_{33}=2+1-1+2=4$, so $\bar X_{ab}=X_{ab}-2\eta_{ab}$ has entries $\bar X_{00}=-2+2=0$, $\bar X_{01}=-2$, $\bar X_{03}=0$, $\bar X_{11}=1-2=-1$, $\bar X_{13}=2$, $\bar X_{22}=-1-2=-3$, $\bar X_{33}=2-2=0$ and $\bar X_{12}=\bar X_{23}=0$. With $k^0=1$, $k^3=1$, $k^1=k^2=0$, the four contractions are $k^a\bar X_{a0}=\bar X_{00}+\bar X_{30}=0$, $k^a\bar X_{a1}=\bar X_{01}+\bar X_{31}=-2+2=0$, $k^a\bar X_{a2}=0$, $k^a\bar X_{a3}=\bar X_{03}+\bar X_{33}=0$; hence $X\in V_0$. It is not TT because $X(e_0,e_0)=X_{00}=-2\ne0$ and $\operatorname{tr}X=4\ne0$. This is clause 1. [L1, algebra]
 
-1.2 (The TT representative.) By [L1] with $\omega=1$ the unique $Z$ is $Z_0=-X_{00}/2=1$, $Z_1=-X_{01}=2$, $Z_2=-X_{02}=0$, $Z_3=Z_0-X_{03}=1$, which is the displayed $Z$. Forming $k_aZ_b+k_bZ_a$ with $k_a=(-1,0,0,1)$ gives the matrix with entries $(kZ+Zk)_{00}=-2$, $(kZ+Zk)_{01}=-2$, $(kZ+Zk)_{03}=0$, $(kZ+Zk)_{11}=0$, $(kZ+Zk)_{13}=2$, $(kZ+Zk)_{22}=0$, $(kZ+Zk)_{23}=0$, $(kZ+Zk)_{33}=2$, and subtracting from $X$ gives the displayed $X'$, whose only nonzero entries are $X'_{11}=1$ and $X'_{22}=-1$; hence $A_+=X'_{11}=1$ and $A_\times=X'_{12}=0$. This is clause 2. [L1, algebra]
+2.1 (The TT representative.) Since $X\in V_0$ by step 1.1, [L1] with $\omega=1$ gives the unique $Z$ as $Z_0=-X_{00}/2=1$, $Z_1=-X_{01}=2$, $Z_2=-X_{02}=0$, $Z_3=Z_0-X_{03}=1$, which is the displayed $Z$. Forming $k_aZ_b+k_bZ_a$ with $k_a=(-1,0,0,1)$ gives the matrix with entries $(kZ+Zk)_{00}=-2$, $(kZ+Zk)_{01}=-2$, $(kZ+Zk)_{03}=0$, $(kZ+Zk)_{11}=0$, $(kZ+Zk)_{13}=2$, $(kZ+Zk)_{22}=0$, $(kZ+Zk)_{23}=0$, $(kZ+Zk)_{33}=2$, and subtracting from $X$ gives the displayed $X'$, whose only nonzero entries are $X'_{11}=1$ and $X'_{22}=-1$; hence $A_+=X'_{11}=1$ and $A_\times=X'_{12}=0$. This is clause 2. [L1, step 1.1, algebra]
 
-2.1 (The perturbation.) By [L2] the gauge-transformed perturbation of the plane wave $h_{ab}=X_{ab}\cos(k\cdot x)$ is $h'=X'\cos(k\cdot x)$, and $X'\in T\subseteq V_0$ is TT and in harmonic gauge in the sense of [[def-gr-plane-wave-perturbation]] clause (c). This is clause 3. [L2, step 1.2, algebra] ∎
+3.1 (The perturbation.) By [L2] the gauge-transformed perturbation of the plane wave $h_{ab}=X_{ab}\cos(k\cdot x)$ is $h'=X'\cos(k\cdot x)$, and $X'\in T\subseteq V_0$ is TT and in harmonic gauge in the sense of [[def-gr-plane-wave-perturbation]] clause (c). This is clause 3. [L2, step 2.1, algebra] ∎
 
 ## Remarks
 

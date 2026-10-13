@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 1
-deps: [def-cm-mechanical-vector-field-and-energy-in-a-chart, thm-chain-rule-for-total-derivatives, def-vector-valued-derivative-and-integral, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-euclidean-inner-product, lem-finite-sum-laws, thm-algebra-of-derivatives, def-interval]
+deps: [def-cm-mechanical-vector-field-and-energy-in-a-chart, thm-chain-rule-for-total-derivatives, def-vector-valued-derivative-and-integral, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-euclidean-inner-product, lem-finite-sum-laws, thm-algebra-of-derivatives, def-interval, cor-zero-derivative-implies-constant]
 dependency_roles:
   def-cm-mechanical-vector-field-and-energy-in-a-chart: mathematical-premise
   thm-chain-rule-for-total-derivatives: mathematical-premise
@@ -17,6 +17,7 @@ dependency_roles:
   lem-finite-sum-laws: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
   def-interval: mathematical-premise
+  cor-zero-derivative-implies-constant: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -53,6 +54,8 @@ $$\bigl(\nabla_q(v^{\mathsf T}M(q)v)\bigr)\cdot v=\sum_kv_k\,v^{\mathsf T}\parti
 
 ([[def-jacobian-matrix-and-gradient]], [[def-euclidean-inner-product]], [[lem-finite-sum-laws]], [[def-interval]]).
 
+[F4] A continuous scalar function on an order-convex interval whose derivative vanishes at interior points is constant ([[cor-zero-derivative-implies-constant]]).
+
 ## Proof
 
 **Proof technique:** direct; differentiate the energy along the solution and substitute the equation of motion.
@@ -65,10 +68,10 @@ $$\bigl(\nabla_q(v^{\mathsf T}M(q)v)\bigr)\cdot v=\sum_kv_k\,v^{\mathsf T}\parti
 
 3.1 Substituting the equation of motion $v'=M(q)^{-1}\bigl(\tfrac12\nabla_q(v^{\mathsf T}M(q)v)-(D_qM(q)[v])v-\nabla U(q)\bigr)$ of [F1] into step 2.1 gives $$\frac{d}{dt}\Bigl(\tfrac12v^{\mathsf T}M(q)v\Bigr)=\tfrac12v^{\mathsf T}\nabla_q\bigl(v^{\mathsf T}M(q)v\bigr)-v^{\mathsf T}\bigl(D_qM(q)[v]\bigr)v-v^{\mathsf T}\nabla U(q)+\tfrac12v^{\mathsf T}\bigl(D_qM(q)[v]\bigr)v .$$ [step 1.1, 2.1, F1, algebra]
 
-4.1 By [F3] the first and the last terms combine as $\tfrac12v^{\mathsf T}\nabla_q(v^{\mathsf T}M(q)v)+\tfrac12v^{\mathsf T}(D_qM[v])v=v^{\mathsf T}(D_qM[v])v$, cancelling the middle term; hence $\frac{d}{dt}(\tfrac12v^{\mathsf T}M(q)v)=-v^{\mathsf T}\nabla U(q)$. Adding step 1.2, $\frac{d}{dt}E(q(t),v(t))=-v^{\mathsf T}\nabla U(q)+v^{\mathsf T}\nabla U(q)=0$ on $I$. [step 2.1, 1.2, 3.1, F3, algebra] ∎
+4.1 By [F3] the first and the last terms combine as $\tfrac12v^{\mathsf T}\nabla_q(v^{\mathsf T}M(q)v)+\tfrac12v^{\mathsf T}(D_qM[v])v=v^{\mathsf T}(D_qM[v])v$, cancelling the middle term; hence $\frac{d}{dt}(\tfrac12v^{\mathsf T}M(q)v)=-v^{\mathsf T}\nabla U(q)$. Adding step 1.2, $\frac{d}{dt}E(q(t),v(t))=-v^{\mathsf T}\nabla U(q)+v^{\mathsf T}\nabla U(q)=0$ on $I$. The continuous scalar energy is constant on the interval $I$ by [F4]. [step 2.1, 1.2, 3.1, F3, F4, algebra] ∎
 
 ## Remarks
 
-- The cancellation uses exactly the two terms produced by the configuration dependence of $M$: the derivative of the kinetic energy along the flow produces $v^{\mathsf T}(D_qM[v])v$, and the first term of the force $-M^{-1}\bigl(\tfrac12\nabla_q(v^{\mathsf T}Mv)\bigr)$ produces the same quantity with the opposite sign. For constant $M$ the statement reduces to the familiar $\frac{d}{dt}(\tfrac12v^{\mathsf T}Mv+U)=0$.
+- The cancellation uses exactly the two terms produced by the configuration dependence of $M$: the derivative of the kinetic energy along the flow produces $v^{\mathsf T}(D_qM[v])v$, and substitution of the two configuration-dependent acceleration terms gives $\tfrac12v^{\mathsf T}\nabla_q(v^{\mathsf T}Mv)-v^{\mathsf T}(D_qM[v])v=-\tfrac12v^{\mathsf T}(D_qM[v])v$, cancelling the kinetic derivative term $\tfrac12v^{\mathsf T}(D_qM[v])v$. For constant $M$ the statement reduces to the familiar $\frac{d}{dt}(\tfrac12v^{\mathsf T}Mv+U)=0$.
 
 - The lemma is a statement about the model: it does not assert that any physical system conserves energy, nor that solutions exist globally, nor that the energy is a Liapunov function for any equilibrium; those uses are made in [[thm-cm-energy-stability-of-a-strict-minimum]] under their own hypotheses.

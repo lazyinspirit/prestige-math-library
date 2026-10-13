@@ -49,17 +49,17 @@ $$\omega^2=\frac{4c^2}{a^2}\sin^2\!\Bigl(\frac{\kappa a}{2}\Bigr). \tag{DR}$$
 
 $$\Bigl|\omega^2-c^2\kappa^2\Bigr|\le\frac{c^2\kappa^4a^2}{12},$$
 
-so the continuum dispersion $\omega^2=c^2\kappa^2$ is recovered with an explicit fourth-order error in the spacing.
+so the continuum dispersion $\omega^2=c^2\kappa^2$ is recovered with an explicit error bound of second order in the spacing $a$ and fourth order in the wave number $\kappa$.
 
 ## Facts & Assumptions
 
 **Given:** $N,a,c,\kappa,\omega,A$ with $A\ne0$ and the ansatz $q_j(t)=A\cos(\kappa ja-\omega t)$.
 
-[F1] Trigonometric addition formulas, $1-\cos u=2\sin^2(u/2)$ and the bounds $|\sin r|\le|r|$, $|\cos r|\le1$ ([[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-sine-and-cosine-by-power-series]]).
+[F1] Trigonometric addition formulas, $1-\cos u=2\sin^2(u/2)$ and the bound $|\cos r|\le1$ ([[thm-sine-and-cosine-addition-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-sine-and-cosine-by-power-series]]). The additional bound $|\sin r|\le|r|$ follows locally: by the derivative identity [F2] and integral evaluation [F3], $\sin r=\int_0^r\cos s\,ds$, so $|\sin r|\le\int_{\min(0,r)}^{\max(0,r)}|\cos s|\,ds\le|r|$.
 
 [F2] Derivatives: $(\cos)'=-\sin$, $(\sin)'=\cos$; affine compositions differentiate by the chain rule ([[thm-sine-and-cosine-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[def-derivative]], [[def-ck-euclidean-maps-and-diffeomorphisms]]).
 
-[F3] Fundamental theorem of calculus: for $C^1$ functions on intervals, $\int_r^s\varphi'=\varphi(s)-\varphi(r)$ and $|\int_r^s\psi|\le\int_r^s|\psi|$ for oriented integrals ([[thm-ftc-first-part]], [[thm-ftc-second-part]], [[def-oriented-integral]]).
+[F3] Fundamental theorem of calculus: for $C^1$ functions on intervals, $\int_r^s\varphi'=\varphi(s)-\varphi(r)$ and $|\int_r^s\psi|\le\int_{\min(r,s)}^{\max(r,s)}|\psi|$ for oriented integrals ([[thm-ftc-first-part]], [[thm-ftc-second-part]], [[def-oriented-integral]]).
 
 ## Proof
 
@@ -67,7 +67,7 @@ so the continuum dispersion $\omega^2=c^2\kappa^2$ is recovered with an explicit
 
 1.1 Since $\kappa Na\in2\pi\mathbb Z$, $q_{j+N}(t)=q_j(t)$ for every integer $j$ and every $t$ by cosine periodicity, so the ansatz is well-defined on the cyclic sites and its shifted values agree across the seam. Put $\theta_j:=\kappa ja-\omega t$. By [F2], $q_j''(t)=-\omega^2A\cos\theta_j$. By [F1], $\cos(\theta_j+\kappa a)+\cos(\theta_j-\kappa a)=2\cos\theta_j\cos(\kappa a)$, so $$q_{j+1}-2q_j+q_{j-1}=A\cos\theta_j\bigl(2\cos(\kappa a)-2\bigr)=-2A\cos\theta_j\bigl(1-\cos(\kappa a)\bigr)=-4A\cos\theta_j\sin^2\!\Bigl(\frac{\kappa a}{2}\Bigr).$$ [given, F1, F2, algebra]
 
-1.2 For the error bound, first prove $|\sin z-z|\le|z|^3/6$ for all $z$. Write $\sin z-z=-\int_0^z(\cos s-1)\,ds$ and $\cos s-1=-\int_0^s\sin r\,dr$; by [F3] and $|\sin r|\le|r|$, $|\cos s-1|\le s^2/2$; hence $|\sin z-z|\le\int_0^{|z|}s^2/2\,ds=|z|^3/6$. [given, F1, F3]
+1.2 For the error bound, first prove $|\sin z-z|\le|z|^3/6$ for all $z$. Write $\sin z-z=\int_0^z(\cos s-1)\,ds$ and $\cos s-1=-\int_0^s\sin r\,dr$; by [F3] and $|\sin r|\le|r|$, $|\cos s-1|\le s^2/2$; hence $|\sin z-z|\le\int_0^{|z|}s^2/2\,ds=|z|^3/6$. [given, F1, F3]
 
 2.1 The ODE holds for all $t,j$ if and only if $$-\omega^2A\cos\theta_j=-\frac{4c^2}{a^2}A\cos\theta_j\sin^2\!\Bigl(\frac{\kappa a}{2}\Bigr)$$ for all $t,j$. Since $A\ne0$ and $\cos\theta_j=1$ for $\theta_j=0$ (a value attained for appropriate $t$, for instance $t=\kappa ja/\omega$ when $\omega\ne0$, and the identity is also immediate at $t=0$, $j\equiv0$), the coefficients must agree; conversely (DR) makes the two sides equal identically. If $\omega=0$ the same comparison at $t=0$ and $j=0$ gives the same conclusion. This proves (a). [step 1.1, given, algebra]
 

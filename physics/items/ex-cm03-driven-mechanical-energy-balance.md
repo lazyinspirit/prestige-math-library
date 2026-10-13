@@ -25,7 +25,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "A worked computation in a declared one-dimensional potential presentation with an explicit time-dependent potential and residual force: the displayed quadratic curve is a motion of the model, and along it the mechanical-energy balance, the power identity, the integrated work form and the change of the energy under a time-dependent renormalization of the potential are computed from the model data. The item asserts no measured value and no conservation; the model is driven."
+physical_scope: "A worked computation in a declared one-dimensional potential presentation with an explicit time-dependent potential and residual force: the displayed quadratic curve, embedded as q(t)=x(t)e1 in the open configuration domain R3, is a motion of the model, and along it the mechanical-energy balance, the power identity, the integrated work form and the change of the energy under a time-dependent renormalization of the potential are computed from the model data. The item asserts no measured value and no conservation; the model is driven."
 sources:
   references:
     - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Sections 1.3-1.4, chapter pages 7-10 (PDF pages 11-14): the work-energy principle, potential forces, mechanical energy E = T + U and its failure to be conserved under non-conservative or explicitly time-dependent forcing"
@@ -40,7 +40,11 @@ verification:
 
 Work in the force branch of [[post-cm02-force-superposition]] with one label
 $N=1$, mass $m>0$, time window $I_{0}=\mathbb R$ and configuration domain
-$Q=\mathbb R$, and declare the **potential presentation** of
+$Q=\mathbb R^3$. Write $q=(x,y,z)\in Q$ and $e_1=(1,0,0)$. Define
+$\mathbf d(t,q,v):=d(t,x,v)e_1$ and $\mathbf F(t,q,v):=F(t,x,v)e_1$
+from the scalar expressions below, and set $U(t,q):=U(t,x)$, independent
+of $y,z$. Here the velocity argument of $d,F$ may be any $v\in\mathbb R^3$;
+these expressions are independent of it. Declare the **potential presentation** of
 [[def-cm03-potential-and-mechanical-energy]] clause (a)
 $$U(t,x):=\frac12\lambda\,t\,x^{2},\qquad d(t,x,v):=2ma+\lambda a\,t^{3},$$
 where $a>0$ is a constant of dimension $\ell\tau^{-2}$ and $\lambda>0$ a
@@ -48,8 +52,16 @@ constant of dimension $\mu\tau^{-3}$, so that $U$ has dimension
 $\mu\ell^{2}\tau^{-2}$ and $d$ has the dimension of a force
 ([[def-cm01-units]]). Both maps are smooth; the force map of the model is
 $F(t,x,v)=-\partial_{x}U(t,x)+d(t,x,v)=-\lambda tx+2ma+\lambda at^{3}$, and
-the model is a potential presentation with residual force $d$ in the sense of
-that definition.
+the model satisfies $\mathbf F=-\nabla_q U+\mathbf d$ on
+$\mathbb R\times\mathbb R^3\times\mathbb R^3$. On each compact time
+interval $|t|\le T$, its force has state-Lipschitz constant $\lambda T$;
+$\mathbf d$ is state-independent. Thus both satisfy the standing regularity.
+The one-dimensional computation below uses the rectilinear motion
+$q(t)=x(t)e_1$ and zero transverse coordinates and velocities. Each scalar
+force and residual-force expression denotes its $e_1$ component,
+$\|q\prime(t)\|_2^2=x\prime(t)^2$, and
+$\langle\mathbf d,q\prime\rangle=d x\prime$; no constrained configuration
+domain or reaction force is assumed.
 
 The curve
 $$x(t):=a\,t^{2}\qquad(t\in\mathbb R)$$
@@ -104,7 +116,7 @@ means $0\le t\le1\,\mathrm s$.
 
 **Proof technique:** direct; differentiate the explicit curve and evaluate each term of the balance identities on the stated data.
 
-1.1 The curve $x(t)=at^{2}$ is $C^{2}$ with $\dot x=2at$ and $\ddot x=2a$ on $\mathbb R$. Moreover $$\partial_{x}U(t,x(t))=\lambda t\,x(t)=\lambda a\,t^{3},\qquad F(t,x(t),\dot x(t))=-\lambda at^{3}+2ma+\lambda at^{3}=2ma=m\ddot x(t),$$ so the equations of motion hold identically and $x$ is a motion of the model on the whole time window. [given, L1, L2, algebra]
+1.1 The curve $x(t)=at^{2}$ is $C^{2}$ with $\dot x=2at$ and $\ddot x=2a$ on $\mathbb R$. Moreover $$\partial_{x}U(t,x(t))=\lambda t\,x(t)=\lambda a\,t^{3},\qquad F(t,x(t),\dot x(t))=-\lambda at^{3}+2ma+\lambda at^{3}=2ma=m\ddot x(t),$$ so $m q\prime\prime=(m x\prime\prime)e_1=\mathbf F(t,q,q\prime)$, with both transverse components zero. Thus $q$ is a motion of the model on the whole time window, and the scalar quantities below are its longitudinal components. [given, L1, L2, algebra]
 
 2.1 With the numerical data $m=1\,\mathrm{kg}$, $a=1\,\mathrm{m}\,\mathrm{s}^{-2}$ and $\lambda=1\,\mathrm{kg}\,\mathrm{s}^{-3}$, write $s=t/(1\,\mathrm s)$. Then $x(t)=s^{2}\,\mathrm m$ and $\dot x(t)=2s\,\mathrm{m}\,\mathrm{s}^{-1}$, so $K(t)=2s^{2}\,\mathrm J$, $U(t,x(t))=\frac12s^{5}\,\mathrm J$ and $E(t)=(2s^{2}+\frac12s^{5})\,\mathrm J$; differentiating by [L2], $E'(t)=(4s+\frac52s^{4})\,\mathrm W$. The two contributions of clause 1 of [[pthm-cm03-energy-balance]] are $\partial_{t}U(t,x(t))=\frac12s^{4}\,\mathrm W$ and $d(t,x,v)\dot x(t)=(4s+2s^{4})\,\mathrm W$, whose sum is $E'(t)$; the balance holds on $[0,1\,\mathrm s]$. [step 1.1, L2, L3, algebra]
 

@@ -57,7 +57,7 @@ where $(P_jA_j+A_jP_j)u:=P_j(A_ju)+A_jP_ju$, and each term lies in $L^2$;
 (c) $K_{A,\Phi}$ is symmetric on its domain and self-adjoint with
 $D(K_{A,\Phi})=W^{2,2}(\mathbb R^3;\mathbb C)$;
 
-(d) for every $a\in[0,1)$ there is $b\in[0,\infty)$ with
+(d) for every $a\in(0,1)$ there is $b\in[0,\infty)$ with
 $$\|(K_{A,\Phi}-K_0)u\|\le a\,\|K_0u\|+b\|u\|\qquad \bigl(u\in W^{2,2}(\mathbb R^3;\mathbb C)\bigr),$$
 so $K_{A,\Phi}-K_0$ has $K_0$-bound strictly below one
 ([[def-relative-boundedness-with-respect-to-an-operator]]); consequently
@@ -99,6 +99,6 @@ or measured Hamiltonian.
 
 3.2 [The relative bound] Let $u\in W^{2,2}$. From (b), $\|(K_{A,\Phi}-K_0)u\|\le\frac{|q|}{2m}\sum_j\|(P_jA_j+A_jP_j)u\|+\frac{q^2}{2m}\bigl\||A|^2u\bigr\|+|q|\|\Phi u\|$. By [F4], $\|(P_jA_j+A_jP_j)u\|\le2\|A_j\|_\infty\|P_ju\|+\hbar\|D_jA_j\|_\infty\|u\|$; and $\||A|^2u\|\le\|A\|_\infty^2\|u\|$, $\|\Phi u\|\le\|\Phi\|_\infty\|u\|$. So it suffices to bound $\|P_ju\|$ in terms of $\|K_0u\|$ and $\|u\|$. [given, step 2.2, F2, F4, algebra]
 
-4.1 [Conclusion of (d)] Inserting step 1.3 with $\varepsilon>0$ chosen so small that $\frac{|q|}{m}\sum_j\bigl(2\|A_j\|_\infty\varepsilon\bigr)<1$ into step 3.2 gives (d): the constant $a$ can be made arbitrarily small, in particular $a<1$, with $b$ depending on $q,m,\|A_j\|_\infty,\|D_jA_j\|_\infty,\|\Phi\|_\infty$ and $\varepsilon$. [step 3.2, step 1.3, algebra]
+4.1 [Conclusion of (d)] Fix $a\in(0,1)$ and put $C:=\frac{|q|}{m}\sum_j\|A_j\|_\infty$ and $B_0:=\frac{|q|\hbar}{2m}\sum_j\|D_jA_j\|_\infty+\frac{q^2}{2m}\||A|^2\|_\infty+|q|\|\Phi\|_\infty$. Steps 3.2 and 1.3 give $\|(K_{A,\Phi}-K_0)u\|\le C\varepsilon\|K_0u\|+(C C_\varepsilon+B_0)\|u\|$. If $C>0$, take $\varepsilon=a/C$ and $b=C C_\varepsilon+B_0$; if $C=0$, take $b=B_0$. In both cases the asserted inequality holds for this prescribed $a$. The infimum of admissible relative constants is therefore zero, but an estimate with $a=0$ is not asserted. [step 3.2, step 1.3, algebra]
 
 5.1 [Self-adjointness] By step 2.2 the operator $W:=K_{A,\Phi}-K_0$ is defined on $D(K_0)=W^{2,2}$ and is symmetric by step 3.1 (it is the sum of the symmetric $B_j$ and the bounded symmetric $q\Phi$). By [F3] (Kato-Rellich) with $S=K_0$ and $B=W$, whose $K_0$-bound is below one by step 4.1, the operator $K_0+W=K_{A,\Phi}$ is self-adjoint with domain $D(K_0)=W^{2,2}$. Moreover $K_0u=\mathcal F_2^*(c|\xi|^2\mathcal F_2u)$ is positive (its quadratic form is $\int c|\xi|^2|\mathcal F_2u|^2\ge0$), so $K_0\ge0$ and [F3] gives the lower bound $K_{A,\Phi}\ge-\max\{0,b/(1-a)\}=-b/(1-a)$ for the admissible pair of step 4.1. This is (c) and the final clause of (d). [step 3.1, step 4.1, F3] ∎

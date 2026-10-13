@@ -36,7 +36,7 @@ sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.4.1 'Homogeneity of Time', printed page 26 (PDF page 32): for a Lagrangian with no explicit time dependence the function H = sum qdot_j p_j - L is constant, identified with the total energy for the systems considered"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-8 (PDF pages 26-27): dH/dt = -dL/dt explicitly, so H is an integral of motion when the Lagrangian has no explicit time dependence, while the mechanical energy need not coincide with H"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-10 (PDF pages 25-28): dH/dt = -dL/dt explicitly, so H is an integral of motion when the Lagrangian has no explicit time dependence, while the mechanical energy need not coincide with H"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.3, printed page 15 (PDF page 18): if H has no explicit time dependence then H is conserved, and energy is conserved when the energy is time independent"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
@@ -86,7 +86,7 @@ motion. No empirical content is asserted.
 
 **Given:** The model, the presentation $(U,d)$, the mechanical energy function $E$, and the motions and state of the clauses.
 
-[F1] Model data, chart and charge dictionary ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm08-symmetry-of-the-mechanical-lagrangian]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart over every $[a,b]\times Q$ with $[a,b]\subseteq I_{0}$; $L=K-U$ with $K(v)=\frac12v\cdot\mathsf M v$ independent of $t$ and $x$, so $L_{t}=-U_{t}$ and the mechanical energy function is $E=L_{v}\cdot v-L=K+U$; the charge of a datum $(\tau,\xi,B)$ is $(\mathsf M v)\cdot\xi-E\tau-B$.
+[F1] Model data, chart and charge dictionary ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm08-symmetry-of-the-mechanical-lagrangian]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart whenever $Q\ne\varnothing$ and $a<b$ with $[a,b]\subseteq I_{0}$, over $[a,b]\times Q$; $L=K-U$ with $K(v)=\frac12v\cdot\mathsf M v$ independent of $t$ and $x$, so $L_{t}=-U_{t}$ and the mechanical energy function is $E=L_{v}\cdot v-L=K+U$; the charge of a datum $(\tau,\xi,B)$ is $(\mathsf M v)\cdot\xi-E\tau-B$.
 
 [F2] The general Noether theorem of the model ([[pthm-cm08-general-noether]]): if a symmetry datum satisfies the model identity on $O$ and $d\equiv0$, then its charge is constant along every motion; at $\xi\equiv0$, $\tau\equiv1$, $B\equiv0$ the model identity holds on $O$ if and only if $\partial_{t}U\equiv0$ on $I_{0}\times Q$, and the charge is $-E$.
 
@@ -112,26 +112,8 @@ motion. No empirical content is asserted.
 
 ## Remarks
 
-- **Why the two clauses are sharp together.** Clause 1 is an equivalence at the
-  level of the identity: the datum satisfies the model identity exactly for
-  autonomous representatives of the potential. Clause 3 shows that a
-  time-dependent representative does not merely fail to supply the Noether
-  hypothesis: along a motion through a state where the explicit time dependence
-  is nonzero, the energy derivative is nonzero there, so the failure is
-  observable inside the model. This is a statement about the declared
-  representative; the representative is part of the presentation
-  ([[def-cm03-potential-and-mechanical-energy]] clause (c)) and is named in
-  every energy statement.
+- **Why the two clauses are sharp together.** Clause 1 is an equivalence at the level of the identity: the datum satisfies the model identity exactly for autonomous representatives of the potential. Clause 3 shows that a time-dependent representative does not merely fail to supply the Noether hypothesis: along a motion through a state where the explicit time dependence is nonzero, the energy derivative is nonzero there, so the failure is observable inside the model. This is a statement about the declared representative; the representative is part of the presentation ([[def-cm03-potential-and-mechanical-energy]] clause (c)) and is named in every energy statement.
 
-- **Residual forces.** For a presentation with $d\not\equiv0$ the rate formula
-  of [[pthm-cm03-energy-balance]] clause 1 applies verbatim; the energy is then
-  not conserved in general even for an autonomous potential, and the general
-  Noether theorem of this page records how a residual force enters the charge
-  rates of symmetry data. No separate energy identity is claimed here beyond
-  the cited balance.
+- **Residual forces.** For a presentation with $d\not\equiv0$ the rate formula of [[pthm-cm03-energy-balance]] clause 1 applies verbatim; the energy is then not conserved in general even for an autonomous potential, and the general Noether theorem of this page records how a residual force enters the charge rates of symmetry data. No separate energy identity is claimed here beyond the cited balance.
 
-- **Empirical status.** The word "energy" here denotes the mechanical energy
-  function $K+U$ of the declared presentation, a model object. Its conservation
-  is a deduction inside the model under the stated hypotheses; it is not a
-  report of a measurement and does not by itself assert that any physical
-  system has an autonomous potential presentation.
+- **Empirical status.** The word "energy" here denotes the mechanical energy function $K+U$ of the declared presentation, a model object. Its conservation is a deduction inside the model under the stated hypotheses; it is not a report of a measurement and does not by itself assert that any physical system has an autonomous potential presentation.

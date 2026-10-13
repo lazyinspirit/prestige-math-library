@@ -11,6 +11,7 @@ origin: session
 dependency_level: 15
 deps:
   - def-countable-choice
+  - def-axiom-of-choice
   - def-nrqm-composites-framework-composite-systems-and-local-readouts
   - def-nrqm-composites-framework-reduced-preparations
   - def-nrqm-composites-separable-and-entangled-states
@@ -24,10 +25,12 @@ deps:
   - pthm-nrqm-composites-local-readout-laws-and-reduced-preparations
   - pthm-nrqm-composites-schmidt-reduction-and-pure-entanglement
   - texp-nrqm-composites-singlet-correlations
+  - pthm-nrqm-composites-local-statistics-of-products-and-entangled-preparations
   - thm-nrqm-orbital-and-spin-tensor-spin-composition
   - thm-trace-class-is-a-two-sided-banach-operator-ideal
 dependency_roles:
   def-countable-choice: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
   def-nrqm-composites-framework-composite-systems-and-local-readouts: formulation-prerequisite
   def-nrqm-composites-framework-reduced-preparations: formulation-prerequisite
   def-nrqm-composites-separable-and-entangled-states: formulation-prerequisite
@@ -41,6 +44,7 @@ dependency_roles:
   pthm-nrqm-composites-local-readout-laws-and-reduced-preparations: physical-result
   pthm-nrqm-composites-schmidt-reduction-and-pure-entanglement: physical-result
   texp-nrqm-composites-singlet-correlations: physical-result
+  pthm-nrqm-composites-local-statistics-of-products-and-entangled-preparations: physical-result
   thm-nrqm-orbital-and-spin-tensor-spin-composition: mathematical-premise
   thm-trace-class-is-a-two-sided-banach-operator-ideal: mathematical-premise
 proof_strategy: direct
@@ -80,8 +84,9 @@ $S_{n}=\sum_{i}n_{i}S_{i}$ for unit $n\in\mathbb R^{3}$
 [[pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]]), and let
 [[def-nrqm-composites-framework-reduced-preparations]] and
 [[pthm-nrqm-composites-schmidt-reduction-and-pure-entanglement]] supply the
-reading of the reduced preparations. Assume the Axiom of Countable Choice
-([[def-countable-choice]]). Declare:
+reading of the reduced preparations. Assume the Axiom of Countable Choice and
+the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), as
+required by the cited spin-outcome and singlet suppliers. Declare:
  
 (a) the **improper mixture** of factor $A$: the reduced preparation
 $\rho_{A}=\operatorname{Tr}_{B}\rho$ of the singlet;
@@ -137,11 +142,11 @@ asserts no measured correlation, no experiment and no empirical fact.
 
 ## Verification
 
-**Given:** The internal-factor composite $V\widehat\otimes V$; the singlet preparation $\rho$ and its reductions; the proper mixture $\rho_{\mathrm{proper}}$; the product mixture $M$; unit directions $a,b$; the Axiom of Countable Choice.
+**Given:** The internal-factor composite $V\widehat\otimes V$; the singlet preparation $\rho$ and its reductions; the proper mixture $\rho_{\mathrm{proper}}$; the product mixture $M$; unit directions $a,b$; the Axiom of Countable Choice and the Axiom of Choice.
 
 [L1] **Singlet data.** $\rho_{A}=\rho_{B}=\frac12I$ and $\mathbb E_{\rho}(a,b)=-a\cdot b$ for all unit $a,b$ ([[texp-nrqm-composites-singlet-correlations]] clauses (a), (c)).
 
-[L2] **Product reductions and local laws.** For unit $x,y$ one has $\operatorname{Tr}_{B}T_{x\otimes y,x\otimes y}=T_{x,x}$ and $\operatorname{Tr}_{A}T_{x\otimes y,x\otimes y}=T_{y,y}$; the local directional laws read $\mu^{S_{n}}_{\psi}(\{\pm\hbar/2\})=\frac12(1\pm\langle(n\cdot\sigma)\psi,\psi\rangle)$ on $V$ ([[lem-nrqm-composites-separable-partial-trace]] clause (c), [[pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]] clause (c), [[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clause (e)).
+[L2] **Product reductions and local laws.** For unit $x,y$ one has $\operatorname{Tr}_BT_{\kappa(x\otimes y),\kappa(x\otimes y)}=T_{x,x}$ and $\operatorname{Tr}_AT_{\kappa(x\otimes y),\kappa(x\otimes y)}=T_{y,y}$ ([[lem-nrqm-composites-separable-partial-trace]] clause (c)). On $V$, the projections $P_{n,\pm}=(I\pm n\cdot\sigma)/2$ and the law $\mu^{S_n}_\psi(\{\pm\hbar/2\})=(1\pm\langle(n\cdot\sigma)\psi,\psi\rangle)/2$ are the finite-factor deduction in [F2] of [[texp-nrqm-composites-singlet-correlations]], using Pauli matrices and P2, rather than a transfer of a law on $L^2(\mathbb R^3;\mathbb C^2)$. The matrices in [[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clause (e) give $\langle(n\cdot\sigma)e_\pm,e_\pm\rangle=\pm n_3$. Joint probabilities in a unit product preparation factorize by [[pthm-nrqm-composites-local-statistics-of-products-and-entangled-preparations]] clause (a). The rank-one action is $T_{q,q}z=\langle z,q\rangle q$ ([[lem-nrqm-composites-rank-one-operator-calculus]]).
 
 [L3] **Local readout law.** If two preparations of the composite have the same reduced preparation on $A$, then every local readout law of $A$ agrees in the two preparations ([[pthm-nrqm-composites-local-readout-laws-and-reduced-preparations]] clause (a)).
 
@@ -149,15 +154,17 @@ asserts no measured correlation, no experiment and no empirical fact.
 
 [L5] The density expansion into an at most countable positive orthonormal rank-one sum and trace-norm completeness are [[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a) and [[thm-trace-class-is-a-two-sided-banach-operator-ideal]] clause 3. Partial trace is trace-norm continuous by [[lem-nrqm-composites-separable-partial-trace]] clause (a).
 
+[L6] **Choice hypothesis.** The Axiom of Choice is assumed by the cited spin-outcome and singlet suppliers for their spectral PVM constructions ([[def-axiom-of-choice]]).
+
 **Proof technique:** direct; compute the two marginals and the two correlation functions from the product structure, and compare the local readout laws through the common reduced preparation.
 
 **Given:** The data of the statement and [L1]-[L4].
 
-1.1 [Marginals] By [L2], $\operatorname{Tr}_{B}T_{e_{+}\otimes e_{-},e_{+}\otimes e_{-}}=T_{e_{+},e_{+}}$ and $\operatorname{Tr}_{B}T_{e_{-}\otimes e_{+},e_{-}\otimes e_{+}}=T_{e_{-},e_{-}}$, so the linearity of the partial trace gives $\operatorname{Tr}_{B}M=\frac12T_{e_{+},e_{+}}+\frac12T_{e_{-},e_{-}}=\frac12I$; likewise $\operatorname{Tr}_{A}M=\frac12I$. Together with $\rho_{A}=\frac12I$ from [L1] and $\rho_{\mathrm{proper}}=\frac12I$ by definition this is (i). [given, L1, L2, algebra]
+1.1 [Marginals] By [L2], $\operatorname{Tr}_{B}T_{e_{+}\otimes e_{-},e_{+}\otimes e_{-}}=T_{e_{+},e_{+}}$ and $\operatorname{Tr}_{B}T_{e_{-}\otimes e_{+},e_{-}\otimes e_{+}}=T_{e_{-},e_{-}}$, so the linearity of the partial trace gives $\operatorname{Tr}_{B}M=\frac12T_{e_{+},e_{+}}+\frac12T_{e_{-},e_{-}}=\frac12I$; likewise $\operatorname{Tr}_{A}M=\frac12I$. Together with $\rho_{A}=\frac12I$ from [L1] and $\rho_{\mathrm{proper}}=\frac12I$ by definition these are the marginal identities in (i). Put $q_1=\kappa(e_+\otimes e_-)$, $q_2=\kappa(e_-\otimes e_+)$; they are orthonormal and $\Psi=(q_1-q_2)/\sqrt2$. Thus the displayed mixture and the rank-one action in [L2] give $M\Psi=\Psi/2$, whereas $\rho\Psi=T_{\Psi,\Psi}\Psi=\Psi$. Since $\Psi$ is unit, $\rho\ne M$, completing (i). [given, L1, L2, L6, algebra]
 
-1.2 [Correlations of the product mixture] By [L2] and [L4] the joint outcome law of the local measurements of $S_{a}\otimes I$ and $I\otimes S_{b}$ in $M$ is the weighted average of the two product laws, so $\mathbb E_{M}(a,b)=\frac12\langle(a\cdot\sigma)e_{+},e_{+}\rangle\langle(b\cdot\sigma)e_{-},e_{-}\rangle+\frac12\langle(a\cdot\sigma)e_{-},e_{-}\rangle\langle(b\cdot\sigma)e_{+},e_{+}\rangle=\frac12(a_{3})(-b_{3})+\frac12(-a_{3})(b_{3})=-a_{3}b_{3}$; with [L1] this is (ii). [given, L1, L2, L4, algebra]
+1.2 [Correlations of the product mixture] By [L2] and [L4] the joint outcome law of the local measurements of $S_{a}\otimes I$ and $I\otimes S_{b}$ in $M$ is the weighted average of the two product laws, so $\mathbb E_{M}(a,b)=\frac12\langle(a\cdot\sigma)e_{+},e_{+}\rangle\langle(b\cdot\sigma)e_{-},e_{-}\rangle+\frac12\langle(a\cdot\sigma)e_{-},e_{-}\rangle\langle(b\cdot\sigma)e_{+},e_{+}\rangle=\frac12(a_{3})(-b_{3})+\frac12(-a_{3})(b_{3})=-a_{3}b_{3}$; with [L1] this is (ii). [given, L1, L2, L4, L6, algebra]
 
-2.1 [Local indistinguishability and separability] Let $\tau_B$ be any preparation of $B$. Its density expansion is $\tau_B=\sum_jq_jT_{z_j,z_j}$ in trace norm, with unit $z_j$, $q_j>0$ and $\sum_jq_j=1$, by [L5]. The independent extension of the proper mixture is the trace-norm sum $\Omega=\sum_j(q_j/2)(T_{e_+\otimes z_j,e_+\otimes z_j}+T_{e_-\otimes z_j,e_-\otimes z_j})$: every summand is positive, and its trace norm equals its nonnegative trace, so the series converges with trace one by [L4], [L5]. The rank-one reduction formula [L2] and trace-norm continuity [L5] give $\operatorname{Tr}_B\Omega=(T_{e_+,e_+}+T_{e_-,e_-})/2=I_A/2$ and $\operatorname{Tr}_A\Omega=\tau_B$, which need not equal $I_B/2$. Since $\rho$ and $M$ also have reduction $I_A/2$ by [L1] and step 1.1, [L3] proves all local-$A$ readout laws agree for $\rho$, $M$ and this arbitrary-$B$ extension. The displayed convex decomposition makes $M$ separable by [L4], while $\rho$ is non-product and pure by [L1] and the purity criterion. Their joint laws differ at $(x,x)$ by step 1.2. This proves (iii) and (iv) with the full arbitrary-extension claim. [given, L1, L2, L3, L4, L5, step 1.1, step 1.2, algebra]
+2.1 [Local indistinguishability and separability] Let $\tau_B$ be any preparation of $B$. Its density expansion is $\tau_B=\sum_jq_jT_{z_j,z_j}$ in trace norm, with unit $z_j$, $q_j>0$ and $\sum_jq_j=1$, by [L5]. The independent extension of the proper mixture is the trace-norm sum $\Omega=\sum_j(q_j/2)(T_{e_+\otimes z_j,e_+\otimes z_j}+T_{e_-\otimes z_j,e_-\otimes z_j})$: every summand is positive, and its trace norm equals its nonnegative trace, so the series converges with trace one by [L4], [L5]. The rank-one reduction formula [L2] and trace-norm continuity [L5] give $\operatorname{Tr}_B\Omega=(T_{e_+,e_+}+T_{e_-,e_-})/2=I_A/2$ and $\operatorname{Tr}_A\Omega=\tau_B$, which need not equal $I_B/2$. Since $\rho$ and $M$ also have reduction $I_A/2$ by [L1] and step 1.1, [L3] proves all local-$A$ readout laws agree for $\rho$, $M$ and this arbitrary-$B$ extension. The displayed convex decomposition makes $M$ separable by [L4], while $\rho$ is non-product and pure by [L1] and the purity criterion. Their joint laws differ at $(x,x)$ by step 1.2. This proves (iii) and (iv) with the full arbitrary-extension claim. [given, L1, L2, L3, L4, L5, L6, step 1.1, step 1.2, algebra]
 
 3.1 [Assembly] Step 1.1 is (i), step 1.2 is (ii), step 2.1 is (iii) and (iv); only the declared framework readings and the cited computations were used, so no measured correlation or empirical fact is asserted. [step 1.1, step 1.2, step 2.1] ∎
 

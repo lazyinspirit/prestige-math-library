@@ -27,7 +27,7 @@ provenance:
 proof_strategy: direct
 sources:
   references:
-    - title: "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.6, formulas (8.76)-(8.79): decoupling M q'' + W q = 0 by V M^{-1/2} W M^{-1/2} and the mode energies"
+    - title: "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.4, formulas (8.76)-(8.79): decoupling M q'' + W q = 0 by V M^{-1/2} W M^{-1/2} and the mode energies"
       url: "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6 (normal modes and the mode frequencies), printed pages 40-45"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
@@ -43,7 +43,7 @@ $$S:=M^{-1/2}KM^{-1/2}.$$
 
 By the real spectral theorem choose an orthogonal matrix $O$ and a diagonal matrix $\Lambda=\operatorname{diag}(\lambda_1,\dots,\lambda_n)$ with $S=O\Lambda O^{\mathsf T}$ and $\lambda_i\ge0$ for all $i$.
 
-For a $C^2$ curve $q:I\to\mathbb R^n$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $0\in I$, put $z:=O^{\mathsf T}M^{1/2}q$. Then:
+Let $I\subseteq\mathbb R$ contain at least two points and satisfy $r,s\in I,\ r\le u\le s\Longrightarrow u\in I$ for all $r,s,u\in\mathbb R$; suppose also $0\in I$. Let $q:I\to\mathbb R^n$ be twice differentiable with continuous first and second domain-relative derivatives, in the sense of [[def-vector-valued-derivative-and-integral]]. Put $z:=O^{\mathsf T}M^{1/2}q$. Then:
 
 1. $q$ satisfies the quadratic system $Mq''+Kq=0$ on $I$ if and only if $z$ satisfies the decoupled system
 
@@ -66,7 +66,7 @@ $$\tfrac12\dot q^{\mathsf T}M\dot q+\tfrac12q^{\mathsf T}Kq=\tfrac12|z'|_2^2+\tf
 
 ## Facts & Assumptions
 
-**Given:** The symmetric positive definite $M$, the symmetric non-negative $K$, the orthogonal diagonalisation $S=O\Lambda O^{\mathsf T}$ with $\Lambda=\operatorname{diag}(\lambda_1,\dots,\lambda_n)$, $\lambda_i\ge0$, and a $C^2$ curve $q$ with $z=O^{\mathsf T}M^{1/2}q$.
+**Given:** The symmetric positive definite $M$, the symmetric non-negative $K$, the orthogonal diagonalisation $S=O\Lambda O^{\mathsf T}$ with $\Lambda=\operatorname{diag}(\lambda_1,\dots,\lambda_n)$, $\lambda_i\ge0$, the set $I$ with the stated interval property, and the curve $q:I\to\mathbb R^n$ with two continuous domain-relative derivatives and $z=O^{\mathsf T}M^{1/2}q$.
 
 [F1] $M^{1/2}$, $M^{-1/2}$ exist, are symmetric positive definite, $(M^{1/2})^2=M$, $(M^{-1/2})^2=M^{-1}$ and $M^{-1/2}MM^{-1/2}=I_n$; $S$ is symmetric and non-negative ([[lem-cm-positive-definite-matrix-square-roots]]). A symmetric real matrix is self-adjoint, and the real spectral theorem gives an orthonormal eigenbasis, so $O$ may be taken orthogonal with $O^{\mathsf T}=O^{-1}$ and $S=O\Lambda O^{\mathsf T}$ ([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]], [[def-self-adjoint-and-normal-endomorphism]], [[def-matrix-product-and-identity-matrix]]).
 

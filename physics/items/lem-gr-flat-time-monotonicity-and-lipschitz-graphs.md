@@ -8,9 +8,9 @@ domain: mathematics
 dependency_level: 10
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 proof_strategy: direct
-deps: [def-gr-causal-curves-and-reachability, lem-gr-causal-curve-calculus, lem-gr-maximal-geodesics-and-extension, def-gr-flat-minkowski-model-and-inertial-charts, lem-gr-flat-inertial-cone-criterion-and-sums, def-time-orientation-and-future-causal-sets, def-causal-classification-of-lorentz-vectors, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-norm-inequality-for-the-vector-valued-integral, def-countable-choice, def-dependent-choice, def-interval, def-absolutely-continuous-function, def-gr-causal-conditions-and-global-hyperbolicity]
+deps: [def-gr-causal-curves-and-reachability, lem-gr-causal-curve-calculus, lem-gr-maximal-geodesics-and-extension, def-gr-flat-minkowski-model-and-inertial-charts, lem-gr-flat-inertial-cone-criterion-and-sums, def-time-orientation-and-future-causal-sets, def-causal-classification-of-lorentz-vectors, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-linearity-of-the-lebesgue-integral-on-l-one, def-integrable-real-and-complex-functions-and-their-integrals, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-the-lebesgue-integral-respects-almost-everywhere-equality, def-countable-choice, def-dependent-choice, def-interval, def-absolutely-continuous-function, def-gr-causal-conditions-and-global-hyperbolicity]
 dependency_roles:
   def-gr-causal-curves-and-reachability: mathematical-premise
   lem-gr-causal-curve-calculus: mathematical-premise
@@ -21,7 +21,10 @@ dependency_roles:
   def-causal-classification-of-lorentz-vectors: mathematical-premise
   thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions: mathematical-premise
   thm-nonnegative-integral-zero-iff-zero-almost-everywhere: mathematical-premise
-  thm-norm-inequality-for-the-vector-valued-integral: mathematical-premise
+  thm-linearity-of-the-lebesgue-integral-on-l-one: mathematical-premise
+  def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
+  prop-order-and-scalar-rules-for-the-nonnegative-integral: mathematical-premise
+  thm-the-lebesgue-integral-respects-almost-everywhere-equality: mathematical-premise
   def-countable-choice: mathematical-premise
   def-dependent-choice: mathematical-premise
   def-interval: mathematical-premise
@@ -79,7 +82,7 @@ everywhere.
 
 [L3] Fundamental theorem of calculus for absolutely continuous functions, with its countable and dependent choice assumptions: for an absolutely continuous $F$ on $[a,b]$, $F'$ exists almost everywhere, $F'\in L^1$, and $F(b)-F(a)=\int_a^bF'$ ([[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]], [[def-absolutely-continuous-function]]).
 
-[L4] A nonnegative function with vanishing integral is zero almost everywhere, and a vector-valued integral satisfies $\bigl|\int_a^bw\bigr|\le\int_a^b|w|$ ([[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]], [[thm-norm-inequality-for-the-vector-valued-integral]]).
+[L4] A nonnegative function with vanishing integral is zero almost everywhere ([[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]]). For componentwise Lebesgue-integrable $w:[a,b]\to\mathbb R^3$ and integrable $f$ with $f\ge|w|_{\mathrm e}$ almost everywhere, $|\int_a^b w|_{\mathrm e}\le\int_a^b f$. To prove this, put $v:=\int_a^b w$, componentwise. If $v\ne0$, put $e:=v/|v|_{\mathrm e}$; the inequality $e\cdot w\le|w|_{\mathrm e}$ follows from $|w-(e\cdot w)e|_{\mathrm e}^2=|w|_{\mathrm e}^2-(e\cdot w)^2\ge0$. The integrable function $f-e\cdot w$ is nonnegative after modification on a null set, so its integral is nonnegative; linearity gives $\int f\ge e\cdot v=|v|_{\mathrm e}$. If $v=0$, use $f\ge0$. These are Lebesgue statements, using [[thm-linearity-of-the-lebesgue-integral-on-l-one]], [[def-integrable-real-and-complex-functions-and-their-integrals]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]] and [[thm-the-lebesgue-integral-respects-almost-everywhere-equality]].
 
 [L5] Future-inextendibility means absence of a point limit at the upper parameter end, whether finite or infinite; the dual holds at the lower end ([[def-gr-causal-curves-and-reachability]] clause (d)). This no-limit definition is sufficient below; no parameter-preserving extension at an infinite end is asserted.
 
@@ -89,7 +92,7 @@ everywhere.
 
 1.1 (Almost-everywhere cone inequality.) Write $c(t):=x(\gamma(t))=(c^0(t),c_s(t))$. By [L1], $c$ is locally absolutely continuous and at almost every $t$ its derivative $c'(t)$ exists and equals the coordinates of the nonzero future causal velocity, so by [L2] $c^0{}'(t)\ge|c_s'(t)|_{\mathrm e}$ and $c^0{}'(t)>0$. This proves nothing yet but fixes the a.e. information used below. [given, L1, L2, algebra]
 
-2.1 (Monotonicity and the Lipschitz bound.) Let $a<b$ in $I$. By [L3] applied to the absolutely continuous functions $c^0$ and the components of $c_s$ on $[a,b]$, and by [L4], $$c^0(b)-c^0(a)=\int_a^bc^0{}'\ge\int_a^b|c_s'|_{\mathrm e}\ge\bigl|c_s(b)-c_s(a)\bigr|_{\mathrm e}\ge0 .$$ This is (b). If $c^0(b)=c^0(a)$, then $\int_a^bc^0{}'=0$ with $c^0{}'\ge0$ almost everywhere, so [L4] gives $c^0{}'=0$ almost everywhere on $[a,b]$, contradicting $c^0{}'>0$ on the full-measure set of step 1.1; hence $c^0(b)>c^0(a)$, which is the strict monotonicity of (a). Moreover $c(a)=c(b)$ would give $c_s(a)=c_s(b)$ by the displayed inequality, hence $\gamma(a)=\gamma(b)$, and strict increase of $c^0$ forbids $a<b$; so $\gamma$ is injective, and its spatial coordinates are $1$-Lipschitz in $c^0$ again by the displayed inequality. [step 1.1, L3, L4, algebra]
+2.1 (Monotonicity and the Lipschitz bound.) Let $a<b$ in $I$. By [L3] applied to the absolutely continuous functions $c^0$ and the components of $c_s$ on $[a,b]$, and by [L4], $$c^0(b)-c^0(a)=\int_a^bc^0{}'(t)\,dt\ge\left|\int_a^bc_s'(t)\,dt\right|_{\mathrm e}=|c_s(b)-c_s(a)|_{\mathrm e}\ge0.$$ This is (b). If $c^0(b)=c^0(a)$, then $\int_a^bc^0{}'=0$ with $c^0{}'\ge0$ almost everywhere, so [L4] gives $c^0{}'=0$ almost everywhere on $[a,b]$, contradicting $c^0{}'>0$ on the full-measure set of step 1.1; hence $c^0(b)>c^0(a)$, which is the strict monotonicity of (a). Moreover $c(a)=c(b)$ would give $c_s(a)=c_s(b)$ by the displayed inequality, hence $\gamma(a)=\gamma(b)$, and strict increase of $c^0$ forbids $a<b$; so $\gamma$ is injective, and its spatial coordinates are $1$-Lipschitz in $c^0$ again by the displayed inequality. [step 1.1, L3, L4, algebra]
 
 3.1 (Unboundedness at inextendible ends.) Suppose $\gamma$ is future-inextendible and let $T:=\sup\,(x^0\circ\gamma)(I)$. If $T<+\infty$, then for $t,t'\to\sup I$ the spatial coordinates satisfy $|c_s(t)-c_s(t')|_{\mathrm e}\le|c^0(t)-c^0(t')|\to0$ by step 2.1, so $(c^0,c_s)$ has a limit $q=(T,z_\infty)\in\mathbb R^4$; that is, $\gamma$ converges to the event with coordinates $q$ as $t\to\sup I$. This point limit directly contradicts the no-limit definition of future-inextendibility [L5]. Hence $T=+\infty$; the past statement is the time reverse. With both statements, an inextendible $\gamma$ has range all of $\mathbb R$, and step 2.1 makes $x^0\circ\gamma$ a strictly increasing surjection onto $\mathbb R$, so each level set is attained at exactly one parameter. This proves (c). [step 2.1, L5, algebra]
 

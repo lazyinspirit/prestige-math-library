@@ -10,6 +10,7 @@ origin: session
 dependency_level: 13
 deps:
   - def-countable-choice
+  - def-axiom-of-choice
   - def-nrqm-composites-framework-composite-systems-and-local-readouts
   - def-nrqm-composites-framework-reduced-preparations
   - def-nrqm-composites-separable-and-entangled-states
@@ -26,6 +27,7 @@ deps:
   - thm-continuous-functional-calculus-for-bounded-self-adjoint-operators
 dependency_roles:
   def-countable-choice: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
   def-nrqm-composites-framework-composite-systems-and-local-readouts: formulation-prerequisite
   def-nrqm-composites-framework-reduced-preparations: formulation-prerequisite
   def-nrqm-composites-separable-and-entangled-states: formulation-prerequisite
@@ -73,7 +75,9 @@ Adopt the framework's composition and state readings for a declared composite
 of two distinguishable subsystems $A,B$ with assigned spaces $H,K$
 ([[def-nrqm-composites-framework-composite-systems-and-local-readouts]],
 [[def-nrqm-composites-framework-reduced-preparations]]), and assume the Axiom
-of Countable Choice ([[def-countable-choice]]). Let $\Psi\in H\widehat\otimes K$
+of Countable Choice and the Axiom of Choice
+([[def-countable-choice]], [[def-axiom-of-choice]]), as required by the cited
+spectral-law supplier. Let $\Psi\in H\widehat\otimes K$
 be a unit vector, $\rho=T_{\Psi,\Psi}$ the associated pure preparation, and
 $\rho_{A}=\operatorname{Tr}_{K}\rho$, $\rho_{B}=\operatorname{Tr}_{H}\rho$ its
 reduced preparations. Then:
@@ -109,7 +113,7 @@ establishes any particular physical mechanism.
 
 [F1] **Schmidt reduction.** If $\Psi=\sum_{r}s_{r}\kappa(v_{r}\otimes u_{r})$ is the Schmidt expansion of [[thm-nrqm-composites-infinite-schmidt-decomposition]] with orthonormal families $(v_{r})$, $(u_{r})$ and $s_{r}>0$, $\sum_{r}s_{r}^{2}=1$, then $\rho_{A}=\sum_{r}s_{r}^{2}T_{v_{r},v_{r}}$ and $\rho_{B}=\sum_{r}s_{r}^{2}T_{u_{r},u_{r}}$; for a product vector $\Psi=\kappa(u\otimes v)$ one has $\rho_{A}=T_{u,u}$ and $\rho_{B}=T_{v,v}$ ([[pthm-nrqm-composites-schmidt-reduction-and-pure-entanglement]] clauses (a), (b), [[lem-nrqm-composites-separable-partial-trace]] clause (c)).
 
-[F2] **Rank-one pairing.** For bounded $S$ and $w,w'\in H$ one has $\operatorname{tr}(T_{w,w}S)=\langle Sw,w\rangle$ and $T_{w,w}$ is an orthogonal projection for unit $w$; the same holds on $K$ ([[lem-nrqm-composites-rank-one-operator-calculus]] clauses (c), (e), [[thm-trace-class-is-a-two-sided-banach-operator-ideal]] clause 2). Moreover for bounded $F$ and unit $\Psi$ the pairing $\operatorname{tr}(T_{\Psi,\Psi}F)=\langle F\Psi,\Psi\rangle=\|F^{1/2}\Psi\|^{2}\ge0$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (b)).
+[F2] **Rank-one pairing.** For bounded $S$ and vectors $x,y$ in any of the factor or composite Hilbert spaces, $T_{x,y}S=T_{x,S^*y}$ by [[lem-nrqm-composites-rank-one-operator-calculus]] clause (d), and clause (b) gives $\operatorname{tr}(T_{x,y}S)=\langle x,S^*y\rangle=\langle Sx,y\rangle$; the product is trace class also by [[thm-trace-class-is-a-two-sided-banach-operator-ideal]] clause 2. For unit $w$, clauses (c), (d) give $T_{w,w}^*=T_{w,w}$ and $T_{w,w}^2=T_{w,w}$, so it is an orthogonal projection. If $F$ is bounded and positive, the square root in [F5] further gives $\operatorname{tr}(T_{\Psi,\Psi}F)=\langle F\Psi,\Psi\rangle=\|F^{1/2}\Psi\|^2\ge0$ for unit $\Psi$; this positivity assertion requires positivity of $F$.
 
 [F3] **Tensor calculus.** $(S\otimes S')\kappa(x\otimes y)=\kappa(Sx\otimes S'y)$ and $(S\otimes S')^{*}=S^{*}\otimes S'^{*}$, so $(F\otimes F')\kappa(x\otimes y)=\kappa(Fx\otimes F'y)$ for bounded $F,F'$ ([[lem-nrqm-composites-bounded-tensor-maps]] clauses (a), (c)); product vectors and the embedding $\kappa$ are those of [[lem-nrqm-composites-hilbert-tensor-construction]].
 
@@ -117,33 +121,23 @@ establishes any particular physical mechanism.
 
 [F5] **Positive square roots.** Every bounded positive operator $F$ has a bounded positive square root $F^{1/2}$ with $(F^{1/2})^{2}=F$; if $0\le F\le I$, then $0\le I-F\le I$ and both have such square roots ([[thm-continuous-functional-calculus-for-bounded-self-adjoint-operators]]).
 
+[F6] **Choice hypothesis.** The Axiom of Choice is the additional mathematical assumption used by the cited spectral-law supplier's spectral construction ([[def-axiom-of-choice]]).
+
 ## Proof
 
-**Proof technique:** first declare and verify the product POVM for two local
-effect families, then evaluate the joint pairing on product preparations and
-project a non-product preparation onto Schmidt vectors from different factors.
+**Proof technique:** first declare and verify the product POVM for two local effect families, then evaluate the joint pairing on product preparations and project a non-product preparation onto Schmidt vectors from different factors.
 
 **Given:** The data of the statement and [F1]-[F5].
 
 1.1 [Declared joint POVM] Let $(F_i)_{i=1}^{n}$ and $(F'_j)_{j=1}^{m}$ be finite local effect families with $\sum_iF_i=I_H$ and $\sum_jF'_j=I_K$. Define $G_{ij}:=F_i\otimes F'_j$. By [F5] the positive square roots exist, and the tensor adjoint and product rules [F3] give $G_{ij}=(F_i^{1/2}\otimes(F'_j)^{1/2})^{*}(F_i^{1/2}\otimes(F'_j)^{1/2})\ge0$. Bilinearity of bounded tensoring gives $\sum_{i,j}G_{ij}=(\sum_iF_i)\otimes(\sum_jF'_j)=I_H\otimes I_K$. Thus every $G_{ij}\le I$ and the family $(G_{ij})$ satisfies the finite-outcome requirements of P2 on the product outcome set; [F4] assigns the joint probabilities $p(i,j)=\operatorname{tr}(\rho G_{ij})$. This is the joint law used in (a). [given, F3, F4, F5, algebra]
 
-1.2 [Non-product case] Let $\Psi$ be non-product. By [F1] its norm-convergent Schmidt expansion has at least two positive coefficients; label two of them $s_{1}\ge s_{2}>0$ and put $P=T_{v_{1},v_{1}}$, $P'=T_{u_{2},u_{2}}$. Since $Pv_{r}=\delta_{r,1}v_{1}$ and $P'u_{r}=\delta_{r,2}u_{2}$ by the rank-one definition and orthonormality, [F3] gives $(P\otimes P')\kappa(v_{r}\otimes u_{r})=\delta_{r,1}\delta_{r,2}\kappa(v_{1}\otimes u_{2})=0$ for every $r$. Boundedness of $P\otimes P'$ passes this identity through the norm-convergent Schmidt expansion, so $(P\otimes P')\Psi=0$ and $\operatorname{tr}(\rho(P\otimes P'))=0$ by [F2]. The trace-norm expansions of the reduced preparations [F1], paired with the bounded projections, give $\operatorname{tr}(\rho_{A}P)=s_{1}^{2}$ and $\operatorname{tr}(\rho_{B}P')=s_{2}^{2}$ by [F2]. Thus the marginal product exceeds the joint probability by $s_{1}^{2}s_{2}^{2}>0$. The two local measurements $(P,I-P)$ and $(P',I-P')$ are effect families by [F2], [F4], and their $(+,+)$ entry already proves nonfactorization. [given, F1, F2, F3, F4, algebra]
+1.2 [Non-product case] Let $\Psi$ be non-product. By [F1] its norm-convergent Schmidt expansion has at least two positive coefficients; label two of them $s_{1}\ge s_{2}>0$ and put $P=T_{v_{1},v_{1}}$, $P'=T_{u_{2},u_{2}}$. Since $Pv_{r}=\delta_{r,1}v_{1}$ and $P'u_{r}=\delta_{r,2}u_{2}$ by the rank-one definition and orthonormality, [F3] gives $(P\otimes P')\kappa(v_{r}\otimes u_{r})=\delta_{r,1}\delta_{r,2}\kappa(v_{1}\otimes u_{2})=0$ for every $r$. Boundedness of $P\otimes P'$ passes this identity through the norm-convergent Schmidt expansion, so $(P\otimes P')\Psi=0$ and $\operatorname{tr}(\rho(P\otimes P'))=0$ by [F2]. The trace-norm expansions of the reduced preparations [F1], paired with the bounded projections, give $\operatorname{tr}(\rho_{A}P)=s_{1}^{2}$ and $\operatorname{tr}(\rho_{B}P')=s_{2}^{2}$ by [F2]. Thus the marginal product exceeds the joint probability by $s_{1}^{2}s_{2}^{2}>0$. The two local measurements $(P,I-P)$ and $(P',I-P')$ are effect families by [F2], [F4], and their $(+,+)$ entry already proves nonfactorization. [given, F1, F2, F3, F4, F6, algebra]
 
-2.1 [Product case] Let $\Psi=\kappa(u\otimes v)$ with $\|u\|=\|v\|=1$ and let $F,F'$ be bounded effects. By [F5] and the tensor calculus [F3], the same square-root factorization as in step 1.1 shows $F\otimes F'\ge0$, and
-$I_H\otimes I_K-F\otimes F'=(I_H-F)\otimes I_K+F\otimes(I_K-F')\ge0$,
-since each term on the right factors as $R^{*}R$ using [F5] and [F3]. Thus $F\otimes F'$ is an effect. By [F2] and [F3],
-$\operatorname{tr}(\rho(F\otimes F'))=\langle(F\otimes F')\Psi,\Psi\rangle_{\widehat\otimes}=\langle Fu,u\rangle_H\langle F'v,v\rangle_K=\operatorname{tr}(T_{u,u}F)\operatorname{tr}(T_{v,v}F')=\operatorname{tr}(\rho_AF)\operatorname{tr}(\rho_BF')$ by [F1]. For arbitrary $F,F'$, apply step 1.1 to the binary local families $(F,I_H-F)$ and $(F',I_K-F')$; it declares $F\otimes F'$ as their joint $(+,+)$ effect. For general finite outcome families, step 1.1 gives the corresponding declared joint probabilities and marginals, so they factorize. This is (a). [given, F1, F2, F3, step 1.1, algebra]
+2.1 [Product case] Let $\Psi=\kappa(u\otimes v)$ with $\|u\|=\|v\|=1$ and let $F,F'$ be bounded effects. By [F5] and the tensor calculus [F3], the same square-root factorization as in step 1.1 shows $F\otimes F'\ge0$, and $I_H\otimes I_K-F\otimes F'=(I_H-F)\otimes I_K+F\otimes(I_K-F')\ge0$, since each term on the right factors as $R^{*}R$ using [F5] and [F3]. Thus $F\otimes F'$ is an effect. By [F2] and [F3], $\operatorname{tr}(\rho(F\otimes F'))=\langle(F\otimes F')\Psi,\Psi\rangle_{\widehat\otimes}=\langle Fu,u\rangle_H\langle F'v,v\rangle_K=\operatorname{tr}(T_{u,u}F)\operatorname{tr}(T_{v,v}F')=\operatorname{tr}(\rho_AF)\operatorname{tr}(\rho_BF')$ by [F1]. For arbitrary $F,F'$, apply step 1.1 to the binary local families $(F,I_H-F)$ and $(F',I_K-F')$; it declares $F\otimes F'$ as their joint $(+,+)$ effect. For general finite outcome families, step 1.1 gives the corresponding declared joint probabilities and marginals, so they factorize. This is (a). [given, F1, F2, F3, step 1.1, algebra]
 
 3.1 [Assembly and scope] Steps 2.1 and 1.2 prove (a) and (b); only the declared composite, its pure preparations and the cited mathematics were used, and no dynamics, apparatus or empirical input entered, which is the scope statement (c). [step 1.1, step 2.1, step 1.2] ∎
 
 ## Remarks
 
-- **One pair of effects suffices.** Clause (b) exhibits a single pair of
-  local rank-one effects that detects the correlation; the two-outcome
-  measurements with effects $(P,I-P)$ and $(P',I-P')$ have joint law
-  $(0,s_{1}^{2},s_{2}^{2},1-s_{1}^{2}-s_{2}^{2})$
-  in the ordering $(+,+),(+,-),(-,+),(-,-)$ for the unit vector $\Psi$.
-  All entries are nonnegative because $\sum_{r}s_{r}^{2}=1$, and the first
-  entry differs from $s_{1}^{2}s_{2}^{2}$.
-- **No converse beyond pure states.** The theorem concerns pure preparations;
-  for mixed preparations no analogous factorization criterion is asserted.
+- **One pair of effects suffices.** Clause (b) exhibits a single pair of local rank-one effects that detects the correlation; the two-outcome measurements with effects $(P,I-P)$ and $(P',I-P')$ have joint law $(0,s_{1}^{2},s_{2}^{2},1-s_{1}^{2}-s_{2}^{2})$ in the ordering $(+,+),(+,-),(-,+),(-,-)$ for the unit vector $\Psi$. All entries are nonnegative because $\sum_{r}s_{r}^{2}=1$, and the first entry differs from $s_{1}^{2}s_{2}^{2}$.
+- **No converse beyond pure states.** The theorem concerns pure preparations; for mixed preparations no analogous factorization criterion is asserted.

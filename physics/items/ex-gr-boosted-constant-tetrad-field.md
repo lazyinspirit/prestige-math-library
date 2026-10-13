@@ -8,7 +8,7 @@ domain: mathematics
 dependency_level: 5
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 proof_strategy: direct
 deps: [def-gr-local-frame-and-tetrad-fields, def-gr-observer-congruence-and-adapted-charts, def-gr-smooth-lorentzian-objects, prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components]
 dependency_roles:
@@ -66,13 +66,8 @@ not equal the congruence.
 
 4.1 The field $n:=E_0=\gamma(\partial_0+\beta\partial_1)$ is a smooth future unit timelike field, hence an observer congruence by [L4]. Its integral curves satisfy $\dot x^0=\gamma$, $\dot x^1=\gamma\beta$, $\dot x^2=\dot x^3=0$, so $x^2$ and $x^3$ are constant and $\frac{d}{ds}(x^1-\beta x^0)=\gamma\beta-\beta\gamma=0$; therefore $x^1-\beta x^0$, $x^2$ and $x^3$ are constant along every integral curve. [step 3.1, L4, algebra]
 
-5.1 The map $u=(u^0,u^1,u^2,u^3):=(x^0,x^1-\beta x^0,x^2,x^3)$ has the smooth inverse $x^0=u^0$, $x^1=u^1+\beta u^0$, $x^2=u^2$, $x^3=u^3$, so it is a chart, and by step 4.1 its spatial coordinates $u^1,u^2,u^3$ are constant along the integral curves of $n$; the chart is $n$-adapted by [L4]. In these coordinates $\partial_{u^0}=\partial_0+\beta\partial_1=n/\gamma$, so $n=\gamma\partial_{u^0}\neq\partial_{u^0}$: the coordinate field of the adapted chart is not the congruence itself, and no uniqueness of adapted charts is claimed. [step 4.1, L4, algebra] ∎
+5.1 The map $u=(u^0,u^1,u^2,u^3):=(x^0,x^1-\beta x^0,x^2,x^3)$ has the smooth inverse $x^0=u^0$, $x^1=u^1+\beta u^0$, $x^2=u^2$, $x^3=u^3$, so it is a chart, and by step 4.1 its spatial coordinates $u^1,u^2,u^3$ are constant along the integral curves of $n$; the chart is $n$-adapted by [L4]. In these coordinates $\partial_{u^0}=\partial_0+\beta\partial_1=n/\gamma$, so $n=\gamma\partial_{u^0}$. It equals $\partial_{u^0}$ exactly when $\beta=0$ (then $\gamma=1$), and differs when $\beta\neq0$; thus an adapted chart need not have the congruence as its coordinate field. No uniqueness of adapted charts is claimed. [step 4.1, L4, algebra] ∎
 
 ## Remarks
 
-The example shows that an adapted chart exists for this congruence and that its
-coordinate time need not be the flow parameter of $n$; the existence corollary
-on the tensors page produces a different adapted chart in which
-$n=\partial_{u^0}$ exactly. The congruence is parallel in the identity chart,
-so its observers are straight lines; no curvature or acceleration claim is
-made.
+The example shows that an adapted chart exists for this congruence and that its coordinate time need not be the flow parameter of $n$; the existence corollary on the tensors page produces a different adapted chart in which $n=\partial_{u^0}$ exactly. The congruence is parallel in the identity chart, so its observers are straight lines; no curvature or acceleration claim is made.

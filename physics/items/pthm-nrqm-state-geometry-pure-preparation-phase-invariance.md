@@ -15,6 +15,7 @@ deps:
     lem-nrqm-state-geometry-normalization-and-phase-classes,
     lem-nrqm-state-geometry-ray-to-rank-one-projection,
     def-nrqm-state-geometry-pure-mixed-states-and-purity,
+    lem-nrqm-composites-rank-one-operator-calculus,
     cor-inner-product-induces-a-norm,
     def-countable-choice
   ]
@@ -25,6 +26,7 @@ dependency_roles:
   lem-nrqm-state-geometry-normalization-and-phase-classes: mathematical-premise
   lem-nrqm-state-geometry-ray-to-rank-one-projection: mathematical-premise
   def-nrqm-state-geometry-pure-mixed-states-and-purity: mathematical-premise
+  lem-nrqm-composites-rank-one-operator-calculus: mathematical-premise
   cor-inner-product-induces-a-norm: mathematical-premise
   def-countable-choice: mathematical-premise
 proof_strategy: direct
@@ -75,11 +77,13 @@ and this operator is a pure state. In particular the density operator associated
 
 [F2] **State-space vocabulary** ([[def-nrqm-state-geometry-framework-state-space]], [[def-nrqm-state-geometry-pure-mixed-states-and-purity]]): the state assigned to a nonzero vector is the normalized rank-one operator $T_{\psi,\psi}/\|\psi\|^{2}=T_{\nu(\psi),\nu(\psi)}$, the pure states are the operators $T_{u,u}$ with $u\in S(H)$, and $D(H)$ consists of the density operators of trace one.
 
-[F3] **Rank-one scaling and equality** ([[lem-nrqm-state-geometry-ray-to-rank-one-projection]]): $T_{z\psi,z\psi}=|z|^{2}T_{\psi,\psi}$ for $z\ne0$; $T_{\psi,\psi}=\|\psi\|^{2}T_{\nu(\psi),\nu(\psi)}$; $T_{\psi,\psi}=T_{\varphi,\varphi}$ holds exactly when $\|\psi\|=\|\varphi\|$ and $[\psi]=[\varphi]$; and for unit $u,w$, $T_{u,u}=T_{w,w}$ holds exactly when $w=\zeta u$ for some $\zeta\in U(1)$.
+[F3] **Rank-one scaling and equality** ([[lem-nrqm-state-geometry-ray-to-rank-one-projection]], [[lem-nrqm-composites-rank-one-operator-calculus]] clauses (a)-(c)): $T_{z\psi,z\psi}=|z|^{2}T_{\psi,\psi}$ for $z\ne0$; $T_{\psi,\psi}=\|\psi\|^{2}T_{\nu(\psi),\nu(\psi)}$; $T_{\psi,\psi}=T_{\varphi,\varphi}$ holds exactly when $\|\psi\|=\|\varphi\|$ and $[\psi]=[\varphi]$; and for unit $u,w$, $T_{u,u}=T_{w,w}$ holds exactly when $w=\zeta u$ for some $\zeta\in U(1)$.
 
 [F4] **Normalization and phases** ([[lem-nrqm-state-geometry-normalization-and-phase-classes]]): $\nu(\psi)\in[\psi]\cap S(H)$, $[\psi]=[\varphi]$ holds exactly when $\nu(\varphi)=\zeta\nu(\psi)$ for a unique $\zeta\in U(1)$, and for unit $u,w$ one has $[u]=[w]$ exactly when $w=\zeta u$ with unique $\zeta\in U(1)$.
 
 [F5] **Norms** ([[cor-inner-product-induces-a-norm]]): $\|z\psi\|=|z|\,\|\psi\|$, $\|\psi\|=0$ exactly for $\psi=0$, and $\|\psi\|\ge0$. In particular $\|0\|=0$, so the scalar $\|\psi\|^{-1}$ used in the normalization is defined only for nonzero $\psi$.
+
+[F6] **Rank-one trace, including zero** ([[lem-nrqm-composites-rank-one-operator-calculus]] clauses (b)-(c)): for all $x,y\in H$, including zero, $T_{x,y}$ is trace class and $\operatorname{tr}(T_{x,y})=\langle x,y\rangle$; its defining formula gives $T_{0,0}=0$.
 
 ## Proof
 
@@ -89,4 +93,4 @@ and this operator is a pure state. In particular the density operator associated
 
 2.1 [(b) injectivity of the assignment] Suppose two pure preparations $[\psi],[\varphi]$ have the same assigned pure state, that is $T_{\nu(\psi),\nu(\psi)}=T_{\nu(\varphi),\nu(\varphi)}$. Since $\nu(\psi),\nu(\varphi)\in S(H)$, [F3] gives $\nu(\varphi)=\zeta\nu(\psi)$ for some $\zeta\in U(1)$, and [F4] then gives $[\varphi]=[\psi]$. Hence the assignment is injective, and it is surjective onto the set of pure states by [F2]; so it is a bijection from the pure preparations onto the pure states. [given, step 1.2, F2, F3, F4, algebra]
 
-3.1 [(c) the zero vector] By [F5], $\|0\|=0$, so the normalization map $\nu(\psi)=\|\psi\|^{-1}\psi$ is undefined at $\psi=0$ because the scalar $\|\psi\|^{-1}$ does not exist; the ray of $0$ would be $\{z\cdot 0:z\ne0\}=\{0\}$, which contains no unit vector, so clause (ii) of [F1] assigns no pure preparation to it. Moreover $T_{0,0}=0$ has $\operatorname{tr}(T_{0,0})=\langle0,0\rangle=0$ by [F3], so it is not a density operator of trace one and hence not an element of $D(H)$ by [F2]; clause (iii) of [F1] likewise assigns no general preparation to $0$. This proves (c) and completes (a)-(c). [given, step 1.1, F1, F2, F3, F5, algebra] ∎
+3.1 [(c) the zero vector] By [F5], $\|0\|=0$, so the normalization map $\nu(\psi)=\|\psi\|^{-1}\psi$ is undefined at $\psi=0$ because the scalar $\|\psi\|^{-1}$ does not exist; the ray of $0$ would be $\{z\cdot 0:z\ne0\}=\{0\}$, which contains no unit vector, so clause (ii) of [F1] assigns no pure preparation to it. Moreover $T_{0,0}=0$ has $\operatorname{tr}(T_{0,0})=\langle0,0\rangle=0$ by [F6], so it is not a density operator of trace one and hence not an element of $D(H)$ by [F2]; clause (iii) of [F1] likewise assigns no general preparation to $0$. This proves (c) and completes (a)-(c). [given, step 1.1, F1, F2, F5, F6, algebra] ∎

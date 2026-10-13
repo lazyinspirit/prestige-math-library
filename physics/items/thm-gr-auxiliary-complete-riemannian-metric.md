@@ -10,8 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-smooth-lorentzian-objects, def-gr-observer-and-rest-space, def-gr-inverse-metric-and-musical-isomorphisms, def-lorentz-orthogonality-and-orthogonal-complement, def-gr-smooth-covariant-two-tensor-field, def-gr-causal-curves-and-reachability, lem-gr-causal-curve-calculus, def-absolutely-continuous-function, thm-absolutely-continuous-functions-have-integrable-derivatives, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function, thm-hopf-rinow, def-riemannian-distance-on-a-connected-manifold, thm-riemannian-distance-is-a-metric, thm-the-riemannian-distance-topology-is-the-manifold-topology, def-complete-metric-space, def-countable-choice, def-metric-ball, def-continuity-real, def-c-r-and-smooth-maps-between-smooth-manifolds]
+deps: [lem-gr-observer-projection-decomposition, def-dependent-choice,def-gr-smooth-lorentzian-objects, def-gr-observer-and-rest-space, def-gr-inverse-metric-and-musical-isomorphisms, def-lorentz-orthogonality-and-orthogonal-complement, def-gr-smooth-covariant-two-tensor-field, def-gr-causal-curves-and-reachability, lem-gr-causal-curve-calculus, def-absolutely-continuous-function, thm-absolutely-continuous-functions-have-integrable-derivatives, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function, thm-hopf-rinow, def-riemannian-distance-on-a-connected-manifold, def-riemannian-speed-and-length, thm-riemannian-distance-is-a-metric, thm-the-riemannian-distance-topology-is-the-manifold-topology, def-complete-metric-space, thm-compact-implies-the-other-compactness-forms, thm-compactness-agrees-with-metric-compactness, lem-metric-cauchy-with-convergent-subsequence, def-countable-choice, def-metric-ball, def-continuity-real, def-c-r-and-smooth-maps-between-smooth-manifolds]
 dependency_roles:
+  lem-gr-observer-projection-decomposition: mathematical-premise
+  def-dependent-choice: mathematical-premise
   def-gr-smooth-lorentzian-objects: mathematical-premise
   def-gr-observer-and-rest-space: mathematical-premise
   def-gr-inverse-metric-and-musical-isomorphisms: mathematical-premise
@@ -25,9 +27,13 @@ dependency_roles:
   thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function: mathematical-premise
   thm-hopf-rinow: mathematical-premise
   def-riemannian-distance-on-a-connected-manifold: mathematical-premise
+  def-riemannian-speed-and-length: mathematical-premise
   thm-riemannian-distance-is-a-metric: mathematical-premise
   thm-the-riemannian-distance-topology-is-the-manifold-topology: mathematical-premise
   def-complete-metric-space: mathematical-premise
+  thm-compact-implies-the-other-compactness-forms: mathematical-premise
+  thm-compactness-agrees-with-metric-compactness: mathematical-premise
+  lem-metric-cauchy-with-convergent-subsequence: mathematical-premise
   def-countable-choice: mathematical-premise
   def-metric-ball: mathematical-premise
   def-continuity-real: mathematical-premise
@@ -52,6 +58,17 @@ with the flat map $\flat$ of [[def-gr-inverse-metric-and-musical-isomorphisms]],
 so that $h$ is a smooth covariant $2$-tensor field
 ([[def-gr-smooth-covariant-two-tensor-field]]). Then:
 
+For each connected component $M_0\subseteq M$ and smooth Riemannian metric
+$H$, let $d_H$ denote the Riemannian distance of $H|_{M_0}$. For the following absolutely continuous length assertion, also assume
+Dependent Choice ([[def-dependent-choice]]), as required by the cited
+fundamental theorem. For any locally
+absolutely continuous curve $\gamma:[a,b]\to M_0$, use the length
+$$\ell_H(\gamma):=\int_a^b\sqrt{H_{\gamma(t)}(\gamma'(t),\gamma'(t))}\,dt,$$
+with the Lebesgue integral and almost-everywhere derivative. This extends the
+piecewise-$C^1$ length of [[def-riemannian-speed-and-length]]. The distance
+from [[def-riemannian-distance-on-a-connected-manifold]] satisfies
+$d_H(\gamma(a),\gamma(b))\le\ell_H(\gamma)$; the proof is included below.
+
 **(a)** $h$ is a smooth Riemannian (positive definite) metric on $M$.
 
 **(b)** There is a smooth nonnegative proper function $f:M\to[0,\infty)$ such
@@ -74,7 +91,7 @@ closed ball $\{q\in M_0:d_{h'}(q,p)\le r\}$ is compact.
 
 [L1] $n$ is smooth, nowhere vanishing, with $g(n,n)=-1$ and $g(n,N)<0$; the flat map is the smooth bundle isomorphism $X\mapsto g(X,\cdot)$ and $n^\flat$ is the smooth covector field $g(n,\cdot)$; tensor products and sums of smooth tensor fields are smooth ([[def-gr-smooth-lorentzian-objects]], [[def-gr-observer-and-rest-space]], [[def-gr-inverse-metric-and-musical-isomorphisms]], [[def-gr-smooth-covariant-two-tensor-field]]).
 
-[L2] For a timelike vector $u$ the orthogonal complement $u^\perp=\{w:g(w,u)=0\}$ is a three-dimensional positive definite subspace, and every $v\in T_qM$ decomposes uniquely as $v=\alpha n_q+w$ with $w\in n_q^\perp$ and $\alpha=-g_q(v,n_q)$; then $g_q(v,v)=-\alpha^2+g_q(w,w)$ ([[def-lorentz-orthogonality-and-orthogonal-complement]], [[def-gr-smooth-lorentzian-objects]]).
+[L2] For a timelike vector $u$ the orthogonal complement $u^\perp=\{w:g(w,u)=0\}$ is a three-dimensional positive definite subspace, and every $v\in T_qM$ decomposes uniquely as $v=\alpha n_q+w$ with $w\in n_q^\perp$ and $\alpha=-g_q(v,n_q)$; then $g_q(v,v)=-\alpha^2+g_q(w,w)$ ([[lem-gr-observer-projection-decomposition]] clauses 1 and 3, [[def-lorentz-orthogonality-and-orthogonal-complement]], [[def-gr-smooth-lorentzian-objects]]).
 
 [L3] For a smooth positive definite metric $H$ and a smooth function $u$, the metric $H'=(1+|du|_H^2)H$ has inverse $H'^{-1}=(1+|du|_H^2)^{-1}H^{-1}$ and satisfies $|du|_{H'}^2=|du|_H^2/(1+|du|_H^2)\le1$; this is multilinear algebra applied at each point ([[def-gr-inverse-metric-and-musical-isomorphisms]]).
 
@@ -84,7 +101,7 @@ closed ball $\{q\in M_0:d_{h'}(q,p)\le r\}$ is compact.
 
 [L6] The Riemannian distance $d_H$ of a smooth positive definite metric $H$ on a connected manifold is a metric, and it induces the manifold topology; in particular metric limits and topological limits agree, and a subset is compact for $d_H$ exactly when it is compact in the manifold topology ([[def-riemannian-distance-on-a-connected-manifold]], [[thm-riemannian-distance-is-a-metric]], [[thm-the-riemannian-distance-topology-is-the-manifold-topology]], [[def-metric-ball]]).
 
-[L7] In a compact metric space every sequence has a convergent subsequence, and a Cauchy sequence with a convergent subsequence converges; these are the standard completeness facts encoded in [[def-complete-metric-space]].
+[L7] Topological compactness for a metric topology equals metric compactness ([[thm-compactness-agrees-with-metric-compactness]]). In ZF a compact metric space is sequentially compact ([[thm-compact-implies-the-other-compactness-forms]], clauses 1 and 3). A Cauchy sequence with a convergent subsequence converges to its subsequential limit ([[lem-metric-cauchy-with-convergent-subsequence]]).
 
 [L8] Hopf-Rinow, under $\mathrm{AC}_\omega$: for a connected Riemannian manifold $(M_0,H)$, completeness of $(M_0,d_H)$ is equivalent to every closed $d_H$-bounded subset being compact, and closed metric balls are then compact ([[thm-hopf-rinow]], conditions 1 and 5).
 
@@ -94,17 +111,25 @@ closed ball $\{q\in M_0:d_{h'}(q,p)\le r\}$ is compact.
 
 1.1 (Clause (a).) Let $q\in M$ and $v\in T_qM$ nonzero, and decompose $v=\alpha n_q+w$ as in [L2]. Then $g_q(v,n_q)=-\alpha$, so $$h_q(v,v)=g_q(v,v)+2g_q(v,n_q)^2=-\alpha^2+g_q(w,w)+2\alpha^2=\alpha^2+g_q(w,w).$$ If $w\ne0$ then $g_q(w,w)>0$ by positive definiteness on $n_q^\perp$, so $h_q(v,v)>0$; if $w=0$ then $\alpha\ne0$ and $h_q(v,v)=\alpha^2>0$. Symmetry of $h$ is inherited from $g$ and the symmetric product $n^\flat\otimes n^\flat$, and smoothness from [L1]. This proves (a). [L1, L2, given, algebra]
 
+1.2 (Length and the distance for locally absolutely continuous curves.) Let $M_0$ be a connected component, let $H$ be a smooth Riemannian metric on it, and let $\gamma:[a,b]\to M_0$ be locally absolutely continuous. Its image is compact, so subdivide $[a,b]$ into finitely many pieces whose coordinate images lie in convex chart balls with compact closure. On each piece the smooth metric coefficients are bounded and the coordinate derivative is integrable; hence the integrand defining $\ell_H$ is measurable and dominated by a constant times the Euclidean coordinate speed, so $\ell_H(\gamma)<\infty$. Fix $\varepsilon\in(0,1)$. Refine the subdivision so that on each piece the metric matrix differs from a fixed positive form $H_i$ by relative bounds $(1-\varepsilon)H_i\le H\le(1+\varepsilon)H_i$, which is possible by continuity and compactness. For the coordinate endpoints $x_i,x_{i+1}$ of a piece, the straight coordinate segment stays in its convex chart ball and has $H$-length at most $\sqrt{1+\varepsilon}\,|x_{i+1}-x_i|_{H_i}$. Since $x_{i+1}-x_i=\int x'(t)\,dt$, the triangle inequality for the norm induced by $H_i$ gives
+$$|x_{i+1}-x_i|_{H_i}\le\int |x'(t)|_{H_i}\,dt\le(1-\varepsilon)^{-1/2}\int\sqrt{H_{\gamma(t)}(\gamma'(t),\gamma'(t))}\,dt.$$
+The distance between the piece endpoints is no larger than the length of this piecewise-$C^1$ segment. Summing over pieces and using the triangle inequality for $d_H$ gives $d_H(\gamma(a),\gamma(b))\le\sqrt{(1+\varepsilon)/(1-\varepsilon)}\,\ell_H(\gamma)$. Letting $\varepsilon\downarrow0$ proves the asserted inequality. [L5, L6, given, algebra]
+
+
 2.1 (The conformal factor.) By [L4] choose a smooth nonnegative proper $f$ and set $h':=(1+|df|_h^2)h$. By [L3], applied at each point with $H=h$, the field $h'$ is positive definite and smooth and satisfies $|df|_{h'}\le1$ everywhere. This proves (b). [step 1.1, L3, L4, given]
 
-3.1 (The proper function is $1$-Lipschitz for $h'$.) Let $q,q'\in M_0$ and let $\varepsilon>0$; by the definition of the Riemannian distance as an infimum of lengths of locally absolutely continuous curves ([[def-riemannian-distance-on-a-connected-manifold]]) there is a locally absolutely continuous curve $\gamma:[a,b]\to M_0$ from $q$ to $q'$ with $\ell_{h'}(\gamma)\le d_{h'}(q,q')+\varepsilon$. By [L5] with $H=h'$ and $u=f$, $$|f(q')-f(q)|\le\int_a^b|df|_{h'}\,|\gamma'|_{h'}\le\ell_{h'}(\gamma)\le d_{h'}(q,q')+\varepsilon;$$ letting $\varepsilon\downarrow0$ gives $|f(q')-f(q)|\le d_{h'}(q,q')$. [step 2.1, L5, given, algebra]
+3.1 (The proper function is $1$-Lipschitz for $h'$.) Let $q,q'\in M_0$ and let $\varepsilon>0$. By [[def-riemannian-distance-on-a-connected-manifold]], choose a piecewise-$C^1$ curve $\gamma:[a,b]\to M_0$ from $q$ to $q'$ whose $h'$-length is at most $d_{h'}(q,q')+\varepsilon$. On each smooth piece, [L5] and Cauchy--Schwarz give $|f(\gamma(v))-f(\gamma(u))|\le\int_u^v |df|_{h'}\,|\gamma'|_{h'}\,dt\le L_{h'}(\gamma|_{[u,v]})$. Summing over the finitely many pieces yields $|f(q')-f(q)|\le L_{h'}(\gamma)\le d_{h'}(q,q')+\varepsilon$. Letting $\varepsilon\downarrow0$ gives $|f(q')-f(q)|\le d_{h'}(q,q')$. [step 2.1, L5, given, algebra]
 
-4.1 (Completeness.) Let $(x_k)$ be a Cauchy sequence in $(M_0,d_{h'})$. There is $k_0$ with $d_{h'}(x_k,x_{k_0})\le1$ for all $k\ge k_0$; by step 3.1, $f(x_k)\le f(x_{k_0})+1$ for those $k$, so the tail of the sequence lies in the closed sublevel $K:=f^{-1}\bigl([0,f(x_{k_0})+1]\bigr)$, which is compact in $M$ by [L4] and hence compact in $M_0$; note $K$ contains $x_k$ only for $k\ge k_0$ together with $x_{k_0}$, and we may add the finitely many remaining terms to obtain a compact subset of $M_0$ containing the whole sequence, since a finite set is compact and a finite union of compact sets is compact. On this compact set the sequence has a convergent subsequence by [L7]; that subsequence converges in the manifold topology, hence, by [L6], in $d_{h'}$, and a Cauchy sequence with a convergent subsequence converges in $d_{h'}$. Hence $(M_0,d_{h'})$ is complete, which is (c). [step 3.1, L4, L6, L7, given]
+4.1 (Completeness.) Let $(x_k)$ be a Cauchy sequence in $(M_0,d_{h'})$. There is $k_0$ with $d_{h'}(x_k,x_{k_0})\le1$ for all $k\ge k_0$; by step 3.1, $f(x_k)\le f(x_{k_0})+1$ for those $k$, so the tail lies in the closed sublevel $K:=f^{-1}\bigl([0,f(x_{k_0})+1]\bigr)$. The set $K$ is compact in $M$ by [L4]. Every connected component is closed (the closure of a connected set is connected), so $K_0:=K\cap M_0$ is compact in $M_0$ and contains the tail. By [L7] that tail has a subsequence converging in $K_0$; the limit is a manifold-topology limit and therefore a $d_{h'}$-limit by [L6]. Since $(x_k)$ is Cauchy, the whole sequence converges to the same limit. Hence $(M_0,d_{h'})$ is complete, which is (c). [step 3.1, L4, L6, L7, given]
 
-5.1 (Clause (d).) Apply [L8] to the connected Riemannian manifold $(M_0,h'|_{M_0})$, which is complete by step 4.1: every closed $d_{h'}$-bounded subset of $M_0$ is compact, and every closed ball is compact. This proves (d) and completes the proof. [step 4.1, L8, given] ∎
+5.1 (Clause (d).) Apply [L8] to the connected Riemannian manifold $(M_0,h'|_{M_0})$, which is complete by step 4.1: every closed $d_{h'}$-bounded subset of $M_0$ is compact, and every closed ball is compact. This proves (d). [step 4.1, L8, given]
+
+
+6.1 (Conclusion.) Steps 1.1-5.1 prove (a)-(d), and step 1.2 establishes the locally absolutely continuous length convention stated above. [step 1.1, step 2.1, step 3.1, step 4.1, step 5.1, step 1.2] ∎
 
 ## Remarks
 
-- **Choice.** The countable choice assumption is inherited from the proper-exhaustion theorem and Hopf-Rinow and is used only there; the metric $h$ itself and clauses (a)-(b) need no choice.
+- **Choice.** The countable choice assumption is inherited from the proper-exhaustion theorem and Hopf-Rinow and is used only there; the metric $h$ itself is pointwise algebra, and the additional length assertion uses Dependent Choice through its fundamental-theorem supplier.
 
 - **Why $h$ and not just some Riemannian metric.** The particular combination $g+2n^\flat\otimes n^\flat$ has the additional property, recorded in [[lem-gr-causal-curve-conventions]] and used in the limit-curve arguments, that $h(X,X)\ge1$ for every $g$-unit future timelike $X$; this is what makes the arclength depth of prepended geodesics controlled without completeness assumptions on $g$.
 

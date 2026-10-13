@@ -49,7 +49,7 @@ sources:
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/a56c316e4ec\
         548d8bd0a554fac9a74e8_MIT8_05F13_Chap_02.pdf"
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
-        Section 3.3, printed pages 92-95 (PDF files pages 104-107):
+        Section 3.1, printed pages 92-95 (PDF files pages 104-107):
         probabilities from a projection-valued measure and interference of
         amplitudes"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
@@ -75,7 +75,7 @@ composite $H\widehat\otimes H$ with the product vectors and local operators of
 
 [L2] Rank-one calculus: $T_{u,v}x=\langle x,v\rangle u$ is trace class with $\operatorname{tr}T_{u,v}=\langle u,v\rangle$, so $T_{\psi,\psi}$ is a rank-one positive operator with trace $\|\psi\|^{2}$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]], [[lem-nrqm-composites-rank-one-operator-calculus]]).
 
-[L3] Local operators act on product vectors by $S\otimes T(\psi_{A}\otimes\psi_{B})=(S\psi_{A})\otimes(T\psi_{B})$, and bounded local operators are bounded on the completed tensor product ([[lem-nrqm-composites-bounded-tensor-maps]] clause (a)).
+[L3] Bounded tensor maps act on product vectors by $S\otimes T(\psi_{A}\otimes\psi_{B})=(S\psi_{A})\otimes(T\psi_{B})$, and $(S\otimes T)^*=S^*\otimes T^*$; hence tensoring the self-adjoint $S_z$ with $I$ gives a bounded self-adjoint operator ([[lem-nrqm-composites-bounded-tensor-maps]] clauses (a), (c)).
 
 [L4] The spectral family of $S_{z}$ is $E_{S_{z}}(\{\hbar/2\})=P_{+}$ and $E_{S_{z}}(\{-\hbar/2\})=P_{-}$, the orthogonal projections onto the lines $\mathbb Ce_{+}$ and $\mathbb Ce_{-}$, and $\sigma(S_{z})=\{\hbar/2,-\hbar/2\}$ ([[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clauses (a) and (e), [[post-nrqm-framework-observable-and-probability]] clause (ii)).
 
@@ -85,11 +85,11 @@ composite $H\widehat\otimes H$ with the product vectors and local operators of
 
 1.1 Let $\psi:=\tfrac1{\sqrt2}(e_{+}+e_{-})$, so $\|\psi\|=1$ by orthonormality. The pure preparation is the unit ray $[\psi]=\{z\psi:z\in\mathbb C\setminus\{0\}\}$: the vector $e^{i\theta}\psi$ has the same norm and defines the same ray, and the associated density operator $T_{\psi,\psi}$ satisfies $\operatorname{tr}T_{\psi,\psi}=\|\psi\|^{2}=1$ by [L2]; hence it is a density operator in the sense of [L1]. [given, L1, L2, algebra]
 
-1.2 Let $0<w<1$ and let $\psi_{1},\psi_{2}$ be orthonormal vectors of $H$, and put $\rho:=w\,T_{\psi_{1},\psi_{1}}+(1-w)T_{\psi_{2},\psi_{2}}$. By [L1] $\rho$ is a density operator with $\operatorname{tr}\rho=w+(1-w)=1$; but $\rho^{2}=w^{2}T_{\psi_{1},\psi_{1}}+(1-w)^{2}T_{\psi_{2},\psi_{2}}$ because the cross terms vanish by orthogonality, so $\rho^{2}\psi_{1}=w^{2}\psi_{1}\ne w\psi_{1}=\rho\psi_{1}$ since $0<w<1$ and $\psi_{1}\ne0$. Hence $\rho^{2}\ne\rho$, so $\rho$ is not a rank-one projection and is not of the form $T_{\varphi,\varphi}$; the mixture of two orthogonal pure preparations is a preparation of a different type from either component. [given, L1, algebra]
+1.2 Let $0<w<1$ and let $\psi_{1},\psi_{2}$ be orthonormal vectors of $H$, and put $\rho:=w\,T_{\psi_{1},\psi_{1}}+(1-w)T_{\psi_{2},\psi_{2}}$. By [L1] $\rho$ is a density operator with $\operatorname{tr}\rho=w+(1-w)=1$; orthogonality gives $\rho\psi_{1}=w\psi_{1}$ and $\rho\psi_{2}=(1-w)\psi_{2}$. Both eigenvalues are positive, so the range of $\rho$ contains the two linearly independent vectors $\psi_1,\psi_2$; hence $\rho$ has rank at least two and is not a rank-one operator $T_{\varphi,\varphi}$ for any $\varphi$. The mixture of two orthogonal pure preparations is therefore a preparation of a different type from either component. [given, L1, algebra]
 
-1.3 On the composite $H\widehat\otimes H$ consider the product state $\Psi:=e_{+}\otimes e_{+}$ and the local observable $S_{z}\otimes I$. By [L3], $(S_{z}\otimes I)\Psi=(S_{z}e_{+})\otimes e_{+}=\tfrac{\hbar}{2}\,\Psi$, and the spectral projection of $S_{z}\otimes I$ for the value $\hbar/2$ contains the product of the spectral projection $P_{+}$ of $S_{z}$ with the identity, so the local outcome probability for the set $\{\hbar/2\}$ is $\|(P_{+}\otimes I)\Psi\|^{2}=1$ by [L4]. [given, L3, L4, algebra]
+1.3 On the composite $H\widehat\otimes H$ consider the product state $\Psi:=e_{+}\otimes e_{+}$ and the local observable $S_{z}\otimes I$. By [L3] and the self-adjointness of $S_z$ in [L4], this tensor operator is self-adjoint, and $(S_{z}\otimes I)\Psi=(S_{z}e_{+})\otimes e_{+}=\tfrac{\hbar}{2}\,\Psi$. On the product basis of $H\widehat\otimes H$, the spectral projection for $\hbar/2$ is $P_{+}\otimes I$, so the local outcome probability for $\{\hbar/2\}$ is $\|(P_{+}\otimes I)\Psi\|^{2}=1$. [given, L3, L4, algebra]
 
-1.4 For the state $\psi=\tfrac1{\sqrt2}(e_{+}+e_{-})$ the outcome law of $S_{z}$ is $B\mapsto\mu^{S_{z}}_{\psi}(B)=\operatorname{tr}(T_{\psi,\psi}E_{S_{z}}(B))=\|E_{S_{z}}(B)\psi\|^{2}$. By [L4] the projections are $P_{\pm}$ onto the lines $\mathbb Ce_{\pm}$, so $\mu^{S_{z}}_{\psi}(\{\hbar/2\})=\|P_{+}\psi\|^{2}=\tfrac12$ and $\mu^{S_{z}}_{\psi}(\{-\hbar/2\})=\|P_{-}\psi\|^{2}=\tfrac12$, and $\mu^{S_{z}}_{\psi}$ is the probability measure $\tfrac12\delta_{\hbar/2}+\tfrac12\delta_{-\hbar/2}$ on the two-point set $\sigma(S_{z})$, of total mass one; in particular the value of $S_{z}$ in this preparation is not a number but the measure, and its mean vanishes by symmetry of the two outcomes. [given, L1, L4, algebra]
+1.4 For the state $\psi=\tfrac1{\sqrt2}(e_{+}+e_{-})$ the outcome law of $S_{z}$ is $B\mapsto\mu^{S_{z}}_{\psi}(B)=\operatorname{tr}(T_{\psi,\psi}E_{S_{z}}(B))=\|E_{S_{z}}(B)\psi\|^{2}$. By [L4] the projections are $P_{\pm}$ onto the lines $\mathbb Ce_{\pm}$, so $\mu^{S_{z}}_{\psi}(\{\hbar/2\})=\|P_{+}\psi\|^{2}=\tfrac12$ and $\mu^{S_{z}}_{\psi}(\{-\hbar/2\})=\|P_{-}\psi\|^{2}=\tfrac12$. Thus the law is $\tfrac12\delta_{\hbar/2}+\tfrac12\delta_{-\hbar/2}$ on the two-point set $\sigma(S_{z})$ and is not concentrated at a single outcome; its finite mean is $\tfrac12(\hbar/2)+\tfrac12(-\hbar/2)=0$. [given, L1, L4, algebra]
 
 2.1 Combining steps 1.1-1.4: rays, density operators, mixtures, local tensor actions and outcome laws of the adopted postulates all have the mathematical types claimed for them, and the displayed computations are the ones the definitions and lemmas give. [step 1.1, step 1.2, step 1.3, step 1.4, algebra] ∎
 

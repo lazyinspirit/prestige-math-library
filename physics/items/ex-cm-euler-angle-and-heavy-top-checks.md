@@ -6,8 +6,13 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 6
-deps: [def-cm-euler-angle-parametrization-and-heavy-top-system, lem-cm-euler-angle-angular-velocity, thm-cm-heavy-top-reduction, lem-cm-coordinate-rotation-matrices, lem-cm-skew-matrix-cross-product-correspondence, def-cm-rigid-placement-and-body-angular-velocity, def-matrix-product-and-identity-matrix, def-sine-and-cosine-by-power-series, cor-trigonometric-parity-and-pythagorean-identity, def-euclidean-inner-product, def-derivative, def-interval]
+deps: [def-pi-via-first-positive-cosine-zero, thm-quarter-turn-values-and-shift-formulas, cor-pi-is-the-first-positive-sine-zero, thm-sine-cosine-signs-monotonicity-and-ranges, thm-sine-and-cosine-addition-formulas, def-cm-euler-angle-parametrization-and-heavy-top-system, lem-cm-euler-angle-angular-velocity, thm-cm-heavy-top-reduction, lem-cm-coordinate-rotation-matrices, lem-cm-skew-matrix-cross-product-correspondence, def-cm-rigid-placement-and-body-angular-velocity, def-matrix-product-and-identity-matrix, def-sine-and-cosine-by-power-series, cor-trigonometric-parity-and-pythagorean-identity, def-euclidean-inner-product, def-derivative, def-interval]
 dependency_roles:
+  def-pi-via-first-positive-cosine-zero: mathematical-premise
+  thm-quarter-turn-values-and-shift-formulas: mathematical-premise
+  cor-pi-is-the-first-positive-sine-zero: mathematical-premise
+  thm-sine-cosine-signs-monotonicity-and-ranges: mathematical-premise
+  thm-sine-and-cosine-addition-formulas: mathematical-premise
   def-cm-euler-angle-parametrization-and-heavy-top-system: mathematical-premise
   lem-cm-euler-angle-angular-velocity: mathematical-premise
   thm-cm-heavy-top-reduction: mathematical-premise
@@ -23,7 +28,7 @@ dependency_roles:
 proof_strategy: direct
 provenance:
   statement: ai-generated
-  proof: ai-generated
+  proof: ai-altered
 generation:
   role: example
 sources:
@@ -50,7 +55,7 @@ All data are the exact ones of the heavy-top system of [[def-cm-euler-angle-para
 
 [L3] For a heavy-top trajectory, $b=C(\psi'+\varphi'\cos\theta)$ and $a=A\varphi'\sin^2\theta+b\cos\theta$ are constant, $\varphi'=(a-b\cos\theta)/(A\sin^2\theta)$, $\psi'=b/C-(a-b\cos\theta)\cos\theta/(A\sin^2\theta)$, the reduced energy $E=\tfrac12A\theta'^2+(a-b\cos\theta)^2/(2A\sin^2\theta)+b^2/(2C)+mgd\cos\theta$ is constant, and $A\theta''=-U'(\theta)$ with $U=(a-b\cos\theta)^2/(2A\sin^2\theta)+b^2/(2C)+mgd\cos\theta$ [[thm-cm-heavy-top-reduction]].
 
-[L4] $\sin(\pi/2)=1$, $\cos(\pi/2)=0$, $\sin(\pi/3)=\tfrac{\sqrt3}{2}$, $\cos(\pi/3)=\tfrac12$, and $\sin^2+\cos^2=1$ [[def-sine-and-cosine-by-power-series]], [[cor-trigonometric-parity-and-pythagorean-identity]].
+[L4] With $\pi$ of [[def-pi-via-first-positive-cosine-zero]], $\sin(\pi/2)=1$ and $\cos(\pi/2)=0$ by [[thm-quarter-turn-values-and-shift-formulas]]. For $c=\cos(\pi/3)$, the addition formulas give $4c^3-3c=\cos\pi=-1$, hence $(c+1)(2c-1)^2=0$; strict decrease of cosine on $[0,\pi]$ implies $c>-1$, so $c=1/2$. Positivity of sine on $(0,\pi)$ and $\sin^2+\cos^2=1$ give $\sin(\pi/3)=\sqrt3/2$ ([[thm-sine-and-cosine-addition-formulas]], [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[cor-pi-is-the-first-positive-sine-zero]], [[cor-trigonometric-parity-and-pythagorean-identity]]).
 
 [L5] Matrix multiplication is entrywise-accumulating, so the product of displayed matrices can be read off entrywise, and $\lVert\cdot\rVert_2$ is the Euclidean norm [[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]].
 

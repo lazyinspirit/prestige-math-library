@@ -54,20 +54,28 @@ theorem on maximal integral curves
 [[def-integral-curve-of-a-vector-field]]) assigns to every $q\in U$ a unique
 maximal integral curve $\gamma_q:I_q\to U$ of $n$ with $\gamma_q(0)=q$,
 defined on an open interval $I_q\subseteq\mathbb R$. We call these curves the
-**observers** (or **observer curves**) of the congruence. Each observer is
-regular: $\gamma_q'(s)=n_{\gamma_q(s)}$ and $\lVert n\rVert_g=1$ at every
-parameter value, so the tangent vector is unit timelike and future-directed at
-every parameter value. Completeness of the maximal intervals $I_q$, and global
-product or foliation structure of $U$, are not asserted. The parameter $s$ is
-the flow parameter of $n$; it is not identified with any clock reading here.
+**observers** (or **observer curves**) of the congruence. Each curve is regular:
+for every $s\in I_q$, $\gamma_q'(s)=n_{\gamma_q(s)}$ and
+
+$$g_{\gamma_q(s)}\bigl(n_{\gamma_q(s)},n_{\gamma_q(s)}\bigr)=-1,$$
+
+so its tangent is nonzero, unit timelike and future-directed. Completeness of
+the maximal intervals $I_q$, and global product or foliation structure of
+$U$, are not asserted. The parameter $s$ is the flow parameter of $n$; it is
+not identified with any clock reading here.
 
 **(c) Adapted charts.** An **$n$-adapted chart** is a smooth chart
 $(u^0,u^1,u^2,u^3):U'\to\mathbb R^4$ of $M$ whose domain $U'$ is a nonempty
 open subset of $U$ and whose **spatial coordinates** $u^1,u^2,u^3$ are constant
-along every integral curve of $n$ contained in $U'$; equivalently, for every
-$q\in U'$ the observer curve $\gamma_q$ satisfies
-$u^i(\gamma_q(s))=u^i(q)$ for all $s$ with $\gamma_q(s)\in U'$ and
-$i=1,2,3$. No global adapted chart, and no adapted chart on all of $U$, is
+along every integral curve $\gamma:J\to U'$ of the restricted field
+$n|_{U'}$, where $J$ is an interval. Equivalently, for each maximal observer
+curve $\gamma_q:I_q\to U$, each connected component $K$ of
+$\gamma_q^{-1}(U')$ (a maximal nonempty interval contained in this open
+subset of $\mathbb R$), and $i=1,2,3$, the function
+$u^i\circ\gamma_q$ is constant on $K$. If $q\in U'$ and $0\in K$, this
+constant is $u^i(q)$. This condition does not identify labels on different
+components when a maximal curve leaves and re-enters $U'$. No global adapted
+chart, and no adapted chart on all of $U$, is
 asserted by this definition; one exists near every point of $U$ by the
 existence corollary proved on this page.
 

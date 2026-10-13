@@ -102,14 +102,20 @@ $$\mathsf M(x_{1},\dots,x_{N}):=(m_{1}x_{1},\dots,m_{N}x_{N});$$
 its matrix in the standard basis is block diagonal with blocks $m_{i}I_{3}$,
 the **mass matrix** of [[def-cm-constrained-configuration-and-mass-metric]].
 Its dimension is $\mu$: it multiplies positions of dimension $\ell$ by masses
-of dimension $\mu$. On the constrained branch the mass metric restricts the
-Euclidean inner product to $Q$ as in that item.
+of dimension $\mu$. On the constrained branch, for the inclusion
+$X:Q\hookrightarrow\mathbb R^{3N}$ and tangent vectors $h,z\in T_qQ$,
+the mass metric of that item is
+$$\mathcal G_q(h,z):=\langle dX_q(h),\mathsf M\,dX_q(z)\rangle_{3N}=\sum_{i=1}^{N}m_i\,h_i\cdot z_i,$$
+where $h_i,z_i\in\mathbb R^3$ are the blocks of $dX_q(h),dX_q(z)$ under
+the canonical Euclidean tangent identification specified in that supplier.
+It restricts the mass-weighted ambient bilinear form to $T_qQ$, rather than
+the unweighted Euclidean inner product.
 
 **(e) Velocity constraints are a different object.** A **velocity-map
 constraint** on the open ambient set $O$ is a pair of smooth maps
 $$A:\mathbb R\times O\to\mathbb R^{k'\times3N},\qquad b:\mathbb R\times O\to\mathbb R^{k'},\qquad 1\le k'\le3N,$$
 with $A(t,x)$ of constant rank $k'$ everywhere in the declared domain,
-imposing $A(t,x)\dot x+b(t,x)=0$. Equivalently $A(t,x)$ is a linear map
+imposing $A(t,x(t))\dot x(t)+b(t,x(t))=0$ on a $C^1$ curve $x:J\to O$, where $J\subseteq\mathbb R$ is a nondegenerate open interval, the parameter $t$ is frame time, and $\dot x(t):=x'(t)$ is the componentwise derivative in the convention of [[def-cm01-units]]. Equivalently $A(t,x)$ is a linear map
 $\mathbb R^{3N}\to\mathbb R^{k'}$. Each row's output unit is declared, and
 its corresponding component of $b$ has that same unit. The allowed velocities
 at $(t,x)$ form the affine set $\{v:A(t,x)v+b(t,x)=0\}$; its differences form
@@ -125,8 +131,11 @@ constraints $g(t,x)=\text{constant}$. It is **locally nonholonomic at the
 specified point** when no such neighbourhood and pair $(g,C)$ exists; a
 nonholonomic model in this local sense declares a point (or a region of
 points) with this failure. For a homogeneous time-independent law this
-excludes local position submanifolds whose tangent spaces equal $\ker A$;
-for an affine time-dependent law the criterion also includes the drift $b$.
+rules out such a regular-level-set representation throughout a neighbourhood.
+It need not rule out an individual embedded submanifold $S\subseteq O$ with
+$T_xS=\ker A(x)$ for every $x\in S$, using the ambient tangent identification
+of [[def-cm-constrained-configuration-and-mass-metric]]; for an affine
+time-dependent law the criterion also includes the drift $b$.
 Absence of a single global pair alone does not establish local
 nonintegrability. The rank of $A$ counts instantaneous velocity restrictions,
 not the dimension of a positional configuration manifold; accessibility

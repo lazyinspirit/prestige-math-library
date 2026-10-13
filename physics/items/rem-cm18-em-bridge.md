@@ -23,7 +23,7 @@ dependency_level: 15
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "A scope remark on the interface between the particle framework and a separately developed electromagnetic model: the additional data a coupling requires (charge attributes with declared dimensions, field maps with domains and regularity, and an added coupling force law), the conditional reuse of the force-branch existence and balance results once such an added force map satisfies the standing hypotheses, and the explicit non-import of field equations, field energy-momentum theorems and coupling-constant values. The item derives no electromagnetic law, predicts no electromagnetic phenomenon and asserts no measured value."
+physical_scope: "A scope remark on the interface between the particle framework and a separately developed electromagnetic model: the additional data a coupling requires (charge attributes with declared dimensions, field maps with domains and regularity, and an added coupling force law), reuse of the particle ODE results conditional on a closed time-state force map satisfying the standing hypotheses, reuse of each mechanical balance conditional on its own interaction or potential hypotheses, and the explicit non-import of field equations, field energy-momentum theorems and coupling-constant values. The item derives no electromagnetic law, predicts no electromagnetic phenomenon and asserts no measured value."
 sources:
   references:
     - title: "D. Tong, Electromagnetism (Cambridge lecture notes, 2006-2007; current author-hosted file electro.pdf), Section 1.1, printed page 5 (PDF page 5), equation (1.2): the Lorentz force law F = q(E + rdot x B) as the declared force on a charge, with the motion then determined by Newton's equation F = m rddot; Section 5.4.1, printed page 115, for the covariant display"
@@ -63,11 +63,26 @@ consequence of the framework, and it must supply at least:
    dimension and unit of charge, and of the components of any field used,
    must therefore be declared by the coupling and cannot be inferred from
    this framework.
-2. **Field maps.** Electric and magnetic fields (or the corresponding
-   potentials) as maps with declared domains, regularity, sources and
-   boundary or radiation conditions, supplied by an independently developed
-   electromagnetic model; the particle framework constrains none of these.
-3. **A coupling law.** An added force map $F^{\mathrm{EM}}$ per label, for
+2. **Field maps.** For an electric/magnetic vector-field presentation,
+   specify maps $\mathbf E,\mathbf B:\Omega_{\mathrm{EM}}\times I_0\to\mathbb R^3$
+   in the declared inertial frame, with $\Omega_{\mathrm{EM}}\subseteq\mathbb R^3$
+   open and $x_i\in\Omega_{\mathrm{EM}}$ for every configuration and label on
+   the coupling domain. At fixed time these are spatial vector fields; their
+   component dimensions, units and regularity are additional declared data.
+   The fields may be prescribed external maps without a model of their
+   sources or any boundary or radiation conditions. If instead they are
+   determined by field equations, the independent field model must supply
+   its source data and whatever initial, boundary or radiation conditions
+   its formulation requires. In either case, the total particle force must
+   satisfy the standing regularity hypotheses below on the chosen domain;
+   singular source loci must be excluded where those hypotheses fail, and
+   fields requiring a distributional force need a separate solution notion.
+   A presentation by potentials likewise requires their exact maps and the
+   rule constructing the fields or particle force from them.
+3. **A coupling law.** An added force map
+   $F^{\mathrm{EM}}:I_0\times Q\times(\mathbb R^3)^N\to(\mathbb R^3)^N$
+   with components $F_i^{\mathrm{EM}}$ of force dimension
+   $\mu\ell\tau^{-2}$, read in newtons, for
    instance a declared function of the fields, the charge and the label's
    velocity in the chosen frame, as in the Lorentz force of the cited
    electromagnetic treatment. The coupling law is adopted: the framework
@@ -79,17 +94,40 @@ consequence of the framework, and it must supply at least:
 
 ## What the force branch yields conditionally
 
-Once a coupling has been declared, the mechanical theorems apply to the
-total force map $F+F^{\mathrm{EM}}$ provided it satisfies the standing
-hypotheses of the force branch (continuity and state-local Lipschitz,
-locally uniformly in time) on the declared domain: then
-[[pthm-cm02-ivp]] and [[pthm-cm02-continuation]] give the local, unique and
-maximal motions of the coupled model, and the balance laws of the
-[[def-cm03-centre-of-mass-and-momenta|balance page]] apply with the coupling
-force among the external contributions.
+The particle ODE results apply once the coupling supplies the closed
+time-state force map $F^{\mathrm{EM}}$ of item 3 on the same domain as $F$,
+and $F+F^{\mathrm{EM}}$ satisfies the standing hypotheses of the force
+branch (continuity and state-local Lipschitz, locally uniformly in time).
+Then [[pthm-cm02-ivp]] and [[pthm-cm02-continuation]] give local existence,
+uniqueness, maximal motions and the continuation criterion for that
+particle model. If the fields are sourced by evolving labels, their values
+along a coupled solution are not automatically prescribed time-space maps
+or functions of the instantaneous particle state. A closed force map must
+be supplied by a justified reduction; otherwise the independent field
+equations and particle equations require a separate coupled solution theory,
+to which these particle ODE theorems alone do not apply.
+
+The balance laws recorded in [[rem-cm03-conservation-scope]] retain their
+individual hypotheses. In particular, a coupling force can be added wholly
+to the external contribution of [[post-cm02-interactions]] clause (i) only
+when $F_i^{\mathrm{EM}}(t,x,v)=H_i(t,x_i,v_i)$ for declared single-label
+maps $H_i$ on open domains containing all these arguments, with the standing
+regularity. Prescribed fields independent of the evolving particle labels,
+with a local coupling law depending only on $(t,x_i,v_i)$ and fixed charge
+attributes, have this form if the resulting $H_i$ satisfies that regularity.
+Then replace $F_i^{\mathrm{ext}}$ by $F_i^{\mathrm{ext}}+H_i$ in an existing
+external-plus-pair presentation. More generally, reuse of that presentation
+requires a declared identity
+$$F_i^{\mathrm{EM}}(t,x,v)=H_i(t,x_i,v_i)+\sum_{j\ne i}K_{ij}(t,x_i,x_j,v_i,v_j),$$
+with the component domains and regularity of that clause; add $K_{ij}$ to
+the corresponding pair map. Antisymmetry, centrality and any potential or
+residual-force presentation required by a particular balance must be checked
+for the resulting total force. Regularity alone implies none of these
+restrictions. The work-energy identity for the total force retains its
+force-model hypotheses without requiring an external-plus-pair presentation.
 
 No field-momentum theorem is imported. With the electromagnetic force
-treated as external to the declared particle labels, the particle mechanical
+represented by single-label external maps as above, the particle mechanical
 momentum alone need not be conserved; the balance laws record the exchange
 through the external force, and the open-system boundary of
 [[rem-cm02-open-system-warning]] applies. A conservation statement for

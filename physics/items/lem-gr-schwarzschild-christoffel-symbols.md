@@ -106,17 +106,6 @@ $$\Gamma^1{}_{22}=-rf,\qquad \Gamma^1{}_{33}=-rf\sin^2\vartheta,\qquad \Gamma^2{
 
 ## Remarks
 
-- **Sign check at the leading order.** For large $r$ one has
-  $f=1-s/r+O(r^{-2})$ and $f'=s/r^2$, so
-  $\Gamma^1{}_{00}=\tfrac12f f'=\tfrac{s}{2r^2}+O(r^{-3})$; this is the
-  coefficient $+\partial_r\Phi$ with the Newtonian potential
-  $\Phi=-G_Nm_*/r$ of the flat and Newtonian bridge page, whose spatial
-  acceleration reads $-\partial_r\Phi=-G_Nm_*/r^2$ and matches the geodesic acceleration $-c^2\Gamma^1{}_{00}$ computed in the
-  weak-field bridge lemma of the flat-and-Newtonian page in the overlapping
-  regime. The comparison is made with the round metric of the same chart and
-  is not a statement of this lemma.
+- **Sign check at the leading order.** For large $r$ one has $f=1-s/r+O(r^{-2})$ and $f'=s/r^2$, so $\Gamma^1{}_{00}=\tfrac12f f'=\tfrac{s}{2r^2}+O(r^{-3})$; this is the coefficient $+c^{-2}\partial_r\Phi$ with the Newtonian potential $\Phi=-G_Nm_*/r$ of the flat and Newtonian bridge page, whose spatial acceleration reads $-\partial_r\Phi=-G_Nm_*/r^2$ and matches the geodesic acceleration $-c^2\Gamma^1{}_{00}$ computed in the weak-field bridge lemma of the flat-and-Newtonian page in the overlapping regime. The comparison is made with the round metric of the same chart and is not a statement of this lemma.
 
-- **Distance to the Newtonian form.** The symbols here are written with
-  $x^0=ct$ as the time coordinate; in the coordinate $t=x^0/c$ the
-  components acquire factors of $c$ by the chain rule and the invariant
-  statements of the following lemmas are used rather than the raw symbols.
+- **Distance to the Newtonian form.** The symbols here are written with $x^0=ct$ as the time coordinate; in the coordinate $t=x^0/c$ the components acquire factors of $c$ by the chain rule and the invariant statements of the following lemmas are used rather than the raw symbols.

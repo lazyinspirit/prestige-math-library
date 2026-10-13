@@ -1,7 +1,7 @@
 ---
 id: ex-cm16-pulse-horseshoe-data-check
 kind: example
-title: "The pulsed horseshoe on declared data: $a=100$, the radicand box $[74,126]$, the contraction factor $1/\\sqrt{74}$, the fixed points $1\\pm\\sqrt{101}$, and the physical bounds of the coded states at $\\ell_0=1\\,\\mathrm m$, $m=1\\,\\mathrm{kg}$, $\\omega_0=2\\pi\\,\\mathrm{s^{-1}}$"
+title: "The pulsed horseshoe on declared data: $a=100$, the radicand box $[74,126]$, the contraction factor $1/\\sqrt{74}$, the limiting quadratic fixed points $1\\pm\\sqrt{101}$, and the physical bounds of the coded states at $\\ell_0=1\\,\\mathrm m$, $m=1\\,\\mathrm{kg}$, $\\omega_0=2\\pi\\,\\mathrm{s^{-1}}$"
 status: draft
 origin: session
 domain: physics
@@ -23,7 +23,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "A declared-data check of the constants and bounds in the page's pulsed-horseshoe theorem: at amplitude a=100 the coding box is R=13, the radicands lie in [74,126], the contraction factor is 1/sqrt(74), the fixed points are 1 plus or minus sqrt(101), the limiting kick satisfies K composed with the rotation = F, and with length scale 1 m, mass 1 kg and frequency scale 2 pi per second the coded states on the invariant axis are bounded by 13 m in axial position and 26 pi kg m per second in axial momentum, with period (pi/2+delta)/(2 pi) seconds. All quantities are declared model data; the pulse-width threshold is not numerically evaluated and no measurement is involved."
+physical_scope: "A declared-data check of the constants and bounds in the page's pulsed-horseshoe theorem: at amplitude a=100 the coding box is R=13, the radicands lie in [74,126], the contraction factor is 1/sqrt(74), the limiting quadratic map has fixed points 1 plus or minus sqrt(101), the limiting kick satisfies K composed with the rotation = F, and with length scale 1 m, mass 1 kg and frequency scale 2 pi per second the coded states on the invariant axis are bounded by 13 m in axial position and 26 pi kg m per second in axial momentum, with period (pi/2+delta)/(2 pi) seconds. All quantities are declared model data; the pulse-width threshold is not numerically evaluated and no measurement is involved."
 sources:
   references:
     - title: "P. Cvitanovic, R. Artuso, R. Mainieri, G. Tanner, G. Vattay, Chaos: Classical and Quantum (ChaosBook.org, edition 17.6.8), Chapter 15 Sections 15.2-15.3: fixed points and itinerary constants of the quadratic horseshoe"

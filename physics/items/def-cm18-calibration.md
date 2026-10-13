@@ -17,7 +17,7 @@ dependency_level: 12
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "Calibration of an apparatus for an operational observable model of the force branch: a family of prediction maps indexed by apparatus settings, a finite family of reference inputs traced to realizations of the framework's primitive quantities (durations in seconds, lengths in metres, masses in kilograms) with declared deviations, declared reference observations and a calibration rule. The item defines the datum that assigns numerical values in the framework's units to model parameters; it asserts no accuracy, consistency or unbiasedness of any calibration, no realized standard and no measurement."
+physical_scope: "Calibration of an apparatus for an operational observable model of the force branch: a family of preparation-sliced prediction maps indexed by apparatus settings with an explicit setting-to-preparation selection, a finite family of reference inputs traced to realizations of the framework's primitive quantities (durations in seconds, lengths in metres, masses in kilograms) with declared deviations, declared reference observations and a calibration rule. The item defines the datum that assigns numerical values in the framework's units to model parameters; it asserts no accuracy, consistency or unbiasedness of any calibration, no realized standard and no measurement."
 sources:
   references:
     - title: "JCGM 200:2012, International Vocabulary of Metrology - Basic and General Concepts and Associated Terms (VIM), definition 2.39 'calibration' with its notes on the relation between the indication and the corresponding value of a quantity and on the uncertainty of the reference"
@@ -32,16 +32,18 @@ verification:
 
 ## Definition
 
-Fix the force branch and one inertial frame as in
-[[def-cm18-observable-model]], and fix the observation times and readout of a
-protocol of that definition. A **calibration family** is a family
-$$\bigl(\Phi_{c}\bigr)_{c\in C},\qquad \Phi_{c}:\Theta\longrightarrow\mathbb R^{d},$$
-of prediction maps on a nonempty parameter set $\Theta\subseteq\mathbb R^p$,
-$p\ge1$, in declared numerical coordinates, indexed by a
-nonempty set $C$ of **apparatus settings**, each $\Phi_{c}$ arising as the
-prediction map of an operational observable model of the force branch as in
-[[def-cm18-observable-model]]; the setting $c$ selects the apparatus state in
-which the readout is taken. The dimensions and units are those of
+Fix the force branch and one inertial frame, and fix an operational
+observable protocol as in [[def-cm18-observable-model]], with prediction map
+$\Phi:\Theta\times Z\to\mathbb R^d$, nonempty
+$\Theta\subseteq\mathbb R^p$, $p\ge1$, and its declared observation times,
+readout and numerical coordinates. Specify a nonempty set $C$ of
+**apparatus settings** and a map $\sigma:C\to Z$ selecting a preparation
+setting $z_c:=\sigma(c)$ for every $c\in C$. A **calibration family** is the
+family of preparation slices
+$$\bigl(\Phi_c\bigr)_{c\in C},\qquad \Phi_c:\Theta\longrightarrow\mathbb R^d,\qquad \Phi_c(\theta):=\Phi(\theta,z_c).$$
+Thus the initial datum used in $\Phi_c$ is $\zeta(z_c)$, and the readout
+uses $(\theta,z_c)$ and its ordered model states. The preparation selection
+is part of the family data; fixing times and readout alone does not select it. The dimensions and units are those of
 [[def-cm01-units]]. Coordinate $\theta_j$ is the numerical coefficient of a
 quantity in one fixed unit $u_j$ with declared dimension; different coordinates
 may use different units. Choose positive numerical scales $s_j$ and define
@@ -51,7 +53,7 @@ numerical deviations, not sums of different physical dimensions.
 A **calibration datum** for this family consists of:
 
 1. a finite family, with $n\ge1$, $\theta^{(r)}_{\mathrm{ref}}\in\Theta$, $r=1,\dots,n$, of **nominal reference inputs** assigned by a reference standard under stated realization conditions. Each coordinate uses its fixed unit $u_j$, and the nominal assignment is traced to declared realizations of the framework's primitive quantities, such as durations, lengths or masses ([[def-cm01-units]], [[post-cm01-spacetime]], [[post-cm01-worldlines]] clause (v)). The nominal value is the standard's assigned value, not an assertion that the actual realization equals it;
-2. for each $r$, one specified description of its **actual reference input**: either an unknown fixed value $\theta^{(r)}_{\mathrm{act}}\in\Theta$ with a declared bound $\|\theta^{(r)}_{\mathrm{act}}-\theta^{(r)}_{\mathrm{ref}}\|_s\le\delta_r$, $\delta_r\ge0$, or a Borel random input $\Theta^{(r)}_{\mathrm{act}}:=\theta^{(r)}_{\mathrm{ref}}+\eta_r$ with values in $\Theta$ and a stated law on a stated probability space ([[def-random-element-and-real-random-variable]]). In the latter case declare whether the law describes uncertainty about a fixed realization or physical variation across realizations; a model for one is not automatically a model for the other. Additions are coordinatewise in the fixed units, and deviations need not belong to $\Theta$;
+2. one description of the **actual reference inputs** for the whole family: either fixed values $\theta^{(r)}_{\mathrm{act}}\in\Theta$ for all $r$, with declared bounds $\|\theta^{(r)}_{\mathrm{act}}-\theta^{(r)}_{\mathrm{ref}}\|_s\le\delta_r$, $\delta_r\ge0$, or a Borel random deviation vector $\eta=(\eta_1,\ldots,\eta_n):\Omega_{\mathrm{ref}}\to(\mathbb R^p)^n$ on one probability space $(\Omega_{\mathrm{ref}},\mathcal F_{\mathrm{ref}},\mathbb P_{\mathrm{ref}})$ with a stated joint law, where $\Theta^{(r)}_{\mathrm{act}}:=\theta^{(r)}_{\mathrm{ref}}+\eta_r$ belongs to $\Theta$ for every outcome and every $r$ ([[def-random-element-and-real-random-variable]]). No independence is imposed. A mixture of fixed and random reference inputs uses this second branch: each fixed input is represented by its constant deviation component, retaining any declared bound on that component. In the random branch declare whether the law describes uncertainty about fixed realizations or physical variation across realizations; a model for one is not automatically a model for the other. Additions are coordinatewise in the fixed units, and deviations need not belong to $\Theta$;
 3. a set $Y\subseteq(\mathbb R^{d})^{n}$ of admissible **reference
    observations** and a declared realized vector $y=(y_{1},\dots,y_{n})\in Y$, together with a separate uncertainty specification for these readouts: declared bounds, a joint probability model, or an explicit statement that readout uncertainty is idealized as zero. If a random vector $Y_{\mathrm{ref}}$ models the readings before realization, specify its joint law with the reference-input deviations, including any correlations; $y$ denotes its recorded realization, not the random vector itself;
 4. a **calibration rule**, that is, a map
@@ -70,8 +72,8 @@ rule, not a rule that discards reference values.
 
 ### Well-definedness and conventions
 
-The sets $\Theta$, $C$, $Y$, the maps $\zeta$, $R$ of the underlying
-protocols, the reference inputs, the deviations and the rule $\Gamma$ are
+The sets $\Theta$, $C$, $Y$, the preparation selection $\sigma$ and the maps $\zeta$, $R$ of the underlying
+protocol, the reference inputs, the deviations and the rule $\Gamma$ are
 data. Nothing in the definition requires $\Gamma$ to be injective,
 continuous or measurable, or to return a setting whose prediction map is
 accurate; [[def-cm-calibration-rule]] records the same conventions for the

@@ -1,44 +1,44 @@
 ---
 requires:
-  - gr-gr14-full-high-regularity-symmetric-hyperbolic-proof
-  - the-zfc-axioms-and-basic-set-constructions
-  - whitney-embedding-tubular-neighbourhoods-and-approximation
-  - gr-framework-and-geometry
-  - gr-causal-and-initial-value-boundaries
-  - gr-einstein-and-matter
-  - gr-gr13-convex-normal-neighborhoods
-  - gr-connections-and-free-fall
+- gr-gr14-full-high-regularity-symmetric-hyperbolic-proof
+- the-zfc-axioms-and-basic-set-constructions
+- whitney-embedding-tubular-neighbourhoods-and-approximation
+- gr-framework-and-geometry
+- gr-causal-and-initial-value-boundaries
+- gr-einstein-and-matter
+- gr-gr13-convex-normal-neighborhoods
+- gr-connections-and-free-fall
 page: gr-gr15-exact-checked-sbierski-smooth-mghd-proof-with-complete-local-prerequisites-and-quotient-second-countability
-title: "Gr15 Exact Checked Sbierski Smooth Mghd Proof With Complete Local
-  Prerequisites And Quotient Second Countability"
+title: Gr15 Exact Checked Sbierski Smooth Mghd Proof With Complete Local Prerequisites And Quotient Second Countability
 status: draft
 library: physics
 items:
-  - def-gr-development-and-data-fixing-isometry
-  - def-gr-common-subdevelopment-and-corresponding-boundary
-  - lem-gr-subdevelopment-convexity
-  - lem-gr-portion-inextendibility
-  - lem-gr-isometric-immersion-rigidity
-  - lem-gr-data-fixing-immersion-is-embedding
-  - lem-gr-maximal-common-development
-  - lem-gr-corresponding-boundary-structure
-  - lem-gr-corresponding-set-smooth-extension
-  - lem-gr-compact-past-above-cauchy-set
-  - lem-gr-geodesic-extension-from-compact-length
-  - lem-gr-boundary-null-geodesic-segment
-  - lem-gr-exposed-boundary-point
-  - lem-gr-time-separation-maximizers
-  - lem-gr-spacelike-restart-hypersurface
-  - lem-gr-partial-cauchy-development
-  - lem-gr-no-corresponding-boundary-points
-  - lem-gr-intersection-of-developments
-  - lem-gr-development-pair-gluing
-  - lem-gr-universal-development
-  - lem-gr-development-quotient-dense-set
-  - lem-gr-development-quotient-second-countable
-  - thm-gr-smooth-maximal-globally-hyperbolic-development
-  - pthm-gr-smooth-maximal-development
-  - rem-gr-mghd-scope
+- def-gr-development-and-data-fixing-isometry
+- def-gr-common-subdevelopment-and-corresponding-boundary
+- lem-gr-subdevelopment-convexity
+- lem-gr-portion-inextendibility
+- lem-gr-isometric-immersion-rigidity
+- lem-gr-data-fixing-immersion-is-embedding
+- lem-gr-maximal-common-development
+- lem-gr-corresponding-boundary-structure
+- lem-gr-corresponding-set-smooth-extension
+- lem-gr-compact-past-above-cauchy-set
+- lem-gr-geodesic-extension-from-compact-length
+- lem-gr-boundary-null-geodesic-segment
+- lem-gr-exposed-boundary-point
+- lem-gr-time-separation-maximizers
+- lem-gr-spacelike-restart-hypersurface
+- lem-gr-partial-cauchy-development
+- lem-gr-past-corresponding-boundary-restart
+- lem-gr-no-corresponding-boundary-points
+- lem-gr-intersection-of-developments
+- lem-gr-development-pair-gluing
+- lem-gr-universal-development
+- lem-gr-development-quotient-dense-set
+- lem-gr-development-quotient-second-countable
+- thm-gr-smooth-maximal-globally-hyperbolic-development
+- pthm-gr-smooth-maximal-development
+- rem-gr-mghd-scope
 examples: []
 ---
 

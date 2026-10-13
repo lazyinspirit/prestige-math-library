@@ -49,13 +49,15 @@ sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015
         printing), Section 3.4.3, Eqs. (3.40)-(3.45), printed pages 57-58 (PDF
-        pages 63-64): the explicit perturbation of the intermediate-axis spin
-        and the invariant relation controlling its growth"
+        pages 63-64): the linear perturbation of the intermediate-axis spin
+        and the linear sign criterion; the nonlinear escape is established
+        by the cited local mathematical supplier"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
     - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics
         (title page last edited September 1, 2026), Chapter 4 Section 4.4,
-        chapter pages 9-12 (PDF pages 63-66): instability of rotation about the
-        intermediate principal axis"
+        chapter pages 15-16 (PDF pages 69-70): Euler equations and discussion of
+        extreme principal-axis stability; nonlinear escape is established
+        by the cited local mathematical supplier"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical
         Mechanics, 2nd ed. (MIT Press, 2014), Sections 2.8.2-2.9:
@@ -68,6 +70,15 @@ verification:
 
 ## Example
 
+Use the numerical SI convention of [[ex-cm11-free-top-checks]]:
+$t=T/(1\,\mathrm s)$ is dimensionless, inertia entries are in
+$1\,\mathrm{kg}\,\mathrm m^2$, and $l,L,q,\delta_0,\varepsilon_0$ and
+all distances in angular-momentum space are numerical values in
+$1\,\mathrm{kg}\,\mathrm m^2\,\mathrm s^{-1}$. Restore the growth rate
+by $c_{0,\rm phys}=c_0/(1\,\mathrm s)$ and the escape time by
+$T=t(1\,\mathrm s)$; $\delta_0/q$ is dimensionless. The datum below
+is model data, not an observation.
+
 Adopt the **model A** of [[ex-cm11-free-top-checks]]: the rigid-material
 model of [[post-cm10-rigid-material]] with body inertia matrix
 $I=\mathrm{diag}(1,2,3)$ in the declared orthonormal basis, used in the
@@ -76,7 +87,7 @@ moments are $I_{1}=1<I_{2}=2<I_{3}=3$
 ([[pthm-cm10-principal-axes]] clauses (a) and (d)). Take the intermediate-axis
 spin datum $l_{0}:=Le_{2}$ with $L=1$, and let $q:=\tfrac1{400}$ and
 $$l^{q}:=\Bigl(q,\ \sqrt{1-4q^{2}},\ -\sqrt3\,q\Bigr),$$
-so that $q=1/400$ and $\sqrt{1-4q^{2}}=\sqrt{159999/160000}$. Verify:
+so that $q=1/400$ and $\sqrt{1-4q^{2}}=\sqrt{39999/40000}$. Verify:
 
 1. **The instability constants of [[pthm-cm11-nonlinear-spin-stability]] clause 3.**
 
@@ -121,13 +132,6 @@ $$a=\sqrt3,\qquad c_{0}=\frac14,\qquad \delta_{0}=\frac14,\qquad \varepsilon_{0}
 
 ## Remarks
 
-- **The escape is effective.** The initial perturbation has
-  $\lVert l(0)-e_{2}\rVert_2<10^{-2}$ while the escape radius is
-  $\tfrac12$ at a time below $18.42$ in the declared units; this is a
-  quantitative instance of the statement that the intermediate-axis spin is
-  not Lyapunov stable, not merely a linearized indication.
+- **The escape is effective.** The initial perturbation has $\lVert l(0)-e_{2}\rVert_2<10^{-2}$ while the escape radius is $\tfrac12$ at a time at most $4\log100\approx18.421$ in the declared units; this is a quantitative instance of the statement that the intermediate-axis spin is not Lyapunov stable, not merely a linearized indication.
 
-- **What is declared.** The inertia matrix, the spin datum and the
-  perturbation parameter $q$ are declared model data in the framework's
-  units; no measurement is reported and no concrete body is asserted to have
-  inertia $\mathrm{diag}(1,2,3)$.
+- **What is declared.** The inertia matrix, the spin datum and the perturbation parameter $q$ are declared model data in the framework's units; no measurement is reported and no concrete body is asserted to have inertia $\mathrm{diag}(1,2,3)$.

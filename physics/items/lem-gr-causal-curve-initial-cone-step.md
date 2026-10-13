@@ -12,6 +12,8 @@ provenance:
 proof_strategy: direct
 deps:
   [
+    def-dependent-choice,
+    def-countable-choice,
     lem-gr-normal-neighborhood-length-monotonicity,
     lem-gr-position-vector-differential,
     lem-gr-joint-exponential-diffeomorphism,
@@ -30,6 +32,8 @@ deps:
     def-interval
   ]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   lem-gr-normal-neighborhood-length-monotonicity: mathematical-premise
   lem-gr-position-vector-differential: mathematical-premise
   lem-gr-joint-exponential-diffeomorphism: mathematical-premise
@@ -61,6 +65,10 @@ verification:
 ---
 
 ## Statement
+
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the absolutely continuous causal-curve
+calculus and the supplied causal results used below.
 
 Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold
 ([[def-gr-smooth-lorentzian-objects]]), let $C\subseteq M$ be a strictly

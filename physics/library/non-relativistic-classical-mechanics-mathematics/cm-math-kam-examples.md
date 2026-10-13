@@ -20,7 +20,7 @@ empirical claim.
 
 [[ex-two-rotor-kam-model-with-units]] verifies the data of
 [[thm-positive-measure-analytic-kam-family]] with explicit constants: the
-integrable part $h(I)=\tfrac12|I|^2$ has $Dh=I$, so the inverse frequency map
+integrable part $h(I)=\tfrac12(I_1^2+I_2^2)$ has $Dh=I$, so the inverse frequency map
 is $b(\nu)=\nu$ and $M_2=2$; the perturbation
 $F=\varepsilon\cos\theta_1\cos\theta_2$ is $2\pi$-periodic, holomorphic and
 conjugation symmetric with complex sup-norm
@@ -33,7 +33,8 @@ The example also carries out the unit normalisation
 $p=J_0I$, $t=t_0\tau$ with $J_0=(\mathcal I E_0)^{1/2}$, $t_0=\mathcal I/J_0$,
 and $\varepsilon=\lambda/E_0$, so that the physical coupling threshold is
 $\lambda\le E_0c\alpha^2/\cosh(s_0)^2$ and a torus of dimensionless
-frequency $\nu$ rotates with angular velocities $\nu_j/t_0$. The example is
+frequency $\nu$ has a torus parameter rotating with physical frequencies
+$\nu_j/t_0$; its physical angles are obtained through the embedding. The example is
 conditional mathematics: it exhibits a model, verifies the theorem's hypotheses
 with explicit constants and translates the conclusion, and asserts nothing
 about any measured rotor.

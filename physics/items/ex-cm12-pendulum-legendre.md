@@ -76,6 +76,10 @@ satisfy $X_a(\Omega_a)=N\cap Q_a$ for $a=0,\pi$. Restrict the ambient force mode
 
 In either angular chart, the following hold, with dimensionless radian angle $\theta$:
 
+On each phase-coordinate chart $\Omega_a\times\mathbb R$ with coordinates $(\theta,p)$, define an alternating bilinear form on coordinate increments $u=(u_\theta,u_p)$ and $v=(v_\theta,v_p)$ in $\mathbb R^2$ by
+$$\omega_a(u,v):=u_\theta v_p-v_\theta u_p.$$
+The notation $d\theta\wedge dp$ below denotes this explicitly defined form field.
+
 1. $G_{\mathrm{kin}}=ml^2$, $\widetilde U=-mgl\cos\theta$, and
    $$\widetilde L(\theta,\dot\theta)=\tfrac12ml^2\dot\theta^2+mgl\cos\theta.$$
 2. The generalized momentum is $p=ml^2\dot\theta$, of dimension action $\mu\ell^2\tau^{-1}$. The fibre map is hyperregular with inverse $\dot\theta=p/(ml^2)$, and
@@ -100,6 +104,8 @@ All quantities are declared model data; no measurement is reported.
 
 [F4] Model, units and matrix conventions ([[post-cm02-force-superposition]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm07-action-and-mechanical-lagrangian]], [[def-cm01-configuration]], [[def-cm01-units]], [[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]], [[def-matrix-product-and-identity-matrix]], [[def-transpose-of-a-matrix]], [[def-linear-map]], [[def-euclidean-inner-product]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-euclidean-submersions-and-immersions]]): $\mathsf M=mI_3$, the force is $(0,-mg,0)$, and all derivatives, products and units use the declared chart conventions.
 
+[F5] The alternating bilinear form on each phase-coordinate chart is the field $\omega_a$ defined in the Example prose above, denoted there by $d\theta\wedge dp$.
+
 ## Verification
 
 **Proof technique:** direct; establish an actual angular atlas, apply the mechanical formulas and constraint reduction in each chart, and verify agreement on the overlaps.
@@ -110,7 +116,7 @@ All quantities are declared model data; no measurement is reported.
 
 3.1 Differentiating the Hamiltonian gives $\widetilde H_p=p/(ml^2)$ and $\widetilde H_\theta=mgl\sin\theta$. Thus Hamilton's equations reduce to $\dot\theta=p/(ml^2)$ and $\dot p=-mgl\sin\theta$, whence $ml^2\theta''=-mgl\sin\theta$. By [F1] and [F2], within each chart these equations are equivalent to the ideal constrained equations, and the reaction is recovered as $D\mathcal G^{\mathsf T}\lambda$ with its unique two-component multiplier. [F1, F2, F3, step 2.1, algebra]
 
-4.1 On an overlap the two angle representatives differ by a continuous integer multiple of $2\pi$, hence by one constant multiple on each connected component, by [[thm-intermediate-value]] along each overlap interval. Their time derivatives agree, so $p_b=ml^2\dot\theta_b=ml^2\dot\theta_a=p_a$, and $d\theta_b\wedge dp_b=d\theta_a\wedge dp_a$. Periodicity of sine and cosine makes the formulas for $\widetilde L$, $\widetilde H$ and the equations identical on overlaps. This defines the stated phase cylinder by gluing the charts (equivalently taking the displayed equivalence classes), and the local solutions and reactions agree wherever both charts apply. Every event of a constrained curve lies in one of the two arcs; continuity puts the curve in that arc for a neighbourhood of its parameter value, where step 3.1 applies. Thus the equivalence holds at every time and the full pendulum claim, including crossing the cuts, is retained. [F1, F2, F3, step 1.1, step 3.1, algebra] ∎
+4.1 On an overlap the two angle representatives differ by a continuous integer multiple of $2\pi$, hence by one constant multiple on each connected component, by [[thm-intermediate-value]] along each overlap interval. Their time derivatives agree, so $p_b=ml^2\dot\theta_b=ml^2\dot\theta_a=p_a$; the transition map has identity derivative in $(\theta,p)$, and the definition [F5] therefore gives $\omega_b=\omega_a$, that is, $d\theta_b\wedge dp_b=d\theta_a\wedge dp_a$. Periodicity of sine and cosine makes the formulas for $\widetilde L$, $\widetilde H$ and the equations identical on overlaps. This defines the stated phase cylinder by gluing the charts (equivalently taking the displayed equivalence classes), and the local solutions and reactions agree wherever both charts apply. Every event of a constrained curve lies in one of the two arcs; continuity puts the curve in that arc for a neighbourhood of its parameter value, where step 3.1 applies. Thus the equivalence holds at every time and the full pendulum claim, including crossing the cuts, is retained. [F1, F2, F3, F5, step 1.1, step 3.1, algebra] ∎
 
 ## Remarks
 

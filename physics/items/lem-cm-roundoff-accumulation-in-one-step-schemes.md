@@ -49,7 +49,7 @@ $$d\bigl(x_{j+1},V(x_j)\bigr)\le\eta\qquad(j\in\mathbb N)$$
 for a number $\eta\ge0$ ("computational error per step"). Then for every $n\in\mathbb N$:
 
 1. if $L>0$, $\displaystyle d(x_n,z_n)\le\eta\,\frac{(1+Lh)^n-1}{Lh}$, and if $L=0$, $d(x_n,z_n)\le n\eta$;
-2. if moreover $F:X\to\mathbb R$ satisfies the Lipschitz bound $|F(x)-F(y)|\le\Lambda\,d(x,y)$ for all $x,y\in X$ and some $\Lambda<\infty$, then
+2. if moreover $F:X\to\mathbb R$ satisfies the Lipschitz bound $|F(x)-F(y)|\le\Lambda\,d(x,y)$ for all $x,y\in X$ and some $0\le\Lambda<\infty$, then
  $$|F(x_n)-F(z_n)|\le\Lambda\eta\,\frac{(1+Lh)^n-1}{Lh}\quad(L>0),\qquad |F(x_n)-F(z_n)|\le\Lambda n\eta\quad(L=0);$$
 3. if $nh\le T$ for some $T>0$ and $L>0$, then $(1+Lh)^n\le e^{LT}$ and therefore
  $$d(x_n,z_n)\le\eta\,\frac{e^{LT}-1}{Lh}\le \eta\,e^{LT}\frac{T}{h}.$$

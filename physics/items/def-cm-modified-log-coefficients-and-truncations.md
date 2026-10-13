@@ -45,17 +45,17 @@ verification:
 
 ## Definition
 
-Let $d\ge1$, let $(U,U_\rho,\tilde A,\tilde B,M,K,\delta,\Psi_h)$ be analytic splitting data ([[def-cm-analytic-splitting-data-and-exact-splitting-map]]), let $C_0=C_0(d)$ be the constant of [[lem-cm-difference-operator-and-domain-loss-bound]], and fix the notation $D(r)$, $b=\rho/(8N)$, $r_N=\rho/(C_0MN)$ and $D_k=D(\rho/2-2bk)$ of that lemma. Throughout, $N\ge2$ is an integer, $|h|\le r_N$, and all functions are read on the domain $D_N$ unless stated otherwise.
+Let $d\ge1$, let $(U,U_\rho,\tilde A,\tilde B,M,K,\delta,\Psi_h)$ be analytic splitting data ([[def-cm-analytic-splitting-data-and-exact-splitting-map]]), let $C_0=C_0(d)$ be the constant of [[lem-cm-difference-operator-and-domain-loss-bound]], and fix the notation $D(r)$, $b=\rho/(8N)$, $r_N=\rho/(C_0MN)$ and $D_k=D(\rho/2-2bk)$ for $0\le k\le N$ of that lemma. Throughout, $N\ge2$ is an integer, $|h|\le r_N$, and all functions are read on the domain $D_N$ unless stated otherwise.
 
 **Binomial coefficients.** For $s\in\mathbb C$ and $k\in\mathbb N$ define
 
 $$\binom{s}{k}:=\frac{\prod_{i=0}^{k-1}(s-i)}{k!},$$
 
-the empty product being $1$, and $k!$ the factorial of [[def-factorial-and-falling-factorial]] embedded in $\mathbb C$; thus $\binom{s}{0}=1$, $\binom{s}{k}$ is a polynomial in $s$ of degree $k$ with rational coefficients, $\binom{m}{k}$ agrees with the elementary count for integers $m$, and
+the empty product being $1$, and $k!$ the factorial of [[def-factorial-and-falling-factorial]] embedded in $\mathbb C$; thus $\binom{s}{0}=1$, $\binom{s}{k}$ is a polynomial in $s$ of degree $k$ with rational coefficients, $\binom{m}{k}$ agrees with the number of $k$-element subsets of an $m$-element set for integers $m\ge0$ (and equals $0$ when $k>m$), and
 
 $$\left.\frac{d}{ds}\binom{s}{k}\right|_{s=0}=\frac{(-1)^{k+1}}{k}\quad(k\ge1),\qquad \left.\frac{d}{ds}\binom{s}{0}\right|_{s=0}=0.$$
 
-**Difference operator and pullbacks.** For $f$ holomorphic on $D_0$ put $\Delta_hf:=f\circ\Psi_h-f$, a holomorphic function on $D_1$ by [[lem-cm-difference-operator-and-domain-loss-bound]]; for $k\ge0$ let $\Delta_h^kf$ be the $k$-fold iterate, holomorphic on $D_k$, and let $\Psi_h^m$ be the $m$-fold iterate of $\Psi_h$ (so $\Psi_h^0=\mathrm{id}$).
+**Difference operator and pullbacks.** For $f$ holomorphic on $D_0$ put $\Delta_hf:=f\circ\Psi_h-f$, a holomorphic function on $D_1$ by [[lem-cm-difference-operator-and-domain-loss-bound]]; for $0\le k\le N$ let $\Delta_h^kf$ be the $k$-fold iterate, holomorphic on $D_k$, with $\Delta_h^0f:=f$. For $m\in\mathbb N$ let $\Psi_h^m$ be the partial $m$-fold composite of $\Psi_h$, defined only where every intermediate composition exists (so $\Psi_h^0=\mathrm{id}$).
 
 **Truncated binomial family.** For $s\in\mathbb C$, $f$ holomorphic on $D_0$ and $Z\in D_N$ define
 

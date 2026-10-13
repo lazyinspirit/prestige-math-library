@@ -8,7 +8,7 @@ domain: mathematics
 dependency_level: 11
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 proof_strategy: direct
 deps: [def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, lem-gr-connection-conditions-in-chart-components, def-affine-connection-on-a-smooth-manifold, def-christoffel-symbols-of-an-affine-connection, thm-gr-curvature-tensoriality-and-coordinate-formula, def-gr-curvature-tensor-and-derived-tensors, prop-coordinate-geodesic-equation]
 dependency_roles:
@@ -83,4 +83,4 @@ $$R^a{}_{bcd}=\partial_c\Gamma^a{}_{bd}-\partial_d\Gamma^a{}_{bc} +\sum_e\bigl(\
 ## Remarks
 
 - **Hypothesis.** The lemma needs the components to be constant on the whole chart domain. Vanishing of the metric components' first derivatives at a single point does not make the Christoffel symbols vanish identically, so no pointwise version is claimed.
-- **Converse.** A chart is not required to be an exponential or normal chart; any chart with constant components qualifies. Conversely the conclusion $\Gamma=0$ in a chart forces $\partial_ag_{bc}=0$ there by [L2], so constant components are equivalent to vanishing Christoffel symbols for the metric-selected connection.
+- **Converse.** A chart is not required to be an exponential or normal chart; any chart with constant components qualifies. Conversely the conclusion $\Gamma=0$ in a chart forces $\partial_ag_{bc}=0$ there by [L2], so locally constant components are equivalent to vanishing Christoffel symbols for the metric-selected connection; the components are constant on each connected component of the chart domain.

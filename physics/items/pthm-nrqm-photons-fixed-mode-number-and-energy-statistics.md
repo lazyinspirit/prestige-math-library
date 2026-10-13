@@ -27,7 +27,7 @@ deps:
     lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues,
     def-complex-exponential,
     lem-complex-exponential-series-converges-everywhere,
-    def-countable-choice,
+    def-countable-choice, def-dependent-choice,
     def-axiom-of-choice
   ]
 dependency_roles:
@@ -51,6 +51,7 @@ dependency_roles:
   lem-complex-exponential-series-converges-everywhere: mathematical-premise
   def-countable-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
 forward_refs: [ ex-nrqm-photons-single-mode-number-statistics-coherent-and-thermal ]
 proof_strategy: direct
 provenance:
@@ -97,8 +98,8 @@ the radiation sector definition
 [[def-nrqm-photons-framework-radiation-sector-and-quantum-assignments]] and
 the declared ideal counting model
 [[def-nrqm-photons-framework-ideal-counting-and-detection-model]]. Assume the
-Axioms of Countable Choice and of Choice ([[def-countable-choice]],
-[[def-axiom-of-choice]]). Fix a unit mode vector $\varphi\in\mathfrak h$, a
+Axioms of Countable Choice, Dependent Choice and Choice ([[def-countable-choice]],
+[[def-dependent-choice]], [[def-axiom-of-choice]]). Fix a unit mode vector $\varphi\in\mathfrak h$, a
 dimensionless label $z\in\mathbb C$, and write $U:=U_\varphi$ for the fixed-mode isometry of
 [[lem-nrqm-photons-fixed-mode-number-isometry]]. Then:
 
@@ -127,7 +128,10 @@ $\overline{\varepsilon^{2}}:=\|\varepsilon_{\mathfrak h}\varphi\|^2$,
 the energy variances are
 $$\operatorname{Var}_{Ue_{n}}(H_f)=n\bigl(\overline{\varepsilon^{2}}-\bar\varepsilon^{2}\bigr),\qquad \operatorname{Var}_{U\psi_{z}}(H_f)=|z|^{2}\,\overline{\varepsilon^{2}} ;$$
 the first is strictly positive for every $n\ge1$ and the second is strictly
-positive for every $z\ne0$, so neither preparation has sharp energy;
+positive for every $z\ne0$. Thus $Ue_n$ has non-sharp energy for $n\ge1$
+and $U\psi_z$ has non-sharp energy for $z\ne0$. At $n=0$ or $z=0$ the
+corresponding preparation is the vacuum $\Omega$, with $H_f\Omega=0$ and
+energy law $\delta_0$;
 
 (e) *full-sector Gibbs limitation*: let $\beta>0$ have SI unit
 $\mathrm J^{-1}$, so that $\beta H_f$ is dimensionless. The bounded operator
@@ -169,18 +173,11 @@ efficiency or temperature is asserted, and no sampling model is introduced.
 
 3.1 [Energy means] The sector diagonality of $H_f$ and orthogonality of the sectors give, for the coherent preparation, $$\langle H_fU\psi_{z},U\psi_{z}\rangle=\sum_{n\in\mathbb N}|\langle e_{n},\psi_{z}\rangle|^{2}\,\langle T_{n}\varphi^{\otimes n},\varphi^{\otimes n}\rangle=\Bigl(\sum_{n}|\langle e_{n},\psi_{z}\rangle|^{2}n\Bigr)\bar\varepsilon=|z|^{2}\bar\varepsilon,$$ where the middle identity is [F1] and [F4] and the last is the Poisson mean of step 2.1; the number-state value is the $n$-th instance of [F1]. The Poisson second number moment is finite by step 2.1, so [F1] places $U\psi_z$ in the actual domain of $H_f$ and justifies the graph-truncation passage. The mean exists because both sides are finite: $\bar\varepsilon<\infty$ by $\varphi\in D(\varepsilon_{\mathfrak h})$ and Cauchy-Schwarz, and $\sum_{n}n|\langle e_{n},\psi_{z}\rangle|^{2}=x<\infty$. This proves (c). [F1, F2, F4, step 2.1, algebra]
 
-4.1 [Energy variances] For the number state, $\|H_fUe_n\|^2=\|T_n\varphi^{\otimes n}\|^2=n\overline{\varepsilon^{2}}+n(n-1)\bar\varepsilon^{2}$ by [F4], so the variance is $n(\overline{\varepsilon^{2}}-\bar\varepsilon^{2})$, which is strictly positive for $n\ge1$ by clause (d) of [[lem-nrqm-photons-transverse-restricted-momentum-and-energy-multipliers]] (the energy multiplier has no eigenvalues, so $\overline{\varepsilon^{2}}-\bar\varepsilon^{2}=\operatorname{Var}_\varphi(\varepsilon)>0$). For the coherent preparation, its Poisson second moment and [F1] give $U\psi_z\in D(H_f)$; the orthogonal-sector norm expansion therefore gives $$\|H_fU\psi_z\|^2=\sum_{n}|\langle e_{n},\psi_{z}\rangle|^{2}\bigl(n\overline{\varepsilon^{2}}+n(n-1)\bar\varepsilon^{2}\bigr)=x\,\overline{\varepsilon^{2}}+x^{2}\bar\varepsilon^{2},$$ using the Poisson first and second factorial moments of step 2.1; subtracting the square of the mean $x\bar\varepsilon$ from step 3.1 gives $x\overline{\varepsilon^{2}}$, which is strictly positive for $x=|z|^{2}>0$ because $\overline{\varepsilon^{2}}=\|\varepsilon_{\mathfrak h}\varphi\|^{2}>0$: $\varepsilon_{\mathfrak h}\varphi$ vanishes only where $\varphi$ vanishes off the null set $\{k=0\}$, so a unit $\varphi$ cannot satisfy $\varepsilon_{\mathfrak h}\varphi=0$ in $\mathfrak h$. This proves (d). [F1, F4, step 2.1, step 3.1, algebra]
+4.1 [Energy variances] For the number state, $\|H_fUe_n\|^2=\|T_n\varphi^{\otimes n}\|^2=n\overline{\varepsilon^{2}}+n(n-1)\bar\varepsilon^{2}$ by [F4], so the variance is $n(\overline{\varepsilon^{2}}-\bar\varepsilon^{2})$, which is strictly positive for $n\ge1$ by clause (d) of [[lem-nrqm-photons-transverse-restricted-momentum-and-energy-multipliers]] (the energy multiplier has no eigenvalues, so $\overline{\varepsilon^{2}}-\bar\varepsilon^{2}=\operatorname{Var}_\varphi(\varepsilon)>0$). For the coherent preparation, its Poisson second moment and [F1] give $U\psi_z\in D(H_f)$; the orthogonal-sector norm expansion therefore gives $$\|H_fU\psi_z\|^2=\sum_{n}|\langle e_{n},\psi_{z}\rangle|^{2}\bigl(n\overline{\varepsilon^{2}}+n(n-1)\bar\varepsilon^{2}\bigr)=x\,\overline{\varepsilon^{2}}+x^{2}\bar\varepsilon^{2},$$ using the Poisson first and second factorial moments of step 2.1; subtracting the square of the mean $x\bar\varepsilon$ from step 3.1 gives $x\overline{\varepsilon^{2}}$, which is strictly positive for $x=|z|^{2}>0$ because $\overline{\varepsilon^{2}}=\|\varepsilon_{\mathfrak h}\varphi\|^{2}>0$: $\varepsilon_{\mathfrak h}\varphi$ vanishes only where $\varphi$ vanishes off the null set $\{k=0\}$, so a unit $\varphi$ cannot satisfy $\varepsilon_{\mathfrak h}\varphi=0$ in $\mathfrak h$. For $n=0$ and $z=0$, respectively, $Ue_0=U\psi_0=\Omega$; the vacuum sector has $T_0=0$, hence $H_f\Omega=0$, and the atom/eigenvalue law of P2 gives the sharp energy law $\delta_0$. This proves (d), including its vacuum exceptions. [F1, F4, step 2.1, step 3.1, algebra]
 
 5.1 [Full-sector Gibbs limitation and assembly] A trace-normalized density operator proportional to $e^{-\beta H_f}$ would require that operator to be trace class, which [F6] excludes for every stated $\beta$. This proves only the full-sector Gibbs limitation in (e). Steps 1.1 and 1.2 prove (a) and (b), steps 3.1 and 4.1 prove (c) and (d), and no step introduces a detector response, a sampling model or an empirical premise, which is (f). [F6, step 1.1, step 1.2, step 2.1, step 3.1, step 4.1] ∎
 
 ## Remarks
 
-- **Poisson versus geometric.** The mode-coherent count law is Poisson, with
-  variance equal to its mean; the declared single-mode Gibbs-type preparation
-  of [[ex-nrqm-photons-single-mode-number-statistics-coherent-and-thermal]] has
-  a geometric count law with larger variance at the same mean. Both are
-  conditional model computations; distinguishing them in a laboratory requires
-  a declared detector, preparation and sampling model and reported data.
-- **No temperature identification.** The parameter $\beta$ in (e) has unit
-  $\mathrm J^{-1}$ so that $\beta H_f$ is dimensionless. Identifying it with
-  $(k_{\mathrm B}T)^{-1}$ is an additional physical assumption not made here.
+- **Poisson versus geometric.** The mode-coherent count law is Poisson, with variance equal to its mean; the declared single-mode Gibbs-type preparation of [[ex-nrqm-photons-single-mode-number-statistics-coherent-and-thermal]] has a geometric count law with larger variance at the same mean. Both are conditional model computations; distinguishing them in a laboratory requires a declared detector, preparation and sampling model and reported data.
+- **No temperature identification.** The parameter $\beta$ in (e) has unit $\mathrm J^{-1}$ so that $\beta H_f$ is dimensionless. Identifying it with $(k_{\mathrm B}T)^{-1}$ is an additional physical assumption not made here.

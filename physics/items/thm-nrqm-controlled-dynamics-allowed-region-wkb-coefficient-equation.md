@@ -7,13 +7,11 @@ title: "Allowed-region WKB coefficient equation"
 status: draft
 origin: pipeline
 dependency_level: 0
-deps: [def-derivative, def-continuity-real, thm-chain-rule, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, def-bochner-integrable-function]
+deps: [def-derivative, def-continuity-real, thm-chain-rule]
 dependency_roles:
   def-derivative: mathematical-premise
   def-continuity-real: mathematical-premise
   thm-chain-rule: mathematical-premise
-  lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves: mathematical-premise
-  def-bochner-integrable-function: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -52,13 +50,11 @@ physical interpretation is asserted here.
 
 ## Facts & Assumptions
 
-**Given:** the interval $[a,b]$, the function $p\in C^2([a,b])$ with $p>0$, the
-number $h>0$, the phase $\theta$, the functions $w_\pm$, $q$, an exact solution
-$y\in C^2$ of $y''+(p^2/h^2)y=0$, and $M$, $c$ as in the statement.
+**Given:** the interval $[a,b]$, the function $p\in C^2([a,b])$ with $p>0$, the number $h>0$, the phase $\theta$, the functions $w_\pm$, $q$, an exact solution $y\in C^2$ of $y''+(p^2/h^2)y=0$, and $M$, $c$ as in the statement.
 
 [F1] Differentiation rules: sums, products, quotients and compositions of $C^2$ functions are $C^2$ and obey the product and chain rules; $p^{\pm1/2}$, $p^{-1}$ are $C^2$ because $p>0$ on the compact interval ([[def-derivative]], [[thm-chain-rule]], [[def-continuity-real]]).
 
-[F2] The fundamental theorem of calculus: if $g:[a,b]\to\mathbb C^2$ is continuous and $c(x):=c(a)+\int_a^xg(s)\,ds$, then $c\in C^1$ and $c'=g$ ([[lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves]], [[def-bochner-integrable-function]]).
+[F2] Integrals of continuous $\mathbb C^2$-valued curves are taken componentwise as Riemann integrals. Uniform continuity on $[a,b]$ makes prescribed grid sums Cauchy, so completeness of $\mathbb C^2$ gives their limit. The difference quotient of $G(x)=\int_a^xg(s)\,ds$ differs from $g(x)$ by at most $\sup_{|s-x|\le|h|}\|g(s)-g(x)\|$, which tends to zero. Thus $G'=g$, with one-sided endpoint derivatives. A $C^1$ curve equals its initial value plus the integral of its derivative, since their difference has zero derivative componentwise. No choice principle is used.
 
 [F3] Cramer's rule in dimension $2$: since $\det M=W\ne0$ by (b), $M(x)^{-1}=\frac1W\begin{pmatrix}w_-'&-w_-\\ -w_+'&w_+\end{pmatrix}$ and $c=M^{-1}(y,y')^{\mathsf T}$ is well defined ([[def-derivative]], algebra).
 

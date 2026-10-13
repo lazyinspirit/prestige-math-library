@@ -57,7 +57,7 @@ $H^2(0,L)$ whose members have vanishing endpoint traces;
 (b) $A_D$ is self-adjoint ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]]),
 positive, and its spectrum is $\sigma(A_D)=\{\lambda_n:n\ge1\}$; each
 $\lambda_n$ is an eigenvalue with eigenvector $e_n$; the eigenvalues are
-simple in the sense that $\ker(A_D-\lambda_n)$ contains no vector orthogonal
+simple in the sense that $\ker(A_D-\lambda_n)$ contains no nonzero vector orthogonal
 to $e_n$;
 
 (c) for every $u\in D(A_D)$, $\langle A_Du,u\rangle=\|Du\|_{L^2(0,L)}^2$;
@@ -90,4 +90,4 @@ domain.
 
 6.1 [Self-adjointness, spectrum, positivity] By [F2], $A_D$ is self-adjoint with spectrum the closure of $\{\lambda_n\}$; since $\lambda_n=(n\pi/L)^2\to\infty$ and the map $n\mapsto\lambda_n$ is injective, the set $\{\lambda_n:n\ge1\}$ has no finite accumulation point and is closed in $\mathbb R$, so $\sigma(A_D)=\{\lambda_n:n\ge1\}$, and [F2] gives $A_De_n=\lambda_ne_n$. If $x=\sum_mc_me_m\in D(A_D)$ lies in $\ker(A_D-\lambda_n)$, then $0=(A_D-\lambda_n)x=\sum_m(\lambda_m-\lambda_n)c_me_m$, and uniqueness of coefficients in the orthonormal expansion [F1] gives $(\lambda_m-\lambda_n)c_m=0$ for every $m$, so $c_m=0$ unless $m=n$ and $\ker(A_D-\lambda_n)=\mathbb Ce_n$; this is the simplicity assertion of (b). Finally, for $u\in D(A_D)$ and $u\ne0$, [F2] gives $\langle A_Du,u\rangle=\sum_n\lambda_n|c_n|^2 \ge\lambda_1\sum_n|c_n|^2=\lambda_1\|u\|^2>0$, since $\lambda_1>0$; so $A_D$ is positive and $A_D\ge\lambda_1$ in the quadratic-form sense. [step 5.1, F2]
 
-7.1 [Form identity] Let $u\in D(A_D)=D(B)$. Since $u^*(0)=u^*(L)=0$ and $A_Du=-D^2u$, the first-order identity [F3] applied to the pair $(Du,u)$ — more precisely the twice-integrated form — gives $\langle A_Du,u\rangle=\int_0^L(-D^2u)\overline u =\int_0^L|Du|^2-[Du^*\overline{u^*}]_0^L=\|Du\|_{L^2}^2$, because the boundary terms contain the factor $u^*(0)=u^*(L)=0$. This is (c). [step 5.1, F3, algebra] ∎
+7.1 [Form identity] Let $u\in D(A_D)=D(B)$. Since $u^*(0)=u^*(L)=0$ and $A_Du=-D^2u$, the first-order identity [F3] applied to the pair $(Du,u)$ gives $\langle A_Du,u\rangle=\int_0^L(-D^2u)\overline u =\int_0^L|Du|^2-[Du^*\overline{u^*}]_0^L=\|Du\|_{L^2}^2$, because the boundary terms contain the factor $u^*(0)=u^*(L)=0$. This is (c). [step 5.1, F3, algebra] ∎

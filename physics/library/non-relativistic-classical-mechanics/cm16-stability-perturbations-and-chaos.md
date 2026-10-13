@@ -36,11 +36,12 @@ fixes the framework force-model class: an open configuration domain, fixed
 positive masses and a continuous state-locally-Lipschitz full force map,
 possibly used on a time-shift-invariant open restriction for periodic models.
 It also defines the associated first-order field, local flow and maximal
-solutions, equilibrium
-states, full-time periodic motions and their state orbits, with a limit cycle
-defined as an isolated periodic state orbit, invariant and forward-invariant
-sets, orbital distance, and nonconstant homoclinic and heteroclinic orbits as
-limit relations of motions. [[def-cm16-stability-and-hyperbolicity-concepts]]
+solutions and equilibrium states. It defines full-time periodic motions and
+their state traces; continuous-time periodic orbits, limit cycles, invariant
+and forward-invariant sets, orbital distance, and homoclinic and heteroclinic
+orbits are defined for autonomous models. For a proper open restriction it
+defines maximal motions relative to that restriction.
+[[def-cm16-stability-and-hyperbolicity-concepts]]
 attaches the stability predicates with their exact quantifiers: Lyapunov
 stability and asymptotic stability over maximal solutions, orbital stability
 of a compact invariant set, linear stability of an equilibrium through the
@@ -50,8 +51,10 @@ equilibria. The item records that these notions have different definitions,
 that the equilibrium linearization spectrum is invariant under smooth chart
 changes, and that a hyperbolic sink can be linearly stable. For a $P$-periodic model,
 [[def-cm16-stroboscopic-and-poincare-maps]] defines the stroboscopic map at
-the period, with its recursively defined forward domain and no completeness
-claim, and the local Poincare return map of a transversal section, whose
+the period only for trajectories that remain in the declared restriction
+domain throughout that period, with recursively defined iterates and no
+completeness claim, and the positive-time local Poincare return map of a
+transversal section, whose
 existence, $C^1$ regularity and local invertibility are supplied by the
 return mapping theorem, with a first-return interpretation under the explicit
 no-earlier-hit persistence condition; a fixed point of a stroboscopic map
@@ -66,7 +69,9 @@ a negative definite Hessian (a strict local maximum) makes the equilibrium
 unstable through the hyperbolic instability theorem; and that exact energy
 conservation prevents asymptotic stability whenever states of different energy
 accumulate at the equilibrium, so a strict minimum is stable but not
-attracting. Degenerate Hessians and mixed saddles are explicitly left open.
+attracting. A zero Hessian eigenvalue alone gives no conclusion; strict minima remain
+covered even with degenerate Hessians. Mixed saddles receive only the
+linear-instability conclusion.
 [[pthm-cm16-variational-equation-and-linearization]] establishes the
 variational equation along a motion, the exponential Lipschitz dependence on
 initial states, the second-order constant-metric form
@@ -91,7 +96,7 @@ sensitive dependence. This item makes no pairwise-independence claim and
 records that fixed linear coordinate rescalings preserve the list; numerical
 portraits do not establish its clauses. [[pthm-cm16-separatrix-splitting-and-horseshoe]]
 then adopts a smooth $P$-periodic one-label force model on full Cartesian
-configuration space $\mathbb R^3$: the pulse acts on an invariant axis, and
+configuration space $\mathbb R^3$: the pulse preserves the axial plane for as long as solutions exist, and
 the two transverse directions have explicitly adopted inverted-oscillator
 forces. For every pulse width below a threshold depending only on the
 dimensionless amplitude $a\ge100$ and the bump, the full physical stroboscopic

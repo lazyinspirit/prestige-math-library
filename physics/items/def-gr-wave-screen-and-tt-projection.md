@@ -78,8 +78,9 @@ $\eta$-orthonormal basis of $\Sigma(n,s)$ (which exists by
 to the positive-definite restriction of $\eta$). For a symmetric covariant
 $2$-tensor $A$ the **plus and cross amplitudes of $A$ with respect to
 $(e_1,e_2)$** are $A_+:=A(e_1,e_1)$ and $A_\times:=A(e_1,e_2)$; if $A$ is
-TT with respect to $(n,s)$ in the sense of clause (d) below, then in the dual
-basis $(e^1,e^2)$ of the screen
+TT with respect to $(n,s)$ in the sense of clause (d) below, then, extending
+the screen dual basis to covectors on $\mathbb R^4$ by
+$e^i(v):=\eta(e_i,v)$ for $i=1,2$ (so both vanish on $n,s$),
 
 $$A=A_+\bigl(e^1\otimes e^1-e^2\otimes e^2\bigr)+A_\times\bigl(e^1\otimes e^2+e^2\otimes e^1\bigr).$$
 
@@ -96,9 +97,15 @@ displayed transformations.
 **(d) TT tensors and TT perturbations.** A symmetric covariant $2$-tensor
 $A$ is **transverse-traceless (TT) with respect to $(n,s)$** when
 $A(n,\cdot)=0$, $A(s,\cdot)=0$ and $\eta^{ab}A_{ab}=0$. For a symmetric
-field $h$ on an open set of the flat model, "TT with respect to $(n,s)$"
-means that these three conditions hold at every point. A symmetric field $h$
-is **spatial with respect to $n$** when $h(n,\cdot)=0$ at every point.
+field $h$ on a nonempty open set $\Omega\subseteq\mathbb R^4$, use the
+constant smooth extensions of the fixed component vectors:
+$n_q:=n^a\partial_a|_q$ and $s_q:=s^a\partial_a|_q$ for $q\in\Omega$.
+Here a symmetric field is a smooth covariant $2$-tensor field with symmetric
+components in the sense of [[def-gr-tensor-fields-and-components]]. Then
+"TT with respect to $(n,s)$" means
+$h_q(n_q,\cdot)=h_q(s_q,\cdot)=0$ and $\eta^{ab}h_{ab}(q)=0$ for every
+$q\in\Omega$. It is **spatial with respect to $n$** when
+$h_q(n_q,\cdot)=0$ for every $q\in\Omega$.
 
 **(e) Scope.** This item fixes the screen, the two projections and the
 amplitude terminology, and states the rotation law of clause (c) as part of

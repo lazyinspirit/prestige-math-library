@@ -9,16 +9,23 @@ dependency_level: 8
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-gr-minkowski-model-and-inertial-chart, def-gr-smooth-covariant-two-tensor-field, def-christoffel-symbols-of-an-affine-connection, def-gr-curvature-tensor-and-derived-tensors, def-gr-inverse-metric-and-musical-isomorphisms]
+deps: [def-gr-minkowski-model-and-inertial-chart, def-gr-smooth-covariant-two-tensor-field, def-christoffel-symbols-of-an-affine-connection, def-gr-curvature-tensor-and-derived-tensors, def-gr-inverse-metric-and-musical-isomorphisms, def-local-and-global-flow, def-smooth-vector-field-as-a-tangent-bundle-section, def-pullback-of-a-covariant-tensor-field, thm-fundamental-theorem-on-flows, thm-clairaut-schwarz-mixed-partials, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives]
 dependency_roles:
   def-gr-minkowski-model-and-inertial-chart: mathematical-premise
   def-gr-smooth-covariant-two-tensor-field: mathematical-premise
   def-christoffel-symbols-of-an-affine-connection: mathematical-premise
   def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
   def-gr-inverse-metric-and-musical-isomorphisms: mathematical-premise
+  def-local-and-global-flow: mathematical-premise
+  def-smooth-vector-field-as-a-tangent-bundle-section: mathematical-premise
+  def-pullback-of-a-covariant-tensor-field: mathematical-premise
+  thm-fundamental-theorem-on-flows: mathematical-premise
+  thm-clairaut-schwarz-mixed-partials: mathematical-premise
+  thm-chain-rule-for-total-derivatives: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
 sources:
   references:
-    - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 4: the linearized metric g = eta + h, the trace-reversed perturbation hbar and harmonic gauge, printed pp. 105-110 (PDF pp. 112-117); Ch. 6: the derivation of the linearized field equations (6.1)-(6.9), printed pp. 142-145 (PDF pp. 149-152)"
+    - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 4 equations (4.12)-(4.21) and (4.48)-(4.52), printed pp. 105-112: Newtonian time-time potential and Poisson limit; Ch. 6 equations (6.4)-(6.8), (6.13)-(6.22) and (6.24)-(6.29), printed pp. 142-148: first-order curvature, gauge, trace reversal and diagonal weak-field metric"
       url: "https://arxiv.org/pdf/gr-qc/9712019"
     - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 7.1: perturbations of the metric, the trace-reversed perturbation hbar_{ab} = h_{ab} - (1/2)h eta_{ab} and the gauge transformation h -> h + L_xi eta, printed pp. 86-90 (PDF pp. 87-91)"
       url: "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
@@ -115,3 +122,26 @@ solution of any linearized field equation and no physical interpretation;
 those are separate results. The notation is tied to the inertial chart: a
 change of chart is a different operation from the gauge transformation (d),
 which changes the metric family inside the fixed chart.
+
+## Remarks
+
+- **Flow calculation for the gauge formula.** Let $X:=\xi^a\partial_a$ be the
+  smooth vector field associated with the covector $\xi_b$ by
+  $\xi^a=\eta^{ab}\xi_b$. Its local flow $\Phi_s$ is smooth on an open
+  domain and satisfies $\Phi_0(p)=p$ and
+  $\partial_s\Phi_s(p)=X(\Phi_s(p))$
+  ([[def-local-and-global-flow]], [[thm-fundamental-theorem-on-flows]]).
+  Therefore, at every point where these local expressions are defined,
+  $$\left.\partial_\lambda x^c(\Phi_{-\lambda}(p))\right|_{\lambda=0}   =-\xi^c(p),\qquad   \left.\partial_\lambda\partial_a\Phi_{-\lambda}^c(p)\right|_{\lambda=0}   =-\partial_a\xi^c(p),$$
+  where smoothness of $\Phi$ permits interchanging these coordinate
+  derivatives ([[thm-clairaut-schwarz-mixed-partials]]).
+  The pullback formula for a covariant $2$-tensor is
+  $$(\Phi_{-\lambda}^*g(\lambda))_{ab}(p)=   g_{cd}(\lambda,\Phi_{-\lambda}(p))\,   \partial_a\Phi_{-\lambda}^c(p)\,\partial_b\Phi_{-\lambda}^d(p).$$
+  Since $g_{cd}(\lambda,x)=\eta_{cd}+\lambda h_{cd}(x)+\lambda^2q_{cd}(\lambda,x)$
+  and $\eta$ is constant in the inertial chart, the chain and product rules give, on differentiating at $\lambda=0$, $h_{ab}-\eta_{cb}\partial_a\xi^c-\eta_{ac}\partial_b\xi^c=
+  h_{ab}-\partial_a\xi_b-\partial_b\xi_a$, the formula in clause (d).
+  This is a local-in-flow calculation; it makes no claim that $X$ is complete
+  or that the flow exists for a common nonzero parameter on all of $\Omega$
+  ([[def-local-and-global-flow]],
+  [[def-smooth-vector-field-as-a-tangent-bundle-section]],
+  [[def-pullback-of-a-covariant-tensor-field]]).

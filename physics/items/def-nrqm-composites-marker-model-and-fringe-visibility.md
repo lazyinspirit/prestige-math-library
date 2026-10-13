@@ -11,6 +11,7 @@ origin: session
 dependency_level: 12
 deps:
   - def-countable-choice
+  - def-axiom-of-choice
   - def-nrqm-composites-framework-composite-systems-and-local-readouts
   - def-nrqm-composites-framework-reduced-preparations
   - def-nrqm-framework-quantities-and-units
@@ -25,6 +26,7 @@ deps:
   - cor-complex-exponential-cartesian-form-modulus-and-eulers-identity
 dependency_roles:
   def-countable-choice: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
   def-nrqm-composites-framework-composite-systems-and-local-readouts: formulation-prerequisite
   def-nrqm-composites-framework-reduced-preparations: formulation-prerequisite
   def-nrqm-framework-quantities-and-units: formulation-prerequisite
@@ -78,7 +80,9 @@ $H_{s}=L^{2}(\mathbb R^{3};\mathbb C^{r})$, $r=2s+1$
 [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]), and
 the preparation and apparatus discipline P7
 ([[post-nrqm-framework-preparation-and-apparatus]]). Assume the Axiom of
-Countable Choice ([[def-countable-choice]]). In the model below the particle
+Countable Choice and the Axiom of Choice ([[def-countable-choice]],
+[[def-axiom-of-choice]]), as required by the cited position-outcome law. In
+the model below the particle
 subsystem is $A$ and the marker subsystem is $B$. The following vocabulary is
 used by this page.
  
@@ -118,7 +122,7 @@ $$\rho(\varphi):=\widehat\rho\bigl(\Psi(\varphi)\bigr)=\frac{T_{\Psi(\varphi),\P
 ([[def-nrqm-state-geometry-framework-state-space]] clause (c)); the phase
 $\varphi$ is read in radians (dimensionless). The **marker-carried which-path
 preparation** is the statistical mixture
-$$\rho_{\mathrm{mix}}:=\tfrac12\,T_{\psi_{1}\otimes e_{1},\,\psi_{1}\otimes e_{1}}+\tfrac12\,T_{\psi_{2}\otimes e_{2},\,\psi_{2}\otimes e_{2}},$$
+$$\rho_{\mathrm{mix}}:=\tfrac12\,T_{\kappa(\psi_{1}\otimes e_{1}),\,\kappa(\psi_{1}\otimes e_{1})}+\tfrac12\,T_{\kappa(\psi_{2}\otimes e_{2}),\,\kappa(\psi_{2}\otimes e_{2})},$$
 a preparation of the declared composite by clause (iii) of P1.
  
 **(d) Detection weights of the family.** For a declared detection bin $B$ and admissible phase $\varphi\in I$ put

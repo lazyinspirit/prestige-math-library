@@ -38,7 +38,7 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "Scope of the symplectic and canonical machinery for the declared potential presentation: the local character of generating functions and their projection hypotheses, the determinant tests and the failure of canonicity for volume-preserving maps in dimension at least four, the absence of global generating functions in general, the local-in-time character of flow preservation, the choice assumption in the measure-theoretic volume statement, and the purely conditional empirical status of the whole page. The remark asserts no mathematical claim beyond the items it cites."
+physical_scope: "Scope of the symplectic and canonical machinery for the declared potential presentation, with Cartesian phase domains open in $\\mathbb R^{6N}$ and generalized-coordinate phase domains open in $\\mathbb R^{2r}$: the local character of generating functions and their projection hypotheses, the determinant tests and the failure of canonicity for volume-preserving maps in dimension at least four, the absence of global generating functions in general, the local-in-time character of flow preservation, the choice assumptions in the measure-theoretic volume statement and the cited cylinder construction, and the purely conditional empirical status of the whole page. The split numerical maps are local canonical transformations on nonempty admissible domains; surjectivity onto an entire declared target phase domain is not asserted. The remark asserts no mathematical claim beyond the items it cites."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Sections 4.2, 4.4.1 and 4.4.3, printed pages 88-92 and 102-105 (PDF pages 94-98 and 108-111): the local character of canonical transformations and generating functions, and the absence of any completeness claim for the Hamiltonian flow"
@@ -63,7 +63,7 @@ verification:
   $DC^{\mathsf T}J\,DC=J$ in canonical coordinates, and then
   $|\det DC|=1$ ([[def-cm13-canonical-map]],
   [[prop-cm-canonical-map-tests-and-hamiltonian-transport]]). In dimension
-  $2\cdot3N\ge4$, that determinant condition is necessary but not sufficient:
+  $2m\ge4$ with $m$ the chart half-dimension, that determinant condition is necessary but not sufficient:
   the companion page records a volume-preserving shear of a four-dimensional
   phase domain that fails the fundamental bracket $\{Q^{2},P_{1}\}=0$; for a
   single degree of freedom the symplectic test is exactly $\det DC=1$;
@@ -85,27 +85,42 @@ verification:
 
 - **Symplectic map versus globally exact generating function.** Canonicity is
   a local condition on $\omega$; it does not imply the existence of a
-  globally defined real generating function. The model-free witness is the
-  symplectic shift of the cylinder: it preserves $\omega$ and changes the
-  canonical one-form by the closed, non-exact form $a\,d\theta$, so its local
-  generating functions do not glue to a global one
+  globally defined real generating function. Under the Axiom of Countable
+  Choice ($\mathrm{AC}_\omega$) retained by the cited torus construction, the
+  model-free witness is the cylinder $C=(\mathbb R/\mathbb Z)\times\mathbb R$
+  and its shift $\Phi([\theta],I)=([\theta],I+a)$ for a fixed real $a\ne0$.
+  With the descended forms $\lambda_C=I\,d\theta_C$ and
+  $\omega_C=d\theta_C\wedge dI$ defined in lift charts, it preserves
+  $\omega_C$ and changes $\lambda_C$ by the closed, non-exact form
+  $a\,d\theta_C$, so its local generating functions do not glue to a global one
   ([[prop-cm-cylinder-shift-has-no-global-generating-function]],
-  [[rem-cm-scope-of-canonical-methods]]). The presentation's phase domains
-  are open subsets of $\mathbb R^{6N}$ and need not be simply connected, so
+  [[rem-cm-scope-of-canonical-methods]]). The presentation's Cartesian phase domains are open subsets of
+  $\mathbb R^{6N}$; a generalized-coordinate phase domain
+  $\Omega\times\mathbb R^r$ is open in $\mathbb R^{2r}$, including
+  $r<3N$. These domains need not be simply connected, so
   no global generating-function existence is claimed here; conversely a
-  momentum shift has a global second-kind generating function and a
-  degenerate first-kind projection.
+  momentum shift in Euclidean coordinates has a global second-kind
+  generating function and a degenerate first-kind projection.
 
-- **Choice assumptions.** The form-level statements of this page are
-  choice-free; the measure-theoretic volume statement assumes the Axiom of
-  Countable Choice exactly where the change-of-variables theorem requires it
-  ([[pthm-cm13-liouville]], [[def-countable-choice]]). Consumers that
-  re-prove volume preservation for explicit bounded regions by direct
-  integration may avoid the assumption.
+- **Choice assumptions.** The explicit phase-chart form calculations,
+  canonical matrix tests and local generating-function calculations use no
+  choice principle. The cylinder obstruction above retains
+  $\mathrm{AC}_\omega$ from
+  [[prop-cm-cylinder-shift-has-no-global-generating-function]]'s torus supplier;
+  no choice-free version of that supplier is asserted here. The
+  measure-theoretic volume statement also assumes Countable Choice where
+  the change-of-variables theorem requires it
+  ([[pthm-cm13-liouville]], [[def-countable-choice]]). A separate direct
+  integration argument for an explicit bounded region can avoid that
+  change-of-variables use only when its own mathematical suppliers require
+  no choice assumption.
 
 - **Numerics.** The drift, kick and velocity-Verlet maps of the mechanical
-  splitting are canonical in exact arithmetic
-  ([[prop-cm-drift-kick-and-verlet-preserve-the-canonical-form]]); the scope
+  splitting are local canonical transformations in exact arithmetic on nonempty admissible domains
+  ([[prop-cm-drift-kick-and-verlet-preserve-the-canonical-form]]). Restricting
+  the target to each map's open image gives a canonical transformation onto
+  that image; no surjectivity onto the entire declared target phase domain
+  is asserted. The scope
   of the certified numerical estimates, including roundoff and the absence of
   all-time energy claims, is recorded in
   [[rem-cm-scope-of-the-certified-verlet-estimates]] and is not extended by

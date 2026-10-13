@@ -45,8 +45,12 @@ orientation; the first inertial frame $F$ is the standard one,
 $o=0$, $u=(1,0,0,0)$, $e_{j}$ the standard basis, with coordinates
 $(t,x)=(t,x^{1},x^{2},x^{3})$, times in seconds and lengths in metres.
 
-Let $\omega>0$ and define a **time-dependent orthonormal basis field** of $K$
-by
+Let $I=\mathbb R$ and let $\omega>0$ be a constant angular-speed parameter
+with $[\omega]=\tau^{-1}$, read in $\mathrm s^{-1}$; radian angles are
+dimensionless by [[def-cm01-units]], so $\omega s$ is dimensionless. In the
+displayed formulas $s$ and $\omega$ denote their numerical values in seconds
+and inverse seconds. Define a **time-dependent orthonormal basis field** of
+$K$ on $I$ by
 
 $$\tilde e_{1}(s)=\cos(\omega s)\,e_{1}+\sin(\omega s)\,e_{2},\qquad \tilde e_{2}(s)=-\sin(\omega s)\,e_{1}+\cos(\omega s)\,e_{2},\qquad \tilde e_{3}(s)=e_{3},$$
 
@@ -70,7 +74,7 @@ is unchanged because the basis field rotates in $K$ only.
 
 [L3] Rotations: $SO(3)$ is the set of $R$ with $R^{\mathsf T}R=I_{3}$ and $\det R=1$; products and transposes of elements of $SO(3)$ lie in $SO(3)$ ([[def-cm-special-orthogonal-group]], [[lem-cm-so3-is-a-matrix-group]]).
 
-[L4] Moving-frame acceleration identity: for twice continuously differentiable $R:I\to SO(3)$, $c:I\to\mathbb R^{3}$ and $y:I\to\mathbb R^{3}$, the curve $x=Ry+c$ satisfies $R^{\mathsf T}x''=y''+2\,\omega\times y'+\omega'\times y+\omega\times(\omega\times y)+R^{\mathsf T}c''$, where $\Omega=R^{\mathsf T}R'$ and $\omega$ is the unique vector with $\Omega z=\omega\times z$ for all $z$ ([[lem-cm-moving-frame-acceleration-identity]]).
+[L4] Moving-frame acceleration identity: for twice continuously differentiable $R:I\to SO(3)$, $c:I\to\mathbb R^{3}$ and $y:I\to\mathbb R^{3}$, the curve $x=Ry+c$ satisfies $R^{\mathsf T}x''=y''+2\,\boldsymbol\omega\times y'+\boldsymbol\omega'\times y+\boldsymbol\omega\times(\boldsymbol\omega\times y)+R^{\mathsf T}c''$, where $\Omega=R^{\mathsf T}R'$ and $\boldsymbol\omega$ is the unique vector with $\Omega z=\boldsymbol\omega\times z$ for all $z$ ([[lem-cm-moving-frame-acceleration-identity]]). The vector $\boldsymbol\omega$ is distinct from the scalar rate parameter $\omega$; its components also have dimension $\tau^{-1}$.
 
 [L5] Galilean kinematics: the coordinate acceleration of a worldline vanishes identically in one inertial frame exactly when it does in every inertial frame ([[pthm-cm01-galilean-kinematics]], clause 3). Inertial frames are the adapted charts of the model, whose spatial basis is constant ([[post-cm01-frames]]).
 
@@ -86,11 +90,11 @@ is unchanged because the basis field rotates in $K$ only.
 
 1.2 The worldline $\gamma$ with $F$-coordinate curve $x(s)=(1,0,0)$ is a worldline of the model: it is of class $C^{\infty}$ and satisfies the parameter condition, and its coordinate velocity and acceleration in $F$ are $w=0$ and $a=0$; its spatial velocity vector in $F$ is $\underline v=\gamma'(s)-u=0$. [L6, algebra]
 
-2.1 Hence $R(s)\in SO(3)$ for every $s$: the columns of $R(s)$ are the coordinates of $(\tilde e_{1}(s),\tilde e_{2}(s),\tilde e_{3}(s))$ and form a positively oriented orthonormal basis, so $R(s)^{\mathsf T}R(s)=I_{3}$ and $\det R(s)=1$ by [L3]; moreover $s\mapsto R(s)$ is of class $C^{\infty}$ because $\sin$ and $\cos$ are differentiable with the derivatives of [L1], and likewise $R^{\mathsf T}$. [step 1.1, L1, L3, algebra]
+2.1 Hence $R(s)\in SO(3)$ for every $s$: the columns of $R(s)$ are the coordinates of $(\tilde e_{1}(s),\tilde e_{2}(s),\tilde e_{3}(s))$ and form a positively oriented orthonormal basis, so $R(s)^{\mathsf T}R(s)=I_{3}$ and $\det R(s)=1$ by [L3]; moreover $\sin$ and $\cos$ are continuous because differentiable. Inductively, if both are $C^k$, their derivatives $\cos$ and $-\sin$ are $C^k$ by [L1], so both are $C^{k+1}$. Thus they are $C^{\infty}$; composing with $s\mapsto\omega s$ by [L7] gives $C^{\infty}$ entries of $R$ and $R^{\mathsf T}$. [step 1.1, L1, L3, L7, algebra]
 
 3.1 The rotating-basis coordinate curve is $y(s)=R(s)^{\mathsf T}x(s)=\bigl(\cos(\omega s),\,-\sin(\omega s),\,0\bigr)$, because $R(s)^{\mathsf T}$ has first column $(\cos(\omega s),-\sin(\omega s),0)$; differentiating with the chain rule [L7] and step 2.1 gives $y'(s)=\omega\bigl(-\sin(\omega s),\,-\cos(\omega s),\,0\bigr)$ and $y''(s)=-\omega^{2}\bigl(\cos(\omega s),\,-\sin(\omega s),\,0\bigr)=-\omega^{2}y(s)$, so $y''\not\equiv0$ because $y$ is never the zero vector (its norm is $1$ by [L2]). [step 1.2, step 2.1, L1, L2, L7, algebra]
 
-4.1 The identity of [L4] applies with $c=0$, $x''=0$ and, from $\Omega=R^{\mathsf T}R'$ computed from the displayed $R$, with $\omega$ the constant vector $(0,0,\omega)$; by steps 2.1 and 3.1 the two sides read $R^{\mathsf T}x''=0$ and $y''+2\omega\times y'+\omega'\times y+\omega\times(\omega\times y)=0$, since $2\omega\times y'=2\omega^{2}y$, $\omega'\times y=0$ and $\omega\times(\omega\times y)=-\omega^{2}y$, so the displayed identity is satisfied on this example. [step 2.1, step 3.1, L4, algebra]
+4.1 The identity of [L4] applies with $c=0$, $x''=0$ and, from $\Omega=R^{\mathsf T}R'$ computed from the displayed $R$, with $\boldsymbol\omega$ the constant vector $(0,0,\omega)$; by steps 2.1 and 3.1 the two sides read $R^{\mathsf T}x''=0$ and $y''+2\boldsymbol\omega\times y'+\boldsymbol\omega'\times y+\boldsymbol\omega\times(\boldsymbol\omega\times y)=0$, since $2\boldsymbol\omega\times y'=2\omega^{2}y$, $\boldsymbol\omega'\times y=0$ and $\boldsymbol\omega\times(\boldsymbol\omega\times y)=-\omega^{2}y$, so the displayed identity is satisfied on this example. Every term has acceleration dimension $\ell\tau^{-2}$; the scalar $\omega$ retains the inverse-time dimension declared in the Example. [step 2.1, step 3.1, L4, algebra]
 
 5.1 The result $y''\not\equiv0$ of step 3.1, together with $x''\equiv0$ in the inertial frame $F$, shows that the rotating basis is **not** an inertial frame of the model: were it inertial, its coordinate acceleration of the same worldline would have to vanish identically by clause 3 of [L5], contradicting step 3.1; equivalently, an inertial frame of the model has a constant spatial basis by [L5], and the basis field $\tilde e_{j}(s)$ is not constant. The example therefore delimits the frame assumptions: a time-dependent change of basis preserves simultaneity and the time coordinate but does not preserve the uniform-motion property, and the two extra terms displayed in step 4.1 are kinematic coordinate effects in this basis, not a force law. [step 3.1, step 4.1, L5, algebra] ∎
 

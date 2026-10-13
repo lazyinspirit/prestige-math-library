@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import {scanProofFiles} from '../tools/proof-layout.mjs';
+const base = 'research/physics-cm-qm-gr-79-2026-10-11-root-metadata-pass';
+const dir = `${base}/${fs.readdirSync(base).sort().at(-1)}`;
+const report = JSON.parse(fs.readFileSync(`${dir}/report.json`));
+const items = scanProofFiles(report.subjects.map(id => `items/${id}.md`), process.cwd());
+const errors = items.flatMap(item => item.errors.map(error => ({file: item.file, error})));
+const steps = items.reduce((n, item) => n + item.rows.reduce((n, row) => n + row.sourceSteps, 0), 0);
+fs.writeFileSync(`${dir}/proof-layout.json`, JSON.stringify({items, errors, steps}, null, 2) + '\n');
+console.log(JSON.stringify({items: items.length, steps, errors, evidence: dir}));
+if (errors.length) process.exitCode = 1;

@@ -65,7 +65,9 @@ inequality holds at every $p\in U$.
 Each is a pointwise condition on the pair $(g_p,T_p)$ alone, evaluated on
 timelike or null vectors as displayed; the expressions use only the metric
 pairing $g_p$, its inverse pairing on covectors, and the endomorphism
-$A^\sharp_p$ of [[def-gr-inverse-metric-and-musical-isomorphisms]]. The
+$T^\sharp_p:v\mapsto\sharp_p(T_p(v,\cdot))$ of
+[[def-gr-inverse-metric-and-musical-isomorphisms]], whose trace is
+$\operatorname{tr}_g(T)(p)$. The
 timelike and null vector sets are those of the Lorentz vector space
 $(T_pM,g_p)$ ([[def-gr-smooth-lorentzian-objects]]).
 
@@ -91,8 +93,7 @@ $(T_pM,g_p)$ ([[def-gr-smooth-lorentzian-objects]]).
 
 ## Facts & Assumptions
 
-**Given:** At $p\in U$, the Lorentz form $g_p$, symmetric bilinear $T_p$,
-and the definitions of WEC, NEC, DEC and SEC above.
+**Given:** At $p\in U$, the Lorentz form $g_p$, symmetric bilinear $T_p$, and the definitions of WEC, NEC, DEC and SEC above.
 
 [F1] Future null vectors lie in the closure of the future timelike component ([[lem-gr-future-causal-classification-by-a-timelike-field]]). The closed future cone also contains zero.
 

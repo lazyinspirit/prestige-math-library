@@ -32,13 +32,15 @@ Let $V=W=\mathbb C^2$ with the standard inner product and orthonormal basis $e_+
 
 $$\Psi:=\frac{1}{\sqrt2}\bigl(e_+\otimes e_--e_-\otimes e_+\bigr)\in V\otimes W .$$
 
+Here a **product vector** means an elementary tensor $v\otimes u$ with $v\in V$ and $u\in W$; $T_{\Psi,\Psi}$ is the rank-one density operator determined by the unit vector $\Psi$.
+
 Then:
 
 (a) $\|\Psi\|=1$, and the coefficient matrix of $\Psi$ in the bases $(e_+,e_-)$ is $C=\frac{1}{\sqrt2}\begin{pmatrix}0&1\\-1&0\end{pmatrix}$;
 
 (b) the partial traces satisfy $\operatorname{Tr}_WT_{\Psi,\Psi}=CC^*=\tfrac12 I_V$ and $\operatorname{Tr}_VT_{\Psi,\Psi}=C^*C=\tfrac12 I_W$, so both reduced states are the maximally mixed matrix $\tfrac12 I$;
 
-(c) the reduced density $\rho=\tfrac12 I$ has eigenvalues $\tfrac12,\tfrac12$ and purity $\operatorname{tr}\rho^2=\tfrac12$, while the pure state has $\operatorname{tr}(T_{\Psi,\Psi}^2)=1$; the Schmidt coefficients of $\Psi$ are $s_1=s_2=\tfrac{1}{\sqrt2}$, and $\Psi$ is not a product vector.
+(c) the reduced density $\rho=\tfrac12 I$ has eigenvalues $\tfrac12,\tfrac12$ and trace-square $\operatorname{tr}\rho^2=\tfrac12$, while $\operatorname{tr}(T_{\Psi,\Psi}^2)=1$; the Schmidt coefficients of $\Psi$ are $s_1=s_2=\tfrac{1}{\sqrt2}$, and $\Psi$ is not a product vector.
 ## Facts & Assumptions
 
 **Given:** $V=W=\mathbb C^2$ with the standard inner product; the orthonormal basis $(e_+,e_-)$; the vector $\Psi$ above; the operators $T_{u,v}x=\langle x,v\rangle u$ on the finite-dimensional spaces.
@@ -57,4 +59,4 @@ Then:
 
 2.1 [Partial traces] Computing $CC^*=\frac12\begin{pmatrix}0&1\\-1&0\end{pmatrix}\begin{pmatrix}0&-1\\1&0\end{pmatrix}=\frac12 I_V$ and $C^*C=\frac12 I_W$, [A2] gives $\operatorname{Tr}_WT_{\Psi,\Psi}=CC^*=\frac12 I_V$ and, by symmetry, $\operatorname{Tr}_VT_{\Psi,\Psi}=C^*C=\frac12 I_W$; both are positive with trace $1$, as they must be for the reduction of a unit vector. [step 1.1, A2, algebra]
 
-3.1 [Purity and Schmidt coefficients] The matrix $\frac12 I_V$ has the single eigenvalue $\frac12$ with multiplicity $2$ (in any basis its matrix is diagonal with entries $\frac12$), so $\operatorname{tr}\rho^2=2\cdot(\frac12)^2=\frac12$ for $\rho=\operatorname{Tr}_WT_{\Psi,\Psi}$; the positive singular values of $C$ are the square roots of the eigenvalues of $C^*C=\frac12 I_W$, namely $s_1=s_2=\frac{1}{\sqrt2}$, so the Schmidt decomposition of $\Psi$ has $k=2$ terms and $\sum_rs_r^2=1$, in agreement with the norm formula of [A2]; since $k=2>1$, $\Psi$ is not a product vector. Finally $T_{\Psi,\Psi}^2=T_{\Psi,\Psi}$ because $T_{\Psi,\Psi}T_{\Psi,\Psi}=\langle\Psi,\Psi\rangle T_{\Psi,\Psi}$ by [A4] and $\|\Psi\|=1$, so $\operatorname{tr}(T_{\Psi,\Psi}^2)=\operatorname{tr}(T_{\Psi,\Psi})=\langle\Psi,\Psi\rangle=1$ by [A3]: the pure state has purity $1$ while each reduced state has purity $\frac12$. [step 1.1, step 2.1, A2, A3, A4, algebra] ∎
+3.1 [Purity and Schmidt coefficients] The matrix $\frac12 I_V$ has the single eigenvalue $\frac12$ with multiplicity $2$ (in any basis its matrix is diagonal with entries $\frac12$), so $\operatorname{tr}\rho^2=2\cdot(\frac12)^2=\frac12$ for $\rho=\operatorname{Tr}_WT_{\Psi,\Psi}$; the positive singular values of $C$ are the square roots of the eigenvalues of $C^*C=\frac12 I_W$, namely $s_1=s_2=\frac{1}{\sqrt2}$, so the Schmidt decomposition of $\Psi$ has $k=2$ terms and $\sum_rs_r^2=1$, in agreement with the norm formula of [A2]; since $k=2>1$, $\Psi$ is not a product vector. Finally $T_{\Psi,\Psi}^2=T_{\Psi,\Psi}$ because $T_{\Psi,\Psi}T_{\Psi,\Psi}=\langle\Psi,\Psi\rangle T_{\Psi,\Psi}$ by [A4] and $\|\Psi\|=1$, so $\operatorname{tr}(T_{\Psi,\Psi}^2)=\operatorname{tr}(T_{\Psi,\Psi})=\langle\Psi,\Psi\rangle=1$ by [A3]. [step 1.1, step 2.1, A2, A3, A4, algebra] ∎

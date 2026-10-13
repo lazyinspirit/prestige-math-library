@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 1
-deps: [def-cm-sine-coefficients-of-periodic-functions, thm-integration-by-parts, thm-ftc-second-part, def-oriented-integral, thm-additivity-over-subintervals, thm-algebra-of-derivatives, def-ck-euclidean-maps-and-diffeomorphisms, def-derivative, def-abs-value, thm-extreme-value-metric, thm-heine-borel-rn, def-metric-ball, thm-linearity-of-the-integral, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-derivatives, thm-sine-cosine-zero-sets-and-fundamental-period]
+deps: [def-cm-sine-coefficients-of-periodic-functions, thm-integration-by-parts, thm-ftc-second-part, def-oriented-integral, thm-additivity-over-subintervals, thm-algebra-of-derivatives, def-ck-euclidean-maps-and-diffeomorphisms, def-derivative, def-abs-value, thm-extreme-value-metric, thm-heine-borel-rn, def-metric-ball, thm-linearity-of-the-integral, thm-continuous-implies-integrable, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-derivatives, thm-sine-cosine-zero-sets-and-fundamental-period]
 dependency_roles:
   def-cm-sine-coefficients-of-periodic-functions: mathematical-premise
   thm-integration-by-parts: mathematical-premise
@@ -21,6 +21,7 @@ dependency_roles:
   thm-heine-borel-rn: mathematical-premise
   def-metric-ball: mathematical-premise
   thm-linearity-of-the-integral: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
   def-sine-and-cosine-by-power-series: mathematical-premise
   thm-sine-and-cosine-derivatives: mathematical-premise
   thm-sine-cosine-zero-sets-and-fundamental-period: mathematical-premise
@@ -52,7 +53,7 @@ $$|b_n(F)|\le\frac{2L^5M_5}{\pi^5n^5},\qquad |b_n(G)|\le\frac{2L^4M_4}{\pi^4n^4}
 
 **Given:** The period $L>0$, the functions $F,G$ and the bounds $M_5,M_4$; an integer $n\ge1$.
 
-[F1] Integration by parts: for $C^1$ functions $p,q$ on $[a,b]$, $\int_a^bpq'=\bigl[pq\bigr]_a^b-\int_a^bp'q$ ([[thm-integration-by-parts]], [[thm-ftc-second-part]], [[def-oriented-integral]], [[thm-additivity-over-subintervals]], [[thm-algebra-of-derivatives]]).
+[F1] Integration by parts: for $C^1$ functions $p,q$ on $[0,L]$, their derivatives and products are continuous and hence integrable there; therefore $\int_0^Lpq'=\bigl[pq\bigr]_0^L-\int_0^Lp'q$ ([[thm-continuous-implies-integrable]], [[thm-integration-by-parts]], [[thm-ftc-second-part]], [[def-oriented-integral]], [[thm-additivity-over-subintervals]], [[thm-algebra-of-derivatives]]).
 
 [F2] Boundary values: an odd $2L$-periodic function $W$ satisfies $W(0)=0$ and $W(L)=W(-L)=-W(L)$, hence $W(L)=0$; its even-order derivatives are again odd $2L$-periodic, so $W''(0)=W''(L)=W''''(0)=W''''(L)=0$ whenever these derivatives exist. Also $\sin(n\pi\cdot0/L)=\sin0=0$ and $\sin(n\pi L/L)=\sin(n\pi)=0$, while $\cos(0)=1$ and $\cos(n\pi)=(-1)^n$ ([[def-sine-and-cosine-by-power-series]], [[thm-sine-and-cosine-derivatives]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[def-cm-sine-coefficients-of-periodic-functions]]).
 

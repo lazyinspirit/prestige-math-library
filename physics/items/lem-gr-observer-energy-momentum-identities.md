@@ -8,7 +8,7 @@ domain: mathematics
 dependency_level: 6
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 proof_strategy: direct
 deps: [def-gr-observer-relative-energy-and-momentum, lem-gr-observer-projection-decomposition, lem-gr-observer-pairing-with-future-causal-vectors, thm-gr-observer-relative-velocity-decomposition, def-gr-smooth-lorentzian-objects, def-causal-classification-of-lorentz-vectors, def-rational-power]
 dependency_roles:
@@ -33,8 +33,9 @@ verification:
 
 Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let
 $p\in M$, let $n$ be an observer at $p$, let $c>0$, and for
-$P\in T_pM$ write $E:=E_n(P)$, $q:=q_n(P)$ and $m:=m(P)$ as in
-[[def-gr-observer-relative-energy-and-momentum]]. Then:
+$P\in T_pM$ write $E:=E_n(P)$ and $q:=q_n(P)$ as in
+[[def-gr-observer-relative-energy-and-momentum]]. When $g_p(P,P)\le0$, also
+write $m:=m(P)=\sqrt{-g_p(P,P)}/c$; $m(P)$ is not defined for spacelike $P$. Then:
 
 1. **Master identity.** $E^2=c^2\bigl(g_p(q,q)-g_p(P,P)\bigr)$.
 2. **Positivity.** If $P$ is nonzero future causal, then $E>0$.
@@ -49,13 +50,13 @@ $P\in T_pM$ write $E:=E_n(P)$, $q:=q_n(P)$ and $m:=m(P)$ as in
 
 ## Facts & Assumptions
 
-**Given:** A time-oriented smooth Lorentzian four-manifold $(M,g,N)$, a point $p$, an observer $n$ at $p$, a real $c>0$, and $P\in T_pM$ with $E=E_n(P)$, $q=q_n(P)$, $m=m(P)$.
+**Given:** A time-oriented smooth Lorentzian four-manifold $(M,g,N)$, a point $p$, an observer $n$ at $p$, a real $c>0$, and $P\in T_pM$ with $E=E_n(P)$, $q=q_n(P)$, and $m=m(P)$ only when $g_p(P,P)\le0$.
 
 [L1] $E=-c\,g_p(P,n)$, $q=h_n(P)\in n^{\perp}$, and $P=(E/c)n+q$ ([[def-gr-observer-relative-energy-and-momentum]]).
 
 [L2] $T_pM=\mathbb Rn\oplus n^{\perp}$ is an orthogonal direct sum with $g_p(n,n)=-1$, and $g_p$ is positive definite on $n^{\perp}$ ([[lem-gr-observer-projection-decomposition]]).
 
-[L3] If $z$ is nonzero future causal then $-g_p(n,z)>0$; if $z$ is unit timelike then $\gamma_z:=-g_p(n,z)\ge1$ ([[lem-gr-observer-pairing-with-future-causal-vectors]]).
+[L3] If $z$ is nonzero future causal then $-g_p(n,z)>0$; if $z$ is future unit timelike then $\gamma_z:=-g_p(n,z)\ge1$ ([[lem-gr-observer-pairing-with-future-causal-vectors]]).
 
 [L4] For future unit timelike $u$, with $\gamma=-g_p(n,u)$ and $w=c\,h_n(u)/\gamma$, one has $u=\gamma(n+w/c)$ and $g_p(w,w)=c^2(1-\gamma^{-2})$ ([[thm-gr-observer-relative-velocity-decomposition]]).
 

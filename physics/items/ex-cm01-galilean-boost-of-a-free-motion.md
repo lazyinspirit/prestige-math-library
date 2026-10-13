@@ -75,7 +75,7 @@ acceleration.
 
 [L2] Inertial frames are the adapted charts $(o,u,(e_{j}))$ with $\tau(u)=1$ and $(e_{j})$ an oriented $g$-orthonormal basis of $K$ ([[post-cm01-frames]]).
 
-[L3] The Galilean kinematics theorem: the transformation law between inertial frames, the velocity law $\eta'=Rw+v$, the acceleration law $\eta''=Ra$, and the frame-independence of vanishing coordinate acceleration ([[pthm-cm01-galilean-kinematics]]).
+[L3] The Galilean kinematics theorem: the transformation law between inertial frames, the velocity law $\eta'(t')=Rw(t'-b)+v$, the acceleration law $\eta''(t')=R\alpha(t'-b)$ with $\alpha:=x''$, and the frame-independence of vanishing coordinate acceleration ([[pthm-cm01-galilean-kinematics]]). Here $a$ denotes the spatial translation of the Example; $\alpha$ denotes acceleration.
 
 [L4] Coordinate velocity, acceleration, spatial velocity vector and dimensions ([[def-cm01-velocity-acceleration]], [[def-cm01-units]]).
 
@@ -90,9 +90,9 @@ and check the displayed relations on the explicit data.
 
 1.3 The primed coordinates of the event $p=tu+\sum_{j}x^{j}e_{j}$ are obtained by expanding $p=o'+t'u'+\sum_{j}x'^{j}e_{j}'$: comparing components gives $t'=t+2$ and $x'=\bigl(x^{1}+\frac12t,\ x^{2}+3,\ x^{3}\bigr)=Rx+vt+a$, so the two frames differ by the transformation of [L3] with the displayed parameters $(b,a,v,R)$. [L3, algebra]
 
-1.4 The curve $\gamma$ is a worldline: it is of class $C^{\infty}$ and its $F$-time coordinate is $\tau(\gamma(s)-o)=s$, so the parameter condition holds; its coordinate curve is $x(s)$ with coordinate velocity $w=(\frac14,0,0)$ and coordinate acceleration $a=0$. [L1, L4, algebra]
+1.4 The prescribed worldline $\gamma$ is of class $C^{\infty}$ and its $F$-time coordinate is $\tau(\gamma(s)-o)=s$, so the parameter condition holds; its coordinate curve is $x(s)$ with coordinate velocity $w=(\frac14,0,0)$ and coordinate acceleration $\alpha(s):=x''(s)=0$. [given, L1, L4, algebra]
 
-2.1 The primed description of the motion is $\eta(t')=x(t'-2)+v(t'-2)+a=\bigl(\frac34t'-\frac12,\ 5,\ 0\bigr)$; hence $\eta'=(\frac34,0,0)=Rw+v$ and $\eta''=(0,0,0)=Ra$, so the velocity and acceleration laws of [L3] hold on this motion, and the vanishing of the coordinate acceleration is frame-independent for it. [step 1.3, step 1.4, L3, L4, algebra]
+2.1 The primed description of the motion is $\eta(t')=x(t'-2)+v(t'-2)+a=\bigl(\frac34t'-\frac12,\ 5,\ 0\bigr)$; hence $\eta'=(\frac34,0,0)=Rw+v$ and $\eta''(t')=(0,0,0)=R\alpha(t'-b)$, so the velocity and acceleration laws of [L3] hold on this motion, and the vanishing of the coordinate acceleration is frame-independent for it. [step 1.3, step 1.4, L3, L4, algebra]
 
 3.1 As a cross-check, at $t=2$ the $F$-coordinates are $(\frac32,2,0)$ and the $F'$-coordinates of the same event are $\eta(4)=(\frac52,5,0)$, which equals $x(2)+2v+a$ by the transformation of step 1.3. [step 1.3, step 2.1, algebra]
 

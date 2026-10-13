@@ -6,8 +6,9 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 13
-deps: [def-cm07-action-and-mechanical-lagrangian, def-cm06-holonomic-constraint-model, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-units, def-euclidean-submersions-and-immersions, def-ck-euclidean-maps-and-diffeomorphisms, thm-euclidean-inverse-function-theorem, thm-higher-regularity-of-local-inverses, def-jacobian-matrix-and-gradient, def-transpose-of-a-matrix, def-matrix-product-and-identity-matrix, def-linear-map, def-euclidean-inner-product, def-interval]
+deps: [prop-cm-coordinate-covariance-of-the-euler-lagrange-expression, def-cm07-action-and-mechanical-lagrangian, def-cm06-holonomic-constraint-model, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-units, def-euclidean-submersions-and-immersions, cor-matrix-rank-nullity, def-invertible-euclidean-linear-map, def-ck-euclidean-maps-and-diffeomorphisms, thm-euclidean-inverse-function-theorem, thm-higher-regularity-of-local-inverses, def-jacobian-matrix-and-gradient, def-transpose-of-a-matrix, def-matrix-product-and-identity-matrix, def-linear-map, def-euclidean-inner-product, def-interval]
 dependency_roles:
+  prop-cm-coordinate-covariance-of-the-euler-lagrange-expression: mathematical-premise
   def-cm07-action-and-mechanical-lagrangian: formulation-prerequisite
   def-cm06-holonomic-constraint-model: formulation-prerequisite
   def-cm03-potential-and-mechanical-energy: formulation-prerequisite
@@ -15,6 +16,8 @@ dependency_roles:
   def-cm01-configuration: formulation-prerequisite
   def-cm01-units: formulation-prerequisite
   def-euclidean-submersions-and-immersions: mathematical-premise
+  cor-matrix-rank-nullity: mathematical-premise
+  def-invertible-euclidean-linear-map: mathematical-premise
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   thm-euclidean-inverse-function-theorem: mathematical-premise
   thm-higher-regularity-of-local-inverses: mathematical-premise
@@ -57,8 +60,14 @@ map of the model** is a map $X:\Omega\to Q$ of class $C^{3}$ whose derivative
 $DX(q)$ is injective for every $q\in\Omega$
 ([[def-euclidean-submersions-and-immersions]]: an immersion); the coordinates
 $q=(q_{1},\dots,q_{r})$ each carry a declared dimension $\gamma_{i}$ and unit
-fixed as part of the model declaration. When $r=3N$, $DX(q)$ is invertible at
-every point. The inverse-function theorem and its higher-regularity result
+fixed as part of the model declaration. When $r=3N$, injectivity makes
+$DX(q):\mathbb R^{3N}\to\mathbb R^{3N}$ a bijection: its kernel is $\{0\}$,
+so rank-nullity gives image dimension $3N$, equal to the target dimension.
+The inverse is linear: if $y_{1}=DX(q)u_{1}$ and $y_{2}=DX(q)u_{2}$, then
+linearity and uniqueness of preimages give
+$DX(q)^{-1}(a y_{1}+b y_{2})=a u_{1}+b u_{2}$. Thus $DX(q)$ is invertible in
+the sense of [[def-invertible-euclidean-linear-map]]. The inverse-function
+theorem and its higher-regularity result
 ([[thm-euclidean-inverse-function-theorem]],
 [[thm-higher-regularity-of-local-inverses]]) make $X$ a local $C^{3}$
 diffeomorphism at each point. This local property does not imply that $X$ is
@@ -138,8 +147,16 @@ $$\Lambda(\widetilde L)(q)(t)=Q^{\mathrm{res}}\bigl(t,q(t),q'(t)\bigr)\qquad(t\i
 posed for $C^{2}$ admissible coordinate curves $q:J\to\Omega$. These equations
 are part of the coordinate description: for $d\equiv0$ they reduce to the
 Euler-Lagrange equation $\Lambda(\widetilde L)(q)=0$ of the substituted
-Lagrangian, and for a chart they are the coordinate form of the model's
-equation of motion, as the covariance theorem of this page records. Whether
+Lagrangian. For a chart ($r=3N$), the transport identity of
+[[prop-cm-coordinate-covariance-of-the-euler-lagrange-expression]] clause 4,
+applied to the time-independent map $X$, gives
+$\Lambda(\widetilde L)=DX^{\mathsf T}(\mathsf Mx''-F+d)$ along
+$x=X\circ q$: here $L_v=\mathsf Mx'$ and $L_x=-\nabla_xU$, while
+$F=-\nabla_xU+d$. Hence $\Lambda(\widetilde L)=DX^{\mathsf T}d$
+is equivalent to $\mathsf Mx''=F$, since $DX^{\mathsf T}$ is invertible.
+On any interval $J$, the transport calculation applies on compact
+subintervals around each interior time and extends to included endpoints
+by continuity of these expressions. Whether
 the same equations describe an ideal constrained motion for a
 parametrization of clause (d) is a separate statement, proved as the reduction
 theorem of this page; it is not part of this definition.

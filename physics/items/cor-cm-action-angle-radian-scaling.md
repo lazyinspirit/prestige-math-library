@@ -23,7 +23,7 @@ sources:
   references:
     - title: "D. Tong, Classical Dynamics (University of Cambridge Part II Mathematical Tripos), Section 4.5.3 (action-angle variables for one-dimensional systems and the 2 pi normalisation), printed pages 108-111"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "Ana Cannas da Silva, Lectures on Symplectic Geometry, revised January 2006, Lecture 18 and Definition 6.18 (period-one angles and the convention omega = sum d theta_i wedge d I_i)"
+    - title: "Ana Cannas da Silva, Lectures on Symplectic Geometry, revised January 2006, Lecture 18 (the Arnold-Liouville theorem; local period and sign conventions are specified here)"
       url: "https://web.archive.org/web/20120413034139if_/http://www.math.ist.utl.pt:80/%7Eacannas/Books/symplectic.pdf"
 verification:
   precheck: pass
@@ -34,7 +34,7 @@ verification:
 Let $(I,\theta)$ be period-one action-angle coordinates with
 $\omega=\sum_{i=1}^n d\theta_i\wedge dI_i$ as supplied by
 [[thm-cm-liouville-arnold-action-angle-repaired]] and
-[[def-action-and-angle-coordinates]]. Define the rescaled coordinates
+[[def-action-and-angle-coordinates]]. Use the quotient lift charts and global angle differentials specified in [[thm-cm-liouville-arnold-action-angle-repaired]]. Put $T_{\mathrm{rad}}:=\mathbb R/(2\pi\mathbb Z)$, with quotient lift charts from intervals of length less than $2\pi$; their transitions are translations by $2\pi k$, $k\in\mathbb Z$. The induced diffeomorphism $s:\mathbb R/\mathbb Z\to T_{\mathrm{rad}}$ is $s([x])=[2\pi x]$, with inverse $[y]\mapsto[y/(2\pi)]$. Thus the notation $2\pi\theta_i$ below means $s\circ\theta_i$, with values in $T_{\mathrm{rad}}$, and its differential is defined by local real lifts. The action domain rescales from $A$ to $A/(2\pi)$. Define the rescaled coordinates
 
 $$\theta_i^{\mathrm{rad}}:=2\pi\,\theta_i,\qquad I_i^{\mathrm{rad}}:=\frac{I_i}{2\pi}\qquad(i=1,\dots,n).$$
 
@@ -61,9 +61,9 @@ $\dot\theta^{\mathrm{rad}}_i=\partial\tilde h/\partial I^{\mathrm{rad}}_i$.
 
 **Proof technique:** direct; substitute the constant rescalings into the coordinate expression of $\omega$.
 
-1.1 By [F1], $d\theta^{\mathrm{rad}}_i\wedge dI^{\mathrm{rad}}_i=(2\pi\,d\theta_i)\wedge((2\pi)^{-1}dI_i)=d\theta_i\wedge dI_i$ for each $i$; summing over $i$ and using [F2] gives $\omega=\sum_id\theta^{\mathrm{rad}}_i\wedge dI^{\mathrm{rad}}_i$. Since the rescaling is a linear bijection of the chart coordinates, $(\theta^{\mathrm{rad}},I^{\mathrm{rad}})$ are coordinates on the same chart. [F1, F2, algebra]
+1.1 By [F1], $d\theta^{\mathrm{rad}}_i\wedge dI^{\mathrm{rad}}_i=(2\pi\,d\theta_i)\wedge((2\pi)^{-1}dI_i)=d\theta_i\wedge dI_i$ for each $i$; summing over $i$ and using [F2] gives $\omega=\sum_id\theta^{\mathrm{rad}}_i\wedge dI^{\mathrm{rad}}_i$. The angle map is well-defined because changing a lift by an integer changes its scaled lift by an element of $2\pi\mathbb Z$, and its inverse is the stated quotient map. On each lift chart its differential is the constant scalar $2\pi$. Since this angle diffeomorphism and the action rescaling are bijective and smooth with smooth inverses, $(\theta^{\mathrm{rad}},I^{\mathrm{rad}})$ are coordinates on the same chart. [F1, F2, algebra]
 
-2.1 The relation $H=h(I)$ becomes $H=h(2\pi I^{\mathrm{rad}})=\tilde h(I^{\mathrm{rad}})$; in the radian chart the two-form is $\sum_i d\theta^{\mathrm{rad}}_i\wedge dI^{\mathrm{rad}}_i$ by step 1.1, so [F3] applies there with $(q,p)=(\theta^{\mathrm{rad}},I^{\mathrm{rad}})$: $\dot I^{\mathrm{rad}}_i=0$ and $\dot\theta^{\mathrm{rad}}_i=\partial\tilde h/\partial I^{\mathrm{rad}}_i$. The chain rule gives $\partial\tilde h/\partial I^{\mathrm{rad}}_i=2\pi\,h'(2\pi I^{\mathrm{rad}}_i)=2\pi\dot\theta_i$, consistent with $\theta^{\mathrm{rad}}_i=2\pi\theta_i$. [F1, F3, step 1.1, algebra] ∎
+2.1 The relation $H=h(I)$ becomes $H=h(2\pi I^{\mathrm{rad}})=\tilde h(I^{\mathrm{rad}})$; in the radian chart the two-form is $\sum_i d\theta^{\mathrm{rad}}_i\wedge dI^{\mathrm{rad}}_i$ by step 1.1, so [F3] applies there with $(q,p)=(\theta^{\mathrm{rad}},I^{\mathrm{rad}})$: $\dot I^{\mathrm{rad}}_i=0$ and $\dot\theta^{\mathrm{rad}}_i=\partial\tilde h/\partial I^{\mathrm{rad}}_i$. The chain rule gives $\partial\tilde h/\partial I^{\mathrm{rad}}_i=2\pi\,(\partial_i h)(2\pi I^{\mathrm{rad}})=2\pi\dot\theta_i$, consistent with $\theta^{\mathrm{rad}}_i=2\pi\theta_i$. [F1, F3, step 1.1, algebra] ∎
 
 ## Remarks
 

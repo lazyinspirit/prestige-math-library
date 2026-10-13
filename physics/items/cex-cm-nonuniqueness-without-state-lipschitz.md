@@ -13,8 +13,10 @@ deps:
     def-continuity-real,
     lem-cm-continuous-dependence-on-initial-data,
     thm-algebra-of-continuous-functions,
-    thm-composition-with-a-continuous-function,
+    thm-composition-of-continuous-functions,
     thm-continuous-inverse,
+    thm-of-square-roots,
+    lem-of-square-monotone,
     def-abs-value,
     lem-derivative-of-a-power,
     thm-chain-rule,
@@ -26,13 +28,15 @@ dependency_roles:
   def-continuity-real: mathematical-premise
   lem-cm-continuous-dependence-on-initial-data: mathematical-premise
   thm-algebra-of-continuous-functions: mathematical-premise
-  thm-composition-with-a-continuous-function: mathematical-premise
+  thm-composition-of-continuous-functions: mathematical-premise
   thm-continuous-inverse: mathematical-premise
   def-abs-value: mathematical-premise
   lem-derivative-of-a-power: mathematical-premise
   thm-chain-rule: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
   def-derivative: mathematical-premise
+  thm-of-square-roots: mathematical-premise
+  lem-of-square-monotone: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -64,9 +68,9 @@ Let $F:\mathbb R\to\mathbb R$ be continuous. Then for every $x_0\in\mathbb R$ th
 
 [L1] A solution on an interval $I$ is a differentiable $x:I\to\mathbb R$ with $x'(t)=F(x(t))$ for every $t\in I$ and $x(0)=0$ ([[def-first-order-ode-initial-value-problem-and-solution]], [[def-derivative]]). [given]
 
-[L2] $u\mapsto|u|$ and $u\mapsto\sqrt u$ (on $[0,\infty)$) are continuous, and sums, products and compositions of continuous functions are continuous; $\sqrt{\cdot}$ is the continuous inverse of squaring on $[0,\infty)$ ([[def-abs-value]], [[thm-continuous-inverse]], [[thm-algebra-of-continuous-functions]], [[thm-composition-with-a-continuous-function]], [[def-continuity-real]]). [given]
+[L2] $u\mapsto|u|$ and $u\mapsto\sqrt u$ (on $[0,\infty)$) are continuous, and sums, products and compositions of continuous functions are continuous; squaring is continuous by the polynomial clause of [[thm-algebra-of-continuous-functions]], injective on $[0,\infty)$ by [[lem-of-square-monotone]], and onto $[0,\infty)$ by [[thm-of-square-roots]], so $\sqrt{\cdot}$ is its continuous inverse on $[0,\infty)$ ([[def-abs-value]], [[thm-continuous-inverse]], [[thm-algebra-of-continuous-functions]], [[thm-composition-of-continuous-functions]], [[def-continuity-real]]). [given]
 
-[L3] $(u^2)'=2u$ and $(\sqrt u)'=1/(2\sqrt u)$ for $u>0$, and the chain rule and algebra of derivatives differentiate compositions, products and sums ([[lem-derivative-of-a-power]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]]). [given]
+[L3] $(u^2)'=2u$, and the chain rule and algebra of derivatives differentiate compositions, products and sums ([[lem-derivative-of-a-power]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]]). [given]
 
 ## Counterexample
 
@@ -78,7 +82,7 @@ Let $F:\mathbb R\to\mathbb R$ be continuous. Then for every $x_0\in\mathbb R$ th
 
 1.3 Define $x_1:\mathbb R\to\mathbb R$ by $x_1(t)=0$ for $t\le1$ and $x_1(t)=(t-1)^2/4$ for $t\ge1$. Then $x_1$ is continuous, and it is differentiable at $t=1$ with derivative $0$ from both sides: for $h>0$, $(h^2/4)/h=h/4\to0$, while the left difference quotient is $0$. For $t\ne1$ the derivative is $0$ (for $t<1$) or $(t-1)/2$ (for $t>1$) by [L3]. Hence $x_1$ is differentiable on $\mathbb R$ with $x_1(0)=0$. [given, L3, algebra]
 
-2.1 For $t>1$, $x_1(t)^2=(t-1)^4/16$, so $\sqrt{|x_1(t)|}=|t-1|/2=(t-1)/2=x_1'(t)$; for $t\le1$, $x_1(t)=0$ and $x_1'(t)=0=\sqrt{|0|}$. Hence $x_1$ is a solution of $x'=F(x)$ through $(0,0)$ by [L1], and it differs from the zero solution on $(1,\infty)$: the initial value problem has two distinct solutions on every interval containing $[0,2]$, refuting the statement. [step 1.2, step 1.3, L1, algebra] ∎
+2.1 For $t>1$, $x_1(t)=(t-1)^2/4\ge0$ and $(t-1)/2>0$, so uniqueness of the nonnegative square root in [L2] gives $\sqrt{|x_1(t)|}=(t-1)/2=x_1'(t)$; for $t\le1$, $x_1(t)=0$ and $x_1'(t)=0=\sqrt{|0|}$. Hence $x_1$ is a solution of $x'=F(x)$ through $(0,0)$ by [L1], and it differs from the zero solution on $(1,\infty)$: the initial value problem has two distinct solutions on every interval containing $[0,2]$, refuting the statement. [step 1.2, step 1.3, L1, L2, algebra] ∎
 
 ## Remarks
 

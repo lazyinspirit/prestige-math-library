@@ -78,8 +78,7 @@ that invokes their conclusions carries that assumption.
   available for the radial case, so the conic, area and period statements
   must not be extended to it.
 
-- **Radial motion.** For $j=0$ no polar angle and no plane orthogonal to a
-  nonzero $j$ exist; [[pthm-cm05-plane-area]] clauses 2-4,
+- **Radial motion.** For $j=0$ the nonzero-angular-momentum polar parametrization and its distinguished plane orthogonal to $j$ are unavailable; a constant polar angle can still be chosen in any plane containing the fixed radial direction. [[pthm-cm05-plane-area]] clauses 2-4,
   [[pthm-cm05-conic]] and [[pthm-cm05-kepler-period]] exclude this case
   explicitly. Clause 1 of [[pthm-cm05-effective-potential]] also assumes
   $J=\lvert j\rvert>0$, so it does not supply the radial equation. Instead,
@@ -108,9 +107,9 @@ that invokes their conclusions carries that assumption.
 
 - **Regime.** The meanings of weak-field and non-relativistic use are those
   defined in [[post-cm05-gravity]] clause (iv): for a trajectory segment and
-  chosen tolerance $\eta\in(0,1)$, the maximum source-potential ratio
-  $\max_i\lvert\Phi_i\rvert/c^2$ and the squared relative-speed ratio
-  $\lvert r'\rvert^2/c^2$ are each at most $\eta$. Relativistic corrections
+  chosen tolerance $\eta\in(0,1)$, in the fixed comparison inertial frame of that clause, the maximum source-potential ratio
+  $\max_i\lvert\Phi_i\rvert/c^2$ and the maximum squared label-speed ratio
+  $\max_i\lvert x_i'\rvert^2/c^2$ are each at most $\eta$ throughout the segment. Relativistic corrections
   (for instance the perihelion precession of the inner planets) require the
   general-relativistic framework and are neither derived nor bounded here;
   the inverse-square law itself is an adopted law of the model.
@@ -149,5 +148,5 @@ that invokes their conclusions carries that assumption.
 No global existence of arbitrary central-force trajectories, no nonlinear
 stability of circular orbits, no closed-form solution of the general
 non-Coulomb central problem, no asymptotes or scattering cross-sections for
-the open branches, no relativistic or finite-size corrections, and no claim
+the unbounded conic branches, no relativistic or finite-size corrections, and no claim
 that any physical system is exactly a model of the adopted class.

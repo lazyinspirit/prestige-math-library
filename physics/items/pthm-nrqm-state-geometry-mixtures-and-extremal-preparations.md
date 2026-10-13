@@ -48,7 +48,7 @@ physical_scope: "Model-internal statements about preparations of the
 sources:
   references:
     - title: "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter
-        2 (updated July 2015), Sections 2.3 and 2.5.1, printed pages 16-18 and
+        2 (updated July 2015), Sections 2.3 and 2.5.1, printed pages 18-21 and
         26-27: the density operator of a mixture, convex combinations of density
         matrices, and the interpretation of convexity as an ensemble
         preparation"
@@ -89,9 +89,9 @@ are preparations with $\rho=\tfrac12\sigma_++\tfrac12\sigma_-$ and $\sigma_+\ne\
 
 [F2] **State-space vocabulary and mixtures** ([[def-nrqm-state-geometry-framework-state-space]], [[lem-nrqm-state-geometry-density-set-convex-and-complete]]): preparations are the states $D(H)$; countable probability-weighted sums of states converge absolutely in the trace norm to a state, finite convex combinations of states are states, and consecutive finite blocks of a weighted family may be grouped with the grouped weights producing the same sum.
 
-[F3] **Spectral expansion** ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a), [[lem-nrqm-state-geometry-purity-criterion]]): every density operator $\rho$ admits an expansion $\rho=\sum_n\lambda_nT_{u_n,u_n}$ with $\lambda_n\ge0$, $\sum_n\lambda_n=1$ and $(u_n)$ an orthonormal family of eigenvectors; the $\lambda_n$ are the positive eigenvalues of $\rho$ counted with multiplicity; and $\rho$ is pure exactly when it has a single positive eigenvalue, equal to $1$.
+[F3] **Spectral expansion** ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a), [[lem-nrqm-state-geometry-purity-criterion]]): every density operator $\rho$ admits an expansion $\rho=\sum_n\lambda_nT_{u_n,u_n}$ converging in trace norm, with $\lambda_n>0$, $\sum_n\lambda_n=1$, and $(u_n)$ an orthonormal family of eigenvectors; the $\lambda_n$ are the positive eigenvalues of $\rho$ counted with multiplicity. The purity criterion gives that $\rho$ is pure exactly when the multiplicity list has one positive eigenvalue equal to $1$.
 
-[F4] **Pure states are extreme, and mixed states split** ([[lem-nrqm-state-geometry-extreme-points-of-the-state-space]]): the extreme points of $D(H)$ are exactly the pure states; and for every non-pure $\rho$ with two positive eigenvalues $\lambda_1\ge\lambda_2>0$ and orthonormal eigenvectors $u_1,u_2$, the operators $\rho\pm\varepsilon(T_{u_1,u_1}-T_{u_2,u_2})$ with $\varepsilon=\lambda_2/2$ are states distinct from one another whose average is $\rho$.
+[F4] **Pure states are extreme** ([[lem-nrqm-state-geometry-extreme-points-of-the-state-space]]): the extreme points of $D(H)$ are exactly the pure states.
 
 [F5] **Pure states and rays** ([[lem-nrqm-state-geometry-ray-to-rank-one-projection]], [[def-nrqm-state-geometry-pure-mixed-states-and-purity]]): $T_{u,u}$ with $u\in S(H)$ are exactly the pure states, and $T_{u_1,u_1}\ne T_{u_2,u_2}$ for orthonormal unit vectors $u_1,u_2$.
 
@@ -105,6 +105,6 @@ are preparations with $\rho=\tfrac12\sigma_++\tfrac12\sigma_-$ and $\sigma_+\ne\
 
 1.3 [(c) extremality] By [F4] the extreme points of $D(H)$ are exactly the pure states; since preparations are the states of $D(H)$ by [F2], a preparation is pure exactly when its density operator is extreme. [given, F2, F4]
 
-2.1 [(c) the nontrivial splitting of a mixed preparation] Let $\rho$ be mixed with two positive eigenvalues $\lambda_1\ge\lambda_2>0$ and orthonormal eigenvectors $u_1,u_2$, and let $\varepsilon=\lambda_2/2$. By [F4] the operators $\sigma_\pm=\rho\pm\varepsilon(T_{u_1,u_1}-T_{u_2,u_2})$ are states with $\rho=\tfrac12\sigma_++\tfrac12\sigma_-$ and $\sigma_+\ne\sigma_-$; reading this identity through [F1] and [F2], it is a statistical mixture with weights $\tfrac12$ of the two preparations $\sigma_+$ and $\sigma_-$. Since the two components are distinct, the representation is nontrivial, so no mixed preparation is an extreme point, in agreement with step 1.3. [given, step 1.3, F1, F2, F4, F5, F6, algebra]
+2.1 [(c) the nontrivial splitting of a mixed preparation] By [F3], a mixed $\rho$ has at least two positive eigenvalues counted with multiplicity. Choose two with $\lambda_1\ge\lambda_2>0$ and orthonormal eigenvectors $u_1,u_2$, and put $\varepsilon=\lambda_2/2$. In the spectral expansion of [F3], choose the orthonormal eigenvectors to include $u_1,u_2$ (within either selected eigenspace, replace its finite orthonormal basis by one containing the specified vectors). The operators $\sigma_\pm=\rho\pm\varepsilon(T_{u_1,u_1}-T_{u_2,u_2})$ therefore have the same trace-norm convergent expansion with the two selected weights replaced by $\lambda_1\pm\varepsilon$ and $\lambda_2\mp\varepsilon$. All weights remain positive, since $\lambda_1-\varepsilon\ge\lambda_2/2>0$ and $\lambda_2-\varepsilon=\lambda_2/2>0$, and their sum remains one. By [F2] and [F5] each $\sigma_\pm$ is a density operator and hence a preparation. Their average is $\rho$, while $\sigma_+-\sigma_-=2\varepsilon(T_{u_1,u_1}-T_{u_2,u_2})\ne0$ by [F5]. Thus [F1] reads the identity as a nontrivial statistical mixture with weights $1/2$, so $\rho$ is not extreme by [F6], consistent with step 1.3. [given, step 1.3, F1, F2, F3, F5, F6, algebra]
 
 3.1 [Conclusion] Steps 1.1-1.2 prove (a) and (b); steps 1.3 and 2.1 prove (c). [step 1.1, step 1.2, step 1.3, step 2.1] ∎

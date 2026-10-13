@@ -32,8 +32,9 @@ verification:
 
 ## Example
 
-Adopt a perfect-fluid model $(\varepsilon,p,n,T)$ in the classical framework
-([[def-gr-perfect-fluid-matter-model]]) and use the rest-frame equivalences of
+Adopt a perfect-fluid model $(\varepsilon,p,n)$ in the classical framework
+([[def-gr-perfect-fluid-matter-model]]) with derived stress-energy tensor
+$T_{ab}=(\varepsilon+p)n_an_b+pg_{ab}$, and use the rest-frame equivalences of
 [[pthm-gr-einstein-consistency-and-energy-conditions]] clause (f): at a point
 with rest frame $(e_0,e_1,e_2,e_3)$, $e_0=n$, the four conditions of
 [[def-gr-energy-conditions]] read

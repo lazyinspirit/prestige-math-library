@@ -9,7 +9,7 @@ dependency_level: 15
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [pthm-gr-local-energy-balance, def-gr-killing-energy-charge, lem-gr-killing-congruence-kinematics-and-energy-current, def-gr-killing-field, thm-gr-killing-and-on-shell-matter-identities, def-gr-measured-energy-density-flux-and-stress, def-gr-observer-energy-momentum-current, def-gr-metric-volume-form-and-current-flux, thm-gr-density-divergence-and-finite-chain-flux, thm-gr-second-bianchi-and-divergence-free-einstein, def-gr-stress-energy-tensor-field, post-gr-field-and-matter-assumptions, post-gr-einstein-field-law, post-gr-classical-gravitational-action, rem-gr-einstein-matter-scope-and-conventions, thm-gr-point-normal-and-exponential-coordinate-charts, rem-gr-normal-coordinates-and-local-inertial-frames-scope, def-gr-si-unit-and-coordinate-conventions]
+deps: [pthm-gr-local-energy-balance, def-gr-killing-energy-charge, lem-gr-killing-congruence-kinematics-and-energy-current, def-gr-killing-field, thm-gr-killing-and-on-shell-matter-identities, def-gr-measured-energy-density-flux-and-stress, def-gr-observer-energy-momentum-current, def-gr-metric-volume-form-and-current-flux, thm-gr-density-divergence-and-finite-chain-flux, thm-gr-second-bianchi-and-divergence-free-einstein, def-gr-stress-energy-tensor-field, post-gr-field-and-matter-assumptions, post-gr-einstein-field-law, post-gr-classical-gravitational-action, rem-gr-einstein-matter-scope-and-conventions, thm-gr-point-normal-and-exponential-coordinate-charts, rem-gr-normal-coordinates-and-local-inertial-frames-scope, def-gr-curvature-tensor-and-derived-tensors, thm-gr-curvature-tensoriality-and-coordinate-formula, def-gr-si-unit-and-coordinate-conventions]
 dependency_roles:
   pthm-gr-local-energy-balance: physical-result
   def-gr-killing-energy-charge: formulation-prerequisite
@@ -28,6 +28,8 @@ dependency_roles:
   rem-gr-einstein-matter-scope-and-conventions: formulation-prerequisite
   thm-gr-point-normal-and-exponential-coordinate-charts: mathematical-premise
   rem-gr-normal-coordinates-and-local-inertial-frames-scope: formulation-prerequisite
+  def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
+  thm-gr-curvature-tensoriality-and-coordinate-formula: mathematical-premise
   def-gr-si-unit-and-coordinate-conventions: formulation-prerequisite
 physical_scope: "Scope and status note for energy questions of the classical gravitational framework: the observer dependence of measured energy density, the absence of any local gravitational energy density in the framework as built, the additional hypotheses a global energy requires, and the deferral of asymptotic masses. The note asserts no theorem about nature, no no-go theorem and no measured value."
 sources:
@@ -67,28 +69,40 @@ This note fixes what the framework does and does not provide under the name
   total energy. The framework's normal-coordinate material
   ([[thm-gr-point-normal-and-exponential-coordinate-charts]],
   [[rem-gr-normal-coordinates-and-local-inertial-frames-scope]]) records that
-  the connection can be made to vanish at a point by an adapted chart while
-  the curvature data cannot be removed by that choice; this is recorded here
-  only as the scope statement that no construction of a local gravitational
-  energy density is available from the connection alone. It is not a no-go
-  theorem, and no no-go theorem is claimed. The cited treatments record the
-  corresponding physical point: a gauge-invariant local energy density of the
-  linearized gravitational field is unavailable, and gravitational energy
-  cannot be localized.
+  the Christoffel symbols can be made to vanish at a point in a point-normal
+  chart; it asserts nothing about second metric derivatives or curvature.
+  Separately, the curvature operator
+  $R(X,Y)Z=\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z$ of
+  [[def-gr-curvature-tensor-and-derived-tensors]] clause (a) is a tensor of
+  type $(1,3)$ by [[thm-gr-curvature-tensoriality-and-coordinate-formula]]
+  clause (a). Thus if $R_p\ne0$, no chart can make all its components zero:
+  zero components in a coordinate basis would imply, by multilinearity, that
+  $R_p(u,v)w=0$ for all $u,v,w\in T_pM$. This tensorial observation does not
+  establish a no-go theorem for gravitational energy. The normal-coordinate
+  identities alone define no local gravitational energy density; the cited
+  discussions of gravitational-energy localization provide context, not a
+  no-go theorem proved or used here.
 
 - **A global energy needs a symmetry and control of the flux.** The Killing
-  energy $Q_\xi$ of [[def-gr-killing-energy-charge]] exists only for a model
+  charge $Q_\xi$ of [[def-gr-killing-energy-charge]] exists only for a model
   that admits an everywhere timelike future-directed Killing field $\xi$;
-  a general metric has no nonzero Killing field beyond $\xi=0$
-  ([[def-gr-killing-field]]). Even with such a $\xi$, the finite-chain
+  the theorem is conditional on this field and supplies no existence result
+  for any specified metric ([[def-gr-killing-field]]). Even with such a
+  $\xi$, the finite-chain
   statement of [[pthm-gr-local-energy-balance]] gives
   $Q_\xi(\Sigma_2)-Q_\xi(\Sigma_1)=-Q_\xi(B)$: conservation requires the side
-  flux to vanish. For a slice of unbounded spatial extent one further needs
+  flux to vanish. It is read as an energy in joules when $\xi$ is
+  length-normalized under the framework's length-coordinate convention; for
+  another flow-parameter normalization, its units carry that scale. For a
+  slice of unbounded spatial extent one further needs
   the limiting flux and the integrals to converge; the flux theorem
   [[thm-gr-density-divergence-and-finite-chain-flux]] is stated for finite
-  smooth singular chains and supplies no such limit, and the framework's scope
-  note [[rem-gr-einstein-matter-scope-and-conventions]] already excludes
-  arbitrary rough or noncompact domains from its smooth branch.
+  smooth singular chains and supplies no such limit. Smooth noncompact
+  manifolds and open matter domains are allowed; it is integration over
+  unbounded slices and passage to asymptotic limits that need additional
+  convergence hypotheses. The scope note
+  [[rem-gr-einstein-matter-scope-and-conventions]] excludes distributional
+  sources and low-regularity fields, not noncompact smooth domains.
 
 - **A Killing field need not be timelike everywhere.** A Killing field that is
   timelike on one region may be spacelike or past-directed elsewhere, in which
@@ -96,7 +110,7 @@ This note fixes what the framework does and does not provide under the name
   cited Tong reference has no globally defined positive conserved energy of
   this kind. Nothing in the framework selects a preferred Killing field or
   normalization: the normalization is part of the model data, and changing
-  $\xi$ changes $Q_\xi$ as recorded in
+  $\xi$ changes $Q_\xi$ and can change its unit scale as recorded in
   [[def-gr-killing-energy-charge]] clause (d).
 
 - **Asymptotic and quasilocal masses are deferred.** The ADM energy and

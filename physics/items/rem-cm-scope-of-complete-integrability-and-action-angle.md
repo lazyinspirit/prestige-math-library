@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 5
-deps: [thm-cm-liouville-arnold-action-angle-repaired, lem-cm-closed-two-form-radial-primitive, cor-cm-action-angle-radian-scaling, def-completely-integrable-hamiltonian-system, def-action-and-angle-coordinates, lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice, thm-compact-connected-regular-fibres-are-tori, prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action, cor-motion-of-a-completely-integrable-hamiltonian-is-linear-on-invariant-tori]
+deps: [thm-cm-liouville-arnold-action-angle-repaired, lem-cm-closed-two-form-radial-primitive, cor-cm-action-angle-radian-scaling, def-completely-integrable-hamiltonian-system, def-action-and-angle-coordinates, lem-stabilizer-of-the-r-n-action-on-a-compact-connected-regular-fibre-is-a-full-lattice, thm-compact-connected-regular-fibres-are-tori, prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action, cor-motion-of-a-completely-integrable-hamiltonian-is-linear-on-invariant-tori, cor-every-smooth-vector-field-on-a-compact-manifold-is-complete, def-countable-choice]
 dependency_roles:
   thm-cm-liouville-arnold-action-angle-repaired: mathematical-premise
   lem-cm-closed-two-form-radial-primitive: mathematical-premise
@@ -17,6 +17,8 @@ dependency_roles:
   thm-compact-connected-regular-fibres-are-tori: mathematical-premise
   prop-commuting-hamiltonian-vector-fields-integrate-to-a-local-r-n-action: mathematical-premise
   cor-motion-of-a-completely-integrable-hamiltonian-is-linear-on-invariant-tori: mathematical-premise
+  cor-every-smooth-vector-field-on-a-compact-manifold-is-complete: mathematical-premise
+  def-countable-choice: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -39,8 +41,10 @@ verification:
   flows on the fibre (through
   [[cor-every-smooth-vector-field-on-a-compact-manifold-is-complete]]); connectedness makes the
   orbit of the abelian action all of the fibre; properness keeps the nearby fibres compact and the
-  period structure locally uniform; and $\mathrm{AC}_\omega$ enters only in the counterexample
-  sequence of step 4.1. None of these conclusions follows from independence alone.
+  period structure locally uniform. The assumption $\mathrm{AC}_\omega$
+  ([[def-countable-choice]]) is inherited through the compact-flow corollary and the lattice
+  and torus suppliers, and is also used directly to select the counterexample sequence of
+  periods in step 4.1. None of these conclusions follows from independence alone.
 - **What is not claimed.** No statement is made about singular fibres, about noncompact or
   disconnected fibres, or about a global action-angle chart on all of $M$; the theorem is local over
   a shrunken ball of regular values, in accordance with

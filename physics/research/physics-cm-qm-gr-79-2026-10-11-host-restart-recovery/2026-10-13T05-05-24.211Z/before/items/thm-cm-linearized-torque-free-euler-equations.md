@@ -1,0 +1,92 @@
+---
+id: thm-cm-linearized-torque-free-euler-equations
+kind: theorem
+title: "Linearization of the torque-free Euler system at a principal-axis spin, and the oscillatory/exponential dichotomy"
+status: draft
+origin: pipeline
+domain: mathematics
+dependency_level: 6
+deps: [def-cm-equilibrium-and-lyapunov-stability, thm-cm-euler-equations-and-torque-free-invariants, def-linear-map, def-linear-isomorphism-and-invertible-linear-map, lem-standard-basis-of-f-n, def-total-derivative-in-euclidean-space, thm-picard-lindelof-local-existence-and-uniqueness, def-locally-lipschitz-in-the-state-variable, def-first-order-ode-initial-value-problem-and-solution, def-cross-product-in-r3, thm-cross-product-norm-is-the-two-vector-gram-determinant, thm-cauchy-schwarz-and-the-euclidean-norm, thm-algebra-of-derivatives, thm-chain-rule, thm-sine-and-cosine-derivatives, thm-hyperbolic-identities-and-derivatives, def-hyperbolic-functions, thm-sine-cosine-signs-monotonicity-and-ranges, cor-exponential-is-a-bijection-onto-positive-reals, thm-exponential-is-strictly-increasing, def-matrix-product-and-identity-matrix, def-euclidean-inner-product, def-inner-product-space, def-derivative, def-interval]
+dependency_roles:
+  def-cm-equilibrium-and-lyapunov-stability: mathematical-premise
+  thm-cm-euler-equations-and-torque-free-invariants: mathematical-premise
+  def-linear-map: mathematical-premise
+  def-linear-isomorphism-and-invertible-linear-map: mathematical-premise
+  lem-standard-basis-of-f-n: mathematical-premise
+  def-total-derivative-in-euclidean-space: mathematical-premise
+  thm-picard-lindelof-local-existence-and-uniqueness: mathematical-premise
+  def-locally-lipschitz-in-the-state-variable: mathematical-premise
+  def-first-order-ode-initial-value-problem-and-solution: mathematical-premise
+  def-cross-product-in-r3: mathematical-premise
+  thm-cross-product-norm-is-the-two-vector-gram-determinant: mathematical-premise
+  thm-cauchy-schwarz-and-the-euclidean-norm: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
+  thm-chain-rule: mathematical-premise
+  thm-sine-and-cosine-derivatives: mathematical-premise
+  thm-hyperbolic-identities-and-derivatives: mathematical-premise
+  def-hyperbolic-functions: mathematical-premise
+  thm-sine-cosine-signs-monotonicity-and-ranges: mathematical-premise
+  cor-exponential-is-a-bijection-onto-positive-reals: mathematical-premise
+  thm-exponential-is-strictly-increasing: mathematical-premise
+  def-matrix-product-and-identity-matrix: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
+  def-inner-product-space: mathematical-premise
+  def-derivative: mathematical-premise
+  def-interval: mathematical-premise
+proof_strategy: direct
+provenance:
+  statement: ai-altered
+  proof: ai-altered
+sources:
+  references:
+    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.4.3, Eqs. (3.41)-(3.45), printed pp. 57-58: perturbation of a principal-axis spin, the linearized equations and the sign criterion for oscillation versus exponential growth"
+      url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+    - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §§2.8.2-2.9: linear behaviour near principal-axis spins"
+      url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+---
+
+## Statement
+
+Let $I_1,I_2,I_3>0$ be pairwise distinct, let $I:\mathbb R^3\to\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis, and let $I^{-1}$ denote its inverse, given by $I^{-1}e_j=I_j^{-1}e_j$. Define the formal torque-free Euler vector field
+$$F(\omega):=-I^{-1}\bigl(\omega\times I\omega\bigr),\qquad \omega\in\mathbb R^3.$$
+When $I$ is an actual rigid-body inertia map written in a principal basis, this is the angular-velocity vector field obtained from [[thm-cm-euler-equations-and-torque-free-invariants]]. Here the positive diagonal entries are otherwise arbitrary; no realization by a mass distribution is assumed. Let $\Omega\ne0$. Then:
+
+1. $F(\Omega e_3)=0$, and for every $\delta\in\mathbb R^3$ $$F(\Omega e_3+\delta)=A\delta+R(\delta),\qquad (A\delta)_1=\frac{\Omega(I_2-I_3)}{I_1}\delta_2,\quad (A\delta)_2=\frac{\Omega(I_3-I_1)}{I_2}\delta_1,\quad (A\delta)_3=0,$$ where $\lVert R(\delta)\rVert_2\le C\lVert\delta\rVert_2^2$ for the explicit constant $C:=\lVert I^{-1}\rVert_F\lVert I\rVert_F$ and $\lVert M\rVert_F:=\bigl(\sum_{j,k}M_{jk}^2\bigr)^{1/2}$; consequently $A$ is the total derivative of $F$ at $\Omega e_3$ ([[def-total-derivative-in-euclidean-space]]).
+2. Every solution of the linear system $\delta'=A\delta$ on $\mathbb R$ has $\delta_3$ constant, and with $$\lambda:=\frac{\Omega^2(I_2-I_3)(I_3-I_1)}{I_1I_2}\ne0$$ the pair $(\delta_1,\delta_2)$ is determined by its initial value as follows:
+   - if $\lambda<0$, then with $\kappa:=\sqrt{-\lambda}>0$, $$\delta_1(t)=\delta_1(0)\cos(\kappa t)+\frac{\Omega(I_2-I_3)}{I_1\kappa}\delta_2(0)\sin(\kappa t),\qquad \delta_2(t)=\delta_2(0)\cos(\kappa t)+\frac{\Omega(I_3-I_1)}{I_2\kappa}\delta_1(0)\sin(\kappa t),$$ and every solution is bounded on $[0,\infty)$;
+   - if $\lambda>0$, then the same two formulas hold with $\cosh$ and $\sinh$ in place of $\cos$ and $\sin$ and $\kappa:=\sqrt\lambda$, the system has unbounded solutions (for instance $\delta_2(0)=0$, $\delta_1(0)\ne0$), and if $\delta_1(0)+\frac{\Omega(I_2-I_3)}{I_1\kappa}\delta_2(0)\ne0$ then $\lVert\delta(t)\rVert_2\to+\infty$ as $t\to+\infty$.
+3. Hence the linearization at the spin $\Omega e_3$ is oscillatory exactly when $(I_2-I_3)(I_3-I_1)<0$, i.e. when the third principal moment is a largest or a smallest moment, and it has exponentially growing solutions exactly when $\lambda>0$, i.e. when $I_3$ lies strictly between $I_1$ and $I_2$; in the latter case the zero solution of the linear system is not stable.
+
+## Facts & Assumptions
+
+**Given:** Pairwise distinct positive reals $I_1,I_2,I_3$, the diagonal map $I$, the field $F(\omega)=-I^{-1}(\omega\times I\omega)$ and a real $\Omega\ne0$.
+
+[L1] Every $x\in\mathbb R^3$ has a unique expansion $x=\sum_{j=1}^3x_je_j$ by the standard-basis result ([[lem-standard-basis-of-f-n]]). Define $S(x):=\sum_{j=1}^3(x_j/I_j)e_j$; it is linear and direct substitution gives $SI=IS=\operatorname{Id}$, so $S$ is the inverse linear map of $I$ ([[def-linear-map]], [[def-linear-isomorphism-and-invertible-linear-map]]). The cross product is bilinear with coordinate formula $(u\times v)_1=u_2v_3-u_3v_2$ and cyclic analogues, and $\lVert u\times v\rVert_2\le\lVert u\rVert_2\lVert v\rVert_2$ ([[def-cross-product-in-r3]], [[thm-cross-product-norm-is-the-two-vector-gram-determinant]]).
+
+[L2] For a matrix $M$, $\lVert Mz\rVert_2\le\lVert M\rVert_F\lVert z\rVert_2$ with $\lVert M\rVert_F=\bigl(\sum_{j,k}M_{jk}^2\bigr)^{1/2}$: this is the row-by-row Cauchy-Schwarz inequality [[thm-cauchy-schwarz-and-the-euclidean-norm]], [[def-matrix-product-and-identity-matrix]].
+
+[L3] $A$ is a linear map with $A\delta=\bigl(\Omega(I_2-I_3)\delta_2/I_1,\ \Omega(I_3-I_1)\delta_1/I_2,\ 0\bigr)$; a linear map is totally differentiable at every point with itself as total derivative, and a bound $\lVert F(\omega_0+\delta)-F(\omega_0)-A\delta\rVert_2\le C\lVert\delta\rVert_2^2$ exhibits $A$ as the total derivative by the definition [[def-total-derivative-in-euclidean-space]].
+
+[L4] The first-order linear system $z'=Az$ is locally Lipschitz in the state variable and has unique solutions with prescribed initial data; the same holds for $z'=Az+b$ [[def-locally-lipschitz-in-the-state-variable]], [[thm-picard-lindelof-local-existence-and-uniqueness]], [[def-first-order-ode-initial-value-problem-and-solution]].
+
+[L5] Derivatives: $(\sin)'=\cos$, $(\cos)'=-\sin$; $(\sinh)'=\cosh$, $(\cosh)'=\sinh$; the chain and sum rules hold; $\lvert\sin\rvert\le1$ and $\lvert\cos\rvert\le1$ [[thm-sine-and-cosine-derivatives]], [[thm-hyperbolic-identities-and-derivatives]], [[thm-algebra-of-derivatives]], [[thm-chain-rule]], [[thm-sine-cosine-signs-monotonicity-and-ranges]].
+
+[L6] $\cosh t=(e^t+e^{-t})/2$ and $\sinh t=(e^t-e^{-t})/2$; the exponential is strictly increasing with image $(0,+\infty)$ [[def-hyperbolic-functions]], [[thm-exponential-is-strictly-increasing]], [[cor-exponential-is-a-bijection-onto-positive-reals]].
+
+## Proof
+
+**Proof technique:** direct.
+
+1.1 Expanding with [L1], $\bigl(\Omega e_3+\delta\bigr)\times I\bigl(\Omega e_3+\delta\bigr)=\Omega e_3\times I\delta+\Omega I_3\,\delta\times e_3+\delta\times I\delta$, and $e_3\times I\delta=I_1\delta_1e_2-I_2\delta_2e_1$ while $\delta\times e_3=\delta_2e_1-\delta_1e_2$; collecting components gives $\bigl(\Omega e_3+\delta\bigr)\times I(\Omega e_3+\delta)=\Omega(I_3-I_2)\delta_2e_1+\Omega(I_1-I_3)\delta_1e_2+\delta\times I\delta$. Applying $-I^{-1}$ and [L1] yields $F(\Omega e_3+\delta)=A\delta-I^{-1}(\delta\times I\delta)$ with $A$ as displayed, and $F(\Omega e_3)=A\cdot0=0$. [given, L1, algebra]
+
+1.2 Let $\delta$ solve $\delta'=A\delta$. The third equation gives $\delta_3'=0$, so $\delta_3$ is constant; the first two equations read $\delta_1'=c\delta_2$, $\delta_2'=d\delta_1$ with $c=\Omega(I_2-I_3)/I_1\ne0$ and $d=\Omega(I_3-I_1)/I_2\ne0$ by distinctness and $\Omega\ne0$, so $\delta_1''=cd\,\delta_1=\lambda\delta_1$ and $\delta_2=\delta_1'/c$; conversely every solution of $x''=\lambda x$ produces the solution $\delta=(x,x'/c,\text{const})$. [given, L4, algebra]
+
+2.1 The remainder satisfies $\lVert I^{-1}(\delta\times I\delta)\rVert_2\le\lVert I^{-1}\rVert_F\lVert\delta\rVert_2\lVert I\delta\rVert_2\le\lVert I^{-1}\rVert_F\lVert I\rVert_F\lVert\delta\rVert_2^2$ by [L1] and two applications of [L2]; hence $R(\delta):=-I^{-1}(\delta\times I\delta)$ obeys the bound of clause 1 with $C=\lVert I^{-1}\rVert_F\lVert I\rVert_F$, and $A$ is the total derivative of $F$ at $\Omega e_3$ by [L3]. [step 1.1, given, L2, L3]
+
+2.2 Suppose $\lambda<0$ and put $\kappa=\sqrt{-\lambda}$. The function $x(t):=x(0)\cos(\kappa t)+(x'(0)/\kappa)\sin(\kappa t)$ satisfies $x''=-\kappa^2x=\lambda x$ by the derivative formulas and chain rule [L5]; the pair $(x,x')$ solves the first-order system $(x,x')'=(x',\lambda x)$, which is locally Lipschitz, so by uniqueness [L4] it is the solution with the given initial data. Taking $x=\delta_1$ and using $\delta_2=\delta_1'/c$, $\delta_1'(0)=c\delta_2(0)$, gives $\delta_1(t)=\delta_1(0)\cos(\kappa t)+(c\,\delta_2(0)/\kappa)\sin(\kappa t)$ and $\delta_2(t)=\delta_2(0)\cos(\kappa t)-(\kappa/c)\delta_1(0)\sin(\kappa t)$; substituting $c=\Omega(I_2-I_3)/I_1$, $\kappa^2=-\Omega^2(I_2-I_3)(I_3-I_1)/(I_1I_2)$ and $\kappa/c=-\Omega(I_3-I_1)/(I_2\kappa)$ gives the two displayed formulas. Boundedness follows from $\lvert\sin\rvert,\lvert\cos\rvert\le1$ [L5]. [step 1.2, given, L4, L5, algebra]
+
+2.3 Suppose $\lambda>0$ and put $\kappa=\sqrt\lambda$. The same argument with $\cosh,\sinh$ in place of $\cos,\sin$ verifies the two displayed formulas: $x(t)=x(0)\cosh(\kappa t)+(x'(0)/\kappa)\sinh(\kappa t)$ satisfies $x''=\kappa^2x$ by [L5], and uniqueness [L4] identifies it as the solution. [step 1.2, given, L4, L5, algebra]
+
+3.1 Let $\lambda>0$ and set $A_0:=\delta_1(0)$, $B_0:=c\,\delta_2(0)/\kappa$, so that $\delta_1(t)=A_0\cosh(\kappa t)+B_0\sinh(\kappa t)=\tfrac12(A_0+B_0)e^{\kappa t}+\tfrac12(A_0-B_0)e^{-\kappa t}$ by [L6]. If $A_0+B_0\ne0$ then $\lvert\delta_1(t)\rvert\ge\tfrac12\lvert A_0+B_0\rvert e^{\kappa t}-\tfrac12\lvert A_0-B_0\rvert e^{-\kappa t}\to+\infty$ as $t\to+\infty$, because $e^{\kappa t}\to+\infty$ and $e^{-\kappa t}\to0$ [L6]; since $A_0+B_0=\delta_1(0)+c\delta_2(0)/\kappa$, this is the growth criterion of clause 2, and the choice $\delta_2(0)=0\ne\delta_1(0)$ satisfies it, so the system has unbounded solutions and clause 3 follows. [step 2.3, given, L6, algebra]
+
+4.1 Finally the sign of $\lambda$ is the sign of $(I_2-I_3)(I_3-I_1)$ because $\Omega^2/(I_1I_2)>0$; this vanishes exactly when $I_3$ equals $I_1$ or $I_2$, which distinctness excludes, so $\lambda\ne0$, and $\lambda<0$ exactly for extreme, $\lambda>0$ exactly for intermediate $I_3$, completing the sign criterion. In the intermediate case, for every $\delta>0$ choose $0<\eta<\min\{\delta,1\}$ and initial data $\eta e_1$. Step 3.1 gives an unbounded solution with initial norm $\eta$; by continuity it reaches norm $1$ at some $t>0$. Thus the fixed $\varepsilon=1$ violates the stability condition for every $\delta$, proving that the zero solution is not Lyapunov stable ([[def-cm-equilibrium-and-lyapunov-stability]]) and completing clause 3. [step 2.2, 2.3, 3.1, given, algebra] ∎

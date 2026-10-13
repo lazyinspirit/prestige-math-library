@@ -9,6 +9,7 @@ origin: session
 dependency_level: 10
 deps:
   [
+    def-axiom-of-choice,
     def-countable-choice,
     def-heat-kernel,
     def-nrqm-kinematics-framework-massive-spin-s-model,
@@ -28,6 +29,7 @@ deps:
     thm-tonelli-theorem-for-sigma-finite-product-spaces
   ]
 dependency_roles:
+  def-axiom-of-choice: mathematical-premise
   def-countable-choice: mathematical-premise
   def-heat-kernel: mathematical-premise
   def-nrqm-kinematics-framework-massive-spin-s-model: formulation-prerequisite
@@ -75,8 +77,8 @@ verification:
 Adopt the observable and probability postulate P2 and the massive-particle model
 postulate P5 read through
 [[def-nrqm-kinematics-framework-massive-spin-s-model]] for a spinless particle
-($s=0$, $r=1$) of mass parameter $m>0$, and assume the Axiom of Countable
-Choice ([[def-countable-choice]],
+($s=0$, $r=1$) of mass parameter $m>0$, and assume the Axiom of Choice and
+the Axiom of Countable Choice ([[def-axiom-of-choice]], [[def-countable-choice]],
 [[def-nrqm-observables-framework-observable-and-outcome-law]]). Fix a width
 $\sigma>0$ and define
 $$\psi_{\sigma}(x):=(\pi\sigma^{2})^{-3/4}e^{-|x|^{2}/(2\sigma^{2})},\qquad x\in\mathbb R^{3}.$$
@@ -112,17 +114,17 @@ statements are properties of this family only.
 
 ## Facts & Assumptions
 
-**Given:** A width $\sigma>0$; the action constant $\hbar>0$; the model of [[def-nrqm-kinematics-framework-massive-spin-s-model]] with $r=1$; the vector $\psi_{\sigma}$; the momentum transform $U$; a coordinate $j$ or $k$.
+**Given:** The Axiom of Choice and the Axiom of Countable Choice; a width $\sigma>0$; the action constant $\hbar>0$; the model of [[def-nrqm-kinematics-framework-massive-spin-s-model]] with $r=1$; the vector $\psi_{\sigma}$; the momentum transform $U$; a coordinate $j$ or $k$.
 
 [F1] **Heat kernel.** $\Gamma(x,t):=(4\pi t)^{-n/2}e^{-|x|^{2}/(4t)}$ on $\mathbb R^{n}$, $t>0$ ([[def-heat-kernel]]), with $\int_{\mathbb R^{n}}\Gamma(x,t)\,dx=1$, $\Gamma$ of class $C^{\infty}$, and for every multi-index $\alpha$ a constant $C_{n,\alpha}<\infty$ with $|D^{\alpha}_{x}\Gamma(x,t)|\le C_{n,\alpha}t^{-(|\alpha|+n)/2}e^{-|x|^{2}/(8t)}$ ([[lem-heat-kernel-normalisation-scaling-and-derivatives]] clauses (i),(iii),(iv)); all first and second moments are absolutely integrable and $\int_{\mathbb R^{n}}x_{i}\Gamma(x,t)dx=0$, $\int_{\mathbb R^{n}}x_{i}x_{j}\Gamma(x,t)dx=2t\delta_{ij}$ ([[lem-first-and-second-moments-of-the-heat-kernel]]).
 
-[F2] **Gaussian Fourier transform.** With the $2\pi$-normalized transform of [[thm-plancherel]] one has $\mathcal F_{2}(e^{-\pi t|x|^{2}})(\xi)=t^{-n/2}e^{-\pi|\xi|^{2}/t}$ for $t>0$ ([[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]); the momentum transform satisfies $U=D_{\hbar}\mathcal F_{2}$ with $D_{\hbar}g(p)=(2\pi\hbar)^{-3/2}g(p/(2\pi\hbar))$ and $(U\varphi)(p)=(2\pi\hbar)^{-3/2}\int e^{-ip\cdot x/\hbar}\varphi(x)dx$ for $\varphi\in L^{1}\cap L^{2}$, $\mathcal F_{2}$ being the unitary extension of the $L^{1}$ transform ([[lem-nrqm-composites-momentum-fourier-jacobian]] clauses (a),(c), [[lem-nrqm-kinematics-momentum-representation]] clause (a), [[thm-plancherel]]).
+[F2] **Gaussian Fourier transform.** With the $2\pi$-normalized transform of [[thm-plancherel]] one has $\mathcal F_{2}(e^{-\pi t|x|^{2}})(\xi)=t^{-n/2}e^{-\pi|\xi|^{2}/t}$ for $t>0$ ([[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]); the momentum transform satisfies $U=D_{\hbar}\mathcal F_{2}$ with $D_{\hbar}g(p)=(2\pi\hbar)^{-3/2}g(p/(2\pi\hbar))$ and $(U\varphi)(p)=(2\pi\hbar)^{-3/2}\int e^{-ip\cdot x/\hbar}\varphi(x)dx$ for $\varphi\in\mathcal S(\mathbb R^{3};\mathbb C)$ and every $p\in\mathbb R^{3}$, $\mathcal F_{2}$ being the unitary extension of the Schwartz transform ([[lem-nrqm-composites-momentum-fourier-jacobian]] clauses (a),(c), [[lem-nrqm-kinematics-momentum-representation]] clause (a), [[thm-plancherel]]).
 
 [F3] **Product integrals and domination.** Integrals of nonnegative measurable functions on products may be iterated ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]); $\int_{\mathbb R}e^{-u^{2}}du=\sqrt\pi$ ([[thm-gaussian-integral]]); and $\frac{x^{m}}{e^{ax}}\to0$ as $x\to+\infty$ for every $m\in\mathbb N$ and $a>0$ ([[thm-exponential-beats-every-polynomial]]).
 
 [F4] **Schwartz classes and weak derivatives.** A class lies in $\mathcal S(\mathbb R^{3};\mathbb C)$ exactly when all seminorms $\sup_{x}|x^{\alpha}\partial^{\beta}f(x)|$ are finite ([[def-schwartz-space-and-its-seminorms]]); a $C^{1}$ function whose classical partial derivatives lie in $L^{2}$ has those derivatives as weak derivatives ([[lem-classical-derivatives-are-weak-derivatives]]).
 
-[F5] **Outcome laws.** The position law of $Q_{j}$ in a preparation of the unit class $\psi$ is $\mu^{Q_{j}}_{\psi}(B)=\int_{x_{j}^{-1}(B)}|\psi(x)|^{2}dx$ and the momentum law of $P_{k}$ is $\mu^{P_{k}}_{\psi}(B)=\int_{\{p_{k}\in B\}}|(U\psi)(p)|^{2}dp$; the joint position law has density $|\psi|^{2}$ ([[pthm-nrqm-kinematics-spin-s-outcome-laws]] clauses (a)-(c), [[def-nrqm-observables-framework-observable-and-outcome-law]] clause (b)).
+[F5] **Outcome laws.** Under the stated Choice hypotheses, the position law of $Q_{j}$ in a preparation of the unit class $\psi$ is $\mu^{Q_{j}}_{\psi}(B)=\int_{x_{j}^{-1}(B)}|\psi(x)|^{2}dx$ and the momentum law of $P_{k}$ is $\mu^{P_{k}}_{\psi}(B)=\int_{\{p_{k}\in B\}}|(U\psi)(p)|^{2}dp$; the joint position law has density $|\psi|^{2}$ ([[pthm-nrqm-kinematics-spin-s-outcome-laws]] clauses (a)-(c), [[def-nrqm-observables-framework-observable-and-outcome-law]] clause (b)).
 
 ## Verification
 

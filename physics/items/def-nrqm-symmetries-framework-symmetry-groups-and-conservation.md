@@ -181,7 +181,7 @@ verify the energy-domain and commutation conditions of clause (b). Antiunitary
 symmetries, superselection sectors, symmetries of preparations as opposed to
 dynamics, and any empirical claim about which symmetries a laboratory system
 possesses are outside this definition. The
-parameter $a$ of a translation has the unit of length $u_H$ of
+parameter $a$ of a translation has the unit of length (metre) of
 [[def-nrqm-framework-quantities-and-units]]; the rotation group and parity
 act on the spatial factor only, in the readings of
 [[lem-nrqm-symmetries-spatial-rotation-action]] and

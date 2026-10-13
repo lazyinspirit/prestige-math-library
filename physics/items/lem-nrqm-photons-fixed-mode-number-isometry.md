@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 8
-deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-fock-sector-projections, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains, thm-nrqm-fock-and-equilibrium-number-operator-domain, thm-nrqm-fock-and-equilibrium-fixed-mode-number-law, thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-hilbert-orthogonal-projection, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-real-and-complex-inner-product-space, cor-cauchy-schwarz-inequality-for-l-two, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-countable-choice, def-axiom-of-choice]
+deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-fock-sector-projections, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains, thm-nrqm-fock-and-equilibrium-number-operator-domain, thm-nrqm-fock-and-equilibrium-fixed-mode-number-law, thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian, lem-nrqm-photons-transverse-restricted-momentum-and-energy-multipliers, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-hilbert-orthogonal-projection, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-real-and-complex-inner-product-space, cor-cauchy-schwarz-inequality-for-l-two, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-countable-choice, def-dependent-choice, thm-choice-implies-dependent-implies-countable-choice, def-axiom-of-choice]
 dependency_roles:
   thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction: mathematical-premise
   lem-nrqm-fock-and-equilibrium-fock-sector-projections: mathematical-premise
@@ -15,6 +15,7 @@ dependency_roles:
   thm-nrqm-fock-and-equilibrium-number-operator-domain: mathematical-premise
   thm-nrqm-fock-and-equilibrium-fixed-mode-number-law: mathematical-premise
   thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian: mathematical-premise
+  lem-nrqm-photons-transverse-restricted-momentum-and-energy-multipliers: mathematical-premise
   lem-nrqm-composites-hilbert-tensor-construction: mathematical-premise
   lem-nrqm-composites-permutation-sector-projections: mathematical-premise
   thm-parseval-equivalences-for-a-complete-orthonormal-family: mathematical-premise
@@ -27,6 +28,8 @@ dependency_roles:
   cor-cauchy-schwarz-inequality-for-l-two: mathematical-premise
   thm-tonelli-theorem-for-sigma-finite-product-spaces: mathematical-premise
   def-countable-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
+  thm-choice-implies-dependent-implies-countable-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
 proof_strategy: direct
 provenance:
@@ -43,7 +46,11 @@ sources:
 ## Statement
 
 Assume the Axiom of Countable Choice and the Axiom of Choice
-([[def-countable-choice]], [[def-axiom-of-choice]]). Let $H$ be a complex
+([[def-countable-choice]], [[def-axiom-of-choice]]). By
+[[thm-choice-implies-dependent-implies-countable-choice]], Choice supplies the
+Dependent Choice hypothesis, as defined in [[def-dependent-choice]], of the
+cited transverse free-field Fock result.
+Let $H$ be a complex
 Hilbert space ([[def-hilbert-space]],
 [[def-real-and-complex-inner-product-space]]) with completed tensor powers
 $H^{\otimes n}$, symmetric projections $P_+^{(n)}$, Fock space $F(H)$, sector
@@ -134,14 +141,5 @@ $U_\varphi e_n$, or of the transferred operators is asserted.
 
 ## Remarks
 
-- **Scope.** The lemma is a coefficientwise statement about an orthonormal
-  family in a Fock space; it does not assert that a fixed mode is an energy
-  eigenstate. In fact the energy transfer is only an expectation statement:
-  $H_f$ does not preserve the span of the $\varphi^{\otimes n}$ unless
-  $\varepsilon\varphi$ is a multiple of $\varphi$, which for the transverse
-  continuum fails for every nonzero $\varphi$ by
-  [[lem-nrqm-photons-transverse-restricted-momentum-and-energy-multipliers]]
-  clause (c).
-- **Choice hypotheses.** Only the Axioms of Countable Choice and of Choice
-  inherited from the cited Fock space items are used; no further choice is
-  introduced.
+- **Scope.** The lemma is a coefficientwise statement about an orthonormal family in a Fock space; it does not assert that a fixed mode is an energy eigenstate. In fact the energy transfer is only an expectation statement: $H_f$ does not preserve the span of the $\varphi^{\otimes n}$ unless $\varepsilon\varphi$ is a multiple of $\varphi$, which for the transverse continuum fails for every nonzero $\varphi$ by [[lem-nrqm-photons-transverse-restricted-momentum-and-energy-multipliers]] clause (c).
+- **Choice hypotheses.** The transverse free-field Fock supplier assumes Dependent Choice; the stated Axiom of Choice supplies it by [[thm-choice-implies-dependent-implies-countable-choice]]. The result also carries the cited Countable Choice hypothesis; no other choice is introduced.

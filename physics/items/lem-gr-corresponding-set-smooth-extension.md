@@ -1,7 +1,7 @@
 ---
 id: lem-gr-corresponding-set-smooth-extension
 kind: lemma
-title: "The set of boundary points with a corresponding point is open, and the extension preserves the metric, matter fields and connection on the closure side"
+title: "The set of boundary points with a corresponding point is open, and the extension preserves the metric, matter fields and connection on the common domain and its corresponding boundary"
 status: draft
 origin: session
 domain: mathematics

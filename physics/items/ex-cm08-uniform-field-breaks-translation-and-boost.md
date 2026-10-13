@@ -6,8 +6,10 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 19
-deps: [ex-cm02-uniform-field, pthm-cm08-translation, pthm-cm08-boost-boundary, pthm-cm08-time-energy, def-cm08-symmetry-of-the-mechanical-lagrangian, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm02-newtonian-flow, def-cm07-action-and-mechanical-lagrangian, def-cm01-configuration, def-cm01-units, def-euclidean-inner-product, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, thm-algebra-of-derivatives, lem-derivative-of-a-power, def-vector-valued-derivative-and-integral, def-interval]
+deps: [pthm-cm03-momentum-balance, post-cm02-interactions, ex-cm02-uniform-field, pthm-cm08-translation, pthm-cm08-boost-boundary, pthm-cm08-time-energy, def-cm08-symmetry-of-the-mechanical-lagrangian, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm02-newtonian-flow, def-cm07-action-and-mechanical-lagrangian, def-cm01-configuration, def-cm01-units, def-euclidean-inner-product, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, thm-algebra-of-derivatives, lem-derivative-of-a-power, def-vector-valued-derivative-and-integral, def-interval]
 dependency_roles:
+  pthm-cm03-momentum-balance: physical-result
+  post-cm02-interactions: physical-assumption
   ex-cm02-uniform-field: operational-prerequisite
   pthm-cm08-translation: physical-result
   pthm-cm08-boost-boundary: physical-result
@@ -34,11 +36,11 @@ proof_strategy: direct
 physical_scope: "A worked model check inside the framework: the one-label global potential model (d=0) with U = -m g . x, its explicit maximal motion, the failure of the translation and boost charges in directions with a nonzero component along the field, with the exact rates predicted by the sharpness clauses, a numerical instance at an explicit time, and the survival of the mechanical energy because the potential has no explicit time dependence. The boost direction is dimensionless and its family parameter has velocity units, so the boost charge has mass-length units. All values are model values in a declared idealization; the example reports no measurement and asserts no property of any field of nature."
 sources:
   references:
-    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 4.5, printed pages 79-83: constant near-Earth gravity as the potential mgz with constant g, an approximation and not a globally uniform planetary field"
+    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.5, printed pages 25-26 (PDF pages 28-29), Eqs. (1.95)-(1.97): after release from a sphere, the constant-g potential mgz gives free horizontal motion and quadratic vertical free fall"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.4.1, printed pages 24-26 (PDF pages 30-32): translation invariance as the source of momentum conservation, so that a force law breaking translation invariance breaks the momentum charge"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-8 (PDF pages 26-27): the distinction between a conserved Hamiltonian function and the mechanical energy in a driven description"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-10 (PDF pages 25-28): the distinction between a conserved Hamiltonian function and the mechanical energy in a driven description"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
 verification:
   precheck: pass
@@ -88,12 +90,12 @@ $(0,x_{0},v_{0})$ by [[ex-cm02-uniform-field]]. Verify:
    [[pthm-cm08-time-energy]] clause 1 holds;
 5. for the numerical instance $m=1\,\mathrm{kg}$,
    $\mathbf g=(0,0,-1)\,\mathrm m\,\mathrm s^{-2}$, $x_{0}=0$,
-   $v_{0}=(1,0,0)\,\mathrm m\,\mathrm s^{-1}$ and $a=e_{3}$: at $t=2\,\mathrm s$
+   $v_{0}=(1,0,0)\,\mathrm m\,\mathrm s^{-1}$ and $a=(0,0,1)$: at $t=2\,\mathrm s$
    one has $P(2)=(1,0,-2)$ in $\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$,
    $a\cdot P(2)=-2\,\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$,
    $K_{a}(2)=-2\,\mathrm{kg}\,\mathrm m$ and
    $K_{a}'(2)=-2\,\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$, while the
-   component along $e_{1}$ is constant at $1\,\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$.
+   component along $(1,0,0)$ is constant at $1\,\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$.
 
 All values are model values of the declared idealization: the constant field is
 an adopted approximation of an external influence and no measurement is
@@ -125,22 +127,19 @@ reported.
 
 1.4 Clause 4: the potential has $\partial_{t}U\equiv0$, so the time-translation datum satisfies the model identity by [F4]; directly, $$E(t)=\tfrac12m\lvert v_{0}+\mathbf g t\rvert^{2}-m\,\mathbf g\cdot\bigl(x_{0}+v_{0}t+\tfrac12\mathbf g t^{2}\bigr)=\tfrac12m\bigl(\lvert v_{0}\rvert^{2}+2t\,\mathbf g\cdot v_{0}+t^{2}\lvert\mathbf g\rvert^{2}\bigr)-m\,\mathbf g\cdot x_{0}-m\,t\,\mathbf g\cdot v_{0}-\tfrac12m\,t^{2}\lvert\mathbf g\rvert^{2}=\tfrac12m\lvert v_{0}\rvert^{2}-m\,\mathbf g\cdot x_{0},$$ constant on $\mathbb R$, consistent with the conservation clause of [F4]. [F2, F4, F5, algebra]
 
-2.1 Clause 5, numerical instance: with $m=1$, $\mathbf g=(0,0,-1)$, $x_{0}=0$ and $v_{0}=(1,0,0)$ the velocity is $x'(t)=(1,0,-t)$ and at $t=2\,\mathrm s$ one has $P(2)=(1,0,-2)$ in $\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$; with $a=e_{3}$ clause 2 gives $a\cdot P(2)=m(a\cdot v_{0})+2m(a\cdot\mathbf g)=0+2(-1)=-2\,\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$, clause 3 gives $K_{a}(2)=\tfrac12(1)(4)(-1)-0=-2\,\mathrm{kg}\,\mathrm m$ and $K_{a}'(2)=2(1)(-1)=-2\,\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$; with $a=e_{1}$ one has $a\cdot\mathbf g=0$, so $a\cdot P(t)=m(a\cdot v_{0})=1\,\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$ for every $t$. [step 1.2, step 1.3, F5, algebra]
+2.1 Clause 5, numerical instance: with $m=1$, $\mathbf g=(0,0,-1)$, $x_{0}=0$ and $v_{0}=(1,0,0)$ the velocity is $x'(t)=(1,0,-t)$ and at $t=2\,\mathrm s$ one has $P(2)=(1,0,-2)$ in $\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$; with $a=(0,0,1)$ clause 2 gives $a\cdot P(2)=m(a\cdot v_{0})+2m(a\cdot\mathbf g)=0+2(-1)=-2\,\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$, clause 3 gives $K_{a}(2)=\tfrac12(1)(4)(-1)-0=-2\,\mathrm{kg}\,\mathrm m$ and $K_{a}'(2)=2(1)(-1)=-2\,\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$; with $a=(1,0,0)$ one has $a\cdot\mathbf g=0$, so $a\cdot P(t)=m(a\cdot v_{0})=1\,\mathrm{kg}\,\mathrm m\,\mathrm s^{-1}$ for every $t$. [step 1.2, step 1.3, F5, algebra]
 
 3.1 Clauses 1-5 are steps 1.1, 1.2, 1.3, 1.4 and 2.1; the example exhibits, on explicit data of an adopted model, a force law that breaks the translation and boost charges across the field while the autonomous potential preserves the mechanical energy, and it reports no measurement. [step 1.1, step 1.2, step 1.3, step 1.4, step 2.1] ∎
 
 ## Remarks
 
-- **Reading of the failure.** The rate $m(a\cdot\mathbf g)$ of the momentum
-  component is the component of the external force along $a$, in agreement
-  with the balance identity of [[pthm-cm03-momentum-balance]] read on this
-  single label; the Noether sharpness clause and the balance describe the same
-  failure from different starting points. Directions perpendicular to
-  $\mathbf g$ retain a conserved momentum component, so the model retains a
-  two-dimensional family of translation charges while failing the third.
+- **Reading of the failure.** For this balance comparison, declare the
+  external-plus-pair presentation of [[post-cm02-interactions]] clause (i)
+  with $F_1^{\mathrm{ext}}:\mathbb R\times\mathbb R^3\times\mathbb R^3\to\mathbb R^3$,
+  $F_1^{\mathrm{ext}}(t,x,v):=m\mathbf g$. This map is constant, so it
+  satisfies the standing regularity. There are no pairs for $N=1$: the pair
+  sum is zero and the antisymmetry condition of clause (ii)1 is vacuous.
+  Thus $F_1=F_1^{\mathrm{ext}}$ on the whole state domain, and the total
+  external force along the motion is $m\mathbf g$. The rate $m(a\cdot\mathbf g)$ of the momentum component is the component of the external force along $a$, in agreement with the balance identity of [[pthm-cm03-momentum-balance]] read on this single label; the Noether sharpness clause and the balance describe the same failure from different starting points. Directions perpendicular to $\mathbf g$ retain a conserved momentum component, so the model retains a two-dimensional family of translation charges when $\mathbf g\ne0$, while failing the third. When $\mathbf g=0$, all three components are conserved.
 
-- **Energy versus momentum.** The same model conserves its mechanical energy:
-  the potential is autonomous, and the time-translation datum is available.
-  The example therefore exhibits the independence of the charges of this page:
-  some symmetry data of the framework's model classes hold here and others do
-  not, and the conservation statements must be applied one datum at a time.
+- **Energy versus momentum.** The same model conserves its mechanical energy: the potential is autonomous, and the time-translation datum is available. The example therefore exhibits the independence of the charges of this page: some symmetry data of the framework's model classes hold here and others do not, and the conservation statements must be applied one datum at a time.

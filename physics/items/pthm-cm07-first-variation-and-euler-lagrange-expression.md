@@ -109,4 +109,6 @@ empirical value.
 - The formula is a model statement only through the identification of the
   kinetic energy with the mass operator and of the potential part of the force
   with $-\nabla_{x}U$; the underlying analytic content is the cited
-  mathematical first-variation formula.
+  mathematical first-variation formula. If residual forces are present, the
+  full Cartesian equation also contains the residual term $d$; this item
+  identifies only the potential-part equation.

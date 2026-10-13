@@ -143,11 +143,11 @@ $\Phi:[t_{0}-h,t_{0}+h]\times U_{0}\to W$ of
 
 1.2 By [F1] the map $\Phi_{t}:U_{0}\to V_{t}$ is a $C^{1}$ diffeomorphism onto the open set $V_{t}$ with inverse $\Psi_{t}$, and $|\det D\Phi_{t}|=1$; by [F3], for a bounded Borel $A\subseteq U_{0}$ with $\overline A\subseteq U_{0}$ both $A$ and $\Phi_{t}(A)$ are Borel and the indicator $f:=\mathbf 1_{\Phi_{t}(A)}$ lies in $L^{1}$. [F1, F3]
 
+1.3 Clause 3: let $\Theta:U_1\to U_2$ be the genuine transition between two full-dimensional canonical charts on an open overlap. Write the two charts as $\theta_1:E\to U_1$ and $\theta_2:E\to U_2$ on the same overlap, with $\theta_j^*\omega_j^{\mathrm{st}}=\sigma$ by [[def-cm13-canonical-form]]. Then $\Theta=\theta_2\circ\theta_1^{-1}$, and pointwise pullback and the chain rule give $\theta_1^*(\Theta^*\omega_2^{\mathrm{st}})=\theta_2^*\omega_2^{\mathrm{st}}=\sigma=\theta_1^*\omega_1^{\mathrm{st}}$. Since $D\theta_1$ is invertible, its pullback on two-forms is injective; hence $\Theta^*\omega_2^{\mathrm{st}}=\omega_1^{\mathrm{st}}$. Thus this $C^1$ diffeomorphism is canonical by [[def-cm13-canonical-map]], and its matrix test gives $|\det D\Theta|=1$, independently of the flow-specific fact [F1]. For a Borel set $B\subseteq U_1$ of finite measure, $\Theta(B)$ is Borel because $\Theta$ is a homeomorphism. For each integer $j\ge1$, set $E_j:=\Theta(B)\cap[-j,j]^{6N}$. Each $E_j$ is bounded Borel, so $\mathbf1_{E_j}\in L^1(U_2)$. Applying [F2] with $T=\Theta$ and $f=\mathbf1_{E_j}$ gives $\lambda_{6N}(E_j)=\lambda_{6N}(B\cap\Theta^{-1}([-j,j]^{6N}))$, since $\det D\Theta$ has absolute value one. As $j\to\infty$, both sets increase respectively to $\Theta(B)$ and $B$; continuity from below of Lebesgue measure yields $\lambda_{6N}(\Theta(B))=\lambda_{6N}(B)$. This proves chart-measure independence for genuine full-dimensional phase charts; a lower-dimensional immersion instead has its own degree-matched volume form $\omega_X^{\wedge r}/r!$. [F2, F3, F4, algebra]
+
 2.1 Applying the change-of-variables identity of [F2] with $T=\Phi_{t}$, $V=U_{0}$, $W=V_{t}$ and $f=\mathbf 1_{\Phi_{t}(A)}$: since $f\circ T=\mathbf 1_{A}$ and $|\det DT|=1$, the identity $\int_{W}f\,d\lambda=\int_{V}(f\circ T)|\det DT|\,d\lambda$ reads $\lambda_{6N}(\Phi_{t}(A))=\int_{U_{0}}\mathbf 1_{A}\,d\lambda_{6N}=\lambda_{6N}(A)$, which is clause 2; this is the point at which $\mathrm{AC}_\omega$ is used, through [F2]. [step 1.2, F2, algebra]
 
-2.2 Clause 3: let $\Theta:U_1\to U_2$ be the genuine transition between two full-dimensional canonical charts on an open overlap. It is a $C^1$ diffeomorphism between open subsets of $\mathbb R^{6N}$ and has $|\det D\Theta|=1$ by [F1]. For a Borel set $B\subseteq U_1$ of finite measure, $\Theta(B)$ is Borel because $\Theta$ is a homeomorphism. For each integer $j\ge1$, set $E_j:=\Theta(B)\cap[-j,j]^{6N}$. Each $E_j$ is bounded Borel, so $\mathbf1_{E_j}\in L^1(U_2)$. Applying [F2] with $T=\Theta$ and $f=\mathbf1_{E_j}$ gives $\lambda_{6N}(E_j)=\lambda_{6N}(B\cap\Theta^{-1}([-j,j]^{6N}))$, since $\det D\Theta$ has absolute value one. As $j\to\infty$, both sets increase respectively to $\Theta(B)$ and $B$; continuity from below of Lebesgue measure yields $\lambda_{6N}(\Theta(B))=\lambda_{6N}(B)$. This proves chart-measure independence for genuine full-dimensional phase charts; a lower-dimensional immersion instead has its own degree-matched volume form $\omega_X^{\wedge r}/r!$. [step 1.2, F2, F1]
-
-3.1 Clause 4 is the identification of the time slices with the momentum-phase maps of the model's motions on the potential branch, which is [F1] combined with [[pthm-cm13-hamiltonian-field-integrates-the-model-equations]] clause 1; collecting steps 1.1, 2.1 and 2.2 proves the theorem. [step 1.1, step 2.1, step 2.2, F1] ∎
+3.1 Clause 4 is the identification of the time slices with the momentum-phase maps of the model's motions on the potential branch, which is [F1] combined with [[pthm-cm13-hamiltonian-field-integrates-the-model-equations]] clause 1; collecting steps 1.1, 2.1 and 1.3 proves the theorem. [step 1.1, step 2.1, step 1.3, F1] ∎
 
 ## Remarks
 
@@ -158,10 +158,7 @@ $\Phi:[t_{0}-h,t_{0}+h]\times U_{0}\to W$ of
 
 - **Volume form versus coordinate measure.** On a full-dimensional canonical
   chart, $\Omega$ and the coordinate top form
-  $dx^{1}\wedge\cdots\wedge dp_{3N}$ are nowhere-zero top forms, so they
-  differ by a nowhere-zero continuous factor; clause 1 says the flow
-  preserves the former and clause 2 that it preserves the latter, so the
-  invariant phase volume does not depend on the chosen density representative.
+  $dx^{1}\wedge\cdots\wedge dx^{n}\wedge dp_1\wedge\cdots\wedge dp_n$ differ by the constant sign $(-1)^{n(n-1)/2}$: expand $\omega^{\wedge n}/n!$ and reorder the paired differentials. Thus the absolute density of $\Omega$ is the coordinate Lebesgue density, explaining the equivalence of the form and measure conclusions. An arbitrary nonconstant rescaling of this density need not be preserved.
   A lower-dimensional generalized-coordinate immersion has its own
   degree-matched phase-volume form $\omega_X^{\wedge r}/r!$.
 

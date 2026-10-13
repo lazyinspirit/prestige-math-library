@@ -93,9 +93,12 @@ chart $(U,x)$ of $M$ ([[def-smooth-manifold]]).
   two one-sided tangents at a corner is required.
 
 **(b) Velocity.** If $\gamma$ is $C^1$ at an interior point $t$, its
-**velocity** $\gamma'(t)\in T_{\gamma(t)}M$ is the velocity derivation of
-[[def-velocity-derivation-of-a-smooth-curve]] translated to the parameter
-value $t$. In a chart around $\gamma(t)$ the velocity has the component
+**velocity** $\gamma'(t)\in T_{\gamma(t)}M$ is the derivation
+$[f]\mapsto(f\circ\gamma)'(t)$ on smooth germs at $\gamma(t)$, extending
+[[def-velocity-derivation-of-a-smooth-curve]] from smooth to $C^1$ curves.
+Equal germ representatives agree along the curve near $t$, and the
+one-variable product rule proves the derivation identity. In a chart around
+$\gamma(t)$ the velocity has the component
 expression
 
 $$\gamma'(t)=\sum_{a=0}^{3}\frac{d}{dt}\bigl(x^a\circ\gamma\bigr)(t)\,\partial_a|_{\gamma(t)},$$
@@ -105,7 +108,8 @@ the coordinate expression of the derivation
 included endpoint of the domain, $\gamma'$ means the corresponding one-sided
 tangent of clause (a).
 
-**(c) Timelike worldlines.** A **$C^k$ future timelike worldline** is a $C^k$
+**(c) Timelike worldlines.** For $k\in\{1,2,3,\ldots\}\cup\{\infty\}$,
+a **$C^k$ future timelike worldline** is a $C^k$
 curve $\gamma:I\to M$ whose velocity $\gamma'(t)$ is future timelike at every
 $t\in I$, in the sense of [[def-causal-classification-of-lorentz-vectors]]
 and [[def-gr-smooth-lorentzian-objects]]: $g_{\gamma(t)}(\gamma'(t),\gamma'(t))<0$
@@ -146,7 +150,9 @@ the function with $\tau(s_0)=0$ and $\tau(s)$ equal to the increment
 from $s_0$ to $s$ when $s>s_0$, and minus the increment from $s$ to $s_0$
 when $s<s_0$. That the increment is independent of the admissible
 partition, so that $\tau$ is well defined, and that it is invariant under
-increasing $C^1$ reparametrization are proved in
+increasing $C^1$ reparametrization with strictly positive derivative
+(including one-sided endpoint derivatives), comparing the increment over the
+actual image interval, are proved in
 [[lem-gr-proper-time-reparametrization-and-four-velocity]]; the display is the
 value for any admissible partition.
 

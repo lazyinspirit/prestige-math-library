@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 4
-deps: [def-cm-fluid-constitutive-models, thm-cm-local-momentum-balance, def-cm-euclidean-spatial-calculus, def-ck-euclidean-maps-and-diffeomorphisms, thm-algebra-of-derivatives, thm-total-derivative-computes-directional-and-partial-derivatives, thm-ftc-first-part, thm-ftc-second-part, def-oriented-integral, thm-additivity-over-subintervals, def-integral-over-a-measurable-set, thm-linearity-of-the-integral, def-derivative, def-interval, def-matrix-product-and-identity-matrix, def-matrix-space, def-trace-of-a-square-matrix]
+deps: [def-cm-fluid-constitutive-models, thm-cm-local-momentum-balance, def-cm-euclidean-spatial-calculus, def-ck-euclidean-maps-and-diffeomorphisms, thm-algebra-of-derivatives, thm-total-derivative-computes-directional-and-partial-derivatives, thm-ftc-first-part, thm-ftc-second-part, def-oriented-integral, thm-additivity-over-subintervals, thm-continuous-implies-integrable, thm-linearity-of-the-integral, def-derivative, def-interval, def-matrix-product-and-identity-matrix, def-matrix-space, def-trace-of-a-square-matrix]
 dependency_roles:
   def-cm-fluid-constitutive-models: mathematical-premise
   thm-cm-local-momentum-balance: mathematical-premise
@@ -18,7 +18,7 @@ dependency_roles:
   thm-ftc-second-part: mathematical-premise
   def-oriented-integral: mathematical-premise
   thm-additivity-over-subintervals: mathematical-premise
-  def-integral-over-a-measurable-set: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
   thm-linearity-of-the-integral: mathematical-premise
   def-derivative: mathematical-premise
   def-interval: mathematical-premise
@@ -41,33 +41,37 @@ sources:
 
 ## Statement
 
-Let $\rho>0$, $\eta>0$ and $h>0$ be constants and let $O:=\mathbb R\times(0,h)\times\mathbb R$ with coordinates $(x,y,z)$. For a $C^2$ velocity field $u:O\to\mathbb R^3$ of the form $u=(v(y),0,0)$ and a $C^1$ pressure $p:O\to\mathbb R$, the incompressible Newtonian equations of [[def-cm-fluid-constitutive-models]] with no body force and steady data read
+The flux integrals below are ordinary Riemann integrals of continuous profiles on $[0,h]$.
+
+Let $I\subseteq\mathbb R$ be a nonempty open time interval, let $\rho>0$, $\eta>0$ and $h>0$ be constants, and let $O:=\mathbb R\times(0,h)\times\mathbb R$ with spatial coordinates $(x,y,z)$. Let $v\in C([0,h])\cap C^2((0,h))$, with endpoint values given by its continuous extension, and $p_{\rm sp}\in C^1(O)$. Define stationary spacetime fields $u:I\times O\to\mathbb R^3$ and $p:I\times O\to\mathbb R$ by $u(t,x,y,z):=(v(y),0,0)$ and $p(t,x,y,z):=p_{\rm sp}(x,y,z)$. Here $D_xu$ denotes the spatial total derivative at fixed $t$, $(u\cdot\nabla)u:=D_xu\,u$, and $\Delta u:=(\sum_{j=1}^3\partial_j^2u_i)_{i=1}^3$ acts componentwise ([[def-cm-euclidean-spatial-calculus]]). The incompressible Newtonian equations of [[def-cm-fluid-constitutive-models]] with no body force and steady data read
 
 $$\operatorname{div}u=0,\qquad \rho\,(u\cdot\nabla)u=-\nabla p+\eta\,\Delta u , \tag{NS}$$
 
-where $\Delta$ acts componentwise and the second equation is the local momentum balance of [[thm-cm-local-momentum-balance]] with $\sigma=-pI_3+\eta(Du+Du^{\mathsf T})$.
+where the second equation is the adopted stationary momentum equation with $\sigma=-pI_3+\eta(D_xu+(D_xu)^{\mathsf T})$.
+
+For this item, “irrotational” means that the spatial velocity gradient $D_xu$ is symmetric.
 
 **(a) Plane Poiseuille flow.** Let $G\in\mathbb R$, $p_0\in\mathbb R$ and
 
-$$v(y):=\frac{G\,y(h-y)}{2\eta},\qquad p(x):=p_0-Gx,\qquad u:=(v,0,0).$$
+$$v(y):=\frac{G\,y(h-y)}{2\eta},\qquad p_{\rm sp}(x,y,z):=p_0-Gx.$$
 
-Then $u$ is $C^\infty$, satisfies (NS) on $O$, and $v(0)=v(h)=0$. Its flux per unit width is
+Then $u$ is $C^\infty$ on $I\times O$, satisfies (NS) there, and $v(0)=v(h)=0$. Its flux per unit width is
 
 $$\int_0^hv(y)\,dy=\frac{Gh^3}{12\eta}.$$
 
 Moreover, within the ansatz $u=(v(y),0,0)$, $p=p_0-Gx$ with the same constant $G$ and the no-slip conditions $v(0)=v(h)=0$, this is the only solution: any two such profiles differ by a linear function vanishing at both endpoints, hence coincide.
 
-**(b) Plane Couette flow.** Let $V\in\mathbb R$, let $v(y):=Vy/h$, let $p$ be constant, and let $u:=(v,0,0)$. Then $u$ satisfies (NS) on $O$ and $v(0)=0$, $v(h)=V$. If $V\ne0$, the velocity gradient $Du$ is not symmetric, so the flow is not irrotational in the sense used in this collection.
+**(b) Plane Couette flow.** Let $V\in\mathbb R$, let $v(y):=Vy/h$, and let $p_{\rm sp}$ be constant. Then the stationary $u,p$ defined above satisfy (NS) on $I\times O$ and $v(0)=0$, $v(h)=V$. If $V\ne0$, the velocity gradient $D_xu$ is not symmetric, so the flow is not irrotational by the definition above.
 
 ## Facts & Assumptions
 
 **Given:** The explicitly adopted steady system (NS), constants $\rho,\eta,h>0$, $G,p_0,V\in\mathbb R$, and the profiles above.
 
-[F1] Adopted equation input: (NS) is the differential system being solved here, not a conclusion drawn from an unspecified integral balance. To obtain (NS) from [[thm-cm-local-momentum-balance]], one must additionally impose its continuity hypothesis (K), integral momentum hypothesis (L), admissible domains and regularity. For the present exact-solution computation (NS) itself is adopted. Constitutive substitution: for the branch (a) of [[def-cm-fluid-constitutive-models]], $\sigma=-pI_3+\eta(Du+Du^{\mathsf T})$ and $\operatorname{div}u=0$; the adopted momentum equation is $\rho D_tu=\operatorname{div}\sigma$ in the absence of body force, and for steady data $D_tu=(u\cdot\nabla)u$. For $u=(v(y),0,0)$, $\operatorname{div}u=\partial_xv=0$, and $\operatorname{div}\bigl(Du+Du^{\mathsf T}\bigr)=\Delta u$ because $\operatorname{div}u=0$; hence $\operatorname{div}\sigma=-\nabla p+\eta\Delta u$ ([[def-cm-euclidean-spatial-calculus]], [[def-trace-of-a-square-matrix]], [[def-matrix-product-and-identity-matrix]]).
+[F1] Adopted equation input: (NS) is the differential system being solved here, not a conclusion drawn from an unspecified integral balance. To obtain (NS) from [[thm-cm-local-momentum-balance]], one must additionally impose its continuity hypothesis (K), integral momentum hypothesis (L), admissible domains and regularity. For the present exact-solution computation (NS) itself is adopted. Constitutive substitution: for the branch (a) of [[def-cm-fluid-constitutive-models]], $\sigma=-pI_3+\eta(D_xu+(D_xu)^{\mathsf T})$ and $\operatorname{div}u=0$; the adopted momentum equation is $\rho D_tu=\operatorname{div}\sigma$ in the absence of body force, and for stationary data $D_tu=D_xu\,u$. For $u=(v(y),0,0)$, $\operatorname{div}u=\partial_xv=0$, and $\operatorname{div}\bigl(D_xu+(D_xu)^{\mathsf T}\bigr)=\Delta u$ because $\operatorname{div}u=0$; hence $\operatorname{div}\sigma=-\nabla p+\eta\Delta u$ ([[def-cm-euclidean-spatial-calculus]], [[def-trace-of-a-square-matrix]], [[def-matrix-product-and-identity-matrix]]).
 
-[F2] For $u=(v(y),0,0)$ with $v$ independent of $x$, $(u\cdot\nabla)u=v(y)\,\partial_xu=0$; the only nonzero entries of $Du$ are $\partial_yu_1=v'(y)$, and $\Delta u=(v''(y),0,0)$ ([[thm-total-derivative-computes-directional-and-partial-derivatives]], [[thm-algebra-of-derivatives]]).
+[F2] For $u=(v(y),0,0)$ with $v$ independent of $x$, $(u\cdot\nabla)u=D_xu\,u=0$; the only nonzero entry of $D_xu$ is $\partial_yu_1=v'(y)$, and $\Delta u=(v''(y),0,0)$ ([[thm-total-derivative-computes-directional-and-partial-derivatives]], [[thm-algebra-of-derivatives]]).
 
-[F3] Fundamental theorem of calculus and linearity of the integral: a $C^2$ function $w$ on $[0,h]$ with $w''=0$ is linear; if moreover $w(0)=w(h)=0$ then $w=0$ ([[thm-ftc-first-part]], [[thm-ftc-second-part]], [[def-oriented-integral]], [[thm-additivity-over-subintervals]], [[thm-linearity-of-the-integral]], [[def-integral-over-a-measurable-set]], [[def-derivative]]).
+[F3] If $w\in C([0,h])\cap C^2((0,h))$ and $w''=0$ on $(0,h)$, then $w$ is affine on $(0,h)$: the fundamental theorem applied on each compact subinterval shows $w'$ is constant there, and overlapping subintervals give one constant throughout $(0,h)$. Continuity extends that affine formula to $[0,h]$, so $w(0)=w(h)=0$ implies $w=0$ ([[thm-ftc-first-part]], [[thm-ftc-second-part]], [[def-oriented-integral]], [[thm-additivity-over-subintervals]], [[thm-linearity-of-the-integral]], [[thm-continuous-implies-integrable]], [[def-derivative]]).
 
 ## Proof
 
@@ -75,9 +79,9 @@ Moreover, within the ansatz $u=(v(y),0,0)$, $p=p_0-Gx$ with the same constant $G
 
 1.1 With $u=(v(y),0,0)$, [F2] gives $(u\cdot\nabla)u=0$ and $\Delta u=(v'',0,0)$; also $-\nabla p=(G,0,0)$ for $p=p_0-Gx$. Hence (NS) reduces to $0=G+\eta v''(y)$ and $\partial_yp=0$, i.e. $$v''(y)=-\frac{G}{\eta},\qquad p=p_0-Gx .$$ For part (b) with $p$ constant the first equation becomes $v''=0$. [given, F1, F2, algebra]
 
-2.1 (Poiseuille.) Integrate $v''=-G/\eta$ twice by [F3]: $v(y)=-\frac{G}{2\eta}y^2+Ay+B$ for constants $A,B$. The conditions $v(0)=v(h)=0$ give $B=0$ and $A=\frac{Gh}{2\eta}$, so $v(y)=\frac{Gy(h-y)}{2\eta}$, the stated profile; it is $C^\infty$ and satisfies both equations of step 1.1. Computing the flux, $$\int_0^hv=\frac{G}{2\eta}\Bigl(h\int_0^hy\,dy-\int_0^hy^2\,dy\Bigr)=\frac{G}{2\eta}\Bigl(\frac{h^3}{2}-\frac{h^3}{3}\Bigr)=\frac{Gh^3}{12\eta}.$$ If two profiles $v_1,v_2$ both solve $v''=-G/\eta$ with vanishing endpoints, their difference $w$ has $w''=0$ and $w(0)=w(h)=0$; by [F3], $w=0$. [step 1.1, F3, algebra]
+2.1 (Poiseuille.) Apply [F3] to $w(y):=v(y)+\frac{G}{2\eta}y^2$, which satisfies $w''=0$ on $(0,h)$ and is continuous on $[0,h]$. Thus $w(y)=Ay+B$; the conditions $v(0)=v(h)=0$ give $B=0$ and $A=\frac{Gh}{2\eta}$, so $v(y)=\frac{Gy(h-y)}{2\eta}$, the stated profile; it is $C^\infty$ and satisfies both equations of step 1.1. Computing the flux, $$\int_0^hv=\frac{G}{2\eta}\Bigl(h\int_0^hy\,dy-\int_0^hy^2\,dy\Bigr)=\frac{G}{2\eta}\Bigl(\frac{h^3}{2}-\frac{h^3}{3}\Bigr)=\frac{Gh^3}{12\eta}.$$ If two profiles $v_1,v_2$ both solve $v''=-G/\eta$ with vanishing endpoints, their difference $w$ has $w''=0$ and $w(0)=w(h)=0$; by [F3], $w=0$. [step 1.1, F3, algebra]
 
-3.1 (Couette.) For $v(y)=Vy/h$ we have $v''=0$, so step 1.1 is satisfied with constant $p$; the boundary values are $v(0)=0$ and $v(h)=V$. Finally $Du$ has the single nonzero entry $\partial_yu_1=V/h$ in row $1$, column $2$, while $\partial_xu_2=0$, so $Du\ne Du^{\mathsf T}$ when $V\ne0$: the antisymmetric part is nonzero and the flow is not irrotational. [step 1.1, F2, algebra] ∎
+3.1 (Couette.) For $v(y)=Vy/h$ we have $v''=0$, so step 1.1 is satisfied with constant $p$; the boundary values are $v(0)=0$ and $v(h)=V$. Finally $D_xu$ has the single nonzero entry $\partial_yu_1=V/h$ in row $1$, column $2$, while $\partial_xu_2=0$, so $D_xu\ne(D_xu)^{\mathsf T}$ when $V\ne0$: the antisymmetric part is nonzero and the flow is not irrotational by the definition above. [step 1.1, F2, algebra] ∎
 
 ## Remarks
 

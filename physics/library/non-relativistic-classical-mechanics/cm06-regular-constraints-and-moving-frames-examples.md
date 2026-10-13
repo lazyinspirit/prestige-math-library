@@ -38,7 +38,7 @@ $T=3mg\cos\theta+2E/l$ and its evaluation on explicit data.
 [[ex-cm06-rotating-chart-inertial-terms]] evaluates all four inertial terms
 on explicit data for a zero-force motion and a chart with quadratic rotation
 angle and accelerating reference curve, compares their sum with the
-inertial-chart acceleration, identifies the chart as non-inertial by the
+moving-chart coordinate acceleration, identifies the chart as non-inertial by the
 criterion, and checks an affine chart with constant rotation against the
 exact return to an inertial frame.
 [[ex-cm06-rolling-disk-model-comparison]] compares two declared reduced

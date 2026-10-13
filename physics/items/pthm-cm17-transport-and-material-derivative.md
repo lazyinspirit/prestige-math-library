@@ -104,9 +104,7 @@ neighbourhood of the swept region.
   parameter derivative used by the cited theorem; the whole $J_0$ need not
   be bounded. Fields that are merely
   integrable, motions that fail injectivity somewhere, and time intervals
-  whose closure meets the boundary of $I$ are outside this statement; the
-  counterexample item of the companion page exhibits a motion with a
-  vanishing Jacobian at which the positivity hypothesis genuinely fails.
+  whose closure meets the boundary of $I$ are outside this statement.
 
 - **Reading of the two terms.** At a fixed spatial point $\partial_tf$ is the
   local rate of change of the field; $u\cdot\nabla f$ is the transport of the

@@ -23,6 +23,8 @@ deps:
   - thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian
   - thm-nrqm-fock-and-equilibrium-number-operator-domain
   - def-countable-choice
+  - def-dependent-choice
+  - thm-choice-implies-dependent-implies-countable-choice
   - def-axiom-of-choice
 dependency_roles:
   lem-nrqm-photons-transverse-fock-total-momentum: formulation-prerequisite
@@ -41,7 +43,9 @@ dependency_roles:
   thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian: mathematical-premise
   thm-nrqm-fock-and-equilibrium-number-operator-domain: mathematical-premise
   def-countable-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
+  thm-choice-implies-dependent-implies-countable-choice: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -114,9 +118,12 @@ and spin postulate P6 and the preparation and apparatus discipline P7
 sector vocabulary of
 [[def-nrqm-identical-particles-framework-species-sectors-and-preparations]],
 and the units and dimensions of [[def-nrqm-framework-quantities-and-units]].
-Assume the Axiom of Countable Choice and the Axiom of Choice, the choice
-hypotheses of the cited Fock space mathematics ([[def-countable-choice]],
-[[def-axiom-of-choice]]).
+Assume the Axiom of Countable Choice and the Axiom of Choice
+([[def-countable-choice]], [[def-axiom-of-choice]]). By
+[[thm-choice-implies-dependent-implies-countable-choice]], the stated Axiom of
+Choice entails Dependent Choice, as defined in [[def-dependent-choice]],
+supplying the DC hypothesis of the cited
+transverse free-field Fock theorem without adopting an additional choice axiom.
 
 **(i) Fixed propagation-mode one-photon polarisation model.** For a declared
 propagation mode, described by a nonzero wavevector label
@@ -145,10 +152,10 @@ with the $L^{2}$ inner product; its $n$-particle sector is
 $\mathfrak H_{n}^{+}=\operatorname{ran}P_{+}^{(n)}$ and its radiation state
 space is the bosonic Fock space $F(\mathfrak h)=\bigoplus_{n\ge0}\mathfrak H_{n}^{+}$
 ([[def-nrqm-identical-particles-framework-species-sectors-and-preparations]],
-[[thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction]]). The
-statistics choice "bosonic" is an empirical model assignment of P6 clause (iii)
-and is not derived here; it is motivated by the photon's observed
-indistinguishability and integer spin but is adopted, not deduced.
+  [[thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction]]). The
+  choice of a bosonic species is the additional model assignment of P6 clause
+  (iii). It is adopted here, not derived from the preceding assumptions, and
+  this item records no experimental observation that establishes it.
 
 **(iii) Mode assignments of frequency, energy and momentum.** In the declared
 inertial chart, each free mode label $k\in\mathbb R^{3}\setminus\{0\}$ is

@@ -1,0 +1,535 @@
+{
+  "group": "f",
+  "batches": [
+    "18"
+  ],
+  "pages_read": [
+    "cm02-forces-initial-data-and-newtonian-flow",
+    "cm02-forces-initial-data-and-newtonian-flow-examples"
+  ],
+  "items_read": [
+    "post-cm02-force-superposition",
+    "post-cm02-interactions",
+    "def-cm02-newtonian-flow",
+    "pthm-cm02-ivp",
+    "pthm-cm02-continuation",
+    "ex-cm02-uniform-field",
+    "post-cm02-drag",
+    "rem-cm02-open-system-warning",
+    "ex-cm02-force-model-regularity-checks",
+    "ex-cm02-constant-field-projectile",
+    "ex-cm02-drag-terminal-velocity",
+    "cex-cm02-nonunique-flow-for-a-continuous-force",
+    "cex-cm02-singular-collision-finite-time"
+  ],
+  "conventions": [
+    {
+      "convention": "The unconstrained force branch uses N ≥ 1 labels, fixed positive inertial masses, a nondegenerate open time window I₀, an open configuration domain Q ⊆ R^(3N), and unrestricted coordinate velocities. Forces are continuous and locally Lipschitz in the complete state (x,v), locally uniformly in time.",
+      "fixed_by": "post-cm02-force-superposition",
+      "matters_for": [
+        "def-cm02-newtonian-flow",
+        "pthm-cm02-ivp",
+        "pthm-cm02-continuation",
+        "ex-cm02-force-model-regularity-checks"
+      ]
+    },
+    {
+      "convention": "The associated first-order field is (v,M⁻¹F), with M⁻¹ dividing each label's force by its own inertial mass. Motions are C² position curves; included interval endpoints use domain-relative one-sided derivatives.",
+      "fixed_by": "def-cm02-newtonian-flow",
+      "matters_for": [
+        "pthm-cm02-ivp",
+        "pthm-cm02-continuation",
+        "ex-cm02-uniform-field",
+        "ex-cm02-drag-terminal-velocity",
+        "cex-cm02-singular-collision-finite-time"
+      ]
+    },
+    {
+      "convention": "Frame changes have t′=t+b and xᵢ′=Rxᵢ+υt+a₀, with R ∈ SO(3). Forces transfer by rotation and inverse affine substitution on the transferred open domain; a proper configuration domain can become time-dependent.",
+      "fixed_by": "post-cm02-force-superposition",
+      "matters_for": [
+        "ex-cm02-uniform-field",
+        "def-cm02-newtonian-flow",
+        "rem-cm02-open-system-warning"
+      ]
+    },
+    {
+      "convention": "Antisymmetry, centrality and potential presentation are additional declared restrictions. Potential forces have Fᵢ=−∇ₓᵢU with U ∈ C². Gravitational couplings are distinct from inertial masses unless their identification is separately adopted.",
+      "fixed_by": "post-cm02-interactions",
+      "matters_for": [
+        "ex-cm02-force-model-regularity-checks",
+        "cex-cm02-singular-collision-finite-time",
+        "rem-cm02-open-system-warning"
+      ]
+    },
+    {
+      "convention": "The breakdown conclusion quantifies an outside point in every terminal interval for each compact set. State-space escape is asserted when I₀=R; autonomous compact trapping is applied to the extended-time model on R.",
+      "fixed_by": "pthm-cm02-continuation",
+      "matters_for": [
+        "cex-cm02-singular-collision-finite-time",
+        "rem-cm02-open-system-warning",
+        "ex-cm02-uniform-field"
+      ]
+    },
+    {
+      "convention": "Linear drag is −cv in a declared medium-rest frame, with c ≥ 0 of dimension mass/time. The terminal-velocity formula requires c > 0. The oscillator-specific fluctuation criterion is not imposed on the free-particle drag model.",
+      "fixed_by": "post-cm02-drag",
+      "matters_for": [
+        "ex-cm02-drag-terminal-velocity",
+        "ex-cm02-force-model-regularity-checks",
+        "rem-cm02-open-system-warning"
+      ]
+    },
+    {
+      "convention": "Projectile data require g > 0, v₀ > 0 and 0 < α < π/2; flight time means the positive return to launch height, and range is the horizontal displacement at that return.",
+      "fixed_by": "ex-cm02-constant-field-projectile",
+      "matters_for": [
+        "ex-cm02-constant-field-projectile"
+      ]
+    },
+    {
+      "convention": "The continuity-only counterexample explicitly drops the Lipschitz clause, uses unit inertial mass, and declares a force scale λ and reference length ℓ*. It is outside the adopted regular force branch.",
+      "fixed_by": "cex-cm02-nonunique-flow-for-a-continuous-force",
+      "matters_for": [
+        "cex-cm02-nonunique-flow-for-a-continuous-force"
+      ]
+    },
+    {
+      "convention": "All parameters and worked numerical data are declared model inputs, not observations. Measured replacements would carry their empirical conditions and uncertainty; the computations establish conditional model consequences.",
+      "fixed_by": "rem-cm02-open-system-warning",
+      "matters_for": [
+        "ex-cm02-uniform-field",
+        "ex-cm02-constant-field-projectile",
+        "ex-cm02-drag-terminal-velocity",
+        "cex-cm02-singular-collision-finite-time"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "post-cm02-force-superposition",
+      "statement": "Adopts continuous, state-locally-Lipschitz force maps on I₀ × Q × R^(3N), the equation mᵢxᵢ″=Fᵢ(t,x,x′), pointwise additive composition, and the specified Galilean transfer law.",
+      "used_by": [
+        "post-cm02-interactions",
+        "def-cm02-newtonian-flow",
+        "pthm-cm02-ivp",
+        "pthm-cm02-continuation",
+        "post-cm02-drag",
+        "ex-cm02-uniform-field",
+        "ex-cm02-force-model-regularity-checks"
+      ]
+    },
+    {
+      "id": "def-cm02-newtonian-flow",
+      "statement": "Defines the associated system z′=(v,M⁻¹F), C² motions and their equivalence with first-order solutions, initial data, unique maximal motions, and Φ(t;t₀,z₀) on the actual maximal intervals.",
+      "used_by": [
+        "pthm-cm02-ivp",
+        "pthm-cm02-continuation",
+        "ex-cm02-uniform-field",
+        "ex-cm02-constant-field-projectile",
+        "ex-cm02-drag-terminal-velocity",
+        "cex-cm02-singular-collision-finite-time"
+      ]
+    },
+    {
+      "id": "pthm-cm02-ivp",
+      "statement": "Every admissible datum has a local motion, any two motions with the same datum agree on their common interval, and there is exactly one maximal motion on an open interval. On the stated cylinder, hM ≤ r and Λh < 1 give exactly one motion whose state graph lies in that cylinder.",
+      "used_by": [
+        "pthm-cm02-continuation",
+        "ex-cm02-uniform-field",
+        "ex-cm02-force-model-regularity-checks",
+        "ex-cm02-constant-field-projectile",
+        "ex-cm02-drag-terminal-velocity",
+        "cex-cm02-singular-collision-finite-time"
+      ]
+    },
+    {
+      "id": "post-cm02-interactions",
+      "statement": "Separately adopts external-plus-pair presentations, optional antisymmetry and centrality, C² potential presentations with Fᵢ=−∇ₓᵢU, and the collision-excluded Newtonian gravitational pair potential with distinct gravitational coupling parameters.",
+      "used_by": [
+        "post-cm02-drag",
+        "ex-cm02-force-model-regularity-checks",
+        "cex-cm02-singular-collision-finite-time",
+        "rem-cm02-open-system-warning"
+      ]
+    },
+    {
+      "id": "pthm-cm02-continuation",
+      "statement": "At a finite maximal right endpoint, every compact K ⊆ D and every terminal interval contain a graph point outside K. Terminal compact trapping would give an extension. On I₀=R, either the state is unbounded on every terminal interval or positions approach Qᶜ in the explicitly quantified sense.",
+      "used_by": [
+        "ex-cm02-force-model-regularity-checks",
+        "cex-cm02-singular-collision-finite-time",
+        "rem-cm02-open-system-warning",
+        "ex-cm02-uniform-field"
+      ]
+    },
+    {
+      "id": "post-cm02-drag",
+      "statement": "Adopts F(t,x,v)=m g−cv on R × R³ × R³, with m > 0, c ≥ 0, declared constant g, medium-rest-frame interpretation, and phenomenological regime and fluctuation qualifications.",
+      "used_by": [
+        "ex-cm02-drag-terminal-velocity",
+        "ex-cm02-force-model-regularity-checks",
+        "rem-cm02-open-system-warning"
+      ]
+    },
+    {
+      "id": "ex-cm02-uniform-field",
+      "statement": "For Fᵢ=mᵢg on the full configuration space and time window R, xᵢ(t)=x₀,ᵢ+v₀,ᵢt+g t²/2 is the unique maximal motion; the model transfers to a uniform-force model with g′=Rg.",
+      "used_by": [
+        "ex-cm02-constant-field-projectile",
+        "rem-cm02-open-system-warning"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-locally-lipschitz-in-the-state-variable",
+      "used_for": "Exact compact-cylinder, locally uniform state-Lipschitz hypothesis.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Euclidean state norms, inner products and component norm identities.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Meaning of potential-force gradients.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-euclidean-maps-and-diffeomorphisms",
+      "used_for": "C² potential regularity.",
+      "opened": true
+    },
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "Open ODE domains, solutions and domain-relative endpoint derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-maximal-ode-solution",
+      "used_for": "Extensions, maximal intervals and global solutions relative to the allowed time domain.",
+      "opened": true
+    },
+    {
+      "id": "thm-picard-lindelof-local-existence-and-uniqueness",
+      "used_for": "Local existence, quantitative cylinder conditions and agreement on common intervals.",
+      "opened": true
+    },
+    {
+      "id": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+      "used_for": "Unique maximal solution on an open interval and restriction property.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Norm inequalities and absolute homogeneity in field estimates and computations.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Finite field bounds on nonempty compact cylinders and positive minimum radius on collision-free compact sets.",
+      "opened": true
+    },
+    {
+      "id": "thm-heine-borel-rn",
+      "used_for": "Compact terminal time-state products and bounded state sets separated from Qᶜ.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-valued-derivative-and-integral",
+      "used_for": "Componentwise differentiation and included-endpoint conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-derivative",
+      "used_for": "Difference quotients, including matching derivatives at the delayed departure time.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "Integer-power differentiation in uniform, projectile and counterexample motions.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Differentiation of sums, products and quotients with nonzero denominators.",
+      "opened": true
+    },
+    {
+      "id": "def-continuity-real",
+      "used_for": "Continuity assertions and the excluded-center extension test.",
+      "opened": true
+    },
+    {
+      "id": "lem-reverse-triangle-inequality-in-a-normed-space",
+      "used_for": "Continuity of norms and the inverse-square annulus estimate.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-continuous-functions",
+      "used_for": "Continuity of scalar elementary expressions, read componentwise where needed.",
+      "opened": true
+    },
+    {
+      "id": "thm-double-angle-and-power-reduction-identities",
+      "used_for": "sin(2α)=2 sin α cos α in the projectile range.",
+      "opened": true
+    },
+    {
+      "id": "thm-derivative-of-exponential",
+      "used_for": "Verification of the drag solution.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Exponential differentiation and the collision motion's differentiated identities.",
+      "opened": true
+    },
+    {
+      "id": "def-limits-at-infinity",
+      "used_for": "Quantified terminal-velocity convergence.",
+      "opened": true
+    },
+    {
+      "id": "lem-exponential-dominates-one-plus-x",
+      "used_for": "Elementary bound proving exponential decay.",
+      "opened": true
+    },
+    {
+      "id": "lem-of-inverse-positive",
+      "used_for": "Positive reciprocal comparisons in the decay estimate.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positivity and reciprocal identity for the exponential factor.",
+      "opened": true
+    },
+    {
+      "id": "def-abs-value",
+      "used_for": "Absolute-value expression in the continuity-only force.",
+      "opened": true
+    },
+    {
+      "id": "def-interval",
+      "used_for": "Interval domains, nondegeneracy and endpoint conventions.",
+      "opened": true
+    },
+    {
+      "id": "thm-composition-of-continuous-functions",
+      "used_for": "Continuity of the square-root force expression.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-inverse",
+      "used_for": "Continuity of square root as the inverse of squaring on nonnegative reals.",
+      "opened": true
+    },
+    {
+      "id": "thm-nth-roots-exist",
+      "used_for": "Existence and positivity of the cube root defining the collision motion.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-cm02-newtonian-flow",
+      "concern": "Definition (c) writes “the state curve z=(x,x′):J→D” and repeatedly says z(t) ∈ D, although D=I₀×Q×R^(3N) includes time and has dimension 1+6N. The pair z takes values in Q×R^(3N); its graph (t,z(t)) takes values in D. The intended equivalence is clear, but the displayed map and memberships are mistyped.",
+      "severity": "presentation"
+    },
+    {
+      "id": "def-cm02-newtonian-flow",
+      "concern": "The final frame-covariance remark says “a motion's maximal interval is unchanged by a time shift between frames.” Under the declared convention t′=t+b, the coordinate interval is Jmax+b, rather than literally Jmax. The interval's duration and maximality are preserved.",
+      "severity": "presentation"
+    },
+    {
+      "id": "post-cm02-force-superposition",
+      "concern": "Clause (vi) says “When Q=R^(3N) — the case of the models of the companion page —”. The companion page also contains the inverse-square external model with Q=R³\\{0}, both in ex-cm02-force-model-regularity-checks and cex-cm02-singular-collision-finite-time. The parenthetical inaccurately describes the companion inventory; the surrounding transferred-domain rule itself accommodates proper Q.",
+      "severity": "presentation"
+    },
+    {
+      "id": "post-cm02-drag",
+      "concern": "Clause (iii) proves the state-Lipschitz inequality only for states “sharing a position”, then concludes a global state-Lipschitz constant. The missing unrestricted comparison is immediate because F does not depend on position: for z=(x,v), z′=(x′,v′), the same force difference is c|v−v′| ≤ c|z−z′|. The companion regularity example supplies that complete comparison.",
+      "severity": "gap-a-reader-closes"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "post-cm15-impulse",
+      "finding": "In clause (i), post-cm15-impulse requires “a motion x=(x₁,x₂):I→Q of the associated first-order system ([[def-cm02-newtonian-flow]])” before imposing its piecewise-C² and finite-jump clauses. The cited definition requires a C² motion on its entire interval, equivalently a differentiable state solution; consequently its velocities are continuous and J=0. That prerequisite excludes the intended nonzero impulses and conflicts with the postulate's stated extension status. The candidate needs its own piecewise motion notion, with the smooth-system requirement confined to times away from t*. Also, the quoted first-order solution has state (x,x′), not position x alone.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "cm02-forces-initial-data-and-newtonian-flow",
+      "to": "cm-math-approximation",
+      "faithful": true,
+      "note": "The prerequisite closure supplies ODE mathematics; the explicit oscillator use is in the companion drag computation. No approximation theorem is silently used to establish the force postulate."
+    },
+    {
+      "from": "cm02-forces-initial-data-and-newtonian-flow",
+      "to": "cm01-framework-quantities-and-geometry",
+      "faithful": true,
+      "note": "Uses fixed positive masses, open unconstrained Q, SI numerical coordinates and the stated Galilean velocity/acceleration laws. The interval-shift wording defect is recorded separately."
+    },
+    {
+      "from": "cm02-forces-initial-data-and-newtonian-flow",
+      "to": "cm-math-balances",
+      "faithful": true,
+      "note": "The opened draft compact-continuation theorem and escape corollary support exactly the quantified terminal nontrapping conclusion. The autonomous clause explicitly extends the time window to R."
+    },
+    {
+      "from": "cm02-forces-initial-data-and-newtonian-flow-examples",
+      "to": "cm01-framework-quantities-and-geometry",
+      "faithful": true,
+      "note": "Preserves fixed-mass, frame-time, coordinate derivative and dimension conventions; inputs remain declared model data."
+    },
+    {
+      "from": "cm02-forces-initial-data-and-newtonian-flow-examples",
+      "to": "cm-math-approximation",
+      "faithful": true,
+      "note": "The opened draft oscillator definition, forced-solution theorem and degenerate-case proposition are used with k=0, m>0 and c>0. The displayed drag formula is also independently differentiated."
+    },
+    {
+      "from": "cm03-momentum-work-and-energy-balances",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Balance consumers explicitly retain the equation of motion, fixed masses, optional pair antisymmetry/centrality and declared potential presentation. Frame transfer is read on the transferred domain."
+    },
+    {
+      "from": "cm03-momentum-work-and-energy-balances-examples",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Worked models declare their forces and interaction restrictions; no universal conservation claim is imported from the force page."
+    },
+    {
+      "from": "cm04-one-dimensional-conservative-and-dissipative-models",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "The scalar model is explicitly a separately adopted restricted class at the same primitive level, rather than an unstated identification with the 3N-dimensional branch."
+    },
+    {
+      "from": "cm05-two-body-central-forces-and-gravitation",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Two-body reduction declares a static C² central pair potential and no external forces; gravitational coupling identification remains a separately adopted empirical assumption."
+    },
+    {
+      "from": "cm05-two-body-central-forces-and-gravitation-examples",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "The external-force counterexample retains an admissible constant force map and explicitly probes the additional no-external-force condition."
+    },
+    {
+      "from": "cm06-regular-constraints-and-moving-frames",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Constraint reactions are explicitly additional model data excluded from the original unconstrained branch. The inertial-chart limit reproduces the specified force-covariance law."
+    },
+    {
+      "from": "cm06-regular-constraints-and-moving-frames-examples",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Uniform and zero-force inputs are admissible; constrained examples separately invoke the constraint datum and ideal-reaction postulate."
+    },
+    {
+      "from": "cm07-stationary-action-and-lagrangian-dynamics",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Newton equivalence restricts to the global potential branch and quotes maximal-motion and compact-continuation statements with their actual hypotheses and quantifiers."
+    },
+    {
+      "from": "cm07-stationary-action-and-lagrangian-dynamics-examples",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Free, oscillator and potential examples declare admissible force data; nonholonomic reasoning uses separately stated constraint prescriptions."
+    },
+    {
+      "from": "cm08-symmetry-noether-and-conditional-conservation",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Conservation conclusions distinguish zero residual forces from general presentations. Existence used in sharpness clauses is local/maximal existence, without completeness."
+    },
+    {
+      "from": "cm08-symmetry-noether-and-conditional-conservation-examples",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Uniform-field motion and pair-potential restrictions are faithfully specialized; adopted potentials are additional presentations."
+    },
+    {
+      "from": "cm09-coupled-oscillations-and-approximation",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Prescribed generalized forcing retains the external model-input status. Quadratic and approximation conclusions use separately supplied mathematical hypotheses."
+    },
+    {
+      "from": "cm12-legendre-transformation-and-hamiltonian-mechanics",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Hamilton equivalence retains the force presentation F=−∇U+d and separates the potential branch from residual-force momentum sources."
+    },
+    {
+      "from": "cm12-legendre-transformation-and-hamiltonian-mechanics-examples",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Uses unique maximal motions to identify globally verified candidates; moving-support forces and coordinate changes are explicitly declared."
+    },
+    {
+      "from": "cm13-symplectic-geometry-and-canonical-methods",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Mechanical/Hamiltonian identification preserves the zero-residual-force condition and separately describes forced equations. Flow regularity comes from additional suppliers."
+    },
+    {
+      "from": "cm13-symplectic-geometry-and-canonical-methods-examples",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Free and oscillator formulas are explicit model solutions; canonical-map and splitting properties are not attributed to the basic Newtonian flow definition."
+    },
+    {
+      "from": "cm14-hamilton-jacobi-and-integrability",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Characteristic curves are identified with Cartesian model motions only on the potential branch; chart and integrability hypotheses are separately declared."
+    },
+    {
+      "from": "cm14-hamilton-jacobi-and-integrability-examples",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Free and harmonic model uses do not infer integrability or global torus structure from the force-page IVP theorem."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": false,
+      "note": "The smooth-force exclusion in pthm-cm15-impact-balance is faithful, but post-cm15-impulse clause (i) calls its finite-jump candidate a motion of the cited smooth first-order system. This excludes nonzero jumps; see the routed alert."
+    },
+    {
+      "from": "cm16-stability-perturbations-and-chaos",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "The stability definition distinguishes maximality on a declared open restriction from maximality for the supplier's full product domain. Smooth flow and variational properties require additional hypotheses/suppliers."
+    },
+    {
+      "from": "cm16-stability-perturbations-and-chaos-examples",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Admissible smooth linear forces and explicitly verified all-time curves are identified with maximal motions using uniqueness; chaos is not inferred merely from deterministic evolution."
+    },
+    {
+      "from": "cm18-measurement-uncertainty-and-later-bridges",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Observation times must lie inside the unique maximal motion's interval. Measurement, calibration and sampling assumptions remain separate from deterministic prediction."
+    },
+    {
+      "from": "cm18-measurement-uncertainty-and-later-bridges-examples",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": true,
+      "note": "Zero-force prediction curves are verified directly. Frame-transfer protocol interpretation explicitly requires an admissible fixed-domain presentation; statistical outcomes are not deduced from Newtonian uniqueness."
+    }
+  ]
+}

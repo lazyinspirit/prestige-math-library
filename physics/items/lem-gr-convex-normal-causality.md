@@ -10,8 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [thm-gr-normal-neighborhood-causal-cone, lem-gr-null-position-vector-forces-null-velocity, lem-gr-normal-neighborhood-length-monotonicity, thm-gronwall-integral-inequality, thm-gr-convex-normal-neighborhoods, def-gr-normal-neighborhoods-and-position-vectors, def-gr-causal-curves-and-reachability, def-gr-timelike-worldline-and-proper-time, def-gr-future-and-past-sets, lem-gr-observer-pairing-with-future-causal-vectors, lem-timelike-cone-has-two-convex-components, thm-gr-local-geodesics-and-exponential-map, def-gr-smooth-lorentzian-objects, def-c-r-and-smooth-maps-between-smooth-manifolds, def-continuity-real, def-interval]
+deps: [def-dependent-choice, def-countable-choice, thm-gr-normal-neighborhood-causal-cone, lem-gr-null-position-vector-forces-null-velocity, lem-gr-normal-neighborhood-length-monotonicity, thm-gronwall-integral-inequality, thm-gr-convex-normal-neighborhoods, def-gr-normal-neighborhoods-and-position-vectors, def-gr-causal-curves-and-reachability, def-gr-timelike-worldline-and-proper-time, def-gr-future-and-past-sets, lem-gr-observer-pairing-with-future-causal-vectors, lem-timelike-cone-has-two-convex-components, thm-gr-local-geodesics-and-exponential-map, def-gr-smooth-lorentzian-objects, def-c-r-and-smooth-maps-between-smooth-manifolds, def-continuity-real, def-interval]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   thm-gr-normal-neighborhood-causal-cone: mathematical-premise
   lem-gr-null-position-vector-forces-null-velocity: mathematical-premise
   lem-gr-normal-neighborhood-length-monotonicity: mathematical-premise
@@ -40,13 +42,19 @@ verification:
 
 ## Statement
 
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the absolutely continuous causal-curve
+calculus and the supplied causal results used below.
+
 Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with
 metric-selected connection $\nabla$. For every $x\in M$ there is an open
 neighborhood $B$ of $x$, a strictly convex normal ball satisfying the
 hypotheses of [[thm-gr-normal-neighborhood-causal-cone]] with base point
-$x$, such that, writing $J_B(x)$, $I_B(x)\subseteq B$ for the endpoints in
-$B$ of future causal, respectively future timelike, curves with image in
-$B$ starting at $x$, and $\mathcal C^+,\mathcal T^+,\mathcal N^+$ for the
+$x$, such that, writing $J_B(x):=\{x\}\cup\{y\in B:\text{a future causal
+curve in }B\text{ joins }x\text{ to }y\}$ and
+$I_B(x):=\{y\in B:\text{there is a future timelike curve }
+\eta:[0,1]\to B\text{ with }\eta(0)=x,\ \eta(1)=y\}$, and writing
+$\mathcal C^+,\mathcal T^+,\mathcal N^+$ for the
 future causal or zero, future timelike, and future null nonzero vectors of
 $\exp_x^{-1}(B)$:
 
@@ -70,7 +78,7 @@ $q_n\to q\in B$, then $q\in J_B(x)$. The same holds for $J_B(x)\setminus I_B(x)$
 
 **Given:** A point $x\in M$ and a cone-theorem ball around $x$ as in [[thm-gr-convex-normal-neighborhoods]] and [[thm-gr-normal-neighborhood-causal-cone]].
 
-[L1] The cone theorem holds in $B$ with base $x$: clauses (a)-(d) of [[thm-gr-normal-neighborhood-causal-cone]] (future causal curves from $x$ have future causal or zero position vectors; the cone characterizations; null rigidity; length maximality).
+[L1] The cone theorem holds in $B$ with base $x$: clauses (a)-(d) of [[thm-gr-normal-neighborhood-causal-cone]] (future causal curves from $x$ have future causal or zero position vectors; the cone characterizations, with the reflexive vertex included; null rigidity; length maximality).
 
 
 [L3] The future causal cone in a tangent space is closed, the future timelike cone is open, and a limit of future timelike vectors is future causal or zero ([[lem-timelike-cone-has-two-convex-components]], [[lem-gr-observer-pairing-with-future-causal-vectors]]).
@@ -91,13 +99,6 @@ $q_n\to q\in B$, then $q\in J_B(x)$. The same holds for $J_B(x)\setminus I_B(x)$
 
 ## Remarks
 
-- **Locality and use.** All statements are about one small ball $B$ and one
-  base point $x$; in the downstream arguments they are applied at the
-  finitely many base points that occur in a fixed compact region, and the
-  openness of $I_B(x)$ together with the closedness of $J_B(x)$ is exactly
-  the local input used in [[thm-gr-cauchy-surface-implies-globally-hyperbolic]]
-  and [[lem-gr-globally-hyperbolic-causal-structure]].
+- **Locality and use.** All statements are about one small ball $B$ and one base point $x$; in the downstream arguments they are applied at the finitely many base points that occur in a fixed compact region, and the openness of $I_B(x)$ together with the closedness of $J_B(x)$ is exactly the local input used in [[thm-gr-cauchy-surface-implies-globally-hyperbolic]] and [[lem-gr-globally-hyperbolic-causal-structure]].
 
-- **The closedness of $J_B(x)$ is not asserted for the relation with
-  varying base point.** That stronger statement is proved where it is used,
-  from the limit curve theorem ([[thm-gr-limit-curve-two-endpoints]]).
+- **The closedness of $J_B(x)$ is not asserted for the relation with varying base point.** That stronger statement is proved where it is used, from the limit curve theorem ([[thm-gr-limit-curve-two-endpoints]]).

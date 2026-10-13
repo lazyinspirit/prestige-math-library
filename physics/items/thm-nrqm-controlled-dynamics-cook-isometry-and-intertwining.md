@@ -29,14 +29,17 @@ sources:
 ## Statement
 
 Assume the Axiom of Countable Choice ([[def-countable-choice]]) and adopt all
-hypotheses and notation of
-[[thm-nrqm-controlled-dynamics-cook-domain-criterion]]: $H_0,H$ self-adjoint with
+hypotheses of
+[[thm-nrqm-controlled-dynamics-cook-domain-criterion]], writing its Hilbert
+space as $\mathcal H$ and renaming its operators $A_0,A$ as $H_0,H$: these
+are self-adjoint operators on $\mathcal H$ with
 $D(H_0)\subseteq D(H)$, $D\subseteq D(H_0)$ dense and $e^{-itH_0}$-invariant,
-$\int_{\text{half-line}}\|(H-H_0)e^{-itH_0}\psi\|dt<\infty$ for $\psi\in D$, and
+$\int_{\text{half-line}}\|(H-H_0)e^{-itH_0}\psi\|dt<\infty$ for $\psi\in D$,
+$t\mapsto(H-H_0)e^{-itH_0}\psi$ norm-continuous for each $\psi\in D$, and
 $\Omega_\pm$ the extensions constructed there. Then:
 
 (a) *Intertwining.* $\Omega_\pm e^{-isH_0}=e^{-isH}\Omega_\pm$ for all
-$s\in\mathbb R$, as bounded operators on $H$.
+$s\in\mathbb R$, as bounded operators on $\mathcal H$.
 
 (b) *Domain and commutation.* $\Omega_\pm D(H_0)\subseteq D(H)$ and
 $H\Omega_\pm\psi=\Omega_\pm H_0\psi$ for every $\psi\in D(H_0)$.
@@ -45,10 +48,10 @@ $H\Omega_\pm\psi=\Omega_\pm H_0\psi$ for every $\psi\in D(H_0)$.
 is invariant under $e^{-isH}$ for every $s$, and
 $e^{-isH}|_{\operatorname{ran}\Omega_\pm}
 =\Omega_\pm e^{-isH_0}\Omega_\pm^{-1}$ in the sense of the isometric
-identification $\Omega_\pm:H\to\operatorname{ran}\Omega_\pm$.
+identification $\Omega_\pm:\mathcal H\to\operatorname{ran}\Omega_\pm$.
 
 (d) $\Omega_\pm^*\Omega_\pm=I$, $\|\Omega_\pm\eta\|=\|\eta\|$ for every
-$\eta\in H$; no surjectivity onto $H$ and no identification of
+$\eta\in\mathcal H$; no surjectivity onto $\mathcal H$ and no identification of
 $\operatorname{ran}\Omega_\pm$ with an absolutely continuous subspace is
 asserted.
 
@@ -68,7 +71,7 @@ $\psi\in D$ and $\eta\in D(H_0)$.
 
 2.1 [Domain invariance and commutation] Fix $\eta\in D(H_0)$ and consider the difference quotient $\frac1t\bigl(e^{-itH}\Omega_+\eta-\Omega_+\eta\bigr)$. By step 1.1 this equals $\Omega_+\frac1t\bigl(e^{-itH_0}\eta-\eta\bigr)$; since $\eta\in D(H_0)$, the quotient converges to $\Omega_+(-iH_0\eta)$ by [F2] and [F1]. Applying [F2] to self-adjoint $H$ shows $\Omega_+\eta\in D(H)$ and $-iH\Omega_+\eta=-i\Omega_+H_0\eta$, that is $H\Omega_+\eta=\Omega_+H_0\eta$. The argument for $\Omega_-$ is identical. [step 1.1, F1, F2, algebra]
 
-2.2 [Range invariance] For $\eta=\Omega_+\psi\in\operatorname{ran}\Omega_+$ and $s\in\mathbb R$, step 1.1 gives $e^{-isH}\eta=\Omega_+(e^{-isH_0}\psi)$, which lies in $\operatorname{ran}\Omega_+$; hence the range is invariant, and the displayed operator identity holds on the range because $\Omega_+$ is injective with $\Omega_+^{-1}\eta=\psi$ on the range. [step 1.1, F1, algebra]
+2.2 [Range invariance] Fix either sign. For $\eta=\Omega_\pm\psi\in\operatorname{ran}\Omega_\pm$ and $s\in\mathbb R$, step 1.1 gives $e^{-isH}\eta=\Omega_\pm(e^{-isH_0}\psi)$, which lies in $\operatorname{ran}\Omega_\pm$; hence the range is invariant, and the displayed operator identity holds on the range because $\Omega_\pm$ is injective with $\Omega_\pm^{-1}\eta=\psi$ on the range. [step 1.1, F1, algebra]
 
 3.1 [Conclusion] Claims (a), (b), (c) are steps 1.1, 2.1, 2.2, and (d) is part of [F1]. No surjectivity or absolute-continuity statement has been used. [step 1.1, step 2.1, step 2.2, F1] ∎
 

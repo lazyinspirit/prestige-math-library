@@ -21,10 +21,10 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "A scope and status audit of the force page: which objects are adopted model data, which statements are conditional deductions, which computations are examples, and which claims are deliberately not made; the boundary between the declared particle labels and their environment in an open-system description; the frame-selection content of external fields and apparatus; the empirical status of force-law parameters, drag regimes and model comparisons. Bookkeeping and scope only; it asserts no law, no measurement and no claim about nature beyond the items it cites."
+physical_scope: "A scope and status audit of the force page: which objects are adopted model data, which statements are conditional deductions, which computations are examples, and which claims are deliberately not made; the boundary between the declared particle labels and their environment in an open-system description; the way external fields and apparatus can provide a preferred descriptive frame or spatial location; the empirical status of force-law parameters, drag regimes and model comparisons. Bookkeeping and scope only; it asserts no law, no measurement and no claim about nature beyond the items it cites."
 sources:
   references:
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter pages 3-4 (PDF pages 7-8): the force law and its parameters as model input, with gravity an additional law and the weak-equivalence identification an empirical footnote; Section 5.1, chapter pages 1-3 (PDF pages 87-89), Eqs. (5.1)-(5.9) and footnote 4: the fluctuation condition for the damped harmonic oscillator"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter pages 3-5 (PDF pages 7-9): the force law and its parameters as model input, with gravity an additional law and the weak-equivalence identification an empirical footnote; Section 5.1, chapter pages 1-3 (PDF pages 87-89), Eqs. (5.1)-(5.9) and footnote 4: the fluctuation condition for the damped harmonic oscillator"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.3, printed pages 5-9 (PDF pages 11-15): external force decomposition, the weak and strong forms of the third law, and the warning that momentum exchange with an omitted field is not covered by the particle system's pair structure"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
@@ -99,16 +99,27 @@ reported data is performed.
   balance laws of later pages are statements about stated closed or specified
   systems, not automatic properties of an arbitrary collection of labels.
 
-- **External fields and apparatus select frames.** The equation of motion is
-  kinematically covariant under changes of inertial frame
-  ([[post-cm02-force-superposition]] clause (vi)), but a concrete external
-  field or apparatus can single out the frames in which its description is
-  simple: the uniform-force model of [[ex-cm02-uniform-field]] uses a frame in
-  which its parameter is a constant vector, and an external inverse-square
-  center singles out its own location. The Galilean frames of
-  [[post-cm01-frames]] remain the frames in which the force branch is
-  formulated, but the model's external data can privilege a subclass for the
-  description of an experiment.
+- **External data may select a useful frame or location.** The equation of
+  motion is kinematically covariant under changes of inertial frame
+  ([[post-cm02-force-superposition]] clause (vi)). The uniform-force model of
+  [[ex-cm02-uniform-field]] remains a uniform-force model in every inertial
+  frame, with its parameter changing by $\mathbf g'=R\mathbf g$; it does not
+  select a unique inertial frame. A medium at rest, as in
+  [[post-cm02-drag]], supplies a preferred rest frame for that drag description,
+  while a stationary external inverse-square center also supplies a preferred
+  rest velocity. Explicitly, in the coordinates of one inertial frame let
+  the prescribed source worldline be $\gamma_c(t)=(t,0)$ for $t\in I_0$
+  (a smooth curve), and let $F(t,x,w)=-k x/|x|^3$ for $x\ne0$, with $k>0$
+  of dimension $\mu\ell^3\tau^{-2}$. Under the transfer
+  $t'=t+b$, $y=Rx+\upsilon t+a_0$ of clause (vi), its spatial coordinate
+  curve becomes $c_*(t')=\upsilon(t'-b)+a_0$, and the force becomes
+  $F_*(t',y,w)=-k(y-c_*(t'))/|y-c_*(t')|^3$ on $y\ne c_*(t')$.
+  Thus a nonzero boost makes the center move and the field time-dependent.
+  The source selects the class of inertial frames in which it is at rest,
+  with origins and spatial axes still free; it does not select a unique
+  inertial chart or violate covariance of the transferred model. The Galilean frames of [[post-cm01-frames]] remain the
+  frames in which the force branch is formulated; model-specific external
+  data can make a particular frame useful for describing an application.
 
 - **The particle idealization is per application.** The worldlines of the
   model are those of labels with no size, spin or internal structure; a
@@ -130,12 +141,12 @@ reported data is performed.
   graph leaves every compact subset of $D=I_{0}\times U$. If that endpoint is
   the finite right boundary of the prescribed open time window, the time
   coordinate alone can leave every such compact set while the state remains
-  bounded and away from the excluded configurations. The state-escape reading
-  is asserted in clause 4 when $I_{0}=\mathbb R$: then the state leaves every
-  compact subset of $U=Q\times\mathbb R^{3N}$, by becoming unbounded or by
-  approaching the excluded configurations. The companion singular-collision
-  counterexample exhibits both state-space alternatives at once for an
-  inverse-square external model.
+  bounded and away from the excluded configurations. When $I_{0}=\mathbb R$,
+  the state leaves every compact subset of $U=Q\times\mathbb R^{3N}$; it is
+  unbounded on every terminal interval or, if bounded on a terminal interval
+  and $Q$ is proper, positions approach $Q^{c}$ in the theorem's stated sense.
+  The companion singular-collision counterexample exhibits both state-space
+  alternatives at once for an inverse-square external model.
 
 - **Empirical status.** The force maps, potentials, coefficients and constants
   of this page are model data. A drag coefficient or a field strength taken

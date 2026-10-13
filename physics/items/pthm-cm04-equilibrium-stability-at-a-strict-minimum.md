@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 15
-deps: [def-cm04-one-dimensional-models-and-equilibria, def-cm04-phase-plane-and-energy-level-sets, pthm-cm04-conservative-motion-and-energy, post-cm04-harmonic-model, def-cm-mechanical-vector-field-and-energy-in-a-chart, thm-cm-energy-stability-of-a-strict-minimum, prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium, def-cm-equilibrium-and-lyapunov-stability, def-cm-oscillator-model-and-phase-system, def-euclidean-inner-product, def-metric-ball, def-interval, def-ck-euclidean-maps-and-diffeomorphisms]
+deps: [def-cm04-one-dimensional-models-and-equilibria, def-cm04-phase-plane-and-energy-level-sets, pthm-cm04-conservative-motion-and-energy, post-cm04-harmonic-model, def-cm-mechanical-vector-field-and-energy-in-a-chart, thm-cm-energy-stability-of-a-strict-minimum, prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium, def-cm-equilibrium-and-lyapunov-stability, def-cm-oscillator-model-and-phase-system, def-euclidean-inner-product, def-metric-ball, def-interval, def-ck-euclidean-maps-and-diffeomorphisms, lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets, thm-existence-and-uniqueness-of-a-maximal-ode-solution]
 dependency_roles:
   def-cm04-one-dimensional-models-and-equilibria: formulation-prerequisite
   def-cm04-phase-plane-and-energy-level-sets: formulation-prerequisite
@@ -21,6 +21,8 @@ dependency_roles:
   def-metric-ball: mathematical-premise
   def-interval: mathematical-premise
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
+  lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets: mathematical-premise
+  thm-existence-and-uniqueness-of-a-maximal-ode-solution: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -113,11 +115,19 @@ the linearised equation is $M(q_{0})\xi''+D^{2}U(q_{0})\xi=0$.
 [L4] Model definitions ([[def-cm04-one-dimensional-models-and-equilibria]]
 clauses (b), (e), (f), [[def-cm-oscillator-model-and-phase-system]],
 [[post-cm04-harmonic-model]]): motions of the model are exactly the curves
-whose phase curves solve $z'=G_{F}(z)$; $x_{*}$ is an equilibrium exactly when
+whose phase curves solve $z'=G_{F}(z)$ on intervals $J\subseteq I_0$; $x_{*}$ is an equilibrium exactly when
 $U'(x_{*})=0$, which holds at a strict local minimum; the oscillator-type
 data $(m,0,k,0)$ with $k=U''(x_{*})$ have equation $m\xi''+k\xi=0$; and the
 harmonic model of the postulate has force law $-kx$ and potential
 $\tfrac12kx^{2}$.
+
+[L5] Since $U$ is $C^2$, the unrestricted autonomous phase field
+$(t,x,v)\mapsto(v,-U'(x)/m)$ is $C^1$ on $\mathbb R\times Q\times\mathbb R$.
+It is continuous and locally Lipschitz in the state, locally uniformly in
+time, by [[lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets]].
+Thus [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]] gives a unique
+maximal solution through each datum; every solution through that datum is
+its restriction.
 
 ## Proof
 
@@ -126,9 +136,9 @@ one-dimensional instance of the mathematical mechanical system, apply the
 energy-stability theorem to it, and read the linearisation from the
 linearisation proposition.
 
-1.1 By [L1] the phase field $G_{F}$ of the model is the mechanical vector field of the mathematical data $(n,\Omega,M,U)=(1,Q,m,U)$ with the constant positive definite metric field $M\equiv m$. Hence the phase curves of motions of the model are exactly the solutions $(q,v)$ of the mechanical system of [L1], and its energy is $E$. [given, L1, L4]
+1.1 By [L1] the phase field $G_{F}$ of the model is the mechanical vector field of the mathematical data $(n,\Omega,M,U)=(1,Q,m,U)$ with the constant positive definite metric field $M\equiv m$. On intervals $J\subseteq I_0$, the phase curves of model motions are exactly the solutions $(q,v)$ of that mechanical system; unrestricted solutions are model motions only on their restrictions to the declared time window. Its energy is $E$. At the strict minimum, the difference quotient $(U(x_*+h)-U(x_*))/h$ is nonnegative for small $h>0$ and nonpositive for small $h<0$. Its common two-sided limit $U'(x_*)$ is therefore zero, as required by [L2] and [L3]. [given, L1, L4]
 
-2.1 Clause 1. Let $\varepsilon>0$ with $\overline B((x_{*},0),\varepsilon)\subseteq Q\times\mathbb R$. Apply [L2] with $\Omega=Q$, $M\equiv m$, the potential $U$ and $q_{0}=x_{*}$: it produces $\delta>0$ such that every maximal solution $(q,v)$ of the mechanical system with $\lVert(q(0),v(0))-(x_{*},0)\rVert_{2}<\delta$ is defined for all $t\ge0$ and satisfies $\lVert(q(t),v(t))-(x_{*},0)\rVert_{2}<\varepsilon$ for all $t\ge0$. Now let $x:J\to Q$ be a motion of the model and $t_{0}\in J$ with $\lVert(x(t_{0}),x'(t_{0}))-(x_{*},0)\rVert_{2}<\delta$. The phase system is autonomous, so the translate $s\mapsto(x(t_{0}+s),x'(t_{0}+s))$, defined for $s$ with $t_{0}+s\in J$, is a solution of the same system with initial value $(x(t_{0}),x'(t_{0}))$ at $s=0$; it has a unique maximal extension for this unrestricted autonomous equation by [L2], and by step 1.1 and the defining property of $\delta$ that extension is defined for all $s\ge0$ and stays at distance $<\varepsilon$ from $(x_{*},0)$. Translating the maximal extension back yields a curve defined on $[t_{0},\infty)$ which agrees with $x$ on $J$, and $\lVert(x(t)-x_{*},x'(t))\rVert_{2}<\varepsilon$ for all $t\ge t_{0}$. Since $\varepsilon$ was arbitrary, $(x_{*},0)$ is Lyapunov stable in the sense of [[def-cm-equilibrium-and-lyapunov-stability]]. [given, step 1.1, L2, L4]
+2.1 Clause 1. Let $\varepsilon>0$ with $\overline B((x_{*},0),\varepsilon)\subseteq Q\times\mathbb R$. Apply [L2] with $\Omega=Q$, $M\equiv m$, the potential $U$ and $q_{0}=x_{*}$: it produces $\delta>0$ such that every maximal solution $(q,v)$ of the mechanical system with $\lVert(q(0),v(0))-(x_{*},0)\rVert_{2}<\delta$ is defined for all $t\ge0$ and satisfies $\lVert(q(t),v(t))-(x_{*},0)\rVert_{2}<\varepsilon$ for all $t\ge0$. Now let $x:J\to Q$ be a motion of the model and $t_{0}\in J$ with $\lVert(x(t_{0}),x'(t_{0}))-(x_{*},0)\rVert_{2}<\delta$. The phase system is autonomous, so the translate $s\mapsto(x(t_{0}+s),x'(t_{0}+s))$, defined for $s$ with $t_{0}+s\in J$, is a solution of the same system with initial value $(x(t_{0}),x'(t_{0}))$ at $s=0$; it has a unique maximal extension for this unrestricted autonomous equation by [L5], and by step 1.1 and the defining property of $\delta$ that extension is defined for all $s\ge0$ and stays at distance $<\varepsilon$ from $(x_{*},0)$. Translating the maximal extension back yields a maximal curve whose domain contains $[t_{0},\infty)$ and which agrees with $x$ on $J$, and $\lVert(x(t)-x_{*},x'(t))\rVert_{2}<\varepsilon$ for all $t\ge t_{0}$. Since $\varepsilon$ was arbitrary, $(x_{*},0)$ is Lyapunov stable in the sense of [[def-cm-equilibrium-and-lyapunov-stability]]. [given, step 1.1, L2, L4, L5]
 
 3.1 Clause 2, differentiability and linearised equation. $U$ is $C^{2}$, so $D^{2}U(x_{*})=U''(x_{*})$ exists and $x_{*}$ is a mechanical equilibrium because $U'(x_{*})=0$ at a strict local minimum. Applying [L3] with $q_{0}=x_{*}$, $M(q_{0})=m$ and $D^{2}U(q_{0})=U''(x_{*})$ gives the displayed total derivative and the linearised equation $m\xi''+U''(x_{*})\xi=0$. By [L4] this is exactly the oscillator-type model with data $(m,0,U''(x_{*}),0)$. If $U''(x_{*})>0$, then $k:=U''(x_{*})>0$ and [L4] identifies the equation with that of the harmonic model with spring constant $k$; the frequency $\sqrt{k/m}$ is the undamped frequency $\omega_{0}$ attached to the data $(m,0,k,0)$ by [[def-cm-oscillator-model-and-phase-system]], and it is quoted here only as the linearised frequency, not as a property of the nonlinear motion. [given, step 1.1, L3, L4] ∎
 

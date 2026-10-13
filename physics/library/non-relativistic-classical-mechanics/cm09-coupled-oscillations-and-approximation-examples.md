@@ -30,9 +30,9 @@ $(1,\pm1)/\sqrt{2m}$, the frequencies $\sqrt{k/m}$ and
 $\sqrt{(k+2c)/m}$, the single-mode data and energies, and the zero-stiffness
 case in which the pair's translation is an affine zero mode.
 [[ex-cm09-triatomic-translation-zero-mode]] computes the three modal patterns
-of a linear chain with masses $m,M,m$ — translation, antisymmetric stretch
+of a linear chain with masses $m,m_c,m$ — translation, antisymmetric stretch
 and symmetric stretch — with frequencies $\sqrt{k/m}$ and
-$\sqrt{(k/m)(1+2m/M)}$, and corrects a frequency comparison of the cited
+$\sqrt{(k/m)(1+2m/m_c)}$, and corrects a frequency comparison of the cited
 treatment whose printed matrices give the opposite ordering.
 [[ex-cm09-double-pendulum-linear-modes]] treats the two-angle
 small-oscillation data of the equal-arm double pendulum, with mass metric

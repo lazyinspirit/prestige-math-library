@@ -147,13 +147,6 @@ $\sin^2\vartheta=1$ there. [L1, L3, L7, algebra]
 
 ## Remarks
 
-- **Sign conventions of the constants.** In the coordinate $t=x^0/c$ the
-  constant $e$ is the energy per unit mass up to the factor $c$, and $\ell$
-  is the angular momentum per unit mass up to the factor $c$; the displayed
-  identities are those used below and are not compared numerically with any
-  source convention.
+- **Units of the constants.** With $\tau$ measured in seconds and $x^0=ct$ measured in metres, the definitions give $e=f\,dx^0/d\tau$ in metres per second and, on an equatorial geodesic, $\ell=r^2d\varphi/d\tau$ in square metres per second. The displayed identities fix the parameter convention used below; no numerical comparison with a source convention is made.
 
-- **No field equation was used.** The reduction uses only the metric form,
-  the time and axial Killing fields and the geodesic equation; it holds for
-  every value of $s>0$ and does not use the vacuum property
-  $\operatorname{Ric}=0$ of the model.
+- **No field equation was used.** The reduction uses only the metric form, the time and axial Killing fields and the geodesic equation; it holds for every value of $s>0$ and does not use the vacuum property $\operatorname{Ric}=0$ of the model.

@@ -10,8 +10,9 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-causal-conditions-and-global-hyperbolicity, def-gr-causal-curves-and-reachability, def-gr-smooth-lorentzian-objects, def-gr-observer-and-rest-space, lem-gr-strong-causality-compact-length-bound, thm-gr-limit-curve-two-endpoints, thm-gr-auxiliary-complete-riemannian-metric, lem-gr-maximal-geodesics-and-extension, lem-gr-chronology-openness, lem-gr-causal-curve-calculus, lem-gr-parallel-transport-and-geodesic-speed, thm-gr-local-geodesics-and-exponential-map, def-compact-space, thm-closed-subspace-of-a-compact-space-is-compact, def-countable-choice, def-dependent-choice]
+deps: [lem-gr-basic-limit-curve, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-causal-curves-and-reachability, def-gr-smooth-lorentzian-objects, def-gr-observer-and-rest-space, lem-gr-strong-causality-compact-length-bound, thm-gr-limit-curve-two-endpoints, thm-gr-auxiliary-complete-riemannian-metric, lem-gr-maximal-geodesics-and-extension, lem-gr-chronology-openness, lem-gr-causal-curve-calculus, lem-gr-parallel-transport-and-geodesic-speed, thm-gr-local-geodesics-and-exponential-map, def-compact-space, lem-compactness-of-a-subspace-is-ambient, thm-closed-subspace-of-a-compact-space-is-compact, def-countable-choice, def-dependent-choice]
 dependency_roles:
+  lem-gr-basic-limit-curve: mathematical-premise
   def-gr-causal-conditions-and-global-hyperbolicity: mathematical-premise
   def-gr-causal-curves-and-reachability: mathematical-premise
   def-gr-smooth-lorentzian-objects: mathematical-premise
@@ -25,6 +26,7 @@ dependency_roles:
   lem-gr-parallel-transport-and-geodesic-speed: mathematical-premise
   thm-gr-local-geodesics-and-exponential-map: mathematical-premise
   def-compact-space: mathematical-premise
+  lem-compactness-of-a-subspace-is-ambient: mathematical-premise
   thm-closed-subspace-of-a-compact-space-is-compact: mathematical-premise
   def-countable-choice: mathematical-premise
   def-dependent-choice: mathematical-premise
@@ -63,13 +65,13 @@ $J^+(K_1)\cap J^-(K_2)$ is compact.
 
 [L1] Global hyperbolicity means strong causality together with compactness of all causal diamonds $J^+(p)\cap J^-(q)$; the sets $I^\pm(x)$ are open; $\le$ is reflexive and transitive and contained in its own graph ([[def-gr-causal-conditions-and-global-hyperbolicity]] clause (c), [[lem-gr-chronology-openness]] clause (a), [[lem-gr-causal-curve-calculus]] clause (f)).
 
-[L2] Strong causality bounds the auxiliary length of causal curves in a compact set: for every compact $K$ there is $L(K)<\infty$ with $\ell_h(\gamma)\le L(K)$ for every future causal curve $\gamma$ with image in $K$ ([[lem-gr-strong-causality-compact-length-bound]], [[thm-gr-auxiliary-complete-riemannian-metric]]).
+[L2] Here $h$ denotes the complete conformal metric $h\prime$ of [[thm-gr-auxiliary-complete-riemannian-metric]] clauses (b)-(d). Strong causality bounds the auxiliary length of causal curves in a compact set: for every compact $K$ there is $L(K)<\infty$ with $\ell_h(\gamma)\le L(K)$ for every future causal curve $\gamma$ with image in $K$ ([[lem-gr-strong-causality-compact-length-bound]], [[thm-gr-auxiliary-complete-riemannian-metric]]).
 
-[L3] Two-endpoint limit curve theorem: for future causal curves $\alpha_k:[0,b_k]\to M$ parametrized by $h$-arclength with $\alpha_k(0)\to x$, $\alpha_k(b_k)\to z$ and $b:=\lim_kb_k$ finite, if $b>0$ the common-domain reparametrizations $\widetilde\alpha_k(t)=\alpha_k((b_k/b)t)$ converge along a subsequence uniformly on $[0,b]$ to a future causal limit curve from $x$ to $z$; if $b=0$ then $x=z$ ([[thm-gr-limit-curve-two-endpoints]] clause (i)).
+[L3] Every finite future causal curve can be reparametrized by $h$-arclength, as proved in Step 1.2 of [[lem-gr-basic-limit-curve]]. The two-endpoint limit curve theorem then applies to future causal curves $\alpha_k:[0,b_k]\to M$ with $\alpha_k(0)\to x$, $\alpha_k(b_k)\to z$ and $b:=\lim_kb_k$ finite: if $b>0$ the common-domain reparametrizations $\widetilde\alpha_k(t)=\alpha_k((b_k/b)t)$ converge along a subsequence uniformly on $[0,b]$ to a future causal limit curve from $x$ to $z$; if $b=0$ then $x=z$ ([[thm-gr-limit-curve-two-endpoints]] clause (i)).
 
 [L4] Through every point there are past and future timelike geodesic segments: for each $x$ and every sufficiently small $\varepsilon>0$ the points $\exp_x(-\varepsilon N_x)$ and $\exp_x(\varepsilon N_x)$ are defined, and $\exp_x(-\varepsilon N_x)\ll x\ll\exp_x(\varepsilon N_x)$ because along a geodesic the causal character and time orientation of the tangent are constant and a geodesic with future (respectively past) timelike tangent is a future (respectively past) timelike curve; the reversed segment is again a timelike curve ([[def-gr-observer-and-rest-space]], [[thm-gr-local-geodesics-and-exponential-map]] clauses (a) and (d), [[lem-gr-parallel-transport-and-geodesic-speed]] clause 3, [[def-gr-causal-curves-and-reachability]] clause (b)).
 
-[L5] A closed subset of a compact topological space is compact; a finite union of compact sets is compact ([[thm-closed-subspace-of-a-compact-space-is-compact]], [[def-compact-space]]).
+[L5] A closed subset of a compact topological space is compact ([[thm-closed-subspace-of-a-compact-space-is-compact]]). Every family of ambient open sets covering a compact subset has a finite subfamily covering it ([[lem-compactness-of-a-subspace-is-ambient]] clauses 1 and 2). A finite union of compact subsets is compact: apply that criterion to each subset and combine the finitely many finite subcovers, then apply its converse. Empty subsets use the empty subcover ([[def-compact-space]]).
 
 ## Proof
 
@@ -83,10 +85,10 @@ $J^+(K_1)\cap J^-(K_2)$ is compact.
 
 4.1 (Closedness of the cones.) Let $y_j\to y$ with $y_j\in J^+(K)$ for a compact $K$: choose $x_j\in K$ with $x_j\le y_j$. Passing to a subsequence, $x_j\to x\in K$ because $K$ is compact, so step 3.1 applied to $x_j\le y_j$ gives $x\le y$, that is, $y\in J^+(K)$; hence $J^+(K)$ is closed. The same argument with the order reversed shows that $J^-(K)$ is closed, and with $K=\{x\}$ this gives closedness of $J^\pm(x)$. [step 3.1, L1, given]
 
-5.1 (Compact truncated cones.) Let $K_1,K_2$ be compact. For each $x\in K_1$ choose $\varepsilon_x>0$ with $x^-:=\exp_x(-\varepsilon_xN_x)$ defined; by [L4] $x^-\ll x$, so $\{I^+(x^-)\}_{x\in K_1}$ is an open cover of $K_1$ [L1] and has a finite subcover $I^+(x^-_1),\dots,I^+(x^-_m)$ with $x_i\in K_1$. If $y\in J^+(K_1)$, choose $x\in K_1$ with $x\le y$ and $i$ with $x\in I^+(x^-_i)$; then $x^-_i\le x\le y$, so $y\in J^+(x^-_i)$. Hence $J^+(K_1)\subseteq\bigcup_{i=1}^mJ^+(x^-_i)$. Likewise, applying the time reverse, $K_2$ is covered by finitely many sets $I^-(y^+_j)$ with $y_j\in K_2$ and $J^-(K_2)\subseteq\bigcup_{j=1}^nJ^-(y^+_j)$. Therefore $$J^+(K_1)\cap J^-(K_2)\subseteq\bigcup_{i,j}\bigl(J^+(x^-_i)\cap J^-(y^+_j)\bigr),$$ a finite union of compact causal diamonds, hence compact by [L5]; and $J^+(K_1)\cap J^-(K_2)$ is closed by step 4.1. A closed subset of a compact set is compact [L5], so $J^+(K_1)\cap J^-(K_2)$ is compact. [step 4.1, L1, L4, L5, construct] ∎
+5.1 (Compact truncated cones.) Let $K_1,K_2$ be compact. If either compact set is empty, the intersection is empty and compact. Otherwise form the family of all $I^+(\exp_x(-\varepsilon N_x))$ with $x\in K_1$ and every positive $\varepsilon$ for which the past timelike segment of [L4] is defined. This family covers $K_1$ by [L4], with no simultaneous selection of parameters. The ambient-cover criterion [L5] gives a finite subcover; finite choice names its representing pairs $(x_i,\varepsilon_i)$ and puts $x^-_i:=\exp_{x_i}(-\varepsilon_i N_{x_i})$. If $y\in J^+(K_1)$, choose $x\in K_1$ with $x\le y$ and $i$ with $x\in I^+(x^-_i)$; then $x^-_i\le x\le y$, so $y\in J^+(x^-_i)$. Hence $J^+(K_1)\subseteq\bigcup_{i=1}^mJ^+(x^-_i)$. Likewise form the entire family of admissible future segments for $K_2$, and use [L5] to take a finite subcover by sets $I^-(y^+_j)$ with $y_j\in K_2$ and $J^-(K_2)\subseteq\bigcup_{j=1}^nJ^-(y^+_j)$. Therefore $$J^+(K_1)\cap J^-(K_2)\subseteq\bigcup_{i,j}\bigl(J^+(x^-_i)\cap J^-(y^+_j)\bigr),$$ a finite union of compact causal diamonds, hence compact by [L5]; and $J^+(K_1)\cap J^-(K_2)$ is closed by step 4.1. A closed subset of a compact set is compact [L5], so $J^+(K_1)\cap J^-(K_2)$ is compact. [step 4.1, L1, L4, L5, construct] ∎
 
 ## Remarks
 
-- **Where each hypothesis is used.** Strong causality enters only through the length bound [L2], which rules out the unbounded-length alternative of the limit curve theorem; compactness of the diamonds is used only in step 5.1. The proof is the standard argument that global hyperbolicity is equivalent to closedness of the causal relation plus compactness of the truncated cones.
+- **Where each hypothesis is used.** Strong causality enters only through the length bound [L2], which rules out the unbounded-length alternative of the limit curve theorem; compactness of the diamonds is used in steps 1.1 and 5.1. The proof establishes that global hyperbolicity implies closedness of the causal relation and compactness of the truncated cones. A converse requires an additional causality hypothesis; closedness and compact truncated cones alone allow closed timelike curves.
 
 - **Use.** Closedness of $\le$ is used in [[lem-gr-chronological-volume-continuity]] to obtain almost-everywhere convergence of the indicators of $I^\pm(p_k)$ from the openness of chronology, and compactness of $J^+(K_1)\cap J^-(K_2)$ is used in [[lem-gr-compact-future-cone-intersections]] and [[lem-gr-cone-bump-functions]].

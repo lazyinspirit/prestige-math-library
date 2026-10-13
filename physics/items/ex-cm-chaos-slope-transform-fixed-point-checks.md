@@ -42,9 +42,9 @@ and one has $0<h<1/2$. Moreover $\lambda=2L-k=2\sqrt{74}-\tfrac12>1$ and $\Phi_{
 
 **Given:** The parameter $a=100$, the constants $L=\sqrt{74}$, $k=1/2$, $r_+=1+\sqrt{101}$, and the slope maps of [[def-stable-unstable-cones-and-line-slopes]].
 
-[L1] Slope transform data ([[def-stable-unstable-cones-and-line-slopes]], [[lem-slope-graph-transforms-converge]]): for $|y|\ge L$ and $|h|,|h'|\le k$, the forward slope map satisfies $|\Phi_y(h)|\le(2L-k)^{-1}$ and $|\Phi_y(h)-\Phi_y(h')|\le(2L-k)^{-2}|h-h'|$; the cone $C^u_k$ is invariant under $DF$ with expansion factor $2L-k$ whenever $2L-k>1$ and $k(2L-k)>1$.
+[L1] Slope transform data ([[def-stable-unstable-cones-and-line-slopes]], [[lem-slope-graph-transforms-converge]]): for $L\ge2$, $0<k<1$, $k(2L-k)\ge1$, $|y|\ge L$ and $|h|,|h'|\le k$, the forward slope map satisfies $|\Phi_y(h)|\le(2L-k)^{-1}$ and $|\Phi_y(h)-\Phi_y(h')|\le(2L-k)^{-2}|h-h'|$; under these hypotheses the cone $C^u_k$ is invariant under $DF$ at points with second coordinate of absolute value at least $L$, with expansion factor $2L-k>1$.
 
-[L2] Constant-code data ([[lem-coded-quadratic-recurrence-is-a-contraction]]): the all-$+1$ code is solved by the constant sequence with value $r_+=1+\sqrt{101}$, and $r_+^2=100+2r_+$.
+[L2] Constant-code check using [[lem-coded-quadratic-recurrence-is-a-contraction]], clause 4: for the given $r_+=1+\sqrt{101}$, direct expansion gives $r_+^2=100+2r_+$ and $0<r_+<12<13=R$. Thus the constant sequence $x_n=r_+$ lies in $B_R$ and satisfies $r_+=\sqrt{100+2r_+}$; uniqueness of the coded fixed point identifies it with the all-$+1$ code.
 
 [L3] Square roots and inequalities ([[thm-of-square-roots]], [[def-abs-value]], [[lem-of-abs-value]]): $r_+>10$ because $\sqrt{101}>10$; $\sqrt{r_+^2-1}>r_+-1$; $2\sqrt{74}>17$ because $4\cdot74=296>289=17^2$.
 
@@ -54,7 +54,7 @@ and one has $0<h<1/2$. Moreover $\lambda=2L-k=2\sqrt{74}-\tfrac12>1$ and $\Phi_{
 
 1.1 Fixed slope: the equation $h=1/(2r_+-h)$ is equivalent to $h^2-2r_+h+1=0$, whose roots are $r_+\pm\sqrt{r_+^2-1}$; the small root is $h=r_+-\sqrt{r_+^2-1}=1/(r_++\sqrt{r_+^2-1})$. Since $r_+>10$ and $\sqrt{r_+^2-1}>9$, one has $0<h<1/(10+9)<1/2$. [given, L2, L3, algebra]
 
-2.1 Cone constants: by [L3], $\lambda=2\sqrt{74}-\tfrac12>17-\tfrac12>1$; also $k(2L-k)=\tfrac12(2\sqrt{74}-\tfrac12)>\tfrac12\cdot16>1$, so the invariance and expansion hypotheses of [L1] hold with $\lambda=2\sqrt{74}-\tfrac12$. The induced bounds are $|\Phi_{r_+}(h)|\le\lambda^{-1}<1/2$ and $|\Phi_{r_+}(h)-\Phi_{r_+}(h')|\le\lambda^{-2}|h-h'|$ with $\lambda^{-2}<1/2$, in agreement with [L1]. [given, step 1.1, L1, L3, algebra] ∎
+2.1 Cone constants: $L=\sqrt{74}>8\ge2$ and $0<k=1/2<1$. Also $r_+>10>L$, since $74<100$. By [L3], $\lambda=2\sqrt{74}-\tfrac12>17-\tfrac12>1$; also $k(2L-k)=\tfrac12(2\sqrt{74}-\tfrac12)>\tfrac12\cdot16>1$, so the invariance and expansion hypotheses of [L1] hold with $\lambda=2\sqrt{74}-\tfrac12$. The induced bounds are $|\Phi_{r_+}(h)|\le\lambda^{-1}<1/2$ and $|\Phi_{r_+}(h)-\Phi_{r_+}(h')|\le\lambda^{-2}|h-h'|$ with $\lambda^{-2}<1/2$, in agreement with [L1]. [given, step 1.1, L1, L3, algebra] ∎
 ## Remarks
 
 - The fixed slope $h$ is the slope of the invariant unstable line at the fixed point in the cone $C^u_{1/2}$; the computation uses only the exact fixed-point relation $r_+^2=100+2r_+$ and rational estimates for the two square roots.

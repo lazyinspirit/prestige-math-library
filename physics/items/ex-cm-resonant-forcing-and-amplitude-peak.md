@@ -32,7 +32,7 @@ proof_strategy: direct
 
 ## Example
 
-Consider the forced model $m\,x''+c\,x'+k\,x=f_0\cos(\Omega t)$ with the values and conclusions below ([[def-cm-oscillator-model-and-phase-system]], [[thm-cm-forced-oscillator-sinusoidal-response]], [[prop-cm-oscillator-amplitude-maximum]]).
+Consider the forced model $m\,x''+c\,x'+k\,x=f_0\cos(\Omega t)$ on time domain $I=\mathbb R$ with the values and conclusions below ([[def-cm-oscillator-model-and-phase-system]], [[thm-cm-forced-oscillator-sinusoidal-response]], [[prop-cm-oscillator-amplitude-maximum]]).
 
 - (i) Resonance: $m=k=f_0=1$, $c=0$, $\Omega=\omega_0=1$. Then $x_p(t)=\tfrac12t\sin t$ is a solution of $x''+x=\cos t$, it satisfies $x_p(0)=0$, $x_p'(0)=0$, and $|x_p|$ is unbounded on $[0,\infty)$.
 - (ii) Amplitude peak above zero frequency: $m=k=f_0=1$, $c=1$. Then $u_*=1-\tfrac12=\tfrac12>0$, the maximum of $A(\Omega)=1/\sqrt{(1-\Omega^2)^2+\Omega^2}$ is attained at $\Omega_*=1/\sqrt2$, and $A(\Omega_*)=2/\sqrt3$, while $A(0)=A(1)=1$.

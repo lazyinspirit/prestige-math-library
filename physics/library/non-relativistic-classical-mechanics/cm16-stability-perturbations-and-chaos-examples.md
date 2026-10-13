@@ -49,7 +49,7 @@ mixing nor sensitive, so continuous maps with dense periodic points need not
 be chaotic in the page's stated sense.
 [[ex-cm16-pulse-horseshoe-data-check]] evaluates the constants of the pulsed
 horseshoe on its invariant axis at $a=100$: the coding box $R=13$, the
-radicands in $[74,126]$, the contraction factor $1/\sqrt{74}$, the fixed
+radicands in $[74,126]$, the contraction factor $1/\sqrt{74}$, the limiting quadratic fixed
 points $1\pm\sqrt{101}$, the limiting kick composition, and the axial physical
 bounds $13\ \mathrm m$ and
 $26\pi\ \mathrm{kg\,m\,s^{-1}}$ at $\ell_0=1\ \mathrm m$, $m=1\ \mathrm{kg}$,

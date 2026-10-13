@@ -29,7 +29,7 @@ sources:
   references:
     - title: "MIT 8.05 Quantum Physics II (Fall 2013), Chapter 8 'Tensor product' (addition of angular momenta; the 1/2 x 1/2 example with triplet and singlet)"
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/ffe665c0cba2eae19a83e88dec42925c_MIT8_05F13_Chap_08.pdf"
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Chapter 7, §7.4.2 (addition of angular momenta and the two spin-half example)"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Chapter 7, §7.5.1 (the two spin-half triplet and singlet), equations (7.153)-(7.156)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 ---
 

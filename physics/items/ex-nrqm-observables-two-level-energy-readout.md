@@ -49,7 +49,8 @@ provenance:
 physical_scope: "A finite, exact model computation in the two-level state space
   of the framework: the energy observable E_1 P_1 + E_2 P_2 for two distinct
   energies in joules, its spectral measure, the outcome probabilities of a pure
-  and of a mixed preparation, and the mean, second moment and variance of the
+  and of a statistical mixture (mixed for interior weights and pure at the
+  endpoints), and the mean, second moment and variance of the
   readout. The energies are model parameters; the item asserts no apparatus
   realization, no measurement statistics from a laboratory and no empirical
   value."
@@ -76,15 +77,15 @@ with $T_{u,v}x=\langle x,v\rangle u$ the rank-one calculus of [[lem-nrqm-composi
 
 (i) $A$ is bounded and self-adjoint with $D(A)=H$; its spectral projection-valued measure is
 $$E_{A}(B)=\mathbf 1_{E_{1}\in B}\,T_{e_{1},e_{1}}+\mathbf 1_{E_{2}\in B}\,T_{e_{2},e_{2}}\qquad(B\subseteq\mathbb R\ \text{Borel}),$$
-so the spectrum is $\sigma(A)=\{E_{1},E_{2}\}$ and every outcome lies in it.
+so the spectrum is $\sigma(A)=\{E_{1},E_{2}\}$ and the outcome lies in it almost surely: $\mu^A_\rho(\{E_1,E_2\})=1$ for every preparation $\rho$. This probability-one statement does not logically exclude realizations in a null event.
 
 (ii) For the pure preparation of the unit vector $\psi=c_{1}e_{1}+c_{2}e_{2}$, $|c_{1}|^{2}+|c_{2}|^{2}=1$, the outcome law is
 $$\mu^{A}_{\psi}(\{E_{1}\})=|c_{1}|^{2},\qquad \mu^{A}_{\psi}(\{E_{2}\})=|c_{2}|^{2},\qquad \mu^{A}_{\psi}(B)=\sum_{i:E_{i}\in B}|c_{i}|^{2},$$
-and for the mixed preparation $\rho=w\,T_{e_{1},e_{1}}+(1-w)T_{e_{2},e_{2}}$ with $0\le w\le1$ the law is $\mu^{A}_{\rho}(\{E_{1}\})=w$, $\mu^{A}_{\rho}(\{E_{2}\})=1-w$.
+and for the statistical mixture $\rho=w\,T_{e_{1},e_{1}}+(1-w)T_{e_{2},e_{2}}$ with $0\le w\le1$ the law is $\mu^{A}_{\rho}(\{E_{1}\})=w$, $\mu^{A}_{\rho}(\{E_{2}\})=1-w$. This preparation is mixed exactly when $0<w<1$; at $w=0$ it is the pure state $T_{e_2,e_2}$, and at $w=1$ it is the pure state $T_{e_1,e_1}$.
 
 (iii) With $p:=|c_{1}|^{2}$ and $q:=|c_{2}|^{2}=1-p$, the mean, second moment and variance of the pure preparation are
 $$\langle E\rangle_{\psi}=E_{1}p+E_{2}q,\qquad \langle E^{2}\rangle_{\psi}=E_{1}^{2}p+E_{2}^{2}q,\qquad \operatorname{Var}_{\psi}=pq\,(E_{1}-E_{2})^{2},$$
-and for the mixture $pq$ is replaced by $w(1-w)$; all three numbers are finite and exact because $A$ is bounded.
+and for the mixture replace $p$ by $w$ and $q$ by $1-w$; all three numbers are finite and exact because $A$ is bounded.
 
 The computation is a model-internal readout: the $E_{i}$ are parameters of the assigned observable, the probabilities are those of the framework's outcome law, and no laboratory measurement, apparatus or empirical value is asserted.
 
@@ -92,7 +93,7 @@ The computation is a model-internal readout: the $E_{i}$ are parameters of the a
 
 **Given:** The Hilbert space $H=\mathbb C^{2}$ with the standard inner product and orthonormal basis $(e_{1},e_{2})$; distinct real energies $E_{1}\ne E_{2}$ in joules; the assigned observable $A=E_{1}T_{e_{1},e_{1}}+E_{2}T_{e_{2},e_{2}}$ with unit $\mathrm J$; a unit vector $\psi=c_{1}e_{1}+c_{2}e_{2}$; a weight $w\in[0,1]$; the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), the choice hypotheses of the cited spectral suppliers.
 
-[F1] **Rank-one calculus and one-dimensional projections.** $T_{u,v}x=\langle x,v\rangle u$ is linear in $x$, with $T_{u,v}^{*}=T_{v,u}$ and $T_{u,u}$ self-adjoint and positive; for unit $u$ the operator $T_{u,u}$ is the orthogonal projection onto $\mathbb Cu$ with $T_{u,u}^{2}=T_{u,u}$, and for orthonormal $u,v$ one has $T_{u,u}T_{v,v}=0$ ([[lem-nrqm-composites-rank-one-operator-calculus]], [[lem-nrqm-state-geometry-ray-to-rank-one-projection]],).
+[F1] **Rank-one calculus and one-dimensional projections.** $T_{u,v}x=\langle x,v\rangle u$ is linear in $x$, with $T_{u,v}^{*}=T_{v,u}$ and $T_{u,u}$ self-adjoint and positive; for unit $u$ the operator $T_{u,u}$ is the orthogonal projection onto $\mathbb Cu$ with $T_{u,u}^{2}=T_{u,u}$, its trace is $1$, and for orthonormal $u,v$ one has $T_{u,u}T_{v,v}=0$ ([[lem-nrqm-composites-rank-one-operator-calculus]], [[lem-nrqm-state-geometry-ray-to-rank-one-projection]],).
 
 [F2] **Finite-dimensional spectral structure.** The eigenvectors $e_{1},e_{2}$ of the normal operator $A$ form an orthonormal basis of $H$, so $T_{e_{1},e_{1}}+T_{e_{2},e_{2}}=I$ ([[thm-complex-spectral-theorem-for-normal-endomorphisms]]).
 
@@ -102,15 +103,15 @@ The computation is a model-internal readout: the $E_{i}$ are parameters of the a
 
 [F5] **Moments.** For a unit vector in $D(A)$ the mean and second moment are $\langle A\psi,\psi\rangle$ and $\|A\psi\|^{2}$, and the variance is the second moment minus the square of the mean (clauses (a)-(c), [[pthm-nrqm-observables-preparation-moments]] clauses (a) and (b)).
 
-[F6] **States of the model.** A pure preparation is the state $T_{\psi,\psi}$ of a unit vector; a convex combination of states with weights is a state, and its trace is the corresponding convex combination of traces ([[def-nrqm-state-geometry-pure-mixed-states-and-purity]], clause (a)).
+[F6] **States of the model.** A state is a self-adjoint positive trace-class operator of trace one. A pure state is $T_{\psi,\psi}$ for a unit vector $\psi$, equivalently a rank-one orthogonal projection; a state is mixed when it is not pure ([[def-nrqm-state-geometry-pure-mixed-states-and-purity]], Density operators and Pure states). The statistical mixture here is a state by positivity and the rank-one trace formulas in [F1].
 
 ## Verification
 
 **Proof technique:** direct; compute the spectral measure, the outcome probabilities and the moments on the explicit two-dimensional data.
 
-1.1 [The observable and its spectral measure] $A=E_{1}T_{e_{1},e_{1}}+E_{2}T_{e_{2},e_{2}}$ is bounded with $\|A\|\le\max\{|E_{1}|,|E_{2}|\}$ and self-adjoint because each $T_{e_{i},e_{i}}$ is self-adjoint by [F1] and $E_{i}\in\mathbb R$; $Ae_{1}=E_{1}e_{1}$ and $Ae_{2}=E_{2}e_{2}$. Define $E'(B):=\mathbf 1_{E_{1}\in B}T_{e_{1},e_{1}}+\mathbf 1_{E_{2}\in B}T_{e_{2},e_{2}}$; [F1] gives that each value is an orthogonal projection and that $T_{e_{1},e_{1}}T_{e_{2},e_{2}}=T_{e_{2},e_{2}}T_{e_{1},e_{1}}=0$, while [F2] gives $E'(\mathbb R)=I$; multiplicativity and countable additivity hold because the two-point space $\{E_{1},E_{2}\}$ is finite, and the integral of the identity against $E'$ is $E_{1}T_{e_{1},e_{1}}+E_{2}T_{e_{2},e_{2}}=A$. By uniqueness [F3], $E'$ is the spectral PVM of $A$, so $\sigma(A)=\{E_{1},E_{2}\}$ and clause (i) holds. [given, F1, F2, F3, algebra]
+1.1 [The observable and its spectral measure] $A=E_{1}T_{e_{1},e_{1}}+E_{2}T_{e_{2},e_{2}}$ is bounded with $\|A\|\le\max\{|E_{1}|,|E_{2}|\}$ and self-adjoint because each $T_{e_{i},e_{i}}$ is self-adjoint by [F1] and $E_{i}\in\mathbb R$; $Ae_{1}=E_{1}e_{1}$ and $Ae_{2}=E_{2}e_{2}$. Define $E'(B):=\mathbf 1_{E_{1}\in B}T_{e_{1},e_{1}}+\mathbf 1_{E_{2}\in B}T_{e_{2},e_{2}}$; [F1] gives that each value is an orthogonal projection and that $T_{e_{1},e_{1}}T_{e_{2},e_{2}}=T_{e_{2},e_{2}}T_{e_{1},e_{1}}=0$, while [F2] gives $E'(\mathbb R)=I$; multiplicativity and countable additivity hold because the two-point space $\{E_{1},E_{2}\}$ is finite, and the integral of the identity against $E'$ is $E_{1}T_{e_{1},e_{1}}+E_{2}T_{e_{2},e_{2}}=A$. By uniqueness [F3], $E'$ is the spectral PVM of $A$, so $\sigma(A)=\{E_{1},E_{2}\}$. Its displayed PVM has $E_A(\{E_1,E_2\})=I$, so [F4] gives $\mu^A_\rho(\{E_1,E_2\})=\operatorname{tr}(\rho)=1$ for every preparation, proving the almost-sure support claim of (i). [given, F1, F2, F3, F4, F6, algebra]
 
-2.1 [Outcome probabilities] For the unit vector $\psi=c_{1}e_{1}+c_{2}e_{2}$, the identity $T_{e_{i},e_{i}}\psi=\langle\psi,e_{i}\rangle e_{i}=c_{i}e_{i}$ from [F1] gives $E_{A}(B)\psi=\sum_{i:E_{i}\in B}c_{i}e_{i}$, whose norm squared is $\sum_{i:E_{i}\in B}|c_{i}|^{2}$; by [F4] this is $\mu^{A}_{\psi}(B)$, so in particular $\mu^{A}_{\psi}(\{E_{i}\})=|c_{i}|^{2}$ and the total mass is $|c_{1}|^{2}+|c_{2}|^{2}=1$. For the mixture, [F4] and linearity of the trace give $\mu^{A}_{\rho}(\{E_{1}\})=\operatorname{tr}(\rho T_{e_{1},e_{1}})=w$ because $\operatorname{tr}(T_{e_{1},e_{1}}^{2})=1$ and $\operatorname{tr}(T_{e_{2},e_{2}}T_{e_{1},e_{1}})=0$ by [F1], and similarly $\mu^{A}_{\rho}(\{E_{2}\})=1-w$; this is clause (ii). [given, step 1.1, F1, F2, F4, algebra]
+2.1 [Outcome probabilities] For the unit vector $\psi=c_{1}e_{1}+c_{2}e_{2}$, the identity $T_{e_{i},e_{i}}\psi=\langle\psi,e_{i}\rangle e_{i}=c_{i}e_{i}$ from [F1] gives $E_{A}(B)\psi=\sum_{i:E_{i}\in B}c_{i}e_{i}$, whose norm squared is $\sum_{i:E_{i}\in B}|c_{i}|^{2}$; by [F4] this is $\mu^{A}_{\psi}(B)$, so in particular $\mu^{A}_{\psi}(\{E_{i}\})=|c_{i}|^{2}$ and the total mass is $|c_{1}|^{2}+|c_{2}|^{2}=1$. For the mixture, $\rho$ is self-adjoint, positive and trace class by [F1] and $w,1-w\ge0$, with trace $w+(1-w)=1$, so it is a state by [F6]. If $0<w<1$, then $\rho e_1=we_1$ and $\rho e_2=(1-w)e_2$ give range $H$, of dimension two; hence $\rho$ is not a rank-one projection and is mixed. At $w=0$ or $w=1$ it equals the respective rank-one projection $T_{e_2,e_2}$ or $T_{e_1,e_1}$ and is pure. Now [F4] and linearity of the trace give $\mu^{A}_{\rho}(\{E_{1}\})=\operatorname{tr}(\rho T_{e_{1},e_{1}})=w$ because $\operatorname{tr}(T_{e_{1},e_{1}}^{2})=1$ and $\operatorname{tr}(T_{e_{2},e_{2}}T_{e_{1},e_{1}})=0$ by [F1], and similarly $\mu^{A}_{\rho}(\{E_{2}\})=1-w$; this is clause (ii). [given, step 1.1, F1, F2, F4, F6, algebra]
 
 3.1 [Moments of the readout] With $p=|c_{1}|^{2}$, $q=|c_{2}|^{2}$, the vector $\psi$ lies in $D(A)=H$, so [F5] applies: the mean is $\langle A\psi,\psi\rangle=E_{1}p+E_{2}q$, the second moment is $\|A\psi\|^{2}=E_{1}^{2}p+E_{2}^{2}q$, and the variance is their difference, computed as $E_{1}^{2}p+E_{2}^{2}q-(E_{1}p+E_{2}q)^{2}=p(1-p)E_{1}^{2}+q(1-q)E_{2}^{2}-2pqE_{1}E_{2}=pq(E_{1}-E_{2})^{2}$, using $p+q=1$ and $[F6]$. For the mixture $\rho=wT_{e_{1},e_{1}}+(1-w)T_{e_{2},e_{2}}$, which is a state by [F6], the same identities give mean $wE_{1}+(1-w)E_{2}$ and variance $w(1-w)(E_{1}-E_{2})^{2}$, since the law is the two-point law of (ii) and the moments of a finite two-point law are the displayed sums. All quantities are finite because $A$ is bounded. This is clause (iii). [given, step 2.1, F1, F5, F6, algebra] ∎
 

@@ -39,7 +39,10 @@ displacement at fixed time, equivalently it is the transpose multiple
 $D_{x}G^{\mathsf T}\lambda$ of the constraint Jacobian, with the same
 restriction intended for frictionless joints, smooth tracks and taut links
 and excluded for sliding friction, unilateral and contact-change mechanisms,
-rank loss and active drives.
+rank loss and direct active forces on the labels along permitted displacements.
+Prescribed support motion is encoded in a time-dependent constraint and may
+transfer energy through the ideal reaction; driving-equipment dynamics remain
+outside the model.
 
 [[pthm-cm06-multiplier-balance]] proves the conditional dynamics of the
 ideal branch under a $C^{3}$ constraint map of full rank throughout $O$ and a
@@ -57,17 +60,20 @@ for a potential presentation $F_{i}=-\nabla_{x_{i}}U+d_{i}$ one has
 $E'=\partial_{t}U+\sum_{i}\langle\mathfrak d_{i},w_{i}\rangle-\lambda\cdot G_{t}$,
 the reaction work vanishes identically for a scleronomic constraint, a
 rheonomic constraint can change the mechanical energy through the term
-$-\lambda\cdot G_{t}$, and conservation requires the scleronomic constraint,
-a static potential and no residual forces; the integrated work form is
+$-\lambda\cdot G_{t}$, and a scleronomic constraint,
+a static potential and vanishing residual forces along the motion suffice
+for conservation. These conditions are not necessary: energy is constant
+exactly when its total rate vanishes along the motion. The integrated work form is
 recorded.
 
 The moving-chart branch is kinematic. [[def-cm06-moving-frame]] fixes a
 moving spatial chart of one inertial frame by a $C^{2}$ reference curve
 $c(t)$ and rotation $R(t)$, with coordinates $x=R(t)y+c(t)$, the angular
 velocity $\omega$ in the body convention $\Omega=R^{\mathsf T}R'$, the
-conversion to the opposite convention, the four inertial terms and the
-status of the object as a coordinate description rather than an inertial
-frame. [[pthm-cm06-inertial-forces]] proves the moving-chart equation
+conversion to the opposite convention and the four inertial terms. In general
+the moving chart is not inertial; when $R$ is constant and $c$ is affine, its
+restriction to the stated time interval is an adapted chart of another
+inertial frame. [[pthm-cm06-inertial-forces]] proves the moving-chart equation
 $m_{i}\ddot y_{i}=R^{\mathsf T}F_{i}+m_{i}\tau$ along every motion of the
 force model, names the Coriolis, Euler, centrifugal and translational
 inertial forces as mass multiples of the four terms, and characterizes the
@@ -81,7 +87,8 @@ $A(t,x)x'+b(t,x)=0$, its admissible velocities and Chetaev virtual
 displacements, the adopted d'Alembert ideal-reaction law with its multiplier
 representation, and the classification of holonomic-equivalent laws — those
 that integrate to a family of position constraints — against nonholonomic
-ones; the planar no-slip rolling law is holonomic-equivalent, and Tong's
+ones; the reduced planar two-coordinate no-slip rolling law is
+holonomic-equivalent, and Tong's
 particular coin rolling without slipping down a slope is reported
 nonholonomic. Rank changes,
 contact changes, impacts and friction are excluded and left to separate

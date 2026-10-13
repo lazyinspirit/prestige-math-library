@@ -4,7 +4,7 @@ aliases: [ nrqm-approximations-framework-perturbed-family-model ]
 kind: definition
 domain: physics
 title: "The declared perturbed-family model: bounded self-adjoint perturbation,
-  isolated gapped label and followed spectral label"
+  isolated gapped label and followed spectral cluster"
 status: draft
 origin: session
 dependency_level: 9
@@ -57,7 +57,7 @@ physical_scope: "The perturbed-family model of a declared system of the
   family H(lambda) = H0 + lambda V declared as the model's energy observable at
   coupling lambda, together with a fixed isolated eigenvalue E of H0 of finite
   multiplicity with gap g, its spectral projection, the first-order operator
-  P0VP0 on the eigenspace, and the followed perturbed spectral label supplied by
+  P0VP0 on the eigenspace, and the followed perturbed spectral cluster supplied by
   the contour construction. The definition asserts no time-dependent
   perturbation, no ramping protocol, no occupation of any branch by a
   preparation, no measurement and no laboratory identification; all statements

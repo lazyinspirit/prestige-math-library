@@ -1,0 +1,170 @@
+{
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "58",
+  "input_sha256": "1cf7e5abaa87ab71967de0936e088d092ed7f360990f3752a2c33919d4433b40",
+  "decisions": [
+    {
+      "id": "def-nrqm-central-framework-central-potential-model",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "921da1d94e92845f175b55db4f16c83b315939fa42b2167b3ce751c1476a3d2e",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "Clause (d) left admissibility unspecified. For V=0 and l=0, u=exp(-k r) satisfies the Robin half-line equation with E=-hbar^2 k^2/(2m), whereas its lift exp(-k r)Y00/r has gradient squared integral proportional to integral_0^epsilon exp(-2k r)(k+1/r)^2 dr=infinity, so it is outside W^{1,2} and the declared W^{2,2} energy domain. The repair fixes admissibility by the inverse image of that full domain under the isometric spherical lift and defines the radial eigenvalue equation through H_V on that lift; it preserves every smooth compactly supported radial identity and excludes arbitrary boundary extensions. This is a fatal incomplete-definition defect (other), not a dependency-citation error.",
+      "uncertain": false,
+      "source_urls": [
+        "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-nrqm-central-framework-central-potential-model",
+      "disposition": "repaired",
+      "post_sha256": "25c009ded6a934fbbc8d1ccd562957582b18342328cae77c844c18dfe0314fc6",
+      "review_context_sha256": "874af7de99df0beac1c9a6d74ad40bdb7bc640c6d3d6c3d91a899a55c5e2d77d",
+      "reason": "Reviewed the unitary U and its single-coordinate inverse, the full W^{2,2} energy-domain identification, bounded real potentials and the smooth-sector Laplacian formula. Clause (d) now gives the exact reduced domain and the lifted eigenvalue equation, with nonzero u required only for eigenpairs. The zero-vector identity, SI units, mass distinct from magnetic label, bounded-potential scope and almost-everywhere qualification are preserved. Clause (e) already distinguishes the zero energy reference from a spectral threshold. No new prerequisite or independent acceptance of this repair is claimed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      ],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "pthm-nrqm-central-spherical-reduction-of-smooth-states",
+    "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+    "pthm-nrqm-central-coulomb-energy-observable-and-flow",
+    "rem-nrqm-central-scope-and-empirical-status",
+    "def-nrqm-scattering-partial-wave-and-phase-shift-readings"
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim_and_conventions": "Changed only Definition (d): D_lbar_m is the inverse image of W^{2,2}(R^3;C) under J_lbar_m=U^{-1} iota_lbar_m; radial eigenpairs satisfy H_V J u=E J u, u nonzero; m remains the positive mass and bar m the integer magnetic label. Full-domain endpoint classification is not asserted.",
+    "sources_consulted": "[Tong, Quantum Mechanics](https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf), Section 4.2.3, printed pp. 110-111, read the complete boundary discussion via PDF text. Its integration by parts checks symmetry; it is not used as a proof of self-adjointness or as a reason to shrink the state Hilbert space. Local mathematical suppliers fix the operator domain.",
+    "dependency_evidence": [
+      "items/thm-nrqm-coulomb-angular-radial-unitary-reduction.md Statement (a),(b),(d), Proof 3.1",
+      "items/lem-nrqm-central-free-operator-differential-identification.md Statement (a),(b), Proof 1.1-3.1",
+      "items/thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators.md Statement (a)-(d)",
+      "items/pthm-nrqm-central-spherical-reduction-of-smooth-states.md Statement (a)-(d), Proof 1.1-4.1"
+    ],
+    "downstream_examination": [
+      {
+        "id": "pthm-nrqm-central-spherical-reduction-of-smooth-states",
+        "path": "items/pthm-nrqm-central-spherical-reduction-of-smooth-states.md",
+        "affected_use": "Statement (a)-(d), Facts F1-F2 and Proof 1.1-4.1: u in C_c^infinity((0,infinity)) lifts to psi=uY/r in D(H_V); the radial expression equals H_V psi and the a.e. equation is equivalent to the operator equation.",
+        "disposition": "unaffected",
+        "reason": "The new admissible domain contains all specified smooth test functions by the angular-radial supplier (d). The formula and norm argument of 4.1 remain identical; the consumer already uses the magnetic label bar m.",
+        "route": "frontier-owner",
+        "invalidated_claim": null,
+        "minimality": "No consumer edit is necessary: its used clauses or explicitly restricted smooth domain are unchanged."
+      },
+      {
+        "id": "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+        "path": "items/def-nrqm-central-framework-coulomb-and-hydrogen-model.md",
+        "affected_use": "Definition (a) imports only framework data from central-model clause (a); Definition (c) assigns Coulomb radial domains D(A_l) through its separate transported-endpoint theorem.",
+        "disposition": "unaffected",
+        "reason": "The changed bounded-potential radial domain is not used for singular Coulomb. Its separately fixed H^2 and D(A_l) realization is unchanged.",
+        "route": "frontier-owner",
+        "invalidated_claim": null,
+        "minimality": "No consumer edit is necessary: its used clauses or explicitly restricted smooth domain are unchanged."
+      },
+      {
+        "id": "pthm-nrqm-central-coulomb-energy-observable-and-flow",
+        "path": "items/pthm-nrqm-central-coulomb-energy-observable-and-flow.md",
+        "affected_use": "Frontmatter lists the central-model definition as a formulation prerequisite; Statement and F1-F6 use the separate Coulomb model, its H^2 domain, energy-observable assignments and Born law.",
+        "disposition": "unaffected",
+        "reason": "No proof step uses the formerly unspecified bounded-potential endpoint rule. The Coulomb threshold is independently supported by its essential-spectrum theorem.",
+        "route": "frontier-owner",
+        "invalidated_claim": null,
+        "minimality": "No consumer edit is necessary: its used clauses or explicitly restricted smooth domain are unchanged."
+      },
+      {
+        "id": "rem-nrqm-central-scope-and-empirical-status",
+        "path": "items/rem-nrqm-central-scope-and-empirical-status.md",
+        "affected_use": "Remarks, What the page establishes: central-potential model and spherical reduction of smooth compactly supported vectors, with radial equality a.e. and normalized nonzero preparations.",
+        "disposition": "unaffected",
+        "reason": "All smooth-sector claims and empirical exclusions survive the precise lifted-domain definition; no global endpoint classification was asserted.",
+        "route": "frontier-owner",
+        "invalidated_claim": null,
+        "minimality": "No consumer edit is necessary: its used clauses or explicitly restricted smooth domain are unchanged."
+      },
+      {
+        "id": "def-nrqm-scattering-partial-wave-and-phase-shift-readings",
+        "path": "items/def-nrqm-scattering-partial-wave-and-phase-shift-readings.md",
+        "affected_use": "Definition (a) imports the real bounded measurable central V(x)=v(|x|) definition; Definition (b) defines scattering radial solutions with its own origin and outgoing normalization and states that they need not be state-space vectors.",
+        "disposition": "unaffected",
+        "reason": "Clauses (a)-(c) use unchanged central-potential data and the scattering supplier, not the stationary L^2 admissible domain. Generalized scattering solutions remain outside that domain as explicitly allowed.",
+        "route": "frontier-owner",
+        "invalidated_claim": null,
+        "minimality": "No consumer edit is necessary: its used clauses or explicitly restricted smooth domain are unchanged."
+      }
+    ],
+    "page_examination": {
+      "path": "library/non-relativistic-quantum-mechanics/qm-central-potentials-and-hydrogen.md",
+      "affected_use": "The model summary names the effective potential and says the smooth-sector radial equation is the eigenvalue equation.",
+      "disposition": "unaffected",
+      "reason": "The smooth-sector operator/formula equivalence remains exactly the same. Existing continuum-threshold wording is a contextual name; supplier clause (e) already requires separate spectral determination."
+    },
+    "checks": [
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/def-nrqm-central-framework-central-potential-model.md",
+        "exit_code": 0,
+        "result": "One file passed YAML and real KaTeX rendering checks."
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/def-nrqm-central-framework-central-potential-model.md",
+        "exit_code": 0,
+        "result": "No phase-format body applies to this definition; 0 checked, 0 failing."
+      },
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/def-nrqm-central-framework-central-potential-model.md",
+        "exit_code": 0,
+        "result": "1 item, 0 steps, 0 defects; run after the final item edit."
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file <(printf '%s\\n' '[\"def-nrqm-central-framework-central-potential-model\"]') --json",
+        "exit_code": 0,
+        "result": "Focused item and owning page: 0 errors, 0 warnings; prerequisite closure cycle checks retained (2191 items, 293 pages). The reported 28678 inventory count is graph-loading context, not a whole-corpus audit."
+      }
+    ],
+    "unresolved_obligations": [],
+    "next_action": "Native controller collects the report and schedules the interface event; no judges, worker launches, stamps or certificates were produced.",
+    "metadata_repair": "Under the required shared lock, reread research/physics-cm-qm-gr-79-2026-10-11-batch-58.pages.json and replaced only the assigned item statement with its current Definition, then checked exact equality and released the lock. There is no definition row in batch-58.proof-contracts.json, whose scope covers proof-bearing carriers only; no proof contract was changed."
+  },
+  "ledger_updates": [
+    {
+      "ledger": "canonical-defect-ledger",
+      "id": "def-nrqm-central-framework-central-potential-model",
+      "status": "fixed",
+      "outcome": "confirmed_fatal",
+      "defect_type": "other",
+      "reason": "Clause (d) left admissibility unspecified. For V=0 and l=0, u=exp(-k r) satisfies the Robin half-line equation with E=-hbar^2 k^2/(2m), whereas its lift exp(-k r)Y00/r has gradient squared integral proportional to integral_0^epsilon exp(-2k r)(k+1/r)^2 dr=infinity, so it is outside W^{1,2} and the declared W^{2,2} energy domain. The repair fixes admissibility by the inverse image of that full domain under the isometric spherical lift and defines the radial eigenvalue equation through H_V on that lift; it preserves every smooth compactly supported radial identity and excludes arbitrary boundary extensions. This is a fatal incomplete-definition defect (other), not a dependency-citation error.",
+      "evidence_report": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-repeat-r1-u58.json",
+      "uncertain": false,
+      "source_urls": [
+        "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "canonical-published-consumer-ledger",
+      "supplier": "def-nrqm-central-framework-central-potential-model",
+      "action": "record-examination",
+      "reason": "All five direct item consumers are current draft items. No published direct consumer or defective published use was found; outside-frontier draft uses are routed to separate maintenance in downstream_examination.",
+      "consumers": [
+        "pthm-nrqm-central-spherical-reduction-of-smooth-states",
+        "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+        "pthm-nrqm-central-coulomb-energy-observable-and-flow",
+        "rem-nrqm-central-scope-and-empirical-status",
+        "def-nrqm-scattering-partial-wave-and-phase-shift-readings"
+      ],
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ]
+}

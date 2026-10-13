@@ -7,7 +7,7 @@ title: "Golden-rule coefficient approximate identity"
 status: draft
 origin: pipeline
 dependency_level: 8
-deps: [cor-primitives-of-a-continuous-function, thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound, thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian, thm-plancherel, def-fourier-transform-on-l-one-of-rn, thm-l-one-l-two-agreement-of-fourier-transform, thm-lebesgue-measure-of-a-box-of-every-kind, cor-c-one-change-of-variables-for-l-one-functions, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-sine-and-cosine-derivatives, def-measure-with-density, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, thm-linearity-of-the-lebesgue-integral-on-l-one, def-integrable-real-and-complex-functions-and-their-integrals, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, def-continuity-real, def-limits-at-infinity, def-countable-choice, def-axiom-of-choice]
+deps: [cor-primitives-of-a-continuous-function, thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound, thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian, thm-plancherel, def-fourier-transform-on-l-one-of-rn, thm-l-one-l-two-agreement-of-fourier-transform, thm-lebesgue-measure-of-a-box-of-every-kind, cor-c-one-change-of-variables-for-l-one-functions, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-sine-and-cosine-derivatives, def-measure-with-density, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, thm-linearity-of-the-lebesgue-integral-on-l-one, def-integrable-real-and-complex-functions-and-their-integrals, thm-cauchy-schwarz-in-an-inner-product-space, def-l-p-space-as-a-quotient-by-null-functions, def-continuity-real, def-limits-at-infinity, def-countable-choice, def-axiom-of-choice]
 dependency_roles:
   cor-primitives-of-a-continuous-function: mathematical-premise
   thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound: mathematical-premise
@@ -25,7 +25,7 @@ dependency_roles:
   cor-additivity-of-the-nonnegative-lebesgue-integral: mathematical-premise
   thm-linearity-of-the-lebesgue-integral-on-l-one: mathematical-premise
   def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
-  cor-cauchy-schwarz-inequality-for-l-two: mathematical-premise
+  thm-cauchy-schwarz-in-an-inner-product-space: mathematical-premise
   def-l-p-space-as-a-quotient-by-null-functions: mathematical-premise
   def-continuity-real: mathematical-premise
   def-limits-at-infinity: mathematical-premise
@@ -57,13 +57,12 @@ $$K_t(x)=\frac{4\sin^2\bigl(xt/(2\hbar)\bigr)}{x^2t},\qquad K_t(0)=\frac t{\hbar
 moreover for every $\delta>0$ and every $x$ with $|x|\ge\delta$,
 $$K_t(x)\le\frac4{x^2t}\le\frac4{\delta^2t},\qquad\text{and}\qquad \int_{\mathbb R}K_t(x)\,dx=\frac{2\pi}{\hbar}.$$
 
-**(b) Approximate identity.** Let $J\in L^1(\mathbb R)$
+**(b) Approximate identity.** Let $J\in L^1(\mathbb R;\mathbb C)$ (including real-valued functions)
 ([[def-integrable-real-and-complex-functions-and-their-integrals]],
 [[def-l-p-space-as-a-quotient-by-null-functions]]) and let $\Delta\in\mathbb R$.
-If the representative $J$ is continuous at $\Delta$
-([[def-continuity-real]]), then
+Choose a measurable representative $J:\mathbb R\to\mathbb C$. Continuity at $\Delta$ means that for every $\epsilon>0$ there is $\delta>0$ such that $|J(y)-J(\Delta)|<\epsilon$ whenever $|y-\Delta|<\delta$; for real-valued $J$ this is [[def-continuity-real]], and for complex-valued $J$ it is equivalent to continuity of its real and imaginary parts. If this condition holds, then
 $$\lim_{t\to\infty}\int_{\mathbb R}K_t(x)J(\Delta+x)\,dx=\frac{2\pi}{\hbar}J(\Delta)$$
-([[def-limits-at-infinity]]).
+(For a complex-valued function $Q:(0,\infty)\to\mathbb C$, $Q(t)\to L$ means that for every $\epsilon>0$ there is $T>0$ with $|Q(t)-L|<\epsilon$ for all $t>T$; equivalently its real and imaginary parts have the real limits in [[def-limits-at-infinity]].)
 
 **(c) First-order emission coefficient.** Adopt the objects and hypotheses of
 [[thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound]]: $\alpha>0$, the
@@ -74,7 +73,8 @@ $g_1,\dots,g_J\in\mathfrak h$ ($J\ge1$) with
 $$\operatorname{supp}g_j\subseteq\{k:\ 0<\varepsilon(k)\le\Lambda\},\qquad \frac{g_j}{\sqrt\varepsilon}\in\mathfrak h,$$
 the Hermitian $d\times d$ matrices $H_a,D_1,\dots,D_J$ and the coupling
 $\eta_0\in\mathbb R$. Let $v_a,v_b$ be orthonormal eigenvectors of $H_a$ with
-$H_av_a=E_av_a$, $H_av_b=E_av_b$, and let $\Delta:=E_a-E_b>0$. Put
+real eigenvalues $E_a,E_b$ satisfying $H_av_a=E_av_a$, $H_av_b=E_bv_b$, and
+let $\Delta:=E_a-E_b>0$. Put
 $$c_j:=\langle D_jv_a,v_b\rangle\ (\mathbb C^d\text{ inner product}),\qquad M:=\sum_{j=1}^Jc_jg_j\in\mathfrak h,$$
 and define the finite Borel measure
 $$\nu_b(A):=\int_{\mathbb R^3}\mathbf 1_A(\varepsilon(k))\,\|M(k)\|^2\,d^3k, \qquad A\subseteq\mathbb R\ \text{Borel},$$
@@ -127,9 +127,9 @@ model; their physical identification is a separate assumption.
 
 [F6] Model objects: $\mathfrak h=\{f\in L^2(\mathbb R^3;\mathbb C^3):k\cdot f(k)=0\ \text{a.e.}\}$ is a closed linear subspace, $\varepsilon(k)=\alpha|k|$ is continuous, $g_j\in\mathfrak h$ with $\operatorname{supp}g_j\subseteq\{0<\varepsilon\le\Lambda\}$ and $g_j/\sqrt\varepsilon\in\mathfrak h$; $H_a,D_j$ are Hermitian with $v_a,v_b$ orthonormal eigenvectors ([[thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian]], [[thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound]]).
 
-[F7] Cauchy-Schwarz in $\mathbb C^J$: $|\sum_jc_jg_j(k)|^2\le(\sum_j|c_j|^2)(\sum_j\|g_j(k)\|^2)$ for every $k$, hence $\|M\|_{L^2}^2\le(\sum_j|c_j|^2)(\sum_j\|g_j\|^2)<\infty$ ([[cor-cauchy-schwarz-inequality-for-l-two]], [[def-l-p-space-as-a-quotient-by-null-functions]]).
+[F7] Cauchy-Schwarz in the finite-dimensional Hilbert space $\mathbb C^J$ gives $|\sum_jc_jg_j(k)|^2\le(\sum_j|c_j|^2)(\sum_j\|g_j(k)\|^2)$ for a.e. $k$, hence $\|M\|_{L^2}^2\le(\sum_j|c_j|^2)(\sum_j\|g_j\|^2)<\infty$ ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]).
 
-[F8] Continuity at a point and limits at $+\infty$ ([[def-continuity-real]], [[def-limits-at-infinity]]).
+[F8] Use the modulus definitions of continuity and limits stated in (b); they agree with [[def-continuity-real]] and [[def-limits-at-infinity]] for real functions. For complex functions the inequalities $|\operatorname{Re}z|,|\operatorname{Im}z|\le|z|\le|\operatorname{Re}z|+|\operatorname{Im}z|$ prove equivalence with the two real-component conditions.
 
 
 
@@ -145,7 +145,7 @@ model; their physical identification is a separate assumption.
 
 1.3 [The pushforward measure] With $c_j:=\langle D_jv_a,v_b\rangle$ and $M=\sum_jc_jg_j$, [F7] gives $\|M\|_{L^2}^2<\infty$ and $M\in\mathfrak h$ by [F6], and $\operatorname{supp}M\subseteq\{0<\varepsilon\le\Lambda\}$. Hence for every Borel $A\subseteq\mathbb R$ the function $k\mapsto\mathbf 1_A(\varepsilon(k))\|M(k)\|^2$ is nonnegative and measurable, so $A\mapsto\nu_b(A):=\int_{\mathbb R^3}\mathbf 1_A(\varepsilon(k))\|M(k)\|^2d^3k$ is a finite measure by [F5], with $\nu_b(\mathbb R)=\|M\|_{L^2}^2<\infty$ and $\nu_b(\mathbb R\setminus(0,\Lambda])=0$. The identity $\int fd\nu_b=\int f(\varepsilon(k))\|M(k)\|^2d^3k$ holds for indicators by definition, for nonnegative simple $f$ by additivity, and for all Borel $f\ge0$ by monotone convergence [F5]. This proves (i). [F5, F6, F7, algebra]
 
-2.1 [Approximate identity] Let $J\in L^1(\lambda)$ be continuous at $\Delta$ and fix $t,\delta>0$. By step 1.2, $\int K_t(x)J(\Delta+x)dx-(2\pi/\hbar)J(\Delta)=\int K_t(x)(J(\Delta+x)-J(\Delta))dx$, and we split the right side at $\{|x|\ge\delta\}$. On $|x|<\delta$ the bound $K_t\ge0$ and step 1.2 give at most $(2\pi/\hbar)\sup_{|x|\le\delta}|J(\Delta+x)-J(\Delta)|$; on $|x|\ge\delta$, separate the two terms to obtain at most $(4/(\delta^2t))\int_{|x|\ge\delta}|J(\Delta+x)|dx+|J(\Delta)|\int_{|x|\ge\delta}4/(x^2t)dx\le4\|J\|_1/(\delta^2t)+8|J(\Delta)|/(\delta t)$, since $\int_{|x|\ge\delta}x^{-2}dx=2/\delta$, where $\int_{\mathbb R}|J(\Delta+x)|dx=\|J\|_1$ by [F4] applied to the translation $x\mapsto\Delta+x$. Given $\varepsilon>0$, continuity of $J$ at $\Delta$ [F8] yields $\delta>0$ with $(2\pi/\hbar)\sup_{|x|\le\delta}|J(\Delta+x)-J(\Delta)|\le\varepsilon/2$, and then $t$ large enough that $4\|J\|_1/(\delta^2t)+8|J(\Delta)|/(\delta t)\le\varepsilon/2$; hence the displayed difference is $\le\varepsilon$ for all large $t$, which is the asserted limit $\frac{2\pi}{\hbar}J(\Delta)$ [F8]. [F4, F8, step 1.1, step 1.2, algebra]
+2.1 [Approximate identity] Let $J\in L^1(\lambda;\mathbb C)$ have the representative continuous at $\Delta$ specified in (b). For fixed $t>0$, $K_t\le t/\hbar^2$ by the defining time integral, so $K_t(x)J(\Delta+x)$ is integrable by translation invariance, and the subtraction below is licensed by $L^1$ linearity [F5]. Fix $\delta>0$. By step 1.2, $\int K_t(x)J(\Delta+x)dx-(2\pi/\hbar)J(\Delta)=\int K_t(x)(J(\Delta+x)-J(\Delta))dx$, and we split the right side at $\{|x|\ge\delta\}$. On $|x|<\delta$ the bound $K_t\ge0$ and step 1.2 give at most $(2\pi/\hbar)\sup_{|x|<\delta}|J(\Delta+x)-J(\Delta)|$; on $|x|\ge\delta$, separate the two terms to obtain at most $(4/(\delta^2t))\int_{|x|\ge\delta}|J(\Delta+x)|dx+|J(\Delta)|\int_{|x|\ge\delta}4/(x^2t)dx\le4\|J\|_1/(\delta^2t)+8|J(\Delta)|/(\delta t)$, since $\int_{|x|\ge\delta}x^{-2}dx=2/\delta$, where $\int_{\mathbb R}|J(\Delta+x)|dx=\|J\|_1$ by [F4] applied to the translation $x\mapsto\Delta+x$. Given $\varepsilon>0$, continuity of $J$ at $\Delta$ [F8] yields $\delta>0$ with $(2\pi/\hbar)\sup_{|x|<\delta}|J(\Delta+x)-J(\Delta)|\le\varepsilon/3$, and then $t$ large enough that $4\|J\|_1/(\delta^2t)+8|J(\Delta)|/(\delta t)<\varepsilon/3$; hence the modulus of the displayed difference is $<\varepsilon$ for all large $t$, which is the asserted limit $\frac{2\pi}{\hbar}J(\Delta)$ [F8]. [F4, F5, F8, step 1.1, step 1.2, algebra]
 
 2.2 [Coefficient computation] For $t=0$ the defining time integral is zero and $A_b(\cdot,0)=0$. For $t>0$ let $\varphi_t(E):=\int_0^te^{i(E-\Delta)s/\hbar}ds$, so that $A_b(k,t)=-(i\eta_0/\hbar)M(k)\varphi_t(\varepsilon(k))$ and $|\varphi_t|\le t$. The function $k\mapsto- (i\eta_0/\hbar)\varphi_t(\varepsilon(k))$ is bounded and measurable, so $A_b(\cdot,t)\in L^2(\mathbb R^3;\mathbb C^3)$ with $|A_b(k,t)|\le(|\eta_0|t/\hbar)\|M(k)\|$, and pointwise scalar multiplication preserves the transversality condition $k\cdot f(k)=0$ a.e.; hence $A_b(\cdot,t)\in\mathfrak h$ by [F6]. Then $\|A_b(\cdot,t)\|_{\mathfrak h}^2=(\eta_0^2/\hbar^2)\int_{\mathbb R^3}\|M(k)\|^2|\varphi_t(\varepsilon(k))|^2d^3k=(\eta_0^2/\hbar^2)\int_{\mathbb R}|\varphi_t(E)|^2d\nu_b(E)$ by step 1.3 with $f=|\varphi_t|^2$, and $|\varphi_t(E)|^2=|\int_0^te^{i(E-\Delta)s/\hbar}ds|^2=\hbar^2tK_t(E-\Delta)$ for every $E$ by the definition of $K_t$ in (a) and step 1.1; this proves (ii). [step 1.1, step 1.3, F6, algebra]
 

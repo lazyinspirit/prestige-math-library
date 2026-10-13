@@ -26,7 +26,7 @@ provenance:
 proof_strategy: direct
 sources:
   references:
-    - title: "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.6, formulas (8.76)-(8.77): linearisation of the potential at a critical point, M q'' + W q = 0 with W the Hessian"
+    - title: "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.4, formulas (8.76)-(8.77): linearisation of the potential at a critical point, M q'' + W q = 0 with W the Hessian"
       url: "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6, equations (2.113)-(2.116): expansion of the equation of motion about an equilibrium"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"

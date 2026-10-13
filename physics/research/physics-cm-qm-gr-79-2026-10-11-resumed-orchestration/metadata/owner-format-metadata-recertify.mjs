@@ -11,6 +11,10 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const repo = path.resolve(here, '../../..'); // physics/, independent of invocation cwd.
 const root = path.dirname(repo), research = path.join(repo, 'research');
 const stateDir = path.join(repo, '.physics-autopilot', run);
+// Per-attempt observer outputs are runtime evidence, not publication inputs.
+// Keep prior research receipts immutable and retain strict protected-tree checks.
+const outputDir = path.join(stateDir, 'owner-observer', 'metadata');
+fs.mkdirSync(outputDir, { recursive: true });
 const tool = name => path.join(root, 'tools', name);
 const { readItem, PREFIXES, DEPENDENCY_ROLES, NONPROOF_KINDS } = await import(pathToFileURL(tool('physics-support/physics-content.mjs')));
 const { sectionText } = await import(pathToFileURL(tool('physics-support/facts-block.mjs')));
@@ -78,6 +82,7 @@ function rehash() {
 }
 requireDrained(); rehash();
 const started = new Date().toISOString();
+const passId = `${request.attempt}-${started.replace(/[:.]/g, '-')}`;
 if (!Number.isFinite(Date.parse(request.createdAt)) || Date.parse(started) < Date.parse(request.createdAt)) throw Error('Pass must follow request creation');
 const manifests = new Map();
 for (const name of fs.readdirSync(research).filter(name => new RegExp(`^${run}-batch-\\d+\\.pages\\.json$`).test(name))) {
@@ -144,8 +149,8 @@ for (const binding of snapshot.items) {
   items.push({ ...binding });
 }
 function checkJson(label, argv) {
-  const outputPath = path.join(here, `${request.attempt}-${label}.json`);
-  const outputFd = fs.openSync(outputPath, 'w');
+  const outputPath = path.join(outputDir, `${passId}-${label}.json`);
+  const outputFd = fs.openSync(outputPath, 'wx');
   let result;
   try { result = spawnSync(process.execPath, argv, { cwd: repo, encoding: 'utf8', stdio: ['ignore', outputFd, 'pipe'], maxBuffer: 32 * 1024 * 1024, timeout: 300_000 }); }
   finally { fs.closeSync(outputFd); }
@@ -167,7 +172,7 @@ if (!failures.length) {
 }
 rehash(); requireDrained();
 const reviewedAt = new Date().toISOString();
-const evidencePath = path.join(here, `${run}-gate-${request.attempt}-format-metadata-pass.json`);
+const evidencePath = path.join(outputDir, `${run}-gate-${passId}-format-metadata-pass.json`);
 if (failures.length) {
   fs.writeFileSync(evidencePath, JSON.stringify({ version: 2, run, attempt: request.attempt, status: 'formatting/metadata failed; no receipt issued', reviewStartedAt: started, reviewedAt, failures, ownerDirectionSha256: directionSha256, drainReceipt: drainPath, drainSha256 }, null, 2) + '\n');
   throw Error(`Formatting/metadata defects; see ${evidencePath}`);

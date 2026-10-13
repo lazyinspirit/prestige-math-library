@@ -79,10 +79,12 @@ examples: []
 This page develops the local and global Cauchy structure of a smooth
 time-oriented Lorentzian four-manifold: strictly convex normal neighborhoods
 and the local causality inside them, the auxiliary complete Riemannian metric
-and the limit-curve machinery, the equivalence of the Cauchy-set property with
-global hyperbolicity, the Geroch volume time function with its Cauchy levels,
+and the limit-curve machinery, the equivalence between global hyperbolicity
+and existence of Cauchy sets, the Geroch volume time function with its Cauchy levels,
 and the smooth Cauchy temporal splitting with its complete orthogonal flow.
-The mathematical items give definitions and conditional deductions inside
+The absolutely continuous local causal and chronology chains retain
+Countable Choice and Dependent Choice as stated in their suppliers and
+consumers. The mathematical items give definitions and conditional deductions inside
 the stated models; the exception is the closing remark [[rem-gr-convex-normal-neighborhoods-scope]], which
 is a physics scope and status note. No item reports a measurement, and none
 asserts that a model describes nature.
@@ -92,7 +94,7 @@ function and the two-point inverse velocity of a normal neighborhood are fixed
 in [[def-gr-normal-neighborhoods-and-position-vectors]]; smoothness of the
 joint exponential map, the invertibility of its differential on the diagonal
 and the small-velocity two-point inverse are
-[[lem-gr-joint-exponential-diffeomorphism]]. The convexity of the Euclidean
+[[lem-gr-joint-exponential-diffeomorphism]]. The convexity of the squared Euclidean
 radius function along geodesics and the speed bounds for contained geodesic
 segments ([[lem-gr-coordinate-ball-geodesic-convexity]],
 [[lem-gr-contained-geodesic-velocity-bound]]) yield the existence of
@@ -114,7 +116,8 @@ Riemannian metric $h'$ and the properness of its distance are
 charts gives the Lipschitz graph bounds of [[lem-gr-dominating-cone-bounds]].
 The basic limit-curve lemma and the two-endpoint limit-curve theorem
 ([[lem-gr-basic-limit-curve]], [[thm-gr-limit-curve-two-endpoints]]) rest on
-the arclength conventions of [[lem-gr-causal-curve-conventions]] and the
+the causal-curve conventions of [[lem-gr-causal-curve-conventions]] and
+the arclength parametrization proved in [[lem-gr-basic-limit-curve]] and the
 local cone and chronology results. The two-endpoint bounded case uses the
 explicit normalized common-domain curves. Independently,
 [[thm-gr-length-upper-semicontinuity]] proves refinement convergence even
@@ -131,8 +134,10 @@ and is a locally Lipschitz topological hypersurface
 ([[lem-gr-cauchy-set-topology-and-graph]], [[def-gr-future-and-past-sets]],
 [[lem-gr-achronal-boundaries-lipschitz-graphs]]); the existence of a Cauchy
 set implies strong causality and compact causal diamonds
-([[thm-gr-cauchy-surface-implies-globally-hyperbolic]]), so a Cauchy set is
-equivalent to global hyperbolicity in the sense used here. In a globally
+([[thm-gr-cauchy-surface-implies-globally-hyperbolic]]). Together with the
+volume-time construction [[thm-gr-volume-time-function]], this gives
+equivalence between global hyperbolicity and the existence of a Cauchy set
+under the stated curve and choice conventions. In a globally
 hyperbolic manifold the causal relation is closed and truncated causal cones
 over compact sets are compact
 ([[lem-gr-globally-hyperbolic-causal-structure]]), which yields the local
@@ -152,7 +157,7 @@ bumps produce weak steps with past timelike gradient near each Cauchy level
 averaging finitely many weak steps over a compact slice and summing the
 resulting strip functions gives [[lem-gr-strip-weak-steps]], and the paired
 strip series is a smooth temporal function with Cauchy levels, complete
-gradient flow and orthogonal product splitting
+flow of the normalized field $X=\nabla T/g(\nabla T,\nabla T)$ and orthogonal product splitting
 ([[thm-gr-smooth-cauchy-temporal-splitting]], using the manifold flow escape
 lemma [[lem-gr-maximal-flow-escape]] and the Lipschitz-family subsequence
 lemma [[lem-gr-lipschitz-family-limit-subsequence]]).

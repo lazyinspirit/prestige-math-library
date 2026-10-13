@@ -51,7 +51,8 @@ attach no probability to a parameter value. The numerical-error remark
 of [[cm-math-numerical]] — finite-time order-two trajectory error, additive
 per-step accumulation on an invariant metric state set with a separate numerical-map Lipschitz bound, and the analytic exponential-time energy estimates
 under their holomorphy, small-step and compact-retention hypotheses — from
-the model-versus-nature gap, and records that a simulated trajectory is a
+any model-to-system discrepancy that an application separately defines by a
+trajectory reconstruction and metric, and records that a simulated trajectory is a
 computation, not an experiment.
 
 The remaining remarks locate the framework among its declared regimes and

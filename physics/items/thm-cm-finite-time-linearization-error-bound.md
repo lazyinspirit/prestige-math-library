@@ -31,10 +31,10 @@ provenance:
 proof_strategy: direct
 sources:
   references:
-    - title: "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 2.4 (Theorem 2.10, smooth dependence and the first variational equation) and Sections 6.2-6.3 (linearisation and stability estimates), printed pages 45-48 and 192-197"
-      url: "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
-    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09 Fall 2014, complete course text), Chapter 7 Section 7.1.3: the linearised version of the damped oscillator and the limits of linear reasoning, printed pages 147-148"
-      url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+  - title: G. Teschl, Ordinary Differential Equations and Dynamical Systems (retrieved 365-page online edition), Section 2.4, Theorem 2.10, printed pp. 45-48 (smooth dependence and variational equation); Section 3.4, Theorem 3.12, printed pp. 83-84 (variation of constants). The explicit quadratic error estimate is derived locally.
+    url: https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf
+  - title: 'I. Stewart, Advanced Classical Mechanics (MIT 8.09 Fall 2014, complete course text), Chapter 7 Section 7.1.3: the linearised version of the damped oscillator and the limits of linear reasoning, printed pages 147-148'
+    url: https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf
 verification:
   precheck: pass
 ---
@@ -43,7 +43,8 @@ verification:
 
 Let $n\ge1$, let $U\subseteq\mathbb R^n$ be open with $0\in U$, let $F:U\to\mathbb R^n$ be continuous and locally Lipschitz in the state variable, and let $r>0$, $C\ge0$, $L\ge0$ and $A\in M_n(\mathbb R)$ satisfy $\overline B(0,r)\subseteq U$ ([[def-metric-ball]]) and
 
-$$\|F(z)-Az\|_2\le C\|z\|_2^2,\qquad \|F(z)\|_2\le L\|z\|_2\qquad(\|z\|_2\le r).$$
+$$\|F(z)-Az\|_2\le C\|z\|_2^2,\qquad \|F(z)\|_2\le L\|z\|_2\qquad(\|z\|_2\le r),$$
+where $Az$ and $\|A\|$ use the matrix-action and induced Euclidean operator-norm convention of [[cor-cm-variation-of-constants-for-linear-systems]].
 
 Let $z_0\in\mathbb R^n$ with $\delta:=\|z_0\|_2>0$, let $T>0$ with $\delta e^{LT}<r$, and let $y:\mathbb R\to\mathbb R^n$ be the solution of the linear system $y'=Ay$, $y(0)=z_0$ ([[cor-cm-variation-of-constants-for-linear-systems]]). Then:
 

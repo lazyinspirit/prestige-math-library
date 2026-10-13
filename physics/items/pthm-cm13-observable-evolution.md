@@ -35,7 +35,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "The evolution identity of the declared potential presentation: along the model's Hamiltonian solutions the total time derivative of a phase function is its explicit time derivative plus the bracket with the branch Hamiltonian; autonomous functions with vanishing bracket are constant on trajectories, and, for an autonomous Hamiltonian, the bracket of two autonomous $C^{3}$ first integrals is again a first integral and the Hamiltonian itself is a first integral. The statement is a conditional deduction from the adopted force branch, the declared presentation and the cited mathematics; it asserts no empirical content."
+physical_scope: "The evolution identity of the declared potential presentation: along the model's Hamiltonian solutions the total time derivative of a phase function is its explicit time derivative plus the bracket with the branch Hamiltonian; autonomous functions with vanishing bracket are constant on trajectories, and, for an autonomous Hamiltonian, the bracket of two autonomous $C^{3}$ first integrals is again a first integral and the Hamiltonian itself is a first integral. Identification of Hamiltonian solutions with force-model motions requires $d\\equiv0$ on the state domain. The statement is a conditional deduction from the adopted force branch, the declared presentation and the cited mathematics; it asserts no empirical content."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 4.3, printed pages 94-95 (PDF pages 100-101): the claim $df/dt=\\{f,H\\}+\\partial f/\\partial t$ with its proof, the criterion $\\{I,H\\}=0$ for a constant of motion, and the closure of constants of motion under the bracket"
@@ -59,7 +59,7 @@ in $(t,z)$ on $I_{0}\times W$ ([[def-cm12-hamiltonian]],
 [[post-cm02-force-superposition]], [[def-cm01-configuration]],
 [[def-cm01-units]]). Let $J\subseteq I_{0}$ be a nonempty open interval and
 let $z:J\to W$ be a $C^{1}$ solution of the Hamiltonian system
-$\dot z(t)=X_{H_{t}}(z(t))$, equivalently, on the potential branch with
+$\dot z(t)=X_{H_{t}}(z(t))$, equivalently, when $d\equiv0$ on the state domain and with
 $z=(x,p)$ and $p=\mathsf Mx'$, the momentum-phase curve of a motion of the
 model ([[pthm-cm13-hamiltonian-field-integrates-the-model-equations]],
 [[def-cm02-newtonian-flow]],
@@ -100,7 +100,7 @@ Hamiltonian system on the interval $J$.
 
 [F1] Bracket and field ([[def-cm13-poisson]], [[def-cm13-hamiltonian-field]], [[pthm-cm13-bracket-identities]], [[def-cm13-two-form]]): the pointwise coordinate bracket is defined for $C^1$ inputs by [[def-cm13-poisson]], and for $C^{2}$ functions $u,v,w$ the Jacobi identity holds by [[pthm-cm13-bracket-identities]], with each nested bracket read in that $C^1$ coordinate extension. In clause 3, $f,g\in C^3$ and $H\in C^2$, so all three entries satisfy this $C^2$ Jacobi hypothesis; moreover $\{f,g\}\in C^2$ and is admissible in clause 2. For $C^{2}$ functions $u,v$, $\{u,v\}=\omega(X_u,X_v)=\nabla u^{\mathsf T}J\nabla v$ in canonical coordinates, $\{u,v\}=-\{v,u\}$, and the coordinate formula $\{u,v\}=\sum_{a}(u_{z^{a}}v_{z^{m+a}}-u_{z^{m+a}}v_{z^{a}})$ holds; the field of the branch Hamiltonian satisfies $\dot z=X_{H_t}(z)=J\nabla_zH(t,z)$ along any solution.
 
-[F2] Model and Hamiltonian equivalence ([[pthm-cm13-hamiltonian-field-integrates-the-model-equations]], [[def-cm12-hamiltonian]], [[def-cm02-newtonian-flow]], [[pthm-cm12-energy-time]], [[def-cm03-potential-and-mechanical-energy]], [[post-cm02-force-superposition]]): on the potential branch the momentum-phase curves of the model's motions are exactly the solutions of the Hamiltonian system, and with $\partial_{t}U\equiv0$ and $d\equiv0$ the branch Hamiltonian is constant along every motion.
+[F2] Model and Hamiltonian equivalence ([[pthm-cm13-hamiltonian-field-integrates-the-model-equations]], [[def-cm12-hamiltonian]], [[def-cm02-newtonian-flow]], [[pthm-cm12-energy-time]], [[def-cm03-potential-and-mechanical-energy]], [[post-cm02-force-superposition]]): when $d\equiv0$ on the state domain, the momentum-phase curves of the model's motions are exactly the solutions of the Hamiltonian system, and with $\partial_{t}U\equiv0$ and $d\equiv0$ the branch Hamiltonian is constant along every motion.
 
 [F3] Calculus ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[thm-chain-rule-for-total-derivatives]], [[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]], [[thm-ck-euclidean-maps-closed-under-algebra-and-composition]], [[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]], [[cor-zero-derivative-implies-constant]], [[def-interval]]): the chain rule gives $\frac{d}{dt}f(t,z(t))=\partial_{t}f(t,z(t))+\nabla_{z}f(t,z(t))\cdot\dot z(t)$; the Euclidean product identifies the gradient pairing with the matrix product $\nabla f^{\mathsf T}\dot z$; and a differentiable function on an interval whose derivative vanishes identically is constant.
 

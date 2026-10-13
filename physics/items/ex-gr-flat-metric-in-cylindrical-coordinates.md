@@ -1,7 +1,7 @@
 ---
 id: ex-gr-flat-metric-in-cylindrical-coordinates
 kind: example
-title: "A flat metric whose Christoffel symbols never vanish: flat space in cylindrical coordinates"
+title: "A flat metric with nowhere-zero Christoffel coefficients: flat space in cylindrical coordinates"
 status: draft
 origin: session
 domain: mathematics
@@ -56,7 +56,8 @@ component verification below uses only the displayed metric.
 
 1. The only nonzero Christoffel symbols of $\nabla$ in this chart are
    $$\Gamma^1{}_{22}=-x^1,\qquad \Gamma^2{}_{12}=\Gamma^2{}_{21}=\frac{1}{x^1},$$
-   so no Christoffel symbol vanishes at any point of $\Omega$.
+   so these three coefficients are nonzero at every point of $\Omega$,
+   while all other Christoffel symbols vanish identically.
 2. The curvature vanishes identically, $R=0$, even though the chart has
    nonvanishing Christoffel symbols everywhere.
 3. Consequently $R(T,J)T=0$ for every geodesic tangent $T$ and every field
@@ -81,7 +82,7 @@ component verification below uses only the displayed metric.
 
 1.1 (Christoffel symbols.) In the identity chart only $g_{22}=(x^1)^2$ is nonconstant, with $\partial_1g_{22}=2x^1$, and $g^{22}=(x^1)^{-2}$; by [L1] the possible nonzero symbols are therefore $\Gamma^1{}_{22}=\tfrac12g^{11}(-\partial_1g_{22})=-x^1$, $\Gamma^2{}_{12}=\Gamma^2{}_{21}=\tfrac12g^{22}\partial_1g_{22}=1/x^1$, and every other symbol has a factor $\partial_ag_{bc}$ with $a\neq1$ or a constant metric component and vanishes. All displayed symbols are nonzero on all of $\Omega$ because $x^1>0$ there. [L1, algebra]
 
-2.1 (Vanishing outside a finite list.) Let $a,b,c,d\in\{0,1,2,3\}$. Each of the four terms of [L2] contains a factor $\Gamma^a{}_{\cdot\cdot}$, so $R^a{}_{bcd}=0$ unless $a\in\{1,2\}$. If $c\notin\{1,2\}$ then $c\in\{0,3\}$: the first term vanishes because $\Gamma^a{}_{db}$ depends on $x^1$ alone, so $\partial_0$ and $\partial_3$ annihilate it; the second and fourth vanish because they contain $\Gamma^a{}_{cb}$ or $\Gamma^e{}_{cb}$, whose lower index pair contains $c\notin\{1,2\}$; the third vanishes because $\Gamma^a{}_{ce}=0$. If $d\notin\{1,2\}$: the first and third terms contain $\Gamma^a{}_{db}$ or $\Gamma^e{}_{db}$ with $d\notin\{1,2\}$ and vanish, the second vanishes because $\partial_d=0$, and the fourth contains $\Gamma^a{}_{de}=0$. Hence $R^a{}_{bcd}$ can be nonzero only when $a\in\{1,2\}$ and $c,d\in\{1,2\}$; by [L3] it then suffices to check the eight components $R^a{}_{b12}$ with $a\in\{1,2\}$ and $b\in\{0,1,2,3\}$. [L2, step 1.1, L3, algebra]
+2.1 (Vanishing outside a finite list.) Let $a,b,c,d\in\{0,1,2,3\}$. Each of the four terms of [L2] contains a factor $\Gamma^a{}_{\cdot\cdot}$, so $R^a{}_{bcd}=0$ unless $a\in\{1,2\}$. If $c\notin\{1,2\}$ then $c\in\{0,3\}$: the first term vanishes because $\Gamma^a{}_{db}$ depends on $x^1$ alone, so $\partial_0$ and $\partial_3$ annihilate it; the second and fourth vanish because they contain $\Gamma^a{}_{cb}$ or $\Gamma^e{}_{cb}$, whose lower index pair contains $c\notin\{1,2\}$; the third vanishes because $\Gamma^a{}_{ce}=0$. If $d\notin\{1,2\}$: the first and third terms contain $\Gamma^a{}_{db}$ or $\Gamma^e{}_{db}$ with $d\notin\{1,2\}$ and vanish, the second vanishes because $\partial_d\Gamma^a{}_{cb}=0$, and the fourth contains $\Gamma^a{}_{de}=0$. Hence $R^a{}_{bcd}$ can be nonzero only when $a\in\{1,2\}$ and $c,d\in\{1,2\}$; by [L3] it then suffices to check the eight components $R^a{}_{b12}$ with $a\in\{1,2\}$ and $b\in\{0,1,2,3\}$. [L2, step 1.1, L3, algebra]
 
 2.2 (Components with a lower index outside the block.) Let $b\notin\{1,2\}$. In $R^a{}_{b12}$ the first term is $\partial_1\Gamma^a{}_{2b}=0$ and the second is $\partial_2\Gamma^a{}_{1b}=0$ because both symbols have the lower index $b\notin\{1,2\}$; the third term contains $\Gamma^e{}_{2b}=0$ and the fourth contains $\Gamma^e{}_{1b}=0$ for the same reason. Hence $R^a{}_{b12}=0$ for $b\in\{0,3\}$ and $a\in\{1,2\}$. [L2, step 1.1, algebra]
 
@@ -91,10 +92,4 @@ component verification below uses only the displayed metric.
 
 ## Remarks
 
-The metric is flat and the identity chart on $\Omega$ is not a point-normal
-chart at any point, yet no Christoffel symbol vanishes. The vanishing of
-Christoffel symbols is therefore a property of a chart at a point and not a
-property of the geometry; only the curvature computed above, which is the
-second-order chart-independent information
-([[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a)), can
-detect the difference between flat space and a genuinely curved spacetime.
+The metric is flat and the identity chart on $\Omega$ is not a point-normal chart at any point: its three displayed Christoffel coefficients are nonzero everywhere, while every other coefficient is zero. The vanishing of Christoffel symbols is therefore a property of a chart at a point and not a property of the geometry; only the curvature computed above, which is the second-order chart-independent information ([[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a)), can detect the difference between flat space and a genuinely curved spacetime.

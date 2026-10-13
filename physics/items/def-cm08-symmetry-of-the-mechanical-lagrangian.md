@@ -1,7 +1,7 @@
 ---
 id: def-cm08-symmetry-of-the-mechanical-lagrangian
 kind: definition
-title: "Continuous symmetries of the model's mechanical Lagrangian: symmetry data, the Noether identity, the charge and its dimensions"
+title: "Continuous symmetries of the mechanical Lagrangian of a potential presentation: symmetry data, the Noether identity, the charge and its dimensions"
 status: draft
 origin: session
 domain: physics
@@ -25,12 +25,12 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "The symmetry vocabulary of the force model with a declared potential presentation in one inertial frame: symmetry data as triples (tau, xi, B) satisfying the model's Noether identity for the mechanical Lagrangian K - U, strict data and their exact relation to the chart-level infinitesimal point symmetries, the charge M v . xi - (K+U) tau - B together with its dimension and its behaviour under rescaling of the family parameter, and the status of the notion. The item defines only; it asserts no conservation law, no existence of any symmetry of a given model, and no empirical content."
+physical_scope: "The symmetry vocabulary of the force model with a declared potential presentation in one inertial frame: symmetry data as triples (tau, xi, B) satisfying the Noether identity for the mechanical Lagrangian K - U of that presentation, which carries only the potential part when residual forces are present, strict data and their exact relation to the chart-level infinitesimal point symmetries, the charge M v . xi - (K+U) tau - B together with its dimension and its behaviour under rescaling of the family parameter, and the status of the notion. The item defines only; it asserts no conservation law, no existence of any symmetry of a given model, and no empirical content."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.4.1 'Noether's Theorem', printed pages 24-26 (PDF pages 30-32): a one-parameter family of maps q_i(t) -> Q_i(s,t) is a continuous symmetry when the s-derivative of the Lagrangian vanishes, and the conserved quantity is the momentum paired with the generator"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.4, chapter page 9 (PDF page 28): cyclic coordinates and the generalized momentum as an integral of motion, the Noether theorem named as the general statement"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.4, chapter pages 10-11 (PDF pages 28-29): cyclic coordinates and the generalized momentum as an integral of motion, the Noether theorem named as the general statement"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, second edition (MIT Press, 2014/2015), Section 1.8.5 'Noether's Theorem': parametric coordinate transformations, invariance of the Lagrangian and the Noether integral as the product of the momentum with the generator"
       url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
@@ -54,10 +54,14 @@ $U:I_{0}\times Q\to\mathbb R$ of class $C^{2}$ of dimension
 $\mu\ell^{2}\tau^{-2}$ with $F_{i}(t,x,v)=-\nabla_{x_{i}}U(t,x)+d_{i}(t,x,v)$,
 with residual forces $d=(d_{1},\dots,d_{N})$ of the standing regularity. Let
 $L=K-U$, $O:=I_{0}\times Q\times\mathbb R^{3N}$ and $\mathsf M$ be the
-mechanical Lagrangian, the chart domain and the mass operator of
+mechanical Lagrangian of the presentation, the chart domain and the mass operator of
 [[def-cm07-action-and-mechanical-lagrangian]], so that $L$ is of class $C^{2}$
-on the open set $O$ and $(O,L)$ is a time-dependent Lagrangian chart over
-every $[a,b]\times Q$ with $[a,b]\subseteq I_{0}$
+on the open set $O$. When $d\not\equiv0$, $L$ represents only the potential
+part and excludes the residual forces; its symmetry identity places no
+condition on $d$ and does not assert a symmetry of the full force map. When
+$d\equiv0$, $L$ is a Lagrangian of the model itself. When $Q\ne\varnothing$, $(O,L)$ is a time-dependent
+Lagrangian chart over every $[a,b]\times Q$ with $a<b$ and
+$[a,b]\subseteq I_{0}$
 ([[def-cm-time-dependent-lagrangian-and-action]]). Dimensions are read by
 [[def-cm01-units]], inner products and norms are Euclidean
 ([[def-euclidean-inner-product]]), and differentiability classes are those of
@@ -72,8 +76,8 @@ of $L$ are $(x,v)$, and $L_{t}$, $L_{x}$, $L_{v}$ are the gradients of $L$ in
 its three slots ([[def-jacobian-matrix-and-gradient]],
 [[def-directional-and-partial-derivatives]]).
 
-**(a) Symmetry datum.** A **symmetry datum of the model's mechanical
-Lagrangian** is a triple $(\tau,\xi,B)$ of maps
+**(a) Symmetry datum.** A **symmetry datum of the mechanical
+Lagrangian of the declared potential presentation** is a triple $(\tau,\xi,B)$ of maps
 
 $$\tau:I_{0}\times Q\to\mathbb R,\qquad \xi:I_{0}\times Q\to\mathbb R^{3N},\qquad B:I_{0}\times Q\to\mathbb R,$$
 
@@ -94,22 +98,26 @@ data on the whole state domain $O$.
 
 **(b) Strict data and point symmetries.** A symmetry datum is **strict**
 when $\tau\equiv0$; its identity reads
-$L_{x}\cdot\xi+L_{v}\cdot D_{t}\xi=D_{t}B$. If a strict datum has $\xi$
+$L_{x}\cdot\xi+L_{v}\cdot D_{t}\xi=D_{t}B$. The following chart
+identification is for $Q\ne\varnothing$. If a strict datum has $\xi$
 independent of $t$, then the pair $(\xi,B)$ is an **infinitesimal point
 symmetry of the chart $(O,L)$** in the sense of
 [[def-cm-infinitesimal-point-symmetry]]: that definition's identity,
 instantiated with $n=3N$ in the configuration slot, is verbatim
 $L_{x}(t,x,v)\cdot\xi(x)+L_{v}(t,x,v)\cdot D\xi(x)v=B_{t}(t,x)+B_{x}(t,x)\cdot v$.
 Conversely every infinitesimal point symmetry of the chart $(O,L)$ whose
-boundary function is defined on $I_{0}\times Q$ is a strict datum with $\xi$
-independent of $t$. A general datum is a **point symmetry with time
+generator and boundary function are of class $C^{2}$, with the boundary
+function defined on $I_{0}\times Q$, is a strict datum with $\xi$ independent
+of $t$. A general datum is a **point symmetry with time
 reparametrisation**: the family
 
 $$x_{i}\longmapsto x_{i}+s\,\xi_{i}(t,x),\qquad t\longmapsto t+s\,\tau(t,x)$$
 
 changes the coordinate velocity to first order by $D_{t}\xi-v\,D_{t}\tau$, and
-the identity says that the infinitesimal variation of $L$ along the family is
-the total time derivative $D_{t}B$ of the chart function $B$.
+the identity says that the first-order change of the action density
+$L\,dt$, expressed per unit of the original $dt$, is $D_{t}B$. The
+term $L D_t\tau$ accounts for the change of the time differential;
+the variation of $L$ alone equals $D_tB$ only when this term vanishes.
 
 **(c) Charge.** The **charge of the datum** is the function
 
@@ -155,12 +163,13 @@ page.
   $x\mapsto x+s\xi$: with an inverse-family convention, in which the
   transformed coordinate is written as a function of the old one by
   $x\mapsto x-s\xi$, the same identity holds with $C$ replaced by $-C$. The
-  mathematical items cited above and the sources use different parametrisation
-  conventions; the present definition fixes one and every item of this page
-  uses it. In particular the SICM Noether integral of Section 1.8.5 is the
-  momentum paired with the derivative of the transformed coordinate with
-  respect to the parameter, which for the rotation example equals minus the
-  angular momentum with the convention fixed here.
+  present convention gives $a\cdot J$ for the rotation generator
+  $\xi_i=a\times x_i$. In SICM Section 1.8.5, the rotation matrix in
+  Eq. (1.163) has derivative $(-y,x,0)$ at zero, whereas Eq. (1.168)
+  displays $(y,-x,0)$ and hence the negative angular momentum. Those
+  displayed formulas have a sign inconsistency; the coordinate formula
+  and the fixed generator, rather than that printed derivative, determine
+  the sign used here.
 
 - **Relation to the mathematical track.** The chart-level results
   [[def-cm-infinitesimal-point-symmetry]],
@@ -174,8 +183,8 @@ page.
 - **What a symmetry is not.** The identity constrains the potential: for the
   translation family with frozen generator $\xi=a$ and $B=0$ it fails at the
   state $(t,x,v)$ exactly where $a\cdot\nabla_{x}U(t,x)\ne0$, and for the
-  quadratic potential $U=\tfrac{k}{2}\lvert x\rvert^{2}$ it fails at every
-  nonzero state. A model may therefore possess the full kinematic group of
+  quadratic potential $U=\tfrac{k}{2}\lvert x\rvert^{2}$ with $k>0$ it fails
+  exactly where $a\cdot x\ne0$, since $a\cdot\nabla_xU=k\,a\cdot x$. A model may therefore possess the full kinematic group of
   Galilean frame changes and still admit no translation symmetry datum. The
   worked models of the companion page make this failure explicit.
 

@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 4
-deps: [thm-cm-forced-oscillator-sinusoidal-response, cor-mean-value-theorem, thm-chain-rule, thm-algebra-of-derivatives, lem-derivative-of-a-power, lem-of-square-monotone, lem-of-inverse-positive, def-interval]
+deps: [thm-cm-forced-oscillator-sinusoidal-response, cor-mean-value-theorem, thm-chain-rule, thm-algebra-of-derivatives, lem-derivative-of-a-power, lem-of-square-monotone, lem-of-inverse-positive, def-interval, thm-of-square-roots]
 dependency_roles:
   thm-cm-forced-oscillator-sinusoidal-response: mathematical-premise
   cor-mean-value-theorem: mathematical-premise
@@ -16,6 +16,7 @@ dependency_roles:
   lem-of-square-monotone: mathematical-premise
   lem-of-inverse-positive: mathematical-premise
   def-interval: mathematical-premise
+  thm-of-square-roots: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -54,13 +55,13 @@ $$A(\Omega_*)=\frac{2m|f_0|}{c\sqrt{4mk-c^2}} .$$
 
 [F2] Derivatives: for a differentiable $F$ with $F'>0$ on an interval, $F$ is strictly increasing there, and with $F'<0$ strictly decreasing, by the mean value theorem ([[cor-mean-value-theorem]]); polynomials are differentiated by the algebra of derivatives and the power rule, and composites by the chain rule. [thm-algebra-of-derivatives, lem-derivative-of-a-power, thm-chain-rule, def-interval]
 
-[F3] For $0<a<b$ one has $0<b^{-1}<a^{-1}$ and $0<\sqrt a<\sqrt b$, and $x\mapsto\sqrt x$ is strictly increasing on $[0,\infty)$ ([[lem-of-inverse-positive]], [[lem-of-square-monotone]]). [def-interval]
+[F3] For $0<a<b$ one has $0<b^{-1}<a^{-1}$ and $0<\sqrt a<\sqrt b$, and $x\mapsto\sqrt x$ is strictly increasing on $[0,\infty)$ ([[lem-of-inverse-positive]], [[lem-of-square-monotone]], with nonnegative roots supplied by [[thm-of-square-roots]]). [def-interval]
 
 ## Proof
 
-**Proof technique:** cases on the sign of the minimiser; compute the quadratic exactly, locate its vertex, and convert the monotonicity through the strictly decreasing maps $x\mapsto1/x$ and $x\mapsto\sqrt x$.
+**Proof technique:** cases on the sign of the minimiser; compute the quadratic exactly, locate its vertex, and convert the monotonicity through the strictly increasing square-root map followed by the strictly decreasing reciprocal map on positive arguments.
 
-1.1 Write $q(u)=(k-mu)^2+c^2u=m^2u^2+(c^2-2mk)u+k^2$ and $u_*=\frac{k}{m}-\frac{c^2}{2m^2}$. [assume-case 1, assume-case 2] Expanding $m^2(u-u_*)^2$ and using $-2m^2u_*=c^2-2mk$ gives $$q(u)=m^2(u-u_*)^2+\bigl(k^2-m^2u_*^2\bigr),\qquad q'(u)=2m^2(u-u_*),$$ and the constant is $\bigl(k^2-m^2u_*^2\bigr)=(k-mu_*)(k+mu_*)=\frac{c^2}{2m}\cdot\frac{4mk-c^2}{2m}=\frac{c^2(4mk-c^2)}{4m^2}$, because $k-mu_*=\frac{c^2}{2m}$ and $k+mu_*=\frac{4mk-c^2}{2m}$; in particular $q$ is strictly convex with unique global minimiser $u_*$ and $q(u_*)=\frac{c^2(4mk-c^2)}{4m^2}$. Also $u_*>0$ if and only if $c^2<2mk$; in this branch $4mk-c^2>0$, so $q(u_*)>0$. For every physically used $u\ge0$, $q(u)=(k-mu)^2+c^2u>0$: at $u=0$ it equals $k^2>0$, and at $u>0$ the second summand is positive. [given, algebra]
+1.1 Write $q(u)=(k-mu)^2+c^2u=m^2u^2+(c^2-2mk)u+k^2$ and $u_*=\frac{k}{m}-\frac{c^2}{2m^2}$. [assume-case 1, assume-case 2] Expanding $m^2(u-u_*)^2$ and using $-2m^2u_*=c^2-2mk$ gives $$q(u)=m^2(u-u_*)^2+\bigl(k^2-m^2u_*^2\bigr),\qquad q'(u)=2m^2(u-u_*),$$ and the constant is $\bigl(k^2-m^2u_*^2\bigr)=(k-mu_*)(k+mu_*)=\frac{c^2}{2m}\cdot\frac{4mk-c^2}{2m}=\frac{c^2(4mk-c^2)}{4m^2}$, because $k-mu_*=\frac{c^2}{2m}$ and $k+mu_*=\frac{4mk-c^2}{2m}$; in particular $q$ is a quadratic with positive leading coefficient and unique global minimiser $u_*$ and $q(u_*)=\frac{c^2(4mk-c^2)}{4m^2}$. Also $u_*>0$ if and only if $c^2<2mk$; in this branch $4mk-c^2>0$, so $q(u_*)>0$. For every $u\ge0$, $q(u)=(k-mu)^2+c^2u>0$: at $u=0$ it equals $k^2>0$, and at $u>0$ the second summand is positive. [given, algebra]
 
 2.1 Monotonicity of $\Omega\mapsto q(\Omega^2)$: by [F2], its derivative is $2\Omega\,q'(\Omega^2)=4m^2\Omega(\Omega^2-u_*)$. Hence if $u_*>0$ this derivative is negative on $(0,\Omega_*)$ and positive on $(\Omega_*,\infty)$, so $q(\Omega^2)$ is strictly decreasing on $[0,\Omega_*]$ and strictly increasing on $[\Omega_*,\infty)$ (strictness on the closed intervals follows from [F2] on every subinterval and continuity); if $u_*\le0$ the derivative is positive on $(0,\infty)$, so $q(\Omega^2)$ is strictly increasing on $[0,\infty)$. [step 1.1, F2]
 
@@ -68,4 +69,4 @@ $$A(\Omega_*)=\frac{2m|f_0|}{c\sqrt{4mk-c^2}} .$$
 
 ## Remarks
 
-- **The undamped case.** For $c=0$ the same computation gives $q(u)=(k-mu)^2$, whose zero is $u=k/m$, i.e. $\Omega=\omega_0=\sqrt{k/m}$; there the denominator of the steady-response formula vanishes and $A$ (the modulus of the response function) is unbounded above in every neighbourhood of $\omega_0$ meeting $[0,\infty)\setminus\{\omega_0\}$. Hence for $c=0$ the amplitude has no maximum on $[0,\infty)$; it is strictly increasing on $[0,\omega_0)$, which is the increasing branch that persists in the $c>0$ case above. This matches the resonant case of [[thm-cm-forced-oscillator-sinusoidal-response]] clause 2, where the response itself grows linearly in $t$.
+- **The undamped case.** For $c=0$ the same computation gives $q(u)=(k-mu)^2$, whose zero is $u=k/m$, i.e. $\Omega=\omega_0=\sqrt{k/m}$; there the denominator of the steady-response formula vanishes and $A$ (the modulus of the response function) is unbounded above in every neighbourhood of $\omega_0$ meeting $[0,\infty)\setminus\{\omega_0\}$. Hence for $c=0$ the amplitude has no maximum on $[0,\infty)$; it is strictly increasing on $[0,\omega_0)$, which is the increasing branch that persists in the $c>0$ case above. This matches the resonant case of [[thm-cm-forced-oscillator-sinusoidal-response]] clause 2, where the response has absolute values tending to infinity along the quarter-turn sequence when $f_0\ne0$.

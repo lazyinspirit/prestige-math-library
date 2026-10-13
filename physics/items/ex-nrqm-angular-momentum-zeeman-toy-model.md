@@ -64,14 +64,15 @@ $\omega:=\gamma B_{z}$. Then:
 
 (i) for every unit $f\in L^{2}(\mathbb R^{3};\mathbb C)$ and each sign, the
 product flow satisfies
-$$U_{Z}(t)\bigl(f\otimes e_{\pm}\bigr)=e^{\mp i\gamma B_{z}t/2}\bigl(e^{-itH_{0}/\hbar}f\bigr)\otimes e_{\pm}\qquad(t\in\mathbb R),$$
+$$U_{Z}(t)\bigl(f\otimes e_{\pm}\bigr)=e^{\pm i\gamma B_{z}t/2}\bigl(e^{-itH_{0}/\hbar}f\bigr)\otimes e_{\pm}\qquad(t\in\mathbb R),$$
 and the transverse spin means of such a product state precess as in
 [[pthm-nrqm-angular-momentum-zeeman-precession]]. If in addition
 $f\in D(H_{0})=W^{2,2}(\mathbb R^{3};\mathbb C)$, then
 $$H_{Z}\bigl(f\otimes e_{\pm}\bigr)=\bigl(H_{0}f\bigr)\otimes e_{\pm}\mp\frac{\gamma\hbar B_{z}}{2}\,f\otimes e_{\pm},\qquad \langle H_{Z}\rangle_{f\otimes e_{\pm}}:=\langle H_{Z}(f\otimes e_{\pm}),f\otimes e_{\pm}\rangle=\langle H_{0}f,f\rangle\mp\frac{\gamma\hbar B_{z}}{2};$$
 the displayed expectation is defined only for these domain vectors.
 
-(ii) **toy truncation.** Suppose in addition that, on a declared
+(ii) **toy truncation.** Fix a real energy parameter $E_0\in\mathbb R$
+in joules. Suppose in addition that, on a declared
 two-dimensional internal subspace, the free part is replaced by the scalar
 $E_{0}I$ (a truncation assumption of the toy model, not a theorem of the full
 model): then the truncated operator is
@@ -89,8 +90,8 @@ reduce to explicit matrix identities,
 $$V(t)^{*}\sigma_{1}V(t)=\cos(\omega t)\sigma_{1}+\sin(\omega t)\sigma_{2},\qquad V(t)^{*}\sigma_{2}V(t)=\cos(\omega t)\sigma_{2}-\sin(\omega t)\sigma_{1},$$
 with $V(t)=e^{-itH_{Z}^{(2)}/\hbar}e^{itE_{0}/\hbar}$;
 
-(iv) the toy model contains no driving field: it predicts a stationary
-relative phase, hence no spin flip between $e_{+}$ and $e_{-}$ under
+(iv) the toy model contains no driving field: its diagonal evolution preserves
+the two sector weights, hence there is no spin flip between $e_{+}$ and $e_{-}$ under
 $H_{Z}^{(2)}$ alone. Statements about spin-flip transitions, resonance or
 spectroscopy require a separately adopted drive or coupling, belong to the
 driven-dynamics and light-matter pages, and are not derived here. No
@@ -140,7 +141,7 @@ unitary group with $(e^{-itA/\hbar})^{*}=e^{itA/\hbar}$
 
 **Given:** The data of the example and [F1]-[F3].
 
-1.1 [Sector identities] By [F2] one has $S_{3}(f\otimes e_{\pm})=\pm\frac{\hbar}{2}f\otimes e_{\pm}$ and $H_{0}$ acts on the spatial factor only; hence, for $f\in D(H_{0})$, $H_{Z}(f\otimes e_{\pm})=(H_{0}f)\otimes e_{\pm}\mp\frac{\gamma\hbar B_{z}}{2}f\otimes e_{\pm}$, and taking the inner product with the unit vector $f\otimes e_{\pm}$ gives the displayed expectation. For every $f\in L^{2}$, not necessarily in $D(H_{0})$, [F1] gives the product-flow identity; the transverse means then precess as in the cited theorem, proving (i). [F1, F2, algebra]
+1.1 [Sector identities] By [F2] one has $S_{3}(f\otimes e_{\pm})=\pm\frac{\hbar}{2}f\otimes e_{\pm}$ and $H_{0}$ acts on the spatial factor only; hence, for $f\in D(H_{0})$, $H_{Z}(f\otimes e_{\pm})=(H_{0}f)\otimes e_{\pm}\mp\frac{\gamma\hbar B_{z}}{2}f\otimes e_{\pm}$, and taking the inner product with the unit vector $f\otimes e_{\pm}$ gives the displayed expectation. For every $f\in L^{2}$, not necessarily in $D(H_{0})$, [F1] gives the product-flow identity, with $e^{it\gamma B_zS_3/\hbar}e_\pm=e^{\pm i\gamma B_zt/2}e_\pm$ by [F2]; the transverse means then precess as in the cited theorem, proving (i). [F1, F2, algebra]
 
 2.1 [Toy levels and evolution] In the two-dimensional internal model with free part $E_{0}I$, the operator $H_{Z}^{(2)}=E_{0}I-\gamma B_{z}S_{3}$ is diagonal in $(e_{+},e_{-})$ with entries $E_{0}\mp\frac{\gamma\hbar B_{z}}{2}$ by [F2], so its eigenvalues are those entries and the signed difference is $\gamma\hbar B_{z}=\hbar\omega$; by [F3] the exponential is the displayed diagonal unitary, and the relative phase accumulates at the angular frequency $\omega$, which is (ii). [step 1.1, F2, F3, algebra]
 

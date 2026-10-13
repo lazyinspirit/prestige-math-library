@@ -124,7 +124,11 @@ the divergence of the ideal total.
   ([[def-cm15-asymptotic-data]] clause (iv),
   [[def-cm15-cross-section]] clause (iv)): it is not a count of detected
   events, not a probability per incident label, and not a property of any
-  apparatus. Under the cutoff preparation, the associated probability is the incident preimage area divided by $\pi b_{\max}^2$, with fixed energy and $J(b)=\sqrt{2\mu E}\,b$. No experiment is authored on this page, and no measured rate,
+  apparatus. For a specified branch and Borel angle window, the probability
+  per incident label of an impact parameter in that branch's preimage is its
+  incident preimage area within $D_{\max}=(0,b_{\max})\times(0,2\pi)$ divided by $\pi b_{\max}^2$, with fixed energy and
+  $J(b)=\sqrt{2\mu E}\,b$; this statement covers only the recorded branch
+  portions. No experiment is authored on this page, and no measured rate,
   uncertainty or statistical claim about nature is made here. A comparison
   would require a specified apparatus, sampling model and analysis, as
   [[rem-cm05-collision-scope]] requires of the collision claims of the

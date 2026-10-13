@@ -10,8 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-causal-curves-and-reachability, lem-gr-chronology-openness, lem-gr-position-vector-differential, lem-gr-joint-exponential-diffeomorphism, thm-gr-convex-normal-neighborhoods, thm-gr-normal-neighborhood-causal-cone, def-gr-normal-neighborhoods-and-position-vectors, thm-gr-local-geodesics-and-exponential-map, def-gr-metric-selected-connection, def-gr-smooth-lorentzian-objects, lem-timelike-cone-has-two-convex-components, def-causal-classification-of-lorentz-vectors, lem-gr-observer-pairing-with-future-causal-vectors, def-gr-observer-and-rest-space, lem-gr-causal-curve-calculus, lem-gr-parallel-transport-and-geodesic-speed, lem-gr-dominating-cone-bounds, def-continuity-real, def-c-r-and-smooth-maps-between-smooth-manifolds]
+deps: [def-dependent-choice, def-countable-choice, def-gr-causal-curves-and-reachability, lem-gr-chronology-openness, lem-gr-position-vector-differential, lem-gr-joint-exponential-diffeomorphism, thm-gr-convex-normal-neighborhoods, thm-gr-normal-neighborhood-causal-cone, def-gr-normal-neighborhoods-and-position-vectors, thm-gr-local-geodesics-and-exponential-map, def-gr-metric-selected-connection, def-gr-smooth-lorentzian-objects, lem-timelike-cone-has-two-convex-components, def-causal-classification-of-lorentz-vectors, lem-gr-observer-pairing-with-future-causal-vectors, def-gr-observer-and-rest-space, lem-gr-causal-curve-calculus, lem-gr-parallel-transport-and-geodesic-speed, lem-gr-dominating-cone-bounds, def-continuity-real, def-c-r-and-smooth-maps-between-smooth-manifolds]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   def-gr-causal-curves-and-reachability: mathematical-premise
   lem-gr-chronology-openness: mathematical-premise
   lem-gr-position-vector-differential: mathematical-premise
@@ -43,6 +45,10 @@ verification:
 
 ## Statement
 
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the absolutely continuous causal-curve
+calculus and the supplied causal results used below.
+
 Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold
 ([[def-gr-smooth-lorentzian-objects]]) with metric-selected connection
 $\nabla$ and the relations $\ll$, $\le$ of
@@ -61,7 +67,7 @@ $$I^+\bigl(J^+(\Omega)\bigr)=I^+(\Omega),\qquad I^-\bigl(J^-(\Omega)\bigr)=I^-(\
 for every $\Omega\subseteq M$, and dually
 $J^+\bigl(I^+(\Omega)\bigr)=I^+(\Omega)$.
 
-No choice principle is used.
+No choice principle beyond the stated assumptions is used.
 
 ## Facts & Assumptions
 
@@ -109,7 +115,7 @@ because the reversed null geodesic has past-directed null terminal tangent P(y,x
 
 ## Remarks
 
-- **What the proof uses.** Only the openness of chronology, the convex normal neighbourhood cone description, the smooth joint inverse exponential with its first-order differential, and one elementary cone computation. No completeness, no choice principle and no global causal condition is used; the argument is equally valid for every smooth Lorentzian manifold of dimension at least two.
+- **What the proof uses.** Only the openness of chronology, the convex normal neighbourhood cone description, the smooth joint inverse exponential with its first-order differential, and one elementary cone computation. No completeness or global causal condition is used; the stated choice premises are inherited from the local causal suppliers, and the argument is equally valid for every smooth Lorentzian manifold of dimension at least two.
 
 - **Use.** Clause (a) is the input that makes the chronological volume function strictly monotone in [[thm-gr-volume-time-function]], and clause (c) is used in [[thm-gr-cauchy-surface-implies-globally-hyperbolic]] to convert the closure of the causal relation into a chronological relation between two points of a Cauchy set.
 

@@ -6,11 +6,12 @@ title: "Rays, unit vectors and rank-one Hilbert projections"
 status: draft
 origin: pipeline
 dependency_level: 2
-deps: [def-nrqm-state-geometry-state-vectors-and-rays, lem-nrqm-state-geometry-normalization-and-phase-classes, lem-nrqm-composites-rank-one-operator-calculus, def-hilbert-orthogonal-projection, cor-finite-dimensional-subspaces-are-closed, def-normed-subspace, def-linear-combination-and-span, cor-inner-product-induces-a-norm, def-real-and-complex-inner-product-space]
+deps: [def-nrqm-state-geometry-state-vectors-and-rays, lem-nrqm-state-geometry-normalization-and-phase-classes, lem-nrqm-composites-rank-one-operator-calculus, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-orthogonal-projection, cor-finite-dimensional-subspaces-are-closed, def-normed-subspace, def-linear-combination-and-span, cor-inner-product-induces-a-norm, def-real-and-complex-inner-product-space]
 dependency_roles:
   def-nrqm-state-geometry-state-vectors-and-rays: mathematical-premise
   lem-nrqm-state-geometry-normalization-and-phase-classes: mathematical-premise
   lem-nrqm-composites-rank-one-operator-calculus: mathematical-premise
+  def-self-adjoint-positive-unitary-and-normal-operator: mathematical-premise
   def-hilbert-orthogonal-projection: mathematical-premise
   cor-finite-dimensional-subspaces-are-closed: mathematical-premise
   def-normed-subspace: mathematical-premise
@@ -23,7 +24,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 2 (updated July 2015), Sections 2.1 and 2.2.1, printed pages 4 and 8-9: every ray has a normalized representative, and a pure state of a qubit is the rank-one projector |psi><psi| on the ray of |psi>"
+    - title: "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 2 (updated July 2015), Sections 2.1, 2.3.1 and 2.3.2, printed pages 4 and 20-22: every ray has a normalized representative, and a pure state of a qubit is the rank-one projector |psi><psi| on the ray of |psi>"
       url: "https://preskill.caltech.edu/ph219/chap2_15.pdf"
     - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 1.3.4, printed page 12: the ket |psi> and the corresponding one-dimensional projection"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
@@ -56,7 +57,7 @@ is well defined and injective, and its image is exactly $\{T_{u,u}:u\in S(H)\}$.
 
 **Given:** A nonzero complex Hilbert space $H$; nonzero vectors $\psi,\varphi$; unit vectors $u,w$; the rank-one operators $T_{u,v}$.
 
-[F1] **Rank-one calculus** ([[lem-nrqm-composites-rank-one-operator-calculus]]): $T_{u,v}$ is bounded with $\|T_{u,v}\|=\|u\|\,\|v\|$, the assignment is linear in the first and conjugate-linear in the second variable, $T_{u,v}$ is trace class with $\|T_{u,v}\|_1=\|u\|\,\|v\|$ and $\operatorname{tr}(T_{u,v})=\langle u,v\rangle$, one has $T_{u,v}^{*}=T_{v,u}$ and $T_{x,x}\ge0$, for bounded $B$ one has $BT_{u,v}=T_{Bu,v}$ and $T_{u,v}B=T_{u,B^{*}v}$, for trace-class $S$ one has $ST_{u,v}=T_{Su,v}$ and $\operatorname{tr}(ST_{x,y})=\langle Sx,y\rangle$, and $(u,v)\mapsto T_{u,v}$ is trace-norm continuous.
+[F1] **Rank-one calculus** ([[lem-nrqm-composites-rank-one-operator-calculus]]): $T_{u,v}$ is bounded with $\|T_{u,v}\|=\|u\|\,\|v\|$, the assignment is linear in the first and conjugate-linear in the second variable, $T_{u,v}$ is trace class with $\|T_{u,v}\|_1=\|u\|\,\|v\|$ and $\operatorname{tr}(T_{u,v})=\langle u,v\rangle$, one has $T_{u,v}^{*}=T_{v,u}$, for bounded $B$ one has $BT_{u,v}=T_{Bu,v}$ and $T_{u,v}B=T_{u,B^{*}v}$, for trace-class $S$ one has $ST_{u,v}=T_{Su,v}$ and $\operatorname{tr}(ST_{x,y})=\langle Sx,y\rangle$, and $(u,v)\mapsto T_{u,v}$ is trace-norm continuous.
 
 [F2] **The state-space vocabulary** ([[def-nrqm-state-geometry-state-vectors-and-rays]]): $S(H)$ is the set of unit vectors, $H^{\times}$ the set of nonzero vectors, $[\psi]=\{z\psi:z\ne0\}$, $R(H)$ the set of rays, $\nu(\psi)=\|\psi\|^{-1}\psi$, and $U(1)$ the phase group.
 
@@ -66,11 +67,11 @@ is well defined and injective, and its image is exactly $\{T_{u,u}:u\in S(H)\}$.
 
 [F5] **The line spanned by a unit vector is closed** ([[def-linear-combination-and-span]], [[def-normed-subspace]], [[cor-finite-dimensional-subspaces-are-closed]]): $\mathbb Cu=\{zu:z\in\mathbb C\}$ is a linear subspace admitting the one-element basis $(u)$, hence a finite-dimensional normed subspace of $H$ and therefore closed in $H$.
 
-[F6] **Norm and pairing** ([[cor-inner-product-induces-a-norm]], [[def-real-and-complex-inner-product-space]]): $\|v\|\ge0$ with $\|v\|=0$ exactly for $v=0$, $\|z v\|=|z|\,\|v\|$; the pairing is linear in the first argument, conjugate-linear in the second and conjugate symmetric.
+[F6] **Norm, pairing and positivity** ([[cor-inner-product-induces-a-norm]], [[def-real-and-complex-inner-product-space]], [[def-self-adjoint-positive-unitary-and-normal-operator]]): $\|v\|\ge0$ with $\|v\|=0$ exactly for $v=0$, $\|z v\|=|z|\,\|v\|$; the pairing is linear in the first argument, conjugate-linear in the second and conjugate symmetric; and a bounded operator on any real or complex Hilbert space is positive when its quadratic form $\langle Tx,x\rangle$ is real and nonnegative for every $x$.
 
 ## Proof
 
-1.1 [(a) trace, positivity and scaling] By [F1], $T_{\psi,\psi}$ is trace class with $\|T_{\psi,\psi}\|_1=\|\psi\|^{2}$ and $\operatorname{tr}(T_{\psi,\psi})=\langle\psi,\psi\rangle=\|\psi\|^{2}$, it satisfies $T_{\psi,\psi}^{*}=T_{\psi,\psi}$ and $T_{\psi,\psi}\ge0$, and for every $x$ one has $\langle T_{\psi,\psi}x,x\rangle=\langle\langle x,\psi\rangle\psi,x\rangle=|\langle x,\psi\rangle|^{2}\ge0$ by [F6]; also $T_{\psi,\psi}\psi=\|\psi\|^{2}\psi\ne0$, so $T_{\psi,\psi}$ is nonzero. For $z\ne0$ the conjugate-linearity of [F1] gives $T_{z\psi,z\psi}=|z|^{2}T_{\psi,\psi}$; substituting $z=\|\psi\|^{-1}$ and using $\nu(\psi)=\|\psi\|^{-1}\psi$ gives $T_{\nu(\psi),\nu(\psi)}=\|\psi\|^{-2}T_{\psi,\psi}$, that is the displayed identity after multiplying by $\|\psi\|^{2}$. [given, F1, F2, F6, algebra]
+1.1 [(a) trace, positivity and scaling] By [F1], $T_{\psi,\psi}$ is trace class with $\|T_{\psi,\psi}\|_1=\|\psi\|^{2}$ and $\operatorname{tr}(T_{\psi,\psi})=\langle\psi,\psi\rangle=\|\psi\|^{2}$, and it satisfies $T_{\psi,\psi}^{*}=T_{\psi,\psi}$. For every $x\in H$, $\langle T_{\psi,\psi}x,x\rangle=\langle\langle x,\psi\rangle\psi,x\rangle=|\langle x,\psi\rangle|^{2}\ge0$ by [F6], so $T_{\psi,\psi}$ is positive under the general bounded-operator definition in [F6]; also $T_{\psi,\psi}\psi=\|\psi\|^{2}\psi\ne0$, so $T_{\psi,\psi}$ is nonzero. For $z\ne0$ the conjugate-linearity of [F1] gives $T_{z\psi,z\psi}=|z|^{2}T_{\psi,\psi}$; substituting $z=\|\psi\|^{-1}$ and using $\nu(\psi)=\|\psi\|^{-1}\psi$ gives $T_{\nu(\psi),\nu(\psi)}=\|\psi\|^{-2}T_{\psi,\psi}$, that is the displayed identity after multiplying by $\|\psi\|^{2}$. [given, F1, F2, F6, algebra]
 
 2.1 [(b) $T_{u,u}$ is the projection onto $\mathbb Cu$] Let $u\in S(H)$. The line $\mathbb Cu$ is a closed linear subspace by [F5]. For every $x$ one has $T_{u,u}x=\langle x,u\rangle u\in\mathbb Cu$, and $\langle x-T_{u,u}x,u\rangle=\langle x,u\rangle-\langle x,u\rangle\|u\|^{2}=0$ by [F6], so $x-T_{u,u}x\in(\mathbb Cu)^{\perp}$; by the characterisation of [F4] applied to $M=\mathbb Cu$, this says $T_{u,u}=P_{\mathbb Cu}$, so $T_{u,u}$ is a Hilbert orthogonal projection and in particular is nonzero with $T_{u,u}^{2}=T_{u,u}$ and $T_{u,u}^{*}=T_{u,u}$. [given, step 1.1, F1, F4, F5, F6, algebra]
 

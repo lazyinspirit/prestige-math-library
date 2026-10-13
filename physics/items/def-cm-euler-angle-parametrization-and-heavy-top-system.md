@@ -6,8 +6,13 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 4
-deps: [lem-cm-coordinate-rotation-matrices, lem-cm-skew-matrix-cross-product-correspondence, def-cm-special-orthogonal-group, lem-cm-so3-is-a-matrix-group, def-matrix-product-and-identity-matrix, def-sine-and-cosine-by-power-series, def-interval, def-derivative, def-ck-euclidean-maps-and-diffeomorphisms]
+deps: [def-pi-via-first-positive-cosine-zero, cor-pi-is-the-first-positive-sine-zero, thm-sine-and-cosine-derivatives, thm-algebra-of-derivatives, thm-chain-rule, lem-cm-coordinate-rotation-matrices, lem-cm-skew-matrix-cross-product-correspondence, def-cm-special-orthogonal-group, lem-cm-so3-is-a-matrix-group, def-matrix-product-and-identity-matrix, def-sine-and-cosine-by-power-series, def-interval, def-derivative, def-ck-euclidean-maps-and-diffeomorphisms]
 dependency_roles:
+  def-pi-via-first-positive-cosine-zero: mathematical-premise
+  cor-pi-is-the-first-positive-sine-zero: mathematical-premise
+  thm-sine-and-cosine-derivatives: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
+  thm-chain-rule: mathematical-premise
   lem-cm-coordinate-rotation-matrices: mathematical-premise
   lem-cm-skew-matrix-cross-product-correspondence: mathematical-premise
   def-cm-special-orthogonal-group: mathematical-premise
@@ -34,13 +39,13 @@ sources:
 
 **Euler-angle parametrization.** Let $R_z,R_y$ be the coordinate rotation matrices of [[lem-cm-coordinate-rotation-matrices]]. The **Euler-angle parametrization** is the map
 $$\Theta:\mathbb R\times(0,\pi)\times\mathbb R\longrightarrow SO(3),\qquad \Theta(\varphi,\theta,\psi):=R_z(\varphi)\,R_y(\theta)\,R_z(\psi),$$
-which is $SO(3)$-valued by [[lem-cm-coordinate-rotation-matrices]] and [[lem-cm-so3-is-a-matrix-group]]. The numbers $(\varphi,\theta,\psi)$ are the **Euler angles** and the open set $\mathbb R\times(0,\pi)\times\mathbb R$ is its **domain**; $\theta$ is restricted to the open interval $(0,\pi)$ so that $\sin\theta>0$. No injectivity and no chart or diffeomorphism property of $\Theta$ is asserted or used here, and no periodicity of the angles is imposed — the real parameters stand for themselves.
+which is $SO(3)$-valued by [[lem-cm-coordinate-rotation-matrices]] and [[lem-cm-so3-is-a-matrix-group]]. The numbers $(\varphi,\theta,\psi)$ are the **Euler angles** and the open set $\mathbb R\times(0,\pi)\times\mathbb R$ is its **domain**; $\theta$ is restricted to the open interval $(0,\pi)$ so that $\sin\theta>0$, with $\pi$ defined as twice the smallest positive cosine zero ([[def-pi-via-first-positive-cosine-zero]]) and positivity supplied by [[cor-pi-is-the-first-positive-sine-zero]]. No injectivity and no chart or diffeomorphism property of $\Theta$ is asserted or used here, and no periodicity of the angles is imposed — the real parameters stand for themselves.
 
 **Parameters.** Fix reals $A>0$, $C>0$, $m>0$, $d>0$ and $g>0$; they are mathematical parameters, not identified with any physical quantity in this item.
 
 **The heavy-top function.** Write $q=(\varphi,\theta,\psi)$ for a point of the domain and $v=(\varphi',\theta',\psi')$ for a triple of reals. The **heavy-top function** is
 $$L(q,v):=\tfrac12A\bigl(\theta'^2+\varphi'^2\sin^2\theta\bigr)+\tfrac12C\bigl(\psi'+\varphi'\cos\theta\bigr)^2-mgd\cos\theta,$$
-using the sine and cosine of [[def-sine-and-cosine-by-power-series]]. It is a composition of smooth functions of $(q,v)$ and is $C^\infty$ on the domain times $\mathbb R^3$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]); its relevant partial derivatives are, explicitly,
+using the sine and cosine of [[def-sine-and-cosine-by-power-series]]. Repeated application of the sine/cosine derivative identities ([[thm-sine-and-cosine-derivatives]]) and the finite sum, product and chain rules ([[thm-algebra-of-derivatives]], [[thm-chain-rule]]) gives continuous partial derivatives of every order, so it is $C^\infty$ on the domain times $\mathbb R^3$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]); its relevant partial derivatives are, explicitly,
 $$\partial_{\varphi'}L=A\varphi'\sin^2\theta+C\cos\theta\bigl(\psi'+\varphi'\cos\theta\bigr),\qquad \partial_\varphi L=0,$$
 $$\partial_{\theta'}L=A\theta',\qquad \partial_\theta L=A\varphi'^2\sin\theta\cos\theta-C\bigl(\psi'+\varphi'\cos\theta\bigr)\varphi'\sin\theta+mgd\sin\theta,$$
 $$\partial_{\psi'}L=C\bigl(\psi'+\varphi'\cos\theta\bigr),\qquad \partial_\psi L=0.$$

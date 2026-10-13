@@ -59,6 +59,6 @@ verification:
 
 ## Remarks
 
-- The parameter condition is a genuine restriction: an affine reparametrization $s\mapsto\alpha s+\beta$ of a trajectory again satisfies it only for $\alpha=1$, and free reparametrizations are not part of the model.
+- The parameter condition is a genuine restriction: under an affine reparametrization $s\mapsto\alpha s+\beta$ of a trajectory, the new parameter again equals the frame time only when $\alpha=1$ and $\beta=0$; free reparametrizations are not part of the model.
 - No causal or velocity restriction is imposed on classical trajectories by this definition; the framework is non-relativistic and sets no speed bound. Constraints imposed by a particular apparatus model are stated where that model is introduced.
 - **Dimensions of the derivatives.** The parameter $s=t(\gamma(s))$ has dimension $\tau$ and each coordinate $x_i$ has dimension $\ell$ under [[def-nrqm-framework-quantities-and-units]]. Therefore each coordinate velocity component $w_i=dx_i/ds$ has dimension $\ell\tau^{-1}$, and each coordinate acceleration component $a_i=d^2x_i/ds^2$ has dimension $\ell\tau^{-2}$. These are the dimensions of the frame-coordinate derivatives; they add no force law or speed bound.

@@ -39,9 +39,12 @@ time-oriented smooth Lorentzian four-manifold $(M,g,N)$ as in
 boundary, a Lorentzian metric $g$ of signature $(-,+,+,+)$ on $M$
 ([[def-smooth-manifold]]), and a time orientation $N$. Its points represent
 idealized physical events; the vector $N$ fixes which causal directions are
-future-directed; and the causal classification of tangent vectors along any
-worldline is the classification of the Lorentz vector spaces $(T_pM,g_p)$
-together with the future/past convention of the time orientation. The metric
+future-directed. At each event $p\in M$, every nonzero tangent vector $v\in T_pM$ is
+classified by the sign of $g_p(v,v)$ as in
+[[def-gr-smooth-lorentzian-objects]], and each nonzero causal vector is
+future- or past-directed according to the sign of $g_p(v,N_p)$. The zero
+vector is neither timelike, null, spacelike nor causal. This is a
+pointwise rule and does not require choosing a curve through $p$. The metric
 $g$ is the gravitational field of the model: it is the object that the field
 law of the framework constrains, and the curvature $R^g$ of the uniquely constructed torsion-free
 $g$-compatible connection $\nabla^g$ of
@@ -69,13 +72,18 @@ parameters enter through
 the unit conventions of [[def-gr-si-unit-and-coordinate-conventions]]; no
 numerical value of a constant is asserted here.
 
-**(iv) Smooth-branch restriction.** The fields of a model are defined on an
-open domain of $M$; the metric is $C^\infty$ on all of $M$ and $M$ has no
-boundary. Configurations in which a field fails to be smooth on a nonempty open
-set, in which matter is concentrated on a lower-dimensional set in a way that
-produces a distributional stress-energy tensor, or in which $M$ carries a
-boundary, are outside the stated smooth domain of the framework and require
-mathematics not supplied by these postulates.
+**(iv) Smooth-branch restriction.** Each field of a model is defined and
+$C^\infty$ at every point of its specified open domain in $M$; the metric is
+$C^\infty$ on all of $M$ and $M$ has no boundary. A field is smooth here when
+its component functions in the model's smooth coordinate and bundle charts
+are $C^\infty$ on that domain. Configurations with a field undefined or
+nonsmooth at any point of its stated domain are outside this smooth branch,
+even when the exceptional set has empty interior. Matter concentrated on a
+lower-dimensional set in a way that produces a distributional stress-energy
+tensor, and manifolds with boundary, are also outside this branch and require
+additional mathematics. A model may instead specify an open domain excluding
+an exceptional locus; its smooth-branch claims then apply only on that domain
+and assert no extension across the excluded locus.
 
 **(v) Status.** These are adopted assumptions. They are not derived from the
 mathematics of manifolds, from any symmetry principle, or from experiment; the

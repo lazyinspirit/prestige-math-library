@@ -150,4 +150,4 @@ Choose $\varepsilon(h)=C_1h$ with $C_1$ large enough to dominate the fixed match
 ## Remarks
 
 - **Convention note.** The cited tunnelling theorem is stated in the nondimensional convention standard in this run's controlled-dynamics mathematics, in which the second-order equation carries the small parameter $h$ and the factors $m,\hbar$ are numerical; the identification of [F3] makes that convention exact for the model's dimensionless equation. The physical exponent identity of the statement is then supplied by the nondimensionalisation lemma and involves no approximation.
-- **The exponential is only the leading factor.** The statement controls the correction by $\varepsilon(h)+e^{-2S/h}$; in particular the prefactor of the exponential is $1+O(\varepsilon)$ for a smooth barrier, and no statement about rectangular profiles (whose prefactor differs) is made.
+- **The exponential is only the leading factor.** The statement controls the correction by $\varepsilon(h)+e^{-2S/h}$; in particular the prefactor of the exponential is $1+O(\varepsilon)$ for a smooth barrier, and no statement about rectangular profiles (whose prefactor can differ) is made.

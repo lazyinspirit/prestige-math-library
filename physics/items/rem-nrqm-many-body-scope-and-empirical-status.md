@@ -57,7 +57,7 @@ sources:
         T and V can be computed for only very few Hamiltonians"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "I. Burmistrov and A. Lunkin, Lecture Notes on Statistical Mechanics
-        (HSE, January 10, 2023), Section 1.1.1 printed page 13: the remark that
+        (HSE, January 10, 2023), Section 1.1.3 printed page 14: the remark that
         the von Neumann entropy is conserved under the Liouville equation, and
         Section 1.1.4 printed pages 14-15: the maximal-entropy motivation for
         the Gibbs distribution"
@@ -73,8 +73,13 @@ The page declares and works with the finite-mode and spatial realizations of a
 ([[def-nrqm-many-body-framework-declared-fixed-n-model]]): a species sector of
 P6, a one-particle energy operator, a pair interaction and the self-adjoint
 restriction of the labelled Hamiltonian to the adopted symmetric or
-antisymmetric sector. Everything proved on the page is a conditional
-statement about such a declared model at declared parameters:
+antisymmetric sector. The page also treats separately declared
+number-variable free-mode spaces, including the one-mode and countable-mode
+occupation models of [[pthm-nrqm-many-body-thermal-occupation-predictions]],
+under reading (a)(ii) of
+[[post-nrqm-many-body-canonical-equilibrium-ensemble]]; these are additional
+model declarations, not realizations supplied by the fixed-$N$ definition.
+Every result is conditional on its own stated model and parameters:
 
 - the non-interacting finite-mode model is diagonal in the occupation basis
   with the stated occupation eigenvalues, partition sum and ground energy
@@ -82,18 +87,22 @@ statement about such a declared model at declared parameters:
 - the one-body readout of a bounded self-adjoint one-particle quantity has
   mean equal to $N$ times the pairing of the one-body reduced preparation
   with that quantity ([[pthm-nrqm-many-body-one-body-readout-law]]);
-- for two orthonormal orbitals and a repulsive Coulomb pair interaction the
-  spatially antisymmetric (spin-triplet) sector preparation has the lower
-  mean pair energy, with splitting the exchange integral
+- for two orthonormal orbitals satisfying the stated regularity and a repulsive
+  Coulomb pair interaction, the spatially antisymmetric (spin-triplet) sector
+  preparation has mean pair energy $D-X$, no greater than the spatially symmetric
+  (spin-singlet) preparation's $D+X$, where $D$ and $X\ge0$ are the direct and
+  exchange integrals of the cited theorem; the splitting is $2X$, and the
+  triplet's mean pair energy is strictly lower exactly when $X>0$
   ([[pthm-nrqm-many-body-exchange-energy-splitting]]);
 - in the finite-sector class the canonical preparation is the unique
   minimiser of the free-energy functional at the assigned
-  $\beta=1/(k_BT)$ ([[pthm-nrqm-many-body-thermal-equilibrium-characterization]]),
-  and the free-mode thermal occupation means are the Bose and Fermi factors
+  $\beta=1/(k_BT)$ ([[pthm-nrqm-many-body-thermal-equilibrium-characterization]]);
+- in the separately declared number-variable mode models, the free-mode
+  thermal occupation means are the Bose and Fermi factors
   with the stated product convergence criterion and dilute remainders
   ([[pthm-nrqm-many-body-thermal-occupation-predictions]]);
-- the model's unitary flow preserves the entropy of every declared
-  preparation and never maps a preparation different from the canonical one
+- in the finite-sector class, the model's unitary flow preserves the entropy
+  of every declared sector preparation and never maps a preparation different from the canonical one
   to it ([[pthm-nrqm-many-body-unitary-evolution-preserves-entropy]]).
 
 ## Adopted assumptions and parameters

@@ -38,7 +38,8 @@ physical_scope: "A scope remark on the numerical phase of a prediction pipeline
   finite-time discretization and additive per-step error bounds for the
   velocity-Verlet method, the analytic long-time energy estimates under their
   holomorphy, step-size and compact-retention hypotheses, and the strict
-  separation of these numerical bounds from the model-versus-nature error and
+  separation of these numerical bounds from any separately defined
+  model-to-system discrepancy and
   the observation and sampling errors. The item asserts no numerical result for
   a physical system and no all-time accuracy of any method."
 sources:
@@ -65,14 +66,21 @@ verification:
 The prediction map of an operational observable model
 ([[def-cm18-observable-model]]) is defined from the exact maximal motions of
 the force model. A numerical pipeline replaces those motions by a computed
-sequence, and at least five distinct errors must be kept apart: the
-**model-versus-nature error**, the difference between the model's exact
-motion and a physical system, about which the framework proves nothing; the
-**discretization error**, the difference between the computed sequence and
-the exact flow of the same model; the **implementation error**, the per-step
-residual of the arithmetic actually performed; the **observation error**
-$\varepsilon$ of the protocol; and the **sampling error**, the fluctuation of an estimator such as $\overline Y$ around its model mean in [[def-cm18-sampling-model]], under its adopted dependence and moment hypotheses. Only the second and third admit the certified statements below,
-and those statements are always about the model.
+sequence, and at least five distinct sources of discrepancy must be kept
+apart. A **model-to-system discrepancy** can be defined only after an
+application supplies a reconstructed physical trajectory $\chi:J\to Q$ in
+the same frame and a metric $d$ on $Q$: for a model motion $x:J\to Q$, one
+possible pointwise discrepancy is $t\mapsto d(x(t),\chi(t))$. This
+framework supplies neither $\chi$ nor $d$ and proves no bound on that
+discrepancy. The **discretization error** is the difference between a
+computed sequence and the exact flow of the same model; the
+**implementation error** is the per-step residual of the arithmetic
+actually performed; the **observation error** is $\varepsilon$ of the
+protocol; and the **sampling error** is the fluctuation of an estimator such
+as $\overline Y$ around its model mean in [[def-cm18-sampling-model]], under
+its adopted dependence and moment hypotheses. Only the discretization and
+implementation errors admit the certified statements below, and those
+statements are always about the model.
 
 ## Finite-time discretization error of velocity Verlet
 
@@ -97,9 +105,22 @@ set is part of the statement; no first-exit claim is made here.
 The implementation error is not analysed as floating-point arithmetic.
 Instead, fix a metric state set $(X,d)$, for example a subset of phase space with the Euclidean distance, on which every Verlet stage is defined and $V_h:X\to X$. Require a positive step $h>0$, a separately established map bound $d(V_h(x),V_h(y))\le(1+L_{\mathrm{map}}h)d(x,y)$ for all $x,y\in X$, $L_{\mathrm{map}}\ge0$, and computed points $x_j\in X$ with $x_0=z_0$ and $d(x_{j+1},V_h(x_j))\le\eta$. The exact scheme iterates are $z_{j+1}=V_h(z_j)$. [[lem-cm-roundoff-accumulation-in-one-step-schemes]] then gives
 $$d(x_n,z_n)\le\eta\frac{(1+L_{\mathrm{map}}h)^n-1}{L_{\mathrm{map}}h}\le\eta e^{L_{\mathrm{map}}T}\frac{T}{h}\qquad(nh\le T,\ L_{\mathrm{map}}>0),$$
-with $d(x_n,z_n)\le n\eta\le\eta T/h$ if $L_{\mathrm{map}}=0$. For a readout $F:X\to\mathbb R$ with $|F(x)-F(y)|\le\Lambda d(x,y)$, multiply these bounds by $\Lambda$. The constant $L_{\mathrm{map}}$ is a bound for the numerical map, not the exact-field derivative constant $L$ of the preceding section; that flow bound does not establish the map hypothesis.
-A Lipschitz readout of the protocol therefore converts a trajectory bound
-into a bound on the difference of the computed and exact prediction maps by multiplication with its Lipschitz constant, after combining discretization and implementation bounds by the triangle inequality on a common admissible set; a multi-time readout requires a bound in the declared product-state metric. The number $\eta$ is a
+with $d(x_n,z_n)\le n\eta\le\eta T/h$ if $L_{\mathrm{map}}=0$. For a readout $F:X\to\mathbb R$ with $0\le\Lambda<\infty$ and $|F(x)-F(y)|\le\Lambda d(x,y)$, multiply these bounds by $\Lambda$. The constant $L_{\mathrm{map}}$ is a bound for the numerical map, not the exact-field derivative constant $L$ of the preceding section; that flow bound does not establish the map hypothesis.
+To combine discretization and implementation bounds, take $X$ to be a
+subset of the declared numerical phase domain and additionally require
+$y_j\in X$ for $0\le j\le n$. Require either that $d$ is the Euclidean
+distance used for discretization, or a finite constant $c_d\ge0$ with
+$d(u,v)\le c_d\lVert u-v\rVert$ for all $u,v\in X$; in the Euclidean case
+set $c_d=1$. Let $D_n$ and $I_n$ denote the displayed discretization and
+implementation upper bounds, respectively, with all their hypotheses and a
+common positive step satisfied. Then the triangle inequality in $(X,d)$
+gives $d(x_n,y_n)\le d(x_n,z_n)+d(z_n,y_n)\le I_n+c_dD_n$.
+For the readout $F$ above, evaluated in these same numerical state
+coordinates, $|F(x_n)-F(y_n)|\le\Lambda(I_n+c_dD_n)$. A multi-time
+readout requires a Lipschitz bound in a declared product-state metric and
+comparison bounds in that metric for the ordered state tuples. A common
+underlying set alone supplies no comparison between metrics.
+The number $\eta$ is a
 **hypothesis on the per-step residual**, not a measurement of an arithmetic
 unit, and the lemma says nothing about the distribution of rounding.
 

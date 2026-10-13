@@ -139,7 +139,7 @@ $\sum_{m\in\mathbb Z}e^{-\sigma|m|}\le1+4/\sigma$
 **Proof technique:** direct; shift the full Fourier integrand, use the Cauchy
 bounds on strict coordinate margins, and sum the lattice shells.
 
-1.1 Fix all variables except one real angle $\vartheta_j$ and put [F1, F2, F6, given, algebra]
+1.1 Fix all variables except one real angle $\vartheta_j$ and put 
 $f_j(z)=g(I,\vartheta_1,\ldots,z,\ldots,\vartheta_n,\nu)e^{-ik_jz}$,
 with the absent parameter omitted in the phase-only case. Since $k_j\in\mathbb Z$
 and $g$ is $2\pi$-periodic, $f_j$ is periodic and holomorphic for
@@ -152,7 +152,7 @@ $|g_k(I,\nu)|\le M e^{-\delta|k|_1}$. For $0<\sigma<s$ take
 $\delta=s-\sigma$; for $\sigma=s$ the claimed bound is the trivial estimate
 $|g_k|\le M$. [F1, F2, F6, given, algebra]
 
-1.2 The number of signed integer vectors with $|k|_1=m$ is at most $2^n$ times [F8, given, algebra]
+1.2 The number of signed integer vectors with $|k|_1=m$ is at most $2^n$ times 
 the number of nonnegative integer $n$-tuples with sum $m$. Choosing the first
 $n-1$ entries, each between $0$ and $m$, gives at most
 $2^n(m+1)^{n-1}\le2^{2n-1}m^{n-1}\le4^nm^{n-1}$ vectors. Therefore
@@ -165,14 +165,14 @@ count. If $\tau\ge n-1$, then $m^{n-1-\tau}\le1$ and
 $\sum_{m\ge1}e^{-\sigma m}=1/(e^\sigma-1)\le1/\sigma$; this proves the
 negative-power bound. [F8, given, algebra]
 
-1.3 Products of local power series are local power series and satisfy the [F1, F4, given, algebra]
+1.3 Products of local power series are local power series and satisfy the 
 pointwise product bound. For a uniform limit on the full domain, continuity
 passes to the limit and every coordinate slice is a locally uniform limit of
 one-variable holomorphic functions; [F4] makes the limit separately
 holomorphic and hence holomorphic, while passing to the limit in the pointwise
 bound gives norm at most $M$. [F1, F4, given, algebra]
 
-2.1 For $0<\sigma\le1$ and $2\sigma<s$, the estimate of step 1.1 gives on [step 1.1, F4, F5, F6, F7, algebra]
+2.1 For $0<\sigma\le1$ and $2\sigma<s$, the estimate of step 1.1 gives on 
 $S_{s-2\sigma}$
 $$|g_k(I,\nu)e^{ik\cdot\vartheta}|\le M e^{-\sigma|k|_1}.$$
 The product of one-dimensional geometric sums in [F8] is at most
@@ -190,7 +190,7 @@ For joint-parameter data, the Fourier coefficient is holomorphic in $(I,\nu)$:
 its Riemann sums are holomorphic and converge uniformly on every compact subset
 of $B_r\times O_h(\Omega)$, so [F4] and separate holomorphy apply. [step 1.1, F4, F5, F6, F7, algebra]
 
-2.2 The coordinate Cauchy estimate [F3] on a radius-$\delta$ disc about [step 1.1, F3, given, algebra]
+2.2 The coordinate Cauchy estimate [F3] on a radius-$\delta$ disc about 
 $I_j$ gives the first action-derivative bound, and the same argument on the
 angle and parameter coordinates gives the other first-derivative bounds. For a
 second derivative in the same coordinate, [F3] with order $2$ gives the factor
@@ -198,7 +198,7 @@ $2$; for distinct coordinates, use the iterated Cauchy formula on the product
 of their coordinate circles, obtaining $M/(\delta_i\delta_j)$. This yields the
 stated action, angle, and mixed estimates on their strict smaller domains. [step 1.1, F3, given, algebra]
 
-2.3 Let $K\ge0$ and choose the coefficient-shift margin [step 1.1, step 1.2, F8, algebra]
+2.3 Let $K\ge0$ and choose the coefficient-shift margin 
 $\delta=s-\sigma/2$, which lies strictly between $0$ and $s$. On
 $S_{s-2\sigma}$ each discarded Fourier term is bounded by
 $M e^{-3\sigma|k|_1/2}$. For $|k|_1>K$,
@@ -206,7 +206,7 @@ $e^{-3\sigma|k|_1/2}\le e^{-\sigma K}e^{-\sigma|k|_1/2}$; summing with [F8]
 and step 1.2 gives the stated truncation bound, after absorbing $2^n$ into
 $C_n$. [step 1.1, step 1.2, F8, algebra]
 
-3.1 On any compact subset of the smaller open product in clause 1 there are [step 1.1, step 1.2, step 2.2, F4, algebra]
+3.1 On any compact subset of the smaller open product in clause 1 there are 
 positive action, angle, and (in the joint case) parameter margins to the
 boundary of the original domain. Apply step 1.1 with a fixed strictly smaller
 strip width, then apply the coordinate Cauchy estimates of step 2.2 on those
@@ -216,6 +216,7 @@ set. The shell comparison of step 1.2 makes these bounds summable. The
 Weierstrass test therefore gives locally uniform convergence of each
 termwise-differentiated series, and [F4] identifies those sums with the
 corresponding derivatives. [step 1.1, step 1.2, step 2.2, F4, algebra] ∎
+
 
 ## Remarks
 

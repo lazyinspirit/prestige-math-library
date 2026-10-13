@@ -1,0 +1,13 @@
+import {scanProofFiles} from '../../tools/proof-layout.mjs';
+import {readFileSync,readdirSync,writeFileSync} from 'node:fs';
+const run='physics-cm-qm-gr-79-2026-10-11';
+const base=`research/${run}-root-metadata-pass`;
+const dirs=readdirSync(base).filter(n=>{try{return JSON.parse(readFileSync(`${base}/${n}/report.json`,'utf8')).subjects.length===1551;}catch{return false;}}).sort();
+const dir=`${base}/${dirs.at(-1)}`,report=JSON.parse(readFileSync(`${dir}/report.json`,'utf8'));
+const items=scanProofFiles(report.subjects.map(id=>`items/${id}.md`),process.cwd());
+const errors=items.flatMap(item=>item.errors.map(error=>({file:item.file,...error})));
+const steps=items.reduce((sum,item)=>sum+item.rows.reduce((n,row)=>n+row.sourceSteps,0),0);
+writeFileSync(`${dir}/proof-layout.json`,JSON.stringify({items,errors,steps},null,2)+'\n');
+console.log(JSON.stringify({subjects:items.length,steps,errors:errors.length,evidence:`${dir}/proof-layout.json`}));
+for(const error of errors.slice(0,30))console.error(JSON.stringify(error));
+if(items.length!==1551||!steps||errors.length)process.exitCode=1;

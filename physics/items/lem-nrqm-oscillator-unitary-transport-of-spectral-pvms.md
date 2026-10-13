@@ -7,8 +7,9 @@ title: "Transport of spectral projection-valued measures along isometric bijecti
 status: draft
 origin: pipeline
 dependency_level: 3
-deps: [def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-inner-product-space, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-unbounded-integral-against-a-pvm, lem-nrqm-observables-spectral-support-and-outcome-law, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]
+deps: [def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-inner-product-space, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-unbounded-integral-against-a-pvm, lem-nrqm-observables-spectral-support-and-outcome-law, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]
 dependency_roles:
+  def-resolvent-and-spectrum-of-a-closed-unbounded-operator: mathematical-premise
   def-axiom-of-choice: mathematical-premise
   def-countable-choice: mathematical-premise
   def-hilbert-space: mathematical-premise
@@ -54,23 +55,27 @@ $$\mu^{T'}_{Ux}(B):=\|E(B)Ux\|_K^2=\|E_T(B)x\|_H^2=:\mu^{T}_x(B)\qquad(B\subsete
 
 **Given:** complex Hilbert spaces $H,K$; a bijective linear isometry $U:H\to K$; a self-adjoint operator $T$ on $H$ with spectral projection-valued measure $E_T$; the operator $T'$ defined in the Statement; a real number $\lambda$ and Borel sets $B,B_n\subseteq\mathbb R$.
 
-[F1] **Spectral theorem.** $E_T$ is the unique regular projection-valued measure on the Borel $\sigma$-algebra of $\mathbb R$ with
+[F1] **Spectral theorem on a nonzero space.** When $H\ne\{0\}$, $E_T$ is the unique regular projection-valued measure on the Borel $\sigma$-algebra of $\mathbb R$ with
 $$D(T)=\Bigl\{x\in H:\int_{\mathbb R}\lambda^2\,dE_{T,x}(\lambda)<\infty\Bigr\},\qquad Tx=\int_{\mathbb R}\lambda\,dE_T(\lambda)x\ \ (x\in D(T)),$$
 where $E_{T,x}(B)=\langle E_T(B)x,x\rangle$; conversely, if a regular projection-valued measure $E$ on $\mathbb R$ satisfies the two displayed identities for an operator $S$ in place of $T$, then $E$ is the spectral projection-valued measure of the self-adjoint operator $S$ ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[def-unbounded-integral-against-a-pvm]]).
 
 [F2] **Projection-valued measures and their scalar measures.** $E_T(B)$ is an orthogonal projection for every Borel $B$, $E_T(\varnothing)=0$, $E_T(\mathbb R)=I$, $E_T(B\cap C)=E_T(B)E_T(C)$, and for pairwise disjoint $B_n$ with union $B$ one has $E_T(B)x=\sum_nE_T(B_n)x$ in norm for every $x$; the scalar pairing $E_{T,x,y}(B):=\langle E_T(B)x,y\rangle$ is a finite complex measure and $E_{T,x}(B):=E_{T,x,x}(B)=\|E_T(B)x\|^2\ge0$; the regularity of $E_T$ means that every $E_{T,x}$ is a regular Borel measure ([[def-projection-valued-measure]], [[lem-scalar-and-complex-measures-from-a-pvm]]).
 
-[F3] **Spectrum as support.** For the self-adjoint operator $T$ with spectral projection-valued measure $E_T$ one has $E_T(\mathbb R\setminus\sigma(T))=0$ and $E_T(V)\ne0$ for every nonempty relatively open $V\subseteq\sigma(T)$ ([[lem-nrqm-observables-spectral-support-and-outcome-law]] clause (a)).
+[F3] **Spectrum as support.** On a nonzero complex Hilbert space, for the self-adjoint operator $T$ with spectral projection-valued measure $E_T$ one has $E_T(\mathbb R\setminus\sigma(T))=0$ and $E_T(V)\ne0$ for every nonempty relatively open $V\subseteq\sigma(T)$ ([[lem-nrqm-observables-spectral-support-and-outcome-law]] clause (a)).
 
 [F4] **The adjoint.** For a densely defined operator $S$ on $H$, a vector $y\in H$ lies in $D(S^*)$ exactly when $x\mapsto\langle Sx,y\rangle$ is bounded on $(D(S),\|\cdot\|)$; then $S^*y$ is the unique $w\in H$ with $\langle Sx,y\rangle=\langle x,w\rangle$ for every $x\in D(S)$; and $S$ is self-adjoint exactly when $S=S^*$, that is $D(S)=D(S^*)$ and the two actions agree ([[def-adjoint-of-a-densely-defined-unbounded-operator]], [[def-symmetric-self-adjoint-and-essentially-self-adjoint]]).
 
 [F5] **Inner-product calculus.** The pairing is linear in the first argument and conjugate-linear in the second, $\|u\|^2=\langle u,u\rangle$, and $|\langle u,v\rangle|\le\|u\|\,\|v\|$ ([[def-inner-product-space]], [[def-hilbert-space]], [[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]).
 
+[F6] **Zero-space spectrum.** The resolvent set consists of those $z\in\mathbb C$ for which $zI-T:D(T)\to H$ is bijective with bounded inverse; its complement is $\sigma(T)$. On $H=\{0\}$ every shift is the unique bijection with bounded inverse, so $\sigma(T)=\varnothing$ ([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]).
+
 ## Proof
 
-**Given:** the data of the Statement and [F1]-[F5].
+**Given:** the data of the Statement and [F1]-[F6].
 
 1.1 [The inverse is a linear isometry] Since $U$ is bijective, $U^{-1}$ exists; it is linear because $U$ is linear. For $a=Ux$ and $b=Uy$ in $K$, $\langle U^{-1}a,U^{-1}b\rangle_H=\langle x,y\rangle_H=\langle Ux,Uy\rangle_K=\langle a,b\rangle_K$; hence $U^{-1}$ is isometric, and so is $U$, so $\|Ux\|_K=\|x\|_H$ for every $x\in H$. [given, F5]
+
+1.2 [Zero-space case] If $H=\{0\}$, bijectivity of $U$ gives $K=\{0\}$. The domains of $T$ and $T'$ are the zero space; their actions and adjoints are the unique zero operator by [F4], so clause (a) holds. Every $E_T(B)$ and $E(B)$ is that operator; the PVM identities and scalar regularity hold directly, and the integral of the coordinate function has domain $\{0\}$ and zero action by [[def-unbounded-integral-against-a-pvm]], so this unique PVM is the spectral PVM of $T'$, proving (b). There are no unit vectors, so (c) is vacuous; [F6] gives $\sigma(T')=\sigma(T)=\varnothing$, proving (d). For the remaining steps assume $H\ne\{0\}$, hence $K\ne\{0\}$, so [F1] and [F3] apply. [given, F2, F4, F6]
 
 2.1 [$E$ is a projection-valued measure] For a Borel set $B$ define $E(B):=UE_T(B)U^{-1}\in\mathcal B(K)$. It is an orthogonal projection: $E(B)^2=UE_T(B)U^{-1}UE_T(B)U^{-1}=E(B)$ and $\langle E(B)a,b\rangle_K=\langle E_T(B)U^{-1}a,U^{-1}b\rangle_H=\langle U^{-1}a,E_T(B)U^{-1}b\rangle_H=\langle a,E(B)b\rangle_K$ for all $a,b\in K$, using the isometry of $U^{-1}$ and the self-adjointness of $E_T(B)$. Moreover $E(\varnothing)=0$, $E(\mathbb R)=I$, $E(B\cap C)=E(B)E(C)$, and for pairwise disjoint $B_n$ with union $B$, $\bigl\|E(B)a-\sum_{n\le N}E(B_n)a\bigr\|_K=\bigl\|E_T(B)U^{-1}a-\sum_{n\le N}E_T(B_n)U^{-1}a\bigr\|_H\to0$ by [F2]. Hence $E$ is a projection-valued measure on the Borel sets of $\mathbb R$. [given, step 1.1, F2]
 

@@ -49,7 +49,7 @@ Under this hypothesis each fibre $G(t,\cdot)^{-1}(0)$ is a regular level set and
 is a regular point in the sense of [[def-regular-critical-points-values-and-level-sets]].
 
 **Constraint set and admissible data.** Fix a symmetric positive definite matrix
-$M\in M_n(\mathbb R)$ ([[def-invertible-matrix-and-general-linear-group]]) and a continuous map
+$M\in M_n(\mathbb R)$, meaning $M^{\mathsf T}=M$ and $u^{\mathsf T}Mu>0$ for every $0\ne u\in\mathbb R^n$, and a continuous map
 $f:O\times\mathbb R^n\to\mathbb R^n$, the **given force**. A map $q:I\to\mathbb R^n$ on an open
 interval $I\subseteq\mathbb R$ ([[def-interval]]) is a **constrained curve** when
 
@@ -87,9 +87,11 @@ $\delta\in V(t,q)$, every ideal-constraint motion satisfies the **d'Alembert con
 $$\bigl(Mq''(t)-f(t,q(t),q'(t))\bigr)\cdot\delta=0\qquad\text{for every }\delta\in V(t,q(t)),$$
 
 i.e. the reaction performs no virtual work; the converse implication, that every curve satisfying
-the d'Alembert condition is an ideal-constraint motion with a *unique* multiplier, together with
-uniqueness of the resulting acceleration, is the content of
-[[lem-cm-constraint-multipliers-and-accelerations]] and is not assumed here.
+the d'Alembert condition is an ideal-constraint motion with a *unique* multiplier for its given
+reaction, is the content of [[lem-cm-constraint-multipliers-and-accelerations]] and is not assumed
+here. Determination of the reaction and acceleration additionally uses the twice-differentiated
+constraint, as in [[prop-cm-ideal-holonomic-system-in-a-time-dependent-chart]] under its stated
+regularity hypotheses.
 
 **Scope.** The definition is chartwise and time-dependent: the constraint may depend on $t$
 (rheonomic case), its velocity condition is the fixed-time linearisation recorded above, and no
@@ -102,8 +104,7 @@ $G_q^{\mathsf T}\lambda$ enters the equations of motion.
 ## Remarks
 
 - The definition covers the classical examples: a planar pendulum is $n=2$, $k=1$,
-  $G(q)=|q|^2-l^2$ on the chart $\{(x,y):y\ne0\}$ or on all of $\mathbb R^2$ with
-  $G_q\ne0$ off the origin; a rolling disk in the plane with configuration $(x,\theta)$ is
+  $G(q)=|q|^2-l^2$ with $l>0$ on the chart $\{(x,y):y\ne0\}$ or on $\mathbb R^2\setminus\{0\}$, where $G_q=2q^{\mathsf T}\ne0$; a rolling disk in the plane with configuration $(x,\theta)$ is
   $G(q)=x-a\theta$, so that in that planar special case the constraint is holonomic, while
   general three-dimensional rolling is not reducible to a single level set. These examples are
   worked out on the companion page.

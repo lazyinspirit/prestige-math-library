@@ -33,7 +33,7 @@ verification:
 
 ## Statement
 
-For a finite repeated-observation model of [[def-cm-iid-sampling-model]] with $n\ge1$ IID square-integrable real random variables $Y_1,\ldots,Y_n$ on one probability space, common mean $\mu$ and variance $\sigma^2$, put $\overline Y=n^{-1}\sum_{k=1}^nY_k$. Then
+For a finite repeated-observation model of [[def-cm-iid-sampling-model]] with $n\ge1$, write its variables as $Y_1,\ldots,Y_n$, where $Y_i$ here denotes the supplier's $Y_{i-1}$ for $1\le i\le n$. They are IID square-integrable real random variables on one probability space, with common mean $\mu$ and variance $\sigma^2$. Put $\overline Y=n^{-1}\sum_{k=1}^nY_k$. Then
 $$E[\overline Y]=\mu,\qquad E|\overline Y-\mu|^2=\frac{\sigma^2}{n},\qquad \mathbb P(|\overline Y-\mu|\ge a)\le\frac{\sigma^2}{na^2}\quad(a>0).$$
 No extension to an infinite IID sequence is required; no convergence assertion is made for a single finite family.
 

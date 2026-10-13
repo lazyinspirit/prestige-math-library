@@ -198,48 +198,13 @@ atom beyond the tested identification of clause (e) of the model definition.
 
 [F3] **Spectral-measure transfer under positive scaling.** If $A$ is self-adjoint with spectral PVM $E_A$ and $c>0$, the PVM of $cA$ is $E_{cA}(B)=E_A(c^{-1}B)$ for every Borel $B$ ([[lem-nrqm-central-positive-scaling-spectral-measure]] clauses (b), (c)).
 
-[F4] **Dilation and center Fourier multiplier.** For $c>0$, the map
-$D_ch(E):=c^{-1/2}h(E/c)$ is unitary from $L^{2}((0,\infty),d\lambda)$
-to the correspondingly scaled $L^{2}((0,\infty),dE)$; explicitly
-$D_c^{-1}g(\lambda)=c^{1/2}g(c\lambda)$. The one-dimensional
-change-of-variables formula gives its norm identity, and direct substitution
-gives $D_cM_fD_c^{-1}=M_{f(E/c)}$ for bounded Borel $f$, where $M_f$ denotes
-the maximal multiplication operator (bounded here) by $f$. On
-$L^{2}(\mathbb R^{3}_{R})$ the $2\pi$-normalized Fourier transform sends
-$T_R$ to multiplication by $\tau_R(\xi):=2\pi^{2}\hbar^{2}|\xi|^{2}/M$
-and $P_{R,j}$ to multiplication by $2\pi\hbar\xi_j$. Their maximal
-multiplier domains are $\{g:\tau_Rg\in L^2\}$ and
-$\{g:\xi_jg\in L^2\}$ respectively; the corresponding real multiplication
-operators are self-adjoint on these maximal domains. Tensoring the transform
-with the identity gives the unitary partial Fourier transform on the composite
-$L^2$ space and the maximal weak-derivative domain for $P_{R,j}\otimes I$.
-Spheres in $\mathbb R^{3}_{\xi}$ are Lebesgue-null by the polar-coordinate
-formula; Tonelli applies to the $\xi$ and $E$ product measure
-([[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]], [[thm-plancherel]], [[lem-weak-derivatives-are-polynomial-fourier-multipliers]], [[def-weak-derivative-of-a-locally-integrable-function]], [[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]], [[thm-polar-coordinates-formula-for-lebesgue-measure]], [[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[lem-nrqm-composites-euclidean-l2-product-unitary]]).
+[F4] **Dilation and center Fourier multiplier.** For $c>0$, the map $D_ch(E):=c^{-1/2}h(E/c)$ is unitary from $L^{2}((0,\infty),d\lambda)$ to the correspondingly scaled $L^{2}((0,\infty),dE)$; explicitly $D_c^{-1}g(\lambda)=c^{1/2}g(c\lambda)$. The one-dimensional change-of-variables formula gives its norm identity, and direct substitution gives $D_cM_fD_c^{-1}=M_{f(E/c)}$ for bounded Borel $f$, where $M_f$ denotes the maximal multiplication operator (bounded here) by $f$. On $L^{2}(\mathbb R^{3}_{R})$ the $2\pi$-normalized Fourier transform sends $T_R$ to multiplication by $\tau_R(\xi):=2\pi^{2}\hbar^{2}|\xi|^{2}/M$ and $P_{R,j}$ to multiplication by $2\pi\hbar\xi_j$. Their maximal multiplier domains are $\{g:\tau_Rg\in L^2\}$ and $\{g:\xi_jg\in L^2\}$ respectively; the corresponding real multiplication operators are self-adjoint on these maximal domains. Tensoring the transform with the identity gives the unitary partial Fourier transform on the composite $L^2$ space and the maximal weak-derivative domain for $P_{R,j}\otimes I$. Spheres in $\mathbb R^{3}_{\xi}$ are Lebesgue-null by the polar-coordinate formula; Tonelli applies to the $\xi$ and $E$ product measure ([[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]], [[thm-plancherel]], [[lem-weak-derivatives-are-polynomial-fourier-multipliers]], [[def-weak-derivative-of-a-locally-integrable-function]], [[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]], [[thm-polar-coordinates-formula-for-lebesgue-measure]], [[thm-tonelli-theorem-for-sigma-finite-product-spaces]], [[lem-nrqm-composites-euclidean-l2-product-unitary]]).
 
-[F5] **Two-body decomposition.** $\Phi$ is a linear isomorphism with
-$|\det\Phi|=1$, $U_{\Phi}$ is unitary, and
-$U_{\Phi}H_{2}U_{\Phi}^{-1}=T_{R}\otimes I+I\otimes C_{\mu}$ under the
-identification $L^{2}(\mathbb R^{6})\cong
-L^{2}(\mathbb R^{3}_{R})\widehat\otimes L^{2}(\mathbb R^{3}_{r})$;
-$H_{2}$ is self-adjoint on $H^{2}(\mathbb R^{6};\mathbb C)$ and
-$C_{\mu}=-(\hbar^{2}/2\mu)\Delta-\kappa/|\cdot|$ is the one-centre Coulomb
-operator with mass parameter $\mu$ ([[thm-nrqm-coulomb-two-body-reduced-mass]]
-clauses (a)-(c), [[lem-nrqm-composites-euclidean-l2-product-unitary]]).
+[F5] **Two-body decomposition.** $\Phi$ is a linear isomorphism with $|\det\Phi|=1$, $U_{\Phi}$ is unitary, and $U_{\Phi}H_{2}U_{\Phi}^{-1}=T_{R}\otimes I+I\otimes C_{\mu}$ under the identification $L^{2}(\mathbb R^{6})\cong L^{2}(\mathbb R^{3}_{R})\widehat\otimes L^{2}(\mathbb R^{3}_{r})$; $H_{2}$ is self-adjoint on $H^{2}(\mathbb R^{6};\mathbb C)$ and $C_{\mu}=-(\hbar^{2}/2\mu)\Delta-\kappa/|\cdot|$ is the one-centre Coulomb operator with mass parameter $\mu$ ([[thm-nrqm-coulomb-two-body-reduced-mass]] clauses (a)-(c), [[lem-nrqm-composites-euclidean-l2-product-unitary]]).
 
-[F6] **One-centre results with mass $\mu$.** The one-centre Coulomb model
-with parameters $(\hbar,\mu,\kappa)$ has bound energies
-$\mathcal E_{n}=-\frac{\mu\kappa^{2}}{2\hbar^{2}n^{2}}$, $n\ge1$, the
-eigenspace at $\mathcal E_{n}$ having dimension $n^{2}$ and consisting of
-the transported Laguerre solutions, with the radial and position readings of
-the one-centre items ([[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]]
-clauses (a), (b), [[pthm-nrqm-central-coulomb-bound-state-radial-distributions]]
-clauses (a), (c)).
+[F6] **One-centre results with mass $\mu$.** The one-centre Coulomb model with parameters $(\hbar,\mu,\kappa)$ has bound energies $\mathcal E_{n}=-\frac{\mu\kappa^{2}}{2\hbar^{2}n^{2}}$, $n\ge1$, the eigenspace at $\mathcal E_{n}$ having dimension $n^{2}$ and consisting of the transported Laguerre solutions, with the radial and position readings of the one-centre items ([[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]] clauses (a), (b), [[pthm-nrqm-central-coulomb-bound-state-radial-distributions]] clauses (a), (c)).
 
-[F7] **Stationary states.** For an assigned energy observable, a nonzero
-vector is an eigenvector if and only if its pure preparation is stationary
-([[pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation]]
-clause (c), [[def-nrqm-autonomous-dynamics-framework-evolution]]).
+[F7] **Stationary states.** For an assigned energy observable, a nonzero vector is an eigenvector if and only if its pure preparation is stationary ([[pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation]] clause (c), [[def-nrqm-autonomous-dynamics-framework-evolution]]).
 
 ## Proof
 
@@ -259,21 +224,12 @@ clause (c), [[def-nrqm-autonomous-dynamics-framework-evolution]]).
 
 4.1 [No point spectrum and channel thresholds] Suppose an eigenvector at $\Lambda$ existed in the product representation. In a bound channel its Fourier component would vanish outside the level set $\{\xi:\tau_R(\xi)=\Lambda-\mathcal E_n\}$; this set is empty, a point, or a sphere, hence has Lebesgue measure zero by [F4]. In a continuum channel its component would be supported on $\{(\xi,E):E=\Lambda-\tau_R(\xi)\}$; every fixed-$\xi$ section in $E$ is empty or a singleton and has measure zero, so Tonelli [F4] makes this measurable graph null in the product measure. Every channel component is therefore zero, proving that $H_2$ has no eigenvalues. For real $\Lambda\in[\mathcal E_1,0)$, the range of $H_2-\Lambda I$ is dense because its orthogonal complement is $\ker(H_2-\Lambda I)^{*}=\ker(H_2-\Lambda I)=\{0\}$. If it were onto, the inverse map from $L^{2}(\mathbb R^{6})$ to $D(H_2)$ with the graph norm would have closed graph and would be bounded by [[thm-closed-graph-theorem]]; then $\Lambda$ would be in the resolvent as defined by [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]], contradicting step 3.1. Thus $H_2-\Lambda I$ has dense but non-surjective range; this is the continuous spectrum of the self-adjoint operator, proving the continuous-spectrum clause of (c). Each relative bound energy $\mathcal E_n$ is the lower endpoint of its bound channel $[\mathcal E_n,\infty)$, so it is a channel threshold and not a total eigenvalue. This completes (c). [step 2.1, step 3.1, F4, F5, algebra]
 
-5.1 [Lifted total momentum on the composite state space] In the partial Fourier representation of [F4], $P_{R,j}$ is the real multiplier $2\pi\hbar\xi_j$ on its maximal domain. Therefore $P_{R,j}\otimes I$ is self-adjoint on the maximal weak-derivative domain in the product space, and conjugation by $U_\Phi$ gives exactly $\widetilde P_{R,j}$ and $D(\widetilde P_{R,j})$ stated in (d). If $\widetilde P_{R,j}\Psi=p\Psi$, then for $F=U_\Phi\Psi$ its partial Fourier transform satisfies $$(2\pi\hbar\xi_j-p)\widehat F(\xi,r)=0\quad\text{for almost every }(\xi,r).$$ [F4, F5, F7, step 4.1, algebra]
-It is supported on the hyperplane $\xi_j=p/(2\pi\hbar)$, which is null in $\mathbb R^3_\xi$; Tonelli over the remaining momentum and relative variables gives $\widehat F=0$, hence $\Psi=0$. The multiplier has momentum dimension $[\hbar][\xi_j]=\mathrm{kg\,m\,s^{-1}}$. This proves the total-momentum assertion of (d). Since step 4.1 excludes every eigenvector of $H_2$, the stationary-state criterion [F7] also excludes a stationary preparation from any nonzero centre-of-mass/relative-bound product. [F4, F5, F7, step 4.1, algebra]
+5.1 [Lifted total momentum on the composite state space] In the partial Fourier representation of [F4], $P_{R,j}$ is the real multiplier $2\pi\hbar\xi_j$ on its maximal domain. Therefore $P_{R,j}\otimes I$ is self-adjoint on the maximal weak-derivative domain in the product space, and conjugation by $U_\Phi$ gives exactly $\widetilde P_{R,j}$ and $D(\widetilde P_{R,j})$ stated in (d). If $\widetilde P_{R,j}\Psi=p\Psi$, then for $F=U_\Phi\Psi$ its partial Fourier transform satisfies $$(2\pi\hbar\xi_j-p)\widehat F(\xi,r)=0\quad\text{for almost every }(\xi,r).$$ It is supported on the hyperplane $\xi_j=p/(2\pi\hbar)$, which is null in $\mathbb R^3_\xi$; Tonelli over the remaining momentum and relative variables gives $\widehat F=0$, hence $\Psi=0$. The multiplier has momentum dimension $[\hbar][\xi_j]=\mathrm{kg\,m\,s^{-1}}$. This proves the total-momentum assertion of (d). Since step 4.1 excludes every eigenvector of $H_2$, the stationary-state criterion [F7] also excludes a stationary preparation from any nonzero centre-of-mass/relative-bound product. [F4, F5, F7, step 4.1, algebra]
 
 6.1 [Assembly and scope] Step 1.1 gives (a) and (b), steps 2.1-4.1 give (c), step 5.1 gives the total-momentum assertion of (d), and step 2.2 gives (e). Only the declared two-body model, P1, P2, P4, P5 and the cited mathematics were used, so (f) holds and no empirical identification, measured parameter, transition, photon or formation dynamics is asserted. [step 1.1, step 2.1, step 3.1, step 4.1, step 5.1, step 2.2] ∎
 
 
 ## Remarks
 
-- **Why the relative levels are not total energies.** The centre-of-mass
-  motion of an isolated two-body system is free in this model, so its operator
-  has purely continuous spectrum; a relative bound state is an internal state
-  and cannot be a stationary state of the total system. Any statement that a
-  hydrogen atom "is" an eigenstate of a two-body Hamiltonian conflicts with
-  this decomposition and is not made.
-- **Threshold reading.** The bottom of the continuous spectrum,
-  $\mathcal E_{1}=-\frac{\mu\kappa^{2}}{2\hbar^{2}}$, coincides with the
-  relative ground energy; the model reads it as the continuum threshold of the
-  relative problem, and no ionisation or scattering process is described here.
+- **Why the relative levels are not total energies.** The centre-of-mass motion of an isolated two-body system is free in this model, so its operator has purely continuous spectrum; a relative bound state is an internal state and cannot be a stationary state of the total system. Any statement that a hydrogen atom "is" an eigenstate of a two-body Hamiltonian conflicts with this decomposition and is not made.
+- **Threshold reading.** The bottom of the continuous spectrum, $\mathcal E_{1}=-\frac{\mu\kappa^{2}}{2\hbar^{2}}$, coincides with the relative ground energy; the model reads it as the continuum threshold of the total two-body operator, and no ionisation or scattering process is described here.

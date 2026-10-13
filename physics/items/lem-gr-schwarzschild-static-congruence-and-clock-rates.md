@@ -73,12 +73,12 @@ $$\Delta\tau=\frac{\sqrt{f(r_0)}}{c}\,\Delta x^0=\sqrt{f(r_0)}\,\Delta t,$$
 where $\Delta x^0$ is the coordinate difference in metres between two events
 of the worldline and $\Delta t=\Delta x^0/c$ is the same difference in
 seconds. In particular the proper-time increment is strictly positive for
-$\Delta x^0>0$, and it is smaller than $\Delta t$ at every finite radius
+$\Delta x^0>0$, and it is smaller than $\Delta t$ for $\Delta x^0>0$ at every finite radius
 because $0<f(r_0)<1$.
 
 **(d) Clock-rate ratio.** For two static observers at radii
 $r_1,r_2\in(s,\infty)$ compared over the same coordinate interval
-$\Delta x^0$, the proper-time increments satisfy
+$\Delta x^0\ne0$, the proper-time increments satisfy
 
 $$\frac{\Delta\tau_1}{\Delta\tau_2}=\sqrt{\frac{f(r_1)}{f(r_2)}}=\sqrt{\frac{1-s/r_1}{1-s/r_2}} .$$
 
@@ -117,7 +117,7 @@ made.
 
 2.1 (Proper time.) The tangent $\gamma'(\lambda)=n_{\gamma(\lambda)}$ has $g(\gamma',\gamma')=-1$ by step 1.1, so by [L3] the proper-time density is $c^{-1}\sqrt{1}=1/c$, constant; integrating over a parameter interval of length $\Delta\lambda$ gives $\Delta\tau=\Delta\lambda/c$. Since $x^0$ increases by $\Delta x^0=f(r_0)^{-1/2}\Delta\lambda$ over that interval by step 1.2, we obtain $\Delta\lambda=f(r_0)^{1/2}\Delta x^0$ and hence $\Delta\tau=f(r_0)^{1/2}\Delta x^0/c=f(r_0)^{1/2}\Delta t$; the increment is positive for $\Delta x^0>0$, and $0<f<1$ on $r>s$. This proves (c). [L1, L3, step 1.2, algebra]
 
-3.1 (Clock-rate ratio and acceleration.) Dividing the identity of step 2.1 for $r_1$ by the same identity for $r_2$ over a common coordinate interval gives $\Delta\tau_1/\Delta\tau_2=\sqrt{f(r_1)/f(r_2)}$, which is (d). For the acceleration, by [L2] and [L1], $\nabla_nn=f^{-1/2}\nabla_{\partial_0}(f^{-1/2}\partial_0)=f^{-1/2}\bigl(\partial_0(f^{-1/2})\partial_0+f^{-1/2}\Gamma^a{}_{00}\partial_a\bigr)=f^{-1}\Gamma^1{}_{00}\partial_1=\tfrac12f'\partial_1$, where the first term vanishes because $f$ is independent of $x^0$; substituting $f'=s/r^2$ gives $a=\frac{s}{2r^2}\partial_1$, which is spatial, nonzero and along $\partial_1$. This computation holds on the dense polar-chart locus. Both $\nabla_nn$ and $s(2r^2)^{-1}\partial_r$ are smooth global vector fields, so their equality extends to the poles by continuity. This proves (e) globally. [L1, L2, step 1.1, algebra]
+3.1 (Clock-rate ratio and acceleration.) Since the common increment $\Delta x^0\ne0$ and $f(r_2)>0$, step 2.1 gives $\Delta\tau_2\ne0$. Dividing the identity of step 2.1 for $r_1$ by the same identity for $r_2$ over a common coordinate interval gives $\Delta\tau_1/\Delta\tau_2=\sqrt{f(r_1)/f(r_2)}$, which is (d). For the acceleration, by [L2] and [L1], $\nabla_nn=f^{-1/2}\nabla_{\partial_0}(f^{-1/2}\partial_0)=f^{-1/2}\bigl(\partial_0(f^{-1/2})\partial_0+f^{-1/2}\Gamma^a{}_{00}\partial_a\bigr)=f^{-1}\Gamma^1{}_{00}\partial_1=\tfrac12f'\partial_1$, where the first term vanishes because $f$ is independent of $x^0$; substituting $f'=s/r^2$ gives $a=\frac{s}{2r^2}\partial_1$, which is spatial, nonzero and along $\partial_1$. This computation holds on the dense polar-chart locus. Both $\nabla_nn$ and $s(2r^2)^{-1}\partial_r$ are smooth global vector fields, so their equality extends to the poles by continuity. This proves (e) globally. [L1, L2, step 1.1, algebra]
 
 4.1 (Conclusion.) Steps 1.1, 1.2, 2.1 and 3.1 prove clauses (a)-(e) as identities of the datum, using only its geometric data and the cited definitions; clause (f) records that the clock reading and the observer interpretation belong to the framework's postulates and that no measurement or empirical comparison is made. [step 1.1, step 1.2, step 2.1, step 3.1, given] ∎
 

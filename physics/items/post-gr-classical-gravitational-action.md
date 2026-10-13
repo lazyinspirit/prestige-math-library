@@ -21,7 +21,7 @@ dependency_roles:
   def-gr-metric-volume-form-and-current-flux: mathematical-premise
   def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
   def-oriented-smooth-manifold-and-oriented-chart: mathematical-premise
-physical_scope: "Adoption of the action formulation of the classical gravitational field law: the Einstein-Hilbert action of the smooth Lorentzian metric with cosmological parameter Lambda, a matter sector chosen from the scalar-field, dust or perfect-fluid models, the Hilbert convention for the matter stress-energy tensor, and the variational principle as the field law of the model. Excludes quantum gravity and quantum fields, non-smooth and distributional sources, boundaries and junction conditions, gravity-mediated matter self-force corrections, and any claim that an action principle or a particular matter model describes nature. The adopted fields, constants and equations are model input; deductions from them are conditional on this adoption."
+physical_scope: "Adoption of the action formulation of the classical gravitational field law: the Einstein-Hilbert action of the smooth Lorentzian metric with cosmological parameter Lambda, the supplied scalar-field matter action (dust and perfect-fluid sectors use the separate direct-equation presentation), the Hilbert convention for the matter stress-energy tensor, and the variational principle as the field law of the model. Excludes quantum gravity and quantum fields, non-smooth and distributional sources, boundaries and junction conditions, gravity-mediated matter self-force corrections, and any claim that an action principle or a particular matter model describes nature. The adopted fields, constants and equations are model input; deductions from them are conditional on this adoption."
 sources:
   references:
     - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 4: the Hilbert action (4.54)-(4.55), its variation (4.66)-(4.67), the total action (4.68) and the definition (4.70) of the energy-momentum tensor, printed pp. 115-119 (PDF pp. 122-126)"
@@ -69,8 +69,11 @@ $$\kappa:=\frac{8\pi G_N}{c^4}$$
 
 has dimension $\mathrm m^{-1}\,\mathrm{kg}^{-1}\,\mathrm s^{2}$.
 
-**(iii) Matter sectors.** A model's matter sector is exactly one of the
-following, each read with the units of
+**(iii) Matter sectors and available presentations.** A model adopting this
+action presentation uses the supplied scalar-field action in sector (1).
+Sectors (2) and (3) are described here only to distinguish the alternative
+direct-equation presentation; they do not adopt this variational postulate.
+The three sector descriptions use the units of
 [[def-gr-si-unit-and-coordinate-conventions]]:
 
 1. a **scalar-field sector**, specified by the data $(\varphi,V,K)$ of
@@ -81,7 +84,7 @@ following, each read with the units of
    kinetic term and $V$ have matching dimensions; the physical potential
    energy density is $K V$ in $\mathrm J\,\mathrm m^{-3}$. The sector's
    action differences are those defined there, and its stress-energy tensor
-   is the candidate tensor of that definition; or
+   is the candidate tensor of that definition;
 2. a **dust sector**, specified by $(\rho,u)$ of
    [[def-gr-dust-matter-model]], whose unit-tangent coefficient is the rest
    energy density $\varepsilon:=\rho$ in $\mathrm J\,\mathrm m^{-3}$; the
@@ -89,19 +92,17 @@ following, each read with the units of
    $\mathrm{kg}\,\mathrm m^{-3}$ and the physical four-velocity is $U=cu$
    with $g(U,U)=-c^2$. Its stress-energy tensor
    $T^{ab}=\rho u^au^b=\rho_m U^aU^b$ is prescribed by the model
-   and whose matter equations are the dust system of that definition; or
+   and its matter equations are the dust system of that definition;
 3. a **perfect-fluid sector**, specified by $(\varepsilon,p,n)$ (with optional
    equation of state) of [[def-gr-perfect-fluid-matter-model]] with
    $\varepsilon,p$ in $\mathrm J\,\mathrm m^{-3}$, whose stress-energy tensor
    is prescribed by the model and whose matter equations are the fluid
    equations of that definition.
 
-In sectors (2) and (3) the matter "action" is not supplied: the model
-prescribes $T$ and the matter equations directly, and admissibility requires
-that $T$ meet the consistency conditions imposed by the adopted field law; for
-these sectors the field law of clause (iv) is read as the displayed field
-equation of the direct-equation presentation, adopted for the model, since no
-matter action is available to vary. In
+In sectors (2) and (3) no matter action is supplied: the model prescribes
+$T$ and the matter equations directly and adopts the direct-equation
+presentation, with its consistency conditions. Clause (iv) does not apply to
+these sectors. In
 sector (1) the matter action is the scalar action of
 [[def-gr-scalar-field-matter-model]]; its metric variation is required to be
 represented by its stress-energy tensor in the Hilbert convention
@@ -114,11 +115,11 @@ scalar action this representation is a proved property of the model, recorded
 in [[prop-gr-scalar-field-stress-energy-conservation]] clause (b), and is
 adopted here as the reading of $T$ in the framework's units.
 
-**(iv) Variational field law.** In the action formulation the classical field
+**(iv) Variational field law.** For the supplied scalar-field action, the classical field
 law adopted for the model is: the metric $g$ is stationary for the total action
 difference $\Delta S_{\mathrm{tot}}:=\Delta S_{\mathrm{EH}}+\Delta S_m$ under
-every smooth family of smooth Lorentzian metrics with compactly supported
-variation, and the model's matter configuration satisfies its matter equations
+every jointly smooth metric family with compactly supported variation as
+defined in [[def-gr-hilbert-stress-energy-tensor]] clause (a), and the model's matter configuration satisfies its matter equations
 of motion. This variational principle is the adopted field law of the action
 presentation; the displayed field equation it is equivalent to is derived, not
 adopted a second time, in

@@ -26,7 +26,6 @@ sources:
       url: "https://arxiv.org/pdf/gr-qc/9712019"
     - title: "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), sections 4.5.3-4.5.4: the dust and perfect fluid energy-momentum tensors and the conservation equations (4.53)-(4.55), printed pp. 183-187 (PDF pp. 190-194)"
       url: "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
-justified_by: [prop-gr-dust-and-perfect-fluid-conservation-equations]
 verification:
   precheck: n/a
 ---
@@ -64,8 +63,8 @@ as an SI mass density while keeping the unit tangent $u$ would require the
 explicit tensor $c^2\rho\,u\otimes u$. Physical realizations and readings
 are adopted by the matter postulate, not deduced here.
 
-**(b) Stress-energy tensor.** The model's **stress-energy tensor** is the
-smooth symmetric covariant $2$-tensor field
+**(b) Stress-energy tensor.** The model's **stress-energy tensor** has the
+smooth symmetric contravariant components and their covariant lowering
 
 $$T^{ab}:=\rho\,u^au^b\qquad\text{equivalently}\qquad T_{ab}=\rho\,u_au_b,$$
 

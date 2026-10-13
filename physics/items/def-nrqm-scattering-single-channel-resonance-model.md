@@ -34,7 +34,8 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 physical_scope: "The declared single-channel resonance model for one
-  partial-wave channel of the pair's central scattering reading: the pole-shaped
+  degree-l partial-wave sector of the pair's central scattering reading, including
+  all 2l+1 angular labels with their common scalar factor: the pole-shaped
   unit-modulus channel factor with resonance energy and width parameters read in
   joules, the induced phase shift, and the channel cross-section reading in m^2.
   The model is a declared conditional model of one channel; it makes no
@@ -60,8 +61,14 @@ verification:
 [[def-nrqm-scattering-framework-short-range-model]] with mass $m>0$, spin
 zero and action constant $\hbar>0$, and its partial-wave and phase-shift
 reading [[def-nrqm-scattering-partial-wave-and-phase-shift-readings]] for a
-declared central short-range potential. Fix a **channel label** $l\in\{0,1,2,\dots\}$
-in the sense of clause (b) of that reading. Units are those of
+declared central short-range potential. Fix a **partial-wave label**
+$l\in\{0,1,2,\dots\}$ in the sense of clause (b) of that reading.
+Here a single channel means the whole degree-$l$ partial-wave sector:
+$\operatorname{span}\{Y_{l\mu}:-l\le\mu\le l,\ \mu\in\mathbb Z\}$,
+with all $2l+1$ angular labels $(l,\mu)$ sharing the same scalar factor
+$S_l$. The symbol $\mu$ is the angular index; $m$ remains the positive mass.
+This convention agrees with that reading's $\sigma_l$, which includes
+all these angular labels. Units are those of
 [[def-nrqm-framework-quantities-and-units]].
 
 **(b) The declared single-channel resonance model.** As an additional model

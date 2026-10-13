@@ -143,7 +143,7 @@ noncompact level set.
 
 1.1 By [L1], $F=(H,p_1,p_2)$ is a completely integrable datum with $n=3$ on the six-dimensional domain $W_0$. By [L2], $N=F^{-1}(E,c_1,c_2)$ is a nonempty connected regular common fibre. [L1, L2, given]
 
-1.2 On $N$ the commuting fields have the globally defined joint action $\Psi^{(a,b,c)}(x,p_*)=(x+a p_*/m+b e_1+c e_2,p_*)$. Its translation matrix has determinant $\rho/m>0$, so it is transitive and its stabilizer is $\{0\}$ at every point. There is therefore no full rank-three period lattice. In particular the physical Hamiltonian flow $\Phi^t(x,p_*)=(x+t p_*/m,p_*)$ has no nonzero period since $p_*\ne0$. [L1, L2, algebra]
+1.2 Use fixed SI numerical coordinates for the physical quantities, as in [[def-cm01-units]]. Give the flow parameters the dimensions $[a]=\tau$ and $[b]=[c]=\ell$: $a$ is the Hamiltonian time parameter, while $b,c$ are position-translation parameters for the momentum integrals. With these units each summand in the displacement has length dimension. On $N$ the commuting fields have the globally defined joint action $\Psi^{(a,b,c)}(x,p_*)=(x+a p_*/m+b e_1+c e_2,p_*)$. In these fixed numerical units the translation matrix has determinant $\rho/m>0$, so it is transitive and its stabilizer is $\{0\}$ at every point. There is therefore no full rank-three period lattice. In particular the physical Hamiltonian flow $\Phi^t(x,p_*)=(x+t p_*/m,p_*)$ has no nonzero period since $p_*\ne0$. [L1, L2, algebra]
 
 2.1 The continuous coordinate $x_1$ takes every real value on $N$, at points $((c,0,0),p_*)$. If $N$ were compact, [L3] would make this coordinate bounded. Thus $N$ is noncompact. [L3, step 1.1]
 

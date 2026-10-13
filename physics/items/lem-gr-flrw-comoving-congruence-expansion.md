@@ -50,8 +50,8 @@ let $\nabla$ be the metric-selected connection of $g$
 
 **(a)** $\nabla_{\partial_t}\partial_t=0$ and $\nabla_nn=0$; consequently the
 comoving curves are geodesics of $\nabla$ with affine parameter $t$, the
-parameter $t$ is their proper time, and $n$ is a geodesic unit timelike
-congruence in the sense of
+parameter $t$ is their proper time, and, when $\Sigma\ne\varnothing$, $n$ is a geodesic unit timelike
+observer congruence in the sense of
 [[def-gr-observer-congruence-and-adapted-charts]]
 ([[def-geodesic-of-an-affine-connection]],
 [[def-gr-timelike-worldline-and-proper-time]]).
@@ -84,7 +84,7 @@ $a^b:=n^a\nabla_an^b$, vanishes identically
 
 **Proof technique:** direct substitution of the Christoffel symbols in the geodesic and divergence formulas.
 
-1.1 (The comoving curves are geodesics.) In the product chart the vector field $\partial_t$ has components $\delta^a{}_0$, so for $\nabla_{\partial_t}\partial_t$ the chart expression of [L2] is $\sum_{b,c}\Gamma^a{}_{bc}\delta^b{}_0\delta^c{}_0=\Gamma^a{}_{00}=0$ for $a=0,1,2,3$ by [L1]. Hence $\nabla_{\partial_t}\partial_t=0$. Multiplying by $c^{-2}$ and using the function-linearity and Leibniz rules of [L2] gives $\nabla_nn=c^{-2}\nabla_{\partial_t}\partial_t=0$. Therefore each comoving curve $\gamma_x$ of [L3], whose tangent is $\partial_t=cn$, satisfies $\nabla_{\gamma_x'}\gamma_x'=c\nabla_n(cn)=c^2\nabla_nn=0$: it is a geodesic with affine parameter $t$, and by [L3] its parameter is proper time. This is claim (a). [L1, L2, L3, algebra]
+1.1 (The comoving curves are geodesics.) In the product chart the vector field $\partial_t$ has components $\delta^a{}_0$, so for $\nabla_{\partial_t}\partial_t$ the chart expression of [L2] is $\sum_{b,c}\Gamma^a{}_{bc}\delta^b{}_0\delta^c{}_0=\Gamma^a{}_{00}=0$ for $a=0,1,2,3$ by [L1]. Hence $\nabla_{\partial_t}\partial_t=0$. Multiplying by $c^{-2}$ and using the function-linearity and Leibniz rules of [L2] gives $\nabla_nn=c^{-2}\nabla_{\partial_t}\partial_t=0$. Therefore each comoving curve $\gamma_x$ of [L3], whose tangent is $\partial_t=cn$, satisfies $\nabla_{\gamma_x'}\gamma_x'=c\nabla_n(cn)=c^2\nabla_nn=0$: it is a geodesic with affine parameter $t$, and by [L3] its parameter is proper time. If $\Sigma\ne\varnothing$, the nonempty interval $I$ gives a nonempty product $M=I\times\Sigma$, open in itself, and [L3] supplies the smooth future unit timelike field $n$; thus it is an observer congruence on $M$ in the exact sense of [[def-gr-observer-congruence-and-adapted-charts]], with vanishing geodesic acceleration as just proved. If $\Sigma=\varnothing$, all pointwise tensor and geodesic assertions are vacuous, and no observer-congruence designation is made. This is claim (a). [L1, L2, L3, algebra]
 
 1.2 (Expansion.) In the product chart, $n=c^{-1}\partial_t$ has components $n^0=c^{-1}$ and $n^i=0$, all of them constant as functions on the chart domain, so $\partial_an^a=\partial_0c^{-1}+\sum_i\partial_i0=0$. The divergence formula of [L2] therefore gives $\nabla_an^a=\sum_{a,b}\Gamma^a{}_{ab}n^b=\sum_a\Gamma^a{}_{a0}c^{-1}=c^{-1}\bigl(\Gamma^0{}_{00}+\Gamma^1{}_{10}+\Gamma^2{}_{20}+\Gamma^3{}_{30}\bigr)$. By [L1], $\Gamma^0{}_{00}=0$ and $\Gamma^i{}_{i0}=H\delta^i{}_i=H$ for each $i=1,2,3$ (no sum over $i$ in the symbol, and the three indices each contribute $H$), so $\nabla_an^a=c^{-1}\cdot3H=3H/c$. This is claim (b). [L1, L2, algebra]
 

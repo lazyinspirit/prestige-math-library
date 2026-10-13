@@ -54,9 +54,11 @@ for the mechanical energy of the definition (clause (b)). Then:
    $$E'(t)=\partial_{t}U\bigl(t,x(t)\bigr)+\sum_{i}\bigl\langle\mathfrak d_{i}(t),\,w_{i}(t)\bigr\rangle\qquad(t\in J):$$
    the mechanical energy changes at the rate of the explicit time dependence
    of the potential plus the power of the residual forces;
-2. if $\partial_{t}U\equiv0$ on $I_{0}\times Q$ and $\mathfrak d_{i}\equiv0$
-   for every $i$ — the model is then a global potential model with the
-   declared representative $U$ — then $E$ is constant on $J$;
+2. if $\partial_{t}U\equiv0$ on $I_{0}\times Q$ and each evaluated residual
+   force $\mathfrak d_{i}$ vanishes identically along this motion, then $E$ is
+   constant on $J$. If, more strongly, every residual-force map $d_i$ vanishes
+   on its entire state domain, the model is a global potential model with the
+   declared representative $U$;
 3. for all $t_{0}<t_{1}$ in $J$,
    $$K(t_{1})-K(t_{0})=U\bigl(t_{0},x(t_{0})\bigr)-U\bigl(t_{1},x(t_{1})\bigr)+\int_{t_{0}}^{t_{1}}\Bigl[\partial_{t}U\bigl(t,x(t)\bigr)+\sum_{i}\bigl\langle\mathfrak d_{i}(t),w_{i}(t)\bigr\rangle\Bigr]dt,$$
    equivalently $W([t_{0},t_{1}])=U(t_{0},x(t_{0}))-U(t_{1},x(t_{1}))+\int_{t_{0}}^{t_{1}}\bigl[\partial_{t}U+\sum_{i}\langle\mathfrak d_{i},w_{i}\rangle\bigr]dt$:

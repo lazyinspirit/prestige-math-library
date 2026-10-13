@@ -81,7 +81,7 @@ $$|\dot x(0)|_{\mathrm e}\le 4r .$$
 
 [L1] The coordinate velocity satisfies $\dot w^2=2\,\dot x\cdot\ddot x =-2\,\dot x\cdot\Gamma(x)[\dot x,\dot x]\le 2\|\Gamma\|_K w^3$ at parameters where the image lies in $K$; hence $w'\le \|\Gamma\|_K w^2$ ([[prop-coordinate-geodesic-equation]], [[def-christoffel-symbols-of-an-affine-connection]], [[thm-algebra-of-derivatives]]).
 
-[L2] If $\,1/w$ has derivative at least $-C$ at every differentiability point of an interval, then $1/w(t)\ge 1/w(0)-Ct$ there ([[cor-bounded-derivative-implies-lipschitz]]).
+[L2] On any interval where $w>0$, the reciprocal $1/w$ is smooth. If $(1/w)\prime\ge-C$, the fundamental theorem gives $1/w(t)-1/w(0)=\int_0^t(1/w)\prime(s)\,ds\ge-Ct$ ([[thm-ftc-second-part]]); this needs no two-sided derivative bound.
 
 [L3] For $t$ in a parameter interval on which the image lies in $K$, $\bigl|\dot x(t)-\dot x(0)\bigr|_{\mathrm e} =\bigl|\int_0^t\ddot x(s)\,ds\bigr|_{\mathrm e} \le\int_0^t\|\Gamma\|_K\,w(s)^2ds$ by the geodesic equation and the fundamental theorem of calculus for continuous integrands ([[prop-coordinate-geodesic-equation]], [[thm-ftc-second-part]] for the componentwise statement).
 
@@ -91,7 +91,7 @@ $$|\dot x(0)|_{\mathrm e}\le 4r .$$
 
 **Proof technique:** direct.
 
-1.1 (Speed decay.) Assume $v_0>0$ and let $t$ range over a maximal interval $[0,T]$ on which the image lies in $K$ and $w>0$. By [L1], $w'\le\|\Gamma\|_K w^2$ and hence $(1/w)'=-w'/w^2\ge-\|\Gamma\|_K$ there; by [L2], $1/w(t)\ge 1/v_0-\|\Gamma\|_Kt$ and therefore $w(t)\le v_0/(1-\|\Gamma\|_Kv_0t)\le\frac43v_0$ for $4\|\Gamma\|_Kv_0t\le1$. If $v_0=0$, the constant curve has the same initial data as $\gamma$, so uniqueness of the geodesic initial-value problem gives $w\equiv0$. If $\|\Gamma\|_K=0$, the geodesic equation gives $\ddot x=0$ on the subinterval in $K$, so $w=v_0$ and the velocity change is zero. These cases use no reciprocal of $\|\Gamma\|_Kv_0$. [L1, L2, given, algebra]
+1.1 (Speed bound.) Assume $v_0>0$. The geodesic velocity never vanishes: if it vanished at any parameter, uniqueness with that initial datum would make the geodesic constant, contradicting $v_0>0$ ([[thm-gr-local-geodesics-and-exponential-map]]). Thus $w>0$ on $[0,1]$, and let $t$ range over $[0,\delta]$, whose image is assumed to lie in $K$. By [L1], $w'\le\|\Gamma\|_K w^2$ and hence $(1/w)'=-w'/w^2\ge-\|\Gamma\|_K$ there; by [L2], $1/w(t)\ge 1/v_0-\|\Gamma\|_Kt$ and therefore $w(t)\le v_0/(1-\|\Gamma\|_Kv_0t)\le\frac43v_0$ for $4\|\Gamma\|_Kv_0t\le1$. If $v_0=0$, the constant curve has the same initial data as $\gamma$, so uniqueness of the geodesic initial-value problem gives $w\equiv0$. If $\|\Gamma\|_K=0$, the geodesic equation gives $\ddot x=0$ on the subinterval in $K$, so $w=v_0$ and the velocity change is zero. These cases use no reciprocal of $\|\Gamma\|_Kv_0$. [L1, L2, given, algebra]
 
 2.1 (Velocity-change bound.) On $[0,\delta]$ with $0\le\delta\le1$ and $4\|\Gamma\|_Kv_0\delta\le1$, steps 1.1 and [L3] give $\bigl|\dot x(t)-\dot x(0)\bigr|_{\mathrm e} \le\int_0^t\|\Gamma\|_K(4v_0/3)^2ds \le\|\Gamma\|_K v_0^2\,t\,\frac{16}9 \le\frac{4}{9}v_0$ for $4\|\Gamma\|_Kv_0t\le1$. [step 1.1, L3, algebra]
 

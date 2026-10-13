@@ -65,7 +65,7 @@ For the rarefaction with $u_L=1<u_R=3$, the fan $u=x/t$ satisfies $u_t+uu_x=0$ i
 
 **Proof technique:** direct; substitute the explicit data into the closed formulas.
 
-1.1 For $k=2$: $[\eta_2]=|u_R-2|-|u_L-2|=1-1=0$, and $[q_2]=\operatorname{sign}(u_R-2)\frac{u_R^2-4}{2}-\operatorname{sign}(u_L-2)\frac{u_L^2-4}{2}=(-1)\frac{1-4}{2}-(1)\frac{9-4}{2}=\frac32-\frac52=-1$. Hence $s[\eta_2]-[q_2]=0-(-1)=1=-(2-3)(2-1)$, the interior formula. [given, L1, algebra]
+1.1 For $k=2$: $[\eta_2]=|u_R-2|-|u_L-2|=1-1=0$, and $[q_2]=\operatorname{sgn}(u_R-2)\frac{u_R^2-4}{2}-\operatorname{sgn}(u_L-2)\frac{u_L^2-4}{2}=(-1)\frac{1-4}{2}-(1)\frac{9-4}{2}=\frac32-\frac52=-1$. Hence $s[\eta_2]-[q_2]=0-(-1)=1=-(2-3)(2-1)$, the interior formula. [given, L1, algebra]
 
 1.2 For $k=0$: $[\eta_0]=1-3=-2$ and $[q_0]=\frac{1}{2}-\frac{9}{2}=-4$, so $s[\eta_0]-[q_0]=2(-2)-(-4)=0$, the exterior value; both computed coefficients are $\ge0$ as the theorem requires. [given, L1, algebra]
 

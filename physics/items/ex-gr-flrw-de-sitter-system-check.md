@@ -10,13 +10,14 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-flrw-friedmann-system, def-derivative, thm-algebra-of-derivatives, thm-chain-rule, def-real-exponential-function-and-e, thm-derivative-of-exponential, def-real-power, thm-real-power-laws, lem-of-square-positive, def-real-order]
+deps: [def-gr-flrw-friedmann-system, def-derivative, thm-algebra-of-derivatives, thm-chain-rule, def-real-exponential-function-and-e, cor-exponential-reciprocal-and-positivity, thm-derivative-of-exponential, def-real-power, thm-real-power-laws, lem-of-square-positive, def-real-order]
 dependency_roles:
   def-gr-flrw-friedmann-system: mathematical-premise
   def-derivative: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
   thm-chain-rule: mathematical-premise
   def-real-exponential-function-and-e: mathematical-premise
+  cor-exponential-reciprocal-and-positivity: mathematical-premise
   thm-derivative-of-exponential: mathematical-premise
   def-real-power: mathematical-premise
   thm-real-power-laws: mathematical-premise
@@ -55,7 +56,7 @@ $\Lambda\in\mathbb R$. Then:
 
 **Given:** The constants $c,G_N,A,t_0,\Lambda$ with $c>0$, $G_N>0$, $A>0$, the functions $a,\varepsilon,p$ of the example, and the equations (F), (A), (C), (S) of [[def-gr-flrw-friedmann-system]].
 
-[L1] The real exponential is smooth and strictly positive on $\mathbb R$ with $\exp'=\exp$; consequently for real constants $\alpha,\beta$ the function $t\mapsto\beta\exp(\alpha(t-t_0))$ is smooth with derivative $\alpha\beta\exp(\alpha(t-t_0))$ and second derivative $\alpha^2\beta\exp(\alpha(t-t_0))$ ([[def-real-exponential-function-and-e]], [[thm-derivative-of-exponential]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]]).
+[L1] The real exponential is strictly positive on $\mathbb R$ ([[cor-exponential-reciprocal-and-positivity]]) and smooth with $\exp'=\exp$; consequently for real constants $\alpha,\beta$ the function $t\mapsto\beta\exp(\alpha(t-t_0))$ is smooth with derivative $\alpha\beta\exp(\alpha(t-t_0))$ and second derivative $\alpha^2\beta\exp(\alpha(t-t_0))$ ([[def-real-exponential-function-and-e]], [[thm-derivative-of-exponential]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]]).
 
 [L2] For $\Lambda>0$ the real power $\sqrt{\Lambda/3}=(\Lambda/3)^{1/2}$ is a strictly positive real number with $(\Lambda/3)^{1/2}\cdot(\Lambda/3)^{1/2}=(\Lambda/3)^{1}=\Lambda/3$, and real powers satisfy $(x^r)^s=x^{rs}$ and $(xy)^r=x^ry^r$ for $x,y>0$ ([[def-real-power]], [[thm-real-power-laws]]). Hence $H_\Lambda=c(\Lambda/3)^{1/2}$ satisfies $H_\Lambda>0$ and $H_\Lambda^2=c^2\Lambda/3$. For $\Lambda<0$ the number $\Lambda c^2/3$ is negative.
 
@@ -85,14 +86,6 @@ where the four displays are (F), (A), (C) and (S) at every point of $I$; the thi
 
 
 ## Remarks
-- **What is checked.** The example verifies the two sign regimes directly in
-  the defining equations of [[def-gr-flrw-friedmann-system]]: for $\Lambda>0$
-  the exponential datum satisfies all four scalar equations, and for
-  $\Lambda<0$ the Friedmann equation alone is already unsatisfiable because a
-  square cannot equal a negative number. The physical reading of the datum as
-  a vacuum solution of the field law belongs to the A page and is not
-  asserted here.
+- **What is checked.** The example verifies the two sign regimes directly in the defining equations of [[def-gr-flrw-friedmann-system]]: for $\Lambda>0$ the exponential datum satisfies all four scalar equations, and for $\Lambda<0$ the Friedmann equation alone is already unsatisfiable because a square cannot equal a negative number. The physical reading of the datum as a vacuum solution of the field law belongs to the A page and is not asserted here.
 
-- **What is not claimed.** No uniqueness of the solutions for $\Lambda>0$, no
-  statement about the flat $\Lambda=0$ case, no numerical value of $\Lambda$
-  or $H_\Lambda$, and no physical claim about an expanding universe is made.
+- **What is not claimed.** No uniqueness of the solutions for $\Lambda>0$, no statement about the flat $\Lambda=0$ case, no numerical value of $\Lambda$ or $H_\Lambda$, and no physical claim about an expanding universe is made.

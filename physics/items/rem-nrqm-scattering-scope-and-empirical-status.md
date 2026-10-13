@@ -7,7 +7,7 @@ title: "Scope and empirical status of the three-dimensional scattering page"
 status: draft
 origin: session
 dependency_level: 15
-deps: [def-nrqm-scattering-framework-short-range-model, def-nrqm-scattering-stationary-beam-and-cross-section-model, def-nrqm-scattering-coulomb-dollard-model, def-nrqm-scattering-single-channel-resonance-model, pthm-nrqm-scattering-wave-operator-existence-and-free-continuity, pthm-nrqm-scattering-compact-support-asymptotic-completeness, pthm-nrqm-scattering-stationary-wave-amplitude-and-flux, pthm-nrqm-scattering-controlled-born-approximation]
+deps: [def-nrqm-scattering-framework-short-range-model, def-nrqm-scattering-stationary-beam-and-cross-section-model, def-nrqm-scattering-coulomb-dollard-model, def-nrqm-scattering-single-channel-resonance-model, pthm-nrqm-scattering-wave-operator-existence-and-free-continuity, pthm-nrqm-scattering-compact-support-asymptotic-completeness, pthm-nrqm-scattering-stationary-wave-amplitude-and-flux, pthm-nrqm-scattering-controlled-born-approximation, pthm-nrqm-scattering-resolvent-tail-asymptotic-completeness, pthm-nrqm-scattering-partial-wave-cross-section, pthm-nrqm-scattering-stationary-dynamical-identification, pthm-nrqm-scattering-single-channel-resonance-cross-section]
 dependency_roles:
   def-nrqm-scattering-framework-short-range-model: formulation-prerequisite
   def-nrqm-scattering-stationary-beam-and-cross-section-model: formulation-prerequisite
@@ -17,6 +17,10 @@ dependency_roles:
   pthm-nrqm-scattering-compact-support-asymptotic-completeness: physical-result
   pthm-nrqm-scattering-stationary-wave-amplitude-and-flux: physical-result
   pthm-nrqm-scattering-controlled-born-approximation: physical-result
+  pthm-nrqm-scattering-resolvent-tail-asymptotic-completeness: physical-result
+  pthm-nrqm-scattering-partial-wave-cross-section: physical-result
+  pthm-nrqm-scattering-stationary-dynamical-identification: physical-result
+  pthm-nrqm-scattering-single-channel-resonance-cross-section: physical-result
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -45,8 +49,11 @@ verification:
   readings ([[pthm-nrqm-scattering-stationary-wave-amplitude-and-flux]]), the controlled
   Born approximation with its operator-norm condition
   ([[pthm-nrqm-scattering-controlled-born-approximation]]), the phase-shift
-  cross-section series, the on-shell operator identification, and the
-  conditional resonance-model algebra. Every one of these is a logical
+  cross-section series ([[pthm-nrqm-scattering-partial-wave-cross-section]]),
+  the on-shell operator identification
+  ([[pthm-nrqm-scattering-stationary-dynamical-identification]]), and the
+  conditional resonance-model algebra
+  ([[pthm-nrqm-scattering-single-channel-resonance-cross-section]]). Every one of these is a logical
   consequence of the stated postulates, model declarations, hypotheses and
   mathematics; none of them is an observation.
 - *No observations.* The page reports no experiment: it contains no apparatus,

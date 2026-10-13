@@ -95,7 +95,7 @@ PVM constructed in clause (a) of
 [[def-nrqm-interference-two-path-preparation-and-detection-model]], and read
 its outcome law by P2 as $\mu^{G}_{\rho}(B)=\operatorname{tr}(\rho G(B))$
 ([[post-nrqm-framework-observable-and-probability]]). Put
-$$N:=\|\psi_{1}\|^{2}+\|\psi_{2}\|^{2},\qquad c(B):=\operatorname{Re}\int_{B}\langle\psi_{1}(x),\psi_{2}(x)\rangle_{\mathbb C^{r}}dx,\qquad c:=c(\mathbb R^{3}).$$
+$$N:=\|\psi_{1}\|^{2}+\|\psi_{2}\|^{2},\qquad Z(B):=\int_{B}\langle\psi_{1}(x),\psi_{2}(x)\rangle_{\mathbb C^{r}}dx,\qquad Z:=Z(\mathbb R^{3}),\qquad c(B):=\operatorname{Re}Z(B),\qquad c:=c(\mathbb R^{3}).$$
 Then:
 
 (a) *Coherent law.* If the declared model is admissible at phase $\varphi$,
@@ -103,7 +103,7 @@ then for every Borel set $B\subseteq\mathbb R^{3}$
 $$\mu^{G}_{\rho_{\mathrm{coh}}(\varphi)}(B)=\frac{\displaystyle\int_{B}\|\psi_{1}(x)+e^{i\varphi}\psi_{2}(x)\|_{\mathbb C^{r}}^{2}\,dx}{\|\psi_{1}+e^{i\varphi}\psi_{2}\|^{2}} ,$$
 and the numerator expands as
 $$\int_{B}\bigl(\|\psi_{1}\|^{2}+\|\psi_{2}\|^{2}\bigr)dx+2\operatorname{Re}\Bigl(e^{-i\varphi}\int_{B}\langle\psi_{1}(x),\psi_{2}(x)\rangle_{\mathbb C^{r}}dx\Bigr),$$
-with denominator $N+2\operatorname{Re}(e^{-i\varphi}c)$; in particular
+with denominator $N+2\operatorname{Re}(e^{-i\varphi}Z)$; in particular
 $\|\psi_{1}+e^{i\varphi}\psi_{2}\|^{2}>0$.
 
 (b) *Which-path law.* For the declared weight $w\in[0,1]$ and every Borel set
@@ -141,6 +141,9 @@ satisfies $\mu^G_{[u]}(B)=\|G(B)u\|^2=\int_B\|u(x)\|^2dx$, and for a
 density operator $\rho$ P2 gives $\mu^G_\rho(B)=\operatorname{tr}(\rho G(B))$
 ([[def-nrqm-interference-two-path-preparation-and-detection-model]]
 clause (a), [[post-nrqm-framework-observable-and-probability]]).
+Indeed, $P_uG(B)f=\langle f,G(B)u\rangle u$ is a one-term nuclear
+representation, so its trace is $\langle u,G(B)u\rangle=\|G(B)u\|^2$
+([[thm-trace-is-absolutely-convergent-and-basis-independent]]).
 
 [F2] **Finite trace linearity.** If $\rho_1,\rho_2$ are density operators and
 $\lambda\in[0,1]$, then
@@ -174,46 +177,17 @@ integrable densities.
 
 **Given:** The data of the statement and [F1]-[F4].
 
-1.1 [Coherent law] Assume admissibility at $\varphi$ and put [given, F1, F3, F4, algebra]
-$u=(\psi_1+e^{i\varphi}\psi_2)/\|\psi_1+e^{i\varphi}\psi_2\|$. Then
-$\rho_{\mathrm{coh}}(\varphi)=\widehat\rho(u)$ by [F3], and [F1] gives
-$$\mu^G_{\rho_{\mathrm{coh}}(\varphi)}(B)=\int_B\|u(x)\|^2dx=\frac{\int_B\|\psi_1(x)+e^{i\varphi}\psi_2(x)\|^2dx}{\|\psi_1+e^{i\varphi}\psi_2\|^2}.$$
-Applying [F4] with $a=\psi_1$ and $b=e^{i\varphi}\psi_2$ expands the numerator; conjugate-linearity in the second argument gives the factor $e^{-i\varphi}$. At $B=\mathbb R^3$ the denominator is $N+2\operatorname{Re}(e^{-i\varphi}c)>0$. This proves (a). [given, F1, F3, F4, algebra]
+1.1 [Coherent law] Assume admissibility at $\varphi$ and put $u=(\psi_1+e^{i\varphi}\psi_2)/\|\psi_1+e^{i\varphi}\psi_2\|$. Then $\rho_{\mathrm{coh}}(\varphi)=\widehat\rho(u)$ by [F3], and [F1] gives $$\mu^G_{\rho_{\mathrm{coh}}(\varphi)}(B)=\int_B\|u(x)\|^2dx=\frac{\int_B\|\psi_1(x)+e^{i\varphi}\psi_2(x)\|^2dx}{\|\psi_1+e^{i\varphi}\psi_2\|^2}.$$ Applying [F4] with $a=\psi_1$ and $b=e^{i\varphi}\psi_2$ expands the numerator; conjugate-linearity in the second argument gives the factor $e^{-i\varphi}$. At $B=\mathbb R^3$ the denominator is $N+2\operatorname{Re}(e^{-i\varphi}Z)>0$. This proves (a). [given, F1, F3, F4, algebra]
 
-1.2 [Which-path law] Let $\rho_j=\widehat\rho(\psi_j)$ and [given, F1, F2, F3, algebra]
-$u_j=\psi_j/\|\psi_j\|$. By [F1],
-$\operatorname{tr}(\rho_jG(B))=\int_B\|u_j(x)\|^2dx=\|\psi_j\|^{-2}\int_B\|\psi_j(x)\|^2dx$.
-The declared mixture is $w\rho_1+(1-w)\rho_2$ by [F3]; applying trace
-linearity [F2] to P2's outcome formula yields (b). [given, F1, F2, F3, algebra]
+1.2 [Which-path law] Let $\rho_j=\widehat\rho(\psi_j)$ and $u_j=\psi_j/\|\psi_j\|$. By [F1], $\operatorname{tr}(\rho_jG(B))=\int_B\|u_j(x)\|^2dx=\|\psi_j\|^{-2}\int_B\|\psi_j(x)\|^2dx$. The declared mixture is $w\rho_1+(1-w)\rho_2$ by [F3]; applying trace linearity [F2] to P2's outcome formula yields (b). [given, F1, F2, F3, algebra]
 
-2.1 [Coincidence criterion] Assume admissibility at phase $0$, and define [given, step 1.1, step 1.2, F2, F4, algebra]
-$M(B)=\int_B(\|\psi_1(x)\|^2+\|\psi_2(x)\|^2)dx$ and
-$c_B=\operatorname{Re}\int_B\langle\psi_1(x),\psi_2(x)\rangle dx$.
-By [F4], the zero-phase coherent law is $(M(B)+2c_B)/(N+2c)$, while step 1.2
-at $w=w_*$ gives the which-path law $M(B)/N$. Since $N>0$ and
-$N+2c=\|\psi_1+\psi_2\|^2>0$, equality of these laws for every Borel $B$
-is equivalent to $N c_B=cM(B)$ for every $B$. Define the real integrable
-function
-$$h(x):=N\operatorname{Re}\langle\psi_1(x),\psi_2(x)\rangle-c(\|\psi_1(x)\|^2+\|\psi_2(x)\|^2).$$
-Then equality for every $B$ is equivalent to $\int_Bh(x)dx=0$ for every
-Borel $B$. Since the Lebesgue sigma-algebra is the completion of the Borel
-Lebesgue measure, every Lebesgue-measurable set differs from a Borel set by a
-null set, and the integral of $h\in L^1$ is unchanged on such a difference
-([[cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]]).
-Thus $\int_Eh=0$ for every Lebesgue-measurable set $E$. If $h$ is nonzero on a
-set of positive measure, some set
-$\{h\ge1/n\}$ or $\{h\le-1/n\}$ has positive measure; its integral has a
-strict sign, contradicting that condition. Thus $h=0$ almost everywhere, and
-conversely that almost-everywhere relation makes all the integrals vanish.
-This proves the criterion. If the components are pointwise orthogonal almost
-everywhere, then $c=0$ and the relation holds; if $c=0$, it reduces to
-$\operatorname{Re}\langle\psi_1(x),\psi_2(x)\rangle=0$ almost everywhere.
-This proves (c), and steps 1.1, 1.2 and 2.1 establish (a)-(b) and the stated scope. [given, step 1.1, step 1.2, F2, F4, algebra] ∎
+2.1 [Coincidence criterion] Assume admissibility at phase $0$, and define $M(B)=\int_B(\|\psi_1(x)\|^2+\|\psi_2(x)\|^2)dx$ and $c_B=\operatorname{Re}\int_B\langle\psi_1(x),\psi_2(x)\rangle dx$. By [F4], the zero-phase coherent law is $(M(B)+2c_B)/(N+2c)$, while step 1.2 at $w=w_*$ gives the which-path law $M(B)/N$. Since $N>0$ and $N+2c=\|\psi_1+\psi_2\|^2>0$, equality of these laws for every Borel $B$ is equivalent to $N c_B=cM(B)$ for every $B$. Define the real integrable function $$h(x):=N\operatorname{Re}\langle\psi_1(x),\psi_2(x)\rangle-c(\|\psi_1(x)\|^2+\|\psi_2(x)\|^2).$$ Then equality for every $B$ is equivalent to $\int_Bh(x)dx=0$ for every Borel $B$. Since the Lebesgue sigma-algebra is the completion of the Borel Lebesgue measure, every Lebesgue-measurable set differs from a Borel set by a null set, and the integral of $h\in L^1$ is unchanged on such a difference ([[cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]]). Thus $\int_Eh=0$ for every Lebesgue-measurable set $E$. If $h$ is nonzero on a set of positive measure, some set $\{h\ge1/n\}$ or $\{h\le-1/n\}$ has positive measure; its integral has a strict sign, contradicting that condition. Thus $h=0$ almost everywhere, and conversely that almost-everywhere relation makes all the integrals vanish. This proves the criterion. If the components are pointwise orthogonal almost everywhere, then $c=0$ and the relation holds; if $c=0$, it reduces to $\operatorname{Re}\langle\psi_1(x),\psi_2(x)\rangle=0$ almost everywhere. This proves (c), while steps 1.1 and 1.2 establish (a)-(b); (d) records the stated scope. [given, step 1.1, step 1.2, F2, F4, algebra] ∎
 
 ## Remarks
 
 - **The cross term is physical relative phase.** A change of the relative phase
-  $\varphi$ rotates the cross term $e^{-i\varphi}c(B)$ without changing the two
+  $\varphi$ rotates the complex overlap $Z(B)$, giving the cross term
+  $2\operatorname{Re}(e^{-i\varphi}Z(B))$, without changing the two
   path densities; a common phase of $\psi_{1}$ and $\psi_{2}$ is immaterial.
 - **What the theorem does not claim.** It does not assert that the coherent
   preparation is "more correct" than the which-path preparation, that a

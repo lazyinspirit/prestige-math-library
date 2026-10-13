@@ -21,7 +21,7 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "The action functional of the framework's force branch with a declared potential presentation: the kinetic energy of the labels in an inertial frame, the mechanical Lagrangian K - U of the presentation, the open chart and the action integral over C^2 curves with fixed endpoints, the first variation and stationarity, and the dimensions of these objects. The item defines model-derived objects only: it asserts no equation of motion, no conservation law, no minimisation property and no empirical value, and it does not claim that any apparatus is described by a Lagrangian or by the potential branch."
+physical_scope: "For a nonempty configuration domain, the action functional of the framework's force branch with a declared potential presentation: the kinetic energy of the labels in an inertial frame, the mechanical Lagrangian K - U of the presentation, the open chart and the action integral over C^2 curves with fixed endpoints, the first variation and stationarity, and the dimensions of these objects. If the force postulate is instantiated on an empty configuration domain, there are no curves and this item has no action or stationarity instances. It defines model-derived objects only: it asserts no equation of motion, no conservation law, no minimisation property and no empirical value, and it does not claim that any apparatus is described by a Lagrangian or by the potential branch."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.1 'The Principle of Least Action', printed pages 10-13 (PDF pages 16-19): the action as the time integral of the Lagrangian, its variation and the stationarity condition"
@@ -72,16 +72,20 @@ $$L:I_{0}\times Q\times\mathbb R^{3N}\longrightarrow\mathbb R,\qquad L(t,x,v):=K
 $L$ is of class $C^{2}$ on its open domain and has dimension $\mu\ell^{2}\tau^{-2}$.
 When $d\equiv0$ the presentation is a global potential model and $L$ is a
 Lagrangian of the model itself; when $d\not\equiv0$, $L$ carries the potential
-part only and the residual forces enter through generalized forces. The
+part only, and the residual force contribution $d$ is not included in $L$.
+The
 potential representative is part of the declared data: replacing $U$ by
 $U+c(t)$ for differentiable $c:I_{0}\to\mathbb R$ replaces $L$ by $L-c(t)$
 ([[def-cm03-potential-and-mechanical-energy]] clause (c)).
 
 **(c) Action, variations, stationarity.** Let $a<b$ be reals with
-$[a,b]\subseteq I_{0}$ and put $O:=I_{0}\times Q\times\mathbb R^{3N}$. The set
-$O$ is open and contains $[a,b]\times Q\times\mathbb R^{3N}$, so with $n:=3N$
-the pair $(O,L)$ is a time-dependent Lagrangian chart over $[a,b]\times Q$ in
-the sense of [[def-cm-time-dependent-lagrangian-and-action]]. **Admissible
+$[a,b]\subseteq I_{0}$. If $Q=\varnothing$, there is no map
+$x:[a,b]\to Q$, so this clause has no action, variation or stationarity
+instance. Assume $Q\ne\varnothing$ for the chart construction below, and put
+$O:=I_{0}\times Q\times\mathbb R^{3N}$. The set $O$ is open and contains
+$[a,b]\times Q\times\mathbb R^{3N}$, so with $n:=3N$ the pair $(O,L)$ is a
+time-dependent Lagrangian chart over $[a,b]\times Q$ in the sense of
+[[def-cm-time-dependent-lagrangian-and-action]]. **Admissible
 curves** (the $C^{2}$ curves $x:[a,b]\to Q$ with the extension convention of
 that definition), **variations** $\eta$ with $\eta(a)=\eta(b)=0$, the
 **action**

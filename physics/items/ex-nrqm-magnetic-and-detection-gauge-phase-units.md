@@ -32,7 +32,7 @@ sources:
   references:
     - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 3.5 pp. 49-54 (gauge transformation of the potentials and the phase factor)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
-    - title: "BIPM, The International System of Units (SI), 9th edition 2019, Chapter 2 pp. 15-25 and Table 2 (SI base and derived units)"
+    - title: "BIPM, The International System of Units (SI), 9th edition 2019, Chapter 2 §§2.3.1–2.3.4, printed pp. 126–134 (Tables 2–4: base units, dimensions, and derived units; current PDF v4.01, June 2026)"
       url: "https://www.bipm.org/documents/20126/41483022/SI-Brochure-9-EN.pdf"
 ---
 

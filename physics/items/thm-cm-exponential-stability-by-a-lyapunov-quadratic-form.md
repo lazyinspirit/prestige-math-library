@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 1
-deps: [thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism, lem-exponential-series-of-a-bounded-operator, thm-cm-compact-continuation-for-locally-lipschitz-odes, def-cm-equilibrium-and-lyapunov-stability, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-total-derivative-in-euclidean-space, def-jacobian-matrix-and-gradient, def-euclidean-inner-product, def-metric-ball, thm-chain-rule-for-total-derivatives, thm-ftc-second-part, def-improper-integral-at-infinity, cor-limit-comparison-test-for-improper-integrals, thm-extreme-value-metric, def-ck-euclidean-maps-and-diffeomorphisms]
+deps: [thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism, lem-exponential-series-of-a-bounded-operator, thm-cm-compact-continuation-for-locally-lipschitz-odes, def-cm-equilibrium-and-lyapunov-stability, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-total-derivative-in-euclidean-space, def-jacobian-matrix-and-gradient, def-euclidean-inner-product, def-metric-ball, thm-chain-rule-for-total-derivatives, thm-ftc-second-part, def-improper-integral-at-infinity, thm-extreme-value-metric, def-ck-euclidean-maps-and-diffeomorphisms, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, thm-heine-borel-rn, thm-cauchy-schwarz-and-the-euclidean-norm, thm-comparison-test-for-improper-integrals, thm-derivative-of-exponential, thm-exponential-limits-and-range]
 dependency_roles:
   thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism: mathematical-premise
   lem-exponential-series-of-a-bounded-operator: mathematical-premise
@@ -20,9 +20,14 @@ dependency_roles:
   thm-chain-rule-for-total-derivatives: mathematical-premise
   thm-ftc-second-part: mathematical-premise
   def-improper-integral-at-infinity: mathematical-premise
-  cor-limit-comparison-test-for-improper-integrals: mathematical-premise
   thm-extreme-value-metric: mathematical-premise
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
+  cor-real-spectral-theorem-for-self-adjoint-endomorphisms: mathematical-premise
+  thm-heine-borel-rn: mathematical-premise
+  thm-cauchy-schwarz-and-the-euclidean-norm: mathematical-premise
+  thm-comparison-test-for-improper-integrals: mathematical-premise
+  thm-derivative-of-exponential: mathematical-premise
+  thm-exponential-limits-and-range: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -55,21 +60,23 @@ In particular $0$ is Lyapunov stable and asymptotically stable in the sense of [
 
 [F2] Differentiability at $0$: for every $\eta>0$ there is $\rho>0$ such that $\|F(z)-Az\|_2\le\eta\|z\|_2$ whenever $\|z\|_2<\rho$ ([[def-total-derivative-in-euclidean-space]]).
 
-[F3] Improper integrals: if a continuous $f:[0,\infty)\to\mathbb R$ satisfies $|f(t)|\le Me^{-\lambda t}$ for constants $M,\lambda>0$, then $\int_0^\infty f(t)\,dt$ converges absolutely and $\lim_{T\to\infty}\int_0^Tf(t)\,dt=\int_0^\infty f(t)\,dt$ ([[def-improper-integral-at-infinity]], [[cor-limit-comparison-test-for-improper-integrals]]); the fundamental theorem applies on compact intervals ([[thm-ftc-second-part]]).
+[F3] Improper integrals: For $a>0$, direct integration using [[thm-derivative-of-exponential]] gives $\int_0^T e^{-at}dt=(1-e^{-aT})/a\to1/a$ by [[thm-exponential-limits-and-range]]. if a continuous $f:[0,\infty)\to\mathbb R$ satisfies $|f(t)|\le Me^{-\lambda t}$ for constants $M,\lambda>0$, then $\int_0^\infty f(t)\,dt$ converges absolutely and $\lim_{T\to\infty}\int_0^Tf(t)\,dt=\int_0^\infty f(t)\,dt$ ([[def-improper-integral-at-infinity]], [[thm-comparison-test-for-improper-integrals]]); the fundamental theorem applies on compact intervals ([[thm-ftc-second-part]]).
 
 [F4] Compact continuation: an autonomous solution that is trapped in a compact subset of its open state domain near a finite endpoint extends past that endpoint ([[thm-cm-compact-continuation-for-locally-lipschitz-odes]]); $F$ is locally Lipschitz because it is $C^1$.
 
-[F5] Euclidean structure: $\|\cdot\|_2$ comes from the inner product $\langle\cdot,\cdot\rangle_2$, balls are as in [[def-metric-ball]], a real symmetric positive definite matrix $Q$ defines $z^TQz=\langle Qz,z\rangle_2\ge\lambda_{\min}(Q)\|z\|_2^2$ and $z^TQz\le\lambda_{\max}(Q)\|z\|_2^2$, and the chain rule computes the derivative of a quadratic form along a curve ([[def-euclidean-inner-product]], [[thm-chain-rule-for-total-derivatives]]).
+[F5] The Euclidean norm is induced by $\langle\cdot,\cdot\rangle_2$ ([[def-euclidean-inner-product]]) and satisfies Cauchy--Schwarz ([[thm-cauchy-schwarz-and-the-euclidean-norm]]). For a matrix $Q$, use the induced operator norm $\|Q\|_2:=\sup\{\|Qz\|_2:\|z\|_2\le1\}$. By the real spectral theorem, a symmetric positive definite matrix $Q$ has an orthonormal eigenbasis with positive eigenvalues; writing $\lambda_{\min}(Q)$ and $\lambda_{\max}(Q)$ for their minimum and maximum gives $\lambda_{\min}(Q)\|z\|_2^2\le z^{\mathsf T}Qz\le\lambda_{\max}(Q)\|z\|_2^2$ and $\|Q\|_2=\lambda_{\max}(Q)$ (diagonalize in that basis and use the Euclidean norm) ([[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]]). Balls are as in [[def-metric-ball]], and the chain rule computes the derivative of a quadratic form along a curve ([[thm-chain-rule-for-total-derivatives]]).
+
+[F6] Closed and bounded subsets of $\mathbb R^n$ are compact for the Euclidean metric ([[thm-heine-borel-rn]]).
 
 ## Proof
 
 **Proof technique:** direct; build the quadratic Lyapunov function from the exponential dichotomy and compare its decay with the norm.
 
-1.1 Define the symmetric matrix $Q$ entrywise by $$Q_{ij}:=\int_0^\infty\bigl(e^{tA^{\mathsf T}}e^{tA}\bigr)_{ij}dt .$$ Each integrand is continuous and, by [F1] and submultiplicativity of the operator norm, bounded in absolute value by $C^2e^{-2ct}$; hence every entry integral converges absolutely by [F3]. The resulting matrix is symmetric because $e^{tA^{\mathsf T}}e^{tA}$ is symmetric for every $t$. [F1, F3, algebra]
+1.1 Define the symmetric matrix $Q$ entrywise by $$Q_{ij}:=\int_0^\infty\bigl(e^{tA^{\mathsf T}}e^{tA}\bigr)_{ij}dt .$$ Each integrand is continuous and, for standard basis vectors $e_i,e_j$, equals $\langle e^{tA}e_i,e^{tA}e_j\rangle_2$; Cauchy--Schwarz and [F1], [F5] bound its absolute value by $C^2e^{-2ct}$. Hence every entry integral converges absolutely by [F3]. The resulting matrix is symmetric because $e^{tA^{\mathsf T}}e^{tA}$ is symmetric for every $t$. [F1, F3, F5, algebra]
 
-2.1 The matrix $Q$ is positive definite and satisfies the Lyapunov equation $A^{\mathsf T}Q+QA=-I_n$. Positivity: for $z\ne0$, $z^{\mathsf T}Qz=\int_0^\infty\|e^{tA}z\|_2^2\,dt$, the integrand is continuous, nonnegative, and strictly positive on a neighbourhood of $t=0$, so the integral is $>0$; for $z=0$ it is $0$. Lyapunov equation: put $Q_T:=\int_0^T e^{tA^{\mathsf T}}e^{tA}dt$. By [F3] and linearity of the integral on compact intervals, $A^{\mathsf T}Q_T+Q_TA=\int_0^T\frac{d}{dt}\bigl(e^{tA^{\mathsf T}}e^{tA}\bigr)dt=e^{TA^{\mathsf T}}e^{TA}-I_n$, by the product rule and $\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ from [F1]. Letting $T\to\infty$, the left side tends to $A^{\mathsf T}Q+QA$ by [F3], while $\|e^{TA^{\mathsf T}}e^{TA}\|_2\le C^2e^{-2cT}\to0$; hence $A^{\mathsf T}Q+QA=-I_n$. [step 1.1, F1, F3, algebra]
+2.1 The matrix $Q$ is positive definite and satisfies the Lyapunov equation $A^{\mathsf T}Q+QA=-I_n$. Positivity: for $z\ne0$, $z^{\mathsf T}Qz=\int_0^\infty\|e^{tA}z\|_2^2\,dt$, the integrand is continuous, nonnegative, and strictly positive on a neighbourhood of $t=0$, so the integral is $>0$; for $z=0$ it is $0$. Lyapunov equation: put $Q_T:=\int_0^T e^{tA^{\mathsf T}}e^{tA}dt$. By [F3] and linearity of the integral on compact intervals, $A^{\mathsf T}Q_T+Q_TA=\int_0^T\frac{d}{dt}\bigl(e^{tA^{\mathsf T}}e^{tA}\bigr)dt=e^{TA^{\mathsf T}}e^{TA}-I_n$, by the product rule and $\frac{d}{dt}e^{tA}=Ae^{tA}=e^{tA}A$ from [F1]. Letting $T\to\infty$, the left side tends to $A^{\mathsf T}Q+QA$ by [F3]. Each entry of $e^{TA^{\mathsf T}}e^{TA}$ equals $\langle e^{TA}e_i,e^{TA}e_j\rangle_2$ for standard basis vectors $e_i,e_j$, so [F1], [F5] bound it in absolute value by $C^2e^{-2cT}\to0$. Hence $A^{\mathsf T}Q+QA=-I_n$. [step 1.1, F1, F3, F5, algebra]
 
-3.1 Fix $\eta>0$ with $2\|Q\|_2\eta\le\tfrac12$ and let $\rho>0$ be a radius as in [F2] for this $\eta$; since $U$ is open and $0\in U$, shrink $\rho$ if necessary so that $\overline B(0,\rho)\subseteq U$ (the implication of [F2] persists under shrinking $\rho$; balls as in [[def-metric-ball]]). Define $V(z):=z^{\mathsf T}Qz$; since $Q$ is positive definite with smallest eigenvalue $\lambda_{\min}(Q)>0$, choose $0<\alpha<\lambda_{\min}(Q)\rho^2$. Then $\mathcal S:=\{z\in U:V(z)\le\alpha\}$ satisfies $\mathcal S\subseteq B(0,\rho)\subseteq\overline B(0,\rho)\subseteq U$, so $\mathcal S=\{z\in\overline B(0,\rho):V(z)\le\alpha\}$ is closed and bounded, hence compact. [step 2.1, F2, F5, algebra]
+3.1 Fix $\eta>0$ with $2\|Q\|_2\eta\le\tfrac12$ and let $\rho>0$ be a radius as in [F2] for this $\eta$; since $U$ is open and $0\in U$, shrink $\rho$ if necessary so that $\overline B(0,\rho)\subseteq U$ (the implication of [F2] persists under shrinking $\rho$; balls as in [[def-metric-ball]]). Define $V(z):=z^{\mathsf T}Qz$; since $Q$ is positive definite with smallest eigenvalue $\lambda_{\min}(Q)>0$, choose $0<\alpha<\lambda_{\min}(Q)\rho^2$. Then $\mathcal S:=\{z\in U:V(z)\le\alpha\}$ satisfies $\mathcal S\subseteq B(0,\rho)\subseteq\overline B(0,\rho)\subseteq U$, so $\mathcal S=\{z\in\overline B(0,\rho):V(z)\le\alpha\}$ is closed and bounded, hence compact by [F6]. [step 2.1, F2, F5, F6, algebra]
 
 4.1 Let $z$ be a solution of $z'=F(z)$. On the interval where $\|z(t)\|_2<\rho$, $$\frac{d}{dt}V(z(t))=2z(t)^{\mathsf T}Qz'(t)=z^{\mathsf T}(A^{\mathsf T}Q+QA)z+2z^{\mathsf T}Q(F(z)-Az)\le-\|z\|_2^2+2\eta\|Q\|_2\|z\|_2^2\le-\tfrac12\|z\|_2^2,$$ by step 2.1, [F2] and the choice of $\eta$; the derivative exists by the chain rule ([[thm-chain-rule-for-total-derivatives]], [F5]). Since $V(z)\le\lambda_{\max}(Q)\|z\|_2^2$, this gives $\frac{d}{dt}V(z(t))\le-\frac{1}{2\lambda_{\max}(Q)}V(z(t))$ while the solution stays in $B(0,\rho)$. [step 3.1, F2, F5, algebra]
 

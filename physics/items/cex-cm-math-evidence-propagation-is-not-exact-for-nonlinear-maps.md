@@ -38,8 +38,12 @@ Statement refuted: "if $U\subseteq\mathbb R$ is open and convex, $h:U\to\mathbb 
 is $C^2$, $X:\Omega\to U$ is square-integrable with $E[X]=\mu\in U$, and
 $\Sigma$ is its covariance matrix, then
 $\operatorname{Cov}(h(X))=Dh(\mu)\Sigma Dh(\mu)^{\mathsf T}$, that is,
-$\operatorname{Var}(h(X))=h'(\mu)^2\operatorname{Var}(X)$"
-([[lem-cm-linearized-propagation-of-covariance]]).
+$\operatorname{Var}(h(X))=h'(\mu)^2\operatorname{Var}(X)$."
+
+This is an unsupported nonlinear extension of
+[[lem-cm-linearized-propagation-of-covariance]], which states the covariance
+formula for the affine linearization $T(X)$ and does not assert equality with
+$\operatorname{Cov}(h(X))$.
 
 ## Facts & Assumptions
 
@@ -67,7 +71,4 @@ $\operatorname{Var}(h(X))=h'(\mu)^2\operatorname{Var}(X)$"
 
 ## Remarks
 
-This witness is a genuine failure of *equality*, not of the domination bounds
-of [[cor-cm-linearization-error-bounds]]: the bounds hold strictly here. A
-consumer that reports the propagated covariance as an uncertainty of
-$h(Y)$ must carry the remainder qualification with it.
+This witness is a genuine failure of *equality*, not of the domination bounds of [[cor-cm-linearization-error-bounds]]: the bounds hold strictly here. A consumer that reports the propagated covariance as an uncertainty of $h(Y)$ must carry the remainder qualification with it.

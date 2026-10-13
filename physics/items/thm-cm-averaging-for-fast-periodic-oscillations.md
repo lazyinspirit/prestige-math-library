@@ -42,7 +42,7 @@ verification:
 
 ## Statement
 
-Let $n\ge1$, $P>0$, let $O\subseteq\mathbb R^n$ be open, and let $f:\mathbb R\times O\to\mathbb R^n$ be continuous, continuously partially differentiable in the second variable and $P$-periodic in time, with average $\bar f$ and deviation $g$ as in [[def-cm-averaging-data-and-averaged-field]]. Let $x_0\in O$, let $0<\rho<R$ with $\overline B(x_0,R)\subseteq O$ ([[def-metric-ball]]), and let $M,L\ge0$ satisfy
+Let $n\ge1$, $P>0$, let $O\subseteq\mathbb R^n$ be open, and let $f:\mathbb R\times O\to\mathbb R^n$ be continuous, continuously partially differentiable in the second variable and $P$-periodic in time, with average $\bar f$ and deviation $g$ as in [[def-cm-averaging-data-and-averaged-field]]. Here $D_xf(t,x)$ is the total derivative in the state variable defined in [[lem-cm-averaging-data-basic-bounds]]. Let $x_0\in O$, let $0<\rho<R$ with $\overline B(x_0,R)\subseteq O$ ([[def-metric-ball]]), and let $M,L\ge0$ satisfy
 
 $$\|f(t,x)\|_2\le M,\qquad \|D_xf(t,x)\|\le L\qquad\bigl(t\in\mathbb R,\ x\in\overline B(x_0,R)\bigr),$$
 
@@ -60,7 +60,7 @@ $$\|x(t)-y(t)\|_2\le\varepsilon K=\varepsilon\,e^{LA}\bigl[B+(LB+B_1M)A\bigr].$$
 
 ## Remarks
 
-- **Scaling.** The two curves agree to order $\varepsilon$ on the time interval of length $A/\varepsilon$, i.e. on a fixed number of oscillation periods: $A/\varepsilon$ is the number of periods divided by the fast frequency. The constant is explicit and grows like $A e^{LA}$; no claim is made for times longer than $A/\varepsilon$ or beyond the trapping radius $\rho$.
+- **Scaling.** The two curves agree to order $\varepsilon$ on the time interval of length $A/\varepsilon$, For a fixed period $P$, this horizon contains $A/(\varepsilon P)$ periods. The constant is explicit and grows like $A e^{LA}$; no claim is made for times longer than $A/\varepsilon$ or beyond the trapping radius $\rho$.
 - **Scope.** $f$, $y$, $g$, $\varepsilon$, $A$ are mathematical objects; no physical identification or empirical claim is made. The theorem compares two explicitly specified ODE solutions; the averaged system is a different model, not an exact description.
 
 ## Facts & Assumptions
@@ -73,7 +73,7 @@ $$\|x(t)-y(t)\|_2\le\varepsilon K=\varepsilon\,e^{LA}\bigl[B+(LB+B_1M)A\bigr].$$
 
 [F3] Chain rule: for a totally differentiable curve $G$ on $\mathbb R\times O$ and a differentiable curve $t\mapsto x(t)$, the composite $t\mapsto G(t,x(t))$ is differentiable with derivative $\partial_tG+D_xG\cdot x'$ ([[thm-chain-rule-for-total-derivatives]]). [given]
 
-[F4] Integral inequalities: $\|\int_a^b\phi\|_2\le|\int_a^b\|\phi\|_2|$ and monotonicity for real integrands ([[thm-norm-inequality-for-the-vector-valued-integral]], [[thm-monotonicity-of-the-integral]], [[def-vector-valued-derivative-and-integral]]); Gronwall: if continuous $u\ge0$ satisfies $u(t)\le L_0+M_0t+K_0\int_0^tu$ on $[0,T]$ with constants $\ge0$, then $u(t)\le(L_0+M_0t)e^{K_0t}$ (this is the standard constant-coefficient form obtained from [[thm-gronwall-integral-inequality]] by comparing with $v(t)=(L_0+M_0t)+\int_0^t(K_0v+M_0)$). [given]
+[F4] Integral inequalities: $\|\int_a^b\phi\|_2\le|\int_a^b\|\phi\|_2|$ and monotonicity for real integrands ([[thm-norm-inequality-for-the-vector-valued-integral]], [[thm-monotonicity-of-the-integral]], [[def-vector-valued-derivative-and-integral]]); Gronwall: if continuous $u\ge0$ satisfies $u(t)\le L_0+M_0t+K_0\int_0^tu$ on $[0,T]$ with constants $\ge0$, then $u(t)\le(L_0+M_0t)e^{K_0t}$ (apply the nondecreasing-$a$ clause of [[thm-gronwall-integral-inequality]] with $a(t)=L_0+M_0t$ and $b(t)=K_0$). [given]
 
 ## Proof
 

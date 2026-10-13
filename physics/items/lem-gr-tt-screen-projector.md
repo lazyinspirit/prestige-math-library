@@ -56,7 +56,7 @@ $p^2=p$, $h^2=h$, $\ker p=\operatorname{span}\{n,s\}$,
 $\operatorname{im}p=\Sigma(n,s)$, $\ker h=\mathbb Rn$,
 $\operatorname{im}h=n^\perp$; both are $\eta$-self-adjoint,
 $\eta(pu,v)=\eta(u,pv)$ and $\eta(hu,v)=\eta(u,hv)$ for all $u,v$. Moreover
-$h-p=s^\flat\otimes s$, that is $h^a{}_b-p^a{}_b=s^as_b$.
+$h-p=s\otimes s^\flat$, that is $h^a{}_b-p^a{}_b=s^as_b$.
 
 **(b) Ranks and traces.** $\operatorname{rank}p=\dim\Sigma(n,s)=2$,
 $p^a{}_a=2$, $\operatorname{rank}h=3$, $h^a{}_a=3$.
@@ -117,6 +117,6 @@ $T_{n,s}\to\mathbb R^2$, $B\mapsto(A_+,A_\times)$, is a linear isomorphism.
 
 ## Remarks
 
-- **The rank-two trace subtraction.** The subtraction in $\Pi_{n,s}$ uses the trace of the two-dimensional screen, $p^{cd}p_{cd}=2$. For a projector $q$ of rank $r$ the combination $q_a{}^cq_b{}^dA_{cd}-\tfrac12q_{ab}q^{cd}A_{cd}$ has trace $(1-\tfrac r2)q^{cd}A_{cd}$, which vanishes only for $r=2$; applying the same half-trace formula to the rank-three projector $h$ (or to a four-dimensional rest-space projector in a curved model) does not produce a trace-free tensor. The companion counterexample of the examples page for this material records this failure explicitly.
+- **The rank-two trace subtraction.** The subtraction in $\Pi_{n,s}$ uses the trace of the two-dimensional screen, $p^{cd}p_{cd}=2$. For an $\eta$-self-adjoint idempotent $q$ of rank $r$ the combination $q_a{}^cq_b{}^dA_{cd}-\tfrac12q_{ab}q^{cd}A_{cd}$ has trace $(1-\tfrac r2)q^{cd}A_{cd}$, which vanishes when $r=2$ or $q^{cd}A_{cd}=0$, and for nonzero input trace vanishes exactly when $r=2$; applying the same half-trace formula to the rank-three projector $h$ (whose rest space has dimension three also in a curved four-dimensional model) does not in general produce a trace-free tensor. The companion counterexample of the examples page for this material records this failure explicitly.
 
 - **No canonical screen without a frame.** The space $T_{n,s}$ depends on the pair $(n,s)$, not on the null covector alone: the screen is the orthogonal complement of $\operatorname{span}\{n,s\}$, and different observers $n$ with nonzero pairing against the wave covector give different splittings of the same quotient in the gauge-decomposition lemma of this page. The dimension two is the frame-independent content.

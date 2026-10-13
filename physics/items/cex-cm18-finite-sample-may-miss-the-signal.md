@@ -109,7 +109,7 @@ statement about finite samples.
 
 3.1 Since $0<p<1$ one has $0<1-p<1$ and therefore $0<(1-p)^{n}<1$ for every $n\ge1$; the event $E$ of a finite sample with no outcome in $A$ has strictly positive probability. [step 2.1, L1, algebra]
 
-4.1 Under the product model of steps 1.2 and 2.1 the single observation lies in the designated event with probability $p\in(0,1)$, the coordinates are mutually independent, and yet the finite sample avoids the event with positive probability $(1-p)^{n}$ by step 3.1; therefore the implication asserted in the refuted statement is false: a finite sample with no outcome in $A$ can occur with positive probability under the declared sampling model, so its occurrence does not refute that model. [step 2.1, step 3.1]
+4.1 Under the product model of steps 1.2 and 2.1 the single observation lies in the designated event with probability $p\in(0,1)$, the coordinates are mutually independent, and yet the finite sample avoids the event with positive probability $(1-p)^{n}$ by step 3.1; therefore the implication asserted in the refuted statement is false: a finite sample with no outcome in $A$ can occur with positive probability under the declared sampling model, so its occurrence does not refute that model. [step 1.2, step 2.1, step 3.1]
 
 5.1 The probability that at least one outcome in $A$ is seen in the finite sample is $1-(1-p)^{n}$, which tends to $1$ as $n$ grows but equals $1$ for no finite $n$ when $0<p<1$; the failure to exhibit the feature in a finite sample is a positive-probability event of the model, not a refutation of it. [step 3.1, step 4.1, algebra] ∎
 

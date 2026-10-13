@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 0
-deps: [def-first-order-ode-initial-value-problem-and-solution, def-locally-lipschitz-in-the-state-variable, thm-picard-lindelof-local-existence-and-uniqueness, prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation, thm-gronwall-integral-inequality, def-vector-valued-derivative-and-integral, thm-norm-inequality-for-the-vector-valued-integral, thm-monotonicity-of-the-integral, thm-additivity-over-subintervals, def-euclidean-inner-product, def-metric-ball, def-interval, thm-heine-borel-rn, thm-extreme-value-metric]
+deps: [def-first-order-ode-initial-value-problem-and-solution, def-locally-lipschitz-in-the-state-variable, thm-picard-lindelof-local-existence-and-uniqueness, prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation, thm-gronwall-integral-inequality, def-vector-valued-derivative-and-integral, thm-norm-inequality-for-the-vector-valued-integral, thm-monotonicity-of-the-integral, thm-additivity-over-subintervals, def-euclidean-inner-product, def-metric-ball, def-interval, thm-heine-borel-rn, thm-extreme-value-metric, thm-cauchy-schwarz-and-the-euclidean-norm]
 dependency_roles:
   def-first-order-ode-initial-value-problem-and-solution: mathematical-premise
   def-locally-lipschitz-in-the-state-variable: mathematical-premise
@@ -22,6 +22,7 @@ dependency_roles:
   def-interval: mathematical-premise
   thm-heine-borel-rn: mathematical-premise
   thm-extreme-value-metric: mathematical-premise
+  thm-cauchy-schwarz-and-the-euclidean-norm: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -58,17 +59,17 @@ has exactly one solution $x(\,\cdot\,;a)$ on $[-h,h]$ whose graph lies in $[-h,h
 
 ## Facts & Assumptions
 
-**Given:** The open set $U$, the continuous and locally Lipschitz field $F$, the point $a_0\in U$, the numbers $h,R>0$ with $\overline B(a_0,R)\subseteq U$, the constants $M,L$ and the radius $\rho$ with $hM\le R-\rho<R$ and $Lh<1$.
+**Given:** The open set $U$, the continuous and locally Lipschitz field $F$, the point $a_0\in U$, the numbers $h,R>0$ with $\overline B(a_0,R)\subseteq U$, the constants $M,L$ and the radius $\rho$ with $hM\le R-\rho$ and $Lh<1$.
 
 [F1] Picard-Lindelöf: if $[t_0-h,t_0+h]\times\overline B(x_0,r)\subseteq\mathbb R\times U$, if $\|F\|_2\le M$ and $F$ has state-Lipschitz constant $L$ on that cylinder, and if $hM\le r$ and $Lh<1$, then exactly one solution of $x'=F(x)$, $x(t_0)=x_0$ exists on $[t_0-h,t_0+h]$ with graph in the cylinder; any two solutions through the same initial data agree on every common subinterval containing the initial time ([[thm-picard-lindelof-local-existence-and-uniqueness]], [[def-first-order-ode-initial-value-problem-and-solution]]).
 
 [F2] $F$ is locally Lipschitz in the state variable: every compact time-state cylinder carries a finite state-Lipschitz constant ([[def-locally-lipschitz-in-the-state-variable]]); in particular $L$ as chosen in the statement is finite and the inequality $\|F(x)-F(y)\|_2\le L\|x-y\|_2$ holds on $\overline B(a_0,R)$.
 
-[F3] $\overline B(a_0,R)$ is closed and bounded, hence compact in $\mathbb R^n$ ([[def-metric-ball]], [[thm-heine-borel-rn]]), so the continuous function $\|F\|_2$ attains its maximum there and $M<+\infty$ ([[thm-extreme-value-metric]]).
+[F3] For $\rho=0$ the notation $\overline B(a_0,\rho)$ means the singleton $\{a_0\}$, as follows from the inequality defining a closed ball. $\overline B(a_0,R)$ is closed and bounded, hence compact in $\mathbb R^n$ ([[def-metric-ball]], [[thm-heine-borel-rn]]), so the continuous function $\|F\|_2$ attains its maximum there and $M<+\infty$ ([[thm-extreme-value-metric]]).
 
 [F4] A curve solves the initial value problem on an interval exactly when it is continuous there, has graph in $U$, and satisfies the Volterra equation $x(t)=a+\int_0^tF(x(r))\,dr$; the oriented integral is additive over subintervals ([[prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation]], [[def-vector-valued-derivative-and-integral]], [[thm-additivity-over-subintervals]], [[def-interval]]).
 
-[F5] For an integrable $\mathbb R^n$-valued curve $g$ on an interval and reals $r\le s$ one has $\bigl\|\int_r^sg\bigr\|_2\le\bigl|\int_r^s\|g\|_2\bigr|$, and if a real integrable $u$ satisfies $u\le c$ on a nondegenerate interval then $\int u\le c\,(\text{length})$ ([[thm-norm-inequality-for-the-vector-valued-integral]], [[thm-monotonicity-of-the-integral]]).
+[F5] The Euclidean norm satisfies the triangle inequality ([[thm-cauchy-schwarz-and-the-euclidean-norm]]). For an integrable $\mathbb R^n$-valued curve $g$ on an interval and reals $r\le s$ one has $\bigl\|\int_r^sg\bigr\|_2\le\bigl|\int_r^s\|g\|_2\bigr|$, and if a real integrable $u$ satisfies $u\le c$ on a nondegenerate interval then $\int u\le c\,(\text{length})$ ([[thm-norm-inequality-for-the-vector-valued-integral]], [[thm-monotonicity-of-the-integral]]).
 
 [F6] Gronwall: if continuous $u:[0,T]\to\mathbb R$ and constants $A\ge0$, $L\ge0$ satisfy $u(t)\le A+L\int_0^tu$ for $t\in[0,T]$, then $u(t)\le Ae^{Lt}$ there; the reflected form for an integral oriented as $\int_t^0$ gives $u(t)\le Ae^{L|t|}$ for $t\le0$ ([[thm-gronwall-integral-inequality]]).
 

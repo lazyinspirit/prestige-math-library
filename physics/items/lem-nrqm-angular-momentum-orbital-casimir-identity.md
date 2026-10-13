@@ -7,7 +7,7 @@ title: "The orbital Casimir identity: the restrictions of the orbital generators
   to the degree-l blocks are spin-l models"
 status: draft
 origin: session
-dependency_level: 9
+dependency_level: 8
 deps:
   [
     cor-inner-product-induces-a-norm,
@@ -152,7 +152,7 @@ $r\ge1$ and $j_{1},\dots,j_{r}\in\frac12\mathbb N$ with
 $\sum_{\nu}(2j_{\nu}+1)=\dim V$ and an orthonormal basis
 $(v_{\nu,k})$ of $V$ such that, with $J_{\pm}:=J_{1}\pm iJ_{2}$ and
 $J^{2}:=J_{1}^{2}+J_{2}^{2}+J_{3}^{2}$,
-$$J_{3}v_{\nu,k}=(j_{\nu}-k)v_{\nu,k},\quad J_{\pm}v_{\nu,k}=\sqrt{k(2j_{\nu}-k+1)}\,v_{\nu,k\mp1},\quad J^{2}v_{\nu,k}=j_{\nu}(j_{\nu}+1)v_{\nu,k};$$
+$$J_{3}v_{\nu,k}=(j_{\nu}-k)v_{\nu,k},\quad J_{+}v_{\nu,k}=\sqrt{k(2j_{\nu}-k+1)}\,v_{\nu,k-1},\quad J_{-}v_{\nu,k}=\sqrt{(k+1)(2j_{\nu}-k)}\,v_{\nu,k+1},\quad J^{2}v_{\nu,k}=j_{\nu}(j_{\nu}+1)v_{\nu,k};$$
 moreover $\dim\ker(J_{3}-MI)$ equals the number of blocks with
 $j_{\nu}\in M+\mathbb Z$ and $j_{\nu}\ge M$, and the number of blocks with
 $j_{\nu}=M$ equals $\dim\ker(J_{3}-MI)-\dim\ker(J_{3}-(M+1)I)$, for

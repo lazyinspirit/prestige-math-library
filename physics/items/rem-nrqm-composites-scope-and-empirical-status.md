@@ -43,8 +43,9 @@ physical_scope: "A scope record for the composites, entanglement and
 sources:
   references:
     - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1,
-        printed pages 105-115 (PDF pages 113-123): composites, entanglement,
-        reduced density operators and the Einstein-Podolsky-Rosen discussion"
+        printed pages 105-115 (PDF pages 113-123): composites, entanglement
+        and the Einstein-Podolsky-Rosen discussion; Section 6.3.1, printed
+        pages 125-127 (PDF pages 133-135): reduced density operators"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 8
         'Multiparticle States and Tensor Products', chapter pages 1-19: tensor

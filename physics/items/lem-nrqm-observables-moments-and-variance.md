@@ -7,8 +7,10 @@ title: "Mean, second moment and variance of the scalar spectral law"
 status: draft
 origin: pipeline
 dependency_level: 2
-deps: [def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-projection-valued-measure, def-self-adjoint-positive-unitary-and-normal-operator, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-scalar-and-complex-measures-from-a-pvm, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus]
+deps: [def-unbounded-integral-against-a-pvm, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-projection-valued-measure, def-self-adjoint-positive-unitary-and-normal-operator, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-scalar-and-complex-measures-from-a-pvm, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus]
 dependency_roles:
+  def-unbounded-integral-against-a-pvm: mathematical-premise
+  def-symmetric-self-adjoint-and-essentially-self-adjoint: mathematical-premise
   def-axiom-of-choice: mathematical-premise
   def-countable-choice: mathematical-premise
   def-hilbert-space: mathematical-premise
@@ -57,7 +59,7 @@ so the mean of $\mu^{A}_{\rho}$ is finite if and only if $\sum_nw_n\int|\lambda|
 
 **Given:** The Axiom of Choice and the Axiom of Countable Choice ([[def-axiom-of-choice]], [[def-countable-choice]]); a nonzero complex Hilbert space $H$; a self-adjoint operator $A$ with PVM $E_A$; a unit vector $\psi\in H$; a density operator $\rho$ with expansion $\rho=\sum_nw_nT_{u_n,u_n}$.
 
-[F1] **Spectral domain and calculus.** $D(A)=\{\psi\in H:\int\lambda^{2}\,dE_{A,\psi}<\infty\}$ and $A\psi=\int\lambda\,dE_A(\lambda)\psi$ on $D(A)$; for every Borel $f$ the operator $f(A)$ has domain $D(f(A))=\{\psi:\int|f|^{2}\,dE_{A,\psi}<\infty\}$ and satisfies $\|f(A)\psi\|^{2}=\int|f|^{2}\,dE_{A,\psi}$ ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[thm-unbounded-borel-functional-calculus]],).
+[F1] **Spectral domain and calculus.** $D(A)=\{\psi\in H:\int\lambda^{2}\,dE_{A,\psi}<\infty\}$ and $A\psi=\int\lambda\,dE_A(\lambda)\psi$ on $D(A)$; for every Borel $f$ the operator $f(A)$ has domain $D(f(A))=\{\psi:\int|f|^{2}\,dE_{A,\psi}<\infty\}$ and satisfies $\|f(A)\psi\|^{2}=\int|f|^{2}\,dE_{A,\psi}$ ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[thm-unbounded-borel-functional-calculus]], [[def-unbounded-integral-against-a-pvm]]).
 
 [F2] **Mean and second moment of a pure state.** For a unit vector $\psi\in D(A)$ one has $\int\lambda\,dE_{A,\psi}=\langle A\psi,\psi\rangle$ and $\int\lambda^{2}\,dE_{A,\psi}=\|A\psi\|^{2}$; moreover $\int|\lambda|\,dE_{A,\psi}<\infty$ exactly when $\psi\in D(|A|^{1/2})$, and then the mean $\int\lambda\,dE_{A,\psi}$ is finite ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (c)).
 
@@ -65,7 +67,7 @@ so the mean of $\mu^{A}_{\rho}$ is finite if and only if $\sum_nw_n\int|\lambda|
 
 [F4] **Monotone convergence and approximation.** If $0\le f_m\uparrow f$ pointwise then $\int f_m\,d\nu\uparrow\int f\,d\nu$ for every measure $\nu$ ([[thm-monotone-convergence-for-the-integral]]); every nonnegative measurable $g$ is the pointwise increasing limit of nonnegative simple functions ; and if $f_m\to f$ pointwise with $|f_m|\le G$ for an integrable $G$ then $\int f_m\,d\nu\to\int f\,d\nu$ ([[thm-dominated-convergence]]).
 
-[F5] **Self-adjoint quadratic forms are real.** For a self-adjoint $A$ and $\psi\in D(A)$ one has $\langle A\psi,\psi\rangle=\overline{\langle\psi,A\psi\rangle}=\overline{\langle A\psi,\psi\rangle}\in\mathbb R$, and $\|(A-m)\psi\|^{2}=\|A\psi\|^{2}-2m\langle A\psi,\psi\rangle+m^{2}\| \psi\|^{2}$ for real $m$ ([[def-self-adjoint-positive-unitary-and-normal-operator]]).
+[F5] **Self-adjoint quadratic forms are real.** For a self-adjoint $A$ and $\psi\in D(A)$ one has $\langle A\psi,\psi\rangle=\overline{\langle\psi,A\psi\rangle}=\overline{\langle A\psi,\psi\rangle}\in\mathbb R$, and $\|(A-m)\psi\|^{2}=\|A\psi\|^{2}-2m\langle A\psi,\psi\rangle+m^{2}\| \psi\|^{2}$ for real $m$ ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]]).
 
 ## Proof
 
@@ -73,7 +75,7 @@ so the mean of $\mu^{A}_{\rho}$ is finite if and only if $\sum_nw_n\int|\lambda|
 
 1.2 [Reduction of state moments to pure moments] By [F3], $\mu^{A}_{\rho}(B)=\sum_nw_nE_{A,u_n}(B)$ for every Borel $B$. Let $g\ge0$ be Borel, and omit all zero-weight indices as stipulated in (d). For indicators $g=\mathbf 1_B$ the identity $\int g\,d\mu^{A}_{\rho}=\sum_nw_n\int g\,dE_{A,u_n}$ is exactly [F3]; it extends to nonnegative simple $g$ by linearity, and to all nonnegative Borel $g$ by writing $g$ as an increasing pointwise limit of nonnegative simple functions [F4] and applying monotone convergence twice, to the measure $\mu^{A}_{\rho}$ and to the partial sums of the series. This proves the displayed identity of (d). [given, F3, F4, algebra]
 
-2.1 [The first moment criterion] By [F2], $\int|\lambda|\,d\mu^{A}_{\psi}<\infty$ exactly when $\psi\in D(|A|^{1/2})$, and then the mean is finite; conversely if $\psi\notin D(|A|^{1/2})$ the integral of $|\lambda|$ diverges, so the mean is not a finite real number. Together with step 1.1 this proves (b). [given, step 1.1, F2, algebra]
+2.1 [The first moment criterion] For any unit $\psi\in H$, define $|A|^{1/2}:=f(A)$ with the Borel function $f(\lambda)=|\lambda|^{1/2}$. By [F1], $D(|A|^{1/2})=\{\psi\in H:\int|\lambda|\,dE_{A,\psi}<\infty\}$. By [F3], $E_{A,\psi}=\mu^A_\psi$, so this gives the claimed equivalence without assuming $\psi\in D(A)$. When the absolute first moment is finite, the positive and negative parts of $\lambda$ have finite integrals, and their difference defines a finite real mean; otherwise the mean is not a finite Lebesgue integral. Together with step 1.1 this proves (b). [given, step 1.1, F1, F3, algebra]
 
 2.2 [Variance of a state vector] Let $\psi\in D(A)$ be a unit vector and $m:=\langle A\psi,\psi\rangle$, a real number by [F5]. Then $A\psi-m\psi\in H$ and by [F1] applied to $f(\lambda)=\lambda-m$, $\|(A-m)\psi\|^{2}=\int(\lambda-m)^{2}\,dE_{A,\psi}$. Expanding the square and using [F2] for the integrals of $\lambda^{2}$, $\lambda$ and $1$ gives $\int(\lambda-m)^{2}\,d\mu^{A}_{\psi}=\int\lambda^{2}\,d\mu^{A}_{\psi}-2m\int\lambda\,d\mu^{A}_{\psi}+m^{2}=\|A\psi\|^{2}-2m^{2}+m^{2}=\|A\psi\|^{2}-m^{2}$. [given, step 1.1, F1, F2, F5, algebra]
 

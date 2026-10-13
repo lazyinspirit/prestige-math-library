@@ -1,12 +1,12 @@
 ---
 id: thm-cm-transport-theorem
 kind: theorem
-title: "The transport theorem for a $C^1$ family of diffeomorphisms: $\\frac{d}{dt}\\int_{\\psi_t(B)}f=\\int_{\\psi_t(B)}(\\partial_tf+\\operatorname{div}(fw))$"
+title: "The transport theorem for a $C^2$ family of diffeomorphisms: $\\frac{d}{dt}\\int_{\\psi_t(B)}f=\\int_{\\psi_t(B)}(\\partial_tf+\\operatorname{div}(fw))$"
 status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 2
-deps: [def-cm-continuum-motion, def-cm-euclidean-spatial-calculus, def-cm-material-region-and-density, lem-cm-determinant-derivative-along-a-matrix-curve, cor-c-one-change-of-variables-for-l-one-functions, def-countable-choice, thm-differentiation-under-the-integral-sign, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-ck-euclidean-maps-and-diffeomorphisms, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, thm-extreme-value-metric, thm-heine-borel-rn, def-metric-ball, def-interval]
+deps: [def-cm-continuum-motion, def-cm-euclidean-spatial-calculus, def-cm-material-region-and-density, lem-cm-determinant-derivative-along-a-matrix-curve, cor-c-one-change-of-variables-for-l-one-functions, def-countable-choice, thm-differentiation-under-the-integral-sign, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-ck-euclidean-maps-and-diffeomorphisms, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, thm-extreme-value-metric, thm-heine-borel-rn, def-metric-ball, def-interval, thm-ftc-second-part, thm-continuous-implies-integrable, thm-lebesgue-measure-of-a-box-of-every-kind, thm-lebesgue-measure-is-a-complete-measure]
 dependency_roles:
   def-cm-continuum-motion: mathematical-premise
   def-cm-euclidean-spatial-calculus: mathematical-premise
@@ -26,6 +26,10 @@ dependency_roles:
   thm-heine-borel-rn: mathematical-premise
   def-metric-ball: mathematical-premise
   def-interval: mathematical-premise
+  thm-ftc-second-part: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
+  thm-lebesgue-measure-of-a-box-of-every-kind: mathematical-premise
+  thm-lebesgue-measure-is-a-complete-measure: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -64,7 +68,7 @@ with the divergence and spatial derivative of [[def-cm-euclidean-spatial-calculu
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$; an open interval $I$; a motion $\psi$ of $B$ on $I$ with spatial velocity $w$; an open $J_0$ with compact closure in $I$; a $C^1$ function $f$ on a neighbourhood of the compact swept region $\Sigma$.
+**Given:** $\mathrm{AC}_\omega$; an open interval $I$; a motion $\psi$ of $B$ on $I$ with spatial velocity $w$; an open interval $J_0$ with $\overline{J_0}\subseteq I$; a $C^1$ function $f$ on an open neighbourhood of the swept region $\Sigma$.
 
 [F1] For each $t\in I$ the map $\psi_t:O\to\psi_t(O)$ is a $C^1$ diffeomorphism onto an open set, and $u$ and $w$ are $C^1$ on their open domains ([[def-cm-continuum-motion]]).
 
@@ -72,11 +76,15 @@ with the divergence and spatial derivative of [[def-cm-euclidean-spatial-calculu
 
 [F3] The determinant-derivative lemma: for the $C^1$ matrix curve $t\mapsto A(t):=D_X\psi_t(X)$ with invertible values, $(\det A)'=\det A\;\operatorname{tr}(A^{-1}A')$ ([[lem-cm-determinant-derivative-along-a-matrix-curve]]).
 
-[F4] Differentiation under the integral sign: if $g:B\times J_0\to\mathbb R$ has $x\mapsto g(x,t)$ integrable for every $t$, $t\mapsto g(x,t)$ differentiable for almost every $x$, $t\mapsto\partial_tg(x,t)$ measurable, and $|\partial_tg|\le G$ for an integrable $G$, then $t\mapsto\int_Bg$ is differentiable with derivative $\int_B\partial_tg$ ([[thm-differentiation-under-the-integral-sign]]).
+[F4] Differentiation under the integral sign: if $g:B\times J_0\to\mathbb R$ has $x\mapsto g(x,t)$ integrable for every $t$, $t\mapsto g(x,t)$ differentiable for almost every $x$, $x\mapsto\partial_tg(x,t)$ measurable, and $|\partial_tg|\le G$ for an integrable $G$, then $t\mapsto\int_Bg$ is differentiable with derivative $\int_B\partial_tg$ ([[thm-differentiation-under-the-integral-sign]]).
 
 [F5] The chain rule and the product rule: $C^1$ compositions are $C^1$ with the usual total-derivative rule; finite sums and products of differentiable functions satisfy the algebra rules ([[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[def-ck-euclidean-maps-and-diffeomorphisms]]).
 
-[F6] On the compact set $\overline{J_0}\times\overline B$ every continuous function is bounded and attains its maximum ([[thm-heine-borel-rn]], [[thm-extreme-value-metric]], [[def-metric-ball]]).
+[F6] On each compact cylinder $\overline{J_1}\times\overline B$ used in the local proof, continuous functions are bounded and attain their maxima ([[thm-heine-borel-rn]], [[thm-extreme-value-metric]], [[def-metric-ball]]).
+
+[F7] For a $C^2$ map $\psi$ on an open spacetime domain, each coordinate mixed partial $\partial_{X_j}\partial_t\psi_i$ equals $\partial_t\partial_{X_j}\psi_i$. At a point, the rectangular increment over a small positive $t$- and $X_j$-interval, divided by the rectangle area, is the average of either ordered mixed partial by two applications of the one-variable fundamental theorem; continuity makes both averages converge to their point values ([[thm-ftc-second-part]], [[thm-continuous-implies-integrable]]).
+
+[F8] A bounded measurable subset of $\mathbb R^3$ has finite Lebesgue measure: it is contained in a bounded box, whose measure is its finite volume, and Lebesgue measure is monotone as a measure ([[thm-lebesgue-measure-of-a-box-of-every-kind]], [[thm-lebesgue-measure-is-a-complete-measure]]).
 
 ## Proof
 
@@ -84,9 +92,9 @@ with the divergence and spatial derivative of [[def-cm-euclidean-spatial-calculu
 
 1.1 Fix $\tau\in J_0$. Choose a bounded open interval $J_1$ with $\tau\in J_1$ and $\overline{J_1}\subseteq J_0$. Its swept set $\Sigma_1:=\{(t,x):t\in\overline{J_1},x\in\psi_t(\overline B)\}$ is compact and lies in $U$, since it is contained in $\Sigma$. The continuous map $(t,X)\mapsto(t,\psi(t,X))$ therefore maps $\overline{J_1}\times\overline B$ into $U$. Compactness gives an open neighbourhood $O_1$ of $\overline B$ in $O$ such that $(t,\psi(t,X))\in U$ for $t\in\overline{J_1}$, $X\in O_1$: finitely many product neighbourhoods inside the inverse image of $U$ cover the compact cylinder, or equivalently its positive distance from the closed complement supplies a uniform spatial margin. Define $$g:J_1\times O_1\longrightarrow\mathbb R,\qquad g(t,X):=f\bigl(t,\psi(t,X)\bigr)J(t,X).$$ By [F1] and [F5], $g$ is $C^1$, and $\partial_tg$ is bounded on the compact cylinder $\overline{J_1}\times\overline B$ by [F6]. The argument below is applied on this local interval; compactness of the whole $\overline{J_0}$ is not required. [given, F1, F5, F6, construct]
 
-2.1 For $t\in J_1$, [F2] applied to the $C^1$ diffeomorphism $\psi_t$ and the function $f(t,\cdot)$ restricted to $\psi_t(B)$, integrable because it is continuous on a neighbourhood of the compact $\psi_t(\overline B)$ gives $$F(t)=\int_{\psi_t(B)}f(t,x)\,dx=\int_Bf\bigl(t,\psi(t,X)\bigr)J(t,X)\,dX=\int_Bg(t,X)\,dX .$$ [F1, F2, step 1.1, algebra]
+2.1 For $t\in J_1$, [F2] applied to the $C^1$ diffeomorphism $\psi_t:B\to\psi_t(B)$ and the integrable function $f(t,\cdot)$ restricted to $\psi_t(B)$ gives $$F(t)=\int_{\psi_t(B)}f(t,x)\,dx=\int_Bf\bigl(t,\psi(t,X)\bigr)J(t,X)\,dX=\int_Bg(t,X)\,dX .$$ These integrals are finite because $B$ and $\psi_t(B)$ are bounded measurable sets of finite measure by [F8], while the integrands are continuous and bounded on their compact closures. [F1, F2, F8, step 1.1, algebra]
 
-2.2 Differentiate $g$ in time at $(t,X)$. By [F5], $\partial_t[f(t,\psi(t,X))]=(\partial_tf)(t,\psi(t,X))+D_xf(t,\psi(t,X))\bigl(\partial_t\psi(t,X)\bigr)=(\partial_tf)(t,\psi(t,X))+\langle\nabla f,w\rangle(t,\psi(t,X))$, where the second form uses $w(t,\psi(t,X))=\partial_t\psi(t,X)$. By [F3] applied to $A(t)=D_X\psi_t(X)$, whose derivative is $A'(t)=D_xw(t,\psi(t,X))A(t)$ by [F5], we get $(\partial_tJ)(t,X)=J(t,X)\operatorname{tr}\bigl(D_xw(t,\psi(t,X))\bigr)=J(t,X)(\operatorname{div}w)(t,\psi(t,X))$. Hence $$\partial_tg(t,X)=\Bigl[\bigl(\partial_tf+\langle\nabla f,w\rangle+f\operatorname{div}w\bigr)\circ(t,\psi(t,X))\Bigr]J(t,X). \tag{*}$$ [F1, F3, F5, step 1.1, algebra]
+2.2 Differentiate $g$ in time at $(t,X)$. By [F5], $\partial_t[f(t,\psi(t,X))]=(\partial_tf)(t,\psi(t,X))+D_xf(t,\psi(t,X))\bigl(\partial_t\psi(t,X)\bigr)=(\partial_tf)(t,\psi(t,X))+\langle\nabla f,w\rangle(t,\psi(t,X))$, where the second form uses $w(t,\psi(t,X))=\partial_t\psi(t,X)$. For $A(t)=D_X\psi_t(X)$, [F7] gives $A'(t)=D_X\partial_t\psi(t,X)$. Differentiating $w(t,\psi(t,X))=\partial_t\psi(t,X)$ with respect to $X$ and applying the chain rule yields $D_xw(t,\psi(t,X))A(t)=D_X\partial_t\psi(t,X)=A'(t)$. By [F3], $(\partial_tJ)(t,X)=J(t,X)\operatorname{tr}\bigl(D_xw(t,\psi(t,X))\bigr)=J(t,X)(\operatorname{div}w)(t,\psi(t,X))$. Hence $$\partial_tg(t,X)=\Bigl[\bigl(\partial_tf+\langle\nabla f,w\rangle+f\operatorname{div}w\bigr)\circ(t,\psi(t,X))\Bigr]J(t,X). \tag{*}$$ [F1, F3, F5, F7, step 1.1, algebra]
 
 3.1 The product rule for a scalar field $f$ and a vector field $w$, read off componentwise from the definitions of gradient and divergence, gives $$\operatorname{div}(fw)=\sum_i\partial_i(fw_i)=\sum_i(\partial_if)w_i+f\sum_i\partial_iw_i=\langle\nabla f,w\rangle+f\operatorname{div}w .$$ Therefore ($\ast$) reads $\partial_tg(t,X)=\bigl(\partial_tf+\operatorname{div}(fw)\bigr)(t,\psi(t,X))\,J(t,X)$. [given, F5, step 2.2, algebra]
 
@@ -96,7 +104,7 @@ with the divergence and spatial derivative of [[def-cm-euclidean-spatial-calculu
 
 ## Remarks
 
-- The material motion of [[def-cm-continuum-motion]] is the special case $\psi=\chi$, $w=u$; the theorem is stated for a general $C^1$ family so that the control-volume identities can reuse it with an auxiliary boundary velocity. Positivity of $J$ on $B$ is used to rewrite $|\det D\psi_t|$ as $J$ on the reference region; the theorem itself needs only $J\ne0$ there.
+- The material motion of [[def-cm-continuum-motion]] is the special case $\psi=\chi$, $w=u$; the theorem is stated for a general $C^2$ family so that the control-volume identities can reuse it with an auxiliary boundary velocity. Positivity of $J$ on $B$ is used to rewrite $|\det D\psi_t|$ as $J$ on the reference region; without that positivity the pullback would instead use $|J|$.
 
 - The proof is local at each time in $J_0$: a compact inner time cylinder supplies the integrable majorant. The entire interval $J_0$ need not be bounded. No claim is made about a time interval whose closure meets the boundary of $I$ or about times at which the diffeomorphism family degenerates.
 

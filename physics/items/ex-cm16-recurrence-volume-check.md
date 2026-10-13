@@ -27,7 +27,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "A declared-data check of the page's recurrence theorem on a trapped one-label, three-dimensional Cartesian model: for the unit-mass radial quartic potential U(x)=||x||^4/4 the six-dimensional phase-space energy sublevel {E<=E1}, E1>0, is compact with finite volume bounded by 512 E1^(9/4), invariant under the flow by energy conservation and compact continuation, so the recurrence theorem gives almost-everywhere infinite returns; in contrast the free model U=0 has unbounded energy sublevels and each nonzero-velocity trajectory eventually exits every bounded set, showing the finite-volume hypothesis is not automatic. The check uses no measurement."
+physical_scope: "A declared-data check in dimensionless normalized coordinates of the page's recurrence theorem on a trapped one-label, three-dimensional Cartesian model: for the unit-mass radial quartic potential U(x)=||x||^4/4 the six-dimensional phase-space energy sublevel {E<=E1}, E1>0, is compact with finite dimensionless coordinate volume bounded by 512 E1^(9/4), invariant under the flow by energy conservation and compact continuation, so the recurrence theorem gives almost-everywhere infinite returns; in contrast the dimensionless free model U=0 has unbounded energy sublevels and each nonzero-velocity trajectory eventually exits every bounded set, showing the finite-volume hypothesis is not automatic. No SI quantity, measurement or empirical comparison is asserted."
 sources:
   references:
     - title: "David Tong, Classical Dynamics (University of Cambridge), §4.2.3 pp. 92-93: recurrence, the finite-measure requirement and the warning that positivity of energy alone does not bound the accessible volume"
@@ -40,7 +40,9 @@ sources:
 
 ## Example
 
-**Declared model data.** Take one label in the flat Cartesian presentation of
+**Declared model data.** Use dimensionless normalized position, velocity, mass,
+time and energy coordinates; this is a dimensionless model computation and no
+SI units are assigned. Take one label in the flat Cartesian presentation of
 [[pthm-cm16-recurrence-for-finite-volume-models]] with $N=1$: the configuration
 domain is $Q:=\mathbb R^3$, the mass is $m:=1$ so that $\mathsf M=I_3$ and
 $W=Q\times\mathbb R^3$ with coordinates $(x,v)$, and the **radial quartic
@@ -87,20 +89,8 @@ not automatic.
 
 ## Remarks
 
-- **What the check establishes.** The radial quartic model is trapped: every
-  energy sublevel is compact and invariant, so recurrence applies to every
-  positive energy level in the flat $N=1$ Cartesian presentation for which the
-  theorem is stated. This realizes the hypothesis of
-  [[pthm-cm16-recurrence-for-finite-volume-models]] on declared data and shows
-  that the theorem is not vacuous. The conclusion is almost-everywhere in phase
-  volume, gives no return time and says nothing about the flat model beyond the
-  failure of its hypotheses.
+- **What the check establishes.** The radial quartic model is trapped: every energy sublevel is compact and invariant, so recurrence applies to every positive energy level in the flat $N=1$ Cartesian presentation for which the theorem is stated. This realizes the hypothesis of [[pthm-cm16-recurrence-for-finite-volume-models]] on declared data and shows that the theorem is not vacuous. The conclusion is almost-everywhere in phase volume, gives no return time and says nothing about the flat model beyond the failure of its hypotheses.
 
-- **Choice assumption.** The check inherits the countable-choice assumption of
-  [L1] through the cited theorem; no further choice is used.
+- **Choice assumption.** The check inherits the countable-choice assumption of [L1] through the cited theorem; no further choice is used.
 
-- **Units.** In dimensionless units the box has the stated numeric volume; with
-  a physical mass $m$ and length, time and energy scales the energy sublevel is
-  the image of this one under a linear scaling of positions and velocities,
-  and its phase volume scales by the Jacobian determinant of that scaling
-  ([[def-cm01-units]]).
+- **Units.** The coordinates and measure here are dimensionless. To give the model a physical-unit interpretation one would have to specify compatible length, mass, time and energy scales and restore them in both the potential and phase-volume bound; this example does not make that identification ([[def-cm01-units]]).

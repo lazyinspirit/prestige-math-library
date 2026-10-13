@@ -40,14 +40,22 @@ verification:
 take $N=1$ label of mass $m>0$, time window $I_{0}=\mathbb R$, configuration
 domain $Q=\mathbb R^{3}$ and the **zero force map** $F(t,x,v):=0$. It is
 continuous and state-Lipschitz with constant $0$, so it satisfies the
-standing hypotheses of the branch. With $e_{1}$ the first standard basis
-vector and a parameter $v\in\mathbb R$ of dimension $\ell\tau^{-1}$
-([[def-cm01-units]]), declare the initial datum $\zeta(v):=(0,0,v e_{1})$ at
-time $t_{0}=0$, so that $\Theta:=\mathbb R$ and the datum map $\zeta$ of
-[[def-cm18-observable-model]] is defined. Fix an observation time $t_{1}>0$
-and the **position readout** $\Phi(v):=x_{v}(t_{1})\cdot e_{1}$, where
-$x_{v}$ is the motion of the model with datum $\zeta(v)$; the readout has
-dimension $\ell$ and is read in metres.
+standing hypotheses of the branch. With $e_{1}$ the first standard basis vector, let $\Theta=Z=\mathbb R$,
+with both labels read in velocity units $\ell\tau^{-1}$
+([[def-cm01-units]]). Use the constant family $F_\theta=0$ for every
+$\theta\in\Theta$ and the preparation map
+$\zeta:Z\to\mathbb R\times\mathbb R^3\times\mathbb R^3$,
+$\zeta(z):=(0,0,z e_1)$ at time $t_0=0$.
+Then $x_{\theta,z}(t)=(zt,0,0)$ is the global motion for every pair.
+Fix an observation time $t_1>0$ and the position readout
+$R(\theta,z,(x,w)):=x\cdot e_1$, so the full prediction map is
+$\Phi(\theta,z)=z t_1$. For $v\in\mathbb R$ choose the diagonal pair
+$(\theta,z)=(v,v)$ and abbreviate $x_v:=x_{v,v}$ and
+$\Phi(v):=\Phi(v,v)=x_v(t_1)\cdot e_1$.
+This explicit choice permits a one-label formula without identifying the
+parameter argument with the preparation argument of
+[[def-cm18-observable-model]]. The readout has dimension $\ell$ and is read
+in metres; the force family does not depend on its parameter label.
 
 **The motion.** The curve $x_{v}(t):=(vt,0,0)$, $t\in\mathbb R$, is a
 motion of the declared model with datum $\zeta(v)$: its coordinate velocity
@@ -59,7 +67,7 @@ $\Phi(v)=v\,t_{1}$, of dimension $\ell$ with $[t_{1}]=\tau$.
 **The repeated protocol.** Fix $n\ge1$ and adopt the IID sampling hypothesis
 and the second-moment hypothesis of [[def-cm18-sampling-model]] for the
 errors $\varepsilon_{1},\dots,\varepsilon_{n}$ of $n$ repetitions of the
-protocol at the same parameter $v$ and the same preparation, on a common
+protocol at the fixed pair $(\theta,z)=(v,v)$, on a common
 probability space. Suppose additionally that $E[\varepsilon_{1}]=0$ and
 $\operatorname{Var}(\varepsilon_{1})=\sigma^{2}\in[0,+\infty)$; these two
 statements are extra model hypotheses, not part of either definition. Then
@@ -77,7 +85,7 @@ measured values, and no apparatus is asserted to realize the protocol.
 
 ## Facts & Assumptions
 
-**Given:** The one-label model with zero force map of the statement, the datum map $\zeta(v)=(0,0,ve_{1})$, the observation time $t_{1}>0$, the position readout $\Phi(v)=x_{v}(t_{1})\cdot e_{1}$, and the adopted IID, second-moment, zero-mean and variance hypotheses on the errors of $n$ repetitions.
+**Given:** The one-label model with zero force map of the statement, the preparation map $\zeta(z)=(0,0,ze_{1})$ and fixed pair $(v,v)$, the observation time $t_{1}>0$, the position readout $\Phi(v)=x_{v}(t_{1})\cdot e_{1}$, and the adopted IID, second-moment, zero-mean and variance hypotheses on the errors of $n$ repetitions.
 
 [L1] The curve $x_{v}(t)=(vt,0,0)$ is of class $C^{\infty}$; coordinate velocities and accelerations are obtained componentwise, and a motion of the model is a $C^{2}$ curve satisfying $m\ddot x=F$ on the time window ([[def-cm01-velocity-acceleration]], [[def-cm02-newtonian-flow]]); the zero force map satisfies the standing hypotheses of [[post-cm02-force-superposition]] because it is continuous and state-Lipschitz with constant $0$.
 

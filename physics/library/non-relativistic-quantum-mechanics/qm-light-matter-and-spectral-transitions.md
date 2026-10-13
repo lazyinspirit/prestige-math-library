@@ -48,7 +48,7 @@ $D_j^{\mathrm{ch}}=\sum_{i=1}^{3}e_{j,i}D_i^{W}$,
 a coupling $\eta_{0}$, and the operator
 $H_{\mathrm{LM}}=H_{a}\otimes I+I\otimes H_{f}
 +\eta_{0}\sum_{j=1}^{J}D^{\mathrm{ch}}_{j}\otimes\phi(g_{j})$, self-adjoint and bounded below
-by [[thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound]].
+for $d\ge1$ by [[thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound]]; the zero-dimensional case is handled directly in the model definition.
 [[def-nrqm-light-matter-framework-dipole-drive-and-long-wavelength]] declares
 the separate prescribed-field model $H_{\mathrm d}(t)=H_{a}
 -\sum_{j}E_{\mathrm{ext},j}(t)D^{W}_{j}$ in the long-wavelength dipole regime;

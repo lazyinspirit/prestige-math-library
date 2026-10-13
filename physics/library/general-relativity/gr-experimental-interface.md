@@ -47,7 +47,8 @@ readouts are determined by those entries: the frequency ratio
 $E_R/E_E=g(W_R,U_R)/g(W_E,U_E)$ and the redshift $z=E_E/E_R-1$; the radar
 proper-time increment between emission and reception; the deflection angle
 $\arccos\kappa$ built from the rest-space directions of the ray at two events
-under a declared isometric identification; the chart azimuthal increment and
+under a declared isometric identification; the increment of a supplied continuous unwrapped azimuth between successive
+strict radial minima and
 the perihelion advance $\Delta\varphi-2\pi$; the receiver arrival-time tuple of
 a finite family of rays; and the strain of the ideal two-body detector. An
 operational model attaches to these readouts a parameter set, a prediction map

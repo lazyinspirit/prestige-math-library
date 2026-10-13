@@ -43,6 +43,12 @@ Let $X_{\pm}$ and $B_R$ be the two-sign shift space and the closed ball of bound
 
 $$T_s:B_R\longrightarrow \mathbb R^{\mathbb Z},\qquad (T_sx)_n:=s_n\sqrt{\,a+x_{n-1}+x_{n+1}\,}\qquad(n\in\mathbb Z).$$
 
+For a nonzero real $r$, define $\operatorname{sign}r:=+1$ when $r>0$ and
+$\operatorname{sign}r:=-1$ when $r<0$. Once clause 2 establishes
+$T_s(B_R)\subseteq B_R$, its iterates are defined by
+$T_s^0:=\operatorname{id}_{B_R}$ and $T_s^{m+1}:=T_s\circ T_s^m$ for
+$m\in\mathbb N$.
+
 Then:
 
 1. $a-2R=(\sqrt a-1)^2-7\ge74$, so $L\ge\sqrt{74}>1$; moreover $a+2R<R^2$, hence $\sqrt{a+2R}<R$;

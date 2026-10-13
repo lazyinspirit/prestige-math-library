@@ -10,7 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-minkowski-model-and-inertial-chart, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-christoffel-symbols-of-an-affine-connection, lem-gr-connection-conditions-in-chart-components, thm-gr-curvature-tensoriality-and-coordinate-formula, def-gr-curvature-tensor-and-derived-tensors, prop-coordinate-geodesic-equation, def-geodesic-of-an-affine-connection, def-gr-killing-field, def-lie-derivative-of-a-tensor-field, def-local-and-global-flow, def-complete-vector-field, thm-fundamental-theorem-on-flows, def-smooth-vector-field-as-a-tangent-bundle-section, lem-gr-proper-time-reparametrization-and-four-velocity, def-gr-timelike-worldline-and-proper-time, lem-gr-parallel-transport-and-geodesic-speed]
+deps: [def-gr-minkowski-model-and-inertial-chart, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-christoffel-symbols-of-an-affine-connection, lem-gr-connection-conditions-in-chart-components, thm-gr-curvature-tensoriality-and-coordinate-formula, def-gr-curvature-tensor-and-derived-tensors, prop-coordinate-geodesic-equation, def-geodesic-of-an-affine-connection, def-gr-killing-field, def-lie-derivative-of-a-tensor-field, def-local-and-global-flow, def-complete-vector-field, thm-fundamental-theorem-on-flows, def-smooth-vector-field-as-a-tangent-bundle-section, lem-gr-proper-time-reparametrization-and-four-velocity, def-gr-timelike-worldline-and-proper-time, lem-gr-parallel-transport-and-geodesic-speed, def-euclidean-inner-product]
 dependency_roles:
   def-gr-minkowski-model-and-inertial-chart: mathematical-premise
   def-gr-metric-selected-connection: mathematical-premise
@@ -30,6 +30,7 @@ dependency_roles:
   lem-gr-proper-time-reparametrization-and-four-velocity: mathematical-premise
   def-gr-timelike-worldline-and-proper-time: mathematical-premise
   lem-gr-parallel-transport-and-geodesic-speed: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
 sources:
   references:
     - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 3: the geodesic equation (3.47) and the statement that in flat space geodesics are straight lines in inertial coordinates, printed pp. 70-71 (PDF pp. 77-78)"
@@ -78,19 +79,23 @@ $g(\gamma',\gamma')=\eta(v,v)=-(v^0)^2+\sum_{i=1}^3(v^i)^2$; the maximal
 geodesic with $x(\gamma(0))=x_0$ and $x(\gamma)'(0)=v$ has domain
 $\mathbb R$. If $\eta(v,v)<0$ and $v^0>0$, the geodesic is a future timelike
 worldline
-([[def-gr-timelike-worldline-and-proper-time]]) and the parameter
+([[def-gr-timelike-worldline-and-proper-time]]) and, for any $s_0\in I$,
+the parameter
 $\tau(s):=\sqrt{-\eta(v,v)}\,(s-s_0)/c$ is proper time up to an additive
 constant, with $d\gamma/d\tau$ the physical four-velocity
 $U$, $g(U,U)=-c^2$
 ([[lem-gr-proper-time-reparametrization-and-four-velocity]] clause 3).
 
 **(e) Inertial-chart velocity reading.** Let $\gamma$ be a geodesic as in
-(d) with $\eta(v,v)<0$, $v^0>0$, written in the inertial chart as
-$x(\gamma(t))=(ct,\mathbf q(t))$ with $\mathbf q$ the spatial part and $t$
-the parameter $t=x^0/c$. Then the coordinate velocity
-$\mathbf w:=d\mathbf q/dt$ is the constant vector
-$(cv^1,v^0,\dots)$-reading $\mathbf w=(c/v^0)(v^1,v^2,v^3)$, and
-$|\mathbf w|<c$.
+(d) with $x(\gamma(s))=x_0+sv$, $\eta(v,v)<0$ and $v^0>0$. Define
+$t(s):=x^0(\gamma(s))/c=(x_0^0+sv^0)/c$; this is strictly increasing, and
+on $t(I)$ define
+$\gamma_t(t):=\gamma((ct-x_0^0)/v^0)$. Then
+$x(\gamma_t(t))=(ct,\mathbf q(t))$ for its spatial component $\mathbf q$,
+and the coordinate velocity is the constant vector
+$\mathbf w:=d\mathbf q/dt=(c/v^0)(v^1,v^2,v^3)$. With
+$|\mathbf w|:=\|\mathbf w\|_2$ from the Euclidean inner product
+([[def-euclidean-inner-product]]), timelikeness gives $|\mathbf w|<c$.
 
 ## Facts & Assumptions
 
@@ -108,6 +113,8 @@ $|\mathbf w|<c$.
 
 [L6] On a future-directed timelike geodesic with affine parameter $s$ and constant speed $g(\gamma',\gamma')=-\lambda^2<0$, the parameter $\tau=\lambda(s-s_0)/c$ is proper time, and $U=d\gamma/d\tau$ satisfies $g(U,U)=-c^2$ ([[lem-gr-proper-time-reparametrization-and-four-velocity]] clause 3, [[def-gr-timelike-worldline-and-proper-time]]).
 
+[L7] In $\mathbb R^3$ the Euclidean norm satisfies $\|(w^1,w^2,w^3)\|_2^2=\sum_{i=1}^3(w^i)^2$ ([[def-euclidean-inner-product]]).
+
 ## Proof
 
 **Proof technique:** direct; evaluate the chart formulas for a metric with constant components, then identify the flow and the geodesics.
@@ -120,7 +127,7 @@ $|\mathbf w|<c$.
 
 2.2 (Geodesics are straight lines.) Let $z:=x\circ\gamma:I\to\mathbb R^4$ be the coordinate expression of a smooth curve. By [L3] and step 1.1, $\gamma$ is a geodesic if and only if $\ddot z^k=0$ for $k=0,1,2,3$ on every parameter subinterval, that is, if and only if $z(s)=x_0+sv$ for some $x_0,v\in\mathbb R^4$; then the maximal interval is all of $\mathbb R$, because the affine expression extends to $\mathbb R$ and is again a solution. The speed is constant for every geodesic by clause 3 of [[lem-gr-parallel-transport-and-geodesic-speed]], and inserting the affine expression gives the value $g(\gamma',\gamma')=\eta(v,v)$. This proves the first two claims of (d). [step 1.1, L3, algebra]
 
-3.1 (Future timelike geodesics and proper time.) Suppose $\eta(v,v)=-\lambda^2<0$ with $v^0>0$. By clause (c) of [[def-gr-minkowski-model-and-inertial-chart]], $\gamma$ is a future timelike curve, and by [L6] the parameter $\tau(s)=\lambda(s-s_0)/c$ is proper time, with $g(U,U)=-c^2$ for $U=d\gamma/d\tau$. This proves the third claim of (d); for (e), write $t=x^0(\gamma(s))/c=\bigl(x_0^0+sv^0\bigr)/c$, so that $d\mathbf q/dt=(c/v^0)(v^1,v^2,v^3)$ is constant; from $\eta(v,v)<0$ and $v^0>0$ we have $\sum_i(v^i)^2<(v^0)^2$, hence $|\mathbf w|^2=c^2\sum_i(v^i)^2/(v^0)^2<c^2$. [step 2.2, L6, given, algebra] ∎
+3.1 (Future timelike geodesics and proper time.) Suppose $\eta(v,v)=-\lambda^2<0$ with $v^0>0$. By clause (c) of [[def-gr-minkowski-model-and-inertial-chart]], $\gamma$ is a future timelike curve, and by [L6] the parameter $\tau(s)=\lambda(s-s_0)/c$ is proper time, with $g(U,U)=-c^2$ for $U=d\gamma/d\tau$. This proves the third claim of (d); for (e), write $t=x^0(\gamma(s))/c=\bigl(x_0^0+sv^0\bigr)/c$, so that $d\mathbf q/dt=(c/v^0)(v^1,v^2,v^3)$ is constant; from $\eta(v,v)<0$ and $v^0>0$ we have $\sum_i(v^i)^2<(v^0)^2$, hence [L7] gives $|\mathbf w|^2=c^2\sum_i(v^i)^2/(v^0)^2<c^2$. [step 2.2, L6, L7, given, algebra] ∎
 
 ## Remarks
 

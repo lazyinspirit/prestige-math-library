@@ -30,6 +30,7 @@ deps:
     thm-ftc-second-part,
     def-darboux-integral,
     thm-continuous-implies-integrable,
+    thm-nonnegative-continuous-with-zero-integral-vanishes,
     def-interval,
     thm-gr-curvature-tensoriality-and-coordinate-formula
   ]
@@ -52,6 +53,7 @@ dependency_roles:
   thm-ftc-second-part: mathematical-premise
   def-darboux-integral: mathematical-premise
   thm-continuous-implies-integrable: mathematical-premise
+  thm-nonnegative-continuous-with-zero-integral-vanishes: mathematical-premise
   def-interval: mathematical-premise
   thm-gr-curvature-tensoriality-and-coordinate-formula: mathematical-premise
 sources:
@@ -126,7 +128,7 @@ $J=0$; the index form is positive definite on the space of such fields.
 
 [L2] The curvature satisfies $R_{abcd}=-R_{bacd}$, $R_{abcd}=-R_{abdc}$ and $R_{abcd}=R_{cdab}$, and $g(R(X,Y)Z,W)=R_{abcd}W^aX^cY^dZ^b$ ([[thm-gr-curvature-algebraic-symmetries]] clauses (a)-(b), [[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a)).
 
-[L3] A Jacobi field is a field with $D_s^2J=R(T,J)T$; for a field $J$ along $\gamma$, $g(J,T)$ is affine and $J^\perp$ is again a Jacobi field when $J$ is one ([[def-gr-jacobi-field-and-conjugate-instant]] clauses (b), (c) and (e), [[thm-gr-jacobi-equation-and-geodesic-deviation]] clause (d)).
+[L3] A Jacobi field is a field with $D_s^2J=R(T,J)T$; for a Jacobi field $J$ along $\gamma$, $g(J,T)$ is affine and $J^\perp$ is again a Jacobi field ([[def-gr-jacobi-field-and-conjugate-instant]] clauses (b), (c) and (e), [[thm-gr-jacobi-equation-and-geodesic-deviation]] clause (d)).
 
 [L4] The parallel transport of a $g$-orthonormal basis is a smooth $g$-orthonormal frame with $D_sE_i=0$, so for $J=\sum_iJ^iE_i$ one has $D_sJ=\sum_i(J^i)'E_i$ and $g(D_sJ,D_sK)=\sum_i(J^i)'(K^i)'$ ([[thm-existence-and-uniqueness-of-parallel-sections]], [[def-parallel-section-along-a-curve]], [[lem-gr-parallel-transport-and-geodesic-speed]] clause 2).
 
@@ -134,7 +136,7 @@ $J=0$; the index form is positive definite on the space of such fields.
 
 [L6] The coefficient matrix $C$ of claim (c) is smooth, so the solution $A$ of $A''=CA$, $A(a)=0$, $A'(a)=I_3$ is $C^2$ and satisfies $A(s)=(s-a)I_3+o(s-a)$ and $A'(s)=I_3+o(1)$ as $s\downarrow a$. Write $A(s)=(s-a)B(s)$, so $B(s)\to I_3$; the cofactor formula and $\det B(s)\to1$ give $B(s)^{-1}\to I_3$. Thus $A(s)^{-1}=(s-a)^{-1}(I_3+o(1))$ and $\Theta(s)=A'(s)A(s)^{-1}=(s-a)^{-1}(I_3+o(1))$.
 
-[L7] For $C^1$ functions on $[a,b]$ the fundamental theorem of calculus holds, and continuous functions on compact intervals are integrable; continuous piecewise-$C^1$ fields have continuous integrands on each piece ([[thm-ftc-second-part]], [[thm-continuous-implies-integrable]], [[def-darboux-integral]]).
+[L7] For $C^1$ functions on $[a,b]$ the fundamental theorem of calculus holds, and continuous functions on compact intervals are integrable; continuous piecewise-$C^1$ fields have continuous integrands on each piece. A continuous nonnegative function on a nondegenerate compact interval with zero integral vanishes identically ([[thm-ftc-second-part]], [[thm-continuous-implies-integrable]], [[thm-nonnegative-continuous-with-zero-integral-vanishes]], [[def-darboux-integral]]).
 
 ## Proof
 
@@ -148,8 +150,7 @@ $J=0$; the index form is positive definite on the space of such fields.
 
 4.1 (The Wronskian and $\Theta$.) Define $W(s):=A(s)^TA'(s)-A'(s)^TA(s)$, a $3\times3$ matrix function on $[a,b]$. Then $W'=A'^TA'+A^TA''-A''^TA-A'^TA'=A^TCA-(CA)^TA=0$ because $C$ is symmetric by step 2.1, and $W(a)=0$; hence $W=0$ on $[a,b]$. On $(a,b]$ set $\Theta:=A'A^{-1}$, which is well defined by step 3.1. The identity $W=0$ gives $A^TA'=A'^TA$, and multiplying on the left by $(A^T)^{-1}$ and on the right by $A^{-1}$ gives $\Theta^T=\Theta$; differentiability of $A$ and $A^{-1}$ gives $\Theta'=A''A^{-1}-A'A^{-1}A'A^{-1}=C-\Theta^2$. [step 2.1, step 3.1, algebra]
 
-5.1 (The factorization identity.) Let $J$ be a continuous piecewise-$C^1$ normal field vanishing at $a$ and $b$, with coefficient vector $j(s)$ in the frame of step 2.1. On each smooth piece, [step 3.1, step 4.1, L6, L7, algebra, step 2.1]
-$|j'-\Theta j|^2=|j'|^2-2j'^T\Theta j+j^T\Theta^2j$, because $\Theta$ is symmetric. For $\varepsilon>0$ sufficiently small, integrate by parts on the smooth pieces of $[a+\varepsilon,b]$; the interior endpoint terms cancel because $j$ and $\Theta$ are continuous. The identity
+5.1 (The factorization identity.) Let $J$ be a continuous piecewise-$C^1$ normal field vanishing at $a$ and $b$, with coefficient vector $j(s)$ in the frame of step 2.1. On each smooth piece, $|j'-\Theta j|^2=|j'|^2-2j'^T\Theta j+j^T\Theta^2j$, because $\Theta$ is symmetric. For $\varepsilon>0$ sufficiently small, integrate by parts on the smooth pieces of $[a+\varepsilon,b]$; the interior endpoint terms cancel because $j$ and $\Theta$ are continuous. The identity
 $(j^T\Theta j)'=2j'^T\Theta j+j^T\Theta'j$ gives
 $$\int_{a+\varepsilon}^b-2j'^T\Theta j\,ds=-[j^T\Theta j]_{a+\varepsilon}^b+\int_{a+\varepsilon}^b j^T\Theta'j\,ds.$$
 At $b$ the boundary term vanishes because $j(b)=0$. At $a$, one-sided
@@ -158,13 +159,13 @@ By [L6], $j^T\Theta j=O(s-a)\to0$ and $\Theta(s)j(s)=j'(a)+o(1)$, so
 $j'(s)-\Theta(s)j(s)\to0$ on the first smooth piece as $s\downarrow a$.
 Define the factorized integrand at $a$ to be this limit squared, namely $0$;
 it is then piecewise continuous on $[a,b]$. Using
-$\Theta'=C-\Theta^2$ from step 4.1 and letting $\varepsilon\downarrow a$
+$\Theta'=C-\Theta^2$ from step 4.1 and letting $\varepsilon\downarrow0$
 in the integrated identity yields
 $$I(J)=\int_a^b\bigl(|j'|^2+j^TCj\bigr)\,ds =\int_a^b|j'-\Theta j|^2\,ds.$$
 This is the factorization in (c), with its right-hand integrand continuously
 extended at $a$. [step 3.1, step 4.1, L6, L7, algebra, step 2.1]
 
-6.1 (Positivity.) By step 5.1, $I(J)=\int_a^b|J'-\Theta J|^2ds\ge0$. If $I(J)=0$, the continuous nonnegative integrand vanishes identically on each smooth piece, so $J'=\Theta J$ there. Then $(A^{-1}J)'=A^{-1}J'-A^{-1}A'A^{-1}J=A^{-1}(J'-\Theta J)=0$ on $(a,b]$, so $J(s)=A(s)v$ for a constant $v$; since $J(b)=0$ and $A(b)$ is invertible by step 3.1, $v=0$ and $J=0$. Conversely $J=0$ gives $I(J)=0$. This proves the positivity statement, and with steps 1.1, 2.1, 3.1 and 5.1 the lemma. [step 5.1, step 3.1, step 4.1, L7, algebra, step 1.1] ∎
+6.1 (Positivity.) By step 5.1, $I(J)=\int_a^b|J'-\Theta J|^2ds\ge0$. If $I(J)=0$, nonnegativity gives zero integral on every compact subinterval inside a smooth piece; [L7] makes the continuous integrand zero there, so $J'=\Theta J$ on each open piece. Then $(A^{-1}J)'=A^{-1}J'-A^{-1}A'A^{-1}J=A^{-1}(J'-\Theta J)=0$ on $(a,b]$, so $A^{-1}J$ is constant on each open piece; its continuity across the finitely many joints makes this one constant $v$ on $(a,b]$, giving $J(s)=A(s)v$; since $J(b)=0$ and $A(b)$ is invertible by step 3.1, $v=0$ and $J=0$. Conversely $J=0$ gives $I(J)=0$. This proves the positivity statement, and with steps 1.1, 2.1, 3.1 and 5.1 the lemma. [step 5.1, step 3.1, step 4.1, L7, algebra, step 1.1] ∎
 
 ## Remarks
 

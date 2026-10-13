@@ -12,6 +12,14 @@ deps:
     lem-exponential-series-of-a-bounded-operator,
     cor-linear-maps-with-finite-dimensional-domain-are-bounded,
     def-operator-norm,
+    def-matrix-space,
+    def-euclidean-inner-product,
+    thm-cauchy-schwarz-and-the-euclidean-norm,
+    lem-standard-basis-of-f-n,
+    def-matrix-product-and-identity-matrix,
+    def-linear-map,
+    def-bounded-linear-operator,
+    thm-euclidean-space-complete,
     thm-gronwall-integral-inequality,
     thm-chain-rule,
     thm-algebra-of-derivatives,
@@ -25,6 +33,14 @@ dependency_roles:
   lem-exponential-series-of-a-bounded-operator: mathematical-premise
   cor-linear-maps-with-finite-dimensional-domain-are-bounded: mathematical-premise
   def-operator-norm: mathematical-premise
+  def-matrix-space: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
+  thm-cauchy-schwarz-and-the-euclidean-norm: mathematical-premise
+  lem-standard-basis-of-f-n: mathematical-premise
+  def-matrix-product-and-identity-matrix: mathematical-premise
+  def-linear-map: mathematical-premise
+  def-bounded-linear-operator: mathematical-premise
+  thm-euclidean-space-complete: mathematical-premise
   thm-gronwall-integral-inequality: mathematical-premise
   thm-chain-rule: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
@@ -38,24 +54,17 @@ provenance:
 proof_strategy: direct
 sources:
   references:
-    - title: "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS
-        Graduate Studies in Mathematics 140, online edition), Section 3.1 (the
-        matrix exponential, Lemma 3.1 and Theorem 3.4) and Section 3.2 (the
-        inhomogeneous linear system $\\dot x=A(t)x+f(t)$, variation of
-        constants), printed pages 57-66"
-      url: "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
-    - title: "K. Likharev, Essential Graduate Physics, Classical Mechanics (complete
-        252-page volume), Chapter 5 Section 5.1, Eqs. (5.27)-(5.30): the
-        temporal Green's function as the response to a short pulse, $q(t)=\\int
-        f(t')G(t-t')\\,dt'$, printed pages 6-7 of Chapter 5 (PDF pages 92-93)"
-      url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+  - title: G. Teschl, Ordinary Differential Equations and Dynamical Systems (retrieved 365-page online edition), Section 3.1, Eqs. (3.2)-(3.12), printed pp. 59-61; Section 3.4, Theorem 3.12, Eq. (3.97), printed pp. 83-84.
+    url: https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf
+  - title: 'K. Likharev, Essential Graduate Physics, Classical Mechanics (complete 252-page volume), Chapter 5 Section 5.1, Eqs. (5.27)-(5.30): the temporal Green''s function as the response to a short pulse, $q(t)=\int f(t'')G(t-t'')\,dt''$, printed pages 6-7 of Chapter 5 (PDF pages 92-93)'
+    url: https://essentialgraduatephysics.org/Files/CM%20merged.pdf
 verification:
   precheck: pass
 ---
 
 ## Statement
 
-Let $n\ge1$, let $A\in M_n(\mathbb R)$, let $t_0\in\mathbb R$ and $z_0\in\mathbb R^n$, and let $b:\mathbb R\to\mathbb R^n$ be continuous ([[def-vector-valued-derivative-and-integral]]). Define the **matrix exponential**
+Let $n\ge1$, equip $\mathbb R^n$ with the Euclidean inner product and norm of [[def-euclidean-inner-product]], let $A\in M_n(\mathbb R)$ ([[def-matrix-space]]), let $t_0\in\mathbb R$ and $z_0\in\mathbb R^n$, and let $b:\mathbb R\to\mathbb R^n$ be continuous ([[def-vector-valued-derivative-and-integral]]). The Euclidean norm is a norm by [[thm-cauchy-schwarz-and-the-euclidean-norm]], and the standard coordinate vectors form an ordered basis by [[lem-standard-basis-of-f-n]]. For $A=(a_{ij})$ and $z\in\mathbb R^n$, define $(Az)_i:=\sum_{j<n}a_{ij}z_j$; this is a linear map by [[def-linear-map]], hence bounded by [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]], and $\|A\|$ denotes its induced Euclidean operator norm ([[def-operator-norm]]). Matrix powers and products use [[def-matrix-product-and-identity-matrix]]; their action agrees with composition of the corresponding linear maps by distributing the finite sums in the displayed coordinate formula. Define the **matrix exponential**
 
 $$E:\mathbb R\longrightarrow M_n(\mathbb R),\qquad E(t):=\sum_{k=0}^\infty\frac{t^k}{k!}A^k .$$
 
@@ -71,7 +80,7 @@ satisfies $z(t_0)=z_0$ and $z'(t)=A\,z(t)+b(t)$ for every $t\in\mathbb R$.
 
 **Given:** $n\ge1$, $A\in M_n(\mathbb R)$ identified with a linear endomorphism of $\mathbb R^n$, $z_0\in\mathbb R^n$, a continuous $b:\mathbb R\to\mathbb R^n$, and the matrix exponential $E$ displayed above.
 
-[F1] Every linear map $\mathbb R^n\to\mathbb R^n$ is bounded for the Euclidean norm, so $A\in\mathcal B(\mathbb R^n)$ ([[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]); $\mathbb R^n$ is a Banach space. The exponential series lemma applies and gives all of: absolute convergence in the operator norm, $E\in C^1$ with $E'=AE=EA$, $E(0)=I_n$, $E(u+v)=E(u)E(v)$ and $\|E(u)\|\le e^{\|A\||u|}$ ([[lem-exponential-series-of-a-bounded-operator]]).
+[F1] The matrix action defined in the Statement is a bounded linear endomorphism $\widehat A$ of normed Euclidean $\mathbb R^n$: the Euclidean norm is a norm, and the standard coordinate vectors form a finite ordered basis, so the finite-dimensional boundedness theorem applies ([[def-euclidean-inner-product]], [[thm-cauchy-schwarz-and-the-euclidean-norm]], [[lem-standard-basis-of-f-n]], [[cor-linear-maps-with-finite-dimensional-domain-are-bounded]]). Its induced metric agrees with $d_2$ ([[def-euclidean-inner-product]]), which is complete ([[thm-euclidean-space-complete]]); hence this normed space is Banach. For matrices $B=(b_{ij})$ and $C=(c_{j\ell})$, $((BC)z)_i=\sum_{\ell<n}(\sum_{j<n}b_{ij}c_{j\ell})z_\ell=(B(Cz))_i$, so matrix multiplication represents composition ([[def-matrix-product-and-identity-matrix]]). The exponential series lemma applies to $\widehat A$ and gives absolute convergence in operator norm, $E\in C^1$ with $E'=AE=EA$, $E(0)=I_n$, $E(u+v)=E(u)E(v)$ and $\|E(u)\|\le e^{\|A\||u|}$ ([[lem-exponential-series-of-a-bounded-operator]]).
 
 [F2] The convolution differentiation lemma ([[lem-cm-convolution-differentiation]]) applies with interval $I=\mathbb R$, open kernel domain $U=\mathbb R\supseteq I-I$, $g:=E:U\to M_n(\mathbb R)$ and $f:=b:I\to\mathbb R^n$: for every $t$, the map $t\mapsto\int_{t_0}^tE(t-s)b(s)\,ds$ is differentiable with derivative $E(0)b(t)+\int_{t_0}^tE'(t-s)b(s)\,ds$.
 

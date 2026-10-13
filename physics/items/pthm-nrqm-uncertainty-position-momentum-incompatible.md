@@ -39,7 +39,7 @@ dependency_roles:
   post-nrqm-framework-identical-particles-and-spin: physical-assumption
   post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle: physical-assumption
   post-nrqm-framework-observable-and-probability: physical-assumption
-  pthm-nrqm-uncertainty-compatible-sharp-observables-and-joint-law: physical-result
+  pthm-nrqm-uncertainty-compatible-sharp-observables-and-joint-law: formulation-prerequisite
   thm-spectral-theorem-for-unbounded-self-adjoint-operators: mathematical-premise
 proof_strategy: contradiction
 provenance:
@@ -110,7 +110,7 @@ error-disturbance relation, and records no apparatus or empirical result.
 
 [F2] **Bounded Borel calculus.** If two self-adjoint operators $A,B$ have strongly commuting spectral projection-valued measures, then for every bounded Borel $f$ one has $f(B)D(A)\subseteq D(A)$ and $Af(B)x=f(B)Ax$ for every $x\in D(A)$ ([[lem-nrqm-uncertainty-bounded-borel-calculus-of-commuting-operators]] clause (b)).
 
-[F3] **Joint sharp observable criterion.** A pair of assigned sharp observables is compatible -- possesses a regular projection-valued measure on the Borel sets of $\mathbb R^{2}$ with the two spectral measures as marginals -- exactly when the two spectral projection-valued measures strongly commute ([[pthm-nrqm-uncertainty-compatible-sharp-observables-and-joint-law]] clause (a); [[def-nrqm-uncertainty-strong-spectral-commutation]] clause (b)).
+[F3] **PVM multiplicativity and compatibility vocabulary.** Every projection-valued measure $H$ satisfies $H(S\cap T)=H(S)H(T)=H(T)H(S)$ for measurable $S,T$ ([[def-projection-valued-measure]]). A joint sharp observable and compatibility mean, respectively, a regular PVM on $\mathcal B(\mathbb R^{2})$ with the two spectral marginals and the existence of such a PVM, as defined in the Statement of [[pthm-nrqm-uncertainty-compatible-sharp-observables-and-joint-law]]; only this terminology is used here, not that theorem's deductions under P1-P3.
 
 [F4] **The exponential function.** $\exp\bigl(-\tfrac{i}{\hbar}tp\bigr)$ is a bounded Borel function of $p\in\mathbb R$ with values of modulus $1$, so it is admissible in the bounded Borel functional calculus of a self-adjoint operator ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[def-projection-valued-measure]]).
 
@@ -124,4 +124,4 @@ error-disturbance relation, and records no apparatus or empirical result.
 
 2.1 [The contradiction] Let $\psi\in D(Q_{j})$ be nonzero, which exists because $D(Q_{j})$ is dense, and put $\eta:=T_{te_{j}}^{-1}\psi$; by the domain invariance of [F1], $\eta\in D(Q_{j})$. The conjugation identity of [F1] gives $$T_{te_{j}}Q_{j}\eta=(Q_{j}-tI)T_{te_{j}}\eta=(Q_{j}-tI)\psi,$$ while step 1.1 gives $T_{te_{j}}Q_{j}\eta=Q_{j}T_{te_{j}}\eta=Q_{j}\psi$. Hence $(Q_{j}-tI)\psi=Q_{j}\psi$, that is $t\psi=0$, which contradicts $\psi\ne0$ and $t\ne0$. Therefore $E_{Q_{j}}$ and $E_{P_{j}}$ do not strongly commute, and there are Borel sets on which the two projections fail to commute. This proves (a). [given, step 1.1, F1, algebra]
 
-3.1 [No joint sharp observable] By [F3] a pair of assigned sharp observables is compatible exactly when its spectral projection-valued measures strongly commute; by step 2.1 this fails for $(Q_{j},P_{j})$, so no regular projection-valued measure on $\mathcal B(\mathbb R^{2})$ has $E_{Q_{j}}$ and $E_{P_{j}}$ as marginals, and no joint sharp outcome law of the pair is assigned by the framework to any preparation. This proves (b); the scope statement (c) records that no approximate or unsharp joint measurement, error-disturbance relation, apparatus model or empirical result is asserted by steps 1.1-2.1. [given, step 2.1, F3, discharge-contradiction] ∎
+3.1 [No joint sharp observable] If a regular PVM $H$ on $\mathcal B(\mathbb R^{2})$ had the two spectral marginals, then [F3], with $S=\Lambda\times\mathbb R$ and $T=\mathbb R\times\Sigma$, would give $E_{Q_j}(\Lambda)E_{P_j}(\Sigma)=H(\Lambda\times\Sigma)=E_{P_j}(\Sigma)E_{Q_j}(\Lambda)$ for all Borel $\Lambda,\Sigma$. This contradicts step 2.1. Thus no such PVM exists and, by the terminology in [F3], no joint sharp outcome law of the pair is assigned by the framework to any preparation. This proves (b). The argument uses only the stated postulates and mathematical PVM properties; it asserts no approximate or unsharp joint measurement, error-disturbance relation, apparatus model or empirical result, as required by (c). [given, step 2.1, F3, discharge-contradiction] ∎

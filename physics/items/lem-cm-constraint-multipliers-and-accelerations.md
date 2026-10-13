@@ -6,8 +6,10 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 1
-deps: [def-cm-holonomic-constraint-and-ideal-reactions, lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple, lem-cm-positive-definite-matrix-square-roots, def-matrix-product-and-identity-matrix, def-invertible-matrix-and-general-linear-group, def-linear-map, thm-linear-kernel-image-and-injectivity, def-transpose-of-a-matrix, def-euclidean-inner-product, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, def-ck-euclidean-maps-and-diffeomorphisms]
+deps: [cor-inverse-matrix-by-adjugate, thm-rank-nullity, def-cm-holonomic-constraint-and-ideal-reactions, lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple, lem-cm-positive-definite-matrix-square-roots, def-matrix-product-and-identity-matrix, def-invertible-matrix-and-general-linear-group, def-linear-map, thm-linear-kernel-image-and-injectivity, def-transpose-of-a-matrix, def-euclidean-inner-product, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, def-ck-euclidean-maps-and-diffeomorphisms]
 dependency_roles:
+  cor-inverse-matrix-by-adjugate: mathematical-premise
+  thm-rank-nullity: mathematical-premise
   def-cm-holonomic-constraint-and-ideal-reactions: mathematical-premise
   lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple: mathematical-premise
   lem-cm-positive-definite-matrix-square-roots: mathematical-premise
@@ -56,32 +58,17 @@ $$C(t,q):=G_q(t,q)M^{-1}G_q(t,q)^{\mathsf T}$$
 
 ## Facts & Assumptions
 
-**Given:** The regular constraint $G$ with $k\times n$ Jacobian $G_q(t,q)$ of rank $k$ at the
-fixed point, the symmetric positive definite matrix $M$, and a vector $R\in\mathbb R^n$.
+**Given:** The regular constraint $G$ with $k\times n$ Jacobian $G_q(t,q)$ of rank $k$ at the fixed point, the symmetric positive definite matrix $M$, and a vector $R\in\mathbb R^n$.
 
-[F1] The multiplier lemma
-([[lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple]]): for a
-surjective linear map $A:\mathbb R^n\to\mathbb R^k$ and a linear functional
-$\ell:\mathbb R^n\to\mathbb R$ vanishing on $\ker A$, there is a unique $\lambda\in\mathbb R^k$
-with $\ell(v)=\lambda\cdot Av$ for all $v$. Here $A=G_q(t,q)$ is surjective because its rank is
-$k$ ([[def-ck-euclidean-maps-and-diffeomorphisms]],
-[[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]]).
+[F1] The multiplier lemma ([[lem-linear-functional-annihilating-kernel-of-a-surjection-is-a-transpose-multiple]]): for a surjective linear map $A:\mathbb R^n\to\mathbb R^k$ and a linear functional $\ell:\mathbb R^n\to\mathbb R$ vanishing on $\ker A$, there is a unique $\lambda\in\mathbb R^k$ with $\ell(v)=\lambda\cdot Av$ for all $v$. Here $A=G_q(t,q)$ is surjective because its rank is $k$ ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]]).
 
-[F2] The inverse of a symmetric positive definite matrix is symmetric and positive definite, and
-the matrix $M$ is invertible ([[lem-cm-positive-definite-matrix-square-roots]] clause 1); matrix
-transposition and multiplication satisfy $(AB)^{\mathsf T}=B^{\mathsf T}A^{\mathsf T}$ and
-$(G_q^{\mathsf T}\lambda)\cdot v=\lambda\cdot G_qv$
-([[def-matrix-product-and-identity-matrix]], [[def-transpose-of-a-matrix]],
-[[def-euclidean-inner-product]], [[def-linear-map]]).
+[F2] The inverse of a symmetric positive definite matrix is symmetric and positive definite, and the matrix $M$ is invertible ([[lem-cm-positive-definite-matrix-square-roots]] clause 1); matrix transposition and multiplication satisfy $(AB)^{\mathsf T}=B^{\mathsf T}A^{\mathsf T}$ and $(G_q^{\mathsf T}\lambda)\cdot v=\lambda\cdot G_qv$ ([[def-matrix-product-and-identity-matrix]], [[def-transpose-of-a-matrix]], [[def-euclidean-inner-product]], [[def-linear-map]]).
 
-[F3] A linear map of a finite-dimensional space with trivial kernel is injective
-([[thm-linear-kernel-image-and-injectivity]]), and an injective linear endomorphism of
-$\mathbb R^k$ is invertible ([[def-invertible-matrix-and-general-linear-group]]).
+[F3] A linear map of a finite-dimensional space with trivial kernel is injective ([[thm-linear-kernel-image-and-injectivity]]), and an injective linear endomorphism of $\mathbb R^k$ is invertible: [[thm-rank-nullity]] gives image dimension $k$, hence surjectivity, and the inverse of a linear bijection is linear and two-sided ([[def-invertible-matrix-and-general-linear-group]]).
 
 ## Proof
 
-**Proof technique:** direct; translate the orthogonality condition into the multiplier lemma and
-verify positive definiteness of the multiplier matrix by a quadratic-form computation.
+**Proof technique:** direct; translate the orthogonality condition into the multiplier lemma and verify positive definiteness of the multiplier matrix by a quadratic-form computation.
 
 1.1 Clause 1, forward: assume $R\cdot\delta=0$ for all $\delta\in V=\ker G_q(t,q)$. Apply [F1] to the surjective $A=G_q(t,q)$ and the linear functional $\ell(v):=R\cdot v$, which vanishes on $\ker A=V$ by hypothesis: there is a unique $\lambda\in\mathbb R^k$ with $R\cdot v=\lambda\cdot G_q(t,q)v=(G_q(t,q)^{\mathsf T}\lambda)\cdot v$ for every $v\in\mathbb R^n$. Hence $R=G_q(t,q)^{\mathsf T}\lambda$. [F1, F2, algebra]
 
@@ -91,16 +78,10 @@ verify positive definiteness of the multiplier matrix by a quadratic-form comput
 
 1.4 Clause 2, positive definiteness: let $0\ne z\in\mathbb R^k$ and put $w:=G_q^{\mathsf T}z$. If $w=0$, then $z\cdot G_qv=(G_q^{\mathsf T}z)\cdot v=0$ for every $v\in\mathbb R^n$; since $G_q$ is surjective, $z\cdot u=0$ for every $u\in\mathbb R^k$, hence $z=0$, a contradiction. Thus $w\ne0$, and by positive definiteness of $M^{-1}$, $$z^{\mathsf T}Cz=z^{\mathsf T}G_qM^{-1}G_q^{\mathsf T}z=w\cdot M^{-1}w>0 .$$ Hence $C$ is positive definite. By the kernel argument ($Cz=0$ implies $z^{\mathsf T}Cz=0$ implies $z=0$) and [F3], $C$ is invertible. [F2, F3, algebra]
 
-2.1 The formula for $\lambda$: if $R$ is orthogonal to $V$, clause 1 gives $R=G_q^{\mathsf T}\lambda$; multiplying by $G_qM^{-1}$ on the left gives $G_qM^{-1}R=C\lambda$, hence $\lambda=C^{-1}G_qM^{-1}R$. The right-hand side is a composition of $C^1$ maps of $(t,q)$ — the entries of $G_q$ and of $C^{-1}$ are $C^1$ because $G$ is $C^2$ and $\det C\ne0$ — and is linear in $R$, so $\lambda$ depends on $(t,q,R)$ in a $C^1$ way. [F2, step 1.4, algebra] ∎
+2.1 The formula for $\lambda$: if $R$ is orthogonal to $V$, clause 1 gives $R=G_q^{\mathsf T}\lambda$; multiplying by $G_qM^{-1}$ on the left gives $G_qM^{-1}R=C\lambda$, hence $\lambda=C^{-1}G_qM^{-1}R$. The right-hand side is a composition of $C^1$ maps of $(t,q)$ — the entries of $G_q$ and of $C^{-1}$ are $C^1$ by [[cor-inverse-matrix-by-adjugate]], because $G$ is $C^2$ and $\det C\ne0$ — and is linear in $R$, so $\lambda$ depends on $(t,q,R)$ in a $C^1$ way. [F2, step 1.4, algebra] ∎
 
 ## Remarks
 
-- The uniqueness in clause 1 is uniqueness of the multiplier for a *given* reaction $R$, not yet
-  uniqueness of the reaction or of the acceleration: which $R$ occurs is determined only after the
-  twice-differentiated constraint is imposed, and that is done in
-  [[prop-cm-ideal-holonomic-system-in-a-time-dependent-chart]].
+- The uniqueness in clause 1 is uniqueness of the multiplier for a *given* reaction $R$, not yet uniqueness of the reaction or of the acceleration: which $R$ occurs is determined only after the twice-differentiated constraint is imposed, and that is done in [[prop-cm-ideal-holonomic-system-in-a-time-dependent-chart]].
 
-- The matrix $C$ is the inverse of the reduced mass matrix on the conormal directions; its
-  positive definiteness is the reason the constrained acceleration is determined by the data
-  wherever the rank hypothesis holds. At a point where the rank of $G_q$ drops, $C$ degenerates
-  and the construction is not available; the proposition below makes no claim there.
+- The matrix $C$ is the inverse of the reduced mass matrix on the conormal directions; its positive definiteness is the reason the constrained acceleration is determined by the data wherever the rank hypothesis holds. At a point where the rank of $G_q$ drops, $C$ degenerates and the construction is not available; the proposition below makes no claim there.

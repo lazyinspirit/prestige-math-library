@@ -85,7 +85,7 @@ recorded, in [[def-cm01-velocity-acceleration]].
 **(v) Fixed inertial mass.** Each particle label $i$ carries a **mass**
 $m_{i}>0$, a primitive parameter of the model with dimension $\mu$
 ([[def-cm01-units]]). The mass is fixed: it is the same positive number at all
-times, in all inertial frames and for every model in which the label occurs; it
+times and in all inertial frames of this model; the index $i$ identifies a label within that model and asserts no cross-model identification or equality of mass parameters. It
 is not a function of the time coordinate, of the position or of the velocity,
 and no variable-mass model is a model of this clause. The mass enters the
 dynamics only through its later appearance in the equation of motion; this

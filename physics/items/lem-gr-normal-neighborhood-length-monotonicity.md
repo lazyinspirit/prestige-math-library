@@ -10,8 +10,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [lem-gr-position-vector-differential, def-gr-normal-neighborhoods-and-position-vectors, def-gr-causal-curves-and-reachability, def-gr-timelike-worldline-and-proper-time, lem-gr-observer-pairing-with-future-causal-vectors, thm-gr-lorentz-gauss-lemma-and-normal-maximum, def-gr-smooth-lorentzian-objects, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-absolutely-continuous-functions-have-integrable-derivatives, thm-a-lipschitz-function-after-an-absolutely-continuous-function-is-absolutely-continuous, thm-chain-rule-for-total-derivatives, lem-gr-parallel-transport-and-geodesic-speed, def-c-r-and-smooth-maps-between-smooth-manifolds, def-interval, thm-continuous-implies-integrable]
+deps: [lem-gr-causal-curve-calculus, def-dependent-choice, def-countable-choice, lem-gr-observer-projection-decomposition, lem-gr-position-vector-differential, def-gr-normal-neighborhoods-and-position-vectors, def-gr-causal-curves-and-reachability, def-gr-timelike-worldline-and-proper-time, lem-gr-observer-pairing-with-future-causal-vectors, thm-gr-lorentz-gauss-lemma-and-normal-maximum, def-gr-smooth-lorentzian-objects, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, thm-absolutely-continuous-functions-have-integrable-derivatives, thm-a-lipschitz-function-after-an-absolutely-continuous-function-is-absolutely-continuous, thm-chain-rule-for-total-derivatives, lem-gr-parallel-transport-and-geodesic-speed, def-c-r-and-smooth-maps-between-smooth-manifolds, def-interval, thm-continuous-implies-integrable]
 dependency_roles:
+  lem-gr-causal-curve-calculus: mathematical-premise
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
+  lem-gr-observer-projection-decomposition: mathematical-premise
   lem-gr-position-vector-differential: mathematical-premise
   def-gr-normal-neighborhoods-and-position-vectors: mathematical-premise
   def-gr-causal-curves-and-reachability: mathematical-premise
@@ -39,6 +43,10 @@ verification:
 
 ## Statement
 
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the absolutely continuous causal-curve
+calculus and the supplied causal results used below.
+
 Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold with
 metric-selected connection $\nabla$
 ([[def-gr-smooth-lorentzian-objects]]), let $p\in M$ and let
@@ -49,7 +57,16 @@ $\sigma:[a,b]\to U_p$ be a future causal curve in the class of
 with future causal nonzero velocity almost everywhere), and write
 $$v(t):=\exp_p^{-1}\bigl(\sigma(t)\bigr),\qquad P(t):=d(\exp_p)_{v(t)}(v(t)),\qquad Q(t):=g_p(v(t),v(t))$$
 for $t\in[a,b]$. Suppose there is $t^*\in[a,b]$ such that $v(t^*)$ is
-future timelike. Then:
+future timelike. For any locally absolutely continuous future causal curve
+$\eta:[u,v]\to M$, define its Lorentzian length by
+$$L_g(\eta):=\int_u^v\sqrt{-g_{\eta(s)}(\eta'(s),\eta'(s))}\,ds,$$
+where the derivative is taken almost everywhere and the integral is the
+Lebesgue integral. This integral is finite on a compact parameter interval:
+the curve image is compact, a finite chart subdivision has bounded metric
+coefficients on each piece, and each coordinate derivative is integrable by
+local absolute continuity. The radicand is nonnegative almost everywhere by
+causality. On piecewise-$C^1$ future timelike curves this agrees with the
+length in [[def-gr-timelike-worldline-and-proper-time]]. Then:
 
 **(a) Propagation.** For every $t\in[t^*,b]$ with
 $\sigma([t^*,t])\subseteq U_p$, the vector $v(t)$ is future timelike;
@@ -57,8 +74,7 @@ consequently $Q(t)<0$, and $R(t):=\sqrt{-Q(t)}>0$.
 
 **(b) Length inequality.** For all $t^*\le t_1<t_2\le b$ with
 $\sigma([t_1,t_2])\subseteq U_p$,
-$$R(t_2)-R(t_1)\ \ge\ L_g\bigl(\sigma|_{[t_1,t_2]}\bigr),$$
-the Lorentzian length of [[def-gr-timelike-worldline-and-proper-time]].
+$$R(t_2)-R(t_1)\ \ge\ L_g\bigl(\sigma|_{[t_1,t_2]}\bigr).$$
 In particular $R$ is nondecreasing on $[t^*,b]$.
 
 **(c) Derivative formula.** The map $t\mapsto Q(t)$ is absolutely
@@ -68,24 +84,13 @@ at almost every $t\in[a,b]$.
 
 ## Facts & Assumptions
 
-**Given:** A time-oriented smooth Lorentzian four-manifold $(M,g,N)$, a
-point $p\in M$, a normal neighborhood $U_p=\exp_p(W_p)$, a future causal
-curve $\sigma:[a,b]\to U_p$ and $t^*$ with $v(t^*)$ future timelike.
+**Given:** A time-oriented smooth Lorentzian four-manifold $(M,g,N)$, a point $p\in M$, a normal neighborhood $U_p=\exp_p(W_p)$, a future causal curve $\sigma:[a,b]\to U_p$ and $t^*$ with $v(t^*)$ future timelike.
 
-[L1] The length of a future causal curve is
-$L_g(\sigma|_{[s_1,s_2]})=\int_{s_1}^{s_2}\sqrt{-g(\sigma'(t),\sigma'(t))}\,dt$,
-an absolutely continuous and nondecreasing function of the interval with
-integrable density
-([[def-gr-timelike-worldline-and-proper-time]],
-[[thm-absolutely-continuous-functions-have-integrable-derivatives]],
-[[thm-continuous-implies-integrable]]).
+[L1] The length density $\sqrt{-g(\sigma',\sigma')}$ is measurable, nonnegative and integrable on each compact parameter interval. Indeed, subdivide into finitely many chart pieces with compact closure; bounded smooth metric coefficients bound the density by a constant times the sum of absolute values of the integrable coordinate derivatives. Its integral defines $L_g$ and its indefinite integral is absolutely continuous and nondecreasing ([[lem-gr-causal-curve-calculus]] clause (a), [[thm-absolutely-continuous-functions-have-integrable-derivatives]], [[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]], [[def-gr-timelike-worldline-and-proper-time]]).
 
-[L2] Reverse Cauchy–Schwarz: if $T$ is future timelike and $z$ is future
-causal and nonzero, then $g(T,z)\le-\sqrt{-g(T,T)}\sqrt{-g(z,z)}$, with
-equality if and only if $z$ is a nonnegative multiple of $T$
-([[lem-gr-observer-pairing-with-future-causal-vectors]]).
+[L2] Reverse Cauchy-Schwarz, derived locally. Let $T$ be future timelike, put $e=T/\sqrt{-g(T,T)}$, and decompose the nonzero future causal $z$ as $z=ae+u$, with $u\perp e$. The observer projection and positivity give $a=-g(e,z)>0$ and $0\le g(u,u)\le a^2$. Therefore $-g(T,z)=\sqrt{-g(T,T)}a\ge\sqrt{-g(T,T)}\sqrt{a^2-g(u,u)}=\sqrt{-g(T,T)}\sqrt{-g(z,z)}$. Equality holds precisely when $u=0$, equivalently $z$ is a positive multiple of $T$ ([[lem-gr-observer-projection-decomposition]], [[lem-gr-observer-pairing-with-future-causal-vectors]]).
 
-[L3] $Q$ is absolutely continuous and $\frac{d}{dt}Q(t)=2g_{\sigma(t)}(P(t),\sigma'(t))$ at almost every $t$: indeed $D_p^2$ is the smooth function of [[lem-gr-position-vector-differential]] clause (a), $\sigma$ is locally absolutely continuous, and the composition is absolutely continuous by [[thm-a-lipschitz-function-after-an-absolutely-continuous-function-is-absolutely-continuous]]; the chain rule gives the stated derivative at every differentiability point of $\sigma$ ([[thm-chain-rule-for-total-derivatives]], [[lem-gr-position-vector-differential]] clause (a)).
+[L3] $Q$ is absolutely continuous and $\frac{d}{dt}Q(t)=2g_{\sigma(t)}(P(t),\sigma'(t))$ at almost every $t$: indeed $D_p^2$ is the smooth function of [[lem-gr-position-vector-differential]] clause (a), $\sigma$ is locally absolutely continuous, and the scalar smooth composition is absolutely continuous by [[lem-gr-causal-curve-calculus]] clause (b); the chain rule gives the stated derivative at every differentiability point of $\sigma$ ([[thm-chain-rule-for-total-derivatives]], [[lem-gr-position-vector-differential]] clause (a)).
 
 [L4] $R$ is absolutely continuous on every subinterval where $Q<0$, with $R'=-\frac{1}{2R}Q'=-\frac{1}{R}g_{\sigma}(P,\sigma')$ almost everywhere ([[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]]).
 
@@ -95,7 +100,7 @@ equality if and only if $z$ is a nonnegative multiple of $T$
 
 **Proof technique:** direct.
 
-1.1 (Propagation.) Let $T_0:=\sup\{t\in[t^*,b]:$ for all $s\in[t^*,t]$ one has $\sigma([t^*,s])\subseteq U_p$ and $v(s)$ future timelike$\}$. The set is nonempty and contains a left neighborhood of $t^*$: $v(t^*)$ is future timelike, future-timelikeness is open in $T_pM$ while $v$ is continuous, and $\sigma([t^*,t])\subseteq U_p$ for $t$ near $t^*$. On $(t^*,T_0)$ define $R=\sqrt{-Q}>0$. By [L5] and [L2] applied with $T:=P(t)$ and $z:=\sigma'(t)$ at every differentiability point with $Q(t)<0$, $g_{\sigma(t)}(P(t),\sigma'(t))\le-R(t)\sqrt{-g(\sigma'(t),\sigma'(t))}$; hence by [L4] $R'(t)\ge\sqrt{-g(\sigma'(t),\sigma'(t))}\ge0$ a.e., so $R$ is nondecreasing on $[t^*,T_0)$ ([[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]]), and $Q=-R^2\le Q(t^*)<0$ there. If $T_0<b$ and $\sigma([t^*,T_0])\subseteq U_p$, then $Q(T_0)=\lim_{t\uparrow T_0}Q(t)\le Q(t^*)<0$ by continuity, so $v(T_0)$ is future timelike and there is $\varepsilon>0$ with $\sigma([t^*,T_0+\varepsilon])\subseteq U_p$ and $v$ future timelike on $[t^*,T_0+\varepsilon]$, contradicting maximality of $T_0$. Hence $T_0=b'$ where $b'=\sup\{t\in[t^*,b]:\sigma([t^*,t])\subseteq U_p\}$, proving (a). [L2, L4, L5, given, algebra]
+1.1 (Propagation.) Let $T_0:=\sup\{t\in[t^*,b]:$ for all $s\in[t^*,t]$ one has $\sigma([t^*,s])\subseteq U_p$ and $v(s)$ future timelike$\}$. The set is nonempty and contains a relative right neighborhood of $t^*$ in $[t^*,b]$: $v(t^*)$ is future timelike, future-timelikeness is open in $T_pM$ while $v$ is continuous, and $\sigma([t^*,t])\subseteq U_p$ for $t$ near $t^*$. On $(t^*,T_0)$ define $R=\sqrt{-Q}>0$. By [L5] and [L2] applied with $T:=P(t)$ and $z:=\sigma'(t)$ at every differentiability point with $Q(t)<0$, $g_{\sigma(t)}(P(t),\sigma'(t))\le-R(t)\sqrt{-g(\sigma'(t),\sigma'(t))}$; hence by [L4] $R'(t)\ge\sqrt{-g(\sigma'(t),\sigma'(t))}\ge0$ a.e., so $R$ is nondecreasing on $[t^*,T_0)$ ([[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]]), and $Q=-R^2\le Q(t^*)<0$ there. If $T_0<b$ and $\sigma([t^*,T_0])\subseteq U_p$, then $Q(T_0)=\lim_{t\uparrow T_0}Q(t)\le Q(t^*)<0$ by continuity, so $v(T_0)$ is future timelike and there is $\varepsilon>0$ with $\sigma([t^*,T_0+\varepsilon])\subseteq U_p$ and $v$ future timelike on $[t^*,T_0+\varepsilon]$, contradicting maximality of $T_0$. Hence $T_0=b'$ where $b'=\sup\{t\in[t^*,b]:\sigma([t^*,t])\subseteq U_p\}$, proving (a). [L2, L4, L5, given, algebra]
 
 1.2 (Derivative formula.) The map $t\mapsto Q(t)$ is the composition of the locally absolutely continuous curve $\sigma$ with the smooth function $D_p^2$, hence is absolutely continuous, and the chain rule at every differentiability point of $\sigma$ gives $\frac{d}{dt}Q(t)=d(D_p^2)_{\sigma(t)}(\sigma'(t))=2g_{\sigma(t)}(P(t),\sigma'(t))$ by [L3]. This proves (c). [L3]
 
@@ -105,15 +110,6 @@ equality if and only if $z$ is a nonnegative multiple of $T$
 
 ## Remarks
 
-- **Why the timelike hypothesis at a single time suffices.** The reverse
-  Cauchy–Schwarz inequality is applied with the future timelike vector
-  $P(t)$, whose future-directedness is granted by Gauss' Lemma and
-  [[lem-gr-parallel-transport-and-geodesic-speed]]; the direction cannot
-  change while $Q<0$, and $Q$ can only decrease, so one timelike value
-  propagates forward as long as the curve remains in the normal
-  neighborhood.
+- **Why the timelike hypothesis at a single time suffices.** The reverse Cauchy–Schwarz inequality is applied with the future timelike vector $P(t)$, whose future-directedness is granted by Gauss' Lemma and [[lem-gr-parallel-transport-and-geodesic-speed]]; the direction cannot change while $Q<0$, and $Q$ can only decrease, so one timelike value propagates forward as long as the curve remains in the normal neighborhood.
 
-- **Sharpness.** Equality in (b) holds along radial reparametrizations of
-  the geodesic from $p$; the inequality is the local maximality of
-  geodesics in its integrated form and is used in
-  [[thm-gr-normal-neighborhood-causal-cone]].
+- **Sharpness.** Equality in (b) holds along radial reparametrizations of the geodesic from $p$; the inequality is the local maximality of geodesics in its integrated form and is used in [[thm-gr-normal-neighborhood-causal-cone]].

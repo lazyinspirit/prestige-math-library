@@ -51,7 +51,7 @@ potential: on the declared annular domain the scaled vortex field of
 [[cex-cm03-closed-force-field-without-a-global-potential]] is smooth, closed
 and state-Lipschitz, yet its circulation around the circle of radius
 $1\,\mathrm m$ is
-$2\pi\beta\neq0$, so no global potential energy exists and the conservation
+$2\pi\beta\neq0$, so no global force-generating potential with zero residual force exists and the conservation
 clause of [[pthm-cm03-energy-balance]] cannot be applied globally; on every
 star-shaped subdomain the Poincaré lemma supplies a local potential and the
 energy is conserved locally.

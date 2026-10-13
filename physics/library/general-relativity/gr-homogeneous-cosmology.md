@@ -66,15 +66,15 @@ the three signs but proves no classification theorem.
 **FLRW data and kinematics.** An FLRW model datum is a tuple
 $(I,\Sigma,\gamma,k,a)$ with a smooth scale factor $a:I\to(0,\infty)$ on a time
 interval; its spacetime is $I\times\Sigma$ with metric
-$g=-c^2dt^2+a(t)^2\gamma$ and comoving congruence $n=c^{-1}\partial_t$
+$g=-c^2dt^2+a(t)^2\gamma$ and comoving field $n=c^{-1}\partial_t$
 ([[def-gr-flrw-model-data]]). The metric is smooth Lorentzian, the comoving
 curves $t\mapsto(t,x)$ have physical four-velocity $\partial_t=cn$ and
 proper-time parameter $t$, and the
 slices carry the scaled spatial metric $a(t_0)^2\gamma$ of curvature
 $k/a(t_0)^2$ ([[lem-gr-flrw-metric-and-comoving-data]]). The Christoffel
 symbols are computed in every product chart
-([[lem-gr-flrw-christoffel-symbols]]), and the comoving congruence is a
-geodesic unit timelike congruence with expansion
+([[lem-gr-flrw-christoffel-symbols]]). For $\Sigma\ne\varnothing$, the comoving
+field is a geodesic unit timelike observer congruence; its pointwise expansion is
 $\vartheta=3H/c$, where $H=\dot a/a$
 ([[lem-gr-flrw-comoving-congruence-expansion]]).
 

@@ -40,7 +40,8 @@ verification:
 ## Statement refuted
 
 Statement refuted: "Let $M=\mathbb R^4$ carry the flat metric
-$g=\operatorname{diag}(-1,1,1,1)$ and the identity chart, with metric-selected
+$g=\operatorname{diag}(-1,1,1,1)$, time orientation $N:=\partial_0$
+and the identity chart, with metric-selected
 connection $\nabla$, and let $T$ be a smooth symmetric covariant $2$-tensor
 field on an open subset $U\subseteq M$ with $\nabla^aT_{ab}=0$ on $U$. Then
 the measured energy density of [[def-gr-observer-energy-momentum-current]] is
@@ -49,7 +50,7 @@ $n$ on $U$."
 
 ## Facts & Assumptions
 
-**Given:** The flat Lorentzian four-manifold $(\mathbb R^4,g)$ with identity chart, $g=\operatorname{diag}(-1,1,1,1)$ and chart orientation, with metric-selected connection $\nabla$; the open set $U:=\mathbb R^4$; constants $E_0>0$ with units $\mathrm J\,\mathrm m^{-3}$ and $L_0>0$ with units $\mathrm m$; the smooth function $\varphi(x):=E_0[1+(x^1/L_0)^2]>0$, with energy-density units; and the smooth symmetric covariant $2$-tensor field $T$ with components $T_{ab}=-\varphi\,\delta^0_a\delta^0_b$.
+**Given:** The time-oriented flat Lorentzian four-manifold $(\mathbb R^4,g,N)$ with identity chart, $g=\operatorname{diag}(-1,1,1,1)$, time orientation $N:=\partial_0$ and the standard coordinate orientation, with metric-selected connection $\nabla$; the open set $U:=\mathbb R^4$; constants $E_0>0$ with units $\mathrm J\,\mathrm m^{-3}$ and $L_0>0$ with units $\mathrm m$; the smooth function $\varphi(x):=E_0[1+(x^1/L_0)^2]>0$, with energy-density units; and the smooth symmetric covariant $2$-tensor field $T$ with components $T_{ab}=-\varphi\,\delta^0_a\delta^0_b$.
 
 [L1] On the identity chart the Christoffel symbols vanish and $\nabla$ is the coordinate connection, so $\nabla^aT_{ab}=\eta^{ac}\nabla_cT_{ab}=\eta^{ac}\partial_cT_{ab}$ and $T^{ab}=\eta^{a\alpha}\eta^{b\beta}T_{\alpha\beta}$ ([[def-gr-metric-selected-connection]], [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]], [[def-gr-inverse-metric-and-musical-isomorphisms]]).
 
@@ -57,7 +58,7 @@ $n$ on $U$."
 
 [L3] The measured energy density is $\mu=T_{ab}n^an^b$ ([[def-gr-observer-energy-momentum-current]] clause (b), [[def-gr-measured-energy-density-flux-and-stress]] clause (a)).
 
-[L4] $n=\partial_0$ is a smooth future-directed observer congruence on $\mathbb R^4$ with $n^a=\delta^a_0$ and $n_a=-\delta^0_a$ ([[def-gr-observer-congruence-and-adapted-charts]], [[def-causal-classification-of-lorentz-vectors]], [[def-gr-smooth-lorentzian-objects]]).
+[L4] The smooth field $N=\partial_0$ is timelike since $g(N,N)=-1<0$ and therefore supplies a time orientation. For $n:=N$, one has $g(n,n)=-1$ and $g(n,N)=-1<0$, so $n$ is a smooth future-directed observer congruence on $\mathbb R^4$, with $n^a=\delta^a_0$ and $n_a=-\delta^0_a$ ([[def-gr-observer-congruence-and-adapted-charts]], [[def-causal-classification-of-lorentz-vectors]], [[def-gr-smooth-lorentzian-objects]]).
 
 [L5] The weak energy condition of [[def-gr-energy-conditions]] is an additional pointwise assumption on $T$, not a consequence of conservation ([[def-gr-energy-conditions]], [[def-gr-stress-energy-tensor-field]]).
 

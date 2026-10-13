@@ -23,6 +23,9 @@ deps:
   - thm-of-square-roots
   - thm-algebra-of-derivatives
   - thm-chain-rule-for-total-derivatives
+  - thm-derivative-of-exponential
+  - cor-exponential-reciprocal-and-positivity
+  - thm-exponential-is-strictly-increasing
   - def-vector-valued-derivative-and-integral
   - def-euclidean-inner-product
   - def-matrix-product-and-identity-matrix
@@ -45,6 +48,9 @@ dependency_roles:
   thm-of-square-roots: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
   thm-chain-rule-for-total-derivatives: mathematical-premise
+  thm-derivative-of-exponential: mathematical-premise
+  cor-exponential-reciprocal-and-positivity: mathematical-premise
+  thm-exponential-is-strictly-increasing: mathematical-premise
   def-vector-valued-derivative-and-integral: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
   def-matrix-product-and-identity-matrix: mathematical-premise
@@ -96,6 +102,9 @@ verification:
 ## Statement
 
 Use the fixed coordinate, time and energy units and numerical matrix convention of [[def-cm09-coupled-quadratic-model]]. Every displayed matrix identity and phase norm is in those numerical coordinates; physical positions, velocities, modal amplitudes, frequencies and energies are recovered by the stated fixed scale factors. This does not change the set of physical motions.
+
+For real $u$, define the hyperbolic functions by
+$\cosh u:=(e^{u}+e^{-u})/2$ and $\sinh u:=(e^{u}-e^{-u})/2$.
 
 Global-time, growth and boundedness claims below refer to the unique maximal extension of the autonomous free equation on $\mathbb R$; local motions remain its restrictions. Values at $0$ in coefficient formulas are evaluated on that extension when the original interval omits $0$.
 
@@ -158,60 +167,21 @@ no physical realization and no measured frequency is asserted.
 
 ## Facts & Assumptions
 
-**Given:** The data $(M,K,0)$ of the statement, the modal data
-$M^{1/2},M^{-1/2},O,\Lambda$, the modal coordinates $z=O^{\mathsf T}M^{1/2}q$,
-and a curve $q:J\to\mathbb R^{n}$ as in clause 2.
+**Given:** The data $(M,K,0)$ of the statement, the modal data $M^{1/2},M^{-1/2},O,\Lambda$, the modal coordinates $z=O^{\mathsf T}M^{1/2}q$, and a curve $q:J\to\mathbb R^{n}$ as in clause 2.
 
 [F1] Sign-unrestricted modal construction of [[def-cm09-coupled-quadratic-model]] clause (e): $M^{1/2},M^{-1/2}$ exist by [[lem-cm-positive-definite-matrix-square-roots]] clauses 1-3, and the symmetric matrix $S=M^{-1/2}KM^{-1/2}$ admits $S=O\Lambda O^{\mathsf T}$ by [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]], without assuming $K\ge0$. With $q=M^{-1/2}Oz$, direct differentiation and multiplication give $Mq''+Kq=M^{1/2}O(z''+\Lambda z)$, $q'^{\mathsf T}Mq'=|z'|_2^2$ and $q^{\mathsf T}Kq=\sum_i\lambda_i z_i^2$. Thus the modal equivalence and energy identities hold for every symmetric $K$ on every interval; the non-negative-$K$ theorem [[thm-cm-quadratic-mode-decomposition]] is not invoked for indefinite $K$.
 
-[F2] Scalar classification ([[thm-cm-homogeneous-oscillator-solution-classification]],
-[[prop-cm-oscillator-degenerate-and-repulsive-cases]],
-[[def-cm-oscillator-model-and-phase-system]]): the solutions of
-$z_{i}''+\lambda_{i}z_{i}=0$ on an interval with nonempty interior are exactly
-$a\cos(\omega_{i}t)+b\sin(\omega_{i}t)$ when $\lambda_{i}>0$ (the case
-$m=1$, $c=0$, $k=\lambda_{i}$ of the classification, with
-$\omega_{i}=\sqrt{\lambda_{i}}$), exactly $a+bt$ when $\lambda_{i}=0$, and,
-writing $\kappa_{i}=\sqrt{-\lambda_{i}}$, exactly
-$a\cosh(\kappa_{i}t)+b\sinh(\kappa_{i}t)$ when $\lambda_{i}<0$ (the case
-$k<0$, $c=0$ of the repulsive classification, with
-$e^{\pm\kappa_{i}t}=\cosh(\kappa_{i}t)\pm\sinh(\kappa_{i}t)$); in each case
-the pair $(a,b)$ ranges over $\mathbb R^{2}$ bijectively, with
-$a=z_{i}(0)$ evaluated on the unique global extension and $b=z_{i}'(0)/\omega_{i}$, $b=z_{i}'(0)$,
-$b=z_{i}'(0)/\kappa_{i}$ respectively.
+[F2] Scalar classification ([[thm-cm-homogeneous-oscillator-solution-classification]], [[prop-cm-oscillator-degenerate-and-repulsive-cases]], [[def-cm-oscillator-model-and-phase-system]]): the solutions of $z_{i}''+\lambda_{i}z_{i}=0$ on an interval with nonempty interior are exactly $a\cos(\omega_{i}t)+b\sin(\omega_{i}t)$ when $\lambda_{i}>0$ (the case $m=1$, $c=0$, $k=\lambda_{i}$ of the classification, with $\omega_{i}=\sqrt{\lambda_{i}}$), exactly $a+bt$ when $\lambda_{i}=0$, and, writing $\kappa_{i}=\sqrt{-\lambda_{i}}$, exactly $a\cosh(\kappa_{i}t)+b\sinh(\kappa_{i}t)$ when $\lambda_{i}<0$ (the case $k<0$, $c=0$ of the repulsive classification, with $e^{\pm\kappa_{i}t}=\cosh(\kappa_{i}t)\pm\sinh(\kappa_{i}t)$); in each case the pair $(a,b)$ ranges over $\mathbb R^{2}$ bijectively, with $a=z_{i}(0)$ evaluated on the unique global extension and $b=z_{i}'(0)/\omega_{i}$, $b=z_{i}'(0)$, $b=z_{i}'(0)/\kappa_{i}$ respectively.
 
-[F3] Global linear existence and uniqueness
-([[cor-cm-variation-of-constants-for-linear-systems]]): for the constant
-matrix $A$ of the phase system of [[def-cm09-coupled-quadratic-model]]
-(clause (b)) and every datum $z_{0}$, the curve $z(t)=E(t-t_{0})z_{0}$ solves
-$z'=Az$ on all of $\mathbb R$ with $z(t_{0})=z_{0}$, and any differentiable
-solution of that system on an interval containing $t_{0}$ with the same datum
-agrees with it there. Consequently every local solution is a restriction of the unique global solution, and the global solution is the maximal one
-([[def-maximal-ode-solution]],
-[[thm-existence-and-uniqueness-of-a-maximal-ode-solution]]).
+[F3] Global linear existence and uniqueness ([[cor-cm-variation-of-constants-for-linear-systems]]): for the constant matrix $A$ of the phase system of [[def-cm09-coupled-quadratic-model]] (clause (b)) and every datum $z_{0}$, the curve $z(t)=E(t-t_{0})z_{0}$ solves $z'=Az$ on all of $\mathbb R$ with $z(t_{0})=z_{0}$, and any differentiable solution of that system on an interval containing $t_{0}$ with the same datum agrees with it there. Consequently every local solution is a restriction of the unique global solution, and the global solution is the maximal one ([[def-maximal-ode-solution]], [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]]).
 
-[F4] Lyapunov stability ([[def-cm-equilibrium-and-lyapunov-stability]]): for
-the autonomous field $F(z)=Az$ of the free phase system, the rest point $0$ is
-Lyapunov stable when for every $\varepsilon>0$ there is $\delta>0$ such that
-every maximal solution with $\lVert z(0)\rVert_{2}<\delta$ exists for all $t\ge0$ and
-satisfies $\lVert z(t)\rVert_{2}<\varepsilon$; it is not stable when some
-$\varepsilon_{0}>0$ has data with $\lVert z(0)\rVert_{2}<\delta$ for every
-$\delta>0$ reaching $\lVert z(t)\rVert_{2}=\varepsilon_{0}$.
+[F4] Lyapunov stability ([[def-cm-equilibrium-and-lyapunov-stability]]): for the autonomous field $F(z)=Az$ of the free phase system, the rest point $0$ is Lyapunov stable when for every $\varepsilon>0$ there is $\delta>0$ such that every maximal solution with $\lVert z(0)\rVert_{2}<\delta$ exists for all $t\ge0$ and satisfies $\lVert z(t)\rVert_{2}<\varepsilon$; it is not stable when some $\varepsilon_{0}>0$ has data with $\lVert z(0)\rVert_{2}<\delta$ for every $\delta>0$ reaching $\lVert z(t)\rVert_{2}=\varepsilon_{0}$.
 
-[F5] Calculus ([[thm-algebra-of-derivatives]],
-[[thm-chain-rule-for-total-derivatives]],
-[[def-vector-valued-derivative-and-integral]],
-[[def-ck-euclidean-maps-and-diffeomorphisms]]): sums, products and composites
-of differentiable curves are differentiated by the algebra and chain rules,
-and a $C^{2}$ curve on an interval whose derivative vanishes identically is
-constant. Also $\cosh^{2}-\sinh^{2}=1$ and
-$\sinh'=\cosh$, $\cosh'=\sinh$ for the real hyperbolics
-$2\cosh u=e^{u}+e^{-u}$, $2\sinh u=e^{u}-e^{-u}$.
+[F5] Calculus ([[thm-algebra-of-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[def-vector-valued-derivative-and-integral]], [[def-ck-euclidean-maps-and-diffeomorphisms]]): sums, products and composites of differentiable curves are differentiated by the algebra and chain rules, and a $C^{2}$ curve on an interval whose derivative vanishes identically is constant. Differentiating the hyperbolic definitions in the Statement using $(e^{u})'=e^{u}$ and $(e^{-u})'=-e^{-u}$ gives $\sinh'=\cosh$ and $\cosh'=\sinh$; also $\cosh^{2}-\sinh^{2}=1$ because $e^{u}e^{-u}=1$. Finally, $\sinh(\kappa_i t)\to+\infty$ as $t\to+\infty$ for $\kappa_i>0$: $e^{\kappa_i t}\to+\infty$ by the repulsive-oscillator case of [F2], while $0<e^{-\kappa_i t}\le1$ by positivity and monotonicity of the exponential ([[thm-derivative-of-exponential]], [[cor-exponential-reciprocal-and-positivity]], [[thm-exponential-is-strictly-increasing]]).
 
 ## Proof
 
-**Proof technique:** cases; transport the free system through the modal
-bijection, solve the scalar equations of the three cases, and handle
-degeneracy intrinsically through the invariant subspace $\ker(K-\lambda M)$.
+**Proof technique:** cases; transport the free system through the modal bijection, solve the scalar equations of the three cases, and handle degeneracy intrinsically through the invariant subspace $\ker(K-\lambda M)$.
 
 1.1 Modal equivalence: by [F1] the curve $q$ is a motion if and only if $z_{i}''+\lambda_{i}z_{i}=0$ on $J$ for every $i$. [F1, given]
 
@@ -221,9 +191,9 @@ degeneracy intrinsically through the invariant subspace $\ker(K-\lambda M)$.
 
 2.1 Scalar families: for each $i$, [F2] gives that the scalar solutions are exactly the displayed families with unique coefficients determined by the global extension's values $z_{i}(0)$ and $z_{i}'(0)$; combining with step 1.1 gives clause 2 and its coefficient formulas. [assume-case oscillatory, assume-case zero, assume-case exponential, F1, F2, step 1.1, algebra]
 
-2.2 Pure-$\lambda$ motions, equation: let $q:J\to N_{\lambda}$ be $C^{2}$ on an interval $J$. Since $N_{\lambda}$ is a linear subspace, the difference quotients of $q$ lie in $N_{\lambda}$, so $q'\in N_{\lambda}$ and then $q''\in N_{\lambda}$ as limits in a finite-dimensional normed space; hence with (*) of step 1.3, $M$ invertible, and $q(t),q''(t)\in N_{\lambda}$, $$Mq''+Kq=Mq''+\lambda Mq=M\bigl(q''+\lambda q\bigr),$$ so $q$ is a motion if and only if $q''+\lambda q=0$. This proves the equivalence of clause 4 for such curves and, combined with the support statement of step 1.3, identifies the pure-$\lambda$ motions with the $C^{2}$ solutions of $q''+\lambda q=0$ with values in $N_{\lambda}$. [step 1.3, F5, algebra]
+2.2 Pure-$\lambda$ motions, equation: let $q:J\to N_{\lambda}$ be $C^{2}$ on an interval $J$. By step 1.3, $N_{\lambda}=\ker(K-\lambda M)$, so $(K-\lambda M)q(t)=0$ for every $t\in J$; differentiating this identity once and twice, since $K-\lambda M$ is constant, gives $q'(t),q''(t)\in N_{\lambda}$. Hence with (*), $M$ invertible, and $q(t),q''(t)\in N_{\lambda}$, $$Mq''+Kq=Mq''+\lambda Mq=M\bigl(q''+\lambda q\bigr),$$ so $q$ is a motion if and only if $q''+\lambda q=0$. This proves the equivalence of clause 4 for such curves and, combined with the support statement of step 1.3, identifies the pure-$\lambda$ motions with the $C^{2}$ solutions of $q''+\lambda q=0$ with values in $N_{\lambda}$. [step 1.3, F5, algebra]
 
-2.3 Unstable direction: suppose $\lambda_{i}<0$ and let $u_{i}=M^{-1/2}Oe_{i}$ satisfy $Ku_{i}=\lambda_{i}Mu_{i}$ and $u_{i}^{\mathsf T}Mu_{i}=1$ ([[def-cm09-coupled-quadratic-model]] clause (e)). For $c>0$ define $q_{c}(t):=(c/\kappa_{i})\sinh(\kappa_{i}t)u_{i}$; then $q_{c}''=\kappa_{i}^{2}(c/\kappa_{i})\sinh(\kappa_{i}t)u_{i}$ and $Mq_{c}''+Kq_{c}=(\kappa_{i}^{2}+\lambda_{i})Mc\sinh(\kappa_{i}t)u_{i}/\kappa_{i}=0$ because $\kappa_{i}^{2}=-\lambda_{i}$ and $Ku_{i}=\lambda_{i}Mu_{i}$; so $q_{c}$ is a motion with datum $(0,c u_{i})$, whose phase norm $\lVert(q_{c}(t),q_{c}'(t))\rVert_{2}\ge\lVert q_{c}(t)\rVert_{2}=c\kappa_{i}^{-1}\sinh(\kappa_{i}t)\lVert u_{i}\rVert_{2}$ is unbounded as $t\to\infty$. Fix $\varepsilon_{0}:=1$; given $\delta>0$ choose $c>0$ with $c\lVert u_{i}\rVert_{2}<\delta$, so that $\lVert(0,cu_{i})\rVert_{2}<\delta$; by continuity and unboundedness the motion reaches $\lVert(q_{c}(t),q_{c}'(t))\rVert_{2}=1$ at some $t>0$. Hence the condition of [F4] for stability fails, which is clause 6. [F4, step 1.2, F5, given, algebra]
+2.3 Unstable direction: suppose $\lambda_{i}<0$ and let $u_{i}=M^{-1/2}Oe_{i}$ satisfy $Ku_{i}=\lambda_{i}Mu_{i}$ and $u_{i}^{\mathsf T}Mu_{i}=1$ ([[def-cm09-coupled-quadratic-model]] clause (e)). For $c>0$ define $q_{c}(t):=(c/\kappa_{i})\sinh(\kappa_{i}t)u_{i}$; then $q_{c}''=\kappa_{i}^{2}(c/\kappa_{i})\sinh(\kappa_{i}t)u_{i}$ and $Mq_{c}''+Kq_{c}=(\kappa_{i}^{2}+\lambda_{i})Mc\sinh(\kappa_{i}t)u_{i}/\kappa_{i}=0$ because $\kappa_{i}^{2}=-\lambda_{i}$ and $Ku_{i}=\lambda_{i}Mu_{i}$; so $q_{c}$ is a motion with datum $(0,c u_{i})$, whose phase norm $\lVert(q_{c}(t),q_{c}'(t))\rVert_{2}\ge\lVert q_{c}(t)\rVert_{2}=c\kappa_{i}^{-1}\sinh(\kappa_{i}t)\lVert u_{i}\rVert_{2}$ is unbounded as $t\to\infty$. Fix $\varepsilon_{0}:=1$; given $\delta>0$ choose $c>0$ with $c\lVert u_{i}\rVert_{2}<\min(\delta,1)$, so that $\lVert(0,cu_{i})\rVert_{2}<\delta$; by continuity and unboundedness the motion reaches $\lVert(q_{c}(t),q_{c}'(t))\rVert_{2}=1$ at some $t>0$. Hence the condition of [F4] for stability fails, which is clause 6. [F4, step 1.2, F5, given, algebra]
 
 3.1 Energy: along a motion, differentiating $E(q,q')=\tfrac12q'^{\mathsf T}Mq'+\tfrac12q^{\mathsf T}Kq$ and using $Mq''+Kq=0$ together with the symmetry of $M$ and $K$ gives $\frac{d}{dt}E=q'^{\mathsf T}Mq''+\tfrac12\bigl(q'^{\mathsf T}Kq+q^{\mathsf T}Kq'\bigr)=q'^{\mathsf T}(Mq''+Kq)=0$, so $E$ is constant; the identities $q'^{\mathsf T}Mq'=|z'|_{2}^{2}$ and $q^{\mathsf T}Kq=\sum_{i}\lambda_{i}z_{i}^{2}$ of [F1] give $E=\sum_{i}E_{i}$ with $E_{i}=\tfrac12(z_{i}'^{2}+\lambda_{i}z_{i}^{2})$, and $E_{i}'=z_{i}'(z_{i}''+\lambda_{i}z_{i})=0$ shows that each $E_{i}$ is constant. Substituting the three families of step 2.1 gives the displayed values, using $\cosh^{2}-\sinh^{2}=1$ for $\lambda_{i}<0$ and $\cos^{2}+\sin^{2}=1$ with $\omega_{i}^{2}=\lambda_{i}$ for $\lambda_{i}>0$. This is clause 3. [F1, F2, F5, step 2.1, algebra]
 
@@ -235,16 +205,6 @@ degeneracy intrinsically through the invariant subspace $\ker(K-\lambda M)$.
 
 ## Remarks
 
-- **The three modal types are mutually exclusive per index.** Each index is
-oscillatory, zero or exponential, and the model is oscillatory exactly when
-$K$ is non-negative. A zero stiffness direction arises, for instance, when
-the potential has a flat second-order direction at the equilibrium (an isolated strict minimum can still have zero stiffness, for example the scalar potential $U(q)=q^4$ at $0$); the affine
-family is then not an oscillation at all, as the remark item of this page
-records in detail.
+- **The three modal types are mutually exclusive per index.** Each index is oscillatory, zero or exponential, and the model is oscillatory exactly when $K$ is non-negative. A zero stiffness direction arises, for instance, when the potential has a flat second-order direction at the equilibrium (an isolated strict minimum can still have zero stiffness, for example the scalar potential $U(q)=q^4$ at $0$); the affine family is then not an oscillation at all, as the remark item of this page records in detail.
 
-- **What the intrinsic form does not say.** Clause 4 shows that the
-*family* of pure-$\lambda$ motions is intrinsic; it does not select a
-preferred basis of $N_{\lambda}$, and no physical meaning attaches to an
-individual $u_{i}$ beyond being one convenient basis vector. The frequency
-$\omega=\sqrt{\lambda}$ and the subspace $N_{\lambda}$ are the intrinsic data
-of a degenerate mode.
+- **What the intrinsic form does not say.** Clause 4 shows that the *family* of pure-$\lambda$ motions is intrinsic; it does not select a preferred basis of $N_{\lambda}$, and no physical meaning attaches to an individual $u_{i}$ beyond being one convenient basis vector. The frequency $\omega=\sqrt{\lambda}$ and the subspace $N_{\lambda}$ are the intrinsic data of a degenerate mode.

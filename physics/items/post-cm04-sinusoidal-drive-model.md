@@ -73,10 +73,20 @@ $E(x,v)=\tfrac12mv^{2}+\tfrac12kx^{2}$ of that clause, defined along every
 motion; the model is driven and not a global potential model whenever
 $f_{0}\neq0$.
 
-**(iv) Regularity.** The force law is continuous in $(t,x,v)$ and locally
-Lipschitz in the state variable with the global constant $k+c$, uniformly in
-time ([[def-locally-lipschitz-in-the-state-variable]]); it is an admissible
-force law of clause (a) of [[def-cm04-one-dimensional-models-and-equilibria]],
+**(iv) Regularity.** Let $X:=x_{\rm phys}/(1\,\mathrm m)$,
+$V:=v_{\rm phys}/(1\,\mathrm{m/s})$, and $T:=t_{\rm phys}/(1\,\mathrm s)$
+be the dimensionless numerical SI coordinates (the real inputs of the force
+map). Write
+$K:=k_{\rm phys}/(1\,\mathrm{N/m})$,
+$C:=c_{\rm phys}/(1\,\mathrm{kg/s})$,
+$\widehat f_{0}:=f_{0}/(1\,\mathrm N)$, and
+$\widehat\Omega:=\Omega(1\,\mathrm s)$. The numerical force map is
+$$\widehat F(T,X,V)=\widehat f_{0}\cos(\widehat\Omega T)-KX-CV,$$
+so it is continuous and globally Lipschitz in the state variable with
+numerical-coordinate constant $K+C$, uniformly in time. This is a bound on
+dimensionless SI coordinates and force values, not a sum of the dimensionful
+$k$ and $c$ ([[def-locally-lipschitz-in-the-state-variable]]). It is an
+admissible force law of clause (a) of [[def-cm04-one-dimensional-models-and-equilibria]],
 and its equation is the forced model $m\,x''+cx'+kx=f$ of
 [[def-cm-oscillator-model-and-phase-system]] with the continuous function
 $f(t)=f_{0}\cos(\Omega t)$.

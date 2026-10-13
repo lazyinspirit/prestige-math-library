@@ -87,8 +87,10 @@ Countable Choice and the Axiom of Choice ([[def-countable-choice]],
 [[def-axiom-of-choice]]). Let $(A,u_{A})$ and $(B,u_{B})$ be assigned sharp
 observables with outcome laws $\mu^{A},\mu^{B}$ and let
 $\Delta_{\rho}A,\Delta_{\rho}B$ be their preparation spreads in the reading of
-[[def-nrqm-uncertainty-preparation-spread]]. Let $\psi$ be a unit vector and
-write $a:=\langle A\psi,\psi\rangle$, $b:=\langle B\psi,\psi\rangle$. Then:
+[[def-nrqm-uncertainty-preparation-spread]]. Let $\psi$ be a unit vector.
+Whenever $\psi\in D(A)\cap D(B)$, put
+$$a:=\langle A\psi,\psi\rangle,\qquad b:=\langle B\psi,\psi\rangle.$$
+Then:
 
 (a) **Weak form.** If $\psi\in D(A)\cap D(B)$, then the means $a,b$ are real,
 the spreads $\Delta_{\psi}A$ and $\Delta_{\psi}B$ are defined, both are read in

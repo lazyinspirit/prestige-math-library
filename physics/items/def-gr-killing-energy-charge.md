@@ -1,7 +1,7 @@
 ---
 id: def-gr-killing-energy-charge
 kind: definition
-title: "The Killing energy current and the Killing energy of a three-chain"
+title: "The timelike Killing current and the charge of a three-chain"
 status: draft
 origin: session
 domain: physics
@@ -30,7 +30,7 @@ dependency_roles:
   post-gr-classical-gravitational-action: formulation-prerequisite
   prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure: mathematical-premise
   def-countable-choice: mathematical-premise
-physical_scope: "The energy quantity associated with a timelike Killing symmetry of the smooth classical branch of the gravitational framework: the Killing current built from a smooth stress-energy tensor and its flux through finite smooth singular three-chains on a chosen oriented domain. The item fixes the object, its normalization and its model energy reading; it asserts no conservation, no finiteness for unbounded chains, no positivity and no measurement. With divergence-free T and Killing symmetry, the current lemma supplies conservation up to side flux; the field law is one possible source of that divergence condition. The definition applies only where the stated timelike Killing field exists."
+physical_scope: "The charge associated with a timelike Killing symmetry of the smooth classical branch of the gravitational framework: the Killing current built from a smooth stress-energy tensor and its flux through finite smooth singular three-chains on a chosen oriented domain. It has an energy reading in joules when the Killing field is normalized with a length-valued flow parameter under the length-coordinate convention; other normalizations carry the corresponding scale in the charge's units. The item asserts no conservation, no finiteness for unbounded chains, no positivity and no measurement. With divergence-free T and Killing symmetry, the current lemma supplies conservation up to side flux; the field law is one possible source of that divergence condition. The definition applies only where the stated timelike Killing field exists."
 sources:
   references:
     - title: "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 4.5.5 'Conserved Energy from a Killing Vector': the current J_T = -K^mu T_{mu nu}, its vanishing divergence for Killing K, and the charge Q_T(Sigma) identified with the energy of the matter when K is everywhere timelike, printed pp. 188-189 (PDF pp. 195-196)"
@@ -74,8 +74,8 @@ $T^{ab}\xi_b=-XJ^a$, where $J=-T(\cdot,n)$ is the measured
 energy-momentum current of [[def-gr-observer-energy-momentum-current]]; no
 conservation of $J_\xi$ is asserted by this definition.
 
-**(b) Killing energy of a three-chain.** For every finite smooth singular
-$3$-chain $\Sigma$ of $M$ contained in $U$, the **Killing energy** of $\Sigma$
+**(b) Killing charge of a three-chain.** For every finite smooth singular
+$3$-chain $\Sigma$ of $M$ contained in $U$, the **Killing charge** of $\Sigma$
 with respect to $\xi$ is the real number
 
 $$Q_\xi(\Sigma):=-\Phi_{J_\xi}(\Sigma),$$
@@ -83,6 +83,9 @@ $$Q_\xi(\Sigma):=-\Phi_{J_\xi}(\Sigma),$$
 where $\Phi_{J_\xi}$ is the flux of the current $J_\xi$ through
 $3$-chains on the oriented open submanifold $U$ in the sense of [[def-gr-metric-volume-form-and-current-flux]]
 clause (b).
+
+When $\xi$ is normalized with a length-valued flow parameter in the SI
+length-coordinate convention, this charge is read as a **Killing energy**.
 
 **(c) Relation to the measured energy current.** Since $J_\xi=-XJ$,
 
@@ -98,20 +101,26 @@ $\varepsilon\,g(XJ,\nu^{*})\sqrt{|\det(g(v_i,v_j))|}\,dt^1\wedge dt^2\wedge dt^3
 $\nu^{*}=-n$ and the $v_i$ span $n^{\perp}$ this coefficient equals
 $-X\mu\sqrt{|\det(g(v_i,v_j))|}$, so up to the orientation sign carried by the
 adapted normal, $Q_\xi(\Sigma)$ is the integral of the redshift-weighted
-measured energy density $X\mu$ over $\Sigma$.
+measured energy density $X\mu$ over $\Sigma$. The factor $X$ carries the
+normalization and units of $\xi$.
 
-**(d) Reading and scope.** $Q_\xi(\Sigma)$ is read as the energy that the
-model assigns to the chain $\Sigma$ under the symmetry $\xi$, in the framework
+**(d) Reading and scope.** $Q_\xi(\Sigma)$ is the charge that the model
+assigns to the chain $\Sigma$ under the symmetry $\xi$, in the framework
 of the postulates [[post-gr-spacetime-and-classical-domain]],
 [[post-gr-field-and-matter-assumptions]] with the assigned tensor and symmetry; it does not require the field law
-for its definition. Its numerical value is read in
-$\mathrm J$ under the unit conventions of
-[[def-gr-si-unit-and-coordinate-conventions]] when $T$ is read in
-$\mathrm J\,\mathrm m^{-3}$. The value depends on the model, on $\xi$
-(replacing $\xi$ by $\lambda\xi$ with constant $\lambda>0$ multiplies $X$,
-$J_\xi$ and $Q_\xi$ by $\lambda$), and on the chain $\Sigma$. The definition
-asserts no conservation, no positivity, no finiteness for unbounded chains and
-no measured value. If additionally $\nabla^aT_{ab}=0$ on $U$, the Killing
+for its definition. Under the unit conventions of
+[[def-gr-si-unit-and-coordinate-conventions]], if $T$ is read in
+$\mathrm J\,\mathrm m^{-3}$ and the flow parameter of $\xi$ is measured in
+metres, then $X$ is dimensionless and $Q_\xi(\Sigma)$ is read in $\mathrm J$.
+More generally, if that parameter has unit $\mathcal S$, then in a
+length-coordinate chart $X$ has units $\mathrm m/\mathcal S$ and $Q_\xi$ has
+units $\mathrm J\,\mathrm m/\mathcal S$; converting it to an energy requires
+an explicitly specified normalization factor. The value depends on the model,
+on $\xi$ (replacing $\xi$ by a dimensionless constant multiple $\lambda\xi$
+with $\lambda>0$ multiplies $X$, $J_\xi$ and $Q_\xi$ by $\lambda$), and on the
+chain $\Sigma$. The definition asserts no conservation, no positivity, no
+finiteness for unbounded chains and no measured value. If additionally
+$\nabla^aT_{ab}=0$ on $U$, the Killing
 current lemma gives conservation up to the side flux. The field law
 ([[post-gr-einstein-field-law]] or [[post-gr-classical-gravitational-action]])
 is one way to supply this divergence condition; it is not necessary for

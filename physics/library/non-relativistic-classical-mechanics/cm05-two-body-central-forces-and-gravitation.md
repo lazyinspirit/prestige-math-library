@@ -53,7 +53,7 @@ The first consequences of the reduction are collected in
 [[pthm-cm05-plane-area]]: the planar character of the relative motion, the
 constant areal-velocity vector $j/(2\mu)$, the linear swept-area function
 with rate $J/(2\mu)$ — Kepler's second law for the reduced orbit — and the
-constant areal rates of both labels about the centre of mass, in the ratio
+constant areal rates of both labels about the centre of mass for $j\ne0$, in the ratio
 $(m_2/m_1)^2$. [[pthm-cm05-effective-potential]] establishes the equivalent
 one-dimensional problem for nonzero angular momentum $J>0$: the radial
 coordinate takes values in $J_0$ and obeys

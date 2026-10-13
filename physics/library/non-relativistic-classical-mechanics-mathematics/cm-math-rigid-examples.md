@@ -19,8 +19,9 @@ The companion page to [[cm-math-rigid]] records explicit finite checks of its
 rigid-body results. Everything here is mathematics: the examples carry
 `domain: mathematics`, depend only on the mathematical items of the parent page
 and on mathematical suppliers, and make no physical or empirical claim. No
-measurement, simulation or numerical integration is involved; every number is an
-exact rational or an explicit square root.
+measurement, simulation or numerical integration is involved; the calculations
+use exact rational numbers, square roots, angles involving $\pi$, and the
+logarithmic escape-time bound $4\log25$.
 
 [[ex-cm-inertia-tensors-of-point-masses]] computes the inertia matrix of a
 finite weighted sum of Dirac measures in three cases — two unit masses at

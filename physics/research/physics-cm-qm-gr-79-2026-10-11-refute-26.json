@@ -1,0 +1,86 @@
+{
+  "batch": "26",
+  "opened": [
+    "cex-cm10-degenerate-line-mass-singular-inertia",
+    "cm10-rigid-body-configuration-and-inertia",
+    "cm10-rigid-body-configuration-and-inertia-examples",
+    "def-cm10-angular-velocity",
+    "def-cm10-inertia-tensor",
+    "def-cm10-rigid-body-configuration",
+    "ex-cm10-equilateral-triangle-rotational-inertia",
+    "ex-cm10-euler-angle-pole-and-orientation",
+    "ex-cm10-parallel-axis-shift-check",
+    "post-cm10-rigid-material",
+    "pthm-cm10-frame-covariance",
+    "pthm-cm10-kinetic-splitting",
+    "pthm-cm10-principal-axes",
+    "rem-cm10-orientation-charts"
+  ],
+  "not_opened": [],
+  "flagged": [
+    {
+      "id": "rem-cm10-orientation-charts",
+      "location": "Remark, paragraph “Euler angles are local coordinates”",
+      "defect": "false-claim",
+      "evidence": "The remark says “no single continuous choice of the three angles through that point exists.” The scoped Euler example extends Φ to R³ and gives (α,β,γ)=(0,t,0), for which Φ(0,t,0)=R_y(t) continuously through β=0. The restricted chart lacks coordinates at the pole, but the unqualified claim is contradicted by this path.",
+      "severity": "fatal"
+    },
+    {
+      "id": "rem-cm10-orientation-charts",
+      "location": "Remark, paragraph “Euler angles are local coordinates”; frontmatter deps",
+      "defect": "unlicensed-inference",
+      "evidence": "The paragraph invokes thm-smooth-inverse-function-theorem-on-manifolds for the local inverse, but that ID is absent from deps and dependency_roles. Its current statement says a smooth map with an isomorphism on tangent spaces has a local diffeomorphism; the preceding determinant and dimension calculation meet those hypotheses, but the required dependency edge is undeclared.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "def-cm10-angular-velocity",
+      "location": "Definition (e)",
+      "defect": "unlicensed-inference",
+      "evidence": "The text identifies the axis as the set of points whose velocity equals c'(t), but justifies this with ω_s×(ω_s s)=0, which shows only that points on the stated line have that velocity. The converse requires ω_s×(p−c)=0 to imply p−c is a multiple of the nonzero ω_s; the cited definition and dependencies do not state that implication.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "ex-cm10-euler-angle-pole-and-orientation",
+      "location": "Statement (2); Proof 2.1",
+      "defect": "ill-formed",
+      "evidence": "The item declares Φ:R³→M₃(R), so DΦ maps R³ to R⁹; calling it “not invertible” as a square-map claim is ill-formed. The equal columns do establish rank at most two and noninjectivity, which support the intended conclusion.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "def-cm10-rigid-body-configuration",
+      "location": "Definition (c)",
+      "defect": "missing-hypothesis",
+      "evidence": "The text says a labeling supported on a line determines R “only up to composition” with rotations about that line, but does not define S's relation to the mass measure or handle singleton support. The postulate admits ν=mδ₀; if S is its physical support {0}, every R∈SO(3) fixes S, so the stabilizer is all of SO(3), with no distinguished line.",
+      "severity": "fatal"
+    },
+    {
+      "id": "cm10-rigid-body-configuration-and-inertia",
+      "location": "Page summary, paragraph beginning “This page opens”",
+      "defect": "overstrong-title-or-statement",
+      "evidence": "The summary says a line-supported labeling determines R “only up to rotations about it.” For the admitted model ν=mδ₀, the physical support is {0}; every rotation fixes it, so this does not describe the exact orientation ambiguity.",
+      "severity": "fatal"
+    },
+    {
+      "id": "ex-cm10-equilateral-triangle-rotational-inertia",
+      "location": "Example, opening measure display",
+      "defect": "ill-formed",
+      "evidence": "The display defines ν using δ_{x_1}, δ_{x_2}, and δ_{x_3}, then defines x_k only for k=0,1,2. Thus x_3 is undefined and x_0 is omitted; the subsequent facts and proof instead use the range k=0,1,2.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "def-cm10-angular-velocity",
+      "location": "Proof contract, contracts.def-cm10-angular-velocity.boundaries[4]",
+      "defect": "false-claim",
+      "evidence": "The current contract says the derivative clause applies “including endpoints in the one-sided sense.” The postulate defines I₀ as the open interval (a,b), so its endpoints are not in the domain.",
+      "severity": "nonfatal"
+    },
+    {
+      "id": "pthm-cm10-kinetic-splitting",
+      "location": "Proof contract, contracts.pthm-cm10-kinetic-splitting.boundaries[4]",
+      "defect": "false-claim",
+      "evidence": "The current contract says the identities apply “including interval endpoints” using one-sided derivatives. The postulate defines I₀ as the open interval (a,b), and the theorem asserts identities only for t∈I₀.",
+      "severity": "nonfatal"
+    }
+  ],
+  "coverage_note": "Checked all 14 scoped carriers, the current dependencies needed for the flagged mathematical claims, and the two current contract entries cited by the reader. The reader findings contain no valid in-run-dependency finding requiring an additional producer. I did not independently audit every transitive mathematical dependency or every cited textbook passage."
+}

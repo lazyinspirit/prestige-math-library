@@ -1,0 +1,942 @@
+[
+  {
+    "order": 131,
+    "id": "cm10-rigid-body-configuration-and-inertia",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Rigid-body configuration and inertia",
+    "companion": "cm10-rigid-body-configuration-and-inertia-examples",
+    "requires": [
+      "cm-math-rotation-double-cover",
+      "cm-math-verification",
+      "cm03-momentum-work-and-energy-balances",
+      "cm01-framework-quantities-and-geometry",
+      "cm-math-geometry",
+      "cm-math-rigid",
+      "cm-math-balances",
+      "the-topology-of-euclidean-space",
+      "measures-and-their-basic-properties",
+      "rank-theorems-and-embedded-submanifolds"
+    ],
+    "items": [
+      {
+        "id": "post-cm10-rigid-material",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adoption of the rigid-material model branch: reference mass distribution, rigid placements, orientation and scope",
+        "statement": "Adopt as physical assumptions of the framework the following **rigid-material\nmodel** branch, in the spacetime and frames of [[post-cm01-spacetime]] and\n[[post-cm01-frames]].\n\n**(i) Reference mass distribution.** A rigid-material model carries, besides\nthe framework's time and frame structure, a **reference mass distribution**: a\nmeasure $\\nu$ on the Borel space $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ that\nis a mass distribution in the sense of\n[[def-cm-mass-distribution-and-inertia-matrix]] \u2014 finite and bounded, with\n$\\nu\\bigl(\\mathbb R^3\\setminus\\overline B_R(0)\\bigr)=0$ for some real $R>0$,\nand of total mass $m:=\\nu(\\mathbb R^3)\\in(0,+\\infty)$ \u2014 whose reference\ncoordinates are **centred**,\n$$\\int\\rho\\,d\\nu(\\rho)=0\\in\\mathbb R^3 .$$\nThe label variable $\\rho$ is a coordinate of the model's reference placement\nand has dimension $\\ell$, each component read in metres; the total mass $m$\nhas dimension $\\mu$, read in kilograms, and $R$ has dimension $\\ell$ and is\nthe model's **reference size**\n([[def-cm01-units]]). Under the Axiom of Countable Choice $\\mathrm{AC}_\\omega$,\nused only through [[lem-cm-mass-moments-are-finite]] to make the polynomial\nmoments of $\\nu$ of degree at most two finite, the first and second moments\nof $\\nu$ are finite real numbers. The measure $\\nu$ and the number $m$ are\nmodel data: no distribution of mass of any concrete body and no measured mass\nis asserted.\n\n**(ii) Time window and motions.** A model carries a **time window**\n$I_0\\subseteq\\mathbb R$, a nondegenerate open interval $(a,b)$ with\n$-\\infty\\le a<b\\le+\\infty$ and at least two points, read in seconds. Fix an\n**inertial frame** of the model, that is the adapted chart\n$(o,u,(e_1,e_2,e_3))$ with coordinates $(t,x)$ of [[post-cm01-frames]]. A\n**motion** of the model in this frame is a map\n$x:I_0\\times\\mathbb R^3\\to\\mathbb R^3$ for which there exist a map\n$c:I_0\\to\\mathbb R^3$ and a map $R:I_0\\to SO(3)$, both of class $C^2$\n(componentwise derivatives, [[def-cm-affine-time-space]] for the coordinates\nand [[def-cm-special-orthogonal-group]] for the target), such that\n$$x(t,\\rho)=c(t)+R(t)\\rho\\qquad(t\\in I_0,\\ \\rho\\in\\mathbb R^3).$$\nAdopt: the motions of the model are the maps of this form, and the pair\n$(c,R)$ is the **configuration path** of the motion. The map\n$x(t,\\cdot):\\mathbb R^3\\to\\mathbb R^3$ is the **placement** at time $t$ and is\nthe rigid placement of [[def-cm-rigid-placement-and-body-angular-velocity]]\nwith translation $c$ and rotation $R$; its material velocity is\n$\\partial_tx(t,\\rho)=c'(t)+R'(t)\\rho$, defined by differentiability of $c$ and\nof the entries of $R$. The time window $I_0$ is the interval on which the\nmodel's configuration path is considered; the model's time coordinate is\nthe frame time $t$.\n\n**(iii) Rigidity idealization.** The idealization adopted is that the model\ndescribes a body that does not deform, and its content is the representation\n(ii): a placement of the form $x=c+R\\rho$ with $R\\in SO(3)$ preserves every\nmutual distance, since $R(t)$ preserves the Euclidean norm\n([[def-cm-special-orthogonal-group]]), so for all $\\rho,\\rho'\\in\\mathbb R^3$\nthe number $\\lVert x(t,\\rho)-x(t,\\rho')\\rVert_2=\\lVert\\rho-\\rho'\\rVert_2$ is\nindependent of $t$. The model class (ii) is *adopted* as the definition of a\nrigid-material placement; a motion of material points that preserves all\nmutual distances but whose label set fails to determine a rotation is not\nclaimed to be of this form, and the general characterization of\ndistance-preserving placements is neither asserted nor used on this page.\nFor a **nondegenerate labeling** \u2014 a label set containing the origin and two\nlinearly independent material vectors \u2014 distinct configurations $(c,R)$ and\n$(\\bar c,\\bar R)$ give distinct placements, by [[lem-cm-rigid-labeling-stabilizer]];\nthe configuration data of (ii) therefore do not overcount for such a body.\nDegenerate labelings and degenerate mass distributions are not excluded by\nthis postulate; the later items of the pair state where invertibility of the\ninertial data must be assumed.\n\n**(iv) Centre of mass and orientation.** Because the reference coordinates are\ncentred, the identity\n$$\\int x(t,\\rho)\\,d\\nu(\\rho)=mc(t)$$\nholds for every motion, by linearity of the integral and\n$\\int\\rho\\,d\\nu=0$; the physical reading is that $c(t)$ is the position of the\ncentre of mass of the model in the placement at time $t$. The rotation\n$R(t)$ is the model's **orientation**: it carries reference coordinates into\nthe frame's spatial coordinates, and the **body-fixed frame** at time $t$ is\nthe ordered orthonormal basis $(R(t)e_1,R(t)e_2,R(t)e_3)$ of the spatial\nspace. The reading of $R(t)$ as the orientation of the placement uses the\nnondegeneracy of (iii): for a nondegenerate labeling the material points\ndetermine $R(t)$ uniquely, so the orientation is an attribute of the body's\nplacement and not of the choice of label coordinates.\n\n**(v) Frame changes.** The description of a motion in a second inertial frame\nis obtained by the change of coordinates $t'=t+b$, $x'=Qx+ut+a$ of\n[[post-cm01-frames]] clause (iv), applied to every event of the motion; here\n$Q\\in SO(3)$ and $u\\in\\mathbb R^3$ are the rotation and the boost velocity of\nthat clause, written $R$ and $v$ there and renamed here to avoid a clash with\nthe orientation path $R(t)$ of clause (ii) and with the material velocity\nfield of the pair's definition. With the same $\\rho$ labelling a material\npoint, the description in the second frame is\n$$\\tilde x(t',\\rho):=Q\\,x(t'-b,\\rho)+u\\,(t'-b)+a .$$\nThis description is again a motion of the model, with configuration path\n$$\\tilde c(t')=Qc(t'-b)+u\\,(t'-b)+a,\\qquad \\tilde R(t')=Q\\,R(t'-b),$$\nbecause $SO(3)$ is closed under multiplication\n([[def-cm-special-orthogonal-group]]); this is a consistency requirement of\nthe model's frame language, exactly as for the particle worldlines of\n[[post-cm01-worldlines]] clause (ii). The derived transformation laws of the\nangular velocity, of the inertia data and of the kinetic splitting are\ntheorems of this pair's page, not part of this postulate.\n\n**(vi) No dynamics.** This postulate fixes the kinematic class of the model\nand its mass data only. It asserts no force law, no torque law, no equation of\nmotion for the pair $(c,R)$, and no balance or conservation law; in\nparticular the model does not by itself constrain the configuration path,\nand the effect of forces and torques on a body is a separate model\nassumption. It also asserts no measured value of any mass, length, duration\nor orientation.\n\n**(vii) Scope and exclusions.** The branch excludes deformation, internal\ndegrees of freedom such as temperature, chemical state or an independent spin\nvariable, variable mass, ablation and impact events, contact, friction and\ndissipative constitutive laws, and any relativistic or quantum description.\nIt excludes bodies whose mass distribution is not a bounded finite Borel\nmeasure of the stated kind. A rigid-material model is not a system of\nfinitely many particle labels: the continuum measure $\\nu$ carries the mass\ndata of the model, and the situations of point masses are the special cases\nof measures supported on finitely many points. All physical statements about\nthe model weight material points by $\\nu$; properties of $\\nu$-null sets of\nlabels are not physical properties of the body.",
+        "deps": [
+          "post-cm01-spacetime",
+          "post-cm01-frames",
+          "post-cm01-worldlines",
+          "def-cm01-units",
+          "def-cm-affine-time-space",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-mass-moments-are-finite",
+          "def-cm-rigid-placement-and-body-angular-velocity",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-rigid-labeling-stabilizer"
+        ],
+        "dependency_roles": {
+          "post-cm01-spacetime": "formulation-prerequisite",
+          "post-cm01-frames": "formulation-prerequisite",
+          "post-cm01-worldlines": "formulation-prerequisite",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-cm-affine-time-space": "mathematical-premise",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "def-cm-rigid-placement-and-body-angular-velocity": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-rigid-labeling-stabilizer": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of the rigid-material model branch of the framework: a bounded finite Borel measure (the reference mass distribution) of positive total mass with reference coordinates centred at its first moment, a nondegenerate time window, and motions given by rigid placements $x(t,\\rho)=c(t)+R(t)\\rho$ with $C^{2}$ translation and rotation curves into $SO(3)$. The idealization adopted is kinematic rigidity: all material mutual distances are constant in time. The branch excludes deformation, internal degrees of freedom, variable mass, impacts, and every force, torque, equation of motion, balance or conservation law for the configuration path; it asserts no measured mass, length, duration or orientation and no claim that any concrete body is rigid. It is a declared model branch distinct from the finitely many particle labels of the particle branch.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge Part II lecture notes, January 2015 printing), Section 3.1, printed pages 46-49 (PDF pages 52-55): the rigid body as material points with fixed pairwise distances, the displacement as translation plus rotation, the body-fixed orthonormal basis, and the count of six degrees of freedom",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.1, chapter pages 1-3 (PDF pages 55-57): rigidity as the absence of mutual-distance changes, the moving orthonormal basis and the six degrees of freedom of a rigid body",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Section 2.1, Eqs. (2.8)-(2.10), and Section 2.2, Eqs. (2.14)-(2.30): the rigid body as a system whose configuration is a placement of a mass distribution, the orientation path and the centre-of-mass split",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 2 Sections 2.1-2.2, printed pages 29-33 (PDF pages 32-36): $SO(3)$ and the configuration of a nondegenerate oriented body as a translation together with a rotation",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "def-cm10-rigid-body-configuration",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Configuration, configuration space and orientation of a rigid-material model in an inertial frame",
+        "statement": "Adopt the model data, the time window $I_0$, the inertial frame and the\nnotation of [[post-cm10-rigid-material]]: the reference mass distribution\n$\\nu$ with total mass $m$ and centred reference coordinates, and a motion\n$x(t,\\rho)=c(t)+R(t)\\rho$ with configuration path $(c,R)$ of class $C^2$.\n\n**(a) Configuration and configuration space.** The **configuration** of the\nmodel at time $t$ in the frame is the pair $(c(t),R(t))$; the pair\n$(c,R)$ is a **configuration path**. The **configuration space** of the model\nis the set\n$$\\mathcal C:=\\mathbb R^3\\times SO(3),$$\nread through the identification of $M_3(\\mathbb R)$ with $\\mathbb R^{9}$\n([[def-matrix-space]]) so that $\\mathcal C\\subseteq\\mathbb R^{12}$. The\nconfiguration determines the placement $x=c+R\\,\\cdot$ at that time, and the\nreference placement is $(c,R)=(0,I_3)$. Under the identification of\n$M_3(\\mathbb R)$ with $\\mathbb R^{9}$, the group $SO(3)$ is a compact\nthree-dimensional embedded submanifold of $M_3(\\mathbb R)$ and a subgroup of\nthe general linear group ([[lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold]]\nclauses 1 and 3, [[lem-cm-so3-is-a-matrix-group]]); consequently\n$\\mathcal C=\\mathbb R^3\\times SO(3)$ is a six-dimensional smooth manifold\nwith the product structure. Its dimension $3+3=6$ is read as three\ntranslation coordinates of $c$ and three orientation degrees of freedom of\n$R$; the model of [[post-cm10-rigid-material]] has no other configuration\ndegrees of freedom, since deformation and internal variables are excluded by\nthat postulate.\n\n**(b) Centre of mass, orientation, body frame.** Because\n$\\int\\rho\\,d\\nu=0$, the configuration's translation is the position of the\ncentre of mass of the model,\n$\\int x(t,\\rho)\\,d\\nu(\\rho)=mc(t)$. The rotation $R(t)$ is the **orientation**\nof the model at time $t$: the linear map that carries reference coordinates\ninto the frame's spatial coordinates, so that a material point whose\nreference coordinate is $\\rho$ is found at the spatial position $x(t,\\rho)$.\nThe **body-fixed frame** at time $t$ is the ordered orthonormal basis\n$(R(t)e_1,R(t)e_2,R(t)e_3)$ of the spatial space, obtained by applying the\norientation to the standard basis; the basis is $g$-orthonormal because\n$R(t)\\in O(3)$ preserves the Euclidean inner product\n([[def-euclidean-inner-product]], [[def-cm-special-orthogonal-group]]). The\nmaterial point of reference coordinate $\\rho$ has **spatial position**\n$x(t,\\rho)$ and **reference coordinates** $\\rho$.\n\n**(c) Physical labels and faithfulness.** The **physical label set** is\n$S:=\\operatorname{supp}\\nu$, defined here as the complement of the union of\nall open $\\nu$-null subsets of $\\mathbb R^3$. Thus $\\rho\\in S$ exactly when\nevery open neighbourhood of $\\rho$ has positive mass. This is a closed set\ncarrying all mass: the rational open boxes form a countable basis\n([[thm-rational-points-and-boxes-in-rn]], $n=3$), so its complement is the\nunion of the countably many null basis boxes. Disjointifying this union and\nusing countable additivity ([[def-measure]]) gives $\\nu(\\mathbb R^3\\setminus S)=0$.\nIn particular $S\\neq\\varnothing$ because $m>0$.\n\nIf two configurations satisfy $c+R\\rho=\\bar c+\\bar R\\rho$ for every\n$\\rho\\in S$, integration against the centred measure gives $mc=m\\bar c$,\nhence $c=\\bar c$. Their exact orientation ambiguity is therefore\n$$\\bar R^{-1}R\\in\\operatorname{Stab}_{SO(3)}(S):=\\{H\\in SO(3):H\\rho=\\rho\\text{ for every }\\rho\\in S\\},$$\nthe pointwise stabilizer of [[lem-cm-rigid-labeling-stabilizer]]. Conversely,\n$c=\\bar c$ and this stabilizer condition give equality of the placements on\n$S$ by multiplication. A **nondegenerate physical labeling** is one whose\n$S$ contains two linearly independent vectors; its stabilizer is $\\{I_3\\}$\nby that lemma, so the physical placement determines $(c,R)$ uniquely.\nThe same injectivity conclusion holds for any auxiliary label set containing\nthe origin and two independent vectors, by evaluation at the origin followed\nby the lemma, as in [[post-cm10-rigid-material]] clause (iii).\n\nA **degenerate physical labeling** has no two independent vectors. If\n$S$ contains a nonzero vector $u$, then $S\\subseteq\\mathbb Ru$, and its\nstabilizer is exactly $\\{H\\in SO(3):Hu=u\\}$, the rotations fixing the line\n$\\mathbb Ru$ pointwise; the orientation is determined only up to right\ncomposition with this subgroup. If $S$ contains no nonzero vector, then\n$S=\\{0\\}$ and its stabilizer is all of $SO(3)$. More generally a singleton\nsupport $\\{q\\}$ must have $q=0$, since centring gives $mq=0$.\nThus a centred point mass has no distinguished orientation axis. These are\nall the degenerate cases: after choosing any nonzero $u\\in S$, failure of\nindependence forces every vector in $S$ to be a multiple of $u$.\nConfiguration pairs remain model data in every case, including orientation\ndata invisible in the placed physical labels.\n\n**(d) Description in another inertial frame.** Let a second inertial frame be\nrelated to the first by the transformation $t'=t+b$, $x'=Qx+ut+a$ of\n[[post-cm01-frames]] clause (iv), with $b\\in\\mathbb R$, $a,u\\in\\mathbb R^3$\nand $Q\\in SO(3)$\n([[lem-cm-adapted-charts-and-galilean-transformations]] clause 1); the letters\n$Q$ and $u$ are the rotation and the boost velocity written $R$ and $v$ in\n[[post-cm01-frames]], renamed to avoid clashes with the orientation path\n$R(t)$ and the material velocity field of clause (e). The\n**description of the same motion in the second frame** assigns to the same\nmaterial label $\\rho$ the events of the motion in the new coordinates,\n$$\\tilde x(t',\\rho):=Q\\,x(t'-b,\\rho)+u\\,(t'-b)+a .$$\nSubstituting $x(t,\\rho)=c(t)+R(t)\\rho$ and using distributivity of the matrix\nproduct over sums expresses the description as a motion of the same model in\nthe second frame, with configuration path\n$$\\tilde c(t')=Qc(t'-b)+u\\,(t'-b)+a,\\qquad \\tilde R(t')=Q\\,R(t'-b),$$\nwhere $\\tilde R(t')\\in SO(3)$ for every $t'$ because $SO(3)$ is closed under\nmatrix multiplication ([[lem-cm-so3-is-a-matrix-group]]); the pair\n$(\\tilde c,\\tilde R)$ is again of class $C^2$. This description is a\nconvention forced by the frame change,\nnot a dynamical statement; the transformation laws of the velocity field, the\nangular velocity and the inertia data are proved in the frame-covariance\ntheorem of this page.\n\n**(e) Material velocities.** For a motion with configuration path $(c,R)$, the\n**material velocity** of the label $\\rho$ at time $t$ is the derivative\n$$\\partial_tx(t,\\rho):=c'(t)+R'(t)\\rho,$$\nwhich exists by differentiability of $c$ and of the entries of $R$\n([[def-cm-rigid-placement-and-body-angular-velocity]]). The **velocity field\nof the motion** at time $t$ is the map\n$p\\mapsto v(t,p)$ assigning to a spatial point the velocity of the material\npoint currently placed there, defined on the image of the placement. Neither\nthe configuration nor the placement by itself asserts a dynamics: the pair\n$(c,R)$ is a description of the position and orientation of the body, and the\nmaterial velocity is its kinematic derivative.",
+        "strategy": "A definition: it fixes the configuration pair (c,R) of the rigid-material model, the configuration space R^3 x SO(3) with its manifold structure and dimension six, the centre-of-mass and orientation readings, the body-fixed frame, the faithfulness of the parametrization for nondegenerate labelings and the description of the same motion in a second inertial frame.",
+        "deps": [
+          "post-cm10-rigid-material",
+          "post-cm01-frames",
+          "def-cm-rigid-placement-and-body-angular-velocity",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-so3-is-a-matrix-group",
+          "lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold",
+          "lem-cm-rigid-labeling-stabilizer",
+          "lem-cm-adapted-charts-and-galilean-transformations",
+          "def-cm01-units",
+          "def-matrix-space",
+          "def-euclidean-inner-product",
+          "thm-rational-points-and-boxes-in-rn",
+          "def-measure"
+        ],
+        "dependency_roles": {
+          "post-cm10-rigid-material": "formulation-prerequisite",
+          "post-cm01-frames": "formulation-prerequisite",
+          "def-cm-rigid-placement-and-body-angular-velocity": "mathematical-premise",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-so3-is-a-matrix-group": "mathematical-premise",
+          "lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold": "mathematical-premise",
+          "lem-cm-rigid-labeling-stabilizer": "mathematical-premise",
+          "lem-cm-adapted-charts-and-galilean-transformations": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-matrix-space": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-rational-points-and-boxes-in-rn": "mathematical-premise",
+          "def-measure": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The configuration data of the rigid-material model branch of [[post-cm10-rigid-material]] in one fixed inertial frame: the configuration pair (c,R) of centre-of-mass position and orientation, its reading as a placement of the reference mass distribution, the configuration space $\\mathbb R^3\\times SO(3)$ with the dimension three plus three, the body-fixed orthonormal frame, the reference placement, the faithfulness of the parametrization for nondegenerate labelings, and the description of the same motion in a second inertial frame. No force, torque, equation of motion, time evolution or measured value is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.1, Eqs. (3.3)-(3.10), printed pages 46-49 (PDF pages 52-55): the rigid displacement as translation plus rotation, the body-fixed and space-fixed orthonormal bases, and the six independent configuration variables",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.1, Eqs. (4.1)-(4.6), chapter pages 1-3 (PDF pages 55-57): the configuration of a rigid body as a position plus an orientation, with the Euler-angle discussion deferred to local charts",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Sections 2.1-2.2, Eqs. (2.8)-(2.30): the configuration of a rigid body as a placement, with orientation given by a rotation matrix and the body-frame description of the same motion",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 2 Sections 2.1-2.2, printed pages 29-33 (PDF pages 32-36): the rotation group $SO(3)$ as the configuration space of an oriented body and the transformation of descriptions between frames",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "def-cm10-angular-velocity",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Body and spatial angular velocity of a rigid-material motion, and the material velocity field",
+        "statement": "Adopt the model, inertial frame and notation of\n[[post-cm10-rigid-material]] and [[def-cm10-rigid-body-configuration]], and\nlet a motion $x(t,\\rho)=c(t)+R(t)\\rho$ have configuration path $(c,R)$ of\nclass $C^2$ on the time window $I_0$ ([[def-interval]]).\n\n**(a) Body angular velocity.** By\n[[def-cm-rigid-placement-and-body-angular-velocity]], the matrix\n$R(t)^{\\mathsf T}R'(t)$ is skew-symmetric at every $t\\in I_0$\n([[lem-cm-matrix-curve-derivative-rules]] clause 3), and by\n[[lem-cm-skew-matrix-cross-product-correspondence]] clause 2 there is exactly\none vector $\\omega(t)\\in\\mathbb R^3$ with\n$$R(t)^{\\mathsf T}R'(t)=[\\omega(t)]_\\times .$$\nThe map $\\omega:I_0\\to\\mathbb R^3$ is the **body angular velocity** of the\nmotion. Since $R$ is of class $C^2$, the entries of $R^{\\mathsf T}R'$ are\ndifferentiable and hence $\\omega$ is of class $C^1$; its derivative is the\n**body angular acceleration**. The dimension is $[\\omega]=\\tau^{-1}$\n([[def-cm01-units]]), read in radians per second under the radian convention,\nin which angles are dimensionless.\n\n**(b) Spatial angular velocity.** The **spatial angular velocity** of the\nmotion is\n$$\\omega_{\\mathrm s}(t):=R(t)\\omega(t)\\in\\mathbb R^3,$$\nof the same dimension $\\tau^{-1}$. By the conjugation clause of\n[[lem-cm-skew-matrix-cross-product-correspondence]],\n$R'(t)R(t)^{\\mathsf T}=[\\omega_{\\mathrm s}(t)]_\\times$; this is the\nspace-frame rate matrix of the motion.\n\n**(c) Material velocity field.** For every material label $\\rho$,\n$$\\partial_tx(t,\\rho)=c'(t)+R(t)\\bigl(\\omega(t)\\times\\rho\\bigr),$$\nbecause $R'(t)=R(t)[\\omega(t)]_\\times$ and\n$[\\omega]_\\times\\rho=\\omega\\times\\rho$\n([[def-cm-rigid-placement-and-body-angular-velocity]],\n[[lem-cm-skew-matrix-cross-product-correspondence]] clause 1). Writing\n$p=x(t,\\rho)$ for the spatial position of the label and using\n$R(\\omega\\times\\rho)=(R\\omega)\\times(R\\rho)$, the same identity reads\n$$\\partial_tx(t,\\rho)=c'(t)+\\omega_{\\mathrm s}(t)\\times\\bigl(p-c(t)\\bigr):$$\nthe material velocity field is that of a translation $c'(t)$ composed with a\nrotation of angular velocity $\\omega_{\\mathrm s}(t)$ about the centre of mass\n$c(t)$. The motion is a **pure translation** at time $t$ exactly when\n$\\omega(t)=0$, equivalently $R'(t)=0$; then every material velocity equals\n$c'(t)$.\n\n**(d) Uniqueness of the velocity data.** The velocity field determines\n$c'(t)$ and $\\omega_{\\mathrm s}(t)$ uniquely: if a motion has material\nvelocity field $p\\mapsto v(t,p)=c'(t)+\\omega_{\\mathrm s}(t)\\times(p-c(t))$,\nthen evaluating at $p=c(t)$ gives $c'(t)=v(t,c(t))$, and for $u\\in\\mathbb R^3$\nthe difference $v(t,c(t)+u)-v(t,c(t))=\\omega_{\\mathrm s}(t)\\times u$ is a\nlinear map of $u$; testing it on two linearly independent vectors determines\n$\\omega_{\\mathrm s}(t)$ by the injectivity clause of\n[[lem-cm-skew-matrix-cross-product-correspondence]], and then\n$\\omega(t)=R(t)^{\\mathsf T}\\omega_{\\mathrm s}(t)$. The pair\n$\\bigl(c'(t),\\omega_{\\mathrm s}(t)\\bigr)$ is therefore an intrinsic\ndescription of the velocity field; the body angular velocity is its\ndescription in the body-fixed frame, and the choice of reference coordinates\nis part of the model data fixed in [[post-cm10-rigid-material]].\n\n**(e) Instantaneous rotation axis.** If $\\omega_{\\mathrm s}(t)\\neq0$, the line\n$$\\bigl\\{c(t)+s\\,\\omega_{\\mathrm s}(t):s\\in\\mathbb R\\bigr\\}$$\nis the **instantaneous rotation axis** of the motion at time $t$: it is the\nset of spatial points whose material velocity equals $c'(t)$, as follows from\n$\\omega_{\\mathrm s}\\times(\\omega_{\\mathrm s}s)=0$. Conversely, write\n$w=\\omega_{\\mathrm s}(t)$ and $z=p-c(t)$. If $w\\times z=0$, choose a\ncoordinate $i$ with $w_i\\neq0$; the cross-product coordinate equations\n([[lem-cm-skew-matrix-cross-product-correspondence]] clause 1) give\n$w_i z_j=w_j z_i$ for every $j$, hence $z=(z_i/w_i)w$.\nThis proves that the zero relative-velocity set is exactly the displayed\nline. The velocity field is\nconstant on lines parallel to $\\omega_{\\mathrm s}(t)$ and rotates about this\naxis; if also $c'(t)=0$ at that instant, every point of the axis is\ninstantaneously at rest and the motion is an instantaneous rotation about it.\nNo claim is made that the axis is fixed in time or in space.\n\n**(f) Conventions and scope.** The convention fixed here is the body-fixed\none of the cited mathematical definition: $\\Omega=R^{\\mathsf T}R'=[\\omega]_\\times$\nand $R'=R\\Omega$. A consumer using the space-fixed convention must state the\nchange, which is the rotation by $R$ recorded in (b); the two vectors agree\nonly when $R(t)$ fixes $\\omega(t)$. Both vectors are kinematic quantities of\nthe motion: no torque, no angular momentum and no equation of motion for\n$\\omega$ is asserted, and no measured angular velocity is recorded. The\nbehaviour of $\\omega$ under a change of inertial frame is proved in the\nframe-covariance theorem of this page.",
+        "strategy": "A definition: it fixes the body angular velocity by R^T R' = [omega]_x, the spatial angular velocity, the spatial form of the material velocity field, the uniqueness of the velocity data, the instantaneous rotation axis and the convention, with dimension tau^{-1}.",
+        "deps": [
+          "post-cm10-rigid-material",
+          "def-cm10-rigid-body-configuration",
+          "def-cm-rigid-placement-and-body-angular-velocity",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "lem-cm-matrix-curve-derivative-rules",
+          "def-cm-special-orthogonal-group",
+          "def-cm01-units",
+          "def-euclidean-inner-product",
+          "def-derivative",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "post-cm10-rigid-material": "formulation-prerequisite",
+          "def-cm10-rigid-body-configuration": "formulation-prerequisite",
+          "def-cm-rigid-placement-and-body-angular-velocity": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "lem-cm-matrix-curve-derivative-rules": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The angular velocity of the rigid-material model branch of [[post-cm10-rigid-material]] along a $C^{2}$ motion in one inertial frame: the body angular velocity $\\omega$ characterised by $R^{\\mathsf T}R'=[\\omega]_\\times$, the spatial angular velocity $\\omega_{\\mathrm{s}}=R\\omega$, the spatial form of the material velocity field and its uniqueness, and the instantaneous rotation axis when $\\omega_{\\mathrm{s}}\\neq0$, with the dimension $\\tau^{-1}$ read in radians per second under the radian convention. The item is kinematic: it asserts no torque, no equation of motion for $\\omega$ and no measured value.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.1.1, Eqs. (3.5)-(3.10), printed pages 47-49 (PDF pages 53-55): the antisymmetric body-frame rate matrix, the angular-velocity vector acting by cross product, and the relation between body-frame and space-frame rate vectors",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.1, Eqs. (4.1)-(4.10), chapter pages 1-4 (PDF pages 55-58): the moving orthonormal basis, the skew angular-velocity matrix and the transport theorem for a vector of constant body components",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Section 2.2, Eqs. (2.14)-(2.30): the orientation path, the body and space angular-velocity vectors extracted from the skew rate matrix, and the warning about conventions",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 2 Sections 2.1-2.2, printed pages 29-33 (PDF pages 32-36): the rotating-frame relation between the time derivative in the space frame and the body frame, with the angular-velocity vector",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "def-cm10-inertia-tensor",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Inertia matrix, spatial inertia tensor, inertia tensor about a point and moment of inertia about an axis of a rigid-material model",
+        "statement": "Adopt the model of [[post-cm10-rigid-material]]: the reference mass\ndistribution $\\nu$, its total mass $m=\\nu(\\mathbb R^3)$ and its centred\nreference coordinates $\\int\\rho\\,d\\nu(\\rho)=0$. Assume the Axiom of Countable\nChoice $\\mathrm{AC}_\\omega$, used only through\n[[lem-cm-mass-moments-are-finite]] to make the polynomial moments of $\\nu$ of\ndegree at most two finite real numbers. Fix an inertial frame and a motion\n$x(t,\\rho)=c(t)+R(t)\\rho$ with configuration path $(c,R)$ of class $C^2$\n([[def-cm10-rigid-body-configuration]]).\n\n**(a) Body inertia matrix.** The **body inertia matrix** of the model is the\ninertia matrix of the reference mass distribution,\n$$I:=I(\\nu)=\\int\\bigl(\\lVert\\rho\\rVert_2^{2}I_3-\\rho\\rho^{\\mathsf T}\\bigr)\\,d\\nu(\\rho)\\in M_3(\\mathbb R),$$\nwith entries $I_{jk}=\\int(\\lVert\\rho\\rVert_2^{2}\\delta_{jk}-\\rho_j\\rho_k)\\,d\\nu$\nas in [[def-cm-mass-distribution-and-inertia-matrix]]; the matrix is expressed\nin the standard basis of the reference coordinates. Its entries are finite\nreal numbers, it is symmetric, and for every $\\omega\\in\\mathbb R^3$,\n$$\\omega^{\\mathsf T}I\\omega=\\int\\lVert\\omega\\times\\rho\\rVert_2^{2}\\,d\\nu(\\rho)\\ \\ge 0$$\nby [[lem-cm-inertia-matrix-properties]] clauses 1-2; hence $I$ is symmetric\nand its quadratic form is positive semidefinite. The dimension is\n$[I]=\\mu\\ell^{2}$ ([[def-cm01-units]]), read in kilogram metres squared. The\nmodel is **nondegenerate** when no line through the origin carries the whole\nmass, that is $\\nu\\bigl(\\mathbb R^3\\setminus\\mathbb R\\omega\\bigr)>0$ for every\n$\\omega\\neq0$, and **degenerate** otherwise; the connection between this\ncriterion and the strict positivity and invertibility of $I$ is proved in the\nprincipal-axes theorem of this page.\n\n**(b) Spatial inertia tensor at the centre of mass.** The **spatial inertia\ntensor** of the model at time $t$ is\n$$I(t):=R(t)\\,I\\,R(t)^{\\mathsf T}\\in M_3(\\mathbb R),$$\nthe matrix of the same quadratic form in the frame's spatial coordinates: for\nevery $n\\in\\mathbb R^3$,\n$n^{\\mathsf T}I(t)n=(R(t)^{\\mathsf T}n)^{\\mathsf T}I(R(t)^{\\mathsf T}n)$. Its\nentries are $C^2$ functions of $t$, since $R$ is of class $C^2$ and $I$ is\nconstant; the matrix rotates with the body and returns to $I$ in the\nbody-fixed frame, where $R=I_3$.\n\n**(c) Inertia tensor about a spatial point.** For a spatial point\n$p\\in\\mathbb R^3$ let\n$$a(t,p):=R(t)^{\\mathsf T}\\bigl(p-c(t)\\bigr)\\in\\mathbb R^3$$\nbe the **reference coordinate of $p$**, that is the label of the material\npoint of the reference placement that is placed at $p$ at time $t$. The\n**inertia tensor of the model about $p$** at time $t$ is\n$$I(t,p):=R(t)\\,I_\\nu\\bigl(a(t,p)\\bigr)\\,R(t)^{\\mathsf T}\\in M_3(\\mathbb R),$$\nwhere\n$$I_\\nu(a)=\\int\\bigl(\\lVert\\rho-a\\rVert_2^{2}I_3-(\\rho-a)(\\rho-a)^{\\mathsf T}\\bigr)\\,d\\nu(\\rho)$$\nis the inertia tensor of the mass distribution about the point $a$ of the\nreference coordinates ([[def-cm-inertia-tensor-about-a-point]]). Since the\nlabel of a spatial point is uniquely determined by the placement, this is\nwell defined; for the centre of mass, $a(t,c(t))=0$ and\n$I(t,c(t))=I(t)$. The dimension is again $\\mu\\ell^{2}$, read in kilogram\nmetres squared.\n\n**(d) Moment of inertia about an axis.** Let $\\ell$ be a spatial line at time\n$t$, given by a point $p\\in\\mathbb R^3$ and a unit direction $n\\in\\mathbb R^3$\n($\\lVert n\\rVert_2=1$). The **moment of inertia of the model about $\\ell$** is\n$$\\Theta_\\ell(t):=n^{\\mathsf T}I(t,p)n .$$\nIts invariance under the choices entering the description of the line and\nits identification with the integral defining the physical moment of inertia\nabout the line are statements, not conventions; they are proved in clause\n(c) of the principal-axes theorem of this page. For a **body-fixed\naxis**, that is a line through the centre of mass whose direction in\nreference coordinates is a constant unit vector $n_0$, the moment is\n$$n_0^{\\mathsf T}I n_0=\\int\\lVert n_0\\times\\rho\\rVert_2^{2}\\,d\\nu(\\rho),$$\nby clause (a), and is independent of time, because $I$ and $n_0$ are model\ndata.\n\n**(e) What is constant and what moves.** The body inertia matrix $I$ is\ndetermined by the model's reference mass distribution alone and does not\ndepend on the time, the frame or the motion; the spatial inertia tensor\n$I(t)$ depends on the motion through the orientation $R(t)$; the inertia\ntensor $I(t,p)$ about a spatial point depends on the motion through both the\norientation and the position of $p$. Principal axes and principal moments of\n$I$ are the subject of the principal-axes theorem of this page.",
+        "strategy": "A definition: it fixes the body inertia matrix, the spatial inertia tensor, the inertia tensor about a spatial point, the moment of inertia about an axis and the nondegeneracy naming, with dimension mu l^2 and the cited mathematical properties.",
+        "deps": [
+          "post-cm10-rigid-material",
+          "def-cm10-rigid-body-configuration",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-mass-moments-are-finite",
+          "def-countable-choice",
+          "lem-cm-inertia-matrix-properties",
+          "def-cm-inertia-tensor-about-a-point",
+          "def-cm-special-orthogonal-group",
+          "def-euclidean-inner-product",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-cross-product-in-r3",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "post-cm10-rigid-material": "formulation-prerequisite",
+          "def-cm10-rigid-body-configuration": "formulation-prerequisite",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-cm-inertia-matrix-properties": "mathematical-premise",
+          "def-cm-inertia-tensor-about-a-point": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The inertia data of the rigid-material model branch of [[post-cm10-rigid-material]]: the body inertia matrix of the reference mass distribution about the centre of mass, its spatial version along a motion, the inertia tensor of the model about an arbitrary spatial point, and the moment of inertia about an axis, with the dimension $\\mu\\ell^{2}$ read in kilogram metres squared. The item states the mathematical properties it uses (symmetry, positivity and the nondegeneracy criterion) through their cited mathematical suppliers. No measured inertia is asserted and no rotational dynamics is introduced.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.2, Eqs. (3.17)-(3.23), printed pages 50-52 (PDF pages 56-58): the inertia tensor of a discrete and of a continuous mass distribution, its symmetry and positivity, and principal axes",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.2, Eqs. (4.14)-(4.28), chapter pages 3-6 (PDF pages 57-60): the rotational kinetic energy and the inertia tensor as a symmetric matrix, principal axes, and the parallel-axis relation",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Sections 2.3-2.6, Eq. (2.41) and Eq. (2.51): moments of inertia, the inertia tensor, principal moments and vector angular momentum",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 2 Sections 2.2-2.3, printed pages 33-40 (PDF pages 36-43): the inertia tensor, the principal axes and the parallel-axis derivation",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "pthm-cm10-kinetic-splitting",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Total momentum, kinetic-energy splitting and centre-of-mass angular momentum of a rigid-material motion",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), used only to make the integrals below finite.\nAdopt the model and notation of [[post-cm10-rigid-material]]: a reference\nmass distribution $\\nu$ with total mass $m$ and centred reference coordinates,\na fixed inertial frame, and a motion\n$x(t,\\rho)=c(t)+R(t)\\rho$ with configuration path $(c,R)$ of class $C^{2}$ on\nthe time window $I_0$, body angular velocity $\\omega$\n([[def-cm10-angular-velocity]]) and body inertia matrix $I$\n([[def-cm10-inertia-tensor]]). Define the **total momentum**, **kinetic\nenergy** and **angular momentum about the centre of mass** of the model along\nthe motion by the componentwise integrals\n$$P(t):=\\int\\partial_tx(t,\\rho)\\,d\\nu(\\rho),\\qquad K(t):=\\frac12\\int\\lVert\\partial_tx(t,\\rho)\\rVert_2^{2}\\,d\\nu(\\rho),$$\n$$L_c(t):=\\int\\bigl(x(t,\\rho)-c(t)\\bigr)\\times\\bigl(\\partial_tx(t,\\rho)-c'(t)\\bigr)\\,d\\nu(\\rho),$$\nwith dimensions $\\mu\\ell\\tau^{-1}$, $\\mu\\ell^{2}\\tau^{-2}$ and\n$\\mu\\ell^{2}\\tau^{-1}$ ([[def-cm01-units]]). Then for every $t\\in I_0$:\n\n1. the three integrands are $\\nu$-integrable, so $P(t)$, $K(t)$ and\n   $L_c(t)$ are a well-defined finite vector and finite real numbers;\n2. $P(t)=m\\,c'(t)$;\n3. $K(t)=\\dfrac12m\\lVert c'(t)\\rVert_2^{2}+\\dfrac12\\omega(t)^{\\mathsf T}I\\omega(t)$;\n4. $L_c(t)=R(t)\\,I\\,\\omega(t)$.\n\nThe identities hold for every $C^{2}$ configuration path; no equation of\nmotion, force law or conservation statement is used or asserted.",
+        "strategy": "direct",
+        "deps": [
+          "post-cm10-rigid-material",
+          "def-cm10-rigid-body-configuration",
+          "def-cm10-angular-velocity",
+          "def-cm10-inertia-tensor",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-mass-moments-are-finite",
+          "def-countable-choice",
+          "thm-cm-rigid-kinetic-energy-and-angular-momentum",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-cm-special-orthogonal-group",
+          "def-euclidean-inner-product",
+          "def-cross-product-in-r3",
+          "def-cm01-units",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "post-cm10-rigid-material": "physical-assumption",
+          "def-cm10-rigid-body-configuration": "formulation-prerequisite",
+          "def-cm10-angular-velocity": "formulation-prerequisite",
+          "def-cm10-inertia-tensor": "formulation-prerequisite",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-cm-rigid-kinetic-energy-and-angular-momentum": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-interval": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Conditional inertial identities of the rigid-material model branch of [[post-cm10-rigid-material]] along a $C^{2}$ motion in one inertial frame: the total momentum equals the total mass times the centre-of-mass velocity; the kinetic energy splits into the centre-of-mass term and the rotational term $\\tfrac12\\omega^{\\mathsf T}I\\omega$; and the angular momentum about the centre of mass equals $RI\\omega$. The statements are identities for the model's measure, motion and inertia data, under the countable-choice assumption used only for the finiteness of the integrals. No conservation law, no force law and no measured value is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.2.2, Eqs. (3.27)-(3.30), printed pages 51-53 (PDF pages 57-59): the angular momentum $L=I\\omega$ of a body about its centre of mass and the kinetic-energy split into translational and rotational parts",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.2, Eqs. (4.14)-(4.22), chapter pages 4-6 (PDF pages 58-60): rotational kinetic energy through the inertia tensor and the angular momentum $\\mathbf L=I\\boldsymbol\\omega$",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Section 2.1, Eq. (2.10), and Section 2.6, Eq. (2.51): the kinetic-energy split for a rigid body and the vector angular momentum through the inertia tensor",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "pthm-cm10-principal-axes",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Principal axes and principal moments of the inertia data of a rigid-material model, axis moments and extremal values",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$\n([[def-countable-choice]]), used only to make the integrals finite. Adopt the\nmodel of [[post-cm10-rigid-material]] and its inertia data\n([[def-cm10-inertia-tensor]]): the reference mass distribution $\\nu$ with\ntotal mass $m$ and centred reference coordinates, the body inertia matrix $I$,\nthe spatial inertia tensor $I(t)=R(t)IR(t)^{\\mathsf T}$ of a motion\n$x(t,\\rho)=c(t)+R(t)\\rho$, and the inertia tensor $I(t,p)$ about a spatial\npoint $p$ ([[def-cm10-rigid-body-configuration]]). Then:\n\n**(a) Principal basis.** There is an orthonormal basis $(e_1,e_2,e_3)$ of\n$\\mathbb R^3$ and real numbers $I_1,I_2,I_3$, the **principal axes** and\n**principal moments** of the model, with\n$$Ie_j=I_je_j\\qquad(j=1,2,3).$$\n\n**(b) Quadratic form and rotational term.** For every\n$\\omega=\\sum_j\\omega_je_j\\in\\mathbb R^3$ one has\n$I\\omega=\\sum_jI_j\\omega_je_j$ and\n$$\\omega^{\\mathsf T}I\\omega=\\sum_jI_j\\omega_j^{2}=\\int\\lVert\\omega\\times\\rho\\rVert_2^{2}\\,d\\nu(\\rho)\\ \\ge 0,$$\nand each principal moment is\n$I_j=e_j^{\\mathsf T}Ie_j=\\int\\lVert e_j\\times\\rho\\rVert_2^{2}\\,d\\nu(\\rho)$.\n\n**(c) Axis moments.** For every unit vector $n\\in\\mathbb R^3$,\n$$n^{\\mathsf T}In=\\int\\lVert n\\times\\rho\\rVert_2^{2}\\,d\\nu(\\rho);$$\nfor every spatial point $p$ and unit vector $n$, with $x=x(t,\\cdot)$ the\nplacement at time $t$,\n$$n^{\\mathsf T}I(t,p)n=\\int\\lVert n\\times\\bigl(x(t,\\rho)-p\\bigr)\\rVert_2^{2}\\,d\\nu(\\rho).$$\nConsequently the number $\\Theta_\\ell(t)=n^{\\mathsf T}I(t,p)n$ of\n[[def-cm10-inertia-tensor]] depends only on the spatial line $\\ell$\n$\\{p+sn:s\\in\\mathbb R\\}$ and not on the choice of the point $p$ on it nor on\nthe sign of the unit direction $n$.\n\n**(d) Vanishing and positivity.** Each principal moment satisfies $I_j\\ge0$,\nand $I_j=0$ exactly when $\\nu$ is supported on the line $\\mathbb Re_j$ of the\nprincipal axis, that is $\\nu\\bigl(\\mathbb R^3\\setminus\\mathbb Re_j\\bigr)=0$.\nIf the model is nondegenerate, that is if\n$\\nu\\bigl(\\mathbb R^3\\setminus\\mathbb R\\omega\\bigr)>0$ for every\n$\\omega\\neq0$, then every $I_j>0$ and $I$ is invertible. If $\\nu$ is\nsupported on some line through the origin (such a line exists whenever the\nsupport of a centred $\\nu$ is contained in a line, because the mean of $\\nu$\nis the origin), then $I$ is not invertible.\n\n**(e) Extremal moments.** For every unit vector\n$n=\\sum_jc_je_j$ one has $n^{\\mathsf T}In=\\sum_jI_jc_j^{2}$ and therefore\n$$\\min_jI_j\\ \\le\\ n^{\\mathsf T}In\\ \\le\\ \\max_jI_j,$$\nwith the value $\\max_jI_j$ attained at a unit eigenvector for a maximal\nprincipal moment and the value $\\min_jI_j$ attained at a unit eigenvector for\na minimal principal moment. Hence the largest and smallest principal moments\nare the maximum and minimum of the rotational-inertia quadratic form over the\nunit sphere.\n\nThe identities are conditional on the model data and the stated choice\nassumption; no equation of motion and no conservation statement is used or\nasserted.",
+        "strategy": "direct",
+        "deps": [
+          "post-cm10-rigid-material",
+          "def-cm10-rigid-body-configuration",
+          "def-cm10-inertia-tensor",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-mass-moments-are-finite",
+          "lem-cm-inertia-tensor-about-a-point-is-finite",
+          "def-countable-choice",
+          "lem-cm-inertia-matrix-properties",
+          "cor-cm-principal-axes-of-the-inertia-matrix",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-self-adjoint-and-normal-endomorphism",
+          "def-cm-inertia-tensor-about-a-point",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "def-inner-product-space",
+          "def-euclidean-inner-product",
+          "def-matrix-product-and-identity-matrix",
+          "thm-invertible-matrix-theorem",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "def-measure-null-set-and-almost-everywhere",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-vector-valued-derivative-and-integral",
+          "lem-cm-derivative-of-pairings-of-curves",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "post-cm10-rigid-material": "physical-assumption",
+          "def-cm10-rigid-body-configuration": "formulation-prerequisite",
+          "def-cm10-inertia-tensor": "formulation-prerequisite",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "lem-cm-inertia-tensor-about-a-point-is-finite": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-cm-inertia-matrix-properties": "mathematical-premise",
+          "cor-cm-principal-axes-of-the-inertia-matrix": "mathematical-premise",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms": "mathematical-premise",
+          "def-self-adjoint-and-normal-endomorphism": "mathematical-premise",
+          "def-cm-inertia-tensor-about-a-point": "mathematical-premise",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "thm-invertible-matrix-theorem": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere": "mathematical-premise",
+          "def-measure-null-set-and-almost-everywhere": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "lem-cm-derivative-of-pairings-of-curves": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "The principal-axis structure of the inertia data of the rigid-material model branch of [[post-cm10-rigid-material]]: existence of an orthonormal principal basis with real principal moments, the identification of the quadratic form with the moment of inertia about an axis (body-fixed and spatial versions), the vanishing and positivity criteria for degenerate and nondegenerate mass distributions, and the extremal character of the largest and smallest principal moments. The identities are conditional on the model data and the countable-choice assumption used only for finiteness of the integrals. No measured inertia, no dynamics and no claim about any concrete body is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.2, Eq. (3.21) and the following text, printed pages 50-52 (PDF pages 56-58): orthogonal diagonalization of the symmetric inertia tensor, principal axes, and the semidefiniteness discussion",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.3, chapter pages 6-8 (PDF pages 60-62): principal axes as the eigenvectors of the inertia tensor, with the moments of inertia read on the diagonal",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Section 2.5: the principal moments as the eigenvalues of the inertia tensor and the diagonal form in the principal basis",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 2 Section 2.3, printed pages 37-41 (PDF pages 40-44): the tensor transformation to principal axes and the diagonal inertia matrix",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "pthm-cm10-frame-covariance",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Behaviour of the rigid-material configuration, angular velocity, inertia data and inertial quantities under a change of inertial frame",
+        "statement": "Adopt the model of [[post-cm10-rigid-material]] and notation of\n[[def-cm10-rigid-body-configuration]], [[def-cm10-angular-velocity]] and\n[[def-cm10-inertia-tensor]]: a reference mass distribution $\\nu$ with total\nmass $m$ and centred reference coordinates, a body inertia matrix $I$, a\nmotion $x(t,\\rho)=c(t)+R(t)\\rho$ in one inertial frame with configuration path\n$(c,R)$ of class $C^2$ and body angular velocity $\\omega$, and the quantities\nof [[pthm-cm10-kinetic-splitting]],\n$$P(t)=\\int\\partial_tx(t,\\rho)\\,d\\nu(\\rho),\\qquad K(t)=\\frac12\\int\\lVert\\partial_tx(t,\\rho)\\rVert_2^{2}\\,d\\nu(\\rho),\\qquad L_c(t)=\\int\\bigl(x(t,\\rho)-c(t)\\bigr)\\times\\bigl(\\partial_tx(t,\\rho)-c'(t)\\bigr)\\,d\\nu(\\rho).$$\nLet a second inertial frame be related to the first by the transformation\n$t'=t+b$, $x'=Qx+ut+a$ of [[post-cm01-frames]] clause (iv), with\n$b\\in\\mathbb R$, $a,u\\in\\mathbb R^3$ and $Q\\in SO(3)$; the rotation $Q$ and\nthe boost velocity $u$ are the parameters written $R$ and $v$ in\n[[post-cm01-frames]], renamed here to avoid clashes with the orientation path\n$R(t)$ and the material velocity field $v(t,p)$ of\n[[def-cm10-rigid-body-configuration]]. Let\n$\\tilde x(t',\\rho):=Q\\,x(t'-b,\\rho)+u\\,(t'-b)+a$ be the description of the\nsame motion in the second frame. Then:\n\n1. $\\tilde x(t',\\rho)=\\tilde c(t')+\\tilde R(t')\\rho$ with\n   $\\tilde c(t')=Qc(t'-b)+u\\,(t'-b)+a$ and\n   $\\tilde R(t')=Q\\,R(t'-b)$; the maps $\\tilde c$ and $\\tilde R$ are of class\n   $C^2$, $\\tilde R$ takes values in $SO(3)$, and $\\tilde x$ is a motion of\n   the same model with the same reference mass distribution;\n2. the body angular velocities satisfy\n   $\\tilde\\omega(t')=\\omega(t'-b)$, and the spatial angular velocities satisfy\n   $\\tilde\\omega_{\\mathrm s}(t')=Q\\omega_{\\mathrm s}(t'-b)$;\n3. the material velocity fields satisfy\n   $\\partial_{t'}\\tilde x(t',\\rho)=Q\\,\\partial_tx(t'-b,\\rho)+u$;\n   equivalently, for a spatial point $p$ of the first frame with image\n   $p'=Qp+ut+a$, $\\tilde v(t',p')=Q\\,v(t,p)+u$;\n4. the body inertia matrix computed from $\\nu$ is the same matrix $I$ in\n   either frame, and the spatial inertia tensors satisfy\n   $\\tilde I(t')=Q\\,I(t'-b)\\,Q^{\\mathsf T}$; consequently\n   $\\tilde\\omega(t')^{\\mathsf T}I\\tilde\\omega(t')=\\omega(t'-b)^{\\mathsf T}I\\omega(t'-b)$\n   and\n   $\\tilde\\omega_{\\mathrm s}(t')^{\\mathsf T}\\tilde I(t')\\tilde\\omega_{\\mathrm s}(t')=\\omega_{\\mathrm s}(t'-b)^{\\mathsf T}I(t'-b)\\omega_{\\mathrm s}(t'-b)$;\n5. the inertial quantities satisfy\n   $$\\tilde P(t')=Q\\,P(t'-b)+mu,\\qquad \\tilde L_c(t')=Q\\,L_c(t'-b),$$\n   $$\\tilde K(t')=\\frac12m\\lVert Qc'(t'-b)+u\\rVert_2^{2}+\\frac12\\omega(t'-b)^{\\mathsf T}I\\omega(t'-b).$$\n\nThe statements are kinematic and inertial identities for the model; no\nequation of motion, no conservation law and no measured value is asserted.",
+        "strategy": "direct",
+        "deps": [
+          "post-cm10-rigid-material",
+          "def-cm10-rigid-body-configuration",
+          "def-cm10-angular-velocity",
+          "def-cm10-inertia-tensor",
+          "pthm-cm10-kinetic-splitting",
+          "post-cm01-frames",
+          "lem-cm-adapted-charts-and-galilean-transformations",
+          "lem-cm-so3-is-a-matrix-group",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "lem-cm-matrix-curve-derivative-rules",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-cm01-units",
+          "def-euclidean-inner-product",
+          "def-cm-special-orthogonal-group",
+          "def-matrix-product-and-identity-matrix",
+          "def-derivative",
+          "def-interval",
+          "def-borel-sigma-algebra",
+          "thm-generated-sigma-algebra-exists-and-is-minimal",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-nonnegative-lebesgue-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "dependency_roles": {
+          "post-cm10-rigid-material": "physical-assumption",
+          "def-cm10-rigid-body-configuration": "formulation-prerequisite",
+          "def-cm10-angular-velocity": "formulation-prerequisite",
+          "def-cm10-inertia-tensor": "formulation-prerequisite",
+          "pthm-cm10-kinetic-splitting": "physical-result",
+          "post-cm01-frames": "formulation-prerequisite",
+          "lem-cm-adapted-charts-and-galilean-transformations": "mathematical-premise",
+          "lem-cm-so3-is-a-matrix-group": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "lem-cm-matrix-curve-derivative-rules": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "thm-generated-sigma-algebra-exists-and-is-minimal": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "Transformation laws of the rigid-material model branch of [[post-cm10-rigid-material]] between two inertial frames related by $t'=t+b$, $x'=Qx+ut+a$: the configuration path and material velocity field of the same motion in the new frame, invariance of the body angular velocity and rotation of the spatial angular velocity and of the spatial inertia tensor, and the transformation of the total momentum, kinetic-energy splitting and centre-of-mass angular momentum. The statements are conditional kinematic and inertial identities for the model; no dynamics and no measured value is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.1.2, printed pages 49-50 (PDF pages 55-56): the parallel discussion of body and space angular-velocity descriptions and the convention-dependence of the extracted vector",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Sections 4.1-4.2, Eqs. (4.1)-(4.22), chapter pages 1-6 (PDF pages 55-60): moving-basis kinematics and the inertia data of the moving frame",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Section 2.2: the body-frame description of the same rigid motion and the transformation between body and space quantities",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "rem-cm10-orientation-charts",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "The global orientation and its charts: Euler angles, the quaternion double cover and singularities of parametrizations",
+        "statement": "For the model of [[post-cm10-rigid-material]], the orientation of the body at\ntime $t$ is the element $R(t)\\in SO(3)$ of the configuration\n([[def-cm10-rigid-body-configuration]]): a global object attached to the\nplacement, unique for a nondegenerate labeling. As a subset of\n$M_3(\\mathbb R)\\cong\\mathbb R^9$, the group $SO(3)$ is a compact\nthree-dimensional embedded submanifold and a matrix group\n([[lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold]] clauses\n1 and 3, [[lem-cm-so3-is-a-matrix-group]]). Three descriptions of it are used\nin the literature and on the pages that follow, and they must not be\nconflated.\n\n**Euler angles are local coordinates.** The Euler-angle parametrization of\n[[def-cm-euler-angle-parametrization-and-heavy-top-system]] is\n$$\\Theta:\\mathbb R\\times(0,\\pi)\\times\\mathbb R\\longrightarrow SO(3),\\qquad \\Theta(\\varphi,\\theta,\\psi)=R_z(\\varphi)R_y(\\theta)R_z(\\psi),$$\nwith the coordinate rotation matrices of\n[[lem-cm-coordinate-rotation-matrices]], and its domain is deliberately\nrestricted to $\\theta\\in(0,\\pi)$ so that $\\sin\\theta>0$. On that domain it is\na local parametrisation with smooth local inverse. Indeed the angular-velocity formula in [[lem-cm-euler-angle-angular-velocity]] identifies $\\Theta^{\\mathsf T}d\\Theta$ with the skew matrix of $M(\\varphi,\\theta,\\psi)(d\\varphi,d\\theta,d\\psi)^{\\mathsf T}$, where $$M=\\begin{pmatrix}-\\sin\\theta\\cos\\psi&\\sin\\psi&0\\\\\\sin\\theta\\sin\\psi&\\cos\\psi&0\\\\\\cos\\theta&0&1\\end{pmatrix},\\qquad\\det M=-\\sin\\theta\\ne0.$$ Thus $d\\Theta$ has zero kernel. Its domain and $SO(3)$ both have dimension three, so it is a tangent-space isomorphism. The map is smooth because its matrix entries are finite products of smooth sines and cosines, and [[thm-smooth-inverse-function-theorem-on-manifolds]] gives a smooth local inverse; strictly speaking that inverse is the coordinate chart. The boundary values $\\theta=0$ and $\\theta=\\pi$ (the **poles**)\nare excluded because there the dependence on the angles collapses: by the\ncomposition law $R_z(a)R_z(b)=R_z(a+b)$ the value at $\\theta=0$ depends on\n$\\varphi+\\psi$ alone. A smooth orientation path of the model can pass through\na pole orientation, including $I_3$. The restricted chart has no coordinate\nvalue there, and the extended formula has no local inverse at a pole:\nat $\\theta=0$, the distinct triples $(\\varphi+s,0,\\psi-s)$ give the same\nrotation for arbitrarily small nonzero $s$. This does not exclude a\ncontinuous pathwise choice of unrestricted parameters; for example,\n$(\\varphi,\\theta,\\psi)=(0,t,0)$ represents the smooth path $R_y(t)$ through\n$t=0$. The companion example computes the deficient differential at a pole.\nEuler angles are auxiliary local coordinates for the global orientation.\nThe angular-velocity components are\nnot the coordinate derivatives of these angles\n([[lem-cm-euler-angle-angular-velocity]] is the separate relation, and the\nmodel's angular velocity is defined intrinsically in\n[[def-cm10-angular-velocity]]).\n\n**Quaternion lifts are two-valued, not a single-valued chart.** Under the\ncountable choice hypothesis recorded in\n[[def-cm-quaternion-rotation-map-and-cover]], the unit quaternions $S^3$\ndouble-cover $SO(3)$ through the rotation map $\\rho$: every orientation has\nexactly two preimages $q$ and $-q$. Given a $C^1$ rotation path $R$ and an\ninitial unit quaternion $q_0$ with $\\rho(q_0)=R(t_0)$, there is exactly one\n$C^1$ lift $q$ with $q(t_0)=q_0$, and every $C^1$ lift is either $q$ or $-q$\n([[thm-cm-quaternion-lift-exists-and-is-unique]]). The sign of a lift is thus\nan initial choice that the orientation path itself does not determine, and no\nconstruction on these pages chooses a preferred sign. A quaternion path is a\nglobal description of a rotation path in the sense that it avoids the Euler\npole, but it represents each orientation twice; it is not a chart of $SO(3)$\nand does not select a canonical sign.",
+        "strategy": "A scope remark: it audits the orientation description of the model (global R in SO(3) versus Euler-angle charts with poles and quaternion lifts with a sign choice), records the conventions consumers must state, the degenerate-labeling caveat and the empirical status.",
+        "deps": [
+          "post-cm10-rigid-material",
+          "def-cm10-rigid-body-configuration",
+          "def-cm10-angular-velocity",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-so3-is-a-matrix-group",
+          "lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold",
+          "def-cm-euler-angle-parametrization-and-heavy-top-system",
+          "lem-cm-coordinate-rotation-matrices",
+          "lem-cm-euler-angle-angular-velocity",
+          "def-cm-quaternion-rotation-map-and-cover",
+          "lem-cm-body-angular-velocity-of-a-rotation-path",
+          "thm-cm-quaternion-lift-exists-and-is-unique",
+          "def-countable-choice",
+          "def-cm01-units",
+          "thm-smooth-inverse-function-theorem-on-manifolds"
+        ],
+        "dependency_roles": {
+          "post-cm10-rigid-material": "physical-assumption",
+          "def-cm10-rigid-body-configuration": "formulation-prerequisite",
+          "def-cm10-angular-velocity": "formulation-prerequisite",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-so3-is-a-matrix-group": "mathematical-premise",
+          "lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold": "mathematical-premise",
+          "def-cm-euler-angle-parametrization-and-heavy-top-system": "mathematical-premise",
+          "lem-cm-coordinate-rotation-matrices": "mathematical-premise",
+          "lem-cm-euler-angle-angular-velocity": "mathematical-premise",
+          "def-cm-quaternion-rotation-map-and-cover": "mathematical-premise",
+          "lem-cm-body-angular-velocity-of-a-rotation-path": "mathematical-premise",
+          "thm-cm-quaternion-lift-exists-and-is-unique": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "thm-smooth-inverse-function-theorem-on-manifolds": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Scope and interpretation of the orientation data of the rigid-material model branch of [[post-cm10-rigid-material]]: the physical orientation is the global element $R\\in SO(3)$ of the configuration, while Euler angles are local coordinates with poles and quaternion lifts are global two-valued representations whose sign is an initial choice. The item records the singularities and the bookkeeping conventions of these descriptions and their physical reading; it asserts no dynamics, no measured orientation and no preferred chart.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.5, printed pages 62-65 (PDF pages 68-71): the three ordered rotations defining the Euler angles, the caution about the order and frame conventions, and the local character of the parametrization",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.5, Eqs. (4.70)-(4.82), chapter pages 15-19 (PDF pages 69-73): Euler angles as local coordinates of the rigid-body configuration, with the general warning that the angular-velocity components are not coordinate derivatives",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Section 2.7 and Section 2.12: Euler-angle charts, their singular character at the poles, and quaternions as an alternative global description of orientation",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 9
+      }
+    ]
+  },
+  {
+    "order": 132,
+    "id": "cm10-rigid-body-configuration-and-inertia-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics",
+    "library": "physics",
+    "title": "Rigid-body configuration and inertia \u2014 Examples",
+    "companion": "cm10-rigid-body-configuration-and-inertia",
+    "requires": [
+      "cm10-rigid-body-configuration-and-inertia",
+      "cm-math-rigid",
+      "cm01-framework-quantities-and-geometry",
+      "cm-math-geometry",
+      "cm-math-verification",
+      "sine-cosine-and-the-definition-of-pi",
+      "pi-the-equivalent-characterizations"
+    ],
+    "items": [
+      {
+        "id": "ex-cm10-equilateral-triangle-rotational-inertia",
+        "kind": "example",
+        "domain": "physics",
+        "title": "An equilateral-triangle rigid-material model: inertia matrix, principal axes, rotational term and the threefold-symmetry check",
+        "statement": "Adopt a rigid-material model of [[post-cm10-rigid-material]] whose reference\nmass distribution is the finite weighted sum of Dirac measures\n$$\\nu:=m_0\\sum_{k=0}^{2}\\delta_{x_k},\\qquad x_k:=a\\Bigl(\\cos\\frac{2\\pi k}{3},\\ \\sin\\frac{2\\pi k}{3},\\ 0\\Bigr)\\quad(k=0,1,2),$$\nwith equal weights $m_0>0$ and circumradius $a>0$; the parameters are model\ndata, not measurements. Then:\n\n1. $\\nu$ is a centred mass distribution of total mass $m=3m_0$ in the sense\n   of [[def-cm-mass-distribution-and-inertia-matrix]];\n2. the body inertia matrix is\n   $$I=\\mathrm{diag}\\Bigl(\\frac{3m_0a^{2}}{2},\\ \\frac{3m_0a^{2}}{2},\\ 3m_0a^{2}\\Bigr);$$\n3. the principal axes are $e_3$ together with any $g$-orthonormal pair in the\n   plane $\\{\\rho\\in\\mathbb R^3:\\rho_3=0\\}$, and the principal moments are $\\frac{3m_0a^{2}}{2}$ (twice)\n   and $3m_0a^{2}$; the model is nondegenerate and $I$ is invertible;\n4. for any motion of the model with body angular velocity\n   $\\omega=\\sum_j\\omega_je_j$, the rotational term of\n   [[pthm-cm10-kinetic-splitting]] is\n   $$\\frac12\\omega^{\\mathsf T}I\\omega=\\frac12\\cdot\\frac{3m_0a^{2}}{2}\\bigl(\\omega_1^{2}+\\omega_2^{2}\\bigr)+\\frac12\\cdot3m_0a^{2}\\omega_3^{2};$$\n5. the threefold rotation $S:=R_z(2\\pi/3)$ satisfies $SI S^{\\mathsf T}=I$, so\n   the inertia data of the equilateral triangle are invariant under the\n   symmetry rotation of the shape, and the two equal transverse principal\n   moments exhibit that symmetry: $I$ restricts to the scalar $3m_0a^2/2$ on the transverse plane.",
+        "strategy": "direct",
+        "deps": [
+          "post-cm10-rigid-material",
+          "def-cm10-rigid-body-configuration",
+          "def-cm10-angular-velocity",
+          "def-cm10-inertia-tensor",
+          "pthm-cm10-kinetic-splitting",
+          "pthm-cm10-principal-axes",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-mass-moments-are-finite",
+          "def-countable-choice",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-nonnegative-weighted-sum-of-measures",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-cross-product-in-r3",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "def-euclidean-inner-product",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "lem-cm-coordinate-rotation-matrices",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "lem-finite-sum-laws",
+          "def-cm01-units",
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-pi-zero-and-period-characterizations",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "cor-pi-is-the-first-positive-sine-zero"
+        ],
+        "dependency_roles": {
+          "post-cm10-rigid-material": "physical-assumption",
+          "def-cm10-rigid-body-configuration": "formulation-prerequisite",
+          "def-cm10-angular-velocity": "formulation-prerequisite",
+          "def-cm10-inertia-tensor": "formulation-prerequisite",
+          "pthm-cm10-kinetic-splitting": "physical-result",
+          "pthm-cm10-principal-axes": "physical-result",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-dirac-measure": "mathematical-premise",
+          "prop-dirac-measure-is-a-probability-measure": "mathematical-premise",
+          "thm-nonnegative-weighted-sums-of-measures": "mathematical-premise",
+          "def-nonnegative-weighted-sum-of-measures": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "lem-cm-coordinate-rotation-matrices": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite",
+          "def-pi-via-first-positive-cosine-zero": "mathematical-premise",
+          "thm-pi-zero-and-period-characterizations": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "cor-pi-is-the-first-positive-sine-zero": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked rigid-material model: three equal point masses at the vertices of an equilateral triangle in reference coordinates centred at the triangle's centre. The example computes the model's body inertia matrix, its principal axes and moments, the rotational term of the kinetic splitting for a general motion, and the invariance of the inertia matrix under the threefold symmetry rotation. It is a model instance with declared numerical proportions of the parameters; no measured moment of inertia and no concrete physical body is asserted.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.2, Eqs. (3.19)-(3.23), printed pages 50-52 (PDF pages 56-58): inertia tensors of finite point-mass systems, principal axes and the semidefiniteness discussion",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.2, Eqs. (4.14)-(4.22), chapter pages 4-6 (PDF pages 58-60): computed inertia tensors of discrete mass distributions and the rotational kinetic energy",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Sections 2.3-2.5: moments of inertia and principal moments of discrete mass distributions",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "cex-cm10-degenerate-line-mass-singular-inertia",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "A rigid-material model of two point masses on a line: the inertia matrix can be singular, and rotation about the line is invisible to the rotational term",
+        "statement": "In the rigid-material model branch of [[post-cm10-rigid-material]], **every\nmodel of positive total mass has a positive definite inertia matrix**:\nequivalently, every principal moment of the body inertia matrix $I$ is\nstrictly positive and $I$ is invertible.",
+        "strategy": "direct",
+        "deps": [
+          "post-cm10-rigid-material",
+          "def-cm10-rigid-body-configuration",
+          "def-cm10-angular-velocity",
+          "def-cm10-inertia-tensor",
+          "pthm-cm10-kinetic-splitting",
+          "pthm-cm10-principal-axes",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-mass-moments-are-finite",
+          "def-countable-choice",
+          "lem-cm-inertia-matrix-properties",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-nonnegative-weighted-sum-of-measures",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "lem-cm-coordinate-rotation-matrices",
+          "def-cm-special-orthogonal-group",
+          "lem-finite-sum-laws",
+          "def-cm01-units"
+        ],
+        "dependency_roles": {
+          "post-cm10-rigid-material": "physical-assumption",
+          "def-cm10-rigid-body-configuration": "formulation-prerequisite",
+          "def-cm10-angular-velocity": "formulation-prerequisite",
+          "def-cm10-inertia-tensor": "formulation-prerequisite",
+          "pthm-cm10-kinetic-splitting": "physical-result",
+          "pthm-cm10-principal-axes": "physical-result",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-cm-inertia-matrix-properties": "mathematical-premise",
+          "def-dirac-measure": "mathematical-premise",
+          "prop-dirac-measure-is-a-probability-measure": "mathematical-premise",
+          "thm-nonnegative-weighted-sums-of-measures": "mathematical-premise",
+          "def-nonnegative-weighted-sum-of-measures": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "lem-cm-coordinate-rotation-matrices": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "def-cm01-units": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A counterexample inside the rigid-material model branch of [[post-cm10-rigid-material]]: two equal point masses at opposite points of a line through the reference origin give a centred mass distribution whose inertia matrix has a zero principal moment and is not invertible, and a rotation of the model about that line has zero rotational kinetic energy and zero angular momentum about the centre of mass. The item refutes only the claim that every positive-mass rigid-material model has positive definite inertia; it asserts no measured value and no failure of the model's other statements, which carry the degeneracy caveat.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.2, Eq. (3.22) and the equality-case discussion, printed page 52 (PDF page 58): the inertia quadratic form vanishes precisely when all the mass lies on a line through the centre of mass",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.4, chapter pages 8-11 (PDF pages 62-65): the warning that degenerate mass distributions require care with the inertia tensor, in the free symmetric-top discussion",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Sections 2.3-2.5: the moment of inertia about an axis and the principal moments of discrete mass distributions, including the case of collinear mass",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "dependency_level": 10
+      },
+      {
+        "id": "ex-cm10-euler-angle-pole-and-orientation",
+        "kind": "example",
+        "domain": "physics",
+        "title": "The Euler-angle pole: a degenerate parametrization of $SO(3)$ while the physical orientation remains regular",
+        "statement": "Let $R_z,R_y$ be the coordinate rotation matrices of\n[[lem-cm-coordinate-rotation-matrices]] and consider the formula of the\nEuler-angle parametrization of\n[[def-cm-euler-angle-parametrization-and-heavy-top-system]],\n$$\\Phi:\\mathbb R^3\\longrightarrow M_3(\\mathbb R),\\qquad \\Phi(\\alpha,\\beta,\\gamma):=R_z(\\alpha)R_y(\\beta)R_z(\\gamma),$$\nhere read on the whole parameter space $\\mathbb R^3$ (the definition restricts\nits chart domain to $\\beta\\in(0,\\pi)$). Then:\n\n1. $\\Phi(\\alpha,0,\\gamma)=R_z(\\alpha+\\gamma)$: at the **pole** $\\beta=0$ the\n   value depends only on the sum $\\alpha+\\gamma$, and for every real $s$\n   $$\\Phi(\\alpha+s,0,\\gamma-s)=\\Phi(\\alpha,0,\\gamma);$$\n   hence $\\Phi$ is not injective on any neighbourhood of a pole point.\n2. the partial derivatives at a pole point satisfy\n   $$\\partial_\\alpha\\Phi(\\alpha,0,\\gamma)=\\partial_\\gamma\\Phi(\\alpha,0,\\gamma)=[e_3]_\\times R_z(\\alpha+\\gamma),$$\n   so the Jacobian matrix has two identical columns, its rank is at most $2$,\n   and $D\\Phi:\\mathbb R^3\\to M_3(\\mathbb R)$ is not injective; consequently $\\Phi$ has no differentiable local\n   inverse at any pole point;\n3. along a smooth curve $t\\mapsto(\\alpha(t),\\beta(t),\\gamma(t))$ through a\n   pole point ($\\beta(0)=0$) the body angular velocity of the resulting\n   rotation path is\n   $$\\omega(0)=(\\alpha'(0)+\\gamma'(0))\\,e_3+\\beta'(0)\\,R_z(-\\gamma(0))e_2,$$\n   so the individual rates $\\alpha'$ and $\\gamma'$ enter only through their\n   sum: the triples of rates $(\\alpha',\\beta',\\gamma')$ and\n   $(\\alpha'+s,\\beta',\\gamma'-s)$ produce the same angular velocity, and the\n   rate map of the parametrization is not injective at the pole;\n4. nevertheless the orientation path\n   $$R:\\mathbb R\\longrightarrow SO(3),\\qquad R(t):=R_y(t),$$\n   of a rigid-material model passes through the pole orientation\n   $R(0)=I_3=\\Phi(0,0,0)$, is of class $C^\\infty$, and has the constant body\n   angular velocity $e_2$; the singularity of clause 2 is a property of the\n   parametrization, not of the orientation or of the angular velocity.",
+        "strategy": "direct",
+        "deps": [
+          "def-cm10-rigid-body-configuration",
+          "def-cm10-angular-velocity",
+          "def-cm-euler-angle-parametrization-and-heavy-top-system",
+          "lem-cm-coordinate-rotation-matrices",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-so3-is-a-matrix-group",
+          "def-directional-and-partial-derivatives",
+          "def-jacobian-matrix-and-gradient",
+          "def-total-derivative-in-euclidean-space",
+          "thm-chain-rule-for-total-derivatives",
+          "def-derivative",
+          "def-interval",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ],
+        "dependency_roles": {
+          "def-cm10-rigid-body-configuration": "formulation-prerequisite",
+          "def-cm10-angular-velocity": "formulation-prerequisite",
+          "def-cm-euler-angle-parametrization-and-heavy-top-system": "mathematical-premise",
+          "lem-cm-coordinate-rotation-matrices": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-so3-is-a-matrix-group": "mathematical-premise",
+          "def-directional-and-partial-derivatives": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "physical_scope": "A worked example about the Euler-angle description of the orientation of the rigid-material model branch of [[post-cm10-rigid-material]]: at the pole $\\beta=0$ the parametrization is non-injective and its derivative has rank at most two, so it is not a chart there, and the map from Euler-angle rates to the body angular velocity loses injectivity; meanwhile the orientation path $R(t)=R_y(t)$ passes through the pole orientation with constant angular velocity $e_2$ and is perfectly regular. The item asserts no dynamics, no measurement and no claim that the orientation of a concrete body has been recorded.",
+        "sources": {
+          "references": [
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Section 2.7 and Section 2.8.1: the Euler-angle parametrization, the chart's exclusion of the poles $\\sin\\theta=0$, and the $ABC\\sin^{2}\\theta$ Hessian determinant of the coordinate transformation",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Sections 4.5-4.6, chapter pages 15-22 (PDF pages 69-76): Euler angles as local coordinates and the warning that the angular-velocity components are not globally coordinate derivatives",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.5, printed pages 62-65 (PDF pages 68-71): the three ordered rotations defining the Euler angles and the caution about the convention and the local character of the angles",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        },
+        "dependency_level": 9
+      },
+      {
+        "id": "ex-cm10-parallel-axis-shift-check",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Parallel-axis check for the equilateral-triangle model: inertia tensor about a vertex computed two ways",
+        "statement": "Adopt the equilateral-triangle rigid-material model of\n[[ex-cm10-equilateral-triangle-rotational-inertia]]: three equal point masses\n$m_0>0$ at $x_k=a(\\cos\\frac{2\\pi k}{3},\\sin\\frac{2\\pi k}{3},0)$, $k=0,1,2$, with\ntotal mass $m=3m_0$, body inertia matrix\n$I=\\mathrm{diag}(\\frac{3m_0a^{2}}{2},\\frac{3m_0a^{2}}{2},3m_0a^{2})$ and\nreference coordinates centred at the origin. Then:\n\n1. for every motion of the model and every spatial point $p$, the inertia\n   tensor of the model about $p$ satisfies the **spatial parallel-axis form**\n   $$I(t,p)=I(t)+m\\Bigl(\\lVert p-c(t)\\rVert_2^{2}I_3-(p-c(t))(p-c(t))^{\\mathsf T}\\Bigr);$$\n2. in the reference placement $(c,R)=(0,I_3)$, the inertia tensor about the\n   vertex $p=ae_1$ is\n   $$I(0,ae_1)=\\mathrm{diag}\\Bigl(\\frac{3m_0a^{2}}{2},\\ \\frac{9m_0a^{2}}{2},\\ 6m_0a^{2}\\Bigr);$$\n3. the same matrix is obtained by the direct finite sum over the three\n   material points, confirming the identity of clause 1 on this data;\n4. the moment of inertia about the axis through the vertex $ae_1$ in\n   direction $e_3$ equals $6m_0a^{2}$, while the moment about the parallel\n   central axis is $3m_0a^{2}$; their difference is $ma^{2}$, in agreement\n   with the axis-shift form of the theorem.",
+        "strategy": "direct",
+        "deps": [
+          "post-cm10-rigid-material",
+          "def-cm10-rigid-body-configuration",
+          "def-cm10-inertia-tensor",
+          "pthm-cm10-principal-axes",
+          "ex-cm10-equilateral-triangle-rotational-inertia",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-mass-moments-are-finite",
+          "lem-cm-inertia-tensor-about-a-point-is-finite",
+          "def-cm-inertia-tensor-about-a-point",
+          "thm-cm-parallel-axis-theorem",
+          "def-countable-choice",
+          "def-cm-special-orthogonal-group",
+          "def-euclidean-inner-product",
+          "def-cross-product-in-r3",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "lem-finite-sum-laws",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ],
+        "dependency_roles": {
+          "post-cm10-rigid-material": "physical-assumption",
+          "def-cm10-rigid-body-configuration": "formulation-prerequisite",
+          "def-cm10-inertia-tensor": "formulation-prerequisite",
+          "pthm-cm10-principal-axes": "physical-result",
+          "ex-cm10-equilateral-triangle-rotational-inertia": "formulation-prerequisite",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "lem-cm-inertia-tensor-about-a-point-is-finite": "mathematical-premise",
+          "def-cm-inertia-tensor-about-a-point": "mathematical-premise",
+          "thm-cm-parallel-axis-theorem": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "physical_scope": "A worked instance of the parallel-axis theorem in the rigid-material model branch of [[post-cm10-rigid-material]]: for the equilateral-triangle model of the companion example, the inertia tensor of the model about a vertex is computed from the supplier's shifted-point formula and independently from the finite sum defining it, and the two agree; the axis moment about the vertex axis is compared with the central axis moment. The item asserts no measured inertia and no concrete physical body.",
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.2.1, Eqs. (3.25)-(3.26), printed pages 52-53 (PDF pages 58-59): the inertia tensor about a displaced point and the parallel-axis relation",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.2, Eqs. (4.27)-(4.29), chapter pages 6-7 (PDF pages 60-61): the axis-shift theorem and its use in computed examples",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 2 Section 2.3, printed pages 37-41 (PDF pages 40-44): the parallel-axis derivation for the inertia tensor",
+              "url": "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
+            }
+          ]
+        },
+        "dependency_level": 11
+      }
+    ]
+  }
+]

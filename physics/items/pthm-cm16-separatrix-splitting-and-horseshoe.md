@@ -52,7 +52,7 @@ physical_scope: "The conditional chaos theorem for one declared smooth
   mechanical model: a single label on full Cartesian configuration space R^3
   with fixed positive mass, a pulsed polynomial force in one coordinate and
   inverted harmonic forces in the other two. The axis with zero transverse
-  coordinates and velocities is invariant, and its pulse dynamics is the
+  coordinates and velocities is preserved while solutions exist, and its pulse dynamics is the
   one-coordinate pulsed oscillator of the mathematical supplier. For every pulse
   width below a threshold depending only on the dimensionless amplitude a>=100
   and the bump, the physical stroboscopic map has a compact invariant set on
@@ -103,15 +103,23 @@ $\mathbb R\times Q_{\mathrm{conf}}\times\mathbb R^3$ is
 $$\mathbf F(T,\mathbf r,\mathbf v):=-m\omega_0^2\Bigl(Q+\ell_0\beta_\delta(\omega_0T)\Bigl(a-\frac{Q^2}{\ell_0^2}\Bigr),\ -Y,\ -Z\Bigr),\qquad T_p:=\frac{P}{\omega_0}.$$
 It is smooth, defined on the full product domain and $T_p$-periodic, so it is
 a force model of [[post-cm02-force-superposition]] with fixed mass $m$; its
-motions are the $C^2$ curves of [[def-cm02-newtonian-flow]]. The phase plane
+motions are the $C^2$ curves of [[def-cm02-newtonian-flow]]. The stroboscopic
+map and Euclidean phase chart below use the Newtonian state coordinates
+$(\mathbf r,\mathbf v)$ of that definition. The phase plane
 $$\mathcal P:=\{(\mathbf r,\mathbf v):Y=Z=v_Y=v_Z=0\}$$
-is invariant. Define canonical momenta $\boldsymbol\Pi:=m\mathbf v=
+is preserved for as long as each solution exists: zero transverse position and velocity remain zero by uniqueness of their homogeneous transverse equations. This does not assert completeness of every axial solution. Define canonical momenta $\boldsymbol\Pi:=m\mathbf v=
 (\Pi_Q,\Pi_Y,\Pi_Z)$, with axial component $\Pi:=\Pi_Q$. The restricted equation is
 $$m\ddot Q=-m\omega_0^2\Bigl[Q+\ell_0\beta_\delta(\omega_0T)\Bigl(a-\frac{Q^2}{\ell_0^2}\Bigr)\Bigr].$$
 With $q=Q/\ell_0$, $s=\omega_0T$ and $p=\dot Q/(\ell_0\omega_0)$ this is
 exactly the dimensionless equation of the mathematical supplier. On the axis
-$\Pi=m\dot Q$; the full stroboscopic map
-at period $T_p$ is $\Psi_\delta$ of
+$\Pi=m\dot Q$. In the full dimensionless position-velocity chart write
+$\widetilde{\mathbf r}:=\mathbf r/\ell_0$ and
+$\widetilde{\mathbf v}:=\mathbf v/(\ell_0\omega_0)$; the state scaling
+$(\widetilde{\mathbf r},\widetilde{\mathbf v})\mapsto
+(\ell_0\widetilde{\mathbf r},\ell_0\omega_0\widetilde{\mathbf v})$
+identifies this chart with the physical Newtonian state chart, and
+$\iota_\delta$ is its restriction to the invariant axis. The full stroboscopic
+map at period $T_p$ is $\Psi_\delta$ of
 [[def-cm16-stroboscopic-and-poincare-maps]] clause (i).
 
 **(ii) The horseshoe.** There is $\delta_0>0$, depending only on $a$ and the
@@ -180,10 +188,7 @@ Melnikov calculation by analogy
 
 ## Facts & Assumptions
 
-**Given:** the scales $\ell_0,m,\omega_0$, the parameters $a\ge100$ and
-$\delta>0$, the bump $w$ and pulse $\beta_\delta$ of
-[[def-smooth-periodic-oscillator-pulse-model]], and the full one-label force
-model $m\ddot{\mathbf r}=\mathbf F(T,\mathbf r,\mathbf v)$ of the Statement.
+**Given:** the scales $\ell_0,m,\omega_0$, the parameters $a\ge100$ and $\delta>0$, the bump $w$ and pulse $\beta_\delta$ of [[def-smooth-periodic-oscillator-pulse-model]], and the full one-label force model $m\ddot{\mathbf r}=\mathbf F(T,\mathbf r,\mathbf v)$ of the Statement.
 
 [L1] The dimensionless horseshoe ([[thm-smooth-fixed-mass-mechanical-horseshoe]]): grant $\mathrm{AC}_\omega$ and $\mathrm{DC}$; for $a\ge100$ and the stroboscopic map $G_\delta$ of the dimensionless model of [[def-smooth-periodic-oscillator-pulse-model]] there is $\delta_0>0$ depending only on $a,w$ such that for every $0<\delta<\delta_0$ there is a homeomorphism $h_\delta:X_\pm\to\mathbb R^2$ onto a compact $G_\delta$-invariant set $\Lambda_\delta$ with $G_\delta\circ h_\delta=h_\delta\circ S_\pm$; $G_\delta|_{\Lambda_\delta}$ is chaotic in the stated sense; the constant codes give two hyperbolic fixed points; and every nonconstant code $s$ with $s_n=u$ for $|n|\ge N$ gives a transverse homoclinic point to the fixed point of sign $u$, by the two $C^1$ stable and unstable curves whose tangent lines are distinct. The local construction also supplies a $C^\infty$ stroboscopic diffeomorphism branch on a neighborhood of the coded compact set, since every coded point lies inside the supplier's smooth map domain.
 
@@ -191,29 +196,23 @@ model $m\ddot{\mathbf r}=\mathbf F(T,\mathbf r,\mathbf v)$ of the Statement.
 
 [L3] Transport of the topological properties under a homeomorphism ([[def-cm-topologically-mixing-dense-periodic-and-sensitive-maps]]): continuity, topological mixing, density of periodic points and sensitive dependence are invariant under conjugation by a homeomorphism, the sensitivity constant changing with the uniform continuity moduli on the compact set.
 
-[L4] Transverse dynamics of the full model: the transverse equations are $\ddot Y=\omega_0^2Y$ and $\ddot Z=\omega_0^2Z$. In phase coordinates $(Y,\Pi_Y)$ or $(Z,\Pi_Z)$, each period map is
-$$L_P=\begin{pmatrix}\cosh P&(m\omega_0)^{-1}\sinh P\\m\omega_0\sinh P&\cosh P\end{pmatrix},$$
-with eigenvalues $e^P,e^{-P}$; the transverse stable and unstable eigenspaces $E_s,E_u$ each have dimension $2$ in the combined four-dimensional transverse phase space and satisfy $E_s\oplus E_u=\mathbb R^4$. The full stroboscopic map is the product of its axial map and these two linear transverse maps.
+[L4] Transverse dynamics of the full model: the transverse equations are $\ddot Y=\omega_0^2Y$ and $\ddot Z=\omega_0^2Z$. In the Newtonian state coordinates $(Y,\dot Y)$ or $(Z,\dot Z)$, each period map is
+$$L_P=\begin{pmatrix}\cosh P&\omega_0^{-1}\sinh P\\\omega_0\sinh P&\cosh P\end{pmatrix},$$
+with eigenvalues $e^P,e^{-P}$; the transverse stable and unstable eigenspaces $E_s,E_u$ each have dimension $2$ in the combined four-dimensional transverse state space and satisfy $E_s\oplus E_u=\mathbb R^4$. The full stroboscopic map in the declared position-velocity chart is the product of its axial map and these two linear transverse maps. Canonical momenta are the constant linear re-scaling $\boldsymbol\Pi=m\mathbf v$ and do not change the eigenvalues.
 
-[L5] A common open axial branch ([[lem-rescaled-pulse-map-is-c-one-close-to-kick]]): the dimensionless axial period map is a $C^\infty$ diffeomorphism from an open neighborhood of $S=[-R-1,R+1]^2$ onto its image, and that image contains $S$ because the reverse-conjugated inverse map is defined on a neighborhood of $S$. Its product with the two invertible transverse period maps, transported by the stated linear scaling, gives the full $C^\infty$ diffeomorphism branch $\Psi_\delta|_{\mathcal U_\delta}:\mathcal U_\delta\to\mathcal V_\delta$ used in the Statement, with $\mathcal U_\delta$ and $\mathcal V_\delta$ both containing the physical copy of $S\times\mathbb R^4$.
+[L5] A common open axial branch ([[lem-rescaled-pulse-map-is-c-one-close-to-kick]]): the dimensionless axial period map is a $C^\infty$ diffeomorphism from an open neighborhood of $S=[-R-1,R+1]^2$ onto its image, and that image contains $S$ because the reverse-conjugated inverse map is defined on a neighborhood of $S$. Its product with the two invertible transverse period maps, transported by the full state scaling stated in clause (i), gives the full $C^\infty$ diffeomorphism branch $\Psi_\delta|_{\mathcal U_\delta}:\mathcal U_\delta\to\mathcal V_\delta$ used in the Statement, with $\mathcal U_\delta$ and $\mathcal V_\delta$ both containing the physical image of $S\times\mathbb R^4$.
 
 ## Proof
 
 **Proof technique:** direct; embed the dimensionless pulse dynamics as an invariant line of a full framework force model, transfer its coded set, and use the decoupled transverse hyperbolic modes for full phase-space hyperbolicity and transversality.
 
-1.1 The full force map has domain $\mathbb R\times\mathbb R^3\times\mathbb R^3$ and is $C^\infty$, since $w$ and its periodic pulse $\beta_\delta$ are smooth; it is therefore continuous and state-locally-Lipschitz as required by [[post-cm02-force-superposition]] clause (iii). Its period is $T_p=P/\omega_0$, since $\beta_\delta(\omega_0(T+T_p))=\beta_\delta(\omega_0T+P)=\beta_\delta(\omega_0T)$. The equations are
-$\ddot Q=-\omega_0^2\Bigl[Q+\ell_0\beta_\delta(\omega_0T)\Bigl(a-\frac{Q^2}{\ell_0^2}\Bigr)\Bigr],\qquad \ddot Y=\omega_0^2Y,\qquad \ddot Z=\omega_0^2Z.$
-Thus $\mathcal P$ is invariant. With $Q=\ell_0q$, $s=\omega_0T$, one has $\ddot Q=\ell_0\omega_0^2q''$, so the restricted axial equation becomes $q''=-q+\beta_\delta(s)(q^2-a)$, exactly the dimensionless supplier equation. The phase scaling
-$\iota_\delta(q,p):=(\ell_0q,0,0,m\ell_0\omega_0p,0,0)$
-therefore conjugates $G_\delta$ to the restriction of the full physical stroboscopic map to $\mathcal P$. The full map also factors as this axial map times the two transverse linear period maps of [L4]. [given, L4, algebra]
+1.1 The full force map has domain $\mathbb R\times\mathbb R^3\times\mathbb R^3$ and is $C^\infty$, since $w$ and its periodic pulse $\beta_\delta$ are smooth; it is therefore continuous and state-locally-Lipschitz as required by [[post-cm02-force-superposition]] clause (iii). Its period is $T_p=P/\omega_0$, since $\beta_\delta(\omega_0(T+T_p))=\beta_\delta(\omega_0T+P)=\beta_\delta(\omega_0T)$. The equations are $\ddot Q=-\omega_0^2\Bigl[Q+\ell_0\beta_\delta(\omega_0T)\Bigl(a-\frac{Q^2}{\ell_0^2}\Bigr)\Bigr],\qquad \ddot Y=\omega_0^2Y,\qquad \ddot Z=\omega_0^2Z.$ Thus $\mathcal P$ is invariant. With $Q=\ell_0q$, $s=\omega_0T$, one has $\ddot Q=\ell_0\omega_0^2q''$, so the restricted axial equation becomes $q''=-q+\beta_\delta(s)(q^2-a)$, exactly the dimensionless supplier equation. The axis restriction of the state scaling is $\iota_\delta(q,p):=(\ell_0q,0,0,\ell_0\omega_0p,0,0)$; it conjugates $G_\delta$ to the restriction of the full physical stroboscopic map to $\mathcal P$ in position-velocity coordinates. The full map also factors as this axial map times the two transverse linear period maps of [L4]. [given, L4, algebra]
 
 1.2 For $a\ge100$, let $\delta_0$ be the threshold of [L1]. For $0<\delta<\delta_0$, that supplier gives $h_\delta$ and $\Lambda_\delta$ with the shift conjugacy, chaos list, two hyperbolic fixed points, and transverse homoclinic curves for every nonconstant code that is constant with the same sign on both tails. [given, L1]
 
 2.1 Open diffeomorphism branch: [L5] supplies a dimensionless axial diffeomorphism domain containing $S$ whose image also contains $S$. The product with the transverse linear period maps, followed by the invertible physical phase scaling, gives open sets $\mathcal U_\delta,\mathcal V_\delta$ in the full phase chart containing the physical copy of $S\times\mathbb R^4$, with $\Psi_\delta|_{\mathcal U_\delta}:\mathcal U_\delta\to\mathcal V_\delta$ a $C^\infty$ diffeomorphism. Since every coded state lies in that copy of $S\times\mathbb R^4$, the branch neighborhoods contain $\Lambda_\delta^{\mathrm{phys}}$. [step 1.1, L5, algebra]
 
-2.2 Define $H_\delta:=\iota_\delta\circ h_\delta$ and $\Lambda_\delta^{\mathrm{phys}}:=H_\delta(X_\pm)$. By step 1.1,
-$\Psi_\delta\circ H_\delta=H_\delta\circ S_\pm.$
-The map $\iota_\delta$ is a linear embedding and $h_\delta$ is a homeomorphism onto the compact set $\Lambda_\delta$; hence $H_\delta$ is a homeomorphism onto the compact subset $\Lambda_\delta^{\mathrm{phys}}\subset\mathcal P$, which is invariant under the full map. [step 1.1, step 1.2, L1, algebra]
+2.2 Define $H_\delta:=\iota_\delta\circ h_\delta$ and $\Lambda_\delta^{\mathrm{phys}}:=H_\delta(X_\pm)$. By step 1.1, $\Psi_\delta\circ H_\delta=H_\delta\circ S_\pm.$ The map $\iota_\delta$ is a linear embedding and $h_\delta$ is a homeomorphism onto the compact set $\Lambda_\delta$; hence $H_\delta$ is a homeomorphism onto the compact subset $\Lambda_\delta^{\mathrm{phys}}\subset\mathcal P$, which is invariant under the full map. [step 1.1, step 1.2, L1, algebra]
 
 2.3 Full hyperbolicity: at a coded fixed point, the derivative of $\Psi_\delta$ splits into the axial derivative and the four-dimensional transverse block $L_P\oplus L_P$. By [L1] the axial fixed point has no multiplier of modulus $1$, and by [L4] the transverse multipliers are $e^P,e^{-P}$, also off the unit circle. Hence each full fixed point is hyperbolic. [step 1.1, step 1.2, L1, L4, algebra]
 

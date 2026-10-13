@@ -32,7 +32,7 @@ sources:
 
 ## Definition
 
-Let $I\subseteq\mathbb R$ be a nonempty open interval, let $O\subseteq\mathbb R^3$ be open, and let $u:I\times O\to\mathbb R^3$ be a $C^1$ spatial velocity field with the conventions of [[def-cm-euclidean-spatial-calculus]]. Write $Du(t,x)$ for the total derivative in the spatial variable and $\operatorname{div}u=\operatorname{tr}(Du)$ ([[def-trace-of-a-square-matrix]]).
+Let $I\subseteq\mathbb R$ be a nonempty open interval, let $O\subseteq\mathbb R^3$ be open, and let $u:I\times O\to\mathbb R^3$ be a $C^1$ spatial velocity field with the conventions of [[def-cm-euclidean-spatial-calculus]]. Write $Du(t,x)$ for the total derivative in the spatial variable and $\operatorname{div}u=\operatorname{tr}(Du)$ ([[def-trace-of-a-square-matrix]]). For $A\in M_3(\mathbb R)$ define its **transpose** by $(A^{\mathsf T})_{ij}:=A_{ji}$ for $1\le i,j\le3$, using the same one-based component labels; call $A$ **symmetric** when $A_{ij}=A_{ji}$ for every such pair.
 
 **(a) Incompressible Newtonian fluid.** Model data are a $C^1$ scalar field $p:I\times O\to\mathbb R$ (**pressure**) and a real number $\eta>0$ (**dynamic viscosity**; a dimensionless mathematical parameter until a unit system is fixed). The model consists of the **incompressibility constraint**
 
@@ -42,9 +42,9 @@ and the **Newtonian stress field**
 
 $$\sigma(t,x):=-p(t,x)I_3+\eta\bigl(Du(t,x)+Du(t,x)^{\mathsf T}\bigr)\in M_3(\mathbb R),$$
 
-with $Du^{\mathsf T}$ the transpose and $I_3$ the identity ([[def-matrix-product-and-identity-matrix]], [[def-matrix-space]]). The second term is symmetric, so $\sigma$ is symmetric for every $(t,x)$.
+with $(Du(t,x)^{\mathsf T})_{ij}=\partial_i u_j(t,x)$ and $I_3$ the identity ([[def-matrix-product-and-identity-matrix]], [[def-matrix-space]]). The entries of the second term are $\eta(\partial_j u_i+\partial_i u_j)$, so $\sigma$ is symmetric for every $(t,x)$.
 
-**(b) Barotropic inviscid fluid.** Model data are a $C^1$ function $p:(0,\infty)\to\mathbb R$ (**pressure law**) and a $C^1$ **potential** $V:I\times O\to\mathbb R$. The **enthalpy** of the pressure law is the $C^1$ function
+**(b) Barotropic inviscid fluid.** Model data are a $C^1$ function $p:(0,\infty)\to\mathbb R$ (**pressure law**) and a $C^1$ scalar map $V:I\times O\to\mathbb R$. Calling $V$ a **body-force potential** means that its associated vector field is defined by $b(t,x):=-\nabla_xV(t,x)$; this field is continuous, and in a consuming momentum equation the body-force density is $\rho b=-\rho\nabla_xV$. This datum is separate from the stress law. The **enthalpy** of the pressure law is the $C^1$ function
 
 $$h(\rho):=\int_1^\rho\frac{p'(s)}{s}\,ds\qquad(\rho>0),$$
 

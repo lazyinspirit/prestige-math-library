@@ -104,68 +104,23 @@ domain $W^{2,2}(\mathbb R^{3};\mathbb C^{r})$.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice and the Axiom of Choice; $r\ge1$;
-$\hbar>0$; the space $H^{(r)}$; the componentwise operators $Q_{j},P_{k}$;
-$R,S\in SO(3)$; $f\in H^{(r)}$; $\psi\in\mathcal S^{(r)}$; the momentum
-unitary $U^{(r)}$ and the multipliers $M_R$; a real bounded measurable $V$.
+**Given:** The Axiom of Countable Choice and the Axiom of Choice; $r\ge1$; $\hbar>0$; the space $H^{(r)}$; the componentwise operators $Q_{j},P_{k}$; $R,S\in SO(3)$; $f\in H^{(r)}$; $\psi\in\mathcal S^{(r)}$; the momentum unitary $U^{(r)}$ and the multipliers $M_R$; a real bounded measurable $V$.
 
-[F1] **Componentwise kinematics.** $Q_{j},P_{k}$ are self-adjoint with domains
-$D(Q_{j})=\{f:x_{j}f_{l}\in L^{2}\ \forall l\}$, $D(P_{k})=\{f:D_{k}f_{l}\in L^{2}\ \forall l\}$,
-and on $\mathcal S^{(r)}$ one has $Q_{j}f=x_{j}f$, $P_{k}f=-i\hbar D_{k}f$
-componentwise; $\mathcal S^{(r)}\subseteq D(Q_{j})\cap D(P_{k})$ and both
-operators map $\mathcal S^{(r)}$ into itself
-([[lem-nrqm-kinematics-componentwise-position-and-momentum]] clauses (a),(c),
-[[def-schwartz-space-and-its-seminorms]]).
+[F1] **Componentwise kinematics.** $Q_{j},P_{k}$ are self-adjoint with domains $D(Q_{j})=\{f:x_{j}f_{l}\in L^{2}\ \forall l\}$, $D(P_{k})=\{f:D_{k}f_{l}\in L^{2}\ \forall l\}$, and on $\mathcal S^{(r)}$ one has $Q_{j}f=x_{j}f$, $P_{k}f=-i\hbar D_{k}f$ componentwise; $\mathcal S^{(r)}\subseteq D(Q_{j})\cap D(P_{k})$ and both operators map $\mathcal S^{(r)}$ into itself ([[lem-nrqm-kinematics-componentwise-position-and-momentum]] clauses (a),(c), [[def-schwartz-space-and-its-seminorms]]).
 
-[F2] **Momentum representation.** $U^{(r)}$ is unitary and satisfies
-$U^{(r)}D(P_{k})=D(M_{p_{k}})$ and $U^{(r)}P_{k}=M_{p_{k}}U^{(r)}$; on Schwartz
-classes it acts by the componentwise Fourier transform with normalization
-$(2\pi\hbar)^{-3/2}$, and it maps $\mathcal S^{(r)}$ onto itself
-([[lem-nrqm-kinematics-momentum-representation]] clauses (a),(b),
-[[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (b),
-[[def-schwartz-space-and-its-seminorms]]).
+[F2] **Momentum representation.** $U^{(r)}$ is unitary and satisfies $U^{(r)}D(P_{k})=D(M_{p_{k}})$ and $U^{(r)}P_{k}=M_{p_{k}}U^{(r)}$; on Schwartz classes it acts by the componentwise Fourier transform with normalization $(2\pi\hbar)^{-3/2}$, and it maps $\mathcal S^{(r)}$ onto itself ([[lem-nrqm-kinematics-momentum-representation]] clauses (a),(b), [[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (b), [[def-schwartz-space-and-its-seminorms]]).
 
-[F3] **Substitution and components.** For an orthogonal $R$ and $f\in L^{1}(\mathbb R^{3};\mathbb C)$ one has $\int f(R^{-1}x)\,dx=\int f(y)\,dy$, because the linear substitution scales Lebesgue measure by $|\det R|=1$ ([[thm-linear-change-of-variables-for-lebesgue-measure]],
-[[lem-cm-so3-is-a-matrix-group]]). A class $f=(f_{l})$ of $H^{(r)}$ is
-determined by its components, and componentwise operations preserve the
-$L^{2}$ norm: $\|f\|^{2}=\sum_{l}\|f_{l}\|^{2}$
-([[lem-nrqm-kinematics-component-valued-wavefunction-identifications]] clause (a),
-[[cor-inner-product-induces-a-norm]]).
+[F3] **Substitution and components.** For an orthogonal $R$ and $f\in L^{1}(\mathbb R^{3};\mathbb C)$ one has $\int f(R^{-1}x)\,dx=\int f(y)\,dy$, because the linear substitution scales Lebesgue measure by $|\det R|=1$ ([[thm-linear-change-of-variables-for-lebesgue-measure]], [[lem-cm-so3-is-a-matrix-group]]). A class $f=(f_{l})$ of $H^{(r)}$ is determined by its components, and componentwise operations preserve the $L^{2}$ norm: $\|f\|^{2}=\sum_{l}\|f_{l}\|^{2}$ ([[lem-nrqm-kinematics-component-valued-wavefunction-identifications]] clause (a), [[cor-inner-product-induces-a-norm]]).
 
-[F4] **Schwartz calculus.** $\psi\in\mathcal S^{(r)}$ means each component
-$\psi_{l}$ is smooth with $\sup_{x}|x^{\alpha}\partial^{\beta}\psi_{l}(x)|<\infty$
-for all multi-indices $\alpha,\beta$; hence each component and each of its
-derivatives is bounded, and $\mathcal S^{(r)}\subseteq W^{2,2}(\mathbb R^{3};\mathbb C^{r})$
-([[def-schwartz-space-and-its-seminorms]],
-[[def-sobolev-space-wkp-and-its-norm]]). For an invertible linear substitution
-$A$ with $|A x|\le\|A\|\,|x|$, the chain rule gives
-$\partial^{\beta}(\psi_{l}\circ A)(x)=\sum_{|\gamma|=|\beta|}c_{\gamma}\,\partial^{\gamma}\psi_{l}(Ax)$
-with constants depending only on $A,\beta$, so the seminorms of
-$\psi_{l}\circ A$ are bounded by finitely many seminorms of $\psi_{l}$; in
-particular $\mathcal S^{(r)}$ is invariant under composition with an invertible linear map.
+[F4] **Schwartz calculus.** $\psi\in\mathcal S^{(r)}$ means each component $\psi_{l}$ is smooth with $\sup_{x}|x^{\alpha}\partial^{\beta}\psi_{l}(x)|<\infty$ for all multi-indices $\alpha,\beta$; hence each component and each of its derivatives is bounded, and $\mathcal S^{(r)}\subseteq W^{2,2}(\mathbb R^{3};\mathbb C^{r})$ ([[def-schwartz-space-and-its-seminorms]], [[def-sobolev-space-wkp-and-its-norm]]). For an invertible linear substitution $A$ with $|A x|\le\|A\|\,|x|$, the chain rule gives $\partial^{\beta}(\psi_{l}\circ A)(x)=\sum_{|\gamma|=|\beta|}c_{\gamma}\,\partial^{\gamma}\psi_{l}(Ax)$ with constants depending only on $A,\beta$, so the seminorms of $\psi_{l}\circ A$ are bounded by finitely many seminorms of $\psi_{l}$; in particular $\mathcal S^{(r)}$ is invariant under composition with an invertible linear map.
 
-[F5] **Sobolev and Fourier characterization.** $W^{1,2}(\mathbb R^{3};\mathbb C)=\{g\in L^{2}:p_{k}g\in L^{2}\ \forall k\}$
-and $W^{2,2}(\mathbb R^{3};\mathbb C)=\{g\in L^{2}:|p|^{2}g\in L^{2}\}$ under the
-momentum variable $p=2\pi\hbar\xi$ of the normalization of [F2], with
-$\|g\|_{W^{2,2}}$ equivalent to $\|(1+|p|^{2})g\|_{2}$
-([[thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces]],
-[[thm-plancherel]], [[def-sobolev-space-wkp-and-its-norm]]).
+[F5] **Sobolev and Fourier characterization.** For a scalar position-space class $f$, let $g=U^{(1)}f$ be its momentum representative in the normalization of [F2], with $p=2\pi\hbar\xi$. Then $f\in W^{1,2}$ exactly when $p_kg\in L^2$ for all $k$, and $f\in W^{2,2}$ exactly when $|p|^2g\in L^2$. Moreover $\|f\|_{W^{2,2}}$ is equivalent to $\|(1+|p|^2)g\|_2$ for fixed $\hbar>0$. These statements apply componentwise ([[thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces]], [[thm-plancherel]], [[def-sobolev-space-wkp-and-its-norm]]).
 
-[F6] **Density and extension.** $\mathcal S^{(r)}$ is dense in $H^{(r)}$
-([[lem-schwartz-space-is-dense-in-l-two]]); a bounded linear operator on a dense
-subspace extends uniquely to the whole space with the same norm
-([[thm-extension-of-a-bounded-map-from-a-dense-subspace]]); if a sequence
-$g_n\to g$ pointwise and $|g_n|\le h$ with $h$ integrable, then
-$\int g_n\to\int g$ ([[thm-dominated-convergence]]); and for
-$u,v\in\mathbb R^{3}$ one has $|u\cdot v|\le|u|\,|v|$
-([[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]).
+[F6] **Density and extension.** $\mathcal S^{(r)}$ is dense in $H^{(r)}$ ([[lem-schwartz-space-is-dense-in-l-two]]); a bounded linear operator on a dense subspace extends uniquely to the whole space with the same norm ([[thm-extension-of-a-bounded-map-from-a-dense-subspace]]); if a sequence $g_n\to g$ pointwise and $|g_n|\le h$ with $h$ integrable, then $\int g_n\to\int g$ ([[thm-dominated-convergence]]); and for $u,v\in\mathbb R^{3}$ one has $|u\cdot v|\le|u|\,|v|$ ([[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]).
 
 ## Proof
 
-**Proof technique:** direct; define the rotation action componentwise, prove
-unitarity and the representation property by orthogonal substitution, transport
-the action to the momentum representation for the operator conjugations, and
-obtain strong continuity from dominated convergence and density.
+**Proof technique:** direct; define the rotation action componentwise, prove unitarity and the representation property by orthogonal substitution, transport the action to the momentum representation for the operator conjugations, and obtain strong continuity from dominated convergence and density.
 
 **Given:** The data of the statement and [F1]-[F6].
 

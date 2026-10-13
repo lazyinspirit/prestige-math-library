@@ -1,7 +1,7 @@
 ---
 id: lem-high-sobolev-norms-share-base-lifespan
 kind: lemma
-title: "Higher Sobolev norms of the Galerkin approximations stay bounded on the common base interval, uniformly in $N$"
+title: "Finite initial higher Sobolev norms give uniform Galerkin bounds on the common base interval"
 status: draft
 origin: pipeline
 domain: mathematics
@@ -59,7 +59,7 @@ where $C_m$ is the commutator constant of [[lem-tame-transport-commutator]] and 
 
 1.1 Fix $m\ge s$ with $\|u_0\|_{H^m}<\infty$ and let $Z(t):=\|u_N(t)\|^2_{H^m}$. By the energy inequality of [[lem-fluid-energy-common-lifespan]] and $\|u_N(t)\|_{H^s}\le2Y_0$, $Z'(t)\le2C_m\|u_N(t)\|_{H^s}Z(t)\le4C_mY_0\,Z(t)$ for $0\le t\le T$. [F3, given]
 
-2.1 By [F3] applied with $\lambda=4C_mY_0$, $Z(t)\le Z(0)e^{4C_mY_0T}$; and $Z(0)=\|P_Nu_0\|^2_{H^m}\le\|u_0\|^2_{H^m}$ by [F1]. Taking square roots gives $\|u_N(t)\|_{H^m}\le\|u_0\|_{H^m}e^{4C_mY_0T}=B_m$ for $0\le t\le T$; since $T$ and $Y_0$ do not depend on $N$ or $m$, this is claim 1. [step 1.1, F1, F3]
+2.1 By [F3] applied with $\lambda=4C_mY_0$, $Z(t)\le Z(0)e^{4C_mY_0T}$; and $Z(0)=\|P_Nu_0\|^2_{H^m}\le\|u_0\|^2_{H^m}$ by [F1]. Taking square roots gives $\|u_N(t)\|_{H^m}\le\|u_0\|_{H^m}e^{2C_mY_0T}\le\|u_0\|_{H^m}e^{4C_mY_0T}=B_m$ for $0\le t\le T$; since $T$ and $Y_0$ do not depend on $N$ or $m$, this is claim 1. [step 1.1, F1, F3]
 
 3.1 For claim 2, use $u_N'=F_N(u_N)$ and [F2]: $\|u_N'(t)\|_{H^{m-2}}\le\nu\|u_N(t)\|_{H^m}+3C_{m-2}\|u_N(t)\|_{H^{m-1}}^2\le\nu B_m+3C_{m-2}B_{m-1}^2=B_m'$ by step 2.1, valid for every $m>7/2$. [step 2.1, F2] ∎
 

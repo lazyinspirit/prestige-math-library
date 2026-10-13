@@ -63,11 +63,12 @@ with $\lvert\cdot\rvert=\lVert\cdot\rVert_2$ the Euclidean norm
 
 1. **(Pair forces.)** On $J$ the evaluated forces are
    $$F_1\bigl(t,x(t),x'(t)\bigr)=-\frac{u'(\lvert r\rvert)}{\lvert r\rvert}\,r,\qquad F_2\bigl(t,x(t),x'(t)\bigr)=+\frac{u'(\lvert r\rvert)}{\lvert r\rvert}\,r;$$
-   thus the model invokes the external-plus-pair presentation of
+   thus the force map admits the external-plus-pair decomposition of
    [[post-cm02-interactions]] clause (i) with
    $F_i^{\mathrm{ext}}\equiv0$ and the single pair force
    $F_{12}=-u'(\lvert r\rvert)r/\lvert r\rvert=-F_{21}$, which is central
-   and antisymmetric in the sense of clause (ii).
+   and antisymmetric in the sense of clause (ii). This identity does not
+   assert that a separate decomposition was declared as model data.
 2. **(Centre of mass.)** $P$ is constant on $J$ and $X$ is affine: for all
    $t,t_0\in J$, $X(t)=X(t_0)+(t-t_0)V$ with the constant
    $V=X'=M^{-1}P$.
@@ -102,11 +103,9 @@ with $\lvert\cdot\rvert=\lVert\cdot\rVert_2$ the Euclidean norm
 
 [L3] Chain rule ([[thm-chain-rule-for-total-derivatives]]): composable totally differentiable maps compose with $D(G\circ S)(x)=DG(S(x))\circ DS(x)$; the affine map $S(x_1,x_2):=x_1-x_2$ has $DS(x)(h_1,h_2)=h_1-h_2$, since $S(x+h)-S(x)=h_1-h_2$ is exactly linear in $h$. The Euclidean inner product is bilinear ([[def-euclidean-inner-product]]).
 
-[L4] Momentum balance ([[pthm-cm03-momentum-balance]] clauses 1-3): for a model that invokes the external-plus-pair presentation with antisymmetric pair forces, along every motion $\dot P(t)=\sigma(t):=\sum_iF_i^{\mathrm{ext}}(t,x_i(t),w_i(t))$ and $MX''(t)=\sigma(t)$; and if $\sigma\equiv0$ then $P$ and $V=M^{-1}P$ are constant on $J$.
-
 [L5] Curve calculus ([[lem-cm-derivative-of-pairings-of-curves]] clauses 1 and 4, [[def-vector-valued-derivative-and-integral]]): sums and scalar multiples of differentiable curves are differentiable with the expected derivatives, so differences and second derivatives of $C^2$ curves are computed componentwise; and $t\mapsto\lVert y(t)\rVert_2^2$ differentiates by the product rule.
 
-[L6] Vector FTC ([[cor-vector-valued-ftc-and-lipschitz-bound]]): if $f:[a,b]\to\mathbb R^3$ is differentiable with integrable derivative, then $\int_a^bf'=f(b)-f(a)$; the interval $J$ has nonempty interior, hence at least two points, and the open interval $A\subseteq\mathbb R^3$ and the configuration domain $Q$ are those of the hypotheses ([[def-interval]], [[def-cm01-configuration]]).
+[L6] Vector FTC ([[cor-vector-valued-ftc-and-lipschitz-bound]]): if $f:[a,b]\to\mathbb R^3$ is differentiable with integrable derivative, then $\int_a^bf'=f(b)-f(a)$; the interval $J$ has nonempty interior, hence at least two points, and the open annulus $A\subseteq\mathbb R^3$ and the configuration domain $Q$ are those of the hypotheses ([[def-interval]], [[def-cm01-configuration]]).
 
 ## Proof
 
@@ -116,7 +115,7 @@ with $\lvert\cdot\rvert=\lVert\cdot\rVert_2$ the Euclidean norm
 
 2.1 Pair forces: put $S(x_1,x_2):=x_1-x_2$ and $G(y):=u(\lvert y\rvert)$ on $A$, so that $U=G\circ S$. By [L2] and [L3], $DU(x)(h_1,h_2)=DG(r)(h_1-h_2)=u'(\lvert r\rvert)\langle r/\lvert r\rvert,h_1-h_2\rangle=\langle u'(\lvert r\rvert)r/\lvert r\rvert,h_1\rangle-\langle u'(\lvert r\rvert)r/\lvert r\rvert,h_2\rangle$; reading off the partial gradients gives $\nabla_{x_1}U(x)=u'(\lvert r\rvert)r/\lvert r\rvert$ and $\nabla_{x_2}U(x)=-u'(\lvert r\rvert)r/\lvert r\rvert$. The equation of motion [L1] therefore gives $F_1(t,x(t),w(t))=m_1x_1''(t)=-u'(\lvert r\rvert)r/\lvert r\rvert$ and $F_2(t,x(t),w(t))=+u'(\lvert r\rvert)r/\lvert r\rvert$, and the presentation with $F_1^{\mathrm{ext}}=F_2^{\mathrm{ext}}=0$ and $F_{12}:=-u'(\lvert r\rvert)r/\lvert r\rvert$, $F_{21}:=-F_{12}$ is an identity for the force map; $F_{21}=-F_{12}$ is antisymmetry and both pair forces are parallel to $r=x_1-x_2$, which is centrality. This is clause 1. [step 1.1, L1, L2, L3, algebra]
 
-3.1 Centre of mass: the presentation of step 2.1 has total external force $\sigma=\sum_iF_i^{\mathrm{ext}}\equiv0$, so [L4] gives that $P$ and $V$ are constant on $J$, and $MX''=\sigma=0$ there. For $t_0<t$ in $J$, [L6] applied to the $C^1$ curve $X$ on $[t_0,t]$ gives $X(t)-X(t_0)=\int_{t_0}^{t}X'=\int_{t_0}^{t}V=(t-t_0)V$, and similarly for $t<t_0$; hence $X(t)=X(t_0)+(t-t_0)V$ for all $t,t_0\in J$, and $V=M^{-1}P$ is the constant of clause 2. [step 2.1, L4, L6, algebra]
+3.1 Centre of mass: by [L5] and step 2.1, $P'=m_1x_1''+m_2x_2''=F_1+F_2=0$ on $J$. For $t_0<t$ in $J$, [L6] applied to the $C^1$ curve $P$ on $[t_0,t]$ gives $P(t)-P(t_0)=\int_{t_0}^tP'=0$; reversing endpoints covers $t<t_0$, so $P$ is constant. Differentiating the definition of $X$ using [L5] gives $X'=M^{-1}P=:V$, hence $V$ is constant and $MX''=0$. Applying [L6] to $X$ gives $X(t)-X(t_0)=\int_{t_0}^{t}V=(t-t_0)V$ for $t_0<t$, and the reversed formula for $t<t_0$. This proves clause 2 directly from the potential force map, without requiring a separately declared external-plus-pair presentation. [step 2.1, L1, L5, L6, algebra]
 
 3.2 Relative equation: by [L5], $r=x_1-x_2$ is $C^2$ with $r''=x_1''-x_2''$, so step 2.1 and $M=m_1+m_2$ give $\mu r''=-\mu\bigl(\frac1{m_1}+\frac1{m_2}\bigr)\frac{u'(\lvert r\rvert)}{\lvert r\rvert}r=-\frac{u'(\lvert r\rvert)}{\lvert r\rvert}r$, because $\mu\bigl(\frac1{m_1}+\frac1{m_2}\bigr)=\frac{m_1m_2}{M}\cdot\frac{M}{m_1m_2}=1$. Since $r$ is $C^2$ on the interval $J$ with nonempty interior and $\lvert r(t)\rvert\in J_0$ for every $t\in J$, all hypotheses of [[def-cm-central-force-trajectory]] hold with $(\mu,U)$ replaced by $(\mu,u)$ and the equation just displayed: $r$ is a central-force trajectory for $(\mu,u)$, and $j=\mu r\times r'$, $E=\frac12\mu\lVert r'\rVert_2^2+u(\lvert r\rvert)$ are its attached objects. This is clause 3. [step 1.1, step 2.1, L1, L5, algebra]
 
@@ -124,7 +123,7 @@ with $\lvert\cdot\rvert=\lVert\cdot\rVert_2$ the Euclidean norm
 
 ## Remarks
 
-- **What is and is not assumed.** The reduction uses the potential presentation of the model, hence the absence of external forces; the momentum-balance clause of [[pthm-cm03-momentum-balance]] is applied only through the vanishing total external force that this presentation supplies. The companion counterexample shows that centrality of the pair forces alone, without the no-external-force hypothesis, does not yield the reduction.
+- **What is and is not assumed.** The reduction uses the potential presentation of the model, hence the absence of external forces; the proof sums the two equations directly. If the model also declares the zero-external-force pair decomposition, [[pthm-cm03-momentum-balance]] gives the same conclusion, but its declaration hypothesis is not inferred from the force identity. The companion counterexample shows that centrality of the pair forces alone, without the no-external-force hypothesis, does not yield the reduction.
 
 - **Scope of the reconstruction.** The bijection is stated on a fixed interval $J$ with nonempty interior; it does not assert global existence of either side, and the collision set $x_1=x_2$ is excluded by the configuration domain, so $\lvert r\rvert>0$ throughout.
 

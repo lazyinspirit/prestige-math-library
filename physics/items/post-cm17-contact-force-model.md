@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 11
-deps: [def-cm17-traction-and-stress, def-cm17-continuum-body-and-units, post-cm17-continuum-kinematic-model, def-cm01-units, def-cm-continuum-motion, def-ck-euclidean-maps-and-diffeomorphisms]
+deps: [def-cm17-traction-and-stress, def-cm17-continuum-body-and-units, post-cm17-continuum-kinematic-model, def-cm01-units, def-cm-continuum-motion, def-ck-euclidean-maps-and-diffeomorphisms, def-cm17-density-and-mass, def-bounded-piecewise-c-one-euclidean-domain, def-surface-integral-on-a-compact-c-one-hypersurface, def-integral-over-a-measurable-set, def-countable-choice, def-integrable-real-and-complex-functions-and-their-integrals]
 dependency_roles:
   def-cm17-traction-and-stress: formulation-prerequisite
   def-cm17-continuum-body-and-units: formulation-prerequisite
@@ -14,6 +14,12 @@ dependency_roles:
   def-cm01-units: formulation-prerequisite
   def-cm-continuum-motion: mathematical-premise
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
+  def-cm17-density-and-mass: formulation-prerequisite
+  def-bounded-piecewise-c-one-euclidean-domain: mathematical-premise
+  def-surface-integral-on-a-compact-c-one-hypersurface: mathematical-premise
+  def-integral-over-a-measurable-set: mathematical-premise
+  def-countable-choice: mathematical-premise
+  def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -35,11 +41,12 @@ Adopt for every model of the continuum kinematic branch
 forces acting on the body, read in the fixed inertial frame and with the
 dimensions of [[def-cm17-continuum-body-and-units]].
 
+Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]) for the Lebesgue volume and surface integrals below. Let $\rho$ be the positive $C^1$ density of [[def-cm17-density-and-mass]]. Use a common open field domain $U\subseteq\mathbb R\times\mathbb R^3$ containing the full swept closure $\{(s,x):s\in I,\ x\in\chi_s(\overline B)\}$. At time $s\in I$, write $U_s:=\{x:(s,x)\in U\}$ and $\Omega_s:=\chi_s(B)$. An **admissible region at time $s$** is a nonempty bounded open $D\subseteq\Omega_s$ with $\overline D\subseteq U_s$ and a specified finite piecewise $C^1$ boundary presentation in [[def-bounded-piecewise-c-one-euclidean-domain]]. Its faces $S_j$ carry the outward unit normal $\nu_D$ off the surface-null edge set. Boundary integration means the finite sum of the face integrals of [[def-surface-integral-on-a-compact-c-one-hypersurface]], componentwise for vectors; volume integration uses the Lebesgue integral over $D$ ([[def-integral-over-a-measurable-set]]), with signed integrals defined by positive and negative parts in [[def-integrable-real-and-complex-functions-and-their-integrals]]. Compact closure, continuous fields and finite face areas make these integrals finite.
+
 **(i) Body forces.** There is a continuous field
-$b:U\to\mathbb R^3$ on an open set $U$ containing the swept region of the
-motion over its time window, the **body force per unit mass**, of dimension
+$b:U\to\mathbb R^3$ on the common open field domain $U$, the **body force per unit mass**, of dimension
 $[b]=\ell\tau^{-2}$ ([[def-cm01-units]]). The body force exerted on an
-admissible region $D$ is $\int_D\rho b\,dx$, of dimension $\mu\ell\tau^{-2}$
+admissible region $D$ at time $s$ is $\int_D\rho(s,x)b(s,x)\,dx$, of dimension $\mu\ell\tau^{-2}$
 (force).
 
 **(ii) Contact forces and Cauchy's hypothesis.** There is a traction field
@@ -50,9 +57,8 @@ encodes **Cauchy's hypothesis**: the contact force exerted across a surface at
 a point depends on the surface only through the value of its unit normal at
 that point, so two surfaces through the same point with the same unit normal
 experience the same traction. The contact force exerted across the boundary of
-an admissible region $D$ is $\int_{\partial D}t(y,\nu_D(y))\,dS(y)$, with the
-outward unit normal $\nu_D$ and the surface integral of the current-region
-class. No dependence of $t$ on the curvature of the surface, on higher
+an admissible region $D$ at time $s$ is $\int_{\partial D}t(s,y,\nu_D(y))\,dS(y)$, with the
+outward unit normal $\nu_D$ and the finite face-sum integral defined above. No dependence of $t$ on the curvature of the surface, on higher
 derivatives of the surface, or on the distant shape of the body is introduced;
 no surface couples, no traction singularities and no contact forces on curves
 are introduced.

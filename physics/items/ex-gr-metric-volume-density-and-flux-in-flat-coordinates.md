@@ -10,7 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-metric-volume-form-and-current-flux, lem-gr-metric-volume-form-patching-and-face-normal, lem-gr-metric-divergence-and-density-formula, thm-gr-density-divergence-and-finite-chain-flux, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-oriented-smooth-manifold-and-oriented-chart, def-interior-product-of-a-form-by-a-vector-field, def-smooth-vector-field-as-a-tangent-bundle-section, def-wedge-product-of-differential-forms]
+deps: [def-gr-metric-volume-form-and-current-flux, lem-gr-metric-volume-form-patching-and-face-normal, lem-gr-metric-divergence-and-density-formula, thm-gr-density-divergence-and-finite-chain-flux, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-oriented-smooth-manifold-and-oriented-chart, def-interior-product-of-a-form-by-a-vector-field, def-smooth-vector-field-as-a-tangent-bundle-section, def-wedge-product-of-differential-forms, thm-riemann-fubini-on-product-rectangles, thm-ftc-second-part, def-integral-of-a-form-over-a-smooth-singular-simplex]
 dependency_roles:
   def-gr-metric-volume-form-and-current-flux: mathematical-premise
   lem-gr-metric-volume-form-patching-and-face-normal: mathematical-premise
@@ -23,6 +23,9 @@ dependency_roles:
   def-interior-product-of-a-form-by-a-vector-field: mathematical-premise
   def-smooth-vector-field-as-a-tangent-bundle-section: mathematical-premise
   def-wedge-product-of-differential-forms: mathematical-premise
+  thm-riemann-fubini-on-product-rectangles: mathematical-premise
+  thm-ftc-second-part: mathematical-premise
+  def-integral-of-a-form-over-a-smooth-singular-simplex: mathematical-premise
 sources:
   references:
     - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), sections 8.6-8.7: the volume element and Stokes' theorem in a chart, printed pp. 108-110 (PDF pp. 109-111)"
@@ -77,6 +80,8 @@ metric-selected connection of $g$ and $\mathrm{vol}_g$ the metric volume form
 
 [L5] For a non-null $3$-face with adapted unit normal $\nu^{*}$ the pullback of $\iota_J\mathrm{vol}_g$ on the ordered velocity basis $(v_1,v_2,v_3)$ equals $\varepsilon g(J,\nu^{*})\sqrt{|\det(g(v_i,v_j))|}$ with $\varepsilon=g(\nu^{*},\nu^{*})$ ([[thm-gr-density-divergence-and-finite-chain-flux]] clause (c), [[lem-gr-metric-volume-form-patching-and-face-normal]]).
 
+[L6] The simplex coefficient integral uses zero extension to $[0,1]^3$. Each successive indicator section is an integrable interval indicator, so [[thm-riemann-fubini-on-product-rectangles]] reduces its volume to $\int_0^1\int_0^{1-t_1}\int_0^{1-t_1-t_2}1\,dt_3\,dt_2\,dt_1=\int_0^1(1-t_1)^2/2\,dt_1=1/6$ by [[thm-ftc-second-part]] and the simplex-integral convention of [[def-integral-of-a-form-over-a-smooth-singular-simplex]].
+
 ## Verification
 
 **Proof technique:** direct; evaluate the definitions on the constant-coefficient flat data.
@@ -87,4 +92,4 @@ metric-selected connection of $g$ and $\mathrm{vol}_g$ the metric volume form
 
 2.1 (Current form and its derivative.) By [L3], $\iota_J\mathrm{vol}_g=(-1)^1J^1dx^0\wedge dx^2\wedge dx^3=-x^1dx^0\wedge dx^2\wedge dx^3$. Differentiating by [L4], $d(\iota_J\mathrm{vol}_g)=-\partial_1x^1\,dx^1\wedge dx^0\wedge dx^2\wedge dx^3=dx^0\wedge dx^1\wedge dx^2\wedge dx^3=\mathrm{vol}_g$, which equals $(\nabla_aJ^a)\mathrm{vol}_g$ by step 1.2. [step 1.1, step 1.2, L3, L4, algebra]
 
-3.1 (Two flux orientations.) On the affine simplex $\sigma_-$, the ordered velocities are $(v_1,v_2,v_3)=(\partial_0,\partial_2,\partial_3)$ and their Gram matrix is $\operatorname{diag}(-1,1,1)$, so its determinant is $-1$ and the induced density is $1$. The ambient ordered basis $(\partial_1,\partial_0,\partial_2,\partial_3)$ is negatively oriented; therefore the adapted normal is $\nu_-^{*}=-\partial_1$. The face is non-null, $\varepsilon=1$, and $\varepsilon g(J_0,\nu_-^{*})=-1$. Hence $\sigma_-^*(\iota_{J_0}\mathrm{vol}_g)=-dt_1\wedge dt_2\wedge dt_3$ and $\Phi_{J_0}(\sigma_-)=-1/6$. On $\sigma_+$, the ordered velocities are $(\partial_2,\partial_0,\partial_3)$ with the same Gram determinant $-1$ and density $1$; now $(\partial_1,\partial_2,\partial_0,\partial_3)$ is positively oriented, so $\nu_+^{*}=+\partial_1$ and $\varepsilon g(J_0,\nu_+^{*})=1$. Thus $\sigma_+^*(\iota_{J_0}\mathrm{vol}_g)=dt_1\wedge dt_2\wedge dt_3$ and $\Phi_{J_0}(\sigma_+)=1/6$, since the coordinate volume of $\Delta^3$ is $1/6$. This verifies clause 4 with consistent orientations and the induced area densities. [step 2.1, L5, algebra] ∎
+3.1 (Two flux orientations.) On the affine simplex $\sigma_-$, the ordered velocities are $(v_1,v_2,v_3)=(\partial_0,\partial_2,\partial_3)$ and their Gram matrix is $\operatorname{diag}(-1,1,1)$, so its determinant is $-1$ and the induced density is $1$. The ambient ordered basis $(\partial_1,\partial_0,\partial_2,\partial_3)$ is negatively oriented; therefore the adapted normal is $\nu_-^{*}=-\partial_1$. The face is non-null, $\varepsilon=1$, and $\varepsilon g(J_0,\nu_-^{*})=-1$. Hence $\sigma_-^*(\iota_{J_0}\mathrm{vol}_g)=-dt_1\wedge dt_2\wedge dt_3$ and $\Phi_{J_0}(\sigma_-)=-1/6$. On $\sigma_+$, the ordered velocities are $(\partial_2,\partial_0,\partial_3)$ with the same Gram determinant $-1$ and density $1$; now $(\partial_1,\partial_2,\partial_0,\partial_3)$ is positively oriented, so $\nu_+^{*}=+\partial_1$ and $\varepsilon g(J_0,\nu_+^{*})=1$. Thus $\sigma_+^*(\iota_{J_0}\mathrm{vol}_g)=dt_1\wedge dt_2\wedge dt_3$ and $\Phi_{J_0}(\sigma_+)=1/6$, since the coordinate volume of $\Delta^3$ is $1/6$. This verifies clause 4 with consistent orientations and the induced area densities. [step 2.1, L5, L6, algebra] ∎

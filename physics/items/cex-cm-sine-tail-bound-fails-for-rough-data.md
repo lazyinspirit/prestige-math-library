@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 3
-deps: [thm-cm-smooth-string-fourier-series-solution, def-cm-sine-coefficients-of-periodic-functions, lem-cm-cosine-sine-orthogonality-and-odd-extension, lem-cm-sine-coefficient-decay-by-integration-by-parts, thm-weierstrass-m-test-for-function-series, def-series-of-real-functions, thm-integral-test-for-series, thm-uniform-limit-continuous-real-functions, def-integral-over-a-measurable-set, thm-linearity-of-the-integral, def-ck-euclidean-maps-and-diffeomorphisms, thm-ftc-first-part, thm-substitution, def-oriented-integral, thm-additivity-over-subintervals]
+deps: [thm-cm-smooth-string-fourier-series-solution, def-cm-sine-coefficients-of-periodic-functions, lem-cm-cosine-sine-orthogonality-and-odd-extension, lem-cm-sine-coefficient-decay-by-integration-by-parts, thm-weierstrass-m-test-for-function-series, def-series-of-real-functions, thm-integral-test-for-series, thm-uniform-limit-continuous-real-functions, def-integral-over-a-measurable-set, thm-linearity-of-the-integral, def-ck-euclidean-maps-and-diffeomorphisms, thm-ftc-first-part, thm-substitution, def-oriented-integral, thm-additivity-over-subintervals, thm-uniform-derivative-limit-on-a-closed-interval, lem-uniform-integral-error-bound]
 dependency_roles:
   thm-cm-smooth-string-fourier-series-solution: mathematical-premise
   def-cm-sine-coefficients-of-periodic-functions: mathematical-premise
@@ -23,9 +23,11 @@ dependency_roles:
   thm-substitution: mathematical-premise
   def-oriented-integral: mathematical-premise
   thm-additivity-over-subintervals: mathematical-premise
+  thm-uniform-derivative-limit-on-a-closed-interval: mathematical-premise
+  lem-uniform-integral-error-bound: mathematical-premise
 provenance:
   statement: ai-generated
-  proof: ai-generated
+  proof: ai-altered
 generation:
   role: counterexample
 sources:
@@ -53,13 +55,13 @@ where $S_N^{\rm s}F$ is the $N$-th partial sum of the sine series of [[def-cm-si
 
 $$F(x):=\sum_{n\ge1}n^{-3}\sin\Bigl(\frac{n\pi x}{L}\Bigr).$$
 
-[L1] Convergence and regularity: $\sum n^{-3}<\infty$ and $\sum n^{-2}<\infty$, so by the Weierstrass majorant test the series for $F$ and for the formal derivative $\sum(\pi/L)n^{-2}\cos(n\pi x/L)$ converge uniformly; hence $F$ is continuous, odd, $2L$-periodic, and $C^1$ with the displayed derivative ([[thm-weierstrass-m-test-for-function-series]], [[def-series-of-real-functions]], [[thm-uniform-limit-continuous-real-functions]], [[def-ck-euclidean-maps-and-diffeomorphisms]]).
+[L1] Convergence and regularity: $\sum n^{-3}<\infty$ and $\sum n^{-2}<\infty$, so by the Weierstrass majorant test the series for $F$ and for the formal derivative $\sum(\pi/L)n^{-2}\cos(n\pi x/L)$ converge uniformly; hence $F$ is continuous, odd and $2L$-periodic; applying [[thm-uniform-derivative-limit-on-a-closed-interval]] to partial sums on each compact interval gives $C^1$ regularity with the displayed derivative ([[thm-weierstrass-m-test-for-function-series]], [[def-series-of-real-functions]], [[thm-uniform-limit-continuous-real-functions]], [[def-ck-euclidean-maps-and-diffeomorphisms]]).
 
-[L2] Coefficients: termwise integration of the uniformly convergent series against $\sin(k\pi x/L)$ using the orthogonality $\int_0^L\sin(n\pi x/L)\sin(k\pi x/L)dx=(L/2)\delta_{nk}$ gives $b_k(F)=k^{-3}$ for every $k\ge1$ ([[def-cm-sine-coefficients-of-periodic-functions]], [[lem-cm-cosine-sine-orthogonality-and-odd-extension]], [[def-integral-over-a-measurable-set]], [[thm-linearity-of-the-integral]]).
+[L2] Coefficients: [[lem-uniform-integral-error-bound]] permits termwise integration of the uniformly convergent series against $\sin(k\pi x/L)$ using the orthogonality $\int_0^L\sin(n\pi x/L)\sin(k\pi x/L)dx=(L/2)\delta_{nk}$ gives $b_k(F)=k^{-3}$ for every $k\ge1$ ([[def-cm-sine-coefficients-of-periodic-functions]], [[lem-cm-cosine-sine-orthogonality-and-odd-extension]], [[def-integral-over-a-measurable-set]], [[thm-linearity-of-the-integral]]).
 
-[L3] Orthogonality of the remainder: for the tail $R_N:=F-S_N^{\rm s}F=\sum_{n>N}n^{-3}\sin(n\pi x/L)$, termwise integration of $R_N^2$ (a uniformly convergent series of continuous functions) gives $\int_0^LR_N(x)^2dx=\frac{L}{2}\sum_{n>N}n^{-6}$ ([[lem-cm-cosine-sine-orthogonality-and-odd-extension]], [[thm-linearity-of-the-integral]]).
+[L3] For fixed $N$, put $P_{N,m}:=\sum_{n=N+1}^{m}n^{-3}\sin(n\pi x/L)$. Finite expansion and orthogonality give $\int_0^LP_{N,m}^2=\tfrac L2\sum_{n=N+1}^{m}n^{-6}$. The tails $P_{N,m}$ converge uniformly to $R_N$, are uniformly bounded, and therefore their squares converge uniformly too. The uniform integral-error bound yields $\int_0^LR_N^2=\tfrac L2\sum_{n>N}n^{-6}$ ([[lem-cm-cosine-sine-orthogonality-and-odd-extension]], [[thm-linearity-of-the-integral]], [[lem-uniform-integral-error-bound]]).
 
-[L4] Sum lower bound: $\sum_{n>N}n^{-6}\ge\int_{N+1}^{\infty}x^{-6}dx=\frac15(N+1)^{-5}$ ([[thm-integral-test-for-series]], [[thm-substitution]]).
+[L4] For every integer $M>N$, the decreasing function $x\mapsto x^{-6}$ satisfies $\sum_{n=N+1}^{M}n^{-6}\ge\int_{N+1}^{M+1}x^{-6}dx=\frac15((N+1)^{-5}-(M+1)^{-5})$: on each $[n,n+1]$, $x^{-6}\le n^{-6}$. The series converges by the integral test, so letting $M\to\infty$ gives $\sum_{n>N}n^{-6}\ge\frac15(N+1)^{-5}$ ([[thm-integral-test-for-series]], [[thm-ftc-first-part]]).
 
 
 ## Counterexample
@@ -75,6 +77,6 @@ $$F(x):=\sum_{n\ge1}n^{-3}\sin\Bigl(\frac{n\pi x}{L}\Bigr).$$
 
 ## Remarks
 
-- The datum $F$ is $C^1$ but not $C^2$: formally differentiating twice produces $\sum n^{-1}\sin(n\pi x/L)$, which does not converge absolutely, so the $C^5$ hypothesis of the string theorem is genuinely necessary for the displayed $O(N^{-4})$ displacement tail. The counterexample refutes the hypothesis-free statement only; the theorem itself is not contradicted.
+- The datum is $C^1$ and is not $C^5$: otherwise the coefficient-decay lemma would bound $n^{-3}$ by a fixed multiple of $n^{-5}$ for every $n$, which is impossible. Nonabsolute convergence of a formally differentiated series alone would not prove failure of $C^2$ regularity. The counterexample refutes the hypothesis-free estimate; it does not claim $C^5$ is necessary for every datum having an $O(N^{-4})$ tail.
 
 - The lower bound uses the $L^2$ tail of the sine coefficients; it shows the tail cannot be better than order $N^{-5/2}$ in sup norm for this datum, while any $O(N^{-4})$ assertion would require the considerably faster decay of the $C^5$ class.

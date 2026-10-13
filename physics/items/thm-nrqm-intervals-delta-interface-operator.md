@@ -29,9 +29,9 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Sarang Gopalakrishnan, Self-Adjointness and the Renormalization of Singular Potentials (Amherst College honors thesis, 2006), Chapter 1 pp. 15-32 and Chapter 2 pp. 33-56 (the one-dimensional delta domain and its self-adjointness)"
+    - title: "Sarang Gopalakrishnan, Self-Adjointness and the Renormalization of Singular Potentials (2006), Section 1.2 pp. 16-18 and Section 8.2.5 pp. 129-130 (one-dimensional derivative jump, attractive bound-state calculation and extension background; rigorous operator and resolvent proofs are supplied locally)"
       url: "https://math.ucr.edu/home/baez/gopalkrishnan.pdf"
-    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.2 pp. 187-193 (self-adjoint realisations of one-dimensional differential expressions with point boundary conditions)"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics (2009), Section 2.6, Lemma 2.29 pp. 83-84 (differences of extension resolvents; point-interface results are proved locally)"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
 ---
 

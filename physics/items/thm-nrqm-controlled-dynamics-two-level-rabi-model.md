@@ -7,10 +7,9 @@ title: "Two-level Rabi model"
 status: draft
 origin: pipeline
 dependency_level: 1
-deps: [prop-nrqm-orbital-and-spin-finite-spin-matrices, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-bounded-linear-operator, def-operator-norm, def-hilbert-space]
+deps: [prop-nrqm-orbital-and-spin-finite-spin-matrices, def-bounded-linear-operator, def-operator-norm, def-hilbert-space]
 dependency_roles:
   prop-nrqm-orbital-and-spin-finite-spin-matrices: mathematical-premise
-  lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group: mathematical-premise
   def-bounded-linear-operator: mathematical-premise
   def-operator-norm: mathematical-premise
   def-hilbert-space: mathematical-premise
@@ -38,14 +37,15 @@ $$U(t)=\cos\!\Bigl(\frac{bt}{2}\Bigr)I-\frac{i}{b}\sin\!\Bigl(\frac{bt}{2}\Bigr)
 which solves $i\hbar U'(t)=HU(t)$, $U(0)=I$; if $b=0$ the formula is read as
 $U(t)=I$.
 
-(b) *Rabi probability.* For the initial state $e_{\uparrow}=(1,0)^{\mathsf T}$
-with $\sigma_ze_{\uparrow}=e_{\uparrow}$, the probability of finding the spin
-down in the state $e_{\downarrow}$ at time $t$ is
+(b) *Squared transition amplitude.* Put $e_{\uparrow}=(1,0)^{\mathsf T}$ and
+$e_{\downarrow}=(0,1)^{\mathsf T}$, and use the inner product linear in its
+first argument from the Pauli supplier. Define the squared transition amplitude by
 $$p_{\downarrow}(t)=\bigl|\langle e_{\downarrow},U(t)e_{\uparrow}\rangle\bigr|^2 =\frac{\Omega^2}{b^2}\sin^2\!\Bigl(\frac{bt}{2}\Bigr)\qquad(b>0).$$
+For $b=0$ it is $p_{\downarrow}(t)=0$ for every real $t$.
 
 (c) *Periodicity.* For $b>0$ one has $U(t+2\pi/b)=-U(t)$; the propagator is
-$2\pi/b$-periodic up to the central sign $-I$, and every transition probability
-is exactly $2\pi/b$-periodic.
+$2\pi/b$-periodic up to the central sign $-I$, and every squared transition amplitude
+is $2\pi/b$-periodic.
 
 These are the exact mathematical dynamics of the stipulated finite matrix model;
 no physical identification of $\delta,\Omega$ with a field or detuning and no
@@ -57,14 +57,14 @@ measurement statistics is asserted.
 
 [F1] Pauli algebra: $\sigma_i^2=I$, $\sigma_i\sigma_j=-\sigma_j\sigma_i$ for $i\ne j$, $\sigma_x\sigma_z=-i\sigma_y$ and the products $\sigma_x\sigma_z+\sigma_z\sigma_x=0$; hence $(\delta\sigma_z+\Omega\sigma_x)^2=(\delta^2+\Omega^2)I$ ([[prop-nrqm-orbital-and-spin-finite-spin-matrices]] (e), algebra).
 
-[F2] Matrix exponential: for a finite Hermitian matrix $A$ the series $e^{-iA t/\hbar}=\sum_k(-it/\hbar)^kA^k/k!$ converges in operator norm, is unitary, and solves $i\hbar\frac{d}{dt}e^{-iAt/\hbar}=Ae^{-iAt/\hbar}$; the solution with initial value $I$ is unique ([[lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group]], [[def-operator-norm]], [[def-bounded-linear-operator]]).
+[F2] For a finite matrix $A$, the series $e^{-itA/\hbar}=\sum_{k\ge0}(-itA/\hbar)^k/k!$ and its derivative series converge uniformly in operator norm on compact time intervals by scalar exponential majorants. Termwise differentiation gives $i\hbar U'=AU$ and $U(0)=I$. For Hermitian $A$, $(U^*U)'=0$, so $U^*U=I$; finite-dimensional injectivity gives surjectivity and unitarity. The difference $D$ of two solutions with the same initial value has $(D^*D)'=0$ and $D(0)=0$, so $D=0$. Uniqueness gives the group law. This local argument uses the norm conventions of [[def-operator-norm]] and [[def-bounded-linear-operator]], with no Choice or spectral theorem premise.
 
 [F3] The eigenvectors: $e_{\uparrow}=(1,0)$, $e_{\downarrow}=(0,1)$ satisfy $\sigma_ze_{\uparrow}=e_{\uparrow}$, $\sigma_ze_{\downarrow}=-e_{\downarrow}$, $\sigma_xe_{\uparrow}=e_{\downarrow}$, $\sigma_xe_{\downarrow}=e_{\uparrow}$ ([[prop-nrqm-orbital-and-spin-finite-spin-matrices]] (e)).
 
 ## Proof
 
-1.1 [Exponential form] By [F1], $H$ is Hermitian and $H=\frac{\hbar b}{2}S$ with $S:=(\delta\sigma_z+\Omega\sigma_x)/b$ satisfying $S^2=I$ when $b>0$. Then $H^{2m}=(\hbar b/2)^{2m}I$ and $H^{2m+1}=(\hbar b/2)^{2m}H$, so the exponential series of [F2] splits into even and odd terms: $e^{-iHt/\hbar}=\sum_m(-1)^m(bt/2)^{2m}I/(2m)!-\frac{i}{\hbar}\sum_m(-1)^m(bt/2)^{2m+1}H/[(2m+1)!(\hbar b/2)]\cdot\frac{\hbar b}{2}$; summing the two scalar series gives $U(t)=\cos(bt/2)I-i\sin(bt/2)(\delta\sigma_z+\Omega\sigma_x)/b$, which solves the equation and is unique by [F2]. For $b=0$ one has $H=0$ and $U=I$. [F1, F2, algebra]
+1.1 [Exponential form] By [F1], $H$ is Hermitian and $H^2=\hbar^2b^2I/4$. For $b>0$ put $S=(\delta\sigma_z+\Omega\sigma_x)/b$, so $S^2=I$. The even terms in the series of [F2] sum to $\cos(bt/2)I$, and its odd terms sum to $-iS\sum_{m\ge0}(-1)^m(bt/2)^{2m+1}/(2m+1)!=-iS\sin(bt/2)$. This gives the displayed $U$ and its unique unitary group and equation by [F2]. If $b=0$, realness of $\delta,\Omega$ gives $\delta=\Omega=0$, so $H=0$ and $U=I$. [F1, F2, algebra]
 
-2.1 [The transition amplitude] By [F3] and the matrix entries of the closed form of step 1.1, $U(t)e_{\uparrow}=[\cos(bt/2)-i\delta\sin(bt/2)/b]e_{\uparrow}-i\Omega\sin(bt/2)e_{\downarrow}/b$, so $\langle e_{\downarrow},U(t)e_{\uparrow}\rangle=-i\Omega\sin(bt/2)/b$ and the squared modulus is $\Omega^2\sin^2(bt/2)/b^2$. [step 1.1, F1, F3, algebra]
+2.1 [The transition amplitude] By [F3] and step 1.1, $U(t)e_{\uparrow}=[\cos(bt/2)-i\delta\sin(bt/2)/b]e_{\uparrow}-i\Omega\sin(bt/2)e_{\downarrow}/b$ when $b>0$. Conjugate linearity in the second argument gives $\langle e_{\downarrow},U(t)e_{\uparrow}\rangle=+i\Omega\sin(bt/2)/b$, whose squared modulus is $\Omega^2\sin^2(bt/2)/b^2$. If $b=0$, $U=I$ and orthogonality gives $p_{\downarrow}=0$. [step 1.1, F1, F3, algebra]
 
-3.1 [Periodicity] From the closed form, replacing $t$ by $t+2\pi/b$ changes $\cos,\sin$ by their negatives; hence $U(t+2\pi/b)=-U(t)$, and all transition probabilities (matrix entries squared) are $2\pi/b$-periodic. [step 1.1, step 2.1, algebra] ∎
+3.1 [Periodicity] For $b>0$, replacing $t$ by $t+2\pi/b$ in the closed form changes $\cos,\sin$ by their negatives; hence $U(t+2\pi/b)=-U(t)$, and all squared transition amplitudes are $2\pi/b$-periodic. [step 1.1, step 2.1, algebra] ∎

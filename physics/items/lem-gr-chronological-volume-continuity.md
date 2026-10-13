@@ -10,8 +10,9 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [lem-gr-finite-smooth-volume-density, lem-gr-globally-hyperbolic-causal-structure, lem-gr-achronal-boundaries-lipschitz-graphs, lem-gr-chronology-openness, def-gr-future-and-past-sets, lem-gr-push-up-rule, lem-gr-causal-curve-calculus, thm-dominated-convergence, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-causal-curves-and-reachability, def-gr-observer-and-rest-space, thm-gr-local-geodesics-and-exponential-map, lem-gr-parallel-transport-and-geodesic-speed, def-countable-choice]
+deps: [def-dependent-choice, lem-gr-finite-smooth-volume-density, lem-gr-globally-hyperbolic-causal-structure, lem-gr-achronal-boundaries-lipschitz-graphs, lem-gr-chronology-openness, def-gr-future-and-past-sets, lem-gr-push-up-rule, lem-gr-causal-curve-calculus, thm-dominated-convergence, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-causal-curves-and-reachability, def-gr-observer-and-rest-space, thm-gr-local-geodesics-and-exponential-map, lem-gr-parallel-transport-and-geodesic-speed, def-countable-choice]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
   lem-gr-finite-smooth-volume-density: mathematical-premise
   lem-gr-globally-hyperbolic-causal-structure: mathematical-premise
   lem-gr-achronal-boundaries-lipschitz-graphs: mathematical-premise
@@ -38,8 +39,9 @@ verification:
 
 ## Statement
 
-Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$
-([[def-countable-choice]]). Let $(M,g,N)$ be a globally hyperbolic
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the absolutely continuous causal-curve
+calculus and the supplied causal results used below. Let $(M,g,N)$ be a globally hyperbolic
 time-oriented smooth Lorentzian four-manifold
 ([[def-gr-causal-conditions-and-global-hyperbolicity]] clause (c)) and let
 $\mu$ be the finite volume measure of [[lem-gr-finite-smooth-volume-density]],
@@ -65,7 +67,7 @@ $$\mu\bigl(I^-(p)\bigr)<\mu\bigl(I^-(q)\bigr),\qquad \mu\bigl(I^+(p)\bigr)>\mu\b
 
 **Given:** A globally hyperbolic $(M,g,N)$, the volume measure $\mu$, a point $p\in M$ and a sequence $p_k\to p$.
 
-[L1] $(M,g,N)$ is strongly causal; hence no nonconstant future causal curve has equal endpoints: a closed causal curve through $x$ would fail strong causality at $x$ with the neighbourhood $U=M$, since every sufficiently small neighbourhood $V\ni x$ is left and re-entered by the curve ([[def-gr-causal-conditions-and-global-hyperbolicity]] clauses (b) and (c)).
+[L1] $(M,g,N)$ is strongly causal; hence no nonconstant future causal curve has equal endpoints: a nonconstant closed causal curve through $x$ has an image point $y\ne x$. Take the open neighborhood $U=M\setminus\{y\}$ of $x$ (the manifold is Hausdorff). For every $V$ with $x\in V\subseteq U$, the closed curve starts and ends in $V$ but passes through $y\notin U$, violating the strong-causality requirement ([[def-gr-causal-conditions-and-global-hyperbolicity]] clauses (b) and (c)).
 
 [L2] The causal relation is closed and $J^\pm(K)$ is closed for every compact $K$ ([[lem-gr-globally-hyperbolic-causal-structure]] clauses (a) and (b)).
 
@@ -93,7 +95,7 @@ $$\mu\bigl(I^-(p)\bigr)<\mu\bigl(I^-(q)\bigr),\qquad \mu\bigl(I^+(p)\bigr)>\mu\b
 
 4.1 (Strict monotonicity.) Let $p\ll q$ and choose a future timelike curve $\lambda:[0,1]\to M$ with $\lambda(0)=p$, $\lambda(1)=q$; put $r:=\lambda(1/2)$, so that $p\ll r\ll q$ by transitivity [L3]. If $x\ll p$ then $x\ll q$, so $I^-(p)\subseteq I^-(q)$. The point $r$ lies in $I^-(q)$ but not in $J^-(p)$: otherwise $r\le p$ together with $p\ll r$ would give a nonconstant closed future causal curve through $p$ (concatenating a timelike curve from $p$ to $r$ with a causal curve from $r$ to $p$), contradicting [L1]. Since $J^-(p)$ is closed [L2], the open set $I^-(q)\setminus J^-(p)$ containing $r$ has positive $\mu$-measure; by additivity and monotonicity of $\mu$, $$\mu(I^-(q))\ge\mu(I^-(p))+\mu\bigl(I^-(q)\setminus J^-(p)\bigr)>\mu(I^-(p)).$$ Dually, $I^+(q)\subseteq I^+(p)$ and $r\in I^+(p)\setminus J^+(q)$ is an interior point of an open subset of $I^+(p)\setminus I^+(q)$, so $\mu(I^+(q))<\mu(I^+(p))$. [step 3.2, L1, L2, L3, given]
 
-5.1 (Conclusion.) Clauses (a), (b), (c), (d) are steps 2.1, 3.1, 4.1 and 5.1. [step 2.1, step 3.1, step 3.2, step 4.1] ∎
+5.1 (Conclusion.) Clauses (a), (b), (c), and (d) follow respectively from steps 2.1, 3.1, 3.2, and 4.1. [step 2.1, step 3.1, step 3.2, step 4.1] ∎
 
 ## Remarks
 

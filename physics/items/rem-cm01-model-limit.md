@@ -87,7 +87,15 @@ and the cited mathematics.
 **Explicitly not claimed on this page.** No force law and no equation of
 motion: nothing here determines the acceleration of any particle, and the
 identification of the acceleration term with a force is made on the pages
-that introduce dynamics. No conservation law, no potential and no energy.
+that introduce dynamics. No conservation law and no selected potential for a
+concrete system. Kinetic energy is already defined: for a tangent velocity
+$v\in T_qQ$, [[def-cm-constrained-configuration-and-mass-metric]] gives
+$T_q(v)=\tfrac12G_q(v,v)$, and [[def-cm01-units]] gives the Cartesian
+construction $T=\tfrac12\sum_i m_i\lvert x_i'\rvert^2$ with dimension
+$\mu\ell^2\tau^{-2}$. Its value along a motion requires a specified curve.
+The conditional mechanical-energy construction $E=T+U$ in the unit
+conventions also requires a specified potential $U$; it selects no such
+potential, supplies no conserved energy and asserts no measured energy.
 No gravitational interaction; gravitation is an optional force model adopted
 later with its own coupling parameters. No electromagnetic coupling and no
 electromagnetic field: coupling the framework to classical electromagnetism

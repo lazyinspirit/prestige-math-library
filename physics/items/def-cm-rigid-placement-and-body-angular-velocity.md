@@ -6,13 +6,14 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 3
-deps: [def-cm-mass-distribution-and-inertia-matrix, lem-cm-matrix-curve-derivative-rules, lem-cm-skew-matrix-cross-product-correspondence, def-cm-special-orthogonal-group, def-derivative, def-interval, def-euclidean-inner-product]
+deps: [def-cm-mass-distribution-and-inertia-matrix, lem-cm-matrix-curve-derivative-rules, lem-cm-skew-matrix-cross-product-correspondence, def-cm-special-orthogonal-group, def-derivative, def-vector-valued-derivative-and-integral, def-interval, def-euclidean-inner-product]
 dependency_roles:
   def-cm-mass-distribution-and-inertia-matrix: mathematical-premise
   lem-cm-matrix-curve-derivative-rules: mathematical-premise
   lem-cm-skew-matrix-cross-product-correspondence: mathematical-premise
   def-cm-special-orthogonal-group: mathematical-premise
   def-derivative: mathematical-premise
+  def-vector-valued-derivative-and-integral: mathematical-premise
   def-interval: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
 provenance:
@@ -40,7 +41,7 @@ which exists by differentiability of $c$ and of the entries of $R$.
 
 **Body and spatial angular velocity.** By [[lem-cm-matrix-curve-derivative-rules]] the matrix $R(t)^{\mathsf T}R'(t)$ is skew-symmetric at every $t\in I$. By [[lem-cm-skew-matrix-cross-product-correspondence]] there is therefore a unique vector $\omega(t)\in\mathbb R^3$ with
 $$R(t)^{\mathsf T}R'(t)=[\omega(t)]_\times,$$
-and the map $\omega:I\to\mathbb R^3$ is the **body angular velocity** of the placement; the **spatial angular velocity** is $\omega_{\mathrm{s}}(t):=R(t)\omega(t)$. Explicitly $\omega(t)=\bigl((R^{\mathsf T}R')_{32},(R^{\mathsf T}R')_{13},(R^{\mathsf T}R')_{21}\bigr)(t)$, a finite linear expression in the entries of $R$ and $R'$; consequently, if $R$ is twice differentiable, then $\omega$ is differentiable and its derivative is the **body angular acceleration**.
+and the map $\omega:I\to\mathbb R^3$ is the **body angular velocity** of the placement; the **spatial angular velocity** is $\omega_{\mathrm{s}}(t):=R(t)\omega(t)$. Explicitly $\omega(t)=\bigl((R^{\mathsf T}R')_{32},(R^{\mathsf T}R')_{13},(R^{\mathsf T}R')_{21}\bigr)(t)$, a finite sum of products of entries of $R$ and $R'$; consequently, if $R$ is twice differentiable, then $\omega$ is differentiable and its derivative is the **body angular acceleration**.
 
 Equivalently, by the conjugation clause of [[lem-cm-skew-matrix-cross-product-correspondence]], $R'(t)R(t)^{\mathsf T}=[\omega_{\mathrm{s}}(t)]_\times$.
 

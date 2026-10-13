@@ -116,8 +116,10 @@ $\operatorname{Im}G(k^2+i0)=k\varphi\varphi/|W_l|^2$, the spectral density
 $\rho_l(E)=\sqrt E/(\pi|W_l(\sqrt E)|^2)$ and the absence of point and singular
 continuous spectrum on $(0,\infty)$, including the scaling argument excluding
 the zero eigenvalue; and [[thm-nrqm-coulomb-onto-radial-continuum-transform]]
-proves that the transform
-$(T_lg)(E)=\sqrt{\rho_l(E)}\int\varphi_l(\sqrt E,r)g(r)dr$ is unitary onto
-$L^2((0,\infty),dE)$, diagonalises $A_l$ as multiplication by $E$, and
+defines the compact-source transform
+$(T_lg)(E)=\sqrt{\rho_l(E)}\int\varphi_l(\sqrt E,r)g(r)dr$, extends it to
+a contraction $T$ on the full radial $L^2$ space, and proves that its
+restriction $\widehat T_l$ to the positive spectral subspace is unitary onto
+$L^2((0,\infty),dE)$, with $T=\widehat T_l E_{A_l}((0,\infty))$, diagonalises $A_l$ as multiplication by $E$, and
 assembles the complete spectral resolution of $C$ as bound data plus continuum
 data in every angular channel.

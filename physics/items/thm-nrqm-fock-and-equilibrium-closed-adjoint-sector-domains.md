@@ -7,7 +7,7 @@ title: "Closed adjoint sector domains"
 status: draft
 origin: pipeline
 dependency_level: 6
-deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-fock-sector-projections, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, lem-nrqm-composites-hilbert-tensor-construction, def-hilbert-space, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-densely-defined-closed-and-closable-operator, def-unbounded-linear-operator-domain-and-graph, def-bounded-linear-operator, cor-cauchy-schwarz-inequality-for-l-two, def-countable-choice]
+deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-fock-sector-projections, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, lem-nrqm-composites-hilbert-tensor-construction, def-hilbert-space, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-densely-defined-closed-and-closable-operator, def-unbounded-linear-operator-domain-and-graph, def-bounded-linear-operator, thm-cauchy-schwarz-in-an-inner-product-space, def-countable-choice]
 dependency_roles:
   thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction: mathematical-premise
   lem-nrqm-fock-and-equilibrium-fock-sector-projections: mathematical-premise
@@ -19,7 +19,7 @@ dependency_roles:
   def-densely-defined-closed-and-closable-operator: mathematical-premise
   def-unbounded-linear-operator-domain-and-graph: mathematical-premise
   def-bounded-linear-operator: mathematical-premise
-  cor-cauchy-schwarz-inequality-for-l-two: mathematical-premise
+  thm-cauchy-schwarz-in-an-inner-product-space: mathematical-premise
   def-countable-choice: mathematical-premise
 proof_strategy: direct
 provenance:
@@ -76,7 +76,7 @@ no physical interpretation is asserted.
 
 [F3] If $T$ is a densely defined operator with $S\subseteq T$ for a densely defined $S$, then $T^*\subseteq S^*$; if $T$ is closed and $\overline S=T$ then $T=S^{**}$; adjoints are closed operators ([[def-adjoint-of-a-densely-defined-unbounded-operator]], [[def-densely-defined-closed-and-closable-operator]], [[def-symmetric-self-adjoint-and-essentially-self-adjoint]]).
 
-[F4] Cauchy-Schwarz in $F(H)$: $|\langle\eta,\theta\rangle|\le\|\eta\|\,\|\theta\|$ ([[def-hilbert-space]], [[cor-cauchy-schwarz-inequality-for-l-two]]).
+[F4] Cauchy-Schwarz in the Hilbert space $F(H)$: $|\langle\eta,\theta\rangle|\le\|\eta\|\,\|\theta\|$ ([[thm-cauchy-schwarz-in-an-inner-product-space]]).
 
 
 

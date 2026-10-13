@@ -51,11 +51,13 @@ domain. If the endpoint is the finite right boundary of the prescribed open
 time window, the state may remain bounded and away from the excluded
 configurations. When the time window is all of $\mathbb R$, the theorem gives
 the state-escape reading: the state leaves every compact subset of its open
-state domain, through unbounded state or approach to the excluded
-configurations. In the autonomous case read on $\mathbb R$, a state trapped in
-a compact subset on a terminal neighborhood extends past that endpoint. If
-one compact subset contains the state throughout the entire maximal forward
-trajectory, the same criterion rules out every finite right endpoint.
+state domain. It is unbounded on every terminal interval or, if it is bounded
+on a terminal interval and $Q$ is proper, its positions approach the excluded
+configurations in the theorem's stated sense. In the autonomous case read on
+$\mathbb R$, a state trapped in a compact subset on a terminal neighborhood
+extends past that endpoint. If one compact subset contains the state
+throughout the entire maximal forward trajectory, the same criterion rules
+out every finite right endpoint.
 
 The page's worked computation is the uniform-force model
 ([[ex-cm02-uniform-field]]): the constant force map $F_{i}=m_{i}\mathbf g$
@@ -66,8 +68,9 @@ covariant under changes of inertial frame with the parameter transforming as a
 spatial vector. A closing status audit
 ([[rem-cm02-open-system-warning]]) records what is adopted, defined and
 proved, marks the open-system boundary between the declared labels and their
-environment, notes the frame selection exercised by external fields and
-apparatus, and states the empirical qualifications of the page's parameters:
+environment, distinguishes external data that can select a useful rest frame
+from the uniform-force model that remains covariant, and states the empirical
+qualifications of the page's parameters:
 the drag model's fluctuation neglect and regime restrictions, the
 approximation content of a constant field, and the fact that no conservation
 law, constraint reaction or empirical comparison is claimed here. The worked

@@ -26,7 +26,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.1 pp. 181-186 (boundary conditions and self-adjoint realisations of first-order operators on an interval)"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.6, example pp. 82-83, equations (2.108)-(2.110) (momentum extensions with phase-related endpoints); the adjoint and extension classification are proved locally"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
     - title: "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext 2011), Section 8.5-8.6 pp. 226-233 (boundary traces and self-adjointness of differential operators under boundary conditions)"
       url: "https://www.math.toronto.edu/almut/Brezis.pdf"

@@ -244,12 +244,12 @@ $\psi\in\mathcal S^{(r)}$
 
 [F6] **Conservation theorem.** For a declared isolated system with energy
 $H_{\mathrm{op}}$ and flow $U(t)$, the following are equivalent: commutation of
-the flows $W(s)U(t)=U(t)W(s)$ of a self-adjoint $A$ with $W(s)=e^{-isA/\hbar}$,
+the flows $W(s)U(t)=U(t)W(s)$ of an assigned self-adjoint observable $(A,u_A)$ with $W(s)=e^{-isA/\hbar}$,
 strong spectral commutation of the PVMs, and domain preservation with
 $U(t)AU(t)^{*}=A$; when they hold the outcome law of $A$ is time-independent
 in every preparation and the mean and second moment are conserved for unit
 vectors in $D(A)$; a unitary symmetry $S$ satisfies $SU(t)=U(t)S$ for every
-$t$; and a self-adjoint unitary symmetry has a time-independent outcome law
+$t$; and a self-adjoint unitary symmetry assigned as $(S,1)$ has a time-independent outcome law
 ([[pthm-nrqm-symmetries-generator-conservation]] clauses (a)-(c)).
 
 [F7] **Outcome laws and moments.** For an assigned sharp observable $A$ one has

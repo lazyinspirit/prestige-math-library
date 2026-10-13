@@ -27,8 +27,8 @@ $s_1=s_2=1/\sqrt2$, and $\Psi$ is not a product vector.
 [[ex-nrqm-composites-nonunique-mixed-ensemble]] shows that the maximally
 mixed operator $\frac12 I$ on $\mathbb C^2$ has the two distinct orthonormal
 decompositions $\frac12T_{e_1,e_1}+\frac12T_{e_2,e_2}$ and
-$\frac12T_{e_+,e_+}+\frac12T_{e_-,e_-}$, so a density operator does not
-determine its preparation ensemble.
+$\frac12T_{e_+,e_+}+\frac12T_{e_-,e_-}$, so this density operator has two distinct orthonormal convex
+decompositions into rank-one density operators.
 [[cex-nrqm-composites-selective-conditioning-counterexample]] refutes the
 selective claim that local conditioning preserves the opposite reduced state: on
 the same Bell state, the Lüders outcome of the second factor with

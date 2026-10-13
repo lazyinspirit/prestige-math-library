@@ -6,7 +6,7 @@ domain: physics
 title: "Finite samples of a declared arrangement: the CHSH estimator, its concentration and the limits of a finite-sample verdict"
 status: draft
 origin: session
-dependency_level: 13
+dependency_level: 12
 deps: [def-nrqm-bell-declared-spin-arrangement, def-nrqm-bell-binary-correlation-models, post-nrqm-framework-preparation-and-apparatus, def-probability-measure, def-random-element-and-real-random-variable, def-independence-of-finite-random-variables, def-moments-variance-and-covariance, cor-chebyshev-inequality-for-random-variables, cor-variance-adds-for-pairwise-independent-random-variables, cor-expectation-linearity-monotonicity-and-modulus-bound, def-expectation-of-a-nonnegative-or-integrable-random-variable, lem-nrqm-composites-chsh-and-finite-sampling-law, def-finite-sum]
 dependency_roles:
   def-nrqm-bell-declared-spin-arrangement: formulation-prerequisite
@@ -33,7 +33,7 @@ sources:
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 8 'Multiparticle States and Tensor Products', Section 5, chapter pages 16-19: the singlet probabilities and the definite-spin ensemble compared through accumulated frequencies of many trials"
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/ffe665c0cba2eae19a83e88dec42925c_MIT8_05F13_Chap_08.pdf"
-    - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.A, PDF pages 2-3: the joint probabilities of a Bell experiment estimated from repeated runs, and the assumption that the settings are chosen independently of the specification"
+    - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section I.A, PDF pages 2-3: the joint probabilities of a Bell experiment estimated from repeated runs, and the assumption that the settings are chosen independently of the specification"
       url: "https://arxiv.org/pdf/1303.2849"
 verification:
   precheck: pass
@@ -114,23 +114,5 @@ no error rate, no power, no required sample size and no empirical conclusion.
 
 ## Remarks
 
-- **Finite-sample threshold crossings.** At the displayed singlet settings,
-  each of the four possible outcome pairs has strictly positive probability.
-  A sequence with product signs $+1$ at the first three setting pairs and
-  $-1$ at the last therefore has positive probability and gives
-  $\widehat S=4\ge-2$. For a representable model with $S<2$, a crossing
-  $\widehat S>2$ has positive probability only when its declared tables support
-  at least one such sequence, as specified by clause (c); a deterministic
-  table need not support one. The displayed Chebyshev upper bounds remain
-  valid independently of that support condition. More generally, if two
-  specified finite-sample models both assign positive probability to the same
-  record, that record is possible under both and cannot deductively exclude
-  either; a record assigned probability zero by one specified ideal model can
-  exclude that model conditional on its sampling and apparatus assumptions.
-  Thus this item makes no blanket claim that finite samples cannot distinguish
-  all model pairs. No optimality, power or sample-size assertion is made.
-- **No inference is drawn.** The clauses are probabilities inside the declared
-  sampling model. They do not compute a p-value, do not attach a confidence
-  level and do not assert anything about a real experiment; the
-  preparation, detection and selection qualifications remain as stated in
-  [[rem-nrqm-bell-boundaries-and-comparison-scope]].
+- **Finite-sample threshold crossings.** At the displayed singlet settings, each of the four possible outcome pairs has strictly positive probability. A sequence with product signs $+1$ at the first three setting pairs and $-1$ at the last therefore has positive probability and gives $\widehat S=4\ge-2$. For a representable model with $S<2$, a crossing $\widehat S>2$ has positive probability only when its declared tables support at least one such sequence, as specified by clause (c); a deterministic table need not support one. The displayed Chebyshev upper bounds remain valid independently of that support condition. More generally, if two specified finite-sample models both assign positive probability to the same record, that record is possible under both and cannot deductively exclude either; a record assigned probability zero by one specified ideal model can exclude that model conditional on its sampling and apparatus assumptions. Thus this item makes no blanket claim that finite samples cannot distinguish all model pairs. No optimality, power or sample-size assertion is made.
+- **No inference is drawn.** The clauses are probabilities inside the declared sampling model. They do not compute a p-value, do not attach a confidence level and do not assert anything about a real experiment; the preparation, detection and selection qualifications remain as stated in [[rem-nrqm-bell-boundaries-and-comparison-scope]].

@@ -14,6 +14,8 @@ deps:
     post-nrqm-framework-state-and-composition,
     post-nrqm-framework-observable-and-probability,
     post-nrqm-framework-identical-particles-and-spin,
+    post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle,
+    post-nrqm-framework-preparation-and-apparatus,
     def-nrqm-state-geometry-framework-state-space,
     def-nrqm-observables-framework-observable-and-outcome-law,
     def-nrqm-framework-quantities-and-units,
@@ -26,7 +28,7 @@ deps:
     lem-nrqm-photons-fixed-mode-number-isometry,
     def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis,
     def-hilbert-space,
-    def-countable-choice,
+    def-countable-choice, def-dependent-choice,
     def-axiom-of-choice
   ]
 dependency_roles:
@@ -35,6 +37,8 @@ dependency_roles:
   post-nrqm-framework-state-and-composition: physical-assumption
   post-nrqm-framework-observable-and-probability: physical-assumption
   post-nrqm-framework-identical-particles-and-spin: physical-assumption
+  post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle: physical-assumption
+  post-nrqm-framework-preparation-and-apparatus: physical-assumption
   def-nrqm-state-geometry-framework-state-space: formulation-prerequisite
   def-nrqm-observables-framework-observable-and-outcome-law: formulation-prerequisite
   def-nrqm-framework-quantities-and-units: formulation-prerequisite
@@ -49,6 +53,7 @@ dependency_roles:
   def-hilbert-space: mathematical-premise
   def-countable-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -102,8 +107,8 @@ its clauses (i)-(iv), read in the state vocabulary of
 vocabulary of
 [[def-nrqm-identical-particles-framework-species-sectors-and-preparations]]
 and the units of [[def-nrqm-framework-quantities-and-units]]. Assume the
-Axioms of Countable Choice and of Choice, the choice hypotheses of the cited
-Fock space mathematics ([[def-countable-choice]], [[def-axiom-of-choice]]).
+Axioms of Countable Choice, Dependent Choice and Choice, the choice hypotheses of the cited
+Fock space mathematics ([[def-countable-choice]], [[def-dependent-choice]], [[def-axiom-of-choice]]).
 
 **(b) Radiation one-particle space and sectors.** The **transverse one-particle
 space** of the radiation sector is
@@ -128,9 +133,11 @@ preparation** is a preparation whose state is supported in the one-photon
 sector, and for a unit $f\in\mathfrak h$ the ray of $\iota_{1}(f)$ is the
 one-photon preparation **of wave-packet vector $f$**.
 
-**(c) Modes.** A **mode** of the radiation sector is a nonzero class
-$\varphi\in\mathfrak h$ considered up to phase, equivalently the rank-one
-orthogonal projection onto $\mathbb C\varphi$; a **declared mode family** is a
+**(c) Modes.** A **mode** of the radiation sector is a ray
+$[\varphi]=\{z\varphi:z\in\mathbb C\setminus\{0\}\}$ of a nonzero class
+$\varphi\in\mathfrak h$, equivalently the rank-one orthogonal projection onto
+$\mathbb C\varphi$. Its unit representatives differ only by a complex factor
+of modulus one. A **declared mode family** is a
 finite or countable orthonormal family $(\varphi_{j})$ of $\mathfrak h$
 ([[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]). For
 a unit mode vector $\varphi$ and a dimensionless label $z\in\mathbb C$ the vector

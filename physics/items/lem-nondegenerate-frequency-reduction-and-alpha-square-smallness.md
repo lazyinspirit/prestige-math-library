@@ -73,7 +73,7 @@ where $\omega=\sum_jd\vartheta_j\wedge dI_j$ and $X_H=(-H_\vartheta,H_I)$ is tak
 
 [F2] Calculus: the chain rule gives $\frac{d}{dt}h(b(\nu)+tI)=Dh(b(\nu)+tI)\,I$ and $\frac{d^2}{dt^2}h(b(\nu)+tI)=I^{\mathsf T}D^2h(b(\nu)+tI)\,I$; the second-order Taylor formula with integral remainder is $u(1)-u(0)-u'(0)=\int_0^1(1-t)u''(t)\,dt$ ([[thm-chain-rule-for-total-derivatives]], [[thm-ftc-second-part]], [[def-directional-and-partial-derivatives]], [[def-interval]]).
 
-[F3] Hamiltonian conventions: $X_f=J\nabla f=(-f_\vartheta,f_I)$ and $\omega=\sum_jd\vartheta_j\wedge dI_j$ ([[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]], [[def-cm-phase-domain-and-standard-symplectic-two-form]]); a $C^1$ map $C$ is canonical iff $DC^{\mathsf T}J\,DC=J$, which holds for translations because $DC=I_{2n}$ ([[prop-cm-canonical-map-tests-and-hamiltonian-transport]] clause 1).
+[F3] Hamiltonian conventions: $X_f=J_{\mathrm{act}}\nabla f=(-f_\vartheta,f_I)$ with $J_{\mathrm{act}}:=\begin{pmatrix}0&-I_n\\I_n&0\end{pmatrix}$ in the action-first order $(I,\vartheta)$ and $\omega=\sum_jd\vartheta_j\wedge dI_j$ ([[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]], [[def-cm-phase-domain-and-standard-symplectic-two-form]]); a $C^1$ map $C$ is canonical iff $DC^{\mathsf T}J_{\mathrm{act}}\,DC=J_{\mathrm{act}}$, which holds for translations because $DC=I_{2n}$ ([[prop-cm-canonical-map-tests-and-hamiltonian-transport]] clause 1).
 
 [F4] The conclusions of [[thm-parameter-kam-torus-invariance-and-lagrangianity]]: for the parameter Hamiltonian of its statement, $X_H(\Psi_\infty(0,\vartheta,\nu);\chi_\infty(\nu))=\sum_j\nu_j\partial_{\vartheta_j}\Psi_\infty(0,\vartheta,\nu)$ on the real slice, and the pullback of $\omega$ along the real slice vanishes.
 

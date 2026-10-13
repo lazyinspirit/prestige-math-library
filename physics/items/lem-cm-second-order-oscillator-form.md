@@ -6,11 +6,10 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 0
-deps: [def-interval, def-derivative, def-ck-euclidean-maps-and-diffeomorphisms, thm-sine-and-cosine-derivatives, thm-algebra-of-derivatives, thm-chain-rule, cor-zero-derivative-implies-constant, cor-trigonometric-parity-and-pythagorean-identity]
+deps: [def-interval, def-derivative, thm-sine-and-cosine-derivatives, thm-algebra-of-derivatives, thm-chain-rule, cor-zero-derivative-implies-constant, cor-trigonometric-parity-and-pythagorean-identity]
 dependency_roles:
   def-interval: mathematical-premise
   def-derivative: mathematical-premise
-  def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   thm-sine-and-cosine-derivatives: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
   thm-chain-rule: mathematical-premise
@@ -32,9 +31,14 @@ sources:
 
 Let $\omega>0$, let $I\subseteq\mathbb R$ be an interval with at least two points
 ([[def-interval]]), let $t_0\in I$, and let $v:I\to\mathbb R$ be twice
-differentiable ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with
+differentiable with
 
 $$v''(t)+\omega^2v(t)=0\qquad(t\in I).$$
+
+Here twice differentiable means that $v$ and $v\prime:I\to\mathbb R$
+are differentiable at every point of $I$ in the domain-relative sense of
+[[def-derivative]]; $v\prime\prime=(v\prime)\prime$, with one-sided limits at
+included endpoints.
 
 Then there are reals $A,B$ with
 
@@ -60,7 +64,7 @@ $\mathbb R$ and satisfies $v''+\omega^2v=0$ there.
 
 **Proof technique:** direct.
 
-1.1 Write $\varphi(t):=\omega(t-t_0)$ and define $$w:=v\cos\varphi-\frac{v'}{\omega}\sin\varphi,\qquad z:=v\sin\varphi+\frac{v'}{\omega}\cos\varphi$$ on $I$. Every term is a product of twice differentiable functions, so $w$ and $z$ are differentiable by [L2]. [given, L1, L2, construct]
+1.1 Write $\varphi(t):=\omega(t-t_0)$ and define $$w:=v\cos\varphi-\frac{v'}{\omega}\sin\varphi,\qquad z:=v\sin\varphi+\frac{v'}{\omega}\cos\varphi$$ on $I$. Every factor is differentiable (including $v\prime$, by the twice differentiable hypothesis), so $w$ and $z$ are differentiable by [L2]. [given, L1, L2, construct]
 
 1.2 Differentiating and using $v''=-\omega^2v$: $$w'=v'\cos\varphi-\omega v\sin\varphi-\frac{v''}{\omega}\sin\varphi-v'\cos\varphi=-\frac{\omega^2v+v''}{\omega}\sin\varphi=0,$$ and likewise $z'=v'\sin\varphi+\omega v\cos\varphi+\frac{v''}{\omega}\cos\varphi-v'\sin\varphi=\frac{\omega^2v+v''}{\omega}\cos\varphi=0$ on $I$. [given, L1, L2, algebra]
 

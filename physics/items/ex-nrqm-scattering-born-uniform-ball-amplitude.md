@@ -54,9 +54,7 @@ sources:
         author-hosted course text), Section 15.4 printed pages 213-215: the Born
         approximation and the condition for its validity"
       url: "https://farside.ph.utexas.edu/teaching/qmech/qmech.pdf"
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.4
-        printed pages 271-275 (PDF pages 279-283): scattering off a charge
-        distribution with the Fourier transform of the potential"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.3, printed pages 267-270 (PDF pages 275-278)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 verification:
   precheck: pass

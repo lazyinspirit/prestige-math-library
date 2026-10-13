@@ -58,8 +58,9 @@ physical_scope: "A finite model computation in the spinless massive-particle
 sources:
   references:
     - title: "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 1.1 and
-        Section 3.3.1, printed pages 3-5 and 79-81 (probability densities with
-        power tails and expectation values that may fail to exist)"
+        Section 3.3.1, printed pages 3-5 and 79-81 (Born position density and
+        expectation formulas; the power-tail construction and its moment
+        estimates are supplied locally in this example)"
       url: "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
         Section 2.1 and Section 3.1, printed pages 55-58 and 88-95 (domains of
@@ -71,9 +72,9 @@ verification:
 
 ## Example
 
-Work in the spinless massive-particle model of P5 with $H=L^{2}(\mathbb R^{3};\mathbb C)$ and position operator $Q_{1}$ ([[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]], [[def-nrqm-magnetic-and-detection-position-and-momentum-operators]]). Define the symmetric profile
+Work in the spinless massive-particle model of P5 with $H=L^{2}(\mathbb R^{3};\mathbb C)$ and position operator $Q_{1}$ ([[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]], [[def-nrqm-magnetic-and-detection-position-and-momentum-operators]]). Use the numerical SI spatial coordinates of [[pthm-nrqm-observables-position-and-momentum-outcome-laws]]: $x_1,x_2,x_3,t$ are read in metres and the assigned observable is $(Q_1,\mathrm m)$. Thus the cutoff $|t|\le1$ below means a distance of at most one metre; powers of $t$ in the profile apply to its numerical value in that fixed unit. The unnormalized $g_0$ is dimensionless, $Z$ has length units, and $g$, $\varphi$, $\psi$ carry units $\mathrm m^{-1/2}$, $\mathrm m^{-1}$, $\mathrm m^{-3/2}$ respectively, so the mean is read in metres and the second moment and variance in $\mathrm m^2$. Define the symmetric profile
 $$g_{0}(t):=\begin{cases}1,&|t|\le1,\\[2pt] |t|^{-3/2},&|t|>1,\end{cases}\qquad Z:=\int_{\mathbb R}|g_{0}(t)|^{2}dt,\qquad g:=Z^{-1/2}g_{0},$$
-so that $g\in L^{2}(\mathbb R;\mathbb C)$ has $\|g\|_{2}=1$; fix a unit vector $\varphi\in L^{2}(\mathbb R^{2};\mathbb C)$ and put $\psi(x):=g(x_{1})\varphi(x_{2},x_{3})$. Then $\psi\in H$ is a unit vector, $[\psi]$ is a preparation, and for its position law $\mu^{Q_{1}}_{\psi}$ with density $|g|^{2}$:
+so that $g\in L^{2}(\mathbb R;\mathbb C)$ has $\|g\|_{2}=1$; fix a unit vector $\varphi\in L^{2}(\mathbb R^{2};\mathbb C)$, choose a finite Borel representative as in the cited outcome-law theorem, and put $\psi(x):=g(x_{1})\varphi(x_{2},x_{3})$. Then $\psi\in H$ is a unit vector, $[\psi]$ is a preparation, and for its position law $\mu^{Q_{1}}_{\psi}$ with density $|g|^{2}$:
 
 (i) The mean exists and equals $0$:
 $$\int_{\mathbb R}|t|\,|g(t)|^{2}dt<\infty,\qquad \int_{\mathbb R}t\,|g(t)|^{2}dt=0,$$

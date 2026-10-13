@@ -72,4 +72,4 @@ future-directed unit timelike vector field on $M=\mathbb R^4$
 
 ## Remarks
 
-- **Physical reading.** The conserved family is a static, homogeneous dust congruence in the flat model; the second family is not a solution of the dust system, and the field law of the framework would exclude it as a dust source. Neither statement is an empirical claim about matter.
+- **Physical reading.** The conserved family is a constant dust congruence with time-independent, possibly spatially varying density in the flat model; the second family is not a solution of the dust system, and the field law of the framework would exclude it as a dust source. Neither statement is an empirical claim about matter.

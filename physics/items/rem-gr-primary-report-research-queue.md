@@ -56,14 +56,29 @@ than assumed.
 
 1. *Redshift and clock comparisons.* Comparisons of identical frequency
    standards or clocks at rest at different locations in a gravitational field,
-   including transported-clock comparisons (Will section 2.1.3; Carroll
-   (7.61)-(7.62); Tong section 1.2.5). Model-side content available: the
+   and, as a separate subdestination, comparisons involving clocks transported
+   along different worldlines (Will section 2.1.3; Carroll (7.61)-(7.62);
+   Tong section 1.2.5). Model-side content available: the
    frequency-ratio and redshift readouts of
-   [[def-gr-observation-and-analysis-architecture]] clause (b), realized for
+   [[def-gr-observation-and-analysis-architecture]] clause (b)1, realized for
    static observers by `pthm-gr-schwarzschild-stationary-redshift` and for
-   comoving observers by `pthm-gr-flrw-cosmological-redshift`. What is still
-   missing for a comparison: the apparatus, calibration, line-shape and
-   statistical analysis of an actual report, as in (i).
+   comoving observers by `pthm-gr-flrw-cosmological-redshift`. These restricted
+   theorems do not supply a prediction for transported clocks. Such a comparison
+   must specify the transported and reference worldline segments of clause (a)
+   and the events at which readings are compared. For clocks that separate and
+   reunite, the comparison quantity is the difference, in seconds, between
+   their proper-time increments over the two segments with common initial and
+   final events, under the adopted ideal-clock rule. That accumulated-time
+   comparison needs its own readout definition and trajectory-specific
+   calculation; it is not a frequency-ratio readout of clause (b)1. A comparison
+   by received signals instead uses clause (b)1 with the actual endpoint
+   four-velocities and connecting null rays, together with a declared
+   signal-transfer convention. Predictions for these transported-clock
+   configurations must retain both metric and velocity dependence, including
+   velocity-dependent clock rates; the two restricted redshift formulas cannot
+   be substituted for them. These predictions remain future obligations.
+   Every comparison also needs the apparatus, calibration, relevant line-shape
+   modelling and statistical analysis of an actual report, as in (i).
 
 2. *Light-propagation delay.* Measurements of the variation of round-trip
    travel times of signals passing near a massive body, analysed differentially

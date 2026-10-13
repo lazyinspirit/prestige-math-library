@@ -1,7 +1,7 @@
 ---
 id: pthm-cm06-inertial-forces
 kind: physics-theorem
-title: "The equation of motion in a moving chart: inertial terms, the inertial forces, and the exact criterion for a chart to be inertial"
+title: "The equation of motion in a moving chart: inertial terms, inertial forces, and when it restricts to an inertial chart"
 status: draft
 origin: session
 domain: physics
@@ -38,7 +38,7 @@ sources:
       url: "https://www.davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
     - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 4.6, Eqs. (4.88)-(4.92), chapter pages 21-23 (PDF pages 76-78): the velocity and acceleration transfer formulas and the four inertial-force terms, recorded as mathematical terms rather than physical forces"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
-    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 2.2, printed pages 33-36 (PDF pages 36-39): frames as adapted coordinate maps, and the distinction between frame changes and forces"
+    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 2.2, printed pages 33-35 (PDF pages 36-38), Eqs. (2.19)-(2.24): fixed and rotating bases and the centrifugal, Coriolis and angular-acceleration terms; the affine spacetime chart used here is specified by the local frame definition"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
 verification:
   precheck: pass
@@ -75,18 +75,20 @@ Then:
    Then clause 1 reads $m_{i}\ddot y_{i}=R^{\mathsf T}F_{i}+F_{i}^{\mathrm{in}}$.
    The inertial forces are determined by the chart's motion and the label's
    mass; they are **not** contributions of the model's force map $F$, and
-   the moving chart is not an inertial frame of the model.
+   a general moving chart is not an inertial frame of the model; clause 3
+   characterizes the case in which it is the restriction of another inertial
+   chart.
 
 3. **criterion for an inertial chart.** The inertial terms vanish
    identically, $\tau(t,y,\dot y)=0$ for every $(t,y,\dot y)\in I\times\mathbb R^{3}\times\mathbb R^{3}$,
    if and only if $R$ is constant on $I$ and $c$ is affine on $I$. In that
-   case the moving chart $(t,y)$ is the adapted coordinate chart of an
-   inertial frame $F_{*}$ of the model related to $F$ by a Galilean
+   case the moving chart $(t,y)$ on $I$ is the restriction of the adapted
+   coordinate chart of an inertial frame $F_{*}$ of the model related to $F$ by a Galilean
    transformation with vanishing time shift, and clause 1 reduces for each
    label to $m_{i}\ddot y_{i}=R^{\mathsf T}F_{i}(t,x(t),w(t))$, which is the
    transformed equation of motion of clause (vi) of
    [[post-cm02-force-superposition]] read in $F_{*}$. Conversely, if the
-   moving chart is the adapted chart of an inertial frame related to $F$ by a
+   moving chart on $I$ is the restriction of the adapted chart of an inertial frame related to $F$ by a
    Galilean transformation with vanishing time shift, then $R$ is constant
    and $c$ is affine and $\tau\equiv0$.
 
@@ -106,9 +108,9 @@ force field, and no measured value is asserted.
 
 [L3] The motion and the force branch ([[def-cm02-newtonian-flow]] clause (c), [[post-cm02-force-superposition]] clauses (iii),(iv)): $m_{i}x_{i}''(t)=F_{i}(t,x(t),w(t))$ on $J$, with $F$ of the standing regularity and $Q$ open; the coordinate curves $x_{i}$ are $C^{2}$.
 
-[L4] Frame changes ([[pthm-cm01-galilean-kinematics]] clause 1, [[lem-cm-adapted-charts-and-galilean-transformations]], [[post-cm01-frames]]): two inertial frames are related by $t'=t+b$, $x'=Qx+vt+a_{0}$ with $b\in\mathbb R$, $a_{0},v\in\mathbb R^{3}$, $Q\in SO(3)$; and the transformation class is realized by pairs of inertial frames of the model.
+[L4] Frame changes ([[pthm-cm01-galilean-kinematics]] clause 1, [[lem-cm-adapted-charts-and-galilean-transformations]], [[post-cm01-frames]]): two inertial frames are related by $t'=t+b$, $x'=Qx+vt+a_{0}$ with $b\in\mathbb R$, $a_{0},v\in\mathbb R^{3}$, $Q\in SO(3)$. An inertial frame is given by an event origin, a time direction of time component 1, and a fixed positively oriented orthonormal spatial basis.
 
-[L5] The force-covariance law ([[post-cm02-force-superposition]] clause (vi)): if $\eta(t')=Rx(t'-b)+v(t'-b)+a_{0}$ describes the same worldlines in a second inertial frame, then $m_{i}\eta_{i}''(t')=\bigl(RF(t'-b,x(t'-b),w(t'-b))\bigr)_{i}$ along the motion, and the transferred force map is $F_{*}(t',y,u)=RF(t'-b,R^{\mathsf T}(y-v(t'-b)-a_{0}),R^{\mathsf T}(u-v))$.
+[L5] The force-covariance law ([[post-cm02-force-superposition]] clause (vi)): for a spatial rotation $Q\in SO(3)$, boost $\upsilon\in\mathbb R^3$, translation $a\in\mathbb R^3$ and time shift $b$, define $Q_N=\operatorname{diag}(Q,\ldots,Q)$ and repeated tuples $\bar\upsilon=(\upsilon,\ldots,\upsilon)$, $\bar a=(a,\ldots,a)$. The tuple describing the same worldlines is $\eta(t')=Q_Nx(t'-b)+\bar\upsilon(t'-b)+\bar a$, with $m_i\eta_i''(t')=QF_i(t'-b,x(t'-b),w(t'-b))$. On the transferred domain, where the arguments of $F$ lie in its original domain, the force map is $F_*(t',y,u)=Q_NF(t'-b,Q_N^{\mathsf T}(y-\bar\upsilon(t'-b)-\bar a),Q_N^{\mathsf T}(u-\bar\upsilon))$.
 
 [L6] Calculus of constant and affine maps: a differentiable map on an interval with identically vanishing derivative is constant; a twice differentiable map with identically vanishing second derivative is affine ([[cor-zero-derivative-implies-constant]], [[thm-newton-leibniz-with-interior-derivative]], [[def-vector-valued-derivative-and-integral]], [[def-interval]], [[thm-algebra-of-derivatives]]).
 
@@ -118,15 +120,15 @@ force field, and no measured value is asserted.
 
 **Proof technique:** direct; apply the rotating-frame acceleration identity to each label of the motion and read off the inertial terms, then characterize the vanishing of those terms.
 
-1.1 Clauses 1 and 2: fix $i$ and apply [L2] to the $C^{2}$ curves $R$, $c$ and $y_{i}$ with $x_{i}=Ry_{i}+c$: $$R^{\mathsf T}x_{i}''=\ddot y_{i}+2\omega\times\dot y_{i}+\omega'\times y_{i}+\omega\times(\omega\times y_{i})+R^{\mathsf T}c'' .$$ Multiplying by $m_{i}$ and substituting $m_{i}x_{i}''=F_{i}$ from [L3], $$m_{i}\ddot y_{i}=R^{\mathsf T}F_{i}-m_{i}\bigl(2\omega\times\dot y_{i}+\omega'\times y_{i}+\omega\times(\omega\times y_{i})+R^{\mathsf T}c''\bigr)=R^{\mathsf T}F_{i}+m_{i}\tau(t,y_{i},\dot y_{i}),$$ the last equality being the definition of $\tau$ in [L1]; this is clause 1. Writing $F_{i}^{\mathrm{in}}:=m_{i}\tau$ and multiplying the four components of $\tau$ by $m_{i}$ gives the Coriolis, Euler, centrifugal and translational terms of clause 2, and by [L1] and [L2] the vector $\tau$ is built from the chart data and the label mass, while the force map enters only through $R^{\mathsf T}F_{i}$; this is clause 2. [L1, L2, L3, given, algebra]
+1.1 Clauses 1 and 2: fix $i$ and apply [L2] to the $C^{2}$ curves $R$, $c$ and $y_{i}$ with $x_{i}=Ry_{i}+c$: $$R^{\mathsf T}x_{i}''=\ddot y_{i}+2\omega\times\dot y_{i}+\omega'\times y_{i}+\omega\times(\omega\times y_{i})+R^{\mathsf T}c'' .$$ Multiplying by $m_{i}$ and substituting $m_{i}x_{i}''=F_{i}$ from [L3], $$m_{i}\ddot y_{i}=R^{\mathsf T}F_{i}-m_{i}\bigl(2\omega\times\dot y_{i}+\omega'\times y_{i}+\omega\times(\omega\times y_{i})+R^{\mathsf T}c''\bigr)=R^{\mathsf T}F_{i}+m_{i}\tau(t,y_{i},\dot y_{i}),$$ the last equality being the definition of $\tau$ in [L1]; this is clause 1. Writing $F_{i}^{\mathrm{in}}:=m_{i}\tau$ and multiplying the four components of $\tau$ by $m_{i}$ gives the Coriolis, Euler, centrifugal and translational terms of clause 2, and by [L1] and [L2] the field $\tau(t,y,\dot y)$ is built from the chart data and its position and velocity arguments, and the label mass enters through $F_i^{\mathrm{in}}=m_i\tau(t,y_i,\dot y_i)$; the force map enters the transformed equation through $R^{\mathsf T}F_{i}$; this is clause 2. [L1, L2, L3, given, algebra]
 
 1.2 Clause 3, forward: assume $\tau(t,y,\dot y)=0$ for all $(t,y,\dot y)$. Fix $t\in I$. First set $y=0$ and $\dot y=0$; then $\tau(t,0,0)=-R(t)^{\mathsf T}c''(t)=0$, so $c''(t)=0$ because $R(t)$ is invertible by [L7]. Now set $y=0$ and $\dot y=e_j$ for each standard basis vector $e_j$; since $c''(t)=0$, the identity $\tau(t,0,e_j)=0$ reduces to $-2\omega(t)\times e_j=0$. Thus $\omega(t)\times e_j=0$ for $j=1,2,3$, which by the coordinate formula of the cross product implies $\omega(t)=0$. As $t$ was arbitrary, $\omega\equiv0$ and $c''\equiv0$ on $I$. [L1, L7, algebra]
 
 2.1 With $\omega\equiv0$ one has $\Omega=[\omega]_{\times}=0$ by [L7], so $R'=R\Omega=0$ and $R$ is constant on $I$ by [L6]; and $c''\equiv0$ with the interval $I$ nondegenerate gives $c$ affine on $I$ by [L6], $c(t)=c(t_{0})+c'(t_{0})(t-t_{0})$ for a fixed $t_{0}\in I$. [step 1.2, L6, L7]
 
-2.2 Clause 3, inertial-frame identification: assume $R$ is constant and $c(t)=a_{0}+vt$ is affine. Then $y(t)=R^{\mathsf T}(x(t)-a_{0}-vt)=Qx(t)+v_{*}t+a_{0*}$ with $Q:=R^{\mathsf T}\in SO(3)$, $v_{*}:=-R^{\mathsf T}v$ and $a_{0*}:=-R^{\mathsf T}a_{0}$ constants, so by [L4] there is an inertial frame $F_{*}$ of the model whose adapted coordinates are $(t,y)$. Along the motion, $\eta:=y_{i}$ is the coordinate curve of label $i$ in $F_{*}$, and [L5] gives $m_{i}\eta_{i}''=R^{\mathsf T}F_{i}(t,x(t),w(t))$ read at the transferred data; since $R$ is constant, $\omega\equiv0$ by [L7] and $c''\equiv0$, so $\tau\equiv0$ and clause 1 reduces to exactly this identity. [L4, L5, L6, L7, step 1.1]
+2.2 Clause 3, inertial-frame identification: assume $R$ is constant and $c(t)=a_{0}+vt$ on $I$. For the original frame $F=(o,u,(e_j))$, set $o_*:=o+\sum_j(a_0)_je_j$, $u_*:=u+\sum_jv_je_j$ and $e_{*k}:=\sum_je_jR_{jk}$. The time component of $u_*$ is 1 and the fixed spatial basis $(e_{*k})$ is positively oriented and orthonormal because $R\in SO(3)$; thus [L4] defines an inertial frame $F_*$. Its adapted coordinates satisfy $t_*=t$ and $x=Ry+a_0+vt$ for all times, so the moving chart on $I$ is their restriction. Equivalently $y=Qx+v_*t+a_{0*}$ with $Q=R^{\mathsf T}$, $v_*=-R^{\mathsf T}v$ and $a_{0*}=-R^{\mathsf T}a_0$. Apply [L5] to the tuple $\eta=(y_1,\ldots,y_N)$ on $J$ with $b=0$: $m_i\eta_i''=R^{\mathsf T}F_i(t,x(t),w(t))$. Since $R$ is constant, $\omega\equiv0$ and $c''\equiv0$, hence $\tau\equiv0$ and clause 1 reduces to this covariance identity. [L4, L5, L6, L7, step 1.1, construct]
 
-3.1 Clause 3, converse: if $(t,y)$ are the adapted coordinates of an inertial frame related to $F$ by a Galilean transformation with vanishing time shift, then $y=Qx+vt+a_{0}$ with constant $Q\in SO(3)$, $v,a_{0}$ ([[pthm-cm01-galilean-kinematics]] clause 1), so $x=Q^{\mathsf T}y-Q^{\mathsf T}vt-Q^{\mathsf T}a_{0}$, that is, the chart has $R=Q^{\mathsf T}$ constant and $c(t)=-Q^{\mathsf T}vt-Q^{\mathsf T}a_{0}$ affine; by steps 1.2, 2.1 and 2.2 the inertial terms vanish. [L4, step 1.2, step 2.1, step 2.2, algebra]
+3.1 Clause 3, converse: if the moving chart on $I$ is the restriction of the adapted coordinates of an inertial frame related to $F$ by a Galilean transformation with vanishing time shift, then $y=Qx+vt+a_{0}$ on $I$ with constant $Q\in SO(3)$, $v,a_{0}$ ([[pthm-cm01-galilean-kinematics]] clause 1), so $x=Q^{\mathsf T}y-Q^{\mathsf T}vt-Q^{\mathsf T}a_{0}$; comparison with $x=R(t)y+c(t)$ for all $y$ shows that $R=Q^{\mathsf T}$ is constant and $c(t)=-Q^{\mathsf T}vt-Q^{\mathsf T}a_{0}$ is affine on $I$. Step 2.2 then gives $\tau\equiv0$. [L4, step 2.2, algebra]
 
 4.1 Clauses 1-3: clauses 1 and 2 are step 1.1, and clause 3 is the equivalence assembled from steps 1.2, 2.1, 2.2 and 3.1. [step 1.1, step 1.2, step 2.1, step 2.2, step 3.1] ∎
 

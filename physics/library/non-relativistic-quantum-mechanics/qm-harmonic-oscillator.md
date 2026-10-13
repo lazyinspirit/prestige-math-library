@@ -86,8 +86,8 @@ satisfying $\langle x_z,y_z\rangle=-i\hbar/2$.
 carries $[\Psi_z]$ to $[\Psi_{ze^{-i\omega t}}]$, that the preparation means
 perform the classical harmonic motion $x(t)=x_0\cos\omega t+\frac{p_0}{m\omega}
 \sin\omega t$, $p(t)=p_0\cos\omega t-m\omega x_0\sin\omega t$ with constant
-spreads, and that the coherent energy law is the Poisson law of parameter
-$|z|^{2}$ shifted by $\hbar\omega/2$ with spread $\hbar\omega|z|$.
+spreads, and that the coherent energy law is the affine image of the Poisson law of parameter
+$|z|^{2}$ under $n\mapsto\hbar\omega(n+\frac12)$ with spread $\hbar\omega|z|$.
 [[rem-nrqm-oscillator-scope-and-empirical-status]] closes the page with the
 adopted-versus-proved distinction, the empirical status of the model and the
 list of deferred extensions.

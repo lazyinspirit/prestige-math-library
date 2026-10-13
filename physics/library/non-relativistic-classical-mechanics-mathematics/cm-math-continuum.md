@@ -47,14 +47,14 @@ requires:
 
 The continuum layer of the non-relativistic classical mechanics mathematics
 collection, all of it mathematics: the Euclidean spatial calculus and continuum
-motions; the transport theorem for a $C^1$ family of diffeomorphisms; the
+motions; the transport theorem for the stated $C^2$ family of diffeomorphisms; the
 localization of mass and momentum balance and the control-volume identities;
 the Cauchy-tetrahedron representation of a balanced traction field by a stress
 matrix and the symmetry of that matrix under couple-free angular balance;
 explicit linear elastic and fluid constitutive models with exact plane-wave,
 channel-flow, Bernoulli and Kelvin-circulation results; the two characteristic
 scalar conservation laws of Burgers' equation with weak and entropy solutions;
-the complete smooth fixed-end string solved by its sine series; and the proved
+the classical $C^2$ fixed-end string for $C^5$/$C^4$ data solved by its sine series; and the proved
 finite-time continuum limit of a cyclic spring chain. Every item carries
 `domain: mathematics` and depends only on mathematical suppliers; nothing here
 asserts that any continuum model describes a physical body.
@@ -66,7 +66,8 @@ $C^2$ family of diffeomorphisms with positive Jacobian on the material region.
 [[lem-cm-determinant-derivative-along-a-matrix-curve]] proves the Jacobi
 formula $(\det A)'=\det A\operatorname{tr}(A^{-1}A')$, and
 [[thm-cm-transport-theorem]] combines it with the change-of-variables theorem to
-transport integrals over moving regions. [[lem-cm-localization-of-vanishing-integrals]]
+transport integrals over moving regions for the stated $C^2$ family of
+diffeomorphisms. [[lem-cm-localization-of-vanishing-integrals]]
 records the localization step used by every balance statement.
 
 The balance layer is [[thm-cm-local-mass-balance]],

@@ -1,7 +1,7 @@
 ---
 id: def-cm13-canonical-form
 kind: definition
-title: "Canonical coordinates and the canonical form of the two-form for a potential presentation: the coordinate expression $\\omega=\\sum d\\theta^a\\wedge d\\theta^{n+a}$ and the model's own momentum charts"
+title: "Canonical coordinates and the canonical form of the two-form for a potential presentation: the coordinate expression $\\omega=\\sum_{a=1}^{m} d\\theta^a\\wedge d\\theta^{m+a}$ with $m$ the chart's half-dimension, and the model's own momentum charts"
 status: draft
 origin: session
 domain: physics
@@ -55,14 +55,14 @@ $W_{0}\subseteq\Omega\times\mathbb R^{r}$) be nonempty open, and let
 $$\theta=(\theta^{1},\dots,\theta^{2m}):W_{0}\longrightarrow V\subseteq\mathbb R^{2m}$$
 
 be a $C^{1}$ chart of $W_{0}$ onto an open set $V$ ([[def-metric-topology]]),
-with $m$ the half-dimension of $W_{0}$. The coordinates $\theta$ are
+with $m$ the half-dimension of $W_{0}$. Write $\sigma=\omega|_{W_0}$ and $\alpha=\lambda|_{W_0}$ in the Cartesian case, and $\sigma=\omega_X|_{W_0}$ and $\alpha=\lambda_X|_{W_0}$ in the generalized-coordinate case. Each coordinate $\theta^a$ has a declared dimension $\eta_a$ and unit; its paired coordinate $\theta^{m+a}$ has dimension $\mu\ell^2\tau^{-1}\eta_a^{-1}$ and a declared compatible unit, so every summand below has action dimension. Coordinate formulas use the numerical representatives in these fixed units. The coordinates $\theta$ are
 **canonical coordinates for the presentation's two-form** on $W_{0}$ when the
 two-form takes the **canonical form**
 
-$$\omega=\sum_{a=1}^{m}d\theta^{a}\wedge d\theta^{m+a}$$
+$$\sigma=\sum_{a=1}^{m}d\theta^{a}\wedge d\theta^{m+a}$$
 
 pointwise on $W_{0}$, using the finite-coordinate form and pullback conventions of [[def-cm-finite-regularity-canonical-calculus]]; equivalently, when the
-pullback identity $\theta^{*}\omega_{V}^{\mathrm{st}}=\omega|_{W_{0}}$ holds
+pullback identity $\theta^{*}\omega_{V}^{\mathrm{st}}=\sigma$ holds
 for the standard two-form $\omega_{V}^{\mathrm{st}}$ of $V$
 ([[def-cm-phase-domain-and-standard-symplectic-two-form]],
 [[def-cm-finite-regularity-canonical-calculus]]), equivalently when
@@ -84,10 +84,10 @@ $\omega_{X}=\sum_{a}dq^{a}\wedge dP_{a}$, and when the map is a genuine chart
 ($r=3N$) the chart transition is a change of canonical coordinates on
 overlaps.
 
-**(c) Canonical one-form up to gauge at classical differentiability.** For a $C^2$ canonical chart $\theta$, the canonical one-form $\lambda$ of
+**(c) Canonical one-form up to gauge at classical differentiability.** For a $C^2$ canonical chart $\theta$, the source canonical one-form $\alpha$ specified in clause (a) from
 [[def-cm13-two-form]] is said to be **in canonical form up to gauge** in the
 canonical coordinates $\theta$ when the difference
-$\lambda-\sum_{a}\theta^{m+a}d\theta^{a}$ is a closed one-form on $W_{0}$;
+$\alpha-\sum_{a}\theta^{m+a}d\theta^{a}$ is a closed one-form on $W_{0}$;
 exactness of that difference is not required. For the presentation's own
 charts the difference of the two canonical one-forms is closed by clause 3 of
 [[pthm-cm13-two-form-is-symplectic]]. These charts are $C^2$ or smoother. For a merely $C^1$ chart clause (a) retains its full pointwise meaning, but the coefficients of the pulled-back one-form may be only continuous, so this clause does not apply the classical exterior derivative to them.

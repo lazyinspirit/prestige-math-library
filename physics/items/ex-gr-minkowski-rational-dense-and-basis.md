@@ -12,8 +12,10 @@ provenance:
 generation:
   role: example
 proof_strategy: direct
-deps: [lem-gr-development-quotient-dense-set, lem-gr-development-quotient-second-countable, ex-gr-minkowski-maximal-development, thm-gr-local-geodesics-and-exponential-map, def-second-countable-space, def-topology-basis-subbasis, lem-q-and-irrationals-dense-r, def-countable-choice, def-countable]
+deps: [lem-gr-constant-component-chart-flatness, prop-coordinate-geodesic-equation, lem-gr-development-quotient-dense-set, lem-gr-development-quotient-second-countable, ex-gr-minkowski-maximal-development, thm-gr-local-geodesics-and-exponential-map, def-second-countable-space, def-topology-basis-subbasis, lem-q-and-irrationals-dense-r, def-countable-choice, def-countable]
 dependency_roles:
+  lem-gr-constant-component-chart-flatness: mathematical-premise
+  prop-coordinate-geodesic-equation: mathematical-premise
   lem-gr-development-quotient-dense-set: mathematical-premise
   lem-gr-development-quotient-second-countable: mathematical-premise
   ex-gr-minkowski-maximal-development: mathematical-premise
@@ -30,19 +32,19 @@ sources:
     - title: "J. K. Hunter, Notes on Partial Differential Equations (UC Davis lecture notes): the standard countable basis of R^n by rational balls, background for the verification"
       url: "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf"
 verification:
-  precheck: n/a
+  precheck: pass
 ---
 
 ## Example
 
 In the flat vacuum development $M=(\mathbb R^{1,3},\eta)$ of
 [[ex-gr-minkowski-maximal-development]] with initial embedding
-$j(x)=(0,x)$, take $S_0:=\mathbb Q^3\subseteq j(\Sigma)$ and the standard
+$j(x)=(0,x)$, take $S_0:=j(\mathbb Q^3)=\{0\}\times\mathbb Q^3\subseteq j(\Sigma)$ and the standard
 coordinate basis at each point. Then the recursion of
 [[lem-gr-development-quotient-dense-set]] produces the countable set
 $$D=\mathbb Q\times\mathbb Q^3=\mathbb Q^4,$$
 which is dense in $\mathbb R^{1,3}$ and meets the initial surface in the
-dense set $\mathbb Q^3\times\{0\}$; and the associated exponential family
+dense set $\{0\}\times\mathbb Q^3$; and the associated exponential family
 $$\mathcal B=\Bigl\{d+B(0;r):\ d\in\mathbb Q^4,\ r\in\mathbb Q_{>0}\Bigr\}$$
 (the Euclidean balls with rational centre and rational radius, because
 $\exp_d$ in Minkowski spacetime is $v\mapsto d+v$ in the standard
@@ -51,16 +53,16 @@ $\mathbb R^4$, so $M$ is second countable.
 
 ## Facts & Assumptions
 
-**Given:** the flat vacuum development $M=(\mathbb R^{1,3},\eta)$ of [[ex-gr-minkowski-maximal-development]] with initial embedding $j(x)=(0,x)$; the set $S_0:=\mathbb Q^3\subseteq j(\Sigma)$; and the standard coordinate basis at every point.
+**Given:** the flat vacuum development $M=(\mathbb R^{1,3},\eta)$ of [[ex-gr-minkowski-maximal-development]] with initial embedding $j(x)=(0,x)$; the set $S_0:=j(\mathbb Q^3)=\{0\}\times\mathbb Q^3\subseteq j(\Sigma)$; and the standard coordinate basis at every point.
 
 [L1] The dense-set recursion of [[lem-gr-development-quotient-dense-set]] with initial set $j(\Sigma)$ and datum $D_0=S_0$ produces the countable set $D$ of that lemma.
 
-[L2] The exponential family of rational balls is a countable basis of $Q$ ([[lem-gr-development-quotient-second-countable]]); the exponential map of Minkowski spacetime in standard coordinates is $v\mapsto d+v$ along straight geodesics ([[thm-gr-local-geodesics-and-exponential-map]] clause (a)).
+[L2] The abstract exponential-ball basis is [[lem-gr-development-quotient-second-countable]]. In the global standard chart of Minkowski spacetime the constant metric components give $\Gamma^a{}_{bc}=0$ by [[lem-gr-constant-component-chart-flatness]] clause (a). Thus [[prop-coordinate-geodesic-equation]] reduces to $\ddot x^a=0$, and for every $d,v\in\mathbb R^4$ the curve $s\mapsto d+sv$ is a geodesic defined for all $s\in\mathbb R$ with initial data $(d,v)$. By uniqueness and maximality in [[thm-gr-local-geodesics-and-exponential-map]] clause (a), it is the maximal geodesic for those data. Clause (d) of that theorem then gives $\mathcal E_d=T_dM$ and $\exp_d(v)=d+v$, a global diffeomorphism, so every rational translated tangent ball is admissible.
 
 ## Verification
-1.1 (One exponential step produces the rational points with nonzero time coordinate.) In the standard coordinates the exponential map is $\exp_d(v)=d+v$ ([[thm-gr-local-geodesics-and-exponential-map]]: geodesics are straight lines with affine parameter in flat coordinates). For $d=(0,q)\in\mathbb Q^3\times\{0\}=D_0$ and a rational vector $v=(a,w)\in\mathbb Q^4$ the point $d+v=(a,q+w)$ lies in $D_1$ whenever $v$ is timelike, i.e. $a^2>|w|^2$. Given $(a,b)\in\mathbb Q^4$ with $a\ne0$, choose $q:=b$ and $w:=0$; then $v=(a,0)$ satisfies $\eta(v,v)=-a^2<0$, so it is timelike, and $(a,b)\in D_1$. Every exponential step from a rational point using a rational vector remains rational, so induction gives $D\subseteq\mathbb Q^4$. Hence $\{r\in\mathbb Q^4:\ r^0\ne0\}\subseteq D_1$, and $D_0$ supplies the points with $r^0=0$, so $\mathbb Q^4\subseteq D$. [given, L1, L2, algebra]
+1.1 (One exponential step produces the rational points with nonzero time coordinate.) By the flat geodesic calculation in [L2], the exponential map is $\exp_d(v)=d+v$ for every tangent vector. For $d=(0,q)\in\{0\}\times\mathbb Q^3=D_0$ and a rational vector $v=(a,w)\in\mathbb Q^4$ the point $d+v=(a,q+w)$ lies in $D_1$ whenever $v$ is timelike, i.e. $a^2>|w|^2$. Given $(a,b)\in\mathbb Q^4$ with $a\ne0$, choose $q:=b$ and $w:=0$; then $v=(a,0)$ satisfies $\eta(v,v)=-a^2<0$, so it is timelike, and $(a,b)\in D_1$. Every exponential step from a rational point using a rational vector remains rational, so induction gives $D\subseteq\mathbb Q^4$. Hence $\{r\in\mathbb Q^4:\ r^0\ne0\}\subseteq D_1$, and $D_0$ supplies the points with $r^0=0$, so $\mathbb Q^4\subseteq D$. [given, L1, L2, algebra]
 
-2.1 (Countability and density.) $D$ is countable by the construction ([[lem-gr-development-quotient-dense-set]], [[def-countable]]) and contains $\mathbb Q^4$, which is dense in $\mathbb R^{1,3}$ by the density of $\mathbb Q$ in $\mathbb R$ coordinatewise ([[lem-q-and-irrationals-dense-r]]); hence $D$ is dense and meets $j(\Sigma)=\{t=0\}$ in $\mathbb Q^3\times\{0\}$. [step 1.1, L1, algebra]
+2.1 (Countability and density.) $D$ is countable by the construction ([[lem-gr-development-quotient-dense-set]], [[def-countable]]) and contains $\mathbb Q^4$, which is dense in $\mathbb R^{1,3}$ by the density of $\mathbb Q$ in $\mathbb R$ coordinatewise ([[lem-q-and-irrationals-dense-r]]); hence $D$ is dense and meets $j(\Sigma)=\{t=0\}$ in $\{0\}\times\mathbb Q^3$. [step 1.1, L1, algebra]
 
 3.1 (The basis.) The repaired abstract family uses translated rational tangent balls: here $\exp_d(B(a,r))=B(d+a,r)$. Since $d,a$ are rational, its centers are rational; conversely every rational center is obtained by taking $a=0$ and that center as $d$. Thus it is exactly the Euclidean rational-center family declared above.  For $d\in D$ and rational $r>0$ the set $\exp_d(B(0;r))=d+B(0;r)$ is the open Euclidean ball of radius $r$ around $d$ centred at a rational point with rational radius; the family of all such balls is a countable basis of the Euclidean topology of $\mathbb R^4$ ([[def-topology-basis-subbasis]], [[def-second-countable-space]]). In particular $\mathcal B$ as defined in the statement is a countable basis of the topology of $M$, so $M$ is second countable, in accordance with [[lem-gr-development-quotient-second-countable]]. [step 2.1, L2, algebra] ∎
 

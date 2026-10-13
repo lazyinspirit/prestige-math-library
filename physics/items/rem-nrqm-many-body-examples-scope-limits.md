@@ -31,7 +31,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 physical_scope: "The recorded scope of the companion examples and thought
-  experiment of the many-body and equilibrium pair: exact finite model
+  experiment of the many-body and equilibrium pair: exact finite-mode or countable-mode model
   computations of canonical weights, occupations and readouts; the limits of
   their interpretation with respect to physical systems, empirical data and
   thermodynamic limits."
@@ -55,7 +55,7 @@ verification:
 ## Recorded scope
 
 The companion items contain three conditional examples and one hypothetical
-scenario in declared finite models:
+scenario in declared finite-mode or countable-mode models:
 
 - [[ex-nrqm-many-body-two-site-bond-thermal-ensemble]] solves the one-particle
   two-site bond model exactly: the tunnelling-split eigenbasis, the canonical
@@ -66,7 +66,7 @@ scenario in declared finite models:
   ground energies checked against the page's diagonalisation theorem;
 - [[ex-nrqm-many-body-gas-statistics-dilute-limits]] verifies the exact Bose
   and Fermi dilute identities, evaluated in exact rational arithmetic at
-  $q=1/10$, and contrasts the finite product partition of geometrically
+  $q=1/10$, and contrasts the finite product partition of linearly
   spaced mode energies with the divergent product of constant energies;
 - [[texp-nrqm-many-body-two-site-no-thermalization]] shows, in one declared
   hypothetical preparation of the bond model, that the unitary evolution
@@ -78,8 +78,8 @@ scenario in declared finite models:
 
 None of these items contains measured data, a measured uncertainty, a
 calibration, a sampling model or a detector model; all numbers are exact
-model values in the declared finite-dimensional idealizations, and the
-assignment of a physical system to any of these models is a tested
+model values in the declared finite-mode or countable-mode idealizations, and
+the assignment of a physical system to any of these models is a tested
 identification under P7
 ([[post-nrqm-framework-preparation-and-apparatus]]). In particular:
 
@@ -93,16 +93,18 @@ identification under P7
   unitary flow; it is not evidence for or against thermalisation in nature,
   and the canonical ensemble remains the adopted assumption of
   [[post-nrqm-many-body-canonical-equilibrium-ensemble]];
-- the entropy conservation used in the thought experiment is the exact
-  closed-system statement of
-  [[pthm-nrqm-many-body-unitary-evolution-preserves-entropy]]; it neither
-  forbids nor asserts any open-system or environment-induced behaviour.
+- the thought experiment uses the no-unitary-production conclusion (c) of
+  [[pthm-nrqm-many-body-unitary-evolution-preserves-entropy]]. The separate
+  entropy-conservation conclusion (a) of that theorem concerns the same
+  finite closed-system class but is not a premise of the readout calculation;
+  neither conclusion forbids or asserts open-system or environment-induced
+  behaviour.
 
 ## Source limits
 
 The cited treatments supply the model formulas used here at the recorded
-locators; they do not supply measured values for these particular finite
-models, and no source is used as an empirical premise on this page. Where a
+locators; they do not supply measured values for these particular finite-mode
+or countable-mode models, and no source is used as an empirical premise on this page. Where a
 comparison with data would be attempted, the preparation, isolation,
 detection and sampling models plus the uncertainty of every assigned
 parameter would have to be declared and carried through, as P7 requires.

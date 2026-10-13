@@ -81,23 +81,19 @@ so $t\mapsto H_{\mathrm d}(t)$ is norm-continuous on $I$
 declares the driven model of
 [[def-nrqm-driven-dynamics-framework-driven-model]] clause (b)(i) in its
 **bounded norm-continuous class**, with propagator $U(t,s)$ the unique
-norm-continuous solution of $i\hbar\partial_{t}U(t,s)=H_{\mathrm
-d}(t)U(t,s)$, $U(s,s)=I$, constructed by the Dyson series of
-[[thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness]]; state and
+norm-continuous solution of the integral equation
+$$U(t,s)=I-\frac{i}{\hbar}\int_s^t H_{\mathrm d}(r)U(r,s)\,dr,\qquad U(s,s)=I,$$
+constructed by the Dyson series of
+[[thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness]]. If $t_0<t_1$,
+it satisfies $i\hbar\partial_tU(t,s)=H_{\mathrm d}(t)U(t,s)$ in operator
+norm, with one-sided derivatives at the endpoints. If $t_0=t_1$, the
+evolution declaration is only $U(t_0,t_0)=I$ and asserts no time derivative; state and
 outcome readings are those of clauses (d)-(e) of the driven model, with level
 populations read through the eigenbasis of $H_{a}$.
 
-**(d) Long-wavelength regime.** The model declares a **characteristic matter
-length** $L>0$ (metres) of the finite-level factor, and adopts the
-**long-wavelength (electric-dipole) regime** for a mode or field wavevector
-scale $k$: the spatial phase variation of the field across the matter is
-neglected, expressed as the model assumption $|k|L\ll1$, and under this
-assumption the interaction of the matter with the field is the dipole form
-$-\sum_{j}E_{\mathrm{ext},j}(t)D^{W}_{j}$ displayed in clause (c). The regime
-is a model assumption of this pair: it is not derived from a Maxwell field, its
-criterion is qualitative in this model (no error bound on the neglected phase
-variation is claimed), and its identifications of $L$ and of the field with
-laboratory data are tested identifications with uncertainty under P7.
+**(d) Long-wavelength regime.** Declare a **characteristic matter length** $L>0$ (metres), a reference point $x_0\in\mathbb R^3$ (metres), a **wavevector** $k\in\mathbb R^3$ (inverse metres), and a dimensionless tolerance $0<\delta<1$ as model data. A prescribed spatial phase template for the field of clause (b) is the continuous map
+$$\mathbf E^{\mathrm{sp}}:\mathbb R^3\times I\to\mathbb R^3,\qquad \mathbf E^{\mathrm{sp}}(x,t):=\operatorname{Re}\bigl(\mathbf E_{\mathrm{ext}}(t)e^{ik\cdot(x-x_0)}\bigr),$$
+with components in $\mathrm{V\,m^{-1}}$, so $\mathbf E^{\mathrm{sp}}(x_0,t)=\mathbf E_{\mathrm{ext}}(t)$. This template specifies a spatial phase without assuming Maxwell dynamics or a dispersion relation. The **long-wavelength (electric-dipole) regime at tolerance $\delta$** means $|k|L\le\delta$: for $|x-x_0|\le L$, the phase obeys $|k\cdot(x-x_0)|\le\delta$. The model adopts the neglect of this spatial phase and uses the reference-point field in the interaction $-\sum_j E_{\mathrm{ext},j}(t)D_j^W$ of clause (c). The case $k=0$ is the spatially uniform template. The length $L$ is a declared scale, not a compact-support assertion for the matter wavefunctions. The notation $|k|L\ll1$ denotes choosing a small declared tolerance; no universal tolerance or error estimate for the induced quantum dynamics is asserted. This regime is an adopted model assumption, and identifications of $L$, $k$ and the field with laboratory data are tested identifications with uncertainty under P7.
 
 **(e) Scope.** Clauses (b)-(d) are adopted model data and readings of a
 declared finite-dimensional matter model with a prescribed classical field. The

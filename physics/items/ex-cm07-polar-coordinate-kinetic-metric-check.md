@@ -6,9 +6,10 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 16
-deps: [def-cm07-action-and-mechanical-lagrangian, pthm-cm07-coordinate-covariance-of-the-equations, pthm-cm07-euler-lagrange-equations, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-velocity-acceleration, def-cm01-units, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-invertible-euclidean-linear-map, thm-euclidean-inverse-function-theorem, thm-higher-regularity-of-local-inverses, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, def-euclidean-inner-product, def-matrix-product-and-identity-matrix, def-transpose-of-a-matrix, def-vector-valued-derivative-and-integral, def-interval]
+deps: [def-cm07-action-and-mechanical-lagrangian, def-cm07-generalized-coordinates-and-forces, pthm-cm07-coordinate-covariance-of-the-equations, pthm-cm07-euler-lagrange-equations, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-velocity-acceleration, def-cm01-units, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-invertible-euclidean-linear-map, thm-euclidean-inverse-function-theorem, thm-higher-regularity-of-local-inverses, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-derivatives, cor-differentiable-implies-continuous, thm-induction-principle, cor-trigonometric-parity-and-pythagorean-identity, thm-intermediate-value, cor-pi-is-the-first-positive-sine-zero, thm-quarter-turn-values-and-shift-formulas, thm-sine-cosine-zero-sets-and-fundamental-period, thm-of-square-roots, lem-of-square-positive, def-abs-value, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, def-euclidean-inner-product, def-matrix-product-and-identity-matrix, def-transpose-of-a-matrix, def-vector-valued-derivative-and-integral, def-interval]
 dependency_roles:
   def-cm07-action-and-mechanical-lagrangian: formulation-prerequisite
+  def-cm07-generalized-coordinates-and-forces: formulation-prerequisite
   pthm-cm07-coordinate-covariance-of-the-equations: physical-result
   pthm-cm07-euler-lagrange-equations: physical-result
   def-cm03-potential-and-mechanical-energy: formulation-prerequisite
@@ -21,8 +22,18 @@ dependency_roles:
   def-invertible-euclidean-linear-map: mathematical-premise
   thm-euclidean-inverse-function-theorem: mathematical-premise
   thm-higher-regularity-of-local-inverses: mathematical-premise
+  def-sine-and-cosine-by-power-series: mathematical-premise
   thm-sine-and-cosine-derivatives: mathematical-premise
+  cor-differentiable-implies-continuous: mathematical-premise
+  thm-induction-principle: mathematical-premise
   cor-trigonometric-parity-and-pythagorean-identity: mathematical-premise
+  thm-intermediate-value: mathematical-premise
+  cor-pi-is-the-first-positive-sine-zero: mathematical-premise
+  thm-quarter-turn-values-and-shift-formulas: mathematical-premise
+  thm-sine-cosine-zero-sets-and-fundamental-period: mathematical-premise
+  thm-of-square-roots: mathematical-premise
+  lem-of-square-positive: mathematical-premise
+  def-abs-value: mathematical-premise
   thm-chain-rule-for-total-derivatives: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
@@ -58,7 +69,7 @@ $\Omega:=\{(r,\theta,z)\in\mathbb R^{3}:r>0\}$ and define the cylindrical
 coordinate map
 $$X(r,\theta,z):=\bigl(r\cos\theta,\ r\sin\theta,\ z\bigr),\qquad X:\Omega\longrightarrow Q ,$$
 with substituted Lagrangian and kinetic metric
-$$\widetilde L(t,r,\theta,z,\dot r,\dot\theta,\dot z)=\tfrac12m\bigl(\dot r^{2}+r^{2}\dot\theta^{2}+\dot z^{2}\bigr)-\widetilde U(t,r,\theta,z),\qquad \widetilde U:=U\circ X,$$
+$$\widetilde L(t,r,\theta,z,\dot r,\dot\theta,\dot z)=\tfrac12m\bigl(\dot r^{2}+r^{2}\dot\theta^{2}+\dot z^{2}\bigr)-\widetilde U(t,r,\theta,z),\qquad \widetilde U(t,r,\theta,z):=U(t,X(r,\theta,z)),$$
 $$G(r,\theta,z)=DX(r,\theta,z)^{\mathsf T}\,(mI_{3})\,DX(r,\theta,z)=m\begin{pmatrix}1&0&0\\ 0&r^{2}&0\\ 0&0&1\end{pmatrix}.$$
 
 Under [[def-cm01-units]], $[m]=\mu$, $[r]=[z]=\ell$, $[t]=\tau$ and
@@ -74,7 +85,8 @@ Then:
    $$m\bigl(\ddot r-r\dot\theta^{2}\bigr)=-\partial_{r}\widetilde U,\qquad m\bigl(r^{2}\ddot\theta+2r\dot r\dot\theta\bigr)=-\partial_{\theta}\widetilde U,\qquad m\ddot z=-\partial_{z}\widetilde U,$$
    which are the coordinate components of $m x''=-\nabla U(t,x)$ along
    $x=X(r,\theta,z)$;
-3. consequently, for a $C^{2}$ curve $(r,\theta,z):[a,b]\to\Omega$ with
+3. consequently, for $a<b$ and a $C^{2}$ curve
+   $(r,\theta,z):[a,b]\to\Omega$ with
    $x:=X\circ(r,\theta,z)$, the coordinate curve is stationary for the
    substituted action if and only if the Cartesian curve $x$ satisfies the
    model's equation of motion on $[a,b]$.
@@ -83,17 +95,19 @@ Then:
 
 **Given:** The model data of the Example, the map $X$ and a $C^{2}$ curve $q(t)=(r(t),\theta(t),z(t))$ with values in $\Omega$ and $x:=X\circ q$.
 
-[F1] Regularity and invertibility ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-jacobian-matrix-and-gradient]], [[def-invertible-euclidean-linear-map]], [[thm-sine-and-cosine-derivatives]], [[def-matrix-product-and-identity-matrix]], [[def-transpose-of-a-matrix]], [[def-euclidean-inner-product]]): $X$ is $C^{\infty}$ and $DX(r,\theta,z)=\begin{pmatrix}\cos\theta&-r\sin\theta&0\\ \sin\theta&r\cos\theta&0\\ 0&0&1\end{pmatrix},\qquad \det DX(r,\theta,z)=r>0,$ so $DX$ is invertible on $\Omega$; and the matrix product $DX^{\mathsf T}(mI_{3})DX$ is the displayed diagonal matrix, since the columns of $DX$ are orthogonal with squared norms $1,r^{2},1$ by $\sin^{2}+\cos^{2}=1$ ([[cor-trigonometric-parity-and-pythagorean-identity]]).
+[F1] Regularity and invertibility ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-jacobian-matrix-and-gradient]], [[def-invertible-euclidean-linear-map]], [[thm-sine-and-cosine-derivatives]], [[thm-induction-principle]], [[cor-differentiable-implies-continuous]], [[def-matrix-product-and-identity-matrix]], [[def-transpose-of-a-matrix]], [[def-euclidean-inner-product]]): repeated differentiation cycles through $\pm\sin$ and $\pm\cos$; induction and their continuity show these functions, and therefore the coordinate functions of $X$, are $C^{\infty}$. The Jacobian is $$DX(r,\theta,z)=\begin{pmatrix}\cos\theta&-r\sin\theta&0\\ \sin\theta&r\cos\theta&0\\ 0&0&1\end{pmatrix},\qquad \det DX(r,\theta,z)=r>0,$$ so $DX$ is invertible on $\Omega$; and $DX^{\mathsf T}(mI_{3})DX$ is the displayed diagonal matrix because its columns are orthogonal with squared norms $1,r^{2},1$ by $\sin^{2}+\cos^{2}=1$ ([[cor-trigonometric-parity-and-pythagorean-identity]]).
 
 [F2] The covariance theorem ([[pthm-cm07-coordinate-covariance-of-the-equations]]): for this coordinate map the Euler-Lagrange expression of $\widetilde L$ along $q$ satisfies $E_{\widetilde L}(q)=DX^{\mathsf T}E_{L}(x)$, and the vanishing of the substituted Euler-Lagrange equation is equivalent to the Cartesian curve solving $m x''(t)=-\nabla U(t,x(t))$ on $[a,b]$ ([[pthm-cm07-euler-lagrange-equations]] for the Cartesian equivalence).
 
-[F3] Chain rule for the coordinate description ([[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[thm-sine-and-cosine-derivatives]], [[def-vector-valued-derivative-and-integral]], [[def-interval]]): differentiating $x(t)=X(q(t))$ twice gives $x'=\dot r\,e_{r}+r\dot\theta\,e_{\theta}+\dot z\,e_{3},\qquad x''=\bigl(\ddot r-r\dot\theta^{2}\bigr)e_{r}+\bigl(r\ddot\theta+2\dot r\dot\theta\bigr)e_{\theta}+\ddot z\,e_{3},$ where $e_{r}:=(\cos\theta,\sin\theta,0)$, $e_{\theta}:=(-\sin\theta,\cos\theta,0)$, $e_{3}:=(0,0,1)$ is an orthonormal frame; and $\nabla U(t,x)=\partial_{r}\widetilde U\,e_{r}+\frac1r\partial_{\theta}\widetilde U\,e_{\theta}+\partial_{z}\widetilde U\,e_{3}$ along $x$.
+[F3] Chain rule for the coordinate description ([[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[thm-sine-and-cosine-derivatives]], [[def-vector-valued-derivative-and-integral]], [[def-interval]]): differentiating $x(t)=X(q(t))$ twice gives $x'=\dot r\,e_{r}+r\dot\theta\,e_{\theta}+\dot z\,e_{3},\qquad x''=\bigl(\ddot r-r\dot\theta^{2}\bigr)e_{r}+\bigl(r\ddot\theta+2\dot r\dot\theta\bigr)e_{\theta}+\ddot z\,e_{3},$ where $e_{r}:=(\cos\theta,\sin\theta,0)$, $e_{\theta}:=(-\sin\theta,\cos\theta,0)$, $e_{3}:=(0,0,1)$ are the displayed orthonormal basis vectors; and $\nabla U(t,x)=\partial_{r}\widetilde U\,e_{r}+\frac1r\partial_{\theta}\widetilde U\,e_{\theta}+\partial_{z}\widetilde U\,e_{3}$ along $x$.
+
+[F4] The trigonometric parameterization needed for the global image and periodicity ([[thm-sine-and-cosine-derivatives]], [[cor-differentiable-implies-continuous]], [[thm-intermediate-value]], [[cor-pi-is-the-first-positive-sine-zero]], [[thm-quarter-turn-values-and-shift-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-of-square-roots]], [[lem-of-square-positive]], [[def-abs-value]]): cosine is continuous on $[0,\pi]$, with $\cos0=1$ and $\cos\pi=-1$, and $\sin\theta\ge0$ on this interval. Thus, for $u,v\in\mathbb R$ with $u^{2}+v^{2}=1$, $v^{2}\ge0$ gives $u^{2}\le1$, hence $u\in[-1,1]$; the intermediate value theorem gives $\theta_{0}\in[0,\pi]$ with $\cos\theta_{0}=u$. The Pythagorean identity and sine's sign then give $\sin\theta_{0}=|v|$. Taking $\theta=\theta_{0}$ when $v\ge0$ and $\theta=-\theta_{0}$ when $v<0$ gives $(\cos\theta,\sin\theta)=(u,v)$. The period theorem gives period $2\pi$ for sine and cosine.
 
 ## Verification
 
 **Proof technique:** direct; compute the Jacobian, the kinetic metric and the Euler-Lagrange equations of the substituted Lagrangian, and identify them with the Cartesian equation in the orthonormal cylindrical frame.
 
-1.1 Clause 1: the displayed Jacobian and its determinant $r>0$ are computed from the derivatives of sine and cosine, so $DX(r,\theta,z)$ is invertible for every $(r,\theta,z)\in\Omega$ and $X$ has the invertibility hypothesis of the covariance theorem. By [[thm-euclidean-inverse-function-theorem]] and [[thm-higher-regularity-of-local-inverses]], its restriction near any point is a smooth diffeomorphism onto an open part of its image; the inverse is a local cylindrical coordinate chart. Globally, $X(r,\theta+2\pi,z)=X(r,\theta,z)$, so no global inverse on all of $\Omega$ is asserted. The kinetic metric is computed by matrix multiplication: the columns of $DX$ are $e_{r}$, $r e_{\theta}$, $e_{3}$, an orthogonal triple of norms $1$, $r$, $1$, so $DX^{\mathsf T}(mI_{3})DX=m\,\mathrm{diag}(1,r^{2},1)$ as displayed. [F1, algebra]
+1.1 Clause 1: the displayed Jacobian and its determinant $r>0$ are computed from the derivatives of sine and cosine, so $DX(r,\theta,z)$ is invertible for every $(r,\theta,z)\in\Omega$ and $X$ has the invertibility hypothesis of the covariance theorem. By [[thm-euclidean-inverse-function-theorem]] and [[thm-higher-regularity-of-local-inverses]], its restriction near any point is a smooth diffeomorphism onto an open part of its image; the inverse is a local cylindrical coordinate chart, and these local images show $X(\Omega)$ is open. The image is contained in $Q_{\mathrm{cyl}}$ because $(r\cos\theta)^{2}+(r\sin\theta)^{2}=r^{2}>0$. Conversely, for $(a,b,c)\in Q_{\mathrm{cyl}}$ put $\rho:=\sqrt{a^{2}+b^{2}}>0$, $u:=a/\rho$ and $v:=b/\rho$. Then $u^{2}+v^{2}=1$, so [F4] supplies $\theta$ with $\cos\theta=u$ and $\sin\theta=v$, giving $X(\rho,\theta,c)=(a,b,c)$. Thus $X(\Omega)=Q_{\mathrm{cyl}}$. By [F4], $X(r,\theta+2\pi,z)=X(r,\theta,z)$ with distinct inputs, so $X$ is not injective and is not a global chart of $Q$. The kinetic metric is computed by matrix multiplication: the columns of $DX$ are $e_{r}$, $r e_{\theta}$, $e_{3}$, an orthogonal triple of norms $1$, $r$, $1$, so $DX^{\mathsf T}(mI_{3})DX=m\,\mathrm{diag}(1,r^{2},1)$ as displayed. [F1, F4, algebra]
 
 2.1 Substituted Lagrangian: from clause (b) of the generalized-coordinate construction, $\widetilde L=L\circ(t,X,DX\,v)$ equals $\frac12m(\dot r^{2}+r^{2}\dot\theta^{2}+\dot z^{2})-\widetilde U$, matching the computed kinetic metric. [F1, step 1.1, algebra]
 
@@ -101,7 +115,7 @@ Then:
 
 4.1 Cartesian identification: by [F3], $m x''=-\nabla U(t,x)$ is equivalent, in the orthonormal frame $(e_{r},e_{\theta},e_{3})$, to the three scalar equations $m(\ddot r-r\dot\theta^{2})=-\partial_{r}\widetilde U$, $m(r\ddot\theta+2\dot r\dot\theta)=-\frac1r\partial_{\theta}\widetilde U$, and $m\ddot z=-\partial_{z}\widetilde U$; the second equation of step 3.1 is this one multiplied by $r$. Hence the coordinate Euler-Lagrange equations are exactly the Cartesian equation written in the cylindrical frame. [F3, step 3.1, algebra]
 
-5.1 Clause 3: by [F2], the vanishing of the substituted Euler-Lagrange expression along $q$ is equivalent to the Cartesian equation along $x=X\circ q$; by the chart dictionary of the covariance theorem this is equivalent to stationarity of $q$ for the substituted action. This is the asserted correspondence. [F2, step 3.1, step 4.1] ∎
+5.1 Clause 3: regard the time-independent map as $\widehat X:\mathbb R\times\Omega\to Q$, $\widehat X(t,q):=X(q)$. Then its substituted domain is $\widetilde O=\mathbb R\times\Omega\times\mathbb R^{3}$, which is a time-dependent Lagrangian chart over $[a,b]\times\Omega$ because $\Omega$ is open and nonempty. By clause 2 of [F2], stationarity of $q$ for the substituted action is equivalent to stationarity of $x$ for $S$; by clause 1 of [F2] and step 4.1, the latter is equivalent to the Cartesian equation along $x=X\circ q$. [F2, step 3.1, step 4.1] ∎
 
 ## Remarks
 
@@ -112,6 +126,10 @@ Then:
   chain rule. No new dynamical content is added by the change of
   coordinates.
 
-- The plane-polar case is the restriction $z\equiv\mathrm{const}$, in which the
-  third equation is dropped; the angular equation multiplied by $r$ is the
-  familiar $m(2\dot r\dot\theta+r\ddot\theta)=-\frac1r\partial_{\theta}\widetilde U$.
+- For a $C^2$ curve with $z\equiv z_0$ satisfying the first two equations,
+  the third equation holds exactly when
+  $\partial_z\widetilde U(t,r(t),\theta(t),z_0)=0$ throughout its interval,
+  because $\ddot z=0$. Under this condition the plane-polar equations describe
+  a motion of the declared three-dimensional model in that plane. The displayed
+  angular Euler-Lagrange equation divided by $r>0$ is
+  $m(2\dot r\dot\theta+r\ddot\theta)=-\frac1r\partial_{\theta}\widetilde U$.

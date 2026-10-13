@@ -6,7 +6,7 @@ domain: mathematics
 title: "Driven oscillator common domain"
 status: draft
 origin: pipeline
-dependency_level: 5
+dependency_level: 4
 deps: [thm-nrqm-oscillator-oscillator-scaling-and-exact-realization, lem-nrqm-oscillator-closed-ladder-domains, def-relative-boundedness-with-respect-to-an-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-countable-choice, thm-nrqm-controlled-dynamics-common-domain-nonautonomous-evolution, thm-nrqm-oscillator-hermite-recurrence, thm-plancherel, lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-dominated-convergence, def-adjoint-of-a-densely-defined-unbounded-operator, lem-unbounded-adjoint-is-well-defined-and-closed, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, lem-complex-lp-completeness-density-and-inner-product]
 dependency_roles:
   thm-nrqm-oscillator-oscillator-scaling-and-exact-realization: mathematical-premise

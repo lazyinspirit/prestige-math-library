@@ -69,8 +69,8 @@ $i,j\in\{1,2,3\}$;
 **(d)** $\Gamma^i{}_{jk}={}^{(3)}\Gamma^i{}_{jk}$ for
 $i,j,k\in\{1,2,3\}$.
 
-All components not listed vanish; equivalently, the only nonzero symbols are
-those in (b)-(d).
+All components not listed vanish; equivalently, the only potentially nonzero
+Christoffel-symbol families are those in (b)-(d).
 
 ## Facts & Assumptions
 
@@ -90,29 +90,18 @@ those in (b)-(d).
 
 1.1 (Metric and inverse components.) In the product chart [L1] gives $g_{00}=-c^2$, $g_{0i}=0$, $g_{ij}=a(t)^2\gamma_{ij}$. Solving $\sum_bg^{ab}g_{bc}=\delta^a{}_c$ block by block: the $1\times1$ block gives $g^{00}=-c^{-2}$; the vanishing off-diagonal block gives $g^{0i}=0$; and the spatial block gives $g^{ij}=a(t)^{-2}\gamma^{ij}$, since $(a^2\gamma_{ij})^{-1}=a^{-2}(\gamma_{ij})^{-1}$ and $\gamma^{ij}$ is the inverse of the positive-definite matrix $\gamma_{ij}$ by [L2]. [L1, L2, algebra]
 
-2.1 (The family $\Gamma^0{}_{\cdot\cdot}$ and $\Gamma^i{}_{00}$.) Substituting $a=0$ or $a=i$ together with $(b,c)\in\{(0,0),(0,i),(i,0)\}$ in [L3]: for $a=i$ every term contains $g^{i0}=0$; for $a=0$ the terms involve derivatives of $g_{00}=-c^2$, $g_{0j}=0$ and $g_{j0}=0$, which are all zero. Hence $\Gamma^i{}_{00}=0$ and $\Gamma^0{}_{00}=\Gamma^0{}_{0i}=\Gamma^0{}_{i0}=0$. This is claim (a). [L3, step 1.1, algebra]
+2.1 (The family $\Gamma^0{}_{\cdot\cdot}$ and $\Gamma^i{}_{00}$.) For $a=i$ and $b=c=0$, every differentiated metric component in [L3] vanishes: $\partial_0g_{d0}=\partial_0g_{0d}=0$ and $\partial_dg_{00}=0$, so $\Gamma^i{}_{00}=0$. For $a=0$ and $(b,c)=(0,0),(0,j),(j,0)$, the coefficients $g^{0i}$ vanish and the remaining derivatives are of the constant component $g_{00}=-c^2$ or the zero components $g_{0j}=g_{j0}=0$; hence $\Gamma^0{}_{00}=\Gamma^0{}_{0j}=\Gamma^0{}_{j0}=0$. This is claim (a). [L3, step 1.1, algebra]
 
 2.2 (The family $\Gamma^0{}_{ij}$.) Substituting $a=0$, $b=i$, $c=j$ in [L3]: the terms $\partial_ig_{0j}=0$ and $\partial_jg_{0i}=0$ vanish because $g_{0i}=g_{0j}=0$, leaving $\Gamma^0{}_{ij}=\tfrac12g^{00}(-\partial_0g_{ij})=\tfrac12(-c^{-2})\bigl(-\partial_0(a(t)^2\gamma_{ij})\bigr)=\tfrac12c^{-2}\cdot2a\dot a\gamma_{ij}=\dfrac{a\dot a}{c^2}\gamma_{ij}$, where $\partial_0\gamma_{ij}=0$ because $\gamma_{ij}$ is a function of $x$ alone and $\partial_0(a^2)=2a\dot a$ by [L4]. Symmetry in the lower pair gives $\Gamma^0{}_{ji}=\Gamma^0{}_{ij}$. This is claim (b). [L3, L4, step 1.1, algebra]
 
-2.3 (The family $\Gamma^i{}_{0j}$.) Substituting $a=i$, $b=0$, $c=j$ in [L3]: $\partial_0g_{jd}=\partial_0(a^2\gamma_{jd})=2a\dot a\gamma_{jd}$; $\partial_jg_{0d}=0$ because $g_{0d}=0$; and $\partial_dg_{0j}=0$. Hence $\Gamma^i{}_{0j}=\tfrac12\sum_da^{-2}\gamma^{id}\cdot2a\dot a\gamma_{jd}=a^{-1}\dot a\sum_d\gamma^{id}\gamma_{jd}=\dfrac{\dot a}{a}\delta^i{}_j=H\delta^i{}_j$, using $\sum_d\gamma^{id}\gamma_{jd}=\delta^i{}_j$ by [L2] and the definition $H=\dot a/a$. Symmetry gives $\Gamma^i{}_{j0}=H\delta^i{}_j$. This is claim (c). [L2, L3, L4, step 1.1, algebra]
+2.3 (The family $\Gamma^i{}_{0j}$.) Substitute $a=i$, $b=0$, $c=j$ in [L3]. The $d=0$ summand vanishes because $g^{i0}=0$ by step 1.1, so the remaining sum is over $d=1,2,3$. For those spatial indices, $\partial_0g_{jd}=\partial_0(a^2\gamma_{jd})=2a\dot a\gamma_{jd}$, $\partial_jg_{0d}=0$ and $\partial_dg_{0j}=0$ because $g_{0d}=g_{0j}=0$. Hence $\Gamma^i{}_{0j}=\tfrac12\sum_{d=1}^{3}a^{-2}\gamma^{id}\cdot2a\dot a\gamma_{jd}=a^{-1}\dot a\sum_{d=1}^{3}\gamma^{id}\gamma_{jd}=\dfrac{\dot a}{a}\delta^i{}_j=H\delta^i{}_j$, using the spatial inverse identity $\sum_{d=1}^{3}\gamma^{id}\gamma_{jd}=\delta^i{}_j$ by [L2] and the definition $H=\dot a/a$. Symmetry gives $\Gamma^i{}_{j0}=H\delta^i{}_j$. This is claim (c). [L2, L3, L4, step 1.1, algebra]
 
 2.4 (The family $\Gamma^i{}_{jk}$.) Substituting $a=i$, $b=j$, $c=k$ in [L3]: $\partial_jg_{kd}=a^2\partial_j\gamma_{kd}$, $\partial_kg_{jd}=a^2\partial_k\gamma_{jd}$ and $\partial_dg_{jk}=a^2\partial_d\gamma_{jk}$ for spatial $d$, while for $d=0$ the combination $\partial_jg_{k0}+\partial_kg_{j0}-\partial_0g_{jk}$ has vanishing first two terms and its $g^{i0}=0$ coefficient annihilates the remaining term; hence $\Gamma^i{}_{jk}=\tfrac12\sum_la^{-2}\gamma^{il}a^2(\partial_j\gamma_{kl}+\partial_k\gamma_{jl}-\partial_l\gamma_{jk})={}^{(3)}\Gamma^i{}_{jk}$ by [L4]. This is claim (d). [L2, L3, L4, step 1.1, algebra]
 
-3.1 (Conclusion and identification.) The index triples $(a,b,c)$ with $a,b,c\in\{0,1,2,3\}$ fall into the families (a)-(d) treated in steps 2.1-2.4: index $a=0$ splits into $(0,0,0)$, $(0,0,i)$, $(0,i,0)$, $(0,i,j)$ and index $a=i$ splits into $(i,0,0)$, $(i,0,j)$, $(i,j,k)$, with the symmetry $\Gamma^a{}_{bc}=\Gamma^a{}_{cb}$ of [L3] covering the transposed triples. Each family was computed from the same connection $\nabla$, namely the unique metric-selected connection of the smooth Lorentzian metric $g$ supplied by [L1]; the displays (b)-(d) therefore list exactly the nonzero symbols, and the proof is complete. [L3, step 2.1, step 2.2, step 2.3, step 2.4] ∎
+3.1 (Conclusion and identification.) The index triples $(a,b,c)$ with $a,b,c\in\{0,1,2,3\}$ fall into the families (a)-(d) treated in steps 2.1-2.4: index $a=0$ splits into $(0,0,0)$, $(0,0,i)$, $(0,i,0)$, $(0,i,j)$ and index $a=i$ splits into $(i,0,0)$, $(i,0,j)$, $(i,j,k)$, with the symmetry $\Gamma^a{}_{bc}=\Gamma^a{}_{cb}$ of [L3] covering the transposed triples. Each family was computed from the same connection $\nabla$, namely the unique metric-selected connection of the smooth Lorentzian metric $g$ supplied by [L1]; the displays (b)-(d) therefore list all potentially nonzero symbol families, and the proof is complete. [L3, step 2.1, step 2.2, step 2.3, step 2.4] ∎
 
 ## Remarks
 
-- **Independence of the spatial chart.** Claim (d) says that the spatial
-  symbols of the spacetime connection are exactly the Christoffel symbols of
-  the three-dimensional metric $\gamma$ in the chosen spatial chart, with no
-  explicit dependence on $a$; this is why the spatial part of the connection
-  is the Levi-Civita connection of $\gamma$ (compare
-  [[prop-christoffel-formula-for-the-levi-civita-connection]]).
+- **Independence of the spatial chart.** Claim (d) says that the spatial symbols of the spacetime connection are exactly the Christoffel symbols of the three-dimensional metric $\gamma$ in the chosen spatial chart, with no explicit dependence on $a$; this is why the spatial part of the connection is the Levi-Civita connection of $\gamma$ (compare [[prop-christoffel-formula-for-the-levi-civita-connection]]).
 
-- **Normalization check.** With $x^0=ct$ in place of $t$ as the time
-  coordinate, the components of the same connection carry factors of $c$ from
-  the coordinate change $x^0=ct$; the displays above are stated in the time
-  coordinate $t$ in seconds and are not to be mixed with the length-coordinate
-  convention for components. The invariant statements in which these symbols
-  are used on this page are the curvature components of the next lemma, which
-  are chart-independent geometric objects.
+- **Normalization check.** With $x^0=ct$ in place of $t$ as the time coordinate, the components of the same connection carry factors of $c$ from the coordinate change $x^0=ct$; the displays above are stated in the time coordinate $t$ in seconds and are not to be mixed with the length-coordinate convention for components. The curvature tensors computed in the next lemma are intrinsic geometric objects, whereas their component functions depend on the chosen chart ([[def-gr-tensor-fields-and-components]] clause (b)).

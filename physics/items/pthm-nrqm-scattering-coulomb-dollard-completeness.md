@@ -34,7 +34,7 @@ provenance:
 physical_scope: "The declared long-range Coulomb model with coupling kappa>0 and its Dollard-modified free comparison: existence of the modified wave operators as strong limits, their isometry and intertwining, the completeness equalities of their ranges with the absolutely continuous and continuous subspaces of the Coulomb operator, and unitarity of the modified scattering operator. Conditional on the declared model and the cited mathematics; the item asserts no Coulomb scattering amplitude, no Rutherford cross section, no measured quantity and no ordinary short-range comparison for the Coulomb potential."
 sources:
   references:
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.4 printed pages 271-275 (PDF pages 279-283): scattering electrons off hydrogen; the shielded Coulomb potential and the long-range caution"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.4, printed pages 271-273 (PDF pages 279-281)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 12.3 printed pages 253-256 (PDF pages 265-268): short-range completeness, with the long-range case explicitly outside the short-range condition"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"

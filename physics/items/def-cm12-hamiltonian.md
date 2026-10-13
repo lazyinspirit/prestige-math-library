@@ -65,6 +65,9 @@ with the inverse-branch velocity ([[def-cm12-cotangent-momentum]],
 [[def-euclidean-inner-product]]). The momentum phase chart
 $I_{0}\times Q\times\mathbb R^{3N}$ with coordinates $(t,x,p)$ is the
 **Hamiltonian phase chart** of the presentation on the Cartesian chart.
+If $Q=\varnothing$, the formula denotes the unique empty function; the
+identification with the cited mathematical fibre-full chart applies only
+when $Q\ne\varnothing$.
 
 **(b) Generalized-coordinate Hamiltonian.** Let $X:\Omega\to Q$ be a
 generalized-coordinate map with substituted Lagrangian $\widetilde L$, kinetic
@@ -75,7 +78,8 @@ coordinates $X$** is
 
 $$\widetilde H:I_{0}\times\Omega\times\mathbb R^{r}\longrightarrow\mathbb R,\qquad \widetilde H(t,q,p):=p\cdot v(t,q,p)-\widetilde L\bigl(t,q,v(t,q,p)\bigr).$$
 
-For the Cartesian chart, $X=\mathrm{id}$ and $\widetilde H=H$; the general
+For the Cartesian chart when $Q\ne\varnothing$, $X=\mathrm{id}$ and
+$\widetilde H=H$; the general
 definition is the same formula applied to the substituted fibre-full chart.
 
 **(c) Dimensions and conventions.** Each term of the defining difference has
@@ -92,8 +96,8 @@ Euclidean product; no metric on momentum space and no symplectic form is
 introduced by this definition.
 
 **(d) Dependence and status.** The Hamiltonian depends on the declared chart,
-on the declared inverse Legendre branch (when more than one branch exists it
-is part of the data, as in [[def-cm12-hyperregularity]]) and on the potential
+on its inverse Legendre branch, uniquely determined on that chart by fibre
+bijectivity ([[def-cm12-hyperregularity]]), and on the potential
 representative: replacing $U$ by $U+c(t)$ leaves the branch unchanged and
 replaces $L$ by $L-c(t)$, hence replaces $H$ by $H+c(t)$
 ([[def-cm03-potential-and-mechanical-energy]] clause (c),

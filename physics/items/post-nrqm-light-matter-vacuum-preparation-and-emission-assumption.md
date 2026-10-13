@@ -36,7 +36,7 @@ sources:
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "S. Pratt, Lecture Notes on Quantum Mechanics (Michigan State University, PHY 851/852; Internet Archive snapshot of 2024-04-21), Chapter 14 Section 14.3 printed page 221: a classical current coupled to the field radiates coherent states and is unaffected by the emission, in contrast to an atom that changes state when it emits"
       url: "http://web.archive.org/web/20240421090356/https://web.pa.msu.edu/people/pratts/phy851/lectures/lectures_full.pdf"
-    - title: "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.4.2 printed pages 119-122 (PDF pages 122-125): coupling to radiation and energy transfer as separately scoped extensions, and the photon energy relation as extra input"
+    - title: "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.4.2 printed pages 118-122 (PDF pages 121-125): the photon energy relation E=hbar*omega and the limits of a single-particle Schrodinger treatment of photon dynamics, with quantum field theory identified as a field-theoretic framework"
       url: "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
 ---
 

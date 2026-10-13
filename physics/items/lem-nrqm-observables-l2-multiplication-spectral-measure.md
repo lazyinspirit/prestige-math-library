@@ -7,7 +7,7 @@ title: "Spectral measure of a real L2 multiplication operator"
 status: draft
 origin: pipeline
 dependency_level: 3
-deps: [cor-second-countable-lch-locally-finite-borel-measures-are-regular, def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-projection-valued-measure, def-regular-borel-measure-on-an-lch-space, def-unbounded-integral-against-a-pvm, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, lem-nrqm-observables-spectral-support-and-outcome-law, lem-scalar-and-complex-measures-from-a-pvm, lem-unbounded-pvm-integral-is-well-defined-and-closed, thm-bounded-borel-pvm-integral, thm-dominated-convergence, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, thm-spectral-theorem-for-unbounded-self-adjoint-operators]
+deps: [cor-second-countable-lch-locally-finite-borel-measures-are-regular, def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-projection-valued-measure, def-regular-borel-measure-on-an-lch-space, def-unbounded-integral-against-a-pvm, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, lem-nrqm-observables-spectral-support-and-outcome-law, lem-scalar-and-complex-measures-from-a-pvm, lem-unbounded-pvm-integral-is-well-defined-and-closed, thm-bounded-borel-pvm-integral, thm-cauchy-schwarz-in-an-inner-product-space, thm-dominated-convergence, thm-spectral-theorem-for-unbounded-self-adjoint-operators]
 dependency_roles:
   cor-second-countable-lch-locally-finite-borel-measures-are-regular: mathematical-premise
   def-axiom-of-choice: mathematical-premise
@@ -22,8 +22,8 @@ dependency_roles:
   lem-scalar-and-complex-measures-from-a-pvm: mathematical-premise
   lem-unbounded-pvm-integral-is-well-defined-and-closed: mathematical-premise
   thm-bounded-borel-pvm-integral: mathematical-premise
+  thm-cauchy-schwarz-in-an-inner-product-space: mathematical-premise
   thm-dominated-convergence: mathematical-premise
-  thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators: mathematical-premise
   thm-spectral-theorem-for-unbounded-self-adjoint-operators: mathematical-premise
 proof_strategy: direct
 provenance:
@@ -45,7 +45,7 @@ Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-ch
 $$D(M_{m})=\Bigl\{f\in H:\int_{X}|m|^{2}|f|^{2}\,d\mu<\infty\Bigr\},\qquad M_{m}f=mf .$$
 Then:
 
-(a) $M_{m}$ is self-adjoint on $D(M_{m})$ ([[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]] clause (a)).
+(a) $M_m$ is self-adjoint on $D(M_m)$.
 
 (b) The assignment $E(B):=M_{\mathbf 1_{m^{-1}(B)}}$ on Borel sets $B\subseteq\mathbb R$ is a regular projection-valued measure on the Borel $\sigma$-algebra of $\mathbb R$ ([[def-projection-valued-measure]]), and for a unit vector $\psi\in H$
 $$\|E(B)\psi\|^{2}=\int_{m^{-1}(B)}|\psi|^{2}\,d\mu .$$
@@ -59,7 +59,7 @@ $$\sigma(M_{m})=\{\,t\in\mathbb R:\mu(m^{-1}(t-\varepsilon,t+\varepsilon))>0\ \t
 
 **Given:** The Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]); a $\sigma$-finite measure space $(X,\Sigma,\mu)$; a real measurable finite $\mu$-a.e. multiplier $m$; the operator $M_{m}$ on $H=L^{2}(X,\mu;\mathbb{C})$; Borel sets $B,B_{n}\subseteq\mathbb R$; a unit vector $\psi\in H$.
 
-[F1] **The multiplier is self-adjoint.** $M_{m}f=mf$ on $D(M_{m})=\{f\in H:\int|m|^{2}|f|^{2}d\mu<\infty\}$ is densely defined and self-adjoint ([[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]] clause (a), [[def-l-p-space-as-a-quotient-by-null-functions]]).
+[F1] $H=L^2(X,\mu;\mathbb C)$ has inner product $\langle f,g\rangle=\int_X f\overline g\,d\mu$, Cauchy-Schwarz holds in this Hilbert space, and $m$ is real-valued and measurable. The density, symmetry and adjoint-domain checks for $M_m$ are supplied locally in step 1.1 ([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]], [[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]).
 
 [F2] **Projection-valued measures.** A PVM is a map into orthogonal projections with $E(\varnothing)=0$, $E(X_{0})=I$ and $E(B\cap C)=E(B)E(C)$ on its measurable space $X_{0}$, strongly countably additive on disjoint unions; its scalar measures $E_{x}(B)=\langle E(B)x,x\rangle=\|E(B)x\|^{2}$ are finite positive measures ([[def-projection-valued-measure]], [[lem-scalar-and-complex-measures-from-a-pvm]]).
 
@@ -77,7 +77,7 @@ $$\sigma(M_{m})=\{\,t\in\mathbb R:\mu(m^{-1}(t-\varepsilon,t+\varepsilon))>0\ \t
 
 ## Proof
 
-1.1 [The multiplier of an indicator is an orthogonal projection and $E$ is a PVM] For a Borel set $B$ the class $\mathbf 1_{m^{-1}(B)}$ is real measurable and bounded, so multiplication by it is a bounded self-adjoint operator on $H$ whose square is multiplication by $\mathbf 1_{m^{-1}(B)}^{2}=\mathbf 1_{m^{-1}(B)}$: hence $E(B)=M_{\mathbf 1_{m^{-1}(B)}}$ is an orthogonal projection. Moreover $E(\varnothing)=0$ and $E(\mathbb R)=I$ because $m$ is finite $\mu$-a.e., and $E(B)E(C)=M_{\mathbf 1_{m^{-1}(B)}\mathbf 1_{m^{-1}(C)}}=E(B\cap C)$ because $m^{-1}(B)\cap m^{-1}(C)=m^{-1}(B\cap C)$ up to a $\mu$-null set. For pairwise disjoint Borel $B_{n}$ with union $B$ the multiplicativity of classes gives $\|E(B)h-\sum_{n\le N}E(B_{n})h\|^{2}=\int|(\mathbf 1_{B}-\sum_{n\le N}\mathbf 1_{B_{n}})\circ m|^{2}|h|^{2}d\mu$ for every $h\in H$, and the integrand is bounded by $|h|^{2}$ and tends to $0$ pointwise, so dominated convergence [F7] makes the truncated sums converge in norm to $E(B)h$; thus $E$ is strongly countably additive and is a PVM. [given, F2, F7, algebra]
+1.1 [Self-adjoint multiplication and indicator PVM] Put $X_n:=\{x:|m(x)|\le n\}$. For $f\in H$, $f\mathbf1_{X_n}\in D(M_m)$ and $f\mathbf1_{X_n}\to f$ in $H$ by dominated convergence, so $D(M_m)$ is dense. For $f,g\in D(M_m)$, Cauchy-Schwarz makes the products integrable and real-valuedness of $m$ gives $\langle M_mf,g\rangle=\langle f,M_mg\rangle$, so $M_m$ is symmetric. If $h\in D(M_m^*)$ and $k:=M_m^*h$, the adjoint identity holds for every $f\in D(M_m)$. For each $n$ take $f=(mh-k)\mathbf1_{X_n}$; this vector lies in $D(M_m)$ because $m$ is bounded on $X_n$, and the identity gives $0=\langle M_mf,h\rangle-\langle f,k\rangle=\int_{X_n}|mh-k|^2d\mu$. Thus $mh=k$ a.e. on every $X_n$, and since $\bigcup_nX_n$ has full measure, $mh=k\in H$. Therefore $h\in D(M_m)$ and $M_m^*h=M_mh$, so $M_m=M_m^*$; this proves (a). [F1, F7, algebra] For a Borel set $B$ the class $\mathbf 1_{m^{-1}(B)}$ is real measurable and bounded, so multiplication by it is a bounded self-adjoint operator on $H$ whose square is multiplication by $\mathbf 1_{m^{-1}(B)}^{2}=\mathbf 1_{m^{-1}(B)}$: hence $E(B)=M_{\mathbf 1_{m^{-1}(B)}}$ is an orthogonal projection. Moreover $E(\varnothing)=0$ and $E(\mathbb R)=I$ because $m$ is finite $\mu$-a.e., and $E(B)E(C)=M_{\mathbf 1_{m^{-1}(B)}\mathbf 1_{m^{-1}(C)}}=E(B\cap C)$ because $m^{-1}(B)\cap m^{-1}(C)=m^{-1}(B\cap C)$ up to a $\mu$-null set. For pairwise disjoint Borel $B_{n}$ with union $B$ the multiplicativity of classes gives $\|E(B)h-\sum_{n\le N}E(B_{n})h\|^{2}=\int|(\mathbf 1_{B}-\sum_{n\le N}\mathbf 1_{B_{n}})\circ m|^{2}|h|^{2}d\mu$ for every $h\in H$, and the integrand is bounded by $|h|^{2}$ and tends to $0$ pointwise, so dominated convergence [F7] makes the truncated sums converge in norm to $E(B)h$; thus $E$ is strongly countably additive and is a PVM. [given, F2, F7, algebra]
 
 2.1 [Regularity] For $x\in H$ the scalar measure of [F2] is $E_{x}(B)=\langle E(B)x,x\rangle=\int_{m^{-1}(B)}|x|^{2}d\mu$, a finite Borel measure on $\mathbb R$ of total mass $\|x\|^{2}$; $\mathbb R$ is locally compact, Hausdorff and second countable, so [F6] makes $E_{x}$ regular. As this holds for every $x$, $E$ is a regular PVM. [step 1.1, F2, F6, algebra]
 

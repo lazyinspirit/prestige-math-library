@@ -39,16 +39,16 @@ on $\mathbb T^3_{2\pi}$. Then:
 idempotent ($P_N^2=P_N$), with range $X_N$ and kernel the classes with vanishing
 coefficients on $\Lambda_N$;
 
-**(b)** for every multi-index $\alpha$ with $|\alpha|\le s$ and every
-$u\in H^s$, $P_ND^\alpha u=D^\alpha P_Nu$;
+**(b)** for every integer $s\ge0$, every multi-index $\alpha$ with
+$|\alpha|\le s$ and every $u\in H^s$, $P_ND^\alpha u=D^\alpha P_Nu$;
 
-**(c)** for every $0\le r\le s$ and every $u\in H^r$,
+**(c)** for every integer $r\ge0$ and every $u\in H^r$,
 $\|P_Nu\|_{H^r}\le\|u\|_{H^r}$;
 
-**(d)** for every $0\le r\le s$ and every $u\in H^r$, $P_Nu\to u$ in $H^r$ as
+**(d)** for every integer $r\ge0$ and every $u\in H^r$, $P_Nu\to u$ in $H^r$ as
 $N\to\infty$;
 
-**(e)** for every $s\ge1$, every $u\in H^s$ and every $N\ge0$,
+**(e)** for every integer $s\ge1$, every $u\in H^s$ and every $N\ge0$,
 $$\|u-P_Nu\|_{H^{s-1}}\le C_s\,(1+N^2)^{-1/2}\,\|u\|_{H^s}$$
 with $C_s$ depending only on $s$.
 
@@ -73,7 +73,7 @@ with $C_s$ depending only on $s$.
 
 1.3 (Contraction (c) and convergence (d).) For $u\in H^r$, [L2] and the definition of $P_N$ give $\|P_Nu\|_{H^r}^2=\sum_{k\in\Lambda_N}q^r_k|\widehat u(k)|^2\le\sum_kq^r_k|\widehat u(k)|^2=\|u\|_{H^r}^2$, which is (c). Similarly $\|u-P_Nu\|_{H^r}^2=\sum_{k\notin\Lambda_N}q^r_k|\widehat u(k)|^2$ is the tail of the convergent series $\sum_kq^r_k|\widehat u(k)|^2$, hence tends to $0$ as $N\to\infty$ with $\Lambda_N$ increasing to $\mathbb Z^3$; this is (d). [L2, L3, algebra]
 
-2.1 (Tail bound (e).) For $|k|>N$ and $|\alpha|\le s-1$, $|k^\alpha|^2\le(1+|k|^2)^{s-1}$, so $q^{s-1}_k\le(s+1)^3(1+|k|^2)^{s-1}\le(s+1)^32(1+N^2)^{-1}(1+|k|^2)^s$ because $(1+|k|^2)\ge1+N^2$; hence $\|u-P_Nu\|_{H^{s-1}}^2\le2(s+1)^3(1+N^2)^{-1}\sum_k(1+|k|^2)^s|\widehat u(k)|^2\le C_s^2(1+N^2)^{-1}\|u\|_{H^s}^2$ by the norm equivalence [L2]. Taking square roots gives (e). [L2, algebra] ∎
+2.1 (Tail bound (e).) For $|k|>N$ and $|\alpha|\le s-1$, $|k^\alpha|^2\le(1+|k|^2)^{s-1}$, so $q^{s-1}_k\le(s+1)^3(1+|k|^2)^{s-1}\le(s+1)^32(1+N^2)^{-1}(1+|k|^2)^s$ because $(1+|k|^2)\ge1+N^2$; hence $\|u-P_Nu\|_{H^{s-1}}^2\le2(s+1)^3(1+N^2)^{-1}\sum_k(1+|k|^2)^s|\widehat u(k)|^2\le C_s^2(1+N^2)^{-1}\|u\|_{H^s}^2$ by the norm equivalence [L2]. Taking square roots gives (e). The decay rate is sharp up to constants: for integers $n\ge2$ take $N=n-1$ and the real polynomial $u(x)=\cos(nx^1)$, whose modes $\pm(n,0,0)$ lie outside $\Lambda_N$. By [L2], $\|u-P_Nu\|_{H^{s-1}}^2/\|u\|_{H^s}^2=(\sum_{a=0}^{s-1}n^{2a})/(\sum_{a=0}^s n^{2a})\ge1/((s+1)n^2)$. Hence no bound uniform in $u$ can replace $(1+N^2)^{-1/2}$ by a sequence $o(N^{-1})$. This is the rate sharpness in the title; no optimal constant is asserted. [L2, algebra] ∎
 
 
 

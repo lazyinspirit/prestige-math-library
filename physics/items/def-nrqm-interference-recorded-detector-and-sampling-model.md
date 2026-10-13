@@ -52,20 +52,34 @@ $0\notin A$, together with measurable **recorded weights**
 $w_{a}:\mathbb R^{3}\to[0,1]$ for $a\in A$ such that
 $\sum_{a\in A}w_{a}(x)\le1$ for almost every $x\in\mathbb R^{3}$. The
 **effect** of the label $a$ is the multiplication operator
-$$F_{a}:=M_{w_{a}},\qquad (M_{w}\psi)(x):=w(x)\psi(x),$$
+$$F_{a}:=M_{w_{a}},\qquad (M_{w}\psi)(x):=w(x)\psi(x)\quad\text{a.e.},$$
 on $H_{s}=L^{2}(\mathbb R^{3};\mathbb C^{r})$, and the **no-record effect** is
 $$F_{0}:=I-\sum_{a\in A}F_{a}.$$
-Each $F_{a}$ is a bounded self-adjoint operator
-([[def-bounded-linear-operator]]) with $0\le F_{a}\le I$ in the
-quadratic-form order, and $\sum_{a\in A}F_{a}+F_{0}=I$ with $0\le F_{0}\le I$:
-multiplication by a measurable weight $0\le w\le1$ is bounded with
-$\|M_{w}\|\le1$ by [[prop-order-and-scalar-rules-for-the-nonnegative-integral]], self-adjoint by
-[[def-hilbert-space-adjoint]], and nonnegative with $M_{w}\le I$ by the order
-of [[def-non-negative-and-positive-operator]]; the sum
-$F_{0}=M_{1-\sum_{a}w_{a}}$ is of the same form because $0\le1-\sum_{a}w_{a}\le1$.
-Thus $(F_{a})_{a\in A}\cup\{F_{0}\}$ is a finite family of bounded effects
-with nonnegative terms summing to the identity, of the kind of clause (iv) of
-P2 ([[post-nrqm-framework-observable-and-probability]]).
+The multiplier is a well-defined linear map on almost-everywhere classes,
+since changing a representative on a null set changes its product only on
+that null set.
+Each $F_a$ is bounded: for $\psi\in H_s$,
+$$\|M_{w_a}\psi\|^2=\int_{\mathbb R^3}w_a(x)^2\|\psi(x)\|_{\mathbb C^r}^2dx\le\|\psi\|^2,$$
+so the boundedness inequality holds with bound $C=1$ by monotonicity of the
+nonnegative integral ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]).
+Thus $F_a$ is a bounded linear operator ([[def-bounded-linear-operator]]). Because $w_a$
+is real, the componentwise pairing gives
+$\langle M_{w_a}\psi,\phi\rangle=\langle\psi,M_{w_a}\phi\rangle$ for all
+$\psi,\phi\in H_s$; hence $F_a$ is self-adjoint by
+[[def-hilbert-space-adjoint]]. At almost every $x$, the finite-dimensional
+operator $w_a(x)I_{\mathbb C^r}$ is nonnegative in the sense of
+[[def-non-negative-and-positive-operator]], and therefore
+$$0\le\langle F_a\psi,\psi\rangle=\int_{\mathbb R^3}w_a(x)\|\psi(x)\|_{\mathbb C^r}^2dx\le\|\psi\|^2.$$
+Here $0\le F_a\le I$ means these quadratic-form inequalities for every
+$\psi\in H_s$.
+
+Define $w_0(x):=\max\{0,1-\sum_{a\in A}w_a(x)\}$. This is measurable,
+$0\le w_0\le1$, and it equals $1-\sum_aw_a$ almost everywhere by the
+admissibility condition. Thus $F_0=M_{w_0}=I-\sum_aF_a$ on $H_s$, and the
+same argument gives $0\le F_0\le I$ and self-adjointness. Consequently
+$\sum_{a\in A}F_a+F_0=I$, so the completed family is a finite family of
+bounded effects of clause (iv) of P2
+([[post-nrqm-framework-observable-and-probability]]).
 
 **(b) Recorded probabilities.** For a preparation $\rho\in D(H_{s})$ the
 **recorded probability** of a label $a\in A$ and the **no-record probability**
@@ -76,8 +90,10 @@ the outcome reading of clause (iv) of P2 for the declared effects
 records the reading; the numbers are nonnegative and sum to one). The
 **recorded-event mass** is $\nu(A):=\sum_{a\in A}\nu(a)=1-\nu(0)\in[0,1]$. A
 detector is **full-efficiency** when $\sum_{a}w_{a}=1$ almost everywhere, so
-that $F_{0}=0$ and $\nu(0)=0$; otherwise the model **loses** events, and the
-no-record channel carries the lost mass. A **declared recorded bin** $B$ is
+that $F_{0}=0$ and $\nu(0)=0$ for every preparation. For a fixed preparation
+$\rho$, the model **loses** events when $\nu(0)>0$, and the no-record channel
+carries this lost mass. A detector that is not full-efficiency can nevertheless
+have $\nu(0)=0$ for a particular preparation. A **declared recorded bin** $B$ is
 the special case with one label $a$ and $w_{a}=\mathbf 1_{B}$; then
 $F_{a}=G(B)$ is the position projection of clause (e) of
 [[def-nrqm-interference-two-path-preparation-and-detection-model]], with the
@@ -94,10 +110,12 @@ statistical operation on the recorded data; it is not a state update, and no
 claim of P3 is made here.
 
 **(d) Sampling model.** A **declared $N$-trial sampling model** for a fixed
-preparation $\rho$ is a probability space carrying random elements
-$O_{1},\dots,O_{N}:\Omega\to A\cup\{0\}$ ($N\ge1$), where $0$ is the no-record
+preparation $\rho$ is a probability space $(\Omega,\mathcal F,\mathbb P)$
+carrying measurable maps
+$O_{1},\dots,O_{N}:(\Omega,\mathcal F)\to
+(A\cup\{0\},\mathcal P(A\cup\{0\}))$ ($N\ge1$), where $0$ is the no-record
 label of clause (b) and is distinct from every recorded label because
-$0\notin A$, and that are **mutually independent** in the sense of
+$0\notin A$. The maps are **mutually independent** in the sense of
 [[def-independence-of-finite-random-variables]] and **identically distributed**
 with $\mathbb P(O_{k}=a)=\nu(a)$ for every $a\in A$, $\mathbb P(O_{k}=0)=\nu(0)$
 and every $k$, where $\nu$ is the recorded law of clause (b); the numbers

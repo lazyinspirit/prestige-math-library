@@ -30,9 +30,9 @@ sources:
   references:
     - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.2, printed pages 1-2 (PDF pages 4-5): Newton's second law F_i = d(m_i rdot_i)/dt with initial data r_i(0) and rdot_i(0)"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
-    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 4.5, printed pages 79-83: constant near-Earth gravity as the potential mgz with constant g, an approximation and not a globally uniform planetary field"
-      url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter page 4 (PDF page 8): the gravity law (1.15) as an additional law beyond the equation of motion"
+    - title: "D. Tong, Dynamics and Relativity, Section 2.1, printed page 12 (PDF page 18): uniform gravitational field F=-mg, potential V=mgz and the quadratic solution; Section 2.3.2, printed page 24 (PDF page 30): the near-surface approximation for height z much smaller than planetary radius R"
+      url: "https://www.davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter page 5 (PDF page 9): the gravity law (1.15) as an additional law beyond the equation of motion"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Section 1.2.1, printed page 5 (PDF page 11): under the boost x' = x + v t the acceleration transforms as a spatial vector, a' = R a"
       url: "https://www.davidtong.org/pdfs/teaching/dynamics-and-relativity/dynrel.pdf"
@@ -59,12 +59,14 @@ acceleration $\mathbf g$ independently of its mass, position and velocity
 1. $F$ satisfies the standing continuity and state-local-Lipschitz hypotheses
    of clause (iii) of [[post-cm02-force-superposition]], with state-Lipschitz
    constant $0$ on every cylinder.
-2. For the initial datum $x(0)=x_{0}$, $\dot x(0)=v_{0}$ the explicit curve
+2. For the initial datum $x(0)=x_{0}$, $\dot x(0)=v_{0}$ the explicit curve,
+   defined for every $t\in\mathbb R$,
 
-   $$x(t)=x_{0}+v_{0}t+\tfrac12\mathbf g\,t^{2}$$
+   $$x_i(t)=x_{0,i}+v_{0,i}t+\tfrac12\mathbf g\,t^{2}\quad(i=1,\dots,N),\qquad x(t):=(x_1(t),\dots,x_N(t)).$$
 
-   is a motion of the model on $[0,\infty)$ and hence on the whole time
-   window, and it is the unique maximal motion with this datum.
+   is a motion of the model on the whole time window $\mathbb R$ and is the
+   unique maximal motion with this datum; its restriction to $[0,\infty)$ is
+   therefore also a motion.
 3. The dimension bookkeeping of the terms is consistent: the parameter has
    dimension length per time squared, the force components have dimension
    $\mu\ell\tau^{-2}$, and the quadratic term has dimension length.
@@ -74,40 +76,23 @@ acceleration $\mathbf g$ independently of its mass, position and velocity
 
 ## Facts & Assumptions
 
-**Given:** The uniform-force model above, with parameters $m_{i}>0$ and
-$\mathbf g$, and the initial datum $(0,x_{0},v_{0})$.
+**Given:** The uniform-force model above, with parameters $m_{i}>0$ and $\mathbf g$, and the initial datum $(0,x_{0},v_{0})$.
 
-[L1] The force model, the associated first-order field $\mathcal F$, motions
-and maximal motions are [[post-cm02-force-superposition]] and
-[[def-cm02-newtonian-flow]]; the standing regularity hypothesis is clause (iii)
-of the postulate, and the local existence, uniqueness, quantitative cylinder
-and maximal-motion conclusions are [[pthm-cm02-ivp]] clauses 1-4.
+[L1] The force model, the associated first-order field $\mathcal F$, motions and maximal motions are [[post-cm02-force-superposition]] and [[def-cm02-newtonian-flow]]; the standing regularity hypothesis is clause (iii) of the postulate, and the local existence, uniqueness, quantitative cylinder and maximal-motion conclusions are [[pthm-cm02-ivp]] clauses 1-4.
 
-[L2] Componentwise differentiation of vector-valued curves
-([[def-vector-valued-derivative-and-integral]]): a curve
-$t\mapsto\xi(t)\in\mathbb R^{3}$ is differentiable exactly when its three
-components are, and then $\xi'=(\xi_{1}',\xi_{2}',\xi_{3}')$; sums and scalar
-multiples are differentiated termwise ([[thm-algebra-of-derivatives]]), and
-$(t^{2})'=2t$, $(t)'=1$, and constants have derivative $0$
-([[lem-derivative-of-a-power]], [[def-derivative]]).
+[L2] Componentwise differentiation of vector-valued curves ([[def-vector-valued-derivative-and-integral]]): a curve $t\mapsto\xi(t)\in\mathbb R^{3}$ is differentiable exactly when its three components are, and then $\xi'=(\xi_{1}',\xi_{2}',\xi_{3}')$; sums and scalar multiples are differentiated termwise ([[thm-algebra-of-derivatives]]), and $(t^{2})'=2t$, $(t)'=1$, and constants have derivative $0$ ([[lem-derivative-of-a-power]], [[def-derivative]]).
 
-[L3] Under a change of inertial frame with parameters $(b,a_{0},v,R)$ the
-description $\eta$ of a motion satisfies $\eta''(t')=R\,\ddot x(t'-b)$
-([[pthm-cm01-galilean-kinematics]] clause 2).
+[L3] Under a change of inertial frame with parameters $(b,a_{0},v,R)$ the description $\eta$ of a motion satisfies $\eta''(t')=R\,\ddot x(t'-b)$ ([[pthm-cm01-galilean-kinematics]] clause 2).
 
-[L4] Units and dimensions ([[def-cm01-units]]): $[\mathbf g]=\ell\tau^{-2}$,
-$[m_{i}\mathbf g]=\mu\ell\tau^{-2}$, and the derivative rule gives
-$[\dot x]=\ell\tau^{-1}$ and $[\ddot x]=\ell\tau^{-2}$.
+[L4] Units and dimensions ([[def-cm01-units]]): $[\mathbf g]=\ell\tau^{-2}$, $[m_{i}\mathbf g]=\mu\ell\tau^{-2}$, and the derivative rule gives $[\dot x]=\ell\tau^{-1}$ and $[\ddot x]=\ell\tau^{-2}$.
 
 ## Verification
 
-**Proof technique:** direct; check the standing hypotheses on the constant map,
-differentiate the displayed curve, apply the existence and uniqueness theorem,
-and compute the dimension and covariance statements.
+**Proof technique:** direct; check the standing hypotheses on the constant map, differentiate the displayed curve, apply the existence and uniqueness theorem, and compute the dimension and covariance statements.
 
 1.1 The map $F_{i}(t,x,v)=m_{i}\mathbf g$ is constant on $D=\mathbb R\times\mathbb R^{3N}\times\mathbb R^{3N}$, hence continuous there; and for every pair of states $(t,z),(t,z')$ one has $\lVert F(t,z)-F(t,z')\rVert_{2}=0\le 0\cdot\lVert z-z'\rVert_{2}$, so the local-Lipschitz requirement of clause (iii) of [[post-cm02-force-superposition]] holds on every compact cylinder with constant $L=0$, in particular with a constant not depending on time; this proves claim 1. [given, L1, algebra]
 
-1.2 Differentiate the displayed curve: by [L2] applied to the three components, $\dot x(t)=v_{0}+\mathbf g\,t$ and $\ddot x(t)=\mathbf g$ for every $t\in\mathbb R$; hence $m_{i}\ddot x_{i}(t)=m_{i}\mathbf g=F_{i}(t,x(t),\dot x(t))$ for every $i$, and $x(t)\in Q=\mathbb R^{3N}$, $t\in I_{0}=\mathbb R$; the initial values $x(0)=x_{0}$ and $\dot x(0)=v_{0}$ are immediate. By the equivalence of clause (c) of [[def-cm02-newtonian-flow]], $x$ is a motion of the model on $\mathbb R$. [given, L1, L2, algebra]
+1.2 Differentiate the displayed curve: by [L2] applied to each label's three components, $\dot x_i(t)=v_{0,i}+\mathbf g\,t$ and $\ddot x_i(t)=\mathbf g$ for every $t\in\mathbb R$; hence $m_{i}\ddot x_{i}(t)=m_{i}\mathbf g=F_{i}(t,x(t),\dot x(t))$ for every $i$, and $x(t)\in Q=\mathbb R^{3N}$, $t\in I_{0}=\mathbb R$; the initial values $x(0)=x_{0}$ and $\dot x(0)=v_{0}$ are immediate. By the equivalence of clause (c) of [[def-cm02-newtonian-flow]], $x$ is a motion of the model on $\mathbb R$. [given, L1, L2, algebra]
 
 1.3 Dimensions: $[\mathbf g]=\ell\tau^{-2}$, so $[\tfrac12\mathbf g t^{2}]=\ell\tau^{-2}\cdot\tau^{2}=\ell$, matching the position dimension, and $[m_{i}\mathbf g]=\mu\ell\tau^{-2}$, matching the force dimension of clause (iii) of [[post-cm02-force-superposition]]; $[\dot x]=\ell\tau^{-1}$ and $[\ddot x]=\ell\tau^{-2}$ by the derivative rule of [[def-cm01-units]]; this proves claim 3. [given, L4, algebra]
 
@@ -117,13 +102,6 @@ and compute the dimension and covariance statements.
 
 ## Remarks
 
-- **The parameter is model data.** The computation above produces the
-  quadratic motion for every declared $\mathbf g$; no numerical value is
-  asserted and no measurement enters. Using a measured local field strength as
-  $\mathbf g$ is an empirical premise with its own uncertainty and conditions,
-  and the constant field itself is an approximation to any realistic field,
-  as the recorded source material states.
+- **The parameter is model data.** The computation above produces the quadratic motion for every declared $\mathbf g$; no numerical value is asserted and no measurement enters. Using a measured local field strength as $\mathbf g$ is an empirical premise with its own uncertainty and conditions, and the constant field itself is an approximation to any realistic field, as the recorded source material states.
 
-- **No drag.** The model of this Example has no medium and no drag; adding the
-  drag model [[post-cm02-drag]] changes the equation and the motion, and the
-  companion example computes the resulting terminal-velocity approach.
+- **No drag.** The model of this Example has no medium and no drag; adding the drag model [[post-cm02-drag]] changes the equation and the motion, and the companion example computes the resulting terminal-velocity approach.

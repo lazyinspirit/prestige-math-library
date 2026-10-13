@@ -88,14 +88,15 @@ $\psi'=-\tfrac{i}{\hbar}K\psi$. Under those hypotheses, with
 $f(t):=\langle A\psi(t),\psi(t)\rangle$ and $f'(t_{0})\ne0$, the timescale
 $\tau_{A}(t_{0}):=\Delta A(t_{0})/|f'(t_{0})|$ satisfies
 $$\Delta K(t_{0})\,\tau_{A}(t_{0})\ge\frac{\hbar}{2}.$$
-With $K=H$ the energy and $A$ a bounded observable, the Heisenberg-picture
-theorem identifies $f'(t_{0})$ with the derivative of the mean of the
-representative observable
-([[pthm-nrqm-autonomous-dynamics-heisenberg-picture]]). For a
-domain-qualified, possibly unbounded $A$, the graph-domain theorem still gives
-the Schroedinger-picture derivative stated above, but no Heisenberg-picture
-identification is asserted here; the cited Heisenberg-picture theorem covers
-bounded observables only. The spreads
+With $K=H$ the energy, the Heisenberg-picture theorem identifies $f'(t_{0})$
+with the derivative of the mean of the representative observable when $A$ is
+bounded and preserves the energy domain,
+$A D(H_{\mathrm{op}})\subseteq D(H_{\mathrm{op}})$
+([[pthm-nrqm-autonomous-dynamics-heisenberg-picture]] clause (c)). Boundedness
+alone does not imply this domain-invariance condition. For a domain-qualified,
+possibly unbounded $A$, the graph-domain theorem still gives the
+Schroedinger-picture derivative stated above, but no Heisenberg-picture
+identification is asserted here. The spreads
 $\Delta A(t_{0})$ and $\Delta K(t_{0})$ are preparation spreads in the sense
 of [[def-nrqm-uncertainty-preparation-spread]], and the theorem's clause (d)
 records that when $f'(t_{0})=0$ the quotient supplies no timescale at all.

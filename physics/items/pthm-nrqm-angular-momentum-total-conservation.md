@@ -203,7 +203,7 @@ operators $P_{k}$ and $M_{V}$ and preserves their common domain
 $W^{2,2}(\mathbb R^{3};\mathbb C^{r})$; hence it commutes with $H_{V}$ on
 $D(H_{V})$. If a bounded self-adjoint $S$ satisfies $SK\subseteq KS$ for a
 self-adjoint $K$, then $Se^{-itK/\hbar}=e^{-itK/\hbar}S$ for every $t$
-([[lem-nrqm-angular-momentum-su2-lift-of-the-rotation-action]] clause (d),
+([[lem-nrqm-angular-momentum-su2-lift-of-the-rotation-action]] Facts & Assumptions (F6),
 [[thm-nrqm-magnetic-and-detection-conserved-spectral-probability-laws]]
 clause (a')).
 

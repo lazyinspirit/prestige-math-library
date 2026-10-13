@@ -83,8 +83,9 @@ covariance matrix of the affine map $T(x)=h(\mu)+Dh(\mu)(x-\mu)$ applied to
 the random vector $X$: they are $h(\mu)$ and
 $Dh(\mu)\operatorname{Cov}(X)Dh(\mu)^{\mathsf T}$
 ([[def-cm-covariance-matrix-of-a-random-vector]]). That covariance is the
-covariance of the *linearization*, not of $h\circ X$; the two agree when $h$
-is affine on the values of $X$. Under the convexity, $C^2$ and Hessian-bound
+covariance of the *linearization*, not of $h\circ X$; they agree if $h$ is
+equal to its linearization on $U$, that is, if
+$h(x)=h(\mu)+Dh(\mu)(x-\mu)$ for every $x\in U$. Under the convexity, $C^2$ and Hessian-bound
 hypotheses of [[cor-cm-linearization-error-bounds]] the scalar remainder mean is bounded using the second moment,
 and the covariance difference is bounded using the fourth moment. For a
 vector map $f=(f_i)$ with component Hessian bounds $B_i$, put

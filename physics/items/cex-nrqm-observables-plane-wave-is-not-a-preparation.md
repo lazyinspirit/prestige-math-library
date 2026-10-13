@@ -13,13 +13,16 @@ deps:
     ex-nrqm-observables-position-bin-probabilities,
     cor-trigonometric-parity-and-pythagorean-identity,
     def-countable-choice,
+    def-axiom-of-choice,
     def-nrqm-magnetic-and-detection-position-and-momentum-operators,
     def-nrqm-observables-framework-observable-and-outcome-law,
     def-nrqm-state-geometry-framework-state-space,
     lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues,
     post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle,
     post-nrqm-framework-state-and-composition,
+    post-nrqm-framework-observable-and-probability,
     pthm-nrqm-observables-position-and-momentum-outcome-laws,
+    thm-cauchy-schwarz-in-an-inner-product-space,
     thm-eulers-formula,
     thm-monotone-convergence-for-the-integral
   ]
@@ -27,20 +30,24 @@ dependency_roles:
   ex-nrqm-observables-position-bin-probabilities: operational-prerequisite
   cor-trigonometric-parity-and-pythagorean-identity: mathematical-premise
   def-countable-choice: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
   def-nrqm-magnetic-and-detection-position-and-momentum-operators: mathematical-premise
   def-nrqm-observables-framework-observable-and-outcome-law: formulation-prerequisite
   def-nrqm-state-geometry-framework-state-space: formulation-prerequisite
   lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues: mathematical-premise
   post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle: physical-assumption
   post-nrqm-framework-state-and-composition: physical-assumption
+  post-nrqm-framework-observable-and-probability: physical-assumption
   pthm-nrqm-observables-position-and-momentum-outcome-laws: physical-result
+  thm-cauchy-schwarz-in-an-inner-product-space: mathematical-premise
   thm-eulers-formula: mathematical-premise
   thm-monotone-convergence-for-the-integral: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
   proof: ai-altered
-physical_scope: "A refutation, inside the framework's state assignment, of the
+physical_scope: "A refutation under P1, P2 and P5, with Countable Choice and the Axiom of
+  Choice for the cited spectral suppliers, of the
   informal claim that a free plane wave, or the point-localized distribution
   symbol delta(x minus X), is a preparation of the massive-particle model with
   the idealized position density one: the plane wave is not an element of the
@@ -68,11 +75,13 @@ verification:
 
 ## Statement refuted
 
-Adopt the state and composition postulate P1 and the massive-particle model postulate P5 of the framework ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]). Then: **every** bounded smooth function $\psi:\mathbb R^{3}\to\mathbb C$ that solves the free time-independent Schrödinger equation $-\frac{\hbar^{2}}{2m}\Delta\psi=E\psi$ pointwise determines a pure preparation of the model with position density $|\psi|^{2}$; in particular the plane wave $\psi_{k}(x)=e^{ik\cdot x}$ with $k\ne0$ is a preparation with constant position density $|\psi_{k}|^{2}=1$, and the point-localized object $\delta^{3}(x-X)$ is the preparation of a particle exactly at $X$.
+Adopt the state and composition postulate P1, the observable and probability postulate P2, and the massive-particle model postulate P5 of the framework ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-observable-and-probability]], [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]), with Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]) for the cited spectral suppliers. Then: **every** bounded smooth function $\psi:\mathbb R^{3}\to\mathbb C$ that solves the free time-independent Schrödinger equation $-\frac{\hbar^{2}}{2m}\Delta\psi=E\psi$ pointwise determines a pure preparation of the model with position density $|\psi|^{2}$; in particular the plane wave $\psi_{k}(x)=e^{ik\cdot x}$ with $k\ne0$ is a preparation with constant position density $|\psi_{k}|^{2}=1$, and the point-localized object $\delta^{3}(x-X)$ is the preparation of a particle exactly at $X$.
+
+**Point-localized symbol.** Here $\delta^3(x-X)$ denotes the evaluation functional $\delta_X:C_c(\mathbb R^3;\mathbb C)\to\mathbb C$, $\delta_X(\eta):=\eta(X)$, where $C_c$ is the space of continuous complex functions with compact support. An $L^2$ representation would be a class $f$ with $\int f(x)\eta(x)\,dx=\eta(X)$ for every such $\eta$; these integrals are defined by Cauchy–Schwarz because $\eta\in L^2$.
 
 ## Facts & Assumptions
 
-**Given:** The adopted postulates P1 and P5 for a spinless particle with state space $H=L^{2}(\mathbb R^{3};\mathbb C)$ ([[post-nrqm-framework-state-and-composition]] clauses (i)-(iii), [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]] clauses (iii)-(iv)); the position operators $Q_{j}$ with their spectral facts ([[def-nrqm-magnetic-and-detection-position-and-momentum-operators]], [[pthm-nrqm-observables-position-and-momentum-outcome-laws]]); a wave vector $k\in\mathbb R^{3}$, $k\ne0$; a point $X\in\mathbb R^{3}$; the Axiom of Countable Choice ([[def-countable-choice]]).
+**Given:** The adopted postulates P1, P2 and P5 for a spinless particle with state space $H=L^{2}(\mathbb R^{3};\mathbb C)$ ([[post-nrqm-framework-state-and-composition]] clauses (i)-(iii), [[post-nrqm-framework-observable-and-probability]] clauses (i)-(iii), [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]] clauses (iii)-(iv)); the position operators $Q_{j}$ with their spectral facts ([[def-nrqm-magnetic-and-detection-position-and-momentum-operators]], [[pthm-nrqm-observables-position-and-momentum-outcome-laws]]); a wave vector $k\in\mathbb R^{3}$, $k\ne0$; a point $X\in\mathbb R^{3}$; the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]).
 
 [F1] **Preparations are rays of the state space.** A pure preparation of the model is a unit ray $[\psi]=\{z\psi:z\in\mathbb C\setminus\{0\}\}$ of a vector $\psi\in H$ with $\|\psi\|=1$; the zero vector is excluded, and a general preparation is a density operator on $H$. The model assigns no preparation to an object that is not an element of $H$ ([[post-nrqm-framework-state-and-composition]] clause (ii), [[def-nrqm-state-geometry-framework-state-space]] clauses (a)-(c)).
 
@@ -82,13 +91,15 @@ Adopt the state and composition postulate P1 and the massive-particle model post
 
 [F4] **Outcome-law reading.** The model reads an exact position value $\lambda$ through the singleton $\{\lambda\}$ and a finite-resolution outcome through a Borel bin $B$, with probabilities given by the spectral law of [[def-nrqm-observables-framework-observable-and-outcome-law]]; a vector outside $H$ carries no such law.
 
+[F5] **Cauchy–Schwarz.** In the $L^2$ inner product, $|\int f\overline h|\le\|f\|_2\|h\|_2$ for $f,h\in L^2$ ([[thm-cauchy-schwarz-in-an-inner-product-space]]); the integral pairing convention is that of the position/momentum operator definition.
+
 ## Counterexample
 
 **Proof technique:** direct; show that the objects named in the refuted statement are not elements of the state space and that the model's exact-position statement is atomless.
 
 1.1 [The plane wave is not in the state space] By [F2], $|\psi_{k}(x)|^{2}=1$ for every $x$ and $\int_{\mathbb R^{3}}|\psi_{k}|^{2}dx=+\infty$; hence $\psi_{k}\notin H=L^{2}(\mathbb R^{3};\mathbb C)$. For every nonzero scalar $z$ the same computation gives $\int|z\psi_{k}|^{2}=|z|^{2}\cdot\infty=\infty$, so no nonzero scalar multiple of $\psi_{k}$ lies in $H$ either, and the formal normalization "$\psi_{k}/\sqrt{V}$" depends on a box volume $V$ and is also not an element of $H$. [given, F2, algebra]
 
-1.2 [The exact-position symbol is not a state] Suppose $x\in H$ were an eigenvector of $Q_{j}$ at some $\lambda$, that is $Q_{j}x=\lambda x$ with $x\ne0$; then $\lambda$ would be an eigenvalue of $Q_{j}$. But [F3] states that $Q_{j}$ has no eigenvalues, and its law is atomless, so no such $x$ exists. The symbol $\delta^{3}(x-X)$ is not a function class in $L^{2}(\mathbb R^{3};\mathbb C)$ and cannot be an eigenvector; the model's corresponding exact-position statement is instead $\mu^{Q_{j}}(\{X\})=0$ for every preparation. [given, F3, F4, algebra]
+1.2 [The exact-position symbol is not a state] If an $L^2$ class $f$ represented $\delta_X$, use the real continuous compactly supported functions $\eta_n(x):=\prod_{j=1}^3\max\{0,1-n|x_j-X_j|\}$, for integers $n\ge1$. They satisfy $\eta_n(X)=1$, $0\le\eta_n\le1$, and are supported in the cube $\prod_j[X_j-1/n,X_j+1/n]$, so $\|\eta_n\|_2\le(2/n)^{3/2}$. The representation and [F5] would give $1=|\int f\eta_n|\le\|f\|_2(2/n)^{3/2}\to0$, a contradiction. Thus $\delta_X$ has no $L^2$ representation. Independently, [F3] rules out nonzero position eigenvectors. The model's exact-coordinate law is $\mu^{Q_j}_{\rho}(\{X_j\})=0$ for every preparation $\rho$, with $X_j\in\mathbb R$ the $j$-th coordinate of $X\in\mathbb R^3$. [given, F3, F4, F5, construct, algebra]
 
 2.1 [Hence no preparation is assigned to either object] By [F1] pure preparations are unit rays of $H$ and general preparations are density operators on $H$; since neither $\psi_{k}$ nor $\delta^{3}(x-X)$ determines an element of $H$, neither determines a preparation, and no position density can be attached to them within the model. The identities $|\psi_{k}|^{2}=1$ and "$\delta$ is localized" are formal statements outside the state space, not probabilities of the model. [step 1.1, step 1.2, F1, F4, algebra]
 

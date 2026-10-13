@@ -6,7 +6,7 @@ domain: physics
 title: "The conditional Stern-Gerlach force prediction of the spin-half Zeeman model: transverse momentum rate in a smooth bounded gradient field"
 status: draft
 origin: session
-dependency_level: 11
+dependency_level: 10
 deps: [def-axiom-of-choice, def-countable-choice, def-nrqm-angular-momentum-framework-angular-momentum-observables, def-nrqm-autonomous-dynamics-framework-evolution, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-magnetic-and-detection-position-and-momentum-operators, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, post-nrqm-angular-momentum-magnetic-moment-coupling, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-observable-and-probability, post-nrqm-framework-state-and-composition, prop-nrqm-orbital-and-spin-finite-spin-matrices, thm-nrqm-magnetic-and-detection-conditional-stern-gerlach-force]
 dependency_roles:
   def-axiom-of-choice: mathematical-premise

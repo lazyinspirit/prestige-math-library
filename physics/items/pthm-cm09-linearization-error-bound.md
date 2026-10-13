@@ -139,11 +139,11 @@ $$F(\zeta)-F(0)=\int_{0}^{1}DF(t\zeta)\zeta\,dt,\qquad \Bigl\lVert\int_{0}^{1}\p
 [F5] Finite-time linearization bound
 ([[thm-cm-finite-time-linearization-error-bound]] with state dimension $2n$):
 for the open domain of $F$, the constants $r_{0},C,L$ and the matrix $A$ of
-the statement, the maximal solution $z$ of $z'=F(z)$, $z(0)=z_{0}$ is
+the statement, the maximal solution $\zeta$ of $\zeta'=F(\zeta)$, $\zeta(0)=\zeta_0:=(\delta q_0,v_0)$ is
 defined on $[0,T]$ whenever $\delta e^{LT}<r_{0}$, it satisfies
-$\lVert z(t)\rVert_{2}\le\delta e^{Lt}$ there, and
-$$\lVert z(t)-y(t)\rVert_{2}\le C\delta^{2}\int_{0}^{t}e^{\lVert A\rVert(t-s)}e^{2Ls}\,ds\le C\delta^{2}te^{(\lVert A\rVert+2L)t}$$
-for $t\in[0,T]$, where $y$ solves $y'=Ay$, $y(0)=z_{0}$; every initial value
+$\lVert \zeta(t)\rVert_{2}\le\delta e^{Lt}$ there, and
+$$\lVert \zeta(t)-\widetilde y(t)\rVert_{2}\le C\delta^{2}\int_{0}^{t}e^{\lVert A\rVert(t-s)}e^{2Ls}\,ds\le C\delta^{2}te^{(\lVert A\rVert+2L)t}$$
+for $t\in[0,T]$, where $y$ solves $\widetilde y'=A\widetilde y$, $\widetilde y(0)=\zeta_0$; every initial value
 problem has a unique maximal solution
 ([[thm-existence-and-uniqueness-of-a-maximal-ode-solution]],
 [[def-maximal-ode-solution]]).

@@ -46,7 +46,7 @@ Finally, say that $f$ is **chaotic in the stated sense** when $f$ is continuous 
 
 ## Remarks
 
-- The list is a definition of a chosen package of properties, not a definition of the word "chaos" in all of its uses. Devaney's closely related list replaces topological mixing by topological transitivity; under compactness and absence of isolated points the two open-set forms are equivalent, but no such equivalence is used here. Positive topological entropy, Li-Yorke chaos, and measure-theoretic mixing are further distinct properties that this definition neither implies nor assumes.
+- The list is a definition of a chosen package of properties, not a definition of the word "chaos" in all of its uses. Devaney's closely related list replaces topological mixing by topological transitivity; mixing implies transitivity, while this definition makes no converse claim. Positive topological entropy, Li-Yorke chaos, and measure-theoretic mixing are further distinct properties that this definition neither implies nor assumes.
 
 - Topological mixing immediately implies the open-set form of topological transitivity: for nonempty open $U,V$ the definition supplies $N$ with $f^N(U)\cap V\ne\emptyset$. Sensitivity is required with one constant $\delta$ uniform over all points and all radii $\varepsilon$; it is a statement about the family of iterates, not about a single pair of orbits.
 

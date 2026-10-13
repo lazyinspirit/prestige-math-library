@@ -15,6 +15,8 @@ deps:
   - def-integrable-real-and-complex-functions-and-their-integrals
   - thm-linearity-of-the-lebesgue-integral-on-l-one
   - def-lebesgue-measure-and-the-lebesgue-sigma-algebra
+  - thm-lebesgue-measure-of-a-box-of-every-kind
+  - prop-order-and-scalar-rules-for-the-nonnegative-integral
   - def-derivative
   - def-interval
   - def-countable-choice
@@ -27,6 +29,8 @@ dependency_roles:
   def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
   thm-linearity-of-the-lebesgue-integral-on-l-one: mathematical-premise
   def-lebesgue-measure-and-the-lebesgue-sigma-algebra: mathematical-premise
+  thm-lebesgue-measure-of-a-box-of-every-kind: mathematical-premise
+  prop-order-and-scalar-rules-for-the-nonnegative-integral: mathematical-premise
   def-derivative: mathematical-premise
   def-interval: mathematical-premise
   def-countable-choice: mathematical-premise
@@ -52,6 +56,8 @@ sources:
 Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]) for the actual Lebesgue measure foundation used by the bounded Borel weak/entropy class.
 
 Write $F(u):=\tfrac12u^2$ and let $\lambda_2$ be two-dimensional Lebesgue measure on $\mathbb R^2$ ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]).
+
+Every space-time expression written as $\int_0^\infty\!\!\int_{\mathbb R}(\cdots)\,dx\,dt$ below means the single signed Lebesgue integral over $[0,\infty)\times\mathbb R$ with respect to $\lambda_2$; it is not an iterated-integral convention. The initial-data integral is with respect to one-dimensional Lebesgue measure $\lambda_1$. In (W) and (E), each integrand is Borel measurable, bounded, and supported in the compact support of the test function (or its initial trace). A compact support is contained in a bounded rectangle of finite Lebesgue measure, by [[thm-lebesgue-measure-of-a-box-of-every-kind]]; monotonicity and homogeneity of the nonnegative integral give $\int |q|\le\|q\|_\infty\lambda_d(K)<\infty$ for such an integrand $q$ supported in $K$ ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]). Thus all displayed signed integrals are defined as Lebesgue integrals of integrable functions ([[def-integrable-real-and-complex-functions-and-their-integrals]]).
 
 A **test function** is a function $\varphi:[0,\infty)\times\mathbb R\to\mathbb R$ of class $C^1$ up to the boundary: it is the restriction of a $C^1$ function on an open neighborhood of this closed half-space, and its support within the half-space is compact. No vanishing or continuation by zero for $t<0$ is required. Thus the trace $\varphi(0,x)$ may be nonzero. Derivatives at $t=0$ are the continuous one-sided derivatives. Write $C_c^1([0,\infty)\times\mathbb R)$ for this class; **admissible** means belonging to this class and **nonnegative** means $\varphi\ge0$ on the half-space.
 
@@ -89,6 +95,6 @@ $$f(x):=\begin{cases}u_L,&x<0,\\ u_R,&x\ge0.\end{cases}$$
 
 - The sign convention is fixed by (E): with $\varphi\ge0$ the identity says that the distribution $\eta(u)_t+q(u)_x$ is a nonpositive measure. Under the opposite convention the inequality and the displayed integral would both flip sign; the two conventions are not mixed anywhere in this collection.
 
-- The distinguished family of entropies used in the examples is $\eta_k(u):=|u-k|$, which is convex and only Lipschitz at $u=k$, together with $q_k(u)=\operatorname{sign}(u-k)(u^2-k^2)/2$ off $u=k$ and $q_k(k)=0$; the identity $q_k'=u\eta_k'$ holds off $u=k$, and the pair is applied to piecewise $C^1$ solutions for which the distributional computation is carried out piecewise. The definition of a general entropy solution in (c) is stated for $C^1$ entropies; the piecewise application to $\eta_k$ is part of the corresponding theorem and is checked there.
+- The distinguished family of entropies used in the examples is $\eta_k(u):=|u-k|$, which is convex and only Lipschitz at $u=k$, together with $q_k(u)=\operatorname{sgn}(u-k)(u^2-k^2)/2$ off $u=k$ and $q_k(k)=0$. Here $\operatorname{sgn}(r):=1$ for $r>0$, $0$ for $r=0$, and $-1$ for $r<0$. The identity $q_k'=u\eta_k'$ holds off $u=k$, and the pair is applied to piecewise $C^1$ solutions for which the distributional computation is carried out piecewise. The definition of a general entropy solution in (c) is stated for $C^1$ entropies; the piecewise application to $\eta_k$ is part of the corresponding theorem and is checked there.
 
 - The definition asserts neither existence nor uniqueness of weak or entropy solutions, and no selection principle. Integrals are Lebesgue integrals over the stated domains and the test-function class is exactly as declared; evaluating a weak solution at $t=0$ pointwise is not part of the definition, only the initial term in (W).

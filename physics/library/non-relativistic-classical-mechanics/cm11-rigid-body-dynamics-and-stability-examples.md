@@ -17,6 +17,17 @@ requires:
   - cm-math-rigid
 ---
 
+All numerical formulas on this page use the SI convention of
+[[ex-cm11-free-top-checks]] and [[ex-cm11-heavy-top-steady-precession]]:
+$t=T/(1\,\mathrm s)$ is dimensionless for physical elapsed time $T$;
+inertia entries are numerical values in $\mathrm{kg}\,\mathrm m^2$,
+angular velocities in $\mathrm s^{-1}$, angular momenta in
+$\mathrm{kg}\,\mathrm m^2\,\mathrm s^{-1}$, and energies in joules.
+The angle paths $\varphi(t)=t$ and $\psi(t)=2t$ therefore have physical
+rates $1\,\mathrm s^{-1}$ and $2\,\mathrm s^{-1}$, and every trigonometric
+argument is dimensionless. The escape bound means
+$T\le(1\,\mathrm s)4\log100$; no measured rates or times are reported.
+
 These examples and counterexamples exercise the definitions and theorems of
 [[cm11-rigid-body-dynamics-and-stability]] on explicit model data. The first
 example ([[ex-cm11-free-top-checks]]) declares two inertia matrices, the

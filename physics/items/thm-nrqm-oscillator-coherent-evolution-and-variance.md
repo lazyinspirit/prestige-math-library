@@ -6,15 +6,15 @@ domain: mathematics
 title: "Coherent evolution and variance"
 status: draft
 origin: pipeline
-dependency_level: 5
-deps: [thm-nrqm-oscillator-oscillator-scaling-and-exact-realization, lem-nrqm-oscillator-closed-ladder-domains, thm-nrqm-oscillator-coherent-state-convergence, thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, thm-plancherel, thm-complex-exponential-is-entire-with-derivative-itself, def-adjoint-of-a-densely-defined-unbounded-operator, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-hilbert-space, def-complex-exponential, def-countable-choice, thm-ftc-second-part, thm-chain-rule]
+dependency_level: 4
+deps: [thm-nrqm-oscillator-oscillator-scaling-and-exact-realization, lem-nrqm-oscillator-closed-ladder-domains, thm-nrqm-oscillator-coherent-state-convergence, thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, lem-real-ltwo-multipliers-and-unitary-transport, lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, thm-plancherel, thm-complex-exponential-is-entire-with-derivative-itself, def-adjoint-of-a-densely-defined-unbounded-operator, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-hilbert-space, def-complex-exponential, def-countable-choice, thm-ftc-second-part, thm-chain-rule]
 dependency_roles:
   thm-nrqm-oscillator-oscillator-scaling-and-exact-realization: mathematical-premise
   lem-nrqm-oscillator-closed-ladder-domains: mathematical-premise
   thm-nrqm-oscillator-coherent-state-convergence: mathematical-premise
   thm-nrqm-oscillator-hermite-recurrence: mathematical-premise
   thm-nrqm-oscillator-hermite-orthogonality: mathematical-premise
-  thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators: mathematical-premise
+  lem-real-ltwo-multipliers-and-unitary-transport: mathematical-premise
   lem-weak-derivatives-are-polynomial-fourier-multipliers: mathematical-premise
   thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces: mathematical-premise
   thm-plancherel: mathematical-premise
@@ -48,7 +48,7 @@ Assume the Axiom of Countable Choice ([[def-countable-choice]]). Fix $m,\omega,\
 
 $$Q:=M_x,\quad D(Q)=\{f\in L^2(\mathbb R,dx):xf\in L^2\},\qquad P:=\mathcal F_2^*M_{2\pi\hbar\xi}\mathcal F_2,\quad D(P)=\{f:\xi\,\mathcal F_2f\in L^2\},$$
 
-the self-adjoint position and momentum operators ([[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]](a), [[thm-plancherel]]; the conjugation is discharged in the proof).
+the self-adjoint position and momentum operators ([[lem-real-ltwo-multipliers-and-unitary-transport]], [[thm-plancherel]]; the conjugation is discharged in the proof).
 
 Then:
 
@@ -92,7 +92,7 @@ The parameters $m,\omega,\hbar$ enter as positive real numbers and no physical i
 
 [F3] $Y=\frac{a+a^\dagger}{\sqrt2}$ and $-i\partial_y=\frac{a-a^\dagger}{i\sqrt2}$ on the polynomial-Gaussian space $\mathcal P:=\{pg_0:p\in\mathbb C[y]\}$ (denoted $P$ in the supplier), whence $\sqrt2\,yg_n=\sqrt n\,g_{n-1}+\sqrt{n+1}g_{n+1}$ and $\sqrt2\,g_n'=\sqrt n\,g_{n-1}-\sqrt{n+1}g_{n+1}$ ([[thm-nrqm-oscillator-hermite-recurrence]](g), [[thm-nrqm-oscillator-hermite-orthogonality]](b)).
 
-[F4] $M_x$ is self-adjoint on $D(M_x)=\{f:xf\in L^2\}$ for the real function $x$ ([[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]](a)); $\mathcal F_2$ is unitary ([[thm-plancherel]]); if $T$ is self-adjoint on $K$ and $U:K\to H$ is a bijective linear isometry, then $UTU^*$ is self-adjoint on $UD(T)$ (proved in step 1.3); and $D(P)=W^{1,2}(\mathbb R)$ with $Pf=-i\hbar f'$ there ([[thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces]], [[lem-weak-derivatives-are-polynomial-fourier-multipliers]]).
+[F4] $M_x$ is self-adjoint on $D(M_x)=\{f:xf\in L^2\}$ for the real function $x$ ([[lem-real-ltwo-multipliers-and-unitary-transport]]); $\mathcal F_2$ is unitary ([[thm-plancherel]]); if $T$ is self-adjoint on $K$ and $U:K\to H$ is a bijective linear isometry, then $UTU^*$ is self-adjoint on $UD(T)$ (proved in step 1.3); and $D(P)=W^{1,2}(\mathbb R)$ with $Pf=-i\hbar f'$ there ([[thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces]], [[lem-weak-derivatives-are-polynomial-fourier-multipliers]]).
 
 [F5] $e^{ix}=1+ix+o(x)$ as $x\to0$ and $|e^{ix}-1-ix|\le2|x|$ for $x\in\mathbb R$: the complex exponential is entire with derivative itself at every point ([[thm-complex-exponential-is-entire-with-derivative-itself]], [[def-complex-exponential]]); the estimate follows from $e^{ix}-1=\int_0^1 ix e^{isx}ds$, obtained by the chain rule and the fundamental theorem of calculus, applied to real and imaginary parts ([[thm-chain-rule]], [[thm-ftc-second-part]]), so $|e^{ix}-1|\le|x|$; and $\|f\|^2=\sum_n|\langle f,\psi_n\rangle|^2$ with the finite-subset net convergence of the expansion ([[thm-parseval-equivalences-for-a-complete-orthonormal-family]]).
 

@@ -37,7 +37,7 @@ sources:
 
 Adopt the central-force model of [[post-cm05-central-model]] clause (i) with
 masses $m_1,m_2>0$, $M=m_1+m_2$, reduced mass $\mu=m_1m_2/M$, and static
-central pair potential $u\in C^2(J_0)$. Fix $J>0$, an oriented orthonormal
+central pair potential $u\in C^2(J_0)$, and time window $I_0$. Fix $J>0$, an oriented orthonormal
 triad $(e_1,e_2,e_3)$, and a radius $r_0\in J_0$, and put
 $$U^{\mathrm{eff}}_J(\rho):=u(\rho)+\frac{J^{2}}{2\mu\rho^{2}},\qquad \omega:=\frac{J}{\mu r_0^{2}}.$$
 Then:
@@ -50,8 +50,9 @@ Then:
    is a central-force trajectory for $(\mu,u)$ defined on all of $\mathbb R$,
    with $\lvert r^{\circ}\rvert\equiv r_0$, angular momentum
    $j=\mu\,r^{\circ}\times(r^{\circ})'=Je_3$ and constant energy
-   $E=U^{\mathrm{eff}}_J(r_0)$; and for every affine centre-of-mass curve
-   $X^{\circ}$ with $(X^{\circ})''=0$ the reconstructed motion of the
+   $E=U^{\mathrm{eff}}_J(r_0)$; and for every interval $I\subseteq I_0$ with nonempty interior and
+   affine centre-of-mass curve $X^{\circ}:I\to\mathbb R^3$ with
+   $(X^{\circ})''=0$, the restrictions to $I$ reconstruct a motion of the
    two-label model ([[pthm-cm05-relative-reduction]] clause 4) has both
    labels moving uniformly on circles about the centre of mass:
    $$\lvert x_1(t)-X^{\circ}(t)\rvert=\frac{m_2}{M}r_0,\qquad \lvert x_2(t)-X^{\circ}(t)\rvert=\frac{m_1}{M}r_0,$$
@@ -94,7 +95,7 @@ Then:
 
 1.1 Clause 1: differentiating the definition of $U^{\mathrm{eff}}_J$ with [L3] gives $\bigl(U^{\mathrm{eff}}_J\bigr)'(r_0)=u'(r_0)-J^{2}/(\mu r_0^{3})$, so the first two conditions are equivalent; and $\mu r_0\omega^{2}=\mu r_0\cdot J^{2}/(\mu^{2}r_0^{4})=J^{2}/(\mu r_0^{3})$ by the definition of $\omega$, so $u'(r_0)=J^{2}/(\mu r_0^{3})$ is equivalent to $\mu r_0\omega^{2}=u'(r_0)$. [given, L3, L4, algebra]
 
-2.1 Clause 2: assume $(U^{\mathrm{eff}}_J)'(r_0)=0$. By [L2] clause (ii) the displayed curve $r^{\circ}$ is a central-force trajectory for $(\mu,u)$ on $\mathbb R$ with $\lvert r^{\circ}\rvert\equiv r_0$, $j=Je_3$ and $E=U^{\mathrm{eff}}_J(r_0)$; combined with an affine $X^{\circ}$ and [L1] clause 4 it reconstructs a motion of the two-label model with $x_1-X^{\circ}=\frac{m_2}{M}r^{\circ}$ and $x_2-X^{\circ}=-\frac{m_1}{M}r^{\circ}$. Taking norms gives the displayed constant radii; and since $(r^{\circ})'$ is tangent to the circle $\lvert y\rvert=r_0$ and $\lvert(r^{\circ})'\rvert=r_0\omega$, each label traverses its circle with angular velocity $\omega$. [step 1.1, L1, L2, algebra]
+2.1 Clause 2: assume $(U^{\mathrm{eff}}_J)'(r_0)=0$. By [L2] clause (ii) the displayed curve $r^{\circ}$ is a central-force trajectory for $(\mu,u)$ on $\mathbb R$ with $\lvert r^{\circ}\rvert\equiv r_0$, $j=Je_3$ and $E=U^{\mathrm{eff}}_J(r_0)$; restricted to any interval $I\subseteq I_0$ with nonempty interior and combined with an affine $X^{\circ}:I\to\mathbb R^3$, [L1] clause 4 reconstructs a motion on $I$ of the two-label model with $x_1-X^{\circ}=\frac{m_2}{M}r^{\circ}$ and $x_2-X^{\circ}=-\frac{m_1}{M}r^{\circ}$. Taking norms gives the displayed constant radii; and since $(r^{\circ})'$ is tangent to the circle $\lvert y\rvert=r_0$ and $\lvert(r^{\circ})'\rvert=r_0\omega$, each label traverses its circle with angular velocity $\omega$. [step 1.1, L1, L2, algebra]
 
 2.2 Clause 3: assume $\lvert r\rvert\equiv r_0$ on $I$ with $j=Je_3$, $J>0$. By [L1] and [L2] clause (i), $(U^{\mathrm{eff}}_J)'(r_0)=0$, the polar angular coordinate satisfies $\theta'\equiv J/(\mu r_0^{2})=\omega$, so $\theta(t)=\theta_0+\omega t$ on $I$ up to the additive constant, and $r=r_0(\cos\theta\,e_1+\sin\theta\,e_2)$ is the uniform rotation of clause 2; the reconstruction of [L1] clause 4 gives the two labels on the circles of clause 2 about the affine centre of mass. [step 1.1, L1, L2, algebra]
 

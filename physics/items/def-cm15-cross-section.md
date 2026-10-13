@@ -138,8 +138,15 @@ prediction of the model under the adopted preparation. In particular:
   apparatus model, a detector with finite angular resolution and acceptance,
   a sampling model and uncertainties, and a statistical analysis, none of
   which is supplied by this page;
-- for a branch whose ideal total diverges at a forward angle, only windows of finite cross-section give finite model rates, and a finite measured rate constrains the model only
-  jointly with the apparatus acceptance;
+- an ideal branch cross-section may diverge at a forward angle, while
+  the adopted finite incident cutoff gives
+  $\sigma_{\mathcal B,b_{\max}}(Y)\le\pi b_{\max}^{2}$ for every
+  window $Y$, because the branch incident intervals are disjoint. Thus
+  these cutoff rates are finite even if the ideal window cross-section
+  is infinite. Without an incident cutoff, the rate $\Phi\sigma_{\mathcal B}(Y)$
+  is finite exactly when that ideal window cross-section is finite.
+  A finite measured rate constrains the model jointly with its incident
+  preparation and apparatus acceptance;
 - finite samples fluctuate: an observed angular distribution can miss a
   branch's features with positive probability under ordinary sampling models,
   and agreement is evidence about the model-plus-apparatus assumptions, not a

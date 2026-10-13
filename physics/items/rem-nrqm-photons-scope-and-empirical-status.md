@@ -17,8 +17,10 @@ deps:
     pthm-nrqm-photons-fixed-mode-number-and-energy-statistics,
     def-nrqm-framework-quantities-and-units,
     post-nrqm-framework-preparation-and-apparatus,
-    post-nrqm-framework-observable-and-probability
-  ]
+    post-nrqm-framework-observable-and-probability,
+    post-nrqm-framework-ideal-conditional-measurement,
+    def-dependent-choice
+]
 dependency_roles:
   post-nrqm-photons-radiation-extension-and-transverse-mode-assignment: physical-assumption
   def-nrqm-photons-framework-fixed-mode-polarization-model: formulation-prerequisite
@@ -30,6 +32,8 @@ dependency_roles:
   def-nrqm-framework-quantities-and-units: formulation-prerequisite
   post-nrqm-framework-preparation-and-apparatus: physical-assumption
   post-nrqm-framework-observable-and-probability: physical-assumption
+  post-nrqm-framework-ideal-conditional-measurement: physical-assumption
+  def-dependent-choice: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -100,7 +104,10 @@ preparations, and that $e^{-\beta H_f}$ is not trace class for the full
 continuum sector when $\beta>0$ has unit $\mathrm J^{-1}$. Thus its
 trace-normalized full-sector Gibbs density is unavailable; other preparations
 are outside the theorem. All these are conditional consequences of P1, P2 and
-the adopted radiation model; their units are recorded in
+the adopted radiation model in the declared measurement models. The repeated
+ideal-analyser conditional update additionally adopts P3
+([[post-nrqm-framework-ideal-conditional-measurement]]); its use is restricted
+to outcomes of positive probability. Their units are recorded in
 [[def-nrqm-framework-quantities-and-units]] and in the assigned observables
 of the model.
 
@@ -141,3 +148,5 @@ detector is described by the declared fixed-mode model is a tested
 identification with uncertainty under P7; agreement of the model's conditional
 predictions with reported data would be evidence about the combined model and
 apparatus assumptions, not a deductive proof of the model or of the framework.
+
+**Mathematical hypotheses.** The conditional deductions summarized here retain the choice hypotheses of their mathematical suppliers; in particular, the transverse free-field Fock supplier assumes Countable Choice, Dependent Choice and Choice. [[def-countable-choice]], [[def-dependent-choice]] and [[def-axiom-of-choice]] record these assumptions.

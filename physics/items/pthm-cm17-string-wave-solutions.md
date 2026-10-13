@@ -35,13 +35,19 @@ verification:
 Adopt the one-dimensional string model: a uniform string of length $L>0$
 (fixed ends) or of infinite extent, with linear mass density $\rho_\ell>0$
 and tension $\tau_s>0$, whose small transverse displacement
-$u:I\times J\to\mathbb R$ (with $J=\mathbb R$ or $J=[0,L]$) satisfies
+$u:I\times J\to\mathbb R$ (where $I\subseteq\mathbb R$ is a nonempty time
+interval and $J=\mathbb R$ or $J=[0,L]$) satisfies
 
 $$u_{tt}=c^2u_{xx},\qquad c:=\sqrt{\tau_s/\rho_\ell},$$
 
-where the identification of $c$ with the chain limit is that of
-[[pthm-cm17-chain-limit-of-the-string-model]] and the dimensions are those of
-[[def-cm17-continuum-body-and-units]], [[def-cm01-units]]. Then:
+where $[L]=[x]=\ell$, $[t]=\tau$, $[\rho_\ell]=\mu\ell^{-1}$,
+$[\tau_s]=\mu\ell\tau^{-2}$, and $[u]=\ell$. The initial displacement data
+$f$ and $F$ have dimension $\ell$, while the initial velocity data $g$ and $G$
+have dimension $\ell\tau^{-1}$. Thus $[c]=\sqrt{[\tau_s]/[\rho_\ell]}=
+\ell\tau^{-1}$, and $[\omega_n]=\tau^{-1}$. These are the dimensions of
+[[def-cm17-continuum-body-and-units]], [[def-cm01-units]]. The identification
+of $c$ with the chain limit is that of
+[[pthm-cm17-chain-limit-of-the-string-model]]. Then:
 
 **(i) Cauchy problem on the line.** For $f\in C^2(\mathbb R)$ and
 $g\in C^1(\mathbb R)$ the function
@@ -97,16 +103,6 @@ is asserted.
 
 ## Remarks
 
-- **Energy reading.** For the fixed-end model the uniqueness argument of [F2]
-  uses the conserved energy $\tfrac12\int_0^L(u_t^2+c^2u_x^2)\,dx$: a
-  difference of two solutions with zero data has zero energy and therefore
-  vanishes. This is the model's mechanical energy for the string under the
-  linear idealization; it is not a measured quantity on this page.
+- **Energy reading.** For the fixed-end model the uniqueness argument of [F2] uses the conserved energy $\tfrac12\int_0^L(u_t^2+c^2u_x^2)\,dx$: a difference of two solutions with zero data has zero energy and therefore vanishes. Multiplication by the constant linear density $\rho_\ell$ gives the model's mechanical energy for the string under the linear idealization; it is not a measured quantity on this page.
 
-- **Fixed-end data and the odd extension.** The fixed-end problem is treated
-  through odd $2L$-periodic extensions of the data
-  ([[def-cm-sine-coefficients-of-periodic-functions]]); the $C^5$ and $C^4$
-  smoothness of the extensions is what makes the coefficient tails and the
-  termwise differentiated series converge, and it is a genuine restriction on
-  the initial data of the theorem. Rough or merely continuous data require a
-  weak formulation, which this linear model does not supply.
+- **Fixed-end data and the odd extension.** The fixed-end problem is treated through odd $2L$-periodic extensions of the data ([[def-cm-sine-coefficients-of-periodic-functions]]); the $C^5$ and $C^4$ smoothness of the extensions is what makes the coefficient tails and the termwise differentiated series converge, and it is a genuine restriction on the initial data of the theorem. Rough or merely continuous data require a weak formulation, which this linear model does not supply.

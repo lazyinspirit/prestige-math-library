@@ -1,0 +1,938 @@
+[
+  {
+    "order": 109,
+    "id": "cm-math-fluid",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Fluid",
+    "companion": "cm-math-fluid-examples",
+    "requires": [
+      "cm-math-continuum",
+      "orthonormal-bases-parseval-and-fourier-series",
+      "complex-lp-spaces-and-test-function-conventions",
+      "measures-and-their-basic-properties",
+      "the-real-gamma-and-beta-functions",
+      "uniform-spaces",
+      "subspaces-products-and-quotients",
+      "the-exponential-function",
+      "fejer-and-poisson-summability-of-fourier-series",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "rn-as-a-normed-space"
+    ],
+    "items": [
+      {
+        "id": "def-periodic-vector-sobolev-space-and-leray-projection",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Periodic vector Sobolev spaces on the three-torus, the weight family, and the Leray projection",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-definition; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-countable-choice",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "def-product-measure-on-sigma-finite-spaces",
+          "lem-finite-tori-are-compact-hausdorff-character-spaces",
+          "thm-fejer-convergence-in-lp",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-the-one-dimensional-torus-and-normalized-haar-integral": "mathematical-premise",
+          "def-fourier-coefficients-and-trigonometric-polynomials": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-complex-lp-and-euclidean-test-function-conventions": "mathematical-premise",
+          "def-lebesgue-measure-and-the-lebesgue-sigma-algebra": "mathematical-premise",
+          "def-product-measure-on-sigma-finite-spaces": "mathematical-premise",
+          "lem-finite-tori-are-compact-hausdorff-character-spaces": "mathematical-premise",
+          "thm-fejer-convergence-in-lp": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), which is used by the imported Fourier-basis theorem quoted below.\n\n**The three-torus and its measure.** Let $\\mathbb T:=\\mathbb R/\\mathbb Z$ be the one-dimensional torus with its quotient topology and its normalized Haar integral $m_{\\mathbb T}$ ([[def-the-one-dimensional-torus-and-normalized-haar-integral]]); $\\mathbb T$ is compact Hausdorff ([[lem-finite-tori-are-compact-hausdorff-character-spaces]]). Put $\\mathbb T^3:=\\mathbb T\\times\\mathbb T\\times\\mathbb T$ with the finite product topology. Let $dx:=m_{\\mathbb T}\\otimes m_{\\mathbb T}\\otimes m_{\\mathbb T}$ be the product measure on the Borel $\\sigma$-algebra of $\\mathbb T^3$ ([[def-product-measure-on-sigma-finite-spaces]], [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]); being a product of probability measures it is a probability measure. For a vector $k=(k_1,k_2,k_3)\\in\\mathbb Z^3$ and $x=(x_1,x_2,x_3)\\in\\mathbb T^3$ define the **character**\n$$e_k(x):=\\exp\\bigl(2\\pi i\\,(k_1x_1+k_2x_2+k_3x_3)\\bigr)=e^{2\\pi i\\,k\\cdot x},$$\nwhere each $x_j$ is inserted through any real representative and $\\exp$ is the complex exponential ([[def-fourier-coefficients-and-trigonometric-polynomials]]); the definition does not depend on the representatives. Then $|e_k(x)|=1$, $e_k e_l=e_{k+l}$, and $e_{-k}=\\overline{e_k}$.\n\n**Function spaces.** Write $L^2:=L^2(\\mathbb T^3;\\mathbb R^3)$ for the real Hilbert space of (equivalence classes of) real Borel vector fields $u:\\mathbb T^3\\to\\mathbb R^3$ with $\\int_{\\mathbb T^3}|u|_2^2\\,dx<+\\infty$, inner product $\\langle u,v\\rangle:=\\int_{\\mathbb T^3}u\\cdot v\\,dx$ and norm $|u|_2:=\\langle u,u\\rangle^{1/2}$; here $u\\cdot v$ is the Euclidean inner product of $\\mathbb R^3$ ([[def-complex-lp-and-euclidean-test-function-conventions]]). Similarly $L^1(\\mathbb T^3;\\mathbb C^3)$ denotes the integrable complex vector fields.\n\n**Fourier coefficients.** For $u\\in L^1(\\mathbb T^3;\\mathbb C^3)$ and $k\\in\\mathbb Z^3$ define\n$$\\widehat u(k):=\\int_{\\mathbb T^3}u(x)\\,e_{-k}(x)\\,dx\\ \\in\\mathbb C^3 .$$\nThe integral depends only on the class of $u$. A field $u\\in L^1$ is real almost everywhere if and only if $\\widehat u(-k)=\\overline{\\widehat u(k)}$ for every $k\\in\\mathbb Z^3$; the forward direction uses $\\widehat{\\overline u}(k)=\\overline{\\widehat u(-k)}$, and the reverse uses $L^1$ Fourier uniqueness, proved below. On the circle this uniqueness follows from [[thm-fejer-convergence-in-lp]] with $p=1$: zero coefficients give zero Fejer means, whose $L^1$ limit is the function. To pass to $\\mathbb T^d$ for $d=2,3$, use [[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]: for fixed $k'\\in\\mathbb Z^{d-1}$, $g_{k'}(x_1)=\\int_{\\mathbb T^{d-1}}u(x_1,x')e_{-k'}(x')dx'$ is in $L^1(\\mathbb T)$ and all its coefficients vanish. Hence $g_{k'}=0$ almost everywhere. The countable union of the exceptional sets over $k'$ is null. For every remaining $x_1$, the $L^1$ section in $x'$ has all coefficients zero, so induction in $d$ makes it zero almost everywhere. Fubini then makes $u=0$ almost everywhere on $\\mathbb T^d$. Apply this uniqueness to $u-\\overline u$ to obtain the reverse real-valuedness implication. For $u\\in L^2\\subset L^1$ (finite measure) the coefficient map is the one of the imported theorem, which states: $(e_k)_{k\\in\\mathbb Z^3}$ is an orthonormal basis of the complex Hilbert space $L^2(\\mathbb T^3;\\mathbb C)$, the finite-subset-net expansion $u=\\sum_k\\widehat u(k)e_k$ and the Parseval identities hold, and $u\\mapsto\\widehat u$ is a surjective linear isometry of $L^2(\\mathbb T^3;\\mathbb C)$ onto $\\ell^2(\\mathbb Z^3;\\mathbb C)$ ([[thm-fourier-basis-and-parseval-on-the-n-torus]]); the last statement applied componentwise gives $\\langle u,v\\rangle=\\sum_k\\widehat u(k)\\cdot\\overline{\\widehat v(k)}$ for real $u,v\\in L^2$.\n\n**Weights.** For $k\\in\\mathbb Z^3$ set\n$$w_k:=\\bigl(1+|2\\pi k|_2^2\\bigr)^{1/2}=\\bigl(1+4\\pi^2|k|_2^2\\bigr)^{1/2}\\ \\ge 1,$$\nso that $w_k\\ge|2\\pi k_j|$ for $j=1,2,3$ and $w_{k+l}\\le w_k+w_l$ for all $k,l\\in\\mathbb Z^3$.\n\n**The coefficient space and $H^s$.** For $s\\in\\mathbb R$ let $\\ell^2_s$ be the complex Hilbert space of all $c:\\mathbb Z^3\\to\\mathbb C^3$ with\n$$\\|c\\|_{\\ell^2_s}^2:=\\sum_{k\\in\\mathbb Z^3}w_k^{2s}|c(k)|_2^2<+\\infty,\\qquad \\langle c,d\\rangle_{\\ell^2_s}:=\\sum_{k\\in\\mathbb Z^3}w_k^{2s}\\,c(k)\\cdot\\overline{d(k)} ,$$\nand let $\\ell^2_{s,\\mathbb R}:=\\{c\\in\\ell^2_s: c(-k)=\\overline{c(k)}\\ \\forall k\\}$. The set $\\ell^2_{s,\\mathbb R}$ is closed in $\\ell^2_s$ and is a real-linear subspace; on it the Hermitian pairing $\\langle\\cdot,\\cdot\\rangle_{\\ell^2_s}$ is real valued, because the substitution $k\\mapsto-k$ shows that it equals its own conjugate. By the imported theorem the coefficient map restricts to a bijection of the set of real classes of $L^2$ onto $\\ell^2_{0,\\mathbb R}$. For $s\\ge0$ define\n$$H^s(\\mathbb T^3;\\mathbb R^3):=\\{u\\in L^2:\\widehat u\\in\\ell^2_{s,\\mathbb R}\\},\\qquad \\|u\\|_{H^s}:=\\|\\widehat u\\|_{\\ell^2_s}.$$\nFor $s<0$ define $H^s$ to be the completion of the real trigonometric polynomials in the same weighted coefficient norm, equivalently the space of formal real coefficient families $\\ell^2_{s,\\mathbb R}$. For an element of this completion $\\widehat u(k)$ means its coefficient, not an integral of an assumed $L^2$ function. The embedding of $L^2$ into these negative-order spaces is its coefficient map. Truncation makes finite families dense, so this completion is all of $\\ell^2_{s,\\mathbb R}$, not merely the coefficient families of $L^2$ fields. Consequently each $H^s$ is a real Hilbert space isometric to $\\ell^2_{s,\\mathbb R}$ through $u\\mapsto\\widehat u$, and $\\|u\\|_{H^0}=|u|_2$. If $s\\ge t$ then $H^s\\subseteq H^t$ and $\\|u\\|_{H^t}\\le\\|u\\|_{H^s}$. The **trigonometric polynomials** are the fields $p=\\sum_{k\\in F}c_k e_k$ with $F\\subseteq\\mathbb Z^3$ finite and $c_{-k}=\\overline{c_k}$ (equivalently, real coefficient families of finite support); they belong to every $H^s$, and the finitely supported families are dense in each $\\ell^2_{s,\\mathbb R}$ (truncate a family to $|k|_\\infty\\le M$ and let $M\\to\\infty$), so trigonometric polynomials are dense in every $H^s$.\n\n**Scalar spaces.** For $s\\in\\mathbb R$ define $\\ell^2_s(\\mathbb Z^3;\\mathbb C)$ to consist of families $c:\\mathbb Z^3\\to\\mathbb C$ with $\\sum_k w_k^{2s}|c(k)|^2<\\infty$, with pairing $\\sum_k w_k^{2s}c(k)\\overline{d(k)}$; its real subspace is specified by $c(-k)=\\overline{c(k)}$. For $s\\ge0$, $H^s(\\mathbb T^3;\\mathbb R)$ consists of real scalar $L^2$ classes with this weighted coefficient norm; for $s<0$ it is the completion of real scalar trigonometric polynomials, identified with the real coefficient subspace. Scalar Fourier coefficients are $\\widehat f(k)=\\int f e_{-k}\\,dx$ when $f\\in L^1$, and otherwise denote the completion coordinates. Parseval and truncation give the scalar Hilbert-space and density assertions exactly as above. A vector belongs to $H^s(\\mathbb T^3;\\mathbb R^3)$ exactly when each of its three scalar components belongs to $H^s(\\mathbb T^3;\\mathbb R)$, with $\\|u\\|_{H^s}^2=\\sum_{j=1}^3\\|u_j\\|_{H^s}^2$. Below the value type distinguishes scalar and vector $H^s$; $\\Lambda^s$, $\\partial_j$ and $\\Delta$ have the same multipliers for scalars, $\\nabla$ maps scalar to vector spaces, and $\\operatorname{div}$ maps vector to scalar spaces.\n\n**The operators $\\Lambda^s$, $\\partial_j$, $\\Delta$, $\\nabla$ and $\\operatorname{div}$.**\nFor $s,t\\in\\mathbb R$ and $u\\in H^t$ define $\\Lambda^s u\\in H^{t-s}$ by the coefficient rule\n$$\\widehat{\\Lambda^s u}(k):=w_k^{s}\\,\\widehat u(k);$$\nthen $\\Lambda^s$ is a linear isometric isomorphism of $H^t$ onto $H^{t-s}$, $\\Lambda^0=\\mathrm{id}$, $\\Lambda^s\\Lambda^t=\\Lambda^{s+t}$, and $\\Lambda^{-s}$ is the inverse of $\\Lambda^s$. For $j=1,2,3$ and $u\\in H^{s+1}$ define $\\partial_j u\\in H^s$ by\n$$\\widehat{\\partial_j u}(k):=2\\pi i\\,k_j\\,\\widehat u(k);$$\nfor $u\\in H^{s+2}$ define $\\Delta u\\in H^s$ by $\\widehat{\\Delta u}(k):=-4\\pi^2|k|_2^2\\,\\widehat u(k)$; for a scalar field $f$ with coefficients $\\widehat f(k)\\in\\mathbb C$ in the scalar spaces just defined, define $\\nabla f\\in H^s$ for $f\\in H^{s+1}$ by $\\widehat{\\nabla f}(k):=2\\pi i\\,k\\,\\widehat f(k)$; and for $u\\in H^{s+1}$ define $\\operatorname{div}u:=\\sum_{j=1}^{3}\\partial_j u_j\\in H^s$. These operators satisfy $\\|\\partial_j u\\|_{H^s}\\le\\|u\\|_{H^{s+1}}$, $\\|\\Delta u\\|_{H^s}\\le\\|u\\|_{H^{s+2}}$, and for every integer $m\\ge1$, $\\Lambda^{2m}=(I-\\Delta)^m$, the identity following coefficientwise from $w_k^2=1+4\\pi^2|k|_2^2$. On trigonometric polynomials all four operators agree with the classical coordinatewise derivatives and divergence computed from the smooth functions $x\\mapsto e^{2\\pi ik\\cdot x}$, by the classical rules $\\partial_j e_k=2\\pi i k_j e_k$; this is the convention in which the notation is used below.\n\n**Divergence-free fields and the Leray projection.** For $s\\in\\mathbb R$ put\n$$H^s_\\sigma(\\mathbb T^3;\\mathbb R^3):=\\bigl\\{\\,u\\in H^s: k\\cdot\\widehat u(k)=0\\ \\text{for every }k\\in\\mathbb Z^3\\,\\bigr\\};$$\nthis is a closed real-linear subspace of $H^s$, and $\\operatorname{div}u=0$ in $H^s$ for $u\\in H^{s+1}_\\sigma$. For $k\\neq0$ let $\\pi_k\\in L(\\mathbb C^3)$ be the orthogonal projection onto the hyperplane $\\{k\\}^\\perp$,\n$$\\pi_k v:=v-\\frac{k\\cdot v}{|k|_2^2}\\,k ,$$\nand set $\\pi_0:=\\mathrm{id}_{\\mathbb C^3}$. Define the **Leray projection** $P$ by\n$$\\widehat{Pu}(k):=\\pi_k\\widehat u(k)\\qquad(k\\in\\mathbb Z^3).$$\nThen: $P$ maps $H^s$ linearly into $H^s_\\sigma$, and $\\|Pu\\|_{H^s}\\le\\|u\\|_{H^s}$; $P^2=P$; $P$ is self-adjoint on $H^s$, i.e. $\\langle Pu,v\\rangle_{H^s}=\\langle u,Pv\\rangle_{H^s}$ for all $u,v\\in H^s$; $P$ commutes with each $\\Lambda^t$, with each $\\partial_j$, and with $\\Delta$ wherever these are defined; and the identity $\\operatorname{div}(Pu)=0$ holds in $H^{s-1}$ for $u\\in H^s$. Moreover every $u\\in H^s$ has the orthogonal decomposition\n$$u=Pu+\\nabla f,\\qquad f\\in H^{s+1},\\quad \\widehat f(0)=0,\\qquad \\langle Pu,\\nabla f\\rangle_{H^s}=0.$$\nHere zero mean means zero coefficient at $0$ (the usual integral when the field is integrable); orthogonality for all real orders is in the $H^s$ pairing. The scalar element $f$ is determined by $\\widehat f(0):=0$ and $\\widehat f(k):=\\dfrac{k\\cdot\\widehat u(k)}{2\\pi i\\,|k|_2^2}$ for $k\\neq0$; here $f\\in H^{s+1}$ because $w_k^{2(s+1)}|\\widehat f(k)|^2\\le C\\,w_k^{2s}|\\widehat u(k)|^2$ for $k\\neq0$, and $\\widehat{\\nabla f}(k)=\\bigl(k\\cdot\\widehat u(k)/|k|_2^2\\bigr)k=\\widehat u(k)-\\pi_k\\widehat u(k)$. In particular $P\\nabla f=0$ for every $f$ with $\\nabla f\\in H^s$, so $P$ is the orthogonal projection of $H^s$ onto $H^s_\\sigma$. On smooth fields the decomposition $u=Pu+\\nabla f$ is the Hodge decomposition of the torus quoted as [[thm-fourier-basis-and-parseval-on-the-n-torus]]'s ambient convention; the operator $P$ is the Leray projection of the fluid literature.\n\n**Time-dependent fields.** For an interval $[0,T]$ with $T>0$ and $s\\in\\mathbb R$, let $C([0,T],H^s)$ denote the set of continuous maps from $[0,T]$ to the metric space $(H^s,\\|\\cdot\\|_{H^s})$, with $\\|u\\|_{C([0,T],H^s)}:=\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^s}$. For a map $u:[0,T]\\times\\mathbb T^3\\to\\mathbb R^3$ of class $C^\\infty$ we mean that every mixed partial derivative $\\partial_t^r\\partial_x^\\alpha u$ exists and is continuous on $[0,T]\\times\\mathbb T^3$, with one-sided time derivatives at $t=0,T$.",
+        "strategy": "Definition: objects, regularity, conventions and domain hypotheses are fixed; no proof obligation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 2.1 (Fourier characterisation of Sobolev spaces on the torus T^3, Definitions 2.1-2.2) and Section 2.2 (divergence-free fields H, the Helmholtz decomposition Theorem 2.6, the Leray projection Definition 2.7 and the commutation Lemma 2.8)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            },
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (Cambridge Texts in Applied Mathematics, CUP 2002), Subsection 1.9.1 (Fourier series convention (1.99)-(1.102) on one-periodic fields) and Proposition 1.18 with formula (1.98) (Hodge decomposition on the torus and the multiplier k\u2297k/|k|^2)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-lattice-shell-count-and-weight-sums",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Lattice ball and shell counts and weight sums on the frequency lattice",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "def-countable-choice",
+          "def-measure",
+          "def-nonnegative-extended-series",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "cor-volume-of-a-radius-r-n-ball",
+          "thm-cauchy-schwarz-finite",
+          "thm-integral-test-for-series"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-measure": "mathematical-premise",
+          "def-nonnegative-extended-series": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "cor-volume-of-a-radius-r-n-ball": "mathematical-premise",
+          "thm-cauchy-schwarz-finite": "mathematical-premise",
+          "thm-integral-test-for-series": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), as the Lebesgue-measure statements quoted below do. Let $w_k=(1+|2\\pi k|_2^2)^{1/2}$ for $k\\in\\mathbb Z^3$ ([[def-periodic-vector-sobolev-space-and-leray-projection]]).\n\n1. **Ball count.** For every $R\\ge0$,\n$$\\#\\{\\,k\\in\\mathbb Z^3: |k|_2\\le R\\,\\}\\;\\le\\;\\frac{4\\pi}{3}\\Bigl(R+\\frac{\\sqrt3}{2}\\Bigr)^3 .$$\n2. **Shell count.** There is an absolute constant $C_*$ such that for every integer $m\\ge1$\n$$\\#\\{\\,k\\in\\mathbb Z^3: m\\le|k|_2<m+1\\,\\}\\;\\le\\;C_*(m+1)^2 ;$$\nthe proof exhibits $C_*=240$.\n3. **Weight sums.** If $\\sigma>3/2$ then $\\sum_{k\\in\\mathbb Z^3}w_k^{-2\\sigma}<+\\infty$; more generally, if $\\sigma-r>3/2$ then $\\sum_{k\\in\\mathbb Z^3}w_k^{2r-2\\sigma}<+\\infty$. In particular $\\sum_{k\\in\\mathbb Z^3}(2\\pi|k|_2)^2w_k^{-2\\sigma}<+\\infty$ whenever $\\sigma>5/2$.\n4. **$\\ell^1$ bounds.** If $\\sigma>3/2$, then for every family $c:\\mathbb Z^3\\to\\mathbb C^3$\n$$\\sum_{k\\in\\mathbb Z^3}|c(k)|_2\\;\\le\\;W_\\sigma\\Bigl(\\sum_{k\\in\\mathbb Z^3}w_k^{2\\sigma}|c(k)|_2^2\\Bigr)^{1/2},\\qquad W_\\sigma:=\\Bigl(\\sum_{k\\in\\mathbb Z^3}w_k^{-2\\sigma}\\Bigr)^{1/2}<+\\infty ,$$\nand if $\\sigma>5/2$, then with $W'_\\sigma:=\\bigl(\\sum_k(2\\pi|k|_2)^2w_k^{-2\\sigma}\\bigr)^{1/2}<+\\infty$,\n$$\\sum_{k\\in\\mathbb Z^3}2\\pi|k|_2\\,|c(k)|_2\\;\\le\\;W'_\\sigma\\Bigl(\\sum_{k\\in\\mathbb Z^3}w_k^{2\\sigma}|c(k)|_2^2\\Bigr)^{1/2}.$$\n5. **Truncation tails.** For every integer $N\\ge0$, every real $r$ and every family $c:\\mathbb Z^3\\to\\mathbb C^3$,\n$$\\sum_{|k|_\\infty>N}w_k^{2r}|c(k)|_2^2\\;\\le\\;\\bigl(2\\pi(N+1)\\bigr)^{-2}\\sum_{|k|_\\infty>N}w_k^{2r+2}|c(k)|_2^2 ,$$\nboth sides allowed to be $+\\infty$; in particular, for $u\\in H^{r+1}$ the $H^r$-weighted tail beyond $|k|_\\infty>N$ is at most $(2\\pi(N+1))^{-2}\\|u\\|_{H^{r+1}}^2$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 2.1 (Fourier characterisation of Sobolev spaces on T^3: the weight sums and Cauchy-Schwarz estimates behind H^s inclusions)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            },
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Subsection 1.9.1 (Fourier coefficients and Plancherel on one-periodic fields) and Subsection 3.2.1 with the appendix to Chapter 3 (the Sobolev-space calculus inequalities used for local existence)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-integral-and-ftc-for-continuous-normed-space-curves",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Riemann integration of continuous curves in a complete normed space, with the fundamental theorem of calculus and coefficient functionals",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-norm-and-normed-space",
+          "def-complete-metric-space",
+          "def-cauchy-in-metric",
+          "def-metric-uniform-continuity",
+          "cor-compact-domain-maps-are-uniformly-continuous",
+          "thm-heine-borel-r",
+          "def-interval",
+          "def-metric-continuity",
+          "lem-reverse-triangle-inequality-in-a-normed-space",
+          "def-vector-space"
+        ],
+        "dependency_roles": {
+          "def-norm-and-normed-space": "mathematical-premise",
+          "def-complete-metric-space": "mathematical-premise",
+          "def-cauchy-in-metric": "mathematical-premise",
+          "def-metric-uniform-continuity": "mathematical-premise",
+          "cor-compact-domain-maps-are-uniformly-continuous": "mathematical-premise",
+          "thm-heine-borel-r": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-metric-continuity": "mathematical-premise",
+          "lem-reverse-triangle-inequality-in-a-normed-space": "mathematical-premise",
+          "def-vector-space": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $X$ be a real vector space ([[def-vector-space]]) with a norm $\\|\\cdot\\|$ ([[def-norm-and-normed-space]]) whose metric $d(x,y):=\\|x-y\\|$ is complete ([[def-complete-metric-space]]). Let $a<b$ be reals ([[def-interval]]) and let $g:[a,b]\\to X$ be continuous ([[def-metric-continuity]]). For endpoints $c,d\\in[a,b]$, set $\\int_c^c g:=0_X$ and, when $c>d$, set $\\int_c^d g:=-\\int_d^c g$; for $c<d$ use the Riemann-sum construction below on the restriction to $[c,d]$. Then:\n\n1. **Integral.** For every sequence of tagged partitions of $[a,b]$ whose mesh tends to $0$, the Riemann sums $\\sum_i(t_{i+1}-t_i)\\,g(s_i)$ converge in $X$; the limit, written $\\int_a^b g$, is independent of the sequence, and\n$$\\Bigl\\|\\int_a^b g\\Bigr\\|\\;\\le\\;(b-a)\\sup_{t\\in[a,b]}\\|g(t)\\| .$$\n2. **Fundamental theorem.** The curve $G:[a,b]\\to X$, $G(t):=\\int_a^t g$, is well defined, satisfies $\\|G(t)-G(s)\\|\\le(t-s)\\sup_{[s,t]}\\|g\\|$ for $a\\le s\\le t\\le b$, and is differentiable with $G'=g$ on $[a,b]$ in the one-sided sense at the endpoints.\n3. **Linearity.** For continuous $g,h:[a,b]\\to X$ and reals $\\alpha,\\beta$: $\\int_a^b(\\alpha g+\\beta h)=\\alpha\\int_a^b g+\\beta\\int_a^b h$; and for $a\\le c\\le b$, $\\int_a^b g=\\int_a^c g+\\int_c^b g$.\n4. **Bounded linear images.** If $Y$ is a normed real vector space and $T:X\\to Y$ is linear with $\\|Tx\\|\\le C\\|x\\|$ for some $C<+\\infty$ and all $x$, then $T\\circ g$ is continuous and $T\\bigl(\\int_a^b g\\bigr)=\\int_a^b (T\\circ g)$; in particular, for every real-linear functional $\\Lambda:X\\to\\mathbb R$ with $|\\Lambda x|\\le C\\|x\\|$, $\\Lambda\\bigl(\\int_a^b g\\bigr)=\\int_a^b\\Lambda\\circ g$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 4.1 (Bochner spaces and integration of curves with values in a Banach space)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            },
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Theorem 3.1 (the Picard theorem on a Banach space) and Subsections 3.2.2-3.2.3 (integral equations and limits of curves in Sobolev spaces)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fourier-lattice-sobolev-embedding",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Sobolev embedding on the torus: $H^\\sigma\\subseteq C^j$ for $\\sigma>j+3/2$, with continuous representatives",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-cm-lattice-shell-count-and-weight-sums",
+          "def-countable-choice",
+          "thm-weierstrass-m-test-for-function-series",
+          "def-series-of-real-functions",
+          "thm-uniform-limit-continuous-real-functions",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "cor-bounded-convergence-on-a-finite-measure-space",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-integral-over-a-measurable-set",
+          "def-continuity-real",
+          "def-metric-topology",
+          "def-metric-ball",
+          "def-quotient-topology",
+          "def-product-topology",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-product-measure-on-sigma-finite-spaces",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-cm-lattice-shell-count-and-weight-sums": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-weierstrass-m-test-for-function-series": "mathematical-premise",
+          "def-series-of-real-functions": "mathematical-premise",
+          "thm-uniform-limit-continuous-real-functions": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "cor-bounded-convergence-on-a-finite-measure-space": "mathematical-premise",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-quotient-topology": "mathematical-premise",
+          "def-product-topology": "mathematical-premise",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral": "mathematical-premise",
+          "def-product-measure-on-sigma-finite-spaces": "mathematical-premise",
+          "thm-lebesgue-measure-of-a-box-of-every-kind": "mathematical-premise",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces": "mathematical-premise",
+          "cor-vector-valued-ftc-and-lipschitz-bound": "mathematical-premise",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), as the Fourier-basis and measure-theoretic suppliers below do. Work with either the scalar spaces $H^s(\\mathbb T^3;\\mathbb R)$ or the vector spaces $H^s=H^s(\\mathbb T^3;\\mathbb R^3)$ and the weight family $w_k$ of [[def-periodic-vector-sobolev-space-and-leray-projection]]. In the scalar case replace $\\mathbb R^3$ by $\\mathbb R$ and vector norms by absolute values throughout. Let $\\sigma>3/2$ and $u\\in H^\\sigma$.\n\n1. **Continuous representative.** The coefficient series converges absolutely, $\\sum_k|\\widehat u(k)|_2\\le W_\\sigma\\|u\\|_{H^\\sigma}$ with $W_\\sigma$ as in [[lem-cm-lattice-shell-count-and-weight-sums]], and $S_M:=\\sum_{|k|_\\infty\\le M}\\widehat u(k)e_k$ converges uniformly on $\\mathbb T^3$ to a continuous field $\\widetilde u\\in C(\\mathbb T^3;\\mathbb R^3)$ with the same Fourier coefficients, $\\widehat{\\widetilde u}(k)=\\widehat u(k)$ for all $k$, which satisfies $\\widetilde u=u$ almost everywhere and\n$$\\|\\widetilde u\\|_{L^\\infty}=\\sup_{x\\in\\mathbb T^3}|\\widetilde u(x)|_2\\;\\le\\;W_\\sigma\\|u\\|_{H^\\sigma}.$$\n2. **Uniqueness of the continuous representative.** In the scalar case replace $\\mathbb R^3$ by $\\mathbb R$ in the following formulas. If $f,g\\in C(\\mathbb T^3;\\mathbb R^3)$ satisfy $f=g$ almost everywhere, then $f=g$ everywhere. Consequently the field $\\widetilde u$ is the only continuous field equal to $u$ almost everywhere, and if $u$ has a continuous representative $w$ then $\\widetilde u=w$; in particular for $u\\in C(\\mathbb T^3;\\mathbb R^3)$, $\\widetilde u=u$.\n3. **Higher order.** If $j\\ge0$ is an integer and $\\sigma>j+3/2$, then the canonical representative $\\widetilde u\\in C^j$, and its classical derivatives are the corresponding uniform series\n$$\\partial^\\alpha\\widetilde u=\\sum_{k\\in\\mathbb Z^3}(2\\pi i k)^\\alpha\\widehat u(k)\\,e_k\\qquad(|\\alpha|\\le j),$$\nthe series being absolutely and uniformly convergent, and\n$$\\|u\\|_{C^j}:=\\max_{|\\alpha|\\le j}\\sup_{x\\in\\mathbb T^3}|\\partial^\\alpha\\widetilde u(x)|_2\\;\\le\\;C_{\\sigma,j}\\|u\\|_{H^\\sigma},\\qquad C_{\\sigma,j}:=\\max_{|\\alpha|\\le j}W_{\\sigma-|\\alpha|}.$$\n4. **Derivative bound for differentiable fields.** If $\\sigma>3/2$, $u\\in H^{\\sigma+1}$ and $\\partial_ju$ is continuous for some $j$, then $\\partial_ju\\in H^\\sigma$ has continuous representative $\\partial_ju$ itself and\n$$\\sup_{x\\in\\mathbb T^3}|\\partial_ju(x)|_2\\;\\le\\;W_\\sigma\\|\\partial_ju\\|_{H^\\sigma}\\;\\le\\;W_\\sigma\\|u\\|_{H^{\\sigma+1}}.$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 2.1 (Fourier characterisation of Sobolev spaces on T^3; the absolutely convergent coefficient series and the embedding H^s(T^3)\u2282C(T^3) for s>3/2) and Section 4.3 (Agmon's inequality via low/high frequency splitting)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            },
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Subsection 3.2.1 and the appendix to Chapter 3 (calculus inequalities in Sobolev spaces: the Banach-algebra property for H^s with s>N/2 and the Sobolev inequality (3.30))",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-discrete-young-and-sobolev-product",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Discrete Young inequality, the Sobolev product bound, and the transport product bound on the torus",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-cm-lattice-shell-count-and-weight-sums",
+          "lem-fourier-lattice-sobolev-embedding",
+          "def-countable-choice",
+          "def-nonnegative-extended-series",
+          "thm-cauchy-schwarz-finite",
+          "cor-bounded-convergence-on-a-finite-measure-space",
+          "thm-fourier-basis-and-parseval-on-the-n-torus"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-cm-lattice-shell-count-and-weight-sums": "mathematical-premise",
+          "lem-fourier-lattice-sobolev-embedding": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nonnegative-extended-series": "mathematical-premise",
+          "thm-cauchy-schwarz-finite": "mathematical-premise",
+          "cor-bounded-convergence-on-a-finite-measure-space": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used through the two lattice and embedding suppliers quoted below. Use the scalar and vector spaces and weights of [[def-periodic-vector-sobolev-space-and-leray-projection]]. For scalar $a,b$ put $ab$ equal to ordinary multiplication; for scalar $a$ and vector $v$ put $av=(av_1,av_2,av_3)$; for vectors $v,z$ put $vz=(v_1z_1,v_2z_2,v_3z_3)$ (componentwise product). These products extend complex-bilinearly to coefficients and satisfy $|ab|\\le|a||b|$, with Euclidean norm for vectors and absolute value for scalars. The output is scalar only for two scalar inputs, and vector otherwise. The convolution for the same typed products is $(a*b)(k):=\\sum_l a(l)b(k-l)$ whenever the sum is absolutely convergent. In claim 3, $f,g$ are vector fields and $f\\cdot\\nabla$ denotes the explicitly displayed scalar-component action, not componentwise vector multiplication.\n\n1. **Discrete Young.** Let $a\\in\\ell^1(\\mathbb Z^3;\\mathbb C)$, $b\\in\\ell^2(\\mathbb Z^3;\\mathbb C)$ and define $(a*b)(k):=\\sum_{l\\in\\mathbb Z^3}a(k-l)b(l)$. The sum converges absolutely, and\n$$\\|a*b\\|_{\\ell^2}\\;\\le\\;\\|a\\|_{\\ell^1}\\|b\\|_{\\ell^2}.$$\n2. **Sobolev product.** Let $\\sigma>3/2$ and let $f,g$ each belong to its scalar or vector $H^\\sigma$. Then the pointwise product $fg$ of the continuous representatives ([[lem-fourier-lattice-sobolev-embedding]]) belongs to $H^\\sigma$, and with $W_\\sigma=(\\sum_kw_k^{-2\\sigma})^{1/2}$ of [[lem-cm-lattice-shell-count-and-weight-sums]],\n$$\\|fg\\|_{H^\\sigma}\\;\\le\\;C_\\sigma\\|f\\|_{H^\\sigma}\\|g\\|_{H^\\sigma},\\qquad C_\\sigma:=2^\\sigma W_\\sigma .$$\n3. **Transport product.** Let $\\sigma>3/2$, $f\\in H^\\sigma$ and $g\\in H^{\\sigma+1}$. Then $(f\\cdot\\nabla)g:=\\sum_{j=1}^{3}f_j\\,\\partial_jg$ belongs to $H^\\sigma$ and\n$$\\|(f\\cdot\\nabla)g\\|_{H^\\sigma}\\;\\le\\;3C_\\sigma\\|f\\|_{H^\\sigma}\\|g\\|_{H^{\\sigma+1}}.$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Lemma 3.4 (calculus inequalities: products and commutators in H^m(R^N), the Banach-algebra property for s>N/2) with the appendix to Chapter 3",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            },
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 2.1 and Section 4.2 (Fourier characterisation of H^s on T^3 and the product/transport estimates used in the H^m energy inequalities)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tame-transport-commutator",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The transport term is orthogonal to itself and the tame commutator estimate $\\|[\\Lambda^m,u\\cdot\\nabla]u\\|_{L^2}\\le C_m\\|u\\|_{H^m}\\|u\\|_{H^s}$",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 4,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-cm-lattice-shell-count-and-weight-sums",
+          "lem-discrete-young-and-sobolev-product",
+          "lem-fourier-lattice-sobolev-embedding",
+          "def-countable-choice",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-nonnegative-extended-series"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-cm-lattice-shell-count-and-weight-sums": "mathematical-premise",
+          "lem-discrete-young-and-sobolev-product": "mathematical-premise",
+          "lem-fourier-lattice-sobolev-embedding": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "def-nonnegative-extended-series": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used through the lattice and embedding suppliers. Work with the operators $\\Lambda^m$, $\\partial_j$, the weight family $w_k$ and the divergence-free subspaces of [[def-periodic-vector-sobolev-space-and-leray-projection]].\n\n1. **Vanishing transport integral.** Let $m>5/2$, let $u\\in H^m$ with $\\operatorname{div}u=0$, and let $w\\in H^m$. Then $(u\\cdot\\nabla)w\\in L^2$ and\n$$\\int_{\\mathbb T^3}\\bigl((u\\cdot\\nabla)w\\bigr)\\cdot w\\,dx=0 .$$\n2. **Tame commutator.** Let $m\\ge s>5/2$ and $u\\in H^m$ with $\\operatorname{div}u=0$. Then the field\n$$[\\Lambda^m,u\\cdot\\nabla]u:=\\Lambda^m\\bigl((u\\cdot\\nabla)u\\bigr)-(u\\cdot\\nabla)(\\Lambda^m u)$$\nbelongs to $L^2$, and with $W'_s=(\\sum_k(2\\pi|k|_2)^2w_k^{-2s})^{1/2}$ of [[lem-cm-lattice-shell-count-and-weight-sums]] and $C_m:=4\\pi^2m2^{m-2}(W'_s+1)$,\n$$\\bigl\\|[\\Lambda^m,u\\cdot\\nabla]u\\bigr\\|_{L^2}\\;\\le\\;C_m\\|u\\|_{H^m}\\|u\\|_{H^s}.$$\n3. **Commutation identity for the energy estimate.** If moreover $u\\in H^{2m}$ and $\\operatorname{div}u=0$, then\n$$\\bigl\\langle (u\\cdot\\nabla)u,\\Lambda^{2m}u\\bigr\\rangle=\\bigl\\langle [\\Lambda^m,u\\cdot\\nabla]u,\\Lambda^mu\\bigr\\rangle,$$\nwhere $\\langle f,g\\rangle=\\int_{\\mathbb T^3}f\\cdot g\\,dx$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Lemma 3.4 and estimate (3.32) (commutator calculus inequalities in Sobolev spaces) with Subsection 3.2.3 and Proposition 3.7 (the energy estimate d/dt||v||_m \u2264 c_m|\u2207v|_{L\u221e}||v||_m)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            },
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 4.2 (the H^m energy identity, the vanishing transport term after integration by parts and the Sobolev estimates bounding the commutator)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fluid-galerkin-coefficient-ivp",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The Galerkin coefficient system: finite-dimensional invariance, local Lipschitz property, and the unique maximal approximation on the torus",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 4,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-discrete-young-and-sobolev-product",
+          "lem-fourier-lattice-sobolev-embedding",
+          "lem-cm-lattice-shell-count-and-weight-sums",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "def-countable-choice",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "def-maximal-ode-solution",
+          "thm-coordinate-map-for-a-finite-dimensional-normed-space",
+          "thm-cauchy-schwarz-finite",
+          "def-linear-basis",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-metric-ball",
+          "def-vector-space",
+          "def-inner-product-space"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-discrete-young-and-sobolev-product": "mathematical-premise",
+          "lem-fourier-lattice-sobolev-embedding": "mathematical-premise",
+          "lem-cm-lattice-shell-count-and-weight-sums": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "thm-coordinate-map-for-a-finite-dimensional-normed-space": "mathematical-premise",
+          "thm-cauchy-schwarz-finite": "mathematical-premise",
+          "def-linear-basis": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-vector-space": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used through the Fourier-coefficient suppliers. Fix $N\\ge1$, a real viscosity parameter $\\nu\\ge0$ and a real exponent $s>3/2$. Work in the notation of [[def-periodic-vector-sobolev-space-and-leray-projection]]: $H^s=H^s(\\mathbb T^3;\\mathbb R^3)$ with coefficients $\\widehat u(k)$, weights $w_k$, Leray projection $P$, differential operators $\\partial_j,\\Delta$ and divergence-free subspace $H^s_\\sigma$.\n\n**Definitions.** For a coefficient family $c$ let $(P_Nc)(k):=c(k)$ if $|k|_\\infty\\le N$ and $(P_Nc)(k):=0$ otherwise (\\emph{Fourier truncation}); let\n$$X_N:=\\{\\,u\\in H^0:\\widehat u(k)=0\\ \\text{for }|k|_\\infty>N,\\ k\\cdot\\widehat u(k)=0\\ \\forall k,\\ \\widehat u(-k)=\\overline{\\widehat u(k)}\\ \\forall k\\,\\}$$\nbe the space of real divergence-free trigonometric-polynomial fields of frequency at most $N$, and define the **Galerkin field**\n$$F_N:X_N\\longrightarrow H^0,\\qquad F_N(u):=-P_NP\\bigl((u\\cdot\\nabla)u\\bigr)+\\nu\\Delta u .$$\n\nThen:\n\n1. $X_N$ is a finite-dimensional real-linear subspace of $H^s$ for every $s\\in\\mathbb R$, $P_N$ restricted to the real divergence-free subspace $H^s_\\sigma$ is the orthogonal projection onto $X_N$ for the $H^s$ inner product and $\\|P_Nu\\|_{H^s}\\le\\|u\\|_{H^s}$; moreover $F_N$ maps $X_N$ into $X_N$, and $\\int_{\\mathbb T^3}F_N(u)\\,dx=0$ and $F_N(P_Nu)=F_N(u)$ for $u\\in X_N$.\n2. **Local Lipschitz property.** For every $R>0$ there is $L_N(R)<+\\infty$ such that $\\|F_N(u)-F_N(v)\\|_{H^s}\\le L_N(R)\\|u-v\\|_{H^s}$ whenever $u,v\\in X_N$ with $\\|u\\|_{H^s},\\|v\\|_{H^s}\\le R$; the proof exhibits $L_N(R)=12\\pi^2\\nu N^2+6C_sc_NR$ with $c_N=(1+12\\pi^2N^2)^{1/2}$ and $C_s$ the product constant of [[lem-discrete-young-and-sobolev-product]].\n3. **Galerkin IVP.** For every $u_0\\in X_N$ the initial value problem\n$$u'(t)=F_N(u(t)),\\qquad u(0)=u_0$$\nhas a unique maximal solution $u_N:I\\to X_N$ with open interval $I\\ni0$; if the maximal interval has finite right endpoint $T_{\\max}<+\\infty$, then $\\lim_{t\\uparrow T_{\\max}}\\|u_N(t)\\|_{H^{s'}}=+\\infty$ for every $s'>3/2$, and conversely if $\\|u_N\\|_{H^{s'}}\\le R$ on $[0,T)$ for some $s'>3/2$ with $T<+\\infty$ then the solution extends past $T$. For $u_0\\in H^0_\\sigma$ arbitrary, $P_Nu_0\\in X_N$ and the corresponding solution is written $u_N(\\cdot;P_Nu_0)$.\n4. **Basic bounds.** Along the maximal solution:\n   (a) for every real $m>3/2$,\n   $$\\|u_N'(t)\\|_{H^m}\\le\\nu\\|u_N(t)\\|_{H^{m+2}}+3C_m\\|u_N(t)\\|_{H^{m+1}}^2 ,$$\n   where $C_m$ is the product constant of [[lem-discrete-young-and-sobolev-product]] at order $m$;\n   (b) for every real $0\\le m\\le2$, with $c_N=(1+12\\pi^2N^2)^{1/2}$ and $e_N=(1+48\\pi^2N^2)^{1/2}$,\n   $$\\|u_N'(t)\\|_{H^m}\\le12\\pi^2\\nu N^2\\|u_N(t)\\|_{H^m}+3C_sc_Ne_N^2\\|u_N(t)\\|_{H^s}^2 ;$$\n   (c) $\\|P_Nu-u\\|_{H^r}\\le(2\\pi(N+1))^{-1}\\|u\\|_{H^{r+1}}$ for every real $r$ and every $u\\in H^{r+1}$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Definition 3.1 and Subsection 3.1.2 (the N-th order Galerkin approximation of the NSE and the resulting finite system of ODEs)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            },
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Theorem 3.1 and Proposition 3.6 with Subsection 3.2.2 (Picard's theorem on a Banach space and the locally Lipschitz regularized/Galerkin evolution)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fluid-energy-common-lifespan",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The higher-order energy inequality and a common Galerkin lifespan with $\\|u_N(t)\\|_{H^s}\\le2Y_0$",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 5,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-tame-transport-commutator",
+          "lem-fluid-galerkin-coefficient-ivp",
+          "lem-discrete-young-and-sobolev-product",
+          "def-countable-choice",
+          "thm-ftc-second-part",
+          "thm-monotonicity-of-the-integral",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-tame-transport-commutator": "mathematical-premise",
+          "lem-fluid-galerkin-coefficient-ivp": "mathematical-premise",
+          "lem-discrete-young-and-sobolev-product": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used through the Fourier-coefficient suppliers. Fix $N\\ge1$, $\\nu\\ge0$ and a real $s>5/2$, and let $u_N:I\\to X_N$ be the maximal solution of the Galerkin system $u_N'=F_N(u_N)$ of [[lem-fluid-galerkin-coefficient-ivp]] with initial datum $u_N(0)=P_Nu_0$, where $u_0\\in H^s_\\sigma$ and $Y_0:=\\|u_0\\|_{H^s}$.\n\n1. **Energy inequality.** For every real $m\\ge s$ and every $t\\in I$,\n$$\\frac12\\frac{d}{dt}\\|u_N(t)\\|_{H^m}^2+\\nu\\|\\nabla u_N(t)\\|_{H^m}^2\\;\\le\\;C_m\\|u_N(t)\\|_{H^s}\\|u_N(t)\\|_{H^m}^2 ,$$\nwhere $C_m$ is the commutator constant of [[lem-tame-transport-commutator]] (claim 2), and $\\|\\nabla u_N\\|_{H^m}^2:=\\sum_{j=1}^3\\|\\partial_ju_N\\|_{H^m}^2$.\n2. **Common lifespan.** With\n$$T:=\\begin{cases}(2C_sY_0)^{-1},&Y_0>0,\\\\ 1,&Y_0=0,\\end{cases}$$\none has $[0,T]\\subseteq I$ and\n$$\\|u_N(t)\\|_{H^s}\\le2Y_0\\quad(0\\le t\\le T);$$\nif $Y_0=0$ then $u_N\\equiv0$ on $I$. In particular the same interval length $T$, depending only on $Y_0$ and $s$ (and not on $N$ or on the finer profile of $u_0$), is a common interval of existence for all Galerkin approximations.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 4.2 and Theorem 4.14 with its proof (the H^m energy inequality for the Galerkin approximations and the resulting common lifespan)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            },
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Proposition 3.7 and estimate (3.59) (the a priori H^m bound d/dt||v_\u03b5||_m \u2264 c_m||v_\u03b5||_m^2 and the bound ||v_0||_m/(1-c_mt||v_0||_m))",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-high-sobolev-norms-share-base-lifespan",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Finite initial higher Sobolev norms give uniform Galerkin bounds on the common base interval",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 6,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-fluid-energy-common-lifespan",
+          "lem-fluid-galerkin-coefficient-ivp",
+          "lem-tame-transport-commutator",
+          "lem-discrete-young-and-sobolev-product",
+          "def-countable-choice",
+          "thm-derivative-of-exponential",
+          "cor-exponential-reciprocal-and-positivity",
+          "thm-chain-rule"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-fluid-energy-common-lifespan": "mathematical-premise",
+          "lem-fluid-galerkin-coefficient-ivp": "mathematical-premise",
+          "lem-tame-transport-commutator": "mathematical-premise",
+          "lem-discrete-young-and-sobolev-product": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "cor-exponential-reciprocal-and-positivity": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Fix $N\\ge1$, $\\nu\\ge0$, a real $s>5/2$, and $u_0\\in H^s_\\sigma$ with $Y_0=\\|u_0\\|_{H^s}$, and let $T$ and $u_N:[0,T]\\to X_N$ be as in [[lem-fluid-energy-common-lifespan]]. For every real $m\\ge s$ with $\\|u_0\\|_{H^m}<+\\infty$ define\n$$B_m:=\\|u_0\\|_{H^m}\\,e^{4C_mY_0T},\\qquad B_m':=\\nu B_m+3C_{m-2}B_{m-1}^2 ,$$\nwhere $C_m$ is the commutator constant of [[lem-tame-transport-commutator]] and $3C_{m-2}$ is the product constant of [[lem-discrete-young-and-sobolev-product]] at order $m-2$ (so that $B_m'$ is defined for $m>7/2$). For lower orders $0\\le r<s$ set $B_r:=B_s$; then $\\|u_N(t)\\|_{H^r}\\le B_r$ follows from monotonicity of the weights and the base bound. At any order where an initial norm is infinite, take $B_r=+\\infty$ and the corresponding $B_r\\prime=+\\infty$ by convention, reading the estimate as an extended upper bound. Then for $0\\le t\\le T$:\n\n1. $\\|u_N(t)\\|_{H^m}\\le B_m$ for every real $m\\ge s$; in particular all bounds hold on the single interval $[0,T]$ whose length depends only on $Y_0$ and $s$, uniformly in $N$.\n2. $\\|u_N'(t)\\|_{H^{m-2}}\\le B_m'$ for every real $m>7/2$; in particular, for the integer orders of the main theorem ($s\\ge4$, $m\\ge s$) these are the uniform-in-$N$ bounds on $L^\\infty(0,T;H^m)$ and $L^\\infty(0,T;H^{m-2})$ of the Galerkin approximations.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Theorem 4.16 and its proof (higher regularity: the induction giving uniform H^m bounds for the Galerkin approximations on the interval of the strong solution)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            },
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), estimate (3.58)-(3.60) and the proof of Theorem 3.4 (uniform bounds for v_\u03b5 in L^\u221eH^m and for \u2202_tv_\u03b5 in L^\u221eH^{m-2})",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fourier-tail-diagonal-compact-convergence",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Diagonal extraction of a converging Fourier subsequence from high-norm bounds and the tail estimate",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "cor-mean-value-theorem",
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-cm-lattice-shell-count-and-weight-sums",
+          "def-countable-choice",
+          "cor-bolzano-weierstrass-in-rn",
+          "thm-countable-union-of-countable",
+          "def-countable",
+          "cor-archimedean-reciprocal",
+          "lem-integer-part",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "cor-mean-value-theorem": "mathematical-premise",
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-cm-lattice-shell-count-and-weight-sums": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "cor-bolzano-weierstrass-in-rn": "mathematical-premise",
+          "thm-countable-union-of-countable": "mathematical-premise",
+          "def-countable": "mathematical-premise",
+          "cor-archimedean-reciprocal": "mathematical-premise",
+          "lem-integer-part": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $s>5/2$ and $T>0$, and for each $N\\ge1$ let $u_N:[0,T]\\to H^s(\\mathbb T^3;\\mathbb R^3)$ be a field-valued curve with the following properties:\n\n(a) for every $t\\in[0,T]$ the coefficients of $u_N(t)$ are supported in $|k|_\\infty\\le N$;\n(b) for every real $m\\ge s$ there is $B_m<+\\infty$ with $\\sup_{N\\ge1}\\sup_{0\\le t\\le T}\\|u_N(t)\\|_{H^m}\\le B_m$;\n(c) each $u_N$ is differentiable into $H^{m-2}$ for every $m\\ge s$ and there are $B_m'<+\\infty$ with $\\sup_{N\\ge1}\\sup_{0\\le t\\le T}\\|u_N'(t)\\|_{H^{m-2}}\\le B_m'$.\n\nThen there are a subsequence $(N_j)$ and a field $u:[0,T]\\to H^m$ for every $m\\ge s$, denoted $u\\in\\bigcap_{m\\ge s}C([0,T],H^m)$, such that:\n\n1. $u_{N_j}\\to u$ in $C([0,T],H^{m-1})$ for every real $m\\ge s+1$ (i.e. $\\sup_{0\\le t\\le T}\\|u_{N_j}(t)-u(t)\\|_{H^{m-1}}\\to0$);\n2. $\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^m}\\le B_m$ for every $m\\ge s$;\n3. $u(t)$ is real for every $t$ and is divergence-free whenever every $u_N(t)$ is divergence-free, and $\\widehat{u_{N_j}(t)}(k)\\to\\widehat u(t)(k)$ for every $k$ and every $t$, the convergence being uniform in $t$ on every finite set of frequencies;\n4. if in addition $u_N(0)\\to v$ in $H^m$ for every $m\\ge s$, then $u(0)=v$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Subsection 3.2.3 (uniform bounds in C([0,T];H^m) and Lip([0,T];H^{m-2}), subsequence extraction and passage to the limit)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            },
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 3.2 and Section 4.2 (compactness of the Galerkin approximations on the torus via finitely many Fourier coefficients and uniform tail bounds)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-strong-solution-smoothness-bootstrap",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "A strong solution of the projected periodic equation with all Sobolev norms continuous in time is $C^\\infty$",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 4,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-fourier-lattice-sobolev-embedding",
+          "lem-discrete-young-and-sobolev-product",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves",
+          "def-countable-choice",
+          "def-vector-space",
+          "def-norm-and-normed-space"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-fourier-lattice-sobolev-embedding": "mathematical-premise",
+          "lem-discrete-young-and-sobolev-product": "mathematical-premise",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-vector-space": "mathematical-premise",
+          "def-norm-and-normed-space": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\nu\\ge0$, let $T>0$, and let $u:[0,T]\\to\\bigcap_{p\\in\\mathbb R}H^p(\\mathbb T^3;\\mathbb R^3)$ be a curve such that, in the notation of [[def-periodic-vector-sobolev-space-and-leray-projection]]:\n\n1. for every real $p$, $t\\mapsto u(t)$ is continuous into $H^p$;\n2. for every real $p$, $t\\mapsto u(t)$ is differentiable into $H^p$, with\n$$u'(t)=\\nu\\Delta u(t)-P\\bigl((u(t)\\cdot\\nabla)u(t)\\bigr)\\qquad(0\\le t\\le T),$$\nthe right-hand side being an element of $H^p$ for every $p$ (which follows from the other hypotheses as below);\n3. $u(t)$ is divergence-free and real for every $t$.\n\nThen the map $(t,x)\\mapsto u(t,x)$ belongs to $C^\\infty([0,T]\\times\\mathbb T^3;\\mathbb R^3)$ (with one-sided time derivatives at the endpoints), and for all $r\\ge0$ and every multi-index $\\alpha$ the derivative $\\partial_t^r\\partial_x^\\alpha u$ is the one obtained from the right-hand side of the equation by the formal product rule and differentiation under $P$, $\\nabla$ and $\\Delta$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Sections 4.4 and 4.5 (regularity of strong solutions: time and space regularity upgrades by differentiating the equation)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            },
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Theorem 3.5 and Section 4.4 (continuity in the high norm and higher regularity of solutions of the Euler and Navier-Stokes equations)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-local-smooth-periodic-euler-viscous-solution",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Local smooth solutions of the periodic incompressible Euler and constant-viscosity equations on $\\mathbb T^3$",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 7,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-cm-lattice-shell-count-and-weight-sums",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves",
+          "lem-fourier-lattice-sobolev-embedding",
+          "lem-discrete-young-and-sobolev-product",
+          "lem-tame-transport-commutator",
+          "lem-fluid-galerkin-coefficient-ivp",
+          "lem-fluid-energy-common-lifespan",
+          "lem-high-sobolev-norms-share-base-lifespan",
+          "lem-fourier-tail-diagonal-compact-convergence",
+          "lem-cm-strong-solution-smoothness-bootstrap",
+          "def-countable-choice",
+          "cor-vector-valued-ftc-and-lipschitz-bound"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-cm-lattice-shell-count-and-weight-sums": "mathematical-premise",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves": "mathematical-premise",
+          "lem-fourier-lattice-sobolev-embedding": "mathematical-premise",
+          "lem-discrete-young-and-sobolev-product": "mathematical-premise",
+          "lem-tame-transport-commutator": "mathematical-premise",
+          "lem-fluid-galerkin-coefficient-ivp": "mathematical-premise",
+          "lem-fluid-energy-common-lifespan": "mathematical-premise",
+          "lem-high-sobolev-norms-share-base-lifespan": "mathematical-premise",
+          "lem-fourier-tail-diagonal-compact-convergence": "mathematical-premise",
+          "lem-cm-strong-solution-smoothness-bootstrap": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "cor-vector-valued-ftc-and-lipschitz-bound": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $s\\ge4$ be an integer, let $\\nu\\ge0$, and let $u_0\\in H^s_\\sigma(\\mathbb T^3;\\mathbb R^3)\\cap C^\\infty(\\mathbb T^3;\\mathbb R^3)$ be a smooth divergence-free field (so that $\\|u_0\\|_{H^m}<+\\infty$ for every $m$). Let $Y_0:=\\|u_0\\|_{H^s}$, let $C_s$ be the commutator constant of [[lem-tame-transport-commutator]], and set\n$$T:=\\begin{cases}(2C_sY_0)^{-1},&Y_0>0,\\\\ 1,&Y_0=0.\\end{cases}$$\nThen there exists a field $u\\in C^\\infty([0,T]\\times\\mathbb T^3;\\mathbb R^3)$ such that:\n\n1. $u(0,\\cdot)=u_0$; for every real $m\\ge s$ the identity\n$$\\partial_tu+P\\bigl((u\\cdot\\nabla)u\\bigr)=\\nu\\Delta u$$\nholds in $C([0,T],H^{m-2})$ (hence pointwise on the strip after the smoothness conclusion), where $P$ is the Leray projection of [[def-periodic-vector-sobolev-space-and-leray-projection]]; the identities $\\operatorname{div}u=0$ and $\\int_{\\mathbb T^3}u(t,x)\\,dx=\\int_{\\mathbb T^3}u_0(x)\\,dx$ hold for all $t$;\n2. for every real $m\\ge s$ the uniform bound $\\sup_{0\\le t\\le T}\\|u(t)\\|_{H^m}\\le B_m:=\\|u_0\\|_{H^m}e^{4C_mY_0T}$ holds, where $C_m$ is the commutator constant of order $m$;\n3. if $Y_0=0$ then $u_0=0$ and $u\\equiv0$. The existence time $T$ depends only on the single number $Y_0=\\|u_0\\|_{H^s}$ (and on $s$), not on the finer profile of $u_0$; the case $\\nu=0$ is the periodic incompressible Euler model and $\\nu>0$ the constant-viscosity Navier-Stokes model.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Theorem 3.4 (local-in-time existence of solutions to the Euler and Navier-Stokes equations, with T \u2264 1/(c_m||v_0||_m) for m \u2265 [N/2]+2), Theorem 3.5 (continuity in the high norm) and Corollary 3.2 (maximal time of existence)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            },
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Theorem 4.14 and Theorem 4.16 (existence of strong solutions and higher regularity for the periodic 3D Euler and Navier-Stokes equations)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-periodic-pressure-reconstruction",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Reconstruction of the periodic pressure from the velocity: $\\nabla p=-(I-P)((u\\cdot\\nabla)u)$ and $\\Delta p=-\\sum_{i,j}\\partial_i\\partial_j(u_iu_j)$",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 5,
+        "deps": [
+          "lem-cm-strong-solution-smoothness-bootstrap",
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-fourier-lattice-sobolev-embedding",
+          "lem-discrete-young-and-sobolev-product",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "lem-cm-strong-solution-smoothness-bootstrap": "mathematical-premise",
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-fourier-lattice-sobolev-embedding": "mathematical-premise",
+          "lem-discrete-young-and-sobolev-product": "mathematical-premise",
+          "lem-cm-integral-and-ftc-for-continuous-normed-space-curves": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $T>0$, let $u:[0,T]\\times\\mathbb T^3\\to\\mathbb R^3$ be a field such that $u\\in C([0,T],H^m)$ for every real $m\\ge0$, $t\\mapsto u(t)$ is differentiable into $H^m$ with $\\partial_tu\\in C([0,T],H^m)$ for every $m$, $u(t)$ is divergence-free for every $t$, and $u$ solves the projected equation $\\partial_tu=\\nu\\Delta u-P((u\\cdot\\nabla)u)$ for some real $\\nu\\ge0$ (all in the sense of the spaces of [[def-periodic-vector-sobolev-space-and-leray-projection]]).\n\nDefine the real scalar field $p$ on $[0,T]\\times\\mathbb T^3$ by its Fourier coefficients\n$$\\widehat p(t,0):=0,\\qquad \\widehat p(t,k):=-\\frac{1}{|k|_2^2}\\sum_{i,j=1}^{3}k_ik_j\\,\\widehat{u_iu_j}(t,k)\\quad(k\\ne0),$$\nwhere $\\widehat{u_iu_j}(t,k)$ is the $k$-th Fourier coefficient of the product field $u_i(t,\\cdot)u_j(t,\\cdot)$. Then:\n\n1. $p\\in C([0,T],H^m)$ for every $m\\ge0$, $t\\mapsto p(t)$ is differentiable into every $H^m$, $p\\in C^\\infty([0,T]\\times\\mathbb T^3)$, and $\\int_{\\mathbb T^3}p(t,x)\\,dx=0$ for every $t$.\n2. The following identities hold on the strip:\n$$\\nabla p=-(I-P)\\bigl((u\\cdot\\nabla)u\\bigr),\\qquad \\partial_tu+(u\\cdot\\nabla)u=\\nu\\Delta u-\\nabla p,\\qquad \\Delta p=-\\sum_{i,j=1}^{3}\\partial_i\\partial_j(u_iu_j).$$\n3. **Uniqueness.** If $q\\in C^\\infty([0,T]\\times\\mathbb T^3)$ has $\\int_{\\mathbb T^3}q(t,\\cdot)\\,dx=0$ and $\\nabla q=\\nabla p$ for every $t$, then $q=p$; equivalently, $p$ is the unique smooth mean-zero pressure making $u$ solve the primitive-variable system.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Subsection 1.8 with equation (1.84) and Proposition 1.15 (the Poisson equation -\u0394p = tr(\u2207v)^2 and the recovery of the pressure from the velocity)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            },
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 1.2.2 and Section 2.2 (elimination of the pressure, -\u0394p = div div(u\u2297u), and the Helmholtz decomposition)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-fluid-uniqueness-and-continuous-dependence",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Uniqueness of smooth periodic solutions and continuous dependence in $H^{s-1}$ on the common local interval",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 8,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-fourier-lattice-sobolev-embedding",
+          "lem-discrete-young-and-sobolev-product",
+          "lem-tame-transport-commutator",
+          "thm-local-smooth-periodic-euler-viscous-solution",
+          "def-countable-choice",
+          "thm-gronwall-integral-inequality",
+          "thm-holder-finite-real-exponents",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-integral-over-a-measurable-set"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-fourier-lattice-sobolev-embedding": "mathematical-premise",
+          "lem-discrete-young-and-sobolev-product": "mathematical-premise",
+          "lem-tame-transport-commutator": "mathematical-premise",
+          "thm-local-smooth-periodic-euler-viscous-solution": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-gronwall-integral-inequality": "mathematical-premise",
+          "thm-holder-finite-real-exponents": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**Assume the Axiom of Countable Choice** $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $s\\ge4$ be an integer, $\\nu\\ge0$, and let $B>0$ with $T:=(2C_sB)^{-1}$, where $C_s$ is the commutator constant of [[lem-tame-transport-commutator]]. Let $u_0,v_0\\in H^s_\\sigma(\\mathbb T^3;\\mathbb R^3)\\cap C^\\infty(\\mathbb T^3;\\mathbb R^3)$ be smooth divergence-free data with $\\|u_0\\|_{H^s}\\le B$ and $\\|v_0\\|_{H^s}\\le B$, and let $u,v\\in C^\\infty([0,T]\\times\\mathbb T^3;\\mathbb R^3)$ be the corresponding smooth solutions of the projected equation $\\partial_tu+P((u\\cdot\\nabla)u)=\\nu\\Delta u$ given by [[thm-local-smooth-periodic-euler-viscous-solution]] (each nonzero datum has lifespan at least $T$ by its norm bound; for a zero datum use the explicit solution $z\\equiv0$ on $[0,T]$, even when $T>1$).\n\n1. **Uniqueness.** If $u(0)=v(0)$, then $u=v$ on $[0,T]$.\n2. **Stability in $L^2$.** With $w:=u-v$ and $\\Theta:=\\sup_{0\\le t\\le T}\\||\\nabla v(t)|\\|_{L^\\infty}\\le6W_{s-1}B$, where $|\\nabla v|=(\\sum_j|\\partial_jv|^2)^{1/2}$ ([[lem-fourier-lattice-sobolev-embedding]]),\n$$\\|w(t)\\|_{L^2}\\le e^{\\Theta t}\\|w(0)\\|_{L^2}\\qquad(0\\le t\\le T).$$\n3. **Continuous dependence in $H^{s-1}$.** There is a finite constant $K=K(s,B,T,\\nu)$ such that\n$$\\sup_{0\\le t\\le T}\\|u(t)-v(t)\\|_{H^{s-1}}\\;\\le\\;K\\,\\|u_0-v_0\\|_{L^2}^{1/s}.$$\nIn particular the solution map $u_0\\mapsto u$ is continuous from the bounded set $\\{\\|u_0\\|_{H^s}\\le B\\}$ with the $L^2$-topology into $C([0,T],H^{s-1})$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 4.2 and Theorem 4.11 (energy estimates for differences of solutions; uniqueness and stability of strong solutions)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            },
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Proposition 3.1, Corollary 3.1 and Lemma 3.8 (the basic energy estimate, uniqueness of solutions, and interpolation in Sobolev spaces)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "rem-local-versus-known-open-global-fluid-scope",
+        "kind": "remark",
+        "domain": "mathematics",
+        "title": "Scope of the local periodic result: what is proved, what is not, and the known open global problem",
+        "reference": "local-fluid-wellposedness.md (E30)",
+        "design_state": "completed-scope-remark; recorded in the batch notes",
+        "dependency_level": 9,
+        "deps": [
+          "thm-local-smooth-periodic-euler-viscous-solution",
+          "thm-fluid-uniqueness-and-continuous-dependence"
+        ],
+        "dependency_roles": {
+          "thm-local-smooth-periodic-euler-viscous-solution": "mathematical-premise",
+          "thm-fluid-uniqueness-and-continuous-dependence": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "",
+        "strategy": "Scope remark: no proof obligation; records explicitly what is and is not claimed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 4.5 (blow-up and the Beale-Kato-Majda criterion) and Chapter 1 (the state-of-the-art table on existence, uniqueness and regularity in dimension three)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            },
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Section 3.3 with Corollary 3.2 (maximal time of existence and the global-existence criterion in terms of vorticity accumulation)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 110,
+    "id": "cm-math-fluid-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Fluid \u2014 Examples",
+    "companion": "cm-math-fluid",
+    "requires": [
+      "cm-math-fluid"
+    ],
+    "items": [
+      {
+        "id": "ex-cm-leray-projection-explicit-computations",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Explicit Leray projection computations on $\\mathbb T^3$: gradients, a mixed field, and a divergence-free mode",
+        "reference": "batch-15 B page; constructed from the A-page statements",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "thm-fourier-basis-and-parseval-on-the-n-torus",
+          "lem-fourier-lattice-sobolev-embedding",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise",
+          "lem-fourier-lattice-sobolev-embedding": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Use the character convention $e_k(x)=e^{2\\pi ik\\cdot x}$ and the Leray projection $P$ of [[def-periodic-vector-sobolev-space-and-leray-projection]]; thus for $k\\ne0$ the $k$-th coefficient of $(I-P)v$ is $\\bigl(k\\cdot\\widehat v(k)/|k|_2^2\\bigr)k$.\n\n**(a) A gradient field.** Let $\\varphi(x):=\\cos(2\\pi x_1)+\\sin\\bigl(2\\pi(x_2+x_3)\\bigr)$ and $v:=\\nabla\\varphi$. Then $Pv=0$ and the decomposed part is the whole gradient: $v=Pv+\\nabla\\varphi$ with $Pv=0$.\n\n**(b) A mixed field.** Let $u(x):=\\bigl(\\sin(2\\pi x_2),\\,0,\\,\\cos(2\\pi x_3)\\bigr)$. Then\n$$Pu=\\bigl(\\sin(2\\pi x_2),\\,0,\\,0\\bigr),\\qquad u-Pu=\\bigl(0,\\,0,\\,\\cos(2\\pi x_3)\\bigr)=\\nabla f,\\quad f(x)=\\tfrac{1}{2\\pi}\\sin(2\\pi x_3),$$\nand one has the orthogonality and Pythagorean identities $\\langle Pu,u-Pu\\rangle=0$, $\\|u\\|_{L^2}^2=\\|Pu\\|_{L^2}^2+\\|u-Pu\\|_{L^2}^2=1$.\n\n**(c) A divergence-free mode.** Let $k\\in\\mathbb Z^3\\setminus\\{0\\}$, $A\\in\\mathbb R^3$ with $A\\cdot k=0$, and $u(x):=A\\sin(2\\pi k\\cdot x)$. Then $Pu=u$, $\\operatorname{div}u=0$, and $\\langle u,Pv\\rangle=\\langle u,v\\rangle$ for every $v$ in $H^0$, i.e. $u$ is fixed by $P$ and orthogonal to every gradient field.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Proposition 1.18 and formula (1.98) (the Hodge decomposition of the torus and the multiplier k\u2297k/|k|^2)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            },
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 2.2 (Definition 2.7 of the Leray projection and Lemma 2.8)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-cm-plane-wave-and-shear-exact-solutions",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Exact transverse plane waves, the sheared single mode, and the Taylor-Green vortex in the periodic models",
+        "reference": "batch-15 B page; constructed from the A-page statements",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 6,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-fourier-lattice-sobolev-embedding",
+          "lem-fluid-galerkin-coefficient-ivp",
+          "lem-periodic-pressure-reconstruction",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-fourier-lattice-sobolev-embedding": "mathematical-premise",
+          "lem-fluid-galerkin-coefficient-ivp": "mathematical-premise",
+          "lem-periodic-pressure-reconstruction": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Work on $\\mathbb T^3$ with $dx$ the normalized measure and the operators of [[def-periodic-vector-sobolev-space-and-leray-projection]]: $\\partial_ju$ has symbol $2\\pi ik_j$, $\\Delta$ has symbol $-4\\pi^2|k|_2^2$, and $P$ kills gradient fields.\n\n**(a) Transverse plane waves, inviscid and viscous.** Let $k\\in\\mathbb Z^3\\setminus\\{0\\}$, $A\\in\\mathbb R^3$ with $A\\cdot k=0$, and put $u_0(x):=A\\sin(2\\pi k\\cdot x)$. Then $\\operatorname{div}u_0=0$, $(u_0\\cdot\\nabla)u_0=0$, $\\Delta u_0=-4\\pi^2|k|_2^2u_0$, and for every $\\nu\\ge0$ the field\n$$u(t,x):=e^{-4\\pi^2\\nu|k|_2^2t}A\\sin(2\\pi k\\cdot x)$$\nis a smooth global solution of $\\partial_tu+P((u\\cdot\\nabla)u)=\\nu\\Delta u$ with $P((u\\cdot\\nabla)u)=0$, and a solution of the primitive system with $p=0$. For $\\nu=0$ the field $u_0$ is stationary; the Galerkin coefficient of the mode $k$ satisfies the scalar equation $c'(t)=-4\\pi^2\\nu|k|_2^2c(t)$.\n\n**(b) The sheared single mode.** For $k=e_2$, $A=e_1$ part (a) gives $u(t,x)=e^{-4\\pi^2\\nu t}\\bigl(\\sin(2\\pi x_2),0,0\\bigr)$: the viscous decay of a shear flow, whose $P$-image is itself because the field is divergence-free and $P$ is the orthogonal projection of $H^0$ onto $H^0_\\sigma$ ([[def-periodic-vector-sobolev-space-and-leray-projection]]).\n\n**(c) The Taylor-Green vortex.** Write $\\theta_j:=2\\pi x_j$ and\n$$u^0(x):=\\bigl(\\sin\\theta_1\\cos\\theta_2,\\,-\\cos\\theta_1\\sin\\theta_2,\\,0\\bigr),\\qquad p^0(x):=\\tfrac14\\bigl(\\cos(2\\theta_1)+\\cos(2\\theta_2)\\bigr).$$\nThen $\\operatorname{div}u^0=0$, $(u^0\\cdot\\nabla)u^0=-\\nabla p^0$, and $\\Delta u^0=-8\\pi^2u^0$; hence for every $\\nu\\ge0$ the pair\n$$u(t,x):=e^{-8\\pi^2\\nu t}u^0(x),\\qquad p(t,x):=e^{-16\\pi^2\\nu t}p^0(x)$$\nsolves the primitive system $\\partial_tu+(u\\cdot\\nabla)u=-\\nabla p+\\nu\\Delta u$ on $[0,\\infty)\\times\\mathbb T^3$, and $u$ solves the projected equation with $P((u\\cdot\\nabla)u)=0$ because $(u^0\\cdot\\nabla)u^0=-\\nabla p^0$ is a gradient field. In particular these solutions are global in time, so the finite time $T$ of [[thm-local-smooth-periodic-euler-viscous-solution]] is not asserted to be sharp.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Subsection 1.5 (exact solutions with convection, vortex stretching and diffusion, including shear flows and the Taylor-Green-type steady states of Subsection 2.2)",
+              "url": "http://inis.jinr.ru/sl/P_Physics/PC_Classical%20physics/PCfm_Fluid%20mechanics/Majda,%20Bertozzi.%20Vorticity%20and%20incompressible%20flow%20(CUP,%202002)(558s).pdf"
+            },
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 1.2.1 (energy balance and elementary exact solutions) and Section 3.1 (Galerkin reduction on single modes)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-cm-absolute-convergence-fails-in-h-zero",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "FALSE: every $L^2$ field on $\\mathbb T^3$ has absolutely convergent Fourier coefficients. An explicit $H^0$ family with $\\sum_k|\\widehat u(k)|=\\infty$",
+        "reference": "batch-15 B page; constructed from the A-page statements",
+        "design_state": "completed-local-example; recorded in the batch notes",
+        "dependency_level": 3,
+        "deps": [
+          "def-periodic-vector-sobolev-space-and-leray-projection",
+          "lem-fourier-lattice-sobolev-embedding",
+          "def-countable-choice",
+          "def-nonnegative-extended-series",
+          "thm-integral-test-for-series",
+          "thm-fourier-basis-and-parseval-on-the-n-torus"
+        ],
+        "dependency_roles": {
+          "def-periodic-vector-sobolev-space-and-leray-projection": "mathematical-premise",
+          "lem-fourier-lattice-sobolev-embedding": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nonnegative-extended-series": "mathematical-premise",
+          "thm-integral-test-for-series": "mathematical-premise",
+          "thm-fourier-basis-and-parseval-on-the-n-torus": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**False statement.** Every field $u\\in H^0(\\mathbb T^3;\\mathbb R^3)=L^2(\\mathbb T^3;\\mathbb R^3)$ has absolutely convergent Fourier coefficients:\n$$\\sum_{k\\in\\mathbb Z^3}|\\widehat u(k)|_2<+\\infty .$$\n(By [[lem-fourier-lattice-sobolev-embedding]] the corresponding statement for $H^\\sigma$ with $\\sigma>3/2$ is true; the false statement drops the hypothesis, and that is exactly what fails.)",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universit\u00e4t Ulm, WS 2018/19), Section 2.1 (the Fourier characterisation of H^s and the threshold s>3/2 for absolute convergence of the coefficient series)",
+              "url": "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
+            },
+            {
+              "title": "R. Laugesen, Harmonic Analysis Lecture Notes (arXiv:0903.3845), Chapters 1-2 (decay of Fourier coefficients versus summability; the failure of absolute convergence for merely L^2 data)",
+              "url": "https://arxiv.org/pdf/0903.3845"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

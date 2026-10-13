@@ -40,7 +40,7 @@ verification:
 ## Statement
 
 Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$
-([[def-countable-choice]]). Let $s\ge5$, let $A^\mu,B$ be a periodic symmetric
+([[def-countable-choice]]). Let $s\ge5$ be an integer, let $A^\mu,B$ be a periodic symmetric
 hyperbolic coefficient family on the open set $O\subseteq\mathbb R^m$, let
 $K\subseteq K_1\subseteq O$ be compact, let $R\ge0$, and let
 $u_0\in H^s(\mathbb T^3_{2\pi};\mathbb R^m)$ take values in $K$ with
@@ -65,7 +65,7 @@ solutions, and in fact $u\in C^1((-T,T)\times\mathbb T^3_{2\pi})$ and solves
 $(\star)$ classically with $u(0)=u_0$.
 
 ## Facts & Assumptions
-**Given:** Countable Choice, $s\ge5$, the coefficient family on $O$, the compact sets $K\subseteq K_1\subseteq O$, the bounds $R,R_1,T$, and the Galerkin sequence $u_{N_j}\to u$ converging uniformly on compact subintervals in $H^{s-1}$.
+**Given:** Countable Choice, integer $s\ge5$, the coefficient family on $O$, the compact sets $K\subseteq K_1\subseteq O$, the bounds $R,R_1,T$, and the Galerkin sequence $u_{N_j}\to u$ converging uniformly on compact subintervals in $H^{s-1}$.
 
 [L1] Uniform convergence in $H^{s-1}$ on compact subintervals controls coefficients and values: $H^{s-1}\subseteq C^{s-3}$ and $s-2\ge3>3/2$, so on every compact subinterval $J'\subseteq(-T,T)$ the sequences $u_{N_j}\to u$ and $\partial_iu_{N_j}\to\partial_iu$ converge uniformly on $J'\times\mathbb T^3_{2\pi}$, and the evaluation maps are continuous; since $K_1$ is closed, the limit takes values in $K_1$; moreover $u\in C^0((-T,T);H^{s-1})$, being a locally uniform limit of the continuous curves $u_{N_j}$ ([[lem-gr-periodic-sobolev-embedding]], [[def-gr-periodic-torus-and-sobolev-spaces]]).
 

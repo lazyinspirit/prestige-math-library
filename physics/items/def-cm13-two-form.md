@@ -34,7 +34,7 @@ provenance:
 physical_scope: "The symplectic data of a potential presentation of the framework's force branch: on the Cartesian momentum phase chart $Q\\times\\mathbb R^{3N}$ the canonical one-form $\\lambda=p\\cdot\\delta x$ and the two-form $\\omega=-d\\lambda$, and on each declared generalized-coordinate momentum chart the forms pulled back along the presentation's own chart map $(q,P)\\mapsto(X(q),\\mathsf M\\,DX(q)G(q)^{-1}P)$. The item defines model objects of the declared presentation and its declared chart only; it asserts no closedness, nondegeneracy, dynamics or measured value, and it fixes the sign convention $\\iota_X\\omega=dH$ used throughout this page."
 sources:
   references:
-    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Sections 4.2 and 4.4, printed pages 88-101 (PDF pages 94-107): Hamilton's equations in the compact form $\\dot x=J\\,\\partial H/\\partial x$ with the $2n\\times2n$ matrix $J$, and the symplectic Jacobian condition $\\mathcal J^{\\mathsf T}\\mathcal J\\mathcal J=\\mathcal J$"
+    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Sections 4.2 and 4.4, printed pages 88-101 (PDF pages 94-107): Hamilton's equations in the compact form $\\dot x=J\\,\\partial H/\\partial x$ with the $2n\\times2n$ matrix $J$, and the symplectic Jacobian condition $\\mathcal J J\\mathcal J^{\\mathsf T}=J$"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
     - title: "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Section 15.7: the symplectic representation of Hamiltonian mechanics, with the symplectic matrix and the bilinear form $\\omega$"
       url: "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
@@ -48,7 +48,7 @@ verification:
 Adopt the force model with potential presentation $(U,d)$ and mechanical
 Lagrangian $L=K-U$ of [[def-cm07-action-and-mechanical-lagrangian]] with the
 data and conventions of [[def-cm12-cotangent-momentum]]: masses
-$m_{1},\dots,m_{N}>0$ and open configuration domain $Q\subseteq\mathbb R^{3N}$
+$m_{1},\dots,m_{N}>0$ and nonempty open configuration domain $Q\subseteq\mathbb R^{3N}$
 ([[def-cm01-configuration]]), time window $I_{0}$, mass operator $\mathsf M$,
 a $C^{2}$ potential $U:I_{0}\times Q\to\mathbb R$ of dimension
 $\mu\ell^{2}\tau^{-2}$ and residual forces $d$ of the standing regularity
@@ -72,7 +72,9 @@ the nonempty open set
 $$W:=Q\times\mathbb R^{3N}\subseteq\mathbb R^{2n},\qquad z=(x,p),$$
 
 a phase domain in the sense of [[def-cm-phase-domain-and-standard-symplectic-two-form]]
-(openness is clause (a) of [[def-cm01-configuration]]). On $W$ the
+(openness is clause (a) of [[def-cm01-configuration]]; nonemptiness is an
+explicit hypothesis here, so an empty configuration domain has no instances
+of this phase-domain definition). On $W$ the
 **canonical one-form of the presentation in the Cartesian chart** is the smooth
 one-form
 

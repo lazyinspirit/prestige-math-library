@@ -66,7 +66,7 @@ grand-canonical partition sum $\operatorname{tr}D_\beta$ for this mode list;
 by its value: for the one-mode space $H=\mathbb C$ with frequency
 $\omega=\varepsilon_0>0$, [[thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace]]
 gives the finite value $Z(\beta)=1/(1-e^{-\beta\omega})$ of the trace of the
-weight operator, and the same formal expression is infinite here.
+weight operator, whereas the countable product of these one-mode factors diverges here.
 
 No thermodynamic interpretation of $\beta$, of $D_\beta$ or of the divergence
 is asserted; the example is a statement about the convergence of the displayed
@@ -82,7 +82,7 @@ series for a degenerate mode list.
 
 [F3] If a series of reals converges then its terms tend to $0$; contrapositively, a series whose terms do not tend to $0$ diverges ([[lem-nth-term-test]], [[def-series-and-absolute-convergence-in-a-normed-space]]).
 
-[F4] For $0<x<1$, put $y=(1-x)^{-1}>1$. Then [F3] gives $x=1-1/y\le\log y$, and the reciprocal law of the natural logarithm gives $\log(1-x)=-\log y\le-x$; the supplier also gives the product law $\log(xy)=\log x+\log y$; $\log$ is increasing and is inverse to the real exponential ([[thm-natural-logarithm-laws]]).
+[F4] For $0<x<1$, put $y=(1-x)^{-1}>1$. The integral inequalities give $x=1-1/y\le\log y$, and the reciprocal law of the natural logarithm gives $\log(1-x)=-\log y\le-x$; the supplier also gives the product law $\log(xy)=\log x+\log y$; $\log$ is increasing and is inverse to the real exponential ([[thm-logarithm-derivative-and-integral]], [[thm-monotonicity-of-the-integral]], [[thm-natural-logarithm-laws]]).
 
 [F5] For the one-mode space $F(\mathbb C)$ with frequency $\omega>0$ and $\beta>0$, $Z(\beta)=\sum_{n\ge0}e^{-\beta\omega n}=1/(1-e^{-\beta\omega})$ and the weight operator $G_\beta e_n=e^{-\beta\omega n}e_n$ is trace class with $\operatorname{tr}G_\beta=Z(\beta)<\infty$ ([[thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace]] (b), (c)).
 
@@ -94,6 +94,6 @@ series for a degenerate mode list.
 
 2.1 [Divergence of the grand-canonical weights, no trace] By step 1.1 the series $\sum_je^{-\beta\varepsilon_j}$ is not finite, so the equivalence in [F1] gives $\sum_{I\in\mathcal M}e^{-\beta\lambda_I}=+\infty$; by step 1.2 its finite partial sums are finite and increasing, consistently. By [F2], $D_\beta$ is not trace class and $\operatorname{tr}D_\beta$ does not exist as a finite number. This is (c). [F1, F2, step 1.1, step 1.2]
 
-2.2 [The single-mode contrast] For $H=\mathbb C$ with $\omega=\varepsilon_0$, [F5] gives $Z(\beta)=1/(1-e^{-\beta\omega})<\infty$ and a trace-class weight operator with trace $Z(\beta)$; the same closed-form expression appears in step 1.2 with each of the infinitely many factors equal to it, and the product of infinitely many factors bounded below by $1$ diverges: $(1-e^{-\beta\omega})^{-N}\ge 1$ for every $N$, with strict increase. Thus the infinite multiplicity, not the value of the positive frequency, produces the divergence. This is (d). [F5, step 1.2, algebra]
+2.2 [The single-mode contrast] For $H=\mathbb C$ with $\omega=\varepsilon_0$, [F5] gives $Z(\beta)=1/(1-e^{-\beta\omega})<\infty$ and a trace-class weight operator with trace $Z(\beta)$; the same closed-form expression appears in step 1.2 with each of the infinitely many factors equal to it, and step 1.2 proves that these constant-factor products diverge by the quantitative bound $(1-e^{-\beta\omega})^{-N}\ge e^{N e^{-\beta\omega}}\to+\infty$. Thus the infinite multiplicity, not the value of the positive frequency, produces the divergence. This is (d). [F5, step 1.2, algebra]
 
 3.1 [Conclusion and scope] Steps 1.1-1.2 prove (a) and (b), step 2.1 proves (c), and step 2.2 proves (d). The scope paragraph of the example records that no thermodynamic interpretation of $\beta$, $D_\beta$ or the divergence is asserted. This completes the verification. [step 1.1, step 1.2, step 2.1, step 2.2] ∎

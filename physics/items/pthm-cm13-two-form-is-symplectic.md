@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 17
-deps: [def-cm13-two-form, def-cm07-action-and-mechanical-lagrangian, def-cm07-generalized-coordinates-and-forces, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-units, def-cm12-cotangent-momentum, def-cm12-hyperregularity, def-cm-phase-domain-and-standard-symplectic-two-form, lem-cm-standard-symplectic-form-is-closed-and-nondegenerate, def-symplectic-form-and-symplectic-manifold, def-symplectic-vector-space, def-pullback-of-a-differential-form, def-smooth-differential-k-form, def-closed-and-exact-differential-forms, thm-local-coordinate-formula-for-the-exterior-derivative, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, thm-chain-rule-for-total-derivatives, def-matrix-product-and-identity-matrix, def-transpose-of-a-matrix, def-invertible-matrix-and-general-linear-group, def-determinant-of-a-square-matrix, def-linear-map, def-euclidean-inner-product]
+deps: [def-cm13-two-form, def-cm07-action-and-mechanical-lagrangian, def-cm07-generalized-coordinates-and-forces, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-units, def-cm12-cotangent-momentum, def-cm12-hyperregularity, def-cm-phase-domain-and-standard-symplectic-two-form, lem-cm-standard-symplectic-form-is-closed-and-nondegenerate, def-symplectic-form-and-symplectic-manifold, def-symplectic-vector-space, def-pullback-of-a-differential-form, def-smooth-differential-k-form, def-closed-and-exact-differential-forms, thm-local-coordinate-formula-for-the-exterior-derivative, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, thm-chain-rule-for-total-derivatives, def-matrix-product-and-identity-matrix, def-transpose-of-a-matrix, def-invertible-matrix-and-general-linear-group, def-determinant-of-a-square-matrix, def-linear-map, def-euclidean-inner-product, thm-euclidean-inverse-function-theorem]
 dependency_roles:
   def-cm13-two-form: formulation-prerequisite
   def-cm07-action-and-mechanical-lagrangian: formulation-prerequisite
@@ -35,6 +35,7 @@ dependency_roles:
   def-determinant-of-a-square-matrix: mathematical-premise
   def-linear-map: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
+  thm-euclidean-inverse-function-theorem: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -42,7 +43,7 @@ proof_strategy: direct
 physical_scope: "The symplectic structure of a declared potential presentation of the force branch: on the Cartesian momentum phase chart the two-form $\\omega=\\sum dx^a\\wedge dp_a$ is closed and nondegenerate, and on each declared generalized-coordinate momentum chart the pullback of the presentation's two-form along the presentation's own chart map has the canonical coordinate expression. The statement is a conditional deduction from the adopted force branch, the declared presentation and the cited mathematics; it asserts no dynamics, no conservation law and no measured value."
 sources:
   references:
-    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Sections 4.2 and 4.4, printed pages 88-92 and 100-101 (PDF pages 94-98 and 106-107): the symplectic matrix $J$ and the symplectic Jacobian condition $\\mathcal J^{\\mathsf T}\\mathcal J\\mathcal J=\\mathcal J$ for canonical transformations"
+    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Sections 4.2 and 4.4, printed pages 88-92 and 100-101 (PDF pages 94-98 and 106-107): the symplectic matrix $J$ and the symplectic Jacobian condition $\\mathcal J J\\mathcal J^{\\mathsf T}=J$ for canonical transformations"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
     - title: "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Sections 15.1-15.2 and 15.7: the symplectic structure of phase space and the bilinear form associated with the symplectic matrix"
       url: "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
@@ -100,11 +101,9 @@ content.
 
 ## Facts & Assumptions
 
-**Given:** The model with its potential presentation, the Cartesian phase
-domain $W$ and the chart map $\Phi_{X}$ of a generalized-coordinate map $X$,
-with the forms of [[def-cm13-two-form]].
+**Given:** The model with its potential presentation, the Cartesian phase domain $W$ and the chart map $\Phi_{X}$ of a generalized-coordinate map $X$, with the forms of [[def-cm13-two-form]].
 
-[F1] Model, presentation and charts ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm07-generalized-coordinates-and-forces]], [[def-cm03-potential-and-mechanical-energy]], [[post-cm02-force-superposition]], [[def-cm01-configuration]], [[def-cm01-units]], [[def-cm12-cotangent-momentum]], [[def-cm12-hyperregularity]]): the force branch has the standing regularity, $Q$ and $\Omega$ are nonempty open sets, the mass operator $\mathsf M$ is symmetric positive definite, $U$ is of class $C^{2}$ and $d$ is a force field of the standing regularity; $X$ is a $C^{3}$ immersion with $G(q)=DX(q)^{\mathsf T}\mathsf M\,DX(q)$ symmetric positive definite, and the momentum datum in the coordinates $X$ is $P=G(q)v$. In particular $DX$ and $G$ are $C^{2}$, $G^{-1}$ is $C^{2}$ on the positive-definite matrices, and the coefficient map $q\mapsto\mathsf M DX(q)G(q)^{-1}$ is $C^{2}$; hence the chart map $\Phi_X(q,P)=(X(q),\mathsf M DX(q)G(q)^{-1}P)$ is $C^{2}$, even though [[def-cm13-two-form]] only needs its $C^{1}$ regularity to define pullbacks.
+[F1] Model, presentation and charts ([[def-cm13-two-form]], [[def-cm07-action-and-mechanical-lagrangian]], [[def-cm07-generalized-coordinates-and-forces]], [[def-cm03-potential-and-mechanical-energy]], [[post-cm02-force-superposition]], [[def-cm01-configuration]], [[def-cm01-units]], [[def-cm12-cotangent-momentum]], [[def-cm12-hyperregularity]]): the force branch has the standing regularity, $Q$ and $\Omega$ are nonempty open sets, the mass operator $\mathsf M$ is symmetric positive definite, $U$ is of class $C^{2}$ and $d$ is a force field of the standing regularity; $X$ is a $C^{3}$ immersion with $G(q)=DX(q)^{\mathsf T}\mathsf M\,DX(q)$ symmetric positive definite, and the momentum datum in the coordinates $X$ is $P=G(q)v$. In particular $DX$ and $G$ are $C^{2}$, $G^{-1}$ is $C^{2}$ on the positive-definite matrices, and the coefficient map $q\mapsto\mathsf M DX(q)G(q)^{-1}$ is $C^{2}$; hence the chart map $\Phi_X(q,P)=(X(q),\mathsf M DX(q)G(q)^{-1}P)$ is $C^{2}$, even though [[def-cm13-two-form]] only needs its $C^{1}$ regularity to define pullbacks.
 
 [F2] The forms and the chart map ([[def-cm13-two-form]]): $\lambda=\sum_{a}p_{a}dx^{a}$ and $\omega=\sum_{a}dx^{a}\wedge dp_{a}$ on $W$, with $\omega=-d\lambda$; $\lambda_{X}=\Phi_{X}^{*}\lambda$, $\omega_{X}=\Phi_{X}^{*}\omega$; and $\Phi_{X}(q,P)=(X(q),\mathsf M\,DX(q)G(q)^{-1}P)$.
 
@@ -130,19 +129,6 @@ with the forms of [[def-cm13-two-form]].
 
 ## Remarks
 
-- **What is and is not proved here.** Clauses 1-3 are chart calculus on the
-  declared presentation. No statement is made about the existence of a global
-  diffeomorphism between the charts ($\Phi_{X}$ need not be injective for a
-  constraint parametrization), about dynamics, or about the completeness of
-  any flow; the field-theoretic consequences are the subject of
-  [[pthm-cm13-hamiltonian-field-integrates-the-model-equations]] and the
-  subsequent items of this page.
+- **What is and is not proved here.** Clauses 1-3 are chart calculus on the declared presentation. No statement is made about the existence of a global diffeomorphism between the charts ($\Phi_{X}$ need not be injective for a constraint parametrization), about dynamics, or about the completeness of any flow; the field-theoretic consequences are the subject of [[pthm-cm13-hamiltonian-field-integrates-the-model-equations]] and the subsequent items of this page.
 
-- **Cotangent chart transitions and general gauge differences.** For the
-  specific transitions of clause 3, both one-forms are pullbacks of the
-  same Cartesian $\lambda$, so step 4.1 gives
-  $\lambda_{X_1}-\Theta^*\lambda_{X_2}=0$. For a general canonical
-  transformation preserving only $\omega$, the corresponding difference
-  of canonical one-forms is closed and can be nonexact on a multiply
-  connected domain; the cylinder obstruction in
-  [[rem-cm13-locality-topology]] concerns this more general situation.
+- **Cotangent chart transitions and general gauge differences.** For the specific transitions of clause 3, both one-forms are pullbacks of the same Cartesian $\lambda$, so step 4.1 gives $\lambda_{X_1}-\Theta^*\lambda_{X_2}=0$. For a general canonical transformation preserving only $\omega$, the corresponding difference of canonical one-forms is closed and can be nonexact on a multiply connected domain; the cylinder obstruction in [[rem-cm13-locality-topology]] concerns this more general situation.

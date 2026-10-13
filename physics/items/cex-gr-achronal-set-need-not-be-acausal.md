@@ -10,8 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-spacelike-hypersurfaces-and-cauchy-sets, def-gr-causal-curves-and-reachability, def-gr-flat-minkowski-model-and-inertial-charts, lem-gr-flat-inertial-cone-criterion-and-sums, def-time-orientation-and-future-causal-sets, def-causal-classification-of-lorentz-vectors, thm-gr-minkowski-cauchy-and-global-hyperbolicity]
+deps: [def-dependent-choice, def-countable-choice, def-gr-spacelike-hypersurfaces-and-cauchy-sets, def-gr-causal-curves-and-reachability, def-gr-flat-minkowski-model-and-inertial-charts, lem-gr-flat-inertial-cone-criterion-and-sums, def-time-orientation-and-future-causal-sets, def-causal-classification-of-lorentz-vectors, thm-gr-minkowski-cauchy-and-global-hyperbolicity]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   def-gr-spacelike-hypersurfaces-and-cauchy-sets: mathematical-premise
   def-gr-causal-curves-and-reachability: mathematical-premise
   def-gr-flat-minkowski-model-and-inertial-charts: mathematical-premise
@@ -37,9 +39,13 @@ Lorentzian four-manifold is acausal"
 
 ## Facts & Assumptions
 
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the general absolutely continuous causal-curve
+conclusions used here.
+
 **Given:** The flat model $(A,\eta,N)$ of [[def-gr-flat-minkowski-model-and-inertial-charts]], written $A=\mathbb R^4$, with its global inertial chart $x=(t,z)$, and the two events $p:=x^{-1}(0,0,0,0)$, $r:=x^{-1}(1,1,0,0)$.
 
-[L1] For all events $u,v$ in the flat model, $u\le v$ exactly when $v-u\in\overline{C^+}$ and $u\ll v$ exactly when $v-u\in C^+$, with $C^+=\{w:w^0>|w_s|_{\mathrm e}\}$ and $\overline{C^+}=\{w:w^0\ge|w_s|_{\mathrm e}\}$ in the global inertial chart. In each case the straight path realizes the relation when the displayed condition holds ([[thm-gr-minkowski-cauchy-and-global-hyperbolicity]] clause (a), [[lem-gr-flat-inertial-cone-criterion-and-sums]] clauses (a), (b), [[def-time-orientation-and-future-causal-sets]], [[def-causal-classification-of-lorentz-vectors]]).
+[L1] For all events $u,v$ in the flat model, $u\le v$ exactly when $v-u\in\overline{C^+}$ and $u\ll v$ exactly when $v-u\in C^+$, with $C^+=\{w:w^0>|w_s|_{\mathrm e}\}$ and $\overline{C^+}=\{w:w^0\ge|w_s|_{\mathrm e}\}$ in the global inertial chart. For $u\ne v$ the straight path realizes the relation when the displayed condition holds; for $u=v$, $u\le u$ instead follows from the equality alternative, without a constant causal curve ([[thm-gr-minkowski-cauchy-and-global-hyperbolicity]] clause (a), [[lem-gr-flat-inertial-cone-criterion-and-sums]] clauses (a), (b), [[def-time-orientation-and-future-causal-sets]], [[def-causal-classification-of-lorentz-vectors]]).
 
 [L2] For events $u,v$ of the model: $u\ll v$ when there is a future timelike curve from $u$ to $v$, and $u\le v$ when $u=v$ or there is a future causal curve from $u$ to $v$; a set is achronal when no two distinct of its points are chronologically related and acausal when no two distinct of its points are causally related ([[def-gr-causal-curves-and-reachability]] clause (c), [[def-gr-spacelike-hypersurfaces-and-cauchy-sets]] clause (b)).
 
@@ -49,7 +55,7 @@ Lorentzian four-manifold is acausal"
 
 2.1 (Achronality.) Suppose $p\ll r$; then by [L1] $r-p\in C^+$, i.e. $1>|(1,0,0)|_{\mathrm e}=1$, a contradiction. In the other direction, $r\ll p$ would require $p-r\in C^+$, i.e. $-1>|(-1,0,0)|_{\mathrm e}=1$, also false. Hence the two distinct points $p,r$ are not chronologically related in either direction and the set $S:=\{p,r\}$ is achronal by [L2]. [step 1.1, L1, L2]
 
-3.1 (Conclusion.) By step 1.1 the distinct points $p,r\in S$ satisfy $p\le r$, so $S$ is not acausal by [L2]. By step 2.1 the set $S$ is achronal. Hence an achronal set need not be acausal, which refutes the displayed statement. ∎ [step 1.1, step 2.1, given, L2]
+3.1 (Conclusion.) By step 1.1 the distinct points $p,r\in S$ satisfy $p\le r$, so $S$ is not acausal by [L2]. By step 2.1 the set $S$ is achronal. Hence an achronal set need not be acausal, which refutes the displayed statement. [step 1.1, step 2.1, given, L2] ∎
 
 ## Remarks
 

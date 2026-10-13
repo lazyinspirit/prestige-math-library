@@ -7,7 +7,7 @@ title: "Kummer recurrence and termination"
 status: draft
 origin: pipeline
 dependency_level: 7
-deps: [lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-intervals-regular-ivp-parameter-series, def-derivative, def-continuity-real, thm-derivative-of-exponential, def-complex-exponential, def-binomial-coefficient, def-factorial-and-falling-factorial, def-finite-sum-in-a-commutative-monoid, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, def-sobolev-space-wkp-and-its-norm, thm-plancherel, lem-weak-derivatives-are-polynomial-fourier-multipliers, def-countable-choice, def-axiom-of-choice]
+deps: [lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-intervals-regular-ivp-parameter-series, def-derivative, def-continuity-real, thm-derivative-of-exponential, def-complex-exponential, def-binomial-coefficient, thm-binomial-closed-formula, def-factorial-and-falling-factorial, def-finite-sum-in-a-commutative-monoid, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, def-sobolev-space-wkp-and-its-norm, thm-plancherel, lem-weak-derivatives-are-polynomial-fourier-multipliers, def-countable-choice, def-axiom-of-choice]
 dependency_roles:
   lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves: mathematical-premise
   thm-nrqm-coulomb-transported-radial-endpoint-realization: mathematical-premise
@@ -19,6 +19,7 @@ dependency_roles:
   thm-derivative-of-exponential: mathematical-premise
   def-complex-exponential: mathematical-premise
   def-binomial-coefficient: mathematical-premise
+  thm-binomial-closed-formula: mathematical-premise
   def-factorial-and-falling-factorial: mathematical-premise
   def-finite-sum-in-a-commutative-monoid: mathematical-premise
   thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces: mathematical-premise
@@ -83,7 +84,7 @@ spectral level is made.
 
 [F3] The derivative rules for exponentials and integer powers are [[thm-derivative-of-exponential]], [[def-complex-exponential]], [[def-derivative]], [[def-continuity-real]]. The angular labels $l,m$ are those of the polar decomposition in [[thm-nrqm-coulomb-angular-radial-unitary-reduction]]; thus $l$ is a nonnegative integer whenever $Y_{lm}$ is used.
 
-[F4] The factorial and binomial identities used for the stated finite Laguerre sum are [[def-binomial-coefficient]], [[def-factorial-and-falling-factorial]], [[def-finite-sum-in-a-commutative-monoid]]. Cauchy–Schwarz is [[cor-cauchy-schwarz-inequality-for-l-two]].
+[F4] For integers $N\ge q\ge0$, $\binom Nq=N!/[q!(N-q)!]$ by [[thm-binomial-closed-formula]]; the binomial is the subset count of [[def-binomial-coefficient]]. Factorials and finite sums use [[def-factorial-and-falling-factorial]], [[def-finite-sum-in-a-commutative-monoid]]. Cauchy–Schwarz is [[cor-cauchy-schwarz-inequality-for-l-two]].
 
 [F5] For a continuous scalar integrand on a compact interval, its primitive is continuously differentiable with derivative the integrand, and integration of a continuous derivative gives its endpoint difference ([[lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves]], applied to the Banach space $\mathbb C$). This supplier assumes CC. Uniform convergence permits passage through the integral because the integral of the absolute error is bounded by interval length times the supremum error.
 

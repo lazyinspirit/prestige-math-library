@@ -22,7 +22,8 @@ deps:
     def-hilbert-space,
     def-countable-choice,
     post-nrqm-framework-observable-and-probability,
-    post-nrqm-framework-autonomous-dynamics
+    post-nrqm-framework-autonomous-dynamics,
+    post-nrqm-framework-preparation-and-apparatus
   ]
 dependency_roles:
   def-nrqm-many-body-framework-declared-fixed-n-model: formulation-prerequisite
@@ -38,6 +39,7 @@ dependency_roles:
   def-countable-choice: mathematical-premise
   post-nrqm-framework-observable-and-probability: physical-assumption
   post-nrqm-framework-autonomous-dynamics: physical-assumption
+  post-nrqm-framework-preparation-and-apparatus: physical-assumption
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -124,7 +126,10 @@ the parameter $T$ to a physical sample, and the identification of
 $\beta=1/(k_BT)$ with an inverse thermodynamic temperature, are adopted
 assumptions of the ensemble model of this pair, not consequences of P1-P4,
 and are tested identifications with uncertainty under the preparation and
-apparatus postulate P7.
+apparatus postulate [[post-nrqm-framework-preparation-and-apparatus]] (P7),
+whose clauses (i), (iii) and (iv) require a declared comparison and
+calibration model and qualifications for measured inputs. No thermometer,
+calibration or measured temperature is supplied here.
 
 **(d) Physical entropy.** The **physical entropy** of $\rho$ is
 $$S(\rho):=k_B\,s(\rho),$$

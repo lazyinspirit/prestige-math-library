@@ -16,10 +16,8 @@ dependency_roles:
   def-cm01-units: formulation-prerequisite
   def-interval: mathematical-premise
 provenance:
-  statement: ai-generated
-  proof: ai-generated
-generation:
-  role: example
+  statement: ai-altered
+  proof: ai-altered
 proof_strategy: direct
 physical_scope: "A numerical check of the circular-orbit criterion and the linearised radial frequency on declared model data for the gravitational relative problem: the critical radius, the force-balance identity $\\mu r_0\\omega^2=u'(r_0)$, the energy at the minimum of the effective potential, the equality $\\omega_{\\rm lin}=\\omega$ for the inverse-square potential, and the two labels' circular motions about the centre of mass. Every number is declared model data or an exact consequence of the cited items; no observation is used and no nonlinear stability is claimed."
 sources:
@@ -32,7 +30,8 @@ sources:
 
 ## Example
 
-Declare the gravitational two-label model of [[post-cm05-gravity]] with the
+Declare the gravitational two-label model of [[post-cm05-gravity]] with
+time window $I_0=\mathbb R$ and the
 same data as the barycentric check ([[ex-cm05-barycentric-orbits-check]]):
 $$m_1=2\times10^{24}\ \mathrm{kg},\qquad m_2=6\times10^{24}\ \mathrm{kg},\qquad \mu=\tfrac32\times10^{24}\ \mathrm{kg},\qquad G_{\mathrm N}=10^{-24}\ \mathrm{m^{3}\,kg^{-1}\,s^{-2}},$$
 $$\kappa=G_{\mathrm N}m_1m_2=1.2\times10^{25}\ \mathrm{kg\,m^{3}\,s^{-2}},\qquad J=6\times10^{27}\ \mathrm{kg\,m^{2}\,s^{-1}},$$

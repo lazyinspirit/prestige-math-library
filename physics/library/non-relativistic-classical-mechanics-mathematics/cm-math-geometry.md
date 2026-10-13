@@ -88,9 +88,10 @@ $GL_3(\mathbb R)$ with $R^{-1}=R^{\mathsf T}$, a compact three-dimensional
 embedded submanifold of $M_3(\mathbb R)$ with tangent space $\{R\Omega:\Omega^{\mathsf T}=-\Omega\}$,
 and a labeling containing two linearly independent vectors has trivial
 stabilizer. All items carry `domain: mathematics`; dependence is only on
-mathematical suppliers, the external ones published canonical root items except
-for the affine-space supplier imported from the special-relativity collection,
-which is inspected and recorded in the batch notes. The companion page
+mathematical suppliers, and every external item dependency is a published
+canonical root mathematics item. The affine-space structure is stated inline in
+[[def-cm-affine-time-space]]; the separate draft special-relativity definition
+is not a dependency. The companion page
 [[cm-math-geometry-examples]] verifies the transformation, rotating-frame,
 constraint, counterexample, primitive and stroboscopic computations in finite
 form.

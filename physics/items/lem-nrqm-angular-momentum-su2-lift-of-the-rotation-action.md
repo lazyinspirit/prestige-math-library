@@ -7,7 +7,7 @@ title: "The SU(2) lift of the spatial rotation action on the component-valued wa
 status: draft
 origin: session
 dependency_level: 7
-deps: [def-axiom-of-choice, def-bounded-linear-operator, def-cm-quaternion-rotation-map-and-cover, def-cm-special-orthogonal-group, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-covering-homomorphism-of-lie-groups, def-cross-product-in-r3, def-hilbert-space, def-infinitesimal-generator-of-a-unitary-group, def-inner-product-space, def-l-p-space-as-a-quotient-by-null-functions, def-linear-isometry-and-orthogonal-or-unitary-operator, def-nrqm-uncertainty-strong-spectral-commutation, def-operator-norm, def-quaternions, def-self-adjoint-positive-unitary-and-normal-operator, def-strongly-continuous-one-parameter-unitary-group, def-strongly-continuous-unitary-representation, def-symmetric-self-adjoint-and-essentially-self-adjoint, ex-su-two-to-so-three-as-a-covering-homomorphism, lem-cm-cross-product-triple-identity, lem-nrqm-angular-momentum-product-flow-generator, lem-nrqm-kinematics-componentwise-position-and-momentum, lem-nrqm-symmetries-rotation-generators-on-schwartz-classes, lem-nrqm-symmetries-spatial-rotation-action, lem-nrqm-symmetries-unitary-conjugation-and-commutation-calculus, lem-nrqm-uncertainty-bounded-borel-calculus-of-commuting-operators, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, prop-nrqm-orbital-and-spin-finite-spin-matrices, thm-bounded-borel-pvm-integral, thm-nrqm-orbital-and-spin-symmetric-power-su2-representation, thm-stone-one-parameter-unitary-groups]
+deps: [def-axiom-of-choice, def-bounded-linear-operator, def-cm-quaternion-rotation-map-and-cover, def-cm-special-orthogonal-group, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-covering-homomorphism-of-lie-groups, def-cross-product-in-r3, def-hilbert-space, def-infinitesimal-generator-of-a-unitary-group, def-inner-product-space, def-l-p-space-as-a-quotient-by-null-functions, def-linear-isometry-and-orthogonal-or-unitary-operator, def-nrqm-uncertainty-strong-spectral-commutation, def-operator-norm, def-quaternions, def-self-adjoint-positive-unitary-and-normal-operator, def-strongly-continuous-one-parameter-unitary-group, def-strongly-continuous-unitary-representation, def-symmetric-self-adjoint-and-essentially-self-adjoint, ex-su-two-to-so-three-as-a-covering-homomorphism, lem-cm-cross-product-triple-identity, lem-nrqm-angular-momentum-product-flow-generator, lem-nrqm-kinematics-componentwise-position-and-momentum, lem-nrqm-symmetries-rotation-generators-on-schwartz-classes, lem-nrqm-symmetries-spatial-rotation-action, lem-nrqm-symmetries-unitary-conjugation-and-commutation-calculus, lem-nrqm-uncertainty-bounded-borel-calculus-of-commuting-operators, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, prop-nrqm-orbital-and-spin-finite-spin-matrices, thm-bounded-borel-pvm-integral, thm-complex-spectral-theorem-for-normal-endomorphisms, thm-nrqm-orbital-and-spin-symmetric-power-su2-representation, thm-stone-one-parameter-unitary-groups]
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-bounded-linear-operator: mathematical-premise
@@ -40,6 +40,7 @@ dependency_roles:
   lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group: mathematical-premise
   prop-nrqm-orbital-and-spin-finite-spin-matrices: mathematical-premise
   thm-bounded-borel-pvm-integral: mathematical-premise
+  thm-complex-spectral-theorem-for-normal-endomorphisms: mathematical-premise
   thm-nrqm-orbital-and-spin-symmetric-power-su2-representation: mathematical-premise
   thm-stone-one-parameter-unitary-groups: mathematical-premise
 proof_strategy: direct
@@ -87,7 +88,7 @@ $v_{k}\mapsto e_{s-k}$ of
 (d) (for $s=0$, $\mathcal S_{0}=\mathbb C v_{0}$ and $F_{0}v_{0}:=1$),
 define $D_{s}:SU(2)\to U(V_{s})$ by
 $D_{s}(W):=F_{s}U_{2s}(W)F_{s}^{-1}$ for $s>0$ and
-$D_{0}(W):=I_{\mathbb C}$, and let $S_{i}=\hbar J_{i}$ be the self-adjoint
+$D_{0}(W):=I_{\mathbb C}$, and let $S_{i}^{\mathrm{fin}}=\hbar J_{i}$ be the self-adjoint
 spin endomorphisms of $V_{s}$ of
 [[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clause (a). By clauses
 (b),(d),(f) of the theorem the maps $D_{s}$ are strongly continuous unitary
@@ -96,6 +97,12 @@ For $W\in SU(2)$ define the matrix action $M_{s}(W)\in\mathcal B(H_{s})$ and
 the lifted operator $U_{s}(W)$ by
 $$(M_{s}(W)f)(x):=D_{s}(W)\bigl(f(x)\bigr),\qquad U_{s}(W):=U(\rho(W))\,M_{s}(W)\qquad(f\in H_{s},\ x\in\mathbb R^{3}),$$
 where the matrix $D_{s}(W)$ acts on the column vector $f(x)\in\mathbb C^{r}$.
+For any $T\in\operatorname{End}(V_s)$ write $M_Tf(x):=Tf(x)$ almost
+everywhere, and define the spin operators on $H_s$ by
+$$S_i:=M_{S_i^{\mathrm{fin}}},\qquad D(S_i):=H_s.$$
+These bounded self-adjoint operators, rather than the endomorphisms
+$S_i^{\mathrm{fin}}$ on $V_s$, occur in all sums, spectral commutation
+claims and conjugations on $H_s$ below.
 Finally let $R_{i}(t)$, $i=1,2,3$, be the coordinate rotation matrices and
 $L_{i}$ the self-adjoint coordinate-rotation generators on $H_{s}$ of
 [[lem-nrqm-symmetries-rotation-generators-on-schwartz-classes]] (so that
@@ -138,8 +145,9 @@ on a second spatial or internal factor is introduced.
 **Given:** the Axiom of Countable Choice and the Axiom of Choice; the spin
 label $s$, $r=2s+1$, the space $H_{s}$; the rotation action $U(R)$ and the
 covering homomorphism $\rho$; the identification $F_{s}$ and the
-representation $D_{s}=F_{s}U_{2s}F_{s}^{-1}$ with spin operators
-$S_{i}=\hbar J_{i}$; the operators $M_{s}(W)$ and $U_{s}(W)$; the coordinate
+representation $D_{s}=F_{s}U_{2s}F_{s}^{-1}$ with spin matrices
+$S_{i}^{\mathrm{fin}}=\hbar J_{i}$ and operators $S_i=M_{S_i^{\mathrm{fin}}}$
+on $H_s$; the operators $M_{s}(W)$ and $U_{s}(W)$; the coordinate
 rotations $R_{i}(t)$, $A_{i}(t)$ and the generators $L_{i}$; $W,W_{1},W_{2}\in
 SU(2)$, real $s_{0},t$ (use $u$ for the group parameter where it is not the
 spin label).
@@ -178,11 +186,11 @@ e_{s-k}$ of
 [[thm-nrqm-orbital-and-spin-symmetric-power-su2-representation]] clause (d),
 $D_{s}(W)=F_{s}U_{n}(W)F_{s}^{-1}$ with $U_{n}(W)=W^{\otimes n}|_{\mathcal
 S_{n}}$ defines a group homomorphism $SU(2)\to U(V_{s})$ that is continuous
-in operator norm; for $s=0$, $D_{0}(W)=I_{\mathbb C}$; and $S_{i}=\hbar J_{i}$
+in operator norm; for $s=0$, $D_{0}(W)=I_{\mathbb C}$; and $S_{i}^{\mathrm{fin}}=\hbar J_{i}$
 are the self-adjoint matrices of
 [[prop-nrqm-orbital-and-spin-finite-spin-matrices]] with
-$[S_{i},S_{j}]=i\hbar\sum_{k}\varepsilon_{ijk}S_{k}$ and
-$S^{2}=\hbar^{2}s(s+1)I$
+$[S_{i}^{\mathrm{fin}},S_{j}^{\mathrm{fin}}]=i\hbar\sum_{k}\varepsilon_{ijk}S_{k}^{\mathrm{fin}}$ and
+$\sum_i(S_i^{\mathrm{fin}})^2=\hbar^{2}s(s+1)I$
 ([[thm-nrqm-orbital-and-spin-symmetric-power-su2-representation]]
 clauses (b),(c),(d),(f),
 [[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clauses (a),(b),(c)).
@@ -227,6 +235,8 @@ with $Be^{iuA}=e^{iuA}B$ for all real $u$, then $A+B$ with domain $D(A)$ is
 self-adjoint and $e^{iu(A+B)}=e^{iuA}e^{iuB}$ for all $u$
 ([[lem-nrqm-angular-momentum-product-flow-generator]] clauses (a),(c)).
 
+[F10] **Finite spectral decomposition.** A normal endomorphism of a finite-dimensional complex inner product space has an orthonormal eigenbasis ([[thm-complex-spectral-theorem-for-normal-endomorphisms]]). Each self-adjoint $S_i^{\mathrm{fin}}$ is normal and has real eigenvalues: for a unit eigenvector $v$, $\lambda=\langle S_i^{\mathrm{fin}}v,v\rangle$ is real. Grouping the eigenbasis by eigenvalue gives mutually orthogonal eigenprojections $P_\lambda$ with $\sum_\lambda P_\lambda=I_{V_s}$ and $S_i^{\mathrm{fin}}=\sum_\lambda\lambda P_\lambda$; its spectral projection on a Borel set $\Sigma$ is $\sum_{\lambda\in\Sigma}P_\lambda$.
+
 ## Proof
 
 **Proof technique:** direct; verify unitarity and multiplicativity from the
@@ -235,7 +245,7 @@ transport the commutation of the internal matrices with the spatial flow into
 strong spectral commutation, and identify the coordinate generators through
 the product-flow lemma and Stone's theorem.
 
-**Given:** The data of the statement and [F1]-[F9].
+**Given:** The data of the statement and [F1]-[F10].
 
 1.1 [Unitary and representation law] Let $W\in SU(2)$; the fibrewise matrix action $M_{s}(W)$ is well defined on almost-everywhere classes, linear, and isometric because $\|D_{s}(W)f(x)\|_{\mathbb C^{r}}=\|f(x)\|_{\mathbb C^{r}}$ for almost every $x$ with $D_{s}(W)$ unitary, so $\|M_{s}(W)f\|=\|f\|$ and $M_{s}(W)$ extends to a unitary operator with inverse $M_{s}(W^{-1})$, and $M_{s}(W_{1})M_{s}(W_{2})=M_{s}(W_{1}W_{2})$ again componentwise; $U(\rho(W))$ is unitary by [F2], so $U_{s}(W)$ is unitary with $U_{s}(I)=U(I)M_{s}(I)=\mathrm{id}$. Using [F6] to move $M_{s}(W_{1})$ across $U(\rho(W_{2}))$ and the multiplicativity $\rho(W_{1}W_{2})=\rho(W_{1})\rho(W_{2})$ of [F1] together with $D_{s}(W_{1}W_{2})=D_{s}(W_{1})D_{s}(W_{2})$, one gets $U_{s}(W_{1})U_{s}(W_{2})=U(\rho(W_{1}))U(\rho(W_{2}))M_{s}(W_{1})M_{s}(W_{2})=U_{s}(W_{1}W_{2})$. [F1, F2, F4, F6, algebra]
 
@@ -243,19 +253,19 @@ the product-flow lemma and Stone's theorem.
 $$ (c+dr)v(c-dr)=(c^2+d^2)\alpha r+(c^2-d^2)w+2cd(r\times w)=\alpha r+\cos t\,w+\sin t\,(r\times w). $$
 Use $r=\varphi(Ce_i)$ and identify vectors through $\varphi$. Since $C\in SO(3)$, it preserves inner products and satisfies $(Cu)\times(Cv)=C(u\times v)$ (the determinant definition of the cross product); conjugating this Rodrigues formula by $C$ gives precisely the rotation about $e_i$ through $t$. Therefore $\rho_0(A_i(t))=CR_i(t)C^{-1}$ and $\rho(A_i(t))=R_i(t)$, with exactly the coordinate convention of [F3]. [F1, F3, given, algebra]
 
-1.3 [Strong commutation of the spatial generators with internal projections] Let $P$ be a spectral projection of the self-adjoint matrix $S_{i}$ and let $M$ be the bounded self-adjoint fibrewise matrix action $(Mf)(x):=Pf(x)$; by [F6] the operator $M$ commutes with $U(R_{i}(u))=e^{-iuL_{i}/\hbar}$ for every $u$, so by [F7] applied to the self-adjoint operator $L_{i}$ and the bounded $M$ one has $ME_{L_{i}}(\Lambda)=E_{L_{i}}(\Lambda)M$ for every Borel $\Lambda$; taking for $P$ every spectral projection $E_{S_{i}}(\Sigma)$ of the finite matrix $S_{i}$ gives $E_{L_{i}}(\Lambda)E_{S_{i}}(\Sigma)=E_{S_{i}}(\Sigma)E_{L_{i}}(\Lambda)$ for all Borel $\Lambda,\Sigma$, which is the strong commutation of $L_{i}$ and $S_{i}$ in the sense of [F8]. [F4, F6, F7, algebra]
+1.3 [Strong commutation of the spatial generators with internal projections] The finite spectral decomposition $S_i^{\mathrm{fin}}=\sum_{\lambda}\lambda P_\lambda$ gives $S_i=\sum_{\lambda}\lambda M_{P_\lambda}$; by [F6] the $M_{P_\lambda}$ are mutually orthogonal projections summing to $I_{H_s}$. Thus $S_i$ is bounded self-adjoint and its spectral projections are $E_{S_i}(\Sigma)=\sum_{\lambda\in\Sigma}M_{P_\lambda}=M_{E_{S_i^{\mathrm{fin}}}(\Sigma)}$. Each of these operators commutes with $U(R_i(u))=e^{-iuL_i/\hbar}$ by [F6], hence with every $E_{L_i}(\Lambda)$ by [F7]. Both spectral measures now act on $H_s$, and $E_{L_i}(\Lambda)E_{S_i}(\Sigma)=E_{S_i}(\Sigma)E_{L_i}(\Lambda)$ for all Borel $\Lambda,\Sigma$, proving strong commutation in the sense of [F8]. [F4, F6, F7, F8, F10, algebra]
 
-1.4 [Internal coordinate generator] By [F5] the family $t\mapsto D_{s}(A_{i}(t))$ is a strongly continuous one-parameter unitary group on $V_{s}$ with infinitesimal generator $-iJ_{i}$; the family $t\mapsto e^{-itS_{i}/\hbar}$ is by [F4] and the spectral calculus a strongly continuous one-parameter unitary group whose quotient at $v$ is $-iS_{i}v/\hbar=-iJ_{i}v$, so by Stone's theorem the two groups agree: $D_{s}(A_{i}(t))=e^{-itS_{i}/\hbar}$ for every $t$. [F4, F5, algebra]
+1.4 [Strong continuity of the lift] Let $W_{m}\to W$ in $SU(2)$ and $f\in H_{s}$; since $\rho$ is continuous by [F1], $\rho(W_{m})\to\rho(W)$ and [F2] gives $\|U(\rho(W_{m}))g-U(\rho(W))g\|\to0$ for every fixed $g$; since $\|D_{s}(W_{m})-D_{s}(W)\|\to0$ in operator norm by [F4], $\|M_{s}(W_{m})f-M_{s}(W)f\|\le\|D_{s}(W_{m})-D_{s}(W)\|\,\|f\|$ tends to $0$; combining, $\|U_{s}(W_{m})f-U_{s}(W)f\|\le\|U(\rho(W_{m}))(M_{s}(W_{m})f-M_{s}(W)f)\|+\|U(\rho(W_{m}))M_{s}(W)f-U(\rho(W))M_{s}(W)f\|\to0$, so $W\mapsto U_{s}(W)$ is strongly continuous. [F1, F2, F4, algebra]
 
-1.5 [Strong continuity of the lift] Let $W_{m}\to W$ in $SU(2)$ and $f\in H_{s}$; since $\rho$ is continuous by [F1], $\rho(W_{m})\to\rho(W)$ and [F2] gives $\|U(\rho(W_{m}))g-U(\rho(W))g\|\to0$ for every fixed $g$; since $\|D_{s}(W_{m})-D_{s}(W)\|\to0$ in operator norm by [F4], $\|M_{s}(W_{m})f-M_{s}(W)f\|\le\|D_{s}(W_{m})-D_{s}(W)\|\,\|f\|$ tends to $0$; combining, $\|U_{s}(W_{m})f-U_{s}(W)f\|\le\|U(\rho(W_{m}))(M_{s}(W_{m})f-M_{s}(W)f)\|+\|U(\rho(W_{m}))M_{s}(W)f-U(\rho(W))M_{s}(W)f\|\to0$, so $W\mapsto U_{s}(W)$ is strongly continuous. [F1, F2, F4, algebra]
+2.1 [Internal coordinate generator] By [F5] the family $t\mapsto D_s(A_i(t))$ on $V_s$ has infinitesimal generator $-iJ_i$; the finite spectral exponential $e^{-itS_i^{\mathrm{fin}}/\hbar}$ has the same generator $-iS_i^{\mathrm{fin}}/\hbar=-iJ_i$, so Stone's theorem gives $D_s(A_i(t))=e^{-itS_i^{\mathrm{fin}}/\hbar}$. Lifting the finite spectral sum of step 1.3 then gives $M_s(A_i(t))=M_{e^{-itS_i^{\mathrm{fin}}/\hbar}}=\sum_\lambda e^{-it\lambda/\hbar}M_{P_\lambda}=e^{-itS_i/\hbar}$ on $H_s$. This includes $s=0$, when both spin generators vanish. [step 1.3, F4, F5, F6, algebra]
 
-2.1 [Conjugations of position and momentum] By [F6] the matrix action $M_s(W)$ commutes with $Q_j$ and $P_k$ and preserves their maximal coordinate domains, so the operator domains of the conjugates by $U_s(W)=U(\rho(W))M_s(W)$ are $U_s(W)D(Q_j)=U(\rho(W))D(Q_j)=D(Q(\rho(W)e_j))$ and $U_s(W)D(P_k)=U(\rho(W))D(P_k)=D(P(\rho(W)e_k))$, where the last equalities are [F2]. On these domains [F2] gives $U_s(W)Q_jU_s(W)^{-1}=Q(\rho(W)e_j)=\sum_l\rho(W)_{lj}Q_l$ and $U_s(W)P_kU_s(W)^{-1}=P(\rho(W)e_k)=\sum_l\rho(W)_{lk}P_l$, with both sums understood as the displayed maximal directional realizations. This proves the conjugation identities of (c). [step 1.1, F2, F6, algebra]
+2.2 [Conjugations of position and momentum] By [F6] the matrix action $M_s(W)$ commutes with $Q_j$ and $P_k$ and preserves their maximal coordinate domains, so the operator domains of the conjugates by $U_s(W)=U(\rho(W))M_s(W)$ are $U_s(W)D(Q_j)=U(\rho(W))D(Q_j)=D(Q(\rho(W)e_j))$ and $U_s(W)D(P_k)=U(\rho(W))D(P_k)=D(P(\rho(W)e_k))$, where the last equalities are [F2]. On these domains [F2] gives $U_s(W)Q_jU_s(W)^{-1}=Q(\rho(W)e_j)=\sum_l\rho(W)_{lj}Q_l$ and $U_s(W)P_kU_s(W)^{-1}=P(\rho(W)e_k)=\sum_l\rho(W)_{lk}P_l$, with both sums understood as the displayed maximal directional realizations. This proves the conjugation identities of (c). [step 1.1, F2, F6, algebra]
 
-2.2 [Self-adjoint sum and product flow] By step 1.3 the spectral measures of $L_{i}$ and $S_{i}$ commute, so [F8] with $f(\mu)=e^{-i\mu t/\hbar}$, $g(\lambda)=e^{-i\lambda u/\hbar}$ gives $e^{-itS_{i}/\hbar}e^{-iuL_{i}/\hbar}=e^{-iuL_{i}/\hbar}e^{-itS_{i}/\hbar}$ for all $t,u$; hence [F9] applies with $A:=L_{i}$ and the bounded self-adjoint $B:=S_{i}$, so the sum $J_{i}=L_{i}+S_{i}$ with domain $D(L_{i})$ is self-adjoint and $e^{-itJ_{i}/\hbar}=e^{-itL_{i}/\hbar}e^{-itS_{i}/\hbar}$ for every $t$. [step 1.3, F4, F8, F9, algebra]
+2.3 [Self-adjoint sum and product flow] By step 1.3 the spectral measures of $L_{i}$ and $S_{i}$ commute, so [F8] with $f(\mu)=e^{-i\mu t/\hbar}$, $g(\lambda)=e^{-i\lambda u/\hbar}$ gives $e^{-itS_{i}/\hbar}e^{-iuL_{i}/\hbar}=e^{-iuL_{i}/\hbar}e^{-itS_{i}/\hbar}$ for all $t,u$; by [F6] $S_i$ itself also commutes with every spatial flow, so [F9] applies with $A:=L_{i}$ and the bounded self-adjoint $B:=S_{i}$, so the sum $J_{i}=L_{i}+S_{i}$ with domain $D(L_{i})$ is self-adjoint and $e^{-itJ_{i}/\hbar}=e^{-itL_{i}/\hbar}e^{-itS_{i}/\hbar}$ for every $t$. [step 1.3, F6, F8, F9, algebra]
 
-3.1 [Coordinate subgroup generator] Let $t$ be real; by step 1.2, $\rho(A_{i}(t))=R_{i}(t)$, so by [F3] and step 1.4 $U_{s}(A_{i}(t))=U(R_{i}(t))M_{s}(A_{i}(t))=e^{-itL_{i}/\hbar}e^{-itS_{i}/\hbar}=e^{-itJ_{i}/\hbar}$ by step 2.2; since the right-hand side is a strongly continuous one-parameter unitary group in $t$ and $A_{i}$ is multiplicative by [F5], $t\mapsto U_{s}(A_{i}(t))$ is a strongly continuous one-parameter unitary group with the displayed generator, which is (b) and the generator identity of (c). [step 1.2, step 1.4, step 2.2, F3, F5, algebra]
+3.1 [Coordinate subgroup generator] Let $t$ be real; by step 1.2, $\rho(A_{i}(t))=R_{i}(t)$, so by [F3] and step 2.1 $U_{s}(A_{i}(t))=U(R_{i}(t))M_{s}(A_{i}(t))=e^{-itL_{i}/\hbar}e^{-itS_{i}/\hbar}=e^{-itJ_{i}/\hbar}$ by step 2.3; since the right-hand side is a strongly continuous one-parameter unitary group in $t$ and $A_{i}$ is multiplicative by [F5], $t\mapsto U_{s}(A_{i}(t))$ is a strongly continuous one-parameter unitary group with the displayed generator, which is (b) and the generator identity of (c). [step 1.2, step 2.1, step 2.3, F3, F5, algebra]
 
-4.1 [Assembly] Step 1.1 proves unitarity, the identity and the representation law, and step 1.5 proves strong continuity, which is (a); step 3.1 proves (b) and the generator identity of (c); step 1.3 proves the strong commutation of $L_{i}$ and $S_{i}$, step 2.2 the self-adjointness of $J_{i}$, and step 2.1 the conjugation identities of (c); (d) records only the scope of these mathematical assertions. [step 1.1, step 1.3, step 1.5, step 2.1, step 2.2, step 3.1] ∎
+4.1 [Assembly] Step 1.1 proves unitarity, the identity and the representation law, and step 1.4 proves strong continuity, which is (a); step 3.1 proves (b) and the generator identity of (c); step 1.3 proves the strong commutation of $L_{i}$ and $S_{i}$, step 2.3 the self-adjointness of $J_{i}$, and step 2.2 the conjugation identities of (c); (d) records only the scope of these mathematical assertions. [step 1.1, step 1.3, step 1.4, step 2.2, step 2.3, step 3.1] ∎
 
 ## Remarks
 
@@ -271,6 +281,8 @@ Use $r=\varphi(Ce_i)$ and identify vectors through $\varphi$. Since $C\in SO(3)$
   [[ex-su-two-to-so-three-as-a-covering-homomorphism]]. On a half-integer
   spin sector the two lifts $\pm U_{s}(W)$ of one rotation $\rho(W)$ differ
   by the central sign.
-- **Units.** $\hbar>0$ is a fixed positive parameter of the statement; $L_{i}$
-  and $S_{i}=J_{i}\hbar$ carry the unit of action, and no numerical value is
-  asserted.
+- **Units.** $\hbar>0$ is a fixed positive parameter of the statement; $L_{i}$,
+  $S_{i}=M_{S_i^{\mathrm{fin}}}$ and the total generator $J_i=L_i+S_i$
+  carry the unit of action. The dimensionless finite spin matrices are
+  $S_i^{\mathrm{fin}}/\hbar$ on $V_s$; their fibrewise actions on $H_s$ are
+  $S_i/\hbar$. No numerical value is asserted.

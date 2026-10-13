@@ -51,7 +51,7 @@ Then there are a subsequence $(N_j)$ and a field $u:[0,T]\to H^m$ for every $m\g
 
 **Given:** The sequence $(u_N)$ with properties (a)-(c), the weights $w_k\ge\max(1,2\pi|k|_\infty)$ of [[def-periodic-vector-sobolev-space-and-leray-projection]], and the coefficient convention $\|v\|_{H^m}^2=\sum_kw_k^{2m}|\widehat v(k)|_2^2$.
 
-[F1] For every finite $K$ the set of coefficient vectors $(\widehat v(k))_{|k|_\infty\le K}\in\mathbb C^{M_K}$, $M_K=\#\{|k|_\infty\le K\}$, is in bijection with $\mathbb R^{2M_K}$; a bounded sequence in $\mathbb R^{2M_K}$ has a convergent subsequence ([[cor-bolzano-weierstrass-in-rn]]).
+[F1] For every finite $K$ the set of coefficient vectors $(\widehat v(k))_{|k|_\infty\le K}\in\mathbb C^{3M_K}$, $M_K=\#\{|k|_\infty\le K\}$, is in bijection with $\mathbb R^{6M_K}$; a bounded sequence in $\mathbb R^{6M_K}$ has a convergent subsequence ([[cor-bolzano-weierstrass-in-rn]]).
 
 [F2] For $m\ge s>5/2$, $m-2>0$ and the coefficient functional satisfies $|\widehat v(k)|_2\le\|v\|_{H^{m-2}}$, since $w_k\ge1$. Thus $t\mapsto\widehat{u_N}(k,t)$ is differentiable with derivative bounded by $B_m\prime$. For $t<t+h$ in $[0,T]$, apply the real mean-value theorem ([[cor-mean-value-theorem]]) to the scalar product of this six-real-coordinate curve with the unit vector in the direction of its endpoint difference (or use zero difference directly). This gives $|\widehat{u_N}(k,t+h)-\widehat{u_N}(k,t)|_2\le|h|B_m\prime\le|h|^{1/2}T^{1/2}B_m\prime$ because $|h|\le T$. No continuity or integrability of the derivative is assumed for this argument ([[def-periodic-vector-sobolev-space-and-leray-projection]]).
 

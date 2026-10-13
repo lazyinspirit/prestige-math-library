@@ -64,8 +64,7 @@ at both endpoints and outside the interval, so no extension convention is needed
 
 ## Facts & Assumptions
 
-**Given:** The reals $c,r$, the polynomials and bumps displayed in the Statement, an open
-interval $J$, a continuous $E:J\to\mathbb R$ and $t_0\in J$ with $E(t_0)\ne0$.
+**Given:** The reals $c,r$, the polynomials and bumps displayed in the Statement, an open interval $J$, a continuous $E:J\to\mathbb R$ and $t_0\in J$ with $E(t_0)\ne0$.
 
 [F1] $h$ is a polynomial, hence differentiable on $\mathbb R$; the product and sum rules
 ([[thm-algebra-of-derivatives]]) give
@@ -73,27 +72,15 @@ $$h'(s)=30s^2(1-s)^2,\qquad h''(s)=60s(1-s)(1-2s),$$
 so $h(0)=0,h(1)=1,h'(0)=h'(1)=h''(0)=h''(1)=0$, and $h'\ge0$ on $\mathbb R$; in particular
 $h$ is nondecreasing with $h(s)\in[0,1]$ for $s\in[0,1]$ and $h(s)>0$ for $0<s<1$.
 
-[F2] At an interior point of $\mathbb R$ differentiability is the usual two-sided derivative,
-and at the points $c-r,c,c+r$ the one-sided derivatives of the two polynomial pieces of
-$\beta_{c,r}$ are computed by the chain rule ([[def-derivative]], [[def-limit-point-r]],
-[[thm-chain-rule]], [[thm-algebra-of-derivatives]]); the explicit matching argument below establishes two-sided differentiability at each gluing point.
+[F2] At an interior point of $\mathbb R$ differentiability is the usual two-sided derivative, and at the points $c-r,c,c+r$ the one-sided derivatives of the two polynomial pieces of $\beta_{c,r}$ are computed by the chain rule ([[def-derivative]], [[def-limit-point-r]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]]); the explicit matching argument below establishes two-sided differentiability at each gluing point.
 
-[F3] If $E$ is continuous at $t_0$ with $E(t_0)\ne0$, then for
-$\varepsilon=|E(t_0)|/2>0$ there is $\delta>0$ such that $|E(t)-E(t_0)|<\varepsilon$ for
-$|t-t_0|<\delta$; then $E(t)>E(t_0)/2>0$ when $E(t_0)>0$ and $E(t)<E(t_0)/2<0$ when
-$E(t_0)<0$ ([[def-continuity-real]], [[def-abs-value]]). Since $J$ is open there is $\rho>0$
-with $[t_0-\rho,t_0+\rho]\subseteq J$; take $\rho\le\delta$.
+[F3] If $E$ is continuous at $t_0$ with $E(t_0)\ne0$, then for $\varepsilon=|E(t_0)|/2>0$ there is $\delta>0$ such that $|E(t)-E(t_0)|<\varepsilon$ for $|t-t_0|<\delta$; then $E(t)>E(t_0)/2>0$ when $E(t_0)>0$ and $E(t)<E(t_0)/2<0$ when $E(t_0)<0$ ([[def-continuity-real]], [[def-abs-value]]). Since $J$ is open there is $\rho>0$ with $[t_0-\rho,t_0+\rho]\subseteq J$; take $\rho\le\delta$.
 
-[F4] A continuous real function on a closed bounded interval is integrable there
-([[thm-continuous-implies-integrable]]); the integral is linear and monotone
-([[thm-linearity-of-the-integral]], [[thm-monotonicity-of-the-integral]]), and a
-nonnegative continuous function whose integral vanishes is identically zero
-([[thm-nonnegative-continuous-with-zero-integral-vanishes]]).
+[F4] A continuous real function on a closed bounded interval is integrable there ([[thm-continuous-implies-integrable]]); the integral is linear and monotone ([[thm-linearity-of-the-integral]], [[thm-monotonicity-of-the-integral]]), and a nonnegative continuous function whose integral vanishes is identically zero ([[thm-nonnegative-continuous-with-zero-integral-vanishes]]).
 
 ## Proof
 
-**Proof technique:** direct; compute the polynomial and glue the pieces of the bump, then
-localise the sign of $E$ and integrate.
+**Proof technique:** direct; compute the polynomial and glue the pieces of the bump, then localise the sign of $E$ and integrate.
 
 1.1 The derivative formulas of [F1] follow from the sum and product rules, and substituting $s=0$ and $s=1$ gives the vanishing values. Since $h'\ge0$ on $\mathbb R$, [F1] and the monotonicity criterion make $h$ nondecreasing on $\mathbb R$; hence $0=h(0)\le h(s)\le h(1)=1$ for $s\in[0,1]$, and $h(s)>0$ for $0<s<1$ because $h(s)=s^3(10-15s+6s^2)$ and $10-15s+6s^2=6(s-5/4)^2+5/8>0$. This proves clause 1. [F1, algebra]
 
@@ -101,17 +88,10 @@ localise the sign of $E$ and integrate.
 
 2.1 Clause 3: by [F3] choose $\rho>0$ with $[t_0-\rho,t_0+\rho]\subseteq J$ and with $E$ of the strict sign of $E(t_0)$ on $(t_0-\rho,t_0+\rho)$. Put $\beta:=\beta_{t_0,\rho}$. On the support interval, $E\beta$ is continuous and has the strict sign of $E(t_0)$ wherever $\beta>0$, and $E(t_0)\beta(t_0)=E(t_0)\ne0$; by clause 2, $\beta>0$ exactly on $(t_0-\rho,t_0+\rho)$ and $\beta\ge0$ everywhere. [F3, step 1.2]
 
-3.1 If $E(t_0)>0$ then $E\beta\ge0$ on $\mathbb R$ and $(E\beta)(t_0)>0$; were $\int_{t_0-\rho}^{t_0+\rho}E\beta=0$, [F4] would force $E\beta=0$ identically on the interval, contradicting $(E\beta)(t_0)>0$. If $E(t_0)<0$ apply the same argument to $-E\beta$, whose integral is $-\int E\beta$. In both cases the displayed integral is nonzero. [F4, step 2.1, algebra] ∎
+3.1 If $E(t_0)>0$ then $E\beta\ge0$ on $[t_0-\rho,t_0+\rho]$ and $(E\beta)(t_0)>0$; were $\int_{t_0-\rho}^{t_0+\rho}E\beta=0$, [F4] would force $E\beta=0$ identically on the interval, contradicting $(E\beta)(t_0)>0$. If $E(t_0)<0$ apply the same argument to $-E\beta$, whose integral is $-\int E\beta$. In both cases the displayed integral is nonzero. [F4, step 2.1, algebra] ∎
 
 ## Remarks
 
-- The bump of this lemma is a polynomial, so no exponential is needed and the construction is
-  entirely elementary; the price of using $C^2$ bumps instead of smooth ones is that the
-  variations in [[lem-cm-first-variation-formula]] and
-  [[thm-cm-hamilton-phase-action-stationarity]] are taken of class $C^2$, which is exactly the
-  regularity required there.
+- The bump of this lemma is a polynomial, so no exponential is needed and the construction is entirely elementary; the price of using $C^2$ bumps instead of smooth ones is that the variations in [[lem-cm-first-variation-formula]] and [[thm-cm-hamilton-phase-action-stationarity]] are taken of class $C^2$, which is exactly the regularity required there.
 
-- The detecting clause is the local form of the fundamental lemma of the calculus of variations:
-  it is used in [[thm-cm-stationarity-iff-euler-lagrange]] and
-  [[thm-cm-hamilton-phase-action-stationarity]] to show that a continuous coefficient which is
-  not identically zero produces a nonzero first variation.
+- The detecting clause is the local form of the fundamental lemma of the calculus of variations: it is used in [[thm-cm-stationarity-iff-euler-lagrange]] and [[thm-cm-hamilton-phase-action-stationarity]] to show that a continuous coefficient which is not identically zero produces a nonzero first variation.

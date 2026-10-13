@@ -25,7 +25,7 @@ provenance:
 proof_strategy: direct
 sources:
   references:
-    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 4.4, printed pages 100-101 (PDF pages 106-107): the symplectic-matrix condition $\\mathcal J^{\\mathsf T}\\mathcal J\\mathcal J=\\mathcal J$ for a change of variables to be canonical"
+    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 4.4, printed pages 100-101 (PDF pages 106-107): the symplectic-matrix condition $\\mathcal J J\\mathcal J^{\\mathsf T}=J$ for a change of variables to be canonical"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
     - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, second edition (MIT Press, 2014/2015), Sections 5.2-5.2.2: the symplectic condition on the derivative and the fundamental Poisson bracket tests"
       url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
@@ -75,9 +75,7 @@ $$C(q^{1},q^{2},p_{1},p_{2})=(q^{1},\,q^{2}+q^{1},\,p_{1},\,p_{2})$$
 
 ## Facts & Assumptions
 
-**Given:** The standard symplectic matrices $J_{2}$ and
-$J_{4}=\operatorname{diag}(J_{2},J_{2})$, the displayed linear maps, and the
-coordinate functions of the phase domains.
+**Given:** The standard symplectic matrices $J_{2}$ and $J_{4}=\operatorname{diag}(J_{2},J_{2})$, the displayed linear maps, and the coordinate functions of the phase domains.
 
 [F1] Symplectic matrix and canonical tests ([[def-cm-phase-domain-and-standard-symplectic-two-form]], [[lem-cm-standard-symplectic-form-is-closed-and-nondegenerate]], [[prop-cm-canonical-map-tests-and-hamiltonian-transport]]): $J^{\mathsf T}=-J$, $J^{2}=-I$; a $C^{1}$ map between phase domains is canonical exactly when $DC^{\mathsf T}J\,DC=J$; canonicity is equivalent to the preservation of the standard two-form.
 
@@ -97,4 +95,6 @@ coordinate functions of the phase domains.
 
 1.4 Block positive control: in the ordered coordinates $J_{4}=\operatorname{diag}(J_{2},J_{2})$, so $\operatorname{diag}(A_{1},A_{2})^{\mathsf T}J_{4}\operatorname{diag}(A_{1},A_{2})=\operatorname{diag}(A_{1}^{\mathsf T}J_{2}A_{1},A_{2}^{\mathsf T}J_{2}A_{2})=\operatorname{diag}(J_{2},J_{2})=J_{4}$ whenever each block satisfies its two-dimensional identity; this is claim 4. [F1, F3, algebra]
 
-2.1 Collecting steps 1.1-1.4 proves the four claims; in particular the determinant test is equivalent to canonicity in dimension two and strictly weaker in dimension four. [step 1.1, step 1.2, step 1.3, step 1.4] ∎
+2.1 Necessity of determinant $+1$ in dimension four: put $\omega(v,w)=v^{\mathsf T}J_4w$ and define $T(v_1,v_2,v_3,v_4)=\omega(v_1,v_2)\omega(v_3,v_4)-\omega(v_1,v_3)\omega(v_2,v_4)+\omega(v_1,v_4)\omega(v_2,v_3)$. Bilinearity and skew-symmetry make $T$ multilinear and alternating (interchanging any adjacent pair negates the displayed expression), and $T(e_1,e_2,e_3,e_4)=1$. Expanding each argument in the coordinate basis therefore gives $T(Ae_1,Ae_2,Ae_3,Ae_4)=\det A$ by the permutation definition of the determinant. If $A^{\mathsf T}J_4A=J_4$, each pairing in $T$ is preserved, so that value is $T(e_1,e_2,e_3,e_4)=1$. Thus every canonical $A$ has $\det A=1$, while step 1.3 gives a noncanonical map with determinant $1$. The grouped-coordinate version has the same determinant by conjugation with the coordinate permutation. [F1, F3, step 1.3, algebra]
+
+3.1 Collecting steps 1.1-1.4 and 2.1 proves the four claims; in particular the determinant test is equivalent to canonicity in dimension two and strictly weaker in dimension four. [step 1.1, step 1.2, step 1.3, step 1.4, step 2.1] ∎

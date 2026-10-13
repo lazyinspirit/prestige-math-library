@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 5
-deps: [def-bilateral-symbol-and-bounded-sequence-space, lem-coded-quadratic-recurrence-is-a-contraction, lem-bounded-bilateral-sequence-ball-is-complete, thm-banach-fixed-point, cor-banach-error-estimates, def-metric-continuity, def-metric-convergence, lem-geometric-sequence-null, def-series, lem-of-abs-value, def-abs-value, def-lipschitz-holder-contraction, def-metric-space, def-metric-ball, lem-cm-bilateral-shift-metric-and-sequential-compactness]
+deps: [def-bilateral-symbol-and-bounded-sequence-space, lem-coded-quadratic-recurrence-is-a-contraction, lem-bounded-bilateral-sequence-ball-is-complete, thm-banach-fixed-point, cor-banach-error-estimates, def-metric-continuity, def-metric-convergence, lem-geometric-sequence-null, def-series, lem-of-abs-value, def-abs-value, lem-of-triangle-inequality, def-lipschitz-holder-contraction, def-metric-space, def-metric-ball, lem-cm-bilateral-shift-metric-and-sequential-compactness]
 dependency_roles:
   def-bilateral-symbol-and-bounded-sequence-space: mathematical-premise
   lem-coded-quadratic-recurrence-is-a-contraction: mathematical-premise
@@ -19,6 +19,7 @@ dependency_roles:
   def-series: mathematical-premise
   lem-of-abs-value: mathematical-premise
   def-abs-value: mathematical-premise
+  lem-of-triangle-inequality: mathematical-premise
   def-lipschitz-holder-contraction: mathematical-premise
   def-metric-space: mathematical-premise
   def-metric-ball: mathematical-premise
@@ -72,15 +73,15 @@ in particular $h$ is continuous at every $s\in X_\pm$ ([[def-metric-continuity]]
 
 **Given:** The parameter $a\ge100$, the constants $R,L$, the shift spaces $X_\pm$, the balls $B_R$, the operators $T_s$, their fixed points $x(s)$ of [[lem-coded-quadratic-recurrence-is-a-contraction]], the map $F$ and the coding map $h$ displayed above.
 
-[F1] Fixed point data ([[lem-coded-quadratic-recurrence-is-a-contraction]]): for each $s\in X_\pm$, $x(s)\in B_R$, $T_sx(s)=x(s)$, $\operatorname{sign}x_n(s)=s_n$, $|x_n(s)|\ge L$ and $x_{n+1}(s)+x_{n-1}(s)=x_n(s)^2-a$ for all $n$; also $\|T_s^m0-x(s)\|_\infty\le 2RL^{-m}$ is what clause 3 asserts.
+[F1] Fixed point data ([[lem-coded-quadratic-recurrence-is-a-contraction]]): for each $s\in X_\pm$, $x(s)\in B_R$, $T_sx(s)=x(s)$, $\operatorname{sign}x_n(s)=s_n$, $|x_n(s)|\ge L$ and $x_{n+1}(s)+x_{n-1}(s)=x_n(s)^2-a$ for all $n$. The iterate convention for $T_s^m$ is the one fixed in that lemma.
 
 [F2] Banach error estimate ([[cor-banach-error-estimates]], [[thm-banach-fixed-point]], [[def-lipschitz-holder-contraction]]): for a contraction with constant $q<1$ on a complete metric space, the iterates from any starting point $x_0$ satisfy $d(x^*,x_m)\le q^m d(x_1,x_0)/(1-q)$; here $q=1/L$, $L\ge\sqrt{74}>2$, so $1/(1-1/L)=L/(L-1)\le2$.
 
-[F3] Ball and metric data ([[def-bilateral-symbol-and-bounded-sequence-space]], [[lem-bounded-bilateral-sequence-ball-is-complete]], [[def-metric-space]]): $0\in B_R$; $\|y\|_\infty\le R$ for $y\in B_R$; $T_s(B_R)\subseteq B_R$; and $\|T_s^m0\|_\infty\le R$; the distance on $X_\pm$ is $D_\pm(s,t)=d_2(\varphi(s),\varphi(t))$ with the published metric $d_2$ of $X_2=\{0,1\}^{\mathbb Z}$.
+[F3] Ball and metric data ([[def-bilateral-symbol-and-bounded-sequence-space]], [[lem-bounded-bilateral-sequence-ball-is-complete]], [[lem-coded-quadratic-recurrence-is-a-contraction]] clauses 1-3, [[def-metric-space]]): $0\in B_R$; $\|y\|_\infty\le R$ for $y\in B_R$; $T_s$ maps $B_R$ into itself and contracts with constant $1/L<1$; therefore induction gives $\|T_s^m0\|_\infty\le R$ for every $m\ge0$; the distance on $X_\pm$ is $D_\pm(s,t)=d_2(\varphi(s),\varphi(t))$ with the metric $d_2$ of $X_2=\{0,1\}^{\mathbb Z}$.
 
-[F4] Cylinders and balls in the published space ([[lem-cm-bilateral-shift-metric-and-sequential-compactness]], clause 2): with $u,v\in X_2$ and $F_m:=\{-m,\dots,m\}$, if $d_2(u,v)<2^{-m}$ then $u_j=v_j$ for $|j|\le m$; under the isometry $\varphi$ of [[lem-bounded-bilateral-sequence-ball-is-complete]] this says for $s,t\in X_\pm$: if $D_\pm(s,t)<2^{-m}$ then $s_j=t_j$ for $|j|\le m$.
+[F4] Cylinders and balls in the binary space ([[lem-cm-bilateral-shift-metric-and-sequential-compactness]], clause 2): with $u,v\in X_2$ and $F_m:=\{-m,\dots,m\}$, if $d_2(u,v)<2^{-m}$ then $u_j=v_j$ for $|j|\le m$; under the isometry $\varphi$ of [[lem-bounded-bilateral-sequence-ball-is-complete]] this says for $s,t\in X_\pm$: if $D_\pm(s,t)<2^{-m}$ then $s_j=t_j$ for $|j|\le m$.
 
-[F5] Absolute value, order and the sequence $0$ ([[def-abs-value]], [[lem-of-abs-value]], [[def-bilateral-symbol-and-bounded-sequence-space]]): $|uv|=|u||v|$, $|u|\le M$ if and only if $-M\le u\le M$ for $M\ge0$, and the zero sequence satisfies $(T_s^00)_n=0$.
+[F5] Absolute value, order and the sequence $0$ ([[def-abs-value]], [[lem-of-abs-value]], [[lem-of-triangle-inequality]], [[def-bilateral-symbol-and-bounded-sequence-space]]): $|uv|=|u||v|$, $|u+w|\le|u|+|w|$, $|u|\le M$ if and only if $-M\le u\le M$ for $M\ge0$, and the zero sequence satisfies $(T_s^00)_n=0$.
 
 [F6] Continuity in a metric space ([[def-metric-continuity]], [[def-metric-ball]], [[def-metric-convergence]]): $h$ is continuous at $s$ when for every $\varepsilon>0$ there is $\delta>0$ such that $D_\pm(s,t)<\delta$ implies $\|h(s)-h(t)\|_2<\varepsilon$.
 
@@ -104,7 +105,7 @@ $F(x_{n-1}(s),x_n(s))=(x_n(s),x_n(s)^2-a-x_{n-1}(s))=(x_n(s),x_{n+1}(s))$.
 
 2.1 Uniform error: $T_s^m0$ is the $m$-th Banach iterate of the starting point $0\in B_R$ for the contraction $T_s$ with constant $1/L$ on the complete space $B_R$ ([F3], [F1]). By [F2], $\|T_s^m0-x(s)\|_\infty\le q^m\|T_s0-0\|_\infty/(1-q)\le q^m R/(1-q)\le 2RL^{-m}$, where $\|T_s0\|_\infty\le R$ by [F3]. [given, step 1.2, F1, F2, F3]
 
-3.1 Coding estimates: let $s,t$ agree for $|j|\le m$ and let $n\in\{-1,0\}$. For $n=0$, locality at level $m$ requires agreement for $|j|\le m-1$, which holds; for $n=-1$ it requires agreement for $|j+1|\le m-1$, i.e. $|j|\le m$, which also holds. Hence $\bigl(T_s^m0\bigr)_n=\bigl(T_t^m0\bigr)_n$, and two applications of step 2.1 give $|x_n(s)-x_n(t)|\le|(T_s^m0)_n-(T_t^m0)_n|+4RL^{-m}=4RL^{-m}$ for $n=-1,0$ ([[def-abs-value]], [F5]). Consequently $\|h(s)-h(t)\|_2=\sqrt{|x_{-1}(s)-x_{-1}(t)|^2+|x_0(s)-x_0(t)|^2}\le\sqrt2\cdot4RL^{-m}$. [given, step 1.2, step 2.1, F5, algebra]
+3.1 Coding estimates: let $s,t$ agree for $|j|\le m$ and let $n\in\{-1,0\}$. For $n=0$, locality at level $m$ requires agreement for $|j|\le m-1$, which holds; for $n=-1$ it requires agreement for $|j+1|\le m-1$, which implies $|j|\le m$, so the required agreement also holds. Hence $\bigl(T_s^m0\bigr)_n=\bigl(T_t^m0\bigr)_n$, and two applications of step 2.1 give $|x_n(s)-x_n(t)|\le|(T_s^m0)_n-(T_t^m0)_n|+4RL^{-m}=4RL^{-m}$ for $n=-1,0$ ([[def-abs-value]], [F5]). Consequently $\|h(s)-h(t)\|_2=\sqrt{|x_{-1}(s)-x_{-1}(t)|^2+|x_0(s)-x_0(t)|^2}\le\sqrt2\cdot4RL^{-m}$. [given, step 1.2, step 2.1, F5, algebra]
 
 4.1 Continuity of $h$: let $\varepsilon>0$ and choose $m\ge0$ with $4\sqrt2\,RL^{-m}<\varepsilon$, possible because $L>1$, hence $L^{-m}=(1/L)^m$ tends to $0$ ([[lem-geometric-sequence-null]], [[def-series]]). Put $\delta:=2^{-m}$. If $D_\pm(s,t)<\delta$, then by [F4] $s_j=t_j$ for $|j|\le m$, so step 3.1 gives $\|h(s)-h(t)\|_2<\varepsilon$. By [F6] this is continuity of $h$ at $s$, and $s$ was arbitrary. [given, step 3.1, F4, F6, algebra]
 

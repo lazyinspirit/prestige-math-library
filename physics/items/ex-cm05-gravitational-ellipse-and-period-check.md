@@ -19,10 +19,8 @@ dependency_roles:
   def-interval: mathematical-premise
   def-countable-choice: mathematical-premise
 provenance:
-  statement: ai-generated
-  proof: ai-generated
-generation:
-  role: example
+  statement: ai-altered
+  proof: ai-altered
 proof_strategy: direct
 physical_scope: "A numerical consistency check of the elliptic-branch formulas of the adopted gravitational two-label model on declared model data: the conic parameter, semiaxes, energy, period by two routes, the third-law form $T^2=4\\pi^2a^3/(G_{\\mathrm N}M)$ under the declared mass identification, the areal rate and the barycentric semiaxes. Every number is a declared model datum or an exact consequence of the cited items; the example asserts no observation, no measurement and no applicability of the model to any real system."
 sources:
@@ -36,7 +34,7 @@ sources:
 ## Example
 
 Declare the gravitational two-label model of [[post-cm05-gravity]] clause (i)
-with the following **model data** (decimal numbers declared for this
+with time window $I_0=\mathbb R$ and the following **model data** (decimal numbers declared for this
 computation; $G_{\mathrm N}=2.5\times10^{-25}\ \mathrm{m^{3}\,kg^{-1}\,s^{-2}}$
 is a declared datum of the example, **not** the measured value of clause
 (iii), and the couplings are identified with the inertial masses as in clause
@@ -59,7 +57,7 @@ cited items predict, as exact consequences of these data:
 
 ## Facts & Assumptions
 
-**Given:** The declared model data $m_1=m_2=2\times10^{24}$, $M=4\times10^{24}$, $\mu=10^{24}$, $G_{\mathrm N}=2.5\times10^{-25}$, $\kappa=10^{24}$, $J=10^{27}$, $p=10^{6}$ and $e=\frac35$.
+**Given:** The declared model data $m_1=m_2=2\times10^{24}$, $M=4\times10^{24}$, $\mu=10^{24}$, $G_{\mathrm N}=2.5\times10^{-25}$, $\kappa=10^{24}$, $J=10^{27}$, $p=10^{6}$ and $e=\frac35$. Bare numbers in the arithmetic below are numerical values in the SI units declared in the Example; explicitly unit-bearing equalities are equalities of quantities.
 
 [A1] The Axiom of Countable Choice is assumed ([[def-countable-choice]]).
 
@@ -73,13 +71,13 @@ cited items predict, as exact consequences of these data:
 
 **Proof technique:** direct.
 
-1.1 Energy: with $\mu\kappa^{2}=(10^{24})(10^{48})=10^{72}$ and $2J^{2}=2\times10^{54}$, the coefficient is $\tfrac12\times10^{18}$; $e^{2}-1=\tfrac{9}{25}-1=-\tfrac{16}{25}$, so $E=\tfrac12\times10^{18}\times(-\tfrac{16}{25})=-\tfrac{8}{25}\times10^{18}=-\tfrac{16}{5}\times10^{17}$ J, and $e<1$ corresponds to $E<0$ as [[pthm-cm05-conic]] clause 1 states. [given, A1, L1, L3, algebra]
+1.1 Energy: the coefficient is $\mu\kappa^{2}/(2J^{2})=\frac{(10^{24})(10^{48})}{2\times10^{54}}\ \mathrm J=\tfrac12\times10^{18}\ \mathrm J$; $e^{2}-1=\tfrac{9}{25}-1=-\tfrac{16}{25}$, so $E=-\tfrac{8}{25}\times10^{18}\ \mathrm J=-3.2\times10^{17}\ \mathrm J$, and $e<1$ corresponds to $E<0$ as [[pthm-cm05-conic]] clause 1 states. [given, A1, L1, L3, algebra]
 
 2.1 Semiaxes: $1-e^{2}=\tfrac{16}{25}$, so $a=p/(1-e^{2})=10^{6}\cdot\tfrac{25}{16}=\tfrac{25}{16}\times10^{6}$ m and $b=a\sqrt{1-e^{2}}=\tfrac{25}{16}\times10^{6}\cdot\tfrac45=\tfrac54\times10^{6}$ m; and $-\kappa/(2E)=-\tfrac{10^{24}}{-\tfrac{16}{25}\times10^{18}}=\tfrac{25}{16}\times10^{6}$ m, so $a=-\kappa/(2E)$ holds. [step 1.1, L1, L3, algebra]
 
-3.1 Period: $a^{3}=\left(\tfrac{25}{16}\right)^{3}\times10^{18}=\tfrac{15625}{4096}\times10^{18}$, so $\mu a^{3}/\kappa=a^{3}=\tfrac{15625}{4096}\times10^{18}$ and $T=2\pi\sqrt{a^{3}}=2\pi\tfrac{125}{64}\times10^{9}=\tfrac{125\pi}{32}\times10^{9}$ s; by the second route $\mu ab/J=\tfrac{10^{24}\cdot\tfrac{25}{16}\times10^{6}\cdot\tfrac54\times10^{6}}{10^{27}}=\tfrac{125}{64}\times10^{9}$ s, the same, so $T=2\pi\mu ab/J$ and $T^{2}=\tfrac{15625}{1024}\pi^{2}\times10^{18}=\tfrac{4\pi^{2}\mu a^{3}}{\kappa}$. [step 2.1, L2, L3, algebra]
+3.1 Period: $a^{3}=\left(\tfrac{25}{16}\right)^{3}\times10^{18}\ \mathrm{m^{3}}=\tfrac{15625}{4096}\times10^{18}\ \mathrm{m^{3}}$, while $\mu/\kappa=1\ \mathrm{s^{2}\,m^{-3}}$, hence $\mu a^{3}/\kappa=\tfrac{15625}{4096}\times10^{18}\ \mathrm{s^{2}}$. Thus $T=2\pi\sqrt{\mu a^{3}/\kappa}=2\pi\tfrac{125}{64}\times10^{9}\ \mathrm s=\tfrac{125\pi}{32}\times10^{9}\ \mathrm s$. The second route gives $\mu ab/J=\frac{10^{24}\cdot(25/16)10^{6}\cdot(5/4)10^{6}}{10^{27}}\ \mathrm s=\tfrac{125}{64}\times10^{9}\ \mathrm s$, so $T=2\pi\mu ab/J$ and $T^{2}=\tfrac{15625}{1024}\pi^{2}\times10^{18}\ \mathrm{s^{2}}=4\pi^{2}\mu a^{3}/\kappa$. [step 2.1, L2, L3, algebra]
 
-4.1 Third law with the declared identification: $G_{\mathrm N}M=\tfrac52\times10^{-25}\cdot4\times10^{24}=1$, so $\dfrac{4\pi^{2}a^{3}}{G_{\mathrm N}M}=4\pi^{2}a^{3}=\dfrac{4\cdot15625}{4096}\pi^{2}\times10^{18}=\dfrac{15625}{1024}\pi^{2}\times10^{18}$, the same as $T^{2}$ from step 3.1. [step 3.1, L2, L3, algebra]
+4.1 Third law with the declared identification: $G_{\mathrm N}M=\bigl(\tfrac52\times10^{-25}\ \mathrm{m^{3}\,kg^{-1}\,s^{-2}}\bigr)\bigl(4\times10^{24}\ \mathrm{kg}\bigr)=1\ \mathrm{m^{3}\,s^{-2}}$. Therefore $\frac{4\pi^{2}a^{3}}{G_{\mathrm N}M}=\frac{4\pi^{2}(15625/4096)10^{18}\ \mathrm{m^{3}}}{1\ \mathrm{m^{3}\,s^{-2}}}=\tfrac{15625}{1024}\pi^{2}\times10^{18}\ \mathrm{s^{2}}$, equal to $T^{2}$ from step 3.1. [step 3.1, L2, L3, algebra]
 
 4.2 Areal rate: $J/(2\mu)=\tfrac{10^{27}}{2\times10^{24}}=500\ \mathrm{m^{2}\,s^{-1}}$, and $\dfrac{\pi ab}{T}=\dfrac{\pi\cdot\tfrac{25}{16}\times10^{6}\cdot\tfrac54\times10^{6}}{\tfrac{125\pi}{32}\times10^{9}}=\dfrac{125}{64}\cdot\dfrac{32}{125}\cdot10^{3}=500\ \mathrm{m^{2}\,s^{-1}}$, so $\pi ab/T=J/(2\mu)$. [step 3.1, L2, L3, algebra]
 

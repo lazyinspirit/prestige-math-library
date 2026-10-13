@@ -1,0 +1,314 @@
+{
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "10",
+  "input_sha256": "1cf7e5abaa87ab71967de0936e088d092ed7f360990f3752a2c33919d4433b40",
+  "decisions": [
+    {
+      "id": "def-cm-splitting-hamiltonian-and-verlet-map",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "15385b8bb4a467a88fae4a86739073e2c490bf4df4bff69bd02c1132eab97f93",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The final Remarks claim is false: with d=1, M=(1), V(q)=-q^2/2, kick-drift-kick has diagonal entries 1+h^2/2 and trace 2+h^2, unlike the cited oscillator matrix of trace 2-h^2. Replaced this unsupported general reduction by the exact specialization d=1, M=(1), V(q)=q^2/2; multiplying its shears gives the cited matrix.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-cm-modified-log-coefficients-and-truncations",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "e8839d7d16fa65fc944392bd90e09ad6381fa7fa487cf0060eb192b5d8f052bd",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The asserted holomorphic iterate on D_k for every k>=0 is undefined beyond the supplier range: D_k is allocated only for 0<=k<=N, with Psi_h(D_k) contained in D_(k-1) in that range. Restricted both the distance-domain notation and guaranteed difference iterates to 0<=k<=N, defined the zeroth iterate explicitly, and retained arbitrary map iterates as partial compositions. All finite sums and coefficient fields keep their original scope.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "rem-cm-scope-of-the-certified-verlet-estimates",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "e22b3f450a633b35238910c6bb7404871e9f70b5f5ac474f5a495b629881f857",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The claimed zero-initial-error bound is false without x_0=z_0: V=id on the real line, eta=0 and distinct initial states satisfy the former conditions but retain positive distance. Restored the common initial state, L>=0, h>0, eta>=0, the exact recurrence and metric residual. Then e_(j+1)<=eta+(1+Lh)e_j with e_0=0 gives exactly the cited geometric bound, or n eta when L=0.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-cm-splitting-hamiltonian-and-verlet-map",
+      "disposition": "repaired",
+      "post_sha256": "b8768ae7f52d50e89083d7406a63f158c44867e6e678a2bcf0b813b6ba507a4f",
+      "review_context_sha256": "1eef828cd6211bcb204a174dda850c93d1367e6a741c33b04cf582870a8dc8bb",
+      "reason": "Checked the open phase domain, C^3 potential, specified symmetric inverse, Hamiltonian sign convention and endpoint-admissible partial compositions against the phase-domain supplier and owning page. The oscillator example defines exactly d=1, M=(1), V(q)=q^2/2 and its displayed shear product agrees. Only Remarks changed: the original Definition is byte-for-byte preserved, so there is no Statement/Definition propagation. No proof contract entry exists for this nonproof definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-cm-modified-log-coefficients-and-truncations",
+      "disposition": "repaired",
+      "post_sha256": "d9dc3a6254f82a52a5b881f6ca877d1352dab96bd6a039a126d5e257852043e4",
+      "review_context_sha256": "666b7391c34d9b7eae223d13c7b029eadf32f73e576b2a90fa29d0d4a20ca1d3",
+      "reason": "Checked the full domain-loss argument, analytic splitting definition, coefficient-extraction supplier, and each direct consumer use. Domain inclusion inductively defines Delta_h^k f for k<=N. Joint local flow holomorphy and Psi_0=id give Delta_h^k f=O(h^k) locally by factoring h and integrating a spatial derivative, so the logarithm coordinate quotient and coefficient fields are well defined. Finite binomial differentiation gives the stated logarithm weights. The five direct consumers use supported finite orders, larger allocated orders, or separately justified local formal germs; their relevant uses remain sound. Owning page prose requires only a finite logarithm on the retained neighbourhood; no contract exists for this nonproof definition.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "rem-cm-scope-of-the-certified-verlet-estimates",
+      "disposition": "repaired",
+      "post_sha256": "128a4a4876655c3e47a9e88506762e2ebdf334382b998d84ed15fadb74b3cce6",
+      "review_context_sha256": "02a946c05793cfa91f8bb0d63f96ff6c35f635795d035f6518b105fda9b7e130",
+      "reason": "Checked the entire roundoff supplier proof and the symplecticity, local-error, finite-time and analytic-energy supplier statements. The repaired state bound now includes every parameter, invariance, residual and initial-state hypothesis used in the finite induction. The separate energy estimate retains sufficiently small fixed positive step, compact retention, both comparison segments, bounded modified-energy gradient and deterministic residual assumptions; it does not need a second reference orbit with a common initial state. This mathematical remark has no Statement or Definition section or proof contract entry; neither physical scope nor empirical qualifications changed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-cm-binomial-pullback-family-and-its-log-are-derivations",
+    "lem-cm-truncated-log-coefficient-bounds",
+    "lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives",
+    "lem-cm-symmetric-log-parity-removes-odd-coefficients",
+    "lem-cm-optimal-truncation-gives-exponential-local-defect"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-step5-repeat-r1-u10-def-cm-splitting-hamiltonian-and-verlet-map",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "at": "2026-10-13T09:57:30.741578+00:00",
+        "class": "accuracy",
+        "subclass": "false-or-overstrong-statement",
+        "severity": "fatal",
+        "location": "remark",
+        "subject": "def-cm-splitting-hamiltonian-and-verlet-map",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "batch": "10",
+        "disposition": "fixed",
+        "evidence": [
+          {
+            "path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-repeat-r1-u10.json",
+            "note": "The final Remarks claim is false: with d=1, M=(1), V(q)=-q^2/2, kick-drift-kick has diagonal entries 1+h^2/2 and trace 2+h^2, unlike the cited oscillator matrix of trace 2-h^2. Replaced this unsupported general reduction by the exact specialization d=1, M=(1), V(q)=q^2/2; multiplying its shears gives the cited matrix."
+          }
+        ],
+        "correction": "The final Remarks claim is false: with d=1, M=(1), V(q)=-q^2/2, kick-drift-kick has diagonal entries 1+h^2/2 and trace 2+h^2, unlike the cited oscillator matrix of trace 2-h^2. Replaced this unsupported general reduction by the exact specialization d=1, M=(1), V(q)=q^2/2; multiplying its shears gives the cited matrix.",
+        "post_sha256": "b8768ae7f52d50e89083d7406a63f158c44867e6e678a2bcf0b813b6ba507a4f",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true,
+        "independent_review": false
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-step5-repeat-r1-u10-def-cm-modified-log-coefficients-and-truncations",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "at": "2026-10-13T09:57:30.741578+00:00",
+        "class": "accuracy",
+        "subclass": "false-or-overstrong-statement",
+        "severity": "fatal",
+        "location": "definition",
+        "subject": "def-cm-modified-log-coefficients-and-truncations",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "batch": "10",
+        "disposition": "fixed",
+        "evidence": [
+          {
+            "path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-repeat-r1-u10.json",
+            "note": "The asserted holomorphic iterate on D_k for every k>=0 is undefined beyond the supplier range: D_k is allocated only for 0<=k<=N, with Psi_h(D_k) contained in D_(k-1) in that range. Restricted both the distance-domain notation and guaranteed difference iterates to 0<=k<=N, defined the zeroth iterate explicitly, and retained arbitrary map iterates as partial compositions. All finite sums and coefficient fields keep their original scope."
+          }
+        ],
+        "correction": "The asserted holomorphic iterate on D_k for every k>=0 is undefined beyond the supplier range: D_k is allocated only for 0<=k<=N, with Psi_h(D_k) contained in D_(k-1) in that range. Restricted both the distance-domain notation and guaranteed difference iterates to 0<=k<=N, defined the zeroth iterate explicitly, and retained arbitrary map iterates as partial compositions. All finite sums and coefficient fields keep their original scope.",
+        "post_sha256": "d9dc3a6254f82a52a5b881f6ca877d1352dab96bd6a039a126d5e257852043e4",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true,
+        "independent_review": false
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-step5-repeat-r1-u10-rem-cm-scope-of-the-certified-verlet-estimates",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "at": "2026-10-13T09:57:30.741578+00:00",
+        "class": "accuracy",
+        "subclass": "missing-hypothesis",
+        "severity": "fatal",
+        "location": "remark",
+        "subject": "rem-cm-scope-of-the-certified-verlet-estimates",
+        "caught_at_stage": "5-adjudicate",
+        "caught_by_role": "final-adjudicator",
+        "batch": "10",
+        "disposition": "fixed",
+        "evidence": [
+          {
+            "path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-repeat-r1-u10.json",
+            "note": "The claimed zero-initial-error bound is false without x_0=z_0: V=id on the real line, eta=0 and distinct initial states satisfy the former conditions but retain positive distance. Restored the common initial state, L>=0, h>0, eta>=0, the exact recurrence and metric residual. Then e_(j+1)<=eta+(1+Lh)e_j with e_0=0 gives exactly the cited geometric bound, or n eta when L=0."
+          }
+        ],
+        "correction": "The claimed zero-initial-error bound is false without x_0=z_0: V=id on the real line, eta=0 and distinct initial states satisfy the former conditions but retain positive distance. Restored the common initial state, L>=0, h>0, eta>=0, the exact recurrence and metric residual. Then e_(j+1)<=eta+(1+Lh)e_j with e_0=0 gives exactly the cited geometric bound, or n eta when L=0.",
+        "post_sha256": "128a4a4876655c3e47a9e88506762e2ebdf334382b998d84ed15fadb74b3cce6",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true,
+        "independent_review": false
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "reconcile-existing-finding",
+      "subject": "lem-cm-cauchy-formula-and-power-series-on-polydiscs",
+      "disposition": "open",
+      "severity": "nonfatal",
+      "route": "frontier-owner",
+      "affected_use": "Proof 1.1: the slice is holomorphic on the disc |z_1-a_1|<rho_1 and continuous on its closure as the restriction of a continuous map.",
+      "invalidated_claim": "Continuity on the full rho_1 boundary is not implied by continuity on the open polydisc; f(z_1,z_2)=1/(rho_1-z_1) gives a counterexample with centre zero.",
+      "minimality": "Replace the outer-closure assertion by continuity on the smaller closed disc of radius r_1<rho_1. The actual Cauchy contour and all domain-loss uses are strictly interior, so their deductions remain sound.",
+      "reason": "Verified the Step-4 digest concern against current Proof 1.1 and F1. The incorrect ancillary sentence persists. This draft supplier is outside the three assigned rejections and is reported without editing or adding an adjudication decision.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no-change",
+      "reason": "The only changed Statement/Definition is the modified-log definition. All five direct item consumers are draft original-frontier items and their examined uses remain sound. No potentially defective published consumer was discovered in this scoped review; no published or imported carrier was edited.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "conventions": "Dimensionless mathematical maps; grouped (q,p) coordinates, X_G=J gradient G and contraction with omega equals dG; finite logarithm domains D_k allocated only through N with retained D_N=D(rho/4). No physical or empirical premise is introduced.",
+    "integration": "No new items or shared metadata edits were necessary. The three nonproof carriers have no owning proof-contract entries. Owning page prose retains its exact finite-truncation contract. Original independent round evidence is preserved; this is an author repair and conditional mathematical review, not independent review or certification.",
+    "interface_comparison": "Frozen/current Statement/Definition comparisons show no change for the splitting definition or scope remark, and a change only for the modified-log definition. Direct dependency/reference search and a complete current-item text scan agree on the five downstream item IDs listed. The owning page use is separately recorded.",
+    "digest_disposition": "The parity item now explicitly restricts reality to real h in Statement clause 3 and Proof 4.1. The Cauchy outer-closure defect persists as a nonfatal, out-of-assignment finding; exact evidence and its minimal repair are proposed in ledger_updates for the frontier owner.",
+    "source_fidelity": "The arguments adjudicated here are familiar elementary shear algebra, finite-domain induction, finite binomial differentiation, holomorphic coefficient extraction and geometric error recurrence. Local suppliers and their exact cited clauses were inspected; no external source retrieval or source audit is claimed.",
+    "unresolved_assigned_obligations": [],
+    "next_action": "Controller collection, native consumer-owner routing and subsequent independent rejudgment; no worker launch, stamp or certification performed."
+  },
+  "consumer_examinations": [
+    {
+      "supplier": "def-cm-modified-log-coefficients-and-truncations",
+      "id": "lem-cm-binomial-pullback-family-and-its-log-are-derivations",
+      "path": "items/lem-cm-binomial-pullback-family-and-its-log-are-derivations.md",
+      "affected_use": "Statement clause 1: for Q>=2 and 0<=m<=Q, T_h^{m,Q}f=f composed with Psi_h^m on D_m allocated with order Q; Statement introduction and Proof 1.1 supply arbitrary-order coefficients as local germs.",
+      "disposition": "remains_sound",
+      "reason": "The bounded integer family uses m<=Q. The arbitrary-order formal coefficients are constructed on a local neighbourhood of (0,Z), not asserted on a fixed D_k beyond its order.",
+      "route": "frontier-owner",
+      "uncertain": false
+    },
+    {
+      "supplier": "def-cm-modified-log-coefficients-and-truncations",
+      "id": "lem-cm-truncated-log-coefficient-bounds",
+      "path": "items/lem-cm-truncated-log-coefficient-bounds.md",
+      "affected_use": "Statement clauses 1-4 and Proof 1.1, 2.1, 4.1 use Delta_h^k z_i only for 1<=k<=N, and compare finite orders N and N-prime on E=D(rho/4).",
+      "disposition": "remains_sound",
+      "reason": "Each finite-order comparison allocates its own N or N-prime domains and common step radius; no iterate above the allocated order is required.",
+      "route": "frontier-owner",
+      "uncertain": false
+    },
+    {
+      "supplier": "def-cm-modified-log-coefficients-and-truncations",
+      "id": "lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives",
+      "path": "items/lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives.md",
+      "affected_use": "Statement introduction and Proof 1.1 extract X_j from L_N(h) coordinates with N>=max(2,j), using the common retained domain E=D(rho/4).",
+      "disposition": "remains_sound",
+      "reason": "All coefficients are computed with sufficient finite order before applying derivation, reality and primitive arguments; no fixed-order higher iterate is required.",
+      "route": "frontier-owner",
+      "uncertain": false
+    },
+    {
+      "supplier": "def-cm-modified-log-coefficients-and-truncations",
+      "id": "lem-cm-symmetric-log-parity-removes-odd-coefficients",
+      "path": "items/lem-cm-symmetric-log-parity-removes-odd-coefficients.md",
+      "affected_use": "Facts Given and L2 and Proof 1.2-3.1 use formal L(h) and T_h^s with finite coefficients in each h-degree, and identify concrete truncations through order N.",
+      "disposition": "remains_sound",
+      "reason": "The binomial supplier independently supplies the local formal germs; coefficient-wise sums use finite orders and do not require an infinite analytic logarithm or a higher fixed-order domain.",
+      "route": "frontier-owner",
+      "uncertain": false
+    },
+    {
+      "supplier": "def-cm-modified-log-coefficients-and-truncations",
+      "id": "lem-cm-optimal-truncation-gives-exponential-local-defect",
+      "path": "items/lem-cm-optimal-truncation-gives-exponential-local-defect.md",
+      "affected_use": "Statement finite X^[N](h) and Proof 1.1-2.1 use X_j for j<=N and compare the finite modified-flow jets with the logarithm through degree N.",
+      "disposition": "remains_sound",
+      "reason": "The bound and jet comparison use only supported coefficients on E and a smaller step radius; the optimal choice increases N and allocates fresh finite-order domains.",
+      "route": "frontier-owner",
+      "uncertain": false
+    },
+    {
+      "supplier": "def-cm-modified-log-coefficients-and-truncations",
+      "page": "cm-math-numerical",
+      "path": "library/non-relativistic-classical-mechanics-mathematics/cm-math-numerical.md",
+      "affected_use": "The finite logarithm supplies Hamiltonian coefficient fields on a common retained complex neighbourhood.",
+      "disposition": "remains_sound",
+      "reason": "All supplied logarithms remain finite and holomorphic on D_N=D(rho/4); the page asserts no higher iterate for fixed N.",
+      "uncertain": false
+    }
+  ],
+  "checks": [
+    {
+      "items": [
+        "def-cm-splitting-hamiltonian-and-verlet-map",
+        "def-cm-modified-log-coefficients-and-truncations",
+        "rem-cm-scope-of-the-certified-verlet-estimates"
+      ],
+      "exit_code": 0,
+      "result": "Executed separately immediately after each mathematical review, before editing the next item. Exact returned hashes are copied in reviews.",
+      "commands": [
+        "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-cm-qm-gr-79-2026-10-11 --items def-cm-splitting-hamiltonian-and-verlet-map",
+        "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-cm-qm-gr-79-2026-10-11 --items def-cm-modified-log-coefficients-and-truncations",
+        "node tools/physics-support/step5-workflow.mjs review-contexts --run physics-cm-qm-gr-79-2026-10-11 --items rem-cm-scope-of-the-certified-verlet-estimates"
+      ]
+    },
+    {
+      "command": "node tools/physics-support/rendercheck.mjs items/def-cm-splitting-hamiltonian-and-verlet-map.md items/def-cm-modified-log-coefficients-and-truncations.md items/rem-cm-scope-of-the-certified-verlet-estimates.md",
+      "exit_code": 0,
+      "result": "3 files passed renderer YAML and KaTeX checks."
+    },
+    {
+      "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/def-cm-splitting-hamiltonian-and-verlet-map.md items/def-cm-modified-log-coefficients-and-truncations.md items/rem-cm-scope-of-the-certified-verlet-estimates.md",
+      "exit_code": 0,
+      "result": "0 checked, 0 failing: these are nonproof carriers, so this records no proof acceptance."
+    },
+    {
+      "command": "node tools/physics-support/proof-layout.mjs items/def-cm-splitting-hamiltonian-and-verlet-map.md items/def-cm-modified-log-coefficients-and-truncations.md items/rem-cm-scope-of-the-certified-verlet-estimates.md",
+      "exit_code": 0,
+      "result": "Run once after all final item edits: 3 items, 0 steps, 0 defects."
+    },
+    {
+      "command": "node tools/physics-support/depcheck.mjs --items-file <(printf '%s\\n' '[\"def-cm-splitting-hamiltonian-and-verlet-map\",\"def-cm-modified-log-coefficients-and-truncations\",\"rem-cm-scope-of-the-certified-verlet-estimates\"]') --quiet",
+      "selection": [
+        "def-cm-splitting-hamiltonian-and-verlet-map",
+        "def-cm-modified-log-coefficients-and-truncations",
+        "rem-cm-scope-of-the-certified-verlet-estimates"
+      ],
+      "exit_code": 0,
+      "result": "Selected item/page checks and prerequisite cycle checks passed."
+    },
+    {
+      "command": "Read-only JSON input digest, itemHashGuard, statementHash and exact direct-reference inventory verification",
+      "exit_code": 0,
+      "result": "Canonical input identity matches the task; all three recorded guards match disk. Only the logarithm Definition changed. Five-item consumer inventory matches the complete current-item scan. An earlier attempt importing workflow from node stdin failed in its entrypoint guard before validation; retried successfully using direct SHA-256 plus side-effect-free hash modules."
+    }
+  ]
+}

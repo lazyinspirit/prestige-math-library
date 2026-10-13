@@ -2,6 +2,9 @@
 requires:
   - gr-framework-and-geometry
   - geodesics-the-exponential-map-completeness-and-hopf-rinow
+  - sine-cosine-and-the-definition-of-pi
+  - fundamental-trigonometric-identities
+  - the-inverse-function-theorem-completed
 page: gr-framework-and-geometry-examples
 title: "Framework And Geometry — Examples"
 status: draft

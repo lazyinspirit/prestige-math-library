@@ -1,0 +1,539 @@
+{
+  "group": "i",
+  "batches": [
+    "26"
+  ],
+  "pages_read": [
+    "cm10-rigid-body-configuration-and-inertia",
+    "cm10-rigid-body-configuration-and-inertia-examples"
+  ],
+  "items_read": [
+    "post-cm10-rigid-material",
+    "def-cm10-rigid-body-configuration",
+    "def-cm10-angular-velocity",
+    "def-cm10-inertia-tensor",
+    "pthm-cm10-kinetic-splitting",
+    "pthm-cm10-principal-axes",
+    "pthm-cm10-frame-covariance",
+    "rem-cm10-orientation-charts",
+    "ex-cm10-equilateral-triangle-rotational-inertia",
+    "cex-cm10-degenerate-line-mass-singular-inertia",
+    "ex-cm10-euler-angle-pole-and-orientation",
+    "ex-cm10-parallel-axis-shift-check"
+  ],
+  "conventions": [
+    {
+      "convention": "The reference mass distribution is a bounded finite Borel measure ν on R³ with positive total mass m and componentwise first moment zero. Atomic and line-supported distributions are admitted. Motions have x(t,ρ)=c(t)+R(t)ρ, with c and R of class C² on a nondegenerate open time interval and R valued in SO(3). This is an adopted kinematic model without a force or torque law.",
+      "fixed_by": "post-cm10-rigid-material",
+      "matters_for": [
+        "def-cm10-rigid-body-configuration",
+        "def-cm10-angular-velocity",
+        "def-cm10-inertia-tensor",
+        "pthm-cm10-kinetic-splitting",
+        "pthm-cm10-principal-axes",
+        "pthm-cm10-frame-covariance",
+        "ex-cm10-equilateral-triangle-rotational-inertia",
+        "cex-cm10-degenerate-line-mass-singular-inertia",
+        "ex-cm10-parallel-axis-shift-check"
+      ]
+    },
+    {
+      "convention": "Configuration pairs belong to R³×SO(3), including orientation data invisible to degenerate physical labels. The physical label set is supp ν. Two placements agreeing there have equal translations and rotations differing by its pointwise stabilizer. Two independent support vectors give a trivial stabilizer; line support leaves rotations fixing that line, and support {0} leaves all rotations.",
+      "fixed_by": "def-cm10-rigid-body-configuration",
+      "matters_for": [
+        "def-cm10-angular-velocity",
+        "rem-cm10-orientation-charts",
+        "cex-cm10-degenerate-line-mass-singular-inertia"
+      ]
+    },
+    {
+      "convention": "The right-handed angular-velocity convention is RᵀR′=[ω]×, with [ω]×z=ω×z and spatial angular velocity ωs=Rω. The velocity field is the affine field on the image of the full placement R³, rather than only on mass-carrying labels; its uniqueness claims use this full domain.",
+      "fixed_by": "def-cm10-angular-velocity",
+      "matters_for": [
+        "pthm-cm10-kinetic-splitting",
+        "pthm-cm10-frame-covariance",
+        "rem-cm10-orientation-charts",
+        "cex-cm10-degenerate-line-mass-singular-inertia",
+        "ex-cm10-euler-angle-pole-and-orientation"
+      ]
+    },
+    {
+      "convention": "Body inertia is I=∫(|ρ|²I₃−ρρᵀ)dν; spatial inertia is RIRᵀ. About spatial p, use reference displacement a=Rᵀ(p−c) and tensor RIν(a)Rᵀ. Axis moments use unit directions. Nondegeneracy means positive mass off every line through the reference origin.",
+      "fixed_by": "def-cm10-inertia-tensor",
+      "matters_for": [
+        "pthm-cm10-kinetic-splitting",
+        "pthm-cm10-principal-axes",
+        "pthm-cm10-frame-covariance",
+        "ex-cm10-equilateral-triangle-rotational-inertia",
+        "cex-cm10-degenerate-line-mass-singular-inertia",
+        "ex-cm10-parallel-axis-shift-check"
+      ]
+    },
+    {
+      "convention": "Countable choice is explicitly assumed for the imported measurability/finiteness route used by kinetic splitting and principal axes. Frame covariance instead supplies its own polynomial-measurability and finite-integral argument in L5 without a choice hypothesis.",
+      "fixed_by": "pthm-cm10-frame-covariance",
+      "matters_for": [
+        "pthm-cm10-kinetic-splitting",
+        "pthm-cm10-principal-axes",
+        "pthm-cm10-frame-covariance"
+      ]
+    },
+    {
+      "convention": "A change of inertial frame is t′=t+b, x′=Qx+ut+a with constant Q∈SO(3), boost u, and the same reference labels and mass measure. Corresponding configuration data are evaluated at t′−b.",
+      "fixed_by": "def-cm10-rigid-body-configuration",
+      "matters_for": [
+        "pthm-cm10-frame-covariance"
+      ]
+    },
+    {
+      "convention": "Euler rotations use the ordered product Rz(φ)Ry(θ)Rz(ψ). The chart parametrization restricts θ to (0,π); the pole example explicitly extends the matrix formula to all real triples. Quaternion lifts require an initial sign choice and retain the covering supplier's countable-choice qualification.",
+      "fixed_by": "rem-cm10-orientation-charts",
+      "matters_for": [
+        "rem-cm10-orientation-charts",
+        "ex-cm10-euler-angle-pole-and-orientation"
+      ]
+    },
+    {
+      "convention": "Reference positions are read in metres, mass in kilograms, angular velocity in radians per second with dimensionless radians, inertia in kilogram metres squared, momentum in kilogram metres per second, and angular momentum in kilogram metres squared per second. Parameters and computations are model data, not measurements.",
+      "fixed_by": "post-cm10-rigid-material",
+      "matters_for": [
+        "def-cm10-angular-velocity",
+        "def-cm10-inertia-tensor",
+        "pthm-cm10-kinetic-splitting",
+        "ex-cm10-equilateral-triangle-rotational-inertia",
+        "cex-cm10-degenerate-line-mass-singular-inertia",
+        "ex-cm10-parallel-axis-shift-check"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "post-cm10-rigid-material",
+      "statement": "Adopt centred bounded finite positive-mass reference data ν and motions x(t,ρ)=c(t)+R(t)ρ with C² translation and SO(3)-valued rotation on a nondegenerate open time window. Rigidity and the physical interpretation are adopted assumptions; no dynamics or measured values are asserted.",
+      "used_by": [
+        "def-cm10-rigid-body-configuration",
+        "def-cm10-angular-velocity",
+        "def-cm10-inertia-tensor",
+        "pthm-cm10-kinetic-splitting",
+        "pthm-cm10-principal-axes",
+        "pthm-cm10-frame-covariance",
+        "rem-cm10-orientation-charts",
+        "ex-cm10-equilateral-triangle-rotational-inertia",
+        "cex-cm10-degenerate-line-mass-singular-inertia",
+        "ex-cm10-parallel-axis-shift-check"
+      ]
+    },
+    {
+      "id": "def-cm10-rigid-body-configuration",
+      "statement": "The configuration is (c(t),R(t)) in C=R³×SO(3), a six-dimensional smooth manifold. Physical placement on supp ν determines c and determines R exactly up to the support's pointwise SO(3) stabilizer; this stabilizer is trivial when the support contains two independent vectors.",
+      "used_by": [
+        "def-cm10-angular-velocity",
+        "def-cm10-inertia-tensor",
+        "pthm-cm10-kinetic-splitting",
+        "pthm-cm10-principal-axes",
+        "pthm-cm10-frame-covariance",
+        "rem-cm10-orientation-charts",
+        "ex-cm10-euler-angle-pole-and-orientation"
+      ]
+    },
+    {
+      "id": "def-cm10-inertia-tensor",
+      "statement": "Under countable choice, define I=∫(|ρ|²I₃−ρρᵀ)dν, I(t)=R(t)IR(t)ᵀ, and I(t,p)=R(t)Iν(R(t)ᵀ(p−c(t)))R(t)ᵀ. For a line through p with unit direction n, its moment is nᵀI(t,p)n.",
+      "used_by": [
+        "pthm-cm10-kinetic-splitting",
+        "pthm-cm10-principal-axes",
+        "pthm-cm10-frame-covariance",
+        "ex-cm10-equilateral-triangle-rotational-inertia",
+        "cex-cm10-degenerate-line-mass-singular-inertia",
+        "ex-cm10-parallel-axis-shift-check"
+      ]
+    },
+    {
+      "id": "def-cm10-angular-velocity",
+      "statement": "Body angular velocity is the unique ω with RᵀR′=[ω]×; spatial angular velocity is Rω. Material velocity is c′+R(ω×ρ)=c′+ωs×(p−c).",
+      "used_by": [
+        "pthm-cm10-kinetic-splitting",
+        "pthm-cm10-frame-covariance",
+        "rem-cm10-orientation-charts",
+        "ex-cm10-equilateral-triangle-rotational-inertia",
+        "cex-cm10-degenerate-line-mass-singular-inertia",
+        "ex-cm10-euler-angle-pole-and-orientation"
+      ]
+    },
+    {
+      "id": "pthm-cm10-kinetic-splitting",
+      "statement": "Under countable choice and the stated rigid-material model, all three defining integrands are integrable, and at every time P=mc′, K=½m|c′|²+½ωᵀIω, and Lc=RIω. These hold for every C² configuration path without an equation of motion.",
+      "used_by": [
+        "pthm-cm10-frame-covariance",
+        "ex-cm10-equilateral-triangle-rotational-inertia",
+        "cex-cm10-degenerate-line-mass-singular-inertia",
+        "post-cm11-torque-balance",
+        "pthm-cm11-euler-equations",
+        "pthm-cm11-torque-free-invariants",
+        "pthm-cm11-top-reduction"
+      ]
+    },
+    {
+      "id": "pthm-cm10-principal-axes",
+      "statement": "Under countable choice, I has an orthonormal eigenbasis with real nonnegative moments. Its quadratic form equals ∫|ω×ρ|²dν; spatial axis moments equal ∫|n×(x−p)|²dν and depend only on the line. A principal moment vanishes exactly when the mass is carried by its axis. Nondegeneracy implies positive moments and invertibility; line-supported mass gives singularity. Unit-direction quadratic values range between the smallest and largest moments, both attained.",
+      "used_by": [
+        "ex-cm10-equilateral-triangle-rotational-inertia",
+        "cex-cm10-degenerate-line-mass-singular-inertia",
+        "ex-cm10-parallel-axis-shift-check",
+        "pthm-cm11-euler-equations",
+        "pthm-cm11-principal-rotations",
+        "pthm-cm11-linearized-spin",
+        "pthm-cm11-nonlinear-spin-stability",
+        "ex-cm11-free-top-checks"
+      ]
+    },
+    {
+      "id": "pthm-cm10-frame-covariance",
+      "statement": "For t′=t+b and x′=Qx+ut+a, the transformed path is c̃(t′)=Qc(t′−b)+u(t′−b)+a and R̃(t′)=QR(t′−b). Body ω and I are unchanged at corresponding times; spatial ω rotates by Q and spatial inertia conjugates by Q. Material velocity transforms by Qv+u, momentum by QP+mu, centre-of-mass angular momentum by QLc, and kinetic energy has the stated boosted translational term with unchanged rotational term.",
+      "used_by": [
+        "post-cm11-torque-balance",
+        "pthm-cm11-euler-equations"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "def-countable-choice",
+      "used_for": "Exact countable-choice assumption retained by integral and covering suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Finite Borel measures, support carrying all mass, and countable additivity.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Reference measurable space and the local choice-free measurability argument.",
+      "opened": true
+    },
+    {
+      "id": "thm-generated-sigma-algebra-exists-and-is-minimal",
+      "used_for": "Frame-covariance L5: continuous polynomial preimages generate Borel measurability.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-of-a-nonnegative-simple-function",
+      "used_for": "Finite-integral bounds and direct finite-atomic integration formulas.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-lebesgue-integral",
+      "used_for": "Simple-minorant supremum construction and atomic calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-over-a-measurable-set",
+      "used_for": "Integral conventions for measure-based inertial quantities.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Signed integrability and componentwise scalar integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+      "used_for": "Momentum, kinetic and angular-momentum calculations and finite atomic sums.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Nonnegative quadratic forms and integral bounds.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-null-set-and-almost-everywhere",
+      "used_for": "Exact interpretation of the axis-support vanishing criterion.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+      "used_for": "Both directions of the principal-moment vanishing criterion.",
+      "opened": true
+    },
+    {
+      "id": "def-dirac-measure",
+      "used_for": "Triangle and line-mass constructions.",
+      "opened": true
+    },
+    {
+      "id": "prop-dirac-measure-is-a-probability-measure",
+      "used_for": "Validity and total mass of atomic model measures.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-weighted-sum-of-measures",
+      "used_for": "Finite positive weighted sums defining the examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-nonnegative-weighted-sums-of-measures",
+      "used_for": "Those finite sums are measures.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-space",
+      "used_for": "Types of rotation and inertia matrices and their Euclidean identification.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-product-and-identity-matrix",
+      "used_for": "Matrix products, tensor conjugation, outer products and quadratic forms.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Norms, orthogonality and component calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-inner-product-space",
+      "used_for": "Positive definiteness and real self-adjointness.",
+      "opened": true
+    },
+    {
+      "id": "def-orthogonal-vectors-sets-and-orthonormal-bases",
+      "used_for": "Principal-basis terminology and orthonormal expansions.",
+      "opened": true
+    },
+    {
+      "id": "def-self-adjoint-and-normal-endomorphism",
+      "used_for": "Hypothesis of the real spectral theorem.",
+      "opened": true
+    },
+    {
+      "id": "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+      "used_for": "Existence of an orthonormal principal eigenbasis.",
+      "opened": true
+    },
+    {
+      "id": "thm-invertible-matrix-theorem",
+      "used_for": "Trivial kernel implies invertibility of nondegenerate inertia.",
+      "opened": true
+    },
+    {
+      "id": "def-cross-product-in-r3",
+      "used_for": "Right-handed cross-product formulas.",
+      "opened": true
+    },
+    {
+      "id": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+      "used_for": "Axis invariance, rotation identities and angular-momentum algebra.",
+      "opened": true
+    },
+    {
+      "id": "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+      "used_for": "Inertia quadratic identity and cross-product vanishing tests.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-sum-laws",
+      "used_for": "Explicit matrix, trigonometric and atomic computations.",
+      "opened": true
+    },
+    {
+      "id": "def-interval",
+      "used_for": "Nondegenerate time domains and interior pole evaluation.",
+      "opened": true
+    },
+    {
+      "id": "def-derivative",
+      "used_for": "Entrywise curve derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-valued-derivative-and-integral",
+      "used_for": "Vector curve derivatives used by the kinematic suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-euclidean-maps-and-diffeomorphisms",
+      "used_for": "C² regularity and local inverse terminology.",
+      "opened": true
+    },
+    {
+      "id": "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+      "used_for": "Regularity of transformed configuration paths.",
+      "opened": true
+    },
+    {
+      "id": "def-directional-and-partial-derivatives",
+      "used_for": "Euler-pole partial derivatives.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Euler-pole Jacobian columns.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Noninjective differential at the Euler pole.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule-for-total-derivatives",
+      "used_for": "Frame reparametrization and local inverse differential conditions.",
+      "opened": true
+    },
+    {
+      "id": "thm-smooth-inverse-function-theorem-on-manifolds",
+      "used_for": "Smooth local Euler charts when sin θ is nonzero.",
+      "opened": true
+    },
+    {
+      "id": "thm-rational-points-and-boxes-in-rn",
+      "used_for": "Countable null-basis argument establishing that supp ν carries all mass.",
+      "opened": true
+    },
+    {
+      "id": "def-sine-and-cosine-by-power-series",
+      "used_for": "Exact trigonometric functions in rotations and examples.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-addition-formulas",
+      "used_for": "Coordinate-rotation composition and triangle values.",
+      "opened": true
+    },
+    {
+      "id": "cor-trigonometric-parity-and-pythagorean-identity",
+      "used_for": "Norm preservation, triangle sums and rotation calculations.",
+      "opened": true
+    },
+    {
+      "id": "def-pi-via-first-positive-cosine-zero",
+      "used_for": "Exact angle constant in triangle and chart domains.",
+      "opened": true
+    },
+    {
+      "id": "cor-pi-is-the-first-positive-sine-zero",
+      "used_for": "Positive sine on (0,π).",
+      "opened": true
+    },
+    {
+      "id": "thm-pi-zero-and-period-characterizations",
+      "used_for": "The common period used in the triangle's triple-angle calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "used_for": "Selecting cos(2π/3)=−½ and the positive sine value.",
+      "opened": true
+    },
+    {
+      "id": "ex-su-two-to-so-three-as-a-covering-homomorphism",
+      "used_for": "The rotation supplier's exact two-sheeted quaternion cover and its countable-choice qualification.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "pthm-cm10-frame-covariance",
+      "concern": "The Tong reference identifies 'Section 3.1.2, printed pages 49-50' as the discussion of body and space angular-velocity descriptions. In the cited text, inspected through /tmp/batch26-tong.pdf, §3.1.2 is Path Ordered Exponentials. The comparison of the two rate-matrix orders is in §3.1.1, printed pages 47-48, particularly Eq. (3.10) and its following paragraph. The local deduction is sound; the locator is inaccurate.",
+      "severity": "presentation"
+    },
+    {
+      "id": "pthm-cm10-kinetic-splitting",
+      "concern": "The Tong reference attributes Eqs. (3.27)-(3.30), including kinetic splitting, to §3.2.2 and printed pages 51-53. Inspection of /tmp/batch26-tong.pdf shows Eqs. (3.27)-(3.28) in §3.2.2 on printed page 53, but Eqs. (3.29)-(3.30), including the centre-of-mass kinetic split, in §3.3 on printed page 54 (PDF page 60). The reference does not accurately locate the claimed source content.",
+      "severity": "presentation"
+    },
+    {
+      "id": "cex-cm10-degenerate-line-mass-singular-inertia",
+      "concern": "The Tong reference locates Eq. (3.22) and its equality-case discussion on printed page 52 (PDF page 58). In /tmp/batch26-tong.pdf they are on printed page 51 (PDF page 57). The counterexample itself correctly retains the singular-inertia case.",
+      "severity": "presentation"
+    },
+    {
+      "id": "pthm-cm10-principal-axes",
+      "concern": "The Stationary points remark says: 'stationarity does not by itself single out geometric axes; the extremal clause (e) does.' This last wording needs qualification: for I=λI₃, the very case mentioned immediately before it, every unit vector attains both extrema. Repeated maximal or minimal moments likewise determine an eigenspace rather than a unique axis. Clause (e) itself is correctly stated and proved.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "cm10-rigid-body-configuration-and-inertia",
+      "to": "cm-math-rotation-double-cover",
+      "faithful": true,
+      "note": "Quaternion map, lift equation, prescribed initial value and global sign ambiguity agree with the suppliers; the remark retains countable choice."
+    },
+    {
+      "from": "cm10-rigid-body-configuration-and-inertia",
+      "to": "cm-math-verification",
+      "faithful": true,
+      "note": "Shifted inertia uses the reference-point definition with componentwise finite integrals; principal axes explicitly cites shifted-integral finiteness."
+    },
+    {
+      "from": "cm10-rigid-body-configuration-and-inertia",
+      "to": "cm03-momentum-work-and-energy-balances",
+      "faithful": true,
+      "note": "Particle-frame transformations are an explanatory comparison, not a premise importing particle dynamics. Momentum and kinetic boost laws agree in the overlapping point-mass specialization."
+    },
+    {
+      "from": "cm10-rigid-body-configuration-and-inertia",
+      "to": "cm01-framework-quantities-and-geometry",
+      "faithful": true,
+      "note": "Uses the exact adapted inertial charts, Galilean changes, open time domains and SI dimension conventions; the rigid-material branch is distinguished from the finite-particle branch."
+    },
+    {
+      "from": "cm10-rigid-body-configuration-and-inertia",
+      "to": "cm-math-geometry",
+      "faithful": true,
+      "note": "SO(3) group, compact three-dimensional manifold, affine frame changes and independent-vector stabilizer results are used within their hypotheses."
+    },
+    {
+      "from": "cm10-rigid-body-configuration-and-inertia",
+      "to": "cm-math-rigid",
+      "faithful": true,
+      "note": "Kinetic splitting, principal axes and angular velocity preserve centredness, bounded finite positive mass, signs and degeneracy. The stronger supplier choice hypothesis is carried, or replaced by the explicit local argument in covariance L5."
+    },
+    {
+      "from": "cm10-rigid-body-configuration-and-inertia",
+      "to": "cm-math-balances",
+      "faithful": true,
+      "note": "Principal-axis stationarity uses the exact derivative-of-pairings rule. No dynamical balance is inferred from that mathematical differentiation supplier."
+    },
+    {
+      "from": "cm10-rigid-body-configuration-and-inertia-examples",
+      "to": "cm-math-rigid",
+      "faithful": true,
+      "note": "Atomic inertia and coordinate-rotation computations agree with the suppliers. The pole example explicitly extends the Euler formula beyond the supplier's restricted parameter domain."
+    },
+    {
+      "from": "cm10-rigid-body-configuration-and-inertia-examples",
+      "to": "cm01-framework-quantities-and-geometry",
+      "faithful": true,
+      "note": "Model parameters retain the framework's quantity interpretation; no measurements or empirical precision are claimed."
+    },
+    {
+      "from": "cm10-rigid-body-configuration-and-inertia-examples",
+      "to": "cm-math-geometry",
+      "faithful": true,
+      "note": "Coordinate rotations take values in the same SO(3); nondegeneracy and physical support are consistent with the configuration definitions."
+    },
+    {
+      "from": "cm10-rigid-body-configuration-and-inertia-examples",
+      "to": "cm-math-verification",
+      "faithful": true,
+      "note": "Parallel-axis application retains centredness and the inherited integral qualification. Spatial conjugation and the independent vertex finite sum agree."
+    },
+    {
+      "from": "cm11-rigid-body-dynamics-and-stability",
+      "to": "cm10-rigid-body-configuration-and-inertia",
+      "faithful": true,
+      "note": "Inspected downstream uses preserve Lc=RIω, body/spatial conventions, C² regularity, countable choice and nondegeneracy before inversion. Positive orientation of principal bases is imposed additionally. Torque and pivot balances enter through separate postulates."
+    },
+    {
+      "from": "cm11-rigid-body-dynamics-and-stability-examples",
+      "to": "cm10-rigid-body-configuration-and-inertia",
+      "faithful": true,
+      "note": "The examples declare positive principal inertia data and use the same nondegeneracy, angular-velocity and kinetic-energy meanings; the page explicitly supplies numerical SI normalization."
+    }
+  ]
+}

@@ -31,7 +31,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Theorem 3.1-3.2 pp. 90-92 and Section 3.3 pp. 92-95 (spectral measures, invariant probabilities and stationary states)"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Theorems 3.1-3.2 pp. 90-92 (spectral calculus), Section 5.1 pp. 123-125, especially equation (5.4) p. 124 (unitary evolution and energy expectation conservation), and Theorem 8.1 p. 174 (commuting-observable expectation conservation); the full spectral-law and density-operator extension is proved locally"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
     - title: "MIT 8.05 Quantum Physics II (Fall 2013), Chapter 6 'Quantum Dynamics' (lectures 12-16), Section 2.1 'Unitary time evolution' pp. 10-17 and Section 3.2 'Heisenberg equation of motion' pp. 20-22 (conservation of the norm under unitary evolution and operators conserved when they commute with the Hamiltonian)"
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/79a8091ef4f18d8e3ff76a097e8db33c_MIT8_05F13_Chap_06.pdf"

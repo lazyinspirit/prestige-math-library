@@ -53,9 +53,7 @@ physical_scope: "The declared short-range scattering model with a real bounded
   asserted."
 sources:
   references:
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections
-        12.5-12.5.1 printed pages 275-281 (PDF pages 283-289): partial-wave
-        expansions, phase shifts and scattering at low energy"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.5, printed pages 273-278 (PDF pages 281-286)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "R. Fitzpatrick, Quantum Mechanics (University of Texas at Austin,
         author-hosted course text), Sections 15.5-15.6 printed pages 217-219:

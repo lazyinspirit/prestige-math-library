@@ -83,7 +83,7 @@ sources:
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
     - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics
         (title page last edited September 1, 2026), Chapter 4 Section 4.4, Eq.
-        (4.66) and its derivation, chapter pages 9-11 (PDF pages 63-65): Euler
+        (4.66) and its derivation, chapter page 15 (PDF page 69): Euler
         equations
         $I_j\\dot\\omega_j+(I_{j''}-I_{j'})\\omega_{j'}\\omega_{j''}=\\tau_j$
         and the free-symmetric-top specialisation"
@@ -194,20 +194,8 @@ value.
 
 ## Remarks
 
-- **What is a theorem and what is an assumption.** The balance $L_c'=\tau$ is
-  adopted in [[post-cm11-torque-balance]]; clauses 1-4 here are its
-  consequences in the body frame and in the torque-free case, and clause 5
-  records that the formulation is consistent with the framework's frame
-  changes. No clause produces $\tau$ from a force system.
+- **What is a theorem and what is an assumption.** The balance $L_c'=\tau$ is adopted in [[post-cm11-torque-balance]]; clauses 1-4 here are its consequences in the body frame and in the torque-free case, and clause 5 records that the formulation is consistent with the framework's frame changes. No clause produces $\tau$ from a force system.
 
-- **Where the nondegeneracy is used.** Clauses 1-3 and 5 hold for every model
-  of the branch, including degenerate ones; only clause 4 uses the
-  invertibility of $I$, and the items that invert $I$ on this page state that
-  hypothesis explicitly.
+- **Where the nondegeneracy is used.** Clauses 1-3 and 5 hold for every model of the branch, including degenerate ones; only clause 4 uses the invertibility of $I$, and the items that invert $I$ on this page state that hypothesis explicitly.
 
-- **The rotational power identity.** Clause 3 says that the rate of change of
-  the rotational kinetic energy equals the power $\omega\cdot R^{\mathsf T}\tau$
-  developed by the external torque; in the torque-free branch the rotational
-  kinetic energy is a constant of the motion. This is a consequence of the
-  adopted balance, not a separate assumption, and it does not by itself
-  determine the motion.
+- **The rotational power identity.** Clause 3 says that the rate of change of the rotational kinetic energy equals the power $\omega\cdot R^{\mathsf T}\tau$ developed by the external torque; in the torque-free branch the rotational kinetic energy is a constant of the motion. This is a consequence of the adopted balance, not a separate assumption, and it does not by itself determine the motion.

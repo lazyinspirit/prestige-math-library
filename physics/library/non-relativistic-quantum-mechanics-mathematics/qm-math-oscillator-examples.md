@@ -37,7 +37,7 @@ orthonormal basis, not about measured counts.
 [[ex-nrqm-oscillator-formal-nonnormalizable-solution]] exhibits the classical
 formal second solution $u_2(y)=e^{-y^2/2}\int_0^ye^{t^2}dt$ of the ground-state
 equation $u''=(y^2-1)u$: it has constant Wronskian $g_0u_2'-g_0'u_2=\pi^{-1/4}$
-against the Gaussian $g_0$, grows like $e^{y^2/2}$ and is therefore not in
+against the Gaussian $g_0$, satisfies $|u_2(y)|^2\ge e^{y^2-4y+2}$ for $y\ge1$ and is therefore not in
 $L^2(\mathbb R,dy)$, and every $C^2\cap L^2$ solution of the equation is a
 constant multiple of $g_0$. This is the analytic reason the $L^2$
 eigenfunction at the bottom of the spectrum is the normalizable Gaussian and

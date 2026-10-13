@@ -57,7 +57,7 @@ Then:
    $X_{tq}$ is the $t$-derivative of $X_q$ and $X_{qq}[v]$ is the matrix with entries
    $\sum_j\partial_j\partial_iX_k(t,q)v_j$, all evaluated at $(t,q)$ and $L_x,L_v$ at
    $(t,X(t,q),w)$;
-4. **(transport)** let $q:[a,b]\to\mathbb R^n$ be a $C^2$ curve with
+4. **(transport)** let $a<b$ be reals and let $q:[a,b]\to\mathbb R^n$ be a $C^2$ curve with
    $(t,q(t),q'(t))\in O$ for all $t\in[a,b]$, put $x(t):=X(t,q(t))$, and define
    $P(t):=\widetilde L_v(t,q(t),q'(t))$ and $p(t):=L_v(t,x(t),x'(t))$, which are $C^1$. Then
 
@@ -69,37 +69,19 @@ $$\frac{d}{dt}P(t)-\widetilde L_q\bigl(t,q(t),q'(t)\bigr) =X_q\bigl(t,q(t)\bigr)
 
 ## Facts & Assumptions
 
-**Given:** The open sets $\Omega,O_x$, the $C^3$ map $X$ with everywhere invertible $X_q$, the
-$C^2$ Lagrangian $L$, a $C^2$ curve $q:[a,b]\to\mathbb R^n$ with $(t,q(t),q'(t))\in O$, and the
-shorthand $x(t):=X(t,q(t))$.
+**Given:** The open sets $\Omega,O_x$, the $C^3$ map $X$ with everywhere invertible $X_q$, the $C^2$ Lagrangian $L$, a $C^2$ curve $q:[a,b]\to\mathbb R^n$ with $(t,q(t),q'(t))\in O$, and the shorthand $x(t):=X(t,q(t))$.
 
-[F1] Compositions and finite products of $C^r$ maps are $C^r$
-([[thm-ck-euclidean-maps-closed-under-algebra-and-composition]],
-[[def-ck-euclidean-maps-and-diffeomorphisms]]), and a map with continuous partial derivatives is
-totally differentiable with the Jacobian as derivative
-([[thm-continuous-partial-derivatives-imply-total-differentiability]],
-[[def-total-derivative-in-euclidean-space]], [[def-jacobian-matrix-and-gradient]],
-[[def-ck-and-multi-index-notation-in-several-variables]]).
+[F1] Compositions and finite products of $C^r$ maps are $C^r$ ([[thm-ck-euclidean-maps-closed-under-algebra-and-composition]], [[def-ck-euclidean-maps-and-diffeomorphisms]]), and a map with continuous partial derivatives is totally differentiable with the Jacobian as derivative ([[thm-continuous-partial-derivatives-imply-total-differentiability]], [[def-total-derivative-in-euclidean-space]], [[def-jacobian-matrix-and-gradient]], [[def-ck-and-multi-index-notation-in-several-variables]]).
 
-[F2] The chain rule for total derivatives ([[thm-chain-rule-for-total-derivatives]]) gives the
-derivatives of all composites below; in particular
-$x'(t)=X_t(t,q(t))+X_q(t,q(t))q'(t)$, so that $x'(t)=w(t,q(t),q'(t))$, and
-$\frac{d}{dt}X_q(t,q(t))=X_{qt}(t,q(t))+X_{qq}(t,q(t))[q'(t)]$ as matrices.
+[F2] The chain rule for total derivatives ([[thm-chain-rule-for-total-derivatives]]) gives the derivatives of all composites below; in particular $x'(t)=X_t(t,q(t))+X_q(t,q(t))q'(t)$, so that $x'(t)=w(t,q(t),q'(t))$, and $\frac{d}{dt}X_q(t,q(t))=X_{qt}(t,q(t))+X_{qq}(t,q(t))[q'(t)]$ as matrices.
 
-[F3] Mixed second partials of a $C^2$ function commute
-([[thm-clairaut-schwarz-mixed-partials]]): since $X$ is $C^3$, its mixed second partials are
-$C^1$ and satisfy $X_{qt}=X_{tq}$ and $\partial_j\partial_iX_k=\partial_i\partial_jX_k$.
+[F3] Mixed second partials of a $C^2$ function commute ([[thm-clairaut-schwarz-mixed-partials]]): since $X$ is $C^3$, its mixed second partials are $C^1$ and satisfy $X_{qt}=X_{tq}$ and $\partial_j\partial_iX_k=\partial_i\partial_jX_k$.
 
-[F4] A square matrix $A$ is invertible if and only if $A^{\mathsf T}u=0$ implies $u=0$: indeed
-$A^{\mathsf T}u=0$ means $u\cdot Aw=(A^{\mathsf T}u)\cdot w=0$ for all $w$, so $u$ annihilates
-the image of the surjective $A$ and hence $u=0$; conversely the transpose of an invertible matrix
-is invertible ([[def-invertible-euclidean-linear-map]], [[def-matrix-product-and-identity-matrix]],
-[[def-linear-map]], [[def-vector-valued-derivative-and-integral]], [[def-interval]]).
+[F4] If a square matrix $A$ is invertible, then $A^{\mathsf T}u=0$ implies $u=0$: indeed $A^{\mathsf T}u=0$ gives $u\cdot Aw=0$ for all $w$, and surjectivity of $A$ gives $u\cdot u=0$, hence $u=0$ ([[def-invertible-euclidean-linear-map]], [[def-matrix-product-and-identity-matrix]], [[def-linear-map]], [[def-vector-valued-derivative-and-integral]], [[def-interval]]).
 
 ## Proof
 
-**Proof technique:** direct; compute the transformed gradients and compare the two
-Euler–Lagrange expressions along a curve, using the equality of mixed partials of $X$.
+**Proof technique:** direct; compute the transformed gradients and compare the two Euler–Lagrange expressions along a curve, using the equality of mixed partials of $X$.
 
 1.1 $O$ is the preimage under the continuous map $(t,q,v)\mapsto(t,X(t,q),X_t(t,q)+X_q(t,q)v)$ of the open set $O_x$, hence open; and $\widetilde L$ is the composite of the $C^2$ map $L$ with that map, which is $C^2$ because $X$ is $C^3$ and $v$ enters linearly. This proves clause 1. [F1, F2, algebra]
 
@@ -113,9 +95,6 @@ Euler–Lagrange expressions along a curve, using the equality of mixed partials
 
 ## Remarks
 
-- The transformation is restricted to the configuration variables; no transformation of the time
-  variable is performed here. The general point transformation that also changes time, together
-  with the resulting Noether charge, is treated in
-  [[thm-cm-point-noether-identity-with-time-reparametrization]].
+- The transformation is restricted to the configuration variables; no transformation of the time variable is performed here. The general point transformation that also changes time, together with the resulting Noether charge, is treated in [[thm-cm-point-noether-identity-with-time-reparametrization]].
 
 - The $C^3$ hypothesis makes $(t,q,v)\mapsto(t,X,X_t+X_qv)$ a $C^2$ map and hence ensures the transformed Lagrangian is $C^2$. The mixed second derivatives used in transport already commute for $C^2$ $X$; that weaker assumption alone does not ensure the claimed $C^2$ transformed chart.

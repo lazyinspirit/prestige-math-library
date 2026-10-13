@@ -6,12 +6,12 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 13
-physical_scope: "Smooth classical domain of the framework in either presentation of the adopted field law: an oriented time-oriented smooth Lorentzian four-manifold, a constant cosmological parameter, a smooth stress-energy tensor on the model's matter domain, and the field equation G_{ab}+Lambda g_{ab}=kappa T_{ab}. The conclusions are conditional consequences of the adopted field law; they assert no existence, no propagation and no empirical fact, and the energy-condition clauses are additional assumptions available to models, not consequences of the field law."
+physical_scope: "Smooth classical domain of the framework in either presentation of the adopted field law: an oriented time-oriented smooth Lorentzian four-manifold, a constant cosmological parameter, a smooth stress-energy tensor on the model's matter domain, and the field equation G_{ab}+Lambda g_{ab}=kappa T_{ab}. The conclusions are conditional consequences of the adopted field law; they assert no existence, no propagation and no empirical fact, and none of the four energy conditions is universally forced by the field equation; particular matter models may imply some, and otherwise they are additional assumptions."
 provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [post-gr-einstein-field-law, post-gr-classical-gravitational-action, post-gr-spacetime-and-classical-domain, post-gr-field-and-matter-assumptions, thm-gr-second-bianchi-and-divergence-free-einstein, def-gr-curvature-tensor-and-derived-tensors, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-stress-energy-tensor-field, def-gr-energy-conditions, def-gr-perfect-fluid-matter-model, def-gr-smooth-lorentzian-objects, def-gr-inverse-metric-and-musical-isomorphisms, def-gr-smooth-covariant-two-tensor-field, def-gr-observer-and-rest-space, lem-gr-observer-projection-decomposition, lem-gr-future-causal-classification-by-a-timelike-field, thm-gram-schmidt-orthonormalisation, def-gr-si-unit-and-coordinate-conventions, def-gr-tensor-fields-and-components]
+deps: [post-gr-einstein-field-law, post-gr-classical-gravitational-action, post-gr-spacetime-and-classical-domain, post-gr-field-and-matter-assumptions, thm-gr-second-bianchi-and-divergence-free-einstein, def-gr-curvature-tensor-and-derived-tensors, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-stress-energy-tensor-field, def-gr-energy-conditions, def-gr-perfect-fluid-matter-model, def-gr-smooth-lorentzian-objects, def-gr-inverse-metric-and-musical-isomorphisms, def-gr-smooth-covariant-two-tensor-field, def-gr-observer-and-rest-space, lem-gr-observer-projection-decomposition, lem-gr-future-causal-classification-by-a-timelike-field, thm-gram-schmidt-orthonormalisation, def-gr-si-unit-and-coordinate-conventions, def-gr-tensor-fields-and-components, thm-gr-curvature-tensoriality-and-coordinate-formula]
 dependency_roles:
   post-gr-einstein-field-law: physical-assumption
   post-gr-classical-gravitational-action: formulation-prerequisite
@@ -33,6 +33,7 @@ dependency_roles:
   thm-gram-schmidt-orthonormalisation: mathematical-premise
   def-gr-si-unit-and-coordinate-conventions: formulation-prerequisite
   def-gr-tensor-fields-and-components: mathematical-premise
+  thm-gr-curvature-tensoriality-and-coordinate-formula: mathematical-premise
 sources:
   references:
     - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 6.4 'Postulates of General Relativity': the symmetric conserved tensor T_{ab} and the Einstein equation, printed pp. 66-68 (PDF pp. 67-69)"
@@ -67,7 +68,9 @@ $$G_{ab}+\Lambda g_{ab}=\kappa T_{ab}\qquad\text{on }U .$$
 
 **(a) Necessary conservation.** $\nabla^aT_{ab}=0$ on $U$. Consequently a
 prescribed smooth symmetric $T$ with $\nabla^aT_{ab}\neq0$ at some point cannot
-satisfy the field law there for any metric on which $T$ is smooth.
+satisfy the field law there with that proposed metric; the divergence is
+computed using its metric-selected connection, and may change if the metric
+is changed.
 
 **(b) Trace.** On $U$, $g^{ab}T_{ab}$ satisfies
 $-S+4\Lambda=\kappa\,g^{ab}T_{ab}$.
@@ -92,13 +95,15 @@ fails, since $G+\Lambda g=\Lambda g\neq0$.
 
 **(e) Energy conditions are additional assumptions.** Neither adopted
 presentation of the field law contains a clause imposing any of the weak, null,
-dominant or strong energy conditions of [[def-gr-energy-conditions]]; each of
-the four conditions is available to a model only as a further assumption in the
-sense of clause (iv) of [[post-gr-field-and-matter-assumptions]], and the field
-law (a)-(d) derives none of them.
+dominant or strong energy conditions of [[def-gr-energy-conditions]]; none of
+the four is a universal consequence of that equation, as the direct-equation
+perfect-fluid model in the proof shows. Particular matter models may imply
+energy conditions; when not derived, they are additional assumptions in the
+sense of clause (iv) of [[post-gr-field-and-matter-assumptions]].
 
-**(f) Perfect-fluid rest-frame reading.** Let $(\varepsilon,p,n,T)$ be a
-perfect-fluid model on its matter domain
+**(f) Perfect-fluid rest-frame reading.** Let $(\varepsilon,p,n)$ be a
+perfect-fluid model on its matter domain, with derived tensor
+$T=(\varepsilon+p)n^\flat\otimes n^\flat+pg$
 ([[def-gr-perfect-fluid-matter-model]]), and at any $p\in U$ let
 $(e_0,e_1,e_2,e_3)$ be a $g_p$-orthonormal basis with $e_0=n_p$. Then
 $T_{AB}=\operatorname{diag}(\varepsilon,p,p,p)$ in that basis, and at $p$
@@ -128,6 +133,8 @@ continuity extensions to the causal cone are not assumed.
 
 [L5] The four energy conditions are the pointwise inequalities of [[def-gr-energy-conditions]]: WEC $T(v,v)\ge0$ for timelike $v$; NEC $T(v,v)\ge0$ for null $v$; DEC $-\sharp(T(v,\cdot))\in\operatorname{cl}(C_p^+)$ for future timelike $v$; SEC $(T-\tfrac12(\operatorname{tr}_gT)g)(v,v)\ge0$ for timelike $v$.
 
+[L6] The coordinate curvature formula of [[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (b) applies to every smooth Lorentzian metric with its metric-selected connection; contraction gives $\operatorname{Ric}_{bd}=R^a{}_{bad}$, $S=g^{bd}\operatorname{Ric}_{bd}$ and $G=\operatorname{Ric}-\tfrac12Sg$.
+
 ## Proof
 
 **Proof technique:** direct; differentiate the field equation using the contracted Bianchi identity, contract traces, test the flat metric, and evaluate the quadratic inequalities of a rest-frame diagonal tensor.
@@ -138,15 +145,15 @@ continuity extensions to the causal cone are not assumed.
 
 1.3 (Flat solution.) By [L3], the flat metric has $\Gamma=0$, hence $R=0$, $\operatorname{Ric}=0$, $S=0$ and $G=0$; with $T=0$ and $\Lambda=0$ the field equation reads $0=0$, while for $\Lambda\neq0$ it would require $\Lambda g_{ab}=0$, which fails because $g$ is nondegenerate; this is (d). [L3, algebra]
 
-1.4 (Rest-frame components.) By [L4] choose the orthonormal basis with $e_0=n_p$ and write $T_{AB}=T(e_A,e_B)$. From $T_{ab}=(\varepsilon+p)n_an_b+pg_{ab}$ ([[def-gr-perfect-fluid-matter-model]]) and $n=n_p=e_0$: $T_{00}=(\varepsilon+p)(-1)^2+p(-1)=\varepsilon$, $T_{0i}=0$, $T_{ij}=p\,\delta_{ij}$; so $T_{AB}=\operatorname{diag}(\varepsilon,p,p,p)$. For a vector $v=v^0e_0+\mathbf v$ with $\mathbf v=\sum_{i\ge1}v^ie_i$, $T(v,v)=\varepsilon(v^0)^2+p|\mathbf v|^2$. [L4, algebra]
+1.4 (Rest-frame components.) By [L4] choose the orthonormal basis with $e_0=n_p$ and write $T_{AB}=T(e_A,e_B)$ and let $e^A$ be the dual covectors, $e^A(e_B)=\delta^A{}_B$. From $T_{ab}=(\varepsilon+p)n_an_b+pg_{ab}$ ([[def-gr-perfect-fluid-matter-model]]) and $n=n_p=e_0$: $T_{00}=(\varepsilon+p)(-1)^2+p(-1)=\varepsilon$, $T_{0i}=0$, $T_{ij}=p\,\delta_{ij}$; so $T_{AB}=\operatorname{diag}(\varepsilon,p,p,p)$. For a vector $v=v^0e_0+\mathbf v$ with $\mathbf v=\sum_{i\ge1}v^ie_i$, $T(v,v)=\varepsilon(v^0)^2+p|\mathbf v|^2$. [L4, algebra]
 
 2.1 (WEC and NEC.) A vector $v\neq0$ is timelike exactly when $(v^0)^2>|\mathbf v|^2$ and null exactly when $(v^0)^2=|\mathbf v|^2$ with $v\neq0$ ([[def-gr-smooth-lorentzian-objects]]). Writing $s:=|\mathbf v|/|v^0|\in[0,1)$ for timelike $v$, $T(v,v)=(v^0)^2[\varepsilon+ps^2]$. This is nonnegative for all such $v$ if and only if $\varepsilon\ge0$ (take $\mathbf v=0$) and $\varepsilon+p\ge0$ (let $s\to1$, i.e. approach the null cone); conversely these inequalities make every value nonnegative. For null $v$, $T(v,v)=(v^0)^2(\varepsilon+p)$, so the NEC is exactly $\varepsilon+p\ge0$. [step 1.4, L5, algebra]
 
-2.2 (DEC.) By [L5] and [L2], the DEC requires $w:=-\sharp(T(v,\cdot))$ to be future causal for every future timelike $v$. In the orthonormal basis, $T(v,\cdot)=\varepsilon v^0\,dx^0+p\sum_iv^i\,dx^i$ and $\sharp$ raises with $\operatorname{diag}(-1,1,1,1)$, so $w=\varepsilon v^0e_0-p\sum_iv^ie_i$. Since $v$ is future and $e_0=n_p$ is the future unit normal of the rest frame, $v^0>0$. By [[def-gr-energy-conditions]] and [[lem-gr-future-causal-classification-by-a-timelike-field]], $w$ lies in $\operatorname{cl}(C_p^+)$ exactly when $w=0$ or $w$ is future-directed and causal; for $w=\varepsilon v^0e_0-p\sum_iv^ie_i$ this is exactly the pair of conditions $\varepsilon v^0\ge0$ and $(\varepsilon v^0)^2\ge p^2|\mathbf v|^2$. Requiring them for all future timelike $v$ forces $\varepsilon\ge0$ (take $\mathbf v=0$, so that $w=\varepsilon e_0$ must be $0$ or future causal) and $\varepsilon^2\ge p^2$, that is $\varepsilon\ge|p|$ (let $|\mathbf v|/v^0\to1$); conversely $\varepsilon\ge|p|$ gives both conditions. This is the DEC equivalence. [step 1.4, L5, algebra]
+2.2 (DEC.) By [L5] and [L2], the DEC requires $w:=-\sharp(T(v,\cdot))$ to lie in the closed future cone, including zero, for every future timelike $v$. In the orthonormal basis, $T(v,\cdot)=\varepsilon v^0\,e^0+p\sum_iv^i\,e^i$ and $\sharp$ raises with $\operatorname{diag}(-1,1,1,1)$, so $w=\varepsilon v^0e_0-p\sum_iv^ie_i$. Since $v$ is future and $e_0=n_p$ is the future unit normal of the rest frame, $v^0>0$. By [[def-gr-energy-conditions]] and [[lem-gr-future-causal-classification-by-a-timelike-field]], $w$ lies in $\operatorname{cl}(C_p^+)$ exactly when $w=0$ or $w$ is future-directed and causal; for $w=\varepsilon v^0e_0-p\sum_iv^ie_i$ this is exactly the pair of conditions $\varepsilon v^0\ge0$ and $(\varepsilon v^0)^2\ge p^2|\mathbf v|^2$. Requiring them for all future timelike $v$ forces $\varepsilon\ge0$ (take $\mathbf v=0$, so that $w=\varepsilon e_0$ must be $0$ or future causal) and $\varepsilon^2\ge p^2$, that is $\varepsilon\ge|p|$ (let $|\mathbf v|/v^0\to1$); conversely $\varepsilon\ge|p|$ gives both conditions. This is the DEC equivalence. [step 1.4, L5, algebra]
 
 3.1 (SEC.) By [L5], with $\operatorname{tr}_gT=g^{ab}T_{ab}=-\varepsilon+3p$ (from step 1.4), the tensor $T-\tfrac12(\operatorname{tr}_gT)g$ has rest-frame components $\tfrac{\varepsilon+3p}{2}$ in the $(0,0)$ slot and $\tfrac{\varepsilon-p}{2}\delta_{ij}$ in the spatial slots, so its value on $v=v^0e_0+\mathbf v$ is $\tfrac{(v^0)^2}{2}\bigl[(\varepsilon+3p)+(\varepsilon-p)s^2\bigr]$ with $s=|\mathbf v|/|v^0|\in[0,1)$. This is nonnegative for every $s\in[0,1)$ exactly when $\varepsilon+3p\ge0$ (at $s=0$) and $2(\varepsilon+p)\ge0$ (letting $s\to1$), which is the SEC equivalence; for $\varepsilon>0$, $p=-\varepsilon$ the conditions NEC, WEC and DEC hold with the equalities $\varepsilon+p=0$ and $\varepsilon=|p|$, while SEC fails since $\varepsilon+3p=-2\varepsilon<0$. [step 1.4, step 2.1, L5, algebra]
 
-4.1 (Energy conditions by inspection.) The adopted field law is the equation displayed in the statement, equivalently the displayed equation of [[post-gr-einstein-field-law]] clause (i) or the variational principle of [[post-gr-classical-gravitational-action]] clause (iv); neither adopted formulation contains a clause imposing a pointwise inequality on $T$. By [[def-gr-energy-conditions]] each of the four conditions is a separate assumption, so none is derived by clauses (a)-(d) and the four equivalences of (f) concern the perfect-fluid tensor form only. This is (e), and with steps 1.4-3.1 it completes the proof. [given, L5, algebra] ∎
+4.1 (Energy conditions are not universal consequences.) The absence of inequalities from the adopted law is a formulation fact; nonimplication also needs a model. On $M=\mathbb R^4$ with coordinates $(t,x^1,x^2,x^3)$, choose $L>0$, put $a(t)=\exp((t/L)^2)$ and $H=a'/a=2t/L^2$, and set $g=-dt^2+a^2\sum_i(dx^i)^2$, $N=n=\partial_t$, $\Lambda=0$. This metric is smooth Lorentzian and $n$ is future unit timelike. Its only nonzero Christoffel symbols are $\Gamma^0{}_{ij}=aa'\delta_{ij}$ and $\Gamma^i{}_{0j}=\Gamma^i{}_{j0}=H\delta^i{}_j$. Substitution into the coordinate curvature formula of [[thm-gr-curvature-tensoriality-and-coordinate-formula]] and contraction give $\operatorname{Ric}_{00}=-3(H'+H^2)$, $\operatorname{Ric}_{0i}=0$, $\operatorname{Ric}_{ij}=a^2(H'+3H^2)\delta_{ij}$, hence $S=6H'+12H^2$, $G_{00}=3H^2$, $G_{ij}=-a^2(2H'+3H^2)\delta_{ij}$. Choose the prescribed perfect fluid $\varepsilon=3H^2/\kappa$, $p=-(2H'+3H^2)/\kappa$ and $T=(\varepsilon+p)n^\flat\otimes n^\flat+pg$. Then $G=\kappa T$, and its fluid equations hold: acceleration is zero, $\vartheta=3H$, spatial pressure gradient is zero, and $D\varepsilon+(\varepsilon+p)\vartheta=6HH'/\kappa-6HH'/\kappa=0$. Thus it is an admissible direct-equation model, with no energy condition additionally adopted. At $t=0$, $\varepsilon=0$ and $p=-4/(\kappa L^2)<0$; steps 2.1–3.1 show that WEC, NEC, DEC and SEC all fail there. This proves (e) without inferring nonimplication merely from the wording of a postulate. In length coordinates $L$ has dimension $\mathrm m$, $H$ dimension $\mathrm m^{-1}$, and $\varepsilon,p$ have the required energy-density units; the construction reports no observation. [step 2.1, step 2.2, step 3.1, L1, L2, L6, given, construct, algebra] ∎
 
 ## Remarks
 

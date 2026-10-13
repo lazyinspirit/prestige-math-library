@@ -95,10 +95,14 @@ $\psi\in D(A)$ the spread is $\Delta_{\psi}A=\|(A-\langle A\psi,\psi\rangle I)\p
 equal to $\bigl(\langle A^{2}\psi,\psi\rangle-\langle A\psi,\psi\rangle^{2}\bigr)^{1/2}$
 when $\psi\in D(A^{2})$; for a preparation $\rho$ the identities and existence
 criteria are those of [[pthm-nrqm-observables-preparation-moments]] and
-[[lem-nrqm-observables-moments-and-variance]]. In particular a mean exists
-exactly when $\rho$ is concentrated on the domain of $|A|^{1/2}$ in the sense
-of those items, and no preparation is equipped with finite moments
-automatically.
+[[lem-nrqm-observables-moments-and-variance]]. In particular, for an orthonormal density expansion
+$\rho=\sum_n w_nT_{u_n,u_n}$, the mean is finite exactly when
+$$\sum_{n:w_n>0}w_n\int_{\mathbb R}|\lambda|\,dE_{A,u_n}(\lambda)<\infty,$$
+by [[lem-nrqm-observables-moments-and-variance]] clause (d); zero-weight
+indices are omitted before evaluating their component integrals. For a pure
+unit vector the corresponding criterion is membership in $D(|A|^{1/2})$
+by clause (b). Componentwise domain membership alone does not imply
+convergence of the weighted sum, and finite moments are not automatic.
 
 **(d) Products of spreads.** For two assigned sharp observables $(A,u_{A})$
 and $(B,u_{B})$ in a common preparation $\rho$ in which both spreads are

@@ -10,10 +10,9 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-congruence-acceleration-and-expansion, def-gr-observer-energy-momentum-current, def-gr-observer-congruence-and-adapted-charts, def-gr-observer-and-rest-space, lem-gr-observer-projection-decomposition, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-inverse-metric-and-musical-isomorphisms, def-affine-connection-on-a-smooth-manifold, def-covariant-derivative-along-a-curve, def-geodesic-of-an-affine-connection, lem-gr-metric-divergence-and-density-formula, def-christoffel-symbols-of-an-affine-connection, def-smooth-vector-field-as-a-tangent-bundle-section, def-c-r-and-smooth-maps-between-smooth-manifolds]
+deps: [def-gr-congruence-acceleration-and-expansion, def-gr-observer-congruence-and-adapted-charts, def-gr-observer-and-rest-space, lem-gr-observer-projection-decomposition, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-inverse-metric-and-musical-isomorphisms, def-affine-connection-on-a-smooth-manifold, def-covariant-derivative-along-a-curve, def-geodesic-of-an-affine-connection, lem-gr-metric-divergence-and-density-formula, def-christoffel-symbols-of-an-affine-connection, def-smooth-vector-field-as-a-tangent-bundle-section, def-c-r-and-smooth-maps-between-smooth-manifolds]
 dependency_roles:
   def-gr-congruence-acceleration-and-expansion: mathematical-premise
-  def-gr-observer-energy-momentum-current: mathematical-premise
   def-gr-observer-congruence-and-adapted-charts: mathematical-premise
   def-gr-observer-and-rest-space: mathematical-premise
   lem-gr-observer-projection-decomposition: mathematical-premise
@@ -51,7 +50,8 @@ $D$ as in [[def-gr-congruence-acceleration-and-expansion]]. Then:
 $$g_p(a_p,n_p)=0\qquad\text{for every }p\in U,$$
 
 that is, $a_p\in n_p^{\perp}$; equivalently $h(a)=a$ for the projection field
-$h$ of [[def-gr-observer-energy-momentum-current]].
+$h_p:=h_{n_p}$ of [[def-gr-observer-and-rest-space]] clause (c), namely
+$h_p(v)=v+g_p(n_p,v)n_p$ for $v\in T_pM$.
 
 **(b) Acceleration of the observer curves.** Let $\gamma:I\to U$ be an
 observer curve of the congruence, that is, an integral curve of $n$
@@ -83,13 +83,15 @@ $D(fh)=f\,Dh+h\,Df$, and $D$ annihilates constants.
 
 [L2] $\nabla_XY$ is a smooth vector field for smooth $X,Y$, so $\nabla_nn$ is smooth on $U$; $\nabla_XY$ is additive and $C^\infty(M)$-linear in $X$, and additive in $Y$ ([[def-affine-connection-on-a-smooth-manifold]]).
 
-[L3] For a smooth curve $\gamma$ and a smooth vector field $V$ along $\gamma$, the covariant derivative along the curve satisfies $(D_sV)(s)=\nabla_{\gamma'(s)}\widetilde V$ for any smooth local extension $\widetilde V$ of $V$; if $\gamma$ is an integral curve of the smooth field $n$, then $\gamma'=n\circ\gamma$ and $D_s\gamma'=(\nabla_nn)\circ\gamma$ ([[def-covariant-derivative-along-a-curve]], [[def-geodesic-of-an-affine-connection]], [[def-gr-observer-congruence-and-adapted-charts]]).
+[L3] For an integral curve $\gamma$ of $n$, $\gamma'=n\circ\gamma$ is the pullback of the supplied smooth field $n$. The pullback connection defining the curve derivative gives $D_s(n\circ\gamma)=\nabla_{\gamma'}n=(\nabla_nn)\circ\gamma$ ([[def-covariant-derivative-along-a-curve]], [[def-geodesic-of-an-affine-connection]], [[def-gr-observer-congruence-and-adapted-charts]]).
 
 [L4] $g_p(n_p,n_p)=-1$ for every $p\in U$ ([[def-gr-observer-and-rest-space]], [[def-gr-observer-congruence-and-adapted-charts]]).
 
 [L5] In every smooth chart of $U$, for every smooth vector field $J$ on $U$, $\nabla_aJ^a=w^{-1}\partial_a(wJ^a)$ with $w=\sqrt{|\det(g_{ab})|}$, and the chart formula represents the chart-independent scalar $\nabla_aJ^a$ ([[lem-gr-metric-divergence-and-density-formula]] clause (c), [[def-christoffel-symbols-of-an-affine-connection]]).
 
-[L6] The projection field $h$ of [[def-gr-observer-energy-momentum-current]] satisfies $h_p(a_p)=a_p$ for $a_p\in n_p^{\perp}$ and annihilates multiples of $n_p$ ([[lem-gr-observer-projection-decomposition]], [[def-gr-observer-and-rest-space]]).
+[L6] Define $h_p:=h_{n_p}$ by $h_p(v)=v+g_p(n_p,v)n_p$ ([[def-gr-observer-and-rest-space]] clause (c)). This projection field satisfies $h_p(a_p)=a_p$ for $a_p\in n_p^{\perp}$ and annihilates multiples of $n_p$ ([[lem-gr-observer-projection-decomposition]], [[def-gr-observer-and-rest-space]]).
+
+[L7] For smooth functions $f$ on $U$, the induced tensor derivative has $\nabla_af=\partial_af$, so $Df=n(f)$ is the action of the smooth vector field $n$ as a derivation on functions ([[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]] clause (c), [[def-smooth-vector-field-as-a-tangent-bundle-section]]).
 
 ## Proof
 
@@ -101,7 +103,7 @@ $D(fh)=f\,Dh+h\,Df$, and $D$ annihilates constants.
 
 2.2 (Divergence form.) Applying [L5] to $J:=n$ gives $\theta=\nabla_an^a=w^{-1}\partial_a(wn^a)$; in particular $\theta$ is smooth on $U$, since the right-hand side is smooth. The trace identities follow from $h^{ab}=g^{ab}+n^an^b$ and $n^b\nabla_an_b=\tfrac12\nabla_a(n\cdot n)=0$, the last by [L1] and [L4]: $h^{ab}\nabla_an_b=g^{ab}\nabla_an_b+n^an^b\nabla_an_b=\theta+0$. This proves (c). [L5, L1, L4, step 1.1, algebra]
 
-3.1 (Derivation property.) For smooth $f,h$, the action of $\nabla$ on functions is a derivation and $n^a$ is a smooth coefficient, so $D(fh)=n^a\nabla_a(fh)=n^a(f\nabla_ah+h\nabla_af)=f\,Dh+h\,Df$; for a constant function $c$ one has $\nabla_ac=0$, so $Dc=0$. This proves (d). [L2, algebra] ∎
+3.1 (Derivation property.) For smooth $f,h$, [L7] gives $D=n$ as a derivation on functions, so $D(fh)=n^a\nabla_a(fh)=n^a(f\nabla_ah+h\nabla_af)=f\,Dh+h\,Df$; for a constant function $c$ one has $\nabla_ac=0$, so $Dc=0$. This proves (d). [L7, algebra] ∎
 
 ## Remarks
 

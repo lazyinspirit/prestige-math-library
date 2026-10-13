@@ -87,8 +87,7 @@ $G=DX^{\mathsf T}\mathsf M\,DX$
    $(q,\pi)\mapsto(X(q),DX(q)^{-\mathsf T}\pi)$, exactly $\Phi_X$;
    consequently $\Phi_X$ is a canonical map of the presentation with
    $|\det D\Phi_X|=1$
-   ([[pthm-cm13-generating-functions]] clause 2,
-   [[def-cm-generating-function-of-the-first-and-second-kind]],
+   ([[def-cm-generating-function-of-the-first-and-second-kind]],
    [[prop-cm-generating-functions-yield-canonical-maps]]);
 2. determinant check: with the block decomposition in source coordinates
    $(q,\pi)$ and target coordinates $(Q,P)$ the derivative is block
@@ -104,7 +103,7 @@ $$D\Phi_{X}=\begin{pmatrix}DX(q)&0\\ \partial_{q}\bigl(DX^{-\mathsf T}\pi\bigr)&
    diffeomorphism, the transition $\Phi_{X}$ admits **no first-kind
    generating function** near any point; the second-kind representation of
    claim 1 is the available local description
-   ([[pthm-cm13-generating-functions]] clause 3,
+   ([[def-cm-generating-function-of-the-first-and-second-kind]],
    [[prop-cm-canonical-map-locally-has-a-generating-function]]);
 4. contrast — the Cartesian momentum shift: for a constant $c\in\mathbb R^{3}$
    of momentum dimension the map
@@ -112,7 +111,7 @@ $$D\Phi_{X}=\begin{pmatrix}DX(q)&0\\ \partial_{q}\bigl(DX^{-\mathsf T}\pi\bigr)&
    ($DC=I_{6}$), its first-kind projection is degenerate identically, and it
    has the **global** second-kind generating function
    $S(q,P)=q\cdot(P-c)$, also of action dimension, since $S_q=P-c$ and
-   $S_P=q$.
+   $S_P=q$ ([[pthm-cm13-generating-functions]] clause 2).
 
 All quantities are model values of the declared idealization; no measurement
 is reported.
@@ -125,7 +124,7 @@ generating-function data of the two examples.
 
 [F1] Chart data and units ([[def-cm07-generalized-coordinates-and-forces]], [[def-cm12-cotangent-momentum]], [[def-cm12-hyperregularity]], [[pthm-cm12-mechanical-hyperregularity]], [[def-cm13-two-form]], [[pthm-cm13-two-form-is-symplectic]], [[def-cm01-configuration]], [[def-cm01-units]]): $X$ is a $C^3$ immersion with $DX(q)$ invertible, $G=DX^{\mathsf T}\mathsf M DX$, the generalized momentum is $\pi=G(q)\dot q$ with $[\pi_a]=\mu\ell^2\tau^{-1}\gamma_a^{-1}$, and the transition is $\Phi_X(q,\pi)=(X(q),\mathsf M DX(q)G(q)^{-1}\pi)=(X(q),DX(q)^{-\mathsf T}\pi)$, whose output is Cartesian momentum of dimension $\mu\ell\tau^{-1}$.
 
-[F2] Generating functions and their canonical maps ([[def-cm-generating-function-of-the-first-and-second-kind]], [[prop-cm-generating-functions-yield-canonical-maps]], [[prop-cm-canonical-map-locally-has-a-generating-function]], [[pthm-cm13-generating-functions]], [[thm-euclidean-inverse-function-theorem]]): a second-kind datum with $\det S_{qP}\ne0$ generates a canonical $C^2$ local diffeomorphism via old generalized momentum $\pi=S_q$ and new Cartesian position $Q=S_P$, with unit determinant; a first-kind datum requires $\det S_{qQ}\ne0$, so $(q,Q)\mapsto(q,S_q(q,Q))$ is a local diffeomorphism. The generating functions have action dimension.
+[F2] Generating functions and their canonical maps ([[def-cm-generating-function-of-the-first-and-second-kind]], [[prop-cm-generating-functions-yield-canonical-maps]], [[prop-cm-canonical-map-locally-has-a-generating-function]], [[thm-euclidean-inverse-function-theorem]]): a second-kind datum with $\det S_{qP}\ne0$ generates a canonical $C^2$ local diffeomorphism via old generalized momentum $\pi=S_q$ and new Cartesian position $Q=S_P$, with unit determinant; a first-kind datum requires $\det S_{qQ}\ne0$, so $(q,Q)\mapsto(q,S_q(q,Q))$ is a local diffeomorphism. The generating functions have action dimension. For the point transformation the mathematical proposition applies with $O_q=\Omega$ and $O_P=\mathbb R^3$, using the standard source and target forms supplied by [F1]; the Cartesian-domain theorem [[pthm-cm13-generating-functions]] clause 2 applies to the momentum shift with $O_q=O_Q=O_P=\mathbb R^3$.
 
 [F3] Calculus and matrix algebra ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]], [[def-matrix-product-and-identity-matrix]], [[def-transpose-of-a-matrix]], [[def-linear-map]], [[def-invertible-matrix-and-general-linear-group]], [[cor-square-matrix-invertible-iff-determinant-is-a-unit]], [[def-determinant-of-a-square-matrix]], [[def-euclidean-submersions-and-immersions]]): $S_q=DX^{\mathsf T}P$ has generalized-momentum components $[\pi_a]=[P_i][X^i][q^a]^{-1}$, so $S=P\cdot X(q)$ has action dimension; the displayed partial derivatives are computed by the ordinary rules, transposes and inverses obey $(A^{\mathsf T})^{-1}=(A^{-1})^{\mathsf T}$, and a matrix with a vanishing block column has rank at most the number of its nonzero columns.
 

@@ -70,9 +70,13 @@ natural-unit momentum notation suppresses the factor $1/c$; it never assigns
 SI momentum units directly to $\Phi^{\flat}$. Symmetry of $T$ gives the two
 aspects of the same mixed component, with these distinct SI conversions.
 
-**(c) Measured stress.** The smooth symmetric field $S=h^*h^*T$ of
-[[def-gr-observer-energy-momentum-current]] clause (e) is read as the **stress
-measured by the observers** of the congruence: for unit spatial vectors
+**(c) Measured stress.** Write $S_{ab}=g_{ac}g_{bd}S^{cd}$ for the covariant
+form of the projected field of [[def-gr-observer-energy-momentum-current]]
+clause (e). Explicitly, for $p\in U$ and $v,w\in T_pM$,
+$S_p(v,w):=T_p(h_p(v),h_p(w))$, where
+$h_p(v)=v+g_p(n_p,v)n_p$. This agrees with the lowered component formula
+because $h_p$ is self-adjoint for $g_p$. This smooth symmetric covariant field
+is read as the **stress measured by the observers** of the congruence: for unit spatial vectors
 $e,e'$ in the rest space of $n_p$, $S_p(e,e')$ is read as the force per unit
 area in the direction $e$ across a surface whose normal is $e'$, with
 components in $\mathrm J\,\mathrm m^{-3}$ by the conventions.

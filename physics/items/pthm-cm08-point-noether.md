@@ -86,7 +86,7 @@ content.
 
 **Given:** The model, the presentation $(U,d)$, the strict symmetry datum $(0,\xi,B)$ and the motion $x:J\to Q$ of the statement.
 
-[F1] Model data and chart ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart over every $[a,b]\times Q$ with $[a,b]\subseteq I_{0}$; $L(t,x,v)=K(v)-U(t,x)$ with $K(v)=\frac12v\cdot\mathsf M v$, $L_{v}(t,x,v)=\mathsf M v$, $L_{x}(t,x,v)=-\nabla_{x}U(t,x)$ and $L_{t}(t,x,v)=-U_{t}(t,x)$; the force map is $F_{i}=-\nabla_{x_{i}}U+d_{i}$.
+[F1] Model data and chart ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart whenever $Q\ne\varnothing$ and $a<b$ with $[a,b]\subseteq I_{0}$, over $[a,b]\times Q$; $L(t,x,v)=K(v)-U(t,x)$ with $K(v)=\frac12v\cdot\mathsf M v$, $L_{v}(t,x,v)=\mathsf M v$, $L_{x}(t,x,v)=-\nabla_{x}U(t,x)$ and $L_{t}(t,x,v)=-U_{t}(t,x)$; the force map is $F_{i}=-\nabla_{x_{i}}U+d_{i}$.
 
 [F2] The symmetry datum and its charge ([[def-cm08-symmetry-of-the-mechanical-lagrangian]], [[def-cm-infinitesimal-point-symmetry]]): $\xi:I_{0}\times Q\to\mathbb R^{3N}$ and $B:I_{0}\times Q\to\mathbb R$ are of class $C^{2}$ and satisfy the strict identity $L_{x}(t,x,v)\cdot\xi(t,x)+L_{v}(t,x,v)\cdot D_{t}\xi(t,x,v)=D_{t}B(t,x,v)$ on $O$; the charge is the displayed function $C$; when $\xi$ is independent of $t$ the pair $(\xi,B)$ is an infinitesimal point symmetry of the chart $(O,L)$ in the sense of the cited definition.
 
@@ -116,27 +116,8 @@ content.
 
 ## Remarks
 
-- **Where the identity is used.** Clause 1 uses the strict identity on the whole
-  chart through the mathematical point-symmetry theorem; clause 2 uses the same
-  identity only at the graph points of the motion and evaluates the motion
-  equation. For a presentation with $d\equiv0$ the two routes agree, and clause
-  2 then gives $C'=0$ directly; the field-theoretic reading is that the
-  potential part of the force does no work against the generator, while the
-  residual part does, at rate $\langle d,\xi\rangle$. The specialisation of
-  this statement with $\xi=\xi(x)$ to the mathematical case
-  [[thm-cm-point-symmetry-charge-is-conserved]] is the reason the framework
-  reuses the chart-level notion of symmetry as its model notion.
+- **Where the identity is used.** Clause 1 uses the strict identity on the whole chart through the mathematical point-symmetry theorem; clause 2 uses the same identity only at the graph points of the motion and evaluates the motion equation. For a presentation with $d\equiv0$ the two routes agree, and clause 2 then gives $C'=0$ directly; the field-theoretic reading is that the potential part of the force does no work against the generator, while the residual part does, at rate $\langle d,\xi\rangle$. The specialisation of this statement with $\xi=\xi(x)$ to the mathematical case [[thm-cm-point-symmetry-charge-is-conserved]] is the reason the framework reuses the chart-level notion of symmetry as its model notion.
 
-- **Conditional conservation.** The pairing criterion makes the conditions
-  explicit: with residual forces the charge of a strict symmetry is conserved
-  exactly if the residual force is orthogonal to the generator along the
-  motion. A model whose residual force carries a component along $\xi$ — for
-  instance a friction force along a translation generator — conserves no
-  corresponding momentum charge, whatever symmetries the potential part has.
+- **Conditional conservation.** The pairing criterion makes the conditions explicit: with residual forces the charge of a strict symmetry is conserved exactly if the residual force is orthogonal to the generator along the motion. If the total pairing $\langle d,\xi\rangle$ is nonzero at a point of the motion — for instance for a nonzero friction force paired with a translation generator — the corresponding charge is not constant on that motion.
 
-- **What is not claimed.** No converse is asserted: from the constancy of
-  $(\mathsf M x')\cdot\xi-B$ along the motions one cannot conclude that the
-  identity holds, and the existence of a symmetry datum for a given model is a
-  separate verification against its declared $U$ and masses. The statement is
-  also not an empirical law: it concerns the model's motions under the adopted
-  force branch and the declared presentation.
+- **What is not claimed.** No converse is asserted: from the constancy of $(\mathsf M x')\cdot\xi-B$ along the motions one cannot conclude that the identity holds, and the existence of a symmetry datum for a given model is a separate verification against its declared $U$ and masses. The statement is also not an empirical law: it concerns the model's motions under the adopted force branch and the declared presentation.

@@ -12,13 +12,14 @@ physical_scope: "Conditional computation in the classical gravitational
   of the flat model with sinusoidal profiles, its harmonic-gauge and
   linearized-vacuum properties, its first-order curvature components, and the
   finite path-length strain function of the ideal two-body detector of the
-  companion definition at equal inertial-chart time. Clause 3 is a model
+  companion definition at equal inertial-chart time. The exact-vacuum residual
+  clause is for the zero-source, Lambda = 0 branch. Clause 3 is a model
   statement about that ideal detector; the example asserts no measurement, no
   apparatus, no noise model, and no numerical amplitude, frequency or strain of
   any real wave."
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 proof_strategy: direct
 deps:
   - def-gr-plane-wave-perturbation
@@ -30,6 +31,7 @@ deps:
   - thm-gr-flat-linearized-curvature-and-gauge
   - def-gr-minkowski-model-and-inertial-chart
   - thm-sine-and-cosine-derivatives
+  - cor-trigonometric-parity-and-pythagorean-identity
   - thm-chain-rule
   - thm-algebra-of-derivatives
   - def-derivative
@@ -47,6 +49,7 @@ dependency_roles:
   thm-gr-flat-linearized-curvature-and-gauge: mathematical-premise
   def-gr-minkowski-model-and-inertial-chart: mathematical-premise
   thm-sine-and-cosine-derivatives: mathematical-premise
+  cor-trigonometric-parity-and-pythagorean-identity: mathematical-premise
   thm-chain-rule: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
   def-derivative: mathematical-premise
@@ -99,8 +102,9 @@ $M>0$. Then:
    $G^{(1)}_{ab}(h)=0$: the perturbation solves the linearized vacuum
    equations; the metric $g(\lambda)=\eta+\lambda h$ is a smooth Lorentzian
    metric of signature $(-,+,+,+)$ with time orientation $\partial_0$, and
-   for every compact $K$ and length scale $L$, the exact vacuum residual is
-   bounded by a constant times $\lambda^2$ whenever $|\lambda|B_K(h)\le1/16$;
+   in the zero-source, $\Lambda=0$ branch, for every nonempty compact $K$ and
+   length scale $L$, the exact vacuum residual is bounded by a constant times
+   $\lambda^2$ whenever $|\lambda|B_K(h)\le1/16$;
    since the profiles are smooth, this holds for sufficiently small
    $|\lambda|$ on each fixed compact set.
 2. The first-order curvature components are
@@ -124,13 +128,15 @@ and no numerical amplitude, frequency or strain of a real wave is asserted.
 
 **Given:** The flat model with SI length coordinates, dimensionless $a,b,\lambda$, positive $\omega$ in $\mathrm m^{-1}$, and the profiles $A_+(u)=a\cos(\omega u)$, $A_\times(u)=b\sin(\omega u)$, the perturbation $h$ above, the amplitude parameter $\lambda$ and the metric $g(\lambda)=\eta+\lambda h$.
 
-[L1] The derivatives are $\partial_0\cos(\omega u)=-\omega\sin(\omega u)$, $\partial_0\sin(\omega u)=\omega\cos(\omega u)$, $\partial_3\cos(\omega u)=\omega\sin(\omega u)$, $\partial_3\sin(\omega u)=-\omega\cos(\omega u)$, hence $\Box\cos(\omega u)=-\omega^2\cos+\omega^2\cos=0$ and likewise for $\sin$ ([[thm-sine-and-cosine-derivatives]], [[thm-chain-rule]], [[def-derivative]], [[lem-gr-null-phase-coordinate]] clause (b)).
+[L1] The derivatives are $\partial_0\cos(\omega u)=-\omega\sin(\omega u)$, $\partial_0\sin(\omega u)=\omega\cos(\omega u)$, $\partial_3\cos(\omega u)=\omega\sin(\omega u)$, $\partial_3\sin(\omega u)=-\omega\cos(\omega u)$. For $f(x)=\cos(\omega u(x))$ or $f(x)=\sin(\omega u(x))$, differentiating once more gives $\partial_0^2f=\partial_3^2f=-\omega^2f$ and $\partial_1^2f=\partial_2^2f=0$, so $\Box f=-\partial_0^2f+\partial_3^2f=+\omega^2f-\omega^2f=0$ ([[thm-sine-and-cosine-derivatives]], [[thm-chain-rule]], [[def-derivative]], [[def-gr-flat-linearized-perturbation]] clause (c), [[lem-gr-null-phase-coordinate]] clause (b)).
 
-[L2] For a TT planar perturbation with bounded profiles the perturbation is in harmonic gauge with $G^{(1)}_{ab}(h)=0$ and the metric $\eta+\lambda h$ is Lorentzian for $|\lambda|<1/(2M)$ ([[thm-gr-tt-plane-wave-solutions]] clauses (a)-(b), [[def-gr-plane-wave-perturbation]] clause (b)); for each compact $K$ and $L>0$, the physical residual is $O(\lambda^2)$ whenever $|\lambda|B_K(h)\le1/16$ ([[pthm-gr-linearized-field-equations]] clause (d)).
+[L2] For a TT planar perturbation with bounded profiles the perturbation is in harmonic gauge with $G^{(1)}_{ab}(h)=0$ and, when $M>0$, the metric $\eta+\lambda h$ is Lorentzian for $|\lambda|<1/(2M)$; when $M=0$, $h=0$ and the metric is $\eta$ for every $\lambda$ ([[thm-gr-tt-plane-wave-solutions]] clauses (a)-(b), [[def-gr-plane-wave-perturbation]] clause (b)). In the zero-source, $\Lambda=0$ branch, for each nonempty compact $K$ and $L>0$ the vacuum field-law residual is $O(\lambda^2)$ whenever $|\lambda|B_K(h)\le1/16$ ([[pthm-gr-linearized-field-equations]] clause (d)).
 
-[L3] For a TT planar perturbation, $R^{(1)}_{0i0j}=-\tfrac12F''_{ij}$ with $F''_{11}=A_+''$, $F''_{22}=-A_+''$, $F''_{12}=A_\times''$ and $F''_{i3}=0$; the finite arm length and strain are the path integrals of clause (c) of [[def-gr-linearized-wave-regime-and-detector-coupling]], which reduce to $\sqrt{1+\lambda a}-1$ when $\delta^3=0$ makes the profile constant along the arm ([[thm-gr-tt-plane-wave-curvature]] clause (c), [[def-gr-linearized-wave-regime-and-detector-coupling]] clause (c), [[def-rational-power]]).
+[L3] For a TT planar perturbation, $R^{(1)}_{0i0j}=-\tfrac12F''_{ij}$ with $F''_{11}=A_+''$, $F''_{22}=-A_+''$, $F''_{12}=A_\times''$ and $F''_{i3}=0$; the finite arm length and strain are the path integrals of clause (c) of [[def-gr-linearized-wave-regime-and-detector-coupling]], which reduce to $\sqrt{1+\lambda a_\delta(s,0)}-1$ when $\delta^3=0$ makes the profile constant along the arm ([[thm-gr-tt-plane-wave-curvature]] clause (c), [[def-gr-linearized-wave-regime-and-detector-coupling]] clause (c), [[def-rational-power]]).
 
-1.1 (Second derivatives.) Differentiating twice in $x^0$ with [L1], $A_+''(u)=-\omega^2a\cos(\omega u)$ and $A_\times''(u)=-\omega^2b\sin(\omega u)$. Hence $h$ has smooth bounded profiles with bound $M$, and clause 1 is [L2]. [L1, L2, algebra]
+[L4] The profiles are bounded because $|\sin z|\le1$ and $|\cos z|\le1$ for all real $z$ ([[cor-trigonometric-parity-and-pythagorean-identity]]).
+
+1.1 (Second derivatives.) Differentiating twice in $x^0$ with [L1], $A_+''(u)=-\omega^2a\cos(\omega u)$ and $A_\times''(u)=-\omega^2b\sin(\omega u)$. Hence $h$ has smooth bounded profiles with bound $M$, and clause 1 is [L2]. [L1, L2, L4, algebra]
 
 2.1 (Curvature components.) By [L3], $R^{(1)}_{0101}=-\tfrac12F''_{11}=-\tfrac12A_+''=\tfrac12a\omega^2\cos(\omega u)$, $R^{(1)}_{0102}=-\tfrac12F''_{12}=-\tfrac12A_\times''=\tfrac12b\omega^2\sin(\omega u)$ and $R^{(1)}_{0202}=-\tfrac12F''_{22}=\tfrac12A_+''=-\tfrac12a\omega^2\cos(\omega u)$; the vanishing for $i=3$ or $j=3$ is part of the same clause. This proves clause 2. [L3, step 1.1, algebra]
 

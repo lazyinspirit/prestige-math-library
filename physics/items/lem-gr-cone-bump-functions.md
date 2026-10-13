@@ -2,7 +2,7 @@
 id: lem-gr-cone-bump-functions
 kind: lemma
 title: "Cone bumps: for every point of a Cauchy level there is a smooth bump
-  with past timelike gradient on the truncated past cone"
+  with past timelike gradient on its positive region below that level"
 status: draft
 origin: session
 domain: mathematics
@@ -37,6 +37,7 @@ deps:
     lem-gr-causal-curve-calculus,
     lem-gr-push-up-rule,
     lem-euclidean-bump-for-a-compact-set-inside-an-open-set,
+    lem-compactness-of-a-subspace-is-ambient,
     def-smooth-partition-of-unity-subordinate-to-an-open-cover,
     def-continuity-real,
     def-gr-smooth-lorentzian-objects,
@@ -70,6 +71,7 @@ dependency_roles:
   lem-gr-causal-curve-calculus: mathematical-premise
   lem-gr-push-up-rule: mathematical-premise
   lem-euclidean-bump-for-a-compact-set-inside-an-open-set: mathematical-premise
+  lem-compactness-of-a-subspace-is-ambient: mathematical-premise
   def-smooth-partition-of-unity-subordinate-to-an-open-cover: mathematical-premise
   def-continuity-real: mathematical-premise
   def-gr-smooth-lorentzian-objects: mathematical-premise
@@ -79,19 +81,8 @@ dependency_roles:
   def-riemannian-distance-on-a-connected-manifold: mathematical-premise
 sources:
   references:
-    - title: "P. T. Chrusciel, Elements of causality theory, arXiv:1110.6706 (2011):
-        the smoothing construction of the volume/time proof (Theorem 2.11.1 and
-        the discussion following it), printed pp. 59-60; the light-cone
-        smoothing appears in the same tradition, compare the proof sketch in E.
-        Minguzzi, Lorentzian causality theory, Living Reviews in Relativity 22
-        (2019) 3, Theorem 4.120 printed pp. 147-148"
-      url: "https://arxiv.org/pdf/1110.6706"
-    - title: "R. Geroch, Domain of dependence, Journal of Mathematical Physics 11
-        (1970) 437-449: the volume-function construction underlying the
-        smooth-step arguments; E. Minguzzi, Lorentzian causality theory, Living
-        Reviews in Relativity 22 (2019) 3, Section 4.5 (time and temporal
-        functions) printed pp. 142-148"
-      url: "https://inspirehep.net/files/7a575d682fd15aaad8463a778fac1609"
+    - title: "A. N. Bernal and M. Sanchez, On smooth Cauchy hypersurfaces and Geroch splitting theorem (arXiv:gr-qc/0306108), Lemma 4.12, printed pp. 8-9: compactly supported exponential cone bumps; local proof below also states its choice assumptions."
+      url: "https://arxiv.org/pdf/gr-qc/0306108"
 verification:
   precheck: pass
 ---
@@ -137,7 +128,7 @@ cutoff used below is identically one.
 
 **Given:** Countable Choice and Dependent Choice; A globally hyperbolic $(M,g,N)$ with volume time $t$ ([[thm-gr-volume-time-function]]), real numbers $a<b$, a point $p\in S_b$, and an open neighborhood $O$ of $p$.
 
-[L1] $t$ is continuous, strictly increasing along causal relations, its levels $S_c$ are Cauchy hence acausal sets, and $I^+(S_a)=\{t>a\}$, $J^\pm(S_b)=\{t\gtrless b\}$ with $J^+(x)$ and $J^-(S_b)$ closed; for compact $K$ the set $J^+(K)\cap J^-(S_b)$ is compact ([[thm-gr-volume-time-function]] clauses (b)-(d), [[lem-gr-compact-future-cone-intersections]], [[lem-gr-globally-hyperbolic-causal-structure]] clauses (a) and (b)).
+[L1] $t$ is continuous, strictly increasing along causal relations, its levels $S_c$ are Cauchy hence acausal sets, and $I^+(S_a)=\{t>a\}$, $J^+(S_b)=\{t\ge b\}$ and $J^-(S_b)=\{t\le b\}$ with $J^+(x)$ and $J^-(S_b)$ closed; for compact $K$ the set $J^+(K)\cap J^-(S_b)$ is compact ([[thm-gr-volume-time-function]] clauses (b)-(d), [[lem-gr-compact-future-cone-intersections]], [[lem-gr-globally-hyperbolic-causal-structure]] clauses (a) and (b)).
 
 [L2] In a sufficiently small convex normal ball, the future timelike endpoints from its base are exactly the exponential image of the future timelike cone ([[thm-gr-normal-neighborhood-causal-cone]] clause (b)). Strictly convex normal neighborhoods: every point has arbitrarily small strictly convex normal neighborhoods $C$; on $C$ the exponential $\exp_q:W_q\to C$ is a diffeomorphism for every $q\in C$, the unique geodesic segment in $C$ joins any two points, and the position vector $P(q,q')=d(\exp_q)_{v}(v)$, $v=\exp_q^{-1}(q')$, is defined with $g_{q'}(P,P)=g_q(v,v)$ ([[thm-gr-convex-normal-neighborhoods]] clauses (a)-(c), [[def-gr-normal-neighborhoods-and-position-vectors]], [[lem-gr-joint-exponential-diffeomorphism]]).
 
@@ -145,11 +136,11 @@ cutoff used below is identically one.
 
 [L4] The standard flat function $\varphi(t)=e^{-1/t}$ for $t>0$ and zero for $t\le0$ is smooth and all its derivatives vanish at zero ([[def-the-standard-flat-function]], [[thm-the-standard-flat-function-is-smooth-and-flat-at-zero]]). For $t>0$ each derivative is a polynomial in $1/t$ times $e^{-1/t}$, and for every nonnegative integer $m$, $t^{-m}e^{-1/t}\to0$ as $t\downarrow0$. Smooth compositions and products obey the chain and product rules ([[thm-chain-rule-for-total-derivatives]], [[def-c-r-and-smooth-maps-between-smooth-manifolds]], [[def-continuity-real]]).
 
-[L5] Smooth cutoffs: for every compact $K$ and open $O$ with $K\subseteq O$ there is a smooth $\chi:M\to[0,1]$ with $\chi=1$ on a neighborhood of $K$ and $\operatorname{supp}\chi\subseteq O$; such $\chi$ can be assembled from finitely many Euclidean bumps transferred by charts, so no choice beyond $\mathrm{AC}_\omega$ is used ([[lem-euclidean-bump-for-a-compact-set-inside-an-open-set]], [[def-smooth-partition-of-unity-subordinate-to-an-open-cover]]).
+[L5] Smooth cutoffs: for every compact $K$ and open $O$ with $K\subseteq O$ there is a smooth $\chi:M\to[0,1]$ with $\chi=1$ on a neighborhood of $K$ and $\operatorname{supp}\chi\subseteq O$; to see the neighborhood plateau from the weaker Euclidean cutoff statement, take the family of all pairs of nested chart balls with inner closed ball inside the outer ball and outer compact closure in $O$. Their inner open balls form an ambient open cover of $K$, so a finite subfamily covers $K$ by [[lem-compactness-of-a-subspace-is-ambient]] clause 2. Apply the Euclidean supplier to each inner closed ball and its outer ball, extend by zero in the chart, and call the resulting functions $\chi_i$. Then $\chi=1-\prod_i(1-\chi_i)$ is one on the union of the inner open balls and has compact support in $O$. Empty $K$ permits $\chi=0$; only finite selections are used ([[lem-euclidean-bump-for-a-compact-set-inside-an-open-set]], [[def-smooth-partition-of-unity-subordinate-to-an-open-cover]]).
 
 [L6] Timelike and causal displacement: $p'\ll p$ implies $p\in I^+(p')$; the future timelike cone in each tangent space is open and convex and its closure contains the future causal cone; a smooth curve with future timelike velocity everywhere is a future timelike curve ([[lem-timelike-cone-has-two-convex-components]], [[def-causal-classification-of-lorentz-vectors]], [[def-gr-observer-and-rest-space]], [[thm-gr-local-geodesics-and-exponential-map]], [[lem-gr-parallel-transport-and-geodesic-speed]] clause 3, [[lem-gr-causal-curve-calculus]] clause (c)).
 
-[L7] Diameters of small chart balls: $h$ is a smooth Riemannian metric on $M$ and $d_h$ its Riemannian distance ([[thm-gr-auxiliary-complete-riemannian-metric]] clause (a), [[def-riemannian-distance-on-a-connected-manifold]]); on a compact subset $K$ of a chart the metric $h$ is comparable with the Euclidean metric, $h(v,v)\le C_K|v|_{\mathrm e}^2$ for a finite constant $C_K$ depending on $K$ ([[lem-local-comparison-of-a-riemannian-metric-with-the-euclidean-metric]]). Fix a Euclidean chart ball $E_{\rho_0}$ around $p$ and let $C$ be the constant of the comparison on its closure; then for every $0<\rho\le\rho_0$ the $h$-diameter of the concentric ball $E_\rho$ is at most $2\sqrt C\rho$, because the $h$-length of a curve in $E_\rho$ is at most $\sqrt C$ times its Euclidean length and any two points of $E_\rho$ are joined there by a straight segment of Euclidean length at most $2\rho$.
+[L7] Diameters of small chart balls: $h$ is a smooth Riemannian metric on $M$ and $d_h$ its Riemannian distance ([[thm-gr-auxiliary-complete-riemannian-metric]] clauses (b)-(d), [[def-riemannian-distance-on-a-connected-manifold]]); on a compact subset $K$ of a chart the metric $h$ is comparable with the Euclidean metric, $h(v,v)\le C_K|v|_{\mathrm e}^2$ for a finite constant $C_K$ depending on $K$ ([[lem-local-comparison-of-a-riemannian-metric-with-the-euclidean-metric]]). Fix a Euclidean chart ball $E_{\rho_0}$ around $p$ and let $C$ be the constant of the comparison on its closure; then for every $0<\rho\le\rho_0$ the $h$-diameter of the concentric ball $E_\rho$ is at most $2\sqrt C\rho$, because the $h$-length of a curve in $E_\rho$ is at most $\sqrt C$ times its Euclidean length and any two points of $E_\rho$ are joined there by a straight segment of Euclidean length at most $2\rho$.
 
 ## Proof
 
@@ -167,6 +158,6 @@ cutoff used below is identically one.
 
 - **The point of the flat function.** $f$ is the smoothing of the indicator of the future cone: it vanishes to infinite order on the null boundary and at the vertex, which is why the composition is smooth although the cone has a corner. The exponential map converts the corner into the quadratic zero set $Q=0$ of a smooth function.
 
-- **Why the cutoff is harmless.** The gradient of $h_p$ is only claimed to be past timelike on the truncated past cone $J^-(S_b)$, and exactly there the support of the cutoff has already begun, so the cutoff's own gradient does not contribute.
+- **Why the cutoff is harmless.** At every point of $\{h_p>0\}\cap J^-(S_b)$ the cutoff equals one on a neighborhood, so its gradient does not contribute and $\nabla h_p$ is past timelike. At the future null boundary and the vertex $p'$ the flat cone function and its gradient vanish; no timelikeness is asserted there.
 
 - **Use.** In [[lem-gr-locally-finite-shell-sum]] these bumps are summed locally finitely to produce $h^+$ with past timelike gradient on the past side, and the time-reversed construction produces the negative plateau $h^-$.

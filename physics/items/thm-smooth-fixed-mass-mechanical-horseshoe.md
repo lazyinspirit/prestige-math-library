@@ -6,8 +6,9 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 6
-deps: [def-smooth-periodic-oscillator-pulse-model, lem-rescaled-pulse-map-is-c-one-close-to-kick, thm-explicit-perturbed-horseshoe-and-transversality, def-bilateral-symbol-and-bounded-sequence-space, def-stable-unstable-cones-and-line-slopes, def-cm-topologically-mixing-dense-periodic-and-sensitive-maps, def-metric-continuity, def-metric-convergence, def-abs-value, def-countable-choice, def-dependent-choice]
+deps: [def-metric-compactness, def-smooth-periodic-oscillator-pulse-model, lem-rescaled-pulse-map-is-c-one-close-to-kick, thm-explicit-perturbed-horseshoe-and-transversality, def-bilateral-symbol-and-bounded-sequence-space, def-stable-unstable-cones-and-line-slopes, def-cm-topologically-mixing-dense-periodic-and-sensitive-maps, def-metric-continuity, def-metric-convergence, def-abs-value, def-countable-choice, def-dependent-choice]
 dependency_roles:
+  def-metric-compactness: mathematical-premise
   def-smooth-periodic-oscillator-pulse-model: mathematical-premise
   lem-rescaled-pulse-map-is-c-one-close-to-kick: mathematical-premise
   thm-explicit-perturbed-horseshoe-and-transversality: mathematical-premise
@@ -52,11 +53,11 @@ All statements are about the explicit smooth $P$-periodic ordinary differential 
 
 [F1] Structure of the model ([[def-smooth-periodic-oscillator-pulse-model]]): $\beta_\delta$ is $C^\infty$ and $P$-periodic with $\beta_\delta\ge0$ and $\int_0^P\beta_\delta=1$; the associated system is $q'=p$, $p'=-q+\beta_\delta(t)(q^2-a)$, smooth and locally Lipschitz in the state; and $G_\delta=K_\delta\circ R_0$ is its time-$P$ map.
 
-[F2] Pulse approximation ([[lem-rescaled-pulse-map-is-c-one-close-to-kick]]): there are $\delta_1>0$ and $C_1,C_2<\infty$ depending only on $a$ and $w$ such that for $0<\delta\le\delta_1$ the maps $K_\delta$ and $G_\delta=K_\delta\circ R_0$ are defined and $C^\infty$ on a neighbourhood of $S=[-R-1,R+1]^2$, $R=\sqrt a+3$, have $\sup_S(|G_\delta-F|+\|DG_\delta-DF\|)\le C_1\delta$ with $F(q,p)=(p,p^2-a-q)$, $G_\delta$ is a symplectic $C^\infty$ diffeomorphism onto its image, and the conjugate map $H_\delta=S_w\circ G_\delta^{-1}\circ S_w$, $S_w(q,p)=(p,q)$, satisfies $\sup_S(|H_\delta-F|+\|DH_\delta-DF\|)\le C_2\delta$ and is likewise $C^\infty$ and diffeomorphic onto its image near $S$; moreover both $G_\delta$ and $H_\delta$ satisfy each of the six componentwise closeness inequalities displayed in the statement of [[thm-explicit-perturbed-horseshoe-and-transversality]] on $S$ with the common constant $\bar C\delta$, where $\bar C:=\max(C_1,C_2)$.
+[F2] Pulse approximation ([[lem-rescaled-pulse-map-is-c-one-close-to-kick]]): there are $\delta_1>0$ and $C_1,C_2<\infty$ depending only on $a$ and $w$ such that for $0<\delta\le\delta_1$ the maps $K_\delta$ and $G_\delta=K_\delta\circ R_0$ are defined and $C^\infty$ on a neighbourhood of $S=[-R-1,R+1]^2$, $R=\sqrt a+3$, have $\sup_S(|G_\delta-F|+\|DG_\delta-DF\|)\le C_1\delta$ with $F(q,p)=(p,p^2-a-q)$, $G_\delta$ is a symplectic $C^\infty$ diffeomorphism onto its image, and the conjugate map $H_\delta=S_w\circ G_\delta^{-1}\circ S_w$, $S_w(q,p)=(p,q)$, satisfies $\sup_S(|H_\delta-F|+\|DH_\delta-DF\|)\le C_2\delta$ and is likewise $C^\infty$ and diffeomorphic onto its image near $S$; moreover both $G_\delta$ and $H_\delta$ satisfy each of the six componentwise closeness inequalities displayed in the statement of [[thm-explicit-perturbed-horseshoe-and-transversality]] on $S$ with the common constant $\bar C\delta$, where $\bar C:=\max(1,C_1,C_2)$.
 
 [F3] Under the Axioms of Countable and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]]), the perturbed horseshoe ([[thm-explicit-perturbed-horseshoe-and-transversality]]): for every $\varepsilon\le1/6$ with $C\varepsilon\le1$ and every $C^2$ diffeomorphism $G$ onto its image on a neighbourhood of $S$ satisfying the six closeness inequalities with constant $\varepsilon$ on $S$, and whose conjugate $S_w\circ G^{-1}\circ S_w$ does the same, the conclusions of clauses 1-4 above hold for $G$ under these same axioms with sensitivity constant $2(\sqrt a-3)$ and with all codes constant outside finite sets.
 
-[F4] The coding and transversality vocabulary ([[def-stable-unstable-cones-and-line-slopes]], [[def-cm-topologically-mixing-dense-periodic-and-sensitive-maps]], [[def-metric-continuity]], [[def-metric-convergence]], [[def-abs-value]]): the definitions of homeomorphism, compactness in the metric sense, conjugacy, chaos in the stated sense, hyperbolic fixed point, and transverse homoclinic point used in clauses 1-4.
+[F4] A homeomorphism here means a bijection $h_\delta$ whose forward and inverse maps are continuous in the stated metrics ([[def-metric-continuity]]); conjugacy means such a homeomorphism satisfying $G_\delta\circ h_\delta=h_\delta\circ S_\pm$. Compactness means that every open cover of the metric subspace has a finite subcover ([[def-metric-compactness]]). Chaos has the four properties in [[def-cm-topologically-mixing-dense-periodic-and-sensitive-maps]]. Hyperbolicity means that every eigenvalue of the fixed-point differential has modulus different from $1$; a transverse homoclinic point is a point different from the fixed point lying in both invariant sets, with injective $C^1$ curves in those sets through it and nonzero linearly independent tangents ([[def-stable-unstable-cones-and-line-slopes]], using metric convergence [[def-metric-convergence]]).
 
 
 
@@ -64,7 +65,7 @@ All statements are about the explicit smooth $P$-periodic ordinary differential 
 
 **Proof technique:** direct; choose $\delta_0$ so that the pulse approximation puts $G_\delta$ and $H_\delta$ inside the hypotheses of the perturbed horseshoe theorem, then transfer that theorem's conclusions.
 
-1.1 Choice of the threshold: put $\bar C:=\max(C_1,C_2)$ and let $\delta_0:=\min\bigl(\delta_1,\;1/(6\max(1,\bar C)),\;1/(\max(1,C)\max(1,\bar C))\bigr)>0$, so that for $0<\delta<\delta_0$ the number $\varepsilon:=\bar C\delta$ satisfies $\varepsilon\le1/6$ and $C\varepsilon\le1$. [given, F2, F3, algebra]
+1.1 Choice of the threshold: put $\bar C:=\max(1,C_1,C_2)$ and let $\delta_0:=\min\bigl(\delta_1,\;1/(6\max(1,\bar C)),\;1/(\max(1,C)\max(1,\bar C))\bigr)>0$, so that for $0<\delta<\delta_0$ the number $\varepsilon:=\bar C\delta$ satisfies $0<\varepsilon\le1/6$ and $C\varepsilon\le1$. [given, F2, F3, algebra]
 
 2.1 Hypotheses of the perturbed horseshoe for $G_\delta$: by [F2] (with the identification of $G_\delta$ as the time-$P$ map in [F1]), for $0<\delta<\delta_0$ the maps $G_\delta$ and $H_\delta=S_w\circ G_\delta^{-1}\circ S_w$ are $C^\infty$, hence $C^2$, diffeomorphisms onto their images on a neighbourhood of $S$, and both satisfy each of the six componentwise closeness inequalities of [F3] on $S$ with the common constant $\varepsilon=\bar C\delta$; in particular $H_\delta$ is defined and $C^2$ on a neighbourhood of $S$ with the same inequalities. Thus the hypotheses of [F3] are met with $\varepsilon=\bar C\delta$. [step 1.1, F1, F2, F3]
 
@@ -73,7 +74,7 @@ All statements are about the explicit smooth $P$-periodic ordinary differential 
 
 ## Remarks
 
-- The threshold $\delta_0$ is explicit: it is the minimum of the pulse-approximation threshold and the two smallness conditions on $\max(C_1,C_2)\delta$ from [[thm-explicit-perturbed-horseshoe-and-transversality]]. No qualitative structural-stability theorem is used.
+- The threshold $\delta_0$ is explicit: it is the minimum of the pulse-approximation threshold and the two smallness conditions on $\max(1,C_1,C_2)\delta$ from [[thm-explicit-perturbed-horseshoe-and-transversality]]. No qualitative structural-stability theorem is used.
 
 - The forced oscillator $q''=-q+\beta_\delta(t)(q^2-a)$ is a dimensionless mathematical model. A mechanical interpretation with a mass, a length scale and an angular frequency would multiply $q$ and $p$ by those scales and rescale the Hamiltonian; that interpretation, its units and its physical scope belong to the consuming physics pages and are not asserted here.
 

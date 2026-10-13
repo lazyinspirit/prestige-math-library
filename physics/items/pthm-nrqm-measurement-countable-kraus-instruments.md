@@ -13,7 +13,6 @@ deps:
     def-bounded-linear-operator,
     def-countable-choice,
     def-hilbert-orthogonal-projection,
-    def-non-negative-and-positive-operator,
     def-nrqm-measurement-framework-declared-measurements-and-instruments,
     def-nrqm-state-geometry-framework-state-space,
     def-nrqm-state-geometry-pure-mixed-states-and-purity,
@@ -21,7 +20,6 @@ deps:
     def-trace-of-a-trace-class-operator,
     lem-nrqm-composites-countable-kraus-normalization,
     lem-nrqm-composites-density-and-scalar-spectral-probability,
-    lem-nrqm-composites-finite-effects-and-instruments,
     lem-nrqm-composites-general-trace-class-instrument-and-effect-duality,
     lem-nrqm-composites-nuclear-bounded-cyclicity,
     lem-nrqm-composites-rank-one-operator-calculus,
@@ -30,14 +28,12 @@ deps:
     post-nrqm-framework-ideal-conditional-measurement,
     post-nrqm-framework-observable-and-probability,
     post-nrqm-framework-state-and-composition,
-    thm-cauchy-schwarz-in-an-inner-product-space,
     thm-trace-class-is-a-two-sided-banach-operator-ideal
   ]
 dependency_roles:
   def-bounded-linear-operator: mathematical-premise
   def-countable-choice: mathematical-premise
   def-hilbert-orthogonal-projection: mathematical-premise
-  def-non-negative-and-positive-operator: mathematical-premise
   def-nrqm-measurement-framework-declared-measurements-and-instruments: formulation-prerequisite
   def-nrqm-state-geometry-framework-state-space: formulation-prerequisite
   def-nrqm-state-geometry-pure-mixed-states-and-purity: mathematical-premise
@@ -45,7 +41,6 @@ dependency_roles:
   def-trace-of-a-trace-class-operator: mathematical-premise
   lem-nrqm-composites-countable-kraus-normalization: mathematical-premise
   lem-nrqm-composites-density-and-scalar-spectral-probability: mathematical-premise
-  lem-nrqm-composites-finite-effects-and-instruments: mathematical-premise
   lem-nrqm-composites-general-trace-class-instrument-and-effect-duality: mathematical-premise
   lem-nrqm-composites-nuclear-bounded-cyclicity: mathematical-premise
   lem-nrqm-composites-rank-one-operator-calculus: mathematical-premise
@@ -54,7 +49,6 @@ dependency_roles:
   post-nrqm-framework-ideal-conditional-measurement: physical-assumption
   post-nrqm-framework-observable-and-probability: physical-assumption
   post-nrqm-framework-state-and-composition: formulation-prerequisite
-  thm-cauchy-schwarz-in-an-inner-product-space: mathematical-premise
   thm-trace-class-is-a-two-sided-banach-operator-ideal: mathematical-premise
 proof_strategy: direct
 provenance:
@@ -109,9 +103,9 @@ Equivalently, $M_a^*F_aM_a=F_a$ for every $a$. If $H$ is finite-dimensional, thi
 
 [F2] **Density expansions.** A state has an expansion $\rho=\sum_{n}w_{n}T_{u_{n},u_{n}}$ with orthonormal $(u_{n})$, $w_{n}\ge0$, $\sum_{n}w_{n}=1$; then $\operatorname{tr}(\rho B)=\sum_{n}w_{n}\langle Bu_{n},u_{n}\rangle$ for bounded $B$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a), [[lem-nrqm-composites-nuclear-bounded-cyclicity]] clause (b)).
 
-[F3] **Positivity of the Kraus products.** $F_{a}=M_{a}^{*}M_{a}\ge0$ and $F_{a}\le I$: the finite sums $G_{N}:=\sum_{a\le N}F_{a}$ satisfy $0\le G_{N}\le G_{N+1}\le I$ because $G_{N+1}-G_{N}=F_{N+1}\ge0$ and $\langle(I-G_{N})x,x\rangle=\sum_{a>N}\|M_{a}x\|^{2}\to0$ ([[def-non-negative-and-positive-operator]], [[lem-nrqm-composites-finite-effects-and-instruments]] clause (b), [F1]).
+[F3] **Effects of the Kraus family.** Each $F_a=M_a^{*}M_a$ is bounded and self-adjoint, with $\langle F_ax,x\rangle=\|M_ax\|^{2}\ge0$. The normalization and [F1] give $\langle(I-F_a)x,x\rangle=\sum_{b\ne a}\|M_bx\|^{2}\ge0$ for every $x$, so $0\le F_a\le I$ in the general-H quadratic-form order used to define effects in [[def-nrqm-measurement-framework-declared-measurements-and-instruments]] clause (d).
 
-[F4] **Zero quadratic form.** If $X$ is a positive bounded operator and $\langle Xu,u\rangle=0$ for every unit vector $u$, then $X=0$: by Cauchy-Schwarz for the positive semidefinite sesquilinear form $(x,y)\mapsto\langle Xx,y\rangle$ one has $|\langle Xx,y\rangle|^{2}\le\langle Xx,x\rangle\langle Xy,y\rangle=0$ for all $x,y$ ([[thm-cauchy-schwarz-in-an-inner-product-space]], [[def-non-negative-and-positive-operator]]).
+[F4] **Zero quadratic form for a positive form.** If $X$ is bounded and self-adjoint with $q_X(x):=\langle Xx,x\rangle\ge0$ for every $x$, then $b_X(x,y):=\langle Xx,y\rangle$ satisfies $|b_X(x,y)|^{2}\le q_X(x)q_X(y)$. If $q_X(y)>0$, expanding $q_X(x-\frac{b_X(x,y)}{q_X(y)}y)\ge0$ gives this inequality; if $q_X(y)=0$, positivity of $q_X(x+ty)$ for every $t\in\mathbb C$ forces $b_X(x,y)=0$. Consequently, if $q_X(x)=0$ for every $x$, then all pairings $\langle Xx,y\rangle$ vanish and $X=0$.
 
 [F5] **Updates and their formulas.** For $p_{a}>0$ one has $\rho_{a}=M_{a}\rho M_{a}^{*}/p_{a}$ with $\operatorname{tr}(M_{a}\rho M_{a}^{*})=\operatorname{tr}(\rho F_{a})=p_{a}$ ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]] clause (d), [[lem-nrqm-composites-rank-one-operator-calculus]] clause (e), [[lem-nrqm-composites-nuclear-bounded-cyclicity]] clause (b)).
 
@@ -123,9 +117,9 @@ Equivalently, $M_a^*F_aM_a=F_a$ for every $a$. If $H$ is finite-dimensional, thi
 
 3.1 [Sufficiency of the criterion] Assume $M_bM_a=0$ whenever $b\ne a$. For a state $\rho$ and $p_a>0$, cyclicity and [F5] give $\operatorname{tr}(\rho_a F_b)=\operatorname{tr}(\rho(M_bM_a)^*(M_bM_a))/p_a=0$ for every $b\ne a$. By clause (a), already proved in steps 1.1-2.1, the outcome probabilities in the state $\rho_a$ sum to $1$, so its probability for $a$ is $1$. Hence the instrument is repeatable, without any assumption that $F_a$ commutes with $M_a$. [step 1.1, step 2.1, given, F1, F5, algebra]
 
-4.1 [Necessity and the equivalent identity] Assume repeatability. For a unit vector $x$, if $M_ax\ne0$, the state $T_{x,x}$ has $p_a=\|M_ax\|^2>0$, and the probability for $b\ne a$ after outcome $a$ is $\|M_bM_ax\|^2/\|M_ax\|^2=0$ by the rank-one rules and [F5]. If $M_ax=0$, then $M_bM_ax=0$ directly. Thus $M_bM_a$ vanishes on every vector, proving necessity. Applying [F1] to $M_ax$ shows $\sum_b\|M_bM_ax\|^2=\|M_ax\|^2$. Under the criterion only $b=a$ remains, so $\langle M_a^*F_aM_ax,x\rangle=\|M_a^2x\|^2=\|M_ax\|^2=\langle F_ax,x\rangle$; polarization gives $M_a^*F_aM_a=F_a$. Conversely that identity and the same nonnegative norm sum force each $\|M_bM_ax\|^2=0$ for $b\ne a$. [step 3.1, given, F1, F4, F5, algebra]
+4.1 [Necessity and the equivalent identity] Assume repeatability. For a unit vector $x$, if $M_ax\ne0$, the state $T_{x,x}$ has $p_a=\|M_ax\|^2>0$, and the probability for $b\ne a$ after outcome $a$ is $\|M_bM_ax\|^2/\|M_ax\|^2=0$ by the rank-one rules and [F5]. If $M_ax=0$, then $M_bM_ax=0$ directly. Thus $M_bM_a$ vanishes on every vector, proving necessity. Applying [F1] to $M_ax$ shows $\sum_b\|M_bM_ax\|^2=\|M_ax\|^2$. Under the criterion only $b=a$ remains, so $\langle M_a^*F_aM_ax,x\rangle=\|M_a^2x\|^2=\|M_ax\|^2=\langle F_ax,x\rangle$. For the self-adjoint difference $D:=M_a^*F_aM_a-F_a$, equality of these quadratic forms gives $q_D(x)=\langle Dx,x\rangle=0$ for every $x$; the complex polarization identity $4\langle Dx,y\rangle=q_D(x+y)-q_D(x-y)+i q_D(x+iy)-i q_D(x-iy)$ then gives $\langle Dx,y\rangle=0$ for all $x,y$, hence $D=0$. Conversely $M_a^*F_aM_a=F_a$ gives $\|M_a^2x\|^2=\|M_ax\|^2$; by [F1], $\sum_b\|M_bM_ax\|^2=\|M_ax\|^2$, so all nonnegative terms with $b\ne a$ vanish. [step 3.1, given, F1, F4, F5, algebra]
 
-5.1 [The finite-dimensional projection consequence] Suppose $H$ is finite-dimensional and the criterion holds. Put $E_a:=\{y:F_ay=y\}$. By [F1], for $y=M_ax$ the criterion implies $\|M_ay\|^2=\|y\|^2$, hence $\langle(I-F_a)y,y\rangle=0$. Since $I-F_a\ge0$, positive-form Cauchy-Schwarz gives $(I-F_a)y=0$, so $\operatorname{ran}M_a\subseteq E_a$. On $E_a$, $\|M_ay\|=\|y\|$, so $M_a|_{E_a}$ is injective; finite dimensionality makes its image all of $E_a$. If $x\perp E_a$ and $e\in E_a$, then $\langle M_ax,M_ae\rangle=\langle x,F_ae\rangle=\langle x,e\rangle=0$. Thus $M_ax$ lies in $E_a$ and is orthogonal to all of $E_a$, so is zero. Consequently $F_a$ is identity on $E_a$ and zero on $E_a^\perp$, hence is the orthogonal projection onto $E_a$. This proves the final finite-dimensional assertion of (b); the surjectivity step uses finite dimensionality and is not asserted for general $H$. [step 4.1, F1, F3, F4, algebra]
+5.1 [The finite-dimensional projection consequence] Suppose $H$ is finite-dimensional and the criterion holds. Put $E_a:=\{y:F_ay=y\}$. By [F1], for $y=M_ax$ the criterion implies $\|M_ay\|^{2}=\|y\|^{2}$, hence $\langle(I-F_a)y,y\rangle=0$. By [F3], $I-F_a$ is self-adjoint with nonnegative quadratic form; [F4] gives $\langle(I-F_a)y,z\rangle=0$ for every $z$, so $(I-F_a)y=0$ and $\operatorname{ran}M_a\subseteq E_a$. On $E_a$, $\|M_ay\|=\|y\|$, so $M_a|_{E_a}$ is injective; finite dimensionality makes its image all of $E_a$. If $x\perp E_a$ and $e\in E_a$, then $\langle M_ax,M_ae\rangle=\langle x,F_ae\rangle=\langle x,e\rangle=0$. Thus $M_ax$ lies in $E_a$ and is orthogonal to all of $E_a$, so is zero. Consequently $F_a$ is identity on $E_a$ and zero on $E_a^\perp$, hence is the orthogonal projection onto $E_a$. This proves the final finite-dimensional assertion of (b); the surjectivity step uses finite dimensionality and is not asserted for general $H$. [step 4.1, F1, F3, F4, algebra]
 
 6.1 [Clauses (c) and (d)] For a declared ideal sharp measurement, $M_{a}=P_{a}$ satisfies $M_{b}M_{a}=P_{b}P_{a}=0$ for $b\ne a$ and $F_{a}=P_{a}^{2}=P_{a}$, so the criterion of (b) holds and the instrument is repeatable, in agreement with [[pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles]] clause (b); the explicit instrument of [[pthm-nrqm-measurement-instrument-updates-not-determined-by-effects]] clause (c) violates repeatability, so the criterion is not automatic. Since the outcome probabilities are functions of the effects alone while distinct normalized Kraus families may share effects, the effects do not determine the update; this is the non-determination recorded in [[pthm-nrqm-measurement-instrument-updates-not-determined-by-effects]] clause (b) and clause (v) of P3. This is (c) and (d). [step 4.1, step 5.1, given, F1, F3, algebra]
 
@@ -133,16 +127,4 @@ Equivalently, $M_a^*F_aM_a=F_a$ for every $a$. If $H$ is finite-dimensional, thi
 
 ## Remarks
 
-The finite-dimensional qualification in (b) is essential. For an explicit
-infinite-dimensional countermodel, take a Hilbert space with orthonormal basis
-$e_0,f_1,f_2,\dots,g_1,g_2,\dots$ and fix $0<t<1$. Define bounded operators
-$M_1e_0=\sqrt t\,f_1$, $M_1f_j=f_{j+1}$, $M_1g_j=0$, and
-$M_2e_0=\sqrt{1-t}\,g_1$, $M_2g_j=g_{j+1}$, $M_2f_j=0$;
-put $M_a=0$ for $a\ge3$. The images within each operator are orthogonal,
-so these formulas extend continuously from finite sums, with norm at most
-$1$. Writing $P_F$ and $P_G$ for the orthogonal projections onto the closed
-spans of the $f_j$ and $g_j$, their effects are
-$F_1=P_F+tT_{e_0,e_0}$ and $F_2=P_G+(1-t)T_{e_0,e_0}$, hence
-$F_1+F_2=I$. Since $M_2M_1=M_1M_2=0$, (b) proves repeatability;
-however $F_1e_0=te_0$ and $F_1^2e_0=t^2e_0$, so $F_1$ is not a
-projection. This is a conditional operator model, not an apparatus claim.
+The finite-dimensional qualification in (b) is essential. For an explicit infinite-dimensional countermodel, take a Hilbert space with orthonormal basis $e_0,f_1,f_2,\dots,g_1,g_2,\dots$ and fix $0<t<1$. Define bounded operators $M_1e_0=\sqrt t\,f_1$, $M_1f_j=f_{j+1}$, $M_1g_j=0$, and $M_2e_0=\sqrt{1-t}\,g_1$, $M_2g_j=g_{j+1}$, $M_2f_j=0$; put $M_a=0$ for $a\ge3$. The images within each operator are orthogonal, so these formulas extend continuously from finite sums, with norm at most $1$. Writing $P_F$ and $P_G$ for the orthogonal projections onto the closed spans of the $f_j$ and $g_j$, their effects are $F_1=P_F+tT_{e_0,e_0}$ and $F_2=P_G+(1-t)T_{e_0,e_0}$, hence $F_1+F_2=I$. Since $M_2M_1=M_1M_2=0$, (b) proves repeatability; however $F_1e_0=te_0$ and $F_1^2e_0=t^2e_0$, so $F_1$ is not a projection. This is a conditional operator model, not an apparatus claim.

@@ -1,0 +1,7 @@
+# Batch65–79 gate1 routing resolution
+
+Native decision/ledger subject binding is repaired. Sixteen canonical fixed records preserve documented existing reader repairs, distinct native finding occurrences, actual inherited choice-premise omissions, and exact own-subject page/consumer corrections. Existing unowned fixed rows, including the causal owner six gate1rows, now have legal exact-ID supplemental routes. No source was edited for this task.
+
+All original native observations and producer/consumer/pre-reader bindings were checked unchanged for 182 existing decisions. Complete before bytes are retained in before/. Twenty-nine amended carriers retain source bytes identical to reader-post and only metadata continuity is claimed; two touched79 amendments retain their actual source-interface choice repair classification. Current227 supplier quotations are exact. The full native read-only routing check leaves zero assigned non-stamp errors and 53 assigned current carrier stamp failures. Root owns final metadata regeneration and stamps; passing final routing is not claimed yet. Scoped cross-batch unowned messages disappear in the full check because their original assigned groups own those rows.
+
+Evidence: receipt.json, metadata-continuity-review.json, original/proposed decision archives, precise corrected-source passages, full-before.txt and full-after.txt. Three79 source premise corrections use the causal owner actual focused review and consumer-dispositions provenance; no whole independent proof audit or native coverage is invented.

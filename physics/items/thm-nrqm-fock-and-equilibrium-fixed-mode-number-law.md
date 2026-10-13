@@ -75,7 +75,7 @@ adopted measurement postulate, and no such physical claim is made here.
 
 [F2] For $\mathbb H=\mathbb C$ one has $\mathbb C^{\otimes m}=\mathbb C$, $P_+^{(m)}=\mathrm{id}$ and $\operatorname{ran}P_+^{(m)}=\mathbb C$ for every $m$ ([[lem-nrqm-composites-hilbert-tensor-construction]], [[lem-nrqm-composites-permutation-sector-projections]]).
 
-[F3] $A_\pm(1)$ are closed operators with $A_+(1)e_m=\sqrt mP_+^{(m)}(1\otimes e_{m-1})$ and $A_-(1)e_m=\sqrt{m+1}\Psi_1^{(m)}(e_{m+1})$ for the elementary unit vectors ([[thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains]]).
+[F3] $A_\pm(1)$ are closed operators. For a finite-sector vector $\psi$, their coordinate formulas are $(A_+(1)\psi)_0=0$, $(A_+(1)\psi)_n=\sqrt n\,\psi_{n-1}$ for $n\ge1$, and $(A_-(1)\psi)_n=\sqrt{n+1}\,\psi_{n+1}$ for $n\ge0$, under the identifications of [F2] ([[thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains]]).
 
 [F5] The complex exponential satisfies $\exp(z+w)=\exp(z)\exp(w)$ for all complex $z,w$ ([[thm-complex-exponential-addition-and-real-extension]]).
 
@@ -83,7 +83,7 @@ adopted measurement postulate, and no such physical claim is made here.
 
 ## Proof
 
-1.1 [Oscillator coefficients] By [F2], $1\otimes e_{m-1}$ is the unit vector of the $m$-th tensor power and $P_+^{(m)}=\mathrm{id}$, so [F3] gives that the coordinate-$m+1$ entry of $A_+(1)e_m$ is $\sqrt{m+1}$ and all other coordinates vanish, that is $A_+(1)e_m=\sqrt{m+1}e_{m+1}$; here $e_m$ denotes the unit vector of the tensor power $\mathbb C^{\otimes m}$ and of the Fock sector simultaneously. Similarly, since $\Psi_1^{(m)}:\mathbb C\to\mathbb C$ is multiplication by $\langle1,1\rangle=1$, $A_-(1)e_m=\sqrt m\,e_{m-1}$ for $m\ge1$ and $A_-(1)e_0=0$. This is (a). [F2, F3, algebra]
+1.1 [Oscillator coefficients] For $e_m$ supported in coordinate $m$, the raising formula of [F3] has its only nonzero coordinate at $m+1$, with value $\sqrt{m+1}$, so $A_+(1)e_m=\sqrt{m+1}e_{m+1}$. For $m\ge1$ the lowering formula has its only nonzero coordinate at $m-1$, with value $\sqrt m$, so $A_-(1)e_m=\sqrt m\,e_{m-1}$; for $m=0$ every lowering coordinate is zero. This proves (a). [F2, F3, algebra]
 
 1.2 [Convergence and normalization] Let $z\in\mathbb C$ and $S_N:=e^{-|z|^2/2}\sum_{n\le N}z^n/\sqrt{n!}\,e_n$. Orthogonality of the $e_n$ gives $\|S_N-S_M\|^2=e^{-|z|^2}\sum_{M<n\le N}|z|^{2n}/n!$, and $\sum_n|z|^{2n}/n!=\exp(|z|^2)$ by [F4], so $(S_N)$ is Cauchy and converges in the complete space $F(\mathbb C)$ to a vector $\psi_z$; moreover $\|\psi_z\|^2=\lim_N\|S_N\|^2=e^{-|z|^2}\exp(|z|^2)=1$, so $\|\psi_z\|=1$. For $z=0$ only the zeroth term survives, so convergence is absolute. For $z\ne0$, convergence is absolute because the ratio of consecutive moduli of $\sum_n|z|^n/\sqrt{n!}$ is $|z|/\sqrt{n+1}\to0$, so that series converges by the ratio test ([[thm-ratio-test]]); and $\sum_n|z|^{2n}/n!=\exp(|z|^2)$ is the exponential series of the real number $|z|^2\ge0$ ([F4]). [F1, F4, F5, algebra]
 

@@ -28,7 +28,7 @@ verification:
 
 ## Example
 
-For the dimensionless oscillator $H(q,p)=(q^2+p^2)/2$, velocity Verlet is the matrix map $z\mapsto S_hz$, where
+Take $d=1$, $U=\mathbb R^2$, $\Pi=\mathbb R$, $M=(1)$, and $V(q)=q^2/2$ in [[def-cm-splitting-hamiltonian-and-verlet-map]]. Thus the dimensionless oscillator has $H(q,p)=(q^2+p^2)/2$. For each initial state $z_0=(q_0,p_0)\in U$, velocity Verlet is the matrix map $z\mapsto S_hz$, where
 
 $$S_h=\begin{pmatrix}1-h^2/2&h\\-h(1-h^2/4)&1-h^2/2\end{pmatrix}.$$
 
@@ -40,7 +40,7 @@ The conclusion is an explicit exact-arithmetic all-step fact for this linear exa
 
 ## Verification
 
-**Given:** The oscillator, the velocity-Verlet kick-drift-kick formula, and the stated step.
+**Given:** The domain, mass matrix, potential, arbitrary initial state $z_0\in U$, and the velocity-Verlet kick-drift-kick formula from the splitting definition; $0<h<2$.
 
 [F1] [[def-cm-splitting-hamiltonian-and-verlet-map]] gives $K_{h/2}(q,p)=(q,p-hq/2)$ and $D_h(q,p)=(q+hp,p)$; [[prop-cm-drift-kick-and-verlet-preserve-the-canonical-form]] proves exact symplecticity.
 

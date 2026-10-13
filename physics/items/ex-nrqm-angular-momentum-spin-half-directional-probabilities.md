@@ -6,7 +6,7 @@ domain: physics
 title: "Spin-half outcome probabilities along an arbitrary direction: the Bloch parametrization and worked cases"
 status: draft
 origin: session
-dependency_level: 12
+dependency_level: 11
 deps: [def-axiom-of-choice, def-countable-choice, def-inner-product-space, def-nrqm-angular-momentum-framework-angular-momentum-observables, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-observable-and-probability, post-nrqm-framework-state-and-composition, prop-nrqm-orbital-and-spin-finite-spin-matrices, pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
@@ -134,9 +134,11 @@ product preparation and read the two projection weights.
 ## Remarks
 
 - **One preparation, all directions.** The Bloch vector determines the whole
-  family of directional laws of this preparation; the example computes no
-  joint law of two nonparallel directions, which is excluded by the
-  incompatibility results of the uncertainty page.
+  family of directional laws of this preparation. These marginal laws alone
+  do not specify joint probabilities for measurements in two directions.
+  Such probabilities require a declared joint or sequential measurement
+  model, including any state change between measurements; none is supplied
+  here. No impossibility of all joint probability laws is asserted.
 - **No apparatus.** The probabilities are Born weights of the model; whether
   a given Stern-Gerlach or optical apparatus realizes $S_{n}$ is a tested
   identification under the preparation and apparatus postulate P7 and is not

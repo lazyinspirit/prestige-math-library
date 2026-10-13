@@ -31,7 +31,7 @@ proof_strategy: direct
 
 ## Example
 
-Let $m>0$, $g\in\mathbb R$ and consider the two constant-forcing models ([[def-cm-oscillator-model-and-phase-system]]).
+Let $m>0$, $g\in\mathbb R$ and consider the two constant-forcing models with time domain $I=\mathbb R$ (the half-line solution in (ii) is the restriction of its global solution) ([[def-cm-oscillator-model-and-phase-system]]).
 
 - (i) Uniform force: $x''=g$ with data $x(0)=x_0$, $x'(0)=v_0$. The unique solution is $x(t)=x_0+v_0t+\tfrac12gt^2$.
 - (ii) Linear drag: $m=1$, $c=2$, $g=1$, that is $x''+2x'=1$, with data $(x_0,v_0)=(0,0)$. The unique solution on $[0,\infty)$ is $x(t)=\tfrac12t-\tfrac14(1-e^{-2t})$, and its velocity $x'(t)=\tfrac12(1-e^{-2t})$ increases to the limiting value $\tfrac12$.
@@ -40,7 +40,7 @@ Let $m>0$, $g\in\mathbb R$ and consider the two constant-forcing models ([[def-c
 
 **Given:** The parameters $m,g$ and the data of the two lines; the forced oscillator theorem applies in both since $k=0\ge0$ and the forcing is constant, hence continuous.
 
-[L1] For $m>0$, $c\ge0$, $k\ge0$ and continuous $f$, the unique solution of $x''+cx'+kx=f$ with data $(x_0,v_0)$ at $t_0=0$ is $x=x_h+\int_0^tg(t-s)f(s)ds$, where $x_h$ is the homogeneous solution with the data and $g$ is the homogeneous kernel with $g(0)=0$, $g'(0)=1/m$; for $k=c=0$ one has $g(u)=u/m$, and for $k=0$, $c>0$ one has $g(u)=(1-e^{-cu/m})/c$ ([[thm-cm-forced-oscillator-variation-of-constants]], [[prop-cm-oscillator-degenerate-and-repulsive-cases]]). [given]
+[L1] For $m>0$, $c\ge0$, $k\ge0$ and continuous $f$, the unique solution of $m x''+cx'+kx=f$ with data $(x_0,v_0)$ at $t_0=0$ is $x=x_h+\int_0^tg(t-s)f(s)ds$, where $x_h$ is the homogeneous solution with the data and $g$ is the homogeneous kernel with $g(0)=0$, $g'(0)=1/m$; for $k=c=0$ one has $g(u)=u/m$, and for $k=0$, $c>0$ one has $g(u)=(1-e^{-cu/m})/c$ ([[thm-cm-forced-oscillator-variation-of-constants]], [[prop-cm-oscillator-degenerate-and-repulsive-cases]]). [given]
  
 [L2] For $k=0$ the homogeneous solutions are $x_h(t)=A+Be^{-ct/m}$ when $c>0$ and $x_h(t)=A+Bt$ when $c=0$, with $A=x_0+v_0m/c$, $B=-v_0m/c$ respectively $A=x_0$, $B=v_0$ ([[prop-cm-oscillator-degenerate-and-repulsive-cases]]). [given]
 

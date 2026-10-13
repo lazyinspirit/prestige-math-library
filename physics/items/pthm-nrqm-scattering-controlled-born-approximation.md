@@ -62,9 +62,7 @@ sources:
         author-hosted course text), Section 15.4 printed pages 213-215: the Born
         approximation and the condition for its validity"
       url: "https://farside.ph.utexas.edu/teaching/qmech/qmech.pdf"
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections
-        12.2.2-12.2.3 printed pages 265-270 (PDF pages 273-278): expanding the
-        S-matrix and the scattering amplitude"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 12.2-12.3, printed pages 261-270 (PDF pages 269-278)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 verification:
   precheck: pass

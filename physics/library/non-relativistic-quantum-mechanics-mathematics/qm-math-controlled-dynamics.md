@@ -68,6 +68,12 @@ requires:
   - qm-math-orbital-and-spin
   - qm-math-intervals-and-contacts
   - qm-math-oscillator
+  - complex-differentiability-and-cauchy-riemann
+  - properties-of-the-integral-and-the-working-ftc
+  - the-derivative-and-mean-value-theorems
+  - the-fundamental-theorems-of-calculus
+  - the-identity-theorem-and-the-open-mapping-theorem
+  - the-riemann-integral
 examples: []
 ---
 
@@ -91,10 +97,12 @@ identification of the stationary and dynamical sectors.
 Every item carries `domain: mathematics` and depends only on mathematical
 suppliers from [[qm-math-oscillator]], [[qm-math-orbital-and-spin]],
 [[qm-math-intervals-and-contacts]], [[qm-math-coulomb]], [[qm-math-composites]]
-and published mathematics. The page opens with
-[[thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness]] and its
-truncation estimate, then splits into the approximation branches (WKB/Airy,
-perturbation, adiabatic, rotating wave), the solvable models (oscillator, Rabi)
-and the scattering branch; nothing here asserts a physical interpretation,
-measurement model or empirical claim, and the companion page
+and published mathematics. The item list begins with the two spectral-calculus
+lemmas, followed by the allowed-region WKB coefficient equation and the
+common-domain evolution; [[thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness]]
+and its truncation estimate follow. The page then splits into approximation
+branches (WKB/Airy, perturbation, adiabatic, rotating wave), solvable models
+(oscillator, Rabi) and the scattering branch. The page presents mathematical
+model calculations and records no experimental observations or uncertainty
+records. The companion page
 [[qm-math-controlled-dynamics-examples]] stays mathematics as well.

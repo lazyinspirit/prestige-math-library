@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 0
-deps: [thm-uniform-derivative-limit-on-a-closed-interval, thm-uniform-limit-continuous-real-functions, def-continuity-real, def-derivative, def-directional-and-partial-derivatives, thm-continuous-partial-derivatives-imply-total-differentiability, def-ck-euclidean-maps-and-diffeomorphisms, def-interval, thm-total-derivative-computes-directional-and-partial-derivatives, thm-algebra-of-derivatives]
+deps: [thm-uniform-derivative-limit-on-a-closed-interval, thm-uniform-limit-continuous-real-functions, def-continuity-real, def-derivative, def-directional-and-partial-derivatives, thm-continuous-partial-derivatives-imply-total-differentiability, def-ck-euclidean-maps-and-diffeomorphisms, def-interval, thm-total-derivative-computes-directional-and-partial-derivatives, thm-algebra-of-derivatives, thm-ftc-first-part, thm-ftc-second-part, thm-continuous-implies-integrable, def-oriented-integral]
 dependency_roles:
   thm-uniform-derivative-limit-on-a-closed-interval: mathematical-premise
   thm-uniform-limit-continuous-real-functions: mathematical-premise
@@ -18,6 +18,10 @@ dependency_roles:
   def-interval: mathematical-premise
   thm-total-derivative-computes-directional-and-partial-derivatives: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
+  thm-ftc-first-part: mathematical-premise
+  thm-ftc-second-part: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
+  def-oriented-integral: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -54,15 +58,17 @@ the derivatives extending continuously to $R$.
 
 [F3] $C^2$ on an open set means: the first and second partial derivatives exist and are continuous; if the first partial derivatives are continuous, the map is totally differentiable ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[thm-continuous-partial-derivatives-imply-total-differentiability]], [[thm-total-derivative-computes-directional-and-partial-derivatives]]).
 
+[F4] If $g$ is $C^2$ on an open neighbourhood of a point $(t,x)$, then its two mixed partials agree there. For small $h,k>0$, the rectangular increment $g(t+h,x+k)-g(t+h,x)-g(t,x+k)+g(t,x)$, divided by $hk$, is both the average of $\partial_x\partial_tg$ and the average of $\partial_t\partial_xg$ over the rectangle, by applying the one-variable fundamental theorem in the two orders; continuity of both second partials makes the respective averages tend to their values at $(t,x)$ as $h,k\downarrow0$ ([[thm-ftc-second-part]], [[thm-continuous-implies-integrable]]).
+
 ## Proof
 
 **Proof technique:** direct; apply the one-variable uniform-differentiation theorem in each variable separately.
 
 1.1 Fix $x\in[0,L]$ and apply [F1] to the sequence $t\mapsto u_k(t,x)$ on $[0,T]$ with $c=0$: $u_k(0,x)\to u(0,x)$ and $\partial_tu_k(\cdot,x)\to v(\cdot,x)$ uniformly on $[0,T]$ (the convergence of $\partial_tu_k$ is uniform on all of $R$, hence on the slice). We obtain: $t\mapsto u(t,x)$ is differentiable on $[0,T]$ with $\partial_tu(t,x)=v(t,x)$, and $u_k(\cdot,x)\to u(\cdot,x)$ uniformly on $[0,T]$. Applying the same statement to $\partial_tu_k(\cdot,x)$ with its $t$-derivative $\partial_t^2u_k(\cdot,x)\to v_2(\cdot,x)$, $t\mapsto v(t,x)$ is differentiable with $\partial_tv(t,x)=v_2(t,x)$. [given, F1]
 
-1.2 Fix $t\in[0,T]$ and apply [F1] in the variable $x$ to $x\mapsto u_k(t,x)$ and to $x\mapsto \partial_xu_k(t,x)$: $x\mapsto u(t,x)$ has $\partial_xu(t,x)=w(t,x)$, and $x\mapsto w(t,x)$ has $\partial_xw(t,x)=w_2(t,x)$. Applying [F1] in $x$ to $x\mapsto v(t,x)$ (whose $x$-derivative converges uniformly to $z$) gives $\partial_xv(t,x)=z(t,x)$; applying it in $t$ to $t\mapsto w(t,x)$ gives $\partial_tw(t,x)=z(t,x)$. [given, F1]
+1.2 Fix $t\in[0,T]$ and apply [F1] in the variable $x$ to $x\mapsto u_k(t,x)$ and to $x\mapsto \partial_xu_k(t,x)$: $x\mapsto u(t,x)$ has $\partial_xu(t,x)=w(t,x)$, and $x\mapsto w(t,x)$ has $\partial_xw(t,x)=w_2(t,x)$. Applying [F1] in $x$ to $x\mapsto \partial_tu_k(t,x)$ is legitimate because its $x$-derivative equals $\partial_t\partial_xu_k$ by [F4]; the limits are $v(t,x)$ and $z(t,x)$, so $\partial_xv(t,x)=z(t,x)$. Applying [F1] in $t$ to the sequence $t\mapsto\partial_xu_k(t,x)$, whose values converge to $w(t,x)$ and whose derivatives converge uniformly to $z(t,x)$, gives $\partial_tw(t,x)=z(t,x)$. [given, F1, F4]
 
-2.1 The functions $v,w,v_2,z,w_2$ are continuous on $R$ as uniform limits of continuous functions [F2], and $u$ is continuous as the uniform limit of continuous functions (in fact the estimates of step 1.1 are uniform in $x$). Steps 1.1-1.2 identify the first and second partial derivatives of $u$ with these continuous functions; in particular $\partial_t\partial_xu=\partial_x\partial_tu=z$. By [F3], $u$ is $C^2$ on the interior of $R$ with the stated derivatives, all extending continuously to $R$. [step 1.1, step 1.2, F2, F3] ∎
+2.1 The functions $v,w,v_2,z,w_2$ are continuous on $R$ as uniform limits of continuous functions [F2]. Fix $(t_0,x_0)\in R$. By continuity, $v$ and $w$ are bounded on a relative neighbourhood of $(t_0,x_0)$. The integral-evaluation theorem [[thm-ftc-second-part]], with continuous slice derivatives integrable by [[thm-continuous-implies-integrable]] and reversed endpoints handled by [[def-oriented-integral]], and steps 1.1-1.2 give, for $(t,x)$ in that neighbourhood, $$u(t,x)-u(t_0,x_0)=\int_{x_0}^{x}w(t_0,s)\,ds+\int_{t_0}^{t}v(s,x)\,ds .$$ Thus $|u(t,x)-u(t_0,x_0)|\le M_w|x-x_0|+M_v|t-t_0|$ for local bounds $M_w,M_v$, proving continuity of $u$ on $R$, including its boundary. Steps 1.1-1.2 identify the first and second partial derivatives of $u$ with these continuous functions; in particular $\partial_t\partial_xu=\partial_x\partial_tu=z$. By [F3], $u$ is $C^2$ on the interior of $R$ with the stated derivatives, all extending continuously to $R$. [step 1.1, step 1.2, F2, F3, F4] ∎
 
 ## Remarks
 

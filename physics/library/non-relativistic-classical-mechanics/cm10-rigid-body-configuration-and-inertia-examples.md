@@ -15,6 +15,8 @@ requires:
   - cm01-framework-quantities-and-geometry
   - cm-math-geometry
   - cm-math-verification
+  - sine-cosine-and-the-definition-of-pi
+  - pi-the-equivalent-characterizations
 ---
 
 These examples and counterexamples exercise the definitions and theorems of

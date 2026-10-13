@@ -74,6 +74,11 @@ regularity required by the cited item:
   vector $n$ with $g(n,n)=-1$, or a smooth observer congruence
   ([[def-gr-observer-and-rest-space]],
   [[def-gr-observer-congruence-and-adapted-charts]]);
+- an *isometric-identification entry*: declared points $p,q\in M$ and a
+  linear isomorphism $\Phi:T_pM\to T_qM$ satisfying
+  $g_q(\Phi v,\Phi w)=g_p(v,w)$ for every $v,w\in T_pM$; this map is supplied
+  comparison data, not an identification selected by the metric alone, and
+  any required relation to observer entries is specified by the readout;
 - a *ray entry*: a smooth curve $\eta:J\to M$, where $J\subseteq\mathbb R$ is
   an interval with nonempty interior, that is a future-directed null geodesic
   of $\nabla$; thus it is affinely parametrized and satisfies
@@ -83,6 +88,11 @@ regularity required by the cited item:
   [[def-causal-classification-of-lorentz-vectors]],
   [[post-gr-ideal-clocks-and-free-fall]] clause (iii));
 - a *chart entry*: a smooth chart $(U,x)$ of $M$ ([[def-smooth-manifold]]);
+- an *azimuth entry*: a continuous real function $\varphi:K\to\mathbb R$
+  on a compact parameter interval $K=[t_1,t_2]$ of a worldline entry, with
+  values in radians, together with the local azimuth chart designations and
+  compatibility conditions specified in (b)4; this is supplied data, not an
+  assertion that such a function exists;
 - a *detector entry*: the data of the ideal two-body detector of the
   linearized-wave regime, namely a TT linearized-wave datum, a reference point
   $x_0$, a separation vector $\delta\ne0$ with $\delta^0=0$, the arm direction
@@ -136,11 +146,10 @@ real numbers determined by the entries of $D$.
 
 3. *Deflection angle.* Suppose $D$ contains a ray entry $\eta:J\to M$ with
    tangent $W$, parameter values $s_1<s_2$ in $J$, observer entries $n_1,n_2$ at
-   $p_1:=\eta(s_1)$ and $p_2:=\eta(s_2)$, and an isometric identification
-   $\Phi:T_{p_1}M\to T_{p_2}M$, by which is meant a linear isomorphism with
-   $g_{p_2}(\Phi v,\Phi w)=g_{p_1}(v,w)$ for all $v,w\in T_{p_1}M$ and
-   $\Phi(n_1)=n_2$. Put $q_i:=h_{n_i}(W(s_i))$, the spatial projection of
-   clause (b) of [[def-gr-observer-and-rest-space]], and suppose $q_1,q_2\ne0$.
+   $p_1:=\eta(s_1)$ and $p_2:=\eta(s_2)$, and an isometric-identification
+   entry $\Phi:T_{p_1}M\to T_{p_2}M$ of (a) satisfying $\Phi(n_1)=n_2$.
+   Put $q_i:=h_{n_i}(W(s_i))$, the spatial projection of
+   clause (c) of [[def-gr-observer-and-rest-space]], and suppose $q_1,q_2\ne0$.
    Then $|q_i|_{n_i}:=\sqrt{g_{p_i}(q_i,q_i)}>0$, because $g_{p_i}$ is positive
    definite on the rest space ([[lem-gr-observer-projection-decomposition]]),
    and $\Phi(q_1)$ lies in $n_2^{\perp}$ with
@@ -157,18 +166,32 @@ real numbers determined by the entries of $D$.
    [[def-principal-inverse-sine-and-cosine]].
 
 4. *Azimuthal increment and perihelion advance.* Suppose $D$ contains a
-   worldline entry $h:I\to M$, a chart entry $(U,x)$ and an annotation entry
-   designating the coordinate $x^2$ as the azimuth and declaring two parameter
-   values $t_1<t_2$ in $I$ with $h(t_1),h(t_2)\in U$ to be successive passages
-   of the worldline through the minimum of the coordinate $x^1$ within $U$. Then
-   the **azimuthal-increment readout** and the **perihelion-advance readout**
-   are
+   worldline entry $h:I\to M$, a chart entry $(U,x)$ with
+   $h([t_1,t_2])\subseteq U$ for $t_1<t_2$ in $I$, and an azimuth entry
+   $\varphi:[t_1,t_2]\to\mathbb R$. Put $r(t):=x^1(h(t))$ on $h^{-1}(U)\subseteq I$. Require $t_1,t_2$
+   to be strict local minima of $r$ (relative to its domain in $I$), with no
+   strict local minimum between them; these are the designated successive
+   perihelion passages. For every $t\in[t_1,t_2]$ require a smooth chart
+   $(V,y)$ containing $h(t)$, whose dimensionless coordinate $y^2$ is
+   designated as a local azimuth, and a relative parameter neighborhood $J_t$
+   of $t$ on which $h(J_t)\subseteq V$ and
+   $\varphi(u)-y^2(h(u))\in2\pi\mathbb Z$ for every $u\in J_t$.
+   Here $2\pi\mathbb Z:=\{2\pi k:k\in\mathbb Z\}$, and the designations
+   specify a common angular orientation and period $2\pi$. The supplied
+   continuous $\varphi$ is the **unwrapped azimuth** along this traversal;
+   local azimuth representatives alone are not sufficient input. The
+   **azimuthal-increment readout** and the **perihelion-advance readout** are
 
-   $$\Delta\varphi:=x^2\bigl(h(t_2)\bigr)-x^2\bigl(h(t_1)\bigr),\qquad A:=\Delta\varphi-2\pi .$$
+   $$\Delta\varphi:=\varphi(t_2)-\varphi(t_1),\qquad A:=\Delta\varphi-2\pi .$$
 
-   The designation of the two passages is a declared condition carried by the
-   annotation, not a consequence of the other entries, and the readout is a
-   chart datum: it is not asserted to be invariant under changes of chart.
+   This convention subtracts one positive circuit; for a negatively oriented
+   traversal it still uses the displayed signed formula. The radial and
+   angular designations are part of the declared configuration, not a
+   dynamical prediction or a chart-invariance assertion. Adding a constant
+   $2\pi k$ to the supplied lift leaves the increment unchanged. A traversal
+   with $\varphi(t_2)=\varphi(t_1)+2\pi$ has $A=0$ even when its endpoint
+   local azimuth representatives coincide. No lift-existence theorem is
+   assumed: the readout is defined only when the required lift is supplied.
 
 5. *Arrival times.* Suppose $D$ contains worldline entries $h_E,h_R$, a finite
    family of ray entries $\eta_1,\dots,\eta_N$ and parameter values such that
@@ -272,7 +295,7 @@ suppliers: [[def-gr-smooth-lorentzian-objects]] uses countable choice
 ([[def-countable-choice]]) for the canonical smooth structures of tangent
 bundles, and nothing here uses any further choice. No measurability,
 integrability, completeness, differentiability or convergence beyond the cited
-items is used. Clause (c) evaluates a prediction only at parameter values for
+items is used; the continuous unwrapped azimuth in (b)4 is supplied explicitly. Clause (c) evaluates a prediction only at parameter values for
 which the cited items supply its ingredients, and each readout of (b) is
 defined only for configurations carrying the stated entries and incidence
 conditions, so this definition asserts no existence of worldlines, rays,

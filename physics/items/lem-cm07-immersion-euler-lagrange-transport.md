@@ -1,7 +1,7 @@
 ---
 id: lem-cm07-immersion-euler-lagrange-transport
 kind: lemma
-title: "Transport of the Euler-Lagrange expression under an arbitrary C^3 immersion: E of the substituted Lagrangian is the Jacobian-transpose multiple of E of the ambient Lagrangian"
+title: "Transport of the Euler-Lagrange expression under a C^3 map: E of the substituted Lagrangian is the Jacobian-transpose multiple of E of the ambient Lagrangian"
 status: draft
 origin: session
 domain: mathematics
@@ -33,7 +33,7 @@ sources:
   references:
     - title: "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Sections 5.8 and 6.3: generalized coordinates in variational calculus and the reduction of the Lagrangian description to a parametrized configuration"
       url: "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
-    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.3.2 and Section 5.1: generalized coordinates eliminating constraint forces and the kinetic energy as a quadratic form in the coordinate velocities"
+    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.3.1 and Section 5.1: generalized coordinates eliminating constraint forces and the kinetic energy as a quadratic form in the coordinate velocities"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
 verification:
   precheck: pass
@@ -61,9 +61,9 @@ $$\widetilde L_{q}\bigl(t,q(t),q'(t)\bigr)-\frac{d}{dt}\Bigl(\widetilde L_{v}\bi
 
 for every $t\in J'$. In words: the Euler-Lagrange expression of the
 substituted Lagrangian is the transpose-Jacobian multiple of the
-Euler-Lagrange expression of the ambient Lagrangian. No invertibility of
-$DX$ is assumed; the identity holds for every immersion, and in particular for
-square and non-square parameterizations.
+Euler-Lagrange expression of the ambient Lagrangian. No rank or invertibility
+condition on $DX$ is assumed; the identity holds for every $C^{3}$ map $X$,
+square or not.
 
 ## Facts & Assumptions
 
@@ -91,20 +91,20 @@ square and non-square parameterizations.
 
 3.1 Cancellation: on the curve $v=q'(t)$, so [F3] gives $X_{qq}[q'(t)]^{\mathsf T}L_{w}=\bigl(X_{qq}[v]\bigr)^{\mathsf T}L_{w}$ at $(t,q(t),q'(t))$; subtracting step 2.1 from step 1.3 leaves $DX(q(t))^{\mathsf T}\bigl(L_{x}(t,x,x')-\frac{d}{dt}L_{w}(t,x,x')\bigr)$, which is the displayed identity. [F2, F3, step 1.3, step 2.1, algebra]
 
-4.1 Conclusion: the regularity of step 1.1 and the identity of step 3.1 are the two assertions of the statement, for the arbitrary immersion $X$ and curve $q$. [step 1.1, step 3.1] ∎
+4.1 Conclusion: the regularity of step 1.1 and the identity of step 3.1 are the two assertions of the statement, for the arbitrary $C^{3}$ map $X$ and curve $q$. [step 1.1, step 3.1] ∎
 
 ## Remarks
 
-- **The identity is the mechanism of constraint elimination.** When $X$
-  parametrizes a constraint locus and the ambient equation of motion is
-  projected onto the tangent space of the locus, the left side of the identity
-  is the Euler-Lagrange expression of the substituted Lagrangian and the right
-  side is the tangent projection of the ambient expression. The identity is
-  purely mathematical: no physical model, no reaction and no constraint law
-  enters it, and no invertibility or dimension hypothesis is used beyond the
-  $C^{3}$ regularity of $X$ and the $C^{2}$ regularity of $L$.
+- **Use with constrained coordinates.** If a map $X$ is used to describe
+  constrained configurations, this identity relates the substituted
+  Euler-Lagrange expression to the ambient expression after multiplication by
+  the explicit matrix $DX(q)^{\mathsf T}$. The identity is purely mathematical:
+  no physical model, reaction law or constraint hypothesis enters it, and no
+  rank or dimension condition is used beyond the $C^{3}$ regularity of $X$ and
+  the $C^{2}$ regularity of $L$.
 
 - **Comparison with the invertible case.** When $DX$ is invertible the vanishing
-  of the two expressions is equivalent; for a non-square immersion only one
-  implication of the vanishing is available, and the missing directions are
-  the normal directions of the parametrized submanifold.
+  of the two expressions is equivalent. In general, the identity always sends
+  a zero ambient expression to a zero substituted expression. The converse
+  requires that $DX(q)^{\mathsf T}u=0$ force $u=0$ for $u\in\mathbb R^{m}$;
+  this item assumes no such property.

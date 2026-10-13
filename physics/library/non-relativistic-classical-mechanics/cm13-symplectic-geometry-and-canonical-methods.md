@@ -46,7 +46,8 @@ $\sum_{a}dq^{a}\wedge dP_{a}$. Transitions between genuine overlapping
 full-dimensional charts ($r=3N$) preserve the two-form; the difference of
 their one-form data is closed. [[def-cm13-canonical-form]] fixes the canonical
 coordinates of the presentation, in which the two-form has the constant
-coefficient form $\sum_{a}d\theta^{a}\wedge d\theta^{n+a}$; the mathematical
+coefficient form $\sum_{a=1}^{m}d\theta^{a}\wedge d\theta^{m+a}$, where $m$ is the
+chart's half-dimension; the mathematical
 phase-domain and symplectic-manifold vocabulary is that of
 [[cm-math-canonical]].
 
@@ -55,9 +56,20 @@ function as the unique field $X_{f}$ with $\iota_{X_{f}}\omega=df$ and
 computes $X_{H}=(H_{p},-H_{x})$ for the branch Hamiltonian
 $H(t,x,p)=\tfrac12p\cdot\mathsf M^{-1}p+U(t,x)$ and its generalized-coordinate
 analogue. [[pthm-cm13-hamiltonian-field-integrates-the-model-equations]]
-identifies the integral curves of $X_{H_{t}}$ with the momentum-phase curves
-of the model's motions, in every chart — for the potential branch and, with
-residual forces, for the forced field, which is Hamiltonian exactly when the
+identifies, on the potential branch, the Cartesian integral curves of
+$X_{H_{t}}$ with the momentum-phase curves of the model's motions. For any
+of the declared generalized-coordinate maps, the substituted Lagrange
+equations are equivalent to the corresponding Hamilton system with residual
+generalized force; when $d\equiv0$, they are equivalent to the integral-curve
+equation of $X_{\widetilde H_{t}}$. For full-dimensional charts these curves
+reconstruct model motions by
+[[pthm-cm07-coordinate-covariance-of-the-equations]]. For a parametrization
+of a scleronomic regular holonomic-constraint locus, reconstruction as ideal
+constrained motions requires that constraint datum and the ideal-reaction
+law, as in [[pthm-cm12-hamilton-equivalence]] clause 4; an arbitrary
+lower-dimensional immersion alone does not supply those hypotheses.
+With residual forces, the Cartesian model equation is equivalent to the
+forced momentum-phase field, which is Hamiltonian exactly when the
 residual force is velocity-independent and satisfies
 $d(t,x,v)=-\nabla_{x}V(t,x)$ for a $C^{2}$ potential
 $V:I_{0}\times Q\to\mathbb R$.
@@ -94,7 +106,7 @@ every full-dimensional canonical chart, under the stated Axiom of Countable
 Choice used by the change-of-variables step. The phase-volume unit is action
 to the power $3N$. [[pthm-cm13-generating-functions]] closes the
 constructive part: first- and second-kind generating functions with
-nondegenerate mixed derivative generate canonical local diffeomorphisms of
+nondegenerate mixed derivative on nonempty admissible position and momentum domains generate canonical local diffeomorphisms of
 the presentation, the local converse holds under an invertible
 $(q,Q)$-projection, and a time-dependent generating function carries the
 identity $p\cdot dq-H\,dt=P\cdot dQ-K\,dt+dS$ with $K=H+S_{t}$ and transports

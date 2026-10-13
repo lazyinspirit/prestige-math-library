@@ -76,7 +76,7 @@ with the two summands of (d) having dimensions $\binom m2\binom{k+1}2$ and $\bin
 
 [F3] **Finite-dimensional subspaces are closed.** A subspace of a normed space that admits a finite basis is closed ([[cor-finite-dimensional-subspaces-are-closed]]).
 
-[F4] **Exchange operators and projections.** For a Hilbert space $W$, the exchange operator $\tau_W:=U_{(12)}$ satisfies $\tau_W^2=I$ and $\tau_W^{*}=\tau_W$ and $\tau_W(w\otimes w')=w'\otimes w$, and $P_\pm^{(W)}=\frac12(I\pm\tau_W)$ are the orthogonal projections with the corresponding ranges ([[lem-nrqm-identical-particles-two-particle-exchange-operator]] clauses (a),(b), [[lem-nrqm-composites-permutation-sector-projections]] clauses (a),(c)).
+[F4] **Exchange operators and projections.** For a Hilbert space $W$, the exchange operator $\tau_W:=U_{(0\,1)}$ satisfies $\tau_W^2=I$ and $\tau_W^{*}=\tau_W$ and $\tau_W(w\otimes w')=w'\otimes w$, and $P_\pm^{(W)}=\frac12(I\pm\tau_W)$ are the orthogonal projections with the corresponding ranges ([[lem-nrqm-identical-particles-two-particle-exchange-operator]] clauses (a),(b), [[lem-nrqm-composites-permutation-sector-projections]] clauses (a),(c)).
 
 [F5] **Bounded tensor maps.** For bounded operators $S,S'$ on $X$ and $T,T'$ on $Y$ there is a unique bounded $S\otimes T$ with $(S\otimes T)\kappa(u\otimes v)=\kappa'(Su\otimes Tv)$, $\|S\otimes T\|\le\|S\|\|T\|$, $(S\otimes T)(S'\otimes T')=(SS')\otimes(TT')$, $(S\otimes T)^{*}=S^{*}\otimes T^{*}$, and unitarity of $S,T$ gives unitarity of $S\otimes T$ ([[lem-nrqm-composites-bounded-tensor-maps]] clauses (a)-(d), [[def-bounded-linear-operator]], [[def-operator-norm]]).
 

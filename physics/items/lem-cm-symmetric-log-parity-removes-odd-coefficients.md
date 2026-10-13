@@ -1,7 +1,7 @@
 ---
 id: lem-cm-symmetric-log-parity-removes-odd-coefficients
 kind: lemma
-title: Symmetry of the splitting map forces $X_j=0$ for every even $j$, so the first modified-energy correction is of order $h^2$
+title: Symmetry of the splitting map forces $X_j=0$ for every even $j$, so the first possible modified-energy correction is of order $h^2$
 status: draft
 origin: pipeline
 domain: mathematics
@@ -46,9 +46,11 @@ verification:
 
 Let $d\ge1$, let $(U,U_\rho,\tilde A,\tilde B,M,K,\delta,\Psi_h)$ be analytic splitting data ([[def-cm-analytic-splitting-data-and-exact-splitting-map]]), and use the notation of [[def-cm-modified-log-coefficients-and-truncations]] and [[lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives]]: the coefficient fields $X_j$ ($j\ge1$, with $X_j$ acting on holomorphic functions as the coefficient operator $D_j=[h^j]L(h)$, and $X_j=D_j$ in the notation of that lemma) and the normalized primitives $H_j$ with $dH_j=\iota_{X_j}\omega_{\mathbb C}$, $H_j(0)=0$, on the domains $D_j$.
 
-1. **Reversibility.** For every $h$ for which both sides are defined, $\Psi_{-h}=\Psi_h^{-1}$.
+1. **Reversibility.** For the local flow germs at $h=0$, and their mutually reverse continuation branches wherever defined, $\Psi_{-h}=\Psi_h^{-1}$.
 2. **Parity.** $X_j=0$ for every even $j\ge2$.
-3. **Modified energy.** Consequently $H_2=0$, and the truncated modified Hamiltonian $H^{[N]}:=H+\sum_{j=2}^{N}h^{j-1}H_j$ equals $H+h^2H_3+\cdots+h^{N-1}H_N$ on $D_N$, so the first possible correction is of order $h^2$.
+3. **Modified energy.** Consequently $H_2=0$. For $N\ge2$ define the finite complex modified Hamiltonian on $D_N$ by
+$$H_h:=\tilde H+\sum_{j=2}^{N}h^{j-1}H_j.$$
+Then $H_h=\tilde H+\sum_{j=3}^{N}h^{j-1}H_j$ on $D_N$, so the first possible correction is of order $h^2$. For real $h$, on the real part of $D_N$, $H_h$ restricts to the corresponding real function with baseline $H=A+B$.
 
 ## Facts & Assumptions
 
@@ -60,10 +62,7 @@ read as formal power series in $h$ whose $h$-degree-$j$ coefficients are finite 
 
 [L2] Integer case: for every integer $m\ge0$, $T_h^mf=f\circ\Psi_h^m$ as formal series in $h$ (the sum is finite at each $h$-degree and equals the finite binomial sum of [[lem-cm-binomial-pullback-family-and-its-log-are-derivations]] clause 1 for any truncation order $\ge m$). Consequently $T_h^mf$ is well defined for all $m\ge0$ and all holomorphic $f$ on $D_0$.
 
-[L3] Formal identities in one element. Let $A$ be an element of the ring of formal series in $h$ with operator coefficients, with $A=O(h)$. Define $\exp(A):=\sum_{m\ge0}A^m/m!$ and $\log(1+U):=\sum_{k\ge1}(-1)^{k+1}U^k/k$, both well defined coefficient-wise because $A=O(h)$ and $U=O(h)$. Then:
- (i) $\exp(A)\exp(-A)=1$ and $\exp(-A)\exp(A)=1$, because all powers of $A$ commute and the identity holds in the commutative $\mathbb Q$-algebra $\mathbb Q[A]$;
- (ii) $\log(\exp(A))=A$, because both sides are universal rational-coefficient expressions in the single element $A$ and the identity holds in the commutative ring $\mathbb Q\llbracket x\rrbracket$ (differentiate $t\mapsto\log(\exp(tx))$ and use $(\log)'(1+u)=(1+u)^{-1}$ coefficient-wise);
- (iii) hence $\exp$ is injective on $\{A:A=O(h)\}$: if $\exp(A)=\exp(B)$ then $A=\log(\exp(A))=\log(\exp(B))=B$.
+[L3] Formal identities in one element. Let $A$ be an element of the ring of formal series in $h$ with operator coefficients, with $A=O(h)$. Define $\exp(A):=\sum_{m\ge0}A^m/m!$ and $\log(1+U):=\sum_{k\ge1}(-1)^{k+1}U^k/k$, both well defined coefficient-wise because $A=O(h)$ and $U=O(h)$. Then: (i) $\exp(A)\exp(-A)=1$ and $\exp(-A)\exp(A)=1$, because all powers of $A$ commute and the identity holds in the commutative $\mathbb Q$-algebra $\mathbb Q[A]$; (ii) $\log(\exp(A))=A$, because both sides are universal rational-coefficient expressions in the single element $A$ and the identity holds in the commutative ring $\mathbb Q\llbracket x\rrbracket$ (differentiate $t\mapsto\log(\exp(tx))$ and use $(\log)'(1+u)=(1+u)^{-1}$ coefficient-wise); (iii) hence $\exp$ is injective on $\{A:A=O(h)\}$: if $\exp(A)=\exp(B)$ then $A=\log(\exp(A))=\log(\exp(B))=B$.
 
 [L4] Formal binomial group law. For $B_s(x)=\sum_{k\ge0}\binom{s}{k}x^k$, the falling-factorial recurrence gives $(1+x)\partial_xB_s=sB_s$ and $B_s(0)=1$. Comparing coefficients determines the series uniquely. Thus $B_sB_t$ satisfies the same equation as $B_{s+t}$ and the same constant term, so $B_sB_t=B_{s+t}$. Differentiate in $t$ at zero: $\partial_sB_s=B_s\sum_{k\ge1}(-1)^{k+1}x^k/k$, by the derivative formula for $\binom{t}{k}$ at zero. Substituting the single operator $x=\Delta_h=O(h)$ makes all sums finite at any fixed $h$-degree and gives $\partial_sT_h^s=L(h)T_h^s$, with $T_h^0=\mathrm{id}$ ([[def-factorial-and-falling-factorial]], [[lem-cm-binomial-pullback-family-and-its-log-are-derivations]]).
 
@@ -75,7 +74,7 @@ read as formal power series in $h$ whose $h$-degree-$j$ coefficients are finite 
 
 **Proof technique:** direct; identify $\Psi_{-h}$ with the inverse, use the formal exponential of the logarithm to compare $L(h)$ and $L(-h)$, and differentiate in the binomial parameter.
 
-1.1 Reversibility. For $h$ in the common domain, $\Psi_h^{-1}=(\varphi_{\tilde A}^{h/2}\circ\varphi_{\tilde B}^h\circ\varphi_{\tilde A}^{h/2})^{-1}=\varphi_{\tilde A}^{-h/2}\circ\varphi_{\tilde B}^{-h}\circ\varphi_{\tilde A}^{-h/2}=\Psi_{-h}$ by [L1]. This is clause 1. [given, L1, algebra]
+1.1 Reversibility. Use the local flow germs, or continue each inverse factor along the reverse of the branch of its forward factor, as required by [L1]. For $h$ in their common domain, $\Psi_h^{-1}=(\varphi_{\tilde A}^{h/2}\circ\varphi_{\tilde B}^h\circ\varphi_{\tilde A}^{h/2})^{-1}=\varphi_{\tilde A}^{-h/2}\circ\varphi_{\tilde B}^{-h}\circ\varphi_{\tilde A}^{-h/2}=\Psi_{-h}$ by [L1]. This is clause 1. [given, L1, algebra]
 
 1.2 The exponential of the logarithm. By [L4] the family $s\mapsto T_h^sf$ solves the formal initial value problem of [L5] with initial value $f$; the family $s\mapsto\log$-exponential $\exp(sL(h))f$ solves the same problem, because $\frac{d}{ds}\exp(sL(h))=\sum_{m\ge1}L(h)^m s^{m-1}/(m-1)! = L(h)\exp(sL(h))$ by commutation of $L(h)$ with $sL(h)$. By [L5], $T_h^sf=\exp(sL(h))f$ as formal series in $s$; taking $s=1$ and using [L2] with $m=1$, $$\Psi_h^*f=f\circ\Psi_h=T_h^1f=\exp(L(h))f.$$ [given, L2, L4, L5, algebra]
 
@@ -83,7 +82,7 @@ read as formal power series in $h$ whose $h$-degree-$j$ coefficients are finite 
 
 3.1 Vanishing of the even coefficients. Write $L(h)=\sum_{j\ge0}h^jD_j$ (so $D_0=0$). Then $L(-h)=\sum_j(-1)^jh^jD_j$ and $-L(h)=\sum_j-h^jD_j$; comparing $h$-degree-$j$ coefficients in the identity of step 2.1 gives $(-1)^jD_j=-D_j$, hence $D_j=0$ for even $j$. Since $X_j$ acts as $D_j$ by [L6], $X_j=0$ for every even $j\ge2$. This is clause 2. [given, step 2.1, L6, algebra]
 
-4.1 Modified energy. For $j=2$, $X_2=0$ gives $\iota_{X_2}\omega_{\mathbb C}=0$, so $dH_2=0$; since $D_2$ is connected and $H_2(0)=0$, $H_2=0$ by [L6]. Hence $H^{[N]}=H+\sum_{j=2}^Nh^{j-1}H_j=H+h^2H_3+\cdots+h^{N-1}H_N$. This is clause 3. [given, step 3.1, L6] ∎
+4.1 Modified energy. For $j=2$, $X_2=0$ gives $\iota_{X_2}\omega_{\mathbb C}=0$, so $dH_2=0$; since $D_2$ is connected and $H_2(0)=0$, $H_2=0$ by [L6]. The definition of $H_h$ in clause 3 therefore gives $H_h=\tilde H+\sum_{j=3}^{N}h^{j-1}H_j$ on $D_N$, and, for real $h$, its restriction to the real part of $D_N$ is real-valued: the baseline $\tilde H$ and each normalized primitive $H_j$ are real there by the primitive supplier. On $U$ the baseline is $H=A+B$. No nonzero $H_3$ is asserted; for example, an exact one-part splitting can have every correction zero. This is clause 3. [given, step 3.1, L6] ∎
 
 ## Remarks
 

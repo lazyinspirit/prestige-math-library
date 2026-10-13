@@ -58,8 +58,9 @@ verification:
 **Adopted assumptions.** The page adopts the sector and species assignments of
 P6 in the reading of
 [[def-nrqm-identical-particles-framework-species-sectors-and-preparations]]:
-which species is bosonic or fermionic, its mass, charge, spin label and
-statistics are declared model parameters, and the symmetric or antisymmetric
+which species is bosonic or fermionic, its mass, spin label and statistics,
+and, for a charged species, its charge, are declared model parameters;
+the symmetric or antisymmetric
 sector of the $n$-particle space is part of that declaration. The finite-mode
 occupation model of
 [[def-nrqm-identical-particles-framework-orbital-occupation-model]] adds the

@@ -170,10 +170,13 @@ P7, not a consequence of the declaration.
 
 - **Labels versus particles.** The tensor factors of $H^{\otimes n}$ are
   bookkeeping slots, not particle identities: by clause (c) the model assigns
-  the same sector state to every relabelling, and clause (f) of P6 records
+  the same sector state to every relabelling, and clause (i) of P6 records
   that the labels carry no physical content.
 - **Why the sector restriction is stated for operators.** The rule of clause
   (e) is the one recorded in the owner direction for permutation sectors: a
   bounded quantity restricts to a sector only when it preserves the sector.
-  Position and momentum operators of a single labelled factor do not preserve
-  either sector, which is why they are not read as sector quantities.
+  For $n=1$, both sector projections are the identity, so the assigned
+  one-particle position and momentum operators preserve both sectors and
+  their domains. For $n\ge2$, an operator on a single labelled factor need
+  not preserve either sector; clause (e), including its domain condition,
+  must be checked before reading it as a sector quantity.

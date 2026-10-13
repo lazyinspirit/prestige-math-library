@@ -66,11 +66,11 @@ Let $d\ge1$, let $U$, $M$, $V$, $A$, $B$, $H=A+B$, $D_h$, $K_h$ and $V_h$ be as 
  $$DK_h(q,p)^{\mathsf T}J\,DK_h(q,p)=J.$$
 3. The admissible composition domain of $V_h$ is open, $V_h$ is $C^2$ there, and its derivative satisfies
  $$DV_h(q,p)^{\mathsf T}J\,DV_h(q,p)=J,$$
- so that $V_h^*\omega_U=\omega_U$: the velocity-Verlet map preserves the standard two-form and is a local $C^2$ canonical transformation in the finite-regularity sense of [[def-cm-finite-regularity-canonical-calculus]]. This matrix/form conclusion holds on the full algebraic composition domain; the separate flow interpretations in clauses 1-2 require the stated intermediate-segment containment.
+ so that $V_h^*\omega_U=\omega_U$: the velocity-Verlet map preserves the standard two-form and, when its admissible composition domain is nonempty, is a local $C^2$ canonical transformation in the finite-regularity sense of [[def-cm-finite-regularity-canonical-calculus]]. This matrix/form conclusion holds on the full algebraic composition domain; the separate flow interpretations in clauses 1-2 require the stated intermediate-segment containment.
 
 ## Facts & Assumptions
 
-**Given:** The data of [[def-cm-splitting-hamiltonian-and-verlet-map]]: the phase domain $U$, the symmetric positive definite $M$, the $C^3$ potential $V$, and the maps $D_h,K_h,V_h$; $M$ is invertible because $Mv=0$ implies $v^{\mathsf T}Mv=0$ and hence $v=0$, and $(M^{-1})^{\mathsf T}=M^{-1}$.
+**Given:** The data of [[def-cm-splitting-hamiltonian-and-verlet-map]]: the phase domain $U$, the symmetric positive definite $M$ with its specified two-sided inverse, the $C^3$ potential $V$, and the maps $D_h,K_h,V_h$. Transposing the inverse identities and using $M^{\mathsf T}=M$ gives $(M^{-1})^{\mathsf T}=M^{-1}$.
 
 [F1] Derivative calculus: the Jacobian matrix of a $C^1$ map records its partial derivatives, composition obeys $D(g\circ f)(x)=Dg(f(x))\,Df(x)$, and a map is $C^1$ when its partial derivatives are continuous ([[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[def-total-derivative-in-euclidean-space]], [[def-ck-euclidean-maps-and-diffeomorphisms]]).
 
@@ -90,7 +90,7 @@ Let $d\ge1$, let $U$, $M$, $V$, $A$, $B$, $H=A+B$, $D_h$, $K_h$ and $V_h$ be as 
 
 2.1 Clause 3, composition. Since $V$ is $C^3$, its gradient is $C^2$, so each kick is $C^2$ and the drift is smooth. The admissible composition domain is an intersection of finitely many preimages of the open set $U$ under these continuous maps, hence open; their composition $V_h=K_{h/2}\circ D_h\circ K_{h/2}$ is $C^2$ on it. At each point there, the chain rule of [F1] gives $DV_h=C_1C_2C_3$ with $C_1=DK_{h/2}$ evaluated at $D_h(K_{h/2}(q,p))$, $C_2=DD_h$ evaluated at $K_{h/2}(q,p)$, and $C_3=DK_{h/2}$ evaluated at $(q,p)$. Each factor satisfies $C_i^{\mathsf T}JC_i=J$ by steps 1.1-1.2, so $$DV_h^{\mathsf T}J\,DV_h=C_3^{\mathsf T}\bigl(C_2^{\mathsf T}(C_1^{\mathsf T}JC_1)C_2\bigr)C_3=C_3^{\mathsf T}(C_2^{\mathsf T}JC_2)C_3=C_3^{\mathsf T}JC_3=J.$$ [given, step 1.1, step 1.2, F1, algebra]
 
-3.1 Clause 3, form preservation. The identity of step 2.1 is exactly the matrix condition of [F3] for the $C^2$ map $V_h$, so $V_h^*\omega_U=\omega_U$ on its admissible open domain. The explicit inverse factors are $D_{-h}$ and $K_{-h}$; reversing the palindrome gives $V_{-h}$ as the inverse on the image wherever the compositions exist. Restriction to these open domains makes $V_h$ a $C^2$ diffeomorphism onto its open image, with $C^2$ inverse $V_{-h}$, preserving the form. Thus it is a local $C^2$ canonical transformation in [[def-cm-finite-regularity-canonical-calculus]], without assuming a smooth potential. [step 2.1, F3] ∎
+3.1 Clause 3, form preservation. If the composition domain is empty, the pointwise matrix and form assertions are vacuous. Otherwise it is a phase domain, and the identity of step 2.1 is exactly the matrix condition of [F3] for the $C^2$ map $V_h$, so $V_h^*\omega_U=\omega_U$ on its admissible open domain. The explicit inverse factors are $D_{-h}$ and $K_{-h}$; reversing the palindrome gives $V_{-h}$ as the inverse on the image wherever the compositions exist. Restriction to these open domains makes $V_h$ a $C^2$ diffeomorphism onto its open image, with $C^2$ inverse $V_{-h}$, preserving the form. Thus it is a local $C^2$ canonical transformation in [[def-cm-finite-regularity-canonical-calculus]], without assuming a smooth potential. [step 2.1, F3] ∎
 
 ## Remarks
 

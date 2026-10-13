@@ -30,7 +30,7 @@ sources:
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
     - title: "D. Cline, Variational Principles in Classical Mechanics (2nd edition, University of Rochester River Campus Libraries, open textbook, CC BY-NC-SA 4.0), Section 7.3: invariant transformations and Noether's theorem, with the warning that the invariance must be verified for the actual Lagrangian"
       url: "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-8 (PDF pages 26-27): a conserved Hamiltonian function that differs from the mechanical energy in a time-dependent (moving) description"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-10 (PDF pages 25-28): a conserved Hamiltonian function that differs from the mechanical energy in a time-dependent (moving) description"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
 verification:
   precheck: n/a
@@ -40,13 +40,15 @@ verification:
 
 - **Symmetries are properties of the model, not of the kinematics.** The
   symmetry criteria of this page are identities imposed on the model's
-  declared mechanical Lagrangian $L=K-U$ and its residual forces
+  mechanical Lagrangian $L=K-U$ of the declared potential presentation;
+  residual forces enter the charge rates separately
   ([[def-cm08-symmetry-of-the-mechanical-lagrangian]]); the affine structure
   of spacetime, the availability of every inertial frame and the Galilean
   transformation law do not by themselves make a potential invariant. For the
   uniform-force potential $U=-\sum_i m_i\mathbf g\cdot x_i$ with $d\equiv0$,
-  $\sum_i\nabla_{x_i}U=-M_{\mathrm{tot}}\mathbf g$: translations are
-  symmetries exactly in dimensionless directions $a\perp\mathbf g$, and a direction with
+  $\sum_i\nabla_{x_i}U=-M_{\mathrm{tot}}\mathbf g$: the strict translation
+  datum $\tau=0$, $\xi_i=a$, $B=0$ satisfies the identity exactly in
+  nonzero dimensionless directions $a\perp\mathbf g$, and a direction with
   $a\cdot\mathbf g\ne0$ gives a momentum and boost charge that fail along
   motions. The sharpness clauses locate that failure along maximal motions
   through states where their required directional derivative is nonzero.
@@ -78,8 +80,9 @@ verification:
   ([[pthm-cm08-point-noether]] clause 2), and for a general datum with time
   reparametrisation the rate is the residual force paired with
   $\xi-v\tau$ ([[pthm-cm08-general-noether]] clause 3). A friction force along
-  a translation generator, for instance, removes the corresponding momentum
-  charge whatever symmetries the potential part has. The balance theorems of
+  a translation generator, for instance, changes the corresponding momentum
+  charge whenever its total pairing with that generator is nonzero along the
+  motion. The balance theorems of
   the force page, in particular [[pthm-cm03-energy-balance]], remain valid in
   those situations and carry the residual contribution explicitly; the
   Noether charges and the balance identities are different deductions, and
@@ -92,12 +95,13 @@ verification:
   with the mass-operator velocity, and the chart energy can be conserved while
   that difference is nonzero; the phrase "the Hamiltonian is conserved" is
   therefore not by itself a statement about the inertial mechanical energy.
-  Similarly, a potential with $\partial_t U\not\equiv0$ satisfies the
-  time-translation identity of [[pthm-cm08-time-energy]], with parameter
-  measured in seconds, exactly when its explicit time dependence vanishes, and
-  in the global potential branch the
-  sharpness clause exhibits a motion through a state where $\partial_t U\ne0$
-  whose mechanical energy changes at that rate.
+  For the datum $(\tau,\xi,B)=(1,0,0)$, with parameter measured in seconds,
+  the time-translation identity of [[pthm-cm08-time-energy]] holds exactly
+  when $\partial_t U\equiv0$ on $I_0\times Q$. If
+  $\partial_t U\not\equiv0$, this datum fails the identity; in the global
+  potential branch the sharpness clause exhibits a maximal motion through
+  a state where $\partial_t U\ne0$ whose mechanical energy has that
+  nonzero derivative there.
 
 - **No converse and no empirical claim.** The results of this page are
   conditional deductions inside the force model: symmetry hypotheses on the

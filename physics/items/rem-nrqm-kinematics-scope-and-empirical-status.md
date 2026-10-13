@@ -52,8 +52,10 @@ sources:
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "C. Torre, Galilean Relativity and the Path Integral Formalism in Quantum
         Mechanics, arXiv:2306.13487 (2023), Sections 4 and 6, pages 12-13 and
-        17: the Galilean boost law (4.23) with its phase factor, the passive
-        frame reading and the projective composition of boosts"
+        17: the Galilean boost law (4.23) with its phase factor and passive
+        frame reading; equation (6.4) gives the ordinary composition of pure
+        boosts, while equation (6.8) gives the projective relation between
+        boosts and spatial translations"
       url: "https://arxiv.org/pdf/2306.13487"
     - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave
         Mechanics', Section 6, printed pages 22-25 (PDF pages 22-25): the

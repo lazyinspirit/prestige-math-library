@@ -92,11 +92,15 @@ read in joules, and, for a class $u\in D(A_{l})$, the **declared radial
 equation** is the distributional identity
 $$-u''(r)+\Bigl(\frac{l(l+1)}{r^{2}}-\frac{\gamma}{r}\Bigr)u(r)=A_{l}u(r)\qquad\text{on }(0,\infty),$$
 which by clause (c) of the cited theorem is an ordinary differential equation
-with $C^{2}$ representative whenever $A_{l}u=Eu$ for a constant $E$. The
-**regular reduced solution** at energy attribute $k>0$ is the function
+with $C^{2}$ representative whenever $A_{l}u=\lambda u$ for a constant
+$\lambda$ (unit $\mathrm{m^{-2}}$); its physical energy is
+$E=(\hbar^{2}/2m)\lambda$ in joules. For an **inverse-length parameter**
+$k>0$ (unit $\mathrm{m^{-1}}$), put $\lambda=-k^{2}$ and
+$E(k):=-\hbar^{2}k^{2}/(2m)$ (unit $\mathrm J$). The
+**regular reduced solution** at this parameter is the function
 $u_{\mathrm{reg}}(r)=r^{l+1}e^{-kr}v(2kr)$ of clause (c) of
 [[thm-nrqm-coulomb-kummer-recurrence-and-termination]], with $v$ the regular
-power series of that clause; the pair uses it as the declared radial template
+power series of clause (b) and dimensionless argument $2kr$; the pair uses it as the declared radial template
 of the model, not as a physical state, until the normalisation and spectral
 theorems of the page identify it.
 

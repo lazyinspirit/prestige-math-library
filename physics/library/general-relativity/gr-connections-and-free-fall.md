@@ -13,6 +13,9 @@ requires:
   - the-lebesgue-integral-and-the-convergence-theorems
   - the-logarithm-and-general-powers
   - gr-framework-and-geometry
+  - rn-as-a-normed-space
+  - compactness-in-metric-spaces
+  - the-fundamental-theorems-of-calculus
 page: gr-connections-and-free-fall
 title: "Connections And Free Fall"
 status: draft
@@ -77,8 +80,8 @@ domain is open with smooth evaluation map, the scaling relation
 $\gamma_{p,sv}(t)=\gamma_{p,v}(st)$ holds, and the exponential map
 $\exp_p(v):=\gamma_{p,v}(1)$ is smooth on a star-shaped open domain with
 $d(\exp_p)_0=\operatorname{id}_{T_pM}$, so it is a local diffeomorphism at the
-origin ([[thm-gr-local-geodesics-and-exponential-map]]). Point-normal
-coordinates $\exp_p\circ\psi_p^{-1}$ then give $g_{ab}(p)=\eta_{ab}$,
+origin ([[thm-gr-local-geodesics-and-exponential-map]]). The exponential
+coordinate chart $\psi_p\circ\exp_p^{-1}$ then gives $g_{ab}(p)=\eta_{ab}$,
 $\partial_ag_{bc}(p)=0$ and $\Gamma^a{}_{bc}(p)=0$ at the point. In the
 exponential chart, a geodesic through $p$ is the straight radial line while its
 initial vector remains in the chosen star-shaped domain; no claim is made for a
@@ -87,11 +90,13 @@ explicitly claims nothing at second order
 ([[thm-gr-point-normal-and-exponential-coordinate-charts]]).
 
 **Variational characterization and the radial maximum.** For a $C^2$ future
-timelike curve parametrized by proper time up to origin, the first variation
+timelike curve contained in one smooth chart domain and parametrized by
+proper time up to origin, consider $C^2$ variations valued in that same
+chart domain, with fixed endpoints and future timelike fibers. The first variation
 of the length functional is computed under the integral sign, with
 $D_s$-$D_t$ commutation and an integration by parts; using compactly supported
-bump variation fields one concludes that $L'(0)=0$ for every variation with
-fixed endpoints if and only if $D_t\gamma'=0$, i.e. stationarity is exactly
+bump variation fields one concludes that $L'(0)=0$ for every such variation
+if and only if $D_t\gamma'=0$, i.e. stationarity is exactly
 the geodesic equation in the given proper-time parameter
 ([[lem-gr-first-variation-of-proper-time]]). The Lorentzian Gauss lemma
 $g_{\exp_pv}(d(\exp_p)_vv,d(\exp_p)_vw)=g_p(v,w)$ is proved from the

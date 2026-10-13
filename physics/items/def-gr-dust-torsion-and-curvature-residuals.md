@@ -5,7 +5,7 @@ title: "Tentative coframe, Cartan torsion and curvature, and the curvature resid
 status: draft
 origin: session
 domain: mathematics
-dependency_level: 10
+dependency_level: 13
 provenance:
   statement: ai-altered
   proof: not-applicable

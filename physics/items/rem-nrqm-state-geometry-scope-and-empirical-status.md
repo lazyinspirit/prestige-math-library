@@ -53,8 +53,10 @@ sources:
         interpretation"
       url: "https://preskill.caltech.edu/ph219/chap2_15.pdf"
     - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.3,
-        printed pages 121-126: pure and impure states, and the remark that an
-        impure state is not a pure state with unknown parameters"
+        printed pages 121-126, especially page 122, equations (6.61)-(6.64):
+        uncertainty about which state the system is in is represented by a
+        probability mixture, distinct from the coherent superposition with
+        amplitudes equal to the square roots of those probabilities"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
         Section 2.1, printed pages 55-58 (PDF pages 66-69): the axiomatic status

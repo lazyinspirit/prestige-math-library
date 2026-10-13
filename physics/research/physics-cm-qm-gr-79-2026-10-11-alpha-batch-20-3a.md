@@ -1,0 +1,81 @@
+# Batch 20 Step 3a adjudication
+
+Run: `physics-cm-qm-gr-79-2026-10-11`; group: `batch-20`; role: alpha.
+
+Review follows the dispatched item order. Scope: twelve touched carriers, one page, one refuter finding; untouched items receive risk review only. No empirical measurements occur.
+
+## Completed lower-level review
+
+The one-dimensional definition explicitly declares scalar force data on an open time/state domain, positive constant mass, C2 motions, C2 time-independent potential, and residual-force presentation. Clause (d) now cites the exact C2 supplier clause (a). The normalized SI phase coordinates make the Euclidean norm dimensionless. The harmonic, damping and drive postulates define their force maps and numerical Lipschitz constants K and K+C; they are adopted restricted models, not empirical deductions. These corrections preserve the equations consumed downstream.
+
+Conservation: maximal ODE existence on I0 × Q × R, energy differentiation and endpoint continuity, nonnegative kinetic energy, both zero-speed/equal-potential directions, and constant rest motion on I0 checked. Strict-minimum stability: n=1, constant positive metric M=m, C2 U; strict minimum gives U' =0, energy barrier/compact continuation supplier applies. The unrestricted autonomous extension is distinguished from the original time window. Harmonic motion: all three classification hypotheses hold at c=0; arbitrary base time, zero amplitude, unit-circle parametrization, least period, whole ellipse and rest stability checked.
+
+Sources/prerequisites opened: items/thm-cm-energy-stability-of-a-strict-minimum.md (Statement and complete Proof), items/prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium.md (Statement and complete Proof), items/thm-cm-homogeneous-oscillator-solution-classification.md (Statement and complete Proof); relevant definitions of force, units, phase, equilibrium and ODE solutions and exact derivative/trigonometric statements. These are authored draft mathematical suppliers, not new publication certifications.
+
+## Pending at checkpoint
+
+Pendulum citation finding verified from Likharev PDF text, Eq. (1.18), PDF page 10 (zero-based P9), printed Chapter 1 page 6. Current source entry still says page 5/PDF 9. Remaining work: locator correction, pendulum supplier proof review, damping/response consumers, manifest consistency, final risk reviews and focused checks.
+
+## Pendulum and damping checkpoint
+
+Pendulum: mathematical chart proof and the complete small-angle supplier proof checked; delta e < r, norm of A=1 and e³/120000 verified. Refuter finding confirmed: inaccurate locator amended to printed page 6 / PDF page 10 after text and rendered-page inspection of https://essentialgraduatephysics.org/Files/CM%20merged.pdf. Statement, verification and scope unchanged. Damped motion: integrability repair supplies the exact missing Newton–Leibniz hypothesis; all constant-energy equivalences checked for c>0. Damped decay: three coefficient regimes, negative rates, critical polynomial decay, SI-normalized energy bound and global stability quantified for fixed m,k,c checked. Risk reviews complete for these items. Next: numerical examples, resonance, scope remark, consumers and manifests.
+
+## Response and final-level checkpoint
+
+Complete response and amplitude-maximum proofs checked. Independent current review found three further defects: the quality-factor remark confused a half width with the normalized full width of the squared response; the worked transient omitted the forward-time domain from its boundedness claim (it grows backward in time); the counterexample used all-time unboundedness language for arbitrary local motions. Corrections preserve the motion formulas and qualify their domains; the quality-factor note defines the approximate profile and derives its normalized full width. Likharev PDF91, Eqs. 5.20–5.22, read in full. Harmonic, damping and response computations checked; risks now reviewed for all twelve routed risk items. All twelve original touched item preimages match Git HEAD bytes and all current items initially matched the post-reader hashes. No historical-byte uncertainty. Next: synchronized contracts/manifests, consumer dispositions, ledger/decision entries and focused checks.
+
+## Decisions and evidence
+
+- `touched:20:cex-cm04-undamped-resonance-with-bounded-drive-is-unbounded`: **amended_repair**. Accepted zero-drive resonant exception. Further amended all-time quantifiers to maximal motions on R; t sin t/2 diverges along pi/2+2pi n and bounded harmonic addition cannot cancel it. Local restrictions are not claimed unbounded. Ledger: `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-zero-drive-exception`, `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-local-versus-maximal-unboundedness`.
+
+- `touched:20:def-cm04-one-dimensional-models-and-equilibria`: **amended_repair**. C2 definition citation repaired; objects, open domains, fixed m>0, residual-force and equilibrium definitions checked. MIT introduction locator further corrected; consumer scalar equations unchanged. Ledger: `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-definition-mit-section`, `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-c2-definition-citation`.
+
+- `touched:20:def-cm04-phase-plane-and-energy-level-sets`: **amended_repair**. Reader SI normalization is sound audit enrichment under def-cm01-units numerical-coordinate convention. Phase and energy sets, empty and zero levels and turning points checked. Amended inaccurate MIT section locator. Ledger: `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-phase-mit-section`.
+
+- `touched:20:ex-cm04-pendulum-small-angle-check`: **amended_repair**. Reader angular-chart clarification and purely mathematical chart suppliers checked independently, including C2 potential, strict minimum and finite-time bound. Amended both MIT introduction section and refuter Likharev page locator. Generalized inertia and torque are distinct from translational mass/force. Ledger: `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-pendulum-mit-section`.
+
+- `touched:20:ex-cm04-resonance-response-check`: **amended_repair**. Reader SI time and dimensionless quality-ratio repair accepted. Exact response, peak and zero-datum transient checked. Further amended claim3/step3.1 boundedness to [0,infinity); negative-time exponential transient prevents global boundedness. Ledger: `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-quality-ratio-units`, `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-forward-boundedness-domain`.
+
+- `touched:20:post-cm04-harmonic-model`: **amended_repair**. Adopted m,k>0,Q=I0=R model and U=kx²/2 checked; reader numerical Lipschitz constant K preserves force law. Amended MIT introduction section locator. Ledger: `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-harmonic-mit-section`.
+
+- `touched:20:post-cm04-linear-damping-model`: **reviewed_no_defect**. Normalization explicitly distinguishes numerical K+C from dimensionful coefficients; exact force -kx-cv and c=0 branch unchanged. Adopted low-speed phenomenology and source fluctuation caveat preserved. This is audit enrichment, with no confirmed substantive defect. Ledger: none (audit enrichment).
+
+- `touched:20:post-cm04-sinusoidal-drive-model`: **reviewed_no_defect**. Numerical SI force map and K+C Lipschitz bound checked; prescribed time-only drive, Omega>0,c>=0 and external-source regime unchanged. Audit enrichment; no confirmed substantive defect. Ledger: none (audit enrichment).
+
+- `touched:20:pthm-cm04-damped-decay-and-stability`: **reviewed_no_defect**. SI-normalized M,K,C/rates and coefficient constants make every norm/energy bound explicit. All three discriminant regimes, critical polynomial decay, zero datum, fixed-parameter uniform bounds and global attraction checked. Reader change is audit enrichment of the numeric-coordinate convention. Ledger: none (audit enrichment).
+
+- `touched:20:pthm-cm04-damped-motion`: **accepted_repair**. Accepted explicit continuous-integrability premise before Newton–Leibniz. Checked complete classification, time translation, endpoints, four constant-energy equivalences for c>0, and unique zero rest state. Ledger: `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-continuous-integrability-premise`.
+
+- `touched:20:pthm-cm04-resonance-and-boundedness`: **amended_repair**. Reader positive-frequency maximum clarification accepted: c²<2mk,f0!=0 gives unique positive peak; c²>=2mk gives decreasing function without positive-domain maximum; zero drive constant. Global existence and all bounded/unbounded cases checked. Further corrected source full-width/half-width confusion in remark. Ledger: `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-full-width-source-fidelity`.
+
+- `touched:20:rem-cm04-linear-model-scope`: **accepted_repair**. Accepted correction distinguishing driving contribution from total state-dependent force; centered quadratic approximation and adopted/derived/empirical distinction agree with suppliers. Every scope paragraph checked. Ledger: `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-driving-contribution-versus-total-force`.
+
+- `page:20:cm04-one-dimensional-conservative-and-dissipative-models`: **accepted_repair**. Checked complete A-page summary and original/current ordered inventory. Positive-frequency peak is accurately qualified by nonzero drive and c²<2mk; model/postulate, conservation, stability and response descriptions match reviewed carriers. Ledger: `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-positive-frequency-page-summary`.
+
+- `refuter:20:1`: **confirmed_fatal**. Observed carrier hash e00f5088397c6d6efd1052f0009ee27c921617a19dd0ebbaebf43fabfa9af252 matches post-reader item. Eq.(1.18) is on Likharev PDF page10 (zero-based9), Chapter1 printed page6, checked in downloaded text and rendered page. Corrected locator from PDF9/printed5. Mathematical claim is unchanged. Ledger: `physics-cm-qm-gr-79-2026-10-11-3a-batch-20-pendulum-eq18-page`.
+
+## Consumer dispositions and metadata
+
+Every direct item/reference use of changed public interfaces was located. Owned consumers use the same scalar equations, normalized SI phase coordinates and declared model hypotheses; their actual uses were checked above. Outside consumers ex-cm09-weak-damping-averaging-check and pthm-cm09-averaging-for-weak-damping use -kx-cv with positive damping; ex-cm14-oscillator-caustic-check, cex-cm14-harmonic-model-critical-fibre and ex-cm14-harmonic-oscillator-hamilton-jacobi-check use -kx, U=kx²/2 and the unchanged harmonic motion theory; def-cm09-coupled-quadratic-model uses scalar data and prescribed-force status; ex-cm09-forced-resonant-mode-check and pthm-cm09-forced-modal-response use the time-only external drive for positive frequency and separate the zero-frequency branch; cex-cm16-stability-does-not-imply-attraction mentions damping only as another model. These actual uses remain sound under numerical normalization; no outside repair or further propagation is required. The newly qualified B-page example and counterexample have no item consumers. Their examples-page summary is a reference consumer: its repeated all-motion unboundedness claim was surgically qualified to maximal motions on R and forward unboundedness, and its pendulum terminology now follows the angular-chart interface. The response remark edit changes no theorem interface. No defective published item was found.
+
+Batch-20 manifest projections now match all twelve current reader-changed carriers, including pendulum dependency_level 13 (previous manifest16), deps, sources, scope and statements. Item order and stable IDs preserved. Owned contracts have refreshed proof-step claims, current supplier quotes and endpoint worksheets. The current owned cross-batch input has no obsolete pendulum translational edges; the reader removed those same-batch prerequisites from the carrier, and the manifest now matches. Remaining changed consumer uses are maintained. No judge stamp existed on Alpha-edited items. No content outside assigned carriers was repaired.
+
+## Source and review limits
+
+Direct dependency inventory comprises 56 exact suppliers, including 37 pinned mathematics imports identified from research/math-imports.json; imports were read-only. Complete central oscillator, forced-response, peak, stability, linearization and pendulum-bound proofs were inspected; elementary direct suppliers were checked at their exact statements/definitions, not re-audited transitively. Likharev PDF pages10,33–35,87–92 and MIT PDF55–56,150–151 were retrieved and read, with rendered inspection of Likharev PDF10. The MIT introductory expansion supplies the quadratic approximation; the forced-response passage supplies transient plus steady solution. Tong web retrieval returned an error; no new claim relies on pretending that retrieval succeeded. Redundant Likharev/MIT support and local mathematical arguments suffice for the reviewed claims. The source author may use informal approximations; local exact theorem claims were checked independently. Reviewer confidence concerns conditional logic/source fidelity, not empirical truth.
+
+All pre-reader touched item SHA256 fingerprints match Git HEAD preimages. Before Alpha edits all 17 items matched post-reader hashes, and the refuter observation hash matched the current pendulum carrier. Historical changes are bound; no owner-resolution substitute is needed. The full current source is the basis of each verdict.
+
+## Final local checks and handoff
+
+- Initial risk-report on `research/physics-cm-qm-gr-79-2026-10-11-batch-20.proof-contracts.json`: exit0, twelve HIGH/CRITICAL items routed. Final same command with `--require-reviewed`: exit0, twelve reviewed, zero errors. Every risk_review names specific claim/hypothesis, supplier and boundary checks.
+- `node tools/tsx-run.mjs tools/physics-support/precheck.mts` on the seven Alpha-edited paths: exit0, five applicable structural/proof checks, zero failures; definitions have no proof check.
+- `node tools/physics-support/rendercheck.mjs` on those seven paths and the routed A page: exit0, eight files, valid renderer YAML and KaTeX, zero defects. The necessary B-page consumer prose correction was then separately renderchecked: exit0, one file, zero defects.
+- The required final `node tools/physics-support/proof-layout.mjs` command batched those seven paths after all edits (repeated after the subsequent B-page consumer prose correction): exit0, seven items, 21 steps, zero defects. Alpha-edited IDs: def-cm04-one-dimensional-models-and-equilibria; def-cm04-phase-plane-and-energy-level-sets; post-cm04-harmonic-model; ex-cm04-pendulum-small-angle-check; pthm-cm04-resonance-and-boundedness; ex-cm04-resonance-response-check; cex-cm04-undamped-resonance-with-bounded-drive-is-unbounded. No formatter or subsequent item edit occurred. The only additional page edit was the necessary same-batch B-page reference-consumer correction; no extra decision was invented for an unrouted obligation.
+- Exact obligation-set check: 14 decisions =12 touched +1 page +1 refuter, no extras or duplicates; every defect reference matches a closed row at 3a-adjudicate. Touched normalization/audit enrichment uses reviewed_no_defect and empty defect_ids. All twelve touched manifest metadata projections match current carriers.
+- Independent numerical recomputation: |x(4)|=0.1531227684,0.0915781944,0.4537038564 for c=1,2,5; respective bounds 0.2134711454,0.0915781944,0.4734675426. Peak height 5.0251890763; pendulum error bound 0.0001673795. These are computed model values, not experimental precision.
+- Owned dependency input refreshed with the two units edges, and the supported ledger refresh command completed successfully.
+
+Unresolved obligations/blockers: none in this dispatch. Published defects: none identified. No judge, stamp, self-certification, new agents or gate battery was initiated. Engine owns hash stamping and subsequent gates.
+
+The B-page inventory/order is unchanged. Its corrected prose no longer transfers an all-time claim to arbitrary local restrictions and explicitly distinguishes angular inertia/torque and quadratic linearized energy. This is a necessary surgical consumer correction within dispatched batch20. It resolves the same local/maximal-motion defect recorded for the counterexample; it creates no new item or obligation. Final blockers remain none.

@@ -37,11 +37,12 @@ Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let
 $\Sigma\subseteq M$ be a spacelike embedded hypersurface with induced metric
 $h$, future unit normal field $n$ and second fundamental form
 $K(V,W)=g(\nabla_Vn,W)$ ([[def-gr-spacelike-hypersurfaces-and-cauchy-sets]],
-[[lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form]]). Let
-$s$ be a smooth function defined near $\Sigma$ with $s=0$ exactly on $\Sigma$
-and $ds(n)=1$ (a normal time coordinate), and let $h_0$ be a smooth metric on a
-product neighborhood of $\Sigma$ with $h_0|_{\Sigma}=h$ and
-$\partial_sh_0=0$. Put $\bar g:=-ds^2+h_0$ as background metric. Define a smooth
+[[lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form]]). Fix
+smooth product coordinates $(s,x^1,x^2,x^3)$ on a neighborhood of $\Sigma$ such
+that $s=0$ exactly on $\Sigma$ and $\partial_s|_\Sigma=n$. Let $\pi_\Sigma$ denote the spatial projection of this product neighborhood
+onto $\Sigma$, and set $h_0:=\pi_\Sigma^*h$. Thus $h_0$ is a smooth
+covariant tensor with zero time and mixed components, $h_0|_\Sigma=h$
+and $\partial_sh_0=0$. Put $\bar g:=-ds^2+h_0$ as background metric. Define a smooth
 metric germ $g_0$ on $\Sigma$ by the initial jet
 $$g_{ij}=h_{ij},\qquad g_{00}=-1,\qquad g_{0i}=0,\qquad \partial_sg_{ij}=2K_{ij},\qquad \partial_sg_{0i}=0,\qquad \partial_sg_{00}=-2\operatorname{tr}_hK .$$
 Then:
@@ -54,7 +55,7 @@ fundamental form $K$;
 $H^a|_\Sigma=0$.
 
 ## Facts & Assumptions
-**Given:** the manifold, the spacelike hypersurface and its normal-coordinate setup, the background metric $\bar g=-ds^2+h_0$ with $h_0|_\Sigma=h$ and $\partial_sh_0=0$, and the prescribed jet.
+**Given:** the manifold, the spacelike hypersurface and its normal-coordinate setup, the background metric $\bar g=-ds^2+h_0$ with $h_0=\pi_\Sigma^*h$, and the prescribed jet.
 
 [L1] On the slice, $g_{0i}=0$ makes its tangential derivatives zero. The Christoffel formula gives $g(\nabla_{\partial_i}\partial_s,\partial_j)=\tfrac12(\partial_i g_{sj}+\partial_s g_{ij}-\partial_j g_{is})=\tfrac12\partial_sg_{ij}=K_{ij}$. Together with $g_{00}=-1$ and the chosen time orientation, this identifies $\partial_s$ as the future unit normal and gives the stated second fundamental form ([[lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form]], [[def-christoffel-symbols-of-an-affine-connection]]).
 

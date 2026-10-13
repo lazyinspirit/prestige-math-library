@@ -19,10 +19,12 @@ deps:
     pthm-nrqm-oscillator-coherent-state-evolution,
     pthm-nrqm-oscillator-coherent-state-fluctuations,
     thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions,
+    thm-quarter-turn-values-and-shift-formulas,
     cor-complex-exponential-cartesian-form-modulus-and-eulers-identity,
     def-countable-choice
   ]
 dependency_roles:
+  thm-quarter-turn-values-and-shift-formulas: mathematical-premise
   post-nrqm-framework-state-and-composition: physical-assumption
   post-nrqm-framework-observable-and-probability: physical-assumption
   post-nrqm-framework-autonomous-dynamics: physical-assumption
@@ -83,7 +85,7 @@ $$\Delta_{\Psi_z(t)}Q=\frac{\ell}{\sqrt2},\qquad \Delta_{\Psi_z(t)}P=\frac{\hbar
 
 [F1] **Coherent evolution and its statistics.** For every $w\in\mathbb C$ and $s\in\mathbb R$, $U(s)\Psi_w=e^{-i\omega s/2}\Psi_{we^{-i\omega s}}$; the preparation means of the evolved coherent preparation are $\langle Q\rangle_{w(s)}=\sqrt2\ell\operatorname{Re}w(s)$, $\langle P\rangle_{w(s)}=\frac{\sqrt2\hbar}{\ell}\operatorname{Im}w(s)$ with $w(s)=we^{-i\omega s}$; and $\Delta_{\Psi_{w(s)}}Q=\ell/\sqrt2$, $\Delta_{\Psi_{w(s)}}P=\hbar/(\ell\sqrt2)$ with product $\hbar/2$ ([[pthm-nrqm-oscillator-coherent-state-evolution]] clauses (a), (b), (c); [[pthm-nrqm-oscillator-coherent-state-fluctuations]] clauses (a), (b)).
 
-[F2] **Trigonometric identities.** For real $\theta$, $e^{-i\theta}=\cos\theta-i\sin\theta$, $\cos^{2}\theta+\sin^{2}\theta=1$, $\cos 0=\sin\pi/2$ properties in the form $\cos 0=1$, $\sin 0=0$, $\cos\frac{\pi}{2}=0$, $\sin\frac{\pi}{2}=1$, and $e^{-2\pi i}=1$ ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[def-nrqm-oscillator-coherent-states]]).
+[F2] **Trigonometric identities.** For real $\theta$, $e^{-i\theta}=\cos\theta-i\sin\theta$, $\cos^{2}\theta+\sin^{2}\theta=1$, $\cos 0=1$, $\sin 0=0$, $\cos\frac{\pi}{2}=0$, $\sin\frac{\pi}{2}=1$, and $e^{-2\pi i}=1$ ([[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]], [[thm-quarter-turn-values-and-shift-formulas]]).
 
 [F3] **Spread reading.** The preparation spreads in [F1] are the outcome-law spreads of the assigned observables $(Q,\mathrm m)$ and $(P,\mathrm{kg}\,\mathrm m\,\mathrm s^{-1})$ in the reading of [[def-nrqm-uncertainty-preparation-spread]] clauses (b), (c), and the means are the outcome-law means of [[pthm-nrqm-oscillator-coherent-state-evolution]] clause (b).
 

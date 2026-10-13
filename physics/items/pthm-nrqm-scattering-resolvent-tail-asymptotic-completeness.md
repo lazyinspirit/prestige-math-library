@@ -64,9 +64,7 @@ sources:
         Section 12.3 printed pages 253-256 (PDF pages 265-268): the short-range
         condition and asymptotic completeness"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Chapter 12
-        printed pages 257-284 (PDF pages 265-292): scattering by localized
-        potentials and the S-matrix"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Chapter 12, printed pages 257-281 (PDF pages 265-289)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 verification:
   precheck: pass
@@ -123,7 +121,7 @@ $E_*A_{0,*}$ and $E_*A_*$, where $A_*=A_{0,*}+M_{W_*}$.
 The purely mathematical positive-scaling correspondence
 [[lem-nrqm-scattering-model-scaling-correspondence]] applies to these
 operators with positive scalar $c=E_*$ (its numerical parameters can be
-chosen as $\hbar'=1$, $m'=1/(2E_*)$). It gives spectral dilation, preservation
+chosen as $\hbar'=\hbar$, $m'=\hbar^2/(2E_*)$). It gives spectral dilation, preservation
 of spectral types and the time change $\tau=tE_*/\hbar=t/T_*$.
 Unitary conjugation transports the PVM and the strong limits, so
 $E_H(E_*B)=D_*^*E_{A_*}(B)D_*$ and
@@ -142,40 +140,15 @@ $D_*^*$ of the corresponding subspace for $A_*$.
 
 **Given:** the data and hypotheses of the statement and [F1]-[F4].
 
-1.1 Put $W_*(y)=V(L_*y)/E_*=W_{*,2}(y)+W_{*,\mathrm b}(y)$. [F1, F2, given, algebra]
-Lebesgue dilation gives $\|W_{*,2}\|_2=E_*^{-1}L_*^{-3/2}\|V_2\|_2$ and
-$\|W_{*,\mathrm b}\|_\infty=E_*^{-1}\|V_{\mathrm b}\|_\infty$.
-Thus these parts are real $L^2$ and bounded functions respectively. In [F2]
-use the dimensionless variable $y$ in place of its abstract variable $x$,
-$V_0=W_*$ and $A_{0,*}=-\Delta_y^{\mathrm{weak}}$. The full hypothesis is
-exactly $h_*(r)<\infty$ for every $r$ with $h_*\in L^1$, so [F2] gives
-self-adjoint $A_*$ on $H^2_y$, isometric wave operators $\Omega_{\pm,*}$,
-$H_{\mathrm{sc}}(A_*)=0$, equal ranges $H_{\mathrm{ac}}(A_*)=H_{\mathrm c}(A_*)$
-and unitary $S_*$. [F1, F2, given, algebra]
+1.1 Put $W_*(y)=V(L_*y)/E_*=W_{*,2}(y)+W_{*,\mathrm b}(y)$. Lebesgue dilation gives $\|W_{*,2}\|_2=E_*^{-1}L_*^{-3/2}\|V_2\|_2$ and $\|W_{*,\mathrm b}\|_\infty=E_*^{-1}\|V_{\mathrm b}\|_\infty$. Thus these parts are real $L^2$ and bounded functions respectively. In [F2] use the dimensionless variable $y$ in place of its abstract variable $x$, $V_0=W_*$ and $A_{0,*}=-\Delta_y^{\mathrm{weak}}$. The full hypothesis is exactly $h_*(r)<\infty$ for every $r$ with $h_*\in L^1$, so [F2] gives self-adjoint $A_*$ on $H^2_y$, isometric wave operators $\Omega_{\pm,*}$, $H_{\mathrm{sc}}(A_*)=0$, equal ranges $H_{\mathrm{ac}}(A_*)=H_{\mathrm c}(A_*)$ and unitary $S_*$. [F1, F2, given, algebra]
 
 1.2 [Failure of the general Coulomb resolvent-tail condition] For the pure Coulomb reduced potential put $W_{*,C}=-\gamma_*/|y|$, $\gamma_*=\kappa/(E_*L_*)>0$. All radii in this argument are dimensionless. Fix by [F4] a nonzero real $\phi\in C_c^\infty(B_R)$, and for $r>R$ set $\phi_r(y)=\phi(y-2r e_1)$ and $f_r=(A_{0,*}-i)\phi_r$. Both are supported outside the radius-$r$ ball, since $2r-R>r$; derivatives do not enlarge support. The free derivative action and translation isometry give $\|\phi_r\|_2=\|\phi\|_2>0$ and $\|f_r\|_2=\|(A_{0,*}-i)\phi\|_2=:c_f>0$. Positivity and self-adjointness of $A_{0,*}$ ensure its resolvent at $i$ exists, and $(A_{0,*}-i)^{-1}\mathbf1_{\{|y|\ge r\}}f_r=\phi_r$. If the Coulomb resolvent-tail operator is not bounded at some radius it already fails the class; otherwise its operator norm obeys $h_{*,C}(r)\ge\frac{\|M_{W_{*,C}}\phi_r\|_2}{\|f_r\|_2}\ge\frac{\gamma_*\|\phi\|_2}{c_f(2r+R)}.$ The last bound uses $|y|\le2r+R$ on that support. The positive lower bound has divergent integral over $r>R$, so $h_{*,C}\notin L^1([0,\infty))$. Thus pure Coulomb fails the general class as well, proving the general-class exclusion in (d) without any zero-energy hypothesis. [F4, given, algebra]
 
-2.1 By [F1], $H=D_*^*E_*A_*D_*$ is self-adjoint on $W^{2,2}_x$. [F1, step 1.1, algebra]
-For $\tau=t/T_*$ the physical comparison is
-$D_*^*e^{i\tau A_*}e^{-i\tau A_{0,*}}D_*$. Since $T_*>0$, each physical
-infinite-time limit exists and equals $D_*^*\Omega_{\pm,*}D_*$.
-These are isometries, their ranges are the conjugated spectral subspaces
-$H_{\mathrm{ac}}(H)=H_{\mathrm c}(H)$ and $H_{\mathrm{sc}}(H)=0$.
-This proves (a). [F1, step 1.1, algebra]
+2.1 By [F1], $H=D_*^*E_*A_*D_*$ is self-adjoint on $W^{2,2}_x$. For $\tau=t/T_*$ the physical comparison is $D_*^*e^{i\tau A_*}e^{-i\tau A_{0,*}}D_*$. Since $T_*>0$, each physical infinite-time limit exists and equals $D_*^*\Omega_{\pm,*}D_*$. These are isometries, their ranges are the conjugated spectral subspaces $H_{\mathrm{ac}}(H)=H_{\mathrm c}(H)$ and $H_{\mathrm{sc}}(H)=0$. This proves (a). [F1, step 1.1, algebra]
 
-3.1 By [F3] and step 2.1, $S=D_*^*S_*D_*$, which is unitary since $S_*$ [F1, F3, step 1.1, step 2.1, algebra]
-and $D_*$ are unitary. This proves (b). [F1, F3, step 1.1, step 2.1, algebra]
+3.1 By [F3] and step 2.1, $S=D_*^*S_*D_*$, which is unitary since $S_*$ and $D_*$ are unitary. This proves (b). [F1, F3, step 1.1, step 2.1, algebra]
 
-4.1 For the physical decay form in (c), set [F1, F2, step 2.1, step 3.1, algebra]
-$W_{*,\mathrm{loc}}(y)=V_{\mathrm{loc}}(L_*y)/E_*$ and
-$W_{*,\mathrm{tail}}(y)=V_{\mathrm{tail}}(L_*y)/E_*$.
-The local part has norm $E_*^{-1}L_*^{-3/2}\|V_{\mathrm{loc}}\|_2$ and
-support radius divided by $L_*$. The tail satisfies
-$|W_{*,\mathrm{tail}}(y)|\le(C/E_*)(1+|y|)^{-1-\delta}$.
-Thus [F2]'s full sufficient-decay result supplies the integrable
-resolvent-input tail and all conclusions for $A_*$; step 2.1 and step 3.1
-transfer them to the physical operators. This proves (c) without assuming
-the resolvent estimate for this example. [F1, F2, step 2.1, step 3.1, algebra]
+4.1 For the physical decay form in (c), set $W_{*,\mathrm{loc}}(y)=V_{\mathrm{loc}}(L_*y)/E_*$ and $W_{*,\mathrm{tail}}(y)=V_{\mathrm{tail}}(L_*y)/E_*$. The local part has norm $E_*^{-1}L_*^{-3/2}\|V_{\mathrm{loc}}\|_2$ and support radius divided by $L_*$. The tail satisfies $|W_{*,\mathrm{tail}}(y)|\le(C/E_*)(1+|y|)^{-1-\delta}$. Thus [F2]'s full sufficient-decay result supplies the integrable resolvent-input tail and all conclusions for $A_*$; step 2.1 and step 3.1 transfer them to the physical operators. This proves (c) without assuming the resolvent estimate for this example. [F1, F2, step 2.1, step 3.1, algebra]
 
 5.1 For $V(x)=-\kappa/|x|$ with $\kappa>0$ and any split $V=V_{\mathrm{loc}}+V_{\mathrm{tail}}$ into a compactly supported part and the remainder, the remainder equals $-\kappa/|x|$ for all sufficiently large $|x|$, so for every $\delta>0$ the quotient $(1+|x|/L_*)^{1+\delta}|V_{\mathrm{tail}}(x)|=\kappa(1+|x|/L_*)^{1+\delta}/|x|$ tends to $+\infty$ as $|x|\to\infty$; hence no constant $C$ satisfies the sufficient decay bound of [F2]'s final paragraph, and the explicit form of (c) does not cover the Coulomb potential. This proves the sufficient-decay exclusion in (d). [F2, step 1.2, step 4.1, given, algebra] ∎
 

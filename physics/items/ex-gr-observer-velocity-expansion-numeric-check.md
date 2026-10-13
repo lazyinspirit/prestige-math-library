@@ -73,7 +73,7 @@ $s=c/2$.
 
 [L4] In the inertial chart $g_{ab}=\eta_{ab}=\operatorname{diag}(-1,1,1,1)$; $\eta(\partial_0,\partial_0)=-1$ and $g_p(\partial_1,\partial_1)=1$ ([[def-gr-minkowski-model-and-inertial-chart]], [[def-causal-classification-of-lorentz-vectors]]).
 
-[L5] Arithmetic: $\sqrt3$ is the positive root of $3$ ([[def-rational-power]]) and $\frac53<\sqrt3<2$, since $\frac{25}{9}<3<4$. Hence $\frac{2}{\sqrt3}=\frac{2\sqrt3}{3}$, $\frac{1}{\sqrt3}=\frac{\sqrt3}{3}$, $\frac{1}{2}-\frac{1}{\sqrt3}=\frac{2-\sqrt3}{2\sqrt3}>0$, $9\sqrt3<16$ since $(9\sqrt3)^2=243<256=16^2$, and $27\sqrt3>46$ since $(27\sqrt3)^2=2187>2116=46^2$, both by squaring positive quantities; hence $\frac{16-9\sqrt3}{8\sqrt3}>0$.
+[L5] Arithmetic: $\sqrt3$ is the positive root of $3$ ([[def-rational-power]]) and $\frac53<\sqrt3<2$, since $\frac{25}{9}<3<4$. Hence $\frac{2}{\sqrt3}=\frac{2\sqrt3}{3}$, $\frac{1}{\sqrt3}=\frac{\sqrt3}{3}$, $\frac{1}{\sqrt3}-\frac{1}{2}=\frac{2-\sqrt3}{2\sqrt3}>0$, $9\sqrt3<16$ since $(9\sqrt3)^2=243<256=16^2$, and $27\sqrt3>46$ since $(27\sqrt3)^2=2187>2116=46^2$, both by squaring positive quantities; hence $\frac{16-9\sqrt3}{8\sqrt3}>0$.
 
 
 

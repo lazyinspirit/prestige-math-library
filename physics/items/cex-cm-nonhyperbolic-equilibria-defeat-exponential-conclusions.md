@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 1
-deps: [def-cm-local-flow-of-an-autonomous-system, def-cm-equilibrium-and-lyapunov-stability, thm-existence-and-uniqueness-of-a-maximal-ode-solution, def-maximal-ode-solution, def-first-order-ode-initial-value-problem-and-solution, def-ck-euclidean-maps-and-diffeomorphisms, thm-chain-rule-for-total-derivatives, def-derivative, thm-algebra-of-derivatives]
+deps: [def-cm-local-flow-of-an-autonomous-system, def-cm-equilibrium-and-lyapunov-stability, thm-existence-and-uniqueness-of-a-maximal-ode-solution, def-maximal-ode-solution, def-first-order-ode-initial-value-problem-and-solution, def-ck-euclidean-maps-and-diffeomorphisms, thm-chain-rule-for-total-derivatives, def-derivative, thm-algebra-of-derivatives, thm-real-power-continuity-and-derivatives]
 dependency_roles:
   def-cm-local-flow-of-an-autonomous-system: mathematical-premise
   def-cm-equilibrium-and-lyapunov-stability: mathematical-premise
@@ -17,6 +17,7 @@ dependency_roles:
   thm-chain-rule-for-total-derivatives: mathematical-premise
   def-derivative: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
+  thm-real-power-continuity-and-derivatives: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -43,7 +44,7 @@ If $F:\mathbb R\to\mathbb R$ is $C^1$ with $F(0)=0$ and no eigenvalue of $A=DF(0
 
 [L2] Every initial value problem satisfying the Picard-Lindelöf hypotheses has a unique maximal solution, and every solution through the same data is its restriction ([[thm-existence-and-uniqueness-of-a-maximal-ode-solution]], [[def-maximal-ode-solution]], [[def-first-order-ode-initial-value-problem-and-solution]]).
 
-[L3] The polynomial $x\mapsto x^3$ is $C^1$ with derivative $3x^2$, so $A=DF(0)=0$ ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-derivative]], [[thm-algebra-of-derivatives]], [[thm-chain-rule-for-total-derivatives]]); the eigenvalue $0$ of $A$ has real part $0$, and no eigenvalue has positive real part.
+[L3] For real $\alpha$, $u^\alpha$ on $u>0$ is continuous and has derivative $\alpha u^{\alpha-1}$ ([[thm-real-power-continuity-and-derivatives]]). The polynomial $x\mapsto x^3$ is $C^1$ with derivative $3x^2$, so $A=DF(0)=0$ ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-derivative]], [[thm-algebra-of-derivatives]], [[thm-chain-rule-for-total-derivatives]]); the eigenvalue $0$ of $A$ has real part $0$, and no eigenvalue has positive real part.
 
 ## Counterexample
 

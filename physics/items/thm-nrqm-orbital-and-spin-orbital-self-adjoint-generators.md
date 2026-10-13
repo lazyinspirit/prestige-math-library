@@ -6,7 +6,7 @@ domain: mathematics
 title: "Orbital self-adjoint generators"
 status: draft
 origin: pipeline
-dependency_level: 8
+dependency_level: 7
 deps:
   [
     thm-nrqm-orbital-and-spin-strongly-continuous-rotation-action,

@@ -83,7 +83,7 @@ not injective.
 
 [L2] For a smooth two-parameter map $\Phi(r,s)$, the variation field $\partial_r\Phi$ of a family of geodesics is a Jacobi field along each longitudinal geodesic, the two covariant derivatives satisfy $D_s\partial_r\Phi=D_r\partial_s\Phi$ whenever the longitudinal curves are geodesics, and the differential of a smooth map is computed by the chain rule ([[thm-gr-jacobi-equation-and-geodesic-deviation]] clauses (a)-(b), [[def-differential-of-a-smooth-map]], [[thm-chain-rule-for-total-derivatives]]).
 
-[L3] A Jacobi field along a geodesic is determined by its value and covariant derivative at one parameter; the map from initial data $(J_0,J_1)$ to Jacobi fields is a linear isomorphism onto $T_{\gamma(s_0)}M\oplus T_{\gamma(s_0)}M$ ([[thm-gr-jacobi-equation-and-geodesic-deviation]] clause (c)).
+[L3] A Jacobi field along a geodesic is determined by its value and covariant derivative at one parameter; the initial-value map $J\mapsto(J(s_0),D_sJ(s_0))$ is a linear isomorphism onto $T_{\gamma(s_0)}M\oplus T_{\gamma(s_0)}M$ ([[thm-gr-jacobi-equation-and-geodesic-deviation]] clause (c)).
 
 [L4] A field $J$ along a geodesic is a Jacobi field when $D_t^2J=R(\gamma',J)\gamma'$; conjugacy at a pair of instants means the existence of a nonzero Jacobi field vanishing there, and the multiplicity is the dimension of the space of such fields ([[def-gr-jacobi-field-and-conjugate-instant]] clauses (b) and (d)).
 

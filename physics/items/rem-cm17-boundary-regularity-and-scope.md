@@ -6,8 +6,9 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 16
-deps: [pthm-cm17-incompressible-periodic-local-evolution, pthm-cm17-linear-elastic-equation-of-motion, pthm-cm17-string-wave-solutions, pthm-cm17-momentum-equation, post-cm17-fluid-constitutive, post-cm17-linear-elastic-constitutive, post-cm17-momentum-balance, def-cm-scalar-conservation-law-weak-and-entropy-solution, rem-local-versus-known-open-global-fluid-scope]
+deps: [pthm-cm17-incompressible-periodic-local-evolution, pthm-cm17-linear-elastic-equation-of-motion, pthm-cm17-string-wave-solutions, pthm-cm17-momentum-equation, post-cm17-fluid-constitutive, post-cm17-linear-elastic-constitutive, post-cm17-momentum-balance, def-cm-scalar-conservation-law-weak-and-entropy-solution, rem-local-versus-known-open-global-fluid-scope, post-cm17-continuum-kinematic-model]
 dependency_roles:
+  post-cm17-continuum-kinematic-model: formulation-prerequisite
   pthm-cm17-incompressible-periodic-local-evolution: physical-result
   pthm-cm17-linear-elastic-equation-of-motion: physical-result
   pthm-cm17-string-wave-solutions: physical-result
@@ -20,7 +21,7 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "Scope audit of the continuum page: the ideal boundary data used by its theorems (periodic cell, fixed ends, whole line, and the no-slip condition of the channel example), the smoothness and positive-Jacobian hypotheses that exclude shocks, interfaces and corners, the validity regimes of the three constitutive branches, the open specialist scopes deliberately not claimed (general compressible entropy systems, rough walls and boundary layers, nonlinear constitutive PDEs, turbulence closure, all-time three-dimensional regularity), and the model-versus-nature status of every result on the page. The remark asserts no new physical claim, no measurement and no theorem."
+physical_scope: "Scope audit of the continuum page: the ideal boundary data used by its boundary-value and evolution results (periodic cell, fixed ends, whole line, and the no-slip condition of the channel example), the actual pointwise applicability limits of the smoothness and positive-Jacobian hypotheses of the finite-motion transport and balance branch, its separately adopted exclusion of material interfaces and its theorem-specific boundary regularity, the separately adopted reference-coordinate linear elastic balance without a finite-motion requirement, the validity regimes of the constitutive branches and the separate one-dimensional string model, the open specialist scopes deliberately not claimed (general compressible entropy systems, rough walls and boundary layers, nonlinear constitutive PDEs, turbulence closure, all-time three-dimensional regularity), and the model-versus-nature status of every result on the page. The remark asserts no new physical claim, no measurement and no theorem."
 sources:
   references:
     - title: "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Sections 12.1-12.3 (fluid boundary conditions and the limits of the inviscid and viscous models)"
@@ -33,8 +34,8 @@ verification:
 
 ## Remarks
 
-- **Boundary data are idealizations, not derived.** Every quantitative result
-  of this page is proved for explicit ideal boundary data: the periodic cell
+- **Boundary data are idealizations, not derived.** Boundary-value and
+  evolution results use explicit ideal domains and boundary data: the periodic cell
   of [[post-cm17-fluid-constitutive]] clause (c) (fields on $\mathbb T^3$,
   with the mean of the pressure fixed), fixed ends for the string
   ([[pthm-cm17-string-wave-solutions]]), the whole line for the d'Alembert
@@ -45,15 +46,27 @@ verification:
   free surfaces, contact lines and moving contact sets require boundary
   models outside this page and are not covered by any theorem here.
 
-- **Regularity hypotheses exclude shocks and interfaces.** The transport and
-  balance theorems of this page assume a $C^2$ motion with positive Jacobian
+- **Regularity limits and separate model exclusions.** The finite-motion
+  transport and balance theorems assume a $C^2$ motion with positive Jacobian
   and $C^1$ fields, and the local fluid theorem assumes smooth data. These
-  hypotheses exclude shocks, material interfaces, cracks, corners and
-  cavitation inside the motion: at such sets the classical identities are
-  not asserted, and a weak or distributional formulation is required
-  ([[def-cm-scalar-conservation-law-weak-and-entropy-solution]] defines the
-  weak and entropy formulations of a scalar model, and the companion page
-  exhibits explicit shock and rarefaction weak solutions of it). No general
+  classical identities apply only where their stated hypotheses hold; they
+  do not apply pointwise across a jump discontinuity of a required $C^1$
+  field or where the motion loses its required regularity, injectivity or
+  positive Jacobian. A **material interface**, a surface separating material
+  portions, need not produce such a discontinuity: the motion and fields can
+  extend smoothly across it. [[post-cm17-continuum-kinematic-model]] clause
+  (iv) separately excludes material interfaces from its adopted physical
+  scope; this is a model restriction, not a consequence of smoothness.
+  Boundary corners likewise need not violate field regularity: the body data
+  require a bounded open region, while each boundary integral has its own
+  domain hypotheses. In particular, [[post-cm17-momentum-balance]] permits
+  finite piecewise $C^1$ presentations with face integrals and surface-null
+  edges; a corner alone does not require a weak formulation. For fields with
+  jumps, these classical results supply no balance across the discontinuity.
+  [[def-cm-scalar-conservation-law-weak-and-entropy-solution]] separately
+  defines a scalar weak balance tested against compactly supported $C^1$
+  functions and its entropy inequalities; the companion page exhibits shock
+  and rarefaction solutions in that specified formulation. No general
   multidimensional shock theory, entropy existence theorem or interface
   kinematics is claimed by this page.
 
@@ -79,9 +92,27 @@ verification:
   [[rem-local-versus-known-open-global-fluid-scope]] records the dated 2026 CMI announcement about the Euclidean problem and the absence of an audited transfer to this unforced periodic model; this page inherits the local-proof boundary without asserting a blanket present-day open status or a global conclusion.
 
 - **Model deductions versus nature.** All results of this page are conditional
-  deductions from the adopted postulates
-  ([[post-cm17-momentum-balance]] and the constitutive postulates) and the
-  cited mathematics, subject to the idealizations recorded above. They do not
+  deductions from each result's explicitly adopted model assumptions and
+  the cited mathematics, subject to its stated hypotheses. The
+  finite-motion momentum deduction uses the kinematic and mass-balance
+  hypotheses of [[pthm-cm17-momentum-equation]] and the momentum-balance
+  postulate [[post-cm17-momentum-balance]]; a constitutive application also
+  adopts its specified branch. The linear elastic deduction
+  [[pthm-cm17-linear-elastic-equation-of-motion]] instead uses
+  [[post-cm17-linear-elastic-constitutive]]: a $C^2$ reference displacement
+  $\xi:I\times O\to\mathbb R^3$, constant reference density $\rho_0>0$,
+  the isotropic stress $\sigma=\lambda(\operatorname{tr}e)I_3+2\mu_s e$
+  with $e=\tfrac12(D_X\xi+D_X\xi^{\mathsf T})$ and its stated moduli,
+  and the adopted reference balance
+  $\rho_0\partial_t^2\xi=\rho_0b_{\mathrm{ref}}+\operatorname{div}_X\sigma$.
+  It requires neither a finite motion $X+\xi$ nor a positive Jacobian,
+  and constant reference density does not assert constant current density.
+  The string results separately adopt the one-dimensional model
+  of [[pthm-cm17-string-wave-solutions]]: uniform linear density
+  $\rho_\ell>0$, tension $\tau_s>0$, and small transverse displacement
+  satisfying $u_{tt}=(\tau_s/\rho_\ell)u_{xx}$ with the specified line or
+  fixed-end data. Its model equation is adopted, not deduced from the
+  three-dimensional constitutive postulates. They do not
   establish that the model describes any material, and no measurement is used
   or asserted. Comparing a prediction with an observation tests the model,
   the boundary data and the apparatus together; agreement is evidence under

@@ -6,8 +6,12 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 17
-deps: [post-cm10-rigid-material, post-cm11-torque-balance, pthm-cm11-euler-equations, pthm-cm11-torque-free-invariants, pthm-cm11-principal-rotations, pthm-cm11-linearized-spin, def-cm10-inertia-tensor, pthm-cm10-principal-axes, lem-cm-quaternion-lift-of-a-prescribed-body-angular-velocity, def-cm-quaternion-rotation-map-and-cover, def-countable-choice, lem-cross-product-is-bilinear-alternating-and-orthogonal, def-cross-product-in-r3, def-euclidean-inner-product, thm-sine-and-cosine-derivatives, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-addition-formulas, cor-trigonometric-parity-and-pythagorean-identity, def-hyperbolic-functions, thm-hyperbolic-identities-and-derivatives, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, def-derivative, def-interval, def-cm01-units]
+deps: [post-cm10-rigid-material, post-cm11-torque-balance, pthm-cm11-euler-equations, pthm-cm11-torque-free-invariants, pthm-cm11-principal-rotations, pthm-cm11-linearized-spin, def-cm10-inertia-tensor, pthm-cm10-principal-axes, lem-cm-quaternion-lift-of-a-prescribed-body-angular-velocity, def-cm-quaternion-rotation-map-and-cover, def-countable-choice, lem-cross-product-is-bilinear-alternating-and-orthogonal, def-cross-product-in-r3, def-euclidean-inner-product, thm-sine-and-cosine-derivatives, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-addition-formulas, cor-trigonometric-parity-and-pythagorean-identity, def-hyperbolic-functions, thm-hyperbolic-identities-and-derivatives, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, def-derivative, def-interval, def-cm01-units, def-pi-via-first-positive-cosine-zero, thm-cosine-has-a-smallest-positive-zero, thm-quarter-turn-values-and-shift-formulas, thm-of-square-roots]
 dependency_roles:
+  def-pi-via-first-positive-cosine-zero: mathematical-premise
+  thm-cosine-has-a-smallest-positive-zero: mathematical-premise
+  thm-quarter-turn-values-and-shift-formulas: mathematical-premise
+  thm-of-square-roots: mathematical-premise
   post-cm10-rigid-material: formulation-prerequisite
   post-cm11-torque-balance: formulation-prerequisite
   pthm-cm11-euler-equations: physical-result
@@ -37,12 +41,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "Worked checks inside the torque-free branch of the rigid-material model of [[post-cm10-rigid-material]] on two declared inertia matrices: a symmetric model with body inertia matrix diag(1,1,2) and an asymmetric model with diag(1,2,3). The checks verify principal-axis spins and their invariants, an explicit non-uniform symmetric-top motion with conserved angular momentum and energy, and the linearized frequencies at the principal-axis spins of the asymmetric model. No measured value, no concrete body and no experiment is asserted; the numerical data are declared model parameters."
+physical_scope: "Worked checks inside the torque-free branch of the rigid-material model of [[post-cm10-rigid-material]] on the declared time window $I_0=\\mathbb R$ for both models and two declared inertia matrices: a symmetric model with body inertia matrix diag(1,1,2) and an asymmetric model with diag(1,2,3). The checks verify principal-axis spins and their invariants, an explicit non-uniform symmetric-top motion with conserved angular momentum and energy, and the linearized frequencies at the principal-axis spins of the asymmetric model. No measured value, no concrete body and no experiment is asserted; the numerical data are declared model parameters under the explicit numerical SI convention dimensionless t = T / (one second) in the Example."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.4.1-3.4.3, printed pages 55-58 (PDF pages 61-64): the free symmetric top and worked stability computations for principal-axis spins"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.4, chapter pages 9-12 (PDF pages 63-66): free-rotation invariants and computed examples for symmetric and asymmetric bodies"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.4, chapter pages 15-16 (PDF pages 69-70): free-rotation invariants and computed examples for symmetric and asymmetric bodies"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "I. W. Stewart, Advanced Classical Mechanics (MIT 8.09 Advanced Classical Mechanics, Fall 2014 course text), Chapter 2 Section 2.4, printed pages 41-48 (PDF pages 44-51): principal-axis spins and their linear stability with worked examples"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
@@ -52,11 +56,33 @@ verification:
 
 ## Example
 
+**Numerical SI convention.** Let $T$ denote physical elapsed time and fix
+$T_*=1\,\mathrm s$, $M_*=1\,\mathrm{kg}$ and $D_*=1\,\mathrm m$.
+Below $t:=T/T_*$ is dimensionless and all quantities are numerical SI
+values: inertia is divided by $M_*D_*^2$, angular velocity and its
+perturbations by $T_*^{-1}$, angular momentum by $M_*D_*^2/T_*$,
+and energy by $M_*D_*^2/T_*^2$. Primes differentiate with respect to $t$.
+Restore physical angular velocity by
+$\omega_{\rm phys}(T)=\omega(T/T_*)/T_*$ and angular momentum by
+$l_{\rm phys}(T)=(M_*D_*^2/T_*)l(T/T_*)$.
+The displayed numerical rates $1$, $2$, $1/\sqrt3$ mean physical rates
+$1/T_*$, $2/T_*$, $1/(\sqrt3 T_*)$; $\lambda_j$ is restored by
+$\lambda_{j,\rm phys}=\lambda_j/T_*^2$.
+Thus $\cos t$, $\sin t$, $\cos(t/\sqrt3)$ and the hyperbolic functions
+have dimensionless arguments; $t=\pi/2$ means $T=\pi T_*/2$.
+For the reconstructed motion use
+$x_{\rm phys}(T,\rho_{\rm phys})=D_*x(T/T_*,\rho_{\rm phys}/D_*)$;
+the chain rule restores $R_{\rm phys}^{\mathsf T}dR_{\rm phys}/dT
+=[\omega_{\rm phys}]_\times$ and the dimensioned torque-free equation.
+This convention uses [[def-cm01-units]] and reports no measurement.
+
 Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$
-([[def-countable-choice]]), used only through the quaternion constructions
-below. Consider two **declared** models of the rigid-material branch
+([[def-countable-choice]]), inherited for finite mass moments and inertial
+integrals through the rigid-material and torque-balance suppliers, and for
+the double-cover surjectivity used in the quaternion constructions below. Consider two **declared** models of the rigid-material branch
 [[post-cm10-rigid-material]], each with body inertia matrix diagonal in the
 declared positively oriented orthonormal basis $(e_{1},e_{2},e_{3})$ and no other inertia data,
+each with time window $I_0=\mathbb R$ (equivalently all physical times $T\in\mathbb R$),
 each used in the torque-free branch of [[post-cm11-torque-balance]] clause
 (iv):
 
@@ -93,19 +119,21 @@ Verify the following.
 
 ## Facts & Assumptions
 
-**Given:** The two models S and A of the Example with their declared diagonal inertia matrices, the torque-free branch, and the data $j$, $\Omega$ of each claim.
+**Given:** The two models S and A of the Example with time window $I_0=\mathbb R$ and their declared diagonal inertia matrices, the torque-free branch, and the data $j$, $\Omega$ of each claim.
 
 [L1] Model data and nondegeneracy: for each model the body inertia matrix $I=\int(\lVert\rho\rVert_2^{2}I_3-\rho\rho^{\mathsf T})\,d\nu$ is diagonal with the displayed positive entries in the declared basis, and the model is nondegenerate ([[def-cm10-inertia-tensor]] clauses (a) and (d)-(e), [[pthm-cm10-principal-axes]] clauses (a) and (d), [[def-euclidean-inner-product]]).
 
 [L2] Principal-axis spins: for a nondegenerate torque-free model, every axis $j$, rate $\Omega$ and initial orientation there is a torque-free motion with constant body angular velocity $\Omega e_{j}$, and along the motions $l=\Omega I_{j}e_{j}$, $C=\Omega^{2}I_{j}^{2}$, $E=\tfrac12\Omega^{2}I_{j}$ ([[pthm-cm11-principal-rotations]] clauses 1-3).
 
-[L3] Torque-free equations and invariants: $l=I\omega$ satisfies $l'=l\times(I^{-1}l)$, and $\langle l,l\rangle$ and $\tfrac12\langle l,I^{-1}l\rangle$ are constant along solutions; the latter is $E=\tfrac12\omega^{\mathsf T}I\omega$ ([[pthm-cm11-torque-free-invariants]] clauses 2-3, [[pthm-cm11-euler-equations]] clause 4).
+[L3] Torque-free equations and invariants: $L_c=Rl$, and $l=I\omega$ satisfies $l'=l\times(I^{-1}l)$, and $\langle l,l\rangle$ and $\tfrac12\langle l,I^{-1}l\rangle$ are constant along solutions; the latter is $E=\tfrac12\omega^{\mathsf T}I\omega$ ([[pthm-cm11-torque-free-invariants]] clauses 2-3, [[pthm-cm11-euler-equations]] clause 4).
 
 [L4] Realisability: for every continuous $\omega:\mathbb R\to\mathbb R^{3}$ there is a $C^{2}$ rotation path with body angular velocity $\omega$ if $\omega$ is $C^{1}$; and a $C^{2}$ rotation path with any prescribed initial orientation exists by the surjectivity of the quaternion cover ([[lem-cm-quaternion-lift-of-a-prescribed-body-angular-velocity]] clauses 1-2, [[def-cm-quaternion-rotation-map-and-cover]] and its second remark).
 
 [L5] Linearization: the derivative of the torque-free spin field at $\Omega e_{j}$ and the dichotomy with $\lambda_{j}=\Omega^{2}(I_{a}-I_{j})(I_{j}-I_{b})/(I_{a}I_{b})$ and $\kappa_{j}=\sqrt{\lvert\lambda_{j}\rvert}$, with the explicit $\cos,\sin$ and $\cosh,\sinh$ solutions ([[pthm-cm11-linearized-spin]] clauses 1-2).
 
 [L6] Calculus: $(\sin)'=\cos$, $(\cos)'=-\sin$, $(\sinh)'=\cosh$, $(\cosh)'=\sinh$, the sum, product and chain rules, $\sin^{2}+\cos^{2}=1$, and $\cosh t\ge1$ with $\cosh t\to+\infty$; cross products are bilinear and alternating ([[thm-sine-and-cosine-derivatives]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-and-cosine-addition-formulas]], [[def-hyperbolic-functions]], [[thm-hyperbolic-identities-and-derivatives]], [[thm-algebra-of-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[def-derivative]], [[lem-cross-product-is-bilinear-alternating-and-orthogonal]], [[def-cross-product-in-r3]]).
+
+[L7] Quarter-turn values: $\pi=2\gamma>0$ for the smallest positive cosine zero $\gamma$, and $\sin(\pi/2)=1$, $\cos(\pi/2)=0$ ([[def-pi-via-first-positive-cosine-zero]], [[thm-cosine-has-a-smallest-positive-zero]], [[thm-quarter-turn-values-and-shift-formulas]]); square roots denote unique nonnegative roots ([[thm-of-square-roots]]).
 
 ## Proof
 
@@ -117,23 +145,14 @@ Verify the following.
 
 1.3 For claim 3, [L5] gives $\lambda_{j}=\Omega^{2}(I_{a}-I_{j})(I_{j}-I_{b})/(I_{a}I_{b})$; for Model A and $j=1$, with $a=2$, $b=3$: $\lambda_{1}=\tfrac{(2-1)(1-3)}{2\cdot3}=-\tfrac13$ and $\kappa_{1}=1/\sqrt3$; for $j=2$, with the cyclic choice $a=3$, $b=1$: $\lambda_{2}=\tfrac{(3-2)(2-1)}{3\cdot1}=\tfrac13$ and $\kappa_{2}=1/\sqrt3$; for $j=3$, with $a=1$, $b=2$: $\lambda_{3}=\tfrac{(1-3)(3-2)}{1\cdot2}=-1$ and $\kappa_{3}=1$. In the first case the linearized field of [L5] satisfies $Ae_{2}=-\tfrac13e_{3}$ and $Ae_{3}=e_{2}$, and the pair $\delta_{2}(t)=\cos(t/\sqrt3)$, $\delta_{3}(t)=-\tfrac1{\sqrt3}\sin(t/\sqrt3)$ satisfies $\delta_{2}'=\delta_{3}$ and $\delta_{3}'=-\tfrac13\delta_{2}$ by [L6], so it solves the transverse linearized equations. [given, L5, L6, algebra]
 
-2.1 The quantities of claim 2: $\lVert\omega(t)\rVert_2^{2}=\tfrac14\cos^{2}t+\tfrac14\sin^{2}t+1=\tfrac14+1=\tfrac54$ and $C=\langle l,l\rangle=\tfrac14\cos^{2}t+\tfrac14\sin^{2}t+4=\tfrac{17}4$ by the Pythagorean identity in [L6]; and $E=\tfrac12\omega^{\mathsf T}I\omega=\tfrac12(\tfrac14\cos^{2}t+\tfrac14\sin^{2}t+2\cdot1)=\tfrac12(\tfrac14+2)=\tfrac98$. The difference $\omega(\tfrac\pi2)-\omega(0)=(-\tfrac12,\tfrac12,0)\neq0$ has norm $\tfrac{\sqrt2}2$, so $\omega$ is not constant. [step 1.2, given, L1, L6, algebra]
+2.1 The quantities of claim 2: $\lVert\omega(t)\rVert_2^{2}=\tfrac14\cos^{2}t+\tfrac14\sin^{2}t+1=\tfrac14+1=\tfrac54$ and $C=\langle l,l\rangle=\tfrac14\cos^{2}t+\tfrac14\sin^{2}t+4=\tfrac{17}4$ by the Pythagorean identity in [L6]; and $E=\tfrac12\omega^{\mathsf T}I\omega=\tfrac12(\tfrac14\cos^{2}t+\tfrac14\sin^{2}t+2\cdot1)=\tfrac12(\tfrac14+2)=\tfrac98$. The difference $\omega(\tfrac\pi2)-\omega(0)=(-\tfrac12,\tfrac12,0)\neq0$ has norm $\tfrac{\sqrt2}2$, so $\omega$ is not constant. [step 1.2, given, L1, L6, L7, algebra]
 
-3.1 Since $\omega$ is $C^{\infty}$, hence $C^{1}$, [L4] supplies a $C^{1}$ rotation path $R:\mathbb R\to SO(3)$ with body angular velocity $\omega$ and any prescribed initial orientation; then $R'=R[\omega]_\times$ is $C^{1}$, so $R$ is of class $C^{2}$, and $x(t,\rho):=R(t)\rho$ (that is, $c\equiv0$) is a motion of Model S with body angular velocity $\omega$ and $l$ as in step 1.2. Its balance holds: $L_c=Rl$ by [L3], so $(Rl)'=R'l+Rl'=R(\omega\times l+l')=0$ because $l'=l\times(I^{-1}l)=l\times\omega=-\omega\times l$ from step 1.2 and the alternation of the cross product in [L6]; hence the motion is torque-free and realizes claim 2. [step 1.2, step 2.1, given, L3, L4, L6]
+3.1 Since $\omega$ is $C^{\infty}$, hence $C^{1}$, [L4] supplies a $C^{1}$ rotation path $R:\mathbb R\to SO(3)$ with body angular velocity $\omega$ and any prescribed initial orientation; then $R'=R[\omega]_\times$ is $C^{1}$, so $R$ is of class $C^{2}$, and $x:I_0\times\mathbb R^3\to\mathbb R^3$, $x(t,\rho):=R(t)\rho$ (that is, $c\equiv0$), is a motion of Model S on its declared window $I_0=\mathbb R$ by [[post-cm10-rigid-material]] clause (ii) with body angular velocity $\omega$ and $l$ as in step 1.2. Its balance holds: $L_c=Rl$ by [L3], so $(Rl)'=R'l+Rl'=R(\omega\times l+l')=0$ because $l'=l\times(I^{-1}l)=l\times\omega=-\omega\times l$ from step 1.2 and the alternation of the cross product in [L6]; hence the motion is torque-free and realizes claim 2. [step 1.2, step 2.1, given, L3, L4, L6]
 
 4.1 In the intermediate case $j=2$, the same formulas give $Ae_{1}=-\tfrac13e_{3}$ and $Ae_{3}=-e_{1}$, so the transverse system is $\delta_{1}'=-\delta_{3}$, $\delta_{3}'=-\tfrac13\delta_{1}$; with $\delta_{1}(0)=1$, $\delta_{3}(0)=0$ the $\cosh,\sinh$ solution of [L5] is $\delta_{1}(t)=\cosh(t/\sqrt3)$, $\delta_{3}(t)=-\tfrac1{\sqrt3}\sinh(t/\sqrt3)$, and $\delta_{1}$ is unbounded on $[0,\infty)$ by [L6]; hence the linearized system at the intermediate spin of Model A has an unbounded solution, which is claim 3. [step 1.3, given, L5, L6, algebra] ∎
 
 ## Remarks
 
-- **The two models are declared, not measured.** The matrices
-  $\mathrm{diag}(1,1,2)$ and $\mathrm{diag}(1,2,3)$ are model parameters in
-  the declared units; no body is asserted to have these principal moments and
-  no measurement is reported.
+- **The two models are declared, not measured.** The matrices $\mathrm{diag}(1,1,2)$ and $\mathrm{diag}(1,2,3)$ are model parameters in the declared units; no body is asserted to have these principal moments and no measurement is reported.
 
-- **What the checks exhibit.** Claim 2 exhibits a torque-free motion whose
-  body angular velocity is not constant while both invariants and the spatial
-  angular momentum are constant; claim 3 exhibits the oscillatory and the
-  exponentially growing linearized behaviour on explicit data. The nonlinear
-  consequences of the latter are proved in
-  [[pthm-cm11-nonlinear-spin-stability]] and instantiated on the companion
-  page.
+- **What the checks exhibit.** Claim 2 exhibits a torque-free motion whose body angular velocity is not constant while both invariants and the spatial angular momentum are constant; claim 3 exhibits the oscillatory and the exponentially growing linearized behaviour on explicit data. The nonlinear consequences of the latter are proved in [[pthm-cm11-nonlinear-spin-stability]] and instantiated on the companion page.

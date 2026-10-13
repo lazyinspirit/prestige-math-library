@@ -75,45 +75,19 @@ and fix the initial datum $x(0)=x_{0}$, $\dot x(0)=v_{0}$. Verify:
 
 ## Facts & Assumptions
 
-**Given:** The drag model with its parameters $m,c>0$ and $\mathbf g$, the
-datum $(0,x_{0},v_{0})$, and the terminal velocity $v_{\infty}=(m/c)\mathbf g$.
+**Given:** The drag model with its parameters $m,c>0$ and $\mathbf g$, the datum $(0,x_{0},v_{0})$, and the terminal velocity $v_{\infty}=(m/c)\mathbf g$.
 
-[L1] The model is a force map of [[post-cm02-force-superposition]] clause
-(iii) by [[post-cm02-drag]] clause (iii); motions, maximal motions and their
-uniqueness are [[def-cm02-newtonian-flow]] and [[pthm-cm02-ivp]] clauses 1, 2
-and 4.
+[L1] The model is a force map of [[post-cm02-force-superposition]] clause (iii) by [[post-cm02-drag]] clause (iii); motions, maximal motions and their uniqueness are [[def-cm02-newtonian-flow]] and [[pthm-cm02-ivp]] clauses 1, 2 and 4.
 
-[L2] Scalar model and its solvability: for $m>0$, $c\ge0$, $k=0$ and constant
-forcing $f\equiv f_{0}$ the equation $m\xi''+c\xi'=f_{0}$ is the damped
-driven oscillator model [[def-cm-oscillator-model-and-phase-system]] with
-$k=0$; by [[thm-cm-forced-oscillator-variation-of-constants]] clause 1 there
-is exactly one solution on $\mathbb R$ through any datum
-$(\xi(0),\xi'(0))$, and by
-[[prop-cm-oscillator-degenerate-and-repulsive-cases]] clause 2, for $c>0$ the
-homogeneous solutions are $\xi_{\mathrm h}(t)=A+Be^{-ct/m}$ with
-$A=\xi_{\mathrm h}(0)+\frac{m}{c}\xi_{\mathrm h}'(0)$ and
-$B=-\frac{m}{c}\xi_{\mathrm h}'(0)$.
+[L2] Scalar model and its solvability: for $m>0$, $c\ge0$, $k=0$ and constant forcing $f\equiv f_{0}$ the equation $m\xi''+c\xi'=f_{0}$ is the damped driven oscillator model [[def-cm-oscillator-model-and-phase-system]] with $k=0$; by [[thm-cm-forced-oscillator-variation-of-constants]] clause 1 there is exactly one solution on $\mathbb R$ through any datum $(\xi(0),\xi'(0))$, and by [[prop-cm-oscillator-degenerate-and-repulsive-cases]] clause 2, for $c>0$ the homogeneous solutions are $\xi_{\mathrm h}(t)=A+Be^{-ct/m}$ with $A=\xi_{\mathrm h}(0)+\frac{m}{c}\xi_{\mathrm h}'(0)$ and $B=-\frac{m}{c}\xi_{\mathrm h}'(0)$.
 
-[L3] Differentiation and limits: $\frac{d}{dt}e^{\mu t}=\mu e^{\mu t}$
-([[thm-derivative-of-exponential]], [[thm-chain-rule]],
-[[thm-algebra-of-derivatives]], [[def-derivative]],
-[[def-vector-valued-derivative-and-integral]] for componentwise
-differentiation); $\exp(s)\ge1+s$ for every real $s$
-([[lem-exponential-dominates-one-plus-x]]);
-$e^{-ct/m}=1/e^{ct/m}>0$
-([[cor-exponential-reciprocal-and-positivity]]); and
-$0<a<b$ implies $0<1/b<1/a$ ([[lem-of-inverse-positive]]); limits at infinity
-are read through [[def-limits-at-infinity]].
+[L3] Differentiation and limits: $\frac{d}{dt}e^{\mu t}=\mu e^{\mu t}$ ([[thm-derivative-of-exponential]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[def-derivative]], [[def-vector-valued-derivative-and-integral]] for componentwise differentiation); $\exp(s)\ge1+s$ for every real $s$ ([[lem-exponential-dominates-one-plus-x]]); $e^{-ct/m}=1/e^{ct/m}>0$ ([[cor-exponential-reciprocal-and-positivity]]); and $0<a<b$ implies $0<1/b<1/a$ ([[lem-of-inverse-positive]]); limits at infinity are read through [[def-limits-at-infinity]].
 
-[L4] The Euclidean norm satisfies the triangle inequality and absolute
-homogeneity ([[thm-cauchy-schwarz-and-the-euclidean-norm]],
-[[def-euclidean-inner-product]]).
+[L4] The Euclidean norm satisfies the triangle inequality and absolute homogeneity ([[thm-cauchy-schwarz-and-the-euclidean-norm]], [[def-euclidean-inner-product]]).
 
 ## Verification
 
-**Proof technique:** direct; decompose the vector equation into scalar
-coordinate equations of the solved scalar model, verify the explicit formula
-by differentiation, and estimate the velocity difference.
+**Proof technique:** direct; decompose the vector equation into scalar coordinate equations of the solved scalar model, verify the explicit formula by differentiation, and estimate the velocity difference.
 
 1.1 The vector equation $m\ddot x=m\mathbf g-c\dot x$ is, in the frame's coordinates, the three scalar equations $m\ddot x_{j}=m g_{j}-c\dot x_{j}$ for $j=1,2,3$, each the scalar model of [L2] with $k=0$, $c>0$ and constant forcing $f_{0}=mg_{j}$; in particular each scalar initial value problem has exactly one solution on $\mathbb R$ by [L2]. [given, L1, L2, algebra]
 
@@ -125,18 +99,8 @@ by differentiation, and estimate the velocity difference.
 
 ## Remarks
 
-- **Terminal velocity is a model quantity.** $v_{\infty}=(m/c)\mathbf g$ is the
-  velocity at which the drag force balances the applied force in this model;
-  it is not asserted as a measured value, and both $c$ and $\mathbf g$ are
-  declared model parameters subject to the regime qualifications of
-  [[post-cm02-drag]].
+- **Terminal velocity is a model quantity.** $v_{\infty}=(m/c)\mathbf g$ is the velocity at which the drag force balances the applied force in this model; it is not asserted as a measured value, and both $c$ and $\mathbf g$ are declared model parameters subject to the regime qualifications of [[post-cm02-drag]].
 
-- **The approach is not an equilibrium.** The motion is not at rest: the
-  position grows linearly at leading order, $x(t)=v_{\infty}t+O(1)$, while the
-  velocity converges exponentially. The state is unbounded, so the trapping
-  hypothesis of [[pthm-cm02-continuation]] clause 3 is not available here; the
-  global existence is read off the explicit solution instead.
+- **Position and compact trapping.** If $\mathbf g\ne0$, then $v_{\infty}\ne0$ and $x(t)=v_{\infty}t+O(1)$ as $t\to+\infty$, so the state is unbounded and the forward compact-trapping hypothesis of [[pthm-cm02-continuation]] clause 3 is unavailable. If $\mathbf g=0$, then $x(t)\to x_0+(m/c)v_0$ and $\dot x(t)\to0$; the forward state is bounded and lies in a compact subset of the full state space. For $\mathbf g=0$ and $v_0=0$, the motion is stationary. In every case the explicit all-time formula establishes global existence.
 
-- **Strict positivity of $c$.** For $c=0$ the model degenerates to the
-  uniform-force model and no finite terminal velocity exists; the computation
-  above uses $c>0$ at every step.
+- **Strict positivity of $c$.** The formula for $v_{\infty}$ and the computation above require $c>0$. For $c=0$ the equation instead gives $\dot x(t)=v_0+\mathbf g t$: there is no finite limiting velocity when $\mathbf g\ne0$, while for $\mathbf g=0$ the velocity is constant.

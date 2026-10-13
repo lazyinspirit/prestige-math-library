@@ -20,7 +20,8 @@ deps:
     def-nrqm-kinematics-framework-massive-spin-s-model,
     def-nrqm-observables-framework-observable-and-outcome-law,
     def-nrqm-autonomous-dynamics-framework-evolution,
-    pthm-nrqm-kinematics-spin-s-outcome-laws,
+    lem-nrqm-observables-l2-multiplication-spectral-measure,
+    lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues,
     lem-nrqm-potentials-free-operator-differential-identification,
     thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators,
     def-l-p-space-as-a-quotient-by-null-functions,
@@ -40,7 +41,8 @@ dependency_roles:
   def-nrqm-kinematics-framework-massive-spin-s-model: formulation-prerequisite
   def-nrqm-observables-framework-observable-and-outcome-law: formulation-prerequisite
   def-nrqm-autonomous-dynamics-framework-evolution: formulation-prerequisite
-  pthm-nrqm-kinematics-spin-s-outcome-laws: physical-result
+  lem-nrqm-observables-l2-multiplication-spectral-measure: mathematical-premise
+  lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues: mathematical-premise
   lem-nrqm-potentials-free-operator-differential-identification: mathematical-premise
   thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators: mathematical-premise
   def-l-p-space-as-a-quotient-by-null-functions: mathematical-premise
@@ -115,9 +117,13 @@ argument ([[def-l-p-space-as-a-quotient-by-null-functions]]). Its declared
 **position assignment** is the multiplication assignment $Q$, defined on the
 classes with $xf\in H_{\mathrm{lin}}$, with the declared outcome law
 $$\mu^{Q}_{\psi}(B):=\int_{B}|\psi(x)|^{2}\,dx\qquad(B\subseteq\mathbb R \text{ Borel})$$
-for a unit class $\psi$, the one-dimensional reading of the framework's Born
-position law of [[pthm-nrqm-kinematics-spin-s-outcome-laws]] clause (a)
-adopted here as part of the model; its declared **momentum assignment** is
+for a unit class $\psi$. Indeed, the positive sigma-finite Lebesgue measure
+space $\mathbb R$ and the finite measurable multiplier $x\mapsto x$ satisfy
+[[lem-nrqm-observables-l2-multiplication-spectral-measure]] clauses (a)-(c)
+under the choice assumptions of (a): $Q$ is self-adjoint on the displayed
+domain, with spectral PVM $E_Q(B)=M_{\mathbf 1_B}$ and
+$\|E_Q(B)\psi\|^2=\int_B|\psi|^2$. The probability reading of this
+mathematical law is adopted under P2. Its declared **momentum assignment** is
 $P:=-i\hbar D$ on the classes whose weak derivative $D\psi$ lies in
 $H_{\mathrm{lin}}$ ([[def-weak-derivative-of-a-locally-integrable-function]]).
 The pair asserts no derivation of $H_{\mathrm{lin}}$, $Q$ or $P$ from the
@@ -156,29 +162,61 @@ the model with potential $V$ and energy $E\in\mathbb R$ is a nonzero class
 $\psi\in D(H_{V})$ with $H_{V}\psi=E\psi$; the pair $(\psi,E)$ is an
 **eigenpair** of the model. A **bound state** of the model is a stationary
 solution with energy $E<0$ whose representative is normalized, $\|\psi\|=1$;
-its eigenvalue $E$ is its **binding energy**, read in joules, and in this model
-the value $0$ is called the **continuum threshold**. The model reads the
+its eigenvalue $E$ is its **signed binding energy**, read in joules, and its
+positive binding-energy magnitude is $-E$. The value $0$ is the reference
+energy in this negative-eigenvalue definition of a bound state. For a general
+bounded measurable $V$, this convention makes no assertion about the location
+of any spectral threshold. The model reads the
 energy outcome law of the pure preparation of a unit eigenstate $\psi$ with
-eigenvalue $E$ through clause (a) of
-[[def-nrqm-observables-framework-observable-and-outcome-law]] as the point
-mass $\delta_{E}$ at $E$, so that outcome in $\{E\}$ has probability one; and
-the position density of the preparation is $|\psi|^{2}$ by clause (b). These
+eigenvalue $E$ through clause (c) of
+[[def-nrqm-observables-framework-observable-and-outcome-law]] and
+[[lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues]] clauses (a)-(b):
+for self-adjoint $H_V$ on the nonzero Hilbert space $H_{\mathrm{lin}}$,
+its spectral projection at $E$ fixes the unit eigenvector, so the outcome
+in $\{E\}$ has probability one and the law is the point mass $\delta_E$.
+The position density of the preparation is $|\psi|^{2}$ by the
+one-dimensional multiplication-PVM construction in clause (b) above. These
 readings are declarations of the model under P2 and construct no sample,
 detector or measured value.
 
 **(e) Declared generalized stationary solutions.** Let
 $-\infty=x_{0}<x_{1}<\dots<x_{n}=\infty$ be a finite partition of
-$\mathbb R$, and let $\psi:\mathbb R\to\mathbb C$ be bounded and classically
+$\mathbb R$, let $E\in\mathbb R$, and let $\psi:\mathbb R\to\mathbb C$ be bounded and classically
 $C^{1}$ on $\mathbb R$ with a continuous derivative, and twice continuously
 differentiable on each open interval $(x_{j},x_{j+1})$ restricted to which
 $V$ is continuous, satisfying
-$-\frac{\hbar^{2}}{2m}\psi''(x)+V(x)\psi(x)=E\psi(x)$ there. Such a $\psi$ is
+$-\frac{\hbar^{2}}{2m}\psi''(x)+V(x)\psi(x)=E\psi(x)$ there. In addition,
+require the stationary equation on the whole line in the weak sense:
+$$-\frac{\hbar^{2}}{2m}\int_{\mathbb R}\psi(x)\varphi''(x)\,dx+\int_{\mathbb R}V(x)\psi(x)\varphi(x)\,dx=E\int_{\mathbb R}\psi(x)\varphi(x)\,dx$$
+for every smooth compactly supported real test function
+$\varphi\in C_c^{\infty}(\mathbb R;\mathbb R)$; the equality is complex,
+equivalently componentwise. All integrals are finite because $V$ and $\psi$
+are bounded and the tests have compact support. This is exactly the assertion
+$D^{2}\psi=(2m/\hbar^{2})(V-E)\psi$ with the weak derivative convention of
+[[def-weak-derivative-of-a-locally-integrable-function]]; it is required even
+when $V$ is continuous on no open interval. For a piecewise constant potential
+and a $C^{1}$ piecewise $C^{2}$ solution of the displayed classical equations,
+integration by parts twice on the pieces gives this identity: the internal
+boundary terms cancel by continuity of $\psi$ and $\psi'$, and the external
+terms vanish by compact support of the test. Such a $\psi$ is
 a **declared generalized stationary solution** of the model at energy $E$. It
-is generally not an element of $H_{\mathrm{lin}}$ (a bounded oscillatory
-solution has $|\psi|^{2}$ not integrable), so it is not a preparation of the
-model and clause (d) does not apply to it; it is used only through the
+need not be an element of $H_{\mathrm{lin}}$ (for example, a function
+$x\mapsto A e^{ikx}$ with $A\in\mathbb C\setminus\{0\}$ and $k\in\mathbb R$
+has constant density $|A|^{2}>0$, which is not integrable on $\mathbb R$). When it is
+not in $H_{\mathrm{lin}}$, it does not represent a preparation of the model
+and clause (d) does not apply to it; its scattering reading uses only the
 declared flux quantities computed from it, and every such use states the
-idealization. The pair's scattering reading assigns to $\psi$ the
+idealization. Square-integrable solutions are not excluded: if the nonzero
+class of $\psi$ belongs to $D(H_{V})$, the weak equation above is the
+eigenvalue equation of clause (d), and its unit normalization has the
+preparation and outcome-law readings of that clause. Merely declaring a
+generalized stationary solution imposes no such normalization. For
+dimensional bookkeeping, assign $\psi$ and its amplitudes
+the one-dimensional position-wavefunction dimension $\ell^{-1/2}$ of
+[[def-nrqm-framework-quantities-and-units]] clause (d)1 (the SI reference unit
+is $\mathrm{m}^{-1/2}$); this convention does not normalize $\psi$ or make it
+an element of $H_{\mathrm{lin}}$. The pair's scattering reading assigns to
+$\psi$ the
 **probability current** $j(x)=\frac{\hbar}{m}\operatorname{Im}\bigl(\overline{\psi(x)}\psi'(x)\bigr)$,
 read in $\mathrm{s^{-1}}$ by clause (d)5 of
 [[def-nrqm-framework-quantities-and-units]], and reads a ratio of currents at
@@ -189,9 +227,8 @@ predicted.
 
 **(f) Status and scope.** Clauses (a)-(e) fix the data of the pair: a declared
 effective line model with a declared potential, energy operator, bound-state
-vocabulary and generalized-solution vocabulary. They introduce no assumption
-beyond P1, P2, P4, P5, P6, P7 and the cited mathematics; in particular the
-line model, its state space and its position and momentum assignments are
-declarations of the pair and are not consequences of the three-dimensional
-model. No numerical value of $m$, $V$ or $\hbar$ and no measured quantity is
+vocabulary and generalized-solution vocabulary. In addition to P1, P2, P4, P5, P6, P7 and the cited mathematics,
+they adopt the effective line-model assignments of clauses (b)-(e); these
+assignments are additional model assumptions and are not consequences of the
+three-dimensional model. No numerical value of $m$, $V$ or $\hbar$ and no measured quantity is
 asserted.

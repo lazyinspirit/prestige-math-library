@@ -102,7 +102,7 @@ along $\gamma$.
 
 [L6] On a compact interval, a linear first-order system $Y'=A(s)Y$ with continuous coefficient matrix has a unique solution with prescribed initial value ([[lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval]]).
 
-[L7] A Jacobi field along a geodesic is by definition a smooth field with $D_t^2J=R(\gamma',J)\gamma'$; the Jacobi operator is $J\mapsto R(\gamma',J)\gamma'$ ([[def-gr-jacobi-field-and-conjugate-instant]] clauses (b)-(c)).
+[L7] A Jacobi field along a geodesic is by definition a smooth field with $D_t^2J=R(\gamma',J)\gamma'$; the Jacobi operator is $J\mapsto R(\gamma',J)\gamma'$ ([[def-gr-jacobi-field-and-conjugate-instant]] clause (b)).
 
 ## Proof
 
@@ -112,7 +112,7 @@ along $\gamma$.
 
 1.2 (The two derivatives commute on the tangent.) If $D_tT=0$, then by the component expressions of [L3] with $V=T$ and by [L2], $D_tJ^F-D_rT$ has components $\partial_t\partial_rF^a+\Gamma^a{}_{bc}T^b(J^F)^c-\partial_r\partial_tF^a-\Gamma^a{}_{bc}(J^F)^bT^c$, which vanishes because the mixed partials commute and $\Gamma^a{}_{bc}$ is symmetric. Hence $D_tJ^F=D_rT$. [L2, L3, algebra]
 
-1.3 (Jacobi fields with prescribed initial data.) Let $p:=\gamma(s_0)$ and extend a basis $E_1(s_0),\dots,E_4(s_0)$ of $T_pM$ to a parallel frame $E_1,\dots,E_4$ along $\gamma$ by [L5]. Writing a field along $\gamma$ as $J=\sum_iJ^iE_i$, [L3] and $D_sE_i=0$ give $D_s^2J=\sum_i(J^i)''E_i$, while [L1] gives $R(\gamma',J)\gamma'=\sum_{i,j}J^jC^i{}_jE_i$ for the smooth functions $C^i{}_j=g(R(\gamma',E_j)\gamma',E^i)$ of the dual frame; the Jacobi equation is therefore equivalent to the second-order linear system $(J^i)''=\sum_jC^i{}_jJ^j$ for the coefficient functions. [L5, L1, L3, algebra]
+1.3 (Jacobi fields with prescribed initial data.) Let $p:=\gamma(s_0)$ and extend a basis $E_1(s_0),\dots,E_4(s_0)$ of $T_pM$ to a parallel frame $E_1,\dots,E_4$ along $\gamma$ by [L5]. Writing a field along $\gamma$ as $J=\sum_iJ^iE_i$, [L3] and $D_sE_i=0$ give $D_s^2J=\sum_i(J^i)''E_i$. For each $j$, define the smooth coefficient functions $C^i{}_j$ by the unique frame expansion $R(\gamma',E_j)\gamma'=\sum_i C^i{}_jE_i$; then [L1] gives $R(\gamma',J)\gamma'=\sum_{i,j}J^jC^i{}_jE_i$. The Jacobi equation is therefore equivalent to the second-order linear system $(J^i)''=\sum_jC^i{}_jJ^j$ for the coefficient functions. [L5, L1, L3, algebra]
 
 2.1 (Identification with the curvature and conclusion of (a).) The coefficient of $T^c(J^F)^dV^b$ in step 1.1 is $\partial_c\Gamma^a{}_{db}-\partial_d\Gamma^a{}_{cb}+\sum_e(\Gamma^a{}_{ce}\Gamma^e{}_{db}-\Gamma^a{}_{de}\Gamma^e{}_{cb})$, which is the coordinate formula for $R^a{}_{bcd}$ of [L1]. Therefore $(D_tD_r-D_rD_t)V=R(T,J^F)V$ at the chosen point; the point was arbitrary and the identity is between smooth fields, so (a) holds. [step 1.1, L1, algebra]
 
@@ -122,17 +122,7 @@ along $\gamma$.
 
 3.2 (Vector space and dimension.) By step 2.2 the map $J\mapsto(J(s_0),D_sJ(s_0))$ from the set of smooth Jacobi fields along $\gamma$ to $T_pM\oplus T_pM$ is well defined, linear over $\mathbb R$, injective (two Jacobi fields with the same data agree by uniqueness of step 2.2) and surjective (existence in step 2.2). It is therefore a linear isomorphism, the space of Jacobi fields has dimension $\dim(T_pM\oplus T_pM)=8$, and (c) holds. [step 2.2, algebra]
 
-4.1 (Tangential component.) For a Jacobi field $J$ along a geodesic, put [step 3.1, step 3.2, L4, L7, algebra]
-$a(s):=g(J,\gamma')$. Metric compatibility and $D_s\gamma'=0$ give
-$a''=g(D_s^2J,\gamma')=g(R(\gamma',J)\gamma',\gamma')=0$ by [L4], so $a$
-is affine. If in addition $g(\gamma',\gamma')=-1$, the normal component
-defined in [[def-gr-jacobi-field-and-conjugate-instant]] is
-$J^\perp=J+a\gamma'$. Therefore
-$D_s^2J^\perp=D_s^2J+a''\gamma'+2a'D_s\gamma'+aD_s^2\gamma'
-=R(\gamma',J)\gamma'$.
-Since $J=J^\perp-a\gamma'$ and $R(\gamma',\gamma')\gamma'=0$ by the
-first-slot skew-symmetry of [L4], this is
-$R(\gamma',J^\perp)\gamma'$. Thus $J^\perp$ is a Jacobi field, proving (d). [step 3.1, step 3.2, L4, L7, algebra] ∎
+4.1 (Tangential component.) For a Jacobi field $J$ along a geodesic, put $a(s):=g(J,\gamma')$. Metric compatibility and $D_s\gamma'=0$ give $a''=g(D_s^2J,\gamma')=g(R(\gamma',J)\gamma',\gamma')=0$ by [L4], so $a$ is affine. If in addition $g(\gamma',\gamma')=-1$, the normal component defined in [[def-gr-jacobi-field-and-conjugate-instant]] is $J^\perp=J+a\gamma'$. Therefore $D_s^2J^\perp=D_s^2J+a''\gamma'+2a'D_s\gamma'+aD_s^2\gamma' =R(\gamma',J)\gamma'$. Since $J=J^\perp-a\gamma'$ and $R(\gamma',\gamma')\gamma'=0$ by the first-slot skew-symmetry of [L4], this is $R(\gamma',J^\perp)\gamma'$. Thus $J^\perp$ is a Jacobi field, proving (d). [step 3.1, step 3.2, L4, L7, algebra] ∎
 
 ## Remarks
 

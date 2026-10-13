@@ -6,7 +6,7 @@ domain: mathematics
 title: "Orbital core commutators"
 status: draft
 origin: pipeline
-dependency_level: 9
+dependency_level: 8
 deps: [thm-nrqm-orbital-and-spin-orbital-self-adjoint-generators, thm-nrqm-orbital-and-spin-sphere-laplacian-diagonal-domain, thm-nrqm-orbital-and-spin-harmonic-polynomial-dimension, thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-nrqm-orbital-and-spin-sphere-onb, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, prop-nrqm-orbital-and-spin-finite-spin-matrices, def-directional-and-partial-derivatives, def-laplacian-of-a-c2-function, thm-algebra-of-derivatives, thm-ftc-second-part, thm-sine-and-cosine-derivatives, def-sine-and-cosine-by-power-series, def-complex-exponential, def-inner-product-space, def-hilbert-space, cor-inner-product-induces-a-norm, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]
 dependency_roles:
   thm-nrqm-orbital-and-spin-orbital-self-adjoint-generators: mathematical-premise
@@ -39,7 +39,7 @@ sources:
   references:
     - title: "MIT 8.05 Quantum Physics II (Fall 2013), Chapter 9 'Angular Momentum', §1.2 and §3 (the l = 1 angular-momentum matrices and the spherical harmonics Y(1,m) proportional to x, y, z)"
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/e765f050b2fd50a9d87d2ae801e9c52f_MIT8_05F13_Chap_09.pdf"
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Chapter 7, §7.5 ('The spherical harmonics', l = 1 harmonics as coordinate functions) and §7.1 (eigenvalues of Jz and J2)"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Chapter 7, §7.2.3 and Table 7.1 (l = 1 spherical harmonics as coordinate functions), printed pp. 147-149, and §7.1 (eigenvalues of Jz and J2)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 ---
 

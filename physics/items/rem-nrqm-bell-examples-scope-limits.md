@@ -98,8 +98,8 @@ verification:
   recorded as an open destination.
 
 - **Why a null or shifted sample is not a verdict.** The mixture's tables have
-  $S=-\sqrt2$, so $|S|=\sqrt2$, strictly below both the classical bound $2$
-  and the singlet's $2\sqrt2$
+  $S=-\sqrt2$, so $|S|=\sqrt2$, strictly below the local-response CHSH bound
+  $2$ ([[thm-nrqm-bell-local-representations-satisfy-chsh]]) and the singlet's $2\sqrt2$
   ([[ex-nrqm-bell-worked-angles-and-product-mixture]]). At the worked angles,
   every singlet table cell has probability $\tfrac14(1\pm1/\sqrt2)>0$, and
   every mixture table cell has probability either $\tfrac14$ or

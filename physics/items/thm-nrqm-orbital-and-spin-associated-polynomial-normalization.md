@@ -3,11 +3,11 @@ id: thm-nrqm-orbital-and-spin-associated-polynomial-normalization
 aliases: [nrqm-orbital-and-spin-associated-polynomial-normalization]
 kind: theorem
 domain: mathematics
-title: "Associated-polynomial normalization"
+title: "Associated Legendre function normalization"
 status: draft
 origin: pipeline
 dependency_level: 1
-deps: [thm-nrqm-orbital-and-spin-legendre-rodrigues-equation, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, def-polar-surface-measure-on-the-unit-sphere, thm-general-leibniz-rule, thm-algebra-of-derivatives, thm-chain-rule, thm-ftc-second-part, lem-trigonometric-characters-are-orthonormal, thm-continuous-implies-integrable, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, cor-cauchy-schwarz-inequality-for-l-two, def-complex-exponential, def-factorial-and-falling-factorial, def-natural-numbers, lem-complex-conjugation-and-modulus-laws, def-inner-product-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, cor-inner-product-induces-a-norm, def-countable-choice]
+deps: [thm-nrqm-orbital-and-spin-legendre-rodrigues-equation, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, def-polar-surface-measure-on-the-unit-sphere, thm-general-leibniz-rule, thm-algebra-of-derivatives, thm-chain-rule, thm-ftc-second-part, lem-trigonometric-characters-are-orthonormal, thm-continuous-implies-integrable, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, cor-cauchy-schwarz-inequality-for-l-two, def-complex-exponential, def-factorial-and-falling-factorial, def-natural-numbers, lem-complex-conjugation-and-modulus-laws, def-inner-product-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, cor-inner-product-induces-a-norm, cor-mean-value-theorem, def-countable-choice]
 dependency_roles:
   thm-nrqm-orbital-and-spin-legendre-rodrigues-equation: mathematical-premise
   lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates: mathematical-premise
@@ -28,6 +28,7 @@ dependency_roles:
   def-inner-product-space: mathematical-premise
   def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis: mathematical-premise
   cor-inner-product-induces-a-norm: mathematical-premise
+  cor-mean-value-theorem: mathematical-premise
   def-countable-choice: mathematical-premise
 proof_strategy: direct
 provenance:
@@ -35,8 +36,10 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "NIST Digital Library of Mathematical Functions, §14.7 'Integer Degree and Order' (associated Legendre functions, Rodrigues-type formula and (14.7.1)-(14.7.6)) and §14.30 'Spherical and Spheroidal Harmonics' (surface harmonics and orthonormality)"
+    - title: "NIST Digital Library of Mathematical Functions, §14.7(ii), equation (14.7.8) (Ferrers associated Legendre Rodrigues-type formula)"
       url: "https://dlmf.nist.gov/14.7"
+    - title: "NIST Digital Library of Mathematical Functions, §14.30, spherical harmonics (surface harmonics and orthonormality)"
+      url: "https://dlmf.nist.gov/14.30"
     - title: "S. Axler, P. Bourdon, W. Ramey, Harmonic Function Theory, 2nd edition, author-hosted full text, Chapter 5, printed pp. 77-105 (inner product of spherical harmonics and zonal harmonics)"
       url: "https://www.axler.net/HFT.pdf"
 ---
@@ -52,7 +55,15 @@ $$w_{lm}(t):=(-1)^m(1-t^2)^{m/2}\,\frac{d^m}{dt^m}P_l(t),$$
 where $(1-t^2)^{1/2}>0$ denotes the nonnegative square root. Let $\sigma$ be the polar surface measure on
 $S^2$ and let the angle coordinates be $\Phi(\theta,\varphi)=(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta)$
 ([[lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates]],
-[[def-polar-surface-measure-on-the-unit-sphere]]). Then:
+[[def-polar-surface-measure-on-the-unit-sphere]]). The image of $\Phi$ is
+$S^2\setminus C$, where $C:=\{(x,0,z)\in S^2:x\ge0\}$; $C$ is closed and $\sigma(C)=0$ by applying the integral identity of
+[[lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates]] to its indicator. For $l\ge m\ge0$, define the representative
+$\widetilde Y_{lm}:S^2\to\mathbb C$ on $S^2\setminus C$ by
+$$\widetilde Y_{lm}(\Phi(\theta,\varphi)):=b_{lm}w_{lm}(\cos\theta)\frac{e^{im\varphi}}{\sqrt{2\pi}},$$
+and on the cut $C$ by
+$$\widetilde Y_{lm}(\sin\theta,0,\cos\theta):=b_{lm}w_{lm}(\cos\theta)/\sqrt{2\pi}\qquad(0\le\theta\le\pi).$$
+The limits at $\varphi=0$ and $2\pi$ agree because $m$ is an integer, and the endpoint values of $w_{lm}$ from (a) give the limits at the poles; hence $\widetilde Y_{lm}$ is continuous. For $1\le m\le l$ set
+$\widetilde Y_{l,-m}:=(-1)^m\overline{\widetilde Y_{lm}}$, and write $Y_{lm}$ for the class of $\widetilde Y_{lm}$ in $L^2(S^2,\sigma;\mathbb C)$. Then:
 
 (a) each $w_{lm}$ extends continuously to $[-1,1]$, with $w_{lm}(\pm1)=0$ when $m\ge1$, and on $(-1,1)$
 it satisfies the associated Legendre equation
@@ -62,11 +73,8 @@ equivalently $(1-t^2)w_{lm}''-2tw_{lm}'+\Bigl[l(l+1)-\frac{m^2}{1-t^2}\Bigr]w_{l
 (b) for fixed $m\ge0$ the functions $w_{lm}$, $l\ge m$, are pairwise orthogonal in $L^2((-1,1),dt)$:
 $\int_{-1}^1w_{lm}w_{km}\,dt=0$ for $k\ne l$; moreover $0<\int_{-1}^1w_{lm}^2\,dt<+\infty$;
 
-(c) with $b_{lm}:=\bigl(\int_{-1}^1w_{lm}^2\,dt\bigr)^{-1/2}>0$ and
-$$Y_{lm}(\theta,\varphi):=b_{lm}\,w_{lm}(\cos\theta)\,\frac{e^{im\varphi}}{\sqrt{2\pi}}\qquad(l\ge m\ge0),$$
-extended by $Y_{l,-m}:=(-1)^m\overline{Y_{lm}}$ for $m\ge1$ (as functions of $(\theta,\varphi)\in(0,\pi)\times(0,2\pi)$,
-$\overline{\ \cdot\ }$ denoting complex conjugation, [[def-complex-exponential]],
-[[lem-complex-conjugation-and-modulus-laws]]), one has $|Y_{l,-m}|=|Y_{lm}|$ and
+(c) with $b_{lm}:=\bigl(\int_{-1}^1w_{lm}^2\,dt\bigr)^{-1/2}>0$ and the representatives just defined, one has
+$|Y_{l,-m}|=|Y_{lm}|$ and
 $\overline{Y_{lm}}=(-1)^mY_{l,-m}$ for all $l$ and all $m$ with $|m|\le l$;
 
 (d) the family $\{Y_{lm}:l\ge0,\ -l\le m\le l\}$ is orthonormal in $L^2(S^2,\sigma;\mathbb C)$
@@ -93,12 +101,13 @@ momentum eigenfunctions or spherical harmonics of an atom is asserted.
 
 [F5] A continuous real function on the compact interval $[−1,1]$ is (Riemann and Lebesgue) integrable; products of continuous functions are continuous, and $\int_{-1}^1g>0$ for a continuous $g\ge0$ that is not identically zero ([[thm-continuous-implies-integrable]], [[def-complex-lp-and-euclidean-test-function-conventions]]).
 
-[F6] If $G:[−1,1]\to\mathbb R$ is continuous on $[−1,1]$, differentiable on $(-1,1)$, and $G'$ is Riemann integrable on $[−1,1]$, then $\int_{-1}^1G'=G(1)-G(-1)$; a continuous $G$ with $G(-1)=G(1)=0$ therefore has $\int_{-1}^1G'=0$ ([[thm-ftc-second-part]]).
+[F6] If $G:[a,b]\to\mathbb R$ is differentiable at every point of $[a,b]$ as a function on $[a,b]$ (with one-sided derivatives at $a,b$) and $G'$ is integrable on $[a,b]$, then $\int_a^bG'=G(b)-G(a)$ ([[thm-ftc-second-part]]).
 
 [F7] For $f,g\in L^2$ the product $f\overline g$ is in $L^1$ with $\int|f\overline g|\le\|f\|_2\|g\|_2$; the inner product in $L^2(S^2,\sigma;\mathbb C)$ is linear in the first argument; conjugation satisfies $\overline{zw}=\overline z\,\overline w$ and $|z|^2=z\overline z$ ([[cor-cauchy-schwarz-inequality-for-l-two]], [[def-inner-product-space]], [[lem-complex-conjugation-and-modulus-laws]], [[def-complex-lp-and-euclidean-test-function-conventions]]).
 
 [F8] For the given $0\le m\le l$, $d^mP_l/dt^m$ is a polynomial of degree $l-m$ with nonzero leading coefficient, so $w_{lm}$ is not the zero function on $(-1,1)$, because $(1-t^2)^{m/2}>0$ there ([[thm-nrqm-orbital-and-spin-legendre-rodrigues-equation]], [[def-factorial-and-falling-factorial]]).
 
+[F9] If $G:[a,b]\to\mathbb R$ is continuous on $[a,b]$ and differentiable at every point of $(a,b)$ as a function on $[a,b]$, the mean value theorem gives a $c\in(a,b)$ with $G(b)-G(a)=G'(c)(b-a)$ ([[cor-mean-value-theorem]]).
 
 
 ## Proof
@@ -107,12 +116,12 @@ momentum eigenfunctions or spherical harmonics of an atom is asserted.
 
 1.2 [Continuity at the endpoints] For $m=0$, $w_{l0}=P_l$ is a polynomial; for $m\ge1$, $w_{lm}=(-1)^m(1-t^2)^{m/2}Q(t)$ with $Q=P_l^{(m)}$ a polynomial, so $|w_{lm}(t)|\le(1-t^2)^{m/2}\sup_{[-1,1]}|Q|\to0$ as $t\to\pm1$, and the function extended by $w_{lm}(\pm1):=0$ is continuous on $[-1,1]$. [F1, F2, algebra]
 
-2.1 [Substitution] Put $f(t):=(1-t^2)^{m/2}>0$ on $(-1,1)$, so that $w_{lm}=(-1)^mfv$; the sign is constant and will be carried along. From $v=f^{-1}w$ and [F2], $v'=f^{-1}w'-f^{-2}f'w$ and $v''=f^{-1}w''-2f^{-2}f'w'+(2f^{-3}(f')^2-f^{-2}f'')w$. Substituting into step 1.1 and multiplying by $f$ gives $(1-t^2)w''+\bigl[-2\tfrac{f'}{f}(1-t^2)-2t(m+1)\bigr]w'+\bigl[-\tfrac{f''}{f}(1-t^2)+2(\tfrac{f'}{f})^2(1-t^2)+2t(m+1)\tfrac{f'}{f}-m(m+1)+l(l+1)\bigr]w=0$. Direct differentiation gives $\tfrac{f'}{f}=-\tfrac{mt}{1-t^2}$ and therefore $\tfrac{f''}{f}=(\tfrac{f'}{f})'+(\tfrac{f'}{f})^2=\tfrac{-m-mt^2}{(1-t^2)^2}+\tfrac{m^2t^2}{(1-t^2)^2}=\tfrac{m(-1+(m-1)t^2)}{(1-t^2)^2}$. Hence the coefficient of $w'$ is $2mt-2t(m+1)=-2t$, and the coefficient of $w$ equals $\tfrac{m-m(m+1)t^2}{1-t^2}-m(m+1)+l(l+1)=l(l+1)-\tfrac{m^2}{1-t^2}$, using $\tfrac{m-m(m+1)t^2}{1-t^2}-m(m+1)=-\tfrac{m^2}{1-t^2}$ (expand the left side over the common denominator $1-t^2$). This is the associated equation. [step 1.1, F2, algebra]
+2.1 [Substitution] Put $f(t):=(1-t^2)^{m/2}>0$ on $(-1,1)$, so that $w_{lm}=(-1)^mfv$; the sign is constant and will be carried along. Put $u:=(-1)^mv$, so $w=fu$ and $u$ satisfies the same homogeneous equation as $v$ in step 1.1. From $u=f^{-1}w$ and [F2], $u'=f^{-1}w'-f^{-2}f'w$ and $u''=f^{-1}w''-2f^{-2}f'w'+(2f^{-3}(f')^2-f^{-2}f'')w$. Substituting into step 1.1 and multiplying by $f$ gives $(1-t^2)w''+\bigl[-2\tfrac{f'}{f}(1-t^2)-2t(m+1)\bigr]w'+\bigl[-\tfrac{f''}{f}(1-t^2)+2(\tfrac{f'}{f})^2(1-t^2)+2t(m+1)\tfrac{f'}{f}-m(m+1)+l(l+1)\bigr]w=0$. Direct differentiation gives $\tfrac{f'}{f}=-\tfrac{mt}{1-t^2}$ and therefore $\tfrac{f''}{f}=(\tfrac{f'}{f})'+(\tfrac{f'}{f})^2=\tfrac{-m-mt^2}{(1-t^2)^2}+\tfrac{m^2t^2}{(1-t^2)^2}=\tfrac{m(-1+(m-1)t^2)}{(1-t^2)^2}$. Hence the coefficient of $w'$ is $2mt-2t(m+1)=-2t$, and the coefficient of $w$ equals $\tfrac{m-m(m+1)t^2}{1-t^2}-m(m+1)+l(l+1)=l(l+1)-\tfrac{m^2}{1-t^2}$, using $\tfrac{m-m(m+1)t^2}{1-t^2}-m(m+1)=-\tfrac{m^2}{1-t^2}$ (expand the left side over the common denominator $1-t^2$). This is the associated equation. [step 1.1, F2, algebra]
 
-3.1 [Orthogonality] Fix $m$ and let $k\ne l$, $k\ge m$. Multiply the associated equation for $w_{lm}$ by $w_{km}$ and that for $w_{km}$ by $w_{lm}$, subtract, and use $-\bigl((1-t^2)w_{lm}'\bigr)'w_{km}+\bigl((1-t^2)w_{km}'\bigr)'w_{lm}=-\tfrac{d}{dt}\bigl[(1-t^2)(w_{lm}'w_{km}-w_{lm}w_{km}')\bigr]$: $(l(l+1)-k(k+1))w_{lm}w_{km}=-\tfrac{d}{dt}G(t)$ with $G(t):=(1-t^2)\bigl(w_{lm}'(t)w_{km}(t)-w_{lm}(t)w_{km}'(t)\bigr)$. By step 1.2 and [F2], $G$ is continuous on $[-1,1]$ with $G(\pm1)=0$ (for $m\ge1$ both $w$'s vanish there; for $m=0$ the factor $1-t^2$ does), and $G$ is differentiable on $(-1,1)$ with the continuous integrand $G'$ of the previous display; hence [F6] gives $\int_{-1}^1G'=G(1)-G(-1)=0$, so $(l(l+1)-k(k+1))\int_{-1}^1w_{lm}w_{km}\,dt=0$ and, since $l\ne k$, $\int_{-1}^1w_{lm}w_{km}\,dt=0$. [step 2.1, step 1.2, F2, F5, F6, algebra]
+3.1 [Orthogonality] Fix $m$ and let $k\ne l$, $k\ge m$. Multiply the associated equation for $w_{lm}$ by $w_{km}$ and that for $w_{km}$ by $w_{lm}$, subtract, and use $-\bigl((1-t^2)w_{lm}'\bigr)'w_{km}+\bigl((1-t^2)w_{km}'\bigr)'w_{lm}=-\tfrac{d}{dt}\bigl[(1-t^2)(w_{lm}'w_{km}-w_{lm}w_{km}')\bigr]$: $(l(l+1)-k(k+1))w_{lm}w_{km}=-\tfrac{d}{dt}G(t)$ with $G(t):=(1-t^2)\bigl(w_{lm}'(t)w_{km}(t)-w_{lm}(t)w_{km}'(t)\bigr)$ on $(-1,1)$. By step 1.2, put $Q_l=P_l^{(m)}$ and $Q_k=P_k^{(m)}$. If $m=0$, then both $w$ functions are polynomials and the factor $1-t^2$ gives $G(t)\to0$ at both endpoints. If $m\ge1$, put $f(t)=(1-t^2)^{m/2}$, so $f'=-mt(1-t^2)^{m/2-1}$ and $w_{lm}=(-1)^mfQ_l$, $w_{km}=(-1)^mfQ_k$; since $Q_l,Q_k$ and their derivatives are bounded on $[-1,1]$, each term in $(1-t^2)w_{lm}'w_{km}$ and $(1-t^2)w_{lm}w_{km}'$, after the product rule, is bounded by a constant times $(1-t^2)^m$ or $(1-t^2)^{m+1}$, so again $G(t)\to0$ at both endpoints. Extend $G$ by $G(\pm1)=0$; these limits make it continuous on $[-1,1]$. The subtracted equations give $G'(t)=q(t):=-\bigl(l(l+1)-k(k+1)\bigr)w_{lm}(t)w_{km}(t)$ on $(-1,1)$, and step 1.2 makes $q$ continuous on $[-1,1]$. For each $x\in(-1,1)$, [F9] on $[x,1]$ gives $(G(1)-G(x))/(1-x)=q(\xi_x)$ for some $\xi_x\in(x,1)$, so as $x\uparrow1$ this quotient tends to $q(1)$. On $[-1,x]$, [F9] gives $(G(x)-G(-1))/(x+1)=q(\eta_x)$ for some $\eta_x\in(-1,x)$; as $x\downarrow-1$ this quotient tends to $q(-1)$. Thus $G$ is differentiable at every point of $[-1,1]$ with the endpoint convention of [F6], and $G'=q$ is continuous, hence integrable by [F5]. Now [F6] gives $\int_{-1}^1G'=G(1)-G(-1)=0$, so $(l(l+1)-k(k+1))\int_{-1}^1w_{lm}w_{km}\,dt=0$ and, since $l\ne k$, $\int_{-1}^1w_{lm}w_{km}\,dt=0$. [step 2.1, step 1.2, F2, F5, F6, F9, algebra]
 
 3.2 [Positivity and finiteness of the norms] By steps 2.1 and 1.2, $w_{lm}^2$ is continuous on $[−1,1]$, so its integral is finite and nonnegative by [F5]; it is not zero because $w_{lm}$ is not the zero function on $(-1,1)$: $P_l^{(m)}$ is a nonzero polynomial by [F8] and $(1-t^2)^{m/2}>0$ in the interior, so $w_{lm}$ is nonzero at every point where the polynomial does not vanish, and a continuous nonzero function has positive integral by [F5]. Hence $0<\int_{-1}^1w_{lm}^2\,dt<+\infty$ and $b_{lm}$ of the Statement is a well-defined positive real. [step 2.1, step 1.2, F5, F8, algebra]
 
-3.3 [The functions $Y_{lm}$ and their conjugation] For $l\ge m\ge0$, $Y_{lm}$ is well defined on the rectangle, and $|Y_{lm}|=b_{lm}|w_{lm}(\cos\theta)|/\sqrt{2\pi}$; by definition $Y_{l,-m}=(-1)^m\overline{Y_{lm}}$, so $|Y_{l,-m}|=|Y_{lm}|$ and, conjugating twice, $\overline{Y_{l,-m}}=(-1)^mY_{lm}$, which for $m\ge0$ is the displayed identity $\overline{Y_{lm}}=(-1)^mY_{l,-m}$. This establishes (c) and the identities in (e) follow from $P_l^{(0)}=P_l$ and $P_l^{(l)}=\frac{(2l)!}{2^ll!}$ (the leading coefficient of $P_l$ times $l!$, by [F1]). [step 2.1, F1, F7, algebra]
+3.3 [The functions $Y_{lm}$ and their conjugation] The formula in the Statement defines continuous representatives on $S^2$, so each class $Y_{lm}$ belongs to $L^2(S^2,\sigma)$ because $\sigma$ is finite; their chart moduli satisfy $|Y_{lm}(\Phi(\theta,\varphi))|=b_{lm}|w_{lm}(\cos\theta)|/\sqrt{2\pi}$. By definition $Y_{l,-m}=(-1)^m\overline{Y_{lm}}$, so $|Y_{l,-m}|=|Y_{lm}|$ and, conjugating twice, $\overline{Y_{l,-m}}=(-1)^mY_{lm}$, which is the displayed identity for every $m\ge0$. This establishes (c), and the identities in (e) follow from $P_l^{(0)}=P_l$ and $P_l^{(l)}=\frac{(2l)!}{2^ll!}$ (the leading coefficient of $P_l$ times $l!$, by [F1]). [step 2.1, F1, F7, algebra]
 
-4.1 [Orthonormality] Let $m,m'\ge0$. By [F3] applied to the $L^1$ function $Y_{lm}\overline{Y_{l'm'}}$, whose integral against $\sigma$ is the inner product, and by [F4], $\langle Y_{lm},Y_{l'm'}\rangle=b_{lm}b_{l'm'}\frac1{2\pi}\Bigl(\int_0^{2\pi}e^{i(m-m')\varphi}d\varphi\Bigr)\Bigl(\int_{-1}^1w_{lm}(t)w_{l'm'}(t)\,dt\Bigr)=\delta_{mm'}\,b_{lm}b_{l'm}\int_{-1}^1w_{lm}w_{l'm}\,dt$, which by steps 3.1 and 3.2 equals $0$ for $l\ne l'$ and $1$ for $l=l'$. For entries with negative lower index, write the inner product as a product of conjugation operations using [F7]: $\langle Y_{l,-m},Y_{l',-m'}\rangle=(-1)^{m+m'}\langle\overline{Y_{lm}},\overline{Y_{l'm'}}\rangle=(-1)^{m+m'}\overline{\langle Y_{lm},Y_{l'm'}\rangle}$, and $\langle Y_{lm},Y_{l',-m'}\rangle=(-1)^{m'}\int_{S^2}Y_{lm}Y_{l'm'}\,d\sigma$, whose rectangle form has $\varphi$-factor $\int_0^{2\pi}e^{i(m+m')\varphi}d\varphi$, vanishing unless $m=m'=0$ by [F4], in which case it reduces to the already treated case; collecting the cases gives orthonormality for all pairs. This proves (d), and (a), (b) were proved in steps 2.1, 3.1 and 3.2. [step 3.1, step 3.2, step 3.3, F3, F4, F7, algebra] ∎
+4.1 [Orthonormality] Let $m,m'\ge0$. The extensions on $C$ do not affect integrals because $\sigma(C)=0$. Thus [F3] applies to the $L^1$ function $Y_{lm}\overline{Y_{l'm'}}$, whose integral against $\sigma$ is the inner product; with [F4], this gives $\langle Y_{lm},Y_{l'm'}\rangle=b_{lm}b_{l'm'}\frac1{2\pi}\Bigl(\int_0^{2\pi}e^{i(m-m')\varphi}d\varphi\Bigr)\Bigl(\int_{-1}^1w_{lm}(t)w_{l'm'}(t)\,dt\Bigr)=\delta_{mm'}\,b_{lm}b_{l'm}\int_{-1}^1w_{lm}w_{l'm}\,dt$, which by steps 3.1 and 3.2 equals $0$ for $l\ne l'$ and $1$ for $l=l'$. For entries with negative lower index, write the inner product as a product of conjugation operations using [F7]: $\langle Y_{l,-m},Y_{l',-m'}\rangle=(-1)^{m+m'}\langle\overline{Y_{lm}},\overline{Y_{l'm'}}\rangle=(-1)^{m+m'}\overline{\langle Y_{lm},Y_{l'm'}\rangle}$, and $\langle Y_{lm},Y_{l',-m'}\rangle=(-1)^{m'}\int_{S^2}Y_{lm}Y_{l'm'}\,d\sigma$, whose rectangle form has $\varphi$-factor $\int_0^{2\pi}e^{i(m+m')\varphi}d\varphi$, vanishing unless $m=m'=0$ by [F4], in which case it reduces to the already treated case; collecting the cases gives orthonormality for all pairs. This proves (d), and (a), (b) were proved in steps 2.1, 3.1 and 3.2. [step 3.1, step 3.2, step 3.3, F3, F4, F7, algebra] ∎

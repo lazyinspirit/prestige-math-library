@@ -60,15 +60,17 @@ verification:
 
 ## Statement
 
+In this item, a **complex-time solution** on an open set $\Omega\subseteq\mathbb C$ is a holomorphic map $Y:\Omega\to D$ satisfying $Y'(\tau)=F(Y(\tau))$. For a closed time disc, a solution means the restriction of such a map that is continuous on the closed disc.
+
 Let $n\ge1$, let $D\subseteq\mathbb C^n$ be open, let $F:D\to\mathbb C^n$ be holomorphic in the sense of [[def-cm-complex-phase-domains-and-holomorphic-maps]] with $\lVert F\rVert\le M$ everywhere on $D$ for some $M>0$, let $Z_0\in D$ and let $s>0$ satisfy $\Delta_s(Z_0)\subseteq D$ ([[def-cm-complex-phase-domains-and-holomorphic-maps]]). Put
 
 $$t_0:=\frac{s}{8nM},\qquad D_{t_0}:=\{t\in\mathbb C:\ |t|\le t_0\}.$$
 
-Then there is a map $\Phi:D_{t_0}\times B(Z_0,s/4)\to D$ such that:
+Then there is a map $\Phi:D_{t_0}\times B(Z_0,s/4)\to D$ that is the restriction of a jointly holomorphic map on $\{|t|<3t_0/2\}\times B(Z_0,s/4)$, such that:
 
-1. **Solution.** For every $Z\in B(Z_0,s/4)$ the curve $t\mapsto\Phi(t,Z)$ is the unique solution of $\frac{d}{d\tau}Y(\tau)=F(Y(\tau))$, $Y(0)=Z$, on $D_{t_0}$ among all solutions with values in the ball $B(Z,s/2)$; it satisfies $\lVert\Phi(t,Z)-Z\rVert\le M|t|$ and $\|\Phi(t,Z)-Z\|\le s/(8n)$.
+1. **Solution.** For every $Z\in B(Z_0,s/4)$, $t\mapsto\Phi(t,Z)$ solves $Y'=F(Y)$ with $Y(0)=Z$ for $|t|<3t_0/2$. It is the unique holomorphic solution on $|t|<t_0$ among solutions with values in $B(Z,s/2)$. On $D_{t_0}$ it satisfies $\lVert\Phi(t,Z)-Z\rVert\le M|t|\le s/(8n)$.
 2. **Holomorphy.** $\Phi$ is holomorphic on the open set $\{|t|<t_0\}\times B(Z_0,s/4)$ in the sense of [[def-cm-complex-phase-domains-and-holomorphic-maps]], and $\Phi(0,Z)=Z$.
-3. **Composition and inverse.** The local solutions glue uniquely on overlapping initial-data balls. For the resulting local flow, whenever both sides are defined on the same connected continuation of the solution, $\Phi(s_2,\Phi(s_1,Z))=\Phi(s_1+s_2,Z)$. In particular, for sufficiently small $s_1$ for which the forward and backward local solutions exist, $\Phi(-s_1,\Phi(s_1,Z))=Z$. No assertion that every translated point remains in the displayed initial-data ball is made.
+3. **Composition and inverse.** Repeating the construction with each initial point as a center gives a family of compatible local maps; in this clause $\Phi(t,Z)$ denotes the map in the chart centered at $Z$. If the two sides are defined by branches on the same connected open continuation of a solution, then $\Phi(s_2,\Phi(s_1,Z))=\Phi(s_1+s_2,Z)$. In particular, along the reverse continuation of the same local solution, $\Phi(-s_1,\Phi(s_1,Z))=Z$ whenever both sides are defined.
 
 ## Facts & Assumptions
 
@@ -106,5 +108,5 @@ Then there is a map $\Phi:D_{t_0}\times B(Z_0,s/4)\to D$ such that:
 
 ## Remarks
 
-- The lemma is local by design: the time radius $t_0=s/(8nM)$ shrinks with the size of the field and with the complex margin, and the initial-data polydisc is $B(Z_0,s/4)$. Applying it at every point of an open set and using the composition law gives the maximal complex flow of $F$; the applications on this page only need the local statement, with the domains chosen explicitly.
+- The lemma is local by design: the time radius $t_0=s/(8nM)$ shrinks with the size of the field and with the complex margin, and the initial-data ball is $B(Z_0,s/4)$. Applying it at each point gives compatible local solution maps. Continued branches are used on specified connected time domains; the local construction does not select a single-valued global maximal flow.
 - Clause 1's uniqueness is asserted among solutions with values in the ball $B(Z,s/2)$, which is what the contraction proof gives; no global uniqueness of complex-time solutions outside that ball is claimed.

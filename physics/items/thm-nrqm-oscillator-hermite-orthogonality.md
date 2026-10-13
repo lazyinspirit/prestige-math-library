@@ -6,7 +6,7 @@ domain: mathematics
 title: "Hermite orthogonality"
 status: draft
 origin: pipeline
-dependency_level: 2
+dependency_level: 1
 deps: [thm-nrqm-oscillator-hermite-recurrence, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, cor-cauchy-schwarz-inequality-for-l-two, def-countable-choice]
 dependency_roles:
   thm-nrqm-oscillator-hermite-recurrence: mathematical-premise

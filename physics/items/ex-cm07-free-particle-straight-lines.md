@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 16
-deps: [def-cm07-action-and-mechanical-lagrangian, pthm-cm07-euler-lagrange-equations, pthm-cm07-newton-equivalence, def-cm02-newtonian-flow, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-velocity-acceleration, def-cm01-units, def-ck-euclidean-maps-and-diffeomorphisms, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, thm-linearity-of-the-integral, thm-monotonicity-of-the-integral, thm-continuous-implies-integrable, def-darboux-integral, def-euclidean-inner-product, def-vector-valued-derivative-and-integral, def-derivative, def-interval]
+deps: [def-cm07-action-and-mechanical-lagrangian, pthm-cm07-euler-lagrange-equations, pthm-cm07-newton-equivalence, def-cm02-newtonian-flow, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-velocity-acceleration, def-cm01-units, def-ck-euclidean-maps-and-diffeomorphisms, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, thm-ftc-second-part, thm-linearity-of-the-integral, thm-monotonicity-of-the-integral, thm-nonnegative-continuous-with-zero-integral-vanishes, thm-continuous-implies-integrable, def-darboux-integral, def-euclidean-inner-product, def-vector-valued-derivative-and-integral, def-derivative, def-interval]
 dependency_roles:
   def-cm07-action-and-mechanical-lagrangian: formulation-prerequisite
   pthm-cm07-euler-lagrange-equations: physical-result
@@ -20,8 +20,10 @@ dependency_roles:
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   thm-chain-rule-for-total-derivatives: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
+  thm-ftc-second-part: mathematical-premise
   thm-linearity-of-the-integral: mathematical-premise
   thm-monotonicity-of-the-integral: mathematical-premise
+  thm-nonnegative-continuous-with-zero-integral-vanishes: mathematical-premise
   thm-continuous-implies-integrable: mathematical-premise
   def-darboux-integral: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
@@ -82,17 +84,17 @@ All quantities are model values; no measurement is reported.
 
 [F2] Motion and maximal motion ([[pthm-cm07-newton-equivalence]], [[def-cm02-newtonian-flow]]): the stationary curves of $S$ on $[a,b]$ are the restrictions of the motions of the model with interval containing $[a,b]$; every motion with $\mathsf M x''=0$ is affine, and through each datum there is exactly one maximal motion.
 
-[F3] Integral calculus ([[thm-linearity-of-the-integral]], [[thm-monotonicity-of-the-integral]], [[thm-continuous-implies-integrable]], [[def-darboux-integral]], [[def-euclidean-inner-product]], [[def-vector-valued-derivative-and-integral]], [[def-derivative]], [[def-interval]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]]): for continuous integrands the integral is linear and monotone; a continuous nonnegative function with zero integral vanishes identically; $C^{2}$ curves on $[a,b]$ have continuous derivatives and the usual algebra of derivatives applies.
+[F3] Integral and derivative calculus ([[thm-ftc-second-part]], [[thm-linearity-of-the-integral]], [[thm-monotonicity-of-the-integral]], [[thm-nonnegative-continuous-with-zero-integral-vanishes]], [[thm-continuous-implies-integrable]], [[def-darboux-integral]], [[def-euclidean-inner-product]], [[def-vector-valued-derivative-and-integral]], [[def-derivative]], [[def-interval]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]]): the integral is linear and monotone on continuous integrands; a continuous nonnegative function with zero integral vanishes identically; and componentwise the fundamental theorem gives $\int_{u}^{v}f'=f(v)-f(u)$ for the $C^{1}$ functions used here. The derivatives of a $C^{2}$ curve on $[a,b]$ are continuous and the usual derivative algebra applies.
 
 ## Verification
 
 **Proof technique:** direct; solve the second-order equation of the free model, then expand the action of a varied curve and integrate by parts.
 
-1.1 Equation and uniqueness: by [F1], stationary means $x''\equiv0$ on $[a,b]$ because $m>0$, i.e. $x$ is affine; conversely an affine curve has $x''\equiv0$. An affine curve on $[a,b]$ is determined by its two endpoint values: writing $x(t)=x_{a}+v_{0}(t-a)$ and evaluating at $b$ gives $v_{0}=(x_{b}-x_{a})/(b-a)$ (well defined because $b>a$), so the displayed $x_{*}$ is the unique stationary curve with the prescribed endpoints. [F1, given, algebra]
+1.1 Equation and uniqueness: by [F1], stationary means $x''\equiv0$ on $[a,b]$ because $m>0$. Componentwise, [F3] applied to $x'$ gives $x'(t)-x'(a)=\int_a^t x''(u)\,du=0$ for every $t\in[a,b]$; applying it to $x$ then gives $x(t)=x(a)+x'(a)(t-a)$, so $x$ is affine. Conversely an affine curve has $x''\equiv0$ and is stationary by [F1]. Its endpoint values force $x'(a)=(x_b-x_a)/(b-a)$, well defined because $b>a$; hence $x_*$ is the unique stationary curve with the prescribed endpoints. [F1, F3, given, algebra]
 
 2.1 Expansion of the action: let $\eta$ be a variation. Since $L$ is quadratic with no linear term, $S(x_{*}+\eta)-S(x_{*})=\frac m2\int_{a}^{b}\bigl(\lvert x_{*}'+\eta'\rvert_{2}^{2}-\lvert x_{*}'\rvert_{2}^{2}\bigr)dt=\frac m2\int_{a}^{b}\bigl(2\,x_{*}'\cdot\eta'+\lvert\eta'\rvert_{2}^{2}\bigr)dt .$ The first term vanishes: $x_{*}'$ is the constant vector $v_{0}$, so by [F3] $\int_{a}^{b}x_{*}'\cdot\eta'\,dt=v_{0}\cdot\int_{a}^{b}\eta'\,dt=v_{0}\cdot\bigl(\eta(b)-\eta(a)\bigr)=0$ because $\eta$ vanishes at both endpoints. Hence $S(x_{*}+\eta)-S(x_{*})=\frac m2\int_{a}^{b}\lvert\eta'\rvert_{2}^{2}dt\ge0$ by [F3]. [F3, step 1.1, algebra]
 
-3.1 Equality case: if the integral vanishes, the continuous nonnegative integrand $\lvert\eta'\rvert_{2}^{2}$ vanishes identically on $[a,b]$ by [F3], so $\eta$ is constant on $[a,b]$; since $\eta(a)=0$, $\eta\equiv0$. Thus the stationary curve is the unique minimiser in the fixed-endpoint class. [F3, step 2.1, algebra]
+3.1 Equality case: if the integral vanishes, the continuous nonnegative integrand $\lvert\eta'\rvert_{2}^{2}$ vanishes identically on $[a,b]$ by [F3], so $\eta'\equiv0$. The fundamental theorem in [F3] gives $\eta(t)-\eta(a)=\int_a^t\eta'(u)\,du=0$ componentwise; since $\eta(a)=0$, $\eta\equiv0$. Thus the stationary curve is the unique minimiser in the fixed-endpoint class. [F3, step 2.1, algebra]
 
 4.1 Consistency with the flow: by [F2] the curve $x_{*}$ is the restriction of the maximal motion through $\bigl(a,x_{a},v_{0}\bigr)$; the affine curve $t\mapsto x_{a}+v_{0}(t-a)$ is a motion on all of $\mathbb R$, hence the maximal motion is defined for all times and equals $x_{*}$ on $[a,b]$. [F2, step 1.1] ∎
 

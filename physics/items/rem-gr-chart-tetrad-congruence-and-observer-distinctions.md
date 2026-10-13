@@ -9,10 +9,11 @@ dependency_level: 6
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-gr-tensor-fields-and-components, def-gr-local-frame-and-tetrad-fields, lem-gr-tetrad-change-of-basis-is-lorentz, lem-gr-tensor-component-transformation-law, def-gr-observer-and-rest-space, def-gr-observer-congruence-and-adapted-charts, cor-gr-adapted-chart-existence, prop-gr-rest-space-integrability-criterion, def-gr-observer-relative-energy-and-momentum]
+deps: [def-gr-tensor-fields-and-components, def-gr-local-frame-and-tetrad-fields, thm-gr-local-lorentz-tetrad-existence, lem-gr-tetrad-change-of-basis-is-lorentz, lem-gr-tensor-component-transformation-law, def-gr-observer-and-rest-space, def-gr-observer-congruence-and-adapted-charts, cor-gr-adapted-chart-existence, prop-gr-rest-space-integrability-criterion, def-gr-observer-relative-energy-and-momentum]
 dependency_roles:
   def-gr-tensor-fields-and-components: mathematical-premise
   def-gr-local-frame-and-tetrad-fields: mathematical-premise
+  thm-gr-local-lorentz-tetrad-existence: mathematical-premise
   lem-gr-tetrad-change-of-basis-is-lorentz: mathematical-premise
   lem-gr-tensor-component-transformation-law: mathematical-premise
   def-gr-observer-and-rest-space: mathematical-premise
@@ -53,14 +54,19 @@ the general-relativity track.
 - **Tetrad.** A tetrad field is a pointwise $g$-orthonormal frame field; it is
   future-directed when its first member is future-directed, and it is adapted
   to a congruence $n$ when that first member equals $n$. A tetrad field need
-  not be a coordinate frame. Local existence near every point is proved on this
-  page; global existence on $M$ is not asserted and would be a nontrivial
+  not be a coordinate frame. Local existence near every point is proved in
+  [[thm-gr-local-lorentz-tetrad-existence]]; global existence on $M$ is not asserted and would be a nontrivial
   parallelizability property of the manifold.
 - **Adapted chart.** A chart is $n$-adapted when its spatial coordinates are
-  constant along the integral curves of $n$; one exists near every point of a
-  congruence, by the existence corollary on this page, but it is not unique and
-  its coordinate field need not equal $n$
-  ([[cor-gr-adapted-chart-existence]]).
+  constant along each integral curve of $n$ contained in its domain, with an
+  interval as parameter domain
+  ([[def-gr-observer-congruence-and-adapted-charts]], Definition (c)). Near
+  every point of a congruence there is such a chart with
+  $n=\partial/\partial u^0$ ([[cor-gr-adapted-chart-existence]]). The definition
+  does not require this normalization: replacing $u^0$ in that chart by
+  $v^0=2u^0$ and keeping the spatial coordinates gives another adapted chart
+  with $n=2\partial/\partial v^0$. Thus adapted charts are not unique, and
+  their zeroth coordinate field need not equal $n$.
 - **Rest spaces and their integrability.** The rest spaces $n_q^{\perp}$ of a
   congruence always form a smooth rank-$3$ distribution, and they are tangent
   to local hypersurfaces exactly when $\alpha\wedge d\alpha=0$ for
@@ -75,11 +81,16 @@ the general-relativity track.
   $\Lambda^0{}_0>0$ ([[lem-gr-tetrad-change-of-basis-is-lorentz]]). The two
   component systems are different data
   ([[def-gr-tensor-fields-and-components]]).
-- **Observer-relative quantities.** Observer energy, spatial momentum and
-  rest mass are defined with respect to a chosen observer; different observers
+- **Observer-relative quantities.** For $P\in T_pM$ and a fixed real parameter
+  $c>0$, observer energy $E_n(P)=-c\,g_p(P,n)$ and spatial momentum
+  $q_n(P)=h_n(P)$ depend on the chosen observer $n$, where
+  $h_n(P)=P+g_p(n,P)n$ is the spatial projection of
+  [[def-gr-observer-and-rest-space]], Definition (c). Different observers
   generally assign different energies to the same tangent vector, and no
-  observer-independent split of a tangent vector into energy and momentum is
-  asserted ([[def-gr-observer-relative-energy-and-momentum]]).
+  observer-independent energy-momentum split is asserted. In contrast, rest
+  mass $m(P)=\sqrt{-g_p(P,P)}/c$, defined when $g_p(P,P)\le0$, depends only on
+  $P$, $g_p$ and $c$, and is independent of $n$
+  ([[def-gr-observer-relative-energy-and-momentum]], Definition (a)-(c)).
 - **Physical readings.** The interpretation of these geometric objects as
   observers, reference frames, clocks, particles and measured energies belongs
   to the physical postulates and unit conventions of the framework, recorded

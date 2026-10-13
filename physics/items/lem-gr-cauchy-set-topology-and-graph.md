@@ -10,8 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-maximal-geodesics-and-extension, lem-gr-chronology-openness, lem-gr-dominating-cone-bounds, lem-gr-parallel-transport-and-geodesic-speed, thm-gr-local-geodesics-and-exponential-map, def-gr-observer-and-rest-space, def-gr-causal-curves-and-reachability, def-gr-smooth-lorentzian-objects, def-continuity-real, def-c-r-and-smooth-maps-between-smooth-manifolds, def-interval]
+deps: [def-dependent-choice, def-countable-choice, def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-maximal-geodesics-and-extension, lem-gr-chronology-openness, lem-gr-dominating-cone-bounds, lem-gr-parallel-transport-and-geodesic-speed, thm-gr-local-geodesics-and-exponential-map, def-gr-observer-and-rest-space, def-gr-causal-curves-and-reachability, def-gr-smooth-lorentzian-objects, def-continuity-real, def-c-r-and-smooth-maps-between-smooth-manifolds, def-interval]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   def-gr-spacelike-hypersurfaces-and-cauchy-sets: mathematical-premise
   lem-gr-maximal-geodesics-and-extension: mathematical-premise
   lem-gr-chronology-openness: mathematical-premise
@@ -35,6 +37,10 @@ verification:
 ---
 
 ## Statement
+
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the absolutely continuous causal-curve
+calculus and the supplied causal results used below.
 
 Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold
 ([[def-gr-smooth-lorentzian-objects]]) and let $S\subseteq M$ be a Cauchy set

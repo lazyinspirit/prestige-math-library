@@ -57,7 +57,9 @@ adopts the d'Alembert one for its nonholonomic models.
 For the constraint $z'=xy'$ with unit mass, zero applied force and initial
 data $(x,y,z)(0)=(0,0,0)$, $(x',y',z')(0)=(1,1,0)$,
 [[cex-cm-dalembert-and-vakonomic-evolutions-differ]] proves that the unique
-d'Alembert motion is not a vakonomic motion with those data. Thus the set of
+maximal d'Alembert motion on $\mathbb R$ is not vakonomic. Every other
+d'Alembert motion with these data is its restriction, and no such
+restriction is vakonomic either. Thus the set of
 d'Alembert motions with this initial datum is not a subset of the vakonomic
 motions with the same datum, so the two solution sets are unequal; the
 counterexample does not assert that a vakonomic motion with these data exists.
@@ -95,8 +97,8 @@ constraints and contact-mode changes (a body that leaves a surface or begins
 to slip), which require mode-change models with impact or friction laws; the
 determination of which prescription describes a given physical mechanism; and
 the quantitative comparison of either model with reported observations.
-Rolling is a family of models rather than one model: the planar no-slip law
-used on the companion page is holonomic-equivalent, and the straight-rolling
+Rolling is a family of models rather than one model: the reduced planar
+two-coordinate no-slip law used on the companion page is holonomic-equivalent, and the straight-rolling
 exception is noted in the sources. Tong's cited example is the specific coin
 of radius $R$ rolling without slipping down a slope, with coordinates
 $(x,y,\theta,\phi)$ and constraints $x'=R\phi'\sin\theta$,

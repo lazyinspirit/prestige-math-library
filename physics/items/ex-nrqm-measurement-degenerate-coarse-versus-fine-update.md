@@ -7,7 +7,7 @@ title: "Coarse and fine declared measurements of a degenerate subspace: the
   Lueders update is not eigenvector selection"
 status: draft
 origin: pipeline
-dependency_level: 12
+dependency_level: 11
 deps:
   [
     cor-inner-product-induces-a-norm,
@@ -20,7 +20,7 @@ deps:
     def-nrqm-state-geometry-pure-mixed-states-and-purity,
     lem-complex-conjugation-and-modulus-laws,
     lem-nrqm-composites-rank-one-operator-calculus,
-    pthm-nrqm-measurement-degenerate-eigenspace-update,
+    lem-nrqm-measurement-selective-luders-update,
     pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles,
     thm-complex-spectral-theorem-for-normal-endomorphisms
   ]
@@ -35,7 +35,7 @@ dependency_roles:
   def-nrqm-state-geometry-pure-mixed-states-and-purity: mathematical-premise
   lem-complex-conjugation-and-modulus-laws: mathematical-premise
   lem-nrqm-composites-rank-one-operator-calculus: mathematical-premise
-  pthm-nrqm-measurement-degenerate-eigenspace-update: physical-result
+  lem-nrqm-measurement-selective-luders-update: mathematical-premise
   pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles: physical-result
   thm-complex-spectral-theorem-for-normal-endomorphisms: mathematical-premise
 proof_strategy: direct
@@ -81,7 +81,7 @@ with spectral projections $T_{\psi,\psi}$ at $+1$, $T_{w',w'}$ at $-1$ and $I-T_
 
 **(iii)** For the observable $W$ the two declared measurements give different model predictions: after the coarse outcome the value $+1$ has probability $1$; the mixture $\tfrac12T_{e_{1},e_{1}}+\tfrac12T_{e_{2},e_{2}}$ (the discarded ensemble of the fine measurement) assigns probability $\tfrac12$ to $+1$ and $\tfrac12$ to $-1$. Hence the coarse Lueders update is not equivalent to selecting one eigenvector of the degenerate subspace with probability $\tfrac12$ and forgetting the other: that replacement destroys the coherence of $\psi$ and changes the statistics of $W$.
 
-**(iv)** The fine measurement is a different declared measurement, not a refinement of the reported data of the coarse one. A model that reports only "the system is in $K$" and then predicts with the mixture of (iii) is a different model from the coarse Lueders model, with the observable consequence exhibited in (iii). No apparatus is asserted to realize either declared measurement, and no empirical comparison is made.
+**(iv)** The fine measurement refines the coarse outcome structure: grouping outcomes $e_{1},e_{2}$ gives $K$, and outcome $e_{3}$ gives $K^{\perp}$, since $P=T_{e_{1},e_{1}}+T_{e_{2},e_{2}}$ and $I-P=T_{e_{3},e_{3}}$. It is nevertheless a different declared measurement with more detailed outcomes. The coarse outcome "the system is in $K$" does not itself report whether the fine outcome was $e_{1}$ or $e_{2}$; replacing the coarse Lueders update by the discarded fine ensemble is a different model, with the observable consequence exhibited in (iii). No apparatus is asserted to realize either declared measurement, and no empirical comparison is made.
 
 ## Facts & Assumptions
 
@@ -91,7 +91,7 @@ with spectral projections $T_{\psi,\psi}$ at $+1$, $T_{w',w'}$ at $-1$ and $I-T_
 
 [F2] **Declared measurements and updates.** For a declared ideal sharp measurement $(P_{a})$ the outcome probabilities are $p_{a}=\operatorname{tr}(\rho P_{a})=\|P_{a}\xi\|^{2}$ for a pure preparation of the unit vector $\xi$, and the conditional state after a positive-probability outcome is $P_{a}\rho P_{a}/p_{a}$ ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]] clauses (a)-(b), [[pthm-nrqm-measurement-projective-outcomes-and-discarded-ensembles]] clauses (a)-(b)).
 
-[F3] **Coherence in a degenerate eigenspace.** If $\xi$ lies in the range of a projection $P$ and $\rho=T_{\xi,\xi}$, the conditional state after the outcome of the two-outcome measurement $(P,I-P)$ is again $T_{\xi,\xi}$ ([[pthm-nrqm-measurement-degenerate-eigenspace-update]] clause (a)).
+[F3] **Selective update of a supported pure state.** Under Countable Choice, for an orthogonal projection $P$ and a unit vector $\xi$ with $P\xi\ne0$, the normalized compression of $T_{\xi,\xi}$ is $T_{P\xi,P\xi}/\|P\xi\|^2$ ([[lem-nrqm-measurement-selective-luders-update]] clause (d)). Its physical interpretation as the conditional state of the declared measurement is exactly [F2]. This lemma requires no assigned observable or spectral-eigenspace hypothesis.
 
 [F4] **Spectral projections of $W$.** $\psi$ and $w'$ are orthonormal, and $W=T_{\psi,\psi}-T_{w',w'}$ is bounded and self-adjoint with $W\psi=\psi$, $Ww'=-w'$, so $T_{\psi,\psi}$ and $T_{w',w'}$ are its spectral projections at $+1$ and $-1$ ([[thm-complex-spectral-theorem-for-normal-endomorphisms]], [F1]).
 
@@ -101,13 +101,13 @@ with spectral projections $T_{\psi,\psi}$ at $+1$, $T_{w',w'}$ at $-1$ and $I-T_
 
 **Proof technique:** direct; compute the outcome laws and conditional states of the two declared measurements and the induced law of the observable $W$.
 
-1.1 [Clause (i)] $P\psi=\psi$, so [F2] gives $\operatorname{tr}(\rho P)=\|P\psi\|^{2}=1$; by [F3] the conditional state after the outcome $K$ is $\rho=T_{\psi,\psi}$, unchanged. This is (i). [given, F1, F2, F3, algebra]
+1.1 [Clause (i)] $P\psi=\psi$, so [F2] gives $\operatorname{tr}(\rho P)=\|P\psi\|^{2}=1$; by [F3] and [F2] the conditional state after the outcome $K$ is $T_{P\psi,P\psi}/\|P\psi\|^2=T_{\psi,\psi}=\rho$, unchanged. This is (i). [given, F1, F2, F3, algebra]
 
 2.1 [Clause (ii)] By [F2] and [F1], the fine outcome probabilities are $\operatorname{tr}(T_{\psi,\psi}T_{e_{i},e_{i}})=|\langle e_{i},\psi\rangle|^{2}$, equal to $\tfrac12$ for $i=1,2$ and $0$ for $i=3$ by [F5]; the conditional states are $T_{e_{i},e_{i}}$. This is (ii). [step 1.1, given, F1, F2, F5, algebra]
 
 3.1 [Clause (iii)] By [F4] and [F2], in the coarse conditional state $\rho=T_{\psi,\psi}$ the value $+1$ of $W$ has probability $\operatorname{tr}(T_{\psi,\psi}T_{\psi,\psi})=1$. The mixture $\sigma=\tfrac12T_{e_{1},e_{1}}+\tfrac12T_{e_{2},e_{2}}$ gives $\operatorname{tr}(\sigma T_{\psi,\psi})=\tfrac12|\langle e_{1},\psi\rangle|^{2}+\tfrac12|\langle e_{2},\psi\rangle|^{2}=\tfrac12$ and $\operatorname{tr}(\sigma T_{w',w'})=\tfrac12|\langle e_{1},w'\rangle|^{2}+\tfrac12|\langle e_{2},w'\rangle|^{2}=\tfrac12$ by [F1] and [F5], so the mixture assigns probability $\tfrac12$ to each of $+1$ and $-1$. The two laws for $W$ differ; the discarded ensemble of the fine measurement is this mixture, whereas the coarse conditional state is the coherent state $\rho$, so replacing the coarse Lueders update by eigenvector selection is a distinct model with different predictions. This is (iii). [step 2.1, given, F1, F2, F4, F5, algebra]
 
-4.1 [Clause (iv) and scope] The measurements $\mathcal C$ and $\mathcal G$ have different outcome structures ($\mathcal G$ resolves $K$, $\mathcal C$ does not), so $\mathcal G$ is not a re-reading of coarse data; and step 3.1 shows that the coarse Lueders model and the eigenvector-selection mixture differ in the law of the declared observable $W$. No apparatus was used and no record is reported. This is (iv). [step 3.1, given, F2, algebra] ∎
+4.1 [Clause (iv) and scope] By the displayed definitions, the sum of the first two fine projections is $P$ and the third is $I-P$, so grouping the fine outcomes as stated gives the coarse outcome structure; thus $\mathcal G$ refines $\mathcal C$. The instruments are still distinct because the coarse Lueders outcome $K$ leaves $\rho$ unchanged while the fine measurement, when its label is discarded, gives the mixture in step 3.1. The coarse outcome alone supplies no finer label. No apparatus was used and no record is reported. This is (iv). [step 3.1, given, F1, F2, algebra] ∎
 
 ## Remarks
 

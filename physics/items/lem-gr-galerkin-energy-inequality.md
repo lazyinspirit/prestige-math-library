@@ -36,7 +36,7 @@ verification:
 ## Statement
 
 Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$
-([[def-countable-choice]]). Let $s\ge5$, fix a compact interval $I_0$ inside the coefficient time domain, and assume $J\subseteq I_0$. Let $A^\mu,B$ be a periodic symmetric
+([[def-countable-choice]]). Let $s\ge5$ be an integer, fix a compact interval $I_0$ inside the coefficient time domain, and let $J\subseteq I_0$ be an interval on which the Galerkin solution is defined. Let $A^\mu,B$ be a periodic symmetric
 hyperbolic coefficient family on the open set $O\subseteq\mathbb R^m$, let
 $K\subseteq O$ be compact and $R\ge0$, and let $u_N:J\to X_N$ be a Galerkin
 solution ([[lem-gr-galerkin-ode-local-solution]]) with $u_N(t)$ taking values

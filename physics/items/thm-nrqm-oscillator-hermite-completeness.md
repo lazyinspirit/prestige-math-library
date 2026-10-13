@@ -6,8 +6,8 @@ domain: mathematics
 title: "Hermite completeness"
 status: draft
 origin: pipeline
-dependency_level: 3
-deps: [thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-fourier-transform-on-l-one-of-rn, cor-uniqueness-of-the-l-one-fourier-transform, thm-dominated-convergence, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-complex-exponential, lem-complex-exponential-series-converges-everywhere, thm-nonnegative-series-bounded-partial-sums, lem-nrqm-composites-complex-gaussian-continuation, def-countable-choice]
+dependency_level: 2
+deps: [thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-fourier-transform-on-l-one-of-rn, cor-uniqueness-of-the-l-one-fourier-transform, thm-dominated-convergence, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-complex-exponential, lem-complex-exponential-series-converges-everywhere, thm-nonnegative-series-bounded-partial-sums, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, def-countable-choice]
 dependency_roles:
   thm-nrqm-oscillator-hermite-recurrence: mathematical-premise
   thm-nrqm-oscillator-hermite-orthogonality: mathematical-premise
@@ -22,7 +22,7 @@ dependency_roles:
   def-complex-exponential: mathematical-premise
   lem-complex-exponential-series-converges-everywhere: mathematical-premise
   thm-nonnegative-series-bounded-partial-sums: mathematical-premise
-  lem-nrqm-composites-complex-gaussian-continuation: mathematical-premise
+  lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization: mathematical-premise
   def-countable-choice: mathematical-premise
 proof_strategy: direct
 provenance:
@@ -60,13 +60,13 @@ Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $L^2=L^2(\m
 
 [F5] For real $w$, $e^{w}=\sum_{j\ge0}w^j/j!$ is the sum of an absolutely convergent series ([[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]]), and for nonnegative terms every partial sum is at most the full sum ([[thm-nonnegative-series-bounded-partial-sums]]).
 
-[F6] $\int_{\mathbb R}e^{-y^2/2}d\lambda(y)=\sqrt{2\pi}<\infty$ ([[lem-nrqm-composites-complex-gaussian-continuation]](b)).
+[F6] The Lebesgue Gaussian transform at $n=1$, $\xi=0$ and parameter $1/(2\pi)$ gives $\int_{\mathbb R}e^{-y^2/2}dy=\sqrt{2\pi}<\infty$ ([[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]).
 
 ## Proof
 
 1.1 [Reduction to the moment criterion] Since $(g_n)$ is orthonormal by [F1], [F2] reduces completeness to the statement that no nonzero $f\in L^2$ is orthogonal to every $g_n$; the expansion and Parseval identities are part of the same equivalence. The moment criterion (a) is proved first, and then applied. [given, F1, F2]
 
-1.2 [Vanishing moments] Let $f\in L^2$ satisfy $\langle f,g_n\rangle=0$ for all $n$. Since $H_n$ is real-valued, [F1] gives $0=\langle f,g_n\rangle=(2^nn!)^{-1/2}\int f\,\overline{H_ng_0}=(2^nn!)^{-1/2}\int f\,H_n\,g_0$, so $\int fH_ng_0=0$ for every $n$. The polynomials $H_0,\dots,H_m$ have degrees $0,\dots,m$ with nonzero leading coefficients, so they form a basis of the polynomials of degree $\le m$; hence $\int fqg_0=0$ for every polynomial $q$. Writing $h:=fg_0$, we have $h\in L^1$ with $\|h\|_1\le\|f\|_2$ by [F3], and $\int h\,q=0$ for every polynomial $q$; in particular all moments $\int h(y)y^jdy$ vanish. This reduces the criterion (a) to showing that $h$ vanishes. [given, F1, F3, algebra]
+1.2 [Vanishing moments] Let $f\in L^2$ satisfy the moment hypothesis of (a), and put $h:=fg_0$. By [F3], $h\in L^1$ and $\|h\|_1\le\|f\|_2$; every polynomial moment is integrable by Cauchy–Schwarz because $qg_0\in L^2$ by [F1], and the hypothesis gives $\int hq=0$, in particular $\int h(y)y^jdy=0$ for every $j\ge0$. If instead $f$ is orthogonal to every $g_n$, then real-valuedness of $H_n$ and $g_0$ gives $0=\langle f,g_n\rangle=(2^nn!)^{-1/2}\int fH_ng_0$. The polynomials $H_0,\ldots,H_m$ have respective degrees $0,\ldots,m$ and nonzero leading coefficients, so successive subtraction of leading terms expresses every polynomial of degree at most $m$ as their linear combination. Thus orthogonality implies the moment hypothesis of (a). It remains to prove $h=0$ under that hypothesis. [given, F1, F3, algebra]
 
 2.1 [The transform vanishes] Fix $\xi\in\mathbb R$, write $w:=2\pi\xi y$ and $S_N(y):=\sum_{j=0}^N(-2\pi i\xi y)^j/j!$. Then $S_N(y)\to e^{-2\pi i\xi y}$ for every $y$ by [F5], and $|S_N(y)|\le\sum_{j=0}^N|2\pi\xi y|^j/j!\le e^{2\pi|\xi||y|}=:G(y)$ by [F5]. Moreover $hG\in L^1$: by [F3], $\int |h(y)|G(y)dy\le\|f\|_2\|g_0G\|_2=\|f\|_2\bigl(\int G(y)^2g_0(y)^2dy\bigr)^{1/2}$, and $G(y)^2g_0(y)^2=\pi^{-1/2}e^{4\pi|\xi||y|-y^2}\le\pi^{-1/2}e^{8\pi^2\xi^2}e^{-y^2/2}$ because $4\pi|\xi||y|-y^2\le8\pi^2\xi^2-|y|^2/2$; the last integral is finite by [F6]. Hence [F4] applies with $\widehat h(\xi)=\lim_{N\to\infty}\int hS_N=\lim_{N\to\infty}\sum_{j=0}^N\frac{(-2\pi i\xi)^j}{j!}\int h(y)y^jdy=0$, the first equality by dominated convergence, the interchange of the finite sum with the integral by linearity of the integral, and the final equality because all moments of $h$ vanish by step 1.2. [step 1.2, F3, F4, F5, F6, algebra]
 

@@ -142,11 +142,11 @@ value.
 
 3.1 By [L2] one has $J_{p}=L_{c}+c\times P=RI\omega+mc\times c'$. Substituting $c=dRe_{3}$ and $c'=dR(\omega\times e_{3})$ from step 1.1 and using $I e_{3}=C e_{3}$, $Ie_{1}=A_{c}e_{1}$, $Ie_{2}=A_{c}e_{2}$ from [L3] gives $mc\times c'=md^{2}\,(Re_{3})\times R(\omega\times e_{3})=md^{2}R\bigl(e_{3}\times(\omega\times e_{3})\bigr)=md^{2}R(\omega-\omega_{3}e_{3})$ by [L6] and the vector triple product with $\lVert e_{3}\rVert_2=1$, so $J_{p}=R\bigl(I\omega+md^{2}(\omega-\omega_{3}e_{3})\bigr)=R\tilde I\omega$ with $\tilde I=\mathrm{diag}(A,A,C)$ and $A=A_{c}+md^{2}$, $C=C_{c}$. Hence the balance of [L1] reads $J_{p}'=\tau_{p}$ with $\tau_{p}$ as in step 2.1, completing clause 1. [step 1.1, step 2.1, given, L1, L2, L3, L6, algebra]
 
-4.1 Since $R$ is $C^{1}$ and $\omega$ is $C^{1}$, the product $\tilde I\omega$ is $C^{1}$ and $J_{p}=R\tilde I\omega$ from step 3.1 gives $R(\tilde I\omega'+\omega\times\tilde I\omega)=J_{p}'$ by [L6]; with the balance $J_{p}'=\tau_{p}$ of step 3.1 and $R^{\mathsf T}R=I_{3}$ one gets $\tilde I\omega'+\omega\times\tilde I\omega=R^{\mathsf T}\tau_{p}$. By step 2.1 and [L6], $R^{\mathsf T}\bigl((Re_{3})\times e_{3}\bigr)=e_{3}\times(R^{\mathsf T}e_{3})=e_{3}\times\gamma$ with $\gamma$ of step 1.2, so $\tilde I\omega'+\omega\times\tilde I\omega=-mgd(e_{3}\times\gamma)$. Componentwise, $(e_{3}\times\gamma)_{1}=-\gamma_{2}$, $(e_{3}\times\gamma)_{2}=\gamma_{1}$, $(e_{3}\times\gamma)_{3}=0$ and $(\omega\times\tilde I\omega)_{1}=(C-A)\omega_{2}\omega_{3}$, $(\omega\times\tilde I\omega)_{2}=(A-C)\omega_{1}\omega_{3}$, $(\omega\times\tilde I\omega)_{3}=0$, giving the three displayed equations of clause 2. [step 2.1, step 3.1, given, L6, algebra]
+4.1 Since $R$ is $C^{1}$ and $\omega$ is $C^{1}$, the product $\tilde I\omega$ is $C^{1}$ and $J_{p}=R\tilde I\omega$ from step 3.1 gives $R(\tilde I\omega'+\omega\times\tilde I\omega)=J_{p}'$ by [L6]; with the balance $J_{p}'=\tau_{p}$ of step 3.1 and $R^{\mathsf T}R=I_{3}$ one gets $\tilde I\omega'+\omega\times\tilde I\omega=R^{\mathsf T}\tau_{p}$. By step 2.1 and [L6], $R^{\mathsf T}\bigl((Re_{3})\times e_{3}\bigr)=e_{3}\times(R^{\mathsf T}e_{3})=e_{3}\times\gamma$ with $\gamma$ of step 1.2, so $\tilde I\omega'+\omega\times\tilde I\omega=-mgd(e_{3}\times\gamma)$. Componentwise, $(e_{3}\times\gamma)_{1}=-\gamma_{2}$, $(e_{3}\times\gamma)_{2}=\gamma_{1}$, $(e_{3}\times\gamma)_{3}=0$ and $(\omega\times\tilde I\omega)_{1}=(C-A)\omega_{2}\omega_{3}$, $(\omega\times\tilde I\omega)_{2}=(A-C)\omega_{1}\omega_{3}$, $(\omega\times\tilde I\omega)_{3}=0$, giving the three displayed equations of clause 2. [step 1.2, step 2.1, step 3.1, given, L6, algebra]
 
 5.1 The third of the equations of step 4.1 gives $C\omega_{3}'=0$, and $C>0$, so $\omega_{3}$ is constant on the interval $I_0$ by [L6]; by step 1.2, $b=C(\psi'+\varphi'\cos\theta)=C\omega_{3}$ is constant on $I_0$. [step 1.2, step 4.1, given, L6]
 
-6.1 By step 3.1 and [L6], $\frac{d}{dt}(J_{p}\cdot e_{3})=J_{p}'\cdot e_{3}=\tau_{p}\cdot e_{3}=0$ by step 2.1, so $J_{p}\cdot e_{3}$ is constant on $I_0$; and by steps 3.1 and 1.2, $J_{p}\cdot e_{3}=(R\tilde I\omega)\cdot e_{3}=\tilde I\omega\cdot\gamma=A(\omega_{1}\gamma_{1}+\omega_{2}\gamma_{2})+C\omega_{3}\gamma_{3}$. Substituting the components of [L4] and step 1.2 and using $\sin^{2}\psi+\cos^{2}\psi=1$ from [L4] gives $\omega_{1}\gamma_{1}+\omega_{2}\gamma_{2}=\varphi'\sin^{2}\theta$ and $\omega_{3}\gamma_{3}=(\psi'+\varphi'\cos\theta)\cos\theta$, so $J_{p}\cdot e_{3}=A\varphi'\sin^{2}\theta+b\cos\theta=a$ is constant on $I_0$. [step 1.2, step 3.1, step 5.1, given, L4, L6, algebra]
+6.1 By step 3.1 and [L6], $\frac{d}{dt}(J_{p}\cdot e_{3})=J_{p}'\cdot e_{3}=\tau_{p}\cdot e_{3}=0$ by step 2.1, so $J_{p}\cdot e_{3}$ is constant on $I_0$; and by steps 3.1 and 1.2, $J_{p}\cdot e_{3}=(R\tilde I\omega)\cdot e_{3}=\tilde I\omega\cdot\gamma=A(\omega_{1}\gamma_{1}+\omega_{2}\gamma_{2})+C\omega_{3}\gamma_{3}$. Substituting the components of [L4] and step 1.2 and using $\sin^{2}\psi+\cos^{2}\psi=1$ from [L4] gives $\omega_{1}\gamma_{1}+\omega_{2}\gamma_{2}=\varphi'\sin^{2}\theta$ and $\omega_{3}\gamma_{3}=(\psi'+\varphi'\cos\theta)\cos\theta$, so $J_{p}\cdot e_{3}=A\varphi'\sin^{2}\theta+b\cos\theta=a$ is constant on $I_0$. [step 1.2, step 2.1, step 3.1, step 5.1, given, L4, L6, algebra]
 
 6.2 Put $n:=\sin\psi\,e_{1}+\cos\psi\,e_{2}$, so that $n$ has $\lVert n\rVert_2=1$ and, by [L4] and $R'=R[\omega]_{\times}$, the identity $\theta'=\omega\cdot n$ holds. Differentiating $\theta'$ with [L6] gives $A\theta''=A(\omega'\cdot n)+A(\omega\cdot n')$, where $n'=\psi'(\cos\psi\,e_{1}-\sin\psi\,e_{2})$; using the first two equations of step 4.1, the components of [L4] and the values $\omega_{1}\cos\psi-\omega_{2}\sin\psi=-\varphi'\sin\theta$, $\omega_{2}\sin\psi-\omega_{1}\cos\psi=\varphi'\sin\theta$ and $\gamma_{2}\sin\psi-\gamma_{1}\cos\psi=\sin\theta$ of step 1.2, one computes $A(\omega'\cdot n)=(A-C)\omega_{3}\,\varphi'\sin\theta+mgd\,\sin\theta$ and $A(\omega\cdot n')=-A\varphi'\psi'\sin\theta$, hence $A\theta''=(A-C)\omega_{3}\varphi'\sin\theta+mgd\sin\theta-A\varphi'\psi'\sin\theta=A\varphi'^{2}\sin\theta\cos\theta-b\varphi'\sin\theta+mgd\sin\theta$, the last equality by $\omega_{3}-\psi'=\varphi'\cos\theta$ from step 1.2 and $b=C\omega_{3}$ from step 5.1. [step 1.2, step 4.1, step 5.1, given, L4, L6, algebra]
 
@@ -154,21 +154,8 @@ value.
 
 ## Remarks
 
-- **Where $A=A_{c}+md^{2}$ comes from.** The transverse moment of the model
-  about the pivot is the transverse moment $A_{c}$ about the centre of mass
-  shifted by $md^{2}$; this is why the reduction uses $A$ and the supplier's
-  parameter is identified with the pivot moment, not with $A_{c}$. The axial
-  moment is unchanged because the shift is along the symmetry axis.
+- **Where $A=A_{c}+md^{2}$ comes from.** The transverse moment of the model about the pivot is the transverse moment $A_{c}$ about the centre of mass shifted by $md^{2}$; this is why the reduction uses $A$ and the supplier's parameter is identified with the pivot moment, not with $A_{c}$. The axial moment is unchanged because the shift is along the symmetry axis.
 
-- **The role of the chart.** The Euler-angle description is a hypothesis;
-  the chart is singular at the poles $\theta=0,\pi$, where the sleeping top
-  and the hanging configuration lie, and the statement says nothing there.
-  The definitions of $a$, $b$, $E$ and $U$ depend on the chosen description
-  (the angles are determined only up to the chart's ambiguities), while the
-  physical conclusions of clause 3 are invariants of the motion.
+- **The role of the chart.** The Euler-angle description is a hypothesis; the chart is singular at the poles $\theta=0,\pi$, where the sleeping top and the hanging configuration lie, and the statement says nothing there. The definitions of $a$, $b$, $E$ and $U$ depend on the chosen description (the angles are determined only up to the chart's ambiguities), while the physical conclusions of clause 3 are invariants of the motion.
 
-- **No empirical content.** Clause 3 is a conditional deduction from the
-  adopted branch; in particular the sleeping-top threshold, the stability of
-  the upright top and the interpretation of precession in any concrete
-  apparatus are not asserted here, and no value of $A_{c}$, $C_{c}$, $m$,
-  $d$ or $g$ is measured.
+- **No empirical content.** Clause 3 is a conditional deduction from the adopted branch; in particular the sleeping-top threshold, the stability of the upright top and the interpretation of precession in any concrete apparatus are not asserted here, and no value of $A_{c}$, $C_{c}$, $m$, $d$ or $g$ is measured.

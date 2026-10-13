@@ -7,12 +7,12 @@ title: "The selective Lueders update by an orthogonal projection"
 status: draft
 origin: pipeline
 dependency_level: 2
-deps: [def-countable-choice, def-hilbert-orthogonal-projection, def-hilbert-space, def-non-negative-and-positive-operator, def-trace-class-operator, def-trace-of-a-trace-class-operator, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-rank-one-operator-calculus, thm-trace-class-is-a-two-sided-banach-operator-ideal]
+deps: [def-countable-choice, def-hilbert-orthogonal-projection, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-trace-class-operator, def-trace-of-a-trace-class-operator, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-rank-one-operator-calculus, thm-trace-class-is-a-two-sided-banach-operator-ideal]
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-hilbert-orthogonal-projection: mathematical-premise
   def-hilbert-space: mathematical-premise
-  def-non-negative-and-positive-operator: mathematical-premise
+  def-self-adjoint-positive-unitary-and-normal-operator: mathematical-premise
   def-trace-class-operator: mathematical-premise
   def-trace-of-a-trace-class-operator: mathematical-premise
   lem-nrqm-composites-density-and-scalar-spectral-probability: mathematical-premise
@@ -59,11 +59,11 @@ No physical interpretation of the update is asserted.
 
 [F2] **Density operators.** A density operator $\rho$ is self-adjoint, positive and trace class with $\operatorname{tr}\rho=1$, and it admits an expansion $\rho=\sum_{n}w_{n}T_{u_{n},u_{n}}$ with $(u_{n})$ a finite or countable orthonormal family and weights $w_{n}\ge0$, $\sum_{n}w_{n}=1$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a)).
 
-[F3] **Rank-one calculus.** $T_{u,v}x=\langle x,v\rangle u$ is trace class with $\operatorname{tr}(T_{u,v})=\langle u,v\rangle$ and $\|T_{u,v}\|_{1}=\|u\|\,\|v\|$; $T_{x,x}\ge0$ with $\operatorname{tr}(T_{x,x})=\|x\|^{2}$; and for bounded $B$ one has $BT_{u,v}=T_{Bu,v}$ and $T_{u,v}B=T_{u,B^{*}v}$ ([[lem-nrqm-composites-rank-one-operator-calculus]] clauses (b), (c) and (d)).
+[F3] **Rank-one calculus.** $T_{u,v}x=\langle x,v\rangle u$ is trace class with $\operatorname{tr}(T_{u,v})=\langle u,v\rangle$ and $\|T_{u,v}\|_{1}=\|u\|\,\|v\|$; for bounded $B$ one has $BT_{u,v}=T_{Bu,v}$ and $T_{u,v}B=T_{u,B^{*}v}$ ([[lem-nrqm-composites-rank-one-operator-calculus]] clauses (b)-(d)). For any $x,y\in H$, $T_{x,x}^{*}=T_{x,x}$ and $\langle T_{x,x}y,y\rangle=|\langle y,x\rangle|^{2}\ge0$, so $T_{x,x}$ is positive under the general Hilbert-space definition ([[def-self-adjoint-positive-unitary-and-normal-operator]]).
 
 [F4] **Trace-class ideal and cyclicity.** If $T$ is trace class and $B$ bounded, then $BT$ and $TB$ are trace class with $\operatorname{tr}(BT)=\operatorname{tr}(TB)$ and $\operatorname{tr}$ linear and trace-norm continuous ([[thm-trace-class-is-a-two-sided-banach-operator-ideal]], [[lem-nrqm-composites-nuclear-bounded-cyclicity]] clause (b)).
 
-[F5] **Positivity of quadratic forms.** If $S\ge0$ then $\langle Sx,x\rangle\ge0$ for every $x$; sums of positive operators are positive, and $\rho=T_{u,u}$ with $\|u\|=1$ is a density operator ([[def-non-negative-and-positive-operator]], [F2], [F3]).
+[F5] **Positivity of quadratic forms.** If $S$ is positive on the Hilbert space $H$, then $\langle Sx,x\rangle\ge0$ for every $x$; sums of positive operators are positive, and $\rho=T_{u,u}$ with $\|u\|=1$ is a density operator ([[def-self-adjoint-positive-unitary-and-normal-operator]], [F2], [F3]).
 
 ## Proof
 

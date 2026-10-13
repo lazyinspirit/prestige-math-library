@@ -123,7 +123,8 @@ bracket the count parameter by rationals.
   $K=\pi\sqrt2/(4a)$ the radius circle of the even root condition passes
   through the point $k=\kappa=\pi/(4a)$ of the first branch, where
   $\tan(ka)=1$, so the transcendental root condition is satisfied by an
-  exact rational multiple of $1/a$ and the binding energy is exactly $U/2$.
+  exact rational multiple of $1/a$ and the signed binding energy is exactly
+  $E=-U/2$ (its positive magnitude is $U/2$).
 - **What the counts show and what they do not.** The comparisons verify the
   branch criterion and the ceiling formula at declared depths. They are not a
   numerical solution of the transcendental equations at generic depths, do not

@@ -29,7 +29,8 @@ requires:
 Worked checks and counterexamples for
 [[cm14-hamilton-jacobi-and-integrability]].
 [[ex-cm14-harmonic-oscillator-hamilton-jacobi-check]] works the harmonic
-model of [[post-cm04-harmonic-model]] through the whole page: the
+model of [[post-cm04-harmonic-model]] through the whole page using its
+declared straight-line generalized-coordinate presentation: the
 explicit family $S$ is shown to be a complete integral of the model's
 Hamilton-Jacobi equation wherever $\sin(\omega t)\neq0$, its
 characteristic curves are the harmonic motions with $\beta=S_{\alpha}$
@@ -42,12 +43,14 @@ potential has exactly two simple turning points on the elliptic energy
 window, applies the one-dimensional action-variable theorem
 [[thm-cm-action-variable-derivative]] to obtain
 $J_{\mathrm a}'(E)=T/(2\pi)$, and identifies the radial quadrature with
-the orbital period $T$, recovering
+the orbital period $T$ on the unique global relative central-force
+extension (with model motions restricted to their declared time window), recovering
 $T^{2}=4\pi^{2}\mu a^{3}/\kappa$ without using any measured constant.
 
 The two counterexamples exhibit the hypotheses that cannot be dropped.
 [[cex-cm14-harmonic-model-critical-fibre]] shows that the zero-energy
-level of the one-label harmonic datum is a compact connected common level
+level of the one-degree-of-freedom harmonic datum in its declared
+generalized-coordinate presentation is a compact connected common level
 set that is a single point, not a torus: compactness and connectedness
 alone do not give the toral conclusion, regularity is indispensable.
 [[cex-cm14-free-particle-noncompact-fibre]] uses the three-integral free-particle datum

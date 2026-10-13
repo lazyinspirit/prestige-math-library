@@ -19,7 +19,7 @@ requires:
   - qm-autonomous-dynamics
 ---
 This companion page works the many-body and equilibrium statements of
-`qm-many-body-and-equilibrium-models` through three exact finite computations
+`qm-many-body-and-equilibrium-models` through three exact model computations
 and one hypothetical scenario.
 [[ex-nrqm-many-body-two-site-bond-thermal-ensemble]] solves the one-particle
 two-site bond model exactly: the tunnelling-split eigenbasis, the canonical
@@ -30,7 +30,7 @@ modes and two bosons in two modes, checking the total-occupation identity and
 the ground energies against the page's diagonalisation theorem.
 [[ex-nrqm-many-body-gas-statistics-dilute-limits]] verifies the exact Bose
 and Fermi dilute identities in exact rational arithmetic at $q=1/10$ and
-contrasts geometrically spaced mode energies, whose product partition
+contrasts linearly spaced mode energies, whose product partition
 converges, with constant mode energies, whose product partition diverges.
 [[texp-nrqm-many-body-two-site-no-thermalization]] is a hypothetical
 exactly-solved scenario: a site-localised preparation of the bond model
@@ -40,4 +40,4 @@ the energy readout never takes its canonical value, so readout coincidence
 is not state convergence.
 [[rem-nrqm-many-body-examples-scope-limits]] records what the examples do and
 do not establish. None of the items contains measured data, and every number
-is an exact model value in a declared finite-dimensional idealization.
+is an exact model value in a declared finite-mode or countable-mode idealization.

@@ -47,10 +47,10 @@ regions the smooth unit field is prescribed separately; the geodesic equation
 is imposed there as well and is not deduced from conservation of the zero
 tensor. This is the smooth geodesic-dust extension, without a free boundary
 or a division by density. Make the following
-**reduction conventions**, all local to an open set $U\subseteq U_0$:
+**reduction conventions**, all local to an open set $\mathcal U\subseteq U_0$:
 
 **(a) Signature flip.** Put $\gamma:=-g$, a smooth metric of signature
-$(+---)$ on $U$, with inverse $\gamma^{-1}=-g^{-1}$; all indices in the
+$(+---)$ on $\mathcal U$, with inverse $\gamma^{-1}=-g^{-1}$; all indices in the
 reduction are raised and lowered with $\gamma$
 ([[def-gr-inverse-metric-and-musical-isomorphisms]]). Put
 $$U:=u,\qquad r:=\rho c^2 .$$
@@ -66,16 +66,15 @@ Physical identification of these mathematical parameters is made by the
 consuming physical model, not assumed by this definition.
 
 **(b) Orthonormal frame.** Choose a smooth orthonormal frame
-$(e_0,e_1,e_2,e_3)$ on $U$ with $e_0=U$ and
+$(e_0,e_1,e_2,e_3)$ on $\mathcal U$ with $e_0=U$ and
 $\gamma(e_i,e_j)=\eta_{ij}:=\operatorname{diag}(1,-1,-1,-1)_{ij}$
 ([[def-gr-local-frame-and-tetrad-fields]], [[def-gr-observer-congruence-and-adapted-charts]]).
 Its connection coefficients are defined by
 $$\nabla_ie_j=\Gamma_i{}^k{}_j\,e_k,\qquad \Gamma_{ijk}:=\gamma_{kl}\Gamma_i{}^l{}_j=-\Gamma_{ikj},$$
 and the frame components of $U$ are $U^i=\delta^i_0$.
-The **spatial projection** onto the $\gamma$-orthogonal complement of $U$ and the tensor
-$$h_{ij}:=\gamma_{ij}-U_iU_j,\qquad l_{ij}:=h_{ij}-U_iU_j$$
-coincide with $\gamma$-orthogonal projection onto $\operatorname{span}(e_1,e_2,e_3)$
-when restricted to spatial pairs.
+The **spatial projection** is the endomorphism $h^i{}_j:=\delta^i_j-U^iU_j$, whose image is $U^\perp=\operatorname{span}(e_1,e_2,e_3)$ and whose kernel is $\mathbb RU$. Its lowered bilinear form and the auxiliary covariant tensor are
+$$h_{ij}:=\gamma_{ij}-U_iU_j,\qquad l_{ij}:=h_{ij}-U_iU_j.$$
+On spatial pairs $h$ and $l$ both restrict to $\gamma$; they are covariant two-tensors, while $h^i{}_j$ is the projection map.
 
 **(c) Kinematics.** With $\nabla$ the metric connection of $\gamma$
 ([[def-gr-metric-selected-connection]],
@@ -88,7 +87,7 @@ $\gamma$-volume tensor with $\epsilon_{0123}=1$ and set
 $\epsilon_{ijk}:=\epsilon_{0ijk}$ (so $\epsilon_{123}=1$).
 
 **(d) Comoving-parallel gauge.** Assume the coordinates
-$(x^0=s,x^1,x^2,x^3)$ on $U$ are **comoving** ($e_0=\partial_s$ and $x^\alpha$
+$(x^0=s,x^1,x^2,x^3)$ on $\mathcal U$ are **comoving** ($e_0=\partial_s$ and $x^\alpha$
 constant along the flow lines of $e_0$, $s$ a parameter on them) and
 **parallel** ($\Gamma_0{}^i{}_j=0$, i.e. the spatial frame is parallelly
 transported along $U$). This gauge is admissible for tilted configurations: the
@@ -97,13 +96,12 @@ to $U$.
 
 **(e) Unknowns.** The unknowns of the reduction are the coefficients
 $$u_{\mathrm{red}}:=\bigl(e_a{}^\mu,\ \Gamma_a{}^i{}_j,\ E_{ij},\ B_{ij},\ r\bigr),\qquad a=1,2,3,$$
-where $E$ and $B$ are the electric and magnetic parts of the Weyl curvature
-defined in [[def-gr-dust-electric-magnetic-weyl-variables-and-schouten]]; the transport,
-evolution and subsidiary equations they satisfy are stated and derived in
-[[def-gr-dust-electric-magnetic-weyl-variables-and-schouten]],
-[[lem-gr-dust-reduced-evolution-equations]],
-[[lem-gr-dust-symmetric-hyperbolic-reduction]] and
-[[thm-gr-dust-subsidiary-and-residual-vanishing]].
+where $E$ and $B$ are independent smooth symmetric spatial covariant
+$2$-tensor fields, with $E_{0i}=B_{0i}=0$ and
+$\sum_{a=1}^3 E_{aa}=\sum_{a=1}^3 B_{aa}=0$ in this orthonormal frame.
+Their slots are thus defined without assuming curvature reconstruction,
+evolution or residual vanishing. Their interpretation as electric and magnetic
+Weyl components is supplied after these reduction conventions are fixed.
 
 During the independent reduced evolution, the frame and the coefficients
 $\Gamma_a{}^i{}_j$ are tentative smooth unknowns. The coefficients define a

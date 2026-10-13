@@ -70,7 +70,7 @@ of transverse-traceless amplitudes of
 [[def-gr-wave-screen-and-tt-projection]] clause (d). Then:
 
 **(a) Adapted frames exist.** There is a future-directed unit timelike $n$
-with $\eta(n,k)\neq0$; putting $\omega:=-\eta(n,k)$ and
+with $k(n)\neq0$; putting $\omega:=-k(n)$ and
 $s:=\eta^{-1}(k)/\omega-n$ (with $\eta^{-1}(k)$ the vector metrically dual
 to $k$) gives $\eta(s,s)=1$, $\eta(n,s)=0$ and
 $k=\omega(\eta(n,\cdot)+\eta(s,\cdot))$, and $(n,s)$ extends to an
@@ -110,7 +110,7 @@ amplitude $X'$ and is again in harmonic gauge.
 
 **Given:** The flat model with inertial chart, a null covector $k\ne0$, and the spaces $V_0$, $G$, $T$ defined above.
 
-[L1] The flat metric is nondegenerate of signature $(-,+,+,+)$; for every null $k\ne0$ there is a future-directed unit timelike $n$ with $\eta(n,k)\ne0$, and $(n,s)$ with the stated properties extends to an $\eta$-orthonormal basis ([[def-gr-minkowski-model-and-inertial-chart]], [[lem-lorentz-form-has-orthonormal-basis]], [[def-causal-classification-of-lorentz-vectors]], [[def-lorentz-orthogonality-and-orthogonal-complement]], [[def-rational-power]]).
+[L1] The flat metric is nondegenerate of signature $(-,+,+,+)$; for every null $k\ne0$ there is a future-directed unit timelike $n$ with $k(n)\ne0$, and $(n,s)$ with the stated properties extends to an $\eta$-orthonormal basis ([[def-gr-minkowski-model-and-inertial-chart]], [[lem-lorentz-form-has-orthonormal-basis]], [[def-causal-classification-of-lorentz-vectors]], [[def-lorentz-orthogonality-and-orthogonal-complement]], [[def-rational-power]]).
 
 [L2] In an $\eta$-orthonormal basis $(e_0,e_1,e_2,e_3)$, the matrix of the screen projector of the pair $(e_0,e_3)$ is $\operatorname{diag}(0,1,1,0)$ and the TT subspace $T$ consists of the symmetric matrices with $X_{11}=-X_{22}$, $X_{12}=X_{21}$ and all other components zero; it is two-dimensional, and the map $X\mapsto(X_{11},X_{12})$ is a linear isomorphism onto $\mathbb R^2$ ([[lem-gr-tt-screen-projector]] clauses (c)-(d), [[def-gr-wave-screen-and-tt-projection]]).
 
@@ -124,7 +124,7 @@ amplitude $X'$ and is again in harmonic gauge.
 
 **Proof technique:** direct; construct an adapted orthonormal frame from the null covector, evaluate the amplitude conditions in that frame, and solve the resulting finite linear system.
 
-1.1 (Existence of the adapted frame.) A vector $n$ with $\eta(n,k)\neq0$ and the required properties exists: choose any future unit timelike $v$; if $\eta(v,k)\neq0$ take $n:=v$; if $\eta(v,k)=0$, nondegeneracy of $\eta$ and $k\neq0$ give a vector $w$ with $\eta(w,k)\neq0$, and for small $t\neq0$ the vector $v+tw$ is future timelike and has $\eta(v+tw,k)=t\eta(w,k)\neq0$; rescaling it to unit length gives $n$ by [L1]. Put $\omega:=-\eta(n,k)\neq0$ and $s:=\eta^{-1}(k)/\omega-n$, where $\eta^{-1}(k)$ is the vector with components $\eta^{ab}k_b$. Then $\eta(n,s)=\eta(n,k)/\omega-\eta(n,n)=(-\omega)/\omega+1=0$ and $\eta(s,s)=\eta(k,k)/\omega^2-2\eta(k,n)/\omega+\eta(n,n)=0-2(-\omega)/\omega-1=1$, so $s$ is a unit spacelike vector orthogonal to $n$; moreover $k=\omega(\eta(n,\cdot)+\eta(s,\cdot))$ by construction. By [L5] the pair extends to an $\eta$-orthonormal basis with $e_0=n$, $e_3=s$; in that basis the frame components of the covector are $k_A=k(e_A)=\omega(\eta(n,e_A)+\eta(s,e_A))=\omega(-1,0,0,1)$ and the raised components are $k^A=\eta^{AB}k_B=\omega(1,0,0,1)$. This proves (a). [L1, L5, algebra]
+1.1 (Existence of the adapted frame.) A vector $n$ with $k(n)\neq0$ and the required properties exists: choose any future unit timelike $v$; if $k(v)\neq0$ take $n:=v$; if $k(v)=0$, nondegeneracy of $\eta$ and $k\neq0$ give a vector $w$ with $k(w)\neq0$, and for small $t\neq0$ the vector $v+tw$ is future timelike and has $k(v+tw)=tk(w)\neq0$; rescaling it to unit length gives $n$ by [L1]. Put $\omega:=-k(n)\neq0$ and $s:=\eta^{-1}(k)/\omega-n$, where $\eta^{-1}(k)$ is the vector with components $\eta^{ab}k_b$. Then $\eta(n,s)=k(n)/\omega-\eta(n,n)=(-\omega)/\omega+1=0$ and $\eta(s,s)=\eta^{-1}(k,k)/\omega^2-2k(n)/\omega+\eta(n,n)=0-2(-\omega)/\omega-1=1$, so $s$ is a unit spacelike vector orthogonal to $n$; moreover $k=\omega(\eta(n,\cdot)+\eta(s,\cdot))$ by construction. By [L5] the pair extends to an $\eta$-orthonormal basis with $e_0=n$, $e_3=s$; in that basis the frame components of the covector are $k_A=k(e_A)=\omega(\eta(n,e_A)+\eta(s,e_A))=\omega(-1,0,0,1)$ and the raised components are $k^A=\eta^{AB}k_B=\omega(1,0,0,1)$. This proves (a). [L1, L5, algebra]
 
 2.1 (The pure gauge amplitudes.) Let $H_{ab}=k_aZ_b+k_bZ_a$. Its trace is $\operatorname{tr}H=2k^aZ_a=:2\kappa_Z$, so $\bar H_{ab}=k_aZ_b+k_bZ_a-\eta_{ab}\kappa_Z$; hence $k^a\bar H_{ab}=k^ak_aZ_b+k^ak_bZ_a-k_b\kappa_Z=k_b\kappa_Z-k_b\kappa_Z=0$ because $k^ak_a=0$ and $k^ak_bZ_a=k_b\kappa_Z$. Thus $G\subseteq V_0$. If $H=0$, then testing in the frame of step 1.1 on $e_0$ gives $0=H(e_0,\cdot)=-\omega Z_\bullet+Z_0k_\bullet$; evaluating on $e_0$ gives $0=-2\omega Z_0$, so $Z_0=0$, and substituting back gives $\omega Z_b=0$ for every $b$, so $Z=0$. Hence $Z\mapsto(k_aZ_b+k_bZ_a)$ is injective, and its image $G$ is isomorphic to $\mathbb R^4$, so $\dim G=4$ by [L3]. [L3, algebra]
 
@@ -140,6 +140,6 @@ amplitude $X'$ and is again in harmonic gauge.
 
 ## Remarks
 
-- **Frame dependence of the representative.** The subspace $T=T_{n,s}$ and hence the pair $(A_+,A_\times)$ of a class depend on the chosen observer $n$ with $\eta(n,k)\ne0$; the quotient $V_0/G$ and its dimension two do not. Clause (a) records that an adapted observer always exists, and the identity of two classes is tested by their TT representatives in any one admissible frame.
+- **Frame dependence of the representative.** The subspace $T=T_{n,s}$ and hence the pair $(A_+,A_\times)$ of a class depend on the chosen observer $n$ with $k(n)\ne0$; the quotient $V_0/G$ and its dimension two do not. Clause (a) records that an adapted observer always exists, and the identity of two classes is tested by their TT representatives in any one admissible frame.
 
 - **Residual gauge freedom.** Harmonic gauge is preserved by the plane-wave gauges of $G$; that is the plane-wave instance of the residual freedom $\Box\xi=0$ after harmonic gauge, since $\Box\xi_b=-k^ak_aZ_b\sin(k\cdot x)=0$ for null $k$ by [L4]. The lemma states this only in the form needed for the amplitude classification; the existence of a harmonic-gauge representative for a general (non-plane-wave) perturbation is a different statement, proved for the smooth all-space regime in [[thm-gr-flat-wave-equation-duhamel-and-harmonic-gauge]].

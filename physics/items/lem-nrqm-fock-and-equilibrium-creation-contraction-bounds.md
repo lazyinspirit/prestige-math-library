@@ -7,14 +7,14 @@ title: "Creation contraction bounds"
 status: draft
 origin: pipeline
 dependency_level: 5
-deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-fock-sector-projections, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, thm-riesz-representation-for-hilbert-space, cor-cauchy-schwarz-inequality-for-l-two, def-hilbert-space, def-real-and-complex-inner-product-space, def-bounded-linear-operator, def-operator-norm, def-countable-choice]
+deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-fock-sector-projections, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, thm-riesz-representation-for-hilbert-space, thm-cauchy-schwarz-in-an-inner-product-space, def-hilbert-space, def-real-and-complex-inner-product-space, def-bounded-linear-operator, def-operator-norm, def-countable-choice]
 dependency_roles:
   thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction: mathematical-premise
   lem-nrqm-fock-and-equilibrium-fock-sector-projections: mathematical-premise
   lem-nrqm-composites-hilbert-tensor-construction: mathematical-premise
   lem-nrqm-composites-permutation-sector-projections: mathematical-premise
   thm-riesz-representation-for-hilbert-space: mathematical-premise
-  cor-cauchy-schwarz-inequality-for-l-two: mathematical-premise
+  thm-cauchy-schwarz-in-an-inner-product-space: mathematical-premise
   def-hilbert-space: mathematical-premise
   def-real-and-complex-inner-product-space: mathematical-premise
   def-bounded-linear-operator: mathematical-premise
@@ -78,11 +78,11 @@ asserted.
 
 [F1] $F(H)$ is a Hilbert space with $\langle\psi,\varphi\rangle=\sum_n\langle\psi_n,\varphi_n\rangle$; $\psi\in F_0$ has finitely many nonzero coordinates; $F_0$ is dense ([[thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction]]).
 
-[F2] $\Pi_n$ is the orthogonal projection onto the vectors supported in coordinate $n$; $\|\Pi_n\|=1$; the sectors are orthogonal ([[lem-nrqm-fock-and-equilibrium-fock-sector-projections]]).
+[F2] $\Pi_n$ is the orthogonal projection onto the vectors supported in coordinate $n$; $\|\Pi_n\|\le1$, with equality when its sector is nonzero; the sectors are orthogonal ([[lem-nrqm-fock-and-equilibrium-fock-sector-projections]]).
 
 [F3] For $n\ge1$: $P_+^{(n)}$ is an orthogonal projection; every vector of $\operatorname{ran}P_+^{(n)}$ is fixed by each permutation unitary $U_\pi$ ($\pi\in S_n$), and conversely; for fixed $v$ the map $u\mapsto u\otimes v$ is linear and bounded with $\|u\otimes v\|=\|u\|\,\|v\|$ ([[lem-nrqm-composites-permutation-sector-projections]], [[lem-nrqm-composites-hilbert-tensor-construction]]).
 
-[F4] Cauchy-Schwarz in $H^{\otimes m}$ and for square-summable families ([[def-real-and-complex-inner-product-space]], [[cor-cauchy-schwarz-inequality-for-l-two]]).
+[F4] Cauchy-Schwarz in each Hilbert tensor power follows from [[thm-cauchy-schwarz-in-an-inner-product-space]]. For square-summable scalar sequences, apply that theorem to finite nonnegative real vectors $(|a_0|,\ldots,|a_N|)$ and $(|b_0|,\ldots,|b_N|)$ in $\mathbb R^{N+1}$ with inner product $\langle a,b\rangle:=\sum_{n=0}^Na_nb_n$, then take the limit of the nonnegative partial sums; this gives $\sum_n|a_nb_n|\le(\sum_n|a_n|^2)^{1/2}(\sum_n|b_n|^2)^{1/2}$.
 
 [F5] Riesz representation: every bounded linear functional on a Hilbert space is evaluation against a unique vector ([[thm-riesz-representation-for-hilbert-space]], [[def-bounded-linear-operator]]).
 

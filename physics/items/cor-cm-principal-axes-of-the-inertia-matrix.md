@@ -6,8 +6,9 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 3
-deps: [def-cm-mass-distribution-and-inertia-matrix, lem-cm-inertia-matrix-properties, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, def-self-adjoint-and-normal-endomorphism, prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases, def-orthogonal-vectors-sets-and-orthonormal-bases, def-euclidean-inner-product, def-inner-product-space, def-invertible-matrix-and-general-linear-group, thm-invertible-matrix-theorem, def-matrix-product-and-identity-matrix, thm-unique-coordinates-with-respect-to-an-ordered-basis]
+deps: [def-countable-choice, def-cm-mass-distribution-and-inertia-matrix, lem-cm-inertia-matrix-properties, cor-real-spectral-theorem-for-self-adjoint-endomorphisms, def-self-adjoint-and-normal-endomorphism, prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases, def-orthogonal-vectors-sets-and-orthonormal-bases, def-euclidean-inner-product, def-inner-product-space, def-invertible-matrix-and-general-linear-group, thm-invertible-matrix-theorem, def-matrix-product-and-identity-matrix, thm-unique-coordinates-with-respect-to-an-ordered-basis]
 dependency_roles:
+  def-countable-choice: mathematical-premise
   def-cm-mass-distribution-and-inertia-matrix: mathematical-premise
   lem-cm-inertia-matrix-properties: mathematical-premise
   cor-real-spectral-theorem-for-self-adjoint-endomorphisms: mathematical-premise
@@ -36,7 +37,7 @@ sources:
 
 ## Statement
 
-Let $\nu$ be a mass distribution on $\mathbb R^3$ with inertia matrix $I=I(\nu)$ ([[def-cm-mass-distribution-and-inertia-matrix]]), and write $I\omega$ for the matrix-vector product and $\langle\cdot,\cdot\rangle$ for the Euclidean inner product on $\mathbb R^3$ ([[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]]). Then:
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]), used through [[lem-cm-inertia-matrix-properties]] to ensure finiteness of the inertia integrals. Let $\nu$ be a mass distribution on $\mathbb R^3$ with inertia matrix $I=I(\nu)$ ([[def-cm-mass-distribution-and-inertia-matrix]]), and write $I\omega$ for the matrix-vector product and $\langle\cdot,\cdot\rangle$ for the Euclidean inner product on $\mathbb R^3$ ([[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]]). Then:
 
 1. there is an orthonormal basis $(e_1,e_2,e_3)$ of $\mathbb R^3$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]]) and real numbers $I_1,I_2,I_3$ with $Ie_j=I_je_j$ for $j=1,2,3$;
 2. for any such basis and any $\omega=\sum_j\omega_je_j$ one has $I\omega=\sum_jI_j\omega_je_j$, $I_j=e_j^{\mathsf T}Ie_j$, and $\omega^{\mathsf T}I\omega=\sum_jI_j\omega_j^2=\int\lVert\omega\times\rho\rVert_2^2\,d\nu(\rho)\ \ge0$;

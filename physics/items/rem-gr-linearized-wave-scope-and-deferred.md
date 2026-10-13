@@ -57,11 +57,11 @@ not claim; it proves nothing by itself.
   existence statement for the vacuum plane waves is
   [[thm-gr-tt-plane-wave-solutions]]: for every pair of bounded smooth
   profiles there is an exact solution of the linearized vacuum equations in
-  harmonic gauge, whose exact metric satisfies the vacuum field law only up
-  to a residual bounded by a constant times the square of the amplitude on
-  compact sets. [[pthm-gr-plane-wave-polarizations]] reads the amplitude
+  harmonic gauge, whose exact metric in the zero-source, $\Lambda=0$ branch
+  has vacuum field-law residual bounded by a constant times the square of the
+  amplitude on nonempty compact sets. [[pthm-gr-plane-wave-polarizations]] reads the amplitude
   classification of [[lem-gr-plane-wave-gauge-decomposition]] as the
-  statement that the model has two polarizations at fixed null wave covector,
+  statement that the model has two polarization types at fixed null wave covector,
   with the gauge-invariant first-order curvature coefficients as their
   geometric content; no operational observable is defined on this page.
   [[pthm-gr-plane-wave-tidal-detector-response]] derives the model's
@@ -77,10 +77,13 @@ not claim; it proves nothing by itself.
   [[post-gr-ideal-clocks-and-free-fall]], together with the explicit
   hypotheses of the mathematical items. The postulates are adopted model
   assumptions, not derived results; no item on the page establishes the
-  postulates, and no item compares a prediction with a measurement. The
-  metric family $\eta+\lambda h$ is an exact solution of the field law only
-  at zeroth order in the amplitude, so the polarization and response
-  statements are statements of the linearized model.
+  postulates, and no item compares a prediction with a measurement. For a TT perturbation the metric family $\eta+\lambda h$ satisfies the
+  zero-source, $\Lambda=0$ equation through first order; its residual is
+  bounded by $O(\lambda^2)$ on nonempty compact sets for sufficiently small
+  amplitudes. This estimate does not establish an exact vacuum solution for
+  nonzero $\lambda$. The admitted case $h=0$ is exactly flat and solves that
+  equation for every $\lambda$. The polarization and response statements
+  retain their stated linearized-model interpretation.
 
 - **Idealizations of the detector.** The "detector" of
   [[def-gr-linearized-wave-regime-and-detector-coupling]] is two freely

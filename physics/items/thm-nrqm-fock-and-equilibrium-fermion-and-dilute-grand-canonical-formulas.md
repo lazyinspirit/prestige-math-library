@@ -6,10 +6,10 @@ domain: mathematics
 title: "Fermion and dilute grand-canonical formulas"
 status: draft
 origin: pipeline
-dependency_level: 9
-deps: [thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace, lem-nrqm-composites-density-and-scalar-spectral-probability, def-trace-class-operator, def-trace-of-a-trace-class-operator, thm-trace-is-absolutely-convergent-and-basis-independent, thm-geometric-series, def-natural-logarithm, thm-logarithm-derivative-and-integral, thm-monotonicity-of-the-integral, def-hilbert-space, def-bounded-linear-operator, def-countable-choice, thm-natural-logarithm-laws, thm-complex-exponential-addition-and-real-extension, thm-monotone-convergence]
+dependency_level: 2
+deps: [thm-tonelli-for-nonnegative-double-series, lem-nrqm-composites-density-and-scalar-spectral-probability, def-trace-class-operator, def-trace-of-a-trace-class-operator, thm-trace-is-absolutely-convergent-and-basis-independent, thm-geometric-series, def-natural-logarithm, thm-logarithm-derivative-and-integral, thm-monotonicity-of-the-integral, def-hilbert-space, def-bounded-linear-operator, def-countable-choice, thm-natural-logarithm-laws, thm-complex-exponential-addition-and-real-extension, thm-monotone-convergence]
 dependency_roles:
-  thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace: mathematical-premise
+  thm-tonelli-for-nonnegative-double-series: mathematical-premise
   lem-nrqm-composites-density-and-scalar-spectral-probability: mathematical-premise
   def-trace-class-operator: mathematical-premise
   def-trace-of-a-trace-class-operator: mathematical-premise
@@ -74,7 +74,7 @@ is asserted.
 ## Facts & Assumptions
 **Given:** the real data $\beta>0$, $(\varepsilon_j)_{j\ge1}\subseteq(0,\infty)$, $\mu\in\mathbb R$, the numbers $q_j=e^{-\beta(\varepsilon_j-\mu)}$, the two-dimensional Hilbert space $\mathfrak h=\mathbb C^2$ with orthonormal basis $(u_0,u_1)$, the finite-rank operators $T_{u_k,u_k}$, and $0<q<1$.
 
-[F1] $\sum_{n\ge0}q^n=1/(1-q)$ and $\sum_{n\ge1}nq^n=q/(1-q)^2$ for $0\le q<1$ ([[thm-geometric-series]], [[thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace]] (b)).
+[F1] For $0\le q<1$, the geometric series gives $\sum_{n\ge0}q^n=(1-q)^{-1}$ ([[thm-geometric-series]]). Tonelli for nonnegative double series ([[thm-tonelli-for-nonnegative-double-series]]) gives $\sum_{n\ge1}nq^n=\sum_{m\ge1}\sum_{n\ge m}q^n=(1-q)^{-1}\sum_{m\ge1}q^m=q/(1-q)^2$. This scalar derivation uses no Axiom-of-Choice operator supplier.
 
 [F2] A finite-rank operator is trace class; the trace is independent of the chosen Hilbert basis and equals the sum of the diagonal entries in any supplied Hilbert basis ([[def-trace-class-operator]], [[def-trace-of-a-trace-class-operator]], [[thm-trace-is-absolutely-convergent-and-basis-independent]]).
 
@@ -95,7 +95,7 @@ is asserted.
 
 1.1 [Single orbital] The vector $u_k$ is an eigenvector of $\sum_{m=0}^1mT_{u_m,u_m}$ with eigenvalue $k$, so $e^{-\beta(\varepsilon_1-\mu)N_-}=\sum_{k=0}^1e^{-\beta(\varepsilon_1-\mu)k}T_{u_k,u_k}=F$ on a complete orthonormal family, hence everywhere; $F$ is a positive diagonal finite-rank operator with eigenvalues $1$ and $e^{-\beta(\varepsilon_1-\mu)}>0$. By [F2] its trace is $1+e^{-\beta(\varepsilon_1-\mu)}$ and the weighted average of the eigenvalues $0,1$ is $\frac{0\cdot1+1\cdot e^{-\beta(\varepsilon_1-\mu)}}{1+e^{-\beta(\varepsilon_1-\mu)}}=\frac1{e^{\beta(\varepsilon_1-\mu)}+1}$. This proves (a). [F1, F2, algebra]
 
-1.2 [Dilute remainders] For $0<q<1$, the algebra $\frac{q}{1-q}-q=\frac{q^2}{1-q}$ and $\frac q{1+q}-q=-\frac{q^2}{1+q}$ is immediate; both error terms are positive and bounded by $2q^2$ when $q\le1/2$ because $1-q\ge1/2$ and $1+q\ge1/2$. The displayed geometric sums are [F1]. This proves (c). [F1, algebra]
+1.2 [Dilute remainders] For $0<q<1$, the bosonic signed deviation is $\frac{q}{1-q}-q=\frac{q^2}{1-q}>0$. For every $q>0$, the fermionic signed deviation is $\frac q{1+q}-q=-\frac{q^2}{1+q}<0$. Their absolute values are $q^2/(1-q)$ and $q^2/(1+q)$ on these respective domains; when $0<q\le1/2$, each is bounded by $2q^2$ because $1-q\ge1/2$ and $1+q\ge1$. The bosonic geometric sums are [F1], and the fermionic finite sums are $1+q$ and $q$. This proves (c). [F1, algebra]
 
 1.3 [Fermionic products] If infinitely many $j$ have $q_j>1/2$, the product over any $k$ of these indices is at least $(3/2)^k$, so $Z_{\mathrm F}=+\infty$ and $\sum_jq_j=+\infty$. Otherwise their finitely many factors are finite positive constants, and [F3] gives $q_j/2\le q_j-q_j^2\le\log(1+q_j)\le q_j$ on the remaining tail. Thus the nonnegative logarithmic partial sums are bounded exactly when $\sum_jq_j<\infty$. Since $\prod_{j\le n}(1+q_j)=\exp(\sum_{j\le n}\log(1+q_j))$, the increasing partial products have a finite limit exactly in that case. Every finite subset is contained in an initial segment and every factor is at least one, so their supremum equals that limit. Finally $\sum_jq_j=e^{\beta\mu}\sum_je^{-\beta\varepsilon_j}$, giving precisely the fermionic equivalence in (b). [F3, F5, F6, F7, algebra]
 

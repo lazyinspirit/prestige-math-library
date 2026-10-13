@@ -135,6 +135,9 @@
           "def-measure",
           "def-measure-space",
           "def-metric-ball",
+          "def-metric-topology",
+          "lem-metrics-on-rn",
+          "thm-metric-open-set-algebra",
           "def-integral-over-a-measurable-set",
           "def-integrable-real-and-complex-functions-and-their-integrals",
           "def-euclidean-inner-product",
@@ -147,6 +150,9 @@
           "def-measure": "mathematical-premise",
           "def-measure-space": "mathematical-premise",
           "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "lem-metrics-on-rn": "mathematical-premise",
+          "thm-metric-open-set-algebra": "mathematical-premise",
           "def-integral-over-a-measurable-set": "mathematical-premise",
           "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
           "def-euclidean-inner-product": "mathematical-premise",
@@ -190,6 +196,8 @@
           "def-countable-choice",
           "cor-continuous-functions-are-borel-measurable",
           "def-borel-and-lebesgue-measurable-function-on-rn",
+          "def-borel-sigma-algebra",
+          "def-metric-topology",
           "thm-arithmetic-and-lattice-operations-preserve-measurability",
           "def-integral-over-a-measurable-set",
           "def-nonnegative-lebesgue-integral",
@@ -198,6 +206,8 @@
           "prop-order-and-scalar-rules-for-the-nonnegative-integral",
           "thm-integral-triangle-inequality",
           "def-metric-ball",
+          "lem-metrics-on-rn",
+          "thm-metric-open-set-algebra",
           "def-euclidean-inner-product"
         ],
         "dependency_roles": {
@@ -205,6 +215,8 @@
           "def-countable-choice": "mathematical-premise",
           "cor-continuous-functions-are-borel-measurable": "mathematical-premise",
           "def-borel-and-lebesgue-measurable-function-on-rn": "mathematical-premise",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
           "thm-arithmetic-and-lattice-operations-preserve-measurability": "mathematical-premise",
           "def-integral-over-a-measurable-set": "mathematical-premise",
           "def-nonnegative-lebesgue-integral": "mathematical-premise",
@@ -213,6 +225,8 @@
           "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
           "thm-integral-triangle-inequality": "mathematical-premise",
           "def-metric-ball": "mathematical-premise",
+          "lem-metrics-on-rn": "mathematical-premise",
+          "thm-metric-open-set-algebra": "mathematical-premise",
           "def-euclidean-inner-product": "mathematical-premise"
         },
         "dependency_level": 1,
@@ -239,13 +253,14 @@
         "kind": "definition",
         "domain": "mathematics",
         "title": "Rigid placements, body and spatial angular velocity, and material velocities",
-        "statement": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $\\nu$ be a mass distribution on $\\mathbb R^3$ with total mass $m$ ([[def-cm-mass-distribution-and-inertia-matrix]]), let $c:I\\to\\mathbb R^3$ be differentiable and let $R:I\\to SO(3)$ be differentiable ([[def-cm-special-orthogonal-group]]), differentiability meaning entrywise differentiability of $R$ in the sense of [[def-derivative]] with derivative $R'$; write $c'$ for the derivative of $c$.\n\nThe **rigid placement with reference shape $\\nu$, translation $c$ and rotation $R$** is the map\n$$x:I\\times\\mathbb R^3\\longrightarrow\\mathbb R^3,\\qquad x(t,\\rho):=c(t)+R(t)\\rho,$$\nso that the material point labelled by $\\rho$ (a point of the reference shape) is carried to $x(t,\\rho)$ at time $t$; the map $x(t,\\cdot)$ is the **placement at time $t$**, and the pair $(c(t),R(t))$ is its **configuration**. The **material velocity** of the label $\\rho$ at time $t$ is the derivative\n$$\\partial_tx(t,\\rho):=c'(t)+R'(t)\\rho,$$\nwhich exists by differentiability of $c$ and of the entries of $R$.\n\n**Body and spatial angular velocity.** By [[lem-cm-matrix-curve-derivative-rules]] the matrix $R(t)^{\\mathsf T}R'(t)$ is skew-symmetric at every $t\\in I$. By [[lem-cm-skew-matrix-cross-product-correspondence]] there is therefore a unique vector $\\omega(t)\\in\\mathbb R^3$ with\n$$R(t)^{\\mathsf T}R'(t)=[\\omega(t)]_\\times,$$\nand the map $\\omega:I\\to\\mathbb R^3$ is the **body angular velocity** of the placement; the **spatial angular velocity** is $\\omega_{\\mathrm{s}}(t):=R(t)\\omega(t)$. Explicitly $\\omega(t)=\\bigl((R^{\\mathsf T}R')_{32},(R^{\\mathsf T}R')_{13},(R^{\\mathsf T}R')_{21}\\bigr)(t)$, a finite linear expression in the entries of $R$ and $R'$; consequently, if $R$ is twice differentiable, then $\\omega$ is differentiable and its derivative is the **body angular acceleration**.\n\nEquivalently, by the conjugation clause of [[lem-cm-skew-matrix-cross-product-correspondence]], $R'(t)R(t)^{\\mathsf T}=[\\omega_{\\mathrm{s}}(t)]_\\times$.",
+        "statement": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $\\nu$ be a mass distribution on $\\mathbb R^3$ with total mass $m$ ([[def-cm-mass-distribution-and-inertia-matrix]]), let $c:I\\to\\mathbb R^3$ be differentiable and let $R:I\\to SO(3)$ be differentiable ([[def-cm-special-orthogonal-group]]), differentiability meaning entrywise differentiability of $R$ in the sense of [[def-derivative]] with derivative $R'$; write $c'$ for the derivative of $c$.\n\nThe **rigid placement with reference shape $\\nu$, translation $c$ and rotation $R$** is the map\n$$x:I\\times\\mathbb R^3\\longrightarrow\\mathbb R^3,\\qquad x(t,\\rho):=c(t)+R(t)\\rho,$$\nso that the material point labelled by $\\rho$ (a point of the reference shape) is carried to $x(t,\\rho)$ at time $t$; the map $x(t,\\cdot)$ is the **placement at time $t$**, and the pair $(c(t),R(t))$ is its **configuration**. The **material velocity** of the label $\\rho$ at time $t$ is the derivative\n$$\\partial_tx(t,\\rho):=c'(t)+R'(t)\\rho,$$\nwhich exists by differentiability of $c$ and of the entries of $R$.\n\n**Body and spatial angular velocity.** By [[lem-cm-matrix-curve-derivative-rules]] the matrix $R(t)^{\\mathsf T}R'(t)$ is skew-symmetric at every $t\\in I$. By [[lem-cm-skew-matrix-cross-product-correspondence]] there is therefore a unique vector $\\omega(t)\\in\\mathbb R^3$ with\n$$R(t)^{\\mathsf T}R'(t)=[\\omega(t)]_\\times,$$\nand the map $\\omega:I\\to\\mathbb R^3$ is the **body angular velocity** of the placement; the **spatial angular velocity** is $\\omega_{\\mathrm{s}}(t):=R(t)\\omega(t)$. Explicitly $\\omega(t)=\\bigl((R^{\\mathsf T}R')_{32},(R^{\\mathsf T}R')_{13},(R^{\\mathsf T}R')_{21}\\bigr)(t)$, a finite sum of products of entries of $R$ and $R'$; consequently, if $R$ is twice differentiable, then $\\omega$ is differentiable and its derivative is the **body angular acceleration**.\n\nEquivalently, by the conjugation clause of [[lem-cm-skew-matrix-cross-product-correspondence]], $R'(t)R(t)^{\\mathsf T}=[\\omega_{\\mathrm{s}}(t)]_\\times$.",
         "deps": [
           "def-cm-mass-distribution-and-inertia-matrix",
           "lem-cm-matrix-curve-derivative-rules",
           "lem-cm-skew-matrix-cross-product-correspondence",
           "def-cm-special-orthogonal-group",
           "def-derivative",
+          "def-vector-valued-derivative-and-integral",
           "def-interval",
           "def-euclidean-inner-product"
         ],
@@ -255,6 +270,7 @@
           "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
           "def-cm-special-orthogonal-group": "mathematical-premise",
           "def-derivative": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
           "def-interval": "mathematical-premise",
           "def-euclidean-inner-product": "mathematical-premise"
         },
@@ -407,8 +423,9 @@
         "kind": "corollary",
         "domain": "mathematics",
         "title": "Principal axes and principal moments of the inertia matrix, and positivity in the nondegenerate case",
-        "statement": "Let $\\nu$ be a mass distribution on $\\mathbb R^3$ with inertia matrix $I=I(\\nu)$ ([[def-cm-mass-distribution-and-inertia-matrix]]), and write $I\\omega$ for the matrix-vector product and $\\langle\\cdot,\\cdot\\rangle$ for the Euclidean inner product on $\\mathbb R^3$ ([[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]]). Then:\n\n1. there is an orthonormal basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]]) and real numbers $I_1,I_2,I_3$ with $Ie_j=I_je_j$ for $j=1,2,3$;\n2. for any such basis and any $\\omega=\\sum_j\\omega_je_j$ one has $I\\omega=\\sum_jI_j\\omega_je_j$, $I_j=e_j^{\\mathsf T}Ie_j$, and $\\omega^{\\mathsf T}I\\omega=\\sum_jI_j\\omega_j^2=\\int\\lVert\\omega\\times\\rho\\rVert_2^2\\,d\\nu(\\rho)\\ \\ge0$;\n3. each $I_j$ vanishes exactly when $\\nu(\\mathbb R^3\\setminus\\mathbb Re_j)=0$, that is, the whole mass lies on the line $\\mathbb Re_j$; if the inertia form is positive definite then every $I_j>0$ and $I$ is invertible with $I^{-1}e_j=I_j^{-1}e_j$; and if $\\nu$ is not supported on any line through the origin, meaning that $\\nu(\\mathbb R^3\\setminus\\mathbb R\\omega)>0$ for every $\\omega\\ne0$, then every $I_j>0$.",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used through [[lem-cm-inertia-matrix-properties]] to ensure finiteness of the inertia integrals. Let $\\nu$ be a mass distribution on $\\mathbb R^3$ with inertia matrix $I=I(\\nu)$ ([[def-cm-mass-distribution-and-inertia-matrix]]), and write $I\\omega$ for the matrix-vector product and $\\langle\\cdot,\\cdot\\rangle$ for the Euclidean inner product on $\\mathbb R^3$ ([[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]]). Then:\n\n1. there is an orthonormal basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]]) and real numbers $I_1,I_2,I_3$ with $Ie_j=I_je_j$ for $j=1,2,3$;\n2. for any such basis and any $\\omega=\\sum_j\\omega_je_j$ one has $I\\omega=\\sum_jI_j\\omega_je_j$, $I_j=e_j^{\\mathsf T}Ie_j$, and $\\omega^{\\mathsf T}I\\omega=\\sum_jI_j\\omega_j^2=\\int\\lVert\\omega\\times\\rho\\rVert_2^2\\,d\\nu(\\rho)\\ \\ge0$;\n3. each $I_j$ vanishes exactly when $\\nu(\\mathbb R^3\\setminus\\mathbb Re_j)=0$, that is, the whole mass lies on the line $\\mathbb Re_j$; if the inertia form is positive definite then every $I_j>0$ and $I$ is invertible with $I^{-1}e_j=I_j^{-1}e_j$; and if $\\nu$ is not supported on any line through the origin, meaning that $\\nu(\\mathbb R^3\\setminus\\mathbb R\\omega)>0$ for every $\\omega\\ne0$, then every $I_j>0$.",
         "deps": [
+          "def-countable-choice",
           "def-cm-mass-distribution-and-inertia-matrix",
           "lem-cm-inertia-matrix-properties",
           "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
@@ -423,6 +440,7 @@
           "thm-unique-coordinates-with-respect-to-an-ordered-basis"
         ],
         "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
           "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
           "lem-cm-inertia-matrix-properties": "mathematical-premise",
           "cor-real-spectral-theorem-for-self-adjoint-endomorphisms": "mathematical-premise",
@@ -464,8 +482,9 @@
         "kind": "theorem",
         "domain": "mathematics",
         "title": "Euler's equations $I\\omega'+\\omega\\times I\\omega=R^{\\mathsf T}\\tau$ under an adopted torque balance, and the torque-free invariants and principal-axis equations",
-        "statement": "Let $J\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $\\nu$ be a centred mass distribution on $\\mathbb R^3$ that is not supported on any line through the origin, with inertia matrix $I$ ([[def-cm-mass-distribution-and-inertia-matrix]]), let $c:J\\to\\mathbb R^3$ be differentiable and let $R:J\\to SO(3)$ be twice differentiable, and let $x(t,\\rho)=c(t)+R(t)\\rho$ be the rigid placement with body angular velocity $\\omega$ ([[def-cm-rigid-placement-and-body-angular-velocity]]). Write $l:=I\\omega:J\\to\\mathbb R^3$; by [[cor-cm-principal-axes-of-the-inertia-matrix]] the inertia form is positive definite and $I$ is invertible.\n\nAdopt the **balance hypothesis** (B): there is a map $\\tau:J\\to\\mathbb R^3$ such that the curve $t\\mapsto R(t)l(t)$ is differentiable and\n$$(Rl)'(t)=\\tau(t)\\qquad(t\\in J).$$\nThen:\n\n1. $l$ is differentiable and **Euler's equations with torque** hold: $$I\\omega'+\\omega\\times I\\omega=R^{\\mathsf T}\\tau\\qquad\\text{on }J;$$\n2. if $\\tau=0$ on $J$, then $l$ satisfies the **torque-free Euler equations** $l'=l\\times(I^{-1}l)$, and the functions $t\\mapsto\\langle l(t),l(t)\\rangle$ and $t\\mapsto\\tfrac12\\langle l(t),I^{-1}l(t)\\rangle=\\tfrac12\\omega(t)^{\\mathsf T}I\\omega(t)$ are constant on $J$;\n3. if $\\tau=0$ on $J$ and $(e_1,e_2,e_3)$ is a positively oriented orthonormal eigenbasis of $I$ with $Ie_j=I_je_j$ and $l=\\sum_jl_je_j$, then $\\langle l,l\\rangle=\\sum_jl_j^2$ and $\\tfrac12\\langle l,I^{-1}l\\rangle=\\sum_jl_j^2/(2I_j)$ are constant on $J$, and the torque-free equations read $$l_1'=\\Bigl(\\frac1{I_3}-\\frac1{I_2}\\Bigr)l_2l_3,\\qquad l_2'=\\Bigl(\\frac1{I_1}-\\frac1{I_3}\\Bigr)l_1l_3,\\qquad l_3'=\\Bigl(\\frac1{I_2}-\\frac1{I_1}\\Bigr)l_1l_2.$$",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used through the inertia suppliers to ensure finiteness of the integrals. Let $J\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $\\nu$ be a centred mass distribution on $\\mathbb R^3$ that is not supported on any line through the origin, with inertia matrix $I$ ([[def-cm-mass-distribution-and-inertia-matrix]]), let $c:J\\to\\mathbb R^3$ be differentiable and let $R:J\\to SO(3)$ be twice differentiable, and let $x(t,\\rho)=c(t)+R(t)\\rho$ be the rigid placement with body angular velocity $\\omega$ ([[def-cm-rigid-placement-and-body-angular-velocity]]). Write $l:=I\\omega:J\\to\\mathbb R^3$; by [[cor-cm-principal-axes-of-the-inertia-matrix]] the inertia form is positive definite and $I$ is invertible.\n\nAdopt the **balance hypothesis** (B): there is a map $\\tau:J\\to\\mathbb R^3$ such that the curve $t\\mapsto R(t)l(t)$ is differentiable and\n$$(Rl)'(t)=\\tau(t)\\qquad(t\\in J).$$\nThen:\n\n1. $l$ is differentiable and **Euler's equations with torque** hold: $$I\\omega'+\\omega\\times I\\omega=R^{\\mathsf T}\\tau\\qquad\\text{on }J;$$\n2. if $\\tau=0$ on $J$, then $l$ satisfies the **torque-free Euler equations** $l'=l\\times(I^{-1}l)$, and the functions $t\\mapsto\\langle l(t),l(t)\\rangle$ and $t\\mapsto\\tfrac12\\langle l(t),I^{-1}l(t)\\rangle=\\tfrac12\\omega(t)^{\\mathsf T}I\\omega(t)$ are constant on $J$;\n3. if $\\tau=0$ on $J$ and $(e_1,e_2,e_3)$ is a positively oriented orthonormal eigenbasis of $I$ with $Ie_j=I_je_j$ and $l=\\sum_jl_je_j$, then $\\langle l,l\\rangle=\\sum_jl_j^2$ and $\\tfrac12\\langle l,I^{-1}l\\rangle=\\sum_jl_j^2/(2I_j)$ are constant on $J$, and the torque-free equations read $$l_1'=\\Bigl(\\frac1{I_3}-\\frac1{I_2}\\Bigr)l_2l_3,\\qquad l_2'=\\Bigl(\\frac1{I_1}-\\frac1{I_3}\\Bigr)l_1l_3,\\qquad l_3'=\\Bigl(\\frac1{I_2}-\\frac1{I_1}\\Bigr)l_1l_2.$$",
         "deps": [
+          "def-countable-choice",
           "def-cm-rigid-placement-and-body-angular-velocity",
           "def-cm-mass-distribution-and-inertia-matrix",
           "lem-cm-inertia-matrix-properties",
@@ -481,9 +500,11 @@
           "def-matrix-product-and-identity-matrix",
           "def-euclidean-inner-product",
           "def-inner-product-space",
+          "thm-algebra-of-derivatives",
           "cor-zero-derivative-implies-constant"
         ],
         "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
           "def-cm-rigid-placement-and-body-angular-velocity": "mathematical-premise",
           "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
           "lem-cm-inertia-matrix-properties": "mathematical-premise",
@@ -499,6 +520,7 @@
           "def-matrix-product-and-identity-matrix": "mathematical-premise",
           "def-euclidean-inner-product": "mathematical-premise",
           "def-inner-product-space": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
           "cor-zero-derivative-implies-constant": "mathematical-premise"
         },
         "dependency_level": 5,
@@ -545,6 +567,7 @@
           "thm-cross-product-norm-is-the-two-vector-gram-determinant",
           "def-euclidean-inner-product",
           "def-inner-product-space",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
           "def-metric-ball",
           "thm-heine-borel-rn",
           "cor-zero-derivative-implies-constant"
@@ -564,6 +587,7 @@
           "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
           "def-euclidean-inner-product": "mathematical-premise",
           "def-inner-product-space": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
           "def-metric-ball": "mathematical-premise",
           "thm-heine-borel-rn": "mathematical-premise",
           "cor-zero-derivative-implies-constant": "mathematical-premise"
@@ -576,7 +600,7 @@
         "sources": {
           "references": [
             {
-              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §§3.5.1-3.4.3, Eqs. (3.34)-(3.45), printed pp. 55-58: free symmetric top, and the asymmetric-top stability discussion with the invariants of the motion",
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §§3.4.1-3.4.3, Eqs. (3.34)-(3.45), printed pp. 55-58: free symmetric top, and the asymmetric-top stability discussion with the invariants of the motion",
               "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
             },
             {
@@ -598,6 +622,9 @@
         "title": "Instability of spin about the intermediate principal axis of the torque-free top",
         "statement": "Let $I_1<I_2<I_3$ be positive reals, let $I:\\mathbb R^3\\to\\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis, and consider the torque-free Euler system $l'=F(l)$, $F(l)=l\\times(I^{-1}l)$, on $U=\\mathbb R^3$ ([[thm-cm-euler-equations-and-torque-free-invariants]], [[def-cm-equilibrium-and-lyapunov-stability]]). Let $L\\ne0$. Then $l_0:=Le_2$ is an equilibrium of $F$ and is **not Lyapunov stable**: with $$\\varepsilon_0:=\\frac{|L|}{2},\\qquad a:=\\sqrt{\\frac{1/I_1-1/I_2}{1/I_2-1/I_3}}>0,\\qquad c_0:=a\\Bigl(\\frac1{I_2}-\\frac1{I_3}\\Bigr)\\frac{\\sqrt3}{2}|L|>0,$$ for every $\\delta>0$ there is a solution $l$ with $\\lVert l(0)-l_0\\rVert_2<\\delta$ and some $t\\ge0$ with $\\lVert l(t)-l_0\\rVert_2\\ge\\varepsilon_0$; Moreover, with $\\delta_0:=|L|/(2\\sqrt{1+a^2})$, the escape can be arranged at a time $t\\le c_0^{-1}\\log(\\delta_0/\\eta)$ where $\\eta=l_1(0)>0$ may be chosen as small as desired.",
         "deps": [
+          "def-natural-logarithm",
+          "cor-exponential-is-a-bijection-onto-positive-reals",
+          "thm-exponential-is-strictly-increasing",
           "def-maximal-ode-solution",
           "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
           "thm-cm-euler-equations-and-torque-free-invariants",
@@ -615,11 +642,15 @@
           "thm-monotonicity-from-the-derivative",
           "def-euclidean-inner-product",
           "def-inner-product-space",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
           "def-interval",
           "thm-heine-borel-rn",
           "cor-zero-derivative-implies-constant"
         ],
         "dependency_roles": {
+          "def-natural-logarithm": "mathematical-premise",
+          "cor-exponential-is-a-bijection-onto-positive-reals": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
           "def-maximal-ode-solution": "mathematical-premise",
           "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
           "thm-cm-euler-equations-and-torque-free-invariants": "mathematical-premise",
@@ -637,6 +668,7 @@
           "thm-monotonicity-from-the-derivative": "mathematical-premise",
           "def-euclidean-inner-product": "mathematical-premise",
           "def-inner-product-space": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
           "def-interval": "mathematical-premise",
           "thm-heine-borel-rn": "mathematical-premise",
           "cor-zero-derivative-implies-constant": "mathematical-premise"
@@ -649,7 +681,7 @@
         "sources": {
           "references": [
             {
-              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.4.3, Eqs. (3.40)-(3.45), printed pp. 57-58: explicit small perturbation of intermediate-axis spin, the invariant relation between the perturbations, and exponential growth",
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.4.3, Eqs. (3.40)-(3.45), printed pp. 57-58: linearized perturbation of principal-axis spin and the sign criterion for exponential growth; the nonlinear invariant-branch proof and escape bound are supplied locally",
               "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
             },
             {
@@ -669,10 +701,13 @@
         "kind": "theorem",
         "domain": "mathematics",
         "title": "Linearization of the torque-free Euler system at a principal-axis spin, and the oscillatory/exponential dichotomy",
-        "statement": "Let $I_1,I_2,I_3>0$ be pairwise distinct, let $I:\\mathbb R^3\\to\\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis, and let\n$$F(\\omega):=-I^{-1}\\bigl(\\omega\\times I\\omega\\bigr),\\qquad \\omega\\in\\mathbb R^3,$$\nbe the torque-free Euler field in angular-velocity variables ([[thm-cm-euler-equations-and-torque-free-invariants]]). Let $\\Omega\\ne0$. Then:\n\n1. $F(\\Omega e_3)=0$, and for every $\\delta\\in\\mathbb R^3$ $$F(\\Omega e_3+\\delta)=A\\delta+R(\\delta),\\qquad (A\\delta)_1=\\frac{\\Omega(I_2-I_3)}{I_1}\\delta_2,\\quad (A\\delta)_2=\\frac{\\Omega(I_3-I_1)}{I_2}\\delta_1,\\quad (A\\delta)_3=0,$$ where $\\lVert R(\\delta)\\rVert_2\\le C\\lVert\\delta\\rVert_2^2$ for the explicit constant $C:=\\lVert I^{-1}\\rVert_F\\lVert I\\rVert_F$ and $\\lVert M\\rVert_F:=\\bigl(\\sum_{j,k}M_{jk}^2\\bigr)^{1/2}$; consequently $A$ is the total derivative of $F$ at $\\Omega e_3$ ([[def-total-derivative-in-euclidean-space]]).\n2. Every solution of the linear system $\\delta'=A\\delta$ on $\\mathbb R$ has $\\delta_3$ constant, and with $$\\lambda:=\\frac{\\Omega^2(I_2-I_3)(I_3-I_1)}{I_1I_2}\\ne0$$ the pair $(\\delta_1,\\delta_2)$ is determined by its initial value as follows:\n   - if $\\lambda<0$, then with $\\kappa:=\\sqrt{-\\lambda}>0$, $$\\delta_1(t)=\\delta_1(0)\\cos(\\kappa t)+\\frac{\\Omega(I_2-I_3)}{I_1\\kappa}\\delta_2(0)\\sin(\\kappa t),\\qquad \\delta_2(t)=\\delta_2(0)\\cos(\\kappa t)+\\frac{\\Omega(I_3-I_1)}{I_2\\kappa}\\delta_1(0)\\sin(\\kappa t),$$ and every solution is bounded on $[0,\\infty)$;\n   - if $\\lambda>0$, then the same two formulas hold with $\\cosh$ and $\\sinh$ in place of $\\cos$ and $\\sin$ and $\\kappa:=\\sqrt\\lambda$, the system has unbounded solutions (for instance $\\delta_2(0)=0$, $\\delta_1(0)\\ne0$), and if $\\delta_1(0)+\\frac{\\Omega(I_2-I_3)}{I_1\\kappa}\\delta_2(0)\\ne0$ then $\\lVert\\delta(t)\\rVert_2\\to+\\infty$ as $t\\to+\\infty$.\n3. Hence the linearization at the spin $\\Omega e_3$ is oscillatory exactly when $(I_2-I_3)(I_3-I_1)<0$, i.e. when the third principal moment is a largest or a smallest moment, and it has exponentially growing solutions exactly when $\\lambda>0$, i.e. when $I_3$ lies strictly between $I_1$ and $I_2$; in the latter case the zero solution of the linear system is not stable.",
+        "statement": "Let $I_1,I_2,I_3>0$ be pairwise distinct, let $I:\\mathbb R^3\\to\\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis, and let $I^{-1}$ denote its inverse, given by $I^{-1}e_j=I_j^{-1}e_j$. Define the formal torque-free Euler vector field\n$$F(\\omega):=-I^{-1}\\bigl(\\omega\\times I\\omega\\bigr),\\qquad \\omega\\in\\mathbb R^3.$$\nWhen $I$ is an actual rigid-body inertia map written in a principal basis, this is the angular-velocity vector field obtained from [[thm-cm-euler-equations-and-torque-free-invariants]]. Here the positive diagonal entries are otherwise arbitrary; no realization by a mass distribution is assumed. Let $\\Omega\\ne0$. Then:\n\n1. $F(\\Omega e_3)=0$, and for every $\\delta\\in\\mathbb R^3$ $$F(\\Omega e_3+\\delta)=A\\delta+R(\\delta),\\qquad (A\\delta)_1=\\frac{\\Omega(I_2-I_3)}{I_1}\\delta_2,\\quad (A\\delta)_2=\\frac{\\Omega(I_3-I_1)}{I_2}\\delta_1,\\quad (A\\delta)_3=0,$$ where $\\lVert R(\\delta)\\rVert_2\\le C\\lVert\\delta\\rVert_2^2$ for the explicit constant $C:=\\lVert I^{-1}\\rVert_F\\lVert I\\rVert_F$ and $\\lVert M\\rVert_F:=\\bigl(\\sum_{j,k}M_{jk}^2\\bigr)^{1/2}$; consequently $A$ is the total derivative of $F$ at $\\Omega e_3$ ([[def-total-derivative-in-euclidean-space]]).\n2. Every solution of the linear system $\\delta'=A\\delta$ on $\\mathbb R$ has $\\delta_3$ constant, and with $$\\lambda:=\\frac{\\Omega^2(I_2-I_3)(I_3-I_1)}{I_1I_2}\\ne0$$ the pair $(\\delta_1,\\delta_2)$ is determined by its initial value as follows:\n   - if $\\lambda<0$, then with $\\kappa:=\\sqrt{-\\lambda}>0$, $$\\delta_1(t)=\\delta_1(0)\\cos(\\kappa t)+\\frac{\\Omega(I_2-I_3)}{I_1\\kappa}\\delta_2(0)\\sin(\\kappa t),\\qquad \\delta_2(t)=\\delta_2(0)\\cos(\\kappa t)+\\frac{\\Omega(I_3-I_1)}{I_2\\kappa}\\delta_1(0)\\sin(\\kappa t),$$ and every solution is bounded on $[0,\\infty)$;\n   - if $\\lambda>0$, then the same two formulas hold with $\\cosh$ and $\\sinh$ in place of $\\cos$ and $\\sin$ and $\\kappa:=\\sqrt\\lambda$, the system has unbounded solutions (for instance $\\delta_2(0)=0$, $\\delta_1(0)\\ne0$), and if $\\delta_1(0)+\\frac{\\Omega(I_2-I_3)}{I_1\\kappa}\\delta_2(0)\\ne0$ then $\\lVert\\delta(t)\\rVert_2\\to+\\infty$ as $t\\to+\\infty$.\n3. Hence the linearization at the spin $\\Omega e_3$ is oscillatory exactly when $(I_2-I_3)(I_3-I_1)<0$, i.e. when the third principal moment is a largest or a smallest moment, and it has exponentially growing solutions exactly when $\\lambda>0$, i.e. when $I_3$ lies strictly between $I_1$ and $I_2$; in the latter case the zero solution of the linear system is not stable.",
         "deps": [
+          "def-cm-equilibrium-and-lyapunov-stability",
           "thm-cm-euler-equations-and-torque-free-invariants",
-          "cor-cm-principal-axes-of-the-inertia-matrix",
+          "def-linear-map",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "lem-standard-basis-of-f-n",
           "def-total-derivative-in-euclidean-space",
           "thm-picard-lindelof-local-existence-and-uniqueness",
           "def-locally-lipschitz-in-the-state-variable",
@@ -695,8 +730,11 @@
           "def-interval"
         ],
         "dependency_roles": {
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
           "thm-cm-euler-equations-and-torque-free-invariants": "mathematical-premise",
-          "cor-cm-principal-axes-of-the-inertia-matrix": "mathematical-premise",
+          "def-linear-map": "mathematical-premise",
+          "def-linear-isomorphism-and-invertible-linear-map": "mathematical-premise",
+          "lem-standard-basis-of-f-n": "mathematical-premise",
           "def-total-derivative-in-euclidean-space": "mathematical-premise",
           "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
           "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
@@ -809,8 +847,13 @@
         "kind": "definition",
         "domain": "mathematics",
         "title": "The Euler-angle parametrization and the heavy symmetric top system",
-        "statement": "**Euler-angle parametrization.** Let $R_z,R_y$ be the coordinate rotation matrices of [[lem-cm-coordinate-rotation-matrices]]. The **Euler-angle parametrization** is the map\n$$\\Theta:\\mathbb R\\times(0,\\pi)\\times\\mathbb R\\longrightarrow SO(3),\\qquad \\Theta(\\varphi,\\theta,\\psi):=R_z(\\varphi)\\,R_y(\\theta)\\,R_z(\\psi),$$\nwhich is $SO(3)$-valued by [[lem-cm-coordinate-rotation-matrices]] and [[lem-cm-so3-is-a-matrix-group]]. The numbers $(\\varphi,\\theta,\\psi)$ are the **Euler angles** and the open set $\\mathbb R\\times(0,\\pi)\\times\\mathbb R$ is its **domain**; $\\theta$ is restricted to the open interval $(0,\\pi)$ so that $\\sin\\theta>0$. No injectivity and no chart or diffeomorphism property of $\\Theta$ is asserted or used here, and no periodicity of the angles is imposed — the real parameters stand for themselves.\n\n**Parameters.** Fix reals $A>0$, $C>0$, $m>0$, $d>0$ and $g>0$; they are mathematical parameters, not identified with any physical quantity in this item.\n\n**The heavy-top function.** Write $q=(\\varphi,\\theta,\\psi)$ for a point of the domain and $v=(\\varphi',\\theta',\\psi')$ for a triple of reals. The **heavy-top function** is\n$$L(q,v):=\\tfrac12A\\bigl(\\theta'^2+\\varphi'^2\\sin^2\\theta\\bigr)+\\tfrac12C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)^2-mgd\\cos\\theta,$$\nusing the sine and cosine of [[def-sine-and-cosine-by-power-series]]. It is a composition of smooth functions of $(q,v)$ and is $C^\\infty$ on the domain times $\\mathbb R^3$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]); its relevant partial derivatives are, explicitly,\n$$\\partial_{\\varphi'}L=A\\varphi'\\sin^2\\theta+C\\cos\\theta\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr),\\qquad \\partial_\\varphi L=0,$$\n$$\\partial_{\\theta'}L=A\\theta',\\qquad \\partial_\\theta L=A\\varphi'^2\\sin\\theta\\cos\\theta-C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\varphi'\\sin\\theta+mgd\\sin\\theta,$$\n$$\\partial_{\\psi'}L=C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr),\\qquad \\partial_\\psi L=0.$$\n\n**The heavy-top system.** Let $I\\subseteq\\mathbb R$ be an interval with at least two points. A **heavy-top trajectory** for these parameters is a twice-differentiable curve $q=(\\varphi,\\theta,\\psi):I\\to\\mathbb R\\times(0,\\pi)\\times\\mathbb R$ such that, with $q'=(\\varphi',\\theta',\\psi')$ its derivative, the three second-order equations\n$$\\frac{d}{dt}\\Bigl(A\\varphi'\\sin^2\\theta+C\\cos\\theta\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\Bigr)=0,\\qquad \\frac{d}{dt}\\bigl(A\\theta'\\bigr)=A\\varphi'^2\\sin\\theta\\cos\\theta-C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\varphi'\\sin\\theta+mgd\\sin\\theta,$$\n$$\\frac{d}{dt}\\Bigl(C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\Bigr)=0$$\nhold on $I$, all functions being evaluated at $t$. These displayed equations are the definition of the system; they are written out so that no separate definition of a variational principle is needed. The first and third are the statements that $\\partial_{\\varphi'}L$ and $\\partial_{\\psi'}L$ are constant along the trajectory.",
+        "statement": "**Euler-angle parametrization.** Let $R_z,R_y$ be the coordinate rotation matrices of [[lem-cm-coordinate-rotation-matrices]]. The **Euler-angle parametrization** is the map\n$$\\Theta:\\mathbb R\\times(0,\\pi)\\times\\mathbb R\\longrightarrow SO(3),\\qquad \\Theta(\\varphi,\\theta,\\psi):=R_z(\\varphi)\\,R_y(\\theta)\\,R_z(\\psi),$$\nwhich is $SO(3)$-valued by [[lem-cm-coordinate-rotation-matrices]] and [[lem-cm-so3-is-a-matrix-group]]. The numbers $(\\varphi,\\theta,\\psi)$ are the **Euler angles** and the open set $\\mathbb R\\times(0,\\pi)\\times\\mathbb R$ is its **domain**; $\\theta$ is restricted to the open interval $(0,\\pi)$ so that $\\sin\\theta>0$, with $\\pi$ defined as twice the smallest positive cosine zero ([[def-pi-via-first-positive-cosine-zero]]) and positivity supplied by [[cor-pi-is-the-first-positive-sine-zero]]. No injectivity and no chart or diffeomorphism property of $\\Theta$ is asserted or used here, and no periodicity of the angles is imposed — the real parameters stand for themselves.\n\n**Parameters.** Fix reals $A>0$, $C>0$, $m>0$, $d>0$ and $g>0$; they are mathematical parameters, not identified with any physical quantity in this item.\n\n**The heavy-top function.** Write $q=(\\varphi,\\theta,\\psi)$ for a point of the domain and $v=(\\varphi',\\theta',\\psi')$ for a triple of reals. The **heavy-top function** is\n$$L(q,v):=\\tfrac12A\\bigl(\\theta'^2+\\varphi'^2\\sin^2\\theta\\bigr)+\\tfrac12C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)^2-mgd\\cos\\theta,$$\nusing the sine and cosine of [[def-sine-and-cosine-by-power-series]]. Repeated application of the sine/cosine derivative identities ([[thm-sine-and-cosine-derivatives]]) and the finite sum, product and chain rules ([[thm-algebra-of-derivatives]], [[thm-chain-rule]]) gives continuous partial derivatives of every order, so it is $C^\\infty$ on the domain times $\\mathbb R^3$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]); its relevant partial derivatives are, explicitly,\n$$\\partial_{\\varphi'}L=A\\varphi'\\sin^2\\theta+C\\cos\\theta\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr),\\qquad \\partial_\\varphi L=0,$$\n$$\\partial_{\\theta'}L=A\\theta',\\qquad \\partial_\\theta L=A\\varphi'^2\\sin\\theta\\cos\\theta-C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\varphi'\\sin\\theta+mgd\\sin\\theta,$$\n$$\\partial_{\\psi'}L=C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr),\\qquad \\partial_\\psi L=0.$$\n\n**The heavy-top system.** Let $I\\subseteq\\mathbb R$ be an interval with at least two points. A **heavy-top trajectory** for these parameters is a twice-differentiable curve $q=(\\varphi,\\theta,\\psi):I\\to\\mathbb R\\times(0,\\pi)\\times\\mathbb R$ such that, with $q'=(\\varphi',\\theta',\\psi')$ its derivative, the three second-order equations\n$$\\frac{d}{dt}\\Bigl(A\\varphi'\\sin^2\\theta+C\\cos\\theta\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\Bigr)=0,\\qquad \\frac{d}{dt}\\bigl(A\\theta'\\bigr)=A\\varphi'^2\\sin\\theta\\cos\\theta-C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\varphi'\\sin\\theta+mgd\\sin\\theta,$$\n$$\\frac{d}{dt}\\Bigl(C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\Bigr)=0$$\nhold on $I$, all functions being evaluated at $t$. These displayed equations are the definition of the system; they are written out so that no separate definition of a variational principle is needed. The first and third are the statements that $\\partial_{\\varphi'}L$ and $\\partial_{\\psi'}L$ are constant along the trajectory.",
         "deps": [
+          "def-pi-via-first-positive-cosine-zero",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-sine-and-cosine-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
           "lem-cm-coordinate-rotation-matrices",
           "lem-cm-skew-matrix-cross-product-correspondence",
           "def-cm-special-orthogonal-group",
@@ -822,6 +865,11 @@
           "def-ck-euclidean-maps-and-diffeomorphisms"
         ],
         "dependency_roles": {
+          "def-pi-via-first-positive-cosine-zero": "mathematical-premise",
+          "cor-pi-is-the-first-positive-sine-zero": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
           "lem-cm-coordinate-rotation-matrices": "mathematical-premise",
           "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
           "def-cm-special-orthogonal-group": "mathematical-premise",
@@ -989,6 +1037,10 @@
         "title": "Finite point-mass inertia matrices computed and checked against the positivity criterion",
         "statement": "Throughout, the ambient data are the Euclidean inner product and cross product of $\\mathbb R^3$ ([[def-euclidean-inner-product]], [[def-cross-product-in-r3]]), and $\\nu$ is a finite weighted sum of Dirac measures at distinct points $x_1,\\dots,x_n\\in\\mathbb R^3$ with weights $c_1,\\dots,c_n>0$ ([[def-dirac-measure]], [[thm-nonnegative-weighted-sums-of-measures]]), which is a mass distribution of total mass $m=\\sum_kc_k$ in the sense of [[def-cm-mass-distribution-and-inertia-matrix]]; let $I=I(\\nu)$ be its inertia matrix. Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the Borel measurability of the polynomial integrands, which is what makes the entries of $I$ finite real numbers ([[lem-cm-mass-moments-are-finite]]). Three cases are computed and each is checked against the positivity criterion of [[lem-cm-inertia-matrix-properties]] and the principal-axis corollary [[cor-cm-principal-axes-of-the-inertia-matrix]].\n\n**(i) Two unit masses on the third axis.** $n=2$, $x_1=e_3$, $x_2=-e_3$, $c_1=c_2=1$: then $m=2$, $\\mu(\\nu)=e_3-e_3=0$, and $I=\\mathrm{diag}(2,2,0)$.\n\n**(ii) Three unit masses at an equilateral triangle in the plane $e_3=0$.** $n=3$, $c_k=1$ and $x_k=\\cos(2\\pi k/3)e_1+\\sin(2\\pi k/3)e_2$ for $k=0,1,2$: then $m=3$, $\\mu(\\nu)=0$ and $I=\\mathrm{diag}(\\tfrac32,\\tfrac32,3)$.\n\n**(iii) Two unit masses on the first axis.** $n=2$, $x_1=e_1$, $x_2=2e_1$, $c_1=c_2=1$: then $m=2$, $\\mu(\\nu)=3e_1\\ne0$, and $I=\\mathrm{diag}(0,5,5)$.",
         "deps": [
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
           "def-cm-mass-distribution-and-inertia-matrix",
           "lem-cm-mass-moments-are-finite",
           "def-countable-choice",
@@ -999,6 +1051,7 @@
           "thm-nonnegative-weighted-sums-of-measures",
           "def-nonnegative-weighted-sum-of-measures",
           "def-nonnegative-lebesgue-integral",
+          "def-nonnegative-simple-measurable-function",
           "def-integral-of-a-nonnegative-simple-function",
           "def-integral-over-a-measurable-set",
           "def-integrable-real-and-complex-functions-and-their-integrals",
@@ -1015,6 +1068,10 @@
           "cor-trigonometric-parity-and-pythagorean-identity"
         ],
         "dependency_roles": {
+          "def-pi-via-first-positive-cosine-zero": "mathematical-premise",
+          "thm-quarter-turn-values-and-shift-formulas": "mathematical-premise",
+          "cor-pi-is-the-first-positive-sine-zero": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
           "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
           "lem-cm-mass-moments-are-finite": "mathematical-premise",
           "def-countable-choice": "mathematical-premise",
@@ -1025,6 +1082,7 @@
           "thm-nonnegative-weighted-sums-of-measures": "mathematical-premise",
           "def-nonnegative-weighted-sum-of-measures": "mathematical-premise",
           "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-nonnegative-simple-measurable-function": "mathematical-premise",
           "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
           "def-integral-over-a-measurable-set": "mathematical-premise",
           "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
@@ -1043,7 +1101,7 @@
         "dependency_level": 4,
         "provenance": {
           "statement": "ai-generated",
-          "proof": "ai-generated"
+          "proof": "ai-altered"
         },
         "sources": {
           "references": [
@@ -1067,7 +1125,7 @@
         "kind": "example",
         "domain": "mathematics",
         "title": "Finite checks of the torque-free spin results: stability certificates, an escape-time bound, and the linearized dichotomy",
-        "statement": "Fix the diagonal inertia map with principal moments $(I_1,I_2,I_3)=(1,2,3)$ ([[cor-cm-principal-axes-of-the-inertia-matrix]]) and the torque-free Euler system $l'=l\\times(I^{-1}l)$ of [[thm-cm-euler-equations-and-torque-free-invariants]] on $\\mathbb R^3$. The three computations below check the certificates of [[thm-cm-stability-of-extreme-principal-axes]], the escape bound of [[thm-cm-instability-of-the-intermediate-axis]], and the linearized formulas of [[thm-cm-linearized-torque-free-euler-equations]] at explicit numerical data. All numbers are exact rationals or explicit square roots; no measurement or simulation is involved, and no claim about a physical top is made.",
+        "statement": "Fix the diagonal inertia map with principal moments $(I_1,I_2,I_3)=(1,2,3)$ ([[cor-cm-principal-axes-of-the-inertia-matrix]]) and the torque-free Euler system $l'=l\\times(I^{-1}l)$ of [[thm-cm-euler-equations-and-torque-free-invariants]] on $\\mathbb R^3$. The three computations below check the certificates of [[thm-cm-stability-of-extreme-principal-axes]], the escape bound of [[thm-cm-instability-of-the-intermediate-axis]], and the linearized formulas of [[thm-cm-linearized-torque-free-euler-equations]] at explicit data. The inertia values and component calculations are exact rationals or square roots; the escape-time upper bound is the exact expression $4\\log25$. No measurement or simulation is involved, and no claim about a physical top is made.",
         "deps": [
           "thm-cm-stability-of-extreme-principal-axes",
           "thm-cm-instability-of-the-intermediate-axis",
@@ -1096,8 +1154,8 @@
         },
         "dependency_level": 7,
         "provenance": {
-          "statement": "ai-generated",
-          "proof": "ai-generated"
+          "statement": "ai-altered",
+          "proof": "ai-altered"
         },
         "sources": {
           "references": [
@@ -1111,10 +1169,7 @@
             }
           ]
         },
-        "strategy": "direct",
-        "generation": {
-          "role": "example"
-        }
+        "strategy": "direct"
       },
       {
         "id": "ex-cm-euler-angle-and-heavy-top-checks",
@@ -1123,6 +1178,11 @@
         "title": "Finite checks of the Euler-angle parametrization, the angular-velocity formula and a steady precession of the heavy top",
         "statement": "All data are the exact ones of the heavy-top system of [[def-cm-euler-angle-parametrization-and-heavy-top-system]] with the parameter choice $A=C=m=d=g=1$, and the rotation matrices are those of [[lem-cm-coordinate-rotation-matrices]]. Three computations are performed: the value of the Euler-angle parametrization at a specific triple, the body angular velocity of a specific motion through the formula of [[lem-cm-euler-angle-angular-velocity]] checked against the definition, and a constant-rate precession checked against every clause of [[thm-cm-heavy-top-reduction]]. No physical measurement is involved and no claim about a physical top is made.",
         "deps": [
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-sine-and-cosine-addition-formulas",
           "def-cm-euler-angle-parametrization-and-heavy-top-system",
           "lem-cm-euler-angle-angular-velocity",
           "thm-cm-heavy-top-reduction",
@@ -1137,6 +1197,11 @@
           "def-interval"
         ],
         "dependency_roles": {
+          "def-pi-via-first-positive-cosine-zero": "mathematical-premise",
+          "thm-quarter-turn-values-and-shift-formulas": "mathematical-premise",
+          "cor-pi-is-the-first-positive-sine-zero": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
           "def-cm-euler-angle-parametrization-and-heavy-top-system": "mathematical-premise",
           "lem-cm-euler-angle-angular-velocity": "mathematical-premise",
           "thm-cm-heavy-top-reduction": "mathematical-premise",
@@ -1153,7 +1218,7 @@
         "dependency_level": 6,
         "provenance": {
           "statement": "ai-generated",
-          "proof": "ai-generated"
+          "proof": "ai-altered"
         },
         "sources": {
           "references": [

@@ -78,8 +78,9 @@ min-max bound. They verify the cited theorems at declared parameter points by
 exact rational and algebraic checks; they are not numerical approximations of
 generic transcendental roots, they contain no simulation presented as data,
 and they report no measured value, no uncertainty and no significance
-statement. The only numerical decimals displayed are brackets of exact
-rationals proven in the verifications.
+statement. The displayed decimals are rational bracket endpoints or exact
+terminating decimal expansions of rational values, including
+$201/125000=0.001608$; each is justified in the verifications.
 
 **Evidence status.** All three items are conditional computations in the
 declared line, well and box models of the pair's A page, under the same P1,

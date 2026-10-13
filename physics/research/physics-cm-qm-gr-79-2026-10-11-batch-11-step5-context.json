@@ -1,0 +1,505 @@
+{
+  "group": "o",
+  "batches": [
+    "11"
+  ],
+  "pages_read": [
+    "cm-math-evidence",
+    "cm-math-evidence-examples"
+  ],
+  "items_read": [
+    "def-cm-measurement-model",
+    "def-cm-calibration-rule",
+    "def-cm-iid-sampling-model",
+    "lem-cm-finite-iid-sample-mean-bound",
+    "def-cm-covariance-matrix-of-a-random-vector",
+    "lem-cm-linearized-propagation-of-covariance",
+    "lem-cm-uniform-second-order-remainder-bound",
+    "cor-cm-linearization-error-bounds",
+    "def-cm-statistical-test-and-size",
+    "def-cm-confidence-set-and-coverage",
+    "def-cm-likelihood-function",
+    "rem-cm-inference-and-uncertainty-scope",
+    "ex-cm-math-evidence-pendulum-propagation",
+    "ex-cm-math-evidence-exact-versus-linear-variance",
+    "ex-cm-math-evidence-chebyshev-sample-mean-check",
+    "ex-cm-math-evidence-remainder-bound-check",
+    "cex-cm-math-evidence-confidence-coverage-is-not-posterior",
+    "cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps"
+  ],
+  "conventions": [
+    {
+      "convention": "Measurement inputs take values in the open domain at every outcome, not merely almost surely. The model function is Borel measurable; mean-zero errors, moments, boundedness and error laws are additional hypotheses.",
+      "fixed_by": "def-cm-measurement-model",
+      "matters_for": [
+        "def-cm-calibration-rule",
+        "lem-cm-linearized-propagation-of-covariance",
+        "rem-cm-inference-and-uncertainty-scope"
+      ]
+    },
+    {
+      "convention": "Calibration uses fixed numerical parameter coordinates, nominal reference inputs and explicit reference deviations. The rule takes both observations and nominal reference inputs; measurability and accuracy are not assumed.",
+      "fixed_by": "def-cm-calibration-rule",
+      "matters_for": [
+        "def-cm18-calibration"
+      ]
+    },
+    {
+      "convention": "The sampling family is finite with n ≥ 1, indexed from zero in the definition. IID means mutual independence and identical laws; finite second moment is a separate adopted hypothesis. The finite lemma explicitly relabels the variables from one.",
+      "fixed_by": "def-cm-iid-sampling-model",
+      "matters_for": [
+        "lem-cm-finite-iid-sample-mean-bound",
+        "rem-cm-inference-and-uncertainty-scope",
+        "ex-cm-math-evidence-chebyshev-sample-mean-check",
+        "def-cm18-sampling-model",
+        "ex-cm18-uniform-motion-sampling-check"
+      ]
+    },
+    {
+      "convention": "Statistical vector and matrix labels start at one and denote the root library's entries at indices i−1 and j−1. Covariance uses centered products; coordinate independence is not required.",
+      "fixed_by": "def-cm-covariance-matrix-of-a-random-vector",
+      "matters_for": [
+        "lem-cm-linearized-propagation-of-covariance",
+        "cor-cm-linearization-error-bounds",
+        "ex-cm-math-evidence-pendulum-propagation",
+        "ex-cm-math-evidence-exact-versus-linear-variance",
+        "cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps"
+      ]
+    },
+    {
+      "convention": "The Hessian bound is a finite nonnegative bound on its Euclidean operator norm throughout an open convex domain; the remainder estimate holds for every pair of points in that domain.",
+      "fixed_by": "lem-cm-uniform-second-order-remainder-bound",
+      "matters_for": [
+        "cor-cm-linearization-error-bounds",
+        "ex-cm-math-evidence-pendulum-propagation",
+        "ex-cm-math-evidence-remainder-bound-check",
+        "ex-cm18-pendulum-calibration-proposal"
+      ]
+    },
+    {
+      "convention": "Second moments suffice for the remainder mean bound; fourth moments are required for the mean-square and covariance-error bounds. Propagated covariance is exact for the affine linearization.",
+      "fixed_by": "cor-cm-linearization-error-bounds",
+      "matters_for": [
+        "rem-cm-inference-and-uncertainty-scope",
+        "ex-cm-math-evidence-pendulum-propagation",
+        "ex-cm-math-evidence-exact-versus-linear-variance",
+        "cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps",
+        "ex-cm18-pendulum-calibration-proposal"
+      ]
+    },
+    {
+      "convention": "A test is a measurable rejection region in a specified probability family with a nonempty null parameter set. Its size is the supremum of null rejection probabilities; level means an upper bound on size.",
+      "fixed_by": "def-cm-statistical-test-and-size",
+      "matters_for": [
+        "rem-cm-inference-and-uncertainty-scope",
+        "rem-cm18-model-test",
+        "rem-cm18-primary-report-contract"
+      ]
+    },
+    {
+      "convention": "Confidence-set measurability is required separately for each fixed parameter. Coverage level 1−α means infimum coverage ≥ 1−α, and introduces no prior or posterior probability.",
+      "fixed_by": "def-cm-confidence-set-and-coverage",
+      "matters_for": [
+        "rem-cm-inference-and-uncertainty-scope",
+        "cex-cm-math-evidence-confidence-coverage-is-not-posterior",
+        "rem-cm18-model-test"
+      ]
+    },
+    {
+      "convention": "The dominating measure and pointwise density versions are specified model data. Likelihood can take values zero and positive infinity; no parameter-space measurability or prior is assumed.",
+      "fixed_by": "def-cm-likelihood-function",
+      "matters_for": [
+        "rem-cm-inference-and-uncertainty-scope",
+        "rem-cm18-model-test",
+        "rem-cm18-primary-report-contract"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "cor-cm-linearization-error-bounds",
+      "statement": "On an open convex U, for C² scalar h with Hessian operator norm ≤ B, an input X taking values in U with E[X] = μ ∈ U and finite centered second moment has integrable remainder R and |E[R]| ≤ E|R| ≤ (B/2)E|X−μ|². Finite centered fourth moment gives E[R²] ≤ (B²/4)E|X−μ|⁴. For a C² vector map with component Hessian bounds B_i and M₄ = E|X−μ|⁴ < ∞, f(X) is square-integrable and |Cov(f(X))_ij−S_ij| ≤ √(S_ii q_j)+√(S_jj q_i)+√(q_i q_j), where S = Df(μ)Cov(X)Df(μ)ᵀ and q_i = B_i²M₄/4.",
+      "used_by": [
+        "rem-cm-inference-and-uncertainty-scope",
+        "ex-cm-math-evidence-pendulum-propagation",
+        "ex-cm-math-evidence-exact-versus-linear-variance",
+        "cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps",
+        "ex-cm18-pendulum-calibration-proposal"
+      ]
+    },
+    {
+      "id": "def-cm-covariance-matrix-of-a-random-vector",
+      "statement": "For a square-integrable random vector X in R^m, μ = E[X] coordinatewise and Σ_ij = E[(X_i−μ_i)(X_j−μ_j)]. The covariance matrix is symmetric and positive semidefinite; zᵀΣz = 0 exactly when the corresponding linear combination of X is almost surely constant.",
+      "used_by": [
+        "lem-cm-linearized-propagation-of-covariance",
+        "cor-cm-linearization-error-bounds",
+        "ex-cm-math-evidence-pendulum-propagation",
+        "ex-cm-math-evidence-exact-versus-linear-variance",
+        "cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps",
+        "ex-cm18-frame-change-of-an-observation-model"
+      ]
+    },
+    {
+      "id": "lem-cm-linearized-propagation-of-covariance",
+      "statement": "Let U ⊆ R^m be open, μ ∈ U, and h:U→R^d be Borel measurable and totally differentiable at μ with A = Dh(μ). If X takes values in U, is square-integrable, has mean μ and covariance Σ, then T(X), for T(x) = h(μ)+A(x−μ), has mean h(μ) and covariance AΣAᵀ.",
+      "used_by": [
+        "cor-cm-linearization-error-bounds",
+        "rem-cm-inference-and-uncertainty-scope",
+        "ex-cm-math-evidence-pendulum-propagation",
+        "ex-cm-math-evidence-exact-versus-linear-variance",
+        "cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps",
+        "ex-cm18-pendulum-calibration-proposal",
+        "ex-cm18-frame-change-of-an-observation-model"
+      ]
+    },
+    {
+      "id": "lem-cm-uniform-second-order-remainder-bound",
+      "statement": "For m ≥ 1, open convex U ⊆ R^m, C² h:U→R, and finite B ≥ 0 satisfying ||H_h(x)|| ≤ B for every x ∈ U, all μ,y ∈ U satisfy |h(y)−h(μ)−∇h(μ)·(y−μ)| ≤ (B/2)|y−μ|².",
+      "used_by": [
+        "cor-cm-linearization-error-bounds",
+        "ex-cm-math-evidence-pendulum-propagation",
+        "ex-cm-math-evidence-remainder-bound-check",
+        "ex-cm18-pendulum-calibration-proposal"
+      ]
+    },
+    {
+      "id": "lem-cm-finite-iid-sample-mean-bound",
+      "statement": "For a finite repeated-observation model with n ≥ 1, IID square-integrable real variables of common mean μ and variance σ², and sample mean Ȳ, E[Ȳ] = μ, E|Ȳ−μ|² = σ²/n, and P(|Ȳ−μ| ≥ a) ≤ σ²/(na²) for a > 0. No infinite extension or convergence assertion is required.",
+      "used_by": [
+        "rem-cm-inference-and-uncertainty-scope",
+        "def-cm18-sampling-model",
+        "ex-cm18-uniform-motion-sampling-check"
+      ]
+    },
+    {
+      "id": "def-cm-confidence-set-and-coverage",
+      "statement": "A confidence set is C:S→2^Θ with {s:θ ∈ C(s)} measurable for every θ. Its coverage at θ is γ(θ) = P_θ(θ ∈ C), and it has coverage level 1−α when inf_θ γ(θ) ≥ 1−α, for α ∈ [0,1].",
+      "used_by": [
+        "rem-cm-inference-and-uncertainty-scope",
+        "cex-cm-math-evidence-confidence-coverage-is-not-posterior",
+        "rem-cm18-model-test",
+        "rem-cm18-primary-report-contract"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+      "used_for": "Finite sums of coordinate second moments and covariance-entry integrability.",
+      "opened": true
+    },
+    {
+      "id": "cor-chebyshev-inequality-for-random-variables",
+      "used_for": "Finite sample-mean probability bound and zero-variance characterization.",
+      "opened": true
+    },
+    {
+      "id": "cor-expectation-linearity-monotonicity-and-modulus-bound",
+      "used_for": "Mean calculations, integral domination and remainder bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-iid-finite-variance-weak-law",
+      "used_for": "The scope remark's separately qualified infinite-sequence convergence statement.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra",
+      "used_for": "Measurement-model and random-element target measurability.",
+      "opened": true
+    },
+    {
+      "id": "def-borel-sigma-algebra-on-the-extended-real-line",
+      "used_for": "The likelihood density's extended nonnegative target sigma-algebra.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-euclidean-maps-and-diffeomorphisms",
+      "used_for": "C² and smooth-map hypotheses in measurement and propagation items.",
+      "opened": true
+    },
+    {
+      "id": "def-complete-ordered-field",
+      "used_for": "Existence of real supremum and infimum probability indices.",
+      "opened": true
+    },
+    {
+      "id": "def-conditional-probability",
+      "used_for": "The finite prior-dependent posterior counterexample.",
+      "opened": true
+    },
+    {
+      "id": "def-convex-subset-of-euclidean-space",
+      "used_for": "Segment containment in Taylor bounds and example domains.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Vector norms, quadratic forms and fixed numerical coordinates.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-linear-map",
+      "used_for": "Linear action of a Hessian matrix in the remainder lemma.",
+      "opened": true
+    },
+    {
+      "id": "def-expectation-on-a-finite-probability-space",
+      "used_for": "All finite weighted-sum computations on the examples page.",
+      "opened": true
+    },
+    {
+      "id": "def-extended-reals",
+      "used_for": "Zero and infinite likelihood values and their codomain.",
+      "opened": true
+    },
+    {
+      "id": "def-finite-probability-space-and-event",
+      "used_for": "Finite weighted witnesses and their events.",
+      "opened": true
+    },
+    {
+      "id": "def-hessian-and-euclidean-critical-point",
+      "used_for": "Second-derivative matrix conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-identically-distributed-and-iid-random-variables",
+      "used_for": "Mutual independence and equality-of-laws convention.",
+      "opened": true
+    },
+    {
+      "id": "def-independence-of-finite-random-variables",
+      "used_for": "The two-Rademacher enumeration's independence check.",
+      "opened": true
+    },
+    {
+      "id": "def-infimum",
+      "used_for": "Confidence coverage's real infimum.",
+      "opened": true
+    },
+    {
+      "id": "def-integrable-real-and-complex-functions-and-their-integrals",
+      "used_for": "Integrability of dominated Taylor remainders.",
+      "opened": true
+    },
+    {
+      "id": "def-jacobian-matrix-and-gradient",
+      "used_for": "Sensitivity coefficients and zero-based derivative coordinates.",
+      "opened": true
+    },
+    {
+      "id": "def-matrix-space",
+      "used_for": "Matrix shapes and translation to one-based statistical labels.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-function-between-measurable-spaces",
+      "used_for": "Composition and density measurability.",
+      "opened": true
+    },
+    {
+      "id": "def-measurable-space",
+      "used_for": "Test, confidence and likelihood data spaces.",
+      "opened": true
+    },
+    {
+      "id": "def-measure",
+      "used_for": "Dominating measures and the finite-support probability family.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-null-set-and-almost-everywhere",
+      "used_for": "Almost-sure constancy in covariance definiteness.",
+      "opened": true
+    },
+    {
+      "id": "def-measure-with-density",
+      "used_for": "Probability-family construction from normalized likelihood densities.",
+      "opened": true
+    },
+    {
+      "id": "def-moments-variance-and-covariance",
+      "used_for": "Moment assumptions and centered variance/covariance definitions.",
+      "opened": true
+    },
+    {
+      "id": "def-multivariable-taylor-polynomial",
+      "used_for": "Identification of the first-order Taylor polynomial.",
+      "opened": true
+    },
+    {
+      "id": "def-nonnegative-lebesgue-integral",
+      "used_for": "Normalization of likelihood densities.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm-on-a-finite-dimensional-inner-product-space",
+      "used_for": "Uniform Hessian norm bounds and scalar example norms.",
+      "opened": true
+    },
+    {
+      "id": "def-probability-measure",
+      "used_for": "Common probability spaces and parameter-indexed probability families.",
+      "opened": true
+    },
+    {
+      "id": "def-random-element-and-real-random-variable",
+      "used_for": "Measurable input, error and observation maps.",
+      "opened": true
+    },
+    {
+      "id": "def-sigma-algebra",
+      "used_for": "Measurable rejection and coverage events.",
+      "opened": true
+    },
+    {
+      "id": "def-total-derivative-in-euclidean-space",
+      "used_for": "Affine linearization and derivative hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "def-uniform-finite-probability-space",
+      "used_for": "Four equally weighted Rademacher outcomes.",
+      "opened": true
+    },
+    {
+      "id": "lem-derivative-of-a-power",
+      "used_for": "Quadratic, cubic and inverse-square derivative computations.",
+      "opened": true
+    },
+    {
+      "id": "lem-sup-unique",
+      "used_for": "Uniqueness of the coverage infimum.",
+      "opened": true
+    },
+    {
+      "id": "lem-variance-and-covariance-identities-for-random-variables",
+      "used_for": "Finite covariance bilinearity and moment-based variance computations.",
+      "opened": true
+    },
+    {
+      "id": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+      "used_for": "Measurability of affine coordinates and remainders.",
+      "opened": true
+    },
+    {
+      "id": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+      "used_for": "Moment domination, including zero Hessian bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Pendulum-map product and inverse-power differentiation.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Euclidean row estimates and quadratic-form bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-clairaut-schwarz-mixed-partials",
+      "used_for": "Identification of the Taylor remainder with the symmetric Hessian form.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-partial-derivatives-imply-total-differentiability",
+      "used_for": "Total differentiability of the formal pendulum map.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-preimages-of-borel-sets-are-borel",
+      "used_for": "Measurability of continuous readout and error transformations.",
+      "opened": true
+    },
+    {
+      "id": "thm-coordinatewise-measurability-into-r-n",
+      "used_for": "Measurability of vector linearizations and nonlinear outputs.",
+      "opened": true
+    },
+    {
+      "id": "thm-factorization-of-expectations-for-independent-variables",
+      "used_for": "Vanishing off-diagonal covariance in the finite IID lemma.",
+      "opened": true
+    },
+    {
+      "id": "thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces",
+      "used_for": "Compatibility of finite weighted witnesses with probability measures.",
+      "opened": true
+    },
+    {
+      "id": "thm-infimum-property",
+      "used_for": "Existence of confidence coverage's infimum.",
+      "opened": true
+    },
+    {
+      "id": "thm-matrix-multiplication-laws",
+      "used_for": "Coordinate expansion of AΣAᵀ.",
+      "opened": true
+    },
+    {
+      "id": "thm-multivariable-taylor-formula-with-lagrange-remainder",
+      "used_for": "Second-order pointwise remainder formula on an open convex domain.",
+      "opened": true
+    },
+    {
+      "id": "thm-operator-norm-is-the-largest-singular-value",
+      "used_for": "Existence and attainment of the Hessian operator-norm maximum.",
+      "opened": true
+    },
+    {
+      "id": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+      "used_for": "Almost-sure constant linear combinations have zero variance.",
+      "opened": true
+    },
+    {
+      "id": "thm-singular-value-decomposition",
+      "used_for": "Checking the cited operator-norm supplier's basis dimensions and zero-rank boundary.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-cm-likelihood-function",
+      "concern": "The Definition introduces log-likelihood using 'Here log is the real logarithm on (0,+∞)' but gives neither its mathematical construction nor an exact supplier, and its deps contain no logarithm item. The published root item def-natural-logarithm, which I opened, defines log as the inverse of the exponential bijection and would supply the missing meaning. The extended zero/infinity branches themselves are explicit and sound.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "rem-cm-inference-and-uncertainty-scope",
+      "concern": "The inference section says 'The level of a confidence set is' inf_θ P_θ(θ ∈ C). The cited definition instead says C has coverage level 1−α whenever that infimum is at least 1−α. Thus the displayed infimum is the maximal guaranteed level, not every level the definition permits. Similar wording occurs in the definition's explanatory paragraph and the A-page summary. Preserve the supplier's inequality convention in these restatements.",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [
+    {
+      "item": "thm-operator-norm-is-the-largest-singular-value",
+      "finding": "Proof step 1.1 extends σ_j through n = dim(V), then states 'Te_j=σ_j f_j for every j' and sums through n. The opened SVD supplier supplies only m = dim(W) vectors f_j. For dim(V) > dim(W), f_j is undefined for j > m; for W = 0 and V ≠ 0, step 2.1 also uses the nonexistent f_1. The norm theorem is true, but this proof needs to retain the sum over positive singular values and handle the zero map without nonexistent codomain vectors.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "item": "def-cm18-sampling-model",
+      "finding": "The conventions state 'Independence of the errors fails when successive repetitions share a systematic effect' and 'identical distribution fails when the preparation or the conditions change between repetitions.' These are categorical claims without sufficient hypotheses. Independent errors ε_k = c+Z_k, with a fixed shared systematic offset c and IID Z_k, remain independent. Changed conditions can likewise leave the error laws unchanged. These mechanisms can invalidate IID, but do not necessarily do so.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "item": "rem-cm18-model-test",
+      "finding": "The text says 'The level of a confidence set is a pre-data infimum of coverage probabilities' while citing def-cm-confidence-set-and-coverage. That supplier defines having level 1−α by infimum coverage ≥ 1−α. The infimum is the maximal guaranteed coverage level; the cited definition also permits smaller levels.",
+      "severity": "presentation"
+    }
+  ],
+  "seams_checked": [
+    {
+      "from": "cm18-measurement-uncertainty-and-later-bridges",
+      "to": "cm-math-evidence",
+      "faithful": false,
+      "note": "Checked the page and its measurement, calibration, sampling, testing, primary-report and quantum-bridge consumers against the mathematical suppliers. Measurement and calibration structures, finite IID bounds, fixed density versions and empirical qualifications are preserved. The testing remark restates coverage level as equality with the infimum rather than the supplier's lower-bound convention; see alert. The sampling definition also contains an independently overstrong explanation of mechanisms that invalidate IID."
+    },
+    {
+      "from": "cm18-measurement-uncertainty-and-later-bridges-examples",
+      "to": "cm-math-evidence",
+      "faithful": true,
+      "note": "Checked the pendulum, uniform-motion and frame-change consumers. The pendulum calculation supplies a bounded convex box and fourth moment, distinguishes exact affine covariance from nonlinear variance, and keeps finite-amplitude and calibration discrepancies unquantified. Uniform-motion sampling retains finite IID, second-moment and additional zero-mean hypotheses. Rotation covariance is an exact affine application. The examples and page assert no reported measurements."
+    }
+  ]
+}

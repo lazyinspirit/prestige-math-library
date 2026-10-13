@@ -7,14 +7,14 @@ origin: session
 domain: mathematics
 dependency_level: 0
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [thm-divergence-theorem-for-bounded-piecewise-c-one-domains, thm-gronwall-integral-inequality, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, def-ck-and-multi-index-notation-in-several-variables, def-metric-space]
+deps: [def-countable-choice, thm-divergence-theorem-for-bounded-piecewise-c-one-domains, thm-gronwall-integral-inequality, def-ck-and-multi-index-notation-in-several-variables, def-metric-space]
 dependency_roles:
+  def-countable-choice: mathematical-premise
   thm-divergence-theorem-for-bounded-piecewise-c-one-domains: mathematical-premise
   thm-gronwall-integral-inequality: mathematical-premise
-  thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions: mathematical-premise
   def-ck-and-multi-index-notation-in-several-variables: mathematical-premise
   def-metric-space: mathematical-premise
 sources:
@@ -24,10 +24,12 @@ sources:
     - title: "H. Friedrich and A. D. Rendall, The Cauchy Problem for the Einstein Equations, Living Reviews in Relativity 3 (2000), article 1 (arXiv:gr-qc/0002074), Section 3.2 (Symmetric Hyperbolic Systems on Manifolds): the invariant principal-symbol definition of a symmetric hyperbolic system on a manifold, with Section 3.1's torus theory supplying the local model"
       url: "https://arxiv.org/pdf/gr-qc/0002074"
 verification:
-  precheck: pending
+  precheck: pass
 ---
 
 ## Statement
+
+Assume Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]), carrying the hypotheses of the analytic suppliers used below.
 
 Let $T>0$, let $A^\mu:(-T,T)\times\mathbb R^3\to\operatorname{Sym}_m(\mathbb R)$
 ($\mu=0,1,2,3$) be smooth with $A^0(t,x)\ge aI$ for some constant $a>0$ and all
@@ -51,11 +53,11 @@ $w_1(0,x)=w_2(0,x)$ for $|x-x_0|\le\lambda t_0$, then $w_1=w_2$ on $D$.
 
 ## Facts & Assumptions
 
-**Given:** The coefficients, their stated bounds and the $C^1$ solutions, and the point and time determining the compact cone $D$.
+**Given:** Countable Choice and The coefficients, their stated bounds and the $C^1$ solutions, and the point and time determining the compact cone $D$.
 
 [L2] The divergence theorem applies on bounded piecewise $C^1$ domains ([[thm-divergence-theorem-for-bounded-piecewise-c-one-domains]]).
 
-[L3] Continuous nonnegative $E$ satisfying $E(t)\le c\int_0^tE(s)\,ds$ vanishes by Gronwall ([[thm-gronwall-integral-inequality]], [[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]]).
+[L3] Continuous nonnegative $E$ satisfying $E(t)\le c\int_0^tE(s)\,ds$ vanishes by Gronwall ([[thm-gronwall-integral-inequality]]).
 
 ## Proof
 

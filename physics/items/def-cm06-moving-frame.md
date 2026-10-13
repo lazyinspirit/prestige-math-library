@@ -22,7 +22,7 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "Definition of the moving spatial charts of the Newtonian model: a translating and rotating coordinate description attached to a fixed inertial frame, its reference curve and rotation, the coordinate curves, velocities and accelerations read in it, the angular velocity of the chart in a stated convention, and the four inertial terms. The moving chart is a coordinate description, not an inertial frame, an adapted chart of the adopted class or an observer congruence; the item asserts no force law, no equation of motion and no measured value."
+physical_scope: "Definition of the moving spatial charts of the Newtonian model: a translating and rotating coordinate description attached to a fixed inertial frame, its reference curve and rotation, the coordinate curves, velocities and accelerations read in it, the angular velocity of the chart in a stated convention, and the four inertial terms. In general the moving chart is not an inertial frame; when its rotation is constant and its reference curve is affine, its restriction is an adapted chart of another inertial frame. A chart is not an observer congruence. The item asserts no force law, no equation of motion and no measured value."
 sources:
   references:
     - title: "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Sections 6.1-6.2, printed pages 93-95 (PDF pages 99-101): rotating frames, the angular velocity of the rotating axes, Eq. (6.4) for the acceleration transfer, and the Coriolis, centrifugal and Euler terms of Eq. (6.5)"
@@ -31,7 +31,7 @@ sources:
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.1.1, printed pages 47-49 (PDF pages 53-55): moving orthonormal bases, the antisymmetric matrix R^T Rdot and the angular velocity vector in the body convention"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 2.2, printed pages 33-36 (PDF pages 36-39): a reference frame as an adapted coordinate map (t,x) -> (t, o(t)+R(t)x) with an origin trajectory and an oriented orthonormal spatial basis map, distinct from an observer congruence"
+    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 2.2, printed pages 33-35 (PDF pages 36-38), Eqs. (2.19)-(2.24): fixed and rotating spatial bases, angular velocity, and the rotating-coordinate acceleration terms; the affine spacetime chart and translating origin used here are specified by the local definitions and mathematical suppliers"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
 verification:
   precheck: pass
@@ -51,7 +51,10 @@ the matrix $R(t)$ being identified with its nine entries, such that all
 components of $c$ and all entries of $R$ have continuous second derivatives on
 $I$ ([[def-ck-euclidean-maps-and-diffeomorphisms]],
 [[def-vector-valued-derivative-and-integral]]); we then say that $c$ and $R$
-are of class $C^{2}$. The map
+are of class $C^{2}$. The components $c_j(t)$ are spatial coordinates, with
+$[c_j]=\ell$, and the entries of $R(t)$ are dimensionless, with
+$[R_{ij}]=1$; the moving coordinates $y_j$ also have dimension $\ell$
+([[def-cm01-units]]). The map
 $$\Phi:I\times\mathbb R^{3}\longrightarrow I\times\mathbb R^{3},\qquad \Phi(t,y):=\bigl(t,\,R(t)y+c(t)\bigr),$$
 is the **coordinate change of the chart**: for $t\in I$ it identifies the
 triple $y\in\mathbb R^{3}$ with the point of the inertial chart whose
@@ -70,10 +73,12 @@ its **coordinate velocity** and **coordinate acceleration in the moving
 chart** are the componentwise derivatives $\dot y:=y'$ and $\ddot y:=y''$
 ([[def-vector-valued-derivative-and-integral]]), of dimensions
 $\ell\tau^{-1}$ and $\ell\tau^{-2}$. These are chart-local notions: because
-the moving chart is not an inertial frame of the model (clause (f)), they are
-not the coordinate velocity and acceleration of an inertial frame, and their
-relation to the inertial-frame notions is a theorem with hypotheses, not an
-identification.
+the chart is generally time-dependent, these need not be the coordinate
+velocity and acceleration of an inertial frame. If $R$ is constant and $c$ is
+affine on $I$, they agree on $I$ with the corresponding quantities in the
+inertial frame whose adapted chart restricts to this chart. Their relation to
+the fixed frame $F$ is the kinematic identity of the cited mathematical
+supplier, not an identification with the quantities read in $F$.
 
 **(c) Angular velocity of the chart.** Put $\Omega(t):=R(t)^{\mathsf T}R'(t)$.
 By [[lem-cm-moving-frame-acceleration-identity]] clause 1, $\Omega(t)$ is
@@ -106,20 +111,25 @@ $-R^{\mathsf T}c''$. The names are conventions attached to the displayed
 terms; the definition attaches no force to them, and clause (f) records their
 kinematic status.
 
-**(e) Curves at rest in the chart.** For fixed $y_{0}\in\mathbb R^{3}$ the
-curve $t\mapsto R(t)y_{0}+c(t)$ in the inertial chart is the path of a point
-**at rest in the chart**; it is of class $C^{2}$ because $R$ and $c$ are, and
-it satisfies the parameter condition of [[post-cm01-worldlines]]; whether it
-is the worldline of a particle label is a separate declaration of a model and
-is not made here.
+**(e) Curves at rest in the chart.** For fixed $y_{0}\in\mathbb R^{3}$ let
+$x_{y_{0}}(s):=R(s)y_{0}+c(s)$ be the spatial coordinate curve in the inertial
+chart. Its spacetime lift is the curve $\gamma_{y_{0}}:I\to A$ defined by
+$$\gamma_{y_{0}}(s):=o+su+\sum_{j=1}^{3}\bigl(x_{y_{0}}(s)\bigr)_{j}e_{j}.$$
+It is $C^{2}$ and satisfies $t(\gamma_{y_{0}}(s))=s$, so it has the
+parameter condition of [[post-cm01-worldlines]]. This lifted curve is the path
+of a point **at rest in the chart**; whether it is assigned as the worldline of
+a particle label is a separate declaration of a model and is not made here.
 
 **(f) Status.** A moving chart is a time-dependent coordinate description
-attached to one inertial frame; it is **not** an inertial frame of the model
-in the sense of [[post-cm01-frames]] — that notion requires a fixed spatial
-basis and an affine reference curve, and the theorem of this page records
-that the inertial terms of clause (d) vanish identically exactly in that case.
-It is also not an observer congruence: a congruence is a family of curves of
-the spacetime data, whereas a chart is a coordinate map. The identity
+attached to one inertial frame. In general it is not an inertial frame of the
+model: [[post-cm01-frames]] defines inertial charts using a fixed spatial basis
+and an affine reference curve. When $R$ is constant and $c$ is affine on $I$,
+the coordinate change has the form of an allowed Galilean frame change and is
+the restriction to $I$ of an adapted chart. The inertial-forces theorem of
+this page proves that these are exactly the data for which the inertial terms
+of clause (d) vanish identically. A moving chart is not an observer
+congruence: a congruence is a family of curves of the spacetime data, whereas
+a chart is a coordinate map. The identity
 relating the inertial-chart acceleration to the moving-chart acceleration of
 the same curve is the mathematical lemma cited in clause (c); the equation of
 motion of a force model in the moving chart, with the inertial terms entering
@@ -139,10 +149,9 @@ measured value.
 - **Time coordinate unchanged.** The chart changes spatial coordinates only:
   the time coordinate of the chart is the inertial frame's time coordinate
   $t$, and no time shift, time dilation or reparametrization is introduced.
-  The charts of this item are therefore the subclass of Galilean frame
-  changes with vanishing time shift, extended by allowing the spatial
-  rotation and origin to depend on time; the extension is precisely what
-  makes the inertial terms nonzero.
+  The charts of this item use the same time coordinate as $F$. Constant
+  rotation and an affine origin give a Galilean inertial chart; more general
+  time dependence of the rotation or origin produces nonzero inertial terms.
 
 - **Accelerated reference curves.** The translational term involves
   $c''$, the inertial-chart acceleration of the chart's reference point; a

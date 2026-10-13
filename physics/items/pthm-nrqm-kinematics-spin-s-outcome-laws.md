@@ -128,14 +128,15 @@ is asserted, no dynamics is used or claimed, and the identification of the
 operators with concrete laboratory apparatus is a tested identification under
 the preparation and apparatus postulate, not a consequence of this theorem;
 no empirical result is recorded. Exact values have probability zero although
-both spectra equal $\mathbb R$, so an exact value is an idealization outside
-the sharp finite-resolution reading.
+both spectra equal $\mathbb R$. The real outcome spaces remain $\mathbb R$;
+zero singleton mass means atomlessness and supplies no normalizable exact-value
+eigenstate. Finite-resolution records use the displayed Borel bin probabilities.
 
 ## Facts & Assumptions
 
 **Given:** The postulates P2, P5, P6 read through [[def-nrqm-kinematics-framework-massive-spin-s-model]]; the Axiom of Countable Choice and the Axiom of Choice; the state space $H_{s}$ with $r=2s+1$; the operators $Q_{j},P_{k}$ and the unitaries $\Psi_{0},U^{(s)}$; a unit vector $\psi\in H_{s}$; Borel sets $B,B_{1},B_{2},B_{3}\subseteq\mathbb R$; a Borel set $B'\subseteq\mathbb R^{3}$; a unitary matrix $V\in U(r)$; a real $\lambda$.
 
-[F1] **Outcome law.** For an assigned sharp observable $A$ with spectral PVM $E_{A}$ the law in a unit vector is $\mu^{A}_{\psi}(B)=\|E_{A}(B)\psi\|^{2}$, a probability measure on the Borel sets; the spectral support of $E_{A}$ is the spectrum $\sigma(A)$, and $\mu^{A}_{\psi}(\{\lambda\})=0$ unless $\lambda$ is an eigenvalue of $A$ ([[def-nrqm-observables-framework-observable-and-outcome-law]] clauses (b)-(d)). Exact values of a quantity with no eigenvalues are idealizations outside the sharp assignment (clause (c) of the same definition, [[def-projection-valued-measure]]).
+[F1] **Outcome law.** For an assigned sharp observable $A$ with spectral PVM $E_{A}$ the law in a unit vector is $\mu^{A}_{\psi}(B)=\|E_{A}(B)\psi\|^{2}$, a probability measure on the Borel sets; the spectral support of $E_{A}$ is the spectrum $\sigma(A)$, and $\mu^{A}_{\psi}(\{\lambda\})=0$ unless $\lambda$ is an eigenvalue of $A$ ([[def-nrqm-observables-framework-observable-and-outcome-law]] clauses (b)-(d)). If $A$ has no eigenvalues its laws are atomless, with real outcome space $\mathbb R$ and no normalizable exact-value eigenstate; zero singleton mass does not exclude real point realizations (clause (c) of the same definition, [[def-projection-valued-measure]]).
 
 [F2] **Componentwise operators and their spectral measures.** $Q_{j}$ and $P_{k}$ are the componentwise operators of the model, self-adjoint with their maximal domains; $E_{Q_{j}}(B)=M_{\mathbf 1_{x_{j}^{-1}(B)}}$ and $E_{P_{k}}(B)=\mathcal F_{2}^{(r)*}M_{\mathbf 1_{\{2\pi\hbar\xi_{k}\in B\}}}\mathcal F_{2}^{(r)}$ are their spectral PVMs ([[lem-nrqm-kinematics-ccr-and-internal-factor-commutation]] clauses (b),(c), [[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (a)); the matrix action $V_{\times}$ commutes with these PVMs and is unitary for unitary $V$ ([[lem-nrqm-kinematics-ccr-and-internal-factor-commutation]] clauses (b)-(d)).
 

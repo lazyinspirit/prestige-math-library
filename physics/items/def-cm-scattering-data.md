@@ -15,6 +15,10 @@ deps:
     def-integral-over-a-measurable-set,
     def-borel-and-lebesgue-measurable-function-on-rn,
     thm-indefinite-integral-of-a-nonnegative-function-is-a-measure,
+    thm-sine-and-cosine-derivatives,
+    thm-sine-cosine-signs-monotonicity-and-ranges,
+    thm-sine-cosine-zero-sets-and-fundamental-period,
+    thm-continuous-preimages-of-borel-sets-are-borel,
     def-sine-and-cosine-by-power-series,
     thm-derivative-of-an-inverse,
     def-derivative,
@@ -29,6 +33,10 @@ dependency_roles:
   def-integral-over-a-measurable-set: mathematical-premise
   def-borel-and-lebesgue-measurable-function-on-rn: mathematical-premise
   thm-indefinite-integral-of-a-nonnegative-function-is-a-measure: mathematical-premise
+  thm-sine-and-cosine-derivatives: mathematical-premise
+  thm-sine-cosine-signs-monotonicity-and-ranges: mathematical-premise
+  thm-sine-cosine-zero-sets-and-fundamental-period: mathematical-premise
+  thm-continuous-preimages-of-borel-sets-are-borel: mathematical-premise
   def-sine-and-cosine-by-power-series: mathematical-premise
   thm-derivative-of-an-inverse: mathematical-premise
   def-derivative: mathematical-premise
@@ -81,7 +89,16 @@ $(0,\pi)\times(0,2\pi)$ with density $\sin$ against $\lambda_2$,
 
 $$\Omega(B):=\int_B\sin\theta\,d\lambda_2(\theta,\varphi)\qquad(B\subseteq(0,\pi)\times(0,2\pi)\ \text{Borel}),$$
 
-where $\sin$ is the function of [[def-sine-and-cosine-by-power-series]]. This
+where $\sin$ is the function of [[def-sine-and-cosine-by-power-series]].
+It is continuous, being differentiable by [[thm-sine-and-cosine-derivatives]].
+Also $\sin0=\sin\pi=0$ by [[thm-sine-cosine-zero-sets-and-fundamental-period]];
+strict increase on $[0,\pi/2]$ and strict decrease on $[\pi/2,\pi]$
+([[thm-sine-cosine-signs-monotonicity-and-ranges]]) give $\sin\theta>0$ for
+$0<\theta<\pi$. Thus $(\theta,\varphi)\mapsto\sin\theta$ is a nonnegative
+Borel function (continuous preimages of Borel sets are Borel,
+[[thm-continuous-preimages-of-borel-sets-are-borel]]), and
+[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]
+establishes that $\Omega$ is a measure. This
 is the standard solid-angle element written $\sin\theta\,d\theta\,d\varphi$
 (the surface measure of the unit sphere in spherical coordinates, restricted
 to the open chart).

@@ -54,14 +54,16 @@ Adopt the equilateral-triangle rigid-material model of
 $m_0>0$ at $x_k=a(\cos\frac{2\pi k}{3},\sin\frac{2\pi k}{3},0)$, $k=0,1,2$, with
 total mass $m=3m_0$, body inertia matrix
 $I=\mathrm{diag}(\frac{3m_0a^{2}}{2},\frac{3m_0a^{2}}{2},3m_0a^{2})$ and
-reference coordinates centred at the origin. Then:
+reference coordinates centred at the origin. The kilogram/metre input
+conventions and kilogram metres squared inertia units are inherited from the
+companion example. Then:
 
-1. for every motion of the model and every spatial point $p$, the inertia
+1. for every motion of the model, every $t\in I_0$ and every spatial point $p$, the inertia
    tensor of the model about $p$ satisfies the **spatial parallel-axis form**
    $$I(t,p)=I(t)+m\Bigl(\lVert p-c(t)\rVert_2^{2}I_3-(p-c(t))(p-c(t))^{\mathsf T}\Bigr);$$
-2. in the reference placement $(c,R)=(0,I_3)$, the inertia tensor about the
-   vertex $p=ae_1$ is
-   $$I(0,ae_1)=\mathrm{diag}\Bigl(\frac{3m_0a^{2}}{2},\ \frac{9m_0a^{2}}{2},\ 6m_0a^{2}\Bigr);$$
+2. at any reference-placement time $t_*\in I_0$ satisfying
+   $(c(t_*),R(t_*))=(0,I_3)$, the inertia tensor about the vertex $p=ae_1$ is
+   $$I(t_*,ae_1)=\mathrm{diag}\Bigl(\frac{3m_0a^{2}}{2},\ \frac{9m_0a^{2}}{2},\ 6m_0a^{2}\Bigr);$$
 3. the same matrix is obtained by the direct finite sum over the three
    material points, confirming the identity of clause 1 on this data;
 4. the moment of inertia about the axis through the vertex $ae_1$ in
@@ -70,7 +72,7 @@ reference coordinates centred at the origin. Then:
    with the axis-shift form of the theorem.
 
 ## Facts & Assumptions
-**Given:** The model of [[ex-cm10-equilateral-triangle-rotational-inertia]], its reference mass distribution $\nu$, its total mass $m=3m_0$, its body inertia matrix $I$, a motion $x(t,\rho)=c(t)+R(t)\rho$ of the model, a spatial point $p$, and the notation of [[def-cm10-inertia-tensor]] and [[def-cm-inertia-tensor-about-a-point]].
+**Given:** The model of [[ex-cm10-equilateral-triangle-rotational-inertia]], its reference mass distribution $\nu$, its total mass $m=3m_0$, its body inertia matrix $I$, a motion $x(t,\rho)=c(t)+R(t)\rho$ of the model, a spatial point $p$, and the notation of [[def-cm10-inertia-tensor]] and [[def-cm-inertia-tensor-about-a-point]]. For clauses 2-4, assume a time $t_*\in I_0$ with $c(t_*)=0$, $R(t_*)=I_3$. Such motions exist on every allowed time window (take the constant reference placement); an arbitrary motion need not attain it, and $0$ need not lie in $I_0$.
 
 [L1] The companion-model data ([[ex-cm10-equilateral-triangle-rotational-inertia]]): $\nu=m_0\sum_k\delta_{x_k}$ is a centred mass distribution of total mass $m=3m_0$, its body inertia matrix is $I=\mathrm{diag}(\frac{3m_0a^{2}}{2},\frac{3m_0a^{2}}{2},3m_0a^{2})$ and the finite-atomic formula $\int f\,d\nu=m_0\sum_kf(x_k)$ holds for $\nu$-integrable $f$.
 
@@ -90,9 +92,9 @@ reference coordinates centred at the origin. Then:
 
 2.1 Constructor notation is consistent: $I(t,c(t))=I(t)$, because $a(t,c(t))=0$ and $I_\nu(0)=I$ by [L2] with $a=0$; this is the statement of [[def-cm10-inertia-tensor]] clause (c) that the tensor about the centre of mass is the spatial tensor. [step 1.1, L2, L3, algebra]
 
-2.2 Vertex evaluation from the supplier: take the reference placement $c=0$, $R=I_3$, so $I(0)=I$ and $a(0,ae_1)=ae_1$ by [L3]; then step 1.1 gives $$I(0,ae_1)=I+m\bigl(a^{2}I_3-a^{2}e_1e_1^{\mathsf T}\bigr)=I+3m_0a^{2}\bigl(I_3-e_1e_1^{\mathsf T}\bigr),$$ and adding the diagonal contributions gives $\mathrm{diag}(\frac{3m_0a^{2}}{2}+0,\frac{3m_0a^{2}}{2}+\frac{6m_0a^{2}}{2},3m_0a^{2}+3m_0a^{2})$, which is the matrix of clause 2. [step 1.1, L1, L2, L3, algebra]
+2.2 Vertex evaluation from the supplier: evaluate at the assumed reference-placement time $t_*$, where $c(t_*)=0$, $R(t_*)=I_3$, so $I(t_*)=I$ and $a(t_*,ae_1)=ae_1$ by [L3]; then step 1.1 gives $$I(t_*,ae_1)=I+m\bigl(a^{2}I_3-a^{2}e_1e_1^{\mathsf T}\bigr)=I+3m_0a^{2}\bigl(I_3-e_1e_1^{\mathsf T}\bigr),$$ and adding the diagonal contributions gives $\mathrm{diag}(\frac{3m_0a^{2}}{2}+0,\frac{3m_0a^{2}}{2}+\frac{6m_0a^{2}}{2},3m_0a^{2}+3m_0a^{2})$, which is the matrix of clause 2. [step 1.1, L1, L2, L3, algebra]
 
-3.1 Direct finite-sum check: by the definition of the shifted tensor [L2] and the finite-atomic formula [L1], $$I(0,ae_1)=\int\bigl(\lVert\rho-ae_1\rVert_2^{2}I_3-(\rho-ae_1)(\rho-ae_1)^{\mathsf T}\bigr)d\nu(\rho)=m_0\sum_k\bigl(\lVert x_k-ae_1\rVert_2^{2}I_3-(x_k-ae_1)(x_k-ae_1)^{\mathsf T}\bigr).$$ The contribution of $k=0$ vanishes because $x_0=ae_1$. For $k=1,2$, the displacement vectors are $d_k:=x_k-ae_1=(-\frac{3a}{2},\pm\frac{\sqrt3a}{2},0)$ with $\lVert d_k\rVert_2^{2}=3a^{2}$, and $d_1d_1^{\mathsf T}+d_2d_2^{\mathsf T}=\mathrm{diag}(\frac{9a^{2}}{2},\frac{3a^{2}}{2},0)$ because the off-diagonal products cancel by [L5]. Hence $I(0,ae_1)=m_0\bigl(2\cdot3a^{2}I_3-\mathrm{diag}(\frac{9a^{2}}{2},\frac{3a^{2}}{2},0)\bigr)=\mathrm{diag}(\frac{3m_0a^{2}}{2},\frac{9m_0a^{2}}{2},6m_0a^{2})$, in agreement with step 2.2. This is clause 3. [step 2.2, L1, L5, algebra]
+3.1 Direct finite-sum check: by the definition of the shifted tensor [L2] and the finite-atomic formula [L1], $$I(t_*,ae_1)=\int\bigl(\lVert\rho-ae_1\rVert_2^{2}I_3-(\rho-ae_1)(\rho-ae_1)^{\mathsf T}\bigr)d\nu(\rho)=m_0\sum_k\bigl(\lVert x_k-ae_1\rVert_2^{2}I_3-(x_k-ae_1)(x_k-ae_1)^{\mathsf T}\bigr).$$ The contribution of $k=0$ vanishes because $x_0=ae_1$. For $k=1,2$, the displacement vectors are $d_k:=x_k-ae_1=(-\frac{3a}{2},\pm\frac{\sqrt3a}{2},0)$ with $\lVert d_k\rVert_2^{2}=3a^{2}$, and $d_1d_1^{\mathsf T}+d_2d_2^{\mathsf T}=\mathrm{diag}(\frac{9a^{2}}{2},\frac{3a^{2}}{2},0)$ because the off-diagonal products cancel by [L5]. Hence $I(t_*,ae_1)=m_0\bigl(2\cdot3a^{2}I_3-\mathrm{diag}(\frac{9a^{2}}{2},\frac{3a^{2}}{2},0)\bigr)=\mathrm{diag}(\frac{3m_0a^{2}}{2},\frac{9m_0a^{2}}{2},6m_0a^{2})$, in agreement with step 2.2. This is clause 3. [step 2.2, L1, L5, algebra]
 
 4.1 Axis moments: by clause (c) of [[pthm-cm10-principal-axes]] the moment about a spatial axis through $p$ with unit direction $n$ is $n^{\mathsf T}I(t,p)n$; for the axis through the vertex $ae_1$ in direction $e_3$ this is the $(3,3)$ entry of the matrix of clause 2, namely $6m_0a^{2}$; for the parallel axis through the centre of mass the moment is $e_3^{\mathsf T}Ie_3=3m_0a^{2}$ by the companion example [L1]. Directly, the squared distance of the three material points from the vertex axis is $0,3a^{2},3a^{2}$ (using [L5] for the coordinates of $d_1,d_2$), giving $2m_0\cdot3a^{2}=6m_0a^{2}$. The difference $6m_0a^{2}-3m_0a^{2}=3m_0a^{2}=ma^{2}$ is the product of the total mass and the squared distance between the parallel axes, as the axis-shift form of [L2] predicts. This is clause 4. [step 2.2, step 3.1, L1, L2, L5, algebra]
 

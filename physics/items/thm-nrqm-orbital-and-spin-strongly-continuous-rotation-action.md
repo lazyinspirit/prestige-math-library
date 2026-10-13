@@ -6,7 +6,7 @@ domain: mathematics
 title: "Strongly continuous rotation action"
 status: draft
 origin: pipeline
-dependency_level: 7
+dependency_level: 6
 deps: [thm-nrqm-orbital-and-spin-harmonic-polynomial-dimension, thm-nrqm-orbital-and-spin-sphere-onb, thm-nrqm-orbital-and-spin-associated-polynomial-normalization, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, lem-euclidean-chart-measure-agrees-with-polar-surface-measure, def-cm-special-orthogonal-group, lem-cm-so3-is-a-matrix-group, def-strongly-continuous-unitary-representation, def-linear-isometry-and-orthogonal-or-unitary-operator, cor-compact-domain-maps-are-uniformly-continuous, def-nonnegative-lebesgue-integral, def-laplacian-of-a-c2-function, def-directional-and-partial-derivatives, def-homogeneous-polynomial-and-homogeneous-ideal, def-monomials-multidegree-and-total-degree, thm-chain-rule-for-total-derivatives, thm-total-derivative-computes-directional-and-partial-derivatives, def-ck-euclidean-maps-and-diffeomorphisms, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-polar-surface-measure-on-the-unit-sphere, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-hilbert-space, def-inner-product-space, cor-inner-product-induces-a-norm, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-metric-continuity, def-linear-map, def-linear-subspace, def-countable-choice]
 dependency_roles:
   thm-nrqm-orbital-and-spin-harmonic-polynomial-dimension: mathematical-premise

@@ -32,7 +32,8 @@ verification:
 ## Statement
 
 Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$
-([[def-countable-choice]]). Let $\mathbb T^3_{2\pi}$, $\mu$, $\chi_k$,
+([[def-countable-choice]]). Let $s\ge0$ be an integer, and let
+$\mathbb T^3_{2\pi}$, $\mu$, $\chi_k$,
 $\widehat u(k)$, the weak derivatives $D^\alpha$ and the spaces
 $H^s(\mathbb T^3_{2\pi};\mathbb R^N)$ be as in
 [[def-gr-periodic-torus-and-sobolev-spaces]], and put
@@ -50,11 +51,11 @@ The right-hand inequality holds for every $u\in H^s$, so the two norms are
 equivalent on $H^s$.
 
 ## Facts & Assumptions
-**Given:** Countable Choice, the torus $\mathbb T^3_{2\pi}$ with its normalized measure $\mu$ and characters $\chi_k$, the weak derivatives $D^\alpha$, and the spaces $H^s$.
+**Given:** Countable Choice, an integer $s\ge0$, the torus $\mathbb T^3_{2\pi}$ with its normalized measure $\mu$ and characters $\chi_k$, the weak derivatives $D^\alpha$, and the spaces $H^s$.
 
 [L1] $(\chi_k)_{k\in\mathbb Z^3}$ is an orthonormal basis of the complex $L^2$: for $f,g\in L^2$ one has the norm and pairing identities $\|f\|_2^2=\sum_k|\widehat f(k)|^2$ and $\langle f,g\rangle=\sum_k\widehat f(k)\overline{\widehat g(k)}$, the series converging absolutely, and the coefficient map is a surjective linear isometry onto $\ell^2(\mathbb Z^3)$ ([[thm-fourier-basis-and-parseval-on-the-n-torus]], [[def-gr-periodic-torus-and-sobolev-spaces]]).
 
-[L2] $v=D^\alpha u$ means $\int u\,D^\alpha\varphi\,d\mu=(-1)^{|\alpha|}\int v\,\varphi\,d\mu$ for every smooth test function $\varphi$; the character $\chi_l$ is smooth, so it is an admissible test function ([[def-gr-periodic-torus-and-sobolev-spaces]]).
+[L2] $v=D^\alpha u$ means $\int u\,D^\alpha\varphi\,d\mu=(-1)^{|\alpha|}\int v\,\varphi\,d\mu$ for every smooth test function $\varphi$; the real and imaginary parts of $\chi_l$ are smooth real tests; adding their test identities extends the identity complex-linearly to $\chi_l$ ([[def-gr-periodic-torus-and-sobolev-spaces]]).
 
 [L3] For a $C^1$ function $G$ on an interval $[a,b]$, $\int_a^bG'=G(b)-G(a)$: the derivative $G'$ is continuous, hence integrable, and the second fundamental theorem of calculus applies ([[thm-ftc-second-part]], [[thm-continuous-implies-integrable]]).
 
@@ -75,7 +76,7 @@ equivalent on $H^s$.
 
 2.2 (The norm bounds for $u\in H^s$.) By Parseval [L1] applied to the $L^2$ classes $D^\alpha u$, $\|D^\alpha u\|_2^2=\sum_k|k^\alpha|^2|\widehat u(k)|^2$, so the definition of the $H^s$ norm gives $\|u\|_{H^s}^2=\sum_kq_k|\widehat u(k)|^2$. Combining with step 1.2, $\|u\|_{H^s}^2\le(s+1)^3N_s(u)^2$ and $N_s(u)^2\le4^s\|u\|_{H^s}^2$, which are the right-hand inequality and the converse inequality of (b) whenever $u\in H^s$. [step 1.2, L1, algebra]
 
-3.1 (Converse direction of (b): the weighted series produce weak derivatives.) Let $u\in L^2$ with $N_s(u)<\infty$. For each $|\alpha|\le s$ the sequence $k\mapsto(ik)^\alpha\widehat u(k)$ is square-summable because $|k^\alpha|^2\le(1+|k|^2)^{|\alpha|}\le(1+|k|^2)^s$; by the surjectivity of the coefficient isometry [L1] there is a unique class $w_\alpha\in L^2$ with $\widehat{w_\alpha}(k)=(ik)^\alpha\widehat u(k)$. For a smooth real test $\varphi$, Parseval's pairing identity [L1] gives $\int u\,D^\alpha\varphi\,d\mu=\sum_k\widehat u(k)\overline{\widehat{D^\alpha\varphi}(k)}=\sum_k\widehat u(k)\overline{(ik)^\alpha\widehat\varphi(k)}=\sum_k(-1)^{|\alpha|}(ik)^\alpha\widehat u(k)\overline{\widehat\varphi(k)}=(-1)^{|\alpha|}\int w_\alpha\varphi\,d\mu$, where the second equality is step 2.1 applied to the smooth $\varphi$ and the third uses $\overline{(ik)^\alpha}=(-i)^\alpha k^\alpha=(-1)^{|\alpha|}(ik)^\alpha$. Hence $D^\alpha u=w_\alpha$ weakly for every $|\alpha|\le s$, so $u\in H^s$. [step 2.1, L1, L2, algebra]
+3.1 (Converse direction of (b): the weighted series produce weak derivatives.) Let $u\in L^2$ with $N_s(u)<\infty$. For each $|\alpha|\le s$ the sequence $k\mapsto(ik)^\alpha\widehat u(k)$ is square-summable because $|k^\alpha|^2\le(1+|k|^2)^{|\alpha|}\le(1+|k|^2)^s$; by the surjectivity of the coefficient isometry [L1] there is a unique class $w_\alpha\in L^2$ with $\widehat{w_\alpha}(k)=(ik)^\alpha\widehat u(k)$. Since $u$ is real, $\widehat u(-k)=\overline{\widehat u(k)}$ by conjugating its integral. Thus $a_k:=(ik)^\alpha\widehat u(k)$ satisfies $a_{-k}=\overline{a_k}$. Also $\widehat{\overline{w_\alpha}}(k)=\overline{\widehat{w_\alpha}(-k)}=a_k$, again by conjugating the integral. Injectivity in [L1] gives $\overline{w_\alpha}=w_\alpha$ as $L^2$ classes, so $w_\alpha$ has a real-valued representative, componentwise. For a smooth real test $\varphi$, Parseval's pairing identity [L1] gives $\int u\,D^\alpha\varphi\,d\mu=\sum_k\widehat u(k)\overline{\widehat{D^\alpha\varphi}(k)}=\sum_k\widehat u(k)\overline{(ik)^\alpha\widehat\varphi(k)}=\sum_k(-1)^{|\alpha|}(ik)^\alpha\widehat u(k)\overline{\widehat\varphi(k)}=(-1)^{|\alpha|}\int w_\alpha\varphi\,d\mu$, where the second equality is step 2.1 applied to the smooth $\varphi$ and the third uses $\overline{(ik)^\alpha}=(-i)^\alpha k^\alpha=(-1)^{|\alpha|}(ik)^\alpha$. Hence $D^\alpha u=w_\alpha$ weakly for every $|\alpha|\le s$, so $u\in H^s$. [step 2.1, L1, L2, algebra]
 
 4.1 (Conclusion.) By step 3.1 and step 2.2, for $u$ with $N_s(u)<\infty$ the class lies in $H^s$ and satisfies $4^{-s}N_s(u)^2\le\|u\|_{H^s}^2\le(s+1)^3N_s(u)^2$, so (b) holds with $c_s=4^{-s}$ and $C_s=(s+1)^3$, while (a) was proved in step 2.1. [step 3.1, step 2.1, step 2.2, construct, discharge-construct] ∎
 

@@ -1,0 +1,338 @@
+{
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "phase": "initial",
+  "round": 1,
+  "unit": "26",
+  "input_sha256": "a190d6e1e698ac74ff228d5cd1752f8f5e2a8f3acbdac43f25de890342cc9699",
+  "decisions": [
+    {
+      "id": "def-cm10-angular-velocity",
+      "model": "gpt-6-luna",
+      "context_sha256": "67e78788803f87b6f53af478881f4c83be24294fd5914dddc351cc8f4f5bf7a5",
+      "outcome": "false_positive",
+      "reason": "The rejection restricts v to x(t,supp nu), but post-cm10-rigid-material (ii) defines the placement on all R^3 and def-cm10-rigid-body-configuration (e) defines v on its full image, also all R^3. At the fixed placement c'(t)=v(t,c(t)); equality of full-field differences gives equal cross-product matrices, hence equal angular velocities by the skew-matrix supplier. Two independent test vectors suffice since a vector parallel to both must vanish. The point-mass restriction is indeed non-identifying, but it is not the defined full-field domain. Clauses (a)-(f), C^1 rates, rotation conjugation and the explicit axis converse are sound. No final item or contract edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-cm10-inertia-tensor",
+      "model": "gpt-6-luna",
+      "context_sha256": "356065b35c5ffa6257da8b78c2117deb8ba9df0b0a903bdb440515ca691a51ab",
+      "outcome": "false_positive",
+      "reason": "The 13 declared deps do not include pthm-cm10-principal-axes. Final focused depcheck examined the actual prerequisite graph across 1184 closure items and 287 pages and reported no cycles or other errors. The Remark's link is a deferred same-page result, not a prerequisite: symmetry and semidefiniteness use the mathematical inertia-properties lemma, while axis invariance and invertibility are explicitly deferred. Finite bounded centred positive mass and AC_omega match the moment and shifted-integral suppliers; R^T(p-c) and conjugation correctly define all shifted tensors. No item or metadata edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-cm10-euler-angle-pole-and-orientation",
+      "model": "gpt-6-luna",
+      "context_sha256": "3b525708128a8e73ff78a5224d5f3d536d829868f83c475ed30d175918bfbd63",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The original physical path uses seconds as a radian argument with no inverse-time coefficient. Added a positive model rate kappa in radians/second, R(t)=Ry(kappa t), c=0 on I0=R and omega=kappa e2. The derivative is kappa Ry(kappa t)[e2]_cross, so R^T R'=[kappa e2]_cross; the dimensionless-angle and inverse-time-rate declarations now match def-cm01-units. Pole collisions, nonzero kernel (1,0,-1), and the conjugated pole-rate formula remain valid. Distinguished a dimensionless angle shift s from a rate shift h and made the Given curve C^2 to match the model. This is a missing dimensional convention, not a failure of the pole calculation. Focused precheck and rendercheck passed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-cm10-degenerate-line-mass-singular-inertia",
+      "model": "gpt-6-luna",
+      "context_sha256": "9f1ccaf18258476a51c456bc0d6dc9ade6549d719394c792296d1691464e8bc8",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The two-atom witness and I=diag(2m0 a^2,2m0 a^2,0) are valid, but the parameter and output dimensions were implicit. Given now declares m0 in kilograms, a in metres, varpi in radians/second and inertia, energy and angular-momentum units. The finite-simple minorant yields the signed atomic integral; centredness is exact; Rz(varpi t) fixes both physical labels, and Ie3=0 forces zero rotational energy and Lc. No false certainty or empirical values are introduced. Also corrected Tong Eq. (3.22) from printed p.52/PDF p.58 to p.51/PDF p.57 after reading the complete local source discussion through /tmp/batch26-tong.pdf pages 56-58 with PyMuPDF; the source's loose word positive is qualified by its actual nonnegative inequality and rod example. Focused precheck and rendercheck passed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-cm10-equilateral-triangle-rotational-inertia",
+      "model": "gpt-6-luna",
+      "context_sha256": "77908b9c899f004bf5cc846e7925fd2da97d16599d8e539aea2f53fad6f0f334",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The finite-atomic triangle calculation is correct, but m0, a, inertia and energy units were implicit. Declared m0 in kilograms, a and xk in metres, dimensionless basis and angles, omega_j and varpi in radians/second, moments in kilogram metres squared and rotational energy in joules. Independent checks give sum xk=0 and sum xk xk^T=diag(3a^2/2,3a^2/2,0), hence the stated inertia; no line contains two atoms, and Rz(2pi/3) permutes them, so SIS^T=I. The repeated transverse eigenvalue permits exactly any orthonormal planar pair. The formula 1/2 omega^T I omega has energy dimension after these declarations. No mathematical proportion, support, regularity, dynamics or empirical claim changes. Focused precheck, rendercheck and strict contract check passed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-cm10-parallel-axis-shift-check",
+      "model": "gpt-6-luna",
+      "context_sha256": "3a856a0f3556b28d73a5c206d65a36b50edda802c1189096f02b7f0ee74c54d5",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original tensor I(0,ae1) is undefined when 0 is outside the permitted open time window, and evaluating a reference placement requires c=0 and R=I3 at the evaluation time. Clauses 2-4 and their proofs now use an explicitly assumed t_* in I0 with (c(t_*),R(t_*))=(0,I3); constant reference motions show admissibility on every permitted interval, while clause 1 remains universal for all t in I0 and all motions. Conjugating the centred supplier with a=R^T(p-c) yields the spatial shift. At t_* the shift is 3m0 a^2 diag(0,1,1); adding it gives diag(3m0 a^2/2,9m0 a^2/2,6m0 a^2). The direct atom displacements (0,0,0),(-3a/2,+/-sqrt(3)a/2,0) give the same matrix and e3-axis difference ma^2. This repairs the missing domain hypothesis without changing the promised reference-placement calculation or universal spatial identity. SI dimensions inherit the corrected triangle; no measurement is asserted. Focused precheck and rendercheck passed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "def-cm10-angular-velocity",
+      "disposition": "unaffected",
+      "post_sha256": "a3441d74ef336a1c3b3fcc8c26eb16ffea8f76c8f0b34d22eb3c65cb04d11b82",
+      "review_context_sha256": "4130c5aafb803399effa096ddd7a234f09f5ec88ef96355be8169827ef29beec",
+      "reason": "The rejection restricts v to x(t,supp nu), but post-cm10-rigid-material (ii) defines the placement on all R^3 and def-cm10-rigid-body-configuration (e) defines v on its full image, also all R^3. At the fixed placement c'(t)=v(t,c(t)); equality of full-field differences gives equal cross-product matrices, hence equal angular velocities by the skew-matrix supplier. Two independent test vectors suffice since a vector parallel to both must vanish. The point-mass restriction is indeed non-identifying, but it is not the defined full-field domain. Clauses (a)-(f), C^1 rates, rotation conjugation and the explicit axis converse are sound. No final item or contract edit.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "def-cm10-inertia-tensor",
+      "disposition": "unaffected",
+      "post_sha256": "5e742af82b75f6771e42321d5100f9db5b430cee58e71f59b1400e397655dfd8",
+      "review_context_sha256": "9a696b087c8d65e0a5a69c146af65cd34e9a2a2686701e39150cf0dc42dd6021",
+      "reason": "The 13 declared deps do not include pthm-cm10-principal-axes. Final focused depcheck examined the actual prerequisite graph across 1184 closure items and 287 pages and reported no cycles or other errors. The Remark's link is a deferred same-page result, not a prerequisite: symmetry and semidefiniteness use the mathematical inertia-properties lemma, while axis invariance and invertibility are explicitly deferred. Finite bounded centred positive mass and AC_omega match the moment and shifted-integral suppliers; R^T(p-c) and conjugation correctly define all shifted tensors. No item or metadata edit is needed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-cm10-euler-angle-pole-and-orientation",
+      "disposition": "repaired",
+      "post_sha256": "3b17564a1ac624f52f2b925afe4c50815d914817a0e713229b0c1f5c4d8c6a85",
+      "review_context_sha256": "879f2316b5dfad3e7601a07334d3812d4dce505eaaf81a91207a43551b840b45",
+      "reason": "The original physical path uses seconds as a radian argument with no inverse-time coefficient. Added a positive model rate kappa in radians/second, R(t)=Ry(kappa t), c=0 on I0=R and omega=kappa e2. The derivative is kappa Ry(kappa t)[e2]_cross, so R^T R'=[kappa e2]_cross; the dimensionless-angle and inverse-time-rate declarations now match def-cm01-units. Pole collisions, nonzero kernel (1,0,-1), and the conjugated pole-rate formula remain valid. Distinguished a dimensionless angle shift s from a rate shift h and made the Given curve C^2 to match the model. This is a missing dimensional convention, not a failure of the pole calculation. Focused precheck and rendercheck passed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-cm10-degenerate-line-mass-singular-inertia",
+      "disposition": "repaired",
+      "post_sha256": "f975d762ed707c863acda380c7bd3349d87a2478ebb1eb7e7475b0c1c24003aa",
+      "review_context_sha256": "71ed42443bf6e61519981f6cb09d4dff30671967ffbd782ded9af3140f9066c4",
+      "reason": "The two-atom witness and I=diag(2m0 a^2,2m0 a^2,0) are valid, but the parameter and output dimensions were implicit. Given now declares m0 in kilograms, a in metres, varpi in radians/second and inertia, energy and angular-momentum units. The finite-simple minorant yields the signed atomic integral; centredness is exact; Rz(varpi t) fixes both physical labels, and Ie3=0 forces zero rotational energy and Lc. No false certainty or empirical values are introduced. Also corrected Tong Eq. (3.22) from printed p.52/PDF p.58 to p.51/PDF p.57 after reading the complete local source discussion through /tmp/batch26-tong.pdf pages 56-58 with PyMuPDF; the source's loose word positive is qualified by its actual nonnegative inequality and rod example. Focused precheck and rendercheck passed.",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "ex-cm10-equilateral-triangle-rotational-inertia",
+      "disposition": "repaired",
+      "post_sha256": "cbaa4df6aadf6326b77eda332c2c5c80d3f79e08e3de55cd97b43e7bb599d637",
+      "review_context_sha256": "e878d6c7292a613a7b21e1c11d0c7c970854c3f4d0c5e7e4ad35746c2d44519b",
+      "reason": "The finite-atomic triangle calculation is correct, but m0, a, inertia and energy units were implicit. Declared m0 in kilograms, a and xk in metres, dimensionless basis and angles, omega_j and varpi in radians/second, moments in kilogram metres squared and rotational energy in joules. Independent checks give sum xk=0 and sum xk xk^T=diag(3a^2/2,3a^2/2,0), hence the stated inertia; no line contains two atoms, and Rz(2pi/3) permutes them, so SIS^T=I. The repeated transverse eigenvalue permits exactly any orthonormal planar pair. The formula 1/2 omega^T I omega has energy dimension after these declarations. No mathematical proportion, support, regularity, dynamics or empirical claim changes. Focused precheck, rendercheck and strict contract check passed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-cm10-parallel-axis-shift-check",
+      "disposition": "repaired",
+      "post_sha256": "05991f02d9908e47f1e88ef4bae7eba8b9b803eeca34a7e7fb23359afe807185",
+      "review_context_sha256": "85490a27a725d856b590774fe0dcb94608eeb0827c3cbfadd82f3a0758fd76a2",
+      "reason": "The original tensor I(0,ae1) is undefined when 0 is outside the permitted open time window, and evaluating a reference placement requires c=0 and R=I3 at the evaluation time. Clauses 2-4 and their proofs now use an explicitly assumed t_* in I0 with (c(t_*),R(t_*))=(0,I3); constant reference motions show admissibility on every permitted interval, while clause 1 remains universal for all t in I0 and all motions. Conjugating the centred supplier with a=R^T(p-c) yields the spatial shift. At t_* the shift is 3m0 a^2 diag(0,1,1); adding it gives diag(3m0 a^2/2,9m0 a^2/2,6m0 a^2). The direct atom displacements (0,0,0),(-3a/2,+/-sqrt(3)a/2,0) give the same matrix and e3-axis difference ma^2. This repairs the missing domain hypothesis without changing the promised reference-placement calculation or universal spatial identity. SI dimensions inherit the corrected triangle; no measurement is asserted. Focused precheck and rendercheck passed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "ex-cm10-parallel-axis-shift-check"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "defect",
+      "id": "def-cm10-angular-velocity",
+      "status": "false_positive",
+      "reason": "The rejection restricts v to x(t,supp nu), but post-cm10-rigid-material (ii) defines the placement on all R^3 and def-cm10-rigid-body-configuration (e) defines v on its full image, also all R^3. At the fixed placement c'(t)=v(t,c(t)); equality of full-field differences gives equal cross-product matrices, hence equal angular velocities by the skew-matrix supplier. Two independent test vectors suffice since a vector parallel to both must vanish. The point-mass restriction is indeed non-identifying, but it is not the defined full-field domain. Clauses (a)-(f), C^1 rates, rotation conjugation and the explicit axis converse are sound. No final item or contract edit."
+    },
+    {
+      "ledger": "defect",
+      "id": "def-cm10-inertia-tensor",
+      "status": "false_positive",
+      "reason": "The 13 declared deps do not include pthm-cm10-principal-axes. Final focused depcheck examined the actual prerequisite graph across 1184 closure items and 287 pages and reported no cycles or other errors. The Remark's link is a deferred same-page result, not a prerequisite: symmetry and semidefiniteness use the mathematical inertia-properties lemma, while axis invariance and invertibility are explicitly deferred. Finite bounded centred positive mass and AC_omega match the moment and shifted-integral suppliers; R^T(p-c) and conjugation correctly define all shifted tensors. No item or metadata edit is needed."
+    },
+    {
+      "ledger": "defect",
+      "id": "ex-cm10-euler-angle-pole-and-orientation",
+      "status": "repaired",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The original physical path uses seconds as a radian argument with no inverse-time coefficient. Added a positive model rate kappa in radians/second, R(t)=Ry(kappa t), c=0 on I0=R and omega=kappa e2. The derivative is kappa Ry(kappa t)[e2]_cross, so R^T R'=[kappa e2]_cross; the dimensionless-angle and inverse-time-rate declarations now match def-cm01-units. Pole collisions, nonzero kernel (1,0,-1), and the conjugated pole-rate formula remain valid. Distinguished a dimensionless angle shift s from a rate shift h and made the Given curve C^2 to match the model. This is a missing dimensional convention, not a failure of the pole calculation. Focused precheck and rendercheck passed."
+    },
+    {
+      "ledger": "defect",
+      "id": "cex-cm10-degenerate-line-mass-singular-inertia",
+      "status": "repaired",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The two-atom witness and I=diag(2m0 a^2,2m0 a^2,0) are valid, but the parameter and output dimensions were implicit. Given now declares m0 in kilograms, a in metres, varpi in radians/second and inertia, energy and angular-momentum units. The finite-simple minorant yields the signed atomic integral; centredness is exact; Rz(varpi t) fixes both physical labels, and Ie3=0 forces zero rotational energy and Lc. No false certainty or empirical values are introduced. Also corrected Tong Eq. (3.22) from printed p.52/PDF p.58 to p.51/PDF p.57 after reading the complete local source discussion through /tmp/batch26-tong.pdf pages 56-58 with PyMuPDF; the source's loose word positive is qualified by its actual nonnegative inequality and rod example. Focused precheck and rendercheck passed."
+    },
+    {
+      "ledger": "defect",
+      "id": "ex-cm10-equilateral-triangle-rotational-inertia",
+      "status": "repaired",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The finite-atomic triangle calculation is correct, but m0, a, inertia and energy units were implicit. Declared m0 in kilograms, a and xk in metres, dimensionless basis and angles, omega_j and varpi in radians/second, moments in kilogram metres squared and rotational energy in joules. Independent checks give sum xk=0 and sum xk xk^T=diag(3a^2/2,3a^2/2,0), hence the stated inertia; no line contains two atoms, and Rz(2pi/3) permutes them, so SIS^T=I. The repeated transverse eigenvalue permits exactly any orthonormal planar pair. The formula 1/2 omega^T I omega has energy dimension after these declarations. No mathematical proportion, support, regularity, dynamics or empirical claim changes. Focused precheck, rendercheck and strict contract check passed."
+    },
+    {
+      "ledger": "defect",
+      "id": "ex-cm10-parallel-axis-shift-check",
+      "status": "repaired",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The original tensor I(0,ae1) is undefined when 0 is outside the permitted open time window, and evaluating a reference placement requires c=0 and R=I3 at the evaluation time. Clauses 2-4 and their proofs now use an explicitly assumed t_* in I0 with (c(t_*),R(t_*))=(0,I3); constant reference motions show admissibility on every permitted interval, while clause 1 remains universal for all t in I0 and all motions. Conjugating the centred supplier with a=R^T(p-c) yields the spatial shift. At t_* the shift is 3m0 a^2 diag(0,1,1); adding it gives diag(3m0 a^2/2,9m0 a^2/2,6m0 a^2). The direct atom displacements (0,0,0),(-3a/2,+/-sqrt(3)a/2,0) give the same matrix and e3-axis difference ma^2. This repairs the missing domain hypothesis without changing the promised reference-placement calculation or universal spatial identity. SI dimensions inherit the corrected triangle; no measurement is asserted. Focused precheck and rendercheck passed."
+    },
+    {
+      "ledger": "defect",
+      "id": "pthm-cm10-frame-covariance",
+      "status": "owner_followup",
+      "outcome": "confirmed_nonfatal",
+      "reason": "sources.references Tong locator says Section 3.1.2 printed pages 49-50 for the body/space rate-order discussion. Change locator to Section 3.1.1 printed page 48, Eq.3.10 and its following paragraph (PDF p.54). Read PDF pp.54-55; Section 3.1.2 is Path Ordered Exponentials.",
+      "affected_use": "sources.references Tong locator says Section 3.1.2 printed pages 49-50 for the body/space rate-order discussion.",
+      "minimality": "Change locator to Section 3.1.1 printed page 48, Eq.3.10 and its following paragraph (PDF p.54). Read PDF pp.54-55; Section 3.1.2 is Path Ordered Exponentials.",
+      "route": "unassigned draft frontier carrier; owner repair, no edits in unit 26",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "defect",
+      "id": "pthm-cm10-kinetic-splitting",
+      "status": "owner_followup",
+      "outcome": "confirmed_nonfatal",
+      "reason": "sources.references Tong locator assigns all Eqs.3.27-3.30 to Section 3.2.2, printed pp.51-53. Locate Eqs.3.27-3.28 at Section 3.2.2 printed p.53/PDF p.59, and Eqs.3.29-3.30 at Section 3.3 printed p.54/PDF p.60. Read both complete pages.",
+      "affected_use": "sources.references Tong locator assigns all Eqs.3.27-3.30 to Section 3.2.2, printed pp.51-53.",
+      "minimality": "Locate Eqs.3.27-3.28 at Section 3.2.2 printed p.53/PDF p.59, and Eqs.3.29-3.30 at Section 3.3 printed p.54/PDF p.60. Read both complete pages.",
+      "route": "unassigned draft frontier carrier; owner repair, no edits in unit 26",
+      "uncertain": false,
+      "source_urls": [
+        "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "ledger": "defect",
+      "id": "pthm-cm10-principal-axes",
+      "status": "owner_followup",
+      "outcome": "confirmed_nonfatal",
+      "reason": "Remarks Stationary points: stationarity does not by itself single out geometric axes; the extremal clause (e) does. For I=lambda I3 every unit vector attains both extrema; repeated extreme eigenvalues specify eigenspaces rather than unique axes. Qualify only this remark; the proved extremal clause (e) already states the correct attainable range.",
+      "affected_use": "Remarks Stationary points: stationarity does not by itself single out geometric axes; the extremal clause (e) does.",
+      "minimality": "For I=lambda I3 every unit vector attains both extrema; repeated extreme eigenvalues specify eigenspaces rather than unique axes. Qualify only this remark; the proved extremal clause (e) already states the correct attainable range.",
+      "route": "unassigned draft frontier carrier; owner repair, no edits in unit 26",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Completed the two level-8 definitions unchanged. Exact suppliers: post-cm10-rigid-material (ii), def-cm10-rigid-body-configuration (e), mathematical rigid-placement definition, skew-matrix lemma clauses 1-3 and matrix-derivative lemma clause 3; inertia/moment/shifted-point suppliers retain AC_omega. Review-context hashes were captured on this stable state. Next: repair the Euler example rate scale; no outstanding mathematics for the two definitions.",
+    {
+      "id": "ex-cm10-euler-angle-pole-and-orientation",
+      "claim": "Dimensionless Euler angles; physical time in seconds; kappa>0 with [kappa]=tau^-1. Exact pole noninjectivity and smooth Ry(kappa t) path retained.",
+      "suppliers": [
+        "lem-cm-coordinate-rotation-matrices clauses 1-3",
+        "lem-cm-skew-matrix-cross-product-correspondence clauses 2-3",
+        "def-cm01-units (a)-(d)",
+        "def-cm10-angular-velocity (a)"
+      ],
+      "checks": [
+        "precheck exit 0, 1 checked 0 failing",
+        "rendercheck exit 0, 1 file OK"
+      ],
+      "closure": "Assigned item repair and review complete. Necessary owning contract synchronization completed under acquire/reread/edit/strict-check/release; prior independent risk reviews retained. Subsequent metadata review confirmed unchanged item/context hashes."
+    },
+    {
+      "id": "cex-cm10-degenerate-line-mass-singular-inertia",
+      "claim": "Positive kilogram weights at +/-a e3 in metres; constant inverse-second rate; singular inertia and zero rotation energy and Lc unchanged.",
+      "suppliers": [
+        "def-cm01-units",
+        "def-dirac-measure and weighted-sum measure suppliers",
+        "nonnegative/simple and signed integral definitions",
+        "def-cm10-inertia-tensor (a)",
+        "pthm-cm10-kinetic-splitting 3-4",
+        "lem-cm-coordinate-rotation-matrices 1,3"
+      ],
+      "checks": [
+        "precheck exit 0",
+        "rendercheck exit 0"
+      ],
+      "public_interface": "Statement refuted and physical_scope unchanged; only Given parameter/unit conventions and a source locator changed; no downstream claim is invalidated.",
+      "closure": "Assigned item repair and review complete. Necessary owning contract synchronization completed under acquire/reread/edit/strict-check/release; prior independent risk reviews retained. Subsequent metadata review confirmed unchanged item/context hashes."
+    },
+    {
+      "id": "ex-cm10-equilateral-triangle-rotational-inertia",
+      "claim": "Same three atoms and inertia; explicit SI input/output dimensions.",
+      "suppliers": [
+        "def-cm01-units (a)-(d)",
+        "finite atomic and trigonometric suppliers in L1-L4",
+        "pthm-cm10-kinetic-splitting clause 3"
+      ],
+      "checks": [
+        "precheck exit 0",
+        "rendercheck exit 0",
+        "strict proof-contract exit 0, 3/3 checked"
+      ],
+      "closure": "Assigned item repair and review complete. Necessary owning contract synchronization completed under acquire/reread/edit/strict-check/release; prior independent risk reviews retained. Subsequent metadata review confirmed unchanged item/context hashes."
+    },
+    {
+      "id": "ex-cm10-parallel-axis-shift-check",
+      "claim": "Universal spatial shift for every t in I0; explicit attained reference placement at t_* for the vertex check.",
+      "suppliers": [
+        "thm-cm-parallel-axis-theorem Statement, centred positive finite bounded measure and AC_omega",
+        "def-cm10-inertia-tensor (b)-(c)",
+        "corrected triangle Example and finite-atomic formula",
+        "pthm-cm10-principal-axes (c)"
+      ],
+      "checks": [
+        "precheck exit 0",
+        "rendercheck exit 0"
+      ],
+      "public_interface": "Reference-placement time is now explicit. No item directly depends on or references this example; the owning B page describes the reference computation generally and remains sound.",
+      "closure": "Assigned item repair and review complete. Necessary owning contract synchronization completed under acquire/reread/edit/strict-check/release; prior independent risk reviews retained. Subsequent metadata review confirmed unchanged item/context hashes."
+    },
+    "No potentially defective published consumer was found: the two definitions remain unchanged, and changed examples have only the assigned triangle-to-parallel-axis item use and owning-page prose references. No published-ledger repair is proposed. The three verified digest concerns belong to unassigned draft items and have exact minimal owner followups above. No judges, workflow cycles, gates, stamps or shared ledgers were written.",
+    {
+      "checks": [
+        {
+          "command": "node tools/physics-support/proof-layout.mjs items/ex-cm10-euler-angle-pole-and-orientation.md items/cex-cm10-degenerate-line-mass-singular-inertia.md items/ex-cm10-equilateral-triangle-rotational-inertia.md items/ex-cm10-parallel-axis-shift-check.md",
+          "exit_code": 0,
+          "result": "4 items, 27 steps, 0 defects; run after all final item edits."
+        },
+        {
+          "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step5-u26-items.json --json",
+          "exit_code": 0,
+          "result": "Focused six assigned items and two owning pages, dependency closure 1184 items and 287 pages; 0 errors, 0 warnings."
+        },
+        {
+          "command": "node tools/physics-support/proof-contract.mjs research/physics-cm-qm-gr-79-2026-10-11-batch-26.proof-contracts.json --strict --items def-cm10-angular-velocity,def-cm10-inertia-tensor,ex-cm10-euler-angle-pole-and-orientation,cex-cm10-degenerate-line-mass-singular-inertia,ex-cm10-equilateral-triangle-rotational-inertia,ex-cm10-parallel-axis-shift-check",
+          "exit_code": 0,
+          "result": "Final check: 0 errors, 0 warnings, 6/6 items checked. An earlier run found the triangle Example quotation mismatch in parallel-axis L1; synchronized the exact current quotation under shared lock and rechecked successfully."
+        }
+      ],
+      "status": "All assigned repairs complete; one necessary owning B-page prose repair and three unassigned draft digest followups are routed for owner work. No new item, no gate diagnostics assigned, no unresolved mathematics."
+    }
+  ],
+  "downstream_page_uses": [
+    {
+      "supplier": "ex-cm10-euler-angle-pole-and-orientation",
+      "path": "library/non-relativistic-classical-mechanics/cm10-rigid-body-configuration-and-inertia-examples.md",
+      "affected_use": "orientation path $R(t)=R_y(t)$ passes through the pole orientation with constant angular velocity $e_2$",
+      "invalidated_claim": "The page repeats the old dimensionally unspecified path and rate.",
+      "minimality": "Replace Ry(t) and e2 with Ry(kappa t) and kappa e2 and declare kappa>0 in radians per second. All pole and regularity conclusions remain sound.",
+      "disposition": "necessary_owner_page_repair",
+      "route": "owning page metadata/maintenance; page prose is outside this dispatch write scope"
+    }
+  ],
+  "downstream_reviews": [
+    {
+      "supplier": "ex-cm10-equilateral-triangle-rotational-inertia",
+      "id": "ex-cm10-parallel-axis-shift-check",
+      "path": "items/ex-cm10-parallel-axis-shift-check.md",
+      "affected_use": "Example opening and L1 use m0, a, the same centred atomic measure, I=diag(3m0 a^2/2,3m0 a^2/2,3m0 a^2) and finite-atomic formula.",
+      "invalidated_claim": "None from the supplier units change: all measure, inertia and energy formulas are unchanged.",
+      "minimality": "Inherit the now explicit kilogram/metre conventions; independently repair the assigned reference-time defect. Owning contract L1 quotation was synchronized under the shared lock and the strict contract check passed.",
+      "disposition": "sound_supplier_use_assigned_independent_repair",
+      "route": "assigned frontier review"
+    }
+  ]
+}

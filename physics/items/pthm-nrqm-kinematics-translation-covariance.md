@@ -30,7 +30,11 @@ deps:
     post-nrqm-framework-observable-and-probability,
     pthm-nrqm-autonomous-dynamics-schrodinger-picture-flow,
     pthm-nrqm-kinematics-spin-s-outcome-laws,
+    thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions,
+    thm-completion-measurable-functions-have-base-measurable-representatives,
+    thm-linear-change-of-variables-for-lebesgue-measure,
     thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators,
+    thm-tonelli-theorem-for-sigma-finite-product-spaces,
     thm-stone-one-parameter-unitary-groups
   ]
 dependency_roles:
@@ -54,7 +58,11 @@ dependency_roles:
   post-nrqm-framework-observable-and-probability: physical-assumption
   pthm-nrqm-autonomous-dynamics-schrodinger-picture-flow: physical-result
   pthm-nrqm-kinematics-spin-s-outcome-laws: physical-result
+  thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions: mathematical-premise
+  thm-completion-measurable-functions-have-base-measurable-representatives: mathematical-premise
+  thm-linear-change-of-variables-for-lebesgue-measure: mathematical-premise
   thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators: mathematical-premise
+  thm-tonelli-theorem-for-sigma-finite-product-spaces: mathematical-premise
   thm-stone-one-parameter-unitary-groups: mathematical-premise
 provenance:
   statement: ai-altered
@@ -162,6 +170,14 @@ No apparatus, laboratory identification or empirical result is recorded.
 
 [F4] **Multipliers shift.** $T_{a}M_{V}T_{a}^{-1}=M_{V_{a}}$ with $V_{a}(x)=V(x-a)$, and $T_{a}W^{2,2}(\mathbb R^{3};\mathbb C^{r}) =W^{2,2}(\mathbb R^{3};\mathbb C^{r})$, because the componentwise translation preserves the weak derivative and shifts the pointwise multiplier ([[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (c), [[lem-nrqm-kinematics-component-valued-wavefunction-identifications]] clause (c)).
 
+[F5] **Borel representatives.** Under Countable Choice, a Lebesgue-measurable function on $\mathbb R^{3}$ is equal almost everywhere to a Borel-measurable function ([[thm-completion-measurable-functions-have-base-measurable-representatives]]).
+
+[F6] **Tonelli.** For sigma-finite measure spaces, a nonnegative product-measurable function has measurable sections and its integral is the iterated integral in either order ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]).
+
+[F7] **Linear change of variables.** An invertible linear map $A:\mathbb R^{6}\to\mathbb R^{6}$ carries Lebesgue-measurable sets to measurable sets and scales their measure by $|\det A|$ ([[thm-linear-change-of-variables-for-lebesgue-measure]]).
+
+[F8] **Translations preserve null sets.** For a $C^{1}$ diffeomorphism $T$ the change-of-variables formula holds for nonnegative Lebesgue-measurable functions; in particular translations of Lebesgue-null sets are null ([[thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions]]).
+
 ## Proof
 
 **Proof technique:** direct; read clause (a) from the componentwise translation identities, compute the law transport from the explicit multiplication and momentum-multiplier forms of the spectral measures, and conjugate the bounded-potential Hamiltonian and its flow, identifying the generator of the conjugated group.
@@ -170,27 +186,19 @@ No apparatus, laboratory identification or empirical result is recorded.
 
 1.1 [Operators and domains] Clause (a) is exactly [F1]: unitarity of $T_{a}$, the domain equalities and the two conjugation identities. [F1]
 
-1.2 [Position-law transport] By [F2], both sides of $E_{Q_{j}}(B)T_{a}=T_{a}E_{Q_{j}}(B-a_{j})$ are componentwise multiplication operators: for a class $f$, $\bigl(E_{Q_{j}}(B)T_{a}f\bigr)(x)=\mathbf 1_{B}(x_{j})f(x-a)$ and $\bigl(T_{a}E_{Q_{j}}(B-a_{j})f\bigr)(x) =\mathbf 1_{B-a_{j}}(x_{j}-a_{j})f(x-a) =\mathbf 1_{B}(x_{j})f(x-a)$, so the operators agree. Taking norms and using unitarity of $T_{a}$ and the law formula [F2], $\mu^{Q_{j}}_{T_{a}\psi}(B)=\|E_{Q_{j}}(B)T_{a}\psi\|^{2} =\|E_{Q_{j}}(B-a_{j})\psi\|^{2}=\mu^{Q_{j}}_{\psi}(B-a_{j})$. [F1, F2, algebra]
+1.2 [Position-law transport] By [F2], the two compositions $E_{Q_j}(B)T_a$ and $T_aE_{Q_j}(B-a_j)$ act componentwise as follows: for a class $f$, $\bigl(E_{Q_{j}}(B)T_{a}f\bigr)(x)=\mathbf 1_{B}(x_{j})f(x-a)$ and $\bigl(T_{a}E_{Q_{j}}(B-a_{j})f\bigr)(x) =\mathbf 1_{B-a_{j}}(x_{j}-a_{j})f(x-a) =\mathbf 1_{B}(x_{j})f(x-a)$, so the operators agree. Taking norms and using unitarity of $T_{a}$ and the law formula [F2], $\mu^{Q_{j}}_{T_{a}\psi}(B)=\|E_{Q_{j}}(B)T_{a}\psi\|^{2} =\|E_{Q_{j}}(B-a_{j})\psi\|^{2}=\mu^{Q_{j}}_{\psi}(B-a_{j})$. [F1, F2, algebra]
 
 1.3 [Hamiltonian covariance] By [F1], $T_{a}P_{k}T_{a}^{-1}=P_{k}$, hence also $T_{a}P_{k}^{2}T_{a}^{-1}=P_{k}^{2}$ with domain invariance; and [F4] gives $T_{a}M_{V}T_{a}^{-1}=M_{V_{a}}$, with $T_{a}W^{2,2}=W^{2,2}$. Therefore $T_{a}H_{V}T_{a}^{-1}=H_{V_{a}}$ as operators with domain $W^{2,2}(\mathbb R^{3};\mathbb C^{r})$. [F1, F3, F4, algebra]
 
+1.4 [Functions invariant under every translation] Suppose $V(\cdot-a)=V$ almost everywhere for every $a\in\mathbb R^{3}$. By [F5] choose a Borel representative $\widetilde V=V$ almost everywhere. For each fixed $a$, [F8] preserves the exceptional null set under translation, so $\widetilde V(\cdot-a)=\widetilde V$ almost everywhere. For $n\ge1$ put $C_n:=(-n,n)^3$, $A_n:=(-2n,2n)^3$, and $N_n:=\{(x,a)\in C_n\times A_n:\widetilde V(x-a)\ne\widetilde V(x)\}$. This is a Borel set, and each $x$-section at fixed $a$ is null, so [F6] gives $\lambda_6(N_n)=0$. The invertible linear map $\Phi(x,a):=(x,x-a)$ has $|\det\Phi|=1$; by [F7], $\Phi[N_n]$ is null. Since every $(x,y)\in C_n\times C_n$ has $a=x-y\in A_n$, the set $\{(x,y)\in C_n\times C_n:\widetilde V(y)\ne\widetilde V(x)\}$ is contained in $\Phi[N_n]$ and is null. By [F6], for almost every $x\in C_n$ this equality holds for almost every $y\in C_n$; choose such an $x_n$ with $\widetilde V(x_n)$ finite. Hence $V=\widetilde V(x_n)$ almost everywhere on $C_n$. The cubes are nested and their overlaps have positive measure, so these constants agree for all $n$ and $V$ is constant almost everywhere on $\mathbb R^3$. Conversely, if $V$ is constant almost everywhere, [F8] gives $V(\cdot-a)=V$ almost everywhere for every $a$. Thus invariance under all translations is equivalent to being constant almost everywhere. [F5, F6, F7, F8, algebra]
+
 2.1 [Momentum-law invariance] By [F2], $U^{(s)}E_{P_{k}}(B)U^{(s)-1}=M_{\mathbf 1_{B}(p_{k})}$ and $U^{(s)}T_{a}U^{(s)-1}=M_{e^{-ia\cdot p/\hbar}}$ ([[lem-nrqm-kinematics-momentum-representation]] clause (d)); the two multipliers commute, so $E_{P_{k}}(B)T_{a}=T_{a}E_{P_{k}}(B)$ and $\mu^{P_{k}}_{T_{a}\psi}(B)=\|E_{P_{k}}(B)T_{a}\psi\|^{2} =\|E_{P_{k}}(B)\psi\|^{2}=\mu^{P_{k}}_{\psi}(B)$. Together with step 1.2 this proves (b). [step 1.2, F1, F2, algebra]
 
-2.2 [Flow covariance] Define $W(t):=T_{a}U_{V}(t)T_{a}^{-1}$. It is a strongly continuous unitary group because $U_{V}$ is one and conjugation by the unitary $T_{a}$ preserves the group law, unitarity and strong continuity. For $x\in D(H_{V_{a}})=T_{a}D(H_{V})$ one has $T_{a}^{-1}x\in D(H_{V})$ and $\frac1t\bigl(W(t)x-x\bigr) =T_{a}\frac1t\bigl(U_{V}(t)T_{a}^{-1}x-T_{a}^{-1}x\bigr) \longrightarrow T_{a}\Bigl(-\frac{i}{\hbar}H_{V}T_{a}^{-1}x\Bigr) =-\frac{i}{\hbar}H_{V_{a}}x,$ using the generator property of $U_{V}$ [F3] and step 1.3; the limit exists exactly on $D(H_{V_{a}})$ because the limit for $U_{V}$ exists exactly on $D(H_{V})$ [F3]. Hence $W$ is a strongly continuous unitary group with generator $-\frac{i}{\hbar}H_{V_{a}}$; by [F3] the group $t\mapsto U_{V_{a}}(t)=\exp(-itH_{V_{a}}/\hbar)$ has the same generator, and uniqueness of the group with a given generator gives $T_{a}U_{V}(t)T_{a}^{-1}=U_{V_{a}}(t)$. If $V$ is invariant under translation by $a$ then $V_{a}=V$ almost everywhere and $T_{a}H_{V}T_{a}^{-1}=H_{V}$ with $T_{a}U_{V}(t)T_{a}^{-1}=U_{V}(t)$; the free case $V=0$ is translation invariant for every $a$. This proves (c). [step 1.3, F1, F3, F4, algebra]
+2.2 [Flow covariance] Define $W(t):=T_{a}U_{V}(t)T_{a}^{-1}$. It is a strongly continuous unitary group because $U_{V}$ is one and conjugation by the unitary $T_{a}$ preserves the group law, unitarity and strong continuity. For $x\in D(H_{V_{a}})=T_{a}D(H_{V})$ one has $T_{a}^{-1}x\in D(H_{V})$ and $\frac1t\bigl(W(t)x-x\bigr) =T_{a}\frac1t\bigl(U_{V}(t)T_{a}^{-1}x-T_{a}^{-1}x\bigr) \longrightarrow T_{a}\Bigl(-\frac{i}{\hbar}H_{V}T_{a}^{-1}x\Bigr) =-\frac{i}{\hbar}H_{V_{a}}x,$ using the generator property of $U_{V}$ [F3] and step 1.3; the limit exists exactly on $D(H_{V_{a}})$ because the limit for $U_{V}$ exists exactly on $D(H_{V})$ [F3]. Hence $W$ is a strongly continuous unitary group with generator $-\frac{i}{\hbar}H_{V_{a}}$; by [F3] the group $t\mapsto U_{V_{a}}(t)=\exp(-itH_{V_{a}}/\hbar)$ has the same generator, and uniqueness of the group with a given generator gives $T_{a}U_{V}(t)T_{a}^{-1}=U_{V_{a}}(t)$. If $V(\cdot-a)=V$ almost everywhere, then $V_{a}=V$ as a multiplier and $T_{a}H_{V}T_{a}^{-1}=H_{V}$ with $T_{a}U_{V}(t)T_{a}^{-1}=U_{V}(t)$; the free case $V=0$ is translation invariant for every $a$. This proves the fixed-translation assertion of (c). [step 1.3, F1, F3, F4, algebra]
 
-3.1 [Frame reading and scope] Clause (d) records the model's convention for the passive spatial translation of P5: the parameter $a$ is the shift of the spatial origin and the representative transforms by the shift $T_{a}$, so steps 1.2, 2.1 and 2.2 are exactly the transformations of the law and of the bounded-potential dynamics under the frame change. Clause (e) records the hypotheses actually used: P2, P4, P5 and P6, the componentwise model, real bounded measurable $V$ and the cited mathematics; nothing was used about singular potentials, boundaries, massless or relativistic models, radiation, apparatus or measurements. [given, step 1.1, step 1.2, step 2.1, step 1.3, step 2.2] ∎
+3.1 [Frame reading and scope] Clause (d) records the model's convention for the passive spatial translation of P5: the parameter $a$ is the shift of the spatial origin and the representative transforms by the shift $T_{a}$, so steps 1.2, 2.1 and 2.2 are exactly the transformations of the law and of the bounded-potential dynamics under the frame change. Clause (e) records the hypotheses actually used: P2, P4, P5 and P6, the componentwise model, real bounded measurable $V$ and the cited mathematics; nothing was used about singular potentials, boundaries, massless or relativistic models, radiation, apparatus or measurements. [given, step 1.1, step 1.2, step 2.1, step 1.3, step 2.2, step 1.4] ∎
 
 ## Remarks
 
-- **Sign of the shift.** The convention is that translating the preparation by
-  $a$ moves the position law by $+a$: clause (b) says
-  $\mu^{Q_{j}}_{T_{a}\psi}(B)=\mu^{Q_{j}}_{\psi}(B-a)$. Momentum laws are
-  invariant because the translation commutes with $P_{k}$; this is the
-  kinematic statement that translations are generated by momentum, and the
-  generator identification itself is the mathematical content of
-  [[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (d).
-- **What is not claimed.** No covariance of the internal factor under spatial
-  transformations, no rotation or boost statement (those are separate items of
-  this page), and no general covariance for potentials outside the bounded
-  measurable class. The frame reading of clause (d) is a convention of the
-  model and gains content only through the covariance statements (b) and (c).
+- **Sign of the shift.** The convention is that translating the preparation by $a$ moves the position law by $+a$: clause (b) says $\mu^{Q_{j}}_{T_{a}\psi}(B)=\mu^{Q_{j}}_{\psi}(B-a_j)$. Momentum laws are invariant because the translation commutes with $P_{k}$; this is the kinematic statement that translations are generated by momentum, and the generator identification itself is the mathematical content of [[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (d).
+- **What is not claimed.** No covariance of the internal factor under spatial transformations, no rotation or boost statement (those are separate items of this page), and no general covariance for potentials outside the bounded measurable class. The frame reading of clause (d) is a convention of the model and gains content only through the covariance statements (b) and (c).

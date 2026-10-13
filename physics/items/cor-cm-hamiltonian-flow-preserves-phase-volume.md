@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 4
-deps: [def-cm-phase-domain-and-standard-symplectic-two-form, lem-cm-standard-symplectic-form-is-closed-and-nondegenerate, prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart, prop-cm-flow-derivative-satisfies-the-canonical-matrix-identity, cor-cm-flow-domain-open-and-flow-is-c1, def-cm-local-flow-of-an-autonomous-system, lem-cm-local-flow-composition-law, cor-c-one-change-of-variables-for-l-one-functions, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-borel-sigma-algebra, def-integrable-real-and-complex-functions-and-their-integrals, thm-continuous-preimages-of-borel-sets-are-borel, thm-heine-borel-rn, thm-continuous-image-of-a-compact-space-is-compact, def-ck-euclidean-maps-and-diffeomorphisms, def-metric-topology, def-countable-choice]
+deps: [def-cm-phase-domain-and-standard-symplectic-two-form, lem-cm-standard-symplectic-form-is-closed-and-nondegenerate, prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart, prop-cm-flow-derivative-satisfies-the-canonical-matrix-identity, cor-cm-flow-domain-open-and-flow-is-c1, def-cm-local-flow-of-an-autonomous-system, lem-cm-local-flow-composition-law, cor-c-one-change-of-variables-for-l-one-functions, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-borel-sigma-algebra, def-integrable-real-and-complex-functions-and-their-integrals, thm-continuous-preimages-of-borel-sets-are-borel, thm-heine-borel-rn, thm-continuous-image-of-a-compact-space-is-compact, def-ck-euclidean-maps-and-diffeomorphisms, def-metric-topology, def-countable-choice, thm-borel-sets-are-lebesgue-measurable, thm-lebesgue-measure-of-a-box-of-every-kind, def-integral-of-a-nonnegative-simple-function, prop-the-nonnegative-integral-agrees-with-the-simple-integral]
 dependency_roles:
   def-cm-phase-domain-and-standard-symplectic-two-form: mathematical-premise
   lem-cm-standard-symplectic-form-is-closed-and-nondegenerate: mathematical-premise
@@ -25,6 +25,10 @@ dependency_roles:
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   def-metric-topology: mathematical-premise
   def-countable-choice: mathematical-premise
+  thm-borel-sets-are-lebesgue-measurable: mathematical-premise
+  thm-lebesgue-measure-of-a-box-of-every-kind: mathematical-premise
+  def-integral-of-a-nonnegative-simple-function: mathematical-premise
+  prop-the-nonnegative-integral-agrees-with-the-simple-integral: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -66,7 +70,7 @@ No completeness or time independence is needed.
 
 [F3] Change of variables for $L^1$ functions under a $C^1$ diffeomorphism ([[cor-c-one-change-of-variables-for-l-one-functions]]): for open $V,W\subseteq\mathbb R^m$ and a $C^1$ diffeomorphism $T:V\to W$, $\int_W f\,d\lambda_m=\int_V(f\circ T)|\det DT|\,d\lambda_m$ for $f\in L^1(W)$; the Lebesgue measure and $\sigma$-algebra are those of [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]], and Borel sets are those of [[def-borel-sigma-algebra]].
 
-[F4] Borel and integrability bookkeeping ([[thm-continuous-preimages-of-borel-sets-are-borel]], [[thm-heine-borel-rn]], [[thm-continuous-image-of-a-compact-space-is-compact]], [[def-borel-sigma-algebra]], [[def-integrable-real-and-complex-functions-and-their-integrals]]): for Borel $A\subseteq D_t$ the image $\Phi_t(A)=(\Phi_{-t})^{-1}(A)$ is Borel, because $\Phi_{-t}$ is continuous on the image of $\Phi_t$; if in addition $A$ is bounded, then $\overline A$ is compact with $\overline A\subseteq D_t$, so $\Phi_t(\overline A)$ is compact, hence bounded and closed, and the indicator of the bounded Borel set $\Phi_t(A)\subseteq\Phi_t(\overline A)$ is bounded and compactly supported, hence in $L^1(\mathbb R^{2n})$.
+[F4] Borel and integrability bookkeeping ([[thm-continuous-preimages-of-borel-sets-are-borel]], [[thm-heine-borel-rn]], [[thm-continuous-image-of-a-compact-space-is-compact]], [[def-borel-sigma-algebra]], [[thm-borel-sets-are-lebesgue-measurable]], [[thm-lebesgue-measure-of-a-box-of-every-kind]], [[def-integral-of-a-nonnegative-simple-function]], [[prop-the-nonnegative-integral-agrees-with-the-simple-integral]], [[def-integrable-real-and-complex-functions-and-their-integrals]]): the continuous inverse gives $\Phi_t(A)=(\Phi_{-t})^{-1}(A)$ Borel relative to the open image domain, hence Borel in $\mathbb R^{2n}$. Under the assumed Countable Choice, every Borel subset of $\mathbb R^{2n}$ is Lebesgue measurable. Boundedness and $\overline A\subseteq D_t$ make $\overline A$ compact; its continuous image $\Phi_t(\overline A)$ is compact and bounded. Thus $A$ and $\Phi_t(A)$ each lie in a finite closed box $[-R,R]^{2n}$, whose measure is $(2R)^{2n}<\infty$. Monotonicity of Lebesgue outer measure, restricted to measurable sets, bounds their measures by this value. For either measurable set $E$, its indicator is simple and $\int|\mathbf1_E|\,d\lambda_{2n}=\lambda_{2n}(E)<\infty$, by the simple-integral definition and its agreement with the nonnegative integral. Consequently both indicators are in $L^1$.
 
 ## Proof
 
@@ -81,4 +85,4 @@ No completeness or time independence is needed.
 ## Remarks
 
 - The published [[thm-liouville-volume-preservation]] states the same conclusion for the Liouville form $\omega^n/n!$ on a symplectic manifold; the present corollary is the chart-level Lebesgue form with an explicit choice-free determinant computation apart from the change-of-variables theorem it cites.
-- The boundedness and closure hypotheses on $A$ are what make the indicator integrable on the chosen domain; for arbitrary measurable $A\subseteq D_t$ the identity follows by exhausting with bounded Borel sets, and no statement about non-measurable sets is made.
+- The same equality holds for every Lebesgue-measurable $A\subseteq D_t$, with infinite measures permitted. To justify this extension, let $T=\Phi_t:D_t\to W$ and use the proof of [[cor-c-one-change-of-variables-for-l-one-functions]], steps 4.1-5.1: a $C^1$ diffeomorphism has measurable preimages of Lebesgue-measurable sets, and for any such $E\subseteq W$ it gives $\lambda_{2n}(E)=\int_{D_t}\mathbf 1_E(T(z))|\det DT(z)|\,dz$, without a finiteness restriction. Apply the preimage measurability assertion first to $T^{-1}:W\to D_t$ and $A$; thus $E=T(A)$ is measurable. Apply the displayed identity to this $E$ and use $|\det DT|=1$ to obtain $\lambda_{2n}(T(A))=\int_{D_t}\mathbf 1_A=\lambda_{2n}(A)$. The same argument applies to each fixed-endpoint evolution. Countable Choice is retained throughout; exhaustion by Borel sets alone does not establish this completion step.

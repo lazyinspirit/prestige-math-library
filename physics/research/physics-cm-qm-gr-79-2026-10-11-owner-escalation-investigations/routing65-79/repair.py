@@ -1,0 +1,77 @@
+import pathlib,json,copy,re,datetime,os,hashlib
+R='physics-cm-qm-gr-79-2026-10-11';B=pathlib.Path('research/'+R+'-owner-escalation-investigations/routing65-79');now=datetime.datetime.now(datetime.timezone.utc).isoformat();before=B/'before';before.mkdir(exist_ok=True)
+def read(p):return json.loads(pathlib.Path(p).read_text())
+def dump(p,d):q=pathlib.Path(str(p)+'.owner-routing-tmp');q.write_text(json.dumps(d,indent=2)+'\n');os.replace(q,p)
+ledger=[json.loads(l) for l in pathlib.Path('research/defect-ledger.jsonl').read_text().splitlines()];byid={a['defect_id']:a for a in ledger};own={};docs={};changes=[];newrows=[]
+for b in range(65,80):
+ p=pathlib.Path(f'research/{R}-alpha-batch-{b}-3a-decisions.json');(before/p.name).write_bytes(p.read_bytes());docs[b]=read(p)
+ for f in [f'research/{R}-batch-{b}.pages.json',f'research/{R}-batch-{b}.proof-contracts.json']:
+  fp=pathlib.Path(f);(before/fp.name).write_bytes(fp.read_bytes())
+ for page in read(f'research/{R}-batch-{b}.pages.json'):
+  own[page['id']]=b
+  for item in page.get('items',[]):own[item if isinstance(item,str) else item['id']]=b
+for b,d in docs.items():
+ for a in d['decisions']:
+  p=pathlib.Path('items/'+a['id']+'.md')
+  if not p.exists():
+   pp=next((p for p in pathlib.Path('library').rglob(a['id']+'.md')),None);p=pp
+  if p and p.exists():(before/(a['id']+'.md')).write_bytes(p.read_bytes())
+def amend(a,why,**fields):
+ old=copy.deepcopy(a);a.update(fields);a.setdefault('routing_owner_history',[]).append({'at':now,'reviewer':'/root/physics_alpha17_affine_owner','original_decision':old,'resolution':why});a['evidence']=old.get('evidence','')+'\n\nRouting owner resolution: '+why;changes.append({'obligation':a['obligation'],'id':a['id'],'resolution':why})
+def row(subject,b,slug,correction,severity='nonfatal',subclass='reader-repair',location='proof-step',extra=None):
+ z={'defect_id':R+'-3a-owner-routing65-79-'+slug,'run':R,'at':now,'class':'accuracy','subclass':subclass,'severity':severity,'location':location,'subject':subject,'caught_at_stage':'3a-adjudicate','caught_by_role':'group-alpha','batch':str(b),'group':'batch-'+str(b),'status':'closed','disposition':'fixed','correction':correction,'repair_confidence':1,'evidence':[{'path':f'research/{R}-alpha-batch-{b}-3a-decisions.json','note':'Preserved native Alpha acceptance and precise correction evidence; this owner records its actual same-subject disposition rather than reusing an incompatible supplier or finding row.'},{'path':str(B/'missing-ref-current-source-review.json'),'note':'Current corrected Facts/steps inspected for this exact documented reader repair; no fabricated native finding, observation hash, full independent proof audit or gate coverage.'}]}
+ if extra:z.update(extra)
+ newrows.append(z);byid[z['defect_id']]=z;return z['defect_id']
+# Preserve all19 unchanged mathematical/physical source repairs while acknowledging actual owning metadata amendments.
+errors=(B/'full-before.txt').read_text().splitlines();mismatch={re.search(r'\[([^]]+)\]',l)[1] for l in errors if 'accepted_repair no longer matches' in l}
+for b,d in docs.items():
+ for a in d['decisions']:
+  if a['verdict']=='accepted_repair' and a['id'] in mismatch:
+   post=read(f'research/{R}-step3-hash-{b}-post.json')['hashes'][a['id']];raw=pathlib.Path('items/'+a['id']+'.md').read_bytes();assert hashlib.sha256(raw).hexdigest()==post['item_sha256']
+   amend(a,'Actual current source bytes are exactly the immutable reader-post source bytes. The accepted mathematical/physical correction is retained without claiming another proof repair. Current exact supplier quotations and manifest/contract representation have since been amended; archive contains the current reviewed source and owning metadata. Classify this carrier as amended_repair, preserving the original accepted_repair and its source evidence. Root will compute final carrier stamps after metadata reconciliation.',verdict='amended_repair')
+# Rows improperly shared between touched/page and genuine findings: retain the subject's other genuine repairs.
+remove={65:{'touched:65:post-gr-spacetime-and-classical-domain':['zero-vector'],'touched:65:rem-gr-primitive-and-derived-status':['causal-set-name']},67:{'touched:67:thm-gr-local-geodesics-and-exponential-map':['page-chart-direction']},71:{'touched:71:thm-gr-flat-wave-equation-duhamel-and-harmonic-gauge':['retarded'],'touched:71:thm-gr-weak-field-einstein-stress-hierarchy':['threshold']},77:{'touched:77:lem-gr-compact-future-cone-intersections':['refuter-1']}}
+for b,obs in remove.items():
+ for a in docs[b]['decisions']:
+  if a['obligation'] in obs:
+   gone=[v for v in a['defect_ids'] if any(v.endswith('-'+s) for s in obs[a['obligation']])];kept=[v for v in a['defect_ids'] if v not in gone];assert kept
+   amend(a,'Retain the exact same-subject repairs owned by this touched decision. Original references '+', '.join(gone)+' belong to a separate native finding or another actual subject and are now routed there with their unchanged history.',defect_ids=kept)
+# Four actual shared findings: distinct native classifications require separate occurrence records for two.
+for n in [1,3]:
+ d=docs[69]['decisions'];a=next(v for v in d if v['obligation']==f'refuter:69:{n}');first=next(v for v in d if v['obligation']==f'reader:69:{n}');amend(a,'Reader and refuter report the same item, exact defect classification and original observed carrier; preserve both original findings and bind their single fixed defect explicitly.',same_defect_as=first['obligation'],same_defect_evidence='Same exact native defect classification, same item and original observed fingerprint; both findings concern the same corrected inference.')
+for n in [2,4]:
+ a=next(v for v in docs[69]['decisions'] if v['obligation']==f'refuter:69:{n}');original=byid[a['defect_ids'][0]];z=copy.deepcopy(original);z.update(defect_id=R+f'-3a-owner-routing65-79-refuter69-{n}',at=now);z['original_occurrence_record']=copy.deepcopy(original);z['routing_note']='Distinct native refuter classification prevents the native shared-finding binding. This separate occurrence disposition preserves the same actual repaired subject, original severity and evidence; it does not invent another source defect or another repair.';z['adjudication_ref']=[{'path':f'research/{R}-alpha-batch-69-3a-decisions.json','obligation':a['obligation']}];newrows.append(z);byid[z['defect_id']]=z;amend(a,z['routing_note'],defect_ids=[z['defect_id']])
+# Exact documented reader repairs that lacked any row. These are existing accepted repairs, not invented new fatal findings.
+repairs={
+'lem-gr-observer-relative-velocity-expansions':('rest-space-norm-power-supplier','Explicit positive-definite rest-space norm and real-power derivative suppliers now justify the displayed Taylor constants; record the existing native reader prerequisite-explication repair.'),
+'def-gr-newtonian-comparison-model-and-identification':('gradient-vector-covector','Correct derivative/gradient typing D Phi[v]=<grad Phi,v>; vector gradient and covector differential are distinguished in the current Definition.'),
+'lem-gr-weak-field-christoffel-bounds':('mixed-christoffel-proof','The current mixed-index proof splits the upper-spatial lower-time term into g^i0 partial_j g00 and spatial-shift terms with the correct distinct orders; record the documented native reader proof correction.'),
+'lem-gr-flat-model-connection-curvature-and-geodesics':('flat-geodesic-parameter-definitions','Current parameter conventions specify s0 in I, increasing coordinate time and its inverse and the Euclidean spatial norm; record the documented explicit-definition reader repair.'),
+'pthm-gr-uniform-weak-slow-correspondence':('correspondence-norm-tags','Current correspondence proof defines the adopted norms and complete input tags; record native reader explicit-definition/proof-carrier correction, retaining every dust/postulate/compact-interval qualification.'),
+'ex-gr-weak-field-poisson-quadratic-potential':('poisson-example-range-parameters','Current example distinguishes remainder-domain epsilon0 from the linearization radius and uses the actual hierarchy threshold; record native reader parameter-definition and supplier-range repair.'),
+'def-gr-normal-neighborhoods-and-position-vectors':('normal-starshaped-attribution','Radial containment is now attributed to the selected star-shaped normal inverse domain, not an unsupported convexity inference; the current Definition retains the original radial construction.'),
+'lem-gr-strong-causality-compact-length-bound':('compact-length-open-visit-ends','The current compact-length proof estimates closed hulls inside relatively open visit intervals and adds nonnegative integrals without evaluating unavailable visit endpoints; record native reader endpoint-proof repair.'),
+ 'thm-gr-limit-curve-two-endpoints':('two-endpoints-zero-domain','The current endpoint-limit proof separates positive bounded domains from the zero-length case; b=0 uses distance convergence to the constant curve rather than division by b.'),
+}
+for b,d in docs.items():
+ for a in d['decisions']:
+  if a['id'] in repairs and a['verdict']=='accepted_repair' and not a.get('defect_ids'):
+   slug,correction=repairs[a['id']];rid=row(a['id'],b,slug,correction,location='definition' if a['id'].startswith('def-') else 'proof-step');amend(a,'The preserved native Alpha evidence describes this exact existing reader correction, and its actual current corrected source has been checked. Bind a precise same-subject fixed reader-repair record; no new native finding or historical observation is manufactured.',defect_ids=[rid])
+# Actual choice-interface fixes authored/reviewed by causal owner and integrated by this owner.
+for subject,scope in [('lem-gr-subdevelopment-convexity','Cauchy side and causal-calculus suppliers require inherited Countable and Dependent Choice, now explicit for the full convexity result.'),('lem-gr-development-quotient-second-countable','The conditional rational translated-ball basis construction remains Countable Choice only; obtaining the particular universal quotient Q and dense set D inherits Dependent Choice, now explicitly retained in their existence context.'),('lem-gr-isometric-immersion-rigidity','Only clause(c), using supplied global Cauchy rigidity context, inherits Dependent Choice; the local clauses retain their original smaller premises.')]:
+ rid=row(subject,79,'choice-'+subject,scope,'fatal','missing-choice-scope','statement',{'evidence':[{'path':f'research/{R}-resumed-orchestration/choice77-owner-20261013/batch79-source-metadata-proposals.json','note':'Actual causal owner source-interface repair; reviewed focused consumer closure in that owner evidence. No independent whole-proof review is claimed.'},{'path':f'research/{R}-owner-escalation-investigations/alpha79-past-restart/causal-owner-metadata-integration.json','note':'Exact current Statement/dependency metadata and all affected supplier quotes integrated by owning79 reviewer.'}]})
+ a=next((a for a in docs[79]['decisions'] if a['id']==subject and a['route']=='touched'),None)
+ if a:amend(a,'Original native Alpha found no fatal geometric/basis defect; preserve that evidence. Later actual source-interface repair makes inherited DC premises explicit. Bind only this real prerequisite completeness correction, retaining the conditional Countable-Choice-only basis result and richer original conclusions.',verdict='amended_repair',defect_ids=[rid])
+# Page and physical-consumer repair receipts must bind their own public prose, not supplier rows.
+a=next(v for v in docs[65]['decisions'] if v['id']=='gr-framework-and-geometry');rid=row(a['id'],65,'framework-page-matter-synopsis','The current page synopsis requires model-specific conservation arguments and allows model-derived energy conditions without framework-wide imposition. Record its own documented synopsis correction, separately from the supplier postulate correction.',location='page-summary');amend(a,'Bind the actual corrected page synopsis to its own same-subject reader-repair row; supplier matter-model row retains its original item owner and history.',defect_ids=[rid])
+a=next(v for v in docs[72]['decisions'] if v['id']=='pthm-gr-schwarzschild-circular-orbit-predictions');rid=row(a['id'],72,'circular-physical-extremum-inference','Current physical-consumer proof explicitly invokes the supplier strict-extremum/3s factorization to establish the iff stability endpoint, rather than relying only on vanishing second derivative; retains arbitrary orbital orientation and every ideal-body/model qualification.',subclass='invalid-inference');amend(a,'The current native Alpha evidence records the consumer-specific strict-extremum inference correction. Bind that own-subject corrected inference; supplier orientation/degenerate-endpoint rows stay solely owned by their mathematical supplier.',defect_ids=[rid])
+# Remove page77 supplier references; its actual own page repair remains.
+a=next(v for v in docs[77]['decisions'] if v['route']=='page');kept=[v for v in a['defect_ids'] if byid[v]['subject']==a['id']];assert kept;amend(a,'The page decision retains its own actual page-prose correction only. All original source-subject corrections are independently routed by exact fixed ID under their actual owning subject, without claiming page authorship or new gate coverage.',defect_ids=kept)
+# Every active fixed same-run owned row gets an exact-ID supplemental route only if no compatible actual decision owns it.
+allrows=ledger+newrows;superseded={v for a in allrows for v in a.get('supersedes',[])};referenced={v for d in docs.values() for a in d['decisions'] for v in a.get('defect_ids',[])}
+for z in allrows:
+ if z.get('run')!=R or z['defect_id'] in superseded or z['subject'] not in own or z.get('caught_at_stage')!='3a-adjudicate' or z['defect_id'] in referenced:continue
+ assert z['disposition'] in ['fixed','narrowed','dropped','false-positive','nonfatal-recorded'],z['defect_id'];b=own[z['subject']];verdict='false_positive' if z['disposition']=='false-positive' else 'confirmed_fatal' if z['severity']=='fatal' else 'confirmed_nonfatal';docs[b]['decisions'].append({'obligation':'gate:'+z['defect_id'],'id':z['subject'],'route':'gate','verdict':verdict,'defect_ids':[z['defect_id']],'repair_confidence':1,'evidence':'Owner supplemental exact-ID routing of the existing actual fixed row under its own assigned subject. The original correction and native/owner review provenance remain in the unchanged ledger evidence. Current corrected passages and evidence have been inspected for this precise routing/repair scope; this route does not assert native worker dispatch, original observation rebinding, new gate execution or an unrelated whole-proof audit. '+z.get('correction',''),'routing_owner_evidence':[str(B/'unowned-current-passages.json'),str(B/'before')],'subject_sha256':next((a.get('subject_sha256') for a in docs[b]['decisions'] if a['id']==z['subject'] and a.get('subject_sha256')),None),'owner_hash_pending':True});referenced.add(z['defect_id']);changes.append({'obligation':'gate:'+z['defect_id'],'id':z['subject'],'resolution':'Exact actual subject binding for existing fixed row; root owns current carrier sealing.'})
+dump(B/'new-ledger-rows.json',newrows);dump(B/'decision-patch-plan.json',changes)
+for b,d in docs.items():dump(B/f'proposed-batch-{b}-decisions.json',d)
+print('Prepared',len(newrows),'precise correction rows and',len(changes),'decision changes; no global append or decision mutation yet.')

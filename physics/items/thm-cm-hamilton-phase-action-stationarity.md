@@ -71,21 +71,11 @@ $$q'(t)=H_p\bigl(t,q(t),p(t)\bigr),\qquad p'(t)=-H_q\bigl(t,q(t),p(t)\bigr)\qqua
 
 ## Facts & Assumptions
 
-**Given:** The $C^2$ phase function $H$, a $C^1$ path $\gamma=(q,p)$, the phase action $A$, and
-admissible variation pairs $(\delta q,\delta p)$ with $\delta q(a)=\delta q(b)=0$.
+**Given:** The $C^2$ phase function $H$, a $C^1$ path $\gamma=(q,p)$, the phase action $A$, and admissible variation pairs $(\delta q,\delta p)$ with $\delta q(a)=\delta q(b)=0$.
 
-[F1] Differentiation under the integral sign on a compact rectangle
-([[thm-differentiation-under-the-integral-sign-on-a-compact-rectangle]]): the one-parameter
-integrand has continuous partial derivative in the parameter, so the derivative passes through the
-integral. Integration by parts ([[thm-integration-by-parts]]) applies to the term
-$\int_a^bp\cdot\delta q'\,dt$ with $u=p\cdot\delta q$ and yields $-\int_a^bp'\cdot\delta q\,dt$,
-because the boundary term $[p\cdot\delta q]_a^b$ vanishes by $\delta q(a)=\delta q(b)=0$; the
-integral is linear ([[thm-linearity-of-the-integral]]). 
+[F1] Differentiation under the integral sign on a compact rectangle ([[thm-differentiation-under-the-integral-sign-on-a-compact-rectangle]]): the one-parameter integrand has continuous partial derivative in the parameter, so the derivative passes through the integral. Integration by parts ([[thm-integration-by-parts]]) applies to the term $\int_a^bp\cdot\delta q'\,dt$ componentwise with $u=p_j$, $w=\delta q_j$, and yields $-\int_a^bp'\cdot\delta q\,dt$, because the boundary term $[p\cdot\delta q]_a^b$ vanishes by $\delta q(a)=\delta q(b)=0$; the integral is linear ([[thm-linearity-of-the-integral]]).
 
-[F2] The bumps of [[lem-cm-c2-bump-functions]]: a continuous scalar coefficient $E$ on $(a,b)$
-that is nonzero at some interior point admits a $C^2$ bump $\beta$ supported in $(a,b)$ with
-$\int E\beta\ne0$. Such bumps, multiplied by the standard basis vectors of the $q$- and
-$p$-components, give the admissible variations used below.
+[F2] The bumps of [[lem-cm-c2-bump-functions]]: a continuous scalar coefficient $E$ on $(a,b)$ that is nonzero at some interior point admits a $C^2$ bump $\beta$ supported in $(a,b)$ with $\int E\beta\ne0$. Such bumps, multiplied by the standard basis vectors of the $q$- and $p$-components, give the admissible variations used below.
 
 [F3] Hyperregular elimination ([[prop-cm-hamiltonian-branch-identities]]): on the inverse branch
 $H_p(t,q,p)=v(t,q,p)$, $H_q=-\mathcal L_q(t,q,v)$, and $(q,p)$ solves Hamilton's equations iff
@@ -93,16 +83,11 @@ $q$ solves the Euler–Lagrange equation with $p=\mathcal L_v(t,q,q')$; in the r
 $p=\mathcal L_v(t,q,q')$ the inverse relation gives $v(t,q,p)=q'$, so
 $$p\cdot q'-H(t,q,p)=\mathcal L_v\cdot q'-\bigl(\mathcal L_v\cdot q'-\mathcal L\bigr)=\mathcal L(t,q,q').$$
 
-[F4] Stationarity for the Lagrangian action is equivalent to the vanishing of the
-Euler–Lagrange expression ([[thm-cm-stationarity-iff-euler-lagrange]],
-[[def-cm-time-dependent-lagrangian-and-action]]); differentiability and integrability conventions
-are those of [[def-ck-euclidean-maps-and-diffeomorphisms]],
-[[def-vector-valued-derivative-and-integral]], [[def-interval]], [[def-abs-value]].
+[F4] Stationarity for the Lagrangian action is equivalent to the vanishing of the Euler–Lagrange expression ([[thm-cm-stationarity-iff-euler-lagrange]], [[def-cm-time-dependent-lagrangian-and-action]]); differentiability and integrability conventions are those of [[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-vector-valued-derivative-and-integral]], [[def-interval]], [[def-abs-value]].
 
 ## Proof
 
-**Proof technique:** direct; differentiate the phase action, integrate by parts, and use bumps in
-the two components separately; then substitute the inverse Legendre branch.
+**Proof technique:** direct; differentiate the phase action, integrate by parts, and use bumps in the two components separately; then substitute the inverse Legendre branch.
 
 1.1 Clause 1: the parameter derivative of the integrand is $\delta p\cdot q'+p\cdot\delta q'-H_q\cdot\delta q-H_p\cdot\delta p$, continuous in $(s,t)$; by [F1] the derivative of $A$ is the integral of this expression. Integrating the term $\int p\cdot\delta q'$ by parts and collecting the coefficients of $\delta q$ and $\delta p$ gives the displayed formula. [F1, given, algebra]
 
@@ -114,12 +99,6 @@ the two components separately; then substitute the inverse Legendre branch.
 
 ## Remarks
 
-- The identification in clause 3 is made on the actual inverse branch: the path in phase space is
-  the Legendre image of the Lagrangian path, so no dynamical assumption such as $p=q'$ is built
-  into the statement; the elimination uses the inverse relation of the hyperregular chart, which
-  is exactly the hypothesis under which the branch exists globally.
+- The identification in clause 3 is made on the actual inverse branch: the path in phase space is the Legendre image of the Lagrangian path, so no dynamical assumption such as $p=q'$ is built into the statement; the elimination uses the inverse relation of the hyperregular chart, which is exactly the hypothesis under which the branch exists globally.
 
-- The phase action has free $p$ endpoints and fixed $q$ endpoints. This is why the $p$-variations
-  require no boundary condition and the $q$-variations do: the boundary term produced by
-  integrating $\int p\cdot\delta q'$ vanishes precisely because $\delta q$ vanishes at the
-  endpoints, while no corresponding term arises from $\delta p$.
+- The phase action has free $p$ endpoints and fixed $q$ endpoints. This is why the $p$-variations require no boundary condition and the $q$-variations do: the boundary term produced by integrating $\int p\cdot\delta q'$ vanishes precisely because $\delta q$ vanishes at the endpoints, while no corresponding term arises from $\delta p$.

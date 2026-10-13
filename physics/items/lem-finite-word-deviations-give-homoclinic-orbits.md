@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 7
-deps: [def-bilateral-symbol-and-bounded-sequence-space, lem-coded-quadratic-recurrence-is-a-contraction, lem-symbol-locality-gives-coding-continuity, thm-henon-coded-invariant-set-is-conjugate-to-shift, def-stable-unstable-cones-and-line-slopes, def-metric-convergence, def-metric-space, def-continuity-real, thm-of-square-roots, def-abs-value, lem-of-abs-value, thm-geometric-series, lem-geometric-sequence-null]
+deps: [def-bilateral-symbol-and-bounded-sequence-space, lem-coded-quadratic-recurrence-is-a-contraction, lem-symbol-locality-gives-coding-continuity, thm-henon-coded-invariant-set-is-conjugate-to-shift, def-stable-unstable-cones-and-line-slopes, def-metric-convergence, def-metric-space, def-continuity-real, thm-of-square-roots, def-abs-value, lem-of-abs-value, lem-of-square-monotone, thm-geometric-series, lem-geometric-sequence-null]
 dependency_roles:
   def-bilateral-symbol-and-bounded-sequence-space: mathematical-premise
   lem-coded-quadratic-recurrence-is-a-contraction: mathematical-premise
@@ -19,6 +19,7 @@ dependency_roles:
   thm-of-square-roots: mathematical-premise
   def-abs-value: mathematical-premise
   lem-of-abs-value: mathematical-premise
+  lem-of-square-monotone: mathematical-premise
   thm-geometric-series: mathematical-premise
   lem-geometric-sequence-null: mathematical-premise
 provenance:
@@ -67,7 +68,9 @@ $$F^n\bigl(h(s)\bigr)\longrightarrow(r_u,r_u)\quad\text{as }n\to+\infty\quad\tex
 
 [F5] The sequence $L^{-m}$ tends to $0$ because $L>1$ ([[lem-geometric-sequence-null]], [[thm-geometric-series]]).
 
-[F6] Absolute value and order ([[lem-of-abs-value]], [[def-abs-value]]): $|uv|=|u||v|$, $|u+w|\le|u|+|w|$, and $10^2=100$.
+[F6] Absolute value and the base arithmetic ([[lem-of-abs-value]], [[def-abs-value]]): $|uv|=|u||v|$, $|u+w|\le|u|+|w|$, and $10^2=100$.
+
+[F7] Squaring is strictly increasing on the nonnegative reals ([[lem-of-square-monotone]]): if $0\le x<y$ then $x^2<y^2$, and if $0\le x\le y$ then $x^2\le y^2$.
 
 ## Proof
 
@@ -75,9 +78,9 @@ $$F^n\bigl(h(s)\bigr)\longrightarrow(r_u,r_u)\quad\text{as }n\to+\infty\quad\tex
 
 
 
-1.1 The constants $r_u$: by [F6] and $a\ge100$, $a+2-2\sqrt{a+1}\ge a+2-2(\sqrt a+1)=a-2\sqrt a>0$ for $a>4$, so $a+2r_u=a+2+2u\sqrt{a+1}>0$; the number $r_u=1+u\sqrt{a+1}$ satisfies $r_u^2=1+2u\sqrt{a+1}+(a+1)=a+2+2u\sqrt{a+1}=a+2r_u$, and $\operatorname{sign}r_u=u$ (for $u=+1$ because $\sqrt{a+1}>1$, for $u=-1$ because $\sqrt{a+1}>1$). Hence by [F3] $r_u=u\sqrt{a+2r_u}$. [given, F3, F6, algebra]
+1.1 The constants $r_u$: since $a\ge100$, [F7] applied to $10^2\le a=(\sqrt a)^2$ gives $\sqrt a\ge10$. Also $(\sqrt a+1)^2=a+2\sqrt a+1>a+1$, so [F7] gives $\sqrt{a+1}<\sqrt a+1$; and $1^2<a+1$ gives $\sqrt{a+1}>1$. Thus $a+2-2\sqrt{a+1}>a-2\sqrt a=\sqrt a(\sqrt a-2)>0$, so $a+2r_u=a+2+2u\sqrt{a+1}>0$ for both signs. The number $r_u=1+u\sqrt{a+1}$ satisfies $r_u^2=1+2u\sqrt{a+1}+(a+1)=a+2+2u\sqrt{a+1}=a+2r_u$, and $\operatorname{sign}r_u=u$ by $\sqrt{a+1}>1$. Hence by [F3] $r_u=u\sqrt{a+2r_u}$. [given, F3, F6, F7, algebra]
 
-2.1 Constant codes: let $\tilde x$ be the constant sequence $\tilde x_n:=r_u$. By step 1.1, $(T_{\bar u}\tilde x)_n=u\sqrt{a+r_u+r_u}=u\sqrt{a+2r_u}=r_u=\tilde x_n$ for all $n$; so $\tilde x$ is a fixed point of $T_{\bar u}$ in $B_R$ (indeed $|r_u|\le1+\sqrt{a+1}\le R$ by [F6] and $a\ge100$). By uniqueness ([F1]) $x(\bar u)=\tilde x$, hence $h(\bar u)=(r_u,r_u)$; and $F(r_u,r_u)=(r_u,r_u^2-a-r_u)=(r_u,r_u)$ because $r_u^2-a=2r_u$. [step 1.1, F1, F2, F6, algebra]
+2.1 Constant codes: let $\tilde x$ be the constant sequence $\tilde x_n:=r_u$. By step 1.1, $(T_{\bar u}\tilde x)_n=u\sqrt{a+r_u+r_u}=u\sqrt{a+2r_u}=r_u=\tilde x_n$ for all $n$; so $\tilde x$ is a fixed point of $T_{\bar u}$ in $B_R$ (indeed $|r_u|\le1+\sqrt{a+1}<\sqrt a+2<R$ by [F7] and $a\ge100$). By uniqueness ([F1]) $x(\bar u)=\tilde x$, hence $h(\bar u)=(r_u,r_u)$; and $F(r_u,r_u)=(r_u,r_u^2-a-r_u)=(r_u,r_u)$ because $r_u^2-a=2r_u$. [step 1.1, F1, F2, F6, F7, algebra]
 
 3.1 Convergence in the forward direction: let $m\ge0$ and let $n\ge N+m-1$; then every $j$ with $|j-n|\le m-1$ satisfies $j\ge n-(m-1)\ge N$, hence $s_j=u=\bar u_j$. By [F1], $\bigl(T_s^m0\bigr)_n=\bigl(T_{\bar u}^m0\bigr)_n$. Therefore $$\bigl|x_n(s)-x_n(\bar u)\bigr|\le\bigl|x_n(s)-\bigl(T_s^m0\bigr)_n\bigr|+\bigl|\bigl(T_{\bar u}^m0\bigr)_n-x_n(\bar u)\bigr|\le4RL^{-m}$$ for $n\ge N+m-1$, using the uniform error bound of [F1] twice and $x(\bar u)=\tilde x$ of step 2.1. Given $\varepsilon>0$, choose $m$ with $4RL^{-m}<\varepsilon$, possible by [F5]; then $|x_n(s)-r_u|<\varepsilon$ for all $n\ge N+m-1$. Hence $x_n(s)\to r_u$ as $n\to+\infty$, and therefore $F^n(h(s))=(x_{n-1}(s),x_n(s))\to(r_u,r_u)$ by [F1]. [step 2.1, F1, F2, F5, algebra]
 

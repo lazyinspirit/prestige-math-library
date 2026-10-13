@@ -31,10 +31,11 @@ physical_scope: "A worked scalar-model example of shock and rarefaction weak
   solutions: the Riemann data 2 and 1 with the entropy coefficients of the shock
   computed on the interval (1,2), and the rarefaction fan of the data 1 and 2
   checked for continuity, the classical equation inside the fan and convergence
-  of the initial trace. The scalar conservation law u_t + (u^2/2)_x = 0 is read
-  as an idealized one-dimensional transport/compressible model; the example
-  asserts no derivation of it from three-dimensional fluid mechanics and reports
-  no measurement."
+  of the initial trace. The scalar conservation law u_t + (u^2/2)_x = 0 is a
+  dimensionless idealized one-dimensional model; its scalar variable is not
+  identified with a particular physical density or velocity. The example
+  asserts no derivation from three-dimensional fluid mechanics and reports no
+  measurement."
 sources:
   references:
     - title: "W. Barsukow, Introduction to Conservation Laws: Theory and Numerics
@@ -56,8 +57,9 @@ Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]) for the cited Lebesgue we
 
 Let $F(u)=\tfrac12u^2$ and use the weak and entropy formulations of
 [[def-cm-scalar-conservation-law-weak-and-entropy-solution]], with the scalar
-field $u$ read as the idealized one-dimensional model variable (a rescaled
-density or transport quantity of the scalar model; see the remarks). Then:
+field $u$ read as a dimensionless model variable. The coordinates $t,x$, the
+states $u_L,u_R$ and flux $F(u)$ are all dimensionless; no assignment to a
+measured density, velocity, length or time is made. Then:
 
 1. **(Shock.)** For the Riemann data $u_L=2$, $u_R=1$ the piecewise constant
    field $u(t,x)=2$ for $x<\tfrac32t$ and $u(t,x)=1$ for $x>\tfrac32t$
@@ -111,18 +113,6 @@ density or transport quantity of the scalar model; see the remarks). Then:
 
 ## Remarks
 
-- **Physical reading.** The scalar field $u$ is a model variable of an
-  idealized one-dimensional transport problem; it is **not** claimed to be
-  the velocity or density of a three-dimensional compressible fluid, and no
-  derivation of the scalar equation from the momentum and mass balances of
-  this page is asserted. The example shows that a scalar continuum model can
-  have nondifferentiable weak solutions whose admissibility is controlled by
-  entropy inequalities, in contrast with the smooth motions required by the
-  transport and balance theorems of this page.
+- **Physical reading.** The dimensionless scalar field $u$ is a model variable of an idealized one-dimensional transport problem; it is **not** claimed to be the velocity or density of a three-dimensional compressible fluid, and no derivation of the scalar equation from the momentum and mass balances of this page is asserted. The example shows that a scalar continuum model can have nondifferentiable weak solutions whose admissibility is controlled by entropy inequalities, in contrast with the smooth motions required by the transport and balance theorems of this page.
 
-- **Admissibility is not automatic.** Both the shock and the fan are weak
-  solutions; only the entropy inequalities select the physically admissible
-  one among weak solutions of this model family. The computed coefficients
-  show the shock is admissible for the stated data and the fan is the
-  equality case. No statement is made about entropy solutions for general
-  initial data or for systems of conservation laws.
+- **Admissibility is not automatic.** Both the shock and the fan are weak solutions; only the entropy inequalities select the physically admissible one among weak solutions of this model family. The computed coefficients show the shock is admissible for the stated data and the fan is the equality case. No statement is made about entropy solutions for general initial data or for systems of conservation laws.

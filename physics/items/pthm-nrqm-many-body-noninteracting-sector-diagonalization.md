@@ -136,7 +136,9 @@ $N>d$ the sector space is $\{0\}$ and the model has no sector states;
 (c) *partition sum and ground energy*: write
 $$\mathcal C_N^\sigma:=\{\lambda\in W(N,d):\lambda_j\le1\ \text{for every }j\ \text{if }\sigma=-\},\qquad M_N^\sigma:=|\mathcal C_N^\sigma|=\dim\mathfrak H_N^\sigma.$$
 The configuration counts are $M_N^- =\binom dN$ and
-$M_N^+ =\binom{N+d-1}{N}$. For every $\beta>0$,
+$M_N^+ =\binom{N+d-1}{N}$. For every inverse-energy parameter
+$\beta>0$ in $\mathrm J^{-1}$ (all $\varepsilon_j$ and configuration
+energies are read in joules, so each Boltzmann exponent is dimensionless),
 $$Z_N(\beta):=\operatorname{tr}e^{-\beta H_N^\sigma}=\sum_{\lambda\in\mathcal C_N^\sigma}e^{-\beta\lambda_\lambda}$$
 is finite. If $\sigma=-$ and $N>d$, then $\mathcal C_N^-=\varnothing$,
 $Z_N(\beta)=0$, and there is no ground eigenvalue or trace-one density

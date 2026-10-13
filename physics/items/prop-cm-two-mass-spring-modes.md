@@ -49,7 +49,7 @@ and $\omega_+:=(k/m)^{1/2}$, $\omega_-:=((k+2c)/m)^{1/2}$ (nonnegative square ro
 $$m\,x''(t)=-Kx(t)$$
 
 for $C^2$ curves $x:J\to\mathbb R^2$ on intervals $J\subseteq\mathbb R$ with nonempty interior
-([[def-interval]], [[def-vector-valued-derivative-and-integral]]). Then:
+([[def-interval]], [[def-vector-valued-derivative-and-integral]]). The vector equation and its scalar mode equations are autonomous equations with time domain $\mathbb R$; a solution on $J$ is their restriction to that solution interval. Every such local solution extends uniquely to the displayed global family. Global growth claims below refer to that extension. Then:
 
 1. $Ku_+=ku_+$ and $Ku_-=(k+2c)u_-$; the vectors $u_+,u_-$ are orthonormal, and every
    $x\in\mathbb R^2$ satisfies $x=\langle u_+,x\rangle u_++\langle u_-,x\rangle u_-$
@@ -69,7 +69,7 @@ $$x(t)=\bigl(A_+\cos(\omega_+t)+B_+\sin(\omega_+t)\bigr)u_++\bigl(A_-\cos(\omega
    $k/m$ and an anti-phase normal mode with squared frequency $(k+2c)/m$
    ([[thm-cm-homogeneous-oscillator-solution-classification]]);
 4. if $k=0$ and $c\ge0$, then $Ku_+=0$, and the curves $x(t)=(A+Bt)u_+$
-   ($A,B\in\mathbb R$) are solutions; for $B\ne0$ such a curve is unbounded on $[0,\infty)$, so
+   ($A,B\in\mathbb R$) are solutions; for $B\ne0$ each such curve has a global extension unbounded on $[0,\infty)$, so
    the zero-frequency mode is affine rather than oscillatory. The bijection of clause 2 remains
    valid with the scalar equations $m\,y_+''=0$ and $m\,y_-''+2c\,y_-=0$, and for $c>0$ the
    $u_-$-component is the trigonometric family with $\omega_-=(2c/m)^{1/2}$
@@ -133,7 +133,7 @@ theorem.
 
 4.1 Frequencies on an arbitrary interval: assume $k>0$ and choose $t_0\in J$. For scalar components $y_\pm$ from clause 2, the translated functions $\widetilde y_\pm(s):=y_\pm(t_0+s)$ are defined on $J-t_0$, which contains $0$ and has nonempty interior, and solve the same autonomous scalar equations. Apply [F2] to obtain the trigonometric families in $s$ with frequencies $\omega_+=(k/m)^{1/2}$ and $\omega_-=((k+2c)/m)^{1/2}$. The addition formulas in [F2] restore constants $A_\pm,B_\pm$ and give $y_\pm(t)=A_\pm\cos(\omega_\pm t)+B_\pm\sin(\omega_\pm t)$ on $J$. Conversely each displayed scalar family solves its equation on $J$; the bijection of step 3.1 therefore gives exactly the vector solutions in clause 3, with the $u_+$-mode (both coordinates equal) in phase and the $u_-$-mode (opposite coordinates) anti-phase. [step 3.1, F2, algebra]
 
-5.1 Degenerate case on an arbitrary interval: let $k=0$, $c\ge0$, and choose $t_0\in J$. Step 1.1 gives $Ku_+=0$, so for $x(t)=(A+Bt)u_+$ one has $m x''=0$ and $-Kx=-(A+Bt)Ku_+=0$: the family consists of solutions. If $B\ne0$ then $\lVert x(t)\rVert_2=|A+Bt|$ is unbounded on $[0,\infty)$. The translations $\widetilde y_\pm(s):=y_\pm(t_0+s)$ of the scalar components are defined on $J-t_0$ and satisfy $m\widetilde y_+''=0$, $m\widetilde y_-''+2c\widetilde y_-=0$. By [F2], $\widetilde y_+$ is affine, and restoring constants gives $y_+(t)=A+Bt$; if $c=0$ the same affine classification applies to $\widetilde y_-$, while if $c>0$ the homogeneous-oscillator classification gives the trigonometric family for $\widetilde y_-$ and the addition formulas restore its constants to the stated family with $\omega_-=(2c/m)^{1/2}$. The bijection of step 3.1 remains valid and establishes clause 4. [step 1.1, step 3.1, F2, algebra] ∎
+5.1 Degenerate case on an arbitrary interval: let $k=0$, $c\ge0$, and choose $t_0\in J$. Step 1.1 gives $Ku_+=0$, so for $x(t)=(A+Bt)u_+$ one has $m x''=0$ and $-Kx=-(A+Bt)Ku_+=0$: the family consists of solutions. The same formula defines $x$ on all of $\mathbb R$, and if $B\ne0$ its global extension has $\lVert x(t)\rVert_2=|A+Bt|$ unbounded on $[0,\infty)$. The translations $\widetilde y_\pm(s):=y_\pm(t_0+s)$ of the scalar components are defined on $J-t_0$ and satisfy $m\widetilde y_+''=0$, $m\widetilde y_-''+2c\widetilde y_-=0$. By [F2], $\widetilde y_+$ is affine, and restoring constants gives $y_+(t)=A+Bt$; if $c=0$ the same affine classification applies to $\widetilde y_-$, while if $c>0$ the homogeneous-oscillator classification gives the trigonometric family for $\widetilde y_-$ and the addition formulas restore its constants to the stated family with $\omega_-=(2c/m)^{1/2}$. The bijection of step 3.1 remains valid and establishes clause 4. In both stiffness cases the scalar classifications give a unique global extension of each component, and the inverse modal transform gives the unique global vector extension claimed in the statement. [step 1.1, step 3.1, F2, algebra] ∎
 
 ## Remarks
 

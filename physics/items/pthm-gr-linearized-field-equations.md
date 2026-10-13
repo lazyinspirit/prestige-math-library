@@ -6,17 +6,16 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 14
-physical_scope: "Conditional deduction inside the classical gravitational framework: a one-parameter family of models of the adopted field law on an open set of the flat model, with smooth metric and stress-energy families, expanded to first order about the flat metric. The conclusion is the linearized equation with the first-order stress coefficient as its source, its vacuum and harmonic-gauge reductions, and a compact-set bound on the exact vacuum residual of a small-amplitude metric. The all-space harmonic-gauge existence clause additionally assumes the Axiom of Countable Choice. Excludes nonlinear back-reaction, non-smooth or distributional sources, curved backgrounds, boundaries, quantum fields and any comparison with observation; the stress-energy family is model input, not derived from the metric perturbation."
+physical_scope: "Conditional deduction inside the classical gravitational framework: a one-parameter family of models of the adopted field law on an open set of the flat model, with smooth metric and stress-energy families, expanded to first order about the flat metric. The conclusion is the linearized equation with the first-order stress coefficient as its source, its vacuum and harmonic-gauge reductions, and, on the zero-source Lambda = 0 branch, a compact-set bound on the exact vacuum residual of a small-amplitude metric. The all-space harmonic-gauge existence clause additionally assumes the Axiom of Countable Choice. Excludes nonlinear back-reaction, non-smooth or distributional sources, curved backgrounds, boundaries, quantum fields and any comparison with observation; the stress-energy family is model input, not derived from the metric perturbation."
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 proof_strategy: direct
-deps: [post-gr-einstein-field-law, post-gr-spacetime-and-classical-domain, post-gr-field-and-matter-assumptions, post-gr-classical-gravitational-action, pthm-gr-adopted-action-and-einstein-equations, def-gr-si-unit-and-coordinate-conventions, def-gr-flat-linearized-perturbation, def-gr-plane-wave-perturbation, thm-gr-flat-linearized-curvature-and-gauge, thm-gr-flat-wave-equation-duhamel-and-harmonic-gauge, def-countable-choice, def-polar-surface-measure-on-the-unit-sphere, thm-linear-change-of-variables-for-lebesgue-measure, lem-gr-lorentzian-perturbations-remain-lorentzian, cor-taylor-lagrange-and-cauchy-remainders, def-gr-minkowski-model-and-inertial-chart, def-gr-smooth-covariant-two-tensor-field, def-gr-curvature-tensor-and-derived-tensors, def-gr-metric-selected-connection, def-c-r-and-smooth-maps-between-smooth-manifolds]
+deps: [post-gr-einstein-field-law, post-gr-spacetime-and-classical-domain, post-gr-field-and-matter-assumptions, pthm-gr-adopted-action-and-einstein-equations, def-gr-si-unit-and-coordinate-conventions, def-gr-flat-linearized-perturbation, def-gr-plane-wave-perturbation, thm-gr-flat-linearized-curvature-and-gauge, thm-gr-flat-wave-equation-duhamel-and-harmonic-gauge, def-countable-choice, def-polar-surface-measure-on-the-unit-sphere, thm-linear-change-of-variables-for-lebesgue-measure, lem-gr-lorentzian-perturbations-remain-lorentzian, cor-taylor-lagrange-and-cauchy-remainders, def-gr-minkowski-model-and-inertial-chart, def-gr-smooth-covariant-two-tensor-field, def-gr-curvature-tensor-and-derived-tensors, def-gr-metric-selected-connection, def-c-r-and-smooth-maps-between-smooth-manifolds]
 dependency_roles:
   post-gr-einstein-field-law: physical-assumption
   post-gr-spacetime-and-classical-domain: physical-assumption
   post-gr-field-and-matter-assumptions: physical-assumption
-  post-gr-classical-gravitational-action: physical-assumption
   pthm-gr-adopted-action-and-einstein-equations: physical-result
   def-gr-si-unit-and-coordinate-conventions: formulation-prerequisite
   def-gr-flat-linearized-perturbation: mathematical-premise
@@ -59,7 +58,7 @@ $\varepsilon_1\le\varepsilon$, and let
 $(T(\lambda))_{\lambda\in(-\varepsilon,\varepsilon)}$ be a family of smooth
 symmetric covariant $2$-tensor fields on $\Omega$ whose component families
 $T_{ab}(\lambda,p)$ are smooth in $(\lambda,p)$ and such that for every
-$\lambda\in(-\varepsilon,\varepsilon)$ the pair $(g(\lambda),T(\lambda))$
+$\lambda\in(-\varepsilon_1,\varepsilon_1)$ the pair $(g(\lambda),T(\lambda))$
 satisfies the adopted field law
 
 $$G_{ab}\bigl(g(\lambda)\bigr)+\Lambda\,g_{ab}(\lambda)=\kappa\,T_{ab}(\lambda)\qquad\text{on }\Omega,\qquad \kappa:=\frac{8\pi G_N}{c^4},$$
@@ -90,7 +89,7 @@ the sense of [[def-gr-plane-wave-perturbation]] clause (e), then
 $\Box\bar h_{ab}=2\Lambda h_{ab}-2S_{ab}$ on $\Omega$.
 
 **(d) Quadratic residual of a linearized vacuum wave.** Let
-$K\subseteq\Omega$ be compact and let $L>0$ be a length scale. In the fixed
+$K\subseteq\Omega$ be a nonempty compact set and let $L>0$ be a length scale. In the fixed
 SI numerical chart define the real control functional
 
 $$B_K(A):=\sup_K\max_{a,b}|A_{ab}|+L^{-1}\sup_K\max_{a,b,c}|\partial_cA_{ab}|+L^{-2}\sup_K\max_{a,b,c,d}|\partial_c\partial_dA_{ab}|.$$
@@ -98,16 +97,16 @@ $$B_K(A):=\sup_K\max_{a,b}|A_{ab}|+L^{-1}\sup_K\max_{a,b,c}|\partial_cA_{ab}|+L^
 Take the fixed dimensionless numerical threshold $\delta_0:=1/16$. If $h$ is
 a smooth symmetric perturbation on a neighborhood of $K$ with
 $G^{(1)}_{ab}(h)=0$ on $K$, then there is a finite dimensionless numerical
-constant $C_{K,L}$ such that, for every $|\lambda|\le1$ with
+constant $C_{K,L}$ such that, for every real $\lambda$ with
 $|\lambda|B_K(h)\le\delta_0$,
 
-$$\bigl|G_{ab}(\eta+\lambda h)(p)\bigr|\le C_{K,L}\,\lambda^2B_K(h)^2/L^2\qquad(p\in K,\ |\lambda|\le1).$$
+$$\bigl|G_{ab}(\eta+\lambda h)(p)\bigr|\le C_{K,L}\,\lambda^2B_K(h)^2/L^2\qquad(p\in K).$$
 
 The functional $B_K$ and threshold are numerical chart controls, not physical
 observables; each component and derivative is first evaluated in the fixed
 SI length-coordinate convention. With $L$ in metres, the displayed residual
-has units $\mathrm m^{-2}$. Thus the exact vacuum field law holds on $K$ up
-to a residual quadratic in the amplitude.
+has units $\mathrm m^{-2}$. For the zero-source branch $T(\lambda)=0$ with
+$\Lambda=0$, this bounds the residual of the exact vacuum field law on $K$.
 
 **(e) All-space harmonic gauge (assuming $\mathrm{AC}_\omega$).** If
 $\Omega=\mathbb R^4$, $h$ solves the linearized vacuum equations with
@@ -124,7 +123,7 @@ no empirical premise.
 
 ## Facts & Assumptions
 
-**Given:** The adopted postulates, a flat linearized family $(\varepsilon_1,h,q)$ over $\Omega$, a smooth family $T(\lambda)$ of symmetric fields satisfying the field law for every $\lambda$, and a compact set $K\subseteq\Omega$ with $L>0$; for clause (e), also assume $\mathrm{AC}_\omega$.
+**Given:** The adopted postulates, a flat linearized family $(\varepsilon_1,h,q)$ over $\Omega$, a smooth family $T(\lambda)$ of symmetric fields satisfying the field law for every $\lambda$, and a nonempty compact set $K\subseteq\Omega$ with $L>0$; for clause (e), also assume $\mathrm{AC}_\omega$.
 
 [A1] The model satisfies the adopted field law $G_{ab}+\Lambda g_{ab}=\kappa T_{ab}$ on its matter domain, with $\kappa=8\pi G_N/c^4$; the equation is model input, and the constants, the matter content and the domain are those of the cited postulates ([[post-gr-einstein-field-law]] clauses (i)-(ii), [[post-gr-spacetime-and-classical-domain]], [[post-gr-field-and-matter-assumptions]], [[def-gr-si-unit-and-coordinate-conventions]]).
 
@@ -138,13 +137,13 @@ no empirical premise.
 
 **Proof technique:** direct; differentiate the field-law identity along the family at $\lambda=0$, then apply the harmonic-gauge reduction and the quadratic-remainder estimate.
 
-1.1 (The residual family.) Define $\Phi_{ab}(\lambda,p):=G_{ab}(g(\lambda))(p)+\Lambda g_{ab}(\lambda)(p)-\kappa T_{ab}(\lambda,p)$ for $(\lambda,p)\in(-\varepsilon,\varepsilon)\times\Omega$. By [L1] and the smoothness of $T$, each component $\Phi_{ab}$ is differentiable in $\lambda$ at every $\lambda$. By hypothesis $\Phi_{ab}(\lambda,p)=0$ for all $(\lambda,p)$, so $\partial_\lambda\Phi_{ab}(0,p)=0$ for every $p$ (the difference quotients of the identically zero function vanish). [A1, L1, given]
+1.1 (The residual family.) Define $\Phi_{ab}(\lambda,p):=G_{ab}(g(\lambda))(p)+\Lambda g_{ab}(\lambda)(p)-\kappa T_{ab}(\lambda,p)$ for $(\lambda,p)\in(-\varepsilon_1,\varepsilon_1)\times\Omega$. By [L1] and the smoothness of $T$, each component $\Phi_{ab}$ is differentiable in $\lambda$ at every $\lambda$. By hypothesis $\Phi_{ab}(\lambda,p)=0$ for all $(\lambda,p)$, so $\partial_\lambda\Phi_{ab}(0,p)=0$ for every $p$ (the difference quotients of the identically zero function vanish). [A1, L1, given]
 
 1.2 (Sourced wave equation.) If $h$ is in harmonic gauge and $G^{(1)}_{ab}(h)+\Lambda h_{ab}=S_{ab}$, then substituting [L2] gives $-\tfrac12\Box\bar h_{ab}=S_{ab}-\Lambda h_{ab}$, that is $\Box\bar h_{ab}=2\Lambda h_{ab}-2S_{ab}$. This proves (c). [L2, algebra]
 
-1.3 (Quadratic residual.) Let $h$ satisfy $G^{(1)}_{ab}(h)=0$ on $K$ and choose $|\lambda|\le1$ with $|\lambda|B_K(h)\le\delta_0=1/16$. Put $A:=\lambda h$ and at each $p\in K$ let $V_A(p)$ be the finite list $(A_{ab},\partial_cA_{ab},\partial_c\partial_dA_{ab})$. By the displayed definition of $B_K$, $\|V_A(p)\|_{\max}\le m_LB_K(A)$, where $m_L:=\max\{1,L,L^2\}$; in particular $|A_{ab}(p)|\le1/16<1/8$, so [L3] makes $\eta+A$ Lorentzian. The jet lists along all segments $tV_A(p)$, $p\in K$, $0\le t\le1$, lie in the compact set given by $\max|A_{ab}|\le1/16$, $\max|\partial_cA_{ab}|\le L\delta_0$ and $\max|\partial_c\partial_dA_{ab}|\le L^2\delta_0$. On this set the smooth Einstein-tensor map of [L3] has Hessian bounded by a finite $H_{K,L}$. Taylor's estimate along $tV_A(p)$ gives $|G_{ab}(\eta+A)(p)-G^{(1)}_{ab}(A)(p)|\le\tfrac12H_{K,L}m_L^2B_K(A)^2=C_{K,L}B_K(A)^2/L^2$, with $C_{K,L}:=\tfrac12H_{K,L}m_L^2L^2$. Since $B_K(A)=|\lambda|B_K(h)$ and $G^{(1)}_{ab}(A)=\lambda G^{(1)}_{ab}(h)=0$, this is (d). [L3, algebra]
+1.3 (Quadratic residual.) Let $h$ satisfy $G^{(1)}_{ab}(h)=0$ on $K$ and choose $\lambda\in\mathbb R$ with $|\lambda|B_K(h)\le\delta_0=1/16$. Put $A:=\lambda h$ and at each $p\in K$ let $V_A(p)$ be the finite list $(A_{ab},\partial_cA_{ab},\partial_c\partial_dA_{ab})$. By the displayed definition of $B_K$, $\|V_A(p)\|_{\max}\le m_LB_K(A)$, where $m_L:=\max\{1,L,L^2\}$; in particular $|A_{ab}(p)|\le1/16<1/8$, so [L3] makes $\eta+A$ Lorentzian. The jet lists along all segments $tV_A(p)$, $p\in K$, $0\le t\le1$, lie in the compact set given by $\max|A_{ab}|\le1/16$, $\max|\partial_cA_{ab}|\le L\delta_0$ and $\max|\partial_c\partial_dA_{ab}|\le L^2\delta_0$. On this set the smooth Einstein-tensor map of [L3] has Hessian bounded by a finite $H_{K,L}$. Taylor's estimate along $tV_A(p)$ gives $|G_{ab}(\eta+A)(p)-G^{(1)}_{ab}(A)(p)|\le\tfrac12H_{K,L}m_L^2B_K(A)^2=C_{K,L}B_K(A)^2/L^2$, with $C_{K,L}:=\tfrac12H_{K,L}m_L^2L^2$. Since $B_K(A)=|\lambda|B_K(h)$ and $G^{(1)}_{ab}(A)=\lambda G^{(1)}_{ab}(h)=0$, this is (d). [L3, algebra]
 
-2.1 (First-order equation.) Differentiating the definition of $\Phi$ at $\lambda=0$ and evaluating at $p$, $$0=\partial_\lambda G_{ab}(g(\lambda))\big|_0+\Lambda\,\partial_\lambda g_{ab}(\lambda)\big|_0-\kappa\,\partial_\lambda T_{ab}(\lambda,0).$$ By [L1] the first term is the first-order Einstein coefficient $G^{(1)}_{ab}(h)(p)$, the second is $\Lambda h_{ab}(p)$, and the third is $\kappa T^{(1)}_{ab}(p)$. Hence $G^{(1)}_{ab}(h)+\Lambda h_{ab}=\kappa T^{(1)}_{ab}$ on $\Omega$, which is (a). [L1, step 1.1, algebra]
+2.1 (First-order equation.) Differentiating the definition of $\Phi$ at $\lambda=0$ and evaluating at $p$, $$0=\partial_\lambda G_{ab}(g(\lambda))\big|_0+\Lambda\,\partial_\lambda g_{ab}(\lambda)\big|_0-\kappa\,\left.\partial_\lambda T_{ab}(\lambda,p)\right|_{\lambda=0}.$$ By [L1] the first term is the first-order Einstein coefficient $G^{(1)}_{ab}(h)(p)$, the second is $\Lambda h_{ab}(p)$, and the third is $\kappa T^{(1)}_{ab}(p)$. Hence $G^{(1)}_{ab}(h)+\Lambda h_{ab}=\kappa T^{(1)}_{ab}$ on $\Omega$, which is (a). [L1, step 1.1, algebra]
 
 3.1 (Vacuum branch and wave form.) If $T(\lambda)=0$ for every $\lambda$, then $T^{(1)}=0$, and with $\Lambda=0$ step 2.1 gives $G^{(1)}_{ab}(h)=0$. If in addition $\partial^a\bar h_{ab}=0$, then [L2] gives $-\tfrac12\Box\bar h_{ab}=G^{(1)}_{ab}(h)=0$ for every $a,b$, so $\Box\bar h_{ab}=0$. This proves (b). [L2, step 2.1, algebra]
 

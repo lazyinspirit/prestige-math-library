@@ -49,7 +49,7 @@ verification:
 
 ## Definition
 
-**Holomorphic maps.** Let $m,p\ge1$ and let $D\subseteq\mathbb C^m$ be open, identified with an open subset of $\mathbb R^{2m}$ through $\mathbb C^m\cong\mathbb R^{2m}$. A map $F:D\to\mathbb C^p$ is **complex differentiable at** $a\in D$ when there is a map $L:\mathbb C^m\to\mathbb C^p$ that is $\mathbb C$-linear — $L(u+v)=L(u)+L(v)$ and $L(\lambda u)=\lambda L(u)$ for $\lambda\in\mathbb C$ ([[def-linear-map]], [[def-euclidean-linear-map]], [[thm-complex-numbers-form-a-field]]) — with
+**Holomorphic maps.** Let $m,p\ge1$ and let $D\subseteq\mathbb C^m$ be open. Write each coordinate $z_k=x_k+iy_k$ and identify $D$ with the corresponding open subset of $\mathbb R^{2m}$ by $(z_1,\dots,z_m)\mapsto(x_1,y_1,\dots,x_m,y_m)$. A map $F:D\to\mathbb C^p$ is **complex differentiable at** $a\in D$ when there is a map $L:\mathbb C^m\to\mathbb C^p$ that is $\mathbb C$-linear — $L(u+v)=L(u)+L(v)$ and $L(\lambda u)=\lambda L(u)$ for $\lambda\in\mathbb C$ ([[def-linear-map]], [[def-euclidean-linear-map]], [[thm-complex-numbers-form-a-field]]) — with
 
 $$F(a+v)=F(a)+L(v)+r(v),\qquad \frac{\lVert r(v)\rVert}{\lVert v\rVert}\longrightarrow0\ \ (v\to0),$$
 
@@ -59,17 +59,21 @@ the norm being the Euclidean norm of $\mathbb R^{2m}$ and $\mathbb R^{2p}$ ([[de
 
 **Polydiscs.** For $a\in\mathbb C^m$ and a polyradius $\rho=(\rho_1,\dots,\rho_m)$ with $0<\rho_k\le\infty$ put
 
-$$\Delta_\rho(a):=\{\,z\in\mathbb C^m:\ |z_k-a_k|<\rho_k\ \text{for all }k\,\},\qquad \Gamma_\rho(a):=\{\,z:\ |z_k-a_k|=\rho_k\ \text{for all }k\,\},$$
+$$\Delta_\rho(a):=\{\,z\in\mathbb C^m:\ |z_k-a_k|<\rho_k\ \text{for all }k\,\},$$
 
-the open **polydisc** and its **distinguished boundary**; a polydisc is open and convex ([[def-metric-ball]], [[def-metric-topology]]).
+the open **polydisc**, which is open and convex ([[def-metric-ball]], [[def-metric-topology]]). If every $\rho_k$ is finite, its **distinguished boundary** is
 
-**Complex phase domains.** Let $d\ge1$. A **complex phase domain** is a nonempty open $D\subseteq\mathbb C^{2d}$ whose points are written $Z=(z,w)$ with $z=(z^1,\dots,z^d)$, $w=(w_1,\dots,w_d)\in\mathbb C^d$. On it define the **complexified canonical two-form** and the **complexified Poisson bracket** of holomorphic functions $f,g:D\to\mathbb C$ by
+$$\Gamma_\rho(a):=\{\,z\in\mathbb C^m:\ |z_k-a_k|=\rho_k\ \text{for all }k\,\}.$$
+
+When any radius is infinite, no distinguished boundary is defined.
+
+**Complex phase domains.** Let $d\ge1$. A **complex phase domain** is a nonempty open $D\subseteq\mathbb C^{2d}$ whose points are written $Z=(z,w)$ with $z=(z^1,\dots,z^d)$, $w=(w_1,\dots,w_d)\in\mathbb C^d$. In these coordinates, $\partial_{z^i}$ and $\partial_{w_i}$ denote the coordinate derivatives defined above for the corresponding entries of $Z$. On $D$ define the **complexified canonical two-form** and the **complexified Poisson bracket** of holomorphic functions $f,g:D\to\mathbb C$ by
 
 $$\omega_{\mathbb C}:=\sum_{i=1}^d dz^i\wedge dw_i,\qquad \{f,g\}:=\sum_{i=1}^d\bigl(\partial_{z^i}f\,\partial_{w_i}g-\partial_{w_i}f\,\partial_{z^i}g\bigr),$$
 
-and for a holomorphic $f:D\to\mathbb C$ its **complex Hamiltonian field** $X_f:=J\nabla f$, where $J=\begin{pmatrix}0_d&I_d\\-I_d&0_d\end{pmatrix}$ is the standard symplectic matrix of [[def-cm-phase-domain-and-standard-symplectic-two-form]] and $\nabla f=(\partial_{z^1}f,\dots,\partial_{z^d}f,\partial_{w_1}f,\dots,\partial_{w_d}f)$ is the gradient column of coordinate derivatives. The real subspace $\mathbb R^{2d}\subseteq\mathbb C^{2d}$ and the restriction of $\omega_{\mathbb C}$, $J$ and $\{\,\cdot\,,\,\cdot\,\}$ to real-valued functions reproduce the real objects of [[def-cm-phase-domain-and-standard-symplectic-two-form]].
+and for a holomorphic $f:D\to\mathbb C$ its **complex Hamiltonian field** $X_f:=J\nabla f$, where the same entries of $J=\begin{pmatrix}0_d&I_d\\-I_d&0_d\end{pmatrix}$ from [[def-cm-phase-domain-and-standard-symplectic-two-form]] are regarded as a matrix in $M_{2d}(\mathbb C)$, and $\nabla f=(\partial_{z^1}f,\dots,\partial_{z^d}f,\partial_{w_1}f,\dots,\partial_{w_d}f)$ is the gradient column of coordinate derivatives. If $D_{\mathbb R}:=D\cap\mathbb R^{2d}$ is nonempty, it is open in $\mathbb R^{2d}$, and the restrictions of $\omega_{\mathbb C}$ and $J$ to $D_{\mathbb R}$ are exactly the standard two-form and matrix of [[def-cm-phase-domain-and-standard-symplectic-two-form]].
 
-**Distance domains.** For $U\subseteq\mathbb R^{2d}$ and $r>0$ put
+**Distance domains.** For a nonempty $U\subseteq\mathbb R^{2d}$ and $r>0$ put
 
 $$D(r):=\{\,\zeta\in\mathbb C^{2d}:\ \operatorname{dist}(\zeta,\overline U)<r\,\},\qquad \operatorname{dist}(\zeta,\overline U):=\inf\{\lVert\zeta-x\rVert:x\in\overline U\},$$
 

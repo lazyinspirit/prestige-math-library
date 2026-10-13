@@ -72,7 +72,7 @@ $\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ its curvature data
 
 [L1] The product metric is smooth Lorentzian of signature $(-,+,+,+)$ on $M$ with time orientation $N=\partial_0$; its components on $U$ are $\operatorname{diag}(-1,1,\sin^2(x^1),1)$. The metric-selected connection exists and is unique, and on $U$ its Christoffel symbols are $\Gamma^a{}_{bc}=\tfrac12g^{ad}(\partial_bg_{dc}+\partial_cg_{bd}-\partial_dg_{bc})$, with $g^{ad}$ the matrix inverse of $g_{ab}$ ([[def-gr-smooth-lorentzian-objects]], [[def-gr-metric-selected-connection]], [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]] clause (a), [[def-christoffel-symbols-of-an-affine-connection]], [[def-gr-inverse-metric-and-musical-isomorphisms]]).
 
-[L2] The curvature components in a chart are $R^a{}_{bcd}=\partial_c\Gamma^a{}_{db}-\partial_d\Gamma^a{}_{cb}+\sum_e(\Gamma^a{}_{ce}\Gamma^e{}_{db}-\Gamma^a{}_{de}\Gamma^e{}_{cb})$, and $R$ is a tensor, so a component identity proved in one chart holds in every chart ([[thm-gr-curvature-tensoriality-and-coordinate-formula]] clauses (a)-(b), [[def-gr-curvature-tensor-and-derived-tensors]] clause (b)).
+[L2] The curvature components in a chart are $R^a{}_{bcd}=\partial_c\Gamma^a{}_{db}-\partial_d\Gamma^a{}_{cb}+\sum_e(\Gamma^a{}_{ce}\Gamma^e{}_{db}-\Gamma^a{}_{de}\Gamma^e{}_{cb})$, and $R$ is a tensor: its components transform between charts, while tensor identities and vanishing are chart-independent; the displayed nonzero component values below refer to the specified product chart ([[thm-gr-curvature-tensoriality-and-coordinate-formula]] clauses (a)-(b), [[def-gr-curvature-tensor-and-derived-tensors]] clause (b)).
 
 [L3] The lowered curvature satisfies $R_{abcd}=-R_{bacd}=-R_{abdc}=R_{cdab}$ and $R_{abcd}+R_{acdb}+R_{adbc}=0$; equivalently $R(X,Y)Z=-R(Y,X)Z$ and $g(R(X,Y)Z,W)=-g(R(X,Y)W,Z)$ ([[thm-gr-curvature-algebraic-symmetries]] clauses (a)-(c)).
 
@@ -88,7 +88,7 @@ $\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ its curvature data
 
 2.1 (Candidate components.) In the coordinate formula of [L2] every term contains a factor $\Gamma^a{}_{\cdot\cdot}$ or a derivative of one; by step 1.1 a term can be nonzero only if all its symbol indices lie in $\{1,2\}$. Hence $R^a{}_{bcd}=0$ whenever one of $a,b,c,d$ equals $0$ or $3$: the derivative terms contain $\Gamma^a{}_{db}$ or $\Gamma^a{}_{cb}$ with a forbidden index in the lower pair, or are annihilated by $\partial_0,\partial_3$, and each product term contains a symbol with a forbidden index. Of the four remaining candidates $R^1{}_{112}$, $R^1{}_{212}$, $R^2{}_{112}$, $R^2{}_{212}$, the first and the last have a repeated index in the first lower pair, so their lowered components vanish by the skew-symmetry of [L3], and $R^2{}_{112}$ is the negative of $R^2{}_{121}$; it therefore suffices to check $R^1{}_{212}$ and $R^2{}_{121}$, which are equal up to lowering and sign. [L2, step 1.1, L3, algebra]
 
-2.2 (The curvature component.) By [L2] and step 1.1, the products in $R^1{}_{212}$ contribute only through $\Gamma^1{}_{2e}\Gamma^e{}_{12}=-\Gamma^1{}_{22}\Gamma^2{}_{12}$, because $\Gamma^1{}_{1e}=0$ for every $e$ kills the first product and the only nonzero term of the second has $e=2$; hence $$R^1{}_{212}=\partial_1\Gamma^1{}_{22}-\partial_2\Gamma^1{}_{12}-\Gamma^1{}_{22}\Gamma^2{}_{12}=-\partial_1(\sin x^1\cos x^1)+\sin x^1\cos x^1\cot x^1 .$$ Substituting and using $\cos x^1\cot x^1=\cos^2x^1/\sin x^1$, $R^1{}_{212}=-({\cos^2}x^1-{\sin^2}x^1)+{\cos^2}x^1=\sin^2(x^1)$. Lowering with $g_{11}=1$ gives $R_{1212}=\sin^2(x^1)$; by [L3], $R_{2121}=R_{1212}$ and the skew-symmetry gives $R^2{}_{121}=\sin^{-2}(x^1)R_{2121}=1$, and the vector-valued forms follow from $R(\partial_c,\partial_d)\partial_b=R^a{}_{bcd}\partial_a$. [step 1.1, L2, L3, L4, algebra]
+2.2 (The curvature component.) By [L2] and step 1.1, the products in $R^1{}_{212}$ contribute only through $-\sum_e\Gamma^1{}_{2e}\Gamma^e{}_{12}=-\Gamma^1{}_{22}\Gamma^2{}_{12}$, because $\Gamma^1{}_{1e}=0$ for every $e$ kills the first product and the only nonzero term of the second has $e=2$; hence $$R^1{}_{212}=\partial_1\Gamma^1{}_{22}-\partial_2\Gamma^1{}_{12}-\Gamma^1{}_{22}\Gamma^2{}_{12}=-\partial_1(\sin x^1\cos x^1)+\sin x^1\cos x^1\cot x^1 .$$ Substituting and using $\cos x^1\cot x^1=\cos^2x^1/\sin x^1$, $R^1{}_{212}=-({\cos^2}x^1-{\sin^2}x^1)+{\cos^2}x^1=\sin^2(x^1)$. Lowering with $g_{11}=1$ gives $R_{1212}=\sin^2(x^1)$; by [L3], $R_{2121}=R_{1212}$ and the skew-symmetry gives $R^2{}_{121}=\sin^{-2}(x^1)R_{2121}=1$, and the vector-valued forms follow from $R(\partial_c,\partial_d)\partial_b=R^a{}_{bcd}\partial_a$. [step 1.1, L2, L3, L4, algebra]
 
 3.1 (Ricci tensor.) By [L4] and step 2.1, the only components of $R_{abcd}$ that can contribute to a contraction are those with all indices in $\{1,2\}$: $\operatorname{Ric}_{11}=g^{22}R_{2121}=\sin^{-2}(x^1)\sin^2(x^1)=1$ and $\operatorname{Ric}_{22}=g^{11}R_{1212}=\sin^2(x^1)$, while $\operatorname{Ric}_{bd}=0$ whenever $b$ or $d$ is $0$ or $3$, because every term of the sum $g^{ac}R_{abcd}$ then contains a component with a forbidden index. [step 2.1, step 2.2, L4, algebra]
 
@@ -104,9 +104,10 @@ $\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ its curvature data
   $R_{1212}+R_{1122}+R_{1221}=0$, and the contracted second Bianchi identity.
   The metric is not Ricci flat and is not flat: $R_{1212}=\sin^2(x^1)$ is
   nonzero throughout the chart $U$, so $\operatorname{Ric}\neq0$ by step 3.1.
-- **Relation to the tidal page.** The component
-  $R(\partial_1,\partial_2)\partial_1=-\partial_2$ computed above is the
-  curvature term $R(T,J)T$ of the deviation equation along geodesics of the
-  sphere factor; the explicit Jacobi field it produces, and the conjugate
-  instant it entails, are worked out in
-  [[ex-gr-conjugate-instant-on-a-round-sphere-factor]].
+- **Relation to the tidal page.** On the equator $x^1=\pi/2$, the
+  geodesic and field of [[ex-gr-conjugate-instant-on-a-round-sphere-factor]]
+  have $T=\partial_2$ and $J(s)=\sin(s)\partial_1$. The component
+  $R(\partial_1,\partial_2)\partial_2=\sin^2(x^1)\partial_1$ computed above,
+  together with skew-symmetry, gives the curvature term
+  $R(T,J)T=-\sin(s)\partial_1$. That item verifies the Jacobi equation
+  and the conjugate instant it entails.

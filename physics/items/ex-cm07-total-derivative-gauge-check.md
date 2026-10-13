@@ -69,9 +69,12 @@ Then:
    $$S'(x_{*})-S(x_{*})=F(2t_{0},x_{*}(2t_{0}))-F(t_{0},x_{*}(t_{0}))=2\alpha t_{0}^{2}(e_{1}\cdot v_{0}),$$
    with $S(x_{*})=\tfrac12m\lvert v_{0}\rvert_{2}^{2}t_{0}$ and
    $S'(x_{*})=S(x_{*})+2\alpha t_{0}^{2}(e_{1}\cdot v_{0})$;
-3. for the normalized choice $m=\mu$, $t_{0}=\tau$,
-   $v_{0}=(\ell/\tau)e_{1}$ and $\alpha=\mu\ell\tau^{-2}$, these values are
-   $S=0.5$, $S'=2.5$ and endpoint term $2$ in units of
+3. for the reference-unit choice $m=1\,\mathrm{kg}$, $t_{0}=1\,\mathrm{s}$,
+   $v_{0}=(1\,\mathrm{m}\,\mathrm{s}^{-1})e_{1}$ and
+   $\alpha=1\,\mathrm{kg}\,\mathrm{m}\,\mathrm{s}^{-2}$, these values are
+   $S=0.5\,\mathrm{kg}\,\mathrm{m}^{2}\,\mathrm{s}^{-1}$,
+   $S'=2.5\,\mathrm{kg}\,\mathrm{m}^{2}\,\mathrm{s}^{-1}$ and endpoint term
+   $2\,\mathrm{kg}\,\mathrm{m}^{2}\,\mathrm{s}^{-1}$, all of dimension
    $\mu\ell^{2}\tau^{-1}$, while the equation of motion and stationary curves
    are unchanged.
 
@@ -95,7 +98,7 @@ Then:
 
 2.1 Actions: $S(x_{*})=\tfrac12m\lvert v_{0}\rvert_{2}^{2}t_{0}$ by [F3], and step 1.2 gives $S'(x_{*})=S(x_{*})+2\alpha t_{0}^{2}(e_{1}\cdot v_{0})$. [F1, F3, step 1.2, algebra]
 
-3.1 Normalized data: for the specified $m,t_{0},v_{0},\alpha$, step 2.1 gives $S=1/2$ and $S'=5/2$ in units of $\mu\ell^{2}\tau^{-1}$, differing by endpoint term $2$; the curve $x_{*}$ is affine, hence stationary for both actions by [F2], and the model equation $x''=0$ is the same for both. [F2, step 1.1, step 2.1, algebra]
+3.1 Reference-unit data: substituting the specified $m,t_{0},v_{0},\alpha$ into step 2.1 gives $S=(1/2)\,\mathrm{kg}\,\mathrm{m}^{2}\,\mathrm{s}^{-1}$ and $S'=(5/2)\,\mathrm{kg}\,\mathrm{m}^{2}\,\mathrm{s}^{-1}$, differing by endpoint term $2\,\mathrm{kg}\,\mathrm{m}^{2}\,\mathrm{s}^{-1}$. Their numerical values in that SI action unit are $0.5$, $2.5$ and $2$, respectively; the dimension is $\mu\ell^{2}\tau^{-1}$. The curve $x_{*}$ is affine, hence stationary for both actions by [F2], and the model equation $x''=0$ is the same for both. [F2, step 1.1, step 2.1, algebra]
 
 4.1 Clauses 1-3 are verified: the total-derivative modification changes the action by the endpoint value of $F$ and leaves the Euler-Lagrange expression, the stationary curves and the model equation unchanged; the potential normalization is the case $F=-\gamma t^2/2$ by [F1]. [step 1.1, step 1.2, step 2.1, step 3.1, F1] ∎
 

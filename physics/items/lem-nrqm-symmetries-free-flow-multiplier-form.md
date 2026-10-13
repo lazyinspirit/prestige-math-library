@@ -47,7 +47,7 @@ sources:
   references:
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 7.3, printed pages 169-171 (PDF pages 181-183): the time evolution in the free case as multiplication by a unimodular function of the momentum variable, with the Fourier transform"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
-    - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 6 'Quantum Dynamics', Sections 2.3 and 3.3, printed pages 15-25 (PDF pages 15-25): the free evolution operator in momentum space and its action as a phase multiplication"
+    - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 6 'Quantum Dynamics', Sections 2.3 and 3.3, printed pages 15-25 (PDF pages 15-25): autonomous unitary evolution and Heisenberg-dynamics examples; the momentum-multiplier formula is proved locally and supported by the Teschl reference"
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/79a8091ef4f18d8e3ff76a097e8db33c_MIT8_05F13_Chap_06.pdf"
 verification:
   precheck: pass
@@ -84,66 +84,23 @@ $\mathcal S^{(r)}=\mathcal S(\mathbb R^{3};\mathbb C^{r})$.
 
 ## Facts & Assumptions
 
-**Given:** The Axiom of Countable Choice and the Axiom of Choice; integers
-$r\ge1$; $m,\hbar>0$; the space $H^{(r)}$; the componentwise operators
-$Q_{j},P_{k}$; the momentum unitary $U^{(r)}$; the free operator $H_{0}$; a
-vector $\psi\in H^{(r)}$; a Schwartz class $u\in\mathcal S^{(r)}$; real $t$.
+**Given:** The Axiom of Countable Choice and the Axiom of Choice; integers $r\ge1$; $m,\hbar>0$; the space $H^{(r)}$; the componentwise operators $Q_{j},P_{k}$; the momentum unitary $U^{(r)}$; the free operator $H_{0}$; a vector $\psi\in H^{(r)}$; a Schwartz class $u\in\mathcal S^{(r)}$; real $t$.
 
-[F1] **Free operator.** $H_{0}=\frac{1}{2m}\sum_{k}P_{k}^{2}$ with domain
-$W^{2,2}(\mathbb R^{3};\mathbb C^{r})$ is self-adjoint; it is the componentwise
-assembly of the scalar free operators of
-[[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]
-clause (b), which are self-adjoint with domain $W^{2,2}(\mathbb R;\mathbb C)$
-per component and equal $-\frac{\hbar^{2}}{2m}\Delta$ on Schwartz classes
-([[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]
-clauses (b),(c), [[lem-nrqm-kinematics-componentwise-position-and-momentum]]
-clause (a), [[def-sobolev-space-wkp-and-its-norm]]).
+[F1] **Free operator.** $H_{0}=\frac{1}{2m}\sum_{k}P_{k}^{2}$ with domain $W^{2,2}(\mathbb R^{3};\mathbb C^{r})$ is self-adjoint; it is the componentwise assembly of the scalar free operators of [[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]] clause (b), which are self-adjoint with domain $W^{2,2}(\mathbb R^{3};\mathbb C)$ per component and equal $-\frac{\hbar^{2}}{2m}\Delta$ on Schwartz classes ([[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]] clauses (b),(c), [[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (a), [[def-sobolev-space-wkp-and-its-norm]]).
 
-[F2] **Momentum representation.** $U^{(r)}$ is unitary,
-$U^{(r)}D(P_{k})=D(M_{p_{k}})$ with $U^{(r)}P_{k}=M_{p_{k}}U^{(r)}$, and
-$U^{(r)}$ maps $\mathcal S^{(r)}$ onto itself and acts there by the
-componentwise Fourier transform with normalization $(2\pi\hbar)^{-3/2}$
-([[lem-nrqm-kinematics-momentum-representation]] clauses (a),(b),
-[[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (b),
-[[def-schwartz-space-and-its-seminorms]]).
+[F2] **Momentum representation.** $U^{(r)}$ is unitary, $U^{(r)}D(P_{k})=D(M_{p_{k}})$ with $U^{(r)}P_{k}=M_{p_{k}}U^{(r)}$, and $U^{(r)}$ maps $\mathcal S^{(r)}$ onto itself and acts there by the componentwise Fourier transform with normalization $(2\pi\hbar)^{-3/2}$ ([[lem-nrqm-kinematics-momentum-representation]] clauses (a),(b), [[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (b), [[def-schwartz-space-and-its-seminorms]]).
 
-[F3] **Domain in momentum form.** With $p$ the momentum variable of [F2],
-$W^{2,2}(\mathbb R^{3};\mathbb C^{r})=\{\psi\in H^{(r)}:\ |p|^{2}U^{(r)}\psi\in L^{2}\}$
-and
-$W^{1,2}(\mathbb R^{3};\mathbb C^{r})=\{\psi:p_{k}U^{(r)}\psi\in L^{2}\ \forall k\}$
-as sets, by the Fourier characterization of integer-order Sobolev spaces read in the normalization of [F2]
-([[thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces]],
-[[thm-plancherel]], [[def-sobolev-space-wkp-and-its-norm]]).
+[F3] **Domain in momentum form.** With $p$ the momentum variable of [F2], $W^{2,2}(\mathbb R^{3};\mathbb C^{r})=\{\psi\in H^{(r)}:\ |p|^{2}U^{(r)}\psi\in L^{2}\}$ and $W^{1,2}(\mathbb R^{3};\mathbb C^{r})=\{\psi:p_{k}U^{(r)}\psi\in L^{2}\ \forall k\}$ as sets, by the Fourier characterization of integer-order Sobolev spaces read in the normalization of [F2] ([[thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces]], [[thm-plancherel]], [[def-sobolev-space-wkp-and-its-norm]]).
 
-[F4] **Conjugation calculus.** For a unitary $W$ and a self-adjoint $K$ with
-spectral PVM $E_K$, the operator $WKW^{-1}$ with domain $WD(K)$ is self-adjoint
-with PVM $WE_K(\cdot)W^{-1}$ and flow $e^{-itWKW^{-1}/\hbar}=We^{-itK/\hbar}W^{-1}$
-([[lem-nrqm-symmetries-unitary-conjugation-and-commutation-calculus]] clause (a)),
-and if two self-adjoint operators have a common domain $D$ and agree on a dense
-linear subspace of $D$, then they are equal: their difference is symmetric on
-$D$ and vanishes on a dense subspace, hence is zero
-([[def-symmetric-self-adjoint-and-essentially-self-adjoint]]).
+[F4] **Conjugation calculus.** For a unitary $W$ and a self-adjoint $K$ with spectral PVM $E_K$, the operator $WKW^{-1}$ with domain $WD(K)$ is self-adjoint with PVM $WE_K(\cdot)W^{-1}$ and flow $e^{-itWKW^{-1}/\hbar}=We^{-itK/\hbar}W^{-1}$ ([[lem-nrqm-symmetries-unitary-conjugation-and-commutation-calculus]] clause (a)), and if two self-adjoint operators have a common domain $D$ and agree on a dense linear subspace of $D$, then they are equal: their difference is symmetric on $D$ and vanishes on a dense subspace, hence is zero ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]]).
 
-[F5] **Multiplier spectral data.** For a real measurable finite-valued function
-$a$ the multiplication operator $M_{a}$ on $L^{2}(\mathbb R^{3},dp;\mathbb C^{r})$
-is self-adjoint with domain $\{g:ag\in L^{2}\}$ and spectral PVM
-$M_{\mathbf 1_{a^{-1}(B)}}$; for bounded Borel $h$ the bounded calculus satisfies
-$\Phi_{M_a}(h)=M_{h\circ a}$ and $\|M_{g}\|=\sup|g|$; these are the componentwise
-versions of the scalar multiplier facts
-([[lem-nrqm-observables-l2-multiplication-spectral-measure]],
-[[thm-spectral-theorem-for-unbounded-self-adjoint-operators]],
-[[thm-bounded-borel-pvm-integral]],
-[[thm-unbounded-borel-functional-calculus]],
-[[def-unbounded-integral-against-a-pvm]]).
+[F5] **Multiplier spectral data.** For a real measurable finite-valued function $a$ the multiplication operator $M_{a}$ on $L^{2}(\mathbb R^{3},dp;\mathbb C^{r})$ is self-adjoint with domain $\{g:ag\in L^{2}\}$ and spectral PVM $M_{\mathbf 1_{a^{-1}(B)}}$; for bounded Borel $h$ the bounded calculus satisfies $\Phi_{M_a}(h)=M_{h\circ a}$ and $\|M_{g}\|=\operatorname{ess\,sup}_{p}|g(p)|$ for bounded measurable $g$; these are the componentwise versions of the scalar multiplier facts ([[lem-nrqm-observables-l2-multiplication-spectral-measure]], [[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[thm-bounded-borel-pvm-integral]], [[thm-unbounded-borel-functional-calculus]], [[def-unbounded-integral-against-a-pvm]]).
 
-[F6] **Density.** $\mathcal S^{(r)}$ is dense in $H^{(r)}$
-([[lem-schwartz-space-is-dense-in-l-two]]).
+[F6] **Density.** $\mathcal S^{(r)}$ is dense in $H^{(r)}$ ([[lem-schwartz-space-is-dense-in-l-two]]).
 
 ## Proof
 
-**Proof technique:** direct; identify the momentum-space form of the free
-operator as a multiplier, obtain the flow by the conjugation calculus and read
-the modulus invariance and Schwartz preservation off the multiplier formula.
+**Proof technique:** direct; identify the momentum-space form of the free operator as a multiplier, obtain the flow by the conjugation calculus and read the modulus invariance and Schwartz preservation off the multiplier formula.
 
 **Given:** The data of the statement and [F1]-[F6].
 
@@ -161,10 +118,5 @@ the modulus invariance and Schwartz preservation off the multiplier formula.
 
 ## Remarks
 
-- **What is not claimed.** No free propagator integral kernel, no pointwise
-  trajectory of the particle, and no assertion that the momentum representative's
-  modulus is measurable-free (it is an $L^{2}$ class; the invariance is that of
-  the class of the modulus) appear in this lemma.
-- **Scope.** The statement is purely mathematical, about the free operator on
-  $L^{2}(\mathbb R^{3};\mathbb C^{r})$; the physical reading of the momentum
-  laws is that of the observable and probability postulate.
+- **What is not claimed.** No free propagator integral kernel, no pointwise trajectory of the particle, and no assertion that the momentum representative's modulus is measurable-free (it is an $L^{2}$ class; the invariance is that of the class of the modulus) appear in this lemma.
+- **Scope.** The statement is purely mathematical, about the free operator on $L^{2}(\mathbb R^{3};\mathbb C^{r})$; the physical reading of the momentum laws is that of the observable and probability postulate.

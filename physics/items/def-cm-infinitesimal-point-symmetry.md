@@ -53,7 +53,7 @@ infinitesimal family of point transformations
 $$q\longmapsto q+s\,\xi(q),\qquad t\longmapsto t$$
 
 with the velocity transformed accordingly by $v\mapsto v+s\,D\xi(q)v$, and the right-hand side is
-the derivative of $B$ along that family; thus the identity says that the infinitesimal variation of
+the total derivative $\frac{d}{dt}B(t,q(t))$ along a $C^1$ trajectory with $q'(t)=v$; thus the identity says that the infinitesimal variation of
 $\mathcal L$ is a total time derivative of the chart function $B$. In particular:
 
 - Taking $B=0$ reduces the identity to

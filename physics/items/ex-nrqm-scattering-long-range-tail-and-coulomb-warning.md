@@ -7,7 +7,7 @@ title: "A Yukawa tail satisfies the resolvent-tail class while the Coulomb limit
 status: draft
 origin: session
 dependency_level: 15
-deps: [def-nrqm-scattering-framework-short-range-model, pthm-nrqm-scattering-resolvent-tail-asymptotic-completeness, def-nrqm-scattering-coulomb-dollard-model, def-nrqm-framework-quantities-and-units, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, def-nrqm-observables-framework-observable-and-outcome-law, def-real-exponential-function-and-e, thm-exponential-beats-every-polynomial, def-countable-choice, def-axiom-of-choice]
+deps: [def-nrqm-scattering-framework-short-range-model, pthm-nrqm-scattering-resolvent-tail-asymptotic-completeness, def-nrqm-scattering-coulomb-dollard-model, def-nrqm-framework-quantities-and-units, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, def-nrqm-observables-framework-observable-and-outcome-law, def-real-exponential-function-and-e, thm-exponential-beats-every-polynomial, def-countable-choice, def-axiom-of-choice, thm-polar-coordinates-formula-for-lebesgue-measure, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates]
 dependency_roles:
   def-nrqm-scattering-framework-short-range-model: formulation-prerequisite
   pthm-nrqm-scattering-resolvent-tail-asymptotic-completeness: physical-result
@@ -21,6 +21,8 @@ dependency_roles:
   thm-exponential-beats-every-polynomial: mathematical-premise
   def-countable-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
+  thm-polar-coordinates-formula-for-lebesgue-measure: mathematical-premise
+  lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -28,9 +30,9 @@ provenance:
 physical_scope: "The declared short-range scattering model with a Yukawa (screened Coulomb) potential of coupling g>0 and screening parameter mu>0: the explicit split into a compactly supported square-integrable part and a bounded exponentially decaying tail, the verification that the tail satisfies the decaying-tail hypothesis of the resolvent-tail class, hence asymptotic completeness of the model, and the failure of that hypothesis in the unscreened Coulomb limit mu=0, whose treatment belongs to the declared long-range model. Conditional on the declared model and cited mathematics; no measured screening length, coupling or cross section is asserted."
 sources:
   references:
-    - title: "R. Fitzpatrick, Quantum Mechanics (University of Texas at Austin, author-hosted course text), Section 15.4 printed pages 214-215: the Yukawa potential reducing to the Coulomb potential as the screening parameter tends to zero"
+    - title: "R. Fitzpatrick, Quantum Mechanics (University of Texas at Austin, author-hosted course text), Section 15.3 printed pages 211-212: the Yukawa potential reducing to the Coulomb potential as the screening parameter tends to zero"
       url: "https://farside.ph.utexas.edu/teaching/qmech/qmech.pdf"
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.4 printed pages 271-275 (PDF pages 279-283): scattering off hydrogen with a shielded Coulomb potential"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.4, printed pages 271-273 (PDF pages 279-281)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 verification:
   precheck: pass
@@ -50,20 +52,11 @@ $\mathrm{J\,m}$ and $\mu$ in $\mathrm{m^{-1}}$. Fix the model's reference length
 **Given:** the declared model data and the hypotheses of
 [[pthm-nrqm-scattering-resolvent-tail-asymptotic-completeness]] clauses (c), (d).
 
-1.1 Put $V_{\mathrm{loc}}:=V_{g,\mu}\mathbf1_{\{|x|<L_*\}}$ and [given, algebra]
-$V_{\mathrm{tail}}:=V_{g,\mu}\mathbf1_{\{|x|\ge L_*\}}$. The local part is
-supported in the closed radius-$L_*$ ball, and polar integration gives
-$\int|V_{\mathrm{loc}}|^2dx=4\pi g^2\int_0^{L_*}e^{-2\mu r}dr
-\le4\pi g^2L_*<\infty$. Thus it is compactly supported $L^2$, while the
-tail is bounded by $g/L_*$, in joules. [given, algebra]
+[F1] Polar integration in dimension three is supplied by [[thm-polar-coordinates-formula-for-lebesgue-measure]]; the sphere measure has total mass $4\pi$ by [[lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates]] clause (b). Both suppliers assume Countable Choice, already declared here.
 
-2.1 For $s=|x|/L_*\ge1$, $|V_{\mathrm{tail}}(x)|\le(g/L_*)e^{-\mu_*s}$. [step 1.1, given, algebra]
-For any dimensionless $\delta>0$, exponential dominance and continuity on
-compact intervals give the finite dimensionless constant
-$C_\delta:=\sup_{s\ge0}e^{-\mu_*s}(1+s)^{1+\delta}$.
-Hence $|V_{\mathrm{tail}}(x)|\le(g/L_*)C_\delta
-(1+|x|/L_*)^{-1-\delta}$ on that region; on $|x|<L_*$ the tail is zero,
-so the bound holds everywhere. [step 1.1, given, algebra]
+1.1 Put $V_{\mathrm{loc}}:=V_{g,\mu}\mathbf1_{\{|x|<L_*\}}$ and $V_{\mathrm{tail}}:=V_{g,\mu}\mathbf1_{\{|x|\ge L_*\}}$. The local part is supported in the closed radius-$L_*$ ball, and polar integration gives $\int|V_{\mathrm{loc}}|^2dx=4\pi g^2\int_0^{L_*}e^{-2\mu r}dr \le4\pi g^2L_*<\infty$. Thus it is compactly supported $L^2$, while the tail is bounded by $g/L_*$, in joules. [F1, given, algebra]
+
+2.1 For $s=|x|/L_*\ge1$, $|V_{\mathrm{tail}}(x)|\le(g/L_*)e^{-\mu_*s}$. For any dimensionless $\delta>0$, choose an integer $N>1+\delta$; for $s\ge1$, $(1+s)^{1+\delta}\le(2s)^N$, so [[thm-exponential-beats-every-polynomial]] at $a=\mu_*$ and $m=N$ gives $e^{-\mu_*s}(1+s)^{1+\delta}\to0$. This and continuity on compact intervals give the finite dimensionless constant $C_\delta:=\sup_{s\ge0}e^{-\mu_*s}(1+s)^{1+\delta}$. Hence $|V_{\mathrm{tail}}(x)|\le(g/L_*)C_\delta (1+|x|/L_*)^{-1-\delta}$ on that region; on $|x|<L_*$ the tail is zero, so the bound holds everywhere. [step 1.1, given, algebra]
 
 3.1 By 1.1 and 2.1 the declared Yukawa potential has the decaying-tail form of [[pthm-nrqm-scattering-resolvent-tail-asymptotic-completeness]] clause (c) with any $\delta>0$; hence, by that theorem, the model's interacting operator is self-adjoint on $W^{2,2}$, its wave operators exist and are asymptotically complete with vanishing singular continuous spectrum, and its scattering operator is unitary. [step 2.1, given, algebra]
 

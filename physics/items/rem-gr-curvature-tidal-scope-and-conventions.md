@@ -5,12 +5,12 @@ title: "Conventions, units and scope for curvature and tidal quantities"
 status: draft
 origin: session
 domain: physics
-dependency_level: 14
+dependency_level: 15
 physical_scope: "Bookkeeping remark for the curvature-and-tides page: it fixes the sign, index and unit conventions of the curvature items, distinguishes chart artifacts from curvature, and delimits the model status of the word 'tidal'. It makes no prediction, uses no empirical premise, and asserts nothing about nature beyond the adopted framework postulates it cites."
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-gr-curvature-tensor-and-derived-tensors, thm-gr-curvature-tensoriality-and-coordinate-formula, thm-gr-curvature-algebraic-symmetries, thm-gr-second-bianchi-and-divergence-free-einstein, def-gr-si-unit-and-coordinate-conventions, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, thm-gr-point-normal-and-exponential-coordinate-charts, pthm-gr-tidal-comparison]
+deps: [def-gr-curvature-tensor-and-derived-tensors, thm-gr-curvature-tensoriality-and-coordinate-formula, thm-gr-curvature-algebraic-symmetries, thm-gr-second-bianchi-and-divergence-free-einstein, def-gr-si-unit-and-coordinate-conventions, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, thm-gr-point-normal-and-exponential-coordinate-charts, pthm-gr-tidal-comparison, thm-gr-conjugacy-and-local-timelike-maximum]
 dependency_roles:
   def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
   thm-gr-curvature-tensoriality-and-coordinate-formula: mathematical-premise
@@ -21,6 +21,7 @@ dependency_roles:
   def-gr-metric-selected-connection: mathematical-premise
   thm-gr-point-normal-and-exponential-coordinate-charts: mathematical-premise
   pthm-gr-tidal-comparison: physical-result
+  thm-gr-conjugacy-and-local-timelike-maximum: mathematical-premise
 sources:
   references:
     - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 3: curvature conventions (3.63)-(3.67) and the tidal reading of geodesic deviation (3.113), printed pp. 74-76 and 86-88 (PDF pp. 81-83 and 93-95)"
@@ -75,18 +76,45 @@ converse implications are not asserted anywhere on this page.
 **"Tidal" is a model term.** In [[pthm-gr-tidal-comparison]] the word tidal
 refers to the curvature term $R(U,J)U$ in the deviation equation satisfied by
 smooth free-fall congruences of the adopted model; the deduction shows that
-this term is exactly the relative four-acceleration of nearby freely falling
-ideal test bodies and that its vanishing for all timelike directions at an
-event is equivalent to the vanishing of curvature there. It does not assert
+this term is exactly the infinitesimal relative four-acceleration when ideal
+test-body histories realize the mathematical family on a common interval.
+Its vanishing for all timelike directions and all separation values at an
+event is equivalent to the vanishing of curvature there. All these values
+are attained by local mathematical candidate families, without guaranteeing
+bodies realizing them. It does not assert
 that any real body is freely falling, that any particular measured effect is
 of this form, or that agreement of any such comparison would establish the
 postulates; a comparison with data would require apparatus models, empirical
 premises with uncertainties and statistical inference, none of which is part
 of this page.
 
-**Scope of the maximum and conjugacy results.** The conjugacy and local
-maximum statements on this page concern a single smooth geodesic segment, a
-fixed exponential chart and a $C^1$-neighborhood of that segment; they assert
-no global maximality, no existence of conjugate instants, and no cut-locus
-classification. Global causal, completeness and singularity statements are
-reserved for later pages and are not prerequisites of the results here.
+**Scope of the maximum and conjugacy results.** The exact maximum statement
+is [[thm-gr-conjugacy-and-local-timelike-maximum]] clause (b). Its hypotheses
+are a smooth future timelike geodesic $\gamma:[0,b]\to M$, $b>0$, with
+$g(\gamma',\gamma')=-1$ and no conjugate instant in $(0,b]$ relative to $0$:
+no nonzero smooth field $J$ along $\gamma$ satisfying
+$D_s^2J=R(\gamma',J)\gamma'$ vanishes both at $0$ and at such an instant.
+Fix a finite chart cover $(U_i,x_i)$ and a partition
+$0=s_0<\cdots<s_m=b$ with $\gamma([s_{i-1},s_i])\subseteq U_i$.
+The comparison curves $\alpha:[0,b]\to M$ are continuous piecewise-$C^1$
+future timelike curves with the same endpoints. For some $\delta>0$, each
+comparison curve must remain in the corresponding $U_i$ and satisfy
+$\sup\|x_i\circ\alpha-x_i\circ\gamma\|<\delta$ and
+$\sup\|(x_i\circ\alpha)'-(x_i\circ\gamma)'\|<\delta$ on every common
+smooth partition piece, with Euclidean norms as in that clause. Only in
+this comparison class is $L_g(\alpha)\le b=L_g(\gamma)$ asserted; equality
+means a piecewise-$C^1$ strictly increasing reparametrization onto $[0,b]$.
+
+The local inverse branches used in that theorem's proof steps 2.1-3.1 are
+smooth maps $\psi_k:V_k\to D_k\subseteq T_pM$, $p=\gamma(0)$, inverse to
+$\exp_p|_{D_k}:D_k\to V_k$, where $D_k,V_k$ are open and the restricted
+exponential map is a diffeomorphism. A finite parameter subdivision puts
+each radial subsegment $s\gamma'(0)$ in its corresponding $D_k$.
+Compatibility means adjacent branches agree on a neighborhood of the
+shared endpoint event and send that event to the same radial vector.
+Branches at nonadjacent occurrences of a repeated event need not agree;
+one injective exponential chart containing the whole segment is not assumed.
+These are local assertions, not global maximality, existence of conjugate
+instants, or a classification of where global maximality first fails.
+Global causal, completeness and singularity statements are reserved for
+later pages and are not prerequisites of the results here.

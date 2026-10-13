@@ -1,7 +1,7 @@
 ---
 id: pthm-cm09-forced-modal-response
 kind: physics-theorem
-title: "The forced coupled quadratic model: decoupled modal responses, sinusoidal drive, resonance at the modal frequencies and boundedness away from resonance"
+title: "The forced coupled quadratic model: modal responses, resonance, and boundedness for positive definite stiffness off resonance"
 status: draft
 origin: session
 domain: physics
@@ -63,7 +63,7 @@ $$z_{i}(t)=\xi_{i}\cos\bigl(\omega_{i}(t-t_{0})\bigr)+\frac{\eta_{i}}{\omega_{i}
 
 $$z_{i}(t)=\xi_{i}+\eta_{i}(t-t_{0})+\int_{t_{0}}^{t}(t-s)\psi_{i}(s)\,ds\quad(\lambda_{i}=0).$$
 
-2. **Sinusoidal generalized force.** Suppose $I_{0}=\mathbb R$ and
+2. **Sinusoidal or constant generalized force.** Suppose $I_{0}=\mathbb R$ and
 $J(t)=J_{0}\cos(\Omega t)$ with $J_{0}\in\mathbb R^{n}$ and $\Omega\ge0$, so
 that $\psi(t)=\psi_{0}\cos(\Omega t)$ with
 $\psi_{0}=O^{\mathsf T}M^{-1/2}J_{0}$. Then for each index $i$:
@@ -98,71 +98,30 @@ $q^{\mathrm{h}}$ a motion of the free model of
    together with $\Omega=0$ when some index with $\lambda_{i}=0$ has
    $\psi_{0,i}\ne0$.
 
-The generalized force is prescribed external data in the modelling status of
-[[post-cm04-sinusoidal-drive-model]]: it is a function of time alone, the
-source is not modelled dynamically, and no back-reaction, damping, measured
-response or empirical value is asserted.
+The generalized force is prescribed external data. For $\Omega>0$ this is
+the sinusoidal-drive formulation of [[post-cm04-sinusoidal-drive-model]]; for
+$\Omega=0$ it is the constant-force case allowed by clause (b) of
+[[def-cm09-coupled-quadratic-model]], whose $J$ is any continuous prescribed
+generalized force. In both cases the source is not modelled dynamically, and
+no back-reaction, damping, measured response or empirical value is asserted.
 
 ## Facts & Assumptions
 
-**Given:** The data $(M,K,J)$ of the statement, the modal data
-$M^{1/2},M^{-1/2},O,\Lambda$ and modal coordinates $z$, the modal force
-$\psi=O^{\mathsf T}M^{-1/2}J$, the time $t_{0}$, the datum $(q_{0},v_{0})$
-and, in clauses 2 and 3, $J(t)=J_{0}\cos(\Omega t)$ with
-$\psi_{0}=O^{\mathsf T}M^{-1/2}J_{0}$.
+**Given:** The data $(M,K,J)$ of the statement, the modal data $M^{1/2},M^{-1/2},O,\Lambda$ and modal coordinates $z$, the modal force $\psi=O^{\mathsf T}M^{-1/2}J$, the time $t_{0}$, the datum $(q_{0},v_{0})$ and, in clauses 2 and 3, $J(t)=J_{0}\cos(\Omega t)$ with $\psi_{0}=O^{\mathsf T}M^{-1/2}J_{0}$.
 
-[F1] Forced modal decoupling and convolution
-([[cor-cm-forced-modal-oscillator-response]] clauses 1-3): $q$ solves
-$Mq''+Kq=\varphi$ on $I_{0}$ if and only if $z=O^{\mathsf T}M^{1/2}q$ solves
-$z_{i}''+\lambda_{i}z_{i}=\psi_{i}$ for all $i$ with
-$\psi=O^{\mathsf T}M^{-1/2}\varphi$; the unique scalar solution with data
-$(\xi_{i},\eta_{i})$ at $t_{0}$ is the displayed homogeneous solution plus
-the convolution integrals with kernel $\sin(\omega_{i}u)/\omega_{i}$ for
-$\lambda_{i}>0$ and $u$ for $\lambda_{i}=0$; and consequently for every datum
-there is exactly one solution $q:I_{0}\to\mathbb R^{n}$ of the forced system
-with that datum.
+[F1] Forced modal decoupling and convolution ([[cor-cm-forced-modal-oscillator-response]] clauses 1-3): $q$ solves $Mq''+Kq=\varphi$ on $I_{0}$ if and only if $z=O^{\mathsf T}M^{1/2}q$ solves $z_{i}''+\lambda_{i}z_{i}=\psi_{i}$ for all $i$ with $\psi=O^{\mathsf T}M^{-1/2}\varphi$; the unique scalar solution with data $(\xi_{i},\eta_{i})$ at $t_{0}$ is the displayed homogeneous solution plus the convolution integrals with kernel $\sin(\omega_{i}u)/\omega_{i}$ for $\lambda_{i}>0$ and $u$ for $\lambda_{i}=0$; and consequently for every datum there is exactly one solution $q:I_{0}\to\mathbb R^{n}$ of the forced system with that datum.
 
-[F2] Sinusoidal scalar response
-([[thm-cm-forced-oscillator-sinusoidal-response]] clauses 1-2): for
-$m=1$, $c=0$, $k=\lambda_{i}>0$ and forcing
-$\psi_{0,i}\cos(\Omega t)$, if $\lambda_{i}-\Omega^{2}\ne0$ then
-$x_{\mathrm{p}}(t)=\psi_{0,i}\cos(\Omega t)/(\lambda_{i}-\Omega^{2})$ is a
-solution of amplitude $|\psi_{0,i}|/|\lambda_{i}-\Omega^{2}|$, and if
-$\Omega^{2}=\lambda_{i}$ then $x_{\mathrm{p}}(t)=\psi_{0,i}t\sin(\omega_{i}t)/(2\omega_{i})$
-is a solution, unbounded on $[0,\infty)$ for $\psi_{0,i}\ne0$.
+[F2] Sinusoidal scalar response ([[thm-cm-forced-oscillator-sinusoidal-response]] clauses 1-2): for $m=1$, $c=0$, $k=\lambda_{i}>0$ and forcing $\psi_{0,i}\cos(\Omega t)$, if $\lambda_{i}-\Omega^{2}\ne0$ then $x_{\mathrm{p}}(t)=\psi_{0,i}\cos(\Omega t)/(\lambda_{i}-\Omega^{2})$ is a solution of amplitude $|\psi_{0,i}|/|\lambda_{i}-\Omega^{2}|$, and if $\Omega^{2}=\lambda_{i}$ then $x_{\mathrm{p}}(t)=\psi_{0,i}t\sin(\omega_{i}t)/(2\omega_{i})$ is a solution, unbounded on $[0,\infty)$ for $\psi_{0,i}\ne0$.
 
-[F3] Prescribed drive ([[post-cm04-sinusoidal-drive-model]] clause (ii) and
-[[def-cm-oscillator-model-and-phase-system]]): a sinusoidal drive is
-prescribed external data depending on time alone, does not react to the
-motion, and is a restricted idealization rather than a measured input; the
-scalar model $m x''+c x'+kx=f$ with $m=1$, $c=0$, $k=\lambda_{i}$ is the
-oscillator model of the cited definition.
+[F3] Prescribed generalized force ([[def-cm09-coupled-quadratic-model]] clause (b)): $J$ is a continuous force prescribed as model data. When $\Omega>0$, the cosine term has the restricted sinusoidal-drive status of [[post-cm04-sinusoidal-drive-model]] clause (ii); when $\Omega=0$, it is the constant-force specialization of the general $J$ data, not an application of that postulate's positive-frequency convention. In either case it depends on time alone and has no modelled back-reaction. The scalar equation with $m=1$, $c=0$, $k=\lambda_i$ is the oscillator model of [[def-cm-oscillator-model-and-phase-system]].
 
-[F4] Free motion classification
-([[pthm-cm09-free-modes-and-degeneracy]] clauses 2 and 5): the motions of the
-free model with symmetric positive definite $M$ and symmetric non-negative
-$K$ are exactly the modal superpositions with $\lambda_{i}>0$ oscillatory and
-$\lambda_{i}=0$ affine; if $K$ is positive definite every free motion is
-bounded on $\mathbb R$, and an affine component with nonzero slope is
-unbounded on $[0,\infty)$.
+[F4] Free motion classification ([[pthm-cm09-free-modes-and-degeneracy]] clauses 2 and 5): the motions of the free model with symmetric positive definite $M$ and symmetric non-negative $K$ are exactly the modal superpositions with $\lambda_{i}>0$ oscillatory and $\lambda_{i}=0$ affine; if $K$ is positive definite every free motion is bounded on $\mathbb R$, and an affine component with nonzero slope is unbounded on $[0,\infty)$.
 
-[F5] Calculus and linear algebra ([[thm-sine-and-cosine-derivatives]],
-[[thm-algebra-of-derivatives]], [[thm-chain-rule-for-total-derivatives]],
-[[def-vector-valued-derivative-and-integral]],
-[[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]],
-[[def-linear-map]], [[def-ck-euclidean-maps-and-diffeomorphisms]]): sine and
-cosine are differentiated by $(\sin)'=\cos$, $(\cos)'=-\sin$; sums and
-products are differentiated by the algebra and chain rules; the map
-$z\mapsto q=M^{-1/2}Oz$ and its inverse $q\mapsto z=O^{\mathsf T}M^{1/2}q$
-are linear bijections, so each is a finite linear combination of components
-with fixed coefficients and boundedness of $q$ is equivalent to boundedness of its modal coordinate $z$, and boundedness of $q'$ is equivalent to boundedness of $z'$, and $\psi_{0}=O^{\mathsf T}M^{-1/2}J_{0}$ by
-linearity.
+[F5] Calculus and linear algebra ([[thm-sine-and-cosine-derivatives]], [[thm-algebra-of-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[def-vector-valued-derivative-and-integral]], [[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]], [[def-linear-map]], [[def-ck-euclidean-maps-and-diffeomorphisms]]): sine and cosine are differentiated by $(\sin)'=\cos$, $(\cos)'=-\sin$; sums and products are differentiated by the algebra and chain rules; the map $z\mapsto q=M^{-1/2}Oz$ and its inverse $q\mapsto z=O^{\mathsf T}M^{1/2}q$ are linear bijections, so each is a finite linear combination of components with fixed coefficients and boundedness of $q$ is equivalent to boundedness of its modal coordinate $z$, and boundedness of $q'$ is equivalent to boundedness of $z'$, and $\psi_{0}=O^{\mathsf T}M^{-1/2}J_{0}$ by linearity.
 
 ## Proof
 
-**Proof technique:** cases; transport the forced system to the decoupled
-scalar equations, compute the sinusoidal particular responses in the three
-modal cases, and read resonance and boundedness from the free classification.
+**Proof technique:** cases; transport the forced system to the decoupled scalar equations, compute the sinusoidal particular responses in the three modal cases, and read resonance and boundedness from the free classification.
 
 1.1 Clause 1 is the instantiation of [F1] at the data of the statement: the hypotheses are $M$ symmetric positive definite, $K$ symmetric non-negative, $I_{0}$ an interval with nonempty interior and $\varphi=J$ continuous, so the unique motion with the datum is $q=M^{-1/2}Oz$ with the displayed scalar solutions and $\psi=O^{\mathsf T}M^{-1/2}J$. [F1, given]
 
@@ -180,16 +139,6 @@ modal cases, and read resonance and boundedness from the free classification.
 
 ## Remarks
 
-- **Degenerate resonance.** If a modal stiffness is degenerate, the modal
-force components $\psi_{0,i}$ depend on the choice of diagonalization, but
-whether the drive resonates with the corresponding pure-$\lambda$ family
-does not: by clause 4 of [[pthm-cm09-free-modes-and-degeneracy]] the family
-is the intrinsic subspace $N_{\lambda}$, and the resonance condition is that
-the mass-metric projection of $M^{-1}J_{0}$ onto $N_{\lambda}$ be
-nonzero, a basis-independent statement.
+- **Degenerate resonance.** If a modal stiffness is degenerate, the modal force components $\psi_{0,i}$ depend on the choice of diagonalization, but whether the drive resonates with the corresponding pure-$\lambda$ family does not: by clause 4 of [[pthm-cm09-free-modes-and-degeneracy]] the family is the intrinsic subspace $N_{\lambda}$, and the resonance condition is that the mass-metric projection of $M^{-1}J_{0}$ onto $N_{\lambda}$ be nonzero, a basis-independent statement.
 
-- **Why the zero mode is special.** A zero modal stiffness means the
-potential of the quadratic model has a flat direction to second order; a
-constant generalized force component along such a direction produces
-quadratic growth in time, the degenerate analogue of resonance, and no
-oscillation at all is present in that direction.
+- **Why the zero mode is special.** A zero modal stiffness means the potential of the quadratic model has a flat direction to second order; a constant generalized force component along such a direction produces quadratic growth in time, the degenerate analogue of resonance, and no oscillation at all is present in that direction.

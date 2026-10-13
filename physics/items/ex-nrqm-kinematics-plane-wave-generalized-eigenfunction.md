@@ -104,11 +104,13 @@ Thus the defining integral is absolutely convergent and has the bound in (a). Si
 
 ## Remarks
 
-- **The delta normalization is formal.** Formally writing
-  $u_{k}(\varphi)=\int\overline{\varphi(x)}e^{ikx}dx$ as a pairing against
-  $e^{ikx}$ suggests the orthogonality symbol $\int e^{i(k-k')x}dx=2\pi\delta(k-k')$
-  familiar from physics texts; the functional $u_{k}$ is the precise object,
-  and the delta is a formal notation for it, not an $L^{2}$ inner product.
+- **The delta normalization is formal.** The formal orthogonality symbol in
+  dimension $d$ is $\int_{\mathbb R^{d}}e^{i(k-k')\cdot x}dx=(2\pi)^{d}\delta^{(d)}(k-k')$,
+  where $\delta^{(d)}$ denotes evaluation at zero on Schwartz test functions
+  on $\mathbb R^{d}$. This denotes a distribution in $k-k'$, not a convergent
+  integral or an $L^{2}$ inner product of plane waves. The functional $u_k$
+  defined above is a different, precise object: its argument is a test function
+  of $x$.
 - **Why this is not a state.** By clause (c), no element of $L^{2}$ represents
   $u_{k}$; the framework's state assignment requires a nonzero $L^{2}$ class,
   so the plane wave is not a preparation, and no position or momentum

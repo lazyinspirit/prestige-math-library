@@ -35,11 +35,11 @@ $$m\,x''(t)+c\,x'(t)+k\,x(t)=f(t),\qquad t\in I .$$
 
 A **solution** of the model on an interval $J\subseteq I$ with nonempty interior is a twice differentiable $x:J\to\mathbb R$ such that the identity holds for every $t\in J$, derivatives being ordinary real derivatives ([[def-derivative]], [[def-vector-valued-derivative-and-integral]]). The model is called **homogeneous** when $f\equiv 0$, **undamped** when $c=0$, and **strictly damped** when $c>0$.
 
-The **phase-plane system** of the model is the first-order system on the open set $I\times\mathbb R^2$ ([[def-first-order-ode-initial-value-problem-and-solution]]) with right-hand side
+The **phase-plane equation** of the model has right-hand side
 
 $$G_f:I\times\mathbb R^2\longrightarrow\mathbb R^2,\qquad G_f(t,x,v):=\Bigl(v,\ \frac{f(t)-c\,v-k\,x}{m}\Bigr).$$
 
-Here $\mathbb R^2$ is the **phase plane**, with coordinates $(x,v)$, where $x$ is the **displacement** and $v$ the **velocity**. If $x$ is a solution of the model on $J$, then $t\mapsto(x(t),x'(t))$ solves $z'=G_f(t,z)$ on $J$; conversely, if $t\mapsto(x(t),v(t))$ solves $z'=G_f(t,z)$ on $J$, then $v=x'$ and $x$ is a solution of the model on $J$. For the homogeneous model the right-hand side is written $G_0(x,v)=(v,-(cv+kx)/m)$.
+Here $\mathbb R^2$ is the **phase plane**, with coordinates $(x,v)$, where $x$ is the **displacement** and $v$ the **velocity**. For an interval $J\subseteq I$ with nonempty interior, a differentiable curve $z=(x,v):J\to\mathbb R^2$ solves the phase-plane equation when $z'(t)=G_f(t,z(t))$ for every $t\in J$, using the domain-relative derivative at any included endpoint ([[def-derivative]]). If $x$ is a solution of the model on $J$, then $t\mapsto(x(t),x'(t))$ solves this equation; conversely, if $t\mapsto(x(t),v(t))$ solves it, then $v=x'$ and $x$ is a solution of the model on $J$. When $J$ is open, this is the first-order system of [[def-first-order-ode-initial-value-problem-and-solution]] on the open domain $J\times\mathbb R^2$. For the homogeneous model the right-hand side is written $G_0(x,v)=(v,-(cv+kx)/m)$.
 
 The **characteristic polynomial** of the model is
 
@@ -53,4 +53,4 @@ with **discriminant** $\Delta:=c^2-4mk$. When $k>0$ define the **undamped freque
 
 - **Interpretation.** This item is a purely mathematical model: $m,c,k$ are real parameters, $f$ an arbitrary continuous real function, and no physical units, force law, constitutive assumption or empirical claim is made. The classical-mechanical reading of $m,c,k,f$ and any identification with measured data belong to the consuming physics item, not to this definition.
 
-- **Regularity.** $G_f$ is continuous on $I\times\mathbb R^2$ and, for each $t$, Lipschitz in $(x,v)$ with constant $L:=\max(1,(c+|k|)/m)\sqrt2$, since $|{-c\Delta v-k\Delta x}|\le c|\Delta v|+|k||\Delta x|$ and $|a|+|b|\le\sqrt2\sqrt{a^2+b^2}$. The Picard-Lindelof hypotheses of [[thm-picard-lindelof-local-existence-and-uniqueness]] are therefore satisfied at every point of the phase-plane domain.
+- **Regularity.** $G_f$ is continuous relative to $I\times\mathbb R^2$ and, for each $t$, Lipschitz in $(x,v)$ with constant $L:=\max(1,(c+|k|)/m)\sqrt2$, since $|{-c\Delta v-k\Delta x}|\le c|\Delta v|+|k||\Delta x|$ and $|a|+|b|\le\sqrt2\sqrt{a^2+b^2}$. At every interior time $t\in I^\circ$, its restriction to a sufficiently small open time interval about $t$ satisfies the Picard-Lindelof hypotheses of [[thm-picard-lindelof-local-existence-and-uniqueness]]. If $I$ includes an endpoint, this item does not assert existence across that endpoint unless $f$ is also defined on an open time neighborhood there.

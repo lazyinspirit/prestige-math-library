@@ -16,7 +16,11 @@ deps:
     thm-monotone-convergence-for-the-integral,
     lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set,
     thm-extension-of-a-bounded-map-from-a-dense-subspace,
+    thm-riesz-fischer-completeness-of-l-p,
     def-schwartz-space-and-its-seminorms,
+    def-l-p-space-as-a-quotient-by-null-functions,
+    def-lebesgue-measure-and-the-lebesgue-sigma-algebra,
+    def-hilbert-space,
     def-countable-choice,
   ]
 dependency_roles:
@@ -27,7 +31,11 @@ dependency_roles:
   thm-monotone-convergence-for-the-integral: mathematical-premise
   lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set: mathematical-premise
   thm-extension-of-a-bounded-map-from-a-dense-subspace: mathematical-premise
+  thm-riesz-fischer-completeness-of-l-p: mathematical-premise
   def-schwartz-space-and-its-seminorms: mathematical-premise
+  def-l-p-space-as-a-quotient-by-null-functions: mathematical-premise
+  def-lebesgue-measure-and-the-lebesgue-sigma-algebra: mathematical-premise
+  def-hilbert-space: mathematical-premise
   def-countable-choice: mathematical-premise
 proof_strategy: direct
 provenance:
@@ -43,13 +51,13 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice ([[def-countable-choice]]), let $d\ge1$ and $\hbar>0$. Write $\mathcal F_2$ for the unitary Plancherel transform extending $\widehat f(\xi)=\int_{\mathbb R^d}f(x)e^{-2\pi ix\cdot\xi}dx$ ([[def-fourier-transform-on-l-one-of-rn]], [[thm-plancherel]]).
+Assume the Axiom of Countable Choice ([[def-countable-choice]]), let $d\ge1$ and $\hbar>0$. Write $\mathcal F_2$ for the unitary Plancherel transform extending $\widehat f(\xi)=\int_{\mathbb R^d}f(x)e^{-2\pi ix\cdot\xi}dx$ ([[def-fourier-transform-on-l-one-of-rn]], [[thm-plancherel]]); the $L^2$ spaces are Hilbert spaces by [[thm-riesz-fischer-completeness-of-l-p]] and [[def-hilbert-space]]. For $\psi\in\mathcal S(\mathbb R^d)$, denote by $\widehat\psi$ the continuous representative of $\mathcal F_2\psi$ given by that absolutely convergent integral.
 
 (a) For $\psi\in\mathcal S(\mathbb R^d)$ the momentum wavefunction
 
 $$\psi_p(p):=(2\pi\hbar)^{-d/2}\int_{\mathbb R^d}e^{-ip\cdot x/\hbar}\psi(x)\,dx$$
 
-is well defined, bounded and continuous, and $\psi_p(p)=(2\pi\hbar)^{-d/2}\mathcal F_2\psi\bigl(p/(2\pi\hbar)\bigr)$ for every $p$.
+is well defined, bounded and continuous, and $\psi_p(p)=(2\pi\hbar)^{-d/2}\widehat\psi\bigl(p/(2\pi\hbar)\bigr)$ for every $p$; here $\widehat\psi$ is the stated continuous representative, not a point evaluation of an $L^2$ equivalence class.
 
 (b) The dilation operator $D_\hbar g(p):=(2\pi\hbar)^{-d/2}g\bigl(p/(2\pi\hbar)\bigr)$ is a surjective linear isometry of $L^2(\mathbb R^d;\mathbb C)$ onto itself, with inverse $D_\hbar^{-1}g(\xi)=(2\pi\hbar)^{d/2}g(2\pi\hbar\,\xi)$.
 
@@ -69,7 +77,7 @@ The normalization statement is: the substitution $\xi=p/(2\pi\hbar)$ carries $d\
 
 [F3] An invertible linear map $T$ of $\mathbb R^d$ scales Lebesgue measure by $|\det T|$ on measurable sets ([[thm-linear-change-of-variables-for-lebesgue-measure]]); for nonnegative measurable $h$ the integral identity $\int h(Tx)\,dx=|\det T|^{-1}\int h(y)\,dy$ follows by approximation with simple functions and monotone convergence ([[thm-monotone-convergence-for-the-integral]]).
 
-[F4] $\mathcal S(\mathbb R^d)$ contains $C_c^\infty(\mathbb R^d)$, which is dense in $L^2(\mathbb R^d)$ ([[lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set]], [[def-schwartz-space-and-its-seminorms]]); in particular every Schwartz function lies in $L^1\cap L^2$.
+[F4] $\mathcal S(\mathbb R^d)$ contains $C_c^\infty(\mathbb R^d)$, which is dense in $L^2(\mathbb R^d)$ ([[lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set]], [[def-schwartz-space-and-its-seminorms]]); in particular every Schwartz function lies in $L^1\cap L^2$. The $L^2$ space is complete by [[thm-riesz-fischer-completeness-of-l-p]].
 
 [F5] A bounded linear map from a dense subspace of a normed space into a Banach space extends uniquely with the same norm ([[thm-extension-of-a-bounded-map-from-a-dense-subspace]]).
 

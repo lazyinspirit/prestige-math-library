@@ -11,7 +11,6 @@ dependency_level: 2
 deps:
 - lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus
 - cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases
-- def-discrete-and-essential-spectrum-of-a-self-adjoint-operator
 - def-projection-valued-measure
 - def-resolvent-and-spectrum-of-a-closed-unbounded-operator
 - def-bounded-linear-operator
@@ -22,7 +21,6 @@ deps:
 dependency_roles:
   lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus: mathematical-premise
   cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases: mathematical-premise
-  def-discrete-and-essential-spectrum-of-a-self-adjoint-operator: mathematical-premise
   def-projection-valued-measure: mathematical-premise
   def-resolvent-and-spectrum-of-a-closed-unbounded-operator: mathematical-premise
   def-bounded-linear-operator: mathematical-premise
@@ -46,7 +44,7 @@ sources:
 
 ## Statement
 
-Assume Countable Choice ([[def-countable-choice]]). Let $H$ be an arbitrary complex Hilbert space ([[def-hilbert-space]]) and let $H_0$ be self-adjoint on its exact dense domain $D(H_0)$ ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]]). Let $E\in\mathbb R$ be an isolated eigenvalue of finite multiplicity $r\ge1$, with $\operatorname{dist}(E,\sigma(H_0)\setminus\{E\})\ge g>0$ ([[def-discrete-and-essential-spectrum-of-a-self-adjoint-operator]]). Write $P=E_{H_0}(\{E\})$ for its orthogonal spectral projection and $Q=I-P$, using the CC arbitrary-H calculus of [[lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus]]. Let $V=V^*\in\mathcal B(H)$ with $v=\|V\|>0$, and let $\lambda\in\mathbb R$ satisfy $|\lambda|v<g/4$ ([[def-bounded-linear-operator]], [[def-operator-norm]]). Put $H_\lambda=H_0+\lambda V$ on $D(H_0)$ and assume it is self-adjoint there. Then:
+Assume Countable Choice ([[def-countable-choice]]). Let $H$ be an arbitrary complex Hilbert space ([[def-hilbert-space]]) and let $H_0$ be self-adjoint on its exact dense domain $D(H_0)$ ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]]). Use $\sigma(H_0)$ for the resolvent spectrum ([[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]). Let $E\in\sigma(H_0)$ be isolated, with $\dim\ker(H_0-E)=r\ge1$ and $\operatorname{dist}(E,\sigma(H_0)\setminus\{E\})\ge g>0$. Write $P=E_{H_0}(\{E\})$ for its orthogonal spectral projection and $Q=I-P$, using the CC arbitrary-H calculus of [[lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus]]. Let $V=V^*\in\mathcal B(H)$ with $v=\|V\|>0$, and let $\lambda\in\mathbb R$ satisfy $|\lambda|v<g/4$ ([[def-bounded-linear-operator]], [[def-operator-norm]]). Put $H_\lambda=H_0+\lambda V$ on $D(H_0)$ and assume it is self-adjoint there. Then:
 
 (a) For every real $z$ with $|z-E|+|\lambda|v\le g/2$, the operator $T_\lambda(z)=Q(H_\lambda-z)Q$ **on $QH$**, with domain $QD(H_0)=D(H_0)\cap QH$, has a bounded two-sided inverse $B(z):QH\to QD(H_0)$ with $\|B(z)\|\le4/g$. This includes $z=E$ and the case $QH=\{0\}$, with its unique zero-space inverse.
 

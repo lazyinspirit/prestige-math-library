@@ -35,20 +35,22 @@ $$t:S^2\longrightarrow\mathbb R^3,$$
 
 read with the following convention: $t(n)$ is the force per unit area exerted **by the material on the side towards which $n$ points upon the material on the other side**, at the point of a surface whose unit normal is $n$. The dependence of $t$ on position and time is suppressed in this notation; a traction **field on a set** $\Omega\times I$ is a map $t:\Omega\times I\times S^2\to\mathbb R^3$, and all statements below apply to each fixed $(y,s)$.
 
+For $v\in\mathbb R^3$ use one-based component labels $v_i:=v(i-1)$, and for $\sigma\in M_3(\mathbb R)$ use $\sigma_{ij}:=\sigma(i-1,j-1)$, where $1\le i,j\le3$; $e_i$ is the vector with value $1$ at $i-1$ and $0$ at the other two indices. Define the matrix-vector action $\sigma v\in\mathbb R^3$ by $(\sigma v)(k):=\sum_{j<3}\sigma(k,j)v(j)$ for $0\le k<3$, equivalently $(\sigma v)_i=\sum_{j=1}^3\sigma_{ij}v_j$. It is the rectangular product of [[def-matrix-product-and-identity-matrix]] after identifying $v$ with the column matrix $C_v(j,0):=v(j)$ and the result with its sole column.
+
 A matrix $\sigma\in M_3(\mathbb R)$ ([[def-matrix-space]]) **represents** the traction field $t$ when
 
 $$t(n)=\sigma n\qquad\text{for every }n\in S^2,$$
 
-the product being matrix-vector multiplication ([[def-matrix-product-and-identity-matrix]]). A matrix representing a traction field is called a **stress matrix** for it.
+the product being the matrix-vector action defined above. A matrix representing a traction field is called a **stress matrix** for it.
 
 The **reversed normal convention** is the identity $t(-n)=-t(n)$; it is a property some traction fields have and is not part of the definition. A traction field is **normal** when $t(n)$ is a real multiple of $n$ for every $n$, and **purely tangential** when $\langle t(n),n\rangle_2=0$ for every $n$ ([[def-euclidean-inner-product]]).
 
 ## Remarks
 
-- Existence and uniqueness of a representing matrix are **not** asserted by this definition. Under the additional hypothesis that $t$ satisfies Cauchy's hypothesis (dependence on the surface only through its unit normal) and is continuous in $n$, the existence of a unique representing matrix is proved by the Cauchy tetrahedron argument, which is developed for this collection in the conditional continuum-transport items; the continuity hypothesis is a genuine restriction, since Cauchy's hypothesis itself fails for contact forces depending on surface curvature.
+- Continuity and dependence on the normal alone do not imply existence of a representing matrix: the continuous map $t(n)=(n_1^3,0,0)$ has $t(e_1)=e_1$ and $t(e_2)=t(e_3)=0$, forcing any representing matrix to be $\operatorname{diag}(1,0,0)$, but this matrix disagrees with $t$ at $n=(1/\sqrt2,1/\sqrt2,0)$. Conditional Cauchy tetrahedron arguments also require balance and limiting hypotheses, stated by their consuming items. If a representing matrix exists, it is unique because its columns are $t(e_1),t(e_2),t(e_3)$.
 
-- Stress positivity is not asserted: $-\lambda I_3$ with $\lambda>0$ represents a purely normal traction field with $t(n)=-\lambda n$, i.e. a compressive traction with positive scalar pressure $\lambda$; the sign convention is the one recorded, so positive $\lambda$ gives compression in the direction $-n$.
+- Stress positivity is not asserted: for $\lambda>0$, the matrix $-\lambda I_3$ represents the normal-dependent map $t(n)=-\lambda n$ under the sign convention above. This is a mathematical example and imposes no constitutive or force-balance law.
 
-- The force per unit volume $\rho b$ of a body-force density $b$ (force per unit mass) is not an acceleration: $b$ and the acceleration field are different objects related only through a momentum balance that states its own hypotheses. The distinction is recorded here so that later items cannot silently identify them.
+- This definition does not identify a traction with an acceleration or assert any momentum balance; those are separate model data and results with their own hypotheses.
 
 - The notation $t(n)$ suppresses the point of application. A traction field depending only on $(y,s)$ cannot distinguish two surfaces through the same point with the same normal, which is exactly the restriction Cauchy's hypothesis imposes; the failure of that hypothesis for general contact interactions is not a defect of this definition.

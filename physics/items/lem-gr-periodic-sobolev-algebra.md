@@ -55,7 +55,7 @@ sources:
         non-identity time matrix"
       url: "https://arxiv.org/pdf/gr-qc/0002074"
 verification:
-  precheck: pending
+  precheck: pass
 ---
 
 ## Statement
@@ -85,7 +85,7 @@ $$\|\varphi w\|_{H^k}\le C_k\,\|\varphi\|_{C^k}\,\|w\|_{H^k}.$$
 
 [L2] $\|D^\alpha w\|_2\le\|w\|_{H^k}$ for $|\alpha|\le k$, and $C^m$ functions on the torus have finite sup norm; the $L^\infty$ norm of the constant function $1$ on the probability space is $1$, so $\|g\|_2\le\|g\|_\infty$ ([[def-gr-periodic-torus-and-sobolev-spaces]]).
 
-[L3] The multi-index Leibniz rule: for $|\alpha|\le k$, $D^\alpha(\varphi\psi)=\sum_{\beta\le\alpha}\binom{\alpha}{\beta}D^\beta\varphi\,D^{\alpha-\beta}\psi$, a finite sum over the multi-indices $\beta\le\alpha$; it follows by induction on $|\alpha|$ from the one-variable product rule and the definition of the weak derivatives, all functions involved being smooth on the torus ([[def-ck-and-multi-index-notation-in-several-variables]], [[def-gr-periodic-torus-and-sobolev-spaces]]).
+[L3] For $C^k$ functions $\varphi,\psi$ on the torus and $|\alpha|\le k$, the classical multi-index Leibniz rule is $D^\alpha(\varphi\psi)=\sum_{\beta\le\alpha}\binom{\alpha}{\beta}D^\beta\varphi\,D^{\alpha-\beta}\psi$, a finite sum over $\beta\le\alpha$; it follows by induction on $|\alpha|$ from the one-variable product rule ([[def-ck-and-multi-index-notation-in-several-variables]], [[def-gr-periodic-torus-and-sobolev-spaces]]). For smooth factors this also gives the weak-derivative identity.
 
 [L4] $\binom{\alpha}{\beta}\ge1$ is an integer and the number of multi-indices $\beta\le\alpha$ is at most $(k+1)^3$ ([[def-ck-and-multi-index-notation-in-several-variables]]).
 
@@ -93,17 +93,19 @@ $$\|\varphi w\|_{H^k}\le C_k\,\|\varphi\|_{C^k}\,\|w\|_{H^k}.$$
 
 [L5] Fourier truncations are smooth and converge in every stated $H^k$ norm ([[lem-gr-galerkin-projection-properties]]). The periodic space $H^k$ is complete: every $H^k$-Cauchy sequence converges in $H^k$; this follows from completeness of the weighted Fourier coefficient space and the Fourier characterization of $H^k$ ([[lem-gr-periodic-sobolev-completeness]]).
 
+[L6] If $f$ is $C^k$ and periodic, its classical derivatives through order $k$ are its weak derivatives: for $C^1$ periodic $G$, integrating $\partial_iG$ over one period gives zero by the fundamental theorem of calculus and equality of endpoint values; applying this coordinatewise to $G=(D^\beta f)\eta$ for smooth periodic tests $\eta$ proves the weak identities. The same periodic integration-by-parts argument is used in [[lem-gr-periodic-fourier-differentiation-and-norm-equivalence]], proof step 1.1.
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 (Embedding control (a).) Since $k-(k-2)=2>3/2$, [L1] with $(s,m)=(k,k-2)$ gives a $C^{k-2}$ representative of $u$ and the bound $\sup|D^\gamma u|\le\|u\|_{C^{k-2}}\le C_k\|u\|_{H^k}$ for every $|\gamma|\le k-2$. [L1]
 
-2.1 (Each Leibniz term is bounded by $\|u\|_{H^k}\|v\|_{H^k}$.) Fix $|\alpha|\le k$ and expand by [L3]. In a term $D^\beta u\,D^{\alpha-\beta}v$ two cases occur. First case, $|\beta|\ge k-1$: then $|\alpha-\beta|=|\alpha|-|\beta|\le1\le k-2$ because $k\ge3$, so by step 1.1 the second factor has $L^\infty$ norm at most $C_k\|v\|_{H^k}$ and the first has $L^2$ norm at most $\|u\|_{H^k}$; the product has $L^2$ norm at most $C_k\|u\|_{H^k}\|v\|_{H^k}$ by [L2]. Second case, $|\beta|\le k-2$: then $|\alpha-\beta|\le k$, so the first factor has $L^\infty$ norm at most $C_k\|u\|_{H^k}$ and the second $L^2$ norm at most $\|v\|_{H^k}$, with the same product bound. The two cases exhaust the possibilities, because $|\beta|\ge k-1$ and $|\alpha-\beta|\ge k-1$ simultaneously would give $|\alpha|\ge2k-2>k$ for $k\ge3$. [step 1.1, L3, L4, algebra]
+2.1 (Each Leibniz term for smooth factors is bounded by $\|u\|_{H^k}\|v\|_{H^k}$.) First take smooth $u,v$ and fix $|\alpha|\le k$. Expand by [L3]. In a term $D^\beta u\,D^{\alpha-\beta}v$ two cases occur. If $|\beta|\ge k-1$, then $|\alpha-\beta|\le1\le k-2$, so step 1.1 bounds the second factor in $L^\infty$ and [L2] bounds the first in $L^2$. If $|\beta|\le k-2$, step 1.1 bounds the first factor in $L^\infty$, while [L2] bounds the second in $L^2$. Both cases give an $L^2$ bound $C_k\|u\|_{H^k}\|v\|_{H^k}$. They exhaust the possibilities because both orders cannot be at least $k-1$ when $|\alpha|\le k$ and $k\ge4$. [step 1.1, L2, L3, algebra]
 
-3.1 (Conclusion of (b).) Summing the at most $(k+1)^3$ terms of [L3] and using [L4], $\|D^\alpha(uv)\|_2\le(k+1)^3\max_\beta\binom{\alpha}{\beta}C_k\|u\|_{H^k}\|v\|_{H^k}$; taking the sum over $|\alpha|\le k$ and absorbing the finite combinatorial factor into a new $C_k$ gives (b). For general $u,v$, approximate by their Fourier truncations from [L5]. The smooth bilinear estimate makes the products Cauchy in $H^k$, so [L5]'s completeness assertion gives a limit in $H^k$. The factors converge uniformly by [L1], hence the limit is their pointwise product. Testing against smooth functions passes the Leibniz derivative formula to this limit. Thus $uv\in H^k$ and the same estimate holds. [step 2.1, L1, L3, L4, L5, algebra]
+3.1 (Conclusion of (b).) Summing the finitely many terms of [L3] and using [L4] gives the stated product bound for smooth $u,v$. For general $u,v\in H^k$, put $u_N=P_Nu$ and $v_N=P_Nv$. By [L5], these converge in $H^k$ and, by [L1], uniformly. The smooth estimate applied to $u_Nv_N-u_Mv_M=(u_N-u_M)v_N+u_M(v_N-v_M)$ shows that $(u_Nv_N)$ is Cauchy in $H^k$. Completeness [L5] gives a limit, and uniform convergence identifies it with $uv$. For every smooth test function $\eta$, pass to the limit in $\int u_Nv_N D^\alpha\eta=(-1)^{|\alpha|}\int D^\alpha(u_Nv_N)\eta$; uniform convergence on the left and $L^2$ convergence of the derivatives on the right show that the limits are the weak derivatives of $uv$. The product estimate passes to the limit by norm continuity and $\|P_Nw\|_{H^k}\le\|w\|_{H^k}$. [step 2.1, L1, L3, L5, algebra]
 
-4.1 ((c): smoothing by a classical factor.) For $\varphi\in C^k$ and $w\in H^k$, Leibniz [L3] gives $D^\alpha(\varphi w)=\sum_{\beta\le\alpha}\binom{\alpha}{\beta}D^\beta\varphi\,D^{\alpha-\beta}w$; here $|D^\beta\varphi|\le\|\varphi\|_{C^k}$ pointwise and $\|D^{\alpha-\beta}w\|_2\le\|w\|_{H^k}$, so $\|D^\alpha(\varphi w)\|_2\le2^k\|\varphi\|_{C^k}\|w\|_{H^k}$; the coefficient sum is $\sum_{\beta\le\alpha}\binom\alpha\beta=2^{|\alpha|}\le2^k$, and summing over $|\alpha|\le k$ gives (c). For general $w$, first apply this estimate to smooth Fourier truncations of $w$: multiplication by the fixed $C^k$ function maps their Cauchy sequence to a Cauchy sequence in $H^k$, and uniform convergence identifies the limit with $\varphi w$. The classical $C^k$ Leibniz rule for each truncation passes to weak derivatives by testing, so the same estimate holds. [L2, L3, L4, algebra] ∎
+4.1 ((c): smoothing by a classical factor.) First take $w_N=P_Nw$, which is smooth. The $C^k$ Leibniz rule [L3] and [L6] give its weak derivatives by the displayed finite sum. Since $|D^\beta\varphi|\le\|\varphi\|_{C^k}$ and $\|D^{\alpha-\beta}w_N\|_2\le\|w_N\|_{H^k}$, summing the binomial coefficients gives $\|\varphi w_N\|_{H^k}\le C_k\|\varphi\|_{C^k}\|w_N\|_{H^k}$. Applying this estimate to $w_N-w_M$ and using completeness [L5] shows that $\varphi w_N$ converges in $H^k$; uniform convergence identifies its limit as $\varphi w$. Passing the weak derivative identities against smooth test functions gives $\varphi w\in H^k$, and the bound follows from $\|w_N\|_{H^k}\le\|w\|_{H^k}$. [L2, L3, L5, L6, algebra] ∎
 
 
 

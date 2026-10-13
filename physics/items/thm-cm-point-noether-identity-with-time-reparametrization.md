@@ -43,12 +43,12 @@ Let $(O,\mathcal L)$ be a time-dependent Lagrangian chart over $[a,b]\times U$
 ([[def-cm-time-dependent-lagrangian-and-action]]). Let $A\subseteq\mathbb R\times\mathbb R^n$ be open and contain the time-configuration projection of $O$. Let
 $\tau,\xi:A\to\mathbb R,\mathbb R^n$ and
 $B:A\to\mathbb R$ be of class $C^2$, and for a $C^1$ function
-$\varphi(t,q)$ write $D_t\varphi(t,q,v):=\varphi_t(t,q)+\varphi_q(t,q)\cdot v$. Assume the
+$\varphi(t,q)$ with scalar values write $D_t\varphi(t,q,v):=\varphi_t(t,q)+\varphi_q(t,q)\cdot v$; for vector-valued $\xi$ set $D_t\xi:=\xi_t+D_q\xi\,v$, equivalently $(D_t\xi)_j=D_t(\xi_j)$. Assume the
 **Noether identity**
 
 $$\mathcal L_t\,\tau+\mathcal L_q\cdot\xi+\mathcal L_v\cdot\bigl(D_t\xi-v\,D_t\tau\bigr) +\mathcal L\,D_t\tau=D_tB$$
 
-on $O$, where all arguments of $\mathcal L$ and its derivatives are $(t,q,v)$, and put
+on $O$, where all arguments of $\mathcal L$ and its derivatives are $(t,q,v)$. Write $p:=\mathcal L_v$ for the momentum and put
 
 $$E(t,q,v):=\mathcal L_v(t,q,v)\cdot v-\mathcal L(t,q,v),\qquad C(t,q,v):=\mathcal L_v(t,q,v)\cdot\xi(t,q)-E(t,q,v)\tau(t,q)-B(t,q).$$
 
@@ -68,12 +68,9 @@ Moreover:
 
 ## Facts & Assumptions
 
-**Given:** The chart data $(O,\mathcal L)$, the $C^2$ data $\tau,\xi,B$, the Noether identity, the
-functions $E$ and $C$, and a $C^2$ Euler–Lagrange solution $q:I\to U$.
+**Given:** The chart data $(O,\mathcal L)$, the $C^2$ data $\tau,\xi,B$, the Noether identity, the functions $E$ and $C$, and a $C^2$ Euler–Lagrange solution $q:I\to U$.
 
-[F1] Euler–Lagrange equation along $q$: $\frac{d}{dt}\mathcal L_v(t,q,q')=\mathcal L_q(t,q,q')$;
-this is the content of $E_{\mathcal L}(q)=0$, which is equivalent to stationarity
-([[def-cm-time-dependent-lagrangian-and-action]], [[thm-cm-stationarity-iff-euler-lagrange]]).
+[F1] Euler–Lagrange equation along $q$: $\frac{d}{dt}\mathcal L_v(t,q,q')=\mathcal L_q(t,q,q')$; this is the content of $E_{\mathcal L}(q)=0$, which is equivalent to stationarity ([[def-cm-time-dependent-lagrangian-and-action]], [[thm-cm-stationarity-iff-euler-lagrange]]).
 
 [F2] Chain rule along the curve ([[thm-chain-rule-for-total-derivatives]],
 [[def-vector-valued-derivative-and-integral]], [[def-interval]]): for the $C^1$ composite
@@ -81,17 +78,11 @@ $t\mapsto\varphi(t,q(t))$ the derivative is $D_t\varphi(t,q(t),q'(t))$; in parti
 $$\frac{d}{dt}\xi(t,q(t))=D_t\xi,\qquad\frac{d}{dt}\tau(t,q(t))=D_t\tau,\qquad \frac{d}{dt}B(t,q(t))=D_tB$$
 along the curve, with the right-hand sides evaluated at $(t,q(t),q'(t))$.
 
-[F3] Algebra of derivatives ([[thm-algebra-of-derivatives]],
-[[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-jacobian-matrix-and-gradient]],
-[[def-directional-and-partial-derivatives]], [[def-matrix-product-and-identity-matrix]],
-[[def-abs-value]]): sums, products and scalar multiples of differentiable functions on $I$ are
-differentiable with the usual rules, and a differentiable function on an interval with vanishing
-derivative at every interior point is constant ([[cor-zero-derivative-implies-constant]]).
+[F3] Algebra of derivatives ([[thm-algebra-of-derivatives]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]], [[def-matrix-product-and-identity-matrix]], [[def-abs-value]]): sums, products and scalar multiples of differentiable functions on $I$ are differentiable with the usual rules, and a differentiable function on an interval with vanishing derivative at every interior point is constant ([[cor-zero-derivative-implies-constant]]).
 
 ## Proof
 
-**Proof technique:** direct; differentiate the charge along the solution and substitute the
-Euler–Lagrange equation and the Noether identity.
+**Proof technique:** direct; differentiate the charge along the solution and substitute the Euler–Lagrange equation and the Noether identity.
 
 1.1 Along the solution, the energy satisfies $E'=-\mathcal L_t$: by [F2] and the product rule [F3], $$E'=\Bigl(\frac{d}{dt}\mathcal L_v\Bigr)\cdot q'+\mathcal L_v\cdot q''-\mathcal L_t-\mathcal L_q\cdot q'-\mathcal L_v\cdot q'' =\mathcal L_q\cdot q'-\mathcal L_t-\mathcal L_q\cdot q'=-\mathcal L_t,$$ where [F1] was used in the second equality. [F1, F2, F3, algebra]
 
@@ -107,21 +98,8 @@ Euler–Lagrange equation and the Noether identity.
 
 ## Remarks
 
-- **Dimensions of the generators.** If a one-parameter family of transformations is parametrised
-  by a parameter $s$ of physical dimension $[s]$, then $\tau$ has dimension time$/[s]$, $\xi$ has
-  dimension $[q]/[s]$, $B$ has dimension action$/[s]$, and the charge $C=p\cdot\xi-E\tau-B$ has
-  dimension action$/[s]$. Rescaling the generator by a constant rescales the charge by the same
-  constant. These dimensional remarks are bookkeeping for applications; the theorem itself is the
-  unconditional statement proved above, and no physical interpretation of the dimensions is
-  asserted.
+- **Dimensions of the generators.** If a one-parameter family of transformations is parametrised by a parameter $s$ of physical dimension $[s]$, then $\tau$ has dimension time$/[s]$, $\xi$ has dimension $[q]/[s]$, $B$ has dimension action$/[s]$, and the charge $C=p\cdot\xi-E\tau-B$ has dimension action$/[s]$. Rescaling the generator by a constant rescales the charge by the same constant. These dimensional remarks are bookkeeping for applications; the theorem itself is the unconditional statement proved above, and no physical interpretation of the dimensions is asserted.
 
-- **Orientation.** The local transformations are meant to act on the same oriented path space,
-  which for an infinitesimal family with time change requires $\mathrm dt_{\text{new}}/\mathrm dt>0$;
-  the present theorem only uses the infinitesimal identity and the charge, and the global
-  interpretation of the family is not needed for the conservation statement.
+- **Orientation.** The local transformations are meant to act on the same oriented path space, which for an infinitesimal family with time change requires $\mathrm dt_{\text{new}}/\mathrm dt>0$; the present theorem only uses the infinitesimal identity and the charge, and the global interpretation of the family is not needed for the conservation statement.
 
-- **Scope.** The identity is a hypothesis on the chart data. It does not follow from the existence
-  of a kinematic transformation of the configuration space; a chosen potential may break it. The
-  concrete charges and the failure of the symmetry for a quadratic potential are recorded in
-  [[cor-cm-noether-charges-for-translations-rotations-and-boosts]] and
-  [[rem-cm-scope-of-point-symmetry]].
+- **Scope.** The identity is a hypothesis on the chart data. It does not follow from the existence of a kinematic transformation of the configuration space; a chosen potential may break it. The concrete charges and the failure of the symmetry for a quadratic potential are recorded in [[cor-cm-noether-charges-for-translations-rotations-and-boosts]] and [[rem-cm-scope-of-point-symmetry]].

@@ -31,13 +31,15 @@ verification:
 
 Let $n\ge1$, let $\Omega\subseteq\mathbb R^n$ be open, let $M:\Omega\to M_n(\mathbb R)$ be of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with $M(q)$ symmetric and positive definite for every $q\in\Omega$, that is $v^{\mathsf T}M(q)v>0$ for every nonzero $v\in\mathbb R^n$, and let $U:\Omega\to\mathbb R$ be of class $C^2$. The matrix field $M$ is the **kinetic metric field** and $U$ the **potential** of the data in the chart $\Omega$.
 
+Coordinates and matrix entries are indexed by $0\le i,j,k<n$, as in [[def-euclidean-inner-product]] and [[def-jacobian-matrix-and-gradient]]. Vectors are read as columns: for $A\in M_n(\mathbb R)$, $(Av)_i:=\sum_{j=0}^{n-1}A_{ij}v_j$, and $v^{\mathsf T}Av:=\sum_{i,j=0}^{n-1}v_iA_{ij}v_j$.
+
 Define, for $(q,v)\in\Omega\times\mathbb R^n$, the **kinetic energy**, **Lagrangian** and **energy**
 
 $$T(q,v):=\tfrac12v^{\mathsf T}M(q)v,\qquad L(q,v):=T(q,v)-U(q),\qquad E(q,v):=T(q,v)+U(q),$$
 
 and, for $q\in\Omega$ and $v\in\mathbb R^n$, the matrix
 
-$$D_qM(q)[v]:=\sum_{k=1}^nv_k\,\partial_kM(q),\qquad\bigl(\partial_kM(q)\bigr)_{ij}=\partial_kM_{ij}(q).$$
+$$D_qM(q)[v]:=\sum_{k=0}^{n-1}v_k\,\partial_kM(q),\qquad\bigl(\partial_kM(q)\bigr)_{ij}=\partial_kM_{ij}(q)\quad(0\le i,j,k<n).$$
 
 The **mechanical vector field** of the data is the map
 

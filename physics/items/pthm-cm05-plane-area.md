@@ -64,7 +64,8 @@ coordinate, and $j:=\mu\,r\times r'$ the attached angular-momentum vector
    $$A(t):=\frac12\int_{t_0}^{t}\rho(s)^2\theta'(s)\,ds\qquad(t\in I)$$
    is of class $C^1$ with $A'\equiv J/(2\mu)$; hence for all
    $t_0<t_1$ in $I$ one has $A(t_1)-A(t_0)=(t_1-t_0)J/(2\mu)$.
-4. **(Both labels about the centre of mass.)** For every $t\in I$,
+4. **(Both labels about the centre of mass.)** With $j\ne0$ as in clause 2,
+   for every $t\in I$,
    $$\tfrac12\bigl(x_1(t)-X(t)\bigr)\times\bigl(x_1(t)-X(t)\bigr)'=\Bigl(\frac{m_2}{M}\Bigr)^{2}\omega(t),\qquad \tfrac12\bigl(x_2(t)-X(t)\bigr)\times\bigl(x_2(t)-X(t)\bigr)'=\Bigl(\frac{m_1}{M}\Bigr)^{2}\omega(t),$$
    so each label's areal-velocity vector about the centre of mass is
    constant; their magnitudes are in the ratio $(m_2/m_1)^2$.
@@ -97,8 +98,8 @@ coordinate, and $j:=\mu\,r\times r'$ the attached angular-momentum vector
 
 ## Remarks
 
-- **Reading of the area law.** $A$ is the polar sector integral of the reduced orbit; for a closed orbit traversed once it is the area enclosed by the trajectory, and clause 3's increment is the standard statement that the radius vector to the force centre sweeps equal areas in equal times. The geometric identification of $A$ with an ordinary plane area for a general (possibly self-intersecting) orbit is not asserted here.
+- **Reading of the area law.** $A$ is the polar sector integral of the reduced orbit; for a simple closed orbit traversed once in the positive polar orientation it is the area enclosed by the trajectory, and clause 3's increment is the standard statement that the radius vector to the force centre sweeps equal areas in equal times. The geometric identification of $A$ with an ordinary plane area for a general (possibly self-intersecting) orbit is not asserted here.
 
-- **Non-zero angular momentum only.** Clauses 2-4 require $j\ne0$: for a radial relative motion no polar angle is defined, the areal-velocity vector vanishes identically, and the equal-area statement is vacuous. The radial case is treated in the scope remark of this page.
+- **Non-zero angular momentum only.** Clauses 2-4 require $j\ne0$: for a radial relative motion the nonzero-angular-momentum parametrization is unavailable; a plane containing its constant radial direction and a constant polar angle may still be chosen, the areal-velocity vector vanishes identically, and the equal-area statement is vacuous. The radial case is treated in the scope remark of this page.
 
 - **Frame and interpretation.** The statement is read in one inertial frame; the plane and the constant $j$ are properties of the reduced model in that frame, and neither an observation nor an empirical claim is made.

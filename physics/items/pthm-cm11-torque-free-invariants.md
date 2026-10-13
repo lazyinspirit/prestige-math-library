@@ -93,7 +93,7 @@ sources:
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
     - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics
         (title page last edited September 1, 2026), Chapter 4 Section 4.4, Eqs.
-        (4.63)-(4.71), chapter pages 9-12 (PDF pages 63-66): free-rotation
+        (4.63)-(4.71), chapter pages 15-16 (PDF pages 69-70): free-rotation
         invariants and the Poinsot description"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical
@@ -198,20 +198,8 @@ measured value and no empirical law.
 
 ## Remarks
 
-- **The invariants are two, not three.** $\lVert l\rVert_2^{2}=C$ and
-  $\tfrac12\langle l,I^{-1}l\rangle=E$ are the two independent constants of the
-  torque-free motion in the $l$-variable; together with the components
-  $l_{j}=I_{j}\omega_{j}$ they describe the trajectories as the intersection
-  curves of a sphere and an ellipsoid. The statement above proves precisely
-  those invariants and boundedness; it does not compute the elliptic
-  functions along the level curves and does not claim periodicity.
+- **The scalar invariants.** The two invariant functions displayed are $C=\lVert l\rVert_2^{2}$ and $E=\tfrac12\langle l,I^{-1}l\rangle$; they need not be functionally independent in every model. For spherical inertia $I=\alpha I_{3}$ with $\alpha>0$, one has $E=C/(2\alpha)$. The components $l_{j}=I_{j}\omega_{j}$ are coordinates, not additional conserved quantities. The statement proves the displayed invariants and boundedness; it does not parameterize their level sets, compute elliptic functions or claim periodicity.
 
-- **What is not claimed.** No orientation statement is made: the
-  conservation of $L_c$ bounds the body-frame data $l$ and $\omega$, but the
-  orientation $R(t)$ itself is not confined by these invariants, and the
-  pages that follow record this distinction explicitly.
+- **What is not claimed.** No orientation statement is made: the conservation of $L_c$ bounds the body-frame data $l$ and $\omega$, but the orientation $R(t)$ itself is not confined by these invariants, and the pages that follow record this distinction explicitly.
 
-- **The countable-choice hypothesis.** $\mathrm{AC}_\omega$ enters only
-  through [L1] and [L2], which make the defining integrals of the model's
-  inertial quantities finite; the algebraic identities themselves are
-  choice-free once those integrals exist.
+- **The countable-choice hypothesis.** $\mathrm{AC}_\omega$ enters only through [L1] and [L2], which make the defining integrals of the model's inertial quantities finite; the algebraic identities themselves are choice-free once those integrals exist.

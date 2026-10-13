@@ -57,7 +57,13 @@ $\Phi:\Omega\to S_0$ ([[def-cm16-flow-equilibria-and-invariant-sets]] clauses
 (i)-(ii)); all differentiability is that of
 [[def-ck-euclidean-maps-and-diffeomorphisms]]. Let $z_*\in S_0$ be an
 equilibrium state, $G(z_*)=0$, and let
-$A:=DG(z_*)$ ([[def-total-derivative-in-euclidean-space]]). Then:
+$A:=DG(z_*)$ ([[def-total-derivative-in-euclidean-space]]). All state
+and tangent norms below are Euclidean norms of the dimensionless SI
+numerical coordinates $z=(X/(1\ \mathrm m),V/(1\ \mathrm{m\,s^{-1}}))$
+fixed by [[def-cm16-flow-equilibria-and-invariant-sets]] clause (iv), and
+$t=t_{\rm phys}/t_{\rm ref}$ with $t_{\rm ref}=1\ \mathrm s$.
+Thus $G$ and $A$ are the numerical field and its derivative in that chart;
+no norm adds physical positions to physical velocities. Then:
 
 1. **(Exponential dichotomy.)** If no complex eigenvalue of $A$
    ([[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]) has real part
@@ -88,7 +94,8 @@ $A:=DG(z_*)$ ([[def-total-derivative-in-euclidean-space]]). Then:
    $\lVert z(t_1)-z_*\rVert_2=\varepsilon_0$.
 4. **(Rates, charts and scope.)** The constants $C,c,\beta,\gamma$ and the
    coordinate descriptions of the subspaces depend on the chosen chart and
-   norm; the rates $c,\gamma$ have dimension $\tau^{-1}$. Under a smooth
+   norm; the physical rates $c/t_{\rm ref},\gamma/t_{\rm ref}$ have dimension
+   $\tau^{-1}$. Under a smooth
    change of chart the derivative matrices at the equilibrium are similar, so
    their eigenvalue spectrum is invariant, while the Euclidean estimates may
    change as recorded in [[def-cm16-stability-and-hyperbolicity-concepts]]
@@ -129,4 +136,4 @@ negative-spectrum hypothesis, for clause 3 the saddle hypothesis.
 
 - **Why the centre case is excluded.** If some eigenvalue lies on the imaginary axis, the quadratic Lyapunov form of [L2] is not negative definite and the cone argument of [L3] does not apply; the page records this gap in the scope clause and in [[rem-cm16-scope-of-stability-and-chaos]].
 
-- **Units.** $\lVert A\rVert$ and the rates $\gamma,c$ have dimension $\tau^{-1}$ ([[def-cm01-units]]); the estimates compare states in the same chart, so their right-hand sides are dimensionless ratios of Euclidean norms.
+- **Units.** $\lVert A\rVert$ is the induced operator norm on the numerical state space; $\lVert A\rVert/t_{\rm ref}$ and the physical rates $\gamma/t_{\rm ref},c/t_{\rm ref}$ have dimension $\tau^{-1}$ ([[def-cm01-units]]). All exponential arguments and all state norms in the estimates are dimensionless. Fixed reference scales affect the numerical bounds, while preserving the qualitative stability predicates.

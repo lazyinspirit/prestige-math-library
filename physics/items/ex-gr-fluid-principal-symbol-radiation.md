@@ -29,7 +29,7 @@ verification:
 
 ## Example
 
-Take the barotropic equation of state $p(\epsilon)=\tfrac13\epsilon$ (so
+Take the smooth barotropic equation of state $p:J\to\mathbb R$, $J=(0,\infty)$, $p(\epsilon)=\tfrac13\epsilon$, at any state $\epsilon_0\in J$. Then $\epsilon+p=4\epsilon/3>0$ on $J$ and $p'=1/3\in(0,1)$ (so
 $c_s=1/\sqrt3$) and at a point choose a rest frame $n$ with spatial frame
 $(e_1,e_2,e_3)$ and the future-directed timelike covector
 $\zeta=-n^\flat+\tfrac12 e_1^\flat$ (in the notation
@@ -41,7 +41,7 @@ eigenvalues and positive definiteness explicitly.
 
 ## Facts & Assumptions
 
-**Given:** the radiation equation of state, the rest frame and the covector $\zeta=-n^\flat+\tfrac12e_1^\flat$, for which $\zeta(n)=1$ and $\zeta_\perp=\tfrac12e_1^\flat$.
+**Given:** the radiation equation of state on $J=(0,\infty)$ and a state $\epsilon_0>0$, the rest frame and the covector $\zeta=-n^\flat+\tfrac12e_1^\flat$, for which $\zeta(n)=1$ and $\zeta_\perp=\tfrac12e_1^\flat$.
 
 [L1] The principal symbol of the fluid system in the variables $(r,n^1,n^2,n^3)$ at a covector $\zeta$ is the symmetric matrix $A(\zeta)=\begin{pmatrix}\zeta_0&c_s\zeta_\perp^{\mathsf T}\\ c_s\zeta_\perp&\zeta_0I_3\end{pmatrix}$ ([[lem-gr-barotropic-fluid-symmetric-hyperbolic-system]] clause (b)).
 

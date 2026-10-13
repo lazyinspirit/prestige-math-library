@@ -21,7 +21,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.1 pp. 181-186 and Section 9.6 pp. 214-221 (Prufer angle, Sturm oscillation and monotonicity in the spectral parameter)"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.1, Theorem 9.1 pp. 182-183 (unique IVP solutions and entire parameter dependence; the Prufer angle and its derivative are proved locally)"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
     - title: "Gerald Teschl, Ordinary Differential Equations and Dynamical Systems (American Mathematical Society, Graduate Studies in Mathematics 140), Chapter 2 pp. 25-54 (first-order systems and comparison)"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-ode/ode.pdf"

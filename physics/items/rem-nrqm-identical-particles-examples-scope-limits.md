@@ -6,7 +6,7 @@ domain: physics
 title: "Scope of the identical-particles examples page"
 status: draft
 origin: pipeline
-dependency_level: 14
+dependency_level: 13
 deps: [texp-nrqm-identical-particles-two-fermion-spatial-spin-symmetry, ex-nrqm-identical-particles-exchange-versus-coulomb-terms, def-nrqm-identical-particles-framework-species-sectors-and-preparations, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-preparation-and-apparatus]
 dependency_roles:
   texp-nrqm-identical-particles-two-fermion-spatial-spin-symmetry: physical-result

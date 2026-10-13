@@ -113,14 +113,15 @@ to $H$ is nondegenerate, equivalently when $H\cap H^\perp=\{0\}$ in the
 orthogonality of [[def-lorentz-orthogonality-and-orthogonal-complement]]. A
 smooth singular $3$-simplex $\sigma$ is **non-null at** a parameter point $t$
 when the span of the three velocity vectors
-$\sigma_*\partial_1|_t,\sigma_*\partial_2|_t,\sigma_*\partial_3|_t$ is
-nondegenerate at $\sigma(t)$, and **non-null** when this holds at every
+$\sigma_*\partial_1|_t,\sigma_*\partial_2|_t,\sigma_*\partial_3|_t$ has
+dimension $3$ and is nondegenerate at $\sigma(t)$, and **non-null** when this holds at every
 parameter point. For a non-null face the **unit normal** $\nu$ at that point is
 the unique vector of $T_{\sigma(t)}M$ with $\nu\in H^\perp$,
 $g(\nu,\nu)\in\{-1,+1\}$ and $(\nu,\sigma_*\partial_1,\sigma_*\partial_2,
 \sigma_*\partial_3)$ a positively oriented basis of $T_{\sigma(t)}M$; its
 existence, uniqueness and its sign $\varepsilon:=g(\nu,\nu)$ are proved in
-[[lem-gr-metric-volume-form-patching-and-face-normal]] clause (b), together
+[[lem-gr-metric-volume-form-patching-and-face-normal]] clause (c), together
 with the density identity of clause (c) used to read $\iota_J\mathrm{vol}_g$ on
-such a face. Null faces are not assigned a unit normal; their flux is defined
+such a face. Rank-deficient faces and rank-three faces with degenerate induced
+metric are not assigned a unit normal; their flux is defined
 by the $3$-form $\iota_J\mathrm{vol}_g$ itself, as in clause (b).

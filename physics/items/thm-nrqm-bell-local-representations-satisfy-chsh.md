@@ -21,7 +21,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.A, PDF page 3, equation (4) and its derivation: the CHSH inequality S <= 2 for probabilities satisfying the local decomposition with local expectations in [-1,1]"
+    - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section I.A, PDF page 3, equation (4) and its derivation: the CHSH inequality S <= 2 for probabilities satisfying the local decomposition with local expectations in [-1,1]"
       url: "https://arxiv.org/pdf/1303.2849"
     - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 113-115 (PDF pages 121-123): Bell's inequality for a setting-independent response-function model, obtained by bounding the response product pointwise"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
@@ -68,17 +68,5 @@ contains no physics. No choice principle is used.
 
 ## Remarks
 
-- **Deterministic special case.** If the representation has response functions
-  $a_{i},b_{j}:\Lambda\to\Sigma$ in the sense of clause (b) of
-  [[def-nrqm-bell-local-response-representation]], then the four compositions
-  $a_{i}b_{j}$ are $\pm1$-valued random variables on one probability space and
-  the present bound reduces to the classical CHSH inequality for such
-  variables, which is also proved directly in
-  [[lem-nrqm-composites-chsh-and-finite-sampling-law]] (a). The probabilistic
-  form proved here is the general case: it does not assume determinism of the
-  responses.
-- **Sharpness.** The bound $2$ is not improvable for the class: the model
-  $I=J=\{0,1\}$ with $\mu_{ij}$ the point mass at
-  $(\varepsilon,\delta)$ with $\varepsilon=\delta=+1$ for all $(i,j)$ admits
-  the deterministic representation with $a_{i}\equiv+1$, $b_{j}\equiv+1$ and
-  has $S(\mu)=2$; reversing the sign of every $b_{j}$ gives $S(\mu)=-2$.
+- **Deterministic special case.** If the representation has response functions $a_{i},b_{j}:\Lambda\to\Sigma$ in the sense of clause (b) of [[def-nrqm-bell-local-response-representation]], then the four compositions $a_{i}b_{j}$ are $\pm1$-valued random variables on one probability space and the present bound reduces to the classical CHSH inequality for such variables, which is also proved directly in [[lem-nrqm-composites-chsh-and-finite-sampling-law]] (a). The probabilistic form proved here is the general case: it does not assume determinism of the responses.
+- **Sharpness.** The bound $2$ is not improvable for the class: the model $I=J=\{0,1\}$ with $\mu_{ij}$ the point mass at $(\varepsilon,\delta)$ with $\varepsilon=\delta=+1$ for all $(i,j)$ admits the deterministic representation with $a_{i}\equiv+1$, $b_{j}\equiv+1$ and has $S(\mu)=2$; reversing the sign of every $b_{j}$ gives $S(\mu)=-2$.

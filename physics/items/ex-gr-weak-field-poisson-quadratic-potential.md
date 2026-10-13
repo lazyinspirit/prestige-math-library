@@ -60,7 +60,8 @@ inertial chart $x$, let $L>0$ be a length, take spacetime region
 $\Omega=\mathbb R\times B_L(0)\subseteq\mathbb R^4$ with spatial base
 $U=B_L(0)\subseteq\mathbb R^3$, and let $K=\overline B_{L/2}(0)\subset U$.
 Set $c>0$, $G_N>0$, $\kappa:=8\pi G_N/c^4$, $C:=1$,
-$\varepsilon_0:=1/2$, $r\equiv0$, and
+$\varepsilon_0:=1/2$, choose the stationary-data remainder interval parameter
+$\varepsilon_1^{\mathrm{data}}:=1$, set $r\equiv0$ on that interval, and
 
 $$\varphi(\mathbf x):=\frac{(x^1)^2+(x^2)^2+(x^3)^2}{2L^2}.$$
 
@@ -70,7 +71,7 @@ Then:
    in the sense of [[def-gr-stationary-weak-field-data]] clause (a), with
    $g_{ab}(\varepsilon)=\eta_{ab}+\varepsilon h_{ab}$,
    $h_{00}=-2\varphi$, $h_{ij}=-2\varphi\delta_{ij}$, $h_{0i}=0$; the
-   family $(\varepsilon_1,h,q)$ with $\varepsilon_1:=1/2$ and $q\equiv0$ is
+   family $(\delta_1,h,q)$ with $\delta_1:=1/2$ and $q\equiv0$ is
    a flat linearized family and $g(\varepsilon)-\eta=\varepsilon h$.
 2. Defining $T_{ab}(\varepsilon):=G_{ab}(g(\varepsilon))/\kappa$ and
    $\rho_\varepsilon:=T_{00}(\varepsilon)/c^2$
@@ -100,41 +101,15 @@ Then:
 
 ## Facts & Assumptions
 
-**Given:** The flat model with inertial chart $x$, spacetime region
-$\Omega=\mathbb R\times B_L(0)$, spatial base $U=B_L(0)$, compact spatial set
-$K=\overline B_{L/2}(0)$, the function $\varphi$ and $r\equiv0$ above,
-$C=1$, $\varepsilon_0=\varepsilon_1=1/2$, $c>0$, $G_N>0$ and
-$\kappa=8\pi G_N/c^4$.
+**Given:** The flat model with inertial chart $x$, spacetime region $\Omega=\mathbb R\times B_L(0)$, spatial base $U=B_L(0)$, compact spatial set $K=\overline B_{L/2}(0)$, the function $\varphi$ and $r\equiv0$ above, $C=1$, $\varepsilon_0=1/2$, $\varepsilon_1^{\mathrm{data}}=1$, $\delta_1=1/2$, $c>0$, $G_N>0$ and $\kappa=8\pi G_N/c^4$.
 
-[L1] Stationary weak-field data have metric components
-$g_{00}=-(1+2\varepsilon\varphi)+r_{00}$,
-$g_{0i}=r_{0i}$ and
-$g_{ij}=(1-2\varepsilon\varphi)\delta_{ij}+r_{ij}$ pulled back from $U$;
-the metric must be Lorentzian on $\Omega$ and the spatial derivatives through
-order two obey the stated bounds on $K$. An Einstein family has a smooth
-symmetric field $T$ with $G=\kappa T$ and
-$\rho_\varepsilon=T_{00}/c^2$
-([[def-gr-stationary-weak-field-data]] clauses (a)-(c),
-[[def-gr-smooth-lorentzian-objects]],
-[[def-gr-curvature-tensor-and-derived-tensors]]).
+[L1] Stationary weak-field data have metric components $g_{00}=-(1+2\varepsilon\varphi)+r_{00}$, $g_{0i}=r_{0i}$ and $g_{ij}=(1-2\varepsilon\varphi)\delta_{ij}+r_{ij}$ pulled back from $U$; the metric must be Lorentzian on $\Omega$ and the spatial derivatives through order two obey the stated bounds on $K$. An Einstein family has a smooth symmetric field $T$ with $G=\kappa T$ and $\rho_\varepsilon=T_{00}/c^2$ ([[def-gr-stationary-weak-field-data]] clauses (a)-(c), [[def-gr-smooth-lorentzian-objects]], [[def-gr-curvature-tensor-and-derived-tensors]]).
 
-[L2] For every stationary weak-field Einstein family, the general component
-hierarchy gives
-$|\kappa T_{00}-2\Delta\Phi/c^2|\le C_2\varepsilon^2/L^2$ on $K$ for
-$0<\varepsilon\le\varepsilon_*'$
-([[thm-gr-weak-field-einstein-stress-hierarchy]] clauses (b)-(c)).
+[L2] For every stationary weak-field Einstein family, the general component hierarchy gives $|\kappa T_{00}-2\Delta\Phi/c^2|\le C_2\varepsilon^2/L^2$ on $K$ for $0<\varepsilon\le\varepsilon_*'$ ([[thm-gr-weak-field-einstein-stress-hierarchy]] clauses (b)-(c)).
 
-[L3] For $\varphi(\mathbf x)=|\mathbf x|^2/(2L^2)$,
-$\partial_i\varphi=x_i/L^2$,
-$\partial_i\partial_j\varphi=\delta_{ij}/L^2$ and
-$\Delta\varphi=3/L^2$; the field is stationary
-([[def-laplacian-of-a-c2-function]]).
+[L3] For $\varphi(\mathbf x)=|\mathbf x|^2/(2L^2)$, $\partial_i\varphi=x_i/L^2$, $\partial_i\partial_j\varphi=\delta_{ij}/L^2$ and $\Delta\varphi=3/L^2$; the field is stationary ([[def-laplacian-of-a-c2-function]]).
 
-[L4] The first-order formulas are linear in $h$ and give
-$\bar h_{00}=-4\varphi$, $\bar h_{0i}=\bar h_{ij}=0$ and
-$G^{(1)}_{ab}=-\frac12\Box\bar h_{ab}+\partial^c\partial_{(a}\bar h_{b)c}-\frac12\eta_{ab}\partial^c\partial^d\bar h_{cd}$; for stationary fields $\Box=\Delta$
-([[thm-gr-flat-linearized-curvature-and-gauge]] clause (c),
-[[def-gr-flat-linearized-perturbation]] clauses (a) and (c)).
+[L4] The first-order formulas are linear in $h$ and give $\bar h_{00}=-4\varphi$, $\bar h_{0i}=\bar h_{ij}=0$ and $G^{(1)}_{ab}=-\frac12\Box\bar h_{ab}+\partial^c\partial_{(a}\bar h_{b)c}-\frac12\eta_{ab}\partial^c\partial^d\bar h_{cd}$; for stationary fields $\Box=\Delta$ ([[thm-gr-flat-linearized-curvature-and-gauge]] clause (c), [[def-gr-flat-linearized-perturbation]] clauses (a) and (c)).
 
 [L5] On $U=B_L(0)$, $0\le\varphi<1/2$; for $0<\varepsilon\le1/2$ the diagonal metric entries $-(1+2\varepsilon\varphi)$ and $1-2\varepsilon\varphi$ have signs $-,+,+,+$. Also $\kappa c^2=8\pi G_N/c^2$.
 
@@ -142,13 +117,13 @@ $G^{(1)}_{ab}=-\frac12\Box\bar h_{ab}+\partial^c\partial_{(a}\bar h_{b)c}-\frac1
 
 **Proof technique:** check the spatially factored data, compute the exact Newtonian Poisson source and the first-order Einstein tensor, then use the general coordinate-density estimate without imposing dust assumptions.
 
-1.1 (Admissible data.) The fields are smooth and factor through the spatial projection. For $0<\varepsilon\le1/2$ and $\mathbf x\in U$, $0\le2\varepsilon\varphi<1/2$, so [L5] gives a diagonal Lorentzian metric of signature $(-,+,+,+)$ on all of $\Omega$. On $K$, $|\varphi|\le1/8$, $|\partial_i\varphi|\le1/(2L)$ and $|\partial_i\partial_j\varphi|\le1/L^2$, so the bounds hold with $C=1$; $r=0$ satisfies its bounds. Taking $\varepsilon_1=\varepsilon_0=1/2$ and $q=0$ gives the stated flat linearized family. [L1, L3, L5, algebra]
+1.1 (Admissible data.) The fields are smooth and factor through the spatial projection. For $0<\varepsilon\le1/2$ and $\mathbf x\in U$, $0\le2\varepsilon\varphi<1/2$, so [L5] gives a diagonal Lorentzian metric of signature $(-,+,+,+)$ on all of $\Omega$. On $K$, $|\varphi|\le1/8$, $|\partial_i\varphi|\le1/(2L)$ and $|\partial_i\partial_j\varphi|\le1/L^2$, so the bounds hold with $C=1$; $r=0$ satisfies its bounds on $(-\varepsilon_1^{\mathrm{data}},\varepsilon_1^{\mathrm{data}})$, with $\varepsilon_1^{\mathrm{data}}=1>\varepsilon_0=1/2$. Taking $\delta_1=1/2$ and $q=0$ gives the stated flat linearized family. [L1, L3, L5, algebra]
 
 1.2 (First-order coefficient.) By [L3], $\Delta\varphi=3/L^2$. The trace reversal has $\bar h_{00}=-4\varphi$ and all other components zero. Formula [L4], stationarity and $\Box=\Delta$ give $G^{(1)}_{00}(h)=2\Delta\varphi=6/L^2$ and $G^{(1)}_{0i}(h)=G^{(1)}_{ij}(h)=0$. Linearity gives $G^{(1)}_{00}(A(\varepsilon))=6\varepsilon/L^2$ and the remaining displayed components vanish. [L3, L4, algebra]
 
 2.1 (Einstein family.) Define $T_{ab}(\varepsilon)=G_{ab}(g(\varepsilon))/\kappa$ on $\Omega$. The metric-selected connection and curvature depend smoothly on the metric and its derivatives; hence $T$ is a smooth symmetric component field and $G=\kappa T$ identically. Thus the data are an Einstein family by [L1], with coordinate density $\rho_\varepsilon=T_{00}/c^2$. This construction is a mathematical source prescription, not a dust realization. [step 1.1, L1, L5, algebra]
 
-3.1 (Exact Poisson source and coordinate-density estimate.) By [L3], $\Delta\Phi=\varepsilon c^2\Delta\varphi=3\varepsilon c^2/L^2$. Defining $\bar\rho=3\varepsilon c^2/(4\pi G_NL^2)$ gives $\Delta\Phi=4\pi G_N\bar\rho$ exactly. By [L2], [step 2.1, L2, L3, L5, algebra]
+3.1 (Exact Poisson source and coordinate-density estimate.) By [L3], $\Delta\Phi=\varepsilon c^2\Delta\varphi=3\varepsilon c^2/L^2$. Defining $\bar\rho=3\varepsilon c^2/(4\pi G_NL^2)$ gives $\Delta\Phi=4\pi G_N\bar\rho$ exactly. By [L2],
 $$|\kappa c^2\rho_\varepsilon-6\varepsilon/L^2|\le C_2\varepsilon^2/L^2.$$
 Since $\kappa c^2\bar\rho=6\varepsilon/L^2$ and $\kappa c^2=8\pi G_N/c^2$, division by $\kappa c^2>0$ gives
 $$|\rho_\varepsilon-\bar\rho|\le\frac{C_2\varepsilon^2c^2}{8\pi G_NL^2}.$$

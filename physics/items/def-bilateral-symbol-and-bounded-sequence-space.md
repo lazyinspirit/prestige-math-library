@@ -42,7 +42,7 @@ $$X_{\pm}\ :=\ \Sigma_{\pm}^{\mathbb Z}\ =\ \{\,s\ :\ s \text{ is a function } \
 
 with the function-set convention of [[def-function-space]]; for $s\in X_{\pm}$ write $s_k:=s(k)$. The elements of $X_{\pm}$ are called **two-sign bilateral sequences**.
 
-**Coding correspondence with the published two-symbol space.** Let
+**Coding correspondence with the two-symbol space.** Let
 
 $$\varphi:X_{\pm}\longrightarrow\{0,1\}^{\mathbb Z},\qquad \varphi(s)_k:=\frac{s_k+1}{2}\in\{0,1\},$$
 
@@ -68,7 +68,7 @@ For $m\in\mathbb Z$ its iterate satisfies $S_{\pm}^{m}(s)_k=s_{k+m}$; in particu
 
 $$\ell^{\infty}(\mathbb Z):=\{\,x:\mathbb Z\to\mathbb R\ :\ x \text{ is bounded}\,\},\qquad \|x\|_{\infty}:=\sup\{\,|x_k|\ :\ k\in\mathbb Z\,\}.$$
 
-The set $\{|x_k|:k\in\mathbb Z\}$ whose supremum is taken is nonempty and bounded above ([[def-bounded-set]]), so $\|x\|_\infty$ is a well-defined nonnegative real number ([[lem-sup-unique]], [[def-complete-ordered-field]]). For $R>0$ put
+The set $\{|x_k|:k\in\mathbb Z\}$ whose supremum is taken is nonempty and bounded above ([[def-bounded-set]]), so $\|x\|_\infty$ is a well-defined nonnegative real number ([[lem-sup-unique]], [[def-complete-ordered-field]]). For $R\ge0$ put
 
 $$B_R:=\{\,x\in\ell^{\infty}(\mathbb Z)\ :\ \|x\|_{\infty}\le R\,\}.$$
 
@@ -76,7 +76,7 @@ Thus $B_R$ is the closed ball of radius $R$ in the supremum norm, and $\|x\|_\in
 
 ## Remarks
 
-- The only difference between $(X_{\pm},D_{\pm},S_{\pm})$ and the published $(X_2,d_2,\sigma_2)$ is the relabelling $0\leftrightarrow -1$, $1\leftrightarrow+1$ of the two symbols: $\varphi$ is a bijection satisfying $\varphi\circ S_{\pm}=\sigma_2\circ\varphi$. Every metric, compactness or chaos statement about the published two-symbol shift therefore transfers through $\varphi$ once it is known that $\varphi$ is an isometry, which is the content of [[lem-bounded-bilateral-sequence-ball-is-complete]] clause 3.
+- The only difference between $(X_{\pm},D_{\pm},S_{\pm})$ and the $(X_2,d_2,\sigma_2)$ is the relabelling $0\leftrightarrow -1$, $1\leftrightarrow+1$ of the two symbols: $\varphi$ is a bijection satisfying $\varphi\circ S_{\pm}=\sigma_2\circ\varphi$. Every metric, compactness or chaos statement about the two-symbol shift therefore transfers through $\varphi$ once it is known that $\varphi$ is an isometry, which is the content of [[lem-bounded-bilateral-sequence-ball-is-complete]] clause 3.
 
 - No measure, probability or invariant measure on $X_{\pm}$ is introduced; all statements on this page are topological or metric.
 

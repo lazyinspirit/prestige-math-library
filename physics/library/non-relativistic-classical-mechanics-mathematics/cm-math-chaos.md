@@ -109,7 +109,7 @@ margins $\ge3/4$, derivative bounds $d\le2/13$, and exact orbit form
 $P_{u,w}(v)=0\iff B(u,V(u,v))=V(v,w)$.
 [[thm-explicit-perturbed-horseshoe-and-transversality]] constructs, for
 every $C^2$ diffeomorphism $G$ satisfying six explicit closeness inequalities
-with constant $\varepsilon\le1/6$ (and the same for the distinct map
+with $0<\varepsilon\le1/6$ and $C(a,R)\varepsilon\le1$, where $C$ is the defect-bound constant of [[lem-perturbed-scalar-recurrence-root-bounds]] (and the same bounds for the distinct map
 $\Sigma\circ G^{-1}\circ\Sigma$), a coded invariant set $\Lambda_G=h_G(X_\pm)$
 on which $G$ is conjugate to the shift. Under $\mathrm{AC}_\omega$ it is
 mixing with dense periodic points and chaotic with sensitivity constant

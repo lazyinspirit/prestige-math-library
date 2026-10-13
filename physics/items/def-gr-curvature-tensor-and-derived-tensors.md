@@ -88,12 +88,15 @@ $$R_{abcd}:=\sum_e g_{ae}R^e{}_{bcd},\qquad \operatorname{Ric}_{bd}:=\sum_{a,c}g
 The fields $R_{abcd}$, $\operatorname{Ric}_{ab}$, $S$ and $G_{ab}$ are called
 the **Riemann tensor with lowered indices**, the **Ricci tensor**, the
 **scalar curvature** and the **Einstein tensor** of the metric-selected
-connection. That $R_{abcd}$ are the components of a smooth $(0,4)$-tensor
-field and that $\operatorname{Ric}_{ab}$ are the components of a smooth
-symmetric $(0,2)$-tensor field, so that the contractions above are
-basis-independent and do not depend on the chart, is proved in
-[[thm-gr-curvature-algebraic-symmetries]] clauses (a)-(d); the Ricci symmetry
-is part of that statement.
+connection. Tensoriality of $R$ is proved in
+[[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a).
+Lowering its output slot with the smooth metric and contracting with the
+smooth inverse metric are intrinsic tensor operations
+([[def-gr-tensor-fields-and-components]] clauses (b)-(c),
+[[def-contraction-of-a-mixed-tensor]]). Thus these formulas give smooth
+fields of types $(0,4)$, $(0,2)$, $(0,0)$ and $(0,2)$, respectively,
+independent of the chart. Symmetry of $\operatorname{Ric}$ and $G$ is proved
+separately in [[thm-gr-curvature-algebraic-symmetries]] clause (d).
 
 ## Conventions and scope
 
@@ -110,7 +113,8 @@ is part of that statement.
   are defined from the connection alone; the lowered tensor, Ricci tensor,
   scalar curvature and Einstein tensor of clause (c) require the metric, and
   in clause (c) everything is defined chartwise from the components, with
-  the chart-independence supplied by the cited theorem. The Christoffel
+  the chart-independence supplied by curvature tensoriality and intrinsic
+  metric contractions, as specified there. The Christoffel
   symbols $\Gamma^a{}_{bc}$ are chart functions and not tensor components
   ([[def-christoffel-symbols-of-an-affine-connection]]); no tensority of
   $\Gamma$ is asserted here or later.

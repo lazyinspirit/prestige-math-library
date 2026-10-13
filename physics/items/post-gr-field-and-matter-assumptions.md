@@ -38,8 +38,11 @@ about the matter content of a model.
 nongravitational fields or matter and their explicit equations of motion and
 couplings. The geometric data $(M,g,N)$ of
 [[def-gr-smooth-lorentzian-objects]] and covariance of the model's equations
-under relabelling of events do not select those fields, equations or couplings:
-different matter specifications over the same geometry are different models of
+under relabelling of events do not select those fields, equations or couplings.
+Here covariance means that, on overlapping smooth charts, the component
+transformations specified for the model's fields carry solutions of the
+equations in one chart to solutions of the same equations in the other.
+Different matter specifications over the same geometry are different models of
 the framework, and no dynamical selection principle is asserted.
 
 **(ii) Smooth matter and its stress-energy tensor.** The matter of a model on
@@ -54,18 +57,21 @@ while a model that prescribes $T$ directly is a separate source model.
 **(iii) Consistency with the field law.** Where a model prescribes $T$
 independently of matter fields, the prescription is admissible only if it meets
 the consistency conditions imposed by the gravitational field law adopted for
-the model, stated where that law is stated; in the action formulation the
-matter equations, their coupling to the metric, and the on-shell conservation
-of $T$ are derived within the model rather than assumed. Conservation is an
-on-shell statement about a specified model and is not automatic for an
-arbitrary smooth symmetric $T$.
+the model, stated where that law is stated. If a model specifies a real-valued
+action functional on its admissible metric and matter configurations, the
+action, its dependence on those fields, its stated symmetries, and the matter
+equations obtained from it are part of the model. Any conservation identity
+used for $T$ when those equations hold must be established from that model's
+action, symmetries, equations, and regularity hypotheses; it is not assumed
+for an arbitrary action or arbitrary smooth symmetric $T$.
 
 **(iv) Energy conditions are optional additional assumptions.** A model may
 adopt any of the pointwise inequalities of [[def-gr-energy-conditions]] as
-further assumptions on its stress-energy tensor. None of them is a consequence
-of the preceding clauses, of the field law, or of the symmetry of $T$; each
-model records which conditions, if any, it adopts, and a model that adopts none
-is not thereby excluded.
+further assumptions on its stress-energy tensor. The general framework
+postulates impose none automatically. A particular matter model may imply one
+or more of them; any such implication must be established from that model's
+equations and hypotheses. Each model records which conditions, if any, it
+adopts, and a model that adopts none is not thereby excluded.
 
 **(v) Scope and exclusions.** Idealizations such as unmodeled self-force,
 finite-size and tidal corrections, dispersion, dissipation, and quantum effects
@@ -80,9 +86,9 @@ adoption of a matter model is not a claim that it describes nature.
 - **Adopted, not deduced.** Clauses (i)-(v) are model assumptions. They
   constrain what counts as a model of the framework; they imply no theorem
   about matter and no measured property of any substance. Clause (iii)
-  deliberately postpones conservation to the field-law context because an
-  identity such as $\nabla^aT_{ab}=0$ is meaningful only once a connection and
-  matter equations are fixed.
+  leaves any conservation equation to the item stating the field law; that
+  item must define the derivative used and state the matter equations and
+  regularity hypotheses under which the equation is asserted.
 
 - **Line of responsibility.** The geometric objects, the inverse metric, the
   causal classification and the metric-selected connection class are supplied

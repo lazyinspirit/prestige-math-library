@@ -7,7 +7,7 @@ title: "Tsirelson bound"
 status: draft
 origin: pipeline
 dependency_level: 2
-deps: [prop-nrqm-orbital-and-spin-finite-spin-matrices, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-chsh-and-finite-sampling-law, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-hilbert-space-adjoint, thm-hilbert-adjoint-properties, cor-operator-norm-submultiplicative-and-t-star-t-identity, def-linear-isometry-and-orthogonal-or-unitary-operator, def-inner-product-space, def-adjoint-of-a-linear-map-between-inner-product-spaces, cor-inner-product-induces-a-norm, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-countable-choice, lem-norm-of-a-self-adjoint-operator-from-its-quadratic-form, def-self-adjoint-positive-unitary-and-normal-operator]
+deps: [prop-nrqm-orbital-and-spin-finite-spin-matrices, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-chsh-and-finite-sampling-law, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-hilbert-space-adjoint, thm-hilbert-adjoint-properties, def-inner-product-space, cor-inner-product-induces-a-norm, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-countable-choice, def-self-adjoint-positive-unitary-and-normal-operator]
 dependency_roles:
   prop-nrqm-orbital-and-spin-finite-spin-matrices: mathematical-premise
   lem-nrqm-composites-hilbert-tensor-construction: mathematical-premise
@@ -18,14 +18,10 @@ dependency_roles:
   def-operator-norm: mathematical-premise
   def-hilbert-space-adjoint: mathematical-premise
   thm-hilbert-adjoint-properties: mathematical-premise
-  cor-operator-norm-submultiplicative-and-t-star-t-identity: mathematical-premise
-  def-linear-isometry-and-orthogonal-or-unitary-operator: mathematical-premise
   def-inner-product-space: mathematical-premise
-  def-adjoint-of-a-linear-map-between-inner-product-spaces: mathematical-premise
   cor-inner-product-induces-a-norm: mathematical-premise
   thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces: mathematical-premise
   def-countable-choice: mathematical-premise
-  lem-norm-of-a-self-adjoint-operator-from-its-quadratic-form: mathematical-premise
   def-self-adjoint-positive-unitary-and-normal-operator: mathematical-premise
 proof_strategy: direct
 provenance:
@@ -33,7 +29,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani, S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.C.1.a (equation (31) and the operator identity S^2 = 4 + [A1,A2][B1,B2], giving ||S|| <= 2 sqrt 2) and Section II (CHSH inequality (4) and the classical bound S <= 2)"
+    - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani, S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.C.1.a, p. 12, paragraph following equation (31) (CHSH operator bound 2 sqrt 2; the square identity printed there has a plus sign, whereas the minus sign for the displayed CHSH convention is verified locally) and Section II (CHSH inequality (4) and the classical bound S <= 2)"
       url: "https://arxiv.org/pdf/1303.2849"
     - title: "L. J. Landau, 'On the violation of Bell's inequality in quantum theory', Physics Letters A 120 (1987) 54-56 (operator derivation of the CHSH quantum bound), as reported and used in the review above; the operator square identity used here is verified directly in the proof"
 ---
@@ -85,15 +81,15 @@ is asserted.
 
 [F2] For bounded $S,S'\in\mathcal B(H)$, $T,T'\in\mathcal B(K)$: $(S\otimes T)(S'\otimes T')=(SS')\otimes(TT')$, $S\otimes I_K$ and $I_H\otimes T$ commute, $(S\otimes T)^*=S^*\otimes T^*$, and $\|S\otimes T\|\le\|S\|\,\|T\|$; the identity operator on $H\widehat\otimes K$ is $I_H\otimes I_K$ ([[lem-nrqm-composites-bounded-tensor-maps]]).
 
-[F3] For bounded operators on Hilbert spaces: the adjoint is additive and conjugate-linear, $(TS)^*=S^*T^*$, $T^{**}=T$, $\|T^*\|=\|T\|$ and $\|T^*T\|=\|T\|^2$; the operator norm is submultiplicative; and for a self-adjoint $T$ one has $\|T\|=\sup\{|\langle Tx,x\rangle|:\|x\|=1\}$ ([[thm-hilbert-adjoint-properties]], [[cor-operator-norm-submultiplicative-and-t-star-t-identity]], [[lem-norm-of-a-self-adjoint-operator-from-its-quadratic-form]], [[def-operator-norm]]).
+[F3] For bounded operators on Hilbert spaces, the adjoint is additive and conjugate-linear, $(TS)^*=S^*T^*$, $T^{**}=T$, $\|T^*\|=\|T\|$ and $\|T^*T\|=\|T\|^2$ under Countable Choice ([[thm-hilbert-adjoint-properties]]). From [[def-operator-norm]], $\|TSx\|\le\|T\|\|Sx\|\le\|T\|\|S\|\|x\|$; taking the supremum over the unit ball gives $\|TS\|\le\|T\|\|S\|$. Likewise the vector triangle inequality gives $\|T+S\|\le\|T\|+\|S\|$. These estimates include zero spaces.
 
-[F4] For a self-adjoint operator $T$ and all $\psi$, $|\langle T\psi,\psi'\rangle|\le\|T\|\,\|\psi\|\,\|\psi'\|$ by Cauchy–Schwarz; a self-adjoint operator with $T^2=I$ is a unitary involution ([[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]], [[def-linear-isometry-and-orthogonal-or-unitary-operator]], [[def-adjoint-of-a-linear-map-between-inner-product-spaces]]).
+[F4] For a bounded operator $T$ and all $\psi,\psi'$, $|\langle T\psi,\psi'\rangle|\le\|T\|\,\|\psi\|\,\|\psi'\|$ by Cauchy–Schwarz and the norm definition ([[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]], [[def-operator-norm]]). A self-adjoint involution satisfies $T^*T=TT^*=I$, so it is unitary in the Hilbert-space sense ([[def-self-adjoint-positive-unitary-and-normal-operator]]).
 
 [F5] The Pauli matrices are self-adjoint, $\sigma_i^2=I_2$, $\sigma_x\sigma_y=i\sigma_z$ and cyclically, and $\sigma_a$ for a unit vector $a$ is self-adjoint with $\sigma_a^2=I_2$, because $\sigma_a^2=\sum_{i,j}a_ia_j\sigma_i\sigma_j=\sum_i a_i^2I_2+\sum_{i\ne j}a_ia_j\sigma_i\sigma_j=\|a\|^2I_2$ by the anticommutation relations $\sigma_i\sigma_j+\sigma_j\sigma_i=2\delta_{ij}I_2$ ([[prop-nrqm-orbital-and-spin-finite-spin-matrices]]).
 
 [F6] If $A_0,A_1,B_0,B_1:\Omega\to\{-1,1\}$ are random variables on a probability space, then $|\mathbb E[A_0B_0]+\mathbb E[A_0B_1]+\mathbb E[A_1B_0]-\mathbb E[A_1B_1]|\le2$, with no choice principle used ([[lem-nrqm-composites-chsh-and-finite-sampling-law]] (a)).
 
-[F7] A bounded self-adjoint involution is unitary, so $\|A_i\|,\|B_j\|\le1$ (with equality on nonzero factor spaces), and $\|A_0A_1\|\le\|A_0\|\|A_1\|\le1$ ([[def-linear-isometry-and-orthogonal-or-unitary-operator]], [[cor-operator-norm-submultiplicative-and-t-star-t-identity]]).
+[F7] A bounded self-adjoint involution satisfies $\|Tx\|^2=\langle Tx,Tx\rangle=\langle x,T^*Tx\rangle=\|x\|^2$. Thus $\|A_i\|,\|B_j\|\le1$ (with equality on nonzero factor spaces), and the estimate proved in [F3] gives $\|A_0A_1\|\le\|A_0\|\|A_1\|\le1$ ([[def-hilbert-space-adjoint]], [[def-operator-norm]]).
 
 
 

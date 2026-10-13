@@ -95,7 +95,7 @@ that is, the state space is the unit ball of $\mathbb R^{3}$ in this parametriza
 
 **Given:** The two-dimensional complex Hilbert space $H=\mathbb C^{2}$ with its standard inner product and basis $(e_1,e_2)$; the Pauli matrices $\sigma_x,\sigma_y,\sigma_z$ displayed above; the state space $D(H)$ of [[def-nrqm-state-geometry-framework-state-space]].
 
-[L1] **Pauli algebra** ([[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clause (e)): $\sigma_i^{2}=I$ for $i=x,y,z$, $\sigma_i\sigma_j+\sigma_j\sigma_i=2\delta_{ij}I$, $\sigma_i\sigma_j=\delta_{ij}I+i\sum_k\varepsilon_{ijk}\sigma_k$, and the displayed matrices satisfy $\sigma_i^{*}=\sigma_i$ and $\operatorname{tr}\sigma_i=0$ for $i=x,y,z$; direct calculation gives $\operatorname{tr}I=2$.
+[L1] **Pauli algebra** ([[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clause (e)): $\sigma_i^{2}=I$ for $i=x,y,z$, $\sigma_i\sigma_j+\sigma_j\sigma_i=2\delta_{ij}I$, and the displayed matrices satisfy $\sigma_i^{*}=\sigma_i$ and $\operatorname{tr}\sigma_i=0$ for $i=x,y,z$; direct calculation gives $\operatorname{tr}I=2$.
 
 [L2] **States and purity** ([[def-nrqm-state-geometry-framework-state-space]], [[lem-nrqm-state-geometry-purity-criterion]]): a state is a self-adjoint positive trace-class operator of trace one; a state is pure exactly when its purity $\operatorname{tr}(\rho^{2})$ equals $1$ and exactly when it equals $T_{\psi,\psi}$ for a unit vector $\psi$; a mixed state has at least two positive eigenvalues.
 

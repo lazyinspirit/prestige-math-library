@@ -51,9 +51,9 @@ The witness exhibits two admissible outcomes for one data set.
 
 ## Facts & Assumptions
 
-**Given:** The collinear isolated-impact model with masses $m_1=2\ \mathrm{kg}$, $m_2=6\ \mathrm{kg}$ and incoming velocities $v_1^-=3n\ \mathrm{m\,s^{-1}}$, $v_2^-=-1n\ \mathrm{m\,s^{-1}}$ along the contact direction; the two candidate outcomes of the Counterexample below.
+**Given:** Fix a unit vector $n\in\mathbb R^3$. Take the two-label force model with time window $I_0=\mathbb R$, configuration domain $Q=(\mathbb R^3)^2$, and all external and pair force maps identically zero. Coincident positions are permitted because these forces have no singularity. Let $I=(-1\ \mathrm s,1\ \mathrm s)$ and $t_*=0$. The masses are $m_1=2\ \mathrm{kg}$, $m_2=6\ \mathrm{kg}$ and the incoming velocities are $v_1^-=3n\ \mathrm{m\,s^{-1}}$, $v_2^-=-1n\ \mathrm{m\,s^{-1}}$; the two candidate outcomes are those below.
 
-[L1] Impulse equations ([[post-cm15-impulse]] clause (i), [[pthm-cm15-impact-balance]] clause 1): an outcome is admissible for the reciprocal impulse model exactly when there is $J$ with $m_1(v_1^+-v_1^-)=J$ and $m_2(v_2^+-v_2^-)=-J$; equivalently the total momentum is continuous across the impact, $m_1v_1^++m_2v_2^+=m_1v_1^-+m_2v_2^-$. In the collinear case with $J=J_nn$ this is one scalar equation for the two post-impact velocity components. [given, L1, algebra]
+[L1] Impulse equations ([[post-cm15-impulse]] clause (i), [[pthm-cm15-impact-balance]] clause 1): once a continuous, piecewise-$C^2$ position curve in $Q$ with the regular off-impact dynamics and the required one-sided velocities is supplied, its jump condition is $m_1(v_1^+-v_1^-)=J=-m_2(v_2^+-v_2^-)$. Existence of such a $J$ is equivalent to total-momentum equality for the endpoint velocities; it does not by itself establish the curve conditions. In the collinear case with $J=J_nn$ this endpoint equality is one scalar equation for two outgoing components.
 
 [L2] Kinetic identity ([[thm-cm-center-of-mass-and-kinetic-splitting]], [[def-cm03-centre-of-mass-and-momenta]], [[def-euclidean-inner-product]]): with $V=\frac{m_1v_1+m_2v_2}{M}$ and $\mu=\frac{m_1m_2}{M}$, $K=\frac{M}{2}\lVert V\rVert_2^2+\frac{\mu}{2}\lVert v_2-v_1\rVert_2^2$; with momentum continuous, $V$ is the same on both sides and $\Delta K=\frac{\mu}{2}\bigl(\lVert v_2^+-v_1^+\rVert_2^2-\lVert v_2^--v_1^-\rVert_2^2\bigr)$.
 
@@ -63,11 +63,13 @@ The witness exhibits two admissible outcomes for one data set.
 
 1.1 Common data: $M=8$, $\mu=\frac32$, $V=\frac{2\cdot3+6\cdot(-1)}{8}=0$, $d^-=-4n$, $\lVert d^-\rVert_2^2=16$, $K^-=12\ \mathrm{J}$. [given, L2, algebra]
 
+1.2 For each candidate outgoing pair below, define $x_i(t)=t v_i^-$ for $t\le0$ and $x_i(t)=t v_i^+$ for $t>0$. Both position curves are continuous on $I$, affine and hence $C^2$ on either side of $0$, and take values in the declared full domain $Q$. They have precisely the specified one-sided velocities, and $m_ix_i''=0=F_i(t,x,x')$ away from $0$. Thus all trajectory conditions of the isolated reciprocal impulse model hold for both candidates; only the reciprocal jumps remain to check. Moreover $\langle v_2^--v_1^-,n\rangle=-4\ \mathrm{m\,s^{-1}}<0$, so the common incoming data approach along $n$. [given, L1, construct]
+
 2.1 Outcome (a), sticking: $v_1^+=v_2^+=0$. Then $m_1(v_1^+-v_1^-)=2(0-3)n=-6n$ and $m_2(v_2^+-v_2^-)=6(0+1)n=+6n$; the impulse is $J=-6n\ \mathrm{N\,s}$ and the total momentum is $0=P^-$. [step 1.1, L1, algebra]
 
 2.2 Outcome (b), elastic: $v_1^+=-3n$, $v_2^+=+1n$. Then $m_1(v_1^+-v_1^-)=2(-6)n=-12n$ and $m_2(v_2^+-v_2^-)=6(+2)n=+12n$; the impulse is $J=-12n\ \mathrm{N\,s}$ and the total momentum is $0=P^-$. [step 1.1, L1, algebra]
 
-3.1 Both outcomes satisfy the reciprocal impulse equations of [L1], with different impulses ($-6n$ versus $-12n$), and the same given incoming data; their post-impact velocities differ ($0$ versus $-3n$ and $+1n$). Hence the impulse equations alone do not fix the post-impact velocities, and the false statement fails. [step 2.1, step 2.2, L1, algebra]
+3.1 Together with the curves of step 1.2, steps 2.1 and 2.2 establish two complete runs of clause (i), with the same incoming data and different impulses ($-6n$ versus $-12n$) and outgoing velocities ($0$ versus $-3n$ and $+1n$). The first also satisfies restitution with $e=0$, and the second with $e=1$. Hence reciprocal impulse accounting alone does not fix the outgoing velocities, and the false statement fails. [step 1.2, step 2.1, step 2.2, L1, algebra]
 
 4.1 Energy: by [L2] the changes are $\Delta K_{(a)}=\frac32\cdot\frac12(0-16)=-12\ \mathrm{J}$ and $\Delta K_{(b)}=\frac32\cdot\frac12(16-16)=0$; the outcomes are therefore also distinguished by their energy accounting, so no choice of impulse can be recovered from the momentum data and the two outcomes are genuinely different model histories. [step 3.1, L2, algebra]
 

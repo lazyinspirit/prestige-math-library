@@ -6,9 +6,10 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 15
-deps: [def-cm07-action-and-mechanical-lagrangian, pthm-cm07-euler-lagrange-equations, def-cm03-potential-and-mechanical-energy, rem-cm-scope-of-stationarity, def-cm-legendre-map-in-a-time-dependent-chart, prop-cm-mechanical-chart-lagrangian-is-hyperregular, def-cm-nonholonomic-velocity-constraint-law, cex-cm-dalembert-and-vakonomic-evolutions-differ]
+deps: [def-cm07-action-and-mechanical-lagrangian, def-cm07-generalized-coordinates-and-forces, pthm-cm07-euler-lagrange-equations, def-cm03-potential-and-mechanical-energy, rem-cm-scope-of-stationarity, def-cm-legendre-map-in-a-time-dependent-chart, prop-cm-mechanical-chart-lagrangian-is-hyperregular, def-cm-nonholonomic-velocity-constraint-law, cex-cm-dalembert-and-vakonomic-evolutions-differ]
 dependency_roles:
   def-cm07-action-and-mechanical-lagrangian: formulation-prerequisite
+  def-cm07-generalized-coordinates-and-forces: formulation-prerequisite
   pthm-cm07-euler-lagrange-equations: physical-result
   def-cm03-potential-and-mechanical-energy: formulation-prerequisite
   rem-cm-scope-of-stationarity: mathematical-premise
@@ -36,8 +37,8 @@ verification:
 - **Stationarity is not minimisation.** The defining condition of
   [[def-cm07-action-and-mechanical-lagrangian]] is the vanishing of the first
   variation for all fixed-endpoint variations, and
-  [[pthm-cm07-euler-lagrange-equations]] identifies it with the model's
-  equation. It is not claimed that a stationary curve minimises the action, and
+  [[pthm-cm07-euler-lagrange-equations]] identifies it with the potential-part
+  equation, and with the full model equation when $d\equiv0$. It is not claimed that a stationary curve minimises the action, and
   no second-variation or convexity hypothesis is imposed on this page:
   [[rem-cm-scope-of-stationarity]] records the explicit quadratic model in
   which stationary curves are not local minima, and the verification page of
@@ -53,9 +54,9 @@ verification:
   Legendre inverse, so no failure of invertibility of the Legendre map
   [[def-cm-legendre-map-in-a-time-dependent-chart]] occurs on this branch and
   the Euler-Lagrange equations determine the coordinate accelerations. A
-  singular velocity Hessian — for which the Legendre map is not locally
-  invertible and the second-order equations need not determine accelerations —
-  is outside the hypotheses of every theorem on this page; the admissible
+  singular velocity Hessian — for which the Legendre map has no $C^{1}$ local
+  inverse and the second-order equations need not determine accelerations —
+  is outside the regular mechanical branch described here; the admissible
   coordinate maps of the generalized-coordinate definition of this page
   exclude it by injectivity of $DX$ and positive definiteness of $\mathsf M$.
 
@@ -79,9 +80,10 @@ verification:
   branch, the declared potential presentation and the cited mathematics: it
   does not establish that nature extremises or stationarises an action, and it
   adds no empirical content beyond the force model and its potential
-  presentation. When the presentation has residual forces the equations acquire
-  the generalized forces of the generalized-coordinate definition of this page
-  and the pure action reading is lost; comparing predictions with observations
+  presentation. When the presentation has residual forces, the equation in
+  generalized coordinates retains the transformed residual term defined by
+  [[def-cm07-generalized-coordinates-and-forces]], while the pure action
+  reading gives only the potential-part equation; comparing predictions with observations
   tests the force law and the apparatus, not the variational reformulation.
   [[def-cm03-potential-and-mechanical-energy]] clause (c) supplies the further
   reminder that the potential and the Lagrangian are defined only up to the
@@ -89,8 +91,8 @@ verification:
   prediction without fixing that convention.
 
 - **Not asserted.** No global existence of stationary curves, no theory of
-  minimisers in function spaces, no conjugate-point or Morse-theoretic
-  statements, no free- or variable-endpoint problems, and no field-theoretic
+  minimisers in function spaces, no further criteria for extrema, no free- or
+  variable-endpoint problems, and no field-theoretic
   or infinite-dimensional actions are part of this page; the boundary-value
   non-uniqueness of the oscillator, for instance, is recorded in the
   verification page of the mathematics track, not here.

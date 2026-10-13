@@ -6,7 +6,7 @@ domain: physics
 title: "The idealized Stern-Gerlach splitting: transverse momentum separation of the two spin sectors under a window hypothesis"
 status: draft
 origin: session
-dependency_level: 12
+dependency_level: 11
 deps: [def-axiom-of-choice, def-countable-choice, def-nrqm-angular-momentum-framework-angular-momentum-observables, def-nrqm-autonomous-dynamics-framework-evolution, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, post-nrqm-angular-momentum-magnetic-moment-coupling, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-observable-and-probability, post-nrqm-framework-preparation-and-apparatus, post-nrqm-framework-state-and-composition, prop-nrqm-orbital-and-spin-finite-spin-matrices, pthm-nrqm-angular-momentum-stern-gerlach-conditional-force]
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
@@ -31,7 +31,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "An idealized model prediction of the spin-half Zeeman model with a static windowed-gradient field: under an explicitly hypothetical containment premise (the first-coordinate marginals of both spin-sector components remain supported in the window of constant gradient during [0,tau]), the sector mean transverse momenta separate at the rate gamma hbar G / 2 and by gamma hbar G tau over the time tau, while the sector weights and the total transverse mean are conserved. The item is a hypothetical calculation, not a reported experiment: it asserts no apparatus, no beam, no counts, no detector, no measured value and no claim that the containment premise holds for realistic preparations."
+physical_scope: "An idealized model prediction of the spin-half Zeeman model with a static windowed-gradient field: under an explicitly hypothetical containment premise (the first-coordinate marginals of both spin-sector components remain supported in the window of constant gradient during [0,tau]), the normalized sector mean transverse momenta change at rates plus and minus gamma hbar G / 2, so their difference changes by gamma hbar G tau over the time tau; the change is zero if gamma G is zero. The sector weights are conserved; the total transverse mean is conserved for equal sector weights or zero coupling-gradient product, and otherwise has rate gamma hbar G (w_plus-w_minus) / 2. The item is a hypothetical calculation, not a reported experiment: it asserts no apparatus, no beam, no counts, no detector, no measured value and no claim that the containment premise holds for realistic preparations."
 empirical_premises: []
 sources:
   references:
@@ -83,14 +83,16 @@ normalized sector transverse mean
 $M_{\pm}(t):=w_{\pm}^{-1}\langle P_{x}u_{\pm}(t),u_{\pm}(t)\rangle$ is affine
 in $t$ on $[0,\tau]$:
 $$\frac{d}{dt}M_{\pm}(t)=\pm\frac{\gamma\hbar G}{2},\qquad M_{\pm}(\tau)=M_{\pm}(0)\pm\frac{\gamma\hbar G\tau}{2},$$
-so the two sector mean transverse momenta (both defined when $w_{+}w_{-}>0$)
-differ by $\gamma\hbar G\tau$ at time $\tau$, independently of the initial
-means; a sector with $w_{\pm}=0$ is trivial;
+so, when $w_{+}w_{-}>0$, their difference changes by
+$\gamma\hbar G\tau$:
+$$M_{+}(\tau)-M_{-}(\tau)=M_{+}(0)-M_{-}(0)+\gamma\hbar G\tau,$$
+independently of the initial means; a sector with $w_{\pm}=0$ is trivial;
 
 (iii) the total transverse mean evolves by the weighted rate
 $$\frac{d}{dt}\bigl\langle P_{x}u(t),u(t)\bigr\rangle =\frac{\gamma\hbar G}{2}(w_{+}-w_{-})=\gamma G\,\langle S_{3}\rangle_{u_{0}}, \qquad t\in[0,\tau],$$
 so for the equal-weight preparation $w_{+}=w_{-}=\tfrac12$ the total
-transverse mean is conserved while the sector means separate;
+transverse mean is conserved while the sector mean changes are equal and
+opposite; if $\gamma G=0$, both changes vanish;
 
 (iv) **Status and scope.** This is an idealized hypothetical calculation: the
 containment premise is an explicitly assumed possible property of the
@@ -104,13 +106,7 @@ identification with uncertainty under
 
 ## Facts & Assumptions
 
-**Given:** The postulates P1, P2, P4, P5 and P6 and the magnetic-moment
-postulate in the stated readings; the two choice principles; the parameters
-$m>0$, $s=\tfrac12$, $\gamma\in\mathbb R$ and the real
-$B_{z}\in C^{1}(\mathbb R)$ with $B_{z},B_{z}'$ bounded; the reals $a>0$,
-$G$, $\tau>0$; the profile $\mathbf B$; the operator $H_{Z}$; the flow
-$u(t)$; the unit vector $u_{0}\in D(H_{Z}^{2})$; the sector projections
-$P_{\pm}$; the marginal densities $\eta_{\pm}$.
+**Given:** The postulates P1, P2, P4, P5 and P6 and the magnetic-moment postulate in the stated readings; the two choice principles; the parameters $m>0$, $s=\tfrac12$, $\gamma\in\mathbb R$ and the real $B_{z}\in C^{1}(\mathbb R)$ with $B_{z},B_{z}'$ bounded; the reals $a>0$, $G$, $\tau>0$; the profile $\mathbf B$; the operator $H_{Z}$; the flow $u(t)$; the unit vector $u_{0}\in D(H_{Z}^{2})$; the sector projections $P_{\pm}$; the marginal densities $\eta_{\pm}$.
 
 [F1] **Model force theorem.** For the present model and profile, with the
 identifications of
@@ -130,38 +126,13 @@ $\tfrac{\hbar}{2}$ times the Pauli $\sigma_{z}$ on the internal factor
 [[def-nrqm-angular-momentum-framework-angular-momentum-observables]]
 clause (c)).
 
-[F2] **Sector invariance.** $P_{\pm}=\tfrac12(I\pm 2S_{3}/\hbar)$ are
-orthogonal projections with $P_{+}+P_{-}=I$ and
-$S_{3}P_{\pm}=\pm\tfrac{\hbar}{2}P_{\pm}$; since $S_{3}$ commutes with
-$H_{Z}$ on $D(H_{Z})$ by [F1], $P_{\pm}$ commute with $H_{Z}$, preserve
-$D(H_{Z})$ and $D(H_{Z}^{2})$, and commute with the flow, so
-$u_{\pm}(t)=P_{\pm}u(t)=e^{-itH_{Z}/\hbar}P_{\pm}u_{0}$ lies in the $\pm$
-spin sector for every $t$, with $\|u_{\pm}(t)\|=w_{\pm}^{1/2}$
-([[def-nrqm-autonomous-dynamics-framework-evolution]],
-[[def-nrqm-state-geometry-pure-mixed-states-and-purity]],
-[[def-nrqm-state-geometry-framework-state-space]]).
-Moreover $P_{\pm}$ act on the internal factor while $P_x=P_1$ is the
-componentwise momentum in the $x_1$ spatial coordinate, so
-$P_{\pm}D(P_x)\subseteq D(P_x)$ and
-$P_xP_{\pm}=P_{\pm}P_x$ on $D(P_x)$; consequently
-$\langle P_xu(t),u(t)\rangle=\sum_{\pm}\langle P_xu_{\pm}(t),u_{\pm}(t)\rangle$
-whenever these expectations are defined.
+[F2] **Sector invariance.** $P_{\pm}=\tfrac12(I\pm 2S_{3}/\hbar)$ are orthogonal projections with $P_{+}+P_{-}=I$ and $S_{3}P_{\pm}=\pm\tfrac{\hbar}{2}P_{\pm}$; since $S_{3}$ commutes with $H_{Z}$ on $D(H_{Z})$ by [F1], $P_{\pm}$ commute with $H_{Z}$, preserve $D(H_{Z})$ and $D(H_{Z}^{2})$, and commute with the flow, so $u_{\pm}(t)=P_{\pm}u(t)=e^{-itH_{Z}/\hbar}P_{\pm}u_{0}$ lies in the $\pm$ spin sector for every $t$, with $\|u_{\pm}(t)\|=w_{\pm}^{1/2}$ ([[def-nrqm-autonomous-dynamics-framework-evolution]], [[def-nrqm-state-geometry-pure-mixed-states-and-purity]], [[def-nrqm-state-geometry-framework-state-space]]). Moreover $P_{\pm}$ act on the internal factor while $P_x=P_1$ is the componentwise momentum in the $x_1$ spatial coordinate, so $P_{\pm}D(P_x)\subseteq D(P_x)$ and $P_xP_{\pm}=P_{\pm}P_x$ on $D(P_x)$; consequently $\langle P_xu(t),u(t)\rangle=\sum_{\pm}\langle P_xu_{\pm}(t),u_{\pm}(t)\rangle$ whenever these expectations are defined.
 
-[F3] **Hypothetical containment premise.** It is assumed that for each sign
-and every $t\in[0,\tau]$ the density $\eta_{\pm}(t,\cdot)$ is supported in
-$(-a,a)$; under this premise, since $B_{z}'(x_{1})=G$ for $x_{1}\in(-a,a)$ by
-the window hypothesis, the identity $S_{3}B_{z}'(Q_{x})u_{\pm}(t)
-=\pm\tfrac{\hbar}{2}G\,u_{\pm}(t)$ holds as classes. This premise is assumed,
-not derived, and is labeled hypothetical
-([[def-nrqm-observables-framework-observable-and-outcome-law]],
-[[def-nrqm-state-geometry-framework-state-space]],
-[[def-nrqm-framework-quantities-and-units]]).
+[F3] **Hypothetical containment premise.** It is assumed that for each sign and every $t\in[0,\tau]$ the density $\eta_{\pm}(t,\cdot)$ is supported in $(-a,a)$; under this premise, since $B_{z}'(x_{1})=G$ for $x_{1}\in(-a,a)$ by the window hypothesis, the identity $S_{3}B_{z}'(Q_{x})u_{\pm}(t) =\pm\tfrac{\hbar}{2}G\,u_{\pm}(t)$ holds as classes. This premise is assumed, not derived, and is labeled hypothetical ([[def-nrqm-observables-framework-observable-and-outcome-law]], [[def-nrqm-state-geometry-framework-state-space]], [[def-nrqm-framework-quantities-and-units]]).
 
 ## Proof
 
-**Proof technique:** direct; decompose the state into the conserved spin
-sectors, apply the conditional force identity to each sector with the window
-premise, and integrate the resulting constant rates.
+**Proof technique:** direct; decompose the state into the conserved spin sectors, apply the conditional force identity to each sector with the window premise, and integrate the resulting constant rates.
 
 **Given:** The data of the statement and [F1]-[F3].
 
@@ -169,19 +140,11 @@ premise, and integrate the resulting constant rates.
 
 2.1 [Sector rates] Apply the general rate identity of [F1] to each sector component $u_{\pm}$: $\frac{d}{dt}\langle P_{x}u_{\pm}(t),u_{\pm}(t)\rangle=\gamma\langle S_{3}B_{z}'(Q_{x})u_{\pm}(t),u_{\pm}(t)\rangle$; by the numerical identity $S_{3}u_{\pm}(t)=\pm\tfrac{\hbar}{2}u_{\pm}(t)$ of [F2] and the premise [F3] giving $S_{3}B_{z}'(Q_{x})u_{\pm}(t)=\pm\frac{\hbar}{2}Gu_{\pm}(t)$, the right-hand side equals $\pm\frac{\gamma\hbar G}{2}\|u_{\pm}(t)\|^{2}=\pm\frac{\gamma\hbar G}{2}w_{\pm}$; dividing by the constant sector weight $w_{\pm}>0$ gives $\frac{d}{dt}M_{\pm}(t)=\pm\frac{\gamma\hbar G}{2}$ on $[0,\tau]$. [step 1.1, F1, F2, F3, algebra]
 
-3.1 [Integration and separation] Integrating the unnormalized rates of step 2.1 over $[0,\tau]$ gives $\langle P_{x}u_{\pm}(\tau),u_{\pm}(\tau)\rangle=\langle P_{x}u_{\pm}(0),u_{\pm}(0)\rangle\pm\frac{\gamma\hbar G\tau}{2}w_{\pm}$. For each sector with $w_{\pm}>0$, division by its conserved weight gives $M_{\pm}(\tau)=M_{\pm}(0)\pm\frac{\gamma\hbar G\tau}{2}$; subtracting these normalized identities yields the separation $\gamma\hbar G\tau$. For the total mean, [F2] gives $\langle P_xu(t),u(t)\rangle=\sum_{\pm}\langle P_xu_{\pm}(t),u_{\pm}(t)\rangle$, so summing the unnormalized rates of step 2.1 gives $\frac{d}{dt}\langle P_{x}u(t),u(t)\rangle=\frac{\gamma\hbar G}{2}(w_{+}-w_{-})=\gamma G\langle S_{3}\rangle_{u_{0}}$; this vanishes for $w_{+}=w_{-}$, proving (ii) and (iii). [step 2.1, step 1.1, F2, algebra]
+3.1 [Integration and separation] Integrating the unnormalized rates of step 2.1 over $[0,\tau]$ gives $\langle P_{x}u_{\pm}(\tau),u_{\pm}(\tau)\rangle=\langle P_{x}u_{\pm}(0),u_{\pm}(0)\rangle\pm\frac{\gamma\hbar G\tau}{2}w_{\pm}$. For each sector with $w_{\pm}>0$, division by its conserved weight gives $M_{\pm}(\tau)=M_{\pm}(0)\pm\frac{\gamma\hbar G\tau}{2}$; when both weights are positive, subtracting these identities gives $M_{+}(\tau)-M_{-}(\tau)=M_{+}(0)-M_{-}(0)+\gamma\hbar G\tau$, so the difference changes by $\gamma\hbar G\tau$, independently of its initial value. For the total mean, [F2] gives $\langle P_xu(t),u(t)\rangle=\sum_{\pm}\langle P_xu_{\pm}(t),u_{\pm}(t)\rangle$, so summing the unnormalized rates of step 2.1 gives $\frac{d}{dt}\langle P_{x}u(t),u(t)\rangle=\frac{\gamma\hbar G}{2}(w_{+}-w_{-})=\gamma G\langle S_{3}\rangle_{u_{0}}$; this vanishes for $w_{+}=w_{-}$, proving (ii) and (iii). [step 2.1, step 1.1, F2, algebra]
 
 4.1 [Assembly and scope] Steps 1.1, 2.1 and 3.1 prove (i)-(iii) under the explicit premise [F3]; the premise is hypothetical, no position-space trace, count or apparatus entered, and no empirical conclusion is drawn, which is the status statement (iv). [step 1.1, step 2.1, step 3.1, F3] ∎
 
 ## Remarks
 
-- **Normalization of the means.** The mean transverse momentum of a sector is
-  read from the outcome law of the whole preparation restricted to the
-  sector, that is from the normalized sector mean; the statement and the
-  proof use this reading, and the sector rate is constant under the window
-  premise.
-- **How strong the premise is.** The containment premise constrains the
-  prepared state and the field window jointly; for a spreading wave packet
-  and a finite window it can fail for large $\tau$ or narrow packets, and the
-  item asserts nothing about when it holds. The physical two-beam profile of
-  a real Stern-Gerlach magnet is not modeled here.
+- **Normalization of the means.** The mean transverse momentum of a sector is read from the outcome law of the whole preparation restricted to the sector, that is from the normalized sector mean; the statement and the proof use this reading, and the sector rate is constant under the window premise.
+- **How strong the premise is.** The containment premise constrains the prepared state and the field window jointly; for a spreading wave packet and a finite window it can fail for large $\tau$ or narrow packets, and the item asserts nothing about when it holds. The physical two-beam profile of a real Stern-Gerlach magnet is not modeled here.

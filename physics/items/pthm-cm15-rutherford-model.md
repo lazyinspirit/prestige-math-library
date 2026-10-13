@@ -105,7 +105,7 @@ with masses $m_1,m_2>0$, reduced mass $\mu$, and the **repulsive Coulomb
 potential**
 $$u(r)=\frac{\kappa}{r}\qquad(r>0),\qquad \kappa>0,$$
 where $\kappa$ is a model datum of the mechanical model
-([[def-cm01-units]]: $[\kappa]=\mathsf M\ell^3\tau^{-2}$), so that
+([[def-cm01-units]]: $[\kappa]=\mu\ell^3\tau^{-2}$), so that
 $$V(r)=\frac{\kappa}{r}+\frac{J^2}{2\mu r^2}\qquad(r>0).$$
 Let the data satisfy $E>0$, $J>0$ and put
 $$b:=\frac{J}{\sqrt{2\mu E}}>0,\qquad \alpha:=\frac{\kappa}{2Eb}>0.$$
@@ -117,13 +117,13 @@ Then:
    ($V'(r_*)<0$), one has $V(r)<E$ for every $r>r_*$ and $V(r)>E$ for every
    $0<r<r_*$, and $V=U^{\mathrm{eff}}_J$ is of class $C^2$ with no other
    crossing of the level $E$.
-2. **(Global non-colliding scattering motion.)** Let $r:J_0\to\mathbb R^3$
+2. **(Global non-colliding scattering motion.)** Let $I\subseteq I_0$ be a time interval with nonempty interior and $r:I\to\mathbb R^3$
    be the relative coordinate of a motion of the model with attached angular
    momentum $j=\mu\,r\times r'=Je_3$ and energy $E$, with $|r(t)|\ge r_*$ for
-   every $t\in J_0$ and $|r(t_*)|=r_*$ for some $t_*\in J_0$. Then $r$
+   every $t\in I$ and $|r(t_*)|=r_*$ for some $t_*\in I$. Then $r$
    extends uniquely to a central-force trajectory $\bar r:\mathbb R\to
    \mathbb R^3$ whose extension is the relative coordinate of a motion of
-   the two-label model on all of $\mathbb R$; $\rho:=|\bar r|$ satisfies
+   the two-label model with its autonomous force law extended to time window $\mathbb R$; $\rho:=|\bar r|$ satisfies
    $\rho\ge r_*>0$ (no collision), $\rho(t)>r_*$ for $t\ne t_*$, and $\rho$
    is strictly decreasing on $(-\infty,t_*]$ and strictly increasing on
    $[t_*,\infty)$; the asymptotic velocities $v_\pm=\lim_{t\to\pm\infty}
@@ -156,8 +156,15 @@ Then:
    $\sigma\bigl((\theta_1,\pi)\bigr)=\pi b(\theta_1)^2 =\pi\bigl(\frac{\kappa}{2E}\bigr)^2\cot^2\frac{\theta_1}{2}$; whereas the
    truncated integral over $(0,\theta_0)$ diverges for every
    $\theta_0\in(0,\pi)$, so the **model has no finite ideal total cross-section**. Every positive angular cutoff therefore yields a finite
-   truncated cross-section, and the model is predictive only jointly with an
-   angular acceptance.
+   truncated ideal cross-section. Under the declared uniform-incident
+   preparation with $b_{\max}>0$ and flux $\Phi>0$, the cutoff
+   cross-section satisfies $\sigma_{b_{\max}}(Y)\le\pi b_{\max}^2$
+   for every Borel angular window $Y\subseteq(0,\pi)$, and the expected
+   scattered rate is $\Phi\sigma_{b_{\max}}(Y)<\infty$
+   ([[def-cm15-cross-section]] clause (iv)). Thus ideal cross-section
+   divergence does not imply an infinite rate under the finite incident
+   cutoff; comparison with detected rates additionally requires a declared
+   apparatus acceptance and its uncertainties.
 5. **(Status of the parameter and exclusions.)** The coupling $\kappa$ is a
    parameter of the mechanical model. This item does not identify it with
    $q_1q_2/(4\pi\varepsilon_0)$ or with any electromagnetic quantity, states
@@ -186,20 +193,20 @@ Then:
 
 1.1 Clause 1: [L1] gives that $V$ is strictly decreasing from $+\infty$ to $0$ and that the unique solution $r_*$ of $V=E$ is simple with $V(r)<E$ for $r>r_*$; strict decrease also gives $V(r)>E$ for $0<r<r_*$. This is clause 1. [given, L1]
 
-2.1 Clause 2, motion and asymptotics: by [L2] the relative coordinate is a central-force trajectory for $(\mu,u)$ with the attached data, so the trajectory hypotheses of [L1] hold; [L1] then gives the unique extension to all of $\mathbb R$ with no collision, the monotone branches with unique apsis, and the existence of $v_\pm$ with $|v_\pm|=\sqrt{2E/\mu}$ and asymptotic perpendicular distance $b=J/\sqrt{2\mu E}$ on both branches. The extension is the relative coordinate of a motion of the model on all of $\mathbb R$ by [L2], since $|\bar r(t)|\in(0,\infty)$ keeps the configuration admissible and the affine centre-of-mass extension is defined on all of $\mathbb R$. Because $u\not\equiv0$ on any outer region, no exact free tail is asserted; this is clause 2. [step 1.1, L1, L2]
+2.1 Clause 2, motion and asymptotics: by [L2] the relative coordinate is a central-force trajectory for $(\mu,u)$ with the attached data, so the trajectory hypotheses of [L1] hold; [L1] then gives the unique extension to all of $\mathbb R$ with no collision, the monotone branches with unique apsis, and the existence of $v_\pm$ with $|v_\pm|=\sqrt{2E/\mu}$ and asymptotic perpendicular distance $b=J/\sqrt{2\mu E}$ on both branches. The extension is the relative coordinate of a motion of the model with its autonomous force law extended to time window $\mathbb R$ by [L2], since $|\bar r(t)|\in(0,\infty)$ keeps the configuration admissible and the affine centre-of-mass extension is defined on all of $\mathbb R$. Because $u\not\equiv0$ on any outer region, no exact free tail is asserted; this is clause 2. [step 1.1, L1, L2]
 
 3.1 Clause 3: [L1] gives $\Delta=\pi/2-\arctan(\kappa/(2Eb))$ with $\alpha=\kappa/(2Eb)>0$, so $\arctan\alpha\in(0,\pi/2)$ and $\Delta\in(0,\pi/2)$; [L3] then gives the scattering angle $\theta_{\mathrm s}=\pi-2\Delta\in(0,\pi)$ and the signed rotation $2\Delta-\pi$; substituting the arctangent expression gives $\theta_{\mathrm s}=2\arctan(\kappa/(2Eb))$. [L3] further gives that $\theta_{\mathrm{def}}$ is $C^1$ and strictly decreasing with image $(0,\pi)$ and the stated inverse, and $\theta_{\mathrm{def}}'(b)=2\cdot\frac{1}{1+(\kappa/(2Eb))^2}\cdot(-\frac{\kappa}{2Eb^2})<0$, so $\theta_{\mathrm{def}}'\ne0$ everywhere and the single branch covers $(0,\infty)$. For each $b>0$, [L1] supplies the apsis trajectory at $J(b)$ and [L2] reconstructs it into a two-label motion with any affine centre of mass. Thus these are actual model motions throughout the claimed family. Since every $b>0$ gives $0<\Delta<\pi/2$, the branch never wraps. This is clause 3. [step 2.1, L1, L3, L4, algebra]
 
 4.1 Clause 4, density: the cross-section density of the branch is $b(\theta)|b'(\theta)|/\sin\theta$ by [L3], and substituting $b'(\theta)=-(\kappa/4E)\csc^2(\theta/2)$ and $b(\theta)=(\kappa/2E)\cot(\theta/2)$ and using $\sin\theta=2\sin(\theta/2)\cos(\theta/2)$ and $\csc^2=1+\cot^2$ gives $(\kappa/(4E))^2\csc^4(\theta/2)$, finite and positive for $0<\theta<\pi$; this is the displayed density. [step 3.1, L3, L4, algebra]
 
-5.1 Clause 4, band computation: put $F(\theta):=\pi b(\theta)^2$. By [L4] and the chain rule, $F'(\theta)=2\pi b(\theta)b'(\theta) =2\pi\cdot\frac{\kappa}{2E}\cot\frac{\theta}{2}\cdot\bigl(-\frac{\kappa}{4E}\csc^2\frac{\theta}{2}\bigr) =-\frac{\kappa^2}{4E^2}\,\frac{\cos(\theta/2)}{\sin^3(\theta/2)}$, while the solid-angle integrand is $\frac{\mathrm d\sigma}{\mathrm d\Omega}(\theta)\,2\pi\sin\theta =\bigl(\frac{\kappa}{4E}\bigr)^2\csc^4\frac{\theta}{2}\cdot 4\pi\sin\frac{\theta}{2}\cos\frac{\theta}{2} =\frac{\kappa^2}{4E^2}\frac{\cos(\theta/2)}{\sin^3(\theta/2)}=-F'(\theta)$, using $\sin\theta=2\sin(\theta/2)\cos(\theta/2)$. Hence by the fundamental theorem [L5], for $0<\theta_1<\theta_2<\pi$ $$\sigma\bigl((\theta_1,\theta_2)\bigr)=\int_{\theta_1}^{\theta_2}\frac{\mathrm d\sigma}{\mathrm d\Omega}(\theta)\,2\pi\sin\theta\,\mathrm d\theta =-\bigl(F(\theta_2)-F(\theta_1)\bigr)=\pi\bigl(b(\theta_1)^2-b(\theta_2)^2\bigr),$$ finite because $b$ is continuous on $[\theta_1,\theta_2]$. Since the integrand is nonnegative, the truncated integral over $(\theta_1,\theta_2)$ increases as $\theta_2\uparrow\pi$ and tends to $\pi b(\theta_1)^2$ because $b(\theta_2)^2\to0$; this gives the band value. The divergence of the truncated integral over $(0,\theta_0)$ is the corresponding clause of [L3]. This is clause 4. [step 4.1, L3, L4, L5, algebra]
+5.1 Clause 4, band computation: put $F(\theta):=\pi b(\theta)^2$. By [L4] and the chain rule, $F'(\theta)=2\pi b(\theta)b'(\theta) =2\pi\cdot\frac{\kappa}{2E}\cot\frac{\theta}{2}\cdot\bigl(-\frac{\kappa}{4E}\csc^2\frac{\theta}{2}\bigr) =-\frac{\pi\kappa^2}{4E^2}\,\frac{\cos(\theta/2)}{\sin^3(\theta/2)}$, while the solid-angle integrand is $\frac{\mathrm d\sigma}{\mathrm d\Omega}(\theta)\,2\pi\sin\theta =\bigl(\frac{\kappa}{4E}\bigr)^2\csc^4\frac{\theta}{2}\cdot 4\pi\sin\frac{\theta}{2}\cos\frac{\theta}{2} =\frac{\pi\kappa^2}{4E^2}\frac{\cos(\theta/2)}{\sin^3(\theta/2)}=-F'(\theta)$, using $\sin\theta=2\sin(\theta/2)\cos(\theta/2)$. Hence by the fundamental theorem [L5], for $0<\theta_1<\theta_2<\pi$ $$\sigma\bigl((\theta_1,\theta_2)\bigr)=\int_{\theta_1}^{\theta_2}\frac{\mathrm d\sigma}{\mathrm d\Omega}(\theta)\,2\pi\sin\theta\,\mathrm d\theta =-\bigl(F(\theta_2)-F(\theta_1)\bigr)=\pi\bigl(b(\theta_1)^2-b(\theta_2)^2\bigr),$$ finite because $b$ is continuous on $[\theta_1,\theta_2]$. Since the integrand is nonnegative, the truncated integral over $(\theta_1,\theta_2)$ increases as $\theta_2\uparrow\pi$ and tends to $\pi b(\theta_1)^2$ because $b(\theta_2)^2\to0$; this gives the band value. The divergence of the truncated integral over $(0,\theta_0)$ is the corresponding clause of [L3]. For the single branch, its incident preimage restricted to $0<b<b_{\max}$ is a subset of the disc of incident area $\pi b_{\max}^2$. Clause (iv) of [[def-cm15-cross-section]] therefore gives $\sigma_{b_{\max}}(Y)\le\pi b_{\max}^2$ and the finite expected rate $\Phi\sigma_{b_{\max}}(Y)$ for every Borel angular window, including $Y=(0,\pi)$. These are model expectations; a detected-rate comparison needs the separately specified apparatus and uncertainty. This is clause 4. [step 4.1, L3, L4, L5, algebra]
 
 6.1 Clause 5: the statement records only the mechanical model's parameter $\kappa$, its conditional prediction and the explicit exclusions; no identification, measurement or additional model is used in steps 1.1-5.1, each of which cites only model data and the cited mathematical and physical suppliers. This completes the proof. [given, L1, L2, L3] ∎
 
 ## Remarks
 
-- **Dimensions.** $[\kappa]=\mathsf M\ell^3\tau^{-2}$, $\alpha$ and $\Delta$ dimensionless, $[\mathrm d\sigma/\mathrm d\Omega]=\ell^2$; the identity $\sigma=\pi b(\theta_1)^2$ at a cutoff shows that the truncated total is the area of the disk of impact parameters feeding the accepted angles.
+- **Dimensions.** $[\kappa]=\mu\ell^3\tau^{-2}$, $\alpha$ and $\Delta$ dimensionless, $[\mathrm d\sigma/\mathrm d\Omega]=\ell^2$; the identity $\sigma=\pi b(\theta_1)^2$ at a cutoff shows that the truncated total is the area of the disk of impact parameters feeding the accepted angles.
 
-- **The divergence is a feature of the ideal model.** The ideal Coulomb branch has no total cross-section because the small-angle density grows like $\theta^{-3}$; a real measurement always has a finite angular acceptance, and the truncated value depends on it. This is a statement about the model's idealisation, not an experimental fact.
+- **The divergence is a feature of the ideal model.** The ideal Coulomb branch has no total cross-section because the full-azimuth angular density $2\pi\sin\theta\,\mathrm d\sigma/\mathrm d\Omega$ grows like $\theta^{-3}$ (the solid-angle density grows like $\theta^{-4}$). An angular cutoff gives the displayed truncated ideal value, while the declared finite incident cutoff gives finite predicted rates even for the entire angular interval. Comparing either prediction with observations requires the specified preparation and apparatus model; no experimental acceptance or rate is reported here.
 
 - **What is not claimed.** No attractive branch, no capture, no screening of a medium of scatterers, no radiation loss, no relativistic or quantum correction, and no identification of $\kappa$ with an electromagnetic coupling; those require separate models and, for the identification, a cross-framework item.

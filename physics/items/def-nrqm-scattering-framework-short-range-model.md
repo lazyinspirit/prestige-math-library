@@ -29,6 +29,7 @@ deps:
   - def-sobolev-space-wkp-and-its-norm
   - def-countable-choice
   - def-axiom-of-choice
+  - thm-nrqm-controlled-dynamics-resolvent-tail-short-range-completeness
   - thm-lebesgue-measure-under-dilations-and-reflections
 dependency_roles:
   post-nrqm-framework-state-and-composition: formulation-prerequisite
@@ -51,6 +52,7 @@ dependency_roles:
   def-sobolev-space-wkp-and-its-norm: mathematical-premise
   def-countable-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
+  thm-nrqm-controlled-dynamics-resolvent-tail-short-range-completeness: mathematical-premise
   thm-lebesgue-measure-under-dilations-and-reflections: mathematical-premise
 provenance:
   statement: ai-altered
@@ -187,8 +189,17 @@ operator
 $$H:=H^{\mathrm{free}}+M_{V},\qquad D(H):=D(H^{\mathrm{free}}).$$
 The declared energy unit is the joule. For the compact-support class,
 clause (c) of the cited theorem makes $H$ self-adjoint on $D(H)$ and bounded
-below by $-\|V\|_{\infty}$; for the resolvent-tail class, self-adjointness of
-$H$ on the same domain is proved on this page and is not presupposed here. The
+below by $-\|V\|_{\infty}$. For the resolvent-tail class,
+[[thm-nrqm-controlled-dynamics-resolvent-tail-short-range-completeness]]
+(Statement and proof step 1.1) applies to $W_*=W_{*,2}+W_{*,\mathrm b}$:
+$\|W_{*,2}\|_2=E_*^{-1}L_*^{-3/2}\|V_2\|_2<\infty$,
+$\|W_{*,\mathrm b}\|_\infty=E_*^{-1}\|V_{\mathrm b}\|_\infty<\infty$,
+and its tail hypothesis is exactly clause (b)2. That supplier proves
+$H^2_y\subseteq D(M_{W_*})$ and self-adjointness of
+$A_{0,*}+M_{W_*}$ on $H^2_y=W^{2,2}_y$. The displayed unitary dilation and
+positive scaling therefore give $D(H^{\mathrm{free}})\subseteq D(M_V)$
+and self-adjointness of $H$ on precisely $W^{2,2}_x$, without assuming
+that $V_2$ is bounded. The
 model adopts $(H^{\mathrm{free}},\mathrm J)$ and $(H,\mathrm J)$ as assigned
 sharp observables in the sense of
 [[def-nrqm-observables-framework-observable-and-outcome-law]] clause (a), and
@@ -227,7 +238,7 @@ potential classes as **additional pair-level model assumptions**; neither
 class follows from those postulates or from the cited mathematical results.
 Clause (c) declares the assigned energy operators and their common domain;
 the cited mathematics establishes self-adjointness where stated, including
-the resolvent-tail case proved on the A page. Clause (d) declares the
+the resolvent-tail case supplied by the cited mathematical theorem. Clause (d) declares the
 comparison and spectral vocabulary without asserting that the limits exist
 or are complete. No identification of $m$, $\hbar$ or $V$ with measured data
 is asserted. Existence of the limits, completeness of the ranges and every

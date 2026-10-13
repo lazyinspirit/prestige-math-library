@@ -119,23 +119,22 @@ trace against bounded operators through nuclear representations;
 the completed tensor product of arbitrary Hilbert spaces and proves its
 uniqueness, positivity, trace preservation and contractivity; and
 [[thm-nrqm-composites-infinite-schmidt-decomposition]], which proves the Schmidt
-expansion for unit vectors of $H\widehat\otimes K$ with separable factors and
-the corresponding reduction formula. On this basis
+expansion for arbitrary vectors of $H\widehat\otimes K$ by constructing
+countable factor supports, and the reduction and purity formulae for unit vectors. On this basis
 [[lem-nrqm-composites-finite-effects-and-instruments]] introduces finite effects
 and instruments with their Lüders examples and probability normalization,
 [[lem-nrqm-composites-general-trace-class-instrument-and-effect-duality]] proves
 the duality between abstract trace-class instruments and their effects
 together with the adjoint instrument $J_B^*$,
-[[lem-nrqm-composites-finite-naimark-compression]] supplies the finite Naimark
-compression of a finite PVM into a larger space by an isometry, and
-[[lem-nrqm-composites-countable-kraus-normalization]] records the countable Kraus
-family with its trace-preservation criterion, complete positivity under
-amplification and dilation data.
+[[lem-nrqm-composites-finite-naimark-compression]] constructs a finite PVM on a larger tensor space whose compression
+by an isometry gives the specified finite POVM, and
+[[lem-nrqm-composites-countable-kraus-normalization]] proves trace-norm convergence, positivity and trace preservation
+for countable Kraus families with strong completeness.
 
 The infinite and continuous instrument layer is
-[[lem-nrqm-composites-finite-ancilla-complete-positivity]], which characterizes
-complete positivity of a finite instrument by Kraus families and proves that
-amplification preserves positivity; [[lem-nrqm-composites-countable-kraus-isometric-dilation]],
+[[lem-nrqm-composites-finite-ancilla-complete-positivity]], which defines finite-ancilla complete positivity and proves that
+finite-dimensional ancilla amplifications of normalized countable Kraus maps
+preserve self-adjoint positive trace-class inputs; [[lem-nrqm-composites-countable-kraus-isometric-dilation]],
 which builds the isometric dilation $W\xi=\sum_aM_a\xi\otimes e_a$ with the
 repair of the normalization needed for it;
 [[lem-nrqm-composites-local-trace-preserving-no-signalling]], which proves that a

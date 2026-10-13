@@ -52,9 +52,10 @@ curvature ([[def-gr-smooth-lorentzian-objects]],
    componentwise derivative in the identity chart, and the Jacobi fields along
    $\gamma$ are exactly the affine fields
    $$J(t)=J_0+tJ_1,\qquad J_0,J_1\in\mathbb R^4 ,$$
-   with $D_tJ(0)=J_1$; the space of Jacobi fields along $\gamma$ is thus the
-   image of the initial-value isomorphism of
-   [[thm-gr-jacobi-equation-and-geodesic-deviation]] clause (c).
+   with $D_tJ(0)=J_1$; the map $J\mapsto(J(0),D_tJ(0))$ from this space
+   onto $T_pM\oplus T_pM$ is the initial-value isomorphism of
+   [[thm-gr-jacobi-equation-and-geodesic-deviation]] clause (c), and its
+   inverse sends $(J_0,J_1)$ to the field $t\mapsto J_0+tJ_1$.
 4. No geodesic of this model has a conjugate instant: if
    $J(t_0)=J(t_1)=0$ for $t_0<t_1$, then $J=0$. Consistently
    $d(\exp_p)_u=\operatorname{id}$ is invertible for every $u\in T_pM$,

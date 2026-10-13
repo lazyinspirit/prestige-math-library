@@ -152,8 +152,12 @@ charts other than those of clauses 1 and 3.
   shifts the balance by $c'(t)$.
 
 - **Relation to the equivalence theorem.** Clause 1 also shows that along
-  solutions of Hamilton's equations the conserved quantity $H$ of
-  [[prop-cm-hamiltonian-branch-identities]] clause 3 is the mechanical energy
-  in the inertial chart; the equivalence itself, including the forced case,
-  is [[pthm-cm12-hamilton-equivalence]]. Neither statement asserts that any
+  solutions of the unforced Hamilton equations, $H$ is the mechanical energy
+  in the inertial chart. Clause 3 of
+  [[prop-cm-hamiltonian-branch-identities]] gives
+  $\frac{d}{dt}H=-L_{t}=\partial_{t}U$ along those solutions; it gives
+  conservation when $\partial_{t}U$ vanishes along the trajectory.
+  Their identification with model motions when $d\equiv0$, and the
+  corresponding forced equations when residual forces are present, are
+  [[pthm-cm12-hamilton-equivalence]]. Neither statement asserts that any
   apparatus conserves energy, and neither reports a measured value.

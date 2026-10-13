@@ -1,0 +1,802 @@
+[
+  {
+    "order": 191,
+    "id": "qm-bell-models-and-measurement-limits",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Bell Models And Measurement Limits",
+    "companion": "qm-bell-models-and-measurement-limits-examples",
+    "requires": [
+      "qm-composites-entanglement-and-reduced-states",
+      "qm-math-orbital-and-spin",
+      "qm-math-composites",
+      "qm-framework-and-quantities",
+      "qm-state-geometry",
+      "qm-observables-and-born-probabilities",
+      "qm-massive-particle-kinematics",
+      "qm-measurement-and-instruments",
+      "qm-angular-momentum-and-spin"
+    ],
+    "items": [
+      {
+        "id": "def-nrqm-bell-binary-correlation-models",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Binary correlation models: setting-indexed tables of two-valued outcome laws, marginals and the CHSH functional",
+        "statement": "This item fixes finite combinatorial vocabulary for outcome laws of a\ntwo-station comparison. No physical interpretation, measurement model,\ndynamics or locality assertion is made here; the physical readings are fixed\non the page of this pair. No choice principle is used.\n\n**(a) Binary correlation model.** Let $I$ and $J$ be finite nonempty sets, the\n**setting labels** of the two stations, and put\n$\\Sigma:=\\{-1,+1\\}$ for the common **outcome labels**. A **binary correlation\nmodel** on $(I,J)$ is a family\n$$\\mu=(\\mu_{ij})_{(i,j)\\in I\\times J},\\qquad \\mu_{ij}:\\Sigma\\times\\Sigma\\to[0,1],$$\nof functions with the normalization\n$$\\sum_{\\varepsilon\\in\\Sigma}\\sum_{\\delta\\in\\Sigma}\\mu_{ij}(\\varepsilon,\\delta)=1 \\qquad\\text{for every }(i,j)\\in I\\times J$$\n([[def-finite-sum]]). Each $\\mu_{ij}$ is the **joint law** of the setting pair\n$(i,j)$: it is the outcome-weight function of a finite probability space on\nthe four outcomes $\\Sigma\\times\\Sigma$ in the sense of\n[[def-finite-probability-space-and-event]], and sums over $\\Sigma\\times\\Sigma$\nare finite sums.\n\n**(b) Marginals.** For $(i,j)\\in I\\times J$ the **marginal law of the first\nstation** and the **marginal law of the second station** are\n$$\\mu^{A}_{ij}(\\varepsilon):=\\sum_{\\delta\\in\\Sigma}\\mu_{ij}(\\varepsilon,\\delta), \\qquad \\mu^{B}_{ij}(\\delta):=\\sum_{\\varepsilon\\in\\Sigma}\\mu_{ij}(\\varepsilon,\\delta), \\qquad \\varepsilon,\\delta\\in\\Sigma .$$\n\n**(c) No-signalling.** The model $\\mu$ is **no-signalling** when the marginal\nlaw of the first station does not depend on the distant setting,\n$\\mu^{A}_{ij}=\\mu^{A}_{ij'}$ for all $i\\in I$ and all $j,j'\\in J$, and the\nmarginal law of the second station does not depend on the distant setting,\n$\\mu^{B}_{ij}=\\mu^{B}_{i'j}$ for all $j\\in J$ and all $i,i'\\in I$. The word is\nused as a name for this pair of identities about the tables; no spatial or\ncausal claim is attached to it.\n\n**(d) Correlations and the CHSH functional.** Assume $I=J=\\{0,1\\}$. The\n**correlation** of the setting pair $(i,j)$ and the **CHSH functional** of the\nmodel are the real numbers\n$$E_{ij}(\\mu):=\\sum_{\\varepsilon\\in\\Sigma}\\sum_{\\delta\\in\\Sigma} \\varepsilon\\,\\delta\\,\\mu_{ij}(\\varepsilon,\\delta), \\qquad S(\\mu):=E_{00}(\\mu)+E_{01}(\\mu)+E_{10}(\\mu)-E_{11}(\\mu).$$\n\n**(e) Status.** Clauses (a)-(d) introduce finite tables, their marginals, the\nno-signalling identities and one linear functional of four correlations. They\nassert no physical assumption, no dynamics, no measurement, no probability law\nfor a real apparatus and no statement about nature; the identification of a\nlaboratory arrangement with a model $\\mu$ is a separate physical matter.",
+        "strategy": "n/a",
+        "deps": [
+          "def-finite-probability-space-and-event",
+          "def-finite-sum"
+        ],
+        "dependency_roles": {
+          "def-finite-probability-space-and-event": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.A, PDF pages 2-3: the two-station measurement scenario, the joint table p(ab|xy), its marginals and the independence of a marginal from the distant setting",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 111-115 (PDF pages 119-123): the four pairwise outcome laws of a two-station spin comparison and the expectation values built from them",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqm-bell-local-response-representation",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Local-response representations of a binary correlation model: one setting-independent specification space and per-station response laws",
+        "statement": "Let $\\mu$ be a binary correlation model on the finite setting sets $I,J$ with\noutcome labels $\\Sigma=\\{-1,+1\\}$\n([[def-nrqm-bell-binary-correlation-models]]). No choice principle is used in\nthis definition.\n\n**(a) Local-response representation.** A **local-response representation** of\n$\\mu$ is a tuple consisting of a probability space $(\\Lambda,\\Sigma_{\\Lambda},\n\\mathbb P)$ ([[def-measure-space]], [[def-probability-measure]]) and two\nfamilies of **response laws**\n$$(\\alpha_{i})_{i\\in I},\\qquad (\\beta_{j})_{j\\in J},$$\nwhere for each $i\\in I$ the function\n$\\alpha_{i}:\\Lambda\\times\\Sigma\\to[0,1]$ has the two properties\n$$\\sum_{\\varepsilon\\in\\Sigma}\\alpha_{i}(\\lambda,\\varepsilon)=1\\quad(\\lambda\\in\\Lambda), \\qquad \\lambda\\mapsto\\alpha_{i}(\\lambda,+1)\\ \\text{is measurable}$$\n([[def-measurable-function-between-measurable-spaces]]), and the family\n$(\\beta_{j})_{j\\in J}$ has the same two properties; and the **representation\nidentity**\n$$\\mu_{ij}(\\varepsilon,\\delta) =\\int_{\\Lambda}\\alpha_{i}(\\lambda,\\varepsilon)\\,\\beta_{j}(\\lambda,\\delta)\\, d\\mathbb P(\\lambda) =\\mathbb E_{\\mathbb P}\\!\\left[\\alpha_{i}(\\cdot,\\varepsilon)\\, \\beta_{j}(\\cdot,\\delta)\\right]$$\nholds for every $(i,j)\\in I\\times J$ and every\n$(\\varepsilon,\\delta)\\in\\Sigma\\times\\Sigma$. The integrand is a product of two\nbounded measurable $[0,1]$-valued functions, so the expectation exists as a\nfinite number ([[def-expectation-of-a-nonnegative-or-integrable-random-variable]],\n[[def-random-element-and-real-random-variable]]). The functions\n$\\alpha_{i}(\\cdot,-1)=1-\\alpha_{i}(\\cdot,+1)$ and likewise for $\\beta_{j}$ are\nmeasurable as well. The variable $\\lambda$ is called the **specification**\nof the representation; it is a mathematical index, and no physical\ninterpretation is asserted.\n\n**(b) Response functions (deterministic form).** Equip the finite outcome set\n$\\Sigma=\\{-1,+1\\}$ with its discrete $\\sigma$-algebra $\\mathcal P(\\Sigma)$.\nA local-response representation **has response functions** when there are\nmeasurable maps\n$a_{i}:(\\Lambda,\\Sigma_{\\Lambda})\\to(\\Sigma,\\mathcal P(\\Sigma))$ $(i\\in I)$\nand $b_{j}:(\\Lambda,\\Sigma_{\\Lambda})\\to(\\Sigma,\\mathcal P(\\Sigma))$\n$(j\\in J)$ with\n$$\\alpha_{i}(\\lambda,\\varepsilon)=\\mathbf 1_{\\{a_{i}=\\varepsilon\\}}(\\lambda), \\qquad \\beta_{j}(\\lambda,\\delta)=\\mathbf 1_{\\{b_{j}=\\delta\\}}(\\lambda),$$\nin which case the representation identity reads\n$$\\mu_{ij}(\\varepsilon,\\delta) =\\mathbb P\\bigl(\\{a_{i}=\\varepsilon\\}\\cap\\{b_{j}=\\delta\\}\\bigr).$$\nThe deterministic form is a special case of clause (a): it is obtained by\nsetting the response laws to the Dirac laws at $a_{i}(\\lambda)$ and\n$b_{j}(\\lambda)$. In this form one and the same specification space and the\nsame single-station functions $a_{i}$ and $b_{j}$ serve every setting\npair, and the response of a station depends on the specification and on that\nstation's own setting only.\n\n**(c) Terminology.** The two mathematical features named by **local response**\nare: (i) a single specification space carrying the probability law used for\nevery setting pair (setting-independence), and (ii) per-station response laws\nthat do not depend on the distant station's setting. A model that admits such\na representation is also called a **local model** of the tables in the\nliterature; the representation is an existence statement about the tables and\nasserts no determinism, no mechanism, no dynamics and no causal relation. In\nparticular clause (a) permits probabilistic responses and does not require\nthe response functions of clause (b).\n\n**(d) Status.** Clauses (a)-(c) fix vocabulary. They assert no physical\nassumption and no property of any laboratory arrangement; whether a declared\nphysical model of a comparison admits a representation of this form is a\nmathematical question about its tables, and the physical reading of that\nquestion is fixed on the page of this pair.",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-bell-binary-correlation-models",
+          "def-probability-measure",
+          "def-measure-space",
+          "def-measurable-function-between-measurable-spaces",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-random-element-and-real-random-variable"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "def-probability-measure": "mathematical-premise",
+          "def-measure-space": "mathematical-premise",
+          "def-measurable-function-between-measurable-spaces": "mathematical-premise",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable": "mathematical-premise",
+          "def-random-element-and-real-random-variable": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 1,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section I.A, PDF page 3: the local decomposition p(ab|xy) = integral of q(lambda) p(a|x,lambda) p(b|y,lambda), its factorability reading and the assumption that the settings are chosen independently of lambda",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 113-115 (PDF pages 121-123): response functions of the two stations on a common hidden-variable space and the expectation values they define",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-nrqm-bell-local-representations-are-no-signalling",
+        "kind": "proposition",
+        "domain": "mathematics",
+        "title": "Local-response representability implies setting-independent marginals",
+        "statement": "Let $\\mu$ be a binary correlation model on finite setting sets $I,J$ with\noutcome labels $\\Sigma=\\{-1,+1\\}$\n([[def-nrqm-bell-binary-correlation-models]]), and suppose that $\\mu$ admits a\nlocal-response representation with response laws $(\\alpha_{i})$, $(\\beta_{j})$\nand probability space $(\\Lambda,\\Sigma_{\\Lambda},\\mathbb P)$\n([[def-nrqm-bell-local-response-representation]]). Then:\n\n(a) for every $i\\in I$ the marginal law of the first station satisfies\n$$\\mu^{A}_{ij}=\\mu^{A}_{ij'}\\qquad\\text{for all }j,j'\\in J,$$\nand for every $j\\in J$ the marginal law of the second station satisfies\n$\\mu^{B}_{ij}=\\mu^{B}_{i'j}$ for all $i,i'\\in I$; that is, $\\mu$ is\nno-signalling;\n\n(b) consequently, if a binary correlation model is not no-signalling, then it\nadmits no local-response representation.\n\nNo physical assumption and no choice principle is used; the proposition is a\nstatement about the tables and their representation.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-bell-binary-correlation-models",
+          "def-nrqm-bell-local-response-representation",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-finite-sum"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "def-nrqm-bell-local-response-representation": "mathematical-premise",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound": "mathematical-premise",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section I.A, PDF page 3: a marginal p(a|x) = sum over b of p(ab|xy) is independent of the distant setting y, and this is identified with the no-signalling property of the local decomposition",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-nrqm-bell-local-representations-satisfy-chsh",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The CHSH bound for every binary correlation model admitting a local-response representation",
+        "statement": "Let $\\mu$ be a binary correlation model on the setting sets $I=J=\\{0,1\\}$\nwith outcome labels $\\Sigma=\\{-1,+1\\}$, with correlations $E_{ij}(\\mu)$ and\nCHSH functional $S(\\mu)$ as in\n[[def-nrqm-bell-binary-correlation-models]] clauses (d), and suppose that\n$\\mu$ admits a local-response representation with response laws\n$(\\alpha_{i})_{i\\in I}$, $(\\beta_{j})_{j\\in J}$ on a probability space\n$(\\Lambda,\\Sigma_{\\Lambda},\\mathbb P)$\n([[def-nrqm-bell-local-response-representation]]). Then\n$$\\bigl|S(\\mu)\\bigr|\\le 2 .$$\nThe statement is a theorem about the tables and their representation; it\nasserts no measurement, no dynamics, no spatial or causal structure, and it\ncontains no physics. No choice principle is used.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-bell-binary-correlation-models",
+          "def-nrqm-bell-local-response-representation",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "def-finite-sum",
+          "def-measurable-function-between-measurable-spaces"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "def-nrqm-bell-local-response-representation": "mathematical-premise",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound": "mathematical-premise",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise",
+          "def-measurable-function-between-measurable-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section I.A, PDF page 3, equation (4) and its derivation: the CHSH inequality S <= 2 for probabilities satisfying the local decomposition with local expectations in [-1,1]",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 113-115 (PDF pages 121-123): Bell's inequality for a setting-independent response-function model, obtained by bounding the response product pointwise",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-bell-setting-independent-selection-closure",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Conditioning on a setting-independent selection preserves local-response representability and the CHSH bound",
+        "statement": "Let $\\mu$ be a binary correlation model on finite setting sets $I,J$ with\noutcome labels $\\Sigma=\\{-1,+1\\}$\n([[def-nrqm-bell-binary-correlation-models]]), and suppose that $\\mu$ admits a\nlocal-response representation with response laws $(\\alpha_{i})_{i\\in I}$,\n$(\\beta_{j})_{j\\in J}$ on a probability space\n$(\\Lambda,\\Sigma_{\\Lambda},\\mathbb P)$\n([[def-nrqm-bell-local-response-representation]]). Let\n$D\\in\\Sigma_{\\Lambda}$ be a **selection event** with $\\mathbb P(D)>0$, put\n$$\\mathbb P_{D}(A):=\\frac{\\mathbb P(A\\cap D)}{\\mathbb P(D)}\\qquad(A\\in\\Sigma_{\\Lambda})$$\nfor the **conditional probability measure** on $D$, and define the\n**$D$-conditional tables**\n$$\\mu^{D}_{ij}(\\varepsilon,\\delta):=\\frac{1}{\\mathbb P(D)} \\int_{\\Lambda}\\mathbf 1_{D}(\\lambda)\\,\\alpha_{i}(\\lambda,\\varepsilon)\\, \\beta_{j}(\\lambda,\\delta)\\,d\\mathbb P(\\lambda)$$\nfor $(i,j)\\in I\\times J$ and $(\\varepsilon,\\delta)\\in\\Sigma\\times\\Sigma$. Then:\n\n(a) $\\mathbb P_{D}$ is a probability measure on $(\\Lambda,\\Sigma_{\\Lambda})$\nand $\\mu^{D}:=(\\mu^{D}_{ij})$ is a binary correlation model on $(I,J)$;\n\n(b) the same response laws represent $\\mu^{D}$ over $\\mathbb P_{D}$:\n$$\\mu^{D}_{ij}(\\varepsilon,\\delta) =\\int_{\\Lambda}\\alpha_{i}(\\lambda,\\varepsilon)\\,\\beta_{j}(\\lambda,\\delta)\\, d\\mathbb P_{D}(\\lambda)\\qquad\\text{for all }i,j,\\varepsilon,\\delta ;$$\n\n(c) if $I=J=\\{0,1\\}$, then $\\bigl|S(\\mu^{D})\\bigr|\\le2$.\n\nThe selection event $D$ is a subset of the specification space: membership in\n$D$ is the same for every setting pair and does not depend on the settings or\non the outcomes. No choice principle is used.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-bell-binary-correlation-models",
+          "def-nrqm-bell-local-response-representation",
+          "thm-nrqm-bell-local-representations-satisfy-chsh",
+          "def-probability-measure",
+          "def-measure",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "cor-expectation-of-an-indicator-is-probability",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations",
+          "thm-monotone-convergence-for-the-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-finite-sum"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "def-nrqm-bell-local-response-representation": "mathematical-premise",
+          "thm-nrqm-bell-local-representations-satisfy-chsh": "mathematical-premise",
+          "def-probability-measure": "mathematical-premise",
+          "def-measure": "mathematical-premise",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable": "mathematical-premise",
+          "cor-expectation-of-an-indicator-is-probability": "mathematical-premise",
+          "prop-indicator-function-is-measurable-iff-its-set-is-measurable": "mathematical-premise",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound": "mathematical-premise",
+          "thm-nonnegative-measurable-functions-admit-increasing-simple-approximations": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section I.A, PDF page 3: the decomposition p(ab|xy) = integral of q(lambda) p(a|x,lambda) p(b|y,lambda), in which the settings are chosen independently of the specification lambda; conditioning on a specification-only event reweights q",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 113-115 (PDF pages 121-123): experimental tests of Bell's inequality and the qualification that a recorded sample is a sub-ensemble of the pairs produced",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-bell-singlet-pairings",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Singlet pairings: the joint laws of the two spin-half factors along two directions",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), the hypothesis\nof the tensor construction cited below. Let $V=\\mathbb C^{2}$ carry the\northonormal basis $(e_{+},e_{-})$ and let\n$$\\sigma_{x}=\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad \\sigma_{y}=\\begin{pmatrix}0&-i\\\\ i&0\\end{pmatrix},\\qquad \\sigma_{z}=\\begin{pmatrix}1&0\\\\0&-1\\end{pmatrix}$$\nbe the Pauli matrices of clause (e) of\n[[prop-nrqm-orbital-and-spin-finite-spin-matrices]] in the ordered basis\n$(e_{+},e_{-})$; for $a=(a_{x},a_{y},a_{z})\\in\\mathbb R^{3}$ put\n$\\sigma_{a}:=a_{x}\\sigma_{x}+a_{y}\\sigma_{y}+a_{z}\\sigma_{z}$, and for\n$\\varepsilon\\in\\Sigma=\\{-1,+1\\}$ put\n$$P_{a,\\varepsilon}:=\\tfrac12\\bigl(I+\\varepsilon\\,\\sigma_{a}\\bigr).$$\nLet $V\\widehat\\otimes V$ be the completed tensor product with inclusion\n$\\kappa$ of [[lem-nrqm-composites-hilbert-tensor-construction]] and let\n$$\\Psi:=\\frac{1}{\\sqrt2}\\Bigl(\\kappa(e_{+}\\otimes e_{-})-\\kappa(e_{-}\\otimes e_{+})\\Bigr)\\in V\\widehat\\otimes V, \\qquad q:=\\frac{1}{\\sqrt2}\\Bigl(\\kappa(e_{+}\\otimes e_{-})+\\kappa(e_{-}\\otimes e_{+})\\Bigr).$$\nThen:\n\n(a) for every unit $a\\in\\mathbb R^{3}$ and $\\varepsilon\\in\\Sigma$ the\noperator $P_{a,\\varepsilon}$ is an orthogonal projection on $V$,\n$P_{a,+}+P_{a,-}=I$ and\n$P_{a,\\varepsilon}P_{a,\\varepsilon'}=\\delta_{\\varepsilon\\varepsilon'}P_{a,\\varepsilon}$;\n\n(b) $\\|\\Psi\\|=1$ and the four vectors $\\Psi,q,\\kappa(e_{+}\\otimes e_{+}),\n\\kappa(e_{-}\\otimes e_{-})$ are mutually orthogonal, so\n$(\\Psi,q,\\kappa(e_{+}\\otimes e_{+}),\\kappa(e_{-}\\otimes e_{-}))$ is an\northonormal basis of $V\\widehat\\otimes V$;\n\n(c) for all unit $a,b\\in\\mathbb R^{3}$ and all\n$\\varepsilon,\\delta\\in\\Sigma$,\n$$\\bigl\\langle(P_{a,\\varepsilon}\\otimes P_{b,\\delta})\\Psi,\\Psi\\bigr\\rangle =\\tfrac14\\bigl(1-\\varepsilon\\delta\\,a\\cdot b\\bigr);$$\n\n(d) the marginals of the four numbers in (c) are\n$$\\sum_{\\delta\\in\\Sigma}\\bigl\\langle(P_{a,\\varepsilon}\\otimes P_{b,\\delta})\\Psi,\\Psi\\bigr\\rangle=\\tfrac12 =\\sum_{\\varepsilon\\in\\Sigma}\\bigl\\langle(P_{a,\\varepsilon}\\otimes P_{b,\\delta})\\Psi,\\Psi\\bigr\\rangle,$$\nand their correlation is\n$$\\sum_{\\varepsilon\\in\\Sigma}\\sum_{\\delta\\in\\Sigma}\\varepsilon\\,\\delta\\, \\bigl\\langle(P_{a,\\varepsilon}\\otimes P_{b,\\delta})\\Psi,\\Psi\\bigr\\rangle =-a\\cdot b .$$\n\nThe lemma is a finite-dimensional computation in the tensor product; it\nasserts no preparation, measurement or physical interpretation. The Axiom of\nCountable Choice enters only through the construction of the completed tensor\nproduct cited from [[lem-nrqm-composites-hilbert-tensor-construction]].",
+        "strategy": "direct",
+        "deps": [
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices",
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "lem-nrqm-composites-bounded-tensor-maps",
+          "def-inner-product-space",
+          "def-hilbert-space",
+          "def-real-and-complex-inner-product-space",
+          "cor-inner-product-induces-a-norm",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "def-linear-map",
+          "def-matrix-product-and-identity-matrix",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices": "mathematical-premise",
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "lem-nrqm-composites-bounded-tensor-maps": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-real-and-complex-inner-product-space": "mathematical-premise",
+          "cor-inner-product-induces-a-norm": "mathematical-premise",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces": "mathematical-premise",
+          "def-linear-map": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 7.5.1, printed pages 173-175 (PDF pages 181-183): the spin-half Pauli matrices and the two-particle singlet as a difference of product basis vectors, and Section 6.1.4 printed pages 111-115 (PDF pages 119-123): the singlet spin correlations along two directions",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 8 'Multiparticle States and Tensor Products', Sections 3 and 5, chapter pages 9-12 and 16-19: the Bell basis, the singlet state and its spin correlations; Chapter 2 'Spin One-Half' for the Pauli matrices",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/ffe665c0cba2eae19a83e88dec42925c_MIT8_05F13_Chap_08.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqm-bell-declared-spin-arrangement",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Declared spin correlation arrangement of the framework: two spin-half factors, four directions, joint sign tables and local-response models",
+        "statement": "Adopt the state and composition postulate P1, the observable and probability\npostulate P2, the ideal conditional-measurement postulate P3, the\ninternal-factor assignment of the identical-particle and spin postulate P6 and\nthe preparation and apparatus discipline P7\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-ideal-conditional-measurement]],\n[[post-nrqm-framework-identical-particles-and-spin]],\n[[post-nrqm-framework-preparation-and-apparatus]]), together with the\ncomposite, observable and measurement readings of\n[[def-nrqm-composites-framework-composite-systems-and-local-readouts]],\n[[def-nrqm-observables-framework-observable-and-outcome-law]] and\n[[def-nrqm-measurement-framework-declared-measurements-and-instruments]], the\nangular momentum readings of\n[[def-nrqm-angular-momentum-framework-angular-momentum-observables]] and the\nunits of [[def-nrqm-framework-quantities-and-units]]. Assume the Axiom of\nCountable Choice and the Axiom of Choice, the hypotheses of the cited\nmathematical suppliers. The following vocabulary is used by this page.\n\n**(a) Declared spin-half factors.** A **declared spin-half factor** is the\ninternal factor $V=\\mathbb C^{2}$ of the spin-$s$ model\n[[def-nrqm-kinematics-framework-massive-spin-s-model]] with spin label\n$s=\\tfrac12$, with its orthonormal basis $(e_{+},e_{-})$, the self-adjoint\nmatrices $J_{i}=\\tfrac12\\sigma_{i}$ of\n[[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clause (e) and the spin\nobservables $S_{i}:=\\hbar J_{i}$, read as assigned sharp observables with unit\n$\\mathrm{J\\,s}$ by clause (c) of\n[[def-nrqm-angular-momentum-framework-angular-momentum-observables]] and P6\nclause (ii). For a unit direction $n\\in\\mathbb R^{3}$ put\n$S_{n}:=\\sum_{i}n_{i}S_{i}$. By\n[[pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]] clause (c) the\nobservable $S_{n}$ has the two eigenvalues $\\pm\\tfrac{\\hbar}{2}$ with\nspectral projections\n$$P_{n,\\varepsilon}:=\\tfrac12\\bigl(I+\\varepsilon\\,n\\cdot\\sigma\\bigr), \\qquad \\varepsilon\\in\\Sigma=\\{-1,+1\\},$$\nand the label $\\varepsilon$ attached to the projection $P_{n,\\varepsilon}$ is\nthe **sign label** of the outcome; the outcome coordinate is\n$\\varepsilon\\hbar/2$, read in the unit $\\mathrm{J\\,s}$, while the sign label\nitself is dimensionless.\n\n**(b) Declared arrangement.** A **declared spin correlation arrangement**\nconsists of: the declared composite $V\\widehat\\otimes V$ of two declared\nspin-half factors, with inclusion $\\kappa$, in the sense of clause (a) of\n[[def-nrqm-composites-framework-composite-systems-and-local-readouts]] (a\ndeclared pair of distinguishable subsystems whose assigned spaces are the two\ninternal factors); a **declared preparation** $\\rho\\in D(V\\widehat\\otimes V)$,\nthe set of density operators on the composite\n([[def-nrqm-state-geometry-framework-state-space]],\n[[def-nrqm-state-geometry-pure-mixed-states-and-purity]]); and two unit\n**setting directions** $a_{0},a_{1}\\in\\mathbb R^{3}$ for the first station and\n$b_{0},b_{1}\\in\\mathbb R^{3}$ for the second station. The setting labels are\n$I=J=\\{0,1\\}$.\n\n**(c) Declared local sign measurements.** For the first station and setting\n$i\\in I$, the **declared local sign measurement** is the declared ideal sharp\nmeasurement whose outcome structure is the pair\n$(P_{a_{i},+}\\otimes I,\\;P_{a_{i},-}\\otimes I)$ with the sign labels $\\pm1$:\nthese are the spectral projections of the local readout of the assigned\nobservable $(S_{a_{i}},\\mathrm{J\\,s})$ on the declared composite, the local\nreadout being constructed through the spectral measure by clause (c) of\n[[def-nrqm-composites-framework-composite-systems-and-local-readouts]] and\n[[lem-nrqm-composites-local-pvm-tensor-extension]]. The second station's\ndeclared local sign measurement for setting $j$ is\n$(I\\otimes P_{b_{j},+},\\;I\\otimes P_{b_{j},-})$, defined symmetrically.\n\n**(d) Declared joint sign measurement and tables.** For $(i,j)\\in I\\times J$\nthe **declared joint sign measurement** of the setting pair is the declared\nideal sharp measurement of the composite whose outcome structure is\n$$E_{ij}:=\\bigl(P_{a_{i},\\varepsilon}\\otimes P_{b_{j},\\delta}\\bigr)_{(\\varepsilon,\\delta)\\in\\Sigma\\times\\Sigma}, \\qquad E_{ij}(\\varepsilon,\\delta)=P_{a_{i},\\varepsilon}\\otimes P_{b_{j},\\delta},$$\nwith the pair of sign labels as its labels: by clause (c) of\n[[pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]] each factor is an\northogonal projection, and the tensor calculus of\n[[lem-nrqm-composites-bounded-tensor-maps]] gives\n$E_{ij}(\\varepsilon,\\delta)E_{ij}(\\varepsilon',\\delta')=\n\\delta_{\\varepsilon\\varepsilon'}\\delta_{\\delta\\delta'}E_{ij}(\\varepsilon,\\delta)$\nand $\\sum_{\\varepsilon,\\delta}E_{ij}(\\varepsilon,\\delta)=I$, so this is a\nfinite family of mutually orthogonal projections resolving the identity, as\nrequired by clause (a) of\n[[def-nrqm-measurement-framework-declared-measurements-and-instruments]]. Its\n**outcome law** in the declared preparation $\\rho$ is\n$$\\nu^{\\rho}_{ij}(\\varepsilon,\\delta):=\\operatorname{tr}\\bigl(\\rho\\,E_{ij}(\\varepsilon,\\delta)\\bigr), \\qquad (\\varepsilon,\\delta)\\in\\Sigma\\times\\Sigma,$$\nread from clause (b) of\n[[def-nrqm-measurement-framework-declared-measurements-and-instruments]]\n(compare P2 clause (ii), [[post-nrqm-framework-observable-and-probability]]).\nThe **correlation table of the arrangement** is the family\n$\\nu^{\\rho}=(\\nu^{\\rho}_{ij})_{(i,j)\\in I\\times J}$, which is a binary\ncorrelation model on $(I,J)$ in the sense of\n[[def-nrqm-bell-binary-correlation-models]] clause (a); its correlations\n$E_{ij}(\\nu^{\\rho})$, its marginals and its CHSH functional $S(\\nu^{\\rho})$ are\nthe ones of clauses (b) and (d) of that definition, and are written\n$S(\\rho;a_{0},a_{1};b_{0},b_{1})$ when the arrangement data are displayed.\n\n**(e) Declared local-response models of the arrangement.** A **declared\nlocal-response model of the arrangement** is a local-response representation,\nin the sense of [[def-nrqm-bell-local-response-representation]], of the\ncorrelation table $\\nu^{\\rho}$. It is a model of the same four tables: it\nconsists of a probability space of **specifications** and of per-station\nresponse laws, subject to the representation identity, and it need not be a\nmodel of the framework's state space. The arrangement **admits a\nlocal-response model** when such a representation exists.\n\n**(f) Scope.** Clauses (a)-(e) fix model vocabulary. They assign no spatial\nposition, worldline, spatial separation or temporal order to the two factors;\nthey assert no dynamics, no interaction, no apparatus, no detection procedure\nand no measured correlation; they do not assert that the composite is prepared\nby any particular laboratory procedure. Whether a laboratory arrangement\nrealizes the declared preparation, the declared directions and the declared\nsign measurements is a tested identification with uncertainty under P7\n([[post-nrqm-framework-preparation-and-apparatus]]), not a consequence of this\ndefinition; the model's assignments of states to preparations and of spectral\nprojections to quantities are the readings of P1, P2 and P3 fixed on the\nearlier pages.",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-bell-binary-correlation-models",
+          "def-nrqm-bell-local-response-representation",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-ideal-conditional-measurement",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-kinematics-framework-massive-spin-s-model",
+          "def-nrqm-composites-framework-composite-systems-and-local-readouts",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "def-nrqm-angular-momentum-framework-angular-momentum-observables",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices",
+          "lem-nrqm-composites-local-pvm-tensor-extension",
+          "lem-nrqm-composites-bounded-tensor-maps",
+          "pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "def-nrqm-bell-local-response-representation": "mathematical-premise",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+          "post-nrqm-framework-ideal-conditional-measurement": "formulation-prerequisite",
+          "post-nrqm-framework-identical-particles-and-spin": "formulation-prerequisite",
+          "post-nrqm-framework-preparation-and-apparatus": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-kinematics-framework-massive-spin-s-model": "formulation-prerequisite",
+          "def-nrqm-composites-framework-composite-systems-and-local-readouts": "formulation-prerequisite",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "def-nrqm-angular-momentum-framework-angular-momentum-observables": "formulation-prerequisite",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices": "mathematical-premise",
+          "lem-nrqm-composites-local-pvm-tensor-extension": "mathematical-premise",
+          "lem-nrqm-composites-bounded-tensor-maps": "mathematical-premise",
+          "pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 8 'Multiparticle States and Tensor Products', Section 5, chapter pages 16-19: the two-observer spin comparison, its four measurement choices and the joint probabilities p(ab|xy)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/ffe665c0cba2eae19a83e88dec42925c_MIT8_05F13_Chap_08.pdf"
+            },
+            {
+              "title": "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.A, PDF pages 2-3: the two-station scenario with two measurement choices per station and its joint table",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            }
+          ]
+        },
+        "physical_scope": "The declared model vocabulary of a two-station spin comparison inside the framework: two declared spin-half internal factors, a declared composite preparation, two declared unit directions per station, the four declared joint sign measurements with their outcome laws, the correlation table and the CHSH functional, and the class of local-response models of that table. The definition adds no physical assumption beyond P1, P2, P3, P6 and P7 in their stated readings; it assigns no spatial position, worldline, separation or temporal order to the factors, asserts no dynamics, no apparatus realization, no measured correlation and no empirical fact, and leaves the identification of a laboratory arrangement with these declarations to the tested identification of P7."
+      },
+      {
+        "id": "texp-nrqm-bell-singlet-arrangement-contrast",
+        "kind": "thought-experiment",
+        "domain": "physics",
+        "title": "The singlet arrangement: directional sign tables, CHSH value 2 sqrt 2 and the failure of local-response models at violating settings",
+        "statement": "Adopt the declared spin correlation arrangement of\n[[def-nrqm-bell-declared-spin-arrangement]]: the composite\n$V\\widehat\\otimes V$ of two declared spin-half factors with orthonormal basis\n$(e_{+},e_{-})$, a declared preparation $\\rho\\in D(V\\widehat\\otimes V)$, the\nsetting directions $a_{0},a_{1},b_{0},b_{1}\\in\\mathbb R^{3}$ and the four\ndeclared joint sign measurements with outcome laws\n$$\\nu^{\\rho}_{ij}(\\varepsilon,\\delta) =\\operatorname{tr}\\bigl(\\rho\\,(P_{a_{i},\\varepsilon}\\otimes P_{b_{j},\\delta})\\bigr), \\qquad P_{a,\\varepsilon}=\\tfrac12(I+\\varepsilon\\,a\\cdot\\sigma) .$$\nAssume the Axiom of Countable Choice and the Axiom of Choice, the hypotheses of\nthe cited suppliers ([[def-countable-choice]], [[def-axiom-of-choice]]), and\ntake the **singlet preparation**\n$$\\Psi:=\\frac{1}{\\sqrt2}\\Bigl(\\kappa(e_{+}\\otimes e_{-})-\\kappa(e_{-}\\otimes e_{+})\\Bigr), \\qquad \\rho_{\\Psi}:=T_{\\Psi,\\Psi},$$\nwhere $T_{\\Psi,\\Psi}$ is the rank-one operator of\n[[lem-nrqm-composites-rank-one-operator-calculus]]. Then:\n\n(a) for every $(i,j)\\in\\{0,1\\}^{2}$ and all $\\varepsilon,\\delta\\in\\Sigma$,\n$$\\nu^{\\rho_{\\Psi}}_{ij}(\\varepsilon,\\delta) =\\bigl\\langle(P_{a_{i},\\varepsilon}\\otimes P_{b_{j},\\delta})\\Psi,\\Psi\\bigr\\rangle =\\tfrac14\\bigl(1-\\varepsilon\\delta\\,a_{i}\\cdot b_{j}\\bigr);$$\n\n(b) the correlations of the arrangement are\n$E_{ij}(\\nu^{\\rho_{\\Psi}})=-a_{i}\\cdot b_{j}$ and\n$$S(\\nu^{\\rho_{\\Psi}}) =-\\bigl[a_{0}\\cdot b_{0}+a_{0}\\cdot b_{1}+a_{1}\\cdot b_{0}-a_{1}\\cdot b_{1}\\bigr] =-\\,(a_{0}\\cdot(b_{0}+b_{1})+a_{1}\\cdot(b_{0}-b_{1}));$$\nin particular, for the unit directions\n$a_{0}=(0,0,1)$, $a_{1}=(1,0,0)$, $b_{0}=(1,0,1)/\\sqrt2$ and\n$b_{1}=(-1,0,1)/\\sqrt2$ one has $S(\\nu^{\\rho_{\\Psi}})=-2\\sqrt2$, so\n$\\bigl|S(\\nu^{\\rho_{\\Psi}})\\bigr|=2\\sqrt2>2$;\n\n(c) consequently the correlation table $\\nu^{\\rho_{\\Psi}}$ of the arrangement\nat those directions admits no local-response model in the sense of clause (e)\nof [[def-nrqm-bell-declared-spin-arrangement]]: there is no local-response\nrepresentation of the four tables\n([[def-nrqm-bell-local-response-representation]]) with these laws;\n\n(d) the marginal sign laws of the arrangement are\n$\\nu^{\\rho_{\\Psi},A}_{ij}(\\varepsilon)=\\tfrac12=\n\\nu^{\\rho_{\\Psi},B}_{ij}(\\delta)$ for every setting pair and every direction, so\nthe table is no-signalling in the sense of clause (c) of\n[[def-nrqm-bell-binary-correlation-models]]; and a discarded declared local\ninstrument on either factor leaves the reduced preparation of the other factor\nand every local outcome law of that factor unchanged\n([[pthm-nrqm-composites-local-instruments-and-no-signalling]] clause (b)).\n\nThe item is a conditional model computation: it asserts no measured\ncorrelation, no apparatus and no empirical fact, and its exclusion is exactly\nof the declared local-response class of these four tables. Higher singleton\nclaims about hidden variables in general are not asserted.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-bell-declared-spin-arrangement",
+          "def-nrqm-bell-binary-correlation-models",
+          "def-nrqm-bell-local-response-representation",
+          "lem-nrqm-bell-singlet-pairings",
+          "thm-nrqm-bell-local-representations-satisfy-chsh",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "pthm-nrqm-composites-local-instruments-and-no-signalling",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-declared-spin-arrangement": "formulation-prerequisite",
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "def-nrqm-bell-local-response-representation": "mathematical-premise",
+          "lem-nrqm-bell-singlet-pairings": "mathematical-premise",
+          "thm-nrqm-bell-local-representations-satisfy-chsh": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "pthm-nrqm-composites-local-instruments-and-no-signalling": "physical-result",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 111-115 (PDF pages 119-123): the electron-positron singlet, the correlation -a.b, the inequality of Bell for a setting-independent response model and its violation by the singlet",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 8 'Multiparticle States and Tensor Products', Section 5, chapter pages 16-19: the singlet state, the probabilities P(a,b), the EPR-type definite-spin ensemble and the Bell inequality P(a,b) <= P(a,c) + P(c,b) that it violates",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/ffe665c0cba2eae19a83e88dec42925c_MIT8_05F13_Chap_08.pdf"
+            },
+            {
+              "title": "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.C.1.a, PDF pages 12-13: the Bell operator of the CHSH expression and the quantum bound 2 sqrt 2, attained by the singlet correlations",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            }
+          ]
+        },
+        "physical_scope": "A conditional model computation for the declared spin correlation arrangement in the singlet preparation of two declared spin-half factors: the four directional sign tables, their correlations, the CHSH value at the specified directions, the setting-independent marginals and the failure of local-response representability at settings whose CHSH value exceeds 2. The item is a thought experiment of the declared framework; it asserts no spatial separation, no temporal order, no relativistic consideration, no apparatus, no detection and no measured correlation, and it excludes only the declared class of local-response models of these tables, not hidden-variable theories in general."
+      },
+      {
+        "id": "pthm-nrqm-bell-tsirelson-bound-for-arrangements",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Tsirelson bound for every declared spin correlation arrangement of the framework",
+        "statement": "Let $(V\\widehat\\otimes V,\\rho,a_{0},a_{1},b_{0},b_{1})$ be a declared spin\ncorrelation arrangement of the two declared spin-half factors in the sense of\n[[def-nrqm-bell-declared-spin-arrangement]], with a preparation\n$\\rho\\in D(V\\widehat\\otimes V)$, unit directions\n$a_{i},b_{j}\\in\\mathbb R^{3}$, outcome laws\n$\\nu^{\\rho}_{ij}(\\varepsilon,\\delta)$ and CHSH functional\n$S(\\nu^{\\rho})$ as in clauses (d) of that definition and (d) of\n[[def-nrqm-bell-binary-correlation-models]]. Assume the Axiom of Countable\nChoice ([[def-countable-choice]]) and the Axiom of Choice\n([[def-axiom-of-choice]]), the hypotheses of the cited mathematical\nsuppliers. Then:\n\n(a) $\\bigl|S(\\nu^{\\rho})\\bigr|\\le2\\sqrt2$ for every preparation $\\rho$ and all\nunit directions $a_{0},a_{1},b_{0},b_{1}$;\n\n(b) the bound is attained: with $\\Psi:=\\frac1{\\sqrt2}(\\kappa(e_{+}\\otimes e_{-})-\\kappa(e_{-}\\otimes e_{+}))$\nand the singlet preparation $\\rho_{\\Psi}=T_{\\Psi,\\Psi}$, for the directions\n$a_{0}=(0,0,1)$, $a_{1}=(1,0,0)$, $b_{0}=(1,0,1)/\\sqrt2$,\n$b_{1}=(-1,0,1)/\\sqrt2$ one has\n$S(\\nu^{\\rho_{\\Psi}})=-2\\sqrt2$, so\n$\\bigl|S(\\nu^{\\rho_{\\Psi}})\\bigr|=2\\sqrt2$.\n\nThe statement is a conditional theorem about the declared arrangement model; it\nasserts no measured value and no apparatus realization.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-bell-declared-spin-arrangement",
+          "def-nrqm-bell-binary-correlation-models",
+          "texp-nrqm-bell-singlet-arrangement-contrast",
+          "thm-nrqm-orbital-and-spin-tsirelson-bound",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices",
+          "lem-nrqm-composites-bounded-tensor-maps",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "def-trace-class-operator",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "thm-trace-is-absolutely-convergent-and-basis-independent",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-declared-spin-arrangement": "formulation-prerequisite",
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "texp-nrqm-bell-singlet-arrangement-contrast": "physical-result",
+          "thm-nrqm-orbital-and-spin-tsirelson-bound": "mathematical-premise",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices": "mathematical-premise",
+          "lem-nrqm-composites-bounded-tensor-maps": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "def-trace-class-operator": "mathematical-premise",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal": "mathematical-premise",
+          "thm-trace-is-absolutely-convergent-and-basis-independent": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.C.1.a, PDF pages 12-13: the Bell operator of a Bell expression, the CHSH operator, the identity S^2 = 4 + [A1,A2][B1,B2], the conclusion ||S|| <= 2 sqrt 2 and the attainment by the singlet",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            },
+            {
+              "title": "L. J. Landau, 'On the violation of Bell's inequality in quantum theory', Physics Letters A 120 (1987) 54-56, as reported in the review above: the operator derivation of the CHSH quantum bound used here is verified directly from the operator identity in the proof"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 111-115 (PDF pages 119-123): the singlet correlation -a.b and the contrast with the bound of a setting-independent response model",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional bound on the CHSH functional of every declared spin correlation arrangement of the framework: for any declared composite preparation of the two spin-half factors and any two unit directions per station the absolute value of the CHSH functional of the arrangement's sign tables is at most 2 sqrt 2, and the bound is attained by the singlet preparation at the directions displayed on this page. The statement is a model theorem under the framework's composite, observable, measurement and spin readings; it asserts no measured value, no apparatus, no detection efficiency and no empirical fact."
+      },
+      {
+        "id": "rem-nrqm-bell-boundaries-and-comparison-scope",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Measurement-model boundaries of the singlet-local comparison: what the no-go excludes and what it does not",
+        "statement": "## Remarks\n\n- **What the comparison establishes.** For the declared spin correlation\n  arrangement of [[def-nrqm-bell-declared-spin-arrangement]], the four sign\n  tables are the laws $\\nu^{\\rho}_{ij}(\\varepsilon,\\delta)$ of clause (d) of\n  that definition. If the arrangement's CHSH functional satisfies\n  $|S(\\nu^{\\rho})|>2$, then the four tables admit no local-response model:\n  every local-response representation would give $|S|\\le2$ by\n  [[thm-nrqm-bell-local-representations-satisfy-chsh]]. The singlet at the\n  directions of [[texp-nrqm-bell-singlet-arrangement-contrast]] is the\n  displayed instance, with $|S|=2\\sqrt2$. The statement is a conditional\n  no-go for one precisely defined class of models of one precisely defined set\n  of four tables.\n\n- **What is not excluded.** The theorem concerns models of the four tables\n  that consist of one specification space whose probability law is the same\n  for all setting pairs, together with per-station response laws that do not\n  depend on the distant setting ([[def-nrqm-bell-local-response-representation]]\n  clauses (a), (c)). Models outside that class are not addressed: a model\n  whose specification or response is allowed to depend on the distant setting,\n  a model that does not reproduce all four tables simultaneously, or a model\n  of a different arrangement or of a different measurement structure is not\n  excluded. In particular the comparison does not rule out \"hidden variables\"\n  in general, and it does not claim that no completion of quantum mechanics\n  exists; it excludes the declared local-response class for these tables.\n\n- **Assumptions used.** The deduction rests on the framework readings P1, P2,\n  P3, P6 and P7 fixed by\n  [[def-nrqm-bell-declared-spin-arrangement]], on the declared composite,\n  preparation and spin-half assignments, on the ideal sharp character of the\n  declared measurements ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]]),\n  and on the cited mathematics (the finite-dimensional tensor calculus, the\n  CHSH bound for representable models and the operator bound of\n  [[pthm-nrqm-bell-tsirelson-bound-for-arrangements]]). Changing one of these\n  readings voids the conditional conclusion for the changed model; it does not\n  weaken it, and a replacement conclusion needs its own proof.\n\n- **Measurement-model boundary.** The declared sign measurements have exactly\n  two outcomes with sign labels $\\pm1$; detection efficiency, finite\n  resolution, dark counts, background, drift and loss are outside the\n  arrangement and require their own apparatus models. In particular an\n  observed violation on a recorded sub-ensemble does not by itself contradict\n  the declared model class: the recorded tables are conditional tables, and\n  the CHSH bound transfers to them only when the selection is itself\n  setting-independent, as in\n  [[lem-nrqm-bell-setting-independent-selection-closure]]; that lemma is a\n  sufficient condition and is not a claim about any real detector. Finite\n  samples add a sampling model and its fluctuations, treated on the examples\n  page, and no finite sample decides between the models with certainty.\n\n- **No-signalling is not the separator.** Every local-response model is\n  no-signalling ([[prop-nrqm-bell-local-representations-are-no-signalling]]),\n  and the arrangement's marginals are also setting-independent\n  ([[texp-nrqm-bell-singlet-arrangement-contrast]] clause (d)); a discarded\n  declared local instrument on one factor leaves the other factor unchanged\n  ([[pthm-nrqm-composites-local-instruments-and-no-signalling]] clause (b)).\n  The contrast between the two classes therefore lies in the joint tables,\n  not in any dependence of one station's marginal law on the distant setting.\n\n- **Attainment and sharpness.** The value $2\\sqrt2$ is attained for the\n  declared arrangement\n  ([[pthm-nrqm-bell-tsirelson-bound-for-arrangements]] clause (b)), so within\n  the declared class of binary sharp readouts of self-adjoint involutions no\n  smaller uniform bound for the CHSH functional is available. This says\n  nothing about other functionals, other numbers of settings, unsharp\n  measurements or other systems.\n\n- **Interpretation.** The result is a statement about four probability\n  tables. It identifies no mechanism, no influence between the stations and\n  no preferred frame; the arrangement carries no spatial or temporal\n  structure. Interpretations that attach additional physical content to the\n  violation are not part of the deduction and are not asserted here. Whether\n  a laboratory arrangement realizes the declared model and what a recorded\n  sample shows are separate matters under the preparation and apparatus\n  postulate P7 ([[post-nrqm-framework-preparation-and-apparatus]]).",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-bell-declared-spin-arrangement",
+          "def-nrqm-bell-binary-correlation-models",
+          "def-nrqm-bell-local-response-representation",
+          "thm-nrqm-bell-local-representations-satisfy-chsh",
+          "lem-nrqm-bell-setting-independent-selection-closure",
+          "texp-nrqm-bell-singlet-arrangement-contrast",
+          "pthm-nrqm-bell-tsirelson-bound-for-arrangements",
+          "prop-nrqm-bell-local-representations-are-no-signalling",
+          "pthm-nrqm-composites-local-instruments-and-no-signalling",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-declared-spin-arrangement": "formulation-prerequisite",
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "def-nrqm-bell-local-response-representation": "mathematical-premise",
+          "thm-nrqm-bell-local-representations-satisfy-chsh": "mathematical-premise",
+          "lem-nrqm-bell-setting-independent-selection-closure": "mathematical-premise",
+          "texp-nrqm-bell-singlet-arrangement-contrast": "physical-result",
+          "pthm-nrqm-bell-tsirelson-bound-for-arrangements": "physical-result",
+          "prop-nrqm-bell-local-representations-are-no-signalling": "mathematical-premise",
+          "pthm-nrqm-composites-local-instruments-and-no-signalling": "physical-result",
+          "def-nrqm-measurement-framework-declared-measurements-and-instruments": "formulation-prerequisite",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.A and Section II.C, PDF pages 2-4 and 8-13: the definition of a local model, the CHSH inequality and the quantum bound, and the distinction between the declared model class and broader interpretations",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 111-115 (PDF pages 119-123): the setting-independent response-function model, the Bell inequality it satisfies and the qualifications of the experimental discussion",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A record of the boundaries of the comparison between the declared spin correlation arrangement and the declared class of local-response models: the exact class excluded, the assumptions on which the conditional exclusion rests, the ideal sharp character of the declared measurements, the separate detection, selection and finite-sample models needed for any comparison with recorded data, and the no-signalling properties shared by both sides. The remark asserts no empirical result and no claim about nature."
+      },
+      {
+        "id": "rem-nrqm-bell-scope-and-empirical-status",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Scope and empirical status of the Bell-models page: conditional model results and the deferred experiment destination",
+        "statement": "- **What the page contains.** Mathematical vocabulary for binary correlation\n  models and their local-response representations\n  ([[def-nrqm-bell-binary-correlation-models]],\n  [[def-nrqm-bell-local-response-representation]]), the CHSH bound for every\n  representable model ([[thm-nrqm-bell-local-representations-satisfy-chsh]]),\n  the preservation of representability and of the bound under a\n  setting-independent selection\n  ([[lem-nrqm-bell-setting-independent-selection-closure]]), the exact joint\n  laws of the two-factor singlet ([[lem-nrqm-bell-singlet-pairings]]), the\n  declared spin correlation arrangement of the framework\n  ([[def-nrqm-bell-declared-spin-arrangement]]), the singlet computation with\n  the failure of local-response representability at violating settings\n  ([[texp-nrqm-bell-singlet-arrangement-contrast]]) and the Tsirelson bound\n  with its attainment\n  ([[pthm-nrqm-bell-tsirelson-bound-for-arrangements]]). All are conditional\n  model statements; the spin-arrangement and spin-comparison claims carry the\n  Axiom of Countable Choice ([[def-countable-choice]]) and the Axiom of Choice\n  ([[def-axiom-of-choice]]) stated in their supplier hypotheses.\n\n- **What the page does not contain.** No experiment item, no reported count,\n  no calibration, no detector efficiency, no loss model, no background, no\n  trial-level uncertainty analysis, no p-value, no confidence level and no\n  measured correlation. None of the computations establishes that the\n  framework or any of its postulates describes nature, and none of them\n  asserts that any laboratory procedure realizes the declared arrangement.\n  The marginals, tables and correlations are model probabilities for the\n  declared preparation; the identification of a concrete apparatus with the\n  declared measurements, and of repetitions with a sampling model, is the\n  tested identification with uncertainty of clause (iii) of the preparation\n  and apparatus postulate P7\n  ([[post-nrqm-framework-preparation-and-apparatus]]).\n\n- **Deferred experiment destination.** The design of this pair reserves an\n  experiment item for a Bell test. Such an item is not built here: it would\n  require reading a primary or authoritative full report and recording its\n  source-specific preparation and apparatus, calibration, measured outputs,\n  trial count where reported, detection efficiency, loss and post-selection,\n  background, the reported statistical treatment and systematics, and the\n  source's omissions; none of the sources read for this page supplies that\n  level of detail. The sources' experimental remarks motivate the model\n  comparison only: Binney's section 6.1.4 refers to the 1972\n  Freedman-Clauser test and cites a 1998 photonic test, and the MIT chapter\n  closes with the statement that experiments have confirmed violations; no\n  numerical value from those secondary accounts is reproduced here as an\n  observation, and no interval, count or precision is asserted. The\n  statistics and primary-report gap named in the design is recorded as an\n  open destination.\n\n- **Source qualifications not imported.** The same sources contain general\n  conclusions that the comparison rules out hidden variables as such or that\n  quantum mechanics cannot be superseded by a theory with a definite spin\n  direction. Those conclusions are stronger than the conditional statement\n  proved here \u2014 which excludes only the declared local-response class of the\n  declared tables \u2014 and are not imported. Likewise the operator bound used on\n  this page is proved by the operator-norm route of the cited mathematics\n  (the identity for the square of the CHSH operator and the norm bound); no\n  reversed variance inequality of the form\n  $\\langle C^{2}\\rangle\\le\\langle C\\rangle^{2}$ and no commutator estimate is\n  used as a premise.\n\n- **What a comparison with data could show.** Under declared preparation,\n  detection, settings, selection and sampling models, agreement of recorded\n  frequencies with the arrangement's tables supports the combined model and\n  apparatus assumptions. The bound $|S(\\mu)|\\le2$ constrains the correlations\n  of a local-response model's probability tables, rather than every finite\n  sample estimate $\\widehat S$. A finite recorded estimate with\n  $|\\widehat S|>2$ can have positive probability under that model; finite-sample\n  fluctuations are treated in [[texp-nrqm-bell-finite-sample-chsh]]. Evidence\n  against a specified model class requires an explicit statistical test with\n  its sampling assumptions, uncertainty and error control, together with the\n  apparatus and selection qualifications. A threshold crossing alone does\n  not deductively exclude the class, and a p-value is not the probability\n  that the class is false. Agreement does not prove the framework, and a null\n  or reduced result does not by itself falsify it.\n\n- **Interpretation and scope of the model.** The arrangement assigns no\n  spatial positions, separation or temporal order to the two factors, so no\n  relativistic locality principle is modelled here; the exclusion is a\n  statement about the four tables. The boundaries of the comparison are\n  recorded in [[rem-nrqm-bell-boundaries-and-comparison-scope]], and no\n  interpretation of the violation beyond those boundaries is asserted.",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-bell-declared-spin-arrangement",
+          "def-nrqm-bell-binary-correlation-models",
+          "def-nrqm-bell-local-response-representation",
+          "thm-nrqm-bell-local-representations-satisfy-chsh",
+          "lem-nrqm-bell-setting-independent-selection-closure",
+          "lem-nrqm-bell-singlet-pairings",
+          "texp-nrqm-bell-singlet-arrangement-contrast",
+          "pthm-nrqm-bell-tsirelson-bound-for-arrangements",
+          "rem-nrqm-bell-boundaries-and-comparison-scope",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "texp-nrqm-bell-finite-sample-chsh"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-declared-spin-arrangement": "formulation-prerequisite",
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "def-nrqm-bell-local-response-representation": "mathematical-premise",
+          "thm-nrqm-bell-local-representations-satisfy-chsh": "mathematical-premise",
+          "lem-nrqm-bell-setting-independent-selection-closure": "mathematical-premise",
+          "lem-nrqm-bell-singlet-pairings": "mathematical-premise",
+          "texp-nrqm-bell-singlet-arrangement-contrast": "physical-result",
+          "pthm-nrqm-bell-tsirelson-bound-for-arrangements": "physical-result",
+          "rem-nrqm-bell-boundaries-and-comparison-scope": "formulation-prerequisite",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "texp-nrqm-bell-finite-sample-chsh": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 17,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Brunner et al., Bell nonlocality, Section VII.B.3, PDF page 52: finite statistics and conditional statistical evidence against local models",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 111-115 (PDF pages 119-123): the EPR/Bell discussion, the mention of the 1972 test and the citation of a 1998 photonic test, together with its unsupported general conclusions, which this page does not import",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 8 'Multiparticle States and Tensor Products', Section 5, chapter pages 16-20: the singlet, the definite-spin ensemble, the Bell inequality, and the closing statement that experiments show the inequalities violated, without trial-level detail",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/ffe665c0cba2eae19a83e88dec42925c_MIT8_05F13_Chap_08.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A scope and evidence record for the page: the conditional model items it contains, the empirical content it does not contain, the qualifications of the sources' experimental remarks that are not imported, and the deferred destination of a Bell-test experiment item with its required preparation, apparatus, calibration, loss and statistical qualifications. The record asserts no empirical result, no measured correlation and no claim about nature."
+      }
+    ]
+  },
+  {
+    "order": 192,
+    "id": "qm-bell-models-and-measurement-limits-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Bell Models And Measurement Limits \u2014 Examples",
+    "companion": "qm-bell-models-and-measurement-limits",
+    "requires": [
+      "qm-bell-models-and-measurement-limits",
+      "qm-math-composites",
+      "qm-composites-entanglement-and-reduced-states",
+      "qm-angular-momentum-and-spin",
+      "qm-math-orbital-and-spin",
+      "qm-framework-and-quantities"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqm-bell-worked-angles-and-product-mixture",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Worked Bell angles: the singlet against the EPR product mixture at the same directions",
+        "statement": "Adopt the declared spin correlation arrangement of\n[[def-nrqm-bell-declared-spin-arrangement]] over the two declared spin-half\nfactors $V,V$ with basis $(e_{+},e_{-})$. Assume the Axiom of Countable Choice\nand the Axiom of Choice, as required\nby the cited singlet, spin-spectrum and arrangement suppliers\n([[def-countable-choice]], [[def-axiom-of-choice]]). Fix the orthonormal vectors\n$e_{1}:=(1,0,0)$, $e_{2}:=(0,1,0)$, $e_{3}:=(0,0,1)$ and the four unit\ndirections\n$$a_{0}:=e_{3},\\qquad a_{1}:=e_{1},\\qquad b_{0}:=\\frac{e_{3}+e_{1}}{\\sqrt2},\\qquad b_{1}:=\\frac{e_{3}-e_{1}}{\\sqrt2}.$$\nConsider two arrangements over these same directions:\n\n- the **singlet arrangement**, with the singlet preparation\n  $\\rho_{\\Psi}=T_{\\Psi,\\Psi}$,\n  $\\Psi=\\frac1{\\sqrt2}(\\kappa(e_{+}\\otimes e_{-})-\\kappa(e_{-}\\otimes e_{+}))$;\n- the **product-mixture arrangement**, with the EPR-type mixture\n  $$M:=\\tfrac12\\,T_{e_{+}\\otimes e_{-},\\,e_{+}\\otimes e_{-}} +\\tfrac12\\,T_{e_{-}\\otimes e_{+},\\,e_{-}\\otimes e_{+}} ,$$\n  a convex combination of the two product preparations of definite opposite\n  spins along $e_{3}$.\n\nThen:\n\n(a) for the singlet arrangement the four correlations are\n$$E_{00}=E_{01}=E_{10}=-\\frac{1}{\\sqrt2},\\qquad E_{11}=+\\frac{1}{\\sqrt2}, \\qquad S(\\nu^{\\rho_{\\Psi}})=-2\\sqrt2 ;$$\n\n(b) for the product-mixture arrangement the four sign tables are\n$$\\nu^{M}_{ij}(\\varepsilon,\\delta)=\\tfrac14\\bigl(1-\\varepsilon\\delta\\, (a_{i})_{3}(b_{j})_{3}\\bigr),$$\nso its correlations are $E_{ij}=- (a_{i})_{3}(b_{j})_{3}$; at the displayed\ndirections $(a_{0})_{3}=1$, $(a_{1})_{3}=0$ and\n$(b_{0})_{3}=(b_{1})_{3}=1/\\sqrt2$, hence\n$$E_{00}=E_{01}=-\\frac{1}{\\sqrt2},\\qquad E_{10}=E_{11}=0,\\qquad S(\\nu^{M})=-\\sqrt2 ;$$\n\n(c) the mixture's tables admit a local-response model\n([[def-nrqm-bell-local-response-representation]]): on the two-point\nspecification space, the response laws\n$$\\alpha_{i}(1,\\varepsilon)=\\tfrac12(1+\\varepsilon(a_{i})_{3}),\\quad \\alpha_{i}(2,\\varepsilon)=\\tfrac12(1-\\varepsilon(a_{i})_{3}),\\quad \\beta_{j}(1,\\delta)=\\tfrac12(1-\\delta(b_{j})_{3}),\\quad \\beta_{j}(2,\\delta)=\\tfrac12(1+\\delta(b_{j})_{3})$$\nwith specification weights $\\tfrac12,\\tfrac12$ reproduce\n$\\nu^{M}$; consequently $\\bigl|S(\\nu^{M})\\bigr|=\\sqrt2\\le2$, as the bound for\nrepresentable models requires\n([[thm-nrqm-bell-local-representations-satisfy-chsh]]);\n\n(d) both arrangements have the same marginal sign laws\n$\\nu^{A}(\\pm)=\\nu^{B}(\\pm)=\\tfrac12$ for every direction, and the same reduced\npreparation $\\operatorname{Tr}_{B}M=\\tfrac12I=\\operatorname{Tr}_{B}\\rho_{\\Psi}$\non each factor, although their joint tables and CHSH functionals differ:\n$\\bigl|S(\\nu^{\\rho_{\\Psi}})\\bigr|=2\\sqrt2>2\\ge\\sqrt2=\\bigl|S(\\nu^{M})\\bigr|$.\n\nAll clauses are conditional computations in the declared framework; no\nmeasured correlation is asserted.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-bell-declared-spin-arrangement",
+          "def-nrqm-bell-binary-correlation-models",
+          "def-nrqm-bell-local-response-representation",
+          "lem-nrqm-bell-singlet-pairings",
+          "thm-nrqm-bell-local-representations-satisfy-chsh",
+          "texp-nrqm-bell-singlet-arrangement-contrast",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "lem-nrqm-composites-separable-partial-trace",
+          "pthm-nrqm-composites-local-statistics-of-products-and-entangled-preparations",
+          "pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-declared-spin-arrangement": "formulation-prerequisite",
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "def-nrqm-bell-local-response-representation": "mathematical-premise",
+          "lem-nrqm-bell-singlet-pairings": "mathematical-premise",
+          "thm-nrqm-bell-local-representations-satisfy-chsh": "mathematical-premise",
+          "texp-nrqm-bell-singlet-arrangement-contrast": "physical-result",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "lem-nrqm-composites-separable-partial-trace": "mathematical-premise",
+          "pthm-nrqm-composites-local-statistics-of-products-and-entangled-preparations": "physical-result",
+          "pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws": "physical-result",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 8 'Multiparticle States and Tensor Products', Section 5, chapter pages 16-19: the singlet probabilities P(a,b) at orthogonal and 45-degree directions and the EPR-type ensemble of definite opposite spins, with P(z,-z)=1/2 and P(z,x)=1/4",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/ffe665c0cba2eae19a83e88dec42925c_MIT8_05F13_Chap_08.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 111-115 (PDF pages 119-123): the singlet correlation -a.b, the four-case expectation of the product, and the EPR discussion of an ensemble with definite opposite spins",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A finite conditional computation in the declared spin correlation arrangement of the framework at four specified directions: the singlet's four sign tables and CHSH value, the tables and CHSH value of the EPR-type product mixture of definite opposite spins, an explicit local-response representation of the mixture's tables, and the comparison of the two arrangements. The example asserts no measured correlation, no apparatus and no empirical fact; it makes no claim that any laboratory preparation realizes either arrangement."
+      },
+      {
+        "id": "texp-nrqm-bell-finite-sample-chsh",
+        "kind": "thought-experiment",
+        "domain": "physics",
+        "title": "Finite samples of a declared arrangement: the CHSH estimator, its concentration and the limits of a finite-sample verdict",
+        "statement": "Adopt a declared spin correlation arrangement $(V\\widehat\\otimes V,\\rho,\na_{0},a_{1},b_{0},b_{1})$ of [[def-nrqm-bell-declared-spin-arrangement]]\nwith its outcome laws $\\nu^{\\rho}_{ij}(\\varepsilon,\\delta)$, correlations\n$E_{ij}=E_{ij}(\\nu^{\\rho})$ and CHSH functional\n$S=S(\\nu^{\\rho})$. Let $n\\ge1$ and declare the following **sampling model**\n(the statistical model of clause (ii) of the preparation and apparatus\npostulate P7, [[post-nrqm-framework-preparation-and-apparatus]]): on a\nprobability space $(\\Omega,\\mathcal F,\\mathbb P)$ let\n$$\\bigl(\\Sigma_{ijk},\\mathrm T_{ijk}\\bigr)_{\\substack{i,j\\in\\{0,1\\}\\\\ k\\in\\{1,\\dots,n\\}}}$$\nbe $4n$ random elements with values in $\\Sigma\\times\\Sigma$ that are\n**mutually independent** and have the declared laws\n$$\\mathbb P\\bigl((\\Sigma_{ijk},\\mathrm T_{ijk})=(\\varepsilon,\\delta)\\bigr) =\\nu^{\\rho}_{ij}(\\varepsilon,\\delta) \\qquad\\text{for every }i,j,k,\\varepsilon,\\delta$$\n([[def-independence-of-finite-random-variables]],\n[[def-random-element-and-real-random-variable]]). Define the **sample\ncorrelations** and the **sample CHSH functional**\n$$\\widehat E_{ij}:=\\frac1n\\sum_{k=1}^{n}\\Sigma_{ijk}\\mathrm T_{ijk}, \\qquad \\widehat S:=\\widehat E_{00}+\\widehat E_{01}+\\widehat E_{10}-\\widehat E_{11}.$$\nThen:\n\n(a) $\\mathbb E[\\widehat E_{ij}]=E_{ij}$ and\n$\\operatorname{Var}(\\widehat E_{ij})\\le1/n$ for all $(i,j)$;\n\n(b) $\\mathbb E[\\widehat S]=S$, $\\operatorname{Var}(\\widehat S)\\le4/n$, and\nfor every $\\varepsilon>0$\n$$\\mathbb P\\bigl(|\\widehat S-S|\\ge\\varepsilon\\bigr)\\le\\frac{4}{n\\varepsilon^{2}} ;$$\n\n(c) threshold consequences: if the declared model satisfies\n$S\\le2-\\varepsilon$ for some $\\varepsilon>0$, then\n$\\mathbb P(\\widehat S>2)\\le4/(n\\varepsilon^{2})$; if the declared model is\nthe singlet arrangement with $S=-2\\sqrt2$ and\n$\\varepsilon:=2\\sqrt2-2$, then\n$\\mathbb P(\\widehat S\\ge-2)\\le4/(n\\varepsilon^{2})$. Moreover, for every\ndeclared acceptance criterion $C\\subseteq(\\Sigma\\times\\Sigma)^{4n}$ that\nrejects at least one outcome sequence $(x_{ijk})$ with\n$\\prod_{i,j,k}\\nu^{\\rho}_{ij}(x_{ijk})>0$, the failure probability of the\ncriterion is at least $\\prod_{i,j,k}\\nu^{\\rho}_{ij}(x_{ijk})>0$;\n\n(d) scope: the independence, the identical distribution and the tables\n$\\nu^{\\rho}$ are declared model assumptions of the sampling model, not\nconsequences of P1-P6; clauses (a)-(c) assert no measured count, no p-value,\nno error rate, no power, no required sample size and no empirical conclusion.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-bell-declared-spin-arrangement",
+          "def-nrqm-bell-binary-correlation-models",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "def-probability-measure",
+          "def-random-element-and-real-random-variable",
+          "def-independence-of-finite-random-variables",
+          "def-moments-variance-and-covariance",
+          "cor-chebyshev-inequality-for-random-variables",
+          "cor-variance-adds-for-pairwise-independent-random-variables",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "lem-nrqm-composites-chsh-and-finite-sampling-law",
+          "def-finite-sum"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-declared-spin-arrangement": "formulation-prerequisite",
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption",
+          "def-probability-measure": "mathematical-premise",
+          "def-random-element-and-real-random-variable": "mathematical-premise",
+          "def-independence-of-finite-random-variables": "mathematical-premise",
+          "def-moments-variance-and-covariance": "mathematical-premise",
+          "cor-chebyshev-inequality-for-random-variables": "mathematical-premise",
+          "cor-variance-adds-for-pairwise-independent-random-variables": "mathematical-premise",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound": "mathematical-premise",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable": "mathematical-premise",
+          "lem-nrqm-composites-chsh-and-finite-sampling-law": "mathematical-premise",
+          "def-finite-sum": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 113-115 (PDF pages 121-123): the estimation of the two sides of Bell's inequality from finite series of trials, and the statement that a value is estimated from the results",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 8 'Multiparticle States and Tensor Products', Section 5, chapter pages 16-19: the singlet probabilities and the definite-spin ensemble compared through accumulated frequencies of many trials",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/ffe665c0cba2eae19a83e88dec42925c_MIT8_05F13_Chap_08.pdf"
+            },
+            {
+              "title": "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section I.A, PDF pages 2-3: the joint probabilities of a Bell experiment estimated from repeated runs, and the assumption that the settings are chosen independently of the specification",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            }
+          ]
+        },
+        "physical_scope": "A conditional finite-sampling analysis for a declared spin correlation arrangement: under a declared independent and identically distributed sampling model with n runs per setting pair, the sample CHSH functional is unbiased, has variance at most 4/n and satisfies the stated Chebyshev concentration inequality; threshold events on either side of 2 have explicitly bounded model probabilities, and every acceptance criterion that rejects a positive-probability outcome sequence fails with positive probability. The item asserts no measured count, no p-value, no power, no error rate, no sample size and no empirical conclusion; the independence and identical distribution of trials is the declared statistical assumption of clause (ii) of P7, not a consequence of the framework."
+      },
+      {
+        "id": "rem-nrqm-bell-selection-loss-and-fair-sampling",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Selection and loss: the precise hypothesis under which the CHSH bound transfers to recorded pairs",
+        "statement": "## Remarks\n\n- **Recorded tables are conditional tables.** The arrangement's laws\n  $\\nu^{\\rho}_{ij}$ of\n  [[def-nrqm-bell-declared-spin-arrangement]] clause (d) describe a declared\n  pair of local sign measurements for every setting pair on the declared\n  preparation. A comparison with recorded data ordinarily uses only the runs\n  in which both stations register an event; the laws of the recorded runs are\n  therefore **conditional laws** of a larger model, and they are not the\n  arrangement's tables unless a detection and selection model connecting the\n  two is declared. This is part of the preparation and apparatus discipline of\n  P7 clause (i) ([[post-nrqm-framework-preparation-and-apparatus]]).\n\n- **A sufficient condition for the transfer.** If the full tables admit a\n  local-response representation and the recorded runs are exactly those\n  specifications lying in a measurable selection event $D$ of the\n  specification space with $\\mathbb P(D)>0$ \u2014 the same event for every setting\n  pair, independent of the settings and of the outcomes \u2014 then the conditional\n  tables again admit a local-response representation, with the same response\n  laws over the conditional measure, and hence satisfy the CHSH bound\n  ([[lem-nrqm-bell-setting-independent-selection-closure]]). This is the\n  mathematical content of a **setting-independent detection** or\n  **fair-sampling** hypothesis for the declared model class.\n\n- **The condition is a hypothesis, not a theorem about detectors.** The\n  selection-closure lemma is a conditional statement about the declared model.\n  It does not assert that any laboratory detector, coincidence circuit or\n  post-selection rule realizes a selection event of the required form;\n  identifying a concrete apparatus with such a model is a tested\n  identification with uncertainty under P7 and carries its calibration and\n  control-experiment qualifications. Efficiency, dead time, misalignment,\n  background and drift each require their own declared model.\n\n- **No transfer without a selection model.** If the recorded sample is\n  selected by a rule that depends on the settings or on the observed outcomes,\n  the selection-closure lemma does not apply, and no claim is made here that\n  the CHSH bound constrains the recorded tables. Correspondingly, a deviation\n  computed from recorded pairs is a statement about those recorded tables and\n  their own declared model; it becomes a statement about the full arrangement\n  only through a declared selection model of the kind above. The finite-sample\n  fluctuation of any such computed functional is a further, separate matter,\n  treated in [[texp-nrqm-bell-finite-sample-chsh]], and the singlet contrast\n  itself is the conditional model computation of\n  [[texp-nrqm-bell-singlet-arrangement-contrast]].\n\n- **Settings choice.** A test in which the settings are chosen by a procedure\n  whose outcome could depend on the specification would not be described by\n  one common probability law over the specification space for all setting\n  pairs, which is part of the definition of a local-response representation\n  ([[def-nrqm-bell-local-response-representation]] clause (c)). Randomizing or\n  otherwise fixing the setting choice is a procedure-level assumption of the\n  experiment's own model; this page neither assumes nor reports such a\n  procedure.",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-bell-declared-spin-arrangement",
+          "def-nrqm-bell-local-response-representation",
+          "lem-nrqm-bell-setting-independent-selection-closure",
+          "texp-nrqm-bell-singlet-arrangement-contrast",
+          "texp-nrqm-bell-finite-sample-chsh",
+          "post-nrqm-framework-preparation-and-apparatus"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-declared-spin-arrangement": "formulation-prerequisite",
+          "def-nrqm-bell-local-response-representation": "mathematical-premise",
+          "lem-nrqm-bell-setting-independent-selection-closure": "mathematical-premise",
+          "texp-nrqm-bell-singlet-arrangement-contrast": "physical-result",
+          "texp-nrqm-bell-finite-sample-chsh": "physical-result",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.A, PDF page 3: the local decomposition and the assumption that the settings are chosen independently of the specification, the formal basis of a setting-independent selection model",
+              "url": "https://arxiv.org/pdf/1303.2849"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 113-115 (PDF pages 121-123): the estimation of the two sides of Bell's inequality from recorded series of trials",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A record of the detection and selection qualification of any comparison between a declared arrangement and recorded coincidences: the recorded tables are conditional tables; the CHSH bound transfers to them when the recorded runs are selected by an event of the specification space that is the same for every setting pair, as the selection-closure lemma states; without a declared selection model no transfer is claimed, and no assertion is made that any real detector satisfies the condition. The remark reports no measurement and no efficiency."
+      },
+      {
+        "id": "rem-nrqm-bell-examples-scope-limits",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Scope of the examples page: conditional computations, no experiment, and the deferred Bell-test destination",
+        "statement": "## Remarks\n\n- **What the page contains.** Three conditional computations in the declared\n  framework: the worked comparison at the specified directions between the\n  singlet arrangement and the EPR-type product mixture, with both CHSH values\n  and an explicit local-response representation of the mixture\n  ([[ex-nrqm-bell-worked-angles-and-product-mixture]]); the finite-sample\n  behaviour of the sample CHSH functional under a declared independent and\n  identically distributed sampling model, with its concentration inequality\n  and positive failure probabilities\n  ([[texp-nrqm-bell-finite-sample-chsh]]); and the selection and loss\n  qualification, with the precise hypothesis under which the CHSH bound\n  transfers to recorded pairs\n  ([[rem-nrqm-bell-selection-loss-and-fair-sampling]]).\n\n- **What the page does not contain.** No experiment item, no reported count,\n  no calibration, no detector efficiency, no loss fraction, no background\n  model, no trial-level uncertainty analysis, no p-value and no confidence\n  level. The worked tables, the sample functional and the failure\n  probabilities are probabilities of the declared models; no number on the\n  page is an observation. The identification of any apparatus with the\n  declared measurements and of any repetition procedure with the declared\n  sampling model is a tested identification with uncertainty under P7\n  ([[post-nrqm-framework-preparation-and-apparatus]]).\n\n- **Deferred Bell-test experiment destination.** The design of the pair\n  reserves an experiment item for a Bell test. It is not built here because\n  none of the sources read for the pair supplies the required trial-level\n  material: a primary or authoritative full report read directly, with the\n  source-specific preparation and apparatus, calibration, measured outputs,\n  trial count where reported, detection efficiency, losses and\n  post-selection, background, the reported statistical treatment and\n  systematics, and the source's omissions. The experimental remarks of the\n  secondary sources \u2014 Binney's reference to the 1972 Freedman-Clauser test\n  and its citation of a 1998 photonic test, and the MIT chapter's statement\n  that experiments have confirmed violations \u2014 motivate the comparison only\n  and are not used as measured records; no numerical value from them is\n  reproduced. The statistics and primary-report gap named in the design is\n  recorded as an open destination.\n\n- **Why a null or shifted sample is not a verdict.** The mixture's tables have\n  CHSH value $-\\sqrt2$ in absolute value, strictly below both the classical\n  bound $2$ and the singlet's $2\\sqrt2$\n  ([[ex-nrqm-bell-worked-angles-and-product-mixture]]), and the finite-sample\n  analysis bounds the probability that a model's sample functional crosses\n  either threshold by a strictly positive quantity\n  ([[texp-nrqm-bell-finite-sample-chsh]]). A finite sample therefore does not\n  by itself decide between the declared models; a comparison requires the\n  full battery of preparation, detection, selection and sampling assumptions,\n  and agreement would be evidence about the combined assumptions, not a proof\n  of the framework.\n\n- **Model contrast is not an interpretation.** The page compares the tables of\n  two declared arrangements and the class of local-response models of those\n  tables ([[thm-nrqm-bell-local-representations-satisfy-chsh]]); it makes no\n  claim about the completeness of quantum mechanics, about hidden variables in\n  general, about mechanisms or about any interpretation of the violation. The\n  boundaries of the comparison are recorded on the pair's first page.\n",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-bell-declared-spin-arrangement",
+          "def-nrqm-bell-binary-correlation-models",
+          "def-nrqm-bell-local-response-representation",
+          "thm-nrqm-bell-local-representations-satisfy-chsh",
+          "ex-nrqm-bell-worked-angles-and-product-mixture",
+          "texp-nrqm-bell-finite-sample-chsh",
+          "rem-nrqm-bell-selection-loss-and-fair-sampling",
+          "post-nrqm-framework-preparation-and-apparatus",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-bell-declared-spin-arrangement": "formulation-prerequisite",
+          "def-nrqm-bell-binary-correlation-models": "mathematical-premise",
+          "def-nrqm-bell-local-response-representation": "mathematical-premise",
+          "thm-nrqm-bell-local-representations-satisfy-chsh": "mathematical-premise",
+          "ex-nrqm-bell-worked-angles-and-product-mixture": "formulation-prerequisite",
+          "texp-nrqm-bell-finite-sample-chsh": "physical-result",
+          "rem-nrqm-bell-selection-loss-and-fair-sampling": "formulation-prerequisite",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 8 'Multiparticle States and Tensor Products', Section 5, chapter pages 16-20: the singlet probabilities, the definite-spin ensemble and the closing experimental remark without trial-level detail",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/ffe665c0cba2eae19a83e88dec42925c_MIT8_05F13_Chap_08.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 111-115 (PDF pages 119-123): the experimental discussion of the Bell comparison and the stated estimation of the two sides from recorded trials",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A scope record for the examples page of the pair: the conditional computations it contains, the empirical content it does not contain, and the deferred Bell-test experiment destination with its required preparation, apparatus, calibration, loss and statistical qualifications. The record asserts no measured correlation, no count and no empirical conclusion."
+      }
+    ]
+  }
+]

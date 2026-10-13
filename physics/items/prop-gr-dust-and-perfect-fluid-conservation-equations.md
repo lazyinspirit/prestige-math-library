@@ -39,13 +39,15 @@ matter domain ([[def-gr-smooth-lorentzian-objects]],
 [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]],
 [[prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure]]).
 
-**(a) Dust.** Let $(\rho,u,T)$ be a dust model on $U$
+**(a) Dust.** Let $(\rho,u)$ be a dust model on $U$, and let
+$T_{ab}:=\rho u_a u_b$ be its derived tensor
 ([[def-gr-dust-matter-model]]). Then
 
 $$\nabla^aT_{ab}=0\ \text{on }U\qquad\Longleftrightarrow\qquad \nabla_a(\rho u^a)=0\ \text{and}\ u^a\nabla_au^b=0\ \text{on }U .$$
 
-**(b) Perfect fluid.** Let $(\varepsilon,p,n,T)$ be a perfect-fluid model on
-$U$ with comoving derivative $D$, expansion $\vartheta$, acceleration $a$ and
+**(b) Perfect fluid.** Let $(\varepsilon,p,n)$ be a perfect-fluid model on
+$U$, with derived tensor $T_{ab}:=(\varepsilon+p)n_an_b+p g_{ab}$,
+comoving derivative $D$, expansion $\vartheta$, acceleration $a$ and
 projection $h$ ([[def-gr-perfect-fluid-matter-model]]). Then
 
 $$\nabla^aT_{ab}=0\ \text{on }U\qquad\Longleftrightarrow\qquad D\varepsilon+(\varepsilon+p)\vartheta=0\quad\text{and}\quad (\varepsilon+p)a^b+h^{ba}\partial_ap=0\ \text{on }U .$$
@@ -76,6 +78,6 @@ $$\nabla^aT_{ab}=0\ \text{on }U\qquad\Longleftrightarrow\qquad D\varepsilon+(\va
 
 ## Remarks
 
-- **Role of $\rho>0$ and of the projections.** In (a) the strict positivity of the rest density is used in the converse direction to divide by $\rho$; on a region where the model has $\rho=0$ the equation $\rho u^a\nabla_au_b=0$ carries no information about $u$. In (b) the two displayed equations are the contraction and the rest-space projection of the divergence; together they are equivalent to the full covector equation because $W_b=-(W_cn^c)n_b+\bigl(W_b+(W_cn^c)n_b\bigr)$ for every covector $W$.
+- **Role of $\rho>0$ and of the projections.** In (a) the strict positivity of the rest density is used in deriving the dust system from conservation to divide by $\rho$; on a region where the model has $\rho=0$ the equation $\rho u^a\nabla_au_b=0$ carries no information about $u$. In (b) the two displayed equations are the contraction and the rest-space projection of the divergence; together they are equivalent to the full covector equation because $W_b=-(W_cn^c)n_b+\bigl(W_b+(W_cn^c)n_b\bigr)$ for every covector $W$.
 
 - **No equation of state used.** Neither equivalence uses an equation of state: the equations are identities for the tensor defined from $\varepsilon,p,n$ alone. A model that adds $p=P(\varepsilon)$ restricts the admissible tuples $(\varepsilon,p,n)$, it does not change the equivalence.

@@ -11,6 +11,7 @@ origin: session
 dependency_level: 12
 deps:
   - def-countable-choice
+  - def-axiom-of-choice
   - def-nrqm-composites-framework-composite-systems-and-local-readouts
   - def-nrqm-composites-framework-reduced-preparations
   - def-nrqm-composites-separable-and-entangled-states
@@ -26,6 +27,7 @@ deps:
   - lem-nrqm-composites-pure-state-separability-criterion
 dependency_roles:
   def-countable-choice: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
   def-nrqm-composites-framework-composite-systems-and-local-readouts: formulation-prerequisite
   def-nrqm-composites-framework-reduced-preparations: formulation-prerequisite
   def-nrqm-composites-separable-and-entangled-states: formulation-prerequisite
@@ -55,15 +57,15 @@ physical_scope: 'The pure preparations of a declared composite of two
 sources:
   references:
     - title: 'J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1
-        printed pages 105-111 (PDF pages 113-119): entanglement, product states
-        and the reduced density operator; Section 6.3.1 printed pages 125-127
+        printed pages 105-111 (PDF pages 113-119): entanglement, product states;
+        Section 6.3.1 printed pages 125-127
         (PDF pages 133-135): the reduced density operator of an entangled pair
         and purity loss'
       url: https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf
     - title: 'B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 8
         ''Multiparticle States and Tensor Products'', Section 2, chapter pages
         8-9: product and entangled vectors of a two-particle space and the
-        reduced description of one factor'
+        two-dimensional determinant criterion'
       url: https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/ffe665c0cba2eae19a83e88dec42925c_MIT8_05F13_Chap_08.pdf
     - title: 'G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
         Section 1.4 printed pages 45-47 (PDF pages 57-59): the tensor
@@ -79,8 +81,10 @@ of two distinguishable subsystems $A,B$ with assigned spaces $H,K$
 ([[def-nrqm-composites-framework-composite-systems-and-local-readouts]],
 [[def-nrqm-state-geometry-framework-state-space]],
 [[def-nrqm-composites-framework-reduced-preparations]]), and assume the Axiom
-of Countable Choice ([[def-countable-choice]]), the hypothesis of the cited
-mathematical suppliers. Let $\Psi\in H\widehat\otimes K$ satisfy
+of Countable Choice ([[def-countable-choice]]). The adopted composite
+reading also carries the Axiom of Choice ([[def-axiom-of-choice]]) for its
+local spectral readouts; the Schmidt and partial-trace deductions below use
+only Countable Choice. Let $\Psi\in H\widehat\otimes K$ satisfy
 $\|\Psi\|=1$, let
 $$\rho=T_{\Psi,\Psi}\in D(H\widehat\otimes K),\qquad \rho_{A}=\operatorname{Tr}_{K}\rho\in D(H),\qquad \rho_{B}=\operatorname{Tr}_{H}\rho\in D(K)$$
 be the pure preparation of the declared composite and its two reduced
@@ -115,13 +119,13 @@ separability being outside its scope.
 
 ## Facts & Assumptions
 
-**Given:** The declared composite with assigned spaces $H,K$; a unit vector $\Psi\in H\widehat\otimes K$; the preparations $\rho,\rho_{A},\rho_{B}$; the Axiom of Countable Choice.
+**Given:** The declared composite with assigned spaces $H,K$; a unit vector $\Psi\in H\widehat\otimes K$; the preparations $\rho,\rho_{A},\rho_{B}$; the Axiom of Countable Choice and the inherited Axiom of Choice.
 
-[F1] **Schmidt expansion.** For $\Psi\in H\widehat\otimes K$ there are an at most countable $J$, orthonormal families $(v_{r})\subseteq H$, $(u_{r})\subseteq K$ and $s_{r}>0$ with $\Psi=\sum_{r}s_{r}\kappa(v_{r}\otimes u_{r})$ in norm, $\|\Psi\|^{2}=\sum_{r}s_{r}^{2}$; the $s_{r}$ are the positive square roots of the nonzero eigenvalues of the coefficient operator on countable factor supports; and for $\|\Psi\|=1$ the reduced density $\rho=\operatorname{Tr}_{K}T_{\Psi,\Psi}$ satisfies $\operatorname{tr}\rho^{2}=\sum_{r}s_{r}^{4}$, with $\operatorname{tr}\rho^{2}=1$ exactly when exactly one $s_{r}$ is nonzero, i.e. exactly when $\Psi$ is a product vector ([[thm-nrqm-composites-infinite-schmidt-decomposition]]; the completed tensor product and the embedding $\kappa$ are those of [[lem-nrqm-composites-hilbert-tensor-construction]]). For bounded $X\in\mathcal B(H)$ and $x,y\in H$ the tensor identity $(X\otimes I_{K})\kappa(x\otimes y)=\kappa(Xx\otimes y)$ holds ([[lem-nrqm-composites-bounded-tensor-maps]] clause (a)).
+[F1] **Schmidt expansion.** For $\Psi\in H\widehat\otimes K$ there are an at most countable $J$, orthonormal families $(v_{r})\subseteq H$, $(u_{r})\subseteq K$ and $s_{r}>0$ with $\Psi=\sum_{r}s_{r}\kappa(v_{r}\otimes u_{r})$ in norm, $\|\Psi\|^{2}=\sum_{r}s_{r}^{2}$; the $s_{r}$ are the positive square roots of the nonzero eigenvalues of the positive operator $CC^*:H_0\to H_0$, where $C:\overline{K_0}\to H_0$ is the linear coefficient map on countable closed factor supports of $\Psi$ from the cited Schmidt theorem (for an orthonormal basis $(f_j)$ of $K_0$ and $\Psi=\sum_jh_j\otimes f_j$, it is defined by $C\bar f_j=h_j$ and continuous linear extension); and for $\|\Psi\|=1$ the reduced density $\rho=\operatorname{Tr}_{K}T_{\Psi,\Psi}$ satisfies $\operatorname{tr}\rho^{2}=\sum_{r}s_{r}^{4}$, with $\operatorname{tr}\rho^{2}=1$ exactly when exactly one $s_{r}$ is nonzero, i.e. exactly when $\Psi$ is a product vector ([[thm-nrqm-composites-infinite-schmidt-decomposition]]; the completed tensor product and the embedding $\kappa$ are those of [[lem-nrqm-composites-hilbert-tensor-construction]]). For bounded $X\in\mathcal B(H)$, $x\in H$ and $y\in K$ the tensor identity $(X\otimes I_{K})\kappa(x\otimes y)=\kappa(Xx\otimes y)$ holds ([[lem-nrqm-composites-bounded-tensor-maps]] clause (a)).
 
 [F2] **Partial trace.** There is a linear positive trace-preserving map $\operatorname{Tr}_{K}$ on trace-class operators with $\operatorname{tr}((\operatorname{Tr}_{K}T)X)=\operatorname{tr}(T(X\otimes I_{K}))$ for every trace-class $T$ and every bounded $X\in\mathcal B(H)$ and $\|\operatorname{Tr}_{K}T\|_{1}\le\|T\|_{1}$; it maps density operators to density operators ([[lem-nrqm-composites-separable-partial-trace]] clauses (a), (b)); on rank-one operators $\operatorname{Tr}_{K}T_{u\otimes v,u'\otimes v'}=\langle v,v'\rangle T_{u,u'}$ (clause (c)).
 
-[F3] **Rank-one trace pairing.** For trace-class $S$ and $x,y\in H$ one has $\operatorname{tr}(ST_{x,y})=\langle Sx,y\rangle$, and $T_{x,x}\ge0$ with $\operatorname{tr}T_{x,x}=\|x\|^{2}$, $T_{x,y}$ being bounded with $\|T_{x,y}\|=\|x\|\,\|y\|$; the map $(x,y)\mapsto T_{x,y}$ is trace-norm continuous ([[lem-nrqm-composites-rank-one-operator-calculus]] clauses (a), (b), (c), (e), (f), [[thm-trace-class-is-a-two-sided-banach-operator-ideal]]).
+[F3] **Rank-one trace pairing.** For trace-class $S$ and $x,y\in H$ one has $\operatorname{tr}(ST_{x,y})=\langle Sx,y\rangle$, and $T_{x,x}\ge0$ with $\operatorname{tr}T_{x,x}=\|x\|^{2}$, $T_{x,y}$ being bounded with $\|T_{x,y}\|=\|x\|\,\|y\|$; the map $(x,y)\mapsto T_{x,y}$ is trace-norm continuous ([[lem-nrqm-composites-rank-one-operator-calculus]] clauses (a), (b), (c), (d), (e), (f), [[thm-trace-class-is-a-two-sided-banach-operator-ideal]]). For every bounded $X$, clauses (d) and (b) of that rank-one supplier give $T_{x,y}X=T_{x,X^*y}$ and $\operatorname{tr}(T_{x,y}X)=\langle x,X^*y\rangle=\langle Xx,y\rangle$; thus the bounded pairings used below do not require $X$ to be trace class.
 
 [F4] **Purity criterion.** A state is pure exactly when its purity $\operatorname{tr}\rho^{2}$ equals one ([[lem-nrqm-state-geometry-purity-criterion]], [[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a)).
 
@@ -152,6 +156,7 @@ the purity criterion for states.
 ## Remarks
 
 - **Pure versus mixed scope.** Clause (c) proves non-product pure preparations entangled for the full trace-norm closed convex hull. A general classification or criterion for mixed-state separability is not claimed.
-- **Choice.** Only the Axiom of Countable Choice is used, through the tensor
-  construction and the Schmidt theorem; no spectral theorem for unbounded
-  operators enters this item.
+- **Choice.** The adopted composite interface carries the Axiom of Choice
+  for local spectral readouts. The deductions in this proof use only
+  Countable Choice through the tensor construction and Schmidt theorem;
+  no spectral theorem for unbounded operators enters the deduction.

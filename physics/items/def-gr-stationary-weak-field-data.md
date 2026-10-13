@@ -27,7 +27,7 @@ sources:
       url: "https://arxiv.org/pdf/gr-qc/9712019"
     - title: "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), sections 5.1-5.1.2: the stationary weak-field ansatz g = eta + h with h_{00}=-2Phi, h_{ij}=-2Phi delta_{ij} and the Newtonian limit, printed pp. 205-210 (PDF pp. 212-217)"
       url: "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
-    - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 4.2 and the Newtonian-gravity module: weak fields, slow motion and the Poisson equation, printed p. 42 (PDF p. 43) with the Newtonian expansion of the geodesic equation"
+    - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 7.2: weak fields, slow motion and the Newtonian potential, equations (7.19)-(7.36), printed pp. 74-77 (PDF pp. 75-78); the uniform stationary-family bounds here are local hypotheses"
       url: "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
 verification:
   precheck: pass
@@ -95,11 +95,27 @@ $\Omega$ ([[def-gr-smooth-covariant-two-tensor-field]]) satisfying
 
 $$G_{ab}\bigl(g(\varepsilon)\bigr)=\kappa\,T_{ab}(\varepsilon)\qquad\text{on }\Omega,$$
 
-where $G$ is the Einstein tensor of the metric-selected connection of
-$g(\varepsilon)$
-([[def-gr-metric-selected-connection]],
-[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]],
-[[def-gr-curvature-tensor-and-derived-tensors]]). In that case define the
+where the connection of $g(\varepsilon)$ is the unique torsion-free,
+metric-compatible connection supplied for any smooth nondegenerate metric
+by [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]] clauses (a)-(b),
+with that supplier's $\mathrm{AC}_\omega$ convention. Its **Einstein tensor**
+$G$ is defined without assuming a global time orientation as follows. For
+each $p\in\Omega$, fix a timelike $v\in T_p\Omega$ and extend its inertial-chart
+components constantly. By continuity of $g(\varepsilon)$, this smooth field
+$N$ remains timelike on an open neighborhood $V\ni p$. Apply
+[[def-gr-curvature-tensor-and-derived-tensors]] clauses (a)-(c) to
+$(V,g(\varepsilon)|_V,N)$, using the restricted connection, which is the
+metric-selected connection there by uniqueness. In particular,
+$R(X,Y)Z=\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z$,
+$R(\partial_c,\partial_d)\partial_b=R^a{}_{bcd}\partial_a$, and
+
+$$\operatorname{Ric}_{bd}=\sum_{a=0}^3R^a{}_{bad},\qquad S=\sum_{b,d=0}^3g^{bd}\operatorname{Ric}_{bd},\qquad G_{ab}=\operatorname{Ric}_{ab}-\tfrac12Sg_{ab},$$
+
+where $(g^{ab})$ is the inverse metric matrix. These local tensor fields
+agree on every overlap: the restricted connection is the same, and the
+curvature operator and metric contractions contain no $N$. They therefore
+define a unique smooth tensor $G$ on $\Omega$, even if $g(\varepsilon)$ is not
+time-orientable. In that case define the
 **spatial density read from the time-time component**
 
 $$\rho_\varepsilon(\mathbf x):=\frac{T_{00}(\varepsilon,x^0,\mathbf x)}{c^2}\qquad\text{on }U,$$
@@ -114,9 +130,11 @@ density and is not thereby the dust rest-mass density.
 **(d) Scope.** This item fixes a class of metric families and the vocabulary
 of the weak-field bridge: the spatial factorization, component form,
 stationarity, spatial derivative bounds, potential, and the equation that
-upgrades the data to an Einstein family. It asserts that no family exists,
-that $\partial_0$ is timelike or a Killing field, that the inverse metrics
-are uniformly bounded or that $\rho_\varepsilon$ is positive; those are
+upgrades the data to an Einstein family. The stationarity condition gives $\mathcal L_{\partial_0}g=0$ by the
+local translation pullback, independently of any time orientation. It asserts
+neither existence for prescribed data nor that $\partial_0$ is timelike,
+that the inverse metrics are uniformly bounded,
+or that $\rho_\varepsilon$ is positive; the latter properties are
 consequences proved separately where they are used. The family is an explicit
 input-family hypothesis: neither its existence for prescribed Newtonian
 initial data nor its construction from other data is claimed. The physical

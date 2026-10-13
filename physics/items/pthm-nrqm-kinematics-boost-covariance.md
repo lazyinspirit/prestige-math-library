@@ -79,12 +79,13 @@ sources:
   references:
     - title: "C. Torre, Galilean Relativity and the Path Integral Formalism in Quantum
         Mechanics, arXiv:2306.13487 (2023), Section 4 equation (4.23) and
-        Section 6 equation (6.2), pages 12-13 and 17: the Galilean boost law of
+        Section 6 equations (6.2)-(6.4) and (6.8), pages 12-13 and 17-18: the Galilean boost law of
         the wave function requires the multiplicative phase factor,
         psi_u(r,t)=exp[-(i/hbar) M u.(t u/2 - R)] psi(r-t u,t), the passive
         reading of psi_u as the wave function in a frame moving with velocity -u
-        relative to the original frame, and the projective composition of boosts
-        u1,u2 to u1+u2"
+        relative to the original frame, ordinary composition of pure boosts
+        u1,u2 to u1+u2 in equation (6.4), and the projective boost-translation
+        relation in equation (6.8)"
       url: "https://arxiv.org/pdf/2306.13487"
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
         Section 7.2 printed pages 167-169 (PDF pages 179-181): the free
@@ -228,16 +229,5 @@ and strong continuity of $B_u(t)$ (step 1.4) yield $\psi'=B_u(t)y'-\frac{i}{\hba
 
 ## Remarks
 
-- **The boost phase is not a gauge transformation.** The phase
-  $\varphi(x,t)=mu\cdot x/\hbar-m|u|^{2}t/(2\hbar)$ depends on $x$ and shifts the
-  momentum by $mu$, as clause (b) records; a gauge transformation of an
-  external potential would not change the momentum law. The boost is a
-  kinematic frame change of the model, and its free-propagator identity
-  (clause (c)) says that the free dynamics is the same in both frames.
-- **What is not claimed.** No boost covariance is asserted for potentials
-  outside the real bounded measurable class, for confined or boundary
-  realizations, or for the internal factor beyond its passive transport by the
-  componentwise definition; no relativistic boost or Lorentz transformation
-  law is either assumed or derived. The boost family is defined by the phase
-  and translation formula in the Statement; the covariance identities are
-  derived here from that formula and the componentwise model operators.
+- **Momentum shift from the phase.** The phase $\varphi(x,t)=mu\cdot x/\hbar-m|u|^{2}t/(2\hbar)$ depends on $x$ and shifts the model momentum law by $mu$, as clause (b) records. The boost is a kinematic frame change of the model, and its free-propagator identity (clause (c)) gives the covariance of the free dynamics.
+- **What is not claimed.** No boost covariance is asserted for potentials outside the real bounded measurable class, for confined or boundary realizations, or for the internal factor beyond its passive transport by the componentwise definition; no relativistic boost or Lorentz transformation law is either assumed or derived. The boost family is defined by the phase and translation formula in the Statement; the covariance identities are derived here from that formula and the componentwise model operators.

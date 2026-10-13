@@ -23,6 +23,7 @@ deps:
     def-countable-choice,
     def-axiom-of-choice
   ]
+forward_refs: [texp-nrqm-bell-finite-sample-chsh]
 dependency_roles:
   def-nrqm-bell-declared-spin-arrangement: formulation-prerequisite
   def-nrqm-bell-binary-correlation-models: mathematical-premise
@@ -44,10 +45,13 @@ physical_scope: "A scope and evidence record for the page: the conditional model
   qualifications of the sources' experimental remarks that are not imported, and
   the deferred destination of a Bell-test experiment item with its required
   preparation, apparatus, calibration, loss and statistical qualifications. The
-  record asserts no empirical result, no measured correlation and no claim about
-  nature."
+  record distinguishes apparatus identification under P7(iii) from additional
+  repeated-trial sampling assumptions under P7(ii), and asserts no empirical
+  result, no measured correlation and no claim about nature."
 sources:
   references:
+    - title: "N. Brunner et al., Bell nonlocality, Section VII.B.3, PDF page 52: finite statistics and conditional statistical evidence against local models"
+      url: "https://arxiv.org/pdf/1303.2849"
     - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section
         6.1.4, printed pages 111-115 (PDF pages 119-123): the EPR/Bell
         discussion, the mention of the 1972 test and the citation of a 1998
@@ -94,10 +98,13 @@ verification:
   asserts that any laboratory procedure realizes the declared arrangement.
   The marginals, tables and correlations are model probabilities for the
   declared preparation; the identification of a concrete apparatus with the
-  declared measurements, and of repetitions with a sampling model, is the
+  declared measurements is the
   tested identification with uncertainty of clause (iii) of the preparation
   and apparatus postulate P7
-  ([[post-nrqm-framework-preparation-and-apparatus]]).
+  ([[post-nrqm-framework-preparation-and-apparatus]]). Treating repetitions
+  as independent and identically distributed draws is the additional
+  statistical model of clause (ii), to be declared and checked for the
+  apparatus and procedure; it is not implied by the state postulate.
 
 - **Deferred experiment destination.** The design of this pair reserves an
   experiment item for a Bell test. Such an item is not built here: it would
@@ -122,20 +129,30 @@ verification:
   proved here — which excludes only the declared local-response class of the
   declared tables — and are not imported. Likewise the operator bound used on
   this page is proved by the operator-norm route of the cited mathematics
-  (the identity for the square of the CHSH operator and the norm bound); no
+  (the identity for the square of the CHSH operator and the norm bound,
+  invoked in [[pthm-nrqm-bell-tsirelson-bound-for-arrangements]] fact F6 and
+  proof step 1.2). That route uses
+  $\|[A_0,A_1]\|\le2$ and $\|[B_0,B_1]\|\le2$ for the supplier's
+  self-adjoint involutions $A_i,B_j$, where $[A,B]:=AB-BA$ is the
+  commutator; no
   reversed variance inequality of the form
-  $\langle C^{2}\rangle\le\langle C\rangle^{2}$ and no commutator estimate is
+  $\langle C^{2}\rangle\le\langle C\rangle^{2}$ is
   used as a premise.
 
-- **What a comparison with data could show.** Under the declared
-  preparation, detection, settings and sampling models, agreement of recorded
-  frequencies with the arrangement's tables would support the combined model
-  and apparatus assumptions, and a recorded CHSH functional outside the bound
-  of a declared representable model would exclude that model class only under
-  those same detection and selection assumptions. Agreement is evidence about
-  the combined assumptions, not a proof of the framework, and a null or
-  reduced result does not by itself falsify it; the finite-sample and
-  selection qualifications are stated on the examples page.
+- **What a comparison with data could show.** Under declared preparation,
+  detection, settings, selection and sampling models, agreement of recorded
+  frequencies with the arrangement's tables supports the combined model and
+  apparatus assumptions. The bound $|S(\mu)|\le2$ constrains the correlations
+  of a local-response model's probability tables, rather than every finite
+  sample estimate $\widehat S$. A finite recorded estimate with
+  $|\widehat S|>2$ can have positive probability under that model; finite-sample
+  fluctuations are treated in [[texp-nrqm-bell-finite-sample-chsh]]. Evidence
+  against a specified model class requires an explicit statistical test with
+  its sampling assumptions, uncertainty and error control, together with the
+  apparatus and selection qualifications. A threshold crossing alone does
+  not deductively exclude the class, and a p-value is not the probability
+  that the class is false. Agreement does not prove the framework, and a null
+  or reduced result does not by itself falsify it.
 
 - **Interpretation and scope of the model.** The arrangement assigns no
   spatial positions, separation or temporal order to the two factors, so no

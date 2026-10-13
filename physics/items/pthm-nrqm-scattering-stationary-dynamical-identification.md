@@ -59,10 +59,7 @@ physical_scope: "The declared short-range scattering model with a real bounded
   statement, and no cross-section observation is asserted."
 sources:
   references:
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections
-        12.1-12.2 printed pages 257-270 (PDF pages 265-278): the scattering
-        operator, the S-matrix as the on-shell operator and the scattering
-        amplitude"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 12.1-12.2, printed pages 257-267 (PDF pages 265-275)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
         Section 12.1 printed pages 247-252 (PDF pages 259-264): the scattering
@@ -106,7 +103,8 @@ then
 $$S[V_{R}](E)=U_{R}\,S[V](E)\,U_{R}^{-1};$$
 
 (d) if $V$ is in addition central, the fiber decomposes in the spherical
-harmonic basis as $S(E)Y_{lm}=S_{l}(k)Y_{lm}$, where $S_{l}$ and
+harmonic basis, with integer labels $l\ge0$ and $-l\le\bar m\le l$, as
+$S(E)Y_{l\bar m}=S_{l}(k)Y_{l\bar m}$, where $S_{l}$ and
 $\delta_{l}$ are the model's channel factor and phase shift of
 [[def-nrqm-scattering-partial-wave-and-phase-shift-readings]], equal to the
 Wronskian ratio $\overline{W(\varphi_{l},f_{l})}/W(\varphi_{l},f_{l})$, and
@@ -142,7 +140,7 @@ and no empirical claim.
 
 4.1 By [F1] the covariance identity $S[V_{R}](E)=U_{R}S[V](E)U_{R}^{-1}$ holds for the energy-divided potential; since rotations act on $W$ exactly as on $V$ through $R^{-1}$, the same identity is the model's (c). [F1, step 3.1, algebra]
 
-5.1 If $V$ is central, so is $W$; [F1] gives $S(E)Y_{lm}=S_{l}(k)Y_{lm}$ with $S_{l}=\overline{W_{l}}/W_{l}$; by [F3] the model's channel vocabulary names exactly these objects $S_{l}=\overline{W(\varphi_{l},f_{l})}/W(\varphi_{l},f_{l})$ and $\delta_{l}$, and the phase-shift series of the partial-wave theorem is the total cross-section reading of this decomposition. This is (d) and completes the proof. [F1, F3, step 4.1, algebra] ∎
+5.1 If $V$ is central, so is $W$; [F1], with its integer harmonic index renamed $\bar m$ as in [F3], gives $S(E)Y_{l\bar m}=S_{l}(k)Y_{l\bar m}$ with $S_{l}=\overline{W_{l}}/W_{l}$; by [F3] the model's channel vocabulary names exactly these objects $S_{l}=\overline{W(\varphi_{l},f_{l})}/W(\varphi_{l},f_{l})$ and $\delta_{l}$, and the phase-shift series of the partial-wave theorem is the total cross-section reading of this decomposition. This is (d) and completes the proof. [F1, F3, step 4.1, algebra] ∎
 
 ## Remarks
 

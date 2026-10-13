@@ -24,7 +24,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "The angular momentum balance of a model that declares the external-plus-pair presentation with antisymmetric pair forces: the internal torque sum is independent of the reference point and the balance about a possibly moving reference point carries the correction minus odot cross P; when the evaluated pair forces are central the internal torque sum vanishes; about a fixed point with vanishing external torque the angular momentum is constant. The result is conditional on the declared pair structure and centrality where invoked; it asserts no necessity of centrality and no measured value."
+physical_scope: "The angular momentum balance of a model that declares the external-plus-pair presentation with antisymmetric pair forces: the internal torque sum is independent of the reference point and the balance about a possibly moving reference point carries the correction minus odot cross P; when the evaluated pair forces are central the internal torque sum vanishes; about a fixed point with central evaluated pair forces and vanishing external torque the angular momentum is constant. The result is conditional on the declared pair structure and centrality where invoked; it asserts no necessity of centrality and no measured value."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.3, Eqs. (1.17)-(1.19), printed pages 6-7 (PDF pages 12-13): Ldot = sum_i r_i x F_i^ext + sum_{i<j}(r_i - r_j) x F_ij, with the internal term vanishing when F_ij is parallel to r_i - r_j"

@@ -8,13 +8,13 @@ origin: session
 domain: physics
 dependency_level: 12
 physical_scope: "An exact flat-space instance of the framework's Killing energy:
-  a constant static dust with the translation Killing field of the identity
-  chart, the current three-form of its Killing current, the value of the Killing
-  energy on three-chains carried by constant-time slices, and its conservation
-  up to the side flux. The example is an exact model calculation under the
-  framework's unit reading; it asserts no measured value and no empirical mass,
-  and the identification of its numbers with any physical energy requires
-  separate empirical premises."
+  a constant static dust with the length-normalized translation Killing field
+  of the identity chart, the current three-form of its Killing current, the
+  value of the Killing energy on three-chains carried by constant-time slices,
+  and its conservation up to the side flux. The example is an exact model
+  calculation under the framework's unit reading; it asserts no measured value
+  and no empirical mass, and the identification of its numbers with any
+  physical energy requires separate empirical premises."
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -153,19 +153,6 @@ $$Q_\xi(\Sigma_2)-Q_\xi(\Sigma_1)=-Q_\xi(B);$$
 
 ## Remarks
 
-- **Reading of the value.** In the framework's stress-energy reading, $T$
-  has components in $\mathrm J\,\mathrm m^{-3}$, and the flux $Q_\xi(\Sigma)$
-  is read as the rest energy assigned to the chain. The parameter $\rho$ is
-  the dust model's rest-energy-density parameter in the SI reading;
-  $\rho_m=\rho/c^2$ is the corresponding mass density. The identification of
-  $\rho\int_\Sigma dx^1\wedge dx^2\wedge dx^3$ with a physical mass or energy
-  requires separate empirical premises and is not asserted.
+- **Reading of the value.** In the framework's stress-energy reading, $T$ has components in $\mathrm J\,\mathrm m^{-3}$. Here $\xi=\partial_0$ is length-normalized because $x^0=ct$ is a length coordinate, and $X=1$; hence this $Q_\xi(\Sigma)$ is read in joules as the rest energy assigned to the chain. The parameter $\rho$ is the dust model's rest-energy-density parameter in the SI reading; $\rho_m=\rho/c^2$ is the corresponding mass density. The identification of $\rho\int_\Sigma dx^1\wedge dx^2\wedge dx^3$ with a physical mass or energy requires separate empirical premises and is not asserted.
 
-- **Why conservation needs the side flux.** The current $J_\xi$ has no
-  spatial components, so a side face swept out along $\partial_0$
-  carries no flux; a side face tilted so that its velocity vectors span a
-  hyperplane containing $\partial_0$ also carries none, by the
-  linear-dependence argument of step 4.1. For a general side chain the flux
-  need not vanish and the equality of clause 4 is a balance identity of
-  bookkeeping, exactly as in
-  [[thm-gr-density-divergence-and-finite-chain-flux]].
+- **Why conservation needs the side flux.** The current $J_\xi$ has no spatial components, so a side face swept out along $\partial_0$ carries no flux; a side face tilted so that its velocity vectors span a hyperplane containing $\partial_0$ also carries none, by the linear-dependence argument of step 4.1. For a general side chain the flux need not vanish and the equality of clause 4 is a balance identity of bookkeeping, exactly as in [[thm-gr-density-divergence-and-finite-chain-flux]].

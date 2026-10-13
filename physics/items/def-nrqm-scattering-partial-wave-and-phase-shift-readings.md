@@ -14,6 +14,8 @@ deps:
     def-nrqm-scattering-stationary-beam-and-cross-section-model,
     def-nrqm-central-framework-central-potential-model,
     thm-nrqm-controlled-dynamics-partial-wave-cross-section-convergence,
+    thm-nrqm-orbital-and-spin-associated-polynomial-normalization,
+    thm-nrqm-orbital-and-spin-sphere-onb,
     post-nrqm-framework-state-and-composition,
     post-nrqm-framework-observable-and-probability,
     post-nrqm-framework-autonomous-dynamics,
@@ -27,6 +29,8 @@ dependency_roles:
   def-nrqm-scattering-stationary-beam-and-cross-section-model: formulation-prerequisite
   def-nrqm-central-framework-central-potential-model: formulation-prerequisite
   thm-nrqm-controlled-dynamics-partial-wave-cross-section-convergence: mathematical-premise
+  thm-nrqm-orbital-and-spin-associated-polynomial-normalization: mathematical-premise
+  thm-nrqm-orbital-and-spin-sphere-onb: mathematical-premise
   post-nrqm-framework-state-and-composition: formulation-prerequisite
   post-nrqm-framework-observable-and-probability: formulation-prerequisite
   post-nrqm-framework-autonomous-dynamics: formulation-prerequisite
@@ -46,6 +50,10 @@ physical_scope: "The pair's declared partial-wave and phase-shift vocabulary for
   system, no bound-state statement and no measured quantity."
 sources:
   references:
+    - title: "NIST Digital Library of Mathematical Functions, Section 14.30,
+        equations 14.30.1, 14.30.6 and 14.30.8: spherical harmonics,
+        negative-index convention and orthonormality"
+      url: "https://dlmf.nist.gov/14.30"
     - title: "R. Fitzpatrick, Quantum Mechanics (University of Texas at Austin,
         author-hosted course text), Section 15.5 printed pages 217-219: partial
         waves, phase shifts and hard-sphere scattering"
@@ -72,12 +80,34 @@ the compact-support class of the scattering model. Units are those of
 [[def-nrqm-framework-quantities-and-units]]; the wave number $k$ is read in
 $\mathrm{m^{-1}}$ and the energy $E=\hbar^{2}k^{2}/(2m)$ in joules.
 
-**(b) Channel vocabulary.** For a declared central short-range potential $V$
-and a channel label $(l,m)$ with $l\ge0$ and $-l\le m\le l$, the model
-declares the **partial wave** $l$ and reads the angular dependence in the
-complete spherical harmonic family $(Y_{lm})$ of
-[[thm-nrqm-controlled-dynamics-partial-wave-cross-section-convergence]]; the
-labels $l,m$ are indices of that family. The reduced equation below is read in
+**(b) Channel vocabulary.** Let $S^2=\{\omega\in\mathbb R^3:|\omega|=1\}$
+be the sphere of spatial directions, with polar surface measure $\sigma$
+and angle coordinates
+$\Phi(\theta,\alpha)=(\sin\theta\cos\alpha,\sin\theta\sin\alpha,\cos\theta)$;
+$d\sigma=\sin\theta\,d\theta\,d\alpha$ and $\sigma(S^2)=4\pi$.
+Use exactly the dimensionless spherical harmonics defined in
+[[thm-nrqm-orbital-and-spin-associated-polynomial-normalization]]:
+for integers $l\ge0$ and $0\le q\le l$, set
+$$P_l(t)=\frac{1}{2^l l!}\frac{d^l}{dt^l}(t^2-1)^l,\qquad w_{lq}(t)=(-1)^q(1-t^2)^{q/2}\frac{d^q}{dt^q}P_l(t),\qquad b_{lq}=\left(\int_{-1}^1w_{lq}(t)^2\,dt\right)^{-1/2}>0.$$
+The continuous representatives $Y_{lq}:S^2\to\mathbb C$ are given by
+$$Y_{lq}(\Phi(\theta,\alpha))=\frac{b_{lq}}{\sqrt{2\pi}}w_{lq}(\cos\theta)e^{iq\alpha}\qquad(0<\theta<\pi,\ 0\le\alpha<2\pi),$$
+extended continuously to the poles; for $1\le q\le l$ set
+$Y_{l,-q}=(-1)^q\overline{Y_{lq}}$. The same symbols denote their
+almost-everywhere classes in $L^2(S^2,\sigma;\mathbb C)$.
+Under the declared Countable Choice assumption,
+[[thm-nrqm-orbital-and-spin-sphere-onb]] proves that these classes are
+orthonormal for $\langle F,G\rangle=\int_{S^2}F\overline G\,d\sigma$
+and their closed linear span is all of $L^2(S^2,\sigma;\mathbb C)$.
+For a declared central short-range potential $V$, an **angular channel**
+$(l,\bar m)$, with integers $l\ge0$ and $-l\le\bar m\le l$, means the
+one-dimensional subspace $\operatorname{span}_{\mathbb C}\{Y_{l\bar m}\}$;
+the **partial wave** $l$ means the degree-$l$ sector
+$\mathcal H_l:=\operatorname{span}_{\mathbb C}\{Y_{lq}:-l\le q\le l\}$.
+The angular indices $q,\bar m$ are distinct from the positive mass $m$.
+
+The radial solutions are those constructed in
+[[thm-nrqm-controlled-dynamics-partial-wave-cross-section-convergence]].
+The reduced equation below is read in
 physical coordinates after energy division: the reduced potential is
 $w:=2mv/\hbar^{2}$ of clause (c) of
 [[def-nrqm-scattering-framework-short-range-model]] and the energy-divided spectral value is $k^{2}$, both in $\mathrm{m^{-2}}$,
@@ -87,8 +117,11 @@ $\varphi_{l}$ of the reduced equation
 $$-\varphi_{l}''+\Bigl(w(r)+\frac{l(l+1)}{r^{2}}\Bigr)\varphi_{l}=k^{2}\varphi_{l}, \qquad \varphi_{l}(r)/r^{l+1}\longrightarrow1\quad(r\to0),$$
 and the **outgoing radial solution** $f_{l}$ with
 $$f_{l}(r)=e^{i(kr-l\pi/2)}\bigl(1+O(r^{-1})\bigr)\qquad(r\to\infty)$$
-outside the interaction region; these are the functions constructed by the
-cited theorem, and they are not asserted to be elements of the state space.
+outside the interaction region. Both are maps $(0,\infty)\to\mathbb C$
+whose functions and first derivatives are locally absolutely continuous;
+the reduced equation holds almost everywhere, equivalently in distributions
+on $(0,\infty)$, as in the cited theorem's bounded measurable potential
+construction. They are not asserted to be elements of the state space.
 
 **(c) Channel factor and phase shift.** The model declares the **channel
 factor** and the **phase shift** of the partial wave $l$ to be
@@ -105,7 +138,7 @@ page and are not presupposed here.
 **(d) Status and scope.** Clauses (b)-(c) are declarations of the pair: names
 for the objects constructed by the cited mathematics and the reading of the
 phase shift modulo $\pi$. The model asserts no identification of the labels
-$l,m$ with a measured angular momentum of a material system, no statement
+$l,\bar m$ with a measured angular momentum of a material system, no statement
 about bound states or their count, and no channel decomposition for
 non-central potentials. Every numerical statement about $\delta_{l}$ is a
 separate theorem or example of the pair.

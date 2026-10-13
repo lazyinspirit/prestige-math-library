@@ -16,12 +16,12 @@ dependency_roles:
   def-euclidean-inner-product: mathematical-premise
 provenance:
   statement: ai-generated
-  proof: ai-generated
+  proof: ai-altered
 generation:
   role: example
 sources:
   references:
-    - title: "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.6, formulas (8.77)-(8.81): the spring-chain harmonic example and its modes"
+    - title: "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.4, formulas (8.77)-(8.81): the spring-chain harmonic example and its modes"
       url: "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6 (normal modes of coupled oscillators), printed pages 40-45"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
@@ -59,7 +59,7 @@ In particular a zero eigenvalue is not an oscillator but a free mode.
 
 2.1 By [L1] the general solution is $q=M^{-1/2}Oz$, where each modal coordinate is given by the theorem according to the sign of its eigenvalue: if $k>0$ then $z_1=a_1\cos(\omega_1t)+b_1\sin(\omega_1t)$ with $\omega_1=\sqrt{\lambda_1}$, and if $k=0$ then $z_1=a_1+b_1t$; if $k+2c>0$ then $z_2=a_2\cos(\omega_2t)+b_2\sin(\omega_2t)$ with $\omega_2=\sqrt{\lambda_2}$, and if $k=c=0$ then $z_2=a_2+b_2t$. The modal energies are constant. The verification of the scalar solution formulas is the one given by the theorem via [[thm-sine-and-cosine-derivatives]]. [step 1.1, L1]
 
-3.1 The zero-mode branch $k=0$: then $\lambda_1=0$ and the first modal solution is the affine motion $a_1+b_1t$ along $w_1$ by [L1], which is unbounded unless $b_1=0$; the second eigenvalue is $2c/m\ge0$, with $2c/m>0$ when $c>0$, so the second mode oscillates with frequency $\sqrt{2c/m}$ unless also $c=0$, in which case both modes are affine. Thus the only genuinely free direction in the stated model is the centre-of-mass direction $\frac1{\sqrt2}(1,1)$, and the zero mode is not an oscillator. [step 1.1, L1, algebra] ∎
+3.1 The zero-mode branch $k=0$: then $\lambda_1=0$ and the first modal solution is the affine motion $a_1+b_1t$ along $w_1$ by [L1], which is unbounded unless $b_1=0$; the second eigenvalue is $2c/m\ge0$, with $2c/m>0$ when $c>0$, so the second mode oscillates with frequency $\sqrt{2c/m}$ unless also $c=0$, in which case both modes are affine. Thus when $k=0<c$ the only free direction is $\frac1{\sqrt2}(1,1)$, while when $k=c=0$ both independent directions are free; in either case a zero mode is not an oscillator. [step 1.1, L1, algebra] ∎
 
 ## Remarks
 

@@ -6,12 +6,22 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 0
-deps: [def-matrix-space, def-matrix-product-and-identity-matrix, def-transpose-of-a-matrix, def-determinant-of-a-square-matrix]
+deps: [def-matrix-space, def-matrix-product-and-identity-matrix, def-transpose-of-a-matrix, prop-transpose-laws, thm-matrix-multiplication-laws, def-group, def-invertible-matrix-and-general-linear-group, def-determinant-of-a-square-matrix, def-euclidean-inner-product, def-orthogonal-vectors-sets-and-orthonormal-bases, def-orientation-of-a-finite-dimensional-real-vector-space, thm-determinant-multiplicative, thm-determinant-of-transpose, thm-real-square-matrix-invertible-iff-determinant-nonzero]
 dependency_roles:
   def-matrix-space: mathematical-premise
   def-matrix-product-and-identity-matrix: mathematical-premise
   def-transpose-of-a-matrix: mathematical-premise
+  prop-transpose-laws: mathematical-premise
+  thm-matrix-multiplication-laws: mathematical-premise
+  def-group: mathematical-premise
+  def-invertible-matrix-and-general-linear-group: mathematical-premise
   def-determinant-of-a-square-matrix: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
+  def-orthogonal-vectors-sets-and-orthonormal-bases: mathematical-premise
+  def-orientation-of-a-finite-dimensional-real-vector-space: mathematical-premise
+  thm-determinant-multiplicative: mathematical-premise
+  thm-determinant-of-transpose: mathematical-premise
+  thm-real-square-matrix-invertible-iff-determinant-nonzero: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -37,8 +47,8 @@ Equivalently $SO(3)=O(3)\cap\{R:\det R=1\}$. Elements of $SO(3)$ are called **ro
 
 ## Remarks
 
-- That $O(3)$ and $SO(3)$ are closed under multiplication and inversion, contain $I_3$, and are subgroups of the general linear group, is proved in [[lem-cm-so3-is-a-matrix-group]]. The definition itself only records the sets and their ambient identification.
+- The set $O(3)$ is a group under matrix multiplication. It contains $I_3$, and if $A,B\in O(3)$ then $(AB)^{\mathsf T}(AB)=B^{\mathsf T}A^{\mathsf T}AB=I_3$. For $A\in O(3)$, determinant multiplicativity and $\det(A^{\mathsf T})=\det A$ give $(\det A)^2=\det(A^{\mathsf T}A)=1$, so $A$ is invertible; $A^{\mathsf T}A=I_3$ then gives $A^{-1}=A^{\mathsf T}$ and $AA^{\mathsf T}=I_3$, hence $A^{\mathsf T}\in O(3)$. The stronger fact that $SO(3)$ is a subgroup of $GL_3(\mathbb R)$ is proved in [[lem-cm-so3-is-a-matrix-group]].
 
-- An element $R\in O(3)$ preserves the Euclidean inner product of $\mathbb R^3$: if $R^{\mathsf T}R=I_3$ then $\langle Ru,Rv\rangle_2=\langle u,v\rangle_2$ for all $u,v$, by the matrix identities recorded in [[def-matrix-product-and-identity-matrix]]; and $R$ preserves the norm since $\|Ru\|_2^2=\langle Ru,Ru\rangle_2=\langle u,u\rangle_2$. Equivalently, the columns of $R$ form an orthonormal basis of $\mathbb R^3$. The determinant condition $\det R=1$ selects the orientation-preserving elements; an element of $O(3)$ with $\det R=-1$ reverses orientation. These statements are used only through the cited matrix identities.
+- An element $R\in O(3)$ preserves the Euclidean inner product of $\mathbb R^3$: $\langle Ru,Rv\rangle_2=u^{\mathsf T}R^{\mathsf T}Rv=\langle u,v\rangle_2$ for all $u,v$. Its three columns therefore form an orthonormal triple. Relative to the standard orientation determined by the standard basis, $\det R=1$ means orientation preserving and $\det R=-1$ means orientation reversing ([[def-orientation-of-a-finite-dimensional-real-vector-space]]).
 
 - The set $O(3)$ appears here as a subset of $M_3(\mathbb R)$ with a specific defining equation; no claim is made in this item about its manifold structure, dimension or compactness. Those are supplied by [[lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold]].

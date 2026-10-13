@@ -6,10 +6,10 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 16
-physical_scope: "Conditional model deduction inside the classical gravitational framework: a model spacetime R^4 with the small-amplitude TT plane-wave metric g(lambda) = eta + lambda h, the adopted clock and free-fall postulates, and ideal structureless test bodies whose worldlines are future timelike geodesics. The conclusions are the infinitesimal relative-acceleration law of a geodesic variation to first order in amplitude and the finite path length and strain of a prescribed chart-straight detector arm. The infinitesimal law is not a finite-pair acceleration claim, and the arm length is path-dependent rather than the shortest spatial distance. Excludes self-force, spin, finite body size, elasticity, internal resonances, detector noise, the propagation and readout of light, any measurement and any comparison with data; on compact sets and for sufficiently small amplitudes in the stated chart-control regime, the perturbation has a residual quadratic in amplitude, so all conclusions are conditional on being in the linearized regime."
+physical_scope: "Conditional model deduction inside the classical gravitational framework: a model spacetime R^4 with the small-amplitude TT plane-wave metric g(lambda) = eta + lambda h, the adopted clock and free-fall postulates, and ideal structureless test bodies whose worldlines are future timelike geodesics. The conclusions are the infinitesimal relative-acceleration law of a geodesic variation to first order in amplitude and the finite path length and strain of a prescribed chart-straight detector arm. The infinitesimal law is not a finite-pair acceleration claim, and the arm length is path-dependent rather than the shortest spatial distance. The exact-vacuum residual statement applies in the zero-source, Lambda = 0 branch and on nonempty compact sets in the stated chart-control regime. Excludes self-force, spin, finite body size, elasticity, internal resonances, detector noise, the propagation and readout of light, any measurement and any comparison with data; the conclusions are conditional model predictions, not empirical claims."
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 proof_strategy: direct
 deps: [post-gr-ideal-clocks-and-free-fall, post-gr-spacetime-and-classical-domain, def-gr-si-unit-and-coordinate-conventions, pthm-gr-free-fall-worldline-is-determined-by-initial-data, pthm-gr-tidal-comparison, pthm-gr-linearized-field-equations, thm-gr-jacobi-equation-and-geodesic-deviation, def-gr-jacobi-field-and-conjugate-instant, def-gr-timelike-worldline-and-proper-time, lem-gr-proper-time-reparametrization-and-four-velocity, def-gr-metric-selected-connection, def-christoffel-symbols-of-an-affine-connection, def-geodesic-of-an-affine-connection, def-covariant-derivative-along-a-curve, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-plane-wave-perturbation, def-gr-wave-screen-and-tt-projection, def-gr-linearized-wave-regime-and-detector-coupling, thm-gr-tt-plane-wave-solutions, thm-gr-tt-plane-wave-curvature, def-gr-flat-linearized-perturbation, thm-gr-flat-linearized-curvature-and-gauge, def-gr-minkowski-model-and-inertial-chart, def-gr-smooth-covariant-two-tensor-field, def-gr-smooth-lorentzian-objects, def-causal-classification-of-lorentz-vectors, cor-taylor-lagrange-and-cauchy-remainders, def-rational-power, def-real-order, lem-of-square-positive, def-compact-space, thm-heine-cantor-metric, thm-sine-and-cosine-derivatives, thm-sine-and-cosine-addition-formulas, thm-chain-rule, thm-algebra-of-derivatives, lem-gr-null-phase-coordinate]
 dependency_roles:
@@ -66,6 +66,8 @@ verification:
 
 Adopt the framework postulates [[post-gr-spacetime-and-classical-domain]] and
 [[post-gr-ideal-clocks-and-free-fall]] ([[def-gr-si-unit-and-coordinate-conventions]]).
+The exact-vacuum residual statement in the Status below concerns the
+source-free branch with $T=0$ and $\Lambda=0$.
 Let $(M,g,N)=(\mathbb R^4,\eta,\partial_0)$ be the flat model with its inertial
 chart, let $A_+,A_\times\in C^\infty(\mathbb R)$ be bounded with
 $M_0:=\sup_{\mathbb R}\max\{|A_+|,|A_\times|\}$, let $h$ be the TT planar
@@ -140,10 +142,11 @@ $(e_1+e_2)/\sqrt2$ sees $A_\times$, and an arm along $e_3$ sees nothing.
 
 **Status.** Clauses (a)-(c) are conditional deductions from the adopted
 postulates for the model spacetime $(\mathbb R^4,g(\lambda),\partial_0)$ and
-for ideal test bodies and an ideal detector. The metric $g(\lambda)$
-satisfies the vacuum field law exactly only up to a residual of order
-$\lambda^2$ ([[thm-gr-tt-plane-wave-solutions]] clause (c)); consequently
-all conclusions are predictions of the linearized model. No observation,
+for ideal test bodies and an ideal detector. In the source-free branch with
+$\Lambda=0$, the residual in the exact vacuum equation $G_{ab}=0$ for
+$g(\lambda)$ is of order $\lambda^2$
+([[thm-gr-tt-plane-wave-solutions]] clause (c)); consequently
+the field-law interpretation is a prediction of the linearized model. No observation,
 apparatus, noise model, light-propagation model or statistical statement is
 made, and the item contains no empirical premise.
 ## Facts & Assumptions
@@ -162,7 +165,7 @@ made, and the item contains no empirical premise.
 
 [L4] The Christoffel family has the expansion $\Gamma^\mu{}_{ab}(\lambda,p)=\lambda\Gamma^{(1)\mu}{}_{ab}(p)+O(\lambda^2)$ with the first-order coefficient $\Gamma^{(1)\mu}{}_{ab}=\tfrac12\eta^{\mu\rho}(\partial_ah_{\rho b}+\partial_bh_{\rho a}-\partial_\rho h_{ab})$ and a quadratic remainder bounded on compact parameter sets by a Lagrange estimate; $\Gamma(0)=0$ ([[thm-gr-flat-linearized-curvature-and-gauge]] clauses (a), (e), [[cor-taylor-lagrange-and-cauchy-remainders]], [[def-gr-flat-linearized-perturbation]] clauses (b)-(c)). Also, on a compact parameter segment and a compact set of the curves, $Q^\mu{}_a(\lambda,p):=\partial_0\Gamma^\mu{}_{0a}(\lambda,p)$ is smooth in $(\lambda,p)$, satisfies $Q(0,p)=0$ and $\partial_\lambda Q(0,p)=\partial_0\Gamma^{(1)\mu}{}_{0a}(p)$; applying Taylor's estimate to $Q$ itself gives $\partial_0\Gamma=\lambda\partial_0\Gamma^{(1)}+O(\lambda^2)$ uniformly there. Smoothness follows from the explicit metric formula, matrix inversion on the Lorentzian domain and smoothness of the profiles ([[thm-gr-flat-linearized-curvature-and-gauge]] clauses (a), (e), [[cor-taylor-lagrange-and-cauchy-remainders]]).
 
-[L5] On a compact set a continuous function is bounded and attains its bounds; the second-order Taylor remainder for $\sqrt{1+x}$ gives $|\sqrt{1+x}-1-\tfrac x2|\le\tfrac12x^2$ for $|x|\le\tfrac12$; squares are nonnegative ([[thm-heine-cantor-metric]], [[def-compact-space]], [[cor-taylor-lagrange-and-cauchy-remainders]], [[lem-of-square-positive]], [[def-real-order]], [[def-rational-power]]).
+[L5] A continuous real function on a nonempty compact set is bounded: its relatively open sublevel sets $\{|f|<m\}$, for positive integers $m$, cover the set and have a finite subcover ([[def-compact-space]]). For $|x|\le\tfrac12$, put $r=\sqrt{1+x}>0$. Since $(r-1)(r+1)=x$, one has $r-1-x/2=-x^2/(2(r+1)^2)$, hence $|\sqrt{1+x}-1-x/2|\le x^2/2$. Squares are nonnegative, and $2|ab|\le a^2+b^2$ follows from $(|a|-|b|)^2\ge0$ ([[lem-of-square-positive]], [[def-real-order]], [[def-rational-power]]).
 
 [L6] The finite detector arm is the spatial coordinate segment $\sigma_s(q)=(cs,x_0+q\delta)$, $q\in[0,1]$, and its metric length and strain are the path integral of clause (c) of [[def-gr-linearized-wave-regime-and-detector-coupling]]; for TT profiles its integrand is $|\delta|\sqrt{1+\lambda a(s,q)}$, with $a(s,q)$ as in (c). The addition formulas give $\cos2\theta=\cos^2\theta-\sin^2\theta$ and $\sin2\theta=2\sin\theta\cos\theta$ ([[def-gr-linearized-wave-regime-and-detector-coupling]] clauses (b)-(c), [[def-gr-wave-screen-and-tt-projection]], [[thm-sine-and-cosine-addition-formulas]]).
 
@@ -184,7 +187,7 @@ made, and the item contains no empirical premise.
 
 3.2 (Consistency with the curvature identity.) The right-hand side of the exact equation of step 2.1 is $c^2R^\mu{}_{00a}\delta^a\partial_\mu$; by [L3] its first-order coefficient is $c^2\lambda\cdot\tfrac12\partial_0^2h^\mu{}_a\delta^a$, in agreement with step 2.2. This is a check of the conventions; the relative-acceleration content of (b) is the direct computation of step 2.2. [L3, step 2.1, step 2.2, algebra]
 
-4.1 (Status and conclusion.) Steps 1.1-3.2 derive clauses (a)-(c) from the adopted postulates for the model spacetime and the cited mathematics; the only physical inputs are the clock and free-fall rules, and the only metric input is the explicit TT plane-wave family. For each compact $K$ and length scale $L$, smoothness gives $B_K(h)<\infty$, so sufficiently small $|\lambda|$ satisfies $|\lambda|B_K(h)\le1/16$ and the physical quadratic residual estimate of [[pthm-gr-linearized-field-equations]] clause (d) applies. The displayed relative acceleration and strain remain predictions of the linearized model, not exact solution properties; no observation is used or predicted in the empirical sense. [step 1.1, step 1.2, step 2.1, step 2.2, step 2.3, step 3.1, step 3.2, A1] ∎
+4.1 (Status and conclusion.) Steps 1.1-3.2 derive clauses (a)-(c) from the adopted postulates for the model spacetime and the cited mathematics; the only physical inputs are the clock and free-fall rules, and the only metric input is the explicit TT plane-wave family. For each nonempty compact $K$ and length scale $L$, smoothness gives $B_K(h)<\infty$, so sufficiently small $|\lambda|$ satisfies $|\lambda|B_K(h)\le1/16$ and the quadratic residual estimate for the source-free, $\Lambda=0$ branch of [[pthm-gr-linearized-field-equations]] clause (d) applies. The displayed relative acceleration and strain remain predictions of the model, not exact solution properties; no observation is used or predicted in the empirical sense. [step 1.1, step 1.2, step 2.1, step 2.2, step 2.3, step 3.1, step 3.2, A1] ∎
 
 ## Remarks
 

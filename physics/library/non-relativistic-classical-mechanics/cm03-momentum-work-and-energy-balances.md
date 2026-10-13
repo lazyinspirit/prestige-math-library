@@ -63,8 +63,10 @@ Poincaré lemma on star-shaped subdomains, no global potential from closedness
 alone, and equipotential level sets — and local potentials.
 [[pthm-cm03-energy-balance]] then gives
 $E'=\partial_{t}U(t,x(t))+\sum_{i}\langle\mathfrak d_{i},w_{i}\rangle$, the
-conservation of $E$ for a time-independent representative with no residual
-forces, and the integrated work form. The frame behaviour of all these
+conservation of $E$ when the representative is time-independent and the
+evaluated residual forces vanish along the motion (in particular, when the
+residual-force maps vanish throughout their state domains), and the integrated
+work form. The frame behaviour of all these
 quantities — affine centre-of-mass law, the boost law $\tilde P=RP+Mv$, the kinetic and
 mechanical boost terms, the angular-momentum boost, and the transformation of
 torque, power and work through the transferred force map — is

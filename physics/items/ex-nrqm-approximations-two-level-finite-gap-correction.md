@@ -17,7 +17,8 @@ deps:
     post-nrqm-framework-observable-and-probability,
     post-nrqm-framework-autonomous-dynamics,
     def-nrqm-observables-framework-observable-and-outcome-law,
-    def-countable-choice
+    def-countable-choice,
+    def-axiom-of-choice
   ]
 dependency_roles:
   def-nrqm-approximations-framework-perturbed-family-model: formulation-prerequisite
@@ -28,6 +29,7 @@ dependency_roles:
   post-nrqm-framework-autonomous-dynamics: physical-assumption
   def-nrqm-observables-framework-observable-and-outcome-law: formulation-prerequisite
   def-countable-choice: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -108,12 +110,12 @@ evolution of P4, not by the perturbative expansion).
 **Given:** the declared two-level model with parameters $g,c>0$, matrices
 $H_{0},V$, the family $H(\lambda)$, and the label data $E=0$, $g$, $v=c$,
 $\psi_{0}=e_{1}$, $S=\operatorname{diag}(0,1/g)$; the Axiom of Countable
-Choice as the choice hypothesis of the model's spectral suppliers
+Choice and the Axiom of Choice as the choice hypotheses of the model's spectral suppliers
 ([[def-nrqm-approximations-framework-perturbed-family-model]]).
 
 [L1] **The model's theorem.** Under the model's hypotheses with a simple
 label, for every real $|\lambda|<R=g/(8v)$ the followed label $E_{\lambda}$
-is the unique spectral value of $H(\lambda)$ in $|z-E|=g/2$, the coefficients
+is the unique spectral value of $H(\lambda)$ in $|z-E|<g/2$, the coefficients
 and remainder bound of clause (e) of the statement of
 [[pthm-nrqm-approximations-nondegenerate-perturbation-expansion]] hold, and
 $E'(0)=\langle V\psi_{0},\psi_{0}\rangle$,
@@ -144,7 +146,7 @@ and evaluate the page's remainder bound at the test point.
 
 **Given:** the data of the Example and [L1]-[L3].
 
-1.1 [Hermiticity and the eigenbasis] Both $H_{0}$ and $V$ are real symmetric, hence $H(\lambda)$ is Hermitian for real $\lambda$. Put $$s:=\sqrt{g^{2}+4\lambda^{2}c^{2}}>0,\qquad E_{\pm}:=\frac{g\pm s}{2},$$ and, for $\lambda\ne0$, $w_{\pm}:=(\lambda c,E_{\pm})\ne0$. From $E_{\pm}^{2}-gE_{\pm}-\lambda^{2}c^{2}=0$, which follows from $E_{+}+E_{-}=g$ and $E_{+}E_{-}=-\lambda^{2}c^{2}$ by [L2], the first component equation $\lambda c\,E_{\pm}=E_{\pm}\,\lambda c$ holds identically and the second reads $\lambda c\cdot\lambda c+gE_{\pm} =\lambda^{2}c^{2}+gE_{\pm}=E_{\pm}^{2}$, so $H(\lambda)w_{\pm}=E_{\pm}w_{\pm}$; moreover $w_{+}\cdot\overline{w_{-}}=\lambda^{2}c^{2}+E_{+}E_{-}=0$ by [L2], so the normalizations $u_{\pm}:=w_{\pm}/\|w_{\pm}\|$ form an orthonormal pair. For $\lambda=0$ the vectors $u_{1}=e_{1},u_{2}=e_{2}$ are an orthonormal eigenbasis with eigenvalues $0=E_{-}(0)$ and $g=E_{+}(0)$. By [L3] the spectrum of $H(\lambda)$ is exactly $\{E_{-}(\lambda),E_{+}(\lambda)\}$ for every real $\lambda$, and the eigenvalues are simple for $\lambda\ne0$ because then $s>g$ and $E_{+}\ne E_{-}$. This is clause (a). [L2, L3, given, algebra]
+1.1 [Hermiticity and the eigenbasis] Both $H_{0}$ and $V$ are real symmetric, hence $H(\lambda)$ is Hermitian for real $\lambda$. Put $$s:=\sqrt{g^{2}+4\lambda^{2}c^{2}}>0,\qquad E_{\pm}:=\frac{g\pm s}{2},$$ and, for $\lambda\ne0$, $w_{\pm}:=(\lambda c,E_{\pm})\ne0$. From $E_{\pm}^{2}-gE_{\pm}-\lambda^{2}c^{2}=0$, which follows from $E_{+}+E_{-}=g$ and $E_{+}E_{-}=-\lambda^{2}c^{2}$ by [L2], the first component equation $\lambda c\,E_{\pm}=E_{\pm}\,\lambda c$ holds identically and the second reads $\lambda c\cdot\lambda c+gE_{\pm} =\lambda^{2}c^{2}+gE_{\pm}=E_{\pm}^{2}$, so $H(\lambda)w_{\pm}=E_{\pm}w_{\pm}$; moreover $w_{+}\cdot\overline{w_{-}}=\lambda^{2}c^{2}+E_{+}E_{-}=0$ by [L2], so the normalizations $u_{\pm}:=w_{\pm}/\|w_{\pm}\|$ form an orthonormal pair. For $\lambda=0$ the vectors $u_{1}=e_{1},u_{2}=e_{2}$ are an orthonormal eigenbasis with eigenvalues $0=E_{-}(0)$ and $g=E_{+}(0)$. By [L3] the spectrum of $H(\lambda)$ is exactly $\{E_{-}(\lambda),E_{+}(\lambda)\}$ for every real $\lambda$, and the eigenvalues are simple for $\lambda\ne0$ because then $s>g$ and $E_{+}\ne E_{-}$. For $2|\lambda|c/g<1$, $s<\sqrt2g<2g$, so $|E_-|=(s-g)/2<g/2$ while $E_+\ge g>g/2$; thus the unique enclosed label is $E_-$, proving the contour identification in (a). [L2, L3, given, algebra]
 
 1.2 [Coefficients] With $P_{0}$ the projection onto $\mathbb Ce_{1}$ and $Q_{0}$ the projection onto $\mathbb Ce_{2}$, one has $V\psi_{0}=ce_{2}$, $\langle V\psi_{0},\psi_{0}\rangle=0$, $SV\psi_{0}=(c/g)e_{2}$ and $VSV\psi_{0}=(c^{2}/g)e_{1}$; hence $E'(0)=0$, $\psi'(0)=-SV\psi_{0}=-(c/g)e_{2}$ and $E''(0)=-2\langle VSV\psi_{0},\psi_{0}\rangle=-2c^{2}/g$, as displayed. Expanding $E_{-}(\lambda)=\frac g2\bigl(1-\sqrt{1+4\lambda^{2}c^{2}/g^{2}} \bigr)$ by [L2] gives the displayed expansion. This is clause (b). [L1, L2, given, algebra]
 
@@ -160,7 +162,7 @@ and evaluate the page's remainder bound at the test point.
   against a closed-form eigenvalue. The second-order coefficient is strictly
   negative for the followed lower level, the signature of a level repulsion from the
   complementary state.
-- **The remainder is genuinely cubic.** The exact difference from the
+- **The cubic bound is not sharp.** The exact difference from the
   second-order truncation is $O(\lambda^{4})$, and the page's bound at the
   test point is more than three orders of magnitude larger; the check
   verifies the inequality, not optimality.

@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 1
-deps: [def-cm-sine-coefficients-of-periodic-functions, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-derivatives, thm-sine-and-cosine-addition-formulas, thm-sine-cosine-zero-sets-and-fundamental-period, cor-trigonometric-parity-and-pythagorean-identity, thm-ftc-second-part, thm-substitution, def-oriented-integral, thm-additivity-over-subintervals, thm-linearity-of-the-integral, def-integral-over-a-measurable-set, def-continuity-real, thm-ftc-first-part]
+deps: [def-cm-sine-coefficients-of-periodic-functions, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-derivatives, thm-sine-and-cosine-addition-formulas, thm-sine-cosine-zero-sets-and-fundamental-period, cor-trigonometric-parity-and-pythagorean-identity, thm-ftc-second-part, thm-substitution, def-oriented-integral, thm-additivity-over-subintervals, thm-linearity-of-the-integral, def-continuity-real, thm-continuous-implies-integrable, thm-ftc-first-part]
 dependency_roles:
   def-cm-sine-coefficients-of-periodic-functions: mathematical-premise
   def-sine-and-cosine-by-power-series: mathematical-premise
@@ -19,8 +19,8 @@ dependency_roles:
   def-oriented-integral: mathematical-premise
   thm-additivity-over-subintervals: mathematical-premise
   thm-linearity-of-the-integral: mathematical-premise
-  def-integral-over-a-measurable-set: mathematical-premise
   def-continuity-real: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
   thm-ftc-first-part: mathematical-premise
 provenance:
   statement: ai-altered
@@ -38,6 +38,8 @@ sources:
 
 ## Statement
 
+All integrals in this statement and proof are ordinary Riemann integrals of continuous functions on compact intervals, as in [[def-cm-sine-coefficients-of-periodic-functions]].
+
 Let $L>0$. Then:
 
 **(a)** For all integers $n,k\ge1$,
@@ -46,7 +48,7 @@ $$\int_0^L\sin\Bigl(\frac{n\pi x}{L}\Bigr)\sin\Bigl(\frac{k\pi x}{L}\Bigr)dx=\fr
 
 **(b)** Let $W:\mathbb R\to\mathbb R$ be continuous ([[def-continuity-real]]), odd and $2L$-periodic. Then
 
-$$\int_0^{2L}W(x)\,dx=0,\qquad \int_0^{2L}W(x)\cos\Bigl(\frac{k\pi x}{L}\Bigr)dx=0 ,$$
+$$\int_0^{2L}W(x)\,dx=0,\qquad \int_0^{2L}W(x)\cos\Bigl(\frac{k\pi x}{L}\Bigr)dx=0\quad\text{for every integer }k ,$$
 
 and, for every integer $k\ge1$,
 
@@ -58,7 +60,7 @@ $$\frac{1}{2L}\int_0^{2L}W(x)\sin\Bigl(\frac{k\pi x}{L}\Bigr)dx=\frac{1}{L}\int_
 
 [F1] Product-to-sum identities and values: $2\sin a\sin b=\cos(a-b)-\cos(a+b)$, $\sin(m\pi)=0$ and $\cos(m\pi)=(-1)^m$ for integers $m$, and $\sin0=0$, $\cos0=1$ ([[thm-sine-and-cosine-addition-formulas]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-sine-and-cosine-by-power-series]]).
 
-[F2] Integrals of cosine: for $m\ne0$, $\int_0^L\cos(m\pi x/L)dx=(L/(m\pi))[\sin(m\pi)-0]=0$, and for $m=0$ the integral is $L$; the integrals are evaluated by the fundamental theorem ([[thm-ftc-second-part]], [[def-oriented-integral]], [[thm-linearity-of-the-integral]], [[def-integral-over-a-measurable-set]]).
+[F2] The sine and cosine integrands in this proof are continuous on each compact interval, hence Riemann integrable ([[thm-continuous-implies-integrable]]). For $m\ne0$, $\int_0^L\cos(m\pi x/L)dx=(L/(m\pi))[\sin(m\pi)-0]=0$, and for $m=0$ the integral is $L$; the values follow from the fundamental theorem ([[thm-ftc-second-part]], [[def-oriented-integral]], [[thm-linearity-of-the-integral]]).
 
 [F3] Additivity and change of variable on a period: for a continuous $2L$-periodic $g$, $\int_0^{2L}g=\int_0^Lg+\int_L^{2L}g$, and substituting $x=2L-u$ in the second integral gives $\int_L^{2L}g(x)dx=\int_0^Lg(2L-u)du=\int_0^Lg(-u)du$ by periodicity ([[thm-additivity-over-subintervals]], [[def-oriented-integral]], [[thm-substitution]], [[thm-ftc-first-part]]).
 

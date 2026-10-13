@@ -22,6 +22,7 @@ deps:
   - thm-cross-product-norm-is-the-two-vector-gram-determinant
   - def-euclidean-inner-product
   - def-inner-product-space
+  - thm-cauchy-schwarz-and-the-euclidean-norm
   - def-metric-ball
   - thm-heine-borel-rn
   - cor-zero-derivative-implies-constant
@@ -40,6 +41,7 @@ dependency_roles:
   thm-cross-product-norm-is-the-two-vector-gram-determinant: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
   def-inner-product-space: mathematical-premise
+  thm-cauchy-schwarz-and-the-euclidean-norm: mathematical-premise
   def-metric-ball: mathematical-premise
   thm-heine-borel-rn: mathematical-premise
   cor-zero-derivative-implies-constant: mathematical-premise
@@ -50,7 +52,7 @@ provenance:
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015),
-        §§3.5.1-3.4.3, Eqs. (3.34)-(3.45), printed pp. 55-58: free symmetric
+        §§3.4.1-3.4.3, Eqs. (3.34)-(3.45), printed pp. 55-58: free symmetric
         top, and the asymmetric-top stability discussion with the invariants of
         the motion"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
@@ -82,7 +84,7 @@ $Le_1$ and $Le_3$ are equilibria of $F$ and each is Lyapunov stable in the sense
 
 [L2] The cross product is bilinear and alternating and satisfies $\lVert u\times v\rVert_2\le\lVert u\rVert_2\lVert v\rVert_2$ [[def-cross-product-in-r3]], [[thm-cross-product-norm-is-the-two-vector-gram-determinant]], [[def-euclidean-inner-product]].
 
-[L3] $F$ is locally Lipschitz in the state variable in the sense of [[def-locally-lipschitz-in-the-state-variable]]: for $\lVert x\rVert_2,\lVert y\rVert_2\le r$ one has $F(x)-F(y)=(x-y)\times(I^{-1}x)+y\times(I^{-1}(x-y))$ by bilinearity of the cross product [L2], whence $\lVert F(x)-F(y)\rVert_2\le C_r\lVert x-y\rVert_2$ with $C_r:=2\max\{\lVert I^{-1}z\rVert_2:z\in\overline B_r(0)\}$ finite on the ball ([[def-metric-ball]], the minimum of $I_j$ gives $\lVert I^{-1}z\rVert_2\le\lVert z\rVert_2/I_1$). Picard-Lindelof therefore applies to the initial value problem of the system [[thm-picard-lindelof-local-existence-and-uniqueness]]; every datum has a unique maximal solution on an open interval, and every other solution through that datum is a restriction ([[def-maximal-ode-solution]], [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]]).
+[L3] $F$ is locally Lipschitz in the state variable in the sense of [[def-locally-lipschitz-in-the-state-variable]]. For $\lVert x\rVert_2,\lVert y\rVert_2\le r$, bilinearity gives $F(x)-F(y)=(x-y)\times(I^{-1}x)+y\times(I^{-1}(x-y))$ [L2]. Since $I^{-1}$ is diagonal with entries at most $1/I_1$ in absolute value, $\lVert I^{-1}z\rVert_2\le\lVert z\rVert_2/I_1$; hence $\lVert F(x)-F(y)\rVert_2\le(2r/I_1)\lVert x-y\rVert_2$. A compact time-state cylinder is a compact subset of Euclidean $\mathbb R^4$, hence bounded by Heine-Borel ([[thm-heine-borel-rn]], clause 2); choosing $r$ to contain its state projection gives the finite Lipschitz constant required by the definition. The same local estimate gives continuity of $F$ at each state point by the $\varepsilon$-$\delta$ definition. Picard-Lindelof therefore applies to the initial value problem of the system [[thm-picard-lindelof-local-existence-and-uniqueness]]; every datum has a unique maximal solution on an open interval, and every other solution through that datum is a restriction ([[def-maximal-ode-solution]], [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]]).
 
 [L4] Along every solution of $l'=l\times(I^{-1}l)$ the quantities $C(l)=\langle l,l\rangle$ and $E(l)=\tfrac12\langle l,I^{-1}l\rangle$ are constant; for $l=\sum_jl_je_j$ they equal $\sum_jl_j^2$ and $\sum_jl_j^2/(2I_j)$ The same algebra as in [[thm-cm-euler-equations-and-torque-free-invariants]] applies directly to the present diagonal map: $I^{-1}$ is symmetric, so $C\prime=2\langle l\times(I^{-1}l),l\rangle=0$ and $E\prime=\langle l\times(I^{-1}l),I^{-1}l\rangle=0$ by cross-product orthogonality. Both scalar functions are continuous and differentiable on the solution interval; [[cor-zero-derivative-implies-constant]] therefore makes them constant there. These computations require only the given positive diagonal entries, and no realization as a mass-distribution inertia matrix.
 
@@ -92,13 +94,15 @@ $Le_1$ and $Le_3$ are equilibria of $F$ and each is Lyapunov stable in the sense
 
 [L7] A closed bounded subset of $\mathbb R^3$ is compact by [[thm-heine-borel-rn]], clause 2.
 
+[L8] The Euclidean norm satisfies the triangle inequality, so $|\lVert x\rVert_2-\lVert y\rVert_2|\le\lVert x-y\rVert_2$; hence the norm is continuous and each sphere $\{z:\lVert z\rVert_2=r\}$ is closed ([[thm-cauchy-schwarz-and-the-euclidean-norm]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 By antisymmetry of the cross product, $F(Le_1)=Le_1\times(L/I_1)e_1=0$ and $F(Le_3)=Le_3\times(L/I_3)e_3=0$, so $Le_1$ and $Le_3$ are equilibria; and [L3] supplies the existence, uniqueness and continuation theory for the system. [given, L1, L2, L3]
 
-1.2 Let $l$ be the maximal solution with prescribed datum at $0$. By [L4] the numbers $C(l(t))=\lVert l(t)\rVert_2^2=\lVert l(0)\rVert_2^2$ and $E(l(t))$ are constant, so the values of $l$ lie in the sphere $\{z:\lVert z\rVert_2=\lVert l(0)\rVert_2\}\subseteq U$. This sphere is closed, since the norm is continuous by the reverse triangle inequality, and bounded, hence compact by [[thm-heine-borel-rn]]. [given, L2, L4, L6, L7]
+1.2 Let $l$ be the maximal solution with prescribed datum at $0$. By [L4] the numbers $C(l(t))=\lVert l(t)\rVert_2^2=\lVert l(0)\rVert_2^2$ and $E(l(t))$ are constant, so the values of $l$ lie in the sphere $\{z:\lVert z\rVert_2=\lVert l(0)\rVert_2\}\subseteq U$. This sphere is closed by [L8] and bounded, hence compact by [[thm-heine-borel-rn]]. [given, L2, L4, L6, L7, L8]
 
 1.3 Define, for $l=\sum_jl_je_j$, the quantity $D(l):=C(l)/(2I_1)-E(l)=\tfrac12\sum_{j>1}(1/I_1-1/I_j)l_j^2$. Since $1/I_1-1/I_j\ge1/I_1-1/I_2$ for $j=2,3$ by $I_2<I_3$ and $I_1<I_2$, one has $D(l)\ge c(l_2^2+l_3^2)$ with $c:=\tfrac12(1/I_1-1/I_2)>0$. [given, L4, algebra]
 
@@ -110,4 +114,4 @@ $Le_1$ and $Le_3$ are equilibria of $F$ and each is Lyapunov stable in the sense
 
 5.1 Combining steps 3.1 and 4.1, $\lVert l(t)-Le_1\rVert_2^2=(l_1(t)-L)^2+l_2(t)^2+l_3(t)^2<\frac{\varepsilon^2}{9}+\frac{\varepsilon^2}{4}<\varepsilon^2$ for all $t\ge0$; since for every $\varepsilon>0$ such a $\delta$ was produced and every maximal solution starting in $B_\delta(Le_1)$ is defined for all $t\ge0$ by step 2.1, $Le_1$ is Lyapunov stable in the sense of [L1]. [step 2.1, step 3.1, step 4.1, given, L1, algebra]
 
-6.1 The same argument with the roles of $e_1$ and $e_3$ exchanged uses $D_3(l):=E(l)-C(l)/(2I_3)=\tfrac12\sum_{j<3}(1/I_j-1/I_3)l_j^2\ge c_3(l_1^2+l_2^2)$ with $c_3:=\tfrac12(1/I_2-1/I_3)>0$, together with the mirrored estimates carrying $(l_1,l_2)$ where steps 1.3, 3.1 and 4.1 carry $(l_2,l_3)$; the certificate $D_3$ is constant along solutions by [L4], so the argument of steps 1.3, 2.1, 3.1, 5.1 and 4.1 applies verbatim to $Le_3$ and proves its Lyapunov stability. [step 1.3, step 3.1, step 4.1, step 5.1, given, L4, algebra] ∎
+6.1 The same argument with the roles of $e_1$ and $e_3$ exchanged uses $D_3(l):=E(l)-C(l)/(2I_3)=\tfrac12\sum_{j<3}(1/I_j-1/I_3)l_j^2\ge c_3(l_1^2+l_2^2)$ with $c_3:=\tfrac12(1/I_2-1/I_3)>0$, and $D_3(l)\le(l_1^2+l_2^2)/(2I_1)$. Set $\kappa_3:=1/\sqrt{2I_1c_3}$; the same positive $\delta$ conditions of step 3.1, with $\kappa_3$ in place of $\kappa$, bound $l_1(t)^2+l_2(t)^2<\kappa_3^2\delta^2$. The norm invariant then gives $|l_3(t)|\ge|L|/2$ with the sign of $L$, and the calculation of step 4.1 gives $|l_3(t)-L|\le\varepsilon/3$; the certificate $D_3$ is constant along solutions by [L4], so the argument of steps 1.3, 2.1, 3.1, 5.1 and 4.1 applies verbatim to $Le_3$ and proves its Lyapunov stability. [step 1.3, step 3.1, step 4.1, step 5.1, given, L4, algebra] ∎

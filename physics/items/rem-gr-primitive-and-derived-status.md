@@ -59,8 +59,12 @@ conventions of [[def-gr-si-unit-and-coordinate-conventions]] are part of the
 formulation; they fix dimensions and contain no measured value. The
 stress-energy slot [[def-gr-stress-energy-tensor-field]] and the energy-condition
 inequalities [[def-gr-energy-conditions]] are formulation-level definitions
-available to a model; a model that uses an energy condition adopts it as an
-extra assumption.
+available to a model. When a model adopts an energy condition independently,
+it is an extra assumption. When the condition is proved from that model's
+equations and hypotheses, it is a derived result under those hypotheses, as
+allowed by [[post-gr-field-and-matter-assumptions]] clause (iv); using that
+result requires its proof and prerequisites, not a separate adoption of the
+condition. The general framework imposes no energy condition automatically.
 
 **Derived (constructed, not adopted) on this page.** The inverse metric, the
 musical isomorphisms $\flat_p,\sharp_p$, the raised and lowered component
@@ -69,9 +73,10 @@ conventions and the metric trace
 transformation law of the inverse-metric components
 ([[lem-gr-inverse-metric-is-smooth]]); the pointwise causal classification of
 tangent vectors; the future/past classification of nonzero causal vectors by
-$N$, the identification of the future closed null cone with
-$\operatorname{cl}(C_p^+)\setminus\{0\}$, and the fact that a nonzero causal
-vector has nonzero pairing with any timelike vector
+$N$, the identification of the future-directed causal vectors with
+$\operatorname{cl}(C_p^+)\setminus\{0\}$, and the fact that every nonzero
+causal vector has nonzero pairing with the specified time-orientation vector
+$N_p$
 ([[lem-gr-future-causal-classification-by-a-timelike-field]]); the agreement or
 opposition of two time orientations on connected sets
 ([[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]); the

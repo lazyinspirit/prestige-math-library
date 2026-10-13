@@ -10,8 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-flat-minkowski-model-and-inertial-charts, lem-gr-flat-inertial-cone-criterion-and-sums, def-gr-causal-curves-and-reachability, def-causal-classification-of-lorentz-vectors, def-time-orientation-and-future-causal-sets, lem-gr-push-up-rule, lem-gr-causal-curve-calculus, thm-chain-rule-for-total-derivatives, def-c-r-and-smooth-maps-between-smooth-manifolds]
+deps: [def-dependent-choice, def-countable-choice, def-gr-flat-minkowski-model-and-inertial-charts, lem-gr-flat-inertial-cone-criterion-and-sums, def-gr-causal-curves-and-reachability, def-causal-classification-of-lorentz-vectors, def-time-orientation-and-future-causal-sets, lem-gr-push-up-rule, lem-gr-causal-curve-calculus, thm-chain-rule-for-total-derivatives, def-c-r-and-smooth-maps-between-smooth-manifolds]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   def-gr-flat-minkowski-model-and-inertial-charts: mathematical-premise
   lem-gr-flat-inertial-cone-criterion-and-sums: mathematical-premise
   def-gr-causal-curves-and-reachability: mathematical-premise
@@ -31,6 +33,10 @@ verification:
 
 ## Example
 
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the causal reachability and supplied
+causal-calculus conclusions used here.
+
 In the flat model $(A,\eta,N)$ with global inertial chart $x=(t,y_1,y_2,y_3)$,
 put $p:=x^{-1}(0,0,0,0)$, $q:=x^{-1}(1,1,0,0)$ and $r:=x^{-1}(2,0,0,0)$. The
 straight paths $p\to q$ and $q\to r$ are null, so $p\le q\le r$, while the
@@ -44,7 +50,7 @@ which the composition of two null legs stays null.
 
 **Given:** The flat model with inertial chart $x$ and the events $p=x^{-1}(0,0,0,0)$, $q=x^{-1}(1,1,0,0)$, $r=x^{-1}(2,0,0,0)$, $r'=x^{-1}(2,2,0,0)$.
 
-[L1] Inertial cone criterion: a nonzero displacement $v$ is future timelike, future null or future causal exactly when $v^0>|v_{\mathrm{vec}}|$, $v^0=|v_{\mathrm{vec}}|$, or $v^0\ge|v_{\mathrm{vec}}|>0$; the straight path $s\mapsto x^{-1}(a+sv)$ is a geodesic with constant velocity $v$ and hence, when $v$ is future causal, a future causal curve ([[lem-gr-flat-inertial-cone-criterion-and-sums]], [[def-gr-flat-minkowski-model-and-inertial-charts]], [[def-causal-classification-of-lorentz-vectors]], [[def-time-orientation-and-future-causal-sets]], [[def-gr-causal-curves-and-reachability]]).
+[L1] Inertial cone criterion: a nonzero displacement $v$ is future timelike, future null or future causal exactly when $v^0>|v_{\mathrm{vec}}|$, $v^0=|v_{\mathrm{vec}}|$, or $v^0\ge|v_{\mathrm{vec}}|$ (and then $v^0>0$ because $v\ne0$); the straight path $s\mapsto x^{-1}(a+sv)$ is a geodesic with constant velocity $v$ and hence, when $v$ is future causal, a future causal curve ([[lem-gr-flat-inertial-cone-criterion-and-sums]], [[def-gr-flat-minkowski-model-and-inertial-charts]], [[def-causal-classification-of-lorentz-vectors]], [[def-time-orientation-and-future-causal-sets]], [[def-gr-causal-curves-and-reachability]]).
 
 [L2] A smooth curve with future timelike velocity everywhere is a future timelike curve; velocities are read in the inertial chart by differentiating the chart representative ([[lem-gr-causal-curve-calculus]] clause (c), [[thm-chain-rule-for-total-derivatives]], [[def-c-r-and-smooth-maps-between-smooth-manifolds]]).
 

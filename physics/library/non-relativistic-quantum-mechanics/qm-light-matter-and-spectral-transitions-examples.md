@@ -19,6 +19,7 @@ requires:
   - qm-central-potentials-and-hydrogen
   - qm-controlled-approximations
   - qm-photons-and-radiation-modes
+  - lebesgue-measure-on-euclidean-space
 ---
 
 The companion page to [[qm-light-matter-and-spectral-transitions]] collects
@@ -26,15 +27,19 @@ two conditional computations and one model comparison, with a scope remark.
 [[ex-nrqm-light-matter-two-level-dipole-drive-check]] identifies declared
 two-level Pauli matter data with the linear two-level drive model of
 [[qm-driven-dynamics-and-adiabatic-limits]], computes the resonant
-co-rotating first-order amplitude $dE_{0}\tau/(2\hbar)$ and shows that its
-probability is the leading term of the exact averaged Rabi probability
+co-rotating first-order amplitude $a_+=idE_{0}\tau/(2\hbar)$, with modulus
+$|a_+|=dE_{0}\tau/(2\hbar)$, and shows that its squared modulus is the leading
+small-$\tau$ term of the exact averaged Rabi probability
 $\sin^{2}(dE_{0}\tau/(2\hbar))$ of that model.
 [[ex-nrqm-light-matter-hydrogen-dipole-angular-factors]] computes explicit
-angular factors of the hydrogenic dipole matrix elements — $1/\sqrt3$ for the
-allowed $1s$-to-$2p$ and $2p$-to-$1s$ angular entries $\langle Y_{10},Q_{0}Y_{00}\rangle$
-and $\langle Y_{1,\pm1},Q_{\pm}Y_{00}\rangle$, zero for the forbidden
-$1s$-to-$1s$, $1s$-to-$2s$ and $m$-violating entries — and contrasts them with
-the oscillator rule $|\Delta n|=1$.
+angular factors of the hydrogenic dipole matrix elements: $1/\sqrt3$ for
+$\langle Y_{10},Q_{0}Y_{00}\rangle$ and its reverse, $\mp1/\sqrt3$ for
+$\langle Y_{1,\pm1},Q_{\pm}Y_{00}\rangle$, and $\pm1/\sqrt3$ for
+$\langle Y_{00},Q_{\pm}Y_{1,\mp1}\rangle$, under the adopted harmonic and
+$Q_\pm=(x_1\pm ix_2)/\sqrt2$ conventions. These allowed $1s$-to-$2p$ and
+$2p$-to-$1s$ angular entries all have modulus $1/\sqrt3$; the factors are zero
+for the forbidden $1s$-to-$1s$, $1s$-to-$2s$ and $m$-violating entries. The
+example contrasts them with the oscillator rule $|\Delta n|=1$.
 [[texp-nrqm-light-matter-spectral-density-and-detected-photon-comparison]]
 proves that two declared cutoff-dipole models whose mode densities agree at
 the transition energy have the same rate coefficient in the golden-rule limit

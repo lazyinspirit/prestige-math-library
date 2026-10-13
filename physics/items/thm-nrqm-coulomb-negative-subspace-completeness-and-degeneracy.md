@@ -7,8 +7,9 @@ title: "Negative-subspace completeness and degeneracy"
 status: draft
 origin: pipeline
 dependency_level: 9
-deps: [thm-nrqm-coulomb-laguerre-bound-energy-exhaustion, thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-coulomb-essential-spectrum, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-coulomb-kummer-recurrence-and-termination, def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-projection-valued-measure, lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-inner-product-space, cor-cauchy-schwarz-inequality-for-l-two, def-countable-choice, def-axiom-of-choice]
+deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, thm-nrqm-coulomb-laguerre-bound-energy-exhaustion, thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-coulomb-essential-spectrum, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-coulomb-kummer-recurrence-and-termination, def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-projection-valued-measure, lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-inner-product-space, cor-cauchy-schwarz-inequality-for-l-two, def-countable-choice, def-axiom-of-choice]
 dependency_roles:
+  def-symmetric-self-adjoint-and-essentially-self-adjoint: mathematical-premise
   thm-nrqm-coulomb-laguerre-bound-energy-exhaustion: mathematical-premise
   thm-nrqm-coulomb-infinitesimal-kinetic-bound: mathematical-premise
   thm-nrqm-coulomb-essential-spectrum: mathematical-premise
@@ -72,7 +73,7 @@ interpretation is asserted.
 
 [F3] The negative spectral subspace $E_C((-\infty,0))L^2$ is the closed linear span of the eigenspaces of $C$ for its negative eigenvalues ([[thm-nrqm-coulomb-essential-spectrum]] (c)).
 
-[F4] Eigenspaces of a self-adjoint operator for distinct eigenvalues are orthogonal; $E(\{\lambda\})$ is the orthogonal projection onto $\ker(C-\lambda)$; and $\lambda\in\sigma_{\mathrm{ess}}(C)$ iff $\operatorname{rank}E((\lambda-\varepsilon,\lambda+\varepsilon))=\infty$ for every $\varepsilon>0$ ([[lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal]], [[def-discrete-and-essential-spectrum-of-a-self-adjoint-operator]], [[def-projection-valued-measure]]).
+[F4] For the self-adjoint (possibly unbounded) $C$, if $Cu=Eu$ and $Cv=E'v$ with $u,v\in D(C)$ and distinct real $E,E'$, then $E\langle u,v\rangle=\langle Cu,v\rangle=\langle u,Cv\rangle=E'\langle u,v\rangle$, hence $\langle u,v\rangle=0$ by symmetry on its domain; $E(\{\lambda\})$ is the orthogonal projection onto $\ker(C-\lambda)$; and $\lambda\in\sigma_{\mathrm{ess}}(C)$ iff $\operatorname{rank}E((\lambda-\varepsilon,\lambda+\varepsilon))=\infty$ for every $\varepsilon>0$ ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]], [[def-discrete-and-essential-spectrum-of-a-self-adjoint-operator]], [[def-projection-valued-measure]]).
 
 [F5] For a complete orthonormal family $(e_i)$ of a closed subspace $S$ of a Hilbert space one has $x=\sum_i\langle x,e_i\rangle e_i$ and $\|x\|^2=\sum_i|\langle x,e_i\rangle|^2$ for $x\in S$ ([[thm-parseval-equivalences-for-a-complete-orthonormal-family]], [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]], [[def-hilbert-space]]).
 

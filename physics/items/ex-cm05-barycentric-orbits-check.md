@@ -19,10 +19,8 @@ dependency_roles:
   def-interval: mathematical-premise
   def-countable-choice: mathematical-premise
 provenance:
-  statement: ai-generated
-  proof: ai-generated
-generation:
-  role: example
+  statement: ai-altered
+  proof: ai-altered
 proof_strategy: direct
 physical_scope: "A numerical check of the barycentric reconstruction on declared model data with unequal masses: the two labels' conic parameters and semimajor axes, the common eccentricity and focus at the centre of mass, the ratio of the areal rates $(m_2/m_1)^2$ and the common period about the centre of mass. Every number is declared model data or an exact consequence of the cited items; no observation or measurement is used."
 sources:
@@ -36,7 +34,7 @@ sources:
 ## Example
 
 Declare the gravitational two-label model of [[post-cm05-gravity]] with
-unequal inertial masses and a declared value of the constant,
+time window $I_0=\mathbb R$, unequal inertial masses and a declared value of the constant,
 $$m_1=2\times10^{24}\ \mathrm{kg},\quad m_2=6\times10^{24}\ \mathrm{kg},\quad M=8\times10^{24}\ \mathrm{kg},\quad \mu=\frac{m_1m_2}{M}=\tfrac32\times10^{24}\ \mathrm{kg},$$
 $$G_{\mathrm N}=10^{-24}\ \mathrm{m^{3}\,kg^{-1}\,s^{-2}},\qquad \kappa=G_{\mathrm N}m_1m_2=1.2\times10^{25}\ \mathrm{kg\,m^{3}\,s^{-2}},$$
 with the couplings identified with the inertial masses, and suppose a motion
@@ -63,7 +61,7 @@ cited conic and period items. Then the cited items give:
 
 ## Facts & Assumptions
 
-**Given:** The declared data $m_1=2\times10^{24}$, $m_2=6\times10^{24}$, $M=8\times10^{24}$, $\mu=\frac32\times10^{24}$, $\kappa=1.2\times10^{25}$, $J=6\times10^{27}$, $p=2\times10^{6}$ and $e=\frac12$.
+**Given:** The declared data $m_1=2\times10^{24}$, $m_2=6\times10^{24}$, $M=8\times10^{24}$, $\mu=\frac32\times10^{24}$, $\kappa=1.2\times10^{25}$, $J=6\times10^{27}$, $p=2\times10^{6}$ and $e=\frac12$. Bare numbers in the arithmetic below are numerical values in the SI units declared in the Example; any explicitly unit-bearing equality is an equality of quantities.
 
 [A1] The Axiom of Countable Choice is assumed ([[def-countable-choice]]).
 
@@ -71,7 +69,7 @@ cited conic and period items. Then the cited items give:
 
 [L2] Period, area law and curves ([[pthm-cm05-kepler-period]] clauses 1 and 3, [[pthm-cm05-plane-area]] clauses 2 and 4, [[def-euclidean-inner-product]]): $T=2\pi\mu ab/J=2\pi\sqrt{\mu/\kappa}\,a^{3/2}$; the relative areal-velocity vector is $j/(2\mu)$ with magnitude $J/(2\mu)$; and the label $i$'s areal-velocity vector about the centre of mass is $\bigl(\frac{m_j}{M}\bigr)^{2}\omega$, of magnitude $\bigl(\frac{m_j}{M}\bigr)^{2}J/(2\mu)$, with both labels $T$-periodic about the centre of mass.
 
-[L3] Arithmetic: $\kappa/(2a)=\bigl(1.2\times10^{25}\bigr)\big/\bigl(\tfrac{16}{3}\times10^{6}\bigr)=\tfrac94\times10^{18}$; $\mu a^{3}/\kappa=\tfrac{3/2}{1.2}\cdot\tfrac{512}{27}\times10^{18}=\tfrac{64}{27}\times10^{18}$; $2\pi\sqrt{64/27}\times10^{9}=\tfrac{16\pi}{3\sqrt3}\times10^{9}$; $(m_2/M)^{2}=9/16$, $(m_1/M)^{2}=1/16$ and $J/(2\mu)=2000\ \mathrm{m^{2}\,s^{-1}}$ ([[def-interval]]).
+[L3] Arithmetic: $\kappa/(2a)=\bigl(1.2\times10^{25}\bigr)\big/\bigl(\tfrac{16}{3}\times10^{6}\bigr)=\tfrac94\times10^{18}$; $\mu/\kappa=\tfrac{3/2}{1.2}\times10^{-1}\ \mathrm{s^{2}\,m^{-3}}=\tfrac18\ \mathrm{s^{2}\,m^{-3}}$; $\mu a^{3}/\kappa=\tfrac{3/2}{1.2}\times10^{-1}\cdot\tfrac{512}{27}\times10^{18}\ \mathrm{s^{2}}=\tfrac{64}{27}\times10^{18}\ \mathrm{s^{2}}$; $2\pi\sqrt{64/27}\times10^{9}=\tfrac{16\pi}{3\sqrt3}\times10^{9}$; $(m_2/M)^{2}=9/16$, $(m_1/M)^{2}=1/16$ and $J/(2\mu)=2000\ \mathrm{m^{2}\,s^{-1}}$ ([[def-interval]]).
 
 ## Verification
 

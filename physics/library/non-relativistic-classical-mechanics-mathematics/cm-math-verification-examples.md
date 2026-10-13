@@ -20,8 +20,9 @@ The companion page to [[cm-math-verification]] records explicit finite checks
 of its results. Everything here is mathematics: the examples carry
 `domain: mathematics`, depend only on the mathematical items of the parent page
 and on mathematical suppliers, and make no physical or empirical claim. No
-measurement, simulation or numerical integration is involved; every number is
-an exact rational, polynomial or explicit exponential expression.
+measurement, simulation or numerical integration is involved; the displayed
+values and bounds are exact expressions, including square roots, multiples of
+$\pi$, polynomials in the stated parameters, and exponential expressions.
 
 [[ex-cm-oscillator-saddle-second-variation-checks]] evaluates the oscillator
 second variation at $\omega=1$, $T=2\pi$ for the variations $\sin(t/2)$ and

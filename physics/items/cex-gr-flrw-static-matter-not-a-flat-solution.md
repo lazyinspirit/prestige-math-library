@@ -56,14 +56,6 @@ and pressure $p\equiv0$ satisfies the Friedmann equation (F)."
 
 ## Remarks
 
-- **Consistency with the equivalence proposition.** The example does not
-  contradict [[prop-gr-flrw-equation-equivalences]] clause (a), which assumes
-  (F) and compares the pairs (F), (S) and (F), (A); here (F) fails, so that
-  proposition does not apply. It shows that the hypothesis (F) in that
-  equivalence cannot be dropped.
+- **Consistency with the equivalence proposition.** The example does not contradict [[prop-gr-flrw-equation-equivalences]] clause (a), which assumes (F) and compares the pairs (F), (S) and (F), (A); here (F) fails, so that proposition does not apply. It shows that the hypothesis (F) in that equivalence cannot be dropped.
 
-- **Physical reading.** The datum is a formal solution candidate, not a
-  physical configuration: a static spatially flat matter-filled model is
-  incompatible with the adopted field law, and the same computation records
-  that fact at the level of the reduced equations. No observation and no
-  field law is asserted here.
+- **Scope.** The datum is a formal Friedmann-system example, not a claim about a physical configuration. The conclusions concern only the four scalar equations defined in [[def-gr-flrw-friedmann-system]]; no field law, observation, or physical model is asserted here.

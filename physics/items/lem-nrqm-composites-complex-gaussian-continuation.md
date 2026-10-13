@@ -7,7 +7,7 @@ title: "Complex Gaussian continuation"
 status: draft
 origin: pipeline
 dependency_level: 0
-deps: [lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, thm-dominated-convergence, def-complex-differentiability-holomorphic-and-entire, def-complex-domain, def-complex-logarithms-principal-logarithm-and-complex-powers, cor-principal-logarithm-is-holomorphic-on-the-slit-plane, thm-chain-rule-for-complex-derivatives, thm-complex-exponential-is-entire-with-derivative-itself, thm-identity-theorem-holomorphic-functions, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, def-improper-integral-at-infinity, def-countable-choice]
+deps: [lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, thm-dominated-convergence, def-complex-differentiability-holomorphic-and-entire, def-complex-domain, def-complex-logarithms-principal-logarithm-and-complex-powers, cor-principal-logarithm-is-holomorphic-on-the-slit-plane, thm-chain-rule-for-complex-derivatives, thm-complex-exponential-is-entire-with-derivative-itself, thm-identity-theorem-holomorphic-functions, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, def-improper-integral-at-infinity, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, def-countable-choice]
 dependency_roles:
   lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization: mathematical-premise
   thm-dominated-convergence: mathematical-premise
@@ -21,6 +21,8 @@ dependency_roles:
   thm-tonelli-theorem-for-sigma-finite-product-spaces: mathematical-premise
   thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
   def-improper-integral-at-infinity: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
+  thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral: mathematical-premise
   def-countable-choice: mathematical-premise
 proof_strategy: direct
 provenance:
@@ -40,7 +42,7 @@ Assume the Axiom of Countable Choice ([[def-countable-choice]]). For $z\in\mathb
 
 $$G_n(z):=\int_{\mathbb R^n}e^{-z|x|^2}\,dx,$$
 
-understood as the absolutely convergent improper multiple integral of the real and imaginary parts ([[def-improper-integral-at-infinity]]). Then:
+where $dx$ is product Lebesgue measure and the complex integral is computed from its real and imaginary parts. Equivalently, the absolutely convergent improper multiple integral used here is the cube-truncation limit $\lim_{R\to\infty}\int_{[-R,R]^n}e^{-z|x|^2}\,dx$ of these finite Lebesgue integrals. For $n=1$ it also equals the sum of the two separately convergent one-sided improper Riemann integrals at $0$, computed componentwise ([[def-improper-integral-at-infinity]]); this agreement is proved below. Then:
 
 (a) $G_n(z)$ converges absolutely for every $z$ with $\operatorname{Re}z>0$, and $G_1$ is holomorphic on the right half-plane $\Omega:=\{z\in\mathbb C:\operatorname{Re}z>0\}$ with $G_1'(z)=-\int_{\mathbb R}x^2e^{-zx^2}dx$ ([[def-complex-differentiability-holomorphic-and-entire]], [[def-complex-domain]]);
 
@@ -58,9 +60,9 @@ In particular the factor $(1+i\tau)^{-1/2}$ is defined by this branch for every 
 
 **Given:** $n\ge1$; a complex parameter $z$ with $\operatorname{Re}z>0$; the functions $G_n$ of the Statement; the principal logarithm $\operatorname{Log}$.
 
-[F1] For $n\ge1$, $t>0$ and $\xi\in\mathbb R^n$, $\mathcal F(e^{-\pi t|x|^2})(\xi)=t^{-n/2}e^{-\pi|\xi|^2/t}$; at $\xi=0$ this reads $\int_{\mathbb R^n}e^{-\pi t|x|^2}dx=t^{-n/2}$, and substituting $s=\pi t$ gives $\int_{\mathbb R^n}e^{-s|x|^2}dx=(\pi/s)^{n/2}$ ([[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]).
+[F1] For $n\ge1$, $t>0$ and $\xi\in\mathbb R^n$, $\mathcal F(e^{-\pi t|x|^2})(\xi)=t^{-n/2}e^{-\pi|\xi|^2/t}$; at $\xi=0$ this reads $\int_{\mathbb R^n}e^{-\pi t|x|^2}dx=t^{-n/2}$, and substituting $s=\pi t$ gives $\int_{\mathbb R^n}e^{-s|x|^2}dx=(\pi/s)^{n/2}$. Every polynomial times a positive real Gaussian is absolutely integrable ([[lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization]]).
 
-[F2] If $f_h\to f$ pointwise and $|f_h|\le g$ with $\int g<\infty$ uniformly in $h$, then $\int|f_h-f|\to0$ ([[thm-dominated-convergence]]).
+[F2] On a fixed measure space, if measurable complex-valued $f_n,f$ satisfy $f_n\to f$ almost everywhere and $|f_n|\le g$ almost everywhere for one nonnegative measurable $g$ with $\int g<\infty$, then $\int|f_n-f|\to0$ ([[thm-dominated-convergence]]). For a parameter $h\to0$, apply this to each sequence of nonzero parameters tending to zero.
 
 [F3] A function is holomorphic when it is complex differentiable at every point of its domain; the derivative is the limit of difference quotients ([[def-complex-differentiability-holomorphic-and-entire]]). A complex domain is a nonempty connected open set ([[def-complex-domain]]).
 
@@ -70,13 +72,13 @@ In particular the factor $(1+i\tau)^{-1/2}$ is defined by this branch for every 
 
 [F6] Tonelli's theorem: for a product-measurable nonnegative function on a $\sigma$-finite product, the iterated and double integrals agree ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]).
 
-[F7] For continuous $f$ on $\mathbb R$ the improper integral $\int_{-\infty}^{\infty}f$ is the limit of $\int_{-R}^{R}f$ when it exists ([[def-improper-integral-at-infinity]]).
+[F7] For continuous $f:\mathbb R^n\to\mathbb C$ with $\int|f|<\infty$, the improper multiple integral used here is $\lim_{R\to\infty}\int_{[-R,R]^n}f$, with finite Lebesgue integrals computed componentwise. Dominated convergence ([[thm-dominated-convergence]]) applied to $\mathbf1_{[-R,R]^n}f$ identifies this limit with the product Lebesgue integral: for any sequence $R_j\to\infty$ the indicators tend pointwise to $1$ and are dominated by $|f|$, hence every such sequence has the same limit. For $n=1$, the real and imaginary parts are bounded and Riemann integrable on every compact interval by [[thm-continuous-implies-integrable]], and their finite Riemann and Lebesgue integrals agree by [[thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral]]. Applying dominated convergence separately to $\mathbf1_{[0,R]}f$ as $R\to\infty$ and $\mathbf1_{[R,0]}f$ as $R\to-\infty$ therefore proves convergence of both one-sided improper integrals of [[def-improper-integral-at-infinity]]; the same argument for $|f|$ proves absolute convergence. Their sum is the full integral because the overlap $\{0\}$ has Lebesgue measure zero. Existence of a symmetric limit alone does not imply this agreement.
 
 ## Proof
 
 1.1 [Absolute convergence] Let $z\in\Omega$ and $\delta:=\operatorname{Re}z>0$. For every $x$, $|e^{-z|x|^2}|=e^{-\delta|x|^2}$, whose integral over $\mathbb R^n$ is finite by [F1] with $s=\delta$; hence the real and imaginary parts of $x\mapsto e^{-z|x|^2}$ are absolutely improperly integrable and $G_n(z)$ is well defined by [F7]. The same bound holds uniformly on compact subsets of $\Omega$, where $\delta$ can be taken positive uniformly. [given, F1, F7, algebra]
 
-2.1 [Holomorphy of $G_1$] Fix $z\in\Omega$ and $0<\delta<\operatorname{Re}z$; let $|h|<\delta/2$. For the function $w\mapsto e^w$ the second-order Taylor remainder satisfies $|e^{w}-1-w|\le|w|^2e^{|w|}$ (the power series of $e^w-1-w$ has its first term $\frac{w^2}2$ and the remaining terms are bounded by $\frac{|w|^2}{2}(e^{|w|}-1)\le|w|^2e^{|w|}$). Applying this with $w=-hx^2$ gives $\bigl|e^{-zx^2}\frac{e^{-hx^2}-1+hx^2}{h}\bigr|\le|h|x^4e^{(|h|-\operatorname{Re}z)x^2}\le|h|x^4e^{-\delta x^2/2}$ for all real $x$ and all $|h|<\delta/2$, and $x\mapsto x^4e^{-\delta x^2/2}$ has finite integral; by [F2] (applied on $[-R,R]$ uniformly in $R$ and then by [F7]) the difference quotient $\bigl(G_1(z+h)-G_1(z)\bigr)/h$ tends, as $h\to0$, to $-\int_{\mathbb R}x^2e^{-zx^2}dx$. Hence $G_1$ is complex differentiable at every $z\in\Omega$, with the displayed derivative; by [F3] it is holomorphic on $\Omega$. [step 1.1, F2, F3, F7, algebra]
+2.1 [Holomorphy of $G_1$] Fix $z\in\Omega$ and $0<\delta<\operatorname{Re}z$; let $|h|<\delta/2$. For the function $w\mapsto e^w$ the second-order Taylor remainder satisfies $|e^{w}-1-w|\le|w|^2e^{|w|}$ (the power series of $e^w-1-w$ has its first term $\frac{w^2}2$ and the remaining terms are bounded by $\frac{|w|^2}{2}(e^{|w|}-1)\le|w|^2e^{|w|}$). Applying this with $w=-hx^2$ gives $\bigl|e^{-zx^2}\frac{e^{-hx^2}-1+hx^2}{h}\bigr|\le|h|x^4e^{(|h|-\operatorname{Re}z)x^2}\le|h|x^4e^{-\delta x^2/2}$ for all real $x$ and all $|h|<\delta/2$, and $x\mapsto x^4e^{-\delta x^2/2}$ has finite integral; the remainder functions are continuous, hence measurable, converge pointwise to zero, and for $|h|<\delta/2$ are dominated by the nonnegative integrable function $(\delta/2)x^4e^{-\delta x^2/2}$. By [F2] along every sequence $h\to0$, their integrals over $\mathbb R$ tend to zero. Thus the difference quotient $\bigl(G_1(z+h)-G_1(z)\bigr)/h$ tends, as $h\to0$, to $-\int_{\mathbb R}x^2e^{-zx^2}dx$. Hence $G_1$ is complex differentiable at every $z\in\Omega$, with the displayed derivative; by [F3] it is holomorphic on $\Omega$. [step 1.1, F2, F3, F7, algebra]
 
 2.2 [The candidate branch] Put $H(z):=\sqrt\pi\,\exp\bigl(-\tfrac12\operatorname{Log}z\bigr)$ for $z$ in the slit plane $S\supseteq\Omega$. By [F4], $\operatorname{Log}$ is holomorphic on $S$ with $\operatorname{Log}'z=1/z$, and the complex exponential is entire with derivative itself, so by the chain rule for complex derivatives $H$ is holomorphic on the complex domain $S$ ([[thm-chain-rule-for-complex-derivatives]], [[thm-complex-exponential-is-entire-with-derivative-itself]]); also $H(z)^2=\pi\exp(-\operatorname{Log}z)=\pi/z$ because $\exp(\operatorname{Log}z)=z$. On the positive axis, $\operatorname{Log}t=\ln t$ [F4], so $H(t)=\sqrt\pi\,t^{-1/2}=\sqrt{\pi/t}$, which equals $G_1(t)=\int_{\mathbb R}e^{-tx^2}dx$ by [F1] with $n=1$, $s=t$. [step 1.1, F1, F3, F4, algebra]
 

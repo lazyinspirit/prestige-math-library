@@ -16,8 +16,9 @@ deps: [def-cm16-flow-equilibria-and-invariant-sets,
        def-lebesgue-measure-and-the-lebesgue-sigma-algebra,
        def-borel-sigma-algebra,
        thm-heine-borel-rn,
-       def-cm01-units]
+       def-cm01-units, cor-cm-flow-domain-open-and-flow-is-c1]
 dependency_roles:
+  cor-cm-flow-domain-open-and-flow-is-c1: mathematical-premise
   def-cm16-flow-equilibria-and-invariant-sets: formulation-prerequisite
   pthm-cm13-liouville: physical-result
   pthm-cm13-flow-preservation: physical-result
@@ -83,7 +84,7 @@ real time.
 
 [L2] Recurrence in finite measure ([[thm-poincare-recurrence-for-finite-measure-preserving-systems]]): in a measure-preserving system $(X,\mathcal A,\mu,T)$ with $\mu(X)<\infty$, for every $E\in\mathcal A$ almost every $x\in E$ has $T^nx\in E$ for infinitely many positive integers $n$.
 
-[L3] Measurability of the time-one map ([[thm-cm-smooth-dependence-and-the-variational-equation]]): the Hamiltonian field is $C^1$ because $H$ is $C^2$; its maximal-flow domain is open and its flow map is $C^1$ there. Every point of $A$ has a complete orbit by hypothesis, so the time-one domain is an open neighborhood of $A$ and $\Phi_1$ is continuous, hence Borel measurable, on that neighborhood.
+[L3] Measurability of the time-one map ([[cor-cm-flow-domain-open-and-flow-is-c1]]): the Hamiltonian field is $C^1$ because $H$ is $C^2$; its maximal-flow domain is open and its flow map is $C^1$ there. Every point of $A$ has a complete orbit by hypothesis, so the time-one domain is an open neighborhood of $A$ and $\Phi_1$ is continuous, hence Borel measurable, on that neighborhood.
 
 [L4] Heine-Borel in Euclidean space ([[thm-heine-borel-rn]]): a closed and bounded subset of $\mathbb R^{6N}$ is compact.
 
@@ -91,7 +92,7 @@ real time.
 
 **Proof technique:** direct.
 
-1.1 Compact phase set and local cover: $K=\overline A$ is closed and bounded in $\mathbb R^{6N}$, so [L4] makes it compact; by hypothesis it lies in the open phase domain $W$. For each $z\in K$, [L1] supplies a local-flow neighborhood $U_z$ and $h_z>0$. Choose an open neighborhood $V_z$ of $z$ with $\overline{V_z}\subset U_z$, and by compactness select finitely many $V_1,\ldots,V_m$ covering $K$, with corresponding local neighborhoods $U_i$ and times $h_i$. Set $h:=\min_i h_i>0$. Since $A$ is bounded, $\lambda_{6N}(A)<\infty$. [given, L1, L4, algebra]
+1.1 If $A=\emptyset$, every Borel subset of $A$ is empty and the almost-everywhere recurrence assertion is vacuous. Otherwise $K=\overline A$ is nonempty. Compact phase set and local cover: $K=\overline A$ is closed and bounded in $\mathbb R^{6N}$, so [L4] makes it compact; by hypothesis it lies in the open phase domain $W$. For each $z\in K$, [L1] supplies a local-flow neighborhood $U_z$ and $h_z>0$. Choose an open neighborhood $V_z$ of $z$ with $\overline{V_z}\subset U_z$, and by compactness select finitely many $V_1,\ldots,V_m$ covering $K$, with corresponding local neighborhoods $U_i$ and times $h_i$. Set $h:=\min_i h_i>0$. Since $A$ is bounded, $\lambda_{6N}(A)<\infty$. [given, L1, L4, algebra]
 
 2.1 One short time slice preserves volume on every Borel subset of $A$: fix $|s|\le h$ and a Borel set $B\subseteq A$. Partition $B$ into disjoint Borel pieces $B_i$ by assigning each point to the first $V_i$ containing it. Then $\overline{B_i}\subseteq K\cap\overline{V_i}\subset U_i$, so [L1] applies to each piece and gives a Borel image with $\lambda_{6N}(\Phi_s(B_i))=\lambda_{6N}(B_i)$. The images are pairwise disjoint because $\Phi_s$ is injective on $A$, with inverse $\Phi_{-s}|_A$; they lie in $A$ by invariance. Finite additivity therefore yields $\lambda_{6N}(\Phi_s(B))=\lambda_{6N}(B)$. [step 1.1, given, L1, algebra]
 

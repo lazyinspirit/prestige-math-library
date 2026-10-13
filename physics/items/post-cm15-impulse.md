@@ -20,7 +20,11 @@ deps: [post-cm02-force-superposition,
        def-euclidean-inner-product,
        def-cross-product-in-r3,
        thm-cm-impulse-restitution-and-energy-loss,
-       thm-cm-variable-mass-momentum-balance]
+       thm-cm-variable-mass-momentum-balance,
+       lem-cm-piecewise-c1-jump-derivative,
+       def-countable-choice,
+       def-test-function-space-d-of-an-open-set,
+       def-integral-over-a-measurable-set]
 dependency_roles:
   post-cm02-force-superposition: formulation-prerequisite
   post-cm02-interactions: formulation-prerequisite
@@ -37,6 +41,10 @@ dependency_roles:
   def-cross-product-in-r3: mathematical-premise
   thm-cm-impulse-restitution-and-energy-loss: mathematical-premise
   thm-cm-variable-mass-momentum-balance: mathematical-premise
+  lem-cm-piecewise-c1-jump-derivative: mathematical-premise
+  def-countable-choice: mathematical-premise
+  def-test-function-space-d-of-an-open-set: mathematical-premise
+  def-integral-over-a-measurable-set: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -45,9 +53,11 @@ sources:
   references:
     - title: "Jacob Moore and Contributors, Mechanics Map (Pennsylvania State University, 2nd ed.), Engineering LibreTexts, Chapter 11 'Impulse and Momentum in Particles', §§11.2-11.5: the impulse-momentum principle $\\mathbf J=m\\mathbf v_f-m\\mathbf v_i$, conservation of momentum for a system with no external impulse, the coefficient of restitution $0\\le\\epsilon\\le1$ along the contact normal, and one-dimensional particle collisions"
       url: "https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Mechanics_Map_(Moore_2nd_Edition)/11%3A_Impulse_and_Momentum_in_Particles/11.04%3A_Surface_Collisions_and_the_Coefficient_of_Restitution"
-    - title: "J. Peraire and S. Widnall, 16.07 Dynamics (MIT OpenCourseWare, Fall 2008/2009), Lecture L14 'Variable Mass Systems: The Rocket Equation': the capture/expulsion momentum accounting, the warning that $\\mathrm d(m\\mathbf v)/\\mathrm dt=\\mathbf F$ holds only when the transferred matter carries no momentum relative to the body, and the thrust $T=-c\\dot m$"
+    - title: "Jacob Moore and Contributors, Mechanics Map, §11.5 'Particle Collisions in One Dimension': equal and opposite internal impulses, conservation in the absence of external impulse, and restitution using relative velocities"
+      url: "https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Mechanics_Map_(Moore_2nd_Edition)/11%3A_Impulse_and_Momentum_in_Particles/11.05%3A_Particle_Collisions_in_One_Dimension"
+    - title: "J. Peraire and S. Widnall, 16.07 Dynamics (MIT OpenCourseWare, Fall 2008/2009), Lecture L14 'Variable Mass Systems: The Rocket Equation', Eqs. (9)-(15): capture/expulsion accounting in an inertial frame, the net transferred inertial momentum term in $(mv)'$, and thrust $T=-c\\dot m$; the sentence after Eq. (11) mislabels the transferred velocity as relative, while the initial definition and rocket specialization distinguish it from relative exhaust velocity"
       url: "https://ocw.mit.edu/courses/16-07-dynamics-fall-2009/98d19cb2b9983c14c6907052499e7a98_MIT16_07F09_Lec14.pdf"
-    - title: "David Tong, Classical Dynamics (University of Cambridge), §1.2, printed p. 2: the momentum balance $\\mathbf F=\\dot{\\mathbf p}$ as the primitive statement and the caution that an open variable-mass body is not described by the closed-system form alone"
+    - title: "David Tong, Classical Dynamics (University of Cambridge), §1.2, Eq. (1.1), printed pp. 2-3: background on particle momentum $\\mathbf p=m\\dot{\\mathbf r}$ and Newton's law in an inertial frame; the open-body momentum-transfer accounting used here is supplied by MIT L14, not by this section"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
 ---
 
@@ -63,9 +73,12 @@ statement explicitly invokes it.
 masses $m_1,m_2>0$ ([[post-cm01-worldlines]] clause (v)), time window $I_0$,
 configuration domain $Q$ ([[def-cm01-configuration]]) and continuous
 external-plus-pair force maps $F_1,F_2$ is **run in the isolated reciprocal
-impulse model at $t_*\in I_0$** when there is a motion
-$x=(x_1,x_2):I\to Q$ of the associated first-order system
-([[def-cm02-newtonian-flow]]) such that:
+impulse model at $t_*\in I_0$** when there is an interval
+$I\subseteq I_0$ with $t_*\in\operatorname{int}I$ and a position curve
+$x=(x_1,x_2):I\to Q$ such that the following conditions hold. This curve is
+called an **impulse motion**; only its restrictions away from $t_*$ are
+motions of the associated first-order system of [[def-cm02-newtonian-flow]],
+and no differentiability at $t_*$ is required:
 
 1. $x_1,x_2$ are continuous on $I$ and twice continuously differentiable on
    each of $I\cap(-\infty,t_*)$ and $I\cap(t_*,\infty)$
@@ -80,10 +93,29 @@ $x=(x_1,x_2):I\to Q$ of the associated first-order system
 
 The two equations of clause 3 are the **reciprocal finite-jump form** of the
 isolated impulse: the two labels receive equal and opposite momentum changes.
-The model places no bound on the force maps across $t_*$; its distributional
-rendering by test-function pairings is proved in
-[[thm-cm-impulse-restitution-and-energy-loss]]. The dimension of the impulse
-is $[J]=\mathsf M\ell\tau^{-1}$ ([[def-cm01-units]]).
+The regular force maps remain continuous on their state domain; their
+evaluations along the curve can have different one-sided limits because the
+velocity can jump. The dimension of the impulse
+is $[J]=\mu\ell\tau^{-1}$ ([[def-cm01-units]]).
+
+For the distributional rendering on $\operatorname{int}I$, assume
+$\mathrm{AC}_\omega$ ([[def-countable-choice]]). Put
+$p_i(t)=m_ix_i'(t)$ and $f_i(t)=F_i(t,x(t),x'(t))$ off $t_*$, assigning both
+the value $0$ at $t_*$. Their one-sided limits are finite: those of $p_i$
+are $m_iv_i^\pm$, and continuity of the state-domain force maps gives
+$f_i(t_*^\pm)=F_i(t_*,x(t_*),v^\pm)$, with
+$v^\pm=(v_1^\pm,v_2^\pm)$. Also $p_i'=f_i$ off the impulse. Thus each
+component meets the piecewise-$C^1$ and one-sided derivative-limit
+hypotheses of [[lem-cm-piecewise-c1-jump-derivative]]. Its identity,
+summed componentwise, gives for every real vector test function
+$\Phi\in C_c^\infty(\operatorname{int}I;\mathbb R^3)$ (each component is
+smooth and compactly supported, [[def-test-function-space-d-of-an-open-set]])
+$$-\int_{\operatorname{int}I}\langle p_i,\Phi'\rangle\,d\lambda=\int_{\operatorname{int}I}\langle f_i,\Phi\rangle\,d\lambda+s_i\langle J,\Phi(t_*)\rangle,\qquad s_1=1,\quad s_2=-1,$$
+where $\lambda$ is Lebesgue measure and the integral convention is that of
+[[def-integral-over-a-measurable-set]]. This is the pairing form of the
+adopted jumps. Unlike [[thm-cm-impulse-restitution-and-energy-loss]], whose
+hypotheses require continuous time forces and assume the pairings to derive
+the jumps, this rendering allows distinct one-sided regular-force values.
 
 **(ii) The collinear restitution contact law.** A model run in the isolated
 reciprocal impulse model at $t_*$ is **collinear** when there is a unit vector
@@ -118,9 +150,9 @@ is proved in [[thm-cm-variable-mass-momentum-balance]]; in particular the
 closed-system law $(mv)'=F$ is recovered only when
 $r_{\mathrm{in}}w_{\mathrm{in}}=r_{\mathrm{out}}w_{\mathrm{out}}$.
 The quantities have types and SI dimensions
-$[m]=\mathsf M$, $[v]=[w_{\mathrm{in}}]=[w_{\mathrm{out}}]=\ell\tau^{-1}$,
-$[F]=\mathsf M\ell\tau^{-2}$ and
-$[r_{\mathrm{in}}]=[r_{\mathrm{out}}]=\mathsf M\tau^{-1}$; they are model
+$[m]=\mu$, $[v]=[w_{\mathrm{in}}]=[w_{\mathrm{out}}]=\ell\tau^{-1}$,
+$[F]=\mu\ell\tau^{-2}$ and
+$[r_{\mathrm{in}}]=[r_{\mathrm{out}}]=\mu\tau^{-1}$; they are model
 data, not measured values.
 
 ## Status and scope
@@ -128,9 +160,13 @@ data, not measured values.
 - **Why the extensions are adopted rather than derived.** A motion of the
   smooth-force branch with a continuous force map has a $C^1$ momentum curve
   and no jumps; hence no choice of smooth force maps produces the momentum
-  jump of clause 3 with $J\ne0$ at an isolated time, and no choice of a
-  constant total mass produces the matter exchange of clause (iii). The
-  extensions enlarge the model class; they are not consequences of
+  jump of clause 3 with $J\ne0$ at an isolated time. The closed, fixed-label
+  smooth-force model does not account for matter crossing a body boundary;
+  clause (iii) adopts that additional accounting. Constant body mass alone
+  does not exclude exchange: its mass balance permits
+  $r_{\mathrm{in}}=r_{\mathrm{out}}>0$, and different entering and leaving
+  inertial velocities can give a nonzero momentum flux. The extensions
+  enlarge the model class; they are not consequences of
   [[post-cm02-force-superposition]] or [[post-cm02-interactions]], and the
   exact statement that a smooth-force motion cannot jump is proved on this
   page as part of [[pthm-cm15-impact-balance]].
@@ -150,4 +186,4 @@ data, not measured values.
   bounded smooth force are outside the adopted models. Clause (iii) excludes
   internal structure of the leaving mass, pressure forces on the open
   boundary and non-inertial frames; its spatially distributed refinement is
-  the smooth open-flow model of [[pthm-cm15-control-volume-balance]].
+  the finite-regularity open-flow model of [[pthm-cm15-control-volume-balance]].

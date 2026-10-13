@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 0
-deps: [def-vector-space, def-linear-map, def-kernel-and-image-of-a-linear-map, def-inner-product-space, def-orthogonal-vectors-sets-and-orthonormal-bases, def-orientation-of-a-finite-dimensional-real-vector-space, def-euclidean-inner-product]
+deps: [def-vector-space, def-linear-map, def-kernel-and-image-of-a-linear-map, def-inner-product-space, def-orthogonal-vectors-sets-and-orthonormal-bases, def-orientation-of-a-finite-dimensional-real-vector-space, def-euclidean-inner-product, def-quotient-vector-space-and-canonical-projection, thm-first-isomorphism-theorem-for-vector-spaces, thm-linear-kernel-image-and-injectivity, thm-rank-nullity, lem-standard-basis-of-f-n]
 dependency_roles:
   def-vector-space: mathematical-premise
   def-linear-map: mathematical-premise
@@ -15,6 +15,11 @@ dependency_roles:
   def-orthogonal-vectors-sets-and-orthonormal-bases: mathematical-premise
   def-orientation-of-a-finite-dimensional-real-vector-space: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
+  def-quotient-vector-space-and-canonical-projection: mathematical-premise
+  thm-first-isomorphism-theorem-for-vector-spaces: mathematical-premise
+  thm-linear-kernel-image-and-injectivity: mathematical-premise
+  thm-rank-nullity: mathematical-premise
+  lem-standard-basis-of-f-n: mathematical-premise
 justified_by: [lem-cm-adapted-coordinates-exist-and-are-unique]
 provenance:
   statement: ai-altered
@@ -35,17 +40,23 @@ Let $V$ be a real vector space of dimension $4$ ([[def-vector-space]]) and let $
 
 $$K:=\ker\tau=\{v\in V:\tau(v)=0\},$$
 
-the kernel of $\tau$ ([[def-kernel-and-image-of-a-linear-map]]). Since $\tau$ is surjective and $\dim V=4$, the quotient $V/K\cong\mathbb R$ is one-dimensional and $\dim K=3$.
+the kernel of $\tau$ ([[def-kernel-and-image-of-a-linear-map]]). The kernel is a linear subspace ([[thm-linear-kernel-image-and-injectivity]]), so the quotient vector space $V/K$ is defined ([[def-quotient-vector-space-and-canonical-projection]]). The first isomorphism theorem gives the linear isomorphism $V/K\to\operatorname{im}\tau=\mathbb R$, $v+K\mapsto\tau(v)$ ([[thm-first-isomorphism-theorem-for-vector-spaces]]). Since $\mathbb R$ has the one-element standard basis, $\dim\mathbb R=1$ ([[lem-standard-basis-of-f-n]] with $F=\mathbb R$ and $n=1$); rank-nullity for the surjective map $\tau$ therefore gives $\dim K=4-1=3$ ([[thm-rank-nullity]]).
 
 Let $g$ be an inner product on $K$ in the sense of [[def-inner-product-space]]: a symmetric positive definite $\mathbb R$-bilinear form $g:K\times K\to\mathbb R$.
 
-Let $A$ be a set equipped with an action of the additive group of $V$, written $(p,v)\mapsto p+v$, that is free and transitive: explicitly, $(p+v)+w=p+(v+w)$ and $p+0=p$ for all $p\in A$ and $v,w\in V$, and for all $p,q\in A$ there is exactly one $v\in V$ with $p+v=q$; write $q-p$ for that unique vector. The identities $p+(q-p)=q$, $(q-p)+(r-q)=r-p$ and $q-p=-(p-q)$ follow from the axioms together with uniqueness of the displacement. Such a set is an **affine space modelled on $V$**, and its elements are **events**. (This formulation restates the affine-space structure used here so that the item is self-contained; the general theory of affine spaces is supplied by the special-relativity collection for its own consumers.)
+Let $A$ be a nonempty set equipped with an action of the additive group of $V$, written $(p,v)\mapsto p+v$, that is free and transitive: explicitly, $(p+v)+w=p+(v+w)$ and $p+0=p$ for all $p\in A$ and $v,w\in V$, and for all $p,q\in A$ there is exactly one $v\in V$ with $p+v=q$; write $q-p$ for that unique vector. The identities $p+(q-p)=q$, $(q-p)+(r-q)=r-p$ and $q-p=-(p-q)$ follow from the axioms together with uniqueness of the displacement. Such a set is an **affine space modelled on $V$**, and its elements are **events**. (This formulation restates the affine-space structure used here so that the item is self-contained; the general theory of affine spaces is supplied by the special-relativity collection for its own consumers.)
+
+Fix an orientation of $K$ in the sense of [[def-orientation-of-a-finite-dimensional-real-vector-space]]; this is a chosen orientation class, not a chosen spatial basis.
 
 An **adapted chart** for the data $(V,\tau,g,A)$ is a triple $(o,u,(e_1,e_2,e_3))$ consisting of
 
 1. an origin $o\in A$;
 2. a vector $u\in V$ with $\tau(u)=1$;
-3. an ordered basis $(e_1,e_2,e_3)$ of $K$ that is $g$-orthonormal and positively oriented with respect to a chosen orientation of $K$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]], [[def-orientation-of-a-finite-dimensional-real-vector-space]]).
+3. an ordered basis $(e_1,e_2,e_3)$ of $K$ that is $g$-orthonormal and positively oriented with respect to the fixed orientation of $K$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]], [[def-orientation-of-a-finite-dimensional-real-vector-space]]).
+
+An adapted chart exists for every such set of data and fixed orientation, by clause 3 of [[lem-cm-adapted-coordinates-exist-and-are-unique]].
+
+For spatial coordinate vectors $x\in\mathbb R^3$, this item uses the one-based labels $x_i:=x(i-1)$ for $1\le i\le3$; thus $(x_1,x_2,x_3)$ lists the values at $0,1,2$ of the function-space vector of [[def-euclidean-inner-product]]. The labels $e_1,e_2,e_3$ name the corresponding ordered spatial basis; they do not change the underlying index set of $\mathbb R^3$.
 
 The **adapted coordinates** of a point $p\in A$ in this chart are the pair $(t,x)\in\mathbb R\times\mathbb R^3$ determined by
 

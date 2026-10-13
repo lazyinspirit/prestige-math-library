@@ -14,10 +14,12 @@ deps:
   - def-gr-development-and-data-fixing-isometry
   - def-gr-smooth-lorentzian-objects
   - lem-gr-cauchy-set-topology-and-graph
+  - lem-gr-chronology-openness
 dependency_roles:
   def-gr-development-and-data-fixing-isometry: mathematical-premise
   def-gr-smooth-lorentzian-objects: mathematical-premise
   lem-gr-cauchy-set-topology-and-graph: mathematical-premise
+  lem-gr-chronology-openness: mathematical-premise
 sources:
   references:
     - title: "J. Sbierski, On the Existence of a Maximal Cauchy Development for the
@@ -71,9 +73,12 @@ $x\in V\cap U$ with $\varphi(x)\in V'$.
 $\Sigma_{M'}=j'(\Sigma)$. For a corresponding pair $(p,p')$, openness of
 $U\supseteq\Sigma_M$ and of $\varphi(U)\supseteq\Sigma_{M'}$ implies
 $p\notin\Sigma_M$ and $p'\notin\Sigma_{M'}$.
-The Cauchy-set trichotomy and chronology openness of
-[[lem-gr-cauchy-set-topology-and-graph]] clauses (a),(b) therefore put each
-boundary point in exactly one of the open chronological sides.
+The Cauchy-set trichotomy of
+[[lem-gr-cauchy-set-topology-and-graph]] clause (a) puts each boundary point
+in exactly one chronological side. These sides are open because
+$I^\pm(\Sigma_M)=\bigcup_{s\in\Sigma_M}I^\pm(s)$, and each point future
+and past is open by [[lem-gr-chronology-openness]] clause (a); the same
+argument applies in $M'$.
 For $x\in U$, its ambient and intrinsic sides agree: the trichotomy in
 $U$ gives an intrinsic timelike curve between $x$ and $\Sigma_M$ in one
 direction, and that curve is also an ambient curve; the disjoint ambient

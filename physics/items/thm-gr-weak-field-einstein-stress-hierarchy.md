@@ -31,6 +31,7 @@ deps:
   - def-euclidean-spheres-and-closed-balls
   - cor-euclidean-closed-balls-and-spheres-are-compact
   - thm-heine-cantor-metric
+  - thm-compactness-under-continuous-maps
   - thm-geometric-series
 dependency_roles:
   def-gr-stationary-weak-field-data: mathematical-premise
@@ -52,14 +53,11 @@ dependency_roles:
   def-euclidean-spheres-and-closed-balls: mathematical-premise
   cor-euclidean-closed-balls-and-spheres-are-compact: mathematical-premise
   thm-heine-cantor-metric: mathematical-premise
+  thm-compactness-under-continuous-maps: mathematical-premise
   thm-geometric-series: mathematical-premise
 sources:
   references:
-    - title: "S. M. Carroll, Lecture Notes on General Relativity,
-        arXiv:gr-qc/9712019v1 (1997), Ch. 4: R^{(1)}_{00} = -(1/2)Delta h_{00}
-        and the reduction of the field equations to the Poisson equation,
-        printed pp. 111-112 (PDF pp. 118-119); Ch. 4: the trace-reversed
-        linearized Einstein tensor, printed pp. 108-110 (PDF pp. 115-117)"
+    - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 4 equations (4.12)-(4.21) and (4.48)-(4.52), printed pp. 105-112: Newtonian time-time potential and Poisson limit; Ch. 6 equations (6.4)-(6.8), (6.13)-(6.22) and (6.24)-(6.29), printed pp. 142-148: first-order curvature, gauge, trace reversal and diagonal weak-field metric"
       url: "https://arxiv.org/pdf/gr-qc/9712019"
     - title: "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos,
         Michaelmas 2019), section 5.1.1: the linearized Einstein tensor for the
@@ -89,8 +87,9 @@ $\Phi=\varepsilon c^2\varphi:U\to\mathbb R$,
 $\rho_\varepsilon=T_{00}/c^2:U\to\mathbb R$, and let $G^{(1)}$ be the
 first-order Einstein coefficient of
 [[def-gr-flat-linearized-perturbation]]. Let $c>0$ and
-$G_N:=\kappa c^4/(8\pi)$. There are $\varepsilon_*'>0$ and $C_2<\infty$,
-depending only on $C$, $L$ and the dimension, such that for every
+$G_N:=\kappa c^4/(8\pi)$. There are $\varepsilon_*'>0$, depending only on $\varepsilon_0$, $C$,
+$L$ and the dimension, and $C_2<\infty$, depending only on $C$, $L$ and
+the dimension, such that for every
 $0<\varepsilon\le\varepsilon_*'$ the following inequalities hold at every
 spacetime point $p\in\Omega$ with $\pi(p)\in K$. Spatial derivatives and
 $\Delta$ are taken on $U$ ([[def-laplacian-of-a-c2-function]]), and maxima
@@ -171,11 +170,7 @@ $$|\Delta_X\psi-4\pi R|\le C_2\varepsilon\qquad\text{on }K/L .$$
 
 ## Facts & Assumptions
 
-**Given:** Stationary weak-field data with spatial base $U=\pi(\Omega)$ and
-compact $K\subseteq U$, an Einstein family with coupling $\kappa$, its
-potential $\Phi=\varepsilon c^2\varphi$, the spatial density
-$\rho_\varepsilon=T_{00}/c^2$, and the constants $c>0$ and
-$G_N=\kappa c^4/(8\pi)$.
+**Given:** Stationary weak-field data with spatial base $U=\pi(\Omega)$ and compact $K\subseteq U$, an Einstein family with coupling $\kappa$, its potential $\Phi=\varepsilon c^2\varphi$, the spatial density $\rho_\varepsilon=T_{00}/c^2$, and the constants $c>0$ and $G_N=\kappa c^4/(8\pi)$.
 
 [L1] The component families have the form $g_{00}=-(1+2\varepsilon\varphi)+r_{00}$, $g_{0i}=r_{0i}$ and $g_{ij}=(1-2\varepsilon\varphi)\delta_{ij}+r_{ij}$, pulled back from $U$; on $K$, $|\partial^\alpha\varphi|\le C/L^{|\alpha|}$, $|\partial^\alpha r_{00}|+|\partial^\alpha r_{ij}|\le C\varepsilon^2/L^{|\alpha|}$ and $|\partial^\alpha r_{0i}|\le C\varepsilon^{3/2}/L^{|\alpha|}$ for spatial $|\alpha|\le2$ ([[def-gr-stationary-weak-field-data]] clause (a)).
 
@@ -195,7 +190,7 @@ with indices raised by $\eta$ ([[thm-gr-flat-linearized-curvature-and-gauge]] cl
 
 [L7] For a positive-density dust model $T_{ab}=\mathcal E u_a u_b$, $\nabla^aT_{ab}=0$ is equivalent to the dust continuity and geodesic equations; the forward identity $\nabla^aT_{ab}=u_b\nabla_a(\mathcal E u^a)+\mathcal E u^a\nabla_a u_b$ also holds at zero density without division by $\mathcal E$ ([[def-gr-dust-matter-model]], [[prop-gr-dust-and-perfect-fluid-conservation-equations]] clause (a)). The same definition supplies the formal energy-to-mass conversion $\mathcal E_\varepsilon=c^2\mu_\varepsilon$, hence $T_{ab}=c^2\mu_\varepsilon u_a u_b$.
 
-[L8] Closed Euclidean balls in finite-dimensional jet space are compact and continuous functions on them are bounded; Taylor's Lagrange remainder gives $|f(1)-f(0)-f'(0)|\le\tfrac12\sup_{[0,1]}|f''|$ for $f\in C^2([0,1])$; and $\sum_{k\ge0}q^k=1/(1-q)$ for $0\le q<1$ ([[cor-euclidean-closed-balls-and-spheres-are-compact]], [[thm-heine-cantor-metric]], [[cor-taylor-lagrange-and-cauchy-remainders]], [[thm-geometric-series]]).
+[L8] Closed Euclidean balls in finite-dimensional jet space are compact and continuous functions on them are bounded; Taylor's Lagrange remainder gives $|f(1)-f(0)-f'(0)|\le\tfrac12\sup_{[0,1]}|f''|$ for $f\in C^2([0,1])$; and $\sum_{k\ge0}q^k=1/(1-q)$ for $0\le q<1$ ([[cor-euclidean-closed-balls-and-spheres-are-compact]], [[thm-heine-cantor-metric]], [[thm-compactness-under-continuous-maps]] clause 2, [[cor-taylor-lagrange-and-cauchy-remainders]], [[thm-geometric-series]]).
 
 
 ## Proof
@@ -220,27 +215,7 @@ with indices raised by $\eta$ ([[thm-gr-flat-linearized-curvature-and-gauge]] cl
 
 ## Remarks
 
-- **Two distinct source densities.** Every Einstein family has the component
-  estimate for $\rho_\varepsilon=T_{00}/c^2$, which is a coordinate
-  energy-density reading divided by $c^2$. Matching the Poisson source to
-  the independent dust rest-mass density $\mu_\varepsilon$ requires the
-  separately stated dust, energy-size and tilt hypotheses; the density
-  estimate is proved from those hypotheses and is not an identity.
-- **Admissibility and existence.** The dust continuity and geodesic equations
-  make its stress tensor divergence-free, including across smooth zero-density
-  regions with the velocity field still specified. The theorem assumes the
-  coupled Einstein-dust family; it does not construct one from Newtonian data
-  or assert existence for prescribed initial data.
-- **Nonlogical comparison with later evolution theory.** The density symbol
-  $\rho$ used in [[thm-gr-dust-local-evolution]] is mass-normalized and
-  corresponds to $\mu_\varepsilon=\mathcal E_\varepsilon/c^2$ here, so its
-  tensor convention $c^2\rho u_a u_b$ matches the energy-density convention
-  $\mathcal E_\varepsilon u_a u_b$. This is a notation comparison only;
-  the present theorem assumes its coupled family and its smooth velocity
-  even at zero density. Its proof uses no existence or evolution conclusion
-  from that later theorem.
-- **Gauge independence.** No harmonic-gauge condition is used here: the
-  component estimates are computed directly in the spatially factored chart,
-  and the linearized coefficient is evaluated on the actual perturbation.
-  The flat gauge material of [[thm-gr-flat-linearized-curvature-and-gauge]]
-  supplies the formula; the uniform two-jet remainder is established here.
+- **Two distinct source densities.** Every Einstein family has the component estimate for $\rho_\varepsilon=T_{00}/c^2$, which is a coordinate energy-density reading divided by $c^2$. Matching the Poisson source to the independent dust rest-mass density $\mu_\varepsilon$ requires the separately stated dust, energy-size and tilt hypotheses; the density estimate is proved from those hypotheses and is not an identity.
+- **Admissibility and existence.** The dust continuity and geodesic equations make its stress tensor divergence-free, including across smooth zero-density regions with the velocity field still specified. The theorem assumes the coupled Einstein-dust family; it does not construct one from Newtonian data or assert existence for prescribed initial data.
+- **Nonlogical comparison with later evolution theory.** The density symbol $\rho$ used in [[thm-gr-dust-local-evolution]] is mass-normalized and corresponds to $\mu_\varepsilon=\mathcal E_\varepsilon/c^2$ here, so its tensor convention $c^2\rho u_a u_b$ matches the energy-density convention $\mathcal E_\varepsilon u_a u_b$. This is a notation comparison only; the present theorem assumes its coupled family and its smooth velocity even at zero density. Its proof uses no existence or evolution conclusion from that later theorem.
+- **Gauge independence.** No harmonic-gauge condition is used here: the component estimates are computed directly in the spatially factored chart, and the linearized coefficient is evaluated on the actual perturbation. The flat gauge material of [[thm-gr-flat-linearized-curvature-and-gauge]] supplies the formula; the uniform two-jet remainder is established here.

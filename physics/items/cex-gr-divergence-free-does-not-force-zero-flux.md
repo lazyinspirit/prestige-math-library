@@ -1,7 +1,7 @@
 ---
 id: cex-gr-divergence-free-does-not-force-zero-flux
 kind: counterexample
-title: "A divergence-free current with nonzero flux through a spacelike 3-simplex"
+title: "A divergence-free current with nonzero flux through a timelike 3-simplex"
 status: draft
 origin: session
 domain: mathematics
@@ -10,7 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-metric-volume-form-and-current-flux, lem-gr-metric-volume-form-patching-and-face-normal, thm-gr-density-divergence-and-finite-chain-flux, lem-gr-metric-divergence-and-density-formula, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-oriented-smooth-manifold-and-oriented-chart, def-integral-of-a-form-over-a-smooth-singular-simplex, def-smooth-vector-field-as-a-tangent-bundle-section, def-darboux-integral, thm-ftc-second-part]
+deps: [def-gr-metric-volume-form-and-current-flux, lem-gr-metric-volume-form-patching-and-face-normal, thm-gr-density-divergence-and-finite-chain-flux, lem-gr-metric-divergence-and-density-formula, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-oriented-smooth-manifold-and-oriented-chart, def-integral-of-a-form-over-a-smooth-singular-simplex, def-smooth-vector-field-as-a-tangent-bundle-section, def-darboux-integral, thm-ftc-second-part, thm-riemann-fubini-on-product-rectangles]
 dependency_roles:
   def-gr-metric-volume-form-and-current-flux: mathematical-premise
   lem-gr-metric-volume-form-patching-and-face-normal: mathematical-premise
@@ -24,6 +24,7 @@ dependency_roles:
   def-smooth-vector-field-as-a-tangent-bundle-section: mathematical-premise
   def-darboux-integral: mathematical-premise
   thm-ftc-second-part: mathematical-premise
+  thm-riemann-fubini-on-product-rectangles: mathematical-premise
 sources:
   references:
     - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 8.7: Stokes' theorem in the form flux equality up to the side boundary, printed pp. 109-110 (PDF pp. 110-111)"
@@ -54,7 +55,7 @@ $M$ vanishes."
 
 [L3] For a non-null face with velocity basis $(v_1,v_2,v_3)$ and adapted unit normal $\nu^{*}$ (so that $(\nu^{*},v_1,v_2,v_3)$ is positively oriented, $g(\nu^{*},\nu^{*})=\varepsilon$ and $\nu^{*}\perp\operatorname{span}(v_1,v_2,v_3)$), the pullback of $\iota_J\mathrm{vol}_g$ on $(v_1,v_2,v_3)$ equals $\varepsilon g(J,\nu^{*})\sqrt{|\det(g(v_i,v_j))|}$ ([[thm-gr-density-divergence-and-finite-chain-flux]] clause (c), [[lem-gr-metric-volume-form-patching-and-face-normal]]).
 
-[L4] The standard $3$-simplex $\Delta^3$ has volume $1/6$: the iterated integral $\int_0^1\!\int_0^{1-t_1}\!\int_0^{1-t_1-t_2}dt_3\,dt_2\,dt_1=\int_0^1\tfrac{(1-t_1)^2}{2}dt_1=\tfrac16$ evaluates by the fundamental theorem of calculus; hence the integral of a constant $c$ over $\Delta^3$ is $c/6$ ([[def-darboux-integral]], [[thm-ftc-second-part]], [[def-integral-of-a-form-over-a-smooth-singular-simplex]]).
+[L4] Using the simplex-integral zero-extension convention on $[0,1]^3$, the indicator sections are integrable interval indicators; [[thm-riemann-fubini-on-product-rectangles]] identifies their repeated integrals with the multiple integral. The standard $3$-simplex $\Delta^3$ has volume $1/6$: the iterated integral $\int_0^1\!\int_0^{1-t_1}\!\int_0^{1-t_1-t_2}dt_3\,dt_2\,dt_1=\int_0^1\tfrac{(1-t_1)^2}{2}dt_1=\tfrac16$ evaluates by the fundamental theorem of calculus; hence the integral of a constant $c$ over $\Delta^3$ is $c/6$ ([[def-darboux-integral]], [[thm-ftc-second-part]], [[def-integral-of-a-form-over-a-smooth-singular-simplex]]).
 
 ## Counterexample
 
@@ -64,7 +65,7 @@ Let $J:=\partial_1$ on $M=\mathbb R^4$ and let $\sigma$ be the affine simplex of
 
 1.2 (The adapted normal.) The velocity vectors of $\sigma$ are $v_1=\partial_0$, $v_2=\partial_2$, $v_3=\partial_3$, spanning the hyperplane $H=\{v^1=0\}$, which is nondegenerate (it is the $g$-orthogonal complement of the spacelike vector $\partial_1$). The vector $\nu^{*}:=-\partial_1$ lies in $H^{\perp}$, has $g(\nu^{*},\nu^{*})=1$, and the ordered basis $(-\partial_1,\partial_0,\partial_2,\partial_3)$ has determinant $-\det(\partial_1,\partial_0,\partial_2,\partial_3)=+1$ in the identity chart, so $(\nu^{*},v_1,v_2,v_3)$ is positively oriented: $\nu^{*}$ is the adapted unit normal. [L1, algebra]
 
-2.1 (The flux.) By [L3] with $\varepsilon=g(\nu^{*},\nu^{*})=1$, $g(J,\nu^{*})=g(\partial_1,-\partial_1)=-1$ and $\det(g(v_i,v_j))=\det\operatorname{diag}(-1,1,1)=-1$, so $\sqrt{|\det(g(v_i,v_j))|}=1$ and the pullback $\sigma^*(\iota_J\mathrm{vol}_g)$ is the constant $1$-form coefficient $\varepsilon g(J,\nu^{*})\cdot1=-1$ times $dt_1\wedge dt_2\wedge dt_3$. By [L2] and [L4], $$\Phi_J(\sigma)=\int_{\Delta^3}(-1)\,dt_1dt_2dt_3=-\tfrac16\neq0 .$$ [step 1.1, step 1.2, L2, L3, L4, algebra]
+2.1 (The flux.) By [L3] with $\varepsilon=g(\nu^{*},\nu^{*})=1$, $g(J,\nu^{*})=g(\partial_1,-\partial_1)=-1$ and $\det(g(v_i,v_j))=\det\operatorname{diag}(-1,1,1)=-1$, so $\sqrt{|\det(g(v_i,v_j))|}=1$ and the pullback $\sigma^*(\iota_J\mathrm{vol}_g)$ is the constant scalar coefficient $\varepsilon g(J,\nu^{*})\cdot1=-1$ times $dt_1\wedge dt_2\wedge dt_3$. By [L2] and [L4], $$\Phi_J(\sigma)=\int_{\Delta^3}(-1)\,dt_1dt_2dt_3=-\tfrac16\neq0 .$$ [step 1.1, step 1.2, L2, L3, L4, algebra]
 
 3.1 (Conclusion.) The field $J=\partial_1$ is divergence-free on $M$, yet its flux through the smooth singular $3$-simplex $\sigma$ is $-1/6$, not zero. Hence the displayed statement is refuted: divergence-freedom is a differential condition on $J$, while the flux through a single face depends on the face and its orientation. [step 2.1, algebra] ∎
 

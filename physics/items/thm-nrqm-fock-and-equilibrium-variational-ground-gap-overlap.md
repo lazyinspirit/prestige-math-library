@@ -23,7 +23,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Chapter 3 and Chapter 4 (spectral theorem, functional calculus) and Chapter 12.1 (variational methods for eigenvalues)"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Chapter 3 and Chapter 4 (spectral theorem, functional calculus) and Sections 4.3-4.4 pp. 117-120 (variational methods and spectral projection estimates)"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
     - title: "S. Pratt, Lecture Notes on Quantum Mechanics (Michigan State University, PHY 851/852; retrieved via the Internet Archive snapshot of 2024-04-21), Section 6.2 pp. 87-89 (variational theory and ground-state estimates)"
       url: "http://web.archive.org/web/20240421090356/http://web.archive.org/web/20240421090356/https://web.pa.msu.edu/people/pratts/phy851/lectures/lectures_full.pdf"
@@ -60,7 +60,7 @@ being an eigenvalue, or about any physical interpretation of the trial vector.
 
 **Given:** the self-adjoint operator $H$ bounded below with bottom $E_0=\inf\sigma(H)$, its projection-valued measure $E$, the ground projection $P=E(\{E_0\})$, a gap $g>0$, and a vector $u\in D(|H|^{1/2})$ with $\|u\|=1$.
 
-[F1] For a self-adjoint $H$ bounded below and $u\in D(|H|^{1/2})$, the scalar measure $E_u(B)=\langle E(B)u,u\rangle$ on the Borel sets of $\mathbb R$ is a probability measure with $\int\lambda\,dE_u(\lambda)$ finite and equal to $\langle H^{1/2}u,H^{1/2}u\rangle$; for $u\in D(H)$ it equals $\langle Hu,u\rangle$; moreover $\int|\lambda|\,dE_u<\infty$ exactly for $u\in D(|H|^{1/2})$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] (c), [[lem-scalar-and-complex-measures-from-a-pvm]], [[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]).
+[F1] For a self-adjoint $H$ and unit $u\in D(|H|^{1/2})$, the scalar measure $E_u(B)=\langle E(B)u,u\rangle$ is a probability measure and $\int|\lambda|\,dE_u<\infty$, so its signed first moment $\int\lambda\,dE_u$ is finite; if $u\in D(H)$, that moment equals $\langle Hu,u\rangle$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] (c), [[lem-scalar-and-complex-measures-from-a-pvm]], [[thm-spectral-theorem-for-unbounded-self-adjoint-operators]]). No square-root expectation of $H$ is asserted when $H$ may have negative spectrum.
 
 [F2] $E(\{E_0\})=P$ is an orthogonal projection; for every Borel set $B$, $E_u(B)=\|E(B)u\|^2$, and $E(B)=0$ implies $E_u(B)=0$ ([[def-projection-valued-measure]]).
 

@@ -12,6 +12,7 @@ deps:
     post-nrqm-framework-state-and-composition,
     post-nrqm-framework-observable-and-probability,
     post-nrqm-framework-ideal-conditional-measurement,
+    post-nrqm-framework-identical-particles-and-spin,
     post-nrqm-framework-preparation-and-apparatus,
     def-nrqm-state-geometry-framework-state-space,
     def-nrqm-observables-framework-observable-and-outcome-law,
@@ -21,7 +22,7 @@ deps:
     def-nrqm-state-geometry-pure-mixed-states-and-purity,
     lem-nrqm-photons-analyzer-projections-and-overlaps,
     def-hilbert-orthogonal-projection,
-    def-countable-choice,
+    def-countable-choice, def-dependent-choice,
     def-axiom-of-choice
   ]
 dependency_roles:
@@ -29,6 +30,7 @@ dependency_roles:
   post-nrqm-framework-state-and-composition: physical-assumption
   post-nrqm-framework-observable-and-probability: physical-assumption
   post-nrqm-framework-ideal-conditional-measurement: physical-assumption
+  post-nrqm-framework-identical-particles-and-spin: physical-assumption
   post-nrqm-framework-preparation-and-apparatus: physical-assumption
   def-nrqm-state-geometry-framework-state-space: formulation-prerequisite
   def-nrqm-observables-framework-observable-and-outcome-law: formulation-prerequisite
@@ -40,12 +42,14 @@ dependency_roles:
   def-hilbert-orthogonal-projection: mathematical-premise
   def-countable-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
 physical_scope: "The declared fixed propagation-mode polarisation model of the
-  framework: a nonzero wavevector label, a declared orthonormal pair spanning
-  the transverse plane, the two-dimensional complex polarisation space with its
+  framework: a nonzero wavevector label, a declared real orthonormal pair spanning
+  the real transverse plane with an optional common phase, the two-dimensional
+  complex polarisation space with its
   unit rays as idealised one-photon polarisation preparations, and the
   two-outcome polarisation analyser family with the Born outcome law of P2 and
   the Lueders reading of P3 where used. The model is an adopted idealisation of
@@ -85,9 +89,10 @@ in [[def-nrqm-observables-framework-observable-and-outcome-law]], the
 measurement vocabulary in
 [[def-nrqm-measurement-framework-declared-measurements-and-instruments]], and
 the units of angles in [[def-nrqm-framework-quantities-and-units]]: angles and
-phases are dimensionless under the radian convention. Assume the Axiom of
-Countable Choice and the Axiom of Choice, the choice hypotheses of the cited
-readings ([[def-countable-choice]], [[def-axiom-of-choice]]).
+phases are dimensionless under the radian convention. Assume Countable Choice,
+Dependent Choice and Choice ([[def-countable-choice]], [[def-dependent-choice]],
+[[def-axiom-of-choice]]), including the hypotheses inherited from the adopted
+radiation postulate and its Fock-space suppliers.
 
 **(b) Declared fixed-mode data.** A **declared fixed-mode polarisation model**
 consists of:
@@ -95,9 +100,14 @@ consists of:
 1. a nonzero **propagation label** $k_{0}\in\mathbb R^{3}\setminus\{0\}$, read
    in $\mathrm m^{-1}$ in a declared inertial chart, which is a parameter of the
    model and not a state;
-2. a declared **transverse frame**, that is an orthonormal pair $(v_{1},v_{2})$
-   in the euclidean space $\mathbb C^{3}$ with $\langle v_{i},v_{j}\rangle=\delta_{ij}$
-   and $k_{0}\cdot v_{1}=k_{0}\cdot v_{2}=0$;
+2. a declared **transverse frame**, that is a pair $v_j=\zeta u_j$ for
+   $j\in\{1,2\}$, where $(u_1,u_2)$ is a real orthonormal basis of
+   $k_0^\perp:=\{u\in\mathbb R^3:k_0\cdot u=0\}$ and $\zeta\in\mathbb C$
+   is one common phase factor, $|\zeta|=1$. Here $k_0\cdot u$ is the real
+   Euclidean dot product, and the Hermitian form on $\mathbb C^3$ is
+   $\langle x,y\rangle=\sum_{\ell=1}^3 x_\ell\overline{y_\ell}$, linear
+   in its first argument; thus $\langle v_i,v_j\rangle=\delta_{ij}$ and
+   $k_0\cdot v_j:=\sum_{\ell=1}^3(k_0)_\ell(v_j)_\ell=0$;
 3. the **polarisation space** $V:=\mathbb Cv_{1}\oplus\mathbb Cv_{2}$ with the
    restricted Hermitian inner product and the orthonormal basis
    $(e_{1},e_{2}):=(v_{1},v_{2})$.
@@ -106,11 +116,18 @@ The model's **state space** is $D(V)$, the set of density operators of $V$; the
 **pure preparations** of the model are the unit rays $[\psi]$ of $V$, that is
 the preparations assigned the pure state $\widehat\rho(\psi)$ of
 [[def-nrqm-state-geometry-pure-mixed-states-and-purity]], and a **mixed
-preparation** is a statistical mixture of preparations in the sense of P1. The
-map $\theta\mapsto\psi_{\theta}:=\cos\theta\,e_{1}+\sin\theta\,e_{2}$ assigns
+preparation** is a statistical mixture of preparations in the sense of P1.
+A pure ray is **linearly polarised** when it has a nonzero real representative
+in $k_0^\perp$. The map
+$\theta\mapsto\psi_{\theta}:=\cos\theta\,e_{1}+\sin\theta\,e_{2}$ assigns
 to each angle $\theta\in\mathbb R$ a distinguished pure preparation, the
 **linear polarisation preparation at angle $\theta$** in the declared
-transverse frame.
+transverse frame. In particular,
+$\psi_\theta=\zeta(\cos\theta\,u_1+\sin\theta\,u_2)$ has that ray, whose
+real direction is the unoriented line
+$\mathbb R(\cos\theta\,u_1+\sin\theta\,u_2)$; hence the physical angle
+label is modulo $\pi$. General complex unit vectors of $V$ remain allowed as
+pure preparations and need not be linearly polarised.
 
 **(c) Declared polarisation analyser.** For each angle $\theta\in\mathbb R$ the
 **declared polarisation analyser at angle $\theta$** is the declared ideal
@@ -130,11 +147,11 @@ one-photon polarisation state, and the absorption outcome is used only through
 its discarded-outcome law unless a separate instrument is declared (clause (v)
 of P3).
 
-**(d) Frame covariance and angle labels.** For another complex orthonormal transverse pair $(e_1',e_2')$, let $U:V\to V$ be the unitary map with $Ue_i=e_i'$, explicitly $Ux=\sum_i\langle x,e_i\rangle e_i'$. Its analyser family is $P_\theta'=UP_\theta U^*$, because $Ue_\theta=\cos\theta e_1'+\sin\theta e_2'$. Under the simultaneous transport of a preparation to $\rho'=U\rho U^*$ the Born probabilities agree: $\operatorname{tr}(\rho'P_\theta')=\operatorname{tr}(U\rho P_\theta U^*)=\operatorname{tr}(\rho P_\theta)$. The last equality follows by evaluating the finite trace in a transported orthonormal basis; the same argument preserves trace one, and conjugation preserves positivity and self-adjointness of $\rho$. Thus covariance concerns the transported states and projectors together. A general complex frame change need not leave the original real-angle family fixed: replacing $e_2$ by $ie_2$ gives rays of $\cos\theta e_1+i\sin\theta e_2$, generally absent from the original family. If the frames differ by a common phase times a real orthogonal two-by-two matrix, the families are equal with the angle reparametrisation $\theta\mapsto\chi+\theta$ or $\chi-\theta$ according to its orientation; this follows by the sine and cosine addition formulas. No invariance of a fixed physical linear polariser under arbitrary $U(2)$ is asserted. The value of $|k_0|$ enters no polarisation probability: it enters the separate mode frequency and energy assignments of the radiation postulate.
+**(d) Frame covariance and angle labels.** For another complex orthonormal transverse pair $(e_1',e_2')$ (not necessarily a transverse frame of clause (b)), let $U:V\to V$ be the unitary map with $Ue_i=e_i'$, explicitly $Ux=\sum_i\langle x,e_i\rangle e_i'$. Its transported sharp-measurement family is $P_\theta'=UP_\theta U^*$, because $Ue_\theta=\cos\theta e_1'+\sin\theta e_2'$. Under the simultaneous transport of a preparation to $\rho'=U\rho U^*$ the Born probabilities agree: $\operatorname{tr}(\rho'P_\theta')=\operatorname{tr}(U\rho P_\theta U^*)=\operatorname{tr}(\rho P_\theta)$. The last equality follows by evaluating the finite trace in a transported orthonormal basis; the same argument preserves trace one, and conjugation preserves positivity and self-adjointness of $\rho$. Thus covariance concerns the transported states and projectors together. A general complex basis change need not leave the original linear-analyser family fixed: replacing $e_2$ by $ie_2$ gives rays of $\cos\theta e_1+i\sin\theta e_2$, generally absent from the original family, and does not satisfy clause (b). For two transverse frames of clause (b), the bases differ by a common phase times a real orthogonal two-by-two matrix. Write its first column as $(\cos\chi,\sin\chi)$; its second column is $(-\sin\chi,\cos\chi)$ or $(\sin\chi,-\cos\chi)$ according to whether its determinant is $+1$ or $-1$. The families are equal with the angle reparametrisation $\theta\mapsto\chi+\theta$ or $\chi-\theta$, respectively, by the sine and cosine addition formulas. Arbitrary complex basis transport gives a valid sharp measurement but need not give a linear polariser. The value of $|k_0|$ enters no polarisation probability: it enters the separate mode frequency and energy assignments of the radiation postulate.
 
 **(e) Scope.** The model is an idealisation of a transverse propagation mode
 with a definite mode label. It is a finite-dimensional internal-factor model
-in the sense of P1 and P6: its state space is $D(V)$, its preparations are
+in the sense of P1 and P6: its state space is $D(V)$, its pure preparations are
 rays, and its analyser is a declared ideal sharp measurement. It contains no
 position observable, no momentum observable, no spatial wave function and no
 localisation claim, and it is not the massive one-particle model of P5 with

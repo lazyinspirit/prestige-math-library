@@ -17,7 +17,7 @@ provenance:
   proof: not-applicable
 sources:
   references:
-    - title: "L. Wasserman, All of Statistics: A Concise Course in Statistical Inference (Springer, 2004), Definitions 10.1 and 10.4 and Section 10.1 (rejection regions); full text copy at the cited URL"
+    - title: "L. Wasserman, All of Statistics: A Concise Course in Statistical Inference (Springer, 2004), Definition 10.1 and Section 10.1 (power, size, and rejection regions); full text copy at the cited URL"
       url: "https://egrcc.github.io/docs/math/all-of-statistics.pdf"
     - title: "NIST/SEMATECH e-Handbook of Statistical Methods, section 7.1.3, 'What are statistical tests?'"
       url: "https://www.itl.nist.gov/div898/handbook/prc/section1/prc13.htm"
@@ -52,12 +52,13 @@ $\{\beta(\theta):\theta\in\Theta_0\}$ is nonempty because $\Theta_0\neq
 \emptyset$, and it is bounded above by $1$; the least-upper-bound property of
 the complete ordered field of reals ([[def-complete-ordered-field]]) therefore
 supplies its supremum $\alpha\in[0,1]$, uniquely by [[def-complete-ordered-field]].
-The size is computed from the null set alone; no alternative set
+The size is the supremum of the rejection probabilities over the null set
+for the specified rejection region and model family; no alternative set
 $\Theta\setminus\Theta_0$, no prior distribution on $\Theta$, and no observed
 datum enter its definition.
 
 The rejection region, the family $(\mathbb P_\theta)$ and the null set are
-data of the test, not consequences of it. Changing any of them changes
-$\beta$ and $\alpha$; a statement that a test has a given size is a statement
+data of the test, not consequences of it. Changing the rejection region or model family may change $\beta$ and
+$\alpha$; changing the null set may change $\alpha$ but leaves $\beta$ unchanged; a statement that a test has a given size is a statement
 about the specified triple $(S,\mathcal S,\{\mathbb P_\theta\})$, the
 specified $\Theta_0$ and the specified $R$.

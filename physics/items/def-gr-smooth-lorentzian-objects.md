@@ -106,7 +106,7 @@ Given a time orientation $N$ and $p\in M$, the vector $N_p$ is timelike, and we
 $g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of
 nonzero causal vectors into exactly these two classes, and its agreement with
 the two components of the timelike set (the future component is the component
-$C_p^+$ containing $N_p$, and the future closed null cone is
+$C_p^+$ containing $N_p$, and the future causal vectors form
 $\operatorname{cl}(C_p^+)\setminus\{0\}$), is proved in
 [[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no
 nonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and
@@ -163,12 +163,11 @@ no completeness, extendibility or maximality property of $(M,g)$ is asserted.
 
 ## Facts & Assumptions
 
-**Given:** The Lorentzian data of the Definition, a smooth future timelike
-curve $\gamma:I\to M$, and supplied $c>0$, $s_0\in I$, $\tau_0\in\mathbb R$.
+**Given:** The Lorentzian data of the Definition, a smooth future timelike curve $\gamma:I\to M$, and supplied $c>0$, $s_0\in I$, $\tau_0\in\mathbb R$.
 
 [F1] Coordinates of smooth maps and their finite sums, products and compositions are smooth; the curve velocity has components $d(x^a\circ\gamma)/ds$ ([[def-c-r-and-smooth-maps-between-smooth-manifolds]], [[def-velocity-derivation-of-a-smooth-curve]], [[thm-ck-euclidean-maps-closed-under-algebra-and-composition]]).
 
-[F2] The square root is smooth on $(0,\infty)$ ([[thm-real-power-continuity-and-derivatives]]). A continuous function on a real interval has the primitive $s\mapsto\int_{s_0}^{s}h$ ([[cor-primitives-of-a-continuous-function]]).
+[F2] For every real $\alpha$, $x^\alpha$ is continuous on $(0,\infty)$ with derivative $\alpha x^{\alpha-1}$ ([[thm-real-power-continuity-and-derivatives]]). Repeated application gives, for every integer $m\ge0$, $D^m(x^\alpha)=\bigl(\prod_{j=0}^{m-1}(\alpha-j)\bigr)x^{\alpha-m}$, where the empty product is $1$: differentiating the $m$th formula gives the $(m+1)$st. Each right side is continuous by the same supplier, so $x^\alpha$ is smooth; in particular $\sqrt{x}=x^{1/2}$ is smooth on $(0,\infty)$.  A continuous function on a real interval has the primitive $s\mapsto\int_{s_0}^{s}h$ ([[cor-primitives-of-a-continuous-function]]).
 
 [F3] The mean value theorem applies on each compact subinterval of $I$ ([[cor-mean-value-theorem]]), and a smooth map with nonzero derivative has a smooth local inverse ([[lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space]]). The intermediate value theorem gives every intermediate image value ([[thm-intermediate-value]]). Velocities transform by the chain rule ([[thm-chain-rule-for-total-derivatives]]).
 

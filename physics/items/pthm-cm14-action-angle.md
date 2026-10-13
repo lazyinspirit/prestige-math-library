@@ -52,7 +52,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "Action-angle coordinates for a completely integrable datum of a declared hyperregular potential presentation of the framework's force branch: near a compact connected regular fibre and over a ball of regular values on which the integral map is a proper submersion with connected fibres, there are period-one angle and action coordinates of the presentation's two-form with $\\omega=\\sum_i d\\theta_i\\wedge dI_i$; fibrewise-constant functions, in particular the datum and the branch Hamiltonian, depend on the actions alone; and the model's motions become the constant-action, linear-angle flows. The conclusion is conditional on the Axiom of Countable Choice, on the complete integrability of the datum and on all the fibre hypotheses; it is local over the ball of regular values, asserts no global coordinates on the phase domain, and carries no empirical content. The identification of the coordinates with classical period integrals is a normalization convention, not part of the theorem."
+physical_scope: "Action-angle coordinates for a completely integrable datum of a declared hyperregular potential presentation of the framework's force branch: near a compact connected regular fibre and over a ball of regular values on which the integral map is a proper submersion with connected fibres, there are period-one angle and action coordinates of the presentation's two-form with $\\omega=\\sum_i d\\theta_i\\wedge dI_i$; fibrewise-constant functions, in particular the datum and the branch Hamiltonian, depend on the actions alone; and, with zero residual force, Hamiltonian solutions become constant-action, linear-angle flows: these correspond to Cartesian model motions or, in generalized coordinates, to substituted Lagrange solutions; a lower-dimensional immersion alone does not make the latter ambient unconstrained motions. The conclusion is conditional on the Axiom of Countable Choice, on the complete integrability of the datum and on all the fibre hypotheses; it is local over the ball of regular values, asserts no global coordinates on the phase domain, and carries no empirical content. The identification of the coordinates with classical period integrals is a normalization convention, not part of the theorem."
 sources:
   references:
     - title: "Ana Cannas da Silva, Lectures on Symplectic Geometry (revised January 2006), Lecture 18, Lemma 18.11 and Theorem 18.12, pp. 110-111: action-angle coordinates forming a Darboux chart ($\\{\\phi_i,\\psi_j\\}=\\delta_{ij}$) whose angle coordinates linearize the flows of the commuting Hamiltonians; the source does not fix the period normalization used here"
@@ -104,9 +104,13 @@ of class $C^{\infty}$, diffeomorphic onto their image, such that:
    particular $F_{i}=f_{i}(I)$ for $C^{\infty}$ functions $f_{i}$ and the
    branch Hamiltonian is $H=h(I)$ with $h=f_{1}$;
 4. **(linear motion)** the solutions of the Hamiltonian system of $h$ in
-   the chart $(I,\theta)$ are exactly the momentum-phase curves of the
-   model's motions on $U_0$ (which is the presentation reading of clause 1
-   of [[pthm-cm13-hamiltonian-field-integrates-the-model-equations]]),
+   the chart $(I,\theta)$, on the potential branch $d\equiv0$, are exactly
+   the momentum-phase curves of Cartesian model motions, or in a
+   generalized-coordinate chart the solutions of its substituted Lagrange
+   equations on $U_0$, by clauses 1-2 of
+   [[pthm-cm13-hamiltonian-field-integrates-the-model-equations]].
+   A lower-dimensional immersion requires a separate ideal-constraint
+   premise to identify these with constrained ambient motions. In either case
    and they satisfy
 $$\dot I=0,\qquad \dot\theta=\frac{\partial h}{\partial I}(I),\qquad\theta(t)=\theta(0)+t\,\frac{\partial h}{\partial I}\bigl(I(0)\bigr)\pmod{\mathbb Z^{n}},$$
    writing $\nu=\partial h/\partial I(I(0))$, a positive $T$ is a period exactly when $T\nu\in\mathbb Z^n$. The linear-motion formula alone does not assert a periodic-versus-full-density dichotomy: nonperiodic motion can remain in a proper invariant subtorus when the frequency vector has integer relations.
@@ -130,80 +134,31 @@ noncompact fibres and no empirical content.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_{\omega}$, the presentation on its chart, the
-completely integrable datum $F$ with $F_{1}=H$ on $W_{0}$, the regular
-value $b_{0}$ and its compact connected regular fibre $N$, and the
-saturated neighbourhood $U$ with the proper submersion $\pi=F|_{U}$ over
-the ball $B$ with connected fibres.
+**Given:** $\mathrm{AC}_{\omega}$, the presentation on its chart, the completely integrable datum $F$ with $F_{1}=H$ on $W_{0}$, the regular value $b_{0}$ and its compact connected regular fibre $N$, and the saturated neighbourhood $U$ with the proper submersion $\pi=F|_{U}$ over the ball $B$ with connected fibres.
 
-[F1] Setting and identification ([[def-cm14-complete-integrability]],
-[[def-completely-integrable-hamiltonian-system]],
-[[def-symplectic-form-and-symplectic-manifold]],
-[[pthm-cm13-two-form-is-symplectic]]): $(W_{0},\omega)$ is a
-$2n$-dimensional symplectic manifold, and $F$ is a completely integrable
-Hamiltonian system on it with $F_{1}=H$; the fibre $N$ is nonempty,
-compact, connected and regular, and $\pi=F|_{U}$ is a proper submersion
-onto the ball $B$ with connected fibres.
+[F1] Setting and identification ([[def-cm14-complete-integrability]], [[def-completely-integrable-hamiltonian-system]], [[def-symplectic-form-and-symplectic-manifold]], [[pthm-cm13-two-form-is-symplectic]]): $(W_{0},\omega)$ is a $2n$-dimensional symplectic manifold, and $F$ is a completely integrable Hamiltonian system on it with $F_{1}=H$; the fibre $N$ is nonempty, compact, connected and regular, and $\pi=F|_{U}$ is a proper submersion onto the ball $B$ with connected fibres.
 
-[F2] The mathematical action-angle theorem
-([[thm-cm-liouville-arnold-action-angle-repaired]],
-[[def-action-and-angle-coordinates]]): under the hypotheses of [F1] and
-$\mathrm{AC}_{\omega}$, after restricting to $U_0=\pi^{-1}(B_0)$ there are period-one
-action-angle coordinates $(I,\theta):U_0\to A\times T^{n}$, of class $C^{\infty}$, where $A=I(B_0)$ is the action image and $B_0$ remains in the original integral-value coordinates, with $\omega=\sum_{i}d\theta_{i}\wedge dI_{i}$, and every
-$C^{\infty}$ function on $U_0$ constant on the fibres of $\pi$ — in
-particular each $F_{i}$ — is a function of $I$ alone.
+[F2] The mathematical action-angle theorem ([[thm-cm-liouville-arnold-action-angle-repaired]], [[def-action-and-angle-coordinates]]): under the hypotheses of [F1] and $\mathrm{AC}_{\omega}$, after restricting to $U_0=\pi^{-1}(B_0)$ there are period-one action-angle coordinates $(I,\theta):U_0\to A\times T^{n}$, of class $C^{\infty}$, where $A=I(B_0)$ is the action image and $B_0$ remains in the original integral-value coordinates, with $\omega=\sum_{i}d\theta_{i}\wedge dI_{i}$, and every $C^{\infty}$ function on $U_0$ constant on the fibres of $\pi$ — in particular each $F_{i}$ — is a function of $I$ alone.
 
-[F3] Hamiltonian equations in canonical coordinates
-([[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]],
-[[def-cm13-hamiltonian-field]] clause (a),
-[[cor-motion-of-a-completely-integrable-hamiltonian-is-linear-on-invariant-tori]],
-[[def-hamiltonian-vector-field-and-hamiltonian-function]]): in a
-canonical chart $(q,p)$ of a presentation two-form the field
-$X_{K}$ of a $C^{2}$ function $K$ has the components
-$X_{K}=(K_{p},-K_{q})$, so its integral curves satisfy
-$\dot q=K_{p}$, $\dot p=-K_{q}$; in action-angle coordinates with
-$K=h(I)$ this gives $\dot I=0$, $\dot\theta=\partial h/\partial I(I)$ on
-the torus, with the displayed linear formula.
+[F3] Hamiltonian equations in canonical coordinates ([[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]], [[def-cm13-hamiltonian-field]] clause (a), [[cor-motion-of-a-completely-integrable-hamiltonian-is-linear-on-invariant-tori]], [[def-hamiltonian-vector-field-and-hamiltonian-function]]): in a canonical chart $(q,p)$ of a presentation two-form the field $X_{K}$ of a $C^{2}$ function $K$ has the components $X_{K}=(K_{p},-K_{q})$, so its integral curves satisfy $\dot q=K_{p}$, $\dot p=-K_{q}$; in action-angle coordinates with $K=h(I)$ this gives $\dot I=0$, $\dot\theta=\partial h/\partial I(I)$ on the torus, with the displayed linear formula.
 
-[F4] Dimension of the two-form
-([[def-cm13-canonical-form]] clause (b), [[def-cm13-two-form]],
-[[pthm-cm13-two-form-is-symplectic]] clause 2, [[def-cm01-units]]): in
-each canonical chart $(q,p)$ of the presentation, $\omega=\sum_{a}dq^{a}
-\wedge dp_{a}$ and the momentum $p_{a}$ has dimension
-$\mu\ell^{2}\tau^{-1}\gamma_{a}^{-1}$ while $q^{a}$ has dimension
-$\gamma_{a}$; hence every coefficient form $dq^{a}\wedge dp_{a}$ has the
-constant dimension $\mu\ell^{2}\tau^{-1}$ (action).
+[F4] Dimension of the two-form ([[def-cm13-canonical-form]] clause (b), [[def-cm13-two-form]], [[pthm-cm13-two-form-is-symplectic]] clause 2, [[def-cm01-units]]): in each canonical chart $(q,p)$ of the presentation, $\omega=\sum_{a}dq^{a} \wedge dp_{a}$ and the momentum $p_{a}$ has dimension $\mu\ell^{2}\tau^{-1}\gamma_{a}^{-1}$ while $q^{a}$ has dimension $\gamma_{a}$; hence every coefficient form $dq^{a}\wedge dp_{a}$ has the constant dimension $\mu\ell^{2}\tau^{-1}$ (action).
 
-[F5] Radian rescaling ([[cor-cm-action-angle-radian-scaling]]): with
-$\theta^{\mathrm{rad}}=2\pi\theta$, $I^{\mathrm{rad}}=I/(2\pi)$ one has
-$\omega=\sum_{i}d\theta^{\mathrm{rad}}_{i}\wedge dI^{\mathrm{rad}}_{i}$,
-and if $H=h(I)$ then $H=\tilde h(I^{\mathrm{rad}})$ with
-$\tilde h(I^{\mathrm{rad}})=h(2\pi I^{\mathrm{rad}})$ and
-$\dot\theta^{\mathrm{rad}}_{i}=\partial\tilde h/\partial
-I^{\mathrm{rad}}_{i}$.
+[F5] Radian rescaling ([[cor-cm-action-angle-radian-scaling]]): with $\theta^{\mathrm{rad}}=2\pi\theta$, $I^{\mathrm{rad}}=I/(2\pi)$ one has $\omega=\sum_{i}d\theta^{\mathrm{rad}}_{i}\wedge dI^{\mathrm{rad}}_{i}$, and if $H=h(I)$ then $H=\tilde h(I^{\mathrm{rad}})$ with $\tilde h(I^{\mathrm{rad}})=h(2\pi I^{\mathrm{rad}})$ and $\dot\theta^{\mathrm{rad}}_{i}=\partial\tilde h/\partial I^{\mathrm{rad}}_{i}$.
 
-[F6] Model reading ([[pthm-cm13-hamiltonian-field-integrates-the-model-equations]]
-clause 1, [[pthm-cm12-hamilton-equivalence]] clause 1,
-[[def-cm02-newtonian-flow]], [[def-cm12-cotangent-momentum]]): on the
-potential branch the momentum-phase curves of the model's motions are
-exactly the integral curves of the branch Hamiltonian field in each
-chart.
+[F6] Model reading ([[pthm-cm13-hamiltonian-field-integrates-the-model-equations]] clauses 1-2, [[pthm-cm12-hamilton-equivalence]] clauses 1 and 3, [[def-cm02-newtonian-flow]], [[def-cm12-cotangent-momentum]]): with $d\equiv0$, the Hamiltonian curves correspond to Cartesian model motions in a Cartesian chart and to substituted Lagrange solutions in a generalized-coordinate chart. An arbitrary lower-dimensional immersion alone does not identify the latter with ambient unconstrained motions.
 
-[A1] $\mathrm{AC}_{\omega}$ is [[def-countable-choice]]; it is consumed
-through [F2], whose statement assumes it.
+[A1] $\mathrm{AC}_{\omega}$ is [[def-countable-choice]]; it is consumed through [F2], whose statement assumes it.
 
 ## Proof
 
-**Proof technique:** direct; apply the mathematical action-angle theorem
-to the presentation's symplectic chart, fix the dimension bookkeeping
-from the two-form, and read the motion off the canonical Hamiltonian
-field.
+**Proof technique:** direct; apply the mathematical action-angle theorem to the presentation's symplectic chart, fix the dimension bookkeeping from the two-form, and read the motion off the canonical Hamiltonian field.
 
 1.1 Clauses 1 and 3: by [F1] the hypotheses of [F2] are in force, so after restricting the original base to $B_0$ and the saturated neighbourhood to $U_0$ there is a $C^{\infty}$ diffeomorphism $(I,\theta):U_0\to A\times T^{n}$ onto its image with $\omega=\sum_{i}d\theta_{i}\wedge dI_{i}$ and every $C^{\infty}$ function constant on the fibres of $\pi$ (in particular each $F_{i}$, and $H=F_{1}$) a function of $I$ alone; write $F_{i}=f_{i}(I)$ and $H=h(I)=f_{1}(I)$. [A1, F1, F2]
 
 1.2 Clause 2: by [F4] the two-form has action dimension; in the coordinates $(I,\theta)$ the form is $\sum_{i}d\theta_{i}\wedge dI_{i}$ with the angles period-one and dimensionless by [F2] and [[def-action-and-angle-coordinates]], so comparing dimensions term by term gives $[I_{i}]=\mu\ell^{2}\tau^{-1}$. [F2, F4, algebra]
 
-2.1 Clause 4: in the canonical chart $(\theta,I)$ the field of $h(I)$ has components $X_h=(\partial h/\partial I,0)$ by [F3], so $\dot I=0$ and $\dot\theta=\partial h/\partial I(I)$. Integrating on $\mathbb R^n/\mathbb Z^n$ gives the displayed linear formula. By [F6] these integral curves are exactly the model's momentum-phase motions on $U_0$ on the potential branch. Write $\nu=\partial h/\partial I(I(0))$. The orbit returns after $T>0$ exactly when $T\nu\in\mathbb Z^n$, by the defining quotient. If an integer vector $k\ne0$ satisfies $k\cdot\nu=0$, the angle combination $k\cdot\theta(t)$ remains fixed modulo $\mathbb Z$, so no full-torus density follows merely from nonperiodicity. For example a frequency vector $(c,c\alpha,0)$ with $c\ne0$ and irrational $\alpha$ keeps the third angle fixed; a positive period would make both $Tc$ and $Tc\alpha$ integers, forcing their ratio $\alpha$ rational, contradiction. This verifies the precise period criterion and the stated qualification. [F3, F6, step 1.1, algebra]
+2.1 Clause 4: in the canonical chart $(\theta,I)$ the field of $h(I)$ has components $X_h=(\partial h/\partial I,0)$ by [F3], so $\dot I=0$ and $\dot\theta=\partial h/\partial I(I)$. Integrating on $\mathbb R^n/\mathbb Z^n$ gives the displayed linear formula. By [F6], with $d\equiv0$ these integral curves are exactly Cartesian momentum-phase motions, or generalized-coordinate substituted Lagrange solutions, as applicable to the original chart. The action-angle change transports that same Hamiltonian field; no ambient-motion assertion follows from an immersion alone. Write $\nu=\partial h/\partial I(I(0))$. The orbit returns after $T>0$ exactly when $T\nu\in\mathbb Z^n$, by the defining quotient. If an integer vector $k\ne0$ satisfies $k\cdot\nu=0$, the angle combination $k\cdot\theta(t)$ remains fixed modulo $\mathbb Z$, so no full-torus density follows merely from nonperiodicity. For example a frequency vector $(c,c\alpha,0)$ with $c\ne0$ and irrational $\alpha$ keeps the third angle fixed; a positive period would make both $Tc$ and $Tc\alpha$ integers, forcing their ratio $\alpha$ rational, contradiction. This verifies the precise period criterion and the stated qualification. [F3, F6, step 1.1, algebra]
 
 3.1 Clause 5: [F5] applied to the coordinates of step 1.1 gives the invariance of the two-form under the rescaling, the transformed Hamiltonian $\tilde h$ and the rescaled evolution equation; the relation $\dot\theta^{\mathrm{rad}}=2\pi\dot\theta$ identifies the cyclic frequencies $\partial h/\partial I_{i}$ of clause 4 with the angular rates $2\pi\partial h/\partial I_{i}$ in the radian chart. [F5, step 1.1, step 2.1, algebra]
 
@@ -211,24 +166,8 @@ field.
 
 ## Remarks
 
-- **The action coordinates are not unique.** The theorem determines
-  $(\theta,I)$ only up to additive constants in the actions and shifts of
-  the angles: if $(I,\theta)$ has the stated properties then so does
-  $(I+c,\theta)$ for every $c\in\mathbb R^{n}$. In particular the theorem
-  does not by itself single out the classical normalization
-  $I_{i}=\oint_{\gamma_{i}}p\,dq$ of the sources; that normalization is a
-  convention fixed in explicit models, and the one-dimensional companion
-  examples of [[def-cm-one-dimensional-action-variable]] verify it
-  directly in the models treated there, where the period-one action is
-  $2\pi$ times the radian action $J_{\mathrm{a}}$ of that definition.
+- **The action coordinates are not unique.** The theorem does not fix additive constants in the actions or constant shifts of the angles: if $(I,\theta)$ has the stated properties then so does $(I+c,\theta)$ for every $c\in\mathbb R^{n}$. In particular the theorem does not by itself single out the classical normalization $I_{i}=\oint_{\gamma_{i}}p\,dq$ of the sources; that normalization is a convention fixed in explicit models, and the one-dimensional companion examples of [[def-cm-one-dimensional-action-variable]] verify it directly in the models treated there, where the period-one action is $2\pi$ times the radian action $J_{\mathrm{a}}$ of that definition.
 
-- **Global coordinates are not claimed.** The conclusion holds over the
-  neighbourhood $B_0$ of original regular values with action-coordinate image $A$, after restricting the saturated neighbourhood; a compact phase domain with nontrivial period-lattice
-  monodromy admits no global single-valued action-angle chart, as the
-  published obstruction examples cited on the companion page show.
+- **Global coordinates are not claimed.** The conclusion holds over the neighbourhood $B_0$ of original regular values with action-coordinate image $A$, after restricting the saturated neighbourhood; a compact phase domain with nontrivial period-lattice monodromy admits no global single-valued action-angle chart, as the published obstruction examples cited on the companion page show.
 
-- **Frequencies.** In the period-one convention of clause 1 the numbers
-  $\partial h/\partial I_{i}$ are frequencies in cycles per unit time;
-  the angular rates are their $2\pi$-multiples, per clause 5. The two
-  conventions are related by the explicit rescaling of
-  [[cor-cm-action-angle-radian-scaling]] and must not be mixed.
+- **Frequencies.** In the period-one convention of clause 1 the numbers $\partial h/\partial I_{i}$ are frequencies in cycles per unit time; the angular rates are their $2\pi$-multiples, per clause 5. The two conventions are related by the explicit rescaling of [[cor-cm-action-angle-radian-scaling]] and must not be mixed.

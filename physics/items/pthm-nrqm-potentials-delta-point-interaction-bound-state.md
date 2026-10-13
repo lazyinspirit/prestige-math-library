@@ -3,7 +3,7 @@ id: pthm-nrqm-potentials-delta-point-interaction-bound-state
 aliases: [ nrqm-potentials-delta-point-interaction-bound-state ]
 kind: physics-theorem
 domain: physics
-title: "The zero-range (delta) model: self-adjointness and its unique bound state"
+title: "The zero-range (delta) model: self-adjointness and the unique attractive bound-state preparation"
 status: draft
 origin: session
 dependency_level: 12
@@ -18,7 +18,8 @@ deps:
     def-nrqm-framework-quantities-and-units,
     def-nrqm-observables-framework-observable-and-outcome-law,
     def-nrqm-autonomous-dynamics-framework-evolution,
-    pthm-nrqm-potentials-line-model-energy-and-stationary-states,
+    pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation,
+    lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues,
     lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators,
     thm-nrqm-intervals-delta-interface-operator,
     thm-nrqm-intervals-delta-unique-bound-state,
@@ -35,7 +36,8 @@ dependency_roles:
   def-nrqm-framework-quantities-and-units: formulation-prerequisite
   def-nrqm-observables-framework-observable-and-outcome-law: formulation-prerequisite
   def-nrqm-autonomous-dynamics-framework-evolution: formulation-prerequisite
-  pthm-nrqm-potentials-line-model-energy-and-stationary-states: physical-result
+  pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation: physical-result
+  lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues: mathematical-premise
   lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators: mathematical-premise
   thm-nrqm-intervals-delta-interface-operator: mathematical-premise
   thm-nrqm-intervals-delta-unique-bound-state: mathematical-premise
@@ -97,7 +99,7 @@ eigenvalue, namely
 $$E_{g}=-\frac{mg^{2}}{2\hbar^{2}}<0,$$
 and its eigenspace is one-dimensional, spanned by the unit class
 $$\psi_{g}(x)=\sqrt{\frac{m|g|}{\hbar^{2}}}\;\exp\!\Bigl(-\frac{m|g|}{\hbar^{2}}|x|\Bigr).$$
-This eigenpair is the unique bound state of the zero-range model: every
+For $g<0$ this is the unique bound-state preparation of the zero-range model: every
 eigenvector of $H_{g}$ with negative eigenvalue is a nonzero multiple of
 $\psi_{g}$, the preparation $[\psi_{g}]$ is stationary with energy $E_{g}$, and
 the energy outcome law assigns probability one to $\{E_{g}\}$.
@@ -115,11 +117,11 @@ function and no potential in $L^{2}$ is involved.
 
 [F1] **The interface operator.** For every $\alpha\in\mathbb R$, the operator $A_{\alpha}$ with domain $D(A_{\alpha})$ consisting of the classes $u\in H^{1}(\mathbb R)$ whose restrictions to the half-lines are of class $H^{2}$ and which satisfy $u'^{*}(0+)-u'^{*}(0-)=\alpha u^{*}(0)$, and with $A_{\alpha}u$ obtained by gluing $-D^2(u|_{\mathbb R_+})$ and $-D^2(u|_{\mathbb R_-})$, is densely defined, symmetric and self-adjoint ([[thm-nrqm-intervals-delta-interface-operator]] clauses (a)-(c)).
 
-[F2] **Negative eigenvalues of the interface operator.** For $\alpha\ge0$ the operator $A_{\alpha}$ has no negative eigenvalue, and $0$ is not an eigenvalue for any $\alpha\in\mathbb R$; for $\alpha<0$ the number $-\alpha^{2}/4<0$ is an eigenvalue with one-dimensional eigenspace spanned by $\psi_{\alpha}(x)=\sqrt{-\alpha/2}\,e^{\alpha|x|/2}$, which is a unit vector, and it is the unique negative eigenvalue: every eigenvector with negative eigenvalue is a multiple of $\psi_{\alpha}$; moreover for $\hbar,m>0$ the scaled operator $(\hbar^{2}/2m)A_{\alpha}$ on the same domain is self-adjoint and has $\psi_{\alpha}$ as eigenvector with eigenvalue $-\hbar^{2}\alpha^{2}/(8m)$ ([[thm-nrqm-intervals-delta-unique-bound-state]] clauses (a)-(c)).
+[F2] **Negative eigenvalues of the interface operator.** For $\alpha\ge0$ the operator $A_{\alpha}$ has no negative eigenvalue, and $0$ is not an eigenvalue for any $\alpha\in\mathbb R$; for $\alpha<0$ the number $-\alpha^{2}/4<0$ is an eigenvalue with one-dimensional eigenspace spanned by $\psi_{\alpha}(x)=\sqrt{-\alpha/2}\,e^{\alpha|x|/2}$, which is a unit vector, and it is the unique negative eigenvalue: every eigenvector with negative eigenvalue is a multiple of $\psi_{\alpha}$; moreover for $\hbar,m>0$ and $\alpha<0$ the scaled operator $(\hbar^{2}/2m)A_{\alpha}$ on the same domain is self-adjoint and has $\psi_{\alpha}$ as eigenvector with eigenvalue $-\hbar^{2}\alpha^{2}/(8m)$ ([[thm-nrqm-intervals-delta-unique-bound-state]] clauses (a)-(c)).
 
 [F3] **Positive scaling.** For self-adjoint $A$ and $c=\hbar^{2}/2m>0$, the operator $cA$ on $D(A)$ is self-adjoint, its spectrum is $c\,\sigma(A)$, and its eigenvectors are exactly those of $A$ with eigenvalues scaled by $c$ ([[lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators]] clauses (a)-(d)).
 
-[F4] **Assigned observables and stationary states.** An assigned sharp observable is a densely defined self-adjoint operator with a declared unit; a nonzero $\psi$ gives a stationary preparation of the autonomous model exactly when it is an eigenvector of the assigned energy observable, and the energy law of a unit eigenvector is the point mass at its eigenvalue ([[def-nrqm-observables-framework-observable-and-outcome-law]] clause (a), [[pthm-nrqm-potentials-line-model-energy-and-stationary-states]] clause (c), [[def-nrqm-autonomous-dynamics-framework-evolution]]).
+[F4] **Assigned observables and stationary states.** An assigned sharp observable is a densely defined self-adjoint operator with a declared unit; a nonzero $\psi$ gives a stationary preparation of the autonomous model exactly when it is an eigenvector of the assigned energy observable, and the energy law of a unit eigenvector is the point mass at its eigenvalue ([[def-nrqm-observables-framework-observable-and-outcome-law]] clause (a), [[pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation]] clause (c), [[lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues]] clause (b), [[def-nrqm-autonomous-dynamics-framework-evolution]]).
 
 ## Proof
 
@@ -129,7 +131,7 @@ function and no potential in $L^{2}$ is involved.
 
 1.1 [Domain and self-adjointness] By [F1] the operator $A_{\alpha_{g}}$ is self-adjoint on the displayed domain, and $H_{g}=(\hbar^{2}/2m)A_{\alpha_{g}}$ on the same domain; by [F3] with $c=\hbar^{2}/2m>0$, $H_{g}$ is self-adjoint. The domain description is unchanged; the action is the class formed by the two half-line weak second derivatives in [F1], multiplied by $-\hbar^2/(2m)$. These restrictions lie in $L^2$ by the domain condition, so their glued class is in $L^2(\mathbb R)$; no global $L^2$ second derivative is required. This proves (a). [given, F1, F3, algebra]
 
-2.1 [Repulsive and free couplings] Let $g\ge0$, so that $\alpha_{g}=2mg/\hbar^{2}\ge0$. By [F2] $A_{\alpha_{g}}$ has no negative eigenvalue and $0$ is not an eigenvalue; by [F3] the eigenvalues of $H_{g}$ are those of $A_{\alpha_{g}}$ multiplied by $c>0$, so $H_{g}$ has no negative eigenvalue and no zero eigenvalue either. This is (b), the case $\alpha=0$ included. [step 1.1, F2, F3, algebra]
+2.1 [Repulsive and free couplings] Let $g\ge0$, so that $\alpha_{g}=2mg/\hbar^{2}\ge0$. By [F2] $A_{\alpha_{g}}$ has no negative eigenvalue; by [F3] multiplication of eigenvalues by $c>0$ implies that $H_g$ has no negative eigenvalue. Separately, for every real $g$, [F2] excludes zero as an eigenvalue of $A_{\alpha_g}$, and [F3] excludes zero for $H_g$. This proves (b), including $g=0$. [step 1.1, F2, F3, algebra]
 
 3.1 [Attractive coupling] Let $g<0$, so that $\alpha_{g}=2mg/\hbar^{2}<0$. By [F2] the unique negative eigenvalue of $A_{\alpha_{g}}$ is $-\alpha_{g}^{2}/4$ with one-dimensional eigenspace spanned by the unit vector $\psi_{\alpha_{g}}$, and [F3] scales the eigenvalue by $c=\hbar^{2}/2m$ while preserving the eigenvector: $E_{g}=c\,(-\alpha_{g}^{2}/4)=-\frac{\hbar^{2}}{2m}\cdot\frac{1}{4}\bigl(\frac{2mg}{\hbar^{2}}\bigr)^{2}=-\frac{m^{2}g^{2}}{2m\hbar^{2}}=-\frac{mg^{2}}{2\hbar^{2}}$. The eigenfunction is, by [F2], $\psi_{g}(x)=\sqrt{-\alpha_{g}/2}\,e^{\alpha_{g}|x|/2}$ with $-\alpha_{g}/2=m|g|/\hbar^{2}$ and $\alpha_{g}/2=-m|g|/\hbar^{2}$, that is the displayed $\sqrt{m|g|/\hbar^{2}}\,e^{-m|g||x|/\hbar^{2}}$, and it is a unit vector. Since the eigenvectors of $H_{g}$ are exactly those of $A_{\alpha_{g}}$ by [F3], the negative eigenspace of $H_{g}$ is one-dimensional and spanned by $\psi_{g}$; by [F4] the preparation $[\psi_{g}]$ is stationary with energy $E_{g}$ and its energy law is the point mass at $E_{g}$. This is (c). [step 2.1, F2, F3, F4, algebra]
 

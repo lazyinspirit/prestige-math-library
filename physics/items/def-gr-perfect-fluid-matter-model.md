@@ -18,7 +18,7 @@ dependency_roles:
   def-gr-inverse-metric-and-musical-isomorphisms: mathematical-premise
   def-c-r-and-smooth-maps-between-smooth-manifolds: mathematical-premise
   prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure: mathematical-premise
-justified_by: [prop-gr-dust-and-perfect-fluid-conservation-equations]
+justified_by: []
 sources:
   references:
     - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 6.2: the perfect fluid energy-momentum tensor (6.30) and the conservation equations (6.31), printed pp. 65-66 (PDF pp. 66-67)"

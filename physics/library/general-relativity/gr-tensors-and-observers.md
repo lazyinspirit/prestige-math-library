@@ -9,6 +9,7 @@ title: "Tensors And Observers"
 status: draft
 library: physics
 items:
+  - lem-gr-tensor-bundle-coordinate-construction
   - def-gr-tensor-fields-and-components
   - def-gr-observer-and-rest-space
   - def-gr-observer-congruence-and-adapted-charts

@@ -33,12 +33,15 @@ physical_scope: "A record of the detection and selection qualification of any
   the recorded runs are selected by an event of the specification space that is
   the same for every setting pair, as the selection-closure lemma states;
   without a declared selection model no transfer is claimed, and no assertion is
-  made that any real detector satisfies the condition. The remark reports no
+  made that any real detector satisfies the condition. Finite-sample claims
+  additionally require an explicit sampling model for the recorded law; the
+  cited arrangement-sampling result applies only under its stated independent
+  trial laws. The remark reports no
   measurement and no efficiency."
 sources:
   references:
     - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell
-        nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.A, PDF
+        nonlocality', Reviews of Modern Physics 86 (2014) 419, Section I.A, PDF
         page 3: the local decomposition and the assumption that the settings are
         chosen independently of the specification, the formal basis of a
         setting-independent selection model"
@@ -67,13 +70,15 @@ verification:
 - **A sufficient condition for the transfer.** If the full tables admit a
   local-response representation and the recorded runs are exactly those
   specifications lying in a measurable selection event $D$ of the
-  specification space with $\mathbb P(D)>0$ — the same event for every setting
-  pair, independent of the settings and of the outcomes — then the conditional
+  specification space with $\mathbb P(D)>0$ — membership is determined by the
+  specification alone, using the same event for every setting pair — then the conditional
   tables again admit a local-response representation, with the same response
   laws over the conditional measure, and hence satisfy the CHSH bound
   ([[lem-nrqm-bell-setting-independent-selection-closure]]). This is the
   mathematical content of a **setting-independent detection** or
-  **fair-sampling** hypothesis for the declared model class.
+  **fair-sampling** hypothesis for the declared model class. It does not
+  require statistical independence of $D$ from the outcomes: reweighting the
+  specifications can change the tables.
 
 - **The condition is a hypothesis, not a theorem about detectors.** The
   selection-closure lemma is a conditional statement about the declared model.
@@ -90,10 +95,17 @@ verification:
   the CHSH bound constrains the recorded tables. Correspondingly, a deviation
   computed from recorded pairs is a statement about those recorded tables and
   their own declared model; it becomes a statement about the full arrangement
-  only through a declared selection model of the kind above. The finite-sample
-  fluctuation of any such computed functional is a further, separate matter,
-  treated in [[texp-nrqm-bell-finite-sample-chsh]], and the singlet contrast
-  itself is the conditional model computation of
+  only through an explicitly justified detection and selection model; the
+  condition above is sufficient, not necessary. Finite-sample fluctuations
+  are a further, separate matter. The result
+  [[texp-nrqm-bell-finite-sample-chsh]] assumes $n$ trials per setting pair,
+  all $4n$ outcome pairs mutually independent, with each trial law equal to
+  the arrangement's table $\nu^{\rho}_{ij}$. It applies to recorded pairs
+  only when their declared sampling model satisfies those hypotheses. A
+  postselected law different from $\nu^{\rho}_{ij}$, random recorded trial
+  counts or correlations induced by selection require a separate analysis;
+  the cited result does not supply one. The singlet contrast itself is the
+  conditional model computation of
   [[texp-nrqm-bell-singlet-arrangement-contrast]].
 
 - **Settings choice.** In a specified experiment model, let $Q_{ij}$ be the

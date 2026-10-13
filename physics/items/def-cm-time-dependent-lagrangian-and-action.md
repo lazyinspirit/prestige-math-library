@@ -53,9 +53,9 @@ class $C^2$ in the same sense with
 $$\eta(a)=\eta(b)=0 .$$
 
 Thus the admissible curves and variations are the restrictions to $[a,b]$ of $C^2$ maps on a
-common open interval, exactly the convention under which $C^2$ data on a closed interval are used
-in [[def-ck-and-multi-index-notation-in-several-variables]] and in the classical treatments cited
-below.
+common open interval. This closed-interval extension convention is stipulated here; on the
+open interval each component has continuous derivatives through order two in the sense of
+[[def-ck-and-multi-index-notation-in-several-variables]].
 
 **The action.** For a $C^2$ curve $q:[a,b]\to U$ the map $t\mapsto\mathcal L(t,q(t),q'(t))$ is
 continuous on $[a,b]$, because $q,q'$ are continuous and $\mathcal L$ is continuous
@@ -67,7 +67,7 @@ $$S(q):=\int_a^b\mathcal L\bigl(t,q(t),q'(t)\bigr)\,dt .$$
 **First variation.** For a $C^2$ curve $q$ and a variation $\eta$ the curve $q_\varepsilon:=q+\varepsilon\eta$
 takes values in $U$ for all sufficiently small $|\varepsilon|$; this is proved in
 [[lem-cm-first-variation-formula]] and is *not* part of the present definition. The **first
-variation of $S$ at $q$ in the direction $\eta$** is the one-sided derivative at $\varepsilon=0$
+variation of $S$ at $q$ in the direction $\eta$** is the ordinary two-sided derivative at $\varepsilon=0$
 of the function $\varepsilon\mapsto S(q+\varepsilon\eta)$, written
 
 $$\delta S(q)[\eta]:=\frac{d}{d\varepsilon}\Big|_{\varepsilon=0}S(q+\varepsilon\eta),$$

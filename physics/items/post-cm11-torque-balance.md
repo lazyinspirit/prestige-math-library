@@ -27,7 +27,7 @@ sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge Part II lecture notes, January 2015 printing), Section 3.3, printed pages 53-55 (PDF pages 59-61): the angular-momentum rate equals the applied torque, and Euler's equations in the body frame"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.4, Eqs. (4.63)-(4.66), chapter pages 9-10 (PDF pages 63-64): the angular-momentum balance of a rigid body and Euler's equations with torque components"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.4, Eqs. (4.63)-(4.66), chapter page 15 (PDF page 69): the angular-momentum balance of a rigid body and Euler's equations with torque components"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Section 2.9, Eqs. (2.80)-(2.83): the evolution of the angular momentum of a rigid body and Euler's equations under an applied torque"
       url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"

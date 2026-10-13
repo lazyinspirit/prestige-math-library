@@ -47,30 +47,19 @@ forbidden $1s$-to-$1s$, $1s$-to-$2s$ and $m$-violating entries — together with
 the oscillator contrast $|\Delta n|=1$.
 [[texp-nrqm-light-matter-spectral-density-and-detected-photon-comparison]]
 proves that two declared cutoff-dipole models whose mode densities agree at
-the transition energy have the same rate coefficient but different
+the transition energy and are not proportional almost everywhere have the same rate coefficient but different
 formal single-vertex photon-energy laws at every positive finite time (normalized one-photon preparations require nonzero coupling), and that a declared
 sharp-line model is the idealisation approached in the limit rather than a
 property of the finite-time law.
 
-**What they rest on.** All three are conditional on the state and composition
-postulate P1, the observable and probability postulate P2 and the preparation
-and apparatus discipline P7 in the readings of the model
-[[def-nrqm-light-matter-framework-finite-level-coupled-model]], on the
-spectral-transition reading
-[[def-nrqm-light-matter-framework-spectral-transition-and-detection]], on the
-single-vertex mathematics [[lem-nrqm-light-matter-first-order-photon-energy-law]]
-and on the main-page results [[pthm-nrqm-light-matter-stimulated-dipole-drive-transitions]],
-[[pthm-nrqm-light-matter-dipole-selection-rules]] and
-[[pthm-nrqm-light-matter-golden-rule-limit-and-rate-reading]]. The two-level
-example's parameters $\omega_{0},d,E_{0},\omega$ and the densities
-$J_{1},J_{2}$ are declared model data, not measured values.
+**What they rest on.** The two-level example adopts the prescribed dipole-drive data and uses [[pthm-nrqm-light-matter-stimulated-dipole-drive-transitions]] together with the driven-dynamics suppliers cited in that example; its state, probability and laboratory-identification readings use P1, P2 and P7. The hydrogen angular-factor example uses the declared Coulomb dipole components, spherical harmonics, angular integration, the bound-state domain and oscillator suppliers, and [[pthm-nrqm-light-matter-dipole-selection-rules]]. Its model reading uses P1 and the declared units, but its angular calculation uses neither the single-vertex photon law nor a detector or a P2/P7 inference. The spectral comparison uses the declared cutoff model [[def-nrqm-light-matter-framework-finite-level-coupled-model]], its spectral definition [[def-nrqm-light-matter-framework-spectral-transition-and-detection]], the kernel mathematics [[lem-nrqm-light-matter-first-order-photon-energy-law]], and [[pthm-nrqm-light-matter-golden-rule-limit-and-rate-reading]], with the stated P1, P2 and P7 readings; its ideal detected-law reading requires nonzero coupling. The two-level example's parameters $\omega_0,d,E_0,\omega,L,k$ and the comparison's densities $J_1,J_2$ are declared model data, not measured values.
 
 **What is not claimed.** The page records no experiment, no apparatus, no
 calibration, no count, no frequency, no efficiency and no uncertainty budget,
 and none is invented. It does not claim that any laboratory atom, field,
 spectrometer or detector realizes the declared models; those are tested
 identifications with uncertainty under P7
-([[post-nrqm-framework-preparation-and-apparatus]]). It asserts no rate,
+([[post-nrqm-framework-preparation-and-apparatus]]). It asserts no measured rate,
 lifetime, linewidth or exponential decay from any of its comparisons, and no
 statistical inference. Comparing the declared model laws with data would test
 the combined model and apparatus assumptions under a declared sampling and

@@ -28,6 +28,9 @@ requires:
   - uniform-spaces
   - subspaces-products-and-quotients
   - the-exponential-function
+  - fejer-and-poisson-summability-of-fourier-series
+  - product-measures-and-the-fubini-tonelli-theorems
+  - rn-as-a-normed-space
 ---
 
 The fluid-analysis layer of the non-relativistic classical mechanics mathematics
@@ -63,10 +66,10 @@ $C_m\|u\|_{H^m}\|u\|_{H^s}$. The Galerkin scheme of
 ordinary differential equations on the truncated coefficient space, with
 explicit invariance, local Lipschitz and maximal-solution statements;
 [[lem-fluid-energy-common-lifespan]] integrates the energy inequality to obtain
-the common lifespan $T=(2C_sY_0)^{-1}$ with
+the common lifespan $T=(2C_sY_0)^{-1}$ for $Y_0>0$ (and $T=1$ for $Y_0=0$), with
 $\|u_N(t)\|_{H^s}\le2Y_0$, and
-[[lem-high-sobolev-norms-share-base-lifespan]] extends the bounds to all higher
-norms on that same interval, uniformly in $N$.
+[[lem-high-sobolev-norms-share-base-lifespan]] extends the bounds to higher
+norms whose initial values are finite on that same interval, uniformly in $N$.
 
 Compactness and the limit are
 [[lem-fourier-tail-diagonal-compact-convergence]] (diagonal extraction of a
@@ -77,7 +80,7 @@ Sobolev norms continuous in time is $C^\infty$). Together they yield
 [[thm-local-smooth-periodic-euler-viscous-solution]]: for smooth divergence-free
 data on $\mathbb T^3$, an integer $s\ge4$ and $\nu\ge0$, a smooth solution exists
 on $[0,T]$ with $T$ depending only on $\|u_0\|_{H^s}$, satisfies the projected
-equation in every $H^{m-2}$ and obeys the uniform bounds. Line 12 of the page is
+equation in every $H^{m-2}$ and obeys the uniform bounds. The pressure-reconstruction item is
 [[lem-periodic-pressure-reconstruction]], which recovers the mean-zero pressure
 and the primitive-variable equation
 $\partial_tu+(u\cdot\nabla)u=-\nabla p+\nu\Delta u$ with

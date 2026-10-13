@@ -7,16 +7,16 @@ items:
   - def-nrqm-framework-newtonian-spacetime
   - def-nrqm-framework-galilei-transformations
   - lem-nrqm-framework-galilei-transformations-form-a-group
+  - def-nrqm-framework-quantities-and-units
   - def-nrqm-framework-inertial-frames
   - def-nrqm-framework-classical-apparatus-trajectories
-  - def-nrqm-framework-quantities-and-units
   - lem-nrqm-framework-ccr-on-the-schwartz-core
   - post-nrqm-framework-state-and-composition
   - post-nrqm-framework-observable-and-probability
   - post-nrqm-framework-ideal-conditional-measurement
   - post-nrqm-framework-autonomous-dynamics
-  - post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle
   - post-nrqm-framework-identical-particles-and-spin
+  - post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle
   - post-nrqm-framework-preparation-and-apparatus
   - rem-nrqm-framework-assumption-classes-and-scope
   - rem-nrqm-framework-primitive-and-derived-status

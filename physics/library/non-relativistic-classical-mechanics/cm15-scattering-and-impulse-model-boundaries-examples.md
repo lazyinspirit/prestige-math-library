@@ -58,8 +58,9 @@ monotone inverse are needed for the cross-section.
 
 [[ex-cm15-impact-check]] checks three outcomes of one declared impact
 ($m_1=2$, $m_2=6\,\mathrm{kg}$, velocities $3$ and
-$-1\,\mathrm{m\,s^{-1}}$): the elastic case exchanges the velocities with
-$\Delta K=0$, the semi-elastic case $e=\frac12$ gives impulse
+$-1\,\mathrm{m\,s^{-1}}$): the elastic case reverses each velocity, giving
+outgoing velocities $-3$ and $+1\,\mathrm{m\,s^{-1}}$ along the contact
+direction, with $\Delta K=0$; the semi-elastic case $e=\frac12$ gives impulse
 $-9\,\mathrm{N\,s}$ and $\Delta K=-9\,\mathrm{J}$, and the sticking case gives
 $\Delta K=-12\,\mathrm{J}$, all with total momentum continuous across the
 impact. Its companion counterexamples isolate the model boundaries:

@@ -9,7 +9,7 @@ dependency_level: 9
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-gr-stationary-weak-field-data, def-gr-si-unit-and-coordinate-conventions, def-gr-stress-energy-tensor-field, def-laplacian-of-a-c2-function, def-c-r-and-smooth-maps-between-smooth-manifolds, def-interval, def-total-derivative-in-euclidean-space]
+deps: [def-gr-stationary-weak-field-data, def-gr-si-unit-and-coordinate-conventions, def-gr-stress-energy-tensor-field, def-laplacian-of-a-c2-function, def-c-r-and-smooth-maps-between-smooth-manifolds, def-interval, def-total-derivative-in-euclidean-space, def-jacobian-matrix-and-gradient, thm-total-derivative-computes-directional-and-partial-derivatives, def-euclidean-inner-product]
 dependency_roles:
   def-gr-stationary-weak-field-data: formulation-prerequisite
   def-gr-si-unit-and-coordinate-conventions: formulation-prerequisite
@@ -18,6 +18,9 @@ dependency_roles:
   def-c-r-and-smooth-maps-between-smooth-manifolds: mathematical-premise
   def-interval: mathematical-premise
   def-total-derivative-in-euclidean-space: mathematical-premise
+  def-jacobian-matrix-and-gradient: mathematical-premise
+  thm-total-derivative-computes-directional-and-partial-derivatives: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
 physical_scope: "Definition of the auxiliary Newtonian comparison model (potential, source density, gravitational constant and comparison motions) and of the dictionary that identifies its spatial region, coordinates, potential and coupling with the relativistic stationary weak-field data. The Newtonian source density and the relativistic coordinate and dust rest-mass densities remain distinct; their error-qualified matching is proved separately. Excludes any derivation of either framework from the other, any numerical value of a physical constant, distributional or point sources, boundary conditions at spatial infinity, and any empirical claim. The coordinate and potential identifications are adopted correspondences, not theorems or observations."
 sources:
   references:
@@ -25,7 +28,7 @@ sources:
       url: "https://arxiv.org/pdf/gr-qc/9712019"
     - title: "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), sections 5.1-5.1.2: the identification of the potential and mass density with their Newtonian counterparts, printed pp. 205-210 (PDF pp. 212-217)"
       url: "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
-    - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 4.2 and the Newtonian module: Newtonian gravity as the weak-field slow-motion comparison model, and its variable and coupling dictionary"
+    - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 7.2, equations (7.19), (7.27)-(7.28) and (7.35)-(7.36), printed pp. 74-77 (PDF pp. 75-78): Newtonian potential, force and Poisson comparison; the exact correspondence dictionary is adopted locally"
       url: "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
 verification:
   precheck: n/a
@@ -56,14 +59,24 @@ $$\Delta\Phi_N=4\pi G_{\mathrm{cmp}}\rho_N\qquad\text{on }O$$
 
 holds, where $\Delta$ is the Laplacian on $\mathbb R^3$
 ([[def-laplacian-of-a-c2-function]]). A **comparison motion** of the model is
-a $C^2$ curve $q:J\to O$ on an interval $J\subseteq\mathbb R$ whose points
-are read as times in seconds, satisfying the **Newtonian equation of motion**
+a curve $q:J\to O$ on a nonempty interval $J\subseteq\mathbb R$ with
+nonempty interior, whose points are read as times in seconds. Here **$C^2$
+on $J$** means that $q$ is continuous on $J$, is $C^2$ on its open interior,
+and $q'$, $q''$ extend continuously to each included finite endpoint.
+At those endpoints derivatives mean these unique limits from the interior.
+A comparison motion is $C^2$ in this sense and satisfies the **Newtonian
+equation of motion**
 
 $$q''(t)=-\nabla\Phi_N\bigl(q(t)\bigr)\qquad(t\in J),$$
 
-the gradient being the total derivative of $\Phi_N$
+where in the standard coordinates of $\mathbb R^3$
+$\nabla\Phi_N(q):=(\partial_1\Phi_N(q),\partial_2\Phi_N(q),\partial_3\Phi_N(q))$
+([[def-jacobian-matrix-and-gradient]]) and the total derivative is the
+covector represented by this vector through the Euclidean inner product:
+$D\Phi_N(q)[v]=\langle\nabla\Phi_N(q),v\rangle$
 ([[def-total-derivative-in-euclidean-space]],
-[[def-c-r-and-smooth-maps-between-smooth-manifolds]]).
+[[thm-total-derivative-computes-directional-and-partial-derivatives]],
+[[def-euclidean-inner-product]]).
 The model is an auxiliary classical model: its equations are adopted as part
 of the definition of the comparison framework and are not derived here from
 the relativistic framework or from anything else.

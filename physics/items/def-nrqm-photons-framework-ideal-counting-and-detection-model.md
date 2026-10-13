@@ -24,7 +24,7 @@ deps:
     thm-nrqm-fock-and-equilibrium-number-operator-domain,
     lem-nrqm-measurement-selective-luders-update,
     lem-nrqm-measurement-nonselective-luders-map,
-    def-countable-choice,
+    def-countable-choice, def-dependent-choice,
     def-axiom-of-choice
   ]
 dependency_roles:
@@ -45,6 +45,7 @@ dependency_roles:
   lem-nrqm-measurement-nonselective-luders-map: mathematical-premise
   def-countable-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -91,8 +92,10 @@ the radiation sector definition
 [[def-nrqm-photons-framework-radiation-sector-and-quantum-assignments]], in
 the measurement vocabulary of
 [[def-nrqm-measurement-framework-declared-measurements-and-instruments]].
-Assume the Axioms of Countable Choice and of Choice, the choice hypotheses of
-the cited readings ([[def-countable-choice]], [[def-axiom-of-choice]]).
+Assume Countable Choice, Dependent Choice and Choice
+([[def-countable-choice]], [[def-dependent-choice]], [[def-axiom-of-choice]]),
+including the hypotheses inherited from the radiation postulate and the cited
+measurement mathematics.
 
 **(b) Declared ideal total-number detector.** The **declared ideal
 total-number detector** of the radiation sector is the declared ideal sharp
@@ -124,7 +127,11 @@ free-field energy observable $(H_f,\mathrm J)$; its **window law** in the
 preparation $\rho$ is $p_{B}(\rho)=\operatorname{tr}(\rho E_{H_f}(B))$ and its
 complement probability is $\operatorname{tr}(\rho(I-E_{H_f}(B)))$, the reading
 of P2. A finite-resolution detector is described by such a window or by a
-declared family of pairwise disjoint windows covering $[0,\infty)$; the
+declared finite or countably infinite family $(B_a)_{a\in A}$ of pairwise
+disjoint Borel windows covering $[0,\infty)$, with outcome projections
+$(E_{H_f}(B_a))_{a\in A}$. Countable additivity of the spectral PVM and
+$E_{H_f}([0,\infty))=I$ give their strong sum $I$, so this is an admissible
+declared ideal sharp measurement. The
 statement that a laboratory spectrometer realizes a declared window, with what
 resolution and calibration, is an identification under P7.
 

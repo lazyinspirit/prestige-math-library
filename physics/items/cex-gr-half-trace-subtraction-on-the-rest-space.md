@@ -68,6 +68,6 @@ trace-free.
 
 ## Remarks
 
-- **The rank-two repair.** The contrast computed in step 2.1 shows which weight is correct: the same half-trace formula is trace-free precisely for the rank-two screen projector $p$, while the rank-three spatial projector fails it. The general identity is $\operatorname{tr}\bigl(q_a{}^cq_b{}^dA_{cd}-\tfrac12q_{ab}q^{cd}A_{cd}\bigr)=\bigl(1-\tfrac r2\bigr)q^{cd}A_{cd}$ for a projector $q$ of rank $r$, which vanishes only for $r=2$; this is why the half weight belongs to the two-dimensional screen and not to the three-dimensional rest space ([[lem-gr-tt-screen-projector]] remark).
+- **The rank-two repair.** The contrast computed in step 2.1 shows which weight is correct: the same half-trace formula is trace-free for every input with the rank-two screen projector $p$, while the rank-three spatial projector fails it for the displayed input. The general identity is $\operatorname{tr}\bigl(q_a{}^cq_b{}^dA_{cd}-\tfrac12q_{ab}q^{cd}A_{cd}\bigr)=\bigl(1-\tfrac r2\bigr)q^{cd}A_{cd}$ for an $\eta$-self-adjoint idempotent $q$ of rank $r$. This trace vanishes when $r=2$ or $q^{cd}A_{cd}=0$; for nonzero input trace it vanishes exactly when $r=2$; this is why the half weight belongs to the two-dimensional screen and not to the three-dimensional rest space ([[lem-gr-tt-screen-projector]] remark).
 
 - **Scope.** The counterexample concerns the algebraic projector formula in the flat model; it makes no statement about metric perturbations, field equations or observations.

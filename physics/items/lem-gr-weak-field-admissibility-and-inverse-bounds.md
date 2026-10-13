@@ -57,8 +57,11 @@ $$m\bigl(E(\varepsilon)\bigr)\le4C\varepsilon,\qquad m\bigl(H(\varepsilon)\bigr)
 
 so the chart field $\partial_0$ is timelike over the spatial compact $K$;
 moreover $\partial_0$ is
-a Killing field of $g(\varepsilon)$ on $\Omega$
-([[def-gr-killing-field]]).
+a Killing field of $g(\varepsilon)$ on $\Omega$. Here, on a Lorentzian
+region without a specified global time orientation, **Killing** means
+$\mathcal L_{\partial_0}g(\varepsilon)=0$: the same orientation-independent
+equation as [[def-gr-killing-field]], applied on each locally time-oriented
+neighborhood. No global time orientation of $g(\varepsilon)$ is asserted.
 
 **(b) Inverse-metric expansion and uniform bounds.** There is
 $C_1=C_1(C,L)<\infty$ such that at these spacetime points, with
@@ -91,13 +94,11 @@ where $g^{ab}(\varepsilon)$ are the components of the inverse metric
 
 1.1 (Smallness and timelikeness.) Over the spatial set $K$, [L1] gives $m(E)\le2C\varepsilon+C\varepsilon^2+C\varepsilon^{3/2}\le4C\varepsilon$ for $\varepsilon\le1$, hence $m(H)\le16C\varepsilon\le1/8$ for $\varepsilon\le(128C)^{-1}$; and $g(\varepsilon)_{00}=-(1+2\varepsilon\varphi)+r_{00}\le-1+2C\varepsilon+C\varepsilon^2\le-1/2$ for $\varepsilon$ small as chosen. Thus $\partial_0$ is timelike at every spacetime point over $K$. [L1, L2, given, algebra]
 
-1.2 (Stationarity.) For each $p\in\Omega$, the local flow of $\partial_0$ is the translation of [L3] for sufficiently small $s$ on a neighborhood of $p$. Its differential is the identity, and the metric components have equal values at source and target by [L1]. The local pullback therefore fixes $g(\varepsilon)$, so differentiating at $s=0$ in the definition of [L3] gives $\mathcal L_{\partial_0}g(\varepsilon)=0$ throughout $\Omega$. Thus $\partial_0$ is Killing; no global translation flow on the arbitrary open set $\Omega$ is required. [L1, L3, given, algebra]
+1.2 (Stationarity.) For each $p\in\Omega$, the local flow of $\partial_0$ is the translation of [L3] for sufficiently small $s$ on a neighborhood of $p$. Its differential is the identity, and the metric components have equal values at source and target by [L1]. The local pullback therefore fixes $g(\varepsilon)$, so differentiating at $s=0$ in the definition of [L3] gives $\mathcal L_{\partial_0}g(\varepsilon)=0$ throughout $\Omega$. For each $p$, choose a timelike $v\in T_p\Omega$ and extend its coordinate components constantly on a chart neighborhood; smoothness and the strict inequality $g_p(v,v)<0$ make the extension timelike after shrinking the neighborhood. This gives a local time orientation on which [[def-gr-killing-field]] applies. Its defining equation is independent of that local choice and holds on every such neighborhood, hence globally in the sense specified in (a). Thus $\partial_0$ is Killing; neither a global time orientation nor a global translation flow on $\Omega$ is required. [L1, L3, given, algebra]
 
 2.1 (Convergent matrix inverse.) Write $g(\varepsilon)=\eta(I+H(\varepsilon))$. By step 1.1, $m(H)\le1/8$. From [L2], induction gives $m(H^k)\le4^{k-1}m(H)^k\le(4m(H))^k$ for $k\ge1$. Since $4m(H)\le1/2$, the scalar geometric series [[thm-geometric-series]] shows that every entry of $S_N:=\sum_{k=0}^N(-H)^k$ converges as $N\to\infty$; let $S$ be the limiting matrix. The finite geometric identity $(I+H)S_N=S_N(I+H)=I+(-1)^NH^{N+1}$ and the same bound $m(H^{N+1})\to0$ imply $(I+H)S=S(I+H)=I$, so $S=(I+H)^{-1}$. Moreover, $m(S)\le1+\sum_{k\ge1}(4m(H))^k\le2$. [step 1.1, L2, given, algebra]
 
-3.1 (Exact inverse expansion.) The finite geometric identity also gives $S=I-H+H^2S$. Since $g^{-1}=S\eta^{-1}$, substituting $H=\eta^{-1}E$ yields [step 2.1, L2, given, algebra]
-$$g^{-1}=\eta^{-1}-\eta^{-1}E\eta^{-1}+\eta^{-1}E\eta^{-1}E S\eta^{-1}.$$
-Thus the first two terms are the zeroth- and first-order parts and the final term is exactly the remainder $R$ in (b), with the stated component convention. [step 2.1, L2, given, algebra]
+3.1 (Exact inverse expansion.) The finite geometric identity also gives $S=I-H+H^2S$. Since $g^{-1}=S\eta^{-1}$, substituting $H=\eta^{-1}E$ yields $$g^{-1}=\eta^{-1}-\eta^{-1}E\eta^{-1}+\eta^{-1}E\eta^{-1}E S\eta^{-1}.$$ Thus the first two terms are the zeroth- and first-order parts and the final term is exactly the remainder $R$ in (b), with the stated component convention. [step 2.1, L2, given, algebra]
 
 4.1 (Derivative bounds.) Since $H=\eta^{-1}E$ and $E$ is smooth with $m(\partial^\alpha E)\le4C\varepsilon/L^{|\alpha|}$ for $1\le|\alpha|\le2$ on the spatial compact (using $\varepsilon^{3/2}\le\varepsilon$), [L2] gives $m(\partial^\alpha H)\le4C\varepsilon/L^{|\alpha|}$. Differentiating $(I+H)S=I$ for $S=(I+H)^{-1}$ gives $\partial_cS=-S(\partial_cH)S$; differentiating again gives $\partial_d\partial_cS=-S_dH_cS-SH_{cd}S-SH_cS_d$. Step 2.1 bounds $m(S)\le2$, and repeated use of [L2] in these identities yields $m(\partial^\alpha S)\le C'\varepsilon/L^{|\alpha|}$ for $1\le|\alpha|\le2$ (terms quadratic in $\varepsilon$ are bounded by the same order since $\varepsilon\le1$). Differentiating the exact identity $g^{-1}=\eta^{-1}-\eta^{-1}E\eta^{-1}+\eta^{-1}E\eta^{-1}E S\eta^{-1}$ from step 3.1, every derivative of the last term still contains two factors drawn from $E,\partial E,\partial^2E$, so $|\partial^\alpha R^{ab}|\le C_1\varepsilon^2/L^{|\alpha|}$ for $0\le|\alpha|\le2$. The first two terms give $|\partial^\alpha g^{ab}|\le C_1/L^{|\alpha|}$ for $1\le|\alpha|\le2$, with $C_1=C_1(C,L)$ enlarged as needed. This proves (b). [step 2.1, L2, L4, algebra, step 3.1]
 
@@ -105,6 +106,6 @@ Thus the first two terms are the zeroth- and first-order parts and the final ter
 
 ## Remarks
 
-- **Uniform in the family.** The threshold $\varepsilon_*$ and the constant $C_1$ depend only on $(C,L)$ and the dimension, not on the individual family; this uniformity is what makes the estimates effective for the trajectory limit later on this page.
+- **Uniform in the family.** The threshold $\varepsilon_*$ also depends on the admissible range $\varepsilon_0$; the constant $C_1$ depends only on $(C,L)$ and the dimension, not on the individual family; this uniformity is what makes the estimates effective for the trajectory limit later on this page.
 - **Local in space.** All bounds are stated over the fixed spatial compact set $K$; no global smallness on $\Omega$ and no decay of the data at infinity is assumed.
 - **Scope.** The lemma is the analytic input of the weak-field hierarchy: it converts the raw $O(\varepsilon^2)$ and $O(\varepsilon^{3/2})$ bounds on the remainders into uniform control of the inverse metric through two derivatives, which is what the curvature and geodesic estimates require.

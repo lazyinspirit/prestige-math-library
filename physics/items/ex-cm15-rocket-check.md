@@ -1,7 +1,7 @@
 ---
 id: ex-cm15-rocket-check
 kind: example
-title: "A declared rocket check: mass $3-t\\,\\mathrm{kg}$ and constant exhaust speed $2\\,\\mathrm{m\\,s^{-1}}$ relative to the body give $v(t)=2\\ln(3/(3-t))\\,\\mathrm{m\\,s^{-1}}$ and show that $(mv)'=F$ fails"
+title: "A declared rocket check: initial mass $3\\,\\mathrm{kg}$, loss rate $1\\,\\mathrm{kg\\,s^{-1}}$ and relative exhaust speed $2\\,\\mathrm{m\\,s^{-1}}$ give $v=u_e\\ln(m_0/m)n$ and show that $(mv)'=F$ fails"
 status: draft
 origin: session
 domain: physics
@@ -33,7 +33,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "A declared-data check of the open-body material accounting: a body of initial mass $3\\,\\mathrm{kg}$ losing mass at $1\\,\\mathrm{kg\\,s^{-1}}$ with no external force and ejecta of constant speed $2\\,\\mathrm{m\\,s^{-1}}$ relative to the body has velocity $v(t)=2\\ln(3/(3-t))\\,\\mathrm{m\\,s^{-1}}$ from rest, satisfies the material balance identities, and violates the naive closed-system law $(mv)'=F$; the example verifies the identities, the thrust $2\\,\\mathrm{N}$ and the failure of the naive law on declared model data. It reports no measurement, no engine data and no empirical comparison."
+physical_scope: "A declared-data check of the open-body material accounting: a body of initial mass $m_0=3\\,\\mathrm{kg}$ losing mass at $r_0=1\\,\\mathrm{kg\\,s^{-1}}$ has $m(t)=m_0-r_0t$. With no external force and ejecta of relative speed $u_e=2\\,\\mathrm{m\\,s^{-1}}$ opposite a fixed unit direction $n$, its velocity from rest is $v(t)=u_e\\ln(m_0/m(t))n$. It satisfies the material balance identities and violates the naive closed-system law $(mv)'=F$; the example verifies the identities, the thrust $2\\,\\mathrm{N}$ and the failure of the naive law on declared model data. It reports no measurement, no engine data and no empirical comparison."
 sources:
   references:
     - title: "J. Peraire and S. Widnall, 16.07 Dynamics (MIT OpenCourseWare, Fall 2008/2009), Lecture L14 'Variable Mass Systems: The Rocket Equation', Eqs. (11)-(15): $m\\,\\mathrm d\\mathbf v/\\mathrm dt=\\mathbf F+(\\mathrm dm/\\mathrm dt)\\mathbf v_0$ with $\\mathbf v_0$ the transferred matter's velocity relative to the body, and the Tsiolkovsky integral"
@@ -46,14 +46,18 @@ sources:
 
 **Declared model data.** Adopt the open-body material accounting of
 [[post-cm15-impulse]] clause (iii) with, on the open interval
-$I=(-\frac12,\frac52)$ containing the initial time $0$,
-$$m(t):=3-t\ \mathrm{kg},\qquad F\equiv0,\qquad r_{\mathrm{in}}\equiv0,\qquad r_{\mathrm{out}}\equiv1\ \mathrm{kg\,s^{-1}},\qquad w_{\mathrm{out}}(t):=v(t)-u_e\,n,$$
+$I=(-\frac12\ \mathrm s,\frac52\ \mathrm s)$ containing the initial time $0$,
+set $m_0:=3\ \mathrm{kg}$, $r_0:=1\ \mathrm{kg\,s^{-1}}$, and
+$$m(t):=m_0-r_0t,\qquad F\equiv0,\qquad r_{\mathrm{in}}\equiv0,\qquad r_{\mathrm{out}}\equiv r_0,\qquad w_{\mathrm{out}}(t):=v(t)-u_e\,n,$$
 with a fixed unit vector $n$, $u_e:=2\ \mathrm{m\,s^{-1}}$, and initial
 velocity $v(0)=0$. The ejecta therefore leave with the body's velocity
-reduced by the constant exhaust speed $u_e$ along $n$.
+reduced by the constant exhaust speed $u_e$ along $n$. Set
+$q:=t/(1\ \mathrm s)$, the dimensionless numerical time, so
+$m(t)=(3-q)\ \mathrm{kg}$. Primes denote differentiation with respect to
+physical frame time $t$, read in seconds.
 
 **Assertions to check.** The balance identities hold with
-$$v(t)=u_e\ln\frac{m(0)}{m(t)}=2\ln\frac{3}{3-t}\ n\ \mathrm{m\,s^{-1}}\qquad(t\in I),$$
+$$v(t)=u_e\ln\frac{m_0}{m(t)}\,n=2\ln\frac{3}{3-q}\ n\ \mathrm{m\,s^{-1}}\qquad(t\in I),$$
 the thrust is $r_{\mathrm{out}}u_e=2\ \mathrm{N}$ along $n$, and the naive
 closed-system law $(mv)'=F$ fails: it would force $v\equiv0$ on $I$.
 
@@ -69,17 +73,17 @@ closed-system law $(mv)'=F$ fails: it would force $v\equiv0$ on $I$.
 
 **Proof technique:** direct.
 
-1.1 Mass identity: $m'=-1$ and $r_{\mathrm{in}}-r_{\mathrm{out}}=0-1=-1$ on $I$, so the first balance identity holds; moreover $m(t)=3-t>0$ on $I$. [given, L1, L2, algebra]
+1.1 Mass identity: $m'=-r_0=r_{\mathrm{in}}-r_{\mathrm{out}}$ on $I$, in $\mathrm{kg\,s^{-1}}$. Since $-1/2<q<5/2$, $m(t)=(3-q)\ \mathrm{kg}>0$, so the first balance identity and the positive-mass condition hold. [given, L1, L2, algebra]
 
-1.2 Velocity candidate: define $v(t):=u_e\ln\frac{3}{3-t}n$; by [L2], $\frac{\mathrm d}{\mathrm dt}\ln\frac{3}{3-t}=\frac{1}{3-t}$, so $v'(t)=\frac{u_e}{3-t}n=\frac{2}{3-t}n$, and $v(0)=u_e\ln1\cdot n=0$. [given, L2, algebra]
+2.1 Velocity candidate: define $v(t):=u_e\ln(m_0/m(t))n$. By [L2] and $m'=-r_0$, $\frac{\mathrm d}{\mathrm dt}\ln(m_0/m(t))=r_0/m(t)$, so $v'(t)=u_er_0n/m(t)$, with acceleration units $\mathrm{m\,s^{-2}}$, and $v(0)=u_e\ln1\cdot n=0$. The logarithm acts on the positive dimensionless ratio $m_0/m(t)$. [step 1.1, given, L2, algebra]
 
-2.1 Strong form: $m v'=(3-t)\cdot\frac{2}{3-t}n=2n$, while $F+r_{\mathrm{in}}(w_{\mathrm{in}}-v)-r_{\mathrm{out}}(w_{\mathrm{out}}-v)=0+0-1\cdot\bigl((v-u_en)-v\bigr)=u_en=2n$; hence the derived law holds with thrust $r_{\mathrm{out}}u_e=2\ \mathrm{N}$ along $n$. [step 1.1, step 1.2, L1, algebra]
+3.1 Strong form: $mv'=r_0u_en$, while $F+r_{\mathrm{in}}(w_{\mathrm{in}}-v)-r_{\mathrm{out}}(w_{\mathrm{out}}-v)=-r_0((v-u_en)-v)=r_0u_en$. Thus the derived law holds with thrust $r_0u_e=2\ \mathrm N$ along $n$. [step 1.1, step 2.1, L1, algebra]
 
-3.1 Material identities: from step 1.2, $(mv)'=m'v+mv'=-v+2n$, while $F+r_{\mathrm{in}}w_{\mathrm{in}}-r_{\mathrm{out}}w_{\mathrm{out}}=0+0-1\cdot(v-u_en)=-v+2n$; both identities of [L1] therefore hold. [step 1.1, step 2.1, L1, L2, algebra]
+4.1 Material identities: the product rule gives $(mv)'=m'v+mv'=-r_0v+r_0u_en=-r_0w_{\mathrm{out}}=F+r_{\mathrm{in}}w_{\mathrm{in}}-r_{\mathrm{out}}w_{\mathrm{out}}$. Along with step 1.1 this verifies both balance identities of [L1], with every term in this momentum-rate identity having force units. [step 1.1, step 3.1, L1, L2, algebra]
 
-4.1 Failure of the naive law: the closed-system law $(mv)'=F\equiv0$ would give $mv$ constant and, since $m(0)v(0)=0$, would force $v\equiv0$ on $I$ by [L2]; but the computed velocity has $v(t)=2\ln\frac{3}{3-t}n\ne0$ for $t\in(0,2)$ and, at $t=2^{-}$, $(mv)'(2^{-})=(-2\ln3+2)n\approx-0.197n\ \mathrm{N}\ne F$. Hence $(mv)'=F$ is false for this open body, exactly as [[pthm-cm15-impact-balance]] clause 6(b) records. [step 3.1, L1, L2, algebra]
+5.1 Failure of the naive law: $(mv)'=F\equiv0$ would make $mv$ constant and, since $m(0)v(0)=0$ and $m>0$, would force $v\equiv0$ by [L2]. But the computed $v(t)$ is nonzero for $0<t<2\ \mathrm s$; at $t=2\ \mathrm s$, $(mv)'=(2-2\ln3)n\ \mathrm N\approx-0.197n\ \mathrm N\ne F$. Hence the naive law fails for this open body, as [[pthm-cm15-impact-balance]] clause 6(b) records. [step 4.1, L1, L2, algebra]
 
-5.1 Tsiolkovsky value: at $t=1$ one has $m(1)=2\ \mathrm{kg}$ and $v(1)=2\ln\frac32n\approx0.8109n\ \mathrm{m\,s^{-1}}$; the momentum at that time is $2\cdot0.8109n\approx1.6218n\ \mathrm{kg\,m\,s^{-1}}$, while the naive law would give $mv=0$. All quantities are declared model data substituted into the model formulas; no engine, propellant or measurement is involved. [step 4.1, L1, L2, algebra] ∎
+6.1 Tsiolkovsky value: at $t=1\ \mathrm s$, $q=1$, $m=2\ \mathrm{kg}$ and $v=2\ln(3/2)n\ \mathrm{m\,s^{-1}}\approx0.8109n\ \mathrm{m\,s^{-1}}$. The momentum is approximately $1.6219n\ \mathrm{kg\,m\,s^{-1}}$, whereas the naive law gives zero. These values come from the exact logarithm before rounding; all are declared model computations, with no measurement or empirical inference. [step 5.1, L1, L2, algebra] ∎
 
 ## Remarks
 

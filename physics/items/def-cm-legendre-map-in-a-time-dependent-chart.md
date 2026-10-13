@@ -100,7 +100,7 @@ gradient $\mathcal L(v)=\sqrt{1+v^2}$ and the identically zero Lagrangian — ar
   the autonomous manifold formulation of the same concept. The present definition is the
   finite-dimensional chart version with explicit time dependence, which is the form consumed by
   the classical-mechanics items on this page; it is not a restatement of the bundle definition,
-  because time-dependent Lagrangians and the explicit $C^2$ inverse branch on $J\times U\times\mathbb R^n$
+  because time-dependent Lagrangians and the explicit $C^1$ inverse branch on $J\times U\times\mathbb R^n$
   have no counterpart in the autonomous formulation.
 
 - When $\mathcal L$ is hyperregular, the fibre condition and the open domain $J\times U$ make

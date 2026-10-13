@@ -1,0 +1,1452 @@
+[
+  {
+    "order": 88,
+    "id": "cm-math-central",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Central",
+    "companion": "cm-math-central-examples",
+    "requires": [
+      "cm-math-balances",
+      "inverse-and-implicit-function-theorems",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "fubini-and-change-of-variables",
+      "linear-independence-bases-and-dimension",
+      "orthonormal-bases-parseval-and-fourier-series",
+      "the-fundamental-theorems-of-calculus",
+      "continuity-ivt-evt-and-uniform-continuity",
+      "fundamental-trigonometric-identities",
+      "inner-product-spaces-and-orthogonality",
+      "lebesgue-measure-on-euclidean-space",
+      "sine-cosine-and-the-definition-of-pi",
+      "the-real-gamma-and-beta-functions",
+      "further-trigonometric-identities-and-inverses"
+    ],
+    "items": [
+      {
+        "id": "def-cm-central-force-trajectory",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Central-force trajectories: the central-force equation, angular momentum, energy and the effective potential",
+        "reference": "mathematical-prerequisites.md#m9",
+        "design_state": "completed-local-argument (M9 split into items; new local prerequisites recorded in the batch notes)",
+        "dependency_level": 0,
+        "deps": [
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-vector-valued-derivative-and-integral",
+          "def-euclidean-inner-product",
+          "def-cross-product-in-r3"
+        ],
+        "dependency_roles": {
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\mu>0$ be a real number, let $J_0\\subseteq(0,\\infty)$ be an open interval,\nlet $U:J_0\\to\\mathbb R$ be of class $C^2$\n([[def-ck-euclidean-maps-and-diffeomorphisms]]), let $I\\subseteq\\mathbb R$ be\nan interval with at least two points ([[def-interval]]), and let\n$r:I\\to\\mathbb R^3$ be twice differentiable with $|r(t)|\\in J_0$ for every\n$t\\in I$ ([[def-vector-valued-derivative-and-integral]]). The curve $r$ is a\n**central-force trajectory for** $(\\mu,U)$ when\n\n$$\\mu\\,r''(t)=-\\frac{U'(|r(t)|)}{|r(t)|}\\,r(t)\\qquad(t\\in I),$$\n\nwhere $|x|:=\\lVert x\\rVert_2$ is the Euclidean norm\n([[def-euclidean-inner-product]]) and $U'$ is the derivative of $U$ on the\nopen interval $J_0$.\n\n**Attached objects.** The **angular momentum vector** of such a trajectory is\nthe curve $j:I\\to\\mathbb R^3$,\n\n$$j(t):=\\mu\\,r(t)\\times r'(t),$$\n\nwith $\\times$ the cross product of $\\mathbb R^3$ ([[def-cross-product-in-r3]]);\nits **energy** is the function $E:I\\to\\mathbb R$,\n\n$$E(t):=\\tfrac12\\mu\\,\\lVert r'(t)\\rVert_2^2+U(|r(t)|);$$\n\nand for every $J\\ge0$ the **effective potential of momentum magnitude** $J$ is\nthe function $U^{\\mathrm{eff}}_J:J_0\\to\\mathbb R$,\n\n$$U^{\\mathrm{eff}}_J(\\rho):=U(\\rho)+\\frac{J^2}{2\\mu\\,\\rho^2}.$$\n\n**Why the objects are defined.** Since $\\rho>0$ throughout $J_0$, the right-hand\nside of the central-force equation is defined, the map\n$\\rho\\mapsto J^2/(2\\mu\\rho^2)$ is $C^2$ on $(0,\\infty)$ (a quotient of $C^2$\nfunctions with nowhere vanishing denominator), and $U^{\\mathrm{eff}}_J$ is\nagain $C^2$; in particular second derivatives of $U^{\\mathrm{eff}}_J$ are\navailable. The vector $j(t)$ is defined for every $t\\in I$ because $r$ is\ndifferentiable there.\n\n**Mathematical status.** The data $\\mu$, $U$ and $J$ are real numbers and\nfunctions; the equation and the attached objects are mathematical statements\nabout curves. Nothing here asserts that the equation describes a physical\ninteraction, and the names are conventional labels for the mathematical\nobjects only.",
+        "strategy": "definition",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a72.5.4, printed pp. 31-33, Eqs. (2.82)-(2.89): two-body reduction, the conserved $J=\\mu r^2\\dot\\phi$, the radial equation and the effective potential $V_{\\rm eff}(r)=V(r)+J^2/(2\\mu r^2)$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.4, Eqs. (3.44)-(3.65): motion in a central field, the first integral and the effective potential",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-planar-polar-lift",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Local polar coordinates for a curve with nonvanishing position in the plane: a differentiable angle function with prescribed derivative",
+        "reference": "mathematical-prerequisites.md#m9",
+        "design_state": "completed-local-argument (M9 split into items; new local prerequisites recorded in the batch notes)",
+        "dependency_level": 0,
+        "deps": [
+          "def-interval",
+          "def-derivative",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-continuity-real",
+          "thm-derivative-of-an-inverse",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-algebra-of-continuous-functions",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "cor-primitives-of-a-continuous-function",
+          "cor-zero-derivative-implies-constant"
+        ],
+        "dependency_roles": {
+          "def-interval": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "thm-derivative-of-an-inverse": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-algebra-of-continuous-functions": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-and-cosine-parametrize-the-unit-circle": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "cor-primitives-of-a-continuous-function": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points\n([[def-interval]]), let $t_0\\in I$, and let $\\rho,\\sigma:I\\to\\mathbb R$ be twice\ndifferentiable ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with\n$(\\rho(t),\\sigma(t))\\ne(0,0)$ for every $t\\in I$. Put\n\n$$r(t):=\\sqrt{\\rho(t)^2+\\sigma(t)^2}>0\\qquad(t\\in I).$$\n\nThen there is a twice differentiable $\\theta:I\\to\\mathbb R$ with\n\n$$\\rho=r\\cos\\theta,\\qquad\\sigma=r\\sin\\theta\\qquad\\text{on }I,$$\n\nand every twice differentiable $\\vartheta:I\\to\\mathbb R$ with\n$\\rho=r\\cos\\vartheta$ and $\\sigma=r\\sin\\vartheta$ on $I$ satisfies\n\n$$\\vartheta'(t)=\\frac{\\rho(t)\\sigma'(t)-\\sigma(t)\\rho'(t)}{r(t)^2}\\qquad(t\\in I).$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a72.5.4, printed p. 31, Eqs. (2.83)-(2.84): polar coordinates in the orbital plane and the conserved $J=\\mu r^2\\dot\\phi$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a76.3 Motion in a General Central Force-Field: use of polar coordinates $(r,\\theta)$ in the orbital plane with the angular first integral",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node44.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-second-order-oscillator-form",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Solutions of $v''+\\omega^2v=0$ are exactly the functions $A\\cos(\\omega(t-t_0))+B\\sin(\\omega(t-t_0))$",
+        "reference": "mathematical-prerequisites.md#m9",
+        "design_state": "completed-local-argument (M9 split into items; new local prerequisites recorded in the batch notes)",
+        "dependency_level": 0,
+        "deps": [
+          "def-interval",
+          "def-derivative",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-sine-and-cosine-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "cor-zero-derivative-implies-constant",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ],
+        "dependency_roles": {
+          "def-interval": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\omega>0$, let $I\\subseteq\\mathbb R$ be an interval with at least two points\n([[def-interval]]), let $t_0\\in I$, and let $v:I\\to\\mathbb R$ be twice\ndifferentiable ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with\n\n$$v''(t)+\\omega^2v(t)=0\\qquad(t\\in I).$$\n\nThen there are reals $A,B$ with\n\n$$v(t)=A\\cos\\bigl(\\omega(t-t_0)\\bigr)+B\\sin\\bigl(\\omega(t-t_0)\\bigr)\\qquad(t\\in I).$$\n\nConversely, for all reals $A,B$ the function\n$t\\mapsto A\\cos(\\omega(t-t_0))+B\\sin(\\omega(t-t_0))$ is twice differentiable on\n$\\mathbb R$ and satisfies $v''+\\omega^2v=0$ there.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a72.6, printed pp. 38-44: small oscillations and the oscillatory solution with frequency squared $\\omega^2$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 2 small oscillations: the second-order linear oscillator and its general sinusoidal solution",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-cross-product-triple-identity",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The vector triple product identity $u\\times(v\\times w)=\\langle u,w\\rangle v-\\langle u,v\\rangle w$",
+        "reference": "mathematical-prerequisites.md#m9",
+        "design_state": "completed-local-argument (M9 split into items; new local prerequisites recorded in the batch notes)",
+        "dependency_level": 0,
+        "deps": [
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_roles": {
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "For all $u,v,w\\in\\mathbb R^3$,\n$$u\\times(v\\times w)=\\langle u,w\\rangle\\,v-\\langle u,v\\rangle\\,w .$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a71.1, printed pp. 1-2: the vector triple product and the orthonormality identities for the cross product",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a72.5 and Appendix A: vector identities for the cross product, including the triple product rule",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node12.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-oriented-orthonormal-triads",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Oriented orthonormal triads in $\\mathbb R^3$: existence over any unit vector, and the orthonormal expansion with no fourth orthogonal direction",
+        "reference": "mathematical-prerequisites.md#m9",
+        "design_state": "completed-local-argument (M9 split into items; new local prerequisites recorded in the batch notes)",
+        "dependency_level": 1,
+        "deps": [
+          "lem-cm-cross-product-triple-identity",
+          "def-cross-product-in-r3",
+          "def-euclidean-inner-product",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "lem-standard-basis-of-f-n",
+          "lem-finite-sum-laws",
+          "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "def-inner-product-space"
+        ],
+        "dependency_roles": {
+          "lem-cm-cross-product-triple-identity": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "lem-standard-basis-of-f-n": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "thm-bessel-inequality-for-an-arbitrary-orthonormal-family": "mathematical-premise",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Call a triple $(e_1,e_2,e_3)$ of vectors of $\\mathbb R^3$ an **oriented\northonormal triad** when $\\langle e_i,e_j\\rangle=\\delta_{ij}$ for all\n$i,j\\in\\{1,2,3\\}$ and $e_1\\times e_2=e_3$. Then:\n\n1. **Existence.** For every $e_3\\in\\mathbb R^3$ with $|e_3|=1$ there are\n   $e_1,e_2\\in\\mathbb R^3$ such that $(e_1,e_2,e_3)$ is an oriented orthonormal\n   triad.\n2. **Dimension bound.** Every orthonormal list\n   $f_1,\\dots,f_m\\in\\mathbb R^3$ (pairwise orthogonal unit vectors) has\n   $m\\le3$; consequently, for every oriented orthonormal triad $(e_1,e_2,e_3)$\n   and every $x\\in\\mathbb R^3$,\n   $$x=\\langle x,e_1\\rangle e_1+\\langle x,e_2\\rangle e_2+\\langle x,e_3\\rangle e_3, \\qquad |x|^2=\\langle x,e_1\\rangle^2+\\langle x,e_2\\rangle^2+\\langle x,e_3\\rangle^2 .$$\n\nThroughout, $\\langle\\cdot,\\cdot\\rangle$ and $|\\cdot|$ are the Euclidean inner\nproduct and norm ([[def-euclidean-inner-product]]), $\\times$ is the cross\nproduct ([[def-cross-product-in-r3]]), and $s_1,s_2,s_3$ is the standard basis\nof $\\mathbb R^3$ ([[lem-standard-basis-of-f-n]]).",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a71.1 and \u00a72.5.4: orthonormal vector triads, the right-handed relation $\\mathbf e_1\\times\\mathbf e_2=\\mathbf e_3$ and planar coordinates in the orbital plane",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a72.4: Cartesian components, orthonormal bases and the scalar-product expansion $\\mathbf a=(\\mathbf a\\cdot\\mathbf e_1)\\mathbf e_1+(\\mathbf a\\cdot\\mathbf e_2)\\mathbf e_2$",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node12.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-central-force-angular-momentum-conservation",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Conservation of the angular momentum vector along a central-force trajectory and its orthogonality to position and velocity",
+        "reference": "mathematical-prerequisites.md#m9",
+        "design_state": "completed-local-argument (M9 split into items; new local prerequisites recorded in the batch notes)",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-central-force-trajectory",
+          "lem-cm-derivative-of-pairings-of-curves",
+          "def-vector-valued-derivative-and-integral",
+          "def-euclidean-inner-product",
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-central-force-trajectory": "mathematical-premise",
+          "lem-cm-derivative-of-pairings-of-curves": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "cor-vector-valued-ftc-and-lipschitz-bound": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\mu>0$, let $J_0\\subseteq(0,\\infty)$ be an open interval, let\n$U:J_0\\to\\mathbb R$ be of class $C^2$, let $I\\subseteq\\mathbb R$ be an interval\nwith at least two points, and let $r:I\\to\\mathbb R^3$ be a central-force\ntrajectory for $(\\mu,U)$ with angular momentum vector\n$j=\\mu\\,r\\times r'$ ([[def-cm-central-force-trajectory]]). Then:\n\n1. $j$ is differentiable on $I$ with $j'(t)=0$ for every $t\\in I$; hence $j$ is\n   constant on $I$;\n2. for every $t\\in I$, $\\langle r(t),j(t)\\rangle=0$ and\n   $\\langle r'(t),j(t)\\rangle=0$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a72.5.4, printed p. 31, Eqs. (2.83)-(2.84): the orbit lies in a plane perpendicular to the conserved angular momentum",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a76.3 Motion in a General Central Force-Field, Eqs. (299)-(304): the angular first integral $r^2\\dot\\theta=h$ in polar coordinates",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node44.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-central-force-polar-reduction",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Polar reduction of a non-radial central-force trajectory: $\\rho^2\\theta'=J/\\mu$, the effective-potential equation and energy conservation",
+        "reference": "mathematical-prerequisites.md#m9",
+        "design_state": "completed-local-argument (M9 split into items; new local prerequisites recorded in the batch notes)",
+        "dependency_level": 2,
+        "deps": [
+          "def-cm-central-force-trajectory",
+          "lem-cm-oriented-orthonormal-triads",
+          "lem-cm-planar-polar-lift",
+          "thm-cm-central-force-angular-momentum-conservation",
+          "lem-cm-derivative-of-pairings-of-curves",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-euclidean-inner-product",
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "cor-zero-derivative-implies-constant",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-cm-central-force-trajectory": "mathematical-premise",
+          "lem-cm-oriented-orthonormal-triads": "mathematical-premise",
+          "lem-cm-planar-polar-lift": "mathematical-premise",
+          "thm-cm-central-force-angular-momentum-conservation": "mathematical-premise",
+          "lem-cm-derivative-of-pairings-of-curves": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\mu>0$, let $J_0\\subseteq(0,\\infty)$ be an open interval, let\n$U:J_0\\to\\mathbb R$ be of class $C^2$, let $I\\subseteq\\mathbb R$ be an interval\nwith at least two points, and let $r:I\\to\\mathbb R^3$ be a central-force\ntrajectory for $(\\mu,U)$ whose angular momentum $j=\\mu\\,r\\times r'$ is a nonzero\nconstant vector ([[thm-cm-central-force-angular-momentum-conservation]]); write\n$J:=|j|>0$. Let $(e_1,e_2,e_3)$ be an oriented orthonormal triad with\n$e_3=j/J$ ([[lem-cm-oriented-orthonormal-triads]]).\n\nThen there are twice differentiable $\\rho:I\\to(0,\\infty)$ and\n$\\theta:I\\to\\mathbb R$ with\n\n$$r(t)=\\rho(t)\\bigl(\\cos\\theta(t)\\,e_1+\\sin\\theta(t)\\,e_2\\bigr)\\qquad(t\\in I),$$\n\nand for **every** such pair $(\\rho,\\theta)$:\n\n1. $\\rho(t)=|r(t)|$ for all $t$;\n2. $\\rho^2\\theta'=J/\\mu$ on $I$, so $\\theta'>0$;\n3. the effective-potential equation $\\mu\\rho''=-\\bigl(U^{\\mathrm{eff}}_J\\bigr)'(\\rho)$\n   holds on $I$, with $U^{\\mathrm{eff}}_J=U+J^2/(2\\mu\\rho^2)$\n   ([[def-cm-central-force-trajectory]]);\n4. $E:=\\frac12\\mu\\lVert r'\\rVert_2^2+U(|r|)$ equals\n   $\\frac12\\mu\\rho'^2+U^{\\mathrm{eff}}_J(\\rho)$ and is constant on $I$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a72.5.4, printed pp. 31-33, Eqs. (2.83)-(2.88): the planar polar Lagrangian, the conserved $J=\\mu r^2\\dot\\phi$, the radial equation $\\mu\\ddot r=-\\partial_rV_{\\rm eff}$ and the energy $E=\\frac12\\mu\\dot r^2+V_{\\rm eff}(r)$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.4, Eqs. (3.44)-(3.57): polar coordinates in a central field, the first integral and the effective radial equation",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-circular-orbit-and-radial-frequency",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Circular orbits of a non-radial central-force trajectory: the critical-point condition and the squared frequency of the linearised radial equation",
+        "reference": "mathematical-prerequisites.md#m9",
+        "design_state": "completed-local-argument (M9 split into items; new local prerequisites recorded in the batch notes)",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-central-force-trajectory",
+          "thm-cm-central-force-polar-reduction",
+          "lem-cm-second-order-oscillator-form",
+          "lem-cm-oriented-orthonormal-triads",
+          "lem-cm-derivative-of-pairings-of-curves",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-sine-and-cosine-derivatives",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-derivative",
+          "def-limit-point-r",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-cm-central-force-trajectory": "mathematical-premise",
+          "thm-cm-central-force-polar-reduction": "mathematical-premise",
+          "lem-cm-second-order-oscillator-form": "mathematical-premise",
+          "lem-cm-oriented-orthonormal-triads": "mathematical-premise",
+          "lem-cm-derivative-of-pairings-of-curves": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-limit-point-r": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\mu>0$, let $J_0\\subseteq(0,\\infty)$ be an open interval, let\n$U:J_0\\to\\mathbb R$ be of class $C^2$, let $I$ be an interval with at least two\npoints, and let $r:I\\to\\mathbb R^3$ be a central-force trajectory for $(\\mu,U)$\nwith constant nonzero angular momentum $j=Je_3$, $J>0$, and polar data\n$(\\rho,\\theta)$ as in [[thm-cm-central-force-polar-reduction]], so that\n$\\rho^2\\theta'=J/\\mu$ and $\\mu\\rho''=-\\bigl(U^{\\mathrm{eff}}_J\\bigr)'(\\rho)$ on\n$I$. Fix $r_0\\in J_0$. Then:\n\n1. **(Necessity.)** If $\\rho\\equiv r_0$ is constant on $I$, then\n   $\\bigl(U^{\\mathrm{eff}}_J\\bigr)'(r_0)=0$ and $\\theta'\\equiv J/(\\mu r_0^2)$\n   is constant; the trajectory is the uniform rotation\n   $r(t)=r_0(\\cos\\theta(t)\\,e_1+\\sin\\theta(t)\\,e_2)$.\n2. **(Existence.)** Conversely, if $\\bigl(U^{\\mathrm{eff}}_J\\bigr)'(r_0)=0$,\n   then for every $\\theta_0\\in\\mathbb R$ the curve\n   $$r^\\circ(t):=r_0\\bigl(\\cos(\\theta_0+\\omega t)\\,e_1+\\sin(\\theta_0+\\omega t)\\,e_2\\bigr), \\qquad \\omega:=\\frac{J}{\\mu r_0^2},$$\n   is a central-force trajectory for $(\\mu,U)$ defined on $\\mathbb R$, with\n   angular momentum $j=Je_3$ and constant energy\n   $E=\\frac12\\mu r_0^2\\omega^2+U(r_0)=U^{\\mathrm{eff}}_J(r_0)$.\n3. **(Linearised radial equation.)** Let $\\rho$ be a solution of the reduced\n   equation $\\mu\\rho''=-\\bigl(U^{\\mathrm{eff}}_J\\bigr)'(\\rho)$ on $I$ with\n   $\\bigl(U^{\\mathrm{eff}}_J\\bigr)'(r_0)=0$, and put\n   $\\delta:=\\rho-r_0$. Then\n   $$\\mu\\delta''=-\\bigl(U^{\\mathrm{eff}}_J\\bigr)''(r_0)\\,\\delta +g(\\delta),\\qquad g(x):=\\bigl(U^{\\mathrm{eff}}_J\\bigr)''(r_0)x-\\bigl(U^{\\mathrm{eff}}_J\\bigr)'(r_0+x),$$\n   where $g(x)/x\\to0$ as $x\\to0$; if moreover\n   $\\bigl(U^{\\mathrm{eff}}_J\\bigr)''(r_0)>0$, then the associated linearised\n   equation $\\mu\\delta''=-\\bigl(U^{\\mathrm{eff}}_J\\bigr)''(r_0)\\delta$ has\n   exactly the solutions\n   $\\delta(t)=A\\cos(\\omega_{\\rm lin}(t-t_0))+B\\sin(\\omega_{\\rm lin}(t-t_0))$\n   with $A,B\\in\\mathbb R$ and $\\omega_{\\rm lin}:=\\sqrt{\\bigl(U^{\\mathrm{eff}}_J\\bigr)''(r_0)/\\mu}>0$,\n   for any $t_0\\in I$. This is a statement about the quadratic radial\n   approximation; no nonlinear stability of the circular orbit is asserted.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a72.5.4 and Figure 15, printed pp. 31-33: circular, elliptic and hyperbolic orbits as features of the effective potential $V_{\\rm eff}$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.4, Eqs. (3.52)-(3.58): the circular-orbit condition $\\mathrm dU_{\\rm eff}/\\mathrm dr=0$ and small radial oscillations about it",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-kepler-binet-equation",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Binet's equation for the attractive inverse-square field: $\\mathrm d^2u/\\mathrm d\\varphi^2+u=\\mu\\kappa/J^2$ for $u=1/\\rho$",
+        "reference": "mathematical-prerequisites.md#m9",
+        "design_state": "completed-local-argument (M9 split into items; new local prerequisites recorded in the batch notes)",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-central-force-trajectory",
+          "thm-cm-central-force-polar-reduction",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-derivative",
+          "thm-derivative-of-an-inverse",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-continuity-real"
+        ],
+        "dependency_roles": {
+          "def-cm-central-force-trajectory": "mathematical-premise",
+          "thm-cm-central-force-polar-reduction": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "thm-derivative-of-an-inverse": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\mu>0$, $\\kappa>0$, let $U:(0,\\infty)\\to\\mathbb R$ be $U(\\rho):=-\\kappa/\\rho$\n(of class $C^2$), let $I$ be an interval with at least two points, and let\n$r:I\\to\\mathbb R^3$ be a central-force trajectory for $(\\mu,U)$ with constant\nangular momentum $j=Je_3$, $J>0$. Let $(\\rho,\\theta)$ be polar data as in\n[[thm-cm-central-force-polar-reduction]], let $I^\\circ$ be the interior of $I$\n(a nonempty interval with at least two points, or empty if $I$ is a singleton,\nwhich is excluded), and put $W:=\\theta(I^\\circ)$, an interval. Then:\n\n1. $\\theta:I^\\circ\\to W$ is a $C^1$ bijection with inverse\n   $\\sigma:W\\to I^\\circ$ of class $C^1$, and the function\n   $u:=1/(\\rho\\circ\\sigma):W\\to(0,\\infty)$ is of class $C^2$;\n2. on $W$, $u''+u=\\mu\\kappa/J^2$ (derivatives with respect to the variable of\n   $W$);\n3. the auxiliary identity $\\rho'=-\\dfrac{J}{\\mu}\\,u'\\circ\\theta$ holds on\n   $I^\\circ$;\n4. the energy satisfies $E=\\dfrac{J^2}{2\\mu}\\bigl((u')^2+u^2\\bigr)-\\kappa u$ on\n   $W$, where $E$ is the constant energy of the trajectory.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a72.5.4, printed pp. 32-33: the inverse-square radial equation and the orbit equation for $r(\\phi)$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.4, Eqs. (3.59)-(3.65): the Binet-type equation and the conic solution with eccentricity $e$ for the Coulomb/Kepler potential",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-kepler-conic-and-eccentricity",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The Kepler orbit equation is a conic: $u=c(1+e\\cos(\\varphi-\\theta_0))$ with $E=(\\mu\\kappa^2/2J^2)(e^2-1)$",
+        "reference": "mathematical-prerequisites.md#m9",
+        "design_state": "completed-local-argument (M9 split into items; new local prerequisites recorded in the batch notes)",
+        "dependency_level": 4,
+        "deps": [
+          "thm-cm-kepler-binet-equation",
+          "lem-cm-second-order-oscillator-form",
+          "thm-sine-and-cosine-subtraction-formulas",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-interval",
+          "def-cm-central-force-trajectory"
+        ],
+        "dependency_roles": {
+          "thm-cm-kepler-binet-equation": "mathematical-premise",
+          "lem-cm-second-order-oscillator-form": "mathematical-premise",
+          "thm-sine-and-cosine-subtraction-formulas": "mathematical-premise",
+          "thm-sine-and-cosine-parametrize-the-unit-circle": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-cm-central-force-trajectory": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\mu>0$, $\\kappa>0$, $U(\\rho)=-\\kappa/\\rho$ on $(0,\\infty)$, let\n$r:I\\to\\mathbb R^3$ be a central-force trajectory for $(\\mu,U)$ with constant\nangular momentum $j=Je_3$, $J>0$ and constant energy $E$\n([[def-cm-central-force-trajectory]]), and let\n$u:W\\to(0,\\infty)$, $\\theta$ and $\\sigma$ be as in\n[[thm-cm-kepler-binet-equation]], with $W=\\theta(I^\\circ)$. Write\n$c:=\\mu\\kappa/J^2>0$ and $p:=1/c=J^2/(\\mu\\kappa)$. Then:\n\n1. there are $e\\ge0$ and $\\theta_0\\in\\mathbb R$ with\n   $$u(\\varphi)=c\\bigl(1+e\\cos(\\varphi-\\theta_0)\\bigr)\\qquad(\\varphi\\in W),$$\n   and for $t\\in I^\\circ$ accordingly\n   $\\rho(t)=p/\\bigl(1+e\\cos(\\theta(t)-\\theta_0)\\bigr)$;\n2. the energy and the eccentricity are related by\n   $$E=\\frac{\\mu\\kappa^2}{2J^2}\\bigl(e^2-1\\bigr);$$ consequently\n   $E<0\\iff e<1$, $E=0\\iff e=1$ and $E>0\\iff e>1$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.4, Eqs. (3.59)-(3.65): the conic $r=p/(1+e\\cos\\varphi)$ and the eccentricity-energy relation",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a72.5.4, printed pp. 32-33: elliptic and hyperbolic orbit classes in terms of the sign of the energy for the inverse-square potential",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cm-one-dimensional-action-variable",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The one-dimensional action variable of a family of two-simple-turning-point energy levels",
+        "reference": "expansion-proofs.md#e6",
+        "design_state": "completed-local-argument (E6 split into items; recorded in the batch notes)",
+        "dependency_level": 0,
+        "deps": [
+          "def-interval",
+          "def-continuity-real",
+          "def-darboux-integral",
+          "thm-of-square-roots",
+          "lem-sine-positive-and-cosine-decreasing-on-zero-two"
+        ],
+        "dependency_roles": {
+          "def-interval": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-darboux-integral": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise",
+          "lem-sine-positive-and-cosine-decreasing-on-zero-two": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $J_0\\subseteq\\mathbb R$ be an open interval, let $U:J_0\\to\\mathbb R$ be\ncontinuous ([[def-continuity-real]]), let $m>0$, let $E_0<E_1$ be reals, and\nlet $a,b:(E_0,E_1)\\to J_0$ be functions with\n\n$$a(E)<b(E),\\qquad U(a(E))=U(b(E))=E,\\qquad U(q)<E\\ (a(E)<q<b(E)) \\qquad(E_0<E<E_1).$$\n\nThe **action variable** of this datum is the function\n$J_{\\mathrm{a}}:(E_0,E_1)\\to\\mathbb R$,\n\n$$J_{\\mathrm{a}}(E):=\\frac{1}{\\pi}\\int_{a(E)}^{b(E)}\\sqrt{2m\\bigl(E-U(q)\\bigr)}\\;dq,$$\n\nthe integral being the Riemann integral on the compact interval\n$[a(E),b(E)]$ ([[def-darboux-integral]]). It is defined because\n$q\\mapsto\\sqrt{2m(E-U(q))}$ is continuous on $[a(E),b(E)]$: the radicand is a\ncontinuous nonnegative function there (it vanishes exactly at the two\nendpoints), and the nonnegative square root is continuous\n([[thm-of-square-roots]]).\n\n**Reading of the notation.** The interval $[a(E),b(E)]$ is the classically\nallowed segment between the two turning points of the energy $E$, and the\nintegral is twice the momentum phase-space area (Tong, Eq. (4.136) with\n$I=J_{\\mathrm{a}}$); no physical interpretation of $m$, $U$ or $E$ is a\nmathematical premise here, and no period is claimed by this definition.",
+        "strategy": "definition",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a74.5.3, printed pp. 108-111, Eqs. (4.133)-(4.142): the action variable $I=\\frac{1}{2\\pi}\\oint p\\,dq$ of a one-dimensional system and the identity $\\omega=dE/dI$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a710.4: adiabatic invariants and the action variable of a periodic one-dimensional motion",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-kepler-ellipse-geometry",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The subcritical Kepler conic is an ellipse with semiaxes $a=p/(1-e^2)$, $b=a\\sqrt{1-e^2}$, focus at the origin and area $\\pi ab$; its area is also $\\tfrac12\\int_0^{2\\pi}\\varrho^2$",
+        "reference": "expansion-proofs.md#e6",
+        "design_state": "completed-local-argument (E6 split into items; recorded in the batch notes)",
+        "dependency_level": 5,
+        "deps": [
+          "thm-cm-kepler-conic-and-eccentricity",
+          "def-countable-choice",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-injective-regular-c-one-map-is-a-diffeomorphism-onto-its-image",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "cor-volume-of-the-unit-n-ball",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-interval",
+          "def-continuity-real"
+        ],
+        "dependency_roles": {
+          "thm-cm-kepler-conic-and-eccentricity": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "cor-c-one-change-of-variables-for-l-one-functions": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-injective-regular-c-one-map-is-a-diffeomorphism-onto-its-image": "mathematical-premise",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null": "mathematical-premise",
+          "thm-linear-change-of-variables-for-lebesgue-measure": "mathematical-premise",
+          "cor-volume-of-the-unit-n-ball": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $p>0$ and\n$0\\le e<1$, and put\n$$a:=\\frac{p}{1-e^2}>0,\\qquad b:=a\\sqrt{1-e^2},\\qquad \\varrho(\\varphi):=\\frac{p}{1+e\\cos\\varphi}\\quad(\\varphi\\in\\mathbb R).$$\n\n1. $\\varrho$ is $C^1$, $2\\pi$-periodic, and\n   $\\dfrac{p}{1+e}\\le\\varrho\\le\\dfrac{p}{1-e}$.\n2. Let $Q(x,y):=(1-e^2)x^2+y^2+2pex-p^2$ and\n   $E_{\\rm ell}:=\\{(x,y)\\in\\mathbb R^2:Q(x,y)\\le0\\}$. Then\n   $E_{\\rm ell}$ is Lebesgue measurable, and for the closed unit disc\n   $\\overline B\\subseteq\\mathbb R^2$ and $T(u,v):=(au-ae,bv)$ one has\n   $E_{\\rm ell}=T[\\overline B]$; consequently\n   $\\lambda_2(E_{\\rm ell})=\\pi ab=\\pi a^2\\sqrt{1-e^2}$.\n3. For every $\\varphi$, the ray $\\{s(\\cos\\varphi,\\sin\\varphi):s>0\\}$ meets\n   $\\partial E_{\\rm ell}$ in the unique point\n   $\\varrho(\\varphi)(\\cos\\varphi,\\sin\\varphi)$; that point satisfies\n   $Q=0$, and $\\lambda_2(E_{\\rm ell})=\\frac12\\int_0^{2\\pi}\\varrho(\\varphi)^2\\,\n   \\mathrm d\\varphi$.\n\nThus the conic $Q=0$ is the ellipse with centre $(-ae,0)$, semiaxes $a,b$,\nits right focus at the origin, and enclosed area $\\pi ab$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.4, Eqs. (3.59)-(3.65) and Fig. 8: the elliptic branch $E<0$, $e<1$, with the turning radii and the ellipse geometry",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a75.5 and \u00a75.6: the elliptic orbit of the Kepler problem, its semiaxes and the focus at the force centre",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node44.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-kepler-orbit-period",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Completeness and periodicity of the negative-energy Kepler orbit, with $T=2\\pi\\mu ab/J$ and $T^2=4\\pi^2\\mu a^3/\\kappa$",
+        "reference": "expansion-proofs.md#e6",
+        "design_state": "completed-local-argument (E6 split into items; recorded in the batch notes)",
+        "dependency_level": 6,
+        "deps": [
+          "def-cm-central-force-trajectory",
+          "thm-cm-central-force-polar-reduction",
+          "thm-cm-kepler-conic-and-eccentricity",
+          "thm-cm-kepler-ellipse-geometry",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-countable-choice",
+          "thm-derivative-of-an-inverse",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-algebra-of-continuous-functions",
+          "thm-sine-and-cosine-derivatives",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "cor-primitives-of-a-continuous-function",
+          "thm-additivity-over-subintervals",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-cm-central-force-trajectory": "mathematical-premise",
+          "thm-cm-central-force-polar-reduction": "mathematical-premise",
+          "thm-cm-kepler-conic-and-eccentricity": "mathematical-premise",
+          "thm-cm-kepler-ellipse-geometry": "mathematical-premise",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-derivative-of-an-inverse": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-algebra-of-continuous-functions": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-sine-cosine-zero-sets-and-fundamental-period": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "cor-primitives-of-a-continuous-function": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $\\mu>0$,\n$\\kappa>0$, $U(\\rho)=-\\kappa/\\rho$ on $(0,\\infty)$, and let $r:I\\to\\mathbb R^3$\nbe a central-force trajectory for $(\\mu,U)$ with constant angular momentum\n$j=Je_3$, $J>0$, and constant energy $E<0$. Let $e\\in[0,1)$,\n$\\theta_0\\in\\mathbb R$, $p=J^2/(\\mu\\kappa)$, $a=p/(1-e^2)$,\n$b=a\\sqrt{1-e^2}$, and $\\varrho(\\varphi):=p/(1+e\\cos(\\varphi-\\theta_0))$\nbe the conic data of [[thm-cm-kepler-conic-and-eccentricity]], and let\n$(\\rho,\\theta)$ be polar data as in\n[[thm-cm-central-force-polar-reduction]]. Then:\n\n1. **(Completeness.)** $r$ extends uniquely to a central-force trajectory for\n   $(\\mu,U)$ defined on all of $\\mathbb R$; along it\n   $\\rho(t)\\in[p/(1+e),\\,p/(1-e)]$ for every $t$, and $\\rho$ and $\\rho'$ are\n   bounded. Consequently every maximal central-force trajectory with these\n   data has domain $\\mathbb R$.\n2. **(Periodicity.)** $\\theta:\\mathbb R\\to\\mathbb R$ is a strictly increasing\n   $C^1$ bijection with\n   $\\dfrac{J}{\\mu}\\Bigl(\\dfrac{1-e}{p}\\Bigr)^2\\le\\theta'\\le\\dfrac{J}{\\mu}\\Bigl(\\dfrac{1+e}{p}\\Bigr)^2$;\n   if $t_0\\in\\mathbb R$ and $T>0$ is determined by\n   $\\theta(t_0+T)=\\theta(t_0)+2\\pi$, then $r(t+T)=r(t)$ and\n   $r'(t+T)=r'(t)$ for all $t\\in\\mathbb R$.\n3. **(Period value.)** With $r_{\\max}:=p/(1-e)$ and $r_{\\min}:=p/(1+e)$,\n   $$T=\\frac{2\\pi\\mu ab}{J}=2\\pi\\sqrt{\\frac{\\mu}{\\kappa}}\\,a^{3/2}, \\qquad T^2=\\frac{4\\pi^2\\mu a^3}{\\kappa}.$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a72.5.4, printed pp. 32-33, Eqs. (2.86)-(2.90): the $E<0$ elliptic branch of the inverse-square problem",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.4, Eqs. (3.59)-(3.65): the elliptic branch and the relation between period, semimajor axis and potential strength",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-action-variable-derivative",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The action variable of a two-simple-turning-point family is $C^1$ with derivative $T(E)/(2\\pi)$, the period quadrature over $2\\pi$",
+        "reference": "expansion-proofs.md#e6",
+        "design_state": "completed-local-argument (E6 split into items; recorded in the batch notes)",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-one-dimensional-action-variable",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-continuity-real",
+          "thm-euclidean-inverse-function-theorem",
+          "thm-substitution",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-algebra-of-continuous-functions",
+          "cor-primitives-of-a-continuous-function",
+          "thm-continuous-implies-integrable",
+          "thm-monotonicity-of-the-integral",
+          "thm-extreme-value-metric",
+          "lem-integral-elementary-bounds"
+        ],
+        "dependency_roles": {
+          "def-cm-one-dimensional-action-variable": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "thm-euclidean-inverse-function-theorem": "mathematical-premise",
+          "thm-substitution": "mathematical-premise",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-algebra-of-continuous-functions": "mathematical-premise",
+          "cor-primitives-of-a-continuous-function": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "lem-integral-elementary-bounds": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $J_0\\subseteq\\mathbb R$ be an open interval, let $U:J_0\\to\\mathbb R$ be of\nclass $C^3$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), let $m>0$, let\n$E_0<E_1$, and let $a,b:(E_0,E_1)\\to J_0$ be functions with\n$a(E)<b(E)$, $U(a(E))=U(b(E))=E$, $U(q)<E$ for $a(E)<q<b(E)$, and\n\n$$U'\\bigl(a(E)\\bigr)<0<U'\\bigl(b(E)\\bigr)\\qquad(E_0<E<E_1)$$\n\n(the energy $E$ has exactly the two simple turning points $a(E)$, $b(E)$ in\n$J_0$). Then:\n\n1. $a$ and $b$ are of class $C^1$ on $(E_0,E_1)$;\n2. the action variable $J_{\\mathrm{a}}$ of\n   [[def-cm-one-dimensional-action-variable]] is of class $C^1$ on\n   $(E_0,E_1)$, and for every $E\\in(E_0,E_1)$\n   $$J_{\\mathrm{a}}'(E)=\\frac{1}{2\\pi}T(E),\\qquad T(E):=\\sqrt{2m}\\int_{a(E)}^{b(E)}\\frac{\\mathrm dq}{\\sqrt{E-U(q)}}\\in(0,\\infty),$$\n   where the integral is the improper integral over the open interval\n   $(a(E),b(E))$, convergent at both endpoints.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a74.5.3, printed pp. 108-111, Eqs. (4.136)-(4.142): $I=\\frac1{2\\pi}\\oint p\\,\\mathrm dq$, the varying-endpoint cancellation and the identity $\\mathrm dE/\\mathrm dI=\\omega=2\\pi/T$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 10: the action variable and its energy derivative for a periodic one-dimensional motion",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-cm-scattering-data",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Scattering data: the incident flux measure, the solid-angle element, deflection branches and the cross-section density",
+        "reference": "expansion-proofs.md#e10",
+        "design_state": "completed-local-argument (E10 split into items; recorded in the batch notes)",
+        "dependency_level": 0,
+        "deps": [
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-continuity-real",
+          "def-integral-over-a-measurable-set",
+          "def-borel-and-lebesgue-measurable-function-on-rn",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "def-sine-and-cosine-by-power-series",
+          "thm-derivative-of-an-inverse",
+          "def-derivative",
+          "def-limit-point-r",
+          "def-countable-choice",
+          "cor-mean-value-theorem"
+        ],
+        "dependency_roles": {
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-borel-and-lebesgue-measurable-function-on-rn": "mathematical-premise",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-derivative-of-an-inverse": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-limit-point-r": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the Borel/Lebesgue measure foundation below.\n\n**Data.** Let $\\mu>0$, let $U:(0,\\infty)\\to\\mathbb R$ be of class $C^2$\n([[def-ck-euclidean-maps-and-diffeomorphisms]]), let $R>0$ satisfy $U(r)=0$\nfor every $r\\ge R$ (a **finite-range potential**), and let $E>0$ and $J>0$ be\nreals. Write\n\n$$V(r):=U(r)+\\frac{J^2}{2\\mu r^2}\\qquad(r>0).$$\n\n**Incident flux measure.** Let $\\nu$ be the Borel measure on the open rectangle\n$(0,\\infty)\\times(0,2\\pi)$ given by the density $b$ against Lebesgue measure\n$\\lambda_2$,\n\n$$\\nu(A):=\\int_A b\\,d\\lambda_2(b,\\varphi)\\qquad(A\\subseteq(0,\\infty)\\times(0,2\\pi)\\ \\text{Borel}),$$\n\nthe integral being that of [[def-integral-over-a-measurable-set]]; the\nnonnegative Borel function $(b,\\varphi)\\mapsto b$ defines a measure by\n[[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]]\n([[def-borel-and-lebesgue-measurable-function-on-rn]]). In the model this\nmeasure records a uniform incident beam: an annulus of impact parameters\n$[b_1,b_2)$ contributes $\\pi(b_2^2-b_1^2)$ over the full azimuth range, or\n$\\tfrac12(b_2^2-b_1^2)$ per unit azimuth.\n\n**Solid-angle element.** Let $\\Omega$ be the Borel measure on\n$(0,\\pi)\\times(0,2\\pi)$ with density $\\sin$ against $\\lambda_2$,\n\n$$\\Omega(B):=\\int_B\\sin\\theta\\,d\\lambda_2(\\theta,\\varphi)\\qquad(B\\subseteq(0,\\pi)\\times(0,2\\pi)\\ \\text{Borel}),$$\n\nwhere $\\sin$ is the function of [[def-sine-and-cosine-by-power-series]]. This\nis the standard solid-angle element written $\\sin\\theta\\,d\\theta\\,d\\varphi$\n(the surface measure of the unit sphere in spherical coordinates, restricted\nto the open chart).\n\n**Deflection branch.** A **deflection branch** is an interval\n$(a_1,a_2)\\subseteq(0,\\infty)$ with at least two points together with a\nfunction $\\theta:(a_1,a_2)\\to(0,\\pi)$ that is of class $C^1$ and satisfies\n$\\theta'(b)\\ne0$ for every $b\\in(a_1,a_2)$. Such a $\\theta$ is strictly\nmonotone (the continuous nonvanishing derivative has constant sign, and [[cor-mean-value-theorem]] gives strict monotonicity) and its image is an interval with endpoints $\\theta_1<\\theta_2$\n([[def-interval]]); its inverse $b:(\\theta_1,\\theta_2)\\to(a_1,a_2)$ is\ndifferentiable with $b'(\\theta)=1/\\theta'(b(\\theta))$, by the\nderivative-of-an-inverse theorem [[thm-derivative-of-an-inverse]] applied to\nthe continuous injective $\\theta$ (every point of $(a_1,a_2)$ is a limit point\nof it, [[def-limit-point-r]], [[def-derivative]]).\n\n**Cross-section density.** The **cross-section density of the branch** is the\nfunction\n\n$$\\frac{d\\sigma}{d\\Omega}(\\theta):=\\frac{b(\\theta)}{\\sin\\theta\\,\\bigl|\\theta'\\bigl(b(\\theta)\\bigr)\\bigr|} \\qquad(\\theta_1<\\theta<\\theta_2).$$\n\n**Mathematical status.** The measures, branches and density are abstract data\nindependent of the finite-range trajectory data $(\\mu,U,R,E,J)$. A branch is not asserted to arise from any\ntrajectory; the scattering theorems of this page identify the deflection\nangle computed from the central-force equation with the values of such a\nfunction under their hypotheses, and they compute the pushforward of $\\nu$ under the induced map. No counting of\ndetected particles, and no empirical claim, is part of this definition.",
+        "strategy": "definition",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a76.4 Scattering in the Center of Mass Frame, Eqs. (340)-(367): impact parameter, turning-point quadrature, the annular incident area and outgoing solid angle",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node51.html"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.5, Eqs. (3.66)-(3.72): impact parameter, scattering angle, uniform-beam counting and the geometric cross-section relation",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-scattering-turning-point-and-global-branches",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Finite-range scattering: the simple outer turning point, the two global branches and the free tails",
+        "reference": "expansion-proofs.md#e10",
+        "design_state": "completed-local-argument (E10 split into items; recorded in the batch notes)",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-central-force-trajectory",
+          "thm-cm-central-force-polar-reduction",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-locally-lipschitz-in-the-state-variable",
+          "thm-substitution",
+          "thm-derivative-of-an-inverse",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-primitives-of-a-continuous-function",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-continuity-real"
+        ],
+        "dependency_roles": {
+          "def-cm-central-force-trajectory": "mathematical-premise",
+          "thm-cm-central-force-polar-reduction": "mathematical-premise",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "thm-substitution": "mathematical-premise",
+          "thm-derivative-of-an-inverse": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "cor-primitives-of-a-continuous-function": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\mu>0$, let $U:(0,\\infty)\\to\\mathbb R$ be of class $C^2$, let $R>0$ satisfy\n$U(r)=0$ for every $r\\ge R$, let $E>0$ and $J>0$, and put\n$V(r):=U(r)+J^2/(2\\mu r^2)$ ([[def-cm-central-force-trajectory]]). Suppose $r_*>0$\nsatisfies\n\n$$V(r_*)=E,\\qquad V'(r_*)<0,\\qquad V(r)<E\\quad(r>r_*).$$\n\nLet $r:I\\to\\mathbb R^3$ be a central-force trajectory for $(\\mu,U)$ with\nconstant nonzero angular momentum $j=Je_3$, $J>0$, energy $E$, and\n$|r(t)|\\ge r_*$ for all $t\\in I$, whose radial part attains the value $r_*$ at\nsome $t_*\\in I$ ([[thm-cm-central-force-polar-reduction]]). Then:\n\n1. $(\\rho')^2=\\dfrac{2}{\\mu}\\bigl(E-V(\\rho)\\bigr)$ on $I$, where $\\rho=|r|$;\n   $\\rho'(t_*)=0$ and $\\rho''(t_*)=-V'(r_*)/\\mu>0$, so $t_*$ is a strict\n   minimum of $\\rho$;\n2. $r$ extends uniquely to a central-force trajectory on all of $\\mathbb R$;\n   along the extension $\\rho\\ge r_*$, $\\rho(t)>\\rho(t_*)=r_*$ for $t\\ne t_*$,\n   and $\\rho$ is strictly decreasing on $(-\\infty,t_*]$ and strictly\n   increasing on $[t_*,\\infty)$;\n3. the time quadrature\n   $$\\tau(r):=\\int_{r_*}^{r}\\frac{\\mathrm ds}{\\sqrt{(2/\\mu)(E-V(s))}} \\qquad(r\\ge r_*)$$\n   is finite for every $r$ and satisfies\n   $\\rho(t_*+\\tau(r))=r$ for all $r\\ge r_*$;\n4. for every time $t_1\\ge t_*$ with $\\rho(t_1)>R$ the motion is exactly free\n   from $t_1$ on: $r(t)=r(t_1)+(t-t_1)r'(t_1)$ for all $t\\ge t_1$, and $\\rho$\n   is strictly increasing there; symmetrically, for $t_2\\le t_*$ with\n   $\\rho(t_2)>R$, $r(t)=r(t_2)+(t-t_2)r'(t_2)$ for all $t\\le t_2$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a76.4, Eqs. (340)-(346): the energy equation, the turning point and the two asymptotic branches of a scattering orbit",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node51.html"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.5, Eqs. (3.66)-(3.68): the nearest-approach point, the equality of the two branch angle changes and the scattering-angle quadrature",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-scattering-asymptotic-velocities-and-impact-parameter",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Existence of the asymptotic velocities and the impact-parameter identity $J=\\mu b|v_-|$",
+        "reference": "expansion-proofs.md#e10",
+        "design_state": "completed-local-argument (E10 split into items; recorded in the batch notes)",
+        "dependency_level": 4,
+        "deps": [
+          "def-cm-central-force-trajectory",
+          "thm-cm-scattering-turning-point-and-global-branches",
+          "def-euclidean-inner-product",
+          "def-cross-product-in-r3",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant"
+        ],
+        "dependency_roles": {
+          "def-cm-central-force-trajectory": "mathematical-premise",
+          "thm-cm-scattering-turning-point-and-global-branches": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let the hypotheses of\n[[thm-cm-scattering-turning-point-and-global-branches]] hold, with finite-range\npotential $U$, energy $E>0$, angular momentum $j=Je_3$, $J>0$, outer turning\npoint $r_*$, and let $r:\\mathbb R\\to\\mathbb R^3$ be the extension of the\ntrajectory. Then:\n\n1. the limits $v_\\pm:=\\lim_{t\\to\\pm\\infty}r'(t)$ exist and satisfy\n   $|v_+|=|v_-|=\\sqrt{2E/\\mu}$;\n2. for every $t_2\\le t_*$ with $\\rho(t_2)>R$, the incoming free tail is the half-line $\\{r(t_2)+s\\,v_-:s\\le0\\}$, whose affine extension is the\n   straight line $\\{r(t_2)+s\\,v_-:s\\in\\mathbb R\\}$; its perpendicular distance\n   from the origin is\n   $$b:=\\frac{|r(t_2)\\times v_-|}{|v_-|}=\\frac{J}{\\mu|v_-|}, \\qquad\\text{i.e.}\\qquad J=\\mu b|v_-| .$$",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a76.4, Eqs. (340)-(346): the asymptotic velocity, the impact parameter and the relation $L=mvb$",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node51.html"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.5, Eq. (3.66): $L_z=b(2mE)^{1/2}$ for a scattering orbit",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-scattering-angle-advance",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The scattering angle advance $\\Delta$ and the deflection relation: the total polar advance is $2\\Delta$ and the velocity directions make the cosine $\\cos(\\pi-2\\Delta)$",
+        "reference": "expansion-proofs.md#e10",
+        "design_state": "completed-local-argument (E10 split into items; recorded in the batch notes)",
+        "dependency_level": 5,
+        "deps": [
+          "def-cm-central-force-trajectory",
+          "thm-cm-central-force-polar-reduction",
+          "thm-cm-scattering-turning-point-and-global-branches",
+          "thm-cm-scattering-asymptotic-velocities-and-impact-parameter",
+          "def-euclidean-inner-product",
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-derivative-of-an-inverse",
+          "thm-substitution",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-cm-central-force-trajectory": "mathematical-premise",
+          "thm-cm-central-force-polar-reduction": "mathematical-premise",
+          "thm-cm-scattering-turning-point-and-global-branches": "mathematical-premise",
+          "thm-cm-scattering-asymptotic-velocities-and-impact-parameter": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "thm-derivative-of-an-inverse": "mathematical-premise",
+          "thm-substitution": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let the hypotheses of\n[[thm-cm-scattering-turning-point-and-global-branches]] hold, let\n$r:\\mathbb R\\to\\mathbb R^3$ be the extension of the trajectory, and let\n$(\\rho,\\theta)$ be polar data with $r=\\rho\\,n(\\theta)$,\n$n(\\varphi)=\\cos\\varphi\\,e_1+\\sin\\varphi\\,e_2$\n([[thm-cm-central-force-polar-reduction]]). Write\n$t_*$ for the apsis time, and for $\\alpha\\in\\mathbb R$ let $R_\\alpha$ be the\nrotation of the plane $\\operatorname{span}(e_1,e_2)$,\n$R_\\alpha(x):=\\cos\\alpha\\,x+\\sin\\alpha\\,(e_3\\times x)$. Then:\n\n1. the half-angle\n   $$\\Delta:=\\int_{r_*}^{\\infty}\\frac{J\\,\\mathrm dr}{r^2\\sqrt{2\\mu\\,(E-V(r))}}$$\n   is finite and positive, and\n   $$\\theta(\\infty)-\\theta(t_*)=\\Delta=\\theta(t_*)-\\theta(-\\infty),\\qquad \\theta(\\infty)-\\theta(-\\infty)=2\\Delta;$$\n2. $\\displaystyle\\lim_{t\\to\\pm\\infty}n(\\theta(t))$ exist and equal\n   $v_+/|v_+|$ (as $t\\to+\\infty$) and $-v_-/|v_-|$ (as $t\\to-\\infty$);\n3. consequently\n   $$\\frac{v_+}{|v_+|}=-R_{2\\Delta}\\Bigl(\\frac{v_-}{|v_-|}\\Bigr), \\qquad \\frac{\\langle v_-,v_+\\rangle}{|v_-|\\,|v_+|}=-\\cos 2\\Delta=\\cos(\\pi-2\\Delta);$$\n   in particular, if $0<\\Delta<\\pi/2$ then $\\pi-2\\Delta\\in(0,\\pi)$ is the\n   (undirected) angle between the asymptotic velocity directions, and the\n   signed velocity rotation is $-( \\pi-2\\Delta)$ in the orientation defined by\n   $e_3$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a76.4, Eqs. (346)-(351): the scattering-angle quadrature and the relation between the half-angle and the deflection",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node51.html"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.5, Eqs. (3.66)-(3.68): $\\theta=\\pi-2\\varphi_0$ with the nearest-approach angle $\\varphi_0$",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-differential-cross-section-density",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "One-dimensional substitution on a deflection branch: the outgoing angular measure has density $b|\\mathrm db/\\mathrm d\\theta|$, hence cross-section density $b|\\mathrm db/\\mathrm d\\theta|/\\sin\\theta$",
+        "reference": "expansion-proofs.md#e10",
+        "design_state": "completed-local-argument (E10 split into items; recorded in the batch notes)",
+        "dependency_level": 1,
+        "deps": [
+          "def-cm-scattering-data",
+          "def-interval",
+          "def-continuity-real",
+          "thm-derivative-of-an-inverse",
+          "cor-one-dimensional-change-of-variables-with-absolute-derivative",
+          "thm-continuous-implies-integrable",
+          "thm-additivity-over-subintervals",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-algebra-of-continuous-functions",
+          "cor-mean-value-theorem",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle",
+          "def-countable-choice",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "thm-monotone-convergence-for-the-integral",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure"
+        ],
+        "dependency_roles": {
+          "def-cm-scattering-data": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "thm-derivative-of-an-inverse": "mathematical-premise",
+          "cor-one-dimensional-change-of-variables-with-absolute-derivative": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "thm-algebra-of-continuous-functions": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral": "mathematical-premise",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system": "mathematical-premise",
+          "thm-continuous-preimages-of-borel-sets-are-borel": "mathematical-premise",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let\n$\\theta:(a_1,a_2)\\to(\\theta_1,\\theta_2)\\subseteq(0,\\pi)$ be a deflection\nbranch of [[def-cm-scattering-data]], with inverse $b(\\theta)$, and set\n$D=(a_1,a_2)\\times(0,2\\pi)$, $H=(\\theta_1,\\theta_2)\\times(0,2\\pi)$ and\n$T(b,\\varphi)=(\\theta(b),\\varphi)$. Restrict the incident measure $\\nu$ to\n$D$. Its pushforward, defined by $T_*\\nu(B)=\\nu(T^{-1}(B))$ for Borel\n$B\\subseteq H$, satisfies\n$$T_*\\nu(B)=\\int_B b(\\theta)|b'(\\theta)|\\,d\\lambda_2(\\theta,\\varphi).$$\nFor every nonnegative Borel $g:H\\to[0,+\\infty]$, and for every real Borel\n$g$ with either side's integral of $|g|$ finite, consequently\n$$\\int_D g(\\theta(b),\\varphi)b\\,d\\lambda_2(b,\\varphi)=\\int_H g(\\theta,\\varphi)b(\\theta)|b'(\\theta)|\\,d\\lambda_2(\\theta,\\varphi).$$\nThe nonnegative equality allows $+\\infty$; in the real case both sides are\nfinite and absolute integrability on one side is equivalent to that on the\nother. In particular it applies to continuous periodic test functions that\nare nonnegative or absolutely integrable, and to compactly supported\ncontinuous test functions. No equality of undefined signed improper\nintegrals is asserted. Nonnegative double-integral notation denotes the\ncorresponding Lebesgue integrals, with iterated integrals justified by Tonelli.\n\nThus the outgoing angular measure has density $b(\\theta)|b'(\\theta)|$\nagainst $d\\theta\\,d\\varphi$ and density\n$$\\frac{d\\sigma}{d\\Omega}(\\theta)=\\frac{b(\\theta)|b'(\\theta)|}{\\sin\\theta}=\\frac{b(\\theta)}{\\sin\\theta\\,|\\theta'(b(\\theta))|}$$\nagainst the solid-angle measure. For finitely many branches on disjoint\nincident intervals the measures add, including on overlapping image\nintervals; in particular contributions with pairwise disjoint images add.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a76.4, Eqs. (347)-(351): the annular incident area $2\\pi b\\,\\mathrm db$ and the outgoing solid angle, giving $\\mathrm d\\sigma/\\mathrm d\\Omega=(b/\\sin\\theta)|\\mathrm db/\\mathrm d\\theta|$",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node51.html"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.5, Eqs. (3.70)-(3.72): the differential cross-section and the geometric relation $\\mathrm d\\sigma/\\mathrm d\\Omega=b|\\mathrm db/\\mathrm d\\theta|/\\sin\\theta$",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-coulomb-scattering",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Repulsive Coulomb scattering: the unique outer turning point, global non-colliding motion, the asymptotic impact distance and $\\Delta=\\pi/2-\\arctan(\\kappa/(2Eb))$",
+        "reference": "expansion-proofs.md#e10",
+        "design_state": "completed-local-argument (E10 split into items; recorded in the batch notes)",
+        "dependency_level": 3,
+        "deps": [
+          "def-cm-central-force-trajectory",
+          "thm-cm-central-force-polar-reduction",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-locally-lipschitz-in-the-state-variable",
+          "thm-substitution",
+          "thm-derivative-of-an-inverse",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-intermediate-value",
+          "cor-primitives-of-a-continuous-function",
+          "thm-monotonicity-from-the-derivative",
+          "def-principal-inverse-tangent",
+          "def-principal-inverse-sine-and-cosine",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-subtraction-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "def-tangent-cotangent-secant-cosecant",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-monotonicity-of-the-integral",
+          "lem-integral-elementary-bounds",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "thm-euclidean-space-complete",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "dependency_roles": {
+          "def-cm-central-force-trajectory": "mathematical-premise",
+          "thm-cm-central-force-polar-reduction": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "thm-substitution": "mathematical-premise",
+          "thm-derivative-of-an-inverse": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-intermediate-value": "mathematical-premise",
+          "cor-primitives-of-a-continuous-function": "mathematical-premise",
+          "thm-monotonicity-from-the-derivative": "mathematical-premise",
+          "def-principal-inverse-tangent": "mathematical-premise",
+          "def-principal-inverse-sine-and-cosine": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "thm-sine-and-cosine-subtraction-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "def-tangent-cotangent-secant-cosecant": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-norm-inequality-for-the-vector-valued-integral": "mathematical-premise",
+          "cor-vector-valued-ftc-and-lipschitz-bound": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "lem-integral-elementary-bounds": "mathematical-premise",
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "thm-euclidean-space-complete": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $\\mu>0$, let $\\kappa>0$ and $U(r)=\\kappa/r$ on $(0,\\infty)$ (the repulsive\nCoulomb potential, of class $C^2$), let $E>0$ and $J>0$, and put\n$$V(r):=\\frac{\\kappa}{r}+\\frac{J^2}{2\\mu r^2},\\qquad b:=\\frac{J}{\\sqrt{2\\mu E}}>0,\\qquad \\alpha:=\\frac{\\kappa}{Eb}>0.$$\nThen:\n\n1. $V$ is strictly decreasing on $(0,\\infty)$, with $V(r)\\to\\infty$ as $r\\downarrow0$\n   and $V(r)\\to0$ as $r\\to\\infty$; hence there is exactly one $r_*>0$ with\n   $V(r_*)=E$, it is simple ($V'(r_*)<0$), and $V(r)<E$ for all $r>r_*$.\n2. Let $r:I\\to\\mathbb R^3$ be a central-force trajectory for $(\\mu,U)$ with\n   constant angular momentum $j=Je_3$, $J>0$, energy $E$, with $|r(t)|\\ge r_*$\n   for all $t\\in I$ and with $|r(t_*)|=r_*$ for some $t_*\\in I$. Then $r$\n   extends uniquely to all of $\\mathbb R$; along the extension $\\rho=|r|\\ge r_*>0$\n   (no collision), $\\rho$ is strictly decreasing on $(-\\infty,t_*]$ and\n   strictly increasing on $[t_*,\\infty)$, and the asymptotic velocities\n   $v_\\pm=\\lim_{t\\to\\pm\\infty}r'(t)$ exist with $|v_+|=|v_-|=\\sqrt{2E/\\mu}$.\n   Moreover the asymptotic perpendicular distance of each branch to its\n   limiting direction exists and equals\n   $$b=\\frac{J}{\\sqrt{2\\mu E}}=\\frac{J}{\\mu|v_\\pm|}, \\qquad\\text{so that}\\qquad J=\\mu b|v_\\pm| .$$\nThe distance in clause 2 means the limit of $|r(t)\\times v_\\pm|/|v_\\pm|$ as $t\\to\\pm\\infty$, the distance to the line through the origin in the limiting velocity direction; it does not assert a free tail or a finite longitudinal intercept.\n\n3. For the polar angle, with $u_*:=1/r_*$,\n   $$\\Delta:=\\int_{r_*}^{\\infty}\\frac{J\\,\\mathrm dr}{r^2\\sqrt{2\\mu\\,(E-V(r))}} =\\int_0^{u_*}\\frac{b\\,\\mathrm du}{\\sqrt{1-\\dfrac{\\kappa}{E}u-b^2u^2}} =\\frac{\\pi}{2}-\\arctan\\frac{\\kappa}{2Eb}.$$\n\n4. Write $n_\\pm=\\lim_{t\\to\\pm\\infty}r(t)/|r(t)|$. Then\n   $n_+=v_+/|v_+|$, $n_-=-v_-/|v_-|$, and in an oriented polar plane\n   the outgoing velocity direction is the incoming direction rotated by\n   $2\\Delta-\\pi\\in(-\\pi,0)$. In particular\n   $$\\frac{\\langle v_-,v_+\\rangle}{|v_-||v_+|}=\\cos(\\pi-2\\Delta),\\qquad \\theta_{\\mathrm s}=\\pi-2\\Delta=2\\arctan\\frac{\\kappa}{2Eb}.$$\n   For fixed $\\mu,\\kappa,E$ this gives an actual family for every $b>0$,\n   with angular momentum $J(b)=\\sqrt{2\\mu E}\\,b$: choose its unique turning\n   radius and initial data $r(0)=r_*e_1$, $r'(0)=J(b)e_2/(\\mu r_*)$.\n   Local existence and the extension in clause 2 give a member of the family\n   for every $b$, unique up to apsis time and oriented plane placement.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a76.4, Eqs. (358)-(366): the inverse-square scattering integral, the Rutherford angle relation and the asymptotic distance",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node51.html"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.5, Eqs. (3.68)-(3.69): the scattering integral for the Coulomb potential, $\\tan(\\theta/2)=\\alpha/(2Eb)$",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-rutherford-cross-section",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "The Rutherford deflection map, its inverse, the cross-section density $(\\kappa/4E)^2\\csc^4(\\theta/2)$ and the divergence of the total cross-section",
+        "reference": "expansion-proofs.md#e10",
+        "design_state": "completed-local-argument (E10 split into items; recorded in the batch notes)",
+        "dependency_level": 4,
+        "deps": [
+          "def-cm-scattering-data",
+          "thm-cm-coulomb-scattering",
+          "thm-cm-differential-cross-section-density",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-derivative",
+          "def-principal-inverse-tangent",
+          "def-principal-inverse-sine-and-cosine",
+          "def-tangent-cotangent-secant-cosecant",
+          "lem-tangent-principal-branch-is-bijective",
+          "thm-principal-inverse-tangent-calculus",
+          "thm-tangent-cotangent-secant-cosecant-derivatives-and-periods",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "thm-sine-and-cosine-addition-formulas",
+          "thm-sine-and-cosine-subtraction-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-derivative-of-an-inverse",
+          "cor-mean-value-theorem",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-algebra-of-continuous-functions",
+          "thm-ftc-second-part",
+          "thm-additivity-over-subintervals",
+          "thm-monotonicity-of-the-integral",
+          "thm-continuous-implies-integrable",
+          "cor-primitives-of-a-continuous-function",
+          "def-continuity-real",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-cm-scattering-data": "mathematical-premise",
+          "thm-cm-coulomb-scattering": "mathematical-premise",
+          "thm-cm-differential-cross-section-density": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-principal-inverse-tangent": "mathematical-premise",
+          "def-principal-inverse-sine-and-cosine": "mathematical-premise",
+          "def-tangent-cotangent-secant-cosecant": "mathematical-premise",
+          "lem-tangent-principal-branch-is-bijective": "mathematical-premise",
+          "thm-principal-inverse-tangent-calculus": "mathematical-premise",
+          "thm-tangent-cotangent-secant-cosecant-derivatives-and-periods": "mathematical-premise",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "thm-sine-and-cosine-subtraction-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "thm-derivative-of-an-inverse": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-algebra-of-continuous-functions": "mathematical-premise",
+          "thm-ftc-second-part": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-continuous-implies-integrable": "mathematical-premise",
+          "cor-primitives-of-a-continuous-function": "mathematical-premise",
+          "def-continuity-real": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the cross-section measures. Fix $\\mu>0$, $\\kappa>0$ and $E>0$. For every $b>0$ put $J(b)=\\sqrt{2\\mu E}\\,b$ and use the Coulomb trajectory family of [[thm-cm-coulomb-scattering]] clause 4. Its impact distance is $b$ and its\n**deflection map**\n$$\\theta_{\\rm def}:(0,\\infty)\\to(0,\\pi),\\qquad \\theta_{\\rm def}(b):=2\\arctan\\frac{\\kappa}{2Eb}.$$\nThen:\n\n1. $\\theta_{\\rm def}$ is $C^1$ and strictly decreasing, with\n   $\\theta_{\\rm def}(b)\\to\\pi$ as $b\\downarrow0$ and\n   $\\theta_{\\rm def}(b)\\to0$ as $b\\to\\infty$; it is a $C^1$ bijection\n   $(0,\\infty)\\to(0,\\pi)$ with inverse\n   $$b(\\theta)=\\frac{\\kappa}{2E}\\cot\\frac{\\theta}{2}\\qquad(0<\\theta<\\pi).$$\n2. For every interval $(\\theta_1,\\theta_2)\\subseteq(0,\\pi)$ the pair\n   $(\\theta,b)$ is a deflection branch with cross-section density\n   $$\\frac{\\mathrm d\\sigma}{\\mathrm d\\Omega}(\\theta) =b(\\theta)\\Bigl|\\frac{\\mathrm db}{\\mathrm d\\theta}(\\theta)\\Bigr|\\frac{1}{\\sin\\theta} =\\Bigl(\\frac{\\kappa}{4E}\\Bigr)^2\\csc^4\\frac{\\theta}{2},$$\n   finite and positive on $(\\theta_1,\\theta_2)$; and the pushforward of the\n   incident flux measure under the branch is described by\n   [[thm-cm-differential-cross-section-density]].\n3. For every $\\theta_0\\in(0,\\pi)$ the truncated total cross-section\n   $$\\int_0^{\\theta_0}\\!\\!\\int_0^{2\\pi}\\Bigl(\\frac{\\kappa}{4E}\\Bigr)^2 \\csc^4\\frac{\\theta}{2}\\,\\sin\\theta\\,\\mathrm d\\varphi\\,\\mathrm d\\theta=+\\infty,$$\n   while for $0<\\theta_1<\\theta_2<\\pi$ the integral over\n   $(\\theta_1,\\theta_2)\\times(0,2\\pi)$ is finite; in this sense the total\n   cross-section of the ideal Coulomb model diverges at forward angles and\n   every compact angular acceptance away from $0$ has finite cross-section.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a76.4, Eqs. (358)-(367): the Rutherford cross-section and the small-angle divergence of the total cross-section",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node51.html"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.5, Eq. (3.69) and following: $\\tan(\\theta/2)=\\alpha/(2Eb)$ and the Rutherford scattering formula",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 89,
+    "id": "cm-math-central-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Central \u2014 Examples",
+    "companion": "cm-math-central",
+    "requires": [
+      "cm-math-central",
+      "the-logarithm-and-general-powers"
+    ],
+    "items": [
+      {
+        "id": "ex-cm-harmonic-oscillator-action-derivative",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "The harmonic oscillator action variable $J_{\\mathrm a}(E)=E/\\omega$ and $J_{\\mathrm a}'(E)=T/(2\\pi)$",
+        "reference": "expansion-proofs.md#e6",
+        "design_state": "completed-local-argument (E6 split into items; recorded in the batch notes)",
+        "dependency_level": 2,
+        "deps": [
+          "thm-cm-action-variable-derivative",
+          "def-cm-one-dimensional-action-variable",
+          "def-interval",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-substitution",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-of-square-roots"
+        ],
+        "dependency_roles": {
+          "thm-cm-action-variable-derivative": "mathematical-premise",
+          "def-cm-one-dimensional-action-variable": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-substitution": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $m>0$, $k>0$, $U(q)=\\frac12kq^2$ on $J_0=\\mathbb R$, and for $E>0$ set\n$$a(E):=-\\sqrt{\\frac{2E}{k}},\\qquad b(E):=\\sqrt{\\frac{2E}{k}},\\qquad \\omega:=\\sqrt{\\frac{k}{m}},\\qquad T:=\\frac{2\\pi}{\\omega}.$$\nThen the datum $(J_0,U,m,a,b)$ satisfies the hypotheses of\n[[thm-cm-action-variable-derivative]] on the energy interval $(0,\\infty)$, the\naction variable of [[def-cm-one-dimensional-action-variable]] is\n$$J_{\\mathrm a}(E)=\\frac{E}{\\omega}\\qquad(E>0),$$\nand\n$$J_{\\mathrm a}'(E)=\\frac{1}{\\omega}=\\frac{T}{2\\pi}\\qquad(E>0),$$\nin agreement with the general theorem, whose period quadrature is\n$T(E)=\\sqrt{2m}\\int_{a(E)}^{b(E)}\\mathrm dq/\\sqrt{E-U(q)}=2\\pi/\\omega$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a74.5.1 and \u00a74.5.3, printed pp. 105-111: the harmonic oscillator action variable and the period relation $\\mathrm dE/\\mathrm dI=\\omega$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-cm-kepler-ellipse-data-check",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "An exact Kepler ellipse check: $e=1/2$, $J=1$, $\\mu=\\kappa=1$ give $a=4/3$, $b=2\\sqrt3/3$, $E=-3/8$ and $T^2=256\\pi^2/27$",
+        "reference": "expansion-proofs.md#e6",
+        "design_state": "completed-local-argument (E6 split into items; recorded in the batch notes)",
+        "dependency_level": 7,
+        "deps": [
+          "thm-cm-kepler-conic-and-eccentricity",
+          "thm-cm-kepler-ellipse-geometry",
+          "thm-cm-kepler-orbit-period",
+          "def-cm-central-force-trajectory",
+          "thm-of-square-roots",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-interval",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-cm-kepler-conic-and-eccentricity": "mathematical-premise",
+          "thm-cm-kepler-ellipse-geometry": "mathematical-premise",
+          "thm-cm-kepler-orbit-period": "mathematical-premise",
+          "def-cm-central-force-trajectory": "mathematical-premise",
+          "thm-of-square-roots": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), as required by the conic, ellipse and period suppliers.\n\nTake the attractive Kepler data $\\mu=\\kappa=1$ and angular momentum magnitude\n$J=1$, and consider the negative-energy orbit with eccentricity $e=\\frac12$.\nThen the conic data of [[thm-cm-kepler-conic-and-eccentricity]] and\n[[thm-cm-kepler-ellipse-geometry]] are\n$$p=\\frac{J^2}{\\mu\\kappa}=1,\\qquad a=\\frac{p}{1-e^2}=\\frac43,\\qquad b=a\\sqrt{1-e^2}=\\frac{2\\sqrt3}{3},$$\nthe energy is $E=\\dfrac{\\mu\\kappa^2}{2J^2}(e^2-1)=-\\dfrac38$, and the period of\n[[thm-cm-kepler-orbit-period]] satisfies\n$$T=\\frac{2\\pi\\mu ab}{J}=\\frac{16\\pi\\sqrt3}{9},\\qquad T^2=\\frac{256\\pi^2}{27}=\\frac{4\\pi^2\\mu a^3}{\\kappa}.$$\nAll numbers are exact; the example checks algebraic consistency of the three\ntheorems and the sign criterion $E<0\\iff e<1$, and makes no empirical claim.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.4, Eqs. (3.59)-(3.65): the eccentricity, semimajor axis and period relations checked numerically here with exact rational data",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-cm-rutherford-cross-section-check",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "An exact Rutherford check: $\\kappa=E=1$, $b=1$ give $\\theta=2\\arctan\\frac12$ and $\\mathrm d\\sigma/\\mathrm d\\Omega=25/16$",
+        "reference": "expansion-proofs.md#e10",
+        "design_state": "completed-local-argument (E10 split into items; recorded in the batch notes)",
+        "dependency_level": 5,
+        "deps": [
+          "thm-cm-rutherford-cross-section",
+          "thm-cm-coulomb-scattering",
+          "def-cm-scattering-data",
+          "def-principal-inverse-tangent",
+          "def-tangent-cotangent-secant-cosecant",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+          "thm-sine-and-cosine-subtraction-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-interval",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "thm-cm-rutherford-cross-section": "mathematical-premise",
+          "thm-cm-coulomb-scattering": "mathematical-premise",
+          "def-cm-scattering-data": "mathematical-premise",
+          "def-principal-inverse-tangent": "mathematical-premise",
+          "def-tangent-cotangent-secant-cosecant": "mathematical-premise",
+          "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions": "mathematical-premise",
+          "thm-sine-and-cosine-subtraction-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the cited scattering measures and vocabulary.\n\nTake the repulsive Coulomb data $\\kappa=1$ and $E=1$ (with any $\\mu>0$ and\n$J=\\sqrt{2\\mu}$, so that the asymptotic impact distance of\n[[thm-cm-coulomb-scattering]] is $b=1$). Then the deflection map of\n[[thm-cm-rutherford-cross-section]] has the exact values\n$$\\theta_{\\rm def}(1)=2\\arctan\\frac12\\in(0,\\pi), \\qquad \\frac{\\pi}{2}-\\Delta=\\arctan\\frac12,\\qquad \\Delta=\\frac{\\pi}{2}-\\arctan\\frac12,$$\nthe inverse branch satisfies $b(\\theta_{\\rm def}(1))=1$, and\n$$\\frac{\\mathrm d\\sigma}{\\mathrm d\\Omega}\\Bigl(\\theta_{\\rm def}(1)\\Bigr) =\\Bigl(\\frac{\\kappa}{4E}\\Bigr)^2\\csc^4\\Bigl(\\frac{\\theta_{\\rm def}(1)}{2}\\Bigr) =\\frac{25}{16},$$\nbecause $\\theta_{\\rm def}(1)/2=\\arctan\\frac12$ and $\\csc^2(\\arctan\\frac12)=1+\\cot^2(\\arctan\\frac12)=1+4=5$.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Richard Fitzpatrick, Newtonian Dynamics (University of Texas at Austin), \u00a76.4, Eqs. (358)-(365): the Rutherford angle and density, checked here at exact rational data",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node51.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-cm-radial-kepler-collision",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "A zero-angular-momentum Kepler trajectory reaches the force centre in finite time, refuting unconditional global existence",
+        "reference": "expansion-proofs.md#e10",
+        "design_state": "completed-local-argument (E10 split into items; recorded in the batch notes)",
+        "dependency_level": 4,
+        "deps": [
+          "def-cm-central-force-trajectory",
+          "def-interval",
+          "def-derivative",
+          "def-limit-point-r",
+          "thm-algebra-of-derivatives",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-chain-rule",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "thm-cm-scattering-turning-point-and-global-branches"
+        ],
+        "dependency_roles": {
+          "def-cm-central-force-trajectory": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-limit-point-r": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "thm-cm-scattering-turning-point-and-global-branches": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "**False statement.** *Every solution of the attractive inverse-square equation\n$\\mu\\,r''=-\\kappa\\,r/|r|^3$ ($\\mu,\\kappa>0$) on its maximal interval of\ndefinition is defined for all real times and satisfies $|r(t)|\\ge c$ for some\n$c>0$.*\n\nThe witness has zero angular momentum and reaches the excluded force centre;\nnon-radial orbit results therefore cannot be applied to it. It also shows why\nthe finite-range scattering theorem\n[[thm-cm-scattering-turning-point-and-global-branches]] assumes a simple\nturning point rather than mere boundedness from below.",
+        "strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a72.5.4, printed pp. 32-33: the angular-momentum barrier and the separation of the radial and angular problems",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

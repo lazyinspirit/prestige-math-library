@@ -60,12 +60,14 @@ sources:
 
 ## Statement
 
+**Slot convention.** For $\ell\ge1$, $S_\ell$ acts on $\{0,\dots,\ell-1\}$ as in [[lem-nrqm-composites-permutation-sector-projections]]. On one-based tuple positions use $\widehat{\pi}(k):=1+\pi(k-1)$ for $1\le k\le\ell$. Conjugation by $k\mapsto k-1$ gives $\widehat{\pi\sigma}=\widehat{\pi}\circ\widehat{\sigma}$ and $\widehat{\pi^{-1}}=\widehat{\pi}^{-1}$; thus the supplier's tensor action becomes $U_\pi(v_1\otimes\cdots\otimes v_\ell)=v_{\widehat{\pi}^{-1}(1)}\otimes\cdots\otimes v_{\widehat{\pi}^{-1}(\ell)}$. The parameters of $U_\pi$ and $\operatorname{sgn}(\pi)$ remain canonical zero-based permutations.
+
 Assume Countable Choice ([[def-countable-choice]]). Let $H$ be a complex Hilbert space with a supplied countably infinite orthonormal basis $(e_j)_{j\ge1}$, let $N\ge1$ be an integer, and let $\varepsilon_j\in\mathbb R$ with $\varepsilon_j\ge b$ for a fixed $b\in\mathbb R$. Use the completed tensor power and permutation-sector projections of [[lem-nrqm-composites-hilbert-tensor-construction]] and [[lem-nrqm-composites-permutation-sector-projections]], and write $\mathfrak H_N^\sigma:=\operatorname{ran}P_\sigma^{(N)}$ for $\sigma\in\{+,-\}$. Then:
 
 (a) For every finitely supported sequence $n=(n_j)_{j\ge1}$ of nonnegative integers with $\sum_jn_j=N$, put $\operatorname{orb}(n):=\{(i_1,\ldots,i_N):\#\{k:i_k=j\}=n_j\text{ for every }j\}$ and
 $$b_n^+:=|\operatorname{orb}(n)|^{-1/2}\sum_{i\in\operatorname{orb}(n)}e_{i_1}\otimes\cdots\otimes e_{i_N}.$$
 For every $N$-element subset $J=\{j_1<\cdots<j_N\}$ of the positive integers, put
-$$b_J^-:=\frac1{\sqrt{N!}}\sum_{\pi\in S_N}\operatorname{sgn}(\pi)e_{j_{\pi(1)}}\otimes\cdots\otimes e_{j_{\pi(N)}}.$$
+$$b_J^-:=\frac1{\sqrt{N!}}\sum_{\pi\in S_N}\operatorname{sgn}(\pi)e_{j_{\widehat{\pi}(1)}}\otimes\cdots\otimes e_{j_{\widehat{\pi}(N)}}.$$
 These are orthonormal bases of the symmetric and antisymmetric sectors respectively. Denote their countable index sets by $\mathcal C_N^+$ and $\mathcal C_N^-$, and write $b_c^\sigma$ for the corresponding vector. Define $E_n:=\sum_jn_j\varepsilon_j$ and $E_J:=\sum_{j\in J}\varepsilon_j$.
 
 (b) The fixed-$N$ free energy operator is the self-adjoint diagonal operator

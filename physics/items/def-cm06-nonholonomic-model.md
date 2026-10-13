@@ -120,6 +120,12 @@ $C^{2}$ map $\varrho:O_{v}\to GL(k',\mathbb R)$
 ([[def-invertible-matrix-and-general-linear-group]],
 [[def-jacobian-matrix-and-gradient]]) with
 $$A(t,x)=\varrho(t,x)\,\Phi_{x}(t,x),\qquad b(t,x)=\varrho(t,x)\,\Phi_{t}(t,x)\qquad\text{on }O_{v};$$
+for a physical datum, each component $\Phi_{\beta}$ has a declared dimension
+$\phi_{\beta}$. With $[x_j]=\ell$ and $[t]=\tau$, assign
+$[\varrho_{\alpha\beta}]=[b_{\alpha}]\tau/\phi_{\beta}$; then every term
+in the two matrix products has the declared dimension of the corresponding
+entry of $A$ or $b$. These component assignments are part of the model's
+declaration.
 The datum is **locally holonomic-equivalent at a point** when such a pair exists on some open neighbourhood of that point, and **locally nonholonomic there** when no such neighbourhood and pair exists, as in [[def-cm01-configuration]] clause (e). A **nonholonomic model** in this local sense specifies a point (or region of points) with this failure. Absence of one pair on the whole domain $O_v$ alone is insufficient, since a global obstruction need not be local nonintegrability. In
 the holonomic-equivalent case the law is the differentiated family of
 position constraints $\Phi(t,x)=\text{constant}$: for a $C^{1}$ curve with
@@ -135,8 +141,12 @@ $b\,dt+A\cdot dx$ is $\varrho\,d\Phi$: in this single-row case, local
 nonholonomicity means that no such integrating factor and regular potential
 exist on any neighbourhood of the specified point. For $k'>1$, local
 nonholonomicity is defined by failure of the matrix factorization above, not
-by a single one-form criterion. The planar no-slip law of a disk rolling in a straight line is
-holonomic-equivalent with $A=(1,-a)$, $b=0$, $\Phi(x,\theta)=x-a\theta$ and
+by a single one-form criterion. In a separate reduced two-coordinate model
+$q=(s,\theta)\in\mathbb R^{2}$ of a disk rolling along a straight line (not
+the $3N$-coordinate datum of clauses (a)-(c)), let $[s]=[a]=\ell$,
+$[\theta]=1$ and $a>0$. Its no-slip law $s'-a\theta'=0$ is
+holonomic-equivalent with $A=(1,-a)$, $b=0$,
+$\Phi(s,\theta)=s-a\theta$ of dimension $\ell$, and dimensionless
 $\varrho=1$; the velocity constraint $z'=xy'$ of
 [[def-cm-nonholonomic-velocity-constraint-law]] is not: an integrating factor
 would make the distribution $\ker A$ tangent to the level sets of $\Phi$, and
@@ -158,8 +168,10 @@ idealization of the mechanism; it is **not** identified with the vakonomic
 [[def-cm-nonholonomic-velocity-constraint-law]]. For the sample model $z'=xy'$
 with unit mass, zero applied force and initial data
 $(x,y,z)(0)=(0,0,0)$, $(x',y',z')(0)=(1,1,0)$,
-[[cex-cm-dalembert-and-vakonomic-evolutions-differ]] proves that the unique
-d'Alembert motion is not vakonomic with those data. Thus the d'Alembert
+[[cex-cm-dalembert-and-vakonomic-evolutions-differ]] proves that there is a
+unique maximal d'Alembert motion on $\mathbb R$ with those data. Every
+other d'Alembert motion through the datum is its restriction; neither the
+maximal motion nor any such restriction is vakonomic. Thus the d'Alembert
 solution set is not a subset of the vakonomic solution set for that datum,
 and the two sets are unequal; this does not assert that a vakonomic motion
 with those data exists. The closing remark of this page records the

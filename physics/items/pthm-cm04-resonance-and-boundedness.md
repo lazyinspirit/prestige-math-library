@@ -1,7 +1,7 @@
 ---
 id: pthm-cm04-resonance-and-boundedness
 kind: physics-theorem
-title: "The driven oscillator: the sinusoidal steady response, its amplitude and maximum, bounded motions for $c>0$ and at $c=0$ off resonance, and the unbounded resonant motions at $c=0$"
+title: "The driven oscillator: steady response and amplitude profile, bounded damped and off-resonant motions, and unbounded undamped resonance"
 status: draft
 origin: session
 domain: physics
@@ -31,7 +31,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: cases
-physical_scope: "The response of the driven oscillator model with m>0, k>0, c>=0, drive amplitude f_0 and angular frequency Omega>0: the explicit steady sinusoidal response and its amplitude |f_0|/sqrt((k-m Omega^2)^2+c^2 Omega^2) whenever the denominator does not vanish; the reduction of every motion to the steady response plus a homogeneous motion; boundedness of every motion in the strictly damped case, with exponential convergence of the transient to the steady response; boundedness for c=0 away from Omega=sqrt(k/m); unbounded motions at c=0 and Omega=sqrt(k/m) with nonzero amplitude, so boundedness fails exactly in the off-singular-case sense; and the amplitude maximum of the steady response for c>0. The result is a conditional deduction from the declared drive and damping models; it asserts no measured resonance curve, no value of any parameter and no behaviour of an apparatus."
+physical_scope: "The response of the driven oscillator model with m>0, k>0, c>=0, drive amplitude f_0 and angular frequency Omega>0: the explicit steady sinusoidal response and its amplitude |f_0|/sqrt((k-m Omega^2)^2+c^2 Omega^2) whenever the denominator does not vanish; the reduction of every motion to the steady response plus a homogeneous motion; boundedness of every motion in the strictly damped case, with exponential convergence of the transient to the steady response; boundedness for c=0 away from Omega=sqrt(k/m); unbounded motions at c=0 and Omega=sqrt(k/m) with nonzero amplitude, so boundedness fails exactly in the off-singular-case sense; and the positive-frequency amplitude peak when f_0 is nonzero and c^2<2mk. For c^2>=2mk and f_0!=0 the amplitude strictly decreases on Omega>0 and has no maximum on that domain; for f_0=0 it is constant. The result is a conditional deduction from the declared drive and damping models; it asserts no measured resonance curve, no value of any parameter and no behaviour of an apparatus."
 sources:
   references:
     - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 5.1, Eqs. (5.13a)-(5.22), chapter pages 3-5 (PDF pages 89-91): the forced-oscillator response function, the forced amplitude (5.18), the resonance value (5.19), the quality factor ratio and the width of the resonance peak"
@@ -69,15 +69,18 @@ $x_{p}(t):=f_{0}t\sin(\omega_{0}t)/(2m\omega_{0})$. All all-time boundedness, co
    homogeneous model with the same $m$, $c$, $k$ (and is a harmonic motion
    of [[post-cm04-harmonic-model]] when $c=0$).
 3. **Strictly damped case $c>0$.** For every $\Omega>0$ the following hold:
-   every motion is bounded on $[0,\infty)$; and
+  every motion is bounded on $[0,\infty)$; and
    $x(t)-x_{p}(t)\to0$ and $x'(t)-x_{p}'(t)\to0$ as $t\to+\infty$. Moreover
    $x_{p}$ is the unique motion with datum
    $(t_{0},x_{p}(t_{0}),x_{p}'(t_{0}))$ for any $t_{0}\in\mathbb R$. The
    amplitude function $\Omega\mapsto A(\Omega)$ has the following shape when $f_0\ne0$: if
    $c^{2}<2mk$ it is strictly increasing on $(0,\Omega_{*})$ and strictly
-   decreasing on $(\Omega_{*},\infty)$ with
+   decreasing on $(\Omega_{*},\infty)$, so has its unique maximum there, with
    $$\Omega_{*}=\sqrt{\frac{k}{m}-\frac{c^{2}}{2m^{2}}},\qquad A(\Omega_{*})=\frac{2m\lvert f_{0}\rvert}{c\sqrt{4mk-c^{2}}};$$
-   if $c^{2}\ge2mk$ it is strictly decreasing on $(0,\infty)$. For $f_0=0$ the amplitude is identically zero.
+   if $c^{2}\ge2mk$ it is strictly decreasing on $(0,\infty)$ and does not
+   attain a maximum on the declared positive-frequency domain. Its continuous
+   extension to $\Omega=0$ has its maximum there. For $f_0=0$ the amplitude is
+   identically zero on the domain, so every frequency has the same value.
 4. **Undamped case away from resonance.** For $c=0$ and
    $\Omega\neq\omega_{0}$ every motion is bounded on $\mathbb R$.
 5. **Undamped resonance.** For $c=0$, $\Omega=\omega_{0}$ and $f_{0}\neq0$
@@ -96,51 +99,19 @@ and no measured response is asserted.
 
 ## Facts & Assumptions
 
-**Given:** The driven model with data $(m,c,k,f_{0},\Omega)$, its motions on
-intervals with nonempty interior, the constants $\omega_{0},D$, the functions
-$x_{p}$ of clause 1, and the homogeneous damped model with the same $m,c,k$.
+**Given:** The driven model with data $(m,c,k,f_{0},\Omega)$, its motions on intervals with nonempty interior, the constants $\omega_{0},D$, the functions $x_{p}$ of clause 1, and the homogeneous damped model with the same $m,c,k$.
 
-[L1] Model vocabulary ([[post-cm04-sinusoidal-drive-model]],
-[[def-cm04-one-dimensional-models-and-equilibria]] clauses (b), (f),
-[[def-cm-oscillator-model-and-phase-system]]): motions of the driven model
-are the solutions of $m\,x''+cx'+kx=f_{0}\cos(\Omega t)$, which is the
-forced oscillator model of [[def-cm-oscillator-model-and-phase-system]] with
-the continuous function $f(t)=f_{0}\cos(\Omega t)$ and $k>0$; motions of
-the homogeneous damped model are the solutions with $f\equiv0$, and for
-$c=0$ these are the motions of the harmonic model by clause 1 of
-[[pthm-cm04-damped-motion]].
+[L1] Model vocabulary ([[post-cm04-sinusoidal-drive-model]], [[def-cm04-one-dimensional-models-and-equilibria]] clauses (b), (f), [[def-cm-oscillator-model-and-phase-system]]): motions of the driven model are the solutions of $m\,x''+cx'+kx=f_{0}\cos(\Omega t)$, which is the forced oscillator model of [[def-cm-oscillator-model-and-phase-system]] with the continuous function $f(t)=f_{0}\cos(\Omega t)$ and $k>0$; motions of the homogeneous damped model are the solutions with $f\equiv0$, and for $c=0$ these are the motions of the harmonic model by clause 1 of [[pthm-cm04-damped-motion]].
 
-[L2] [[thm-cm-forced-oscillator-sinusoidal-response]]: if $D\neq0$ then
-$x_{p}=\operatorname{Re}(f_{0}e^{i\Omega t}/D)$ is a solution of the forced
-equation on $\mathbb R$, with the displayed real form and amplitude
-$\lvert f_{0}\rvert/\sqrt{(k-m\Omega^{2})^{2}+c^{2}\Omega^{2}}$; if $c=0$
-and $\Omega=\omega_{0}$ then $x_{p}(t)=f_{0}t\sin(\omega_{0}t)/(2m\omega_{0})$
-is a solution on $\mathbb R$ and is unbounded on $[0,\infty)$ when
-$f_{0}\neq0$; if $c>0$ then every solution $x:[0,\infty)\to\mathbb R$ equals
-$x_{p}+x_{h}$ with $x_{h}$ homogeneous, and $x(t)-x_{p}(t)\to0$, with $x$
-bounded.
+[L2] [[thm-cm-forced-oscillator-sinusoidal-response]]: if $D\neq0$ then $x_{p}=\operatorname{Re}(f_{0}e^{i\Omega t}/D)$ is a solution of the forced equation on $\mathbb R$, with the displayed real form and amplitude $\lvert f_{0}\rvert/\sqrt{(k-m\Omega^{2})^{2}+c^{2}\Omega^{2}}$; if $c=0$ and $\Omega=\omega_{0}$ then $x_{p}(t)=f_{0}t\sin(\omega_{0}t)/(2m\omega_{0})$ is a solution on $\mathbb R$ and is unbounded on $[0,\infty)$ when $f_{0}\neq0$; if $c>0$ then every solution $x:[0,\infty)\to\mathbb R$ equals $x_{p}+x_{h}$ with $x_{h}$ homogeneous, and $x(t)-x_{p}(t)\to0$, with $x$ bounded.
 
-[L3] [[thm-cm-forced-oscillator-variation-of-constants]]: for $m>0$,
-$c\ge0$, $k>0$ and continuous $f$ on an interval $I$, the forced model has
-exactly one solution on $I$ for every datum; and
-[[thm-cm-homogeneous-oscillator-solution-classification]] classifies the
-homogeneous solutions.
+[L3] [[thm-cm-forced-oscillator-variation-of-constants]]: for $m>0$, $c\ge0$, $k>0$ and continuous $f$ on an interval $I$, the forced model has exactly one solution on $I$ for every datum; and [[thm-cm-homogeneous-oscillator-solution-classification]] classifies the homogeneous solutions.
 
-[L4] [[pthm-cm04-damped-decay-and-stability]] clauses 2 and 3: a strictly
-damped homogeneous motion and its derivative tend to $0$ and are bounded;
-[[pthm-cm04-damped-motion]] clause 1: the maximal motion of the homogeneous
-model with a given datum is unique.
+[L4] [[pthm-cm04-damped-decay-and-stability]] clauses 2 and 3: a strictly damped homogeneous motion and its derivative tend to $0$ and are bounded; [[pthm-cm04-damped-motion]] clause 1: the maximal motion of the homogeneous model with a given datum is unique.
 
-[L5] [[pthm-cm04-harmonic-motion]] clauses 2 and 3: a harmonic motion is
-bounded by its amplitude $R$, and $\lvert y'(t)\rvert\le\omega_{0}R$ for
-the motion of amplitude $R$ because $y'=-R\omega_{0}\sin(\theta-\varphi)$.
+[L5] [[pthm-cm04-harmonic-motion]] clauses 2 and 3: a harmonic motion is bounded by its amplitude $R$, and $\lvert y'(t)\rvert\le\omega_{0}R$ for the motion of amplitude $R$ because $y'=-R\omega_{0}\sin(\theta-\varphi)$.
 
-[L6] [[prop-cm-oscillator-amplitude-maximum]]: for $c>0$ and $f_0\ne0$ the function
-$A(\Omega)=\lvert f_{0}\rvert/\sqrt{(k-m\Omega^{2})^{2}+c^{2}\Omega^{2}}$ is
-strictly increasing then strictly decreasing with the maximum
-$\Omega_{*}=\sqrt{k/m-c^{2}/(2m^{2})}$ and value
-$2m\lvert f_{0}\rvert/(c\sqrt{4mk-c^{2}})$ when $c^{2}<2mk$, and strictly
-decreasing on $(0,\infty)$ when $c^{2}\ge2mk$.
+[L6] [[prop-cm-oscillator-amplitude-maximum]]: for $c>0$ and $f_0\ne0$ the function $A(\Omega)=\lvert f_{0}\rvert/\sqrt{(k-m\Omega^{2})^{2}+c^{2}\Omega^{2}}$ is strictly increasing then strictly decreasing with the maximum $\Omega_{*}=\sqrt{k/m-c^{2}/(2m^{2})}$ and value $2m\lvert f_{0}\rvert/(c\sqrt{4mk-c^{2}})$ when $c^{2}<2mk$, and strictly decreasing on $(0,\infty)$ when $c^{2}\ge2mk$.
 
 [L7] Derivatives ([[thm-sine-and-cosine-derivatives]],
 [[thm-algebra-of-derivatives]], [[thm-chain-rule]]): the real form of
@@ -153,10 +124,7 @@ $\Omega\lvert f_{0}\rvert\bigl(\lvert k-m\Omega^{2}\rvert+c\Omega\bigr)/
 
 ## Proof
 
-**Proof technique:** cases; verify the explicit particular motions, reduce an
-arbitrary motion to the particular one plus a homogeneous motion by
-linearity, and use the decay, boundedness and amplitude results of the
-suppliers.
+**Proof technique:** cases; verify the explicit particular motions, reduce an arbitrary motion to the particular one plus a homogeneous motion by linearity, and use the decay, boundedness and amplitude results of the suppliers.
 
 1.1 Clause 1. Assume $D\neq0$. By [L2] the function $x_{p}$ is a solution of the forced equation on $\mathbb R$, hence a motion of the model by [L1], with the displayed real form and amplitude $\lvert x_{p}(t)\rvert\le A(\Omega)$. Its periodicity: the real form is a constant linear combination of $\cos(\Omega\cdot)$ and $\sin(\Omega\cdot)$, and for every real $u$ one has $\cos(u+2\pi)=\cos u$ and $\sin(u+2\pi)=\sin u$ by [[thm-sine-cosine-zero-sets-and-fundamental-period]]; taking $u=\Omega t$ and $u=\Omega(t+2\pi/\Omega)$ gives $x_{p}(t+2\pi/\Omega)=x_{p}(t)$. [assume-case 1, given, L1, L2, L7]
 
@@ -174,15 +142,7 @@ suppliers.
 
 ## Remarks
 
-- **What resonance is here.** The exceptional case is a property of the
-  declared model: with zero damping and a drive at the undamped frequency,
-  the particular solution grows linearly and every motion is unbounded.
-  Clause 5 states no physical resonance phenomenon; an apparatus comparison
-  would be a separate, empirically qualified step.
+- **What resonance is here.** The exceptional case is a property of the declared model: with zero damping and a nonzero drive at the undamped frequency, the particular solution grows linearly and every maximal motion is unbounded. Clause 5 states no physical resonance phenomenon; an apparatus comparison would be a separate, empirically qualified step.
 
-- **The quality factor.** The source reads the ratio
-  $A(\omega_{0})/A(0)=m\omega_{0}/c=\omega_0/(2\gamma)$ (with $\gamma=c/(2m)$) as
-  the quality factor and the peak's half width as its reciprocal in the
-  small-damping regime; these are ratios of the explicit amplitude formula
-  for $c>0$, $f_0\ne0$ and readouts of clause 3, not additional claims.
+- **The quality factor.** For $c>0$ and $f_0\ne0$, use the continuous extension of $A$ to $0$ and define $Q:=A(\omega_{0})/A(0)=m\omega_{0}/c=\omega_0/(2\gamma)$, where $\gamma=c/(2m)$. Likharev §5.1, Eqs. (5.20)-(5.22), PDF page 91, concerns the normalized **full** width of the squared response, not a half width. In the source's low-damping, small-detuning approximation the squared amplitude is replaced by $f_0^2/[4m^2\omega_0^2((\Omega-\omega_0)^2+\gamma^2)]$. Its half-maximum points are $\Omega=\omega_0\pm\gamma$, so their separation $\Delta\Omega=2\gamma$ satisfies $\Delta\Omega/\omega_0=1/Q$. This is an identity for that approximate profile; no exact width formula for the original amplitude curve or apparatus measurement is asserted.
 

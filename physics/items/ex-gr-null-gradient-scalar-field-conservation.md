@@ -1,7 +1,7 @@
 ---
 id: ex-gr-null-gradient-scalar-field-conservation
 kind: example
-title: "A scalar field with null gradient in flat space: equation of motion and conservation"
+title: "A scalar field with null-or-zero gradient in flat space: equation of motion and conservation"
 status: draft
 origin: session
 domain: mathematics
@@ -45,8 +45,8 @@ $$\varphi(x):=f(x^0+x^1),$$
 and let $(\varphi,V,K)$ be the scalar-field matter model with $V\equiv0$ and
 $K>0$ ([[def-gr-scalar-field-matter-model]]). Then:
 
-1. $\partial^c\varphi\,\partial_c\varphi=0$: the gradient of $\varphi$ is null
-   everywhere.
+1. $\partial^c\varphi\,\partial_c\varphi=0$: the metric dual of $d\varphi$ is
+   null wherever $d\varphi\ne0$ and is zero wherever $d\varphi=0$.
 2. $\Box_g\varphi=\nabla^a\partial_a\varphi=0$: $\varphi$ satisfies the scalar
    equation of motion, and its stress-energy tensor is
    $T_{ab}=K\,\partial_a\varphi\,\partial_b\varphi$.
@@ -67,7 +67,7 @@ $K>0$ ([[def-gr-scalar-field-matter-model]]). Then:
 
 **Proof technique:** direct; apply the chain rule and evaluate the flat-space expressions.
 
-1.1 (Null gradient.) By [L3], $\partial_a\varphi=(f'(u),f'(u),0,0)$ in the identity chart. By [L1], $\partial^a\varphi\partial_a\varphi=g^{ab}\partial_a\varphi\partial_b\varphi=-(f')^2+(f')^2+0+0=0$: the gradient is null wherever $f'$ is defined, including at its zeros. [L1, L3, algebra]
+1.1 (Null or zero gradient.) By [L3], $\partial_a\varphi=(f'(u),f'(u),0,0)$ in the identity chart. By [L1], $\partial^a\varphi\partial_a\varphi=g^{ab}\partial_a\varphi\partial_b\varphi=-(f')^2+(f')^2+0+0=0$. Thus the metric dual of $d\varphi$ is null where $f'(u)\ne0$ and is the zero vector where $f'(u)=0$. [L1, L3, algebra]
 
 2.1 (Equation of motion.) Again by [L3], $\partial_0^2\varphi=f''(u)$ and $\partial_1^2\varphi=f''(u)$, while $\partial_2^2\varphi=\partial_3^2\varphi=0$; hence $\Box_g\varphi=-f''+f''=0$. Since $V\equiv0$, the scalar equation $\Box_g\varphi=V'(\varphi)=0$ holds. Using step 1.1 in the tensor formula of [L2], the metric bracket vanishes and $T_{ab}=K\partial_a\varphi\partial_b\varphi$. [step 1.1, L1, L2, L3, algebra]
 

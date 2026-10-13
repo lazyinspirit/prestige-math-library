@@ -95,9 +95,9 @@ sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015
         printing), Section 4.4.3, printed pages 104-105 (PDF pages 110-111):
-        generating functions of the four kinds, $p=\\partial F/\\partial q$,
-        $P=-\\partial F/\\partial Q$, and the time-dependent generating function
-        with the transformed Hamiltonian $K=H+\\partial F/\\partial t$"
+        first-kind relations $p=\\partial F/\\partial q$,
+        $P=-\\partial F/\\partial Q$, and second-kind relations
+        $p=\\partial F_2/\\partial q$, $Q=\\partial F_2/\\partial P$"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
     - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical
         Mechanics, second edition (MIT Press, 2014/2015), Sections 5.4-5.4.1:
@@ -107,9 +107,10 @@ sources:
         579/sicm_edition_2.zip"
     - title: "D. Cline, Variational Principles in Classical Mechanics (2nd edition,
         University of Rochester River Campus Libraries, open textbook, CC
-        BY-NC-SA 4.0), Section 15.3: generating functions of the first kind and
-        the transformation of Hamilton's equations"
-      url: "https://downloads.libretexts.org/api/v1/download/phys-9557/pdf"
+        BY-NC-SA 4.0), Section 15.3, equations 15.77-15.82: time-dependent
+        first-kind generating-function relations and the transformed
+        Hamiltonian $\\mathcal H=H+\\partial_tF_1$"
+      url: "https://phys.libretexts.org/Bookshelves/Classical_Mechanics/Variational_Principles_in_Classical_Mechanics_%28Cline%29/15%253A_Advanced_Hamiltonian_Mechanics/15.03%253A_Canonical_Transformations_in_Hamiltonian_Mechanics"
 verification:
   precheck: pass
 ---
@@ -124,8 +125,12 @@ coordinates of [[def-cm13-canonical-form]], the Hamiltonian fields of
 [[def-cm12-hamiltonian]] and [[pthm-cm12-mechanical-hyperregularity]]
 ([[def-cm03-potential-and-mechanical-energy]],
 [[post-cm02-force-superposition]], [[def-cm01-configuration]],
-[[def-cm01-units]]). Write $n':=3N$ and let $O_{q},O_{Q},O_{P}\subseteq
-Q$-coordinates and $\mathbb R^{n'}$ be as below. Then:
+[[def-cm01-units]]). Write $n':=3N$. Let $O_q,O_Q\subseteq Q$ be nonempty open
+Cartesian position-coordinate sets, and let $O_P\subseteq\mathbb R^{n'}$
+be a nonempty open momentum-coordinate set. In clause 2 require
+$S_P(q,P)\in O_Q$ for every $(q,P)\in O_q\times O_P$; only
+local branches with source in $O_q\times\mathbb R^{n'}$ and target in
+$O_Q\times\mathbb R^{n'}$ are called maps of the presentation. Then:
 
 1. **(first kind)** Let $S:O_{q}\times O_{Q}\to\mathbb R$ be of class $C^{3}$
    with $\det S_{qQ}(q,Q)\neq0$ everywhere
@@ -182,9 +187,7 @@ local statements, and no empirical content.
 
 ## Facts & Assumptions
 
-**Given:** The presentation with its Cartesian two-form and canonical charts,
-the generating-function data $S$, the generated maps $C$ resp. $C_{t}$, and
-the functions $p,P,K$ of the item.
+**Given:** The presentation with its Cartesian two-form and canonical charts, the generating-function data $S$, the generated maps $C$ resp. $C_{t}$, and the functions $p,P,K$ of the item.
 
 [F1] The presentation's two-form ([[def-cm13-two-form]], [[pthm-cm13-two-form-is-symplectic]], [[def-cm13-canonical-form]], [[def-cm13-canonical-map]]): on the Cartesian chart the two-form is $\omega=\sum_{a}dq^{a}\wedge dp_{a}$ with standard matrix $J$; a $C^{1}$ map between phase domains is canonical exactly when it satisfies the matrix identity, and then it preserves $\omega$.
 
@@ -200,7 +203,7 @@ the functions $p,P,K$ of the item.
 
 **Proof technique:** direct. Instantiate the generating-function theorems on the presentation's Cartesian chart for clauses 1-3, then carry the time-dependent Poincare-Cartan identity to the two Hamilton systems by the annihilation characterization.
 
-1.1 Clauses 1 and 2: in the first-kind case the relation map $\Psi(q,Q)=(q,S_q(q,Q))$ is $C^2$ and has invertible derivative by $\det S_{qQ}\ne0$; in the second-kind case use $\Psi(q,P)=(q,S_q(q,P))$ and $\det S_{qP}\ne0$. For either map, the inverse theorem gives a local $C^1$ inverse $g$ and $Dg(y)=[D\Psi(g(y))]^{-1}$. Since $D\Psi$ and $g$ are $C^1$, this derivative is $C^1$, because the cofactor-over-determinant formula makes matrix inversion $C^1$ on the invertible matrices; thus $g$ is $C^2$. The maps in the generating-function definitions are then compositions of $C^2$ maps, so the generated maps are $C^2$ local diffeomorphisms. With [F1] identifying the presentation's Cartesian chart with the standard phase domain and $n'=3N$, the canonical identity, matrix test, unit determinant and one-form identities follow from [F2]. [F1, F2, algebra]
+1.1 Clauses 1 and 2: in the first-kind case the relation map $\Psi(q,Q)=(q,S_q(q,Q))$ is $C^2$ and has invertible derivative by $\det S_{qQ}\ne0$; in the second-kind case use $\Psi(q,P)=(q,S_q(q,P))$ and $\det S_{qP}\ne0$. For either map, the inverse theorem gives a local $C^1$ inverse $g$ and $Dg(y)=[D\Psi(g(y))]^{-1}$. Since $D\Psi$ and $g$ are $C^1$, this derivative is $C^1$, because the cofactor-over-determinant formula makes matrix inversion $C^1$ on the invertible matrices; thus $g$ is $C^2$. The maps in the generating-function definitions are then compositions of $C^2$ maps, so the generated maps are $C^2$ local diffeomorphisms. The stated position containment puts the source and target of each branch inside the presentation's open phase domain. With [F1] identifying the presentation's Cartesian chart with the standard phase domain and $n'=3N$, the canonical identity, matrix test, unit determinant and one-form identities follow from [F2]. [F1, F2, algebra]
 
 1.2 Clause 3: let $F(z)=(q(z),Q(z))$ be the stated $(q,Q)$ projection. Since $C$ is $C^2$, $F$ is $C^2$, and its derivative is invertible at the base point by hypothesis. The inverse theorem gives a $C^1$ local inverse $G$; differentiating $F\circ G=\mathrm{id}$ gives $DG=(DF\circ G)^{-1}$. As $DF$ and $G$ are $C^1$, the right side is $C^1$ by the cofactor-over-determinant formula for matrix inversion, so $G$ is $C^2$. This supplies the $C^2$ inverse regularity needed in the proof of the local-converse proposition [F2]. Its remaining argument then yields a neighborhood and a $C^3$ first-kind generating function with $\det S_{qQ}\ne0$ whose generated map agrees with $C$, proving clause 3. [F2, algebra]
 
@@ -216,14 +219,6 @@ the functions $p,P,K$ of the item.
 
 ## Remarks
 
-- **The projection hypothesis is essential.** The first-kind representation
-  requires the invertibility of $Q\mapsto S_{q}(q,Q)$, i.e. of the $(q,Q)$
-  projection of the canonical map; without it only other kinds are available
-  locally. The companion page carries a point transformation whose
-  $(q,Q)$-projection is degenerate identically and which is nevertheless
-  generated in the second kind.
+- **The projection hypothesis is essential.** The first-kind representation requires the invertibility of $Q\mapsto S_{q}(q,Q)$, i.e. of the $(q,Q)$ projection of the canonical map; without it only other kinds are available locally. The companion page carries a point transformation whose $(q,Q)$-projection is degenerate identically and which is nevertheless generated in the second kind.
 
-- **No global generating function.** The theorem is local. A canonical map
-  of the presentation need not admit a globally defined generating function
-  even when it is symplectic; the obstruction is a cohomological one and is
-  described in [[rem-cm13-locality-topology]].
+- **No global generating function.** The theorem is local. A canonical map of the presentation need not admit a globally defined generating function even when it is symplectic; the obstruction is a cohomological one and is described in [[rem-cm13-locality-topology]].

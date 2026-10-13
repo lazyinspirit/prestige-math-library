@@ -37,7 +37,8 @@ verification:
 ## Definition
 
 This item assumes the axiom of countable choice $\mathrm{AC}_\omega$ through
-the manifold-product and tangent-bundle suppliers cited below
+the tangent-bundle convention of [[def-gr-smooth-lorentzian-objects]]
+clause (c); the product-smooth-structure supplier has no choice hypothesis
 ([[def-countable-choice]]); no further choice principle is used.
 
 **(a) Parameters.** Let $c>0$, $G_N>0$ and $m_*>0$ be the constants and mass

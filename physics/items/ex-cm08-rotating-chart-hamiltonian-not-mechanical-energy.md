@@ -42,7 +42,7 @@ proof_strategy: direct
 physical_scope: "A worked computation of the moving-chart energy bookkeeping on an explicit model: the one-label isotropic oscillator with potential U = k |x|^2 / 2, observed in a chart rotating uniformly about the third axis; the substituted Lagrangian, its Legendre data and its Hamiltonian are computed, the difference identity between the chart Hamiltonian and the inertial mechanical energy is verified as the pairing of the chart's angular velocity with the momentum, an explicit circular motion with k = m omega^2 is shown to have chart Hamiltonian zero and inertial mechanical energy m omega^2 r^2, and a numerical instance is evaluated. All values are model values of the declared idealization; the example reports no measurement and asserts no property of an apparatus."
 sources:
   references:
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-8 (PDF pages 26-27): the bead on a rotating ring with Hamiltonian H = mR^2(omega~dot^2 - omega^2 sin^2 theta)/2 - mgR cos theta, mechanical energy E = mR^2(omega~dot^2 + omega^2 sin^2 theta)/2 - mgR cos theta, and E - H = mR^2 omega^2 sin^2 theta while H is conserved"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-10 (PDF pages 25-28): the bead on a rotating ring with Hamiltonian H = mR^2(omega~dot^2 - omega^2 sin^2 theta)/2 - mgR cos theta, mechanical energy E = mR^2(omega~dot^2 + omega^2 sin^2 theta)/2 - mgR cos theta, and E - H = mR^2 omega^2 sin^2 theta while H is conserved"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, second edition (MIT Press, 2014/2015), Section 5.4.4: in rotating coordinates the Hamiltonians differ by the product of the angular momentum with the angular velocity of the coordinate system"
       url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
@@ -58,14 +58,19 @@ Work in the one-label force model of [[post-cm02-force-superposition]] with
 $N=1$, mass $m>0$, time window $I_{0}=\mathbb R$, configuration domain
 $Q=\mathbb R^{3}$, and adopt the potential
 
-$$U(x):=\tfrac{k}{2}\lvert x\rvert^{2},\qquad k>0,$$
+$$U(x):=\tfrac{k}{2}\lvert x\rvert^{2},\qquad k>0\ \text{with}\ [k]=\mu\tau^{-2},$$
 
 so that $F(t,x,v)=-\nabla U(x)=-kx$ and the model is a global potential model
 $d\equiv0$ of [[def-cm03-potential-and-mechanical-energy]] whose motions
 satisfy $mx''=-kx$ ([[def-cm02-newtonian-flow]]). Fix a rotation rate
-$\omega\ne0$ of dimension $\tau^{-1}$, let $\boldsymbol\omega:=\omega e_{3}$,
-and let $R(t)$ be the rotation about $e_{3}$ by the angle $\omega t$, so that
-$R(t)\in SO(3)$, $R'(t)z=\boldsymbol\omega\times R(t)z$
+$\omega\ne0$ of dimension $\tau^{-1}$ and let $\boldsymbol\omega:=\omega e_{3}$.
+Define
+
+$$R(t):=\begin{pmatrix}\cos(\omega t)&-\sin(\omega t)&0\\\sin(\omega t)&\cos(\omega t)&0\\0&0&1\end{pmatrix}.$$
+
+This matrix is the rotation about $e_{3}$ by angle $\omega t$; the identity
+$\sin^{2}(\omega t)+\cos^{2}(\omega t)=1$ gives $R(t)\in SO(3)$, and direct
+differentiation gives $R'(t)z=\boldsymbol\omega\times R(t)z$
 ([[def-cm-special-orthogonal-group]], [[lem-cm-so3-is-a-matrix-group]],
 [[def-cross-product-in-r3]]). Consider the time-dependent chart
 
@@ -87,7 +92,7 @@ Verify:
 $$H(t,q,p)=\frac{\lvert p\rvert^{2}}{2m}-p\cdot(\boldsymbol\omega\times q)+\frac{k}{2}\lvert q\rvert^{2}.$$
 
 2. **Difference from the inertial mechanical energy.** Along every $C^{2}$
-   curve $q:J\to\mathbb R^{3}$ on an interval $J\subseteq\mathbb R$, the
+   curve $q:J\to\mathbb R^{3}$ on an interval $J\subseteq\mathbb R$ with nonempty interior, the
    inertial mechanical energy
    $E_{\mathrm{in}}=\tfrac{m}{2}\lvert x'\rvert^{2}+\tfrac{k}{2}\lvert x\rvert^{2}$
    with $x=X(t,q)$ and the chart energy function
@@ -96,7 +101,7 @@ $$H(t,q,p)=\frac{\lvert p\rvert^{2}}{2m}-p\cdot(\boldsymbol\omega\times q)+\frac
    $\langle X_{t},\mathsf M x'\rangle=p\cdot(\boldsymbol\omega\times q)$, i.e.
    $E_{\mathrm{in}}=H+p\cdot(\boldsymbol\omega\times q)$ along solutions.
 3. **Explicit circular motion.** If $k=m\omega^{2}$, then
-   $x(t):=r\,R(t)e_{1}$ with $r>0$ is a motion of the model on $\mathbb R$, its
+   $x(t):=r\,R(t)e_{1}$ with $r>0$ of dimension $\ell$ is a motion of the model on $\mathbb R$, its
    chart description is the constant curve $q(t)=re_{1}$ with
    $v\equiv0$ and $p\equiv m\,\boldsymbol\omega\times(re_{1})$, and along it
    $H\equiv0$ while $E_{\mathrm{in}}\equiv m\omega^{2}r^{2}$; the substituted
@@ -123,13 +128,13 @@ reported.
 
 [F4] Conservation of the chart energy function ([[pthm-cm08-moving-chart-energy-function]] clause 3, [[prop-cm-hamiltonian-branch-identities]]): if $\mathcal L_{t}$ vanishes along a curve solving $E_{\mathcal L}=0$ on a hyperregular chart, then $e$ is constant along it, and $e$ equals the branch Hamiltonian along solutions.
 
-[F5] Rotations and trigonometry ([[def-cm-special-orthogonal-group]], [[lem-cm-so3-is-a-matrix-group]], [[def-cross-product-in-r3]], [[lem-cross-product-is-bilinear-alternating-and-orthogonal]], [[def-sine-and-cosine-by-power-series]], [[thm-sine-and-cosine-derivatives]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]], [[def-vector-valued-derivative-and-integral]], [[def-interval]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-jacobian-matrix-and-gradient]], [[def-cm01-units]], [[def-cm01-configuration]]): $R(t)\in SO(3)$ is $C^{\infty}$ with $R'(t)z=\boldsymbol\omega\times R(t)z$, $\lvert R(t)z\rvert=\lvert z\rvert$ and $R(t)e_{1}$ tracing the unit circle in the $(e_{1},e_{2})$-plane; the cross product is bilinear and alternating and $\boldsymbol\omega\times(\boldsymbol\omega\times q)=\boldsymbol\omega(\boldsymbol\omega\cdot q)-\lvert\boldsymbol\omega\rvert^{2}q$.
+[F5] Rotations and trigonometry ([[def-cm-special-orthogonal-group]], [[lem-cm-so3-is-a-matrix-group]], [[def-cross-product-in-r3]], [[lem-cross-product-is-bilinear-alternating-and-orthogonal]], [[def-sine-and-cosine-by-power-series]], [[thm-sine-and-cosine-derivatives]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]], [[def-vector-valued-derivative-and-integral]], [[def-interval]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-jacobian-matrix-and-gradient]], [[def-cm01-units]], [[def-cm01-configuration]]): from the displayed matrix and $\sin^{2}(\omega t)+\cos^{2}(\omega t)=1$ we have $R(t)^{\mathsf T}R(t)=I_{3}$ and $\det R(t)=1$, so $R(t)\in SO(3)$ and $\lvert R(t)z\rvert=\lvert z\rvert$. The matrix is $C^{\infty}$, and differentiating its entries gives $R'(t)z=\boldsymbol\omega\times R(t)z$; also $R(t)e_{1}=(\cos\omega t,\sin\omega t,0)$ traces the unit circle in the $(e_{1},e_{2})$-plane. The cross product is bilinear and alternating, and $\boldsymbol\omega\times(\boldsymbol\omega\times q)=\boldsymbol\omega(\boldsymbol\omega\cdot q)-\lvert\boldsymbol\omega\rvert^{2}q$.
 
 ## Verification
 
 **Proof technique:** direct; expand the substituted Lagrangian and its Legendre data, compare the chart Hamiltonian with the inertial mechanical energy on the explicit chart and motion, and evaluate the numerical instance.
 
-1.1 Clause 1: since $R(t)$ is orthogonal, $\lvert X_{t}+X_{q}v\rvert=\lvert R(t)(\boldsymbol\omega\times q+v)\rvert=\lvert v+\boldsymbol\omega\times q\rvert$, so the substituted Lagrangian is the displayed expression; expanding the square gives $\widetilde L=\tfrac{m}{2}\lvert v\rvert^{2}+m\,v\cdot(\boldsymbol\omega\times q)+\tfrac{m}{2}\lvert\boldsymbol\omega\times q\rvert^{2}-\tfrac{k}{2}\lvert q\rvert^{2}$, which is of mechanical type with $G=mI_{3}$, $A=m\,\boldsymbol\omega\times q$ and $V=\tfrac{k}{2}\lvert q\rvert^{2}-\tfrac{m}{2}\lvert\boldsymbol\omega\times q\rvert^{2}$; by [F3] it is hyperregular with $p=m(v+\boldsymbol\omega\times q)$ and Hamiltonian $$H=\frac{1}{2m}\bigl\lvert p-m(\boldsymbol\omega\times q)\bigr\rvert^{2}+\frac{k}{2}\lvert q\rvert^{2}-\frac{m}{2}\lvert\boldsymbol\omega\times q\rvert^{2}=\frac{\lvert p\rvert^{2}}{2m}-p\cdot(\boldsymbol\omega\times q)+\frac{k}{2}\lvert q\rvert^{2}.$$ [F2, F3, F5, algebra]
+1.1 Clause 1: by [F5], $R(t)\in SO(3)$ and preserves the Euclidean norm, so $\lvert X_{t}+X_{q}v\rvert=\lvert R(t)(\boldsymbol\omega\times q+v)\rvert=\lvert v+\boldsymbol\omega\times q\rvert$; hence the substituted Lagrangian is the displayed expression. Expanding the square gives $\widetilde L=\tfrac{m}{2}\lvert v\rvert^{2}+m\,v\cdot(\boldsymbol\omega\times q)+\tfrac{m}{2}\lvert\boldsymbol\omega\times q\rvert^{2}-\tfrac{k}{2}\lvert q\rvert^{2}$, which is of mechanical type with $G=mI_{3}$, $A=m\,\boldsymbol\omega\times q$ and $V=\tfrac{k}{2}\lvert q\rvert^{2}-\tfrac{m}{2}\lvert\boldsymbol\omega\times q\rvert^{2}$; by [F3] it is hyperregular with $p=m(v+\boldsymbol\omega\times q)$ and Hamiltonian $$H=\frac{1}{2m}\bigl\lvert p-m(\boldsymbol\omega\times q)\bigr\rvert^{2}+\frac{k}{2}\lvert q\rvert^{2}-\frac{m}{2}\lvert\boldsymbol\omega\times q\rvert^{2}=\frac{\lvert p\rvert^{2}}{2m}-p\cdot(\boldsymbol\omega\times q)+\frac{k}{2}\lvert q\rvert^{2}.$$ [F2, F3, F5, algebra]
 
 1.2 Clause 3, the circular motion is a motion: for $x(t)=rR(t)e_{1}$ one has $x'(t)=r\,\boldsymbol\omega\times R(t)e_{1}$ and $x''(t)=r\,\boldsymbol\omega\times(\boldsymbol\omega\times R(t)e_{1})=-r\lvert\boldsymbol\omega\rvert^{2}R(t)e_{1}=-\omega^{2}x(t)$ by [F5]; hence $mx''=-m\omega^{2}x=-kx$ exactly when $k=m\omega^{2}$, which is the hypothesis, so $x$ is a motion. [F1, F5, algebra]
 
@@ -143,19 +148,6 @@ reported.
 
 ## Remarks
 
-- **Comparison with the source picture.** The structure matches the
-  rotating-ring computation of the Likharev source, where the Hamiltonian and
-  the mechanical energy differ by an $\omega$-dependent term while the
-  Hamiltonian is the conserved one; here the difference is
-  $p\cdot(\boldsymbol\omega\times q)$, the exact general form of clause 2 of
-  [[pthm-cm08-moving-chart-energy-function]] in this chart. The chart
-  Hamiltonian is a conserved quantity of the chart equations; it is not a
-  measurement of the inertial mechanical energy, and the example attaches no
-  empirical meaning to its value.
+- **Comparison with the source picture.** The structure matches the rotating-ring computation of the Likharev source, where the Hamiltonian and the mechanical energy differ by an $\omega$-dependent term while the Hamiltonian is the conserved one; here the difference is $p\cdot(\boldsymbol\omega\times q)$, the exact general form of clause 2 of [[pthm-cm08-moving-chart-energy-function]] in this chart. The chart Hamiltonian is a conserved quantity of the chart equations; it is not a measurement of the inertial mechanical energy, and the example attaches no empirical meaning to its value.
 
-- **Consistency of the two conserved quantities.** For the circular motion both
-  $H=0$ and $E_{\mathrm{in}}=m\omega^{2}r^{2}$ are constant, as they must be,
-  and they differ; the difference $p\cdot(\boldsymbol\omega\times q)$ is
-  constant along this particular motion but is not a constant function on the
-  chart's state space, so no global additive constant reconciles the two
-  functions.
+- **Consistency of the two conserved quantities.** For the circular motion both $H=0$ and $E_{\mathrm{in}}=m\omega^{2}r^{2}$ are constant, as they must be, and they differ; the difference $p\cdot(\boldsymbol\omega\times q)$ is constant along this particular motion but is not a constant function on the chart's state space, so no global additive constant reconciles the two functions.

@@ -10,9 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-metric-volume-form-and-current-flux, def-gr-smooth-lorentzian-objects, def-christoffel-symbols-of-an-affine-connection, lem-gr-connection-conditions-in-chart-components, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-inverse-metric-and-musical-isomorphisms, lem-cm-determinant-derivative-along-a-matrix-curve, lem-lorentz-form-has-orthonormal-basis, def-smooth-vector-field-as-a-tangent-bundle-section]
+deps: [thm-determinant-multiplicative, lem-gr-covariant-two-tensor-transformation-law, def-gr-smooth-lorentzian-objects, def-christoffel-symbols-of-an-affine-connection, lem-gr-connection-conditions-in-chart-components, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-inverse-metric-and-musical-isomorphisms, lem-cm-determinant-derivative-along-a-matrix-curve, lem-lorentz-form-has-orthonormal-basis, def-smooth-vector-field-as-a-tangent-bundle-section]
 dependency_roles:
-  def-gr-metric-volume-form-and-current-flux: mathematical-premise
+  thm-determinant-multiplicative: mathematical-premise
+  lem-gr-covariant-two-tensor-transformation-law: mathematical-premise
   def-gr-smooth-lorentzian-objects: mathematical-premise
   def-christoffel-symbols-of-an-affine-connection: mathematical-premise
   lem-gr-connection-conditions-in-chart-components: mathematical-premise
@@ -40,8 +41,9 @@ metric-selected connection $\nabla$
 ([[def-gr-smooth-lorentzian-objects]],
 [[def-christoffel-symbols-of-an-affine-connection]],
 [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]), let $(U,x)$ be a
-smooth chart, and let $w=\sqrt{|\det(g_{ab})|}$ be the metric density of
-[[def-gr-metric-volume-form-and-current-flux]] clause (a) on $U$. Write
+smooth chart, and define the local **metric density** by
+$w:=\sqrt{|\det(g_{ab})|}$ on $U$, using the matrix of metric components
+in this chart. This definition requires no orientation or volume form. Write
 $g^{ab}$ for the inverse-metric components
 ([[def-gr-inverse-metric-and-musical-isomorphisms]]) and
 $\Gamma^{a}{}_{bc}$ for the Christoffel symbols of $\nabla$ in the chart.
@@ -68,11 +70,11 @@ right-hand side is independent of the chart, as the left-hand side is.
 
 ## Facts & Assumptions
 
-**Given:** A time-oriented smooth Lorentzian four-manifold $(M,g,N)$ with metric-selected connection $\nabla$, a smooth chart $(U,x)$, the density $w$ of [[def-gr-metric-volume-form-and-current-flux]], and a smooth vector field $J$.
+**Given:** A time-oriented smooth Lorentzian four-manifold $(M,g,N)$ with metric-selected connection $\nabla$, a smooth chart $(U,x)$, the locally defined density $w=\sqrt{|\det(g_{ab})|}$, and a smooth vector field $J$.
 
 [L1] In a chart the Christoffel symbols are $\Gamma^{a}{}_{bc}=\tfrac12g^{ad}(\partial_bg_{dc}+\partial_cg_{bd}-\partial_dg_{bc})$ and satisfy $\Gamma^{a}{}_{bc}=\Gamma^{a}{}_{cb}$ ([[def-christoffel-symbols-of-an-affine-connection]], [[lem-gr-connection-conditions-in-chart-components]], [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]).
 
-[L2] The extension of $\nabla$ to tensor fields has coordinate components $J^{a}{}_{;c}=\partial_cJ^{a}+\Gamma^{a}{}_{dc}J^{d}$ for a vector field $J$, and $\nabla g=0$, $\nabla g^{-1}=0$; the divergence is $\nabla_aJ^a=g^{ab}J^{a}{}_{;b}$ ([[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]] clause (c), [[def-gr-inverse-metric-and-musical-isomorphisms]]).
+[L2] The extension of $\nabla$ to tensor fields has coordinate components $J^{a}{}_{;c}=\partial_cJ^{a}+\Gamma^{a}{}_{dc}J^{d}$ for a vector field $J$, and $\nabla g=0$, $\nabla g^{-1}=0$; the divergence is $\nabla_aJ^a=J^{a}{}_{;a}=g^{ab}J_{a;b}$ ([[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]] clause (c), [[def-gr-inverse-metric-and-musical-isomorphisms]]).
 
 [L3] The components $g^{ab}$ of the inverse metric are smooth and satisfy $g^{ac}g_{cb}=\delta^{a}{}_{b}$ ([[def-gr-inverse-metric-and-musical-isomorphisms]]).
 
@@ -94,7 +96,6 @@ right-hand side is independent of the chart, as the left-hand side is.
 
 ## Remarks
 
-- **Density reading.** The function $w$ is not a scalar: under a change of chart it is multiplied by $|\det D\varphi|$, as recorded in
-  [[lem-gr-metric-volume-form-patching-and-face-normal]] clause (a). Claim (c) shows that $wJ^a$ are the components of a vector density whose coordinate divergence is chart-independent; this is the metric-density form of the divergence theorem used in [[thm-gr-density-divergence-and-finite-chain-flux]].
+- **Density reading.** The function $w$ is not a scalar: for a change from chart $x$ to chart $y$, put $A=D(x\circ y^{-1})$ on the overlap. The metric transformation law gives $g_y=A^{\mathsf T}g_xA$ and hence $w_y=|\det A|w_x$ ([[lem-gr-covariant-two-tensor-transformation-law]], [[thm-determinant-multiplicative]]). Writing $J_x^a$ and $J_y^a$ for the components of $J$ in the two charts at the same point, the quantities $wJ^a$ form a **vector density**, meaning that $w_yJ_y^a=|\det A|(A^{-1})^a{}_b w_xJ_x^b$. By claim (c), $\partial_{y^a}(w_yJ_y^a)=w_y\nabla_aJ^a=|\det A|\,\partial_{x^b}(w_xJ_x^b)$. Thus this coordinate divergence is a **scalar density**, meaning a coefficient transforming by $|\det A|$, rather than a chart-independent scalar; $w^{-1}\partial_a(wJ^a)$ is the chart-independent scalar. In oriented charts, the invariant top form represented by $\partial_a(wJ^a)\,dx^0\wedge\cdots\wedge dx^3$ is the expression used in [[thm-gr-density-divergence-and-finite-chain-flux]].
 
 - **Sign conventions.** No orientation is used in this lemma; claims (a)-(c) hold on every chart of every time-oriented smooth Lorentzian four-manifold.

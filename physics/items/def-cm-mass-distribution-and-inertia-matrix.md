@@ -6,12 +6,15 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 0
-deps: [def-borel-sigma-algebra, def-measure, def-measure-space, def-metric-ball, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, def-euclidean-inner-product, def-matrix-space, def-matrix-product-and-identity-matrix, def-countable-choice]
+deps: [def-borel-sigma-algebra, def-measure, def-measure-space, def-metric-ball, def-metric-topology, lem-metrics-on-rn, thm-metric-open-set-algebra, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, def-euclidean-inner-product, def-matrix-space, def-matrix-product-and-identity-matrix, def-countable-choice]
 dependency_roles:
   def-borel-sigma-algebra: mathematical-premise
   def-measure: mathematical-premise
   def-measure-space: mathematical-premise
   def-metric-ball: mathematical-premise
+  def-metric-topology: mathematical-premise
+  lem-metrics-on-rn: mathematical-premise
+  thm-metric-open-set-algebra: mathematical-premise
   def-integral-over-a-measurable-set: mathematical-premise
   def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
   def-euclidean-inner-product: mathematical-premise

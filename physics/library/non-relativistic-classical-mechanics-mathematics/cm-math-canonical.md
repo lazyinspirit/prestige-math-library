@@ -110,7 +110,10 @@ proof of the action-angle theorem for a compact connected regular fibre of a
 completely integrable system over a saturated proper submersion neighbourhood,
 consuming the published commuting-flow, lattice, torus, Cartan, submersion and
 inverse-function suppliers and carrying the countable-choice assumption exactly
-where the published theorem does. [[cor-cm-action-angle-radian-scaling]]
+where the published theorem does. The local construction supplies its
+regular-level facts, the pullback naturality identity, and the smooth descent
+of fibre-constant functions used in the action-angle argument.
+[[cor-cm-action-angle-radian-scaling]]
 converts between period-one and radian conventions, and
 [[rem-cm-scope-of-complete-integrability-and-action-angle]] records the
 hypotheses, the excluded singular and noncompact cases, and the published proof

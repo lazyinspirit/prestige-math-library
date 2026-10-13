@@ -9,6 +9,7 @@ origin: pipeline
 domain: mathematics
 dependency_level: 5
 deps:
+  - def-countable-choice
   - def-cm-rigid-placement-and-body-angular-velocity
   - def-cm-mass-distribution-and-inertia-matrix
   - lem-cm-inertia-matrix-properties
@@ -24,8 +25,10 @@ deps:
   - def-matrix-product-and-identity-matrix
   - def-euclidean-inner-product
   - def-inner-product-space
+  - thm-algebra-of-derivatives
   - cor-zero-derivative-implies-constant
 dependency_roles:
+  def-countable-choice: mathematical-premise
   def-cm-rigid-placement-and-body-angular-velocity: mathematical-premise
   def-cm-mass-distribution-and-inertia-matrix: mathematical-premise
   lem-cm-inertia-matrix-properties: mathematical-premise
@@ -41,6 +44,7 @@ dependency_roles:
   def-matrix-product-and-identity-matrix: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
   def-inner-product-space: mathematical-premise
+  thm-algebra-of-derivatives: mathematical-premise
   cor-zero-derivative-implies-constant: mathematical-premise
 proof_strategy: direct
 provenance:
@@ -66,7 +70,7 @@ sources:
 
 ## Statement
 
-Let $J\subseteq\mathbb R$ be an interval with at least two points ([[def-interval]]), let $\nu$ be a centred mass distribution on $\mathbb R^3$ that is not supported on any line through the origin, with inertia matrix $I$ ([[def-cm-mass-distribution-and-inertia-matrix]]), let $c:J\to\mathbb R^3$ be differentiable and let $R:J\to SO(3)$ be twice differentiable, and let $x(t,\rho)=c(t)+R(t)\rho$ be the rigid placement with body angular velocity $\omega$ ([[def-cm-rigid-placement-and-body-angular-velocity]]). Write $l:=I\omega:J\to\mathbb R^3$; by [[cor-cm-principal-axes-of-the-inertia-matrix]] the inertia form is positive definite and $I$ is invertible.
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]), used through the inertia suppliers to ensure finiteness of the integrals. Let $J\subseteq\mathbb R$ be an interval with at least two points ([[def-interval]]), let $\nu$ be a centred mass distribution on $\mathbb R^3$ that is not supported on any line through the origin, with inertia matrix $I$ ([[def-cm-mass-distribution-and-inertia-matrix]]), let $c:J\to\mathbb R^3$ be differentiable and let $R:J\to SO(3)$ be twice differentiable, and let $x(t,\rho)=c(t)+R(t)\rho$ be the rigid placement with body angular velocity $\omega$ ([[def-cm-rigid-placement-and-body-angular-velocity]]). Write $l:=I\omega:J\to\mathbb R^3$; by [[cor-cm-principal-axes-of-the-inertia-matrix]] the inertia form is positive definite and $I$ is invertible.
 
 Adopt the **balance hypothesis** (B): there is a map $\tau:J\to\mathbb R^3$ such that the curve $t\mapsto R(t)l(t)$ is differentiable and
 $$(Rl)'(t)=\tau(t)\qquad(t\in J).$$
@@ -80,7 +84,7 @@ Then:
 
 **Given:** The data of the statement, the body angular velocity $\omega$ with $R^{\mathsf T}R'=[\omega]_\times$, the angular momentum $l=I\omega$, and a map $\tau$ satisfying the balance hypothesis (B).
 
-[L1] The body angular velocity satisfies $R^{\mathsf T}R'=[\omega]_\times$, so $R'=R[\omega]_\times$ and $R'(t)R(t)^{\mathsf T}=[R\omega]_\times$; it is differentiable because it is a linear expression in the entries of $R$ and $R'$ [[def-cm-rigid-placement-and-body-angular-velocity]], [[lem-cm-skew-matrix-cross-product-correspondence]].
+[L1] The body angular velocity satisfies $R^{\mathsf T}R'=[\omega]_\times$, so $R'=R[\omega]_\times$ and $R'(t)R(t)^{\mathsf T}=[R\omega]_\times$; it is differentiable because it is a finite sum of products of entries of $R$ and $R'$ [[def-cm-rigid-placement-and-body-angular-velocity]], [[lem-cm-skew-matrix-cross-product-correspondence]].
 
 [L2] $R\in SO(3)$ satisfies $R^{-1}=R^{\mathsf T}$ and $R^{\mathsf T}R=RR^{\mathsf T}=I_3$ [[def-cm-special-orthogonal-group]], [[lem-cm-skew-matrix-cross-product-correspondence]].
 
@@ -92,17 +96,19 @@ Then:
 
 [L6] The Euclidean inner product is bilinear and symmetric and $\langle u,u\rangle=\lVert u\rVert_2^2$ [[def-euclidean-inner-product]], [[def-inner-product-space]].
 
+[L7] The scalar product rule differentiates finite sums of products of differentiable real functions. In an orthonormal eigenbasis of the symmetric positive-definite $I$, $I^{-1}$ has diagonal entries $1/I_j$ and is therefore symmetric ([[thm-algebra-of-derivatives]], [[cor-cm-principal-axes-of-the-inertia-matrix]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 By [L1] the angular velocity $\omega$ is differentiable, hence so is $l=I\omega$; the product $Rl$ satisfies $(Rl)'=R'l+Rl'$ by [L3], and $R'l=R[\omega]_\times l=R(\omega\times l)$ by [L1] and [L3]. [given, L1, L3]
 
-2.1 By the balance hypothesis (B) and step 1.1, $\tau=R(\omega\times l+l')$. Multiplying by $R^{\mathsf T}$ and using [L2] and linearity of matrix-vector multiplication gives $R^{\mathsf T}\tau=\omega\times l+l'$. Since $l=I\omega$ with $I$ a constant matrix, $l'=I\omega'$, and $\omega\times l=\omega\times I\omega$; therefore $I\omega'+\omega\times I\omega=R^{\mathsf T}\tau$, which is clause 1. [step 1.1, given, L2, L3, algebra]
+2.1 By the balance hypothesis (B) and step 1.1, $\tau=R(\omega\times l+l')$. Multiplying by $R^{\mathsf T}$ and using [L2] and linearity of matrix-vector multiplication gives $R^{\mathsf T}\tau=\omega\times l+l'$. Since $l=I\omega$ with $I$ a constant matrix, $l'=I\omega'$ by the finite-sum and scalar rules of [L7], and $\omega\times l=\omega\times I\omega$; therefore $I\omega'+\omega\times I\omega=R^{\mathsf T}\tau$, which is clause 1. [step 1.1, given, L2, L3, L7, algebra]
 
 3.1 Assume $\tau=0$. Then step 2.1 gives $I\omega'=-\omega\times I\omega$; multiplying by $I^{-1}$ from [L4] gives $\omega'=-I^{-1}(\omega\times I\omega)$, hence $l'=I\omega'=-(\omega\times I\omega)=(I\omega)\times\omega=l\times(I^{-1}l)$, using antisymmetry of the cross product [L5] and $I^{-1}l=\omega$ [L4]. This is the first part of clause 2. [step 2.1, given, L4, L5, algebra]
 
-4.1 The two functions of clause 2 are constant: their derivatives are $\frac{d}{dt}\langle l,l\rangle=2\langle l',l\rangle=2\langle l\times(I^{-1}l),l\rangle$ and $\frac{d}{dt}\tfrac12\langle l,I^{-1}l\rangle=\langle l',I^{-1}l\rangle=\langle l\times(I^{-1}l),I^{-1}l\rangle$; both inner products vanish because a cross product is orthogonal to each of its factors [L5], and $\frac{d}{dt}\tfrac12\langle l,I^{-1}l\rangle=\frac{d}{dt}\tfrac12\omega^{\mathsf T}I\omega$ because $I^{-1}l=\omega$ and $I$ is symmetric [L4], [L6]. These functions are continuous on the solution interval $J$ and differentiable at every interior point, so their zero derivatives make them constant by [[cor-zero-derivative-implies-constant]]. [step 3.1, given, L4, L5, L6, algebra]
+4.1 The two functions of clause 2 are constant: the product rule and symmetry of $I^{-1}$ in [L7] give $\frac{d}{dt}\langle l,l\rangle=2\langle l',l\rangle=2\langle l\times(I^{-1}l),l\rangle$ and $\frac{d}{dt}\tfrac12\langle l,I^{-1}l\rangle=\langle l',I^{-1}l\rangle=\langle l\times(I^{-1}l),I^{-1}l\rangle$. Both inner products vanish because a cross product is orthogonal to each of its factors [L5]. Also $\frac{d}{dt}\tfrac12\langle l,I^{-1}l\rangle=\frac{d}{dt}\tfrac12\omega^{\mathsf T}I\omega$ because $I^{-1}l=\omega$ and $I$ is symmetric [L4], [L6]. These functions are continuous on the solution interval $J$ and differentiable at every interior point, so their zero derivatives make them constant by [[cor-zero-derivative-implies-constant]]. [step 3.1, given, L4, L5, L6, L7, algebra]
 
 5.1 For the eigenbasis, $l=\sum_jl_je_j$ gives $I^{-1}l=\sum_j(l_j/I_j)e_j$ by [L4]; by orthonormality $\langle l,l\rangle=\sum_jl_j^2$ and $\tfrac12\langle l,I^{-1}l\rangle=\sum_jl_j^2/(2I_j)$, and these are constant by step 4.1. [step 4.1, given, L4, L6, algebra]
 

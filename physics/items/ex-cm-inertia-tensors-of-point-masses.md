@@ -6,8 +6,12 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 4
-deps: [def-cm-mass-distribution-and-inertia-matrix, lem-cm-mass-moments-are-finite, def-countable-choice, lem-cm-inertia-matrix-properties, cor-cm-principal-axes-of-the-inertia-matrix, def-dirac-measure, prop-dirac-measure-is-a-probability-measure, thm-nonnegative-weighted-sums-of-measures, def-nonnegative-weighted-sum-of-measures, def-nonnegative-lebesgue-integral, def-integral-of-a-nonnegative-simple-function, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-linearity-of-the-lebesgue-integral-on-l-one, def-euclidean-inner-product, def-matrix-space, def-matrix-product-and-identity-matrix, thm-cross-product-norm-is-the-two-vector-gram-determinant, def-cross-product-in-r3, lem-finite-sum-laws, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-addition-formulas, cor-trigonometric-parity-and-pythagorean-identity]
+deps: [def-pi-via-first-positive-cosine-zero, thm-quarter-turn-values-and-shift-formulas, cor-pi-is-the-first-positive-sine-zero, thm-sine-cosine-signs-monotonicity-and-ranges, def-cm-mass-distribution-and-inertia-matrix, lem-cm-mass-moments-are-finite, def-countable-choice, lem-cm-inertia-matrix-properties, cor-cm-principal-axes-of-the-inertia-matrix, def-dirac-measure, prop-dirac-measure-is-a-probability-measure, thm-nonnegative-weighted-sums-of-measures, def-nonnegative-weighted-sum-of-measures, def-nonnegative-lebesgue-integral, def-nonnegative-simple-measurable-function, def-integral-of-a-nonnegative-simple-function, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-linearity-of-the-lebesgue-integral-on-l-one, def-euclidean-inner-product, def-matrix-space, def-matrix-product-and-identity-matrix, thm-cross-product-norm-is-the-two-vector-gram-determinant, def-cross-product-in-r3, lem-finite-sum-laws, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-addition-formulas, cor-trigonometric-parity-and-pythagorean-identity]
 dependency_roles:
+  def-pi-via-first-positive-cosine-zero: mathematical-premise
+  thm-quarter-turn-values-and-shift-formulas: mathematical-premise
+  cor-pi-is-the-first-positive-sine-zero: mathematical-premise
+  thm-sine-cosine-signs-monotonicity-and-ranges: mathematical-premise
   def-cm-mass-distribution-and-inertia-matrix: mathematical-premise
   lem-cm-mass-moments-are-finite: mathematical-premise
   def-countable-choice: mathematical-premise
@@ -18,6 +22,7 @@ dependency_roles:
   thm-nonnegative-weighted-sums-of-measures: mathematical-premise
   def-nonnegative-weighted-sum-of-measures: mathematical-premise
   def-nonnegative-lebesgue-integral: mathematical-premise
+  def-nonnegative-simple-measurable-function: mathematical-premise
   def-integral-of-a-nonnegative-simple-function: mathematical-premise
   def-integral-over-a-measurable-set: mathematical-premise
   def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
@@ -35,7 +40,7 @@ dependency_roles:
 proof_strategy: direct
 provenance:
   statement: ai-generated
-  proof: ai-generated
+  proof: ai-altered
 generation:
   role: example
 sources:
@@ -62,13 +67,13 @@ Throughout, the ambient data are the Euclidean inner product and cross product o
 
 [L1] $\nu$ is a measure, $\nu(E)=\sum_{k=1}^nc_k\delta_{x_k}(E)$ for every measurable $E$, and $\nu(\{x_k\})=c_k$; the inertia matrix is $I_{jk}=\int(\lVert\rho\rVert_2^2\delta_{jk}-\rho_j\rho_k)\,d\nu$ [[thm-nonnegative-weighted-sums-of-measures]], [[def-nonnegative-weighted-sum-of-measures]], [[def-dirac-measure]], [[prop-dirac-measure-is-a-probability-measure]], [[def-cm-mass-distribution-and-inertia-matrix]].
 
-[L2] For a nonnegative measurable $f$ one has $\int f\,d\nu=\sum_kc_kf(x_k)$; for a real measurable $f$ that is bounded on the finite set $\{x_1,\dots,x_n\}$ and vanishes outside a bounded set, the same identity holds with $f=f^+-f^-$ and linearity of the integral [[def-nonnegative-lebesgue-integral]], [[def-integral-of-a-nonnegative-simple-function]], [[def-integral-over-a-measurable-set]], [[def-integrable-real-and-complex-functions-and-their-integrals]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]].
+[L2] For a finite-valued nonnegative measurable $f$ one has $\int f\,d\nu=\sum_kc_kf(x_k)$; for a real measurable $f$ that is bounded on the finite set $\{x_1,\dots,x_n\}$ and vanishes outside a bounded set, the same identity holds with $f=f^+-f^-$ and linearity of the integral [[def-nonnegative-lebesgue-integral]], [[def-nonnegative-simple-measurable-function]], [[def-integral-of-a-nonnegative-simple-function]], [[def-integral-over-a-measurable-set]], [[def-integrable-real-and-complex-functions-and-their-integrals]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]], [[prop-order-and-scalar-rules-for-the-nonnegative-integral]].
 
 [L3] $\omega^{\mathsf T}I\omega=\int\lVert\omega\times\rho\rVert_2^2\,d\nu$, and $I$ is positive definite exactly when $\nu(\mathbb R^3\setminus\mathbb R\omega)>0$ for every $\omega\ne0$; the eigenvalues of $I$ are its principal moments [[lem-cm-inertia-matrix-properties]], [[cor-cm-principal-axes-of-the-inertia-matrix]].
 
 [L4] $\lVert u\times v\rVert_2^2=\lVert u\rVert_2^2\lVert v\rVert_2^2-\langle u,v\rangle^2$ [[thm-cross-product-norm-is-the-two-vector-gram-determinant]], [[def-euclidean-inner-product]].
 
-[L5] Finite sums are additive and distribute over scalar multiples; $\cos^2+\sin^2=1$, and $\sum_{k=0}^{2}\cos(2\pi k/3)=\sum_{k=0}^{2}\sin(2\pi k/3)=0$, $\sum_{k=0}^{2}\cos^2(2\pi k/3)=\sum_{k=0}^{2}\sin^2(2\pi k/3)=\tfrac32$, $\sum_k\cos(2\pi k/3)\sin(2\pi k/3)=0$ [[lem-finite-sum-laws]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-and-cosine-addition-formulas]], [[def-sine-and-cosine-by-power-series]].
+[L5] Here $\pi$ is twice the smallest positive cosine zero ([[def-pi-via-first-positive-cosine-zero]]). The quarter-turn values, addition formulas and strict decrease of cosine on $[0,\pi]$ give $\cos(\pi/3)=1/2$: writing $c=\cos(\pi/3)$, the triple-angle formula gives $4c^3-3c=-1$, or $(c+1)(2c-1)^2=0$, and $c>-1$. Positivity of sine on $(0,\pi)$ and the Pythagorean identity give $\sin(\pi/3)=\sqrt3/2$; the addition and shift formulas therefore give the points $(1,0)$, $(-1/2,\sqrt3/2)$, $(-1/2,-\sqrt3/2)$ ([[thm-quarter-turn-values-and-shift-formulas]], [[cor-pi-is-the-first-positive-sine-zero]], [[thm-sine-cosine-signs-monotonicity-and-ranges]]). Finite sums are additive and distribute over scalar multiples; $\cos^2+\sin^2=1$, and $\sum_{k=0}^{2}\cos(2\pi k/3)=\sum_{k=0}^{2}\sin(2\pi k/3)=0$, $\sum_{k=0}^{2}\cos^2(2\pi k/3)=\sum_{k=0}^{2}\sin^2(2\pi k/3)=\tfrac32$, $\sum_k\cos(2\pi k/3)\sin(2\pi k/3)=0$ [[lem-finite-sum-laws]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-and-cosine-addition-formulas]], [[def-sine-and-cosine-by-power-series]].
 
 [L6] The matrices $\mathrm{diag}(a,b,c)$ act by scaling components; $\rho\rho^{\mathsf T}$ has entries $\rho_i\rho_j$ [[def-matrix-product-and-identity-matrix]], [[def-matrix-space]].
 

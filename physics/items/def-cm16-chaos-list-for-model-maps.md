@@ -25,9 +25,11 @@ provenance:
 physical_scope: "The chaos vocabulary of the page, applied to stroboscopic maps of periodic models, Poincare return maps, and time-one maps of autonomous models when restricted to invariant domains: a continuous map of a metric space is chaotic in the stated sense when it is topologically mixing, has dense periodic points and has sensitive dependence on initial conditions with a positive constant, with all four clauses stated exactly. The item fixes one precise list among several used in the literature, requires an invariant set and a metric relative to which the properties are stated, and records that an invertible linear coordinate rescaling preserves the list. It asserts no measure-theoretic property, no entropy or dimension and no empirical claim."
 sources:
   references:
-    - title: "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3 and §7.4: sensitivity, mixing and the explicit warning that plots and numerical portraits are not proofs of chaos"
-      url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
-    - title: "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 7 pp. 143-195: the requirement of a chosen precise definition of chaos and the distinctness of sensitivity, mixing and positive exponents"
+    - title: "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3 'Homoclinic Tangle': qualitative tangle and divergence discussion, not the four-clause definition adopted here"
+      url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip/chapter004.html"
+    - title: "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., Chapter 3 opening epigraph: numerical experiments do not prove theorems"
+      url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip/chapter003.html"
+    - title: "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), §7.5 pp. 182-188: nonlinear discrete maps as qualitative motivation; the exact mixing, periodic-point and sensitivity predicates are supplied by the local mathematical definition"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
     - title: "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), Chapter 9 'Chaos': qualitative chaos discussion retained here only as motivation for the precise list"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"

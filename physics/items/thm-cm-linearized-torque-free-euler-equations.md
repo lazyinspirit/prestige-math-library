@@ -6,10 +6,13 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 6
-deps: [thm-cm-euler-equations-and-torque-free-invariants, cor-cm-principal-axes-of-the-inertia-matrix, def-total-derivative-in-euclidean-space, thm-picard-lindelof-local-existence-and-uniqueness, def-locally-lipschitz-in-the-state-variable, def-first-order-ode-initial-value-problem-and-solution, def-cross-product-in-r3, thm-cross-product-norm-is-the-two-vector-gram-determinant, thm-cauchy-schwarz-and-the-euclidean-norm, thm-algebra-of-derivatives, thm-chain-rule, thm-sine-and-cosine-derivatives, thm-hyperbolic-identities-and-derivatives, def-hyperbolic-functions, thm-sine-cosine-signs-monotonicity-and-ranges, cor-exponential-is-a-bijection-onto-positive-reals, thm-exponential-is-strictly-increasing, def-matrix-product-and-identity-matrix, def-euclidean-inner-product, def-inner-product-space, def-derivative, def-interval]
+deps: [def-cm-equilibrium-and-lyapunov-stability, thm-cm-euler-equations-and-torque-free-invariants, def-linear-map, def-linear-isomorphism-and-invertible-linear-map, lem-standard-basis-of-f-n, def-total-derivative-in-euclidean-space, thm-picard-lindelof-local-existence-and-uniqueness, def-locally-lipschitz-in-the-state-variable, def-first-order-ode-initial-value-problem-and-solution, def-cross-product-in-r3, thm-cross-product-norm-is-the-two-vector-gram-determinant, thm-cauchy-schwarz-and-the-euclidean-norm, thm-algebra-of-derivatives, thm-chain-rule, thm-sine-and-cosine-derivatives, thm-hyperbolic-identities-and-derivatives, def-hyperbolic-functions, thm-sine-cosine-signs-monotonicity-and-ranges, cor-exponential-is-a-bijection-onto-positive-reals, thm-exponential-is-strictly-increasing, def-matrix-product-and-identity-matrix, def-euclidean-inner-product, def-inner-product-space, def-derivative, def-interval]
 dependency_roles:
+  def-cm-equilibrium-and-lyapunov-stability: mathematical-premise
   thm-cm-euler-equations-and-torque-free-invariants: mathematical-premise
-  cor-cm-principal-axes-of-the-inertia-matrix: mathematical-premise
+  def-linear-map: mathematical-premise
+  def-linear-isomorphism-and-invertible-linear-map: mathematical-premise
+  lem-standard-basis-of-f-n: mathematical-premise
   def-total-derivative-in-euclidean-space: mathematical-premise
   thm-picard-lindelof-local-existence-and-uniqueness: mathematical-premise
   def-locally-lipschitz-in-the-state-variable: mathematical-premise
@@ -44,9 +47,9 @@ sources:
 
 ## Statement
 
-Let $I_1,I_2,I_3>0$ be pairwise distinct, let $I:\mathbb R^3\to\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis, and let
-$$F(\omega):=-I^{-1}\bigl(\omega\times I\omega\bigr),\qquad \omega\in\mathbb R^3,$$
-be the torque-free Euler field in angular-velocity variables ([[thm-cm-euler-equations-and-torque-free-invariants]]). Let $\Omega\ne0$. Then:
+Let $I_1,I_2,I_3>0$ be pairwise distinct, let $I:\mathbb R^3\to\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis, and let $I^{-1}$ denote its inverse, given by $I^{-1}e_j=I_j^{-1}e_j$. Define the formal torque-free Euler vector field
+$$F(\omega):=-I^{-1}\bigl(\omega\times I\omega\bigr),\qquad \omega\in\mathbb R^3.$$
+When $I$ is an actual rigid-body inertia map written in a principal basis, this is the angular-velocity vector field obtained from [[thm-cm-euler-equations-and-torque-free-invariants]]. Here the positive diagonal entries are otherwise arbitrary; no realization by a mass distribution is assumed. Let $\Omega\ne0$. Then:
 
 1. $F(\Omega e_3)=0$, and for every $\delta\in\mathbb R^3$ $$F(\Omega e_3+\delta)=A\delta+R(\delta),\qquad (A\delta)_1=\frac{\Omega(I_2-I_3)}{I_1}\delta_2,\quad (A\delta)_2=\frac{\Omega(I_3-I_1)}{I_2}\delta_1,\quad (A\delta)_3=0,$$ where $\lVert R(\delta)\rVert_2\le C\lVert\delta\rVert_2^2$ for the explicit constant $C:=\lVert I^{-1}\rVert_F\lVert I\rVert_F$ and $\lVert M\rVert_F:=\bigl(\sum_{j,k}M_{jk}^2\bigr)^{1/2}$; consequently $A$ is the total derivative of $F$ at $\Omega e_3$ ([[def-total-derivative-in-euclidean-space]]).
 2. Every solution of the linear system $\delta'=A\delta$ on $\mathbb R$ has $\delta_3$ constant, and with $$\lambda:=\frac{\Omega^2(I_2-I_3)(I_3-I_1)}{I_1I_2}\ne0$$ the pair $(\delta_1,\delta_2)$ is determined by its initial value as follows:
@@ -58,7 +61,7 @@ be the torque-free Euler field in angular-velocity variables ([[thm-cm-euler-equ
 
 **Given:** Pairwise distinct positive reals $I_1,I_2,I_3$, the diagonal map $I$, the field $F(\omega)=-I^{-1}(\omega\times I\omega)$ and a real $\Omega\ne0$.
 
-[L1] The inverse $I^{-1}$ exists with $I^{-1}e_j=I_j^{-1}e_j$; the cross product is bilinear with coordinate formula $(u\times v)_1=u_2v_3-u_3v_2$ and cyclic analogues, and $\lVert u\times v\rVert_2\le\lVert u\rVert_2\lVert v\rVert_2$ [[cor-cm-principal-axes-of-the-inertia-matrix]], [[def-cross-product-in-r3]], [[thm-cross-product-norm-is-the-two-vector-gram-determinant]].
+[L1] Every $x\in\mathbb R^3$ has a unique expansion $x=\sum_{j=1}^3x_je_j$ by the standard-basis result ([[lem-standard-basis-of-f-n]]). Define $S(x):=\sum_{j=1}^3(x_j/I_j)e_j$; it is linear and direct substitution gives $SI=IS=\operatorname{Id}$, so $S$ is the inverse linear map of $I$ ([[def-linear-map]], [[def-linear-isomorphism-and-invertible-linear-map]]). The cross product is bilinear with coordinate formula $(u\times v)_1=u_2v_3-u_3v_2$ and cyclic analogues, and $\lVert u\times v\rVert_2\le\lVert u\rVert_2\lVert v\rVert_2$ ([[def-cross-product-in-r3]], [[thm-cross-product-norm-is-the-two-vector-gram-determinant]]).
 
 [L2] For a matrix $M$, $\lVert Mz\rVert_2\le\lVert M\rVert_F\lVert z\rVert_2$ with $\lVert M\rVert_F=\bigl(\sum_{j,k}M_{jk}^2\bigr)^{1/2}$: this is the row-by-row Cauchy-Schwarz inequality [[thm-cauchy-schwarz-and-the-euclidean-norm]], [[def-matrix-product-and-identity-matrix]].
 
@@ -86,4 +89,4 @@ be the torque-free Euler field in angular-velocity variables ([[thm-cm-euler-equ
 
 3.1 Let $\lambda>0$ and set $A_0:=\delta_1(0)$, $B_0:=c\,\delta_2(0)/\kappa$, so that $\delta_1(t)=A_0\cosh(\kappa t)+B_0\sinh(\kappa t)=\tfrac12(A_0+B_0)e^{\kappa t}+\tfrac12(A_0-B_0)e^{-\kappa t}$ by [L6]. If $A_0+B_0\ne0$ then $\lvert\delta_1(t)\rvert\ge\tfrac12\lvert A_0+B_0\rvert e^{\kappa t}-\tfrac12\lvert A_0-B_0\rvert e^{-\kappa t}\to+\infty$ as $t\to+\infty$, because $e^{\kappa t}\to+\infty$ and $e^{-\kappa t}\to0$ [L6]; since $A_0+B_0=\delta_1(0)+c\delta_2(0)/\kappa$, this is the growth criterion of clause 2, and the choice $\delta_2(0)=0\ne\delta_1(0)$ satisfies it, so the system has unbounded solutions and clause 3 follows. [step 2.3, given, L6, algebra]
 
-4.1 Finally the sign of $\lambda$ is the sign of $(I_2-I_3)(I_3-I_1)$ because $\Omega^2/(I_1I_2)>0$; this vanishes exactly when $I_3$ equals $I_1$ or $I_2$, which distinctness excludes, so $\lambda\ne0$, and $\lambda<0$ exactly for extreme, $\lambda>0$ exactly for intermediate $I_3$, completing clauses 2 and 3. [step 2.2, 2.3, 3.1, given, algebra] ∎
+4.1 Finally the sign of $\lambda$ is the sign of $(I_2-I_3)(I_3-I_1)$ because $\Omega^2/(I_1I_2)>0$; this vanishes exactly when $I_3$ equals $I_1$ or $I_2$, which distinctness excludes, so $\lambda\ne0$, and $\lambda<0$ exactly for extreme, $\lambda>0$ exactly for intermediate $I_3$, completing the sign criterion. In the intermediate case, for every $\delta>0$ choose $0<\eta<\min\{\delta,1\}$ and initial data $\eta e_1$. Step 3.1 gives an unbounded solution with initial norm $\eta$; by continuity it reaches norm $1$ at some $t>0$. Thus the fixed $\varepsilon=1$ violates the stability condition for every $\delta$, proving that the zero solution is not Lyapunov stable ([[def-cm-equilibrium-and-lyapunov-stability]]) and completing clause 3. [step 2.2, 2.3, 3.1, given, algebra] ∎

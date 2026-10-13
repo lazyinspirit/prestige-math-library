@@ -24,7 +24,7 @@ requires:
   - cm-math-variations
 ---
 
-This page is the variational companion of the force model of
+For a nonempty configuration domain, this page is the variational companion of the force model of
 [[cm02-forces-initial-data-and-newtonian-flow]] and of the constraint branch
 of [[cm06-regular-constraints-and-moving-frames]]. It adds no new physical
 assumption: given the force branch and a declared potential presentation
@@ -53,8 +53,10 @@ The coordinate and gauge structure is developed by
 time-dependent coordinate map $X$ with invertible $X_{q}$ into the transport
 identity $E_{\widetilde L}(q)=X_{q}^{\mathsf T}E_{L}(x)$; this is a local
 coordinate change, and it is a global chart only when it is also one-to-one.
-Thus the model equation takes the form of the Euler-Lagrange equation of the
-substituted Lagrangian in each such coordinate description, and
+Thus the full force equation in each such coordinate description retains
+the residual generalized force; it is the unforced Euler-Lagrange equation
+of the substituted Lagrangian when $d\equiv0$. The result
+
 [[pthm-cm07-boundary-terms-and-gauge]], which records that adding the total time
 derivative of a $C^{3}$ function on the full time-configuration domain with
 action dimension changes the action by endpoint values only, that changing the

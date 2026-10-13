@@ -176,7 +176,7 @@ finite-speed independence of extensions
 [[lem-gr-finite-speed-independence-of-extension]]; the packaged local
 well-posedness statement with the domain of dependence is
 [[thm-gr-local-symmetric-hyperbolic-well-posedness]]. The theorems are stated
-for data of class $H^s$, $s\ge5$, and they assert nothing at the critical
+for data of class $H^s$ with integer $s\ge5$, and they assert nothing at the critical
 threshold, nothing global in time and no uniform slab on noncompact data.
 
 **E1 — harmonic reduction and the subsidiary system.** The gauge vector

@@ -9,7 +9,7 @@ dependency_level: 3
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-gr-smooth-lorentzian-objects, def-gr-smooth-covariant-two-tensor-field, def-gr-inverse-metric-and-musical-isomorphisms, def-type-r-s-tensor-on-a-finite-dimensional-vector-space, def-type-r-s-tensor-bundle, def-smooth-tensor-field, thm-tensor-transition-laws-define-a-smooth-vector-bundle, def-derivation-at-a-point-and-tangent-space, def-cotangent-space-and-cotangent-bundle-as-a-disjoint-union, thm-coordinate-derivations-form-a-basis-of-the-tangent-space, thm-coordinate-differentials-form-the-dual-cotangent-basis, def-countable-choice]
+deps: [def-gr-smooth-lorentzian-objects, def-gr-smooth-covariant-two-tensor-field, def-gr-inverse-metric-and-musical-isomorphisms, def-type-r-s-tensor-on-a-finite-dimensional-vector-space, def-type-r-s-tensor-bundle, def-smooth-tensor-field, lem-gr-tensor-bundle-coordinate-construction, def-derivation-at-a-point-and-tangent-space, def-cotangent-space-and-cotangent-bundle-as-a-disjoint-union, thm-coordinate-derivations-form-a-basis-of-the-tangent-space, thm-coordinate-differentials-form-the-dual-cotangent-basis, def-countable-choice]
 dependency_roles:
   def-gr-smooth-lorentzian-objects: mathematical-premise
   def-gr-smooth-covariant-two-tensor-field: mathematical-premise
@@ -17,7 +17,7 @@ dependency_roles:
   def-type-r-s-tensor-on-a-finite-dimensional-vector-space: mathematical-premise
   def-type-r-s-tensor-bundle: mathematical-premise
   def-smooth-tensor-field: mathematical-premise
-  thm-tensor-transition-laws-define-a-smooth-vector-bundle: mathematical-premise
+  lem-gr-tensor-bundle-coordinate-construction: mathematical-premise
   def-derivation-at-a-point-and-tangent-space: mathematical-premise
   def-cotangent-space-and-cotangent-bundle-as-a-disjoint-union: mathematical-premise
   thm-coordinate-derivations-form-a-basis-of-the-tangent-space: mathematical-premise
@@ -60,7 +60,7 @@ type $(0,2)$ tensors of this definition.
 $T^r_sM$ is the disjoint union of the fibres $T^r_sM|_p=\operatorname{Mult}((T_p^*M)^r\times(T_pM)^s,\mathbb R)$
 over $p\in M$ ([[def-type-r-s-tensor-bundle]]); it carries the smooth
 vector-bundle structure defined by the tensor-coordinate change rules
-([[thm-tensor-transition-laws-define-a-smooth-vector-bundle]]). A **smooth
+([[lem-gr-tensor-bundle-coordinate-construction]]). A **smooth
 tensor field of type $(r,s)$** on $M$ is a family $T=(T_p)_{p\in M}$ assigning
 to each $p$ a type $(r,s)$ tensor at $p$, such that for every smooth chart
 $(U,x)$ of the maximal smooth atlas the **component functions**
@@ -86,17 +86,19 @@ and once lower, is summed over $0,1,2,3$. An upper index is a contravariant
 slot in which a covector is evaluated, a lower index a covariant slot in which
 a vector is evaluated. Slots are moved between these positions with the
 musical isomorphisms $\flat_p,\sharp_p$ of
-[[def-gr-inverse-metric-and-musical-isomorphisms]]; for example, lowering the
-first slot of a type $(1,1)$ field uses $(g^\flat T)^a{}_b=g_{ac}T^c{}_b$ and
-raising uses $g^{ac}$. This is an identification of slots, not a change of the
-field into a field of another kind, and it uses the metric nondegeneracy.
+[[def-gr-inverse-metric-and-musical-isomorphisms]] to change slot variance.
+For example, if $T$ is a type $(1,1)$ field, lowering its contravariant slot
+gives the type $(0,2)$ field with components $T_{ab}:=g_{ac}T^c{}_b$; if $S$
+is a type $(0,2)$ field, raising its first covariant slot gives the type
+$(1,1)$ field with components $S^a{}_b:=g^{ac}S_{cb}$. Each operation changes
+the tensor type and is invertible because $g_p$ is nondegenerate.
 
 **(d) Scope.** The definition is purely local and chart-based; no global
 triviality of $T^r_sM$, no global frame and no choice of metric-compatible
 fields is assumed or implied. All fields are smooth ($C^\infty$); no
 lower-regularity or distributional tensor field is defined here. The smooth
 structure of the tangent bundle, and hence of $T^r_sM$
-([[thm-tensor-transition-laws-define-a-smooth-vector-bundle]]), inherits the
+([[lem-gr-tensor-bundle-coordinate-construction]]), inherits the
 axiom $\mathrm{AC}_\omega$ of [[def-countable-choice]] recorded with
 [[def-gr-smooth-lorentzian-objects]]; the component formulation of smoothness
 itself makes no choice.

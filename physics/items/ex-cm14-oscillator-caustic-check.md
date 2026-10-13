@@ -6,8 +6,11 @@ status: draft
 origin: pipeline
 domain: physics
 dependency_level: 22
-deps: [post-cm04-harmonic-model, pthm-cm04-harmonic-motion, def-cm12-hamiltonian, pthm-cm12-mechanical-hyperregularity, def-cm14-hamilton-jacobi-equation, def-cm14-complete-integral, pthm-cm14-hamilton-jacobi-characteristics, def-cm13-hamiltonian-field, def-cm02-newtonian-flow, def-cm01-units, def-ck-euclidean-maps-and-diffeomorphisms, def-directional-and-partial-derivatives, def-jacobian-matrix-and-gradient, thm-sine-and-cosine-derivatives, thm-chain-rule, thm-algebra-of-derivatives, thm-sine-cosine-zero-sets-and-fundamental-period, cor-trigonometric-parity-and-pythagorean-identity, thm-derivative-of-an-inverse, def-derivative, def-interval]
+deps: [post-cm04-harmonic-model, pthm-cm04-harmonic-motion, def-cm12-hamiltonian, pthm-cm12-mechanical-hyperregularity, def-cm14-hamilton-jacobi-equation, def-cm14-complete-integral, pthm-cm14-hamilton-jacobi-characteristics, def-cm13-hamiltonian-field, def-cm02-newtonian-flow, def-cm01-units, def-ck-euclidean-maps-and-diffeomorphisms, def-directional-and-partial-derivatives, def-jacobian-matrix-and-gradient, thm-sine-and-cosine-derivatives, thm-chain-rule, thm-algebra-of-derivatives, thm-sine-cosine-zero-sets-and-fundamental-period, cor-trigonometric-parity-and-pythagorean-identity, thm-derivative-of-an-inverse, def-derivative, def-interval, def-cm07-generalized-coordinates-and-forces, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition]
 dependency_roles:
+  post-cm02-force-superposition: physical-assumption
+  def-cm03-potential-and-mechanical-energy: formulation-prerequisite
+  def-cm07-generalized-coordinates-and-forces: formulation-prerequisite
   post-cm04-harmonic-model: physical-assumption
   pthm-cm04-harmonic-motion: physical-result
   def-cm12-hamiltonian: formulation-prerequisite
@@ -50,7 +53,9 @@ verification:
 ## Example
 
 Adopt the harmonic model of [[post-cm04-harmonic-model]] as in the
-companion example: one label of mass $m>0$, spring constant $k>0$,
+companion example. For the CM12-CM14 interfaces, declare an ambient one-label potential presentation on $Q_{\mathrm{amb}}=\mathbb R^3$, time window $\mathbb R$, mass operator $mI_3$, potential $U_{\mathrm{amb}}(y)=ky_1^2/2$ and residual force $d=0$. Its smooth immersion $X:\mathbb R\to Q_{\mathrm{amb}}$, $X(x)=(x,0,0)$ has mass metric $G=DX^{\mathsf T}mI_3DX=m$ and substituted potential $kx^2/2$ ([[def-cm07-generalized-coordinates-and-forces]], [[def-cm03-potential-and-mechanical-energy]], [[post-cm02-force-superposition]]). The transverse equations are $0=0$, so scalar harmonic motions reconstruct ambient motions. The displayed scalar Hamiltonian is the generalized-coordinate chart Hamiltonian of [[def-cm12-hamiltonian]] clause (b).
+
+Take one label of mass $m>0$, spring constant $k>0$,
 $\omega=\sqrt{k/m}>0$, $T=2\pi/\omega$, branch Hamiltonian
 $H(x,p)=p^{2}/(2m)+m\omega^{2}x^{2}/2$, and the family
 
@@ -68,7 +73,7 @@ on the open strips where $\sin(\omega t)\neq0$. The example verifies:
    curves of $S$ are
 $$x(t)=\alpha\cos(\omega t)-\frac{\beta}{m\omega}\sin(\omega t),\qquad\beta=S_{\alpha}(t,x(t),\alpha),$$and the derivative of the position with respect to the Jacobi label
    $\beta$ at fixed $(\alpha,t)$ is
-$$\frac{\partial x}{\partial\beta}(t)=-\frac{\sin(\omega t)}{m\omega}=\frac{1}{S_{x\alpha}(t)},$$so it vanishes exactly at the conjugatetimes $\omega t\in\pi\mathbb Z$, where the map from the label $\beta$
+$$\frac{\partial x}{\partial\beta}(t)=-\frac{\sin(\omega t)}{m\omega},\qquad \frac{\partial x}{\partial\beta}(t)=\frac{1}{S_{x\alpha}(t)}\quad(\sin(\omega t)\ne0),$$so it vanishes exactly at the conjugatetimes $\omega t\in\pi\mathbb Z$, where the map from the label $\beta$
    to the position degenerates while $S_{x\alpha}$ is unbounded.
 3. **(refocusing of the model's motions)** independently, the harmonic
    motions through a fixed event $(t_{0},x_{0})$, labelled by their
@@ -84,50 +89,21 @@ asserted.
 
 ## Facts & Assumptions
 
-**Given:** The harmonic model data $m>0$, $k>0$, the constants $\omega,T$,
-the Hamiltonian $H$, the function $S$ on the strips
-$\sin(\omega t)\neq0$, and the conjugate time
-$t_{1}=t_{0}+\pi/\omega$.
+**Given:** The harmonic model data $m>0$, $k>0$, the constants $\omega,T$, the Hamiltonian $H$, the function $S$ on the strips $\sin(\omega t)\neq0$, and the conjugate time $t_{1}=t_{0}+\pi/\omega$.
 
-[L1] Model and Hamiltonian ([[post-cm04-harmonic-model]],
-[[pthm-cm04-harmonic-motion]], [[pthm-cm12-mechanical-hyperregularity]],
-[[def-cm12-hamiltonian]], [[def-cm02-newtonian-flow]]): the motions are
-exactly the curves
-$x(t)=A\cos(\omega(t-t_{0}))+B\sin(\omega(t-t_{0}))$ with reals $A,B$;
-the branch Hamiltonian is the displayed $H$; and the least positive
-period of a nonconstant motion is $T$.
+[L1] Model and Hamiltonian ([[post-cm04-harmonic-model]], [[pthm-cm04-harmonic-motion]], [[pthm-cm12-mechanical-hyperregularity]], [[def-cm12-hamiltonian]], [[def-cm02-newtonian-flow]]): the motions are exactly the curves $x(t)=A\cos(\omega(t-t_{0}))+B\sin(\omega(t-t_{0}))$ with reals $A,B$; the branch Hamiltonian is the displayed $H$; and the least positive period of a nonconstant motion is $T$.
 
-[L2] Calculus ([[def-ck-euclidean-maps-and-diffeomorphisms]],
-[[def-directional-and-partial-derivatives]],
-[[def-jacobian-matrix-and-gradient]], [[thm-sine-and-cosine-derivatives]],
-[[thm-chain-rule]], [[thm-algebra-of-derivatives]],
-[[thm-sine-cosine-zero-sets-and-fundamental-period]],
-[[cor-trigonometric-parity-and-pythagorean-identity]],
-[[thm-derivative-of-an-inverse]], [[def-derivative]],
-[[def-interval]]): $(\sin)'=\cos$, $(\cos)'=-\sin$,
-$(\cot)'=-\csc^{2}$, $(\csc)'=-\csc\cot$; the chain rule and algebra of
-derivatives apply; $\sin(k\pi)=0$ and $\cos(k\pi)=(-1)^{k}$ for integers
-$k$; and the one-variable inverse-function rule holds where the
-derivative is nonzero.
+[L2] Calculus ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-directional-and-partial-derivatives]], [[def-jacobian-matrix-and-gradient]], [[thm-sine-and-cosine-derivatives]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-derivative-of-an-inverse]], [[def-derivative]], [[def-interval]]): $(\sin)'=\cos$, $(\cos)'=-\sin$, $(\cot)'=-\csc^{2}$, $(\csc)'=-\csc\cot$; the chain rule and algebra of derivatives apply; $\sin(k\pi)=0$ and $\cos(k\pi)=(-1)^{k}$ for integers $k$; and the one-variable inverse-function rule holds where the derivative is nonzero.
 
-[L3] Complete-integral definitions and characteristics
-([[def-cm14-hamilton-jacobi-equation]], [[def-cm14-complete-integral]],
-[[pthm-cm14-hamilton-jacobi-characteristics]]): a $C^{3}$ solution $S$ of
-$S_{t}+H(x,S_{x})=0$ is a complete integral at a point exactly when
-$S_{x\alpha}\neq0$ there, and its characteristic curves with
-$p=S_{x}$ solve the Hamilton equations with $\beta=S_{\alpha}$ constant.
+[L3] Complete-integral definitions and characteristics ([[def-cm14-hamilton-jacobi-equation]], [[def-cm14-complete-integral]], [[pthm-cm14-hamilton-jacobi-characteristics]]): a $C^{3}$ solution $S$ of $S_{t}+H(x,S_{x})=0$ is a complete integral at a point exactly when $S_{x\alpha}\neq0$ there, and its characteristic curves with $p=S_{x}$ solve the Hamilton equations with $\beta=S_{\alpha}$ constant.
 
-[L4] Hamilton equations in one dimension ([[def-cm13-hamiltonian-field]]):
-for the branch Hamiltonian the field is $X_{H}=(H_{p},-H_{x})$, so
-$x'=p/m$ and $p'=-m\omega^{2}x$ along solutions.
+[L4] Hamilton equations in one dimension ([[def-cm13-hamiltonian-field]]): for the branch Hamiltonian the field is $X_{H}=(H_{p},-H_{x})$, so $x'=p/m$ and $p'=-m\omega^{2}x$ along solutions.
 
 ## Verification
 
-**Proof technique:** direct; differentiate the displayed family,
-evaluate the mixed derivative, solve the characteristics explicitly, and
-exhibit the refocusing of the model's solutions at the conjugate time.
+**Proof technique:** direct; differentiate the displayed family, evaluate the mixed derivative, solve the characteristics explicitly, and exhibit the refocusing of the model's solutions at the conjugate time.
 
-1.1 Mixed derivative: by [L2], differentiating the displayed $S$ gives $S_{x}=m\omega(x\cot(\omega t)-\alpha\csc(\omega t))$ and hence $S_{x\alpha}=-m\omega\csc(\omega t)=-m\omega/\sin(\omega t)$; this is finite and nonzero exactly when $\sin(\omega t)\neq0$, and $|S_{x\alpha}|\to+\infty$ as $\omega t\to k\pi$, $k\in\mathbb Z$, because $\sin(k\pi)=0$. By [L3] and the companion computation that $S$ solves $S_{t}+H(x,S_{x})=0$ on the strips, $S$ is a complete integral at every point of the strips and has no finite nondegenerate extension across the conjugate times. This is claim 1. [L2, L3, algebra]
+1.1 Mixed derivative: by [L2], differentiating the displayed $S$ gives $S_{x}=m\omega(x\cot(\omega t)-\alpha\csc(\omega t))$ and hence $S_{x\alpha}=-m\omega\csc(\omega t)=-m\omega/\sin(\omega t)$; this is finite and nonzero exactly when $\sin(\omega t)\neq0$, and $|S_{x\alpha}|\to+\infty$ as $\omega t\to k\pi$, $k\in\mathbb Z$, because $\sin(k\pi)=0$. Direct substitution gives $S_t+H(x,S_x)=\frac{m\omega^2x^2}{2}(1+\cot^2(\omega t)-\csc^2(\omega t))=0$ on the strips by [L2]. Thus by [L3], $S$ is a complete integral at every point of the strips and has no finite nondegenerate extension across the conjugate times. This is claim 1. [L2, L3, algebra]
 
 2.1 Characteristic curves: by [L3], solving $\beta=S_{\alpha}(t,x,\alpha) =m\omega(\alpha\cot(\omega t)-x\csc(\omega t))$ for $x$ gives $x(t)=\alpha\cos(\omega t)-\frac{\beta}{m\omega}\sin(\omega t),$ and with $p=S_{x}$ the pair solves $x'=p/m$, $p'=-m\omega^{2}x$; explicitly $x'(t)=-\alpha\omega\sin(\omega t)-\beta m^{-1}\cos(\omega t)$ and $\partial_{\beta}x(t)=-\sin(\omega t)/(m\omega)$, which vanishes exactly at $\omega t\in\pi\mathbb Z$; moreover $(\partial_{\beta}x)(t)=1/S_{x\alpha}(t)$ by step 1.1. At those times the label $\beta$ has no first-order effect on the position, so the map from the Jacobi label to the position degenerates while the mixed derivative is unbounded: this is the conjugate time of the family. This is claim 2. [L1, L2, L3, L4, step 1.1, algebra]
 
@@ -137,14 +113,6 @@ exhibit the refocusing of the model's solutions at the conjugate time.
 
 ## Remarks
 
-- **The failure is a caustic, not an accident of the chart.** The
-  half-period refocusing in step 3.1 shows that the obstruction is
-  invariant: at the conjugate time the endpoint-position map of the
-  family of extremals is not locally invertible, so no smooth complete
-  integral based on that family can satisfy the nondegeneracy
-  $\det S_{q\alpha}\neq0$ across the caustic. The companion scope remark
-  records the same warning for the page.
+- **The failure is a caustic, not an accident of the chart.** The half-period refocusing in step 3.1 shows that the obstruction is invariant: at the conjugate time the endpoint-position map of the family of extremals is not locally invertible, so no smooth complete integral based on that family can satisfy the nondegeneracy $\det S_{q\alpha}\neq0$ across the caustic. The companion scope remark records the same warning for the page.
 
-- **No empirical content.** The conjugate time $\pi/\omega$ is a property
-  of the ideal harmonic model; the example asserts no measured period or
-  frequency and no claim about a real oscillator.
+- **No empirical content.** The conjugate time $\pi/\omega$ is a property of the ideal harmonic model; the example asserts no measured period or frequency and no claim about a real oscillator.

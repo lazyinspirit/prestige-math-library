@@ -6,8 +6,13 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 18
-deps: [post-cm10-rigid-material, post-cm11-torque-balance, pthm-cm11-torque-free-invariants, ex-cm11-free-top-checks, def-cm10-inertia-tensor, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, def-euclidean-inner-product, def-interval]
+deps: [post-cm10-rigid-material, post-cm11-torque-balance, pthm-cm11-torque-free-invariants, ex-cm11-free-top-checks, def-cm10-inertia-tensor, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, def-euclidean-inner-product, def-interval, def-cm01-units, def-countable-choice, def-pi-via-first-positive-cosine-zero, thm-quarter-turn-values-and-shift-formulas, thm-of-square-roots]
 dependency_roles:
+  def-cm01-units: formulation-prerequisite
+  def-countable-choice: mathematical-premise
+  def-pi-via-first-positive-cosine-zero: mathematical-premise
+  thm-quarter-turn-values-and-shift-formulas: mathematical-premise
+  thm-of-square-roots: mathematical-premise
   post-cm10-rigid-material: formulation-prerequisite
   post-cm11-torque-balance: formulation-prerequisite
   pthm-cm11-torque-free-invariants: physical-result
@@ -27,7 +32,7 @@ sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 3.4.1-3.4.2, printed pages 55-57 (PDF pages 61-63): the free symmetric top, whose symmetry axis precesses about the fixed angular momentum while the body angular velocity is not constant"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.4, chapter pages 9-12 (PDF pages 63-66): the free symmetric top's precession about the conserved angular momentum and the distinction between the latter and the body angular velocity"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 4 Section 4.4, chapter pages 15-16 (PDF pages 69-70): the free symmetric top's precession about the conserved angular momentum and the distinction between the latter and the body angular velocity"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), Sections 2.8.2-2.9: the invariant level curves of the free rigid body and the non-constant body angular velocity along them"
       url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
@@ -47,13 +52,15 @@ angular velocity $\omega$ of the motion is constant in time.
 
 ## Facts & Assumptions
 
+Use the numerical SI convention of [[ex-cm11-free-top-checks]]: $t=T/T_*$ with $T_*=1\,\mathrm s$, inertia entries in $M_*D_*^2$ with $M_*=1\,\mathrm{kg}$ and $D_*=1\,\mathrm m$, $\omega_{\rm phys}(T)=\omega(T/T_*)/T_*$ and energy in $M_*D_*^2/T_*^2$. Thus $t=\pi/2$ means $T=\pi T_*/2$; constancy or nonconstancy is preserved by these fixed nonzero scales. Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]), carried from the supplier for its integral and quaternion constructions. No measured data enter this counterexample ([[def-cm01-units]]).
+
 **Given:** The model S of [[ex-cm11-free-top-checks]], namely the rigid-material model with body inertia matrix $\mathrm{diag}(1,1,2)$ in the declared basis, used torque-free, and the path $\omega(t)=(\tfrac12\cos t,\tfrac12\sin t,1)$.
 
 [F1] Model data: $\nu$ is the centred reference mass distribution of model S with body inertia matrix $I=\mathrm{diag}(1,1,2)$ in the declared orthonormal basis, and the model is nondegenerate ([[post-cm10-rigid-material]] clauses (i)-(ii), [[def-cm10-inertia-tensor]] clause (a), [[ex-cm11-free-top-checks]]).
 
 [F2] The path $\omega$ is the body angular velocity of a torque-free motion of model S; along that motion $L_c$ is constant with $C=\lVert L_c\rVert_2^{2}=\tfrac{17}4$ by [[pthm-cm11-torque-free-invariants]] clause 1, and the rotational kinetic energy is the constant $E=\tfrac98$; and $\omega$ satisfies the torque-free Euler equations $l'=l\times(I^{-1}l)$ with $l=I\omega=(\tfrac12\cos t,\tfrac12\sin t,2)$ ([[ex-cm11-free-top-checks]] claim 2, [[pthm-cm11-torque-free-invariants]] clauses 2-3).
 
-[F3] Values of the path: $\omega(0)=(\tfrac12,0,1)$ and $\omega(\tfrac\pi2)=(0,\tfrac12,1)$, using $\cos0=\sin\tfrac\pi2=1$ and $\sin0=\cos\tfrac\pi2=0$ with the sine and cosine of [[def-sine-and-cosine-by-power-series]] and their derivative and parity identities ([[thm-sine-and-cosine-derivatives]], [[cor-trigonometric-parity-and-pythagorean-identity]]); the Euclidean norm of the difference is computed with [[def-euclidean-inner-product]].
+[F3] Values of the path: $\omega(0)=(\tfrac12,0,1)$ and $\omega(\tfrac\pi2)=(0,\tfrac12,1)$, using $\cos0=\sin\tfrac\pi2=1$ and $\sin0=\cos\tfrac\pi2=0$ with the sine and cosine of [[def-sine-and-cosine-by-power-series]], the definition of $\pi$ in [[def-pi-via-first-positive-cosine-zero]], and the exact quarter-turn values of [[thm-quarter-turn-values-and-shift-formulas]] together with the zero values of [[thm-sine-and-cosine-derivatives]]; the Euclidean norm of the difference is computed with [[def-euclidean-inner-product]] and [[thm-of-square-roots]].
 
 ## Counterexample
 
@@ -67,15 +74,6 @@ angular velocity $\omega$ of the motion is constant in time.
 
 ## Remarks
 
-- **What the counterexample shows and does not show.** It shows that
-  conservation of the angular momentum about the centre of mass and of the
-  rotational kinetic energy does not force a constant body angular velocity,
-  so no proof of uniform rotation may rely on those invariants alone. It does
-  not show that the torque-free equations are inconsistent: the exhibited
-  path is an exact solution of them, and the two invariants are precisely the
-  reason the motion is bounded in $l$ and $\omega$.
+- **What the counterexample shows and does not show.** It shows that conservation of the angular momentum about the centre of mass and of the rotational kinetic energy does not force a constant body angular velocity, so no proof of uniform rotation may rely on those invariants alone. It does not show that the torque-free equations are inconsistent: the exhibited path is an exact solution of them, and the two invariants are precisely the reason the motion is bounded in $l$ and $\omega$.
 
-- **Where uniform rotation does occur.** Constant body angular velocity
-  characterises the principal-axis spins, as proved in
-  [[pthm-cm11-principal-rotations]] clause 4; the present motion is not one of
-  them because $\omega(t)$ is not parallel to a fixed principal direction.
+- **Where uniform rotation does occur.** Constant body angular velocity characterises the principal-axis spins, as proved in [[pthm-cm11-principal-rotations]] clause 4; the present motion is not one of them because $\omega(t)$ is not parallel to a fixed principal direction.

@@ -19,7 +19,19 @@ deps:
     thm-existence-and-uniqueness-of-a-maximal-ode-solution,
     def-interval,
     def-abs-value,
-    def-continuity-real
+    def-continuity-real,
+    thm-continuous-implies-integrable,
+    lem-integral-elementary-bounds,
+    thm-monotonicity-of-the-integral,
+    thm-additivity-over-subintervals,
+    thm-linearity-of-the-integral,
+    thm-ftc-first-part,
+    thm-ftc-second-part,
+    thm-chain-rule,
+    thm-sine-and-cosine-derivatives,
+    cor-trigonometric-parity-and-pythagorean-identity,
+    thm-sine-cosine-zero-sets-and-fundamental-period,
+    cor-pi-is-the-first-positive-sine-zero
   ]
 dependency_roles:
   def-cm-stroboscopic-map: mathematical-premise
@@ -33,6 +45,18 @@ dependency_roles:
   def-interval: mathematical-premise
   def-abs-value: mathematical-premise
   def-continuity-real: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
+  lem-integral-elementary-bounds: mathematical-premise
+  thm-monotonicity-of-the-integral: mathematical-premise
+  thm-additivity-over-subintervals: mathematical-premise
+  thm-linearity-of-the-integral: mathematical-premise
+  thm-ftc-first-part: mathematical-premise
+  thm-ftc-second-part: mathematical-premise
+  thm-chain-rule: mathematical-premise
+  thm-sine-and-cosine-derivatives: mathematical-premise
+  cor-trigonometric-parity-and-pythagorean-identity: mathematical-premise
+  thm-sine-cosine-zero-sets-and-fundamental-period: mathematical-premise
+  cor-pi-is-the-first-positive-sine-zero: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -53,19 +77,29 @@ verification:
 
 ## Definition
 
-**The normalized pulse.** Fix once and for all a function
+**The normalized pulse.** By [[lem-test-function-cutoffs-and-euclidean-localization]], applied to $K=\{1/2\}\subset(0,1)$, choose $\chi\in C_c^\infty((0,1))$ with $0\le\chi\le1$ and $\chi=1$ on a neighborhood of $1/2$. Thus there are $0<\alpha<\beta<1$ with $\chi=1$ on $[\alpha,\beta]$. Before taking any integral, extend $\chi$ by zero to $\mathbb R$, retaining the notation $\chi$. Its compact support inside $(0,1)$ makes this extension identically zero near both endpoints, hence smooth on $\mathbb R$. The continuous extended function $\chi$ is integrable on $[0,1]$; by additivity and monotonicity of the integral and the integral of a constant,
 
-$$w\in C_c^\infty\bigl((0,1)\bigr),\qquad w\ge0,\qquad \int_0^1w(s)\,ds=1 .$$
+$$I:=\int_0^1\chi(s)\,ds\ge\int_\alpha^\beta\chi(s)\,ds=\beta-\alpha>0,$$
 
-Such a function exists: by [[lem-test-function-cutoffs-and-euclidean-localization]] there is $\chi\in C_c^\infty((0,1))$ with $\chi\ge0$ and $\chi(1/2)>0$, and $w:=\chi/\int_0^1\chi$ has the stated properties, the integral being positive. All constructions below use only these properties of $w$ and are therefore independent of the particular choice.
+using integrability of continuous functions ([[thm-continuous-implies-integrable]]), additivity and monotonicity ([[thm-additivity-over-subintervals]], [[thm-monotonicity-of-the-integral]]), and the integral of a constant ([[lem-integral-elementary-bounds]]).
+
+Define $w_0:=\chi/I$ on $(0,1)$ and let $w:\mathbb R\to\mathbb R$ be its extension by zero outside $(0,1)$. Since $\chi$ has compact support in $(0,1)$, this zero extension is smooth and compactly supported in $(0,1)$. Linearity of the integral ([[thm-linearity-of-the-integral]]) gives
+
+$$w\in C_c^\infty\bigl((0,1)\bigr),\qquad w\ge0,\qquad \int_0^1w(s)\,ds=1.$$
+
+Fix such a pulse $w$ for the constructions below. The resulting coefficient and endpoint maps may depend on this choice; the later estimates apply to every such $w$, with constants allowed to depend on it.
 
 **The periodic pulse.** Fix a real parameter $a\ge100$ and a smallness parameter $\delta>0$, and put $P:=\pi/2+\delta$. Define $\beta_\delta:\mathbb R\to\mathbb R$ to be the $P$-periodic function whose restriction to $[0,P]$ is
 
 $$\beta_\delta(t):=0\quad\Bigl(t\in\Bigl[0,\tfrac\pi2\Bigr]\Bigr),\qquad \beta_\delta(t):=\frac1\delta\,w\Bigl(\frac{t-\pi/2}{\delta}\Bigr)\quad\Bigl(t\in\Bigl[\tfrac\pi2,P\Bigr]\Bigr).$$
 
-Both definitions are meaningful: for $t\in[\pi/2,P]$ the argument $(t-\pi/2)/\delta$ lies in $[0,1]$, and at the junction $t=\pi/2$ the second formula gives $\delta^{-1}w(0)=0$ because $w$ is supported in the open interval $(0,1)$; at $t=P$ it gives $\delta^{-1}w(1)=0$. Every derivative of $w$ vanishes at $0$ and $1$ (as $w$ is $C^\infty$ and compactly supported in $(0,1)$), so the $P$-periodic extension is of class $C^\infty$ on $\mathbb R$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Moreover
+Both definitions use the same zero extension $w:\mathbb R\to\mathbb R$, so the endpoint values $w(0)$ and $w(1)$ are defined and equal to $0$. Since $w$ vanishes on neighborhoods of $0$ and $1$, all its derivatives vanish there; the $P$-periodic extension of $\beta_\delta$ is therefore of class $C^\infty$ on $\mathbb R$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Also $\beta_\delta\ge0$. To verify its normalization, put
 
-$$\beta_\delta\ge0,\qquad \int_0^P\beta_\delta(t)\,dt=\int_0^1w(s)\,ds=1 .$$
+$$B_\delta(t):=\begin{cases}0,&0\le t\le\pi/2,\\[2pt]\displaystyle\int_0^{(t-\pi/2)/\delta}w(s)\,ds,&\pi/2\le t\le P.\end{cases}$$
+
+The integral function of the continuous $w$ has derivative $w$ by [[thm-ftc-first-part]] and [[thm-continuous-implies-integrable]], and the chain rule ([[thm-chain-rule]]) gives $B_\delta'(t)=\beta_\delta(t)$ on the pulse interval. Since $w$ vanishes near its endpoints, $B_\delta$ is differentiable across $t=\pi/2$ as well. Since $\beta_\delta$ is continuous and therefore integrable on $[0,P]$, the second part of the fundamental theorem ([[thm-ftc-second-part]]) gives
+
+$$\int_0^P\beta_\delta(t)\,dt=B_\delta(P)-B_\delta(0)=\int_0^1w(s)\,ds=1.$$
 
 **The Hamiltonian and its equations.** Use the phase domain $U=\mathbb R^2$
 with coordinates $(q,p)$ and standard symplectic form $\omega=dq\wedge dp$
@@ -73,13 +107,13 @@ and matrix $J=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$, as in
 [[def-cm-phase-domain-and-standard-symplectic-two-form]]. For each fixed time
 $t$, define the smooth Hamiltonian function
 
-$$H_\delta:\mathbb R\times\mathbb R^2\longrightarrow\mathbb R,\qquad H_\delta(t,q,p):=\frac{p^2+q^2}{2}+\beta_\delta(t)\Bigl(aq-\frac{q^3}{3}\Bigr).$$
+$$\mathcal H_\delta:\mathbb R\times\mathbb R^2\longrightarrow\mathbb R,\qquad \mathcal H_\delta(t,q,p):=\frac{p^2+q^2}{2}+\beta_\delta(t)\Bigl(aq-\frac{q^3}{3}\Bigr).$$
 
 The Hamiltonian-vector-field convention is $\iota_{X_H}\omega=dH$, for
 which [[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]] gives
 $X_H=J\nabla H=(\partial_pH,-\partial_qH)$. Here
-$\partial_pH_\delta=p$ and
-$\partial_qH_\delta=q+\beta_\delta(t)(a-q^2)$, so the associated
+$\partial_p\mathcal H_\delta=p$ and
+$\partial_q\mathcal H_\delta=q+\beta_\delta(t)(a-q^2)$, so the associated
 time-dependent first-order system is
 
 $$q'=p,\qquad p'=-q+\beta_\delta(t)\,(q^2-a),$$
@@ -90,21 +124,21 @@ equivalently the second-order equation $q''=-q+\beta_\delta(t)(q^2-a)$; the righ
 
 $$R_0:\mathbb R^2\to\mathbb R^2,\qquad R_0(q,p):=(p,-q),$$
 
-which is the time-$\pi/2$ solution operator of $q'=p$, $p'=-q$: the map $t\mapsto(q_0\cos t+p_0\sin t,\,-q_0\sin t+p_0\cos t)$ solves the free system with the initial data $(q_0,p_0)$, and uniqueness of solutions identifies it with the solution operator.
+which is the time-$\pi/2$ solution operator of $q'=p$, $p'=-q$: the map $t\mapsto(q_0\cos t+p_0\sin t,\,-q_0\sin t+p_0\cos t)$ solves the free system by the derivative identities of sine and cosine ([[thm-sine-and-cosine-derivatives]]) and has initial data $(q_0,p_0)$. Moreover $\cos(\pi/2)=0$ by the zero-set statement ([[thm-sine-cosine-zero-sets-and-fundamental-period]]), $\sin(\pi/2)>0$ by positivity on $(0,\pi)$ ([[cor-pi-is-the-first-positive-sine-zero]]), and $\sin^2(\pi/2)+\cos^2(\pi/2)=1$ ([[cor-trigonometric-parity-and-pythagorean-identity]]), so $\sin(\pi/2)=1$. Uniqueness of solutions then identifies the endpoint map with $R_0$.
 
 For $s\in[0,1]$ the **rescaled pulse equation** is
 
 $$q_s=\delta\,p,\qquad p_s=-\delta\,q+w(s)\,(q^2-a),$$
 
-obtained from the second half of the period by the substitution $s=(t-\pi/2)/\delta$. For $(q,p)$ in its domain of existence, let the **pulse endpoint map** be
+obtained from the second half of the period by the substitution $s=(t-\pi/2)/\delta$. For each initial state $z=(q,p)\in\mathbb R^2$, let $J_z^\delta$ be the open maximal interval containing $0$ of its solution to the rescaled equation. Define
 
-$$K_\delta(q,p):=\bigl(q(1),p(1)\bigr),$$
+$$D_\delta:=\{z\in\mathbb R^2:[0,1]\subseteq J_z^\delta\},\qquad K_\delta:D_\delta\to\mathbb R^2,\quad K_\delta(z):=(q(1),p(1)),$$
 
-where $s\mapsto(q(s),p(s))$ is the unique solution of the rescaled equation with $(q,p)(0)=(q,p)$ ([[thm-existence-and-uniqueness-of-a-maximal-ode-solution]]). The **stroboscopic map** of the periodic system,
+where $(q(s),p(s))$ is the unique maximal solution with $(q,p)(0)=z$ ([[thm-existence-and-uniqueness-of-a-maximal-ode-solution]]). For the original $P$-periodic system, let $J_z$ be the maximal existence interval of the solution through $z$ at time $0$, and set $D_P:=\{z\in\mathbb R^2:[0,P]\subseteq J_z\}$. Define the stroboscopic map by
 
-$$G_\delta:=K_\delta\circ R_0,$$
+$$G_\delta:D_{G_\delta}\to\mathbb R^2,\qquad D_{G_\delta}:=\{z\in\mathbb R^2:R_0(z)\in D_\delta\},\qquad G_\delta(z):=K_\delta(R_0(z)).$$
 
-is defined on the set of $(q,p)\in\mathbb R^2$ for which the solution of the $P$-periodic system exists up to time $P$; there it equals the stroboscopic map $\theta_P$ of [[def-cm-stroboscopic-map]]: the free rotation moves the initial point to time $\pi/2$, and the pulse endpoint map moves it from time $\pi/2$ to time $P$.
+The change of time variable $s=(t-\pi/2)/\delta$ identifies solutions on $[\pi/2,P]$ with solutions of the rescaled equation on $[0,1]$. Concatenating with the unique free solution on $[0,\pi/2]$ shows $D_{G_\delta}=D_P$ and $G_\delta=\theta_P$ there, where $\theta_P:D_P\to\mathbb R^2$ is the stroboscopic map of [[def-cm-stroboscopic-map]]. Conversely, restricting any solution through time $P$ to the pulse interval and applying the same change of variables gives a solution of the rescaled equation through $s=1$; uniqueness identifies both maps.
 
 ## Remarks
 

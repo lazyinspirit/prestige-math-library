@@ -72,9 +72,7 @@ sources:
         tan delta_l = -(ka)^(2l+1)/((2l+1)[(2l-1)!!]^2) and the total cross
         section 4 pi a^2"
       url: "https://farside.ph.utexas.edu/teaching/qmech/qmech.pdf"
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section
-        12.5.1 printed pages 279-281 (PDF pages 287-289): scattering at low
-        energy and the s-wave dominance"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.5.1, printed pages 276-278 (PDF pages 284-286)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 verification:
   precheck: pass

@@ -110,7 +110,7 @@ not asserted here.
 
 [F1] $(e_n)_{n\in\mathbb N}$ is a complete orthonormal family of the Hilbert space $F(\mathbb C)$; $N$ is self-adjoint with $Ne_n=ne_n$ ([[thm-nrqm-fock-and-equilibrium-fixed-mode-number-law]], [[thm-nrqm-fock-and-equilibrium-number-operator-domain]]).
 
-[F2] For real scalars $c_n$ on every sector $\operatorname{ran}P_+^{(n)}$, including $c_0$ on $\mathbb C$, the direct-sum theorem makes $\bigoplus_nc_n\mathrm{id}$ bounded and self-adjoint when $\sup_n|c_n|<\infty$, with norm $\sup_n|c_n|$; it is positive when all $c_n\ge0$ ([[thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction]] (f)). A bounded operator agreeing with another bounded operator on a complete orthonormal family agrees everywhere ([[def-bounded-linear-operator]], [[def-operator-norm]]).
+[F2] For real scalars $c_n$ on every sector $\operatorname{ran}P_+^{(n)}$, including $c_0$ on $\mathbb C$, the direct-sum theorem makes $\bigoplus_nc_n\mathrm{id}$ bounded and self-adjoint when $\sup_n|c_n|<\infty$, with norm $\sup_n|c_n|$ ([[thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction]] (f)); when $c_n\ge0$, positivity follows from $\langle(\bigoplus_nc_n\mathrm{id})\psi,\psi\rangle=\sum_nc_n\|\psi_n\|^2\ge0$. A bounded operator agreeing with another bounded operator on a complete orthonormal family agrees everywhere ([[def-bounded-linear-operator]], [[def-operator-norm]]).
 
 [F3] Geometric series: $\sum_{n\ge0}q^n=1/(1-q)$ for $|q|<1$ ([[thm-geometric-series]]); Tonelli for nonnegative double series permits the interchange of the summation order, even for the extended value $+\infty$ ([[thm-tonelli-for-nonnegative-double-series]]).
 
@@ -127,7 +127,7 @@ not asserted here.
 
 ## Proof
 
-1.1 [The diagonal weights] For every $n$ the operator $c_n\mathrm{id}$ on the nonzero complex Hilbert space $\operatorname{ran}P_+^{(n)}=\mathbb C$ has the single real eigenvalue $e^{-\beta\omega n}\in(0,1]$, so the direct sum $\bigoplus_n e^{-\beta\omega n}\mathrm{id}$ is bounded self-adjoint positive with norm $\sup_n e^{-\beta\omega n}=1$ by [F2]; by [F1] this direct sum agrees with $G_\beta$ on the complete orthonormal family $(e_n)$ and therefore equals $G_\beta$: a bounded operator vanishing on all $e_n$ is zero. This proves (a). [F1, F2, algebra]
+1.1 [The diagonal weights] For every $n$ the operator $c_n\mathrm{id}$ on the nonzero complex Hilbert space $\operatorname{ran}P_+^{(n)}=\mathbb C$ has the single real eigenvalue $e^{-\beta\omega n}\in(0,1]$, so the direct sum $\bigoplus_n e^{-\beta\omega n}\mathrm{id}$ is bounded and self-adjoint with norm $\sup_n e^{-\beta\omega n}=1$ by [F2]; its quadratic form is $\sum_ne^{-\beta\omega n}\|\psi_n\|^2\ge0$, so it is positive. By [F1] this direct sum agrees with $G_\beta$ on the complete orthonormal family $(e_n)$ and therefore equals $G_\beta$: a bounded operator vanishing on all $e_n$ is zero. This proves (a). [F1, F2, algebra]
 
 1.2 [The weight sums] Put $q:=e^{-\beta\omega}\in(0,1)$. The geometric series [F3] gives $Z(\beta)=\sum_{n\ge0}q^n=1/(1-q)$. For the first moment, $\sum_{n\ge1}nq^n=\sum_{n\ge1}\sum_{m=1}^{n}q^n=\sum_{m\ge1}\sum_{n\ge m}q^n$, where the interchange of the nonnegative double series is licensed by [F3]; the inner sum is $\sum_{n\ge m}q^n=q^m/(1-q)$ by the geometric series, so the total is $\frac1{1-q}\sum_{m\ge1}q^m=\frac{q}{(1-q)^2}<\infty$. The identity $q/(1-q)=1/(e^{\beta\omega}-1)$ follows from $e^{\beta\omega}e^{-\beta\omega}=e^0=1$ by [F7]. This proves (b). [F3, F7, algebra]
 

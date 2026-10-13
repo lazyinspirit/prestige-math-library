@@ -32,19 +32,19 @@ verification:
 ## Statement
 
 Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$
-([[def-countable-choice]]). Let $s\ge5$, fix a compact interval $I_0$ inside the coefficient time domain, and assume $J\subseteq I_0$. Let $A^\mu,B$ be a periodic symmetric
+([[def-countable-choice]]). Let $s\ge5$ be an integer, fix a compact interval $I_0$ inside the coefficient time domain, and assume $J\subseteq I_0$. Let $A^\mu,B$ be a periodic symmetric
 hyperbolic coefficient family on the open set $O\subseteq\mathbb R^m$
 ([[def-gr-periodic-symmetric-hyperbolic-system]]), let $K\subseteq O$ be compact
 and $R\ge0$, and let $u_N:J\to X_N$ be a Galerkin solution of
 [[lem-gr-galerkin-ode-local-solution]] for some $N\ge0$. Suppose that
 $u_N(t)$ takes values in $K$ and satisfies $\|u_N(t)\|_{H^s}\le R$ for every
-$t\in J$. Then there is $C=C(A^\mu,B,K,R,s,I_0)$ such that for every
+$t\in J$. Then there is $C=C(A^\mu,B,K,R,s,I_0)$ such that for every integer
 $0\le j\le s-1$ and every $t\in J$
 $$\|\partial_tu_N(t)\|_{H^j}\le C\,\bigl(1+\|u_N(t)\|_{H^s}\bigr).$$
 
 ## Facts & Assumptions
 
-**Given:** Countable Choice, $s\ge5$, the coefficient family on $O$, the compact $K$, the bound $R$, a Galerkin solution $u_N$ on $J$ with values in $K$ and $\|u_N\|_{H^s}\le R$.
+**Given:** Countable Choice, integer $s\ge5$, the coefficient family on $O$, the compact $K$, the bound $R$, a Galerkin solution $u_N$ on $J$ with values in $K$ and $\|u_N\|_{H^s}\le R$.
 
 [L1] $P_N$ is linear and self-adjoint on $L^2$, commutes with every spatial derivative $D^\alpha$, and is the identity on $X_N$ ([[lem-gr-galerkin-projection-properties]], [[def-gr-galerkin-fourier-projection]]).
 
@@ -62,7 +62,7 @@ $$\|\partial_tu_N(t)\|_{H^j}\le C\,\bigl(1+\|u_N(t)\|_{H^s}\bigr).$$
 
 1.1 (Order zero.) Pair the Galerkin equation [L2] with $\partial_tu_N$: since $\partial_tu_N\in X_N$, self-adjointness [L1] gives $\int(\partial_tu_N)^{\mathsf T}P_N[A^0\partial_tu_N]=\int(\partial_tu_N)^{\mathsf T}A^0\partial_tu_N\ge a\|\partial_tu_N\|_2^2$ by [L3]; the right-hand side is $-\int(\partial_tu_N)^{\mathsf T}P_N[A^i\partial_iu_N+B]\le\|\partial_tu_N\|_2\|A^i\partial_iu_N+B\|_2$, and $\|A^i\partial_iu_N+B\|_{L^2}\le C_R(1+\|u_N\|_{H^s})$ by [L4] (the composition $A^i(t,\cdot,u_N)$ lies in $H^s\subseteq C^0$, so its sup norm is at most $C_R$, and $\|\partial_iu_N\|_2\le\|u_N\|_{H^s}$; the term $B$ is similar). Hence $a\|\partial_tu_N\|_2\le C_R(1+\|u_N\|_{H^s})$. [L1, L2, L3, L4, algebra]
 
-2.1 (Induction on the order: the estimate at order $j$.) Fix $j$ with $1\le j\le s-1$ and suppose the bound holds for all orders below $j$; fix $|\alpha|=j$. Applying $P_ND^\alpha$ to the Galerkin equation [L2] (legitimate by commutation [L1]) and pairing with $D^\alpha\partial_tu_N\in X_N$ gives, after moving the leading term and using self-adjointness [L1], $a\|D^\alpha\partial_tu_N\|_2\le\bigl\|[D^\alpha,A^0(t,\cdot,u_N)]\partial_tu_N\bigr\|_2+\bigl\|D^\alpha(A^i(t,\cdot,u_N)\partial_iu_N+B(t,\cdot,u_N))\bigr\|_2$: indeed $D^\alpha(A^0\partial_tu_N)=A^0D^\alpha\partial_tu_N+[D^\alpha,A^0]\partial_tu_N$ by [L5], and the pairing of $P_ND^\alpha(A^0\partial_tu_N)$ with $D^\alpha\partial_tu_N$ removes $P_N$. The first term is at most $C_R\|\partial_tu_N\|_{H^{j-1}}$ by [L4], hence at most $C_R'(1+\|u_N\|_{H^s})$ by the induction hypothesis; the second is at most $C_R(1+\|u_N\|_{H^s})$ by [L4] applied to the compositions $A^i(t,\cdot,u_N)$ and the product bound, since $\|\partial_iu_N\|_{H^{j}}\le\|u_N\|_{H^s}$. Summing over the finitely many $|\alpha|\le j$ gives the estimate at order $j$. [step 1.1, L1, L2, L3, L4, L5, algebra]
+2.1 (Induction on the order: the estimate at order $j$.) Fix an integer $j$ with $1\le j\le s-1$ and suppose the bound holds for all orders below $j$; fix $|\alpha|=j$. Applying $P_ND^\alpha$ to the Galerkin equation [L2] (legitimate by commutation [L1]) and pairing with $D^\alpha\partial_tu_N\in X_N$ gives, after moving the leading term and using self-adjointness [L1], $a\|D^\alpha\partial_tu_N\|_2\le\bigl\|[D^\alpha,A^0(t,\cdot,u_N)]\partial_tu_N\bigr\|_2+\bigl\|D^\alpha(A^i(t,\cdot,u_N)\partial_iu_N+B(t,\cdot,u_N))\bigr\|_2$: indeed $D^\alpha(A^0\partial_tu_N)=A^0D^\alpha\partial_tu_N+[D^\alpha,A^0]\partial_tu_N$ by [L5], and the pairing of $P_ND^\alpha(A^0\partial_tu_N)$ with $D^\alpha\partial_tu_N$ removes $P_N$. The first term is at most $C_R\|\partial_tu_N\|_{H^{j-1}}$ by [L4], hence at most $C_R'(1+\|u_N\|_{H^s})$ by the induction hypothesis; the second is at most $C_R(1+\|u_N\|_{H^s})$ by [L4] applied to the compositions $A^i(t,\cdot,u_N)$ and the product bound, since $\|\partial_iu_N\|_{H^{j}}\le\|u_N\|_{H^s}$. Summing over the finitely many $|\alpha|\le j$ gives the estimate at order $j$. [step 1.1, L1, L2, L3, L4, L5, algebra]
 
 3.1 (Conclusion.) The induction of step 2.1, starting from step 1.1, gives the stated bound for every $0\le j\le s-1$ after enlarging the constant to be independent of $j$. [step 1.1, step 2.1, discharge-induction] ∎
 

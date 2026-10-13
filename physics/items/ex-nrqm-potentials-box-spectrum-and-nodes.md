@@ -45,7 +45,9 @@ sources:
       url: "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
         Section 9.1, printed pages 181-187 (PDF pages 193-199): Sturm-Liouville
-        problems on intervals, Dirichlet eigenvalues and nodal counts"
+        interval setup; separated self-adjoint boundary conditions are treated
+        in Section 9.2, including Theorem 9.6. The full-line nodal theorem in
+        Section 9.7 has different domain hypotheses and is not used here"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
 verification:
   precheck: pass
@@ -69,7 +71,7 @@ $n-1$ zeros in $(0,L)$, namely the points $x_{k}=kL/n$, $k=1,\dots,n-1$.
 (ii) *Constant shift.* If $V=c$ is the constant potential of value $c\in
 \mathbb R$ (joules), then $H_{D,c}$ has exactly the same eigenfunctions
 $e_{n}$ and the eigenvalues $\mathcal E_{n}+c$; consequently the min-max
-complexity bound of the interval theorem is attained with equality,
+comparison bound of the interval theorem is attained with equality,
 $|\mathcal E_{n}+c-\mathcal E_{n}|=|c|=\|V\|_{\infty}$ for every $n$.
 
 (iii) *Gaps.* $\mathcal E_{n+1}-\mathcal E_{n}
@@ -88,11 +90,11 @@ potential.
 
 **Given:** The declared Dirichlet interval model with $0<L<\infty$ and $m,\hbar>0$; the interval spectrum theorem [[pthm-nrqm-potentials-interval-spectra-completeness-and-nodes]]; a real constant potential value $c$.
 
-[F1] **Dirichlet box conclusions.** For every $V\in C([0,L];\mathbb R)$ the assigned operator $H_{D,V}=(\hbar^{2}/2m)(A_{D}+M_{\tilde V})$ with $\tilde V=(2m/\hbar^{2})V$ is an assigned sharp observable, self-adjoint with compact resolvent and a complete orthonormal eigenfamily, with strictly increasing simple eigenvalues $\mathcal E_{n}$ and the nodal count: the eigenvector belonging to $\mathcal E_{n}$ has exactly $n-1$ zeros in $(0,L)$; the min-max comparison $|\mathcal E_{n}-\hbar^{2}\pi^{2}n^{2}/(2mL^{2})|\le\|V\|_{\infty}$ holds; and for $V=0$ the eigenpairs are exactly $(\hbar^{2}\pi^{2}n^{2}/(2mL^{2}),\,e_{n})$ with the displayed $e_{n}$, a complete orthonormal family ([[pthm-nrqm-potentials-interval-spectra-completeness-and-nodes]] clause (a)).
+[F1] **Dirichlet box conclusions.** For every $V\in C([0,L];\mathbb R)$ the assigned operator $H_{D,V}=(\hbar^{2}/2m)(A_{D}+M_{\tilde V})$ with $\tilde V=(2m/\hbar^{2})V$ is an assigned sharp observable, self-adjoint with compact resolvent and a complete orthonormal eigenfamily, with strictly increasing simple eigenvalues $\mathcal E_{n}$ and the nodal count: the eigenvector belonging to $\mathcal E_{n}$ has exactly $n-1$ zeros in $(0,L)$; the min-max comparison $|\mathcal E_{n}-\hbar^{2}\pi^{2}n^{2}/(2mL^{2})|\le\|V\|_{\infty}$ holds; and for $V=0$ a complete orthonormal family of eigenpairs is $(\hbar^{2}\pi^{2}n^{2}/(2mL^{2}),\,e_{n})$ with the displayed $e_{n}$, a complete orthonormal family ([[pthm-nrqm-potentials-interval-spectra-completeness-and-nodes]] clause (a)).
 
 [F2] **Sine zeros.** For $n\ge1$ and $x\in(0,L)$, $\sin(n\pi x/L)=0$ if and only if $n\pi x/L=k\pi$ for an integer $k$, i.e. $x=kL/n$; among these only $k=1,\dots,n-1$ lie in $(0,L)$ ([[thm-sine-cosine-zero-sets-and-fundamental-period]]).
 
-1.1 [Free eigenpairs and completeness] For $V=0$ the hypotheses of [F1] hold with $V=0$, and its free-box clause gives exactly the eigenpairs $(\mathcal E_{n},e_{n})$ with $\mathcal E_{n}=\hbar^{2}\pi^{2}n^{2}/(2mL^{2})$ and $e_{n}(x)=\sqrt{2/L}\sin(n\pi x/L)$, together with completeness of $(e_{n})$ and simplicity of the eigenvalues. [given, F1, algebra]
+1.1 [Free eigenpairs and completeness] For $V=0$ the hypotheses of [F1] hold with $V=0$, and its free-box clause gives the complete orthonormal family of eigenpairs $(\mathcal E_{n},e_{n})$ with $\mathcal E_{n}=\hbar^{2}\pi^{2}n^{2}/(2mL^{2})$ and $e_{n}(x)=\sqrt{2/L}\sin(n\pi x/L)$, together with completeness of $(e_{n})$ and simplicity of the eigenvalues. [given, F1, algebra]
 
 2.1 [Nodal points] By [F2] the zeros of $e_{n}$ in $(0,L)$ are exactly $x_{k}=kL/n$, $k=1,\dots,n-1$, so their number is $n-1$, in agreement with the nodal count of [F1]. [step 1.1, F1, F2, algebra]
 

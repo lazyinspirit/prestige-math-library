@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 3
-deps: [def-cm-continuum-motion, def-cm-material-region-and-density, thm-cm-transport-theorem, def-cm-euclidean-spatial-calculus, cor-c-one-change-of-variables-for-l-one-functions, def-countable-choice, def-metric-ball, def-euclidean-inner-product, def-integral-over-a-measurable-set, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-algebra-of-derivatives, thm-total-derivative-computes-directional-and-partial-derivatives, def-ck-euclidean-maps-and-diffeomorphisms]
+deps: [def-cm-continuum-motion, def-cm-material-region-and-density, thm-cm-transport-theorem, def-cm-euclidean-spatial-calculus, cor-c-one-change-of-variables-for-l-one-functions, def-countable-choice, def-metric-ball, def-euclidean-inner-product, def-integral-over-a-measurable-set, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-algebra-of-derivatives, thm-total-derivative-computes-directional-and-partial-derivatives, def-ck-euclidean-maps-and-diffeomorphisms, thm-chain-rule-for-total-derivatives]
 dependency_roles:
   def-cm-continuum-motion: mathematical-premise
   def-cm-material-region-and-density: mathematical-premise
@@ -21,6 +21,7 @@ dependency_roles:
   thm-algebra-of-derivatives: mathematical-premise
   thm-total-derivative-computes-directional-and-partial-derivatives: mathematical-premise
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
+  thm-chain-rule-for-total-derivatives: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -61,7 +62,7 @@ so the transport theorem reproduces the constant rate $0$.
 
 [L2] Change of variables: for the translation $\psi_t$ (a $C^1$ diffeomorphism with $|\det D\psi_t|=1$), $\int_{\psi_t(B)}f(t,x)dx=\int_Bf(t,X+tv)dX=\int_Bh(X)dX$ ([[cor-c-one-change-of-variables-for-l-one-functions]], [[def-countable-choice]], [[def-integral-over-a-measurable-set]]).
 
-[L3] Derivatives: $\partial_tf(t,x)=-Dh(x-tv)v$ and $\nabla f(t,x)=(\nabla h)(x-tv)$, hence $\partial_tf+\langle\nabla f,v\rangle_2=0$; moreover $\operatorname{div}(fv)=\langle\nabla f,v\rangle_2+f\operatorname{div}v=\langle\nabla f,v\rangle_2$ because $v$ is constant ([[def-cm-euclidean-spatial-calculus]], [[thm-algebra-of-derivatives]], [[thm-total-derivative-computes-directional-and-partial-derivatives]], [[def-euclidean-inner-product]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]]).
+[L3] The affine map $A(t,x):=x-tv$ has total derivative $DA(t,x)(\tau,z)=z-\tau v$, directly from its exact increment. Since $h$ is $C^1$, [[thm-chain-rule-for-total-derivatives]] gives $f=h\circ A$ of class $C^1$ and $Df(t,x)(\tau,z)=Dh(x-tv)(z-\tau v)$. Derivatives: $\partial_tf(t,x)=-Dh(x-tv)v$ and $\nabla f(t,x)=(\nabla h)(x-tv)$, hence $\partial_tf+\langle\nabla f,v\rangle_2=0$; moreover $\operatorname{div}(fv)=\langle\nabla f,v\rangle_2+f\operatorname{div}v=\langle\nabla f,v\rangle_2$ because $v$ is constant ([[def-cm-euclidean-spatial-calculus]], [[thm-algebra-of-derivatives]], [[thm-total-derivative-computes-directional-and-partial-derivatives]], [[def-euclidean-inner-product]], [[thm-linearity-of-the-lebesgue-integral-on-l-one]]).
 
 ## Verification
 

@@ -34,7 +34,7 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "Complete integrability of the Hamiltonian system of a declared hyperregular potential presentation: a datum of $n$ phase functions on an open phase domain of dimension $2n$, with first entry the autonomous branch Hamiltonian, pairwise in involution, independent on an open dense regular locus, and the attached integral map, regular values and regular fibres; the datum is a completely integrable Hamiltonian system for the presentation's two-form in the root-library sense. The item defines the datum class; it asserts no model of the force branch is completely integrable, no fibre structure, no action-angle coordinates and no measured value."
+physical_scope: "Complete integrability of the Hamiltonian system of a declared hyperregular potential presentation: a datum of $n$ phase functions on an open phase domain of dimension $2n$, with first entry the autonomous branch Hamiltonian, pairwise in involution, independent on an open dense regular locus, and the attached integral map, regular values and regular fibres; the datum is a completely integrable Hamiltonian system for the presentation's two-form in the root-library sense. The item defines the datum class without asserting complete integrability of any particular model, any fibre structure, existence of action-angle coordinates or any measured value."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 4.5.2, printed pages 107-108 (PDF pages 113-114): integrable systems as systems with n mutually Poisson-commuting constants of motion, the invariant tori, and the reference to Arnold's book for a proof"
@@ -54,10 +54,12 @@ Adopt the force model with potential presentation $(U,d)$ and mechanical
 Lagrangian $L=K-U$ of [[def-cm07-action-and-mechanical-lagrangian]], with
 the momentum charts and two-form datum of [[def-cm13-two-form]], the
 canonical coordinates of [[def-cm13-canonical-form]], the bracket of
-[[def-cm13-poisson]], the Hamiltonian fields of [[def-cm13-hamiltonian-field]] and the branch
-Hamiltonian of [[def-cm12-hamiltonian]], assumed autonomous on the
-chosen domain and hence written $H:W\to\mathbb R$;
-by clause 1 of [[pthm-cm13-two-form-is-symplectic]] each momentum phase
+[[def-cm13-poisson]], the Hamiltonian fields of [[def-cm13-hamiltonian-field]] and the Hamiltonian of the chosen chart of [[def-cm12-hamiltonian]]:
+$H$ in Cartesian coordinates or $\widetilde H$ in generalized coordinates.
+Assume this chart Hamiltonian is autonomous and write it throughout this
+definition as $H:W\to\mathbb R$, on that same chart's phase domain $W$;
+by clauses 1–2 of [[pthm-cm13-two-form-is-symplectic]] (clause 1 for the
+Cartesian domain and clause 2 for a generalized-coordinate domain), each momentum phase
 domain is a symplectic manifold for $\omega$, with $\omega$ the standard
 two-form in the chart's canonical coordinates
 ([[def-symplectic-form-and-symplectic-manifold]]). Dimensions are read by
@@ -89,7 +91,8 @@ Hamiltonian system** on $(W_{0},\omega)$ in the sense of
 [[def-completely-integrable-hamiltonian-system]], with branches read
 through the presentation's Hamiltonians; the root notion of
 [[def-first-integral-and-poisson-commuting-functions]] is read through the
-bracket criterion of [[pthm-cm13-observable-evolution]] clause 2.
+bracket criterion of [[def-cm14-involution]] clause (c), whose sufficiency
+is [[pthm-cm13-observable-evolution]] clause 2.
 
 **(c) Integral map, regular locus and fibres.** Attached to a datum $F$
 are:
@@ -106,9 +109,9 @@ are:
    ([[def-cm13-hamiltonian-field]]).
 
 **(d) Status.** The item defines a datum class and its attached objects.
-It asserts that no particular model of the force branch is completely
-integrable, that no fibre is compact, connected or a torus, that no
-action-angle coordinates exist and no measured value is known; the
+It makes no assertion that a particular model is completely integrable,
+that a fibre is compact, connected or a torus, that action-angle coordinates
+exist, or that a measured value is known; the
 structural and motion statements are the torus theorem and the
 action-angle theorem of this page (items `pthm-cm14-regular-tori` and
 `pthm-cm14-action-angle`), conditional on the hypotheses stated there.
@@ -125,5 +128,6 @@ action-angle theorem of this page (items `pthm-cm14-regular-tori` and
   datum: the branch Hamiltonian of a potential presentation with a $C^{2}$
   potential is only $C^{2}$ in general, so a completely integrable datum
   carrying $F_{1}=H$ requires a smoother presentation (for example
-  $U$ of class $C^{\infty}$) or a smoothed integral family; this is a
+  $U$ and the chart data of class $C^{\infty}$); merely smoothing other
+  integrals cannot replace the required equality $F_{1}=H$. This is a
   hypothesis on the datum, not a consequence of the model's regularity.

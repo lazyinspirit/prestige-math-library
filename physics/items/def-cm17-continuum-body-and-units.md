@@ -6,8 +6,13 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 8
-deps: [def-cm-material-region-and-density, post-cm01-frames, post-cm01-worldlines, post-cm01-spacetime, def-cm01-units, def-interval, def-cm-affine-time-space, pthm-cm01-galilean-kinematics]
+deps: [def-cm-material-region-and-density, post-cm01-frames, post-cm01-worldlines, post-cm01-spacetime, def-cm01-units, def-interval, def-cm-affine-time-space, pthm-cm01-galilean-kinematics, def-cm-continuum-motion, def-cm-euclidean-spatial-calculus, thm-cm-local-mass-balance, thm-cm-local-momentum-balance, def-cm-linear-elastic-constitutive-law]
 dependency_roles:
+  thm-cm-local-mass-balance: mathematical-premise
+  thm-cm-local-momentum-balance: mathematical-premise
+  def-cm-linear-elastic-constitutive-law: mathematical-premise
+  def-cm-continuum-motion: mathematical-premise
+  def-cm-euclidean-spatial-calculus: mathematical-premise
   def-cm-material-region-and-density: mathematical-premise
   post-cm01-frames: formulation-prerequisite
   post-cm01-worldlines: formulation-prerequisite
@@ -58,41 +63,78 @@ consisting of
 The points $X\in B$ are the **material labels** of the body and $B$ is its
 **reference placement**. The reference placement is bookkeeping for the
 labels and not an observable: it is used only to name the points of the body,
-and all physical statements of this page concern spatial fields on the
-current regions and their transformation between frames. The label set
-carries no metric, mass or force of its own.
+and the full-motion branch concerns spatial fields on the current regions;
+the linear elastic branch instead uses reference fields. The reference chart's
+Euclidean structure fixes the derivatives of these reference fields. It does
+not assign an intrinsic mass or force to a label.
 
-**(c) Field slots and dimensions.** The following fields are attached to body
-data of this branch; each dimension is computed from the stated defining
-relation with the rules of [[def-cm01-units]], and every display of this page
-must be dimensionally consistent:
+**(c) Field slots and dimensions.** These slots are conditional data, not
+assertions of physical existence. Whenever a motion is specified, use exactly
+[[def-cm-continuum-motion]]: a $C^2$ map $\chi:I\times O\to\mathbb R^3$,
+with each $\chi_t$ injective and $D_X\chi_t$ invertible, and
+$\det D_X\chi_t>0$ on $I\times B$. Put $\Omega_t=\chi_t(B)$ and
+$\mathcal U=\{(t,x):t\in I,\ x\in\chi_t(O)\}$, the open spacetime domain
+of that supplier. Spatial fields below are defined on $\mathcal U$ or on a
+stated open subdomain containing the current events of interest; additional
+regularity is specified wherever needed. The dimensions use
+[[def-cm01-units]].
 
-1. **density** $\rho$, mass per unit volume, $[\rho]=\mu\ell^{-3}$;
-2. **spatial velocity** $u$, $[u]=\ell\tau^{-1}$, and **material
-   acceleration** $a=D_tu$, $[a]=\ell\tau^{-2}$;
-3. **body force per unit mass** $b$, an acceleration, $[b]=\ell\tau^{-2}$;
-   the corresponding force per volume is $\rho b$ of dimension
-   $\mu\ell^{-2}\tau^{-2}$;
-4. **traction** $t$ and **stress matrix** $\sigma$, force per unit area,
-   $[t]=[\sigma]=\mu\ell^{-1}\tau^{-2}$ (in SI, $\mathrm{N\,m^{-2}}$);
-5. **displacement** $\xi$, $[\xi]=\ell$; **linear strain** $e$, dimensionless;
-6. **elastic moduli** $\lambda,\mu_s$ and **pressure** $p$ of dimension
-   $\mu\ell^{-1}\tau^{-2}$; **dynamic viscosity** $\eta$ of dimension
-   $\mu\ell^{-1}\tau^{-1}$ (SI, $\mathrm{Pa\,s}$);
-7. **wave speed** $c$, $[c]=\ell\tau^{-1}$, and **enthalpy per unit mass**
-   $h$, $[h]=\ell^2\tau^{-2}$.
+1. **Density** is a scalar map $\rho:\mathcal U\to(0,\infty)$ of class
+   $C^1$, read as mass per unit spatial volume, $[\rho]=\mu\ell^{-3}$.
+2. **Spatial velocity** is the $C^1$ map $u:\mathcal U\to\mathbb R^3$
+   defined by $u(t,\chi(t,X))=\partial_t\chi(t,X)$,
+   $[u]=\ell\tau^{-1}$. For any $C^1$ scalar or vector field $f$ on this
+   domain define $D_tf=\partial_tf+D_xf\,u$, componentwise for vectors,
+   as in [[def-cm-euclidean-spatial-calculus]]. **Material acceleration**
+   is the continuous map $a:=D_tu:\mathcal U\to\mathbb R^3$,
+   $[a]=\ell\tau^{-2}$.
+3. **Body force per unit mass** is a continuous map
+   $b:\mathcal U\to\mathbb R^3$, $[b]=\ell\tau^{-2}$; its force per
+   unit volume is $\rho b$, of dimension $\mu\ell^{-2}\tau^{-2}$.
+4. With $S^2=\{n\in\mathbb R^3:\|n\|_2=1\}$, **traction** is a map
+   $t:\mathcal U\times S^2\to\mathbb R^3$, read as force per unit area
+   acting on the side opposite to the direction $n$. A **stress matrix**
+   is a matrix field $\sigma:\mathcal U\to M_3(\mathbb R)$ representing
+   it by $t(s,x,n)=\sigma(s,x)n$ when such a field exists; existence and
+   regularity are separate hypotheses. Here
+   $[t]=[\sigma]=\mu\ell^{-1}\tau^{-2}$ (SI $\mathrm{N\,m^{-2}}$).
+5. **Displacement** relative to the stationary reference placement is
+   $\xi:I\times O\to\mathbb R^3$, $\xi(t,X)=\chi(t,X)-X$,
+   $[\xi]=\ell$; its **linear strain** is the symmetric matrix field
+   $e=(D_X\xi+(D_X\xi)^{\mathsf T})/2$, of dimension $1$. A linearized
+   branch may instead prescribe a displacement field with these same
+   domain and strain conventions; identifying it with an exact motion
+   requires the motion hypotheses above.
+6. **Elastic moduli** $\lambda,\mu_s$ are real scalar model parameters;
+   **pressure** is a scalar field $p:\mathcal U\to\mathbb R$ of class
+   $C^1$, read as the coefficient in the isotropic stress $-pI_3$.
+   Their dimension is $\mu\ell^{-1}\tau^{-2}$. **Dynamic viscosity**
+   $\eta$ is a real scalar model parameter of dimension
+   $\mu\ell^{-1}\tau^{-1}$ (SI $\mathrm{Pa\,s}$). Signs and constitutive
+   uses of these parameters are specified by each branch.
+7. **Wave speed** $c>0$ is a scalar parameter of a specified wave model,
+   $[c]=\ell\tau^{-1}$; its construction from that model's parameters is
+   stated in the relevant branch, rather than inferred from dimensions.
 
 **(d) Frame and reference-label conventions.** Write a Galilean change as
 $$G(t,x)=(t',x')=(t+\beta,Rx+vt+a_0),\qquad R\in SO(3),$$
-with the conventions of [[pthm-cm01-galilean-kinematics]]. At corresponding events, a scalar field $q$ (density $\rho$, pressure $p$ or enthalpy $h$) transforms by $q'\circ G=q$. Spatial vectors such as acceleration and force per unit mass transform by $a'\circ G=Ra$, $b'\circ G=Rb$, while velocity has the boost term $u'\circ G=Ru+v$. Normals transform by $n'=Rn$, traction by
+with the conventions of [[pthm-cm01-galilean-kinematics]]. At corresponding events, a scalar field $q$ (for example, density $\rho$ or pressure $p$) transforms by $q'\circ G=q$. Spatial vectors such as acceleration and force per unit mass transform by $a'\circ G=Ra$, $b'\circ G=Rb$, while velocity has the boost term $u'\circ G=Ru+v$. Normals transform by $n'=Rn$, traction by
 $$t'(G(t,x),Rn)=R\,t(t,x,n),$$
-and stress by $\sigma'\circ G=R\sigma R^{\mathsf T}$. Rotations preserve spatial volume and area. Spatial differentiation is at fixed frame time; these rules give $D_{x'}u'=R(D_xu)R^{\mathsf T}$, $\operatorname{div}_{x'}u'=\operatorname{div}_xu$ and $D_{t'}u'=R D_tu$ at corresponding events. Thus $t=\sigma n$ and the local mass and momentum equations have the same form, as do their volume and surface integral forms.
+and stress by $\sigma'\circ G=R\sigma R^{\mathsf T}$. Rotations preserve spatial volume and area. Spatial differentiation is at fixed frame time; these rules give $D_{x'}u'=R(D_xu)R^{\mathsf T}$, $\operatorname{div}_{x'}u'=\operatorname{div}_xu$ and $D_{t'}u'=R D_tu$ at corresponding events. In particular, $\sigma'n'=R\sigma n$, so traction representation is preserved.
+
+Here the **local mass and momentum equations** mean precisely
+$$D_t\rho+\rho\operatorname{div}_xu=0,\qquad \rho D_tu=\rho b+g,\qquad g_i:=\sum_{j=1}^3\partial_{x_j}\sigma_{ij},$$
+with $\rho,u,\sigma$ of class $C^1$ on a common open subdomain of $\mathcal U$ and $b$ continuous there, as in [[thm-cm-local-mass-balance]] and [[thm-cm-local-momentum-balance]]. These are equation templates, not adopted laws in this definition. The chain rule applied to $G^{-1}$ gives $(D_{t'}\rho')\circ G=D_t\rho$ and $g'\circ G=Rg$ (in the latter identity the sum over spatial indices uses $R^{\mathsf T}R=I_3$). Thus the mass residual is unchanged and the momentum residual is multiplied by $R$; each equation holds exactly when its transformed equation holds.
+
+For the **integral forms**, use the exact setting of those two suppliers, including $\mathrm{AC}_\omega$: $J_0$ has compact closure in $I$, the common open field domain contains its swept closure, and $B_0\subseteq B$ is nonempty bounded open with $\overline{B_0}\subseteq B$. Write $V_t=\chi_t(B_0)$ for the moving region, and put
+$$M(t):=\int_{V_t}\rho\,dx,\qquad P(t):=\int_{V_t}\rho u\,dx,\qquad \mathcal F(t):=\int_{V_t}\rho b\,dx+\int_{\partial V_t}\sigma\nu\,dS.$$
+The volume integrals are Lebesgue integrals, componentwise for vectors; the force expression is used only when $V_t$ is a bounded $C^1$ domain, with outward unit normal $\nu$ and the surface integral of [[thm-cm-local-momentum-balance]]. The equations are $\dot M=0$ and $\dot P=\mathcal F$, on the respective admissible regions and times of the suppliers. At $t'=t+\beta$ the corresponding region is $RV_t+vt+a_0$. Volume and surface measure preservation and $\nu'=R\nu$ give $M'(t')=M(t)$, $P'(t')=RP(t)+vM(t)$ and $\mathcal F'(t')=R\mathcal F(t)$, where primes here label the transformed quantities. Consequently $dP'/dt'=R\dot P+v\dot M$: the integral momentum equation retains its form together with mass conservation. No covariance of momentum alone without the mass premise is asserted.
 
 For a reference-label chart choose a fixed reference time $t_{\mathrm r}\in I$ and set $X'=RX+vt_{\mathrm r}+a_0$. This is a time-independent relabeling, with $B',O'$ the images of $B,O$, and
 $$\chi'(t',X')=R\chi(t,X)+vt+a_0,\qquad t=t'-\beta.$$
 A material scalar transforms by composition with the inverse label/time map; a material vector by that composition followed by $R$. In the linear elastic branch the stress-free comparison placement $X$ in $F$ transforms to the uniformly translating comparison placement $RX+vt+a_0$ in $F'$. Define displacement as the difference from this same comparison placement, so
 $$\xi'(t',X')=R\xi(t,X),\qquad D_{X'}\xi'=R(D_X\xi)R^{\mathsf T},\qquad e'=ReR^{\mathsf T}.$$
-Time derivatives here are at fixed labels. Consequently $\partial_{t'}^2\xi'=R\partial_t^2\xi$, while spatial velocity in the boosted description is $v+R\partial_t\xi$. The convention $u=\partial_t\xi$ applies in the chosen frame where the comparison placement is stationary. Constant isotropic elastic moduli and viscosity are scalars; the isotropic strain-stress law is carried to the same law by these rules. These are coordinate-reading rules, not a finite-strain approximation theorem or a new constitutive assumption.
+Time derivatives here are at fixed labels. Consequently $\partial_{t'}^2\xi'=R\partial_t^2\xi$, while the label's coordinate velocity in the boosted description is $v+R\partial_t\xi$. In the stationary comparison frame its coordinate velocity is $\partial_t\xi$; for a finite motion the spatial velocity is related by $u(t,\chi(t,X))=\partial_t\xi(t,X)$. Constant isotropic elastic moduli and viscosity are scalars. Precisely, the **isotropic strain-stress law** of [[def-cm-linear-elastic-constitutive-law]], applied at each time to a $C^2$ reference displacement, is $\sigma_{\mathrm{ref}}=\lambda(\operatorname{tr}e)I_3+2\mu_s e$ with constant $\mu_s>0$ and $\lambda+2\mu_s/3>0$. Since $\operatorname{tr}(ReR^{\mathsf T})=\operatorname{tr}e$ and $RI_3R^{\mathsf T}=I_3$, its rotated stress is $R\sigma_{\mathrm{ref}}R^{\mathsf T}=\lambda(\operatorname{tr}e')I_3+2\mu_s e'$. Thus it retains its form. These are conditional coordinate-reading rules, not a finite-strain approximation theorem or a new constitutive assumption.
 
 ## Remarks
 
@@ -103,11 +145,10 @@ Time derivatives here are at fixed labels. Consequently $\partial_{t'}^2\xi'=R\p
   conventions in the sense of [[def-cm01-units]], not physical laws.
 
 - **Reference versus current placement.** The choice of $B$ and $O$ is
-  bookkeeping for the labels. Every statement of this page is formulated for
-  one chosen body data set and quantifies over its labels only through the
-  motion; how the formulation is transported under relabeling is a
-  convention of the model, is not used in any proof below, and is not
-  asserted here. No physical meaning is attached to the coordinates $X$.
+  bookkeeping for the labels. The full-motion and reference-field branches
+  use their respective domains above. Clause (d) specifies the affine
+  relabeling convention and the conditional transformation calculations;
+  it does not identify a reference strain with a finite-strain observable.
 
 - **Model quantities versus measured quantities.** The fields introduced here
   are model quantities read in a frame. A measured mass, density or force is

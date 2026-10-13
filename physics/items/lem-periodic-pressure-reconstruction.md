@@ -45,11 +45,11 @@ $$\nabla p=-(I-P)\bigl((u\cdot\nabla)u\bigr),\qquad \partial_tu+(u\cdot\nabla)u=
 
 **Given:** The field $u$ with the stated continuity, differentiability and divergence-free hypotheses, and the operators of [[def-periodic-vector-sobolev-space-and-leray-projection]].
 
-[F1] Coefficientwise, $(u\cdot\nabla)u=\operatorname{div}(u\otimes u)$ when $\operatorname{div}u=0$: $((u\cdot\nabla)u)_i=\sum_j\partial_j(u_iu_j)$, so $\widehat{((u\cdot\nabla)u)_i}(k)=2\pi i\sum_jk_j\widehat{u_iu_j}(k)$ ([[def-periodic-vector-sobolev-space-and-leray-projection]]).
+[F1] The scalar product rule and $\sum_j\partial_ju_j=0$ give, componentwise, $((u\cdot\nabla)u)_i=\sum_j\partial_j(u_iu_j)$, so $\widehat{((u\cdot\nabla)u)_i}(k)=2\pi i\sum_jk_j\widehat{u_iu_j}(k)$ ([[def-periodic-vector-sobolev-space-and-leray-projection]]).
 
 [F2] For $k\ne0$, the coefficient of $(I-P)v$ at $k$ is $\bigl(k\cdot\widehat v(k)/|k|_2^2\bigr)k$, and the coefficient of $\nabla p$ is $2\pi ik\,\widehat p(t,k)$; $P$ kills gradient fields: $P\nabla q=0$ ([[def-periodic-vector-sobolev-space-and-leray-projection]]).
 
-[F3] Product bounds $\|fg\|_{H^m}\le C_m\|f\|_{H^m}\|g\|_{H^m}$ and $\|\partial_jf\|_{H^m}\le\|f\|_{H^{m+1}}$ hold ([[lem-discrete-young-and-sobolev-product]], claim 2; [[def-periodic-vector-sobolev-space-and-leray-projection]]).
+[F3] For $m>3/2$, product bounds $\|fg\|_{H^m}\le C_m\|f\|_{H^m}\|g\|_{H^m}$ and $\|\partial_jf\|_{H^m}\le\|f\|_{H^{m+1}}$ hold ([[lem-discrete-young-and-sobolev-product]], claim 2; [[def-periodic-vector-sobolev-space-and-leray-projection]]).
 
 [F4] If $h(t,\cdot)\in H^m$ for all $m$ with $|k|^{2}|\widehat h(t,k)|$ bounded by $C_Nw_k^{-N}$ for all $N$, uniformly on compact time sets, then $h$ has continuous derivatives of all orders in $x$; a curve with $\partial_t^rh\in C([0,T],H^m)$ for all $r,m$ is $C^\infty$ on the strip ([[lem-fourier-lattice-sobolev-embedding]], claims 1 and 3).
 
@@ -70,7 +70,7 @@ $$\nabla p=-(I-P)\bigl((u\cdot\nabla)u\bigr),\qquad \partial_tu+(u\cdot\nabla)u=
 
 2.2 **Poisson identity.** By [F1] and the definitions, the coefficient of $\Delta p$ at $k\ne0$ is $-4\pi^2|k|_2^2\widehat p(t,k)=4\pi^2\sum_{i,j}k_ik_j\widehat{u_iu_j}(k)$, while the coefficient of $-\sum_{i,j}\partial_i\partial_j(u_iu_j)$ is $-\sum_{i,j}(2\pi ik_i)(2\pi ik_j)\widehat{u_iu_j}(k)=4\pi^2\sum_{i,j}k_ik_j\widehat{u_iu_j}(k)$; at $k=0$ both sides vanish (for $\Delta p$ because $\widehat p(0)=0$, and for the double divergence because $\widehat{-\sum\partial_i\partial_j(u_iu_j)}(0)=0$). Hence $\Delta p=-\sum_{i,j}\partial_i\partial_j(u_iu_j)$: the third identity of claim 2. [step 1.1, F1]
 
-3.1 **Uniqueness.** If $\nabla q=\nabla p$ then for every $k\ne0$, $2\pi ik(\widehat q(k)-\widehat p(k))=0$ forces $\widehat q(t,k)=\widehat p(t,k)$, while at $k=0$ both means vanish, so $\widehat q(t,0)=\widehat p(t,0)=0$; hence $q-p$ has all Fourier coefficients zero. Both $q,p$ are continuous, so $q-p=0$ everywhere by the uniqueness of continuous representatives ([[lem-fourier-lattice-sobolev-embedding]], claim 2). [step 1.2, F4] ∎
+3.1 **Uniqueness.** If $\nabla q=\nabla p$ then for every $k\ne0$, $2\pi ik(\widehat q(k)-\widehat p(k))=0$ forces $\widehat q(t,k)=\widehat p(t,k)$, while at $k=0$ both means vanish, so $\widehat q(t,0)=\widehat p(t,0)=0$; hence $q-p$ has all Fourier coefficients zero. Injectivity of the scalar $L^2$ coefficient map in [[def-periodic-vector-sobolev-space-and-leray-projection]] gives $q-p=0$ almost everywhere. Both $q,p$ are continuous, so $q-p=0$ everywhere by the uniqueness of continuous representatives ([[lem-fourier-lattice-sobolev-embedding]], claim 2). [step 1.2, F4] ∎
 
 ## Remarks
 

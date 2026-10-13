@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 11
-deps: [def-countable-choice, def-holomorphic-kam-domain-and-diophantine-labels, lem-kam-parameter-sequences-satisfy-all-step-hypotheses, lem-kam-generator-flow-and-remainder-bound, lem-frequency-reparametrization-by-contraction, lem-truncated-homological-equation-with-conservative-loss, lem-kam-affine-taylor-fourier-truncation, lem-kam-composed-map-and-derivative-convergence, thm-parameter-kam-torus-invariance-and-lagrangianity, lem-kam-limit-is-an-embedding, lem-nondegenerate-frequency-reduction-and-alpha-square-smallness, lem-diophantine-resonance-slab-measure, lem-kam-conjugation-symmetry-of-the-construction, prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart, def-cm-phase-domain-and-standard-symplectic-two-form, thm-real-analytic-inverse-and-implicit-function-theorems, def-metric-ball, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-product-measure-on-sigma-finite-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-mean-value-inequality, thm-chain-rule-for-total-derivatives, def-operator-norm, def-interval, thm-continuous-image-of-a-compact-space-is-compact]
+deps: [def-countable-choice, def-holomorphic-kam-domain-and-diophantine-labels, lem-kam-parameter-sequences-satisfy-all-step-hypotheses, lem-kam-generator-flow-and-remainder-bound, lem-frequency-reparametrization-by-contraction, lem-truncated-homological-equation-with-conservative-loss, lem-kam-affine-taylor-fourier-truncation, lem-kam-composed-map-and-derivative-convergence, thm-parameter-kam-torus-invariance-and-lagrangianity, lem-kam-limit-is-an-embedding, lem-nondegenerate-frequency-reduction-and-alpha-square-smallness, lem-diophantine-resonance-slab-measure, lem-kam-conjugation-symmetry-of-the-construction, prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart, def-cm-phase-domain-and-standard-symplectic-two-form, thm-real-analytic-inverse-and-implicit-function-theorems, def-metric-ball, def-metric-topology, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, thm-lebesgue-measure-is-a-complete-measure, thm-lebesgue-measure-of-a-box-of-every-kind, def-product-measure-on-sigma-finite-spaces, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets, thm-mean-value-inequality, thm-chain-rule-for-total-derivatives, def-operator-norm, def-interval, thm-heine-borel-rn, thm-continuous-image-of-a-compact-space-is-compact]
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-holomorphic-kam-domain-and-diophantine-labels: mathematical-premise
@@ -25,13 +25,18 @@ dependency_roles:
   def-cm-phase-domain-and-standard-symplectic-two-form: mathematical-premise
   thm-real-analytic-inverse-and-implicit-function-theorems: mathematical-premise
   def-metric-ball: mathematical-premise
+  def-metric-topology: mathematical-premise
   def-lebesgue-measure-and-the-lebesgue-sigma-algebra: mathematical-premise
+  thm-lebesgue-measure-is-a-complete-measure: mathematical-premise
+  thm-lebesgue-measure-of-a-box-of-every-kind: mathematical-premise
   def-product-measure-on-sigma-finite-spaces: mathematical-premise
-  thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces: mathematical-premise
+  thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique: mathematical-premise
+  thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets: mathematical-premise
   thm-mean-value-inequality: mathematical-premise
   thm-chain-rule-for-total-derivatives: mathematical-premise
   def-operator-norm: mathematical-premise
   def-interval: mathematical-premise
+  thm-heine-borel-rn: mathematical-premise
   thm-continuous-image-of-a-compact-space-is-compact: mathematical-premise
 provenance:
   statement: ai-altered
@@ -120,35 +125,13 @@ No probability, frequency-of-occurrence or empirical claim is made.
 
 ## Facts & Assumptions
 
-**Given:** The analytic data and the parameters $\alpha,\varepsilon$ in the
-Statement.
+**Given:** The analytic data and the parameters $\alpha,\varepsilon$ in the Statement.
 
-[F1] The suppliers [[lem-kam-affine-taylor-fourier-truncation]],
-[[lem-truncated-homological-equation-with-conservative-loss]],
-[[lem-kam-generator-flow-and-remainder-bound]],
-[[lem-frequency-reparametrization-by-contraction]] and
-[[lem-kam-parameter-sequences-satisfy-all-step-hypotheses]] supply the affine
-Taylor step, truncated solution, one-step Hamiltonian map and remainder, inverse
-frequency shifts, and parameter sequences. In particular the sequences have
-$h_j=h_04^{-\mu j}$, angle loss $8\sigma_j$, and a summable relative error
-sequence $E_j$ satisfying $E_j\le4^{-(\mu+1)j}E_0$.
+[F1] The suppliers [[lem-kam-affine-taylor-fourier-truncation]], [[lem-truncated-homological-equation-with-conservative-loss]], [[lem-kam-generator-flow-and-remainder-bound]], [[lem-frequency-reparametrization-by-contraction]] and [[lem-kam-parameter-sequences-satisfy-all-step-hypotheses]] supply the affine Taylor step, truncated solution, one-step Hamiltonian map and remainder, inverse frequency shifts, and parameter sequences. In particular the sequences have $h_j=h_04^{-\mu j}$, angle loss $8\sigma_j$, and a summable relative error sequence $E_j$ satisfying $E_j\le4^{-(\mu+1)j}E_0$.
 
-[F2] [[lem-kam-composed-map-and-derivative-convergence]] gives the parameter
-limit $\Psi_\infty=(a,\vartheta+w)$ and $\chi_\infty$, with
-$|a|\le ArE$, $|w|\le A\sigma E$,
-$|D_\vartheta a|\le ArE/\sigma$, $|D_\vartheta w|\le AE$,
-$\operatorname{Lip}(\chi_\infty-\mathrm{id})\le C_LB_0/h_0$, and
-$\operatorname{Lip}_\nu(a,w)$ in the fixed scaled phase norm at most
-$2C_L(r+\sigma)E/h_0$. Here $\sigma=\min(\sigma_0,s_0/32)$,
-$E=2\sqrt{\varepsilon M_2}/(\alpha\sigma^\mu)$, and
-$B_0=C\alpha E\sigma^\mu$; all constants depend only on the fixed analytic
-data, $n$ and $\tau$.
+[F2] [[lem-kam-composed-map-and-derivative-convergence]] gives the parameter limit $\Psi_\infty=(a,\vartheta+w)$ and $\chi_\infty$, with $|a|\le ArE$, $|w|\le A\sigma E$, $|D_\vartheta a|\le ArE/\sigma$, $|D_\vartheta w|\le AE$, $\operatorname{Lip}(\chi_\infty-\mathrm{id})\le C_LB_0/h_0$, and $\operatorname{Lip}_\nu(a,w)$ in the fixed scaled phase norm at most $2C_L(r+\sigma)E/h_0$. Here $\sigma=\min(\sigma_0,s_0/32)$, $E=2\sqrt{\varepsilon M_2}/(\alpha\sigma^\mu)$, and $B_0=C\alpha E\sigma^\mu$; all constants depend only on the fixed analytic data, $n$ and $\tau$.
 
-[F3] The parameter limit satisfies the invariance and Lagrangian conclusions
-of [[thm-parameter-kam-torus-invariance-and-lagrangianity]], and is an embedded
-real torus by [[lem-kam-limit-is-an-embedding]] and
-[[lem-kam-conjugation-symmetry-of-the-construction]], provided the initial
-smallness is chosen as in [F1].
+[F3] The parameter limit satisfies the invariance and Lagrangian conclusions of [[thm-parameter-kam-torus-invariance-and-lagrangianity]], and is an embedded real torus by [[lem-kam-limit-is-an-embedding]] and [[lem-kam-conjugation-symmetry-of-the-construction]], provided the initial smallness is chosen as in [F1].
 
 [F4] The reduction in
 [[lem-nondegenerate-frequency-reduction-and-alpha-square-smallness]] gives
@@ -158,56 +141,54 @@ $r=\sqrt{\varepsilon/M_2}$ yields the relative KAM smallness. The parameter
 Hamiltonian is exactly $H_{\rm par}(I,\vartheta,\lambda)=
 H(b(\lambda)+I,\vartheta)$.
 
-[F5] [[lem-diophantine-resonance-slab-measure]] bounds the resonant slabs in a
-cube by $C_{n,\tau}R^{n-1}\alpha$ for half-width $R$ and exponent
-$\tau>n-1$. Its slicing proof is invariant under translating the cube, and
-closed cubes follow by enclosing them in open cubes of widths decreasing to
-that of the closed cube. Lebesgue measure is countably subadditive and the
-product measure of finite-measure measurable factors is their product
-([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]],
-[[def-product-measure-on-sigma-finite-spaces]],
-[[thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces]]).
+[F5] [[lem-diophantine-resonance-slab-measure]] bounds the resonant slabs in a cube by $C_{n,\tau}R^{n-1}\alpha$ for half-width $R$ and exponent $\tau>n-1$. For a translated cube, the orthogonal image is contained in a ball of the same radius centred at the translated centre, so the projected $(n-1)$-dimensional box bound and the slab thickness are unchanged. Under Lebesgue measure $\lambda_n$ is the restriction of Lebesgue outer measure to its measurable sets ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). Under countable choice, it is countably subadditive and every open, closed, or half-open cube has measure equal to the product of its side lengths ([[thm-lebesgue-measure-is-a-complete-measure]], [[thm-lebesgue-measure-of-a-box-of-every-kind]]). On Borel subsets of $\mathbb R^{2n}$, $\lambda_n\times\lambda_n$ agrees with $\lambda_{2n}$, and the product-measure rectangle formula gives $\lambda_{2n}(E_1\times E_2)=\lambda_n(E_1)\lambda_n(E_2)$ for measurable factors ([[thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets]], [[thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique]], [[def-product-measure-on-sigma-finite-spaces]]).
 
-[F6] If a holomorphic map has invertible derivative at a point, continuity of
+[F6] The set $\Lambda$ is closed in $C^*$: for each $k\ne0$, the map
+$\nu\mapsto|k\cdot\nu|$ is continuous (indeed Lipschitz), so its superlevel set
+is closed by [[def-metric-topology]], and $\Lambda$ is their intersection with
+$C^*$. Thus $\Lambda$ is
+compact. A cube in $\mathbb R^n$ is compact by Heine--Borel. The compact set
+$\Lambda\cap Q$ and the closed angle cube used below are therefore Borel.
+If a compact set in a metric space is considered in a local phase chart, its
+image there is Borel: compact subsets of metric spaces are closed, as a finite
+subcover of disjoint-neighbourhood balls separates any exterior point.
+Equip the phase space with the supremum product metric
+$$d_{\mathrm{phase}}((p,\pi\theta),(p',\pi\theta')):=\max\{|p-p'|_\infty,d_{\mathbb T^n}(\pi\theta,\pi\theta')\},$$
+using $d_{\mathbb T^n}$ of [[lem-kam-limit-is-an-embedding]].
+If a holomorphic map has invertible derivative at a point, continuity of
 the derivative gives a small convex cube on which the map is lower-Lipschitz:
 write $A=Db(\nu_0)$, choose the cube so
 $\sup\|Db-A\|\le(2\|A^{-1}\|)^{-1}$, and integrate the derivative along a
 segment ([[thm-mean-value-inequality]], [[thm-chain-rule-for-total-derivatives]],
-[[def-operator-norm]], [[def-interval]]). A continuous image of a compact set
-is compact ([[thm-continuous-image-of-a-compact-space-is-compact]]). A
+[[def-operator-norm]], [[def-interval]]). A closed bounded subset of a finite
+dimensional Euclidean space is compact by Heine--Borel, and a continuous image
+of a compact metric space is compact ([[thm-heine-borel-rn]],
+[[thm-continuous-image-of-a-compact-space-is-compact]]). A
 Lipschitz map between subsets of $\mathbb R^{2n}$ sends null sets to null sets:
 cover a null set by cubes of arbitrarily small total volume and cover each cube's
 image by a dimension-dependent finite number of cubes with side bounded by its
 Lipschitz constant times the original side.
 
-[F7] Hamiltonian translation and vector-field conventions are those of
-[[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]] and
-[[def-cm-phase-domain-and-standard-symplectic-two-form]].
+[F7] Hamiltonian translation and vector-field conventions are those of [[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]] and [[def-cm-phase-domain-and-standard-symplectic-two-form]].
 
 ## Proof
 
-**Proof technique:** direct; construct the translated parameter family, apply the
-complete iteration, transfer its tori to physical coordinates, then prove a
-joint lower-Lipschitz estimate for the frequency-angle parametrisation.
+**Proof technique:** direct; construct the translated parameter family, apply the complete iteration, transfer its tori to physical coordinates, then prove a joint lower-Lipschitz estimate for the frequency-angle parametrisation.
 
-1.1 Put $\sigma:=\min(\sigma_0,s_0/32)$, so [given, F1, F2, F5, choose, algebra]
-$3\sigma_0/4\le\sigma\le\sigma_0$, and put
-$E:=2\sqrt{\varepsilon M_2}/(\alpha\sigma^\mu)$. Choose a compact complex
-neighborhood of $C^*$ inside $\Omega'$ on which $b$ has bounded derivative and
-$\operatorname{dist}_\infty(b(\lambda),K)<r_0/2$; compactness and
-$b(C^*)\subset K$ permit this. Reduce $c$ so that $r\le r_0/4$,
-$h_0+AB_0$ is smaller than the width of this neighborhood, and $E$ meets the
-initial smallness requirements of [F1]-[F3]. The parameter-sequence lemma
-allows $K_0=O(1+|\log E|)$ and $h_0=\alpha/(2K_0^{\tau+1})$. Since
-$E_0\le(4/3)^\mu E$ and $E(1+|\log E|)^{\tau+1}\to0$ as $E\downarrow0$,
-$c$ can also be chosen so every small Lipschitz bound used below is below its
-fixed positive threshold. Finally reduce $c$ so
-$C_{n,\tau}(\operatorname{diam}C^*)^{n-1}\alpha<|C^*|/2$ whenever
-$0<\alpha<c$. [given, F1, F2, F5, choose, algebra]
+1.1 Put $\sigma:=\min(\sigma_0,s_0/32)$, so 
+$3\sigma_0/4\le\sigma\le\sigma_0$, and put $E:=2\sqrt{\varepsilon M_2}/(\alpha\sigma^\mu)$. Choose a compact complex neighborhood of $C^*$ inside $\Omega'$ on which $b$ has bounded derivative and $\operatorname{dist}_\infty(b(\lambda),K)<r_0/2$; compactness and $b(C^*)\subset K$ permit this. Reduce $c$ so that $r\le r_0/4$, $h_0+AB_0$ is smaller than the width of this neighborhood, and $E$ meets the initial smallness requirements of [F1]-[F3]. The parameter-sequence lemma allows $K_0=O(1+|\log E|)$ and $h_0=\alpha/(2K_0^{\tau+1})$. Since $E_0\le(4/3)^\mu E$ and $E(1+|\log E|)^{\tau+1}\to0$ as $E\downarrow0$, $c$ can also be chosen so every small Lipschitz bound used below is below its fixed positive threshold. Finally reduce $c$ so $C_{n,\tau}(\operatorname{diam}C^*)^{n-1}\alpha<|C^*|/2$ whenever $0<\alpha<c$. [given, F1, F2, F5, choose, algebra]
 
-2.1 Let $\Lambda:=\Omega_{\alpha,\tau}$. Its positive measure and lower bound [F2, F5, F6, step 1.1, algebra]
-in clause 1 follow by applying [F5] to the slabs removed from the translated
-cube $C^*$ and summing the lattice shells. Every label is in the regular
+2.1 Let $\Lambda:=\Omega_{\alpha,\tau}$. By [F6], $\Lambda$ is a closed subset
+of the compact cube $C^*$, hence compact. For every $\delta>0$, the resonant
+part $C^*\setminus\Lambda$ is contained in the resonant part of the translated
+open cube obtained by enlarging each side by $2\delta$; [F5] bounds its measure
+by the slab constant with half-width $R+\delta$. Letting $\delta\downarrow0$
+gives
+$$|C^*\setminus\Lambda|\le C_{n,\tau}(\operatorname{diam}C^*)^{n-1}\alpha.$$
+Since $C^*$ and $\Lambda$ are
+measurable, subtraction from $|C^*|$ gives the lower bound in clause 1; choose
+$c$ so this lower bound is positive. 
+Every label is in the regular
 frequency patch; differentiating $Dh(b(\nu))=\nu$ gives
 $D^2h(b(\nu))Db(\nu)=I_n$, so $Db(\nu)$ is invertible. On a sufficiently
 small neighborhood of each frequency, $b$ is lower-Lipschitz by [F6]. The
@@ -217,7 +198,7 @@ $\Omega'$. At least one, say $Q$, has $|\Lambda\cap Q|>0$, because the finite
 cover covers the positive-measure set $\Lambda$. Choose the constants in
 step 1.1 so $\chi_\infty(\Lambda\cap Q)$ remains in that larger neighborhood. [F2, F5, F6, step 1.1, algebra]
 
-2.2 Define the physical family map on $\Lambda\times\mathbb T^n$ by [step 1.1, F3, F4, F7, algebra]
+2.2 Define the physical family map on $\Lambda\times\mathbb T^n$ by 
 $$\mathcal P(\nu,\vartheta):= (b(\chi_\infty(\nu))+a(\vartheta,\nu),\,\vartheta+w(\vartheta,\nu)).$$
 For fixed $\nu$, the translation $I\mapsto b(\chi_\infty(\nu))+I$ is canonical.
 Since $H_{\rm par}(I,\vartheta,\chi_\infty(\nu))=
@@ -227,7 +208,7 @@ embedding statements of [F3] make each descended $\widehat\Psi^{\rm phys}_\nu$
 an embedded real torus. The geometric choice in step 1.1 keeps the image inside
 the actual domain of $H$. This proves clause 2. [step 1.1, F3, F4, F7, algebra]
 
-2.3 The angle component of the parameter invariance equation is [F2, F3, F4, step 1.1, algebra]
+2.3 The angle component of the parameter invariance equation is 
 $$Dh(b(\lambda)+a)+F_p(b(\lambda)+a,\vartheta+w)= \nu+D_\vartheta w\,\nu,\qquad \lambda=\chi_\infty(\nu).$$
 Average over $\vartheta\in\mathbb T^n$. Each component of the periodic $w$ has
 mean-zero derivatives, hence
@@ -244,7 +225,7 @@ fixed multiple of $rE$. Also $|w|\le A\sigma E$. The comparisons
 $E\le(4/3)^\mu E_0$ and $\sigma\le\sigma_0$ give clause 3 after enlarging
 $C_{\rm phys}$. [F2, F3, F4, step 1.1, algebra]
 
-3.1 Fix $\alpha>0$. On a lifted physical phase chart define the invertible [F2, F6, step 1.1, step 2.1, algebra]
+3.1 Fix $\alpha>0$. On a lifted physical phase chart define the invertible 
 linear output scaling
 $$S_\alpha(p,\theta):=(p/\alpha,\theta),\qquad \mathcal P_\alpha:=S_\alpha\circ\mathcal P.$$
 Use the output norm $\|(u,v)\|_*:=|u|_\infty+|v|_\infty$ and the input
@@ -285,28 +266,9 @@ The unscaled physical output has an equivalent norm for each fixed
 $\alpha>0$, but no uniform unscaled lower-Lipschitz constant as
 $\alpha\downarrow0$ is asserted. [F2, F6, step 1.1, step 2.1, algebra]
 
-4.1 The compact set $\Lambda\cap Q$ has positive measure, and $A$ has positive [step 2.1, step 2.2, step 3.1, F5, F6, algebra]
-$n$-dimensional measure, so
-$(\Lambda\cap Q)\times A$ has positive $2n$-dimensional measure by [F5].
-The map $\mathcal P$ is continuous on the compact set
-$\Lambda\times\mathbb T^n$, so its image $\mathcal K$ is compact and
-Lebesgue-measurable. Put $\mathcal E:=(\Lambda\cap Q)\times A$. If the lifted physical image
-$\mathcal P(\mathcal E)$ had measure zero, then $\mathcal P_\alpha(\mathcal E)=
-S_\alpha(\mathcal P(\mathcal E))$ would also have measure zero: for this fixed
-$\alpha>0$, $S_\alpha$ and its inverse are linear Lipschitz maps with
-finite constants. Step 3.1 makes $\mathcal P_\alpha$ injective, and its
-inverse on $\mathcal P_\alpha(\mathcal E)$ is Lipschitz in ordinary Euclidean
-coordinates. Indeed
-$|\nu-\nu'|_\infty+|\vartheta-\vartheta'|_\infty
-\le\max(\alpha,1)d_\alpha$; combining this with step 3.1 and the fixed
-finite-dimensional norm comparisons gives a finite inverse Lipschitz
-constant for each fixed $\alpha$. By the cube-cover property in [F6], that
-inverse would send the null set $\mathcal P_\alpha(\mathcal E)$ to the
-positive-measure set $\mathcal E$, a contradiction. The passage back to physical
-coordinates uses only invertibility of the fixed scaling, not a bound
-uniform as $\alpha\downarrow0$.
-Therefore this image, and hence $\mathcal K$, has positive
-phase-space measure. This is clause 4. [step 2.1, step 2.2, step 3.1, F5, F6, algebra] ∎
+4.1 The compact set $\Lambda\cap Q$ has positive measure, and $A$ has positive 
+$n$-dimensional measure, so $\mathcal E:=(\Lambda\cap Q)\times A$ is Borel and has positive $2n$-dimensional measure by [F5]. To see that $\mathcal K$ is measurable, represent each torus angle by a point of $C_0:=[0,2\pi]^n$. The domain $\Lambda\times C_0$ is a closed bounded subset of $\mathbb R^{2n}$, hence compact by [F6]. The map $(\nu,\vartheta)\mapsto \mathcal P(\nu,\pi(\vartheta))$ is continuous by the parameter Lipschitz and angular holomorphy bounds in [F2], and has image exactly $\mathcal K$, because $\pi(C_0)=\mathbb T^n$. Thus $\mathcal K$ is compact in the metric phase space and is Lebesgue-measurable in its local charts. If the lifted physical image $\mathcal P(\mathcal E)$ had measure zero, then $\mathcal P_\alpha(\mathcal E)= S_\alpha(\mathcal P(\mathcal E))$ would also have measure zero: for this fixed $\alpha>0$, $S_\alpha$ and its inverse are linear Lipschitz maps with finite constants. Step 3.1 makes $\mathcal P_\alpha$ injective, and its inverse on $\mathcal P_\alpha(\mathcal E)$ is Lipschitz in ordinary Euclidean coordinates. Indeed $|\nu-\nu'|_\infty+|\vartheta-\vartheta'|_\infty \le\max(\alpha,1)d_\alpha$; combining this with step 3.1 and the fixed finite-dimensional norm comparisons gives a finite inverse Lipschitz constant for each fixed $\alpha$. By the cube-cover property in [F6], that inverse would send the null set $\mathcal P_\alpha(\mathcal E)$ to the positive-measure set $\mathcal E$, a contradiction. The passage back to physical coordinates uses only invertibility of the fixed scaling, not a bound uniform as $\alpha\downarrow0$. Therefore this image, and hence $\mathcal K$, has positive phase-space measure. This is clause 4. [step 2.1, step 2.2, step 3.1, F5, F6, algebra] ∎
+
 
 ## Remarks
 

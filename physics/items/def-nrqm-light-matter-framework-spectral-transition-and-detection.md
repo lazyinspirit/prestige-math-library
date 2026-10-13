@@ -30,14 +30,14 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "The spectral-transition vocabulary of the declared finite-level cutoff dipole model: the transition energy of a declared level pair, its dipole coefficients and single-vertex photon density, the single-vertex emission vector and coefficient, the normalised single-vertex photon-energy law, and the reading of an ideal energy-window detector on the single-vertex one-photon preparation. The definition fixes vocabulary and model quantities only: it asserts no sharp spectral line, no spectrometer or calibration, no exact model probability, no rate, no measurement record and no empirical result."
+physical_scope: "The spectral-transition vocabulary of the declared finite-level cutoff dipole model: the transition energy of a declared level pair, its dipole coefficients and single-vertex photon density, the single-vertex emission vector and coefficient, the normalised single-vertex photon-energy law, and the reading of an ideal energy-window detector on the single-vertex one-photon preparation. The definition includes the exact Born window law in the declared normalized single-vertex one-photon preparation when eta_0 != 0, M != 0 and t > 0; it fixes vocabulary and model quantities: it asserts no sharp spectral line, no spectrometer or calibration, no identification of the single-vertex coefficient with the exact evolved coupled-model probability, no rate, no measurement record and no empirical result."
 sources:
   references:
     - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.3.2 printed pages 216-218 (PDF pages 224-226): the dipole matrix element of the perturbing field, the transition rate proportional to its modulus squared and the energy density of the field"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 6 'Quantum Dynamics', Section 5.3 printed pages 48-50: number states of a field mode, energy n*hbar*omega and the field expectation of a coherent state"
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/79a8091ef4f18d8e3ff76a097e8db33c_MIT8_05F13_Chap_06.pdf"
-    - title: "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.4.2 printed pages 118-122 (PDF pages 121-125): the photon relation E=hbar*omega and E=pc as extra input, and the explicit deferral of coupling to radiation to a separately scoped extension"
+    - title: "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.4.2 printed pages 118-122 (PDF pages 121-125): the photon energy relation E=hbar*omega and the limits of a single-particle Schrodinger treatment of photon dynamics, with quantum field theory identified as a field-theoretic framework"
       url: "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
 ---
 
@@ -131,8 +131,18 @@ of a normalisable state and not a quantum number of the model's mode labels.
 
 **(f) Scope.** Clauses (b)-(e) fix the model's spectral vocabulary. They assert
 no sharp spectral line: the energy law of clause (e) is spread over the support
-of $\nu_{b}$, and a point mass at $\Delta$ is only the idealisation proved as a
-limit in [[lem-nrqm-light-matter-first-order-photon-energy-law]] clause (c).
+of $\nu_{b}$. A point mass at $\Delta$ (the probability measure assigning
+$\mathbf 1_B(\Delta)$ to a Borel set $B$) is the limiting idealisation of
+[[lem-nrqm-light-matter-first-order-photon-energy-law]] clause (c) only under
+its hypotheses: $\nu_b=J_b\lambda$, where $\lambda$ is Lebesgue measure on
+$\mathbb R$ and $J_b$ is an integrable nonnegative density representative
+vanishing almost everywhere off $(0,\Lambda]$, continuous at
+$0<\Delta<\Lambda$ and satisfying $J_b(\Delta)>0$. Under these hypotheses,
+$\int f\,dP_{b,t}\to f(\Delta)$ as $t\to\infty$ for every bounded continuous
+$f:\mathbb R\to\mathbb C$; no such limit is asserted for other allowed
+level pairs or densities. In particular, if $\Delta>\Lambda$, the finite-time
+laws assign all mass to $(0,\Lambda]$ and cannot converge to the point mass
+at $\Delta$.
 They supply no spectrometer, no calibration, no detector response beyond the
 declared ideal window, no efficiency, no background, no sampling model, no
 count and no measurement record; the identification of a laboratory

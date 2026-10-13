@@ -44,6 +44,24 @@ heavy-top system are measured quantities. Those readings belong to the consuming
 classical-mechanics pages, which add their own postulates, interpretations and
 empirical qualifications.
 
+**Coordinates and regularity used on this page and its companion.** The
+mathematics supplier represents $\mathbb R^3$ as functions on
+$3=\{0,1,2\}$. Write $s_0,s_1,s_2$ for its standard basis from
+[[lem-standard-basis-of-f-n]], and, in the conventional one-based notation of
+the rigid-body formulas, set $e_1:=s_0$, $e_2:=s_1$, $e_3:=s_2$ and
+$u_j:=u(j-1)$ for $j=1,2,3$. For a matrix $M\in M_3(\mathbb R)$, write
+$M_{jk}:=M(j-1,k-1)$ for $j,k=1,2,3$; sums indexed from $1$ to $3$ use these
+labels. In particular, define $\operatorname{tr}M:=\sum_{j=1}^3M_{jj}$.
+Whenever a curve $c:I\to\mathbb R^3$ is called differentiable, this means
+componentwise differentiability in the sense of
+[[def-vector-valued-derivative-and-integral]], with derivative whose $j$th
+component is $c_j'$. Twice differentiable means each component has a first
+derivative that is differentiable. The Borel sigma-algebra on $\mathbb R^3$
+below is for its usual Euclidean metric topology: $d_2$ is the metric of
+[[lem-metrics-on-rn]], and every closed metric ball is closed, hence Borel, by
+[[thm-metric-open-set-algebra]]. Thus the complement of a support ball in the
+definition of a bounded mass distribution is a measurable set.
+
 **Kinematic foundations.** [[lem-cm-matrix-curve-derivative-rules]] proves the
 sum, transpose and product rules for matrix-valued curves and the skew-symmetry
 of $R^{\mathsf T}R'$ for a curve in $SO(3)$;

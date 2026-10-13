@@ -6,8 +6,9 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 17
-deps: [def-cm08-symmetry-of-the-mechanical-lagrangian, pthm-cm08-point-noether, def-cm03-centre-of-mass-and-momenta, def-cm02-newtonian-flow, post-cm02-force-superposition, def-cm03-potential-and-mechanical-energy, def-cm07-action-and-mechanical-lagrangian, def-cm-time-dependent-lagrangian-and-action, def-cm01-configuration, def-cm01-units, def-cross-product-in-r3, lem-cross-product-is-bilinear-alternating-and-orthogonal, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, cor-zero-derivative-implies-constant, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, def-euclidean-inner-product, def-vector-valued-derivative-and-integral, def-interval]
+deps: [pthm-cm03-angular-momentum-balance, def-cm08-symmetry-of-the-mechanical-lagrangian, pthm-cm08-point-noether, def-cm03-centre-of-mass-and-momenta, def-cm02-newtonian-flow, post-cm02-force-superposition, def-cm03-potential-and-mechanical-energy, def-cm07-action-and-mechanical-lagrangian, def-cm-time-dependent-lagrangian-and-action, def-cm01-configuration, def-cm01-units, def-cross-product-in-r3, lem-cross-product-is-bilinear-alternating-and-orthogonal, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, cor-zero-derivative-implies-constant, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, def-euclidean-inner-product, def-vector-valued-derivative-and-integral, def-interval]
 dependency_roles:
+  pthm-cm03-angular-momentum-balance: physical-result
   def-cm08-symmetry-of-the-mechanical-lagrangian: formulation-prerequisite
   pthm-cm08-point-noether: physical-result
   def-cm03-centre-of-mass-and-momenta: formulation-prerequisite
@@ -116,7 +117,7 @@ content is asserted.
 
 **Given:** The model, the presentation $(U,d)$, the vector $a$, the family $R_{a}$, the field $\xi^{a}$, and the motions and state occurring in the clauses.
 
-[F1] Model data and chart ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart over every $[a',b']\times Q$ with $[a',b']\subseteq I_{0}$; $L=K-U$ with $L_{x}(t,x,v)=-\nabla_{x}U(t,x)$, $L_{v}(t,x,v)=\mathsf M v$; the force map is $F_{i}=-\nabla_{x_{i}}U+d_{i}$.
+[F1] Model data and chart ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart whenever $Q\ne\varnothing$ and $a'<b'$ with $[a',b']\subseteq I_{0}$, over $[a',b']\times Q$; $L=K-U$ with $L_{x}(t,x,v)=-\nabla_{x}U(t,x)$, $L_{v}(t,x,v)=\mathsf M v$; the force map is $F_{i}=-\nabla_{x_{i}}U+d_{i}$.
 
 [F2] The model's symmetry vocabulary ([[def-cm08-symmetry-of-the-mechanical-lagrangian]]): a strict datum $\tau\equiv0,\xi,B$ satisfies the model identity when $L_{x}\cdot\xi+L_{v}\cdot D_{t}\xi=D_{t}B$ on $O$, with charge $(\mathsf M v)\cdot\xi-B$; a strict datum with $\xi$ independent of $t$ is an infinitesimal point symmetry of the chart $(O,L)$.
 
@@ -154,32 +155,10 @@ content is asserted.
 
 ## Remarks
 
-- **Separated arcs.** On two disjoint balls centred at opposite points of
-  a circle about the axis, the potential equal to $0$ on one ball and $1$
-  on the other has zero rotational derivative everywhere, but a rotation
-  between the two centres changes its value. Differential conservation
-  holds on arbitrary open $Q$; comparing separated arcs requires the
-  compatibility in clause 1.
+- **Separated arcs.** On two disjoint balls centred at opposite points of a circle about the axis, the potential equal to $0$ on one ball and $1$ on the other has zero rotational derivative everywhere, but a rotation between the two centres changes its value. Differential conservation holds on arbitrary open $Q$; comparing separated arcs requires the compatibility in clause 1.
 
-- **Torque reading.** Under the potential presentation the total torque of the
-  potential forces about the origin is $-\sum_{i}x_{i}\times\nabla_{x_{i}}U$,
-  so hypothesis (i) for all $a$ is the vanishing of that torque; clause 5 is
-  then the familiar statement that a model whose potential exerts no torque
-  about the origin conserves its total angular momentum. The balance theorem
-  [[pthm-cm03-angular-momentum-balance]] reaches the conservation statement
-  from centrality of the pair forces and vanishing external torque, a different
-  hypothesis; the two routes are complementary and neither is a consequence of
-  the other.
+- **Torque reading.** Under the potential presentation the total torque of the potential forces about the origin is $-\sum_{i}x_{i}\times\nabla_{x_{i}}U$, so hypothesis (i) for all $a$ is the vanishing of that torque; clause 5 is then the familiar statement that a model whose potential exerts no torque about the origin conserves its total angular momentum. The balance theorem [[pthm-cm03-angular-momentum-balance]] reaches the conservation statement from centrality of the pair forces and vanishing external torque, a different hypothesis; the two routes are complementary and neither is a consequence of the other.
 
-- **Angular momentum about other origins.** The charge constructed here is the
-  angular momentum about the inertial origin, which is where the rotation
-  family $R_{a}$ acts. For rotations about another fixed point $o$ the same
-  computation with $x_{i}-o$ in place of $x_{i}$ produces the component of the
-  angular momentum about $o$; that variant is not needed on this page and is
-  not asserted.
+- **Angular momentum about other origins.** The charge constructed here is the angular momentum about the inertial origin, which is where the rotation family $R_{a}$ acts. For rotations about another fixed point $o$ the same computation with $x_{i}-o$ in place of $x_{i}$ produces the component of the angular momentum about $o$; that variant is not needed on this page and is not asserted.
 
-- **Empirical status.** The statement identifies a conserved quantity of the
-  model under an explicit rotational invariance hypothesis of the declared
-  potential; it is a conditional deduction inside the model, and no claim is
-  made that any actual force law is rotation invariant, nor is any converse
-  from an observed conservation to a symmetry of a model.
+- **Empirical status.** The statement identifies a conserved quantity of the model under an explicit rotational invariance hypothesis of the declared potential; it is a conditional deduction inside the model, and no claim is made that any actual force law is rotation invariant, nor is any converse from an observed conservation to a symmetry of a model.

@@ -1,0 +1,514 @@
+{
+  "group": "j",
+  "batches": [
+    "31"
+  ],
+  "pages_read": [
+    "cm15-scattering-and-impulse-model-boundaries",
+    "cm15-scattering-and-impulse-model-boundaries-examples"
+  ],
+  "items_read": [
+    "def-cm15-asymptotic-data",
+    "def-cm15-cross-section",
+    "pthm-cm15-central-scattering",
+    "pthm-cm15-rutherford-model",
+    "post-cm15-impulse",
+    "pthm-cm15-impact-balance",
+    "pthm-cm15-control-volume-balance",
+    "rem-cm15-model-boundaries",
+    "ex-cm15-hard-sphere-reflection-check",
+    "ex-cm15-rutherford-cutoff-check",
+    "cex-cm15-deflection-need-not-decrease",
+    "ex-cm15-impact-check",
+    "cex-cm15-restitution-above-one-increases-energy",
+    "cex-cm15-momentum-alone-does-not-fix-the-impact",
+    "ex-cm15-rocket-check",
+    "ex-cm15-control-volume-check"
+  ],
+  "conventions": [
+    {
+      "convention": "Scattering quantities belong to r=x1−x2, with reduced mass μ=m1m2/(m1+m2), positive energy E and angular-momentum magnitude J>0; they are not individual-label scattering angles.",
+      "fixed_by": "def-cm15-asymptotic-data",
+      "matters_for": [
+        "pthm-cm15-central-scattering",
+        "pthm-cm15-rutherford-model",
+        "ex-cm15-rutherford-cutoff-check",
+        "rem-cm15-model-boundaries"
+      ]
+    },
+    {
+      "convention": "The polar plane is oriented by e3=j/J; polar angle increases. The scattering angle is arccos of the normalized velocity inner product, whereas signed velocity rotation is 2Δ−π. The unwrapped scattering formula π−2Δ requires 0<Δ<π/2.",
+      "fixed_by": "def-cm15-asymptotic-data",
+      "matters_for": [
+        "pthm-cm15-central-scattering",
+        "pthm-cm15-rutherford-model",
+        "cex-cm15-deflection-need-not-decrease"
+      ]
+    },
+    {
+      "convention": "Impact parameter is the common asymptotic perpendicular-distance limit J/(μv∞). Finite-range motions have exact free tails; Coulomb motions need not have a finite longitudinal intercept.",
+      "fixed_by": "def-cm15-asymptotic-data",
+      "matters_for": [
+        "pthm-cm15-central-scattering",
+        "pthm-cm15-rutherford-model",
+        "ex-cm15-rutherford-cutoff-check"
+      ]
+    },
+    {
+      "convention": "Assume countable choice for the incident and solid-angle Borel measures. A deflection branch is C1 on an open positive-impact interval, takes values in (0,π), and has nowhere-zero derivative. Finite branch sums require disjoint incident intervals but permit overlapping angular images.",
+      "fixed_by": "def-cm15-cross-section",
+      "matters_for": [
+        "pthm-cm15-central-scattering",
+        "pthm-cm15-rutherford-model",
+        "ex-cm15-hard-sphere-reflection-check",
+        "ex-cm15-rutherford-cutoff-check",
+        "rem-cm15-model-boundaries"
+      ]
+    },
+    {
+      "convention": "Uniform incident preparation has cutoff bmax, probability density b/(πbmax²), and total expected arrival rate Φπbmax². Cross-sections have area units; detected counts and empirical comparisons require separate apparatus and statistical assumptions.",
+      "fixed_by": "def-cm15-asymptotic-data",
+      "matters_for": [
+        "def-cm15-cross-section",
+        "pthm-cm15-central-scattering",
+        "rem-cm15-model-boundaries"
+      ]
+    },
+    {
+      "convention": "Impulse J is delivered to label 1 and −J to label 2. Collinear incoming relative velocity satisfies (v2−−v1−)·n<0, and restitution is v2+−v1+=−e(v2−−v1−), with adopted e∈[0,1].",
+      "fixed_by": "post-cm15-impulse",
+      "matters_for": [
+        "pthm-cm15-impact-balance",
+        "ex-cm15-impact-check",
+        "cex-cm15-momentum-alone-does-not-fix-the-impact",
+        "cex-cm15-restitution-above-one-increases-energy"
+      ]
+    },
+    {
+      "convention": "Open-body inflow and outflow rates are nonnegative, and exchanged-matter velocities are inertial velocities in the body's frame. For a rocket, wout=v−ue n, so thrust points along +n.",
+      "fixed_by": "post-cm15-impulse",
+      "matters_for": [
+        "pthm-cm15-impact-balance",
+        "pthm-cm15-control-volume-balance",
+        "ex-cm15-rocket-check"
+      ]
+    },
+    {
+      "convention": "Control regions have bounded C1 boundaries and outward normals; fields are defined near their closed sweeps. Traction is σν, stress divergence is row-wise, and boundary flux uses (u−w)·ν. Local equations must hold at the control region, either by material-interior localization or explicit adoption.",
+      "fixed_by": "pthm-cm15-control-volume-balance",
+      "matters_for": [
+        "ex-cm15-control-volume-check",
+        "rem-cm15-model-boundaries"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-cm15-asymptotic-data",
+      "statement": "Defines the two-label central scattering model, all-time scattering motions, asymptotic velocities, equal impact-distance limits b=J/(μv∞), polar advance and deflection conventions, and the cutoff uniform-incident preparation at fixed E with J(b)=√(2μE)b.",
+      "used_by": [
+        "def-cm15-cross-section",
+        "pthm-cm15-central-scattering",
+        "pthm-cm15-rutherford-model",
+        "ex-cm15-hard-sphere-reflection-check",
+        "ex-cm15-rutherford-cutoff-check",
+        "cex-cm15-deflection-need-not-decrease",
+        "rem-cm15-model-boundaries"
+      ]
+    },
+    {
+      "id": "post-cm15-impulse",
+      "statement": "Adopts the isolated reciprocal impulse model with momentum jumps ±J, the collinear restitution law with e∈[0,1], and differentiable open-body accounting m′=rin−rout and (mv)′=F+rin win−rout wout.",
+      "used_by": [
+        "pthm-cm15-impact-balance",
+        "pthm-cm15-control-volume-balance",
+        "ex-cm15-impact-check",
+        "cex-cm15-momentum-alone-does-not-fix-the-impact",
+        "cex-cm15-restitution-above-one-increases-energy",
+        "ex-cm15-rocket-check",
+        "ex-cm15-control-volume-check",
+        "rem-cm15-model-boundaries"
+      ]
+    },
+    {
+      "id": "def-cm15-cross-section",
+      "statement": "For a model-recording C1 deflection branch with nonzero derivative, defines density b(θ)|b′(θ)|/sinθ, nonnegative Borel cross-section integrals, finite sums over disjoint incident intervals, and cutoff expected rates Φσbmax.",
+      "used_by": [
+        "pthm-cm15-central-scattering",
+        "pthm-cm15-rutherford-model",
+        "ex-cm15-hard-sphere-reflection-check",
+        "ex-cm15-rutherford-cutoff-check",
+        "cex-cm15-deflection-need-not-decrease",
+        "rem-cm15-model-boundaries"
+      ]
+    },
+    {
+      "id": "pthm-cm15-central-scattering",
+      "statement": "Under a finite-range C2 potential, E,J>0, a simple outer turning point V(r*)=E, V′(r*)<0 and V(r)<E for r>r*, and a relative trajectory staying above and attaining r*, proves unique global continuation, monotone radial branches, free tails, speed √(2E/μ), impact parameter J/√(2μE), finite advance quadrature and the wrapped deflection relation; supplies cross-sections and cutoff rates for the additionally assumed recorded deflection family.",
+      "used_by": [
+        "pthm-cm15-rutherford-model",
+        "ex-cm15-hard-sphere-reflection-check",
+        "cex-cm15-deflection-need-not-decrease",
+        "rem-cm15-model-boundaries"
+      ]
+    },
+    {
+      "id": "pthm-cm15-impact-balance",
+      "statement": "Under the adopted impact extensions, proves total-momentum continuity, exclusion of a nonzero impulse for a candidate also satisfying the smooth-force branch, restitution velocities and ΔK=−(1−e²)μ|v2−−v1−|²/2, momentum-only underdetermination, and the open-body and rocket laws.",
+      "used_by": [
+        "ex-cm15-impact-check",
+        "cex-cm15-momentum-alone-does-not-fix-the-impact",
+        "cex-cm15-restitution-above-one-increases-energy",
+        "ex-cm15-rocket-check",
+        "rem-cm15-model-boundaries"
+      ]
+    },
+    {
+      "id": "pthm-cm15-rutherford-model",
+      "statement": "For repulsive u(r)=κ/r with κ,E,J>0 and a trajectory attaining its turning radius, proves global non-colliding scattering, the family θ(b)=2 arctan(κ/(2Eb)), density (κ/(4E))² csc⁴(θ/2), band cross-section π(b(θ1)²−b(θ2)²), finite positive angular cutoffs and forward divergence.",
+      "used_by": [
+        "ex-cm15-rutherford-cutoff-check",
+        "rem-cm15-model-boundaries"
+      ]
+    },
+    {
+      "id": "pthm-cm15-control-volume-balance",
+      "statement": "From explicitly adopted smooth material balances, the stated field and control-sweep hypotheses, and countable choice, derives moving-control-region mass and momentum balances, their material and fixed special cases, and the inlet/outlet decomposition yielding the variable-mass law for v=P/m.",
+      "used_by": [
+        "ex-cm15-control-volume-check",
+        "rem-cm15-model-boundaries"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Strict monotonicity, endpoint derivatives, and elementary trigonometric bounds.",
+      "opened": true
+    },
+    {
+      "id": "cor-primitives-of-a-continuous-function",
+      "used_for": "Radial quadratures and evaluation of continuous integrals.",
+      "opened": true
+    },
+    {
+      "id": "cor-trigonometric-parity-and-pythagorean-identity",
+      "used_for": "Polar, reflection, and cross-section trigonometry.",
+      "opened": true
+    },
+    {
+      "id": "cor-vector-valued-ftc-and-lipschitz-bound",
+      "used_for": "Cartesian local Lipschitz bounds, continuation estimates, and constant-derivative arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+      "used_for": "Control-region boundary regularity and outward-normal conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-ck-euclidean-maps-and-diffeomorphisms",
+      "used_for": "Regularity and diffeomorphism hypotheses throughout the batch.",
+      "opened": true
+    },
+    {
+      "id": "def-continuity-real",
+      "used_for": "Branch continuity and endpoint limits.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Declared measure, surface-integration, and distribution foundations.",
+      "opened": true
+    },
+    {
+      "id": "def-cross-product-in-r3",
+      "used_for": "Angular momentum, impact distances, and contact impulse geometry.",
+      "opened": true
+    },
+    {
+      "id": "def-derivative",
+      "used_for": "Domain-relative derivatives and rocket differentiation.",
+      "opened": true
+    },
+    {
+      "id": "def-euclidean-inner-product",
+      "used_for": "Norms, angles, kinetic energies, and normal fluxes.",
+      "opened": true
+    },
+    {
+      "id": "def-first-order-ode-initial-value-problem-and-solution",
+      "used_for": "Cartesian central-force solution and continuation notions.",
+      "opened": true
+    },
+    {
+      "id": "def-integral-over-a-measurable-set",
+      "used_for": "Borel-window cross-sections and continuum integral conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-interval",
+      "used_for": "Time, branch, and integration domains.",
+      "opened": true
+    },
+    {
+      "id": "def-locally-lipschitz-in-the-state-variable",
+      "used_for": "ODE uniqueness and compact continuation hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "def-principal-inverse-sine-and-cosine",
+      "used_for": "Principal scattering and incidence angles.",
+      "opened": true
+    },
+    {
+      "id": "def-principal-inverse-tangent",
+      "used_for": "Rutherford deflection conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-surface-integral-on-a-compact-c-one-hypersurface",
+      "used_for": "Traction and inlet/outlet surface integrals.",
+      "opened": true
+    },
+    {
+      "id": "def-tangent-cotangent-secant-cosecant",
+      "used_for": "Rutherford inverse branch and density.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-valued-derivative-and-integral",
+      "used_for": "Position, velocity, momentum, and vector-integral conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-vector-valued-functions-limits-and-continuity",
+      "used_for": "Asymptotic velocities and one-sided contact limits.",
+      "opened": true
+    },
+    {
+      "id": "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+      "used_for": "Angular-momentum conservation and planar rotation algebra.",
+      "opened": true
+    },
+    {
+      "id": "thm-algebra-of-derivatives",
+      "used_for": "Product, quotient, and componentwise differentiation.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-and-the-euclidean-norm",
+      "used_for": "Well-defined normalized angles and norm identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-chain-rule",
+      "used_for": "Quadratures, branch derivatives, and rocket logarithms.",
+      "opened": true
+    },
+    {
+      "id": "thm-continuous-implies-integrable",
+      "used_for": "Compact radial and angular integrals.",
+      "opened": true
+    },
+    {
+      "id": "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+      "used_for": "Perpendicular line distances and impact-parameter geometry.",
+      "opened": true
+    },
+    {
+      "id": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+      "used_for": "Control-volume flux and row-stress conversions.",
+      "opened": true
+    },
+    {
+      "id": "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+      "used_for": "Maximal Cartesian central-force continuation.",
+      "opened": true
+    },
+    {
+      "id": "thm-extreme-value-metric",
+      "used_for": "Compact force-field derivative and speed bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-ftc-second-part",
+      "used_for": "Angular-band and contact-total integration.",
+      "opened": true
+    },
+    {
+      "id": "thm-intermediate-value",
+      "used_for": "Turning points and branch ranges.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Rocket velocity verification.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-from-the-derivative",
+      "used_for": "Coulomb and refracting-shell branch monotonicity.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotonicity-of-the-integral",
+      "used_for": "Improper-integral comparisons and angular truncations.",
+      "opened": true
+    },
+    {
+      "id": "thm-picard-lindelof-local-existence-and-uniqueness",
+      "used_for": "Central-force trajectory existence and uniqueness.",
+      "opened": true
+    },
+    {
+      "id": "thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions",
+      "used_for": "Rutherford and shell trigonometric computations.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-and-cosine-addition-formulas",
+      "used_for": "Asymptotic rotations and half-angle simplifications.",
+      "opened": true
+    },
+    {
+      "id": "thm-sine-cosine-signs-monotonicity-and-ranges",
+      "used_for": "Principal-angle ranges and positivity of angular denominators.",
+      "opened": true
+    },
+    {
+      "id": "thm-substitution",
+      "used_for": "Compact radial-to-time and radial-to-angle substitutions.",
+      "opened": true
+    },
+    {
+      "id": "thm-tangent-cotangent-secant-cosecant-derivatives-and-periods",
+      "used_for": "Rutherford inverse-branch differentiation.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "post-cm15-impulse",
+      "concern": "Clause (i) requires 'a motion x=(x1,x2):I→Q of the associated first-order system ([[def-cm02-newtonian-flow]])'. That supplier defines a motion as C2 on the whole interval, equivalently a differentiable state solving the regular system everywhere. Such a motion has equal one-sided velocities and forces J=0. Thus the literal adopted model excludes the nonzero impulses and approaching restitution contacts that its consumers use. The piecewise motion notion needs an explicit distinction from the earlier whole-interval solution.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "post-cm15-impulse",
+      "concern": "Clause (i) says its 'distributional rendering by test-function pairings is proved in [[thm-cm-impulse-restitution-and-energy-loss]]'. That theorem assumes the test-function pairings and derives the finite jumps; it does not prove the converse asserted here. Moreover its regular forces are continuous time functions, whereas the postulate permits continuous state-dependent maps evaluated on a velocity-jumping path, whose left and right evaluations can differ. The opened jump lemma supplies the elementary piecewise derivative identity, but this application and its hypotheses must be stated locally rather than attributed to the cited theorem.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "pthm-cm15-impact-balance",
+      "concern": "The first Remarks bullet says the exclusion is 'equivalently the force map of an impulse model is not continuous across t*'. This is false for the regular force map used in the adopted extension: piecewise affine paths with nonzero reciprocal jumps can have F1=F2=0 everywhere. The singular impulse is additional forcing; it need not make the regular force map discontinuous. Clause 2 excludes a whole-interval smooth solution, not a continuous regular force map.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "def-cm15-cross-section",
+      "concern": "Clause (iv) says that for a forward-divergent branch 'only windows of finite cross-section give finite model rates'. Under the cutoff preparation defined immediately above, rates use σj,bmax, not the ideal σj. For the Rutherford branch, Y=(0,π) has infinite ideal cross-section but finite cutoff cross-section πbmax² and rate Φπbmax². The sentence needs to specify which cross-section and preparation it means.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "pthm-cm15-rutherford-model",
+      "concern": "Remarks says 'the small-angle density grows like θ−3'. The stated differential density (κ/(4E))² csc⁴(θ/2) grows like (κ/E)² θ−4. The angular-integrated density 2π sinθ times that expression grows like θ−3. The present wording confuses these two densities.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "cex-cm15-deflection-need-not-decrease",
+      "concern": "The grazing Remarks says 'the chord length shrinks to zero'. In the item's own L2 the interior chord length is 2a cosβ, with β=arcsin(2b/(3a)). As b↑a this tends to 2a√5/3>0, not zero. At the separately adopted free grazing path there is no interior chord; the nonzero branch limit is precisely compatible with the discontinuity.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "cm15-scattering-and-impulse-model-boundaries-examples",
+      "concern": "The page says the elastic case of ex-cm15-impact-check 'exchanges the velocities'. Its incoming velocities are (3,−1) m/s with masses (2,6) kg, and the item correctly computes outgoing velocities (−3,1) m/s: each velocity reverses. Exchanging them would give (−1,3), changing total momentum from 0 to 16 kg m/s.",
+      "severity": "would-be-fatal"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries",
+      "to": "cm-math-continuum",
+      "faithful": true,
+      "note": "Transport, instantaneous localization, and control-volume calculations preserve smoothness, outward-normal and row-divergence conventions. The consumer explicitly requires local equations near controls outside the material interior."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries",
+      "to": "cm05-two-body-central-forces-and-gravitation",
+      "faithful": true,
+      "note": "Uses the static central pair model without external forces, exact reduced mass, affine centre of mass and reconstruction. Global extensions explicitly extend the autonomous time window; no gravitational empirical parameter is imported."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries",
+      "to": "cm-math-central",
+      "faithful": true,
+      "note": "Preserves J>0, polar orientation, Coulomb trajectory hypotheses, measure assumptions and Borel test-function qualifications. Finite-range continuation and quadrature are supplied locally."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries",
+      "to": "cm01-framework-quantities-and-geometry",
+      "faithful": true,
+      "note": "Uses fixed inertial charts, fixed positive label masses and SI conventions; impulse and variable-mass rules are expressly adopted extensions."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries",
+      "to": "cm03-momentum-work-and-energy-balances",
+      "faithful": true,
+      "note": "Momentum and kinetic-energy constructions are used with their fixed-frame meanings; endpoint algebra is separately stated for impacts."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries",
+      "to": "cm-math-balances",
+      "faithful": false,
+      "note": "The algebraic kinetic split, variable-mass product rule and compact continuation are faithful. However post-cm15-impulse attributes jump-to-pairing rendering to a theorem that assumes pairings and proves pairing-to-jump; its continuous-time-force hypothesis is also not established for the postulate's evaluated force maps."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries",
+      "to": "cm02-forces-initial-data-and-newtonian-flow",
+      "faithful": false,
+      "note": "post-cm15-impulse calls its piecewise contact path a motion of the earlier associated first-order system, whose definition requires a whole-interval C2 motion. The additional claim that a nonzero impulse implies discontinuity of the regular force map is not licensed by that supplier."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries",
+      "to": "cm-math-geometry",
+      "faithful": true,
+      "note": "Uses the material-region density construction and traction convention σν without assuming stress symmetry or a constitutive relation."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries-examples",
+      "to": "cm-math-central",
+      "faithful": true,
+      "note": "Contact examples define separate pushforward measures and invoke only the abstract branch-density theorem, without treating contact paths as smooth-potential trajectories. Rutherford arithmetic preserves the fixed-energy family."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries-examples",
+      "to": "cm01-framework-quantities-and-geometry",
+      "faithful": true,
+      "note": "Examples use declared SI data in fixed inertial charts and distinguish contact paths from ordinary C2 worldlines."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries-examples",
+      "to": "cm-math-balances",
+      "faithful": true,
+      "note": "Kinetic splitting and variable-mass algebra are used correctly. The e=2 counterexample derives its result locally rather than applying the restricted restitution theorem outside e∈[0,1]."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries-examples",
+      "to": "cm03-momentum-work-and-energy-balances",
+      "faithful": true,
+      "note": "Endpoint momentum and kinetic-energy computations retain the fixed-frame constructions. The page's incorrect 'exchanges the velocities' summary is recorded separately."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries-examples",
+      "to": "cm05-two-body-central-forces-and-gravitation",
+      "faithful": true,
+      "note": "The zero-potential smooth witness uses collision-excluded paths and correct two-label reconstruction; contact and hypothetical impact rules are identified separately."
+    },
+    {
+      "from": "cm15-scattering-and-impulse-model-boundaries-examples",
+      "to": "cm-math-continuum",
+      "faithful": true,
+      "note": "Uniform-expansion controls are explicit C2 maps with positive Jacobian. Elbow data use smooth supported port profiles and flux-effective areas, and assert only the conditional net resultant."
+    }
+  ]
+}

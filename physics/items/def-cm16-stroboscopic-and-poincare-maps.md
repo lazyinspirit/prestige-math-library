@@ -24,10 +24,10 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "The two maps used to reduce the model's dynamics to discrete time: the stroboscopic map at the period of a P-periodic force model, defined only on states whose motion exists over the full period, with iterates recursively defined and fixed points in bijection with P-periodic motions; and the local Poincare return map of a transversal section of an autonomous model, whose existence, C1 regularity and local invertibility are supplied from the return mapping theorem; its first-return interpretation additionally requires the stated persistent exclusion of earlier section hits. The item asserts no completeness, no global return and no all-time existence of iterates."
+physical_scope: "The two maps used to reduce the model's dynamics to discrete time: the stroboscopic map at the period of a P-periodic force model, defined only when its D-maximal motion stays in the declared open restriction domain for the full period, with iterates recursively defined and fixed points extending to full-time P-periodic motions; and the local Poincare return map of a transversal section of an autonomous model, whose existence, C1 regularity and local invertibility are supplied from the return mapping theorem. Its first-return interpretation additionally requires positive return time and the stated persistent exclusion of earlier section hits. The item asserts no completeness, no global return and no all-time existence of iterates."
 sources:
   references:
-    - title: "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), §7.2 pp. 157-172: stroboscopic maps of periodically driven systems, Poincare sections and the requirement of an actual return domain"
+    - title: "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), §7.1.4 pp. 149-152: periodic sampling as a stroboscopic Poincare section; the precise local return domain and invertibility used here come from the declared mathematical proposition"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
     - title: "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3: return maps, fixed points and the tangle narrative"
       url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
@@ -43,17 +43,22 @@ restriction domain $D\subseteq\mathbb R\times Q\times\mathbb R^{3N}$ is
 invariant under time shifts by $P$. Define its time-zero state slice
 $$S_P:=\{z_0\in Q\times\mathbb R^{3N}:(0,z_0)\in D\};$$
 periodicity gives the same admissible slice at every integer multiple of $P$.
-Let $z(t;z_0)=(x(t;z_0),x'(t;z_0))$ be the maximal state curve of the motion
-through $z_0\in S_P$ at time $0$, with maximal interval $I_{z_0}$. The
+For $z_0\in S_P$, let $z_D(\cdot;z_0):I^D_{z_0}\to
+Q\times\mathbb R^{3N}$ be the unique $D$-maximal state curve through $z_0$ at
+time $0$, with interval $I^D_{z_0}$ as in
+[[def-cm16-flow-equilibria-and-invariant-sets]] clause (i). The
 **stroboscopic map at period $P$** is the partial map
-$$\Psi:\Sigma\longrightarrow S_P,\qquad \Sigma:=\{z_0\in S_P:[0,P]\subseteq I_{z_0}\},\qquad \Psi(z_0):=z(P;z_0),$$
-with domain $\Sigma$ the set of states whose maximal motion exists over
-$[0,P]$; its endpoint belongs to $S_P$ because the restriction domain is
-preserved by the shift from $P$ to $0$. Its **iterates** are defined
+$$\Psi:\Sigma\longrightarrow S_P,\qquad \Sigma:=\{z_0\in S_P:[0,P]\subseteq I^D_{z_0}\},\qquad \Psi(z_0):=z_D(P;z_0),$$
+with domain $\Sigma$ the states whose $D$-maximal motion remains in the
+declared restriction domain throughout $[0,P]$. Its endpoint belongs to
+$S_P$ because the restriction domain is preserved by the shift from $P$ to
+$0$. Its **iterates** are defined
 recursively by $\Psi^1:=\Psi$ and, where
 $\Psi^n(z_0)\in\Sigma$, $\Psi^{n+1}(z_0):=\Psi(\Psi^n(z_0))$; the domain of
-$\Psi^n$ is therefore the set of states whose maximal motion exists over
-$[0,nP]$, and it may be strictly smaller than $\Sigma$. A state
+$\Psi^n$ is therefore the set of states whose $D$-maximal motion remains in
+$D$ over $[0,nP]$, and it may be strictly smaller than $\Sigma$. This domain
+identity follows by induction from the $P$-periodicity of the field, shift
+invariance of $D$ and uniqueness of the $D$-maximal solution. A state
 $z_*\in\Sigma$ with $\Psi(z_*)=z_*$ is a **fixed point** of $\Psi$. It is a
 **$P$-periodic state** in the full-time sense: the motion through $z_*$ extends
 to a motion on $\mathbb R$ satisfying $z(t+P)=z(t)$ for every $t\in\mathbb R$.
@@ -67,7 +72,7 @@ of $S_P$, and iterates can leave the domain.
 
 **(ii) Autonomous special case.** If the model is autonomous, then its
 stroboscopic map at any period $P>0$ is the time-$P$ map $\Phi_P$ of its local
-flow restricted to $\Omega_P=\{(P,z):(P,z)\in\Omega\}$
+flow restricted to $\Omega_P=\{z\in S_0:(P,z)\in\Omega\}$
 ([[def-cm16-flow-equilibria-and-invariant-sets]] clause (ii)); this is the
 reading used for the isotropic-oscillator check on the page.
 
@@ -82,12 +87,26 @@ $h(z_0)=h(z_1)=0$ and $Dh(z_0)G(z_0)\ne0$, $Dh(z_1)G(z_1)\ne0$. The
 transversally at $z_0$ and again at $z_1$. Then
 [[prop-cm-first-return-map-is-a-local-c1-diffeomorphism]] supplies open sets
 $A\ni z_0$, $B\ni z_1$ and $C^1$ functions $\tau:A\to\mathbb R$,
-$\sigma:B\to\mathbb R$ with $\tau(z_0)=\sigma(z_1)=t_0$ such that
-$$P:A\cap\Sigma_h\longrightarrow\Sigma_h,\qquad P(z):=\Phi\bigl(\tau(z),z\bigr)$$
-is a $C^1$ diffeomorphism onto $P(A\cap\Sigma_h)$, which is open in the
+$\sigma:B\to\mathbb R$ with $\tau(z_0)=\sigma(z_1)=t_0$, and an open time
+interval $J\ni t_0$ as in clause 1 of that proposition. Restrict $A$ to the
+open positive-time branch $A_+:=A\cap\tau^{-1}((0,\infty))$, which contains
+$z_0$ by continuity and $t_0>0$, and restrict the return map to
+$A_+\cap\Sigma_h$. Then
+$$P:A_+\cap\Sigma_h\longrightarrow\Sigma_h,\qquad P(z):=\Phi\bigl(\tau(z),z\bigr)$$
+is a $C^1$ diffeomorphism onto $P(A_+\cap\Sigma_h)$, which is open in the
 subspace topology of $\Sigma_h$ ([[def-subspace-topology-top]]), with inverse
-$Q(z)=\Phi(-\sigma(z),z)$; moreover $h(\Phi(t,z))=0$ for $(t,z)\in J\times A$
-holds exactly for $t=\tau(z)$, so $P$ is the **local return map** at the reference crossing. The section near the two crossings has the embedded $C^1$ charts established by the proposition. If the open reference segment satisfies $\Phi(s,z_0)\notin\overline{\Sigma_h}^{\,S_0}$ for every $0<s<t_0$ (closure in the state domain), clause 4 of the proposition supplies persistence of the absence of earlier hits: for $z\in A\cap\Sigma_h$ the return time $\tau(z)>0$ is the least positive hitting time. Under this explicit additional hypothesis $P$ is the **local first-return map**. Transversality alone gives the return branch near $t_0$, and permits earlier hits. A state $z_*\in A\cap\Sigma_h$ with
+$Q|_{P(A_+\cap\Sigma_h)}$, where $Q(z)=\Phi(-\sigma(z),z)$; moreover
+$h(\Phi(t,z))=0$ for $(t,z)\in J\times A_+$ holds exactly for $t=\tau(z)$,
+so $P$ is the **local return map** at the reference crossing. The section near
+the two crossings has the embedded $C^1$ charts established by the proposition.
+If the open reference segment satisfies
+$\Phi(s,z_0)\notin\overline{\Sigma_h}^{\,S_0}$ for every $0<s<t_0$ (closure in
+the state domain), clause 4 of the proposition supplies persistence of the
+absence of earlier hits: for $z\in A_+\cap\Sigma_h$ the positive return time
+$\tau(z)$ is the least positive hitting time. Under this explicit additional
+hypothesis $P$ is the **local first-return map**. Transversality alone gives
+the return branch near $t_0$, and permits earlier hits. A state
+$z_*\in A_+\cap\Sigma_h$ with
 $P(z_*)=z_*$ is a **fixed point of the return map**, and the motion through
 $z_*$ is periodic with period $\tau(z_*)$.
 
@@ -100,5 +119,5 @@ the reference crossing time $t_0$ is only one value of it. (c) Neither map is
 asserted to be defined on all of phase space, and no statement here asserts
 that a fixed point, a periodic orbit or a return exists for any particular
 model. (d) Periods and return times are measured in the frame time
-$[t]=\tau$ ([[def-cm01-units]]); a return time must be positive for the
-periodicity reading of clause (iii) to apply.
+$[t]=\tau$ ([[def-cm01-units]]); the positivity required for the periodicity
+reading of clause (iii) is built into the chosen local return branch.

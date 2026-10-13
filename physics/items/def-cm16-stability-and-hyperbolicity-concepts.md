@@ -1,7 +1,7 @@
 ---
 id: def-cm16-stability-and-hyperbolicity-concepts
 kind: definition
-title: "Stability vocabulary of the model: Lyapunov, asymptotic and orbital stability, linear stability of equilibria and periodic orbits, and hyperbolicity of equilibria and fixed points"
+title: "Stability vocabulary of the model: Lyapunov, asymptotic and orbital stability, linear stability of equilibria and map fixed points, and hyperbolicity of equilibria and fixed points"
 status: draft
 origin: session
 domain: physics
@@ -37,7 +37,7 @@ sources:
   references:
     - title: "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §3.2 on equilibrium types and Chapter 5 on small oscillations, whose informal stability wording is replaced here by the exact quantifiers"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
-    - title: "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 5 pp. 60-103, perturbation theory and linearised stability"
+    - title: "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Section 7.3.1, printed p. 164: two-dimensional linear fixed-point equations; the exact stability predicates here are local definitions"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
     - title: "Gerald Sussman and Jack Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed., §4.3 on fixed points, stable and unstable sets and the warning that calling these sets manifolds needs a theorem"
       url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
@@ -63,6 +63,22 @@ standing continuous, state-locally-Lipschitz regularity is required for
 clauses (i)-(ii); clauses (iii)-(iv) add $C^1$ regularity explicitly. In each
 application the predicates concern the declared model objects and quantify
 over its maximal solutions; the two model classes are not being identified.
+
+**Numerical state metric.** All norms and balls below apply to dimensionless
+numerical coordinates. For class (a) these are the SI numerical coordinates
+of [[def-cm16-flow-equilibria-and-invariant-sets]] clause (iv). For class (b),
+fix a positive duration reference $t_{\rm ref}$ and a positive reference
+quantity $a_j$ of the dimension of each configuration coordinate, and read
+$q_j=Q_j/a_j$, $v_j=V_j/(a_j/t_{\rm ref})$ and $t=t_{\rm phys}/t_{\rm ref}$;
+thus $q'=v$. The given mathematical chart data $M,U,G$ are the numerical
+data in this chart. For either class the distance is
+$d(z,z')=\bigl(\sum_j(q_j-q_j')^2+\sum_j(v_j-v_j')^2\bigr)^{1/2}$,
+with $q=x$ in class (a). The same convention applies to tangent vectors
+and to clause (v)'s numerical map charts. Different positive reference
+scales give equivalent norms: their ratios are bounded above and below by
+the largest and smallest diagonal scale ratios. Hence they preserve the
+stability, convergence and boundedness predicates, while quantitative
+radii and bounds can change.
 
 **(i) Lyapunov and asymptotic stability.** Let $z_*\in S_0$ be an equilibrium
 state. The state $z_*$ is **Lyapunov stable** when for every Euclidean ball
@@ -96,10 +112,14 @@ about the set, not about one motion, and it does not assert attraction.
 chosen model is of class $C^1$ on its state domain $S_0$, so that its local
 flow is $C^1$ and $DG(z_*)$ exists. Write $m:=\dim S_0$. For each initial
 deviation $u\in\mathbb R^m$, let $\eta_u:[0,\infty)\to\mathbb R^m$ be the unique
-solution of the constant-coefficient variational equation
+solution of the associated constant-coefficient vector equation
 $$\eta_u'(t)=DG(z_*)\eta_u(t),\qquad \eta_u(0)=u$$
-([[def-variational-equation-along-an-ode-solution]], with the constant
-solution $z(t)=z_*$ as the reference motion). The equilibrium $z_*$ is
+For the constant reference motion $z(t)=z_*$,
+[[def-variational-equation-along-an-ode-solution]] instead defines the
+normalized matrix equation $A'(t)=DG(z_*)A(t)$, $A(0)=I_m$. Its solution
+acts on initial deviations by $\eta_u(t)=A(t)u$: differentiating this
+product gives the displayed vector equation and its initial value.
+The equilibrium $z_*$ is
 **linearly stable** when
 $\sup_{t\ge0}\lVert\eta_u(t)\rVert_2<\infty$ for every $u$; it is
 **linearly unstable** if this norm is unbounded as $t\to\infty$ for some
@@ -115,7 +135,7 @@ the eigenvalues are those of the matrix of $DG(z_*)$ in the state chart. The
 harmonic oscillator equilibrium of a one-dimensional model with a positive
 stiffness has the purely imaginary eigenvalues $\pm i\omega$ and is therefore
 not hyperbolic; the saddle of a repulsive linear model has the real
-eigenvalues $\pm\mu$, $\mu>0$, and is hyperbolic.
+eigenvalues $\pm\kappa$, $\kappa>0$, and is hyperbolic.
 
 **(v) Linear stability and hyperbolicity of a map.** Let $X,Y\subseteq\mathbb R^m$
 be open and let $\Psi:X\to Y$ be of class $C^1$

@@ -1,7 +1,7 @@
 ---
 id: pthm-cm05-conic
 kind: physics-theorem
-title: "The gravitational relative orbit is a conic focused at the force centre: $\\rho=p/(1+e\\cos(\\theta-\\theta_0))$, $E=(\\mu\\kappa^2/2J^2)(e^2-1)$, elliptic completeness and barycentric scaled ellipses"
+title: "The inverse-square gravitational relative trajectory has the Kepler polar form: $\\rho=p/(1+e\\cos(\\theta-\\theta_0))$, $E=(\\mu\\kappa^2/2J^2)(e^2-1)$, elliptic completeness and barycentric scaled ellipses"
 status: draft
 origin: session
 domain: physics
@@ -28,7 +28,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "The Keplerian orbit classification of the two-label gravitational model with non-zero angular momentum: the polar conic with its eccentricity and focus at the force centre, the eccentricity-energy relation and the elliptic, parabolic and hyperbolic branches, the centrifugal barrier that keeps the motion away from the collision, and - in the elliptic case - the completeness, the closed periodic relative orbit with the ellipse geometry, and the scaled barycentric conics of both labels. The parabolic and hyperbolic clauses record only the orbit formula, the periapsis and the domain of the angle on the actual domain of the motion; no asymptotic extent, scattering or observational claim is made."
+physical_scope: "The Keplerian orbit classification of the two-label gravitational model with non-zero angular momentum: the polar conic with its eccentricity and focus at the force centre, the eccentricity-energy relation and the elliptic, parabolic and hyperbolic branches, the centrifugal barrier that keeps the motion away from the collision, and - in the elliptic case - the completeness of the relative trajectory and reconstruction on the declared model time window, the closed periodic relative orbit with the ellipse geometry, and the scaled barycentric conics of both labels. The parabolic and hyperbolic clauses record only the orbit formula, the periapsis and the domain of the angle on the actual domain of the motion; no asymptotic extent, scattering or observational claim is made."
 sources:
   references:
     - title: "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), Section 3.4, Eqs. (3.57)-(3.65), chapter pages 13-15 (PDF pages 46-48): the conic $r=p/(1+e\\cos\\varphi)$, the eccentricity-energy relation, the elliptic parameters $a,b$, the first Kepler law and the parabolic/hyperbolic branches for $E\\ge0$"
@@ -45,7 +45,8 @@ Assume the Axiom of Countable Choice ([[def-countable-choice]]). Adopt the
 two-label gravitational model of [[post-cm05-gravity]] clause (i): inertial
 masses $m_1,m_2>0$, $M=m_1+m_2$, reduced mass $\mu=m_1m_2/M$, gravitational
 couplings $m_1^{g},m_2^{g}>0$, $\kappa=G_{\mathrm N}m_1^{g}m_2^{g}>0$, and
-the central pair potential $u(\rho)=-\kappa/\rho$ on $J_0=(0,\infty)$. Let
+the central pair potential $u(\rho)=-\kappa/\rho$ on $J_0=(0,\infty)$,
+and model time window $I_0$. Let
 $x:I\to Q$ be a motion on a time interval $I$ with nonempty interior, with
 relative coordinate $r$, attached angular momentum $j=\mu\,r\times r'$ and
 energy $E=\tfrac12\mu\lVert r'\rVert_2^2-\kappa/\lvert r\rvert$
@@ -55,13 +56,28 @@ Let $(\rho,\theta)$ be polar data for $r$ and put
 $$p:=\frac{J^{2}}{\mu\kappa},\qquad U^{\mathrm{eff}}_J(\rho):=-\frac{\kappa}{\rho}+\frac{J^{2}}{2\mu\rho^{2}},\qquad \rho_*:=\frac{J^{2}}{\mu\kappa}=p.$$
 Then:
 
+In the orbital plane $\Pi:=\operatorname{span}(e_1,e_2)$, for a point
+$F\in\Pi$, a line $D\subseteq\Pi$ with $F\notin D$, and $e>0$, define the
+**focus-directrix conic of eccentricity $e$** to be
+$$C(F,D,e):=\{y\in\Pi:\lVert y-F\rVert_2=e\,d_\Pi(y,D)\},\qquad d_\Pi(y,D):=\inf_{z\in D}\lVert y-z\rVert_2.$$
+Here $F$ is a focus, $D$ is its directrix, and $e$ is the distance ratio in
+the definition. The types $0<e<1$, $e=1$, and $e>1$ are called ellipse,
+parabola, and hyperbola, respectively. The case $e=0$ is the circle of radius
+$p$ centered at $F$, the circular ellipse with coincident foci at its centre.
+In this item, an **unbounded conic** is a conic locus that is unbounded, not
+an open subset of $\Pi$; the **periapsis distance** is the minimum distance
+on the conic to its focus, and any point attaining it is a periapsis.
+
 1. **(Conic and eccentricity.)** There are $e\ge0$ and $\theta_0\in\mathbb R$
    with
    $$\rho=\frac{p}{1+e\cos(\theta-\theta_0)}$$
    on the interior of $I$, and the energy satisfies
    $E=\dfrac{\mu\kappa^{2}}{2J^{2}}\bigl(e^{2}-1\bigr)$; consequently
-   $E<0\iff e<1$, $E=0\iff e=1$ and $E>0\iff e>1$. The orbit is therefore a
-   conic section with the force centre at a focus.
+   $E<0\iff e<1$, $E=0\iff e=1$ and $E>0\iff e>1$. The relative trajectory
+   lies on a focus-directrix conic with the force centre as focus when $e>0$: its
+   directrix is $D=\{y\in\Pi:\langle y,n_0\rangle=p/e\}$, where
+   $n_0:=\cos\theta_0e_1+\sin\theta_0e_2$. When $e=0$, the relative
+   trajectory lies on the circle of radius $p$ centered at the force centre.
 2. **(Centrifugal barrier.)** $\rho_*$ is the unique critical point of
    $U^{\mathrm{eff}}_J$ in $(0,\infty)$ and the unique minimum, with
    $$U^{\mathrm{eff}}_J(\rho_*)=-\frac{\mu\kappa^{2}}{2J^{2}};$$
@@ -74,9 +90,13 @@ Then:
    clause 1.
 3. **(Elliptic case.)** If $E<0$, then $e<1$ and:
    (a) the relative trajectory extends uniquely to a central-force
-   trajectory for $(\mu,u)$ defined on all of $\mathbb R$, the motion $x$ of
-   the two-label model extends uniquely to a motion defined on all of
-   $\mathbb R$, and the relative motion is periodic, with
+   trajectory for $(\mu,u)$ defined on all of $\mathbb R$. Together with
+   the unique affine extension of $X$, this defines global coordinate curves
+   $\bar x_1=\bar X+(m_2/M)\bar r$, $\bar x_2=\bar X-(m_1/M)\bar r$
+   satisfying the same time-independent force equations; their restriction
+   to $I_0$ is the unique extension of the model motion $x$. They are a
+   model motion on all of $\mathbb R$ when $I_0=\mathbb R$. The relative
+   motion is periodic, with
    $\theta(t+T)=\theta(t)+2\pi$ for one full angular revolution;
    (b) $r$ is an ellipse with focus at the force centre, semiaxes
    $$a=\frac{p}{1-e^{2}}=-\frac{\kappa}{2E},\qquad b=a\sqrt{1-e^{2}},$$
@@ -93,7 +113,8 @@ Then:
    $\rho=p/\bigl(1+\cos(\theta-\theta_0)\bigr)$ with periapsis
    $\rho_{\min}(0)=p/2$. If $E>0$, then $e>1$ and the formula of clause 1
    holds at every $t$ with $1+e\cos(\theta-\theta_0)>0$, with periapsis
-   $\rho_{\min}(E)=p/(1+e)$. In both cases $e\ge1$ and the conic is open;
+   $\rho_{\min}(E)=p/(1+e)$. In both cases $e\ge1$ and the corresponding
+   conic locus is unbounded;
    the extent of the trajectory, its asymptotes and its scattering
    interpretation are **not** claimed here.
 
@@ -113,13 +134,13 @@ Then:
 
 **Proof technique:** direct.
 
-1.1 Clause 1: by [L1] the curve $r$ is a central-force trajectory for $(\mu,u)$ with constant nonzero angular momentum $Je_3$ and constant energy $E$, so the hypotheses of the inverse-square orbit theory [L2] are met and its conic representation and eccentricity-energy relation give exactly clause 1, including the equivalence of the signs of $E$ and $e^{2}-1$ because $\mu\kappa^{2}/(2J^{2})>0$. [given, A1, L1, L2, algebra]
+1.1 Clause 1: by [L1] the curve $r$ is a central-force trajectory for $(\mu,u)$ with constant nonzero angular momentum $Je_3$ and constant energy $E$, so the hypotheses of the inverse-square orbit theory [L2] are met and its polar representation and eccentricity-energy relation give the displayed formula and sign equivalences, since $\mu\kappa^{2}/(2J^{2})>0$. To verify the geometric description, for $e>0$ put $n_0:=\cos\theta_0e_1+\sin\theta_0e_2$ and $D:=\{y\in\Pi:\langle y,n_0\rangle=p/e\}$. For $t\in I^\circ$, set $\phi:=\theta(t)-\theta_0$. The formula and its positive denominator give $\rho(t)\cos\phi<p/e$ and $e\,d_\Pi(r(t),D)=e\bigl(p/e-\rho(t)\cos\phi\bigr)=p-e\rho(t)\cos\phi=\rho(t)=\lVert r(t)\rVert_2$, so $r(t)\in C(0,D,e)$ and the force centre is a focus. If $e=0$, the polar formula gives $\rho(t)=p$, so $r(t)$ lies on the stated circle. [given, A1, L1, L2, algebra]
 
 2.1 Clause 2: differentiating $U^{\mathrm{eff}}_J$ gives $\bigl(U^{\mathrm{eff}}_J\bigr)'(\rho)=\bigl(\kappa\rho-J^{2}/\mu\bigr)/\rho^{3}$, which vanishes exactly at $\rho_*$ and is negative for $\rho<\rho_*$ and positive for $\rho>\rho_*$; for $0<\rho<\rho'\le\rho_*$ the difference identity $$U^{\mathrm{eff}}_J(\rho')-U^{\mathrm{eff}}_J(\rho)=\frac{(\rho'-\rho)\bigl[2\mu\kappa\rho\rho'-J^{2}(\rho'+\rho)\bigr]}{2\mu\rho^{2}(\rho')^{2}}$$ has numerator at most $(\rho'-\rho)\bigl[2J^{2}\rho-J^{2}(\rho'+\rho)\bigr]=-J^{2}(\rho'-\rho)^{2}<0$, where the inequality uses $\rho\le\rho'$ and $\rho'\le\rho_*=J^{2}/(\mu\kappa)$; hence $U^{\mathrm{eff}}_J$ is strictly decreasing on $(0,\rho_*]$ and $\rho_*$ is its unique minimum. Direct substitution gives $$-\frac{\kappa}{\rho_{\min}(E)}+\frac{J^{2}}{2\mu\rho_{\min}(E)^{2}}=E,$$ by multiplying by $\rho_{\min}^{2}$, clearing denominators with the definition of $\rho_{\min}$ and using $\bigl(\mu\kappa+\sqrt{\mu^{2}\kappa^{2}+2\mu EJ^{2}}\bigr)\bigl(-\mu\kappa+\sqrt{\mu^{2}\kappa^{2}+2\mu EJ^{2}}\bigr)=2\mu EJ^{2}$. Along the motion, the energy identity of [L2] gives $\tfrac12\mu(\rho')^{2}+U^{\mathrm{eff}}_J(\rho)=E$, so $U^{\mathrm{eff}}_J(\rho(t))\le E=U^{\mathrm{eff}}_J(\rho_{\min}(E))$; if $\rho(t)\le\rho_*$ then strict decrease on $(0,\rho_*]$ forces $\rho(t)\ge\rho_{\min}(E)$, while if $\rho(t)>\rho_*$ then $\rho(t)>\rho_*\ge\rho_{\min}(E)$ because $\rho_{\min}(E)\le\rho_*$ (its defining denominator is at least $\mu\kappa$). Hence $\rho\ge\rho_{\min}(E)>0$ throughout. [step 1.1, L2, L3, algebra]
 
-3.1 Clause 3: assume $E<0$, so $e<1$ by step 1.1. Clause (a) is [L2] for the relative trajectory together with [L1] clause 4, which reconstructs the extension of $x$ to $\mathbb R$ and gives its uniqueness through the uniqueness of the extension of $r$ and the affine $X$. Clause (b) is the ellipse clause of [L2], including $a=p/(1-e^{2})=-\kappa/(2E)$ and the bound on $\rho$. Clause (c): by [L1] and [L2], $\lvert x_1-X\rvert=\frac{m_2}{M}\lvert r\rvert=\frac{m_2}{M}\rho$ and $\lvert x_2-X\rvert=\frac{m_1}{M}\rho$, so substituting the conic of clause 1 gives the two displayed conic formulas; their semimajor axes are $p_j/(1-e^{2})=\frac{m_j}{M}a$ with the same eccentricity and the focus at the origin of $x_i-X$, which is the centre of mass. [step 1.1, step 2.1, L1, L2, algebra]
+3.1 Clause 3: assume $E<0$, so $e<1$ by step 1.1. Clause (a) is [L2] for the global relative trajectory $\bar r$. The affine curve $X$ has a unique affine extension $\bar X$ to $\mathbb R$ because $I$ has at least two points. Define $\bar x_1=\bar X+(m_2/M)\bar r$ and $\bar x_2=\bar X-(m_1/M)\bar r$ globally; the calculation in [L1] clause 4 shows that these satisfy the same time-independent equations. Their restriction to $I_0$ is a motion of the original model by that clause, and uniqueness follows from the unique relative and affine extensions. A global coordinate curve is a model motion on all of $\mathbb R$ only when the model time window is $I_0=\mathbb R$. Clause (b) is the ellipse clause of [L2], including $a=p/(1-e^{2})=-\kappa/(2E)$ and the bound on $\rho$. Clause (c): by [L1] and [L2], $\lvert x_1-X\rvert=\frac{m_2}{M}\lvert r\rvert=\frac{m_2}{M}\rho$ and $\lvert x_2-X\rvert=\frac{m_1}{M}\rho$, so substituting the conic of clause 1 gives the two displayed conic formulas; their semimajor axes are $p_j/(1-e^{2})=\frac{m_j}{M}a$ with the same eccentricity and the focus at the origin of $x_i-X$, which is the centre of mass. [step 1.1, step 2.1, L1, L2, algebra]
 
-4.1 Clause 4 and endpoints: [L2] gives $\rho=p/(1+e\cos(\theta-\theta_0))$ on $I^\circ$. Equivalently, the continuous functions $t\mapsto\rho(t)(1+e\cos(\theta(t)-\theta_0))$ and $t\mapsto p$ agree on $I^\circ$, so they agree on its closure in $I$, which is all of $I$; since $\rho(t)>0$ and $p>0$, this identity gives $1+e\cos(\theta(t)-\theta_0)=p/\rho(t)>0$ and the conic formula also holds at every included endpoint of $I$. If $E=0$ then $e=1$ by step 1.1; the denominator is at most $2$, so the periapsis is $p/2=\rho_{\min}(0)$ by the formula of step 2.1, and the open conic has the single periapsis at $\theta=\theta_0$. If $E>0$ then $e>1$; positivity of the denominator places the motion on the branch of the hyperbola through periapsis, which is $\rho_{\min}(E)=p/(1+e)$ by step 2.1. No assertion is made about the extent of these trajectories, their asymptotic directions or scattering, which are outside this item. [step 1.1, step 2.1, L1, L2, algebra] ∎
+4.1 Clause 4 and endpoints: [L2] gives $\rho=p/(1+e\cos(\theta-\theta_0))$ on $I^\circ$. Equivalently, the continuous functions $t\mapsto\rho(t)(1+e\cos(\theta(t)-\theta_0))$ and $t\mapsto p$ agree on $I^\circ$, so they agree on its closure in $I$, which is all of $I$; since $\rho(t)>0$ and $p>0$, this identity gives $1+e\cos(\theta(t)-\theta_0)=p/\rho(t)>0$ and the conic formula also holds at every included endpoint of $I$. If $E=0$ then $e=1$ by step 1.1; the periapsis is $p/2=\rho_{\min}(0)$ by step 2.1. The conic locus is unbounded because $1+\cos\phi\downarrow0$ as $\phi\uparrow\pi$ through values below $\pi$. If $E>0$ then $e>1$; the periapsis is $\rho_{\min}(E)=p/(1+e)$ by step 2.1. With $\phi_*:=\arccos(-1/e)\in(0,\pi)$, the denominator $1+e\cos\phi$ is positive for $0\le\phi<\phi_*$ and tends to $0$ as $\phi\uparrow\phi_*$, so this conic locus is unbounded as well. These statements concern the full conic loci; no assertion is made that the actual time domain $I$ covers every point of either locus, or about asymptotic directions or scattering. [step 1.1, step 2.1, L1, L2, algebra] ∎
 
 ## Remarks
 

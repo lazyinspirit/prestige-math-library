@@ -10,8 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-causal-curves-and-reachability, lem-gr-flat-time-monotonicity-and-lipschitz-graphs, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-spacelike-hypersurfaces-and-cauchy-sets, def-gr-flat-minkowski-model-and-inertial-charts, lem-gr-flat-inertial-cone-criterion-and-sums, def-time-orientation-and-future-causal-sets, def-causal-classification-of-lorentz-vectors, def-embedded-submanifold-and-slice-chart, cor-heine-borel-in-the-product-topology, def-compact-space]
+deps: [def-dependent-choice, def-countable-choice, def-gr-causal-curves-and-reachability, lem-gr-flat-time-monotonicity-and-lipschitz-graphs, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-spacelike-hypersurfaces-and-cauchy-sets, def-gr-flat-minkowski-model-and-inertial-charts, lem-gr-flat-inertial-cone-criterion-and-sums, def-time-orientation-and-future-causal-sets, def-causal-classification-of-lorentz-vectors, def-embedded-submanifold-and-slice-chart, cor-heine-borel-in-the-product-topology, def-compact-space]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   def-gr-causal-curves-and-reachability: mathematical-premise
   lem-gr-flat-time-monotonicity-and-lipschitz-graphs: mathematical-premise
   def-gr-causal-conditions-and-global-hyperbolicity: mathematical-premise
@@ -35,6 +37,10 @@ verification:
 
 ## Statement
 
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the general absolutely continuous causal-curve
+conclusions used here.
+
 Let $(M,\eta,N)$ be the flat model of
 [[def-gr-flat-minkowski-model-and-inertial-charts]], with its global inertial
 chart $x=(x^0,z)$, its cone sets $C^+,\overline{C^+}$ of clause (f) and its
@@ -48,7 +54,7 @@ $M=\mathbb R^4$; in the chart,
 $$q\in J^+(p)\Longleftrightarrow x^0(q)-x^0(p)\ge|z(q)-z(p)|_{\mathrm e}.$$
 
 **(b)** For every $c\in\mathbb R$ the level set
-$\Sigma_c:=x^{-1}(\{c\})$ is a spacelike embedded hypersurface of $M$, and
+$\Sigma_c:=x^{-1}(\{c\}\times\mathbb R^3)$ is a spacelike embedded hypersurface of $M$, and
 every inextendible causal curve of $M$ meets $\Sigma_c$ in exactly one
 parameter value; equivalently, $\Sigma_c$ is a Cauchy hypersurface in the
 sense of [[def-gr-spacelike-hypersurfaces-and-cauchy-sets]] clause (c).
@@ -66,11 +72,11 @@ globally hyperbolic in the sense of clause (c) of that definition.
 
 [L1] The flat model of [[def-gr-flat-minkowski-model-and-inertial-charts]]: $M=\mathbb R^4$, the chart $x$ of clause (a) is global and inertial with $\eta=\operatorname{diag}(-1,1,1,1)$ in its coordinates, the cone sets are $C^+=\{v:v^0>|v_s|\}$ and $\overline{C^+}=\{v:v^0\ge|v_s|\}$ by clause (f), and clause (d) supplies the translations, displacements and straight paths; by [[lem-gr-flat-inertial-cone-criterion-and-sums]] clause (a) a nonzero future causal vector has positive time coordinate in every inertial chart.
 
-[L2] The straight path $s\mapsto p+s(q-p)$ of clause (d) has constant tangent $q-p$, whose coordinate path in the chart $x$ is $x(p)+s\,(q-p)$, and its tangent is classified by the cone criterion: it is future causal when $q-p\in\overline{C^+}$ and future timelike when $q-p\in C^+$ ([[def-gr-flat-minkowski-model-and-inertial-charts]] clause (d), [[lem-gr-flat-inertial-cone-criterion-and-sums]] clauses (a) and (b), [[def-causal-classification-of-lorentz-vectors]]).
+[L2] The straight path $s\mapsto p+s(q-p)$ of clause (d) has constant tangent $q-p$, whose coordinate path in the chart $x$ is $x(p)+s\,(q-p)$, and its tangent is classified by the cone criterion: it is future causal when $q-p\in\overline{C^+}\setminus\{0\}$ and future timelike when $q-p\in C^+$ ([[def-gr-flat-minkowski-model-and-inertial-charts]] clause (d), [[lem-gr-flat-inertial-cone-criterion-and-sums]] clauses (a) and (b), [[def-causal-classification-of-lorentz-vectors]]).
 
 [L3] Along a future causal curve, inertial time is strictly increasing with the Lipschitz bound of [[lem-gr-flat-time-monotonicity-and-lipschitz-graphs]] clause (b): $|z(\gamma(b))-z(\gamma(a))|_{\mathrm e}\le x^0(\gamma(b))-x^0(\gamma(a))$ for $a<b$; and the displacement of a future causal curve from $p$ to $q$ lies in $\overline{C^+}$ ([[lem-gr-flat-time-monotonicity-and-lipschitz-graphs]] clause (b) and its proof, [[def-gr-causal-curves-and-reachability]]).
 
-[L4] The level sets $\{x^0=c\}$ of the global coordinate are embedded submanifolds with slice chart given by $x$, and the restriction of $\eta$ to the tangent space $\operatorname{span}(\partial_1,\partial_2,\partial_3)$ is positive definite by clause (b) of the definition ([[def-embedded-submanifold-and-slice-chart]], [[def-gr-flat-minkowski-model-and-inertial-charts]] clauses (a) and (b)).
+[L4] The level sets $\{x^0=c\}$ of the global coordinate are embedded submanifolds with slice chart $y=(x^1,x^2,x^3,x^0-c)$, for which $y(\Sigma_c)=\mathbb R^3\times\{0\}$, and the restriction of $\eta$ to the tangent space $\operatorname{span}(\partial_1,\partial_2,\partial_3)$ is positive definite by clause (b) of the definition ([[def-embedded-submanifold-and-slice-chart]], [[def-gr-flat-minkowski-model-and-inertial-charts]] clauses (a) and (b)).
 
 [L5] A subset of $\mathbb R^4$ that is closed and bounded is compact ([[cor-heine-borel-in-the-product-topology]], [[def-compact-space]]).
 

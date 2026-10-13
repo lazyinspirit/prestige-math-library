@@ -1,8 +1,8 @@
 ---
 id: lem-gr-flrw-metric-and-comoving-data
 kind: lemma
-title: "The FLRW metric is smooth Lorentzian; comoving curves are unit-speed
-  observers and cosmic time is their proper time; the slices carry the scaled
+title: "The FLRW metric is smooth Lorentzian; the comoving field is unit
+  timelike and cosmic time parametrizes comoving curves by proper time; the slices carry the scaled
   spatial metric"
 status: draft
 origin: session
@@ -135,7 +135,7 @@ sectional curvature $k/a(t_0)^2$
 
 [L5] The maximal integral curves of a smooth vector field through the points of its domain exist and are unique ([[thm-unique-maximal-integral-curve-through-each-point]], [[def-integral-curve-of-a-vector-field]]); a smooth vector field is a smooth section of the tangent bundle ([[def-smooth-vector-field-as-a-tangent-bundle-section]]). A differentiable real function on an interval with zero derivative is constant ([[cor-zero-derivative-implies-constant]]), so solving $dt/ds=c^{-1}$ and zero spatial velocity gives the displayed integral curves in product charts.
 
-[L6] The pullback of a smooth metric by a smooth embedding is a smooth metric; the slice inclusion $x\mapsto(t_0,x)$ is a smooth embedding of $\Sigma$ into $M$ with image $\{t_0\}\times\Sigma$, and on it the components of the pullback of $g$ are the spatial components $g_{ij}=a(t_0)^2\gamma_{ij}$ ([[prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure]], [[def-c-r-and-smooth-maps-between-smooth-manifolds]], [[def-riemannian-metric-and-riemannian-manifold]]).
+[L6] Since $I$ is an open interval, it has the restricted smooth structure from $\mathbb R$ ([[prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure]]), and the FLRW product charts are smooth. For fixed $t_0\in I$, the slice map $\iota_{t_0}(x)=(t_0,x)$ has coordinate form $u\mapsto(t_0,u)$, so it is a smooth embedding and $D\iota_{t_0}(\partial_i)=\partial_i$. Define its pullback by $(\iota_{t_0}^*g)_x(v,w):=g_{(t_0,x)}(D\iota_{t_0}v,D\iota_{t_0}w)$; its components are therefore $(\iota_{t_0}^*g)_{ij}=g_{ij}(t_0,x)=a(t_0)^2\gamma_{ij}(x)$. This is a smooth symmetric positive-definite form, hence a Riemannian metric, because $a(t_0)>0$ and $\gamma$ is Riemannian ([[def-c-r-and-smooth-maps-between-smooth-manifolds]], [[def-riemannian-metric-and-riemannian-manifold]]).
 
 [L7] The Ricci tensor of a metric is unchanged by a constant rescaling of that metric, and under a rescaling $\tilde\lambda\gamma$ of a metric with constant sectional curvature $K$ the sectional curvature is $\tilde\lambda^{-1}K$ ([[lem-gr-constant-rescaling-preserves-levi-civita-and-curvature]]); in dimension three, $\operatorname{Ric}=2k\gamma$ is equivalent to constant sectional curvature $k$ ([[lem-gr-constant-curvature-three-manifold-ricci]], [[def-gr-flrw-spatial-model]]).
 
@@ -145,7 +145,7 @@ sectional curvature $k/a(t_0)^2$
 
 1.1 (Smoothness and Lorentzian signature.) In a product chart $(x^0,x^1,x^2,x^3)$ with $x^0=t$ the components of $g$ are the smooth functions displayed in [[def-gr-flrw-model-data]]: $g_{00}=-c^2$, $g_{0i}=0$, $g_{ij}=a(t)^2\gamma_{ij}(x)$. Product charts cover $M$ and their transition maps are products of the transition maps of $I$ and $\Sigma$, so by the transformation law [L1] the family $g$ is a smooth symmetric $(0,2)$-tensor field on $M$. At a point, the matrix of $g_p$ in the coordinate basis is block diagonal, $\operatorname{diag}(-c^2,\,a(t)^2(\gamma_{ij}(x))_{i,j=1}^{3})$. The $1\times1$ block has the single negative entry $-c^2$, and the $3\times3$ block is a positive multiple of the positive-definite matrix of $\gamma_x$; hence the diagonal entries of a diagonalization are one negative and three positive numbers, and $g_p$ is nondegenerate with inertia $(3,1,0)$. By [L2] this makes $g_p$ a Lorentz form at every point; by [[def-gr-smooth-lorentzian-objects]] the smooth field $g$ with these pointwise Lorentz forms is a Lorentzian metric of signature $(-,+,+,+)$ on $M$. Since $g(N,N)=g_{00}=-c^2<0$ at every point, [L3] makes $N=\partial_t$ a time orientation and $(M,g,N)$ a time-oriented smooth Lorentzian four-manifold. [L1, L2, L3, algebra]
 
-2.1 (The comoving congruence and the comoving curves.) By step 1.1 the manifold $(M,g,N)$ is time-oriented smooth Lorentzian, so the causal vocabulary of [L3] applies. The field $n=c^{-1}\partial_t$ is a smooth vector field; its metric pairing is $g(n,n)=c^{-2}g(\partial_t,\partial_t)=c^{-2}(-c^2)=-1$, and $g(n,N)=-c<0$. Hence $n$ is a future-directed unit timelike vector field, i.e. a smooth future-directed unit timelike congruence. For fixed $x\in\Sigma$ the smooth curve $\gamma_x:I\to M$, $\gamma_x(t)=(t,x)$ has tangent $\partial_t=cn$; its image lies in $\{t\}\times\{x\}$ and its velocity satisfies $g(\gamma_x',\gamma_x')=-c^2<0$ and $g(\gamma_x',N)=-c^2<0$, so it is a future timelike worldline. For $(t_0,x)\in M$, the curve $\eta_{t_0,x}(s)=(t_0+s/c,x)$ on $c(I-t_0)$ has derivative $c^{-1}\partial_t=n$, so it is the integral curve of $n$ through that point by [L5]. Any extension would still satisfy $dt/ds=c^{-1}$ and constant spatial coordinates, hence would leave $I\times\Sigma$ beyond this interval; its domain is therefore maximal. The curve $\gamma_x$ is the cosmic-time reparametrization $s=c(t-t_0)$ of this same observer trajectory, with velocity $cn$. [L3, L5, algebra]
+2.1 (The comoving congruence and the comoving curves.) By step 1.1 the manifold $(M,g,N)$ is time-oriented smooth Lorentzian, so the causal vocabulary of [L3] applies. The field $n=c^{-1}\partial_t$ is a smooth vector field; its metric pairing is $g(n,n)=c^{-2}g(\partial_t,\partial_t)=c^{-2}(-c^2)=-1$, and $g(n,N)=-c<0$. Hence $n$ is a future-directed unit timelike vector field, i.e. a smooth future-directed unit timelike congruence. For fixed $x\in\Sigma$ the smooth curve $\gamma_x:I\to M$, $\gamma_x(t)=(t,x)$ has tangent $\partial_t=cn$; its image is $I\times\{x\}$ and its velocity satisfies $g(\gamma_x',\gamma_x')=-c^2<0$ and $g(\gamma_x',N)=-c^2<0$, so it is a future timelike worldline. For $(t_0,x)\in M$, the curve $\eta_{t_0,x}(s)=(t_0+s/c,x)$ on $c(I-t_0)$ has derivative $c^{-1}\partial_t=n$, so it is the integral curve of $n$ through that point by [L5]. Any extension would still satisfy $dt/ds=c^{-1}$ and constant spatial coordinates, hence would leave $I\times\Sigma$ beyond this interval; its domain is therefore maximal. The curve $\gamma_x$ is the cosmic-time reparametrization $s=c(t-t_0)$ of this same observer trajectory, with velocity $cn$. [L3, L5, algebra]
 
 3.1 (Cosmic time is proper time.) For the comoving curve $\gamma_x$ of step 2.1, the proper-time density of [L4] is $h(t)=\sqrt{-g(\gamma_x'(t),\gamma_x'(t))}=\sqrt{c^2}=c$, a constant. Hence for $t_0<t_1$ in $I$, the proper-time increment is $c^{-1}\int_{t_0}^{t_1}c\,dt=t_1-t_0$ by [L4]; in particular the parameter $t$ is proper time along $\gamma_x$ up to the choice of zero. The physical four-velocity, defined as the derivative of the worldline with respect to this proper time ([[lem-gr-proper-time-reparametrization-and-four-velocity]]), is therefore $U=d\gamma_x/dt=\partial_t=cn$, with $g(U,U)=-c^2$. [L4, step 2.1, algebra]
 
@@ -155,16 +155,6 @@ sectional curvature $k/a(t_0)^2$
 
 ## Remarks
 
-- **What is not asserted.** The lemma asserts neither completeness of the
-  comoving observers beyond their computed domains (the maximal $n$-integral
-  parameter domain is $c(I-t_0)$; their cosmic/proper-time domain is $I$),
-  nor any global product structure of the spacetime beyond the
-  product structure that defines the datum, nor any relation between the time
-  parameter and a physical clock; the physical clock reading is supplied by the
-  framework's clock postulate, not by this lemma.
+- **What is not asserted.** The lemma asserts neither completeness of the comoving observers beyond their computed domains (the maximal $n$-integral parameter domain is $c(I-t_0)$; their cosmic/proper-time domain is $I$), nor any global product structure of the spacetime beyond the product structure that defines the datum, nor any relation between the time parameter and a physical clock; the physical clock reading is supplied by the framework's clock postulate, not by this lemma.
 
-- **Sign of the curvature reading.** The slice curvature $k/a(t_0)^2$ is a
-  real number whose sign is the sign of $k$. The Ricci form displayed in the
-  final proof step uses the equivalence of
-  [[lem-gr-constant-curvature-three-manifold-ricci]] for the real parameter
-  $k/a(t_0)^2$, which is not restricted to the three signs $\{-1,0,1\}$.
+- **Sign of the curvature reading.** The slice curvature $k/a(t_0)^2$ is a real number whose sign is the sign of $k$. The Ricci form displayed in the final proof step uses the equivalence of [[lem-gr-constant-curvature-three-manifold-ricci]] for the real parameter $k/a(t_0)^2$, which is not restricted to the three signs $\{-1,0,1\}$.

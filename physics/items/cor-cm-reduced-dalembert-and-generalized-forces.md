@@ -41,7 +41,7 @@ verification:
 Let $n,m\ge1$, let $\Omega\subseteq\mathbb R^n$ be open and nonempty, and let
 $X:\Omega\to\mathbb R^m$ be of class $C^3$ with $DX(q)$ injective for every $q\in\Omega$; fix an
 immersion in the sense of [[def-euclidean-submersions-and-immersions]] (this forces $n\le m$).
-Let $M\in M_m(\mathbb R)$ be symmetric positive definite, let $D\subseteq\mathbb R\times\mathbb R^m\times\mathbb R^m$ be open and let $F:D\to\mathbb R^m$ be continuous, let
+Let $M\in M_m(\mathbb R)$ be symmetric positive definite, meaning $M^{\mathsf T}=M$ and $u^{\mathsf T}Mu>0$ for every $0\ne u\in\mathbb R^m$, let $D\subseteq\mathbb R\times\mathbb R^m\times\mathbb R^m$ be open and let $F:D\to\mathbb R^m$ be continuous, let
 $I\subseteq\mathbb R$ be an open interval ([[def-interval]]), and let
 $q:I\to\Omega$ be a $C^2$ curve with $x(t):=X(q(t))$ and $(t,x(t),x'(t))\in D$ for all $t\in I$. Suppose there is a continuous
 $R:I\to\mathbb R^m$ with
@@ -59,8 +59,7 @@ the parametrisation; when $X$ is affine, the correction vanishes.
 
 ## Facts & Assumptions
 
-**Given:** The open set $\Omega$, the immersion $X$, the constant matrix $M$, the field $F$, the
-curve $q$ with $x=X\circ q$, and the reaction $R$ satisfying the two displayed relations.
+**Given:** The open set $\Omega$, the immersion $X$, the constant matrix $M$, the field $F$, the curve $q$ with $x=X\circ q$, and the reaction $R$ satisfying the two displayed relations.
 
 [F1] Differentiating $x=X\circ q$ twice by the chain rule
 ([[thm-chain-rule-for-total-derivatives]], [[prop-cm-coordinate-covariance-of-the-euler-lagrange-expression]],
@@ -68,16 +67,9 @@ curve $q$ with $x=X\circ q$, and the reaction $R$ satisfying the two displayed r
 $x'=DX(q)q'$ and
 $$x''=\frac{d}{dt}\bigl(DX(q)\bigr)q'+DX(q)q''=\bigl(X_{qq}[q',q']\bigr)+DX(q)q'' .$$
 
-[F2] $R(t)$ annihilates the tangent space of the immersion: $R(t)\cdot DX(q(t))\delta=0$ for all
-$\delta$; equivalently $DX(q(t))^{\mathsf T}R(t)=0$, because
-$\bigl(DX^{\mathsf T}R\bigr)\cdot\delta=R\cdot DX\delta$ for every $\delta$
-([[def-euclidean-inner-product]], [[def-matrix-product-and-identity-matrix]], [[def-linear-map]]).
+[F2] $R(t)$ annihilates the tangent space of the immersion: $R(t)\cdot DX(q(t))\delta=0$ for all $\delta$; equivalently $DX(q(t))^{\mathsf T}R(t)=0$, because $\bigl(DX^{\mathsf T}R\bigr)\cdot\delta=R\cdot DX\delta$ for every $\delta$ ([[def-euclidean-inner-product]], [[def-matrix-product-and-identity-matrix]], [[def-linear-map]]).
 
-[F3] Matrix algebra and transposition: $(DX)^{\mathsf T}$ is the adjoint of $DX$ for the Euclidean
-inner products, and multiplying an identity by $DX^{\mathsf T}$ on the left preserves it
-([[def-jacobian-matrix-and-gradient]], [[def-euclidean-inner-product]],
-[[def-vector-valued-derivative-and-integral]], [[def-interval]],
-[[def-invertible-euclidean-linear-map]], [[thm-clairaut-schwarz-mixed-partials]]).
+[F3] Matrix algebra and transposition: $(DX)^{\mathsf T}$ is the adjoint of $DX$ for the Euclidean inner products, and multiplying an identity by $DX^{\mathsf T}$ on the left preserves it ([[def-jacobian-matrix-and-gradient]], [[def-euclidean-inner-product]], [[def-vector-valued-derivative-and-integral]], [[def-interval]], [[def-invertible-euclidean-linear-map]], [[thm-clairaut-schwarz-mixed-partials]]).
 
 ## Proof
 
@@ -89,13 +81,6 @@ inner products, and multiplying an identity by $DX^{\mathsf T}$ on the left pres
 
 ## Remarks
 
-- The corollary is the mathematical content of the reduced d'Alembert principle: the tangent
-  projection of the ambient equation is taken, the normal component $R$ drops out, and the applied
-  force enters as the generalized force $DX^{\mathsf T}F$. The condition
-  $R\cdot DX\delta=0$ is an explicit hypothesis on $R$; the corollary does not assert that any
-  particular mechanism realises it, nor that an ambient constraint produces such an $R$.
+- The corollary is the mathematical content of the reduced d'Alembert principle: the tangent projection of the ambient equation is taken, the normal component $R$ drops out, and the applied force enters as the generalized force $DX^{\mathsf T}F$. The condition $R\cdot DX\delta=0$ is an explicit hypothesis on $R$; the corollary does not assert that any particular mechanism realises it, nor that an ambient constraint produces such an $R$.
 
-- The matrix $DX^{\mathsf T}MDX$ is symmetric and positive definite on the image of $DX$ because
-  $M$ is positive definite and $DX$ is injective; this is the reduced mass matrix used in
-  [[ex-cm-ideal-pendulum-equation-and-stability]] and
-  [[ex-cm-rolling-disk-acceleration]].
+- The matrix $DX^{\mathsf T}MDX$ is symmetric and positive definite on $\mathbb R^n$: for $0\ne u\in\mathbb R^n$, injectivity gives $DXu\ne0$ and $u^{\mathsf T}DX^{\mathsf T}MDXu=(DXu)^{\mathsf T}M(DXu)>0$; this is the reduced mass matrix used in [[ex-cm-ideal-pendulum-equation-and-stability]] and [[ex-cm-rolling-disk-acceleration]].

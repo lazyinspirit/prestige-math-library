@@ -7,7 +7,7 @@ title: "Fixed-N Coulomb self-adjointness"
 status: draft
 origin: pipeline
 dependency_level: 4
-deps: [thm-complex-lp-completeness-and-almost-everywhere-subsequences, thm-fatou-lemma, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-nrqm-fock-and-equilibrium-bounded-fixed-n-operator, thm-nrqm-fock-and-equilibrium-permutation-restricted-self-adjointness, lem-nrqm-coulomb-three-dimensional-hardy-bound, lem-nrqm-composites-euclidean-l2-product-unitary, cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-dominated-convergence, thm-plancherel, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, def-sobolev-space-wkp-and-its-norm, thm-kato-rellich, def-relative-boundedness-with-respect-to-an-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-weak-derivative-of-a-locally-integrable-function, def-l-p-space-as-a-quotient-by-null-functions, def-hilbert-space, def-countable-choice, def-axiom-of-choice]
+deps: [thm-complex-lp-completeness-and-almost-everywhere-subsequences, thm-fatou-lemma, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-nrqm-fock-and-equilibrium-bounded-fixed-n-operator, thm-nrqm-fock-and-equilibrium-permutation-restricted-self-adjointness, lem-nrqm-coulomb-three-dimensional-hardy-bound, lem-nrqm-composites-euclidean-l2-product-unitary, cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-dominated-convergence, thm-plancherel, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, def-sobolev-space-wkp-and-its-norm, thm-kato-rellich, def-relative-boundedness-with-respect-to-an-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-weak-derivative-of-a-locally-integrable-function, def-l-p-space-as-a-quotient-by-null-functions, def-hilbert-space, cor-cauchy-schwarz-inequality-for-l-two, def-countable-choice, def-axiom-of-choice]
 dependency_roles:
   thm-complex-lp-completeness-and-almost-everywhere-subsequences: mathematical-premise
   thm-fatou-lemma: mathematical-premise
@@ -30,6 +30,7 @@ dependency_roles:
   def-weak-derivative-of-a-locally-integrable-function: mathematical-premise
   def-l-p-space-as-a-quotient-by-null-functions: mathematical-premise
   def-hilbert-space: mathematical-premise
+  cor-cauchy-schwarz-inequality-for-l-two: mathematical-premise
   def-countable-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
 proof_strategy: direct
@@ -91,7 +92,7 @@ $H$, the masses or the coefficients is asserted.
 ## Facts & Assumptions
 **Given:** the integers $N,r\ge1$, masses $m_i>0$, the constant $\hbar>0$, fixed points $a_m$, real coefficients $z_{im},z_{ij}$, the free kinetic operator $K$ with domain $D(K)=W^{2,2}(\mathbb R^{3N})$, the partial Laplacians $\Delta_i$ and the operators $K_i:=-\hbar^2\Delta_i/(8\pi^2m_i)$ on the $i$-th block, and the multiplier $V$ defined above.
 
-[F1] $K=\sum_iK_i$ is self-adjoint, positive, with $D(K)=W^{2,2}(\mathbb R^{3N};\mathbb C)$ and graph norm equivalent to the $W^{2,2}$ norm; for every $u\in D(K)$: $\|\nabla_iu\|_2^2=(8\pi^2m_i/\hbar^2)\langle K_iu,u\rangle\le(8\pi^2m_i/\hbar^2)\langle Ku,u\rangle\le(8\pi^2m_i/\hbar^2)\|Ku\|_2\|u\|_2$, and $\|\Delta_iu\|_2\le(8\pi^2m_i/\hbar^2)\|Ku\|_2$ ([[thm-nrqm-fock-and-equilibrium-bounded-fixed-n-operator]], [[thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces]], [[thm-plancherel]], [[def-sobolev-space-wkp-and-its-norm]]).
+[F1] $K=\sum_iK_i$ is self-adjoint, positive, with $D(K)=W^{2,2}(\mathbb R^{3N};\mathbb C)$ and graph norm equivalent to the $W^{2,2}$ norm; for every $u\in D(K)$: $\|\nabla_iu\|_2^2=(8\pi^2m_i/\hbar^2)\langle K_iu,u\rangle\le(8\pi^2m_i/\hbar^2)\langle Ku,u\rangle\le(8\pi^2m_i/\hbar^2)\|Ku\|_2\|u\|_2$ by Cauchy-Schwarz in $L^2$, and $\|\Delta_iu\|_2\le(8\pi^2m_i/\hbar^2)\|Ku\|_2$ ([[thm-nrqm-fock-and-equilibrium-bounded-fixed-n-operator]], [[thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces]], [[thm-plancherel]], [[def-sobolev-space-wkp-and-its-norm]], [[cor-cauchy-schwarz-inequality-for-l-two]]).
 
 [F2] Three-dimensional Hardy inequality: for $v\in W^{1,2}(\mathbb R^3;\mathbb C)$, $\|v/|\cdot|\|_2\le2\|\nabla v\|_2$ ([[lem-nrqm-coulomb-three-dimensional-hardy-bound]] (c)).
 

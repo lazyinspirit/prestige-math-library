@@ -36,7 +36,7 @@ verification:
 
 ## Statement
 
-Assume Countable Choice ([[def-countable-choice]]). Let $s\ge5$, let $I_0$ be a compact interval inside the coefficient time domain, and let $K\subseteq O$ be compact. Let $u_N:J\to X_N$ be a Galerkin solution, with $J\subseteq I_0$, values in $K$ and $\|u_N\|_{H^s}\le R$. Then, uniformly in $N$,
+Assume Countable Choice ([[def-countable-choice]]). Let $s\ge5$ be an integer, let $I_0$ be a compact interval inside the coefficient time domain, and let $K\subseteq O$ be compact. Let $u_N:J\to X_N$ be a Galerkin solution, with $J\subseteq I_0$ an interval, values in $K$ and $\|u_N\|_{H^s}\le R$. Then, uniformly in $N$,
 $$\|\partial_t^2u_N(t)\|_{H^{s-2}}\le C(A^\mu,B,K,R,s,I_0),$$
 and consequently
 $$\|\partial_tu_N(t)-\partial_tu_N(t')\|_{H^{s-2}}\le C(A^\mu,B,K,R,s,I_0)|t-t'|.$$
@@ -44,7 +44,7 @@ No convexity of $K$ is required.
 
 ## Facts & Assumptions
 
-**Given:** The coefficient family, compact time/value sets, Countable Choice, and the stated Galerkin bounds.
+**Given:** Integer $s\ge5$, the interval $J$, the coefficient family, compact time/value sets, Countable Choice, and the stated Galerkin bounds.
 
 [L1] The Galerkin ODE is smooth and $P_N$ commutes with derivatives and is self-adjoint ([[lem-gr-galerkin-ode-local-solution]], [[lem-gr-galerkin-projection-properties]]).
 

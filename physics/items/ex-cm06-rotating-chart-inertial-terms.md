@@ -31,7 +31,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "A worked finite check of the moving-chart equation of the framework: a zero-force one-label model observed in a chart with a uniformly accelerated rotation angle and a uniformly accelerated reference curve; the four inertial terms are evaluated term by term at one time and compared with the inertial-chart acceleration of the motion, a chart with nonzero angular velocity is identified as non-inertial by the criterion, and an explicit chart with affine reference curve and constant rotation is checked to reproduce the inertial-frame description. All values are model values; the example reports no measurement."
+physical_scope: "A worked finite check of the moving-chart equation of the framework: a zero-force one-label model observed in a chart with a uniformly accelerated rotation angle and a uniformly accelerated reference curve; the four inertial terms are evaluated term by term at one time and compared with the moving-chart coordinate acceleration of the motion, a chart with nonzero angular velocity is identified as non-inertial by the criterion, and an explicit chart with affine reference curve and constant rotation is checked to reproduce the inertial-frame description. All values are model values; the example reports no measurement."
 sources:
   references:
     - title: "D. Tong, Dynamics and Relativity (Cambridge lecture notes, Lent 2013), Sections 6.1-6.2, Eqs. (6.4)-(6.5), printed pages 94-95 (PDF pages 100-101): the acceleration transfer to a rotating frame and the Coriolis, centrifugal and Euler terms"
@@ -72,9 +72,10 @@ $a_{0}=v_{c}=0$:
 1. $R(t)\in SO(3)$ is $C^{\infty}$ and $\Omega=R^{\mathsf T}R'$ has the
    angular velocity $\omega(t)=\theta'(t)e_{3}=(2+t)e_{3}$ and
    $\omega'(t)=e_{3}$, while $c''(t)=(3,0,0)$;
-2. $y(0)=e_{1}$, $\dot y(0)=-e_{2}$, and the inertial-chart acceleration of
-   the motion gives $\ddot y(0)=-3e_{1}-e_{2}$ (in units
-   $\mathrm m\,\mathrm s^{-2}$);
+2. $y(0)=e_{1}$, $\dot y(0)=-e_{2}$, and the moving-chart coordinate
+   acceleration is $\ddot y(0)=-3e_{1}-e_{2}$ (in units
+   $\mathrm m\,\mathrm s^{-2}$); the inertial-chart acceleration is
+   $\ddot x(t)=0$ for every $t$;
 3. the four inertial terms at $t=0$ are $-2\omega\times\dot y=-4e_{1}$,
    $-\omega'\times y=-e_{2}$, $-\omega\times(\omega\times y)=+4e_{1}$ and
    $-R^{\mathsf T}c''=-3e_{1}$, and their sum is $\tau(0,y(0),\dot y(0))=-3e_{1}-e_{2}=\ddot y(0)$;

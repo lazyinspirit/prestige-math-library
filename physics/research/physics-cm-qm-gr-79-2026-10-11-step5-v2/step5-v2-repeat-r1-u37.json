@@ -1,0 +1,169 @@
+{
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "phase": "repeat",
+  "round": 1,
+  "unit": "37",
+  "input_sha256": "1cf7e5abaa87ab71967de0936e088d092ed7f360990f3752a2c33919d4433b40",
+  "decisions": [
+    {
+      "id": "thm-nrqm-orbital-and-spin-symmetric-power-su2-representation",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "915bb3dc996952aeaa763d585a0fbbf08d0386043c100cfb144fe65805e4b6a0",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The Statement combines S_n=Sym({0,...,n-1}) with the imported place-action rule on {1,...,n} without identifying their domains. Already for n=1, the untransported rule asks for pi inverse at 1, which is undefined, so P_+ and its range are not defined by the stated construction. Repaired by b_n(a)=a+1 and widehat pi=b_n pi b_n inverse, with U_pi using widehat pi; F2 verifies composition, inverses and the singleton case.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "thm-nrqm-orbital-and-spin-symmetric-power-su2-representation",
+      "disposition": "repaired",
+      "post_sha256": "fa23155ff26d283715022320d4ac44ab2a87a91e26f34a950ad4a59fd9d84cd0",
+      "review_context_sha256": "1ddbbf9c479317020a9792fdc2aca95c7fd123fb50036103300ad1dd08273c12",
+      "reason": "Reviewed all eleven proof steps and the exact supplier conventions. Conjugation is a group isomorphism onto permutations of tensor positions, so the finite average is self-adjoint and idempotent with invariant range; counting strings gives the same normalized basis. The place sums have the stated adjoints and ladder coefficients, hence the spin-n/2 Casimir. Tensor telescoping gives operator-norm continuity and derivative -iJ_i on the whole finite space; n=0 is treated separately. Also made proof 3.3 restrict intermediate s_(k-1), s_(k+1) and binomial ratios to their valid ranges, deriving the two zero endpoints separately. No choice or empirical premise is used. This is an adjudicator review of its own repair, not independent certification.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "lem-nrqm-angular-momentum-su2-lift-of-the-rotation-action",
+    "post-nrqm-framework-identical-particles-and-spin"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "subject": "thm-nrqm-orbital-and-spin-symmetric-power-su2-representation",
+      "severity": "fatal",
+      "disposition": "fixed",
+      "defect_type": "logic",
+      "location": "Statement tensor-place action and Facts F2",
+      "reason": "Explicit b_n transport repairs the undefined use of a zero-indexed permutation in a one-indexed tensor-place action. The original tuple and context hash are retained in decisions.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "subject": "thm-nrqm-orbital-and-spin-symmetric-power-su2-representation",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "location": "Proof 3.3",
+      "reason": "Intermediate s_(k-1), s_(k+1) and binomial ratios were used before excluding k=0 or k=n. Restricted their formulas to valid indices and derived J_+v_0=0 and J_-v_n=0 directly; the Statement endpoint conventions are preserved.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "subject": "thm-nrqm-orbital-and-spin-symmetric-power-su2-representation",
+      "severity": "nonfatal",
+      "disposition": "fixed",
+      "location": "Owning batch-37 proof contract boundaries and manifest Statement",
+      "reason": "The prior contract incorrectly excluded n=0 and asserted a Countable Choice premise absent from this finite construction. Boundary records now cite actual zero/singleton/endpoint and choice-free arguments, retain their prior records, and pass the scoped strict check. The manifest Statement is synchronized with the explicit place-index transport.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "subjects": [
+        "def-finite-symmetric-group-and-permutation-notation",
+        "def-commuting-symmetric-and-linear-actions-on-tensor-power"
+      ],
+      "disposition": "no_published_repair_required",
+      "reason": "The imported definitions explicitly choose different finite index sets and each action is well defined on its own declared set. The assigned draft consumer omitted the transport between them. This repair supplies that transport locally; neither published snapshot is changed or certified. No potentially defective published consumer was found among this item direct uses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": {
+    "claim": "Finite algebraic symmetric tensor powers realize the spin-n/2 unitary SU(2) representation, including the trivial n=0 representation; inner products are linear in the first argument.",
+    "supplier_evidence": [
+      {
+        "path": "items/def-finite-symmetric-group-and-permutation-notation.md",
+        "locator": "Definition first two paragraphs: S_n=Sym({0,...,n-1}), right factor acts first."
+      },
+      {
+        "path": "items/def-commuting-symmetric-and-linear-actions-on-tensor-power.md",
+        "locator": "Definition, Place permutations: left action on positions {1,...,n}; universal multilinear extension; diagonal action and infinitesimal operator."
+      },
+      {
+        "path": "items/prop-nrqm-orbital-and-spin-finite-spin-matrices.md",
+        "locator": "Statement (a)-(e): finite spin adjoints, ladders, Casimir and explicit Pauli matrices."
+      }
+    ],
+    "interface_change": "Direct section comparison changed only the opening Statement specification of place permutations, adding b_n(a)=a+1, widehat pi=b_n pi b_n inverse and the elementary-tensor rule with indices pi inverse(j-1)+1. The pre-edit Statement hash matched the frozen assignment. Clauses (a)-(f), n=0 conventions, physical exclusion and all dependencies are preserved; no new prerequisite is introduced.",
+    "downstream_reviews": [
+      {
+        "id": "lem-nrqm-angular-momentum-su2-lift-of-the-rotation-action",
+        "path": "items/lem-nrqm-angular-momentum-su2-lift-of-the-rotation-action.md",
+        "locator": "Statement F_s and D_s; F4, F5; Proof 1.4, 2.1; Remarks Kernel and the two lifts",
+        "affected_use": "F_s sends v_k to e_(s-k); D_s=F_s U_(2s) F_s inverse uses clauses (b)-(f). Proof 1.4 uses norm continuity, proof 2.1 uses the generator -iJ_i, and the central sign uses (-I) tensor (2s).",
+        "invalidated_claim": "None: conjugation exhausts all tensor-place permutations, so the average, invariant space, v_k, diagonal action, generator and central sign have the same intended values.",
+        "minimality": "No consumer edit is necessary; all consumed clauses are preserved.",
+        "disposition": "examined_sound",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "post-nrqm-framework-identical-particles-and-spin",
+        "path": "items/post-nrqm-framework-identical-particles-and-spin.md",
+        "locator": "Postulate (ii) Spin",
+        "affected_use": "Defines F_s v_k=e_(s-k), D_s(W)=F_s U_n(W) F_s inverse, and the infinitesimal generator -iJ_i for the assigned internal representation, with a separate trivial spin-zero case.",
+        "invalidated_claim": "None: the relabelled symmetrizer averages the same full set of tensor-place permutations; the normalized basis and all SU(2) formulas are preserved.",
+        "minimality": "The physical assignment, scope and empirical species-parameter qualifications need no change.",
+        "disposition": "examined_sound",
+        "route": "frontier-owner"
+      },
+      {
+        "id": "qm-math-orbital-and-spin",
+        "path": "library/non-relativistic-quantum-mechanics-mathematics/qm-math-orbital-and-spin.md",
+        "locator": "Spin layer paragraph beginning with symmetric-power theorem link",
+        "affected_use": "Summarizes identification of the symmetric power of the spin-half module with the spin-n/2 module inside the n-fold tensor power.",
+        "invalidated_claim": "None: the same symmetric subspace and normalized basis result from the explicitly transported full permutation average.",
+        "minimality": "The summary contains no incompatible indexing convention and needs no edit.",
+        "disposition": "examined_sound",
+        "route": "owning-page"
+      }
+    ],
+    "validation": [
+      {
+        "command": "node tools/physics-support/proof-layout.mjs items/thm-nrqm-orbital-and-spin-symmetric-power-su2-representation.md",
+        "exit_code": 0,
+        "result": "1 item, 11 steps, 0 defects"
+      },
+      {
+        "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/thm-nrqm-orbital-and-spin-symmetric-power-su2-representation.md",
+        "exit_code": 0,
+        "result": "1 checked, 0 failing"
+      },
+      {
+        "command": "node tools/physics-support/rendercheck.mjs items/thm-nrqm-orbital-and-spin-symmetric-power-su2-representation.md",
+        "exit_code": 0,
+        "result": "1 file; YAML and all math spans parse"
+      },
+      {
+        "command": "node tools/physics-support/depcheck.mjs --items-file /tmp/step5-repeat-r1-u37-items.json --quiet",
+        "exit_code": 0,
+        "result": "Selected item/page checks and prerequisite cycle checks passed."
+      },
+      {
+        "command": "node tools/physics-support/proof-contract.mjs research/physics-cm-qm-gr-79-2026-10-11-batch-37.proof-contracts.json --strict --items thm-nrqm-orbital-and-spin-symmetric-power-su2-representation",
+        "initial_exit_code": 1,
+        "initial_result": "One iff-reverse boundary-evidence-unanchored error: added the exact proof 1.2 and Statement/proof 1.1 locators.",
+        "exit_code": 0,
+        "result": "0 errors, 0 warnings, 1/1 items checked."
+      }
+    ],
+    "pending_obligations": [],
+    "next_action": "Handoff to the controller for ordinary frontier consumer routing and independent rejudgment; no judgment, certification or round-state transition was performed.",
+    "input_binding": "Canonical frozen-input JSON digest equals the assigned 1cf7e5abaa87ab71967de0936e088d092ed7f360990f3752a2c33919d4433b40. The preserved before itemHashGuard and Statement hash both match this assignment; the post itemHashGuard is fa23155ff26d283715022320d4ac44ab2a87a91e26f34a950ad4a59fd9d84cd0.",
+    "metadata_repairs": "Updated only the assigned proof-contract object and manifest item Statement. F2 now has an exact citation to the zero-indexed symmetric-group definition; proof 3.3 derivation matches the endpoint repair. Corrected the eight boundary records for n>=0, explicit singleton transport, endpoint ranges, finite choice-free construction and both invariant-range implications. Kept every prior boundary record and the existing independent risk/source reviews. The frozen assignments show only unit 37 owns carriers in the batch-37 contract scope; these were exclusive owning-file edits, not shared integration writes."
+  }
+}

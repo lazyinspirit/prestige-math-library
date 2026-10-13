@@ -27,7 +27,7 @@ deps:
     lem-nrqm-measurement-nonselective-luders-map,
     def-hilbert-orthogonal-projection,
     def-resolvent-and-spectrum-of-a-closed-unbounded-operator,
-    def-countable-choice,
+    def-countable-choice, def-dependent-choice,
     def-axiom-of-choice
   ]
 dependency_roles:
@@ -51,6 +51,7 @@ dependency_roles:
   def-resolvent-and-spectrum-of-a-closed-unbounded-operator: mathematical-premise
   def-countable-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
 forward_refs: [ ex-nrqm-photons-malus-and-jones-analyzer-ratios ]
 proof_strategy: direct
 provenance:
@@ -74,9 +75,9 @@ sources:
         cos^2(theta), and the consecutive analyser discussion"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 3 'Linear
-        algebra: vector spaces and operators', Section 7 printed pages 24-28:
-        orthogonal projections, measurement probabilities and the unitary
-        calculus of polarisation filters"
+        algebra: vector spaces and operators', Section 5 'Orthonormal basis and
+        orthogonal projectors': finite-dimensional orthogonal projection
+        formulas, ranges and eigenspaces"
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/04b0570b349\
         e84d74129eef504498472_MIT8_05F13_Chap_03.pdf"
 ---
@@ -96,9 +97,10 @@ vocabulary of [[def-nrqm-state-geometry-framework-state-space]] and the
 observable and measurement vocabularies of
 [[def-nrqm-observables-framework-observable-and-outcome-law]] and
 [[def-nrqm-measurement-framework-declared-measurements-and-instruments]].
-Assume the Axiom of Countable Choice and the Axiom of Choice, the choice
-hypotheses of the cited spectral and measurement mathematics
-([[def-countable-choice]], [[def-axiom-of-choice]]). Fix angles
+Assume Countable Choice, Dependent Choice and Choice
+([[def-countable-choice]], [[def-dependent-choice]], [[def-axiom-of-choice]]),
+including the hypotheses inherited from the radiation postulate and the cited
+spectral and measurement mathematics. Fix angles
 $\varphi,\theta,\theta'\in\mathbb R$ and write
 $\psi_{\varphi}=\cos\varphi\,e_{1}+\sin\varphi\,e_{2}$ and
 $P_{\theta}$ for the analyser projections of the model. Then:
@@ -175,11 +177,5 @@ ideal analyser, not a measured count.
 
 ## Remarks
 
-- **The same number classically.** The number $\cos^{2}(\theta-\varphi)$ is also
-  the intensity ratio of the declared classical transverse-field model of
-  [[ex-nrqm-photons-malus-and-jones-analyzer-ratios]]; the comparison shows
-  that this ratio alone does not distinguish the two declared models.
-- **Absorption.** For a laboratory absorber the "blocked" outcome of the
-  declared analyser is used only through its discarded-outcome law: clause (v)
-  of P3 asserts no post-absorption one-photon state, and no such state is used
-  here.
+- **The same number classically.** The number $\cos^{2}(\theta-\varphi)$ is also the intensity ratio of the declared classical transverse-field model of [[ex-nrqm-photons-malus-and-jones-analyzer-ratios]]; the comparison shows that this ratio alone does not distinguish the two declared models.
+- **Absorption.** For a laboratory absorber the "blocked" outcome of the declared analyser is used only through its discarded-outcome law: clause (v) of P3 asserts no post-absorption one-photon state, and no such state is used here.

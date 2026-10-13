@@ -63,7 +63,7 @@ tetrahedron and the couple-free torque balance, and
 [[pthm-cm17-momentum-equation]] localizes the balances into the model's
 momentum equation $\rho D_tu=\rho b+\operatorname{div}\sigma$. Two
 constitutive branches are then carried through complete deductions: the
-small-strain isotropic linear elastic branch
+small-strain isotropic linear elastic branch with its separately adopted reference-coordinate linear momentum balance
 ([[post-cm17-linear-elastic-constitutive]],
 [[pthm-cm17-linear-elastic-equation-of-motion]],
 [[pthm-cm17-elastic-plane-wave-speeds]]) with the displacement equation
@@ -75,7 +75,8 @@ and its longitudinal and transverse speeds, and the fluid branch
 periodic evolution theorem
 [[pthm-cm17-incompressible-periodic-local-evolution]] on the
 three-dimensional side, using separately adopted incompressible inviscid or Newtonian stress, explicit length/velocity/time scales and conversion of its unit-torus lifespan to physical time. [[rem-cm17-boundary-regularity-and-scope]] closes the
-page by recording the ideal boundary data, the regularity limits that exclude
-shocks and interfaces from the classical identities, the constitutive
+page by recording the ideal boundary data, the actual regularity limits of
+the classical identities, the separately adopted exclusion of material
+interfaces and the theorem-specific boundary domains, the constitutive
 validity regimes, the deliberately open specialist scopes and the
 model-versus-nature status of every result.

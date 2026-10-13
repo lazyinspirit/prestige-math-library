@@ -55,7 +55,7 @@ with the trace of [[def-trace-of-a-square-matrix]]. In particular, a $C^1$ matri
 
 [F2] If $A$ is invertible, then $\det A\ne0$, $A^{-1}$ exists, and $A^{-1}=\det(A)^{-1}\operatorname{adj}(A)$ ([[thm-real-square-matrix-invertible-iff-determinant-nonzero]], [[cor-inverse-matrix-by-adjugate]]).
 
-[F3] Replacing the $i$-th column of the identity by $w\in\mathbb R^n$ produces a matrix whose determinant is the $i$-th entry $w_i$: the column expansion over the standard basis has one nonzero term, by alternation and normalization [F1]. Consequently, for invertible $B$ and $b\in\mathbb R^n$, the matrix $B^{(i)}$ obtained from $B$ by replacing its $i$-th column by $b$ satisfies
+[F3] For $0\le i<n$, replacing the $i$-th column of the identity by $w\in\mathbb R^n$ produces a matrix whose determinant is the $i$-th entry $w_i$: the column expansion over the standard basis has one nonzero term, by alternation and normalization [F1]. Consequently, for invertible $B$ and $b\in\mathbb R^n$, the matrix $B^{(i)}$ obtained from $B$ by replacing its $i$-th column by $b$ satisfies
 
 $$\det B^{(i)}=\det B\,(B^{-1}b)_i .$$
 
@@ -69,13 +69,13 @@ Indeed $B^{(i)}=BE$ where $E$ is the identity with $i$-th column $B^{-1}b$, so [
 
 **Proof technique:** direct; expand the determinant by column-multilinearity and keep the terms up to first order.
 
-1.1 Put $B:=A(t_0)$, $H:=A'(t_0)$ and, for small $h\ne0$ with $t_0+h\in I$, write $A(t_0+h)=B+hH+r(h)$ with the remainder $r(h)$ of [F5]. By [F2], $B$ is invertible. Choose $0<\varepsilon_0$ such that $\max_{i,j}|r_{ij}(h)|\le|h|$ for $|h|<\varepsilon_0$, and fix such an $h$. [given, F2, F5, choose]
+1.1 Put $B:=A(t_0)$, $H:=A'(t_0)$ and, for small $h\ne0$ with $t_0+h\in I$, write $A(t_0+h)=B+hH+r(h)$ with the remainder $r(h)$ of [F5]. By [F2], $B$ is invertible. Since $r_{ij}(h)=o(h)$ entrywise, choose $0<\varepsilon_0\le1$ such that $\max_{i,j}|r_{ij}(h)|\le|h|$ for $0<|h|<\varepsilon_0$, and fix such an $h$. [given, F2, F5, choose]
 
-1.2 For fixed $h$, expand $\det A(t_0+h)$ by column-multilinearity [F1]: the $i$-th column is $b_i+h\,h_i+r_i(h)$, so $$\det A(t_0+h)=\sum_{S\subseteq\{1,\dots,n\}}\det\bigl(c_1^S,\dots,c_n^S\bigr),\qquad c_i^S=\begin{cases} h\,h_i+r_i(h),&i\in S,\\ b_i,&i\notin S,\end{cases}$$ the sum being over the $2^n$ subsets $S$. The term $S=\varnothing$ is $\det B$. [F1, given, algebra]
+1.2 For fixed $h$, expand $\det A(t_0+h)$ by column-multilinearity [F1]: the $i$-th column is $b_i+h\,h_i+r_i(h)$, so $$\det A(t_0+h)=\sum_{S\subseteq\{0,\dots,n-1\}}\det\bigl(c_0^S,\dots,c_{n-1}^S\bigr),\qquad c_i^S=\begin{cases} h\,h_i+r_i(h),&i\in S,\\ b_i,&i\notin S,\end{cases}$$ the sum being over the $2^n$ subsets $S$. The term $S=\varnothing$ is $\det B$. [F1, given, algebra]
 
-1.3 For $S=\{i\}$ a single index, [F3] applied to $b:=h\,h_i+r_i(h)$ gives $\det B\,(B^{-1}(h\,h_i+r_i(h)))_i$. Summing over $i$ and using linearity of $B^{-1}$ and of the trace [F4], $$\sum_{i}\det B\,\bigl(B^{-1}(h\,h_i+r_i(h))\bigr)_i=\det B\Bigl(h\,\operatorname{tr}(B^{-1}H)+\operatorname{tr}\bigl(B^{-1}r(h)\bigr)\Bigr).$$ [F3, F4, algebra]
+1.3 For $S=\{i\}$ a single index, [F3] applied to $b:=h\,h_i+r_i(h)$ gives $\det B\,(B^{-1}(h\,h_i+r_i(h)))_i$. Summing over $0\le i<n$ and using linearity of $B^{-1}$ and of the trace [F4], $$\sum_{i}\det B\,\bigl(B^{-1}(h\,h_i+r_i(h))\bigr)_i=\det B\Bigl(h\,\operatorname{tr}(B^{-1}H)+\operatorname{tr}\bigl(B^{-1}r(h)\bigr)\Bigr).$$ [F3, F4, algebra]
 
-2.1 For $|S|\ge2$, each term is, by multilinearity, a signed sum of products $\prod_{i\in S}(h\,h_{i,k_i}+r_{i,k_i}(h))$ of at most $n$ entries of $hH+r(h)$; every such product has absolute value at most $M^{|S|}$ where $M:=\max\{1,\max_{i,j}|h_{ij}|+\max_{i,j}|r_{ij}(h)/h|\}$ for $0<|h|<\varepsilon_0$. Since only finitely many products occur, there is a constant $C$, depending on $n$ and on the fixed numbers $H_{ij}$, with $\bigl|\sum_{|S|\ge2}\det(c^S)\bigr|\le C\,h^2$ for $0<|h|<\varepsilon_0$. [F1, step 1.1, algebra]
+2.1 For $|S|\ge2$, the Leibniz formula [F1] expresses $\det(c^S)$ as $n!$ signed products. Each product has $|S|$ entries from increment columns and $n-|S|$ entries from $B$. Put $M:=\max\{1,\max_{i,j}|H_{ij}|+1\}$ and $P:=\max\{1,\max_{i,j}|B_{ij}|\}$. Step 1.1 bounds each increment entry by $|h|M$, so for $|h|\le1$ each product has magnitude at most $|h|^{|S|}M^{|S|}P^{n-|S|}\le h^2(MP)^n$. Summing over all $S$ and permutations gives $\bigl|\sum_{|S|\ge2}\det(c^S)\bigr|\le 2^n n!(MP)^n h^2$. When $n=1$ the sum is empty and equals zero. [F1, step 1.1, algebra]
 
 3.1 Combining the preceding steps, $$\det A(t_0+h)-\det B-h\det B\,\operatorname{tr}(B^{-1}H)=\det B\,\operatorname{tr}\bigl(B^{-1}r(h)\bigr)+O(h^2).$$ The right-hand side is $o(h)$: $\|\operatorname{tr}(B^{-1}r(h))\|\le n\max_{i,j}|(B^{-1}r(h))_{ij}|\le C'|r(h)|_{\max}=o(|h|)$ by [F5], and $O(h^2)=o(h)$. Hence $(\det A)'(t_0)=\det B\,\operatorname{tr}(B^{-1}H)$, which is the stated formula. [step 1.3, step 2.1, F4, F5, algebra] ∎
 

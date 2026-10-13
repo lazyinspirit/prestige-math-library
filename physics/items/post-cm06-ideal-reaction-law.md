@@ -17,7 +17,7 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "Adoption of the ideal-reaction law for the holonomic-constraint models of the force branch: along every constrained motion the reaction annihilates every virtual displacement at fixed time, equivalently it is a transpose multiple of the constraint Jacobian. The item records the modelled mechanisms and the exclusions (sliding friction along admissible directions, unilateral and contact-change mechanisms, rank loss, active drives, mechanical capability of the reaction) and separates the virtual-work condition from statements about actual work and energy. No measured value and no conservation claim is asserted."
+physical_scope: "Adoption of the ideal-reaction law for the holonomic-constraint models of the force branch: along every constrained motion the reaction annihilates every virtual displacement at fixed time, equivalently it is a transpose multiple of the constraint Jacobian. The item records the modelled mechanisms and the exclusions (sliding friction along admissible directions, unilateral and contact-change mechanisms, rank loss, direct active forces on the labels, mechanical capability of the reaction) and separates the virtual-work condition from statements about actual work and energy. No measured value and no conservation claim is asserted."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.3.1, Eqs. (2.27)-(2.28) and the constraint-force discussion, printed pages 17-19 (PDF pages 23-25): the pendulum tension and normal reaction as the constraint force, and the multiplier proportional to the tension"
@@ -91,10 +91,12 @@ no numerical value here.
    here;
 3. points where the Jacobian $D_{x}G$ drops rank, which lie outside the
    regularity hypothesis of the datum and outside the representation above;
-4. active mechanisms that drive the constraint (motors, moving walls driven by
-   external equipment): their driving must be declared as an additional force
-   contribution, and the ideal reaction then accounts only for the passive
-   maintenance of the constraint;
+4. direct active forces on the modelled labels with a component along an
+   admissible virtual displacement: these must be declared as additional
+   force contributions. Prescribed motion of a support is instead encoded
+   in the time-dependent constraint $G$ and is compatible with clause (i);
+   its ideal reaction may do actual work as in clause (v). The dynamics and
+   energy budget of equipment driving that support are not modelled here;
 5. any claim that the mechanism can mechanically supply the computed
    reaction: the law computes the reaction the ideal constraint exerts; whether
    a physical contact, rod or string can supply it (friction cone, sign of a

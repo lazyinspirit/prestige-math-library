@@ -19,7 +19,10 @@ deps:
     lem-gr-periodic-sobolev-algebra,
     def-ck-and-multi-index-notation-in-several-variables,
     def-countable-choice,
-    lem-gr-galerkin-projection-properties
+    lem-gr-galerkin-projection-properties,
+    thm-chain-rule-for-total-derivatives,
+    thm-continuous-partial-derivatives-imply-total-differentiability,
+    thm-general-leibniz-rule
   ]
 dependency_roles:
   def-gr-periodic-torus-and-sobolev-spaces: mathematical-premise
@@ -29,6 +32,9 @@ dependency_roles:
   def-ck-and-multi-index-notation-in-several-variables: mathematical-premise
   def-countable-choice: mathematical-premise
   lem-gr-galerkin-projection-properties: mathematical-premise
+  thm-chain-rule-for-total-derivatives: mathematical-premise
+  thm-continuous-partial-derivatives-imply-total-differentiability: mathematical-premise
+  thm-general-leibniz-rule: mathematical-premise
 sources:
   references:
     - title: "H. Friedrich and A. D. Rendall, The Cauchy Problem for the Einstein
@@ -53,7 +59,7 @@ verification:
 
 ## Statement
 
-Assume Countable Choice ([[def-countable-choice]]). Let $s\ge5$, let $O\subseteq\mathbb R^m$ be open, let $I$ be an open time interval, let $I_0\subseteq I$ be a compact interval, and let $F:I\times\mathbb T^3\times O\to\mathbb R^{m'}$ and $A:I\times\mathbb T^3\times O\to M_{m'}(\mathbb R)$ be smooth. Fix compact $K\subseteq O$ and $R\ge0$. Constants below depend on these data and are uniform in $t\in I_0$. For $u,v\in H^s$ with values in $K$ and norms at most $R$:
+Assume Countable Choice ([[def-countable-choice]]). Let $s\ge5$ be an integer, let $O\subseteq\mathbb R^m$ be open, let $I$ be an open time interval, let $I_0\subseteq I$ be a compact interval, and let $F:I\times\mathbb T^3\times O\to\mathbb R^{m'}$ and $A:I\times\mathbb T^3\times O\to M_{m'}(\mathbb R)$ be smooth. Fix compact $K\subseteq O$ and $R\ge0$. Constants below depend on these data and are uniform in $t\in I_0$. For $u,v\in H^s$ with values in $K$ and norms at most $R$:
 
 **(a)** $\|F(t,\cdot,u)\|_{H^j}\le C(1+\|u\|_{H^s})$ for $0\le j\le s$.
 
@@ -63,7 +69,7 @@ Assume Countable Choice ([[def-countable-choice]]). Let $s\ge5$, let $O\subseteq
 
 **(d)** For $0\le j\le s-1$, $\|A(t,\cdot,u)w\|_{H^j}\le C\|w\|_{H^j}$.
 
-**(e)** Let $n\ge6$, $\rho\ge0$ and $z\in H^n$ with values in $K$ and $\|z\|_{H^{n-1}}\le\rho$. Then $\|F(t,\cdot,z)\|_{H^n}\le C_\rho(1+\|z\|_{H^n})$. Moreover for $w\in H^{n-1}$ and $|\alpha|\le n$,
+**(e)** Let $n\ge6$ be an integer, $\rho\ge0$ and $z\in H^n$ with values in $K$ and $\|z\|_{H^{n-1}}\le\rho$. Then $\|F(t,\cdot,z)\|_{H^n}\le C_\rho(1+\|z\|_{H^n})$. Moreover for $w\in H^{n-1}$ and $|\alpha|\le n$,
 $$\|[D^\alpha,A(t,\cdot,z)]w\|_2\le C_\rho\bigl(\|w\|_{H^{n-1}}+(1+\|z\|_{H^n})\|w\|_{H^{n-2}}\bigr).$$
 The same estimates apply to any smooth coefficient obtained from $F,A$ by differentiation or by a smooth matrix inverse where that inverse exists on a neighborhood of $I_0\times\mathbb T^3\times K$.
 
@@ -75,7 +81,7 @@ The same estimates apply to any smooth coefficient obtained from $F,A$ by differ
 
 [L2] $H^k$ is an algebra for $k\ge4$ ([[lem-gr-periodic-sobolev-algebra]]).
 
-[L3] Fourier truncation gives smooth density in every $H^q$ ([[lem-gr-galerkin-projection-properties]]); chain and Leibniz rules hold for smooth maps ([[def-ck-and-multi-index-notation-in-several-variables]]).
+[L3] Fourier truncation gives smooth density in every $H^q$ ([[lem-gr-galerkin-projection-properties]]); Smooth maps are totally differentiable with their partial-derivative matrices ([[thm-continuous-partial-derivatives-imply-total-differentiability]]), and $D(G\circ f)=DG(f)Df$ ([[thm-chain-rule-for-total-derivatives]]). The one-variable Leibniz rule holds at every order ([[thm-general-leibniz-rule]]). Applying it successively in each coordinate gives $D^\alpha(av)=\sum_{\gamma\le\alpha}\binom\alpha\gamma D^\gamma a\,D^{\alpha-\gamma}v$: each coordinate splits its derivatives independently, multiplying the binomial coefficients. Iterating the first-order chain rule gives the finite chain expansions used below, with the sum of orders on the field factors at most $|\alpha|$.
 
 ## Proof
 

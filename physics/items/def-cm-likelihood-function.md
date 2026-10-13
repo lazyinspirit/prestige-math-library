@@ -5,8 +5,11 @@ title: "Likelihood functions for a dominated parametric family"
 status: draft
 origin: pipeline
 domain: mathematics
-deps: [def-measurable-function-between-measurable-spaces, def-measurable-space, def-measure, def-measure-with-density, def-nonnegative-lebesgue-integral]
+deps: [def-borel-sigma-algebra, def-borel-sigma-algebra-on-the-extended-real-line, def-extended-reals, def-measurable-function-between-measurable-spaces, def-measurable-space, def-measure, def-measure-with-density, def-nonnegative-lebesgue-integral]
 dependency_roles:
+  def-borel-sigma-algebra: mathematical-premise
+  def-borel-sigma-algebra-on-the-extended-real-line: mathematical-premise
+  def-extended-reals: mathematical-premise
   def-measurable-function-between-measurable-spaces: mathematical-premise
   def-measurable-space: mathematical-premise
   def-measure: mathematical-premise
@@ -31,9 +34,14 @@ verification:
 Let $(S,\mathcal S)$ be a measurable space, the **data space**
 ([[def-measurable-space]]), let $\nu$ be a measure on it ([[def-measure]]),
 let $\Theta$ be a nonempty set, the **parameter set**, and let
-$$\theta\longmapsto p_\theta,\qquad p_\theta:S\to[0,+\infty],$$
-be a family of measurable functions
-([[def-measurable-function-between-measurable-spaces]]) such that
+$(p_\theta)_{\theta\in\Theta}$ be a family of measurable maps
+$$p_\theta:(S,\mathcal S)\longrightarrow([0,+\infty],\mathcal B_+),$$
+where $[0,+\infty]$ is the nonnegative part of the extended real line
+$\overline{\mathbb R}$ ([[def-extended-reals]]) and
+$$\mathcal B_+:=\{A\cap[0,+\infty]:A\in\mathcal B(\overline{\mathbb R})\}$$
+is the trace of its order-topology Borel sigma-algebra
+([[def-borel-sigma-algebra-on-the-extended-real-line]],
+[[def-measurable-function-between-measurable-spaces]]), such that
 $$\int_S p_\theta\,d\nu=1\qquad\text{for every }\theta\in\Theta$$
 ([[def-nonnegative-lebesgue-integral]]). Each $p_\theta$ is the **density**
 of a probability measure $\mathbb P_\theta$ with respect to $\nu$,
@@ -44,7 +52,9 @@ measure** of the family.
 For an observed datum $s\in S$ the **likelihood function** is
 $$L_s:\Theta\longrightarrow[0,+\infty],\qquad L_s(\theta):=p_\theta(s),$$
 and the **log-likelihood function** is
-$$\ell_s:\Theta\longrightarrow[-\infty,+\infty],\qquad \ell_s(\theta):=\begin{cases}\log L_s(\theta),&L_s(\theta)>0,\\ -\infty,&L_s(\theta)=0.\end{cases}$$
+$$\ell_s:\Theta\longrightarrow[-\infty,+\infty],\qquad \ell_s(\theta):=\begin{cases} \log L_s(\theta),&0<L_s(\theta)<+\infty,\\ +\infty,&L_s(\theta)=+\infty,\\ -\infty,&L_s(\theta)=0. \end{cases}$$
+Here $\log$ is the real logarithm on $(0,+\infty)$, with the extended-value
+convention $\log(+\infty):=+\infty$.
 
 ### Well-definedness and conventions
 

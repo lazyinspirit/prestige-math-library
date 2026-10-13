@@ -59,26 +59,31 @@ verification:
 ---
 ## What the page establishes
 
-The items of this page are conditional consequences of the framework's
-postulates and of the cited mathematics.
+The mathematical lemmas of this page follow from their stated mathematical
+hypotheses; its physics theorems follow conditionally from their stated model
+postulates and mathematical hypotheses.
 [[def-nrqm-symmetries-framework-symmetry-groups-and-conservation]] fixes the
 vocabulary: a symmetry of the declared dynamics is a unitary preserving the
 energy domain and commuting with the energy operator, a unitary symmetry group
-is a group of such symmetries, a conserved sharp observable is one whose
+is a group of such symmetries, a conserved assigned sharp observable $(A,u_A)$ is one whose
 outcome law is time-independent in every preparation, and the translations,
 spatial rotations, parity and gauge multipliers are recorded as the model's
 candidate actions, not as symmetries.
 [[lem-nrqm-symmetries-unitary-conjugation-and-commutation-calculus]] proves the
 equivalence between flow commutation, strong spectral commutation and domain
-invariance of a self-adjoint observable;
+invariance together with invariance of the observable under conjugation:
+for self-adjoint $K,A$ on a nonzero complex Hilbert space and $\hbar>0$,
+clause (b)(iii) requires both $U_K(t)D(A)=D(A)$ and
+$U_K(t)AU_K(t)^{*}=A$ for every $t\in\mathbb R$, where
+$U_K(t)=e^{-itK/\hbar}$. Domain invariance alone is insufficient;
 [[lem-nrqm-symmetries-spatial-rotation-action]],
 [[lem-nrqm-symmetries-parity-action]],
 [[lem-nrqm-symmetries-rotation-generators-on-schwartz-classes]] and
 [[lem-nrqm-symmetries-free-flow-multiplier-form]] provide the concrete actions
 and their operator identities on the component-valued model.
-[[pthm-nrqm-symmetries-generator-conservation]] proves the equivalence of the
-commutation conditions with the conservation of the outcome law and the
-conservation of moments, and covers self-adjoint unitary symmetries;
+[[pthm-nrqm-symmetries-generator-conservation]] proves the equivalence of its
+three commutation conditions, deduces conservation of the outcome law and of
+domain-qualified moments, and covers self-adjoint unitary symmetries;
 [[pthm-nrqm-symmetries-translation-invariance-and-momentum-conservation]]
 decides exactly which bounded potentials have the translations as symmetries
 and derives momentum conservation for the translation-invariant case;
@@ -88,10 +93,16 @@ parity; and [[pthm-nrqm-symmetries-gauge-covariance]] transports the
 prescribed-coupling operator under gauge transformations of
 [[post-nrqm-symmetries-prescribed-external-coupling]], exhibits the exact
 criterion under which a gauge multiplier is a symmetry of the fixed dynamics
-and identifies the global-phase case. Every one of these statements is
-conditional on P1, P2, P4, P5, P5a and P6 in their stated readings, on the
-choice assumptions displayed with the items, and on the cited operator
-analysis.
+and identifies the global-phase case. The mathematical lemmas are conditional
+on their displayed mathematical hypotheses, including the stated choice
+assumptions; they do not depend on physical postulates. The physics theorems
+and examples are conditional on the postulates and model hypotheses stated in
+each item: the general conservation result uses P1, P2 and P4; the bounded-
+potential translation, rotation and parity results use P1, P2, P4, P5 and P6;
+and gauge covariance uses P1, P2, P4 and the prescribed-coupling assumption
+P5a. P5a is adopted and is not derived by the gauge theorem. None of these
+conditional results establishes that its assumptions describe a laboratory
+system.
 
 ## Empirical status of the symmetry and conservation statements
 
@@ -122,24 +133,39 @@ parity actions act on the spatial factor only: no SU(2) lift, no rotation of
 the internal factor and no spin angular momentum appear here; antiunitary and
 time-reversal symmetries, superselection sectors, gauge freedom beyond the
 prescribed bounded-coefficient class, singular or unbounded potentials,
-confined and boundary realizations, periodic potentials, time-dependent
-external fields, relativistic matter and full field theory are all outside
-the scope of these items and require their own model assumptions.
+confined and boundary realizations, arbitrary driven external fields,
+relativistic matter and full field theory are outside the scope of these items.
+Bounded periodic potentials remain within the bounded-potential class; no
+periodic-band classification is claimed. The stated time-dependent gauge
+transports are covered by [[pthm-nrqm-symmetries-gauge-covariance]] clause (c),
+with its prescribed coefficient class and gauge regularity; they supply no
+general driven-field model.
 
 ## Recorded supplier note
 
 The gauge items of this page consume the magnetic-operator development of an
-earlier batch of this run. A scoped physics-content check over this page's
-dependency closure currently reports no error naming any consumed supplier:
-the role metadata of the consumed magnetic-operator items was repaired upstream
-after an earlier batch reported it, and the statements and complete proofs
-consumed here were inspected in their current form. Separately, the batch notes
-of this page record that two consumed supplier items still cite a Teschl
-section that does not exist in the author-hosted full text named by their URL
-(the citation locators `Section 7.8 pp. 168-171` in
-`def-nrqm-magnetic-and-detection-magnetic-schrodinger-operator`,
-`thm-nrqm-magnetic-and-detection-gauge-h2-domain-preservation` and
-`thm-nrqm-magnetic-and-detection-gauge-transported-propagator`); the
-mathematical content of those items is proved locally by their own complete
-arguments, which is what this page consumes, and the citation repair belongs to
-their owning batch.
+earlier batch of this run. The batch-53 notes preserve historical reports of
+role-metadata and source-locator defects in earlier versions of those
+suppliers; those notes are not a description of their current text. The
+current files inspected for this review declare the mathematics dependencies
+with role `mathematical-premise` and have these source locators:
+
+- `def-nrqm-magnetic-and-detection-magnetic-schrodinger-operator` cites
+  Teschl, Sections 6.1 and 7.2, and Binney and Skinner, Sections 3.3 and
+  3.3.1.
+- `thm-nrqm-magnetic-and-detection-gauge-h2-domain-preservation` cites
+  Teschl, Section 7.2, equations (7.22)-(7.24) and Theorem 7.8, and Binney
+  and Skinner, Section 3.3.1, equations (3.40)-(3.45).
+- `thm-nrqm-magnetic-and-detection-gauge-transported-propagator` cites
+  Teschl, Section 5.1, Theorem 5.1, and Binney and Skinner, Section 3.3.1,
+  equations (3.40)-(3.45).
+
+The current Teschl text has the cited free-operator material in Section 7.2
+(printed pages 167-168), the Kato-Rellich theorem in Section 6.1 (printed
+page 135), and Stone's theorem in Section 5.1 (printed pages 123-124). The
+current Binney text has the static gauge phase and covariant-momentum
+intertwining in Section 3.3.1 (printed pages 46-47). I checked these current
+locators against the hosted full texts. They provide background for the
+magnetic results; the bounded-coefficient operator and time-dependent
+propagator arguments are supplied locally in the magnetic items. The earlier
+false locators recorded in the batch notes are absent from the current files.

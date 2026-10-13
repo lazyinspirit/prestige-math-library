@@ -61,9 +61,11 @@ page [[qm-math-orbital-and-spin-examples]] stays mathematics as well.
 The spin layer begins with
 [[prop-nrqm-orbital-and-spin-finite-spin-matrices]]: for $s\in\frac12\mathbb
 N$ the standard matrices $J_ze_m=me_m$ and
-$J_\pm e_m=\sqrt{(s\mp m)(s\pm m+1)}\,e_{m\pm1}$ on $\mathbb C^{2s+1}$ are
-self-adjoint, obey the $\mathfrak{su}(2)$ commutators, have Casimir
-$J^2=s(s+1)I$, and for $s=\frac12$ are $\frac12$ times the Pauli matrices with
+$J_\pm e_m=\sqrt{(s\mp m)(s\pm m+1)}\,e_{m\pm1}$ on $\mathbb C^{2s+1}$ satisfy
+$J_+^*=J_-$; the matrices $J_z$,
+$J_x=(J_++J_-)/2$ and $J_y=(J_+-J_-)/(2i)$ are self-adjoint, obey the
+$\mathfrak{su}(2)$ commutators and have Casimir $J^2=s(s+1)I$. For
+$s=\frac12$, $J_i=\frac12\sigma_i$ for $i=x,y,z$, with
 the multiplication law $\sigma_i\sigma_j=\delta_{ij}I+
 i\sum_k\varepsilon_{ijk}\sigma_k$.
 [[thm-nrqm-orbital-and-spin-symmetric-power-su2-representation]] identifies
@@ -93,7 +95,8 @@ the polar surface measure with the chart measure
 $\sin\theta\,d\theta\,d\varphi$ and computes $\sigma(S^2)=4\pi$;
 [[thm-nrqm-orbital-and-spin-associated-polynomial-normalization]] establishes
 the associated functions $w_{lm}$, their equation and the normalized
-spherical functions $Y_{lm}=b_{lm}w_{l|m|}(\cos\theta)e^{im\varphi}/\sqrt{2\pi}$;
+spherical functions $Y_{lm}=b_{lm}w_{lm}(\cos\theta)e^{im\varphi}/\sqrt{2\pi}$
+for $0\le m\le l$, with $Y_{l,-m}=(-1)^m\overline{Y_{lm}}$ for $1\le m\le l$;
 [[thm-nrqm-orbital-and-spin-weighted-angular-completeness]] proves
 completeness of $(w_{lm})_l$ in the weighted space; and
 [[thm-nrqm-orbital-and-spin-sphere-onb]] assembles the complete orthonormal

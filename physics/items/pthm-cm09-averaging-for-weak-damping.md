@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 15
-deps: [post-cm04-linear-damping-model, def-cm-oscillator-model-and-phase-system, thm-cm-averaging-for-fast-periodic-oscillations, def-cm-averaging-data-and-averaged-field, cor-cm-variation-of-constants-for-linear-systems, cor-primitives-of-a-continuous-function, thm-complex-exponential-is-entire-with-derivative-itself, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, def-complex-conjugate-real-imaginary-part-and-modulus, thm-sine-and-cosine-derivatives, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, def-operator-norm, def-euclidean-inner-product, def-metric-ball, def-vector-valued-derivative-and-integral, def-vector-valued-functions-limits-and-continuity, def-ck-euclidean-maps-and-diffeomorphisms, def-maximal-ode-solution, def-interval]
+deps: [post-cm04-linear-damping-model, def-cm-oscillator-model-and-phase-system, thm-cm-averaging-for-fast-periodic-oscillations, def-cm-averaging-data-and-averaged-field, cor-cm-variation-of-constants-for-linear-systems, cor-primitives-of-a-continuous-function, thm-complex-exponential-is-entire-with-derivative-itself, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, def-complex-conjugate-real-imaginary-part-and-modulus, thm-sine-and-cosine-derivatives, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, def-operator-norm, def-euclidean-inner-product, def-metric-ball, def-vector-valued-derivative-and-integral, def-vector-valued-functions-limits-and-continuity, def-ck-euclidean-maps-and-diffeomorphisms, def-maximal-ode-solution, def-interval, def-natural-logarithm, thm-exponential-is-strictly-increasing, cor-exponential-reciprocal-and-positivity]
 dependency_roles:
   post-cm04-linear-damping-model: physical-assumption
   def-cm-oscillator-model-and-phase-system: mathematical-premise
@@ -28,6 +28,9 @@ dependency_roles:
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   def-maximal-ode-solution: mathematical-premise
   def-interval: mathematical-premise
+  def-natural-logarithm: mathematical-premise
+  thm-exponential-is-strictly-increasing: mathematical-premise
+  cor-exponential-reciprocal-and-positivity: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -55,6 +58,9 @@ given; its equation is
 $$m\,x''(t)+\varepsilon\gamma\,x'(t)+k\,x(t)=0 .$$
 
 Put $\omega_{0}:=\sqrt{k/m}$ and identify $\mathbb C$ with $\mathbb R^{2}$.
+For $x>0$, write $\ln x:=\log x$, where $\log:(0,\infty)\to\mathbb R$ is
+the inverse of the real exponential as defined in
+[[def-natural-logarithm]].
 For a motion $x$ define the **rotating-frame amplitude**
 
 $$\zeta(t):=\frac{1}{\sqrt{2\omega_{0}}}\bigl(\omega_{0}x(t)+i\,x'(t)\bigr)e^{i\omega_{0}t}\in\mathbb C,$$
@@ -108,82 +114,30 @@ claim is asserted.
 
 ## Facts & Assumptions
 
-**Given:** The model data $(m,\varepsilon\gamma,k)$, the frequency
-$\omega_{0}=\sqrt{k/m}$, the amplitude map $\zeta$, the field $F$, the
-constants $\zeta_{0},\rho,R,M,L,B,B_{1},A,K$, and a motion $x$ of the model.
+**Given:** The model data $(m,\varepsilon\gamma,k)$, the frequency $\omega_{0}=\sqrt{k/m}$, the amplitude map $\zeta$, the field $F$, the constants $\zeta_{0},\rho,R,M,L,B,B_{1},A,K$, and a motion $x$ of the model.
 
-[F1] Model and global linear theory ([[post-cm04-linear-damping-model]],
-[[def-cm-oscillator-model-and-phase-system]],
-[[cor-cm-variation-of-constants-for-linear-systems]]): the phase system of
-the model is $(x,v)'=A_{0}(x,v)$ with
-$A_{0}=\begin{pmatrix}0&1\\-k/m&-\varepsilon\gamma/m\end{pmatrix}$, a
-constant real matrix; for every datum $(t_{0},x_{0},v_{0})$ the curve
-$(x,v)(t)=e^{(t-t_{0})A_{0}}(x_{0},v_{0})$ solves it on all of $\mathbb R$,
-any differentiable solution with that datum agrees with it on its interval,
-and a curve is a motion if and only if its phase curve solves the system
-([[def-maximal-ode-solution]]).
+[F1] Model and global linear theory ([[post-cm04-linear-damping-model]], [[def-cm-oscillator-model-and-phase-system]], [[cor-cm-variation-of-constants-for-linear-systems]]): the phase system of the model is $(x,v)'=A_{0}(x,v)$ with $A_{0}=\begin{pmatrix}0&1\\-k/m&-\varepsilon\gamma/m\end{pmatrix}$, a constant real matrix; for every datum $(t_{0},x_{0},v_{0})$ the curve $(x,v)(t)=e^{(t-t_{0})A_{0}}(x_{0},v_{0})$ solves it on all of $\mathbb R$, any differentiable solution with that datum agrees with it on its interval, and a curve is a motion if and only if its phase curve solves the system ([[def-maximal-ode-solution]]).
 
-[F2] Complex exponential and trigonometric calculus
-([[thm-complex-exponential-is-entire-with-derivative-itself]],
-[[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]],
-[[def-complex-conjugate-real-imaginary-part-and-modulus]],
-[[thm-sine-and-cosine-derivatives]], [[thm-algebra-of-derivatives]],
-[[thm-chain-rule-for-total-derivatives]],
-[[def-vector-valued-derivative-and-integral]]): for real $\theta$,
-$e^{i\theta}=\cos\theta+i\sin\theta$ and
-$\frac{d}{d\theta}e^{i\theta}=ie^{i\theta}$; sine and cosine are
-differentiated by $(\sin)'=\cos$, $(\cos)'=-\sin$; sums, products and
-composites of differentiable curves are differentiated by the algebra and
-chain rules; $\operatorname{Re}$ and $\operatorname{Im}$ are linear and
-commute with differentiation, and
-$\lvert\zeta\rvert^{2}=(\operatorname{Re}\zeta)^{2}+(\operatorname{Im}\zeta)^{2}$.
+[F2] Complex exponential and trigonometric calculus ([[thm-complex-exponential-is-entire-with-derivative-itself]], [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], [[def-complex-conjugate-real-imaginary-part-and-modulus]], [[thm-sine-and-cosine-derivatives]], [[thm-algebra-of-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[def-vector-valued-derivative-and-integral]]): for real $\theta$, $e^{i\theta}=\cos\theta+i\sin\theta$ and $\frac{d}{d\theta}e^{i\theta}=ie^{i\theta}$; sine and cosine are differentiated by $(\sin)'=\cos$, $(\cos)'=-\sin$; sums, products and composites of differentiable curves are differentiated by the algebra and chain rules; $\operatorname{Re}$ and $\operatorname{Im}$ are linear and commute with differentiation, and $\lvert\zeta\rvert^{2}=(\operatorname{Re}\zeta)^{2}+(\operatorname{Im}\zeta)^{2}$.
 
-[F3] Primitives and one-period averages
-([[cor-primitives-of-a-continuous-function]],
-[[thm-sine-and-cosine-derivatives]],
-[[def-vector-valued-derivative-and-integral]]): on $\mathbb R$ the functions
-$u\mapsto u/2+\sin(2u)/4$, $u\mapsto u/2-\sin(2u)/4$ and
-$u\mapsto-\cos(2u)/4$ are primitives of $u\mapsto\cos^{2}u$,
-$u\mapsto\sin^{2}u$ and $u\mapsto\sin u\cos u$; hence with
-$\omega_{0}P=2\pi$ the one-period averages of $\cos^{2}(\omega_{0}t)$ and
-$\sin^{2}(\omega_{0}t)$ are $1/2$ and that of
-$\sin(\omega_{0}t)\cos(\omega_{0}t)$ is $0$.
+[F3] Primitives and one-period averages ([[cor-primitives-of-a-continuous-function]], [[thm-sine-and-cosine-derivatives]], [[def-vector-valued-derivative-and-integral]]): on $\mathbb R$ the functions $u\mapsto u/2+\sin(2u)/4$, $u\mapsto u/2-\sin(2u)/4$ and $u\mapsto-\cos(2u)/4$ are primitives of $u\mapsto\cos^{2}u$, $u\mapsto\sin^{2}u$ and $u\mapsto\sin u\cos u$; hence with $\omega_{0}P=2\pi$ the one-period averages of $\cos^{2}(\omega_{0}t)$ and $\sin^{2}(\omega_{0}t)$ are $1/2$ and that of $\sin(\omega_{0}t)\cos(\omega_{0}t)$ is $0$.
 
-[F4] Averaging theorem ([[thm-cm-averaging-for-fast-periodic-oscillations]]
-and [[def-cm-averaging-data-and-averaged-field]]) with state space
-$O=\mathbb C\cong\mathbb R^{2}$: for a continuous field
-$f:\mathbb R\times O\to O$ with continuous partial derivatives in the state,
-$P$-periodic in $t$, satisfying
-$\lVert f(t,\zeta)\rVert_{2}\le M$ and
-$\lVert D_{\zeta}f(t,\zeta)\rVert\le L$ for
-$\lVert\zeta-\zeta_{0}\rVert_{2}\le R$ ([[def-metric-ball]],
-[[def-operator-norm]]), and for a solution $\bar\zeta$ of
-$\bar\zeta'=\varepsilon\bar f(\bar\zeta)$ with
-$\bar\zeta(0)=\zeta_{0}$ that lies in
-$\overline B(\zeta_{0},R-\rho)$ on $[0,A/\varepsilon]$, the hypothesis
-$\varepsilon K<\rho$ with $K=e^{LA}\bigl[B+(LB+B_{1}M)A\bigr]$,
-$B=2MP$, $B_{1}=2LP$, implies that the solution of
-$\zeta'=\varepsilon f(t,\zeta)$, $\zeta(0)=\zeta_{0}$ exists on
-$[0,A/\varepsilon]$ and satisfies
-$\lVert\zeta(t)-\bar\zeta(t)\rVert_{2}\le\varepsilon K$ there.
+[F4] Averaging theorem ([[thm-cm-averaging-for-fast-periodic-oscillations]] and [[def-cm-averaging-data-and-averaged-field]]) with state space $O=\mathbb C\cong\mathbb R^{2}$: for a continuous field $f:\mathbb R\times O\to O$ with continuous partial derivatives in the state, $P$-periodic in $t$, satisfying $\lVert f(t,\zeta)\rVert_{2}\le M$ and $\lVert D_{\zeta}f(t,\zeta)\rVert\le L$ for $\lVert\zeta-\zeta_{0}\rVert_{2}\le R$ ([[def-metric-ball]], [[def-operator-norm]]), and for a solution $\bar\zeta$ of $\bar\zeta'=\varepsilon\bar f(\bar\zeta)$ with $\bar\zeta(0)=\zeta_{0}$ that lies in $\overline B(\zeta_{0},R-\rho)$ on $[0,A/\varepsilon]$, the hypothesis $\varepsilon K<\rho$ with $K=e^{LA}\bigl[B+(LB+B_{1}M)A\bigr]$, $B=2MP$, $B_{1}=2LP$, implies that the solution of $\zeta'=\varepsilon f(t,\zeta)$, $\zeta(0)=\zeta_{0}$ exists on $[0,A/\varepsilon]$ and satisfies $\lVert\zeta(t)-\bar\zeta(t)\rVert_{2}\le\varepsilon K$ there.
 
-[F5] Elementary analysis ([[def-euclidean-inner-product]],
-[[def-vector-valued-functions-limits-and-continuity]],
-[[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-interval]]): the
-Euclidean norm on $\mathbb C\cong\mathbb R^{2}$ satisfies
-$\lvert\operatorname{Re}w\rvert+\lvert\operatorname{Im}w\rvert\le\sqrt2\,\lvert w\rvert$
-and the reverse triangle inequality; the map $F$ of the statement is smooth
-because it is real-linear in $\zeta$ with smooth coefficients; and a
-real-linear map of the form
-$h\mapsto-(i\gamma/m)e^{i\omega_{0}t}(\cos(\omega_{0}t)\operatorname{Im}h-\sin(\omega_{0}t)\operatorname{Re}h)$
-has operator norm at most $(\gamma/m)\sqrt2$.
+[F5] Elementary analysis ([[def-euclidean-inner-product]], [[def-vector-valued-functions-limits-and-continuity]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-interval]]): the Euclidean norm on $\mathbb C\cong\mathbb R^{2}$ satisfies $\lvert\operatorname{Re}w\rvert+\lvert\operatorname{Im}w\rvert\le\sqrt2\,\lvert w\rvert$ and the reverse triangle inequality; the map $F$ of the statement is smooth because it is real-linear in $\zeta$ with smooth coefficients; and a real-linear map of the form $h\mapsto-(i\gamma/m)e^{i\omega_{0}t}(\cos(\omega_{0}t)\operatorname{Im}h-\sin(\omega_{0}t)\operatorname{Re}h)$ has operator norm at most $(\gamma/m)\sqrt2$.
+
+[F6] Logarithm and exponential order: $\ln$ is the natural logarithm of
+[[def-natural-logarithm]], the inverse of $\exp$ on $(0,\infty)$. Since
+$\exp$ is strictly increasing ([[thm-exponential-is-strictly-increasing]])
+and $\exp(-x)=1/\exp(x)$ ([[cor-exponential-reciprocal-and-positivity]]),
+for $r>R-\rho>0$ the condition
+$$\frac{\gamma A}{2m}\le\ln\!\left(\frac{r}{r-(R-\rho)}\right)$$
+is equivalent to
+$$r\left(1-e^{-\gamma A/(2m)}\right)\le R-\rho.$$
 
 ## Proof
 
-**Proof technique:** direct; conjugate the equation by the rotating frame,
-identify the resulting slow system and its average, bound the data on the
-stated ball, apply the averaging theorem, and convert the amplitude estimate
-to the energy estimate.
+**Proof technique:** direct; conjugate the equation by the rotating frame, identify the resulting slow system and its average, bound the data on the stated ball, apply the averaging theorem, and convert the amplitude estimate to the energy estimate.
 
 1.1 Identification of the slow system. Let $x$ be a motion and put $u(t):=\omega_{0}x(t)+ix'(t)$, so that $\zeta=e^{i\omega_{0}t}u/\sqrt{2\omega_{0}}$ and $\operatorname{Im}u=\sqrt{2\omega_{0}}\bigl(\cos(\omega_{0}t)\operatorname{Im}\zeta-\sin(\omega_{0}t)\operatorname{Re}\zeta\bigr)$ by [F2]. From $x''=-\omega_{0}^{2}x-(\varepsilon\gamma/m)x'$ of the model, $u'=\omega_{0}x'+ix''=\omega_{0}x'-i\omega_{0}^{2}x-i\frac{\varepsilon\gamma}{m}x'=-i\omega_{0}u-i\frac{\varepsilon\gamma}{m}\operatorname{Im}u,$ so differentiating $\zeta$ with the product and chain rules of [F2] gives $\zeta'=-\frac{i\varepsilon\gamma}{m}\frac{e^{i\omega_{0}t}}{\sqrt{2\omega_{0}}}\operatorname{Im}u=\varepsilon F(t,\zeta)$. Conversely, if $\zeta$ solves $\zeta'=\varepsilon F(t,\zeta)$ and $u:=\sqrt{2\omega_{0}}e^{-i\omega_{0}t}\zeta$, then $u'=-i\omega_{0}u-i(\varepsilon\gamma/m)\operatorname{Im}u$, so $x:=\operatorname{Re}(u)/\omega_{0}$ satisfies $x'=\operatorname{Re}(u')/\omega_{0}=\operatorname{Im}u$ and $x''=\operatorname{Im}(u')=-\omega_{0}\operatorname{Re}u-(\varepsilon\gamma/m)\operatorname{Im}u=-\omega_{0}^{2}x-(\varepsilon\gamma/m)x'$, that is, $x$ is a motion with the stated inverse formula. The two constructions are inverse to each other because $x$ and $x'$ are recovered from $\zeta$ and $\zeta$ is recovered from $x,x'$. [F1, F2, given, algebra]
 
@@ -193,7 +147,7 @@ to the energy estimate.
 
 2.1 Existence and uniqueness. By [F1] every datum has exactly one maximal motion and it is defined on all of $\mathbb R$; by step 1.1 its amplitude solves the slow system on $\mathbb R$ with the datum $\zeta(0)$, and distinct motions have distinct amplitudes. Conversely a solution of the slow system on $\mathbb R$ produces a motion by step 1.1; this proves the bijection of clause 1. [F1, step 1.1, given]
 
-3.1 Averaged trajectory and the estimate. The averaged solution is $\bar\zeta(t)=\zeta_0e^{-\varepsilon\gamma t/(2m)}$, and its distance from $\zeta_0$ is $|\zeta_0|(1-e^{-\varepsilon\gamma t/(2m)})$. The trapping and sufficient logarithmic conditions of clause 3 are therefore equivalent to the inequalities stated there. Apply the numerical rescaling specified in the Statement; write its numerical variables and constants without hats in this argument. The exact amplitude is already global by step 2.1. For $g(t,w):=\int_0^t(F(s,w)-\bar F(w))ds$, periodicity and the vanishing one-period integral give $g(0,w)=0$, $|g(t,w)|\le2MP=B$ and $\|D_wg(t,w)\|\le2LP=B_1$ on $|w-\zeta_0|\le R$: reduce $t$ modulo $P$ and integrate the bounds $2M$, $2L$ on the remaining interval. Smoothness of $F$ justifies differentiating this primitive in $w$. Before the first exit of the global exact amplitude from this ball, put $d=\zeta-\varepsilon g(t,\zeta)$ and $w=d-\bar\zeta$. The chain rule gives $w'=\varepsilon(\bar F(\zeta)-\bar F(\bar\zeta))-\varepsilon^2D_wg(t,\zeta)F(t,\zeta)$, with $w(0)=0$, hence $|w(t)|\le\int_0^t(\varepsilon L|w(s)|+\varepsilon^2(LB+B_1M))ds$. Put $a=\varepsilon L$ and $b=\varepsilon^2(LB+B_1M)$, and $r(t)=\int_0^t(a|w(s)|+b)ds$. Then $|w|\le r$, $r(0)=0$, $r\prime\le ar+b$ and $(e^{-at}r(t))\prime\le b e^{-at}$; integration gives $|w(t)|\le r(t)\le bt e^{at}=\varepsilon^2(LB+B_1M)t e^{\varepsilon Lt}$. Thus on $0\le t\le A/\varepsilon$ before any exit, $|\zeta-\bar\zeta|\le\varepsilon[B+(LB+B_1M)Ae^{LA}]\le\varepsilon K$. At a first exit time in this horizon, continuity would imply $R=|\zeta-\zeta_0|\le\varepsilon K+(R-\rho)<R$, a contradiction. There is no finite-existence-endpoint issue because the exact curve is global. The estimate therefore holds over the whole horizon; undoing the explicitly stated time/amplitude rescaling gives clause 3 with its physical units. [F2, F3, F4, step 1.2, step 1.3, step 2.1, given, algebra]
+3.1 Averaged trajectory and the estimate. The averaged solution is $\bar\zeta(t)=\zeta_0e^{-\varepsilon\gamma t/(2m)}$, and its distance from $\zeta_0$ is $|\zeta_0|(1-e^{-\varepsilon\gamma t/(2m)})$. Thus the trajectory stays in the required ball exactly when the endpoint displacement is at most $R-\rho$; [F6] gives the equivalent logarithmic sufficient condition in clause 3. Apply the numerical rescaling specified in the Statement; write its numerical variables and constants without hats in this argument. The exact amplitude is already global by step 2.1. For $g(t,w):=\int_0^t(F(s,w)-\bar F(w))ds$, periodicity and the vanishing one-period integral give $g(0,w)=0$, $|g(t,w)|\le2MP=B$ and $\|D_wg(t,w)\|\le2LP=B_1$ on $|w-\zeta_0|\le R$: reduce $t$ modulo $P$ and integrate the bounds $2M$, $2L$ on the remaining interval. Smoothness of $F$ justifies differentiating this primitive in $w$. Before the first exit of the global exact amplitude from this ball, put $d=\zeta-\varepsilon g(t,\zeta)$ and $w=d-\bar\zeta$. The chain rule gives $w'=\varepsilon(\bar F(\zeta)-\bar F(\bar\zeta))-\varepsilon^2D_wg(t,\zeta)F(t,\zeta)$, with $w(0)=0$, hence $|w(t)|\le\int_0^t(\varepsilon L|w(s)|+\varepsilon^2(LB+B_1M))ds$. Put $a=\varepsilon L$ and $b=\varepsilon^2(LB+B_1M)$, and $r(t)=\int_0^t(a|w(s)|+b)ds$. Then $|w|\le r$, $r(0)=0$, $r'\le ar+b$ and $(e^{-at}r(t))'\le b e^{-at}$; integration gives $|w(t)|\le r(t)\le bt e^{at}=\varepsilon^2(LB+B_1M)t e^{\varepsilon Lt}$. Thus on $0\le t\le A/\varepsilon$ before any exit, $|\zeta-\bar\zeta|\le\varepsilon[B+(LB+B_1M)Ae^{LA}]\le\varepsilon K$. At a first exit time in this horizon, continuity would imply $R=|\zeta-\zeta_0|\le\varepsilon K+(R-\rho)<R$, a contradiction. There is no finite-existence-endpoint issue because the exact curve is global. The estimate therefore holds over the whole horizon; undoing the explicitly stated time/amplitude rescaling gives clause 3 with its physical units. [F2, F3, F4, F6, step 1.2, step 1.3, step 2.1, given, algebra]
 
 4.1 Energy identity and estimate. With $\zeta=(1/\sqrt{2\omega_{0}})(\omega_{0}x+ix')e^{i\omega_{0}t}$ one has $2\omega_{0}\lvert\zeta\rvert^{2}=\omega_{0}^{2}x^{2}+x'^{2}$ by [F2], hence $m\omega_{0}\lvert\zeta\rvert^{2}=\tfrac12 m x'^{2}+\tfrac12 m\omega_{0}^{2}x^{2}=\tfrac12mx'^{2}+\tfrac12kx^{2}=E .$ For $0\le t\le A/\varepsilon$, $\bigl\lvert\,\lvert\zeta(t)\rvert^{2}-\lvert\bar\zeta(t)\rvert^{2}\bigr\rvert=\bigl\lvert\lvert\zeta(t)\rvert-\lvert\bar\zeta(t)\rvert\bigr\rvert\bigl(\lvert\zeta(t)\rvert+\lvert\bar\zeta(t)\rvert\bigr)\le\varepsilon K\bigl(2\lvert\zeta_{0}\rvert+\varepsilon K\bigr)$, because $\lvert\zeta(t)\rvert\le\lvert\bar\zeta(t)\rvert+\varepsilon K\le\lvert\zeta_{0}\rvert+\varepsilon K$; multiplying by $m\omega_{0}$ and using $m\omega_{0}\lvert\bar\zeta(t)\rvert^{2}=E_{0}e^{-\varepsilon\gamma t/m}$ gives the displayed energy estimate; this is clause 4. [F2, step 3.1, algebra]
 
@@ -201,17 +155,6 @@ to the energy estimate.
 
 ## Remarks
 
-- **Why the time scale is $O(1/\varepsilon)$.** The averaged amplitude decays
-at the rate $\varepsilon\gamma/(2m)$, so on the horizon $t\le A/\varepsilon$
-the averaged energy falls by the definite factor $e^{-\gamma A/m}$ of order
-one: genuinely long times compared with the oscillation period
-$2\pi/\omega_{0}$, which is where weak damping acts. The estimate does not
-continue to hold for $t\gg A/\varepsilon$ without new hypotheses.
+- **Why the time scale is $O(1/\varepsilon)$.** The averaged amplitude decays at the rate $\varepsilon\gamma/(2m)$, so on the horizon $t\le A/\varepsilon$ the averaged energy falls by the definite factor $e^{-\gamma A/m}$ of order one: genuinely long times compared with the oscillation period $2\pi/\omega_{0}$, which is where weak damping acts. The estimate does not continue to hold for $t\gg A/\varepsilon$ without new hypotheses.
 
-- **The averaged system is not the exact system.** The theorem compares two
-explicitly specified initial value problems and bounds their difference by
-$\varepsilon K$; it does not identify them. The exact model is linear with a
-known closed-form solution whose action decreases monotonically with an
-oscillatory component, whereas the averaged action decreases exactly
-exponentially; the comparison is a controlled approximation, not an exact
-conservation law.
+- **The averaged system is not the exact system.** The theorem compares two explicitly specified initial value problems and bounds their difference by $\varepsilon K$; it does not identify them. The exact model is linear with a known closed-form solution whose action decreases monotonically with an oscillatory component, whereas the averaged action decreases exactly exponentially; the comparison is a controlled approximation, not an exact conservation law.

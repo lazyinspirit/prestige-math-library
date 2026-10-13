@@ -36,8 +36,8 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 physical_scope: "A worked verification of the model's transport identity and
-  continuity equation on the explicit uniform expansion of a unit cube at
-  constant density: the model velocity, divergence, density field and mass are
+  continuity equation on the explicit uniform expansion of a cube of side L_0 (including the one-metre cube),
+  with constant reference density rho_0 and time-dependent spatial density: the model velocity, divergence, density field and mass are
   computed exactly, the integral mass balance holds identically, the continuity
   equation holds identically, and both sides of the transport identity are
   evaluated for a nonconstant field. The example is an exact conditional check
@@ -75,7 +75,10 @@ constant-reference-density field
 
 $$\rho(t,x):=\frac{\rho_0}{(1+\alpha t)^3}\qquad(\rho_0>0)$$
 
-on the swept region. Then:
+on all of $I\times\mathbb R^3$. This is a positive $C^\infty$ scalar
+field with $[\rho_0]=[\rho]=\mu\ell^{-3}$, so it is defined on an open
+neighborhood of every swept closure. Its values outside the current body
+are an explicit mathematical extension. Then:
 
 1. the spatial velocity is $u(t,x)=\alpha x/(1+\alpha t)$ and
    $\operatorname{div}u(t,x)=3\alpha/(1+\alpha t)$
@@ -117,7 +120,7 @@ on the swept region. Then:
 
 2.2 Transport identity, left side: $F(t)=\int_{\chi_t(B)}x_1^2\,dx=(1+\alpha t)^5\int_BX_1^2\,dX=\frac{L_0^5(1+\alpha t)^5}{3}$ by the same change of variables, since $\int_0^{L_0}X_1^2\,dX_1=L_0^3/3$ and the other two coordinate integrals each contribute $L_0$; hence $F'(t)=\frac{5\alpha L_0^5(1+\alpha t)^4}{3}$. [step 1.1, F3, algebra]
 
-3.1 Mass and continuity: by the change of variables $x=(1+\alpha t)X$ with $J=(1+\alpha t)^3$, one has $\int_{\chi_t(B)}\rho\,dx=\int_B\frac{\rho_0}{(1+\alpha t)^3}(1+\alpha t)^3\,dX=\rho_0L_0^3$, constant in $t$. For the continuity equation, $\partial_t\rho=-3\alpha\rho_0/(1+\alpha t)^4$ and, by step 2.1 and the product rule, $\operatorname{div}(\rho u)=\rho\operatorname{div}u=\frac{\rho_0}{(1+\alpha t)^3}\cdot\frac{3\alpha}{1+\alpha t}=\frac{3\alpha\rho_0}{(1+\alpha t)^4}$, so the sum is zero identically on $I\times\mathbb R^3$. [step 1.1, step 2.1, F3, algebra]
+3.1 Mass and continuity: by the change of variables $x=(1+\alpha t)X$ with $J=(1+\alpha t)^3$, one has $\int_{\chi_t(B)}\rho\,dx=\int_B\frac{\rho_0}{(1+\alpha t)^3}(1+\alpha t)^3\,dX=\rho_0L_0^3$, constant in $t$. The same change of variables on any admissible $B\prime$ gives $m(t,B\prime)=\rho_0\operatorname{vol}(B\prime)$, establishing the adopted mass balance for every material subregion. For the continuity equation, $\partial_t\rho=-3\alpha\rho_0/(1+\alpha t)^4$ and, by step 2.1 and the product rule, $\operatorname{div}(\rho u)=\rho\operatorname{div}u=\frac{\rho_0}{(1+\alpha t)^3}\cdot\frac{3\alpha}{1+\alpha t}=\frac{3\alpha\rho_0}{(1+\alpha t)^4}$, so the sum is zero identically on $I\times\mathbb R^3$. [step 1.1, step 2.1, F3, algebra]
 
 3.2 Transport identity, right side: the integrand $\partial_tf+\operatorname{div}(fu)=5\alpha x_1^2/(1+\alpha t)$ by step 2.1, so $\int_{\chi_t(B)}(\partial_tf+\operatorname{div}(fu))\,dx=\frac{5\alpha}{1+\alpha t}\int_{\chi_t(B)}x_1^2\,dx=\frac{5\alpha}{1+\alpha t}\cdot\frac{L_0^5(1+\alpha t)^5}{3}=\frac{5\alpha L_0^5(1+\alpha t)^4}{3}$, which equals the derivative of step 2.2 for every $t\in I$. [step 2.1, step 2.2, F3, algebra]
 

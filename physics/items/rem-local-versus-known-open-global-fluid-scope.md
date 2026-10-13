@@ -1,13 +1,15 @@
 ---
 id: rem-local-versus-known-open-global-fluid-scope
 kind: remark
-title: "Scope of the local periodic result: what is proved, what is not, and the known open global problem"
+title: "Scope of the local periodic result: what is proved and what is not"
 status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 9
-deps: [thm-local-smooth-periodic-euler-viscous-solution, thm-fluid-uniqueness-and-continuous-dependence]
+deps: [thm-local-smooth-periodic-euler-viscous-solution, thm-fluid-uniqueness-and-continuous-dependence, lem-periodic-pressure-reconstruction, def-countable-choice]
 dependency_roles:
+  lem-periodic-pressure-reconstruction: mathematical-premise
+  def-countable-choice: mathematical-premise
   thm-local-smooth-periodic-euler-viscous-solution: mathematical-premise
   thm-fluid-uniqueness-and-continuous-dependence: mathematical-premise
 provenance:
@@ -15,6 +17,8 @@ provenance:
   proof: not-applicable
 sources:
   references:
+    - title: "Clay Mathematics Institute, Navier-Stokes Announcement, 11 September 2026 (announcement and evaluation status only)"
+      url: "https://www.claymath.org/news/navier-stokes-announcement/"
     - title: "E. Wiedemann (ed. J. Skipper), Lecture Notes: Navier-Stokes Equations (Universität Ulm, WS 2018/19), Section 4.5 (blow-up and the Beale-Kato-Majda criterion) and Chapter 1 (the state-of-the-art table on existence, uniqueness and regularity in dimension three)"
       url: "https://www.uni-ulm.de/fileadmin/website_uni_ulm/mawi.inst.020/skipper/NSEEmilFinished.pdf"
     - title: "A. J. Majda and A. L. Bertozzi, Vorticity and Incompressible Flow (CUP 2002), Section 3.3 with Corollary 3.2 (maximal time of existence and the global-existence criterion in terms of vorticity accumulation)"
@@ -25,12 +29,14 @@ verification:
 
 ## Scope of the local statement
 
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]), as required by all three local results cited below.
+
 [[thm-local-smooth-periodic-euler-viscous-solution]] and
 [[thm-fluid-uniqueness-and-continuous-dependence]] are mathematical statements
 about the model equations
 $\partial_tu+P((u\cdot\nabla)u)=\nu\Delta u$ on the flat three-torus, for a real
 viscosity parameter $\nu\ge0$, smooth divergence-free data, and an integer
-$s\ge4$. They establish, and only establish:
+$s\ge4$. Write $Y_0:=\|u_0\|_{H^s}$, and use the commutator constants $C_s,C_m$ specified in the existence theorem. Together with [[lem-periodic-pressure-reconstruction]], their established local conclusions are:
 
 - existence of a smooth solution on the **finite** interval
   $[0,T]$ with $T=(2C_s\|u_0\|_{H^s})^{-1}$ when $\|u_0\|_{H^s}>0$ (and
@@ -38,9 +44,10 @@ $s\ge4$. They establish, and only establish:
 - the uniform $H^m$ bounds $\|u(t)\|_{H^m}\le\|u_0\|_{H^m}e^{4C_mY_0T}$ on that
   interval, for every $m\ge s$;
 - uniqueness among smooth solutions on the common interval and Hölder-$1/s$
-  continuity of the solution map on $H^s$-bounded data in the $H^{s-1}$ norm;
-- reconstruction of the pressure with the standard sign convention and its
-  uniqueness under the zero-mean normalization.
+  continuity of the solution map on smooth divergence-free $H^s$-bounded data,
+  from the induced $L^2$ topology into $C([0,T_B],H^{s-1})$, with
+  $T_B=(2C_sB)^{-1}$ for a common positive norm bound $B$;
+- reconstruction of a smooth real scalar pressure $p$ with $\nabla p=-(I-P)((u\cdot\nabla)u)$ and $\partial_tu+(u\cdot\nabla)u=\nu\Delta u-\nabla p$, and its uniqueness under $\int_{\mathbb T^3}p(t,x)\,dx=0$ ([[lem-periodic-pressure-reconstruction]], claims 1-3).
 
 The following are explicitly **not** claimed, and are not consequences of the
 argument:

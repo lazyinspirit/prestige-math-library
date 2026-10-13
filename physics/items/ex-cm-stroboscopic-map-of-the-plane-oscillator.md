@@ -6,15 +6,16 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 2
-deps: [def-cm-stroboscopic-map, lem-cm-stroboscopic-iterate-identity, thm-existence-and-uniqueness-of-a-maximal-ode-solution, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-derivatives, def-vector-valued-derivative-and-integral, def-total-derivative-in-euclidean-space]
+deps: [def-cm-stroboscopic-map, lem-cm-stroboscopic-iterate-identity, thm-existence-and-uniqueness-of-a-maximal-ode-solution, def-sine-and-cosine-by-power-series, thm-sine-and-cosine-derivatives, def-vector-valued-derivative-and-integral, def-euclidean-inner-product, thm-quarter-turn-values-and-shift-formulas]
 dependency_roles:
+  thm-quarter-turn-values-and-shift-formulas: mathematical-premise
   def-cm-stroboscopic-map: mathematical-premise
   lem-cm-stroboscopic-iterate-identity: mathematical-premise
   thm-existence-and-uniqueness-of-a-maximal-ode-solution: mathematical-premise
   def-sine-and-cosine-by-power-series: mathematical-premise
   thm-sine-and-cosine-derivatives: mathematical-premise
   def-vector-valued-derivative-and-integral: mathematical-premise
-  def-total-derivative-in-euclidean-space: mathematical-premise
+  def-euclidean-inner-product: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -49,9 +50,13 @@ In particular, for $P=2\pi/\omega$ the map $\theta_P$ is the identity of $\mathb
 
 [L1] The stroboscopic map of a continuous $P$-periodic field, locally Lipschitz in the state variable, is defined on $D_P=\{z:[0,P]\subseteq J_z\}$ by $\theta_P(z)=x_z(P)$, where $x_z$ is the unique maximal solution through $(0,z)$; every solution through $(0,z)$ is a restriction of $x_z$ ([[def-cm-stroboscopic-map]], [[thm-existence-and-uniqueness-of-a-maximal-ode-solution]]).
 
-[L2] The derivatives of sine and cosine are $(\sin)'=\cos$, $(\cos)'=-\sin$, with $\sin0=0$, $\cos0=1$, and vector-valued curves are differentiated componentwise ([[def-sine-and-cosine-by-power-series]], [[thm-sine-and-cosine-derivatives]], [[def-vector-valued-derivative-and-integral]]).
+[L2] The derivatives of sine and cosine are $(\sin)'=\cos$, $(\cos)'=-\sin$, with $\sin0=0$, $\cos0=1$. The shift identities $\sin(x+\pi)=-\sin x$, $\cos(x+\pi)=-\cos x$ give $\sin\pi=\sin2\pi=0$, $\cos\pi=-1$, $\cos2\pi=1$ ([[thm-quarter-turn-values-and-shift-formulas]]). Vector-valued curves are differentiated componentwise ([[def-sine-and-cosine-by-power-series]], [[thm-sine-and-cosine-derivatives]], [[def-vector-valued-derivative-and-integral]]).
 
-[L3] The system is autonomous, so $F(t,z)=F(0,z)$ for all $t$, and it satisfies the Picard-Lindelof hypotheses: its components are polynomials, hence continuous and locally Lipschitz on $\mathbb R^2$ ([[thm-existence-and-uniqueness-of-a-maximal-ode-solution]], [[def-total-derivative-in-euclidean-space]]).
+[L3] The system is autonomous, so $F(t,z)=F(0,z)$ for all $t$. For $z,w\in\mathbb R^2$,
+
+$$\|F(t,z)-F(t,w)\|_2^2=(z_2-w_2)^2+\omega^4(z_1-w_1)^2\le \max\{1,\omega^4\}\|z-w\|_2^2,$$
+
+so $F$ is globally Lipschitz in the state variable with constant $\max\{1,\omega^2\}$ and is continuous; it satisfies the Picard-Lindelof hypotheses ([[thm-existence-and-uniqueness-of-a-maximal-ode-solution]], [[def-euclidean-inner-product]]).
 
 ## Verification
 

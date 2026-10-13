@@ -54,12 +54,14 @@ Then:
 (a) *Continuity identity.* $\partial_tn(x,t)+\partial_xj(x,t)=0$ for every
 $(x,t)\in\Omega\times I$.
 
-(b) *Constant flux of stationary solutions.* If in addition $u,v:\Omega\to
-\mathbb R$ have continuous second derivatives and there are a real $E$ and a
-real-valued $V$ with
-$-\frac{\hbar^2}{2m}u''+Vu=Eu$ and $-\frac{\hbar^2}{2m}v''+Vv=Ev$ pointwise on
-$\Omega$, then the function $x\mapsto j(x):=\frac{\hbar}{m}(uv'-u'v)(x)$ is
-constant on $\Omega$.
+(b) *Constant flux of stationary solutions.* Separately, let
+$u_{\mathrm s},v_{\mathrm s}:\Omega\to\mathbb R$ have continuous second
+derivatives, and let $E\in\mathbb R$ and $V:\Omega\to\mathbb R$ satisfy
+$-\frac{\hbar^2}{2m}u_{\mathrm s}''+Vu_{\mathrm s}=Eu_{\mathrm s}$ and
+$-\frac{\hbar^2}{2m}v_{\mathrm s}''+Vv_{\mathrm s}=Ev_{\mathrm s}$ pointwise
+on $\Omega$. Then
+$j_{\mathrm s}(x):=\frac{\hbar}{m}(u_{\mathrm s}v_{\mathrm s}'-u_{\mathrm s}'v_{\mathrm s})(x)$
+is constant on $\Omega$.
 
 The assertion is an identity for the declared differentiable functions and
 the declared real pair $V$; it constructs no probability law, no state and no
@@ -67,11 +69,11 @@ physical interpretation.
 
 ## Facts & Assumptions
 
-**Given:** $m,\hbar>0$; nonempty open intervals $\Omega,I\subseteq\mathbb R$; a function $V:\Omega\to\mathbb R$; real functions $u,v$ on $\Omega\times I$ (respectively on $\Omega$) with the stated continuous partial derivatives; in (b) a real number $E$.
+**Given:** $m,\hbar>0$; nonempty open intervals $\Omega,I\subseteq\mathbb R$; a function $V:\Omega\to\mathbb R$; real functions $u,v:\Omega\times I\to\mathbb R$ with the stated continuous partial derivatives; and, separately for (b), real functions $u_{\mathrm s},v_{\mathrm s}:\Omega\to\mathbb R$ with continuous second derivatives and $E\in\mathbb R$.
 
 [F1] **Complex coordinates.** Every complex number has a unique form $c+di$ with $c,d\in\mathbb R$, and the map $\Phi(c+di)=(c,d)$ is a bijection onto $\mathbb R^2$ carrying addition and multiplication to $(c,d)+(e,f)=(c+e,d+f)$ and $(c,d)(e,f)=(ce-df,cf+de)$; moreover $\overline{c+di}=c-di$, $|c+di|^2=c^2+d^2$ and $\operatorname{Im}(c+di)=d$ ([[def-complex-conjugate-real-imaginary-part-and-modulus]], [[thm-complex-numbers-are-the-real-coordinate-plane]]). For real functions $u,v,f,g$ this gives $\operatorname{Im}\bigl((u-iv)(f+ig)\bigr)=ug-vf$ pointwise.
 
-[F2] **Product rule and algebra of derivatives.** For real functions on a set $A\subseteq\mathbb R$ differentiable at a limit point $c$ of $A$, $(fg)'(c)=f'(c)g(c)+f(c)g'(c)$ and $(f+g)'(c)=f'(c)+g'(c)$, and $(\alpha f)'(c)=\alpha f'(c)$ for real $\alpha$ ([[thm-algebra-of-derivatives]], [[def-derivative]]). The same identities hold for the partial derivatives $\partial_x,\partial_t$ of the functions of this statement, applied pointwise at each point of the open set $\Omega\times I$, and at each point of the open interval $\Omega$ in (b), because the one-variable differentiation rules apply to the coordinate functions $x\mapsto w(x,t)$ and $t\mapsto w(x,t)$.
+[F2] **Product rule and algebra of derivatives.** For real functions on a set $A\subseteq\mathbb R$ differentiable at a limit point $c$ of $A$, $(fg)'(c)=f'(c)g(c)+f(c)g'(c)$ and $(f+g)'(c)=f'(c)+g'(c)$, and $(\alpha f)'(c)=\alpha f'(c)$ for real $\alpha$ ([[thm-algebra-of-derivatives]], [[def-derivative]]). The same identities hold for the partial derivatives $\partial_x,\partial_t$ of $u,v$, applied pointwise at each point of the open set $\Omega\times I$, and for the derivatives of the separate functions $u_{\mathrm s},v_{\mathrm s}$ at each point of $\Omega$, because the one-variable differentiation rules apply to the coordinate functions.
 
 [F3] **Continuity of sums and products.** Sums, differences and products of continuous real functions are continuous ([[thm-algebra-of-continuous-functions]], [[def-continuity-real]]).
 
@@ -87,22 +89,13 @@ physical interpretation.
 
 1.2 [Differentiating the density] By [F2] applied pointwise, $\partial_tn=2u\,\partial_tu+2v\,\partial_tv$. Substituting the two given equations, written as $\partial_tu=\hbar^{-1}\bigl(Vv-\tfrac{\hbar^2}{2m}\partial_x^2v\bigr)$ and $\partial_tv=\hbar^{-1}\bigl(\tfrac{\hbar^2}{2m}\partial_x^2u-Vu\bigr)$, gives $\partial_tn=\frac{2}{\hbar}\bigl(uVv-\tfrac{\hbar^2}{2m}u\,\partial_x^2v+\tfrac{\hbar^2}{2m}v\,\partial_x^2u-vVu\bigr)=\frac{\hbar}{m}\bigl(v\,\partial_x^2u-u\,\partial_x^2v\bigr)$, because $2\hbar^{-1}\cdot\tfrac{\hbar^2}{2m}=\tfrac{\hbar}{m}$ and the two terms containing $Vuv$ cancel. [given, F2, algebra]
 
-1.3 [Stationary flux has zero derivative] In the situation of (b), [F2] gives $j'(x)=\frac{\hbar}{m}\bigl(u'(x)v'(x)+u(x)v''(x)-u''(x)v(x)-u'(x)v'(x)\bigr)=\frac{\hbar}{m}\bigl(u(x)v''(x)-u''(x)v(x)\bigr)$ at every $x\in\Omega$. The two stationary equations give $u''=\frac{2m}{\hbar^2}(V-E)u$ and $v''=\frac{2m}{\hbar^2}(V-E)v$ pointwise, so $j'=\frac{\hbar}{m}\cdot\frac{2m}{\hbar^2}(V-E)(uv-uv)=0$ on $\Omega$. [given, F2, algebra]
+1.3 [Stationary flux has zero derivative] In the situation of (b), [F2] gives $j_{\mathrm s}'(x)=\frac{\hbar}{m}\bigl(u_{\mathrm s}'(x)v_{\mathrm s}'(x)+u_{\mathrm s}(x)v_{\mathrm s}''(x)-u_{\mathrm s}''(x)v_{\mathrm s}(x)-u_{\mathrm s}'(x)v_{\mathrm s}'(x)\bigr)=\frac{\hbar}{m}\bigl(u_{\mathrm s}(x)v_{\mathrm s}''(x)-u_{\mathrm s}''(x)v_{\mathrm s}(x)\bigr)$ at every $x\in\Omega$. The two stationary equations give $u_{\mathrm s}''=\frac{2m}{\hbar^2}(V-E)u_{\mathrm s}$ and $v_{\mathrm s}''=\frac{2m}{\hbar^2}(V-E)v_{\mathrm s}$ pointwise, so $j_{\mathrm s}'=\frac{\hbar}{m}\cdot\frac{2m}{\hbar^2}(V-E)(u_{\mathrm s}v_{\mathrm s}-u_{\mathrm s}v_{\mathrm s})=0$ on $\Omega$. [given, F2, algebra]
 
 2.1 [Differentiating the flux] By [F2] applied pointwise, $\partial_xj=\frac{\hbar}{m}\bigl(\partial_xu\,\partial_xv+u\,\partial_x^2v-\partial_x^2u\,v-\partial_xu\,\partial_xv\bigr)=\frac{\hbar}{m}\bigl(u\,\partial_x^2v-(\partial_x^2u)\,v\bigr)$. Adding the result of step 1.2 gives $\partial_tn+\partial_xj=\frac{\hbar}{m}\bigl(v\,\partial_x^2u-u\,\partial_x^2v+u\,\partial_x^2v-v\,\partial_x^2u\bigr)=0$ pointwise on $\Omega\times I$, which is (a). [step 1.2, F2, algebra]
 
-3.1 [Constancy] The functions $u,v,u',v'$ are continuous on the open interval $\Omega$ by hypothesis, so $j=\frac{\hbar}{m}(uv'-u'v)$ is continuous on $\Omega$ by [F3], and $\Omega$ is order-convex; with $j'=0$ at every point of $\Omega$ by step 1.3, [F4] makes $j$ constant on $\Omega$. This proves (b), and step 2.1 proved (a). [step 1.3, F3, F4] ∎
+3.1 [Constancy] The functions $u_{\mathrm s},v_{\mathrm s},u_{\mathrm s}',v_{\mathrm s}'$ are continuous on the open interval $\Omega$ by hypothesis, so $j_{\mathrm s}=\frac{\hbar}{m}(u_{\mathrm s}v_{\mathrm s}'-u_{\mathrm s}'v_{\mathrm s})$ is continuous on $\Omega$ by [F3], and $\Omega$ is order-convex; with $j_{\mathrm s}'=0$ at every point of $\Omega$ by step 1.3, [F4] makes $j_{\mathrm s}$ constant on $\Omega$. This proves (b), and step 2.1 proved (a). [step 1.3, F3, F4] ∎
 
 ## Remarks
 
-- **Meaning of the hypotheses.** The two real equations are exactly the real
-  and imaginary parts of the complex equation displayed in the statement, and
-  no differentiability of a $\mathbb C$-valued function beyond the stated
-  continuous partial derivatives of $u$ and $v$ is used. The function $V$ need
-  not be continuous for the identity (a); it is used only through the given
-  pointwise equations, and in (b) only through the two stationary equations.
-- **What is not asserted.** The lemma produces no normalized state, no
-  probability, no boundary condition and no scattering or transmission
-  coefficient. In particular the constancy in (b) is a statement about a
-  differentiable size on the open interval $\Omega$ and assumes nothing about
-  the behaviour of $j$ at the endpoints of $\Omega$ or at infinity.
+- **Meaning of the hypotheses.** The two real equations are exactly the real and imaginary parts of the complex equation displayed in the statement, and no differentiability of a $\mathbb C$-valued function beyond the stated continuous partial derivatives of $u$ and $v$ is used. The function $V$ need not be continuous for the identity (a); it is used only through the given pointwise equations, and in (b) only through the two stationary equations.
+- **What is not asserted.** The lemma produces no normalized state, no probability, no boundary condition and no scattering or transmission coefficient. In particular the constancy in (b) is a statement about a differentiable size on the open interval $\Omega$ and assumes nothing about the behaviour of $j$ at the endpoints of $\Omega$ or at infinity.

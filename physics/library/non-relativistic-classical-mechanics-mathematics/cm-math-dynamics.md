@@ -91,8 +91,10 @@ Lyapunov exponent only for a forward-unbounded lifetime and an existing finite l
 The symbolic layer is [[def-cm-bilateral-shift-space-and-cylinders]],
 [[lem-cm-bilateral-shift-metric-and-sequential-compactness]] and
 [[thm-cm-bilateral-shift-mixing-dense-periodic-and-sensitive]], which together
-exhibit the full two-symbol shift as a continuous self-map of a compact metric
-space that is topologically mixing, has dense periodic points and is sensitive
+exhibit the full two-symbol shift as a continuous self-map of a sequentially
+compact metric space (compact under the Countable and Dependent Choice
+assumptions of the companion lemma, clause 4) that is topologically mixing,
+has dense periodic points and is sensitive
 with constant $1$, in the sense fixed by
 [[def-cm-topologically-mixing-dense-periodic-and-sensitive-maps]]. This is a
 topological example, not a smoothly realized mechanical flow.

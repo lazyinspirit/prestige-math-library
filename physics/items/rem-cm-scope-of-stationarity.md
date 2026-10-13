@@ -35,10 +35,7 @@ verification:
   one-parameter family has strictly smaller action.
 
 - No second variation, and no convexity or coercivity hypothesis, is introduced on this page. The
-  Euler–Lagrange equation is a necessary condition for a fixed-endpoint extremum under the stated
-  regularity, and the theorem is stated in that direction only; a sufficient condition would
-  require additional structure (for instance convexity of the integrand in $(q,v)$), which is not
-  developed here.
+  stationarity theorem is an equivalence between zero first variation and the Euler–Lagrange equation. For a local extremum on fixed-endpoint $C^2$ curves, use the norm $\|q\|_{C^2}:=\max_{0\le j\le2}\sup_{t\in[a,b]}\|q^{(j)}(t)\|_2$. Each admissible family $q+s\eta$ tends to $q$ in this norm; a local extremum therefore gives an extremum at $s=0$ of its differentiable action, whose derivative is zero. Thus the Euler–Lagrange equation is necessary for such extrema, while stationarity alone need not give an extremum.
 
 - The finite-interval chart statements on this page concern $C^2$ data and a fixed interval
   $[a,b]$. They make no claim about minimizers in a Sobolev or absolutely continuous class, about

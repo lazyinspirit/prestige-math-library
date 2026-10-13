@@ -20,7 +20,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II, PDF page 3: a marginal p(a|x) = sum over b of p(ab|xy) is independent of the distant setting y, and this is identified with the no-signalling property of the local decomposition"
+    - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section I.A, PDF page 3: a marginal p(a|x) = sum over b of p(ab|xy) is independent of the distant setting y, and this is identified with the no-signalling property of the local decomposition"
       url: "https://arxiv.org/pdf/1303.2849"
 verification:
   precheck: pass
@@ -53,7 +53,7 @@ statement about the tables and their representation.
 
 [F1] The joint laws and marginals are the finite sums $\mu^{A}_{ij}(\varepsilon)=\sum_{\delta\in\Sigma}\mu_{ij}(\varepsilon,\delta)$ and $\mu^{B}_{ij}(\delta)=\sum_{\varepsilon\in\Sigma}\mu_{ij}(\varepsilon,\delta)$, and no-signalling means exactly the pair of setting-independence identities of clause (c) of [[def-nrqm-bell-binary-correlation-models]]; under the representation hypothesis the joint law is also given by the representation identity $\mu_{ij}(\varepsilon,\delta)=\mathbb E_{\mathbb P}[\alpha_{i}(\cdot,\varepsilon)\beta_{j}(\cdot,\delta)]$ of clause (a) of [[def-nrqm-bell-local-response-representation]].
 
-[F2] Each $\beta_{j}(\lambda,\cdot)$ is a probability law on the two-point set $\Sigma$: $\sum_{\delta\in\Sigma}\beta_{j}(\lambda,\delta)=1$ for every $\lambda\in\Lambda$ and every $j\in J$ ([[def-nrqm-bell-local-response-representation]] clause (a)).
+[F2] Both response laws are normalized on the two-point set $\Sigma$: $\sum_{\varepsilon\in\Sigma}\alpha_{i}(\lambda,\varepsilon)=1$ for every $\lambda\in\Lambda$ and $i\in I$, and $\sum_{\delta\in\Sigma}\beta_{j}(\lambda,\delta)=1$ for every $\lambda\in\Lambda$ and $j\in J$ ([[def-nrqm-bell-local-response-representation]] clause (a)).
 
 [F3] Expectation is linear: $\mathbb E[aX+bY]=a\mathbb E[X]+b\mathbb E[Y]$ for integrable real random variables $X,Y$ and scalars $a,b$ ([[cor-expectation-linearity-monotonicity-and-modulus-bound]], [[def-expectation-of-a-nonnegative-or-integrable-random-variable]]); by induction the identity extends to finite sums $\sum_{\delta\in\Sigma}$ over the two-element set $\Sigma$ ([[def-finite-sum]]).
 
@@ -71,12 +71,5 @@ statement about the tables and their representation.
 
 ## Remarks
 
-- **Direction of the implication.** Representability is a strictly stronger
-  requirement than no-signalling: this proposition gives only the implication
-  from representability to no-signalling. The converse fails, and the
-  framework's singlet arrangement is an explicit failing case once its four
-  tables violate the CHSH bound of the next item.
-- **Reading.** The two identities are the statement that each station's
-  outcome law is unaffected by the distant setting in the model. This is a
-  property of the declared tables; it is not a statement about any laboratory
-  procedure and it assumes no spatial or temporal structure.
+- **Direction of the implication.** Representability is a strictly stronger requirement than no-signalling: this proposition gives only the implication from representability to no-signalling. The converse fails, and the framework's singlet arrangement is an explicit failing case once its four tables violate the CHSH bound of the next item.
+- **Reading.** The two identities are the statement that each station's outcome law is unaffected by the distant setting in the model. This is a property of the declared tables; it is not a statement about any laboratory procedure and it assumes no spatial or temporal structure.

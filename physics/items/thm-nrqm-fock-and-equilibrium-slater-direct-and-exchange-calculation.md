@@ -40,6 +40,8 @@ sources:
 
 ## Statement
 
+**Slot convention.** For $\ell\ge1$, $S_\ell$ acts on $\{0,\dots,\ell-1\}$ as in [[lem-nrqm-composites-permutation-sector-projections]]. On one-based tuple positions use $\widehat{\pi}(k):=1+\pi(k-1)$ for $1\le k\le\ell$. Conjugation by $k\mapsto k-1$ gives $\widehat{\pi\sigma}=\widehat{\pi}\circ\widehat{\sigma}$ and $\widehat{\pi^{-1}}=\widehat{\pi}^{-1}$; thus the supplier's tensor action becomes $U_\pi(v_1\otimes\cdots\otimes v_\ell)=v_{\widehat{\pi}^{-1}(1)}\otimes\cdots\otimes v_{\widehat{\pi}^{-1}(\ell)}$. The parameters of $U_\pi$ and $\operatorname{sgn}(\pi)$ remain canonical zero-based permutations.
+
 Assume the Axiom of Countable Choice and the Axiom of Choice
 ([[def-countable-choice]], [[def-axiom-of-choice]]). Let $H$ be a complex
 Hilbert space with completed tensor powers $H^{\otimes n}$ and symmetric
@@ -48,7 +50,7 @@ projections $P_\pm^{(n)}$ ([[lem-nrqm-composites-hilbert-tensor-construction]],
 
 (a) *Slater vectors*: for $n\ge2$ and orthonormal $u_1,\dots,u_n\in H$, the
 Slater vector
-$$S(u_1,\dots,u_n):=\frac1{\sqrt{n!}}\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)\,u_{\sigma(1)}\otimes\cdots\otimes u_{\sigma(n)}$$
+$$S(u_1,\dots,u_n):=\frac1{\sqrt{n!}}\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)\,u_{\widehat{\sigma}(1)}\otimes\cdots\otimes u_{\widehat{\sigma}(n)}$$
 satisfies $\|S(u_1,\dots,u_n)\|=1$ and
 $S(u_1,\dots,u_n)=\sqrt{n!}\,P_-^{(n)}(u_1\otimes\cdots\otimes u_n)$;
 
@@ -83,7 +85,7 @@ physical interpretation of $D$, $X$ or the states is asserted.
 ## Facts & Assumptions
 **Given:** orthonormal vectors $u_1,\dots,u_n\in H$, normalized orthogonal $u,v\in L^2(\mathbb R^3;\mathbb C)$, a bounded measurable even $W$, the pair multiplier $M_W$ on $L^2(\mathbb R^6)$, the numbers $D,X$, and $\kappa>0$.
 
-[F1] The permutation unitaries satisfy $U_\pi(v_1\otimes\cdots\otimes v_n)=v_{\pi^{-1}(1)}\otimes\cdots\otimes v_{\pi^{-1}(n)}$, $P_-^{(n)}=\frac1{n!}\sum_\pi\operatorname{sgn}(\pi)U_\pi$, and $P_-^{(n)}(u_1\otimes\cdots\otimes u_n)=0$ whenever two of the $u_i$ coincide; elementary tensors have norm $\|v_1\otimes\cdots\otimes v_n\|=\|v_1\|\cdots\|v_n\|$ ([[lem-nrqm-composites-permutation-sector-projections]], [[lem-nrqm-composites-hilbert-tensor-construction]]).
+[F1] The permutation unitaries satisfy $U_\pi(v_1\otimes\cdots\otimes v_n)=v_{\widehat{\pi}^{-1}(1)}\otimes\cdots\otimes v_{\widehat{\pi}^{-1}(n)}$, $P_-^{(n)}=\frac1{n!}\sum_\pi\operatorname{sgn}(\pi)U_\pi$, and $P_-^{(n)}(u_1\otimes\cdots\otimes u_n)=0$ whenever two of the $u_i$ coincide; elementary tensors have norm $\|v_1\otimes\cdots\otimes v_n\|=\|v_1\|\cdots\|v_n\|$ ([[lem-nrqm-composites-permutation-sector-projections]], [[lem-nrqm-composites-hilbert-tensor-construction]]).
 
 [F2] Cauchy-Schwarz and the $L^2$ product structure: for $f,g\in L^2$, $\|fg\|_1\le\|f\|_2\|g\|_2$, and for bounded measurable $W$, $|W(x-y)|\le\|W\|_\infty$ ([[cor-cauchy-schwarz-inequality-for-l-two]], [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-complex-lp-and-euclidean-test-function-conventions]]).
 
@@ -100,7 +102,7 @@ physical interpretation of $D$, $X$ or the states is asserted.
 
 ## Proof
 
-1.1 [Slater norm and identity] For $\sigma,\pi\in S_n$, the tensor inner product is $\langle u_{\sigma(1)}\otimes\cdots\otimes u_{\sigma(n)},u_{\pi(1)}\otimes\cdots\otimes u_{\pi(n)}\rangle=\prod_{i=1}^n\langle u_{\sigma(i)},u_{\pi(i)}\rangle$ by [F1], which equals $1$ if $\sigma=\pi$ and $0$ otherwise because the $u_i$ are orthonormal. Hence the $n!$ summands of $\sqrt{n!}S$ are mutually orthogonal of norm $1$, so $\|\sqrt{n!}S\|^2=n!$ and $\|S\|=1$. Moreover $P_-^{(n)}(u_1\otimes\cdots\otimes u_n)=\frac1{n!}\sum_\pi\operatorname{sgn}(\pi)u_{\pi(1)}\otimes\cdots\otimes u_{\pi(n)}=\frac1{\sqrt{n!}}S$, using $U_\pi(u_1\otimes\cdots\otimes u_n)=u_{\pi^{-1}(1)}\otimes\cdots\otimes u_{\pi^{-1}(n)}$ and reindexing $\pi\mapsto\pi^{-1}$. This proves (a). [F1, algebra]
+1.1 [Slater norm and identity] For $\sigma,\pi\in S_n$, the tensor inner product is $\langle u_{\widehat{\sigma}(1)}\otimes\cdots\otimes u_{\widehat{\sigma}(n)},u_{\widehat{\pi}(1)}\otimes\cdots\otimes u_{\widehat{\pi}(n)}\rangle=\prod_{i=1}^n\langle u_{\widehat{\sigma}(i)},u_{\widehat{\pi}(i)}\rangle$ by [F1], which equals $1$ if $\sigma=\pi$ and $0$ otherwise because the $u_i$ are orthonormal. Hence the $n!$ summands of $\sqrt{n!}S$ are mutually orthogonal of norm $1$, so $\|\sqrt{n!}S\|^2=n!$ and $\|S\|=1$. Moreover $P_-^{(n)}(u_1\otimes\cdots\otimes u_n)=\frac1{n!}\sum_\pi\operatorname{sgn}(\pi)u_{\widehat{\pi}(1)}\otimes\cdots\otimes u_{\widehat{\pi}(n)}=\frac1{\sqrt{n!}}S$, using $U_\pi(u_1\otimes\cdots\otimes u_n)=u_{\widehat{\pi}^{-1}(1)}\otimes\cdots\otimes u_{\widehat{\pi}^{-1}(n)}$ and reindexing $\pi\mapsto\pi^{-1}$. This proves (a). [F1, algebra]
 
 1.2 [Exclusion] The assertion (b) is exactly [F1]'s vanishing statement for $P_-^{(n)}$ on a tensor with two equal factors; in particular for $n=2$, $P_-^{(2)}(u\otimes u)=0$. [F1]
 

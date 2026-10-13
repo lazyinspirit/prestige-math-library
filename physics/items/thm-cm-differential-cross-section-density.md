@@ -112,7 +112,7 @@ intervals; in particular contributions with pairwise disjoint images add.
 
 [L4] Continuous maps have Borel preimages; a nonnegative measurable density defines a measure. Nonnegative measurable functions have increasing simple approximations and monotone convergence holds; real integrability means finite integral of the absolute value ([[thm-continuous-preimages-of-borel-sets-are-borel]], [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], [[thm-increasing-simple-approximation-of-a-nonnegative-measurable-function]], [[thm-monotone-convergence-for-the-integral]], [[def-integrable-real-and-complex-functions-and-their-integrals]], [[def-cm-scattering-data]]).
 
-[L5] $\sin\theta>0$ on $(0,\pi)$ ([[thm-sine-cosine-signs-monotonicity-and-ranges]]).
+[L5] $\sin\theta>0$ on $(0,\pi)$: the solid-angle definition proves this from $\sin0=\sin\pi=0$ and strict increase/decrease on the two half intervals; its continuous density is Borel measurable ([[def-cm-scattering-data]]).
 
 ## Proof
 

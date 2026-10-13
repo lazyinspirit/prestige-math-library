@@ -62,11 +62,20 @@ the function $E(x,v)=\tfrac12mv^{2}+\tfrac12kx^{2}$ of clause (d), defined
 along every motion; the drag force is not presented through a potential and
 the model is not a global potential model when $c>0$.
 
-**(iii) Regularity.** The force law is continuous and satisfies
-$$\lvert F(x,v)-F(x',v')\rvert\le k\lvert x-x'\rvert+c\lvert v-v'\rvert\le(k+c)\,\lVert(x,v)-(x',v')\rVert_{2},$$
-so it is locally Lipschitz in the state variable with the global constant
-$k+c$, uniformly in time ([[def-locally-lipschitz-in-the-state-variable]]).
-It is an admissible force law of the class of clause (a) of
+**(iii) Regularity.** Let
+$X:=x_{\rm phys}/(1\,\mathrm m)$ and
+$V:=v_{\rm phys}/(1\,\mathrm{m/s})$ be the dimensionless numerical SI state
+coordinates (the real state coordinates in the displayed force-map signature),
+and let $K:=k_{\rm phys}/(1\,\mathrm{N/m})$,
+$C:=c_{\rm phys}/(1\,\mathrm{kg/s})$ be the numerical coefficients. The
+numerical force map $\widehat F:=F_{\rm phys}/(1\,\mathrm N)$ is
+$\widehat F(X,V)=-KX-CV$, so
+$$\lvert\widehat F(X,V)-\widehat F(X',V')\rvert\le K\lvert X-X'\rvert+C\lvert V-V'\rvert\le(K+C)\,\lVert(X,V)-(X',V')\rVert_{2}.$$
+The real number $K+C$ is a Lipschitz constant for this normalized numerical
+coordinate map; the dimensionful coefficients $k$ and $c$ are not added.
+The force map is continuous and locally Lipschitz in the state variable,
+uniformly in time ([[def-locally-lipschitz-in-the-state-variable]]). It is an
+admissible force law of the class of clause (a) of
 [[def-cm04-one-dimensional-models-and-equilibria]], and its equation is
 exactly the homogeneous model $m\,x''+cx'+kx=0$ of
 [[def-cm-oscillator-model-and-phase-system]].

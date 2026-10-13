@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 14
-deps: [def-cm07-generalized-coordinates-and-forces, def-cm07-action-and-mechanical-lagrangian, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm04-one-dimensional-models-and-equilibria, post-cm04-harmonic-model, def-cm01-configuration, def-cm-mechanical-vector-field-and-energy-in-a-chart, def-cm-oscillator-model-and-phase-system, def-cm01-units, def-hessian-and-euclidean-critical-point, cor-hessian-is-symmetric, thm-cm-quadratic-mode-decomposition, def-matrix-product-and-identity-matrix, def-euclidean-inner-product, def-ck-euclidean-maps-and-diffeomorphisms, def-vector-valued-functions-limits-and-continuity, def-interval]
+deps: [def-cm07-generalized-coordinates-and-forces, def-cm07-action-and-mechanical-lagrangian, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm04-one-dimensional-models-and-equilibria, post-cm04-harmonic-model, def-cm01-configuration, def-cm-mechanical-vector-field-and-energy-in-a-chart, def-cm-oscillator-model-and-phase-system, def-cm01-units, def-hessian-and-euclidean-critical-point, cor-hessian-is-symmetric, thm-cm-quadratic-mode-decomposition, def-matrix-product-and-identity-matrix, def-euclidean-inner-product, def-ck-euclidean-maps-and-diffeomorphisms, def-vector-valued-functions-limits-and-continuity, def-interval, def-vector-valued-derivative-and-integral, lem-cm-positive-definite-matrix-square-roots, cor-real-spectral-theorem-for-self-adjoint-endomorphisms]
 dependency_roles:
   def-cm07-generalized-coordinates-and-forces: formulation-prerequisite
   def-cm07-action-and-mechanical-lagrangian: formulation-prerequisite
@@ -26,6 +26,9 @@ dependency_roles:
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   def-vector-valued-functions-limits-and-continuity: mathematical-premise
   def-interval: mathematical-premise
+  def-vector-valued-derivative-and-integral: mathematical-premise
+  lem-cm-positive-definite-matrix-square-roots: mathematical-premise
+  cor-real-spectral-theorem-for-self-adjoint-endomorphisms: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -51,10 +54,12 @@ $M\in M_{n}(\mathbb R)$, symmetric and positive definite, that is
 $M=M^{\mathsf T}$ and $v^{\mathsf T}Mv>0$ for every nonzero
 $v\in\mathbb R^{n}$ ([[def-matrix-product-and-identity-matrix]],
 [[def-euclidean-inner-product]]); a **stiffness matrix**
-$K\in M_{n}(\mathbb R)$, symmetric, $K=K^{\mathsf T}$; and, when the model is
-read as forced, an interval $I_{0}\subseteq\mathbb R$ with nonempty interior
+$K\in M_{n}(\mathbb R)$, symmetric, $K=K^{\mathsf T}$; and an interval $I_{0}\subseteq\mathbb R$ with nonempty interior
 ([[def-interval]]) together with a continuous **generalized force**
 $J:I_{0}\to\mathbb R^{n}$ ([[def-vector-valued-functions-limits-and-continuity]]).
+When no force or time interval is prescribed, take $I_0:=\mathbb R$ and
+$J(t):=0$ for every $t\in\mathbb R$; in particular this is the convention
+for the small-oscillation model in clause (d).
 The coordinates $q_{1},\dots,q_{n}$ of $\mathbb R^{n}$ are read in the chart
 in which the model is declared and carry declared dimensions
 $\gamma_{1},\dots,\gamma_{n}$ and units, and time is read in seconds and mass
@@ -76,13 +81,18 @@ $M$ and $K$ are model parameters, not measured quantities.
 $$q_i=Q_i/s_i,\qquad t=t_{\mathrm{phys}}/t_*,\qquad M_{ij}=\mathsf M_{ij}s_is_j/(e_*t_*^2),\qquad K_{ij}=\mathsf K_{ij}s_is_j/e_*,\qquad J_i=\mathsf J_i s_i/e_*.$$
 Then $Mq''+Kq=J$ is exactly the physical equation in these coefficients, $Q_i=s_iq_i$, $\dot Q_i=(s_i/t_*)q_i'$, and the physical energy is $e_*E$. This is an invertible choice of units, imposing no restriction on the dimensions $\gamma_i$. For a variable metric and potential the same convention means $U(q)=U_{\mathrm{phys}}(s_1q_1,\ldots,s_nq_n)/e_*$ and $M_{ij}(q)=\mathsf M_{ij}(s_1q_1,\ldots,s_nq_n)s_is_j/(e_*t_*^2)$. Congruence by the positive diagonal coordinate-scale matrix and multiplication by positive constants preserve symmetry, definiteness and critical-point type.
 
-**(b) Model equation, motions and phase system.** The equation of the model
+**(b) Model equation, motions and phase system.** On any interval with
+nonempty interior, $C^r$ for $r=1,2$ means that the first $r$ derivatives
+exist and are continuous on that interval, using the domain-relative
+derivative of [[def-vector-valued-derivative-and-integral]] at included
+endpoints; on open intervals this agrees with
+[[def-ck-euclidean-maps-and-diffeomorphisms]]. The equation of the model
 with data $(M,K,J)$ is
 
 $$M\,q''(t)+K\,q(t)=J(t)\qquad(t\in I_{0}).$$
 
 A **motion** of the model is a curve $q:J\to\mathbb R^{n}$ of class $C^{2}$
-([[def-ck-euclidean-maps-and-diffeomorphisms]]) on an interval
+on an interval
 $J\subseteq I_{0}$ with nonempty interior ([[def-interval]]) satisfying the
 equation for every $t\in J$. A **datum** at $t_{0}\in I_{0}$ is a pair
 $(q_{0},v_{0})\in\mathbb R^{n}\times\mathbb R^{n}$. The **phase system** of
@@ -135,7 +145,9 @@ model data to the equilibrium; the identification of the assigned model with
 the derivative of the mechanical field, and every statement about its motions,
 are separate results and are not asserted here.
 
-**(e) Modal vocabulary of the decoupling data.** All the following matrix operations use the fixed-unit numerical convention. By clauses 1-3 of [[lem-cm-positive-definite-matrix-square-roots]], $M^{1/2}$ and its inverse $M^{-1/2}$ exist and are symmetric positive definite. For every symmetric $K$, without a sign restriction, $S:=M^{-1/2}KM^{-1/2}$ is symmetric, since $S^{\mathsf T}=M^{-1/2}K^{\mathsf T}M^{-1/2}=S$. The [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]] therefore supplies an orthogonal $O$ and real diagonal $\Lambda=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)$ with $S=O\Lambda O^{\mathsf T}$. This construction includes negative eigenvalues; the restricted non-negative-$K$ result [[thm-cm-quadratic-mode-decomposition]] is used only in that restricted case. Define **modal coordinates** $z:=O^{\mathsf T}M^{1/2}q$ and **modal vectors** $u_i:=M^{-1/2}Oe_i$, the columns of the inverse transform $q=M^{-1/2}Oz$. The **modal stiffnesses** are the real numbers $\lambda_i$. Direct multiplication gives $Ku_i=\lambda_iMu_i$ and $u_i^{\mathsf T}Mu_j=\delta_{ij}$. In physical units put $a_*:=\sqrt{e_*}\,t_*$. A modal coordinate has unit $a_*$; the $j$-th component of a mass-normalized modal vector has unit $s_j/a_*$, and the physical coordinate is the sum of the physical modal-vector components times their modal amplitudes. The matrix entries of $O$ and its orthonormal eigenvectors are dimensionless numerical coefficients. The physical modal stiffness is $\lambda_i/t_*^2$; an oscillatory or hyperbolic coefficient has unit $a_*$, while the slope coefficient in a zero-mode family $a_i+b_it$ has unit $a_*/t_*$. The physical frequency is $\sqrt{\lambda_i}/t_*$ when $\lambda_i>0$.
+**(e) Modal vocabulary of the decoupling data.** All the following matrix operations use the fixed-unit numerical convention. By clauses 1-3 of [[lem-cm-positive-definite-matrix-square-roots]], $M^{1/2}$ and its inverse $M^{-1/2}$ exist and are symmetric positive definite. For every symmetric $K$, without a sign restriction, $S:=M^{-1/2}KM^{-1/2}$ is symmetric, since $S^{\mathsf T}=M^{-1/2}K^{\mathsf T}M^{-1/2}=S$. The [[cor-real-spectral-theorem-for-self-adjoint-endomorphisms]] therefore supplies an orthogonal $O$ and real diagonal $\Lambda=\operatorname{diag}(\lambda_1,\ldots,\lambda_n)$ with $S=O\Lambda O^{\mathsf T}$. This construction includes negative eigenvalues; the restricted non-negative-$K$ result [[thm-cm-quadratic-mode-decomposition]] is used only in that restricted case. Define **modal coordinates** $z:=O^{\mathsf T}M^{1/2}q$ and **modal vectors** $u_i:=M^{-1/2}Oe_i$, the columns of the inverse transform $q=M^{-1/2}Oz$. The **modal stiffnesses** are the real numbers $\lambda_i$. Direct multiplication gives $Ku_i=\lambda_iMu_i$ and $u_i^{\mathsf T}Mu_j=\delta_{ij}$. For the modal units here and in items using this convention, extend the dimension group of [[def-cm01-units]] clause (a) from $\mathbb Z^3$ to $D_{1/2}:=(\tfrac12\mathbb Z)^3$, with the same componentwise addition and negation for products and inverses. The inclusion $\mathbb Z^3\hookrightarrow D_{1/2}$ preserves every earlier dimension assignment. For $d=(a,b,c)\in D_{1/2}$ write its reference unit as $u_d:=\mathrm m^a\mathrm s^b\mathrm{kg}^c$; a quantity of dimension $d$ is a real multiple $x u_d$, and unit multiplication is $u_du_{d'}=u_{d+d'}$. Products, quotients, sums of equal dimension and derivatives retain the rules of [[def-cm01-units]] clause (b). For a positive quantity $X=xu_d$ with $x>0$ and $d\in\mathbb Z^3$, define $\sqrt X:=\sqrt x\,u_{d/2}$, using the positive real square root; this construction has dimension $d/2$ and square $X$. Only integer-dimensional positive quantities are square-rooted by this convention.
+
+In physical units put $a_*:=\sqrt{e_*}\,t_*$, of dimension $\mu^{1/2}\ell$ and SI unit $\mathrm{kg}^{1/2}\mathrm m$. A modal coordinate has unit $a_*$; the $j$-th component of a mass-normalized modal vector has unit $s_j/a_*$, and the physical coordinate is the sum of the physical modal-vector components times their modal amplitudes. The matrix entries of $O$ and its orthonormal eigenvectors are dimensionless numerical coefficients. The physical modal stiffness is $\lambda_i/t_*^2$; an oscillatory or hyperbolic coefficient has unit $a_*$, while the slope coefficient in a zero-mode family $a_i+b_it$ has unit $a_*/t_*$. The physical frequency is $\sqrt{\lambda_i}/t_*$ when $\lambda_i>0$.
 
 An index is **oscillatory** when $\lambda_i>0$, with numerical frequency $\omega_i:=\sqrt{\lambda_i}$; it is a **zero mode** when $\lambda_i=0$, and an **unstable (exponential) direction** when $\lambda_i<0$. Distinct indices are **degenerate** when their stiffnesses agree. For real $\lambda$ define the **modal eigenspace** $E_\lambda:=\ker(K-\lambda M)$. Its dimension is the multiplicity of $\lambda$, because $q\mapsto M^{1/2}q$ bijects it with the $\lambda$-eigenspace of $S$. The model is **oscillatory** when $K$ is non-negative. Indeed $x^{\mathsf T}Sx=(M^{-1/2}x)^{\mathsf T}K(M^{-1/2}x)$, so $K\ge0$ exactly when every $\lambda_i\ge0$; positive definiteness likewise corresponds to all $\lambda_i>0$. The zero-mode multiplicity is $\dim\ker K$. Frequencies are read in radians per unit time under [[def-cm01-units]].
 
@@ -154,10 +166,24 @@ recorded in the remarks.
 - **The one-dimensional instance.** For $n=1$ the data are $M=m>0$,
 $K=k\in\mathbb R$ and $J=f$, and the equation is $m\,x''+k\,x=f(t)$, which is
 exactly the forced scalar model $m\,x''+0\cdot x'+k\,x=f$ of
-[[def-cm-oscillator-model-and-phase-system]] with $c=0$; with $k>0$ and a
-constant, a vanishing or a sinusoidal generalized force it is the one-
-dimensional oscillator model of [[def-cm04-one-dimensional-models-and-equilibria]]
-clause (f). At a scalar strict minimum the small-oscillation stiffness is $U''(x_*)\ge0$; it is the harmonic model of [[post-cm04-harmonic-model]] when $U''(x_*)>0$, and the free zero-stiffness model when $U''(x_*)=0$. An isolated strict minimum can have zero Hessian (for example $U(x)=x^4$); the accuracy of
+[[def-cm-oscillator-model-and-phase-system]] with $c=0$. To identify this
+with the physical scalar class of
+[[def-cm04-one-dimensional-models-and-equilibria]] clause (f), require a
+length-valued position or displacement coordinate, $\gamma_1=\ell$, read
+in a fixed inertial frame, take configuration domain $Q=\mathbb R$, and
+restrict to an open time interval. Reconstructing dimensional data from
+clause (a), the scalar $\mathsf M$ is then a mass in kilograms,
+$\mathsf K$ a stiffness in newtons per metre, and $\mathsf J$ a force in
+newtons; the numerical SI coefficients correspond to that definition's
+$(m,0,k,f)$. In particular this includes $k>0$ and constant, vanishing or
+sinusoidal force. With this same length-coordinate identification, at a
+scalar strict minimum the small-oscillation stiffness is $U''(x_*)\ge0$;
+the free model is the harmonic model of [[post-cm04-harmonic-model]] when
+$U''(x_*)>0$, and the free zero-stiffness model when $U''(x_*)=0$.
+For an angular coordinate the dimensional $\mathsf M$ and $\mathsf J$
+instead have the units of rotational inertia and torque; the mathematical
+scalar equation still applies, but the physical mass-and-force
+identification requires a separately declared change to a length coordinate. An isolated strict minimum can have zero Hessian (for example $U(x)=x^4$); the accuracy of
 that approximation in time and amplitude is not part of the present item.
 
 - **Why "mass metric" and not "mass matrix".** The matrix $M$ is the value of

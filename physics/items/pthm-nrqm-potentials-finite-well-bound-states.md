@@ -44,7 +44,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 physical_scope: "The line model of the pair with the declared finite square well
-  potential of depth U and half-width a: self-adjointness and boundedness of the
+  potential of depth U and half-width a: self-adjointness and boundedness below of the
   assigned energy operator, the exact root conditions for its negative
   eigenvalues, the absence of eigenvalues outside the interval (-U,0), the
   simplicity and parity of the bound states, the bound-state count, and the
@@ -128,7 +128,7 @@ empirical result is asserted.
 
 [F2] **Model operator identification.** The line model's assigned energy operator with potential $V$ has domain $W^{2,2}(\mathbb R;\mathbb C)=H^{2}(\mathbb R;\mathbb C)$ and acts as $-\frac{\hbar^{2}}{2m}D^{2}+V$; the endpoint-independent multiplication identity $M_V=M_{V_0}$ therefore makes it exactly the operator $H$ of [F1] ([[lem-nrqm-potentials-free-operator-differential-identification]] clauses (a), (b), [[def-nrqm-potentials-one-dimensional-line-model]] clause (c)).
 
-[F3] **Energy observable and stationary reading.** $H_{\mathrm w}$ is an assigned sharp observable in the sense of clause (a) of [[def-nrqm-observables-framework-observable-and-outcome-law]], with the flow of P4 and reflection-positive position readings; a nonzero $\psi$ gives a stationary preparation exactly when $\psi$ is an eigenvector of $H_{\mathrm w}$, and the energy law of a unit eigenvector is the point mass at its eigenvalue ([[pthm-nrqm-potentials-line-model-energy-and-stationary-states]] clauses (a), (c); [[def-nrqm-autonomous-dynamics-framework-evolution]]).
+[F3] **Energy observable and stationary reading.** $H_{\mathrm w}$ is an assigned sharp observable in the sense of clause (a) of [[def-nrqm-observables-framework-observable-and-outcome-law]], with the flow of P4 and the declared position outcome law; a nonzero $\psi$ gives a stationary preparation exactly when $\psi$ is an eigenvector of $H_{\mathrm w}$, and the energy law of a unit eigenvector is the point mass at its eigenvalue ([[pthm-nrqm-potentials-line-model-energy-and-stationary-states]] clauses (a), (c); [[def-nrqm-autonomous-dynamics-framework-evolution]]).
 
 [F4] **Units.** Energy, potential and Hamiltonian eigenvalues are read in joules, position in metres and $\hbar$ in $\mathrm{J\,s}$; the energy unit joule is a declared unit for the spectral coordinate ([[def-nrqm-framework-quantities-and-units]] clauses (b), (c), (d)4).
 
@@ -148,12 +148,5 @@ empirical result is asserted.
 
 ## Remarks
 
-- **Boundedness below.** The lower bound $-U$ is read off from the absence of
-  eigenvalues below $-U$ together with the boundedness of the potential; it is
-  a bound for the model's energy and is not claimed to be attained by a
-  spectral value.
-- **What is not asserted.** The theorem does not compute the eigenvalues
-  numerically beyond their defining root conditions, does not compare them with
-  data, and does not claim that any material system realizes the square well.
-  The example page of the pair carries exact finite checks of the root
-  conditions and of the count.
+- **Boundedness below.** The quadratic-form bound $H_{\mathrm w}\ge -U I$ follows from $-U\le V\le0$ almost everywhere and $\langle H_{\mathrm w}\psi,\psi\rangle= \frac{\hbar^{2}}{2m}\|D\psi\|_{2}^{2}+\int V|\psi|^{2}$, or directly from [F1]. Absence of eigenvalues below $-U$ alone would not exclude continuous spectrum there. The lower bound is not claimed to be attained by a spectral value.
+- **What is not asserted.** The theorem does not compute the eigenvalues numerically beyond their defining root conditions, does not compare them with data, and does not claim that any material system realizes the square well. The example page of the pair carries exact finite checks of the root conditions and of the count.

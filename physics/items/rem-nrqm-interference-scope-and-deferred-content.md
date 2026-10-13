@@ -47,11 +47,14 @@ recorded-bin laws, the no-record mass and conditioned law, the reduction of
 indicator weights to ideal bins, and a sufficient condition for the recorded
 laws to coincide when the model is admissible at phase $0$.
 [[pthm-nrqm-interference-continuity-and-local-probability-balance]]
-derives the continuity equation and local probability balance for
+derives the continuity equation and local squared-amplitude balance for
 componentwise $C^1$-in-time, $C^2$-in-space solutions of the P4/P5 equation
-almost everywhere with the bounded measurable P5 potential, and global
-conservation on an interval under its explicit domination and surface-flux
-hypotheses; P4 separately gives norm conservation of the model's flow.
+almost everywhere with the bounded measurable P5 potential. This density is a
+position probability density when the full-space state is normalized; under
+the theorem's domination and surface-flux hypotheses its finite total
+squared-amplitude integral is conserved on an interval. P4 separately gives
+norm conservation of the model's flow and total probability one for unit
+preparations.
 [[texp-nrqm-interference-finite-sample-fringe-failure]] shows that, within the
 declared independent-trials model, a declared fringe criterion that rejects a
 positive-probability outcome sequence fails with positive probability, and

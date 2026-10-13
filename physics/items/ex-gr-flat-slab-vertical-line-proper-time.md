@@ -10,8 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice, def-gr-flat-minkowski-model-and-inertial-charts, def-gr-causal-curves-and-reachability, def-gr-timelike-worldline-and-proper-time, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-constant-component-chart-flatness, prop-coordinate-geodesic-equation]
+deps: [def-dependent-choice, def-countable-choice, thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice, def-gr-flat-minkowski-model-and-inertial-charts, def-gr-causal-curves-and-reachability, def-gr-timelike-worldline-and-proper-time, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-constant-component-chart-flatness, prop-coordinate-geodesic-equation]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice: mathematical-premise
   def-gr-flat-minkowski-model-and-inertial-charts: mathematical-premise
   def-gr-causal-curves-and-reachability: mathematical-premise
@@ -34,6 +36,10 @@ verification:
 
 ## Example
 
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the general absolutely continuous causal-curve
+conclusions used here.
+
 Let $(M,g,N)$ be the open flat slab $M=x^{-1}((0,1)\times\mathbb R^3)$ of
 [[thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice]] with restricted
 inertial chart $x=(x^0,z)$. Fix $z_0\in\mathbb R^3$ and let
@@ -47,16 +53,9 @@ equation is $\ddot y=0$.
 **(ii)** The affine separation and the Lorentzian length of the segment from
 $s_1$ to $s_2$, $0<s_1<s_2<1$, are
 $$\Delta s=s_2-s_1,\qquad L(\gamma|_{[s_1,s_2]})=\int_{s_1}^{s_2}\sqrt{-g(\gamma',\gamma')}\,ds=s_2-s_1;$$
-under the framework's SI length-coordinate convention
-[[def-gr-si-unit-and-coordinate-conventions]] clause (b), the coordinates
-$x^0=s$ and the affine parameter values $s_1,s_2$ are lengths in metres,
-while $c$ has units $\mathrm m\,\mathrm s^{-1}$; thus
-$(s_2-s_1)/c$ is a duration in seconds. If $\gamma$ is also interpreted as
-an ideal clock's worldline, the ideal-clock assumption of
-[[post-gr-ideal-clocks-and-free-fall]] clause (i) identifies that
-metric-defined proper-time increment with the clock-reading difference.
-This physical reading is conditional; the mathematical example alone asserts
-no clock reading.
+with the fixed mathematical scaling constant $c>0$ of
+[[def-gr-timelike-worldline-and-proper-time]], the metric-defined proper-time
+increment is $\tau(s_2)-\tau(s_1)=(s_2-s_1)/c$.
 
 **(iii)** The maximal domain of a geodesic with the data of $\gamma$ is
 exactly $(0,1)$; the image converges in the ambient affine space to the event
@@ -86,11 +85,25 @@ globally hyperbolic model.
 
 1.1 (The curve is a unit timelike geodesic.) Write $y(s):=(s,z_0)$ for the coordinate path of $\gamma$. Then $\dot y=(1,0,0,0)$ and $\ddot y=0$, so the geodesic equation holds by [L2] because the Christoffel symbols vanish; hence $\gamma$ is a geodesic with affine parameter $s$. Its tangent is $\gamma'(s)=\partial_0$, with $g(\gamma',\gamma')=\eta(\partial_0,\partial_0)=-1<0$ and $g(\gamma',N)=-1<0$; so it is future unit timelike and the chart geodesic equation is $\ddot y=0$. This is (i). [given, L1, L2]
 
-2.1 (Affine and length computations.) By step 1.1, $\sqrt{-g(\gamma',\gamma')}=1$ on $(0,1)$; the length of the segment over $[s_1,s_2]$ is therefore $\int_{s_1}^{s_2}1\,ds=s_2-s_1$, equal to the affine separation, and [L3] gives the metric-defined proper-time increment $(s_2-s_1)/c$. Under the SI interpretation stated in (ii), this has units seconds because $s_2-s_1$ is measured in metres and $c$ in $\mathrm m\,\mathrm s^{-1}$. If the curve is also an ideal-clock worldline, the separate postulate in (ii) identifies this duration with the difference in clock readings. This proves (ii). [step 1.1, given, L3]
+2.1 (Affine and length computations.) By step 1.1, $\sqrt{-g(\gamma',\gamma')}=1$ on $(0,1)$; the length of the segment over $[s_1,s_2]$ is therefore $\int_{s_1}^{s_2}1\,ds=s_2-s_1$, equal to the affine separation, and [L3] gives the metric-defined proper-time increment $(s_2-s_1)/c$. This proves (ii). [step 1.1, given, L3]
 
-3.1 (Maximal domain, limit point and conclusion.) By [L4] no geodesic of $M$ with the data of $\gamma$ extends the parameter interval beyond $(0,1)$, and $\gamma$ does not converge to a point of $M$ as $s\to1$: its coordinate $x^0(\gamma(s))=s$ tends to $1$, while every point of $M$ has $x^0\in(0,1)$. Hence $\gamma$, restricted to the maximal geodesic domain $(0,1)$, is future-inextendible in the sense of [[def-gr-causal-curves-and-reachability]] clause (d) and its affine parameter is bounded above; the slab is timelike geodesically incomplete. By [L4] the slice $\Sigma_{1/2}$ is a Cauchy hypersurface and the model is globally hyperbolic, which is (iii) and (iv). ∎ [step 1.1, step 2.1, given, L4]
+3.1 (Maximal domain, limit point and conclusion.) By [L4] no geodesic of $M$ with the data of $\gamma$ extends the parameter interval beyond $(0,1)$, and $\gamma$ does not converge to a point of $M$ as $s\to1$: its coordinate $x^0(\gamma(s))=s$ tends to $1$, while every point of $M$ has $x^0\in(0,1)$. Hence $\gamma$, restricted to the maximal geodesic domain $(0,1)$, is future-inextendible in the sense of [[def-gr-causal-curves-and-reachability]] clause (d) and its affine parameter is bounded above; the slab is timelike geodesically incomplete. By [L4] the slice $\Sigma_{1/2}$ is a Cauchy hypersurface and the model is globally hyperbolic, which is (iii) and (iv). [step 1.1, step 2.1, given, L4] ∎
 
 ## Remarks
 
-- **Numbers used.** The affine parameter interval has length $1$ in these coordinates; the value is a coordinate statement about the chart $x$ and changes under affine reparametrizations of $x^0$ by a constant factor, under which the incomplete/incomplete verdict is unchanged.
+- **Conditional physical interpretation.** Under the framework's SI length-coordinate convention
+[[def-gr-si-unit-and-coordinate-conventions]] clause (b), the coordinates
+$x^0=s$ and the affine parameter values $s_1,s_2$ are lengths in metres,
+while $c$ has units $\mathrm m\,\mathrm s^{-1}$; thus
+$(s_2-s_1)/c$ is a duration in seconds. If $\gamma$ is also interpreted as
+an ideal clock's worldline, the ideal-clock assumption of
+[[post-gr-ideal-clocks-and-free-fall]] clause (i) identifies that
+metric-defined proper-time increment with the clock-reading difference.
+This is contextual physical interpretation, outside the mathematical
+claims and their Verification. The postulate restricts it to ideal clocks in
+the smooth classical test-field regime without back-reaction; it asserts no
+real device is exactly ideal and reports no measured reading. The mathematical
+example itself supplies neither this assumption nor empirical evidence.
+
+- **Numbers used.** The affine parameter interval has length $1$ in these coordinates; the value is a coordinate statement about the chart $x$ and changes under affine reparametrizations of $x^0$ by a constant factor, under which the incompleteness verdict is unchanged.
 - **Not a singularity.** Curvature vanishes identically on the slab; the incompleteness is caused by the absent boundary of the region, not by curvature blow-up.

@@ -5,19 +5,22 @@ title: "Future sets, past sets, achronal boundaries and their elementary propert
 status: draft
 origin: session
 domain: mathematics
-dependency_level: 6
+dependency_level: 9
 provenance:
   statement: ai-altered
   proof: not-applicable
 proof_strategy: null
-deps: [def-gr-causal-curves-and-reachability, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-causal-curve-calculus, def-gr-smooth-lorentzian-objects]
+deps: [def-dependent-choice, def-countable-choice, def-gr-causal-curves-and-reachability, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-causal-curve-calculus, def-gr-smooth-lorentzian-objects, thm-gr-local-geodesics-and-exponential-map]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   def-gr-causal-curves-and-reachability: mathematical-premise
   def-gr-causal-conditions-and-global-hyperbolicity: mathematical-premise
   def-gr-spacelike-hypersurfaces-and-cauchy-sets: mathematical-premise
   lem-gr-causal-curve-calculus: mathematical-premise
   def-gr-smooth-lorentzian-objects: mathematical-premise
-justified_by: [lem-gr-convex-normal-causality]
+  thm-gr-local-geodesics-and-exponential-map: mathematical-premise
+justified_by: [lem-gr-convex-normal-causality, lem-gr-chronology-openness, lem-gr-push-up-rule]
 sources:
   references:
     - title: "E. Minguzzi, Lorentzian causality theory, Living Reviews in Relativity 22 (2019), article 3: future and past sets (Definition 2.83 printed p. 59), achronal boundaries (Definition 2.86 printed p. 60) and their elementary properties (Proposition 2.84 printed pp. 59-60)"
@@ -41,21 +44,38 @@ open in the manifold topology; for an open future set one has
 $F=I^+(F)$.
 
 **(b) Achronal boundary.** A set $A\subseteq M$ is an **achronal boundary**
-when $A=\partial F$ for a future set $F$; by (c) below this is equivalent to
-$A=\partial F$ for an open future set.
+when $A=\partial F$ for a future set $F$; this is equivalent to being the boundary of an open future set. Indeed,
+put $H:=I^+(F)$. Chronological openness makes $H$ open, and the future-set
+property gives $H\subseteq F$. Arbitrarily short future timelike segments
+from each $p\in F$ give $p\in\overline H$, so
+$\overline H=\overline F$. If $p\in\operatorname{Int}F$, a sufficiently
+short past timelike segment ending at $p$ starts inside $F$, hence
+$p\in H$; therefore $H=\operatorname{Int}F$. It follows that
+$\partial H=\overline H\setminus H=\overline F\setminus\operatorname{Int}F=\partial F$.
+The short segments and openness are supplied by
+[[thm-gr-local-geodesics-and-exponential-map]] and
+[[lem-gr-chronology-openness]].
+
+The derived elementary properties and boundary equivalence use
+Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) through the stated causal-calculus, chronology
+and push-up suppliers. The future/past-set predicates themselves are the
+set definitions above.
 
 **(c) Elementary properties.** The following are immediate from the
 openness of $I^\pm$ and the transitivity of $\ll$
-([[lem-gr-causal-curve-calculus]] clause (f)):
+([[lem-gr-chronology-openness]] clause (a),
+[[lem-gr-causal-curve-calculus]] clauses (d) and (f)):
 
 - if $F$ is a future set then its complement is a past set, and conversely;
 - $I^\pm(S)$, $J^\pm(S)$ and $\overline{J^\pm(S)}$ are future (respectively
   past) sets for every $S\subseteq M$;
 - if $F$ is a future set then $F$ is open if and only if $I^+(F)=F$, and
-  then $\partial F$ is achronal: if $p,q\in\partial F$ with $p\ll q$, then
-  $q\in I^+(p)\subseteq I^+(F)\subseteq F$, so $q$ is interior to $F$
-  (because $I^+(p)$ is open in $F$ through $q$), contradicting
-  $q\in\partial F$;
+  then $\partial F$ is achronal. Indeed, if $p,q\in\partial F$ and
+  $p\ll q$, openness of the chronological relation gives a neighborhood
+  $V$ of $p$ such that every $p'\in V$ satisfies $p'\ll q$. Since
+  $p\in\overline F$, choose $p'\in V\cap F$. The future-set property gives
+  $q\in I^+(F)\subseteq F$, contradicting $q\in\partial F$;
 - a set $S$ is achronal in the sense of
   [[def-gr-spacelike-hypersurfaces-and-cauchy-sets]] clause (b) if and only
   if $\overline S$ is achronal, because $I^\pm$ is open in its arguments.
@@ -67,9 +87,17 @@ interpretation here.
 
 ## Remarks
 
-- **Well-definedness.** No choice principle is used; the properties in (c)
-  are proved directly from the openness of $I^\pm$ and transitivity of
-  $\ll$ ([[lem-gr-causal-curve-calculus]]). The statement that achronal
+- **Well-definedness.** No choice principle beyond the stated assumptions is used. Transitivity proves the
+  future/past-set property for $I^\pm(S)$; the push-up rule supplies the
+  corresponding property for $J^\pm(S)$, and openness of chronology passes it
+  to their closures ([[lem-gr-causal-curve-calculus]],
+  [[lem-gr-push-up-rule]], [[lem-gr-chronology-openness]]). For the boundary
+  claim, the needed openness is in the first endpoint: if $p\ll q$, then
+  $I^-(q)$ is an open neighborhood of $p$, so it meets $F$ when
+  $p\in\partial F$. To show an open future set satisfies $F=I^+(F)$, choose
+  for each $p\in F$ a sufficiently short past timelike geodesic segment
+  ending at $p$ and contained in $F$ ([[thm-gr-local-geodesics-and-exponential-map]]).
+  The statement that achronal
   boundaries are locally Lipschitz graphs is not part of this definition;
   no regularity of achronal boundaries beyond closedness and achronality
   is asserted here.

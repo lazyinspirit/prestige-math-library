@@ -10,13 +10,16 @@ origin: session
 dependency_level: 9
 deps:
   [
+    def-adjoint-of-a-densely-defined-unbounded-operator,
     def-axiom-of-choice,
     def-countable-choice,
     def-nrqm-framework-quantities-and-units,
     def-nrqm-kinematics-framework-massive-spin-s-model,
     def-nrqm-observables-framework-observable-and-outcome-law,
     def-nrqm-state-geometry-framework-state-space,
+    def-symmetric-self-adjoint-and-essentially-self-adjoint,
     lem-nrqm-kinematics-componentwise-position-and-momentum,
+    post-nrqm-framework-autonomous-dynamics,
     post-nrqm-framework-identical-particles-and-spin,
     post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle,
     post-nrqm-framework-observable-and-probability,
@@ -25,13 +28,16 @@ deps:
     thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators
   ]
 dependency_roles:
+  def-adjoint-of-a-densely-defined-unbounded-operator: mathematical-premise
   def-axiom-of-choice: mathematical-premise
   def-countable-choice: mathematical-premise
   def-nrqm-framework-quantities-and-units: formulation-prerequisite
   def-nrqm-kinematics-framework-massive-spin-s-model: formulation-prerequisite
   def-nrqm-observables-framework-observable-and-outcome-law: formulation-prerequisite
   def-nrqm-state-geometry-framework-state-space: formulation-prerequisite
+  def-symmetric-self-adjoint-and-essentially-self-adjoint: mathematical-premise
   lem-nrqm-kinematics-componentwise-position-and-momentum: mathematical-premise
+  post-nrqm-framework-autonomous-dynamics: formulation-prerequisite
   post-nrqm-framework-identical-particles-and-spin: formulation-prerequisite
   post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle: formulation-prerequisite
   post-nrqm-framework-observable-and-probability: formulation-prerequisite
@@ -46,10 +52,12 @@ physical_scope: "The effective magnetic-moment coupling of the framework's
   real bounded measurable magnetic field profile and a declared real
   gyromagnetic parameter gamma_s: the magnetic moment mu = gamma_s S with unit J
   T^-1, the Zeeman energy operator H_Z on the domain of the free operator, its
-  units, and the status of gamma_s and of the field profile as empirical or
+  units and the autonomous unitary evolution assigned to it by P4, and the
+  status of gamma_s and of the static field profile as empirical or
   externally prescribed model inputs. The item asserts no Maxwell equation, no
   source model, no derivation of gamma_s from charge and mass, no spin-orbit or
-  relativistic correction, no dynamics and no measured value; it is a model
+  relativistic correction, no time-dependent or open-system dynamics and no
+  measured value; it is a model
   assumption adopted on this page only."
 sources:
   references:
@@ -112,9 +120,18 @@ $D(H_{Z}):=W^{2,2}(\mathbb R^{3};\mathbb C^{r})$, the domain of $H_{0}$
 $\sum_{k}P_{k}^{2}$ is the componentwise free operator with that domain by
 [[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]
 clause (b) applied to each component). The added term $M_{W}$ is bounded with
-$\|M_{W}\|\le|\gamma_{s}|\sum_{i}\|B_{i}\|_{\infty}\max_{i}\|S_{i}\|$, so
-$H_{Z}$ is a bounded self-adjoint perturbation of $H_{0}$ on the unchanged
-domain, with unit joule, and the assignment $t\mapsto e^{-itH_{Z}/\hbar}$ is
+$\|M_{W}\|\le|\gamma_{s}|\sum_{i}\|B_{i}\|_{\infty}\max_{i}\|S_{i}\|$;
+its matrix value is Hermitian almost everywhere since $B_i$ and
+$\gamma_s$ are real and each finite spin matrix is self-adjoint. Integrating
+the fibrewise inner-product identity gives $M_W^*=M_W$ on $H_s$.
+For completeness, if $y\in D((H_0+M_W)^*)$ and $z=(H_0+M_W)^*y$, then
+$\langle H_0x,y\rangle=\langle x,z-M_Wy\rangle$ for every $x\in D(H_0)$.
+Self-adjointness of $H_0$ gives $y\in D(H_0)$ and $H_0y=z-M_Wy$;
+the reverse adjoint inclusion follows from symmetry. Thus $H_Z=H_Z^*$
+on the unchanged domain
+([[def-adjoint-of-a-densely-defined-unbounded-operator]],
+[[def-symmetric-self-adjoint-and-essentially-self-adjoint]]), with unit
+joule, and the assignment $t\mapsto e^{-itH_{Z}/\hbar}$ is
 a strongly continuous one-parameter unitary group read in the
 autonomous-dynamics postulate P4
 ([[post-nrqm-framework-observable-and-probability]],

@@ -21,14 +21,14 @@ dependency_roles:
   def-gr-smooth-covariant-two-tensor-field: mathematical-premise
   def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
   pthm-gr-schwarzschild-vacuum-model: physical-result
-physical_scope: "Scope note for the spherical vacuum model page: it distinguishes the coordinate breakdown of the Schwarzschild chart at r = s from the curvature obstruction at r = 0 in the smooth model, records that the horizon is a smooth null hypersurface of the extension and Kruskal models with a one-way-membrane property, and states what is not claimed (maximality, geodesic completeness, singularity theorems, collapse and any observation). It asserts no physical fact about nature beyond the model-conditional statements of the cited items and reports no measurement."
+physical_scope: "Scope note for the spherical vacuum model page: it distinguishes the coordinate breakdown of the Schwarzschild chart at r = s from the curvature obstruction at r = 0 in the smooth model, records that the advanced-extension horizon is a smooth null hypersurface, that the Kruskal level r = s is the union of two smooth null hypersurfaces intersecting transversely at the bifurcation sphere (their union is not smooth there), and that the right-exterior future escape boundary is U = 0 with the stated one-way property, and states what is not claimed (maximality, geodesic completeness, singularity theorems, collapse and any observation). It asserts no physical fact about nature beyond the model-conditional statements of the cited items and reports no measurement."
 sources:
   references:
     - title: "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), sections 6.1.2-6.1.4: the coordinate breakdown at r = 2GM, the null character of the horizon, the Kruskal extension and the statement that r = 0 is a genuine singularity while r = 2GM is not, printed pp. 236-249 (PDF pp. 243-256)"
       url: "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
     - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 7 (7.74)-(7.85) and the singularity criterion: the Kruskal diagram, the event horizon as a null surface, the singularity at r = 0 diagnosed by curvature invariants, printed pp. 186-192 (PDF pp. 193-199)"
       url: "https://arxiv.org/pdf/gr-qc/9712019"
-    - title: "E. Minguzzi, Lorentzian causality theory, Living Reviews in Relativity 22 (2019), article 3: event horizons and trapped sets in the smooth Lorentzian setting, sections 4.1-4.2 printed pp. 106-118"
+    - title: "E. Minguzzi, Lorentzian causality theory, Living Reviews in Relativity 22 (2019), article 3, section 1 opening paragraph, printed p. 3: time-oriented Lorentzian spacetime, future causal cones and the C^2 metric convention ensuring continuous curvature; background regularity, not a Schwarzschild horizon identification"
       url: "https://inspirehep.net/files/7a575d682fd15aaad8463a778fac1609"
 ---
 
@@ -42,7 +42,7 @@ frame limit there in this chart. This is a statement about one component, not
 an invariant: the metric tensor is smooth and nondegenerate on $r>s$ and has
 the separate regular extension of [[lem-gr-schwarzschild-extension-chart]].
 
-## The horizon is a smooth null surface of the model
+## The advanced horizon and the two Kruskal null hypersurfaces
 
 [[lem-gr-schwarzschild-extension-chart]] constructs on
 $M_{\mathrm{ext}}=\mathbb R\times(0,\infty)\times S^2$ a smooth nondegenerate
@@ -50,11 +50,17 @@ Lorentzian metric $g_{\mathrm{ext}}$ whose restriction to $r>s$ is the exterior
 datum; the level set $r=s$ is a smooth null hypersurface with generator
 direction $\partial_v$, and the Ricci tensor and Kretschmann scalar of
 $g_{\mathrm{ext}}$ extend smoothly across it. In the Kruskal model
-([[def-gr-kruskal-model-data]], [[lem-gr-kruskal-model-properties]]) the same
-surface appears as the axes $U=0$ or $V=0$: both are null surfaces of the
-smooth metric $g_{\mathcal K}$, through which $r$ extends smoothly on all of
-$\mathcal K$, and the curvature invariant $12s^2/r^6$ equals $12/s^4$ there.
-The one-way character of the surface in the model is the exact statement of
+([[def-gr-kruskal-model-data]], [[lem-gr-kruskal-model-properties]]) the full level set $\{r=s\}$ is $\{UV=0\}=\{U=0\}\cup\{V=0\}$.
+Each axis times $S^2$ is a smooth hypersurface: $dU$ and $dV$ never vanish,
+and the inverse base matrix has $g^{UU}=g^{VV}=0$, so each has null normal
+covector. They intersect transversely at the **bifurcation sphere**
+$\{U=V=0\}\times S^2$. Their tangent spaces there together span the full
+four-dimensional tangent space, so their union cannot be a smooth
+three-dimensional hypersurface at that sphere. The function $r$ and metric
+remain smooth there; the curvature invariant is $12/s^4$ on both axes.
+For future escape to the right exterior, the boundary is specifically
+$\{U=0\}$, while $\{V=0\}$ is the past escape boundary. The one-way
+character in the model is the exact statement of
 [[lem-gr-kruskal-causal-escape-and-trapping]] clause (d): no future-directed
 causal curve issued at a point with $U\ge0$ reaches the quadrant
 $\{U<0,V>0\}$ with $r\to+\infty$, while every point with $U<0$ admits such a

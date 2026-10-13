@@ -1,0 +1,883 @@
+[
+  {
+    "order": 169,
+    "id": "qm-observables-and-born-probabilities",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Observables And Born Probabilities",
+    "companion": "qm-observables-and-born-probabilities-examples",
+    "requires": [
+      "qm-state-geometry",
+      "qm-math-composites",
+      "qm-framework-and-quantities",
+      "qm-math-fock-and-equilibrium",
+      "qm-math-magnetic-and-detection"
+    ],
+    "items": [
+      {
+        "id": "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Atoms of the spectral measure and eigenvalues of a self-adjoint operator",
+        "statement": "Assume the Axiom of Choice and the Axiom of Countable Choice ([[def-axiom-of-choice]], [[def-countable-choice]]). Let $H\\ne\\{0\\}$ be a complex Hilbert space ([[def-hilbert-space]]), let $A$ be a self-adjoint operator on $H$ with spectral projection-valued measure $E_A$ on the Borel $\\sigma$-algebra of $\\mathbb R$ ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[def-projection-valued-measure]]), and let $E_{A,x}(B):=\\langle E_A(B)x,x\\rangle$ be its scalar measures ([[lem-scalar-and-complex-measures-from-a-pvm]]). For $\\lambda\\in\\mathbb R$ say that $\\lambda$ is an **eigenvalue** of $A$ when $Ax=\\lambda x$ for some nonzero $x\\in D(A)$, the domain-restricted reading of [[def-eigenvalue-eigenvector-eigenspace-and-spectrum]]. Then:\n\n(a) The orthogonal projection $E_A(\\{\\lambda\\})$ is the projection of $H$ onto the eigenspace $\\ker(A-\\lambda)=\\{x\\in D(A):Ax=\\lambda x\\}$; in particular $E_A(\\{\\lambda\\})\\ne0$ if and only if $\\lambda$ is an eigenvalue of $A$.\n\n(b) For every density operator $\\rho$ on $H$, that is every self-adjoint positive trace-class $\\rho$ with $\\operatorname{tr}\\rho=1$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a)), the number $\\mu^{A}_{\\rho}(\\{\\lambda\\})=\\operatorname{tr}(\\rho E_{A}(\\{\\lambda\\}))$ is the weight that the scalar law $\\mu^{A}_{\\rho}$ assigns to the singleton $\\{\\lambda\\}$: it vanishes for every $\\rho$ whenever $\\lambda$ is not an eigenvalue of $A$, and it equals $1$ for the pure state $T_{u,u}$ of every unit eigenvector $u\\in\\ker(A-\\lambda)$.\n\n(c) If $A$ has no eigenvalues at all, then $\\mu^{A}_{\\rho}(\\{\\lambda\\})=0$ for every density operator $\\rho$ and every $\\lambda\\in\\mathbb R$: the scalar law of every state carries no point mass, while its values on general Borel sets remain $\\operatorname{tr}(\\rho E_{A}(B))$.\n\nClauses (a)-(c) are mathematical statements about $A$, $E_A$ and the density operators; no physical interpretation of $\\mu^{A}_{\\rho}$ is asserted here.",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum",
+          "def-hilbert-orthogonal-projection",
+          "def-hilbert-space",
+          "def-projection-valued-measure",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
+          "lem-scalar-and-complex-measures-from-a-pvm",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "thm-unbounded-borel-functional-calculus"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-eigenvalue-eigenvector-eigenspace-and-spectrum": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-orthogonal-projection-is-linear-self-adjoint-contractive": "mathematical-premise",
+          "lem-scalar-and-complex-measures-from-a-pvm": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "thm-unbounded-borel-functional-calculus": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 3.1, printed pages 88-95 (spectral projections, point spectrum and the scalar spectral measure)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.2.1, printed pages 67-70 (eigenfunctions and eigenvalues of observables; a continuous spectrum has no normalizable eigenfunction)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 3 'Linear Algebra: Vector Spaces and Operators', Sections 5-7, printed pages 18-28 (orthogonal projectors, adjoints and Hermitian operators)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/04b0570b349e84d74129eef504498472_MIT8_05F13_Chap_03.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Affinity and trace-norm continuity of the scalar spectral law",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]) and let $H$ be a nonzero complex Hilbert space ([[def-hilbert-space]]). Let $A$ be a self-adjoint operator on $H$ with spectral projection-valued measure $E_A$ ([[def-projection-valued-measure]]). For a self-adjoint trace-class operator $T$ on $H$ ([[def-trace-class-operator]], [[def-trace-of-a-trace-class-operator]]) and a Borel set $B\\subseteq\\mathbb R$ put\n$$\\Phi_T(B):=\\operatorname{tr}\\bigl(TE_A(B)\\bigr)\\in\\mathbb C .$$\nThen:\n\n(a) $|\\Phi_T(B)|\\le\\|T\\|_1$ for every Borel set $B$; the map $T\\mapsto\\Phi_T(B)$ is real-linear on the self-adjoint trace-class operators; and for every density operator $\\rho$ one has $0\\le\\Phi_\\rho(B)\\le1$, so that $\\mu^{A}_\\rho:=\\Phi_\\rho$ is a probability measure on the Borel sets with $\\mu^{A}_\\rho(\\mathbb R)=1$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (b)).\n\n(b) If $\\rho=\\sum_nw_n\\rho_n$ is a statistical mixture of density operators $\\rho_n$ with weights $w_n\\ge0$, $\\sum_nw_n=1$, the trace-norm convergent sum of [[lem-nrqm-state-geometry-density-set-convex-and-complete]], then for every Borel set $B$\n$$\\mu^{A}_{\\rho}(B)=\\sum_nw_n\\,\\mu^{A}_{\\rho_n}(B),$$\nthe series converging absolutely.\n\n(c) For density operators $\\rho,\\sigma$ one has\n$$\\sup\\{\\,|\\mu^{A}_{\\rho}(B)-\\mu^{A}_{\\sigma}(B)|:\\ B\\subseteq\\mathbb R\\ \\text{Borel}\\,\\}\\le\\|\\rho-\\sigma\\|_1,$$\nand if density operators $\\rho_k$ converge to $\\rho$ in trace norm, then $\\mu^{A}_{\\rho_k}(B)\\to\\mu^{A}_{\\rho}(B)$ uniformly over all Borel sets $B$.",
+        "strategy": "direct",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-projection-valued-measure",
+          "def-trace-class-operator",
+          "def-trace-of-a-trace-class-operator",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-state-geometry-density-set-convex-and-complete",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "thm-trace-is-absolutely-convergent-and-basis-independent"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-trace-class-operator": "mathematical-premise",
+          "def-trace-of-a-trace-class-operator": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-state-geometry-density-set-convex-and-complete": "mathematical-premise",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal": "mathematical-premise",
+          "thm-trace-is-absolutely-convergent-and-basis-independent": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 5,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Sections 3.1 and 6.3, printed pages 88-95 and 139-145 (traces, trace norm and generated probabilities from a projection-valued measure)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.3, printed pages 121-126 (the trace rule for mixtures of states)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-observables-moments-and-variance",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Mean, second moment and variance of the scalar spectral law",
+        "statement": "Assume the Axiom of Choice and the Axiom of Countable Choice ([[def-axiom-of-choice]], [[def-countable-choice]]). Let $H$ be a nonzero complex Hilbert space ([[def-hilbert-space]]) and let $A$ be a self-adjoint operator on $H$ with spectral projection-valued measure $E_A$ and scalar measures $E_{A,\\psi}(B)=\\langle E_A(B)\\psi,\\psi\\rangle$ ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[def-projection-valued-measure]], [[lem-scalar-and-complex-measures-from-a-pvm]]). For a unit vector $\\psi\\in H$ write $\\mu^{A}_{\\psi}:=\\mu^{A}_{T_{\\psi,\\psi}}$ for the scalar law of the pure state $T_{\\psi,\\psi}$ of [[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (b). Then:\n\n(a) **Second moment.** $\\int_{\\mathbb R}\\lambda^{2}\\,d\\mu^{A}_{\\psi}(\\lambda)=\\|A\\psi\\|^{2}$ if $\\psi\\in D(A)$, and the integral equals $+\\infty$ if $\\psi\\notin D(A)$; thus the second moment of the scalar law is finite exactly on $D(A)$.\n\n(b) **Mean.** $\\int_{\\mathbb R}|\\lambda|\\,d\\mu^{A}_{\\psi}(\\lambda)<\\infty$ if and only if $\\psi\\in D(|A|^{1/2})$; in that case the mean $m(\\psi):=\\int_{\\mathbb R}\\lambda\\,d\\mu^{A}_{\\psi}(\\lambda)$ is finite and real, and if $\\psi\\in D(A)$ then $m(\\psi)=\\langle A\\psi,\\psi\\rangle$.\n\n(c) **Variance.** If $\\psi\\in D(A)$ and $m:=\\langle A\\psi,\\psi\\rangle$, then\n$$\\int_{\\mathbb R}(\\lambda-m)^{2}\\,d\\mu^{A}_{\\psi}(\\lambda)=\\|A\\psi\\|^{2}-m^{2}=\\|(A-m)\\psi\\|^{2}\\ge0 ;$$\nif in addition $\\psi\\in D(A^{2})$, that is $\\psi\\in D(A)$ and $A\\psi\\in D(A)$, then $\\|(A-m)\\psi\\|^{2}=\\langle A^{2}\\psi,\\psi\\rangle-\\langle A\\psi,\\psi\\rangle^{2}$.\n\n(d) **States.** Let $\\rho$ be a density operator with expansion $\\rho=\\sum_nw_nT_{u_n,u_n}$, $w_n\\ge0$, $\\sum_nw_n=1$, $(u_n)$ orthonormal. In every weighted sum below, a term with $w_n=0$ is defined to be zero before any component integral is evaluated; equivalently, sum only over $n$ with $w_n>0$. This convention also applies to signed component means, which need not exist at zero-weight indices. Then for every Borel function $g\\ge0$\n$$\\int_{\\mathbb R}g\\,d\\mu^{A}_{\\rho}=\\sum_nw_n\\int_{\\mathbb R}g\\,dE_{A,u_n}\\in[0,\\infty],$$\nso the mean of $\\mu^{A}_{\\rho}$ is finite if and only if $\\sum_nw_n\\int|\\lambda|\\,dE_{A,u_n}<\\infty$, and then it equals $\\sum_nw_n\\int\\lambda\\,dE_{A,u_n}$. For the second moment, put $M_n:=\\int\\lambda^{2}\\,dE_{A,u_n}$, so $M_n=\\|Au_n\\|^{2}$ when $u_n\\in D(A)$ and $M_n=+\\infty$ otherwise; a zero weight contributes zero. Then $\\int\\lambda^{2}\\,d\\mu^{A}_{\\rho}=\\sum_nw_nM_n\\in[0,\\infty]$. It is finite exactly when every $u_n$ with $w_n>0$ lies in $D(A)$ and $\\sum_{n:w_n>0}w_n\\|Au_n\\|^{2}<\\infty$; componentwise domain membership alone does not ensure a finite second moment.",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-projection-valued-measure",
+          "def-self-adjoint-positive-unitary-and-normal-operator",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-scalar-and-complex-measures-from-a-pvm",
+          "thm-dominated-convergence",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "thm-unbounded-borel-functional-calculus"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-self-adjoint-positive-unitary-and-normal-operator": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-scalar-and-complex-measures-from-a-pvm": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "thm-unbounded-borel-functional-calculus": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1 and Chapter 3, printed pages 55-58 and 87-100 (expectation values, spectral measures and the domain criterion of the first moment)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.3.1, printed pages 79-81 (expectation values from the spectral decomposition and the position and momentum means)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 5 'Uncertainty Principle and Compatible Observables', Sections 1-3, printed pages 1-12 (expectation values, variances and their computation in finite and continuous examples)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/005979fa741c3ea2e0430456b70caf93_MIT8_05F13_Chap_05.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-observables-states-separated-by-bounded-projections",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Distinct density operators are separated by the law of a bounded rank-one projection",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]); the Axiom of Choice is used only where the spectral theorem for unbounded self-adjoint operators is invoked ([[def-axiom-of-choice]]). Let $H$ be a nonzero complex Hilbert space ([[def-hilbert-space]]) and let $\\rho,\\sigma$ be density operators on $H$ with $\\rho\\ne\\sigma$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a)). Then:\n\n(a) There is a unit vector $w\\in H$ with $\\langle\\rho w,w\\rangle\\ne\\langle\\sigma w,w\\rangle$.\n\n(b) For the rank-one orthogonal projection $P:=T_{w,w}$ of [[lem-nrqm-composites-rank-one-operator-calculus]] ([[def-hilbert-orthogonal-projection]]), whose spectral projection-valued measure assigns $P$ to the Borel set $\\{1\\}$, the two scalar laws of [[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (b) satisfy\n$$\\mu^{P}_{\\rho}(\\{1\\})=\\operatorname{tr}(\\rho P)=\\langle\\rho w,w\\rangle,\\qquad \\mu^{P}_{\\sigma}(\\{1\\})=\\operatorname{tr}(\\sigma P)=\\langle\\sigma w,w\\rangle,$$\nso the bounded sharp observable $P$ assigns different outcome probabilities to $\\rho$ and $\\sigma$.\n\n(c) For every unit vector $w$ and every self-adjoint trace-class $T$ one has $|\\operatorname{tr}(TT_{w,w})|\\le\\|T\\|_1$; in particular $|\\langle\\rho w,w\\rangle-\\langle\\sigma w,w\\rangle|\\le\\|\\rho-\\sigma\\|_1$.",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "def-hilbert-space",
+          "lem-norm-of-a-self-adjoint-operator-from-its-quadratic-form",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "lem-nrqm-state-geometry-ray-to-rank-one-projection",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal",
+          "thm-trace-is-absolutely-convergent-and-basis-independent"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "lem-norm-of-a-self-adjoint-operator-from-its-quadratic-form": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "lem-nrqm-state-geometry-ray-to-rank-one-projection": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "thm-trace-class-is-a-two-sided-banach-operator-ideal": "mathematical-premise",
+          "thm-trace-is-absolutely-convergent-and-basis-independent": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Sections 2.2 and 3.1, printed pages 58-67 and 88-95 (quadratic forms of self-adjoint operators, rank-one operators and their traces)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 2 (updated July 2015), Sections 2.2.1 and 2.3, printed pages 8-9 and 16-18 (the probability of an outcome as tr(rho P) and the Bloch-vector separation of qubit states)",
+              "url": "https://preskill.caltech.edu/ph219/chap2_15.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqm-observables-framework-observable-and-outcome-law",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Assigned sharp observables and the outcome law of the framework",
+        "statement": "**(a) Assigned sharp observables.** Adopt the observable and probability postulate [[post-nrqm-framework-observable-and-probability]] (P2) for a declared system whose state space is the model's [[def-nrqm-state-geometry-framework-state-space]]. An **assigned sharp observable** of the system is a pair $(A,u_A)$ consisting of a densely defined self-adjoint operator $A:D(A)\\subset H\\to H$ on the assigned Hilbert space $H$ ([[def-adjoint-of-a-densely-defined-unbounded-operator]], [[def-symmetric-self-adjoint-and-essentially-self-adjoint]], [[def-hilbert-space]]) and a **declared unit** $u_A$ in which the real spectral coordinate of $A$ is read, in the sense of [[def-nrqm-framework-quantities-and-units]]. The domain $D(A)$ is part of the assignment: symmetry on a smaller domain, or a formal differential expression, does not by itself supply an assigned observable ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]]). Whether a concrete laboratory quantity of a given apparatus is described by a particular pair $(A,u_A)$ is a tested identification with uncertainty under the preparation and apparatus postulate P7 and is not produced by this definition.\n\n**(b) Spectral measure and outcome law.** Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), the choice hypotheses of the cited spectral suppliers. The self-adjoint operator $A$ has a unique spectral projection-valued measure $E_A$ on the Borel $\\sigma$-algebra of $\\mathbb R$, with $D(A)=\\{x:\\int\\lambda^{2}\\,dE_{A,x}<\\infty\\}$ and $Ax=\\int\\lambda\\,dE_A(\\lambda)x$, where $E_{A,x}(B)=\\langle E_A(B)x,x\\rangle$ ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[def-projection-valued-measure]], [[def-borel-sigma-algebra]]). For a preparation $\\rho$, that is a state $\\rho\\in D(H)$ of [[def-nrqm-state-geometry-pure-mixed-states-and-purity]], the **outcome law** of the pair $(A,u_A)$ in the preparation $\\rho$ is the assignment\n$$\\mu^{A}_{\\rho}(B):=\\operatorname{tr}\\bigl(\\rho\\,E_A(B)\\bigr)\\qquad(B\\subseteq\\mathbb R\\ \\text{Borel}),$$\nthe reading of clause (ii) of P2; for the pure preparation $[\\psi]$ of a unit vector $\\psi$ it is $\\mu^{A}_{\\psi}(B)=\\|E_A(B)\\psi\\|^{2}$, which depends only on the ray by [[def-nrqm-state-geometry-state-vectors-and-rays]]. The law is a probability measure on the Borel sets by [[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (b), and it is affine in the preparation: for a statistical mixture $\\sum_nw_n\\rho_n$ one has $\\mu^{A}_{\\sum_nw_n\\rho_n}=\\sum_nw_n\\mu^{A}_{\\rho_n}$ by [[lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity]] clause (b).\n\n**(c) Outcome sets and exact values.** A declared finite-resolution outcome of the quantity is a Borel set $B$; its probability in the preparation $\\rho$ is $\\mu^{A}_{\\rho}(B)$, and a \"value in $B$\" is read only through this number. The reading of an **exact value** $\\lambda$ is the singleton $B=\\{\\lambda\\}$, with probability $\\mu^{A}_{\\rho}(\\{\\lambda\\})$; by [[lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues]] clauses (a) and (b) this number is zero for every preparation unless $\\lambda$ is an eigenvalue of $A$, and when $\\lambda$ is an eigenvalue it is the total weight of the eigenspace. In particular the model provides no normalizable eigenvector at a non-eigenvalue of $A$. If $A$ has no eigenvalues, every preparation has an atomless outcome law: each singleton has probability zero, while $\\mathbb R$ remains the outcome space and the law is concentrated on $\\sigma(A)$ as in clause (d). Zero singleton probability does not exclude real point values as realizations of this law; it supplies no normalized exact-value eigenstate. A finite-resolution record is read through its declared Borel bin, in the sense of clause (iii) of P2.\n\n**(d) Spectral support.** The outcomes of the observable lie in its spectrum: with $\\sigma(A)$ the spectrum of [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]], one has $\\mu^{A}_{\\rho}(B)=\\mu^{A}_{\\rho}(B\\cap\\sigma(A))$ and $\\mu^{A}_{\\rho}(\\sigma(A))=1$ for every preparation by [[lem-nrqm-observables-spectral-support-and-outcome-law]] clause (b). This is the precise reading of the statement that the result of a measurement lies in the spectrum of the observable.\n\n**(e) Moments.** The **mean** and the **variance** of the outcome law in a preparation are the numbers $\\int\\lambda\\,d\\mu^{A}_{\\rho}(\\lambda)$ and $\\int(\\lambda-m)^{2}\\,d\\mu^{A}_{\\rho}(\\lambda)$ with $m$ the mean, read in the declared unit $u_A$ and its square respectively; they exist only under the integrability hypotheses of [[lem-nrqm-observables-moments-and-variance]], which also supplies the formulas in terms of $A$ and the state. For a pure preparation of a unit vector $\\psi\\in D(A)$ the mean and the second moment are $\\langle A\\psi,\\psi\\rangle$ and $\\|A\\psi\\|^{2}$; membership of $\\psi$ in $D(A)$ or in $D(A^{2})$ is a genuine hypothesis and is not asserted for an arbitrary preparation.\n\n**(f) Unsharp finite outcomes are separate.** Clause (iv) of P2 permits a finite family of bounded effects $F_a$ with $0\\le F_a\\le I$ and $\\sum_aF_a=I$ and outcome probabilities $\\operatorname{tr}(\\rho F_a)$ as an operational description of a finite-resolution apparatus. That extension is tied to an apparatus instrument and is developed, together with state updates, on the measurement-and-instruments page; this definition fixes only the sharp outcome law of clause (b) and makes no claim that every laboratory procedure realizes it.\n\n**(g) Status.** Clauses (a)-(f) record the readings of P1 and P2 in the vocabulary of this page and fix the terminology used by the later pages of the category. They adopt no physical assumption beyond P1 and P2 and the choice hypotheses of the spectral theorem, assert no dynamics, no joint measurement of several observables, no detector realization and no empirical result, and make no claim that any physical system is exactly described by an assigned pair $(A,u_A)$. The additive additivity, support, atom and moment statements cited are mathematical consequences proved in the cited items; their physical reading is exactly the reading of P2 fixed here.",
+        "strategy": "n/a",
+        "deps": [
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-axiom-of-choice",
+          "def-borel-sigma-algebra",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "def-nrqm-state-geometry-state-vectors-and-rays",
+          "def-projection-valued-measure",
+          "def-resolvent-and-spectrum-of-a-closed-unbounded-operator",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-observables-moments-and-variance",
+          "lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues",
+          "lem-nrqm-observables-spectral-support-and-outcome-law",
+          "post-nrqm-framework-observable-and-probability",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators"
+        ],
+        "dependency_roles": {
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "def-nrqm-state-geometry-state-vectors-and-rays": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-resolvent-and-spectrum-of-a-closed-unbounded-operator": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-observables-moments-and-variance": "mathematical-premise",
+          "lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity": "mathematical-premise",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues": "mathematical-premise",
+          "lem-nrqm-observables-spectral-support-and-outcome-law": "mathematical-premise",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 7,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1 and Chapter 3, printed pages 55-58 and 87-100 (observables as self-adjoint operators, their spectral measures and expectation values)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 3.2-3.3, printed pages 65-84 (operators and observables, eigenfunctions, Hermitian operators, the measurement postulate and expectation values)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 4 'Dirac's Bra and Ket Notation', Sections 1-3, printed pages 1-15 (bras, kets, operator matrix elements and non-denumerable bases)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/4de6d044fa9d7e5b8998c5f8ca984a42_MIT8_05F13_Chap_04.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The observable and outcome-law vocabulary of the non-relativistic quantum framework: the reading of the observable and probability postulate P2 as assigned sharp self-adjoint quantities with a declared unit, their spectral projection-valued measures, the outcome law of a preparation, the spectral-support reading of outcome sets, the conditional readings of mean and variance, and the affinity of the law under statistical mixing. This item fixes terminology and readings only: it adopts no assumption beyond P1 and P2, asserts no detector or apparatus realization, makes no joint-measurement claim, records no empirical data, and excludes the finite unsharp-effect extension of P2(iv), which belongs to the measurement-and-instruments page."
+      },
+      {
+        "id": "pthm-nrqm-observables-born-outcome-law-properties",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "The Born outcome law: probability measure, mixtures, atoms and spectral support",
+        "statement": "Adopt the state and composition postulate [[post-nrqm-framework-state-and-composition]] (P1) and the observable and probability postulate [[post-nrqm-framework-observable-and-probability]] (P2), and assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), the choice hypotheses of the spectral suppliers. Let $H$ be the state space assigned to a declared system, let $(A,u_A)$ be an assigned sharp observable of the framework with spectral projection-valued measure $E_A$ and spectrum $\\sigma(A)$, and let $\\mu^{A}_{\\rho}$ be the outcome law of [[def-nrqm-observables-framework-observable-and-outcome-law]]. Then for every preparation $\\rho$ ([[def-nrqm-state-geometry-framework-state-space]]) and every Borel set $B\\subseteq\\mathbb R$:\n\n(a) **Probability measure.** $0\\le\\mu^{A}_{\\rho}(B)\\le1$ and $\\mu^{A}_{\\rho}(\\mathbb R)=1$; for pairwise disjoint Borel sets $B_n$ with union $B$ one has $\\mu^{A}_{\\rho}(B)=\\sum_n\\mu^{A}_{\\rho}(B_n)$; and for the pure preparation of a unit vector $\\psi$ the law is $\\mu^{A}_{\\psi}(B)=\\|E_A(B)\\psi\\|^{2}$. The declared outcome law of the model is therefore a probability measure on the Borel $\\sigma$-algebra of $\\mathbb R$, not a formal weight attached to eigenvectors.\n\n(b) **Mixtures.** If $\\rho=\\sum_nw_n\\rho_n$ is a statistical mixture of preparations with weights $w_n\\ge0$, $\\sum_nw_n=1$, then $\\mu^{A}_{\\rho}(B)=\\sum_nw_n\\mu^{A}_{\\rho_n}(B)$ for every Borel $B$, the series converging absolutely: the outcome law of a mixture is the weighted average of the outcome laws, with classical weights.\n\n(c) **Exact values.** For $\\lambda\\in\\mathbb R$ the probability of the exact value $\\lambda$ is $\\mu^{A}_{\\rho}(\\{\\lambda\\})=\\operatorname{tr}(\\rho E_A(\\{\\lambda\\}))$; it is zero for every preparation whenever $\\lambda$ is not an eigenvalue of $A$, and when $\\lambda$ is an eigenvalue it equals the trace weight of the eigenspace $\\ker(A-\\lambda)$, with $\\mu^{A}_{T_{u,u}}(\\{\\lambda\\})=1$ for every unit eigenvector $u$.\n\n(d) **Spectral support.** $\\mu^{A}_{\\rho}(B)=\\mu^{A}_{\\rho}(B\\cap\\sigma(A))$ and $\\mu^{A}_{\\rho}(\\sigma(A))=1$: outcomes outside the spectrum of the observable have probability zero.\n\n(e) **No density and no discreteness are asserted.** The postulate asserts that $\\mu^{A}_{\\rho}$ is a probability measure on the Borel sets and does not assert that it is a density with respect to Lebesgue measure or a finite or countable sum of point masses; the operational object named there is the probability of a declared Borel set, such as a finite-resolution bin, not the value of a density at a point ([[post-nrqm-framework-observable-and-probability]] clause (iii)). Which structure a particular pair $(A,\\rho)$ exhibits is a property of that pair and is not fixed by the adopted law.\n\n(f) **What is not claimed.** No mean, variance or higher moment is asserted by this item; their existence is conditional and is treated separately. No claim is made about the joint statistics of two or more observables, about the state after the outcome, about the physical mechanism producing an outcome, or about any concrete apparatus. The statement is conditional on P1 and P2 and on the cited mathematics.",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues",
+          "lem-nrqm-observables-spectral-support-and-outcome-law",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-state-and-composition",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity": "mathematical-premise",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues": "mathematical-premise",
+          "lem-nrqm-observables-spectral-support-and-outcome-law": "mathematical-premise",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 3.2.2-3.3.1, printed pages 71-81 (Hermitian operators; the measurement outcome lies in the spectrum; probabilities from eigenstate expansion and expectation values)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 2 'Spin One-half, Bras, Kets, and Operators', Sections 3-5, printed pages 7-18 (outcome probabilities from amplitudes and the idealized filter measurements), and Chapter 4, Section 2.1-2.2, printed pages 6-9 (projection operators)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/a56c316e4ec548d8bd0a554fac9a74e8_MIT8_05F13_Chap_02.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 1.4 and 6.3, printed pages 15-18 and 121-126 (ideal measurement; the trace rule for the probability of an outcome)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "Conditional consequences of the adopted observable and probability postulate P2 for the sharp observables of the framework: the outcome law of an assigned self-adjoint observable and preparation is a probability measure on the Borel sets; it is affine under statistical mixtures; it assigns zero to an exact value that is not an eigenvalue; it is supported in the spectrum of the observable; and it carries no claimed density. The item is conditional on P1 and P2 and on the choice hypotheses of the spectral theorem; it asserts nothing about concrete apparatuses, joint measurements, moments, state updates or empirical data."
+      },
+      {
+        "id": "pthm-nrqm-observables-preparation-moments",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Mean, second moment and variance of an assigned observable in a preparation",
+        "statement": "Adopt the postulates P1 and P2 ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-observable-and-probability]]) and assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). Let $(A,u_A)$ be an assigned sharp observable with outcome law $\\mu^{A}$ in the reading of [[def-nrqm-observables-framework-observable-and-outcome-law]], and let $\\rho$ be a preparation. Then:\n\n(a) **Pure preparations.** Let $\\rho=T_{\\psi,\\psi}$ be the pure preparation of a unit vector $\\psi\\in D(A)$. Then the mean of the outcome law exists and equals $\\langle A\\psi,\\psi\\rangle$, and the second moment exists and equals $\\|A\\psi\\|^{2}$:\n$$m(\\psi)=\\int_{\\mathbb R}\\lambda\\,d\\mu^{A}_{\\psi}(\\lambda)=\\langle A\\psi,\\psi\\rangle,\\qquad \\int_{\\mathbb R}\\lambda^{2}\\,d\\mu^{A}_{\\psi}(\\lambda)=\\|A\\psi\\|^{2},$$\nboth read in the powers of the declared unit $u_A$ of the observable. If $\\psi\\in D(A^{2})$, the variance is\n$$\\int_{\\mathbb R}\\bigl(\\lambda-m(\\psi)\\bigr)^{2}d\\mu^{A}_{\\psi}(\\lambda)=\\langle A^{2}\\psi,\\psi\\rangle-\\langle A\\psi,\\psi\\rangle^{2}.$$\n\n(b) **Variance and its hypotheses.** For every unit $\\psi\\in D(A)$ the variance exists and equals\n$$\\operatorname{Var}_{\\psi}(A)=\\|A\\psi\\|^{2}-\\langle A\\psi,\\psi\\rangle^{2}=\\bigl\\|(A-\\langle A\\psi,\\psi\\rangle I)\\psi\\bigr\\|^{2}\\ge0,$$\nwithout any hypothesis beyond $\\psi\\in D(A)$; no appeal to a discrete eigenbasis is made.\n\n(c) **Non-existence is possible.** The identities of (a) and (b) are conditional on membership of $\\psi$ in the stated domains. If $\\psi\\notin D(|A|^{1/2})$ then $\\int_{\\mathbb R}|\\lambda|\\,d\\mu^{A}_{\\psi}(\\lambda)=\\infty$, so the mean of the outcome law does not exist as a finite real number; the mean is finite exactly when $\\psi\\in D(|A|^{1/2})$, and then $\\psi$ need not lie in $D(A)$. If $\\psi\\notin D(A)$ then the second moment $\\int\\lambda^{2}\\,d\\mu^{A}_{\\psi}$ is infinite. In particular every preparation of the model is a unit ray or a density operator, and no preparation is equipped with finite moments automatically.\n\n(d) **Mixtures.** Let $\\rho=\\sum_nw_nT_{u_n,u_n}$ be a spectral expansion of a preparation, $w_n\\ge0$, $\\sum_nw_n=1$, $(u_n)$ orthonormal. In every weighted moment sum, zero-weight terms are defined to be zero before evaluating a component integral; equivalently, only positive-weight indices are summed. This applies also to component means that are undefined at zero-weight indices. Then the mean of $\\mu^{A}_{\\rho}$ is finite if and only if $\\sum_nw_n\\int|\\lambda|\\,dE_{A,u_n}<\\infty$, and then $\\int\\lambda\\,d\\mu^{A}_{\\rho}=\\sum_nw_n\\int\\lambda\\,dE_{A,u_n}$. For the second moment, put $M_n:=\\int\\lambda^{2}\\,dE_{A,u_n}$, so $M_n=\\|Au_n\\|^{2}$ for $u_n\\in D(A)$ and $M_n=+\\infty$ otherwise; a zero weight contributes zero. Then $\\int\\lambda^{2}\\,d\\mu^{A}_{\\rho}=\\sum_nw_nM_n\\in[0,\\infty]$, and it is finite exactly when every $u_n$ of positive weight lies in $D(A)$ and $\\sum_{n:w_n>0}w_n\\|Au_n\\|^{2}<\\infty$. Thus componentwise domain membership alone does not guarantee a finite mixed-state second moment. Whenever the mixture has a finite absolute first moment, the identity of clause (b) of [[pthm-nrqm-observables-born-outcome-law-properties]] gives its mean as the absolutely convergent weighted average of the component means.\n\n(e) **Status.** Clauses (a)-(d) are conditional consequences of P1 and P2 together with the mathematical moment results cited below; they assert no apparatus resolution, no measurement error, no disturbance and no empirical value. Whether a concrete preparation has a finite mean or variance for a concrete assigned observable is a question about the pair $(\\rho,A)$ and the tested identification of the observable, not a consequence of the framework's postulates alone.",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-observables-moments-and-variance",
+          "lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-state-and-composition",
+          "pthm-nrqm-observables-born-outcome-law-properties"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-observables-moments-and-variance": "mathematical-premise",
+          "lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity": "mathematical-premise",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "pthm-nrqm-observables-born-outcome-law-properties": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.3.1, printed pages 79-81 (expectation values from eigenfunction expansions and the position and momentum means)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1 and Section 3.1, printed pages 55-58 and 88-95 (expectation values, domains and the spectral form of moments)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 5 'Uncertainty Principle and Compatible Observables', Section 1, printed pages 1-6 (expectation values and variances as the spread of the outcome distribution)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/005979fa741c3ea2e0430456b70caf93_MIT8_05F13_Chap_05.pdf"
+            }
+          ]
+        },
+        "physical_scope": "Conditional statements, within the framework's observable and probability postulate, about the moments of an assigned sharp observable in a preparation. For a pure preparation represented by a unit vector \u03c8, the second moment is finite exactly when \u03c8 lies in D(A), the mean is finite exactly when \u03c8 lies in D(|A|^{1/2}), and for \u03c8 in D(A) the mean is the quadratic form and the variance is the squared norm of the centred vector. For a density-operator expansion \u03c1=\u03a3\u2099w\u2099T_{u\u2099,u\u2099}, the mean is finite exactly when \u03a3\u2099w\u2099\u222b|\u03bb|dE_{A,u\u2099}<\u221e, and the second moment is finite exactly when every positive-weight u\u2099 lies in D(A) and \u03a3_{n:w\u2099>0}w\u2099||Au\u2099||\u00b2<\u221e. A preparation need not have finite moments automatically. The item asserts no apparatus error, no disturbance and no empirical result."
+      },
+      {
+        "id": "pthm-nrqm-observables-position-and-momentum-outcome-laws",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Position and momentum outcome laws and the Born density of the massive particle model",
+        "statement": "Adopt the observable and probability postulate [[post-nrqm-framework-observable-and-probability]] (P2) and the kinematics and massive-particle model postulate [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]] (P5) for a spinless particle of mass $m>0$ and action constant $\\hbar>0$, with state space $H=L^{2}(\\mathbb R^{3};\\mathbb C)$ and position and momentum operators $Q_{j},P_{j}$ as in [[def-nrqm-magnetic-and-detection-position-and-momentum-operators]], and assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). Let $\\mathcal F_{2}$ be the unitary Plancherel transform with the convention $\\widehat f(\\xi)=\\int f(x)e^{-2\\pi ix\\cdot\\xi}dx$ on $L^{1}$ ([[def-fourier-transform-on-l-one-of-rn]], [[thm-plancherel]]), and for a unit vector $\\psi\\in H$ let $\\mu^{Q_{j}}_{\\psi}$ and $\\mu^{P_{j}}_{\\psi}$ be the outcome laws of the assigned observables $Q_{j}$ and $P_{j}$ in the reading of [[def-nrqm-observables-framework-observable-and-outcome-law]]. Then:\n\n(a) **Position observable.** $Q_{j}$ is self-adjoint with domain $D(Q_{j})=\\{\\psi\\in H:x_{j}\\psi\\in H\\}$, its spectral PVM is given by $E_{Q_{j}}(B)\\psi=\\mathbf 1_{x_{j}^{-1}(B)}\\psi$, and\n$$\\mu^{Q_{j}}_{\\psi}(B)=\\int_{x_{j}^{-1}(B)}|\\psi(x)|^{2}\\,dx\\qquad(B\\subseteq\\mathbb R\\ \\text{Borel}).$$\nThe law is absolutely continuous with respect to one-dimensional Lebesgue measure. Its density is the $L^{1}(\\mathbb R)$ equivalence class $f_{j}$ given for almost every $t$ by\n$$f_{j}(t):=\\int_{\\mathbb R^{2}}|\\psi(x_{\\perp},t)|^{2}\\,dx_{\\perp};$$\nthis class is independent of the chosen representative of $\\psi$ and is the $j$-th marginal density of $|\\psi|^{2}$. The law is atomless: $\\mu^{Q_{j}}_{\\psi}(\\{\\lambda\\})=0$ for every $\\lambda\\in\\mathbb R$. Moreover $\\sigma(Q_{j})=\\mathbb R$.\n\n(b) **Joint position law.** There is a unique regular projection-valued measure $G$ on the Borel $\\sigma$-algebra of $\\mathbb R^{3}$ with\n$$G(B_{1}\\times B_{2}\\times B_{3})=E_{Q_{1}}(B_{1})E_{Q_{2}}(B_{2})E_{Q_{3}}(B_{3})$$\nfor all Borel $B_{1},B_{2},B_{3}\\subseteq\\mathbb R$, and its scalar law in the preparation $\\psi$ is the measure of the density $|\\psi|^{2}$:\n$$\\mu^{G}_{\\psi}(B)=\\|G(B)\\psi\\|^{2}=\\int_{B}|\\psi(x)|^{2}\\,dx\\qquad(B\\subseteq\\mathbb R^{3}\\ \\text{Borel}).$$\nFor a density-operator preparation $\\rho=\\sum_nw_nT_{u_n,u_n}$, its joint scalar law is\n$$\\mu^{G}_{\\rho}(B):=\\operatorname{tr}(\\rho G(B))=\\sum_nw_n\\int_B|u_n(x)|^{2}\\,dx=\\int_Bf_{\\rho}(x)\\,dx,\\qquad f_{\\rho}(x):=\\sum_nw_n|u_n(x)|^{2},$$\nwhere $f_{\\rho}\\in L^{1}(\\mathbb R^{3})$ is a nonnegative density class of total integral $1$, by [F8] and Tonelli. Thus the model's joint position law in a spatial region $B$ has density $|\\psi|^{2}$ for a pure preparation and $f_{\\rho}$ for a density-operator preparation.\n\n(c) **Momentum observable.** $P_{j}$ is self-adjoint with domain $D(P_{j})=\\{\\psi\\in H:\\xi_{j}\\mathcal F_{2}\\psi\\in L^{2}\\}$ and Fourier representation $\\mathcal F_{2}(P_{j}\\psi)(\\xi)=2\\pi\\hbar\\,\\xi_{j}\\,\\mathcal F_{2}\\psi(\\xi)$; its spectral PVM is $E_{P_{j}}(B)=\\mathcal F_{2}^{-1}M_{\\mathbf 1_{m^{-1}(B)}}\\mathcal F_{2}$ with $m(\\xi)=2\\pi\\hbar\\xi_{j}$, and\n$$\\mu^{P_{j}}_{\\psi}(B)=\\int_{m^{-1}(B)}|\\mathcal F_{2}\\psi(\\xi)|^{2}\\,d\\xi,\\qquad m^{-1}(B)=\\{\\xi\\in\\mathbb R^{3}:2\\pi\\hbar\\xi_{j}\\in B\\}.$$\nThe law is absolutely continuous with respect to Lebesgue measure in the momentum variable $p$. Its density is the $L^{1}(\\mathbb R)$ equivalence class $g_{j}$ given for almost every $p$ by\n$$g_{j}(p)=\\frac{1}{2\\pi\\hbar}\\int_{\\mathbb R^{2}}\\bigl|\\mathcal F_{2}\\psi\\bigl(\\xi_{\\perp},\\tfrac{p}{2\\pi\\hbar}\\bigr)\\bigr|^{2}d\\xi_{\\perp}$$\nwhere the class is independent of the chosen representative of $\\mathcal F_{2}\\psi$. The law is atomless; moreover $\\sigma(P_{j})=\\mathbb R$.\n\n(d) **Exact values.** For every $\\lambda\\in\\mathbb R$ one has $\\mu^{Q_{j}}_{\\psi}(\\{\\lambda\\})=0$ and $\\mu^{P_{j}}_{\\psi}(\\{\\lambda\\})=0$ for every preparation, although both observables have spectrum $\\mathbb R$. This says that each coordinate law is atomless; it does not remove $\\mathbb R$ from the law's Borel outcome space. Finite-resolution readings are the Borel bin probabilities of (a)-(c).\n\n(e) **Scope.** The statement is conditional on P2, on the massive spinless model of P5 and on the cited mathematics. The componentwise extension to the spin-$s$ model is not proved here; no joint statistics of a position and a momentum observable, no dynamics and no apparatus or empirical claim are made. The identification of the operators $Q_{j},P_{j}$ with concrete laboratory position and momentum measurements is a tested identification under P7 and is not asserted by this item.",
+        "strategy": "direct",
+        "deps": [
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-fourier-transform-on-l-one-of-rn",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-projection-valued-measure",
+          "def-regular-borel-measure-on-an-lch-space",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint",
+          "lem-nrqm-observables-l2-multiplication-spectral-measure",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-observable-and-probability",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-plancherel",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-fourier-transform-on-l-one-of-rn": "mathematical-premise",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-regular-borel-measure-on-an-lch-space": "mathematical-premise",
+          "lem-finite-measure-uniqueness-on-a-pi-system": "mathematical-premise",
+          "lem-nrqm-composites-density-and-scalar-spectral-probability": "mathematical-premise",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint": "mathematical-premise",
+          "lem-nrqm-observables-l2-multiplication-spectral-measure": "mathematical-premise",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "prop-countable-subsets-of-rn-are-lebesgue-null": "mathematical-premise",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel": "mathematical-premise",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 1.1-1.2 and 3.2.1, printed pages 3-14 and 67-70 (the wave function and its probability density; momentum eigenstates, plane waves and the continuous spectrum)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.2 and Section 3.1, printed pages 58-69 and 88-95 (position and momentum operators, multiplication operators and their spectral measures)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 4 \"Dirac's Bra and Ket Notation\", Section 3, printed pages 11-15 (position and momentum states, their inner products and the interpretation of the wave function)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/4de6d044fa9d7e5b8998c5f8ca984a42_MIT8_05F13_Chap_04.pdf"
+            }
+          ]
+        },
+        "physical_scope": "Conditional consequences of the adopted observable and probability postulate for the spinless massive-particle model of the kinematics postulate: the position operators are self-adjoint with maximal domains and pure-preparation laws of density |\u03c8|\u00b2; their unique joint position PVM has density |\u03c8|\u00b2 for pure preparations and mixture density \u03a3\u2099w\u2099|u\u2099|\u00b2 for a density-operator preparation \u03c1=\u03a3\u2099w\u2099T_{u\u2099,u\u2099}; the momentum operators are self-adjoint with Fourier multipliers and pure-preparation laws of density |\u03c8-hat|\u00b2 in the momentum variable; exact values of each position and momentum coordinate have probability zero for every preparation although the spectra are all of R. The item is spinless, asserts no joint position-momentum statistics, no dynamics and no empirical result."
+      },
+      {
+        "id": "pthm-nrqm-observables-states-separated-by-born-statistics",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Distinct preparations are separated by the statistics of a bounded sharp observable",
+        "statement": "Adopt the state and composition postulate [[post-nrqm-framework-state-and-composition]] (P1) and the observable and probability postulate [[post-nrqm-framework-observable-and-probability]] (P2), and assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). Let $H$ be the state space assigned to a declared system and let $\\rho\\ne\\sigma$ be two preparations of the system in the sense of [[def-nrqm-state-geometry-framework-state-space]] clauses (a)-(c). Then there is a bounded sharp observable of the framework, namely an orthogonal projection $P$ of rank one, such that the outcome laws of [[def-nrqm-observables-framework-observable-and-outcome-law]] differ at the outcome set $\\{1\\}$:\n$$\\mu^{P}_{\\rho}(\\{1\\})=\\operatorname{tr}(\\rho P)\\ne\\operatorname{tr}(\\sigma P)=\\mu^{P}_{\\sigma}(\\{1\\}).$$\nMoreover for every rank-one projection $P$ one has $|\\mu^{P}_{\\rho}(\\{1\\})-\\mu^{P}_{\\sigma}(\\{1\\})|\\le\\|\\rho-\\sigma\\|_{1}$; consequently, if $\\mu^{P}_{\\rho}=\\mu^{P}_{\\sigma}$ for every bounded sharp observable $P$ (or merely for every rank-one projection), then $\\rho=\\sigma$.\n\nThe statement is conditional on P1 and P2 and asserts no procedure that determines a preparation from finitely many measurements, no apparatus realization, no error rate and no empirical result.",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-hilbert-orthogonal-projection",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-framework-state-space",
+          "lem-nrqm-observables-states-separated-by-bounded-projections",
+          "lem-orthogonal-projection-is-linear-self-adjoint-contractive",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-state-and-composition",
+          "pthm-nrqm-observables-born-outcome-law-properties"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-orthogonal-projection": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "lem-nrqm-observables-states-separated-by-bounded-projections": "mathematical-premise",
+          "lem-orthogonal-projection-is-linear-self-adjoint-contractive": "mathematical-premise",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "pthm-nrqm-observables-born-outcome-law-properties": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Preskill, Lecture Notes for Ph219/CS219: Quantum Information, Chapter 2 (updated July 2015), Sections 2.2.1, 2.3.2 and 2.6, printed pages 8-9, 21-23 and 36-39 (Bloch-vector determination of qubit states; statistics distinguishing states and the trace-distance notion)",
+              "url": "https://preskill.caltech.edu/ph219/chap2_15.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.3, printed pages 121-126 (the density operator and the trace rule, with distinct states having different statistics)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional separation statement for the framework's preparations: two distinct preparations of a declared system assign different probabilities to some outcome of some bounded sharp observable of the framework, namely to the outcome 1 of a rank-one orthogonal projection; the difference is bounded by the trace-norm distance of the two states. The item asserts no finite-measurement procedure that identifies a preparation, no apparatus realization and no empirical result; it concerns the model's state space under the state and observable postulates."
+      },
+      {
+        "id": "rem-nrqm-observables-scope-and-empirical-status",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "What the observable and Born-probability page adopts, proves and does not claim",
+        "statement": "**Adopted, not restated.** The physical content of this page is the observable and probability postulate P2 ([[post-nrqm-framework-observable-and-probability]]), read in the vocabulary of [[def-nrqm-observables-framework-observable-and-outcome-law]]: assigning to a declared system a self-adjoint operator with a declared unit, its spectral projection-valued measure, and the outcome law $\\mu^{A}_{\\rho}(B)=\\operatorname{tr}(\\rho E_A(B))$. The page adopts no further physical assumption; the choice hypotheses of the spectral theorem are carried explicitly, and the position and momentum statements are conditional on the massive-particle model postulate P5 as read through the magnetic-and-detection operator definitions.\n\n**What is proved.** [[lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues]] identifies the atoms of the spectral measure with the eigenspace projections, so that an exact value has zero probability unless it is an eigenvalue. [[lem-nrqm-observables-spectral-support-and-outcome-law]] identifies the support of the spectral measure with the spectrum, giving the precise reading of the statement that an outcome lies in the spectrum. [[lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity]] proves affinity under statistical mixtures and uniform trace-norm continuity. [[lem-nrqm-observables-moments-and-variance]] assembles the mean, second moment and variance formulas with their exact domain criteria, and [[lem-nrqm-observables-states-separated-by-bounded-projections]] proves that distinct states are separated by the law of a rank-one projection. The physics theorems read these results as conditional statements about assigned observables: [[pthm-nrqm-observables-born-outcome-law-properties]] (the law is a probability measure, affine in mixtures, atomic only at eigenvalues, supported in the spectrum and not assumed to have a density), [[pthm-nrqm-observables-preparation-moments]] (moments exist exactly under the stated domain hypotheses), [[pthm-nrqm-observables-position-and-momentum-outcome-laws]] (the position and momentum laws of the spinless massive model with densities $|\\psi|^{2}$ and $|\\mathcal F_2\\psi|^{2}$, and the joint position measure) and [[pthm-nrqm-observables-states-separated-by-born-statistics]] (distinct preparations differ in some bounded observable's statistics).\n\n**No complete eigenbasis.** Following the correction recorded in the source audit, the page never asserts that a general self-adjoint operator has a complete discrete system of eigenvectors. The spectral projection-valued measure replaces the eigenbasis; discrete sums are the special case of an atomic law, and continuous parts are handled through measures. The expectation formula $\\langle\\hat O\\rangle=\\langle\\psi,\\hat O\\psi\\rangle$ is proved here only for $\\psi$ in the domain of the operator and through the spectral integral, not through an assumed eigenfunction expansion.\n\n**What is not claimed.** No item of this page asserts an apparatus realization of any observable, a joint measurement of two observables, a state update after an outcome, a density for an arbitrary outcome law, the existence of a mean or variance for an arbitrary preparation, a measured value or a comparison with data. The finite unsharp-effect extension of P2(iv) and all instrument content belong to the measurement-and-instruments page, the componentwise spin extension of the position and momentum laws belongs to the kinematics page, and the identification of concrete laboratory procedures with assigned observables is a tested identification under P7, not a consequence of the postulates. Agreement of the conditional predictions with data would test the combined model and apparatus assumptions; it is not established or claimed here.\n",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "lem-nrqm-observables-moments-and-variance",
+          "lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues",
+          "lem-nrqm-observables-spectral-support-and-outcome-law",
+          "lem-nrqm-observables-states-separated-by-bounded-projections",
+          "post-nrqm-framework-observable-and-probability",
+          "pthm-nrqm-observables-born-outcome-law-properties",
+          "pthm-nrqm-observables-position-and-momentum-outcome-laws",
+          "pthm-nrqm-observables-preparation-moments",
+          "pthm-nrqm-observables-states-separated-by-born-statistics"
+        ],
+        "dependency_roles": {
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "lem-nrqm-observables-moments-and-variance": "mathematical-premise",
+          "lem-nrqm-observables-outcome-law-affinity-and-trace-norm-continuity": "mathematical-premise",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues": "mathematical-premise",
+          "lem-nrqm-observables-spectral-support-and-outcome-law": "mathematical-premise",
+          "lem-nrqm-observables-states-separated-by-bounded-projections": "mathematical-premise",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+          "pthm-nrqm-observables-born-outcome-law-properties": "physical-result",
+          "pthm-nrqm-observables-position-and-momentum-outcome-laws": "physical-result",
+          "pthm-nrqm-observables-preparation-moments": "physical-result",
+          "pthm-nrqm-observables-states-separated-by-born-statistics": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Sections 2.1 and 3.1, printed pages 55-58 and 87-95 (observables, expectation values and the spectral theorem as the replacement of a discrete eigenbasis)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 3.2.2 and 3.3, printed pages 71-84 (Hermitian operators, the outcome-in-the-spectrum statement and expectation values; the caveats about formal eigenfunction and eigenvector claims)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A scope audit of the observable and Born-probability page: it records that the page reads the observable and probability postulate P2 in observable vocabulary, proves conditional consequences about the probability law, its atoms, its support and its moments, and about position and momentum in the massive model, and asserts no empirical, apparatus, joint-measurement or state-determination claim. It proves nothing and reports no observation."
+      }
+    ]
+  },
+  {
+    "order": 170,
+    "id": "qm-observables-and-born-probabilities-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Observables And Born Probabilities \u2014 Examples",
+    "companion": "qm-observables-and-born-probabilities",
+    "requires": [
+      "qm-observables-and-born-probabilities",
+      "improper-and-parameter-dependent-multiple-integrals",
+      "qm-state-geometry",
+      "qm-math-composites",
+      "qm-math-magnetic-and-detection",
+      "qm-framework-and-quantities"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqm-observables-two-level-energy-readout",
+        "kind": "example",
+        "domain": "physics",
+        "title": "An exact two-level energy readout and its moments",
+        "statement": "Let $H=\\mathbb C^{2}$ carry the standard inner product $\\langle z,w\\rangle=z_{1}\\overline{w_{1}}+z_{2}\\overline{w_{2}}$ ([[def-inner-product-space]], [[def-hilbert-space]], [[cor-inner-product-induces-a-norm]], [[lem-complex-conjugation-and-modulus-laws]]), with orthonormal basis $e_{1}=(1,0)$, $e_{2}=(0,1)$. Fix two distinct energies $E_{1}\\ne E_{2}$ in joules (model parameters, not measured values), and consider the assigned sharp observable\n$$A:=E_{1}T_{e_{1},e_{1}}+E_{2}T_{e_{2},e_{2}},\\qquad u_{A}=\\mathrm J,$$\nwith $T_{u,v}x=\\langle x,v\\rangle u$ the rank-one calculus of [[lem-nrqm-composites-rank-one-operator-calculus]] ([[def-nrqm-observables-framework-observable-and-outcome-law]]). Then:\n\n(i) $A$ is bounded and self-adjoint with $D(A)=H$; its spectral projection-valued measure is\n$$E_{A}(B)=\\mathbf 1_{E_{1}\\in B}\\,T_{e_{1},e_{1}}+\\mathbf 1_{E_{2}\\in B}\\,T_{e_{2},e_{2}}\\qquad(B\\subseteq\\mathbb R\\ \\text{Borel}),$$\nso the spectrum is $\\sigma(A)=\\{E_{1},E_{2}\\}$ and every outcome lies in it.\n\n(ii) For the pure preparation of the unit vector $\\psi=c_{1}e_{1}+c_{2}e_{2}$, $|c_{1}|^{2}+|c_{2}|^{2}=1$, the outcome law is\n$$\\mu^{A}_{\\psi}(\\{E_{1}\\})=|c_{1}|^{2},\\qquad \\mu^{A}_{\\psi}(\\{E_{2}\\})=|c_{2}|^{2},\\qquad \\mu^{A}_{\\psi}(B)=\\sum_{i:E_{i}\\in B}|c_{i}|^{2},$$\nand for the mixed preparation $\\rho=w\\,T_{e_{1},e_{1}}+(1-w)T_{e_{2},e_{2}}$ with $0\\le w\\le1$ the law is $\\mu^{A}_{\\rho}(\\{E_{1}\\})=w$, $\\mu^{A}_{\\rho}(\\{E_{2}\\})=1-w$.\n\n(iii) With $p:=|c_{1}|^{2}$ and $q:=|c_{2}|^{2}=1-p$, the mean, second moment and variance of the pure preparation are\n$$\\langle E\\rangle_{\\psi}=E_{1}p+E_{2}q,\\qquad \\langle E^{2}\\rangle_{\\psi}=E_{1}^{2}p+E_{2}^{2}q,\\qquad \\operatorname{Var}_{\\psi}=pq\\,(E_{1}-E_{2})^{2},$$\nand for the mixture $pq$ is replaced by $w(1-w)$; all three numbers are finite and exact because $A$ is bounded.\n\nThe computation is a model-internal readout: the $E_{i}$ are parameters of the assigned observable, the probabilities are those of the framework's outcome law, and no laboratory measurement, apparatus or empirical value is asserted.",
+        "strategy": "direct",
+        "deps": [
+          "cor-inner-product-induces-a-norm",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-inner-product-space",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-nrqm-composites-rank-one-operator-calculus",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues",
+          "lem-nrqm-state-geometry-ray-to-rank-one-projection",
+          "pthm-nrqm-observables-born-outcome-law-properties",
+          "pthm-nrqm-observables-preparation-moments",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators"
+        ],
+        "dependency_roles": {
+          "cor-inner-product-induces-a-norm": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "lem-nrqm-composites-rank-one-operator-calculus": "mathematical-premise",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues": "mathematical-premise",
+          "lem-nrqm-state-geometry-ray-to-rank-one-projection": "mathematical-premise",
+          "pthm-nrqm-observables-born-outcome-law-properties": "physical-result",
+          "pthm-nrqm-observables-preparation-moments": "physical-result",
+          "thm-complex-spectral-theorem-for-normal-endomorphisms": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 7 'Two State Systems', Section 1, printed pages 1-6 (the two-state Hamiltonian with energies g_0 plus or minus g and its energy eigenstates)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/7c376a3b5b27e5ea586a7e37b85a05d3_MIT8_05F13_Chap_07.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 1.3.6 and 2.1, printed pages 13-14 and 17-21 (probabilities in a two-state space and the operator description of observables)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A finite, exact model computation in the two-level state space of the framework: the energy observable E_1 P_1 + E_2 P_2 for two distinct energies in joules, its spectral measure, the outcome probabilities of a pure and of a mixed preparation, and the mean, second moment and variance of the readout. The energies are model parameters; the item asserts no apparatus realization, no measurement statistics from a laboratory and no empirical value."
+      },
+      {
+        "id": "ex-nrqm-observables-position-bin-probabilities",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Position-bin probabilities of a Gaussian packet",
+        "statement": "Work in the spinless massive-particle model of P5, that is $H=L^{2}(\\mathbb R^{3};\\mathbb C)$ with position operators $Q_{j}$ ([[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]], [[def-nrqm-magnetic-and-detection-position-and-momentum-operators]]), fix a width $\\sigma>0$ in metres, and let\n$$\\psi_{\\sigma}(t):=(2\\pi\\sigma^{2})^{-1/4}e^{-t^{2}/(4\\sigma^{2})}\\qquad(t\\in\\mathbb R),$$\nthe **Gaussian packet** of width $\\sigma$. Let $\\varphi\\in L^{2}(\\mathbb R^{2};\\mathbb C)$ satisfy $\\int_{\\mathbb R^{2}}|\\varphi|^{2}=1$ and put\n$$\\psi(x):=\\psi_{\\sigma}(x_{1})\\,\\varphi(x_{2},x_{3})\\qquad(x\\in\\mathbb R^{3}),$$\nso that $\\psi\\in H$ is a unit vector and the preparation $[\\psi]$ is a state of the model. Then:\n\n(i) The probability that the first coordinate $Q_{1}$ lies in a Borel set $B\\subseteq\\mathbb R$ is\n$$\\mu^{Q_{1}}_{\\psi}(B)=\\int_{B}|\\psi_{\\sigma}(t)|^{2}\\,dt=\\frac{1}{\\sqrt{2\\pi\\sigma^{2}}}\\int_{B}e^{-t^{2}/(2\\sigma^{2})}\\,dt,$$\nindependently of the transverse factor $\\varphi$; the law has density $|\\psi_{\\sigma}|^{2}$ and $\\mu^{Q_{1}}_{\\psi}(\\mathbb R)=1$.\n\n(ii) For every $\\lambda\\in\\mathbb R$ the probability of the exact value $\\lambda$ is zero, $\\mu^{Q_{1}}_{\\psi}(\\{\\lambda\\})=0$, while for every $a<b$ the bin $(a,b]$ has positive probability with the explicit bounds\n$$\\frac{b-a}{\\sqrt{2\\pi\\sigma^{2}}}\\exp\\Bigl(-\\frac{\\max\\{|a|,|b|\\}^{2}}{2\\sigma^{2}}\\Bigr)\\le\\mu^{Q_{1}}_{\\psi}((a,b])\\le\\frac{b-a}{\\sqrt{2\\pi\\sigma^{2}}}.$$\nIn particular these bounds hold when $0\\le a<b$. In the symmetric case $a=-\\delta$, $b=\\delta$ with $\\delta>0$, the probability satisfies\n$$\\sqrt{\\frac{2}{\\pi e}}\\ \\le\\ \\mu^{Q_{1}}_{\\psi}((-\\sigma,\\sigma])\\ \\le\\ \\sqrt{\\frac{2}{\\pi}},\\qquad 0\\ <\\ \\mu^{Q_{1}}_{\\psi}((-\\delta,\\delta])\\ \\le\\ \\frac{2\\delta}{\\sqrt{2\\pi\\sigma^{2}}}.$$\nIn particular a single recorded event localized in a bin of positive length is possible in the model, while an event at an exact coordinate value has probability zero.\n\n(iii) For each $j\\in\\{1,2,3\\}$ the same formulas hold for $Q_j$ in the unit product preparation $\\psi^{(j)}(x):=\\psi_\\sigma(x_j)\\varphi(x_\\perp)$, where $x_\\perp$ lists the other two coordinates in increasing index order. For the original preparation $\\psi=\\psi^{(1)}$, the laws of $Q_2$ and $Q_3$ are the marginals of $|\\varphi|^2$ and need not be Gaussian. The width and bin endpoints are model parameters read in metres.\n\nThe computation is the framework's own outcome law applied to an explicit state; it records no measurement, no apparatus response and no empirical data.",
+        "strategy": "direct",
+        "deps": [
+          "cor-continuous-functions-are-borel-measurable",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-integral-over-a-measurable-set",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-nonnegative-lebesgue-integral",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "lem-complex-conjugation-and-modulus-laws",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "pthm-nrqm-observables-position-and-momentum-outcome-laws",
+          "thm-gaussian-integral",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "cor-continuous-functions-are-borel-measurable": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-l-p-space-as-a-quotient-by-null-functions": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "pthm-nrqm-observables-position-and-momentum-outcome-laws": "physical-result",
+          "thm-gaussian-integral": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 1.1-1.2 and 2.1.4, printed pages 3-10 and 26-30 (the probability density of the wave function; Gaussian wave packets and their properties)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 4 \"Dirac's Bra and Ket Notation\", Section 3, printed pages 11-15 (the position wave function as the component of the state along position states and the normalization of position amplitudes)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/4de6d044fa9d7e5b8998c5f8ca984a42_MIT8_05F13_Chap_04.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A finite model computation of position-bin probabilities in the spinless massive-particle model: for a normalized Gaussian packet in the first coordinate and an arbitrary normalized transverse factor, the probability that the first position coordinate lies in a Borel bin is the Gaussian integral over that bin, and the probability of an exact value is zero while every bin of positive length gets positive probability with the stated elementary bounds. The item is conditional on the model's postulates, uses no measured data and asserts no apparatus behaviour."
+      },
+      {
+        "id": "cex-nrqm-observables-plane-wave-is-not-a-preparation",
+        "kind": "counterexample",
+        "domain": "physics",
+        "title": "The plane wave and the point-localized delta are not preparations of the model",
+        "statement": "Adopt the state and composition postulate P1 and the massive-particle model postulate P5 of the framework ([[post-nrqm-framework-state-and-composition]], [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]). Then: **every** bounded smooth function $\\psi:\\mathbb R^{3}\\to\\mathbb C$ that solves the free time-independent Schr\u00f6dinger equation $-\\frac{\\hbar^{2}}{2m}\\Delta\\psi=E\\psi$ pointwise determines a pure preparation of the model with position density $|\\psi|^{2}$; in particular the plane wave $\\psi_{k}(x)=e^{ik\\cdot x}$ with $k\\ne0$ is a preparation with constant position density $|\\psi_{k}|^{2}=1$, and the point-localized object $\\delta^{3}(x-X)$ is the preparation of a particle exactly at $X$.\n\n**Point-localized symbol.** Here $\\delta^3(x-X)$ denotes the evaluation functional $\\delta_X:C_c(\\mathbb R^3;\\mathbb C)\\to\\mathbb C$, $\\delta_X(\\eta):=\\eta(X)$, where $C_c$ is the space of continuous complex functions with compact support. An $L^2$ representation would be a class $f$ with $\\int f(x)\\eta(x)\\,dx=\\eta(X)$ for every such $\\eta$; these integrals are defined by Cauchy\u2013Schwarz because $\\eta\\in L^2$.",
+        "strategy": "direct",
+        "deps": [
+          "ex-nrqm-observables-position-bin-probabilities",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-countable-choice",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-framework-state-space",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-state-and-composition",
+          "pthm-nrqm-observables-position-and-momentum-outcome-laws",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-eulers-formula",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "dependency_roles": {
+          "ex-nrqm-observables-position-bin-probabilities": "operational-prerequisite",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues": "mathematical-premise",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "pthm-nrqm-observables-position-and-momentum-outcome-laws": "physical-result",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "thm-eulers-formula": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.2.1, printed pages 67-70 (plane-wave and position eigenstates are not normalizable; the continuous spectrum has no normalizable eigenfunction)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 4 \"Dirac's Bra and Ket Notation\", Section 3, printed pages 11-13 (position states have infinite norm and are not allowed states; the position basis is an idealization)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/4de6d044fa9d7e5b8998c5f8ca984a42_MIT8_05F13_Chap_04.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A refutation, inside the framework's state assignment, of the informal claim that a free plane wave, or the point-localized distribution symbol delta(x minus X), is a preparation of the massive-particle model with the idealized position density one: the plane wave is not an element of the state space and the exact-position symbol is not an element of the state space either, while the model's own exact-position statement is that the probability of an exact value is zero and finite bins carry the probability. The item refutes that specific informal claim; it asserts no empirical result and no claim about approximation schemes in which such objects are formally useful."
+      },
+      {
+        "id": "ex-nrqm-observables-position-mean-without-variance",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A preparation with finite mean position and infinite variance",
+        "statement": "Work in the spinless massive-particle model of P5 with $H=L^{2}(\\mathbb R^{3};\\mathbb C)$ and position operator $Q_{1}$ ([[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]], [[def-nrqm-magnetic-and-detection-position-and-momentum-operators]]). Define the symmetric profile\n$$g_{0}(t):=\\begin{cases}1,&|t|\\le1,\\\\[2pt] |t|^{-3/2},&|t|>1,\\end{cases}\\qquad Z:=\\int_{\\mathbb R}|g_{0}(t)|^{2}dt,\\qquad g:=Z^{-1/2}g_{0},$$\nso that $g\\in L^{2}(\\mathbb R;\\mathbb C)$ has $\\|g\\|_{2}=1$; fix a unit vector $\\varphi\\in L^{2}(\\mathbb R^{2};\\mathbb C)$ and put $\\psi(x):=g(x_{1})\\varphi(x_{2},x_{3})$. Then $\\psi\\in H$ is a unit vector, $[\\psi]$ is a preparation, and for its position law $\\mu^{Q_{1}}_{\\psi}$ with density $|g|^{2}$:\n\n(i) The mean exists and equals $0$:\n$$\\int_{\\mathbb R}|t|\\,|g(t)|^{2}dt<\\infty,\\qquad \\int_{\\mathbb R}t\\,|g(t)|^{2}dt=0,$$\nand $\\psi\\in D(|Q_{1}|^{1/2})$ while $\\psi\\notin D(Q_{1})$.\n\n(ii) The second moment diverges, so the variance of the position law does not exist:\n$$\\int_{\\mathbb R}t^{2}\\,|g(t)|^{2}dt=+\\infty,\\qquad \\int_{\\mathbb R}\\bigl(t-0\\bigr)^{2}d\\mu^{Q_{1}}_{\\psi}(t)=+\\infty.$$\n\nThus a preparation of the model can have a finite mean position without a finite second moment: the moment identities of the framework are conditional on the domains, and a finite mean does not require membership in $D(Q_{1})$.\n\nThe example is a model computation; it asserts no measured value and no apparatus behaviour.",
+        "strategy": "direct",
+        "deps": [
+          "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-nonnegative-lebesgue-integral",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "lem-complex-conjugation-and-modulus-laws",
+          "lem-nrqm-observables-moments-and-variance",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "pthm-nrqm-observables-position-and-momentum-outcome-laws",
+          "pthm-nrqm-observables-preparation-moments",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-nonnegative-series-bounded-partial-sums",
+          "thm-p-series-real-exponents",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "cor-additivity-of-the-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "lem-complex-conjugation-and-modulus-laws": "mathematical-premise",
+          "lem-nrqm-observables-moments-and-variance": "mathematical-premise",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "pthm-nrqm-observables-position-and-momentum-outcome-laws": "physical-result",
+          "pthm-nrqm-observables-preparation-moments": "physical-result",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "thm-nonnegative-series-bounded-partial-sums": "mathematical-premise",
+          "thm-p-series-real-exponents": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 1.1 and Section 3.3.1, printed pages 3-5 and 79-81 (probability densities with power tails and expectation values that may fail to exist)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1 and Section 3.1, printed pages 55-58 and 88-95 (domains of operators and integrability conditions for expectation values)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A finite model computation in the spinless massive-particle model exhibiting a legitimate preparation whose position law has a finite mean but infinite second moment: the state is a product of a symmetric profile with a power tail in the first coordinate and an arbitrary normalized transverse factor, its first absolute moment is finite while its second moment diverges, so the mean position exists and the variance of the position law does not. The item asserts no apparatus behaviour, no measured value and no empirical claim; it is a demonstration of the domain hypotheses of the moment statements."
+      },
+      {
+        "id": "rem-nrqm-observables-examples-scope-limits",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "What the worked readouts of the companion page establish",
+        "statement": "**Finite energy readout.** [[ex-nrqm-observables-two-level-energy-readout]] computes, on the explicit two-dimensional state space, the spectral measure of the bounded observable $E_{1}P_{1}+E_{2}P_{2}$, the exact outcome probabilities of a pure and of a mixed preparation, and the mean, second moment and variance of the readout. The energies $E_{1}\\ne E_{2}$ are parameters of the assigned observable; the computation verifies the framework's law on finite data and asserts no apparatus realization, no measured level and no identification with a specific physical system.\n\n**Position bins.** [[ex-nrqm-observables-position-bin-probabilities]] computes the first-coordinate law of a normalized Gaussian packet in the model's state space, its exact-value probability zero and explicit elementary bounds on the probability of a bin of positive length. The computation verifies the Born density reading of the model on a normalizable state; it reports no counts, no detector response and no resolution, and its bounds are mathematical estimates rather than uncertainty statements about an experiment.\n\n**Distribution caveats.** [[cex-nrqm-observables-plane-wave-is-not-a-preparation]] refutes the informal claim that a free plane wave or a point-localized delta symbol is a preparation of the model: both fail to be elements of the state space, and the model's exact-position statement is that the probability of an exact value is zero. The refutation concerns the state assignment; it does not deny the usefulness of these objects as distributional idealizations, and it makes no claim about approximation schemes in which they are formally employed.\n\n**Domains of the moment statements.** [[ex-nrqm-observables-position-mean-without-variance]] exhibits a legitimate preparation whose position law has a finite mean and infinite second moment, so that the variance of the position law does not exist; the computation verifies that the domain hypotheses of the moment statements are genuine and not automatic. It asserts no measurement error, no disturbance and no apparatus behaviour.\n\n**Empirical neutrality.** None of the four items is an experiment. Each is a finite or asymptotic computation inside the model's state space and outcome law, or a refutation of an informal claim about that model; none records data, calibration, sampling, uncertainty or a comparison with observation. Agreement or disagreement with data would test the combined model and apparatus assumptions and is not established or claimed here.\n",
+        "strategy": "n/a",
+        "deps": [
+          "cex-nrqm-observables-plane-wave-is-not-a-preparation",
+          "ex-nrqm-observables-position-bin-probabilities",
+          "ex-nrqm-observables-position-mean-without-variance",
+          "ex-nrqm-observables-two-level-energy-readout"
+        ],
+        "dependency_roles": {
+          "cex-nrqm-observables-plane-wave-is-not-a-preparation": "operational-prerequisite",
+          "ex-nrqm-observables-position-bin-probabilities": "operational-prerequisite",
+          "ex-nrqm-observables-position-mean-without-variance": "operational-prerequisite",
+          "ex-nrqm-observables-two-level-energy-readout": "operational-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 1.1-1.2 and 3.2-3.3, printed pages 3-14 and 65-84 (probability densities, plane-wave caveats and expectation values)",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 1.3.6 and 6.3, printed pages 13-14 and 121-126 (two-state probabilities and the trace rule for mixed states)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A scope audit of the companion page of worked readouts: it records what each finite computation verifies inside the framework's outcome law and what none of them claims. It proves nothing, records no measurement and reports no observation."
+      }
+    ]
+  }
+]

@@ -7,11 +7,14 @@ title: "Real multiplication operators and free plus bounded-potential Schröding
 status: draft
 origin: pipeline
 dependency_level: 0
-deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-hilbert-space, thm-dominated-convergence, thm-plancherel, def-fourier-transform-on-l-one-of-rn, lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, def-sobolev-space-wkp-and-its-norm, thm-kato-rellich, def-relative-boundedness-with-respect-to-an-operator, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-schwartz-space-and-its-seminorms, def-countable-choice, def-axiom-of-choice]
+deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, thm-riesz-fischer-completeness-of-l-p, thm-dominated-convergence, thm-plancherel, def-fourier-transform-on-l-one-of-rn, lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, def-sobolev-space-wkp-and-its-norm, thm-kato-rellich, def-relative-boundedness-with-respect-to-an-operator, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-schwartz-space-and-its-seminorms, def-countable-choice, def-axiom-of-choice]
 dependency_roles:
   def-adjoint-of-a-densely-defined-unbounded-operator: mathematical-premise
   def-symmetric-self-adjoint-and-essentially-self-adjoint: mathematical-premise
   def-hilbert-space: mathematical-premise
+  def-l-p-space-as-a-quotient-by-null-functions: mathematical-premise
+  def-lebesgue-measure-and-the-lebesgue-sigma-algebra: mathematical-premise
+  thm-riesz-fischer-completeness-of-l-p: mathematical-premise
   thm-dominated-convergence: mathematical-premise
   thm-plancherel: mathematical-premise
   def-fourier-transform-on-l-one-of-rn: mathematical-premise
@@ -38,7 +41,7 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), let $d\ge1$ and work on $H=L^2(\mathbb R^d;\mathbb C)$ ([[def-hilbert-space]]).
+Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]), let $d\ge1$ and work on the complex Hilbert space $H=L^2(\mathbb R^d;\mathbb C)$, whose completeness follows from [[thm-riesz-fischer-completeness-of-l-p]] and whose Hilbert-space structure is defined in [[def-hilbert-space]].
 
 (a) For a real measurable finite-valued function $a:\mathbb R^d\to\mathbb R$ define $M_af:=af$ on $D(M_a):=\{f\in H: af\in H\}$. Then $M_a$ is a densely defined self-adjoint operator on $H$ ([[def-adjoint-of-a-densely-defined-unbounded-operator]], [[def-symmetric-self-adjoint-and-essentially-self-adjoint]]).
 
@@ -70,9 +73,11 @@ Then $H_0$ is self-adjoint, $D(H_0)$ coincides with the Sobolev space $W^{2,2}(\
 
 [F7] If $T$ is self-adjoint with spectral PVM $E$ and $U(t)=e^{itT}$, then $U$ is a strongly continuous one-parameter unitary group, $U(t)D(T)=D(T)$, and $\lim_{t\to0}\frac1t(U(t)\psi-\psi)$ exists exactly for $\psi\in D(T)$, where it equals $iT\psi$ ([[lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group]]).
 
+[F8] For Lebesgue measure and $p=2$, the quotient space $L^2(\mathbb R^d)$ is complete, so with its usual first-variable-linear inner product it is a complex Hilbert space ([[thm-riesz-fischer-completeness-of-l-p]], [[def-hilbert-space]]).
+
 ## Proof
 
-1.1 [Density and symmetry of the multiplier] For $f\in H$ and $n\ge1$ put $f_n:=f\mathbf 1_{\{|a|\le n\}}$. Then $af_n$ is bounded by $n|f_n|$, so $f_n\in D(M_a)$, and $f_n\to f$ in $H$ by [F1] applied to $|f_n-f|^2\le|f|^2$; hence $D(M_a)$ is dense. For $f,g\in D(M_a)$ the integral $\int af\overline g$ is defined and equals $\int f\overline{ag}$ because $a$ is real-valued, so $\langle M_af,g\rangle=\langle f,M_ag\rangle$: $M_a$ is symmetric. [given, F1, F2, algebra]
+1.1 [Density and symmetry of the multiplier] By [F8], the defined $L^2$ space $H$ is a complex Hilbert space. For $f\in H$ and $n\ge1$ put $f_n:=f\mathbf 1_{\{|a|\le n\}}$. Then $af_n$ is bounded by $n|f_n|$, so $f_n\in D(M_a)$, and $f_n\to f$ in $H$ by [F1] applied to $|f_n-f|^2\le|f|^2$; hence $D(M_a)$ is dense. For $f,g\in D(M_a)$ the integral $\int af\overline g$ is defined and equals $\int f\overline{ag}$ because $a$ is real-valued, so $\langle M_af,g\rangle=\langle f,M_ag\rangle$: $M_a$ is symmetric. [given, F1, F2, F8, algebra]
 
 2.1 [Adjoint domain of the multiplier] Let $g\in D(M_a^*)$ with representing vector $h=M_a^*g$, so $\int af\overline g=\int f\overline h$ for all $f\in D(M_a)$. Fix $n$ and restrict to $f\in H$ vanishing off $E_n:=\{|a|\le n\}$; every such $f$ lies in $D(M_a)$, and the identity reads $\int_{E_n}(a\overline g-\overline h)f=0$ for all $f\in L^2(E_n)$, so $h=ag$ a.e. on $E_n$; as $E_n\uparrow\mathbb R^d$, $h=ag$ a.e., and since $h\in H$, $ag\in H$ and $g\in D(M_a)$. Conversely every $g\in D(M_a)$ satisfies the adjoint identity with $h=M_ag$. Hence $D(M_a^*)=D(M_a)$ and $M_a^*=M_a$: $M_a$ is self-adjoint, giving (a). [step 1.1, F2, algebra]
 

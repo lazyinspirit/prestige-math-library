@@ -22,11 +22,11 @@ examples:
 This page collects the worked computations of
 [[gr-einstein-and-matter]] on the flat model: the metric density and current
 flux in the identity chart
-([[ex-gr-metric-volume-density-and-flux-in-flat-coordinates]]), the side flux
+([[ex-gr-metric-volume-density-and-flux-in-flat-coordinates]]), the pointwise face-flux density
 of a divergence-free current
 ([[ex-gr-flux-balance-for-a-divergence-free-current]]), a conserved and a
 nonconserved dust family ([[ex-gr-dust-conservation-in-flat-space]]), a
-scalar field with null gradient
+scalar field whose metric-dual gradient is null where nonzero and zero at critical points
 ([[ex-gr-null-gradient-scalar-field-conservation]]), the Killing current of a
 static dust congruence
 ([[ex-gr-killing-current-for-a-static-dust-in-flat-space]]) and the

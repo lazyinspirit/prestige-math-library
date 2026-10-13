@@ -54,7 +54,14 @@ Let $n\ge1$, let $\Omega\subseteq\mathbb R^n$ be open, let
 $M:\Omega\to M_n(\mathbb R)$ be a $C^2$ field of symmetric positive definite
 matrices, let $U:\Omega\to\mathbb R$ be of class $C^2$, and let $G$ be the
 mechanical vector field on the state domain $S_0:=\Omega\times\mathbb R^n$
-([[def-cm-mechanical-vector-field-and-energy-in-a-chart]]). This field is
+([[def-cm-mechanical-vector-field-and-energy-in-a-chart]]). Require the fixed
+numerical chart convention of
+[[def-cm16-stability-and-hyperbolicity-concepts]]: for declared positive
+component references $a_j$ and duration reference $t_{\rm ref}$, physical
+coordinates and velocities are $Q_j=a_jq_j$ and
+$V_j=(a_j/t_{\rm ref})v_j$, with physical time $t_{\rm phys}=t_{\rm ref}t$.
+All data $M,U,G$, balls, vector norms and induced operator norms below are
+in this dimensionless numerical state chart, so $q'=v$. This field is
 $C^1$, hence locally Lipschitz; let $\Phi$ be its local flow as defined in
 [[def-cm-local-flow-of-an-autonomous-system]], and write $z(t;a)$ for the
 maximal solution through $a\in S_0$. Fix a state $z_0=(q_0,v_0)\in S_0$, a time
@@ -96,7 +103,7 @@ and let $0<\rho<R-M_RT$ ([[def-metric-ball]],
    $z(\,\cdot\,;a)$ be the model's motion through $a$, and let $y$ solve the
    linearised equation $y'=Ay$, $y(0)=a-z_0$. Then
    $$\lVert z(t;a)-z_0-y(t)\rVert_2\le C\delta^2\int_0^t e^{\lVert A\rVert(t-s)}e^{2Ls}\,\mathrm ds \le C\delta^2\,t\,e^{(\lVert A\rVert+2L)t}\qquad(0\le t\le T).$$
-   under the supplier's interval, where $\lVert A\rVert$ is the operator norm
+   where $\lVert A\rVert$ is the operator norm
    ([[def-operator-norm]]).
 4. **(Scope.)** The linearised equation approximates the model's motion only
    for finite times and initial states inside the declared ball with the
@@ -109,10 +116,7 @@ and let $0<\rho<R-M_RT$ ([[def-metric-ball]],
 
 ## Facts & Assumptions
 
-**Given:** the chart data $M,U$ of class $C^2$, the associated field $G$ on
-$S_0=\Omega\times\mathbb R^n$, the state $z_0$, the numbers $T,R,\rho$ and
-(for clause 2) a constant metric $M$; (for clause 3) an equilibrium $z_0$,
-$A=DG(z_0)$ and the declared constants $C,L,r$ with the stated bounds.
+**Given:** the chart data $M,U$ of class $C^2$, the associated field $G$ on $S_0=\Omega\times\mathbb R^n$, the state $z_0$, the numbers $T,R,\rho$ and (for clause 2) a constant metric $M$; (for clause 3) an equilibrium $z_0$, $A=DG(z_0)$ and the declared constants $C,L,r$ with the stated bounds.
 
 [L1] Smooth dependence, the variational equation and Lipschitz bounds ([[thm-cm-smooth-dependence-and-the-variational-equation]]): for $F:U\to\mathbb R^n$ of class $C^1$ and $\overline B(a_0,R)\subseteq U$, $M:=\sup_{\overline B(a_0,R)}\lVert F\rVert_2$, $L:=\sup_{\overline B(a_0,R)}\lVert DF\rVert$ and $0<\rho<R-MT$, the maximal solution through $a\in\overline B(a_0,\rho)$ is defined on $[0,T]$, $\lVert x(t;a)-x(t;b)\rVert_2\le e^{Lt}\lVert a-b\rVert_2$, and $a\mapsto x(t;a)$ is differentiable with $D_ax(t;a)h=Y_a(t)h$, where $Y_a$ solves $Y'=DF(x(t;a))Y$, $Y(0)=I$.
 
@@ -124,9 +128,9 @@ $A=DG(z_0)$ and the declared constants $C,L,r$ with the stated bounds.
 
 **Proof technique:** direct.
 
-1.1 Clause 1: the field $G$ is of class $C^1$ on $S_0$, because $M$ is $C^2$ and $U$ is $C^2$ ([[def-cm-mechanical-vector-field-and-energy-in-a-chart]]); the numbers $M_R$ and $L_R$ are finite (continuous functions on the compact ball $\overline B(z_0,R)$). Apply [L1] with $F:=G$, $a_0:=z_0$, the given $R,T$ and $\rho$: every maximal solution through $a\in\overline B(z_0,\rho)$ is defined on $[0,T]$ and stays in $B(z_0,R)$, the Lipschitz bound $\lVert z(t;a)-z(t;b)\rVert_2\le e^{L_Rt}\lVert a-b\rVert_2$ holds, and $D_az(t;a)u=Y_a(t)u$ with $Y_a$ solving $Y'=DG(z(t;a))Y$, $Y(0)=I_{2n}$, which is exactly the variational equation along the model's motion through $a$. [given, L1, algebra]
+1.1 Clause 1: the numerical field $G$ is of class $C^1$ on $S_0$, because $M$ is $C^2$ and $U$ is $C^2$ ([[def-cm-mechanical-vector-field-and-energy-in-a-chart]]); $M_R$ and $L_R$ are finite by continuity on the compact ball $\overline B(z_0,R)$. Choose $\rho'$ with $\rho<\rho'<R-M_RT$ and apply [L1] with $F:=G$, $a_0:=z_0$, the given $R,T$ and radius $\rho'$. Every $a\in\overline B(z_0,\rho)$ lies in the supplier's open differentiability ball $B(z_0,\rho')$. Thus all these motions are defined on $[0,T]$ and stay in $B(z_0,R)$, the displayed Lipschitz bound holds, and their unique matrix solutions satisfy $Y'=DG(z(t;a))Y$, $Y(0)=I_{2n}$ and $D_az(t;a)u=Y_a(t)u$. This also justifies existence of $Y_a$ for initial states on the boundary of the smaller closed ball. [given, L1, choose, algebra]
 
-1.2 Clause 3: put $F(z):=G(z+z_0)$ on $\overline B(0,r)$; then $F$ is continuous and locally Lipschitz in the state (the standing regularity of $G$), $F(0)=G(z_0)=0$, $DF(0)=DG(z_0)=A$, and the declared bounds are exactly the hypotheses of [L3] for $F$ with the data $z_0$ replaced by $a-z_0$ of norm $\delta$: $\lVert F(\zeta)-A\zeta\rVert_2\le C\lVert\zeta\rVert_2^2$ and $\lVert F(\zeta)\rVert_2\le L\lVert\zeta\rVert_2$ for $\lVert\zeta\rVert_2\le r$. Applying [L3] to $F$ and translating by $z_0$ gives exactly the displayed bound for $\lVert z(t;a)-z_0-y(t)\rVert_2$ with $y'=Ay$, $y(0)=a-z_0$, on the supplier's interval. [given, L3, algebra]
+1.2 Clause 3: put $U_0:=S_0-z_0$, an open neighborhood of $0$ containing $\overline B(0,r)$, and define $F:U_0\to\mathbb R^{2n}$ by $F(\zeta):=G(z_0+\zeta)$. Then $F$ is continuous and locally Lipschitz in the state (the standing regularity of $G$), $F(0)=G(z_0)=0$, $DF(0)=DG(z_0)=A$, and the declared bounds are exactly the hypotheses of [L3] for $F$ with initial datum $a-z_0$ of norm $\delta$: $\lVert F(\zeta)-A\zeta\rVert_2\le C\lVert\zeta\rVert_2^2$ and $\lVert F(\zeta)\rVert_2\le L\lVert\zeta\rVert_2$ for $\lVert\zeta\rVert_2\le r$. Applying [L3] to $F$ and translating by $z_0$ gives exactly the displayed bound for $\lVert z(t;a)-z_0-y(t)\rVert_2$ with $y'=Ay$, $y(0)=a-z_0$, on the supplier's interval. [given, L3, algebra]
 
 2.1 Clause 2: with $M$ constant, $G(q,v)=(v,-M^{-1}\nabla U(q))$ ([[def-cm-mechanical-vector-field-and-energy-in-a-chart]]). By [L2], $\nabla U$ is differentiable with derivative $D^2U(q)$; hence $DG(q,v)(\delta q,\delta v)=(\delta v,-M^{-1}D^2U(q)\delta q)$. For the reference initial state $a$ of the Statement, write $Y_a=(Y_{a,q},Y_{a,v})$ in the variational equation of step 1.1. Then $Y_{a,q}'=Y_{a,v}$ and $Y_{a,v}'=-M^{-1}D^2U(q(t))Y_{a,q}$; eliminating the second block yields $M Y_{a,q}''=-D^2U(q(t))Y_{a,q}$, which is the displayed equation for $\eta=Y_{a,q}$, column by column. [step 1.1, given, L2, algebra]
 
@@ -138,4 +142,4 @@ $A=DG(z_0)$ and the declared constants $C,L,r$ with the stated bounds.
 
 - **Regularity.** $M$ of class $C^2$ and $U$ of class $C^2$ make $G$ of class $C^1$, which suffices for the variational equation. If $M$ is only continuous, the variational equation need not exist, and clause 1 is not available; the local Lipschitz regularity of the field alone still gives uniqueness of motions.
 
-- **Units.** $\lVert A\rVert$, $L_R$ and $L$ have dimension $\tau^{-1}$ and $C$ has dimension of inverse state-units times $\tau^{-1}$; the bound in clause 3 is dimensionally consistent because $C\delta^2$ has the dimension of a state rate times time ([[def-cm01-units]]).
+- **Units.** All constants and norms in the displayed estimates are numerical in the required chart. The physical rate constants corresponding to $\lVert A\rVert$, $L_R$, $L$ and $C$ are these numbers divided by $t_{\rm ref}$; each has dimension $\tau^{-1}$ relative to the dimensionless state norm. Thus the exponential arguments are dimensionless and clause 3 bounds a dimensionless state difference. A bound $b$ on that norm gives component error bounds $a_jb$ for $Q_j$ and $(a_j/t_{\rm ref})b$ for $V_j$, carrying their respective dimensions ([[def-cm01-units]]).

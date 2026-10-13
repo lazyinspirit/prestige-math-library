@@ -38,18 +38,19 @@ contrasts the undamped resonant and off-resonant cases; the counterexample
 ([[cex-cm04-undamped-resonance-with-bounded-drive-is-unbounded]]) uses the
 same model at $c=0$ to refute the unqualified claim that a bounded drive
 forces bounded motions: the bounded drive $\cos t$ coexists with the
-unbounded motion $t\sin t/2$, and every motion is unbounded, while the
+unbounded motion $t\sin t/2$, and every maximal motion on $\mathbb R$ is
+unbounded on $[0,\infty)$, while the
 strictly damped and undamped off-resonant parameter values remain bounded.
 
 The pendulum check ([[ex-cm04-pendulum-small-angle-check]]) declares the
-ideal planar pendulum as an effective one-dimensional model with effective
-mass $ml^{2}$ and force $-mgl\sin\theta$, verifies its potential
+ideal planar pendulum as an effective angular chart model with generalized
+inertia $ml^{2}$ and torque $-mgl\sin\theta$, verifies its potential
 presentation and the strict minimum at $\theta=0$, applies the generic mathematical chart stability and
 linearisation suppliers to obtain the stable hanging rest point and the
 small-angle frequency $\sqrt{g/l}$, and transports the source-supported
 finite-time error bound of
 [[prop-cm-pendulum-small-angle-linearization-bound]] with its explicit
 numbers at $g=1\,\mathrm{m/s^2}$, $l=1\,\mathrm m$ and normalized initial phase norm $1/100$ on a one-second horizon; it closes by exhibiting the non-conservation of the
-harmonic energy along the exact motion, so the exact pendulum is not the
+quadratic energy of the linearization along the exact motion, so the exact pendulum is not the
 harmonic model.
 

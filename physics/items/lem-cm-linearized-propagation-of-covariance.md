@@ -5,7 +5,7 @@ title: "The covariance of the linearization is $A\\Sigma A^{\\mathsf T}$"
 status: draft
 origin: pipeline
 domain: mathematics
-deps: [cor-expectation-linearity-monotonicity-and-modulus-bound, def-cm-covariance-matrix-of-a-random-vector, def-jacobian-matrix-and-gradient, def-matrix-space, def-measurable-function-between-measurable-spaces, def-random-element-and-real-random-variable, def-total-derivative-in-euclidean-space, lem-variance-and-covariance-identities-for-random-variables, prop-closure-properties-of-measurable-functions-used-by-the-integral, thm-continuous-preimages-of-borel-sets-are-borel, thm-coordinatewise-measurability-into-r-n, thm-matrix-multiplication-laws]
+deps: [cor-expectation-linearity-monotonicity-and-modulus-bound, def-cm-covariance-matrix-of-a-random-vector, def-jacobian-matrix-and-gradient, def-matrix-space, def-measurable-function-between-measurable-spaces, def-random-element-and-real-random-variable, def-total-derivative-in-euclidean-space, lem-variance-and-covariance-identities-for-random-variables, prop-closure-properties-of-measurable-functions-used-by-the-integral, thm-cauchy-schwarz-in-an-inner-product-space, thm-continuous-preimages-of-borel-sets-are-borel, thm-coordinatewise-measurability-into-r-n, thm-matrix-multiplication-laws]
 dependency_roles:
   cor-expectation-linearity-monotonicity-and-modulus-bound: mathematical-premise
   def-cm-covariance-matrix-of-a-random-vector: mathematical-premise
@@ -16,6 +16,7 @@ dependency_roles:
   def-total-derivative-in-euclidean-space: mathematical-premise
   lem-variance-and-covariance-identities-for-random-variables: mathematical-premise
   prop-closure-properties-of-measurable-functions-used-by-the-integral: mathematical-premise
+  thm-cauchy-schwarz-in-an-inner-product-space: mathematical-premise
   thm-continuous-preimages-of-borel-sets-are-borel: mathematical-premise
   thm-coordinatewise-measurability-into-r-n: mathematical-premise
   thm-matrix-multiplication-laws: mathematical-premise
@@ -52,10 +53,11 @@ Then $T\circ X$ is a random element of $\mathbb R^d$, its mean vector is
 $$E\bigl[T(X)\bigr]=h(\mu),$$
 and its covariance matrix is
 $$\operatorname{Cov}\bigl(T(X)\bigr)=A\Sigma A^{\mathsf T},$$
-where $A$ is identified with its Jacobian matrix
-$\bigl(\partial_jh_i(\mu)\bigr)_{i,j}$ and $A\Sigma A^{\mathsf T}$ is the
-matrix product of [[thm-matrix-multiplication-laws]] in the matrix space of
-[[def-matrix-space]].
+where, in the one-based statistical coordinate notation of
+[[def-cm-covariance-matrix-of-a-random-vector]],
+$$A_{ij}:=\partial_{j-1}h_{i-1}(\mu),\qquad 1\le i\le d,\quad1\le j\le m,$$
+and $A\Sigma A^{\mathsf T}$ is the matrix product of
+[[thm-matrix-multiplication-laws]] in the matrix space of [[def-matrix-space]].
 
 ## Facts & Assumptions
 
@@ -67,15 +69,17 @@ matrix product of [[thm-matrix-multiplication-laws]] in the matrix space of
 
 [L3] Covariance is symmetric and bilinear on finite linear combinations of square-integrable real random variables: for finite families $(U_i)$, $(V_j)$ and real scalars, $\operatorname{Cov}\bigl(\sum_ia_iU_i,\sum_jb_jV_j\bigr)=\sum_{i,j}a_ib_j\operatorname{Cov}(U_i,V_j)$, and covariance with a constant is zero. ([[lem-variance-and-covariance-identities-for-random-variables]])
 
-[L4] A map into $\mathbb R^d$ is measurable exactly when its coordinates are, and sums of measurable real-valued functions are measurable. ([[thm-coordinatewise-measurability-into-r-n]], [[prop-closure-properties-of-measurable-functions-used-by-the-integral]])
+[L4] Each coordinate projection on $U\subseteq\mathbb R^m$ is continuous, hence has Borel preimages of Borel sets; finite sums and scalar multiples of measurable real-valued functions are measurable, and a map into $\mathbb R^d$ is measurable exactly when its coordinates are. ([[thm-continuous-preimages-of-borel-sets-are-borel]], [[prop-closure-properties-of-measurable-functions-used-by-the-integral]], [[thm-coordinatewise-measurability-into-r-n]])
 
 [L5] $(Av)_i=\sum_{j=1}^{m}a_{ij}v_j$ and $\bigl(A\Sigma A^{\mathsf T}\bigr)_{ij}=\sum_{k,l=1}^{m}a_{ik}a_{jl}\Sigma_{kl}$ in the matrix space. ([[def-jacobian-matrix-and-gradient]], [[def-matrix-space]], [[thm-matrix-multiplication-laws]])
+
+[L6] For vectors $u,v$ in a real inner-product space, $|\langle u,v\rangle|\le\|u\|\,\|v\|$. ([[thm-cauchy-schwarz-in-an-inner-product-space]])
 
 ## Proof
 
 **Proof technique:** direct coordinatewise computation.
 
-1.1 For each $i$ the real-valued function $x\mapsto h_i(\mu)+\sum_{j=1}^{m}a_{ij}(x_j-\mu_j)$ is Borel measurable on $U$ by [L4], and each coordinate $X_j$ is a random variable, so $T_i(X)=h_i(\mu)+\sum_{j=1}^{m}a_{ij}(X_j-\mu_j)$ is measurable; moreover it is integrable as a finite linear combination of the integrable variables $1$ and $X_j-\mu_j$ by [L2] and [L1]. Since all coordinates of $T\circ X$ are measurable, $T\circ X$ is a random element of $\mathbb R^d$ by [L4]. [given, L1, L2, L4, algebra]
+1.1 For each $i$, the coordinate projections on $U$ are continuous, so the affine function $x\mapsto h_i(\mu)+\sum_{j=1}^{m}a_{ij}(x_j-\mu_j)$ is Borel by [L4]; composition with $X$ makes $T_i(X)$ measurable, and coordinatewise measurability gives that $T\circ X$ is a random element of $\mathbb R^d$. By [L1] and [L6], $$E\left[\left(\sum_{j=1}^{m}a_{ij}(X_j-\mu_j)\right)^2\right]\le\left(\sum_{j=1}^{m}a_{ij}^2\right)\left(\sum_{j=1}^{m}E[(X_j-\mu_j)^2]\right)<+\infty,$$ so the linear part is square-integrable; since $(u+v)^2\le2u^2+2v^2$, adding the finite constant $h_i(\mu)$ shows $T_i(X)$ is square-integrable as well. [given, L1, L4, L6, algebra]
 
 2.1 For each $i$, [L2] and $E[X_j]=\mu_j$ give $E[T_i(X)]=h_i(\mu)+\sum_{j=1}^{m}a_{ij}E[X_j-\mu_j]=h_i(\mu)+\sum_{j=1}^{m}a_{ij}\cdot0=h_i(\mu)$, so $E[T(X)]=h(\mu)$. [step 1.1, L2, algebra]
 

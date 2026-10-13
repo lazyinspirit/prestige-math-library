@@ -24,7 +24,7 @@ sources:
   references:
     - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 1: the Minkowski metric eta_{mu nu} = diag(-1,1,1,1) and the classification of vectors, printed pp. 6-10 (PDF pp. 13-17); Ch. 2: the metric components in a chart and the transformation law, printed pp. 49-51 (PDF pp. 56-58)"
       url: "https://arxiv.org/pdf/gr-qc/9712019"
-    - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 2.1: charts, the metric components and the canonical form diag(-1,1,1,1) of a Lorentzian form at a point, printed pp. 25-26 (PDF pp. 26-27), and section 4.1: the flat metric on R^4 as the trivial solution, printed pp. 41-43 (PDF pp. 42-44)"
+    - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 2.1: charts, the metric components and the canonical form diag(-1,1,1,1) of a Lorentzian form at a point, printed pp. 25-26 (PDF pp. 26-27), and section 4.2: vanishing curvature of Minkowski spacetime and local flatness, printed p. 42 (PDF p. 43)"
       url: "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
     - title: "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 1.2.1: the metric eta = diag(-1,1,1,1) on R^4 with x^mu = (ct,x,y,z) and the causal classification of tangent vectors, printed pp. 12-16 (PDF pp. 19-23)"
       url: "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
@@ -80,7 +80,8 @@ vector $v=v^a\partial_a|_p$ the definitions of
 
 $$g_p(v,v)=-(v^0)^2+\sum_{i=1}^3(v^i)^2,\qquad g_p(v,N_p)=-v^0 .$$
 
-so $v$ is **future-directed** exactly when $v^0>0$, and
+so, for a nonzero **causal** $v$, $v$ is **future-directed** exactly when
+$v^0>0$, and
 
 - $v$ is future timelike $\iff$ $v^0>0$ and $(v^0)^2>\sum_i(v^i)^2$;
 - $v$ is future null $\iff$ $v^0>0$ and $(v^0)^2=\sum_i(v^i)^2$;

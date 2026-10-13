@@ -7,12 +7,12 @@ title: "A spin-one multiplet in a uniform field: the exact Zeeman spectrum and d
 status: draft
 origin: session
 dependency_level: 12
-deps: [post-nrqm-angular-momentum-magnetic-moment-coupling, def-nrqm-kinematics-framework-massive-spin-s-model, pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws, pthm-nrqm-angular-momentum-zeeman-precession, def-nrqm-approximations-framework-perturbed-family-model, pthm-nrqm-approximations-degenerate-first-order-splitting, def-nrqm-framework-quantities-and-units, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-identical-particles-and-spin, def-nrqm-observables-framework-observable-and-outcome-law, def-countable-choice, def-axiom-of-choice]
+deps: [post-nrqm-angular-momentum-magnetic-moment-coupling, def-nrqm-kinematics-framework-massive-spin-s-model, pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws, prop-nrqm-orbital-and-spin-finite-spin-matrices, def-nrqm-approximations-framework-perturbed-family-model, pthm-nrqm-approximations-degenerate-first-order-splitting, def-nrqm-framework-quantities-and-units, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-identical-particles-and-spin, def-nrqm-observables-framework-observable-and-outcome-law, def-countable-choice, def-axiom-of-choice]
 dependency_roles:
   post-nrqm-angular-momentum-magnetic-moment-coupling: physical-assumption
   def-nrqm-kinematics-framework-massive-spin-s-model: formulation-prerequisite
   pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws: physical-result
-  pthm-nrqm-angular-momentum-zeeman-precession: physical-result
+  prop-nrqm-orbital-and-spin-finite-spin-matrices: mathematical-premise
   def-nrqm-approximations-framework-perturbed-family-model: formulation-prerequisite
   pthm-nrqm-approximations-degenerate-first-order-splitting: physical-result
   def-nrqm-framework-quantities-and-units: formulation-prerequisite
@@ -30,7 +30,7 @@ proof_strategy: direct
 physical_scope: "A conditional finite-level computation for the declared spin-one internal multiplet of the massive spin-s model with the adopted effective magnetic-moment coupling: the Zeeman family H0 + lambda V with H0 = epsilon I on the three-dimensional multiplet and V = -gamma B S3, its three energy eigenvalues counted with multiplicity (three distinct levels occur exactly when lambda gamma is nonzero), the first-order operator P0VP0 = V and the corresponding degenerate-perturbation localisation, and the absence of any relaxation or branch selection statement. The example identifies no laboratory species, reports no measured splitting or gyromagnetic ratio, and asserts no detector record."
 sources:
   references:
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.1.3 printed pages 208-211 (PDF pages 216-219): the perturbation HBs = mu_B B(Jz + 2Sz), its diagonalisation in the m_l, m_s labels and the Zeeman/Paschen-Back splitting patterns"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.1.3 printed pages 208-211 (PDF pages 216-219), Eq. (9.25): the perturbation HBs = mu_B B(Lz + 2Sz) = mu_B B(Jz + Sz), its diagonalisation in the m_l, m_s labels and the Zeeman/Paschen-Back splitting patterns"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 7 'Two State Systems', Sections 2-4 printed and PDF pages 2-10: spin precession in a magnetic field (Section 2), the general two-state system viewed as a spin system (Section 3), and the ammonia molecule as a two-state system (Section 4); the spin operator along a field direction, its two eigenvalues and the magnetic-dipole energy are read in this range"
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/7c376a3b5b27e5ea586a7e37b85a05d3_MIT8_05F13_Chap_07.pdf"
@@ -49,7 +49,8 @@ Adopt P1, P2, P4 and P6 for the massive spin-$s$ particle model of
 effective magnetic-moment coupling
 [[post-nrqm-angular-momentum-magnetic-moment-coupling]] with real
 gyromagnetic parameter $\gamma:=\gamma_{1}$ and the spin-one internal factor
-$\mathbb C^{3}$ with spin operators $S_{1},S_{2},S_{3}$; read energies in
+$\mathbb C^{3}$ with spin operators $S_i=\hbar J_i$ of
+[[prop-nrqm-orbital-and-spin-finite-spin-matrices]] at $s=1$; read energies in
 joules as in [[def-nrqm-framework-quantities-and-units]]. Declare the
 **finite-level Zeeman model** by the perturbed-family model of
 [[def-nrqm-approximations-framework-perturbed-family-model]] with
@@ -89,10 +90,12 @@ distance is $0$ directly, without invoking the theorem's positive-norm
 hypothesis. In both cases the first-order eigenvalue set is exact, with
 multiplicity retained as in (a)-(b);
 
-(d) the model's conserved component and transverse precession are those of
-[[pthm-nrqm-angular-momentum-zeeman-precession]] for the declared field:
-the component $S_{3}$ is conserved along the flow of $H(\lambda)$ and the
-transverse spin means precess at the Larmor angular signed frequency $\lambda\gamma B_{z}$, equal to $\gamma B_z$ at the physical coupling $\lambda=1$;
+(d) for a unit preparation vector $u\in\mathbb C^3$, put
+$u(t)=e^{-itH(\lambda)/\hbar}u$ and $s_i(t)=\langle S_i u(t),u(t)\rangle$.
+With $\omega=\lambda\gamma B_z$ (in $\mathrm{s^{-1}}$),
+$$s_3(t)=s_3(0),\qquad s_1(t)=\cos(\omega t)s_1(0)+\sin(\omega t)s_2(0),\qquad s_2(t)=\cos(\omega t)s_2(0)-\sin(\omega t)s_1(0).$$
+Thus the transverse means rotate by $-\omega t$, with the signed Larmor
+parameter $\omega$ equal to $\gamma B_z$ at $\lambda=1$;
 
 (e) no branch selection: the energy eigenspaces of (b) are spectral data of
 the family; a preparation in any eigenstate is stationary, and a superposition
@@ -111,17 +114,9 @@ multiplet energy $\varepsilon$; the family $H(\lambda)=\varepsilon
 I_{3}-\lambda\gamma B_{z}S_{3}$; the Axiom of Countable Choice and the Axiom
 of Choice as the choice hypotheses of the cited suppliers.
 
-[L1] **Spin spectrum and conservation.** For every unit $n$, the operator
-$S_{n}=\sum_{i}n_{i}S_{i}$ is bounded self-adjoint with spectrum
-$\hbar\{-1,0,1\}$ and one-dimensional eigenspaces
-([[pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]] clause (a));
-in particular $\|S_{3}\|=\hbar$ and $\sigma(S_{3})=\hbar\{-1,0,1\}$.
+[L1] **Internal spin matrices.** On $\mathbb C^3$ the orthonormal basis $e_m$, $m=1,0,-1$, satisfies $S_3e_m=\hbar m e_m$, and the self-adjoint matrices satisfy $[S_i,S_j]=i\hbar\varepsilon_{ijk}S_k$, by [[prop-nrqm-orbital-and-spin-finite-spin-matrices]] at $s=1$ and the internal-factor reading of [[def-nrqm-kinematics-framework-massive-spin-s-model]] clause (c). Consequently $\|S_3\|=\hbar$ and its three internal eigenspaces are lines. The amplified operators on the full spatial state space of [[pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]] have different eigenspace multiplicities; only their internal matrices are used here.
 
-[L2] **Zeeman precession.** Under the adopted coupling, for a uniform static
-field along the third axis the Zeeman operator $H_{Z}$ is self-adjoint, the
-component $S_{3}$ is conserved, and the transverse spin expectations of a
-preparation precess with Larmor angular frequency $\gamma B_{z}$, in the
-reading of [[pthm-nrqm-angular-momentum-zeeman-precession]].
+[L2] **Finite-dimensional autonomous flow.** P4 assigns $U(t)=e^{-itH(\lambda)/\hbar}$ on the declared finite state space ([[post-nrqm-framework-autonomous-dynamics]]). The matrix exponential is the everywhere convergent power series; differentiating that series gives $U'=-iH(\lambda)U/\hbar$. For a fixed matrix $A$, the product rule gives $(U^*AU)'=(i/\hbar)U^*[H(\lambda),A]U$; all domains are $\mathbb C^3$.
 
 [L3] **The model's degenerate theorem.** Under the perturbed-family model
 with an isolated finite-multiplicity label $E$ of $H_{0}$ and gap at least
@@ -155,7 +150,7 @@ with the page's degenerate localisation bound.
 
 3.1 [The localisation check and zero branch] Since $\sigma(H_0)=\{\varepsilon\}$, any $g>0$ is a gap in the stated convention. Each eigenvalue of step 2.1 has $|z-\varepsilon|\le|\lambda|v$, so $|\lambda|v<g/4$ implies $|z-\varepsilon|+|\lambda|v<g/2$, exactly the controlled window required by [L3]. For $v>0$ the theorem therefore applies; the actual distance is already zero by the exact spectrum of step 2.1, for every real $\lambda$. One could also send $g\to\infty$ while keeping $\lambda$ fixed to make the upper bound tend to zero; decreasing $g$ would not do so. If $v=0$, then $\gamma=0$ and the family is constant, with the same zero distance directly and no division by $v$. This proves (c) in all branches. [L3, step 1.1, step 2.1, given, algebra]
 
-4.1 [Conservation, precession and scope] By [L2] the component $S_{3}$ is conserved and the transverse spin means precess at signed frequency $\lambda\gamma B_z$, by applying [L2] to the effective field $\lambda\mathbf B$; the scalar $\varepsilon I$ contributes only a common phase and cancels from observable expectations; these statements concern the declared model's expectations along the flow of $H(\lambda)$. The eigenvalues of step 2.1 are spectral data; every vector in an energy eigenspace is stationary up to its scalar phase, and a superposition evolves with the relative phases of the occupied eigenvalues. No transition, relaxation, branch selection or measurement entered the argument, so clause (e) holds; no laboratory species, measured splitting or gyromagnetic value is asserted anywhere. [L1, L2, L3, step 2.1, given] ∎
+4.1 [Finite-level conservation, precession and scope] Put $\omega=\lambda\gamma B_z$ and $A_i(t)=U(t)^*S_iU(t)$. By [L1] and [L2], $A_3'=0$, $A_1'=\omega A_2$ and $A_2'=-\omega A_1$, with $A_i(0)=S_i$. The matrices $A_1=\cos(\omega t)S_1+\sin(\omega t)S_2$ and $A_2=\cos(\omega t)S_2-\sin(\omega t)S_1$ satisfy these equations and initial data. Uniqueness follows entrywise: for the difference of two solutions, the derivative of $|a_1|^2+|a_2|^2$ is zero, and its initial value is zero. Pairing with $u$ proves (d), including zero frequency. The scalar $\varepsilon I$ cancels from the commutators and contributes only a common phase. Each energy eigenvector evolves by its scalar phase, while a superposition has the relative phases of step 2.1. This proves (e), with no transition, relaxation, branch selection, measurement or laboratory identification assumed. [L1, L2, step 2.1, given, algebra] ∎
 
 ## Remarks
 

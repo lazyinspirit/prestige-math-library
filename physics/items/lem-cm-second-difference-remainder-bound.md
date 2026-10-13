@@ -52,7 +52,7 @@ $$\left|\frac{u(x+a)-2u(x)+u(x-a)}{a^2}-u''(x)\right|\le\frac{M\,a^2}{12}.$$
 
 [F2] The bound $M$ is the maximum of the continuous function $|u''''|$ on the compact set $[x-a,x+a]$, so $|u''''|\le M$ there ([[thm-extreme-value-metric]], [[thm-heine-borel-rn]], [[def-metric-ball]]); derivatives and sums compose by the chain and algebra rules ([[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[def-derivative]]).
 
-[F3] (Second-order integral remainder.) If $\varphi\in C^2$ on an interval containing $[0,a]$, then $\varphi(a)=\varphi(0)+\varphi'(0)a+\int_0^a(a-s)\varphi''(s)\,ds$. Indeed, integrating by parts via [F1], $\int_0^a(a-s)\varphi''(s)ds=[(a-s)\varphi'(s)]_0^a+\int_0^a\varphi'(s)ds=-\varphi'(0)a+\varphi(a)-\varphi(0)$.
+[F3] (Second-order integral remainder.) If $\varphi\in C^2$ on an interval containing $[0,a]$, then $\varphi(a)=\varphi(0)+\varphi'(0)a+\int_0^a(a-s)\varphi''(s)\,ds$. By the product rule, $\frac{d}{ds}((a-s)\varphi'(s))=-\varphi'(s)+(a-s)\varphi''(s)$; integrating this identity with [F1] and rearranging gives the displayed formula.
 
 ## Proof
 

@@ -43,10 +43,7 @@ physical_scope: "The declared single-channel resonance model with l=0, E_r>0 and
   producing potential, decay law or measured width or count is asserted."
 sources:
   references:
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section
-        12.6.1 printed pages 283-284 (PDF pages 291-292): the Breit-Wigner
-        partial cross section sigma_l(E) = 4 pi hbar^2/p^2 (2l+1) (Gamma/2)^2 /
-        ((E-E_R)^2 + (Gamma/2)^2) and the half-height width"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.6.1, printed page 280 (PDF page 288)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 verification:
   precheck: pass

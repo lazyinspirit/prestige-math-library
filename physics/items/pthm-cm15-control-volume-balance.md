@@ -1,7 +1,7 @@
 ---
 id: pthm-cm15-control-volume-balance
 kind: physics-theorem
-title: "The smooth open-flow model: moving-control-region mass and momentum balances, their material and fixed special cases, and the inlet/outlet decomposition reproducing the open-body and rocket laws"
+title: "The finite-regularity open-flow model: moving-control-region mass and momentum balances, their material and fixed special cases, and the inlet/outlet decomposition reproducing the open-body and rocket laws"
 status: draft
 origin: session
 domain: physics
@@ -13,6 +13,7 @@ deps: [post-cm15-impulse,
        thm-cm-local-mass-balance,
        thm-cm-local-momentum-balance,
        thm-cm-control-volume-balance,
+       thm-cm-transport-theorem,
        def-cm-traction-and-stress,
        def-bounded-c-one-domain-boundary-charts-and-outward-normal,
        def-surface-integral-on-a-compact-c-one-hypersurface,
@@ -35,6 +36,7 @@ dependency_roles:
   thm-cm-local-mass-balance: mathematical-premise
   thm-cm-local-momentum-balance: mathematical-premise
   thm-cm-control-volume-balance: mathematical-premise
+  thm-cm-transport-theorem: mathematical-premise
   def-cm-traction-and-stress: mathematical-premise
   def-bounded-c-one-domain-boundary-charts-and-outward-normal: mathematical-premise
   def-surface-integral-on-a-compact-c-one-hypersurface: mathematical-premise
@@ -53,7 +55,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "The moving-control-region bookkeeping of the adopted smooth open-flow model in one fixed inertial chart: the scalar mass density $\\rho$ has units kg m$^{-3}$, the spatial velocity $u$ and control velocity $w$ have units m s$^{-1}$, the Cauchy stress matrix $\\sigma$ has units Pa, and the specific body-force vector $b$ (force per unit mass) has units N kg$^{-1}$; $D_tu=\\partial_tu+(D_xu)u$ is the material acceleration, distinct from $b$. Under the adopted material mass and momentum balances for every material subregion, a non-material control region has the stated mass and momentum rates, and under an inlet/outlet split the fluxes give the mass rates and flux-averaged inertial velocities in the lumped open-body law. The balances are adopted hypotheses, not derivations from particle mechanics; no constitutive law, boundary condition, measured value or observation is asserted."
+physical_scope: "The moving-control-region bookkeeping of the adopted finite-regularity open-flow model in one fixed inertial chart: the scalar mass density $\\rho$ has units kg m$^{-3}$, the spatial velocity $u$ and control velocity $w$ have units m s$^{-1}$, the Cauchy stress matrix $\\sigma$ has units Pa, and the specific body-force vector $b$ (force per unit mass) has units N kg$^{-1}$; $D_tu=\\partial_tu+(D_xu)u$ is the material acceleration, distinct from $b$. Under the adopted material mass and momentum balances for every material subregion, a non-material control region has the stated mass and momentum rates, and under an inlet/outlet split the fluxes give the mass rates and flux-averaged inertial velocities in the lumped open-body law. The balances are adopted hypotheses, not derivations from particle mechanics; no constitutive law, boundary condition, measured value or observation is asserted."
 sources:
   references:
     - title: "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), §3.7 'Transport Equations' Eqs. (3.84)-(3.89) and §4.4 'The Balance of Momentum Principles' Eqs. (4.18)-(4.21): the material transport formulae, the flux form of the transport identity and the material momentum balance"
@@ -70,7 +72,7 @@ sources:
 
 Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$
 ([[def-countable-choice]]), as used by the transport and divergence theorems.
-**Adopt the smooth open-flow model** with the following model data in one
+**Adopt the finite-regularity open-flow model** with the following model data in one
 fixed inertial frame (the adapted affine chart of [[post-cm01-frames]]) and
 with SI conventions ([[def-cm01-units]]): a nonempty open interval $I$; a
 material region $B\subseteq\mathbb R^3$ (bounded open with $C^1$ boundary);
@@ -80,13 +82,13 @@ diffeomorphisms with positive Jacobian onto their images. Let $U\subseteq
 swept region over a compact subinterval $J_0$ with
 $\overline{J_0}\subseteq I$. On $U$ take a scalar mass-density field
 $\rho:U\to(0,\infty)$ of class $C^1$ with
-$[\rho]=\mathsf M\ell^{-3}$ ([[def-cm-material-region-and-density]], where
+$[\rho]=\mu\ell^{-3}$ ([[def-cm-material-region-and-density]], where
 mass on a spatial region $C$ is $\int_C\rho\,dx$); its spatial velocity
 field $u:U\to\mathbb R^3$ of class $C^1$ with $[u]=\ell\tau^{-1}$ and
 $u(t,\chi(t,X))=\partial_t\chi(t,X)$
 ([[def-cm-continuum-motion]]); a Cauchy stress matrix field
 $\sigma:U\to M_3(\mathbb R)$ of class $C^1$ with
-$[\sigma]=\mathsf M\ell^{-1}\tau^{-2}$, representing the traction by
+$[\sigma]=\mu\ell^{-1}\tau^{-2}$, representing the traction by
 $\mathbf t(\nu)=\sigma\nu$ on a surface with unit normal $\nu$
 ([[def-cm-traction-and-stress]]); and a continuous specific body-force vector
 $b:U\to\mathbb R^3$, meaning force per unit mass and distinct from the
@@ -98,7 +100,7 @@ where $\partial_t$ differentiates at fixed $x$ and $D_xu$ is the spatial
 Jacobian at fixed $t$ ([[def-cm-euclidean-spatial-calculus]],
 [[def-cm-continuum-motion]]). Define the row divergence by
 $g_i:=\sum_{j=1}^3\partial_{x_j}\sigma_{ij}$, so $g$ is a vector force
-density with units $\mathsf M\ell^{-2}\tau^{-2}$. Adopt as the model's
+density with units $\mu\ell^{-2}\tau^{-2}$. Adopt as the model's
 **material balances**: for every material subregion $B'\subseteq B$ (a
 nonempty bounded open subset with $\overline{B'}\subseteq B$ whose images
 $\chi_t(B')$ are bounded $C^1$ domains,
@@ -142,9 +144,9 @@ Require its closed sweep $\Sigma_C:=\{(t,x):t\in\overline{J_0},\ x\in\psi_t(\ove
    positive; define $r_{\mathrm{in}}w_{\mathrm{in}}=0$ when
    $r_{\mathrm{in}}=0$, and likewise for the outlet term), and write
    $$m:=\int_{C_t}\rho\,\mathrm dx>0,\qquad P:=\int_{C_t}\rho u\,\mathrm dx,\qquad F_{\mathrm{ext}}:=\int_{C_t}\rho b\,\mathrm dx+\int_{\partial C_t}\sigma\nu\,\mathrm dS .$$
-   The units are $[m]=\mathsf M$, $[P]=\mathsf M\ell\tau^{-1}$,
-   $[F_{\mathrm{ext}}]=\mathsf M\ell\tau^{-2}$,
-   $[r_{\mathrm{in}}]=[r_{\mathrm{out}}]=\mathsf M\tau^{-1}$ and
+   The units are $[m]=\mu$, $[P]=\mu\ell\tau^{-1}$,
+   $[F_{\mathrm{ext}}]=\mu\ell\tau^{-2}$,
+   $[r_{\mathrm{in}}]=[r_{\mathrm{out}}]=\mu\tau^{-1}$ and
    $[w_{\mathrm{in}}]=[w_{\mathrm{out}}]=\ell\tau^{-1}$. The control-volume
    theorem supplies the derivatives of $m$ and $P$; since $\rho>0$ and each
    $C_t$ is a nonempty open region, $m>0$, so $v:=P/m$ is differentiable on
@@ -166,28 +168,28 @@ Require its closed sweep $\Sigma_C:=\{(t,x):t\in\overline{J_0},\ x\in\psi_t(\ove
    the two stated deductions (localization followed by the control-volume
    identities, and the inlet/outlet reading). It asserts no constitutive law
    for $\rho$ or $\sigma$, no boundary condition, no incompressibility, no
-   smoothness beyond the stated one, and no empirical claim; the fields,
+   regularity beyond that stated, and no empirical claim; the fields,
    the control motion and the region are model data.
 
 ## Facts & Assumptions
 
-**Given:** $\mathrm{AC}_\omega$; the smooth open-flow model data $\chi,\rho,u,\sigma,b$ with the adopted material balances on $J_0$; the control motion $\psi$ with its regions $C_t$; for clause 3 the boundary decomposition and the flux-averaged velocities.
+**Given:** $\mathrm{AC}_\omega$; the finite-regularity open-flow model data $\chi,\rho,u,\sigma,b$ with the adopted material balances on $J_0$; the control motion $\psi$ with its regions $C_t$; for clause 3 the boundary decomposition and the flux-averaged velocities.
 
-[L1] Localization of the material balances ([[thm-cm-local-mass-balance]] clause (i), [[thm-cm-local-momentum-balance]], [[def-cm-euclidean-spatial-calculus]], [[def-cm-traction-and-stress]]): if the material mass balance holds for the inverse images of all sufficiently small current balls at each $t\in J_0$, as included in the adopted smooth admissible subregion class, then $\partial_t\rho+\operatorname{div}(\rho u)=0$ on $J_0\times\chi_t(B)$; and if moreover the material momentum balance holds for each admissible pair of a time and a material subregion whose current image is a bounded $C^1$ domain, then $\rho D_tu=\rho b+g$ there, where $g$ is the row divergence of $\sigma$. Both require the stated regularity and the countable-choice assumption.
+[L1] Localization of the material balances ([[thm-cm-local-mass-balance]] clause (i), [[thm-cm-local-momentum-balance]], [[def-cm-euclidean-spatial-calculus]], [[def-cm-traction-and-stress]]): if the material mass balance holds for the inverse images of all sufficiently small current balls at each $t\in J_0$, as included in the adopted stated admissible subregion class, then $\partial_t\rho+\operatorname{div}(\rho u)=0$ on $J_0\times\chi_t(B)$; and if moreover the material momentum balance holds for each admissible pair of a time and a material subregion whose current image is a bounded $C^1$ domain, then $\rho D_tu=\rho b+g$ there, where $g$ is the row divergence of $\sigma$. Both require the stated regularity and the countable-choice assumption.
 
-[L2] Control-volume theorem ([[thm-cm-control-volume-balance]], [[def-cm-continuum-motion]], [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]], [[def-surface-integral-on-a-compact-c-one-hypersurface]], [[thm-divergence-theorem-for-bounded-c-one-euclidean-domains]]): if $\rho$ and $\sigma$ are $C^1$, $b$ continuous and the local balances (K), (KM) hold on an open field domain containing the closed control sweep, then for every control motion with bounded $C^1$ control regions the identities (CV1), (CV2) of clause 1 hold.
+[L2] Transport and control-volume identities ([[thm-cm-transport-theorem]], [[thm-cm-control-volume-balance]], [[def-cm-continuum-motion]], [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]], [[def-surface-integral-on-a-compact-c-one-hypersurface]], [[thm-divergence-theorem-for-bounded-c-one-euclidean-domains]]): transport gives $\frac{d}{dt}\int_{C_t}f=\int_{C_t}(\partial_tf+\operatorname{div}(fw))$ for $C^1$ fields near a closed control sweep. Combining this with the local mass and momentum equations and row-wise divergence gives (CV1), (CV2); the calculation at a fixed time uses the local equations only on that current region.
 
 [L3] Lumped open-body algebra and regularity ([[thm-cm-control-volume-balance]], [[thm-cm-variable-mass-momentum-balance]], [[def-cm03-centre-of-mass-and-momenta]], [[def-euclidean-inner-product]], [[def-integral-over-a-measurable-set]]): the control-volume rate identities make $m$ and $P$ differentiable; since the density is positive on the nonempty control region, $m>0$ and $v=P/m$ is differentiable. From $m'=r_{\mathrm{in}}-r_{\mathrm{out}}$ and $P'=F+r_{\mathrm{in}}w_{\mathrm{in}}-r_{\mathrm{out}}w_{\mathrm{out}}$, the variable-mass product rule then gives $mv'=F+r_{\mathrm{in}}(w_{\mathrm{in}}-v)-r_{\mathrm{out}}(w_{\mathrm{out}}-v)$.
 
-[L4] Intervals, field types and units ([[def-interval]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[post-cm01-worldlines]], [[def-cm01-units]], [[def-cm-material-region-and-density]], [[def-cm-traction-and-stress]]): $J_0$ is a compact subinterval of $I$ with nonempty interior; $\rho$ is scalar mass density, $u,w$ are spatial velocity vectors, $\sigma$ is the stress matrix, and $b$ is force per unit mass, with SI dimensions $[\rho]=\mathsf M\ell^{-3}$, $[u]=[w]=\ell\tau^{-1}$, $[\sigma]=\mathsf M\ell^{-1}\tau^{-2}$ and $[b]=\ell\tau^{-2}$. Consequently the row divergence $g$ has dimension $\mathsf M\ell^{-2}\tau^{-2}$; $m,P,F_{\mathrm{ext}},r_{\mathrm{in/out}},w_{\mathrm{in/out}}$ carry the units listed in clause 3.
+[L4] Intervals, field types and units ([[def-interval]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[post-cm01-worldlines]], [[def-cm01-units]], [[def-cm-material-region-and-density]], [[def-cm-traction-and-stress]]): $J_0$ is a compact subinterval of $I$ with nonempty interior; $\rho$ is scalar mass density, $u,w$ are spatial velocity vectors, $\sigma$ is the stress matrix, and $b$ is force per unit mass, with SI dimensions $[\rho]=\mu\ell^{-3}$, $[u]=[w]=\ell\tau^{-1}$, $[\sigma]=\mu\ell^{-1}\tau^{-2}$ and $[b]=\ell\tau^{-2}$. Consequently the row divergence $g$ has dimension $\mu\ell^{-2}\tau^{-2}$; $m,P,F_{\mathrm{ext}},r_{\mathrm{in/out}},w_{\mathrm{in/out}}$ carry the units listed in clause 3.
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Local forms: the adopted smooth admissible subregions include the inverse images under $\chi_t$ of all sufficiently small current balls with closure in the field domain. Thus the current-ball localization variant of [L1] applies to the adopted material mass balance and gives $\partial_t\rho+\operatorname{div}(\rho u)=0$ on the swept region over $J_0$, and with the adopted momentum balance on these smooth admissible test regions, the local momentum theorem of [L1] gives $\rho D_tu=\rho b+g$ there, with $g$ the row divergence of the $C^1$ field $\sigma$. [given, L1, L4]
+1.1 Fix $t\in J_0$, which is interior to $I$ even if it is an endpoint of $J_0$. Each sufficiently small current ball $A$ with closure in $\chi_t(B)$ has an admissible inverse-image material subregion under the $C^2$ diffeomorphism $\chi_t$. Transport [L2] applies on a small open time neighbourhood of $t$. The adopted mass balance at $t$ gives $\int_A(\partial_t\rho+\operatorname{div}(\rho u))=0$. A continuous integrand with zero integral on all such balls vanishes pointwise: a nonzero value would retain its strict sign on a sufficiently small ball, contradicting the zero integral. Thus the local mass equation holds. Componentwise transport and row-wise divergence applied to the momentum balance give $\int_A(\rho D_tu-\rho b-g)_i=0$, since the mass-equation terms cancel by the product rule. The same sign argument proves the local momentum equation. This is the instantaneous localization argument of [L1], including the compact $J_0$'s endpoints. [given, L1, L2, L4, algebra]
 
-2.1 Clause 1: by the control-sweep hypothesis, the fields are defined on an open neighbourhood of each closed control region. If the sweep lies locally inside the current material region, step 1.1 supplies (K) and (KM) on that neighbourhood; otherwise the same local equations there are explicit adopted hypotheses. Thus in either case all field-domain and local-equation conditions of [L2] hold for the control motion $\psi$, and [L2] gives (CV1) and (CV2) for every $t\in J_0$. [given, step 1.1, L2]
+2.1 Fix $t\in J_0$. The control-sweep hypothesis and continuity of the control motion put its closed regions in the field domain on a small open time neighbourhood of $t$. The local equations on $C_t$ follow from step 1.1 in the material-interior case, and are adopted in the alternative case. Transport gives $m'=\int_{C_t}(\partial_t\rho+\operatorname{div}(\rho w))=\int_{C_t}\operatorname{div}(\rho(w-u))$; divergence gives (CV1). Componentwise transport, the product rule and the local equations give $P_i'=\int_{C_t}(\rho b_i+g_i+\operatorname{div}(\rho u_i(w-u)))$; divergence of the stress row and of the last vector field gives (CV2). These calculations of [L2] use the local equations only at $t$, and therefore include the endpoints without assuming balances outside $J_0$. [given, step 1.1, L2, algebra]
 
 3.1 Clause 2: if $\psi=\chi$ then $w=u$ on $\partial C_t$, so $(u-w)\cdot\nu=0$ and both flux integrals in (CV1) and (CV2) vanish; the identities become the material balances of the model. If $\psi$ is constant then $w=0$ and $u-w=u$, giving the displayed fixed-region equations with $m_C$, $P_C$; when in addition the fields are steady and $C$ is fixed, the left sides are the rates of the steady-flow treatment and the equations reduce to the balance between the external force and the momentum flux difference. [step 2.1, L2, algebra]
 
@@ -205,4 +207,4 @@ Require its closed sweep $\Sigma_C:=\{(t,x):t\in\overline{J_0},\ x\in\psi_t(\ove
 
 - **Relation to the lumped postulate.** Clause 3 exhibits the two identities of [[post-cm15-impulse]] clause (iii) as a specialization of the spatial balances, with $r_{\mathrm{in}},r_{\mathrm{out}}$ the mass fluxes through the inlet and outlet and $w_{\mathrm{in}},w_{\mathrm{out}}$ the flux-averaged inertial velocities. Conversely the material accounting of the postulate does not by itself produce the distributed identities (CV1), (CV2), which use the spatial fields.
 
-- **No empirical content.** The smooth open-flow model is a restricted model class; no physical body is asserted to be one, and the balances are adopted assumptions that a comparison with observation would test jointly with the apparatus and constitutive assumptions.
+- **No empirical content.** The finite-regularity open-flow model is a restricted model class; no physical body is asserted to be one, and the balances are adopted assumptions that a comparison with observation would test jointly with the apparatus and constitutive assumptions.

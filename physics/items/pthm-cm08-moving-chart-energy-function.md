@@ -39,7 +39,7 @@ proof_strategy: direct
 physical_scope: "The energy bookkeeping of a time-dependent coordinate description of the force model: for a C^3 coordinate map X with everywhere invertible configuration Jacobian and the substituted Lagrangian of the covariance theorem, the chart energy function equals the inertial mechanical energy plus or minus the pairing of the chart's explicit time dependence with the mass-operator velocity, so the two agree exactly when that pairing vanishes; the chart energy function is conserved along chart Euler-Lagrange solutions whenever the substituted Lagrangian has no explicit time dependence along the trajectory; and in the global potential branch the chart description of every motion solves that chart equation. The statement concerns the model's coordinate description, is conditional on the adopted force branch and the declared presentation, and asserts no measurement and no identification of the chart energy with the inertial mechanical energy."
 sources:
   references:
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-8 (PDF pages 26-27): the Hamiltonian function of the bead on the rotating ring differs from the mechanical energy by mR^2 omega^2 sin^2(theta) while H itself is conserved because the Lagrangian has no explicit time dependence"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-10 (PDF pages 25-28): the Hamiltonian function of the bead on the rotating ring differs from the mechanical energy by mR^2 omega^2 sin^2(theta) while H itself is conserved because the Lagrangian has no explicit time dependence"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.4.1 'Example: Homogeneity of Time', printed page 26 (PDF page 32): the relation between the conserved energy-type charge and the explicit time dependence of the Lagrangian"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
@@ -62,7 +62,7 @@ $X_{q}(t,q)$ invertible for every $(t,q)\in\Omega$; let
 $$\widetilde O:=\bigl\{(t,q,v)\in\Omega\times\mathbb R^{3N}:\bigl(t,X(t,q),X_{t}(t,q)+X_{q}(t,q)v\bigr)\in O\bigr\},\qquad \widetilde L(t,q,v):=L\bigl(t,X(t,q),\,X_{t}(t,q)+X_{q}(t,q)v\bigr)$$
 
 be the substituted data of [[pthm-cm07-coordinate-covariance-of-the-equations]].
-Let $J\subseteq\mathbb R$ be an interval, with derivatives at any included
+Let $J\subseteq\mathbb R$ be an interval with nonempty interior, with derivatives at any included
 endpoints understood one-sided, and let $q:J\to\mathbb R^{3N}$ be a $C^{2}$ curve with
 $(t,q(t),q'(t))\in\widetilde O$ for every $t\in J$, and put $x(t):=X(t,q(t))$.
 Define the **chart energy function** and the **inertial mechanical energy**
@@ -101,7 +101,7 @@ empirical content is claimed.
 
 **Given:** The model, the presentation $(U,d)$, the coordinate map $X$, the substituted data $\widetilde O,\widetilde L$, and the curve $q$ with $x=X\circ q$.
 
-[F1] The substituted chart ([[pthm-cm07-coordinate-covariance-of-the-equations]], [[def-cm-time-dependent-lagrangian-and-action]]): $\widetilde O$ is open, $\widetilde L$ is $C^{2}$ on it, along the curve $E_{\widetilde L}(q)=X_{q}(t,q(t))^{\mathsf T}E_{L}(x)(t)$ with $x=X\circ q$, and if $d\equiv0$ and $x$ is a motion then $E_{L}(x)=0$ and hence $E_{\widetilde L}(q)=0$; also $x'(t)=X_{t}(t,q(t))+X_{q}(t,q(t))q'(t)$.
+[F1] The substituted chart ([[pthm-cm07-coordinate-covariance-of-the-equations]], [[def-cm-time-dependent-lagrangian-and-action]]): $\widetilde O$ is open, $\widetilde L$ is $C^{2}$ on it, along the curve $E_{\widetilde L}(q)=X_{q}(t,q(t))^{\mathsf T}E_{L}(x)(t)$ with $x=X\circ q$, and if $d\equiv0$ and $x$ is a motion then $E_{L}(x)=0$ and hence $E_{\widetilde L}(q)=0$; this pointwise identity is applied on nondegenerate closed subintervals of $J^\circ$ and extended to included endpoints by continuity; also $x'(t)=X_{t}(t,q(t))+X_{q}(t,q(t))q'(t)$.
 
 [F2] The mechanical Lagrangian ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm03-potential-and-mechanical-energy]], [[post-cm02-force-superposition]], [[def-cm01-configuration]]): $L(t,x,v)=K(v)-U(t,x)$ with $K(v)=\tfrac12\langle v,\mathsf M v\rangle$, $\mathsf M$ symmetric positive definite, $U$ of class $C^{2}$, $L_{v}=\mathsf M v$, $L_{x}=-\nabla_{x}U$; the force map is $F_{i}=-\nabla_{x_{i}}U+d_{i}$, and for $d\equiv0$ the motions satisfy $\mathsf M x''=-\nabla_{x}U$.
 
@@ -119,38 +119,18 @@ empirical content is claimed.
 
 1.2 Clause 4: by [F1], along the curve $q$ one has $E_{\widetilde L}(q)=X_{q}^{\mathsf T}E_{L}(x)$; if $d\equiv0$ and $x$ is a motion, then $E_{L}(x)=0$ by [F1] and [F2], so $E_{\widetilde L}(q)=0$ on $J$. [F1, F2, given]
 
-2.1 Clause 3, hyperregularity of the substituted chart: by step 1.1 the substituted Lagrangian has the form $\widetilde L=\tfrac12v^{\mathsf T}Gv+Av-V$ with $V:=U(t,X)-\tfrac12\langle X_{t},\mathsf M X_{t}\rangle$; the fields $G,A,V$ are of class $C^{2}$ because $X$ is $C^{3}$ and $U$ is $C^{2}$, and $G(t,q)$ is symmetric with $\langle Gv,v\rangle=\langle X_{q}v,\mathsf M X_{q}v\rangle>0$ for $v\ne0$ by [F5]; hence [F3] applies and $\widetilde L$ is hyperregular on its fibre-full domain with inverse branch $v=G^{-1}(p-A)$. [F2, F3, F5, step 1.1]
+2.1 Clause 3, local hyperregularity: put $D:=\Omega\cap(I_0\times\mathbb R^{3N})$, so $\widetilde O=D\times\mathbb R^{3N}$. By step 1.1, $\widetilde L=\tfrac12v^{\mathsf T}Gv+A\cdot v-V$ with $V:=U(t,X)-\tfrac12\langle X_t,\mathsf M X_t\rangle$. The fields $G,A,V$ are $C^2$ on $D$ because $X$ is $C^3$ and $U$ is $C^2$, and $G$ is symmetric positive definite by [F5]. Around each $(t,q)\in D$ choose an open product $J_0\times U_0\subseteq D$, with $J_0$ an interval and $U_0$ a ball. On this product [F3] applies, giving hyperregularity and the $C^2$ inverse $v=G^{-1}(p-A)$. These inverses agree on overlaps because the displayed formula is unique in each fibre; thus it defines a $C^2$ inverse on $D\times\mathbb R^{3N}$, and each product restriction is a hyperregular chart in the precise sense of [F3]. [F2, F3, F5, step 1.1]
 
 2.2 Clause 2: by the difference identity of step 1.1, $e(t)=E_{\mathrm{in}}(t)$ holds exactly when $\langle X_{t}(t,q(t)),\mathsf M x'(t)\rangle=0$; if $X_{t}(t,q(t))=0$ the pairing vanishes identically along the curve. [step 1.1]
 
-3.1 Clause 3, conservation: by step 2.1 the chart $\widetilde L$ is hyperregular. If $J$ has empty interior, then it has at most one point and $e$ is constant on $J$. Otherwise $J^{\circ}$ is a nonempty open interval; the restriction $q|_{J^{\circ}}$ solves $E_{\widetilde L}=0$ there, so [F4] applies on $J^{\circ}$ and gives $e'=-\widetilde L_{t}=0$, hence $e$ is constant on $J^{\circ}$. The formula defining $e$ and the $C^{2}$ regularity of $q$ and $\widetilde L$ make $e$ continuous on $J$ by [F5], so this constant extends to every endpoint of $J$ that belongs to $J$. Thus $e$ is constant on $J$. [F4, F5, step 2.1]
+3.1 Clause 3, conservation: $J^\circ$ is a nonempty open interval. For each $t_0\in J^\circ$, choose a product neighborhood $J_0\times U_0\subseteq D$ of $(t_0,q(t_0))$ as in step 2.1. Continuity of $q$ gives an open interval $I\ni t_0$ inside $J^\circ\cap J_0$ with $q(I)\subseteq U_0$. On that restriction [F4] applies and gives $e'(t_0)=-\widetilde L_t(t_0,q(t_0),q'(t_0))=0$. Hence $e'=0$ throughout $J^\circ$ and $e$ is constant there by [F5]. The defining formula and $C^2$ regularity make $e$ continuous on $J$, so the same constant extends to every included endpoint. [F4, F5, step 2.1]
 
 4.1 Clause 1 is step 1.1, clause 2 is step 2.2, clause 3 is step 3.1, and clause 4 is step 1.2; the chart energy function of a moving description is conserved along the chart solutions whenever the substituted Lagrangian has no explicit time dependence along the trajectory, and it coincides with the inertial mechanical energy exactly when the explicit time dependence pairs to zero with the mass-operator velocity. [step 1.1, step 2.1, step 2.2, step 3.1] ∎
 
 ## Remarks
 
-- **The moving-chart boundary.** The identity of clause 1 is the exact
-  bookkeeping behind the phrase "in a moving chart the Hamiltonian need not
-  equal the mechanical energy": for a chart with $X_{t}\not\equiv0$ the two
-  functions differ by $\langle X_{t},\mathsf M x'\rangle$, which is not
-  constant in general, and clause 3 shows that the chart energy function can
-  nevertheless be a conserved quantity of the chart equations. For a component
-  of the model's motion the chart curve solves the chart equation in the global
-  potential branch by clause 4, so a conserved chart energy that differs from
-  the inertial mechanical energy is a genuine feature of the model's
-  description and not a computational artefact. The concrete rotating-chart
-  computation of the companion page evaluates both functions on explicit data.
+- **The moving-chart boundary.** The identity of clause 1 is the exact bookkeeping behind the phrase "in a moving chart the Hamiltonian need not equal the mechanical energy": for a chart with $X_{t}\not\equiv0$ the two functions differ by $\langle X_{t},\mathsf M x'\rangle$, which is not constant in general, and clause 3 shows that the chart energy function can nevertheless be a conserved quantity of the chart equations. For a component of the model's motion the chart curve solves the chart equation in the global potential branch by clause 4, so a conserved chart energy that differs from the inertial mechanical energy is a genuine feature of the model's description and not a computational artefact. The concrete rotating-chart computation of the companion page evaluates both functions on explicit data.
 
-- **Relation to the Hamiltonian.** On a hyperregular chart the chart energy
-  function equals the branch Hamiltonian $H=p\cdot v-\widetilde L$ along the
-  solutions ([[prop-cm-hamiltonian-branch-identities]] clause 3), so clause 3
-  is the statement that $H$ is a first integral of the chart equations when no
-  explicit time dependence is present; this is the chart-level reading of the
-  energy case of
-  [[thm-cm-point-noether-identity-with-time-reparametrization]], applied to the
-  substituted Lagrangian rather than to the inertial one.
+- **Relation to the Hamiltonian.** On a hyperregular chart the chart energy function equals the branch Hamiltonian $H=p\cdot v-\widetilde L$ along the solutions ([[prop-cm-hamiltonian-branch-identities]] clause 3), so clause 3 is the statement that $H$ is a first integral of the chart equations when no explicit time dependence is present; this is the chart-level reading of the energy case of [[thm-cm-point-noether-identity-with-time-reparametrization]], applied to the substituted Lagrangian rather than to the inertial one.
 
-- **Empirical status.** All clauses concern the model's coordinate description
-  and are conditional deductions from the adopted force branch, the declared
-  presentation and the smooth invertibility of $X$; no measurement is reported
-  and no chart quantity is identified with a measured energy.
+- **Empirical status.** All clauses concern the model's coordinate description and are conditional deductions from the adopted force branch, the declared presentation and the smooth invertibility of $X$; no measurement is reported and no chart quantity is identified with a measured energy.

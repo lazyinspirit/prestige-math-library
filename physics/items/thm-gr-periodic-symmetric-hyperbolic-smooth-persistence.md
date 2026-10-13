@@ -65,16 +65,16 @@ verification:
 ## Statement
 
 Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$
-([[def-countable-choice]]). Let $s\ge5$, let $A^\mu,B$ be a periodic symmetric
+([[def-countable-choice]]). Let $s\ge5$ be an integer, let $A^\mu,B$ be a periodic symmetric
 hyperbolic coefficient family on the open set $O\subseteq\mathbb R^m$, let
 $K\subseteq\operatorname{int}K'\subseteq O$ be compact, let $R\ge0$, and let
 $T>0$ and $C$ be as in [[thm-gr-periodic-symmetric-hyperbolic-existence]] for
 the data class $\mathcal S(K,R)$. Let $u_0\in C^\infty(\mathbb T^3_{2\pi};\mathbb R^m)$
 take values in $K$ and satisfy $\|u_0\|_{H^s}\le R$. Then the solution $u\in L^\infty((-T,T);H^s)\cap C^0H^{s-1}$
-of that theorem with $u(0)=u_0$ satisfies $u\in L^\infty((-T,T);H^m)$ and
-$\partial_tu\in L^\infty((-T,T);H^{m-1})$ for every $m\ge s$, with bounds
-depending only on $m$, $T$, $R$, the coefficient family, $K'$ and the $H^j$ bounds
-of $u_0$ for $j\le m$; consequently $u\in C^\infty((-T,T)\times\mathbb T^3_{2\pi})$
+of that theorem with $u(0)=u_0$ satisfies $u\in L^\infty((-T,T);H^q)$ and
+$\partial_tu\in L^\infty((-T,T);H^{q-1})$ for every integer $q\ge s$, with bounds
+depending only on $q$, $T$, $R$, the coefficient family, $K'$ and the $H^j$ bounds
+of $u_0$ for $j\le q$; consequently $u\in C^\infty((-T,T)\times\mathbb T^3_{2\pi})$
 and solves $(\star)$ classically.
 
 ## Facts & Assumptions

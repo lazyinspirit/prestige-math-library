@@ -36,16 +36,18 @@ page and to the parameters of the frame transformations of
 [[post-cm01-frames]]: the time coordinate $t$, the spatial coordinates $x_{i}$,
 the worldline parameter, the coordinate velocity $w$ and acceleration $a$ of
 [[def-cm01-velocity-acceleration]], the masses $m_{i}$ and the mass operator,
-the parameters $b,a,v,R$ of a Galilean transformation, the quantities
-transformed in the laws $t'=t+b$, $x'=Rx+vt+a$, $w'=Rw+v$, $a'=Ra$ of
+the parameters $b,a_0,v,R$ of a Galilean transformation, the quantities
+transformed in the laws $t'=t+b$, $x'=Rx+vt+a_0$, $w'=Rw+v$, $a'=Ra$ of
 [[pthm-cm01-galilean-kinematics]], and the frequency $\omega$ and coordinates
 $y$ of the rotating-basis example of the page.
+
+For the rotating-coordinate bookkeeping, let $s\in\mathbb R$ be time, let $\omega>0$ be a scalar frequency with $[\omega]=\tau^{-1}$, put $\boldsymbol\omega=(0,0,\omega)$, and let $y:\mathbb R\to\mathbb R^3$ be a $C^2$ coordinate curve whose components have dimension $\ell$. For the constraint bookkeeping define, independently, $G:(\mathbb R^3)^2\to\mathbb R$ by $G(x_1,x_2)=\sum_{j=1}^3((x_1)_j-(x_2)_j)^2-h^2$, with a fixed length $h>0$. These local formulas specify the objects whose dimensions are checked; no result about their motions or level sets is borrowed from a sibling example. Cross products use the explicit component formula of [[def-cm01-units]].
 
 ## Facts & Assumptions
 
 **Given:** The dimension symbols $\ell,\tau,\mu$ and the rules $[XY]=[X][Y]$, $[X/Y]=[X][Y]^{-1}$, $[dX/du]=[X][u]^{-1}$, together with the requirements that a sum is formed only from equal dimensions and that $[t]=\tau$, $[x_{i}]=\ell$, $[m]=\mu$, $[R_{ij}]=1$ ([[def-cm01-units]]).
 
-[L1] Dimensions of the frame parameters: $[b]=\tau$, $[a_{i}]=\ell$, $[v_{i}]=\ell\tau^{-1}$ and $[R_{ij}]=1$; the transformation laws are $t'=t+b$, $x'=Rx+vt+a$, $w'=Rw+v$ and $a'=Ra$ ([[post-cm01-frames]], [[pthm-cm01-galilean-kinematics]]).
+[L1] Dimensions of the frame parameters: $[b]=\tau$, $[(a_0)_{i}]=\ell$, $[v_{i}]=\ell\tau^{-1}$ and $[R_{ij}]=1$; the transformation laws are $t'=t+b$, $x'=Rx+vt+a_0$, $w'=Rw+v$ and $a'=Ra$ ([[post-cm01-frames]], [[pthm-cm01-galilean-kinematics]]).
 
 [L2] Coordinate velocity and acceleration: $w=x_{\gamma}'$ and $a=x_{\gamma}''$ for the coordinate curve $x_{\gamma}$ of a worldline in a frame, whose parameter is the frame time ([[def-cm01-velocity-acceleration]], [[post-cm01-worldlines]]).
 
@@ -62,11 +64,11 @@ quantity and combine.
 
 3.1 The masses have $[m_{i}]=\mu$, so the mass operator has dimension $\mu$ by [L3]; the momentum $p=mw$ has $[p]=\mu\ell\tau^{-1}$ and the product $m a$ has $[ma]=\mu\ell\tau^{-2}$, both being products of the displayed dimensions. [step 2.1, L3, algebra]
 
-3.2 The frame parameters have the dimensions of [L1]; each law of [L1] is dimensionally consistent: $[t']=[t+b]=\tau$ because $[t]=[b]=\tau$; in $x'=Rx+vt+a$ the three summands have dimensions $\ell$, $\ell\tau^{-1}\cdot\tau=\ell$ and $\ell$; $[w']=[Rw+v]=\ell\tau^{-1}$ because $[Rw]=\ell\tau^{-1}$ and $[v]=\ell\tau^{-1}$; and $[a']=[Ra]=\ell\tau^{-2}$. [step 2.1, L1, algebra]
+3.2 The frame parameters have the dimensions of [L1]; each law of [L1] is dimensionally consistent: $[t']=[t+b]=\tau$ because $[t]=[b]=\tau$; in $x'=Rx+vt+a_0$ the three summands have dimensions $\ell$, $\ell\tau^{-1}\cdot\tau=\ell$ and $\ell$; $[w']=[Rw+v]=\ell\tau^{-1}$ because $[Rw]=\ell\tau^{-1}$ and $[v]=\ell\tau^{-1}$; and $[a']=[Ra]=\ell\tau^{-2}$. [step 2.1, L1, algebra]
 
-4.1 For the rotating-basis coordinates $y$ of the page and the angular speed $\omega>0$ measured in radians per second, $[\omega]=\tau^{-1}$ under the radian convention, and the two terms of the identity displayed in that example are consistent with the acceleration: $[\omega\times y]=\tau^{-1}\ell=\ell\tau^{-1}=[y']$ and $[\omega\times(\omega\times y)]=\tau^{-2}\ell=\ell\tau^{-2}=[y'']$, where each component of a cross product is a sum of products of two components, so its dimension is the product of the dimensions. [step 3.2, algebra]
+4.1 For the locally specified rotating-basis coordinates $y$ and the angular speed $\omega>0$ measured in radians per second, $[\omega]=\tau^{-1}$ under the radian convention, and the two cross-product expressions are consistent with the acceleration: $[\boldsymbol\omega\times y]=\tau^{-1}\ell=\ell\tau^{-1}=[y']$ and $[\boldsymbol\omega\times(\boldsymbol\omega\times y)]=\tau^{-2}\ell=\ell\tau^{-2}=[y'']$, where each component of a cross product is a sum of products of two components, so its dimension is the product of the dimensions. [step 3.2, algebra]
 
-5.1 Finally the constraint function of the two-particle example has dimension $\ell^{2}$; the level equation $G(x)=0$ relates a quantity of dimension $\ell^{2}$ to the number $0$, which is admissible because $0$ is the neutral element of addition in every dimension, and multiplying $G$ by a nonzero constant of any fixed dimension produces the same zero set with the same ranks of $DG$ on it, as recorded with the definition of the configuration stage; all quantities and laws of this page are therefore dimensionally consistent under the stated conventions. [step 4.1, algebra] ∎
+5.1 Finally the locally defined two-particle constraint function has dimension $\ell^{2}$; the level equation $G(x)=0$ relates a quantity of dimension $\ell^{2}$ to the number $0$, which is admissible because $0$ is the neutral element of addition in every dimension, and multiplying $G$ by a nonzero constant of any fixed dimension produces the same zero set with the same ranks of $DG$ on it, as recorded with the definition of the configuration stage; all quantities and laws of this page are therefore dimensionally consistent under the stated conventions. [step 4.1, algebra] ∎
 
 ## Remarks
 

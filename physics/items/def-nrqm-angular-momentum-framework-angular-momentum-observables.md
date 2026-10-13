@@ -6,8 +6,8 @@ domain: physics
 title: "Orbital, spin and total angular momentum of the massive spin-s model: assigned sharp observables, units and readings"
 status: draft
 origin: session
-dependency_level: 10
-deps: [def-axiom-of-choice, def-countable-choice, def-dependent-choice, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-self-adjoint-positive-unitary-and-normal-operator, def-strongly-continuous-one-parameter-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-nrqm-angular-momentum-product-flow-generator, lem-nrqm-angular-momentum-su2-lift-of-the-rotation-action, lem-nrqm-angular-momentum-orbital-casimir-identity, lem-nrqm-kinematics-componentwise-position-and-momentum, lem-nrqm-symmetries-rotation-generators-on-schwartz-classes, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-observable-and-probability, post-nrqm-framework-state-and-composition, prop-nrqm-orbital-and-spin-finite-spin-matrices, thm-bounded-borel-pvm-integral, thm-nrqm-orbital-and-spin-sphere-onb, thm-nrqm-orbital-and-spin-orbital-self-adjoint-generators]
+dependency_level: 9
+deps: [def-axiom-of-choice, def-countable-choice, def-dependent-choice, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-self-adjoint-positive-unitary-and-normal-operator, def-strongly-continuous-one-parameter-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-nrqm-angular-momentum-product-flow-generator, lem-nrqm-angular-momentum-su2-lift-of-the-rotation-action, lem-nrqm-angular-momentum-orbital-casimir-identity, lem-nrqm-kinematics-componentwise-position-and-momentum, lem-nrqm-symmetries-rotation-generators-on-schwartz-classes, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-observable-and-probability, post-nrqm-framework-state-and-composition, prop-nrqm-orbital-and-spin-finite-spin-matrices, thm-bounded-borel-pvm-integral, thm-nrqm-orbital-and-spin-sphere-onb, thm-nrqm-orbital-and-spin-orbital-self-adjoint-generators]
 dependency_roles:
   def-axiom-of-choice: mathematical-premise
   def-countable-choice: mathematical-premise
@@ -25,6 +25,7 @@ dependency_roles:
   lem-nrqm-angular-momentum-orbital-casimir-identity: mathematical-premise
   lem-nrqm-kinematics-componentwise-position-and-momentum: mathematical-premise
   lem-nrqm-symmetries-rotation-generators-on-schwartz-classes: mathematical-premise
+  post-nrqm-framework-autonomous-dynamics: physical-assumption
   post-nrqm-framework-identical-particles-and-spin: physical-assumption
   post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle: physical-assumption
   post-nrqm-framework-observable-and-probability: physical-assumption
@@ -59,6 +60,7 @@ mass parameter $m>0$, spin label $s\in\{0,\tfrac12,1,\tfrac32,\dots\}$ and
 $r=2s+1$
 ([[post-nrqm-framework-state-and-composition]],
 [[post-nrqm-framework-observable-and-probability]],
+[[post-nrqm-framework-autonomous-dynamics]],
 [[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]],
 [[post-nrqm-framework-identical-particles-and-spin]],
 [[def-nrqm-state-geometry-framework-state-space]],
@@ -103,7 +105,10 @@ $$[S_{i},S_{j}]=i\hbar\sum_{k=1}^{3}\varepsilon_{ijk}S_{k},\qquad S^{2}:=S_{x}^{
 [[post-nrqm-framework-identical-particles-and-spin]] clause (ii)). The
 **ladder** operators $S_{\pm}:=S_{x}\pm iS_{y}$ and the finite projections on
 the basis vectors $e_{m}$ are structural objects of the internal factor, not
-assigned sharp observables, and $S_{\pm}$ are not self-adjoint. For $s=\tfrac12$
+assigned sharp observables. They satisfy $S_+^*=S_-$; for $s>0$ they
+are not self-adjoint, since $S_+e_{-s}=\hbar\sqrt{2s}\,e_{-s+1}\ne0$
+whereas $S_-e_{-s}=0$, while for $s=0$ both vanish and are self-adjoint.
+For $s=\tfrac12$
 one has $S_{i}=\tfrac{\hbar}{2}\sigma_{i}$ in the Pauli matrices
 ([[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clause (e)). The internal
 factor is a finite-dimensional bookkeeping factor: it is not a spatial
@@ -139,9 +144,12 @@ are outside the definition.
 ## Remarks
 
 - **Why the sum is a definition and not a theorem.** The operator identity
-  $J_{i}^{\mathrm{tot}}=L_{i}+S_{i}$ requires the strong commutation of the
-  two summands for self-adjointness of the sum; that commutation and the
-  product-flow identity are proved in
+  $J_{i}^{\mathrm{tot}}=L_{i}+S_{i}$ is self-adjoint on $D(L_i)$ because
+  $S_i$ is bounded self-adjoint; the adjoint-domain argument in
+  [[lem-nrqm-angular-momentum-product-flow-generator]] Proof steps 1.1,
+  1.3 and 2.1 uses no commutation hypothesis for this conclusion.
+  Strong commutation identifies the flow of the sum with the product of
+  the two flows; that commutation and product-flow identity are proved in
   [[lem-nrqm-angular-momentum-su2-lift-of-the-rotation-action]], and this
   definition only names the resulting assigned observable.
 - **Orbital and spin are distinct.** $L_{i}$ acts on the spatial factor and

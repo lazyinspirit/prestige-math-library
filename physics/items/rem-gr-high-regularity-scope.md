@@ -11,8 +11,9 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 proof_strategy: null
-deps: [pthm-gr-high-regularity-local-development, thm-gr-high-regularity-selected-matter-development, post-gr-einstein-field-law, def-gr-dust-matter-model, def-gr-perfect-fluid-matter-model, def-gr-scalar-field-matter-model, def-countable-choice, def-dependent-choice]
+deps: [thm-gr-dust-local-evolution, pthm-gr-high-regularity-local-development, thm-gr-high-regularity-selected-matter-development, post-gr-einstein-field-law, def-gr-dust-matter-model, def-gr-perfect-fluid-matter-model, def-gr-scalar-field-matter-model, def-countable-choice, def-dependent-choice]
 dependency_roles:
+  thm-gr-dust-local-evolution: mathematical-premise
   pthm-gr-high-regularity-local-development: physical-result
   thm-gr-high-regularity-selected-matter-development: mathematical-premise
   post-gr-einstein-field-law: physical-assumption

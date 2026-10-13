@@ -1,7 +1,7 @@
 ---
 id: pthm-cm13-hamiltonian-field-integrates-the-model-equations
 kind: physics-theorem
-title: "Integral curves of the presentation's Hamiltonian field are exactly the momentum-phase curves of the model's motions, in every chart; and the forced field is Hamiltonian exactly when the residual force has a velocity-independent potential"
+title: "Cartesian model motions on the potential branch and declared generalized-coordinate Lagrange equations integrate their Hamiltonian fields; the forced Cartesian field is Hamiltonian exactly when the residual force has a velocity-independent potential"
 status: draft
 origin: session
 domain: physics
@@ -67,7 +67,11 @@ $\widetilde H(t,q,P)=\tfrac12P\cdot G(q)^{-1}P+\widetilde U(t,q)$
 ([[def-cm12-hamiltonian]], [[pthm-cm12-mechanical-hyperregularity]],
 [[def-cm07-generalized-coordinates-and-forces]],
 [[def-cm12-cotangent-momentum]]). Let $J\subseteq I_{0}$ be a nonempty open
-interval. Then:
+interval. For clause 4, a time-dependent phase function is a map
+$f:I_{0}\times W\to\mathbb R$ of class $C^{2}$; write $f_{t}(z):=f(t,z)$
+and use [[def-cm13-hamiltonian-field]] to define the associated family of
+Hamiltonian fields $t\mapsto X_{f_t}$. The forced field is called Hamiltonian
+on this full chart when it equals $X_{f_t}$ for every $t\in I_{0}$. Then:
 
 1. **(potential branch, Cartesian chart)** Assume $d\equiv0$ on the state
    domain. For a $C^{2}$ curve $x:J\to Q$ with $p(t):=\mathsf Mx'(t)$ the
@@ -94,8 +98,8 @@ interval. Then:
    $\dot x=H_{p}$ and $\dot p=-H_{x}+d(t,x,\mathsf M^{-1}p)$ on $J$.
 4. **(when is the forced field Hamiltonian?)** The forced field
    $(x,p)\mapsto\bigl(\mathsf M^{-1}p,-\nabla_{x}U(t,x)+d(t,x,\mathsf M^{-1}p)\bigr)$
-   is the Hamiltonian field of a $C^{2}$ phase function on its domain if and
-   only if there is a $C^{2}$ function $V:I_{0}\times Q\to\mathbb R$ with
+   is Hamiltonian in the preceding time-dependent sense if and only if there
+   is a $C^{2}$ function $V:I_{0}\times Q\to\mathbb R$ with
    $d(t,x,v)=-\nabla_{x}V(t,x)$ for every $(t,x,v)$ of the state domain; in
    that case the phase function is $H+V$ up to an independently chosen
    additive $C^2$ function of $t$ on each connected component of $Q$, and the model's forced motions are the motions of the potential
@@ -107,15 +111,13 @@ solutions, no completeness, no conservation law and no empirical content.
 
 ## Facts & Assumptions
 
-**Given:** The model with its potential presentation and the two branch
-charts with their Hamiltonians and Hamiltonian fields of
-[[def-cm13-hamiltonian-field]].
+**Given:** The model with its potential presentation and the two branch charts with their Hamiltonians and Hamiltonian fields of [[def-cm13-hamiltonian-field]].
 
 [F1] Model and motions ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm03-potential-and-mechanical-energy]], [[post-cm02-force-superposition]], [[def-cm01-configuration]], [[def-cm01-units]], [[def-cm02-newtonian-flow]]): the force branch has the standing regularity, a motion is a curve with $m_{i}\ddot x_{i}=F_{i}(t,x,\dot x)$, and on the potential branch $F_{i}=-\nabla_{x_{i}}U+d_{i}$ with the residual forces of the standing regularity.
 
-[F2] Branch Hamiltonians and equivalence ([[pthm-cm12-mechanical-hyperregularity]], [[def-cm12-hamiltonian]], [[pthm-cm12-hamilton-equivalence]], [[def-cm12-cotangent-momentum]], [[def-cm07-generalized-coordinates-and-forces]]): the presentation is hyperregular on both charts with $H(t,x,p)=\tfrac12p\cdot\mathsf M^{-1}p+U(t,x)$, $H_{p}=\mathsf M^{-1}p$, $H_{x}=\nabla_{x}U$, and $\widetilde H(t,q,P)=\tfrac12P\cdot G(q)^{-1}P+\widetilde U(t,q)$; the model's motions with $p=\mathsf Mx'$ are exactly the solutions of Hamilton's equations of $H$, the forced equation is exactly Hamilton's equations with the residual force added to the momentum source, and in a generalized-coordinate chart the declared Lagrange equations are equivalent to the Hamilton system of $\widetilde H$ with residual generalized force $Q^{\mathrm{res}}$.
+[F2] Branch Hamiltonians and equivalence ([[pthm-cm12-mechanical-hyperregularity]], [[def-cm12-hamiltonian]], [[pthm-cm12-hamilton-equivalence]], [[def-cm12-cotangent-momentum]], [[def-cm07-generalized-coordinates-and-forces]]): the presentation is hyperregular on both charts with $H(t,x,p)=\tfrac12p\cdot\mathsf M^{-1}p+U(t,x)$, $H_{p}=\mathsf M^{-1}p$, $H_{x}=\nabla_{x}U$, and $\widetilde H(t,q,P)=\tfrac12P\cdot G(q)^{-1}P+\widetilde U(t,q)$; when $d\equiv0$, the model's motions with $p=\mathsf Mx'$ are exactly the solutions of Hamilton's equations of $H$, the forced equation is exactly Hamilton's equations with the residual force added to the momentum source, and in a generalized-coordinate chart the declared Lagrange equations are equivalent to the Hamilton system of $\widetilde H$ with residual generalized force $Q^{\mathrm{res}}$.
 
-[F3] The Hamiltonian field ([[def-cm13-hamiltonian-field]], [[pthm-cm13-two-form-is-symplectic]], [[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]], [[def-cm13-two-form]]): for each $t$ the field $X_{H_{t}}$ is the unique $C^{1}$ field with $\iota_{X_{H_{t}}}\omega=dH_{t}$ and in the coordinates of each chart reads $X_{H_{t}}=\bigl(H_{p},-H_{x}\bigr)$, resp. $\bigl(\widetilde H_{P},-\widetilde H_{q}\bigr)$; an integral curve of the time-dependent field is by definition a solution of $\dot z(t)=X_{H_{t}}(z(t))$.
+[F3] Hamiltonian fields ([[def-cm13-hamiltonian-field]], [[pthm-cm13-two-form-is-symplectic]], [[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]], [[def-cm13-two-form]]): for each $t$, $H_t$ is a $C^2$ phase function and $X_{H_t}$ is the unique $C^1$ field with $\iota_{X_{H_t}}\omega=dH_t$; in the Cartesian and generalized-coordinate charts its components are $(H_p,-H_x)$ and $(\widetilde H_P,-\widetilde H_q)$. For a joint $C^2$ phase function $f:I_0\times W\to\mathbb R$, each frozen-time function $f_t$ is $C^2$ and has the field $X_{f_t}$ defined in [[def-cm13-hamiltonian-field]]; a solution of the time-dependent field is a curve satisfying $\dot z(t)=X_{H_t}(z(t))$.
 
 [F4] Calculus ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[thm-ck-euclidean-maps-closed-under-algebra-and-composition]], [[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]], [[cor-zero-total-derivative-on-a-convex-open-set-is-constant]], [[thm-algebra-of-derivatives]]): $C^{2}$ classes are closed under the displayed algebra and composition, gradients and partial derivatives are computed by the ordinary product and chain rules, $\nabla_{p}\bigl(\tfrac12p\cdot\mathsf M^{-1}p\bigr)=\mathsf M^{-1}p$ because $\mathsf M^{-1}$ is symmetric, and a totally differentiable function with vanishing total derivative on a convex open set is constant.
 
@@ -131,22 +133,16 @@ charts with their Hamiltonians and Hamiltonian fields of
 
 1.4 Clause 3: the forced equation $\mathsf Mx''=-\nabla_{x}U(t,x)+d(t,x,x')$ with $p=\mathsf Mx'$ is, by [F2], equivalent to $\dot x=H_{p}$ together with $\dot p=-H_{x}+d(t,x,\mathsf M^{-1}p)$, since $\dot p=\mathsf Mx''$ and $H_{p}=\mathsf M^{-1}p=x'$; this is the claim. [F2, algebra]
 
-1.5 Clause 4, sufficiency: if $d(t,x,v)=-\nabla_{x}V(t,x)$ with $V$ of class $C^{2}$, then $f:=H+V$ is $C^{2}$ by [F4] and its Hamiltonian field has components $f_{p}=\mathsf M^{-1}p$ and $-f_{x}=-\nabla_{x}U-\nabla_{x}V=-\nabla_{x}U+d$, which is the forced field; an independently chosen additive $C^2$ function of $t$ on each connected component of $Q$ changes neither gradient and gives the same field. [F2, F3, F4, algebra]
+1.5 Clause 4, sufficiency: if $d(t,x,v)=-\nabla_{x}V(t,x)$ with $V$ of class $C^{2}$, then $f:=H+V$ belongs to $C^{2}(I_0\times W)$ by [F4] and its frozen-time Hamiltonian fields have components $f_{p}=\mathsf M^{-1}p$ and $-f_{x}=-\nabla_{x}U-\nabla_{x}V=-\nabla_{x}U+d$, which is the forced field; adding an independently chosen $C^2$ function of $t$ on each connected component of $Q$ changes neither spatial nor momentum gradient and gives the same field. [F2, F3, F4, algebra]
 
 2.1 Clause 1: step 1.2 identifies clauses 1(a) and 1(b), and step 1.1 identifies clauses 1(b) and 1(c); hence all three are equivalent. [step 1.1, step 1.2]
 
-2.2 Clause 4, necessity: suppose the forced field equals $X_{f}$ for a $C^{2}$ function $f$ on a phase domain containing the chart; comparing first components gives $f_{p}(t,x,p)=\mathsf M^{-1}p$, so $\nabla_{p}\bigl(f-\tfrac12p\cdot\mathsf M^{-1}p\bigr)=0$; for each fixed $(t,x)$ the map $p\mapsto f(t,x,p)-\tfrac12p\cdot\mathsf M^{-1}p$ has vanishing total derivative on the convex open set $\mathbb R^{3N}$, so by [F4] it is constant, and evaluating at $p=0$ gives $f(t,x,p)=\tfrac12p\cdot\mathsf M^{-1}p+g(t,x)$ with $g(t,x):=f(t,x,0)$ of class $C^{2}$ by [F4]; comparing second components gives $-\nabla_xU+d=-\nabla_xg$, hence $d(t,x,v)=-\nabla_x(g-U)(t,x)$ for every state, so the asserted velocity-independent potential is $V:=g-U$. For any fixed admissible $V$, two phase functions producing this same field have difference with both spatial and momentum gradients zero; by the componentwise constancy argument of [[def-cm03-potential-and-mechanical-energy]] clause (c), that difference is a $C^2$ function of $t$ on each connected component of $Q\times\mathbb R^{3N}$, namely each $C\times\mathbb R^{3N}$; the model's forced equation is then $\mathsf Mx''=-\nabla_{x}(U+V)(t,x)$, the equation of the potential presentation with potential $U+V$ and vanishing residual forces. [step 1.5, F1, F2, F4, algebra]
+2.2 Clause 4, necessity: suppose the forced field equals $X_{f_t}$ for some $f\in C^{2}(I_0\times W)$. Comparing first components gives $f_{p}(t,x,p)=\mathsf M^{-1}p$, so $\nabla_{p}\bigl(f-\tfrac12p\cdot\mathsf M^{-1}p\bigr)=0$; for each fixed $(t,x)$ the map $p\mapsto f(t,x,p)-\tfrac12p\cdot\mathsf M^{-1}p$ has vanishing total derivative on the convex open set $\mathbb R^{3N}$, so by [F4] it is constant, and evaluating at $p=0$ gives $f(t,x,p)=\tfrac12p\cdot\mathsf M^{-1}p+g(t,x)$ with $g(t,x):=f(t,x,0)$ of class $C^{2}$ by [F4]; comparing second components gives $-\nabla_xU+d=-\nabla_xg$, hence $d(t,x,v)=-\nabla_x(g-U)(t,x)$ for every state, so the asserted velocity-independent potential is $V:=g-U$. For any fixed admissible $V$, two phase functions producing this same field have difference with both spatial and momentum gradients zero; by the componentwise constancy argument of [[def-cm03-potential-and-mechanical-energy]] clause (c), that difference is a $C^2$ function of $t$ on each connected component of $Q\times\mathbb R^{3N}$, namely each $C\times\mathbb R^{3N}$; the model's forced equation is then $\mathsf Mx''=-\nabla_{x}(U+V)(t,x)$, the equation of the potential presentation with potential $U+V$ and vanishing residual forces. [step 1.5, F1, F2, F4, algebra]
 
 3.1 Collecting: clause 1 is step 2.1, clause 2 is step 1.3, clause 3 is step 1.4, and clause 4 follows from steps 1.5 and 2.2 in the two directions; this proves the statement. [step 2.1, step 1.3, step 1.4, step 1.5, step 2.2] ∎
 
 ## Remarks
 
-- **No solution theory is asserted.** The theorem compares three descriptions of
-  the same first-order equations; existence, uniqueness and maximal domains of
-  solutions are provided separately by the model's initial-value theory and by
-  the ordinary ODE theory used on the later items of this page.
+- **No solution theory is asserted.** The theorem compares three descriptions of the same first-order equations; existence, uniqueness and maximal domains of solutions are provided separately by the model's initial-value theory and by the ordinary ODE theory used on the later items of this page.
 
-- **Why clause 4 matters.** It delimits the model's Hamiltonian branch: a
-  residual force contributes a Hamiltonian field only when it derives from a
-  potential independent of the velocity slot, which is why the flow and
-  volume-preservation items below state the potential branch explicitly.
+- **Why clause 4 matters.** It delimits the model's Hamiltonian branch: a residual force contributes a Hamiltonian field only when it derives from a potential independent of the velocity slot, which is why the flow and volume-preservation items below state the potential branch explicitly.

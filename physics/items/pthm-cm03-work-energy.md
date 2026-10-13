@@ -52,7 +52,7 @@ interval $J$ with nonempty interior. Then:
 
 No potential, no pair decomposition and no conservation hypothesis is used:
 the identity is a consequence of the equation of motion alone, in the fixed
-frame. The power and the work are frame-dependent (see clauses (iv) and (v)
+frame. The power and the work are frame-dependent (see clause 4
 of the frame-transformation item of this page); the mechanical energy
 statement of the potential branch is the energy balance of this page.
 

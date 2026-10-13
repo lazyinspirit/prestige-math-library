@@ -31,14 +31,16 @@ On $H=\mathbb C^2$ with the standard inner product and orthonormal basis $e_1=\b
 
 $$\frac12 I=\frac12T_{e_1,e_1}+\frac12T_{e_2,e_2}=\frac12T_{e_+,e_+}+\frac12T_{e_-,e_-},$$
 
-where $(e_1,e_2)$ and $(e_+,e_-)$ are distinct orthonormal bases of $H$; hence a density operator does not determine its preparation ensemble: the same statistical operator arises from two different mixtures of pure states.
+where $(e_1,e_2)$ and $(e_+,e_-)$ are distinct orthonormal bases of $H$. Thus the same density operator has two distinct orthonormal convex decompositions into rank-one density operators.
 ## Facts & Assumptions
 
 **Given:** $H=\mathbb C^2$ with the standard inner product; the orthonormal basis $(e_1,e_2)$; the unit vectors $e_\pm$; the operators $T_{u,v}x=\langle x,v\rangle u$.
 
-[A1] A density operator is a self-adjoint positive trace-class operator with trace $1$; if $(u_n)$ is an orthonormal family and $w_n\ge0$ with $\sum_nw_n=1$, then $\rho=\sum_nw_nT_{u_n,u_n}$ converges in trace norm to a density operator with $\operatorname{tr}\rho=\sum_nw_n=1$; in particular a finite family of unit vectors with weights $\frac12,\frac12$ gives a density operator ([[lem-nrqm-composites-density-and-scalar-spectral-probability]](a)).
+[A1] A density operator is a self-adjoint positive trace-class operator with trace $1$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]](a), definition only). For a finite family of unit vectors $u_jinmathbb C^2$ and weights $w_jge0$ with $sum_jw_j=1$, set $
+ho:=sum_jw_ju_ju_j^*$. This is a finite matrix and hence trace class; it is self-adjoint, $x^*
+ho x=sum_jw_j|u_j^*x|^2ge0$, and its finite trace is $sum_jw_jsum_{k=1}^2|(u_j)_k|^2=sum_jw_j=1$. Thus it is a density operator even without orthogonality. This is a local finite-matrix calculation, not an invocation of the supplier's Countable Choice expansion.
 
-[A2] $T_{u,v}$ is trace class with $\operatorname{tr}(T_{u,v})=\langle u,v\rangle$ and $\|T_{u,v}\|_1=\|u\|\,\|v\|$; the trace is linear on trace-class operators ([[lem-nrqm-composites-rank-one-operator-calculus]]).
+[A2] $T_{u,v}$ is trace class with $\operatorname{tr}(T_{u,v})=\langle u,v\rangle$ and $\|T_{u,v}\|_1=\|u\|\,\|v\|$; the trace is linear on trace-class operators ([[lem-nrqm-composites-rank-one-operator-calculus]]). In the present $H=\mathbb C^2$ these facts follow directly from $T_{u,v}=uv^*$: the diagonal sum is $\sum_ku_k\overline{v_k}=\langle u,v\rangle$, and $(uv^*)^*(uv^*)=\|u\|^2vv^*$ has at most one nonzero eigenvalue, $\|u\|^2\|v\|^2$, so its singular-value sum is $\|u\|\|v\|$. Finite diagonal sums are linear. No choice principle is used in these finite computations.
 
 [A3] In an orthonormal basis of $\mathbb C^2$ the matrix of $T_{u,v}$ is the column-times-row matrix $uv^*$; $T_{e_1,e_1}$ and $T_{e_2,e_2}$ therefore have matrices $\begin{pmatrix}1&0\\0&0\end{pmatrix}$ and $\begin{pmatrix}0&0\\0&1\end{pmatrix}$.
 
@@ -48,9 +50,9 @@ where $(e_1,e_2)$ and $(e_+,e_-)$ are distinct orthonormal bases of $H$; hence a
 
 2.1 [Fixed $\pm$ basis decomposition] The vectors $e_\pm=\frac{1}{\sqrt2}(e_1\pm e_2)$ are unit and orthogonal since $\langle e_+,e_-\rangle=\frac12(\langle e_1,e_1\rangle-\langle e_1,e_2\rangle+\langle e_2,e_1\rangle-\langle e_2,e_2\rangle)=0$; their matrices are $T_{e_+,e_+}=\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix}$ and $T_{e_-,e_-}=\frac12\begin{pmatrix}1&-1\\-1&1\end{pmatrix}$, so $\frac12T_{e_+,e_+}+\frac12T_{e_-,e_-}=\frac12 I$ again, with weights $\frac12,\frac12$ on an orthonormal family; thus the same operator $\frac12 I$ has a second decomposition. [step 1.1, A1, A3, algebra]
 
-3.1 [The decompositions are different] The two orthonormal families are distinct: $|\langle e_1,e_+\rangle|=\frac{1}{\sqrt2}\notin\{0,1\}$, so $e_1$ is not a scalar multiple of $e_\pm$ and $T_{e_1,e_1}$ is not one of $T_{e_\pm,e_\pm}$ (their matrices of step 2.1 differ from $\begin{pmatrix}1&0\\0&0\end{pmatrix}$); hence the two lists of pure states are not the same up to reordering, while both convex combinations equal the single operator $\frac12 I$ by steps 1.1 and 2.1. Therefore a density operator (here $\frac12 I$, which is not pure) does not determine the ensemble of pure states from which it was prepared, and the expansion of [A1] is not unique. [step 1.1, step 2.1, A1, algebra] ∎
+3.1 [The decompositions are different] The two orthonormal families are distinct: $|\langle e_1,e_+\rangle|=\frac{1}{\sqrt2}\notin\{0,1\}$, so $e_1$ is not a scalar multiple of $e_\pm$ and $T_{e_1,e_1}$ is not one of $T_{e_\pm,e_\pm}$ (their matrices of step 2.1 differ from $\begin{pmatrix}1&0\\0&0\end{pmatrix}$); hence the two lists of rank-one density operators are not the same up to reordering, while both convex combinations equal the single operator $\frac12 I$ by steps 1.1 and 2.1. Therefore this density operator has a nonunique orthonormal convex decomposition into rank-one density operators, consistent with the expansion in [A1]. [step 1.1, step 2.1, A1, algebra] ∎
 
 ## Remarks
 
-- **The density operator records the statistics, not the preparation.** Both decompositions yield the same expectation $\operatorname{tr}(\rho A)=\frac12\operatorname{tr}A$ for every operator $A$, so no measurement of an operator on $H$ alone distinguishes them; the difference is a feature of the preparation, not of $\rho$.
-- **Nonuniqueness needs no optimization.** The two decompositions here are already orthonormal and vary only in the choice of basis, in contrast with decompositions into non-orthogonal pure states (which exist as well but are not needed for this example).
+- **The operator identity is basis-independent.** Both decompositions define the same matrix $\rho=\frac12I$, so $\operatorname{tr}(\rho A)=\frac12\operatorname{tr}A$ for every endomorphism $A$ of $H$.
+- **Nonuniqueness needs no optimization.** The two decompositions here are already orthonormal and vary only in the choice of basis; no operational preparation procedure is specified.

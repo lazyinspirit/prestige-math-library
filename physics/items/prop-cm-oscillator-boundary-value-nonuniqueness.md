@@ -40,7 +40,7 @@ Consider the undamped homogeneous oscillator equation
 
 $$m\,x''(t)+k\,x(t)=0$$
 
-of [[def-cm-oscillator-model-and-phase-system]] on intervals with nonempty interior. Then:
+of [[def-cm-oscillator-model-and-phase-system]] with time domain $I=\mathbb R$ and zero forcing, and its solutions on intervals with nonempty interior. The Dirichlet curves below are restrictions to $[0,T]$ of its global solutions. Then:
 
 1. for every real $A$ the function $x_A(t):=A\sin(\omega t)$ is a $C^2$ (indeed $C^\infty$)
    solution on $\mathbb R$ with $x_A(0)=0$ and $x_A(T)=A\sin(\omega T)$; moreover $x_A(T)=0$ if

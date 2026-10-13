@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 14
-deps: [post-cm17-momentum-balance, post-cm17-mass-balance, post-cm17-contact-force-model, pthm-cm17-continuity-equation, pthm-cm17-stress-matrix-and-symmetry, pthm-cm17-transport-and-material-derivative, thm-cm-local-momentum-balance, def-cm17-density-and-mass, def-cm17-traction-and-stress, def-cm17-continuum-body-and-units, def-cm-euclidean-spatial-calculus, def-cm-continuum-motion, def-countable-choice, def-bounded-c-one-domain-boundary-charts-and-outward-normal, def-surface-integral-on-a-compact-c-one-hypersurface, def-ck-euclidean-maps-and-diffeomorphisms, thm-algebra-of-derivatives, def-interval]
+deps: [post-cm17-momentum-balance, post-cm17-mass-balance, post-cm17-contact-force-model, pthm-cm17-continuity-equation, pthm-cm17-stress-matrix-and-symmetry, pthm-cm17-transport-and-material-derivative, thm-cm-local-momentum-balance, def-cm17-density-and-mass, def-cm17-traction-and-stress, def-cm17-continuum-body-and-units, def-cm-euclidean-spatial-calculus, def-cm-continuum-motion, def-countable-choice, def-bounded-c-one-domain-boundary-charts-and-outward-normal, def-bounded-piecewise-c-one-euclidean-domain, thm-divergence-theorem-for-bounded-piecewise-c-one-domains, def-surface-integral-on-a-compact-c-one-hypersurface, def-ck-euclidean-maps-and-diffeomorphisms, thm-algebra-of-derivatives, def-interval]
 dependency_roles:
   post-cm17-momentum-balance: physical-assumption
   post-cm17-mass-balance: physical-assumption
@@ -22,6 +22,8 @@ dependency_roles:
   def-cm-continuum-motion: mathematical-premise
   def-countable-choice: mathematical-premise
   def-bounded-c-one-domain-boundary-charts-and-outward-normal: mathematical-premise
+  def-bounded-piecewise-c-one-euclidean-domain: mathematical-premise
+  thm-divergence-theorem-for-bounded-piecewise-c-one-domains: mathematical-premise
   def-surface-integral-on-a-compact-c-one-hypersurface: mathematical-premise
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
@@ -84,13 +86,15 @@ relation and no empirical value.
 
 [F5] Algebra ([[def-cm-euclidean-spatial-calculus]], [[thm-algebra-of-derivatives]]): the product rule for the divergence and the componentwise computation of the row divergence; for a symmetric matrix the row and column divergences agree.
 
+[F6] Piecewise-$C^1$ divergence theorem ([[def-bounded-piecewise-c-one-euclidean-domain]], [[thm-divergence-theorem-for-bounded-piecewise-c-one-domains]]): for a bounded domain with a specified finite piecewise-$C^1$ presentation and a $C^1$ vector field on a neighborhood of its closure, the integral of its divergence equals the outward flux over the presented faces. Applied to each row of a $C^1$ stress field, this gives $\int_{\partial D}\sigma\nu_D\,dS=\int_D g\,dx$ with $g_i=\sum_j\partial_j\sigma_{ij}$.
+
 ## Proof
 
 **Proof technique:** direct; convert the force-form balance on material subregions into the integral momentum balance with the transport identity and the continuity equation, then instantiate the mathematical localization theorem.
 
 1.1 Fix a material subregion $B'$ and $t\in J_0$. By hypothesis $\chi_t(B')$ is an admissible region at time $t$; the force balance [F4] with $D:=\chi_t(B')$ reads $\int_{\partial\chi_t(B')}t(t,y,\nu)\,dS+\int_{\chi_t(B')}(\rho b-\rho D_tu)\,dy=0$. Replacing $t(t,y,\nu)=\sigma(t,y)\nu$ by [F1] and rearranging gives $\int_{\chi_t(B')}\rho\,D_tu\,dy=\int_{\chi_t(B')}\rho b\,dy+\int_{\partial\chi_t(B')}\sigma\nu\,dS$. [given, F1, F4, algebra]
 
-1.2 Conversely suppose (M) holds with the same continuous fields and a $C^1$ stress representing $t$. At fixed time extend the stress to the field neighborhood by its columns $\sigma e_j=t(e_j)$, which are $C^1$; on the current region this agrees with [F1], and continuity carries the traction identity to the boundary of every admissible $D\subseteq\Omega_t$. Apply [[thm-divergence-theorem-for-bounded-piecewise-c-one-domains]] componentwise to these rows on $D$: $\int_{\partial D}\sigma\nu_D\,dS=\int_D g\,dx$. Integrating (M) therefore gives $\int_{\partial D}t\,dS+\int_D(\rho b-\rho a)dx=0$, precisely (F). On a smooth material image, [F2] identifies $\int_D\rho a$ with the derivative of its momentum integral, giving (L) too. This proves the converse without assuming either balance in that direction. [given, F1, F2, F5, algebra]
+1.2 Conversely suppose (M) holds with the same continuous fields and a $C^1$ stress representing $t$. At fixed time extend the stress to the field neighborhood by its columns $\sigma e_j=t(e_j)$, which are $C^1$; on the current region this agrees with [F1], and continuity carries the traction identity to the boundary of every admissible $D\subseteq\Omega_t$. By [F6], applied componentwise to these rows, $\int_{\partial D}\sigma\nu_D\,dS=\int_D g\,dx$. Integrating (M) therefore gives $\int_{\partial D}t\,dS+\int_D(\rho b-\rho a)dx=0$, precisely (F). On a smooth material image, [F2] identifies $\int_D\rho a$ with the derivative of its momentum integral, giving (L) too. This proves the converse without assuming either balance in that direction. [given, F1, F2, F5, F6, algebra]
 
 2.1 The transport identity of [F2] applied componentwise to the field $\rho u_i$ and the continuity equation give $\frac{d}{dt}\int_{\chi_t(B')}\rho u_i\,dx=\int_{\chi_t(B')}\bigl(\partial_t(\rho u_i)+\operatorname{div}(\rho u_iu)\bigr)dx=\int_{\chi_t(B')}\rho\,(D_tu)_i\,dx$; comparing with step 1.1 shows that the integral momentum balance (L) of [F3] holds for every material subregion and every $t\in J_0$. [given, step 1.1, F2, F5, algebra]
 
@@ -100,15 +104,6 @@ relation and no empirical value.
 
 ## Remarks
 
-- **Two equivalent forms.** Steps 1.1-4.1 show that the force-form balance on
-  material subregions, the continuity equation and the transport identity
-  together are equivalent to the integral momentum balance (L); the local
-  equation (M) is the localization of either form. In a model in which the
-  mass balance carries source terms, the continuity equation changes and the
-  equivalence with (M) is lost.
+- **Two equivalent forms.** Steps 1.1-4.1 show that the force-form balance on material subregions, the continuity equation and the transport identity together are equivalent to the integral momentum balance (L); the local equation (M) is the localization of either form. In a model in which the mass balance carries source terms, the continuity equation changes and the equivalence with (M) is lost.
 
-- **What is not claimed.** Equation (M) is an identity satisfied by any motion
-  of the model; it neither asserts that motions exist for given data nor
-  determines them without a constitutive law relating $\sigma$ to the
-  motion. The elastic and fluid items below supply such laws, and the local
-  well-posedness theorem of this page uses them.
+- **What is not claimed.** Equation (M) is an identity satisfied by any motion of the model; it neither asserts that motions exist for given data nor determines them without a constitutive law relating $\sigma$ to the motion. The elastic and fluid items below supply such laws, and the local well-posedness theorem of this page uses them.

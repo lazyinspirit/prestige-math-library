@@ -113,11 +113,12 @@ and proper time affine parameter, and its coordinate angular velocity satisfies
 
 $$\Bigl(\frac{d\varphi}{dt}\Bigr)^2=\frac{G_Nm_*}{r_0^3}.$$
 
-**(b) No circular free-fall orbit below the threshold.** If an equatorial
-future timelike geodesic of the datum has $r\equiv r_0>s$ constant on an
-interval of positive length, then $r_0>\frac{3s}{2}$; in particular no ideal
-freely falling massive test body is assigned a circular worldline of radius
-$s<r_0\le\frac{3s}{2}$.
+**(b) No circular free-fall orbit below the threshold.** If a future timelike
+geodesic of the datum, parametrized by proper time, has $r\equiv r_0>s$
+constant on an interval of positive length, then $r_0>\frac{3s}{2}$,
+regardless of angular orientation; in
+particular no ideal freely falling massive test body is assigned a circular
+worldline of radius $s<r_0\le\frac{3s}{2}$.
 
 **(c) Stability threshold of the restricted radial potential.** For each
 $r>\frac{3s}{2}$ set $\ell_r^2=c^2sr^2/(2r-3s)$. Differentiate
@@ -156,7 +157,7 @@ free-fall rule.
 
 [A2] The model satisfies the field law with $T=0$ and $\Lambda=0$ and its spacetime is the smooth time-oriented Lorentzian four-manifold of the exterior datum ([[pthm-gr-schwarzschild-vacuum-model]] clause (a), [[def-gr-schwarzschild-exterior-model]], [[def-gr-smooth-lorentzian-objects]]).
 
-[L1] For every $r_0>\frac{3s}{2}$ the curve of clause (a) of [[lem-gr-schwarzschild-circular-orbits-and-photon-sphere]] is a future timelike geodesic with $g(\gamma',\gamma')=-c^2$, conserved quantities $e,\ell$ of [[lem-gr-schwarzschild-timelike-geodesic-reduction]], and coordinate angular velocity $(d\varphi/dt)^2=G_Nm_*/r_0^3$; conversely an equatorial timelike geodesic with constant radius $r_0>s$ on an interval of positive length satisfies $r_0>\frac{3s}{2}$ and $\ell^2=c^2sr_0^2/(2r_0-3s)$; and $V_\ell''(r)=c^2s(r-3s)/(r^3(2r-3s))$ holds on $r>\frac{3s}{2}$ ([[lem-gr-schwarzschild-circular-orbits-and-photon-sphere]] clauses (a)-(c)).
+[L1] For every $r_0>\frac{3s}{2}$ the curve of clause (a) of [[lem-gr-schwarzschild-circular-orbits-and-photon-sphere]] is a future timelike geodesic with $g(\gamma',\gamma')=-c^2$, conserved quantities $e,\ell$ of [[lem-gr-schwarzschild-timelike-geodesic-reduction]], and coordinate angular velocity $(d\varphi/dt)^2=G_Nm_*/r_0^3$; conversely any future timelike geodesic parametrized by proper time with constant radius $r_0>s$ on an interval of positive length satisfies $r_0>\frac{3s}{2}$, and in the equatorial case it also satisfies $\ell^2=c^2sr_0^2/(2r_0-3s)$; and, after differentiating at fixed $\ell$ and evaluating at $r>\frac{3s}{2}$ with $\ell^2=c^2sr^2/(2r-3s)$, one has $V_\ell''(r)=c^2s(r-3s)/(r^3(2r-3s))$ ([[lem-gr-schwarzschild-circular-orbits-and-photon-sphere]] clauses (a)-(c)).
 
 [L2] For $\ell\ne0$ the curve with $r=\frac{3s}{2}$ and $x^0_0,\varphi_0$ as in clause (d) is a future null geodesic with conserved quantities $e_0,\ell$ and $(d\varphi/dt)^2=4c^2/(27s^2)$ ([[lem-gr-schwarzschild-circular-orbits-and-photon-sphere]] clause (d), [[def-geodesic-of-an-affine-connection]], [[def-causal-classification-of-lorentz-vectors]]).
 
@@ -170,9 +171,9 @@ free-fall rule.
 
 1.1 (Circular free-fall orbits.) By [A2] the adopted model satisfies the field law with $T=0$ and $\Lambda=0$ and its spacetime is the exterior datum. Let $r_0>\frac{3s}{2}$ and let $\gamma$ be the curve of [L1]; by [L1] it is a future timelike geodesic with $g(\gamma',\gamma')=-c^2$, so by [A1] its restriction to the actual domain of an ideal freely falling massive test body with the same initial event and tangent is the body's physical history. The all-real curve is its unique maximal mathematical continuation by [[pthm-gr-free-fall-worldline-is-determined-by-initial-data]]; proper time is an affine parameter, and [L1] gives $(d\varphi/dt)^2=G_Nm_*/r_0^3$ with $t=x^0/c$ as in [L3]. This proves (a). [A1, A2, L1, L3, algebra]
 
-1.2 (No circular orbit below the threshold.) Let $\gamma$ be an equatorial future timelike geodesic with $r\equiv r_0>s$ on an interval of positive length; by [L1] it satisfies $r_0>\frac{3s}{2}$ and $\ell^2=c^2sr_0^2/(2r_0-3s)$. Hence no such geodesic exists for $s<r_0\le\frac{3s}{2}$, and by [A1] the model assigns no circular worldline of those radii to an ideal freely falling massive test body. This proves (b). [A1, L1, algebra]
+1.2 (No circular orbit below the threshold.) Let $\gamma$ be any future timelike geodesic parametrized by proper time with $r\equiv r_0>s$ on an interval of positive length; by [L1] it satisfies $r_0>\frac{3s}{2}$ without an angular-orientation restriction. Hence no such geodesic exists for $s<r_0\le\frac{3s}{2}$, and by [A1] the model assigns no circular worldline of those radii to an ideal freely falling massive test body. This proves (b). [A1, L1, algebra]
 
-1.3 (Stability threshold.) By [L1] the second derivative of $V_\ell$ at the circular-orbit value is $V_\ell''(r)=c^2s(r-3s)/(r^3(2r-3s))$ for $r>\frac{3s}{2}$; its sign is the sign of $r-3s$, so $V_\ell''(r)>0$ exactly for $r>3s$ and $V_\ell''(r)<0$ exactly for $\frac{3s}{2}<r<3s$, with $V_\ell''(3s)=0$. These are exactly the claims of (c), and they are statements about the second derivative of the stated potential only. [L1, algebra]
+1.3 (Stability threshold.) Fix $r>3s/2$ and $\ell^2=c^2sr^2/(2r-3s)$, held constant during differentiation. By [L1] the second derivative of $V_\ell$ at this circular-orbit value is $V_\ell''(r)=c^2s(r-3s)/(r^3(2r-3s))$ for $r>\frac{3s}{2}$; its sign is the sign of $r-3s$, so $V_\ell''(r)>0$ exactly for $r>3s$ and $V_\ell''(r)<0$ exactly for $\frac{3s}{2}<r<3s$, with $V_\ell''(3s)=0$. The strict-extremum assertions, including the absence of either extremum at $3s$, follow from clause (c) of [[lem-gr-schwarzschild-circular-orbits-and-photon-sphere]] in [L1], whose endpoint proof factors $V_\ell'(x)=c^2s(x-3s)^2/(2x^4)$ at $\ell^2=3c^2s^2$. This proves (c) in its stated radial-potential sense. [L1, algebra]
 
 1.4 (Photon sphere.) The curve of [L2] is an all-real future null geodesic. By [A1] a physical ideal ray with its initial event and tangent is a geodesic on its actual affine-parameter interval. The geodesic uniqueness theorem [[thm-gr-local-geodesics-and-exponential-map]] identifies it with a restriction of the displayed all-real curve, which is therefore its unique maximal mathematical continuation. Along that restriction, [L2] gives $(d\varphi/dt)^2=4c^2/(27s^2)$; this is (d). [A1, L2, algebra]
 

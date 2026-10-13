@@ -1,0 +1,11 @@
+import { writeFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { scanProofFiles } from '../../tools/proof-layout.mjs';
+const root = fileURLToPath(new URL('../', import.meta.url));
+const files = ['items/cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps.md', 'items/def-cm-likelihood-function.md'];
+const items = scanProofFiles(files, root);
+const steps = items.reduce((n, item) => n + item.rows.reduce((m, row) => m + row.sourceSteps, 0), 0);
+const errors = items.flatMap(item => item.errors.map(error => ({ file: item.file, ...error })));
+writeFileSync(new URL('./physics-cm-qm-gr-79-2026-10-11-gate1-statistical-proof-layout.json', import.meta.url), JSON.stringify({ files, items, steps, errors }, null, 2) + '\n');
+console.log(`proof-layout actual API: ${items.length} items, ${steps} steps, ${errors.length} defects`);
+if (items.length !== files.length || steps <= 0 || errors.length) process.exitCode = 1;

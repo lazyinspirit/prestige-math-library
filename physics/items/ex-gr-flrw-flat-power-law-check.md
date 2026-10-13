@@ -73,7 +73,7 @@ $$H(t)=\frac{q}{t-t_0},\qquad \frac{\ddot a(t)}{a(t)}=\frac{q(q-1)}{(t-t_0)^2}.$
 
 **Given:** The constants $c,G_N,A,t_*,t_0,w$ with $c>0$, $G_N>0$, $A>0$, $t_*>0$, $w>-1$, the interval $I=(t_0,\infty)$, the functions $a,\varepsilon,p$ of the example, and the equations (F), (A), (C), (S) of [[def-gr-flrw-friedmann-system]].
 
-[L1] For $x>0$ and real $\alpha$ the real power $x^\alpha=\exp(\alpha\log x)$ is smooth and strictly positive on $(0,\infty)$ with $(x^\alpha)'=\alpha x^{\alpha-1}$, and $(x^\alpha)^\beta=x^{\alpha\beta}$ for real $\beta$ ([[def-real-power]], [[thm-real-power-continuity-and-derivatives]], [[thm-real-power-laws]]).
+[L1] For $x>0$ and real $\alpha$ the real power $x^\alpha=\exp(\alpha\log x)$ is strictly positive, continuous and differentiable on $(0,\infty)$ with $(x^\alpha)'=\alpha x^{\alpha-1}$, and $(x^\alpha)^\beta=x^{\alpha\beta}$ for real $\beta$ ([[def-real-power]], [[thm-real-power-continuity-and-derivatives]], [[thm-real-power-laws]]). Smoothness on an open real interval means that derivatives of every finite order exist and are continuous; it will be established locally in step 1.1.
 
 [L2] Smooth functions on intervals satisfy the sum, product, quotient and chain rules; in particular, if $u$ is smooth and strictly positive and $\alpha$ is real, then $\frac{d}{dt}u^\alpha=\alpha u^{\alpha-1}\dot u$, and the derivative of a constant function is $0$ ([[thm-algebra-of-derivatives]], [[thm-chain-rule]], [[def-derivative]], [[lem-derivative-of-a-power]]).
 
@@ -88,7 +88,7 @@ where the first display is (F), the second (A), the third (C) and the fourth (S)
 
 
 ## Verification
-1.1 (Smoothness and positivity.) The function $u(t):=(t-t_0)/t_*$ is smooth and strictly positive on $I$ because $t-t_0>0$ and $t_*>0$. By [L1] the function $a=A\,u^q$ is smooth and strictly positive on $I$, and $\varepsilon(t)=3c^2q^2/(8\pi G_N)\cdot(t-t_0)^{-2}$ is smooth and strictly positive because $t-t_0>0$; $p=w\varepsilon$ is smooth as a constant multiple. [L1, L2, given, algebra]
+1.1 (Smoothness and positivity.) Put $u(t):=(t-t_0)/t_*>0$ on $I$. For every real $\alpha$ and integer $m\ge0$, repeated application of [L1] and [L2] gives $\frac{d^m}{dt^m}u(t)^\alpha=t_*^{-m}\bigl(\prod_{r=0}^{m-1}(\alpha-r)\bigr)u(t)^{\alpha-m}$, with empty product $1$: at $m=0$ this is the function itself, and differentiating the formula at $m$ introduces the factor $(\alpha-m)/t_*$ and lowers the exponent by one, proving the formula at $m+1$. Each derivative is continuous by [L1] and continuity of the affine function $u$, so $u^\alpha$ is smooth. Taking $\alpha=q$ proves smoothness of $a=A u^q$; the same argument with the positive affine function $v(t)=t-t_0$, whose derivative is $1$, and $\alpha=-2$ proves smoothness of $\varepsilon=3c^2q^2v^{-2}/(8\pi G_N)$ and hence of $p=w\varepsilon$. Finally $a>0$ by [L1] and $A>0$, and $\varepsilon>0$ because $c,G_N>0$, $q>0$ by [L4], and $v>0$. [L1, L2, L4, given, algebra]
 
 2.1 (Derivatives and the Hubble parameter.) By [L2], $\dot u=1/t_*$ and $\dot a=Aq\,u^{q-1}\dot u=Aq\,u^{q-1}/t_*$. Since $u^q/(t-t_0)=u^{q-1}/t_*$, this is $\dot a=q\,a/(t-t_0)$, so $H=\dot a/a=q/(t-t_0)$. Differentiating $\dot a=qa/(t-t_0)$ by the product and quotient rules gives $\ddot a=q\bigl(\dot a(t-t_0)-a\bigr)/(t-t_0)^2=q(q-1)a/(t-t_0)^2$, hence $\ddot a/a=q(q-1)/(t-t_0)^2$. Also $\dot\varepsilon=-6c^2q^2/(8\pi G_N(t-t_0)^3)=-2\varepsilon/(t-t_0)$. This proves claim 1. [L1, L2, step 1.1, algebra]
 

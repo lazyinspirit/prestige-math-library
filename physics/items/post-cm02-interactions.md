@@ -23,9 +23,9 @@ sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.3 'Newtonian Mechanics: Many Particles', printed pages 5-9 (PDF pages 11-15): F_i = sum_j F_ij + F_i^ext, the weak and strong forms of Newton's third law, the caution that momentum exchange with an omitted field is not covered, and the centre-of-mass consequences"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter pages 3-4 (PDF pages 7-8): vector superposition of forces assumed separately (Eq. 1.13), and the gravity law (1.15) introduced as an additional law with the weak-equivalence footnote 11 recording the empirical support for identifying gravitational and inertial mass"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter pages 4-5 (PDF pages 8-9): vector superposition of forces assumed separately (Eq. 1.13), and the gravity law (1.15) introduced as an additional law with the weak-equivalence footnote 11 recording the empirical support for identifying gravitational and inertial mass"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.3, chapter pages 5-8 (PDF pages 9-12): the internal forces assumed central for the total-torque statement, with the pairwise central form and its restricted character"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.3, chapter pages 9-10 (PDF pages 13-14): the internal forces assumed central for the total-torque statement, with the pairwise central form and its restricted character"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.3, printed pages 12-15 (PDF pages 15-18): the total momentum balance with internal forces obeying Newton's third law F_i-to-j = -F_j-to-i and no total external force, and the centre-of-mass reduction"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
@@ -61,12 +61,15 @@ force.
 **(ii) Optional pair assumptions.** In addition, a model may adopt, separately
 or together, the following assumptions about a pair force $F_{ij}$:
 
-1. **Antisymmetry (strong form of the third law).**
+1. **Antisymmetry (weak form of the third law).**
    $F_{ij}(t,x_{i},x_{j},v_{i},v_{j})=-F_{ji}(t,x_{j},x_{i},v_{j},v_{i})$ for
    all arguments in the domain.
 2. **Centrality.** $F_{ij}(t,x_{i},x_{j},v_{i},v_{j})$ is parallel to
    $x_{i}-x_{j}$, i.e. lies in the real line spanned by $x_{i}-x_{j}$,
    whenever $x_{i}\ne x_{j}$.
+
+The **strong form of the third law** means antisymmetry together with
+centrality; centrality alone does not imply antisymmetry.
 
 Each assumption is a further restriction of the model class and is adopted
 only where invoked. Both are *sufficient* hypotheses used by later balance
@@ -100,13 +103,24 @@ When $U$ has the form
 
 $$U(t,x)=\sum_{i}u_{i}(t,x_{i})+\sum_{i<j}u_{ij}(t,x_{i},x_{j})$$
 
-with $C^{2}$ scalar functions $u_{i}$, $u_{ij}$, the decomposition (i) holds
-with $F_{i}^{\mathrm{ext}}=-\nabla_{x_{i}}u_{i}$ and
-$F_{ij}=-\nabla_{x_{i}}u_{ij}$. Potentials of the still more special form
+with $C^{2}$ scalar functions $u_{i}$, $u_{ij}$ on the respective open
+time-position domains, each with energy dimension, the decomposition (i)
+holds with $F_{i}^{\mathrm{ext}}(t,x_i,v_i)=-\nabla_{x_{i}}u_{i}(t,x_i)$
+and, for every $i<j$, both ordered-pair maps given by
+
+$$F_{ij}(t,x_i,x_j,v_i,v_j)=-\nabla_{x_i}u_{ij}(t,x_i,x_j),\qquad F_{ji}(t,x_j,x_i,v_j,v_i)=-\nabla_{x_j}u_{ij}(t,x_i,x_j).$$
+
+Here the two gradients differentiate the first and second position arguments,
+respectively, of the same declared $u_{ij}$; no $u_{ji}$ is required. These
+maps are independent of velocities. Differentiating the finite sum for $U$
+with respect to $x_i$ collects exactly the external term and one term for
+each $j\ne i$, giving (i). Antisymmetry is not asserted for a general pair
+potential. Potentials of the still more special form
 $u_{ij}=u_{ij}(t,\lvert x_{i}-x_{j}\rvert)$ are the **central pair
 potentials**; these are examples, and no generality is claimed for any of
-these subclasses. Velocity-dependent forces such as the drag model
-[[post-cm02-drag]] lie outside every potential model of this clause.
+these subclasses. Forces with nontrivial velocity dependence, such as the drag model
+[[post-cm02-drag]] with $c>0$, lie outside every potential model of this
+clause; when $c=0$ that model is a constant force and has a potential.
 
 **(v) Newtonian gravitational branch.** The model may adopt the pair potential
 
@@ -149,9 +163,11 @@ hypotheses on this structure and are not made here.
 ## Status and scope
 
 - **Why the restrictions are separated.** Antisymmetry, centrality and the
-  existence of a potential are independent properties; a model may have any
-  combination. Keeping them optional prevents the later balance theorems from
-  silently assuming more than their proofs use.
+  existence of a potential are stated as separate restrictions. A model's
+  declared assumptions must be jointly consistent with its force maps and
+  decomposition; no logical independence or realizability of every combination
+  is asserted. Keeping the hypotheses explicit prevents the later balance
+  theorems from silently assuming more than their proofs use.
 
 - **Open subsystems.** The pair form is declared for the labels of the model.
   If a physical system is described by a proper subset of its bodies,

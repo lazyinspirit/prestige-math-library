@@ -121,6 +121,16 @@ inclusion; hence $Q_j=Q_j^*$ by
 [[def-adjoint-of-a-densely-defined-unbounded-operator]],
 [[def-symmetric-self-adjoint-and-essentially-self-adjoint]].
 
+For a Borel set $S\subseteq\mathbb R^3$, define the indicator multiplication
+operator $M_{\mathbf 1_S}:H_s\to H_s$ by
+$(M_{\mathbf 1_S}f)(x):=\mathbf 1_S(x)f(x)$ almost everywhere. This is
+independent of the representative of the $L^2$ class and is bounded, since
+$$\|M_{\mathbf 1_S}f\|^2=\int_S\|f(x)\|_{\mathbb C^r}^2dx\le\|f\|^2.$$
+It is linear and a bounded operator with bound one
+([[def-bounded-linear-operator]]). It is an orthogonal projection:
+$\mathbf 1_S^2=\mathbf 1_S$ and the real indicator multiplier is
+self-adjoint for the declared pairing.
+
 For Borel $C\subseteq\mathbb R$, define
 $$E_j(C):=M_{\mathbf 1_{\{x:x_j\in C\}}}.$$
 Each value is a bounded orthogonal projection since
@@ -169,12 +179,29 @@ uniquely determine the joint PVM ([[thm-borel-products-of-euclidean-spaces-are-e
 [[lem-scalar-and-complex-measures-from-a-pvm]]): for any two candidate PVMs,
 their finite scalar measures agree on the generating rectangles and on the
 whole space, so they agree on every Borel set; the polarization identity in
-the last lemma then gives equality of the operator values. By P2, for
-every unit vector $u$ and Borel $B\subseteq\mathbb R^3$ the sharp position law is
-$$\mu^G_{[u]}(B)=\|G(B)u\|^2=\int_B\|u(x)\|_{\mathbb C^r}^2dx,$$
-and for a density operator $\rho$ it is
-$\mu^G_\rho(B)=\operatorname{tr}(\rho G(B))$
-([[post-nrqm-framework-observable-and-probability]]).
+the last lemma then gives equality of the operator values. This constructs the
+mathematical joint position PVM; a physical joint detector reading is supplied
+only for the finite effect families declared below. For a density operator
+$\rho$ define
+$\mu^G_\rho(B):=\operatorname{tr}(\rho G(B))$ for each Borel
+$B\subseteq\mathbb R^3$. Since $G$ is a PVM, this set function is a probability
+measure by the general density/PVM calculation used in clause (ii) of P2. For a
+finite Borel partition $(B_a)_{a=1}^m$,
+the operators $G(B_a)$ are orthogonal projections and sum to $I$. For each
+$f\in H_s$,
+$\langle G(B_a)f,f\rangle=\|G(B_a)f\|^2\in[0,\|f\|^2]$, so they are
+bounded effects with $0\le G(B_a)\le I$ in quadratic-form order. Clause (iv)
+of P2 therefore assigns the channel probabilities
+$p_a(\rho)=\mu^G_\rho(B_a)$; the two-channel partition
+$(B,\mathbb R^3\setminus B)$ assigns $\mu^G_\rho(B)$ to bin $B$
+([[post-nrqm-framework-observable-and-probability]]). Thus $G$ is the
+mathematical joint position PVM, while the detector reading used here is the
+declared finite-effect model of P2(iv); this does not assert that every three
+sharp coordinate measurement is jointly realized by a laboratory apparatus.
+For a unit vector $u$, the trace formula for the rank-one operator $P_u$ gives
+$$\mu^G_{P_u}(B)=\operatorname{tr}(P_uG(B))=\|G(B)u\|^2=\int_B\|u(x)\|_{\mathbb C^r}^2dx,$$
+and P7(iii) leaves identification of this ideal detector with a concrete
+apparatus as a tested physical claim with uncertainty.
 
 Assume the Axiom of Countable Choice and the Axiom of Choice as required by
 the cited trace and spectral suppliers ([[def-countable-choice]],
@@ -218,9 +245,10 @@ finite family $\mathcal B=(B_{a})_{a=1}^{m}$ of pairwise disjoint Borel subsets
 of $\mathbb R^{3}$ with $\bigcup_{a}B_{a}=\mathbb R^{3}$; the **ideal bin
 probabilities** of a preparation $\rho\in D(H_{s})$ are the numbers
 $$p_{a}(\rho):=\mu^{G}_{\rho}(B_{a})=\operatorname{tr}\bigl(\rho\,G(B_{a})\bigr)\qquad(a=1,\dots,m),$$
-the reading of clause (ii) of P2 for the joint position assignment
+the reading of the finite-effect clause (iv) of P2 for the declared detector
+and its mathematical joint position PVM
 ([[post-nrqm-framework-observable-and-probability]],
-[[def-projection-valued-measure]]). By clause (ii) of P2 these numbers are
+[[def-projection-valued-measure]]). By clause (iv) of P2 these numbers are
 nonnegative, are at most one, and satisfy
 $\sum_{a}p_{a}(\rho)=1$. A single **declared bin** $B$ is the two-element ideal
 detector $(B,\mathbb R^{3}\setminus B)$; its probability is $\mu^{G}_{\rho}(B)$.

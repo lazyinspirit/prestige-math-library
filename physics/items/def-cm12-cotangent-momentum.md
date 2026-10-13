@@ -68,17 +68,21 @@ $(x,p)$ is the **cotangent datum** of the state, and $I_{0}\times Q\times\mathbb
 with coordinates $(t,x,p)$ is the **momentum phase chart** of the
 presentation.
 
-**(b) Fibre derivative.** The **fibre derivative** (the velocity Legendre
-coordinate) of the presentation is $p:=\mathcal L_{v}(t,x,v)$, the Legendre
+**(b) Fibre derivative.** The **fibre derivative** of the presentation is
+the velocity-slot gradient $p:=L_{v}(t,x,v)$ at each state. When
+$Q\ne\varnothing$, this is the momentum coordinate of the Legendre
 map of the fibre-full chart $(O,L)$ of clause (c) of
 [[def-cm07-action-and-mechanical-lagrangian]], in the sense of
 [[def-cm-legendre-map-in-a-time-dependent-chart]] (the chart data are those of
 [[def-cm-time-dependent-lagrangian-and-action]]). Because $L=K-U$ with
 $K'(v)=\mathsf Mv$ and $U$ independent of the velocity slot (clause (a) of
 [[def-cm07-action-and-mechanical-lagrangian]]), one has
-$\mathcal L_{v}(t,x,v)=\mathsf Mv$: the fibre derivative and the momentum of
-clause (a) are the same covector, and the Legendre map of the presentation is
-$(t,x,v)\mapsto(t,x,\mathsf Mv)$.
+$L_{v}(t,x,v)=\mathsf Mv$: the fibre derivative and the momentum of
+clause (a) are the same covector, and for $Q\ne\varnothing$ the Legendre map
+of the presentation is $(t,x,v)\mapsto(t,x,\mathsf Mv)$. If
+$Q=\varnothing$, the state and momentum domains are empty and the momentum
+and fibre-derivative assignments are the unique empty maps; there is no
+fibre-full chart instance of the cited mathematical definition.
 
 **(c) Generalized momenta.** Let $X:\Omega\to Q$ be a generalized-coordinate
 map of the model, with substituted Lagrangian $\widetilde L$, substituted
@@ -94,8 +98,9 @@ whose components $p_{a}=\partial\widetilde L/\partial v_{a}$ have dimension
 $\mu\ell^{2}\tau^{-1}\gamma_{a}^{-1}$ (action divided by the dimension
 $\gamma_{a}$ of the coordinate $q_{a}$), while the **pairing**
 $p\cdot v=\sum_{a}p_{a}v^{a}$ has dimension $\mu\ell^{2}\tau^{-2}$. For the
-Cartesian chart, $X=\mathrm{id}$, $\Omega=Q$, $G=\mathsf M$, and clause (c)
-reduces to clause (a).
+Cartesian chart when $Q\ne\varnothing$, $X=\mathrm{id}$, $\Omega=Q$,
+$G=\mathsf M$, and clause (c) reduces to clause (a). If $Q=\varnothing$,
+no generalized-coordinate map exists, since its domain $\Omega$ is nonempty.
 
 **(d) Status and warnings.** The item defines the momentum datum of a declared
 presentation as a model object. It introduces no force law, no equation of

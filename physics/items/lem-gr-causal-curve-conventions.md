@@ -10,8 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [lem-gr-parallel-transport-and-geodesic-speed, def-gr-causal-curves-and-reachability, def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-causal-curve-calculus, thm-gr-convex-normal-neighborhoods, thm-gr-normal-neighborhood-causal-cone, lem-gr-convex-normal-causality, lem-gr-dominating-cone-bounds, def-gr-normal-neighborhoods-and-position-vectors, lem-gr-joint-exponential-diffeomorphism, lem-gr-maximal-geodesics-and-extension, thm-gr-local-geodesics-and-exponential-map, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, def-gr-observer-and-rest-space, lem-gr-observer-pairing-with-future-causal-vectors, lem-timelike-cone-has-two-convex-components, def-causal-classification-of-lorentz-vectors, def-interval, def-continuity-real, def-c-r-and-smooth-maps-between-smooth-manifolds]
+deps: [def-dependent-choice, def-countable-choice, lem-gr-parallel-transport-and-geodesic-speed, def-gr-causal-curves-and-reachability, def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-causal-curve-calculus, thm-gr-convex-normal-neighborhoods, thm-gr-normal-neighborhood-causal-cone, lem-gr-convex-normal-causality, lem-gr-dominating-cone-bounds, def-gr-normal-neighborhoods-and-position-vectors, lem-gr-joint-exponential-diffeomorphism, lem-gr-maximal-geodesics-and-extension, thm-gr-local-geodesics-and-exponential-map, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, def-gr-observer-and-rest-space, lem-gr-observer-pairing-with-future-causal-vectors, lem-timelike-cone-has-two-convex-components, def-causal-classification-of-lorentz-vectors, def-interval, def-continuity-real, def-c-r-and-smooth-maps-between-smooth-manifolds]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   lem-gr-parallel-transport-and-geodesic-speed: mathematical-premise
   def-gr-causal-curves-and-reachability: mathematical-premise
   def-gr-spacelike-hypersurfaces-and-cauchy-sets: mathematical-premise
@@ -45,6 +47,10 @@ verification:
 
 ## Statement
 
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the absolutely continuous causal-curve
+calculus and the supplied causal results used below.
+
 Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold
 ([[def-gr-smooth-lorentzian-objects]], [[def-gr-metric-selected-connection]]).
 Call a map $x:I\to M$ a **geodesically connectible continuous causal curve**
@@ -64,11 +70,12 @@ geodesically connectible continuous causal curve.
 
 **(b) Connectible curves give causal relations.** Let $x:I\to M$ be a
 geodesically connectible continuous causal curve and let $t_1<t_2$ in $I$.
-Then for every open neighborhood $W$ of $x([t_1,t_2])$ there is a piecewise
-smooth future causal curve $\eta:[t_1,t_2]\to W$ with $\eta(t_1)=x(t_1)$ and
-$\eta(t_2)=x(t_2)$ (in particular a locally absolutely continuous future
-causal curve, so $x(t_1)\le x(t_2)$ in the relation defined by
-[[def-gr-causal-curves-and-reachability]]).
+If $x|_{[t_1,t_2]}$ is nonconstant, then for every open neighborhood $W$ of
+$x([t_1,t_2])$ there is a piecewise smooth future causal curve
+$\eta:[t_1,t_2]\to W$ with $\eta(t_1)=x(t_1)$ and $\eta(t_2)=x(t_2)$; in
+particular $x(t_1)\le x(t_2)$. If the restriction is constant, its endpoints
+coincide and reflexivity gives $x(t_1)\le x(t_2)$ without asserting a curve
+in the nonconstant future causal class.
 
 **(c) Equality of relations.** For $p,q\in M$ the following are equivalent:
 $p\le q$; $p=q$ or there is a geodesically connectible continuous causal
@@ -82,7 +89,7 @@ $[0,\infty)\subseteq I^*\subseteq\mathbb R$ and $\gamma^*|_{[0,\infty)}=\gamma$;
 that is, $\gamma$ is contained in a curve that is both future- and
 past-inextendible. The dual statement holds for past-inextendible curves.
 
-No choice principle is used. The extension in (d) is not asserted to be
+No choice principle beyond the stated assumptions is used. The extension in (d) is not asserted to be
 unique.
 
 ## Facts & Assumptions
@@ -102,7 +109,7 @@ unique.
 ## Proof
 **Proof technique:** direct.
 
-1.1 (Clause (b).) Let $x:I\to M$ be geodesically connectible, $t_1<t_2$ in $I$, and $W$ an open neighborhood of the compact image $x([t_1,t_2])$. Every point of $x([t_1,t_2])$ lies in a strictly convex normal ball contained in $W$ by [L1], and the image is compact, so finitely many such balls $C_1,\dots,C_m\subseteq W$ cover $x([t_1,t_2])$. The preimages $x^{-1}(C_j)$ form an open cover of the compact interval $[t_1,t_2]$; let $\rho>0$ be a Lebesgue number of this cover for the metric of $\mathbb R$. Choose a partition $t_1=s_0<s_1<\dots<s_N=t_2$ of mesh less than $\rho$; then each $x([s_{j-1},s_j])$ lies in some $C_{j}$, and by the defining property of $x$ there is a future causal geodesic in $C_{j}$ joining $x(s_{j-1})$ to $x(s_j)$. Concatenating these finitely many geodesic segments gives a piecewise smooth curve $\eta:[t_1,t_2]\to W$ with the required endpoints; by [L3] it is a locally absolutely continuous future causal curve. This proves (b). [L1, L3, given, construct]
+1.1 (Clause (b).) Let $x|_{[t_1,t_2]}$ be nonconstant and let $W$ be an open neighborhood of its compact image. Include a parameter $t_*$ with $x(t_*)$ different from $x(t_1)$ in a finite partition. Cover the image by finitely many strictly convex normal balls $C_1,\dots,C_m\subseteq W$ and refine the partition to a Lebesgue-number subdivision so each subarc is contained in one ball. Each successive pair of endpoint values is joined there by its unique causal geodesic. If a pair coincides, that geodesic is constant and is omitted; the chosen parameter $t_*$ ensures at least one nonconstant segment remains. Reparametrize the remaining segments affinely, in their original order, onto consecutive subintervals of positive length partitioning $[t_1,t_2]$. Their concatenation is piecewise smooth with nonzero future causal velocity away from finitely many joints, so it is a future causal curve by [L3]. It lies in $W$ and has the required endpoints, proving (b). [L1, L3, given, construct]
 
 1.2 (Clause (a).) Let $\gamma:I\to M$ be a future causal curve and let $C$ be a strictly convex normal ball with $\gamma([t_1,t_2])\subseteq C$; put $p:=\gamma(t_1)$. The restricted curve $s\mapsto\gamma(t_1+s)$, $s\in[0,t_2-t_1]$, is a future causal curve with image in $C$ starting at $p$, so by [L2] its endpoint $\gamma(t_2)$ lies in $J^+_C(p)$; by [L1] there is $v\in\mathcal C^+\subseteq W_p$ with $\exp_p(v)=\gamma(t_2)$, and the radial geodesic $s\mapsto\exp_p(sv)$, $s\in[0,1]$, is a future causal geodesic whose image is contained in $C$ because $W_p$ is star-shaped and $\exp_p(W_p)=C$. This proves (a). [L1, L2, given]
 

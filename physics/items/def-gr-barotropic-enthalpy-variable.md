@@ -42,11 +42,22 @@ $$r:J\to\mathbb R,\qquad r(\epsilon):=\int_{\epsilon_*}^{\epsilon}\frac{\sqrt{p'
 The integrand is continuous on $J$ ([[thm-continuous-implies-integrable]]), so
 $r$ is well defined and $C^1$ with $r'(\epsilon)=\sqrt{p'(\epsilon)}/(\epsilon+p(\epsilon))>0$
 ([[cor-ftc-integral-function-differentiable-almost-everywhere]]); hence $r$
-maps $J$ diffeomorphically onto the open interval $r(J)$, and we write
-$\epsilon(r)$ for its inverse and $c_s:=\sqrt{p'}$ for the **sound-speed
-function**, so that $r'(\epsilon)=c_s(\epsilon)/(\epsilon+p(\epsilon))$ and
+maps $J$ diffeomorphically onto the open interval $r(J)$. Write $\epsilon(r)$
+for its inverse and $c_s:=\sqrt{p'}$ for the **dimensionless sound-speed ratio**
+(the physical sound speed is $v_s=c\,c_s$ when the SI light-speed constant is
+$c$). Thus $r'(\epsilon)=c_s(\epsilon)/(\epsilon+p(\epsilon))$ and
 $c_s\in(0,1)$ when $0<p'<1$ is assumed.
 
-The definition and the two displayed equivalences are the form in which the
-fluid system is fed into [[lem-gr-barotropic-fluid-symmetric-hyperbolic-system]];
+For a smooth unit timelike fluid velocity $u$ with $g(u,u)=-1$,
+put $\Pi^{ab}:=g^{ab}+u^au^b$. The energy and Euler equations of
+[[def-gr-perfect-fluid-matter-model]] are equivalently
+$$u^a\nabla_a r+c_s\nabla_a u^a=0,\qquad u^a\nabla_a u^b+c_s\Pi^{ba}\nabla_a r=0.$$
+Indeed $\nabla_a r=c_s\nabla_a\epsilon/(\epsilon+p)$; multiplying the
+energy equation by $c_s/(\epsilon+p)$ gives the first equation, while
+$\nabla_a p=c_s^2\nabla_a\epsilon=(\epsilon+p)c_s\nabla_a r$
+gives the second after division by $\epsilon+p$. All factors divided out are
+positive on $J$, so both transformations are reversible. In a rest orthonormal
+basis the principal scalar/velocity cross coefficients are both $c_s$;
+the precise covector symbol and its positive time condition are proved in the
+following lemma. These two equations are the form in which the fluid system is fed into [[lem-gr-barotropic-fluid-symmetric-hyperbolic-system]];
 no existence theorem is asserted here.

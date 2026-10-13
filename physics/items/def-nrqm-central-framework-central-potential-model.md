@@ -67,7 +67,7 @@ physical_scope: "The pair's declared central-potential model for one spinless
   massive particle: its state space, its position and momentum assignments, its
   assigned energy operator for a real bounded measurable central potential, its
   declared spherical angular-radial reading and effective potential, and its
-  stationary-state, bound-state and continuum-threshold vocabulary. The model is
+  stationary-state, bound-state and energy-reference vocabulary. The model is
   an additional assumption of the pair, not a derivation from the
   three-dimensional massive-particle model P5; the Coulomb and other unbounded
   or singular potentials, spin, relativistic and radiative corrections, finite
@@ -197,23 +197,42 @@ the cited theorem's, and no further spectral property is presupposed here.
 
 **(d) The declared spherical reading.** Let $U$ be the unitary of
 [[thm-nrqm-coulomb-angular-radial-unitary-reduction]] from
-$H_{0}$ onto $K=\bigoplus_{(l,m)}L^{2}((0,\infty),dr;\mathbb C)$, written
-$U\psi=(u_{lm})_{l\ge0,-l\le m\le l}$, and let $(Y_{lm})$ be the complete
-orthonormal family of that theorem. As an additional reading of the model, the
-pair declares the **spherical sector** $(l,m)$ and the **effective potential**
+$H_{0}$ onto $K=\bigoplus_{(l,\bar m)}L^{2}((0,\infty),dr;\mathbb C)$, written
+$U\psi=(u_{l\bar m})_{l\ge0,-l\le\bar m\le l}$, and let $(Y_{l\bar m})$ be the complete
+orthonormal family of that theorem; $l,\bar m$ are integers, while $m>0$
+continues to denote the mass. For a fixed $(l,\bar m)$, let
+$\iota_{l\bar m}:L^{2}((0,\infty),dr;\mathbb C)\to K$ insert its argument
+in that coordinate and zero in every other coordinate, and define the
+isometric **spherical lift** $J_{l\bar m}:=U^{-1}\iota_{l\bar m}$, so that
+$$J_{l\bar m}u(x)=\frac{u(r)}{r}Y_{l\bar m}(\Omega)\qquad(x=r\Omega,\ r>0).$$
+The **spherical sector** $(l,\bar m)$ is the range of this lift. Its
+**admissible reduced domain** is fixed by the assigned energy domain:
+$$\mathcal D_{l\bar m}:=\{u\in L^{2}((0,\infty),dr;\mathbb C):J_{l\bar m}u\in W^{2,2}(\mathbb R^{3};\mathbb C)\}.$$
+Thus every weak Cartesian derivative through order two of the lift must
+belong to $L^{2}$ on all of $\mathbb R^{3}$, including neighbourhoods of the
+origin. This condition and the global square integrability specify
+admissibility at both endpoints; no independent half-line boundary parameter
+is part of the model. In particular $C_c^\infty((0,\infty);\mathbb C)
+\subseteq\mathcal D_{l\bar m}$ by clause (d) of the cited theorem. The
+**effective potential** is
 $$v^{\mathrm{eff}}_{l}(r):=v(r)+\frac{\hbar^{2}l(l+1)}{2mr^{2}}\qquad(r>0),$$
 whose second summand is called the **angular-momentum barrier**; both
-summands, and $v^{\mathrm{eff}}_{l}$, are read in joules. The model's
-**declared radial equation** in the sector $(l,m)$ is the eigenvalue equation
-for the one-dimensional expression
+summands, and $v^{\mathrm{eff}}_{l}$, are read in joules. For $E\in\mathbb R$,
+the model's **declared radial equation** in the sector $(l,\bar m)$ is
+$$u\in\mathcal D_{l\bar m},\qquad H_VJ_{l\bar m}u=EJ_{l\bar m}u\quad\text{in }L^{2}(\mathbb R^{3};\mathbb C).$$
+A **radial eigenpair** additionally requires $u\ne0$. The associated
+one-dimensional differential expression is
 $$u\longmapsto-\frac{\hbar^{2}}{2m}u''+\Bigl(v(r)+\frac{\hbar^{2}l(l+1)}{2mr^{2}}\Bigr)u,\qquad u:(0,\infty)\to\mathbb C,$$
-restricted to declared admissible classes (for instance $u\in
-C_{c}^{\infty}((0,\infty))$). The pair does not presuppose that the assigned
-energy operator of clause (c) literally reduces to this expression; the
-consistency of the two readings on smooth states is the content of the
-spherical-reduction theorem of this page, which is proved from the cited
-mathematics. The angular-momentum quantum numbers $l$ and $m$
-appearing in the reading are labels of the orthonormal family $(Y_{lm})$; the
+where $u''$ means the distributional second derivative on $(0,\infty)$
+([[def-weak-derivative-of-a-locally-integrable-function]]). The expression
+alone, without the specified lifted domain, does not define a radial
+eigenvalue problem. On $C_c^\infty((0,\infty);\mathbb C)$, its equation
+with right-hand side $Eu$ is equivalent almost everywhere to the declared
+radial equation above by the spherical-reduction theorem of this page;
+pointwise equivalence additionally requires continuity of $v$. No full-domain
+differential reduction or endpoint classification is presupposed here.
+The angular-momentum quantum numbers $l$ and $\bar m$
+appearing in the reading are labels of the orthonormal family $(Y_{l\bar m})$; the
 identification of $l$ with a total angular momentum of a material system is a
 separate assignment of the framework's angular-momentum items and is not made
 here.
@@ -223,12 +242,19 @@ model with potential $V$ and **energy** $E\in\mathbb R$ is a nonzero class
 $\psi\in D(H_{V})$ with $H_{V}\psi=E\psi$; the pair $(\psi,E)$ is an
 **eigenpair** of the model. A **bound state** of the model is a stationary
 vector with energy $E<0$ whose representative is normalised, $\|\psi\|=1$; its
-eigenvalue is its **binding energy**, read in joules, and the value $0$ is
-called the **continuum threshold** of the model. The model reads the energy
+eigenvalue is its **binding energy**, read in joules, relative to the
+chosen **energy reference** $0$. Here $E<0$ is a vocabulary convention;
+no assertion that $0$ is a spectral continuum threshold follows for an
+arbitrary bounded central potential. A continuum threshold requires a
+separate spectral determination for the particular operator. In particular,
+adding a constant potential shifts the free operator and its spectrum by
+that constant without changing its eigenvectors. The model reads the energy
 outcome law of the pure preparation of a unit eigenvector with eigenvalue $E$
 as the point mass $\delta_{E}$, the reading of clause (c) of
 [[def-nrqm-observables-framework-observable-and-outcome-law]], and the
-position density of that preparation as $|\psi|^{2}$ by clause (b). These are
+position density of that preparation as $|\psi|^{2}$ by
+[[pthm-nrqm-kinematics-spin-s-outcome-laws]] clause (b), with $s=0$
+and the state, position and choice hypotheses of (a). These are
 declarations of the model under P2; they construct no sample, detector or
 measured value, and they assert no stability, decay or formation claim.
 
@@ -236,8 +262,9 @@ measured value, and they assert no stability, decay or formation claim.
 state space, position and momentum assignments, an assigned energy operator
 for a real bounded measurable central potential, a declared spherical reading
 with its effective potential and radial equation, and a stationary-state and
-bound-state vocabulary. They introduce no assumption beyond P1, P2, P4, P5,
-P6, P7 and the cited mathematics; in particular the central form of the
+bound-state vocabulary. They adopt P1, P2, P4, P5, P6, P7, the choice hypotheses of the cited
+mathematics, and the additional central-potential model assumption and
+spherical reading of clauses (b) and (d); in particular the central form of the
 potential, the model's use of the full three-dimensional space as its state
 space and the identification of the spherical sectors with angular-momentum
 labels are declarations of the pair. The model excludes from its scope, until

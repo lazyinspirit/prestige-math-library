@@ -100,6 +100,10 @@ In every spherical-polar chart near the equator, $\Phi=\partial_\varphi$;
 longitude expressions below are local chart expressions for the global sphere
 curve $R_\alpha\omega_0$.
 
+In this item, a **timelike circular geodesic** means a future timelike
+geodesic whose areal radius $r$ is constant on an interval of positive length;
+its angular orientation is unrestricted.
+
 **(a) Existence of circular timelike geodesics.** Let $r_0>3s/2$ and choose
 $\ell\in\mathbb R$ with
 
@@ -122,11 +126,12 @@ $$\frac{d\varphi}{dx^0}=\frac{\ell f(r_0)}{r_0^2e}=\operatorname{sgn}(\ell)\Bigl
 $t=x^0/c$.
 
 **(b) The circular-orbit condition is necessary.** Conversely, if
-$\gamma:I\to M$ is an equatorial future timelike geodesic with
+$\gamma:I\to M$ is any future timelike geodesic parametrized by proper time with
 $r(\tau)\equiv r_0>s$ constant on an interval of positive length, then
-$r_0>\frac{3s}{2}$ and its conserved angular momentum satisfies
-$\ell^2=\dfrac{c^2sr_0^2}{2r_0-3s}$; in particular there is no timelike
-circular geodesic with $s<r_0\le\frac{3s}{2}$.
+$r_0>\frac{3s}{2}$. If $\gamma$ is equatorial, its conserved angular
+momentum additionally satisfies $\ell^2=\dfrac{c^2sr_0^2}{2r_0-3s}$.
+Consequently no timelike circular geodesic, in any angular orientation, exists
+with $s<r_0\le\frac{3s}{2}$.
 
 **(c) Stability threshold of the radial potential.** For each radius
 $r>\frac{3s}{2}$ set $\ell_r^2:=c^2sr^2/(2r-3s)$ and regard $\ell_r$ as a
@@ -181,6 +186,8 @@ the reduction is stated only where $r>s$.
 
 [L6] The sine and cosine functions are smooth, their derivatives are cosine and minus sine, their addition formulas hold, and $\sin^2\alpha+\cos^2\alpha=1$ ([[def-sine-and-cosine-by-power-series]], [[thm-sine-and-cosine-derivatives]], [[thm-sine-and-cosine-addition-formulas]], [[thm-pythagorean-and-parity-identities-for-all-six-trigonometric-functions]]). Thus $R_\alpha$ is a smooth one-parameter group of orthogonal transformations of $\mathbb R^3$, its restriction preserves the induced round metric, and its derivative at $\alpha=0$ is $\Phi$.
 
+[L7] In any product chart $(x^0,r,\xi^2,\xi^3)$, the coordinate-free metric formula of [[def-gr-schwarzschild-exterior-model]] has components $g_{00}=-f$, $g_{rr}=f^{-1}$, $g_{0r}=g_{0i}=g_{ri}=0$ and $g_{ij}=r^2\gamma_{ij}$, with $(\gamma_{ij})$ the positive-definite round-metric matrix ([[lem-gr-schwarzschild-metric-properties]]). The block inverse has $g^{rr}=f$ and $g^{r0}=g^{ri}=0$ by matrix multiplication; substituting it and $g_{ij}=r^2\gamma_{ij}$ into the Christoffel formula of [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]] gives $\Gamma^r{}_{00}=-\frac12g^{rr}\partial_rg_{00}=ff'/2$ and $\Gamma^r{}_{ij}=-\frac12g^{rr}\partial_rg_{ij}=-rf\gamma_{ij}$, while $\Gamma^r{}_{0i}=0$.
+
 ## Proof
 
 **Proof technique:** solve the stationarity equation of the effective potential, verify the constructed circular curves against the four geodesic equations directly, and differentiate the potential twice.
@@ -189,9 +196,9 @@ the reduction is stated only where $r>s$.
 
 2.1 (The timelike circular geodesic.) Let $r_0>3s/2$, choose $\ell$ as in (a) and $e=\sqrt{W_\ell(r_0)}>0$, and define the global curve $\gamma$ of clause (a). At any parameter value choose a spherical-polar chart near its angular point; the local tangent components are $U^a=(e/f(r_0),0,0,\ell/r_0^2)$. Then $g(U,U)=-f(r_0)\bigl(e/f(r_0)\bigr)^2+r_0^2\bigl(\ell/r_0^2\bigr)^2=-\frac{e^2}{f(r_0)}+\frac{\ell^2}{r_0^2}=-\bigl(c^2+\frac{\ell^2}{r_0^2}\bigr)+\frac{\ell^2}{r_0^2}=-c^2$ by the choice of $e$, so $U$ is timelike; and $g(U,\partial_0)=-e<0$, so $U$ is future-directed. In that chart the $x^0$-equation reduces to $\ddot x^0=0$ because $\dot r=0$; the $\vartheta$-equation reads $0+0-\sin(\pi/2)\cos(\pi/2)(\ell/r_0^2)^2=0$; the $\varphi$-equation reduces to $\ddot\varphi=0$ because $\dot r=\dot\vartheta=0$; and the $r$-equation reads $\frac{ff'}{2}\bigl(\frac{e}{f}\bigr)^2-rf\bigl(\frac{\ell}{r_0^2}\bigr)^2=\frac{f'e^2}{2f}-\frac{f\ell^2}{r_0^3}=\frac{f'}{2}\bigl(c^2+\frac{\ell^2}{r_0^2}\bigr)-\frac{f\ell^2}{r_0^3}=\frac12W_\ell'(r_0)=0$, using the choice of $e$ in the third equality and step 1.1 in the last. These equations hold in every local chart interval along the curve; longitude charts differ by constant shifts, so the global curve is a geodesic on $\mathbb R$ by [L3]. By [L5] and [L6], the global time translations and rotations are isometries, so $\partial_0$ and $\Phi$ are Killing; their pairings with $U$ are $-e$ and $\ell$. The Killing-pairing identity in [L5] proves these quantities are constant on the connected parameter interval. The local angular velocity is $\frac{d\varphi}{dx^0}=\frac{\dot\varphi}{\dot x^0}=\frac{\ell f(r_0)}{r_0^2e}$; squaring and substituting $\ell^2$ and $e^2=f(r_0)(c^2+\ell^2/r_0^2)$ gives $\bigl(\frac{\ell f}{r_0^2e}\bigr)^2=\frac{\ell^2f^2}{r_0^4f(c^2+\ell^2/r_0^2)}=\frac{\ell^2 f}{r_0^4c^2+r_0^2\ell^2}=\frac{s}{2r_0^3}$, using $\ell^2=c^2sr_0^2/(2r_0-3s)$; with $t=x^0/c$ this is $\bigl(\frac{d\varphi}{dt}\bigr)^2=c^2\frac{s}{2r_0^3}=\frac{G_Nm_*}{r_0^3}$. This proves (a). [L1, L2, L3, L4, L5, L6, step 1.1, algebra]
 
-2.2 (Necessity.) If an equatorial future timelike geodesic has $r\equiv r_0$ on an interval of positive length, then $\dot r=\ddot r=0$ there, so by [L2] $0=\ddot r=-\tfrac12W_\ell'(r_0)$ and step 1.1 gives $\ell^2=c^2sr_0^2/(2r_0-3s)$ and $r_0>3s/2$; the same conclusion holds on the whole parameter interval by the conservation of $\ell$ and continuity. This proves (b). [L2, step 1.1, algebra]
+2.2 (Necessity in any angular orientation.) Let $\gamma:I\to M$ be a future timelike geodesic parametrized by proper time with $r\equiv r_0$ on an interval of positive length, and choose a product chart about any parameter value. Write $\dot\xi=(\dot\xi^2,\dot\xi^3)$ for the angular tangent. Since $\dot r=\ddot r=0$, [L3, L7] give $0=\frac{ff'}2(\dot x^0)^2-rf\,\gamma_{ij}\dot\xi^i\dot\xi^j$, so $\gamma_{ij}\dot\xi^i\dot\xi^j=\frac{f'}{2r}(\dot x^0)^2$. Timelike normalization gives $-c^2=-f(\dot x^0)^2+r^2\gamma_{ij}\dot\xi^i\dot\xi^j=-(f-rf'/2)(\dot x^0)^2$. The value $\dot x^0$ cannot be zero, since the radial equation and positive definiteness of $\gamma$ would then force $\dot\xi=0$, contradicting timelikeness. Hence $f-rf'/2=1-3s/(2r_0)>0$ and $r_0>3s/2$. For an equatorial geodesic, [L2] additionally gives $0=\ddot r=-\tfrac12W_\ell'(r_0)$, and step 1.1 yields $\ell^2=c^2sr_0^2/(2r_0-3s)$. This proves (b) and its equatorial angular-momentum claim. [L2, L3, L7, step 1.1, algebra]
 
-2.3 (The second derivative at fixed angular momentum.) Differentiate $W_\ell(x)=f(x)(c^2+\ell^2/x^2)$ twice while holding $\ell$ constant. This gives $W_\ell''(x)=f''(x)(c^2+\ell^2/x^2)-4f'(x)\ell^2/x^3+6f(x)\ell^2/x^4$. Only after this differentiation set $x=r$ and $\ell^2=\ell_r^2=c^2sr^2/(2r-3s)$. Substituting $f'=s/r^2$, $f''=-2s/r^3$ and simplifying gives $W_{\ell_r}''(r)=\frac{2c^2s(r-3s)}{r^3(2r-3s)}$, hence $V_{\ell_r}''(r)=\frac{c^2s(r-3s)}{r^3(2r-3s)}$, whose sign is that of $r-3s$. This proves (c). [L4, step 1.1, algebra]
+2.3 (The second derivative at fixed angular momentum.) Differentiate $W_\ell(x)=f(x)(c^2+\ell^2/x^2)$ twice while holding $\ell$ constant. This gives $W_\ell''(x)=f''(x)(c^2+\ell^2/x^2)-4f'(x)\ell^2/x^3+6f(x)\ell^2/x^4$. Only after this differentiation set $x=r$ and $\ell^2=\ell_r^2=c^2sr^2/(2r-3s)$. Substituting $f'=s/r^2$, $f''=-2s/r^3$ and simplifying gives $W_{\ell_r}''(r)=\frac{2c^2s(r-3s)}{r^3(2r-3s)}$, hence $V_{\ell_r}''(r)=\frac{c^2s(r-3s)}{r^3(2r-3s)}$, whose sign is that of $r-3s$. At $r=3s$, the circular value is $\ell^2=3c^2s^2$, and direct factorization gives $V_\ell'(x)=c^2s(x-3s)^2/(2x^4)$ for $x>s$. This is positive on both sides of $3s$; thus $V_\ell$ has neither a local minimum nor a local maximum there. Together with the nonzero-second-derivative test away from $3s$, this proves both "exactly" assertions in (c). [L4, step 1.1, algebra]
 
 3.1 (The photon sphere.) Let $\ell\ne0$, $r_0=3s/2$ and $e_0=\lvert\ell\rvert\sqrt{f(r_0)}/r_0>0$; define the global curve $\eta$ of clause (d), with local tangent components $U^a=(e_0/f(r_0),0,0,\ell/r_0^2)$. Then $g(U,U)=-\frac{e_0^2}{f(r_0)}+\frac{\ell^2}{r_0^2}=-\frac{\ell^2}{r_0^2}+\frac{\ell^2}{r_0^2}=0$, so $U$ is null; and $g(U,\partial_0)=-e_0<0$, so $U$ is future-directed. The local $x^0$-, $\vartheta$- and $\varphi$-equations hold as in step 2.1; the $r$-equation reads $\frac{f'e_0^2}{2f}-r_0f\frac{\ell^2}{r_0^4}=\frac{\ell^2}{r_0^2}\bigl(\frac{f'}{2}-\frac{f}{r_0}\bigr)=\frac{\ell^2}{r_0^4}\bigl(\frac{3s}{2}-r_0\bigr)=0$ at $r_0=3s/2$. These local equations establish a future null geodesic on the entire domain $\mathbb R$ by [L3]. By [L5] and [L6], the global Killing fields have pairings $-e_0$ and $\ell$, constant along $\eta$. Its angular velocity is $\frac{\ell f(r_0)}{r_0^2e_0}=\operatorname{sgn}(\ell)\frac{\sqrt{f(r_0)}}{r_0}$, equal to $+\frac{2}{3\sqrt3\,s}$ for $\ell>0$ and to its negative for $\ell<0$, with square $4/(27s^2)$. Finally $W^{\mathrm n}_\ell(r)=f\ell^2/r^2$ has $(W^{\mathrm n}_\ell)'(r)=\ell^2\frac{-2r+3s}{r^4}$ (that is, $\ell^2(3s-2r)/r^4$), which vanishes at $r=3s/2$, and $(W^{\mathrm n}_\ell)''(r)=\ell^2\frac{6(r-2s)}{r^5}$, which at $r=3s/2$ equals $-\frac{32\ell^2}{81s^4}<0$. This proves (d). [L1, L3, L4, L5, L6, algebra]
 
@@ -199,17 +206,6 @@ the reduction is stated only where $r>s$.
 
 ## Remarks
 
-- **The innermost stable circular orbit.** Clause (c) shows that the
-  potential's second derivative changes sign at $r=3s$, so in this reduced
-  one-dimensional description the circular orbits with
-  $\frac{3s}{2}<r<3s$ are maxima of the potential and those with $r>3s$ are
-  minima. This is a statement about the reduced potential only; the physical
-  interpretation of the threshold as the innermost stable circular orbit of
-  the model, and any account of how it would be observed, belong to the
-  physics theorem and its scope remark, not to this lemma.
+- **The innermost stable circular orbit.** Clause (c) shows that the potential's second derivative changes sign at $r=3s$, so in this reduced one-dimensional description the circular orbits with $\frac{3s}{2}<r<3s$ are maxima of the potential and those with $r>3s$ are minima. This is a statement about the reduced potential only; the physical interpretation of the threshold as the innermost stable circular orbit of the model, and any account of how it would be observed, belong to the physics theorem and its scope remark, not to this lemma.
 
-- **Null geodesics are not particle orbits.** The photon-sphere curve of
-  clause (d) has null tangent and no proper-time parametrization; its
-  parameter $\tau$ is an affine parameter, and only the ratio
-  $d\varphi/dx^0$ of the tangent components is asserted, the tangent of a
-  null geodesic being determined only up to positive scale.
+- **Null geodesics are not particle orbits.** The photon-sphere curve of clause (d) has null tangent and no proper-time parametrization; its parameter $\tau$ is an affine parameter, and only the ratio $d\varphi/dx^0$ of the tangent components is asserted, the tangent of a null geodesic being determined only up to positive scale.

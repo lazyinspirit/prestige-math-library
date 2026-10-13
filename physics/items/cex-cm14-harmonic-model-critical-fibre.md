@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: physics
 dependency_level: 26
-deps: [post-cm04-harmonic-model, def-cm14-complete-integrability, def-cm14-involution, pthm-cm14-regular-tori, def-cm12-hamiltonian, pthm-cm12-mechanical-hyperregularity, def-cm12-cotangent-momentum, def-cm13-hamiltonian-field, def-cm07-action-and-mechanical-lagrangian, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-units, def-cm02-newtonian-flow, def-ck-euclidean-maps-and-diffeomorphisms, def-injection-surjection-bijection, def-linear-independence, def-differential-rank-and-constant-rank, def-metric-topology]
+deps: [post-cm04-harmonic-model, def-cm14-complete-integrability, def-cm14-involution, pthm-cm14-regular-tori, def-cm12-hamiltonian, pthm-cm12-mechanical-hyperregularity, def-cm12-cotangent-momentum, def-cm13-hamiltonian-field, def-cm07-action-and-mechanical-lagrangian, def-cm07-generalized-coordinates-and-forces, thm-sine-cosine-zero-sets-and-fundamental-period, thm-sine-and-cosine-derivatives, thm-sine-and-cosine-parametrize-the-unit-circle, thm-euclidean-inverse-function-theorem, cor-trigonometric-parity-and-pythagorean-identity, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-units, def-cm02-newtonian-flow, def-ck-euclidean-maps-and-diffeomorphisms, def-injection-surjection-bijection, def-linear-independence, def-differential-rank-and-constant-rank, def-metric-topology]
 dependency_roles:
   post-cm04-harmonic-model: physical-assumption
   def-cm14-complete-integrability: formulation-prerequisite
@@ -17,6 +17,12 @@ dependency_roles:
   def-cm12-cotangent-momentum: formulation-prerequisite
   def-cm13-hamiltonian-field: formulation-prerequisite
   def-cm07-action-and-mechanical-lagrangian: formulation-prerequisite
+  def-cm07-generalized-coordinates-and-forces: formulation-prerequisite
+  thm-sine-cosine-zero-sets-and-fundamental-period: mathematical-premise
+  thm-sine-and-cosine-derivatives: mathematical-premise
+  thm-sine-and-cosine-parametrize-the-unit-circle: mathematical-premise
+  thm-euclidean-inverse-function-theorem: mathematical-premise
+  cor-trigonometric-parity-and-pythagorean-identity: mathematical-premise
   def-cm03-potential-and-mechanical-energy: formulation-prerequisite
   post-cm02-force-superposition: physical-assumption
   def-cm01-configuration: formulation-prerequisite
@@ -31,7 +37,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "A counterexample inside the declared harmonic model of the framework's force branch: the one-label harmonic datum $(H)$ on the whole Cartesian phase plane is a completely integrable datum, and its zero common level set is compact, connected and nonempty but consists of the single rest point, so it is not diffeomorphic to a torus; equivalently, the level is a critical level at which the regular-fibre hypotheses of the torus theorem fail. The item asserts no measured value and no claim about any apparatus; it shows that regularity cannot be dropped from the hypotheses."
+physical_scope: "A counterexample inside the declared harmonic model of the framework's force branch: the one-degree-of-freedom harmonic datum $(H)$ on the generalized-coordinate phase plane of the explicit straight-line immersion is a completely integrable datum, and its zero common level set is compact, connected and nonempty but consists of the single rest point, so it is not diffeomorphic to a torus; equivalently, the level is a critical level at which the regular-fibre hypotheses of the torus theorem fail. The item asserts no measured value and no claim about any apparatus; it shows that regularity cannot be dropped from the hypotheses."
 sources:
   references:
     - title: "Ana Cannas da Silva, Lectures on Symplectic Geometry (revised January 2006), Lecture 18, Definition 18.10 and Theorem 18.12, pp. 110-111: the torus theorem for compact connected regular fibres and the essential regular-value hypothesis"
@@ -51,21 +57,36 @@ map is diffeomorphic to a torus $T^{n}=\mathbb R^{n}/\mathbb Z^{n}$.**
 
 ## Facts & Assumptions
 
-**Given:** The one-label harmonic model of [[post-cm04-harmonic-model]] with
-$m>0$, $k>0$, force law $F(x)=-kx$ and potential $U(x)=kx^{2}/2$, its
-presentation of [[pthm-cm12-mechanical-hyperregularity]] with the Cartesian
-phase domain $W=Q\times\mathbb R=\mathbb R^{2}$ and branch Hamiltonian
-$H(x,p)=p^{2}/(2m)+kx^{2}/2$
-([[def-cm12-hamiltonian]], [[def-cm12-cotangent-momentum]]).
+**Given:** The scalar harmonic model of [[post-cm04-harmonic-model]] with
+$m>0$, $k>0$, $[m]=\mu$, $[k]=\mu\tau^{-2}$ and length-valued $x$.
+To place its phase plane in the presentation class, declare the ambient
+one-label force model on $Q_{\mathrm{amb}}=\mathbb R^{3}$, time window
+$\mathbb R$, mass operator $mI_{3}$, smooth potential
+$U_{\mathrm{amb}}(y)=ky_{1}^{2}/2$ and $d=0$, with force
+$F_{\mathrm{amb}}(y,v)=(-ky_{1},0,0)$
+([[post-cm02-force-superposition]], [[def-cm03-potential-and-mechanical-energy]]).
+Choose the smooth immersion $X:\mathbb R\to Q_{\mathrm{amb}}$,
+$X(x)=(x,0,0)$, of [[def-cm07-generalized-coordinates-and-forces]].
+Its derivative $(1,0,0)^{\mathsf T}$ is injective, its kinetic metric is
+$G=m$, and its substituted potential is $kx^{2}/2$; thus clause 2 of
+[[pthm-cm12-mechanical-hyperregularity]] gives the generalized-coordinate
+phase domain $W=\mathbb R\times\mathbb R$ and chart Hamiltonian (write it
+as $H$) $H(x,p)=p^{2}/(2m)+kx^{2}/2$, with $p=mx'$ and
+$[p]=\mu\ell\tau^{-1}$, $[H]=\mu\ell^{2}\tau^{-2}$
+([[def-cm12-hamiltonian]], [[def-cm12-cotangent-momentum]], [[def-cm01-units]]).
+This identifies the scalar model with the substituted equations exactly:
+$x$ solves $mx''=-kx$ if and only if $X\circ x$ solves
+$m y''=(-ky_{1},0,0)$ along this line; the transverse equations are $0=0$.
 
 [L1] Datum and integral map ([[def-cm14-complete-integrability]],
 [[def-cm14-involution]], [[def-cm13-hamiltonian-field]]): with
 $\omega=\sqrt{k/m}>0$ so that $H(x,p)=\bigl(p^{2}+m^{2}\omega^{2}
-x^{2}\bigr)/(2m)$, the single function $F_{1}:=H$ on $W_{0}:=W$ has empty
-bracket conditions to check, is $C^{\infty}$, and has differential
+x^{2}\bigr)/(2m)$, the single function $F_{1}:=H$ on $W_{0}:=W$ satisfies $\{H,H\}=0$ by skew-symmetry of the bracket, is $C^{\infty}$, and has differential
 $dH=(m\omega^{2}x)\,dx+(p/m)\,dp$, which vanishes exactly at $(0,0)$; hence
 $F=(H)$ is a completely integrable datum of the presentation on $W_{0}$,
 whose integral map is $H$ itself and whose only critical value is $0$.
+The complement of $(0,0)$ is open and dense, so the independence
+requirement holds on a dense open subset.
 
 [L2] Fibre and diffeomorphism vocabulary ([[def-metric-topology]],
 [[def-ck-euclidean-maps-and-diffeomorphisms]],
@@ -88,7 +109,7 @@ hypotheses; the item makes no claim about critical levels.
 
 2.1 The fibre is not diffeomorphic to $T^{1}$: it has exactly one point, while $T^{1}$ is infinite, and a diffeomorphism is a bijection by [L2]; no bijection exists between a one-point set and an infinite set. Hence the refuted statement fails at the declared model datum. [L2, step 1.1, algebra]
 
-2.2 The failure is confined to the critical level: for every $E>0$ the level $H^{-1}(E)$ is the ellipse $\{(x,p):p^{2}/(2m)+kx^{2}/2=E\}$, a one-dimensional compact connected manifold, the phase curve of a nonconstant harmonic motion; in the period-one chart of the companion example it is exactly the circle $I=\mathrm{const}$ of the action-angle coordinates, in agreement with the torus theorem at regular values. Thus the datum exhibits both a critical fibre that is a point and regular fibres that are circles, and the unqualified compactness/connectedness version of the torus claim is false exactly at the critical value. [L1, step 1.1, algebra]
+2.2 The failure is confined to the critical level: for every $E>0$ the level $H^{-1}(E)$ is the ellipse $\{(x,p):p^{2}/(2m)+kx^{2}/2=E\}$, a one-dimensional compact connected manifold, the phase curve of a nonconstant harmonic motion; the smooth parametrization $u\mapsto(\sqrt{2E/k}\sin(2\pi u),\sqrt{2mE}\cos(2\pi u))$ is a diffeomorphism from $\mathbb R/\mathbb Z$ to that ellipse. Indeed the Pythagorean identity gives its image, the bijection of [[thm-sine-and-cosine-parametrize-the-unit-circle]] and the $2\pi$ period fix $u$ modulo one and cover the whole ellipse. At each point either the derivative of its $x$ coordinate or of its $p$ coordinate is nonzero, since sine and cosine cannot vanish together. Applying [[thm-euclidean-inverse-function-theorem]] to that scalar coordinate in a real representative interval gives a smooth local inverse, proving the claimed diffeomorphism. These trigonometric properties are [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[thm-sine-and-cosine-derivatives]] and [[cor-trigonometric-parity-and-pythagorean-identity]]. Thus the regular fibres have the torus structure, whereas the critical fibre is a point. The refuted claim therefore fails exactly at the critical value. [L1, step 1.1, algebra]
 
 3.1 Collecting: the common level set $H^{-1}(0)$ of the completely integrable datum $(H)$ is nonempty, compact and connected but not diffeomorphic to a torus, so the refuted statement is false; the regular values of the same datum do satisfy the torus conclusion, so no claim of [[pthm-cm14-regular-tori]] is affected. [step 1.1, step 1.2, step 2.1, step 2.2] ∎
 

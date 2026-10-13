@@ -34,9 +34,9 @@ ratio, so that this number alone does not establish field quantisation.
 the count statistics of three declared preparations of one mode: the sharp
 count of the $n$-quanta state, the Poisson law of dimensionless coherent-state
 label $z$ with mean and variance $|z|^{2}$, and the geometric law with mean
-$1/(e^{\beta\varepsilon_{0}}-1)$ and variance $m(m+1)$ of a declared
+$1/(e^{\beta E_{0}}-1)$ and variance $m(m+1)$ of a declared
 effective-mode-energy preparation, with declared parameters
-$\varepsilon_{0}>0$ joules and $\beta>0$ in $\mathrm J^{-1}$, not derived from
+$E_{0}>0$ joules and $\beta>0$ in $\mathrm J^{-1}$, not derived from
 the mode profile.
 [[texp-nrqm-photons-classical-field-and-quantized-detection-comparison]]
 proves that the declared classical and quantised models assign the same

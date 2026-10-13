@@ -74,17 +74,17 @@ $$\partial_t\rho+\operatorname{div}(\rho u)=0 \qquad\text{and}\qquad \rho\,D_tu=
 
 $$D_tu=-\nabla\bigl(h(\rho)+V\bigr).$$
 
-**(ii)** Suppose in addition that the flow is **steady**: $\partial_tu=0$, $\partial_t\rho=0$ and $\partial_tV=0$ on $I\times O$. If $\gamma:J\to O$ is a $C^1$ curve on a nonempty open interval $J\subseteq I$ with $\gamma'=u(\gamma)$, then
+**(ii)** Suppose in addition that the flow is **steady**: $\partial_tu=0$, $\partial_t\rho=0$ and $\partial_tV=0$ on $I\times O$. A **streamline** on an open interval $J\subseteq I$ is a $C^1$ curve $\gamma:J\to O$ satisfying $\gamma'(t)=u(t,\gamma(t))$. For every streamline on a nonempty $J$,
 
 $$\frac{d}{dt}\Bigl(h(\rho)+V+\tfrac12|u|_2^2\Bigr)\bigl(t,\gamma(t)\bigr)=0 ,$$
 
 equivalently $u\cdot\nabla\bigl(h(\rho)+V+\tfrac12|u|_2^2\bigr)=0$ on $I\times O$: the quantity is constant along every streamline.
 
-**(iii)** If in addition the velocity gradient $Du(t,x)$ is symmetric at every $(t,x)$ (irrotational branch in the standard coordinates), then
+**(iii)** If the steady hypotheses of (ii) hold and in addition the spatial velocity gradient $Du(t,x)$ is symmetric at every $(t,x)$ (the **irrotational condition** used in this collection), then
 
 $$\nabla\Bigl(h(\rho)+V+\tfrac12|u|_2^2\Bigr)=0\qquad\text{on }I\times O,$$
 
-so the quantity is constant on every Euclidean ball contained in $I\times O$ (and hence on each connected component when the domain is connected).
+so the full derivative of this quantity vanishes and it is constant on every Euclidean ball contained in $I\times O$, hence on each connected component of $I\times O$.
 
 ## Facts & Assumptions
 
@@ -96,7 +96,9 @@ so the quantity is constant on every Euclidean ball contained in $I\times O$ (an
 
 [F3] If $Du$ is symmetric, then $Du\,u=\nabla\bigl(\tfrac12|u|_2^2\bigr)$: $(Du\,u)_i=\sum_j\partial_ju_i\,u_j=\sum_j\partial_iu_j\,u_j=\partial_i\tfrac12\sum_ju_j^2$ ([[def-cm-euclidean-spatial-calculus]], [[def-euclidean-inner-product]], [[thm-total-derivative-computes-directional-and-partial-derivatives]]).
 
-[F4] A $C^1$ curve with $\gamma'=u(\gamma)$ differentiates a $C^1$ scalar field $\varphi$ by $\frac{d}{dt}\varphi(t,\gamma(t))=\partial_t\varphi(t,\gamma(t))+\nabla\varphi(t,\gamma(t))\cdot\gamma'(t)$ ([[thm-chain-rule-for-total-derivatives]], [[thm-total-derivative-computes-directional-and-partial-derivatives]], [[def-derivative]]).
+[F4] A $C^1$ curve with $\gamma'(t)=u(t,\gamma(t))$ differentiates a $C^1$ scalar field $\varphi$ by $\frac{d}{dt}\varphi(t,\gamma(t))=\partial_t\varphi(t,\gamma(t))+\nabla\varphi(t,\gamma(t))\cdot\gamma'(t)$ ([[thm-chain-rule-for-total-derivatives]], [[thm-total-derivative-computes-directional-and-partial-derivatives]], [[def-derivative]]).
+
+[F5] A function locally constant on an open set is constant on each connected component: on a connected component, every nonempty level set and its complement are relatively open. A connected set is one that is not a union of two nonempty disjoint relatively open sets, and a connected component is a maximal connected subset.
 
 ## Proof
 
@@ -108,10 +110,10 @@ so the quantity is constant on every Euclidean ball contained in $I\times O$ (an
 
 3.1 For the streamline $\gamma$, [F4] gives $\frac{d}{dt}Q(t,\gamma(t))=\partial_tQ+u\cdot\nabla Q$ with $Q:=h(\rho)+V+\tfrac12|u|_2^2$; by [F2] and steadiness, $\partial_tQ=h'(\rho)\partial_t\rho+\partial_tV+u\cdot\partial_tu=0$. Step 2.1 makes the spatial term vanish, so the derivative is $0$. This is (ii). [step 2.1, F2, F4, given, algebra]
 
-4.1 Under the symmetry hypothesis, [F3] gives $D_tu=\partial_tu+\nabla(\tfrac12|u|_2^2)$; with $\partial_tu=0$ and (i), $$\nabla\Bigl(h(\rho)+V+\tfrac12|u|_2^2\Bigr)=\nabla(h(\rho)+V)+\nabla\bigl(\tfrac12|u|_2^2\bigr)=-D_tu+D_tu=0 .$$ A function with zero total derivative on a convex open set is constant ([[cor-zero-total-derivative-on-a-convex-open-set-is-constant]]); every Euclidean ball in $\mathbb R\times\mathbb R^3$ is convex ([[def-metric-ball]], [[def-euclidean-inner-product]]), so the quantity is constant on every ball contained in $I\times O$. This is (iii). [step 1.1, F3, given, algebra] ∎
+4.1 Under the symmetry hypothesis, [F3] gives $D_tu=\partial_tu+\nabla(\tfrac12|u|_2^2)$; with the steady condition $\partial_tu=0$ and (i), $$\nabla Q=\nabla(h(\rho)+V)+\nabla\bigl(\tfrac12|u|_2^2\bigr)=-D_tu+D_tu=0,$$ where $Q=h(\rho)+V+\tfrac12|u|_2^2$. Steadiness also gives $\partial_tQ=0$, so the full derivative $DQ$ vanishes. A function with zero total derivative on a convex open set is constant ([[cor-zero-total-derivative-on-a-convex-open-set-is-constant]]); every Euclidean ball in $\mathbb R\times\mathbb R^3$ is convex ([[def-metric-ball]], [[def-euclidean-inner-product]]), so $Q$ is constant on every ball in $I\times O$. It is therefore locally constant, and [F5] gives constancy on each connected component. This is (iii). [step 1.1, F3, F5, given, algebra] ∎
 
 ## Remarks
 
-- The hypotheses of (ii) and (iii) are part of the statement: a time-dependent, sheared barotropic flow need not satisfy Bernoulli along streamlines, and $Du$ symmetric is a genuine restriction equivalent, in these coordinates, to the vanishing of the curl of $u$ (a term not otherwise defined in this collection). No global constant is asserted in (ii): different streamlines may carry different constants.
+- The steady hypotheses of (ii) and (iii) are part of the statement. A time-dependent or sheared barotropic flow need not satisfy Bernoulli along streamlines. The term “irrotational” in (iii) is defined here by the explicit condition $Du=(Du)^{\mathsf T}$; no curl convention is needed. No global constant is asserted in (ii): different streamlines may carry different constants.
 
 - Only the stated smoothness and the local equation (M) are used. The physical reading — an inviscid barotropic fluid with conservative body force — is the model branch of [[def-cm-fluid-constitutive-models]]; the theorem itself is a conditional consequence of (M).

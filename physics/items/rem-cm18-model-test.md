@@ -40,10 +40,10 @@ $S$ for a specified family $(\mathbb P_{\theta})_{\theta\in\Theta}$ of
 probability measures and a specified null set $\Theta_{0}\subseteq\Theta$;
 its power function is $\beta(\theta)=\mathbb P_{\theta}(R)$ and its size is
 $\sup_{\theta\in\Theta_{0}}\beta(\theta)$
-([[def-cm-statistical-test-and-size]]). The size is computed from the null
-set and the family alone; no alternative set and no prior distribution enter
-it, and a test at level $\alpha$ rejects a true null with probability at most
-$\alpha$ **under the specified family**.
+([[def-cm-statistical-test-and-size]]). The size is computed from the specified
+data space, family, null set and rejection region; no alternative set and no
+prior distribution enter it. A test at level $\alpha$ rejects a true null
+with probability at most $\alpha$ **under the specified family**.
 
 For the force branch of [[post-cm02-force-superposition]], a family and a
 rejection region are obtained only after specifying: one inertial frame; an
@@ -72,7 +72,11 @@ the null is not proof of the null: a test with low power fails to reject
 alternatives it cannot distinguish, and nonrejection alone neither proves nor estimates an effect size. Under a specified family the nonrejection event has parameter-dependent probability $1-\beta(\theta)$ and can therefore inform comparisons of effect values; quantification requires that family and an explicit inferential construction.
 
 The indices of this page attach no probability to a parameter value. The
-level of a confidence set is a pre-data infimum of coverage probabilities
+coverage of a confidence set $C:S\to2^\Theta$ at $\theta$ is
+$\gamma(\theta)=\mathbb P_\theta\{s:\theta\in C(s)\}$, with each displayed
+set required to be measurable. For $\alpha\in[0,1]$, it has coverage level
+$1-\alpha$ when $\inf_{\theta\in\Theta}\gamma(\theta)\ge1-\alpha$;
+the declared level is a pre-data lower bound, and need not equal that infimum
 ([[def-cm-confidence-set-and-coverage]]); a likelihood value is the density
 of the observed datum at a parameter value, not the probability of the value
 ([[def-cm-likelihood-function]]); and a size is a supremum over the null set

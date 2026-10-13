@@ -21,6 +21,7 @@ requires:
   - properties-of-the-integral-and-the-working-ftc
   - geodesics-the-exponential-map-completeness-and-hopf-rinow
   - riemann-curvature-and-riemannian-submanifolds
+  - smooth-partitions-of-unity-and-exhaustions
 page: gr-framework-and-geometry
 title: "Framework And Geometry"
 status: draft
@@ -100,9 +101,12 @@ smooth-branch domain and its four-dimensional, boundaryless restrictions
 ([[post-gr-spacetime-and-classical-domain]]). The matter postulate records
 that a model's nongravitational fields, their equations and couplings, and its
 stress-energy tensor are model input occupying the smooth symmetric tensor
-slot defined here, with on-shell conservation and consistency left to the
-adopted field law and with the weak, null, dominant and strong energy
-conditions available only as additional adopted assumptions
+slot defined here; any conservation equation used for that tensor must be
+established for the specified model under its equations, symmetries and
+regularity hypotheses, while an independently prescribed tensor must meet the
+adopted field law's consistency conditions. The general framework imposes none
+of the weak, null, dominant or strong energy conditions automatically, though
+a particular matter model may imply some of them
 ([[def-gr-stress-energy-tensor-field]], [[def-gr-energy-conditions]],
 [[post-gr-field-and-matter-assumptions]]). A closing audit records which
 notions are primitive, adopted, constructed, or explicitly not claimed on this

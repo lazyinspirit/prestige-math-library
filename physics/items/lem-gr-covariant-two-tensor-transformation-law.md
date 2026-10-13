@@ -20,7 +20,7 @@ dependency_roles:
   thm-ck-euclidean-maps-closed-under-algebra-and-composition: mathematical-premise
 sources:
   references:
-    - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), the tensor transformation law (2.26) and the metric transformation (2.35), printed pp. 46-50 (PDF pp. 53-57)"
+    - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), the metric transformation law (2.35), printed p. 50 (PDF p. 57)"
       url: "https://arxiv.org/pdf/gr-qc/9712019"
     - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), sections 1.6-1.8 on abstract index notation and tensor fields, printed pp. 15-21 (PDF pp. 16-22)"
       url: "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
@@ -51,9 +51,7 @@ atlas.
 
 ## Facts & Assumptions
 
-**Given:** A smooth $n$-manifold $M$, a family $A=(A_p)$ of covariant
-$2$-tensors, a smooth atlas in which the components of $A$ are $C^\infty$, and
-overlapping smooth charts $(U,x)$, $(V,y)$ of the maximal atlas.
+**Given:** A smooth $n$-manifold $M$, a family $A=(A_p)$ of covariant $2$-tensors, a smooth atlas in which the components of $A$ are $C^\infty$, and overlapping smooth charts $(U,x)$, $(V,y)$ of the maximal atlas.
 
 [L1] Each coordinate operator $\partial_i|_p$ is a well-defined derivation at $p$ ([[lem-coordinate-derivations-are-well-defined-derivations]]).
 
@@ -75,6 +73,6 @@ overlapping smooth charts $(U,x)$, $(V,y)$ of the maximal atlas.
 
 2.1 Both sides of the identity in step 1.1 act on smooth germs at $p$ and are derivations there, so the coordinate vector fields are related by $\frac{\partial}{\partial y^a}\big|_p=\sum_c\frac{\partial x^c}{\partial y^a}(y_0)\,\frac{\partial}{\partial x^c}\big|_p$. Evaluating the bilinear form $A_p$ on the pair $\left(\frac{\partial}{\partial y^a}\big|_p,\frac{\partial}{\partial y^b}\big|_p\right)$ and using bilinearity together with [L5] gives $A'_{ab}(y_0)=\sum_{c,d}\frac{\partial x^c}{\partial y^a}(y_0)\frac{\partial x^d}{\partial y^b}(y_0)A_{cd}(x(p))$, which is the displayed transformation law at $p$. [step 1.1, L5, algebra]
 
-3.1 The right-hand side of step 2.1 is a $C^\infty$ function of $y$ on $y(U\cap V)$: the transition $x\circ y^{-1}$ is smooth by [L3] so its total derivative $D(x\circ y^{-1})$ and each entry $\frac{\partial x^c}{\partial y^a}$ are smooth, choose $(U,x)$ from the given atlas, so each $A^x_{cd}=A_{cd}\circ x^{-1}$ is smooth on $x(U)$ by [L6], and $A^x_{cd}\circ(x\circ y^{-1})$ is smooth on $y(U\cap V)$ by [L3]-[L4], and finite sums and products of smooth maps are smooth by [L4]. Since $p\in U\cap V$ was arbitrary, the components $A'_{ab}$ are smooth on $V\cap U$; by [L6] this is smoothness of their coordinate representatives on $y(V\cap U)$. The original-atlas domains cover $V$, so these local smoothness statements cover that chart. [L3, L4, L6, step 2.1, given]
+3.1 Fix an arbitrary chart $(V,y)$ of the maximal atlas and a point $p\in V$. Since the supplied smooth atlas covers $M$, there is a chart $(U_0,x_0)$ in that atlas with $p\in U_0$. On the open overlap $U_0\cap V$, the transition $x_0\circ y^{-1}$ is smooth by [L3], so its first partial derivatives are smooth; each component function $A^{x_0}_{cd}=A_{cd}\circ x_0^{-1}$ is smooth on $x_0(U_0)$ by the hypothesis and [L6]. The transformation law of step 2.1 expresses each $A^y_{ab}$ on $y(U_0\cap V)$ as a finite sum of products of these derivative functions and $A^{x_0}_{cd}\circ(x_0\circ y^{-1})$. These products and compositions are smooth by [L4]. Thus the components are smooth on a neighbourhood of $y(p)$. Since $p$ was arbitrary, they are smooth throughout $y(V)$. [L3, L4, L6, step 2.1, given]
 
-4.1 The chart $(V,y)$ of the maximal atlas was arbitrary, and the maximal atlas is covered by overlaps with the charts of the given atlas since that atlas covers $M$. Hence the components of $A$ are $C^\infty$ in every chart of the maximal atlas whenever they are $C^\infty$ in the charts of one atlas, and the transformation law of step 2.1 holds for every pair of overlapping charts. Thus $A$ is a smooth covariant $2$-tensor field by [L5], as claimed. [step 2.1, step 3.1, L5, given] ∎
+4.1 The maximal-atlas chart $(V,y)$ in step 3.1 was arbitrary, so the components of $A$ are $C^\infty$ in every chart of the maximal atlas whenever they are $C^\infty$ in the charts of one atlas. Step 2.1 proves the transformation law for every pair of overlapping charts. Thus $A$ is a smooth covariant $2$-tensor field by [L5], as claimed. [step 2.1, step 3.1, L5, given] ∎

@@ -68,14 +68,17 @@ rank-three projector is not trace-free.
 from a null wave covector and proves the exact decomposition
 $V_0=T\oplus G$ of the harmonic-gauge amplitude space into the pure
 plane-wave gauge amplitudes and the transverse-traceless amplitudes, with a
-unique TT representative of every class. The quotient is two-dimensional,
-with the amplitudes $(A_+,A_\times)$ of the TT representative as linear
-coordinates; [[ex-gr-plane-wave-regauge-to-tt]] works the explicit regauging
+unique TT representative of every class for each real phase coefficient.
+The quotient for one cosine or sine coefficient is two-dimensional, with the
+amplitudes $(A_+,A_\times)$ of the TT representative as linear coordinates;
+the full real cosine-and-sine pair has two such copies, four real
+coefficients for the two polarization types. [[ex-gr-plane-wave-regauge-to-tt]] works the explicit regauging
 of a non-TT amplitude. [[thm-gr-tt-plane-wave-solutions]] shows that TT
 planar perturbations with arbitrary bounded smooth profiles solve the
 linearized vacuum equations, are in harmonic gauge, and give small-amplitude
-Lorentzian metrics whose exact vacuum residual is bounded by a constant
-times the square of the amplitude on compact sets.
+Lorentzian metrics whose exact zero-source, $\Lambda=0$ vacuum residual is
+bounded by a constant times the square of the amplitude on nonempty compact
+sets.
 [[thm-gr-tt-plane-wave-curvature]] computes the first-order curvature
 coefficient — in particular $R^{(1)}_{0i0j}=-\tfrac12\partial_0^2h_{ij}$ for
 spatial planar waves — proves its gauge invariance, and identifies its
@@ -91,7 +94,7 @@ fixes linearized-wave data, including its smooth stress-energy family and
 chosen quadratic threshold, and defines an ideal detector as two freely
 falling worldlines with the metric length of a prescribed chart-straight arm
 path at equal inertial-chart time. [[pthm-gr-plane-wave-polarizations]]
-states the model reading of the amplitude classification: two polarizations
+states the model reading of the amplitude classification: two polarization types
 at fixed null wave covector, with gauge-invariant first-order curvature
 coefficients as their geometric content. In SI length coordinates $x^0=ct$,
 phase fronts have coordinate speed $c$ and a single-frequency phase
@@ -103,8 +106,9 @@ strain as a path integral. For screen-plane arms this reduces to
 $\sqrt{1+\lambda a}-1$ with $a=A_+\cos2\theta+A_\times\sin2\theta$.
 
 **Status.** Every physical statement on the page is conditional on the
-adopted postulates and on the stated families; the exact metric
-$\eta+\lambda h$ solves the vacuum field law only up to order $\lambda^2$,
+adopted postulates and on the stated families; in the zero-source, $\Lambda=0$
+branch, the exact metric $\eta+\lambda h$ has a vacuum residual bounded by
+$O(\lambda^2)$ on each nonempty compact set for sufficiently small amplitudes,
 and no observation, apparatus model, noise model, light-propagation model or
 numerical amplitude occurs. [[rem-gr-linearized-wave-scope-and-deferred]]
 records the exclusions and the material (source radiation and quadrupole

@@ -52,7 +52,7 @@ $Q=\mathbb R^{3}$, and let $f:\mathbb R\to\mathbb R^{3}$ be of class $C^{2}$,
 of dimension $\mu\ell\tau^{-2}$ (newtons), be a prescribed external drive.
 Adopt the **time-dependent potential**
 
-$$U(t,x):=\tfrac{k}{2}\lvert x\rvert^{2}-f(t)\cdot x,\qquad k>0,$$
+$$U(t,x):=\tfrac{k}{2}\lvert x\rvert^{2}-f(t)\cdot x,\qquad k>0\ \text{with}\ [k]=\mu\tau^{-2},$$
 
 of class $C^{2}$ and dimension $\mu\ell^{2}\tau^{-2}$, and check that the
 presentation $(U,0)$ of [[def-cm03-potential-and-mechanical-energy]] has
@@ -83,8 +83,9 @@ $$E'(t)=\partial_{t}U\bigl(t,x(t)\bigr)=-f'(t)\cdot x(t);$$
    $f'(t_{0})\cdot x_{0}\ne0$ then the maximal motion through $(t_{0},x_{0},0)$
    has nonzero energy derivative at $t_{0}$.
 3. **explicit sinusoidally driven motion.** Specialise to
-   $f(t):=f_{0}\cos(\Omega t)\,\hat e$ with $f_{0}>0$, $\Omega>0$ and a unit
-   vector $\hat e\in\mathbb R^{3}$, and assume $k\ne m\Omega^{2}$. Then
+   $f(t):=f_{0}\cos(\Omega t)\,\hat e$ with $f_{0}>0$ of force dimension,
+   $\Omega>0$ of dimension $\tau^{-1}$ and a dimensionless unit vector
+   $\hat e\in\mathbb R^{3}$, and assume $k\ne m\Omega^{2}$. Then
 
 $$x_{p}(t):=\frac{f_{0}\cos(\Omega t)}{k-m\Omega^{2}}\,\hat e\qquad(t\in\mathbb R)$$
 
@@ -131,16 +132,6 @@ external data and no measurement is reported.
 
 ## Remarks
 
-- **The driven model is adopted external data.** The drive $f(t)$ is prescribed
-  and does not depend on the state; the object producing it is not a label of
-  the model. The example therefore shows that the energy balance of the pair
-  and the failure of the time-translation identity are properties of the
-  declared presentation, not of the framework's kinematics; the same mechanical
-  equation with a constant force would have an autonomous representative and a
-  conserved energy.
+- **The driven model is adopted external data.** The drive $f(t)$ is prescribed and does not depend on the state; the object producing it is not a label of the model. The example therefore shows that the energy balance of the pair and the failure of the time-translation identity are properties of the declared presentation, not of the framework's kinematics; the same mechanical equation with a constant force would have an autonomous representative and a conserved energy.
 
-- **Representative dependence.** Adding a function $c(t)$ to $U$ shifts the
-  energy by $c(t)$ and its rate by $c'(t)$, as recorded in clause (c) of
-  [[def-cm03-potential-and-mechanical-energy]]; the representative declared
-  here is the one in which the drive is visible as $\partial_{t}U=-f'(t)\cdot x$,
-  and the numerical values of $E$ depend on that choice of representative.
+- **Representative dependence.** Adding a function $c(t)$ to $U$ shifts the energy by $c(t)$ and its rate by $c'(t)$, as recorded in clause (c) of [[def-cm03-potential-and-mechanical-energy]]; the representative declared here is the one in which the drive is visible as $\partial_{t}U=-f'(t)\cdot x$, and the numerical values of $E$ depend on that choice of representative.

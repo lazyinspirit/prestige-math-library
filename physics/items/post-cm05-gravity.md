@@ -15,7 +15,7 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "Adoption of the two-label gravitational model inside the page's central-force class: the inverse-square static pair potential with the Newtonian constant and positive gravitational coupling parameters; the empirical identification of the coupling parameters with the inertial masses, adopted as an assumption of the page's applications; the measured value of the Newtonian constant with its uncertainty and the mutual inconsistency of its measurements; and the non-relativistic weak-field two-point-label applicability regime, specified by the source-potential and relative-speed inequalities in clause (iv), with its exclusions. The item adopts model data and empirical premises; it asserts no law of nature, no proof of the identification, and no numerical prediction by itself."
+physical_scope: "Adoption of the two-label gravitational model inside the page's central-force class: the inverse-square static pair potential with the Newtonian constant and positive gravitational coupling parameters; the empirical identification of the coupling parameters with the inertial masses, adopted as an assumption of the page's applications; the measured value of the Newtonian constant with its uncertainty and the mutual inconsistency of its measurements; and the non-relativistic weak-field two-point-label applicability regime, specified by the source-potential and individual-speed inequalities in a specified comparison frame in clause (iv), with its exclusions. The item adopts model data and empirical premises; it asserts no law of nature, no proof of the identification, and no numerical prediction by itself."
 sources:
   references:
     - title: "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, Eq. (1.15) and footnote 11, chapter page 4 (PDF page 8): Newton's gravity law with the gravitational constant and the weak-equivalence footnote recording the empirical support for identifying gravitational and inertial mass"
@@ -24,7 +24,7 @@ sources:
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
     - title: "P. J. Mohr, D. B. Newell, B. N. Taylor, E. Tiesinga et al., CODATA Recommended Values of the Fundamental Physical Constants: 2022, arXiv:2409.03787 [physics.atom-ph], Section XIV and Table XXX: the recommended value $G=6.674\\,30(15)\\times10^{-11}\\,\\mathrm{m^3\\,kg^{-1}\\,s^{-2}}$ with relative standard uncertainty $2.2\\times10^{-5}$, unchanged from 2018, based on the 16 measurements of Table XXX with an expansion factor of 3.9"
       url: "https://arxiv.org/pdf/2409.03787"
-    - title: "Max Tegmark, General Relativity, MIT Course 8.033 lecture notes, Fall 2005 (revised 2006), p. 3: the Newtonian potential of a point source, the dimensionless ratio $\\Phi/c^2$, and the small-potential and slow-motion Newtonian regime"
+    - title: "Max Tegmark, General Relativity, MIT Course 8.033 lecture notes, Fall 2005 (revised 2006), pp. 3-4: the Newtonian potential of a point source, the dimensionless ratio $\\Phi/c^2$, and the small-potential and slow-motion Newtonian regime"
       url: "https://ocw.mit.edu/courses/8-033-relativity-fall-2006/247a558883de99bc79212077c6c6d5d5_gr.pdf"
     - title: "P. J. Mohr, D. B. Newell, B. N. Taylor, E. Tiesinga et al., CODATA Recommended Values of the Fundamental Physical Constants: 2022, Table XXXIII: the speed of light in vacuum $c=299792458\\,\\mathrm{m\\,s^{-1}}$ is exact in SI"
       url: "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=958143"
@@ -92,14 +92,25 @@ $x=(x_1,x_2)\in Q$ with $\rho(x):=\lvert x_1-x_2\rvert>0$, define the
 source potentials per unit gravitational coupling as scalar functions
 $\Phi_1,\Phi_2:Q\to\mathbb R$ by
 $$\Phi_1(x):=-\frac{G_{\mathrm N}m_2^{g}}{\rho(x)},\qquad \Phi_2(x):=-\frac{G_{\mathrm N}m_1^{g}}{\rho(x)},$$
-each of dimension $\ell^2\tau^{-2}$, and for a state velocity
-$v=(v_1,v_2)\in(\mathbb R^3)^2$ define the dimensionless parameters
-$$\epsilon_{\Phi}(x):=\frac{\max\{\lvert\Phi_1(x)\rvert,\lvert\Phi_2(x)\rvert\}}{c^2},\qquad \epsilon_v(v):=\frac{\lvert v_1-v_2\rvert^2}{c^2}.$$
+each of dimension $\ell^2\tau^{-2}$. Fix the inertial frame of
+[[post-cm02-force-superposition]] clause (i), with its time and spatial
+coordinates, as the comparison frame for the intended relativistic
+approximation. For a state velocity $v=(v_1,v_2)\in(\mathbb R^3)^2$,
+where $v_i$ is the coordinate velocity of label $i$ in that frame, define
+the dimensionless parameters
+$$\epsilon_{\Phi}(x):=\frac{\max\{\lvert\Phi_1(x)\rvert,\lvert\Phi_2(x)\rvert\}}{c^2},\qquad \epsilon_v(v):=\frac{\max\{\lvert v_1\rvert^2,\lvert v_2\rvert^2\}}{c^2}.$$
 For a motion $x:J\to Q$, a trajectory interval $\mathcal I\subseteq J$ and a dimensionless tolerance
 $\eta\in(0,1)$ chosen small enough for the intended approximation, the
-weak-field, slow-relative-motion regime on that segment means
+weak-field, slow-motion regime in this comparison frame on that segment means
 $$\epsilon_{\Phi}(x(t))\le\eta\quad\text{and}\quad\epsilon_v(x'(t))\le\eta\qquad\text{for every }t\in\mathcal I.$$
-The choice of $\eta$ is application-specific; this model supplies no
+Small relative speed alone does not meet the speed condition: adding a
+common large velocity leaves $v_1-v_2$ unchanged. The formal Newtonian
+equations retain their frame transformation rule, but this approximation
+criterion is assessed in the specified comparison coordinates, as in the
+cited Newtonian-limit discussion; it is not asserted in every boosted frame.
+The choice of $\eta$ is application-specific; these conditions are applicability
+criteria, not a proved sufficient condition for a relativistic error bound.
+This model supplies no
 relativistic correction estimate or error bound. When $G_{\mathrm N}$ is
 assigned the value in clause (iii), these inequalities inherit its standard
 uncertainty and any uncertainty in the other inputs; no regime assessment is

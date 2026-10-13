@@ -69,7 +69,7 @@ sources:
     - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics
         (title page last edited September 1, 2026), Chapter 4 Section 4.4, Eq.
         (4.66) with the discussion of rotation about the intermediate axis,
-        chapter pages 9-12 (PDF pages 63-66)"
+        chapter pages 15-16 (PDF pages 69-70)"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "I. W. Stewart, Advanced Classical Mechanics (MIT 8.09 Advanced Classical
         Mechanics, Fall 2014 course text), Chapter 2 Section 2.4, printed pages
@@ -158,26 +158,14 @@ and no conclusion about the nonlinear stability of the spin is drawn here.
 
 1.2 Identify $\mathbb R^{3}$ with the supplier's $\mathbb R^{3}$ of [L2] by the map $Q$ carrying its standard basis to the cyclic basis $(e_{a},e_{b},e_{j})$. By the positive orientation stipulated in [L5], $Q\in SO(3)$, so $Q(u\times v)=(Qu)\times(Qv)$ ([L6]); then the supplier's diagonal map with entries $(I_{a},I_{b},I_{j})$ is the model's inertia operator $I$ expressed in the principal basis [L5], and the fields $F(\omega)=-I^{-1}(\omega\times I\omega)$ correspond. Clause 1 of [L2] applied at the spin about the third basis vector gives the total differentiability of $F$ at $\Omega e_{j}$ and the derivative $A_{j}$ of clause 1: the components are $(A_j\delta)_a=\Omega(I_b-I_j)\delta_b/I_a$, $(A_j\delta)_b=\Omega(I_j-I_a)\delta_a/I_b$, $(A_j\delta)_j=0$, so evaluating at $e_a$ and $e_b$ gives exactly the stated basis images. The supplier also gives the remainder bound and explicit constant, and clauses 2-3 of [L2] give the transverse formulas, the criterion for the sign of $\lambda_{j}=\Omega^{2}(I_{a}-I_{j})(I_{j}-I_{b})/(I_{a}I_{b})$ and the bounded/unbounded alternatives. The displayed sine/cosine and hyperbolic formulas are defined on all of $\mathbb R$, satisfy the linear system, and have the prescribed initial data; the uniqueness assertion in the supplier proof makes every local solution their restriction. This is clause 1 and the case analysis of clause 2 up to the sign criterion. [given, L2, L5, L6, algebra]
 
-2.1 The product $(I_{a}-I_{j})(I_{j}-I_{b})$ is positive exactly when $I_{j}$ lies strictly between $I_{a}$ and $I_{b}$ and negative exactly when $I_{j}$ is larger than both or smaller than both; since $\Omega^{2}/(I_{a}I_{b})>0$, the criterion of clause 3 of [L2] reads: $\lambda_{j}<0$ (oscillatory, bounded, the displayed $\cos,\sin$ formulas with $\kappa_{j}=\sqrt{-\lambda_{j}}$) exactly for the extreme axes, and $\lambda_{j}>0$ (the $\cosh,\sinh$ formulas with $\kappa_{j}=\sqrt{\lambda_{j}}$, unbounded solutions, the stated growth criterion) exactly for the intermediate axis. This completes clause 2. [step 1.2, given, algebra]
+2.1 The product $(I_{a}-I_{j})(I_{j}-I_{b})$ is positive exactly when $I_{j}$ lies strictly between $I_{a}$ and $I_{b}$ and negative exactly when $I_{j}$ is larger than both or smaller than both; since $\Omega^{2}/(I_{a}I_{b})>0$, the criterion of clause 3 of [L2] reads: $\lambda_{j}<0$ (oscillatory, bounded, the displayed $\cos,\sin$ formulas with $\kappa_{j}=\sqrt{-\lambda_{j}}$) exactly for the extreme axes, and $\lambda_{j}>0$ (the $\cosh,\sinh$ formulas with $\kappa_{j}=\sqrt{\lambda_{j}}$, unbounded solutions, the stated growth criterion) exactly for the intermediate axis. This completes clause 2. [step 1.2, given, L2, algebra]
 
 3.1 By [L3] the boundedness of every global maximal solution of the linearized system on $[0,\infty)$ in the extreme case is exactly linear stability of the spin, and the existence of an unbounded solution in the intermediate case is the failure of linear stability, since a solution that is unbounded on $[0,\infty)$ is not bounded there. [step 1.2, step 2.1, given, L3] ∎
 
 ## Remarks
 
-- **The linearization variable.** The linearization is taken in the
-  body-angular-velocity variable $\omega$; because $l=I\omega$ with $I$ a
-  fixed invertible linear map, stability and boundedness statements transfer
-  between the $\omega$- and $l$-variables up to the fixed constants
-  $I_{\min}$ and $I_{\max}$, and the two formulations are equivalent for the
-  linearized system.
+- **The linearization variable.** The linearization is taken in the body-angular-velocity variable $\omega$; because $l=I\omega$ with $I$ a fixed invertible linear map, stability and boundedness statements transfer between the $\omega$- and $l$-variables up to the fixed constants $I_{\min}$ and $I_{\max}$, and the two formulations are equivalent for the linearized system.
 
-- **Linear versus nonlinear.** Clause 2 is a statement about the linearized
-  system. Exponential growth of a linearized solution does not by itself
-  prove nonlinear instability, and boundedness of the linearized system does
-  not by itself prove nonlinear Lyapunov stability; the nonlinear statements
-  are proved separately in [[pthm-cm11-nonlinear-spin-stability]], which uses
-  the conserved quantities rather than the linearization.
+- **Linear versus nonlinear.** Clause 2 is a statement about the linearized system. Exponential growth of a linearized solution does not by itself prove nonlinear instability, and boundedness of the linearized system does not by itself prove nonlinear Lyapunov stability; the nonlinear statements are proved separately in [[pthm-cm11-nonlinear-spin-stability]], which uses the conserved quantities rather than the linearization.
 
-- **Distinctness is a real hypothesis.** The supplier requires pairwise
-  distinct principal moments and the case analysis uses it; repeated moments
-  change the equilibrium set and are not covered by this statement.
+- **Distinctness is a real hypothesis.** The supplier requires pairwise distinct principal moments and the case analysis uses it; repeated moments change the equilibrium set and are not covered by this statement.

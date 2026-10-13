@@ -31,7 +31,7 @@ sources:
   references:
     - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.3.1 printed pages 214-215 and Box 9.2 printed page 218 (PDF pages 222-223, 226): Fermi's golden rule with its continuum and long-time approximations, and spontaneous emission as an added zero-point-field mechanism"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
-    - title: "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.4.2 printed pages 119-122 (PDF pages 122-125): the deferral of coupling to radiation, and the warning that energy differences alone do not prove that an isolated stationary atom emits light"
+    - title: "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 4.4.2 printed pages 118-122 (PDF pages 121-125): the photon energy relation E=hbar*omega and the limits of a single-particle Schrodinger treatment of photon dynamics, with quantum field theory identified as a field-theoretic framework"
       url: "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
     - title: "S. Pratt, Lecture Notes on Quantum Mechanics (Michigan State University, PHY 851/852; Internet Archive snapshot of 2024-04-21), Chapter 14 Section 14.3 printed page 221: a classical current radiates coherent states and does not change state, unlike an emitting atom"
       url: "http://web.archive.org/web/20240421090356/https://web.pa.msu.edu/people/pratts/phy851/lectures/lectures_full.pdf"
@@ -92,8 +92,8 @@ their units are those of
 **What the page does not claim.** The page derives no Maxwell equation, no
 mode assignment, no Lorentz transformation law, no massless limit of the
 massive model and no coupling constant. It contains no experiment: there is no
-apparatus, preparation, calibration, count, frequency, efficiency, background
-or uncertainty budget anywhere on the page, and none is invented. It asserts
+reported laboratory apparatus or preparation protocol, calibration, count,
+frequency, efficiency, background or uncertainty budget anywhere on the page, and none is invented. It asserts
 no measured spectral line, no measured rate, lifetime or linewidth, and no
 exponential decay law; the model rate coefficient of
 [[pthm-nrqm-light-matter-golden-rule-limit-and-rate-reading]] is a limit of an

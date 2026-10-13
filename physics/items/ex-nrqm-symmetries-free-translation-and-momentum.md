@@ -74,8 +74,11 @@ sources:
         printed page + 8"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
-        Section 8.1, printed pages 173-175 (PDF pages 185-187): the free
-        evolution as a Fourier multiplier and momentum conservation"
+        Sections 7.2-7.3, printed pages 167-169 (PDF pages 179-181),
+        equations (7.24) and (7.27): the free Hamiltonian and evolution as
+        Fourier multipliers in the convention hbar=1, m=1/2; Section 8.1,
+        printed pages 173-175 (PDF pages 185-187), equations (8.3)-(8.7):
+        translations, momentum generators and conservation"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
     - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 6 'Quantum
         Dynamics', Section 3.2, printed pages 20-22 (PDF pages 20-22): constant

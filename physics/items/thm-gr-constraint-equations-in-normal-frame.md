@@ -10,13 +10,12 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [thm-gr-curvature-algebraic-symmetries, thm-gr-curvature-tensoriality-and-coordinate-formula, def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form, lem-gr-constraint-projections, def-gr-curvature-tensor-and-derived-tensors, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-christoffel-symbols-of-an-affine-connection, def-gr-tensor-fields-and-components, def-gr-inverse-metric-and-musical-isomorphisms, def-embedded-submanifold-and-slice-chart, def-c-r-and-smooth-maps-between-smooth-manifolds]
+deps: [thm-gr-curvature-algebraic-symmetries, thm-gr-curvature-tensoriality-and-coordinate-formula, def-gr-spacelike-hypersurfaces-and-cauchy-sets, lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form, def-gr-curvature-tensor-and-derived-tensors, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-christoffel-symbols-of-an-affine-connection, def-gr-tensor-fields-and-components, def-gr-inverse-metric-and-musical-isomorphisms, def-embedded-submanifold-and-slice-chart, def-c-r-and-smooth-maps-between-smooth-manifolds]
 dependency_roles:
   thm-gr-curvature-algebraic-symmetries: mathematical-premise
   thm-gr-curvature-tensoriality-and-coordinate-formula: mathematical-premise
   def-gr-spacelike-hypersurfaces-and-cauchy-sets: mathematical-premise
   lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form: mathematical-premise
-  lem-gr-constraint-projections: mathematical-premise
   def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
   def-gr-metric-selected-connection: mathematical-premise
   thm-gr-nondegenerate-levi-civita-and-tensor-derivative: mathematical-premise
@@ -66,7 +65,7 @@ With $\rho=T(n,n)$ and $j(Y)=-T(n,Y)$, the second equation is $(\operatorname{di
 
 [L3] The operator is $R(X,Y)Z=\nabla_X\nabla_YZ-\nabla_Y\nabla_XZ-\nabla_{[X,Y]}Z$, and $R_{abcd}=g(R(e_c,e_d)e_b,e_a)$, $\operatorname{Ric}_{bd}=g^{ac}R_{abcd}$, $S=g^{bd}\operatorname{Ric}_{bd}$ and $G=\operatorname{Ric}-\tfrac12Sg$ ([[def-gr-curvature-tensor-and-derived-tensors]]). Curvature is tensorial and is antisymmetric in its first pair and last pair of lowered slots ([[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (a), [[thm-gr-curvature-algebraic-symmetries]]).
 
-[L4] Tangential trace, inverse metric and contractions use the usual tensor operations ([[def-gr-tensor-fields-and-components]], [[def-gr-inverse-metric-and-musical-isomorphisms]]); the normal projections of the field equation are $G(n,n)-\Lambda=\kappa T(n,n)$ and $G(n,Y)=\kappa T(n,Y)$ ([[lem-gr-constraint-projections]]).
+[L4] Tangential trace, inverse metric and contractions use the usual tensor operations ([[def-gr-tensor-fields-and-components]], [[def-gr-inverse-metric-and-musical-isomorphisms]]). The pointwise field equation, when assumed in (d), may be evaluated on $(n,n)$ and $(n,Y)$ directly; this uses no global field-equation premise.
 
 ## Proof
 

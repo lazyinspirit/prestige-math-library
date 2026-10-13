@@ -37,13 +37,20 @@ verification:
 
 Adopt the isotropic linear elastic branch of
 [[post-cm17-linear-elastic-constitutive]] with reference density
-$\rho_0>0$ and moduli $\lambda,\mu_s$ with $\mu_s>0$ and
-$\lambda+\tfrac{2\mu_s}{3}>0$, and let
+$\rho_0>0$ of dimension $\mu\ell^{-3}$ and moduli $\lambda,\mu_s$ of
+dimension $\mu\ell^{-1}\tau^{-2}$, with $\mu_s>0$ and
+$\lambda+\tfrac{2\mu_s}{3}>0$ ([[def-cm17-continuum-body-and-units]]). Use $I=\mathbb R$, $O=\mathbb R^3$ and let
+$x_1$ be the reference position in metres and $t$ time in seconds. The amplitude $A\ne0$ has
+dimension $\ell$, and the wave number $\kappa\ne0$ has dimension $\ell^{-1}$.
+Define the positive longitudinal speed and angular frequency by
+$c_L:=\sqrt{(\lambda+2\mu_s)/\rho_0}$ and $\omega:=\kappa c_L$; then
+$[c_L]=\ell\tau^{-1}$, $[\omega]=\tau^{-1}$ and the phase is dimensionless.
+Let
 
-$$c_L:=\sqrt{\frac{\lambda+2\mu_s}{\rho_0}},\qquad \xi(t,x):=A\cos\bigl(\kappa x_1-\omega t\bigr)\,e_1,\qquad \omega:=\kappa c_L,$$
+$$\xi(t,x):=A\cos\bigl(\kappa x_1-\omega t\bigr)\,e_1,$$
 
 with $A\ne0$, $\kappa\ne0$ and $e_1$ the first standard basis vector: a
-longitudinal plane wave travelling along $e_1$. Then:
+longitudinal plane wave travelling along $e_1$. This is a solution of the linear reference-field model for every declared $A,\kappa$; physical small-strain use requires small $|A\kappa|$. No finite-motion diffeomorphism is inferred: its candidate placement has determinant $1-A\kappa\sin(\kappa x_1-\omega t)$, which need not be positive for these unrestricted algebraic data. Then:
 
 1. the linear strain is $e_{11}(t,x)=-A\kappa\sin(\kappa x_1-\omega t)$ with
    all other entries zero, so $\operatorname{tr}e=e_{11}$ and
@@ -54,7 +61,7 @@ longitudinal plane wave travelling along $e_1$. Then:
 3. the displacement equation (E) of
    [[pthm-cm17-linear-elastic-equation-of-motion]] with $b\equiv0$ holds
    exactly: $\rho_0\partial_t^2\xi_1=(\lambda+2\mu_s)\partial_1^2\xi_1$;
-4. the strain-energy density is
+4. the strain-energy density, of dimension $\mu\ell^{-1}\tau^{-2}$, is
    $W(e)=(\tfrac\lambda2+\mu_s)e_{11}^2=\mu_s\tfrac23e_{11}^2
    +(\tfrac\lambda2+\tfrac{\mu_s}3)e_{11}^2\ge0$, with equality only where
    $e_{11}=0$; both coefficients in the decomposition are positive under the
@@ -73,6 +80,8 @@ longitudinal plane wave travelling along $e_1$. Then:
 
 [F4] Calculcus of the wave ([[thm-sine-and-cosine-derivatives]], [[def-cm-euclidean-spatial-calculus]], [[cor-trigonometric-parity-and-pythagorean-identity]]): $\partial_1\xi_1=-A\kappa\sin(\kappa x_1-\omega t)$, $\partial_1^2\xi_1=-A\kappa^2\cos(\kappa x_1-\omega t)$, $\partial_t^2\xi_1=-A\omega^2\cos(\kappa x_1-\omega t)$, and $\omega^2=\kappa^2c_L^2$.
 
+[F5] Quantity dimensions ([[def-cm17-continuum-body-and-units]]): $[\xi]=\ell$, $[e]=1$, and the stress and strain-energy density have dimension $\mu\ell^{-1}\tau^{-2}$.
+
 ## Verification
 
 **Proof technique:** direct computation; differentiate the wave, form the strain and stress with the branch's formulae, and compare the two sides of the displacement equation.
@@ -83,17 +92,10 @@ longitudinal plane wave travelling along $e_1$. Then:
 
 3.1 Displacement equation: the right side of (E) of [F2] is $\mu_s\Delta\xi+(\lambda+\mu_s)\nabla(\operatorname{div}\xi)$; since $\Delta\xi=\partial_1^2\xi_1e_1$ and $\nabla(\operatorname{div}\xi)=\partial_1^2\xi_1e_1$, it equals $(\lambda+2\mu_s)\partial_1^2\xi_1e_1$. The left side is $\rho_0\partial_t^2\xi_1e_1$ with $\partial_t^2\xi_1=-\omega^2A\cos(\kappa x_1-\omega t)$ by [F4]; since $\omega^2=\kappa^2c_L^2=\kappa^2(\lambda+2\mu_s)/\rho_0$, one has $\rho_0\partial_t^2\xi_1=-\rho_0A\omega^2\cos(\kappa x_1-\omega t)=-(\lambda+2\mu_s)A\kappa^2\cos(\kappa x_1-\omega t)=(\lambda+2\mu_s)\partial_1^2\xi_1$, so the equation holds exactly for every $(t,x)$. [step 2.1, F2, F4, algebra]
 
-4.1 Energy: by [F3] and step 1.1, $W=\mu_s|e_0|_F^2+(\tfrac\lambda2+\tfrac{\mu_s}3)(\operatorname{tr}e)^2=(\tfrac{2\mu_s}3+\tfrac\lambda2+\tfrac{\mu_s}3)e_{11}^2=(\tfrac\lambda2+\mu_s)e_{11}^2$; the coefficients $\mu_s>0$ and $\tfrac\lambda2+\tfrac{\mu_s}3=\tfrac{3\lambda+2\mu_s}6>0$ are positive by [F1], so $W\ge0$ with equality exactly where $e_{11}=0$. Finally $c_L^2=(\lambda+2\mu_s)/\rho_0$ is positive because $\lambda+2\mu_s=(\lambda+\tfrac{2\mu_s}3)+\tfrac{4\mu_s}3>0$ and $\rho_0>0$, and the dimension follows from $[\lambda]=[\mu_s]=\mu\ell^{-1}\tau^{-2}$ and $[\rho_0]=\mu\ell^{-3}$ ([[def-cm17-continuum-body-and-units]]). [step 1.1, step 3.1, F1, F3, algebra] ∎
+4.1 Energy: by [F3] and step 1.1, $W=\mu_s|e_0|_F^2+(\tfrac\lambda2+\tfrac{\mu_s}3)(\operatorname{tr}e)^2=(\tfrac{2\mu_s}3+\tfrac\lambda2+\tfrac{\mu_s}3)e_{11}^2=(\tfrac\lambda2+\mu_s)e_{11}^2$; the coefficients $\mu_s>0$ and $\tfrac\lambda2+\tfrac{\mu_s}3=\tfrac{3\lambda+2\mu_s}6>0$ are positive by [F1], so $W\ge0$ with equality exactly where $e_{11}=0$. By [F5], $e$ is dimensionless and $W$ has dimension $\mu\ell^{-1}\tau^{-2}$, consistent with the constitutive formula. Finally $c_L^2=(\lambda+2\mu_s)/\rho_0$ is positive because $\lambda+2\mu_s=(\lambda+\tfrac{2\mu_s}3)+\tfrac{4\mu_s}3>0$ and $\rho_0>0$. [step 1.1, step 3.1, F1, F3, F5, algebra] ∎
 
 ## Remarks
 
-- The computation exhibits the branch's structure concretely: the wave is
-  longitudinal (the displacement is parallel to the propagation direction)
-  and its speed is the longitudinal speed of
-  [[pthm-cm17-elastic-plane-wave-speeds]]; the transverse branch, with speed
-  $\sqrt{\mu_s/\rho_0}$, is not recomputed here.
+- The computation exhibits the branch's structure concretely: the wave is longitudinal (the displacement is parallel to the propagation direction) and its speed is the longitudinal speed of [[pthm-cm17-elastic-plane-wave-speeds]]; the transverse branch, with speed $\sqrt{\mu_s/\rho_0}$, is not recomputed here.
 
-- The energy density computed is the model's strain energy of the branch
-  ([[def-cm-linear-elastic-constitutive-law]]); it is a nonnegative function
-  of the strain and is zero exactly when the linear strain vanishes, under the branch's positivity hypotheses. Rigid translations and infinitesimal rigid rotations both have zero linear strain; for this particular longitudinal wave, zero energy is exactly $e_{11}=0$. No
-  measured modulus or speed appears.
+- The energy density computed is the model's strain energy of the branch ([[def-cm-linear-elastic-constitutive-law]]); it is a nonnegative function of the strain and is zero exactly when the linear strain vanishes, under the branch's positivity hypotheses. Rigid translations and infinitesimal rigid rotations both have zero linear strain; for this particular longitudinal wave, zero energy is exactly $e_{11}=0$. No measured modulus or speed appears.

@@ -33,8 +33,8 @@ solves a two-mode fixed-end string exactly, cross-checks the d'Alembert
 formula, and evaluates the $O(N^{-4})$ tail bound at $N=1$.
 [[ex-cm17-spring-chain-limit-numbers]] compares the cyclic mass-spring chain
 with the travelling standing wave: the exact discrete frequency and nodal
-error, the evaluated $O(a^{3/2})$ bound at $N=100$, and the fourth-order
-dispersion error. [[ex-cm17-riemann-shock-and-rarefaction-check]] verifies an
+error, the evaluated $O(a^{3/2})$ bound at $N=100$, and the second-order
+dispersion error in the spacing. [[ex-cm17-riemann-shock-and-rarefaction-check]] verifies an
 explicit Rankine-Hugoniot shock with its entropy coefficients under the countable-choice Lebesgue weak formulation and a
 rarefaction fan with its initial trace in the scalar weak formulation.
 [[ex-cm17-channel-flow-and-no-slip-check]] solves the steady viscous channel

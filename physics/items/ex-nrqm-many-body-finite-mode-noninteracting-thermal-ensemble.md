@@ -81,11 +81,11 @@ canonical equilibrium postulate
 temperature $T>0$ with $\beta=1/(k_BT)$. Fix $\varepsilon>0$ in joules.
 
 **Fermionic model.** One-particle space $K=\mathbb C^3$ with modes
-$f_1,f_2,f_3$, fermionic statistics $\sigma=-$, $N=2$, and the declared
+$f_1,f_2,f_3$, fermionic statistics $\sigma=-$, $N=2$, zero interaction $W=0$, and the declared
 one-particle operator $h:=\varepsilon\,(0\cdot T_{f_1,f_1}+1\cdot T_{f_2,f_2}+2\cdot T_{f_3,f_3})$.
 
 **Bosonic model.** One-particle space $K=\mathbb C^2$ with modes $g_1,g_2$,
-bosonic statistics $\sigma=+$, $N=2$, and $h':=\varepsilon(0\cdot T_{g_1,g_1}+1\cdot T_{g_2,g_2})$.
+bosonic statistics $\sigma=+$, $N=2$, zero interaction $W=0$, and $h':=\varepsilon(0\cdot T_{g_1,g_1}+1\cdot T_{g_2,g_2})$.
 
 Then:
 

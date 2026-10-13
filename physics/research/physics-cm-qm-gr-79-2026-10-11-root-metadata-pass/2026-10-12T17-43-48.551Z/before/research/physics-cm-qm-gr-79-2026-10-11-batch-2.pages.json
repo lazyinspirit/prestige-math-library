@@ -1,0 +1,639 @@
+[
+  {
+    "order": 83,
+    "id": "cm-math-balances",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Balances",
+    "companion": "cm-math-balances-examples",
+    "requires": [
+      "picard-lindelof-and-first-order-odes",
+      "regular-surfaces-and-surface-integrals",
+      "the-total-derivative",
+      "compactness-in-metric-spaces",
+      "completeness-and-uniform-continuity",
+      "countability-and-uncountability",
+      "distributions-test-functions-and-differentiation",
+      "fourier-transform-convolution-and-approximate-identities",
+      "properties-of-the-integral-and-the-working-ftc",
+      "rn-as-a-normed-space",
+      "the-derivative-and-mean-value-theorems",
+      "the-inverse-function-theorem-completed",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "the-maximal-function-and-lebesgue-differentiation",
+      "foundations-of-the-real-numbers",
+      "measurable-functions-and-simple-approximation",
+      "metric-spaces",
+      "monotone-sequences-and-cauchy-completeness",
+      "normed-and-banach-spaces",
+      "rings-subrings-and-integral-domains",
+      "roots-and-rational-powers",
+      "the-riemann-integral",
+      "topology-of-r"
+    ],
+    "items": [
+      {
+        "id": "lem-cm-derivative-of-pairings-of-curves",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Differentiation of sums, scalar multiples, inner products, cross products and squared norms of differentiable curves in $\\mathbb R^3$",
+        "reference": "mathematical-prerequisites.md#m2 (differentiation inputs of the balance identities)",
+        "design_state": "completed-local-argument (M2 split into items); recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-vector-valued-derivative-and-integral",
+          "def-euclidean-inner-product",
+          "def-cross-product-in-r3",
+          "def-derivative",
+          "def-limit-point-r",
+          "def-interval",
+          "thm-algebra-of-derivatives",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_roles": {
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-limit-point-r": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $t_0\\in I$, let $x,y:I\\to\\mathbb R^3$ be differentiable at $t_0$ ([[def-vector-valued-derivative-and-integral]]) and let $\\lambda:I\\to\\mathbb R$ be differentiable at $t_0$ ([[def-derivative]]). Write $x'(t_0),y'(t_0)\\in\\mathbb R^3$ for the derivatives, $\\langle\\cdot,\\cdot\\rangle$ for the Euclidean inner product and $\\lVert\\cdot\\rVert_2$ for the Euclidean norm ([[def-euclidean-inner-product]]), and $\\times$ for the cross product ([[def-cross-product-in-r3]]). Then:\n\n1. $x+y$ and $\\lambda x$ are differentiable at $t_0$, with $(x+y)'(t_0)=x'(t_0)+y'(t_0)$ and $(\\lambda x)'(t_0)=\\lambda'(t_0)x(t_0)+\\lambda(t_0)x'(t_0)$;\n2. $t\\mapsto\\langle x(t),y(t)\\rangle$ is differentiable at $t_0$, with derivative $\\langle x'(t_0),y(t_0)\\rangle+\\langle x(t_0),y'(t_0)\\rangle$;\n3. $t\\mapsto x(t)\\times y(t)$ is differentiable at $t_0$, with derivative $x'(t_0)\\times y(t_0)+x(t_0)\\times y'(t_0)$;\n4. $t\\mapsto\\lVert x(t)\\rVert_2^2$ is differentiable at $t_0$, with derivative $2\\langle x'(t_0),x(t_0)\\rangle$.",
+        "strategy": "Clause 1 componentwise from the componentwise differentiability and the real algebra of derivatives; clause 2 expands the finite sum of products; clause 3 repeats componentwise for the cross product; clause 4 applies clause 2 with y=x and symmetry.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a71.3, Eq. (1.32), printed pp. 10-11: the product rule $(\\mathbf r\\times\\mathbf p)'=\\mathbf r'\\times\\mathbf p+\\mathbf r\\times\\mathbf p'$ for angular momentum",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a7\u00a71.2-1.3, printed pp. 2-8: differentiation of $\\mathbf p=m\\dot{\\mathbf r}$, of $\\mathbf r\\times\\mathbf p$ and of the kinetic energy $\\frac12\\sum_i m_i\\dot{\\mathbf r}_i^{\\,2}$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-center-of-mass-and-kinetic-splitting",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Centre of mass, the identity $\\sum_i m_i\\rho_i=0$, and the splitting of the kinetic sum $\\sum_i m_i\\lVert x_i'\\rVert_2^2$ into centre-of-mass and relative parts (with the two-body reduced-mass case)",
+        "reference": "mathematical-prerequisites.md#m2",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-vector-valued-derivative-and-integral",
+          "def-euclidean-inner-product",
+          "def-interval",
+          "lem-finite-sum-laws"
+        ],
+        "dependency_roles": {
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $N\\ge1$, let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $m_1,\\dots,m_N>0$ and let $x_i:I\\to\\mathbb R^3$ be differentiable at every point of $I$ ([[def-vector-valued-derivative-and-integral]]). Put $M:=\\sum_{i}m_i>0$, $X:=M^{-1}\\sum_{i}m_ix_i$ and $\\rho_i:=x_i-X$; all sums over $i$ range over $1,\\dots,N$ (the index set $\\{1,\\dots,N\\}$ of [[lem-finite-sum-laws]]), and $\\langle\\cdot,\\cdot\\rangle$, $\\lVert\\cdot\\rVert_2$ are the Euclidean inner product and norm on $\\mathbb R^3$ ([[def-euclidean-inner-product]]). Then:\n\n1. $X$ and every $\\rho_i$ are differentiable on $I$, with $X'=M^{-1}\\sum_im_ix_i'$ and $\\rho_i'=x_i'-X'$, and the identities $\\sum_im_i\\rho_i=0$ and $\\sum_im_i\\rho_i'=0$ hold on $I$;\n2. for every $t\\in I$, $$\\sum_{i}m_i\\lVert x_i'(t)\\rVert_2^2=M\\lVert X'(t)\\rVert_2^2+\\sum_{i}m_i\\lVert\\rho_i'(t)\\rVert_2^2;$$\n3. if $N=2$, then with $r:=x_1-x_2$ and $\\mu:=m_1m_2/M$ one has $\\sum_im_i\\lVert\\rho_i'(t)\\rVert_2^2=\\mu\\lVert r'(t)\\rVert_2^2$ and hence $$\\sum_{i}m_i\\lVert x_i'(t)\\rVert_2^2=M\\lVert X'(t)\\rVert_2^2+\\mu\\lVert r'(t)\\rVert_2^2$$ for every $t\\in I$.",
+        "strategy": "Differentiate the defining finite sums; differentiate the zero identity; expand the squared norm by bilinearity with the cross term killed by sum m_i rho_i'=0; specialise rho_1=(m_2/M)r, rho_2=-(m_1/M)r.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a71.3, Eqs. (1.15)-(1.16) and (1.22)-(1.23), printed pp. 6-8: the centre of mass and the kinetic-energy split",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.4, Eqs. (3.30)-(3.35), printed pp. 40-42: centre of mass and reduced mass for two bodies",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-momentum-and-angular-momentum-balance",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Total momentum and total angular momentum balances for a finite system with antisymmetric pair forces; pairwise central forces make the internal torque vanish",
+        "reference": "mathematical-prerequisites.md#m2",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "lem-cm-derivative-of-pairings-of-curves",
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval",
+          "lem-finite-sum-laws",
+          "lem-finite-sum-reindexing-and-fubini"
+        ],
+        "dependency_roles": {
+          "lem-cm-derivative-of-pairings-of-curves": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "lem-finite-sum-reindexing-and-fubini": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $N\\ge1$, let $m_1,\\dots,m_N>0$, and let $x_i:I\\to\\mathbb R^3$ be twice differentiable, i.e. differentiable with derivative $x_i'$ differentiable ([[def-vector-valued-derivative-and-integral]]). Write $p_i:=m_ix_i'$ and suppose there are maps $f_i:I\\to\\mathbb R^3$ and, for every ordered pair $i\\ne j$ in $\\{1,\\dots,N\\}$, maps $f_{ij}:I\\to\\mathbb R^3$ such that\n\n$$f_{ij}(t)=-f_{ji}(t),\\qquad p_i'(t)=f_i(t)+\\sum_{j\\ne i}f_{ij}(t)\\qquad(t\\in I).$$\n\nWrite $P:=\\sum_ip_i$, $J:=\\sum_ix_i\\times p_i$ (cross product in $\\mathbb R^3$, [[def-cross-product-in-r3]]). Then:\n\n1. $P$ is differentiable on $I$ with $P'(t)=\\sum_if_i(t)$ for all $t\\in I$;\n2. $J$ is differentiable on $I$ with $$J'(t)=\\sum_ix_i(t)\\times f_i(t)+\\sum_{i<j}\\bigl(x_i(t)-x_j(t)\\bigr)\\times f_{ij}(t)\\qquad(t\\in I);$$\n3. if in addition, for every $i<j$, $f_{ij}$ is parallel to $x_i-x_j$ \u2014 that is, there is a real function $\\lambda_{ij}$ on $I$ with $f_{ij}=\\lambda_{ij}(x_i-x_j)$ \u2014 then $J'(t)=\\sum_ix_i(t)\\times f_i(t)$ for all $t\\in I$.",
+        "strategy": "Sum the balance equations; differentiate each cross product, kill x_i' x p_i by alternation, and reindex the internal double sum using antisymmetry; parallel pairs have vanishing (x_i-x_j) x f_ij.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a71.3, Eqs. (1.11)-(1.19), printed pp. 5-7: $\\dot{\\mathbf P}=\\mathbf F^{\\rm ext}$ and $\\dot{\\mathbf L}=\\sum_i\\mathbf r_i\\times\\mathbf F_i^{\\rm ext}+\\sum_{i<j}(\\mathbf r_i-\\mathbf r_j)\\times\\mathbf F_{ij}$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Richard Fitzpatrick, Classical Mechanics (University of Texas at Austin), Non-Isolated Systems, Eqs. (41)-(44): external momentum and torque balances with internal cancellation",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node12.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-work-energy-balance",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Work-energy balance $\\frac{d}{dt}\\bigl(K+U(t,x(t))\\bigr)=\\partial_tU(t,x(t))+\\sum_i\\langle d_i(t),x_i'(t)\\rangle$ for forces $m_ix_i''=-\\nabla_{x_i}U+d_i$",
+        "reference": "mathematical-prerequisites.md#m2",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "lem-cm-derivative-of-pairings-of-curves",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-euclidean-inner-product",
+          "def-jacobian-matrix-and-gradient",
+          "def-total-derivative-in-euclidean-space",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-continuous-partial-derivatives-imply-total-differentiability",
+          "thm-total-derivative-computes-directional-and-partial-derivatives",
+          "cor-zero-derivative-implies-constant",
+          "lem-finite-sum-laws",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "lem-cm-derivative-of-pairings-of-curves": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-jacobian-matrix-and-gradient": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-continuous-partial-derivatives-imply-total-differentiability": "mathematical-premise",
+          "thm-total-derivative-computes-directional-and-partial-derivatives": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $N\\ge1$, let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $Q\\subseteq\\mathbb R^{3N}$ be nonempty and open, and let $U:I\\times Q\\to\\mathbb R$ be the restriction of a function $\\widehat U:J\\times Q\\to\\mathbb R$ of class $C^1$, where $J\\subseteq\\mathbb R$ is an open interval containing $I$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Write points of $Q$ as $q=(q_1,\\dots,q_N)$ with $q_i\\in\\mathbb R^3$; for $t\\in I$, $q\\in Q$ and each $i$ let $\\nabla_{x_i}U(t,q)\\in\\mathbb R^3$ be the gradient of $u\\mapsto U(t,q_1,\\dots,q_{i-1},u,q_{i+1},\\dots,q_N)$ at $u=q_i$ ([[def-jacobian-matrix-and-gradient]]), and let $\\partial_tU$ and the spatial derivatives on $I\\times Q$ denote the derivatives of $\\widehat U$ restricted there. At an included endpoint of $I$, derivatives of curves are limits relative to $I$ (one-sided there); this preserves closed and half-open time intervals. Let $m_1,\\dots,m_N>0$, let $x:I\\to Q$ be twice differentiable ([[def-vector-valued-derivative-and-integral]]), put $K(t):=\\frac12\\sum_im_i\\lVert x_i'(t)\\rVert_2^2$ (Euclidean norm, [[def-euclidean-inner-product]]), let $d_i:I\\to\\mathbb R^3$ be maps, and suppose\n\n$$m_ix_i''(t)=-\\nabla_{x_i}U\\bigl(t,x(t)\\bigr)+d_i(t)\\qquad(t\\in I,\\ 1\\le i\\le N).$$\n\nThen:\n\n1. $K$ is differentiable on $I$ with $K'(t)=\\sum_i\\langle m_ix_i''(t),x_i'(t)\\rangle$;\n2. $t\\mapsto U(t,x(t))$ is differentiable on $I$ with $$\\frac{d}{dt}U\\bigl(t,x(t)\\bigr)=\\partial_tU\\bigl(t,x(t)\\bigr)+\\sum_i\\bigl\\langle\\nabla_{x_i}U\\bigl(t,x(t)\\bigr),x_i'(t)\\bigr\\rangle;$$\n3. consequently $$\\frac{d}{dt}\\Bigl(K(t)+U\\bigl(t,x(t)\\bigr)\\Bigr)=\\partial_tU\\bigl(t,x(t)\\bigr)+\\sum_i\\langle d_i(t),x_i'(t)\\rangle\\qquad(t\\in I);$$ in particular, if $d_i\\equiv0$ for all $i$ then $\\frac{d}{dt}\\bigl(K+U(t,x(t))\\bigr)=\\partial_tU(t,x(t))$, and if in addition $\\partial_tU\\equiv0$ then $t\\mapsto K(t)+U(t,x(t))$ is constant on $I$.",
+        "strategy": "Differentiate the squared norms; apply the chain rule to the composite U(t,x(t)) and read the total derivative on (1,x'(t)) through the Jacobian; add and substitute the force identity; conclude constancy by the zero-derivative criterion.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a71.3.2, Eqs. (1.22)-(1.25), printed pp. 8-9: kinetic-energy splitting and $d(T+V)/dt=\\partial_tV$ for conservative forces",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a71.3, Eqs. (1.19)-(1.27), printed pp. 8-10: work-energy balance for a time-dependent potential",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-variable-mass-momentum-balance",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Variable-mass momentum balance: from $m'=r_{\\rm in}-r_{\\rm out}$ and $(mv)'=F+r_{\\rm in}w_{\\rm in}-r_{\\rm out}w_{\\rm out}$ to $mv'=F+r_{\\rm in}(w_{\\rm in}-v)-r_{\\rm out}(w_{\\rm out}-v)$",
+        "reference": "expansion-proofs.md#e11 (variable-mass packet accounting)",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-vector-valued-derivative-and-integral",
+          "def-derivative",
+          "def-interval",
+          "thm-algebra-of-derivatives"
+        ],
+        "dependency_roles": {
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $I\\subseteq\\mathbb R$ be an interval with nonempty interior ([[def-interval]]), let $m:I\\to(0,\\infty)$ and $v:I\\to\\mathbb R^3$ be differentiable ([[def-derivative]], [[def-vector-valued-derivative-and-integral]]), and let $F:I\\to\\mathbb R^3$, $r_{\\mathrm{in}},r_{\\mathrm{out}}:I\\to[0,\\infty)$ and $w_{\\mathrm{in}},w_{\\mathrm{out}}:I\\to\\mathbb R^3$ be maps. Suppose the two **material balance identities**\n\n$$m'(t)=r_{\\mathrm{in}}(t)-r_{\\mathrm{out}}(t),\\qquad (mv)'(t)=F(t)+r_{\\mathrm{in}}(t)w_{\\mathrm{in}}(t)-r_{\\mathrm{out}}(t)w_{\\mathrm{out}}(t)$$\n\nhold for every $t\\in I$, where $mv$ denotes the pointwise scalar multiple. Then\n\n$$m(t)v'(t)=F(t)+r_{\\mathrm{in}}(t)\\bigl(w_{\\mathrm{in}}(t)-v(t)\\bigr)-r_{\\mathrm{out}}(t)\\bigl(w_{\\mathrm{out}}(t)-v(t)\\bigr)\\qquad(t\\in I).$$\n\nIn particular, if $F\\equiv0$, $r_{\\mathrm{in}}\\equiv0$ and $r_{\\mathrm{out}}\\equiv r$ for a constant $r\\ge0$, then $mv'=-r(w_{\\mathrm{out}}-v)$: the acceleration is governed by the momentum carried away per unit time relative to the body, not by $(mv)'=0$.\n\nThe two balance identities are the **adopted content of the material momentum accounting** \u2014 the mathematical rendering of \"gains $r_{\\mathrm{in}}\\,dt$ of matter with velocity $w_{\\mathrm{in}}$, loses $r_{\\mathrm{out}}\\,dt$ with velocity $w_{\\mathrm{out}}$, and feels the external force $F$\". They are not derived here from any closed-system law; the deduction below is their product-rule consequence.",
+        "strategy": "Product rule coordinatewise for (mv)', substitute the mass-rate identity, and group the flux terms.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a71.2, printed p. 2: the momentum form $\\mathbf F=\\dot{\\mathbf p}$ for a body of varying mass, with the warning that the closed-system statement needs open-system momentum accounting",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Richard Fitzpatrick, Classical Mechanics (University of Texas at Austin), Non-Isolated Systems: the total-momentum balance $d\\mathbf P/dt=\\mathbf F$ with external force, the form that fails to track ejected/absorbed material without the flux terms below",
+              "url": "https://farside.ph.utexas.edu/teaching/336k/Newtonhtml/node12.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Compact continuation for locally Lipschitz ODEs: a solution whose graph stays in a compact subset of the domain near a finite endpoint extends past it",
+        "reference": "mathematical-prerequisites.md#m10",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 0,
+        "deps": [
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-vector-valued-derivative-and-integral",
+          "def-vector-valued-functions-limits-and-continuity",
+          "def-metric-continuity",
+          "def-metric-topology",
+          "def-metric-ball",
+          "def-complete-metric-space",
+          "def-interval",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation",
+          "thm-additivity-over-subintervals",
+          "thm-norm-inequality-for-the-vector-valued-integral",
+          "thm-monotonicity-of-the-integral",
+          "thm-euclidean-space-complete",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "lem-reverse-triangle-inequality-in-a-normed-space",
+          "thm-extreme-value-metric",
+          "thm-compact-subset-is-closed-and-bounded",
+          "thm-componentwise-limits-and-continuity",
+          "cor-differentiable-implies-continuous",
+          "cor-archimedean-reciprocal"
+        ],
+        "dependency_roles": {
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-vector-valued-functions-limits-and-continuity": "mathematical-premise",
+          "def-metric-continuity": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-complete-metric-space": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "prop-first-order-ivp-is-equivalent-to-a-volterra-integral-equation": "mathematical-premise",
+          "thm-additivity-over-subintervals": "mathematical-premise",
+          "thm-norm-inequality-for-the-vector-valued-integral": "mathematical-premise",
+          "thm-monotonicity-of-the-integral": "mathematical-premise",
+          "thm-euclidean-space-complete": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "lem-reverse-triangle-inequality-in-a-normed-space": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-compact-subset-is-closed-and-bounded": "mathematical-premise",
+          "thm-componentwise-limits-and-continuity": "mathematical-premise",
+          "cor-differentiable-implies-continuous": "mathematical-premise",
+          "cor-archimedean-reciprocal": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, and let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable, locally uniformly in time, in the sense of [[def-locally-lipschitz-in-the-state-variable]]. Let $t_0<b$ be reals, let $x_0\\in\\mathbb R^n$ with $(t_0,x_0)\\in D$, and let $x:[t_0,b)\\to\\mathbb R^n$ be a solution of the initial value problem\n\n$$x'(t)=F\\bigl(t,x(t)\\bigr),\\qquad x(t_0)=x_0$$\n\non $[t_0,b)$ ([[def-first-order-ode-initial-value-problem-and-solution]]). Suppose there is a compact set $K\\subseteq D$ and a real $\\delta>0$ such that\n\n$$\\bigl(t,x(t)\\bigr)\\in K\\qquad\\text{for every }t\\in(b-\\delta,b)\\cap[t_0,b).$$\n\nThen:\n\n1. there is $\\varepsilon>0$ and a solution $\\tilde x:[t_0,b+\\varepsilon)\\to\\mathbb R^n$ of the same initial value problem with $\\tilde x(t)=x(t)$ for all $t\\in[t_0,b)$; in particular $\\tilde x(b)=\\lim_{t\\uparrow b}x(t)$ exists and lies in the state projection of $K$;\n2. if moreover $D=\\mathbb R\\times U$ for an open $U\\subseteq\\mathbb R^n$ and $F$ is autonomous, $F(t,z)=G(z)$ with $G:U\\to\\mathbb R^n$ continuous and locally Lipschitz in the state variable ([[def-locally-lipschitz-in-the-state-variable]]), and if there is a compact $K_0\\subseteq U$ with $x(t)\\in K_0$ for every $t\\in(b-\\delta,b)\\cap[t_0,b)$, then the extension conclusion of clause 1 holds as well.",
+        "strategy": "Bound F on K, get a Lipschitz estimate from the Volterra equation, produce the one-sided limit x_b by completeness, place (b,x_b) in the closed K, apply Picard-Lindelof at (b,x_b), and glue by uniqueness; clause 2 repeats the argument with K0.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Ordinary Differential Equations and Dynamical Systems, \u00a72.6 Extensibility of solutions, printed pp. 50-53: gluing, Corollary 2.15 (compact continuation) and Corollary 2.16 (escape of every compact set)",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "Julien Arino, MATH 8430 Fundamental Theory of Ordinary Differential Equations (University of Manitoba), \u00a71.3 Continuation of solutions, printed pp. 24-28: Lemma 1.3.1, Theorem 1.3.3 and Theorem 1.3.7",
+              "url": "https://julien-arino.github.io/assets/pdf/courses/math8430_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-cm-finite-time-breakdown-requires-escape",
+        "kind": "corollary",
+        "domain": "mathematics",
+        "title": "A non-extendable solution leaves every compact subset of the domain near its finite endpoint; an autonomous solution trapped in a compact subset of its state domain cannot break down there",
+        "reference": "mathematical-prerequisites.md#m10",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-locally-lipschitz-in-the-state-variable"
+        ],
+        "dependency_roles": {
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $n\\ge1$, let $D\\subseteq\\mathbb R\\times\\mathbb R^n$ be open, and let $F:D\\to\\mathbb R^n$ be continuous and locally Lipschitz in the state variable in the sense of [[def-locally-lipschitz-in-the-state-variable]]. Let $t_0<b$ be reals, let $x_0\\in\\mathbb R^n$ with $(t_0,x_0)\\in D$, and let $x:[t_0,b)\\to\\mathbb R^n$ be a solution of the initial value problem $x'=F(t,x)$, $x(t_0)=x_0$ ([[def-first-order-ode-initial-value-problem-and-solution]]). Suppose $x$ admits no extension past $b$: there do not exist $\\varepsilon>0$ and a solution $\\tilde x:[t_0,b+\\varepsilon)\\to\\mathbb R^n$ of the same initial value problem with $\\tilde x(t)=x(t)$ for every $t\\in[t_0,b)$. Then:\n\n1. for every compact $K\\subseteq D$ and every $\\eta>0$ there is $t\\in(b-\\eta,b)\\cap[t_0,b)$ with $(t,x(t))\\notin K$; that is, the graph of $x$ leaves every compact subset of $D$ that could contain it arbitrarily close to $b$;\n2. if $D=\\mathbb R\\times U$ for an open $U\\subseteq\\mathbb R^n$, $F$ is autonomous, $F(t,z)=G(z)$ with $G:U\\to\\mathbb R^n$ continuous and locally Lipschitz in the state variable, and there are a compact $K_0\\subseteq U$ and $\\delta>0$ with $x(t)\\in K_0$ for all $t\\in(b-\\delta,b)\\cap[t_0,b)$, then the no-extension hypothesis is false: $x$ does extend past $b$.",
+        "strategy": "Both clauses are the contrapositive/contradiction form of the compact continuation theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Ordinary Differential Equations and Dynamical Systems, \u00a72.6, Corollary 2.16, printed p. 53: if the maximal right endpoint is finite the solution eventually leaves every compact set",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "Julien Arino, MATH 8430 Fundamental Theory of Ordinary Differential Equations (University of Manitoba), \u00a71.3, Theorem 1.3.3 and Corollary 1.3.4, printed pp. 25-26: failure of continuation forces the solution to approach the boundary of the domain",
+              "url": "https://julien-arino.github.io/assets/pdf/courses/math8430_lecture_notes.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-piecewise-c1-jump-derivative",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The distributional derivative of a piecewise $C^1$ function with a jump: $(u_p)'=u_{p'_{\\mathrm{reg}}}+[p]\\,\\delta_{t_*}$",
+        "reference": "expansion-proofs.md#e11 (impulse jump identity)",
+        "design_state": "completed-local-argument; recorded in the batch notes; declares AC_omega for the Lebesgue distribution suppliers",
+        "dependency_level": 0,
+        "deps": [
+          "cor-mean-value-theorem",
+          "def-regular-distribution-from-a-locally-integrable-function",
+          "def-locally-integrable-function-on-r-n",
+          "def-distributional-derivative",
+          "def-distribution",
+          "def-dirac-delta-and-its-derivatives",
+          "def-test-function-space-d-of-an-open-set",
+          "def-integral-over-a-measurable-set",
+          "def-borel-and-lebesgue-measurable-function-on-rn",
+          "def-countable-choice",
+          "def-interval",
+          "lem-complex-integration-by-parts-on-intervals-and-decaying-lines",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-finitely-many-discontinuities-integrable",
+          "lem-riemann-lebesgue-comparison-for-distribution-test-integrands",
+          "cor-continuous-functions-are-borel-measurable"
+        ],
+        "dependency_roles": {
+          "cor-mean-value-theorem": "mathematical-premise",
+          "def-regular-distribution-from-a-locally-integrable-function": "mathematical-premise",
+          "def-locally-integrable-function-on-r-n": "mathematical-premise",
+          "def-distributional-derivative": "mathematical-premise",
+          "def-distribution": "mathematical-premise",
+          "def-dirac-delta-and-its-derivatives": "mathematical-premise",
+          "def-test-function-space-d-of-an-open-set": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-borel-and-lebesgue-measurable-function-on-rn": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "lem-complex-integration-by-parts-on-intervals-and-decaying-lines": "mathematical-premise",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "thm-finitely-many-discontinuities-integrable": "mathematical-premise",
+          "lem-riemann-lebesgue-comparison-for-distribution-test-integrands": "mathematical-premise",
+          "cor-continuous-functions-are-borel-measurable": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$, [[def-countable-choice]]), used only through the Borel-measurability, Lebesgue-integration and distribution suppliers cited below. Let $I\\subseteq\\mathbb R$ be an open interval ([[def-interval]]), let $t_*\\in I$, and let $p:I\\to\\mathbb R$ satisfy:\n\n1. $p$ is continuous on $I\\setminus\\{t_*\\}$ and of class $C^1$ on each of the two open intervals $I\\cap(-\\infty,t_*)$ and $I\\cap(t_*,\\infty)$;\n2. the one-sided limits $p(t_*^-):=\\lim_{t\\uparrow t_*}p(t)$, $p(t_*^+):=\\lim_{t\\downarrow t_*}p(t)$ and the one-sided limits of the derivative $p'(t_*^-):=\\lim_{t\\uparrow t_*}p'(t)$, $p'(t_*^+):=\\lim_{t\\downarrow t_*}p'(t)$ all exist in $\\mathbb R$.\n\nFix a value $p(t_*)\\in\\mathbb R$ arbitrarily (for instance $p(t_*):=0$) and define $p'_{\\mathrm{reg}}:I\\to\\mathbb R$ by $p'_{\\mathrm{reg}}(t):=p'(t)$ for $t\\ne t_*$ and $p'_{\\mathrm{reg}}(t_*):=0$. Put $[p]:=p(t_*^+)-p(t_*^-)$ and let $u_p,u_{p'_{\\mathrm{reg}}}\\in\\mathcal D'(I)$ be the associated regular distributions ([[def-regular-distribution-from-a-locally-integrable-function]], [[def-locally-integrable-function-on-r-n]]): $$u_p(\\varphi)=\\int_Ip(t)\\,\\varphi(t)\\,d\\lambda(t),\\qquad u_{p'_{\\mathrm{reg}}}(\\varphi)=\\int_Ip'_{\\mathrm{reg}}(t)\\,\\varphi(t)\\,d\\lambda(t).$$\n\nThen $p$ and $p'_{\\mathrm{reg}}$ are locally integrable on $I$, and\n\n$$(u_p)'=u_{p'_{\\mathrm{reg}}}+[p]\\,\\delta_{t_*}$$\n\nin $\\mathcal D'(I)$ ([[def-distributional-derivative]], [[def-dirac-delta-and-its-derivatives]]): that is, for every test function $\\varphi\\in\\mathcal D(I)$,\n\n$$-\\int_Ip(t)\\,\\varphi'(t)\\,d\\lambda(t)=\\int_Ip'_{\\mathrm{reg}}(t)\\,\\varphi(t)\\,d\\lambda(t)+[p]\\,\\varphi(t_*).$$\n\nBoth integrals are over the Lebesgue measure $\\lambda$ on $\\mathbb R$, and the pairing convention of the two sides is complex-linear in $\\varphi$; it therefore suffices that the identity hold for real-valued test functions.",
+        "strategy": "Local integrability from finitely many discontinuities plus the Riemann-Lebesgue comparison; two half-interval integrations by parts of the C1 extensions, assembled with a.e. equality and linearity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, Lecture notes for 18.155 (MIT, 2022): distributional differentiation and the jump of the Heaviside function (the source whose conventions the library distributions use)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf"
+            },
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a71.2, printed p. 2: the variable-mass momentum remark and the caution that a finite force at each point does not by itself determine momentum jumps",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-impulse-restitution-and-energy-loss",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Isolated reciprocal impulse with full-vector restitution: momentum jumps $\\pm J$, conservation of total momentum, the restitution solution and the kinetic-energy change $-\\frac{1-e^2}{2}\\mu\\lVert v_2^--v_1^-\\rVert_2^2$",
+        "reference": "expansion-proofs.md#e11",
+        "design_state": "completed-local-argument; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "lem-cm-piecewise-c1-jump-derivative",
+          "thm-cm-center-of-mass-and-kinetic-splitting",
+          "def-countable-choice",
+          "def-test-function-space-d-of-an-open-set",
+          "def-ck-euclidean-maps-and-diffeomorphisms",
+          "def-euclidean-inner-product",
+          "def-interval",
+          "def-vector-valued-derivative-and-integral",
+          "def-vector-valued-functions-limits-and-continuity",
+          "lem-test-function-cutoffs-and-euclidean-localization",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_roles": {
+          "lem-cm-piecewise-c1-jump-derivative": "mathematical-premise",
+          "thm-cm-center-of-mass-and-kinetic-splitting": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-test-function-space-d-of-an-open-set": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-vector-valued-functions-limits-and-continuity": "mathematical-premise",
+          "lem-test-function-cutoffs-and-euclidean-localization": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Assume the Axiom of Countable Choice ($\\mathrm{AC}_\\omega$, [[def-countable-choice]]), inherited from the jump lemma below.\nLet $I\\subseteq\\mathbb R$ be an open interval with at least two points ([[def-interval]]), let $t_*\\in I$, let $m_1,m_2>0$, and let $x_1,x_2:I\\to\\mathbb R^3$ be continuous on $I$ and twice continuously differentiable on each of the two open intervals $I\\cap(-\\infty,t_*)$ and $I\\cap(t_*,\\infty)$ ([[def-vector-valued-derivative-and-integral]], [[def-ck-euclidean-maps-and-diffeomorphisms]]). Assume the one-sided limits\n$$v_i^-:=\\lim_{t\\uparrow t_*}x_i'(t),\\qquad v_i^+:=\\lim_{t\\downarrow t_*}x_i'(t)\\qquad(i=1,2)$$\nexist in $\\mathbb R^3$. Define $p_i:I\\to\\mathbb R^3$ by $p_i(t):=m_ix_i'(t)$ for $t\\ne t_*$ and fix the representative value $p_i(t_*):=0$ ([[def-vector-valued-functions-limits-and-continuity]]). Let $F_1,F_2:I\\to\\mathbb R^3$ be continuous and let $J\\in\\mathbb R^3$. The **isolated reciprocal impulse model** at $t_*$ consists of the two requirements:\n\n1. regular dynamics off the impulse: $m_ix_i''(t)=F_i(t)$ for every $t\\in I\\setminus\\{t_*\\}$ and $i=1,2$;\n2. impulse pairing: for every $\\Phi\\in C_c^\\infty(I;\\mathbb R^3)$ \u2014 meaning every map whose three components lie in $C_c^\\infty(I)$ ([[def-test-function-space-d-of-an-open-set]], [[def-ck-euclidean-maps-and-diffeomorphisms]]) \u2014 $$-\\int_I\\langle p_1(t),\\Phi'(t)\\rangle\\,d\\lambda(t)=\\int_I\\langle F_1(t),\\Phi(t)\\rangle\\,d\\lambda(t)+\\langle J,\\Phi(t_*)\\rangle,$$ $$-\\int_I\\langle p_2(t),\\Phi'(t)\\rangle\\,d\\lambda(t)=\\int_I\\langle F_2(t),\\Phi(t)\\rangle\\,d\\lambda(t)-\\langle J,\\Phi(t_*)\\rangle,$$ with integrals against Lebesgue measure $\\lambda$ and the Euclidean inner product $\\langle\\cdot,\\cdot\\rangle$ ([[def-euclidean-inner-product]]), using the fixed representative $p_i(t_*)=0$ above.\n\nUnder this model, with $M:=m_1+m_2$ and $\\mu:=m_1m_2/M$:\n\n**a.** $m_1(v_1^+-v_1^-)=J$ and $m_2(v_2^+-v_2^-)=-J$; consequently the total momentum is continuous across the impulse, $p_1(t_*^+)+p_2(t_*^+)=p_1(t_*^-)+p_2(t_*^-)$.\n\n**b.** Let $e\\in[0,1]$ satisfy the **restitution law** $v_2^+-v_1^+=-e(v_2^--v_1^-)$. Then the post-impulse velocities are uniquely determined: with $V:=\\frac{m_1v_1^-+m_2v_2^-}{M}=\\frac{m_1v_1^++m_2v_2^+}{M}$, $$v_1^+=V+\\frac{m_2}{M}e\\,(v_2^--v_1^-),\\qquad v_2^+=V-\\frac{m_1}{M}e\\,(v_2^--v_1^-).$$\n\n**c.** The kinetic-energy change across the impulse is $$\\Delta K:=\\frac{m_1\\lVert v_1^+\\rVert_2^2+m_2\\lVert v_2^+\\rVert_2^2}{2}-\\frac{m_1\\lVert v_1^-\\rVert_2^2+m_2\\lVert v_2^-\\rVert_2^2}{2}=-\\frac{1-e^2}{2}\\,\\mu\\,\\lVert v_2^--v_1^-\\rVert_2^2\\le0;$$ in particular $\\Delta K=0$ for $e=1$ and $\\Delta K=-\\frac12\\mu\\lVert v_2^--v_1^-\\rVert_2^2$ for $e=0$.",
+        "strategy": "Apply the scalar jump lemma to each momentum component and compare with the model pairing to get the jumps; solve the linear system for the post-impulse velocities; use the two-body kinetic splitting with the common centre-of-mass velocity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a71.2-\u00a71.3, printed pp. 2-8: $\\mathbf F=\\dot{\\mathbf p}$ as the primitive balance, together with the caution that the momentum balance of an open (variable-mass) system is not the closed-system statement",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a7\u00a71.2-1.3, Eqs. (1.8), (1.30)-(1.38), printed pp. 6-12: isolated-system momentum and pair reciprocity underlying impulse accounting",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 84,
+    "id": "cm-math-balances-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Balances \u2014 Examples",
+    "companion": "cm-math-balances",
+    "requires": [
+      "cm-math-balances",
+      "the-logarithm-and-general-powers"
+    ],
+    "items": [
+      {
+        "id": "ex-cm-balances-impulse-and-rocket-checks",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Worked impulse and restitution computations and a variable-mass rocket check",
+        "reference": "batch-2 local construction (see research/physics-cm-qm-gr-79-2026-10-11-batch-2.notes.md)",
+        "design_state": "scaffolder-constructed-explicit-mathematical-example; recorded in the batch notes",
+        "dependency_level": 1,
+        "deps": [
+          "cor-differentiable-implies-continuous",
+          "thm-monotonicity-from-the-derivative",
+          "thm-cm-variable-mass-momentum-balance",
+          "def-euclidean-inner-product",
+          "def-interval",
+          "def-derivative",
+          "thm-algebra-of-derivatives",
+          "thm-logarithm-derivative-and-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "cor-vector-valued-ftc-and-lipschitz-bound",
+          "thm-cauchy-schwarz-and-the-euclidean-norm"
+        ],
+        "dependency_roles": {
+          "cor-differentiable-implies-continuous": "mathematical-premise",
+          "thm-monotonicity-from-the-derivative": "mathematical-premise",
+          "thm-cm-variable-mass-momentum-balance": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-logarithm-derivative-and-integral": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "cor-vector-valued-ftc-and-lipschitz-bound": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Throughout, $e\\in\\mathbb R^3$ is a unit vector, $\\lVert e\\rVert_2=1$, for the Euclidean norm of [[def-euclidean-inner-product]] and [[thm-cauchy-schwarz-and-the-euclidean-norm]]. All numbers are pure real numbers. For the two collision computations, $v_i^-$ and $v_i^+$ denote pre- and post-collision vectors. Given positive masses and $e_r\\in[0,1]$, require only the finite algebraic relations\n\n$$m_1v_1^++m_2v_2^+=m_1v_1^-+m_2v_2^-,\\qquad v_2^+-v_1^+=-e_r(v_2^--v_1^-).$$\n\nDefine $J:=m_1(v_1^+-v_1^-)$ and\n\n$$\\Delta K:=\\frac{m_1\\lVert v_1^+\\rVert_2^2+m_2\\lVert v_2^+\\rVert_2^2-m_1\\lVert v_1^-\\rVert_2^2-m_2\\lVert v_2^-\\rVert_2^2}{2}.$$\n\nThe two cases below solve these relations uniquely and compute $J$ and $\\Delta K$ directly. No distributional jump theorem or choice assumption is used in these finite calculations.\n\n**(i) Equal masses, half-elastic impulse.** Take $m_1=m_2=1$, approach velocities $v_1^-=1\\,e$, $v_2^-=-1\\,e$ and restitution coefficient $e_r=\\frac12$. Then the unique post-collision vectors, impulse and kinetic-energy change are\n\n$$v_1^+=-\\tfrac12\\,e,\\qquad v_2^+=\\tfrac12\\,e,\\qquad J=-\\tfrac32\\,e,\\qquad \\Delta K=-\\tfrac34 .$$\n\n**(ii) Elastic impulse with unequal masses.** Take $m_1=1$, $m_2=3$, $v_1^-=2\\,e$, $v_2^-=0$ and $e_r=1$. Then\n\n$$v_1^+=-1\\,e,\\qquad v_2^+=1\\,e,\\qquad J=-3\\,e,\\qquad \\Delta K=0 .$$\n\n**(iii) Rocket check.** On $I=[0,1]$ take $m(t):=2-t$, $v(t):=\\ln\\!\\bigl(\\frac{2}{2-t}\\bigr)e$, $F\\equiv0$, $r_{\\mathrm{in}}\\equiv0$, $r_{\\mathrm{out}}\\equiv1$, $w_{\\mathrm{in}}\\equiv0$, $w_{\\mathrm{out}}(t):=v(t)-u_e\\,e$ with $u_e:=1$. Then the two material balance identities of [[thm-cm-variable-mass-momentum-balance]] hold, the derived law reads $m(t)v'(t)=1\\cdot e$, and $v(1)=\\ln(2)\\,e$. The naive closed-system reading $(mv)'=F\\equiv0$ would instead force $v\\equiv v(0)=0$ on $I$, which does not satisfy the material balance; the two readings differ as soon as $t>0$.",
+        "strategy": "Solve finite momentum and restitution equations uniquely and evaluate kinetic differences directly, without the distributional jump theorem or choice assumption; differentiate the rocket functions on all [0,1] and compare the naive candidate with fixed outflow data.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "David Tong, Classical Dynamics (University of Cambridge), \u00a7\u00a71.2-1.3, printed pp. 2-8: momentum balances and the variable-mass caution",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics, \u00a73.4, Eqs. (3.30)-(3.37), printed pp. 40-42: centre-of-mass and reduced-mass kinetic splitting used in the collision arithmetic",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-cm-balances-continuation-boundary-checks",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Breakdown versus trapping: the blow-up of $x'=x^2$ and the global trapped solution of $x'=-x^2$",
+        "reference": "batch-2 local construction (see research/physics-cm-qm-gr-79-2026-10-11-batch-2.notes.md)",
+        "design_state": "scaffolder-constructed-explicit-mathematical-example; recorded in the batch notes",
+        "dependency_level": 2,
+        "deps": [
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes",
+          "cor-cm-finite-time-breakdown-requires-escape",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-derivative",
+          "def-interval",
+          "thm-algebra-of-derivatives",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "thm-heine-borel-rn",
+          "thm-extreme-value-metric",
+          "thm-mean-value-inequality",
+          "thm-compact-subset-is-closed-and-bounded",
+          "cor-differentiable-implies-continuous"
+        ],
+        "dependency_roles": {
+          "thm-cm-compact-continuation-for-locally-lipschitz-odes": "mathematical-premise",
+          "cor-cm-finite-time-breakdown-requires-escape": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "thm-extreme-value-metric": "mathematical-premise",
+          "thm-mean-value-inequality": "mathematical-premise",
+          "thm-compact-subset-is-closed-and-bounded": "mathematical-premise",
+          "cor-differentiable-implies-continuous": "mathematical-premise"
+        },
+        "inventory_expansion_required": false,
+        "statement": "Let $D:=\\mathbb R\\times\\mathbb R$. For $z\\in\\mathbb R$ define $G_+(z):=z^2$ and $G_-(z):=-z^2$, and define the autonomous vector fields $F_\\pm:D\\to\\mathbb R$ by $F_\\pm(t,z):=G_\\pm(z)$. Their continuity and local Lipschitz property in the state variable are verified below.\n\n**(i) Finite-time breakdown despite a pointwise-finite vector field.** The function $x_+:[0,1)\\to\\mathbb R$, $x_+(t):=\\frac{1}{1-t}$, solves $x'(t)=F_+(t,x_+(t))$ with $x(0)=1$ on $[0,1)$, and no solution of this initial value problem extends past $b=1$. For every compact $K\\subseteq D$ and every $\\eta>0$ there is $t\\in(1-\\eta,1)$ with $(t,x_+(t))\\notin K$: the graph leaves every compact subset of $D$ as $t\\uparrow1$. The compact-containment hypothesis of [[thm-cm-compact-continuation-for-locally-lipschitz-odes]] fails here, and its escape consequence [[cor-cm-finite-time-breakdown-requires-escape]] is witnessed explicitly.\n\n**(ii) Trapping forces continuation.** The function $x_-:[0,\\infty)\\to\\mathbb R$, $x_-(t):=\\frac{1}{1+t}$, solves $x'(t)=F_-(t,x_-(t))$ with $x(0)=1$, and its values lie in the compact set $K_0:=[0,1]\\subseteq\\mathbb R$. For each finite $b>0$, its restriction to $[0,b)$ is trapped in $K_0$, so clause 2 of [[cor-cm-finite-time-breakdown-requires-escape]] extends it past $b$; thus no finite right endpoint is nonextendable, and the displayed formula supplies a global extension on $[0,\\infty)$.\n\nBoth fields are the same polynomial expression up to sign, so (i) and (ii) exhibit the continuation criterion of [[thm-cm-compact-continuation-for-locally-lipschitz-odes]] as a statement about compact trapping, not about pointwise finiteness of the vector field.",
+        "strategy": "Verify the closed forms by the quotient rule and local Lipschitz continuity of the fields by the mean value inequality; prove non-extendability by uniqueness plus boundedness of a continuous solution on [0,1]; verify trapping directly.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Ordinary Differential Equations and Dynamical Systems, \u00a72.6, printed pp. 50-53: the blow-up of $x'=x^2$ and the compact-continuation criterion",
+              "url": "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
+            },
+            {
+              "title": "Julien Arino, MATH 8430 Fundamental Theory of Ordinary Differential Equations (University of Manitoba), \u00a71.3, Theorem 1.3.7 and its remark, printed pp. 27-28: maximal intervals and approach to the boundary",
+              "url": "https://julien-arino.github.io/assets/pdf/courses/math8430_lecture_notes.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

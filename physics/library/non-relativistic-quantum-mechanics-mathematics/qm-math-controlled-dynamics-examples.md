@@ -6,6 +6,7 @@ items: []
 requires:
   - qm-math-controlled-dynamics
   - qm-math-orbital-and-spin
+  - complex-lp-spaces-and-test-function-conventions
 examples:
   - ex-nrqm-controlled-dynamics-gap-closing-failure
   - ex-nrqm-controlled-dynamics-continuum-contribution-in-perturbation
@@ -35,6 +36,10 @@ must include all complementary spectral components.
 [[ex-nrqm-controlled-dynamics-long-time-rwa-limitation]] evaluates the
 rotating-wave error exactly for $A=B=\sigma_z$, $\omega=1$ and finds
 $2|\sin(\sin t)|$, which returns the fixed positive value $2|\sin 1|$ at
-$t=\pi/2+2\pi n$; the error does not decay in time, so the finite-time bound of
-[[thm-nrqm-controlled-dynamics-rotating-wave-finite-time-error]] is not
-improvable to uniform-in-time smallness in that class.
+$t=\pi/2+2\pi n$, proving nondecay in that fixed commuting case. Its separate
+noncommuting family has $A_n=0$, fixed $\omega>0$ and
+$\|B_n\|/\omega\to0$, yet its propagator error equals $2$ at
+$\tau_n=2\pi n/\omega$. That family proves that the finite-time estimate of
+[[thm-nrqm-controlled-dynamics-rotating-wave-finite-time-error]] cannot be
+replaced by a general uniform-in-time bound tending to zero with
+$\|B\|/\omega$.

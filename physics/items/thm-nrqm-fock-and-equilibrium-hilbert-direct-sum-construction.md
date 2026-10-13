@@ -7,7 +7,7 @@ title: "Hilbert direct-sum construction"
 status: draft
 origin: pipeline
 dependency_level: 3
-deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, def-hilbert-space, def-real-and-complex-inner-product-space, def-completion-of-a-normed-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-separable-space, def-dense-top, cor-cauchy-schwarz-inequality-for-l-two, def-series-and-absolute-convergence-in-a-normed-space, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-densely-defined-closed-and-closable-operator, def-unbounded-linear-operator-domain-and-graph, def-bounded-linear-operator, def-countable-choice, def-axiom-of-choice]
+deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, def-hilbert-space, def-real-and-complex-inner-product-space, def-completion-of-a-normed-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-separable-space, def-dense-top, thm-cauchy-schwarz-in-an-inner-product-space, def-series-and-absolute-convergence-in-a-normed-space, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-densely-defined-closed-and-closable-operator, def-unbounded-linear-operator-domain-and-graph, def-bounded-linear-operator, def-countable-choice]
 dependency_roles:
   lem-nrqm-composites-hilbert-tensor-construction: mathematical-premise
   lem-nrqm-composites-permutation-sector-projections: mathematical-premise
@@ -17,7 +17,7 @@ dependency_roles:
   def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis: mathematical-premise
   def-separable-space: mathematical-premise
   def-dense-top: mathematical-premise
-  cor-cauchy-schwarz-inequality-for-l-two: mathematical-premise
+  thm-cauchy-schwarz-in-an-inner-product-space: mathematical-premise
   def-series-and-absolute-convergence-in-a-normed-space: mathematical-premise
   def-symmetric-self-adjoint-and-essentially-self-adjoint: mathematical-premise
   def-adjoint-of-a-densely-defined-unbounded-operator: mathematical-premise
@@ -25,7 +25,6 @@ dependency_roles:
   def-unbounded-linear-operator-domain-and-graph: mathematical-premise
   def-bounded-linear-operator: mathematical-premise
   def-countable-choice: mathematical-premise
-  def-axiom-of-choice: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -40,8 +39,7 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice and the Axiom of Choice
-([[def-countable-choice]], [[def-axiom-of-choice]]). Let $H$ be a complex Hilbert
+Assume the Axiom of Countable Choice ([[def-countable-choice]]). Let $H$ be a complex Hilbert
 space with inner product linear in the first argument
 ([[def-hilbert-space]], [[def-real-and-complex-inner-product-space]]). Let
 $H^{\otimes 0}:=\mathbb C$, $H^{\otimes 1}:=H$ and
@@ -62,7 +60,7 @@ $\sum_{n\in\mathbb N}\langle\psi_n,\varphi_n\rangle$ converges absolutely and
 defines a sesquilinear form, linear in the first argument, with respect to
 which $F(H)$ is a complex vector space with inner product
 $\langle\psi,\varphi\rangle:=\sum_{n\in\mathbb N}\langle\psi_n,\varphi_n\rangle$
-([[cor-cauchy-schwarz-inequality-for-l-two]],
+([[thm-cauchy-schwarz-in-an-inner-product-space]],
 [[def-series-and-absolute-convergence-in-a-normed-space]]);
 
 (b) $(F(H),\langle\cdot,\cdot\rangle)$ is a Hilbert space, i.e. the induced norm
@@ -107,19 +105,19 @@ operators is asserted.
 
 [F1] For every $n\in\mathbb N$, $P_+^{(n)}$ is an orthogonal projection (with $P_+^{(0)}=\mathrm{id}_{\mathbb C}$), so $\operatorname{ran}P_+^{(n)}$ is a closed linear subspace of the complete space $H^{\otimes n}$; for fixed $v\in H^{\otimes m}$ the map $u\mapsto u\otimes v$ is linear and bounded ([[lem-nrqm-composites-permutation-sector-projections]], [[lem-nrqm-composites-hilbert-tensor-construction]]).
 
-[F2] Cauchy-Schwarz for square-summable families: $\sum_n|a_nb_n|\le\bigl(\sum_n|a_n|^2\bigr)^{1/2}\bigl(\sum_n|b_n|^2\bigr)^{1/2}$ ([[cor-cauchy-schwarz-inequality-for-l-two]], [[def-series-and-absolute-convergence-in-a-normed-space]]).
+[F2] Cauchy-Schwarz holds in each sector by [[thm-cauchy-schwarz-in-an-inner-product-space]]. For square-summable scalar sequences, apply that theorem to the finite nonnegative real vectors $(|a_0|,\ldots,|a_N|)$ and $(|b_0|,\ldots,|b_N|)$ in $\mathbb R^{N+1}$ with inner product $\langle a,b\rangle:=\sum_{n=0}^Na_nb_n$, then let $N\to\infty$ in the nonnegative partial sums; this gives $\sum_n|a_nb_n|\le\bigl(\sum_n|a_n|^2\bigr)^{1/2}\bigl(\sum_n|b_n|^2\bigr)^{1/2}$.
 
 [F3] A self-adjoint operator is closed and symmetric; a densely defined symmetric operator $S$ satisfies $S\subseteq S^*$ ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]], [[def-adjoint-of-a-densely-defined-unbounded-operator]], [[def-densely-defined-closed-and-closable-operator]]).
 
-[F4] A subset $A$ of a normed space is dense exactly when every vector is the norm limit of a sequence from its finite linear span ([[def-dense-top]]).
+[F4] A subset $A$ of a normed space is dense exactly when every vector is the norm limit of a sequence from $A$ ([[def-dense-top]]).
 
 
 
 ## Proof
 
-1.1 [Absolutely convergent pairing] Let $\psi,\varphi\in F(H)$. By [F2] with $a_n:=\|\psi_n\|$, $b_n:=\|\varphi_n\|$, $\sum_n|\langle\psi_n,\varphi_n\rangle|\le\sum_n\|\psi_n\|\,\|\varphi_n\|\le\bigl(\sum_n\|\psi_n\|^2\bigr)^{1/2}\bigl(\sum_n\|\varphi_n\|^2\bigr)^{1/2}=\|\psi\|\,\|\varphi\|<\infty$, so the series defining $\langle\psi,\varphi\rangle$ converges absolutely ([[def-series-and-absolute-convergence-in-a-normed-space]]); the value is unchanged by rearranging each term, and termwise addition and scalar multiplication give sesquilinearity and linearity in the first argument, inherited from the pairings on the $H^{\otimes n}$. If $\|\psi\|^2=\sum_n\|\psi_n\|^2=0$ then $\psi_n=0$ for every $n$, so $F(H)$ is a complex vector space with the displayed inner product. [F2, algebra]
+1.1 [Absolutely convergent pairing] Let $\psi,\varphi\in F(H)$. Coordinatewise addition preserves the defining square-summability because $\|\psi_n+\varphi_n\|^2\le2\|\psi_n\|^2+2\|\varphi_n\|^2$, and scalar multiplication does as well, so $F(H)$ is a complex vector space. By [F2] with $a_n:=\|\psi_n\|$, $b_n:=\|\varphi_n\|$, $\sum_n|\langle\psi_n,\varphi_n\rangle|\le\sum_n\|\psi_n\|\,\|\varphi_n\|\le\bigl(\sum_n\|\psi_n\|^2\bigr)^{1/2}\bigl(\sum_n\|\varphi_n\|^2\bigr)^{1/2}=\|\psi\|\,\|\varphi\|<\infty$, so the series defining $\langle\psi,\varphi\rangle$ converges absolutely ([[def-series-and-absolute-convergence-in-a-normed-space]]); termwise addition and scalar multiplication give sesquilinearity and linearity in the first argument, inherited from the pairings on the $H^{\otimes n}$. If $\|\psi\|^2=\sum_n\|\psi_n\|^2=0$ then $\psi_n=0$ for every $n$, so the displayed form is positive definite and is an inner product. [F2, algebra]
 
-1.2 [Completeness] Let $(\psi^{(k)})_k$ be a Cauchy sequence in $F(H)$ and let $\varepsilon>0$. For each $n$, $\|\psi_n^{(k)}-\psi_n^{(l)}\|\le\|\psi^{(k)}-\psi^{(l)}\|$, so $(\psi_n^{(k)})_k$ is Cauchy in the complete space $H^{\otimes n}$ ([F1]) and converges to some $\psi_n\in H^{\otimes n}$; since $\operatorname{ran}P_+^{(n)}$ is closed, $\psi_n\in\operatorname{ran}P_+^{(n)}$ ([F1]). Choose $K$ with $\|\psi^{(k)}-\psi^{(m)}\|\le\varepsilon$ for $k,m\ge K$; for every finite $N$ and $k,m\ge K$, $\sum_{n\le N}\|\psi_n^{(k)}-\psi_n^{(m)}\|^2\le\varepsilon^2$, and letting $m\to\infty$ gives $\sum_{n\le N}\|\psi_n^{(k)}-\psi_n\|^2\le\varepsilon^2$ for every $N$, hence $\|\psi^{(k)}-\psi\|^2\le\varepsilon^2$. In particular $\psi\in F(H)$ and $\psi^{(k)}\to\psi$; thus $F(H)$ is complete and (b) holds. [F1, F3, algebra]
+1.2 [Completeness] Let $(\psi^{(k)})_k$ be a Cauchy sequence in $F(H)$ and let $\varepsilon>0$. For each $n$, $\|\psi_n^{(k)}-\psi_n^{(l)}\|\le\|\psi^{(k)}-\psi^{(l)}\|$, so $(\psi_n^{(k)})_k$ is Cauchy in the complete space $H^{\otimes n}$ ([F1]) and converges to some $\psi_n\in H^{\otimes n}$; since $\operatorname{ran}P_+^{(n)}$ is closed, $\psi_n\in\operatorname{ran}P_+^{(n)}$ ([F1]). Choose $K$ with $\|\psi^{(k)}-\psi^{(m)}\|\le\varepsilon$ for $k,m\ge K$. Fix $k\ge K$. For every finite $N$, $\sum_{n\le N}\|\psi_n\|^2\le2\sum_{n\le N}\|\psi_n^{(k)}\|^2+2\sum_{n\le N}\|\psi_n-\psi_n^{(k)}\|^2\le2\|\psi^{(k)}\|^2+2\varepsilon^2$, where the last term uses the limit as $m\to\infty$ in $\sum_{n\le N}\|\psi_n^{(m)}-\psi_n^{(k)}\|^2\le\varepsilon^2$. Taking the supremum over finite $N$ shows $\psi=(\psi_n)_n\in F(H)$. Also, for each $k\ge K$ and finite $N$, $\sum_{n\le N}\|\psi_n^{(k)}-\psi_n\|^2\le\varepsilon^2$ by letting $m\to\infty$ in $\sum_{n\le N}\|\psi_n^{(k)}-\psi_n^{(m)}\|^2\le\varepsilon^2$; taking the supremum gives $\|\psi^{(k)}-\psi\|\le\varepsilon$. Thus $\psi^{(k)}\to\psi$ and $F(H)$ is complete, proving (b). [F1, algebra]
 
 1.3 [Vacuum, density and embeddings] The vacuum has $\|\Omega\|=|1|=1$. For $\psi\in F(H)$ the truncations $\psi^{(N)}:=(\psi_0,\dots,\psi_N,0,0,\dots)\in F_0$ satisfy $\|\psi-\psi^{(N)}\|^2=\sum_{n>N}\|\psi_n\|^2\to0$, so $F_0$ is dense by [F4]; $F_0$ is a linear subspace because each $\operatorname{ran}P_+^{(n)}$ is one ([F1]). Each $\iota_n$ is linear and $\|\iota_n(u)\|^2=\|u\|^2$, and its range is the set of vectors supported in coordinate $n$, a closed subspace identified isometrically with $\operatorname{ran}P_+^{(n)}$. [F1, F4, algebra]
 
@@ -127,9 +125,7 @@ operators is asserted.
 
 1.5 [Density of the direct-sum domain] Let $\psi\in F(H)$ and $\varepsilon>0$. Choose $N$ so that $\sum_{n>N}\|\psi_n\|^2<\varepsilon^2/4$. For each of the finitely many $n\le N$, the self-adjoint operator $T_n$ is densely defined, so choose $\varphi_n\in D(T_n)$ with $\|\varphi_n-\psi_n\|<\varepsilon/(2\sqrt{N+1})$; put $\varphi_n=0$ for $n>N$. The vector $\varphi$ belongs to $D(T)$ because it has finite support and every retained coordinate belongs to its operator domain. Moreover, $\|\varphi-\psi\|^2=\sum_{n\le N}\|\varphi_n-\psi_n\|^2+\sum_{n>N}\|\psi_n\|^2<\varepsilon^2/2<\varepsilon^2$. Thus $D(T)$ is dense in $F(H)$. [F3, algebra]
 
-2.1 [The adjoint is the same diagonal sum] Let $\varphi\in D(T^*)$ with $C:=\|T^*\varphi\|$, so $|\langle T\psi,\varphi\rangle|\le C\|\psi\|$ for all $\psi\in D(T)$. Testing with $\psi$ supported in a single coordinate $n$ shows that the functional $\psi_n\mapsto\langle T_n\psi_n,\varphi_n\rangle$ on the dense domain $D(T_n)$ is bounded by $C\|\psi_n\|$; hence $\varphi_n\in D(T_n^*)=D(T_n)$ and $T_n\varphi_n=(T^*\varphi)_n$. Let $F$ be a finite subset of coordinates for which $\|T_n\varphi_n\|>0$, and let $\delta>0$. Density of $D(T_n)$ allows, for each $n\in F$, a unit vector $\chi_n\in D(T_n)$ with $\operatorname{Re}\langle\chi_n,T_n\varphi_n\rangle\ge\|T_n\varphi_n\|-\delta$. For nonnegative real $\lambda_n$, put $\psi=\sum_{n\in F}\lambda_n\chi_n$. Symmetry of each $T_n$ and the first-linear inner-product convention give [F2, F3, step 1.4, step 1.5, algebra]
-$\sum_{n\in F}\lambda_n\|T_n\varphi_n\|-\delta\sum_{n\in F}\lambda_n\le\operatorname{Re}\langle T\psi,\varphi\rangle\le|\langle T\psi,\varphi\rangle|=|\langle\psi,T^*\varphi\rangle|\le C\Bigl(\sum_{n\in F}\lambda_n^2\Bigr)^{1/2}.$
-Letting $\delta\downarrow0$ and optimizing over finitely supported nonnegative $(\lambda_n)$ gives $\sum_n\|T_n\varphi_n\|^2\le C^2<\infty$. Therefore $D(T^*)\subseteq D(T)$ and $T^*\varphi=T\varphi$; with $T\subseteq T^*$ from step 1.4, $T=T^*$ is self-adjoint, and $D(T)$ is dense by step 1.5. If every $T_n$ is bounded by $M:=\sup_n\|T_n\|<\infty$, then $\|T\psi\|^2=\sum_n\|T_n\psi_n\|^2\le M^2\|\psi\|^2$ for every $\psi\in F(H)$ and testing on unit vectors in individual nonzero sectors where $\|T_n\|$ approaches $M$ gives the reverse inequality. [F2, F3, step 1.4, step 1.5, algebra]
+2.1 [The adjoint is the same diagonal sum] Let $\varphi\in D(T^*)$ with $C:=\|T^*\varphi\|$, so $|\langle T\psi,\varphi\rangle|\le C\|\psi\|$ for all $\psi\in D(T)$. Testing with $\psi$ supported in a single coordinate $n$ shows that the functional $\psi_n\mapsto\langle T_n\psi_n,\varphi_n\rangle$ on the dense domain $D(T_n)$ is bounded by $C\|\psi_n\|$; hence $\varphi_n\in D(T_n^*)=D(T_n)$ and $T_n\varphi_n=(T^*\varphi)_n$. Since $T^*\varphi\in F(H)$, the coordinate identity gives $\sum_n\|T_n\varphi_n\|^2=\|T^*\varphi\|^2<\infty$. Therefore $D(T^*)\subseteq D(T)$ and $T^*\varphi=T\varphi$; with $T\subseteq T^*$ from step 1.4, $T=T^*$ is self-adjoint, and $D(T)$ is dense by step 1.5. If every $T_n$ is bounded by $M:=\sup_n\|T_n\|<\infty$, then $\|T\psi\|^2=\sum_n\|T_n\psi_n\|^2\le M^2\|\psi\|^2$ for every $\psi\in F(H)$ and testing on unit vectors in individual nonzero sectors where $\|T_n\|$ approaches $M$ gives the reverse inequality. [F2, F3, step 1.4, step 1.5, algebra]
 
 3.1 [Separability] Assume $(e_i)_{i\in I}$ is a complete orthonormal family of $H$ with $I$ at most countable. For $n\ge1$ the elementary tensors $e_{i_1}\otimes\cdots\otimes e_{i_n}$, $(i_1,\dots,i_n)\in I^n$, have dense linear span in $H^{\otimes n}$ by the product-bases statement of [[lem-nrqm-composites-hilbert-tensor-construction]]; since $P_+^{(n)}$ is bounded, the image $P_+^{(n)}$ of a dense set is dense in $\operatorname{ran}P_+^{(n)}$ (given $u=P_+^{(n)}u$ in the range and approximants $v_j\to u$, continuity gives $P_+^{(n)}v_j\to u$). Hence the at most countable set $D:=\{\iota_n(P_+^{(n)}(e_{i_1}\otimes\cdots\otimes e_{i_n})):n\ge1,\ i_1,\dots,i_n\in I\}\cup\{\Omega\}$ has dense span in $F(H)$: any $\psi\in F(H)$ is the limit of its truncations, and each $\psi_n$ is approximated in $\operatorname{ran}P_+^{(n)}$ by finite combinations from $D$. A normed space with a countable set whose finite linear combinations are dense is separable. [F1, step 1.3, algebra] ∎
 

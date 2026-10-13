@@ -82,7 +82,7 @@ physical_scope: "A conditional consequence of the framework postulates for the
   by the generator-conservation theorem. The statement concerns real bounded
   measurable potentials only; it asserts no momentum conservation for
   non-invariant potentials, no statement about singular or unbounded potentials,
-  no lattice or discrete symmetry claim, no apparatus realization and no
+  no lattice or discrete-group conservation claim beyond the fixed-translation criterion, no apparatus realization and no
   empirical result."
 sources:
   references:
@@ -156,8 +156,9 @@ bounded measurable potentials. It asserts no momentum conservation for a
 potential that is not translation invariant — the translation-covariance
 theorem transports the position law and conjugates the dynamics, but does not
 by itself conserve momentum — and it makes no claim about singular, unbounded,
-periodic, boundary or relativistic models, no discrete symmetry group, no
-apparatus and no empirical result.
+boundary or relativistic models. Clause (a) includes bounded periodic potentials
+and their fixed period translations; no additional discrete-group conservation
+theorem, apparatus or empirical result is asserted.
 
 ## Facts & Assumptions
 
@@ -200,7 +201,7 @@ measurable $V$, each integral against $\rho_\varepsilon(x-\cdot)$ is
 absolutely convergent because the kernel is bounded with compact support.
 
 [F4] **Conservation theorem.** For a declared isolated system with energy
-$H_{\mathrm{op}}$ and flow $U(t)$, a self-adjoint $A$ with
+$H_{\mathrm{op}}$ and flow $U(t)$, an assigned sharp observable $(A,u_A)$ with
 $e^{-isA/\hbar}U(t)=U(t)e^{-isA/\hbar}$ for all $s,t$ has a time-independent
 outcome law, conserved moments for vectors in $D(A)$, and a unitary symmetry
 $S$ of the dynamics satisfies $SU(t)=U(t)S$

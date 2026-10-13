@@ -10,7 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-countable-choice, def-dependent-choice, def-gr-causal-conditions-and-global-hyperbolicity, lem-gr-dominating-cone-bounds, def-gr-causal-curves-and-reachability, lem-gr-causal-curve-calculus, def-gr-smooth-lorentzian-objects, def-gr-smooth-covariant-two-tensor-field, def-absolutely-continuous-function, thm-absolutely-continuous-functions-have-integrable-derivatives, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, def-continuity-real, def-interval, def-c-r-and-smooth-maps-between-smooth-manifolds, def-compact-space]
+deps: [def-countable-choice, def-dependent-choice, def-gr-causal-conditions-and-global-hyperbolicity, lem-gr-dominating-cone-bounds, def-gr-causal-curves-and-reachability, lem-gr-causal-curve-calculus, thm-gr-auxiliary-complete-riemannian-metric, def-gr-smooth-lorentzian-objects, def-gr-smooth-covariant-two-tensor-field, def-absolutely-continuous-function, thm-absolutely-continuous-functions-have-integrable-derivatives, thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions, def-continuity-real, def-interval, def-c-r-and-smooth-maps-between-smooth-manifolds, def-compact-space]
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-dependent-choice: mathematical-premise
@@ -18,6 +18,7 @@ dependency_roles:
   lem-gr-dominating-cone-bounds: mathematical-premise
   def-gr-causal-curves-and-reachability: mathematical-premise
   lem-gr-causal-curve-calculus: mathematical-premise
+  thm-gr-auxiliary-complete-riemannian-metric: mathematical-premise
   def-gr-smooth-lorentzian-objects: mathematical-premise
   def-gr-smooth-covariant-two-tensor-field: mathematical-premise
   def-absolutely-continuous-function: mathematical-premise
@@ -39,7 +40,7 @@ verification:
 
 ## Statement
 
-Assume Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]]) for the general absolutely continuous curve calculus and its fundamental theorem. Let $(M,g,N)$ be a strongly causal time-oriented smooth Lorentzian
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]], [[def-dependent-choice]]) for the general absolutely continuous curve calculus and its fundamental theorem. Use the locally absolutely continuous Riemannian length of [[thm-gr-auxiliary-complete-riemannian-metric]]. Let $(M,g,N)$ be a strongly causal time-oriented smooth Lorentzian
 four-manifold ([[def-gr-causal-conditions-and-global-hyperbolicity]] clause
 (b)) and let $h$ be a smooth positive definite metric on $M$
 ([[def-gr-smooth-covariant-two-tensor-field]]). Then for every compact set
@@ -62,7 +63,7 @@ $K$, then $b-a\le L(K)$.
 
 [L3] Continuous images of compact sets are compact, and compact subsets of a Hausdorff space are closed; a compact set has a finite subcover from every open cover ([[def-compact-space]]).
 
-[L4] Absolutely continuous calculus: the length $\ell_h$ is the integral of the nonnegative integrable function $\sqrt{h(\gamma',\gamma')}$, and integrals are additive and monotone over intervals ([[def-absolutely-continuous-function]], [[thm-absolutely-continuous-functions-have-integrable-derivatives]], [[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]]).
+[L4] Absolutely continuous calculus: under the Riemannian length definition of [[thm-gr-auxiliary-complete-riemannian-metric]], the density $\sqrt{h(\gamma',\gamma')}$ is nonnegative and integrable, and its integral is additive and monotone over intervals ([[def-absolutely-continuous-function]], [[thm-absolutely-continuous-functions-have-integrable-derivatives]], [[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]]).
 
 ## Proof
 

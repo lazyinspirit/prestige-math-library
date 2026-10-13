@@ -55,8 +55,10 @@ claims; it proves nothing by itself.
   units ([[def-gr-measured-energy-density-flux-and-stress]]), the acceleration
   and expansion of the congruence
   ([[def-gr-congruence-acceleration-and-expansion]]), and, for a model with an
-  everywhere timelike future-directed Killing field, the Killing energy current
-  and the Killing energy of a finite three-chain
+  everywhere timelike future-directed Killing field, the Killing current and
+  the Killing charge of a finite three-chain (read as an energy in joules when
+  the field is length-normalized under the framework's length-coordinate
+  convention)
   ([[def-gr-killing-energy-charge]]). The algebraic decomposition behind the
   measured fields is proved in
   [[lem-gr-observer-energy-momentum-decomposition]], and the divergence and
@@ -64,8 +66,9 @@ claims; it proves nothing by itself.
   [[lem-gr-energy-momentum-current-divergence]] and
   [[lem-gr-killing-congruence-kinematics-and-energy-current]].
 
-- **What is conditional.** The local energy balance and the conservation of
-  the Killing energy are theorem
+- **What is conditional.** The local energy balance and conservation of the
+  Killing charge (whose energy reading requires the stated normalization) are
+  established by theorem
   [[pthm-gr-local-energy-balance]]: they are conditional on the adopted field
   law, on the smooth hypotheses of
   [[post-gr-spacetime-and-classical-domain]] and
@@ -79,11 +82,15 @@ claims; it proves nothing by itself.
   [[def-gr-metric-volume-form-and-current-flux]] and
   [[thm-gr-density-divergence-and-finite-chain-flux]].
 
-- **Smooth and finite branch.** All items assume smooth fields on an open
-  domain and finite smooth singular chains; distributional sources,
-  interfaces, noncompact or rough regions and asymptotic limits are outside
-  the branch, in the sense of
-  [[rem-gr-einstein-matter-scope-and-conventions]]. The observer congruence is
+- **Smooth and finite branch.** The local constructions and identities use
+  smooth fields on nonempty open domains, which may be noncompact; the flux
+  statements integrate over finite smooth singular chains. This restricts
+  the integration objects, not the ambient manifold or matter domain.
+  Distributional sources, interfaces with nonsmooth fields and rough regions
+  need the additional mathematics deferred in
+  [[rem-gr-einstein-matter-scope-and-conventions]]. Integration over unbounded
+  slices and passage to asymptotic limits require additional convergence and
+  boundary hypotheses not supplied by the finite-chain statements. The observer congruence is
   an idealization of a family of ideal-clock worldlines; the physical reading
   of measured quantities is the framework's reading of
   [[def-gr-si-unit-and-coordinate-conventions]], and no numerical value is

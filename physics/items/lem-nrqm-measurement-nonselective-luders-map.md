@@ -7,12 +7,12 @@ title: "The non-selective Lueders map and the discarded-outcome ensemble"
 status: draft
 origin: pipeline
 dependency_level: 3
-deps: [def-countable-choice, def-hilbert-orthogonal-projection, def-hilbert-space, def-non-negative-and-positive-operator, def-trace-class-operator, def-trace-of-a-trace-class-operator, lem-nrqm-composites-countable-kraus-normalization, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-rank-one-operator-calculus, lem-nrqm-measurement-selective-luders-update, thm-trace-class-is-a-two-sided-banach-operator-ideal]
+deps: [def-countable-choice, def-hilbert-orthogonal-projection, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-trace-class-operator, def-trace-of-a-trace-class-operator, lem-nrqm-composites-countable-kraus-normalization, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-rank-one-operator-calculus, lem-nrqm-measurement-selective-luders-update, thm-trace-class-is-a-two-sided-banach-operator-ideal]
 dependency_roles:
   def-countable-choice: mathematical-premise
   def-hilbert-orthogonal-projection: mathematical-premise
   def-hilbert-space: mathematical-premise
-  def-non-negative-and-positive-operator: mathematical-premise
+  def-self-adjoint-positive-unitary-and-normal-operator: mathematical-premise
   def-trace-class-operator: mathematical-premise
   def-trace-of-a-trace-class-operator: mathematical-premise
   lem-nrqm-composites-countable-kraus-normalization: mathematical-premise
@@ -70,7 +70,7 @@ No physical interpretation of the map is asserted.
 
 [F3'] **Expansion of a density operator.** $\rho=\sum_{n}w_{n}T_{u_{n},u_{n}}$ with $(u_{n})$ a finite or countable orthonormal family and $w_{n}\ge0$, $\sum_{n}w_{n}=1$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a)).
 
-[F4] **Rank-one calculus.** $T_{u,v}x=\langle x,v\rangle u$ is trace class with $\operatorname{tr}(T_{u,v})=\langle u,v\rangle$; $T_{x,x}\ge0$ with $\operatorname{tr}(T_{x,x})=\|x\|^{2}$; for bounded $B$, $BT_{u,v}=T_{Bu,v}$ and $T_{u,v}B=T_{u,B^{*}v}$ ([[lem-nrqm-composites-rank-one-operator-calculus]] clauses (b)-(d)).
+[F4] **Rank-one calculus.** $T_{u,v}x=\langle x,v\rangle u$ is trace class with $\operatorname{tr}(T_{u,v})=\langle u,v\rangle$; for bounded $B$, $BT_{u,v}=T_{Bu,v}$ and $T_{u,v}B=T_{u,B^{*}v}$ ([[lem-nrqm-composites-rank-one-operator-calculus]] clauses (b)-(d)). For every $x,y\in H$, $T_{x,x}^{*}=T_{x,x}$ and $\langle T_{x,x}y,y\rangle=|\langle y,x\rangle|^{2}\ge0$, so $T_{x,x}$ is positive by [[def-self-adjoint-positive-unitary-and-normal-operator]].
 
 [F5] **Trace-class ideal and cyclicity.** For bounded $B$ and trace-class $T$, $BT$ and $TB$ are trace class with $\operatorname{tr}(BT)=\operatorname{tr}(TB)$ ([[thm-trace-class-is-a-two-sided-banach-operator-ideal]], [[lem-nrqm-composites-nuclear-bounded-cyclicity]] clause (b)).
 

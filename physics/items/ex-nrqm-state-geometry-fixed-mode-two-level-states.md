@@ -65,7 +65,7 @@ verification:
 
 Let $H$ be a two-dimensional complex Hilbert space with an orthonormal basis written $(h,v)$, and use the state space $D(H)$ of [[def-nrqm-state-geometry-framework-state-space]]. Put
 $$u:=\frac{h+v}{\sqrt2}\in S(H),\qquad \rho_+:=\frac12T_{h,h}+\frac12T_{v,v},$$
-the first the ray of the equal-amplitude superposition of the two basis vectors, the second the equal statistical mixture of the two basis rays. For an operator $A:H\to H$, write $\operatorname{ran}A:=\{Ax:x\in H\}$ and define its **rank** by $\operatorname{rank}A:=\dim_{\mathbb C}(\operatorname{ran}A)$, using [[def-dimension]]. Then:
+Here $u$ is the unit vector of the equal-amplitude superposition, with ray $[u]$, and $\rho_+$ is the density operator of the equal statistical mixture of the two basis rays. For an operator $A:H\to H$, write $\operatorname{ran}A:=\{Ax:x\in H\}$ and define its **rank** by $\operatorname{rank}A:=\dim_{\mathbb C}(\operatorname{ran}A)$, using [[def-dimension]]. Then:
 
 (i) The state assigned to the ray $[u]$ is the pure state $T_{u,u}$, whose matrix relative to the basis $(h,v)$ is
 $$T_{u,u}=\frac12\begin{pmatrix}1&1\\ 1&1\end{pmatrix};$$
@@ -85,9 +85,9 @@ The basis labels $h$ and $v$ are abstract here. The identification of such a two
 
 [L2] **Rank-one states** ([[lem-nrqm-state-geometry-ray-to-rank-one-projection]]): $T_{x,x}x=\|x\|^{2}x$; for a unit vector $x$ the operator $T_{x,x}$ is a pure state and the Hilbert orthogonal projection onto the one-dimensional subspace $\mathbb Cx$; its matrix relative to a basis has columns $T_{x,x}e_{j}=\langle e_{j},x\rangle x$.
 
-[L3] **Mixtures, purity and mixedness** ([[lem-nrqm-state-geometry-density-set-convex-and-complete]], [[lem-nrqm-state-geometry-purity-criterion]], [[def-nrqm-state-geometry-pure-mixed-states-and-purity]]): a finite convex combination of states with weights summing to one is a state; a state is pure exactly when $\operatorname{tr}(\rho^{2})=1$ and mixed exactly when it has at least two positive eigenvalues.
+[L3] **Mixtures, purity and mixedness** ([[lem-nrqm-state-geometry-density-set-convex-and-complete]], [[lem-nrqm-state-geometry-purity-criterion]], [[def-nrqm-state-geometry-pure-mixed-states-and-purity]]): a finite convex combination of states with weights summing to one is a state; the purity of a state with positive eigenvalues $\lambda_j$, counted with multiplicity, is $\operatorname{tr}(\rho^{2})=\sum_j\lambda_j^2$; a state is pure exactly when this equals $1$ and mixed exactly when it has at least two positive eigenvalues.
 
-[L4] **Finite-dimensional trace** ([[def-matrix-product-and-identity-matrix]]): for the displayed $2\times2$ matrices, traces and matrix products are computed entrywise; $\operatorname{tr}I=2$ for the $2\times2$ identity.
+[L4] **Matrix multiplication and identity** ([[def-matrix-product-and-identity-matrix]]): for the displayed $2\times2$ matrices, $(AB)_{ij}=\sum_k A_{ik}B_{kj}$, and the identity matrix $I$ has diagonal entries one and off-diagonal entries zero.
 
 ## Verification
 
@@ -95,7 +95,7 @@ The basis labels $h$ and $v$ are abstract here. The identification of such a two
 
 1.1 [(i) the pure state of the diagonal ray] For the unit vector $u=(h+v)/\sqrt2$ of [L1] one has $\langle h,u\rangle=1/\sqrt2$ and $\langle v,u\rangle=1/\sqrt2$, so by [L2] the columns of $T_{u,u}$ in the basis $(h,v)$ are $T_{u,u}h=\frac{1}{\sqrt2}u=\frac12(h+v)$ and $T_{u,u}v=\frac{1}{\sqrt2}u=\frac12(h+v)$, that is, the displayed matrix $\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix}$. Its square is $\frac14\begin{pmatrix}2&2\\2&2\end{pmatrix}=\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix}=T_{u,u}$ by [L4]; its range is the one-dimensional subspace $\mathbb Cu$, so its rank is one, and its purity is $1$. By [L3] it is a pure state. [given, L1, L2, L3, L4, algebra]
 
-1.2 [(ii) the mixture is one half times the identity] By [L2] the matrices of the two pure states are $T_{h,h}=\begin{pmatrix}1&0\\0&0\end{pmatrix}$ and $T_{v,v}=\begin{pmatrix}0&0\\0&1\end{pmatrix}$, so $\rho_+=\frac12T_{h,h}+\frac12T_{v,v}=\frac12I$; this is a state by [L3], since the weights are nonnegative and sum to one. Its range is $H$, so its rank is two. Its square is $\frac14I$, so its purity is $\operatorname{tr}(\frac14I)=\frac12$ by [L4]; since $\frac12\ne1$, the state is mixed by [L3]. [given, L1, L2, L3, L4, algebra]
+1.2 [(ii) the mixture is one half times the identity] By [L2] the matrices of the two pure states are $T_{h,h}=\begin{pmatrix}1&0\\0&0\end{pmatrix}$ and $T_{v,v}=\begin{pmatrix}0&0\\0&1\end{pmatrix}$, so $\rho_+=\frac12T_{h,h}+\frac12T_{v,v}=\frac12I$; this is a state by [L3], since the weights are nonnegative and sum to one. Its range is $H$, so its rank is two. Its square is $\frac14I$ by [L4]. Since $\rho_+h=h/2$ and $\rho_+v=v/2$ and $(h,v)$ is a basis, its two eigenvalues counted with multiplicity are $1/2,1/2$, so its purity is $(1/2)^2+(1/2)^2=1/2$ by [L3]; since $\frac12\ne1$, the state is mixed by [L3]. [given, L1, L2, L3, L4, algebra]
 
 2.1 [(iii) the states are distinct] By steps 1.1 and 1.2 the difference $T_{u,u}-\frac12I=\frac12\begin{pmatrix}0&1\\1&0\end{pmatrix}$ is nonzero, so the two states are distinct elements of $D(H)$; their purities $1$ and $\frac12$ and their ranks $1$ and $2$ also differ, so the pure superposition and the equal mixture are different states of the model. [given, step 1.1, step 1.2, L4, algebra] ∎
 

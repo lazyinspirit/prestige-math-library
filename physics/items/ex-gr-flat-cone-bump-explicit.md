@@ -13,6 +13,8 @@ provenance:
 proof_strategy: direct
 deps:
   [
+    def-countable-choice,
+    def-dependent-choice,
     lem-euclidean-bump-for-a-compact-set-inside-an-open-set,
     def-gr-flat-minkowski-model-and-inertial-charts,
     lem-gr-flat-inertial-cone-criterion-and-sums,
@@ -32,6 +34,8 @@ deps:
     lem-gr-cone-bump-functions
   ]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   lem-euclidean-bump-for-a-compact-set-inside-an-open-set: mathematical-premise
   def-gr-flat-minkowski-model-and-inertial-charts: mathematical-premise
   lem-gr-flat-inertial-cone-criterion-and-sums: mathematical-premise
@@ -65,6 +69,10 @@ verification:
 
 ## Example
 
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the causal reachability and supplied
+causal-calculus conclusions used here.
+
 In the flat model $(A,\eta,N)$ of
 [[def-gr-flat-minkowski-model-and-inertial-charts]] with global inertial
 chart $x=(x^0,z)$, fix $\delta>0$ and the events
@@ -85,7 +93,7 @@ with compact support.
 
 [L3] The standard flat function $\varphi$ is smooth with all derivatives vanishing at $0$ ([[def-the-standard-flat-function]], [[thm-the-standard-flat-function-is-smooth-and-flat-at-zero]]); the chain rule and the algebra of derivatives apply to compositions and products of smooth functions ([[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[def-c-r-and-smooth-maps-between-smooth-manifolds]]).
 
-[L5] A compact subset of a Euclidean open set admits a smooth compactly supported cutoff equal to one on a neighborhood of that subset ([[lem-euclidean-bump-for-a-compact-set-inside-an-open-set]]).
+[L5] If $K\subset C\subset\mathbb R^4$ with $K$ compact and $C$ open, first obtain a compact $K_1\subset C$ with $K\subset\operatorname{Int}K_1$: the family of all open balls whose closed doubled balls lie in $C$ covers $K$; take a finite subcover, and let $K_1$ be the union of its closed balls. Apply [[lem-euclidean-bump-for-a-compact-set-inside-an-open-set]] to $K_1\subset C$. The resulting cutoff equals one on $\operatorname{Int}K_1$, a neighborhood of $K$. In the application $C$ is bounded, so its closed support is compact. This uses only finite selections.
 
 [L4] Gradient: for a smooth $u$, the gradient $\nabla u$ of [[def-gr-inverse-metric-and-musical-isomorphisms]] is characterised by $\eta(\nabla u,w)=du(w)$ for every $w$, and if $T$ is a past-directed timelike vector then $-T$ is future-directed timelike.
 

@@ -84,15 +84,21 @@ on every smooth singular $4$-chain contained in $U$.
 **(d) On-shell conservation of the Hilbert tensor.** Let $c>0$, let
 $S:\mathcal D\to\mathbb R$ be a model action with Hilbert stress-energy tensor
 $T$ at $(g,\varphi)$ with respect to $c$
-([[def-gr-hilbert-stress-energy-tensor]]), and let $\xi$ be a smooth vector
-field with compact support whose flow $\Phi_v$ is a global flow
+([[def-gr-hilbert-stress-energy-tensor]]). For the flow diffeomorphisms $F$
+below, suppose the configuration set $\mathcal X$ carries specified maps
+$P_F:\mathcal X\to\mathcal X$ with $P_{\mathrm{id}}=\mathrm{id}$; write
+$F^*\varphi:=P_F(\varphi)$. For geometric matter fields these are the
+model's pullbacks; no pullback operation on an arbitrary set is implicit.
+For **every** smooth compactly supported vector field $\xi$, its flow
+$\Phi_v$ is global
 ([[def-complete-vector-field]], [[def-local-and-global-flow]]); this holds for
 every compactly supported smooth field, using the axiom
 $\mathrm{AC}_\omega$ of [[def-countable-choice]] through
 [[thm-compactly-supported-vector-fields-are-complete]]. Write
 $G(u,v):=S(\Phi_v^*g,\Phi_u^*\varphi)$ for the simultaneous pullback by the
 flow (this presupposes that the pairs lie in $\mathcal D$, which is part of the
-hypotheses below). Suppose:
+hypotheses below). Suppose (H1)–(H4) hold for **every** such $\xi$ (with
+its own $G$ and parameter neighborhood):
 
 - **(H1)** the map $G$ is defined on a neighborhood of $(0,0)$ in
   $\mathbb R^2$ and is differentiable at $(0,0)$;
@@ -101,14 +107,14 @@ hypotheses below). Suppose:
 - **(H3)** $\partial_vG(0,0)=-\frac{1}{2c}\int_MT_{ab}q^{ab}\mathrm{vol}_g$,
   where $q^{ab}:=\partial_v(\Phi_v^*g)^{ab}|_{v=0}$ (the metric variation is
   represented by the Hilbert tensor);
-- **(H4)** $G(u,v)=S(g,\varphi)$ for all $(u,v)$ in that neighborhood
+- **(H4)** $G(s,s)=S(g,\varphi)$ whenever $(s,s)$ lies in that neighborhood
   (invariance of the action under simultaneous pullback by the flow).
 
 Then $\nabla^aT_{ab}=0$ on $M$.
 
 ## Facts & Assumptions
 
-**Given:** The oriented time-oriented smooth Lorentzian four-manifold $(M,g,N)$ with metric-selected connection $\nabla$; in (c) an open $U$, a smooth symmetric $T$ with $\nabla^aT_{ab}=0$ and a Killing field $\xi$ on $U$; in (d) the action $S$, the Hilbert tensor $T$, and a compactly supported smooth vector field $\xi$ with global flow $\Phi_v$ and the hypotheses (H1)-(H4).
+**Given:** The oriented time-oriented smooth Lorentzian four-manifold $(M,g,N)$ with metric-selected connection $\nabla$; in (c) an open $U$, a smooth symmetric $T$ with $\nabla^aT_{ab}=0$ and a Killing field $\xi$ on $U$; in (d) the action $S$, the Hilbert tensor $T$, and the hypotheses (H1)-(H4) for every compactly supported smooth vector field $\xi$, with its global flow $\Phi_v$ and the supplied configuration pullbacks.
 
 [L1] The coordinate formula $(\mathcal L_\xi g)_{ab}=\xi^c\partial_cg_{ab}+g_{cb}\partial_a\xi^c+g_{ac}\partial_b\xi^c$ holds for the Lie derivative of a covariant tensor ([[prop-coordinate-formula-for-the-lie-derivative-of-a-covariant-tensor]], [[def-lie-derivative-of-a-tensor-field]]).
 
@@ -128,9 +134,9 @@ Then $\nabla^aT_{ab}=0$ on $M$.
 
 **Proof technique:** direct; convert the Lie derivative of the metric into the symmetrized covariant derivative, differentiate the pairing along geodesics, then differentiate the invariance identity of the pullback family and integrate by parts.
 
-1.1 (Characterization.) Fix smooth vector fields $X,Y$. Evaluating the coordinate formula of [L1] on $X,Y$, $(\mathcal L_\xi g)(X,Y)=\xi^c\partial_cg_{ab}X^aY^b+g_{cb}\partial_a\xi^cX^aY^b+g_{ac}\partial_b\xi^cX^aY^b$. On the other hand, by [L2], $\nabla_a\xi_b+\nabla_b\xi_a=g_{bc}(\partial_a\xi^c+\Gamma^{c}{}_{ad}\xi^d)+g_{ac}(\partial_b\xi^c+\Gamma^{c}{}_{bd}\xi^d)=\partial_a\xi_b+\partial_b\xi_a+\xi^d(g_{bc}\Gamma^{c}{}_{ad}+g_{ac}\Gamma^{c}{}_{bd})$; metric compatibility in the form $\partial_dg_{ab}=g_{bc}\Gamma^{c}{}_{ad}+g_{ac}\Gamma^{c}{}_{bd}$ (which is the Christoffel formula of [L2]) makes the last term $\xi^d\partial_dg_{ab}$. Hence $(\nabla_a\xi_b+\nabla_b\xi_a)X^aY^b=(\mathcal L_\xi g)(X,Y)$ for all $X,Y$, and since $X,Y$ are arbitrary, $\mathcal L_\xi g$ vanishes exactly when the symmetrized derivative vanishes. This proves (a). [L1, L2, algebra]
+1.1 (Characterization.) Fix smooth vector fields $X,Y$. Evaluating the coordinate formula of [L1] on $X,Y$, $(\mathcal L_\xi g)(X,Y)=\xi^c\partial_cg_{ab}X^aY^b+g_{cb}\partial_a\xi^cX^aY^b+g_{ac}\partial_b\xi^cX^aY^b$. On the other hand, by [L2], $\nabla_a\xi_b+\nabla_b\xi_a=g_{bc}(\partial_a\xi^c+\Gamma^{c}{}_{ad}\xi^d)+g_{ac}(\partial_b\xi^c+\Gamma^{c}{}_{bd}\xi^d)=g_{bc}\partial_a\xi^c+g_{ac}\partial_b\xi^c+\xi^d(g_{bc}\Gamma^{c}{}_{ad}+g_{ac}\Gamma^{c}{}_{bd})$; metric compatibility in the form $\partial_dg_{ab}=g_{bc}\Gamma^{c}{}_{ad}+g_{ac}\Gamma^{c}{}_{bd}$ (which is the Christoffel formula of [L2]) makes the last term $\xi^d\partial_dg_{ab}$. Hence $(\nabla_a\xi_b+\nabla_b\xi_a)X^aY^b=(\mathcal L_\xi g)(X,Y)$ for all $X,Y$, and since $X,Y$ are arbitrary, $\mathcal L_\xi g$ vanishes exactly when the symmetrized derivative vanishes. This proves (a). [L1, L2, algebra]
 
-1.2 (The invariance identity.) Let $\xi$ be compactly supported with global flow $\Phi_v$ and let $G$ be as in (d). By [L8], $s\mapsto G(s,s)$ is differentiable at $0$ with derivative $\partial_uG(0,0)+\partial_vG(0,0)$; by (H4), $G(s,s)=S(g,\varphi)$ is constant in $s$, so this derivative vanishes. Substituting (H2) and (H3), $$0=0-\frac{1}{2c}\int_MT_{ab}q^{ab}\mathrm{vol}_g,\qquad q^{ab}=\partial_v(\Phi_v^*g)^{ab}\big|_{v=0}.$$ [L8, given, algebra]
+1.2 (The invariance identity.) Fix any compactly supported smooth $\xi$ with global flow $\Phi_v$ and let $G$ be as in (d). By [L8], $s\mapsto G(s,s)$ is differentiable at $0$ with derivative $\partial_uG(0,0)+\partial_vG(0,0)$; by (H4), $G(s,s)=S(g,\varphi)$ is constant in $s$, so this derivative vanishes. Substituting (H2) and (H3), $$0=0-\frac{1}{2c}\int_MT_{ab}q^{ab}\mathrm{vol}_g,\qquad q^{ab}=\partial_v(\Phi_v^*g)^{ab}\big|_{v=0}.$$ [L8, given, algebra]
 
 2.1 (Contraction along geodesics.) Let $\gamma$ be a geodesic with $D_t\gamma'=0$ and $\xi$ Killing. By [L3], $\frac{d}{dt}g(\xi,\gamma')=g(D_t\xi,\gamma')+g(\xi,D_t\gamma')=g(D_t\xi,\gamma')$, and $D_t\xi$ is the restriction to $\gamma$ of $\nabla_{\gamma'}\xi$. By (a), $g(\nabla_{\gamma'}\xi,\gamma')=\tfrac12(\nabla_a\xi_b+\nabla_b\xi_a)\gamma'^a\gamma'^b=0$. Hence the derivative vanishes identically and the function is constant on $I$; this proves (b). [step 1.1, L3, algebra]
 
@@ -140,7 +146,7 @@ Then $\nabla^aT_{ab}=0$ on $M$.
 
 3.1 (Conclusion of (d).) Substituting step 2.3 into step 1.2, $0=\frac{1}{2c}\int_MT_{ab}(\nabla^a\xi^b+\nabla^b\xi^a)\mathrm{vol}_g=\frac1c\int_MT_{ab}\nabla^a\xi^b\mathrm{vol}_g$, by symmetry of $T$. By the product rule [L2], $T_{ab}\nabla^a\xi^b=\nabla^a(T_{ab}\xi^b)-(\nabla^aT_{ab})\xi^b$; the vector field $J^a:=T^{ab}\xi_b$ is smooth and compactly supported (since $\xi$ is), so by [L4] $\int_M\nabla_aJ^a\mathrm{vol}_g=0$ and therefore $0=\int_MT_{ab}\nabla^a\xi^b\mathrm{vol}_g=-\int_M(\nabla^aT_{ab})\xi^b\mathrm{vol}_g$. [step 1.2, step 2.3, L2, L4, algebra]
 
-4.1 (Vanishing of the divergence.) Fix a chart $(U,x)$ and restrict to compactly supported smooth $\xi$ supported in $U$. Writing the last integral in the chart and putting $W_b:=\nabla^aT_{ab}$, a smooth covector field on $U$, step 3.1 gives $\int_UW_b\xi^bw\,d^4x=0$ for every such $\xi$, so $W=0$ on $U$ by [L5]; the integral-of-a-divergence identity in [L5] was already used through [L4]. Since every point lies in a chart, $\nabla^aT_{ab}=0$ on $M$, which proves (d). [step 3.1, L5, algebra] ∎
+4.1 (Vanishing of the divergence.) Fix a chart $(U,x)$; the hypotheses hold for every compactly supported smooth $\xi$ supported in $U$. Writing the last integral in the chart and putting $W_b:=\nabla^aT_{ab}$, a smooth covector field on $U$, step 3.1 gives $\int_UW_b\xi^bw\,d^4x=0$ for every such $\xi$, so $W=0$ on $U$ by [L5]; the integral-of-a-divergence identity in [L5] was already used through [L4]. Since every point lies in a chart, $\nabla^aT_{ab}=0$ on $M$, which proves (d). [step 3.1, L5, algebra] ∎
 
 ## Remarks
 

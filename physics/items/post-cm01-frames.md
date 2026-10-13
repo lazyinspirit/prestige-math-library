@@ -6,13 +6,14 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 4
-deps: [post-cm01-spacetime, def-cm-affine-time-space, def-cm01-units, def-cm-special-orthogonal-group, lem-cm-adapted-coordinates-exist-and-are-unique]
+deps: [post-cm01-spacetime, def-cm-affine-time-space, def-cm01-units, def-cm-special-orthogonal-group, lem-cm-adapted-coordinates-exist-and-are-unique, lem-cm-adapted-charts-and-galilean-transformations]
 dependency_roles:
   post-cm01-spacetime: formulation-prerequisite
   def-cm-affine-time-space: mathematical-premise
   def-cm01-units: formulation-prerequisite
   def-cm-special-orthogonal-group: mathematical-premise
   lem-cm-adapted-coordinates-exist-and-are-unique: mathematical-premise
+  lem-cm-adapted-charts-and-galilean-transformations: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -77,10 +78,7 @@ open real interval with $t(\alpha(s))=s$, used to describe an observer; the
 stationary curves just defined have $I=\mathbb R$. This kinematic definition
 assigns neither a particle label nor a mass or a dynamical law to an observer.
 A particle worldline will separately be assigned to a particle label in the
-particle postulate. Observers of
-two different inertial frames are different families of curves; the congruence
-is a derived object, determined by the frame and the spacetime data, not an
-additional primitive.
+particle postulate. The congruence is a derived object, determined by the frame and the spacetime data, not an additional primitive. Distinct frames can have the same family of parametrized curves: if $o' = o+\sum_jc_je_j$ while $u'=u$ and $e_j'=e_j$, then $\alpha'_{x_0}(t)=\alpha_{x_0+c}(t)$ for all $t$. Thus shifting only the spatial origin relabels this family. Changing $u$ changes the curve family, since every curve in it has the affine derivative $u$.
 
 **(iv) Allowed changes between frames.** The model adopts the class of
 transformations between inertial frames
@@ -94,7 +92,7 @@ velocity** ($[v_{i}]=\ell\tau^{-1}$) and $R\in SO(3)$ a **rotation**
 transformation: that two adapted charts of the same data differ by a
 transformation of this form, with $R\in SO(3)$ because both bases are
 positively oriented, is the mathematical transformation law proved in
-[[lem-cm-adapted-charts-and-galilean-transformations]]. The kinematic
+[[lem-cm-adapted-charts-and-galilean-transformations]]. Uniqueness follows by comparing the coordinate maps on all $(t,x)\in\mathbb R\times\mathbb R^3$: evaluating the time map fixes $b$; evaluating the spatial map at $(0,0)$ fixes $a$, at $(1,0)$ fixes $v$, and at $(0,e_j)$ for the three standard coordinate vectors fixes each column of $R$. The kinematic
 consequences of the law — the transformation of coordinate velocity and
 acceleration, and the frame-independence of zero coordinate acceleration — are
 proved as a statement about the model in
@@ -111,8 +109,7 @@ privilege any one inertial frame — each of them is a legitimate arena for the
 formulation of the model's equations.
 
 **(vi) Kinematic symmetry is not conservation.** The class (iv) is a class of
-coordinate changes. Nothing in this postulate implies that any momentum,
-angular momentum, energy or other quantity is conserved, or that every
+coordinate changes. A quantity is **conserved along a motion** when its value as a function of the frame time is constant on the interval of that motion. No such constancy is asserted here, nor is it asserted that every
 mechanical system's description is invariant in form; a force law must also
 transform appropriately under (iv) to be a law of the model in every frame, and
 an external apparatus or background field can single out frames for the

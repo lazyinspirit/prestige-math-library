@@ -34,15 +34,16 @@ future timelike curve, contrasting the parallel case in which the composite
 displacement stays null.
 
 **Explicit smooth splitting.** [[ex-gr-flat-slab-explicit-splitting]] exhibits
-the rational temporal function $T=t/(1-t)-1/t$ on the flat slab
+the rational temporal function $T=t/(1-t)-1/t+1$ on the flat slab
 $(0,1)\times\mathbb R^3$, computes its past timelike gradient, its Cauchy
-levels, its complete gradient flow with explicit inverse and the orthogonal
+levels, the complete flow of its normalized gradient field
+$X=\nabla T/g(\nabla T,\nabla T)$ with explicit inverse and the orthogonal
 product $g=-\beta\,dT\otimes dT+h_T$, verifying the conclusions of
 [[thm-gr-smooth-cauchy-temporal-splitting]] in a model.
 
 **Completeness is not automatic.**
 [[cex-gr-flat-slab-coordinate-time-flow-incomplete]] shows that the
 coordinate time on the same globally hyperbolic slab has Cauchy levels but an
-incomplete gradient flow, so the completeness clause of the splitting theorem
+incomplete normalized gradient flow, so the completeness clause of the splitting theorem
 is a property of the constructed temporal function and not of an arbitrary
 one.

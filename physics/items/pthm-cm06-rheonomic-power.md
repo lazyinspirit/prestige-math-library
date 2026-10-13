@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 12
-deps: [def-cm06-holonomic-constraint-model, post-cm06-ideal-reaction-law, pthm-cm06-multiplier-balance, post-cm02-force-superposition, def-cm03-centre-of-mass-and-momenta, def-cm03-potential-and-mechanical-energy, def-cm01-units, lem-cm-constraint-multipliers-and-accelerations, thm-cm-work-energy-balance, thm-chain-rule-for-total-derivatives, thm-newton-leibniz-with-interior-derivative, cor-zero-derivative-implies-constant, def-euclidean-inner-product, def-vector-valued-derivative-and-integral, def-interval, lem-finite-sum-laws, def-ck-euclidean-maps-and-diffeomorphisms]
+deps: [def-cm06-holonomic-constraint-model, post-cm06-ideal-reaction-law, pthm-cm06-multiplier-balance, post-cm02-force-superposition, def-cm03-centre-of-mass-and-momenta, def-cm03-potential-and-mechanical-energy, def-cm01-units, lem-cm-constraint-multipliers-and-accelerations, thm-cm-work-energy-balance, thm-chain-rule-for-total-derivatives, thm-continuous-implies-integrable, thm-newton-leibniz-with-interior-derivative, cor-zero-derivative-implies-constant, def-euclidean-inner-product, def-vector-valued-derivative-and-integral, def-interval, lem-finite-sum-laws, def-ck-euclidean-maps-and-diffeomorphisms]
 dependency_roles:
   def-cm06-holonomic-constraint-model: formulation-prerequisite
   post-cm06-ideal-reaction-law: physical-assumption
@@ -18,6 +18,7 @@ dependency_roles:
   lem-cm-constraint-multipliers-and-accelerations: mathematical-premise
   thm-cm-work-energy-balance: mathematical-premise
   thm-chain-rule-for-total-derivatives: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
   thm-newton-leibniz-with-interior-derivative: mathematical-premise
   cor-zero-derivative-implies-constant: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
@@ -29,7 +30,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "The work and energy statements of an ideal holonomic-constraint model with an ambient force map presented through a potential with residual forces: the reaction power equals minus the multiplier paired with the time derivative of the constraint, so scleronomic ideal constraints perform no work, while rheonomic ideal constraints can change the mechanical energy through a term that is not a residual force of the model; the mechanical-energy balance carries that term, conservation holds only for a scleronomic constraint with a static potential and no residual forces, and the integrated work form is stated. The result is a conditional deduction from the adopted model and idealization, with the empirical qualifications of the ideal-reaction postulate carried; no measured value is asserted."
+physical_scope: "The work and energy statements of an ideal holonomic-constraint model with an ambient force map presented through a potential with residual forces: the reaction power equals minus the multiplier paired with the time derivative of the constraint, so scleronomic ideal constraints perform no work, while rheonomic ideal constraints can change the mechanical energy through a term that is not a residual force of the model; the mechanical-energy balance carries that term, a scleronomic constraint with a static potential and vanishing residual forces along the motion is sufficient for conservation, and the integrated work form is stated. These sufficient conditions are not necessary: conservation holds along a motion exactly when the total energy-rate expression vanishes there. The result is a conditional deduction from the adopted model and idealization, with the empirical qualifications of the ideal-reaction postulate carried; no measured value is asserted."
 sources:
   references:
     - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Sections 1.4-1.5, printed pages 19-25 (PDF pages 22-28): ideal constraint reactions annihilate admissible virtual displacements, and time-dependent constraints can do actual work despite zero virtual work"
@@ -110,7 +111,7 @@ value.
 
 [L4] The mathematical work-energy balance ([[thm-cm-work-energy-balance]]): if $U$ is $C^{1}$ on the open set $I\times Q$, $m_{i}x_{i}''(t)=-\nabla_{x_{i}}U(t,x(t))+\delta_{i}(t)$ with maps $\delta_{i}:I\to\mathbb R^{3}$, then $K'(t)=\sum_{i}\langle m_{i}x_{i}''(t),x_{i}'(t)\rangle$, $\frac{d}{dt}U(t,x(t))=\partial_{t}U(t,x(t))+\sum_{i}\langle\nabla_{x_{i}}U(t,x(t)),x_{i}'(t)\rangle$, $\frac{d}{dt}(K+U(t,x(t)))=\partial_{t}U(t,x(t))+\sum_{i}\langle\delta_{i}(t),x_{i}'(t)\rangle$, and $K+U(t,x(t))$ is constant when $\delta_{i}\equiv0$ and $\partial_{t}U\equiv0$.
 
-[L5] Bilinearity of the Euclidean product and linearity of finite sums ([[def-euclidean-inner-product]], [[lem-finite-sum-laws]]); a continuous function on a compact interval is Riemann integrable and the Newton-Leibniz formula integrates a continuous derivative ([[thm-newton-leibniz-with-interior-derivative]], [[def-interval]], [[def-vector-valued-derivative-and-integral]]); a differentiable function on an interval with zero derivative is constant ([[cor-zero-derivative-implies-constant]]).
+[L5] Bilinearity of the Euclidean product and linearity of finite sums ([[def-euclidean-inner-product]], [[lem-finite-sum-laws]]); a continuous function on a closed bounded interval is Riemann integrable ([[thm-continuous-implies-integrable]]), and the Newton-Leibniz formula integrates an integrable derivative when the primitive is continuous on the closed interval and differentiable in its interior ([[thm-newton-leibniz-with-interior-derivative]], [[def-interval]], [[def-vector-valued-derivative-and-integral]]); a differentiable function on an interval with zero derivative is constant ([[cor-zero-derivative-implies-constant]]).
 
 [L6] The scleronomic case: the datum is scleronomic when its constraint locus is time-independent, and then $G_{t}(t,x)=0$ for every $(t,x)\in\Sigma$ for the declared presentation ([[def-cm06-holonomic-constraint-model]] clause (d)); a constrained motion has $(t,x(t))\in\Sigma$ for every $t\in J$.
 
@@ -122,11 +123,11 @@ value.
 
 2.1 Clause 1, scleronomic case and integral: if the datum is scleronomic, then by [L6] the point $(t,x(t))$ lies in $\Sigma$ and $G_{t}(t,x(t))=0$ for every $t\in J$, so step 1.1 gives $R(t)\cdot w(t)=0$; both integrals of clause 1 vanish. In general, $t\mapsto R(t)\cdot w(t)$ is continuous (it is a finite sum of products of continuous functions, [L5]) and the displayed integrals are its integrals and those of $-\lambda\cdot G_{t}$, which are equal by step 1.1. [step 1.1, L5, L6]
 
-2.2 Clause 2: substituting the presentation of [L3] into the equation of motion of [L1], with the unique multiplier $\lambda$ of [L2], gives $m_{i}x_{i}''(t)=-\nabla_{x_{i}}U(t,x(t))+\mathfrak d_{i}(t)+R_{i}(t)$ for every $i$; [L4] applies with $\delta_{i}:=\mathfrak d_{i}+R_{i}$ and gives $E'(t)=\partial_{t}U(t,x(t))+\sum_{i}\langle\mathfrak d_{i}(t)+R_{i}(t),w_{i}(t)\rangle=\partial_{t}U(t,x(t))+\sum_{i}\langle\mathfrak d_{i}(t),w_{i}(t)\rangle+R(t)\cdot w(t)=\partial_{t}U(t,x(t))+\sum_{i}\langle\mathfrak d_{i}(t),w_{i}(t)\rangle-\lambda(t)\cdot G_{t}(t,x(t))$ by step 1.1. [L2, L3, L4, step 1.1, L5, algebra]
+2.2 Clause 2: substituting the presentation of [L3] into the equation of motion of [L1], with the unique multiplier $\lambda$ of [L2], gives $m_{i}x_{i}''(t)=-\nabla_{x_{i}}U(t,x(t))+\mathfrak d_{i}(t)+R_{i}(t)$ for every $i$; [L4] applies with $\delta_{i}:=\mathfrak d_{i}+R_{i}$ and gives $E'(t)=\partial_{t}U(t,x(t))+\sum_{i}\langle\mathfrak d_{i}(t)+R_{i}(t),w_{i}(t)\rangle=\partial_{t}U(t,x(t))+\sum_{i}\langle\mathfrak d_{i}(t),w_{i}(t)\rangle+R(t)\cdot w(t)=\partial_{t}U(t,x(t))+\sum_{i}\langle\mathfrak d_{i}(t),w_{i}(t)\rangle-\lambda(t)\cdot G_{t}(t,x(t))$ by step 1.1. [L1, L2, L3, L4, step 1.1, L5, algebra]
 
 3.1 Clause 3: if the datum is scleronomic then $-\lambda\cdot G_{t}=0$ on $J$ by step 2.1; with $\mathfrak d_{i}\equiv0$ and $\partial_{t}U\equiv0$ the right-hand side of step 2.2 vanishes identically, so $E$ is constant on $J$ by [L5]. [step 2.1, step 2.2, L5]
 
-4.1 Clause 4: by [L4] applied with $\delta_{i}=\mathfrak d_{i}+R_{i}$ as in step 2.2, $K(t_{1})-K(t_{0})=U(t_{0},x(t_{0}))-U(t_{1},x(t_{1}))+\int_{t_{0}}^{t_{1}}\bigl[\partial_{t}U+\sum_{i}\langle\mathfrak d_{i}+R_{i},w_{i}\rangle\bigr]dt$; substituting $\int_{t_{0}}^{t_{1}}R\cdot w\,dt=-\int_{t_{0}}^{t_{1}}\lambda\cdot G_{t}\,dt$ from step 2.1 gives the displayed formula. [L4, step 2.1, L5, algebra] ∎
+4.1 Clause 4: the right-hand side of the derivative identity in step 2.2 is continuous on $J$, since $U$ is $C^2$, the residual forces and $w$ are continuous, $\lambda$ is continuous by [L2] and $G_t$ is continuous. On $[t_0,t_1]\subseteq J$ the Newton-Leibniz formula of [L5] therefore gives $E(t_1)-E(t_0)=\int_{t_0}^{t_1}[\partial_tU+\sum_i\langle\mathfrak d_i,w_i\rangle-\lambda\cdot G_t]dt$. Substituting $E=K+U(t,x(t))$ and rearranging proves clause 4. [L2, L3, L5, step 2.2, algebra] ∎
 
 ## Remarks
 
@@ -134,4 +135,4 @@ value.
 
 - **Where the mechanical energy goes.** For a rheonomic ideal constraint the term $-\lambda\cdot G_{t}$ is the power injected or removed by the constraint mechanism; it is not attributable to the model's residual forces and it is not a potential term. A reduced description in a moving chart or a reduced coordinate can have a conserved reduced energy that differs from the inertial mechanical energy, and that difference is the content of this term in those descriptions; the comparison is carried out by the companions and is not claimed here in general.
 
-- **Conservation is conditional and representation-dependent.** Clause 3 needs all three hypotheses: scleronomic constraint, static potential, no residual forces. With a static potential but a rheonomic constraint the mechanical energy generally changes; the normalization of $U$ by a time-dependent additive function changes $E$ and adds $c'(t)$ to the right-hand side of clause 2, exactly as in [[def-cm03-potential-and-mechanical-energy]] clause (c).
+- **Conservation is conditional and representation-dependent.** Clause 3 gives sufficient conditions: a scleronomic constraint, a static potential and vanishing residual forces along the motion. They are not necessary; by clause 2 and the zero-derivative criterion, energy is constant exactly when its displayed total rate vanishes along the motion. For example, with one label, $O=\mathbb R\times\mathbb R^3$, $G(t,x)=x_1-vt$ for a constant nonzero speed $v$, $F=0$, $U=0$ and $x(t)=(vt,0,0)$, the regular constraint is rheonomic, but $R=0$, $\lambda=0$ and $E=mv^2/2$ is constant. More generally the three rate terms can cancel. The normalization of $U$ by a time-dependent additive function changes $E$ and adds $c'(t)$ to the right-hand side of clause 2, exactly as in [[def-cm03-potential-and-mechanical-energy]] clause (c).

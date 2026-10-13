@@ -58,9 +58,7 @@ sources:
         Section 12.3 Theorem 12.12 printed pages 253-256 (PDF pages 265-268):
         asymptotic completeness (Enss) for short-range potentials"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.2
-        printed pages 263-270 (PDF pages 271-278): the S-matrix and its
-        interpretation for scattering experiments"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.2, printed pages 261-267 (PDF pages 269-275)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 verification:
   precheck: pass

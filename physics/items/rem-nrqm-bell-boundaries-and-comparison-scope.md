@@ -47,12 +47,14 @@ physical_scope: "A record of the boundaries of the comparison between the
   exclusion rests, the ideal sharp character of the declared measurements, the
   separate detection, selection and finite-sample models needed for any
   comparison with recorded data, and the no-signalling properties shared by both
-  sides. The remark asserts no empirical result and no claim about nature."
+  sides. Setting-independent specification selection is a sufficient condition
+  for transfer of the CHSH bound, not a necessary condition. The remark asserts
+  no empirical result and no claim about nature."
 sources:
   references:
     - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell
-        nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.A and
-        Section II.C, PDF pages 2-4 and 8-13: the definition of a local model,
+        nonlocality', Reviews of Modern Physics 86 (2014) 419, Section I.A and
+        Section II.C.1.a, PDF pages 2-3 and 12-13: the definition of a local model,
         the CHSH inequality and the quantum bound, and the distinction between
         the declared model class and broader interpretations"
       url: "https://arxiv.org/pdf/1303.2849"
@@ -92,7 +94,7 @@ verification:
   exists; it excludes the declared local-response class for these tables.
 
 - **Assumptions used.** The deduction rests on the framework readings P1, P2,
-  P3, P6 and P7 fixed by
+  P3, P5, P6 and P7 fixed by
   [[def-nrqm-bell-declared-spin-arrangement]], on the declared composite,
   preparation and spin-half assignments, on the ideal sharp character of the
   declared measurements ([[def-nrqm-measurement-framework-declared-measurements-and-instruments]]),
@@ -111,10 +113,13 @@ verification:
   arrangement and require their own apparatus models. In particular an
   observed violation on a recorded sub-ensemble does not by itself contradict
   the declared model class: the recorded tables are conditional tables, and
-  the CHSH bound transfers to them only when the selection is itself
-  setting-independent, as in
+  the CHSH bound transfers to them when the selection is determined by a
+  positive-probability event of the specification space that is the same for
+  every setting pair, as in
   [[lem-nrqm-bell-setting-independent-selection-closure]]; that lemma is a
-  sufficient condition and is not a claim about any real detector. Finite
+  sufficient condition, not a necessary one, and is not a claim about any
+  real detector. A different selection model may also yield representable
+  conditional tables; its consequences require their own justification. Finite
   samples add a sampling model and its fluctuations, treated on the examples
   page. Whether a finite record deductively excludes one of two specified
   models depends on their sampling supports: a record with positive
@@ -125,7 +130,13 @@ verification:
 
 - **No-signalling is not the separator.** Every local-response model is
   no-signalling ([[prop-nrqm-bell-local-representations-are-no-signalling]]),
-  and the arrangement's marginals are also setting-independent
+  and every declared arrangement's marginals are also setting-independent:
+  summing its joint law over $\delta$ gives
+  $\nu^{\rho,A}_{ij}(\varepsilon)=\operatorname{tr}(\rho(P_{a_i,\varepsilon}\otimes I))$
+  because $\sum_\delta P_{b_j,\delta}=I$, and the symmetric sum is
+  $\nu^{\rho,B}_{ij}(\delta)=\operatorname{tr}(\rho(I\otimes P_{b_j,\delta}))$
+  ([[def-nrqm-bell-declared-spin-arrangement]] clauses (a), (d)). For the
+  singlet both marginals are $1/2$
   ([[texp-nrqm-bell-singlet-arrangement-contrast]] clause (d)); a discarded
   declared local instrument on one factor leaves the other factor unchanged
   ([[pthm-nrqm-composites-local-instruments-and-no-signalling]] clause (b)).

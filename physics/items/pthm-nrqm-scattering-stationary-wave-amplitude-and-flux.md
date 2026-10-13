@@ -63,9 +63,7 @@ sources:
         the scattering amplitude, the differential cross section, partial waves
         and hard-sphere scattering"
       url: "https://farside.ph.utexas.edu/teaching/qmech/qmech.pdf"
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections
-        12.2-12.3 printed pages 263-270 (PDF pages 271-278): the scattering
-        amplitude, the cross section and the i-epsilon prescription"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 12.2-12.3, printed pages 261-270 (PDF pages 269-278)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 verification:
   precheck: pass
@@ -137,7 +135,7 @@ measured count rate.
 
 [F4] **Unit-shape and physical current readings.** The mathematical current functional is $\mathbf j^{\mathrm{unit}}[\psi]=(\hbar/m)\operatorname{Im}(\overline\psi\nabla\psi)$. For the unit incident shape its value is $(\hbar k/m)d$, and for the exact outgoing shape $fe^{ikr}/r$ its radial value is $(\hbar k/m)|f|^2/r^2$ ([[lem-nrqm-scattering-three-dimensional-current-and-flux]] clause (c)). For the declared constant $n_{\mathrm{inc}}>0$, the beam model reads the physical field as $\sqrt{n_{\mathrm{inc}}}\psi$, so the quadratic functional gives $\mathbf j[\sqrt{n_{\mathrm{inc}}}\psi]=n_{\mathrm{inc}}\mathbf j^{\mathrm{unit}}[\psi]$, and its cross sections are ratios with $J_{\mathrm{inc}}=n_{\mathrm{inc}}\hbar k/m$ ([[def-nrqm-scattering-stationary-beam-and-cross-section-model]] (b)-(d)).
 
-[F5] **The beam model's solubility vocabulary.** A generalized stationary solution is a $C^{2}$ function on the complement of $\operatorname{supp}V$ satisfying the stationary equation there with an outgoing asymptotic reading and a scattering amplitude read in metres ([[def-nrqm-scattering-stationary-beam-and-cross-section-model]] clause (c)).
+[F5] **The beam model's solubility vocabulary.** A generalized stationary solution belongs to $H^2_{\mathrm{loc}}(\mathbb R^3)$, has $V\Psi\in L^2_{\mathrm{loc}}$, satisfies the stationary equation distributionally on $\mathbb R^3$, and is $C^2$ on the complement of the essential closed support of $V$. On this exterior it satisfies the free equation $-\hbar^2\Delta\Psi/(2m)=E\Psi$ pointwise; the equation with the declared $V$ holds almost everywhere, or pointwise after replacing $V$ by its zero exterior representative. Its outgoing reading has the specified amplitude and remainder bounds ([[def-nrqm-scattering-stationary-beam-and-cross-section-model]] clause (c)).
 
 ## Proof
 
@@ -153,7 +151,7 @@ measured count rate.
 
 4.1 By [F1] the unit-shape scattered field $\Psi_{\mathrm{sc}}=\Psi-e^{ikd\cdot x}$ has radial mathematical current $(\hbar k/m)|f_k|^2/r^2+O(r^{-3})$ uniformly. Write $\Psi_{\mathrm{sc}}=u+iv$; the physical field has real and imaginary parts $\sqrt{n_{\mathrm{inc}}}u,\sqrt{n_{\mathrm{inc}}}v$. Since the scale is constant, its current is $(\hbar/m)[(\sqrt{n_{\mathrm{inc}}}u)\nabla(\sqrt{n_{\mathrm{inc}}}v)-(\sqrt{n_{\mathrm{inc}}}v)\nabla(\sqrt{n_{\mathrm{inc}}}u)]=n_{\mathrm{inc}}(\hbar/m)(u\nabla v-v\nabla u)$ by [F4]. Thus the physical scattered current is the display in (c), and the same calculation on the unit incident plane wave gives $J_{\mathrm{inc}}=n_{\mathrm{inc}}\hbar k/m>0$. Dividing yields $\lim_{r\to\infty}r^2j_r^{\mathrm{sc}}/J_{\mathrm{inc}}=|f_k|^2$. Smoothness and boundedness of $f_k$ on the sphere, with [F1]'s uniform error, give the finite total cross section $\sigma=\int_{S^2}|f_k|^2d\Omega$. The unit-shape amplitude stays in metres and the density cancels from both cross-section readings. This is (c). [F1, F4, step 3.1, algebra]
 
-5.1 By step 2.1 and step 3.1 the constructed $\Psi$ is $C^{2}$ on the complement of the essential closed support of $V$: near each such point the convolution integrates the compactly supported $L^1$ density $Wu$ against $G_k(x-y)$ at a positive distance from its singularity, so its derivatives of every fixed order are bounded on a smaller neighborhood and differentiation under that integral is valid; the incident exponential is smooth too, satisfies the stationary equation there and has the outgoing reading with amplitude $f_{k}$ in metres; by [F5] it is a generalized stationary solution of the beam model at energy $E$ and direction $d$, and the construction determines it through the explicit invertible problem, so no other function with the same equation and outgoing reading arises from this construction. This is (d) and completes the proof. [F5, step 2.1, step 3.1, algebra] ∎
+5.1 By step 2.1 the constructed $\Psi$ lies in $H^2_{\mathrm{loc}}$ and satisfies the global distributional stationary equation after the scaling of [F3]; boundedness of $V$ gives $V\Psi\in L^2_{\mathrm{loc}}$. On the complement of its essential closed support, the convolution integrates the compactly supported $L^1$ density $Wu$ at a positive distance from the kernel singularity locally, so differentiation under the integral gives a smooth field. Here $V=0$ almost everywhere; thus the continuous free-equation residual vanishes distributionally and hence pointwise, as in [F5]. The equation with the declared representative $V$ therefore holds almost everywhere there, and pointwise for its zero exterior representative. Step 3.1 gives the outgoing reading and all required remainder bounds. These facts verify the beam model's generalized stationary solution conditions. The invertible integral problem uniquely fixes the constructed $u$ and hence $\Psi$, which proves the construction-specific uniqueness in (d) and completes the proof. [F3, F5, step 2.1, step 3.1, algebra] ∎
 
 ## Remarks
 

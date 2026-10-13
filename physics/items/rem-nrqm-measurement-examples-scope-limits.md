@@ -6,7 +6,7 @@ domain: physics
 title: "What the worked instruments of the companion page establish"
 status: draft
 origin: pipeline
-dependency_level: 14
+dependency_level: 12
 deps:
   [
     ex-nrqm-measurement-absorption-instrument,

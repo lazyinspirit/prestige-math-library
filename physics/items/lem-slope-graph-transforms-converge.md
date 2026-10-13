@@ -6,8 +6,10 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 1
-deps: [def-stable-unstable-cones-and-line-slopes, def-abs-value, lem-of-abs-value, thm-geometric-series, def-series, thm-nonnegative-series-bounded-partial-sums, lem-geometric-sequence-null, def-sequence, thm-algebra-of-limits, lem-limit-preserves-order, def-metric-convergence, def-complete-ordered-field]
+deps: [lem-of-triangle-inequality, thm-cauchy-criterion-via-lub, def-stable-unstable-cones-and-line-slopes, def-abs-value, lem-of-abs-value, thm-geometric-series, def-series, thm-nonnegative-series-bounded-partial-sums, lem-geometric-sequence-null, def-sequence, thm-algebra-of-limits, lem-limit-preserves-order, def-metric-convergence, def-complete-ordered-field]
 dependency_roles:
+  lem-of-triangle-inequality: mathematical-premise
+  thm-cauchy-criterion-via-lub: mathematical-premise
   def-stable-unstable-cones-and-line-slopes: mathematical-premise
   def-abs-value: mathematical-premise
   lem-of-abs-value: mathematical-premise
@@ -62,13 +64,13 @@ furthermore $DF_a(z_n)$ maps the line $\{(h_nv,v):v\in\mathbb R\}$ onto the line
 
 **Given:** The parameter $a$, the aperture $k\in(0,1)$, the bound $L\ge2$, the sequence $s$ with $|s_n|\ge L$, the cones, slope maps and matrix data of [[def-stable-unstable-cones-and-line-slopes]], and the recursively defined slope families $h^{(m)}$, $r^{(m)}$.
 
-[F1] Cone, slope and matrix data ([[def-stable-unstable-cones-and-line-slopes]]): $DF_a(x,y)(u,v)=(v,-u+2yv)$ and $D(F_a^{-1})(x,y)(u,v)=(2xu-v,u)$; $C^u_k=\{|u|\le k|v|\}$, $C^s_k=\{|v|\le k|u|\}$, $C^u_k\cap C^s_k=\{0\}$; $DF_a(x,y)$ carries the line $\{(hv,v)\}$ to the line with slope $\Phi_y(h)=1/(2y-h)$, and $D(F_a^{-1})(x,y)$ carries the line $\{(u,ru)\}$ to the line with slope $\Psi_x(r)=1/(2x-r)$.
+[F1] Cone, slope and matrix data ([[def-stable-unstable-cones-and-line-slopes]]): $DF_a(x,y)(u,v)=(v,-u+2yv)$ and $D(F_a^{-1})(x,y)(u,v)=(2xu-v,u)$; $C^u_k=\{|u|\le k|v|\}$, $C^s_k=\{|v|\le k|u|\}$, $C^u_k\cap C^s_k=\{0\}$. For $h\ne2y$, the matrix gives $DF_a(x,y)(hv,v)=(v,(2y-h)v)$, so its image line has slope $\Phi_y(h)=1/(2y-h)$. Likewise, for $r\ne2x$, $D(F_a^{-1})(x,y)(u,ru)=((2x-r)u,u)$, so its image line has slope $\Psi_x(r)=1/(2x-r)$.
 
-[F2] Absolute value and order ([[def-abs-value]], [[lem-of-abs-value]], [[def-complete-ordered-field]]): $|uv|=|u||v|$; $|u-w|\ge|u|-|w|$; if $|u|\le k|v|$ and $0<k<1$ then $\max(|u|,|v|)=|v|$; if $|v|\le k|u|$ then $\max(|u|,|v|)=|u|$; and the stated aperture condition gives $1/\lambda\le k$.
+[F2] Absolute value and order ([[def-abs-value]], [[lem-of-abs-value]], [[lem-of-triangle-inequality]], [[def-complete-ordered-field]]): $|uv|=|u||v|$; $|u-w|\ge|u|-|w|$; if $|u|\le k|v|$ and $0<k<1$ then $\max(|u|,|v|)=|v|$; if $|v|\le k|u|$ then $\max(|u|,|v|)=|u|$; and the stated aperture condition gives $1/\lambda\le k$.
 
 [F3] Series and geometric sequences ([[thm-geometric-series]], [[def-series]], [[thm-nonnegative-series-bounded-partial-sums]], [[lem-geometric-sequence-null]]): for $0\le\rho<1$ the series $\sum_{j\ge0}\rho^j$ converges, $\rho^m\to0$, and $\sum_{j\ge m}\rho^j=\rho^m/(1-\rho)$.
 
-[F4] Limits of real sequences ([[def-sequence]], [[thm-algebra-of-limits]], [[lem-limit-preserves-order]], [[def-metric-convergence]]): limits of convergent real sequences are compatible with addition, multiplication, division by nonzero limits, and with weak inequalities; a limit of numbers in a closed interval $[-k,k]$ lies in $[-k,k]$.
+[F4] Completeness and limits of real sequences ([[thm-cauchy-criterion-via-lub]], [[def-sequence]], [[thm-algebra-of-limits]], [[lem-limit-preserves-order]], [[def-metric-convergence]]): every Cauchy real sequence converges; limits of convergent real sequences are compatible with addition, multiplication, division by nonzero limits, and with weak inequalities; a limit of numbers in a closed interval $[-k,k]$ lies in $[-k,k]$.
 
 
 
@@ -84,7 +86,7 @@ furthermore $DF_a(z_n)$ maps the line $\{(h_nv,v):v\in\mathbb R\}$ onto the line
 
 2.3 Slope contractions: let $|y|\ge L$ and $h,h'\in[-k,k]$; by step 1.1, $|2y-h|\ge2L-k=\lambda>0$ and $|2y-h'|\ge\lambda$, so $\Phi_y$ is defined on $[-k,k]$, $|\Phi_y(h)|\le1/\lambda\le k$, and $$|\Phi_y(h)-\Phi_y(h')|=\frac{|h-h'|}{|2y-h||2y-h'|}\le\lambda^{-2}|h-h'|=\rho|h-h'| .$$ The same computation with $\Psi_x$ proves the second assertion. [given, step 1.1, F1, F2, algebra]
 
-3.1 Unstable slopes, uniform bounds and contraction: define $h^{(0)}_n:=0$, $h^{(m+1)}_n:=\Phi_{s_{n-1}}(h^{(m)}_{n-1})$. By induction, step 2.3 gives $|h^{(m)}_n|\le1/\lambda$ for all $m\ge1$ and $n$, and $|h^{(m+1)}_n-h^{(m)}_n|\le\rho^m/\lambda$ for all $m\ge0$. Hence for $m'\ge m$, $$|h^{(m')}_n-h^{(m)}_n|\le\sum_{j=m}^{m'-1}\rho^j/\lambda\le\frac{\rho^m}{\lambda(1-\rho)},$$ uniformly in $n$. Thus $(h^{(m)}_n)_m$ is Cauchy with a bound independent of $n$; by [F3] and [F4] it converges to some $h_n$, and $|h_n|\le1/\lambda\le k$. [given, step 2.3, F2, F3, F4, algebra]
+3.1 Unstable slopes, uniform bounds and contraction: define $h^{(0)}_n:=0$, $h^{(m+1)}_n:=\Phi_{s_{n-1}}(h^{(m)}_{n-1})$. By induction, step 2.3 gives $|h^{(m)}_n|\le1/\lambda$ for all $m\ge1$ and $n$, and $|h^{(m+1)}_n-h^{(m)}_n|\le\rho^m/\lambda$ for all $m\ge0$. Hence for $m'\ge m$, $$|h^{(m')}_n-h^{(m)}_n|\le\sum_{j=m}^{m'-1}\rho^j/\lambda\le\frac{\rho^m}{\lambda(1-\rho)},$$ uniformly in $n$. Thus $(h^{(m)}_n)_m$ is Cauchy; completeness in [F4] gives its limit $h_n$, with $|h_n|\le1/\lambda\le k$. Passing $m'\to\infty$ in the same estimate gives $|h_n-h^{(m)}_n|\le\rho^m/(\lambda(1-\rho))$ for every $n$, proving uniform convergence. [given, step 2.3, F2, F3, F4, algebra]
 
 3.2 Stable slopes: the same argument with $r^{(0)}_n:=0$, $r^{(m+1)}_n:=\Psi_{s_n}(r^{(m)}_{n+1})$ gives $|r^{(m+1)}_n-r^{(m)}_n|\le\rho^m/\lambda$, limits $r_n\in[-k,k]$ satisfying $r_n=\Psi_{s_n}(r_{n+1})=1/(2s_n-r_{n+1})$. [given, step 2.3, F2, F3, F4]
 

@@ -67,12 +67,12 @@ statement uses piecewise fields; the unqualified term means globally smooth.
 
 **(c) Geodesic variations.** A **geodesic variation with affine
 parameter $s$** is a smooth map $F:J_0\times I\to M$, where
-$J_0\subseteq\mathbb R$ is an open interval with nonempty interior, such that
+$J_0\subseteq\mathbb R$ is an open interval containing $0$, such that
 for every $r\in J_0$ the curve $s\mapsto F(r,s)$ is a geodesic with affine
-parameter $s$. Its **variation field** is the field $s\mapsto\partial_rF(r,s)$
+parameter $s$. Its **variation field** is the field $s\mapsto\partial_rF(0,s)$
 along the curve $s\mapsto F(0,s)$. The variation field of a geodesic
 variation is a Jacobi field along that curve
-([[thm-gr-jacobi-equation-and-geodesic-deviation]] clause (c)).
+([[thm-gr-jacobi-equation-and-geodesic-deviation]] clause (b)).
 
 **(d) Conjugate instants and multiplicity.** Let $s_0<s_1$ be points of $I$.
 The event $\gamma(s_1)$ is **conjugate to** $\gamma(s_0)$ **along $\gamma$**
@@ -83,11 +83,12 @@ the **multiplicity** of the conjugate instant is the dimension of the real
 vector space of Jacobi fields vanishing at $s_0$ and $s_1$; the fields
 vanishing at $s_0$ form a $4$-dimensional space and the multiplicity is at
 most $4$, since a Jacobi field is determined by its value and derivative at
-$s_0$ ([[thm-gr-jacobi-equation-and-geodesic-deviation]] clause (d)). For a
+$s_0$ ([[thm-gr-jacobi-equation-and-geodesic-deviation]] clause (c)). For a
 geodesic with $\gamma(s_0)=p$ and $\gamma'(s_0)=v$, the corresponding
 possibility of conjugacy is measured by the derivative of the exponential
-map at $s_1v$
-([[lem-gr-conjugacy-via-the-exponential-map]]); that equivalence is proved,
+map at $(s_1-s_0)v$, provided this vector lies in its domain
+([[lem-gr-conjugacy-via-the-exponential-map]] applied to
+$t\mapsto\gamma(s_0+t)$ on $[0,s_1-s_0]$); that equivalence is proved,
 not assumed here. No conjugate instant is asserted to exist.
 
 **(e) The normal bundle.** If $\gamma$ is future timelike with

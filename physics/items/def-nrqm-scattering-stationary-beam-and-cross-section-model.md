@@ -12,6 +12,8 @@ deps:
   [
     def-nrqm-scattering-framework-short-range-model,
     lem-nrqm-scattering-three-dimensional-current-and-flux,
+    thm-nrqm-controlled-dynamics-stationary-outgoing-integral-and-flux,
+    def-sobolev-space-wkp-and-its-norm,
     post-nrqm-framework-state-and-composition,
     post-nrqm-framework-observable-and-probability,
     post-nrqm-framework-autonomous-dynamics,
@@ -27,6 +29,8 @@ deps:
 dependency_roles:
   def-nrqm-scattering-framework-short-range-model: formulation-prerequisite
   lem-nrqm-scattering-three-dimensional-current-and-flux: mathematical-premise
+  thm-nrqm-controlled-dynamics-stationary-outgoing-integral-and-flux: mathematical-premise
+  def-sobolev-space-wkp-and-its-norm: mathematical-premise
   post-nrqm-framework-state-and-composition: formulation-prerequisite
   post-nrqm-framework-observable-and-probability: formulation-prerequisite
   post-nrqm-framework-autonomous-dynamics: formulation-prerequisite
@@ -53,10 +57,7 @@ physical_scope: "The pair's declared stationary elastic beam model for the
   cross section, and no single-particle trajectory claim."
 sources:
   references:
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.3
-        printed pages 264-270 (PDF pages 272-278): cross sections and scattering
-        experiments, incident and scattered flux and the differential cross
-        section"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.3, printed pages 267-270 (PDF pages 275-278)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "R. Fitzpatrick, Quantum Mechanics (University of Texas at Austin,
         author-hosted course text), Sections 15.1-15.4 printed pages 209-217:
@@ -115,18 +116,53 @@ the density factor supplies the declared physical beam normalization.
 **(c) Scattered-wave reading and generalized stationary solution.** For a
 declared short-range potential $V$ the model declares a **generalized
 stationary solution** at energy $E$ and direction $d$ to be a function
-$\Psi:\mathbb R^{3}\to\mathbb C$ of class $C^{2}$ on the complement of
-$\operatorname{supp}V$ that satisfies
-$$-\frac{\hbar^{2}}{2m}\Delta\Psi+V\Psi=E\Psi$$
-pointwise there and has the **outgoing asymptotic reading**
+$\Psi:\mathbb R^{3}\to\mathbb C$ in $H^2_{\mathrm{loc}}(\mathbb R^3)$,
+meaning that all weak derivatives of order at most two are locally square
+integrable ([[def-sobolev-space-wkp-and-its-norm]]), with $V\Psi\in L^2_{\mathrm{loc}}$,
+of class $C^{2}$ on the complement of the essential closed support of $V$,
+and satisfying the equation on all of $\mathbb R^3$ distributionally:
+$$\int_{\mathbb R^3}\Psi(x)\left[-\frac{\hbar^2}{2m}\Delta\eta(x)+(V(x)-E)\eta(x)\right]dx=0\qquad(\eta\in C_c^\infty(\mathbb R^3;\mathbb C)).$$
+Here the essential closed support is the complement of the union of open
+sets on which $V=0$ almost everywhere; the test functions are smooth and
+compactly supported; $\Delta=\sum_{i=0}^{2}\partial_i^2$ uses the spatial
+coordinate convention of the current lemma. Outside the essential closed
+support, $V=0$ almost everywhere and $\Psi$ is $C^2$, so the continuous
+free-equation residual has zero test pairing and hence vanishes pointwise:
+$-\frac{\hbar^2}{2m}\Delta\Psi=E\Psi$. The equation containing the declared
+representative $V(x)$ holds almost everywhere there; it holds pointwise there
+when $V$ is replaced by its zero representative on this exterior open set.
+No pointwise equation with arbitrary null-set values of $V$ is asserted.
+The solution has the **outgoing asymptotic reading**
 $$\Psi(x)=e^{ikd\cdot x}+\frac{f_{k}(\Omega)}{r}e^{ikr}+\mathcal E(x),\qquad x=r\Omega,\ r\to\infty,$$
 with a **scattering amplitude** function $f_k:S^2\to\mathbb C$, read in
 metres relative to the unit incident shape, and a physical beam field
 $\Phi:=\sqrt{n_{\mathrm{inc}}}\Psi$ with unit $\mathrm{m^{-3/2}}$. The same
 constant factor multiplies its incident, outgoing and remainder terms;
 $f_k$ remains the amplitude relative to the incident field, in metres.
-Here $\Omega:=x/r$ is the **outgoing unit direction**, and the precise decay
-of the remainder $\mathcal E$ is fixed by the existence theorem of this page.
+Here $\Omega:=x/r$ is the **outgoing unit direction**. Require
+$f_k\in C^1(S^2)$ in the radial-extension convention of
+[[lem-nrqm-scattering-three-dimensional-current-and-flux]] (c), and require
+$|\mathcal E(r,\Omega)|+|\partial_r\mathcal E(r,\Omega)|\le Cr^{-2}$
+uniformly in $\Omega$ for all sufficiently large $r$, with some finite $C$.
+For the bounded compact-support class the model selects the outgoing
+integral solution of
+[[thm-nrqm-controlled-dynamics-stationary-outgoing-integral-and-flux]],
+with its potential parameter replaced by $W_x=2mV/\hbar^2$. Explicitly,
+choose $R>0$ enclosing the essential support, put
+$G_k(z)=e^{ik|z|}/(4\pi|z|)$ for $z\ne0$, and on $L^2(B_R;\mathbb C)$ put
+$K_ku(x)=\int_{B_R}G_k(x-y)W_x(y)u(y)dy$. Select
+$u=(I+K_k)^{-1}(u_{\mathrm{inc}}|_{B_R})$ and
+$\Psi(x)=u_{\mathrm{inc}}(x)-\int_{B_R}G_k(x-y)W_x(y)u(y)dy$,
+using the locally continuous representative supplied by $H^2_{\mathrm{loc}}$.
+The cited theorem proves invertibility and the global equation, with a smooth
+amplitude and these uniform remainder bounds. The selection is independent
+of enlarging $R$: the restriction of a solution constructed in a larger ball
+solves the smaller invertible integral equation, and $W_x=0$ outside the
+smaller ball makes both global integrals identical. Hence the compact-support
+model determines $\Psi$ and $f_k$ from $V,k,d$; arbitrary exterior fields
+and arbitrary interior extensions are excluded. For the general resolvent-tail
+class these requirements define a conditional reading only, without an
+existence or uniqueness assertion.
 The **scattered physical field** is
 $\Phi_{\mathrm{sc}}:=\sqrt{n_{\mathrm{inc}}}(\Psi-u_{\mathrm{inc}})$.
 The physical scattered radial current density, obtained by applying the
@@ -154,8 +190,9 @@ $$\frac{d\sigma}{d\Omega}(\Omega):=\lim_{r\to\infty}\frac{r^{2}\,j^{\mathrm{sc}}
 read in $\mathrm{m^{2}\,sr^{-1}}$, and the **total cross section**
 $$\sigma:=\int_{S^{2}}\frac{d\sigma}{d\Omega}(\Omega)\,d\Omega =\int_{S^{2}}|f_{k}(\Omega)|^{2}\,d\Omega,$$
 read in $\mathrm{m^{2}}$, whenever the displayed limit and integral exist; the
-existence and finiteness of both are proved on this page for the declared
-classes. The common positive density factor cancels in the ratio,
+existence and finiteness of both are proved on this page for the bounded
+compact-support class at $k>0$. No stationary existence or finite
+cross-section result is asserted here for the general resolvent-tail class. The common positive density factor cancels in the ratio,
 $r^2j_r^{\mathrm{sc}}/J_{\mathrm{inc}}\to |f_k|^2$, so the cross sections are
 independent of the declared $n_{\mathrm{inc}}$. This normalization supplies
 no relation to the energy outcome law of P2 and no assertion that an $L^2$

@@ -86,7 +86,7 @@ relation and no empirical value.
 
 [F1] Mass balance ([[post-cm17-mass-balance]]): for every material subregion $B'\subseteq B$ and every $t\in J_0$, $\frac{d}{dt}\int_{\chi_t(B')}\rho(t,x)\,dx=0$.
 
-[F2] Local mass balance ([[thm-cm-local-mass-balance]]): under the stated hypotheses, (CM) for every material subregion and every $t\in J_0$ is equivalent to $\partial_t\rho+\operatorname{div}(\rho u)=0$ on $J_0\times\chi_t(B)$; the converse in that theorem uses the equation on a neighbourhood of the swept region.
+[F2] Local mass balance ([[thm-cm-local-mass-balance]]): under the stated hypotheses, (CM) for every material subregion and every $t\in J_0$ implies $\partial_t\rho+\operatorname{div}(\rho u)=0$ on the current interior; conversely, that equation on a neighbourhood of the swept region implies (CM).
 
 [F3] Transport and material derivative ([[pthm-cm17-transport-and-material-derivative]]): for every label $X\in B$, $\frac{d}{dt}f(t,\chi(t,X))=D_tf(t,\chi(t,X))=(\partial_tf+\nabla f\cdot u)(t,\chi(t,X))$ for $C^1$ spatial fields $f$, under the same axiom and kinematic hypotheses.
 

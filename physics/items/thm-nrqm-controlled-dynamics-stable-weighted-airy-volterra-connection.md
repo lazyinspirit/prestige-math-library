@@ -29,11 +29,12 @@ sources:
 
 ## Statement
 
-Adopt the hypotheses and notation of
+Assume Countable Choice ([[def-countable-choice]]). Adopt the hypotheses and notation of
 [[thm-nrqm-controlled-dynamics-liouville-turning-point-transformation]]: $q\in C^5$
 with a single simple zero at $0$, $q'(0)>0$, transformed equation
 $w''=[\zeta/h^2+R(\zeta)]w$ on $\zeta([-x_-,x_+])$, $a>0$ the Liouville factor
-and $R$ continuous bounded. Let
+and $R$ continuous bounded. Put $b:=-\zeta(-x_-)>0$ and $c:=\zeta(x_+)>0$,
+so the transformed interval is $[-b,c]$. Let
 $A_h(\zeta):=A(\zeta/h^{2/3})$, $B_h(\zeta):=B(\zeta/h^{2/3})$ for the Airy
 functions of
 [[thm-nrqm-controlled-dynamics-airy-envelopes-and-asymptotic-coefficients]]
@@ -60,7 +61,7 @@ growing forbidden solution to the corresponding cosine, with absolute errors bou
 
 ## Facts & Assumptions
 
-**Given:** the transformed equation $w''=[\zeta/h^2+R]w$, the Airy functions and their envelopes, and the terminal point $c$.
+**Given:** Countable Choice, the transformed equation $w''=[\zeta/h^2+R]w$ on $[-b,c]$, the Airy functions and their envelopes, and the terminal point $c$.
 
 [F1] Airy functions satisfy $A''=zA$, $B''=zB$ with Wronskian $AB'-A'B=\pi^{-1}$; the envelope bounds of [[thm-nrqm-controlled-dynamics-airy-envelopes-and-asymptotic-coefficients]] (c) hold with constants independent of $h$ ([[thm-nrqm-controlled-dynamics-airy-envelopes-and-asymptotic-coefficients]]).
 

@@ -57,7 +57,7 @@ verification:
 ## Statement
 
 Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$
-([[def-countable-choice]]). Let $s\ge5$, let $A^\mu,B$ be a periodic symmetric
+([[def-countable-choice]]). Let $s\ge5$ be an integer, let $A^\mu,B$ be a periodic symmetric
 hyperbolic coefficient family on the open set $O\subseteq\mathbb R^m$, let
 $K\subseteq O$ be compact and $R\ge0$.
 
@@ -75,7 +75,7 @@ from every datum with values in $K$ and norm at most $R$, with values in $K'$
 and the bounds $C(1+R)$ of that theorem. Then for all such data $u_0,v_0$ with
 solutions $u,v$
 $$\|u(t)-v(t)\|_{H^{s-1}}\le C'\,e^{C'|t|}\,\|u_0-v_0\|_{H^{s-1}}\qquad(|t|<T),$$
-with $C'=C'(A^\mu,B,K',R,s)$, the fixed compact coefficient time slab containing $[-T,T]$ being included in the coefficient data.
+with $C'=C'(A^\mu,B,K,K',R,s)$, the fixed compact coefficient time slab containing $[-T,T]$ being included in the coefficient data.
 
 ## Facts & Assumptions
 
@@ -99,7 +99,7 @@ with $C'=C'(A^\mu,B,K',R,s)$, the fixed compact coefficient time slab containing
 
 ## Proof
 
-1.1 (Homogeneous forcing.) Put $r=s-1$ and $w=u-v$, and define $f=-(A^0(u)-A^0(v))\partial_tv-(A^i(u)-A^i(v))\partial_i v-B(u)+B(v)$. The difference bound of [L3] and the $H^r$ algebra bound give $\|f\|_{H^r}\le C\|w\|_{H^r}$, since the derivatives of $v$ have bounded $H^r$ norms by [L4]. Smooth cutoff extension in the proved supplier gives these estimates on the actual compact value sets without assuming convexity. Total coefficient derivatives $\dot a=A_t^0(u)+A_u^0(u)\partial_tu$ and $\partial_i a_i$ are bounded in $L^\infty$ by those same solution bounds. [L1, L3, L4, algebra]
+1.1 (Homogeneous forcing and constant dependence.) In (a) the common solution norm bound is $R$; in (b) put $M=C_{\mathrm{ex}}(1+R)$, where $C_{\mathrm{ex}}$ is the bound furnished by [[thm-gr-periodic-symmetric-hyperbolic-existence]], and use $M$ as the norm radius in [L3], [L4]. Thus the comparison constants in (b) depend on $A^\mu,B,K,K',R,s$ and the fixed coefficient time slab, through $C_{\mathrm{ex}}$; no independence from $K$ is inferred. Put $r=s-1$ and $w=u-v$, and define $f=-(A^0(u)-A^0(v))\partial_tv-(A^i(u)-A^i(v))\partial_i v-B(u)+B(v)$. The difference bound of [L3] and the $H^r$ algebra bound give $\|f\|_{H^r}\le C\|w\|_{H^r}$, since the derivatives of $v$ have bounded $H^r$ norms by [L4]. Smooth cutoff extension in the proved supplier gives these estimates on the actual compact value sets without assuming convexity. Total coefficient derivatives $\dot a=A_t^0(u)+A_u^0(u)\partial_tu$ and $\partial_i a_i$ are bounded in $L^\infty$ by those same solution bounds. [L1, L3, L4, algebra]
 
 
 1.2 ($L^2$ uniqueness for all stated classical solutions.) Set $E_0(t)=\int w^{\mathsf T}a w$. Symmetry and integration by parts give $E_0'=\int w^{\mathsf T}(\dot a+\partial_i a_i)w+2\int w^{\mathsf T}f$. Pointwise coefficient Lipschitz bounds give $|f|\le C|w|$, since $\partial_tv$ and $\partial_i v$ are bounded in $L^\infty$. Thus $|E_0'|\le CE_0$. If $w(0)=0$, Gronwall on either oriented segment from $0$ to $t$ gives $E_0(t)=0$. As $t\in J$ was arbitrary, this proves (a). [L1, L2, L3, L4, L5, algebra]

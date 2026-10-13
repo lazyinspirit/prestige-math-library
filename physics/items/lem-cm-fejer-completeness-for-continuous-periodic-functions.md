@@ -6,22 +6,20 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 0
-deps: [def-cesaro-and-abel-means-of-a-fourier-series, lem-fejer-kernel-is-a-positive-approximate-identity, thm-fejer-uniform-convergence-for-continuous-periodic-functions, def-complex-exponential, thm-complex-exponential-addition-and-real-extension, def-continuity-real, thm-linear-change-of-variables-for-lebesgue-measure, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, thm-linearity-of-the-lebesgue-integral-on-l-one, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, thm-additivity-over-subintervals, def-oriented-integral]
+deps: [def-cesaro-and-abel-means-of-a-fourier-series, lem-fejer-kernel-is-a-positive-approximate-identity, thm-fejer-uniform-convergence-for-continuous-periodic-functions, def-complex-exponential, thm-complex-exponential-addition-and-real-extension, def-continuity-real, thm-additivity-over-subintervals, def-oriented-integral, thm-substitution, thm-linearity-of-the-integral, thm-continuous-implies-integrable, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]
 dependency_roles:
+  cor-complex-exponential-cartesian-form-modulus-and-eulers-identity: mathematical-premise
   def-cesaro-and-abel-means-of-a-fourier-series: mathematical-premise
   lem-fejer-kernel-is-a-positive-approximate-identity: mathematical-premise
   thm-fejer-uniform-convergence-for-continuous-periodic-functions: mathematical-premise
   def-complex-exponential: mathematical-premise
   thm-complex-exponential-addition-and-real-extension: mathematical-premise
   def-continuity-real: mathematical-premise
-  thm-linear-change-of-variables-for-lebesgue-measure: mathematical-premise
-  thm-lebesgue-outer-measure-and-measurability-are-translation-invariant: mathematical-premise
-  thm-linearity-of-the-lebesgue-integral-on-l-one: mathematical-premise
-  def-integral-over-a-measurable-set: mathematical-premise
-  def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
-  def-lebesgue-measure-and-the-lebesgue-sigma-algebra: mathematical-premise
   thm-additivity-over-subintervals: mathematical-premise
   def-oriented-integral: mathematical-premise
+  thm-substitution: mathematical-premise
+  thm-linearity-of-the-integral: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -38,11 +36,11 @@ sources:
 
 ## Statement
 
-Let $h:\mathbb R\to\mathbb C$ be one-periodic and continuous ([[def-continuity-real]]) and suppose that
+Let $h:\mathbb R\to\mathbb C$ be one-periodic, meaning $h(t+1)=h(t)$ for all real $t$, and continuous, meaning that both real functions $\operatorname{Re}h,\operatorname{Im}h:\mathbb R\to\mathbb R$ satisfy [[def-continuity-real]] and suppose that
 
 $$\int_0^1h(t)\,e_k(-t)\,dt=0\qquad\text{for every }k\in\mathbb Z,$$
 
-where $e_k(t):=e^{2\pi ikt}$ ([[def-complex-exponential]]). Then $h=0$ on $\mathbb R$.
+All integrals here are componentwise Riemann integrals: for continuous $p=p_1+ip_2$, $\int_a^b p:=\int_a^b p_1+i\int_a^b p_2$, with the real oriented convention of [[def-oriented-integral]]; both integrals exist by [[thm-continuous-implies-integrable]]. Here $e_k(t):=e^{2\pi ikt}$ ([[def-complex-exponential]]). Then $h=0$ on $\mathbb R$.
 
 ## Facts & Assumptions
 
@@ -52,11 +50,11 @@ where $e_k(t):=e^{2\pi ikt}$ ([[def-complex-exponential]]). Then $h=0$ on $\math
 
 [F2] The Fejer means $\sigma_Nh=h*F_N$ converge to $h$ uniformly: $\sup_x|\sigma_Nh(x)-h(x)|\to0$ ([[def-cesaro-and-abel-means-of-a-fourier-series]], [[thm-fejer-uniform-convergence-for-continuous-periodic-functions]]).
 
-[F3] Substitution and periodicity: for $\varphi$ continuous and one-periodic, $\int_0^1\varphi(x-t)\,dt=\int_0^1\varphi(u)\,du$, by the change of variables $u=x-t$ on a full period ([[thm-linear-change-of-variables-for-lebesgue-measure]], [[thm-lebesgue-outer-measure-and-measurability-are-translation-invariant]], [[def-oriented-integral]], [[thm-additivity-over-subintervals]]).
+[F3] For continuous one-periodic complex $\varphi$, affine substitution applied to each real component gives $\int_0^1\varphi(x-t)\,dt=\int_{x-1}^x\varphi(u)\,du=\int_0^1\varphi(u)\,du$. For the second equality, write $x=m+r$ with $m\in\mathbb Z$, $0\le r<1$; translate by $m$, split $[r-1,r]$ at $0$, and translate $[r-1,0]$ by $1$ to $[r,1]$, using periodicity and additivity ([[thm-substitution]], [[def-oriented-integral]], [[thm-additivity-over-subintervals]]).
 
-[F4] Exponential addition: $e_k(x-t)=e_k(x)e_k(-t)=e_k(x)e_{-k}(t)$ ([[thm-complex-exponential-addition-and-real-extension]], [[def-complex-exponential]]).
+[F4] Character periodicity: $\exp(i\pi)=-1$ by [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]], hence $\exp(2\pi i)=1$ by exponential addition. Iteration gives $\exp(2\pi ik)=1$ for $k\ge0$; for $k<0$, $\exp(2\pi ik)\exp(-2\pi ik)=\exp(0)=1$ gives the same conclusion. Thus $e_k(t+1)=e_k(t)$. Exponential addition: $e_k(x-t)=e_k(x)e_k(-t)=e_k(x)e_{-k}(t)$ ([[thm-complex-exponential-addition-and-real-extension]], [[def-complex-exponential]]).
 
-[F5] Linearity and additivity of the integral ([[thm-linearity-of-the-lebesgue-integral-on-l-one]], [[def-integral-over-a-measurable-set]], [[def-integrable-real-and-complex-functions-and-their-integrals]], [[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]).
+[F5] Continuous real components are Riemann integrable on compact intervals. The componentwise convention makes the integral complex-linear: expand complex multiplication into its two real components and apply real linearity and additivity ([[thm-continuous-implies-integrable]], [[thm-linearity-of-the-integral]], [[thm-additivity-over-subintervals]]).
 
 ## Proof
 

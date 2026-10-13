@@ -42,7 +42,7 @@ sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Sections 1.3.2-1.3.3, printed pages 8-9 (PDF pages 14-15): the two-body energy and momentum bookkeeping with a pair potential depending on the separation"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 3.4, Eqs. (3.30)-(3.37), printed pages 40-42: the centre-of-mass and reduced-mass decomposition of the two-body kinetic energy"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 3.4, Eqs. (3.30)-(3.37), chapter pages 8-9 (PDF pages 40-41): the centre-of-mass and reduced-mass decomposition of the two-body kinetic energy"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
 verification:
   precheck: pass

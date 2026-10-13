@@ -153,10 +153,13 @@ mathematical operator, by the conventions of clause (c) of
 concrete impurity or material with the model is asserted.
 
 **(e) Units, scope and status.** All three assignments are declared energy
-operators with the joule as declared unit; the self-adjointness, spectra and
-eigenbases of $H_{D,V}$, $H_{\alpha\beta,V}$ and $H_{g}$ are established by
-the interval-spectra theorem and the zero-range bound-state theorem of this
-page, and are not presupposed here. The boundary conditions, boundary parameters and coupling
-are declared assumptions of the pair; nothing in this definition asserts that
-a laboratory system realizes them, and no count, rate or measured value is
-recorded.
+operators with the joule as declared unit. The interval-spectra theorem proves
+self-adjointness, compact resolvent, the complete discrete eigenbases and the
+stated spectra for $H_{D,V}$ and $H_{\alpha\beta,V}$. For $H_g$, the
+zero-range theorem proves self-adjointness and the stated classification of
+negative eigenvalues and bound states; it does not assert a complete description
+of the spectrum or an eigenbasis for $H_g$. These properties are established
+by the theorems of this page, not presupposed here. The boundary conditions,
+boundary parameters and coupling are declared assumptions of the pair; nothing
+in this definition asserts that a laboratory system realizes them, and no
+count, rate or measured value is recorded.

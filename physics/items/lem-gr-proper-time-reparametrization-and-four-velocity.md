@@ -1,7 +1,7 @@
 ---
 id: lem-gr-proper-time-reparametrization-and-four-velocity
 kind: lemma
-title: "Proper time is well defined and reparametrization invariant; the four-velocity is its unit tangent"
+title: "Proper time is well defined and reparametrization invariant; the four-velocity is its proper-time tangent"
 status: draft
 origin: session
 domain: mathematics
@@ -59,8 +59,8 @@ $c>0$ ([[def-gr-smooth-lorentzian-objects]]).
    ([[def-gr-timelike-worldline-and-proper-time]]). Then the sum defining
    $\tau(b)-\tau(a)$ is the same for every admissible partition of $[a,b]$; it
    is written $\frac1c\int_a^b h$, where $h$ is the piecewise-defined
-   proper-time density. For $a<c<b$,
-   $\tau(b)-\tau(a)=\bigl(\tau(c)-\tau(a)\bigr)+\bigl(\tau(b)-\tau(c)\bigr)$.
+   proper-time density. For every $u\in(a,b)$,
+   $\tau(b)-\tau(a)=\bigl(\tau(u)-\tau(a)\bigr)+\bigl(\tau(b)-\tau(u)\bigr)$.
    If $a<b$, the increment is strictly positive.
 
 2. **Reparametrization and orientation, including subintervals.** Let
@@ -142,7 +142,7 @@ $c>0$, and the worldlines and maps named in the three claims.
 
 2.4 (Reparametrization by proper time.) By step 1.5, $\tau$ is $C^1$, and its increments are strictly positive by step 1.3, so it is strictly increasing on $I$; let $J:=\tau(I)$ and $\psi:=\tau^{-1}:J\to I$. At each interior $\sigma\in J$, [L7] applied to $\tau$ at $t=\psi(\sigma)$ gives a $C^1$ local inverse; injectivity identifies it with $\psi$. At an included endpoint, monotonicity first gives continuity of the inverse from that side: any relative neighbourhood of $t$ has a strictly separated inner endpoint value under $\tau$. For $\sigma'\to\sigma$ from that side, put $t'=\psi(\sigma')$; then $t'\to t$ and $(\psi(\sigma')-\psi(\sigma))/(\sigma'-\sigma)=(t'-t)/(\tau(t')-\tau(t))\to1/\tau'(t)$. Continuity of $\tau'>0$ makes the inverse derivative continuous up to that endpoint. Applying the same local inverse and endpoint reciprocal-quotient argument to $\varphi$, whose derivative is continuous and nowhere zero, also proves the $C^1$ diffeomorphism-onto-image assertion in claim 2. Thus $\psi$ is $C^1$ on $J$ in the stated one-sided sense and $\psi'(\sigma)=1/\tau'(\psi(\sigma))$. [L4, L7, step 1.3, step 1.5, construct]
 
-3.1 (Additivity over a splitting.) For $a<c<b$, the partition obtained by inserting $c$ into an admissible partition is admissible, and the sum splits as $\sum_iH(s_{i-1},s_i)=\sum_{s_i\le c}H+\sum_{s_i\ge c}H$; by step 2.1 each part is the increment over the corresponding subinterval, so $\tau(b)-\tau(a)=(\tau(c)-\tau(a))+(\tau(b)-\tau(c))$. [step 2.1, algebra]
+3.1 (Additivity over a splitting.) Fix any $u\in(a,b)$ and insert $u$ into an admissible partition, giving nodes $q_0=a<\cdots<q_j=u<\cdots<q_n=b$. By step 1.2 the total sum is $\sum_{i=1}^{j}H(q_{i-1},q_i)+\sum_{i=j+1}^{n}H(q_{i-1},q_i)$; after division by the fixed constant $c$, step 2.1 identifies these sums with the two subinterval increments. Thus $\tau(b)-\tau(a)=(\tau(u)-\tau(a))+(\tau(b)-\tau(u))$ for every such $u$. [step 1.2, step 2.1, algebra]
 
 3.2 (Reversing orientation.) For $\varphi'<0$, use its image $[\alpha,\beta]=[\varphi(b'),\varphi(a')]$; the chain rule gives $\tilde\gamma'=\varphi'(\gamma'\circ\varphi)$, a negative multiple of a future timelike tangent, hence past timelike. The closed-piece $C^1$ extensions compose in the same way, including their distinct corner values. Bilinearity gives $\tilde h=|\varphi'|(h\circ\varphi)$. Apply [L5] to the reversed endpoints on each piece and sum to get $\int_{a'}^{b'}\tilde h=\int_\alpha^\beta h>0$. Meanwhile the signed original difference is $\tau(\varphi(b'))-\tau(\varphi(a'))=\tau(\alpha)-\tau(\beta)<0$. If the image is the full interval $[a,b]$, this is $-(\tau(b)-\tau(a))$. Thus the unsigned integral and oriented difference have different signs, as asserted; no proper-time function for a future curve is assigned a negative elapsed value. [L2, L5, L7, step 1.3, step 2.2, algebra]
 

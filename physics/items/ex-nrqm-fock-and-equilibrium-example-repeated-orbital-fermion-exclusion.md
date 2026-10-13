@@ -31,18 +31,20 @@ sources:
 
 ## Example
 
+**Slot convention.** For $\ell\ge1$, $S_\ell$ acts on $\{0,\dots,\ell-1\}$ as in [[lem-nrqm-composites-permutation-sector-projections]]. On one-based tuple positions use $\widehat{\pi}(k):=1+\pi(k-1)$ for $1\le k\le\ell$. Conjugation by $k\mapsto k-1$ gives $\widehat{\pi\sigma}=\widehat{\pi}\circ\widehat{\sigma}$ and $\widehat{\pi^{-1}}=\widehat{\pi}^{-1}$; thus the supplier's tensor action becomes $U_\pi(v_1\otimes\cdots\otimes v_\ell)=v_{\widehat{\pi}^{-1}(1)}\otimes\cdots\otimes v_{\widehat{\pi}^{-1}(\ell)}$. The parameters of $U_\pi$ and $\operatorname{sgn}(\pi)$ remain canonical zero-based permutations.
+
 Assume the Axiom of Countable Choice and the Axiom of Choice. Let $H$ be a
 complex Hilbert space, let $H^{\otimes n}$ be its completed tensor powers with
 the unitaries $U_\pi$ and projections $P_\pm^{(n)}$ of
 [[lem-nrqm-composites-permutation-sector-projections]]. Fix $n\ge2$ and vectors $u_1,\ldots,u_n\in H$, and let
-$$S(u_1,\dots,u_n):=\frac1{\sqrt{n!}}\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)\, u_{\sigma(1)}\otimes\cdots\otimes u_{\sigma(n)}$$
+$$S(u_1,\dots,u_n):=\frac1{\sqrt{n!}}\sum_{\sigma\in S_n}\operatorname{sgn}(\sigma)\, u_{\widehat{\sigma}(1)}\otimes\cdots\otimes u_{\widehat{\sigma}(n)}$$
 be the Slater vector of
 [[thm-nrqm-fock-and-equilibrium-slater-direct-and-exchange-calculation]]. This
 example verifies concretely that:
 
 (a) for every $u\in H$ the antisymmetrised two-particle tensor vanishes,
 $$P_-^{(2)}(u\otimes u)=0,$$
-because the transposition $\tau$ of the two tensor factors satisfies
+because the canonical transposition $\tau=(0\,1)\in S_2$ of the two tensor factors satisfies
 $U_\tau(u\otimes u)=u\otimes u$ and $P_-^{(2)}=\tfrac12(\mathrm{id}-U_\tau)$;
 
 (b) consequently the Slater vector with a repeated orbital is the zero vector,
@@ -70,7 +72,7 @@ postulate and no spin-statistics statement is proved here.
 
 **Given:** the complex Hilbert space $H$, its completed tensor powers $H^{\otimes n}$, the permutation unitaries $U_\pi$ and the projections $P_\pm^{(n)}$, the transposition $\tau\in S_2$, the vector $u=e_1+e_2\in\mathbb C^2$ and the orthonormal family $(e_1,e_2)$.
 
-[F1] For every $\pi\in S_n$ there is a unique unitary $U_\pi$ with $U_\pi(v_1\otimes\cdots\otimes v_n)=v_{\pi^{-1}(1)}\otimes\cdots\otimes v_{\pi^{-1}(n)}$, $U_\pi^*=U_{\pi^{-1}}$; for $n=2$ and the transposition $\tau$ one has $\tau^{-1}=\tau$ and $U_\tau(v_1\otimes v_2)=v_2\otimes v_1$. Moreover $P_-^{(2)}=\frac12(\mathrm{id}-U_\tau)$, and $U_\tau(u\otimes u)=u\otimes u$ ([[lem-nrqm-composites-permutation-sector-projections]] (a), (b), [[lem-nrqm-composites-hilbert-tensor-construction]]).
+[F1] For every $\pi\in S_n$ there is a unique unitary $U_\pi$ with $U_\pi(v_1\otimes\cdots\otimes v_n)=v_{\widehat{\pi}^{-1}(1)}\otimes\cdots\otimes v_{\widehat{\pi}^{-1}(n)}$, $U_\pi^*=U_{\pi^{-1}}$; for $n=2$ and the transposition $\tau$ one has $\tau^{-1}=\tau$ and $U_\tau(v_1\otimes v_2)=v_2\otimes v_1$. Moreover $P_-^{(2)}=\frac12(\mathrm{id}-U_\tau)$, and $U_\tau(u\otimes u)=u\otimes u$ ([[lem-nrqm-composites-permutation-sector-projections]] (a), (b), [[lem-nrqm-composites-hilbert-tensor-construction]]).
 
 [F2] $S(u_1,u_2)=\frac1{\sqrt2}(u_1\otimes u_2-u_2\otimes u_1)=\sqrt2\,P_-^{(2)}(u_1\otimes u_2)$, and $\|S(u_1,u_2)\|=1$ whenever $u_1,u_2$ are orthonormal; for $u_1=u_2=u$ the two summands coincide, so the alternating sum vanishes ([[thm-nrqm-fock-and-equilibrium-slater-direct-and-exchange-calculation]] (a), [[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]).
 

@@ -67,22 +67,7 @@ the status of its claims; it proves nothing by itself.
   "mathematically inconsistent": it is a model whose causal structure differs
   from that of the flat models of the examples page.
 
-- **What is proved here.** Conditional deductions inside the stated classes
-  of curves and models: the curve calculus of
-  [[lem-gr-causal-curve-calculus]], the implication from temporal functions
-  to time functions and the exclusion of closed causal curves by a time
-  function ([[lem-gr-temporal-functions-and-time-functions]]), the
-  extendibility of convergent causal ends and the acausality of Cauchy sets
-  ([[lem-gr-maximal-geodesics-and-extension]]), the Minkowski model's global
-  hyperbolicity and its inertial Cauchy hypersurfaces
-  ([[thm-gr-minkowski-cauchy-and-global-hyperbolicity]]), the flat cylinder's
-  failure of chronology, causality and the Cauchy property
-  ([[thm-gr-flat-cylinder-closed-timelike-and-no-cauchy-set]]), the open
-  slab's incompleteness together with its Cauchy slice and global
-  hyperbolicity ([[thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice]]),
-  and the local focusing bound along a geodesic congruence
-  ([[thm-gr-timelike-raychaudhuri-and-local-focusing]]). Each is a statement
-  about the explicitly displayed model and its curve class.
+- **Conditional deductions.** The causal-curve class requires continuity and local chart neighborhoods with absolutely continuous coordinates ([[def-gr-causal-curves-and-reachability]]). Its chart independence, finite subdivisions and smooth scalar composition are supplied by [[lem-gr-causal-curve-calculus]], and temporal monotonicity by [[lem-gr-temporal-functions-and-time-functions]], under their stated Countable Choice and Dependent Choice premises. Causal past uses inverse reachability: $p\in J^-(S)$ means $p\le q$ for some $q\in S$. With this convention, [[thm-gr-minkowski-cauchy-and-global-hyperbolicity]] and [[thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice]] give the compact-diamond and global-hyperbolicity conclusions for their explicit flat models. The general causal-extension and maximal-geodesic results have their own hypotheses and proofs in [[lem-gr-maximal-geodesics-and-extension]]. The flat cylinder's failure of chronology, causality and the Cauchy property ([[thm-gr-flat-cylinder-closed-timelike-and-no-cauchy-set]]) follows from explicit smooth periodic curves. The local focusing bound along a geodesic congruence is [[thm-gr-timelike-raychaudhuri-and-local-focusing]]. These are conditional mathematical deductions; they assert no measurements.
 
 - **Initial value material.** [[def-gr-spacelike-initial-data-and-constraints]]
   defines initial data $(\Sigma,h,K,\rho,j)$ and the constraint equations as

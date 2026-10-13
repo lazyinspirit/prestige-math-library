@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 9
-deps: [post-cm10-rigid-material, def-cm10-rigid-body-configuration, def-cm10-angular-velocity, def-cm-special-orthogonal-group, lem-cm-so3-is-a-matrix-group, lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold, def-cm-euler-angle-parametrization-and-heavy-top-system, lem-cm-coordinate-rotation-matrices, lem-cm-euler-angle-angular-velocity, def-cm-quaternion-rotation-map-and-cover, lem-cm-body-angular-velocity-of-a-rotation-path, thm-cm-quaternion-lift-exists-and-is-unique, def-countable-choice, def-cm01-units]
+deps: [post-cm10-rigid-material, def-cm10-rigid-body-configuration, def-cm10-angular-velocity, def-cm-special-orthogonal-group, lem-cm-so3-is-a-matrix-group, lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold, def-cm-euler-angle-parametrization-and-heavy-top-system, lem-cm-coordinate-rotation-matrices, lem-cm-euler-angle-angular-velocity, def-cm-quaternion-rotation-map-and-cover, lem-cm-body-angular-velocity-of-a-rotation-path, thm-cm-quaternion-lift-exists-and-is-unique, def-countable-choice, def-cm01-units, thm-smooth-inverse-function-theorem-on-manifolds]
 dependency_roles:
   post-cm10-rigid-material: physical-assumption
   def-cm10-rigid-body-configuration: formulation-prerequisite
@@ -22,6 +22,7 @@ dependency_roles:
   thm-cm-quaternion-lift-exists-and-is-unique: mathematical-premise
   def-countable-choice: mathematical-premise
   def-cm01-units: formulation-prerequisite
+  thm-smooth-inverse-function-theorem-on-manifolds: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -61,12 +62,15 @@ a local parametrisation with smooth local inverse. Indeed the angular-velocity f
 are excluded because there the dependence on the angles collapses: by the
 composition law $R_z(a)R_z(b)=R_z(a+b)$ the value at $\theta=0$ depends on
 $\varphi+\psi$ alone. A smooth orientation path of the model can pass through
-a pole orientation — the identity $I_3$ is such a point — while no single
-continuous choice of the three angles through that point exists; the
-companion page's example on the Euler-angle pole exhibits the failure of
-injectivity and of invertibility of the derivative there. Euler angles are
-therefore a local, singular coordinate device, not a
-description of the orientation itself. The angular-velocity components are
+a pole orientation, including $I_3$. The restricted chart has no coordinate
+value there, and the extended formula has no local inverse at a pole:
+at $\theta=0$, the distinct triples $(\varphi+s,0,\psi-s)$ give the same
+rotation for arbitrarily small nonzero $s$. This does not exclude a
+continuous pathwise choice of unrestricted parameters; for example,
+$(\varphi,\theta,\psi)=(0,t,0)$ represents the smooth path $R_y(t)$ through
+$t=0$. The companion example computes the deficient differential at a pole.
+Euler angles are auxiliary local coordinates for the global orientation.
+The angular-velocity components are
 not the coordinate derivatives of these angles
 ([[lem-cm-euler-angle-angular-velocity]] is the separate relation, and the
 model's angular velocity is defined intrinsically in

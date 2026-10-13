@@ -15,8 +15,9 @@ deps:
     texp-nrqm-photons-classical-field-and-quantized-detection-comparison,
     pthm-nrqm-photons-fixed-mode-number-and-energy-statistics,
     post-nrqm-framework-preparation-and-apparatus,
-    post-nrqm-framework-observable-and-probability
-  ]
+    post-nrqm-framework-observable-and-probability,
+    def-dependent-choice
+]
 dependency_roles:
   def-nrqm-photons-framework-fixed-mode-polarization-model: formulation-prerequisite
   def-nrqm-photons-framework-ideal-counting-and-detection-model: formulation-prerequisite
@@ -26,6 +27,7 @@ dependency_roles:
   pthm-nrqm-photons-fixed-mode-number-and-energy-statistics: physical-result
   post-nrqm-framework-preparation-and-apparatus: physical-assumption
   post-nrqm-framework-observable-and-probability: physical-assumption
+  def-dependent-choice: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -62,8 +64,10 @@ preparations of one mode -- sharp $n$, Poisson for dimensionless coherent-state
 label $z$ with mean and variance $|z|^{2}$, and the geometric law of a declared
 effective-energy preparation
 with $\varepsilon_{0}>0$ joules and $\beta>0$ in $\mathrm J^{-1}$, whose mean is
-$1/(e^{\beta\varepsilon_{0}}-1)$ -- and shows that the fluctuation
-content differs at equal mean.
+$1/(e^{\beta\varepsilon_{0}}-1)$ -- and shows different fluctuations for
+the coherent and geometric preparations at equal positive mean. A number
+state joins that equal-mean comparison when the common mean is a positive
+integer and $n$ is chosen equal to it.
 [[texp-nrqm-photons-classical-field-and-quantized-detection-comparison]]
 proves that the declared classical and quantised models assign the same
 normalised two-bin law, with the same interference cross-term, for every
@@ -106,3 +110,5 @@ under a correct coherent model, and a $p$-value or confidence level is not the
 probability that a model is false. Comparing any of these conditional
 predictions with data would test the combined model and apparatus assumptions,
 not prove the model or the framework.
+
+**Mathematical hypotheses.** The conditional deductions summarized here retain the choice hypotheses of their mathematical suppliers; in particular, the transverse free-field Fock supplier assumes Countable Choice, Dependent Choice and Choice. [[def-countable-choice]], [[def-dependent-choice]] and [[def-axiom-of-choice]] record these assumptions.

@@ -10,7 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [thm-gr-nondegenerate-levi-civita-and-tensor-derivative, lem-gr-parallel-transport-and-geodesic-speed, thm-gr-local-geodesics-and-exponential-map, def-gr-timelike-worldline-and-proper-time, lem-gr-proper-time-reparametrization-and-four-velocity, def-gr-metric-selected-connection, def-gr-smooth-lorentzian-objects, def-covariant-derivative-along-a-curve, def-christoffel-symbols-of-an-affine-connection, lem-gr-connection-conditions-in-chart-components, def-gr-inverse-metric-and-musical-isomorphisms, thm-clairaut-schwarz-mixed-partials, thm-differentiation-under-the-integral-sign, thm-ftc-second-part, thm-monotonicity-of-the-integral, lem-smooth-bump-between-concentric-euclidean-balls, def-darboux-integral, def-interval, def-continuity-real]
+deps: [thm-gr-nondegenerate-levi-civita-and-tensor-derivative, lem-gr-parallel-transport-and-geodesic-speed, thm-gr-local-geodesics-and-exponential-map, def-gr-timelike-worldline-and-proper-time, lem-gr-proper-time-reparametrization-and-four-velocity, def-gr-metric-selected-connection, def-gr-smooth-lorentzian-objects, def-covariant-derivative-along-a-curve, def-christoffel-symbols-of-an-affine-connection, lem-gr-connection-conditions-in-chart-components, def-gr-inverse-metric-and-musical-isomorphisms, thm-clairaut-schwarz-mixed-partials, thm-differentiation-under-the-integral-sign-on-a-compact-rectangle, thm-ftc-second-part, thm-monotonicity-of-the-integral, lem-smooth-bump-between-concentric-euclidean-balls, def-darboux-integral, def-interval, def-continuity-real]
 dependency_roles:
   thm-gr-nondegenerate-levi-civita-and-tensor-derivative: mathematical-premise
   lem-gr-parallel-transport-and-geodesic-speed: mathematical-premise
@@ -24,7 +24,7 @@ dependency_roles:
   lem-gr-connection-conditions-in-chart-components: mathematical-premise
   def-gr-inverse-metric-and-musical-isomorphisms: mathematical-premise
   thm-clairaut-schwarz-mixed-partials: mathematical-premise
-  thm-differentiation-under-the-integral-sign: mathematical-premise
+  thm-differentiation-under-the-integral-sign-on-a-compact-rectangle: mathematical-premise
   thm-ftc-second-part: mathematical-premise
   thm-monotonicity-of-the-integral: mathematical-premise
   lem-smooth-bump-between-concentric-euclidean-balls: mathematical-premise
@@ -93,7 +93,7 @@ require it beyond the smooth parametrization.
 
 [L3] For a $C^2$ two-parameter family the mixed derivatives commute as ordinary partial derivatives in a chart, so $D_sT=D_tJ$ ([[thm-clairaut-schwarz-mixed-partials]], [[def-covariant-derivative-along-a-curve]]).
 
-[L4] If $F$ and $\partial_sF$ are continuous on $[-\varepsilon_0,\varepsilon_0]\times[a,b]$ for some $0<\varepsilon_0<\varepsilon$, then the differentiation-under-the-integral theorem applies on $I=(-\varepsilon_0,\varepsilon_0)$ with Lebesgue measure on $[a,b]$: each $F(s,\cdot)$ is integrable, $\partial_sF$ is measurable, and the integrable majorant $t\mapsto\max_{|s|\le\varepsilon_0}|\partial_sF(s,t)|$ bounds it. Thus $s\mapsto\int_a^bF(s,t)\,dt$ is differentiable at $0$ with derivative $\int_a^b\partial_sF(0,t)\,dt$ ([[thm-differentiation-under-the-integral-sign]], [[def-darboux-integral]]).
+[L4] If $F$ and $H$ are continuous on $[-\varepsilon_0,\varepsilon_0]\times[a,b]$ and $\partial_sF(s,t)=H(s,t)$ for $|s|<\varepsilon_0$, then the compact-rectangle differentiation theorem applies to the Darboux/Riemann integrals of the continuous slices and gives that $s\mapsto\int_a^bF(s,t)\,dt$ is differentiable at $0$ with derivative $\int_a^bH(0,t)\,dt$ ([[thm-differentiation-under-the-integral-sign-on-a-compact-rectangle]], [[def-darboux-integral]]).
 
 [L5] If $G$ is $C^1$ on $[a,b]$, then $\int_a^bG'=G(b)-G(a)$ ([[thm-ftc-second-part]]). If a continuous function is strictly positive at a point of an open interval, then its integral over a sufficiently small closed subinterval is strictly positive ([[thm-monotonicity-of-the-integral]], [[def-continuity-real]], [[def-darboux-integral]]).
 

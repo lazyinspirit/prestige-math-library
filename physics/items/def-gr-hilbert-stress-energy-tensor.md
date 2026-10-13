@@ -21,12 +21,12 @@ dependency_roles:
 justified_by: [lem-gr-hilbert-tensor-uniqueness]
 sources:
   references:
-    - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 4: the definition T_{mu nu} = -(1/sqrt(-g)) delta S_M/delta g^{mu nu}, (4.70), printed p. 117 (PDF p. 124), and the variation (4.69) of the total action"
+    - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 4: the definition T_{mu nu} = -(1/sqrt(-g)) delta S_M/delta g^{mu nu}, (4.70), printed p. 116 (PDF p. 123), and the variation (4.69) of the total action"
       url: "https://arxiv.org/pdf/gr-qc/9712019"
     - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 9.3: the definition T^{ab} = (2/sqrt(-g)) delta S_matter/delta g_{ab}, (9.28)-(9.29), printed p. 116 (PDF p. 117)"
-      url: "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
-    - title: "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 4.5.2: T_{mu nu} = -(2/sqrt(-g)) delta S_M/delta g^{mu nu}, (4.46), printed p. 182 (PDF p. 189)"
-      url: "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+      url: "https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+    - title: "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 4.5.2: T_{mu nu} = -(2/sqrt(-g)) delta S_M/delta g^{mu nu}, (4.46), printed p. 183 (PDF p. 190)"
+      url: "https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
 verification:
   precheck: n/a
 ---
@@ -59,6 +59,9 @@ symmetric tensor fields.
 supported variation** is a map $s\mapsto g_s$, $|s|<\varepsilon$ for some
 $\varepsilon>0$, such that $(g_s,\varphi)\in\mathcal D$ for all $s$, such that
 $g_s$ is a smooth Lorentzian metric of signature $(-,+,+,+)$ for every $s$,
+such that in every chart $(U,x)$ the component functions
+$(s,x(p))\mapsto (g_s)_{ab}(p)$ are jointly $C^\infty$ on
+$(-\varepsilon,\varepsilon)\times x(U)$,
 such that $g_0=g$, and such that there is a compact subset $K\subseteq M$ with
 $g_s=g$ outside $K$ for every $|s|<\varepsilon$. For such a family define
 
@@ -96,10 +99,13 @@ $S$ at the point $(g,\varphi)$; it is not automatic, and this definition does
 not assert that any functional has a Hilbert tensor. The definition uses the
 orientation of $M$; a general functional $S$ has no orientation-reversal law,
 so no transformation of $S$ or $T$ is asserted. When $S$ is given by
-integrating an oriented top-form density and the action for the reversed
-orientation is defined by that same integral convention, reversing orientation
-changes both the action variation and the volume-form integral by a sign,
-leaving the tensor in the defining identity unchanged.
+integrating $L(g,\varphi)\mathrm{vol}_g$ with an orientation-independent
+scalar coefficient $L$ and the integral exists (or compact action differences
+are used), define the reversed-orientation action by the same construction.
+Reversing orientation replaces $\mathrm{vol}_g$ by $-\mathrm{vol}_g$ and
+reverses the sign of integration of a fixed top form. These two signs cancel,
+so both the action variation and the integral in the defining identity are
+unchanged, as is its tensor $T$.
 
 ## Remarks
 
@@ -107,11 +113,17 @@ leaving the tensor in the defining identity unchanged.
   generically for the derivative at $s=0$, the defining identity reads
   $\delta S=-\tfrac{1}{2c}\int T_{ab}\,\delta g^{ab}\,w\,d^4x$ with $w$ the
   metric density of [[def-gr-metric-volume-form-and-current-flux]]. The
-  conventions used in the cited treatments differ by a factor $c$: their
-  $T^{ab}=\pm\tfrac{2}{\sqrt{|g|}}\delta S/\delta g_{ab}$ corresponds, with
-  $\delta g_{ab}=-g_{ac}g_{bd}\delta g^{cd}$, to the same tensor with the
-  normalization restored; the SI-normalized form used here is the one carried
-  by the framework's action postulate.
+  normalization must be compared at the same functional $S$. When its
+  smooth symmetric coordinate variational derivative $D_{ab}:=\delta S/\delta g^{ab}$ exists,
+  meaning $\delta S=\int D_{ab}\,\delta g^{ab}\,d^4x$ for compactly supported
+  variations, our convention gives $T_{ab}=-2c\,w^{-1}D_{ab}$.
+  Carroll's (4.70) instead gives $T^{\mathrm C}_{ab}=-w^{-1}D_{ab}$, so
+  $T_{ab}=2c\,T^{\mathrm C}_{ab}$ for the same $S$. Tong's (4.46) gives
+  $T^{\mathrm T}_{ab}=-2w^{-1}D_{ab}$; Reall's (9.28)-(9.29), after
+  $\delta g_{ab}=-g_{ac}g_{bd}\delta g^{cd}$, gives that same coefficient.
+  Thus our tensor is $c$ times their tensors for the same $S$. Rescaling
+  $S$ also rescales its tensor; matching physical normalizations therefore
+  requires specifying the action normalization as well as the factor $c$.
 
 - **The matter configuration is held fixed.** The definition concerns the
   partial derivative of $S$ in the metric direction at fixed $\varphi$; the

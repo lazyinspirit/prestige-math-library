@@ -1,0 +1,958 @@
+[
+  {
+    "order": 175,
+    "id": "qm-massive-particle-kinematics",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Massive Particle Kinematics",
+    "companion": "qm-massive-particle-kinematics-examples",
+    "requires": [
+      "qm-autonomous-dynamics",
+      "qm-math-composites",
+      "qm-math-magnetic-and-detection",
+      "qm-math-fock-and-equilibrium",
+      "qm-framework-and-quantities",
+      "qm-observables-and-born-probabilities",
+      "qm-state-geometry",
+      "qm-math-orbital-and-spin"
+    ],
+    "items": [
+      {
+        "id": "lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Finite orthogonal sums of self-adjoint operators and of bounded operators",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]), the choice\nhypothesis of the cited definitions of the adjoint. Fix an integer $r\\ge1$, let\n$H_{1},\\dots,H_{r}$ be complex Hilbert spaces with inner products linear in the\nfirst argument ([[def-hilbert-space]]), and let\n$$H:=\\bigoplus_{l=1}^{r}H_{l},\\qquad \\bigl\\langle (x_{l}),(y_{l})\\bigr\\rangle:=\\sum_{l=1}^{r}\\langle x_{l},y_{l}\\rangle_{H_{l}},$$\nbe their orthogonal sum. For each $l$ let $A_{l}:D(A_{l})\\subset H_{l}\\to H_{l}$\nbe a densely defined self-adjoint operator\n([[def-adjoint-of-a-densely-defined-unbounded-operator]],\n[[def-symmetric-self-adjoint-and-essentially-self-adjoint]]) and put\n$$D(A):=\\Bigl\\{(x_{l})\\in H:\\ x_{l}\\in D(A_{l})\\ \\text{for all }l,\\ \\sum_{l=1}^{r}\\|A_{l}x_{l}\\|_{H_{l}}^{2}<\\infty\\Bigr\\},\\qquad A(x_{l}):=(A_{l}x_{l}).$$\nThen:\n\n(a) $H$ is a complex Hilbert space, $D(A)$ is a dense linear subspace of $H$,\nand $A:D(A)\\to H$ is a linear operator;\n\n(b) $A$ is symmetric and self-adjoint, and\n$\\|Ax\\|^{2}=\\sum_{l=1}^{r}\\|A_{l}x_{l}\\|_{H_{l}}^{2}$ for every $x\\in D(A)$;\n\n(c) if $B_{l}\\in\\mathcal B(H_{l})$ for every $l$\n([[def-bounded-linear-operator]]), then $B:=\\bigoplus_{l=1}^{r}B_{l}$, defined\nby $B(x_{l}):=(B_{l}x_{l})$ for all $(x_{l})\\in H$, is bounded with\n$$\\|B\\|=\\max_{1\\le l\\le r}\\|B_{l}\\|$$\n([[def-operator-norm]]), its adjoint is\n$B^{*}=\\bigoplus_{l=1}^{r}B_{l}^{*}$ ([[def-hilbert-space-adjoint]]), and $B$\nis unitary if every $B_{l}$ is unitary.\n\nNo assertion is made about infinite orthogonal sums: only the finite case is\nproved here.",
+        "strategy": "direct",
+        "deps": [
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-hilbert-space-adjoint",
+          "def-operator-norm",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint"
+        ],
+        "dependency_roles": {
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-hilbert-space-adjoint": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.5, printed pages 79-80 (PDF pages 91-92): orthogonal sums of operators, reducing subspaces and the adjoint of an orthogonal sum; Section 1.4, printed page 45 (PDF page 57): orthogonal sums of Hilbert spaces",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-kinematics-component-valued-wavefunction-identifications",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Unitary identifications of the component-valued wave-function space",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Fix integers\n$d\\ge1$ and $r\\ge1$, let $H:=L^{2}(\\mathbb R^{d};\\mathbb C)$ with the Euclidean\nintegral pairing ([[def-complex-lp-and-euclidean-test-function-conventions]],\n[[def-l-p-space-as-a-quotient-by-null-functions]],\n[[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]), let\n$$H^{(r)}:=L^{2}\\bigl(\\mathbb R^{d};\\mathbb C^{r}\\bigr),\\qquad \\langle f,g\\rangle:=\\int_{\\mathbb R^{d}}\\sum_{l=1}^{r}f_{l}(x)\\overline{g_{l}(x)}\\,dx,$$\nand let $\\mathbb C^{r}$ carry the standard inner product with orthonormal basis\n$e_{1},\\dots,e_{r}$ ([[def-hilbert-space]],\n[[def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis]]).\nWrite $H\\widehat{\\otimes}\\mathbb C^{r}$ for the completed tensor product of\n[[lem-nrqm-composites-hilbert-tensor-construction]] with inclusion $\\kappa$.\nThen:\n\n(a) the map\n$$\\Psi_{0}\\Bigl((f_{l})\\Bigr):=\\bigl(x\\mapsto(f_{1}(x),\\dots,f_{r}(x))\\bigr)$$\nis a well-defined unitary isomorphism $\\bigoplus_{l=1}^{r}H\\to H^{(r)}$, and\n$$\\|\\Psi_{0}(f)\\|_{H^{(r)}}^{2}=\\sum_{l=1}^{r}\\|f_{l}\\|_{H}^{2},\\qquad \\langle\\Psi_{0}(f),\\Psi_{0}(g)\\rangle=\\sum_{l=1}^{r}\\langle f_{l},g_{l}\\rangle_{H};$$\n\n(b) the assignment on elementary tensors\n$\\Theta_{0}(\\kappa(u\\otimes e_{l})):=\\iota_{l}(u)$, where $\\iota_{l}(u)$ is\nthe $r$-tuple with $u$ in slot $l$ and $0$ elsewhere, extends uniquely to a\nsurjective linear isometry $\\Theta:H\\widehat{\\otimes}\\mathbb C^{r}\\to H^{(r)}$\n(so $\\Theta$ is unitary), and\n$\\Theta(\\kappa(u\\otimes z))=\\sum_{l=1}^{r}z_{l}\\,\\iota_{l}(u)$ for all\n$u\\in H$, $z=\\sum_{l}z_{l}e_{l}\\in\\mathbb C^{r}$;\n\n(c) for every $a\\in L^{\\infty}(\\mathbb R^{d})$ and every $v\\in\\mathbb R^{d}$ one\nhas the intertwining identities\n$$\\Theta^{-1}\\bigl(a\\cdot\\Theta(w)\\bigr)=(M_{a}\\otimes I_{\\mathbb C^{r}})w,\\qquad \\Theta^{-1}\\bigl(T_{v}^{(r)}\\Theta(w)\\bigr)=(T_{v}\\otimes I_{\\mathbb C^{r}})w\\qquad(w\\in H\\widehat{\\otimes}\\mathbb C^{r}),$$\nwhere $M_{a}$ is multiplication by $a$, $T_{v}$ is the Euclidean translation\n$T_{v}h:=h(\\cdot-v)$ of [[lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint]]\nclause (c), $T_{v}^{(r)}$ is its componentwise action on $H^{(r)}$, and the\nbounded amplifications are those of [[lem-nrqm-composites-bounded-tensor-maps]].",
+        "strategy": "direct",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "lem-nrqm-composites-bounded-tensor-maps",
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-extension-of-a-bounded-map-from-a-dense-subspace",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-complex-lp-and-euclidean-test-function-conventions": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-l-p-space-as-a-quotient-by-null-functions": "mathematical-premise",
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis": "mathematical-premise",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space": "mathematical-premise",
+          "lem-nrqm-composites-bounded-tensor-maps": "mathematical-premise",
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint": "mathematical-premise",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces": "mathematical-premise",
+          "thm-extension-of-a-bounded-map-from-a-dense-subspace": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 2,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 1.4, printed pages 45-47 (PDF pages 57-59): orthogonal sums and tensor products of Hilbert spaces",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1 printed pages 105-110 (PDF pages 113-118): composite systems, product states and amplitudes of a composite system; Section 7.4 printed pages 158-161 (PDF pages 166-169): finite-dimensional spin states as an internal factor of the state space",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-kinematics-componentwise-position-and-momentum",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Componentwise position and momentum operators on the component-valued wave-function space",
+        "statement": "Assume the Axiom of Countable Choice and the Axiom of Choice\n([[def-countable-choice]], [[def-axiom-of-choice]]), the choice hypotheses of the\ncited scalar operator and spectral suppliers. Fix integers $d\\ge1$, $r\\ge1$ and\n$\\hbar>0$. Let $H^{(r)}=L^{2}(\\mathbb R^{d};\\mathbb C^{r})$ be the\ncomponent-valued space of [[lem-nrqm-kinematics-component-valued-wavefunction-identifications]]\nwith its componentwise inner product, let $Q_{j}^{(1)},P_{k}^{(1)}$ be the\nscalar position and momentum operators on $L^{2}(\\mathbb R^{d};\\mathbb C)$ of\n[[def-nrqm-magnetic-and-detection-position-and-momentum-operators]], and let\n$\\mathcal F_{2}$ be the unitary Plancherel transform with\n$\\widehat f(\\xi)=\\int f(x)e^{-2\\pi ix\\cdot\\xi}dx$ on $L^{1}$\n([[def-fourier-transform-on-l-one-of-rn]], [[thm-plancherel]]). Write\n$\\mathcal F_{2}^{(r)}:=\\Psi_{0}\\bigl(\\bigoplus_{l}\\mathcal F_{2}\\bigr)\\Psi_{0}^{-1}$\nfor its componentwise version, with $\\Psi_{0}$ the unitary of\n[[lem-nrqm-kinematics-component-valued-wavefunction-identifications]] clause (a).\nDefine, componentwise,\n$$D(Q_{j}):=\\bigl\\{f=(f_{l})\\in H^{(r)}:\\ x_{j}f_{l}\\in L^{2}\\ \\text{for all }l\\bigr\\},\\qquad (Q_{j}f)_{l}:=x_{j}f_{l},$$\n$$D(P_{k}):=\\bigl\\{f=(f_{l})\\in H^{(r)}:\\ D_{k}f_{l}\\text{ exists in }L^{2}\\ \\text{for all }l\\bigr\\},\\qquad (P_{k}f)_{l}:=-i\\hbar\\,D_{k}f_{l},$$\nwhere $D_{k}$ is the weak derivative of [[def-weak-derivative-of-a-locally-integrable-function]].\nWrite $W^{m,2}(\\mathbb R^{d};\\mathbb C^{r})$ for the classes whose components\nlie in $W^{m,2}(\\mathbb R^{d};\\mathbb C)$ ([[def-sobolev-space-wkp-and-its-norm]]),\nand $\\mathcal S(\\mathbb R^{d};\\mathbb C^{r})$ for the componentwise Schwartz\nclass ([[def-schwartz-space-and-its-seminorms]]). Then:\n\n(a) under $\\Psi_{0}$ the operators $Q_{j}$ and $P_{k}$ are the orthogonal sums\n$\\bigoplus_{l}Q_{j}^{(1)}$ and $\\bigoplus_{l}P_{k}^{(1)}$ of\n[[lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators]]; in particular\n$Q_{j}$ and $P_{k}$ are densely defined and self-adjoint with the displayed\ndomains;\n\n(b) $\\mathcal F_{2}^{(r)}$ is unitary,\n$$D(P_{k})=\\bigl\\{f\\in H^{(r)}:\\ \\xi_{k}\\mathcal F_{2}^{(r)}f\\in L^{2}(\\mathbb R^{d};\\mathbb C^{r})\\bigr\\},$$\nand for every $f\\in D(P_{k})$\n$$\\mathcal F_{2}^{(r)}(P_{k}f)(\\xi)=2\\pi\\hbar\\,\\xi_{k}\\,\\mathcal F_{2}^{(r)}f(\\xi)\\qquad\\text{for almost every }\\xi;$$\n\n(c) the componentwise translation $T_{a}^{(r)}f:=f(\\cdot-a)$, $a\\in\\mathbb R^{d}$,\nis unitary, leaves $\\mathcal S(\\mathbb R^{d};\\mathbb C^{r})$,\n$W^{1,2}(\\mathbb R^{d};\\mathbb C^{r})$ and $W^{2,2}(\\mathbb R^{d};\\mathbb C^{r})$\ninvariant, satisfies $D_{k}(T_{a}^{(r)}f)=T_{a}^{(r)}(D_{k}f)$ for\n$f\\in W^{1,2}(\\mathbb R^{d};\\mathbb C^{r})$, and\n$$T_{a}^{(r)}D(Q_{j})=D(Q_{j}),\\quad T_{a}^{(r)}Q_{j}\\bigl(T_{a}^{(r)}\\bigr)^{-1}=Q_{j}-a_{j}I,\\qquad T_{a}^{(r)}D(P_{k})=D(P_{k}),\\quad T_{a}^{(r)}P_{k}\\bigl(T_{a}^{(r)}\\bigr)^{-1}=P_{k};$$\n\n(d) for every $f\\in D(P_{j})$,\n$$\\lim_{t\\to0}\\frac1t\\bigl(T_{te_{j}}^{(r)}f-f\\bigr)=-\\frac{i}{\\hbar}P_{j}f \\qquad\\text{in }H^{(r)},$$\nso the strongly continuous one-parameter unitary group\n$t\\mapsto T_{te_{j}}^{(r)}$ has generator $-\\frac{i}{\\hbar}P_{j}$ and\n$$T_{te_{j}}^{(r)}=\\exp\\Bigl(-\\frac{i}{\\hbar}tP_{j}\\Bigr)\\qquad(t\\in\\mathbb R),$$\nthe exponential being the spectral-calculus flow of the self-adjoint operator\n$P_{j}$.",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-fourier-transform-on-l-one-of-rn",
+          "def-hilbert-space",
+          "def-infinitesimal-generator-of-a-unitary-group",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "def-schwartz-space-and-its-seminorms",
+          "def-sobolev-space-wkp-and-its-norm",
+          "def-strongly-continuous-one-parameter-unitary-group",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-complex-translation-and-approximate-identity-interfaces",
+          "lem-nrqm-composites-momentum-fourier-jacobian",
+          "lem-nrqm-kinematics-component-valued-wavefunction-identifications",
+          "lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint",
+          "lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-dominated-convergence",
+          "thm-plancherel",
+          "thm-stone-one-parameter-unitary-groups",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-fourier-transform-on-l-one-of-rn": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-infinitesimal-generator-of-a-unitary-group": "mathematical-premise",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "def-schwartz-space-and-its-seminorms": "mathematical-premise",
+          "def-sobolev-space-wkp-and-its-norm": "mathematical-premise",
+          "def-strongly-continuous-one-parameter-unitary-group": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+          "lem-classical-derivatives-are-weak-derivatives": "mathematical-premise",
+          "lem-complex-translation-and-approximate-identity-interfaces": "mathematical-premise",
+          "lem-nrqm-composites-momentum-fourier-jacobian": "mathematical-premise",
+          "lem-nrqm-kinematics-component-valued-wavefunction-identifications": "mathematical-premise",
+          "lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators": "mathematical-premise",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint": "mathematical-premise",
+          "lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group": "mathematical-premise",
+          "thm-complex-exponential-is-entire-with-derivative-itself": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "thm-stone-one-parameter-unitary-groups": "mathematical-premise",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 3,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1, printed pages 55-58 (PDF pages 67-70): position and momentum operators, domains, the canonical commutation relation; Sections 7.1-7.2, printed pages 161-169 (PDF pages 173-181): the Fourier transform and the free Schroedinger operator; Section 2.5, printed pages 79-80 (PDF pages 91-92): orthogonal sums",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Section 6, printed pages 22-25 (PDF pages 22-25): the momentum operator in the position representation, momentum eigenstates, the Fourier momentum representation and the position operator in the momentum representation",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 2.3, printed pages 24-32 (PDF pages 32-40): the momentum operator in the position representation, its Hermiticity, the commutator [x,p]=i hbar and momentum-space amplitudes",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-kinematics-ccr-and-internal-factor-commutation",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Canonical commutation relations on the component-valued core and commutation with the internal factor",
+        "statement": "Assume the Axiom of Countable Choice and the Axiom of Choice\n([[def-countable-choice]], [[def-axiom-of-choice]]). Fix integers $d\\ge1$,\n$r\\ge1$ and $\\hbar>0$, let $H^{(r)}=L^{2}(\\mathbb R^{d};\\mathbb C^{r})$ with\nthe componentwise position and momentum operators $Q_{j},P_{k}$ of\n[[lem-nrqm-kinematics-componentwise-position-and-momentum]], let\n$\\mathcal S^{(r)}:=\\mathcal S(\\mathbb R^{d};\\mathbb C^{r})$ be the componentwise\nSchwartz class ([[def-schwartz-space-and-its-seminorms]]), and let $\\Psi_{0}$\nand $\\Theta$ be the unitaries of\n[[lem-nrqm-kinematics-component-valued-wavefunction-identifications]]. For\n$S=(S_{lm})\\in M_{r}(\\mathbb C)$ write\n$$S_{\\times}f:=\\Bigl(\\sum_{m=1}^{r}S_{lm}f_{m}\\Bigr)_{l}\\qquad(f\\in H^{(r)}).$$\nThen:\n\n(a) $\\mathcal S^{(r)}\\subseteq D(Q_{j})\\cap D(P_{k})$ for all $j,k$,\n$Q_{j}\\mathcal S^{(r)}\\subseteq\\mathcal S^{(r)}$ and\n$P_{k}\\mathcal S^{(r)}\\subseteq\\mathcal S^{(r)}$, and on $\\mathcal S^{(r)}$ the\ncanonical commutation relations hold:\n$$(Q_{j}P_{k}-P_{k}Q_{j})f=i\\hbar\\,\\delta_{jk}f\\qquad(f\\in\\mathcal S^{(r)});$$\n\n(b) $S_{\\times}$ is bounded with $\\|S_{\\times}\\|=\\|S\\|_{\\mathrm{op}}$\n([[def-operator-norm]]), and\n$$S_{\\times}D(Q_{j})\\subseteq D(Q_{j}),\\quad Q_{j}S_{\\times}f=S_{\\times}Q_{j}f\\ (f\\in D(Q_{j})),\\qquad S_{\\times}D(P_{k})\\subseteq D(P_{k}),\\quad P_{k}S_{\\times}f=S_{\\times}P_{k}f\\ (f\\in D(P_{k}));$$\n\n(c) the spectral projection-valued measures of $Q_{j}$ and $P_{k}$ are\n$$E_{Q_{j}}(B)=M_{\\mathbf 1_{x_{j}^{-1}(B)}},\\qquad E_{P_{k}}(B)=\\mathcal F_{2}^{(r)*}M_{\\mathbf 1_{\\{2\\pi\\hbar\\xi_{k}\\in B\\}}}\\mathcal F_{2}^{(r)} \\qquad(B\\subseteq\\mathbb R\\ \\text{Borel}),$$\nwhere $M_{g}$ is multiplication by $g$; consequently\n$S_{\\times}E_{Q_{j}}(B)=E_{Q_{j}}(B)S_{\\times}$ and\n$S_{\\times}E_{P_{k}}(B)=E_{P_{k}}(B)S_{\\times}$ for every Borel $B$, and for\nunitary $V\\in U(r)$ and every $f\\in H^{(r)}$\n$$\\bigl\\|E_{Q_{j}}(B)V_{\\times}f\\bigr\\|=\\bigl\\|E_{Q_{j}}(B)f\\bigr\\|,\\qquad \\bigl\\|E_{P_{k}}(B)V_{\\times}f\\bigr\\|=\\bigl\\|E_{P_{k}}(B)f\\bigr\\|;$$\n\n(d) under the tensor identification $\\Theta$ the operator $S_{\\times}$\ncorresponds to the bounded amplification $I\\otimes S$ of\n[[lem-nrqm-composites-bounded-tensor-maps]], that is\n$\\Theta^{-1}S_{\\times}\\Theta=I\\otimes S$; in particular the internal-factor\noperators commute with the spatial ones in the sense of (b).",
+        "strategy": "direct",
+        "deps": [
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-axiom-of-choice",
+          "def-bounded-linear-operator",
+          "def-countable-choice",
+          "def-hilbert-space-adjoint",
+          "def-operator-norm",
+          "def-projection-valued-measure",
+          "def-schwartz-space-and-its-seminorms",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-nrqm-composites-bounded-tensor-maps",
+          "lem-nrqm-composites-hilbert-tensor-construction",
+          "lem-nrqm-kinematics-component-valued-wavefunction-identifications",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint",
+          "lem-nrqm-observables-l2-multiplication-spectral-measure",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces",
+          "thm-dominated-convergence",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space-adjoint": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-schwartz-space-and-its-seminorms": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+          "lem-classical-derivatives-are-weak-derivatives": "mathematical-premise",
+          "lem-nrqm-composites-bounded-tensor-maps": "mathematical-premise",
+          "lem-nrqm-composites-hilbert-tensor-construction": "mathematical-premise",
+          "lem-nrqm-kinematics-component-valued-wavefunction-identifications": "mathematical-premise",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum": "mathematical-premise",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint": "mathematical-premise",
+          "lem-nrqm-observables-l2-multiplication-spectral-measure": "mathematical-premise",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1, printed pages 55-58 (PDF pages 67-70): position, momentum and the canonical commutation relation; Section 8.1, printed pages 173-175 (PDF pages 185-187): algebraic position and momentum methods",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 2.3, printed pages 24-28 (PDF pages 32-36): the commutator [x,p]=i hbar in the position representation and its role in the operator calculus",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-kinematics-momentum-representation",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The momentum representation of the componentwise kinematics",
+        "statement": "Assume the Axiom of Countable Choice and the Axiom of Choice\n([[def-countable-choice]], [[def-axiom-of-choice]]). Fix $d\\ge1$, $r\\ge1$ and\n$\\hbar>0$, let $H^{(r)}=L^{2}(\\mathbb R^{d};\\mathbb C^{r})$ with the\ncomponentwise operators $Q_{j},P_{k}$ of\n[[lem-nrqm-kinematics-componentwise-position-and-momentum]], let $U$ be the\nunitary of [[lem-nrqm-composites-momentum-fourier-jacobian]] clause (c), which\non Schwartz classes acts by\n$$(U\\psi)(p)=(2\\pi\\hbar)^{-d/2}\\int_{\\mathbb R^{d}}e^{-ip\\cdot x/\\hbar}\\psi(x)\\,dx,$$\nand put $U^{(r)}:=\\Psi_{0}\\bigl(\\bigoplus_{l}U\\bigr)\\Psi_{0}^{-1}$ with\n$\\Psi_{0}$ as in [[lem-nrqm-kinematics-component-valued-wavefunction-identifications]].\nThen:\n\n(a) $U^{(r)}:L^{2}(\\mathbb R^{d},dx;\\mathbb C^{r})\\to L^{2}(\\mathbb R^{d},dp;\\mathbb C^{r})$\nis unitary; for $f=(f_{l})\\in\\mathcal S(\\mathbb R^{d};\\mathbb C^{r})$,\n$$(U^{(r)}f)_{l}(p)=(2\\pi\\hbar)^{-d/2}\\int_{\\mathbb R^{d}}e^{-ip\\cdot x/\\hbar}f_{l}(x)\\,dx \\qquad(l=1,\\dots,r),$$\n$U^{(r)}f\\in\\mathcal S(\\mathbb R^{d};\\mathbb C^{r})$, and\n$\\int_{\\mathbb R^{d}}\\|U^{(r)}f(p)\\|_{\\mathbb C^{r}}^{2}\\,dp\n=\\int_{\\mathbb R^{d}}\\|f(x)\\|_{\\mathbb C^{r}}^{2}\\,dx$;\n\n(b) $U^{(r)}D(P_{k})=D(M_{p_{k}})$, where $M_{p_{k}}g(p):=p_{k}g(p)$ on\n$D(M_{p_{k}})=\\{g\\in L^{2}(dp;\\mathbb C^{r}):p_{k}g\\in L^{2}\\}$, and\n$$U^{(r)}P_{k}=M_{p_{k}}U^{(r)};$$\nequivalently $(U^{(r)}P_{k}f)(p)=p_{k}(U^{(r)}f)(p)$ for every $f\\in D(P_{k})$\nand almost every $p$;\n\n(c) for every $f\\in\\mathcal S(\\mathbb R^{d};\\mathbb C^{r})$ and every $j$,\n$$U^{(r)}(Q_{j}f)(p)=i\\hbar\\,\\frac{\\partial}{\\partial p_{j}}\\bigl(U^{(r)}f\\bigr)(p) \\qquad(p\\in\\mathbb R^{d}),$$\nand both sides are Schwartz classes; no identity of unbounded operators on the\nfull domain of $Q_{j}$ is asserted;\n\n(d) for every $a\\in\\mathbb R^{d}$, with $T_{a}^{(r)}$ the componentwise\ntranslation of [[lem-nrqm-kinematics-componentwise-position-and-momentum]]\nclause (c),\n$$U^{(r)}T_{a}^{(r)}U^{(r)-1}=M_{e^{-ia\\cdot p/\\hbar}},$$\nthe bounded multiplication operator by the unimodular function\n$p\\mapsto e^{-ia\\cdot p/\\hbar}$;\n\n(e) under $\\Psi_{0}$ the operator $U^{(r)}$ is the orthogonal sum\n$\\bigoplus_{l}U$; no physical identification of $U^{(r)}f$ with a measured\nmomentum distribution is made by this lemma.",
+        "strategy": "direct",
+        "deps": [
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "def-axiom-of-choice",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-fourier-transform-on-l-one-of-rn",
+          "def-schwartz-space-and-its-seminorms",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-nrqm-composites-momentum-fourier-jacobian",
+          "lem-nrqm-kinematics-component-valued-wavefunction-identifications",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum",
+          "lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-extension-of-a-bounded-map-from-a-dense-subspace",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-plancherel",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-complex-lp-and-euclidean-test-function-conventions": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-fourier-transform-on-l-one-of-rn": "mathematical-premise",
+          "def-schwartz-space-and-its-seminorms": "mathematical-premise",
+          "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+          "lem-nrqm-composites-momentum-fourier-jacobian": "mathematical-premise",
+          "lem-nrqm-kinematics-component-valued-wavefunction-identifications": "mathematical-premise",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum": "mathematical-premise",
+          "lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators": "mathematical-premise",
+          "lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint": "mathematical-premise",
+          "thm-differentiation-under-the-integral-sign": "mathematical-premise",
+          "thm-extension-of-a-bounded-map-from-a-dense-subspace": "mathematical-premise",
+          "thm-linear-change-of-variables-for-lebesgue-measure": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 4,
+        "sources": {
+          "references": [
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Section 6, printed pages 22-25 (PDF pages 22-25): the Fourier transform as the momentum representation, the momentum-space wavefunction with the (2 pi hbar)^(-1/2) normalization and the position operator in the momentum representation",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 7.1, printed pages 161-167 (PDF pages 173-179): the Fourier transform, its unitary extension and the momentum representation",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 2.3.2-2.3.3, printed pages 27-31 (PDF pages 35-39): momentum-space amplitudes and the Gaussian packet's momentum distribution",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqm-kinematics-framework-massive-spin-s-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The massive spin-s particle model of the framework: state space, operators, units and frame readings",
+        "statement": "**(a) Adopted model and state space.** Adopt the kinematics and\nmassive-particle model postulate P5 for a declared particle of mass parameter\n$m>0$, spin label $s\\in\\{0,\\tfrac12,1,\\tfrac32,\\dots\\}$ and internal factor\nassigned as in the identical-particle and spin postulate P6\n([[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]],\n[[post-nrqm-framework-identical-particles-and-spin]]). Put $r:=2s+1$ and take\nas the model's one-particle state space the complex Hilbert space\n$$H_{s}:=L^{2}\\bigl(\\mathbb R^{3};\\mathbb C^{r}\\bigr) =\\Bigl\\{f:\\mathbb R^{3}\\to\\mathbb C^{r}\\ \\text{measurable}:\\ \\int_{\\mathbb R^{3}}\\|f(x)\\|_{\\mathbb C^{r}}^{2}\\,dx<\\infty\\Bigr\\}\\Big/\\!\\sim,$$\nthe quotient by equality almost everywhere, with inner product\n$\\langle f,g\\rangle=\\int_{\\mathbb R^{3}}\\sum_{l=1}^{r}f_{l}\\overline{g_{l}}\\,dx$\nlinear in the first argument ([[def-l-p-space-as-a-quotient-by-null-functions]]).\nThus an element of $H_{s}$ is a class of functions, not a function, and\npointwise values of a state are not defined; the position density is read from\nthe class through the observables of clause (b) and the observable and\nprobability postulate P2 ([[post-nrqm-framework-state-and-composition]],\n[[def-nrqm-state-geometry-framework-state-space]],\n[[def-nrqm-observables-framework-observable-and-outcome-law]]). Its dimension\nin the conventions of [[def-nrqm-framework-quantities-and-units]] clause (d)1\nis $\\ell^{-3/2}$ per component. P5 presents the same space as the completed\ntensor product $L^{2}(\\mathbb R^{3};\\mathbb C)\\widehat\\otimes\\mathbb C^{r}$\nwith the spin factor carrying the representation of P6; the unitary\nidentification of the two descriptions and the componentwise reading of\ncomponentwise operators are those of\n[[lem-nrqm-kinematics-component-valued-wavefunction-identifications]] and\n[[lem-nrqm-kinematics-componentwise-position-and-momentum]]. The orthonormal\nbasis $(e_{m})_{m=-s,\\dots,s}$ of $\\mathbb C^{r}$ is the basis fixed by P6\n([[post-nrqm-framework-identical-particles-and-spin]] clause (ii)).\n\n**(b) Position and momentum.** The model's $j$-th position and $k$-th momentum\nare the componentwise operators $Q_{j}$ and $P_{k}$ of\n[[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (a): for\n$f=(f_{l})$, restricted to the classes with $x_{j}f_{l}\\in L^{2}$ respectively\nwith $D_{k}f_{l}\\in L^{2}$ for all $l$,\n$$(Q_{j}f)_{l}(x):=x_{j}f_{l}(x),\\qquad (P_{k}f)_{l}:=-i\\hbar\\,D_{k}f_{l},$$\nwith $D_{k}$ the weak derivative and $\\hbar$ the action constant of\n[[def-nrqm-framework-quantities-and-units]]. These are the scalar operators of\n[[def-nrqm-magnetic-and-detection-position-and-momentum-operators]] applied\ncomponentwise. The model assigns to $(Q_{j},\\mathrm m)$ and to\n$(P_{k},\\mathrm{kg\\,m\\,s^{-1}})$ the status of assigned sharp observables in\nthe sense of [[def-nrqm-observables-framework-observable-and-outcome-law]]\nclause (a), with the units of [[def-nrqm-framework-quantities-and-units]]\nclause (d)4; both are densely defined and self-adjoint by\n[[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (a). On the\nSchwartz core they satisfy the componentwise canonical commutation relations,\nand they commute with the internal-factor operators of clause (c) in the sense\nof [[lem-nrqm-kinematics-ccr-and-internal-factor-commutation]] clauses (a),(c).\n\n**(c) Internal factor.** For $i\\in\\{1,2,3\\}$ let $S_{i}=\\hbar J_{i}$ be the\nself-adjoint endomorphisms of $\\mathbb C^{r}$ of the spin assignment P6\n([[post-nrqm-framework-identical-particles-and-spin]] clause (ii),\n[[prop-nrqm-orbital-and-spin-finite-spin-matrices]]), and let the model read\nthem on $H_{s}$ as the matrix actions\n$$(S_{i}f)_{l}:=\\hbar\\sum_{m=1}^{r}(J_{i})_{lm}f_{m}\\qquad(l=1,\\dots,r),$$\nthat is, as the amplifications $I\\otimes S_{i}$ under the tensor\nidentification of clause (a) ([[lem-nrqm-kinematics-ccr-and-internal-factor-commutation]]\nclause (d)). Their declared unit is the unit of action ([[def-nrqm-framework-quantities-and-units]]\nclause (d)4). The factor is internal bookkeeping: it is not a spatial\ncoordinate, not a rotating body and not a relativistic spinor, and the model\nassigns no position or worldline to it.\n\n**(d) Momentum-space representative.** With $U^{(s)}$ the unitary of\n[[lem-nrqm-kinematics-momentum-representation]] for $r=2s+1$, the\n**momentum-space representative** of a preparation vector $\\psi\\in H_{s}$ is\n$\\psi_{p}:=U^{(s)}\\psi\\in L^{2}(\\mathbb R^{3},dp;\\mathbb C^{r})$; for a\nSchwartz class $\\psi$ it is the componentwise Fourier transform\n$$(\\psi_{p})_{l}(p)=(2\\pi\\hbar)^{-3/2}\\int_{\\mathbb R^{3}}e^{-ip\\cdot x/\\hbar}\\psi_{l}(x)\\,dx,$$\nand its dimension is $(\\mathrm{kg\\,m\\,s^{-1}})^{-3/2}$ per component\n([[def-nrqm-framework-quantities-and-units]] clause (d)2). By\n[[lem-nrqm-kinematics-momentum-representation]] clause (b), $P_{k}$ acts on the\nmomentum representative by multiplication by $p_{k}$; this is the model's\nmomentum reading and no measured momentum distribution is identified with\n$|\\psi_{p}|^{2}$ by this definition.\n\n**(e) Frame reading.** The model's inertial frames are the global coordinate\ncharts of P5; frame changes are the Galilean transformations of P5, with\nparameters and units as in [[def-nrqm-framework-quantities-and-units]]. This\ndefinition uses P5's frame class only. The transformation law of state\nrepresentatives under a change of inertial frame is a derived statement about\nthe model's operators and is established by the covariance theorems of this\npage for translations and boosts; it is not an additional assumption of this\ndefinition, and no Lorentz transformation law is claimed.\n\n**(f) Status.** Clauses (a)-(e) record the readings of P1, P2, P5 and P6 in the\nterminology of this page and fix the objects used by its theorems. They assert\nno time evolution beyond what the autonomous-dynamics postulate P4 assigns\n([[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]\nclause (iv)), no preparation or apparatus model, no detection model and no\nempirical result. Massless particles, relativistic matter, radiation, singular\nor unbounded potentials and boundary or confined realizations are separate\nmodel assumptions with their own domains and self-adjointness statements; none\nis obtained from this definition.",
+        "strategy": "n/a",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity",
+          "def-schwartz-space-and-its-seminorms",
+          "lem-nrqm-kinematics-ccr-and-internal-factor-commutation",
+          "lem-nrqm-kinematics-component-valued-wavefunction-identifications",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum",
+          "lem-nrqm-kinematics-momentum-representation",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-state-and-composition",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-l-p-space-as-a-quotient-by-null-functions": "mathematical-premise",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-state-geometry-pure-mixed-states-and-purity": "mathematical-premise",
+          "def-schwartz-space-and-its-seminorms": "mathematical-premise",
+          "lem-nrqm-kinematics-ccr-and-internal-factor-commutation": "mathematical-premise",
+          "lem-nrqm-kinematics-component-valued-wavefunction-identifications": "mathematical-premise",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum": "mathematical-premise",
+          "lem-nrqm-kinematics-momentum-representation": "mathematical-premise",
+          "post-nrqm-framework-identical-particles-and-spin": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "prop-nrqm-orbital-and-spin-finite-spin-matrices": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Section 6, printed pages 22-24 (PDF pages 22-24): the position and momentum operators, momentum eigenstates and the momentum representation",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            },
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.2.3, printed pages 75-76 (PDF pages 78-79): momentum eigenstates and the Fourier transform",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 2.3 printed pages 24-32 (PDF pages 32-40): the position representation of the momentum operator; Section 6.1 printed pages 105-110 (PDF pages 113-118): composite systems, product states and operators on the product space; Section 7.4 printed pages 158-161 (PDF pages 166-169): spin commutes with the spatial operators, with 2s+1 spin states",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The kinematic reading of the massive-particle model postulate P5 for one particle of spin label s and mass parameter m>0: the component-valued state space L^2(R^3;C^(2s+1)) with its class reading and internal factor, the componentwise position and momentum operators with their declared units, the internal spin operators as matrix actions, the momentum-space representative, and the frame reading of the model. The item fixes terminology and readings of P1, P2, P5 and P6; it asserts no dynamics beyond what P4 assigns, no apparatus or detection model, no empirical identification of any species, and excludes massless, relativistic, singular-potential, boundary and radiation models, which require their own assumptions."
+      },
+      {
+        "id": "pthm-nrqm-kinematics-spin-s-outcome-laws",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Position and momentum outcome laws of the massive spin-s model",
+        "statement": "Adopt the observable and probability postulate in the reading of\n[[def-nrqm-observables-framework-observable-and-outcome-law]], the kinematics\nand massive-particle model postulate P5, and the internal-factor assignment of\nthe postulate P6, all read for the spin-$s$ model of\n[[def-nrqm-kinematics-framework-massive-spin-s-model]] with mass parameter\n$m>0$, spin label $s\\in\\{0,\\tfrac12,1,\\dots\\}$ and $r=2s+1$\n([[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]],\n[[post-nrqm-framework-identical-particles-and-spin]]), and assume the Axiom of\nCountable Choice and the Axiom of Choice ([[def-countable-choice]],\n[[def-axiom-of-choice]]). Let $H_{s}$ be the model's state space, $Q_{j},P_{k}$\nits componentwise position and momentum operators, $U^{(s)}$ its momentum\ntransform, and let $\\mu^{A}_{\\psi}(B)=\\|E_{A}(B)\\psi\\|^{2}$ be the outcome law\nof an assigned sharp observable $A$ in a unit vector $\\psi$\n([[def-nrqm-observables-framework-observable-and-outcome-law]] clause (b)).\nThen:\n\n(a) for each $j$ the spectral projection-valued measure of $Q_{j}$ is\n$$E_{Q_{j}}(B)=M_{\\mathbf 1_{x_{j}^{-1}(B)}}\\qquad(B\\subseteq\\mathbb R\\ \\text{Borel}),$$\nthe componentwise multiplication by the indicator, and\n$$\\mu^{Q_{j}}_{\\psi}(B)=\\int_{x_{j}^{-1}(B)}\\|\\psi(x)\\|_{\\mathbb C^{r}}^{2}\\,dx;$$\nthe law is atomless, $\\mu^{Q_{j}}_{\\psi}(\\{\\lambda\\})=0$ for every\n$\\lambda\\in\\mathbb R$, and $\\sigma(Q_{j})=\\mathbb R$;\n\n(b) there is a unique regular projection-valued measure $G$ on the Borel sets\nof $\\mathbb R^{3}$ with\n$$G(B_{1}\\times B_{2}\\times B_{3})=E_{Q_{1}}(B_{1})E_{Q_{2}}(B_{2})E_{Q_{3}}(B_{3})$$\nfor all Borel $B_{1},B_{2},B_{3}$, namely $G(B)=M_{\\mathbf 1_{B}}$, and its\nscalar law is the model's Born position law,\n$$\\mu^{G}_{\\psi}(B)=\\|G(B)\\psi\\|^{2}=\\int_{B}\\|\\psi(x)\\|_{\\mathbb C^{r}}^{2}\\,dx;$$\n\n(c) for each $k$ the spectral projection-valued measure of $P_{k}$ is\n$$E_{P_{k}}(B)=U^{(s)-1}M_{\\mathbf 1_{B}(p_{k})}U^{(s)},$$\nand with $\\psi_{p}:=U^{(s)}\\psi$\n$$\\mu^{P_{k}}_{\\psi}(B)=\\int_{\\{p\\in\\mathbb R^{3}:\\,p_{k}\\in B\\}}\\|\\psi_{p}(p)\\|_{\\mathbb C^{r}}^{2}\\,dp;$$\nthe law is atomless and $\\sigma(P_{k})=\\mathbb R$;\n\n(d) for every unitary $V\\in U(r)$, with $V_{\\times}$ the matrix action of\n[[lem-nrqm-kinematics-ccr-and-internal-factor-commutation]] clause (b),\n$$\\mu^{Q_{j}}_{V_{\\times}\\psi}=\\mu^{Q_{j}}_{\\psi},\\qquad \\mu^{P_{k}}_{V_{\\times}\\psi}=\\mu^{P_{k}}_{\\psi};$$\n\n(e) **Scope.** The statement is conditional on P2, P5 and P6 and the cited\nmathematics, and extends the position and momentum laws of the massive model to\nthe spin-$s$ state space. No joint law of a position and a momentum observable\nis asserted, no dynamics is used or claimed, and the identification of the\noperators with concrete laboratory apparatus is a tested identification under\nthe preparation and apparatus postulate, not a consequence of this theorem;\nno empirical result is recorded. Exact values have probability zero although\nboth spectra equal $\\mathbb R$, so an exact value is an idealization outside\nthe sharp finite-resolution reading.",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-nrqm-kinematics-framework-massive-spin-s-model",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-projection-valued-measure",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "lem-nrqm-kinematics-ccr-and-internal-factor-commutation",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum",
+          "lem-nrqm-kinematics-momentum-representation",
+          "lem-nrqm-observables-l2-multiplication-spectral-measure",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-observable-and-probability",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "thm-heine-borel-rn"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nrqm-kinematics-framework-massive-spin-s-model": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-projection-valued-measure": "mathematical-premise",
+          "lem-finite-measure-uniqueness-on-a-pi-system": "mathematical-premise",
+          "lem-nrqm-kinematics-ccr-and-internal-factor-commutation": "mathematical-premise",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum": "mathematical-premise",
+          "lem-nrqm-kinematics-momentum-representation": "mathematical-premise",
+          "lem-nrqm-observables-l2-multiplication-spectral-measure": "mathematical-premise",
+          "post-nrqm-framework-identical-particles-and-spin": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "thm-borel-products-of-euclidean-spaces-are-euclidean-borel": "mathematical-premise",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise",
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 1.1-1.2 and 3.2.3, printed pages 3-14 and 75-76 (PDF pages 6-17 and 78-79): the wave function and its probability density, the Schroedinger Hamiltonian, momentum eigenstates and the Fourier transform",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Sections 4 and 6, printed pages 12-18 and 22-25 (PDF pages 12-18 and 22-25): the nature of the spectrum and the position and momentum representations",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The position and momentum outcome laws of the spin-s massive-particle model of the framework: the spectral projection-valued measures of the componentwise position and momentum operators, the joint position law with Born density the squared component norm, the momentum laws with density the squared momentum-representative norm, the atomlessness of exact values, and the invariance of the spatial laws under the internal factor. The statement is a conditional consequence of the observable and probability postulate P2 and the model postulates P5 and P6 and the cited mathematics; it asserts no joint position-momentum statistics, no dynamics, no apparatus or detector realization, no species identification and no empirical result."
+      },
+      {
+        "id": "pthm-nrqm-kinematics-translation-covariance",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Translation covariance of the massive spin-s kinematics and of its bounded-potential dynamics",
+        "statement": "Adopt the observable and probability postulate P2 in the reading of\n[[def-nrqm-observables-framework-observable-and-outcome-law]], the\nautonomous-dynamics postulate P4 in the reading of\n[[def-nrqm-autonomous-dynamics-framework-evolution]], and the kinematics and\nmassive-particle model postulate P5 and internal-factor postulate P6 read\nthrough [[def-nrqm-kinematics-framework-massive-spin-s-model]] for a particle\nof mass parameter $m>0$ and spin label $s$\n([[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]), and\nassume the Axiom of Countable Choice and the Axiom of Choice\n([[def-countable-choice]], [[def-axiom-of-choice]]). Let $H_{s}$ be the model's\nstate space with componentwise operators $Q_{j},P_{k}$ and translations\n$T_{a}:=T_{a}^{(r)}$ ($r=2s+1$) of\n[[lem-nrqm-kinematics-componentwise-position-and-momentum]] clause (c), let\n$\\mu^{A}_{\\psi}(B)=\\|E_{A}(B)\\psi\\|^{2}$ be the outcome law of an assigned sharp\nobservable $A$ in a unit vector $\\psi$, and let $V:\\mathbb R^{3}\\to\\mathbb R$\nbe real, bounded and measurable with $V_{a}(x):=V(x-a)$; write\n$$H_{V}:=\\frac{1}{2m}\\sum_{k=1}^{3}P_{k}^{2}+M_{V},\\qquad D(H_{V})=W^{2,2}(\\mathbb R^{3};\\mathbb C^{r}),$$\nfor the model's free-plus-bounded-potential energy operator\n([[thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators]]\nclause (c) applied componentwise, assembled by\n[[lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators]]), with flow\n$U_{V}(t)=\\exp(-itH_{V}/\\hbar)$ in the reading of\n[[def-nrqm-autonomous-dynamics-framework-evolution]] clause (b). Then:\n\n(a) for every $a\\in\\mathbb R^{3}$ the operator $T_{a}$ is unitary,\n$T_{a}D(Q_{j})=D(Q_{j})$, $T_{a}D(P_{k})=D(P_{k})$, and\n$$T_{a}Q_{j}T_{a}^{-1}=Q_{j}-a_{j}I,\\qquad T_{a}P_{k}T_{a}^{-1}=P_{k};$$\n\n(b) **Outcome-law covariance.** For every unit $\\psi\\in H_{s}$ and Borel\n$B\\subseteq\\mathbb R$,\n$$\\mu^{Q_{j}}_{T_{a}\\psi}(B)=\\mu^{Q_{j}}_{\\psi}(B-a_{j}),\\qquad \\mu^{P_{k}}_{T_{a}\\psi}(B)=\\mu^{P_{k}}_{\\psi}(B):$$\ntranslating the preparation by $a$ translates the position law by $a$ and\nleaves every momentum law unchanged;\n\n(c) **Dynamics covariance.** With $H_{V}$ and $H_{V_{a}}$ the energy operators\nof the potentials $V$ and $V_{a}$,\n$$T_{a}H_{V}T_{a}^{-1}=H_{V_{a}},\\qquad T_{a}U_{V}(t)T_{a}^{-1}=U_{V_{a}}(t)\\qquad(t\\in\\mathbb R);$$\nin particular, if $V$ is invariant under translation by $a$ (equivalently\nconstant almost everywhere when this holds for every $a$), then $T_{a}$ leaves\n$H_{V}$ and its flow invariant, and the free flow ($V=0$) commutes with every\ntranslation;\n\n(d) **Frame reading.** The model reads the inertial-frame change\n$t'=t$, $x'=x+a$ of P5 (a change of spatial origin; the parameter $a$ has the\nunit of length, [[def-nrqm-framework-quantities-and-units]]) on state\nrepresentatives by $\\psi'(x')=\\psi(x'-a)=(T_{a}\\psi)(x')$; this is the\ntranslation convention of the model, consistent with P5's frame class, and\nclauses (b) and (c) are its covariance consequences for the outcome laws and\nfor the bounded-potential dynamics;\n\n(e) **Scope.** The statement is conditional on P2, P4, P5 and P6 and the cited\nmathematics, and it concerns the componentwise massive model with real bounded\nmeasurable potentials only; singular or unbounded potentials, confined or\nboundary realizations, massless and relativistic models and radiation are\nseparate model assumptions for which no translation covariance is asserted.\nNo apparatus, laboratory identification or empirical result is recorded.",
+        "strategy": "direct",
+        "deps": [
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-nrqm-autonomous-dynamics-framework-evolution",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-kinematics-framework-massive-spin-s-model",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-projection-valued-measure",
+          "def-strongly-continuous-one-parameter-unitary-group",
+          "lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group",
+          "lem-nrqm-kinematics-ccr-and-internal-factor-commutation",
+          "lem-nrqm-kinematics-component-valued-wavefunction-identifications",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum",
+          "lem-nrqm-kinematics-momentum-representation",
+          "lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-observable-and-probability",
+          "pthm-nrqm-autonomous-dynamics-schrodinger-picture-flow",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators",
+          "thm-stone-one-parameter-unitary-groups"
+        ],
+        "dependency_roles": {
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-kinematics-framework-massive-spin-s-model": "formulation-prerequisite",
+          "def-nrqm-magnetic-and-detection-position-and-momentum-operators": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-strongly-continuous-one-parameter-unitary-group": "mathematical-premise",
+          "lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group": "mathematical-premise",
+          "lem-nrqm-kinematics-ccr-and-internal-factor-commutation": "mathematical-premise",
+          "lem-nrqm-kinematics-component-valued-wavefunction-identifications": "mathematical-premise",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum": "mathematical-premise",
+          "lem-nrqm-kinematics-momentum-representation": "mathematical-premise",
+          "lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators": "mathematical-premise",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "pthm-nrqm-autonomous-dynamics-schrodinger-picture-flow": "physical-result",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators": "mathematical-premise",
+          "thm-stone-one-parameter-unitary-groups": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 4.1-4.3, printed pages 58-70 (PDF pages 66-78): translating kets, continuous transformations and generators, transformations of operators and symmetries",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Section 6, printed pages 22-24 (PDF pages 22-24): position and momentum representations and the action of the momentum operator",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 7.1 printed pages 161-167 (PDF pages 173-179): Fourier transform conventions; Section 8.1 printed pages 173-175 (PDF pages 185-187): the one-parameter translation group with generator the momentum component",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The translation covariance of the spin-s massive-particle model: the unitarity and operator conjugation identities of the componentwise translations, the resulting translation of the position law and invariance of the momentum laws, the conjugation of the free-plus-bounded-potential energy operator and of its flow, and the model's reading of a passive change of spatial origin. The statement is conditional on P2, P4, P5 and P6 and the cited mathematics, holds for real bounded measurable potentials only, and asserts nothing about singular or unbounded potentials, boundary realizations, relativistic models, radiation, apparatuses or empirical results."
+      },
+      {
+        "id": "pthm-nrqm-kinematics-boost-covariance",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Galilean boost covariance of the free massive spin-s model and the moving-frame reading",
+        "statement": "Adopt the observable and probability postulate P2 in the reading of\n[[def-nrqm-observables-framework-observable-and-outcome-law]], the\nautonomous-dynamics postulate P4 in the reading of\n[[def-nrqm-autonomous-dynamics-framework-evolution]], and the kinematics and\nmassive-particle model postulate P5 and internal-factor postulate P6 read\nthrough [[def-nrqm-kinematics-framework-massive-spin-s-model]] for a particle\nof mass parameter $m>0$ and spin label $s$\n([[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]), and\nassume the Axiom of Countable Choice and the Axiom of Choice\n([[def-countable-choice]], [[def-axiom-of-choice]]). Let $H_{s}$ be the model's\nstate space with componentwise operators $Q_{j},P_{k}$\n([[lem-nrqm-kinematics-componentwise-position-and-momentum]]), let\n$\\mu^{A}_{\\psi}(B)=\\|E_{A}(B)\\psi\\|^{2}$ be the outcome law of an assigned sharp\nobservable $A$ in a unit vector $\\psi$, let\n$H_{0}:=\\frac{1}{2m}\\sum_{k}P_{k}^{2}$ with domain\n$D(H_{0})=W^{2,2}(\\mathbb R^{3};\\mathbb C^{r})$ and flow\n$U_{0}(t)=\\exp(-itH_{0}/\\hbar)$, and for real bounded measurable\n$V:\\mathbb R^{3}\\to\\mathbb R$ let $H_{V}$ and $U_{V}$ be the operator and flow of\n[[pthm-nrqm-kinematics-translation-covariance]], with\n$D(H_{V})=W^{2,2}(\\mathbb R^{3};\\mathbb C^{r})$ and\n$V_{u}(x,t):=V(x-ut)$. For $u\\in\\mathbb R^{3}$ and $t\\in\\mathbb R$ define the\n**boost operator** $B_{u}(t)$ componentwise by\n$$\\bigl(B_{u}(t)\\psi\\bigr)(x):=\\exp\\Bigl(\\frac{i}{\\hbar}\\Bigl(m\\,u\\cdot x -\\frac{m|u|^{2}}{2}t\\Bigr)\\Bigr)\\psi(x-ut).$$\nThen:\n\n(a) for every $u,t$ the operator $B_{u}(t)$ is unitary,\n$B_{u}(t)^{-1}=B_{u}(t)^{*}$, and it maps $W^{2,2}(\\mathbb R^{3};\\mathbb C^{r})$\nand $\\mathcal S(\\mathbb R^{3};\\mathbb C^{r})$ onto themselves;\n\n(b) $B_{u}(t)D(Q_{j})=D(Q_{j})$ and $B_{u}(t)D(P_{k})=D(P_{k})$; for\n$f\\in D(Q_{j})$ and $g\\in D(P_{k})$, respectively,\n$$Q_{j}B_{u}(t)f=B_{u}(t)(Q_{j}+u_{j}tI)f,\\qquad P_{k}B_{u}(t)g=B_{u}(t)(P_{k}+mu_{k}I)g.$$\nFor a Borel $B\\subseteq\\mathbb R$ and\n$a\\in\\mathbb R$, write $B-a:=\\{b-a:b\\in B\\}$. Consequently, for every\nunit $\\psi$ and Borel $B\\subseteq\\mathbb R$\n$$\\mu^{Q_{j}}_{B_{u}(t)\\psi}(B)=\\mu^{Q_{j}}_{\\psi}(B-u_{j}t),\\qquad \\mu^{P_{k}}_{B_{u}(t)\\psi}(B)=\\mu^{P_{k}}_{\\psi}(B-mu_{k});$$\n\n(c) **free covariance.** $B_{u}(t)U_{0}(t-s)=U_{0}(t-s)B_{u}(s)$ for all\n$s,t\\in\\mathbb R$; in particular the freely evolved boosted preparation equals\nthe boost at time $t$ of the initial boosted preparation,\n$$B_{u}(t)U_{0}(t)\\psi=U_{0}(t)B_{u}(0)\\psi\\qquad(\\psi\\in H_{s});$$\nand the conjugated free Hamiltonian identity\n$$B_{u}(t)^{-1}H_{0}B_{u}(t)=H_{0}+u\\cdot P+\\frac{m|u|^{2}}{2}I$$\nholds on $W^{2,2}(\\mathbb R^{3};\\mathbb C^{r})$ (in the chart velocity\n$v=-u$ of clause (e) it reads $H_{0}-v\\cdot P+\\frac{m|v|^{2}}{2}I$), the\noperator form of the frame change on the free generator;\n\n(d) **moving-frame bounded-potential model.** For every real bounded\nmeasurable $V$ and every $u$, the two-parameter family\n$$W_{u}(t,s):=B_{u}(t)\\,U_{V}(t-s)\\,B_{u}(s)^{-1}$$\nconsists of unitaries preserving $W^{2,2}(\\mathbb R^{3};\\mathbb C^{r})$, and\nfor every $s\\in\\mathbb R$ and $\\psi_{0}\\in W^{2,2}(\\mathbb R^{3};\\mathbb C^{r})$\nthe curve $t\\mapsto W_{u}(t,s)\\psi_{0}$ takes values in $W^{2,2}$, is\ndifferentiable as an $L^{2}$-valued curve and satisfies\n$$i\\hbar\\frac{d}{dt}\\psi(t)=\\Bigl(\\frac{1}{2m}\\sum_{k}P_{k}^{2}+M_{V_{u}(\\cdot,t)}\\Bigr)\\psi(t),\\qquad \\psi(s)=\\psi_{0};$$\nit is unique among maps $w:\\mathbb R\\to W^{2,2}$ that are differentiable\ninto $L^{2}$ and satisfy this equation in $L^{2}$ for every $t$ with\n$w(s)=\\psi_{0}$;\n\n(e) **Frame reading and scope.** The model reads the inertial-frame change\n$t'=t$, $x'=x+ut$ of P5 (the new chart moves with velocity $-u$ relative to the\nold one) on state representatives by $\\psi'(x',t)=(B_{u}(t)\\psi(\\cdot,t))(x')$;\nclauses (b)-(d) are the covariance consequences of that reading for the laws\nof the free model and for the bounded-potential dynamics in the moving frame.\nThe statement is conditional on P2, P4, P5 and P6 and the cited mathematics,\nconcerns the componentwise massive model with real bounded measurable\npotentials only, and asserts no Lorentz covariance, no photon limit, no\ncovariance for singular or unbounded potentials and no worldline of an\nunmeasured particle; no apparatus or empirical result is recorded.",
+        "strategy": "direct",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-mean-value-theorem",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-nrqm-autonomous-dynamics-framework-evolution",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-kinematics-framework-massive-spin-s-model",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-schwartz-space-and-its-seminorms",
+          "def-strongly-continuous-one-parameter-unitary-group",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-mean-value-inequality-for-a-differentiable-banach-valued-curve",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum",
+          "lem-nrqm-kinematics-momentum-representation",
+          "lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-observable-and-probability",
+          "pthm-nrqm-autonomous-dynamics-schrodinger-picture-flow",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "pthm-nrqm-kinematics-translation-covariance",
+          "thm-complex-exponential-is-entire-with-derivative-itself",
+          "thm-dominated-convergence",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators"
+        ],
+        "dependency_roles": {
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-kinematics-framework-massive-spin-s-model": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-schwartz-space-and-its-seminorms": "mathematical-premise",
+          "def-strongly-continuous-one-parameter-unitary-group": "mathematical-premise",
+          "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+          "lem-mean-value-inequality-for-a-differentiable-banach-valued-curve": "mathematical-premise",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum": "mathematical-premise",
+          "lem-nrqm-kinematics-momentum-representation": "mathematical-premise",
+          "lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators": "mathematical-premise",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "pthm-nrqm-autonomous-dynamics-schrodinger-picture-flow": "physical-result",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "pthm-nrqm-kinematics-translation-covariance": "physical-result",
+          "thm-complex-exponential-is-entire-with-derivative-itself": "mathematical-premise",
+          "thm-dominated-convergence": "mathematical-premise",
+          "thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "C. Torre, Galilean Relativity and the Path Integral Formalism in Quantum Mechanics, arXiv:2306.13487 (2023), Section 4 equation (4.23) and Section 6 equations (6.2)-(6.4) and (6.8), pages 12-13 and 17-18: the Galilean boost law of the wave function requires the multiplicative phase factor, psi_u(r,t)=exp[-(i/hbar) M u.(t u/2 - R)] psi(r-t u,t), the passive reading of psi_u as the wave function in a frame moving with velocity -u relative to the original frame, ordinary composition of pure boosts u1,u2 to u1+u2 in equation (6.4), and the projective boost-translation relation in equation (6.8)",
+              "url": "https://arxiv.org/pdf/2306.13487"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 7.2 printed pages 167-169 (PDF pages 179-181): the free Schroedinger operator; Section 7.3 printed pages 169-171 (PDF pages 181-183): the time evolution in the free case; Section 8.1 printed pages 173-175 (PDF pages 185-187): position and momentum via their commutation relations and unitary equivalence through the Fourier transform",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The Galilean boost covariance of the free spin-s massive-particle model and the moving-frame reading of its bounded-potential dynamics: unitarity and domain preservation of the boost family, the operator identities shifting position by ut and momentum by mu together with the resulting law transports, the free-propagator covariance identity, the conjugated free Hamiltonian identity, and the moving-frame Schroedinger equation with the pulled-back potential. The statement is conditional on P2, P4, P5 and P6 and the cited mathematics, holds for the free model and for real bounded measurable potentials only, and asserts no Lorentz covariance, no massless or photon limit, no covariance for singular or unbounded potentials, and no apparatus or empirical result."
+      },
+      {
+        "id": "rem-nrqm-kinematics-scope-and-empirical-status",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Scope and empirical status of the massive-particle kinematics items",
+        "statement": "## What the pair establishes\n\nThe items of this pair are conditional consequences of the framework's\npostulates and of the cited mathematics. [[def-nrqm-kinematics-framework-massive-spin-s-model]]\nfounds the spin-$s$ model on the state space $H_{s}=L^{2}(\\mathbb R^{3};\\mathbb C^{2s+1})$\nwith the componentwise position and momentum operators $Q_{j},P_{k}$;\n[[lem-nrqm-kinematics-componentwise-position-and-momentum]] proves that these\noperators are self-adjoint with their maximal domains and provides the Fourier\nrepresentation and the translation identities;\n[[lem-nrqm-kinematics-ccr-and-internal-factor-commutation]] proves the\ncanonical commutation relations on the Schwartz core, identifies the spectral\nmeasures and proves that the internal factor commutes with the spatial\nmeasures; [[lem-nrqm-kinematics-momentum-representation]] constructs the\nmomentum representation;\n[[pthm-nrqm-kinematics-spin-s-outcome-laws]] derives the position and momentum\noutcome laws of the spin-$s$ model, including the Born density\n$\\|\\psi(x)\\|^{2}_{\\mathbb C^{2s+1}}$ and the momentum density\n$\\|\\psi_{p}(p)\\|^{2}$;\n[[pthm-nrqm-kinematics-translation-covariance]] and\n[[pthm-nrqm-kinematics-boost-covariance]] establish the covariance of these\nlaws and of the bounded-potential dynamics under the Galilean translations and\nboosts of the model's frame class. All of this is conditional on P1, P2, P4,\nP5 and P6 and on the cited mathematical suppliers; none of it is a statement\nthat any physical system is exactly described by the model.\n\n## Empirical status of the parameters\n\nThe mass parameter $m>0$ and the spin label $s$ are model parameters: within\nthe framework they are declared values, and the identical-particle and spin\npostulate assigns to a species its mass, spin, statistics and couplings as\nempirical model parameters with uncertainty. This pair derives no value of\n$m$ or $s$, records no measurement and asserts no species identification; the\nunits in which $m$, $\\hbar$, $Q_{j}$ and $P_{k}$ are read are those of\n[[def-nrqm-framework-quantities-and-units]], and the exact defining constants\nof the current SI recorded there are unit conventions, not measurements of\nthis framework.\n\n## What is not claimed\n\nThe outcome laws are sharp-law statements: an exact position or momentum value\nhas probability zero in every preparation, finite-resolution outcomes are\nBorel bins, and no detector, efficiency, resolution or sampling model is\nintroduced. The covariance theorems hold for the free model and for real\nbounded measurable potentials; they assert nothing for singular or unbounded\npotentials, confined or boundary realizations, massless particles, radiation\nor relativistic matter. The internal factor is bookkeeping: it is not\nidentified with a spatial rotation, a classical angular momentum or a\nrelativistic spinor, and no empirical consequence of the spin assignment alone\nis derived. The identification of the operators $Q_{j},P_{k}$ with concrete\nlaboratory procedures remains a tested identification under the preparation\nand apparatus postulate, external to this pair.",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-kinematics-framework-massive-spin-s-model",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "lem-nrqm-kinematics-ccr-and-internal-factor-commutation",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum",
+          "lem-nrqm-kinematics-momentum-representation",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "pthm-nrqm-kinematics-boost-covariance",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "pthm-nrqm-kinematics-translation-covariance"
+        ],
+        "dependency_roles": {
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-kinematics-framework-massive-spin-s-model": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "lem-nrqm-kinematics-ccr-and-internal-factor-commutation": "mathematical-premise",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum": "mathematical-premise",
+          "lem-nrqm-kinematics-momentum-representation": "mathematical-premise",
+          "post-nrqm-framework-identical-particles-and-spin": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "pthm-nrqm-kinematics-boost-covariance": "physical-result",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "pthm-nrqm-kinematics-translation-covariance": "physical-result"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 1.1-1.2 and 3.2.3, printed pages 3-14 and 75-76 (PDF pages 6-17 and 78-79): the wave function, its normalization and the momentum representation",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 2.3, printed pages 24-32 (PDF pages 32-40): the position and momentum operators and momentum-space amplitudes",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "C. Torre, Galilean Relativity and the Path Integral Formalism in Quantum Mechanics, arXiv:2306.13487 (2023), Sections 4 and 6, pages 12-13 and 17: the Galilean boost law (4.23) with its phase factor, the passive frame reading and the projective composition of boosts",
+              "url": "https://arxiv.org/pdf/2306.13487"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Section 6, printed pages 22-25 (PDF pages 22-25): the position and momentum representations",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The reading of the kinematics pair as a whole: its model assumptions, the empirical status of its mass and spin parameters, the excluded realizations and the limits of its predictions. The remark asserts no new dynamics or mathematics and records no measurement."
+      }
+    ]
+  },
+  {
+    "order": 176,
+    "id": "qm-massive-particle-kinematics-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Massive Particle Kinematics \u2014 Examples",
+    "companion": "qm-massive-particle-kinematics",
+    "requires": [
+      "qm-massive-particle-kinematics",
+      "the-heat-kernel-and-the-cauchy-problem",
+      "improper-and-parameter-dependent-multiple-integrals",
+      "qm-observables-and-born-probabilities",
+      "qm-math-composites",
+      "qm-math-intervals-and-contacts",
+      "qm-framework-and-quantities"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqm-kinematics-gaussian-position-momentum-packet",
+        "kind": "example",
+        "domain": "physics",
+        "title": "The Gaussian position and momentum packet of the massive model",
+        "statement": "Adopt the observable and probability postulate P2 and the massive-particle model\npostulate P5 read through\n[[def-nrqm-kinematics-framework-massive-spin-s-model]] for a spinless particle\n($s=0$, $r=1$) of mass parameter $m>0$, and assume the Axiom of Countable\nChoice ([[def-countable-choice]],\n[[def-nrqm-observables-framework-observable-and-outcome-law]]). Fix a width\n$\\sigma>0$ and define\n$$\\psi_{\\sigma}(x):=(\\pi\\sigma^{2})^{-3/4}e^{-|x|^{2}/(2\\sigma^{2})},\\qquad x\\in\\mathbb R^{3}.$$\nThen:\n\n(i) $\\psi_{\\sigma}\\in\\mathcal S(\\mathbb R^{3};\\mathbb C)$ with\n$\\|\\psi_{\\sigma}\\|=1$, so its ray is a pure preparation of the model and\n$\\psi_{\\sigma}\\in D(Q_{j})\\cap D(P_{k})$ for all $j,k$, with\n$D_{j}\\psi_{\\sigma}=-\\sigma^{-2}x_{j}\\psi_{\\sigma}$;\n\n(ii) with $U$ the momentum transform of\n[[lem-nrqm-kinematics-momentum-representation]], $U\\psi_{\\sigma}=\\psi_{\\sigma_{p}}$\nwhere $\\sigma_{p}:=\\hbar/\\sigma$, that is\n$$(U\\psi_{\\sigma})(p)=(\\pi\\sigma_{p}^{2})^{-3/4}e^{-|p|^{2}/(2\\sigma_{p}^{2})};$$\n\n(iii) the position law of $Q_{j}$ in the preparation $[\\psi_{\\sigma}]$ has\ndensity $(\\pi\\sigma^{2})^{-1/2}e^{-t^{2}/\\sigma^{2}}$ in the coordinate\n$t=x_{j}$, hence mean $0$ and variance $\\sigma^{2}/2$; the momentum law of\n$P_{k}$ has density $(\\pi\\sigma_{p}^{2})^{-1/2}e^{-p^{2}/\\sigma_{p}^{2}}$ in\nthe coordinate $p=p_{k}$, mean $0$ and variance\n$\\sigma_{p}^{2}/2=\\hbar^{2}/(2\\sigma^{2})$; the product of the two standard\ndeviations is $\\hbar/2$;\n\n(iv) the joint position law of the three position observables has density\n$|\\psi_{\\sigma}(x)|^{2}=(\\pi\\sigma^{2})^{-3/2}e^{-|x|^{2}/\\sigma^{2}}$, and\nthe momentum representative has density\n$|(U\\psi_{\\sigma})(p)|^{2}=(\\pi\\sigma_{p}^{2})^{-3/2}e^{-|p|^{2}/\\sigma_{p}^{2}}$\nagainst $dp$.\n\nThe example is an exact model computation in one family of preparations; no\ndynamics, detection model or empirical value is involved, and the variance\nstatements are properties of this family only.",
+        "strategy": "direct",
+        "deps": [
+          "def-countable-choice",
+          "def-heat-kernel",
+          "def-nrqm-kinematics-framework-massive-spin-s-model",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-schwartz-space-and-its-seminorms",
+          "lem-classical-derivatives-are-weak-derivatives",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "lem-first-and-second-moments-of-the-heat-kernel",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives",
+          "lem-nrqm-composites-momentum-fourier-jacobian",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum",
+          "lem-nrqm-kinematics-momentum-representation",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "thm-exponential-beats-every-polynomial",
+          "thm-gaussian-integral",
+          "thm-plancherel",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-heat-kernel": "mathematical-premise",
+          "def-nrqm-kinematics-framework-massive-spin-s-model": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-schwartz-space-and-its-seminorms": "mathematical-premise",
+          "lem-classical-derivatives-are-weak-derivatives": "mathematical-premise",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization": "mathematical-premise",
+          "lem-first-and-second-moments-of-the-heat-kernel": "mathematical-premise",
+          "lem-heat-kernel-normalisation-scaling-and-derivatives": "mathematical-premise",
+          "lem-nrqm-composites-momentum-fourier-jacobian": "mathematical-premise",
+          "lem-nrqm-kinematics-componentwise-position-and-momentum": "mathematical-premise",
+          "lem-nrqm-kinematics-momentum-representation": "mathematical-premise",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "thm-exponential-beats-every-polynomial": "mathematical-premise",
+          "thm-gaussian-integral": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 2.1.3, printed pages 27-29 (PDF pages 30-32): the Gaussian wavepacket and its construction from momentum amplitudes",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 2.3.2-2.3.3 and Box 2.3, printed pages 27-31 (PDF pages 35-39): the Gaussian packet's momentum-space amplitude and the Gaussian integral",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "An exact model computation for the spin-0 massive particle model of the framework: a normalized three-dimensional Gaussian wave function, its unitary momentum representative with the transposed width sigma_p=hbar/sigma, the resulting position and momentum outcome densities, their variances and the product hbar/2 in this single family of preparations. The item uses the model's own sharp outcome laws; it computes no dynamics, models no measurement, asserts no uncertainty theorem for arbitrary preparations and records no empirical result."
+      },
+      {
+        "id": "ex-nrqm-kinematics-plane-wave-generalized-eigenfunction",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "The plane wave as a generalized momentum eigenfunctional",
+        "statement": "Assume the Axiom of Countable Choice ([[def-countable-choice]]). Fix $d\\ge1$,\n$\\hbar>0$ and $k\\in\\mathbb R^{d}$, and define on the Schwartz space\n$\\mathcal S(\\mathbb R^{d};\\mathbb C)$ of\n[[def-schwartz-space-and-its-seminorms]] the conjugate-linear functional\n$$u_{k}(\\varphi):=\\int_{\\mathbb R^{d}}e^{ik\\cdot x}\\,\\overline{\\varphi(x)}\\,dx.$$\nLet $\\mathcal F_{2}$ be the negative-sign $2\\pi$-normalized Fourier transform,\n$\\mathcal F_{2}\\psi(\\xi)=\\int\\psi(x)e^{-2\\pi ix\\cdot\\xi}dx$ on\n$L^{1}(\\mathbb R^{d};\\mathbb C)$\n([[def-fourier-transform-on-l-one-of-rn]], [[thm-plancherel]]). Then:\n\n(a) $u_{k}$ is well defined, conjugate-linear and continuous in the Schwartz\ntopology. Writing $p_{\\alpha,0}(\\varphi)=\\sup_x|x^{\\alpha}\\varphi(x)|$ for the\nseminorms of [[def-schwartz-space-and-its-seminorms]], one has the explicit\nbound\n$$|u_{k}(\\varphi)|\\le\\int_{\\mathbb R^{d}}|\\varphi(x)|\\,dx\\le C_{d}\\sum_{\\alpha\\in\\{0,2\\}^{d}}p_{\\alpha,0}(\\varphi),\\qquad C_{d}:=\\left(\\int_{\\mathbb R}(1+t^{2})^{-1}\\,dt\\right)^{d}<\\infty;$$\nmoreover $u_{k}(\\varphi)=\\mathcal F_{2}\\bigl(\\overline{\\varphi}\\bigr)\\bigl(-\\tfrac{k}{2\\pi}\\bigr)$\nfor every $\\varphi$;\n\n(b) for every $\\varphi\\in\\mathcal S(\\mathbb R^{d};\\mathbb C)$ and every\n$j\\in\\{1,\\dots,d\\}$, with $P_{j}\\varphi:=-i\\hbar\\,\\partial_{j}\\varphi$ the\ncomponentwise momentum action on Schwartz classes,\n$$u_{k}(P_{j}\\varphi)=\\hbar k_{j}\\,u_{k}(\\varphi),\\qquad u_{k}(P_{j}^{2}\\varphi)=(\\hbar k_{j})^{2}\\,u_{k}(\\varphi):$$\nthe functional is a generalized eigenfunctional of every momentum component\nwith eigenvalue $\\hbar k_{j}$;\n\n(c) there is no $L^{2}$ class $F\\in L^{2}(\\mathbb R^{d};\\mathbb C)$ with\n$u_{k}(\\varphi)=\\int_{\\mathbb R^{d}}F(x)\\overline{\\varphi(x)}\\,dx$ for all\n$\\varphi\\in\\mathcal S(\\mathbb R^{d};\\mathbb C)$; in particular the functions\n$x\\mapsto e^{ik\\cdot x}$ and its nonzero scalar multiples are not elements of\n$L^{2}(\\mathbb R^{d};\\mathbb C)$;\n\n(d) the statements are purely mathematical: $u_{k}$ is a conjugate-linear\nfunctional on the Schwartz space, no normalizable class represents it, and no\nphysical state, preparation or outcome probability is attached to it by this\nexample.",
+        "strategy": "direct",
+        "deps": [
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-countable-choice",
+          "def-fourier-transform-on-l-one-of-rn",
+          "def-schwartz-space-and-its-seminorms",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-plancherel",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "dependency_roles": {
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity": "mathematical-premise",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space": "mathematical-premise",
+          "def-complex-lp-and-euclidean-test-function-conventions": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-fourier-transform-on-l-one-of-rn": "mathematical-premise",
+          "def-schwartz-space-and-its-seminorms": "mathematical-premise",
+          "lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set": "mathematical-premise",
+          "lem-weak-derivatives-are-polynomial-fourier-multipliers": "mathematical-premise",
+          "thm-cauchy-schwarz-in-an-inner-product-space": "mathematical-premise",
+          "thm-monotone-convergence-for-the-integral": "mathematical-premise",
+          "thm-plancherel": "mathematical-premise",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 3.2.3, printed pages 75-76 (PDF pages 78-79): momentum eigenstates, the delta orthogonality relation and the Fourier transform",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Section 6, printed pages 22-24 (PDF pages 22-24): momentum eigenstates are plane waves and are not normalizable",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-nrqm-kinematics-ccr-cannot-hold-for-bounded-operators",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "No bounded operators satisfy the canonical commutation relation with a nonzero commutator",
+        "statement": "Let $H\\ne\\{0\\}$ be a complex Hilbert space and let $\\hbar>0$. Then there exist\nbounded linear operators $A,B\\in\\mathcal B(H)$ with\n$$AB-BA=i\\hbar I .$$",
+        "strategy": "direct",
+        "deps": [
+          "def-bounded-linear-operator",
+          "def-hilbert-space",
+          "def-operator-norm",
+          "lem-operator-norm-is-a-norm"
+        ],
+        "dependency_roles": {
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "lem-operator-norm-is-a-norm": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 2.1, printed pages 55-58 (PDF pages 67-70): the closed graph theorem forces observables such as position and momentum to be unbounded, with only dense domains",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Box 2.2 and Sections 2.3.1-2.3.2, printed pages 25-27 (PDF pages 33-35): the integration-by-parts Hermiticity argument for the momentum operator (wavefunctions vanishing at spatial infinity) and the canonical commutator [x,p]=i hbar",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "texp-nrqm-kinematics-dirichlet-momentum-warning",
+        "kind": "thought-experiment",
+        "domain": "physics",
+        "title": "A confined model with Dirichlet walls: the naive interval momentum is not an observable",
+        "statement": "Adopt the observable and probability postulate P2 in the reading of\n[[def-nrqm-observables-framework-observable-and-outcome-law]] and the\nkinematics and massive-particle model postulate P5\n([[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]), and\nassume the Axiom of Countable Choice and the Axiom of Choice\n([[def-countable-choice]], [[def-axiom-of-choice]]). Consider the following\nhypothetical confined-model extension of the kinematics: a spinless particle\nof mass $m>0$ is restricted to an interval $(0,L)$ of length $0<L<\\infty$ in\none spatial direction, with Hilbert space $L^{2}(0,L;\\mathbb C)$, and the\nmodel declares its momentum to be the formal differential expression\n$$T:=-i\\hbar D,\\qquad D(T):=\\bigl\\{u\\in H^{1}(0,L;\\mathbb C):\\ u^{*}(0)=u^{*}(L)=0\\bigr\\},$$\nwith $H^{1}$ and the continuous trace $u^{*}$ as in\n[[def-nrqm-intervals-hilbert-sobolev-spaces]]. Then, in that hypothetical\nmodel:\n\n(a) $T$ is densely defined and symmetric, but not self-adjoint; its adjoint is\n$$T^{*}=-i\\hbar D,\\qquad D(T^{*})=H^{1}(0,L;\\mathbb C),$$\nwithout boundary condition;\n\n(b) no self-adjoint extension $S\\supseteq T$ has domain contained in the\nDirichlet class $D(T)$: there is no self-adjoint realization of the formal\nmomentum on $(0,L)$ that keeps the Dirichlet condition on its domain;\n\n(c) for every self-adjoint extension $S\\supseteq T$ and every $n\\ge1$, the\nnormalized Dirichlet function $u_{n}(x)=\\sqrt{2/L}\\,\\sin(n\\pi x/L)$ lies in\n$D(S)$ but is not an eigenvector of $S$; consequently a momentum\nquantization read off from the Dirichlet eigenfunctions is not a statement\nabout any self-adjoint realization of the interval momentum;\n\n(d) therefore $T$ is not an assigned sharp observable of the model in the\nsense of P2, and no outcome law of a momentum observable of the confined\nmodel exists until the model declares a self-adjoint realization of its\nmomentum. An explicit family of self-adjoint extensions of $T$ is\n$\\hbar P_{\\theta}$, $\\theta\\in[0,2\\pi)$, where $P_{\\theta}=-iD$ is the\nself-adjoint operator of\n[[thm-nrqm-intervals-twisted-periodic-momentum-domain]]; the scaled operator\n$\\hbar P_{\\theta}$ acts as $-i\\hbar D$ on the domain\n$\\{u\\in H^{1}(0,L):u^{*}(L)=e^{i\\theta}u^{*}(0)\\}$ and has units of momentum.\nThese domains impose a twisted-periodic condition rather than Dirichlet\nconditions; nothing here claims that any member of that family, or any other\nrealization, describes a laboratory apparatus.",
+        "strategy": "direct",
+        "deps": [
+          "def-adjoint-of-a-densely-defined-unbounded-operator",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-nrqm-intervals-hilbert-sobolev-spaces",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "def-weak-derivative-of-a-locally-integrable-function",
+          "lem-nrqm-intervals-integration-by-parts",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "post-nrqm-framework-observable-and-probability",
+          "thm-nrqm-intervals-twisted-periodic-momentum-domain"
+        ],
+        "dependency_roles": {
+          "def-adjoint-of-a-densely-defined-unbounded-operator": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-nrqm-intervals-hilbert-sobolev-spaces": "mathematical-premise",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "def-weak-derivative-of-a-locally-integrable-function": "mathematical-premise",
+          "lem-nrqm-intervals-integration-by-parts": "mathematical-premise",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "thm-nrqm-intervals-twisted-periodic-momentum-domain": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 8,
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.1, printed pages 181-188 (PDF pages 193-200): Sturm-Liouville operators, the symmetric operator A_0 = tau on D(tau) intersect AC_c(I), the computation of its closure and adjoint via the boundary (Wronskian) form, and the parametrization of self-adjoint boundary conditions including the Dirichlet condition",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            },
+            {
+              "title": "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext 2011), Section 8.2 printed pages 202-216 (PDF pages 217-231), Theorem 8.8 printed page 212 (PDF page 227) and Corollary 8.10 printed page 215 (PDF page 230): the Sobolev space W^{1,p}(I), the bounded/continuous representative and the integration-by-parts formula; Section 8.6 printed pages 231-232 (PDF pages 246-247), Theorem 8.22: Dirichlet eigenfunction expansion and self-adjointness of the associated solution operator for a second-order operator (contrast case)",
+              "url": "https://www.math.toronto.edu/almut/Brezis.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional warning about a hypothetical confined-model extension of the massive-particle kinematics: if a model confines a spinless particle to an interval and declares the formal momentum -i hbar d/dx on the Dirichlet domain, then that operator is symmetric but not self-adjoint and hence is not an assigned sharp observable of the observable and probability postulate; no self-adjoint extension keeps the Dirichlet domain, and the Dirichlet eigenfunctions are not momentum eigenfunctions of any such extension. The item asserts no experiment, no apparatus realization and no claim that confinement models are physically realized; it excludes any assertion about which self-adjoint realization, if any, describes a laboratory device."
+      },
+      {
+        "id": "rem-nrqm-kinematics-examples-scope-limits",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "What the worked items of the companion page establish",
+        "statement": "## Three worked items\n\n**The Gaussian packet.** [[ex-nrqm-kinematics-gaussian-position-momentum-packet]]\ncomputes, in the spin-zero massive model, the normalized Gaussian\n$\\psi_{\\sigma}(x)=(\\pi\\sigma^{2})^{-3/4}e^{-|x|^{2}/(2\\sigma^{2})}$, shows\nthat its momentum representative is again a normalized Gaussian with width\n$\\sigma_{p}=\\hbar/\\sigma$, and evaluates the position and momentum outcome\ndensities of the model together with their variances $\\sigma^{2}/2$ and\n$\\hbar^{2}/(2\\sigma^{2})$ and the product $\\hbar/2$. This verifies the model's\nsharp laws of [[pthm-nrqm-kinematics-spin-s-outcome-laws]] on a family of\nSchwartz preparations; it computes no dynamics, no measurement and no general\nuncertainty statement.\n\n**The plane wave as a generalized functional.** [[ex-nrqm-kinematics-plane-wave-generalized-eigenfunction]]\ndefines the conjugate-linear functional $u_{k}(\\varphi)=\\int e^{ik\\cdot\nx}\\overline{\\varphi}$ on Schwartz classes, proves the eigenrelation\n$u_{k}(P_{j}\\varphi)=\\hbar k_{j}u_{k}(\\varphi)$, and proves that no $L^{2}$\nclass represents $u_{k}$. This is the precise sense in which the plane wave is\na generalized momentum eigenfunction: it diagonalizes the momentum action on\nthe test space while carrying no state or probability density. The framework's\nstate assignment excludes it as a preparation, in agreement with the model's\natomless sharp laws.\n\n**The boundary warning.** [[texp-nrqm-kinematics-dirichlet-momentum-warning]]\nshows, in a hypothetical confined-model extension, that the formal interval\nmomentum $-i\\hbar D$ on the Dirichlet domain is symmetric but not self-adjoint,\nthat no self-adjoint extension keeps the Dirichlet domain, and that the\nDirichlet functions are not momentum eigenfunctions of any self-adjoint\nextension. The companion counterexample\n[[cex-nrqm-kinematics-ccr-cannot-hold-for-bounded-operators]] shows that the\ncanonical commutation relation cannot hold as an identity of bounded\noperators at all, so the core relation of\n[[lem-nrqm-kinematics-ccr-and-internal-factor-commutation]] is genuinely a\nrelation on a dense core of unbounded operators rather than a bounded\noperator identity.\n\n## What the page does not establish\n\nNone of the items is an experiment: no counts, calibration, resolution,\nefficiency, background, uncertainty or data comparison appears anywhere on the\npage, and no value of $m$, $\\hbar$ or any model parameter is measured. The\nGaussian computation is a single family of preparations; the plane-wave item\nis a distributional statement without a state; the boundary warning and the\nbounded-commutator counterexample are conditional mathematical statements\nabout hypothetical or bounded models, not claims about apparatuses. In\nparticular, no item asserts that confined models, twisted-periodic momenta or\nany self-adjoint realization describe a laboratory device, and no item draws\nconclusions about decoherence, measurement disturbance or relativistic\neffects, which belong to other model pages.",
+        "strategy": "n/a",
+        "deps": [
+          "cex-nrqm-kinematics-ccr-cannot-hold-for-bounded-operators",
+          "ex-nrqm-kinematics-gaussian-position-momentum-packet",
+          "ex-nrqm-kinematics-plane-wave-generalized-eigenfunction",
+          "lem-nrqm-kinematics-ccr-and-internal-factor-commutation",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws",
+          "texp-nrqm-kinematics-dirichlet-momentum-warning"
+        ],
+        "dependency_roles": {
+          "cex-nrqm-kinematics-ccr-cannot-hold-for-bounded-operators": "formulation-prerequisite",
+          "ex-nrqm-kinematics-gaussian-position-momentum-packet": "formulation-prerequisite",
+          "ex-nrqm-kinematics-plane-wave-generalized-eigenfunction": "formulation-prerequisite",
+          "lem-nrqm-kinematics-ccr-and-internal-factor-commutation": "mathematical-premise",
+          "pthm-nrqm-kinematics-spin-s-outcome-laws": "physical-result",
+          "texp-nrqm-kinematics-dirichlet-momentum-warning": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Quantum Mechanics (author-hosted lecture set), Sections 2.1.3 and 3.2.3, printed pages 27-29 and 75-76 (PDF pages 30-32 and 78-79): the Gaussian wavepacket, momentum eigenstates and the Fourier transform",
+              "url": "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Section 6, printed pages 22-25 (PDF pages 22-25): momentum eigenstates, the momentum representation and the position operator in the momentum representation",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.1, printed pages 181-188 (PDF pages 193-200): Sturm-Liouville operators and the parametrization of self-adjoint boundary conditions (the contrast case for the interval momentum warning)",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "Scope of the companion examples page: an inventory of the exact computations and conditional warnings it contains and of the physical questions it does not address. The remark asserts no dynamics and records no empirical data."
+      }
+    ]
+  }
+]

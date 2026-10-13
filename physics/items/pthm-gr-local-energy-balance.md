@@ -1,12 +1,12 @@
 ---
 id: pthm-gr-local-energy-balance
 kind: physics-theorem
-title: "Local energy balance of the measured current and conservation of the Killing energy in stationary models"
+title: "Local energy balance of the measured current and conservation of the Killing charge in stationary models"
 status: draft
 origin: session
 domain: physics
 dependency_level: 14
-physical_scope: "The smooth classical branch of the adopted gravitational framework with the field law in one of its two presentations and a smooth matter stress-energy tensor on the model's matter domain: the local balance identity for the energy density, energy flux and energy-momentum current measured by a prescribed ideal-clock observer congruence, the finite-chain bookkeeping of that current, and, when the model admits an everywhere timelike future-directed Killing field, the conservation of the associated Killing energy up to the side flux. The theorem is a conditional consequence of the adopted field law and the stated smooth hypotheses; it asserts no existence of Killing fields, no convergence or finiteness for unbounded chains, no asymptotic or quasilocal mass, no positivity and no measured value, and it carries no empirical premise."
+physical_scope: "The smooth classical branch of the adopted gravitational framework with the field law in one of its two presentations and a smooth matter stress-energy tensor on the model's matter domain: the local balance identity for the energy density, energy flux and energy-momentum current measured by a prescribed ideal-clock observer congruence, the finite-chain bookkeeping of that current, and, when the model admits an everywhere timelike future-directed Killing field, conservation of its associated Killing charge up to side flux. The charge is an energy in joules when its Killing field is length-normalized in the framework's length-coordinate convention; other normalizations carry their units through the charge. The theorem is a conditional consequence of the adopted field law and the stated smooth hypotheses; it asserts no existence of Killing fields, no convergence or finiteness for unbounded chains, no asymptotic or quasilocal mass, no positivity and no measured value, and it carries no empirical premise."
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -92,10 +92,10 @@ of $C$ and the side flux $\Phi_J(B)$ vanishes, then
 $\Phi_J(\Sigma_2)=\Phi_J(\Sigma_1)$: equal measured energy needs a vanishing
 side flux, not merely on-shell conservation.
 
-**(d) Stationary models and the Killing energy.** Suppose in addition that
+**(d) Stationary models and the Killing charge.** Suppose in addition that
 $U$ carries a Killing field $\xi$ of $(M,g)$ that is everywhere timelike and
 future-directed, with $X:=\sqrt{-g(\xi,\xi)}>0$ and $n=\xi/X$, and let
-$Q_\xi$ be the Killing energy of
+$Q_\xi$ be the Killing charge of
 [[def-gr-killing-energy-charge]]. Then:
 
 1. $\nabla_a(XJ^a)=0$ and $\nabla_a(T^{ab}\xi_b)=0$ on $U$.
@@ -105,8 +105,9 @@ $Q_\xi$ be the Killing energy of
 $$Q_\xi(\Sigma_2)-Q_\xi(\Sigma_1)=-Q_\xi(B);$$
 
    in particular, if $Q_\xi(B)=0$ then $Q_\xi(\Sigma_2)=Q_\xi(\Sigma_1)$: the
-   model's energy assigned to homologous slices is conserved up to the side
-   flux, and is conserved when that flux vanishes.
+   model's Killing charge assigned to homologous slices is conserved up to the
+   side flux, and is conserved when that flux vanishes. With a length-normalized
+   $\xi$, this charge is the model's energy in joules.
 3. In this stationary case the measured energy current itself satisfies
    $\nabla_aJ^a=-\Phi^aa_a$ with $a=\nabla\ln X$, so
    $\nabla_aJ^a=0$ on $U$ if and only if $\Phi^aa_a=0$ there.
@@ -135,7 +136,7 @@ measurement, calibration and uncertainty qualifications.
 
 **Proof technique:** direct; instantiate the adopted field law's necessary conservation, apply the divergence and balance identities of the measured current, and use the conservation of the redshift-weighted Killing current for the stationary statement.
 
-1.1 (On-shell conservation.) For the action sector with a Hilbert tensor, stationarity implies the field equation locally on $U$: chart-supported test variations inside $U$ give the coefficient-vanishing argument of [[pthm-gr-adopted-action-and-einstein-equations]]. Such variations extend by zero away from their compact chart support, so they are among the adopted variations. The direct presentation and the prescribed-tensor action sectors adopt the same equation on $U$. Apply the consistency theorem [L1] on the restricted spacetime $U$ to obtain $\nabla^aT_{ab}=0$ on $U$. This proves (a). [L1, given]
+1.1 (On-shell conservation.) For the action sector with a Hilbert tensor, stationarity implies the field equation locally on $U$: chart-supported test variations inside $U$ give the coefficient-vanishing argument of [[pthm-gr-adopted-action-and-einstein-equations]]. Such variations extend by zero away from their compact chart support, so they are among the adopted variations. The direct presentation, including prescribed-tensor sectors, adopts the same equation on $U$. Apply the consistency theorem [L1] on the restricted spacetime $U$ to obtain $\nabla^aT_{ab}=0$ on $U$. This proves (a). [L1, given]
 
 2.1 (Local balance and bookkeeping.) With $\nabla^aT_{ab}=0$ now available, [L2] gives $\nabla_aJ^a=-T^{ab}\nabla_an_b$ and $D\mu+\mu\theta+\nabla_a\Phi^a=\nabla_aJ^a$ on $U$, which is the displayed identity of (b); moreover [L2] gives the finite-chain identity of (c), and the special case follows when the source integrand vanishes on an open set containing the image of $C$ and $\Phi_J(B)=0$. This proves (b) and (c). [step 1.1, L2, algebra]
 
@@ -145,20 +146,8 @@ measurement, calibration and uncertainty qualifications.
 
 ## Remarks
 
-- **What is and is not empirical.** No experiment, measurement, calibration or
-  sampling enters the argument; the theorem is a conditional deduction from
-  the adopted field law and the stated smooth geometry. The quantities
-  $\mu$, $\Phi$, $S$ and $Q_\xi$ are read through
-  [[def-gr-measured-energy-density-flux-and-stress]] and
-  [[def-gr-killing-energy-charge]]; a later quantitative use of any of them
-  must supply its own empirical premises and uncertainties.
+- **What is and is not empirical.** No experiment, measurement, calibration or sampling enters the argument; the theorem is a conditional deduction from the adopted field law and the stated smooth geometry. The quantities $\mu$, $\Phi$, $S$ and $Q_\xi$ are read through [[def-gr-measured-energy-density-flux-and-stress]] and [[def-gr-killing-energy-charge]]; a later quantitative use of any of them must supply its own empirical premises and uncertainties.
 
-- **Scope of the global statement.** Clause (d)2 is a finite-chain statement.
-  It does not assert that a total energy of an unbounded slice exists, nor
-  that the limit of the side flux at infinity vanishes; those are additional
-  hypotheses, recorded in [[rem-gr-no-universal-global-energy]].
+- **Scope of the global statement.** Clause (d)2 is a finite-chain statement. It does not assert that a total energy of an unbounded slice exists, nor that the limit of the side flux at infinity vanishes; those are additional hypotheses, recorded in [[rem-gr-no-universal-global-energy]].
 
-- **Choice convention.** The smooth structure of the tangent bundle underlying
-  $n$ and $\xi$ assumes $\mathrm{AC}_\omega$ through
-  [[def-gr-observer-congruence-and-adapted-charts]]; no other choice principle
-  is used.
+- **Choice convention.** The smooth structure of the tangent bundle underlying $n$ and $\xi$ assumes $\mathrm{AC}_\omega$ through [[def-gr-observer-congruence-and-adapted-charts]]; no other choice principle is used.

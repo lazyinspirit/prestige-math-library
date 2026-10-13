@@ -1,0 +1,992 @@
+{
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "phase": "initial",
+  "round": 1,
+  "unit": "31",
+  "input_sha256": "a190d6e1e698ac74ff228d5cd1752f8f5e2a8f3acbdac43f25de890342cc9699",
+  "decisions": [
+    {
+      "id": "post-cm15-impulse",
+      "model": "gpt-6-luna",
+      "context_sha256": "8b0e408394d4f5ae42b3e52b0d019275106bb660793183aabe80d2e2c97d23a7",
+      "outcome": "confirmed_fatal",
+      "defect_type": "logic",
+      "reason": "The global C2 motion requirement forces continuous velocities and J=0. Replaced it with an explicit continuous, piecewise-C2 impulse motion whose restrictions solve the regular equations; verified finite one-sided force limits and applied the jump lemma componentwise to derive the pairing, instead of reversing the implication of the continuous-time-force theorem.",
+      "uncertain": false,
+      "source_urls": [
+        "https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Mechanics_Map_(Moore_2nd_Edition)/11%3A_Impulse_and_Momentum_in_Particles/11.04%3A_Surface_Collisions_and_the_Coefficient_of_Restitution",
+        "https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Mechanics_Map_(Moore_2nd_Edition)/11%3A_Impulse_and_Momentum_in_Particles/11.05%3A_Particle_Collisions_in_One_Dimension",
+        "https://ocw.mit.edu/courses/16-07-dynamics-fall-2009/98d19cb2b9983c14c6907052499e7a98_MIT16_07F09_Lec14.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "pthm-cm15-control-volume-balance",
+      "model": "gpt-6-luna",
+      "context_sha256": "daaa722122d5c4fd4333889a8e54909c31d5425c9e75bf984eddf7c864325999",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The hypotheses specify C2 motions, C1 density, velocity and stress and continuous body force, while the regularity supplier reserves smooth for C-infinity. Renamed this adopted model finite-regularity throughout, preserving all hypotheses, endpoint localization, relative boundary flux signs, and flux-average deductions; clause (iii) of the repaired postulate is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-cm15-impact-balance",
+      "model": "gpt-6-luna",
+      "context_sha256": "fddf1f1dd141140fca02c25eb269d76d0daa6c98bb32d5aff709e2459afcaaa2",
+      "outcome": "confirmed_fatal",
+      "reason": "The original motion premise inherited the global C2 contradiction of the postulate. Specified an impulse motion and derived momentum, restitution velocities and energy directly from finite jumps and the kinetic split, since the cited pairing theorem requires continuous time forces not guaranteed here. Corrected the false assertion that a nonzero impulse makes the regular force map discontinuous; a zero regular force map is compatible with singular forcing.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "cex-cm15-momentum-alone-does-not-fix-the-impact",
+      "model": "gpt-6-luna",
+      "context_sha256": "07aef467715c6b9fa73a5cb28f9e5a7177cb6710522eecc5f00cbf90588e49ef",
+      "outcome": "confirmed_fatal",
+      "reason": "The original L1 equated endpoint jump compatibility with full model admissibility and supplied no off-impact trajectories. Constructed explicit continuous piecewise-affine runs on the same interval and full configuration domain, with identical incoming curves and zero regular forces. Verified all trajectory, limit, approach and jump conditions, with impulses -6n and -12n and restitution e=0 and e=1; the two outgoing histories and energies differ.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "ex-cm15-control-volume-check",
+      "model": "gpt-6-luna",
+      "context_sha256": "3443051539907173f2e2e75c504375010813f9d5ed2b17fc057813f458cf46d3",
+      "outcome": "confirmed_nonfatal",
+      "reason": "The stated alpha-not-zero hypothesis includes negative alpha, for which the material scale exp(alpha t) contracts. Replaced the expansion label with uniform scaling throughout and explicitly stated both signs. Checked the mass cancellation, pressure gradient, fixed and material fluxes and conditional elbow resultant; none of those computations requires alpha to be positive.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-cm15-impact-check",
+      "model": "gpt-6-luna",
+      "context_sha256": "b6c774cefb84d2eb9dfdd4015ffeff77c3bb307873babdd323d85eb8cac73e64",
+      "outcome": "confirmed_fatal",
+      "reason": "The assertion of centre-of-mass rest throughout does not follow from V-minus=V-plus=0; the postulate leaves regular external forces unrestricted. Replaced it with the exact one-sided statement at the impact, retaining all elastic, half-restitution and sticking velocities, impulses and energies. Momentum continuity controls the jump, and supplies no zero acceleration away from contact.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "ex-cm15-rocket-check",
+      "model": "gpt-6-luna",
+      "context_sha256": "908501e67cc63187273316f94f7c9df3c8695114d21a95ffae6f743ff5926469",
+      "outcome": "confirmed_fatal",
+      "reason": "The framework gives t duration dimension, so subtracting it from 3 in the mass and logarithm violates its equal-dimension sum rule. Defined m=m0-r0 t with m0=3 kg and r0=1 kg/s, q=t/(1 s), v=ue log(m0/m)n, and retained unit factors in differentiation and momentum balance. Checked positive mass, 2 N thrust, nonzero momentum rate at 2 s and the 1 s values; corrected final momentum rounding from exact 4 log(3/2).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "pthm-cm15-central-scattering",
+      "model": "gpt-6-luna",
+      "context_sha256": "139cbe3a8f24e9321006e1f3d64261c6b7c0f1ba04dd70f58d66126019c691ef",
+      "outcome": "confirmed_fatal",
+      "reason": "The original clause 3 took infinite-time polar limits of r on an arbitrary interval I, which may be bounded. Defined the polar data for the unique global extension r-bar from clause 1 and explicitly applied the polar-reduction supplier on R in proof 4.1. Checked compact Cartesian continuation away from collision, both radial branches, endpoint quadrature convergence, free tails, wrapped angle relation and cutoff branch area. Clarified C1 branch regularity in the physical scope without altering hypotheses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "logic"
+    },
+    {
+      "id": "ex-cm15-rutherford-cutoff-check",
+      "model": "gpt-6-luna",
+      "context_sha256": "853ce60b5ed21b1917f429546c6fedfc2124fa6304f9703973d2d7f38fd441f3",
+      "outcome": "confirmed_fatal",
+      "reason": "The former L2 attributed cot(x) asymptotic to suppliers that do not establish its limit. Added exact published differentiation, continuity and function-limit suppliers, and proved sin(x)/x tends to 1 and x cot(x) tends to 1 locally in step 3.2, yielding the unchanged 16 pi times 10^-24 angular-growth coefficient. Derived the special-angle values and backward endpoint limit from addition, positivity and Pythagorean identities in step 1.2; retained all declared data and qualifications.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true,
+      "defect_type": "dependency_citation"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "post-cm15-impulse",
+      "disposition": "repaired",
+      "post_sha256": "85bc7f4193fe14b266a945d12a04579a16683256c1ae12a139445e16d094ce3e",
+      "review_context_sha256": "fcec45bad53863c14242b6e7467ae58b03a078afc15a6dfe0509f88aa564c071",
+      "reason": "The global C2 motion requirement forces continuous velocities and J=0. Replaced it with an explicit continuous, piecewise-C2 impulse motion whose restrictions solve the regular equations; verified finite one-sided force limits and applied the jump lemma componentwise to derive the pairing, instead of reversing the implication of the continuous-time-force theorem.",
+      "uncertain": false,
+      "source_urls": [
+        "https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Mechanics_Map_(Moore_2nd_Edition)/11%3A_Impulse_and_Momentum_in_Particles/11.04%3A_Surface_Collisions_and_the_Coefficient_of_Restitution",
+        "https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Mechanics_Map_(Moore_2nd_Edition)/11%3A_Impulse_and_Momentum_in_Particles/11.05%3A_Particle_Collisions_in_One_Dimension",
+        "https://ocw.mit.edu/courses/16-07-dynamics-fall-2009/98d19cb2b9983c14c6907052499e7a98_MIT16_07F09_Lec14.pdf"
+      ],
+      "familiar": true
+    },
+    {
+      "id": "pthm-cm15-control-volume-balance",
+      "disposition": "repaired",
+      "post_sha256": "97a32c9adbb3dfaa2021a3f51a0a1ac650db1700a39d95d67ae76dae9df39ec4",
+      "review_context_sha256": "7ebcf4626249b70510fa3d0b874d038e8917a4a4516a3f90712c19d95e4f412c",
+      "reason": "The hypotheses specify C2 motions, C1 density, velocity and stress and continuous body force, while the regularity supplier reserves smooth for C-infinity. Renamed this adopted model finite-regularity throughout, preserving all hypotheses, endpoint localization, relative boundary flux signs, and flux-average deductions; clause (iii) of the repaired postulate is unchanged.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-cm15-impact-balance",
+      "disposition": "repaired",
+      "post_sha256": "22595993d0053ac5085f0f201e981a9ba0b57cde97333b3324b4b56031ec6b0a",
+      "review_context_sha256": "13239edc2504e7da1f86354770e5c89af213d51a399b9961d51833aeb562d7b8",
+      "reason": "The original motion premise inherited the global C2 contradiction of the postulate. Specified an impulse motion and derived momentum, restitution velocities and energy directly from finite jumps and the kinetic split, since the cited pairing theorem requires continuous time forces not guaranteed here. Corrected the false assertion that a nonzero impulse makes the regular force map discontinuous; a zero regular force map is compatible with singular forcing.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "cex-cm15-momentum-alone-does-not-fix-the-impact",
+      "disposition": "repaired",
+      "post_sha256": "eaeeaa466545a2a291e7a9346c3c7a8fe040b1aa2dbb3ca19b31bb2dcf4ad7fc",
+      "review_context_sha256": "6cda774eb49c054b080f8809b9d6e4c7862c6607f2bd14297cec1bf76abb28ef",
+      "reason": "The original L1 equated endpoint jump compatibility with full model admissibility and supplied no off-impact trajectories. Constructed explicit continuous piecewise-affine runs on the same interval and full configuration domain, with identical incoming curves and zero regular forces. Verified all trajectory, limit, approach and jump conditions, with impulses -6n and -12n and restitution e=0 and e=1; the two outgoing histories and energies differ.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-cm15-control-volume-check",
+      "disposition": "repaired",
+      "post_sha256": "2132825111173e0590fc0e6bd72514bd46591b4fed0f4969f537fc32b006b997",
+      "review_context_sha256": "f6535b7f960e92498e73aa282cd5bf0d47c3ca965b8a45753e6bdbaf6de45b23",
+      "reason": "The stated alpha-not-zero hypothesis includes negative alpha, for which the material scale exp(alpha t) contracts. Replaced the expansion label with uniform scaling throughout and explicitly stated both signs. Checked the mass cancellation, pressure gradient, fixed and material fluxes and conditional elbow resultant; none of those computations requires alpha to be positive.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-cm15-impact-check",
+      "disposition": "repaired",
+      "post_sha256": "34db27ed62660b27a51911037ec8d7f4fd29405160dabbad306f3af933a17f55",
+      "review_context_sha256": "b04d6f6c2af84d16a7985f407aa4696e5c91ae2e5fd2c29f170017f533b1554e",
+      "reason": "The assertion of centre-of-mass rest throughout does not follow from V-minus=V-plus=0; the postulate leaves regular external forces unrestricted. Replaced it with the exact one-sided statement at the impact, retaining all elastic, half-restitution and sticking velocities, impulses and energies. Momentum continuity controls the jump, and supplies no zero acceleration away from contact.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-cm15-rocket-check",
+      "disposition": "repaired",
+      "post_sha256": "82dfbf1f6d081715ee77ded83950e11d2456984c70b37f06a5dcbcde4b5caaef",
+      "review_context_sha256": "fecd7e8995fc15fbfbd2660e4904f3c0a8e9e376ebd606df64f42c5f7e4c1670",
+      "reason": "The framework gives t duration dimension, so subtracting it from 3 in the mass and logarithm violates its equal-dimension sum rule. Defined m=m0-r0 t with m0=3 kg and r0=1 kg/s, q=t/(1 s), v=ue log(m0/m)n, and retained unit factors in differentiation and momentum balance. Checked positive mass, 2 N thrust, nonzero momentum rate at 2 s and the 1 s values; corrected final momentum rounding from exact 4 log(3/2).",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "pthm-cm15-central-scattering",
+      "disposition": "repaired",
+      "post_sha256": "e8b6638978b47c906ed4bec8a920082a48465d78117f6f120c8688fd604050a3",
+      "review_context_sha256": "9106800e3846783d2c004e45e1ad6652cd8a2d9bc4bbe12d33e872016b78cb6f",
+      "reason": "The original clause 3 took infinite-time polar limits of r on an arbitrary interval I, which may be bounded. Defined the polar data for the unique global extension r-bar from clause 1 and explicitly applied the polar-reduction supplier on R in proof 4.1. Checked compact Cartesian continuation away from collision, both radial branches, endpoint quadrature convergence, free tails, wrapped angle relation and cutoff branch area. Clarified C1 branch regularity in the physical scope without altering hypotheses.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "id": "ex-cm15-rutherford-cutoff-check",
+      "disposition": "repaired",
+      "post_sha256": "bcbb744d23fd5bfbd16b9efd66a2faab86c97b90b6c4de5eb834a948eb01ccaf",
+      "review_context_sha256": "2b6c14143b77f96b68d5e47e070808d2b262dbc8c8a4ca40c8ea0e0e3f60221d",
+      "reason": "The former L2 attributed cot(x) asymptotic to suppliers that do not establish its limit. Added exact published differentiation, continuity and function-limit suppliers, and proved sin(x)/x tends to 1 and x cot(x) tends to 1 locally in step 3.2, yielding the unchanged 16 pi times 10^-24 angular-growth coefficient. Derived the special-angle values and backward endpoint limit from addition, positivity and Pythagorean identities in step 1.2; retained all declared data and qualifications.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [
+    "cex-cm15-deflection-need-not-decrease",
+    "cex-cm15-momentum-alone-does-not-fix-the-impact",
+    "cex-cm15-restitution-above-one-increases-energy",
+    "ex-cm15-control-volume-check",
+    "ex-cm15-hard-sphere-reflection-check",
+    "ex-cm15-impact-check",
+    "ex-cm15-rocket-check",
+    "post-cm15-impulse",
+    "pthm-cm15-control-volume-balance",
+    "pthm-cm15-impact-balance",
+    "pthm-cm15-rutherford-model",
+    "rem-cm15-model-boundaries"
+  ],
+  "ledger_updates": [
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-post-cm15-impulse",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "post-cm15-impulse",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "disposition": "fixed",
+        "finding": "The global C2 motion requirement forces continuous velocities and J=0. Replaced it with an explicit continuous, piecewise-C2 impulse motion whose restrictions solve the regular equations; verified finite one-sided force limits and applied the jump lemma componentwise to derive the pairing, instead of reversing the implication of the continuous-time-force theorem.",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "context_sha256": "8b0e408394d4f5ae42b3e52b0d019275106bb660793183aabe80d2e2c97d23a7",
+        "uncertain": false,
+        "source_urls": [
+          "https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Mechanics_Map_(Moore_2nd_Edition)/11%3A_Impulse_and_Momentum_in_Particles/11.04%3A_Surface_Collisions_and_the_Coefficient_of_Restitution",
+          "https://eng.libretexts.org/Bookshelves/Mechanical_Engineering/Mechanics_Map_(Moore_2nd_Edition)/11%3A_Impulse_and_Momentum_in_Particles/11.05%3A_Particle_Collisions_in_One_Dimension",
+          "https://ocw.mit.edu/courses/16-07-dynamics-fall-2009/98d19cb2b9983c14c6907052499e7a98_MIT16_07F09_Lec14.pdf"
+        ],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-pthm-cm15-control-volume-balance",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "pthm-cm15-control-volume-balance",
+        "severity": "nonfatal",
+        "defect_type": "other",
+        "disposition": "fixed",
+        "finding": "The hypotheses specify C2 motions, C1 density, velocity and stress and continuous body force, while the regularity supplier reserves smooth for C-infinity. Renamed this adopted model finite-regularity throughout, preserving all hypotheses, endpoint localization, relative boundary flux signs, and flux-average deductions; clause (iii) of the repaired postulate is unchanged.",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "context_sha256": "daaa722122d5c4fd4333889a8e54909c31d5425c9e75bf984eddf7c864325999",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-pthm-cm15-impact-balance",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "pthm-cm15-impact-balance",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "disposition": "fixed",
+        "finding": "The original motion premise inherited the global C2 contradiction of the postulate. Specified an impulse motion and derived momentum, restitution velocities and energy directly from finite jumps and the kinetic split, since the cited pairing theorem requires continuous time forces not guaranteed here. Corrected the false assertion that a nonzero impulse makes the regular force map discontinuous; a zero regular force map is compatible with singular forcing.",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "context_sha256": "fddf1f1dd141140fca02c25eb269d76d0daa6c98bb32d5aff709e2459afcaaa2",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-cex-cm15-momentum-alone-does-not-fix-the-impact",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "cex-cm15-momentum-alone-does-not-fix-the-impact",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "disposition": "fixed",
+        "finding": "The original L1 equated endpoint jump compatibility with full model admissibility and supplied no off-impact trajectories. Constructed explicit continuous piecewise-affine runs on the same interval and full configuration domain, with identical incoming curves and zero regular forces. Verified all trajectory, limit, approach and jump conditions, with impulses -6n and -12n and restitution e=0 and e=1; the two outgoing histories and energies differ.",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "context_sha256": "07aef467715c6b9fa73a5cb28f9e5a7177cb6710522eecc5f00cbf90588e49ef",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-ex-cm15-control-volume-check",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "ex-cm15-control-volume-check",
+        "severity": "nonfatal",
+        "defect_type": "other",
+        "disposition": "fixed",
+        "finding": "The stated alpha-not-zero hypothesis includes negative alpha, for which the material scale exp(alpha t) contracts. Replaced the expansion label with uniform scaling throughout and explicitly stated both signs. Checked the mass cancellation, pressure gradient, fixed and material fluxes and conditional elbow resultant; none of those computations requires alpha to be positive.",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "context_sha256": "3443051539907173f2e2e75c504375010813f9d5ed2b17fc057813f458cf46d3",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-ex-cm15-impact-check",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "ex-cm15-impact-check",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "disposition": "fixed",
+        "finding": "The assertion of centre-of-mass rest throughout does not follow from V-minus=V-plus=0; the postulate leaves regular external forces unrestricted. Replaced it with the exact one-sided statement at the impact, retaining all elastic, half-restitution and sticking velocities, impulses and energies. Momentum continuity controls the jump, and supplies no zero acceleration away from contact.",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "context_sha256": "b6c774cefb84d2eb9dfdd4015ffeff77c3bb307873babdd323d85eb8cac73e64",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-ex-cm15-rocket-check",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "ex-cm15-rocket-check",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "disposition": "fixed",
+        "finding": "The framework gives t duration dimension, so subtracting it from 3 in the mass and logarithm violates its equal-dimension sum rule. Defined m=m0-r0 t with m0=3 kg and r0=1 kg/s, q=t/(1 s), v=ue log(m0/m)n, and retained unit factors in differentiation and momentum balance. Checked positive mass, 2 N thrust, nonzero momentum rate at 2 s and the 1 s values; corrected final momentum rounding from exact 4 log(3/2).",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "context_sha256": "908501e67cc63187273316f94f7c9df3c8695114d21a95ffae6f743ff5926469",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-pthm-cm15-central-scattering",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "pthm-cm15-central-scattering",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "disposition": "fixed",
+        "finding": "The original clause 3 took infinite-time polar limits of r on an arbitrary interval I, which may be bounded. Defined the polar data for the unique global extension r-bar from clause 1 and explicitly applied the polar-reduction supplier on R in proof 4.1. Checked compact Cartesian continuation away from collision, both radial branches, endpoint quadrature convergence, free tails, wrapped angle relation and cutoff branch area. Clarified C1 branch regularity in the physical scope without altering hypotheses.",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "context_sha256": "139cbe3a8f24e9321006e1f3d64261c6b7c0f1ba04dd70f58d66126019c691ef",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-ex-cm15-rutherford-cutoff-check",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "ex-cm15-rutherford-cutoff-check",
+        "severity": "fatal",
+        "defect_type": "dependency_citation",
+        "disposition": "fixed",
+        "finding": "The former L2 attributed cot(x) asymptotic to suppliers that do not establish its limit. Added exact published differentiation, continuity and function-limit suppliers, and proved sin(x)/x tends to 1 and x cot(x) tends to 1 locally in step 3.2, yielding the unchanged 16 pi times 10^-24 angular-growth coefficient. Derived the special-angle values and backward endpoint limit from addition, positivity and Pythagorean identities in step 1.2; retained all declared data and qualifications.",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "context_sha256": "853ce60b5ed21b1917f429546c6fedfc2124fa6304f9703973d2d7f38fd441f3",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-outside-def-cm15-cross-section",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "def-cm15-cross-section",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "disposition": "open",
+        "location": "Definition (iv), forward-divergence bullet",
+        "source_snippet": "only windows of finite cross-section give finite model rates",
+        "affected_use": "The statement confuses ideal and cutoff cross-sections. For the Rutherford branch and Y=(0,pi), ideal sigma(Y)=infinity but sigma-cutoff(Y)=pi b-max^2 and the predicted cutoff rate Phi pi b-max^2 is finite. The earlier definition in the same clause already uses the cutoff area.",
+        "invalidated_claim": "only windows of finite cross-section give finite model rates",
+        "minimality": "Qualify the bullet explicitly by the incident cutoff/preparation; do not alter the existing cutoff measure or ideal divergent measure.",
+        "route": "frontier owner; outside this rejected-item assignment",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-outside-pthm-cm15-rutherford-model",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "pthm-cm15-rutherford-model",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "disposition": "open",
+        "location": "Remarks, forward-divergence bullet",
+        "source_snippet": "the small-angle density grows like theta^{-3}",
+        "affected_use": "The declared d-sigma/d-Omega=(kappa/(4E))^2 csc^4(theta/2) is asymptotic to (kappa/E)^2 theta^{-4}. Multiplication by the full-azimuth solid-angle factor 2 pi sin(theta) gives an angular density of order theta^{-3}. The core cross-section and divergence deduction remain valid.",
+        "invalidated_claim": "the small-angle density grows like theta^{-3}",
+        "minimality": "Specify theta^{-4} for differential density or identify 2 pi sin(theta) d-sigma/d-Omega as the theta^{-3} quantity.",
+        "route": "frontier owner; outside this rejected-item assignment",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-outside-cex-cm15-deflection-need-not-decrease",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "cex-cm15-deflection-need-not-decrease",
+        "severity": "fatal",
+        "defect_type": "logic",
+        "disposition": "open",
+        "location": "Remarks, grazing-discontinuity bullet",
+        "source_snippet": "the chord length shrinks to zero",
+        "affected_use": "Its own L2 gives interior chord length 2a cos(beta), with beta=arcsin(2b/(3a)); the b-up-to-a limit is 2a sqrt(5)/3, which is positive. The separately adopted free grazing path has no interior chord. The zero-potential strict-decrease refutation remains sound.",
+        "invalidated_claim": "the chord length shrinks to zero",
+        "minimality": "Replace the zero-length limit claim with the positive branch limit, distinguishing it from the separately adopted free grazing continuation.",
+        "route": "frontier owner; outside this rejected-item assignment",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/defect-ledger.jsonl",
+      "action": "append",
+      "row": {
+        "defect_id": "physics-cm-qm-gr-79-2026-10-11-initial-r1-u31-page-summaries",
+        "run": "physics-cm-qm-gr-79-2026-10-11",
+        "batch": "31",
+        "subject": "cm15-scattering-and-impulse-model-boundaries-examples",
+        "disposition": "open",
+        "severity": "nonfatal",
+        "location": "Owning A/B page summaries",
+        "finding": "The examples page says elastic velocities are exchanged, but (3,-1) with masses (2,6) produces (-3,1), reversing each velocity. Exchanging gives momentum 16 rather than 0 kg m/s. The page also retains 3-t kg and expansion labels; the A page retains the smooth open-flow label. Exact affected paths and minimal replacements are in page_reviews.",
+        "route": "owning page metadata maintenance",
+        "evidence_path": "research/physics-cm-qm-gr-79-2026-10-11-step5-v2/step5-v2-initial-r1-u31.json",
+        "uncertain": false,
+        "source_urls": [],
+        "familiar": true
+      }
+    },
+    {
+      "ledger": "research/published-consumer-supplier-ledger.md",
+      "action": "no_change",
+      "reason": "All direct item consumers inventoried here are draft items in the frozen frontier. No defective published carrier was identified in the consulted calculus, impulse, kinetic-splitting, ODE or continuum supplier interfaces. The external MIT source terminology error is recorded in the postulate source caption and nonproof contract; it is not misclassified as a published library-item repair.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    {
+      "id": "post-cm15-impulse",
+      "completed": "Postulate clauses (i)-(iii) reviewed; only (i) changed, restitution and open-body identities preserved.",
+      "dependencies": [
+        "def-cm02-newtonian-flow",
+        "lem-cm-piecewise-c1-jump-derivative",
+        "thm-cm-impulse-restitution-and-energy-loss"
+      ],
+      "source_locators": [
+        "items/def-cm02-newtonian-flow.md Definition (c)",
+        "items/lem-cm-piecewise-c1-jump-derivative.md Statement and Proof 1.1-3.1",
+        "items/thm-cm-impulse-restitution-and-energy-loss.md Statement, Proof 2.1-3.1"
+      ],
+      "next_action": "Assigned repair completed; final focused validations and direct-consumer inventory are recorded in this report.",
+      "unresolved_obligations": []
+    },
+    {
+      "id": "pthm-cm15-control-volume-balance",
+      "completed": "The hypotheses specify C2 motions, C1 density, velocity and stress and continuous body force, while the regularity supplier reserves smooth for C-infinity. Renamed this adopted model finite-regularity throughout, preserving all hypotheses, endpoint localization, relative boundary flux signs, and flux-average deductions; clause (iii) of the repaired postulate is unchanged.",
+      "source_locators": [
+        "items/pthm-cm15-control-volume-balance.md"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned repair completed; final focused validations and direct-consumer inventory are recorded in this report."
+    },
+    {
+      "id": "pthm-cm15-impact-balance",
+      "completed": "The original motion premise inherited the global C2 contradiction of the postulate. Specified an impulse motion and derived momentum, restitution velocities and energy directly from finite jumps and the kinetic split, since the cited pairing theorem requires continuous time forces not guaranteed here. Corrected the false assertion that a nonzero impulse makes the regular force map discontinuous; a zero regular force map is compatible with singular forcing.",
+      "source_locators": [
+        "items/pthm-cm15-impact-balance.md"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned repair completed; final focused validations and direct-consumer inventory are recorded in this report."
+    },
+    {
+      "id": "cex-cm15-momentum-alone-does-not-fix-the-impact",
+      "completed": "The original L1 equated endpoint jump compatibility with full model admissibility and supplied no off-impact trajectories. Constructed explicit continuous piecewise-affine runs on the same interval and full configuration domain, with identical incoming curves and zero regular forces. Verified all trajectory, limit, approach and jump conditions, with impulses -6n and -12n and restitution e=0 and e=1; the two outgoing histories and energies differ.",
+      "source_locators": [
+        "items/cex-cm15-momentum-alone-does-not-fix-the-impact.md"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned repair completed; final focused validations and direct-consumer inventory are recorded in this report."
+    },
+    {
+      "id": "ex-cm15-control-volume-check",
+      "completed": "The stated alpha-not-zero hypothesis includes negative alpha, for which the material scale exp(alpha t) contracts. Replaced the expansion label with uniform scaling throughout and explicitly stated both signs. Checked the mass cancellation, pressure gradient, fixed and material fluxes and conditional elbow resultant; none of those computations requires alpha to be positive.",
+      "source_locators": [
+        "items/ex-cm15-control-volume-check.md"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned repair completed; final focused validations and direct-consumer inventory are recorded in this report."
+    },
+    {
+      "id": "ex-cm15-impact-check",
+      "completed": "The assertion of centre-of-mass rest throughout does not follow from V-minus=V-plus=0; the postulate leaves regular external forces unrestricted. Replaced it with the exact one-sided statement at the impact, retaining all elastic, half-restitution and sticking velocities, impulses and energies. Momentum continuity controls the jump, and supplies no zero acceleration away from contact.",
+      "source_locators": [
+        "items/ex-cm15-impact-check.md"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned repair completed; final focused validations and direct-consumer inventory are recorded in this report."
+    },
+    {
+      "id": "ex-cm15-rocket-check",
+      "completed": "The framework gives t duration dimension, so subtracting it from 3 in the mass and logarithm violates its equal-dimension sum rule. Defined m=m0-r0 t with m0=3 kg and r0=1 kg/s, q=t/(1 s), v=ue log(m0/m)n, and retained unit factors in differentiation and momentum balance. Checked positive mass, 2 N thrust, nonzero momentum rate at 2 s and the 1 s values; corrected final momentum rounding from exact 4 log(3/2).",
+      "source_locators": [
+        "items/ex-cm15-rocket-check.md"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned repair completed; final focused validations and direct-consumer inventory are recorded in this report."
+    },
+    {
+      "id": "pthm-cm15-central-scattering",
+      "completed": "The original clause 3 took infinite-time polar limits of r on an arbitrary interval I, which may be bounded. Defined the polar data for the unique global extension r-bar from clause 1 and explicitly applied the polar-reduction supplier on R in proof 4.1. Checked compact Cartesian continuation away from collision, both radial branches, endpoint quadrature convergence, free tails, wrapped angle relation and cutoff branch area. Clarified C1 branch regularity in the physical scope without altering hypotheses.",
+      "source_locators": [
+        "items/pthm-cm15-central-scattering.md"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned repair completed; final focused validations and direct-consumer inventory are recorded in this report."
+    },
+    {
+      "id": "ex-cm15-rutherford-cutoff-check",
+      "completed": "The former L2 attributed cot(x) asymptotic to suppliers that do not establish its limit. Added exact published differentiation, continuity and function-limit suppliers, and proved sin(x)/x tends to 1 and x cot(x) tends to 1 locally in step 3.2, yielding the unchanged 16 pi times 10^-24 angular-growth coefficient. Derived the special-angle values and backward endpoint limit from addition, positivity and Pythagorean identities in step 1.2; retained all declared data and qualifications.",
+      "source_locators": [
+        "items/ex-cm15-rutherford-cutoff-check.md"
+      ],
+      "unresolved_obligations": [],
+      "next_action": "Assigned repair completed; final focused validations and direct-consumer inventory are recorded in this report."
+    },
+    {
+      "kind": "final-state-reexamination",
+      "evidence": "Rechecked all nine items after source-caption clarification and finite-regularity labels: postulate clauses (i)-(iii) and restitution/open-body formulas unchanged by those captions. Checked impact and rocket canonical phase renumbering preserves every argument and earlier-step reference. Consumers cite the unchanged statement clauses, so proof renumbering does not change their deductions. Updated owning contracts and manifest rows; no independent review of these repairs is claimed.",
+      "uncertain": false
+    },
+    {
+      "kind": "integration-history",
+      "evidence": "The first metadata critical section acquired and released the prescribed lock. A later acquire returned busy but an erroneously unguarded write still ran; this was acknowledged. A subsequent successful acquire/reread verified every assigned manifest row and contract, regenerated only assigned entries, passed the scoped contract check and released the lock. The last two finite-regularity metadata labels were then updated under another successfully acquired lock. No shared ledgers were edited.",
+      "uncertain": false
+    },
+    {
+      "id": "pthm-cm15-central-scattering",
+      "kind": "supplier-change-recheck",
+      "evidence": "A concurrent repair changed thm-cm-differential-cross-section-density and def-cm-scattering-data. Read the current complete density theorem Statement and Proof 1.1-5.1 and the current scattering Definition. They establish the Borel pushforward via compact substitution, a common finite rectangle exhaustion and measure uniqueness, then nonnegative/absolutely-integrable tests via monotone convergence. The consumer already states exactly those test qualifications and assumes countable choice and a C1 nondegenerate branch. Its branch-portion cutoff has finite incident area. Refreshed its contract quote and, after this actual examination, reran review-contexts for this item alone.",
+      "uncertain": false,
+      "source_locators": [
+        "items/thm-cm-differential-cross-section-density.md Statement and Proof 1.1-5.1",
+        "items/def-cm-scattering-data.md Definition",
+        "items/pthm-cm15-central-scattering.md Statement 4 and Proof 5.1"
+      ]
+    },
+    {
+      "kind": "focused-check-results",
+      "checks": [
+        {
+          "name": "precheck",
+          "command": "node tools/tsx-run.mjs tools/physics-support/precheck.mts items/post-cm15-impulse.md items/pthm-cm15-control-volume-balance.md items/pthm-cm15-impact-balance.md items/cex-cm15-momentum-alone-does-not-fix-the-impact.md items/ex-cm15-control-volume-check.md items/ex-cm15-impact-check.md items/ex-cm15-rocket-check.md items/pthm-cm15-central-scattering.md items/ex-cm15-rutherford-cutoff-check.md --json",
+          "exit_code": 0,
+          "result": "9 checked, 0 failed; nonproof postulate structure and eight direct proofs pass."
+        },
+        {
+          "name": "rendercheck",
+          "command": "node tools/physics-support/rendercheck.mjs items/post-cm15-impulse.md items/pthm-cm15-control-volume-balance.md items/pthm-cm15-impact-balance.md items/cex-cm15-momentum-alone-does-not-fix-the-impact.md items/ex-cm15-control-volume-check.md items/ex-cm15-impact-check.md items/ex-cm15-rocket-check.md items/pthm-cm15-central-scattering.md items/ex-cm15-rutherford-cutoff-check.md --json",
+          "exit_code": 0,
+          "result": "9 checked, no errors or warnings."
+        },
+        {
+          "name": "proof-contract",
+          "command": "node tools/physics-support/proof-contract.mjs research/physics-cm-qm-gr-79-2026-10-11-batch-31.proof-contracts.json --strict --items post-cm15-impulse,pthm-cm15-control-volume-balance,pthm-cm15-impact-balance,cex-cm15-momentum-alone-does-not-fix-the-impact,ex-cm15-control-volume-check,ex-cm15-impact-check,ex-cm15-rocket-check,pthm-cm15-central-scattering,ex-cm15-rutherford-cutoff-check --json",
+          "exit_code": 0,
+          "result": "All nine selected contracts pass; new postulate nonproof contract, exact source quotes and proof-step mappings included."
+        },
+        {
+          "name": "dependencies",
+          "command": "Read-only Python DFS of assigned dependency closure",
+          "exit_code": 0,
+          "result": "All nine remain assigned draft frontier items; declared roles match dependencies, every supplier exists, and the 1221-item prerequisite closure is acyclic. This is a structural check, not a claimed whole-closure proof audit."
+        },
+        {
+          "name": "proof-layout",
+          "command": "node tools/physics-support/proof-layout.mjs items/post-cm15-impulse.md items/pthm-cm15-control-volume-balance.md items/pthm-cm15-impact-balance.md items/cex-cm15-momentum-alone-does-not-fix-the-impact.md items/ex-cm15-control-volume-check.md items/ex-cm15-impact-check.md items/ex-cm15-rocket-check.md items/pthm-cm15-central-scattering.md items/ex-cm15-rutherford-cutoff-check.md",
+          "exit_code": 0,
+          "result": "proof-layout: 9 items, 52 steps, 0 defects; run after the final item edits."
+        }
+      ],
+      "unresolved_assigned_obligations": [],
+      "owner_followup": "Three separate unassigned frontier-item defects and stale owning page summaries are proposed as open ledger updates. No judgment, stamp, baseline, certificate or round state was written; no worker or judge was launched."
+    }
+  ],
+  "consumer_reviews": [
+    {
+      "supplier": "post-cm15-impulse",
+      "id": "cex-cm15-restitution-above-one-increases-energy",
+      "path": "items/cex-cm15-restitution-above-one-increases-energy.md",
+      "source_snippet": "[[post-cm15-impulse]] clause (i) are retained but its clause (ii) is",
+      "affected_use": "Statement refuted and Given explicitly extend only the restitution range hypothetically; Counterexample 4.1 supplies continuous piecewise-affine zero-potential paths. The corrected impulse-motion conditions hold and no restricted e-in-[0,1] theorem is applied at e=2.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "examined_unaffected",
+      "route": "frontier owner for any separately reported defect",
+      "minimality": "The cited scope or statement remains applicable; no item edit is necessary for this supplier-interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "post-cm15-impulse",
+      "id": "cex-cm15-deflection-need-not-decrease",
+      "path": "items/cex-cm15-deflection-need-not-decrease.md",
+      "source_snippet": "**Given:** Countable choice for the scattering measures. A length $a>0$, a reduced mass $\\mu>0$, a positive energy $E>0$, with $[a]=\\ell$, $[\\mu]=\\mathsf M$ and $[E]=[U_0]=\\mathsf M\\ell^2\\tau^{-2}$; the speeds $v_\\infty,v_{\\mathrm{in}}$ have units $\\ell\\tau^{-1}$ and the angle parameters are dimensionless. Also adopt the following separate **refracting-shell model**: the label moves freely for $r\\ne a$; at $r=a$ the example-specific radial contact rule preserves the tangential velocity component and conserves energy with a potential drop $U_0>0$ inside, so the speed inside is $v_{\\mathrm{in}}=\\sqrt{v_\\infty^2+2U_0/\\mu}$ with $v_\\infty=\\sqrt{2E/\\mu}$. Choose the index $n=\\frac32$ so that $v_{\\mathrm{in}}=\\frac32v_\\infty$ and $U_0=\\frac54E$. This interface rule is adopted here and is not supplied by [[post-cm15-impulse]] clause (ii), which covers only finite-mass collinear two-label restitution. The incoming motion is a straight line with impact parameter $b\\ge0$ and speed $v_\\infty$. The interface rule is applied at transverse crossings; at grazing $b=a$ adopt the free continuation. Separately, for the genuine smooth witness use the central model on time window $\\mathbb R$ with $u=0$ and two equal label masses $2\\mu$.",
+      "affected_use": "Given and L1 explicitly identify the refracting-shell rule as separate from postulate (ii), whose finite-mass collinear scope is unchanged. The new impulse-motion formulation makes no assertion about fixed-wall or shell contact.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "examined_unaffected",
+      "route": "frontier owner for any separately reported defect",
+      "minimality": "The cited scope or statement remains applicable; no item edit is necessary for this supplier-interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "post-cm15-impulse",
+      "id": "pthm-cm15-control-volume-balance",
+      "path": "items/pthm-cm15-control-volume-balance.md",
+      "source_snippet": "open-body accounting of [[post-cm15-impulse]] clause (iii); they are not",
+      "affected_use": "Statement material balances and clauses 3-4 use postulate (iii) only. Its differentiable open-body equations and inertial transfer-velocity conventions are unchanged, so localization and inlet/outlet accounting remain valid.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "post-cm15-impulse",
+      "id": "pthm-cm15-impact-balance",
+      "path": "items/pthm-cm15-impact-balance.md",
+      "source_snippet": "Adopt the impact and open-mass extensions of [[post-cm15-impulse]], with",
+      "affected_use": "Statement and Proof clauses 1-5 use the isolated motion and jump equations. Repaired the global-motion wording and derived endpoint algebra locally, avoiding the continuous-time-force hypotheses of the separate distributional supplier.",
+      "invalidated_claim": "The original global-motion formulation invalidated this use; the assigned repair now supplies the missing trajectory/algebra.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "post-cm15-impulse",
+      "id": "ex-cm15-hard-sphere-reflection-check",
+      "path": "items/ex-cm15-hard-sphere-reflection-check.md",
+      "source_snippet": "[[post-cm15-impulse]] clause (ii), but it is not a formal member of that law:",
+      "affected_use": "Example reflection-rule paragraph compares normal reversal with postulate (ii) but expressly denies formal membership in its finite-mass two-label law. That analogy and its independently adopted fixed-wall reflection remain sound.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "examined_unaffected",
+      "route": "frontier owner for any separately reported defect",
+      "minimality": "The cited scope or statement remains applicable; no item edit is necessary for this supplier-interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "post-cm15-impulse",
+      "id": "ex-cm15-control-volume-check",
+      "path": "items/ex-cm15-control-volume-check.md",
+      "source_snippet": "post-cm15-impulse,",
+      "affected_use": "Example (ii) and L1 use postulate (iii) via the control-volume inlet/outlet decomposition. Neither uses the altered impulse-motion branch; the rate signs and inertial transfer velocities are unchanged.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "post-cm15-impulse",
+      "id": "cex-cm15-momentum-alone-does-not-fix-the-impact",
+      "path": "items/cex-cm15-momentum-alone-does-not-fix-the-impact.md",
+      "source_snippet": "[[post-cm15-impulse]] clause (i), the reciprocal impulse equations",
+      "affected_use": "Facts L1 formerly mistook endpoint equality for full trajectory admissibility. New Counterexample 1.2 constructs the two actual zero-force piecewise-affine paths; 2.1-3.1 verify reciprocal jumps and the two distinct restitutions.",
+      "invalidated_claim": "The original global-motion formulation invalidated this use; the assigned repair now supplies the missing trajectory/algebra.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "post-cm15-impulse",
+      "id": "rem-cm15-model-boundaries",
+      "path": "items/rem-cm15-model-boundaries.md",
+      "source_snippet": "[[post-cm15-impulse]], whose restitution law covers a finite-mass collinear",
+      "affected_use": "The impact/open-flow section records reciprocal impulse, collinear restitution e in [0,1] and open-body accounting, and excludes a nonzero jump from a whole-interval regular solution. All these assertions remain sound for the explicit impulse-motion definition.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "examined_unaffected",
+      "route": "frontier owner for any separately reported defect",
+      "minimality": "The cited scope or statement remains applicable; no item edit is necessary for this supplier-interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "post-cm15-impulse",
+      "id": "ex-cm15-impact-check",
+      "path": "items/ex-cm15-impact-check.md",
+      "source_snippet": "contact model of [[post-cm15-impulse]] clauses (i)-(ii) along the contact",
+      "affected_use": "L1 and Verification substitute the jump/restitution consequences for e=1,1/2,0. The repaired postulate permits those one-sided data; the false throughout-rest remark was separately corrected to one-sided rest at impact.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "post-cm15-impulse",
+      "id": "ex-cm15-rocket-check",
+      "path": "items/ex-cm15-rocket-check.md",
+      "source_snippet": "[[post-cm15-impulse]] clause (iii) with, on the open interval",
+      "affected_use": "Example and L1 invoke postulate (iii), whose open-body assumptions are unchanged. The repaired m0-r0 t and velocity ue log(m0/m)n satisfy both material balances with inertial w-out=v-ue n.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-control-volume-balance",
+      "id": "post-cm15-impulse",
+      "path": "items/post-cm15-impulse.md",
+      "source_snippet": "the finite-regularity open-flow model of [[pthm-cm15-control-volume-balance]].",
+      "affected_use": "Status and scope exclusions refer to the spatial refinement as the open-flow model of the control-volume theorem. Updated the stale smooth label to finite-regularity, retaining the same exclusions and three adopted equations.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-control-volume-balance",
+      "id": "ex-cm15-control-volume-check",
+      "path": "items/ex-cm15-control-volume-check.md",
+      "source_snippet": "[[pthm-cm15-control-volume-balance]] (the density is spatially uniform, the",
+      "affected_use": "Example and L1 invoke moving, fixed and material region identities with C2 maps, C1 fields and continuous body force. The theorem retains those exact hypotheses; clarified finite-regularity scope and scaling with either sign of alpha.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-control-volume-balance",
+      "id": "rem-cm15-model-boundaries",
+      "path": "items/rem-cm15-model-boundaries.md",
+      "source_snippet": "outcome. [[pthm-cm15-control-volume-balance]] derives the",
+      "affected_use": "The impact/open-flow summary says the moving-control-region identities follow from adopted material balances and recover lumped inlet/outlet accounting. The terminology repair leaves those hypotheses and conclusions unchanged.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "examined_unaffected",
+      "route": "frontier owner for any separately reported defect",
+      "minimality": "The cited scope or statement remains applicable; no item edit is necessary for this supplier-interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-impact-balance",
+      "id": "cex-cm15-restitution-above-one-increases-energy",
+      "path": "items/cex-cm15-restitution-above-one-increases-energy.md",
+      "source_snippet": "energy clauses of [[pthm-cm15-impact-balance]] and",
+      "affected_use": "Statement refuted mentions the e-in-[0,1] restriction only; the e=2 equations and energy change are derived independently in Counterexample 2.1-3.1. The clarified impulse-motion premise adds no application outside that restriction.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "examined_unaffected",
+      "route": "frontier owner for any separately reported defect",
+      "minimality": "The cited scope or statement remains applicable; no item edit is necessary for this supplier-interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-impact-balance",
+      "id": "post-cm15-impulse",
+      "path": "items/post-cm15-impulse.md",
+      "source_snippet": "page as part of [[pthm-cm15-impact-balance]].",
+      "affected_use": "Status and scope refers to the theorem for the exclusion of nonzero jumps from ordinary C2 force-model motions. That exclusion is unchanged and its proof uses global differentiability, not discontinuity of the regular force map.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-impact-balance",
+      "id": "cex-cm15-momentum-alone-does-not-fix-the-impact",
+      "path": "items/cex-cm15-momentum-alone-does-not-fix-the-impact.md",
+      "source_snippet": "*independent* contact assumption, and [[pthm-cm15-impact-balance]] clause 5",
+      "affected_use": "Statement refuted and L1 cite clauses 1 and 5 for momentum continuity and scalar underdetermination. Their statements are preserved; the added complete path witnesses meet the clarified motion premise.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-impact-balance",
+      "id": "rem-cm15-model-boundaries",
+      "path": "items/rem-cm15-model-boundaries.md",
+      "source_snippet": "[[pthm-cm15-impact-balance]] proves their conditional consequences \u2014",
+      "affected_use": "The impact/open-flow summary lists continuity, regular-motion exclusion, restitution velocities, energy and open-body/rocket laws. These statement clauses are unchanged; the revised proof supplies them directly under the adopted jumps.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "examined_unaffected",
+      "route": "frontier owner for any separately reported defect",
+      "minimality": "The cited scope or statement remains applicable; no item edit is necessary for this supplier-interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-impact-balance",
+      "id": "ex-cm15-impact-check",
+      "path": "items/ex-cm15-impact-check.md",
+      "source_snippet": "continuous across the impact, as [[pthm-cm15-impact-balance]] clause 1",
+      "affected_use": "L1 cites statement clauses 1,3,4 and the verification substitutes the same masses and incoming velocities. The formulas are unchanged; proof phase renumbering changes no cited statement clause.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-impact-balance",
+      "id": "ex-cm15-rocket-check",
+      "path": "items/ex-cm15-rocket-check.md",
+      "source_snippet": "[L1] Material accounting and derived law ([[post-cm15-impulse]] clause (iii), [[thm-cm-variable-mass-momentum-balance]], [[pthm-cm15-impact-balance]] clause 6): the model requires $m'=r_{\\mathrm{in}}-r_{\\mathrm{out}}$ and $(mv)'=F+r_{\\mathrm{in}}w_{\\mathrm{in}}-r_{\\mathrm{out}}w_{\\mathrm{out}}$, equivalently $mv'=F+r_{\\mathrm{in}}(w_{\\mathrm{in}}-v)-r_{\\mathrm{out}}(w_{\\mathrm{out}}-v)$.",
+      "affected_use": "L1 uses statement clause 6 for the variable-mass product-rule consequence. This clause is unchanged and uses only postulate (iii), so the clarified impulse premise and proof renumbering do not affect it.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "assigned_repair_completed",
+      "route": "assigned unit 31",
+      "minimality": "Only the assigned, identified defect was repaired; unchanged consuming statement clauses require no further expansion.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-central-scattering",
+      "id": "cex-cm15-deflection-need-not-decrease",
+      "path": "items/cex-cm15-deflection-need-not-decrease.md",
+      "source_snippet": "witness for the stated claim. [[pthm-cm15-central-scattering]] clause 5 makes",
+      "affected_use": "L4 and Counterexample 1.3 use the zero-potential all-time free trajectory r-b(t)=(v-infinity t,b,0), which already equals its unique extension. Correcting the polar domain to that extension leaves its zero-deflection counterexample unchanged.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "examined_unaffected",
+      "route": "frontier owner for any separately reported defect",
+      "minimality": "The cited scope or statement remains applicable; no item edit is necessary for this supplier-interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-central-scattering",
+      "id": "ex-cm15-hard-sphere-reflection-check",
+      "path": "items/ex-cm15-hard-sphere-reflection-check.md",
+      "source_snippet": "5.1 Model boundary: the motion just computed is piecewise linear with a contact rule, not a central-force trajectory of class $C^2$ with a finite-range potential; the quadrature theorem [[pthm-cm15-central-scattering]] does not apply to it, and the finite total $\\pi a^2$ is a property of this contact model, not a counterexample to the forward divergence of the ideal Coulomb branch. The declared data are model data: no measurement is reported, and the agreement of the algebraic form with the cited impenetrable-sphere computation is a consistency check of the model, not evidence about nature. [given, L1, L4] \u220e",
+      "affected_use": "Verification 5.1 cites the finite-range theorem only to exclude the separately adopted piecewise-linear reflection trajectory from its C2 potential-model scope. The global polar-data correction does not admit a velocity-jumping contact.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "examined_unaffected",
+      "route": "frontier owner for any separately reported defect",
+      "minimality": "The cited scope or statement remains applicable; no item edit is necessary for this supplier-interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-central-scattering",
+      "id": "rem-cm15-model-boundaries",
+      "path": "items/rem-cm15-model-boundaries.md",
+      "source_snippet": "[[pthm-cm15-central-scattering]] is a conditional deduction inside the",
+      "affected_use": "The scattering summary states global relative continuation, asymptotic velocity/impact data, quadrature and wrapped-angle qualification. These now refer explicitly to the global extension; the branch result still requires C1 and nonzero derivative.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "examined_unaffected",
+      "route": "frontier owner for any separately reported defect",
+      "minimality": "The cited scope or statement remains applicable; no item edit is necessary for this supplier-interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "supplier": "pthm-cm15-central-scattering",
+      "id": "pthm-cm15-rutherford-model",
+      "path": "items/pthm-cm15-rutherford-model.md",
+      "source_snippet": "pthm-cm15-central-scattering,",
+      "affected_use": "The finite-range item is a declared contextual dependency, while L1 and L3 and Proof 2.1-5.1 derive Coulomb scattering from the separate mathematical Coulomb and Rutherford suppliers. No finite-range conclusion is applied to kappa/r; the polar-domain clarification does not invalidate its core deduction.",
+      "invalidated_claim": "No mathematical conclusion is invalidated by this supplier repair; the exact use and its hypotheses are described above.",
+      "disposition": "examined_unaffected",
+      "route": "frontier owner for any separately reported defect",
+      "minimality": "The cited scope or statement remains applicable; no item edit is necessary for this supplier-interface event.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "page_reviews": [
+    {
+      "path": "library/non-relativistic-classical-mechanics/cm15-scattering-and-impulse-model-boundaries.md",
+      "suppliers": [
+        "post-cm15-impulse",
+        "pthm-cm15-impact-balance",
+        "pthm-cm15-control-volume-balance",
+        "pthm-cm15-central-scattering"
+      ],
+      "affected_use": "The impulse extension and regular-motion exclusion summaries remain correct, as do global finite-range continuation and quadrature. The control-volume summary retains the older smooth-model label; replace that label with finite-regularity, preserving the adopted balances and flux equations.",
+      "disposition": "page-owner maintenance for stale regularity label; mathematical summaries otherwise remain sound",
+      "uncertain": false
+    },
+    {
+      "path": "library/non-relativistic-classical-mechanics/cm15-scattering-and-impulse-model-boundaries-examples.md",
+      "suppliers": [
+        "ex-cm15-control-volume-check",
+        "ex-cm15-rocket-check",
+        "ex-cm15-impact-check"
+      ],
+      "affected_use": "The page still says the unequal-mass elastic case exchanges velocities, uses the old dimensional 3-t kg mass/logarithm, and labels both signs of alpha uniform expansion. Change the summary to reverses each velocity, m=m0-r0 t and ue log(m0/m)n, and uniform scaling.",
+      "disposition": "page-owner maintenance; page was not edited by this item dispatch",
+      "uncertain": false
+    }
+  ]
+}

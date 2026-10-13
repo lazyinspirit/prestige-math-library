@@ -56,7 +56,7 @@ Moreover, if $A,C>0$ and $I:\mathbb R^3\to\mathbb R^3$ is the linear map with $I
 
 [L3] For $R\in SO(3)$, $R^{\mathsf T}R=I_3$; the matrices $e_1e_1^{\mathsf T}+e_2e_2^{\mathsf T}+e_3e_3^{\mathsf T}=I_3$, $[e_3]_\times e_3=0$ and $[e_2]_\times e_2=0$ [[lem-cm-skew-matrix-cross-product-correspondence]], [[def-matrix-product-and-identity-matrix]].
 
-[L4] $(\sin\circ a)'=\cos(a)\,a'$ and $(\cos\circ a)'=-\sin(a)\,a'$; the algebra of derivatives holds; and $\sin^2\psi+\cos^2\psi=1$ [[thm-sine-and-cosine-derivatives]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[def-sine-and-cosine-by-power-series]].
+[L4] $(\sin\circ a)'=\cos(a)\,a'$ and $(\cos\circ a)'=-\sin(a)\,a'$; the algebra of derivatives holds [[thm-sine-and-cosine-derivatives]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[def-sine-and-cosine-by-power-series]]. For the identity used below, [L1] gives $R_z(\psi)\in SO(3)$, hence $R_z(\psi)^{\mathsf T}R_z(\psi)=I_3$ by [L3]. Its first column is $(\cos\psi,\sin\psi,0)$, so the first diagonal entry of this product is $\cos^2\psi+\sin^2\psi=1$ by the matrix-product formula [[lem-cm-coordinate-rotation-matrices]], [[def-matrix-product-and-identity-matrix]].
 
 [L5] Evaluation of $R_z(a)e_3=e_3$, $R_z(a)e_1=\cos a\,e_1+\sin a\,e_2$, $R_z(a)e_2=-\sin a\,e_1+\cos a\,e_2$ and $R_y(a)e_1=\cos a\,e_1-\sin a\,e_3$, $R_y(a)e_3=\sin a\,e_1+\cos a\,e_3$ is the column reading of the displayed matrices [[lem-cm-coordinate-rotation-matrices]].
 

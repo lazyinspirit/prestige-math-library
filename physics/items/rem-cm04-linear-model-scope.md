@@ -23,7 +23,7 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "An audit of the page's conditional content: which statements are declared model assumptions, which are exact conditional deductions of the model, and which are approximation or empirical interfaces; the status of the linear models as idealizations, the finite-time character of the small-angle bound, the phenomenological character of the drag with its neglected fluctuations, the prescribed-drive idealization, and the handling of measured parameters as empirical premises. The remark asserts no new mathematical or physical claim and no measured value."
+physical_scope: "An audit of the page's conditional content: which statements are declared model assumptions, which are exact conditional deductions of the model, and which are approximation or empirical interfaces; the status of the linear models as idealizations, the finite-time character of the small-angle bound, the phenomenological character of the drag and the source-reported restriction that oscillator energy greatly exceed the fluctuation energy scale, without a universal quantitative tolerance, the prescribed-drive idealization, and the handling of measured parameters as empirical premises. The remark asserts no new mathematical or physical claim and no measured value."
 sources:
   references:
     - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Sections 3.1-3.3 and 5.1, chapter pages 1-7 of Chapters 3 and 5 (PDF pages 33-39 and 87-93): the effective one-dimensional reduction, the linearization procedure with its local character, the energy diagram, the phenomenological drag with neglected fluctuations, the forced response and the resonance discussion"
@@ -50,8 +50,8 @@ verification:
 - **Declared assumptions versus deductions.** The harmonic, damped and driven
   models are adopted postulates
   ([[post-cm04-harmonic-model]], [[post-cm04-linear-damping-model]],
-  [[post-cm04-sinusoidal-drive-model]]); everything else on the page is a
-  conditional deduction from them: existence and uniqueness, energy
+  [[post-cm04-sinusoidal-drive-model]]); every physics theorem on the page is a
+  conditional deduction from those adopted models: existence and uniqueness, energy
   conservation and level-set containment
   ([[pthm-cm04-conservative-motion-and-energy]]), Lyapunov stability at a
   strict minimum ([[pthm-cm04-equilibrium-stability-at-a-strict-minimum]]),
@@ -63,10 +63,13 @@ verification:
   ([[pthm-cm04-resonance-and-boundedness]]). No deduction here establishes
   that a real system obeys a model.
 
-- **The harmonic model is a local quadratic approximation.** Adopting
-  $U(x)=\tfrac12kx^{2}$ reproduces the quadratic term of the potential near
-  a strict minimum with positive second derivative and the linearized equation about it; the approximation
-  is exact only for the declared model. For the pendulum, the difference
+- **The harmonic model is a local quadratic approximation.** In the
+  displacement coordinate $q=x-x_{*}$ centered at a strict minimum with
+  $U''(x_{*})>0$, the quadratic Taylor term is
+  $\tfrac12U''(x_{*})q^{2}$ after dropping the additive constant
+  $U(x_{*})$. It gives the linearized equation about that minimum; the
+  approximation is exact only for the declared harmonic model. For the
+  pendulum, the difference
   between the nonlinear and the linearized motion is bounded only in the
   finite-time sense of
   [[prop-cm-pendulum-small-angle-linearization-bound]], with the explicit
@@ -76,13 +79,29 @@ verification:
 - **The drag is phenomenological and fluctuation-free.** The linear drag
   model is adopted for a stated viscous regime; its coefficient depends on
   body and medium; the random component of the environment's force is
-  neglected, a restriction the recorded source attaches to an energy-scale
-  condition. No fluctuation–dissipation relation, no derivation of $c$ and
-  no validity outside the linear regime is claimed; regimes of quadratic
+  neglected. Likharev's Section 5.1, footnote 4 (Chapter 5 p. 2; PDF p. 88),
+  limits that omission to oscillator energy much larger than the fluctuation
+  energy scale. In the source's thermal-equilibrium setting, write
+  $T\ge0$ for absolute temperature in kelvins, $k_B>0$ for the Boltzmann
+  constant in joules per kelvin, $\hbar>0$ for the reduced Planck constant
+  in joule seconds, and $\omega_0=\sqrt{k/m}$ in inverse seconds. The
+  reported scale is $E_{\rm fluc}:=\max\{k_BT,\hbar\omega_0/2\}$, compared
+  with $E_{\rm osc}:=mv^2/2+kx^2/2$ above the declared potential minimum.
+  The condition is $E_{\rm osc}\gg E_{\rm fluc}$: the ratio
+  $E_{\rm fluc}/E_{\rm osc}$ must be small where this approximation is used.
+  The source gives no universal numerical tolerance or error estimate.
+  These thermal and quantum quantities report a source's applicability
+  caveat; they are not premises of the page's deterministic proofs or
+  constants derived within this mechanical framework. Since the adopted
+  strictly damped equation predicts $E_{\rm osc}\to0$, its exact long-time
+  decay theorem does not assert indefinite physical applicability when
+  $E_{\rm fluc}>0$. No fluctuation–dissipation relation, derivation of $c$
+  or validity outside the linear regime is claimed; regimes of quadratic
   drag or of Coulomb friction are different models outside this page.
 
-- **The drive is prescribed and sinusoidal.** The driven model's force is a
-  function of time alone with an idealized sinusoidal waveform; no
+- **The drive is prescribed and sinusoidal.** The driving-force contribution
+  is a function of time alone with an idealized sinusoidal waveform; the total
+  force also includes the declared spring and drag terms. No
   back-reaction of the motion on the drive, no non-sinusoidal waveform and
   no apparatus characterization is part of the model. The boundedness and
   resonance clauses of [[pthm-cm04-resonance-and-boundedness]] are

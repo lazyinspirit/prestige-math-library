@@ -33,10 +33,8 @@ dependency_roles:
   def-countable-choice: mathematical-premise
 sources:
   references:
-    - title: "P. T. Chrusciel, Elements of causality theory, arXiv:1110.6706 (2011): the averaging of weak time steps over a compact inner strip in the proof of Theorem 2.11.1, printed pp. 59-60"
-      url: "https://arxiv.org/pdf/1110.6706"
-    - title: "A. N. Bernal and M. Sanchez, Further results on the smoothability of Cauchy hypersurfaces and Cauchy time functions, arXiv:gr-qc/0512095 (2005): the step averaging and series construction of temporal functions, printed pp. 4-7"
-      url: "https://arxiv.org/pdf/gr-qc/0512095"
+    - title: "A. N. Bernal and M. Sanchez, Smoothness of time functions and the metric splitting of globally hyperbolic spacetimes (arXiv:gr-qc/0401112), Corollary 3.9, Lemma 3.10 and Theorem 3.11, printed pp. 6-7: finite averaging and derivative-controlled series."
+      url: "https://arxiv.org/pdf/gr-qc/0401112"
 verification:
   precheck: pass
 ---
@@ -76,9 +74,9 @@ $\{a'\le t\le c'\}$.
 
 **Proof technique:** constructive.
 
-1.1 (Covering each compact slice by finitely many weak steps.) For every integer $j\ge1$ put $K_j:=L_j\cap\{a'\le t\le c'\}$, a compact subset of the inner strip [L3]. The family of open sets $\{U_b: a<b<c\}$ from [L1], where $U_b$ is a neighborhood of $S_b$ on which $\nabla\tau_b$ is past timelike, covers $K_j$: for $x\in K_j$ put $b:=t(x)\in[a',c']\subseteq(a,c)$, so $x\in S_b\subseteq U_b$. By compactness there are finitely many levels $b_{j,1},\dots,b_{j,m_j}\in[a',c']$ with $K_j\subseteq\bigcup_{i=1}^{m_j}U_{b_{j,i}}$. If $K_j$ is empty, choose the single level $b_{j,1}:=(a'+c')/2$ and set $m_j=1$; if $K_j$ is nonempty its finite cover already has $m_j\ge1$. Thus every average below has a positive denominator. Since every chosen level lies in $(a,c)$, all the corresponding weak steps have the same outer bounds $a$ and $c$. [L1, L3, given, choose]
+1.1 (Finite lists of weak steps for each compact slice.) For $j\ge1$ put $K_j:=L_j\cap\{a'\le t\le c'\}$, compact by [L3]. Consider all tuples $(b,\tau,U)$ with $b\in[a',c']$, $\tau$ a weak step supplied by [L1] with outer bounds $a,c$, and $U$ its open past-timelike-gradient locus containing $S_b$. Their open sets cover $K_j$, since at $x\in K_j$ a tuple exists with $b=t(x)$. Compactness supplies a finite tuple list covering $K_j$. For empty $K_j$, a single tuple at $b=(a'+c')/2$ is available, so every list may be taken nonempty. Countable Choice selects one nonempty finite list for each $j$. Write its entries $(b_{j,i},\tau_{j,i},U_{j,i})$, $1\le i\le m_j$. No weak-step family indexed by all real levels is selected. [L1, L3, given, choose]
 
-2.1 (The averaged slice functions.) Define $v_j:=\frac1{m_j}\sum_{i=1}^{m_j}\tau_{b_{j,i}}$. Then $v_j$ is smooth, $v_j=-1$ on $\{t\le a\}$ and $v_j=+1$ on $\{t\ge c\}$ because every summand has these properties, $|v_j|\le1$, and $\nabla v_j$ is past causal or zero everywhere as a finite average of past causal or zero vectors [L2]. On $K_j$ the gradient is past timelike: at $x\in K_j$ some $i$ satisfies $x\in U_{b_{j,i}}$, so $\nabla\tau_{b_{j,i}}(x)$ is past timelike and all other summands are past causal or zero, whence the finite sum $\nabla v_j(x)$ is past timelike by [L2]. [step 1.1, L1, L2, given]
+2.1 (The averaged slice functions.) Define $v_j:=\frac1{m_j}\sum_{i=1}^{m_j}\tau_{j,i}$. Then $v_j$ is smooth, $v_j=-1$ on $\{t\le a\}$ and $v_j=+1$ on $\{t\ge c\}$ because every summand has these properties, $|v_j|\le1$, and $\nabla v_j$ is past causal or zero everywhere as a finite average of past causal or zero vectors [L2]. On $K_j$ the gradient is past timelike: at $x\in K_j$ some $i$ satisfies $x\in U_{j,i}$, so $\nabla\tau_{j,i}(x)$ is past timelike and all other summands are past causal or zero, whence the finite sum $\nabla v_j(x)$ is past timelike by [L2]. [step 1.1, L1, L2, given]
 
 3.1 (Derivative bounds.) For each $j\ge1$ the set $\overline{B_1}\cup\cdots\cup\overline{B_j}$ is compact and the finitely many functions $\partial^\alpha v_j$, $|\alpha|\le j$, are continuous, so by [L5] each of them has a finite maximum there; let $A_j\ge1$ be an integer bounding all these maxima. Since $|v_j|\le1\le A_j$ as well, every coordinate derivative of $v_j$ of order at most $j$ is bounded by $A_j$ on the closures of the first $j$ boxes. [step 2.1, L3, L5, choose]
 

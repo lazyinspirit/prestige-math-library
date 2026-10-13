@@ -6,9 +6,10 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 1
-deps: [def-cm-affine-time-space]
+deps: [def-cm-affine-time-space, def-vector-valued-derivative-and-integral]
 dependency_roles:
   def-cm-affine-time-space: mathematical-premise
+  def-vector-valued-derivative-and-integral: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -37,15 +38,15 @@ and to the requirement that a sum $X+Y$ is meaningful only when $[X]=[Y]$, in wh
 
 **(c) Reference units.** The **metre** is the reference unit of length, the **second** the reference unit of duration and the **kilogram** the reference unit of mass. A quantity of dimension $\ell^{a}\tau^{b}\mu^{c}$ is expressed in the unit $\mathrm m^{a}\,\mathrm s^{b}\,\mathrm{kg}^{c}$: its value is a real multiple of that unit, and the conventions fix how the numerical value of a quantity is read (a coordinate value alone is a real number, and the unit declaration attaches its dimension). The coordinates of an adapted chart of [[def-cm-affine-time-space]] are read with the time coordinate $t$ in seconds, $[t]=\tau$, and the spatial coordinate components $x_{1},x_{2},x_{3}$ in metres, $[x_{i}]=\ell$; the slice distance $d_{g}$ of [[def-cm-affine-time-space]] between simultaneous events is read in metres.
 
-**(d) Dimensions of the quantities of this framework.** The dimension map is fixed on the following quantities:
+**(d) Typed quantity conventions.** The following constructions specify the quantities whose dimensions are recorded here, without adopting their dynamics. Fix a positive integer $N$, a nondegenerate open interval $I\subseteq\mathbb R$ with time parameter $t$ in seconds, position curves $x_i:I\to\mathbb R^3$ of class $C^2$ with components in metres, and constant parameters $m_i>0$ in kilograms, for $1\le i\le N$. Derivatives and integrals have the meanings of [[def-vector-valued-derivative-and-integral]]. These are conditional numerical constructions in a fixed spatial coordinate system; whether they represent a particular system is a separate model assumption.
 
-1. coordinates: $[t]=\tau$ and $[x_{i}]=\ell$;
-2. velocity components: $[w_{i}]=\ell\tau^{-1}$;
-3. acceleration components: $[a_{i}]=\ell\tau^{-2}$;
-4. mass: $[m]=\mu$, and the mass operator (multiplication of spatial components by masses) has dimension $\mu$;
-5. angles and entries of rotation matrices: dimensionless, $[R_{ij}]=1$ for $R\in SO(3)$ under the radian convention, in which an angle is the ratio of an arc length to a radius and therefore a ratio of two lengths;
-6. the standard derived quantities have the dimensions obtained from the rules of (b) once their defining relations are stated: momentum $\mu\ell\tau^{-1}$, force $\mu\ell\tau^{-2}$, energy $\mu\ell^{2}\tau^{-2}$, action $\mu\ell^{2}\tau^{-1}$, angular momentum $\mu\ell^{2}\tau^{-1}$;
-7. generalized coordinates may carry declared dimensions of their own; distinct generalized coordinates of one chart need not share a dimension, and only quantities of equal dimension are added.
+1. **Velocity and acceleration** are the maps $w_i=x_i':I\to\mathbb R^3$ and $a_i=x_i'':I\to\mathbb R^3$, of dimensions $\ell\tau^{-1}$ and $\ell\tau^{-2}$ componentwise.
+2. The **mass operator** is the linear map $\mathsf M:(\mathbb R^3)^N\to(\mathbb R^3)^N$, $\mathsf M(z_1,\ldots,z_N)=(m_1z_1,\ldots,m_Nz_N)$, with dimension $\mu$; the **momentum** of label $i$ is $p_i=m_iw_i:I\to\mathbb R^3$, with component dimension $\mu\ell\tau^{-1}$.
+3. A **force input** is a specified map $F:I\times O\times\mathbb R^{3N}\to\mathbb R^{3N}$, where $O\subseteq\mathbb R^{3N}$ is open, its arguments are time, positions and velocities, and each output component has dimension $\mu\ell\tau^{-2}$. No regularity or equation equating $F$ with $\mathsf M x''$ is adopted here. A later model must state both if needed.
+4. For a specified scalar **potential energy** map $U:I\times O\to\mathbb R$ of dimension $\mu\ell^2\tau^{-2}$ and a tuple $x(t)\in O$, the **kinetic energy** is $T(t)=\tfrac12\sum_{i=1}^N m_i\sum_{j=1}^3(w_i(t))_j^2$, and the **mechanical energy** is $E(t)=T(t)+U(t,x(t))$. Both are real-valued and have dimension $\mu\ell^2\tau^{-2}$; no conservation or applicability to every interaction is asserted.
+5. Given a scalar map $L:I\times O\times\mathbb R^{3N}\to\mathbb R$ of the energy dimension and $t_0<t_1$ in $I$, assume $t\mapsto L(t,x(t),w(t))$ is integrable on $[t_0,t_1]$. Its **action on this curve segment** is the real number $S[x;t_0,t_1]=\int_{t_0}^{t_1}L(t,x(t),w(t))\,dt$, with dimension $\mu\ell^2\tau^{-1}$ (the integration convention multiplies the integrand's dimension by duration). No variational principle is imposed.
+6. Relative to the chosen spatial origin, define the **angular momentum** $J_i:I\to\mathbb R^3$ by $J_i(t)=x_i(t)\times p_i(t)$, where for $r,s\in\mathbb R^3$ the operation is explicitly $r\times s=(r_2s_3-r_3s_2,r_3s_1-r_1s_3,r_1s_2-r_2s_1)$. Its components have dimension $\mu\ell^2\tau^{-1}$. These quantities depend on the chosen coordinates; dimensions alone assert no transformation or conservation law.
+7. A **rotation matrix** here means a real $3\times3$ matrix $R$ satisfying $R^{\mathsf T}R=I_3$ and $\det R=1$; its entries are dimensionless. A radian angle is an arc length divided by its positive radius, hence dimensionless. A generalized coordinate means a component of a specified local coordinate chart on a configuration space; each such component has its own declared dimension, and only quantities of equal dimension are added.
 
 **(e) Conventions only.** No numerical value of any constant or parameter of a model is fixed by this item: in particular no mass, length or duration of any concrete system is asserted, and no measured value is recorded. Two numerical values that are equal but carry different dimensions are not thereby the same quantity. Where a treatment or a later item suppresses a dimensionful constant by a natural-unit convention, that convention is read as shorthand for the corresponding SI-dimensioned statement with the constant restored, and it changes no dimension fixed here.
 

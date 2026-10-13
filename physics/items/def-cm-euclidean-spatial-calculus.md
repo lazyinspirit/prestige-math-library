@@ -34,6 +34,8 @@ sources:
 
 ## Definition
 
+We use one-based component labels: for $x\in\mathbb R^3$, $x_i:=x(i-1)$ for $1\le i\le3$, and $e_i$ denotes the imported standard unit vector at index $i-1$. Thus $\partial_i$ here is the imported partial derivative $\partial_{i-1}$, and an entry labelled $(i,j)$ of a $3\times3$ matrix is its imported entry $(i-1,j-1)$. All component formulas below use this relabelling; the underlying maps, matrices, inner product and trace are unchanged.
+
 Throughout, $\mathbb R^3$ carries its standard ordered orthonormal basis $e_1,e_2,e_3$, its Euclidean inner product $\langle\cdot,\cdot\rangle_2$ ([[def-euclidean-inner-product]]).
 
 Let $O\subseteq\mathbb R^3$ be open, let $a\in O$ and let $v:O\to\mathbb R^3$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]), so that the total derivative $Dv(a):\mathbb R^3\to\mathbb R^3$ is a linear map ([[def-total-derivative-in-euclidean-space]], [[def-euclidean-linear-map]]) whose matrix in the standard bases is $\bigl(\partial_jv_i(a)\bigr)_{1\le i,j\le3}$ ([[def-jacobian-matrix-and-gradient]], [[thm-total-derivative-computes-directional-and-partial-derivatives]]). The **divergence** of $v$ at $a$ is

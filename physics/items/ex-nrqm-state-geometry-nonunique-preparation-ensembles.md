@@ -81,7 +81,7 @@ $$\langle\psi,\varphi\rangle=\cos^{2}\frac\pi6-\sin^{2}\frac\pi6=\frac34-\frac14
 
 [L1] **Inner product and moduli** ([[def-inner-product-space]], [[lem-complex-conjugation-and-modulus-laws]]): $\langle u,v\rangle=u_1\overline{v_1}+u_2\overline{v_2}$, so $\langle e_i,e_j\rangle=\delta_{ij}$, $\|\psi\|^{2}=\frac34+\frac14=1$, $\|\varphi\|^{2}=1$, and $\langle\psi,\varphi\rangle=\frac34-\frac14=\frac12$.
 
-[L2] **Rank-one states** ([[lem-nrqm-state-geometry-ray-to-rank-one-projection]], [[def-matrix-product-and-identity-matrix]]): for a unit vector $x$ the operator $T_{x,x}$ is the pure state of the ray $[x]$, with matrix in the basis $(e_1,e_2)$ having entries $(T_{x,x})_{jk}=\langle e_j,x\rangle\langle x,e_k\rangle$; in particular $T_{e_1,e_1}=\begin{pmatrix}1&0\\0&0\end{pmatrix}$ and $T_{e_2,e_2}=\begin{pmatrix}0&0\\0&1\end{pmatrix}$.
+[L2] **Rank-one states** ([[lem-nrqm-state-geometry-ray-to-rank-one-projection]], [[def-matrix-product-and-identity-matrix]]): for a unit vector $x$ the operator $T_{x,x}$ is the pure state of the ray $[x]$, with matrix in the basis $(e_1,e_2)$ having entries $(T_{x,x})_{jk}=\langle e_k,x\rangle\langle x,e_j\rangle$; in particular $T_{e_1,e_1}=\begin{pmatrix}1&0\\0&0\end{pmatrix}$ and $T_{e_2,e_2}=\begin{pmatrix}0&0\\0&1\end{pmatrix}$.
 
 [L3] **Mixtures, purity and non-uniqueness of ensembles** ([[lem-nrqm-state-geometry-density-set-convex-and-complete]], [[lem-nrqm-state-geometry-purity-criterion]], [[pthm-nrqm-state-geometry-mixtures-and-extremal-preparations]]): finite mixtures of states with nonnegative weights summing to one are states; the purity of a state is $\operatorname{tr}(\rho^{2})$ and it is mixed exactly when its purity is less than $1$; and a preparation is the trace-norm limit of any of its statistical ensembles, distinct ensembles of the same state being allowed.
 
@@ -97,5 +97,5 @@ $$\langle\psi,\varphi\rangle=\cos^{2}\frac\pi6-\sin^{2}\frac\pi6=\frac34-\frac14
 
 ## Remarks
 
-- The non-uniqueness exhibited here is a property of the state assignment, not a physical incompleteness claim: the model assigns the same state to two different ensembles, and all of its predictions depend on the state. The maximally mixed two-level state gives another instance, treated on the mathematics composites page.
+- The non-uniqueness exhibited here is a property of the adopted state assignment: the two displayed ensembles receive the same density operator. This computation does not establish that the framework is physically incomplete or determine whether any further preparation data enter predictions. The maximally mixed two-level state gives another instance, treated on the mathematics composites page.
 - Neither ensemble in the computation is asserted to be realized by any apparatus; whether a laboratory procedure realizes one of them is an identification with uncertainty under the preparation and apparatus assumptions of the framework.

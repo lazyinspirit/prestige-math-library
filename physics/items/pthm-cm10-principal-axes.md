@@ -167,7 +167,9 @@ asserted.
   $2\langle n'(0),e_k\rangle=0$ ([[lem-cm-derivative-of-pairings-of-curves]]
   clause 2). Every point of the unit sphere is stationary for a scalar
   multiple of the identity, so stationarity does not by itself single out
-  geometric axes; the extremal clause (e) does.
+  geometric axes. Clause (e) identifies the extreme values and their
+  eigenspaces; repeated extreme eigenvalues do not select unique axes, and
+  for $I=\lambda I_3$ every unit vector attains both extrema.
 
 - **Physical reading.** Clause (c) is the model's statement that
   $n^{\mathsf T}I(t,p)n$ is the moment of inertia of the body about the

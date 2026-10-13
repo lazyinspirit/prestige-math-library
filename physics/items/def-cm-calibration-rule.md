@@ -36,20 +36,24 @@ nonempty set $C$ of **apparatus settings** ([[def-cm-measurement-model]]).
 
 A **calibration datum** for this family consists of
 
-1. a finite family $(\theta^{(r)})_{1\le r\le n}$, $n\ge1$, of **reference inputs**
-   $\theta^{(r)}\in\Theta$, values supplied by a reference standard under
-   stated conditions;
+1. a finite family $(\theta^{(r)})_{1\le r\le n}$, $n\ge1$, of **reference inputs**,
+   either fixed values $\theta^{(r)}\in\Theta$ or maps
+   $\theta^{(r)}:\Omega\to\Theta$, according to the branch specified in clause 4,
+   representing values supplied by a reference standard under stated conditions;
 2. a set $Y\subseteq(\mathbb R^d)^n$ of admissible **reference observations**
    and the observed vector $y=(y_1,\dots,y_n)\in Y$;
 3. a **calibration rule**, that is, a map
    $$\Gamma:D\longrightarrow C,\qquad (y,\theta_{\mathrm{ref}})\longmapsto c,\qquad D\subseteq Y\times\Theta^n;$$
    the nominal reference tuple $\theta_{\mathrm{ref}}=(\theta^{(r)}_{\mathrm{ref}})_{r=1}^n$
    belongs to $\Theta^n$ and $(y,\theta_{\mathrm{ref}})\in D$;
-4. either a stated bound $|\theta^{(r)}-\theta^{(r)}_{\mathrm{ref}}|\le\delta_r$
-   with $\delta_r\ge0$ for the deviation of each reference input from its nominal value, or a
-   Borel random element $\eta:\Omega\to(\mathbb R^p)^n$ of deviations with a stated law, so
-   that the reference inputs are the random values
-   $\theta^{(r)}_{\mathrm{ref}}+\eta_r(\omega)\in\Theta$ for every $\omega$.
+4. either, in the fixed-value branch, a stated bound
+   $|\theta^{(r)}-\theta^{(r)}_{\mathrm{ref}}|\le\delta_r$ with $\delta_r\ge0$
+   for each $r$, or, in the random-input branch, a Borel random element
+   $\eta:\Omega\to(\mathbb R^p)^n$ of deviations with a stated joint law
+   ([[def-random-element-and-real-random-variable]]), where
+   $\eta_r:\Omega\to\mathbb R^p$ is its $r$th component and
+   $\theta^{(r)}(\omega):=\theta^{(r)}_{\mathrm{ref}}+\eta_r(\omega)\in\Theta$
+   for every $r$ and every $\omega\in\Omega$.
    The bound uses the Euclidean norm of [[def-euclidean-inner-product]]
    on the fixed coordinates; deviations
    need not themselves belong to $\Theta$.

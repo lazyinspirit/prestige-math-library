@@ -40,7 +40,8 @@ verification:
   bound
   ([[ex-nrqm-approximations-two-level-finite-gap-correction]]); the finite
   level static Stark model of the declared Coulomb pair with vanishing
-  first-order shift, the exact quadratic splitting and a finite check of the
+  first-order shift, the exact square-root eigenvalue separation, its leading
+  quadratic small-field correction and a finite check of the
   remainder bound
   ([[ex-nrqm-approximations-stark-finite-level-shift]]); the spin-one
   multiplet in a uniform field with its three exact eigenvalues counted with

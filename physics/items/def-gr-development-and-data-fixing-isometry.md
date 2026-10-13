@@ -9,8 +9,10 @@ dependency_level: 26
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-dependent-choice, def-countable-choice, thm-gr-dust-local-evolution, thm-gr-barotropic-fluid-local-evolution, thm-gr-scalar-field-local-evolution, def-gr-smooth-lorentzian-objects, def-gr-spacelike-hypersurfaces-and-cauchy-sets, def-gr-causal-curves-and-reachability, def-gr-spacelike-initial-data-and-constraints, thm-gr-constraint-equations-in-normal-frame, thm-gr-local-geometric-development, lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form, def-gr-scalar-field-matter-model, def-gr-perfect-fluid-matter-model, def-gr-dust-matter-model, def-smooth-manifold]
+deps: [def-gr-curvature-tensor-and-derived-tensors, thm-gr-cauchy-surface-implies-globally-hyperbolic, def-dependent-choice, def-countable-choice, thm-gr-dust-local-evolution, thm-gr-barotropic-fluid-local-evolution, thm-gr-scalar-field-local-evolution, def-gr-smooth-lorentzian-objects, def-gr-spacelike-hypersurfaces-and-cauchy-sets, def-gr-causal-curves-and-reachability, def-gr-spacelike-initial-data-and-constraints, thm-gr-constraint-equations-in-normal-frame, thm-gr-local-geometric-development, lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form, def-gr-scalar-field-matter-model, def-gr-perfect-fluid-matter-model, def-gr-dust-matter-model, def-smooth-manifold]
 dependency_roles:
+  def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
+  thm-gr-cauchy-surface-implies-globally-hyperbolic: mathematical-premise
   def-dependent-choice: mathematical-premise
   def-countable-choice: mathematical-premise
   thm-gr-dust-local-evolution: mathematical-premise
@@ -65,9 +67,9 @@ $(M,g,N,j,\psi)$ consisting of:
    embedded hypersurface ([[def-gr-spacelike-hypersurfaces-and-cauchy-sets]]
    clause (a));
 3. the smooth tensor fields $\psi$ of the fixed model over $M$;
-4. the equations on $M$: $G_{ab}+\Lambda g_{ab}=\kappa\,T_{ab}(g,\psi)$ with
+4. the equations on $M$: $G_{ab}+\Lambda g_{ab}=\kappa\,\mathcal T_{ab}(g,\psi)$ with
    the Einstein tensor of $g$ ([[def-gr-curvature-tensor-and-derived-tensors]])
-   and $E(g,\psi)=0$;
+   and $\mathcal E(g,\psi)=0$;
 5. the initial condition on $j(\Sigma)$: $j(\Sigma)$ is a Cauchy set of
    $(M,g,N)$ in the sense of [[def-gr-spacelike-hypersurfaces-and-cauchy-sets]]
    clause (c), that is, every inextendible causal curve of

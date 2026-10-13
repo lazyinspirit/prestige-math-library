@@ -29,15 +29,15 @@ conditional consequences of symmetries of the model's declared
 presentation. It adds no new physical assumption:
 [[def-cm08-symmetry-of-the-mechanical-lagrangian]] defines a symmetry datum
 $(\tau,\xi,B)$ of the mechanical Lagrangian $L=K-U$ by the model's Noether
-identity, records that a strict datum with time-independent $\xi$ is exactly
-an infinitesimal point symmetry of the chart in the sense of the mathematics
-track, defines the charge
+identity, identifies strict data with time-independent $\xi$ with the
+$C^2$ instances of infinitesimal point symmetry of a nonempty chart in the
+mathematics track, defines the charge
 $C=(\mathsf M v)\cdot\xi-(K+U)\tau-B$, and fixes the dimension
 $\mu\ell^{2}\tau^{-1}\sigma^{-1}$ of the charge together with the convention
 that $\xi$ generates the configuration change $x\mapsto x+s\xi$.
 [[pthm-cm08-point-noether]] proves the point theorem of the model: the charge
-of a strict symmetry is constant along every motion of the global potential
-branch, and for an arbitrary presentation its derivative equals the residual
+of a strict symmetry with time-independent generator is constant along
+every motion of the global potential branch, and for an arbitrary presentation its derivative equals the residual
 force paired with the generator, so conservation holds exactly when that
 pairing vanishes. [[pthm-cm08-general-noether]] is the general theorem of
 the page: a datum with time reparametrisation has the charge
@@ -56,11 +56,13 @@ proves conservation of $K+U$ in the autonomous global potential branch, and,
 in that branch, exhibits the failure of conservation along an actual maximal
 motion whenever $\partial_{t}U$ is nonzero at a state.
 [[pthm-cm08-translation]] uses a dimensionless direction vector and a
-length-valued parameter to convert the invariance of $U$ under the simultaneous
-translation of all labels, equivalently
-$\sum_{i}a\cdot\nabla_{x_{i}}U=0$, into conservation of the total-momentum
+length-valued parameter to convert the differential condition
+$\sum_{i}a\cdot\nabla_{x_{i}}U=0$, equivalently invariance of $U$ along
+simultaneous translation segments contained in $Q$, into conservation of the total-momentum
 component $a\cdot P$ in the global potential branch, with the failure rate of
-the sharpness clause; [[pthm-cm08-rotation]] does the same for the rotation
+the sharpness clause. Comparing endpoints across excluded segments additionally
+requires agreement of the component constants specified in that theorem.
+[[pthm-cm08-rotation]] does the same for the rotation
 family with dimensionless axis vector $a$ and radian-valued parameter in that
 branch, whose charge is the component $a\cdot J$
 of the total angular momentum about the inertial origin, together with its
@@ -68,8 +70,9 @@ full vector form for rotationally invariant potentials; and
 [[pthm-cm08-boost-boundary]] treats the Galilean boost datum with dimensionless
 direction $a$ and velocity-valued family parameter, whose charge has mass-length
 units and is conserved under the differential translation condition in the global potential
-branch. It records that boosted curves of motions are again motions under that
-hypothesis, gives the general rate $K_{a}'=t\,a\cdot F_{\mathrm{tot}}$, and
+branch. It records that an admissible boosted curve is a motion exactly when the
+potential gradients at its paired endpoints agree; this follows when the
+joining segments lie in $Q$ or the full endpoint-invariance criterion holds, gives the general rate $K_{a}'=t\,a\cdot F_{\mathrm{tot}}$, and
 marks the boundary: Galilean frame availability is kinematic, while the boost
 charge is a property of the model's Lagrangian.
 [[pthm-cm08-moving-chart-energy-function]] supplies the

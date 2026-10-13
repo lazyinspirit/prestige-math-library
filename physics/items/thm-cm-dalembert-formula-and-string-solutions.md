@@ -71,13 +71,15 @@ Then each $u_n$ is $C^\infty$ on $\mathbb R^2$, satisfies $u_{tt}=c^2u_{xx}$, va
 
 [F3] Trigonometric values and derivatives: $\sin'=\cos$, $\cos'=-\sin$, $\sin(n\pi)=0$ and $\cos(0)=1$ ([[thm-sine-and-cosine-derivatives]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[def-sine-and-cosine-by-power-series]]).
 
+[F4] If $q$ is $C^2$ on an open neighbourhood of a point $(t,x)$, then $q_{tx}=q_{xt}$ there. For small $h,k>0$, the divided rectangular increment of $q$ over $[t,t+h]\times[x,x+k]$ equals the average of each mixed partial in its corresponding iterated order, by the one-variable fundamental theorem; continuity of the second partials makes the two averages tend to the respective mixed partial values, which must therefore agree ([[thm-ftc-first-part]], [[thm-continuous-implies-integrable]]).
+
 ## Proof
 
 **Proof technique:** direct; differentiate the explicit formula, then split the solution into the two characteristic combinations for uniqueness, and verify the modes by substitution.
 
 1.1 By [F1] write $F(x)=\int_0^xg$; then $u(t,x)=\frac{f(x-ct)+f(x+ct)}{2}+\frac{F(x+ct)-F(x-ct)}{2c}$. By [F2] (affine chain rule) and [F1], this is $C^2$ in $(t,x)$ and $$u_t=\frac{-cf'(x-ct)+cf'(x+ct)}{2}+\frac{g(x+ct)+g(x-ct)}{2},\qquad u_x=\frac{f'(x-ct)+f'(x+ct)}{2}+\frac{g(x+ct)-g(x-ct)}{2c}.$$ [given, F1, F2, algebra]
 
-1.2 (Uniqueness.) For a $C^2$ solution $u$ set $v:=u_t+cu_x$ and $w:=u_t-cu_x$. By [F2], $v_t-cv_x=u_{tt}+cu_{xt}-cu_{tx}-c^2u_{xx}=0$ and $w_t+cw_x=u_{tt}-cu_{xt}+cu_{tx}-c^2u_{xx}=0$, since mixed partial derivatives of a $C^2$ function agree. Hence $s\mapsto v(s,x_0-cs)$ is constant for every fixed $x_0$: its derivative is $v_t-cv_x=0$ by [F2], so $v(t,x)=v(0,x+ct)=g(x+ct)+cf'(x+ct)$ for every $(t,x)$. Likewise $w(t,x)=w(0,x-ct)=g(x-ct)-cf'(x-ct)$. [given, F2, algebra]
+1.2 (Uniqueness.) For a $C^2$ solution $u$ set $v:=u_t+cu_x$ and $w:=u_t-cu_x$. By [F2] and the mixed-partial identity [F4], $v_t-cv_x=u_{tt}+cu_{xt}-cu_{tx}-c^2u_{xx}=0$ and $w_t+cw_x=u_{tt}-cu_{xt}+cu_{tx}-c^2u_{xx}=0$. Hence $s\mapsto v(s,x_0-cs)$ is constant for every fixed $x_0$: its derivative is $v_t-cv_x=0$ by [F2], so $v(t,x)=v(0,x+ct)=g(x+ct)+cf'(x+ct)$ for every $(t,x)$. Likewise $w(t,x)=w(0,x-ct)=g(x-ct)-cf'(x-ct)$. [given, F2, F4, algebra]
 
 2.1 Differentiating again by [F2] and [F1], $$u_{tt}=\frac{c^2f''(x-ct)+c^2f''(x+ct)}{2}+\frac{c\,g'(x+ct)-c\,g'(x-ct)}{2},\qquad u_{xx}=\frac{f''(x-ct)+f''(x+ct)}{2}+\frac{g'(x+ct)-g'(x-ct)}{2c}.$$ Hence $u_{tt}=c^2u_{xx}$. Evaluating step 1.1 at $t=0$ gives $u(0,x)=f(x)$ and $u_t(0,x)=\frac{-cf'(x)+cf'(x)}{2}+\frac{g(x)+g(x)}{2}=g(x)$. This proves (a). [step 1.1, F1, F2, algebra]
 

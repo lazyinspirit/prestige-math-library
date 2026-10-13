@@ -115,7 +115,7 @@ species.
 
 [F2] **Observable reading.** An assigned sharp observable $A$ has a unique spectral projection-valued measure $E_A$ and the outcome law $\mu^{A}_\rho(B)=\operatorname{tr}(\rho E_A(B))$; if a projection-valued measure $F$ satisfies $\int\lambda\,dF(\lambda)=A$, then $F=E_A$ ([[def-nrqm-observables-framework-observable-and-outcome-law]] clauses (a),(b), [[post-nrqm-framework-observable-and-probability]]).
 
-[F3] **Finite spectral decomposition.** If a finite-dimensional Hilbert space has an orthogonal basis of eigenvectors of a self-adjoint operator $A$ with eigenvalues $\lambda_k$ and the $Q_k$ are the orthogonal projections onto the eigenspaces, then $B\mapsto\sum_{\lambda_k\in B}Q_k$ is a projection-valued measure on the Borel sets with $\int\lambda\,dF(\lambda)=A$ ([[def-hilbert-orthogonal-projection]], [[def-nrqm-state-geometry-pure-mixed-states-and-purity]]).
+[F3] **Joint projectors.** In the declared finite-mode model, the finite family $(P_\lambda)_{\lambda\in\Lambda_n}$ consists of mutually orthogonal projections, sums to the identity of the sector, and satisfies $N_j^\sigma=\sum_{\lambda\in\Lambda_n}\lambda_jP_\lambda$ ([[def-nrqm-identical-particles-framework-orbital-occupation-model]] clause (d)).
 
 [F4] **Laws and traces.** For a preparation $\rho$ and projections $P_\lambda$ with $\sum_\lambda P_\lambda=I$ the numbers $\operatorname{tr}(\rho P_\lambda)$ are nonnegative and sum to one; a pure preparation of the unit ray of a vector $x\ne0$ gives weight $\|Qx\|^2/\|x\|^2$ to an orthogonal projection $Q$ ([[lem-nrqm-composites-density-and-scalar-spectral-probability]] clauses (a),(b), [[def-nrqm-state-geometry-framework-state-space]]).
 
@@ -129,7 +129,11 @@ species.
 
 1.1 [Sector restrictions are self-adjoint] By [F1] the operator $N_j$ preserves $\mathfrak H_n^\sigma$, and both the Slater family and the family $(m_\lambda)$ consist of eigenvectors of $N_j$ with real eigenvalues and form a basis of the respective sector; a linear endomorphism of a finite-dimensional Hilbert space that is diagonal in an orthogonal basis with real eigenvalues is self-adjoint. Hence each $N_j^\sigma=N_j|_{\mathfrak H_n^\sigma}$ is a bounded self-adjoint endomorphism of $\mathfrak H_n^\sigma$, which is the readout declared in clauses (c)-(d) of the model. [F1, algebra]
 
-2.1 [Finite spectral measures and laws] Let $\sigma=-$ and index the Slater basis as $f_J^\wedge$ with $J\subseteq\{1,\dots,d\}$, $|J|=n$; by [F1] each $f_J^\wedge$ is a joint eigenvector of $(N_1^-,\dots,N_d^-)$ with eigenvalue vector $\mathbf 1_J$, and the eigenspaces are the lines $\mathbb Cf_J^\wedge$. For fixed $j$ the eigenspaces of $N_j^-$ are obtained by grouping the lines by the value $\mathbf 1_J(j)\in\{0,1\}$; the orthogonal projection onto the range of $N_j^-$ is therefore $Q_1:=\sum_{J:j\in J}P_{\mathbf 1_J}$ and the orthogonal projection onto the kernel is $Q_0:=I-Q_1$, and $N_j^-=Q_1$ because $N_j^-$ acts as $1$ on $\operatorname{ran}Q_1$ and $0$ on $\operatorname{ran}Q_0$. By [F2] and [F3] the spectral measure of $N_j^-$ is $E_{N_j^-}(B)=\sum_{\lambda\in B\cap\{0,1\}}Q_\lambda$, so for a Borel set $B$ the outcome law is $\mu^{N_j^-}_\rho(B)=\operatorname{tr}(\rho E_{N_j^-}(B))$; the same argument in the symmetric sector replaces $\mathbf 1_J$ by $\lambda$ and gives the spectral measures of $N_j^+$. This identifies the readout laws of clauses (c)-(d) of the model. [F1, F2, F3, step 1.1, algebra, construct]
+2.1 [Finite spectral measures and laws] Fix $\sigma\in\{-,+\}$ and $j\in\{1,\dots,d\}$. By [F3], the finite family of projections
+$$F_j(B):=\sum_{\substack{\lambda\in\Lambda_n\\\lambda_j\in B}}P_\lambda\qquad(B\subseteq\mathbb R\text{ Borel})$$
+is a projection-valued measure: $F_j(\varnothing)=0$ and $F_j(\mathbb R)=I$ because the $P_\lambda$ sum to $I$; each $F_j(B)$ is an orthogonal projection; intersections satisfy $F_j(B\cap C)=F_j(B)F_j(C)$ because the $P_\lambda$ are mutually orthogonal; and countable additivity is strong since only finitely many $\lambda$ occur and the Borel sets in a disjoint sequence contain each eigenvalue $\lambda_j$ at most once. Its scalar measures $\mu_x(B):=\langle F_j(B)x,x\rangle$ are finite and supported on the finite set $S_j:=\{\lambda_j:\lambda\in\Lambda_n\}$, hence regular: for every Borel $B$, the compact set $B\cap S_j$ and an open set $U$ with $U\cap S_j=B\cap S_j$ give $\mu_x(B\cap S_j)=\mu_x(B)=\mu_x(U)$. Its spectral integral is the finite sum
+$$\int_{\mathbb R}r\,dF_j(r)=\sum_{\lambda\in\Lambda_n}\lambda_jP_\lambda=N_j^\sigma.$$
+Thus $F_j$ is the spectral PVM of $N_j^\sigma$ by uniqueness of the spectral PVM in [F2]. The outcome law in $\rho$ is therefore $\mu^{N_j^\sigma}_\rho(B)=\operatorname{tr}(\rho F_j(B))$. In the fermionic sector [F1] restricts the joint eigenvalue vectors to $\mathbf 1_J\in\{0,1\}^d$, so this spectral measure is supported on $\{0,1\}$; in the symmetric sector it groups the lines $\mathbb Cm_\lambda$ by the value $\lambda_j$. This identifies the readout laws of clauses (c)-(d) of the model. [F1, F2, F3, step 1.1, algebra, construct]
 
 3.1 [Exclusion] Assume $\sigma=-$. By step 2.1 the spectral measure of $N_j^-$ is supported on $\{0,1\}$, so $E_{N_j^-}([2,\infty))=0$ and $\mu^{N_j^-}_\rho([2,\infty))=\operatorname{tr}(0)=0$; moreover $N_j^-(N_j^--I)=0$ on the sector because the operator vanishes on the Slater basis by [F1], so its expectation $\operatorname{tr}(\rho N_j^-(N_j^--I))$ is zero. For the joint law, [F1] shows that the joint eigenspaces with an entry $\ge2$ do not occur among the lines $\mathbb Cf_J^\wedge$, so the sum of the corresponding projections $P_\lambda$ is zero and $\mu^{N}_\rho(\{\lambda:\lambda_j\ge2\ \text{for some }j\})=0$. This proves (a). [F1, step 1.1, step 2.1, algebra]
 
@@ -141,13 +145,5 @@ species.
 
 ## Remarks
 
-- **The precise content of "exclusion".** The theorem states the vanishing of
-  the probability of reading an occupation $\ge2$ in each declared mode and
-  the vanishing of the expectation of the double-occupation operator
-  $N_j(N_j-1)$; it is a statement about the declared readout in every declared
-  sector preparation, not a statement about particles avoiding each other in
-  space.
-- **Finite modes.** The statement uses the finite-dimensional mode model of
-  the definition; the counting facts for the index sets are those of the
-  finite-mode count theorem. No infinite mode family and no continuum
-  occupancy is treated.
+- **The precise content of "exclusion".** The theorem states the vanishing of the probability of reading an occupation $\ge2$ in each declared mode and the vanishing of the expectation of the double-occupation operator $N_j(N_j-1)$; it is a statement about the declared readout in every declared sector preparation, not a statement about particles avoiding each other in space.
+- **Finite modes.** The statement uses the finite-dimensional mode model of the definition; the counting facts for the index sets are those of the finite-mode count theorem. No infinite mode family and no continuum occupancy is treated.

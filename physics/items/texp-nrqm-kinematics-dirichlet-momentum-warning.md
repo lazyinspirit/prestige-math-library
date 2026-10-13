@@ -4,7 +4,7 @@ aliases: [ nrqm-kinematics-dirichlet-momentum-warning ]
 kind: thought-experiment
 domain: physics
 title: "A confined model with Dirichlet walls: the naive interval momentum is
-  not an observable"
+  not a sharp observable"
 status: draft
 origin: session
 dependency_level: 8
@@ -19,6 +19,7 @@ deps:
     def-symmetric-self-adjoint-and-essentially-self-adjoint,
     def-weak-derivative-of-a-locally-integrable-function,
     lem-nrqm-intervals-integration-by-parts,
+    lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set,
     post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle,
     post-nrqm-framework-observable-and-probability,
     thm-nrqm-intervals-twisted-periodic-momentum-domain
@@ -33,6 +34,7 @@ dependency_roles:
   def-symmetric-self-adjoint-and-essentially-self-adjoint: mathematical-premise
   def-weak-derivative-of-a-locally-integrable-function: mathematical-premise
   lem-nrqm-intervals-integration-by-parts: mathematical-premise
+  lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set: mathematical-premise
   post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle: physical-assumption
   post-nrqm-framework-observable-and-probability: physical-assumption
   thm-nrqm-intervals-twisted-periodic-momentum-domain: mathematical-premise
@@ -106,9 +108,18 @@ quantization read off from the Dirichlet eigenfunctions is not a statement
 about any self-adjoint realization of the interval momentum;
 
 (d) therefore $T$ is not an assigned sharp observable of the model in the
-sense of P2, and no outcome law of a momentum observable of the confined
-model exists until the model declares a self-adjoint realization of its
-momentum. An explicit family of self-adjoint extensions of $T$ is
+sense of P2(i), and does not supply the sharp spectral outcome law of
+P2(ii); assigning such a momentum law requires the model to declare a
+self-adjoint realization. This obstruction does not exclude the unsharp
+finite outcome probabilities of P2(iv): a separately declared apparatus
+model may assign its momentum channels bounded effects $F_a$ on
+$L^2(0,L;\mathbb C)$, with $0\le F_a\le I$ and $\sum_aF_a=I$, and use
+$p_a=\operatorname{tr}(\rho F_a)$ for a preparation $\rho$ as in P2(iv),
+without declaring a self-adjoint momentum realization. Here an effect is a
+bounded self-adjoint operator with
+$0\le\langle F_a v,v\rangle\le\|v\|^2$ for every vector $v$, as defined in
+[[post-nrqm-framework-observable-and-probability]]. An explicit family of
+self-adjoint extensions of $T$ is
 $\hbar P_{\theta}$, $\theta\in[0,2\pi)$, where $P_{\theta}=-iD$ is the
 self-adjoint operator of
 [[thm-nrqm-intervals-twisted-periodic-momentum-domain]]; the scaled operator
@@ -122,11 +133,11 @@ realization, describes a laboratory apparatus.
 
 **Given:** The postulates P2 and P5 read as above; the Axiom of Countable Choice and the Axiom of Choice; $0<L<\infty$; the operator $T$ of the statement; classes $u,v\in H^{1}(0,L;\mathbb C)$; a self-adjoint extension $S$ of $T$; an integer $n\ge1$; the Dirichlet function $u_{n}$.
 
-[F1] **Interval Sobolev space and integration by parts.** $H^{1}(0,L)$ is the space of $L^{2}$ classes with an $L^{2}$ weak derivative; each class has a continuous representative, its trace $u^{*}$ is defined at the endpoints, and $-\int_{0}^{L}u\,\overline{v'} =u^{*}(0)\overline{v^{*}(0)}-u^{*}(L)\overline{v^{*}(L)}+\int_{0}^{L}u'\,\overline{v}$ for all $u,v\in H^{1}(0,L)$; the test classes $C_{c}^{\infty}(0,L)$ lie in every Dirichlet class and are dense in $L^{2}$ ([[def-nrqm-intervals-hilbert-sobolev-spaces]], [[lem-nrqm-intervals-integration-by-parts]]). In particular $D(T)\supseteq C_{c}^{\infty}(0,L)$ is dense in $L^{2}(0,L;\mathbb C)$ and $D(T)$ is a linear subspace of $H^{1}$.
+[F1] **Interval Sobolev space and integration by parts.** $H^{1}(0,L)$ is the space of $L^{2}$ classes with an $L^{2}$ weak derivative; each class has a continuous representative, its trace $u^{*}$ is defined at the endpoints, and $-\int_{0}^{L}u\,\overline{v'} =u^{*}(0)\overline{v^{*}(0)}-u^{*}(L)\overline{v^{*}(L)}+\int_{0}^{L}u'\,\overline{v}$ for all $u,v\in H^{1}(0,L)$; the test classes $C_{c}^{\infty}(0,L)$ have zero endpoint traces and lie in $D(T)$ ([[def-nrqm-intervals-hilbert-sobolev-spaces]], [[lem-nrqm-intervals-integration-by-parts]]). Under the assumed Countable Choice, these test classes are dense in $L^{2}(0,L;\mathbb C)$ by [[lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set]] applied to the open set $\Omega=(0,L)\subset\mathbb R$. In particular $D(T)\supseteq C_{c}^{\infty}(0,L)$ is dense in $L^{2}(0,L;\mathbb C)$ and $D(T)$ is a linear subspace of $H^{1}$.
 
 [F2] **Adjoints and self-adjointness.** A densely defined operator $B$ is symmetric when $\langle Bu,v\rangle=\langle u,Bv\rangle$ for all $u,v\in D(B)$; its adjoint $B^{*}$ has domain consisting of the $v$ for which $u\mapsto\langle Bu,v\rangle$ is bounded on $D(B)$, and $B$ is self-adjoint when $B^{*}=B$ including domains; a self-adjoint operator has no proper symmetric extension ([[def-adjoint-of-a-densely-defined-unbounded-operator]], [[def-symmetric-self-adjoint-and-essentially-self-adjoint]], [[def-weak-derivative-of-a-locally-integrable-function]]).
 
-[F3] **Assigned observables are self-adjoint.** An assigned sharp observable of the framework is a pair of a densely defined self-adjoint operator and a declared unit; a symmetric formal differential expression on a smaller domain does not by itself supply an assigned observable ([[def-nrqm-observables-framework-observable-and-outcome-law]] clause (a)).
+[F3] **Sharp laws and unsharp outcomes.** An assigned sharp observable of the framework is a pair of a densely defined self-adjoint operator and a declared unit; a symmetric formal differential expression on a smaller domain does not by itself supply an assigned sharp observable or its spectral outcome law ([[def-nrqm-observables-framework-observable-and-outcome-law]] clauses (a)-(b)). Separately, P2(iv) permits a declared finite family of bounded effects $F_a$ with $0\le F_a\le I$ and $\sum_aF_a=I$, with probabilities $p_a=\operatorname{tr}(\rho F_a)$ for a preparation $\rho$; these effects and their apparatus interpretation need not arise from a declared self-adjoint momentum operator ([[post-nrqm-framework-observable-and-probability]] clause (iv), [[def-nrqm-observables-framework-observable-and-outcome-law]] clause (f)).
 
 [F4] **Twisted-periodic realizations.** For each $\theta\in[0,2\pi)$ the operator $P_{\theta}=-iD$ with domain $D(P_{\theta})=\{u\in H^{1}(0,L):u^{*}(L)=e^{i\theta}u^{*}(0)\}$ is densely defined, symmetric and self-adjoint ([[thm-nrqm-intervals-twisted-periodic-momentum-domain]] clause (a)). Because $\hbar>0$ is real and nonzero, the adjoint of $\hbar P_{\theta}$ has the same domain as $P_{\theta}$ and equals $\hbar P_{\theta}^{*}=\hbar P_{\theta}$; thus $\hbar P_{\theta}$ is self-adjoint and acts as $-i\hbar D$. Moreover $D(T)\subseteq D(P_{\theta})$, so $\hbar P_{\theta}$ extends $T$.
 
@@ -144,7 +155,7 @@ realization, describes a laboratory apparatus.
 
 3.1 [No Dirichlet self-adjoint extension] Let $S\supseteq T$ be self-adjoint with $D(S)\subseteq D(T)$. Since $T\subseteq S$, one has $D(T)\subseteq D(S)$; with the assumed inclusion this gives $D(S)=D(T)$, and since $S$ agrees with $T$ on $D(T)$, the operators coincide: $S=T$. But then $T$ would be self-adjoint, contradicting step 2.1. Hence no such $S$ exists, which is (b). Equivalently, any self-adjoint extension of $T$ must contain a vector of $H^{1}(0,L)$ whose trace at $0$ or $L$ is nonzero. [step 1.1, step 2.1, F2, algebra]
 
-4.1 [Observability and scope] By [F3], assigned sharp observables of the model are densely defined self-adjoint operators; by steps 1.1 and 2.1 the Dirichlet momentum $T$ is densely defined and symmetric but not self-adjoint, so $T$ is not an assigned sharp observable of the hypothetical confined model, and no outcome law of the confined momentum exists until a self-adjoint realization is declared. [F4] gives the explicit family $\hbar P_{\theta}$ of self-adjoint extensions of the same formal expression $-i\hbar D$, distinct from the Dirichlet realization; the statement neither selects a member of that family nor asserts any laboratory realization, and it makes no claim about the framework's own momentum $P$ of P5, which is defined on the full line and is not obtained by restricting $T$. This proves (d). [step 1.1, step 2.1, step 3.1, step 2.2, F3, F4] ∎
+4.1 [Observability and scope] By [F3], assigned sharp observables of the model are densely defined self-adjoint operators; by steps 1.1 and 2.1 the Dirichlet momentum $T$ is densely defined and symmetric but not self-adjoint, so $T$ cannot supply an assigned sharp momentum observable or its P2(ii) spectral law. A sharp momentum law requires a separately declared self-adjoint realization. This does not exclude P2(iv)'s finite unsharp probabilities: by [F3] a separately declared family of effects and apparatus interpretation supplies them without a self-adjoint momentum assignment; $T$ alone supplies no such family or interpretation. [F4] gives the explicit family $\hbar P_{\theta}$ of self-adjoint extensions of the same formal expression $-i\hbar D$, distinct from the Dirichlet realization; the statement neither selects a member of that family nor asserts any laboratory realization, and it makes no claim about the framework's own momentum $P$ of P5, which is defined on the full line and is not obtained by restricting $T$. This proves (d). [step 1.1, step 2.1, step 3.1, step 2.2, F3, F4] ∎
 
 ## Remarks
 

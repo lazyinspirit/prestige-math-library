@@ -1,12 +1,12 @@
 ---
 id: ex-cm-pendulum-linearization-error-check
 kind: example
-title: "The pendulum linearisation bound at $g=l=1$: exact error expression for the data $\\delta=1/100$, $T=1$"
+title: "The pendulum linearisation bound at $g=l=1$: exact error bound for the data $\\delta=1/100$, $T=1$"
 status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 4
-deps: [prop-cm-pendulum-small-angle-linearization-bound, thm-cm-finite-time-linearization-error-bound, cor-two-less-than-e-less-than-three, cor-taylor-remainder-bound, thm-derivative-of-exponential, def-real-exponential-function-and-e, thm-sine-and-cosine-derivatives, def-sine-and-cosine-by-power-series, thm-sine-cosine-signs-monotonicity-and-ranges, def-euclidean-inner-product, def-operator-norm, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, def-vector-valued-derivative-and-integral, def-derivative, def-interval, def-metric-ball]
+deps: [prop-cm-pendulum-small-angle-linearization-bound, thm-cm-finite-time-linearization-error-bound, cor-two-less-than-e-less-than-three, cor-taylor-remainder-bound, thm-derivative-of-exponential, def-real-exponential-function-and-e, thm-exponential-addition-formula, thm-continuous-implies-integrable, thm-ftc-second-part, thm-sine-and-cosine-derivatives, def-sine-and-cosine-by-power-series, thm-sine-cosine-signs-monotonicity-and-ranges, def-euclidean-inner-product, def-operator-norm, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, def-vector-valued-derivative-and-integral, def-derivative, def-interval, def-metric-ball]
 dependency_roles:
   prop-cm-pendulum-small-angle-linearization-bound: mathematical-premise
   thm-cm-finite-time-linearization-error-bound: mathematical-premise
@@ -14,6 +14,9 @@ dependency_roles:
   cor-taylor-remainder-bound: mathematical-premise
   thm-derivative-of-exponential: mathematical-premise
   def-real-exponential-function-and-e: mathematical-premise
+  thm-exponential-addition-formula: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
+  thm-ftc-second-part: mathematical-premise
   thm-sine-and-cosine-derivatives: mathematical-premise
   def-sine-and-cosine-by-power-series: mathematical-premise
   thm-sine-cosine-signs-monotonicity-and-ranges: mathematical-premise
@@ -73,16 +76,24 @@ $[0,T]$ ([[thm-cm-finite-time-linearization-error-bound]]).
 
 [L2] Exponential and trigonometric calculus ([[thm-derivative-of-exponential]],
 [[def-real-exponential-function-and-e]], [[cor-two-less-than-e-less-than-three]],
+[[thm-exponential-addition-formula]], [[thm-continuous-implies-integrable]],
+[[thm-ftc-second-part]],
 [[thm-sine-and-cosine-derivatives]], [[def-sine-and-cosine-by-power-series]],
 [[thm-sine-cosine-signs-monotonicity-and-ranges]], [[cor-taylor-remainder-bound]],
 [[thm-algebra-of-derivatives]], [[thm-chain-rule-for-total-derivatives]]): $2<e<3$; $e^t$ is its
-own derivative, so $\int_0^te^{1+s}ds=e(e^t-1)$ by the fundamental theorem; $\sin$ and $\cos$
+own derivative, and $e^{u+v}=e^ue^v$ for real $u,v$. For fixed $t>0$,
+$G(s)=e^{t+s}$ has derivative $G'(s)=e^{t+s}$ on $[0,t]$;
+this derivative is continuous, hence integrable, so the fundamental theorem gives
+$\int_0^te^{t+s}ds=e^{2t}-e^t$. At $t=0$ the integral and expression both vanish.
+$\sin$ and $\cos$
 have range $[-1,1]$ and $\sin0=0$; and the Taylor bound gives
 $\lvert\sin\theta-\theta\rvert\le\lvert\theta\rvert^3/6$.
 
 [L3] Norm data ([[def-euclidean-inner-product]], [[def-operator-norm]],
 [[def-vector-valued-derivative-and-integral]], [[def-derivative]], [[def-interval]],
-[[def-metric-ball]]): $\lVert(w_1,w_2)\rVert_2^2=w_1^2+w_2^2$; $y_1(t)=\delta\cos t$ and
+[[def-metric-ball]]): use the one-based component labels $w_j:=w(j-1)$ for
+$w\in\mathbb R^2$, $j\in\{1,2\}$. Then
+$\lVert(w_1,w_2)\rVert_2^2=w_1^2+w_2^2$; $y_1(t)=\delta\cos t$ and
 $y_2(t)=-\delta\sin t$ satisfy $y_1'=y_2$ and $y_2'=-y_1$.
 
 ## Verification
@@ -95,6 +106,6 @@ pointwise remainder bounds.
 
 1.2 Pointwise bounds at this data: on $\lVert z\rVert_2\le1/2$ one has $\lvert\theta\rvert^3/6\le(1/2)\lVert z\rVert_2^2/6=\lVert z\rVert_2^2/12$ and $\lvert\sin\theta\rvert\le\lvert\theta\rvert\le1/2$, so the two hypotheses of [L1] hold with $C=1/12$ and $L=1$; at $z=(1/2,0)$ this reads $\lvert\sin(1/2)-1/2\rvert\le1/48$. [given, L1, L2, algebra]
 
-2.1 The error expression: by [L1] with $\omega=1$, $r=1/2$, $\delta=1/100$, $L=\lVert A\rVert=1$, $$\lVert z(t)-y(t)\rVert_2\le\frac{1}{12}\cdot\frac{1}{10^4}\int_0^te^{t-s}e^{2s}ds=\frac{e^{2t}-e^t}{12\cdot10^4}$$ for $0\le t\le1$, the integral being $\int_0^te^{t+s}ds=e^t(e^t-1)=e^{2t}-e^t$ by [L2]. [step 1.2, L1, L2, algebra]
+2.1 The error bound: by [L1] with $\omega=1$, $r=1/2$, $\delta=1/100$, $L=\lVert A\rVert=1$, $$\lVert z(t)-y(t)\rVert_2\le\frac{1}{12}\cdot\frac{1}{10^4}\int_0^te^{t-s}e^{2s}ds=\frac{e^{2t}-e^t}{12\cdot10^4}$$ for $0\le t\le1$. By [L2], $e^{t-s}e^{2s}=e^{t+s}$ and $\int_0^te^{t+s}ds=e^{2t}-e^t$, including $t=0$. This evaluates the upper bound, not the actual nonlinear error. [step 1.1, step 1.2, L1, L2, algebra]
 
 3.1 Reading at $t=1$: the bound becomes $(e^2-e)/(12\cdot10^4)<e^3/(12\cdot10^4)$, a finite quantity of order $\delta^2=10^{-4}$, and $y_1(t)=\delta\cos t$ satisfies $\lvert z_1(t)-y_1(t)\rvert\le\lVert z(t)-y(t)\rVert_2$ by [L3]; the estimate is restricted to $[0,1]$ and asserts nothing about the nonlinear pendulum beyond it. [step 2.1, L1, L3, algebra] ∎

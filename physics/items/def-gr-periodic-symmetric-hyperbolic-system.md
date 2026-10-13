@@ -53,38 +53,40 @@ $z^TA^0(t,x,u)z>0$ for every nonzero $z\in\mathbb R^m$
 **(b) The system.** The associated **symmetric hyperbolic system** is
 $$A^0(t,x,u)\,\partial_tu+\sum_{i=1}^3A^i(t,x,u)\,\partial_iu+B(t,x,u)=0 .\qquad(\star)$$
 
-**(c) Values and norms.** A map $u:J\to H^s(\mathbb T^3_{2\pi};\mathbb R^m)$
-on an interval $J$ **takes values in a set $E\subseteq\mathbb R^m$** when
-$u(t)(x)\in E$ for every $t\in J$ and every $x\in\mathbb T^3_{2\pi}$, with
-$u(t)$ read through its continuous representative when $s>3/2$. For compact
+**(c) Values and norms.** For each integer $s\ge0$, an $H^s$ class
+$u\in H^s(\mathbb T^3_{2\pi};\mathbb R^m)$ **takes values in a set
+$E\subseteq\mathbb R^m$** when it has a continuous representative whose values
+lie in $E$. Such a representative is unique, since continuous functions equal
+almost everywhere on the torus agree everywhere. A map $u:J\to H^s$ with
+$J\subseteq I$ takes values in $E$ when every class $u(t)$ does. For compact
 $K\subseteq O$ and $R\ge0$ put
-$$\mathcal S(K,R):=\bigl\{u_0\in H^s(\mathbb T^3_{2\pi};\mathbb R^m):u_0\text{ takes values in }K,\ \|u_0\|_{H^s}\le R\bigr\}.$$
+$$\mathcal S_s(K,R):=\bigl\{u_0\in H^s(\mathbb T^3_{2\pi};\mathbb R^m):u_0\text{ takes values in }K,\ \|u_0\|_{H^s}\le R\bigr\}.$$
+When an item fixes $s$, it may abbreviate this class by $\mathcal S(K,R)$.
 
-**(d) Classical solutions.** Let $s\ge2$. A **classical solution of $(\star)$ on
+**(d) Classical solutions.** Let $s\ge2$ be an integer and let $J\subseteq I$ be
+an interval. A **classical solution of $(\star)$ on
 $J\times\mathbb T^3_{2\pi}$** is a $C^1$ map
 $u:J\times\mathbb T^3_{2\pi}\to\mathbb R^m$ with $u(t,x)\in O$ for all
 $(t,x)$ and $(\star)$ satisfied at every point, such that
-$u\in L^\infty(J;H^s)$ and $\partial_tu\in L^\infty(J;H^{s-1})$. (For $s\ge2$
-the embedding clause gives a continuous representative, so the pointwise
-conditions are meaningful.)
+$u\in L^\infty(J;H^s)$ and $\partial_tu\in L^\infty(J;H^{s-1})$.
 
-**(e) Sobolev solutions.** Let $s\ge5$ and let $J$ be an open interval. A map
+**(e) Sobolev solutions.** Let $s\ge5$ be an integer and let $J\subseteq I$ be
+an open interval. A map
 $u:J\to H^s(\mathbb T^3_{2\pi};\mathbb R^m)$ is a **Sobolev solution of
 $(\star)$ on $J$** when
 
 1. $u\in L^\infty(J;H^s)\cap C^0(J;H^{s-1})$ and the distributional time
    derivative $\partial_tu$ lies in $L^\infty(J;H^{s-1})$;
-2. $u$ takes values in $O$;
+2. $u$ takes values in $O$ using the continuous representatives from (c);
 3. for almost every $t\in J$ the identity $(\star)$ holds in
-   $L^2(\mathbb T^3_{2\pi};\mathbb R^m)$, the coefficients being composed with
-   the continuous representative of $u(t)$; all products are defined because
-   $A^0(t,\cdot,u(t))$ and $A^i(t,\cdot,u(t))$ lie in $H^s$ with norm bounded
-   by a function of $\|u(t)\|_{H^s}$, $\partial_tu(t)$ and $\partial_iu(t)$ lie
-   in $H^{s-1}$, and $B(t,\cdot,u(t))$ lies in $H^s$.
+   $L^2(\mathbb T^3_{2\pi};\mathbb R^m)$, with coefficients evaluated using
+   the continuous representative of $u(t)$. This condition requires each
+   displayed product to define an $L^2$ class; it does not assert a global
+   coefficient-composition bound depending only on $\|u(t)\|_{H^s}$.
 
-**(f) Initial data.** **Initial data for $(\star)$ at time $0$** are a class
-$u_0\in H^s(\mathbb T^3_{2\pi};\mathbb R^m)$ with $s\ge5$ whose values lie in a
-compact subset of $O$; a solution **has initial value $u_0$** when
+**(f) Initial data.** For an integer $s\ge5$, **initial data for $(\star)$ at
+time $0$** are a class $u_0\in H^s(\mathbb T^3_{2\pi};\mathbb R^m)$ whose values
+lie in a compact subset of $O$; a solution **has initial value $u_0$** when
 $u(t)\to u_0$ in $H^{s-1}$ as $t\to0$ within $J$.
 
 The definition introduces the system and its solution classes only; existence,

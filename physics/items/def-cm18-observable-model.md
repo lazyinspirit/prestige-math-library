@@ -72,8 +72,9 @@ frame consists of the following data.
    where $w_{\theta,z}:=x_{\theta,z}'$ is the coordinate velocity.
 5. **Readout.** An integer $d\ge1$ and a map
    $$R:\Theta\times Z\times\bigl(\mathbb R^{3N}\times\mathbb R^{3N}\bigr)^{k} \longrightarrow\mathbb R^{d},$$
-   the **readout**, whose value at $(\theta,z)$ is the tuple of the $k$
-   states of clause 4 in order; the **prediction map** is
+   the **readout**, which takes $(\theta,z)$ and an ordered $k$-tuple of
+   states as inputs and returns the $d$ numerical readout coordinates; the
+   **prediction map** is
    $$\Phi:\Theta\times Z\longrightarrow\mathbb R^{d},\qquad \Phi(\theta,z):=R\bigl(\theta,z,s_{\theta,z}(t_{1}),\dots, s_{\theta,z}(t_{k})\bigr).$$
    No regularity of $R$ in the parameters is assumed; continuity,
    differentiability or measurability in $\theta$ or in the states is an
@@ -116,8 +117,10 @@ then records a modelled residual rather than a probabilistic error.
 
 **Frame relativity of the protocol.** The observation times are times of the
 declared frame, and the prediction map is read in that frame's coordinates;
-a change of inertial frame changes the coordinate times and the readout of
-the same physical protocol. The framework therefore always names the frame
+a change of inertial frame re-expresses the coordinate times and states,
+and the readout must be transformed according to its declared law for the
+same physical protocol. Its numerical value need not change: the admitted
+constant readout $R\equiv0$, for example, has $\Phi\equiv0$ in every frame. The framework therefore always names the frame
 in which a protocol is specified; no frame-independent reading of $\Phi$ or
 $\varepsilon$ is asserted.
 

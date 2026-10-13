@@ -6,7 +6,7 @@ title: "Rank-one operator calculus"
 status: draft
 origin: pipeline
 dependency_level: 0
-deps: [def-trace-class-operator, lem-finite-rank-operators-are-compact, lem-nuclear-series-characterizes-trace-norm, thm-trace-is-absolutely-convergent-and-basis-independent, thm-trace-class-is-a-two-sided-banach-operator-ideal, def-operator-norm, def-bounded-linear-operator, def-hilbert-space-adjoint, def-real-and-complex-inner-product-space, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-non-negative-and-positive-operator, def-hilbert-space, def-countable-choice]
+deps: [def-trace-class-operator, lem-finite-rank-operators-are-compact, lem-nuclear-series-characterizes-trace-norm, thm-trace-is-absolutely-convergent-and-basis-independent, thm-trace-class-is-a-two-sided-banach-operator-ideal, def-operator-norm, def-bounded-linear-operator, def-hilbert-space-adjoint, def-real-and-complex-inner-product-space, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-space, def-countable-choice]
 dependency_roles:
   def-trace-class-operator: mathematical-premise
   lem-finite-rank-operators-are-compact: mathematical-premise
@@ -18,7 +18,7 @@ dependency_roles:
   def-hilbert-space-adjoint: mathematical-premise
   def-real-and-complex-inner-product-space: mathematical-premise
   thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces: mathematical-premise
-  def-non-negative-and-positive-operator: mathematical-premise
+  def-self-adjoint-positive-unitary-and-normal-operator: mathematical-premise
   def-hilbert-space: mathematical-premise
   def-countable-choice: mathematical-premise
 proof_strategy: direct
@@ -45,7 +45,7 @@ Then:
 
 (b) $T_{u,v}$ is trace class ([[def-trace-class-operator]]) with $\|T_{u,v}\|_1=\|u\|\,\|v\|$ and $\operatorname{tr}(T_{u,v})=\langle u,v\rangle$;
 
-(c) $T_{u,v}^*=T_{v,u}$ ([[def-hilbert-space-adjoint]]); $T_{x,x}\ge0$ with $\operatorname{tr}(T_{x,x})=\|x\|^2$ and $\|T_{x,x}\|_1=\|x\|^2$ ([[def-non-negative-and-positive-operator]]);
+(c) $T_{u,v}^*=T_{v,u}$ ([[def-hilbert-space-adjoint]]); $T_{x,x}$ is a positive bounded operator in the sense of [[def-self-adjoint-positive-unitary-and-normal-operator]], with $\langle T_{x,x}y,y\rangle=|\langle y,x\rangle|^2\ge0$ for every $y\in H$, and $\operatorname{tr}(T_{x,x})=\|x\|^2$, $\|T_{x,x}\|_1=\|x\|^2$;
 
 (d) for bounded $B\in\mathcal B(H)$, $BT_{u,v}=T_{Bu,v}$ and $T_{u,v}B=T_{u,B^*v}$;
 
@@ -69,7 +69,7 @@ Then:
 
 [F5] On the trace-class operators $\|\cdot\|_1$ is a norm, they form a Banach space, and $\|T\|\le\|T\|_1$ and $\|ATB\|_1\le\|A\|\,\|T\|_1\|B\|$ ([[thm-trace-class-is-a-two-sided-banach-operator-ideal]]).
 
-[F6] The operator norm is $\|B\|=\sup_{\|x\|\le1}\|Bx\|$ for bounded $B$; an operator is non-negative when $\langle Tx,x\rangle\ge0$ for all $x$ ([[def-operator-norm]], [[def-bounded-linear-operator]], [[def-non-negative-and-positive-operator]]).
+[F6] The operator norm is $\|B\|=\sup_{\|x\|\le1}\|Bx\|$ for bounded $B$; a bounded operator is positive when its quadratic-form values are real and nonnegative ([[def-operator-norm]], [[def-bounded-linear-operator]], [[def-self-adjoint-positive-unitary-and-normal-operator]]).
 
 ## Proof
 
@@ -79,7 +79,7 @@ Then:
 
 3.1 [The trace] Applying [F3] to the one-term nuclear representation of step 2.1 gives $\operatorname{tr}(T_{u,v})=\sum_j\langle v_j,u_j\rangle=\langle u,v\rangle$. In particular $\operatorname{tr}(T_{x,x})=\langle x,x\rangle=\|x\|^2$ and, with step 2.1, $\|T_{x,x}\|_1=\|x\|^2$. [step 2.1, F3, algebra]
 
-3.2 [Adjoint, positivity and one-sided products] For all $x,y$, $\langle T_{u,v}x,y\rangle=\langle x,v\rangle\langle u,y\rangle=\langle x,\langle y,u\rangle v\rangle$ by [F4], so $T_{u,v}^*=T_{v,u}$; also $\langle T_{x,x}y,y\rangle=|\langle y,x\rangle|^2\ge0$, so $T_{x,x}\ge0$ by [F6]. For bounded $B$: $(BT_{u,v})x=B(\langle x,v\rangle u)=\langle x,v\rangle Bu=T_{Bu,v}x$ and $(T_{u,v}B)x=\langle Bx,v\rangle u=\langle x,B^*v\rangle u=T_{u,B^*v}x$, using the defining property of the adjoint [F4]. [step 1.1, step 2.1, F4, F6, algebra]
+3.2 [Adjoint, positivity and one-sided products] For all $x,y$, $\langle T_{u,v}x,y\rangle=\langle x,v\rangle\langle u,y\rangle=\langle x,\langle y,u\rangle v\rangle$ by [F4], so $T_{u,v}^*=T_{v,u}$; in particular $T_{x,x}$ is self-adjoint, and $\langle T_{x,x}y,y\rangle=|\langle y,x\rangle|^2\ge0$ for every $y$, so it is positive by [F6]. For bounded $B$: $(BT_{u,v})x=B(\langle x,v\rangle u)=\langle x,v\rangle Bu=T_{Bu,v}x$ and $(T_{u,v}B)x=\langle Bx,v\rangle u=\langle x,B^*v\rangle u=T_{u,B^*v}x$, using the defining property of the adjoint [F4]. [step 1.1, step 2.1, F4, F6, algebra]
 
 3.3 [Trace-norm continuity] By the bilinearity of step 1.1, $T_{u,v}-T_{u',v'}=T_{u-u',v}+T_{u',v-v'}$; by [F5] and the estimates of steps 1.1 and 2.1, $\|T_{u,v}-T_{u',v'}\|_1\le\|u-u'\|\,\|v\|+\|u'\|\,\|v-v'\|$, which tends to $0$ whenever $(u',v')\to(u,v)$ in $H\times H$; hence $(u,v)\mapsto T_{u,v}$ is continuous into $\mathcal S_1(H)$, and fixing one slot gives the stated continuity. This is (f). [step 1.1, step 2.1, F5, algebra]
 

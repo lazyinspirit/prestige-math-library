@@ -160,11 +160,9 @@ $|\psi_{p}|^{2}$ by this definition.
 **(e) Frame reading.** The model's inertial frames are the global coordinate
 charts of P5; frame changes are the Galilean transformations of P5, with
 parameters and units as in [[def-nrqm-framework-quantities-and-units]]. This
-definition uses P5's frame class only. The transformation law of state
-representatives under a change of inertial frame is a derived statement about
-the model's operators and is established by the covariance theorems of this
-page for translations and boosts; it is not an additional assumption of this
-definition, and no Lorentz transformation law is claimed.
+definition uses P5's frame class only. For translations by $a\in\mathbb R^3$ and boosts with parameter $u\in\mathbb R^3$, choose the componentwise representative convention
+$$(T_a\psi)(x)=\psi(x-a),\qquad (B_u(t)\psi)(x)=\exp\!\left(\frac{i}{\hbar}\left(mu\cdot x-\tfrac12m|u|^2t\right)\right)\psi(x-ut).$$
+Here $a$ is length-valued, $u$ velocity-valued and $t$ time-valued, so the phase is dimensionless. These formulas specify classes almost everywhere and are chosen model conventions. The covariance theorems of this page derive operator and outcome-law identities conditional on these choices; they do not derive the choice of representative convention itself. No Lorentz transformation law is claimed.
 
 **(f) Status.** Clauses (a)-(e) record the readings of P1, P2, P5 and P6 in the
 terminology of this page and fix the objects used by its theorems. They assert

@@ -45,7 +45,7 @@ provenance:
 physical_scope: "A finite check of the declared free-mode thermal occupation
   formulas at low occupation q = e^{-beta epsilon}: the exact Bose and Fermi
   means, their dilute remainders, an exact rational evaluation at q = 1/10, and
-  the product convergence for geometrically spaced and for constant free-mode
+  the product convergence for linearly spaced and for constant free-mode
   energies. The example is a model computation at assigned temperature and
   chemical potential; it asserts no measured occupation, no dilute gas, no
   thermodynamic limit and no condensation."
@@ -68,9 +68,12 @@ verification:
 
 Adopt the mode models and thermal readings of
 [[pthm-nrqm-many-body-thermal-occupation-predictions]] at assigned
-temperature $T>0$ with $\beta=1/(k_BT)$, and put $x:=\beta\varepsilon>0$ and
-$q:=e^{-x}\in(0,1)$ for a single mode of energy $\varepsilon>0$ (or, in the
-grand-canonical reading, $x=\beta(\varepsilon-\mu)$ with $q=e^{-\beta(\varepsilon-\mu)}$).
+temperature $T>0$ with $\beta=1/(k_BT)$. For a canonical single mode of
+energy $\varepsilon>0$, put $x:=\beta\varepsilon>0$ and
+$q:=e^{-x}\in(0,1)$. In the grand-canonical reading put
+$x:=\beta(\varepsilon-\mu)$ and $q:=e^{-x}>0$; the bosonic formulas below
+apply only when $\mu<\varepsilon$ (so $q<1$), while the fermionic formulas
+hold for every $\mu\in\mathbb R$.
 Then:
 
 (a) the exact single-mode means and their dilute identities are
@@ -115,7 +118,7 @@ $\sum_je^{-\beta\varepsilon_j}<\infty$
 
 **Given:** the declared single-mode model with energy $\varepsilon>0$, assigned $\beta>0$, $q=e^{-\beta\varepsilon}$, the energy sequences $\varepsilon_j=j\varepsilon$ and $\varepsilon_j\equiv\varepsilon$, and [L1], [L2].
 
-1.1 [Dilute identities] With $q=e^{-\beta\varepsilon}\in(0,1)$ the bosonic mean of [L1] is $1/(e^{\beta\varepsilon}-1)=q/(1-q)$ and the fermionic mean is $1/(e^{\beta\varepsilon}+1)=q/(1+q)$; the algebraic identities $q/(1-q)=q+q^2/(1-q)$ and $q/(1+q)=q-q^2/(1+q)$ are exact for every $q\in(0,1)$, and the remainders $q^2/(1-q)$, $q^2/(1+q)$ are positive. This proves (a). [L1, algebra]
+1.1 [Dilute identities] In the canonical reading, $q=e^{-\beta\varepsilon}\in(0,1)$; in the grand-canonical reading, $q=e^{-\beta(\varepsilon-\mu)}>0$, with the bosonic formula restricted to $\mu<\varepsilon$ and hence $q<1$. By [L1], the bosonic and fermionic means on these respective domains are $q/(1-q)$ and $q/(1+q)$. The algebraic identities $q/(1-q)=q+q^2/(1-q)$ for $0<q<1$ and $q/(1+q)=q-q^2/(1+q)$ for $q>0$ are exact; the bosonic correction is positive and the fermionic correction is negative, with absolute values $q^2/(1-q)$ and $q^2/(1+q)$. This proves (a). [L1, algebra]
 
 1.2 [The finite check at $q=1/10$] At $q=1/10$ the bosonic mean is $(1/10)/(9/10)=1/9$ and the fermionic mean is $(1/10)/(11/10)=1/11$; the remainders are $q^2/(1-q)=(1/100)/(9/10)=1/90$ and $q^2/(1+q)=(1/100)/(11/10)=1/110$, so the exact identities $1/9=1/10+1/90=10/90+1/90$ and $1/11=1/10-1/110=11/110-1/110$ hold. This proves (b). [L1, algebra]
 

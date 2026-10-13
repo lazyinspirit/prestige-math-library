@@ -17,6 +17,7 @@ deps: [post-cm02-force-superposition,
        thm-chain-rule,
        thm-algebra-of-derivatives,
        thm-sine-and-cosine-derivatives,
+       cor-trigonometric-parity-and-pythagorean-identity,
        def-euclidean-inner-product,
        def-natural-logarithm,
        def-cm01-units]
@@ -32,6 +33,7 @@ dependency_roles:
   thm-chain-rule: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
   thm-sine-and-cosine-derivatives: mathematical-premise
+  cor-trigonometric-parity-and-pythagorean-identity: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
   def-natural-logarithm: mathematical-premise
   def-cm01-units: formulation-prerequisite
@@ -39,31 +41,45 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "A declared-data check of the page's finite-time growth definition and of the variational-equation supplier on two dimensionless one-label Cartesian force models in R^3: the harmonic model with mass matrix M=I_3, potential U_1(q)=||q||^2/2 and force F_1(q)=-q has the rotation flow, whose derivative is orthogonal, so every finite-time tangent growth rate vanishes identically and every Lyapunov exponent that exists is zero; the repulsive linear model with potential U_2(q)=-||q||^2/2 and force F_2(q)=q has the hyperbolic flow, with exact rates +1 and -1 along the eigenvectors of the linearisation and Lyapunov exponent 1 at the equilibrium along each unstable coordinate direction. The check is model-data substitution, not a measurement and not a statement about chaotic behaviour."
+physical_scope: "A declared-data check of two physical one-label Cartesian force models with m0=1 kg, ell0=1 m and t0=1 s: F_1,phys=-(m0/t0^2)X and F_2,phys=(m0/t0^2)X, in newtons. The formulas use normalized q=X/ell0, v=t0 V/ell0 and t=T/t0, mass 1 and potentials U_1(q)=||q||^2/2 and U_2(q)=-||q||^2/2 with energy reference E0=m0 ell0^2/t0^2. In this numerical state metric the harmonic derivative is orthogonal, so all finite-time rates and Lyapunov exponents are zero; the repulsive derivative has exact rates plus and minus 1 along its eigendirections, with positive exponent 1 at equilibrium. The corresponding physical rates divide by t0. All data are declared, with no measurement and no claim of chaos."
 sources:
   references:
-    - title: "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 5 pp. 60-103: the linearisation of a mechanical system and the growth of infinitesimal deviations"
+    - title: "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), §7.3.1 pp. 164-170: linear fixed-point equations and their exponential solutions; the exact six-dimensional model computations are proved locally"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
-    - title: "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), Chapter 7 pp. 143-195: Lyapunov exponents and the warning that a positive exponent at a hyperbolic point is not chaos"
+    - title: "Iain Stewart, Advanced Classical Mechanics (MIT 8.09/8.309, Fall 2014), §7.6.1 pp. 189-191: contextual discussion of Lyapunov exponents; the distinction between a positive equilibrium exponent and chaos in the stated sense is established locally"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
-    - title: "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §5.2: small oscillations with M=K=1, the harmonic phase rotation and the repulsive case"
+    - title: "Konstantin Likharev, Essential Graduate Physics: Classical Mechanics (title page last edited September 1, 2026), §5.1, equations (5.2)-(5.3): the linear harmonic equation and its sine/cosine solution; the repulsive model and tangent-rate calculations are supplied locally"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
 ---
 
 ## Example
 
-**Declared model data.** Take one label with configuration domain
-$Q:=\mathbb R^3$, mass $m:=1$ in dimensionless units and force maps
-$F_i:\mathbb R\times Q\times\mathbb R^3\to\mathbb R^3$ given by
-$F_1(T,\mathbf q,\mathbf v):=-\mathbf q$ and
-$F_2(T,\mathbf q,\mathbf v):=\mathbf q$. These are continuous, globally
-state-Lipschitz force maps of [[post-cm02-force-superposition]]. Equivalently,
-in the constant-metric chart $\Omega:=\mathbb R^3$ with $M:=I_3$, they have
+**Declared model data and normalization.** Take one label with
+$Q:=\mathbb R^3$ and declare physical reference data
+$m_0:=1\ \mathrm{kg}$, $\ell_0:=1\ \mathrm m$, $t_0:=1\ \mathrm s$.
+For $\sigma_1=-1$, $\sigma_2=1$ define physical force maps
+$F_{i,\rm phys}:\mathbb R\times Q\times\mathbb R^3\to\mathbb R^3$ by
+$F_{i,\rm phys}(T,\mathbf X,\mathbf V)=\sigma_i(m_0/t_0^2)\mathbf X$,
+with $T$ in seconds, $\mathbf X$ in metres, $\mathbf V$ in metres per second,
+and outputs in newtons. These are smooth globally state-Lipschitz force
+maps of [[post-cm02-force-superposition]] with physical mass $m_0$.
+Put $t=T/t_0$, $\mathbf q=\mathbf X/\ell_0$,
+$\mathbf v=t_0\mathbf V/\ell_0$ and $E_0=m_0\ell_0^2/t_0^2$. Then
+$m_0\ddot{\mathbf X}=F_{i,\rm phys}$ becomes
+$\mathbf q''=\sigma_i\mathbf q$, with $\mathbf q'=\mathbf v$, since
+$\ddot{\mathbf X}=(\ell_0/t_0^2)\mathbf q''$. The normalized force maps are
+$F_i(t,\mathbf q,\mathbf v)=F_{i,\rm phys}(t_0t,\ell_0\mathbf q,(\ell_0/t_0)\mathbf v)/(m_0\ell_0/t_0^2)=\sigma_i\mathbf q$,
+with normalized mass $m=1$. The physical potentials are
+$U_{i,\rm phys}(\mathbf X)=-\sigma_i m_0\lVert\mathbf X\rVert_2^2/(2t_0^2)$;
+normalizing their energies by $E_0$ gives, in the constant-metric chart $\Omega:=\mathbb R^3$ with $M:=I_3$, they have
 the potentials $U_1(\mathbf q):=\tfrac12\lVert\mathbf q\rVert_2^2$ and
 $U_2(\mathbf q):=-\tfrac12\lVert\mathbf q\rVert_2^2$ of
 [[def-cm-mechanical-vector-field-and-energy-in-a-chart]]. The associated fields
 and complete motion maps are listed below; $\mathbf e_1,\mathbf e_2,\mathbf
-e_3$ denote the standard coordinate basis of $\mathbb R^3$.
+e_3$ denote the coordinate basis, explicitly
+$\mathbf e_j(k)=1$ for $k=j-1$ and $0$ otherwise, for $k\in\{0,1,2\}$ and
+$j\in\{1,2,3\}$. All state and tangent norms below apply to the
+ dimensionless numerical coordinates $(\mathbf q,\mathbf v)$.
 
 1. The **harmonic model** has field
    $G_1(\mathbf q,\mathbf v)=(\mathbf v,-\mathbf q)$ and motion map
@@ -94,25 +110,27 @@ eigenvector is $1$.
 
 **Given:** the two force maps and their equivalent chart data with $M=I_3$, the displayed candidate flows and the finite-time growth-rate definition of [[def-cm-finite-time-tangent-growth-rate-and-lyapunov-exponent]] as recorded in [[def-cm16-finite-time-growth-rates]].
 
-[L1] Uniqueness of force-model motions ([[pthm-cm02-ivp]]): for the adopted force maps, every initial datum has a unique maximal model motion; consequently a globally defined curve that solves the equation with the given initial data is the model's maximal motion.
+[L1] Uniqueness of force-model motions ([[pthm-cm02-ivp]]): for the adopted physical force maps, every initial datum has a unique maximal model motion; consequently a globally defined curve that solves the equation with the given initial data is the model's maximal motion. The invertible state and time normalization transfers this uniqueness and maximality to the numerical systems.
 
 [L2] calculus ([[thm-derivative-of-exponential]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[thm-sine-and-cosine-derivatives]], [[def-natural-logarithm]], [[def-euclidean-inner-product]]): the exponential and trigonometric functions have their standard derivatives, sums and constant multiples differentiate termwise, and $\log$ is the natural logarithm, so that $\log e^{s}=s$ for real $s$.
+
+[L3] Pythagorean identity ([[cor-trigonometric-parity-and-pythagorean-identity]]): for every real $t$, $\sin^2t+\cos^2t=1$.
 
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 The two fields: for the constant metric $M=I_3$ the mechanical field of [[def-cm-mechanical-vector-field-and-energy-in-a-chart]] is $G(\mathbf q,\mathbf v)=(\mathbf v,-\nabla U(\mathbf q))$, giving $G_1(\mathbf q,\mathbf v)=(\mathbf v,-\mathbf q)$ and $G_2(\mathbf q,\mathbf v)=(\mathbf v,\mathbf q)$. These are also the force-model fields of the declared $F_1,F_2$. [given, algebra]
+1.1 The two fields: for the constant metric $M=I_3$ the mechanical field of [[def-cm-mechanical-vector-field-and-energy-in-a-chart]] is $G(\mathbf q,\mathbf v)=(\mathbf v,-\nabla U(\mathbf q))$, giving $G_1(\mathbf q,\mathbf v)=(\mathbf v,-\mathbf q)$ and $G_2(\mathbf q,\mathbf v)=(\mathbf v,\mathbf q)$. These are also the normalized force-model fields of the declared physical $F_{1,\rm phys},F_{2,\rm phys}$. [given, algebra]
 
 2.1 Harmonic flow: differentiating the displayed $\Phi_t^1$ with respect to $t$ by [L2] gives $(\dot{\mathbf q},\dot{\mathbf v})=(\mathbf v,-\mathbf q)$; at $t=0$ the map is the identity. By [L1] the displayed map is the force model's maximal flow. [given, step 1.1, L1, L2, algebra]
 
 2.2 Repulsive flow: differentiating the displayed $\Phi_t^2$ gives $\dot{\mathbf q}=\mathbf v(t)$ and $\dot{\mathbf v}=\mathbf q(t)$; at $t=0$ the map is the identity, so by [L1] it is the force model's maximal flow of $G_2$. [given, step 1.1, L1, L2, algebra]
 
-3.1 Harmonic growth rates: $\Phi_t^1$ is linear in $a=(\mathbf q_0,\mathbf v_0)$, with derivative $$D_a\Phi_t^1(a)=\begin{pmatrix}\cos t\,I_3&\sin t\,I_3\\-\sin t\,I_3&\cos t\,I_3\end{pmatrix};$$ this matrix is orthogonal, whence $\lVert D_a\Phi_t^1(a)u\rVert_2=\lVert u\rVert_2$ for every $u\ne0$. The explicit flow exists for every real time, so the forward lifetime is unbounded, as required by the exponent definition. Therefore $r(t,a,u)=t^{-1}\log1=0$ for every $t>0$, and the limit defining the Lyapunov exponent exists and equals $0$; the variational equation of [[pthm-cm16-variational-equation-and-linearization]] is satisfied by this derivative matrix, whose columns solve $\dot Y=DG_1Y$ by step 2.1. [step 2.1, given, L2, algebra]
+3.1 Harmonic growth rates: $\Phi_t^1$ is linear in $a=(\mathbf q_0,\mathbf v_0)$, with derivative $$D_a\Phi_t^1(a)=\begin{pmatrix}\cos t\,I_3&\sin t\,I_3\\-\sin t\,I_3&\cos t\,I_3\end{pmatrix};$$ writing $c=\cos t$, $s=\sin t$, its transpose times itself has diagonal blocks $(c^2+s^2)I_3=I_3$ by [L3] and off-diagonal blocks $csI_3-scI_3=0$, so it is orthogonal, whence $\lVert D_a\Phi_t^1(a)u\rVert_2=\lVert u\rVert_2$ for every $u\ne0$. The explicit flow exists for every real time, so the forward lifetime is unbounded, as required by the exponent definition. Therefore $r(t,a,u)=t^{-1}\log1=0$ for every $t>0$, and the limit defining the Lyapunov exponent exists and equals $0$; the variational equation of [[pthm-cm16-variational-equation-and-linearization]] is satisfied by this derivative matrix, whose columns solve $\dot Y=DG_1Y$ by step 2.1. [step 2.1, given, L2, L3, algebra]
 
 3.2 Repulsive growth rates: for an initial tangent vector $(\delta\mathbf q,\delta\mathbf v)$ put $\mathbf u:=\delta\mathbf q+\delta\mathbf v$ and $\mathbf w:=\delta\mathbf q-\delta\mathbf v$. The derivative flow satisfies $\delta\mathbf q(t)+\delta\mathbf v(t)=e^t\mathbf u$ and $\delta\mathbf q(t)-\delta\mathbf v(t)=e^{-t}\mathbf w$. For each $j\in\{1,2,3\}$, input $(\mathbf e_j,\mathbf e_j)$ gives output $e^t(\mathbf e_j,\mathbf e_j)$ and rate $+1$, while input $(\mathbf e_j,-\mathbf e_j)$ gives output $e^{-t}(\mathbf e_j,-\mathbf e_j)$ and rate $-1$. The explicit flow exists for every real time, so the lifetime hypothesis holds and these Lyapunov exponents exist. At the equilibrium $a=(\mathbf 0,\mathbf 0)$ this gives a positive exponent along each unstable coordinate eigenvector. [step 2.2, given, L2, algebra]
 
-4.1 Scope check: all steps substitute declared dimensionless data into the chart formulas and the definition of the finite-time rate; no step produces a chaotic invariant set, a mixing property or a measurement, and the positive exponent of step 3.2 concerns the linear model at its equilibrium, as the page's counterexample discusses. [step 3.1, step 3.2, given] ∎
+4.1 Scope check: the chain rule transfers each numerical motion to $\mathbf X(T)=\ell_0\mathbf q(T/t_0)$ satisfying its physical Newton equation. A rate $r$ per numerical time $t$ becomes $r/t_0$ per physical time $T$; thus the physical rates are $0$ and $\pm1/t_0$, and the positive physical exponent is $1/t_0$. All steps substitute declared normalized data into the chart formulas and the finite-time-rate definition; no step produces a chaotic invariant set, a mixing property or a measurement, and the positive exponent of step 3.2 concerns the linear model at its equilibrium, as the page's counterexample discusses. [step 3.1, step 3.2, given, L1, L2, algebra] ∎
 
 ## Remarks
 

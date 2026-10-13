@@ -77,7 +77,7 @@ $\nu_{a}:=\int_{D}W_{a}\,d\mu$ satisfy $\nu_{a}\ge0$ and
 $\sum_{a=1}^{m}\nu_{a}\le1$; if $\sum_{a=1}^{m}W_{a}=1$ pointwise, then
 $\sum_{a=1}^{m}\nu_{a}=1$.
 
-(e) *Coincidence criterion.* Let $\|a\|>0$, $\|b\|>0$ and put
+(e) *Coincidence criterion.* Let $\|a\|>0$, $\|b\|>0$ and $\|a+b\|>0$, and put
 $w_{*}:=\|a\|^{2}/N$, so that $p_{\mathrm{mix}}$ with weight $w_{*}$ is
 $p_{*}(B)=N^{-1}\int_{B}\bigl(\|a\|^{2}+\|b\|^{2}\bigr)dx$. Then
 $p_{\mathrm{coh}}(B)=p_{*}(B)$ for every $B\in\mathcal A$ if and only if
@@ -118,7 +118,7 @@ law of an apparatus, no sample of trials and no empirical claim is asserted.
 
 3.1 [Coherent law] Assume $\|a+b\|>0$. The set function $B\mapsto\int_{B}\|a+b\|^{2}dx$ is a finite measure with total mass $\|a+b\|^{2}$ by [F2], and $\|a+b\|^{2}\in(0,\infty)$; dividing by this constant gives a finite measure of total mass one, hence a probability measure by [F4], whose value at $B$ is $p_{\mathrm{coh}}(B)$ with denominator $N+2c$ by step 2.1 applied to $B=D$. This is (b). [step 2.1, F2, F3, F4, algebra]
 
-4.1 [Coincidence criterion] By steps 2.1 and 1.2 with $w=w_{*}$, $p_{*}(B)=\frac{1}{N}\int_{B}(\|a\|^{2}+\|b\|^{2})dx$ and $p_{\mathrm{coh}}(B)=\frac{\int_{B}(\|a\|^{2}+\|b\|^{2})dx+2c(B)}{N+2c}$ with $c(B):=\operatorname{Re}\langle a,b\rangle_{B}$; since $N>0$ and $N+2c=\|a+b\|^{2}>0$, the equality $p_{\mathrm{coh}}(B)=p_{*}(B)$ is equivalent to $N c(B)=c\,M(B)$ for the finite measure $M(B):=\int_{B}(\|a\|^{2}+\|b\|^{2})dx$. The signed measure $N c(\cdot)-c\,M(\cdot)$ vanishes on every $B\in\mathcal A$ if and only if its density $N\operatorname{Re}\langle a(x),b(x)\rangle_{\mathbb C^{r}}-c(\|a(x)\|^{2}+\|b(x)\|^{2})$ vanishes $dx$-almost everywhere by [F2], since a nonzero integrable density has a level set of strictly positive or strictly negative integral. This is the displayed criterion; if $\langle a(x),b(x)\rangle=0$ a.e., then $c=0$ and $c(B)=0$ for every $B$, so the laws coincide, and if $c=0$ the criterion reduces to $\operatorname{Re}\langle a(x),b(x)\rangle=0$ a.e. This proves (e), and steps 1.1, 1.2, 1.3, 2.1, 3.1 prove the remaining clauses. [step 1.2, step 1.3, step 2.1, step 3.1, F1, F2, algebra] ∎
+4.1 [Coincidence criterion] Assume the hypotheses of (e), including $\|a+b\|>0$. By steps 2.1 and 1.2 with $w=w_{*}$, $p_{*}(B)=\frac{1}{N}\int_{B}(\|a\|^{2}+\|b\|^{2})dx$ and $p_{\mathrm{coh}}(B)=\frac{\int_{B}(\|a\|^{2}+\|b\|^{2})dx+2c(B)}{N+2c}$ with $c(B):=\operatorname{Re}\langle a,b\rangle_{B}$; since $N>0$ and $N+2c=\|a+b\|^{2}>0$, the equality $p_{\mathrm{coh}}(B)=p_{*}(B)$ is equivalent to $N c(B)=c\,M(B)$ for the finite measure $M(B):=\int_{B}(\|a\|^{2}+\|b\|^{2})dx$. The signed measure $N c(\cdot)-c\,M(\cdot)$ vanishes on every $B\in\mathcal A$ if and only if its density $N\operatorname{Re}\langle a(x),b(x)\rangle_{\mathbb C^{r}}-c(\|a(x)\|^{2}+\|b(x)\|^{2})$ vanishes $dx$-almost everywhere by [F2], since a nonzero integrable density has a level set of strictly positive or strictly negative integral. This is the displayed criterion; if $\langle a(x),b(x)\rangle=0$ a.e., then $c=0$ and $c(B)=0$ for every $B$, so the laws coincide, and if $c=0$ the criterion reduces to $\operatorname{Re}\langle a(x),b(x)\rangle=0$ a.e. This proves (e), and steps 1.1, 1.2, 1.3, 2.1, 3.1 prove the remaining clauses. [step 1.2, step 1.3, step 2.1, step 3.1, F1, F2, algebra] ∎
 
 ## Remarks
 

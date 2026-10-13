@@ -5,7 +5,7 @@ title: "Reconstruction of a Weyl tensor from its electric and magnetic parts: sy
 status: draft
 origin: session
 domain: mathematics
-dependency_level: 10
+dependency_level: 13
 provenance:
   statement: ai-altered
   proof: ai-generated

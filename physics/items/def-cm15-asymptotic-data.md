@@ -24,6 +24,7 @@ deps:
     def-interval,
     def-ck-euclidean-maps-and-diffeomorphisms,
     def-euclidean-inner-product,
+    thm-cauchy-schwarz-and-the-euclidean-norm,
     def-cross-product-in-r3,
     def-vector-valued-derivative-and-integral,
     def-vector-valued-functions-limits-and-continuity,
@@ -44,6 +45,7 @@ dependency_roles:
   def-interval: mathematical-premise
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
+  thm-cauchy-schwarz-and-the-euclidean-norm: mathematical-premise
   def-cross-product-in-r3: mathematical-premise
   def-vector-valued-derivative-and-integral: mathematical-premise
   def-vector-valued-functions-limits-and-continuity: mathematical-premise
@@ -97,7 +99,7 @@ static central pair potential $u\in C^2(J_0)$
 whose collision-excluded interval satisfies $(0,\infty)\subseteq J_0$, so
 that the only forbidden configuration is the collision $r=0$. Its **reduced
 problem** is the one-label problem of class (ii) with reduced mass
-$\mu:=m_1m_2/(m_1+m_2)$ ([[def-cm01-units]]: $[\mu]=\mathsf M$) and the same
+$\mu:=m_1m_2/(m_1+m_2)$ ([[def-cm01-units]]: $[\mu]=\mu$) and the same
 potential, presented through the relative coordinate $r=x_1-x_2$; by
 [[pthm-cm05-relative-reduction]] the relative coordinate of every motion of
 the model is a central-force trajectory for $(\mu,u)$ and every pair of an
@@ -144,8 +146,7 @@ theorems give $\cos\theta_{\mathrm{s}}=\cos(\pi-2\Delta)$ and the signed
 rotation $2\Delta-\pi$; in particular, when $0<\Delta<\pi/2$ the scattering
 angle is
 $$\theta_{\mathrm{s}}=\pi-2\Delta\in(0,\pi),$$
-while for $\Delta\ge\pi/2$ the motion has wrapped past the backward direction
-and $\theta_{\mathrm{s}}$ is the wrapped value $\arccos(\cos(\pi-2\Delta))$.
+while outside that range $\theta_{\mathrm{s}}$ is the wrapped value $\arccos(\cos(\pi-2\Delta))$.
 The **deflection map** at fixed model potential $u$, reduced mass $\mu$ and energy $E>0$ is the partial map $b\mapsto\theta_{\mathrm s}(b)$ on those $b>0$ for which a scattering motion exists and all such motions have the same angle. Its corresponding angular momentum magnitude varies as
 $$J(b)=\mu b v_\infty=\sqrt{2\mu E}\,b.$$
 Time translation and rotation of a motion do not change its angle. **Deflection branches** are $C^1$ branches of this partial map as defined in [[def-cm-scattering-data]].
@@ -157,14 +158,19 @@ experiment for the reduced problem: independent incident reduced labels with com
 $$P(A)=\frac{\nu(A\cap D_{\max})}{\pi b_{\max}^2},\qquad D_{\max}=(0,b_{\max})\times(0,2\pi).$$
 Its density is $b/(\pi b_{\max}^2)$, and its total mass is one since $\nu(D_{\max})=\pi b_{\max}^2$. Angular momentum magnitude is $J(b)=\sqrt{2\mu E}\,b$; its plane orientation may vary with azimuth. The **incident flux** $\Phi$ is the expected number of incident labels per unit area per unit time, with $[\Phi]=\ell^{-2}\tau^{-1}$ ([[def-cm01-units]]). The adopted total arrival rate is $\Phi\pi b_{\max}^2$, so for a Borel set $A\subseteq D_{\max}$ the expected incident rate is
 $$\dot N(A)=\Phi\pi b_{\max}^2 P(A)=\Phi\nu(A).$$
-Here $\nu$ is the incident area measure of [[def-cm-scattering-data]];
-the rate of scattered
-labels into a solid-angle set is the flux times the pushforward of $\nu$ under
-the deflection map, whose density on a branch is the cross-section density
-introduced in this page's cross-section definition. This is a predicted model
-quantity: it reports no
-detection, and its comparison with data requires a separately specified
-experiment, apparatus model and statistical analysis.
+Here $\nu$ is the incident area measure of [[def-cm-scattering-data]]. For a
+specified deflection branch $\theta:(a_1,a_2)\to(\theta_1,\theta_2)$ and a
+Borel scattering-angle window $Y\subseteq(\theta_1,\theta_2)$, the predicted
+rate from that branch under this cutoff preparation is
+$$\dot N_{\mathrm{br}}(Y):=\Phi\,\nu\!\left(\left\{(b,\varphi)\in D_{\max}:a_1<b<a_2,\ \theta(b)\in Y\right\}\right).$$
+The preimage is Borel because $\theta$ is continuous on its branch. For a
+finite family of branches with pairwise disjoint incident intervals, branch
+rates add, including when their angular images overlap. Incidences outside
+recorded scattering branches are not assigned an outgoing scattering angle
+by this definition. The rate above integrates over the full impact-azimuth
+range; it is a model prediction, not a detected count. Comparing it with data
+requires a separately specified experiment, apparatus model, sampling model
+and statistical analysis.
 
 **(v) Reading conventions.** All angles and lengths above are data of the
 **relative** problem: angles are computed from the relative coordinate
@@ -199,7 +205,7 @@ preparation measure of clause (iv) is the measure $\nu$ of
 [[def-cm-scattering-data]]. The arccosine of clause (iii) is defined because
 the Cauchy-Schwarz inequality gives
 $|\langle v_-,v_+\rangle|/(\lVert v_-\rVert_2\lVert v_+\rVert_2)\le1$
-([[def-euclidean-inner-product]]).
+([[thm-cauchy-schwarz-and-the-euclidean-norm]]).
 
 **Mathematical status.** The vocabulary is attached to the adopted model
 class of [[post-cm05-central-model]]; the existence of the limits, the

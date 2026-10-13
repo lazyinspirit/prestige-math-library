@@ -81,9 +81,14 @@ verification:
   transition of a preparation to the branch with the smallest first-order
   shift, no relaxation to a lowest branch and no equilibration. The
   motivating textbook conjecture of a jump to the lowest branch is not
-  imported: for a closed system, which spectral subspace a preparation
-  occupies is fixed by the preparation and by the evolution of P4
-  ([[post-nrqm-framework-autonomous-dynamics]]); an equilibration statement
+  imported. For each fixed coupling $\lambda$, P4 assigns the autonomous
+  flow $e^{-itH(\lambda)/\hbar}$; it commutes with the spectral projections
+  of that fixed operator, so their populations are fixed by the initial
+  preparation. The textbook conjecture instead concerns a time ramp
+  $\lambda(t)$: P4 supplies no propagator for that ramp and gives no
+  conservation law for its instantaneous spectral-branch populations
+  ([[post-nrqm-framework-autonomous-dynamics]] clauses (ii), (iv)). Such a
+  question requires separately specified driven dynamics; an equilibration statement
   would require a separately declared environment or dissipation model, which
   this page does not supply.
 
@@ -96,8 +101,8 @@ verification:
   The declared transmission coefficient is a matching datum of the model, not
   a detector response.
 
-- **The static-Stark limitation.** The uncompressed static perturbation of a
-  Coulomb model by a uniform field is the unbounded multiplication term
+- **The static-Stark limitation.** For $\mathbf E_{\rm ext}\ne0$, the
+  uncompressed static perturbation of a Coulomb model by a uniform field is the unbounded multiplication term
   $-\mathbf E_{\rm ext}\cdot\mathbf D$. The common-test-domain calculation in
   [[post-nrqm-approximations-static-finite-level-dipole-coupling]] translates
   a normalized fixed $\varphi\in C_c^\infty(B(0,\rho))$ to
@@ -109,7 +114,11 @@ verification:
   test domain. No quadratic form bounded below there can agree with those
   values, although no particular closed-form domain is asserted. No
   bounded-perturbation theorem
-  of this page applies to it. This page therefore covers only the compressed finite-level operator of
+  of this page applies to that nonzero-field interaction. At
+  $\mathbf E_{\rm ext}=0$, the maximal interaction is the bounded zero
+  operator on $L^2(\mathbb R^3;\mathbb C)$; $\widehat e$ is not defined, and
+  the preceding translation argument and bounded-perturbation exclusion do
+  not apply. This page covers only the compressed finite-level operator of
   [[post-nrqm-approximations-static-finite-level-dipole-coupling]], and it
   states no eigenvalue theorem for the uncompressed model.
 

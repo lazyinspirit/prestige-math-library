@@ -104,7 +104,8 @@ affine space with these data, and no numerical measurement is recorded.
 
 - **Domain of intended use.** The model is intended for the non-relativistic
   regime, in which speeds are small compared with the speed of light and a
-  classical continuum description of matter and apparatus is adequate. The
+  classical particle or continuum description, as appropriate to the
+  application, and a classical description of the apparatus are adequate. The
   framework sets no numerical cutoff for that regime; an application must
   state the regime in which the model, its force law and its apparatus
   description are adequate. Relativistic, quantum and quantum-gravitational

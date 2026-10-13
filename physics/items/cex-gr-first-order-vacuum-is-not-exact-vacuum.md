@@ -24,7 +24,7 @@ dependency_roles:
   def-gr-smooth-lorentzian-objects: mathematical-premise
 sources:
   references:
-    - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 4: the linearized Einstein tensor and the quadratic terms omitted in the weak-field expansion, printed pp. 106-110 (PDF pp. 113-117); Ch. 6: the linearized field equations and their range of validity, printed pp. 142-145 (PDF pp. 149-152)"
+    - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 4 equations (4.12)-(4.21) and (4.48)-(4.52), printed pp. 105-112: Newtonian time-time potential and Poisson limit; Ch. 6 equations (6.4)-(6.8), (6.13)-(6.22) and (6.24)-(6.29), printed pp. 142-148: first-order curvature, gauge, trace reversal and diagonal weak-field metric"
       url: "https://arxiv.org/pdf/gr-qc/9712019"
     - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), sections 7.1-7.2: the linearized approximation and the error term of order h^2 neglected in it, printed pp. 86-90 (PDF pp. 87-91)"
       url: "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
@@ -71,7 +71,7 @@ so that $g(\lambda)_{ab}=\eta_{ab}+\lambda h_{ab}$. Then:
 
 [L2] First-order formulas ([[thm-gr-flat-linearized-curvature-and-gauge]] clauses (b)-(c)): $\operatorname{Ric}^{(1)}_{ab}=\frac12(\partial_c\partial_ah^{c}{}_{b}+\partial_c\partial_bh^{c}{}_{a}-\Box h_{ab}-\partial_a\partial_bh)$, $S^{(1)}=\partial_a\partial_bh^{ab}-\Box h$ and $G^{(1)}_{ab}=-\frac12\Box\bar h_{ab}+\partial^c\partial_{(a}\bar h_{b)c}-\frac12\eta_{ab}\partial^c\partial^d\bar h_{cd}$, expressions linear in $h$.
 
-[L3] The metric-selected connection is unique with Christoffel symbols $\Gamma^a{}_{bc}=\frac12\eta^{ad}(\partial_bh_{cd}+\partial_ch_{bd}-\partial_dh_{bc})$ computed from the metric components of $g(\lambda)$ ([[def-gr-metric-selected-connection]], [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]], [[def-christoffel-symbols-of-an-affine-connection]]). Curvature components in a chart are $R^a{}_{bcd}=\partial_c\Gamma^a{}_{db}-\partial_d\Gamma^a{}_{cb}+\Gamma^a{}_{ce}\Gamma^e{}_{db}-\Gamma^a{}_{de}\Gamma^e{}_{cb}$ and $\operatorname{Ric}_{bd}=R^a{}_{bad}$ with $R_{abcd}=g_{ae}R^e{}_{bcd}$, $G_{ab}=\operatorname{Ric}_{ab}-\frac12Sg_{ab}$ ([[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (b), [[def-gr-curvature-tensor-and-derived-tensors]] clause (c)).
+[L3] The metric-selected connection is unique with Christoffel symbols $\Gamma^a{}_{bc}=\frac12g^{ad}(\partial_bg_{cd}+\partial_cg_{bd}-\partial_dg_{bc})$ computed from the exact metric components of $g(\lambda)$ ([[def-gr-metric-selected-connection]], [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]], [[def-christoffel-symbols-of-an-affine-connection]]). Curvature components in a chart are $R^a{}_{bcd}=\partial_c\Gamma^a{}_{db}-\partial_d\Gamma^a{}_{cb}+\Gamma^a{}_{ce}\Gamma^e{}_{db}-\Gamma^a{}_{de}\Gamma^e{}_{cb}$ and $\operatorname{Ric}_{bd}=R^a{}_{bad}$ with $R_{abcd}=g_{ae}R^e{}_{bcd}$, $G_{ab}=\operatorname{Ric}_{ab}-\frac12Sg_{ab}$ ([[thm-gr-curvature-tensoriality-and-coordinate-formula]] clause (b), [[def-gr-curvature-tensor-and-derived-tensors]] clause (c)).
 
 [L4] For $\varphi=x^1$: $\partial_i\varphi=\delta_{i1}$, $\Delta\varphi=0$, and $\varphi$ is stationary ([[def-laplacian-of-a-c2-function]]).
 

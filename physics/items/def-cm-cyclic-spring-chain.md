@@ -1,7 +1,7 @@
 ---
 id: def-cm-cyclic-spring-chain
 kind: definition
-title: "The cyclic spring chain, its discrete energy, and the smooth periodic comparison class"
+title: "The cyclic spring chain, its discrete energy, and the finite-regularity periodic comparison class"
 status: draft
 origin: pipeline
 domain: mathematics
@@ -58,4 +58,4 @@ $$q_j(0):=u(0,ja),\qquad q_j'(0):=u_t(0,ja)\qquad(j=1,\dots,N).$$
 
 - The cyclic indexing (index $N+1$ is index $1$) makes the chain closed and makes summation by parts in the discrete variable exact; it is part of the model, not a boundary condition. Other boundary conditions are separate models and are not covered by this definition.
 
-- The comparison class requires a globally defined smooth periodic solution; the items using it establish existence of the chain solutions and compare the two evolutions on a compact time interval. No uniqueness or continuation statement for $u$ is part of this definition.
+- The comparison class requires a globally defined periodic solution with the regularity in clause (c); the items using it establish existence of the chain solutions and compare the two evolutions on a compact time interval. No uniqueness or continuation statement for $u$ is part of this definition.

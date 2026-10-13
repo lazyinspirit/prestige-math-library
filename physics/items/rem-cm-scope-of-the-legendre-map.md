@@ -5,9 +5,10 @@ title: "Scope of the Legendre map: regular versus hyperregular, the meaning of t
 status: draft
 origin: pipeline
 domain: mathematics
-dependency_level: 4
-deps: [def-cm-legendre-map-in-a-time-dependent-chart, lem-cm-legendre-map-local-invertibility, prop-cm-hamiltonian-branch-identities, prop-cm-mechanical-chart-lagrangian-is-hyperregular]
+dependency_level: 5
+deps: [thm-cm-hamilton-phase-action-stationarity, def-cm-legendre-map-in-a-time-dependent-chart, lem-cm-legendre-map-local-invertibility, prop-cm-hamiltonian-branch-identities, prop-cm-mechanical-chart-lagrangian-is-hyperregular]
 dependency_roles:
+  thm-cm-hamilton-phase-action-stationarity: mathematical-premise
   def-cm-legendre-map-in-a-time-dependent-chart: mathematical-premise
   lem-cm-legendre-map-local-invertibility: mathematical-premise
   prop-cm-hamiltonian-branch-identities: mathematical-premise

@@ -74,11 +74,11 @@ provenance:
 proof_strategy: direct
 physical_scope: "Assuming countable choice for the orbit suppliers, A worked
   instance inside the two-label gravitational model of the framework's force
-  branch: for an elliptic relative orbit ($j=Je_3$, $J>0$, $E<0$, eccentricity
+  branch: on the unique global central-force extension of an elliptic relative orbit ($j=Je_3$, $J>0$, $E<0$, eccentricity
   $0\\le e<1$), the Kepler effective potential has exactly two simple turning
   points on the energy window between its minimum and $0$; the one-dimensional
   action variable of the radial problem is $C^1$ there with derivative
-  $T/(2\\pi)$; and the radial quadrature is the orbital period, so $J_{\\mathrm
+  $T/(2\\pi)$; and for a noncircular orbit the radial quadrature is the orbital period, so $J_{\\mathrm
   a}'(E)=T/(2\\pi)=\\sqrt{\\mu/\\kappa}\\,a^{3/2}$ with $T^2=4\\pi^2\\mu
   a^3/\\kappa$. The example uses only the model's declared couplings
   $\\kappa=G_{\\mathrm N}m_1^{g}m_2^{g}$ and masses; no measured value of
@@ -117,7 +117,7 @@ $\mu=m_{1}m_{2}/M$, gravitational couplings $m_{1}^{g},m_{2}^{g}>0$,
 $\kappa=G_{\mathrm N}m_{1}^{g}m_{2}^{g}>0$ and the pair potential of
 [[pthm-cm05-relative-reduction]]. Let $x:I\to Q$ be a motion whose
 relative coordinate $r$ has constant angular momentum $j=Je_{3}$ with
-$J>0$ and constant energy $E<0$, and let $0\le e<1$, $\theta_{0}$,
+$J>0$ and constant energy $E<0$. Let $\bar r:\mathbb R\to\mathbb R^{3}\setminus\{0\}$ be the unique global central-force extension of $r$ supplied by [[thm-cm-kepler-orbit-period]] clause 1 and [[pthm-cm05-kepler-period]] clause 1. In all subsequent period and quadrature statements, write $r:=\bar r$, $\rho:=|\bar r|$ and let $\theta:\mathbb R\to\mathbb R$ be its increasing polar-angle lift. Its restriction to the initial interval is the original relative motion; no global physical time window is assumed. Let $0\le e<1$, $\theta_{0}$,
 
 $$p=\frac{J^{2}}{\mu\kappa},\qquad a=\frac{p}{1-e^{2}},\qquad b=a\sqrt{1-e^{2}},\qquad T=2\pi\sqrt{\frac{\mu}{\kappa}}\,a^{3/2}$$
 be its conic data ([[thm-cm-kepler-conic-and-eccentricity]],
@@ -144,7 +144,7 @@ effective potential $U^{\mathrm{eff}}_{J}$). The example verifies:
 $$J_{\mathrm a}'(E)=\frac{T_{\mathrm{rad}}(E)}{2\pi},\qquad T_{\mathrm{rad}}(E)=\sqrt{2\mu}\int_{r_{-}(E)}^{r_{+}(E)}\frac{\mathrm d\rho}{\sqrt{E-U^{\mathrm{eff}}(\rho)}}\in(0,\infty).$$
 
 3. **(quadrature equals the orbital period)** for a noncircular orbit $0<e<1$ (equivalently $E\in I_0$), the radial coordinate of
-   the motion solves the one-dimensional problem of clause 1 of
+   this global extension solves the one-dimensional problem of clause 1 of
    [[pthm-cm05-effective-potential]] with the same energy, and its least
    positive period is the orbital period $T$ of the conic data; the time
    quadrature of that problem is $T_{\mathrm{rad}}(E)=T$, so that
@@ -162,14 +162,13 @@ measured value of $G_{\mathrm N}$ and no empirical premise enters.
 ## Facts & Assumptions
 
 **Given:** Assume $\mathrm{AC}_\omega$. The gravitational model data $m_{1},m_{2},\kappa>0$, the
-motion with $j=Je_{3}$, $J>0$, $E<0$, the conic data
+motion with $j=Je_{3}$, $J>0$, $E<0$, its unique global relative extension $r$ with $\rho=|r|$ and polar lift $\theta$, the conic data
 $p,e,a,b,T$, the effective potential $U^{\mathrm{eff}}$ and the energy
 window $I_{0}$.
 
 [L1] Model and reduction ([[post-cm05-gravity]],
 [[post-cm05-central-model]], [[pthm-cm05-relative-reduction]],
-[[pthm-cm05-effective-potential]]): the relative coordinate $r$ of the
-motion is a central-force trajectory for $(\mu,u)$ with
+[[pthm-cm05-effective-potential]]): the relative coordinate of the motion and its global extension $r$ are central-force trajectories for $(\mu,u)$ with
 $u(\rho)=-\kappa/\rho$, and its $\rho=|r|$ solves the one-dimensional
 problem of mass $\mu$ in the potential $U^{\mathrm{eff}}$:
 $\mu\rho''=-(U^{\mathrm{eff}})'(\rho)$, with
@@ -226,13 +225,13 @@ and identify the time quadrature with the orbital period.
 
 3.1 Applying the action-variable theorem: by step 2.1 the datum $(J_{0},U^{\mathrm{eff}},\mu)$ satisfies the hypotheses of [L4] on $I_{0}=(E_{0},E_{1})$; hence $J_{\mathrm a}$ is $C^{1}$ on $I_{0}$ and $J_{\mathrm a}'(E)=T_{\mathrm{rad}}(E)/(2\pi)$ with the quadrature $T_{\mathrm{rad}}(E)=\sqrt{2\mu}\int_{r_{-}(E)}^{r_{+}(E)} \mathrm d\rho/\sqrt{E-U^{\mathrm{eff}}(\rho)}>0$, which is claim 2. [L4, step 2.1, algebra]
 
-3.2 The quadrature is the radial period: by [L1] the radial coordinate $\rho$ of the motion solves $\mu\rho''=-(U^{\mathrm{eff}})'(\rho)$ with $\tfrac12\mu(\rho')^{2}+U^{\mathrm{eff}}(\rho)=E$, so on every stretch on which $\rho$ is strictly monotone one has $\rho'\neq0$ and $(\rho')^{2}=2(E-U^{\mathrm{eff}}(\rho))/\mu$, i.e. $\rho'=\pm\sqrt{2(E-U^{\mathrm{eff}}(\rho))/\mu}$. On the stretch from $r_{-}(E)$ to $r_{+}(E)$ the coordinate $\rho$ is strictly increasing, so its inverse $\rho\mapsto t(\rho)$ is defined; by the one-variable inverse rule of [L3] it satisfies $t'(\rho)=1/\rho'(t(\rho))$, and the time elapsed is $\Delta t=t\bigl(r_{+}(E)\bigr)-t\bigl(r_{-}(E)\bigr) =\int_{r_{-}(E)}^{r_{+}(E)}\frac{\mathrm d\rho}{\rho'(t(\rho))} =\int_{r_{-}(E)}^{r_{+}(E)}\frac{\sqrt{\mu}\,\mathrm d\rho} {\sqrt{2(E-U^{\mathrm{eff}}(\rho))}},$ where the last equality substitutes the positive branch $\rho'=\sqrt{2(E-U^{\mathrm{eff}}(\rho))/\mu}$ along the increasing stretch. The decreasing stretch contributes the same amount by symmetry of the same substitution with the negative branch, and the radial oscillation has two turning points per period; hence its period is $2\Delta t=\sqrt{2\mu}\int_{r_{-}(E)}^{r_{+}(E)} \frac{\mathrm d\rho}{\sqrt{E-U^{\mathrm{eff}}(\rho)}}=T_{\mathrm{rad}}(E).$ [L1, L3, step 2.1, algebra]
+4.1 The quadrature measures one radial cycle: for $0<e<1$, choose a periastron time $t_-$ of the global extension, and let $t_+$ and $t_1$ be the unique times with polar-angle increments $\pi$ and $2\pi$ from it, respectively. These exist by the increasing bijection of [L2]. The conic formula of [L2] gives endpoint radii $r_-=p/(1+e)$, $r_+=p/(1-e)$, the roots of step 2.1 by the energy identity of [L1], and places $\rho$ strictly between them on each open leg. Energy then makes $\rho'$ nonzero there. At periastron $\rho'=0$ and $\rho''=-(U^{\mathrm{eff}})'(r_-)/\mu>0$, so continuity makes $\rho'>0$ immediately afterwards and throughout $(t_-,t_+)$, since it cannot change sign without vanishing. At apastron $\rho''=-(U^{\mathrm{eff}})'(r_+)/\mu<0$ gives $\rho'<0$ on $(t_+,t_1)$ by the same reasoning. On the increasing leg its inverse $t(\rho)$ is differentiable for $r_-<\rho<r_+$, with $t'(\rho)=\sqrt{\mu/2}/\sqrt{E-U^{\mathrm{eff}}(\rho)}$ by [L1] and the inverse rule in [L3]. For $0<\delta<(r_+-r_-)/2$, FTC on the interior compact interval gives $t(r_+-\delta)-t(r_-+\delta)=\sqrt{\mu/2}\int_{r_-+\delta}^{r_+-\delta}(E-U^{\mathrm{eff}}(\rho))^{-1/2}\,d\rho$. Letting $\delta\downarrow0$, continuity of the inverse at its endpoint limits gives $t_+-t_-$ on the left, and the convergent improper integral of step 3.1 gives the limit on the right. On the decreasing leg the same interior calculation with $t'(\rho)=-\sqrt{\mu/2}/\sqrt{E-U^{\mathrm{eff}}(\rho)}$ gives the identical duration $t_1-t_+$. Thus $t_1-t_-=T_{\mathrm{rad}}(E)$; no derivative or compact-interval substitution at a turning endpoint is used. [L1, L2, L3, step 2.1, step 3.1, algebra]
 
-4.1 Least period and the value of the derivative: by [L2] the radial coordinate satisfies $\rho(t+T)=\rho(t)$ with $T$ the orbital period of the conic data. Since $\theta:\mathbb{R}\to\mathbb{R}$ is a strictly increasing bijection with $\theta(t+T)=\theta(t)+2\pi$ and $\rho(t)=p/(1+e\cos(\theta(t)-\theta_{0}))$ with $0<e<1$, the periastron value $r_{-}(E)=p/(1+e)$ and the apastron value $r_{+}(E)=p/(1-e)$ are attained exactly once in every half-open interval of the form $[t_{0},t_{0}+T)$. Every positive period must carry a periastron time to another periastron time. The strictly increasing polar angle attains successive periastra at increments of $2\pi$, and $\theta(t+T)=\theta(t)+2\pi$ shows their successive times differ by $T$; hence any positive period is at least $T$. Since $T$ is a period, it is the least positive radial period. Therefore $T_{\mathrm{rad}}(E)=T$ by step 3.2, and $J_{\mathrm a}'(E)=\frac{T}{2\pi}=\frac{\mu ab}{J} =\sqrt{\frac{\mu}{\kappa}}\,a^{3/2},$ where the last identity uses $J=\sqrt{\mu\kappa a(1-e^{2})}$ and $b=a\sqrt{1-e^{2}}$: explicitly $\mu ab/J=\mu a^{2}\sqrt{1-e^{2}}/\sqrt{\mu\kappa a(1-e^{2})} =\sqrt{\mu/\kappa}\,a^{3/2}$. Squaring $T=2\pi\sqrt{\mu/\kappa}a^{3/2}$ returns $T^{2}=4\pi^{2}\mu a^{3}/\kappa$. This is claim 3. [L2, step 3.1, step 3.2, algebra]
+5.1 Least period and the value of the derivative: by [L2] the radial coordinate satisfies $\rho(t+T)=\rho(t)$ with $T$ the orbital period of the conic data. Since $\theta:\mathbb{R}\to\mathbb{R}$ is a strictly increasing bijection with $\theta(t+T)=\theta(t)+2\pi$ and $\rho(t)=p/(1+e\cos(\theta(t)-\theta_{0}))$ with $0<e<1$, the periastron value $r_{-}(E)=p/(1+e)$ and the apastron value $r_{+}(E)=p/(1-e)$ are attained exactly once in every half-open interval of the form $[t_{0},t_{0}+T)$. Every positive period must carry a periastron time to another periastron time. The strictly increasing polar angle attains successive periastra at increments of $2\pi$, and $\theta(t+T)=\theta(t)+2\pi$ shows their successive times differ by $T$; hence any positive period is at least $T$. Since $T$ is a period, it is the least positive radial period. Therefore $T_{\mathrm{rad}}(E)=T$ by step 4.1, and $J_{\mathrm a}'(E)=\frac{T}{2\pi}=\frac{\mu ab}{J} =\sqrt{\frac{\mu}{\kappa}}\,a^{3/2},$ where the last identity uses $J=\sqrt{\mu\kappa a(1-e^{2})}$ and $b=a\sqrt{1-e^{2}}$: explicitly $\mu ab/J=\mu a^{2}\sqrt{1-e^{2}}/\sqrt{\mu\kappa a(1-e^{2})} =\sqrt{\mu/\kappa}\,a^{3/2}$. Squaring $T=2\pi\sqrt{\mu/\kappa}a^{3/2}$ returns $T^{2}=4\pi^{2}\mu a^{3}/\kappa$. This is claim 3. [L2, step 3.1, step 4.1, algebra]
 
-5.1 Sharpness: if $e=0$ then $r_{-}(E)=r_{+}(E)=a=r_{*}$ and $E=U^{\mathrm{eff}}(r_{*})$, the lower endpoint of $I_{0}$; there is no energy interval on which two distinct simple turning points exist, so the hypothesis of [L4] fails, in agreement with the circular orbit having a constant radial coordinate and no radial oscillation. The case $J=0$ has no term $J^{2}/(2\mu\rho^{2})$ and no critical point with the stated two-sided conservation, so it is outside the example by hypothesis. This is claim 4. [L2, step 2.1, step 4.1]
+6.1 Sharpness: if $e=0$ then $r_{-}(E)=r_{+}(E)=a=r_{*}$ and $E=U^{\mathrm{eff}}(r_{*})$, the lower endpoint of $I_{0}$; there is no energy interval containing this circular energy on which two distinct simple turning points exist, so the hypothesis of [L4] fails, in agreement with the circular orbit having a constant radial coordinate and no radial oscillation. The case $J=0$ has no term $J^{2}/(2\mu\rho^{2})$ and no critical point with the stated two-sided conservation, so it is outside the example by hypothesis. This is claim 4. [L2, step 2.1, step 5.1]
 
-6.1 Claims 1-4 are verified by steps 1.1 and 2.1, by step 3.1, by steps 3.2 and 4.1, and by step 5.1 respectively; the example is verified. [step 1.1, step 2.1, step 3.1, step 3.2, step 4.1, step 5.1] ∎
+7.1 Claims 1-4 are verified by steps 1.1 and 2.1, by step 3.1, by steps 4.1 and 5.1, and by step 6.1 respectively; the example is verified. [step 1.1, step 2.1, step 3.1, step 4.1, step 5.1, step 6.1] ∎
 
 ## Remarks
 

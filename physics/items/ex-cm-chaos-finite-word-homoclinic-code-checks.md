@@ -50,9 +50,9 @@ $$F^n(z)\longrightarrow(r_+,r_+)\quad(n\to+\infty\ \text{and}\ n\to-\infty).$$
 
 [L2] Conjugacy and injectivity ([[thm-henon-coded-invariant-set-is-conjugate-to-shift]], [[lem-symbol-locality-gives-coding-continuity]]): $F^n(h(t))=h(S_\pm^nt)$ for all $t$ and $n$, and $h$ is injective; hence $F^m(h(s))=h(s)$ would force $S_\pm^ms=s$, and $h(s)=h(\bar{+1})$ would force $s=\bar{+1}$.
 
-[L3] The constant code ([[lem-coded-quadratic-recurrence-is-a-contraction]]): $h(\bar{+1})=(r_+,r_+)$ with $r_+=1+\sqrt{101}$.
+[L3] The constant code ([[lem-finite-word-deviations-give-homoclinic-orbits]], clause 1): $h(\bar{+1})=(r_+,r_+)$ with $r_+=1+\sqrt{101}$.
 
-[L4] Signs ([[def-bilateral-symbol-and-bounded-sequence-space]], [[thm-of-square-roots]], [[def-abs-value]]): $\operatorname{sign}x_n(t)=t_n$ for every code $t$ and every $n$; in particular $x_0(s)<0<r_+$ because $s_0=-1$ and $r_+>1>0$.
+[L4] Signs ([[lem-coded-quadratic-recurrence-is-a-contraction]], clause 4, [[thm-of-square-roots]], [[def-abs-value]]): $\operatorname{sign}x_n(t)=t_n$ for every code $t$ and every $n$; in particular $x_0(s)<0<r_+$ because $s_0=-1$ and $r_+>1>0$.
 
 
 

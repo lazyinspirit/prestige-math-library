@@ -17,7 +17,8 @@ deps:
     post-nrqm-framework-observable-and-probability,
     def-nrqm-framework-quantities-and-units,
     def-hilbert-space,
-    def-countable-choice
+    def-countable-choice,
+    def-axiom-of-choice
   ]
 dependency_roles:
   def-nrqm-identical-particles-framework-species-sectors-and-preparations: formulation-prerequisite
@@ -29,6 +30,7 @@ dependency_roles:
   def-nrqm-framework-quantities-and-units: formulation-prerequisite
   def-hilbert-space: mathematical-premise
   def-countable-choice: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -62,7 +64,11 @@ the observable and probability postulate
 [[post-nrqm-framework-observable-and-probability]] (P2) in the reading of
 [[def-nrqm-observables-framework-observable-and-outcome-law]], and the
 quantities and units of [[def-nrqm-framework-quantities-and-units]]. Assume
-the Axiom of Countable Choice ([[def-countable-choice]]).
+the Axiom of Countable Choice and the Axiom of Choice
+([[def-countable-choice]], [[def-axiom-of-choice]]). The latter is inherited
+from the general spectral-PVM construction in P2 and clause (b) of the
+observable definition used in clause (c) below; the finite joint-eigenspace
+decomposition in clause (d) requires no additional choice.
 
 **(b) The declared finite-mode model.** Fix $d\ge1$, a finite-dimensional
 complex Hilbert space $K$ of dimension $d$ ([[def-hilbert-space]]) with a
@@ -127,7 +133,8 @@ supported on $\Lambda_n$: the total number of particles read by the model is
 $n$ with certainty.
 
 **(f) Status and scope.** Clauses (a)-(e) fix the vocabulary of the model and
-read the cited spectral mathematics through P2; they add no assumption beyond
+read the cited spectral mathematics through P2 under the choice hypotheses of
+clause (a); they add no physical assumption beyond
 the sector declaration and the finite-mode idealization of clause (b). The
 occupation readouts are sector quantities in the sense of clause (e) of
 [[def-nrqm-identical-particles-framework-species-sectors-and-preparations]];
@@ -143,6 +150,7 @@ count, no detector response, no dynamics and no empirical claim is made.
   the sector, not a quantity of a labelled factor, and it is insensitive to
   which labels carry the occupied modes.
 - **Choice hypotheses.** The tensor construction and the sector projections
-  carry the Axiom of Countable Choice, which is declared in clause (a); the
-  finite spectral decomposition of clause (d) is finite-dimensional and uses
-  no further choice.
+  carry the Axiom of Countable Choice. The reading of the general spectral
+  construction through P2 additionally carries the Axiom of Choice; both
+  hypotheses are declared in clause (a). The finite spectral decomposition
+  of clause (d) uses no further choice.

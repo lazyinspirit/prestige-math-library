@@ -25,7 +25,6 @@ requires:
   - qm-framework-and-quantities
   - qm-state-geometry
   - qm-observables-and-born-probabilities
-  - qm-framework-and-quantities-examples
   - qm-measurement-and-instruments
 ---
 

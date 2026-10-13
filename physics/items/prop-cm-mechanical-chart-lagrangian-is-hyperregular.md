@@ -6,8 +6,9 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 2
-deps: [def-cm-time-dependent-lagrangian-and-action, def-cm-legendre-map-in-a-time-dependent-chart, lem-matrix-inversion-preserves-ck-regularity, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-determinant-multiplicative, cor-square-matrix-invertible-iff-determinant-is-a-unit, def-matrix-product-and-identity-matrix, def-invertible-matrix-and-general-linear-group, def-linear-map, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, def-euclidean-inner-product]
+deps: [thm-rank-nullity, def-cm-time-dependent-lagrangian-and-action, def-cm-legendre-map-in-a-time-dependent-chart, lem-matrix-inversion-preserves-ck-regularity, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-determinant-multiplicative, cor-square-matrix-invertible-iff-determinant-is-a-unit, def-matrix-product-and-identity-matrix, def-invertible-matrix-and-general-linear-group, def-linear-map, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, def-euclidean-inner-product]
 dependency_roles:
+  thm-rank-nullity: mathematical-premise
   def-cm-time-dependent-lagrangian-and-action: mathematical-premise
   def-cm-legendre-map-in-a-time-dependent-chart: mathematical-premise
   lem-matrix-inversion-preserves-ck-regularity: mathematical-premise
@@ -68,37 +69,19 @@ $$H(t,q,p)=\tfrac12\bigl(p-A(t,q)\bigr)^{\mathsf T}G(t,q)^{-1}\bigl(p-A(t,q)\big
 
 ## Facts & Assumptions
 
-**Given:** The $C^2$ fields $G,A,V$ with $G(t,q)$ symmetric positive definite, the Lagrangian
-$\mathcal L$ displayed above, and the Legendre map
-$\mathbb F_{\mathcal L}(t,q,v)=(t,q,\mathcal L_v(t,q,v))$.
+**Given:** The $C^2$ fields $G,A,V$ with $G(t,q)$ symmetric positive definite, the Lagrangian $\mathcal L$ displayed above, and the Legendre map $\mathbb F_{\mathcal L}(t,q,v)=(t,q,\mathcal L_v(t,q,v))$.
 
-[F1] Partial derivatives of a quadratic form: if $G$ is symmetric, then the gradient of
-$v\mapsto\tfrac12v^{\mathsf T}Gv$ is $v\mapsto Gv$, and the second derivative in $v$ is the
-constant matrix $G$; this is the sum and product rule applied to
-$\tfrac12\sum_{i,j}G_{ij}v_iv_j$ together with $G_{ij}=G_{ji}$
-([[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]],
-[[def-matrix-product-and-identity-matrix]]).
+[F1] Partial derivatives of a quadratic form: if $G$ is symmetric, then the gradient of $v\mapsto\tfrac12v^{\mathsf T}Gv$ is $v\mapsto Gv$, and the second derivative in $v$ is the constant matrix $G$; this is the sum and product rule applied to $\tfrac12\sum_{i,j}G_{ij}v_iv_j$ together with $G_{ij}=G_{ji}$ ([[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]], [[def-matrix-product-and-identity-matrix]]).
 
-[F2] Finite sums and products of $C^r$ Euclidean maps are $C^r$, and composites of composable
-$C^r$ maps are $C^r$ ([[thm-ck-euclidean-maps-closed-under-algebra-and-composition]],
-[[def-ck-euclidean-maps-and-diffeomorphisms]]). In particular $\mathcal L$ is $C^2$ because
-$G,A,V$ are.
+[F2] Finite sums and products of $C^r$ Euclidean maps are $C^r$, and composites of composable $C^r$ maps are $C^r$ ([[thm-ck-euclidean-maps-closed-under-algebra-and-composition]], [[def-ck-euclidean-maps-and-diffeomorphisms]]). In particular $\mathcal L$ is $C^2$ because $G,A,V$ are.
 
-[F3] A symmetric positive definite matrix is invertible: if $Gw=0$ then $w^{\mathsf T}Gw=0$, so
-$w=0$, and a linear map of $\mathbb R^n$ with trivial kernel is bijective
-([[def-invertible-matrix-and-general-linear-group]], [[def-linear-map]]).
+[F3] A symmetric positive definite matrix is invertible: if $Gw=0$ then $w^{\mathsf T}Gw=0$, so $w=0$, and a linear map of $\mathbb R^n$ with trivial kernel is bijective by [[thm-rank-nullity]] (zero kernel gives image dimension $n$); its linear inverse is two-sided ([[def-invertible-matrix-and-general-linear-group]], [[def-linear-map]]).
 
-[F4] Inversion preserves regularity: if the entries of $B:J\times U\to M_n(\mathbb R)$ are $C^r$
-and $\det B$ never vanishes, then the entries of $B^{-1}$ are $C^r$
-([[lem-matrix-inversion-preserves-ck-regularity]]). For $B=G$, invertibility holds by [F3], and
-$\det G\ne0$ because $\det(G)\det(G^{-1})=\det(GG^{-1})=\det(I_n)=1$ for an invertible $G$ with
-inverse $G^{-1}$ ([[thm-determinant-multiplicative]],
-[[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
+[F4] Inversion preserves regularity: if the entries of $B:J\times U\to M_n(\mathbb R)$ are $C^r$ and $\det B$ never vanishes, then the entries of $B^{-1}$ are $C^r$ ([[lem-matrix-inversion-preserves-ck-regularity]]). For $B=G$, invertibility holds by [F3], and $\det G\ne0$ because $\det(G)\det(G^{-1})=\det(GG^{-1})=\det(I_n)=1$ for an invertible $G$ with inverse $G^{-1}$ ([[thm-determinant-multiplicative]], [[cor-square-matrix-invertible-iff-determinant-is-a-unit]]).
 
 ## Proof
 
-**Proof technique:** direct; differentiate the quadratic Lagrangian, invert the velocity--momentum
-relation by positive definiteness, and complete the square.
+**Proof technique:** direct; differentiate the quadratic Lagrangian, invert the velocity--momentum relation by positive definiteness, and complete the square.
 
 1.1 By [F1] and [F2] the map $\mathcal L$ is $C^2$, its gradient in the velocity slot is $\mathcal L_v(t,q,v)=G(t,q)v+A(t,q)$ and the velocity Hessian is $\mathcal L_{vv}(t,q,v)=G(t,q)$. Since $G(t,q)$ is positive definite, it is invertible by [F3], so $\det\mathcal L_{vv}(t,q,v)=\det G(t,q)\ne0$; this proves clause 1. [F1, F2, F3, algebra]
 
@@ -110,14 +93,6 @@ relation by positive definiteness, and complete the square.
 
 ## Remarks
 
-- The case of a constant diagonal matrix $G=\operatorname{diag}(m_1,\dots,m_n)$ with $m_i>0$ and
-  $A=0$ gives $\mathcal L=\tfrac12\sum_im_i\dot q_i^2-V(q)$ and
-  $H=\tfrac12\sum_ip_i^2/m_i+V(q)$, the classical kinetic-plus-potential form. The proposition is
-  stated for a configuration- and time-dependent positive definite $G$, which is what the
-  consuming classical-mechanics items need for moving constraints and rotating frames.
+- The case of a constant diagonal matrix $G=\operatorname{diag}(m_1,\dots,m_n)$ with $m_i>0$ and $A=0$ gives $\mathcal L=\tfrac12\sum_im_i\dot q_i^2-V(q)$ and $H=\tfrac12\sum_ip_i^2/m_i+V(q)$, the classical kinetic-plus-potential form. The proposition is stated for a configuration- and time-dependent positive definite $G$, which is what the consuming classical-mechanics items need for moving constraints and rotating frames.
 
-- The covector field $A$ is a mathematical datum of the chart: it is allowed to depend on $(t,q)$
-  and enters the momentum as $p=Gv+A$. It is *not* an electromagnetic potential and no physical
-  interpretation of $A$ is asserted here; in particular $p$ is not $\text{mass}\times\text{velocity}$
-  unless $G$ is constant and $A=0$. The scope of these identifications is recorded in
-  [[rem-cm-scope-of-the-legendre-map]].
+- The covector field $A$ is a mathematical datum of the chart: it is allowed to depend on $(t,q)$ and enters the momentum as $p=Gv+A$. It is *not* an electromagnetic potential and no physical interpretation of $A$ is asserted here; in particular $p$ is not $\text{mass}\times\text{velocity}$ unless $G$ is constant and $A=0$. The scope of these identifications is recorded in [[rem-cm-scope-of-the-legendre-map]].

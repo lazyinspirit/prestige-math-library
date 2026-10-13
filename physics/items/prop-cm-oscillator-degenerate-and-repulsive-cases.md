@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 1
-deps: [def-cm-oscillator-model-and-phase-system, lem-cm-continuous-dependence-on-initial-data, thm-derivative-of-exponential, thm-algebra-of-derivatives, thm-chain-rule, cor-zero-derivative-implies-constant, cor-primitives-of-a-continuous-function, thm-exponential-is-strictly-increasing, cor-exponential-is-a-bijection-onto-positive-reals, def-derivative, def-interval]
+deps: [def-cm-oscillator-model-and-phase-system, lem-cm-continuous-dependence-on-initial-data, thm-derivative-of-exponential, thm-algebra-of-derivatives, thm-chain-rule, cor-zero-derivative-implies-constant, cor-primitives-of-a-continuous-function, thm-exponential-is-strictly-increasing, cor-exponential-is-a-bijection-onto-positive-reals, def-derivative, def-interval, def-oriented-integral]
 dependency_roles:
   def-cm-oscillator-model-and-phase-system: mathematical-premise
   lem-cm-continuous-dependence-on-initial-data: mathematical-premise
@@ -19,6 +19,7 @@ dependency_roles:
   cor-exponential-is-a-bijection-onto-positive-reals: mathematical-premise
   def-derivative: mathematical-premise
   def-interval: mathematical-premise
+  def-oriented-integral: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -35,7 +36,9 @@ verification:
 
 ## Statement
 
-Let $m>0$, $c\ge0$, let $k\le0$, and consider the model $m\,x''+c\,x'+k\,x=0$ ([[def-cm-oscillator-model-and-phase-system]]). In the three cases below, $x:J\to\mathbb R$ runs over solutions on intervals $J\subseteq\mathbb R$ with nonempty interior.
+Let $m>0$, $c\ge0$, let $k\le0$, and consider the model $m\,x''+c\,x'+k\,x=0$ of [[def-cm-oscillator-model-and-phase-system]] with time domain $I=\mathbb R$ and forcing $f:\mathbb R\to\mathbb R$ identically zero. In the three cases below, $x:J\to\mathbb R$ runs over solutions on intervals $J\subseteq\mathbb R$ with nonempty interior.
+
+A local solution here may have any interval $J\subseteq\mathbb R$ with nonempty interior, with domain-relative derivatives at included endpoints. It has a unique extension to the global family below. A **maximal solution** means one that has no solution extension to a strictly larger interval; the maximal solutions of this global autonomous equation are precisely the family members on $\mathbb R$. For a homogeneous model restricted to a time domain $I$, its solutions have $J\subseteq I$ and are restrictions of these same global members; their extensions solve the all-$\mathbb R$ equation.
 
 1. **Double zero root ($k=0$, $c=0$).** Then on every such interval $J$, $x$ solves the model if and only if $x(t)=A+Bt$ for some $A,B\in\mathbb R$; each such local solution is the restriction of a unique global member of this family. For every datum $(x_0,v_0)$ there is a unique global solution on $\mathbb R$ with $x(0)=x_0$, $x'(0)=v_0$, namely $x(t)=x_0+v_0t$.
 2. **Simple zero root ($k=0$, $c>0$).** Then on every such interval $J$, $x$ solves the model if and only if
@@ -47,9 +50,9 @@ for some $A,B\in\mathbb R$; each such local solution is the restriction of a glo
 
 ## Facts & Assumptions
 
-**Given:** The parameters $m>0$, $c\ge0$, $k\le0$, the model of [[def-cm-oscillator-model-and-phase-system]] with phase field $G_0(x,v)=(v,-(cv+kx)/m)$, and the constants $\lambda_\pm$ of case 3.
+**Given:** The parameters $m>0$, $c\ge0$, $k\le0$, the model of [[def-cm-oscillator-model-and-phase-system]] with $I=\mathbb R$, $f\equiv0$ and phase field $G_0(x,v)=(v,-(cv+kx)/m)$, and the constants $\lambda_\pm$ of case 3.
 
-[F1] The model, its solutions and the phase-plane system are those of [[def-cm-oscillator-model-and-phase-system]]; $x$ is a solution on $J$ exactly when $t\mapsto(x(t),x'(t))$ solves $z'=G_0(z)$ on $J$, and for $k\le0$ the field $G_0(x,v)=(v,-(cv+kx)/m)$ is linear, hence continuous and globally Lipschitz in the state variable. [given]
+[F1] The model, its solutions and the phase-plane system are those of [[def-cm-oscillator-model-and-phase-system]] with $I=\mathbb R$ and $f\equiv0$; $x$ is a solution on $J$ exactly when $t\mapsto(x(t),x'(t))$ solves $z'=G_0(z)$ on $J$, and for $k\le0$ the field $G_0(x,v)=(v,-(cv+kx)/m)$ is linear, hence continuous and globally Lipschitz in the state variable. [given]
 
 [F2] Local uniqueness: [[lem-cm-continuous-dependence-on-initial-data]] in the form used before: for the Lipschitz field $G_0$, any two solutions of $z'=G_0(z)$ defined on a common interval and taking the same value at one point agree on that interval (this is its "exactly one solution through given data with graph in a Picard-Lindelof cylinder" clause together with the cylinder-local uniqueness, applied along the interval). [given]
 
@@ -57,7 +60,7 @@ for some $A,B\in\mathbb R$; each such local solution is the restriction of a glo
 
 [F4] A differentiable function on an interval with identically zero derivative is constant ([[cor-zero-derivative-implies-constant]]). [def-interval]
 
-[F5] Fundamental theorem of calculus for continuous integrands: if $G$ is a primitive of a continuous $u$ on an interval containing $a$ and $t$, then $\int_a^tu=G(t)-G(a)$ ([[cor-primitives-of-a-continuous-function]]).
+[F5] Fundamental theorem of calculus for continuous integrands: if $G$ is a primitive of a continuous $u$ on an interval containing $a$ and $t$, then for $a<t$ the evaluation clause of [[cor-primitives-of-a-continuous-function]] gives $\int_a^tu=G(t)-G(a)$. For $t<a$, [[def-oriented-integral]] gives $\int_a^tu=-\int_t^au=-(G(a)-G(t))$ by the same clause on $[t,a]$; for $t=a$ both sides vanish. Thus the formula holds for every ordering of $a,t$.
 
 [F6] The real exponential is strictly increasing, and its image is $(0,\infty)$. [thm-exponential-is-strictly-increasing, cor-exponential-is-a-bijection-onto-positive-reals]
 
@@ -71,4 +74,4 @@ for some $A,B\in\mathbb R$; each such local solution is the restriction of a glo
 
 1.3 Case $k<0$. [assume-case 3] Here $c^2-4mk>c^2\ge0$, so $\sqrt{c^2-4mk}>c$ and $\lambda_+>0>\lambda_-$; the completing-square identity $m\lambda^2+c\lambda+k=m\bigl[(\lambda+\frac{c}{2m})^2-\frac{c^2-4mk}{4m^2}\bigr]$ shows that $\lambda_\pm$ are exactly the two real roots of the characteristic polynomial. For a real root $\mu$, $t\mapsto e^{\mu t}$ solves the model because $m\mu^2+c\mu+k=0$ and $(e^{\mu t})''=\mu^2e^{\mu t}$ by [F3]; by linearity every $Ae^{\lambda_+t}+Be^{\lambda_-t}$ solves it. Finally $e^{\lambda_+t}\to+\infty$ as $t\to+\infty$: given $R>0$, surjectivity in [F6] gives $u$ with $e^u>R$, and monotonicity gives $e^{\lambda_+t}\ge e^u>R$ for all $t\ge u/\lambda_+$. [given, F3, F6, algebra]
 
-2.1 Uniqueness and exhaustiveness. [cases-exhaustive: $k=0,c=0$; $k=0,c>0$; $k<0$] Cases 1 and 2 exhaust the arbitrary-interval solution sets by steps 1.1 and 1.2. In case 3 choose any $t_0\in J^\circ$. The value/derivative matrix of $e^{\lambda_+t}$ and $e^{\lambda_-t}$ at $t_0$ has determinant $(\lambda_--\lambda_+)e^{(\lambda_++\lambda_-)t_0}\ne0$, so a unique global family member $y$ matches $(x(t_0),x'(t_0))$. By [F1] the full phase curves solve the same system, and [F2] gives equality on $J$: cylinder-local uniqueness propagates on the connected interior using the closed-and-open set where both phase components agree, then extends to included endpoints by continuity. Thus $x=y|_J$. Each explicit family is defined on $\mathbb R$, its coefficient/data map at zero is invertible, and these exhaust all solutions, proving global existence and uniqueness for prescribed data. The repulsive member with data $(1,\lambda_+)$ grows without bound by step 1.3. [step 1.1, step 1.2, step 1.3, F1, F2, F3, algebra] ∎
+2.1 Uniqueness and exhaustiveness. [cases-exhaustive: $k=0,c=0$; $k=0,c>0$; $k<0$] Cases 1 and 2 exhaust the arbitrary-interval solution sets by steps 1.1 and 1.2. In case 3 choose any $t_0\in J^\circ$. The value/derivative matrix of $e^{\lambda_+t}$ and $e^{\lambda_-t}$ at $t_0$ has determinant $(\lambda_--\lambda_+)e^{(\lambda_++\lambda_-)t_0}\ne0$, so a unique global family member $y$ matches $(x(t_0),x'(t_0))$. By [F1] the full phase curves solve the same system, and [F2] gives equality on $J$: cylinder-local uniqueness propagates on the connected interior using the closed-and-open set where both phase components agree, then extends to included endpoints by continuity. Thus $x=y|_J$. Each explicit family is defined on $\mathbb R$, its coefficient/data map at zero is invertible, and these exhaust all solutions, proving global existence and uniqueness for prescribed data. The repulsive member with data $(1,\lambda_+)$ grows without bound by step 1.3. Because every interval solution has a unique all-$\mathbb R$ extension and $\mathbb R$ has no larger real time interval, these global family members are exactly the maximal solutions. Restricting them to $J\subseteq I$ gives the solutions of a restricted homogeneous model on $I$. [step 1.1, step 1.2, step 1.3, F1, F2, F3, algebra] ∎

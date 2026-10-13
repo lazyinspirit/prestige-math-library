@@ -1,0 +1,1001 @@
+[
+  {
+    "order": 197,
+    "id": "qm-controlled-approximations",
+    "kind": "A",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Controlled Approximations",
+    "companion": "qm-controlled-approximations-examples",
+    "requires": [
+      "qm-central-potentials-and-hydrogen",
+      "qm-harmonic-oscillator",
+      "qm-math-fock-and-equilibrium",
+      "qm-math-controlled-dynamics",
+      "qm-framework-and-quantities",
+      "qm-state-geometry",
+      "qm-observables-and-born-probabilities",
+      "qm-autonomous-dynamics",
+      "qm-massive-particle-kinematics",
+      "qm-one-dimensional-potentials",
+      "qm-math-coulomb"
+    ],
+    "items": [
+      {
+        "id": "lem-nrqm-approximations-scaled-line-model-correspondence",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Nondimensionalisation of the one-dimensional stationary equation and of the WKB exponent",
+        "statement": "Let $\\ell>0$ and $E_\\star>0$ be real reference scales, let $m>0$ and\n$\\hbar>0$ be real, and define\n$$h:=\\frac{\\hbar}{\\ell\\sqrt{2mE_\\star}}>0 .$$\nLet $I\\subseteq\\mathbb R$ be a nonempty open interval, let\n$W\\in C^2(I;\\mathbb R)$, let $\\lambda\\in\\mathbb R$, and let $u:I\\to\\mathbb C$\nbe a function. Then:\n\n(a) $u$ is of class $C^2$ on $I$ and satisfies\n$$u''(\\xi)=\\frac{W(\\xi)-\\lambda}{h^2}\\,u(\\xi)\\qquad(\\xi\\in I)$$\nif and only if the function $\\psi:\\ell I\\to\\mathbb C$, $\\psi(x):=u(x/\\ell)$,\nis of class $C^2$ on the open interval $\\ell I=\\{\\ell\\xi:\\xi\\in I\\}$ and\nsatisfies\n$$-\\frac{\\hbar^2}{2m}\\,\\psi''(x)+E_\\star W(x/\\ell)\\,\\psi(x)=E_\\star\\lambda\\,\\psi(x) \\qquad(x\\in\\ell I);$$\n\n(b) if $a<b$ are points of $I$, then each of the following identities holds\nunder its indicated strict-sign hypothesis:\n\n(i) if $W(\\xi)-\\lambda>0$ for every $\\xi\\in[a,b]$, then\n$$\\frac1h\\int_a^b\\sqrt{W(\\xi)-\\lambda}\\,d\\xi =\\frac1\\hbar\\int_{\\ell a}^{\\ell b}\\sqrt{2m\\bigl(E_\\star W(x/\\ell)-E_\\star\\lambda\\bigr)}\\,dx ;$$\n\n(ii) if $\\lambda-W(\\xi)>0$ for every $\\xi\\in[a,b]$, then\n$$\\frac1h\\int_a^b\\sqrt{\\lambda-W(\\xi)}\\,d\\xi =\\frac1\\hbar\\int_{\\ell a}^{\\ell b}\\sqrt{2m\\bigl(E_\\star\\lambda-E_\\star W(x/\\ell)\\bigr)}\\,dx .$$\n\nAll square roots here are the nonnegative real square roots of strictly\npositive numbers. Part (i) is the forbidden-region exponent identity; part\n(ii) is the allowed-region phase identity.\n\nThe identities are statements about the displayed functions and integrals\nonly. The number $h$ is dimensionless because $\\hbar$ is in $\\mathrm{J\\,s}$\nand $\\ell\\sqrt{2mE_\\star}$ is in $\\mathrm{kg\\,m^2\\,s^{-1}}=\\mathrm{J\\,s}$;\nno physical interpretation, no approximation and no error estimate is\nasserted here.",
+        "strategy": "direct",
+        "deps": [
+          "def-derivative",
+          "thm-chain-rule",
+          "cor-one-dimensional-change-of-variables-with-absolute-derivative"
+        ],
+        "dependency_roles": {
+          "def-derivative": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "cor-one-dimensional-change-of-variables-with-absolute-derivative": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 0,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 11.6 printed pages 253-254 (PDF pages 261-262): the WKBJ equation d^2 psi/dx^2 = -k^2 psi with k^2 = 2m(E-V)/hbar^2 and the phase phi(x) = int k dx",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "R. Fitzpatrick, Quantum Mechanics (University of Texas at Austin, author-hosted course text), Section 5.4 'WKB Approximation' printed and PDF pages 70-72 (the one-dimensional WKB solution with the local wavenumber and the phase integral, in the same reduced equation)",
+              "url": "https://farside.ph.utexas.edu/teaching/qmech/qmech.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-nrqm-approximations-finite-rank-gapped-cluster-projection",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Finite-rank gapped spectral cluster under a bounded perturbation",
+        "deps": [
+          "def-countable-choice",
+          "def-hilbert-space",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "def-resolvent-and-spectrum-of-a-closed-unbounded-operator",
+          "def-projection-valued-measure",
+          "lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases",
+          "thm-circle-integrals-of-integer-monomials",
+          "thm-cauchy-integral-formula-circle"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-hilbert-space": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-resolvent-and-spectrum-of-a-closed-unbounded-operator": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus": "mathematical-premise",
+          "cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases": "mathematical-premise",
+          "thm-circle-integrals-of-integer-monomials": "mathematical-premise",
+          "thm-cauchy-integral-formula-circle": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "statement": "Assume Countable Choice ([[def-countable-choice]]). Let $H$ be an arbitrary complex Hilbert space ([[def-hilbert-space]]) and $H_0=H_0^*$ a self-adjoint operator on its exact dense domain $D=D(H_0)$ ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]]). Let $E\\in\\mathbb R$ be an isolated eigenvalue with $\\operatorname{dist}(E,\\sigma(H_0)\\setminus\\{E\\})\\ge g>0$, and let its orthogonal spectral projection $P_0=E_{H_0}(\\{E\\})$ have finite rank $r\\ge1$. The PVM and gap calculus are those of [[lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus]]. Let $V=V^*\\in\\mathcal B(H)$ and $v=\\|V\\|\\ge0$ ([[def-bounded-linear-operator]], [[def-operator-norm]]). Put $H_\\lambda=H_0+\\lambda V$ on $D$, and define\n$$\\Omega_v=\\begin{cases}\\{\\lambda\\in\\mathbb C:|\\lambda|<g/(2v)\\},&v>0,\\\\\\mathbb C,&v=0.\\end{cases}$$\nFor $\\lambda\\in\\Omega_v$ write $q_\\lambda=2|\\lambda|v/g<1$, $\\Gamma=\\{z:|z-E|=g/2\\}$ oriented counterclockwise, and $\\Delta=\\{z:|z-E|<g/2\\}$.\n\n**(a) Resolvent and exact domain.** $H_\\lambda$ is closed and densely defined on $D$. Every $z\\in\\Gamma$ is a resolvent point, with the convention $R_\\lambda(z)=(z-H_\\lambda)^{-1}:H\\to D$ of [[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]], and\n$$R_\\lambda(z)=R_0(z)\\sum_{k\\ge0}(\\lambda VR_0(z))^k,\\qquad \\|R_\\lambda(z)\\|\\le\\frac{2/g}{1-q_\\lambda},\\qquad \\|R_\\lambda(z)-R_0(z)\\|\\le\\frac2g\\frac{q_\\lambda}{1-q_\\lambda}.$$\nThe series converges in operator norm uniformly on $\\Gamma$ and locally uniformly in $\\lambda\\in\\Omega_v$.\n\n**(b) Finite-rank holomorphic cluster.** The norm contour integral\n$$P_\\lambda=\\frac1{2\\pi i}\\oint_\\Gamma R_\\lambda(z)\\,dz$$\nis a bounded idempotent of rank exactly $r$ throughout $\\Omega_v$, with $P_{\\lambda=0}=P_0$ and $\\|P_\\lambda-P_0\\|\\le q_\\lambda/(1-q_\\lambda)$. It is holomorphic in operator norm. Its range $M_\\lambda=P_\\lambda H$ lies in $D$ and is invariant under $H_\\lambda$, and $P_\\lambda H_\\lambda=H_\\lambda P_\\lambda$ on $D$. Both $H_\\lambda P_\\lambda\\in\\mathcal B(H)$ and $P_\\lambda:H\\to(D,\\|x\\|+\\|H_0x\\|)$ are holomorphic in their respective operator norms.\n\n**(c) Exactly the enclosed spectrum.** Let $A_\\lambda=H_\\lambda|_{M_\\lambda}:M_\\lambda\\to M_\\lambda$. Then\n$$\\sigma(H_\\lambda)\\cap\\Delta=\\sigma(A_\\lambda)\\subset\\Delta.$$\nThis is a nonempty finite set of at most $r$ eigenvalues. The restriction of $w-H_\\lambda$ to $\\ker P_\\lambda$ has a bounded two-sided inverse on its exact domain $D\\cap\\ker P_\\lambda$ for every $w\\in\\Delta$. Consequently all generalized eigenvectors at an enclosed eigenvalue belong to $M_\\lambda$; their eigenspaces and generalized eigenspaces are those of this finite-dimensional restriction.\n\n**(d) Real coupling and zero perturbation.** For real $\\lambda$, $H_\\lambda$ is self-adjoint on $D$. For real $\\lambda\\in\\Omega_v$, $P_\\lambda=E_{H_\\lambda}((E-g/2,E+g/2))$ is the orthogonal projection on the entire enclosed spectral cluster ([[def-projection-valued-measure]]). If $v=0$, then $V=0$, $H_\\lambda=H_0$ and $P_\\lambda=P_0$ for every complex coupling, with $A_\\lambda=E I_{M_0}$ and enclosed spectrum $\\{E\\}$.\n\nNo separability or arbitrary-index Axiom of Choice is assumed. The claim supplies a cluster and its finite restriction; for $r>1$ it supplies no ordering or individually holomorphic scalar eigenvalue branches.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 6.6: contour perturbation; finite-rank extension proved locally here",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-nrqm-approximations-framework-variational-trial-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The declared variational trial reading: assigned energy observable, form domain, trial value, bottom and gap",
+        "statement": "**(a) Framework data.** Adopt the state and composition postulate P1, the\nobservable and probability postulate P2 and the autonomous-dynamics postulate\nP4 ([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]]) for a declared system, in the\nstate reading of [[def-nrqm-state-geometry-framework-state-space]], the sharp\nobservable reading of\n[[def-nrqm-observables-framework-observable-and-outcome-law]] and the\nevolution reading of [[def-nrqm-autonomous-dynamics-framework-evolution]];\nunits are those of [[def-nrqm-framework-quantities-and-units]]. Assume the\nAxiom of Countable Choice and the Axiom of Choice as the choice hypotheses of\nthe cited mathematical suppliers ([[def-countable-choice]],\n[[def-axiom-of-choice]]).\n\n**(b) Assigned energy observable.** As an additional model assumption of the\npair, fix a self-adjoint operator $H:D(H)\\subseteq\\mathfrak H\\to\\mathfrak H$ on\nthe declared state space $\\mathfrak H$ and **declare** the pair\n$(H,\\mathrm J)$ to be the system's sharp energy observable in the sense of\n[[def-nrqm-observables-framework-observable-and-outcome-law]] clause (a); this\nidentification of the operator with the energy of the system is an assumption\nof the model, not a consequence of P1, P2 or P4. Assume $H$ is **bounded\nbelow**: there is a real $c$ with $\\langle Hu,u\\rangle\\ge c\\|u\\|^{2}$ for every\n$u\\in D(H)$. The spectrum $\\sigma(H)$ is the set of the cited spectral\ntheorem, and the **model bottom** is\n$$E_{0}:=\\inf\\sigma(H)\\in[c,+\\infty),$$\nread in joules. An assignment of a concrete material system to the pair\n$(H,\\mathfrak H)$ is a tested identification in the sense of the preparation\nand apparatus discipline P7 and is not made here.\n\n**(c) Form domain and trial value.** Let $Q(H):=D\\bigl((H-cI)^{1/2}\\bigr)$ and\n$q_{H}$ be the form domain and the closed semibounded form of\n[[lem-spectral-form-domain-and-core-of-a-semibounded-operator]] for the lower\nbound $c$ of clause (b), with\n$$q_{H}[u]=\\int_{\\mathbb R}\\lambda\\,dE_{u}(\\lambda)\\qquad(u\\in Q(H)),$$\n$E$ the projection-valued measure of $H$ and $E_{u}(B)=\\langle E(B)u,u\\rangle$\n([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]],\n[[def-projection-valued-measure]]). The definition uses the facts, proved by\nthat lemma, that $q_H$ does not depend on the choice of the lower bound $c$, that\n$D(H)$ is dense in $Q(H)$, and that $q_{H}[u]=\\langle Hu,u\\rangle$ for\n$u\\in D(H)$. A **trial vector** of the model is a vector $u\\in Q(H)$ with\n$\\|u\\|=1$; its **trial value** is $q_{H}[u]$, read in joules. For a trial\nvector that lies in $D(H)$, the trial value is the mean energy of the pure\npreparation $[u]$ under the observable $(H,\\mathrm J)$ in the moment reading of\n[[pthm-nrqm-observables-preparation-moments]]; for a general trial vector in\n$Q(H)\\setminus D(H)$ the trial value is the form value and is not asserted to\nbe the mean of any outcome law.\n\n**(d) Bottom gap and discrete ladder.** If the bottom is an isolated spectral\nvalue, declare a **gap** to be a real $g>0$ with\n$$\\sigma(H)\\cap(E_{0},E_{0}+g)=\\varnothing,$$\nand put $P:=E(\\{E_{0}\\})$ for the bottom spectral projection. The **discrete\nspectrum below the essential spectrum** is the part of\n$\\sigma_{\\mathrm d}(H)$ of\n[[def-discrete-and-essential-spectrum-of-a-self-adjoint-operator]] below\n$\\Lambda:=\\inf\\sigma_{\\mathrm{ess}}(H)$, listed with multiplicity in\nnondecreasing order as $E_{1}\\le E_{2}\\le\\cdots$, with the convention\n$E_{n}:=\\Lambda$ once the list is exhausted, $\\inf\\varnothing=+\\infty$. The\ndefinition asserts neither that $E_{0}$ is an eigenvalue, nor that any\neigenvector exists, nor that $E_{0}=E_{1}$.\n\n**(e) Scope.** Clauses (a)-(d) are a reading of the framework's state,\nobservable and dynamics postulates together with the declared operator $H$;\nthey assert nothing about whether a preparation attains the trial value, about\nthe behaviour of any preparation under time evolution beyond P4, about\nequilibration, environmental coupling, measurement or apparatus, and about any\nmeasured energy. All spectral statements are statements about the declared\noperator.",
+        "strategy": "n/a",
+        "deps": [
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-state-geometry-framework-state-space",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-autonomous-dynamics-framework-evolution",
+          "pthm-nrqm-observables-preparation-moments",
+          "lem-spectral-form-domain-and-core-of-a-semibounded-operator",
+          "def-discrete-and-essential-spectrum-of-a-self-adjoint-operator",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "def-projection-valued-measure",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-state-geometry-framework-state-space": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+          "pthm-nrqm-observables-preparation-moments": "physical-result",
+          "lem-spectral-form-domain-and-core-of-a-semibounded-operator": "mathematical-premise",
+          "def-discrete-and-essential-spectrum-of-a-self-adjoint-operator": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.2 printed page 212 (PDF page 220): Rayleigh's theorem, the upper bound <H> >= E0 for any state and the variational principle for a trial wavefunction",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Section 5 printed pages 19-21 (PDF pages 18-20): the trial-wavefunction upper bound E_gs <= <H>_psi (5.13) and the unnormalised functional F[psi] (5.20)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 4.3 printed pages 117-119 (PDF pages 129-131): the min-max theorem below the essential spectrum and the form-domain reading of the trial family",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The variational trial reading of a declared system of the framework: a self-adjoint assigned energy observable H bounded below, its form domain Q(H) and form q_H supplied by the cited spectral-form mathematics, the model bottom E(0) = inf sigma(H), an isolated bottom with a declared gap g and its spectral projection, the discrete eigenvalue ladder below the essential spectrum, and the declared vocabulary of trial vector and trial value. The definition asserts nothing about whether the bottom is attained, about any eigenvector, about any laboratory realization or identification, and about any measurement, apparatus or sampling model."
+      },
+      {
+        "id": "def-nrqm-approximations-framework-perturbed-family-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The declared perturbed-family model: bounded self-adjoint perturbation, isolated gapped label and followed spectral label",
+        "statement": "**(a) Framework data.** Adopt P1, P2 and P4\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]]) for a declared system, with the\nstate, sharp-observable and evolution readings of\n[[def-nrqm-observables-framework-observable-and-outcome-law]] and\n[[def-nrqm-autonomous-dynamics-framework-evolution]]; units are those of\n[[def-nrqm-framework-quantities-and-units]]. Assume the Axiom of Countable\nChoice and the Axiom of Choice ([[def-countable-choice]],\n[[def-axiom-of-choice]]) as the choice hypotheses of the cited mathematical\nsuppliers.\n\n**(b) The perturbed family.** As an additional model assumption of the pair,\nfix a self-adjoint operator $H_{0}:D(H_{0})\\subseteq\\mathfrak H\\to\\mathfrak H$\non the declared state space, **declare** $(H_{0},\\mathrm J)$ to be the\nunperturbed sharp energy observable,\nfix a bounded self-adjoint operator $V\\in\\mathcal B(\\mathfrak H)$\n([[def-bounded-linear-operator]]) with\n$$v:=\\|V\\|<\\infty$$\n([[def-operator-norm]]) and fix a real **coupling** $\\lambda$ (dimensionless:\n$\\lambda V$ is read in joules). Declare the **perturbed family**\n$$H(\\lambda):=H_{0}+\\lambda V,\\qquad D(H(\\lambda)):=D(H_{0}),$$\nto be the model's sharp energy observable at coupling $\\lambda$. Since $V$ is\n$H_{0}$-bounded with $H_{0}$-bound $0\\le a<1$ (the bound inequality holds with\n$a=0$ and $b=v$), the Kato-Rellich theorem applies and $H(\\lambda)$ is\nself-adjoint on $D(H_{0})$ for every real $\\lambda$\n([[thm-kato-rellich]], [[def-symmetric-self-adjoint-and-essentially-self-adjoint]]).\nThis self-adjointness is a supplied theorem about the declared operators; the\nreading of the family as the system's energy is the model assumption.\n\n**(c) The gapped label.** Fix an isolated eigenvalue $E\\in\\mathbb R$ of $H_{0}$\nof finite multiplicity $r\\ge1$ with gap\n$$\\operatorname{dist}\\bigl(E,\\sigma(H_{0})\\setminus\\{E\\}\\bigr)\\ge g>0,$$\nand put $P_{0}:=E_{H_{0}}(\\{E\\})$ and $Q_{0}:=I-P_{0}$\n([[def-discrete-and-essential-spectrum-of-a-self-adjoint-operator]],\n[[def-projection-valued-measure]],\n[[def-resolvent-and-spectrum-of-a-closed-unbounded-operator]]). The\ndefinitions used by the pair are those of the cited suppliers:\n\n(i) for real $\\lambda$ with $2|\\lambda|v/g<1$, the **followed spectral cluster** is the spectrum of $H(\\lambda)$ inside $|z-E|<g/2$, and\n$$P_\\lambda:=\\frac{1}{2\\pi i}\\oint_{|z-E|=g/2}(z-H(\\lambda))^{-1}\\,dz$$\n(counterclockwise) is its rank-$r$ orthogonal spectral projection, by [[lem-nrqm-approximations-finite-rank-gapped-cluster-projection]]. The cluster is a nonempty finite set and is exactly the spectrum of the restriction to $P_\\lambda\\mathfrak H$. In the simple case $r=1$ only, write $E_\\lambda$ for its unique spectral value; this scalar is the followed perturbed label of [[thm-nrqm-controlled-dynamics-contour-perturbation-projection]] and is analytic on the valid coupling disk. For $r>1$ no unique scalar label, branch ordering or individual scalar holomorphy is presumed. At $\\lambda=0$ the cluster is $\\{E\\}$ and its projection is $P_0$. If $v=0$, these data are constant for all real couplings, with no radius involving division by $v$.\n\n(ii) the **first-order operator** is the Hermitian operator\n$$V_{E}:=\\bigl(P_{0}VP_{0}\\bigr)\\big|_{P_{0}\\mathfrak H}$$\non the finite-dimensional eigenspace $P_{0}\\mathfrak H$, whose spectrum\n$\\operatorname{spec}(V_{E})\\subseteq[-v,v]$ is the model's first-order shift\ndata (joules per unit coupling);\n\n(iii) the **complementary reduced inverse**\n$$S:=\\iota_{Q_{0}}\\bigl(H_{0}|_{D(H_{0})\\cap Q_{0}\\mathfrak H}-E\\bigr)^{-1}Q_{0}$$\nis a bounded operator with the displayed exact complementary-domain inverse. For every finite multiplicity $r\\ge1$, including $v=0$, its existence follows by applying part (c) of [[lem-nrqm-approximations-finite-rank-gapped-cluster-projection]] at coupling $\\lambda=0$ and $w=E$: since the cluster projection is then $P_0$, the restriction of $E-H_0$ to $D(H_0)\\cap Q_0\\mathfrak H$ has a bounded two-sided inverse $R_Q(E):Q_0\\mathfrak H\\to D(H_0)\\cap Q_0\\mathfrak H$, and $S=-\\iota_{Q_0}R_Q(E)Q_0$. For $r=1$ the same operator is supplied by [[thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients]]. Its role is to record that the **whole** complementary spectral subspace, continuum included, contributes to the second-order data.\n\n**(d) Scope.** Clauses (a)-(c) cover bounded perturbations of a self-adjoint\noperator and a fixed isolated finite-multiplicity label only. The definition\nasserts no time-dependent perturbation, no adiabatic ramping of $\\lambda$, no\nstatement that a preparation occupies the branch of $E_{\\lambda}$ or of any\neigenvalue of $V_{E}$, no branch-population or relaxation statement, no\nmeasurement and no identification of the model with a laboratory system; the\nlabels $E_{\\lambda}$ are spectral data of the declared family.",
+        "strategy": "n/a",
+        "deps": [
+          "lem-nrqm-approximations-finite-rank-gapped-cluster-projection",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-autonomous-dynamics-framework-evolution",
+          "def-bounded-linear-operator",
+          "def-operator-norm",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+          "def-projection-valued-measure",
+          "def-resolvent-and-spectrum-of-a-closed-unbounded-operator",
+          "def-discrete-and-essential-spectrum-of-a-self-adjoint-operator",
+          "thm-kato-rellich",
+          "thm-nrqm-controlled-dynamics-contour-perturbation-projection",
+          "thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "lem-nrqm-approximations-finite-rank-gapped-cluster-projection": "mathematical-premise",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+          "def-bounded-linear-operator": "mathematical-premise",
+          "def-operator-norm": "mathematical-premise",
+          "def-symmetric-self-adjoint-and-essentially-self-adjoint": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-resolvent-and-spectrum-of-a-closed-unbounded-operator": "mathematical-premise",
+          "def-discrete-and-essential-spectrum-of-a-self-adjoint-operator": "mathematical-premise",
+          "thm-kato-rellich": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-contour-perturbation-projection": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 9,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.1 printed pages 203-211 (PDF pages 211-219): time-independent perturbation theory, the first- and second-order energy shifts, the quadratic Stark effect and the degenerate-subspace diagonalisation of the perturbation (9.4)-(9.18)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Chapter 6 printed pages 133-159 (PDF pages 145-171): relatively bounded operators, the Kato-Rellich theorem (Theorem 6.4) and norm resolvent convergence for bounded perturbations",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The perturbed-family model of a declared system of the framework: a self-adjoint unperturbed energy observable H0, a bounded self-adjoint perturbation V with norm v, the real coupling lambda and the family H(lambda) = H0 + lambda V declared as the model's energy observable at coupling lambda, together with a fixed isolated eigenvalue E of H0 of finite multiplicity with gap g, its spectral projection, the first-order operator P0VP0 on the eigenspace, and the followed perturbed spectral label supplied by the contour construction. The definition asserts no time-dependent perturbation, no ramping protocol, no occupation of any branch by a preparation, no measurement and no laboratory identification; all statements are about the declared operator family."
+      },
+      {
+        "id": "def-nrqm-approximations-framework-wkb-regime-model",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The declared WKB regime model: nondimensionalised line equation, turning points, phase integrals and the declared barrier transmission reading",
+        "statement": "**(a) Framework data and line model.** Adopt P1, P2, P4 and P5\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]), the\nstate and observable readings cited there, and the declared effective\none-dimensional line model\n[[def-nrqm-potentials-one-dimensional-line-model]] with a mass parameter\n$m>0$, spin label $s=0$, action constant $\\hbar>0$ and units from\n[[def-nrqm-framework-quantities-and-units]]\n([[def-nrqm-kinematics-framework-massive-spin-s-model]]). Assume the Axiom of\nCountable Choice and the Axiom of Choice as the choice hypotheses of the cited\nmathematical suppliers ([[def-countable-choice]],\n[[def-axiom-of-choice]]). Fix a real potential\n$$V\\in C_c^{5}(\\mathbb R;\\mathbb R)$$\n(five times continuously differentiable with compact support); it is real,\nbounded and measurable, so the line model's assigned energy operator $H_{V}$\nof its clause (c) is defined with domain $D(H_{V})=W^{2,2}(\\mathbb R;\\mathbb\nC)$, acts by $H_{V}f=-\\frac{\\hbar^{2}}{2m}D^{2}f+Vf$, and its stationary\nequation at energy $E$ reads\n$$-\\frac{\\hbar^{2}}{2m}\\,\\psi''+V\\psi=E\\psi$$\nfor classically $C^{2}$ solutions.\n\n**(b) Reference scales and nondimensionalisation.** As an additional model\nassumption of the pair fix a **reference length** $\\ell>0$ (metres) and a\n**reference energy** $E_\\star>0$ (joules), and put\n$$W(\\xi):=\\frac{V(\\ell\\xi)}{E_\\star},\\qquad \\lambda:=\\frac{E}{E_\\star},\\qquad h:=\\frac{\\hbar}{\\ell\\sqrt{2mE_\\star}} .$$\nThen $W\\in C_c^{5}(\\mathbb R;\\mathbb R)$ is dimensionless with support scaled by\n$\\ell$, and $h>0$ is dimensionless. By\n[[lem-nrqm-approximations-scaled-line-model-correspondence]] the physical\nstationary equation of clause (a) at energy $E$ is equivalent, under\n$x=\\ell\\xi$, $\\psi(\\ell\\xi)=u(\\xi)$, to the **dimensionless WKB equation**\n$$u''(\\xi)=\\frac{W(\\xi)-\\lambda}{h^{2}}\\,u(\\xi),\\qquad \\xi\\in I,$$\non every interval $I$. The exact transfer of the square-root action integrals\nover a subinterval $[x_a,x_b]=\\ell[a,b]$ is, when the indicated strict sign\nholds throughout $[a,b]$,\n$$\\frac1\\hbar\\int_{x_a}^{x_b}\\sqrt{2m(V(x)-E)}\\,dx=\\frac1h\\int_a^b\\sqrt{W(\\xi)-\\lambda}\\,d\\xi\\quad\\text{if }W-\\lambda>0,$$\n$$\\frac1\\hbar\\int_{x_a}^{x_b}\\sqrt{2m(E-V(x))}\\,dx=\\frac1h\\int_a^b\\sqrt{\\lambda-W(\\xi)}\\,d\\xi\\quad\\text{if }\\lambda-W>0;$$\nthese are respectively clauses (b)(i) and (b)(ii) of\n[[lem-nrqm-approximations-scaled-line-model-correspondence]]. The pair calls\n$h$ the model's **semiclassical parameter** and calls\n$h\\ll1$ the **semiclassical regime**; the physical content of the regime is\n$\\hbar\\ll\\ell\\sqrt{2mE_\\star}$, and every statement of the page's theorems is\nan exact statement about the family indexed by $h$, with the error bounds\nstated at each $h$. For the mathematical small-$h$ limit, hold the dimensionless profile $W$ and energy $\\lambda$ fixed and vary the parameter in $u''=(W-\\lambda)u/h^2$. A corresponding physical family with fixed $m,E_\\star,\\hbar$ is obtained by taking $\\ell_h=\\hbar/(h\\sqrt{2mE_\\star})$ and $V_h(x)=E_\\star W(x/\\ell_h)$, with $E=E_\\star\\lambda$; the physical width then changes, while the natural action constant does not. A single originally chosen $V,\\ell,E_\\star$ supplies one member of this family.\n\n**(c) Turning points, regions and phase.** For the data $(W,\\lambda)$ put\n$$\\tau:=\\{\\xi\\in\\mathbb R: W(\\xi)=\\lambda\\}$$\nfor the set of **turning points**. A point $\\xi_{0}\\in\\tau$ is **simple** when\n$W'(\\xi_{0})\\ne0$. An open interval $J$ is an **allowed interval** when\n$W(\\xi)-\\lambda<0$ on $J$ (the dimensionless kinetic energy $-(W-\\lambda)$ is\npositive there), a **forbidden interval** when $W(\\xi)-\\lambda>0$ on\n$J$. On an allowed interval the model uses the local wavenumber\n$$p(\\xi):=\\sqrt{\\lambda-W(\\xi)}>0$$\nand the WKB phase $\\theta(\\xi):=\\int_{\\xi_{\\mathrm{ref}}}^{\\xi}p(s)\\,ds$ with a\ndeclared base point; on a forbidden interval the model uses\n$\\kappa(\\xi):=\\sqrt{W(\\xi)-\\lambda}>0$. The **WKB exponent** of a forbidden\ninterval $[\\xi_{a},\\xi_{b}]$ is\n$$S:=\\int_{\\xi_{a}}^{\\xi_{b}}\\sqrt{W(\\xi)-\\lambda}\\,d\\xi =\\frac{h}{\\hbar}\\int_{x_{a}}^{x_{b}}\\sqrt{2m(V(x)-E)}\\,dx,$$\nequivalently $S/h$ is the physical action in units of $\\hbar$. For a\nbarrier whose endpoints are simple turning points, the strict-sign hypothesis\nof clause (b)(i) fails at those endpoints; apply that clause on\n$[\\xi_a+\\delta,\\xi_b-\\delta]$ and let $\\delta\\downarrow0$. Both integrands\nextend continuously with value zero at the endpoints, so the omitted endpoint\nintegrals tend to zero. The\nthree declared regime hypotheses used by the page are:\n\n(W1) **Allowed-interval regularity**: $W\\in C^{2}$ on a neighbourhood of\n$[a,b]$ and $\\lambda-W\\ge\\delta>0$ on $[a,b]$ for some $\\delta>0$ (no turning\npoint in the interval; the interval is allowed);\n\n(W2) **Separated simple turning points**: $W-\\lambda$ has exactly two zeros\n$\\xi_{a}<\\xi_{b}$ in $\\mathbb R$, both simple, is positive on\n$(\\xi_{a},\\xi_{b})$ and negative on the complement of $[\\xi_{a},\\xi_{b}]$\n(equivalently the physical barrier $V-E$ has exactly two simple zeros\nsurrounding a forbidden region and is negative outside);\n\n(W3) **Single simple turning point**: on an interval $[\\xi_{0}-r,\\xi_{0}+s]$\nthe equation $W-\\lambda$ has the single zero $\\xi_{0}$, it is simple, and\n$W-\\lambda<0$ on one side and $>0$ on the other.\n\n**(d) Declared barrier transmission reading.** Under (W2), $\\lambda>0$ because $W=0$ outside its compact support. Choose $R>0$ with $\\operatorname{supp}W\\subset(-R,R)$ and put $p_\\infty:=\\sqrt\\lambda$. The declared scattering solution is the exact $C^2$ solution of the dimensionless equation with boundary conditions\n$$u_h(\\xi)=p_\\infty^{-1/2}\\bigl(e^{ip_\\infty\\xi/h}+r(h)e^{-ip_\\infty\\xi/h}\\bigr)\\quad(\\xi\\le-R),\\qquad u_h(\\xi)=p_\\infty^{-1/2}t(h)e^{ip_\\infty\\xi/h}\\quad(\\xi\\ge R).$$\nThus there is one incoming wave from the left and none from the right. These data determine unique amplitudes by [[thm-nrqm-controlled-dynamics-two-turn-barrier-tunnelling-error]], instantiated with its mass parameter $1/2$, potential $W$ and energy $\\lambda$. Define the reference current $J_h(u):=h\\operatorname{Im}(\\overline u\\,u')$: the normalized exterior waves have currents $\\pm1$. The transmission coefficient is $T(h):=|t(h)|^2$, the ratio of transmitted to incoming reference current. The physical line-model current is a positive common multiple of $J_h$ under clause (b), so its ratio is also $T(h)$. Airy/WKB matching computes this exact boundary-defined quantity; it does not define an additional approximate scattering solution. No detector, wave packet, scattering experiment or measured count is asserted, and this clause does not by itself assert an asymptotic formula for $T(h)$.\n\n**(e) Scope.** The model concerns a declared spinless massive particle in the\ndeclared one-dimensional line model with a compactly supported $C^{5}$\npotential, at a fixed energy, in the nondimensionalised family of clause (b).\nIt asserts nothing about two- or three-dimensional scattering, about singular\nor non-smooth potentials, about wave packets, detectors or measurements, and\nabout any laboratory realization of the line model, the potential $V$ or the\nenergy $E$.",
+        "strategy": "n/a",
+        "deps": [
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "def-nrqm-framework-quantities-and-units",
+          "def-nrqm-kinematics-framework-massive-spin-s-model",
+          "def-nrqm-potentials-one-dimensional-line-model",
+          "lem-nrqm-approximations-scaled-line-model-correspondence",
+          "thm-nrqm-controlled-dynamics-two-turn-barrier-tunnelling-error",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "def-nrqm-kinematics-framework-massive-spin-s-model": "formulation-prerequisite",
+          "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+          "lem-nrqm-approximations-scaled-line-model-correspondence": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-two-turn-barrier-tunnelling-error": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 11.6 printed pages 253-254 (PDF pages 261-262): the WKBJ equation with k^2 = 2m(E-V)/hbar^2, the phase phi = int k dx, the slowly varying condition and the flux-conserving WKBJ wavefunction",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "R. Fitzpatrick, Quantum Mechanics (University of Texas at Austin, author-hosted course text), Sections 5.4-5.6 printed and PDF pages 70-75: 5.4 WKB Approximation pp. 70-72, 5.5 Cold Emission pp. 72-73, 5.6 Alpha Decay pp. 73-75 (WKB wavefunctions in allowed and forbidden regions, turning points and barrier transmission)",
+              "url": "https://farside.ph.utexas.edu/teaching/qmech/qmech.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.7 printed pages 214-220 (PDF pages 226-232): the spectra and asymptotic behaviour of one-dimensional Schrodinger operators, one turning point and the transmission setup",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The WKB regime model of a declared spinless one-dimensional massive particle: a compactly supported C^5 potential in the declared line model, declared reference length and energy scales, the nondimensionalised stationary equation with explicit dimensionless semiclassical parameter h, the turning-point, allowed-region and forbidden-region vocabulary, the WKB phase integral and the declared barrier transmission reading. The definition asserts no approximation error (that belongs to the page's theorems), no detector, no wave packet and no laboratory potential; it states the exact nondimensionalisation correspondence proved by the cited lemma."
+      },
+      {
+        "id": "post-nrqm-approximations-static-finite-level-dipole-coupling",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Static finite-level electric-dipole coupling: compressed dipole of the declared two-body Coulomb model in a uniform field",
+        "statement": "Adopt as a physical assumption of the pair, additional to P1, P2 and P4 and\nvalid only for the declared finite-level model of this clause, the following\nstatic electric-dipole coupling. Assume the Axiom of Countable Choice and the\nAxiom of Choice as the choice hypotheses of the cited mathematical suppliers\n([[def-countable-choice]], [[def-axiom-of-choice]]).\n\n**(i) Declared charged pair and relative coordinate.** Take the declared\ntwo-body Coulomb model of\n[[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clause (d): two\ndistinguishable spinless particles with mass parameters $m_{1},m_{2}>0$ and\nopposite charges $-q$ and $+q$, $q>0$ (coulombs), with the relative coordinate\n$r=x_{1}-x_{2}$ and the centre-of-mass/relative unitary\n$U_{\\Phi}$. Work in the relative-coordinate factor $L^{2}(\\mathbb\nR^{3};\\mathbb C)$ of that reading, with Coulomb mass parameter $m=\\mu:=m_{1}m_{2}/(m_{1}+m_{2})$, and with units as in\n[[def-nrqm-framework-quantities-and-units]].\n\n**(ii) Dipole operator.** Let $Q_{j}$, $j=1,2,3$, be the coordinate\nmultiplication operators on $L^{2}(\\mathbb R^{3};\\mathbb C)$ with maximal\ndomains $D(Q_{j})=\\{\\psi:\\xi_{j}\\psi\\in L^{2}\\}$ of\n[[thm-nrqm-coulomb-atomic-dipole-matrix-element-domain]] clause (a); they are\nself-adjoint and proper densely defined. The model's **dipole operator** is\nthe triple\n$$D_{j}:=-q\\,Q_{j}\\qquad(j=1,2,3),$$\nbecause the dipole of charges $-q$ at $x_{1}$ and $+q$ at $x_{2}$ is\n$-qx_{1}+qx_{2}=-qr$: it points from the negative to the positive charge,\nopposite to the declared relative coordinate $r=x_{1}-x_{2}$. Each $D_{j}$ is\nself-adjoint on $D(Q_{j})$ and has unit $\\mathrm{C\\,m}$. This is the dipole of\nthe declared pair in its relative-coordinate reading; no multipole expansion,\nno field equation and no coupling to the centre-of-mass motion is assumed.\n\n**(iii) Finite-level truncation.** Fix, as part of the model specification, a\n**declared finite-dimensional subspace** $W\\subseteq D(H_\\kappa)\\cap D(Q_{1})\\cap D(Q_{2})\\cap\nD(Q_{3})$ of the relative-coordinate space with $D(H_\\kappa)=H^2(\\mathbb R^3;\\mathbb C)$ and $\\dim W=d<\\infty$, together\nwith an orthonormal basis of $W$. The model declares the **compressed dipole\nmatrix** on $W$,\n$$D^{W}_{j}:=\\Pi_{W}D_{j}\\big|_{W},$$\nwhere $\\Pi_{W}$ is the orthogonal projection onto $W$ and the restriction to\n$W$ is read in the declared orthonormal basis; $D^{W}_{j}$ is the finite\nHermitian $d\\times d$ matrix of the dipole component, with unit\n$\\mathrm{C\\,m}$, and it is bounded with norm at most $\\sup_{\\psi\\in\nW,\\|\\psi\\|=1}\\|D_{j}\\psi\\|$. The truncation and the basis are model\nassumptions: they are not derived from the Coulomb model, and they replace\nthe unbounded operator $D_{j}$ by its compression throughout this pair.\n\n**(iv) Static uniform field and interaction operator.** The external datum is\na **uniform static electric field value** $\\mathbf E_{\\rm ext}\\in\\mathbb\nR^{3}$, read in $\\mathrm{V\\,m^{-1}}$; it is prescribed, and no Maxwell\nequation, source model, propagation or back-reaction is assumed. The\n**finite-level static Stark model** is the finite-dimensional operator on $W$\n$$H_{S}(\\mathbf E_{\\rm ext}):=\\Pi_{W}H_{\\kappa}\\big|_{W} -\\sum_{j=1}^{3}E_{{\\rm ext},j}\\,D^{W}_{j},$$\nwhere the energy-domain condition of (iii) makes the compression defined,\nand $H_{\\kappa}=C_{\\mu}$ is the one-centre Coulomb energy operator with\nmass parameter $m=\\mu$ of the declared model, read on the relative-coordinate\nfactor through the angular/radial\nidentification used by the pair. The interaction term has unit\n$\\mathrm{C\\,m\\cdot V\\,m^{-1}}=\\mathrm J$ and is bounded Hermitian on $W$, so\n$H_{S}(\\mathbf E_{\\rm ext})$ is a bounded Hermitian $d\\times d$ matrix and\nthe Kato-Rellich and perturbation statements of the pair apply to it with a\nbounded perturbation; this identification of the matrix with the model's\nenergy on the truncated subspace is a model assumption.\n\n**(v) Scope and explicit exclusion.** Clauses (i)-(iv) are adopted model\nassumptions. They assert nothing about a laboratory atom, field or apparatus;\nno measured Stark shift is claimed; no transition, absorption or emission\nrate is defined; and no time dependence of the field is assumed. In\nparticular the postulate deliberately does **not** treat the uncompressed\nlinear potential $-\\mathbf E_{\\rm ext}\\cdot\\mathbf D$ as a bounded\nperturbation of $H_{\\kappa}$. For $\\mathbf E_{\\rm ext}\\ne0$, define this\ncomposite interaction to be the maximal multiplication operator\n$$M_{\\mathbf E}\\psi(\\mathbf r):=q\\mathbf E_{\\rm ext}\\cdot\\mathbf r\\,\\psi(\\mathbf r),\\qquad D(M_{\\mathbf E}):=\\{\\psi\\in L^2:(\\mathbf E_{\\rm ext}\\cdot\\mathbf r)\\psi\\in L^2\\};$$\nit agrees with $-\\sum_jE_{{\\rm ext},j}D_j$ on the common domain\n$\\bigcap_jD(D_j)$ and is unbounded because its real multiplier is\nunbounded. The common operator domain $D(H_{\\kappa})\\cap D(M_{\\mathbf E})$ contains\n$C_c^\\infty(\\mathbb R^3;\\mathbb C)$. Its lack of a lower bound can be demonstrated\nwithout assuming a full energy-form domain: let $\\mathbf E_{\\rm ext}\\ne0$,\n$\\widehat e=\\mathbf E_{\\rm ext}/|\\mathbf E_{\\rm ext}|$, choose a fixed\nsupport radius $\\rho>0$ in metres and normalized\n$\\varphi\\in C_c^\\infty(B(0,\\rho);\\mathbb C)$, and for each length $R>\\rho$ put\n$$\\psi_R(\\mathbf r):=\\varphi(\\mathbf r+R\\widehat e).$$\nThen $\\psi_R\\in C_c^\\infty(\\mathbb R^3;\\mathbb C)\\subset\nD(H_{\\kappa})\\cap D(M_{\\mathbf E})\\cap\\bigcap_{j=1}^3D(Q_j)$ and\n$\\|\\psi_R\\|_2=1$. On this common test domain define the quadratic\nexpectation\n$$\\mathcal Q_{\\mathbf E_{\\rm ext}}[\\psi]:=\\langle H_{\\kappa}\\psi,\\psi\\rangle+\\langle M_{\\mathbf E}\\psi,\\psi\\rangle.$$\nWith $\\mathbf s=\\mathbf r+R\\widehat e$, the Coulomb action and the\ntranslation-invariant kinetic expectation give\n$$\\mathcal Q_{\\mathbf E_{\\rm ext}}[\\psi_R]=\\frac{\\hbar^2}{2\\mu}\\int|\\nabla\\varphi(\\mathbf s)|^2d\\mathbf s-\\kappa\\int\\frac{|\\varphi(\\mathbf s)|^2}{|\\mathbf s-R\\widehat e|}d\\mathbf s+q\\mathbf E_{\\rm ext}\\cdot\\int\\mathbf s|\\varphi(\\mathbf s)|^2d\\mathbf s-qR|\\mathbf E_{\\rm ext}|.$$\nHere $-\\mathbf E_{\\rm ext}\\cdot\\mathbf D=q\\mathbf E_{\\rm ext}\\cdot\\mathbf r$\nbecause $\\mathbf D=-q\\mathbf r$ in the relative-coordinate convention.\nFor $R>\\rho$, the Coulomb integral is finite and at most $1/(R-\\rho)$,\nthe kinetic term is constant, and the other field term apart from\n$-qR|\\mathbf E_{\\rm ext}|$ is independent of $R$. Therefore\n$\\mathcal Q_{\\mathbf E_{\\rm ext}}[\\psi_R]\\to-\\infty$ as $R\\to\\infty$.\nThis proves unboundedness below of the displayed quadratic expectation on\nthe common test domain, so no quadratic form bounded below there can agree\nwith these values; no claim is made about a particular closed-form domain.\nThe uncompressed static-field\nmodel is outside the scope of every statement of this pair. Only the\ncompressed finite-level operator of clause (iv) is used.",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "thm-nrqm-coulomb-atomic-dipole-matrix-element-domain",
+          "def-nrqm-framework-quantities-and-units",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-nrqm-autonomous-dynamics-framework-evolution",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model": "formulation-prerequisite",
+          "thm-nrqm-coulomb-atomic-dipole-matrix-element-domain": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "formulation-prerequisite",
+          "post-nrqm-framework-observable-and-probability": "formulation-prerequisite",
+          "post-nrqm-framework-autonomous-dynamics": "formulation-prerequisite",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-nrqm-autonomous-dynamics-framework-evolution": "formulation-prerequisite",
+          "def-countable-choice": "formulation-prerequisite",
+          "def-axiom-of-choice": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.1.1 printed pages 205-206 (PDF pages 213-214): the energy change delta E = e(Phi(xp)-Phi(xe)) of the atom in an external field, the long-wavelength reduction delta E = er.E (9.13) and the perturbing term Delta = eEz (9.14)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 7 'Two State Systems', Section 5 'Ammonia molecule in an electric field' printed and PDF pages 11-16: the energy E = -mu.E of a dipole in an electric field (5.1), the two-state ammonia Hamiltonian H = E0 I - Delta sigma1 + muE sigma3 (5.2) and the exact eigenvalues E0 +/- sqrt(mu^2 E^2 + Delta^2) (5.3)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/7c376a3b5b27e5ea586a7e37b85a05d3_MIT8_05F13_Chap_07.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The static finite-level electric-dipole coupling model of the declared two-body Coulomb pair: the relative-coordinate dipole operator with components -q Q_j on their maximal L^2 domains, a declared finite-dimensional subspace of the relative-coordinate space, the compressed Hermitian dipole matrix, the uniform static field value and the bounded interaction -E . D added to the compressed Coulomb energy on the subspace. The postulate is a model assumption for the declared finite-level truncation; it asserts no Maxwell equation or source model, no propagation, no derivation of the truncation or of the field, no semibounded uncompressed model (the common test-domain expectations of H_kappa - E_ext . D are shown unbounded below for every nonzero uniform field), no transition rate and no measured shift."
+      },
+      {
+        "id": "pthm-nrqm-approximations-variational-bounds-and-min-max",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Variational trial bounds, gap-overlap control and the min-max characterisation of the declared model's discrete eigenvalues",
+        "statement": "Adopt the framework data and the declared variational trial model of\n[[def-nrqm-approximations-framework-variational-trial-model]]: a declared\nsystem with self-adjoint assigned energy observable $H$ on $\\mathfrak H$,\nbounded below by a real $c$, with model bottom $E_{0}=\\inf\\sigma(H)$, form\ndomain $Q(H)$, form $q_{H}$ and spectral projection-valued measure $E$; a\ntrial vector is a unit vector $u\\in Q(H)$ and its trial value is $q_{H}[u]$.\nAssume the Axiom of Countable Choice and the Axiom of Choice\n([[def-countable-choice]], [[def-axiom-of-choice]]) as the choice hypotheses\nof the cited spectral suppliers. Then:\n\n(a) *Trial lower bound.* For every trial vector $u\\in Q(H)$,\n$$q_{H}[u]\\ge E_{0},$$\nso every trial value is an upper bound for the model bottom; consequently\n$E_{0}=\\inf\\{q_{H}[u]:u\\in Q(H),\\ \\|u\\|=1\\}$.\n\n(b) *Gap-overlap control.* Suppose in addition that the bottom is isolated\nwith gap $g>0$ and let $P:=E(\\{E_{0}\\})$ (clause (d) of the model). Then for\nevery trial vector $u$ with $q_{H}[u]\\le E_{0}+\\varepsilon$, $\\varepsilon\\ge0$,\n$$\\bigl\\|(I-P)u\\bigr\\|^{2}\\le\\frac{\\varepsilon}{g};$$\nin particular, if $\\varepsilon<g$, then $Pu\\ne0$.\n\n(c) *Min-max.* Let $\\Lambda:=\\inf\\sigma_{\\mathrm{ess}}(H)$ and let\n$E_{1}\\le E_{2}\\le\\cdots$ be the discrete eigenvalue ladder of the model\nclause (d), with $E_{n}:=\\Lambda$ after exhaustion and $\\inf\\varnothing=+\\infty$.\nThen for every integer $n\\ge1$,\n$$E_{n}=\\inf_{\\substack{L\\subseteq Q(H)\\ \\text{linear}\\\\ \\dim L=n}}\\ \\sup_{\\substack{u\\in L\\\\ \\|u\\|=1}}q_{H}[u] =\\sup_{\\substack{F\\subseteq Q(H)\\ \\text{linear}\\\\ \\dim F\\le n-1}}\\ \\inf_{\\substack{u\\in Q(H)\\cap F^{\\perp}\\\\ \\|u\\|=1}}q_{H}[u],$$\nwith the infimum over an empty set read as $+\\infty$; moreover $E_{1}=E_{0}$,\nand when $E_{n}<\\Lambda$ both outer values are attained, respectively by a span\nof the first $n$ and a span of the first $n-1$ orthonormal eigenvectors.\n\n(d) *Consequence for trial subspaces.* For every linear subspace $L\\subseteq\nQ(H)$ of dimension $n\\ge1$ whose supremum is finite, $E_{n}\\le\\sup\\{q_{H}[u]:\nu\\in L,\\ \\|u\\|=1\\}$; for $n=1$ this is clause (a) with $u$ a unit vector of $L$.\n\n(e) *Reading and scope.* All numbers $E_{0}$, $E_{n}$, $q_{H}[u]$ are read in\njoules. For a trial vector in $D(H)$ the trial value is the mean energy of the\npure preparation in the moment reading of\n[[pthm-nrqm-observables-preparation-moments]]; for a trial vector in\n$Q(H)\\setminus D(H)$ it is a form value and no outcome-law mean is asserted.\nThe theorem asserts nothing about whether the infimum in (a) is attained,\nabout a ground eigenvector, about time evolution, equilibration or\nenvironmental coupling, and about any measured energy; it is a statement about\nthe declared operator $H$.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-approximations-framework-variational-trial-model",
+          "post-nrqm-framework-observable-and-probability",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "pthm-nrqm-observables-preparation-moments",
+          "thm-nrqm-fock-and-equilibrium-variational-ground-gap-overlap",
+          "thm-min-max-principle-below-essential-spectrum",
+          "lem-spectral-form-domain-and-core-of-a-semibounded-operator",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+          "def-projection-valued-measure",
+          "def-discrete-and-essential-spectrum-of-a-self-adjoint-operator",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-approximations-framework-variational-trial-model": "formulation-prerequisite",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "pthm-nrqm-observables-preparation-moments": "physical-result",
+          "thm-nrqm-fock-and-equilibrium-variational-ground-gap-overlap": "mathematical-premise",
+          "thm-min-max-principle-below-essential-spectrum": "mathematical-premise",
+          "lem-spectral-form-domain-and-core-of-a-semibounded-operator": "mathematical-premise",
+          "thm-spectral-theorem-for-unbounded-self-adjoint-operators": "mathematical-premise",
+          "def-projection-valued-measure": "mathematical-premise",
+          "def-discrete-and-essential-spectrum-of-a-self-adjoint-operator": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.2 printed pages 212-213 (PDF pages 220-221): Rayleigh's theorem, the bound <H> >= E0 and the variational principle with a parameter-dependent trial wavefunction",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 1 'Wave Mechanics', Section 5 printed pages 19-21 (PDF pages 18-20): E_gs <= <H>_psi for a normalised trial wavefunction (5.13) and the functional F[psi] (5.20)",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/61bc31b8d8bf0680c322733910a71aa0_MIT8_05F13_Chap_01.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 4.3 printed pages 117-119 (PDF pages 129-131): the min-max theorem (Theorem 4.10) with the form-domain remark, and Section 4.4 printed pages 119-121 (PDF pages 131-133): eigenspace estimates",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The variational and min-max statements of the declared trial model: every trial value is at least the model bottom E0, a trial value within epsilon of an isolated bottom with gap g forces ground-projection content at least 1 - epsilon/g, and the model's discrete eigenvalues below the essential spectrum are exactly the min-max values over trial subspaces of the form domain. All quantities are readings of the declared operator; no measurement, apparatus, sampling model or laboratory identification is asserted.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-nrqm-approximations-nondegenerate-perturbation-expansion",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Nondegenerate stationary perturbation of a simple gapped label: first- and second-order coefficients and an explicit cubic remainder",
+        "statement": "Adopt the framework data and the declared perturbed-family model of\n[[def-nrqm-approximations-framework-perturbed-family-model]] in the\n**simple-label case**: $H_{0}$ is self-adjoint on $D(H_{0})$, $V=V^{*}\\in\n\\mathcal B(\\mathfrak H)$ with $v=\\|V\\|\\ge0$, $H(\\lambda)=H_{0}+\\lambda V$ on\n$D(H_{0})$ for real $\\lambda$, and $E$ is an isolated eigenvalue of $H_{0}$ of\n**multiplicity one** with gap at least $g>0$,\n$\\operatorname{dist}(E,\\sigma(H_{0})\\setminus\\{E\\})\\ge g$. Let $\\psi_{0}$ be a\nnormalized eigenvector, $P_{0}\\psi_{0}=\\psi_{0}$, let\n$$S:=\\iota_{Q_{0}}\\bigl(H_{0}|_{D(H_{0})\\cap Q_{0}\\mathfrak H}-E\\bigr)^{-1}Q_{0}, \\qquad Q_{0}=I-P_{0},$$\nbe the reduced inverse of the model clause (c)(iii). In the branch $v>0$ put\n$$R:=\\frac{g}{8v}.$$\nThen clauses (a)-(e) hold for every real $\\lambda$ with $|\\lambda|<R$\nin this positive-norm branch; clause (f) covers $v=0$ independently of $R$:\n\n(a) $H(\\lambda)$ is self-adjoint on $D(H_{0})$; the model's followed label\n$E_{\\lambda}$ of the contour $|z-E|=g/2$ exists, is the unique spectral value\nof $H(\\lambda)$ inside that contour, is real, and its spectral projection is\nthe orthogonal rank-one projection\n$P_{\\lambda}=E_{H(\\lambda)}(\\{E_{\\lambda}\\})$;\n\n(b) the gauge-fixed eigenvector\n$$\\psi(\\lambda):=\\frac{P_{\\lambda}\\psi_{0}}{\\langle P_{\\lambda}\\psi_{0},\\psi_{0}\\rangle}$$\nis analytic in $\\lambda$, satisfies $\\langle\\psi(\\lambda),\\psi_{0}\\rangle=1$\nand $(H_{0}+\\lambda V)\\psi(\\lambda)=E_{\\lambda}\\psi(\\lambda)$, and\n$$q:=2|\\lambda|v/g\\le\\tfrac14,\\qquad \\|P_{\\lambda}-P_{0}\\|\\le\\tfrac13,\\qquad \\|\\psi(\\lambda)\\|\\le2 ;$$\n\n(c) the model's label identity\n$$E_{\\lambda}=\\bigl\\langle (H_{0}+\\lambda V)\\psi(\\lambda),\\psi_{0}\\bigr\\rangle =E+\\lambda\\langle V\\psi(\\lambda),\\psi_{0}\\rangle$$\nholds, so the deviation $\\lambda\\mapsto E_{\\lambda}-E$ of the model's energy\nlabel is controlled by the perturbation alone;\n\n(d) the exact coefficients are\n$$E'(0)=\\langle V\\psi_{0},\\psi_{0}\\rangle,\\qquad \\psi'(0)=-SV\\psi_{0},\\qquad E''(0)=-2\\langle VSV\\psi_{0},\\psi_{0}\\rangle,$$\nwith $|E'(0)|\\le v$, $\\|\\psi'(0)\\|\\le v/g$ and $|E''(0)|\\le2v^{2}/g$; the\nsecond-order coefficient involves the whole complementary spectral subspace of\n$H_{0}$ through $S$, continuum included;\n\n(e) the cubic remainder obeys\n$$\\left|E_{\\lambda}-E-\\lambda E'(0)-\\frac{\\lambda^{2}}{2}E''(0)\\right| \\le \\frac{Rv\\,(|\\lambda|/R)^{3}}{1-|\\lambda|/R},$$\nso at $|\\lambda|=R/2$ the bound is $g/32$ and for $|\\lambda|\\le R/2$ it is at\nmost $128v^{3}|\\lambda|^{3}/g^{2}$;\n\n(f) if $v=0$, that is $V=0$, then $P_{\\lambda}=P_{0}$, $E_{\\lambda}=E$ and\n$\\psi(\\lambda)=\\psi_{0}$ for every real $\\lambda$, and no radius involving\ndivision by $v$ is used in this branch;\n\n(g) the theorem is conditional on the strict positive gap, on the multiplicity\none of $E$ and on the boundedness of $V$; it asserts no unbounded or\ndegenerate perturbation theorem, no time-dependent perturbation, and no\nstatement about which branch of the family a preparation occupies.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-approximations-framework-perturbed-family-model",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "thm-kato-rellich",
+          "thm-nrqm-controlled-dynamics-contour-perturbation-projection",
+          "thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients",
+          "thm-nrqm-controlled-dynamics-analytic-perturbation-remainder",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-approximations-framework-perturbed-family-model": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "thm-kato-rellich": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-contour-perturbation-projection": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-simple-level-reduced-resolvent-coefficients": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-analytic-perturbation-remainder": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.1 printed pages 203-205 (PDF pages 211-213): the perturbative expansions (9.2)-(9.11), the first-order shift E_b = <E0|Delta|E0> (9.6) and the second-order shift (9.11), derived under the non-degeneracy assumption",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 6.6 printed pages 153-159 (PDF pages 165-171): strong and norm resolvent convergence and the analytic perturbation consequences for bounded perturbations",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The stationary perturbation statement for the declared perturbed-family model with a simple isolated label: self-adjointness of the family for real couplings, existence, uniqueness and reality of the followed label inside the gap contour, the exact first- and second-order energy coefficients with the reduced inverse of the complementary spectral subspace, and the explicit cubic remainder bound on the coupling disk. The theorem concerns spectral data of the declared operator family only; it asserts no ramping protocol, no branch population, no relaxation, no transition rate and no measurement.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-nrqm-approximations-degenerate-first-order-splitting",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Degenerate stationary perturbation: the perturbed eigenvalues stay within 4 lambda^2 v^2/g of the first-order shifts, and no branch relaxation is asserted",
+        "statement": "Adopt the framework data and the declared perturbed-family model of\n[[def-nrqm-approximations-framework-perturbed-family-model]] with $H_{0}$\nself-adjoint on $D(H_{0})$, $V=V^{*}\\in\\mathcal B(\\mathfrak H)$, $v=\\|V\\|>0$,\n$H(\\lambda)=H_{0}+\\lambda V$ on $D(H_{0})$ for real $\\lambda$, and an isolated\neigenvalue $E$ of $H_{0}$ of **finite multiplicity $r\\ge1$** with gap at\nleast $g>0$,\n$\\operatorname{dist}(E,\\sigma(H_{0})\\setminus\\{E\\})\\ge g$. Let\n$P_{0}=E_{H_{0}}(\\{E\\})$, $Q_{0}=I-P_{0}$, and\n$$V_{E}:=\\bigl(P_{0}VP_{0}\\bigr)\\big|_{P_{0}\\mathfrak H}$$\nthe first-order operator of the model clause (c)(ii). Assume the Axiom of\nCountable Choice and the Axiom of Choice as the choice hypotheses of the\nsuppliers. Then for every real $\\lambda$ with $|\\lambda|v<g/4$:\n\n(a) $H(\\lambda)$ is self-adjoint on $D(H_{0})$;\n\n(b) for every real $z$ with $|z-E|+|\\lambda|v\\le g/2$, the restricted\noperator $T_{\\lambda}(z):=Q_{0}(H(\\lambda)-z)Q_{0}$ on\n$Q_{0}D(H_{0})=D(H_{0})\\cap Q_{0}\\mathfrak H$ has a bounded two-sided inverse\n$B(z):Q_{0}\\mathfrak H\\to Q_{0}D(H_{0})$ with $\\|B(z)\\|\\le4/g$;\n\n(c) every real eigenvalue $z$ of $H(\\lambda)$ with eigenvector $\\psi\\ne0$\nand $|z-E|+|\\lambda|v\\le g/2$ lies within the first-order shift set:\n$$\\operatorname{dist}\\bigl(z,\\,E+\\lambda\\operatorname{spec}(V_{E})\\bigr) \\le\\frac{4\\lambda^{2}v^{2}}{g},$$\nwhere $\\operatorname{spec}(V_{E})\\subseteq[-v,v]$ is the spectrum of the\nHermitian operator $V_{E}$ on the $r$-dimensional eigenspace; moreover\n$P_{0}\\psi\\ne0$ for every such eigenvector. Every eigenvalue in the model's\nfollowed cluster inside $|z-E|<g/2$ lies in this controlled window and\ntherefore obeys the same bound;\n\n(d) *first-order content.* The eigenvalues of $V_{E}$ are the model's\nfirst-order shifts: the set $E+\\lambda\\operatorname{spec}(V_{E})$ has at most\n$r$ points, all within $|\\lambda|v$ of $E$; the entire followed cluster, and every other eigenvalue in the window of (c),\nare localised at distance $O(\\lambda^{2}v^{2}/g)$ from this set, and no\nordering or one-to-one correspondence between the $r$ spectral branches and\nthe points of $\\operatorname{spec}(V_{E})$ is asserted;\n\n(e) *No relaxation or selection.* The theorem is a statement about the\nspectra of the declared family. It asserts no instantaneous transition of any\npreparation to the branch of the smallest value of\n$\\operatorname{spec}(V_{E})$, no relaxation to a lowest branch, no\nequilibration and no measurement; which spectral subspace a preparation\noccupies is fixed by the preparation and by the evolution postulate P4 of the\ndeclared model, not by the label $E_{\\lambda}$;\n\n(f) the theorem is conditional on the strict positive gap, on the finite\nmultiplicity of $E$ and on the boundedness of $V$; it asserts nothing about\ndegenerate essential-spectrum labels, gap-closing families, unbounded\nperturbations or time-dependent couplings.",
+        "strategy": "direct",
+        "deps": [
+          "lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus",
+          "def-nrqm-approximations-framework-perturbed-family-model",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "thm-kato-rellich",
+          "thm-nrqm-controlled-dynamics-degenerate-feshbach-error",
+          "thm-self-adjoint-norm-and-spectrum-extrema",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus": "mathematical-premise",
+          "def-nrqm-approximations-framework-perturbed-family-model": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "thm-kato-rellich": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-degenerate-feshbach-error": "mathematical-premise",
+          "thm-self-adjoint-norm-and-spectrum-extrema": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 10,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.1.2 printed pages 206-208 (PDF pages 214-216): the failure of the non-degenerate expansion at a degenerate level, the diagonalisation of the perturbation eEz within the four-dimensional n=2 subspace and the eigenvalues +/-3eEa0 and 0",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 6.6 printed pages 153-159 (PDF pages 165-171): resolvent convergence, perturbed spectral projections and the localisation of perturbed eigenvalues for bounded perturbations",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The degenerate stationary perturbation statement for the declared perturbed-family model with an isolated finite-multiplicity label: self-adjointness of the family, the bounded reduced inverse on the complementary subspace, and the localisation of every perturbed eigenvalue in the controlled gap window within 4 lambda^2 v^2/g of the set of first-order shifts E + lambda spec(P0VP0). The theorem asserts no exact eigenvalue correspondence, no branch ordering, no instantaneous selection of the lowest branch, no relaxation and no measurement.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-nrqm-approximations-wkb-allowed-region-error",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "WKB approximation on an allowed interval of the declared regime model: explicit Gronwall error bound away from turning points",
+        "statement": "Adopt the declared WKB regime model of\n[[def-nrqm-approximations-framework-wkb-regime-model]] and let its data\n$V,m,\\hbar,\\ell,E_\\star,E,W,\\lambda,h$ be as in that model, with\nhypothesis (W1) on a closed interval $[a,b]\\subset\\mathbb R$: $W$ is $C^{2}$\non a neighbourhood of $[a,b]$ and $\\lambda-W(\\xi)\\ge\\delta>0$ for some\n$\\delta>0$ and all $\\xi\\in[a,b]$. Put\n$$p(\\xi):=\\sqrt{\\lambda-W(\\xi)}>0,\\qquad \\theta(\\xi):=\\int_{a}^{\\xi}p(s)\\,ds,\\qquad q(\\xi):=\\frac{3p'(\\xi)^{2}}{4p(\\xi)^{2}}-\\frac{p''(\\xi)}{2p(\\xi)},$$\nand\n$$w_{\\pm}(\\xi):=p(\\xi)^{-1/2}e^{\\pm i\\theta(\\xi)/h},\\qquad M(\\xi):=\\begin{pmatrix}w_{+}(\\xi)&w_{-}(\\xi)\\\\ w_{+}'(\\xi)&w_{-}'(\\xi)\\end{pmatrix}.$$\nLet $u\\in C^{2}([a,b];\\mathbb C)$ be an exact solution of the dimensionless\nmodel equation $u''=(W-\\lambda)u/h^{2}$ on $[a,b]$, and let\n$$c(\\xi)=M(\\xi)^{-1}\\begin{pmatrix}u(\\xi)\\\\ u'(\\xi)\\end{pmatrix}$$\nbe its coefficient curve. Then, with $\\|\\cdot\\|_{1}$ the $\\ell^{1}$ norm on\n$\\mathbb C^{2}$ and all quantities read in the model's units:\n\n(a) $\\|c(\\xi)\\|_{1}\\le\\|c(a)\\|_{1}\\exp\\bigl(h\\int_{a}^{\\xi}|q(s)|/p(s)\\,ds\\bigr)$\nfor every $\\xi\\in[a,b]$;\n\n(b) $\\|c(\\xi)-c(a)\\|_{1}\\le\\|c(a)\\|_{1}\\bigl(\\exp\\bigl(h\\int_{a}^{\\xi}|q(s)|/p(s)\\,ds\\bigr)-1\\bigr)$;\n\n(c) *pointwise wavefunction error.* With $\\Psi(\\xi):=c_{+}(a)w_{+}(\\xi)+\nc_{-}(a)w_{-}(\\xi)$ the leading WKB wave,\n$$|u(\\xi)-\\Psi(\\xi)|\\le p(\\xi)^{-1/2}\\|c(a)\\|_{1} \\Bigl(\\exp\\Bigl(h\\int_{a}^{\\xi}\\frac{|q(s)|}{p(s)}\\,ds\\Bigr)-1\\Bigr);$$\n\n(d) the estimate is exact at each fixed $h$; it degenerates as\n$p(\\xi)\\to0$ and therefore excludes turning points by hypothesis (W1). It\nasserts nothing about connecting asymptotics across a turning point, about\nbarrier transmission or reflection, about packets or detectors, and it makes\nno claim that the right-hand side is small unless the dimensionless quantity\n$h\\int_{a}^{b}|q|/p$ is actually small. The estimate is an error bound of\nGronwall type, not an asymptotic expansion, and the physical reading of the\ninterval $[a,b]$ is $[x_{a},x_{b}]=\\ell[a,b]$ in the line model with potential\n$V(\\ell\\xi)=E_\\star W(\\xi)$ and energy $E_\\star\\lambda$.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-approximations-framework-wkb-regime-model",
+          "lem-nrqm-approximations-scaled-line-model-correspondence",
+          "def-nrqm-framework-quantities-and-units",
+          "thm-nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation",
+          "thm-nrqm-controlled-dynamics-wkb-explicit-error",
+          "def-countable-choice",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves",
+          "def-bochner-integrable-function"
+        ],
+        "dependency_roles": {
+          "def-nrqm-approximations-framework-wkb-regime-model": "formulation-prerequisite",
+          "lem-nrqm-approximations-scaled-line-model-correspondence": "mathematical-premise",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "thm-nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-wkb-explicit-error": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves": "mathematical-premise",
+          "def-bochner-integrable-function": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Fitzpatrick, Quantum Mechanics (University of Texas at Austin, author-hosted course text), Section 5.4 'WKB Approximation' printed and PDF pages 70-72 (the WKB function in the classically allowed region, the amplitude condition and the validity discussion)",
+              "url": "https://farside.ph.utexas.edu/teaching/qmech/qmech.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 11.6 printed pages 253-254 (PDF pages 261-262): the slowly varying amplitude equation d ln S/dx = -(1/2) d ln k/dx, its integral and the flux-conserving WKBJ wavefunction (11.40)",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "The finite-interval WKB error statement for the declared WKB regime model: on a closed interval on which the dimensionless potential stays strictly below the energy (no turning point), any exact solution of the model equation is compared with its leading WKB wave, with the explicit Gronwall-type error bound of the cited theorem. The statement is exact at each value of the semiclassical parameter; it asserts no asymptotic connection across a turning point, no barrier transmission formula, no wave packet and no measurement.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-nrqm-approximations-turning-point-connection",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Airy connection across a single simple turning point of the declared regime model, with envelope error control",
+        "statement": "Adopt the declared WKB regime model of\n[[def-nrqm-approximations-framework-wkb-regime-model]] with its data\n$V,m,\\hbar,\\ell,E_\\star,W,\\lambda,h$, and assume hypothesis (W3) at a\nturning point $\\xi_{0}$ with $W'(\\xi_{0})>0$: on an interval\n$[\\xi_{0}-r_{0},\\xi_{0}+s_{0}]$ with $r_{0},s_{0}>0$ the function\n$W-\\lambda$ has the single zero $\\xi_{0}$, is strictly negative on\n$[\\xi_{0}-r_{0},\\xi_{0})$ (allowed side) and strictly positive on\n$(\\xi_{0},\\xi_{0}+s_{0}]$ (forbidden side). Write, for the two sides,\n$$\\theta(\\xi):=\\frac1h\\int_{\\xi}^{\\xi_{0}}\\sqrt{\\lambda-W(\\xi')}\\,d\\xi' \\quad(\\xi<\\xi_{0}),\\qquad \\Sigma(\\xi):=\\frac1h\\int_{\\xi_{0}}^{\\xi}\\sqrt{W(\\xi')-\\lambda}\\,d\\xi' \\quad(\\xi>\\xi_{0}),$$\nthe nonnegative dimensionless phase and exponent measured from the turning\npoint into the allowed and forbidden sides. Let\n$$\\zeta(\\xi):=\\operatorname{sign}(\\xi-\\xi_{0})\\Bigl[\\frac32\\Bigl|\\int_{\\xi_{0}}^{\\xi}\\sqrt{|W(\\xi')-\\lambda|}\\,d\\xi'\\Bigr|\\Bigr]^{2/3}$$\nbe the Liouville coordinate. Write $R$ for the continuous remainder in the\ntransformed equation $w''=[\\zeta/h^{2}+R(\\zeta)]w$ and put\n$\\eta_-:=\\zeta(\\xi_{0}-r_{0})$, $\\eta_+:=\\zeta(\\xi_{0}+s_{0})$. Define\n$$\\varepsilon(h):=C_{\\mathrm{ker}}h\\int_{\\eta_-}^{\\eta_+}\\frac{|R(v)|}{\\sqrt{|v|+h^{2/3}}}\\,dv,$$\nwhere $C_{\\mathrm{ker}}$ is the kernel constant of\n[[thm-nrqm-controlled-dynamics-stable-weighted-airy-volterra-connection]];\nboundedness of $R$ on the fixed transformed interval gives\n$\\varepsilon(h)\\le C_{1}h$ for some $C_{1}>0$ depending only on the fixed data.\nThere are constants $0<C_{0}<\\infty$ and $0<C_{\\mathrm{err}}<\\infty$,\ndepending only on $W,\\lambda,\\xi_{0},r_{0},s_{0}$ (not on $h$), and $h_0>0$,\nsuch that for every $0<h<h_0$:\n\n(a) *Decaying connection.* There is an exact solution $u_{\\mathrm{dec}}$ of\nthe model equation $u''=(W-\\lambda)u/h^{2}$ on\n$[\\xi_{0}-r_{0},\\xi_{0}+s_{0}]$ and a real constant $C\\ne0$ with\n$$u_{\\mathrm{dec}}(\\xi)=C\\,(W(\\xi)-\\lambda)^{-1/4} e^{-\\Sigma(\\xi)}\\bigl(1+\\delta_{\\mathrm{f}}(\\xi)\\bigr)\\qquad(\\xi>\\xi_{0}),$$\n$$u_{\\mathrm{dec}}(\\xi)=2C\\,(\\lambda-W(\\xi))^{-1/4} \\Bigl(\\sin\\bigl(\\theta(\\xi)+\\tfrac{\\pi}{4}\\bigr)+\\delta_{\\mathrm{a}}(\\xi)\\Bigr) \\qquad(\\xi<\\xi_{0}),$$\nwhere the absolute errors obey, for $\\xi\\ne\\xi_{0}$ away from the turning\npoint,\n$$|\\delta_{\\mathrm{f}}(\\xi)|\\le C_{0}\\bigl(\\varepsilon(h)+h/|\\zeta(\\xi)|^{3/2}\\bigr), \\qquad \\bigl|\\delta_{\\mathrm{a}}(\\xi)\\bigr|\\le C_{0}\\bigl(\\varepsilon(h)+h/|\\zeta(\\xi)|^{3/2}\\bigr),$$\n\n(b) *Growing connection.* There is a second exact solution\n$u_{\\mathrm{grow}}$, linearly independent of $u_{\\mathrm{dec}}$, with\n$$u_{\\mathrm{grow}}(\\xi)=C'\\,(W(\\xi)-\\lambda)^{-1/4} e^{+\\Sigma(\\xi)}\\bigl(1+\\delta_{\\mathrm{f,grow}}(\\xi)\\bigr)\\qquad(\\xi>\\xi_{0}),$$\n$$u_{\\mathrm{grow}}(\\xi)=C'\\,(\\lambda-W(\\xi))^{-1/4} \\Bigl(\\cos\\bigl(\\theta(\\xi)+\\tfrac{\\pi}{4}\\bigr)+\\delta_{\\mathrm{a,grow}}(\\xi)\\Bigr) \\qquad(\\xi<\\xi_{0}),$$\nfor a real constant $C'\\ne0$, with\n$|\\delta_{\\mathrm{f,grow}}(\\xi)|,|\\delta_{\\mathrm{a,grow}}(\\xi)|\n\\le C_{0}(\\varepsilon(h)+h/|\\zeta(\\xi)|^{3/2})$ away from $\\xi_{0}$;\n\n(c) *Derivative and envelope control.* Let\n$A_h(\\zeta):=A(\\zeta/h^{2/3})$ and $B_h(\\zeta):=B(\\zeta/h^{2/3})$ be the Airy\nfunctions in [[thm-nrqm-controlled-dynamics-airy-envelopes-and-asymptotic-coefficients]],\nlet $a(\\xi):=(\\zeta'(\\xi))^{-1/2}$, and put\n$$\nf_h(\\zeta):=(1+|\\zeta|/h^{2/3})^{-1/4},\\qquad \\phi_h(\\zeta):=\\frac{2(\\zeta_+)^{3/2}}{3h}.\n$$\nDefine the decaying and growing envelopes by\n$$\ne_h^-(\\zeta):=f_h(\\zeta)e^{-\\phi_h(\\zeta)},\\quad d_h^-(\\zeta):=h^{-2/3}f_h(\\zeta)^{-1}e^{-\\phi_h(\\zeta)},\\quad e_h^+(\\zeta):=f_h(\\zeta)e^{\\phi_h(\\zeta)},\\quad d_h^+(\\zeta):=h^{-2/3}f_h(\\zeta)^{-1}e^{\\phi_h(\\zeta)}.\n$$\nFor each transformed coordinate $\\eta\\in\\zeta([\\xi_0-r_0,\\xi_0+s_0])$, define\n$w_{\\mathrm{dec}}(\\eta):=u_{\\mathrm{dec}}(\\zeta^{-1}(\\eta))/a(\\zeta^{-1}(\\eta))$\nand $w_{\\mathrm{grow}}(\\eta):=u_{\\mathrm{grow}}(\\zeta^{-1}(\\eta))/a(\\zeta^{-1}(\\eta))$.\nFor the solutions chosen as in the proof, the following transformed derivative\nerror bounds hold on the full transformed interval, with an error constant\n$C_{\\mathrm{err}}$ depending only on the fixed data and not on $h$:\n$\n|w_{\\mathrm{dec}}'-A_h'|\\le C_{\\mathrm{err}} d_h^-(e^{\\varepsilon(h)}-1),\\qquad |w_{\\mathrm{grow}}'-B_h'|\\le C_{\\mathrm{err}} d_h^+(e^{\\varepsilon(h)}-1).\n$\nHere\n$\\varepsilon(h):=\\varepsilon_h$ is the control parameter of [F3] and satisfies\n$\\varepsilon(h)\\le C_1h$; the\ncorresponding value errors are bounded by\n$C_{\\mathrm{err}}e_h^-(e^{\\varepsilon(h)}-1)$ and\n$C_{\\mathrm{err}}e_h^+(e^{\\varepsilon(h)}-1)$.\nHere primes on $w_{\\mathrm{dec}},w_{\\mathrm{grow}},A_h,B_h$ denote\n$\\eta$-derivatives, and primes on $a,\\zeta$ denote $\\xi$-derivatives.\nConsequently,\n$$\n|u_{\\mathrm{dec}}'(\\xi)-a'(\\xi)A_h(\\zeta(\\xi))-a(\\xi)\\zeta'(\\xi)A_h'(\\zeta(\\xi))|\\le C_{\\mathrm{err}}\\bigl(|a'(\\xi)|e_h^-(\\zeta(\\xi))+|a(\\xi)|\\zeta'(\\xi)d_h^-(\\zeta(\\xi))\\bigr)(e^{\\varepsilon(h)}-1),\n$$\n$$\n|u_{\\mathrm{grow}}'(\\xi)-a'(\\xi)B_h(\\zeta(\\xi))-a(\\xi)\\zeta'(\\xi)B_h'(\\zeta(\\xi))|\\le C_{\\mathrm{err}}\\bigl(|a'(\\xi)|e_h^+(\\zeta(\\xi))+|a(\\xi)|\\zeta'(\\xi)d_h^+(\\zeta(\\xi))\\bigr)(e^{\\varepsilon(h)}-1).\n$$\nFor $\\rho(\\xi):=W(\\xi)-\\lambda>0$ on the forbidden side and\n$p(\\xi):=\\sqrt{\\lambda-W(\\xi)}>0$ on the allowed side, the scaled slope\nforms on every compact section bounded away from $\\xi_0$ are\n$$\nh\\rho(\\xi)^{-1/4}u_{\\mathrm{dec}}'(\\xi)=C e^{-\\Sigma(\\xi)}\\bigl(-1+\\delta_{\\mathrm{f,dec}}^{(1)}(\\xi)\\bigr),\\qquad\nh\\rho(\\xi)^{-1/4}u_{\\mathrm{grow}}'(\\xi)=C'e^{\\Sigma(\\xi)}\\bigl(1+\\delta_{\\mathrm{f,grow}}^{(1)}(\\xi)\\bigr),\n$$\n$$\nhp(\\xi)^{-1/2}u_{\\mathrm{dec}}'(\\xi)=2C\\bigl(-\\cos(\\theta(\\xi)+\\tfrac{\\pi}{4})+\\delta_{\\mathrm{a,dec}}^{(1)}(\\xi)\\bigr),\\qquad\nhp(\\xi)^{-1/2}u_{\\mathrm{grow}}'(\\xi)=C'\\bigl(\\sin(\\theta(\\xi)+\\tfrac{\\pi}{4})+\\delta_{\\mathrm{a,grow}}^{(1)}(\\xi)\\bigr).\n$$\nEach new slope error is absolute and satisfies\n$|\\delta_{\\mathrm{f,dec}}^{(1)}|,|\\delta_{\\mathrm{f,grow}}^{(1)}|,\n|\\delta_{\\mathrm{a,dec}}^{(1)}|,|\\delta_{\\mathrm{a,grow}}^{(1)}|\n\\le C_0(\\varepsilon(h)+h/|\\zeta(\\xi)|^{3/2})$; in particular no relative\nerror at a sine or cosine zero is asserted.\n\n(d) *Content of the connection.* The factors $2$ in the decaying allowed-side\nform of (a) and $1$ in the growing allowed-side form of (b) are the amplitude\nrelations of the exact Airy pair: the forbidden-side data determine the\nconstants $C$ and $C'$, and the allowed-side oscillations are the sine and\ncosine forms with phase $\\pi/4$ measured from the turning point into the\nallowed region. The statement excludes rectangular walls, coalescing or\nmultiple turning points, multi-turn resonances and barrier-top uniformity; it\nasserts no transmission or reflection coefficient (that is a separate\nstatement requiring hypothesis (W2)), no wave packet, no detector and no\nmeasured value; the errors are absolute and blow up as the turning point is\napproached, as displayed by the $h/|\\zeta|^{3/2}$ term.",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-approximations-framework-wkb-regime-model",
+          "lem-nrqm-approximations-scaled-line-model-correspondence",
+          "thm-nrqm-controlled-dynamics-liouville-turning-point-transformation",
+          "thm-nrqm-controlled-dynamics-airy-contour-and-fresnel-normalization",
+          "thm-nrqm-controlled-dynamics-airy-envelopes-and-asymptotic-coefficients",
+          "thm-nrqm-controlled-dynamics-stable-weighted-airy-volterra-connection",
+          "thm-nrqm-controlled-dynamics-wkb-explicit-error",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-approximations-framework-wkb-regime-model": "formulation-prerequisite",
+          "lem-nrqm-approximations-scaled-line-model-correspondence": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-liouville-turning-point-transformation": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-airy-contour-and-fresnel-normalization": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-airy-envelopes-and-asymptotic-coefficients": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-stable-weighted-airy-volterra-connection": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-wkb-explicit-error": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "F. W. J. Olver, Asymptotics and Special Functions (1974), Chapter 11 (connection formulas and error bounds for Airy-type equations; standard monograph), consulted through the NIST DLMF survey of Airy asymptotics",
+              "url": "https://dlmf.nist.gov/9.7"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Section 9.7 'Asymptotic Expansions' (oscillatory and exponential Airy asymptotics with the phase pi/4 and envelope bounds)",
+              "url": "https://dlmf.nist.gov/9.7"
+            },
+            {
+              "title": "NIST Digital Library of Mathematical Functions, Section 9.2 'Differential Equation' (Airy's equation and the standard solutions Ai, Bi)",
+              "url": "https://dlmf.nist.gov/9.2"
+            }
+          ]
+        },
+        "physical_scope": "The single-simple-turning-point connection statement for the declared WKB regime model with forbidden region on the right of the turning point: the two exact solutions matched to the Airy-type decaying and growing branches of the transformed equation, their forbidden-side exponential forms, their allowed-side sine and cosine forms with the phase pi/4 measured from the turning point, the factor two of the decaying-sine connection, and the envelope-times-epsilon absolute error control. The statement concerns the declared one-dimensional model's exact solutions only; it asserts no rectangular walls, no coalescing turning points, no multi-turn resonances, no wave packet and no measurement.",
+        "empirical_premises": []
+      },
+      {
+        "id": "pthm-nrqm-approximations-barrier-transmission-asymptotics",
+        "kind": "physics-theorem",
+        "domain": "physics",
+        "title": "Separated smooth-barrier tunnelling: the declared transmission coefficient is exp(-2S/h) up to explicit small-h and barrier-thickness errors",
+        "statement": "Adopt the declared WKB regime model of\n[[def-nrqm-approximations-framework-wkb-regime-model]] with its data\n$V,m,\\hbar,\\ell,E_\\star,W,\\lambda,h$ and assume hypothesis (W2): $W-\\lambda$\nhas exactly two zeros $\\xi_{a}<\\xi_{b}$ on $\\mathbb R$, both simple, is\nstrictly positive on $(\\xi_{a},\\xi_{b})$ and strictly negative on\n$\\mathbb R\\setminus[\\xi_{a},\\xi_{b}]$. Put\n$$S:=\\int_{\\xi_{a}}^{\\xi_{b}}\\sqrt{W(\\xi)-\\lambda}\\,d\\xi>0,$$\nand let $T(h)$ be the model's declared transmission coefficient of its\nclause (d). Then there are $h_0>0$, an $\\varepsilon(h)\\le C_{1}h$ for $0<h<h_0$, and a constant\n$0\\le C_{0}<\\infty$, both depending only on the model's barrier data\n$(W,\\lambda,\\ell,E_\\star)$ and the fixed matching sections, such that\n$$\\Bigl|T(h)\\,e^{2S/h}-1\\Bigr|\\le \\frac{C_{0}\\bigl[\\varepsilon(h)+e^{-2S/h}\\bigr]} {1-C_{0}\\bigl[\\varepsilon(h)+e^{-2S/h}\\bigr]}$$\nwhenever the denominator is positive; consequently\n$$T(h)=e^{-2S/h}\\Bigl(1+O\\bigl(\\varepsilon(h)+e^{-2S/h}\\bigr)\\Bigr).$$\nIn the physical variables of the line model, where\n$V(\\ell\\xi)=E_\\star W(\\xi)$ and $E=E_\\star\\lambda$, one has by\n[[lem-nrqm-approximations-scaled-line-model-correspondence]] clause (b)\n$$\\frac{S}{h}=\\frac1\\hbar\\int_{x_{a}}^{x_{b}}\\sqrt{2m\\bigl(V(x)-E\\bigr)}\\,dx, \\qquad x_{a}=\\ell\\xi_{a},\\ x_{b}=\\ell\\xi_{b},$$\nso the displayed leading factor is $e^{-2S/h}\n=\\exp\\bigl(-\\frac{2}{\\hbar}\\int_{x_{a}}^{x_{b}}\\sqrt{2m(V-E)}\\,dx\\bigr)$,\nthe exponential of minus twice the classical action integral of the forbidden\nregion in units of $\\hbar$. The statement is conditional on the fixed\ncompactly supported $C^{5}$ barrier with two separated simple turning points;\nrectangular walls, coalescing turning points, barrier-top uniformity and\nresonant multiwell interference are excluded, and $T(h)$ is the declared\nscattering-current ratio of the model, not a detector response or a measured count; no\nwave packet, preparation, apparatus or sampling model is asserted. In\nparticular, for each fixed barrier,\n$$\\lim_{h\\downarrow0}T(h)\\,e^{2S/h}=1 .$$",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-approximations-framework-wkb-regime-model",
+          "lem-nrqm-approximations-scaled-line-model-correspondence",
+          "pthm-nrqm-approximations-turning-point-connection",
+          "thm-nrqm-controlled-dynamics-two-turn-barrier-tunnelling-error",
+          "thm-nrqm-controlled-dynamics-liouville-turning-point-transformation",
+          "thm-nrqm-controlled-dynamics-stable-weighted-airy-volterra-connection",
+          "thm-nrqm-controlled-dynamics-wkb-explicit-error",
+          "thm-nrqm-controlled-dynamics-airy-envelopes-and-asymptotic-coefficients",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-approximations-framework-wkb-regime-model": "formulation-prerequisite",
+          "lem-nrqm-approximations-scaled-line-model-correspondence": "mathematical-premise",
+          "pthm-nrqm-approximations-turning-point-connection": "physical-result",
+          "thm-nrqm-controlled-dynamics-two-turn-barrier-tunnelling-error": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-liouville-turning-point-transformation": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-stable-weighted-airy-volterra-connection": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-wkb-explicit-error": "mathematical-premise",
+          "thm-nrqm-controlled-dynamics-airy-envelopes-and-asymptotic-coefficients": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 13,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Fitzpatrick, Quantum Mechanics (University of Texas at Austin, author-hosted course text), Sections 5.3-5.6 printed and PDF pages 64-75: 5.3 Square Potential Barrier p. 64, 5.4 WKB Approximation p. 70, 5.5 Cold Emission p. 72, 5.6 Alpha Decay p. 73 (barrier penetration and the WKB tunnelling exponent)",
+              "url": "https://farside.ph.utexas.edu/teaching/qmech/qmech.pdf"
+            },
+            {
+              "title": "F. W. J. Olver, Asymptotics and Special Functions (1974), Chapter 11 (connection formulas and barrier penetration for second-order equations with two turning points; standard monograph), consulted through the NIST DLMF Airy survey",
+              "url": "https://dlmf.nist.gov/9.7"
+            }
+          ]
+        },
+        "physical_scope": "The separated smooth-barrier transmission statement for the declared WKB regime model: the declared transmission coefficient equals the exponential of minus twice the barrier WKB exponent per unit h, with the quantitative small-h and exponentially small correction bound of the cited theorem, and the physical exponent is (1/hbar) times the classical action integral over the forbidden region. The statement is conditional on a fixed compactly supported C^5 barrier with exactly two separated simple turning points; it excludes rectangular walls, coalescing turning points, barrier-top uniformity and resonant multiwell interference, and it asserts no detector, wave packet or measured transmission.",
+        "empirical_premises": []
+      },
+      {
+        "id": "rem-nrqm-approximations-scope-and-empirical-status",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "What the controlled-approximations page adopts, proves and does not claim: gaps, branch populations, turning points and the static-Stark limitation",
+        "statement": "## Remarks\n\n- **Adopted model clauses.** The page declares three models: the variational\n  trial model [[def-nrqm-approximations-framework-variational-trial-model]]\n  (a self-adjoint energy observable bounded below, its form domain and trial\n  value), the perturbed family\n  [[def-nrqm-approximations-framework-perturbed-family-model]] (a bounded\n  self-adjoint perturbation of a gapped isolated label) and the WKB regime\n  model [[def-nrqm-approximations-framework-wkb-regime-model]] (the\n  nondimensionalised one-dimensional stationary equation with a declared\n  semiclassical parameter and a compactly supported $C^{5}$ potential), plus\n  the static finite-level dipole coupling\n  [[post-nrqm-approximations-static-finite-level-dipole-coupling]]. Each\n  declaration is a model assumption; none is derived from P1-P7.\n\n- **What is proved.** Conditional on those declarations the page proves: the\n  trial lower bound, the gap-overlap control and the min-max characterisation\n  of the discrete ladder\n  ([[pthm-nrqm-approximations-variational-bounds-and-min-max]]); the\n  nondegenerate perturbation expansion with explicit cubic remainder\n  ([[pthm-nrqm-approximations-nondegenerate-perturbation-expansion]]); the\n  degenerate first-order splitting localisation within\n  $4\\lambda^{2}v^{2}/g$\n  ([[pthm-nrqm-approximations-degenerate-first-order-splitting]]); the\n  allowed-region WKB Gronwall error\n  ([[pthm-nrqm-approximations-wkb-allowed-region-error]]); the single\n  simple-turning-point Airy connection with envelope errors\n  ([[pthm-nrqm-approximations-turning-point-connection]]); and the separated\n  smooth-barrier transmission asymptotics\n  ([[pthm-nrqm-approximations-barrier-transmission-asymptotics]]). Every one\n  of these statements carries its hypotheses explicitly: the gap $g>0$, the\n  boundedness of the perturbation, the smoothness of $W$, the separation of\n  the turning points, and the value of the semiclassical parameter.\n\n- **No attained ground state is assumed.** The variational statements use the\n  form domain $Q(H)$ and the declared spectral lower bound; they do not\n  assume that the bottom $E_{0}$ is an eigenvalue, that a ground eigenvector\n  exists, or that the trial infimum is attained. The gap-overlap clause is\n  the only place where an isolated bottom is used, and it states exactly the\n  overlap forced by a trial value within $\\varepsilon$ of the bottom.\n\n- **No branch population or equilibration.** The perturbation theorems locate\n  spectral labels of the declared families; they assert no instantaneous\n  transition of a preparation to the branch with the smallest first-order\n  shift, no relaxation to a lowest branch and no equilibration. The\n  motivating textbook conjecture of a jump to the lowest branch is not\n  imported: for a closed system, which spectral subspace a preparation\n  occupies is fixed by the preparation and by the evolution of P4\n  ([[post-nrqm-framework-autonomous-dynamics]]); an equilibration statement\n  would require a separately declared environment or dissipation model, which\n  this page does not supply.\n\n- **Turning points and barriers.** The allowed-region error excludes turning\n  points by hypothesis; the connection theorem treats a single simple\n  turning point and does not produce a transmission coefficient; the barrier\n  theorem assumes exactly two separated simple turning points of a compactly\n  supported $C^{5}$ barrier and excludes rectangular walls, coalescing\n  turning points, barrier-top uniformity and resonant multiwell interference.\n  The declared transmission coefficient is a matching datum of the model, not\n  a detector response.\n\n- **The static-Stark limitation.** The uncompressed static perturbation of a\n  Coulomb model by a uniform field is the unbounded multiplication term\n  $-\\mathbf E_{\\rm ext}\\cdot\\mathbf D$; the energy form of $H_{\\kappa}$ plus\n  that term has no lower bound when the field is nonzero (translating a\n  fixed normalized compactly supported smooth relative-state trial function\n  along $-t\\mathbf E_{\\rm ext}$ lowers the linear term $q\\mathbf E_{\\rm ext}\\cdot r$\n  by $-tq|\\mathbf E_{\\rm ext}|^2$; its kinetic form stays constant and its\n  Coulomb form tends to zero, so the trial energy tends to $-\\infty$), so no bounded-perturbation theorem of this page applies to\n  it. This page therefore covers only the compressed finite-level operator of\n  [[post-nrqm-approximations-static-finite-level-dipole-coupling]], and it\n  states no eigenvalue theorem for the uncompressed model.\n\n- **Empirical status.** No experiment, reported observation, measured shift,\n  splitting, transmission or count appears on this page; no apparatus,\n  calibration, sampling or uncertainty record is supplied. The statements are\n  conditional predictions of the declared models. A comparison with data\n  would test the combined assumptions -- preparation, isolation, parameter\n  identification, truncation, field description and detection response --\n  under the preparation and apparatus discipline P7\n  ([[post-nrqm-framework-preparation-and-apparatus]]); agreement would be\n  evidence about that combination, not a deductive proof of the model, and a\n  discrepancy would require the auxiliary assumptions to be examined before\n  the model is rejected.\n",
+        "strategy": "n/a",
+        "deps": [
+          "def-nrqm-approximations-framework-variational-trial-model",
+          "def-nrqm-approximations-framework-perturbed-family-model",
+          "def-nrqm-approximations-framework-wkb-regime-model",
+          "pthm-nrqm-approximations-variational-bounds-and-min-max",
+          "pthm-nrqm-approximations-nondegenerate-perturbation-expansion",
+          "pthm-nrqm-approximations-degenerate-first-order-splitting",
+          "pthm-nrqm-approximations-wkb-allowed-region-error",
+          "pthm-nrqm-approximations-turning-point-connection",
+          "pthm-nrqm-approximations-barrier-transmission-asymptotics",
+          "post-nrqm-approximations-static-finite-level-dipole-coupling",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-preparation-and-apparatus"
+        ],
+        "dependency_roles": {
+          "def-nrqm-approximations-framework-variational-trial-model": "formulation-prerequisite",
+          "def-nrqm-approximations-framework-perturbed-family-model": "formulation-prerequisite",
+          "def-nrqm-approximations-framework-wkb-regime-model": "formulation-prerequisite",
+          "pthm-nrqm-approximations-variational-bounds-and-min-max": "physical-result",
+          "pthm-nrqm-approximations-nondegenerate-perturbation-expansion": "physical-result",
+          "pthm-nrqm-approximations-degenerate-first-order-splitting": "physical-result",
+          "pthm-nrqm-approximations-wkb-allowed-region-error": "physical-result",
+          "pthm-nrqm-approximations-turning-point-connection": "physical-result",
+          "pthm-nrqm-approximations-barrier-transmission-asymptotics": "physical-result",
+          "post-nrqm-approximations-static-finite-level-dipole-coupling": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-preparation-and-apparatus": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.1.2 printed pages 206-208 (PDF pages 214-216): the degenerate-subspace diagonalisation of the perturbation, together with the conjecture that the system 'jumps' to the lowest branch, which is not imported as a deduction",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 4.3 printed pages 117-119 (PDF pages 129-131) and Section 6.6 printed pages 153-159 (PDF pages 165-171): the min-max theorem and the bounded-perturbation resolvent estimates on which the page's conditional statements rest",
+              "url": "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A scope and status record for the controlled-approximations page: the adopted model clauses, the proved conditional statements with their gap, smoothness and boundedness hypotheses, the explicit exclusions (equilibration and branch selection, unbounded and static-field perturbations, rectangular and coalescing turning-point configurations, detectors and measurements), and the absence of any empirical record on this page."
+      }
+    ]
+  },
+  {
+    "order": 198,
+    "id": "qm-controlled-approximations-examples",
+    "kind": "B",
+    "category": "non-relativistic-quantum-mechanics",
+    "library": "physics",
+    "title": "Qm Controlled Approximations — Examples",
+    "companion": "qm-controlled-approximations",
+    "requires": [
+      "qm-controlled-approximations",
+      "qm-framework-and-quantities",
+      "qm-observables-and-born-probabilities",
+      "qm-central-potentials-and-hydrogen",
+      "qm-math-coulomb",
+      "qm-math-orbital-and-spin",
+      "qm-angular-momentum-and-spin",
+      "qm-massive-particle-kinematics",
+      "qm-one-dimensional-potentials"
+    ],
+    "items": [
+      {
+        "id": "ex-nrqm-approximations-two-level-finite-gap-correction",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A two-level finite-gap model: exact eigenvalues, the second-order correction and a finite check of the cubic remainder bound",
+        "statement": "Adopt P1, P2 and P4 for a declared **two-level system**\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]]) with state space\n$\\mathfrak H=\\mathbb C^{2}$ in the standard orthonormal basis $(e_{1},e_{2})$\nand with the observable reading of\n[[def-nrqm-observables-framework-observable-and-outcome-law]]; read all\nenergies in joules as in [[def-nrqm-framework-quantities-and-units]]. Fix\nreal **gap** and **coupling** parameters $g>0$ and $c>0$, and declare the\nmodel's energy observable family by the perturbed-family model of\n[[def-nrqm-approximations-framework-perturbed-family-model]] with\n$$H_{0}:=\\begin{pmatrix}0&0\\\\0&g\\end{pmatrix},\\qquad V:=\\begin{pmatrix}0&c\\\\c&0\\end{pmatrix},\\qquad H(\\lambda)=H_{0}+\\lambda V\\quad(\\lambda\\in\\mathbb R).$$\nThen $H_{0}$ has the isolated simple eigenvalue $E=0$ with gap $g$,\n$v=\\|V\\|=c$, $\\psi_{0}=e_{1}$, and the reduced inverse of the model clause\n(c)(iii) is $S=\\operatorname{diag}(0,1/g)$ on $Q_{0}\\mathfrak H=\\mathbb\nCe_{2}$. Then:\n\n(a) for every real $\\lambda$ the matrix $H(\\lambda)$ is Hermitian with exactly\ntwo eigenvalues\n$$E_{\\pm}(\\lambda)=\\frac{g\\pm\\sqrt{g^{2}+4\\lambda^{2}c^{2}}}{2},$$\nboth simple for $\\lambda\\ne0$ and spanning the spectrum for every $\\lambda$;\nin the model's valid contour range $2|\\lambda|c/g<1$, its distinguished\nlabel is $E_{\\lambda}=E_{-}(\\lambda)$. The formula $E_-$ remains an exact\ncontinuous lower spectral branch for all real couplings, even beyond that\nfixed-contour range;\n\n(b) the exact perturbation coefficients are\n$$E'(0)=0,\\qquad E''(0)=-\\frac{2c^{2}}{g},\\qquad \\psi'(0)=-SV\\psi_{0}=-\\frac{c}{g}e_{2},\\qquad \\psi_{0}=e_{1},$$\nand the exact eigenvalue has the convergent expansion\n$$E_{-}(\\lambda)=-\\frac{\\lambda^{2}c^{2}}{g} +\\frac{\\lambda^{4}c^{4}}{g^{3}}-\\frac{2\\lambda^{6}c^{6}}{g^{5}}+O(\\lambda^{8});$$\n\n(c) the cubic remainder bound of\n[[pthm-nrqm-approximations-nondegenerate-perturbation-expansion]] clause (e)\nholds in this model for every $|\\lambda|<R=g/(8c)$, and at the test point\n$\\lambda=R/2=g/(16c)$ the exact remainder and its bound are\n$$E_{-}\\!\\left(\\frac{g}{16c}\\right)+\\frac{g}{256} =\\frac{g}{2}\\Bigl(1-\\frac{\\sqrt{65}}{8}\\Bigr)+\\frac{g}{256}\\approx1.51\\cdot10^{-5}g \\le\\frac{g}{32},$$\nso the finite check is satisfied with a wide margin;\n\n(d) the exact spectrum computed in (a) is a spectral statement about the\ndeclared two-level family; it identifies no physical system, asserts no\nmeasured splitting, and asserts nothing about which of the two spectral\nsubspaces a preparation occupies (that is fixed by the preparation and the\nevolution of P4, not by the perturbative expansion).",
+        "strategy": "direct",
+        "deps": [
+          "def-nrqm-approximations-framework-perturbed-family-model",
+          "pthm-nrqm-approximations-nondegenerate-perturbation-expansion",
+          "def-nrqm-framework-quantities-and-units",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-nrqm-approximations-framework-perturbed-family-model": "formulation-prerequisite",
+          "pthm-nrqm-approximations-nondegenerate-perturbation-expansion": "physical-result",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 11,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.1 printed pages 203-205 (PDF pages 211-213): the perturbative expansion, the first-order coefficient (9.6) and the second-order coefficient (9.11) for a non-degenerate level",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 7 'Two State Systems', Section 5 'Ammonia molecule in an electric field' printed and PDF pages 11-16: the exactly solvable two-state Stark family with eigenvalues E0 +/- sqrt(mu^2 E^2 + Delta^2), the closed analogue of the check performed here",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/7c376a3b5b27e5ea586a7e37b85a05d3_MIT8_05F13_Chap_07.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional two-level computation inside the declared perturbed-family model with a finite gap: the exact eigenvalues of the family, its second-order coefficient, the exact quartic expansion, and a finite numerical check of the page's cubic remainder bound at half the perturbation radius. The example is a model computation in the declared finite-dimensional subspace; it asserts no physical system identification, no measured splitting and no transition."
+      },
+      {
+        "id": "ex-nrqm-approximations-stark-finite-level-shift",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A finite-level static Stark model: vanishing first-order shift, exact quadratic splitting and a finite check of the remainder bound",
+        "statement": "Adopt P1, P2 and P4 for the declared two-body Coulomb model of\n[[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clause (d), in the\nrelative-coordinate factor $L^{2}(\\mathbb R^{3};\\mathbb C)$ with the dipole\noperator $D_{j}=-qQ_{j}$ and the compressed finite-level coupling of\n[[post-nrqm-approximations-static-finite-level-dipole-coupling]]. Use\nthe Coulomb mass parameter $m=\\mu:=m_{1}m_{2}/(m_{1}+m_{2})$ and\n$a_{\\mu}:=\\hbar^{2}/(\\mu\\kappa)>0$. Choose as\nthe finite-level subspace the **declared two-dimensional subspace**\n$$W:=\\operatorname{span}\\{\\psi_{1},\\psi_{2}\\}\\subseteq L^{2}(\\mathbb R^{3};\\mathbb C),$$\nwhere $\\psi_{1}$ and $\\psi_{2}$ are normalized bound states of the model with\nangular labels $(n,l,m)=(1,0,0)$ and $(2,1,0)$ supplied by\n[[pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy]], so that\n$H_{\\kappa}\\psi_{1}=E_{1}\\psi_{1}$, $H_{\\kappa}\\psi_{2}=E_{2}\\psi_{2}$ with\n$$E_{1}=-\\frac{m\\kappa^{2}}{2\\hbar^{2}},\\qquad E_{2}=-\\frac{m\\kappa^{2}}{8\\hbar^{2}},\\qquad \\Delta:=E_{2}-E_{1}=\\frac{3m\\kappa^{2}}{8\\hbar^{2}}>0 .$$\nChoose the external field along the third axis of the declared frame,\n$\\mathbf E_{\\rm ext}=(0,0,\\mathcal E)$ with $\\mathcal E>0$ in\n$\\mathrm{V\\,m^{-1}}$, and use the dimensionless coupling\n$$\\lambda:=\\frac{\\mathcal E}{1\\ \\mathrm{V\\,m^{-1}}},\\qquad V:=-(1\\ \\mathrm{V\\,m^{-1}})\\,D^{W}_{3},$$\nso that the Stark model of the postulate reads\n$$H_{S}(\\mathcal E)=H_{0}+\\lambda V,\\qquad H_{0}:=\\Pi_{W}H_{\\kappa}\\big|_{W}=\\begin{pmatrix}E_{1}&0\\\\0&E_{2}\\end{pmatrix}$$\nin the declared orthonormal basis. Then:\n\n(a) the compression of the dipole matrix has the form\n$$D^{W}_{1}=D^{W}_{2}=0,\\qquad D^{W}_{3}=D_{\\rm rel}\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix},\\qquad D_{\\rm rel}:=|\\langle\\psi_{2},D_{3}\\psi_{1}\\rangle|>0,$$\nwith unit $\\mathrm{C\\,m}$, where the phase of $\\psi_{2}$ is chosen to make\nthe off-diagonal entry positive. The local computation below gives\n$D_{\\rm rel}=128\\sqrt2\\,q a_{\\mu}/243>0$ from the declared model parameters;\nthis is an exact model identity, with no measured value of any parameter.\nThe diagonal entries vanish by angular degree selection, and only $Q_{0}$\ncan contribute between the chosen $m=0$ states; nonvanishing is proved by\nexplicit radial and angular integration;\n\n(b) $v=\\|V\\|=D_{\\rm rel}(1\\ \\mathrm{V\\,m^{-1}})$ in joules and the family\n$H_{S}$ has the exact eigenvalues\n$$F_{\\pm}(\\mathcal E)=\\frac{E_{1}+E_{2}}{2} \\pm\\sqrt{\\Bigl(\\frac{\\Delta}{2}\\Bigr)^{2}+\\bigl(D_{\\rm rel}\\mathcal E\\bigr)^{2}},$$\nthe lower branch $F_{-}$ being the model's followed label for\ndimensionless couplings $0\\le\\lambda<R:=\\Delta/(8v)$, equivalently\n$0\\le\\mathcal E<\\Delta/(8D_{\\rm rel})$, with $\\Delta$ playing the role of the gap $g$;\n\n(c) the page's perturbation theorem applies with nondegenerate label\n$E_{1}$ (gap $\\Delta$), and gives the vanishing first-order shift\n$$E'(0)=0$$\nand the exact second-order coefficient\n$$E''(0)=-\\frac{2D_{\\rm rel}^{2}(1\\ \\mathrm{V\\,m^{-1}})^{2}}{\\Delta},$$\nequivalently the quadratic Stark shift\n$$F_{-}(\\mathcal E)=E_{1}-\\frac{D_{\\rm rel}^{2}\\mathcal E^{2}}{\\Delta} +O(\\mathcal E^{4});$$\n\n(d) the finite remainder check at half the perturbation radius\n$\\lambda=R/2$, equivalently $\\mathcal E=\\Delta/(16D_{\\rm rel})$, gives the exact remainder\n$$\\Bigl|F_{-}+\\frac{\\Delta}{256}-E_{1}\\Bigr|=\\Delta\\,\\frac{129-16\\sqrt{65}}{256}=\\frac{\\Delta}{256(129+16\\sqrt{65})}<\\frac{\\Delta}{32768}<\\frac{\\Delta}{32},$$\nso the page's cubic bound is satisfied at this coupling with a wide margin;\n\n(e) scope: the computation is conditional on the declared truncated\ntwo-state model and the adopted coupling; it identifies no laboratory atom,\nreports no measured shift and no polarizability value, asserts no transition\nrate, and does not treat the uncompressed linear potential\n$-\\mathbf E_{\\rm ext}\\cdot\\mathbf D$. The postulate excludes that model and\nproves its common-test-domain expectations unbounded below for every nonzero\nuniform field; no full energy-form domain is used here.",
+        "strategy": "direct",
+        "deps": [
+          "post-nrqm-approximations-static-finite-level-dipole-coupling",
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy",
+          "thm-nrqm-coulomb-atomic-dipole-matrix-element-domain",
+          "thm-nrqm-orbital-and-spin-dipole-angular-selection-rules",
+          "def-nrqm-approximations-framework-perturbed-family-model",
+          "pthm-nrqm-approximations-nondegenerate-perturbation-expansion",
+          "def-nrqm-framework-quantities-and-units",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "thm-nrqm-coulomb-kummer-recurrence-and-termination",
+          "lem-nrqm-central-exponential-moments",
+          "thm-nrqm-orbital-and-spin-associated-polynomial-normalization",
+          "thm-nrqm-orbital-and-spin-sphere-onb",
+          "lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates"
+        ],
+        "dependency_roles": {
+          "post-nrqm-approximations-static-finite-level-dipole-coupling": "physical-assumption",
+          "def-nrqm-central-framework-coulomb-and-hydrogen-model": "formulation-prerequisite",
+          "pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy": "physical-result",
+          "thm-nrqm-coulomb-atomic-dipole-matrix-element-domain": "mathematical-premise",
+          "thm-nrqm-orbital-and-spin-dipole-angular-selection-rules": "mathematical-premise",
+          "def-nrqm-approximations-framework-perturbed-family-model": "formulation-prerequisite",
+          "pthm-nrqm-approximations-nondegenerate-perturbation-expansion": "physical-result",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise",
+          "thm-nrqm-coulomb-kummer-recurrence-and-termination": "mathematical-premise",
+          "lem-nrqm-central-exponential-moments": "mathematical-premise",
+          "thm-nrqm-orbital-and-spin-associated-polynomial-normalization": "mathematical-premise",
+          "thm-nrqm-orbital-and-spin-sphere-onb": "mathematical-premise",
+          "lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 15,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.1.1 printed pages 205-206 (PDF pages 213-214): the quadratic Stark effect of the hydrogen ground state, Eb = eE<100|z|100> = 0 by parity and the second-order formula (9.16)-(9.17); and Section 9.1.2 printed pages 206-208 (PDF pages 214-216): the linear Stark effect from the diagonalisation of eEz within the degenerate n=2 subspace",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 7 'Two State Systems', Section 5 'Ammonia molecule in an electric field' printed and PDF pages 11-16: the two-state ammonia Stark family H = E0 I - Delta sigma1 + muE sigma3 and its exact eigenvalues E0 +/- sqrt(mu^2E^2 + Delta^2), the exact template for the closed form used here",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/7c376a3b5b27e5ea586a7e37b85a05d3_MIT8_05F13_Chap_07.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional finite-level computation in the declared two-body Coulomb model with the adopted static finite-level dipole coupling: the compressed two-state Stark family built from the model's 1s-like and 2p-like relative states, the vanishing diagonal dipole matrix elements by the angular selection rule, the exact closed-form eigenvalues of the two-state family, the vanishing first-order and the exact second-order coefficient of the page's non-degenerate theorem, and a finite numeric check of the cubic remainder bound. The example identifies no laboratory atom, asserts no measured Stark shift or polarizability value, and states no transition or lifetime; the uncompressed linear-potential model is explicitly outside its scope."
+      },
+      {
+        "id": "ex-nrqm-approximations-zeeman-multiplet-splitting",
+        "kind": "example",
+        "domain": "physics",
+        "title": "A spin-one multiplet in a uniform field: the exact Zeeman spectrum and degenerate first-order check",
+        "statement": "Adopt P1, P2, P4 and P6 for the massive spin-$s$ particle model of\n[[def-nrqm-kinematics-framework-massive-spin-s-model]]\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-identical-particles-and-spin]]), together with the\neffective magnetic-moment coupling\n[[post-nrqm-angular-momentum-magnetic-moment-coupling]] with real\ngyromagnetic parameter $\\gamma:=\\gamma_{1}$ and the spin-one internal factor\n$\\mathbb C^{3}$ with spin operators $S_{1},S_{2},S_{3}$; read energies in\njoules as in [[def-nrqm-framework-quantities-and-units]]. Declare the\n**finite-level Zeeman model** by the perturbed-family model of\n[[def-nrqm-approximations-framework-perturbed-family-model]] with\n$$\\mathfrak H:=\\mathbb C^{3},\\qquad H_{0}:=\\varepsilon I_{3},\\qquad V:=-\\gamma B_{z}S_{3},$$\nwhere $\\varepsilon\\in\\mathbb R$ is a declared multiplet energy, $B_{z}>0$ is\nthe field magnitude in tesla of the uniform field $\\mathbf B=(0,0,B_{z})$,\nso that the family is $H(\\lambda)=H_{0}+\\lambda V$ with real coupling\n$\\lambda$ (dimensionless, equal to $1$ for the physical field) and\n$v=\\|V\\|=|\\gamma|B_{z}\\hbar$. For the physical value $\\lambda=1$ the family is\nthe model's Zeeman operator on the internal multiplet. Then:\n\n(a) the perturbation preserves the multiplet: $[H_{0},V]=0$, the\nfirst-order operator is $V_{E}=V$, and its eigenvalues counted with\nmultiplicity are $-\\hbar\\gamma B_{z},0,+\\hbar\\gamma B_{z}$ in joules. If\n$\\gamma\\ne0$, these are three distinct simple eigenvalues; if $\\gamma=0$,\nthe only eigenvalue is $0$ with multiplicity three. Thus the first-order\noperator describes a triply degenerate level when the adopted magnetic\ncoupling vanishes;\n\n(b) the exact energy eigenvalues of the family, counted with multiplicity,\nare\n$$\\varepsilon-\\lambda\\hbar\\gamma B_{z},\\qquad \\varepsilon,\\qquad \\varepsilon+\\lambda\\hbar\\gamma B_{z}.$$\nThey are three distinct simple levels exactly when $\\lambda\\gamma\\ne0$;\nwhen $\\lambda=0$ or $\\gamma=0$, the only energy is $\\varepsilon$ with\nmultiplicity three. Each eigenvalue is affine in $\\lambda$, so its\nsecond-order and higher Taylor coefficients vanish identically;\n\n(c) when $v>0$, the page's degenerate theorem applies for every $g>0$ (the\ngap condition is vacuous because the spectrum of $H_{0}$ is the single value\n$\\varepsilon$) and every real $\\lambda$ with $|\\lambda|v<g/4$; each\neigenvalue $z$ then satisfies\n$\\operatorname{dist}(z,\\varepsilon+\\lambda\\operatorname{spec}(V_{E}))\n\\le 4\\lambda^{2}v^{2}/g$, and the exact spectrum in (b) shows that this\ndistance is $0$. If $v=0$, equivalently $\\gamma=0$, then\n$H(\\lambda)=\\varepsilon I_{3}$ for every real $\\lambda$, so the same\ndistance is $0$ directly, without invoking the theorem's positive-norm\nhypothesis. In both cases the first-order eigenvalue set is exact, with\nmultiplicity retained as in (a)-(b);\n\n(d) the model's conserved component and transverse precession are those of\n[[pthm-nrqm-angular-momentum-zeeman-precession]] for the declared field:\nthe component $S_{3}$ is conserved along the flow of $H(\\lambda)$ and the\ntransverse spin means precess at the Larmor angular signed frequency $\\lambda\\gamma B_{z}$, equal to $\\gamma B_z$ at the physical coupling $\\lambda=1$;\n\n(e) no branch selection: the energy eigenspaces of (b) are spectral data of\nthe family; a preparation in any eigenstate is stationary, and a superposition\nevolves with the relative phases of (b). The example asserts\nno instantaneous transition of any preparation to the lowest sublevel, no\nrelaxation and no measurement; which sublevel a preparation occupies is\nfixed by the preparation and by P4.",
+        "strategy": "direct",
+        "deps": [
+          "post-nrqm-angular-momentum-magnetic-moment-coupling",
+          "def-nrqm-kinematics-framework-massive-spin-s-model",
+          "pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws",
+          "pthm-nrqm-angular-momentum-zeeman-precession",
+          "def-nrqm-approximations-framework-perturbed-family-model",
+          "pthm-nrqm-approximations-degenerate-first-order-splitting",
+          "def-nrqm-framework-quantities-and-units",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-identical-particles-and-spin",
+          "def-nrqm-observables-framework-observable-and-outcome-law",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "post-nrqm-angular-momentum-magnetic-moment-coupling": "physical-assumption",
+          "def-nrqm-kinematics-framework-massive-spin-s-model": "formulation-prerequisite",
+          "pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws": "physical-result",
+          "pthm-nrqm-angular-momentum-zeeman-precession": "physical-result",
+          "def-nrqm-approximations-framework-perturbed-family-model": "formulation-prerequisite",
+          "pthm-nrqm-approximations-degenerate-first-order-splitting": "physical-result",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-identical-particles-and-spin": "physical-assumption",
+          "def-nrqm-observables-framework-observable-and-outcome-law": "formulation-prerequisite",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 12,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.1.3 printed pages 208-211 (PDF pages 216-219): the perturbation HBs = mu_B B(Jz + 2Sz), its diagonalisation in the m_l, m_s labels and the Zeeman/Paschen-Back splitting patterns",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 7 'Two State Systems', Sections 2-4 printed and PDF pages 2-10: spin precession in a magnetic field (Section 2), the general two-state system viewed as a spin system (Section 3), and the ammonia molecule as a two-state system (Section 4); the spin operator along a field direction, its two eigenvalues and the magnetic-dipole energy are read in this range",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/7c376a3b5b27e5ea586a7e37b85a05d3_MIT8_05F13_Chap_07.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A conditional finite-level computation for the declared spin-one internal multiplet of the massive spin-s model with the adopted effective magnetic-moment coupling: the Zeeman family H0 + lambda V with H0 = epsilon I on the three-dimensional multiplet and V = -gamma B S3, its three energy eigenvalues counted with multiplicity (three distinct levels occur exactly when lambda gamma is nonzero), the first-order operator P0VP0 = V and the corresponding degenerate-perturbation localisation, and the absence of any relaxation or branch selection statement. The example identifies no laboratory species, reports no measured splitting or gyromagnetic ratio, and asserts no detector record."
+      },
+      {
+        "id": "ex-nrqm-approximations-smooth-barrier-tunnelling-limits",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Tunnelling asymptotic limits: the smooth-barrier semiclassical limit and the exact rectangular prefactor comparison",
+        "statement": "Adopt the declared one-dimensional line model\n[[def-nrqm-potentials-one-dimensional-line-model]] and the WKB regime model\n[[def-nrqm-approximations-framework-wkb-regime-model]] with their framework\npostulates\n([[post-nrqm-framework-state-and-composition]],\n[[post-nrqm-framework-observable-and-probability]],\n[[post-nrqm-framework-autonomous-dynamics]],\n[[post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]]),\nwith units as in [[def-nrqm-framework-quantities-and-units]]. Then:\n\n(a) *Smooth-barrier semiclassical limit.* Let $V,m,\\hbar,\\ell,E_\\star,E,W,\n\\lambda,h$ be data of the WKB regime model satisfying its hypothesis (W2),\nwith exponent $S=\\int_{\\xi_{a}}^{\\xi_{b}}\\sqrt{W-\\lambda}\\,d\\xi$ and declared\ntransmission coefficient $T(h)$. Then there are $\\varepsilon(h)\\le C_{1}h$\nand $C_{0}<\\infty$, depending only on the barrier data, such that\n$$\\Bigl|T(h)e^{2S/h}-1\\Bigr| \\le\\frac{C_{0}[\\varepsilon(h)+e^{-2S/h}]}{1-C_{0}[\\varepsilon(h)+e^{-2S/h}]}$$\nwhenever the denominator is positive; in particular\n$$\\lim_{h\\downarrow0}T(h)e^{2S/h}=1,$$\nand the physical reading of the limit is the exponential law\n$T\\approx\\exp\\bigl(-\\frac2\\hbar\\int_{x_{a}}^{x_{b}}\\sqrt{2m(V-E)}\\,dx\\bigr)$\nwith prefactor tending to one;\n\n(b) *Rectangular thick-barrier limit.* Fix $m,\\hbar,E,U$ with $U>E>0$ and vary\nthe wall width $a\\to\\infty$ (equivalently, $\\kappa a\\to\\infty$). For the\n**rectangular wall model**\nexcluded by the smooth theorem, take the exact scattering solution of the\nline model with $V(x)=U$ for $0<x<a$ and $V=0$ otherwise, $U>E>0$,\n$k=\\sqrt{2mE}/\\hbar$, $\\kappa=\\sqrt{2m(U-E)}/\\hbar$ and exact transmission\n$$T_{\\rm rect}=\\Bigl[1+\\frac{U^{2}\\sinh^{2}(\\kappa a)}{4E(U-E)}\\Bigr]^{-1};$$\nthen, in this fixed-parameter limit,\n$$\\frac{T_{\\rm rect}}{e^{-2\\kappa a}}\\longrightarrow \\frac{16E(U-E)}{U^{2}}=\\frac{16k^{2}\\kappa^{2}}{(k^{2}+\\kappa^{2})^{2}},$$\nso in the rectangular model the exponential law holds with the profile-dependent\nprefactor $16E(U-E)/U^{2}$; the exponent $2\\kappa a$ equals the classical\nWKB exponent $2B/\\hbar$ of the rectangular barrier, and the limit shows that\nthe exponential alone does not determine the prefactor;\n\n(c) *Reading of the comparison.* Statement (a) is a theorem about smooth\ncompactly supported barriers with separated simple turning points, and its\nprefactor-one conclusion uses the Airy matching of that class; statement (b)\nis an exact model computation for a piecewise constant wall, whose sharp\ndiscontinuities are precisely why it is excluded from (a). Neither statement\nasserts a measured transmission, a detector response, a wave packet or an\napparatus; both are conditional statements about the declared\none-dimensional models.",
+        "strategy": "direct",
+        "deps": [
+          "pthm-nrqm-approximations-barrier-transmission-asymptotics",
+          "def-nrqm-approximations-framework-wkb-regime-model",
+          "lem-nrqm-approximations-scaled-line-model-correspondence",
+          "pthm-nrqm-potentials-barrier-flux-and-transmission",
+          "def-nrqm-potentials-one-dimensional-line-model",
+          "def-nrqm-framework-quantities-and-units",
+          "post-nrqm-framework-state-and-composition",
+          "post-nrqm-framework-observable-and-probability",
+          "post-nrqm-framework-autonomous-dynamics",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "dependency_roles": {
+          "pthm-nrqm-approximations-barrier-transmission-asymptotics": "physical-result",
+          "def-nrqm-approximations-framework-wkb-regime-model": "formulation-prerequisite",
+          "lem-nrqm-approximations-scaled-line-model-correspondence": "mathematical-premise",
+          "pthm-nrqm-potentials-barrier-flux-and-transmission": "physical-result",
+          "def-nrqm-potentials-one-dimensional-line-model": "formulation-prerequisite",
+          "def-nrqm-framework-quantities-and-units": "formulation-prerequisite",
+          "post-nrqm-framework-state-and-composition": "physical-assumption",
+          "post-nrqm-framework-observable-and-probability": "physical-assumption",
+          "post-nrqm-framework-autonomous-dynamics": "physical-assumption",
+          "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle": "physical-assumption",
+          "def-countable-choice": "mathematical-premise",
+          "def-axiom-of-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "dependency_level": 14,
+        "sources": {
+          "references": [
+            {
+              "title": "R. Fitzpatrick, Quantum Mechanics (University of Texas at Austin, author-hosted course text), Sections 5.3-5.6 printed and PDF pages 64-75: 5.3 Square Potential Barrier p. 64 (the exact rectangular transmission), 5.4-5.6 (the WKB barrier exponent)",
+              "url": "https://farside.ph.utexas.edu/teaching/qmech/qmech.pdf"
+            },
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 5.3 printed pages 87-89 (PDF pages 95-97): tunnelling through a potential barrier and the thick-barrier exponential suppression",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            }
+          ]
+        },
+        "physical_scope": "Two asymptotic statements about declared one-dimensional barrier transmission data: the semiclassical limit of the smooth compactly supported barrier of the WKB regime model, in which the ratio of the declared transmission coefficient to exp(-2S/h) tends to one; and the exact thick-barrier limit of the rectangular wall model, whose profile-dependent limit prefactor is 16E(U-E)/U^2 and can differ from one, showing that the exponential law alone does not determine the prefactor and that rectangular walls are outside the smooth-barrier theorem. No measured transmission, detector, sample or apparatus is asserted."
+      },
+      {
+        "id": "rem-nrqm-approximations-examples-scope-limits",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "What the controlled-approximations examples establish and what they do not",
+        "statement": "## Remarks\n\n- **What the page contains.** Four conditional computations of the declared\n  models of the companion A page: the exact two-level finite-gap family with\n  its second-order coefficient and a finite check of the cubic remainder\n  bound\n  ([[ex-nrqm-approximations-two-level-finite-gap-correction]]); the finite\n  level static Stark model of the declared Coulomb pair with vanishing\n  first-order shift, the exact quadratic splitting and a finite check of the\n  remainder bound\n  ([[ex-nrqm-approximations-stark-finite-level-shift]]); the spin-one\n  multiplet in a uniform field with the exact linear splitting and the\n  degenerate first-order check\n  ([[ex-nrqm-approximations-zeeman-multiplet-splitting]]); and the two\n  tunnelling asymptotic limits, the smooth-barrier semiclassical limit and\n  the exact rectangular thick-barrier prefactor\n  ([[ex-nrqm-approximations-smooth-barrier-tunnelling-limits]]). Each\n  computation states its model and its sources and cites the page's theorem\n  it checks.\n\n- **What the checks are.** The first two examples verify the quantitative\n  remainder bound of\n  [[pthm-nrqm-approximations-nondegenerate-perturbation-expansion]] on\n  exactly solvable two-state families, one with a finite gap and a\n  second-order shift, one with the compressed dipole coupling of\n  [[post-nrqm-approximations-static-finite-level-dipole-coupling]]; the\n  third verifies the first-order localisation of\n  [[pthm-nrqm-approximations-degenerate-first-order-splitting]] in the\n  exactly diagonalizable Zeeman family; the fourth compares two asymptotic\n  limits, one covered by\n  [[pthm-nrqm-approximations-barrier-transmission-asymptotics]] and one\n  explicitly excluded by it. These are mathematical checks inside declared\n  models, not tests of the models against data.\n\n- **What the page does not contain.** No experiment, no measured Stark or\n  Zeeman shift, no splitting value, no gyromagnetic ratio, no measured matrix element\n  or polarizability value, no transmission count, no detector response, no\n  apparatus, no calibration, no sampling model and no uncertainty record\n  appears; the radial dipole parameter $D_{\\rm rel}$ of the Stark example is\n  computed exactly from the declared charge and Coulomb length scale,\n  and is not measured. The examples\n  assert no transition rate, no lifetime and no branch-relaxation process;\n  see [[rem-nrqm-approximations-scope-and-empirical-status]] for the\n  corresponding scope record of the A page.\n\n- **Deferred content.** Empirical numerical matrix-element comparisons for concrete Coulomb\n  systems, time-dependent driving, transition rates, adiabatic evolution, and\n  any comparison with measured spectra belong to the driven-dynamics and\n  light-matter pairs of the track; the uncompressed static-field model is\n  outside the present scope by the postulate's exclusion clause.\n",
+        "strategy": "n/a",
+        "deps": [
+          "ex-nrqm-approximations-two-level-finite-gap-correction",
+          "ex-nrqm-approximations-stark-finite-level-shift",
+          "ex-nrqm-approximations-zeeman-multiplet-splitting",
+          "ex-nrqm-approximations-smooth-barrier-tunnelling-limits",
+          "pthm-nrqm-approximations-nondegenerate-perturbation-expansion",
+          "pthm-nrqm-approximations-degenerate-first-order-splitting",
+          "pthm-nrqm-approximations-barrier-transmission-asymptotics",
+          "post-nrqm-approximations-static-finite-level-dipole-coupling",
+          "rem-nrqm-approximations-scope-and-empirical-status"
+        ],
+        "dependency_roles": {
+          "ex-nrqm-approximations-two-level-finite-gap-correction": "formulation-prerequisite",
+          "ex-nrqm-approximations-stark-finite-level-shift": "formulation-prerequisite",
+          "ex-nrqm-approximations-zeeman-multiplet-splitting": "formulation-prerequisite",
+          "ex-nrqm-approximations-smooth-barrier-tunnelling-limits": "formulation-prerequisite",
+          "pthm-nrqm-approximations-nondegenerate-perturbation-expansion": "physical-result",
+          "pthm-nrqm-approximations-degenerate-first-order-splitting": "physical-result",
+          "pthm-nrqm-approximations-barrier-transmission-asymptotics": "physical-result",
+          "post-nrqm-approximations-static-finite-level-dipole-coupling": "physical-assumption",
+          "rem-nrqm-approximations-scope-and-empirical-status": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "dependency_level": 16,
+        "sources": {
+          "references": [
+            {
+              "title": "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.1 printed pages 203-211 (PDF pages 211-219): the textbook perturbation, Stark and Zeeman families that motivate the examples, whose conjectural branch-selection sentence is not imported",
+              "url": "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
+            },
+            {
+              "title": "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 7 'Two State Systems', Section 5 'Ammonia molecule in an electric field' printed and PDF pages 11-16: the exactly solvable two-state electric-field family used as the template for the closed-form checks",
+              "url": "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/7c376a3b5b27e5ea586a7e37b85a05d3_MIT8_05F13_Chap_07.pdf"
+            }
+          ]
+        },
+        "physical_scope": "A scope record for the examples companion of the controlled-approximations pair: the four conditional computations it contains, their model reliance, the checks they perform and the content they do not supply (no experiment, no measured value, no laboratory identification, no transition or relaxation)."
+      }
+    ]
+  }
+]

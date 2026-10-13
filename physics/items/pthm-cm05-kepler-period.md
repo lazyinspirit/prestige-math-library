@@ -61,14 +61,17 @@ be its conic data ([[pthm-cm05-conic]] clauses 1 and 3). Then:
    if in addition the model adopts the identification
    $m_i^{g}=m_i$ of [[post-cm05-gravity]] clause (ii), this reduces to
    $$T^{2}=\frac{4\pi^{2}a^{3}}{G_{\mathrm N}M}.$$
-3. **(Both labels.)** On the extension of the two-label motion supplied by
-   [[pthm-cm05-conic]] clause 3(a), for each $i=1,2$ the position relative to
+3. **(Both labels.)** On the global coordinate extension supplied by
+   [[pthm-cm05-conic]] clause 3(a) (write it again as $x$, with centre
+   of mass $X$), for each $i=1,2$ the position relative to
    the centre of mass is periodic with period $T$,
    $x_i(t+T)-X(t+T)=x_i(t)-X(t)$, while the absolute motions satisfy
    $$x_i(t+T)-x_i(t)=V\,T\qquad(t\in\mathbb R),$$
    with the constant centre-of-mass velocity $V=X'$ of
    [[pthm-cm05-relative-reduction]] clause 2; the absolute motions are
-   periodic exactly when $V=0$.
+   periodic exactly when $V=0$. The restriction of this extension to the
+   model time window $I_0$ is a model motion; statements about
+   $x_i(t+T)$ within that model require $t,t+T\in I_0$.
 4. **(Area per period.)** The area swept by the relative radius vector in one
    period is $\pi ab$, and it equals $JT/(2\mu)$; equivalently
    $T=2\pi\mu ab/J$ as in clause 1.
@@ -81,7 +84,7 @@ be its conic data ([[pthm-cm05-conic]] clauses 1 and 3). Then:
 
 [L1] Reduction ([[pthm-cm05-relative-reduction]] clauses 2-4, [[def-cm-central-force-trajectory]], [[post-cm05-central-model]] clauses (i)-(ii)): the relative coordinate $r$ is a central-force trajectory for $(\mu,u)$ with constant $j=Je_3$ and constant energy $E<0$; the centre of mass is affine with constant $V=X'=M^{-1}P$; and $x_i-X=\pm\frac{m_j}{M}r$ for the two labels.
 
-[L2] Orbit theory ([[pthm-cm05-conic]] clauses 1 and 3, [[thm-cm-kepler-orbit-period]], [[thm-cm-kepler-ellipse-geometry]]): for the negative-energy inverse-square trajectory of [L1], the conic data $e\in[0,1)$, $p$, $a=p/(1-e^{2})=-\kappa/(2E)$, $b=a\sqrt{1-e^{2}}$ apply; the relative trajectory and the two-label model motion extend uniquely to all of $\mathbb R$ by clause 3(a) of the cited physical theorem, and the relative trajectory is periodic with $T$ determined by $\theta(t_0+T)=\theta(t_0)+2\pi$ and satisfying $T=2\pi\mu ab/J=2\pi\sqrt{\mu/\kappa}\,a^{3/2}$, $T^{2}=4\pi^{2}\mu a^{3}/\kappa$; and the ellipse of the conic has area $\pi ab=\frac12\int_0^{2\pi}\varrho(\varphi)^2\,\mathrm d\varphi$, where $\varrho(\varphi)=p/(1+e\cos(\varphi-\theta_0))$.
+[L2] Orbit theory ([[pthm-cm05-conic]] clauses 1 and 3, [[thm-cm-kepler-orbit-period]], [[thm-cm-kepler-ellipse-geometry]]): for the negative-energy inverse-square trajectory of [L1], the conic data $e\in[0,1)$, $p$, $a=p/(1-e^{2})=-\kappa/(2E)$, $b=a\sqrt{1-e^{2}}$ apply; the relative trajectory and the reconstructed coordinate curves extend uniquely to all of $\mathbb R$, with the coordinate curves restricted to $I_0$ defining the extended model motion, by clause 3(a) of the cited physical theorem, and the relative trajectory is periodic with $T$ determined by $\theta(t_0+T)=\theta(t_0)+2\pi$ and satisfying $T=2\pi\mu ab/J=2\pi\sqrt{\mu/\kappa}\,a^{3/2}$, $T^{2}=4\pi^{2}\mu a^{3}/\kappa$; and the ellipse of the conic has area $\pi ab=\frac12\int_0^{2\pi}\varrho(\varphi)^2\,\mathrm d\varphi$, where $\varrho(\varphi)=p/(1+e\cos(\varphi-\theta_0))$.
 
 [L3] Area law ([[pthm-cm05-plane-area]] clauses 2-3): the swept-area function of the reduced orbit has constant derivative $J/(2\mu)$, so the area swept over an interval of length $T$ is $JT/(2\mu)$.
 
@@ -95,9 +98,9 @@ be its conic data ([[pthm-cm05-conic]] clauses 1 and 3). Then:
 
 2.1 Clause 2: substituting $\mu=m_1m_2/M$ and $\kappa=G_{\mathrm N}m_1^{g}m_2^{g}$ from [L4] into $T^{2}=4\pi^{2}\mu a^{3}/\kappa$ gives $T^{2}=4\pi^{2}a^{3}m_1m_2/\bigl(MG_{\mathrm N}m_1^{g}m_2^{g}\bigr)$; if additionally $m_i^{g}=m_i$, the numerator and denominator simplify by $m_1m_2$ to $T^{2}=4\pi^{2}a^{3}/(G_{\mathrm N}M)$. [step 1.1, L4, algebra]
 
-2.2 Clause 3: by [L1], $x_i-X=\pm\frac{m_j}{M}r$, and $r$, hence $x_i-X$, is $T$-periodic by step 1.1; also $X(t+T)-X(t)=VT$ because $X$ is affine with constant derivative $V$, so $x_i(t+T)-x_i(t)=VT+\bigl(x_i(t+T)-X(t+T)\bigr)-\bigl(x_i(t)-X(t)\bigr)=VT$. If $V=0$, this proves that both absolute motions are $T$-periodic. Conversely, suppose either absolute motion $x_i$ has any positive period $S$. For every positive integer $n$, periodicity and the affine motion of $X$ give $0=x_i(t+nS)-x_i(t)=nVS\pm\frac{m_j}{M}\bigl(r(t+nS)-r(t)\bigr)$ for all $t\in\mathbb R$. By the conic bound in [L2], $\lVert r(t)\rVert_2\le p/(1-e)$ for all $t$, so $nS\lVert V\rVert_2\le2(m_j/M)p/(1-e)$ for every $n$. Since the right side is fixed and $S>0$, this forces $V=0$. Thus either label has an absolute period only if $V=0$, and when $V=0$ both are periodic. [step 1.1, L1, L2, algebra]
+2.2 Clause 3: use the global coordinate extension of [L2], which restricts to a model motion on $I_0$. By [L1], $x_i-X=\pm\frac{m_j}{M}r$, and $r$, hence $x_i-X$, is $T$-periodic by step 1.1; also $X(t+T)-X(t)=VT$ because $X$ is affine with constant derivative $V$, so $x_i(t+T)-x_i(t)=VT+\bigl(x_i(t+T)-X(t+T)\bigr)-\bigl(x_i(t)-X(t)\bigr)=VT$. If $V=0$, this proves that both absolute motions are $T$-periodic. Conversely, suppose either absolute motion $x_i$ has any positive period $S$. For every positive integer $n$, periodicity and the affine motion of $X$ give $0=x_i(t+nS)-x_i(t)=nVS\pm\frac{m_j}{M}\bigl(r(t+nS)-r(t)\bigr)$ for all $t\in\mathbb R$. By the conic bound in [L2], $\lVert r(t)\rVert_2\le p/(1-e)$ for all $t$, so $nS\lVert V\rVert_2\le2(m_j/M)p/(1-e)$ for every $n$. Since the right side is fixed and $S>0$, this forces $V=0$. Thus either label has an absolute period only if $V=0$, and when $V=0$ both are periodic. [step 1.1, L1, L2, algebra]
 
-3.1 Clause 4: by [L2] the relative motion extends to $\mathbb R$; applying [L3] to that extended motion, its swept-area function has derivative $J/(2\mu)$, so the area swept over one period is $JT/(2\mu)$. Since $\theta:[t_0,t_0+T]\to[\theta(t_0),\theta(t_0)+2\pi]$ is a strictly increasing $C^1$ bijection with $\theta'=\rho^{-2}\mu^{-1}J$ on the extension, the substitution rule gives $$A(t_0+T)-A(t_0)=\frac12\int_{t_0}^{t_0+T}\rho^{2}\theta'=\frac12\int_{\theta(t_0)}^{\theta(t_0)+2\pi}\varrho(\varphi)^{2}\,\mathrm d\varphi=\frac12\int_{0}^{2\pi}\varrho(\varphi)^{2}\,\mathrm d\varphi=\pi ab$$ by the $2\pi$-periodicity of $\varrho$ and [L2]; combining with $A(t_0+T)-A(t_0)=JT/(2\mu)$ gives $T=2\pi\mu ab/J$. [step 1.1, L2, L3, algebra] ∎
+3.1 Clause 4: by [L2] the relative motion extends to $\mathbb R$; applying the relative areal-rate identity of [L3] to the global central-force trajectory, its swept-area function has derivative $J/(2\mu)$, so the area swept over one period is $JT/(2\mu)$. Since $\theta:[t_0,t_0+T]\to[\theta(t_0),\theta(t_0)+2\pi]$ is a strictly increasing $C^1$ bijection with $\theta'=\rho^{-2}\mu^{-1}J$ on the extension, the substitution rule gives $$A(t_0+T)-A(t_0)=\frac12\int_{t_0}^{t_0+T}\rho^{2}\theta'=\frac12\int_{\theta(t_0)}^{\theta(t_0)+2\pi}\varrho(\varphi)^{2}\,\mathrm d\varphi=\frac12\int_{0}^{2\pi}\varrho(\varphi)^{2}\,\mathrm d\varphi=\pi ab$$ by the $2\pi$-periodicity of $\varrho$ and [L2]; combining with $A(t_0+T)-A(t_0)=JT/(2\mu)$ gives $T=2\pi\mu ab/J$. [step 1.1, L2, L3, algebra] ∎
 
 ## Remarks
 

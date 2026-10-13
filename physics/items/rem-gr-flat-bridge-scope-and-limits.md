@@ -59,8 +59,9 @@ sources:
       url: "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong\
         /gr/gr.pdf"
     - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022
-        revision), section 4.2 and the Newtonian module: the Newtonian limit as
-        a restricted model comparison, not an identity of theories"
+        revision), section 7.2, equations (7.19)-(7.36), printed pp. 74-77
+        (PDF pp. 75-78): the weak-field and slow-motion approximation; the
+        uniform stationary comparison and its empirical status are stated locally"
       url: "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk\
         /user/hsr1000/part3_gr_lectures.pdf"
 verification:
@@ -75,9 +76,9 @@ proves nothing by itself.
 - **The flat model is a model.** [[pthm-gr-minkowski-vacuum-model]] shows
   that the flat geometry with $\Lambda=0$ and $T=0$ satisfies the adopted
   field law and what its ideal free-fall and clock readings are. It is one
-  solution among many: non-flat solutions, flat solutions with other global
-  topology and the semiclassical or observational questions attached to
-  "empty space" are outside this page. Statements about the flat model are
+  solution among many: clause (d) also supplies explicit non-flat vacuum and
+  flat quotient comparisons with different global topology. Semiclassical
+  and observational questions attached to "empty space" are outside this page. Statements about the flat model are
   conditional on the adopted postulates of
   [[post-gr-einstein-field-law]] and
   [[post-gr-ideal-clocks-and-free-fall]], and are not claims about nature.
@@ -99,7 +100,9 @@ proves nothing by itself.
   slow tilt. The page does not
   construct the input family from Newtonian initial data, does not prove
   existence of a global Newtonian limit in any gauge, and does not treat
-  strong fields, fast motion, long times or non-smooth sources.
+  strong fields, fast motion, unbounded scaled times, large-time limits at
+  fixed $\varepsilon$, or non-smooth sources. Fixed scaled intervals do
+  permit the stated $\varepsilon^{-1/2}$ coordinate-time horizons.
 
 - **The correspondence dictionary is adopted, not derived.**
   [[def-gr-newtonian-comparison-model-and-identification]] fixes the spatial
@@ -114,7 +117,7 @@ proves nothing by itself.
   variables is not an identity of theories.
 
 - **The displayed spatial form is chart-dependent.** The perturbation form
-  $g_{00}=-(1+2\Phi/c^2)$, $g_{ij}=(1-2\Phi/c^2)\delta_{ij}$ is a statement
+  $g_{00}=-(1+2\Phi/c^2)+r_{00}$, $g_{ij}=(1-2\Phi/c^2)\delta_{ij}+r_{ij}$ is a statement
   in the chart of the ansatz. Under a change of chart the components
   transform by the covariant transformation law
   ([[lem-gr-covariant-two-tensor-transformation-law]]), so comparisons of

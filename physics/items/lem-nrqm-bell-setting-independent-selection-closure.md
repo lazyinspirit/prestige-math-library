@@ -28,7 +28,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section II.A, PDF page 3: the decomposition p(ab|xy) = integral of q(lambda) p(a|x,lambda) p(b|y,lambda), in which the settings are chosen independently of the specification lambda; conditioning on a specification-only event reweights q"
+    - title: "N. Brunner, D. Cavalcanti, S. Pironio, V. Scarani and S. Wehner, 'Bell nonlocality', Reviews of Modern Physics 86 (2014) 419, Section I.A, PDF page 3: the decomposition p(ab|xy) = integral of q(lambda) p(a|x,lambda) p(b|y,lambda), in which the settings are chosen independently of the specification lambda; conditioning on a specification-only event reweights q"
       url: "https://arxiv.org/pdf/1303.2849"
     - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 6.1.4, printed pages 113-115 (PDF pages 121-123): experimental tests of Bell's inequality and the qualification that a recorded sample is a sub-ensemble of the pairs produced"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
@@ -102,16 +102,5 @@ on the outcomes. No choice principle is used.
 
 ## Remarks
 
-- **Setting-independent selection.** The lemma conditions on an event of the
-  specification space alone. This is the mathematical form of a
-  **setting-independent selection**: whether a run enters the recorded sample
-  is determined by the specification and not by the settings or the outcomes.
-  Nothing is claimed here for selection rules that depend on the distant
-  setting, on the local setting or on the observed outcomes; those require
-  their own models and are not covered by the lemma.
-- **Direction of use.** The lemma is used in the converse direction of
-  detection: if the full tables of a comparison admit a local-response
-  representation and the recorded trials are the runs that pass a
-  setting-independent selection, then the recorded tables again admit one, so
-  the CHSH bound holds for the recorded tables too. Without such a selection
-  model no transfer of the bound to a sub-ensemble is asserted.
+- **Setting-independent selection.** The lemma conditions on an event of the specification space alone. This is the mathematical form of a **setting-independent selection**: whether a run enters the recorded sample is determined by the specification and not by the settings or the outcomes. Nothing is claimed here for selection rules that depend on the distant setting, on the local setting or on the observed outcomes; those require their own models and are not covered by the lemma.
+- **Direction of use.** The lemma is used in the converse direction of detection: if the full tables of a comparison admit a local-response representation and the recorded trials are the runs that pass a setting-independent selection, then the recorded tables again admit one, so the CHSH bound holds for the recorded tables too. Without such a selection model no transfer of the bound to a sub-ensemble is asserted.

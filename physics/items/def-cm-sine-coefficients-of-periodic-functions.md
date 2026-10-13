@@ -6,21 +6,16 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 0
-deps: [def-ck-euclidean-maps-and-diffeomorphisms, def-continuity-real, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-integral, def-oriented-integral, thm-additivity-over-subintervals, def-sine-and-cosine-by-power-series, thm-sine-cosine-zero-sets-and-fundamental-period, cor-trigonometric-parity-and-pythagorean-identity, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, def-interval, def-abs-value]
+deps: [def-ck-euclidean-maps-and-diffeomorphisms, def-continuity-real, thm-continuous-implies-integrable, def-sine-and-cosine-by-power-series, thm-sine-cosine-zero-sets-and-fundamental-period, cor-trigonometric-parity-and-pythagorean-identity, def-interval, def-oriented-integral]
 dependency_roles:
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   def-continuity-real: mathematical-premise
-  def-integral-over-a-measurable-set: mathematical-premise
-  def-integrable-real-and-complex-functions-and-their-integrals: mathematical-premise
-  thm-linearity-of-the-integral: mathematical-premise
-  def-oriented-integral: mathematical-premise
-  thm-additivity-over-subintervals: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
   def-sine-and-cosine-by-power-series: mathematical-premise
   thm-sine-cosine-zero-sets-and-fundamental-period: mathematical-premise
   cor-trigonometric-parity-and-pythagorean-identity: mathematical-premise
-  def-lebesgue-measure-and-the-lebesgue-sigma-algebra: mathematical-premise
   def-interval: mathematical-premise
-  def-abs-value: mathematical-premise
+  def-oriented-integral: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable

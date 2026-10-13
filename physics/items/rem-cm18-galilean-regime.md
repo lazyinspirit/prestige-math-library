@@ -54,8 +54,11 @@ in one inertial frame: its observation times are times of that frame, its
 readout is a function of the coordinate states, and its error random element
 carries the units of the readout coordinates. Changing the frame shifts the
 coordinate times, transforms positions affinely and rotates and boosts
-coordinate velocities, so the same physical protocol has a different
-prediction map in a different frame. A measurement model must therefore name
+coordinate velocities. The prediction map in the new frame must be
+computed using the transformed protocol and its declared readout law; it
+need not differ numerically from the original map. For example, the allowed
+constant dimensionless readout $R\equiv0$ gives $\Phi\equiv0$ in both
+frames. A measurement model must therefore name
 its frame, and a claim that two frames "agree" is a claim about the declared
 transformation law of the model, not a separate empirical discovery.
 
@@ -68,18 +71,30 @@ framework cannot by itself form a dimensionless parameter that measures how
 close a system is to some other kinematic regime, and it states no numerical
 cutoff: every regime statement such as "the motion is adequately described
 by this model at the required accuracy" is an **external, empirically
-qualified premise** of a use of the model, not a theorem of it. Quantifying
-the error of such a statement would require a distinct model carrying a
-speed scale together with a limit or approximation theorem relating the two
-models; no such theorem is asserted, used or presupposed here.
+qualified premise** of a use of the model, not a theorem of it. A deductive
+approximation bound relative to a distinct physical model requires explicit
+hypotheses and a proved comparison estimate; a speed scale is needed only if that
+comparison uses one. Calibrated observations can instead bound discrepancies
+between specified predictions and readouts under declared apparatus,
+calibration and sampling assumptions, carrying their uncertainty and tested
+conditions. Such empirical bounds require neither another physical model nor
+a universal speed scale, and do not establish a universal validity boundary.
+No comparison theorem or empirical bound is asserted here.
 
 ## What is not claimed
 
-The framework distinguishes no inertial frame ([[rem-cm01-model-limit]]);
+The framework's kinematic data distinguish no inertial frame ([[rem-cm01-model-limit]]);
 "at rest" is a frame-relative description, not an absolute state. No
 measured speed, no numerical validity boundary, no comparison with any other
 kinematic framework, and no claim that a physical system is exactly
-Galilean is made. The Galilean transformations are exact symmetries of the
-adopted model by [[pthm-cm01-galilean-kinematics]]; whether a physical
-situation is adequately represented by the model is an empirical question
-that this item leaves open.
+Galilean is made. The Galilean transformations relate the adopted inertial
+frames and give the velocity and acceleration laws of
+[[pthm-cm01-galilean-kinematics]]. Covariance of the equation of motion also
+uses the transformed force map on the transferred domain prescribed by
+[[post-cm02-force-superposition]] clause (vi). A symmetry of a particular
+force model means a transformation carrying its solution curves to solutions
+of the same prescribed force law on the same domain; this requires the
+force law and its domain to be invariant under that transformation and does
+not follow from the kinematic theorem alone. Whether a physical situation
+is adequately represented by the model is an empirical question that this
+item leaves open.

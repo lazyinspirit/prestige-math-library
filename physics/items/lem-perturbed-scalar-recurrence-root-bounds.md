@@ -8,6 +8,8 @@ origin: pipeline
 domain: mathematics
 dependency_level: 4
 deps:
+  - lem-of-triangle-inequality
+  - cor-mean-value-theorem
   - def-bilateral-symbol-and-bounded-sequence-space
   - lem-close-map-first-component-has-uniform-inverse
   - def-ck-euclidean-maps-and-diffeomorphisms
@@ -23,6 +25,8 @@ deps:
   - thm-extreme-value-metric
   - thm-heine-borel-rn
 dependency_roles:
+  lem-of-triangle-inequality: mathematical-premise
+  cor-mean-value-theorem: mathematical-premise
   def-bilateral-symbol-and-bounded-sequence-space: mathematical-premise
   lem-close-map-first-component-has-uniform-inverse: mathematical-premise
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
@@ -104,13 +108,13 @@ $$P_{u,w}(v)=0\quad\Longleftrightarrow\quad B\bigl(u,V(u,v)\bigr)=V(v,w).$$
 
 [F3] $C^1$ calculus and the uniform bound: $e$ is built from $V$, $B$ and polynomials by composition, product and sum, so it is $C^1$ on the compact cube, and its value and first partial derivatives are bounded by a constant times $\varepsilon$ by [F1], [F2], the chain rule and the extreme value theorem ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[thm-chain-rule-for-total-derivatives]], [[thm-extreme-value-metric]], [[def-continuity-real]]); the constant depends only on $a$ and $R$. This is stated as clause 1 with a single constant $C$ absorbing the finitely many $O(1)$ factors.
 
-[F4] The endpoint values of the unperturbed quadratic ([[thm-of-square-roots]], [[def-abs-value]], [[def-interval]]): with $u,w\in[-R,R]$ one has $|u+w|\le2R$, hence
+[F4] The endpoint values of the unperturbed quadratic ([[thm-of-square-roots]], [[def-abs-value]], [[lem-of-triangle-inequality]], [[def-interval]]): with $u,w\in[-R,R]$ one has $|u+w|\le2R$, hence
 
 $$l^2-a-(u+w)\le l^2-a+2R=-4\sqrt a+15,\qquad R^2-a-(u+w)\ge R^2-a-2R=4\sqrt a+3,$$
 
 because $l^2=a-6\sqrt a+9$ and $R^2=a+6\sqrt a+9$. In particular $4\sqrt a-15\ge25$ and $4\sqrt a+3\ge43$ for $a\ge100$.
 
-[F5] The intermediate value theorem and monotonicity ([[thm-intermediate-value]], [[def-continuity-real]], [[def-abs-value]]): a continuous real function on a closed interval taking a negative value at one endpoint and a positive value at the other has a zero; a $C^1$ function with strictly positive derivative on an interval is strictly increasing there.
+[F5] The intermediate value theorem and mean value theorem ([[thm-intermediate-value]], [[cor-mean-value-theorem]], [[def-continuity-real]], [[def-abs-value]]): a continuous real function on a closed interval taking a negative value at one endpoint and a positive value at the other has a zero; for a function continuous on a closed interval and differentiable on its interior, $f(b)-f(a)=f\prime(\xi)(b-a)$ for some interior $\xi$. Thus a $C^1$ function with strictly positive derivative is strictly increasing, and $|f\prime|\le D$ gives $|f(b)-f(a)|\le D|b-a|$, including boundary endpoints.
 
 [F6] Implicit differentiation in two variables ([[thm-euclidean-implicit-function-theorem]], [[def-ck-euclidean-maps-and-diffeomorphisms]]): if $P(u_0,w_0,v_0)=0$ and $\partial_vP(u_0,w_0,v_0)\ne0$, then locally $v=M(u,w)$ is the unique $C^1$ solution with $\partial_uM=-\partial_uP/\partial_vP$ and $\partial_wM=-\partial_wP/\partial_vP$.
 

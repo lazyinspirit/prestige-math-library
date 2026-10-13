@@ -6,9 +6,14 @@ domain: mathematics
 title: "Coherent-state convergence"
 status: draft
 origin: pipeline
-dependency_level: 4
-deps: [thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, thm-nrqm-oscillator-hermite-completeness, lem-nrqm-oscillator-closed-ladder-domains, def-complex-exponential, lem-complex-exponential-series-converges-everywhere, thm-geometric-series, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]
+dependency_level: 3
+deps: [lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-complex-exponential-addition-and-real-extension, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, cor-exponential-reciprocal-and-positivity, thm-exponential-is-strictly-increasing, thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, thm-nrqm-oscillator-hermite-completeness, lem-nrqm-oscillator-closed-ladder-domains, def-complex-exponential, lem-complex-exponential-series-converges-everywhere, thm-geometric-series, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]
 dependency_roles:
+  lem-l-two-with-the-integral-pairing-is-a-hilbert-space: mathematical-premise
+  thm-complex-exponential-addition-and-real-extension: mathematical-premise
+  cor-complex-exponential-cartesian-form-modulus-and-eulers-identity: mathematical-premise
+  cor-exponential-reciprocal-and-positivity: mathematical-premise
+  thm-exponential-is-strictly-increasing: mathematical-premise
   thm-nrqm-oscillator-hermite-recurrence: mathematical-premise
   thm-nrqm-oscillator-hermite-orthogonality: mathematical-premise
   thm-nrqm-oscillator-hermite-completeness: mathematical-premise
@@ -51,27 +56,29 @@ $$\sum_nn^{2k}|c_n|^2=e^{-|z|^2}\sum_{n=0}^{\infty}\frac{n^{2k}|z|^{2n}}{n!}<\in
 
 (e) $\langle N\psi_z,\psi_z\rangle=|z|^2$ and $\|a^\dagger\psi_z\|^2=|z|^2+1$, and $\psi_0=g_0$.
 
-The completeness of $(g_n)$ ([[thm-nrqm-oscillator-hermite-completeness]]) is used only to invoke the closed ladder operators of [[lem-nrqm-oscillator-closed-ladder-domains]] on a complete orthonormal family; the convergence, normalization and moment statements (a)-(e) then use the orthonormality of [[thm-nrqm-oscillator-hermite-orthogonality]] and those operator domains.
+The completeness of $(g_n)$ ([[thm-nrqm-oscillator-hermite-completeness]]) is used for uniqueness from the prescribed coefficients in (a) and to invoke the closed ladder operators of [[lem-nrqm-oscillator-closed-ladder-domains]] on a complete orthonormal family. Series convergence and normalization use orthonormality and Hilbert-space completeness; the operator and moment conclusions use the supplied closed ladder domains.
 
 ## Facts & Assumptions
 
 **Given:** the Hermite family $(g_n)$ with its ladder operators $a,a^\dagger,N$; a complex number $z$; the numbers $c_n=e^{-|z|^2/2}z^n/\sqrt{n!}$.
 
-[F1] $\langle g_n,g_m\rangle=\delta_{nm}$; a series $\sum_na_ng_n$ converges in $L^2$ exactly when $\sum_n|a_n|^2<\infty$, and then $\bigl\|\sum_na_ng_n\bigr\|^2=\sum_n|a_n|^2$ ([[thm-nrqm-oscillator-hermite-orthogonality]](a), [[def-l-p-space-as-a-quotient-by-null-functions]], [[def-complex-lp-and-euclidean-test-function-conventions]]).
+[F1] $\langle g_n,g_m\rangle=\delta_{nm}$ ([[thm-nrqm-oscillator-hermite-orthogonality]](a)), and $L^2$ is a complex Hilbert space under Countable Choice ([[lem-l-two-with-the-integral-pairing-is-a-hilbert-space]]). Finite orthogonal sums satisfy $\|\sum_{n\in E}a_ng_n\|^2=\sum_{n\in E}|a_n|^2$. Thus a series $\sum_na_ng_n$ converges exactly when $\sum_n|a_n|^2<\infty$: finite tail norms give the Cauchy criterion and Hilbert-space completeness gives the limit; conversely convergence bounds the partial norms. Continuity of the norm and inner product gives the sum's squared norm and its coefficients.
 
 [F2] On $D(N)$ one has $a^\dagger a=N$, $aa^\dagger=N+I$; $D(aa^\dagger)=D(a^\dagger a)=D(N)$; and $a$ is closed with $a^*=a^\dagger$ ([[lem-nrqm-oscillator-closed-ladder-domains]](b),(d)).
 
-[F3] $e^{t}=\sum_{n\ge0}t^n/n!$ for complex $t$, the series converging absolutely ([[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]]); powers and integer powers of complex numbers are those of the library's power conventions.
+[F3] $e^{t}=\sum_{n\ge0}t^n/n!$ for complex $t$, the series converging absolutely ([[def-complex-exponential]], [[lem-complex-exponential-series-converges-everywhere]]); powers and integer powers of complex numbers are those of the library's power conventions. The addition law $e^{v+w}=e^ve^w$ and agreement with the real exponential are [[thm-complex-exponential-addition-and-real-extension]]; for real $x,y$, $e^{x+iy}=e^x(\cos y+i\sin y)$ and $|e^{x+iy}|=e^x$ are [[cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]]. Positivity and $e^{-x}=1/e^x$ are [[cor-exponential-reciprocal-and-positivity]], and strict increase is [[thm-exponential-is-strictly-increasing]].
 
 [F4] If $0\le a_{n+1}\le\frac12a_n$ for all $n\ge N$, then $\sum_{n\ge N}a_n\le2a_N$, by comparison with the geometric series $\sum_k2^{-k}=2$ ([[thm-geometric-series]]).
 
 [F5] $ag_n=\sqrt n\,g_{n-1}$ for $n\ge1$ with $ag_0=0$; $a^\dagger g_n=\sqrt{n+1}g_{n+1}$ ([[thm-nrqm-oscillator-hermite-recurrence]](e)).
 
+[F6] The Hermite family is complete: any $h\in L^2$ with $\langle h,g_n\rangle=0$ for every $n$ is zero ([[thm-nrqm-oscillator-hermite-completeness]](b)).
+
 ## Proof
 
-1.1 [Convergence and normalization] For $N\ge M$, the partial sums $S_N:=e^{-|z|^2/2}\sum_{n\le N}\frac{z^n}{\sqrt{n!}}g_n$ satisfy $\|S_N-S_M\|^2=e^{-|z|^2}\sum_{M<n\le N}\frac{|z|^{2n}}{n!}$ by [F1]. As $N,M\to\infty$ the right side tends to $0$ because $\sum_n\frac{|z|^{2n}}{n!}=e^{|z|^2}<\infty$ by [F3]; hence $(S_N)$ is Cauchy and $\psi_z:=\lim_NS_N\in L^2$ exists, and taking limits in the same identity gives $\|\psi_z\|^2=e^{-|z|^2}\sum_n\frac{|z|^{2n}}{n!}=1$. Uniqueness of the coefficient sequence is orthonormality [F1]. [given, F1, F3]
+1.1 [Convergence and normalization] For $N\ge M$, the partial sums $S_N:=e^{-|z|^2/2}\sum_{n\le N}\frac{z^n}{\sqrt{n!}}g_n$ satisfy $\|S_N-S_M\|^2=e^{-|z|^2}\sum_{M<n\le N}\frac{|z|^{2n}}{n!}$ by [F1]. As $N,M\to\infty$ the right side tends to $0$ because $\sum_n\frac{|z|^{2n}}{n!}=e^{|z|^2}<\infty$ by [F3]; hence $(S_N)$ is Cauchy and $\psi_z:=\lim_NS_N\in L^2$ exists, and taking limits in the same identity gives $\|\psi_z\|^2=e^{-|z|^2}\sum_n\frac{|z|^{2n}}{n!}=1$. For fixed $n$, inner-product continuity gives $\langle\psi_z,g_n\rangle=\lim_{M\to\infty}\langle S_M,g_n\rangle=c_n$. If $x\in L^2$ has these same coefficients, then $\langle x-\psi_z,g_n\rangle=0$ for every $n$, so $x=\psi_z$ by completeness [F6]. [given, F1, F3, F6]
 
-2.1 [Number domains] Fix $k\in\mathbb N$ and let $a_n:=n^{2k}|z|^{2n}/n!\ge0$. If $z=0$, $\psi_0=g_0$, which lies in every $D(N^k)$ and all terms $a_n$ with $n\ge1$ vanish. If $z\ne0$, for $n\ge1$, $\frac{a_{n+1}}{a_n}=(\frac{n+1}{n})^{2k}\frac{|z|^2}{n+1}\to0$, so there is $N$ with $a_{n+1}\le\frac12a_n$ for $n\ge N$; by [F4], $\sum_{n\ge N}a_n\le2a_N<\infty$, and the finitely many initial terms are finite. Hence $\sum_nn^{2k}|c_n|^2=e^{-|z|^2}\sum_na_n<\infty$. Since $D(N^k)=\{x:\sum_nn^{2k}|\langle x,g_n\rangle|^2<\infty\}$ (inducting the domain formula of [[lem-nrqm-oscillator-closed-ladder-domains]](a) for $N$), this says $\psi_z\in D(N^k)$. [step 1.1, F1, F4, algebra]
+2.1 [Number domains] For $k=0$ use $N^0=I$, $D(N^0)=H$ and $n^0=1$, including $n=0$; step 1.1 proves the assertion. Now fix $k\ge1$ and let $a_n:=n^{2k}|z|^{2n}/n!\ge0$. If $z=0$, $\psi_0=g_0$, which lies in every $D(N^k)$ and all terms $a_n$ with $n\ge1$ vanish. If $z\ne0$, for $n\ge1$, $\frac{a_{n+1}}{a_n}=(\frac{n+1}{n})^{2k}\frac{|z|^2}{n+1}\to0$, so there is $N$ with $a_{n+1}\le\frac12a_n$ for $n\ge N$; by [F4], $\sum_{n\ge N}a_n\le2a_N<\infty$, and the finitely many initial terms are finite. Hence $\sum_nn^{2k}|c_n|^2=e^{-|z|^2}\sum_na_n<\infty$. Since $D(N^k)=\{x:\sum_nn^{2k}|\langle x,g_n\rangle|^2<\infty\}$ (inducting the domain formula of [[lem-nrqm-oscillator-closed-ladder-domains]](a): $N^j x$ has coefficients $n^j\langle x,g_n\rangle$, and the weight $n^{2k}$ dominates every lower weight for $n\ge1$), this says $\psi_z\in D(N^k)$. [step 1.1, F1, F2, F4, algebra]
 
 2.2 [$a\psi_z=z\psi_z$] Each partial sum $S_N$ is a finite combination of the $g_n$, so $S_N\in D(N)\subseteq D(a)$; by [F5], $aS_N=e^{-|z|^2/2}\sum_{n=1}^Nz^n\sqrt n\,g_{n-1}/\sqrt{n!}=ze^{-|z|^2/2}\sum_{m=0}^{N-1}\frac{z^m}{\sqrt{m!}}g_m=zS_{N-1}$. As $N\to\infty$, $S_N\to\psi_z$ and $aS_N\to z\psi_z$ by step 1.1; since $a$ is closed [F2], $\psi_z\in D(a)$ and $a\psi_z=z\psi_z$. Taking norms, $\|a\psi_z\|=|z|$ by (a). [step 1.1, F2, F5, algebra]
 

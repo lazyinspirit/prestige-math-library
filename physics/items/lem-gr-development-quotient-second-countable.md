@@ -1,7 +1,7 @@
 ---
 id: lem-gr-development-quotient-second-countable
 kind: lemma
-title: "Second countability of the universal development quotient from a countable dense set and exponential charts"
+title: "An explicit rational-exponential basis for the universal development quotient"
 status: draft
 origin: session
 domain: mathematics
@@ -10,8 +10,9 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: constructive
-deps: [lem-gr-joint-exponential-diffeomorphism, lem-gr-universal-development, lem-gr-development-quotient-dense-set, thm-gr-convex-normal-neighborhoods, thm-gr-local-geodesics-and-exponential-map, def-second-countable-space, def-topology-basis-subbasis, thm-countable-union-of-countable, def-countable-choice, def-countable, def-c-r-and-smooth-maps-between-smooth-manifolds, def-continuity-real, lem-q-and-irrationals-dense-r]
+deps: [def-dependent-choice, lem-gr-joint-exponential-diffeomorphism, lem-gr-universal-development, lem-gr-development-quotient-dense-set, thm-gr-convex-normal-neighborhoods, thm-gr-local-geodesics-and-exponential-map, def-second-countable-space, def-topology-basis-subbasis, thm-countable-union-of-countable, def-countable-choice, def-countable, def-c-r-and-smooth-maps-between-smooth-manifolds, def-continuity-real, lem-q-and-irrationals-dense-r]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
   lem-gr-joint-exponential-diffeomorphism: mathematical-premise
   lem-gr-universal-development: mathematical-premise
   lem-gr-development-quotient-dense-set: mathematical-premise
@@ -46,15 +47,19 @@ $\pi|_{U_\alpha}:U_\alpha\to Q_\alpha\subseteq Q$ be as in
 Euclidean smooth four-manifold with a smooth Lorentzian metric $\bar g$, the
 open sets $Q_\alpha$ cover $Q$, and each $\pi|_{U_\alpha}$
 is a diffeomorphism onto $Q_\alpha$. Let $D\subseteq Q$ be a countable dense
-subset, as supplied by [[lem-gr-development-quotient-dense-set]]. Then $Q$ is
-second countable ([[def-second-countable-space]]).
-
-More precisely, choose one basis at each $d\in D$. In these coordinates let
+subset, as supplied by [[lem-gr-development-quotient-dense-set]]. When
+$Q$ and $D$ are obtained from these development suppliers, retain their
+Countable Choice and Dependent Choice hypotheses ([[def-dependent-choice]]).
+The basis construction conditional on the supplied $Q,D$ uses Countable
+Choice only. Choose one
+basis at each $d\in D$. In these coordinates let
 $B_d(a,r)\subseteq T_dQ$ be the Euclidean open ball centered at
 $a\in\mathbb Q^4$ with radius $r\in\mathbb Q_{>0}$, and let
 $\mathcal E_d$ be the maximal exponential domain. Then
 $$\mathcal B:=\{\exp_d(B_d(a,r)):d\in D, a\in\mathbb Q^4, r\in\mathbb Q_{>0}, B_d(a,r)\subseteq\mathcal E_d, \exp_d|_{B_d(a,r)}\text{ is a diffeomorphism onto an open subset of }Q\}$$
-is a countable basis of the topology of $Q$.
+is a countable basis of the topology of $Q$. This exhibits an explicit basis
+for the second-countability conclusion of
+[[lem-gr-universal-development]] clause (d).
 
 ## Facts & Assumptions
 

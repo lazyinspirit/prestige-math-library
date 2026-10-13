@@ -22,10 +22,10 @@ provenance:
 proof_strategy: direct
 sources:
   references:
-    - title: "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 8.6, formulas (8.76)-(8.81): decoupled harmonic modes of $Mq''+Wq=0$ and their energies; Section 3.2 for the inhomogeneous linear solution structure"
-      url: "https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf"
-    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6 (normal modes and their equations), printed pages 40-45"
-      url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+  - title: G. Teschl, Ordinary Differential Equations and Dynamical Systems (retrieved 365-page online edition), Section 8.4, Eqs. (8.77)-(8.80), printed pp. 245-246 (quadratic harmonic model and modal transformation); Section 3.4, Theorem 3.12, printed pp. 83-84 (inhomogeneous linear response). The present mass convention and forced mode formulas are checked locally.
+    url: https://schecter.math.ncsu.edu/ma_732_sp13/teschl_ode.pdf
+  - title: D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 version), Section 2.6 (normal modes and their equations), printed pages 40-45
+    url: https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf
 verification:
   precheck: pass
 ---
@@ -36,7 +36,7 @@ Let $n\ge1$, let $M\in M_n(\mathbb R)$ be symmetric positive definite, let $K\in
 
 $$\psi(t):=O^{\mathsf T}M^{-1/2}\varphi(t),\qquad \omega_i:=\sqrt{\lambda_i}\ (\lambda_i>0),$$
 
-and for a $C^2$ curve $q:I\to\mathbb R^n$ put $z:=O^{\mathsf T}M^{1/2}q$. Then:
+and for a curve $q:I\to\mathbb R^n$ whose first and second derivatives exist on $I$ (relative to $I$ at included endpoints) and whose second derivative is continuous on $I$, put $z:=O^{\mathsf T}M^{1/2}q$. Then:
 
 1. $q$ solves the forced quadratic system $Mq''+Kq=\varphi$ on $I$ if and only if $z$ solves the decoupled forced system
 $$z_i''+\lambda_iz_i=\psi_i\qquad(1\le i\le n)$$

@@ -1,0 +1,1246 @@
+[
+  {
+    "order": 97,
+    "id": "cm-math-rigid",
+    "kind": "A",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Rigid",
+    "companion": "cm-math-rigid-examples",
+    "requires": [
+      "cm-math-balances",
+      "cm-math-geometry",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "the-spectral-theorem-and-singular-value-decomposition",
+      "measures-and-their-basic-properties",
+      "sigma-algebras-and-borel-sets",
+      "gaussian-elimination-and-row-reduction",
+      "sine-cosine-and-the-definition-of-pi",
+      "the-exponential-function",
+      "the-logarithm-and-general-powers"
+    ],
+    "items": [
+      {
+        "id": "lem-cm-matrix-curve-derivative-rules",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Derivative rules for differentiable matrix-valued curves, and skewness of $R^{\\mathsf T}R'$ for a curve in $SO(3)$",
+        "statement": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points, let $t_0\\in I$ and let $A,B:I\\to M_3(\\mathbb R)$ be **differentiable at $t_0$**, meaning ([[def-matrix-space]]) that every entry function $t\\mapsto A(t)_{ij}$ and $t\\mapsto B(t)_{ij}$ is differentiable at $t_0$ in the sense of [[def-derivative]]; write $A'(t_0)$ for the matrix with entries $A'(t_0)_{ij}:=(t\\mapsto A(t)_{ij})'(t_0)$, and similarly for $B$.\n\n1. $A+B$ and $A^{\\mathsf T}$ are differentiable at $t_0$, with $(A+B)'(t_0)=A'(t_0)+B'(t_0)$ and $(A^{\\mathsf T})'(t_0)=(A'(t_0))^{\\mathsf T}$.\n2. $AB$ is differentiable at $t_0$, with $(AB)'(t_0)=A'(t_0)B(t_0)+A(t_0)B'(t_0)$.\n3. If $A(t)\\in SO(3)$ for every $t\\in I$ ([[def-cm-special-orthogonal-group]]), then the matrix $A(t_0)^{\\mathsf T}A'(t_0)$ is skew-symmetric, i.e. $(A^{\\mathsf T}A')^{\\mathsf T}=-A^{\\mathsf T}A'$ at $t_0$, and likewise $A'(t_0)A(t_0)^{\\mathsf T}$ is skew-symmetric. In particular the trace of each of these two matrices vanishes.",
+        "deps": [
+          "def-derivative",
+          "thm-algebra-of-derivatives",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "prop-transpose-laws",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-so3-is-a-matrix-group"
+        ],
+        "dependency_roles": {
+          "def-derivative": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "prop-transpose-laws": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-so3-is-a-matrix-group": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.1.1, printed pp. 47-49: the moving body basis and the antisymmetry computation $R^{\\mathsf T}\\dot R+\\dot R^{\\mathsf T}R=0$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.2 (Kinematics of Rotation), Eq. (2.21): orientation matrix and skew angular-velocity matrix",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.1, Eqs. (4.1)-(4.10): moving frame, antisymmetric angular-velocity matrix and the transport theorem",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-cm-skew-matrix-cross-product-correspondence",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The skew-matrix/cross-product correspondence $[\\omega]_\\times z=\\omega\\times z$ and its conjugation law $R[\\omega]_\\times R^{\\mathsf T}=[R\\omega]_\\times$",
+        "statement": "Use the standard basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$ and coordinates $\\omega=\\omega_1e_1+\\omega_2e_2+\\omega_3e_3$ ([[lem-standard-basis-of-f-n]], [[thm-unique-coordinates-with-respect-to-an-ordered-basis]]). Define the map $[\\cdot]_\\times:\\mathbb R^3\\to M_3(\\mathbb R)$ by\n$$[\\omega]_\\times:=\\begin{pmatrix}0&-\\omega_3&\\omega_2\\\\ \\omega_3&0&-\\omega_1\\\\ -\\omega_2&\\omega_1&0\\end{pmatrix}.$$\nThen:\n\n1. $[\\omega]_\\times z=\\omega\\times z$ for all $\\omega,z\\in\\mathbb R^3$, the cross product being that of [[def-cross-product-in-r3]].\n2. $[\\omega]_\\times^{\\mathsf T}=-[\\omega]_\\times$ for every $\\omega$; the map $\\omega\\mapsto[\\omega]_\\times$ is linear and injective, and its image is exactly the set of skew-symmetric matrices of $M_3(\\mathbb R)$. Consequently every skew-symmetric $\\Omega\\in M_3(\\mathbb R)$ equals $[\\omega]_\\times$ for exactly one $\\omega$, namely $\\omega=(\\Omega_{32},\\Omega_{13},\\Omega_{21})$.\n3. For every $R\\in SO(3)$ ([[def-cm-special-orthogonal-group]]) and every $\\omega\\in\\mathbb R^3$, $$R[\\omega]_\\times R^{\\mathsf T}=[R\\omega]_\\times.$$",
+        "deps": [
+          "def-cross-product-in-r3",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "prop-transpose-laws",
+          "thm-determinant-multiplicative",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-so3-is-a-matrix-group",
+          "def-euclidean-inner-product",
+          "def-inner-product-space",
+          "lem-standard-basis-of-f-n",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis"
+        ],
+        "dependency_roles": {
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "prop-transpose-laws": "mathematical-premise",
+          "thm-determinant-multiplicative": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-so3-is-a-matrix-group": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "lem-standard-basis-of-f-n": "mathematical-premise",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.1.1, Eqs. (3.5)-(3.7), printed pp. 47-48: the antisymmetric angular-velocity matrix and its single-index vector",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.2: extracting the angular-velocity vector from an antisymmetric matrix and rotation-covariance of the cross-product identification",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "def-cm-mass-distribution-and-inertia-matrix",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Mass distributions on $\\mathbb R^3$: total mass, first moment and inertia matrix",
+        "statement": "Let $\\mathcal B(\\mathbb R^3)$ be the Borel sigma-algebra of $\\mathbb R^3$ ([[def-borel-sigma-algebra]]) and let $\\nu$ be a measure on the measurable space $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-measure]], [[def-measure-space]]) that is **finite**, $\\nu(\\mathbb R^3)<+\\infty$, and **bounded**, meaning that there is a real $R>0$ with\n$$\\nu\\bigl(\\mathbb R^3\\setminus\\overline B_R(0)\\bigr)=0,$$\nthe closed ball being that of [[def-metric-ball]]. Throughout, integrals are Lebesgue integrals against $\\nu$ in the sense of [[def-integral-over-a-measurable-set]] and [[def-integrable-real-and-complex-functions-and-their-integrals]], and for a measurable vector- or matrix-valued function the integral is defined **componentwise**: $\\int F\\,d\\nu:=\\bigl(\\int F_1\\,d\\nu,\\int F_2\\,d\\nu,\\int F_3\\,d\\nu\\bigr)$ and $\\bigl(\\int M\\,d\\nu\\bigr)_{jk}:=\\int M_{jk}\\,d\\nu$, whenever every displayed scalar integral is finite.\n\nA **mass distribution on $\\mathbb R^3$** is a bounded finite Borel measure $\\nu$ with $m:=\\nu(\\mathbb R^3)\\in(0,+\\infty)$; the number $m$ is its **total mass**. Writing points of $\\mathbb R^3$ as $\\rho$ and using the Euclidean inner product $\\langle\\cdot,\\cdot\\rangle$ and norm $\\lVert\\rho\\rVert_2=\\sqrt{\\langle\\rho,\\rho\\rangle}$ of [[def-euclidean-inner-product]], define:\n\n1. the **first moment** $\\mu(\\nu):=\\int\\rho\\,d\\nu\\in\\mathbb R^3$, read componentwise as $\\mu(\\nu)_j=\\int\\rho_j\\,d\\nu$;\n2. the **inertia matrix** $I(\\nu)\\in M_3(\\mathbb R)$ ([[def-matrix-space]]) by its entries $I(\\nu)_{jk}:=\\int\\bigl(\\lVert\\rho\\rVert_2^2\\,\\delta_{jk}-\\rho_j\\rho_k\\bigr)\\,d\\nu$, where $\\delta_{jk}=1$ if $j=k$ and $\\delta_{jk}=0$ otherwise; equivalently $I(\\nu)=\\int\\bigl(\\lVert\\rho\\rVert_2^2 I_3-\\rho\\rho^{\\mathsf T}\\bigr)\\,d\\nu$ with $I_3$ the identity matrix and $\\rho\\rho^{\\mathsf T}$ the matrix product of [[def-matrix-product-and-identity-matrix]].\n\nThe mass distribution is **centred** when $\\mu(\\nu)=0$. Under the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), each of the integrals above is a finite real number: on $\\overline B_R(0)$ one has $|\\rho_j|\\le R$ and $|\\rho_j\\rho_k|\\le R^2$, and $\\nu(\\mathbb R^3)<+\\infty$; the precise statement and proof are [[lem-cm-mass-moments-are-finite]], which depends on this definition only for its notation. The assumption is used there exactly once, to obtain the Borel measurability of the polynomial integrands from the published continuity criterion; every later item that invokes this finiteness carries the assumption explicitly.",
+        "deps": [
+          "def-borel-sigma-algebra",
+          "def-measure",
+          "def-measure-space",
+          "def-metric-ball",
+          "def-metric-topology",
+          "lem-metrics-on-rn",
+          "thm-metric-open-set-algebra",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-euclidean-inner-product",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-measure": "mathematical-premise",
+          "def-measure-space": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "lem-metrics-on-rn": "mathematical-premise",
+          "thm-metric-open-set-algebra": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "dependency_level": 0,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.2, Eqs. (3.19)-(3.22), printed pp. 50-52: inertia-tensor components of a discrete or continuous mass distribution and the symmetry/positivity computation",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.2, Eqs. (4.16)-(4.22): continuous inertia-tensor integral and angular momentum",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.4 (Inertia Tensor), Eq. (2.41) and §2.6 (Vector Angular Momentum)",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-cm-mass-moments-are-finite"
+        ]
+      },
+      {
+        "id": "lem-cm-mass-moments-are-finite",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Finiteness of the moments of a bounded finite Borel measure on $\\mathbb R^3$",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $\\nu$ be a measure on $(\\mathbb R^3,\\mathcal B(\\mathbb R^3))$ ([[def-cm-mass-distribution-and-inertia-matrix]]) that is finite and bounded: $\\nu(\\mathbb R^3)<+\\infty$ and $\\nu(\\mathbb R^3\\setminus\\overline B_R(0))=0$ for some $R>0$ ([[def-metric-ball]]). Then:\n\n1. for all $j,k\\in\\{1,2,3\\}$ the functions $\\rho\\mapsto\\rho_j$ and $\\rho\\mapsto\\rho_j\\rho_k$ are Borel measurable and $\\nu$-integrable, with $\\int\\lvert\\rho_j\\rvert\\,d\\nu\\le R\\,\\nu(\\mathbb R^3)$ and $\\int\\lvert\\rho_j\\rho_k\\rvert\\,d\\nu\\le R^2\\,\\nu(\\mathbb R^3)$;\n2. consequently the total mass $m=\\nu(\\mathbb R^3)$, the first moment $\\mu(\\nu)$ and every entry of the inertia matrix $I(\\nu)$ of the definition are well-defined finite real numbers, and $\\lvert\\mu(\\nu)_j\\rvert\\le R\\,\\nu(\\mathbb R^3)$ while $\\lvert I(\\nu)_{jk}\\rvert\\le 2R^2\\,\\nu(\\mathbb R^3)$.",
+        "deps": [
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "def-countable-choice",
+          "cor-continuous-functions-are-borel-measurable",
+          "def-borel-and-lebesgue-measurable-function-on-rn",
+          "def-borel-sigma-algebra",
+          "def-metric-topology",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "def-integral-over-a-measurable-set",
+          "def-nonnegative-lebesgue-integral",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-integral-triangle-inequality",
+          "def-metric-ball",
+          "lem-metrics-on-rn",
+          "thm-metric-open-set-algebra",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "cor-continuous-functions-are-borel-measurable": "mathematical-premise",
+          "def-borel-and-lebesgue-measurable-function-on-rn": "mathematical-premise",
+          "def-borel-sigma-algebra": "mathematical-premise",
+          "def-metric-topology": "mathematical-premise",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-integral-triangle-inequality": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "lem-metrics-on-rn": "mathematical-premise",
+          "thm-metric-open-set-algebra": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "dependency_level": 1,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.2, Eq. (3.19) and the parallel-axis discussion of §3.2.1, printed pp. 50-53: second moments of a bounded mass distribution are finite",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.2, Eq. (4.16): the inertia-tensor integral of a bounded density",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "def-cm-rigid-placement-and-body-angular-velocity",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Rigid placements, body and spatial angular velocity, and material velocities",
+        "statement": "Let $I\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $\\nu$ be a mass distribution on $\\mathbb R^3$ with total mass $m$ ([[def-cm-mass-distribution-and-inertia-matrix]]), let $c:I\\to\\mathbb R^3$ be differentiable and let $R:I\\to SO(3)$ be differentiable ([[def-cm-special-orthogonal-group]]), differentiability meaning entrywise differentiability of $R$ in the sense of [[def-derivative]] with derivative $R'$; write $c'$ for the derivative of $c$.\n\nThe **rigid placement with reference shape $\\nu$, translation $c$ and rotation $R$** is the map\n$$x:I\\times\\mathbb R^3\\longrightarrow\\mathbb R^3,\\qquad x(t,\\rho):=c(t)+R(t)\\rho,$$\nso that the material point labelled by $\\rho$ (a point of the reference shape) is carried to $x(t,\\rho)$ at time $t$; the map $x(t,\\cdot)$ is the **placement at time $t$**, and the pair $(c(t),R(t))$ is its **configuration**. The **material velocity** of the label $\\rho$ at time $t$ is the derivative\n$$\\partial_tx(t,\\rho):=c'(t)+R'(t)\\rho,$$\nwhich exists by differentiability of $c$ and of the entries of $R$.\n\n**Body and spatial angular velocity.** By [[lem-cm-matrix-curve-derivative-rules]] the matrix $R(t)^{\\mathsf T}R'(t)$ is skew-symmetric at every $t\\in I$. By [[lem-cm-skew-matrix-cross-product-correspondence]] there is therefore a unique vector $\\omega(t)\\in\\mathbb R^3$ with\n$$R(t)^{\\mathsf T}R'(t)=[\\omega(t)]_\\times,$$\nand the map $\\omega:I\\to\\mathbb R^3$ is the **body angular velocity** of the placement; the **spatial angular velocity** is $\\omega_{\\mathrm{s}}(t):=R(t)\\omega(t)$. Explicitly $\\omega(t)=\\bigl((R^{\\mathsf T}R')_{32},(R^{\\mathsf T}R')_{13},(R^{\\mathsf T}R')_{21}\\bigr)(t)$, a finite sum of products of entries of $R$ and $R'$; consequently, if $R$ is twice differentiable, then $\\omega$ is differentiable and its derivative is the **body angular acceleration**.\n\nEquivalently, by the conjugation clause of [[lem-cm-skew-matrix-cross-product-correspondence]], $R'(t)R(t)^{\\mathsf T}=[\\omega_{\\mathrm{s}}(t)]_\\times$.",
+        "deps": [
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-matrix-curve-derivative-rules",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "def-cm-special-orthogonal-group",
+          "def-derivative",
+          "def-vector-valued-derivative-and-integral",
+          "def-interval",
+          "def-euclidean-inner-product"
+        ],
+        "dependency_roles": {
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-matrix-curve-derivative-rules": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-vector-valued-derivative-and-integral": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §§3.1-3.2, Eqs. (3.3)-(3.10) and (3.29)-(3.30), printed pp. 47-54: rigid placement $r(t)=\\tilde R(t)+\\Delta r(t)$, body angular velocity and centre-of-mass splitting",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §§4.1-4.2, Eqs. (4.1)-(4.10): rigid body as six degrees of freedom, moving frame and angular velocity",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.2 (Kinematics of Rotation): orientation path $M(q(t))$, velocity $\\dot M M^{\\mathsf T}$ and body components $M^{\\mathsf T}\\omega$",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cm-inertia-matrix-properties",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Symmetry, the quadratic identity $\\omega^{\\mathsf T}I\\omega=\\int\\lVert\\omega\\times\\rho\\rVert_2^2\\,d\\nu$, and the positive-definiteness criterion for the inertia matrix",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only in [L1], through [[lem-cm-mass-moments-are-finite]], to make the entries of $I$ finite real numbers. Let $\\nu$ be a mass distribution on $\\mathbb R^3$ with total mass $m=\\nu(\\mathbb R^3)$ and inertia matrix $I=I(\\nu)$ ([[def-cm-mass-distribution-and-inertia-matrix]]). Write $\\omega^{\\mathsf T}I\\omega:=\\sum_{j,k=1}^{3}\\omega_jI_{jk}\\omega_k$ for the quadratic form of $I$ on $\\mathbb R^3$ and $\\lVert\\cdot\\rVert_2$ for the Euclidean norm ([[def-euclidean-inner-product]]). Then:\n\n1. $I$ is symmetric: $I_{jk}=I_{kj}$ for all $j,k$.\n2. For every $\\omega\\in\\mathbb R^3$, $$\\omega^{\\mathsf T}I\\omega=\\int\\lVert\\omega\\times\\rho\\rVert_2^2\\,d\\nu(\\rho)\\ \\ge 0,$$ the cross product being that of [[def-cross-product-in-r3]].\n3. The symmetric bilinear form $(u,v)\\mapsto u^{\\mathsf T}Iv$ on $\\mathbb R^3$ is therefore positive semidefinite ([[def-definiteness-inertia-and-signature-data-over-the-reals]]); for each $\\omega\\ne0$, writing $\\mathbb R\\omega=\\{t\\omega:t\\in\\mathbb R\\}$, one has $\\omega^{\\mathsf T}I\\omega=0$ if and only if $\\nu(\\mathbb R^3\\setminus\\mathbb R\\omega)=0$. Thus it is positive definite if and only if $\\nu(\\mathbb R^3\\setminus\\mathbb R\\omega)>0$ for every $\\omega\\ne0$, that is, no line through the origin carries the entire mass ([[def-measure-null-set-and-almost-everywhere]]).\n4. If the form is positive definite, then $I$ is invertible.",
+        "deps": [
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-mass-moments-are-finite",
+          "def-countable-choice",
+          "def-cross-product-in-r3",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "def-measure-null-set-and-almost-everywhere",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-definiteness-inertia-and-signature-data-over-the-reals",
+          "def-inner-product-space",
+          "def-euclidean-inner-product",
+          "thm-invertible-matrix-theorem"
+        ],
+        "dependency_roles": {
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere": "mathematical-premise",
+          "def-measure-null-set-and-almost-everywhere": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "def-definiteness-inertia-and-signature-data-over-the-reals": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-invertible-matrix-theorem": "mathematical-premise"
+        },
+        "dependency_level": 2,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.2, Eqs. (3.18)-(3.22), printed pp. 50-52: symmetry of the inertia tensor, positivity and the equality case (all mass on a line)",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.2, Eqs. (4.16)-(4.18): symmetry and the quadratic form of the inertia tensor",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §§2.3-2.5: moments of inertia, inertia tensor and principal moments as a symmetric matrix diagonalized by a rotation",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-cm-rigid-kinetic-energy-and-angular-momentum",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Kinetic energy and angular momentum of a rigid placement: $K=\\tfrac12m\\lVert c'\\rVert_2^2+\\tfrac12\\omega^{\\mathsf T}I\\omega$ and $L_c=RI\\omega$",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the bound of [[lem-cm-mass-moments-are-finite]] that makes the two integrands of clause 1 $\\nu$-integrable. Let $J\\subseteq\\mathbb R$ be an interval with at least two points, let $\\nu$ be a **centred** mass distribution on $\\mathbb R^3$ with total mass $m$ and inertia matrix $I$ ([[def-cm-mass-distribution-and-inertia-matrix]]), let $c:J\\to\\mathbb R^3$ and $R:J\\to SO(3)$ be differentiable, and let $x(t,\\rho)=c(t)+R(t)\\rho$ be the rigid placement with body angular velocity $\\omega$ ([[def-cm-rigid-placement-and-body-angular-velocity]]). For $t\\in J$ define\n$$K(t):=\\frac12\\int\\lVert\\partial_tx(t,\\rho)\\rVert_2^2\\,d\\nu(\\rho),\\qquad L_c(t):=\\int\\bigl(x(t,\\rho)-c(t)\\bigr)\\times\\bigl(\\partial_tx(t,\\rho)-c'(t)\\bigr)\\,d\\nu(\\rho),$$\nthe second integral read componentwise ([[def-cm-mass-distribution-and-inertia-matrix]]). Then for every $t\\in J$:\n\n1. $\\partial_tx(t,\\rho)=c'(t)+R(t)\\bigl(\\omega(t)\\times\\rho\\bigr)$ for every $\\rho\\in\\mathbb R^3$, and $R'(t)=R(t)[\\omega(t)]_\\times=[R(t)\\omega(t)]_\\times R(t)$; moreover the two integrands displayed above are $\\nu$-integrable, so $K(t)$ and $L_c(t)$ are a well-defined finite real number and vector;\n2. $K(t)=\\tfrac12m\\lVert c'(t)\\rVert_2^2+\\tfrac12\\omega(t)^{\\mathsf T}I\\omega(t)$;\n3. $L_c(t)=R(t)I\\omega(t)$.",
+        "deps": [
+          "def-cm-rigid-placement-and-body-angular-velocity",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-mass-moments-are-finite",
+          "def-countable-choice",
+          "lem-cm-inertia-matrix-properties",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "lem-cm-matrix-curve-derivative-rules",
+          "def-cross-product-in-r3",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "def-cm-special-orthogonal-group",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "def-euclidean-inner-product",
+          "def-inner-product-space"
+        ],
+        "dependency_roles": {
+          "def-cm-rigid-placement-and-body-angular-velocity": "mathematical-premise",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-cm-inertia-matrix-properties": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "lem-cm-matrix-curve-derivative-rules": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §§3.2-3.3, Eqs. (3.17)-(3.20) and (3.27)-(3.30), printed pp. 50-54: kinetic energy $T=\\tfrac12\\omega^{\\mathsf T}I\\omega$, angular momentum $L=I\\omega$, and the centre-of-mass split for a free body",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.2, Eqs. (4.14)-(4.22): rotational kinetic energy and angular momentum through the inertia tensor",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.1 Eq. (2.10), §2.4 Eq. (2.41) and §2.6 Eq. (2.51): kinetic-energy split, inertia tensor and vector angular momentum",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "cor-cm-principal-axes-of-the-inertia-matrix",
+        "kind": "corollary",
+        "domain": "mathematics",
+        "title": "Principal axes and principal moments of the inertia matrix, and positivity in the nondegenerate case",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used through [[lem-cm-inertia-matrix-properties]] to ensure finiteness of the inertia integrals. Let $\\nu$ be a mass distribution on $\\mathbb R^3$ with inertia matrix $I=I(\\nu)$ ([[def-cm-mass-distribution-and-inertia-matrix]]), and write $I\\omega$ for the matrix-vector product and $\\langle\\cdot,\\cdot\\rangle$ for the Euclidean inner product on $\\mathbb R^3$ ([[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]]). Then:\n\n1. there is an orthonormal basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$ ([[def-orthogonal-vectors-sets-and-orthonormal-bases]]) and real numbers $I_1,I_2,I_3$ with $Ie_j=I_je_j$ for $j=1,2,3$;\n2. for any such basis and any $\\omega=\\sum_j\\omega_je_j$ one has $I\\omega=\\sum_jI_j\\omega_je_j$, $I_j=e_j^{\\mathsf T}Ie_j$, and $\\omega^{\\mathsf T}I\\omega=\\sum_jI_j\\omega_j^2=\\int\\lVert\\omega\\times\\rho\\rVert_2^2\\,d\\nu(\\rho)\\ \\ge0$;\n3. each $I_j$ vanishes exactly when $\\nu(\\mathbb R^3\\setminus\\mathbb Re_j)=0$, that is, the whole mass lies on the line $\\mathbb Re_j$; if the inertia form is positive definite then every $I_j>0$ and $I$ is invertible with $I^{-1}e_j=I_j^{-1}e_j$; and if $\\nu$ is not supported on any line through the origin, meaning that $\\nu(\\mathbb R^3\\setminus\\mathbb R\\omega)>0$ for every $\\omega\\ne0$, then every $I_j>0$.",
+        "deps": [
+          "def-countable-choice",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-inertia-matrix-properties",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms",
+          "def-self-adjoint-and-normal-endomorphism",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases",
+          "def-euclidean-inner-product",
+          "def-inner-product-space",
+          "def-invertible-matrix-and-general-linear-group",
+          "thm-invertible-matrix-theorem",
+          "def-matrix-product-and-identity-matrix",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-inertia-matrix-properties": "mathematical-premise",
+          "cor-real-spectral-theorem-for-self-adjoint-endomorphisms": "mathematical-premise",
+          "def-self-adjoint-and-normal-endomorphism": "mathematical-premise",
+          "prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases": "mathematical-premise",
+          "def-orthogonal-vectors-sets-and-orthonormal-bases": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-invertible-matrix-and-general-linear-group": "mathematical-premise",
+          "thm-invertible-matrix-theorem": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.2, the diagonalization discussion after Eq. (3.20), printed pp. 50-52: principal axes and principal moments via orthogonal diagonalization of the symmetric inertia tensor",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.5 (Principal Moments of Inertia): the eigensystem of the inertia tensor and the diagonal form",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.3: principal axes of the inertia tensor and their positivity",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-cm-euler-equations-and-torque-free-invariants",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Euler's equations $I\\omega'+\\omega\\times I\\omega=R^{\\mathsf T}\\tau$ under an adopted torque balance, and the torque-free invariants and principal-axis equations",
+        "statement": "Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used through the inertia suppliers to ensure finiteness of the integrals. Let $J\\subseteq\\mathbb R$ be an interval with at least two points ([[def-interval]]), let $\\nu$ be a centred mass distribution on $\\mathbb R^3$ that is not supported on any line through the origin, with inertia matrix $I$ ([[def-cm-mass-distribution-and-inertia-matrix]]), let $c:J\\to\\mathbb R^3$ be differentiable and let $R:J\\to SO(3)$ be twice differentiable, and let $x(t,\\rho)=c(t)+R(t)\\rho$ be the rigid placement with body angular velocity $\\omega$ ([[def-cm-rigid-placement-and-body-angular-velocity]]). Write $l:=I\\omega:J\\to\\mathbb R^3$; by [[cor-cm-principal-axes-of-the-inertia-matrix]] the inertia form is positive definite and $I$ is invertible.\n\nAdopt the **balance hypothesis** (B): there is a map $\\tau:J\\to\\mathbb R^3$ such that the curve $t\\mapsto R(t)l(t)$ is differentiable and\n$$(Rl)'(t)=\\tau(t)\\qquad(t\\in J).$$\nThen:\n\n1. $l$ is differentiable and **Euler's equations with torque** hold: $$I\\omega'+\\omega\\times I\\omega=R^{\\mathsf T}\\tau\\qquad\\text{on }J;$$\n2. if $\\tau=0$ on $J$, then $l$ satisfies the **torque-free Euler equations** $l'=l\\times(I^{-1}l)$, and the functions $t\\mapsto\\langle l(t),l(t)\\rangle$ and $t\\mapsto\\tfrac12\\langle l(t),I^{-1}l(t)\\rangle=\\tfrac12\\omega(t)^{\\mathsf T}I\\omega(t)$ are constant on $J$;\n3. if $\\tau=0$ on $J$ and $(e_1,e_2,e_3)$ is a positively oriented orthonormal eigenbasis of $I$ with $Ie_j=I_je_j$ and $l=\\sum_jl_je_j$, then $\\langle l,l\\rangle=\\sum_jl_j^2$ and $\\tfrac12\\langle l,I^{-1}l\\rangle=\\sum_jl_j^2/(2I_j)$ are constant on $J$, and the torque-free equations read $$l_1'=\\Bigl(\\frac1{I_3}-\\frac1{I_2}\\Bigr)l_2l_3,\\qquad l_2'=\\Bigl(\\frac1{I_1}-\\frac1{I_3}\\Bigr)l_1l_3,\\qquad l_3'=\\Bigl(\\frac1{I_2}-\\frac1{I_1}\\Bigr)l_1l_2.$$",
+        "deps": [
+          "def-countable-choice",
+          "def-cm-rigid-placement-and-body-angular-velocity",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-inertia-matrix-properties",
+          "thm-cm-rigid-kinetic-energy-and-angular-momentum",
+          "cor-cm-principal-axes-of-the-inertia-matrix",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "lem-cm-matrix-curve-derivative-rules",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal",
+          "def-cross-product-in-r3",
+          "def-cm-special-orthogonal-group",
+          "def-derivative",
+          "def-interval",
+          "def-matrix-product-and-identity-matrix",
+          "def-euclidean-inner-product",
+          "def-inner-product-space",
+          "thm-algebra-of-derivatives",
+          "cor-zero-derivative-implies-constant"
+        ],
+        "dependency_roles": {
+          "def-countable-choice": "mathematical-premise",
+          "def-cm-rigid-placement-and-body-angular-velocity": "mathematical-premise",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-inertia-matrix-properties": "mathematical-premise",
+          "thm-cm-rigid-kinetic-energy-and-angular-momentum": "mathematical-premise",
+          "cor-cm-principal-axes-of-the-inertia-matrix": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "lem-cm-matrix-curve-derivative-rules": "mathematical-premise",
+          "lem-cross-product-is-bilinear-alternating-and-orthogonal": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise"
+        },
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.3, Eqs. (3.31)-(3.33), printed pp. 53-55: angular-momentum rate, Euler's equations in the principal body frame and the torque extension",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.4, Eq. (4.66): Euler equations $I_j\\dot\\omega_j+(I_{j''}-I_{j'})\\omega_{j'}\\omega_{j''}=\\tau_j$",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.9 (Euler's Equations), Eqs. (2.80)-(2.83): angular-momentum evolution and Euler equations in principal components",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-cm-stability-of-extreme-principal-axes",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Lyapunov stability of spin about the largest and smallest principal axes of the torque-free top",
+        "statement": "Let $I_1<I_2<I_3$ be positive reals and let $I:\\mathbb R^3\\to\\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis $(e_1,e_2,e_3)$ of $\\mathbb R^3$. Consider the autonomous first-order system\n$$l'(t)=F(l(t)),\\qquad F(l):=l\\times(I^{-1}l),$$\non $U:=\\mathbb R^3$, read as in [[def-cm-equilibrium-and-lyapunov-stability]] with the cross product of [[def-cross-product-in-r3]] and $I^{-1}$ the inverse of $I$ ([[cor-cm-principal-axes-of-the-inertia-matrix]]); this is the torque-free Euler system of [[thm-cm-euler-equations-and-torque-free-invariants]] in angular-momentum variables. Let $L\\ne0$. Then:\n\n$Le_1$ and $Le_3$ are equilibria of $F$ and each is Lyapunov stable in the sense of [[def-cm-equilibrium-and-lyapunov-stability]]: for $j=1$ and $j=3$ and for every $\\varepsilon>0$ there is $\\delta\\in(0,\\varepsilon]$ such that every maximal solution $l$ with $\\lVert l(0)-Le_j\\rVert_2<\\delta$ is defined for all $t\\ge0$ and satisfies $\\lVert l(t)-Le_j\\rVert_2<\\varepsilon$ for every $t\\ge0$.",
+        "deps": [
+          "def-maximal-ode-solution",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "thm-cm-euler-equations-and-torque-free-invariants",
+          "cor-cm-principal-axes-of-the-inertia-matrix",
+          "lem-cm-inertia-matrix-properties",
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "cor-cm-finite-time-breakdown-requires-escape",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-cross-product-in-r3",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "def-euclidean-inner-product",
+          "def-inner-product-space",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-metric-ball",
+          "thm-heine-borel-rn",
+          "cor-zero-derivative-implies-constant"
+        ],
+        "dependency_roles": {
+          "def-maximal-ode-solution": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "thm-cm-euler-equations-and-torque-free-invariants": "mathematical-premise",
+          "cor-cm-principal-axes-of-the-inertia-matrix": "mathematical-premise",
+          "lem-cm-inertia-matrix-properties": "mathematical-premise",
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "cor-cm-finite-time-breakdown-requires-escape": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "def-metric-ball": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise"
+        },
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §§3.4.1-3.4.3, Eqs. (3.34)-(3.45), printed pp. 55-58: free symmetric top, and the asymmetric-top stability discussion with the invariants of the motion",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §§2.8.2-2.9: energy and angular-momentum level curves of the free rigid body and Euler's equations",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.4: free-rotation stability about the extreme and intermediate principal axes",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-cm-instability-of-the-intermediate-axis",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Instability of spin about the intermediate principal axis of the torque-free top",
+        "statement": "Let $I_1<I_2<I_3$ be positive reals, let $I:\\mathbb R^3\\to\\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis, and consider the torque-free Euler system $l'=F(l)$, $F(l)=l\\times(I^{-1}l)$, on $U=\\mathbb R^3$ ([[thm-cm-euler-equations-and-torque-free-invariants]], [[def-cm-equilibrium-and-lyapunov-stability]]). Let $L\\ne0$. Then $l_0:=Le_2$ is an equilibrium of $F$ and is **not Lyapunov stable**: with $$\\varepsilon_0:=\\frac{|L|}{2},\\qquad a:=\\sqrt{\\frac{1/I_1-1/I_2}{1/I_2-1/I_3}}>0,\\qquad c_0:=a\\Bigl(\\frac1{I_2}-\\frac1{I_3}\\Bigr)\\frac{\\sqrt3}{2}|L|>0,$$ for every $\\delta>0$ there is a solution $l$ with $\\lVert l(0)-l_0\\rVert_2<\\delta$ and some $t\\ge0$ with $\\lVert l(t)-l_0\\rVert_2\\ge\\varepsilon_0$; Moreover, with $\\delta_0:=|L|/(2\\sqrt{1+a^2})$, the escape can be arranged at a time $t\\le c_0^{-1}\\log(\\delta_0/\\eta)$ where $\\eta=l_1(0)>0$ may be chosen as small as desired.",
+        "deps": [
+          "def-natural-logarithm",
+          "cor-exponential-is-a-bijection-onto-positive-reals",
+          "thm-exponential-is-strictly-increasing",
+          "def-maximal-ode-solution",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution",
+          "thm-cm-euler-equations-and-torque-free-invariants",
+          "cor-cm-principal-axes-of-the-inertia-matrix",
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "cor-cm-finite-time-breakdown-requires-escape",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-cross-product-in-r3",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-derivative-of-exponential",
+          "thm-monotonicity-from-the-derivative",
+          "def-euclidean-inner-product",
+          "def-inner-product-space",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "def-interval",
+          "thm-heine-borel-rn",
+          "cor-zero-derivative-implies-constant"
+        ],
+        "dependency_roles": {
+          "def-natural-logarithm": "mathematical-premise",
+          "cor-exponential-is-a-bijection-onto-positive-reals": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "def-maximal-ode-solution": "mathematical-premise",
+          "thm-existence-and-uniqueness-of-a-maximal-ode-solution": "mathematical-premise",
+          "thm-cm-euler-equations-and-torque-free-invariants": "mathematical-premise",
+          "cor-cm-principal-axes-of-the-inertia-matrix": "mathematical-premise",
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "cor-cm-finite-time-breakdown-requires-escape": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-derivative-of-exponential": "mathematical-premise",
+          "thm-monotonicity-from-the-derivative": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "thm-heine-borel-rn": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise"
+        },
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.4.3, Eqs. (3.40)-(3.45), printed pp. 57-58: linearized perturbation of principal-axis spin and the sign criterion for exponential growth; the nonlinear invariant-branch proof and escape bound are supplied locally",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §§2.8.2-2.9: intermediate-axis behaviour on the angular-momentum level curves",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.4: instability of rotation about the intermediate principal axis",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "thm-cm-linearized-torque-free-euler-equations",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Linearization of the torque-free Euler system at a principal-axis spin, and the oscillatory/exponential dichotomy",
+        "statement": "Let $I_1,I_2,I_3>0$ be pairwise distinct, let $I:\\mathbb R^3\\to\\mathbb R^3$ be the linear map with $Ie_j=I_je_j$ on the standard orthonormal basis, and let $I^{-1}$ denote its inverse, given by $I^{-1}e_j=I_j^{-1}e_j$. Define the formal torque-free Euler vector field\n$$F(\\omega):=-I^{-1}\\bigl(\\omega\\times I\\omega\\bigr),\\qquad \\omega\\in\\mathbb R^3.$$\nWhen $I$ is an actual rigid-body inertia map written in a principal basis, this is the angular-velocity vector field obtained from [[thm-cm-euler-equations-and-torque-free-invariants]]. Here the positive diagonal entries are otherwise arbitrary; no realization by a mass distribution is assumed. Let $\\Omega\\ne0$. Then:\n\n1. $F(\\Omega e_3)=0$, and for every $\\delta\\in\\mathbb R^3$ $$F(\\Omega e_3+\\delta)=A\\delta+R(\\delta),\\qquad (A\\delta)_1=\\frac{\\Omega(I_2-I_3)}{I_1}\\delta_2,\\quad (A\\delta)_2=\\frac{\\Omega(I_3-I_1)}{I_2}\\delta_1,\\quad (A\\delta)_3=0,$$ where $\\lVert R(\\delta)\\rVert_2\\le C\\lVert\\delta\\rVert_2^2$ for the explicit constant $C:=\\lVert I^{-1}\\rVert_F\\lVert I\\rVert_F$ and $\\lVert M\\rVert_F:=\\bigl(\\sum_{j,k}M_{jk}^2\\bigr)^{1/2}$; consequently $A$ is the total derivative of $F$ at $\\Omega e_3$ ([[def-total-derivative-in-euclidean-space]]).\n2. Every solution of the linear system $\\delta'=A\\delta$ on $\\mathbb R$ has $\\delta_3$ constant, and with $$\\lambda:=\\frac{\\Omega^2(I_2-I_3)(I_3-I_1)}{I_1I_2}\\ne0$$ the pair $(\\delta_1,\\delta_2)$ is determined by its initial value as follows:\n   - if $\\lambda<0$, then with $\\kappa:=\\sqrt{-\\lambda}>0$, $$\\delta_1(t)=\\delta_1(0)\\cos(\\kappa t)+\\frac{\\Omega(I_2-I_3)}{I_1\\kappa}\\delta_2(0)\\sin(\\kappa t),\\qquad \\delta_2(t)=\\delta_2(0)\\cos(\\kappa t)+\\frac{\\Omega(I_3-I_1)}{I_2\\kappa}\\delta_1(0)\\sin(\\kappa t),$$ and every solution is bounded on $[0,\\infty)$;\n   - if $\\lambda>0$, then the same two formulas hold with $\\cosh$ and $\\sinh$ in place of $\\cos$ and $\\sin$ and $\\kappa:=\\sqrt\\lambda$, the system has unbounded solutions (for instance $\\delta_2(0)=0$, $\\delta_1(0)\\ne0$), and if $\\delta_1(0)+\\frac{\\Omega(I_2-I_3)}{I_1\\kappa}\\delta_2(0)\\ne0$ then $\\lVert\\delta(t)\\rVert_2\\to+\\infty$ as $t\\to+\\infty$.\n3. Hence the linearization at the spin $\\Omega e_3$ is oscillatory exactly when $(I_2-I_3)(I_3-I_1)<0$, i.e. when the third principal moment is a largest or a smallest moment, and it has exponentially growing solutions exactly when $\\lambda>0$, i.e. when $I_3$ lies strictly between $I_1$ and $I_2$; in the latter case the zero solution of the linear system is not stable.",
+        "deps": [
+          "def-cm-equilibrium-and-lyapunov-stability",
+          "thm-cm-euler-equations-and-torque-free-invariants",
+          "def-linear-map",
+          "def-linear-isomorphism-and-invertible-linear-map",
+          "lem-standard-basis-of-f-n",
+          "def-total-derivative-in-euclidean-space",
+          "thm-picard-lindelof-local-existence-and-uniqueness",
+          "def-locally-lipschitz-in-the-state-variable",
+          "def-first-order-ode-initial-value-problem-and-solution",
+          "def-cross-product-in-r3",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "thm-cauchy-schwarz-and-the-euclidean-norm",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "thm-sine-and-cosine-derivatives",
+          "thm-hyperbolic-identities-and-derivatives",
+          "def-hyperbolic-functions",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "cor-exponential-is-a-bijection-onto-positive-reals",
+          "thm-exponential-is-strictly-increasing",
+          "def-matrix-product-and-identity-matrix",
+          "def-euclidean-inner-product",
+          "def-inner-product-space",
+          "def-derivative",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-equilibrium-and-lyapunov-stability": "mathematical-premise",
+          "thm-cm-euler-equations-and-torque-free-invariants": "mathematical-premise",
+          "def-linear-map": "mathematical-premise",
+          "def-linear-isomorphism-and-invertible-linear-map": "mathematical-premise",
+          "lem-standard-basis-of-f-n": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "thm-picard-lindelof-local-existence-and-uniqueness": "mathematical-premise",
+          "def-locally-lipschitz-in-the-state-variable": "mathematical-premise",
+          "def-first-order-ode-initial-value-problem-and-solution": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "thm-cauchy-schwarz-and-the-euclidean-norm": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-hyperbolic-identities-and-derivatives": "mathematical-premise",
+          "def-hyperbolic-functions": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "cor-exponential-is-a-bijection-onto-positive-reals": "mathematical-premise",
+          "thm-exponential-is-strictly-increasing": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-inner-product-space": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.4.3, Eqs. (3.41)-(3.45), printed pp. 57-58: perturbation of a principal-axis spin, the linearized equations and the sign criterion for oscillation versus exponential growth",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §§2.8.2-2.9: linear behaviour near principal-axis spins",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-cm-coordinate-rotation-matrices",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "The coordinate rotation matrices $R_z(a)$ and $R_y(a)$: values in $SO(3)$, composition law, and derivatives",
+        "statement": "For $a\\in\\mathbb R$ define, in the standard basis of $\\mathbb R^3$,\n$$R_z(a):=\\begin{pmatrix}\\cos a&-\\sin a&0\\\\ \\sin a&\\cos a&0\\\\ 0&0&1\\end{pmatrix},\\qquad R_y(a):=\\begin{pmatrix}\\cos a&0&\\sin a\\\\ 0&1&0\\\\ -\\sin a&0&\\cos a\\end{pmatrix}\\in M_3(\\mathbb R).$$\nThen:\n\n1. $R_z(a)\\in SO(3)$ and $R_y(a)\\in SO(3)$ for every $a$ ([[def-cm-special-orthogonal-group]]), $R_z(a)e_3=e_3$ and $R_y(a)e_2=e_2$, and $R_z(0)=R_y(0)=I_3$.\n2. $R_z(a)R_z(b)=R_z(a+b)$ and $R_y(a)R_y(b)=R_y(a+b)$ for all $a,b\\in\\mathbb R$.\n3. For every differentiable $a:I\\to\\mathbb R$ on an interval $I\\subseteq\\mathbb R$ ([[def-derivative]], [[def-interval]]), the matrix-valued curves $t\\mapsto R_z(a(t))$ and $t\\mapsto R_y(a(t))$ are differentiable with $$(R_z\\circ a)'=a'\\,R_z(a)\\,[e_3]_\\times=a'\\,[e_3]_\\times R_z(a),\\qquad (R_y\\circ a)'=a'\\,R_y(a)\\,[e_2]_\\times=a'\\,[e_2]_\\times R_y(a),$$ where $[e_3]_\\times,[e_2]_\\times$ are the cross-product matrices of [[lem-cm-skew-matrix-cross-product-correspondence]].",
+        "deps": [
+          "def-cm-special-orthogonal-group",
+          "lem-cm-so3-is-a-matrix-group",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "def-transpose-of-a-matrix",
+          "prop-transpose-laws",
+          "def-determinant-of-a-square-matrix",
+          "thm-determinant-multiplicative",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-and-cosine-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "def-derivative",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-so3-is-a-matrix-group": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-transpose-of-a-matrix": "mathematical-premise",
+          "prop-transpose-laws": "mathematical-premise",
+          "def-determinant-of-a-square-matrix": "mathematical-premise",
+          "thm-determinant-multiplicative": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "dependency_level": 3,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.5, Eqs. (3.53)-(3.58), printed pp. 62-65: the three ordered rotations and the Euler-angle parametrization of $SO(3)$",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.5, Eqs. (4.68)-(4.74): three successive rotations about coordinate axes, Euler angles and the angular-velocity components",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.7 (Euler Angles): the rotation matrices about the coordinate axes and their products",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "def-cm-euler-angle-parametrization-and-heavy-top-system",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The Euler-angle parametrization and the heavy symmetric top system",
+        "statement": "**Euler-angle parametrization.** Let $R_z,R_y$ be the coordinate rotation matrices of [[lem-cm-coordinate-rotation-matrices]]. The **Euler-angle parametrization** is the map\n$$\\Theta:\\mathbb R\\times(0,\\pi)\\times\\mathbb R\\longrightarrow SO(3),\\qquad \\Theta(\\varphi,\\theta,\\psi):=R_z(\\varphi)\\,R_y(\\theta)\\,R_z(\\psi),$$\nwhich is $SO(3)$-valued by [[lem-cm-coordinate-rotation-matrices]] and [[lem-cm-so3-is-a-matrix-group]]. The numbers $(\\varphi,\\theta,\\psi)$ are the **Euler angles** and the open set $\\mathbb R\\times(0,\\pi)\\times\\mathbb R$ is its **domain**; $\\theta$ is restricted to the open interval $(0,\\pi)$ so that $\\sin\\theta>0$, with $\\pi$ defined as twice the smallest positive cosine zero ([[def-pi-via-first-positive-cosine-zero]]) and positivity supplied by [[cor-pi-is-the-first-positive-sine-zero]]. No injectivity and no chart or diffeomorphism property of $\\Theta$ is asserted or used here, and no periodicity of the angles is imposed — the real parameters stand for themselves.\n\n**Parameters.** Fix reals $A>0$, $C>0$, $m>0$, $d>0$ and $g>0$; they are mathematical parameters, not identified with any physical quantity in this item.\n\n**The heavy-top function.** Write $q=(\\varphi,\\theta,\\psi)$ for a point of the domain and $v=(\\varphi',\\theta',\\psi')$ for a triple of reals. The **heavy-top function** is\n$$L(q,v):=\\tfrac12A\\bigl(\\theta'^2+\\varphi'^2\\sin^2\\theta\\bigr)+\\tfrac12C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)^2-mgd\\cos\\theta,$$\nusing the sine and cosine of [[def-sine-and-cosine-by-power-series]]. Repeated application of the sine/cosine derivative identities ([[thm-sine-and-cosine-derivatives]]) and the finite sum, product and chain rules ([[thm-algebra-of-derivatives]], [[thm-chain-rule]]) gives continuous partial derivatives of every order, so it is $C^\\infty$ on the domain times $\\mathbb R^3$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]); its relevant partial derivatives are, explicitly,\n$$\\partial_{\\varphi'}L=A\\varphi'\\sin^2\\theta+C\\cos\\theta\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr),\\qquad \\partial_\\varphi L=0,$$\n$$\\partial_{\\theta'}L=A\\theta',\\qquad \\partial_\\theta L=A\\varphi'^2\\sin\\theta\\cos\\theta-C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\varphi'\\sin\\theta+mgd\\sin\\theta,$$\n$$\\partial_{\\psi'}L=C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr),\\qquad \\partial_\\psi L=0.$$\n\n**The heavy-top system.** Let $I\\subseteq\\mathbb R$ be an interval with at least two points. A **heavy-top trajectory** for these parameters is a twice-differentiable curve $q=(\\varphi,\\theta,\\psi):I\\to\\mathbb R\\times(0,\\pi)\\times\\mathbb R$ such that, with $q'=(\\varphi',\\theta',\\psi')$ its derivative, the three second-order equations\n$$\\frac{d}{dt}\\Bigl(A\\varphi'\\sin^2\\theta+C\\cos\\theta\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\Bigr)=0,\\qquad \\frac{d}{dt}\\bigl(A\\theta'\\bigr)=A\\varphi'^2\\sin\\theta\\cos\\theta-C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\varphi'\\sin\\theta+mgd\\sin\\theta,$$\n$$\\frac{d}{dt}\\Bigl(C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)\\Bigr)=0$$\nhold on $I$, all functions being evaluated at $t$. These displayed equations are the definition of the system; they are written out so that no separate definition of a variational principle is needed. The first and third are the statements that $\\partial_{\\varphi'}L$ and $\\partial_{\\psi'}L$ are constant along the trajectory.",
+        "deps": [
+          "def-pi-via-first-positive-cosine-zero",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-sine-and-cosine-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-chain-rule",
+          "lem-cm-coordinate-rotation-matrices",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "def-cm-special-orthogonal-group",
+          "lem-cm-so3-is-a-matrix-group",
+          "def-matrix-product-and-identity-matrix",
+          "def-sine-and-cosine-by-power-series",
+          "def-interval",
+          "def-derivative",
+          "def-ck-euclidean-maps-and-diffeomorphisms"
+        ],
+        "dependency_roles": {
+          "def-pi-via-first-positive-cosine-zero": "mathematical-premise",
+          "cor-pi-is-the-first-positive-sine-zero": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "lem-cm-coordinate-rotation-matrices": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "def-cm-special-orthogonal-group": "mathematical-premise",
+          "lem-cm-so3-is-a-matrix-group": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-ck-euclidean-maps-and-diffeomorphisms": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.5 Eq. (3.54) and §3.6 Eqs. (3.62)-(3.70), printed pp. 62-68: the Euler-angle rotation, the heavy-top function and its two cyclic momenta and reduced energy",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.5, Eqs. (4.74)-(4.85): Euler angles for the symmetric top, the exact reduced effective potential and the upright threshold",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.10 (Axisymmetric Tops), Eqs. (2.84)-(2.91): the top Lagrangian, its momenta and reduced energy",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-cm-heavy-top-reduction",
+        "kind": "theorem",
+        "domain": "mathematics",
+        "title": "Reduction of the heavy symmetric top system: conserved momenta, one-dimensional $\\theta$ equation and conserved reduced energy",
+        "statement": "Fix the parameters $A>0$, $C>0$, $m>0$, $d>0$, $g>0$ and let $q=(\\varphi,\\theta,\\psi):I\\to\\mathbb R\\times(0,\\pi)\\times\\mathbb R$ be a heavy-top trajectory of [[def-cm-euler-angle-parametrization-and-heavy-top-system]] on an interval $I$ with at least two points; write $q'=(\\varphi',\\theta',\\psi')$ for its derivative. Then:\n\n1. the functions $t\\mapsto b(t):=C\\bigl(\\psi'(t)+\\varphi'(t)\\cos\\theta(t)\\bigr)$ and $t\\mapsto a(t):=A\\varphi'(t)\\sin^2\\theta(t)+b(t)\\cos\\theta(t)$ are constant on $I$; write $b,a$ for their values;\n2. consequently $\\varphi'=\\dfrac{a-b\\cos\\theta}{A\\sin^2\\theta}$ and $\\psi'=\\dfrac{b}{C}-\\dfrac{(a-b\\cos\\theta)\\cos\\theta}{A\\sin^2\\theta}$ on $I$;\n3. the **reduced energy**\n$$E(t):=\\tfrac12A\\theta'(t)^2+\\frac{(a-b\\cos\\theta(t))^2}{2A\\sin^2\\theta(t)}+\\frac{b^2}{2C}+mgd\\cos\\theta(t)$$\nis constant on $I$;\n4. with the **effective potential** $U(\\theta):=\\dfrac{(a-b\\cos\\theta)^2}{2A\\sin^2\\theta}+\\dfrac{b^2}{2C}+mgd\\cos\\theta$ on $(0,\\pi)$, one has\n$$A\\theta''(t)=-U'\\bigl(\\theta(t)\\bigr)\\qquad(t\\in I),$$\nso that the angle $\\theta$ alone obeys the one-dimensional second-order equation $A\\theta''=-U'(\\theta)$ with the constants $a,b$ determined by the initial data.",
+        "deps": [
+          "def-cm-euler-angle-parametrization-and-heavy-top-system",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-derivative",
+          "def-interval",
+          "cor-zero-derivative-implies-constant"
+        ],
+        "dependency_roles": {
+          "def-cm-euler-angle-parametrization-and-heavy-top-system": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "cor-zero-derivative-implies-constant": "mathematical-premise"
+        },
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.6, Eqs. (3.63)-(3.70), printed pp. 67-69: the two cyclic momenta $p_\\psi,p_\\phi$, the reduced energy $E'$ and the effective potential",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.5, Eqs. (4.78)-(4.85): reduced energy and effective potential of the symmetric top",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.10, Eqs. (2.89)-(2.91): the momenta $p_\\varphi,p_\\psi$ and the energy expressed through the effective potential",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "lem-cm-euler-angle-angular-velocity",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Angular velocity in Euler angles: $\\omega_3=\\psi'+\\varphi'\\cos\\theta$ and $\\omega_1^2+\\omega_2^2=\\theta'^2+\\varphi'^2\\sin^2\\theta$",
+        "statement": "Let $J\\subseteq\\mathbb R$ be an interval with at least two points, let $\\varphi,\\theta,\\psi:J\\to\\mathbb R$ be differentiable with $\\theta(J)\\subseteq(0,\\pi)$, and put\n$$R(t):=\\Theta\\bigl(\\varphi(t),\\theta(t),\\psi(t)\\bigr)=R_z(\\varphi(t))\\,R_y(\\theta(t))\\,R_z(\\psi(t)),$$\nthe Euler-angle parametrization of [[def-cm-euler-angle-parametrization-and-heavy-top-system]]. Then $R$ is a differentiable $SO(3)$-valued curve, and its **body angular velocity** $\\omega:J\\to\\mathbb R^3$ in the sense of [[def-cm-rigid-placement-and-body-angular-velocity]] (the unique vector with $R(t)^{\\mathsf T}R'(t)=[\\omega(t)]_\\times$) is, in the standard basis,\n$$\\omega=\\bigl(-\\varphi'\\sin\\theta\\cos\\psi+\\theta'\\sin\\psi\\bigr)e_1+\\bigl(\\varphi'\\sin\\theta\\sin\\psi+\\theta'\\cos\\psi\\bigr)e_2+\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)e_3,$$\nall functions evaluated at $t$. Consequently\n$$\\omega_3=\\psi'+\\varphi'\\cos\\theta,\\qquad \\omega_1^2+\\omega_2^2=\\theta'^2+\\varphi'^2\\sin^2\\theta,\\qquad \\lVert\\omega\\rVert_2^2=\\theta'^2+\\varphi'^2\\sin^2\\theta+\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)^2.$$\nMoreover, if $A,C>0$ and $I:\\mathbb R^3\\to\\mathbb R^3$ is the linear map with $Ie_1=Ae_1$, $Ie_2=Ae_2$, $Ie_3=Ce_3$, then $\\omega^{\\mathsf T}I\\omega=A\\bigl(\\theta'^2+\\varphi'^2\\sin^2\\theta\\bigr)+C\\bigl(\\psi'+\\varphi'\\cos\\theta\\bigr)^2$.",
+        "deps": [
+          "def-cm-euler-angle-parametrization-and-heavy-top-system",
+          "lem-cm-coordinate-rotation-matrices",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "lem-cm-matrix-curve-derivative-rules",
+          "def-cm-rigid-placement-and-body-angular-velocity",
+          "thm-cm-rigid-kinetic-energy-and-angular-momentum",
+          "def-matrix-product-and-identity-matrix",
+          "def-euclidean-inner-product",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-derivatives",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "def-derivative",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-cm-euler-angle-parametrization-and-heavy-top-system": "mathematical-premise",
+          "lem-cm-coordinate-rotation-matrices": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "lem-cm-matrix-curve-derivative-rules": "mathematical-premise",
+          "def-cm-rigid-placement-and-body-angular-velocity": "mathematical-premise",
+          "thm-cm-rigid-kinetic-energy-and-angular-momentum": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-derivatives": "mathematical-premise",
+          "thm-chain-rule": "mathematical-premise",
+          "thm-algebra-of-derivatives": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "dependency_level": 5,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.5.2, Eqs. (3.55)-(3.58), printed pp. 64-65: angular velocity in terms of Euler angles, with $\\omega_3=\\dot\\psi+\\dot\\varphi\\cos\\theta$ and the squared transverse component",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.5, Eq. (4.74): principal-axis components of the instantaneous angular velocity in Euler angles",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.7 (Euler Angles) and §2.10, Eq. (2.86): the kinetic energy $\\tfrac12A(\\dot\\theta^2+\\dot\\varphi^2\\sin^2\\theta)+\\tfrac12C(\\dot\\psi+\\dot\\varphi\\cos\\theta)^2$",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "strategy": "direct"
+      }
+    ]
+  },
+  {
+    "order": 98,
+    "id": "cm-math-rigid-examples",
+    "kind": "B",
+    "category": "non-relativistic-classical-mechanics-mathematics",
+    "library": "mathematics",
+    "title": "Cm Math Rigid — Examples",
+    "companion": "cm-math-rigid",
+    "requires": [
+      "cm-math-rigid",
+      "measures-and-their-basic-properties",
+      "sine-cosine-and-the-definition-of-pi",
+      "the-exponential-function",
+      "the-logarithm-and-general-powers"
+    ],
+    "items": [
+      {
+        "id": "ex-cm-inertia-tensors-of-point-masses",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Finite point-mass inertia matrices computed and checked against the positivity criterion",
+        "statement": "Throughout, the ambient data are the Euclidean inner product and cross product of $\\mathbb R^3$ ([[def-euclidean-inner-product]], [[def-cross-product-in-r3]]), and $\\nu$ is a finite weighted sum of Dirac measures at distinct points $x_1,\\dots,x_n\\in\\mathbb R^3$ with weights $c_1,\\dots,c_n>0$ ([[def-dirac-measure]], [[thm-nonnegative-weighted-sums-of-measures]]), which is a mass distribution of total mass $m=\\sum_kc_k$ in the sense of [[def-cm-mass-distribution-and-inertia-matrix]]; let $I=I(\\nu)$ be its inertia matrix. Assume the Axiom of Countable Choice $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]), used only through the Borel measurability of the polynomial integrands, which is what makes the entries of $I$ finite real numbers ([[lem-cm-mass-moments-are-finite]]). Three cases are computed and each is checked against the positivity criterion of [[lem-cm-inertia-matrix-properties]] and the principal-axis corollary [[cor-cm-principal-axes-of-the-inertia-matrix]].\n\n**(i) Two unit masses on the third axis.** $n=2$, $x_1=e_3$, $x_2=-e_3$, $c_1=c_2=1$: then $m=2$, $\\mu(\\nu)=e_3-e_3=0$, and $I=\\mathrm{diag}(2,2,0)$.\n\n**(ii) Three unit masses at an equilateral triangle in the plane $e_3=0$.** $n=3$, $c_k=1$ and $x_k=\\cos(2\\pi k/3)e_1+\\sin(2\\pi k/3)e_2$ for $k=0,1,2$: then $m=3$, $\\mu(\\nu)=0$ and $I=\\mathrm{diag}(\\tfrac32,\\tfrac32,3)$.\n\n**(iii) Two unit masses on the first axis.** $n=2$, $x_1=e_1$, $x_2=2e_1$, $c_1=c_2=1$: then $m=2$, $\\mu(\\nu)=3e_1\\ne0$, and $I=\\mathrm{diag}(0,5,5)$.",
+        "deps": [
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "def-cm-mass-distribution-and-inertia-matrix",
+          "lem-cm-mass-moments-are-finite",
+          "def-countable-choice",
+          "lem-cm-inertia-matrix-properties",
+          "cor-cm-principal-axes-of-the-inertia-matrix",
+          "def-dirac-measure",
+          "prop-dirac-measure-is-a-probability-measure",
+          "thm-nonnegative-weighted-sums-of-measures",
+          "def-nonnegative-weighted-sum-of-measures",
+          "def-nonnegative-lebesgue-integral",
+          "def-nonnegative-simple-measurable-function",
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-integral-over-a-measurable-set",
+          "def-integrable-real-and-complex-functions-and-their-integrals",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "def-euclidean-inner-product",
+          "def-matrix-space",
+          "def-matrix-product-and-identity-matrix",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "def-cross-product-in-r3",
+          "lem-finite-sum-laws",
+          "def-sine-and-cosine-by-power-series",
+          "thm-sine-and-cosine-addition-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity"
+        ],
+        "dependency_roles": {
+          "def-pi-via-first-positive-cosine-zero": "mathematical-premise",
+          "thm-quarter-turn-values-and-shift-formulas": "mathematical-premise",
+          "cor-pi-is-the-first-positive-sine-zero": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "def-cm-mass-distribution-and-inertia-matrix": "mathematical-premise",
+          "lem-cm-mass-moments-are-finite": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "lem-cm-inertia-matrix-properties": "mathematical-premise",
+          "cor-cm-principal-axes-of-the-inertia-matrix": "mathematical-premise",
+          "def-dirac-measure": "mathematical-premise",
+          "prop-dirac-measure-is-a-probability-measure": "mathematical-premise",
+          "thm-nonnegative-weighted-sums-of-measures": "mathematical-premise",
+          "def-nonnegative-weighted-sum-of-measures": "mathematical-premise",
+          "def-nonnegative-lebesgue-integral": "mathematical-premise",
+          "def-nonnegative-simple-measurable-function": "mathematical-premise",
+          "def-integral-of-a-nonnegative-simple-function": "mathematical-premise",
+          "def-integral-over-a-measurable-set": "mathematical-premise",
+          "def-integrable-real-and-complex-functions-and-their-integrals": "mathematical-premise",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral": "mathematical-premise",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-matrix-space": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "lem-finite-sum-laws": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise"
+        },
+        "dependency_level": 4,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §3.2, Eqs. (3.19)-(3.23), printed pp. 50-52: inertia tensors of finite point-mass systems and of a rod, with the semidefiniteness criterion",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §§2.3-2.5: moments of inertia of discrete mass distributions and the principal moments",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-cm-torque-free-spin-checks",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Finite checks of the torque-free spin results: stability certificates, an escape-time bound, and the linearized dichotomy",
+        "statement": "Fix the diagonal inertia map with principal moments $(I_1,I_2,I_3)=(1,2,3)$ ([[cor-cm-principal-axes-of-the-inertia-matrix]]) and the torque-free Euler system $l'=l\\times(I^{-1}l)$ of [[thm-cm-euler-equations-and-torque-free-invariants]] on $\\mathbb R^3$. The three computations below check the certificates of [[thm-cm-stability-of-extreme-principal-axes]], the escape bound of [[thm-cm-instability-of-the-intermediate-axis]], and the linearized formulas of [[thm-cm-linearized-torque-free-euler-equations]] at explicit data. The inertia values and component calculations are exact rationals or square roots; the escape-time upper bound is the exact expression $4\\log25$. No measurement or simulation is involved, and no claim about a physical top is made.",
+        "deps": [
+          "thm-cm-stability-of-extreme-principal-axes",
+          "thm-cm-instability-of-the-intermediate-axis",
+          "thm-cm-linearized-torque-free-euler-equations",
+          "thm-cm-euler-equations-and-torque-free-invariants",
+          "cor-cm-principal-axes-of-the-inertia-matrix",
+          "lem-cm-inertia-matrix-properties",
+          "def-euclidean-inner-product",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant",
+          "def-cross-product-in-r3",
+          "def-hyperbolic-functions",
+          "cor-exponential-is-a-bijection-onto-positive-reals"
+        ],
+        "dependency_roles": {
+          "thm-cm-stability-of-extreme-principal-axes": "mathematical-premise",
+          "thm-cm-instability-of-the-intermediate-axis": "mathematical-premise",
+          "thm-cm-linearized-torque-free-euler-equations": "mathematical-premise",
+          "thm-cm-euler-equations-and-torque-free-invariants": "mathematical-premise",
+          "cor-cm-principal-axes-of-the-inertia-matrix": "mathematical-premise",
+          "lem-cm-inertia-matrix-properties": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-cross-product-norm-is-the-two-vector-gram-determinant": "mathematical-premise",
+          "def-cross-product-in-r3": "mathematical-premise",
+          "def-hyperbolic-functions": "mathematical-premise",
+          "cor-exponential-is-a-bijection-onto-positive-reals": "mathematical-premise"
+        },
+        "dependency_level": 7,
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §§3.4.1-3.4.3, printed pp. 55-58: free-top invariants and the intermediate-axis stability criterion used in these arithmetic checks",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.4: principal-axis rotation stability, checked numerically here",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            }
+          ]
+        },
+        "strategy": "direct"
+      },
+      {
+        "id": "ex-cm-euler-angle-and-heavy-top-checks",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Finite checks of the Euler-angle parametrization, the angular-velocity formula and a steady precession of the heavy top",
+        "statement": "All data are the exact ones of the heavy-top system of [[def-cm-euler-angle-parametrization-and-heavy-top-system]] with the parameter choice $A=C=m=d=g=1$, and the rotation matrices are those of [[lem-cm-coordinate-rotation-matrices]]. Three computations are performed: the value of the Euler-angle parametrization at a specific triple, the body angular velocity of a specific motion through the formula of [[lem-cm-euler-angle-angular-velocity]] checked against the definition, and a constant-rate precession checked against every clause of [[thm-cm-heavy-top-reduction]]. No physical measurement is involved and no claim about a physical top is made.",
+        "deps": [
+          "def-pi-via-first-positive-cosine-zero",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-pi-is-the-first-positive-sine-zero",
+          "thm-sine-cosine-signs-monotonicity-and-ranges",
+          "thm-sine-and-cosine-addition-formulas",
+          "def-cm-euler-angle-parametrization-and-heavy-top-system",
+          "lem-cm-euler-angle-angular-velocity",
+          "thm-cm-heavy-top-reduction",
+          "lem-cm-coordinate-rotation-matrices",
+          "lem-cm-skew-matrix-cross-product-correspondence",
+          "def-cm-rigid-placement-and-body-angular-velocity",
+          "def-matrix-product-and-identity-matrix",
+          "def-sine-and-cosine-by-power-series",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "def-euclidean-inner-product",
+          "def-derivative",
+          "def-interval"
+        ],
+        "dependency_roles": {
+          "def-pi-via-first-positive-cosine-zero": "mathematical-premise",
+          "thm-quarter-turn-values-and-shift-formulas": "mathematical-premise",
+          "cor-pi-is-the-first-positive-sine-zero": "mathematical-premise",
+          "thm-sine-cosine-signs-monotonicity-and-ranges": "mathematical-premise",
+          "thm-sine-and-cosine-addition-formulas": "mathematical-premise",
+          "def-cm-euler-angle-parametrization-and-heavy-top-system": "mathematical-premise",
+          "lem-cm-euler-angle-angular-velocity": "mathematical-premise",
+          "thm-cm-heavy-top-reduction": "mathematical-premise",
+          "lem-cm-coordinate-rotation-matrices": "mathematical-premise",
+          "lem-cm-skew-matrix-cross-product-correspondence": "mathematical-premise",
+          "def-cm-rigid-placement-and-body-angular-velocity": "mathematical-premise",
+          "def-matrix-product-and-identity-matrix": "mathematical-premise",
+          "def-sine-and-cosine-by-power-series": "mathematical-premise",
+          "cor-trigonometric-parity-and-pythagorean-identity": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "def-derivative": "mathematical-premise",
+          "def-interval": "mathematical-premise"
+        },
+        "dependency_level": 6,
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "D. Tong, Classical Dynamics (Cambridge lecture notes, 2015), §§3.5-3.6, Eqs. (3.54)-(3.70), printed pp. 62-69: Euler angles, angular velocity, and uniform precession of the symmetric top",
+              "url": "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+            },
+            {
+              "title": "K. Likharev, Essential Graduate Physics: Classical Mechanics, Ch. 4 §4.5, Eqs. (4.74)-(4.85): Euler-angle kinematics and the exact precession condition of the symmetric top",
+              "url": "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
+            },
+            {
+              "title": "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, 2nd ed. (MIT Press, 2014), §2.10: the top equations and their steady precession",
+              "url": "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
+            }
+          ]
+        },
+        "strategy": "direct",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

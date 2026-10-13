@@ -5,17 +5,16 @@ title: "First-order curvature of the flat linearization and of TT plane waves, i
 status: draft
 origin: session
 domain: mathematics
-dependency_level: 13
+dependency_level: 12
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 proof_strategy: direct
-deps: [def-gr-plane-wave-perturbation, def-gr-flat-linearized-perturbation, thm-gr-flat-linearized-curvature-and-gauge, thm-gr-tt-plane-wave-solutions, def-gr-minkowski-model-and-inertial-chart, def-gr-curvature-tensor-and-derived-tensors, thm-gr-curvature-tensoriality-and-coordinate-formula, def-gr-inverse-metric-and-musical-isomorphisms, def-gr-smooth-covariant-two-tensor-field, thm-clairaut-schwarz-mixed-partials, thm-algebra-of-derivatives, thm-chain-rule, def-derivative, def-c-r-and-smooth-maps-between-smooth-manifolds, lem-gr-null-phase-coordinate]
+deps: [def-gr-plane-wave-perturbation, def-gr-flat-linearized-perturbation, thm-gr-flat-linearized-curvature-and-gauge, def-gr-minkowski-model-and-inertial-chart, def-gr-curvature-tensor-and-derived-tensors, thm-gr-curvature-tensoriality-and-coordinate-formula, def-gr-inverse-metric-and-musical-isomorphisms, def-gr-smooth-covariant-two-tensor-field, thm-clairaut-schwarz-mixed-partials, thm-algebra-of-derivatives, thm-chain-rule, def-derivative, def-c-r-and-smooth-maps-between-smooth-manifolds, lem-gr-null-phase-coordinate]
 dependency_roles:
   def-gr-plane-wave-perturbation: mathematical-premise
   def-gr-flat-linearized-perturbation: mathematical-premise
   thm-gr-flat-linearized-curvature-and-gauge: mathematical-premise
-  thm-gr-tt-plane-wave-solutions: mathematical-premise
   def-gr-minkowski-model-and-inertial-chart: mathematical-premise
   def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
   thm-gr-curvature-tensoriality-and-coordinate-formula: mathematical-premise
@@ -92,15 +91,13 @@ $S^{(1)}=0$.
 
 **Given:** A flat linearized family $(\varepsilon_1,h,q)$ over $\Omega$, a smooth covector field $\xi$, and a smooth planar profile $F$.
 
-[L1] The curvature components of the metric $g(\lambda)$ are given by $R^a{}_{bcd}=\partial_c\Gamma^a{}_{db}-\partial_d\Gamma^a{}_{cb}+\sum_e(\Gamma^a{}_{ce}\Gamma^e{}_{db}-\Gamma^a{}_{de}\Gamma^e{}_{cb})$, the curvature is a $(1,3)$-tensor, and $\operatorname{Ric}_{bd}=\eta^{ae}R_{ebad}$, $S=\eta^{bd}\operatorname{Ric}_{bd}$, $G_{ab}=\operatorname{Ric}_{ab}-\tfrac12S\eta_{ab}$ ([[thm-gr-curvature-tensoriality-and-coordinate-formula]], [[def-gr-curvature-tensor-and-derived-tensors]], [[def-gr-flat-linearized-perturbation]] clauses (a)-(c), [[def-gr-inverse-metric-and-musical-isomorphisms]]).
+[L1] The curvature components of the metric $g(\lambda)$ are given by $R^a{}_{bcd}=\partial_c\Gamma^a{}_{db}-\partial_d\Gamma^a{}_{cb}+\sum_e(\Gamma^a{}_{ce}\Gamma^e{}_{db}-\Gamma^a{}_{de}\Gamma^e{}_{cb})$, the curvature is a $(1,3)$-tensor, and $\operatorname{Ric}_{bd}=g^{ae}R_{ebad}$, $S=g^{bd}\operatorname{Ric}_{bd}$, $G_{ab}=\operatorname{Ric}_{ab}-\tfrac12Sg_{ab}$. Since the background curvature vanishes at $\lambda=0$, differentiation gives $\operatorname{Ric}^{(1)}_{bd}=\eta^{ae}R^{(1)}_{ebad}$, $S^{(1)}=\eta^{bd}\operatorname{Ric}^{(1)}_{bd}$ and $G^{(1)}_{ab}=\operatorname{Ric}^{(1)}_{ab}-\tfrac12S^{(1)}\eta_{ab}$ ([[thm-gr-curvature-tensoriality-and-coordinate-formula]], [[def-gr-curvature-tensor-and-derived-tensors]], [[def-gr-flat-linearized-perturbation]] clauses (a)-(c), [[def-gr-inverse-metric-and-musical-isomorphisms]]).
 
 [L2] The first-order Christoffel coefficients are $\Gamma^{(1)a}{}_{bc}=\tfrac12\eta^{ad}(\partial_bh_{cd}+\partial_ch_{bd}-\partial_dh_{bc})$, the component family $\lambda\mapsto\Gamma^a{}_{bc}(\lambda,p)$ is smooth with second derivative bounded on compact parameter sets, and $\Gamma^a{}_{bc}(0)=0$ ([[thm-gr-flat-linearized-curvature-and-gauge]] clauses (a), (e), [[def-gr-flat-linearized-perturbation]] clause (b)).
 
 [L3] Mixed partial derivatives of a $C^2$ function commute and derivatives of products and sums obey the usual rules ([[thm-clairaut-schwarz-mixed-partials]], [[thm-algebra-of-derivatives]], [[def-derivative]], [[def-c-r-and-smooth-maps-between-smooth-manifolds]]).
 
-[L4] For a planar profile, $\partial_ch_{ab}=F'_{ab}(u)n_c$ and $\partial_d\partial_ch_{ab}=F''_{ab}(u)n_dn_c$, and for a TT profile the trace, the divergence and hence the contraction $\partial_a\partial_bh^{ab}$ vanish ([[lem-gr-null-phase-coordinate]] clause (c)).
-
-[L5] For a TT planar perturbation, $G^{(1)}_{ab}(h)=0$ ([[thm-gr-tt-plane-wave-solutions]] clause (b)).
+[L4] For a planar profile, $\partial_ch_{ab}=F'_{ab}(u)n_c$ and $\partial_d\partial_ch_{ab}=F''_{ab}(u)n_dn_c$, and $\Box h_{ab}=0$; for a TT profile the trace, the divergence and hence the contraction $\partial_a\partial_bh^{ab}$ vanish ([[lem-gr-null-phase-coordinate]] clause (c)).
 
 [L6] The map $h\mapsto R^{(1)}_{abcd}(h)$ given by the formula of (a) is $\mathbb R$-linear in $h$ and its derivatives, and $\operatorname{Ric}^{(1)}_{bd}=\tfrac12(\partial_c\partial_bh^c{}_d+\partial_c\partial_dh^c{}_b-\Box h_{bd}-\partial_b\partial_dh)$ ([[thm-gr-flat-linearized-curvature-and-gauge]] clause (b), [[def-gr-flat-linearized-perturbation]] clause (b)).
 
@@ -116,9 +113,9 @@ $S^{(1)}=0$.
 
 2.2 (Planar waves.) Let $h_{ab}=F_{ab}(u)$; by [L4], $\partial_b\partial_ch_{ad}=F''_{ad}n_bn_c$, and substituting into the formula of step 1.1 gives the displayed planar formula. If $F_{0a}=0$, then substituting $n_0=1$, $n_i=0$ for $i=1,2$ and $n_3=-1$ gives $R^{(1)}_{0i0j}=\tfrac12(n_in_0F''_{0j}+n_0n_jF''_{i0}-n_0n_0F''_{ij}-n_in_jF''_{00})=-\tfrac12F''_{ij}$. For the raised component, the four-term formula of step 1.1 is antisymmetric in the first and in the last index pair, so $R^{(1)}_{a00j}=-R^{(1)}_{a0j0}=R^{(1)}_{0aj0}=-R^{(1)}_{0a0j}=-\bigl(-\tfrac12F''_{aj}\bigr)=\tfrac12F''_{aj}$; raising the first index gives $R^{(1)i}{}_{00j}=\eta^{ia}\tfrac12F''_{aj}=+\tfrac12F''{}^i{}_j$. If in addition the profile is TT, then $F''_{ij}$ vanishes whenever $i=j=3$ or one index equals $3$, and $F''_{11}=-F''_{22}=A_+''$, $F''_{12}=F''_{21}=A_\times''$; the displayed components follow. This proves (c). [L4, step 1.1, algebra]
 
-2.3 (Ricci contraction.) Contracting the formula of step 1.1 with $\eta^{ac}$ term by term gives $$\eta^{ac}R^{(1)}_{abcd}=\tfrac12\bigl(\partial_b\partial_ch^c{}_d+\partial_a\partial_dh^{a}{}_b-\Box h_{bd}-\partial_b\partial_dh\bigr),$$ which is the formula of [L6] for $\operatorname{Ric}^{(1)}_{bd}$ (the first two terms are the same contraction with renamed dummy indices). For a TT planar perturbation, [L5] gives $G^{(1)}_{ab}=0$, and by the identity $G^{(1)}_{ab}=\operatorname{Ric}^{(1)}_{ab}-\tfrac12S^{(1)}\eta_{ab}$ of [L1] applied to first-order coefficients, $\operatorname{Ric}^{(1)}_{ab}=\tfrac12S^{(1)}\eta_{ab}$. The trace $S^{(1)}=\eta^{ab}\operatorname{Ric}^{(1)}_{ab}$ then gives $S^{(1)}=2S^{(1)}$ at every point, so $S^{(1)}=0$ and $\operatorname{Ric}^{(1)}=0$. This proves (d). [L1, L5, L6, step 1.1, algebra]
+2.3 (Ricci contraction.) Contracting the formula of step 1.1 with $\eta^{ac}$ term by term gives $$\eta^{ac}R^{(1)}_{abcd}=\tfrac12\bigl(\partial_b\partial_ch^c{}_d+\partial_a\partial_dh^{a}{}_b-\Box h_{bd}-\partial_b\partial_dh\bigr),$$ which is the formula of [L6] for $\operatorname{Ric}^{(1)}_{bd}$ (the first two terms are the same contraction with renamed dummy indices). For a TT planar perturbation, [L4] gives zero trace, zero divergence and $\Box h_{bd}=0$, so every term in the Ricci formula of [L6] vanishes, independently of boundedness of the profiles. Thus $\operatorname{Ric}^{(1)}_{bd}=0$ and its contraction $S^{(1)}=0$ by [L1]. This proves (d). [L1, L4, L6, step 1.1, algebra]
 
-3.1 (Conclusion.) Steps 1.1, 2.1, 2.2 and 2.3 prove the four clauses from the coordinate curvature formula, the first-order Christoffel symbols and the commutation of partial derivatives. No field equation is assumed except in the vanishing statement of (d), where the proved statement of [[thm-gr-tt-plane-wave-solutions]] is used; no choice principle beyond the inherited countable choice of the cited suppliers is used. [step 1.1, step 2.1, step 2.2, step 2.3] ∎
+3.1 (Conclusion.) Steps 1.1, 2.1, 2.2 and 2.3 prove the four clauses from the coordinate curvature formula, the first-order Christoffel symbols and the commutation of partial derivatives. No field equation or profile boundedness is assumed: the vanishing statement of (d) follows directly from the null-phase and TT identities; no choice principle beyond the inherited countable choice of the cited suppliers is used. [step 1.1, step 2.1, step 2.2, step 2.3] ∎
 
 ## Remarks
 

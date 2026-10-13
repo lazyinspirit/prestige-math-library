@@ -1,7 +1,7 @@
 ---
 id: pthm-gr-flrw-de-sitter-solutions
 kind: physics-theorem
-title: "The flat vacuum solutions with a cosmological parameter: exponential expansion for Lambda positive and non-existence for Lambda negative"
+title: "An expanding flat vacuum solution for positive cosmological parameter and non-existence for negative parameter"
 status: draft
 origin: session
 domain: physics
@@ -10,7 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [post-gr-flrw-homogeneous-cosmological-model, pthm-gr-flrw-field-equations-reduction, def-gr-flrw-friedmann-system, def-gr-flrw-spatial-model, def-gr-si-unit-and-coordinate-conventions, def-derivative, def-rational-power, def-real-exponential-function-and-e, thm-derivative-of-exponential, thm-chain-rule, thm-algebra-of-derivatives]
+deps: [post-gr-flrw-homogeneous-cosmological-model, pthm-gr-flrw-field-equations-reduction, def-gr-flrw-friedmann-system, def-gr-flrw-spatial-model, def-gr-si-unit-and-coordinate-conventions, def-derivative, def-rational-power, def-real-exponential-function-and-e, cor-exponential-reciprocal-and-positivity, thm-derivative-of-exponential, thm-chain-rule, thm-algebra-of-derivatives]
 dependency_roles:
   post-gr-flrw-homogeneous-cosmological-model: physical-assumption
   pthm-gr-flrw-field-equations-reduction: physical-result
@@ -20,6 +20,7 @@ dependency_roles:
   def-derivative: mathematical-premise
   def-rational-power: mathematical-premise
   def-real-exponential-function-and-e: mathematical-premise
+  cor-exponential-reciprocal-and-positivity: mathematical-premise
   thm-derivative-of-exponential: mathematical-premise
   thm-chain-rule: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
@@ -72,7 +73,7 @@ limit $t\to-\infty$, about singularities or about global structure.
 
 [L1] The flat spatial model is the Euclidean standard model of [[def-gr-flrw-spatial-model]], and the model's geometry, matter sector and field law are the adopted assumptions of [[post-gr-flrw-homogeneous-cosmological-model]] used together with [[pthm-gr-flrw-field-equations-reduction]], which states: on the spacetime the field equation holds if and only if (F) and (A) hold for the model data, and the vacuum sector is the case $\varepsilon=p=0$ with $T=0$.
 
-[L2] The real exponential function $\exp$ is $C^\infty$ with $\exp'=\exp$, and for constants $\alpha,\beta$ the function $t\mapsto\beta\exp(\alpha t)$ satisfies $\frac{d}{dt}\bigl(\beta\exp(\alpha t)\bigr)=\alpha\beta\exp(\alpha t)$ and $\frac{d^2}{dt^2}\bigl(\beta\exp(\alpha t)\bigr)=\alpha^2\beta\exp(\alpha t)$ ([[def-real-exponential-function-and-e]], [[thm-derivative-of-exponential]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]]).
+[L2] For every real $x$, $\exp(x)>0$ ([[cor-exponential-reciprocal-and-positivity]]); the real exponential function is $C^\infty$ with $\exp'=\exp$, and for constants $\alpha,\beta$ the function $t\mapsto\beta\exp(\alpha t)$ satisfies $\frac{d}{dt}\bigl(\beta\exp(\alpha t)\bigr)=\alpha\beta\exp(\alpha t)$ and $\frac{d^2}{dt^2}\bigl(\beta\exp(\alpha t)\bigr)=\alpha^2\beta\exp(\alpha t)$ ([[def-real-exponential-function-and-e]], [[thm-derivative-of-exponential]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]]).
 
 [L3] For $\Lambda>0$ the real number $H_\Lambda=c\sqrt{\Lambda/3}$ is positive and satisfies $H_\Lambda^2=c^2\Lambda/3$ ([[def-rational-power]]); for $\Lambda<0$ the real number $\Lambda c^2/3$ is negative.
 
@@ -90,14 +91,6 @@ limit $t\to-\infty$, about singularities or about global structure.
 
 ## Remarks
 
-- **The flat $\Lambda=0$ case.** For $\Lambda=0$ the constant scale factor
-  $a\equiv A$ satisfies (F) and (A) with $\varepsilon=p=0$ trivially
-  ($H=\ddot a=0$), so it is a further vacuum solution of the reduced system;
-  the lemma makes no claim that it is isometric to Minkowski space, and no
-  statement about which of the vacuum solutions a physical cosmology selects.
+- **The flat $\Lambda=0$ case.** For $\Lambda=0$ the constant scale factor $a\equiv A$ satisfies (F) and (A) with $\varepsilon=p=0$ trivially ($H=\ddot a=0$), so it is a further vacuum solution of the reduced system; the lemma makes no claim that it is isometric to Minkowski space, and no statement about which of the vacuum solutions a physical cosmology selects.
 
-- **No empirical content.** The parameter $\Lambda$ is model data; the theorem
-  is a conditional statement about the adopted field law. In particular the
-  observed accelerated expansion of the universe is not used, asserted or
-  explained here, and associating $\Lambda$ with a measured dark-energy
-  density requires a separate, source-backed empirical premise and analysis.
+- **No empirical content.** The parameter $\Lambda$ is model data; the theorem is a conditional statement about the adopted field law. In particular the observed accelerated expansion of the universe is not used, asserted or explained here, and associating $\Lambda$ with a measured dark-energy density requires a separate, source-backed empirical premise and analysis.

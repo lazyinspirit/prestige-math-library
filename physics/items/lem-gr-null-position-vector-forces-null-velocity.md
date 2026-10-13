@@ -12,6 +12,11 @@ provenance:
   proof: ai-generated
 proof_strategy: direct
 deps:
+  - lem-gr-causal-curve-calculus
+  - def-dependent-choice
+  - def-countable-choice
+  - thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces
+  - lem-gr-observer-projection-decomposition
   - thm-gr-normal-neighborhood-causal-cone
   - lem-gr-position-vector-differential
   - lem-gr-observer-pairing-with-future-causal-vectors
@@ -24,12 +29,16 @@ deps:
   - def-gr-smooth-lorentzian-objects
   - def-interval
   - lem-gr-normal-neighborhood-length-monotonicity
-  - lem-gr-temporal-functions-and-time-functions
   - lem-q-and-irrationals-dense-r
   - thm-rationals-countable
   - def-absolutely-continuous-function
   - thm-absolutely-continuous-functions-have-integrable-derivatives
 dependency_roles:
+  lem-gr-causal-curve-calculus: mathematical-premise
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
+  thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces: mathematical-premise
+  lem-gr-observer-projection-decomposition: mathematical-premise
   thm-gr-normal-neighborhood-causal-cone: mathematical-premise
   lem-gr-position-vector-differential: mathematical-premise
   lem-gr-observer-pairing-with-future-causal-vectors: mathematical-premise
@@ -42,7 +51,6 @@ dependency_roles:
   def-gr-smooth-lorentzian-objects: mathematical-premise
   def-interval: mathematical-premise
   lem-gr-normal-neighborhood-length-monotonicity: mathematical-premise
-  lem-gr-temporal-functions-and-time-functions: mathematical-premise
   lem-q-and-irrationals-dense-r: mathematical-premise
   thm-rationals-countable: mathematical-premise
   def-absolutely-continuous-function: mathematical-premise
@@ -63,10 +71,18 @@ verification:
 
 ## Statement
 
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the absolutely continuous causal-curve
+calculus and the supplied causal results used below.
+
 Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let
-$p\in M$ and let $C$ be a strictly convex normal ball around $p$ satisfying
-the hypotheses of [[thm-gr-normal-neighborhood-causal-cone]], with the
-exponential chart $u$, the position vector $P(p,q)$ and
+$p\in M$, and let $C$ be a strictly convex normal ball around $p$ satisfying
+the hypotheses of [[thm-gr-normal-neighborhood-causal-cone]]. Choose a future
+unit timelike vector $n_p:=N_p/\sqrt{-g_p(N_p,N_p)}$ and exponential
+coordinates $u=\psi\circ\exp_p^{-1}$ whose zeroth component is
+$u^0(q):=-g_p(\exp_p^{-1}(q),n_p)$; the other three components complete this
+nonzero linear functional to an isomorphism $\psi:T_pM\to\mathbb R^4$. Let
+$P(p,q)$ be the position vector and
 $D_p^2(q)=g_p(\exp_p^{-1}q,\exp_p^{-1}q)$. Let $\sigma:[0,1]\to C$ be a
 future causal curve with $\sigma(0)=p$ and suppose that
 $D_p^2(\sigma(t_0))=0$ for some $t_0\in(0,1]$. Then:
@@ -81,15 +97,15 @@ every $t\in[0,t_0]$, and consequently $L_g(\sigma|_{[0,t_0]})=0$.
 
 **Given:** A convex normal ball $C$ as in [[thm-gr-normal-neighborhood-causal-cone]], a future causal curve $\sigma:[0,1]\to C$ from $p$, and $t_0\in(0,1]$ with $D_p^2(\sigma(t_0))=0$.
 
-[L1] $D_p^2\circ\sigma\le0$ on $[0,1]$ by [[thm-gr-normal-neighborhood-causal-cone]] clause (a). The additional coordinate hypothesis in the Statement makes $u^0$ temporal on $C$; hence $u^0\circ\sigma$ is nondecreasing and starts at zero, so $u^0\circ\sigma\ge0$ ([[lem-gr-temporal-functions-and-time-functions]] clauses (a)-(b)).
+[L1] $D_p^2\circ\sigma\le0$ and $v(t):=\exp_p^{-1}(\sigma(t))$ is future causal or zero for every $t$ by [[thm-gr-normal-neighborhood-causal-cone]] clause (a). The coordinate choice in the Statement gives $u^0(\sigma(t))=-g_p(v(t),n_p)\ge0$, since a future causal vector pairs nonpositively with the future timelike vector $n_p$ ([[lem-gr-observer-pairing-with-future-causal-vectors]]).
 
-[L2] The function $t\mapsto D_p^2(\sigma(t))$ is AC with derivative $2g_{\sigma(t)}(P(p,\sigma(t)),\sigma'(t))$ at almost every $t$ ([[lem-gr-position-vector-differential]] clause (a), [[thm-a-lipschitz-function-after-an-absolutely-continuous-function-is-absolutely-continuous]], [[thm-chain-rule-for-total-derivatives]]).
+[L2] The function $t\mapsto D_p^2(\sigma(t))$ is AC with derivative $2g_{\sigma(t)}(P(p,\sigma(t)),\sigma'(t))$ at almost every $t$ ([[lem-gr-position-vector-differential]] clause (a), [[lem-gr-causal-curve-calculus]] clause (b), [[thm-chain-rule-for-total-derivatives]]).
 
-[L3] Reverse Cauchy–Schwarz: if $T,z$ are future causal and nonzero with $g(T,z)=0$, then both are null and positive multiples of one another ([[lem-gr-observer-pairing-with-future-causal-vectors]]).
+[L3] Null pairing rigidity, derived locally. Relative to the specified future unit observer $e$, decompose nonzero future causal vectors as $T=ae+u$, $z=be+w$, with $u,w\perp e$, $a,b>0$, $|u|\le a$, $|w|\le b$ in the positive rest-space norm. Then $g(T,z)=-ab+\langle u,w\rangle\le-ab+|u||w|\le0$. Equality forces $|u|=a$, $|w|=b$ and positive collinearity in Cauchy-Schwarz, so both vectors are null and positive multiples ([[lem-gr-observer-projection-decomposition]], [[lem-gr-observer-pairing-with-future-causal-vectors]], [[thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]]).
 
 [L4] If an AC function is identically zero on an interval, then its derivative vanishes almost everywhere on that interval ([[thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions]]).
 
-[L5] The length of the restriction is $L_g(\sigma|_{[0,t_0]})=\int_0^{t_0}\sqrt{-g(\sigma',\sigma')}$ ([[def-gr-timelike-worldline-and-proper-time]]).
+[L5] The length of the restriction is $L_g(\sigma|_{[0,t_0]})=\int_0^{t_0}\sqrt{-g(\sigma',\sigma')}$, the Lebesgue length for locally absolutely continuous future causal curves defined in [[lem-gr-normal-neighborhood-length-monotonicity]].
 
 [L6] If $f$ is absolutely continuous on an interval and $c\in\mathbb R$, then $f'=0$ almost everywhere on $f^{-1}(c)$. At a differentiability point $s$ of that level set with $f'(s)\ne0$, the definition of derivative implies that $f(u)\ne c$ for every sufficiently close $u\ne s$, so $s$ is isolated in the level set. The isolated points are countable: assign to each one the first rational-endpoint open interval in a fixed enumeration that contains it and no other level-set point; distinct isolated points receive distinct intervals. The nondifferentiability set of an absolutely continuous function and this countable set are null, proving the claim. Applying this coordinatewise on a countable cover of the preimage of a point gives $\sigma'=0$ almost everywhere on $\{s:\sigma(s)=p\}$ ([[def-absolutely-continuous-function]], [[thm-absolutely-continuous-functions-have-integrable-derivatives]], [[lem-q-and-irrationals-dense-r]], [[thm-rationals-countable]]).
 
@@ -107,9 +123,6 @@ every $t\in[0,t_0]$, and consequently $L_g(\sigma|_{[0,t_0]})=0$.
 
 ## Remarks
 
-- **The non-vanishing hypothesis is not needed here.** The lemma uses the propagation argument to establish that the displacement is identically zero, and then differentiates that constant function; it does not need the rigidity statement of
-  [[thm-gr-normal-neighborhood-causal-cone]] clause (c).
+- **The non-vanishing hypothesis is not needed here.** The lemma uses the propagation argument to establish that the displacement is identically zero, and then differentiates that constant function; it does not need the rigidity statement of [[thm-gr-normal-neighborhood-causal-cone]] clause (c).
 
-- **Use.** The lemma is used in [[lem-gr-convex-normal-causality]] to rule
-  out null endpoints for causal curves containing a genuinely timelike
-  piece.
+- **Use.** The lemma is used in [[lem-gr-convex-normal-causality]] to rule out null endpoints for causal curves containing a genuinely timelike piece.

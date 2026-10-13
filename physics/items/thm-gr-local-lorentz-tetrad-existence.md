@@ -8,7 +8,7 @@ domain: mathematics
 dependency_level: 5
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 proof_strategy: direct
 deps: [def-gr-local-frame-and-tetrad-fields, def-gr-smooth-lorentzian-objects, def-gr-smooth-covariant-two-tensor-field, lem-lorentz-form-has-orthonormal-basis, lem-gr-future-causal-classification-by-a-timelike-field, def-causal-classification-of-lorentz-vectors, thm-coordinate-derivations-form-a-basis-of-the-tangent-space, thm-unique-coordinates-with-respect-to-an-ordered-basis, prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components, def-c-r-and-smooth-maps-between-smooth-manifolds, def-continuous-map-top, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-algebra-of-derivatives, cor-injective-regular-ck-map-is-a-ck-diffeomorphism-onto-its-image, def-countable-choice]
 dependency_roles:
@@ -89,7 +89,7 @@ $E_0(q)$ future-directed for every $q\in U$.
 
 4.1 Define $F_0:=B_0\big/\sqrt{-G_{00}}$ on $U_1$. The function $u\mapsto u^{-1/2}$ is $C^\infty$ on $(0,\infty)$: the map $u\mapsto u^{1/2}$ is the inverse of the injective $C^\infty$ squaring map $u\mapsto u^2$ on $(0,\infty)$ whose derivative $2u$ is invertible everywhere there, so it is $C^\infty$ by [L11], and $u\mapsto u^{-1}$ has derivatives $(-1)^nn!\,u^{-n-1}$ for every $n$ by iterating the product and quotient rules of [L10]; composites and products of $C^\infty$ maps are $C^\infty$ by [L9]. Hence $F_0$ is smooth on $U_1$, and $g_q(F_0(q),F_0(q))=G_{00}(q)/(-G_{00}(q))=-1$; since $-G_{00}>0$, the field $F_0$ is a positive multiple of $B_0$ at every point, so $g_q(F_0(q),N_q)=h(q)/\sqrt{-G_{00}(q)}<0$ and $F_0(q)$ is future-directed. [step 3.1, L1, L3, L9, L10, L11]
 
-5.1 For $i=1,2,3$ define $P_i:=B_i+g_q(B_i,F_0)F_0$ on $U_1$; these are smooth fields by [L9], and $g_q(P_i,F_0)=G_{0i}+G_{0i}(-1)=0$, so $P_i(q)$ lies in the $g_q$-orthogonal complement of $F_0(q)$. The function $\varphi_1:=g_q(P_1,P_1)$ is smooth by [L4] and [L9], and $\varphi_1(p)=g_p(b_1,b_1)=1>0$ because $F_0(p)=b_0$ and $g_p(b_1,b_0)=0$. By [L7] and [L8] there is an open $U_2\subseteq U_1$ containing $p$ with $\varphi_1>0$ on $U_2$. Define $F_1:=P_1/\sqrt{\varphi_1}$ on $U_2$; it is smooth by the argument of step 4.1, $g(F_1,F_1)=1$, and $g(F_1,F_0)=0$. [step 4.1, L4, L7, L8, L9, algebra]
+5.1 For $i=1,2,3$ define $P_i:=B_i+g_q(B_i,F_0)F_0$ on $U_1$; these are smooth fields by [L9], and $g_q(P_i,F_0)=g_q(B_i,F_0)+g_q(B_i,F_0)(-1)=0$, so $P_i(q)$ lies in the $g_q$-orthogonal complement of $F_0(q)$. The function $\varphi_1:=g_q(P_1,P_1)$ is smooth by [L4] and [L9], and $\varphi_1(p)=g_p(b_1,b_1)=1>0$ because $F_0(p)=b_0$ and $g_p(b_1,b_0)=0$. By [L7] and [L8] there is an open $U_2\subseteq U_1$ containing $p$ with $\varphi_1>0$ on $U_2$. Define $F_1:=P_1/\sqrt{\varphi_1}$ on $U_2$; it is smooth by the argument of step 4.1, $g(F_1,F_1)=1$, and $g(F_1,F_0)=0$. [step 4.1, L4, L7, L8, L9, algebra]
 
 6.1 Define $P_2':=P_2-g(P_2,F_1)F_1$ on $U_2$, a smooth field with $g(P_2',F_1)=g(P_2,F_1)-g(P_2,F_1)=0$ and $g(P_2',F_0)=0$, and let $\varphi_2:=g(P_2',P_2')$, smooth with $\varphi_2(p)=g_p(b_2,b_2)=1>0$ because $F_1(p)=b_1$ and $g_p(b_2,b_1)=0$. Shrink to an open $U_3\subseteq U_2$ containing $p$ with $\varphi_2>0$ and define $F_2:=P_2'/\sqrt{\varphi_2}$; then $F_2$ is smooth, $g(F_2,F_2)=1$ and $g(F_2,F_0)=g(F_2,F_1)=0$. [step 5.1, L4, L7, L8, L9, algebra]
 

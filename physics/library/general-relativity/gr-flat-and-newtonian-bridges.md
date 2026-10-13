@@ -39,11 +39,11 @@ examples: []
 This page builds two explicit bridges into and out of the framework's field
 law: the flat model $(\mathbb R^4,\eta)$ as a model of the theory, and the
 controlled weak-field/slow-motion limit in which general relativity reproduces
-Newtonian kinematics. Fifteen items are mathematical definitions and conditional
+Newtonian kinematics. Fourteen items are mathematical definitions and conditional
 deductions about the flat model, its linearization and a class of weak-field
-families — and three are physics: the Newtonian comparison model with its
+families — and four are physics: the Newtonian comparison model with its
 adopted identification, and the two model-conditional theorems that read the
-mathematics through the framework's postulates. No item reports a measurement
+mathematics through the framework's postulates, and the physics scope remark. No item reports a measurement
 or an experiment; no empirical premise or uncertainty occurs anywhere on this
 page, and the physics theorems state explicitly that they assert nothing about
 nature.
@@ -84,8 +84,7 @@ formula in [[thm-gr-flat-wave-equation-duhamel-and-harmonic-gauge]].
 **The controlled Newtonian bridge.** Stationary weak-field data have
 spacetime region $\Omega$, spatial base $U=\pi(\Omega)$, spatial potential
 $\varphi:U\to\mathbb R$ and component family
-$g_{ab}(\varepsilon,p)=\eta_{ab}+\varepsilon(-2\varphi(\pi p))(\delta_{a0}\delta_{b0}
-+\delta_{ab})+r_{ab}(\varepsilon,\pi p)$, with derivative bounds on a compact
+$g_{ab}(\varepsilon,p)=\eta_{ab}+\varepsilon(-2\varphi(\pi p))\delta_{ab}+r_{ab}(\varepsilon,\pi p)$, with derivative bounds on a compact
 spatial set $K\subseteq U$ and Einstein-family condition
 $G_{ab}(g(\varepsilon))=\kappa T_{ab}(\varepsilon)$
 ([[def-gr-stationary-weak-field-data]]). Their inverse-metric bounds,
@@ -112,7 +111,7 @@ estimates on a hypothesized family; they assert neither its existence nor
 that any observed system has this form.
 
 **Local flatness and its limits.** Vanishing curvature on a normal
-neighborhood makes the exponential map a linear isometry, so the exponential
+neighborhood makes the differential of the exponential map a linear isometry, so the exponential
 chart has constant components $\eta_{ab}$, and conversely a chart with
 constant components forces vanishing curvature
 ([[thm-gr-vanishing-curvature-implies-locally-minkowski]]).

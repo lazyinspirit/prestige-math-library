@@ -36,7 +36,7 @@ sources:
   references:
     - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 9.3.3 printed pages 219-220 (PDF pages 227-228): the m and l selection rules for electric-dipole transitions"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
-    - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 9 'Angular Momentum', Section 3 (angular integrals of the dipole operator and selection rules)"
+    - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 9 'Angular Momentum', Section 3 (spherical-harmonic orthogonality and azimuthal dependence in the polar chart)"
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/e765f050b2fd50a9d87d2ae801e9c52f_MIT8_05F13_Chap_09.pdf"
 ---
 
@@ -106,7 +106,7 @@ integral is evaluated.
 
 **Given:** the explicit harmonics $Y_{00},Y_{10},Y_{1,\pm1}$, the chart forms of $Q_{0},Q_{\pm}$, the polar measure $\sigma$, the declared model and oscillator data, and the cited suppliers.
 
-[F1] **Explicit harmonics.** With the normalization $Y_{lm}=b_{lm}w_{l|m|}(\cos\theta)e^{im\varphi}/\sqrt{2\pi}$, $Y_{l,-m}=(-1)^{m}\overline{Y_{lm}}$ and $b_{lm}=(\int_{-1}^{1}w_{lm}^{2}dt)^{-1/2}$ of [[thm-nrqm-orbital-and-spin-associated-polynomial-normalization]] clauses (c),(e), and $w_{l0}=P_{l}$ with $P_{0}=1$, $P_{1}(t)=t$ and $w_{11}(t)=-(1-t^{2})^{1/2}$ of [[thm-nrqm-orbital-and-spin-legendre-rodrigues-equation]] clause (d), the norms are $b_{00}=1/\sqrt2$, $b_{10}=\sqrt{3/2}$ and $b_{11}=\sqrt3/2$, giving $Y_{00}=1/\sqrt{4\pi}$, $Y_{10}=\sqrt{3/(4\pi)}\cos\theta$, $Y_{1,1}=-\sqrt{3/(8\pi)}\sin\theta e^{i\varphi}$ and $Y_{1,-1}=\sqrt{3/(8\pi)}\sin\theta e^{-i\varphi}$ ([[def-complex-exponential]], [[def-sine-and-cosine-by-power-series]]).
+[F1] **Explicit harmonics.** For $0\le m\le l$, use $Y_{lm}=b_{lm}w_{lm}(\cos\theta)e^{im\varphi}/\sqrt{2\pi}$ with $b_{lm}=(\int_{-1}^{1}w_{lm}^{2}dt)^{-1/2}$; for $1\le m\le l$, use $Y_{l,-m}=(-1)^{m}\overline{Y_{lm}}$, as in [[thm-nrqm-orbital-and-spin-associated-polynomial-normalization]] clauses (c),(e). With $w_{l0}=P_l$, $P_0=1$, $P_1(t)=t$ and $w_{11}(t)=-(1-t^2)^{1/2}$ from the normalization supplier and [[thm-nrqm-orbital-and-spin-legendre-rodrigues-equation]] clause (d), the norms are $b_{00}=1/\sqrt2$, $b_{10}=\sqrt{3/2}$ and $b_{11}=\sqrt3/2$. Thus $Y_{00}=1/\sqrt{4\pi}$, $Y_{10}=\sqrt{3/(4\pi)}\cos\theta$, $Y_{1,1}=-\sqrt{3/(8\pi)}\sin\theta e^{i\varphi}$ and $Y_{1,-1}=\sqrt{3/(8\pi)}\sin\theta e^{-i\varphi}$ ([[def-complex-exponential]], [[def-sine-and-cosine-by-power-series]]).
 
 [F2] **Chart and sphere integrals.** In the chart $\Phi(\theta,\varphi)=(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta)$ one has $Q_{0}=\cos\theta$ and $Q_{\pm}=\sin\theta e^{\pm i\varphi}/\sqrt2$; for Borel $F\ge0$, $\int_{S^{2}}F\,d\sigma=\int_{0}^{\pi}\int_{0}^{2\pi}F(\Phi(\theta,\varphi))\sin\theta\,d\varphi\,d\theta$ and $\sigma(S^{2})=4\pi$, whence $\int_{S^{2}}\cos^{2}\theta\,d\sigma=4\pi/3$ and $\int_{S^{2}}\sin^{2}\theta\,d\sigma=8\pi/3$, while $\int_{0}^{2\pi}e^{ik\varphi}d\varphi$ vanishes for every nonzero integer $k$ ([[lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates]], [[def-polar-surface-measure-on-the-unit-sphere]], [[def-inner-product-space]], [[def-l-p-space-as-a-quotient-by-null-functions]]).
 

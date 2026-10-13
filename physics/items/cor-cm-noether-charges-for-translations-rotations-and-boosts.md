@@ -37,14 +37,14 @@ verification:
 
 ## Statement
 
-Let $n\ge1$, let $m>0$, let $U\subseteq\mathbb R^n$ be open, let
-$U_0:(a-\varepsilon,b+\varepsilon)\times U\to\mathbb R$ be of class $C^2$, and let
+Let $n\ge1$, let $m>0$, let $a_0<b_0$ be reals, let $\varepsilon>0$, let $U\subseteq\mathbb R^n$ be open and nonempty, let
+$U_0:(a_0-\varepsilon,b_0+\varepsilon)\times U\to\mathbb R$ be of class $C^2$, and let
 
 $$\mathcal L(t,q,v):=\tfrac12m|v|^2-U_0(t,q)$$
 
 be the corresponding Lagrangian chart ([[def-cm-time-dependent-lagrangian-and-action]],
 [[def-euclidean-inner-product]]). Let $q:I\to U$ be a $C^2$ Euler–Lagrange solution on an open
-interval $I\supseteq[a,b]$. Then:
+interval $[a_0,b_0]\subseteq I\subseteq(a_0-\varepsilon,b_0+\varepsilon)$. Then:
 
 1. **(translation)** if $a\in\mathbb R^n$ and $a\cdot\nabla_qU_0(t,q)=0$ for every $(t,q)$, then
    $P_a(t):=m\,a\cdot q'(t)$ is constant on $I$;
@@ -55,33 +55,17 @@ interval $I\supseteq[a,b]$. Then:
 
 ## Facts & Assumptions
 
-**Given:** The real $m>0$, the $C^2$ potential $U_0$, the Lagrangian
-$\mathcal L(t,q,v)=\tfrac12m|v|^2-U_0(t,q)$, a vector $a$ (in $\mathbb R^n$ in clauses 1 and 3,
-in $\mathbb R^3$ in clause 2), and a $C^2$ Euler–Lagrange solution $q:I\to U$.
+**Given:** The real $m>0$, the $C^2$ potential $U_0$, the Lagrangian $\mathcal L(t,q,v)=\tfrac12m|v|^2-U_0(t,q)$, a vector $a$ (in $\mathbb R^n$ in clauses 1 and 3, in $\mathbb R^3$ in clause 2), and a $C^2$ Euler–Lagrange solution $q:I\to U$.
 
-[F1] The Noether theorem ([[thm-cm-point-noether-identity-with-time-reparametrization]]): if
-$C^2$ data $\tau,\xi,B$ satisfy the Noether identity of that theorem, then
-$C=\mathcal L_v\cdot\xi-E\tau-B$ is constant along $q$. Here
-$\mathcal L_v=m\,v$ and $E=\tfrac12m|v|^2+U_0$. [given, algebraic computation of $\mathcal L_v$ and
-$E$ from the definition]
+[F1] The Noether theorem ([[thm-cm-point-noether-identity-with-time-reparametrization]]): if $C^2$ data $\tau,\xi,B$ satisfy the Noether identity of that theorem, then $C=\mathcal L_v\cdot\xi-E\tau-B$ is constant along $q$. Here $\mathcal L_v=m\,v$ and $E=\tfrac12m|v|^2+U_0$. [given, algebraic computation of $\mathcal L_v$ and $E$ from the definition]
 
-[F2] The cross product is alternating and bilinear, and
-$(a\times u)\cdot w=a\cdot(u\times w)$ for all $a,u,w\in\mathbb R^3$
-([[def-cross-product-in-r3]], [[def-euclidean-inner-product]],
-[[thm-algebra-of-derivatives]]); in particular $v\cdot(a\times v)=0$ and
-$\frac{d}{dt}(a\times q)=a\times q'$ along a differentiable curve
-([[thm-chain-rule-for-total-derivatives]], [[def-vector-valued-derivative-and-integral]],
-[[def-interval]], [[cor-zero-derivative-implies-constant]]).
+[F2] The cross product is alternating and bilinear, and $(a\times u)\cdot w=a\cdot(u\times w)$ for all $a,u,w\in\mathbb R^3$ ([[def-cross-product-in-r3]], [[def-euclidean-inner-product]], [[thm-algebra-of-derivatives]]); in particular $v\cdot(a\times v)=0$ and $\frac{d}{dt}(a\times q)=a\times q'$ along a differentiable curve ([[thm-chain-rule-for-total-derivatives]], [[def-vector-valued-derivative-and-integral]], [[def-interval]], [[cor-zero-derivative-implies-constant]]).
 
-[F3] Gradients and directional derivatives: $a\cdot\nabla U_0$ is the derivative of $U_0$ in the
-direction $a$ ([[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]]),
-and for the quadratic potential $U_0(q)=\tfrac12k|q|^2$ one has $\nabla U_0=kq$
-([[def-euclidean-inner-product]], [[def-matrix-product-and-identity-matrix]]).
+[F3] Gradients and directional derivatives: $a\cdot\nabla U_0$ is the derivative of $U_0$ in the direction $a$ ([[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]]), and for the quadratic potential $U_0(q)=\tfrac12k|q|^2$ one has $\nabla U_0=kq$ ([[def-euclidean-inner-product]], [[def-matrix-product-and-identity-matrix]]).
 
 ## Proof
 
-**Proof technique:** direct; verify the Noether identity for each of the three families and read
-off the charge.
+**Proof technique:** direct; verify the Noether identity for each of the three families and read off the charge.
 
 1.1 **Translation.** Take $\tau=0$, $\xi(t,q):=a$ (constant) and $B=0$. Then $D_t\xi=0$ and the Noether identity reduces to $\mathcal L_q\cdot a=-a\cdot\nabla U_0=0$, which holds by hypothesis of clause 1. The charge is $C=\mathcal L_v\cdot a-E\cdot0-0=m\,a\cdot q'(t)=P_a(t)$, constant on $I$ by [F1]. [F1, F3, given]
 
@@ -93,13 +77,6 @@ off the charge.
 
 ## Remarks
 
-- Clause 3 is the Galilean boost charge: it is conserved exactly when the potential is invariant
-  along the boost direction, which for a translation-invariant potential means that the potential
-  is constant along $a$. A confining potential such as $\tfrac k2|q|^2$ breaks the boost symmetry
-  even though the Galilean charts of the framework still exist; this is the mathematical content
-  of the warning that a kinematic symmetry need not be a symmetry of the chosen Lagrangian.
+- Clause 3 is the Galilean boost charge: its defining Noether identity holds when $a\cdot\nabla_qU_0=0$ on the chart, giving conservation along every Euler–Lagrange solution. Constancy on a particular solution alone does not imply this whole-chart symmetry. A confining potential such as $\tfrac k2|q|^2$ breaks the boost symmetry even though the Galilean charts of the framework still exist; this is the mathematical content of the warning that a kinematic symmetry need not be a symmetry of the chosen Lagrangian.
 
-- All three statements are conditional deductions inside the chart model: they identify conserved
-  quantities of the Euler–Lagrange equation under explicitly stated symmetry hypotheses of the
-  potential. They are mathematical statements about the model and are not claims that any
-  particular physical system possesses the required symmetry.
+- All three statements are conditional deductions inside the chart model: they identify conserved quantities of the Euler–Lagrange equation under explicitly stated symmetry hypotheses of the potential. They are mathematical statements about the model and are not claims that any particular physical system possesses the required symmetry.

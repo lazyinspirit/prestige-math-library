@@ -1,7 +1,7 @@
 ---
 id: pthm-cm02-continuation
 kind: physics-theorem
-title: "Maximal Newtonian motions and the compact-continuation criterion: finite-time breakdown requires escape from every compact subset of the state domain"
+title: "Maximal Newtonian motions and the compact-continuation criterion: finite-time breakdown requires escape from every compact subset of the time-state domain"
 status: draft
 origin: session
 domain: physics
@@ -23,7 +23,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "The continuation and breakdown criterion for the adopted Newtonian force model: the maximal motion of an initial datum is unique; at a finite right endpoint of its maximal interval its state graph leaves every compact subset of the open state domain, so a finite-time breakdown is caused by escape of the state (unbounded positions or velocities, or positions approaching the excluded configurations of the domain) or by the declared end of a finite time window; an autonomous force whose state is trapped in a compact subset of the state domain extends past the putative endpoint. The result is a conditional deduction from the adopted force postulate and the cited mathematical continuation theorems; it asserts no global existence for particular force laws, no empirical statement and no claim that any physical system realizes the model."
+physical_scope: "The continuation and breakdown criterion for the adopted Newtonian force model: the maximal motion of an initial datum is unique; at a finite right endpoint its time-state graph leaves every compact subset of the open time-state domain. On the extended time window R, the state leaves every compact subset of the open state domain; equivalently, it is unbounded on every terminal interval or, if it is bounded on some terminal interval and Q is proper, positions approach the excluded configurations in the explicitly stated sense. A finite right boundary of a finite time window is a separate possible endpoint. An autonomous force whose state is trapped in a compact subset of the state domain extends past the putative endpoint. The result is a conditional deduction from the adopted force postulate and the cited mathematical continuation theorems; it asserts no global existence for particular force laws, no empirical statement and no claim that any physical system realizes the model."
 sources:
   references:
     - title: "G. Teschl, Ordinary Differential Equations and Dynamical Systems (AMS Graduate Studies in Mathematics 140, online edition), Section 2.6 'Extensibility of solutions', Corollary 2.15 (compact continuation) and Corollary 2.16 (escape of every compact set), printed pages 50-53"
@@ -79,66 +79,37 @@ and $J_{\max}=(a,b)$ its maximal interval, $-\infty\le a<b\le+\infty$.
    defined for all forward times $t\ge t_{0}$.
 4. **Reading.** Suppose the time window is all of $\mathbb R$ (the
    time-dependent case included) and $b<+\infty$. Then for every compact
-   $K_{0}\subseteq U$ and every $\delta>0$ there is $t\in(b-\delta,b)$ with
+   $K_{0}\subseteq U$ and every $\delta>0$ there is $t\in(b-\delta,b)\cap J_{\max}$ with
    $z(t)\notin K_{0}$: near a finite breakdown the state leaves every compact
-   subset of the open state domain $U=Q\times\mathbb R^{3N}$. Consequently a
-   finite-time breakdown is caused either by unboundedness of the state or by
-   approach of the positions to the complement of $Q$ (the configurations
-   excluded from the model); the mere finiteness of $F$ at every point of $Q$
-   prevents neither.
+   subset of the open state domain $U=Q\times\mathbb R^{3N}$. Consequently
+   either the state is unbounded on every terminal interval, meaning that for
+   every $M,\delta>0$ some $t\in(b-\delta,b)\cap J_{\max}$ has
+   $\lVert z(t)\rVert_{2}>M$, or $Q\ne\mathbb R^{3N}$ and the positions
+   approach the excluded configurations in the following sense: for every
+   $\varepsilon,\delta>0$ there are $t\in(b-\delta,b)\cap J_{\max}$ and
+   $y\in\mathbb R^{3N}\setminus Q$ with
+   $\lVert x_{\max}(t)-y\rVert_{2}<\varepsilon$. If $Q=\mathbb R^{3N}$, the
+   unbounded-state alternative necessarily holds.
 
 ## Facts & Assumptions
 
-**Given:** The force model, its associated field $\mathcal F$ on $D$, the
-initial datum and the maximal motion $x_{\max}$ with state curve $z$ and
-maximal interval $J_{\max}=(a,b)$.
+**Given:** The force model, its associated field $\mathcal F$ on $D$, the initial datum and the maximal motion $x_{\max}$ with state curve $z$ and maximal interval $J_{\max}=(a,b)$.
 
-[L1] The associated first-order system, its motions and their equivalence with
-the second-order motions, the state domain $D=I_{0}\times U$, and maximal
-motions are [[def-cm02-newtonian-flow]]; the state is $z=(x,v)$ and
-$U=Q\times\mathbb R^{3N}$.
+[L1] The associated first-order system, its motions and their equivalence with the second-order motions, the state domain $D=I_{0}\times U$, and maximal motions are [[def-cm02-newtonian-flow]]; the state is $z=(x,v)$ and $U=Q\times\mathbb R^{3N}$.
 
-[L2] The force-model hypotheses ([[post-cm02-force-superposition]] clauses
-(i), (iii)): $I_{0}$ open and nondegenerate, $Q$ open, $m_{i}>0$, $F$
-continuous and locally Lipschitz in the state variable, locally uniformly in
-time ([[def-locally-lipschitz-in-the-state-variable]]); the associated field
-$\mathcal F$ is continuous and has the same local Lipschitz property, with the
-admissibility estimate proved in [[pthm-cm02-ivp]].
+[L2] The force-model hypotheses ([[post-cm02-force-superposition]] clauses (i), (iii)): $I_{0}$ open and nondegenerate, $Q$ open, $m_{i}>0$, $F$ continuous and locally Lipschitz in the state variable, locally uniformly in time ([[def-locally-lipschitz-in-the-state-variable]]); the associated field $\mathcal F$ is continuous and has the same local Lipschitz property, with the admissibility estimate proved in [[pthm-cm02-ivp]].
 
-[L3] Compact continuation
-([[thm-cm-compact-continuation-for-locally-lipschitz-odes]]): for an open
-$D\subseteq\mathbb R\times\mathbb R^{n}$ and a continuous field that is
-locally Lipschitz in the state variable, a solution on $[t_{0},b)$ whose graph
-lies in a compact $K\subseteq D$ near $b$ extends to a solution on
-$[t_{0},b+\varepsilon)$ for some $\varepsilon>0$; and if $D=\mathbb R\times U$
-with autonomous field $F(t,z)=G(z)$ and the solution stays in a compact
-$K_{0}\subseteq U$ near $b$, the same extension conclusion holds.
+[L3] Compact continuation ([[thm-cm-compact-continuation-for-locally-lipschitz-odes]]): for an open $D\subseteq\mathbb R\times\mathbb R^{n}$ and a continuous field that is locally Lipschitz in the state variable, a solution on $[t_{0},b)$ whose graph lies in a compact $K\subseteq D$ near $b$ extends to a solution on $[t_{0},b+\varepsilon)$ for some $\varepsilon>0$; and if $D=\mathbb R\times U$ with autonomous field $F(t,z)=G(z)$ and the solution stays in a compact $K_{0}\subseteq U$ near $b$, the same extension conclusion holds.
 
-[L4] Finite-time breakdown requires escape
-([[cor-cm-finite-time-breakdown-requires-escape]]): a solution of such an
-initial value problem that admits no extension past $b$ leaves every compact
-subset of the domain near $b$; and the autonomous trapping alternative of [L3]
-then forces an extension.
+[L4] Finite-time breakdown requires escape ([[cor-cm-finite-time-breakdown-requires-escape]]): a solution of such an initial value problem that admits no extension past $b$ leaves every compact subset of the domain near $b$; and the autonomous trapping alternative of [L3] then forces an extension.
 
-[L5] Maximal solutions
-([[thm-existence-and-uniqueness-of-a-maximal-ode-solution]],
-[[def-maximal-ode-solution]]): the maximal solution of an initial value
-problem satisfying the Picard–Lindelöf hypotheses is unique, its domain is an
-open interval containing the initial time, and every other solution through
-the same data is its restriction. The maximal motion of
-[[pthm-cm02-ivp]] clause 4 is the corresponding statement for the model.
+[L5] Maximal solutions ([[thm-existence-and-uniqueness-of-a-maximal-ode-solution]], [[def-maximal-ode-solution]]): the maximal solution of an initial value problem satisfying the Picard–Lindelöf hypotheses is unique, its domain is an open interval containing the initial time, and every other solution through the same data is its restriction. The maximal motion of [[pthm-cm02-ivp]] clause 4 is the corresponding statement for the model.
 
-[L6] A subset of $\mathbb R^{m}$ is compact exactly when it is closed and
-bounded ([[thm-heine-borel-rn]]); in particular, for a compact
-$K_{0}\subseteq U$ and reals $b-\delta<b$ the product
-$[b-\delta,b]\times K_{0}$ is a compact subset of $D=\mathbb R\times U$ when
-$I_{0}=\mathbb R$.
+[L6] A subset of $\mathbb R^{m}$ is compact exactly when it is closed and bounded ([[thm-heine-borel-rn]]); in particular, for a compact $K_{0}\subseteq U$ and reals $b-\delta<b$ the product $[b-\delta,b]\times K_{0}$ is a compact subset of $D=\mathbb R\times U$ when $I_{0}=\mathbb R$.
 
 ## Proof
 
-**Proof technique:** direct; transport the maximal motion to the associated
-first-order system, apply the compact-continuation and escape theorems there,
-and translate the conclusions back to the model.
+**Proof technique:** direct; transport the maximal motion to the associated first-order system, apply the compact-continuation and escape theorems there, and translate the conclusions back to the model.
 
 1.1 $\mathcal F$ is continuous on $D$ and locally Lipschitz in the state variable, locally uniformly in time, by the admissibility estimate proved in [[pthm-cm02-ivp]] from clauses (i) and (iii) of [[post-cm02-force-superposition]]; the state graph $(t,z(t))$ of the maximal motion lies in $D$ and $z$ solves $z'=\mathcal F(t,z)$ on $J_{\max}=(a,b)$ by [L1]. [L1, L2]
 
@@ -150,28 +121,12 @@ and translate the conclusions back to the model.
 
 5.1 Clause 3, global-trapping consequence: suppose a single compact $K_{0}\subseteq U$ contains the state for every $t\in J_{\max}\cap[t_{0},+\infty)$. If $b<+\infty$, then $b>t_{0}$ and with $\delta=(b-t_{0})/2>0$ the state lies in $K_{0}$ throughout $(b-\delta,b)$. Step 4.1 extends the solution past $b$ in the extended-time model, contradicting maximality from [L5]. Hence $b=+\infty$, which means the motion is defined for all forward times. The terminal-neighborhood extension statement in clause 3 is exactly step 4.1. [step 4.1, L1, L5, algebra]
 
-6.1 Clause 4: assume $I_{0}=\mathbb R$ and $b<+\infty$, let $K_{0}\subseteq U$ be compact and $\delta>0$. The set $K:=[b-\delta,b]\times K_{0}$ is a compact subset of $D=\mathbb R\times U$ by [L6]; applying clause 2 (step 3.1) with this $K$ and with any $0<\eta<\delta$ gives $t\in(b-\eta,b)\subseteq(b-\delta,b)$ with $(t,z(t))\notin K$, that is, $z(t)\notin K_{0}$; hence the state leaves every compact subset of $U$ near $b$. If in addition the state stayed, near $b$, in a bounded subset $B$ of $U$ with $\overline B\subseteq U$, then $\overline B$ would be compact and would contain $z(t)$ for all $t$ sufficiently close to $b$, contradicting what was just proved; so either the state is unbounded near $b$ or the positions approach the complement of the open set $Q$, which is the stated reading. [step 3.1, L1, L6] ∎
+6.1 Clause 4: assume $I_{0}=\mathbb R$ and $b<+\infty$. For any compact $K_{0}\subseteq U$ and $\delta>0$, the product $[b-\delta,b]\times K_{0}$ is compact in $D$ by [L6]; applying step 3.1 to this product gives a $t\in(b-\delta,b)\cap J_{\max}$ with $z(t)\notin K_{0}$. If $Q=\mathbb R^{3N}$ and the state were bounded by $M$ on a terminal interval, then the set $K_{0}:=\{(x,v):\lVert x\rVert_{2}\le M,\ \lVert v\rVert_{2}\le M\}$ would be closed and bounded in $\mathbb R^{6N}$, hence compact by [L6], and would contain the state on that tail, contradicting step 3.1. Thus the state is unbounded on every terminal interval in this case. Now suppose $Q\ne\mathbb R^{3N}$. If the state were bounded by $M$ on some terminal interval but the position-approach alternative failed, there would be $\varepsilon,\delta_{1},\delta_{2}>0$ such that $\lVert z(t)\rVert_{2}\le M$ for all $t\in(b-\delta_{1},b)\cap J_{\max}$ and $\lVert x_{\max}(t)-y\rVert_{2}\ge\varepsilon$ for every $t\in(b-\delta_{2},b)\cap J_{\max}$ and every $y\in\mathbb R^{3N}\setminus Q$. Set $\delta:=\min\{\delta_{1},\delta_{2}\}>0$ and define $$K_{0}:=\{(x,v):\lVert x\rVert_{2}\le M,\ \lVert v\rVert_{2}\le M,\ \lVert x-y\rVert_{2}\ge\varepsilon\text{ for every }y\in\mathbb R^{3N}\setminus Q\}.$$ Each inequality is preserved under limits, so $K_{0}$ is closed; it is bounded and hence compact by [L6]. Also $K_{0}\subseteq U$: if $x\in\mathbb R^{3N}\setminus Q$, choosing $y=x$ would contradict $\varepsilon>0$. The state lies in $K_{0}$ throughout the terminal interval, contradicting step 3.1. Therefore, if the state is bounded on some terminal interval, positions approach the excluded configurations in the stated sense. [step 3.1, L1, L3, L6] ∎
 
 ## Remarks
 
-- **No uniform lower bound on the maximal interval.** Clause 2 is a criterion,
-  not a quantitative estimate; the length of existence depends on the local
-  Lipschitz data of $F$ and on the distance of the datum from the complement of
-  the domain, and it can shrink to zero along a sequence of data approaching
-  the excluded configurations.
+- **No uniform lower bound on the maximal interval.** Clause 2 is a criterion, not a quantitative estimate; the length of existence depends on the local Lipschitz data of $F$ and on the distance of the datum from the complement of the domain, and it can shrink to zero along a sequence of data approaching the excluded configurations.
 
-- **The excluded configurations matter.** For a singular force law read on the
-  collision-excluded domain $Q=\mathbb R^{3N}\setminus\Delta$, a motion that
-  reaches a collision configuration in finite time has no extension beyond it;
-  the companion counterexample on the examples page computes such a motion for
-  the inverse-square external model, where the state leaves every compact
-  subset by unbounded velocity while the position approaches the excluded
-  point.
+- **The excluded configurations matter.** For a singular force law read on the collision-excluded domain $Q=\mathbb R^{3N}\setminus\Delta$, a motion that reaches a collision configuration in finite time has no extension beyond it; the companion counterexample on the examples page instead computes arrival at an excluded external-source singularity for a single-label inverse-square model, where the state leaves every compact subset by unbounded velocity while the position approaches the excluded point.
 
-- **Autonomous trapping is not automatic.** Clause 3 uses a compact subset of
-  $U$ containing the state on a terminal neighborhood to extend past that
-  endpoint. A single compact set containing the state throughout its entire
-  maximal forward interval would rule out every finite right endpoint by the
-  same criterion. Energy conservation, when a later page provides it, can be
-  a source of such a global trap under suitable coercivity, but no conservation
-  statement is made or used here.
+- **Autonomous trapping is not automatic.** Clause 3 uses a compact subset of $U$ containing the state on a terminal neighborhood to extend past that endpoint. A single compact set containing the state throughout its entire maximal forward interval would rule out every finite right endpoint by the same criterion. Energy conservation, when a later page provides it, can be a source of such a global trap under suitable coercivity, but no conservation statement is made or used here.

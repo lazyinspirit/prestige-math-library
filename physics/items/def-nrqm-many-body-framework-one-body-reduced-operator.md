@@ -107,8 +107,10 @@ when it exists.
 
 **(d) Scope.** The reduced preparation $\gamma_\rho$ is a mathematical
 partial trace of the sector state; it is not asserted to be the state of any
-individual particle, and it does not determine the sector preparation $\rho$:
-many sector preparations have the same one-body reduction. The definition
+individual particle. The reduction need not determine the sector
+preparation in higher-particle sectors; no universal noninjectivity is
+asserted. For $N=1$ it is exactly $\gamma_\rho=\rho$ by clause (b), and
+a one-dimensional sector has only one density preparation. The definition
 asserts no separability or factorization of $\rho$, no result for the spatial
 (infinite-dimensional) realization, whose reduction would require the
 separable partial trace, and no measurement of individual particle labels,

@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 11
-deps: [def-cm03-centre-of-mass-and-momenta, post-cm02-force-superposition, post-cm02-interactions, def-cm01-units, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-closed-and-exact-c1-vector-fields, thm-poincare-lemma-for-star-shaped-domains, def-star-shaped-open-subset-of-rn, thm-a-regular-level-set-is-an-embedded-submanifold, def-regular-and-critical-points-and-values, def-embedded-submanifold-and-slice-chart]
+deps: [def-cm03-centre-of-mass-and-momenta, post-cm02-force-superposition, post-cm02-interactions, def-cm01-units, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-closed-and-exact-c1-vector-fields, thm-clairaut-schwarz-mixed-partials, thm-poincare-lemma-for-star-shaped-domains, def-star-shaped-open-subset-of-rn, thm-a-regular-level-set-is-an-embedded-submanifold, def-regular-and-critical-points-and-values, def-embedded-submanifold-and-slice-chart]
 dependency_roles:
   def-cm03-centre-of-mass-and-momenta: formulation-prerequisite
   post-cm02-force-superposition: formulation-prerequisite
@@ -15,6 +15,7 @@ dependency_roles:
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   def-jacobian-matrix-and-gradient: mathematical-premise
   def-closed-and-exact-c1-vector-fields: mathematical-premise
+  thm-clairaut-schwarz-mixed-partials: mathematical-premise
   thm-poincare-lemma-for-star-shaped-domains: mathematical-premise
   def-star-shaped-open-subset-of-rn: mathematical-premise
   thm-a-regular-level-set-is-an-embedded-submanifold: mathematical-premise
@@ -114,14 +115,15 @@ $i$th component with an external map of [[post-cm02-interactions]] clause (i),
 one must further require that it depend on $x_i$ alone, as in the declared
 signature $F_i^{\mathrm{ext}}(t,x_i,v_i)$. Such a field is **closed** when
 $\partial_{k}\varphi_{j}=\partial_{j}\varphi_{k}$ for all coordinate indices
-$j,k\in\{1,\dots,3N\}$ at every point of $Q$, and **exact with potential
+$j,k\in\{0,\dots,3N-1\}$ at every point of $Q$, using the flattened
+coordinate indices of [[def-closed-and-exact-c1-vector-fields]], and **exact with potential
 energy $U$** when $\varphi=-\nabla U$ for a $C^{2}$ function
 $U:Q\to\mathbb R$; equivalently, the field $-\varphi$ is exact in the sense
 of [[def-closed-and-exact-c1-vector-fields]] with potential $U$. The following
 mathematical facts are used, with their proofs at the cited items:
 
 1. every exact field is closed, by equality of mixed partial derivatives
-   ([[def-closed-and-exact-c1-vector-fields]]);
+   ([[thm-clairaut-schwarz-mixed-partials]], applied to the $C^2$ potential);
 2. on a star-shaped open domain every closed $C^{1}$ field is exact, by the
    Poincaré lemma ([[thm-poincare-lemma-for-star-shaped-domains]]);
 3. beyond item 2 this item asserts **no** implication from closedness to
@@ -149,7 +151,10 @@ energy $K+U_{V}$ is available along curve families in $V$; this is how a
 potential is recovered from a merely closed field on a sufficiently small
 star-shaped piece of the domain, with no claim of a global representative.
 
-**(f) Equipotential level sets.** Let $U:Q\to\mathbb R$ be $C^{2}$, let
+**(f) Equipotential level sets.** For this clause assume additionally that
+$U:Q\to\mathbb R$ is smooth, meaning $C^k$ for every $k\in\mathbb N$
+([[def-ck-euclidean-maps-and-diffeomorphisms]]); the potential presentations
+of clause (a) still require only $C^2$. Let
 $c\in\mathbb R$ and suppose $U^{-1}(c)\neq\varnothing$ and $\nabla
 U(x)\neq0$ for every $x\in U^{-1}(c)$; equivalently $c$ is a regular value of
 $U$ and every point of the level set is a regular point

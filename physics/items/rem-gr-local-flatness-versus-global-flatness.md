@@ -23,7 +23,7 @@ sources:
       url: "https://arxiv.org/pdf/gr-qc/9712019"
     - title: "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 3.3.2: normal coordinates make the metric first-order flat, second derivatives cannot generally vanish, and curvature is the local obstruction; global topology is independent, printed pp. 119-121 (PDF pp. 126-128)"
       url: "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
-    - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 3.4: normal coordinates, the curvature obstruction to flatness and the local nature of the flat comparison, printed pp. 38-40 (PDF pp. 39-41)"
+    - title: "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 3.4: normal coordinates, printed pp. 39-40 (PDF pp. 40-41), and section 4.2: flatness is local, printed p. 42 (PDF p. 43)"
       url: "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
 verification:
   precheck: n/a
@@ -32,16 +32,25 @@ verification:
 ## Local flatness, curvature and global geometry
 
 This note separates three statements that are frequently conflated, and
-records their exact status in this library; it proves nothing by itself.
+records their exact status in this library. The local time-orientation
+reduction below checks the domains of its cited suppliers.
 
 - **First-order flatness at a point is automatic.** Every smooth Lorentzian
-  four-manifold has point-normal and exponential charts in which
+  four-manifold has point-normal and exponential charts around each point.
+  To apply the cited time-oriented supplier at $p$, choose a timelike
+  $v\in T_pM$ and extend its components constantly in any initial chart.
+  Smoothness of $g$ and $g_p(v,v)<0$ make this field timelike on a smaller
+  open neighborhood $V\ni p$. Thus $(V,g|_V,N)$ is time-oriented and meets
+  the supplier's hypotheses. The metric-selected connection restricts to
+  that of $g|_V$ by its uniqueness, and local geodesic solutions and their
+  exponential charts agree with the ambient ones by uniqueness of the
+  same coordinate differential equation. Hence the supplied charts have
   $g_{ab}(p)=\eta_{ab}$, $\partial_ag_{bc}(p)=0$ and
   $\Gamma^a{}_{bc}(p)=0$; the construction is first order and makes no claim
   about second derivatives of the metric
   ([[thm-gr-point-normal-and-exponential-coordinate-charts]] clauses (a)-(b)).
   Consequently the existence of locally inertial coordinates at an event is
-  a property of every smooth metric, not an indication of vanishing
+  a property of every smooth Lorentzian metric, not an indication of vanishing
   curvature, and by itself it is not the statement that any neighborhood is
   Minkowski space.
 
@@ -52,8 +61,12 @@ records their exact status in this library; it proves nothing by itself.
   its vanishing is chart-independent
   ([[def-gr-curvature-tensor-and-derived-tensors]]). If the curvature
   vanishes on a normal neighborhood, the exponential chart is flat to all
-  orders: the exponential map is an isometry onto an open subset of
-  Minkowski space
+  orders. With the normal domain $W\subseteq T_pM$ and $U=\exp_p(W)$,
+  the supplier gives the isometry $\exp_p:(W,g_p)\to(U,g)$.
+  For the coordinate isomorphism $\psi:T_pM\to\mathbb R^4$ of a
+  $g_p$-orthonormal basis, the map
+  $u=\psi\circ\exp_p^{-1}:(U,g)\to(\psi(W),\eta)$ is an isometry onto
+  an open subset of Minkowski space
   ([[thm-gr-vanishing-curvature-implies-locally-minkowski]] clauses (a)-(d)).
   This is the exact sense in which a flat metric is *locally* Minkowski.
 

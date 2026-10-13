@@ -44,13 +44,13 @@ constant along every integral curve of $n$ contained in $U'$.
 
 **Given:** A time-oriented smooth Lorentzian four-manifold $(M,g,N)$, an observer congruence $n$ on an open set $U$, and a point $p\in U$.
 
-[L1] An observer congruence on $U$ is a smooth vector field $n$ on $U$ with $g_q(n_q,n_q)=-1$ for every $q\in U$; its integral curves are its observer curves, and a chart with domain $U'\subseteq U$ is $n$-adapted when its spatial coordinates are constant along every integral curve of $n$ contained in $U'$ ([[def-gr-observer-congruence-and-adapted-charts]]).
+[L1] An observer congruence on the nonempty open set $U$ is a smooth vector field $n$ on $U$ with $g_q(n_q,n_q)=-1$ and $g_q(n_q,N_q)<0$ for every $q\in U$; its maximal integral curves are its observer curves. A chart with nonempty open domain $U'\subseteq U$ is $n$-adapted when its spatial coordinates are constant along every integral curve of $n|_{U'}$ whose parameter domain is an interval; no agreement of spatial labels across exit and re-entry is required ([[def-gr-observer-congruence-and-adapted-charts]], Definition (a)-(c)).
 
 [L2] A smooth vector field $X$ on a manifold with $X_p\neq0$ at a point $p$ admits local coordinates $v^1,\dots,v^4$ near $p$ in which $X=\partial/\partial v^1$ ([[thm-flow-box-theorem]]).
 
 [L3] The value $g_q(n_q,n_q)$ is a smooth function of $q$ on $U$, and $g_q(n_q,n_q)=-1$ implies $n_q\neq0$ ([[def-gr-smooth-lorentzian-objects]]).
 
-[L4] A curve $\gamma$ is an integral curve of a vector field $X$ when $\gamma'=X_{\gamma}$ at every parameter value ([[def-integral-curve-of-a-vector-field]]).
+[L4] A smooth curve $\gamma:J\to U'$ on a real interval $J$ is an integral curve of a smooth vector field $X$ on $U'$ when $\gamma'(s)=X_{\gamma(s)}$ for every $s\in J$ ([[def-integral-curve-of-a-vector-field]]).
 
 ## Proof
 
@@ -58,6 +58,6 @@ constant along every integral curve of $n$ contained in $U'$.
 
 1.1 The field $n$ is smooth on the open set $U$ and nowhere vanishing: by [L1] it satisfies $g_q(n_q,n_q)=-1$ at every $q\in U$, so $n_q$ is a nonzero vector by [L3]. Applying [L2] to $n$ at the point $p$ gives a chart $(v^1,v^2,v^3,v^4)$ with domain $U'\subseteq U$ containing $p$ and $n=\partial/\partial v^1$ on $U'$. [L1, L2, L3, given]
 
-2.1 Define $u^0:=v^1$, $u^1:=v^2$, $u^2:=v^3$, $u^3:=v^4$. This is again a chart with domain $U'$, and $n=\partial/\partial u^0$ on $U'$. A curve $\gamma$ in $U'$ satisfies $\gamma'=n_\gamma$ by [L4] exactly when its coordinate components satisfy $\dot u^0=1$ and $\dot u^1=\dot u^2=\dot u^3=0$, since $\partial/\partial u^0$ has components $(1,0,0,0)$ in this chart; hence the integral curves of $n$ are the curves $s\mapsto(u^0(p)+s,u^1(p),u^2(p),u^3(p))$ with constant $u^1,u^2,u^3$. By [L1] the chart is $n$-adapted. [step 1.1, L1, L4, algebra]
+2.1 Define $u^0:=v^1$, $u^1:=v^2$, $u^2:=v^3$, $u^3:=v^4$. This is again a chart with domain $U'$, and $n=\partial/\partial u^0$ on $U'$. For any integral curve $\gamma:J\to U'$ of $n|_{U'}$ as in [L4], its coordinate components satisfy $(u^0\circ\gamma)'=1$ and $(u^i\circ\gamma)'=0$ for $i=1,2,3$, since $\partial/\partial u^0$ has components $(1,0,0,0)$ in this chart. Thus each $u^i\circ\gamma$ is constant on the interval $J$, so by [L1] the chart is $n$-adapted. [step 1.1, L1, L4, algebra]
 
 3.1 The chart produced in step 2.1 has all the stated properties, so a local adapted chart exists near every point of $U$. [step 2.1] ∎

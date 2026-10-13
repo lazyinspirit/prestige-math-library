@@ -7,8 +7,9 @@ title: "Dirichlet eigenvalues, simplicity and the nodal theorem on an interval"
 status: draft
 origin: pipeline
 dependency_level: 3
-deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-weak-derivative-ac-representative, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, thm-nrqm-intervals-regular-ivp-parameter-series, thm-nrqm-intervals-prufer-energy-monotonicity, thm-sine-and-cosine-derivatives, thm-sine-cosine-zero-sets-and-fundamental-period, thm-gronwall-integral-inequality, thm-intermediate-value, thm-continuous-implies-integrable, def-countable-choice]
+deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-weak-derivative-ac-representative, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, thm-nrqm-intervals-regular-ivp-parameter-series, thm-nrqm-intervals-prufer-energy-monotonicity, thm-sine-and-cosine-derivatives, thm-sine-cosine-zero-sets-and-fundamental-period, thm-gronwall-integral-inequality, thm-intermediate-value, thm-continuous-implies-integrable, def-countable-choice, def-axiom-of-choice]
 dependency_roles:
+  def-axiom-of-choice: mathematical-premise
   def-nrqm-intervals-hilbert-sobolev-spaces: mathematical-premise
   lem-nrqm-intervals-weak-derivative-ac-representative: mathematical-premise
   lem-nrqm-intervals-endpoint-trace-and-half-line-decay: mathematical-premise
@@ -26,15 +27,16 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.1 pp. 181-186 (Sturm oscillation, simple Dirichlet eigenvalues and the nodal count)"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.7, Theorem 9.39 p. 218 (Sturm comparison background; the regular finite-interval nodal count and energy bounds are proved locally)"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
-    - title: "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext 2011), Section 8.6 pp. 231-233 (Dirichlet eigenvalues on an interval and the nodal theorem)"
+    - title: "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext 2011), Section 8.6 pp. 231-233 (Dirichlet eigenbasis on an interval; the nodal theorem is proved locally)"
       url: "https://www.math.toronto.edu/almut/Brezis.pdf"
 ---
 
 ## Statement
 
-Assume Countable Choice ([[def-countable-choice]]). Let $0<L<\infty$ and let
+Assume the Axiom of Choice and Countable Choice
+([[def-axiom-of-choice]], [[def-countable-choice]]). Let $0<L<\infty$ and let
 $V\in C([0,L];\mathbb R)$, with $V_{\min}:=\min_{[0,L]}V$ and
 $V_{\max}:=\max_{[0,L]}V$. For $E\in\mathbb R$ let $u(\cdot,E)$ be the
 solution of $-u''+Vu=Eu$, $u(0)=0$, $u'(0)=1$, and let $\theta(\cdot,E)$ be

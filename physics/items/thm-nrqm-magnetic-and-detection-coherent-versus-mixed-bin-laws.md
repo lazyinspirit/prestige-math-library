@@ -71,7 +71,7 @@ and $|\langle e_1,e_2\rangle|\le1$: the marker overlap bounds the complex cross 
 weight. If $\Psi=0$, no normalized law is defined.
 
 (e) *Finite sampling.* If a detector model produces, for a fixed bin $B$,
-$N$ independent trials each with success probability $p=p_{\mathrm{coh}}(B)$
+a positive integer $N$ of independent trials each with success probability $p=p_{\mathrm{coh}}(B)$
 or $p=p_{\mathrm{mix}}(B)$, and $S_N$ is the number of successes, then $S_N$
 is binomial$(N,p)$ and $\mathbb E[S_N/N]=p$,
 $\operatorname{Var}(S_N/N)=p(1-p)/N$

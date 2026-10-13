@@ -9,12 +9,13 @@ dependency_level: 30
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [post-gr-spacetime-and-classical-domain, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-spacelike-hypersurfaces-and-cauchy-sets, thm-gr-convex-normal-neighborhoods, thm-gr-volume-time-function, thm-gr-cauchy-surface-implies-globally-hyperbolic, lem-gr-local-cauchy-neighborhood, lem-gr-cone-bump-functions, lem-gr-strip-weak-steps, thm-gr-smooth-cauchy-temporal-splitting]
+deps: [post-gr-spacetime-and-classical-domain, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-spacelike-hypersurfaces-and-cauchy-sets, thm-gr-convex-normal-neighborhoods, thm-gr-normal-neighborhood-causal-cone, thm-gr-volume-time-function, thm-gr-cauchy-surface-implies-globally-hyperbolic, lem-gr-local-cauchy-neighborhood, lem-gr-cone-bump-functions, lem-gr-strip-weak-steps, thm-gr-smooth-cauchy-temporal-splitting]
 dependency_roles:
   post-gr-spacetime-and-classical-domain: formulation-prerequisite
   def-gr-causal-conditions-and-global-hyperbolicity: formulation-prerequisite
   def-gr-spacelike-hypersurfaces-and-cauchy-sets: formulation-prerequisite
   thm-gr-convex-normal-neighborhoods: mathematical-premise
+  thm-gr-normal-neighborhood-causal-cone: mathematical-premise
   thm-gr-volume-time-function: mathematical-premise
   thm-gr-cauchy-surface-implies-globally-hyperbolic: mathematical-premise
   lem-gr-local-cauchy-neighborhood: mathematical-premise
@@ -38,8 +39,8 @@ This note fixes the scope of the page's convex-normal, volume-time and
 splitting content and the status of its claims; it proves nothing by itself.
 
 - **Model conditions versus physical readings.** Strictly convex normal
-  neighbourhoods, the local causality inside them
-  ([[thm-gr-convex-normal-neighborhoods]]), the auxiliary metric, the volume
+  neighbourhoods ([[thm-gr-convex-normal-neighborhoods]]), the local causality inside them
+  ([[thm-gr-normal-neighborhood-causal-cone]]), the auxiliary metric, the volume
   time function and its Cauchy levels ([[thm-gr-volume-time-function]]), the
   equivalence of the Cauchy-set property with global hyperbolicity
   ([[thm-gr-cauchy-surface-implies-globally-hyperbolic]]) and the smooth
@@ -56,12 +57,12 @@ splitting content and the status of its claims; it proves nothing by itself.
 
 - **What is proved here.** Conditional deductions inside the stated classes
   of models and curves: the local causal cone and displacement-length
-  calculus of [[thm-gr-convex-normal-neighborhoods]], the locally finite
+  calculus of [[thm-gr-normal-neighborhood-causal-cone]], the locally finite
   cone-bump and weak-step constructions ([[lem-gr-cone-bump-functions]],
   [[lem-gr-strip-weak-steps]]), the continuous volume time
   ([[thm-gr-volume-time-function]]), the local Cauchy neighbourhoods
   ([[lem-gr-local-cauchy-neighborhood]]) and the smooth Cauchy time function
-  with Cauchy levels, complete gradient flow and orthogonal product
+  with Cauchy levels, complete flow of the normalized field $X=\nabla T/g(\nabla T,\nabla T)$ and orthogonal product
   ([[thm-gr-smooth-cauchy-temporal-splitting]]). Each theorem states its
   hypotheses, including the choice principles it uses, and each is a
   statement about the explicitly displayed model.

@@ -36,7 +36,7 @@ proof_strategy: direct
 physical_scope: "A worked computation of the bracket of a declared one-label potential presentation: the fundamental brackets of the canonical coordinates, the bracket of the coordinates with the branch Hamiltonian reproducing velocity and force, and the evolution identity and energy constancy on the isotropic oscillator instance. All quantities are model values of the declared idealization; no measurement is reported."
 sources:
   references:
-    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Sections 4.3 and 4.4, printed pages 93-101 (PDF pages 99-107): the fundamental brackets, the evolution formula $df/dt=\\{f,H\\}+\\partial f/\\partial t$ and the oscillator bracket computations"
+    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 4.3, printed pages 94-95 (PDF pages 100-101): the fundamental brackets and the evolution formula $df/dt=\\{f,H\\}+\\partial f/\\partial t$; Section 4.5.1, printed pages 105-107 (PDF pages 111-113): the one-dimensional harmonic oscillator Hamiltonian and equations. The three-axis bracket computations below are local specializations"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
     - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, second edition (MIT Press, 2014/2015), Sections 5.2.2-5.3: the fundamental Poisson brackets of the coordinates and momenta and their role in the canonical condition"
       url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"

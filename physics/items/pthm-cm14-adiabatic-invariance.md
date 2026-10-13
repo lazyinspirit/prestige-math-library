@@ -80,8 +80,10 @@ physical_scope: "Adiabatic invariance of the action coordinate of a declared
   the parameter runs as $s(t)=s_0+\\varepsilon t$, then along every model
   solution that stays in the compact chart region the action changes by at most
   the displayed order-$\\varepsilon$ bound on $0\\le t\\le A/\\varepsilon$. The
-  statement is conditional on the existence of the uniform parameter-dependent
-  action-angle chart, on the frequency bound and on the trapping of the
+  statement uses a dimensionless slow parameter, an inverse-time slow rate,
+  energy-dimension h and action-dimension k; it is conditional on C2 open
+  extension data, a uniform fixed canonical chart for the parameter-dependent
+  Hamiltonian on the zero-residual-force branch, the frequency bound and the trapping of the
   solution; it asserts no exact invariance, no statement across a separatrix or
   a chart boundary, and no empirical content."
 sources:
@@ -116,20 +118,26 @@ the momentum charts and canonical coordinates of [[def-cm13-two-form]],
 [[pthm-cm13-two-form-is-symplectic]] and [[def-cm13-canonical-form]], the
 Hamiltonian fields of [[def-cm13-hamiltonian-field]] and the branch
 Hamiltonian $H$ of [[def-cm12-hamiltonian]]. Fix one momentum chart and
-let $(I,\theta)$ be a one-degree-of-freedom canonical chart of the presentation on an open set
+let $(I,\theta)$ be a fixed, time-independent one-degree-of-freedom canonical chart of the presentation on an open set
 $U$ of that phase domain, with radian angles and
 $\omega=d\theta\wedge dI$ there, obtained from the period-one chart of [[pthm-cm14-action-angle]] by
 $\theta^{\mathrm{rad}}=2\pi\theta^{\mathrm{one}}$,
 $I^{\mathrm{rad}}=I^{\mathrm{one}}/(2\pi)$ as in
 [[cor-cm-action-angle-radian-scaling]], suppressing the radian superscripts; $I$ has the
-action dimension of clause 2 of that theorem. Let $\varepsilon>0$, $A>0$
-and $\omega_{0}>0$ be reals, let $J\subseteq\mathbb R$ and
-$S\subseteq\mathbb R$ be intervals with nonempty interiors
+action dimension of clause 2 of that theorem. Use the dimensions of
+[[def-cm01-units]]: $[t]=\tau$, $[I]=\mu\ell^2\tau^{-1}$,
+$[\theta]=[s]=[s_0]=[A]=1$, $[\varepsilon]=[\omega_0]=\tau^{-1}$,
+$[h]=[K_s]=\mu\ell^2\tau^{-2}$ and $[k]=\mu\ell^2\tau^{-1}$.
+Thus $\varepsilon$ is the prescribed slow parameter rate, $A$ is the
+dimensionless parameter excursion, and $A/\varepsilon$ is a duration.
+Let $\varepsilon,A,\omega_0>0$ have these dimensions. Let
+$\widehat J,\widehat S\subseteq\mathbb R$ be open intervals, and let
+$J\subseteq\widehat J$ and $S\subseteq\widehat S$ be intervals with nonempty interiors
 ([[def-interval]]), let $K\subseteq J$ and $S_{0}\subseteq S$ be compact
 intervals, let $s_{0}\in S_{0}$, and let
 
-$$h:J\times S\longrightarrow\mathbb R,\qquad k:J\times\mathbb R\times S\longrightarrow\mathbb R$$
-be of class $C^{2}$ with $k$ $2\pi$-periodic in its second variable
+$$h:\widehat J\times\widehat S\longrightarrow\mathbb R,\qquad k:\widehat J\times\mathbb R\times\widehat S\longrightarrow\mathbb R$$
+be of class $C^{2}$ on these open domains, with $k$ $2\pi$-periodic in its second variable on $J\times\mathbb R\times S$
 ([[def-ck-euclidean-maps-and-diffeomorphisms]]). Suppose:
 
 1. **(slow datum)** for every parameter value $s\in S$ and every
@@ -150,6 +158,11 @@ $$|I(t)-I(0)|\le\varepsilon\Bigl[2\sup_{K\times[0,2\pi]\times S_{0}}|g|+A\sup_{K
 where $g=(k-\langle k\rangle)/\partial_{I}h$ is the drift generator and
 $\langle k\rangle(I,s)=\frac1{2\pi}\int_{0}^{2\pi}k(I,\theta,s)\,d\theta$
 the angle average of $k$ ([[def-cm-parameter-dependent-action-angle-branch]]).
+All partial derivatives are those of the ambient open extensions. The
+generator has dimension $[g]=\mu\ell^2$; each term inside the second
+supremum has that same dimension, so both terms multiplied by
+$\varepsilon$ have action dimension. At the included time endpoints,
+derivatives are relative to the nondegenerate interval $[0,A/\varepsilon]$.
 
 The statement is conditional on the adopted force branch, the declared
 presentation, the existence of the uniform action-angle chart, the
@@ -161,52 +174,19 @@ stated horizon $[0,A/\varepsilon]$ and is not an asymptotic equivalence.
 
 ## Facts & Assumptions
 
-**Given:** The presentation, the canonical chart $(I,\theta)$ with
-$\omega=d\theta\wedge dI$, the reals
-$\varepsilon,A,\omega_{0}$, the intervals $J,S$ and compact sets
-$K,S_{0}$, the point $s_{0}$, the $C^{2}$ functions $h,k$ with $k$
-$2\pi$-periodic in $\theta$, the parameter path $s(t)=s_{0}+\varepsilon t$
-and the solution $(I,\theta)$ with the stated trapping.
+**Given:** The presentation, the canonical chart $(I,\theta)$ with $\omega=d\theta\wedge dI$, the reals $\varepsilon,A,\omega_{0}$, the open extension intervals $\widehat J,\widehat S$, their subintervals $J,S$ and compact sets $K,S_{0}$, the point $s_{0}$, the $C^{2}$ functions $h,k$ with $k$ $2\pi$-periodic in $\theta$, the parameter path $s(t)=s_{0}+\varepsilon t$ and the solution $(I,\theta)$ with the stated trapping.
 
-[F1] Chart data and dimension ([[pthm-cm14-action-angle]] clauses 1, 2
-and 4, [[def-cm13-canonical-form]] clause (a),
-[[def-cm01-units]]): by [[cor-cm-action-angle-radian-scaling]], on $U$ the presentation's two-form is
-$\omega=d\theta\wedge dI$ with radian dimensionless
-angles and action coordinates of dimension $\mu\ell^{2}\tau^{-1}$; in
-these coordinates the Hamiltonian field of a $C^{2}$ function $K$ has
-components $X_{K}=(\partial K/\partial I,\,-\partial K/\partial\theta)$,
-so the model's motions in the chart satisfy
-$\dot I=-\partial_{\theta}K$, $\dot\theta=\partial_{I}K$.
+[F1] Chart data and dimension ([[pthm-cm14-action-angle]] clauses 1, 2 and 4, [[def-cm13-canonical-form]] clause (a), [[def-cm01-units]]): by [[cor-cm-action-angle-radian-scaling]], on $U$ the presentation's two-form is $\omega=d\theta\wedge dI$ with radian dimensionless angles and action coordinates of dimension $\mu\ell^{2}\tau^{-1}$; in these coordinates the Hamiltonian field of a $C^{2}$ function $K$ has components $X_{K}=(-\partial K/\partial\theta,\,\partial K/\partial I)$ in the ordered coordinates $(I,\theta)$, so the model's motions in the chart satisfy $\dot I=-\partial_{\theta}K$, $\dot\theta=\partial_{I}K$.
 
-[F2] The datum of the branch
-([[def-cm-parameter-dependent-action-angle-branch]]): with
-$K(I,\theta,s)=h(I,s)+\varepsilon k(I,\theta,s)$, the branch vector field
-is $(I,\theta,s)'=(-\varepsilon\partial_{\theta}k,\,
-\partial_{I}h+\varepsilon\partial_{I}k,\,\varepsilon)$, and a branch
-solution on an interval is a differentiable curve solving that system.
+[F2] The datum of the branch ([[def-cm-parameter-dependent-action-angle-branch]]): with $K(I,\theta,s)=h(I,s)+\varepsilon k(I,\theta,s)$, the branch vector field is $(I,\theta,s)'=(-\varepsilon\partial_{\theta}k,\, \partial_{I}h+\varepsilon\partial_{I}k,\,\varepsilon)$, and a branch solution on an interval is a differentiable curve solving that system.
 
-[F3] The mathematical drift bound
-([[thm-cm-adiabatic-invariant-drift-bound]]): for the $C^{2}$ datum
-$h,k$ with $k$ $2\pi$-periodic in $\theta$, compact intervals
-$K\subseteq J$, $S_{0}\subseteq S$, $s_{0}\in S_{0}$, reals
-$\varepsilon,A,\omega_{0}>0$ with $|\partial_{I}h|\ge\omega_{0}$ on
-$K\times S_{0}$, and a branch solution on $[0,A/\varepsilon]$ with
-$s(0)=s_{0}$ that stays in $K\times S_{0}$, the action obeys the displayed
-order-$\varepsilon$ estimate with the drift generator
-$g=(k-\langle k\rangle)/\partial_{I}h$.
+[F3] The mathematical drift bound ([[thm-cm-adiabatic-invariant-drift-bound]]): for the $C^{2}$ datum $h,k$ with $k$ $2\pi$-periodic in $\theta$, compact intervals $K\subseteq J$, $S_{0}\subseteq S$, $s_{0}\in S_{0}$, reals $\varepsilon,A,\omega_{0}>0$ with $|\partial_{I}h|\ge\omega_{0}$ on $K\times S_{0}$, and a branch solution on $[0,A/\varepsilon]$ with $s(0)=s_{0}$ that stays in $K\times S_{0}$, the action obeys the displayed order-$\varepsilon$ estimate with the drift generator $g=(k-\langle k\rangle)/\partial_{I}h$.
 
-[F4] Model reading of the chart evolution
-([[pthm-cm13-hamiltonian-field-integrates-the-model-equations]] clause 1,
-[[pthm-cm12-hamilton-equivalence]] clause 1, [[def-cm02-newtonian-flow]]):
-on the potential branch the momentum-phase curves of the model's motions
-are exactly the integral curves of the branch Hamiltonian field; in the
-chart $(I,\theta)$ these are the curves of [F1].
+[F4] Model reading of the chart evolution ([[pthm-cm13-hamiltonian-field-integrates-the-model-equations]] clause 1, [[pthm-cm12-hamilton-equivalence]] clause 1, [[def-cm02-newtonian-flow]]): when $d\equiv0$, the Cartesian momentum-phase curves of model motions are exactly the integral curves of the branch Hamiltonian field; in a generalized-coordinate immersion, Hamiltonian curves instead correspond to the substituted Lagrange equations, and any reconstructed ambient motion satisfies those equations; in the chart $(I,\theta)$ these are the curves of [F1].
 
 ## Proof
 
-**Proof technique:** direct; identify the model's motion in the
-parameter-dependent canonical chart with a branch solution of the abstract
-datum, then invoke the mathematical drift bound.
+**Proof technique:** direct; identify the model's motion in the fixed canonical chart with a branch solution of the abstract datum, then invoke the mathematical drift bound.
 
 1.1 By [F1] and [F4], the chart expression $(I(t),\theta(t))$ of the model's motion satisfies $\dot I=-\partial_{\theta}K_{s(t)}$ and $\dot\theta=\partial_{I}K_{s(t)}$ for the branch Hamiltonian of hypothesis 1; substituting $K=h+\varepsilon k$ gives $\dot I=-\varepsilon\,\partial_{\theta}k(I,\theta,s(t))$ and $\dot\theta=\partial_{I}h(I,s(t))+\varepsilon\,\partial_{I}k(I,\theta,s(t))$. With the parameter path $s(t)=s_{0}+\varepsilon t$ from hypothesis 3, the triple $(I,\theta,s)$ therefore solves the branch system of [F2] on $[0,A/\varepsilon]$. [F1, F2, F4, given, algebra]
 
@@ -218,19 +198,6 @@ datum, then invoke the mathematical drift bound.
 
 ## Remarks
 
-- **What the bound does and does not say.** The right-hand side is
-  $\varepsilon$ times a constant depending only on the datum through the
-  suprema over the compact set $K\times[0,2\pi]\times S_{0}$ and on the
-  rescaled horizon length $A$; it grows linearly in $A$ and is uniform in
-  $\varepsilon$. It is not an exact conservation statement: the exact
-  drift of the action is generally nonzero, and the theorem only bounds
-  it.
+- **What the bound does and does not say.** The right-hand side is $\varepsilon$ times a constant depending only on the datum through the suprema over the compact set $K\times[0,2\pi]\times S_{0}$ and on the rescaled horizon length $A$; it grows linearly in $A$ and is uniform in $\varepsilon$. It is not an exact conservation statement: the exact drift of the action is generally nonzero, and the theorem only bounds it.
 
-- **Hypotheses are physical model assumptions.** The existence of the
-  uniform parameter-dependent action-angle chart with nonvanishing
-  frequency and the trapping of the solution are hypotheses about the
-  model family, not consequences of complete integrability of a single
-  Hamiltonian: a family can pass through a separatrix or a critical
-  frequency, where the estimate does not apply and the action need not be
-  approximately constant. The companion mathematical page records the
-  same qualification for the abstract bound.
+- **Hypotheses are physical model assumptions.** The existence of the uniform fixed canonical chart for the parameter-dependent Hamiltonian with nonvanishing frequency and the trapping of the solution are hypotheses about the model family, not consequences of complete integrability of a single Hamiltonian: a family can pass through a separatrix or a critical frequency, where the estimate does not apply and the action need not be approximately constant. The companion mathematical page records the same qualification for the abstract bound.

@@ -5,7 +5,7 @@ title: "The symmetric-tensor curl symbol is skew-adjoint with norm at most the w
 status: draft
 origin: session
 domain: mathematics
-dependency_level: 10
+dependency_level: 13
 provenance:
   statement: ai-altered
   proof: ai-generated

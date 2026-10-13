@@ -28,13 +28,13 @@ sources:
 Let $n\ge1$, let $D\subseteq\mathbb R\times\mathbb R^n$ be open, and let $F:D\to\mathbb R^n$ be continuous and locally Lipschitz in the state variable in the sense of [[def-locally-lipschitz-in-the-state-variable]]. Let $t_0<b$ be reals, let $x_0\in\mathbb R^n$ with $(t_0,x_0)\in D$, and let $x:[t_0,b)\to\mathbb R^n$ be a solution of the initial value problem $x'=F(t,x)$, $x(t_0)=x_0$ ([[def-first-order-ode-initial-value-problem-and-solution]]). Suppose $x$ admits no extension past $b$: there do not exist $\varepsilon>0$ and a solution $\tilde x:[t_0,b+\varepsilon)\to\mathbb R^n$ of the same initial value problem with $\tilde x(t)=x(t)$ for every $t\in[t_0,b)$. Then:
 
 1. for every compact $K\subseteq D$ and every $\eta>0$ there is $t\in(b-\eta,b)\cap[t_0,b)$ with $(t,x(t))\notin K$; that is, the graph of $x$ leaves every compact subset of $D$ that could contain it arbitrarily close to $b$;
-2. if $D=\mathbb R\times U$ for an open $U\subseteq\mathbb R^n$, $F$ is autonomous, $F(t,z)=G(z)$ with $G:U\to\mathbb R^n$ continuous and locally Lipschitz in the state variable, and there are a compact $K_0\subseteq U$ and $\delta>0$ with $x(t)\in K_0$ for all $t\in(b-\delta,b)$, then the no-extension hypothesis is false: $x$ does extend past $b$.
+2. if $D=\mathbb R\times U$ for an open $U\subseteq\mathbb R^n$, $F$ is autonomous, $F(t,z)=G(z)$ with $G:U\to\mathbb R^n$ continuous and locally Lipschitz in the state variable, and there are a compact $K_0\subseteq U$ and $\delta>0$ with $x(t)\in K_0$ for all $t\in(b-\delta,b)\cap[t_0,b)$, then the no-extension hypothesis is false: $x$ does extend past $b$.
 
 ## Facts & Assumptions
 
 **Given:** The data of the statement and the no-extension hypothesis on $x$.
 
-[L1] Compact continuation: under the hypotheses of the statement without the no-extension hypothesis, if there are a compact $K\subseteq D$ and $\delta>0$ with $(t,x(t))\in K$ for all $t\in(b-\delta,b)$, then $x$ extends past $b$; and the same holds for an autonomous field $F(t,z)=G(z)$ on $D=\mathbb R\times U$ when $x(t)\in K_0$ for a compact $K_0\subseteq U$ and all $t\in(b-\delta,b)$ ([[thm-cm-compact-continuation-for-locally-lipschitz-odes]]).
+[L1] Compact continuation: under the hypotheses of the statement without the no-extension hypothesis, if there are a compact $K\subseteq D$ and $\delta>0$ with $(t,x(t))\in K$ for all $t\in(b-\delta,b)\cap[t_0,b)$, then $x$ extends past $b$; and the same holds for an autonomous field $F(t,z)=G(z)$ on $D=\mathbb R\times U$ when $x(t)\in K_0$ for a compact $K_0\subseteq U$ and all $t\in(b-\delta,b)\cap[t_0,b)$ ([[thm-cm-compact-continuation-for-locally-lipschitz-odes]]).
 
 ## Proof
 

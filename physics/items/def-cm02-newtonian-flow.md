@@ -83,11 +83,11 @@ $t\in I_{0}$ for every $t\in J$ and
 
 $$m_{i}\,\ddot x_{i}(t)=F_{i}\bigl(t,x(t),\dot x(t)\bigr)\qquad(i=1,\dots,N,\ t\in J).$$
 
-Equivalently: the state curve $z=(x,\dot x):J\to D$ is a solution of the
+Equivalently: the state curve $z=(x,\dot x):J\to Q\times\mathbb R^{3N}$ is a solution of the
 associated first-order system on $J$. Indeed, if $x$ is a motion then
 $z=(x,x')$ is $C^{1}$ with
-$z'=(x',x'')=(x',\mathsf M^{-1}F(t,x,x'))=\mathcal F(t,z)$ and $z(t)\in D$;
-conversely, if $z=(x,v)$ is a solution with $z(t)\in D$ for all $t$, then
+$z'=(x',x'')=(x',\mathsf M^{-1}F(t,x,x'))=\mathcal F(t,z)$ and $(t,z(t))\in D$;
+conversely, if $z=(x,v)$ is a solution with $(t,z(t))\in D$ for all $t$, then
 $x'=v$ and $v'=\mathsf M^{-1}F(t,x,v)$, so $v$ is $C^{1}$, $x$ is $C^{2}$, and
 multiplying the second equation by the masses returns the displayed
 second-order equation. Motions of the labels of the model are exactly these
@@ -133,5 +133,7 @@ interval $J_{\max}(t_{0},z_{0})$.
 - **Frame covariance.** A motion in the sense of (c) is defined with respect
   to one fixed inertial frame; the transformation of the description between
   inertial frames and of the force map is clause (vi) of
-  [[post-cm02-force-superposition]], and a motion's maximal interval is
-  unchanged by a time shift between frames.
+  [[post-cm02-force-superposition]], and under $t'=t+b$ the maximal interval becomes $J_{\max}+b$.
+  Maximality is preserved on the transferred domain: any proper extension
+  there would pull back by the inverse affine transformation to a proper
+  extension of the original motion.

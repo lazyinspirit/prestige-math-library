@@ -5,13 +5,14 @@ title: "Schouten tensor, prescribed curvature, electric-magnetic Weyl variables 
 status: draft
 origin: session
 domain: mathematics
-dependency_level: 9
+dependency_level: 12
 provenance:
   statement: ai-altered
   proof: not-applicable
 proof_strategy: null
-deps: [def-gr-dust-reduction-variables-and-gauge, def-gr-curvature-tensor-and-derived-tensors, def-gr-tensor-fields-and-components, def-gr-inverse-metric-and-musical-isomorphisms, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-observer-and-rest-space, def-ck-and-multi-index-notation-in-several-variables]
+deps: [thm-gr-curvature-algebraic-symmetries, def-gr-dust-reduction-variables-and-gauge, def-gr-curvature-tensor-and-derived-tensors, def-gr-tensor-fields-and-components, def-gr-inverse-metric-and-musical-isomorphisms, def-gr-metric-selected-connection, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-observer-and-rest-space, def-ck-and-multi-index-notation-in-several-variables]
 dependency_roles:
+  thm-gr-curvature-algebraic-symmetries: mathematical-premise
   def-gr-dust-reduction-variables-and-gauge: mathematical-premise
   def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
   def-gr-tensor-fields-and-components: mathematical-premise
@@ -32,7 +33,8 @@ verification:
 
 Work in the reduction conventions of
 [[def-gr-dust-reduction-variables-and-gauge]]: $\gamma$ is the signature
-$(+---)$ metric, $U$ the unit future timelike vector $U=n$, $r=\rho c^2$, the
+$(+---)$ metric, $U=u$ the prescribed unit future timelike vector (not necessarily the
+hypersurface normal), $r=\rho c^2$, the
 frame $(e_0,e_1,e_2,e_3)$ is $\gamma$-orthonormal with $e_0=U$,
 $\gamma(e_i,e_j)=\eta_{ij}$ on spatial pairs, and indices are moved with
 $\gamma$.
@@ -44,11 +46,21 @@ the Ricci tensor and scalar curvature of $\gamma$
 ([[def-gr-curvature-tensor-and-derived-tensors]]). If the dust field equation
 $G(\gamma)-\Lambda\gamma=\kappa\,r\,U^\flat\otimes U^\flat$ holds, then
 $$S_{ij}=\kappa r\Bigl(U_iU_j-\tfrac13\gamma_{ij}\Bigr)-\tfrac13\Lambda\,\gamma_{ij}.$$
-This normalization is fixed so that the standard Kulkarni--Nomizu decomposition
-$$R_{ijkl}=C_{ijkl}+\tfrac12\bigl(S_{ik}\gamma_{jl}-S_{il}\gamma_{jk}+S_{jl}\gamma_{ik}-S_{jk}\gamma_{il}\bigr)$$
-holds for every metric of dimension four, with $C$ the Weyl tensor
-([[def-gr-curvature-tensor-and-derived-tensors]]); the identity is checked on
-constant-curvature metrics in the Remarks.
+Define the **Weyl tensor** of the metric-selected connection by
+$$C_{ijkl}:=R_{ijkl}-K(S,\gamma)_{ijkl},\qquad K(S,\gamma)_{ijkl}:=\tfrac12\bigl(S_{ik}\gamma_{jl}-S_{il}\gamma_{jk}+S_{jl}\gamma_{ik}-S_{jk}\gamma_{il}\bigr).$$
+Here $R$ is the lowered curvature tensor. The curvature symmetries and Ricci
+symmetry of [[thm-gr-curvature-algebraic-symmetries]] transfer from $g$ to
+$\gamma=-g$ because their lowered curvatures differ by a constant minus
+sign. Symmetry of $S$ and $\gamma$ gives the same two skew-symmetries, pair
+symmetry and cyclic identity for $K(S,\gamma)$ by expanding its four terms.
+Moreover $\operatorname{tr}_\gamma S=S_\gamma/3$ and
+$$\gamma^{ik}K(S,\gamma)_{ijkl}=S_{jl}+\tfrac12(\operatorname{tr}_\gamma S)\gamma_{jl}=\operatorname{Ric}_{jl},\qquad \gamma^{ik}C_{ijkl}=0.$$
+The other metric traces vanish by the curvature symmetries. Thus $C$ is a
+smooth curvature-symmetric, trace-free covariant four-tensor, and the
+**Schouten decomposition** $R=C+K(S,\gamma)$ holds by definition. A tensor
+with these algebraic symmetries and zero metric traces is called
+**Weyl-type**, whether or not it is the curvature part of a metric.
+The constant-curvature specialization is checked in the Remarks.
 
 **(b) Prescribed curvature.** The **prescribed curvature tensor** of a
 configuration $(C,E,B,r)$ is the tensor field with frame components

@@ -54,11 +54,11 @@ given $s$ equals $1-\alpha$"
 
 1.1 By [L1] each $\theta\in\Theta$ determines a probability measure $\mathbb P_\theta$ on $(S,\mathcal S)$ with $\mathbb P_\theta(\{s\})=1/4$ for $s\in D_\theta$ and $\mathbb P_\theta(\{s\})=0$ otherwise. Define $$C(s):=\begin{cases}\{s_1-1\}\cap\Theta,&s_1=s_2,\\ \Bigl\{\dfrac{s_1+s_2}{2}\Bigr\}\cap\Theta,&s_1\neq s_2 .\end{cases}$$ Each $C(s)$ is a subset of $\Theta$, and each set $\{\theta\in C\}$ is a subset of $S$ and therefore an element of the full power set $\mathcal S=2^{S}$, so $C$ is a confidence set by [L2]. [given, L1, L2]
 
-2.1 For fixed $\theta$ the four points of $D_\theta$ evaluate under $C$ as follows: $(\theta+1,\theta+1)$ gives $C=\{(\theta+1)-1\}=\{\theta\}$, which contains $\theta$; $(\theta-1,\theta-1)$ gives $C=\{(\theta-1)-1\}=\{\theta-2\}$, which does not contain $\theta$; and the two points with distinct coordinates, $(\theta+1,\theta-1)$ and $(\theta-1,\theta+1)$, both give $C=\{\theta\}$. Hence $\mathbb P_\theta(\theta\in C)=3/4$ for every $\theta\in\Theta$, and the coverage level of $C$ is $3/4$ by [L2]. [step 1.1, L1, L2, algebra]
+2.1 For fixed $\theta$ the four points of $D_\theta$ evaluate under $C$ as follows: $(\theta+1,\theta+1)$ gives $C=\{(\theta+1)-1\}=\{\theta\}$, which contains $\theta$; $(\theta-1,\theta-1)$ gives $C=\{\theta-2\}\cap\Theta$, which is empty for $\theta=14$ and equals $\{\theta-2\}$ for $\theta=16,18$; in every case it does not contain $\theta$; and the two points with distinct coordinates, $(\theta+1,\theta-1)$ and $(\theta-1,\theta+1)$, both give $C=\{\theta\}$. Hence $\mathbb P_\theta(\theta\in C)=3/4$ for every $\theta\in\Theta$, and the coverage level of $C$ is $3/4$ by [L2]. [step 1.1, L1, L2, algebra]
 
 2.2 Let $s^\ast:=(15,17)$. Since $s^\ast$ has distinct coordinates, step 1.1 gives $C(s^\ast)=\{(15+17)/2\}=\{16\}$. Moreover, $s^\ast\in D_\theta$ holds exactly for $\theta=16$, so $\mathbb P_\theta(\{s^\ast\})$ equals $1/4$ for $\theta=16$ and $0$ for $\theta\in\{14,18\}$. [step 1.1, L1, algebra]
 
-3.1 Fix weights $\pi(14),\pi(16),\pi(18)\ge0$ summing to $1$ with $\pi(16)>0$, and let $Q$ be the finite probability measure on $\Theta\times S$ given by $Q(\{(\theta,s)\})=\pi(\theta)\mathbb P_\theta(\{s\})$ for the twelve pairs with $\mathbb P_\theta(\{s\})>0$; by [L3] this is the probability measure of the finite weighted model. The event $\{s=s^\ast\}$ has $Q$-probability $\pi(16)\cdot\frac14>0$, so the conditional probability given $s^\ast$ is defined by [L3]. [step 2.2, given, L3]
+3.1 Fix weights $\pi(14),\pi(16),\pi(18)\ge0$ summing to $1$ with $\pi(16)>0$, and put $W:=\{(\theta,s):\theta\in\Theta,\ s\in D_\theta\}$, a twelve-element set, and give $(\theta,s)\in W$ weight $\pi(\theta)/4$. These nonnegative weights sum to $1$, so [L3] defines a probability measure $Q$ on the finite space $W$. In events below, $\theta$ and $s$ denote the two coordinate maps on $W$. The event $\{s=s^\ast\}$ has $Q$-probability $\pi(16)\cdot\frac14>0$, so the conditional probability given $s^\ast$ is defined by [L3]. [step 2.2, given, L3]
 
 4.1 The event $\{\theta\in C(s),\,s=s^\ast\}$ equals $\{\theta=16,\,s=s^\ast\}$, because $C(s^\ast)=\{16\}$ by step 2.2; its $Q$-probability is $\pi(16)\cdot\frac14$, the same as $Q(\{s=s^\ast\})$ by step 2.2. Hence $$Q\bigl(\theta\in C(s)\,\big|\,s=s^\ast\bigr)=\frac{\pi(16)/4}{\pi(16)/4}=1 .$$ [step 2.2, step 3.1, L3, algebra]
 
@@ -66,8 +66,4 @@ given $s$ equals $1-\alpha$"
 
 ## Remarks
 
-The parameter is treated as random only through the explicitly specified
-weights $\pi$; the computation uses the finite weighted model and the
-conditional-probability identity of [L3]. The witness shows that the coverage
-level $3/4$ carries no data-conditional posterior content: the data can be
-consistent with exactly one parameter value while the level remains $3/4$.
+The parameter is treated as random only through the explicitly specified weights $\pi$; the computation uses the finite weighted model and the conditional-probability identity of [L3]. The witness shows that the coverage level $3/4$ carries no data-conditional posterior content: the data can be consistent with exactly one parameter value while the level remains $3/4$.

@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 7
-deps: [prop-cm-canonical-map-tests-and-hamiltonian-transport, def-cm-generating-function-of-the-first-and-second-kind, prop-cm-generating-functions-yield-canonical-maps, prop-cm-canonical-map-locally-has-a-generating-function, prop-cm-time-dependent-generating-function, prop-cm-cylinder-shift-has-no-global-generating-function, def-cm-hamilton-jacobi-equation-and-complete-integral, thm-cm-hamilton-jacobi-characteristics-from-a-complete-integral, prop-cm-flow-derivative-satisfies-the-canonical-matrix-identity, cor-cm-hamiltonian-flow-preserves-phase-volume, def-tautological-one-form-on-a-cotangent-bundle, thm-the-canonical-cotangent-two-form-is-symplectic, def-hamiltonian-vector-field-and-hamiltonian-function, thm-hamilton-equations-in-canonical-cotangent-coordinates, def-poisson-bracket-on-a-symplectic-manifold, prop-coordinate-formula-for-the-poisson-bracket, prop-poisson-bracket-is-bilinear-skew-and-a-derivation-in-each-entry, thm-poisson-bracket-satisfies-the-jacobi-identity, thm-hamiltonian-flows-preserve-the-symplectic-form, thm-liouville-volume-preservation, def-canonical-transformation, def-symplectomorphism-local-symplectomorphism-and-symplectic-embedding, def-cm-finite-regularity-canonical-calculus]
+deps: [prop-cm-canonical-map-tests-and-hamiltonian-transport, def-cm-generating-function-of-the-first-and-second-kind, prop-cm-generating-functions-yield-canonical-maps, prop-cm-canonical-map-locally-has-a-generating-function, prop-cm-time-dependent-generating-function, prop-cm-cylinder-shift-has-no-global-generating-function, def-cm-hamilton-jacobi-equation-and-complete-integral, thm-cm-hamilton-jacobi-characteristics-from-a-complete-integral, prop-cm-flow-derivative-satisfies-the-canonical-matrix-identity, cor-cm-hamiltonian-flow-preserves-phase-volume, def-tautological-one-form-on-a-cotangent-bundle, thm-the-canonical-cotangent-two-form-is-symplectic, def-hamiltonian-vector-field-and-hamiltonian-function, thm-hamilton-equations-in-canonical-cotangent-coordinates, def-poisson-bracket-on-a-symplectic-manifold, prop-coordinate-formula-for-the-poisson-bracket, prop-poisson-bracket-is-bilinear-skew-and-a-derivation-in-each-entry, thm-poisson-bracket-satisfies-the-jacobi-identity, thm-hamiltonian-flows-preserve-the-symplectic-form, thm-liouville-volume-preservation, def-canonical-transformation, def-symplectomorphism-local-symplectomorphism-and-symplectic-embedding, def-cm-finite-regularity-canonical-calculus, thm-hamiltonian-vector-fields-exist-uniquely-for-smooth-functions]
 dependency_roles:
   prop-cm-canonical-map-tests-and-hamiltonian-transport: mathematical-premise
   def-cm-generating-function-of-the-first-and-second-kind: mathematical-premise
@@ -31,6 +31,7 @@ dependency_roles:
   def-canonical-transformation: mathematical-premise
   def-symplectomorphism-local-symplectomorphism-and-symplectic-embedding: mathematical-premise
   def-cm-finite-regularity-canonical-calculus: mathematical-premise
+  thm-hamiltonian-vector-fields-exist-uniquely-for-smooth-functions: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable

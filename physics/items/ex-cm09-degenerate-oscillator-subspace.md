@@ -18,12 +18,12 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "A worked instance of degeneracy in the coupled quadratic model: two identical uncoupled oscillators, M = m I, K = k I, with the double modal stiffness k/m, the full two-dimensional eigenspace, the four-parameter family of motions, the non-intrinsic status of every modal basis and the splitting of the double frequency into k/m and (k+2c)/m when a coupling c>0 of the two-mass model is switched on. The parameters are model data; the example asserts no measured frequency and no general stability-of-degeneracy theorem."
+physical_scope: "A worked instance of degeneracy in the coupled quadratic model: two identical uncoupled oscillators, M = m I, K = k I, with the double modal stiffness k/m, the full two-dimensional eigenspace, the four-parameter family of motions, the non-intrinsic status of every modal basis and the splitting of the double modal stiffness into k/m and (k+2c)/m, with corresponding frequencies sqrt(k/m) and sqrt((k+2c)/m), when a coupling c>0 of the two-mass model is switched on. The parameters are model data; the example asserts no measured frequency and no general stability-of-degeneracy theorem."
 sources:
   references:
-    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 3, Sections 3.1-3.2, printed pages 52-59 (PDF pages 55-62): the generalized symmetric eigenproblem and the warning that degenerate eigenspaces need careful treatment"
+    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 3, Sections 3.1-3.2, printed pages 52-59 (PDF pages 55-62): the generalized symmetric eigenproblem and the choice of orthogonal eigenvectors within repeated eigenspaces"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 6, Section 6.2, chapter pages 3-6 (PDF pages 127-130): normal modes of coupled oscillators and the merging of mode frequencies when the coupling vanishes"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 6, Sections 6.1-6.2, Eqs. (6.10)-(6.21), chapter pages 3-6 (PDF pages 127-130): two-oscillator frequency splitting and the generalized normal-mode construction; Eq. (6.11) gives the coincident-frequency limit as coupling vanishes"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
 verification:
   precheck: pass

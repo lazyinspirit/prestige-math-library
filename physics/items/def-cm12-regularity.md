@@ -54,7 +54,7 @@ the standing regularity ([[def-cm03-potential-and-mechanical-energy]],
 in the velocity slot are those of [[def-jacobian-matrix-and-gradient]] and
 [[def-directional-and-partial-derivatives]].
 
-**(a) Velocity Hessian.** Let $(O,L)$ be the fibre-full time-dependent
+**(a) Velocity Hessian.** When $Q\ne\varnothing$, let $(O,L)$ be the fibre-full time-dependent
 Lagrangian chart of clause (c) of [[def-cm07-action-and-mechanical-lagrangian]]
 and let $\widetilde L$ be the substituted Lagrangian of a generalized-coordinate
 map $X:\Omega\to Q$ ([[def-cm07-generalized-coordinates-and-forces]]). The
@@ -75,12 +75,16 @@ $\det L_{vv}(t,x,v)\neq0$, and **velocity-regular at the state** $(t,q,v)$ of
 the chart of $X$ when $\det\widetilde L_{vv}(t,q,v)\neq0$. It is **regular on
 a chart** when it is velocity-regular at every state of that chart, and
 **regular** when this holds on the chart under discussion. This is exactly the
-regularity of [[def-cm-legendre-map-in-a-time-dependent-chart]] instantiated
+regularity of [[def-cm-legendre-map-in-a-time-dependent-chart]] instantiated, for $Q\ne\varnothing$,
 at the corresponding fibre-full chart: the Legendre map is regular at a state
 precisely when its velocity Hessian there is nonsingular. The evaluation of
 the Hessian for the model's mechanical presentations, and the conclusion that
 those presentations are regular at every state, are proved on this page (the
 local Legendre theorem) and are not part of this definition.
+If $Q=\varnothing$, the Cartesian state domain is empty and regularity
+there is vacuous; there is no fibre-full chart instance of the cited
+mathematical definition and no generalized-coordinate map, whose domain
+$\Omega$ must be nonempty.
 
 **(c) Local inverse branch data.** Let the presentation be velocity-regular
 at a state $z$ of a chart with Legendre map $\mathbb F$ and momentum image

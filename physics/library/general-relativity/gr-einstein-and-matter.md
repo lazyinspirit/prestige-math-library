@@ -51,7 +51,7 @@ the unit normal and density of a non-null hyperplane are proved in
 [[lem-gr-metric-volume-form-patching-and-face-normal]]. The density identity
 $\nabla_aJ^a=w^{-1}\partial_a(wJ^a)$ is
 [[lem-gr-metric-divergence-and-density-formula]], and the divergence theorem
-on finite smooth singular chains with the flux balance
+on finite smooth singular chains with the flux balance for divergence-free currents
 $\Phi_J(\Sigma_2)-\Phi_J(\Sigma_1)=-\Phi_J(B)$ and the non-null face formula
 are [[thm-gr-density-divergence-and-finite-chain-flux]].
 
@@ -84,11 +84,13 @@ $\nabla^aT_{ab}=0$ with those systems is
 [[prop-gr-dust-and-perfect-fluid-conservation-equations]].
 
 **The field law.** The action formulation, its Einstein-Hilbert density with
-coupling $\kappa=8\pi G_N/c^4$, its matter sectors and its variational
-principle are adopted in [[post-gr-classical-gravitational-action]]; the
+coupling $\kappa=8\pi G_N/c^4$, its supplied scalar-field matter action and its
+variational principle are adopted in [[post-gr-classical-gravitational-action]];
+prescribed dust and perfect-fluid sectors use the
 direct-equation presentation is adopted in
 [[post-gr-einstein-field-law]]. The two are identified by
-[[pthm-gr-adopted-action-and-einstein-equations]]: stationarity of the total
+[[pthm-gr-adopted-action-and-einstein-equations]] for the supplied action and its
+Hilbert tensor: stationarity of the total
 action difference under compactly supported metric variations holds exactly
 when $G_{ab}+\Lambda g_{ab}=\kappa T_{ab}$. The consistency conditions of that
 law — necessary conservation, the trace identity, the parameter-variation

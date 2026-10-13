@@ -10,8 +10,9 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-future-and-past-sets, lem-gr-chronology-openness, lem-gr-dominating-cone-bounds, def-gr-causal-curves-and-reachability, lem-gr-causal-curve-calculus, def-gr-smooth-lorentzian-objects, def-gr-observer-and-rest-space, cor-graph-of-a-measurable-function-is-lebesgue-null, cor-continuous-functions-are-borel-measurable, def-countable-choice, def-continuity-real, def-interval, def-c-r-and-smooth-maps-between-smooth-manifolds]
+deps: [def-dependent-choice, def-gr-future-and-past-sets, lem-gr-chronology-openness, lem-gr-dominating-cone-bounds, def-gr-causal-curves-and-reachability, lem-gr-causal-curve-calculus, def-gr-smooth-lorentzian-objects, def-gr-observer-and-rest-space, cor-graph-of-a-measurable-function-is-lebesgue-null, cor-continuous-functions-are-borel-measurable, def-countable-choice, def-continuity-real, def-interval, def-c-r-and-smooth-maps-between-smooth-manifolds]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
   def-gr-future-and-past-sets: mathematical-premise
   lem-gr-chronology-openness: mathematical-premise
   lem-gr-dominating-cone-bounds: mathematical-premise
@@ -37,6 +38,10 @@ verification:
 
 ## Statement
 
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the absolutely continuous causal-curve
+calculus and the supplied causal results used below.
+
 Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let
 $F\subseteq M$ be an open future set, so that $I^+(F)=F$
 ([[def-gr-future-and-past-sets]] clause (a)), and let $A:=\partial F$ be its
@@ -48,7 +53,8 @@ future or past timelike curve meets $A$ in at most one point.
 
 **(b) Local Lipschitz graph.** For every $p\in A$ there are a chart
 $(U,x)$ of the kind produced by [[lem-gr-dominating-cone-bounds]] clauses (a)
-and (d) around $p$, with $x(p)=0$ and constants $K$ and $c$, and numbers
+and (d) around $p$, with $x(p)=0$, domination constant $K$, and minorant
+coefficient $c=16$, and numbers
 $a,\rho>0$ with $W:=x^{-1}\bigl((-a,a)\times B_\rho(0)\bigr)\subseteq U$, such
 that for every $z\in B_\rho(0)$ the coordinate vertical line
 $$L_z:=x^{-1}\bigl((-a,a)\times\{z\}\bigr)$$
@@ -75,11 +81,11 @@ volume density on $M$.
 
 **Given:** A time-oriented smooth Lorentzian four-manifold $(M,g,N)$, an open future set $F$, its boundary $A=\partial F$ and a point $p\in A$.
 
-[L1] $F$ is open and $I^+(F)=F$; the boundary $A=\partial F$ is closed, and it is achronal: if $r,r'\in A$ with $r\ll r'$ then $r'\in I^+(r)\subseteq I^+(F)=F$, contradicting $r'\in\partial F$ ([[def-gr-future-and-past-sets]] clauses (a)-(c)).
+[L1] $F$ is open and $I^+(F)=F$, and $A=\partial F$ is closed. If $r,r'\in A$ with $r\ll r'$, openness of the chronological relation in its first endpoint gives a neighborhood $V$ of $r$ with $V\subseteq I^-(r')$ ([[lem-gr-chronology-openness]] clause (b)). Since $r\in\overline F$, choose $f\in V\cap F$; then $r'\in I^+(f)\subseteq I^+(F)=F$, contradicting $r'\in\partial F$. Thus $A$ is achronal ([[def-gr-future-and-past-sets]] clauses (a)-(c), [[lem-gr-chronology-openness]]).
 
 [L2] If $F$ is a future set and $q\in\overline F$ then $I^+(q)\subseteq F$; if $G$ is a past set and $q\in\overline G$ then $I^-(q)\subseteq G$ ([[lem-gr-chronology-openness]] clause (c)).
 
-[L3] The chart of [[lem-gr-dominating-cone-bounds]] supplies coordinates $(x^0,x^1,x^2,x^3)$ on a ball around $p$ with $x(p)=0$, the identity $n=\partial/\partial x^0$ for the future unit timelike field $n$, the domination bound $|v^i|\le Kv^0$ for future causal $v$, and the flat form $\eta_c=-(dx^0)^2+c\sum_i(dx^i)^2$ with the properties: every $\eta_c$-causal vector is $g$-timelike, and if $q,q'\in U$ satisfy $\eta_c(q'-q,q'-q)<0$ then $q,q'$ are chronologically related, in the direction fixed by the sign of $x^0(q')-x^0(q)$ ([[lem-gr-dominating-cone-bounds]] clauses (a), (b), (d)).
+[L3] The chart of [[lem-gr-dominating-cone-bounds]] supplies coordinates $(x^0,x^1,x^2,x^3)$ on a ball around $p$ with $x(p)=0$, the identity $n=\partial/\partial x^0$ for the future unit timelike field $n$, the domination bound $|v^i|\le Kv^0$ for future causal $v$, and the flat form $\eta_{16}=-(dx^0)^2+16\sum_i(dx^i)^2$ with the properties: every $\eta_{16}$-causal vector is $g$-timelike, and if $q,q'\in U$ satisfy $\eta_{16}(q'-q,q'-q)<0$ then $q,q'$ are chronologically related, in the direction fixed by the sign of $x^0(q')-x^0(q)$ ([[lem-gr-dominating-cone-bounds]] clauses (a), (b), (d)).
 
 [L4] The coordinate vertical lines of the chart of [L3] are the integral curves of $n=\partial_0$; hence each of them is a future timelike curve, and for $s<s'$ in $(-a,a)$ the points $x^{-1}(s,z)$ and $x^{-1}(s',z)$ satisfy $x^{-1}(s,z)\ll x^{-1}(s',z)$ ([[def-gr-causal-curves-and-reachability]] clause (c), [[def-gr-observer-and-rest-space]], [[lem-gr-causal-curve-calculus]] clause (f)).
 

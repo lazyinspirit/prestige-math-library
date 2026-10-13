@@ -23,9 +23,9 @@ proof_strategy: direct
 physical_scope: "A worked instance of the finite-time linearization error bound: the one-dimensional chart system with constant mass m, potential U(q) = k q^2/2 + lambda q^3/6 and field G(q,v) = (v,-(kq+lambda q^2/2)/m), whose translated field has the exact quadratic remainder -(lambda/(2m)) delta q^2, giving the exact constants C = |lambda|/(2m) and L = max(1,(k+|lambda|r/2)/m) on the ball of radius r; a numerical instance with m=k=lambda=1, r=1, delta=10^-2 and T=1 checks the smallness condition delta exp(LT) = 0.04482 < 1 and the bound 2.73 x 10^-3, and the case lambda=0 reduces the field to its linearization with C=0. All quantities are exact-arithmetic evaluations of model formulas; no measurement or empirical claim is present."
 sources:
   references:
-    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 7, Section 7.1.3, printed pages 147-148 (PDF pages 150-151): the linearised oscillator, the first-order correction and the limits of linear reasoning"
+    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 7, Section 7.1.3, Eqs. (7.15)-(7.16), printed page 148 (PDF page 151): the linearised forced damped oscillator and its transient and steady response; background only, not a derivation of an anharmonic correction or of the finite-time error bound"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 5, Section 5.2, Eqs. (5.35)-(5.49), chapter pages 6-10 (PDF pages 93-97): the weakly anharmonic oscillator, the cubic and quartic perturbations and the secular behaviour of the first correction"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Chapter 5, Section 5.2, Eqs. (5.38)-(5.49), chapter pages 9-11 (PDF pages 95-97): weakly nonlinear oscillations, slow amplitude/phase variation and a cubic force (quartic potential) perturbation with secular-term removal; qualitative background, not the cubic-potential model or its rigorous error estimate"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
 verification:
   precheck: pass
@@ -131,6 +131,10 @@ $e^{3/2}/100$ and $e^{4}/20000$ and play no role in the verification.
 
 - **What the bound does not say.** The estimate compares the nonlinear
 motion with the harmonic one only on the stated finite horizon and for the
-stated small datum; the cubic potential itself produces secular and
-amplitude-dependent effects beyond that horizon, which are not described by
-this example and are outside the small-oscillation model.
+stated small datum. It gives no conclusion about the approximation error
+beyond that horizon. Likharev Section 5.2 discusses slowly accumulating
+perturbative effects under its own weak-nonlinearity assumptions, including
+a cubic force arising from a quartic potential. That discussion does not
+supply an all-time estimate or a deduction of secular behaviour for every
+motion of the cubic-potential model here; when $\lambda=0$ the equality in
+clause 4 holds at all times.

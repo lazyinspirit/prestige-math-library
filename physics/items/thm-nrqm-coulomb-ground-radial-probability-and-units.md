@@ -56,9 +56,17 @@ so the radial probability density $p(r):=\frac{\gamma^3}{2}r^2e^{-2r/a_0}=4r^2a_
 
 (c) the mean of $p$ is $\int_0^\infty r\,p(r)dr=3a_0/2$, and the unique maximum (mode) of $p$ is at $r=a_0$;
 
-(d) the spatial density $|\psi_{100}(x)|^2=\frac{\gamma^3}{8\pi}e^{-2r/a_0}$ is strictly decreasing in $r$ and maximal at $x=0$, and for every $\varepsilon>0$, $\int_{|x|<\varepsilon}|\psi_{100}|^2dx=\frac16\bigl(\frac{2\varepsilon}{a_0}\bigr)^3+O(\varepsilon^4)>0$ tends to $0$ as $\varepsilon\downarrow0$: the density maximum at the origin is not an atom of probability at any point or a definite orbit;
+(d) the spatial density $|\psi_{100}(x)|^2=\frac{\gamma^3}{8\pi}e^{-2r/a_0}$ is strictly decreasing in $r$ and maximal at $x=0$. For every $\varepsilon>0$ there is a remainder $R_\varepsilon$ such that
+$$
+\int_{|x|<\varepsilon}|\psi_{100}(x)|^2\,dx=\frac16\Bigl(\frac{2\varepsilon}{a_0}\Bigr)^3+R_\varepsilon, \qquad |R_\varepsilon|\le\frac18\Bigl(\frac{2\varepsilon}{a_0}\Bigr)^4.
+$$
+Thus this probability is positive and tends to $0$ as $\varepsilon\downarrow0$, and the spatial probability measure has no point atoms, including at the density maximum $x=0$;
 
-(e) *parametrisation and dimensions.* If $\hbar,m,\kappa>0$ and $\gamma:=2m\kappa/\hbar^2$, then $a_0=\hbar^2/(m\kappa)$ and the eigenvalues of the operator $C_{\hbar,m,\kappa}:=-\frac{\hbar^2}{2m}\Delta-\frac{\kappa}{|\cdot|}$ are $-\frac{m\kappa^2}{2\hbar^2n^2}=\frac{\hbar^2}{2m}\Bigl(-\frac{\gamma^2}{4n^2}\Bigr)$ ($n\ge1$); under the dimensional conventions $[\hbar]=\mathrm{J\,s}$, $[m]=\mathrm{kg}$, $[\kappa]=\mathrm{J\,m}$, the constants $a_0^2$ and $m\kappa^2/(2\hbar^2)$ have the dimensions of $\mathrm m^2$ and $\mathrm J$ respectively.
+(e) *parametrisation and dimensions.* If $\hbar,m,\kappa>0$ and $\gamma:=2m\kappa/\hbar^2$, then $a_0=\hbar^2/(m\kappa)$ and the operator
+$$
+C_{\hbar,m,\kappa}:=-\frac{\hbar^2}{2m}\Delta-\frac{\kappa}{|\cdot|},\qquad D(C_{\hbar,m,\kappa})=H^2(\mathbb R^3;\mathbb C),
+$$
+has eigenvalues $-\frac{m\kappa^2}{2\hbar^2n^2}=\frac{\hbar^2}{2m}\Bigl(-\frac{\gamma^2}{4n^2}\Bigr)$ ($n\ge1$); under the dimensional conventions $[\hbar]=\mathrm{J\,s}$, $[m]=\mathrm{kg}$, $[\kappa]=\mathrm{J\,m}$, the constants $a_0^2$ and $m\kappa^2/(2\hbar^2)$ have the dimensions of $\mathrm m^2$ and $\mathrm J$ respectively.
 
 Clauses (a)–(d) are mathematical statements about the normalised ground vector
 and its distribution; clause (e) is a dimensional-consistency statement about
@@ -85,7 +93,7 @@ of any quantity with nature.
 
 3.1 [Mean and mode] By [F3] together with [F2], $\int_0^\infty r\,p(r)dr=\frac{\gamma^3}{2}\int_0^\infty r^3e^{-2r/a_0}dr=\frac{\gamma^3}{2}\cdot\frac{6}{(2/a_0)^4}=\frac{\gamma^3}{2}\cdot\frac{6a_0^4}{16}=\frac{3\gamma^3a_0^4}{16}=\frac{3a_0}{2}$ because $\gamma a_0=2$. For the mode, differentiate $q(r):=r^2e^{-2r/a_0}$ using [F3]'s ingredients: $q'(r)=2re^{-2r/a_0}-(2/a_0)r^2e^{-2r/a_0}=(2/a_0)r(a_0-r)e^{-2r/a_0}$, which is positive for $0<r<a_0$, zero at $r=a_0$ and negative for $r>a_0$; hence $q$, and with it $p$, has its unique maximum at $r=a_0$. This is (c). [step 2.1, F3, algebra]
 
-3.2 [Density versus point probability] Set $t=2\varepsilon/a_0$. Step 2.1 gives $P(|x|<\varepsilon)=\frac12\int_0^t s^2e^{-s}ds=1-e^{-t}(1+t+t^2/2)$ by differentiation and the fundamental theorem. Since $0\le1-e^{-s}=\int_0^s e^{-v}dv\le s$, the difference from $t^3/6$ has absolute value at most $t^4/8$. Thus the claimed $O(\varepsilon^4)$ expansion holds for fixed $a_0$; the probability is strictly positive for every $\varepsilon>0$ and tends to zero. The density $(\pi a_0^3)^{-1}e^{-2r/a_0}$ is strictly decreasing in $r$, while every singleton has zero probability because its Lebesgue measure is zero. This proves (d), with a density maximum distinguished from a point atom. [step 2.1, F3, algebra]
+3.2 [Density versus point probability] Set $t=2\varepsilon/a_0$. Step 2.1 gives $P(|x|<\varepsilon)=\frac12\int_0^t s^2e^{-s}ds=1-e^{-t}(1+t+t^2/2)$ by differentiation and the fundamental theorem. Since $0\le1-e^{-s}=\int_0^s e^{-v}dv\le s$, the difference from $t^3/6$ has absolute value at most $t^4/8$. Taking $R_\varepsilon:=P(|x|<\varepsilon)-t^3/6$ gives the exact remainder bound in (d), with the dimensionless scale $t=2\varepsilon/a_0$; the probability is strictly positive for every $\varepsilon>0$ and tends to zero. The density $(\pi a_0^3)^{-1}e^{-2r/a_0}$ is strictly decreasing in $r$, while every singleton has zero probability because its Lebesgue measure is zero. This proves (d), with no point atom at the density maximum. [step 2.1, F3, algebra]
 
 4.1 [Parametrisation and dimensions] Setting $\gamma=2m\kappa/\hbar^2$ gives $a_0=2/\gamma=\hbar^2/(m\kappa)>0$, and the operator identity $C_{\hbar,m,\kappa}=\frac{\hbar^2}{2m}C$ on $H^2$ holds because $\frac{\hbar^2}{2m}\cdot\frac{2m\kappa}{\hbar^2}=\kappa$; hence the eigenvalues of $C_{\hbar,m,\kappa}$ are $\frac{\hbar^2}{2m}\cdot(-\frac{\gamma^2}{4n^2})=-\frac{m\kappa^2}{2\hbar^2n^2}$ by [F1], including exclusion of every nonnegative eigenvalue. For the dimensional statement, substituting the dimensional conventions and the dependent unit identity $\mathrm J=\mathrm{kg\,m^2\,s^{-2}}$, one computes $[\hbar^2/(m\kappa)]=\mathrm{J^2s^2\,kg^{-1}J^{-1}m^{-1}}=\mathrm{J\,s^2\,kg^{-1}m^{-1}}=\mathrm m$, so $a_0^2$ has dimension $\mathrm m^2$, and $[m\kappa^2/\hbar^2]=\mathrm{kg\,J^2m^2J^{-2}s^{-2}}=\mathrm{kg\,m^2s^{-2}}=\mathrm J$. This is (e). [step 1.1, step 3.2, F1, algebra]
 

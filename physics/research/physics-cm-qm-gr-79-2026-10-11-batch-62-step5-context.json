@@ -1,0 +1,791 @@
+{
+  "group": "w",
+  "batches": [
+    "62"
+  ],
+  "pages_read": [
+    "qm-many-body-and-equilibrium-models",
+    "qm-many-body-and-equilibrium-models-examples"
+  ],
+  "items_read": [
+    "lem-nrqm-many-body-one-body-reduction-trace-law",
+    "lem-nrqm-many-body-two-level-thermal-formulas",
+    "lem-nrqm-many-body-cc-bounded-spatial-realization",
+    "lem-nrqm-many-body-finite-spin-product-identification",
+    "lem-nrqm-many-body-fixed-n-countable-mode-partition-criterion",
+    "lem-nrqm-many-body-spectral-mean-and-defined-trace-product",
+    "def-nrqm-many-body-framework-declared-fixed-n-model",
+    "def-nrqm-many-body-framework-one-body-reduced-operator",
+    "def-nrqm-many-body-framework-entropy-and-free-energy",
+    "post-nrqm-many-body-canonical-equilibrium-ensemble",
+    "pthm-nrqm-many-body-noninteracting-sector-diagonalization",
+    "pthm-nrqm-many-body-one-body-readout-law",
+    "pthm-nrqm-many-body-exchange-energy-splitting",
+    "pthm-nrqm-many-body-thermal-equilibrium-characterization",
+    "pthm-nrqm-many-body-thermal-occupation-predictions",
+    "pthm-nrqm-many-body-unitary-evolution-preserves-entropy",
+    "rem-nrqm-many-body-scope-and-empirical-status",
+    "ex-nrqm-many-body-two-site-bond-thermal-ensemble",
+    "ex-nrqm-many-body-finite-mode-noninteracting-thermal-ensemble",
+    "ex-nrqm-many-body-gas-statistics-dilute-limits",
+    "texp-nrqm-many-body-two-site-no-thermalization",
+    "rem-nrqm-many-body-examples-scope-limits"
+  ],
+  "conventions": [
+    {
+      "convention": "Permutation parameters act on zero-based slots; on one-based tuple positions use π̂(k)=1+π(k−1), and Uπ sends the factor in position π̂⁻¹(k) to position k.",
+      "fixed_by": "lem-nrqm-many-body-one-body-reduction-trace-law",
+      "matters_for": [
+        "lem-nrqm-many-body-finite-spin-product-identification",
+        "lem-nrqm-many-body-fixed-n-countable-mode-partition-criterion",
+        "def-nrqm-many-body-framework-declared-fixed-n-model",
+        "pthm-nrqm-many-body-one-body-readout-law"
+      ]
+    },
+    {
+      "convention": "The one-body reduction has trace one; the expectation of a sum of N slot observables is N times its one-particle trace pairing. For N=1 the reduction equals the original preparation.",
+      "fixed_by": "def-nrqm-many-body-framework-one-body-reduced-operator",
+      "matters_for": [
+        "pthm-nrqm-many-body-one-body-readout-law"
+      ]
+    },
+    {
+      "convention": "The full spatial spin multiplicity is (2s+1)^N, and identical-particle permutations simultaneously permute spatial blocks and internal spin factors.",
+      "fixed_by": "lem-nrqm-many-body-finite-spin-product-identification",
+      "matters_for": [
+        "def-nrqm-many-body-framework-declared-fixed-n-model",
+        "pthm-nrqm-many-body-exchange-energy-splitting"
+      ]
+    },
+    {
+      "convention": "The Fourier transform uses exp(−2πix·ξ); consequently −aΔ has symbol 4π²a|ξ|². The Coulomb supplier is instantiated with mathematical masses m/(4π²) to obtain the declared physical kinetic operator.",
+      "fixed_by": "def-nrqm-many-body-framework-declared-fixed-n-model",
+      "matters_for": [
+        "pthm-nrqm-many-body-exchange-energy-splitting"
+      ]
+    },
+    {
+      "convention": "N is positive. A zero fermionic sector has no trace-one preparation, its partition trace is zero, and no canonical normalization, ground eigenvalue or logarithm of its partition trace is used.",
+      "fixed_by": "def-nrqm-many-body-framework-entropy-and-free-energy",
+      "matters_for": [
+        "post-nrqm-many-body-canonical-equilibrium-ensemble",
+        "pthm-nrqm-many-body-noninteracting-sector-diagonalization",
+        "pthm-nrqm-many-body-thermal-equilibrium-characterization",
+        "pthm-nrqm-many-body-unitary-evolution-preserves-entropy"
+      ]
+    },
+    {
+      "convention": "Entropy and Helmholtz free energy are defined here only for finite-dimensional sectors. Zero entropy summands are omitted without evaluating log 0. S=kB s, β=1/(kB T), T>0, and kB=1.380649×10⁻²³ J K⁻¹ exactly.",
+      "fixed_by": "def-nrqm-many-body-framework-entropy-and-free-energy",
+      "matters_for": [
+        "pthm-nrqm-many-body-thermal-equilibrium-characterization",
+        "pthm-nrqm-many-body-unitary-evolution-preserves-entropy",
+        "ex-nrqm-many-body-two-site-bond-thermal-ensemble"
+      ]
+    },
+    {
+      "convention": "A thermal mean requires a finite absolute first spectral moment. An unbounded trace-product identity additionally requires the literal everywhere-defined trace-class left product; first-moment existence alone does not supply that product.",
+      "fixed_by": "post-nrqm-many-body-canonical-equilibrium-ensemble",
+      "matters_for": [
+        "pthm-nrqm-many-body-thermal-occupation-predictions"
+      ]
+    },
+    {
+      "convention": "Fixed-N partition traces and full-Fock grand-canonical products are distinct. Countable fixed-N modes may have real energies bounded below; the grand-canonical product criteria use positive unshifted energies and require μ<inf εj for bosons.",
+      "fixed_by": "post-nrqm-many-body-canonical-equilibrium-ensemble",
+      "matters_for": [
+        "pthm-nrqm-many-body-thermal-occupation-predictions",
+        "ex-nrqm-many-body-gas-statistics-dilute-limits"
+      ]
+    },
+    {
+      "convention": "Non-interacting means W=0; equivalence with κ=0 applies only to the Coulomb branch. Coulomb couplings g and κ have units J m, whereas occupation readouts use dimensionless particle count.",
+      "fixed_by": "def-nrqm-many-body-framework-declared-fixed-n-model",
+      "matters_for": [
+        "pthm-nrqm-many-body-noninteracting-sector-diagonalization",
+        "pthm-nrqm-many-body-exchange-energy-splitting",
+        "ex-nrqm-many-body-finite-mode-noninteracting-thermal-ensemble"
+      ]
+    }
+  ],
+  "load_bearing": [
+    {
+      "id": "def-nrqm-many-body-framework-declared-fixed-n-model",
+      "statement": "Declares the positive-N species sector, one-particle operator and pair interaction, and constructs its assigned sector energy through bounded spatial, Coulomb spatial or finite-mode realizations; non-interacting means W=0.",
+      "used_by": [
+        "def-nrqm-many-body-framework-entropy-and-free-energy",
+        "post-nrqm-many-body-canonical-equilibrium-ensemble",
+        "pthm-nrqm-many-body-noninteracting-sector-diagonalization",
+        "pthm-nrqm-many-body-exchange-energy-splitting",
+        "pthm-nrqm-many-body-unitary-evolution-preserves-entropy",
+        "ex-nrqm-many-body-two-site-bond-thermal-ensemble",
+        "ex-nrqm-many-body-finite-mode-noninteracting-thermal-ensemble"
+      ]
+    },
+    {
+      "id": "post-nrqm-many-body-canonical-equilibrium-ensemble",
+      "statement": "For a declared bounded-below self-adjoint Gibbs generator G and β=1/(kB T), assumes 0<Z=Tr exp(−βG)<∞ and adopts ρβ=Z⁻¹exp(−βG) as the Gibbs preparation. Thermal means are finite absolute-first-moment spectral integrals.",
+      "used_by": [
+        "pthm-nrqm-many-body-thermal-equilibrium-characterization",
+        "pthm-nrqm-many-body-thermal-occupation-predictions",
+        "pthm-nrqm-many-body-unitary-evolution-preserves-entropy",
+        "ex-nrqm-many-body-two-site-bond-thermal-ensemble",
+        "ex-nrqm-many-body-finite-mode-noninteracting-thermal-ensemble",
+        "ex-nrqm-many-body-gas-statistics-dilute-limits",
+        "texp-nrqm-many-body-two-site-no-thermalization"
+      ]
+    },
+    {
+      "id": "def-nrqm-many-body-framework-entropy-and-free-energy",
+      "statement": "On a nonzero finite-dimensional declared sector, s(ρ)=−Σwi log wi over positive eigenvalues, S=kB s and F(ρ)=tr(ρH)−kB T s(ρ); Feq=−β⁻¹log Z.",
+      "used_by": [
+        "post-nrqm-many-body-canonical-equilibrium-ensemble",
+        "pthm-nrqm-many-body-thermal-equilibrium-characterization",
+        "pthm-nrqm-many-body-unitary-evolution-preserves-entropy",
+        "ex-nrqm-many-body-two-site-bond-thermal-ensemble",
+        "texp-nrqm-many-body-two-site-no-thermalization"
+      ]
+    },
+    {
+      "id": "lem-nrqm-many-body-one-body-reduction-trace-law",
+      "statement": "Under Countable Choice, for a finite-dimensional one-particle Hilbert space, n≥1 and a density operator on either permutation sector, its normalized one-body partial trace γ satisfies tr(ρ̃Σ(O))=n tr(γO) for every bounded O; γ is slot independent and equals ρ when n=1.",
+      "used_by": [
+        "def-nrqm-many-body-framework-one-body-reduced-operator",
+        "pthm-nrqm-many-body-one-body-readout-law"
+      ]
+    },
+    {
+      "id": "lem-nrqm-many-body-finite-spin-product-identification",
+      "statement": "Under Countable Choice, the N-fold tensor product of L²(R³;Cʳ) is unitarily identified with L²(R³ᴺ;Cʳᴺ), with the stated combined spatial/internal permutation action and exact finite-component H² sector restrictions.",
+      "used_by": [
+        "def-nrqm-many-body-framework-declared-fixed-n-model",
+        "pthm-nrqm-many-body-exchange-energy-splitting"
+      ]
+    },
+    {
+      "id": "lem-nrqm-many-body-cc-bounded-spatial-realization",
+      "statement": "Under Countable Choice, for N,M≥1, a>0 and real essentially bounded V on R³ᴺ, −aΔ+V is self-adjoint on exactly W²,²(R³ᴺ;Cᴹ), bounded below by −ess sup|V|, with equivalent graph/Sobolev norms, a smooth compactly supported core and the stated imaginary resolvent formula.",
+      "used_by": [
+        "def-nrqm-many-body-framework-declared-fixed-n-model",
+        "pthm-nrqm-many-body-exchange-energy-splitting"
+      ]
+    },
+    {
+      "id": "lem-nrqm-many-body-fixed-n-countable-mode-partition-criterion",
+      "statement": "Under Countable Choice, for a supplied countably infinite mode basis, N≥1 and real energies εj≥b, the symmetric and antisymmetric occupation vectors are complete orthonormal bases, their diagonal sector energies are self-adjoint, and 0<ZNσ(β)<∞ iff Σj exp(−βεj)<∞.",
+      "used_by": [
+        "post-nrqm-many-body-canonical-equilibrium-ensemble",
+        "pthm-nrqm-many-body-thermal-occupation-predictions"
+      ]
+    },
+    {
+      "id": "pthm-nrqm-many-body-noninteracting-sector-diagonalization",
+      "statement": "In the declared non-interacting finite-mode model, sector configurations have energy Σj λj εj and partition trace Σλ exp(−βΣj λj εj). On nonzero sectors the fermionic ground energy is the sum of the N smallest mode energies and the bosonic ground energy is N times the smallest.",
+      "used_by": [
+        "ex-nrqm-many-body-finite-mode-noninteracting-thermal-ensemble",
+        "rem-nrqm-many-body-scope-and-empirical-status"
+      ]
+    },
+    {
+      "id": "pthm-nrqm-many-body-unitary-evolution-preserves-entropy",
+      "statement": "In the finite-sector class with the adopted canonical preparation, unitary evolution preserves entropy, leaves ρβ stationary, and ρ(0)≠ρβ implies ρ(t)≠ρβ for every real t.",
+      "used_by": [
+        "texp-nrqm-many-body-two-site-no-thermalization",
+        "rem-nrqm-many-body-scope-and-empirical-status",
+        "rem-nrqm-many-body-examples-scope-limits"
+      ]
+    }
+  ],
+  "published_dependencies": [
+    {
+      "id": "cor-cauchy-schwarz-inequality-for-l-two",
+      "used_for": "Absolute first-moment bound from a finite second moment.",
+      "opened": true
+    },
+    {
+      "id": "cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn",
+      "used_for": "CC smooth density and graph-core construction.",
+      "opened": true
+    },
+    {
+      "id": "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+      "used_for": "Two-site unitary-flow amplitudes.",
+      "opened": true
+    },
+    {
+      "id": "cor-exponential-reciprocal-and-positivity",
+      "used_for": "Positivity and bounds of two-level Gibbs weights.",
+      "opened": true
+    },
+    {
+      "id": "cor-finite-iterated-tensor-products-represent-multilinear-maps",
+      "used_for": "Algebraic regrouping before Hilbert completion.",
+      "opened": true
+    },
+    {
+      "id": "cor-mean-value-theorem",
+      "used_for": "Strict logarithm tangent inequality and its equality case.",
+      "opened": true
+    },
+    {
+      "id": "cor-trigonometric-parity-and-pythagorean-identity",
+      "used_for": "Two-site amplitudes and normalized site probabilities.",
+      "opened": true
+    },
+    {
+      "id": "def-adjoint-of-a-densely-defined-unbounded-operator",
+      "used_for": "Exact multiplier and diagonal adjoint-domain arguments.",
+      "opened": true
+    },
+    {
+      "id": "def-axiom-of-choice",
+      "used_for": "General spectral calculus, basis extension and Coulomb perturbation hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "def-bounded-linear-operator",
+      "used_for": "Bounded slot, interaction and reduction operators.",
+      "opened": true
+    },
+    {
+      "id": "def-countable-choice",
+      "used_for": "Explicit choice premise of Hilbert, Sobolev and trace suppliers.",
+      "opened": true
+    },
+    {
+      "id": "def-fourier-transform-on-l-one-of-rn",
+      "used_for": "Negative-sign 2π Fourier normalization.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-schmidt-operator",
+      "used_for": "Finite extended positive trace implies a Hilbert-Schmidt square root.",
+      "opened": true
+    },
+    {
+      "id": "def-hilbert-space",
+      "used_for": "Hilbert spaces, completeness and pairing conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-l-p-space-as-a-quotient-by-null-functions",
+      "used_for": "Spatial wavefunctions and singular multipliers as almost-everywhere classes.",
+      "opened": true
+    },
+    {
+      "id": "def-linear-isometry-and-orthogonal-or-unitary-operator",
+      "used_for": "Finite-dimensional unitary norm invariance.",
+      "opened": true
+    },
+    {
+      "id": "def-natural-logarithm",
+      "used_for": "Entropy and logarithmic Gibbs identities.",
+      "opened": true
+    },
+    {
+      "id": "def-operator-norm",
+      "used_for": "Slot bounds, resolvent bounds and operator-norm convergence.",
+      "opened": true
+    },
+    {
+      "id": "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+      "used_for": "Supplied mode bases and completeness conventions.",
+      "opened": true
+    },
+    {
+      "id": "def-projection-valued-measure",
+      "used_for": "Spectral outcome laws and coordinate spectral projections.",
+      "opened": true
+    },
+    {
+      "id": "def-sobolev-space-wkp-and-its-norm",
+      "used_for": "Exact H² domains and weak derivatives of spatial products.",
+      "opened": true
+    },
+    {
+      "id": "def-symmetric-self-adjoint-and-essentially-self-adjoint",
+      "used_for": "Exact domain-and-action meaning of self-adjointness.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-class-operator",
+      "used_for": "Density operators and convergent Gibbs traces.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-a-trace-class-operator",
+      "used_for": "Ordinary trace with supplied-basis qualifications.",
+      "opened": true
+    },
+    {
+      "id": "def-trace-of-an-endomorphism",
+      "used_for": "Finite-dimensional trace pairing and zero-space trace.",
+      "opened": true
+    },
+    {
+      "id": "def-unbounded-integral-against-a-pvm",
+      "used_for": "Spectral first and second moment domains.",
+      "opened": true
+    },
+    {
+      "id": "lem-finite-rank-operators-are-compact",
+      "used_for": "Compactness before applying the nuclear trace-class criterion.",
+      "opened": true
+    },
+    {
+      "id": "lem-nuclear-series-characterizes-trace-norm",
+      "used_for": "Trace-class diagonal Gibbs operators and adjoint trace products.",
+      "opened": true
+    },
+    {
+      "id": "lem-unbounded-pvm-integral-is-well-defined-and-closed",
+      "used_for": "Diagonal energy operator and spectral-integral domain agreement.",
+      "opened": true
+    },
+    {
+      "id": "lem-weak-derivatives-are-polynomial-fourier-multipliers",
+      "used_for": "Identification of the physical Laplacian Fourier symbol.",
+      "opened": true
+    },
+    {
+      "id": "prop-trace-is-linear",
+      "used_for": "Finite-dimensional trace linearity.",
+      "opened": true
+    },
+    {
+      "id": "thm-bounded-borel-pvm-integral",
+      "used_for": "Bounded exponential and scalar spectral integral identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-cauchy-schwarz-in-an-inner-product-space",
+      "used_for": "Coordinate pairings in unbounded diagonal-domain proofs.",
+      "opened": true
+    },
+    {
+      "id": "thm-complex-spectral-theorem-for-normal-endomorphisms",
+      "used_for": "Finite energy and density eigenbases.",
+      "opened": true
+    },
+    {
+      "id": "thm-cyclicity-of-the-trace",
+      "used_for": "Bounded cyclicity in reduction and unitary trace calculations.",
+      "opened": true
+    },
+    {
+      "id": "thm-dominated-convergence",
+      "used_for": "Multiplier truncations and integrable spectral limits.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-addition-formula",
+      "used_for": "Gibbs energy shifts and two-level formulas.",
+      "opened": true
+    },
+    {
+      "id": "thm-exponential-is-strictly-increasing",
+      "used_for": "Strict two-level energy and entropy bounds.",
+      "opened": true
+    },
+    {
+      "id": "thm-extension-of-a-bounded-map-from-a-dense-subspace",
+      "used_for": "Completion of regrouping and slot maps.",
+      "opened": true
+    },
+    {
+      "id": "thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces",
+      "used_for": "Fourier weighted domain equals W²,² with equivalent norms.",
+      "opened": true
+    },
+    {
+      "id": "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+      "used_for": "Spatial product derivatives and one-body energy cross terms.",
+      "opened": true
+    },
+    {
+      "id": "thm-geometric-series",
+      "used_for": "Linearly spaced mode convergence example.",
+      "opened": true
+    },
+    {
+      "id": "thm-hilbert-schmidt-norm-is-basis-independent",
+      "used_for": "Basis independence of extended positive partition trace.",
+      "opened": true
+    },
+    {
+      "id": "thm-hilbert-space-fourier-expansion",
+      "used_for": "Basis completion and trace-product diagonal calculation.",
+      "opened": true
+    },
+    {
+      "id": "thm-kato-rellich",
+      "used_for": "Bounded external addition to the supplied Coulomb operator on its exact domain.",
+      "opened": true
+    },
+    {
+      "id": "thm-logarithm-derivative-and-integral",
+      "used_for": "Strict tangent inequality in the free-energy uniqueness proof.",
+      "opened": true
+    },
+    {
+      "id": "thm-monotone-convergence-for-the-integral",
+      "used_for": "Integration of density eigenexpansions.",
+      "opened": true
+    },
+    {
+      "id": "thm-natural-logarithm-laws",
+      "used_for": "Entropy, energy-shift and free-energy identities.",
+      "opened": true
+    },
+    {
+      "id": "thm-norm-limit-of-compact-operators-is-compact",
+      "used_for": "Compactness of summable diagonal and nuclear operator limits.",
+      "opened": true
+    },
+    {
+      "id": "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+      "used_for": "Occupation basis completeness and positive trace basis independence.",
+      "opened": true
+    },
+    {
+      "id": "thm-plancherel",
+      "used_for": "Unitary Fourier transport of the kinetic operator.",
+      "opened": true
+    },
+    {
+      "id": "thm-positive-square-root",
+      "used_for": "Positive partition operator square root under AC.",
+      "opened": true
+    },
+    {
+      "id": "thm-spectral-theorem-for-unbounded-self-adjoint-operators",
+      "used_for": "General assigned-observable and Gibbs-generator spectral PVMs.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-class-iff-product-of-two-hilbert-schmidt-operators",
+      "used_for": "Trace-class consequence of a finite positive partition trace.",
+      "opened": true
+    },
+    {
+      "id": "thm-trace-is-absolutely-convergent-and-basis-independent",
+      "used_for": "Ordinary trace, nuclear trace formulas and diagonal sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-zorn",
+      "used_for": "AC extension to a complete orthonormal basis.",
+      "opened": true
+    },
+    {
+      "id": "lem-nrqm-composites-hilbert-tensor-construction",
+      "used_for": "Draft supplier: completed tensor products, pairings and product bases.",
+      "opened": true
+    },
+    {
+      "id": "lem-nrqm-composites-bounded-tensor-maps",
+      "used_for": "Draft supplier: bounded slot construction, composition and adjoints.",
+      "opened": true
+    },
+    {
+      "id": "lem-nrqm-composites-permutation-sector-projections",
+      "used_for": "Draft supplier: canonical permutations and symmetric/sign projections.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-composites-finite-partial-trace-and-schmidt",
+      "used_for": "Draft supplier: finite partial trace characterization, positivity and trace preservation.",
+      "opened": true
+    },
+    {
+      "id": "lem-nrqm-composites-density-and-scalar-spectral-probability",
+      "used_for": "Draft supplier: density eigenexpansions and scalar spectral probability measures.",
+      "opened": true
+    },
+    {
+      "id": "lem-nrqm-composites-rank-one-operator-calculus",
+      "used_for": "Draft supplier: rank-one trace, adjoint and pairing identities.",
+      "opened": true
+    },
+    {
+      "id": "lem-nrqm-composites-nuclear-bounded-cyclicity",
+      "used_for": "Draft supplier: bounded trace pairing with density eigenexpansions.",
+      "opened": true
+    },
+    {
+      "id": "lem-nrqm-composites-euclidean-l2-product-unitary",
+      "used_for": "Draft supplier: scalar Euclidean tensor-to-product-space transport.",
+      "opened": true
+    },
+    {
+      "id": "lem-nrqm-kinematics-component-valued-wavefunction-identifications",
+      "used_for": "Draft supplier: finite component direct-sum and tensor identifications.",
+      "opened": true
+    },
+    {
+      "id": "lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma",
+      "used_for": "Draft supplier: arbitrary real diagonal self-adjoint operators and graph cores.",
+      "opened": true
+    },
+    {
+      "id": "def-nrqm-identical-particles-framework-species-sectors-and-preparations",
+      "used_for": "Draft supplier: species sectors, preparations and canonical zero extensions.",
+      "opened": true
+    },
+    {
+      "id": "def-nrqm-identical-particles-framework-orbital-occupation-model",
+      "used_for": "Draft supplier: finite-mode occupation observables and joint laws.",
+      "opened": true
+    },
+    {
+      "id": "def-nrqm-kinematics-framework-massive-spin-s-model",
+      "used_for": "Draft supplier: massive spin component space and one-particle model reading.",
+      "opened": true
+    },
+    {
+      "id": "def-nrqm-observables-framework-observable-and-outcome-law",
+      "used_for": "Draft supplier: assigned self-adjoint observables, units and spectral outcome laws.",
+      "opened": true
+    },
+    {
+      "id": "def-nrqm-autonomous-dynamics-framework-evolution",
+      "used_for": "Draft supplier: spectral unitary flow and density evolution.",
+      "opened": true
+    },
+    {
+      "id": "def-nrqm-framework-quantities-and-units",
+      "used_for": "Draft supplier: SI units, dimension rules and explicit ħ.",
+      "opened": true
+    },
+    {
+      "id": "def-nrqm-state-geometry-framework-state-space",
+      "used_for": "Draft supplier: density-operator state space and pure preparations.",
+      "opened": true
+    },
+    {
+      "id": "post-nrqm-framework-state-and-composition",
+      "used_for": "Draft supplier: adopted preparation and tensor-composition assumptions.",
+      "opened": true
+    },
+    {
+      "id": "post-nrqm-framework-observable-and-probability",
+      "used_for": "Draft supplier: adopted Born law with explicit AC and CC hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "post-nrqm-framework-autonomous-dynamics",
+      "used_for": "Draft supplier: adopted autonomous energy and unitary evolution with explicit AC and CC.",
+      "opened": true
+    },
+    {
+      "id": "post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle",
+      "used_for": "Draft supplier: massive-particle realization, bounded baseline and explicit choice hypotheses.",
+      "opened": true
+    },
+    {
+      "id": "post-nrqm-framework-identical-particles-and-spin",
+      "used_for": "Draft supplier: adopted statistics sectors and finite spin factors.",
+      "opened": true
+    },
+    {
+      "id": "post-nrqm-framework-preparation-and-apparatus",
+      "used_for": "Draft supplier: empirical identification, apparatus, sampling and uncertainty qualifications.",
+      "opened": true
+    },
+    {
+      "id": "pthm-nrqm-observables-preparation-moments",
+      "used_for": "Draft supplier: domain-qualified pure and mixed spectral moments.",
+      "opened": true
+    },
+    {
+      "id": "pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation",
+      "used_for": "Draft supplier: eigenray stationarity and conserved energy laws.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-identical-particles-occupation-number-basis",
+      "used_for": "Draft supplier: finite Slater and symmetric occupation bases.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-identical-particles-finite-mode-occupation-counts",
+      "used_for": "Draft supplier: sector dimensions, exclusion and zero-sector counts.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-finite-gibbs-free-energy-minimum",
+      "used_for": "Draft supplier: finite Gibbs data and free-energy lower bound; uniqueness is proved locally.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-slater-direct-and-exchange-calculation",
+      "used_for": "Draft supplier: normalized Slater vectors, complex-orbital exchange integrals and Coulomb positivity.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-permutation-restricted-self-adjointness",
+      "used_for": "Draft supplier: exact-domain permutation reduction; spin uses general clauses (a)–(d).",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-fixed-n-coulomb-self-adjointness",
+      "used_for": "Draft supplier: Coulomb relative bounds, exact H² domain and lower bound.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-bounded-fixed-n-operator",
+      "used_for": "Draft indirect supplier: checked its literal kinetic symbol for the Coulomb mass substitution.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction",
+      "used_for": "Draft supplier: Fock sectors, vacuum and self-adjoint direct sums.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-number-operator-domain",
+      "used_for": "Draft supplier: number operator self-adjoint domain and number eigenvalues.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-fixed-mode-number-law",
+      "used_for": "Draft supplier: supplied one-mode number basis.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace",
+      "used_for": "Draft supplier: geometric Gibbs trace, bosonic mean and finite higher moments.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-countable-mode-product-criterion",
+      "used_for": "Draft supplier: full bosonic Fock trace and summability criterion.",
+      "opened": true
+    },
+    {
+      "id": "thm-nrqm-fock-and-equilibrium-fermion-and-dilute-grand-canonical-formulas",
+      "used_for": "Draft supplier: fermionic weights, shifted product criteria and exact dilute remainders.",
+      "opened": true
+    }
+  ],
+  "concerns": [
+    {
+      "id": "def-nrqm-many-body-framework-one-body-reduced-operator",
+      "concern": "Definition (d) says the reduction 'does not determine the sector preparation ρ: many sector preparations have the same one-body reduction' without restricting N or the model. This is false for the admitted N=1 branch: (b) explicitly gives γρ=ρ, so the reduction determines every preparation uniquely. It also cannot be noninjective on a one-dimensional sector. The general possibility of nonunique reductions needs qualification.",
+      "severity": "would-be-fatal"
+    },
+    {
+      "id": "def-nrqm-many-body-framework-declared-fixed-n-model",
+      "concern": "Definition (a), reiterated in (d)(ii), says AC 'is assumed only in the Coulomb realization'. However (a) adopts P2, P4 and P5, whose opened formulations expressly assume AC, and (e) invokes the general observable spectral-PVM and evolution readings with that hypothesis. The local bounded spatial realization is correctly CC-only, but that does not remove the inherited AC premise of these physical interfaces. Distinguish the operator construction's choice cost from the adopted framework assumptions, or supply an explicitly restricted CC-only reading.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "pthm-nrqm-many-body-thermal-occupation-predictions",
+      "concern": "The first Remark says 'a continuum of radiation modes has divergent free partition function by the cited one-particle non-compactness argument'. No item or source locator identifies that argument, and the continuum one-particle space, measure and energy operator are not declared. The opened suppliers establish discrete countable-mode criteria, not this continuum assertion. Supply the exact noncompactness result and its hypotheses before making the additional claim.",
+      "severity": "gap-a-reader-closes"
+    },
+    {
+      "id": "ex-nrqm-many-body-finite-mode-noninteracting-thermal-ensemble",
+      "concern": "The two Example model specifications declare the spaces, statistics, N and h but never explicitly set the pair interaction W=0. Verification [L1] then invokes the non-interacting diagonalization theorem. The title conveys the intended choice, but the adopted fixed-N definition otherwise includes independent interaction data; state W=0 in the declared models.",
+      "severity": "presentation"
+    },
+    {
+      "id": "rem-nrqm-many-body-scope-and-empirical-status",
+      "concern": "The Burmistrov–Lunkin sources.references locator attributes the entropy-conservation remark to 'Section 1.1.1 printed page 13'. In the retrieved January 10, 2023 text it occurs in §1.1.3, printed page 14, immediately before §1.1.4; §1.1.1 supplies the Liouville equation instead. The underlying conservation claim is supported, but its locator is inaccurate. Checked against [the primary notes](https://home.itp.ac.ru/~burmi/HSE/Lectures-StatPhys-temp.pdf).",
+      "severity": "presentation"
+    }
+  ],
+  "alerts": [],
+  "seams_checked": [
+    {
+      "from": "qm-many-body-and-equilibrium-models",
+      "to": "qm-controlled-approximations",
+      "faithful": true,
+      "note": "Contextual reading-order edge: no controlled-approximation theorem is invoked in the assigned item arguments."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models",
+      "to": "qm-identical-particles-and-exclusion",
+      "faithful": true,
+      "note": "Compared sector definitions and occupation-basis/count statements with consumers; positive N, canonical slot translation and zero fermionic sectors are preserved."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models",
+      "to": "qm-math-composites",
+      "faithful": true,
+      "note": "Tensor, partial-trace and bounded cyclicity statements match their uses. One-body reduction remains finite-dimensional; spatial products use the supplied Euclidean unitary."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models",
+      "to": "qm-math-fock-and-equilibrium",
+      "faithful": true,
+      "note": "Finite Gibbs supplier is not credited with uniqueness; that equality case is proved locally. Coulomb normalization is explicitly corrected by parameter substitution, bounded external addition is local, and fixed-N traces are separated from full-Fock products."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models",
+      "to": "qm-massive-particle-kinematics",
+      "faithful": false,
+      "note": "Spaces, spin components and bounded baseline scope match, but the declared-model definition's 'AC only in Coulomb' accounting omits AC explicitly assumed by adopted P5."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models",
+      "to": "qm-observables-and-born-probabilities",
+      "faithful": false,
+      "note": "Outcome-law and moment uses preserve domains and integrability; the declared-model definition nevertheless claims AC is confined to Coulomb while adopting the general P2 spectral reading that assumes AC."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models",
+      "to": "qm-autonomous-dynamics",
+      "faithful": false,
+      "note": "Flow signs, density conjugation and stationarity uses match. The declared-model definition's exclusive Coulomb AC wording conflicts with the AC premise of adopted P4 and its general spectral flow."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models",
+      "to": "qm-framework-and-quantities",
+      "faithful": true,
+      "note": "Energy, action and coupling units match. Temperature and entropy units are explicitly introduced locally; parameter identifications retain P7 qualifications."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models",
+      "to": "qm-state-geometry",
+      "faithful": true,
+      "note": "Density and pure-state vocabulary matches; zero sectors are treated as admitting no preparation, rather than importing a trace-one state on the zero space."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models",
+      "to": "qm-math-oscillator",
+      "faithful": true,
+      "note": "The diagonal-adjoint supplier is used only for supplied countable bases, real diagonal energies and the exact squared-weight domain."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models-examples",
+      "to": "qm-observables-and-born-probabilities",
+      "faithful": true,
+      "note": "Finite bounded observables and their means are used within the supplier's hypotheses; probabilities and computed means are not presented as observed data."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models-examples",
+      "to": "qm-framework-and-quantities",
+      "faithful": true,
+      "note": "Bond coupling is an energy, tτ/ħ is dimensionless, β has inverse-energy units, and site occupation is dimensionless."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models-examples",
+      "to": "qm-identical-particles-and-exclusion",
+      "faithful": true,
+      "note": "The two-fermion three-mode and two-boson two-mode bases, dimensions and total occupations agree with the supplied occupation model."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models-examples",
+      "to": "qm-math-fock-and-equilibrium",
+      "faithful": true,
+      "note": "Dilute identities retain their Bose/Fermi domains, and product convergence examples retain positive energies and the bosonic chemical-potential condition."
+    },
+    {
+      "from": "qm-many-body-and-equilibrium-models-examples",
+      "to": "qm-autonomous-dynamics",
+      "faithful": true,
+      "note": "Two-site spectral phases and density evolution match the autonomous flow; nonproduction of the canonical preparation is a conditional exact model claim, with no empirical thermalization conclusion."
+    }
+  ]
+}

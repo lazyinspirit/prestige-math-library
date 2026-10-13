@@ -49,7 +49,7 @@ Assume the Axiom of Countable Choice and the Axiom of Choice
 ([[def-countable-choice]], [[def-axiom-of-choice]]). Let $\gamma\ge0$, $l\ge0$,
 and let $A_l$ be the radial operator of
 [[thm-nrqm-coulomb-transported-radial-endpoint-realization]] with form domain
-$V_l$. Fix $k_{\min}>0$ and let $K:=\{k\in\mathbb C:\operatorname{Re}k\ge k_{\min},\ \operatorname{Im}k\ge0\}$.
+$V_l$. Let $\mathcal D:=\{k\in\mathbb C:\operatorname{Re}k>0,\ \operatorname{Im}k\ge0\}$ be the parameter domain for the Jost solution. For each $k_{\min}>0$ also write $K:=\{k\in\mathcal D:\operatorname{Re}k\ge k_{\min}\}$ for its restriction.
 Then:
 
 (a) *regular solution.* With $c_0:=1$, $c_{-1}:=0$ and
@@ -58,7 +58,7 @@ the series $\varphi_l(k,r):=r^{l+1}\sum_{n\ge0}c_nr^n$ converges for every $r>0$
 
 (b) *Jost-type solution.* Put $a:=\gamma/(2k)$, $\theta(r):=kr+a\log r$, $w(r):=e^{i\theta(r)}$, $b:=a^2+l(l+1)+ia$ and consider the integral equation
 $$v(r)=1+\int_r^\infty\frac{b}{s^2}\,w(s)^2\Bigl(\int_r^sw(y)^{-2}dy\Bigr)v(s)\,ds .$$
-For every $k\in K$ with $k\ne0$ the equation has exactly one bounded solution $v(\cdot;k)$ on $[r_0,\infty)$ for some $r_0>0$ depending on $k$, and $v(r)=1+O(1/r)$, $v'(r)=O(1/r)$; the functions $f_l(k,r):=w(r)v(r)$ and $v$ are continuous on $K$, holomorphic in $k$ for $\operatorname{Im}k>0$, satisfy the radial equation $-\partial_r^2f_l+\bigl(l(l+1)/r^2-\gamma/r\bigr)f_l=k^2f_l$ exactly, and obey the asymptotics
+For every $k\in\mathcal D$ the equation has exactly one bounded solution $v(\cdot;k)$ on $[r_0,\infty)$ for some $r_0>0$ depending on $k$; extend $f_l$ uniquely by its regular initial data to every $r>0$ and put $v=f_l/w$ there. Constructions with different admissible tails agree by bounded-solution and initial-value uniqueness, so these functions are independent of the tail and of $k_{\min}$. One has $v(r)=1+O(1/r)$, $v'(r)=O(1/r)$; the functions $f_l(k,r):=w(r)v(r)$ and $v$ are jointly continuous on $\mathcal D\times(0,\infty)$, holomorphic in $k$ on $\{\operatorname{Re}k>0,\operatorname{Im}k>0\}$, satisfy the radial equation $-\partial_r^2f_l+\bigl(l(l+1)/r^2-\gamma/r\bigr)f_l=k^2f_l$ exactly, and obey the asymptotics
 $$f_l=e^{i(kr+a\log r)}(1+O(1/r)),\qquad f_l'=e^{i(kr+a\log r)}[ik+O(1/r)]\qquad(r\to\infty);$$
 
 (c) *Wronskians.* For real $k>0$ one has $W(\overline{f_l},f_l)=2ik$ and $W_l(k):=W(\varphi_l,f_l)\ne0$; consequently every solution of the radial equation on $(0,\infty)$ is $Af_l+B\overline{f_l}$ with $A,B\in\mathbb C$, and $\varphi_l$ is a nonzero complex multiple combination of $f_l,\overline{f_l}$;
@@ -71,7 +71,7 @@ asserted or computed.
 
 ## Facts & Assumptions
 
-**Given:** $\gamma\ge0$, $l\ge0$, $k_{\min}>0$, $K$ as above, and for $k\in K$ the quantities $a,\theta,w,b$; the radial equation $L_lu=k^2u$ with $L_lu:=-u''+(l(l+1)/r^2-\gamma/r)u$.
+**Given:** $\gamma\ge0$, $l\ge0$, $k_{\min}>0$, $K$ as above, and for $k\in\mathcal D$ the quantities $a,\theta,w,b$; the radial equation $L_lu=k^2u$ with $L_lu:=-u''+(l(l+1)/r^2-\gamma/r)u$.
 
 [F1] On any compact interval $[a,b]\subset(0,\infty)$ the radial equation has a two-dimensional space of $C^2$ solutions, and for real $k$ complex conjugation preserves the solution space because both the potential and $k^2$ are real ([[thm-nrqm-intervals-regular-ivp-parameter-series]], [[def-continuity-real]]).
 
@@ -105,7 +105,7 @@ asserted or computed.
 
 5.2 [Second integration gives the amplitude coefficient] Now $h''=v''/r^2-4v'/r^3+6v/r^4=O(r^{-4})$. Put $j=(h/Q)'$. Then $j=O(r^{-3})$, $j'=O(r^{-4})$ and $(j/Q)'=O(r^{-4})$. A second integration by parts gives $\int_r^\infty e^{2i\theta}j=-e^{2i\theta(r)}j(r)/Q(r)-\int_r^\infty e^{2i\theta}(j/Q)'=O(r^{-3})$. Therefore $I(r)=-e^{2i\theta(r)}v(r)/(2i\theta'(r)r^2)+O(r^{-3})$, $v'=bv/(2i\theta'r^2)+O(r^{-3})=b/(2ik r^2)+O(r^{-3})$, and integration to the known limit $v(\infty)=1$ gives $v=1-b/(2ik r)+O(r^{-2})$. Since $-b/(2ik)=-a/(2k)+i[a^2+l(l+1)]/(2k)$ and $|w|=1$, the coefficient is $|f|^2=|v|^2=1-a/(kr)+O(r^{-2})$. These estimates are uniform when real $k$ is restricted to a compact subset of $(0,\infty)$, because all preceding constants and the lower bound for $\theta'$ can be chosen uniformly. [step 4.2, step 2.1, step 3.1, F3, algebra]
 
-6.1 [Real-energy Wronskians] Any real $k>0$ belongs to $\mathcal D$ and to a set $K$ after choosing $k_{\min}\le k$. By the asymptotic formulas, $W(\overline f,f)=2i(k+a/r)|v|^2+2i\operatorname{Im}(\overline vv')=2ik+O(r^{-1})$. It is constant by [F2], hence equals $2ik$. The pair $f,\overline f$ is therefore a basis of the two-dimensional solution space. If $W(\varphi_l,f)=0$, their initial data are proportional at any positive radius, hence IVP uniqueness implies $f=c\varphi_l$; neither solution is identically zero, by their normalizations. Since $\varphi_l$ is real, proportionality forces $W(\overline f,f)=0$, a contradiction. Thus $W_l(k)\ne0$, every solution is $Af+B\overline f$, and the nonzero $\varphi_l$ has such a representation with coefficients not both zero. [step 1.1, step 3.1, step 5.1, F1, F2, algebra]
+6.1 [Real-energy Wronskians] Any real $k>0$ belongs to the public domain $\mathcal D$ of the single patched family $f_l$. By the asymptotic formulas, $W(\overline f,f)=2i(k+a/r)|v|^2+2i\operatorname{Im}(\overline vv')=2ik+O(r^{-1})$. It is constant by [F2], hence equals $2ik$. The pair $f,\overline f$ is therefore a basis of the two-dimensional solution space. If $W(\varphi_l,f)=0$, their initial data are proportional at any positive radius, hence IVP uniqueness implies $f=c\varphi_l$; neither solution is identically zero, by their normalizations. Since $\varphi_l$ is real, proportionality forces $W(\overline f,f)=0$, a contradiction. Thus $W_l(k)\ne0$, every solution is $Af+B\overline f$, and the nonzero $\varphi_l$ has such a representation with coefficients not both zero. [step 1.1, step 3.1, step 5.1, F1, F2, algebra]
 
 7.1 [The mixed term has a bounded integral] For fixed $R>r_0$, integration by parts gives $\int_R^L f^2=[e^{2i\theta}v^2/Q]_R^L-\int_R^L e^{2i\theta}(v^2/Q)'$. The endpoint term is uniformly bounded and $(v^2/Q)'=2vv'/Q+v^2(Q^{-1})'=O(r^{-2})$ is integrable, hence the whole integral is bounded independently of $L$. Expanding $|Af+B\overline f|^2=(|A|^2+|B|^2)|f|^2+2\operatorname{Re}(A\overline B f^2)$ and integrating step 5.2 yields $\int_R^L|Af+B\overline f|^2=(|A|^2+|B|^2)[L-R-(a/k)\log(L/R)]+O(1)$, with $a/k=\gamma/(2k^2)$. If at least one coefficient is nonzero the integral diverges, since its linear term dominates the logarithm; if both vanish it is zero. Every positive-energy eigenfunction in $D(A_l)$ is an $L^2$ classical solution by [F6], hence step 6.1 and this divergence exclude such an eigenfunction. [step 6.1, step 5.2, F3, F6, algebra]
 

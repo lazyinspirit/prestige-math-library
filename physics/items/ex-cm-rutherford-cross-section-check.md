@@ -34,7 +34,7 @@ dependency_roles:
 proof_strategy: direct
 provenance:
   statement: ai-generated
-  proof: ai-generated
+  proof: ai-altered
 generation:
   role: example
 sources:
@@ -78,4 +78,4 @@ because $\theta_{\rm def}(1)/2=\arctan\frac12$ and $\csc^2(\arctan\frac12)=1+\co
 
 2.1 Inverse check: $b(\theta_{\rm def}(1))=\frac12\cot(\arctan\frac12)=\frac12\cdot2=1$ by [L2]. [step 1.1, L2, algebra]
 
-3.1 Density: $\frac{\theta_{\rm def}(1)}{2}=\arctan\frac12$, so by [L2] $\csc^2(\arctan\frac12)=1+\cot^2(\arctan\frac12)=1+4=5$; hence $\csc^4=25$ and, by [L3] with $\kappa=4E$, $\mathrm d\sigma/\mathrm d\Omega=(\frac14)^2\cdot25=\frac{25}{16}$. [step 1.1, L2, L3, algebra] ∎
+3.1 Density: $\frac{\theta_{\rm def}(1)}{2}=\arctan\frac12$, so by [L2] $\csc^2(\arctan\frac12)=1+\cot^2(\arctan\frac12)=1+4=5$; hence $\csc^4=25$ and, by [L3] with $\kappa=E=1$, $\mathrm d\sigma/\mathrm d\Omega=(\frac14)^2\cdot25=\frac{25}{16}$. [step 1.1, L2, L3, algebra] ∎

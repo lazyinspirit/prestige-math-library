@@ -27,17 +27,21 @@ examples: []
 This page treats energy in the classical gravitational framework of
 [[gr-einstein-and-matter]]: what can be said locally about the energy content of
 matter as measured by an observer congruence, and under which additional
-hypotheses a conserved global energy exists. Seven items are mathematics —
+hypotheses and a stated normalization a conserved global Killing charge has
+an energy reading. Six items are mathematics —
 complete conditional deductions inside a time-oriented smooth Lorentzian
-four-manifold, with a chosen orientation on the domain for flux statements — and four are physics: one physical reading of the measured
-fields, one definition of the Killing energy, one model-conditional theorem and
-one scope note. No item reports a measurement, and none asserts that the model
+four-manifold, with a chosen orientation on the domain for flux statements — and five are physics: one physical reading of the measured
+fields, one definition of the timelike Killing charge (with its normalized
+energy reading), one model-conditional theorem and
+two scope notes. No item reports a measurement, and none asserts that the model
 or its postulates describe nature.
 
 **The observer split.** For a smooth symmetric covariant $2$-tensor field $T$
 and a smooth observer congruence $n$, the measured energy density
 $\mu=T_{ab}n^an^b$, the energy-momentum current $J=-T(\cdot,n)$, the energy
-flux $\Phi=J-\mu n$ and the spatial stress $S=h^*h^*T$ are defined in
+flux $\Phi=J-\mu n$ and the spatial stress with covariant form
+$S_p(v,w)=T_p(h_p(v),h_p(w))$ for $v,w\in T_pM$, where
+$h_p(v)=v+g_p(n_p,v)n_p$, are defined in
 [[def-gr-observer-energy-momentum-current]]; the orthogonal decomposition
 $T^{ab}=\mu n^an^b+n^a\Phi^b+n^b\Phi^a+S^{ab}$, its uniqueness and the
 component formulas in a $g$-orthonormal frame are proved in
@@ -64,12 +68,15 @@ everywhere timelike future-directed Killing field $\xi$, then with
 $X=\sqrt{-g(\xi,\xi)}$ and $n=\xi/X$ the redshift-weighted current $XJ$ is
 divergence-free and equals minus the Killing current $T(\cdot,\xi)$
 ([[lem-gr-killing-congruence-kinematics-and-energy-current]]). The Killing
-energy $Q_\xi(\Sigma)=-\Phi_{T(\cdot,\xi)}(\Sigma)$ of a finite three-chain is
-defined in [[def-gr-killing-energy-charge]], and
+charge $Q_\xi(\Sigma)=-\Phi_{T(\cdot,\xi)}(\Sigma)$ of a finite three-chain is
+defined in [[def-gr-killing-energy-charge]]; it has energy units in joules
+when $\xi$ is length-normalized under the framework's length-coordinate
+convention. The theorem
 [[pthm-gr-local-energy-balance]] assembles the physical statement: the local
 balance holds in every smooth model of the adopted field law, and in a
-stationary model the Killing energy assigned to homologous slices is conserved
-up to the side flux. The mathematical conservation implication needs
+stationary model the Killing charge (the Killing energy under that
+normalization) assigned to homologous slices is conserved up to the side flux.
+The mathematical conservation implication needs
 Killing symmetry and $\nabla^aT_{ab}=0$; the field law is one source of this
 divergence condition.
 

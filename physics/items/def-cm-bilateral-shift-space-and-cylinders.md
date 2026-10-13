@@ -55,4 +55,4 @@ where $p\le q$ are integers and $w=(w_p,\dots,w_q)\in\{0,1\}^{\{p,\dots,q\}}$ is
 
 - No measure, probability or invariant measure on $X$ is introduced by this definition. The example used in this collection is topological; statements about invariant measures for the one-sided fair-coin shift are separate published results and are not consumed here.
 
-- The cylinders are the natural basic sets for $X$: a cylinder prescribes finitely many coordinates and constrains no others, and the metric $d$ makes sequences close exactly when they agree on a long initial block around the origin, so cylinders are the balls of $d$ up to a factor of two ([[lem-cm-bilateral-shift-metric-and-sequential-compactness]]).
+- Cylinders form a basis for the metric topology. More precisely, for $m\ge0$ the centered cylinder $[s]_{-m,m}$ satisfies $B(s,2^{-m})\subseteq[s]_{-m,m}\subseteq\overline B(s,2^{1-m})$. An arbitrary cylinder $[w]_{p,q}$ contains $B(s,2^{-\max\{|p|,|q|\}})$ about each of its points $s$, but need not have a comparable outer radius ([[lem-cm-bilateral-shift-metric-and-sequential-compactness]], clause 2 and proof step 2.1).

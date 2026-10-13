@@ -76,9 +76,7 @@ sources:
         Section 12.1 Theorem 12.4 printed page 249 (PDF page 261): existence of
         the wave operators for V in L^2(R^3) by Cook's criterion"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.1
-        printed pages 257-263 (PDF pages 265-271): the scattering operator as a
-        limit of the interacting and free time evolutions"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 12.1, printed pages 257-261 (PDF pages 265-269)"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 verification:
   precheck: pass

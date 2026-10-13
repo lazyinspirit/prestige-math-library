@@ -61,7 +61,10 @@ adopts a reduced angle-action Hamiltonian on a torus phase domain. The pulsed
 horseshoe result is a full one-label force model on $\mathbb R^3$; its axial
 pulse dynamics is embedded by explicitly adopted transverse inverted-oscillator
 forces. The conclusions about equilibria, tori, horseshoes and recurrence are
-properties of these declared models. The energy and variational theorems, the
+properties of these declared models. Continuous-time periodic-orbit,
+limit-cycle and homoclinic vocabulary is used for autonomous models; periodic
+motions of a driven model are treated by its stroboscopic map. The energy and
+variational theorems, the
 pendulum check and the stable-without-attraction harmonic counterexample use
 declared mechanical chart data: an open $\Omega\subseteq\mathbb R^n$, a $C^2$
 positive-definite kinetic metric $M$, and a $C^2$ potential $U$. The growth and
@@ -74,11 +77,11 @@ no measurement, calibration, sampling or uncertainty budget.
 **2. Stability is not attraction, and one notion is not another.**
 [[pthm-cm16-energy-stability-and-instability]] establishes Lyapunov stability
 of a strict minimum, linear instability from a negative Hessian eigenvalue,
-nonlinear instability from a strictly concave potential, and the absence of
-asymptotic stability under exact energy conservation. The degenerate case (a
-zero Hessian eigenvalue) and the mixed saddle case (a negative eigenvalue
-together with oscillatory directions) are deliberately left open: only the
-linear statement is made there. The harmonic-oscillator counterexample shows
+nonlinear instability from a negative definite potential Hessian, and the absence of
+asymptotic stability under exact energy conservation. A zero Hessian eigenvalue alone gives no stability conclusion; strict
+minima remain covered even when their Hessians are degenerate. For a mixed
+saddle (a negative eigenvalue together with oscillatory directions), only the
+linear-instability statement is made. The harmonic-oscillator counterexample shows
 that the page's stability vocabulary cannot be collapsed.
 
 **3. Linearisation has separate local and finite-time conclusions.**
@@ -90,7 +93,7 @@ the linearized flow and, under the hyperbolic spectral hypotheses, local
 exponential asymptotic stability or nonlinear instability; it gives no centre
 case or global conclusion. A finite-time growth rate is attached to a state,
 tangent vector and interval ([[def-cm16-finite-time-growth-rates]]); positive
-growth is not a definition of chaos. At an equilibrium, smooth chart changes
+growth is not a definition of chaos. At an equilibrium where the field is $C^1$ nearby, smooth chart changes
 conjugate derivative matrices and preserve their spectrum, while norms and
 finite-time growth bounds can depend on the chart.
 

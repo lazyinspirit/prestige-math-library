@@ -60,13 +60,13 @@ verification:
 
 ## Example
 
-Adopt P1, P2 and P4 in the readings of the declared driven model ([[def-nrqm-driven-dynamics-framework-driven-model]] clause (a)) and the **circular two-level drive model** of its clause (f) with $\mathbb C^{2}$, the basis $(e_{\uparrow},e_{\downarrow})$ and the Pauli matrices of [[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clause (e). All angular frequencies below are declared model parameters read in $\mathrm{s^{-1}}$ ([[def-nrqm-framework-quantities-and-units]]); no value is attributed to a laboratory system. Three declared parameter sets are used:
+Adopt P1, P2 and P4 in the readings of the declared driven model ([[def-nrqm-driven-dynamics-framework-driven-model]] clause (a)) and the **circular two-level drive model** of its clause (f) with $\mathbb C^{2}$, the basis $(e_{\uparrow},e_{\downarrow})$ and the Pauli matrices of [[prop-nrqm-orbital-and-spin-finite-spin-matrices]] clause (e). All angular frequencies below are declared model parameters read in $\mathrm{s^{-1}}$ ([[def-nrqm-framework-quantities-and-units]]); no value is attributed to a laboratory system. For the numerical substitutions below, frequency symbols denote their numerical values in $\mathrm{s^{-1}}$ and $t,s$ denote numerical time values in seconds; thus a displayed elapsed time $t-s=\pi/2$ means a physical duration $(\pi/2)\,\mathrm s$, and the displayed sine arguments are dimensionless. Define $\sigma_{\pm}:=(\sigma_x\pm i\sigma_y)/2$. Three declared parameter sets are used:
 
 1. **Resonant set.** $\omega_{0}=\omega=1$, $\Omega_{1}=2$, so $\Delta=0$ and $b=2$;
 2. **Detuned set.** $\omega_{0}=1+\sqrt3$, $\omega=1$, $\Omega_{1}=1$, so $\Delta=\sqrt3$ and $b=2$;
 3. **Undriven set.** $\Omega_{1}=0$ and arbitrary $\omega_{0},\omega$.
 
-In each set let $U_{\mathrm c}(t,s)$ be the model's propagator and let $p_{\downarrow}(t)=\langle P_{\downarrow}U_{\mathrm c}(t,s)e_{\uparrow},U_{\mathrm c}(t,s)e_{\uparrow}\rangle$ be the down-population of the initially up state. Then:
+In each set prescribe the displayed circular energy family for all real physical times. For $s,t\in\mathbb R$, define $U_{\mathrm c}(t,s)$ by the model's unique propagator on any compact interval $J$ containing $s,t$. These restrictions agree: on a larger compact interval containing two choices, uniqueness of the norm Dyson integral equation identifies both restrictions. Thus this definition extends the compact-interval model consistently to all real evaluation times. Let $U_{\mathrm c}(t,s)$ be that propagator and let $p_{\downarrow}(t)=\langle P_{\downarrow}U_{\mathrm c}(t,s)e_{\uparrow},U_{\mathrm c}(t,s)e_{\uparrow}\rangle$ be the down-population of the initially up state. Then:
 
 (a) for the resonant set, $p_{\downarrow}(t)=\sin^{2}(t-s)$, so $p_{\downarrow}=1/2$ at the **quarter-inversion time** $t-s=\pi/4$, $p_{\downarrow}=1$ at the **pi-pulse** time $t-s=\pi/2$, and $p_{\downarrow}=0$ again at $t-s=\pi$;
 
@@ -88,7 +88,7 @@ In each set let $U_{\mathrm c}(t,s)$ be the model's propagator and let $p_{\down
 
 **Given:** the data of the Example and [L1]-[L2].
 
-1.1 [Resonant set] By [L1] with $\Delta=0$ one has $p_{\downarrow}=\sin^{2}(\Omega_{1}(t-s)/2)=\sin^{2}(t-s)$ because $\Omega_{1}=2$ by [L2]; at $t-s=\pi/4$ this is $\sin^{2}(\pi/4)=1/2$; at $t-s=\pi/2$ it is $\sin^{2}(\pi/2)=1$; and at $t-s=\pi$ it is $\sin^{2}(\pi)=0$, using $\sin(\pi/4)=\sqrt2/2$ and $\sin(\pi/2)=1$. This is clause (a). [L1, L2, algebra]
+1.1 [Resonant set] For every finite displayed evaluation choose a compact $J$ containing $s,t$; the all-real circular family is bounded and norm-continuous on $J$, so [L1] applies. Independence of $J$ follows from the norm Dyson uniqueness included in the model: restrictions from a larger interval solve the same initial integral equation on the smaller one. By [L1] with $\Delta=0$ one has $p_{\downarrow}=\sin^{2}(\Omega_{1}(t-s)/2)=\sin^{2}(t-s)$ because $\Omega_{1}=2$ by [L2]; at $t-s=\pi/4$ this is $\sin^{2}(\pi/4)=1/2$; at $t-s=\pi/2$ it is $\sin^{2}(\pi/2)=1$; and at $t-s=\pi$ it is $\sin^{2}(\pi)=0$, using $\sin(\pi/4)=\sqrt2/2$ and $\sin(\pi/2)=1$. This is clause (a). [L1, L2, algebra]
 
 1.2 [Detuned set] By [L1] and [L2], $p_{\downarrow}=\frac14\sin^{2}(t-s)$; at $t-s=\pi/2$ this is $\frac14\sin^{2}(\pi/2)=1/4$, and since $\sin^{2}$ has period $\pi$ the population is $\pi$-periodic in $t-s$. This is clause (b). [L1, L2, algebra]
 
@@ -97,4 +97,4 @@ In each set let $U_{\mathrm c}(t,s)$ be the model's propagator and let $p_{\down
 ## Remarks
 
 - **Why the checks are exact.** Each population in clauses (a)-(c) is the square of a sine at a rational multiple of $\pi$, so the values $1/2$, $1$, $0$ and $1/4$ are exact rational outputs of the model, not numerical approximations or measurements.
-- **The example is parameter-free physics.** The three sets are declared dimensionless ratios; no frequency, energy or time of any laboratory species is claimed, and no source-reported measured value is used.
+- **Declared parameters, no measurements.** The three sets are declared frequency parameters with the numerical-unit convention above; no frequency, energy or time of any laboratory species is claimed, and no source-reported measured value is used.

@@ -123,7 +123,9 @@ $|\dot x_\varepsilon(t)|\le C\sqrt\varepsilon c$.
 Suppose also that hypotheses (H2)-(H3) of
 [[thm-gr-weak-field-scaled-trajectory-limit]] hold on a compact convex
 $K'\subseteq U_L$ containing both scaled trajectory ranges, with
-$K_2=\sup_{K'}|D^2\psi|<\infty$.
+$K_2=\sup_{X\in K'}\|D^2\psi(X)\|_{\mathrm{op}}<\infty$,
+using the Euclidean vector norm and induced Hessian operator norm fixed in
+[[thm-gr-weak-field-scaled-trajectory-limit]].
 
 Then the following are conditional consequences of the adopted postulates,
 the independent coupled Einstein-dust input, the comparison dictionary and
@@ -148,7 +150,8 @@ $$\Bigl|\ddot x^i_\varepsilon(t)+\partial_i\Phi(x_\varepsilon(t))\Bigr|\le\frac{
 $X_\varepsilon(S)=x_\varepsilon(LS/(\sqrt\varepsilon c))/L$,
 $W_\varepsilon(S)=\dot x_\varepsilon(LS/(\sqrt\varepsilon c))/(\sqrt\varepsilon c)$,
 and $(X_*,W_*)$ the comparison motion of (H2), let
-$D(S)=|X_\varepsilon(S)-X_*(S)|+|W_\varepsilon(S)-W_*(S)|$.
+$D(S)=\|X_\varepsilon(S)-X_*(S)\|_2+\|W_\varepsilon(S)-W_*(S)\|_2$
+using the same Euclidean norm convention.
 Then
 
 $$D(S)\le\bigl(D(0)+C_3\varepsilon S_*\bigr)e^{(1+K_2)S_*}\qquad(0\le S\le S_*).$$
@@ -170,97 +173,31 @@ empirical premises.
 
 ## Facts & Assumptions
 
-**Given:** The adopted framework postulates; stationary weak-field data over
-$\Omega$ with spatial base $U$, an Einstein family, an independent
-nonnegative dust input satisfying clause (c) of
-[[thm-gr-weak-field-einstein-stress-hierarchy]], a Newtonian comparison model
-with the adopted potential and coupling identifications, and a test-body
-worldline satisfying the stated trajectory hypotheses.
+**Given:** The adopted framework postulates; stationary weak-field data over $\Omega$ with spatial base $U$, an Einstein family, an independent nonnegative dust input satisfying clause (c) of [[thm-gr-weak-field-einstein-stress-hierarchy]], a Newtonian comparison model with the adopted potential and coupling identifications, and a test-body worldline satisfying the stated trajectory hypotheses.
 
-[A1] The direct-equation field law is $G_{ab}+\Lambda g_{ab}=\kappa T_{ab}$;
-for these data the restricted model has $\Lambda=0$ and the Einstein-family
-condition $G_{ab}=\kappa T_{ab}$ is assumed ([[post-gr-einstein-field-law]],
-[[def-gr-stationary-weak-field-data]] clause (c),
-[[def-gr-si-unit-and-coordinate-conventions]] clause (a)). This is a model
-input, not a derived or empirical statement.
+[A1] The direct-equation field law is $G_{ab}+\Lambda g_{ab}=\kappa T_{ab}$; for these data the restricted model has $\Lambda=0$ and the Einstein-family condition $G_{ab}=\kappa T_{ab}$ is assumed ([[post-gr-einstein-field-law]], [[def-gr-stationary-weak-field-data]] clause (c), [[def-gr-si-unit-and-coordinate-conventions]] clause (a)). This is a model input, not a derived or empirical statement.
 
-[A2] An ideal freely falling massive test body has a future timelike geodesic
-worldline, $g(U,U)=-c^2$, with proper time as an affine parameter; its
-initial event and four-velocity determine the worldline
-([[post-gr-ideal-clocks-and-free-fall]] clause (ii),
-[[pthm-gr-free-fall-worldline-is-determined-by-initial-data]],
-[[def-gr-timelike-worldline-and-proper-time]],
-[[def-gr-metric-selected-connection]],
-[[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]).
+[A2] An ideal freely falling massive test body has a future timelike geodesic worldline, $g(U,U)=-c^2$, with proper time as an affine parameter; its initial event and four-velocity determine the worldline ([[post-gr-ideal-clocks-and-free-fall]] clause (ii), [[pthm-gr-free-fall-worldline-is-determined-by-initial-data]], [[def-gr-timelike-worldline-and-proper-time]], [[def-gr-metric-selected-connection]], [[thm-gr-nondegenerate-levi-civita-and-tensor-derivative]]).
 
-[A3] The matter input is a smooth nonnegative rest-energy density
-$\mathcal E_\varepsilon$ and a smooth future unit timelike velocity field
-$u_\varepsilon$ with $T_{ab}=\mathcal E_\varepsilon u_a u_b$, obeying the
-continuity and geodesic equations; $\mu_\varepsilon=\mathcal E_\varepsilon/c^2$
-is its independent rest-mass density. The quantitative source and tilt bounds
-are exactly those in clause (c) of
-[[thm-gr-weak-field-einstein-stress-hierarchy]]
-([[def-gr-dust-matter-model]],
-[[prop-gr-dust-and-perfect-fluid-conservation-equations]]).
+[A3] The matter input is a smooth nonnegative rest-energy density $\mathcal E_\varepsilon$ and a smooth future unit timelike velocity field $u_\varepsilon$ with $T_{ab}=\mathcal E_\varepsilon u_a u_b$, obeying the continuity and geodesic equations; $\mu_\varepsilon=\mathcal E_\varepsilon/c^2$ is its independent rest-mass density. The quantitative source and tilt bounds are exactly those in clause (c) of [[thm-gr-weak-field-einstein-stress-hierarchy]] ([[def-gr-dust-matter-model]], [[prop-gr-dust-and-perfect-fluid-conservation-equations]]).
 
-[L1] The Einstein tensor and stress components satisfy the hierarchy of
-[[thm-gr-weak-field-einstein-stress-hierarchy]] clauses (b)-(c), including
-$|\Delta\Phi-4\pi G_N\mu_\varepsilon|\le C_2\varepsilon^2c^2/L^2$,
-$|\rho_\varepsilon-\mu_\varepsilon|\le C_d\varepsilon^2c^2/(G_NL^2)$ and
-its scaled source estimate. The Christoffel bounds are those of
-[[lem-gr-weak-field-christoffel-bounds]], and the acceleration estimate is
-[[lem-gr-weak-field-geodesic-acceleration]] clause (b).
+[L1] The Einstein tensor and stress components satisfy the hierarchy of [[thm-gr-weak-field-einstein-stress-hierarchy]] clauses (b)-(c), including $|\Delta\Phi-4\pi G_N\mu_\varepsilon|\le C_2\varepsilon^2c^2/L^2$, $|\rho_\varepsilon-\mu_\varepsilon|\le C_d\varepsilon^2c^2/(G_NL^2)$ and its scaled source estimate. The Christoffel bounds are those of [[lem-gr-weak-field-christoffel-bounds]], and the acceleration estimate is [[lem-gr-weak-field-geodesic-acceleration]] clause (b).
 
-[L2] The comparison dictionary identifies spatial region, time, potential and
-coupling as in [[def-gr-newtonian-comparison-model-and-identification]]
-clause (b); it does not identify the Newtonian source density $\rho_N$ with
-$\rho_\varepsilon$ or $\mu_\varepsilon$. The Newtonian model satisfies
-$\Delta\Phi_N=4\pi G_{\mathrm{cmp}}\rho_N$ exactly by its clause (a).
+[L2] The comparison dictionary identifies spatial region, time, potential and coupling as in [[def-gr-newtonian-comparison-model-and-identification]] clause (b); it does not identify the Newtonian source density $\rho_N$ with $\rho_\varepsilon$ or $\mu_\varepsilon$. The Newtonian model satisfies $\Delta\Phi_N=4\pi G_{\mathrm{cmp}}\rho_N$ exactly by its clause (a).
 
-[L3] Under (H1)-(H3), with a compact convex $K'\subseteq U_L$ containing the
-scaled trajectories and comparison motion, the scaled comparison theorem gives
-$D(S)\le(D(0)+C_3\varepsilon S_*)e^{(1+K_2)S_*}$; identical scaled data give
-$O(\varepsilon)$ error on $[0,S_*]$
-([[thm-gr-weak-field-scaled-trajectory-limit]]).
+[L3] Under (H1)-(H3), with a compact convex $K'\subseteq U_L$ containing the scaled trajectories and comparison motion, the scaled comparison theorem gives $D(S)\le(D(0)+C_3\varepsilon S_*)e^{(1+K_2)S_*}$; identical scaled data give $O(\varepsilon)$ error on $[0,S_*]$ ([[thm-gr-weak-field-scaled-trajectory-limit]]).
 
 ## Proof
 
-**Proof technique:** apply the conditional mathematical estimates to the
-assumed Einstein-dust family, use the exact adopted Newtonian dictionary, and
-then apply the test-body and scaled-trajectory results.
+**Proof technique:** apply the conditional mathematical estimates to the assumed Einstein-dust family, use the exact adopted Newtonian dictionary, and then apply the test-body and scaled-trajectory results.
 
-1.1 (Field and source correspondence.) By [A1] and [A3], the given Einstein family and its independently specified dust input [A1, A3, L1, L2, given, algebra]
-satisfy the restricted field-law and dust hypotheses of
-[[thm-gr-weak-field-einstein-stress-hierarchy]]. Apply [L1]. Its first stress
-estimate gives the displayed component hierarchy, and its dust conclusion
-gives the error between $\Delta\Phi$ and $4\pi G_N\mu_\varepsilon$. By [L2],
-$\Delta\Phi_N=4\pi G_N\rho_N$ and $\Phi_N=\Phi$ exactly, so subtraction and
-division by $4\pi G_N>0$ yield
-$|\rho_N-\mu_\varepsilon|\le C_2\varepsilon^2c^2/(4\pi G_NL^2)$. The
-coordinate density satisfies the separate estimate in [L1]; neither density
-identification is exact. This proves (a). [A1, A3, L1, L2, given, algebra]
+1.1 (Field and source correspondence.) By [A1] and [A3], the given Einstein family and its independently specified dust input satisfy the restricted field-law and dust hypotheses of [[thm-gr-weak-field-einstein-stress-hierarchy]]. Apply [L1]. Its first stress estimate gives the displayed component hierarchy, and its dust conclusion gives the error between $\Delta\Phi$ and $4\pi G_N\mu_\varepsilon$. By [L2], $\Delta\Phi_N=4\pi G_N\rho_N$ and $\Phi_N=\Phi$ exactly, so subtraction and division by $4\pi G_N>0$ yield $|\rho_N-\mu_\varepsilon|\le C_2\varepsilon^2c^2/(4\pi G_NL^2)$. The coordinate density satisfies the separate estimate in [L1]; neither density identification is exact. This proves (a). [A1, A3, L1, L2, given, algebra]
 
-1.2 (Free fall to the acceleration bound.) By [A2], the assigned worldline [A2, L1, given, algebra]
-is the model's future timelike geodesic with the stated proper-time and initial
-data conditions. Its spatial path lies in $K$, has coordinate time $t=x^0/c$
-and meets the speed bound in the Statement. The mathematical coordinate-time
-acceleration estimate [[lem-gr-weak-field-geodesic-acceleration]] therefore
-applies and gives clause (b). [A2, L1, given, algebra]
+1.2 (Free fall to the acceleration bound.) By [A2], the assigned worldline is the model's future timelike geodesic with the stated proper-time and initial data conditions. Its spatial path lies in $K$, has coordinate time $t=x^0/c$ and meets the speed bound in the Statement. The mathematical coordinate-time acceleration estimate [[lem-gr-weak-field-geodesic-acceleration]] therefore applies and gives clause (b). [A2, L1, given, algebra]
 
-2.1 (Trajectory correspondence.) The path in step 1.2 satisfies (H1) of [step 1.2, L3, given, algebra]
-[[thm-gr-weak-field-scaled-trajectory-limit]]. The assumed comparison solution,
-compact convex $K'\subseteq U_L$ and bound $K_2$ satisfy (H2)-(H3). Apply [L3]
-choosing $C_3$ to be a common upper bound for the acceleration constant and the scaled theorem's Euclidean error constant, to obtain the displayed Gronwall estimate, uniform convergence for convergent
-scaled initial data, the $O(\varepsilon)$ rate for identical data, and the
-coordinate-time relation $t=LS/(\sqrt\varepsilon c)$. This proves (c). [step 1.2, L3, given, algebra]
+2.1 (Trajectory correspondence.) The path in step 1.2 satisfies (H1) of [[thm-gr-weak-field-scaled-trajectory-limit]]. The assumed comparison solution, compact convex $K'\subseteq U_L$ and bound $K_2$ satisfy (H2)-(H3). Apply [L3] choosing $C_3$ to be a common upper bound for the acceleration constant and the scaled theorem's Euclidean error constant, to obtain the displayed Gronwall estimate, uniform convergence for convergent scaled initial data, the $O(\varepsilon)$ rate for identical data, and the coordinate-time relation $t=LS/(\sqrt\varepsilon c)$. This proves (c). [step 1.2, L3, given, algebra]
 
-3.1 (Status and conclusion.) Steps 1.1, 1.2 and 2.1 establish (a)-(c) as [step 1.1, step 1.2, step 2.1, given]
-conditional consequences of the adopted postulates, the explicitly assumed
-dust and Einstein family, the comparison dictionary and the cited mathematics.
-No observation, apparatus, calibration or measured constant is used; any
-empirical confrontation would require separately qualified empirical
-premises. The input-family and matter hypotheses remain assumptions, not
-conclusions. [step 1.1, step 1.2, step 2.1, given] ∎
+3.1 (Status and conclusion.) Steps 1.1, 1.2 and 2.1 establish (a)-(c) as conditional consequences of the adopted postulates, the explicitly assumed dust and Einstein family, the comparison dictionary and the cited mathematics. No observation, apparatus, calibration or measured constant is used; any empirical confrontation would require separately qualified empirical premises. The input-family and matter hypotheses remain assumptions, not conclusions. [step 1.1, step 1.2, step 2.1, given] ∎
 
 ## Remarks
 

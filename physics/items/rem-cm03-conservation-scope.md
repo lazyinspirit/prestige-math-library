@@ -27,7 +27,7 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "A scope and status audit of the balance page: which objects are defined, which statements are conditional deductions from the force and interaction posts, which hypotheses each conservation statement needs, and which claims are deliberately not made; the frame dependence of the conserved quantities, the open-system boundary, the normalization of a potential, the local-versus-global potential distinction and the empirical status of model parameters. Bookkeeping and scope only; it asserts no law, no measurement and no conservation beyond the items it cites."
+physical_scope: "A scope and status audit of the balance page: which objects are defined, which statements are conditional deductions from the force and interaction posts, which hypotheses the stated conservation conclusions use, and which claims are deliberately not made; the frame dependence of the conserved quantities, the open-system boundary, the normalization of a potential, the local-versus-global potential distinction and the empirical status of model parameters. Bookkeeping and scope only; it asserts no law, no measurement and no conservation beyond the items it cites."
 sources:
   references:
     - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.3, chapter pages 8-10 (PDF pages 12-14): the caution that the conservation laws are first integrals of the equations of motion and introduce nothing new dynamically, and the central-force condition for the angular-momentum statement"
@@ -84,16 +84,21 @@ model with a time-dependent potential and a residual force (the balance, the
 integrated work form and the normalization ambiguity), and the two
 counterexamples recorded below.
 
-**Deliberately not claimed on this page.** No conservation law holds without
-its stated hypotheses: momentum conservation needs the antisymmetric pair
-presentation and the vanishing of the total external force; angular-momentum
-conservation needs a fixed reference point and the vanishing of the total
-torque, with centrality only one sufficient condition (the companion
-counterexample exhibits non-central pair forces whose torque sum cancels
-identically); mechanical-energy conservation needs a global potential
-presentation with a time-independent representative and no residual forces.
-No theorem of this page asserts that any interaction of nature has the
-required structure. No constraint reactions, no impulsive forces, no
+**Deliberately not claimed on this page.** The conservation conclusions stated
+here are conditional: momentum is conserved under the antisymmetric pair
+presentation and vanishing total external force; angular momentum is conserved
+about a fixed reference point when the total torque vanishes, with centrality
+only one sufficient condition (the companion counterexample exhibits
+non-central pair forces whose torque sum cancels identically). For mechanical
+energy, the exact rate is the right-hand side of clause 1 of
+[[pthm-cm03-energy-balance]], so it is constant along a motion whenever that
+combined rate vanishes there. A time-independent potential representative
+with residual forces vanishing along the motion is a sufficient case; the
+stronger condition that the residual-force maps vanish throughout their state
+domains makes the whole model a global potential model. Neither condition is
+claimed as necessary for every motion on which the energy happens to be
+constant. No theorem of this page asserts that any interaction of nature has
+the required structure. No constraint reactions, no impulsive forces, no
 variable-mass models and no measurements appear.
 
 ## Hypotheses and counterexamples
@@ -107,7 +112,7 @@ variable-mass models and no measurements appear.
 
 - **Closed is not exact.** The potential branch requires a global potential;
   a merely closed field on a non-star-shaped domain need not have one, and
-  the companion counterexample exhibits this on the complement of a line,
+  the companion counterexample exhibits this on an annular domain excluding an axis,
   with nonzero circulation around a loop. On every star-shaped subdomain a
   local potential and a local mechanical energy exist
   ([[def-cm03-potential-and-mechanical-energy]] clause (e)).
@@ -136,8 +141,10 @@ variable-mass models and no measurements appear.
 - **Open systems.** The pair structure, antisymmetry and centrality are
   properties of the declared labels; for a proper subsystem the forces to
   omitted labels enter as external forces that need satisfy no such
-  property, and the subsystem's momentum, angular momentum and energy are
-  exchanged with the environment. This continues the boundary recorded in
+  property. The subsystem's momentum, angular momentum and energy may be
+  exchanged with the environment; zero net force, zero total torque about a
+  fixed reference point, or zero mechanical-energy rate can give the
+  respective conservation conclusions under the cited hypotheses. This continues the boundary recorded in
   [[rem-cm02-open-system-warning]]; the balance theorems are statements about
   the specified system, not about an arbitrary collection of bodies.
 

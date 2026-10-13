@@ -55,17 +55,23 @@ $\mathbb T^3_{2\pi}$ and $\int f\,d\mu=(2\pi)^{-3}\int_{[0,2\pi)^3}f\circ q\,d\l
 for bounded measurable $f$ ([[thm-tonelli-theorem-for-sigma-finite-product-spaces]]).
 
 **(b) Test functions and continuous classes.** For $N\ge1$ let
-$C^\infty(\mathbb T^3_{2\pi};\mathbb R^N)$ be the set of compositions
-$u\circ q$ of smooth maps $u:\mathbb R^3\to\mathbb R^N$ that are $2\pi$-periodic
-in each variable; these are the **smooth test functions** (real-valued when
-$N=1$). For $m\ge0$ let $C^m(\mathbb T^3_{2\pi};\mathbb R^N)$ be the set of
-$u\circ q$ with $u\in C^m(\mathbb R^3;\mathbb R^N)$ $2\pi$-periodic in each
-variable ([[def-c-r-and-smooth-maps-between-smooth-manifolds]]), with
-$$\|u\|_{C^m}:=\max_{|\alpha|\le m}\ \sup_{x\in\mathbb T^3_{2\pi}}\bigl|(D^\alpha u)(x)\bigr| ,$$
-where $D^\alpha$ is the multi-index derivative of
-[[def-ck-and-multi-index-notation-in-several-variables]] applied to any
-periodic representative; the displayed expression is independent of the
-representative.
+$C^\infty(\mathbb T^3_{2\pi};\mathbb R^N)$ be the set of maps
+$u:\mathbb T^3_{2\pi}\to\mathbb R^N$ whose pullbacks
+$\widetilde u:=u\circ q:\mathbb R^3\to\mathbb R^N$ are smooth;
+these are the **smooth test functions** (real-valued when $N=1$).
+Equivalently every smooth map $\widetilde u:\mathbb R^3\to\mathbb R^N$
+that is $2\pi$-periodic in each coordinate descends to the unique map
+$u([x])=\widetilde u(x)$, since periodicity makes this value independent of
+$x$ in its equivalence class. For an integer $m\ge0$, define
+$C^m(\mathbb T^3_{2\pi};\mathbb R^N)$ similarly by requiring
+$\widetilde u\in C^m(\mathbb R^3;\mathbb R^N)$
+([[def-c-r-and-smooth-maps-between-smooth-manifolds]]), and define
+$D^\alpha u([x]):=D^\alpha\widetilde u(x)$ for $|\alpha|\le m$.
+Derivatives of a periodic $C^m$ map are periodic, so these values are
+well-defined, with
+$$\|u\|_{C^m}:=\max_{|\alpha|\le m}\ \sup_{x\in\mathbb T^3_{2\pi}}|(D^\alpha u)(x)|,$$
+where the multi-index derivative is that of
+[[def-ck-and-multi-index-notation-in-several-variables]].
 
 **(c) The Hilbert space $L^2$.** For $N\ge1$ let
 $L^2(\mathbb T^3_{2\pi};\mathbb R^N)$ be the quotient of the set of measurable
@@ -104,7 +110,15 @@ are proved in [[lem-gr-periodic-fourier-differentiation-and-norm-equivalence]].
 
 **(e) Conventions.** $O\subseteq\mathbb R^m$ open, $I\subseteq\mathbb R$ an
 interval and maps $F:I\times\mathbb T^3_{2\pi}\times O\to\mathbb R^{m'}$ are
-called smooth when their representatives $F(t,q(x),u)=G(t,x,u)$ have
-$G\in C^\infty$. Throughout this page the torus is always this
+called smooth when the representative $G(t,x,u):=F(t,q(x),u)$ is
+locally the restriction of a smooth Euclidean map: for every
+$(t,x,u)\in I\times\mathbb R^3\times O$ there are an open neighborhood
+$V\subseteq\mathbb R^{4+m}$ and $\widetilde G\in C^\infty(V;\mathbb R^{m'})$
+with $\widetilde G=G$ on $V\cap(I\times\mathbb R^3\times O)$.
+For open $I$ this is the ordinary Euclidean definition. For nonopen $I$
+it is the local extension convention at included endpoints, also admitting
+a singleton interval. On a nondegenerate interval endpoint time derivatives
+are the limits of interior derivatives; on a singleton no time derivative
+is specified without choosing an extension. Throughout this page the torus is always this
 $2\pi$-periodic one; a statement "for every $x$" means for every point of
 $\mathbb T^3_{2\pi}$, and "a.e." means $\mu$-a.e.

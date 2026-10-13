@@ -29,7 +29,7 @@ sources:
   references:
     - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 3.1, Eqs. (3.1)-(3.4), chapter pages 1-2 (PDF pages 33-34): the one-dimensional particle with Lagrangian L = m xdot^2/2 - U(x,t), its equation m xddot = -dU/dx, and the effectively one-dimensional class m_ef qddot = -dU_ef/dq with effective mass and effective potential, which need not coincide with the genuine kinetic and potential energies"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
-    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 3, Sections 3.1-3.2, printed pages 52-55 (PDF pages 55-58): expansion about a minimum of the potential, the quadratic Lagrangian (T_ij eta-dot_i eta-dot_j - V_ij eta_i eta_j)/2 and the linear equations of motion about the minimum"
+    - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 3, introduction and Sections 3.1-3.2, printed pages 52-55 (PDF pages 55-58): expansion about a minimum of the potential, the quadratic Lagrangian (T_ij eta-dot_i eta-dot_j - V_ij eta_i eta_j)/2 and the linear equations of motion about the minimum"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
 verification:
   precheck: n/a
@@ -75,9 +75,17 @@ system on the open set $I_{0}\times Q\times\mathbb R\subseteq\mathbb R^{3}$
 with right-hand side
 $$G_{F}(t,x,v):=\Bigl(v,\ \frac{F(t,x,v)}{m}\Bigr),$$
 read as a system of [[def-first-order-ode-initial-value-problem-and-solution]];
-its state variable is $z=(x,v)$. A curve $x:J\to Q$ is a motion of the model
-if and only if $t\mapsto(x(t),x'(t))$ is a solution of $z'=G_{F}(t,z)$; the
-argument is the one of clause (c) of [[def-cm02-newtonian-flow]] read in one
+its state variable is $z=(x,v)$. For an interval $J\subseteq I_0$ with
+nonempty interior, a **phase solution** on $J$ means a differentiable curve
+$z:J\to Q\times\mathbb R$ satisfying $z'(t)=G_F(t,z(t))$ for every $t\in J$,
+with domain-relative derivatives at included endpoints. Equivalently, for
+any $t_0\in J$ it is a solution in the cited IVP sense with datum
+$(t_0,z(t_0))$. For a $C^2$ curve $x:J\to Q$, being a motion is equivalent
+to $t\mapsto(x(t),x'(t))$ being a phase solution: the first component is
+$x'=v$ and the second is $x''=F(t,x,x')/m$. Conversely a phase solution
+$(x,v)$ has $x'=v$ and $v'=F(t,x,v)/m$; continuity of $F$ makes $v'$ continuous,
+so $x$ is $C^2$ and is a motion. This is the argument of clause (c) of
+[[def-cm02-newtonian-flow]] read in one
 coordinate. Here $x$ is the **position** or **displacement** coordinate and
 $v$ the **velocity** coordinate; both are read in the fixed inertial frame in
 which the model is declared. The phase system inherits the standing
@@ -88,7 +96,8 @@ its domain.
 
 **(d) Potential presentation, residual forces and energy.** The model
 **presents its force law through a potential** when it declares a function
-$U:Q\to\mathbb R$ of class $C^{2}$ ([[def-derivative]]) of dimension
+$U:Q\to\mathbb R$ of class $C^{2}$ in the sense of clause (a) of
+[[def-cm03-potential-and-mechanical-energy]] of dimension
 $\mu\ell^{2}\tau^{-2}$, read in joules, and a **residual force**
 $d:I_{0}\times Q\times\mathbb R\to\mathbb R$ of the standing regularity of
 (a), with

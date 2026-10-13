@@ -29,7 +29,7 @@ requires:
 
 This page is the Hamilton–Jacobi and integrability companion of
 [[cm13-symplectic-geometry-and-canonical-methods]]. It adds no physical
-assumption to the force branch: every item is a conditional statement
+assumption to the force branch: its definitions stipulate data and its theorems prove conditional statements
 about a declared hyperregular potential presentation of
 [[def-cm07-action-and-mechanical-lagrangian]] with the momentum charts and
 two-form of [[def-cm13-two-form]].
@@ -45,7 +45,9 @@ $p=S_{q}$ and the Jacobi constants $\beta=S_{\alpha}$.
 
 [[pthm-cm14-hamilton-jacobi-characteristics]] proves the method: the
 characteristic curves of a complete integral solve the chart's Hamilton
-equations, are the model's motions on the potential branch, carry the
+equations, give Cartesian model motions when $d\equiv0$ and
+generalized-coordinate solutions of the substituted Lagrange equations
+under the same zero-residual assumption, carry the
 constants $\beta=S_{\alpha}$, admit a local converse solving
 $\beta=S_{\alpha}$ for the configuration, and make $(\beta,\alpha)$ local
 canonical coordinates of the presentation's two-form. The theorem is
@@ -63,12 +65,14 @@ transitive commuting action with a full period lattice, under the Axiom
 of Countable Choice consumed through the cited lattice lemma, and
 [[pthm-cm14-action-angle]] produces period-one action-angle coordinates
 $(I,\theta)$ with $\omega=\sum_{i}d\theta_{i}\wedge dI_{i}$, the
-reduction $H=h(I)$, the linear motion $\dot I=0$,
-$\dot\theta=\partial h/\partial I$ on the torus, and the radian
+reduction $H=h(I)$, the linear Hamiltonian motion $\dot I=0$,
+$\dot\theta=\partial h/\partial I$ on the torus (Cartesian model motions
+when $d\equiv0$; in generalized coordinates, solutions of the substituted
+Lagrange equations under the same assumption), and the radian
 rescaling of the sources. [[pthm-cm14-adiabatic-invariance]] then gives
 the order-$\varepsilon$ drift bound for the action of a slowly varying
-one-frequency family, conditional on a uniform parameter-dependent
-action-angle chart with nonvanishing frequency and on the trapping of the
+one-frequency family, conditional on a uniform fixed canonical chart for the parameter-dependent
+Hamiltonian with $C^2$ data on open extension domains and nonvanishing frequency and on the trapping of the
 solution; no exact invariance is claimed.
 [[rem-cm14-scope-of-hamilton-jacobi-and-integrability]] records the scope:
 locality and caustics, the separate involution and independence

@@ -7,7 +7,7 @@ title: "Position and momentum operators on Euclidean L2"
 status: draft
 origin: pipeline
 dependency_level: 0
-deps: [def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, lem-weak-derivatives-are-unique-almost-everywhere, def-complex-lp-and-euclidean-test-function-conventions, def-l-p-space-as-a-quotient-by-null-functions, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-hilbert-space, def-countable-choice]
+deps: [def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, lem-weak-derivatives-are-unique-almost-everywhere, def-complex-lp-and-euclidean-test-function-conventions, def-l-p-space-as-a-quotient-by-null-functions, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-hilbert-space, def-countable-choice, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn]
 dependency_roles:
   def-sobolev-space-wkp-and-its-norm: mathematical-premise
   def-weak-derivative-of-a-locally-integrable-function: mathematical-premise
@@ -17,6 +17,7 @@ dependency_roles:
   lem-l-two-with-the-integral-pairing-is-a-hilbert-space: mathematical-premise
   def-hilbert-space: mathematical-premise
   def-countable-choice: mathematical-premise
+  cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -64,7 +65,15 @@ Both $Q_j$ and $P_j$ are densely defined $\mathbb C$-linear operators in
 $L^2(\mathbb R^d;\mathbb C)$: for $Q_j$ the compactly supported smooth
 classes lie in the domain because $x_j$ is bounded there, and for $P_j$ they
 lie in the domain because their classical derivatives are weak derivatives in
-$L^2$ ([[def-sobolev-space-wkp-and-its-norm]]). For a class
+$L^2$ ([[def-sobolev-space-wkp-and-its-norm]]).
+
+For density, the classes of $C_c^\infty(\mathbb R^d;\mathbb C)$ are dense in
+$W^{0,2}(\mathbb R^d;\mathbb C)=L^2(\mathbb R^d;\mathbb C)$ by
+[[cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn]] and
+[[def-sobolev-space-wkp-and-its-norm]]. Since these classes lie in each domain
+as above, both operator domains are dense.
+
+For a class
 $f\in C_c^\infty(\mathbb R^d)$ one has $Q_jf=x_jf$ and
 $P_jf=-i\hbar\,\partial_jf$ pointwise. The self-adjointness of these operators
 and their Fourier representation are proved in

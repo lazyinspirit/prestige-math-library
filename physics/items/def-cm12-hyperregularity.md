@@ -62,11 +62,15 @@ $$v:I_{0}\times Q\times\mathbb R^{3N}\longrightarrow\mathbb R^{3N},\qquad L_{v}\
 
 is defined on the whole momentum phase chart $I_{0}\times Q\times\mathbb R^{3N}$
 and is of class $C^{1}$. In that case $v$ is the **inverse Legendre branch**
-of the presentation on the Cartesian chart. Hyperregularity of a chart is
-exactly hyperregularity of its fibre-full Lagrangian in the sense of
+of the presentation on the Cartesian chart. For $Q\ne\varnothing$,
+hyperregularity of this chart is exactly hyperregularity of its fibre-full
+Lagrangian in the sense of
 [[def-cm-legendre-map-in-a-time-dependent-chart]], read through the
 identification of the fibre derivative with the momentum of
-[[def-cm12-cotangent-momentum]].
+[[def-cm12-cotangent-momentum]]. If $Q=\varnothing$, the fibre condition
+is vacuous and the inverse assignment is the unique empty $C^{1}$ map;
+this is an empty-domain convention, not an instance of that supplier's
+fibre-full chart, whose base must be nonempty.
 
 **(b) Generalized-coordinate chart.** Let $X:\Omega\to Q$ be a
 generalized-coordinate map with substituted Lagrangian $\widetilde L$ and
@@ -84,12 +88,14 @@ covectors with velocities is the Euclidean pairing of
 **(c) Status.** The item defines the hyperregularity condition and the branch
 objects for the two chart types of the model. It asserts no branch existence,
 no relation between regularity [[def-cm12-regularity]] and hyperregularity, no
-equation of motion and no empirical value. Whether the model's mechanical
-presentations are hyperregular is a conditional statement of this page (the
-global Legendre theorem for the mechanical branch), and a presentation that is
-regular at every state but whose fibre momentum map is not surjective shows
-that the condition is not automatic; the companion page's example
-$\mathcal L(v)=e^{v}$ witnesses this separation.
+equation of motion and no empirical value. The global Legendre theorem for
+the mechanical branch on this page establishes hyperregularity for every
+admitted Cartesian and generalized-coordinate presentation. In the broader
+class of fibre-full $C^{2}$ Lagrangian charts of
+[[def-cm-legendre-map-in-a-time-dependent-chart]], regularity alone does not
+imply hyperregularity: the companion page's example $\mathcal L(v)=e^{v}$
+has a nonsurjective fibre momentum map. That example is outside the model's
+mechanical class and witnesses the separation only in this broader class.
 
 ## Remarks
 
@@ -97,17 +103,19 @@ $\mathcal L(v)=e^{v}$ witnesses this separation.
   map must be **bijective** for every $(t,q)$ (surjectivity and injectivity on
   each momentum fibre), and the inverse assignment must be defined on the
   whole phase domain and be $C^{1}$ there. Injectivity alone gives no
-  description of which momenta occur, and a pointwise inverse does not by
-  itself extend continuously, let alone smoothly, across the fibre.
+  description of which momenta occur. Fibrewise bijectivity determines a
+  unique inverse assignment; its joint $C^{1}$ regularity on the whole
+  phase domain is a further requirement of the definition.
 
-- **The branch is part of the declared data for the Hamiltonian.** The next
+- **The inverse branch is attached to the declared chart.** The next
   definition of this page defines the Hamiltonian of the presentation from the
   inverse Legendre branch introduced here; consequently each Hamiltonian
   statement names the chart on which hyperregularity and the branch are taken,
-  and different charts of the same model may require different branches or
-  fail to have one. The mechanical presentations of the framework satisfy the
-  condition on the Cartesian chart and on every generalized-coordinate chart
-  of the model, as proved later on this page.
+  and on a fixed hyperregular chart the inverse is unique by fibre
+  bijectivity. Different charts express the inverse in their own coordinates.
+  The later global Legendre theorem on this page proves its existence for
+  every admitted mechanical presentation; that conclusion is not an
+  existence assertion of the present definition.
 
 - **Source caveat.** The cited treatments invert the velocity-momentum
   relation on the branch where it is invertible and do not distinguish the

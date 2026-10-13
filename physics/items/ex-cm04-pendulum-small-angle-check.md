@@ -1,21 +1,17 @@
 ---
 id: ex-cm04-pendulum-small-angle-check
 kind: example
-title: "The ideal pendulum as an effective one-dimensional model: strict
-  minimum, stability, the small-angle harmonic model and the finite-time error
-  bound with its numbers"
+title: "The pendulum angle chart: stability, linearized equation, finite-time bound and quadratic-energy check"
 status: draft
 origin: session
 domain: physics
-dependency_level: 16
+dependency_level: 13
 deps:
   - def-cm04-one-dimensional-models-and-equilibria
-  - def-cm04-phase-plane-and-energy-level-sets
-  - pthm-cm04-conservative-motion-and-energy
-  - pthm-cm04-equilibrium-stability-at-a-strict-minimum
-  - post-cm04-harmonic-model
   - prop-cm-pendulum-small-angle-linearization-bound
+  - thm-sine-cosine-zero-sets-and-fundamental-period
   - thm-sine-and-cosine-derivatives
+  - cor-differentiable-implies-continuous
   - thm-quarter-turn-values-and-shift-formulas
   - thm-sine-cosine-signs-monotonicity-and-ranges
   - cor-mean-value-theorem
@@ -36,12 +32,10 @@ deps:
   - prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium
 dependency_roles:
   def-cm04-one-dimensional-models-and-equilibria: formulation-prerequisite
-  def-cm04-phase-plane-and-energy-level-sets: formulation-prerequisite
-  pthm-cm04-conservative-motion-and-energy: physical-result
-  pthm-cm04-equilibrium-stability-at-a-strict-minimum: physical-result
-  post-cm04-harmonic-model: physical-assumption
   prop-cm-pendulum-small-angle-linearization-bound: mathematical-premise
+  thm-sine-cosine-zero-sets-and-fundamental-period: mathematical-premise
   thm-sine-and-cosine-derivatives: mathematical-premise
+  cor-differentiable-implies-continuous: mathematical-premise
   thm-quarter-turn-values-and-shift-formulas: mathematical-premise
   thm-sine-cosine-signs-monotonicity-and-ranges: mathematical-premise
   cor-mean-value-theorem: mathematical-premise
@@ -64,20 +58,19 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "A worked check of the effective one-dimensional pendulum model
-  m l^2 theta-ddot = -m g l sin(theta) adopted from the recorded source: the
-  potential presentation with U=-m g l cos(theta), the equilibria, the strict
-  minimum at theta=0 and the Lyapunov stability of the hanging rest point, the
-  linearised harmonic model with frequency sqrt(g/l), the finite-time
-  small-angle error bound with explicit constants at g=l=1, and the failure of
-  conservation of the harmonic energy along the exact motion. The item asserts
-  no measured value, no period formula for finite amplitudes and no derivation
-  of the effective equation from the constrained system."
+physical_scope: "A worked check of the adopted ideal pendulum angle-chart equation
+  m l^2 theta-ddot = -m g l sin(theta): its scalar potential and strict
+  minimum, Lyapunov stability from the mathematical chart theorem, the
+  linearized angular equation with frequency sqrt(g/l), the finite-time
+  small-angle error bound at g=l=1, and the failure of the quadratic energy
+  of the linearized angular equation to be conserved along exact motions. The
+  item asserts no measured value, no period formula for finite amplitudes and
+  no derivation of the effective equation from the constrained system."
 sources:
   references:
     - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics
         (title page last edited September 1, 2026), Section 1.2, Eq. (1.18),
-        chapter page 5 (PDF page 9): the point pendulum equation m R theta-ddot
+        chapter page 6 (PDF page 10): the point pendulum equation m R theta-ddot
         = -m g sin(theta); Section 3.1, Eqs. (3.1)-(3.6), chapter pages 1-2 (PDF
         pages 33-34): the effectively one-dimensional system with effective mass
         and effective potential; Section 3.2, Eqs. (3.10)-(3.18), chapter pages
@@ -85,7 +78,7 @@ sources:
         effective spring constant and the frequency (kappa_ef/m_ef)^{1/2}"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014
-        course text), Chapter 3, Section 3.1, printed page 52 (PDF page 55):
+        course text), Chapter 3, introduction, printed page 52 (PDF page 55):
         expansion of the potential about its minimum yields the linearised
         equations of motion about a stable equilibrium"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac3\
@@ -96,53 +89,77 @@ verification:
 
 ## Example
 
-Adopt the **ideal planar pendulum in the angle coordinate** as an effective scalar mechanical chart model. Its scalar equation is the constant-metric chart equation of [[def-cm-mechanical-vector-field-and-energy-in-a-chart]], with
+Adopt the **ideal planar pendulum angle-chart equation** as an effective
+physical model, using the mathematical constant-metric chart of
+[[def-cm-mechanical-vector-field-and-energy-in-a-chart]]. This angular chart
+model is not an instance of the one-dimensional translational model class of
+[[def-cm04-one-dimensional-models-and-equilibria]]:
+$\theta$ is a dimensionless angle and its generalized inertia has dimension
+mass times length squared. The chart data are
 configuration domain $\mathbb R$, coordinate $\theta$ (the angle from the
 downward vertical, in radians), effective mass parameter
 $$m_{\mathrm{ef}}:=m\,l^{2}>0,\qquad\text{force law}\qquad F(\theta):=-m\,g\,l\,\sin\theta,$$
 and constants $m,l,g>0$ of dimensions mass, length and length per time
-squared ([[def-cm01-units]]). Its equation of motion is
+squared ([[def-cm01-units]]). The force $F$ is a generalized torque. Its
+equation of motion is
 $$m\,l^{2}\,\theta''=-m\,g\,l\,\sin\theta,\qquad\text{equivalently}\qquad \theta''=-\frac{g}{l}\sin\theta,$$
-the recorded source's point-pendulum equation (Eq. (1.18) there) read as an effective one-dimensional system. Here the coordinate is a dimensionless angle, $m_{\mathrm{ef}}=ml^2$ is an effective kinetic coefficient of dimension $\mu\ell^2$, and $F$ is a generalized torque of dimension $\mu\ell^2\tau^{-2}$; the calculation does not use a translational position coordinate or a mass coefficient in kilograms. The stability and linearization calculations use its autonomous scalar equation as the constant-metric mathematical chart system with $M=m_{\mathrm{ef}}$. All phase norms mean the Euclidean norm of the numerical pair $(\theta,(1\,\mathrm s)\theta\prime)$, so stability is measured in a fixed unit-normalized phase chart; a fixed positive rescaling of the second coordinate preserves Lyapunov stability. The claims checked below are:
+the recorded source's point-pendulum equation (Eq. (1.18) there) expressed
+with the effective inertia $m_{\mathrm{ef}}=ml^2$ and generalized torque
+$F=-mgl\sin\theta$. The potential $U=-mgl\cos\theta$ is an energy-valued
+scalar function of the dimensionless angle. The stability and linearization
+calculations use the autonomous scalar equation as a mathematical chart
+system with constant coefficient $M=m_{\mathrm{ef}}$. All phase norms mean
+the Euclidean norm of the numerical pair $(\theta,(1\,\mathrm s)\theta')$;
+the normalized time variable used in the finite-time estimate is
+$s=t_{\rm phys}/(1\,\mathrm s)$. The claims checked below are:
 
-1. the model is conservative with potential $U(\theta)=-mgl\cos\theta$, and
-   $\theta=0$ is a strict local minimum of $U$;
+1. the generalized torque is $-U'(\theta)$ for
+   $U(\theta)=-mgl\cos\theta$, and $\theta=0$ is a strict local minimum;
 2. the hanging rest point $(\theta,\theta')=(0,0)$ is Lyapunov stable, and
-   the linearised chart equation is $m_{\mathrm{ef}}\theta''+mgl\theta=0$, an oscillator-type equation with frequency $\omega=\sqrt{g/l}$;
+   the linearised angular equation is
+   $m_{\mathrm{ef}}\theta''+mgl\theta=0$ with frequency $\omega=\sqrt{g/l}$;
 3. at $g=1\,\mathrm{m/s^2}$, $l=1\,\mathrm m$, use $s=t_{\mathrm{phys}}/(1\,\mathrm s)$ and $z=(\theta,d\theta/ds)$. For every initial phase vector $z_0$ with $\|z_0\|_2=\delta=1/100$, radius $r=1/2$ and normalized horizon $T=1$, write $t$ for the numerical time $s$ in the bound. Then the difference between the exact motion and the harmonic motion with the same
    datum obeys
    $$\lVert z(t)-y(t)\rVert_{2}\le\frac{t\,e^{3t}}{12\cdot10^{4}}\qquad(0\le t\le1),\qquad\lVert z(1)-y(1)\rVert_{2}\le\frac{e^{3}}{12\cdot10^{4}} \approx1.67\cdot10^{-4},$$
    the source-supported bound of
    [[prop-cm-pendulum-small-angle-linearization-bound]];
-4. the pendulum model is not harmonic: the harmonic energy
-   $\tfrac12m_{\mathrm{ef}}\theta'^{2}+\tfrac12mgl\theta^{2}$ is not
-   conserved along exact motions, with
+4. the quadratic energy of the linearised angular equation,
+   $E_{\rm quad}:=\tfrac12m_{\mathrm{ef}}\theta'^{2}+\tfrac12mgl\theta^{2}$,
+   is not conserved along exact motions, with
    $$\frac{d}{dt}\Bigl[\tfrac12m_{\mathrm{ef}}\theta'^{2} +\tfrac12mgl\theta^{2}\Bigr]=mgl\,\theta'\,(\theta-\sin\theta),$$
-   which is positive at the phase point $(\theta,\theta')=(\pi/2,1)$.
+   which is positive at the phase point $(\theta,\theta')=(\pi/2,1\,\mathrm{s^{-1}})$.
 
 ## Verification
 
-**Proof technique:** direct; verify the potential presentation and the
-strict minimum, apply the stability and linearisation clauses of the
-stability theorem to the declared model, transport the source-supported
-small-angle bound with its numbers, and compute the derivative of the
-harmonic energy along an exact motion.
+**Proof technique:** direct; verify the angular potential and strict minimum,
+apply the mathematical chart stability and linearisation results, transport
+the source-supported small-angle bound with its numbers, and differentiate
+the quadratic energy of the linearised angular equation along an exact motion.
 
 **Given:** The effective pendulum model with $m_{\mathrm{ef}}=ml^{2}$,
 $F=-mgl\sin\theta$, potential $U=-mgl\cos\theta$; the constants
 $m,l,g>0$; the phase point $(\pi/2,1)$ for the last claim.
 
-[L1] Applicable chart theory ([[def-cm-mechanical-vector-field-and-energy-in-a-chart]], [[lem-cm-energy-conservation-for-the-mechanical-system]], [[thm-cm-energy-stability-of-a-strict-minimum]], [[prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium]]): with the constant positive kinetic metric $M=ml^2$ and $U=-mgl\cos\theta$, the chart equation is $M\theta''=-U'$ and its conserved energy is $\tfrac12M\theta'^2+U$. A strict local minimum gives a Lyapunov-stable rest point. At a critical point its derivative linearization is $M\xi''+U''(\theta_*)\xi=0$. These are mathematical chart results, allowing an angle coordinate and a kinetic coefficient of dimension $\mu\ell^2$; no translational mass-in-kilograms postulate is applied to $\theta$.
+[L1] Applicable mathematical chart results ([[def-cm-mechanical-vector-field-and-energy-in-a-chart]], [[lem-cm-energy-conservation-for-the-mechanical-system]], [[thm-cm-energy-stability-of-a-strict-minimum]], [[prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium]]): with the constant positive kinetic coefficient $M=ml^2$ and $U=-mgl\cos\theta$, the chart equation is $M\theta''=-U'$ and its conserved chart energy is $\tfrac12M\theta'^2+U$. A strict local minimum gives a Lyapunov-stable rest point. At a critical point the derivative linearization is $M\xi''+U''(\theta_*)\xi=0$. These mathematical results apply to the declared angular chart system, whose coordinate and inertia are not a translational position and mass in kilograms.
 
-[L2] Derivatives and values ([[thm-sine-and-cosine-derivatives]],
+[L2] Derivatives, continuity and values ([[thm-sine-and-cosine-derivatives]],
+[[cor-differentiable-implies-continuous]],
 [[thm-quarter-turn-values-and-shift-formulas]],
 [[thm-sine-cosine-signs-monotonicity-and-ranges]],
+[[thm-sine-cosine-zero-sets-and-fundamental-period]],
 [[cor-mean-value-theorem]], [[thm-chain-rule]],
 [[thm-algebra-of-derivatives]], [[def-derivative]]):
-$(\sin\theta)'=\cos\theta$, $(\cos\theta)'=-\sin\theta$, $\cos0=1$,
-$\sin(\pi/2)=1$, cosine is strictly decreasing on $[0,\pi]$, and the mean
-value theorem applies to continuous functions differentiable on the open
-interval.
+$(\sin\theta)'=\cos\theta$, $(\cos\theta)'=-\sin\theta$, so
+$U'(\theta)=mgl\sin\theta$ and $U''(\theta)=mgl\cos\theta$; since sine and
+cosine are differentiable on $\mathbb R$, they are continuous there by
+[[cor-differentiable-implies-continuous]], and therefore the displayed first
+and second derivatives are continuous. Thus $U$ is $C^2$ in the one-variable
+sense that its derivatives through order two exist and are continuous.
+Also $\cos0=1$,
+$\sin(\pi/2)=1$, cosine is strictly decreasing on $[0,\pi]$ and strictly
+increasing on $[-\pi,0]$, and the mean value theorem applies to continuous
+functions differentiable on the open interval; $\sin\theta=0$ exactly when
+$\theta=n\pi$ for an integer $n$.
 
 [L3] [[prop-cm-pendulum-small-angle-linearization-bound]]: for $g,l>0$,
 $\omega^{2}=g/l$ and the field $F_{p}(\theta,v)=(v,-\omega^{2}\sin\theta)$
@@ -161,21 +178,22 @@ $$\lVert z(t)-y(t)\rVert_{2}\le\frac{\omega^{2}r}{6}\delta^{2}\, t\,e^{(\lVert D
 [[cor-two-less-than-e-less-than-three]]): $e^{0}=1$, $2<e<3$, so
 $e^{3}<27$; and $e^{s}$ is strictly increasing.
 
-1.1 Potential presentation. By [L2], $U'(\theta)=mgl\sin\theta=-F(\theta)$; $U$ is $C^{2}$ and $F=-U'$, so the effective chart model is conservative in the potential-presentation sense with the declared representative $U(\theta)=-mgl\cos\theta$. The equilibria are the zeros of $\sin\theta$, namely $\theta=n\pi$, $n\in\mathbb Z$; and $\theta=0$ is a strict local minimum of $U$ because $U(0)=-mgl$, $U(\theta)=-mgl\cos\theta >-mgl$ for $0<\lvert\theta\rvert<\pi$ by [L2]. This is claim 1. [given, L1, L2, algebra]
+1.1 Angular potential. By [L2], $U'(\theta)=mgl\sin\theta=-F(\theta)$; the generalized torque is therefore the negative derivative of the declared energy-valued scalar potential $U(\theta)=-mgl\cos\theta$. The equilibria are the zeros of $\sin\theta$, namely $\theta=n\pi$, $n\in\mathbb Z$; and $\theta=0$ is a strict local minimum because $U(0)=-mgl$ and $U(\theta)=-mgl\cos\theta>-mgl$ for $0<|\theta|<\pi$ by [L2]. This is claim 1. [given, L1, L2, algebra]
 
 2.1 Stability. By [L1] and step 1.1 the hanging rest point $(0,0)$ is Lyapunov stable for the model's phase system, with the Euclidean phase norm of [[def-euclidean-inner-product]] and the balls of [[def-metric-ball]]. [step 1.1, L1]
 
-2.2 Linearisation and frequency: $U''(\theta)=mgl\cos\theta$, so $U''(0)=mgl>0$; by the linearisation clause of [L1] the linearised model at $\theta=0$ is the oscillator-type model with data $(m_{\mathrm{ef}},0,mgl,0)$, with sinusoidal solutions and frequency $\omega=\sqrt{U''(0)/m_{\mathrm{ef}}}=\sqrt{mgl/(ml^{2})}=\sqrt{g/l}$ by [[thm-of-square-roots]]. In the source's reading this is the small-oscillation frequency of the pendulum. This is claim 2. [step 1.1, L1, L4, algebra]
+2.2 Linearisation and frequency: $U''(\theta)=mgl\cos\theta$, so $U''(0)=mgl>0$; by the linearisation clause of [L1] the linearised angular equation at $\theta=0$ is $m_{\mathrm{ef}}\xi''+mgl\xi=0$. Its angular frequency is $\omega=\sqrt{U''(0)/m_{\mathrm{ef}}}=\sqrt{mgl/(ml^{2})}=\sqrt{g/l}$ by [[thm-of-square-roots]]. In the source's reading this is the small-oscillation frequency of the ideal pendulum model. This is claim 2. [step 1.1, L1, L4, algebra]
 
 3.1 Small-angle bound at $g=l=1$. Here $\omega^{2}=1$, $L=\max\{1,1\}=1$, $\lVert DF_{p}(0)\rVert=1$, and every explicitly quantified datum $z_0$ in claim 3 has $\omega^{2}r/6=1/12$, $\delta^{2}=10^{-4}$. The hypothesis $\delta e^{LT}<r$ reads $10^{-2}e<1/2$, which holds since $e<3<50$ by [L4]. By [L3] the exact solution and the linearised solution (which solves $\theta''=-\theta$, the numerical linearized chart equation with coefficient $\omega^2=1$) obey $$\lVert z(t)-y(t)\rVert_{2}\le\frac{1}{12}\cdot\frac{1}{10^{4}}\cdot t\,e^{3t}=\frac{t\,e^{3t}}{12\cdot10^{4}}\qquad(0\le t\le1),$$ and at $t=1$ this is at most $e^{3}/(12\cdot10^{4})$, which is less than $27/(12\cdot10^{4})=\tfrac94\cdot10^{-4}$ by [L4]. This is claim 3. [given, step 2.2, L3, L4, algebra]
 
-4.1 The harmonic energy is not conserved. Along a motion of the exact model, $$\frac{d}{dt}\Bigl[\tfrac12m_{\mathrm{ef}}\theta'^{2} +\tfrac12mgl\theta^{2}\Bigr]=m_{\mathrm{ef}}\theta'\theta'' +mgl\,\theta\theta'=mgl\,\theta'\bigl(\theta-\sin\theta\bigr)$$ by [L2] and the equation of motion $m_{\mathrm{ef}}\theta''=-mgl\sin\theta$. At the phase point $(\theta,\theta')=(\pi/2,1)$ the right side equals $mgl(\pi/2-\sin(\pi/2))=mgl(\pi/2-1)>0$; here $\pi/2-1>0$ because $\sin(\pi/2)=1<\pi/2$: indeed the mean value theorem applied to sine on $[0,\pi/2]$ gives $\sin(\pi/2)-\sin0=\cos\xi\cdot(\pi/2-0)$ for some $\xi\in(0,\pi/2)$ with $\cos\xi<1$, so $1<1\cdot(\pi/2)$ by [L2]. Hence the harmonic energy strictly increases at this phase point along the exact motion, and the pendulum model is not the harmonic model. This is claim 4. [given, step 1.1, L2, algebra] ∎
+4.1 The quadratic energy of the linearised angular equation is not conserved. Along a motion of the exact model, $$\frac{d}{dt}E_{\rm quad}=\frac{d}{dt}\Bigl[\tfrac12m_{\mathrm{ef}}\theta'^{2}+\tfrac12mgl\theta^{2}\Bigr]=m_{\mathrm{ef}}\theta'\theta''+mgl\,\theta\theta'=mgl\,\theta'\bigl(\theta-\sin\theta\bigr)$$ by [L2] and the equation of motion $m_{\mathrm{ef}}\theta''=-mgl\sin\theta$. At the phase point $(\theta,\theta')=(\pi/2,1\,\mathrm{s^{-1}})$ the right side equals $mgl(1\,\mathrm{s^{-1}})(\pi/2-\sin(\pi/2))>0$. Indeed $\sin(\pi/2)=1<\pi/2$: the mean value theorem applied to sine on $[0,\pi/2]$ gives $1=\cos\xi\cdot(\pi/2)$ for some $\xi\in(0,\pi/2)$, with $\cos\xi<1$. Thus the quadratic energy changes along the exact pendulum motion, so the exact angular equation is not its linearised equation. This is claim 4. [given, step 1.1, L2, algebra] ∎
 
 ## Remarks
 
-- **What the check exhibits.** The exact pendulum model has a stable
-  hanging rest point and linearises to a harmonic model at it; the agreement
-  of the exact and harmonic motions is bounded only in the finite-time,
+- **What the check exhibits.** The exact pendulum angle-chart model has a stable
+  hanging rest point and linearises to an angular oscillator equation at it.
+  The difference between the exact and linearized angular motions is bounded
+  only in the finite-time,
   small-amplitude sense of [L3], with the explicit numbers above. This is
   the page's instance of "exact versus small-angle model".
 

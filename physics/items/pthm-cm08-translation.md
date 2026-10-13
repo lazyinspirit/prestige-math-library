@@ -102,7 +102,7 @@ any particular force law and no empirical content is asserted.
 
 **Given:** The model, the presentation $(U,d)$, the vector $a$, the datum $\xi^{a}$, and the motions and state occurring in the clauses.
 
-[F1] Model data and chart ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart over every $[a',b']\times Q$ with $[a',b']\subseteq I_{0}$; $L=K-U$ with $L_{x}(t,x,v)=-\nabla_{x}U(t,x)$, $L_{v}(t,x,v)=\mathsf M v$; the force map is $F_{i}=-\nabla_{x_{i}}U+d_{i}$.
+[F1] Model data and chart ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart whenever $Q\ne\varnothing$ and $a'<b'$ with $[a',b']\subseteq I_{0}$, over $[a',b']\times Q$; $L=K-U$ with $L_{x}(t,x,v)=-\nabla_{x}U(t,x)$, $L_{v}(t,x,v)=\mathsf M v$; the force map is $F_{i}=-\nabla_{x_{i}}U+d_{i}$.
 
 [F2] The model's symmetry vocabulary ([[def-cm08-symmetry-of-the-mechanical-lagrangian]]): a strict datum $\tau\equiv0,\xi,B$ satisfies the model identity when $L_{x}\cdot\xi+L_{v}\cdot D_{t}\xi=D_{t}B$ on $O$, and its charge is $(\mathsf M v)\cdot\xi-B$; a strict datum with $\xi$ independent of $t$ is an infinitesimal point symmetry of the chart $(O,L)$.
 
@@ -110,7 +110,7 @@ any particular force law and no empirical content is asserted.
 
 [F4] Motions and maximal motions ([[def-cm02-newtonian-flow]], [[post-cm02-force-superposition]]): a motion $x:J\to Q$ satisfies $\mathsf M x''=-\nabla_{x}U+d$ on $J$; through every initial datum there is exactly one maximal motion with open maximal interval containing the initial time.
 
-[F5] Momentum quantities ([[def-cm03-centre-of-mass-and-momenta]]): $P=\sum_{i}m_{i}x_{i}'$ is the total momentum, a curve in $(\mathbb R^{3})^{N}$ when the $x_{i}$ are $C^{1}$.
+[F5] Momentum quantities ([[def-cm03-centre-of-mass-and-momenta]]): $P=\sum_{i}m_{i}x_{i}'$ is the total momentum, a curve in $\mathbb R^{3}$ when the $x_{i}$ are $C^{1}$.
 
 [F6] Calculus along the motion and translation family ([[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[def-vector-valued-derivative-and-integral]], [[def-euclidean-inner-product]], [[def-interval]], [[cor-zero-derivative-implies-constant]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]]): $J_x$ is an open set containing $0$; each of its interval components is a maximal open interval, and on it $s\mapsto U(t,x+s\xi^a)$ has derivative $\sum_i a\cdot\nabla_{x_i}U(t,x+s\xi^a)$. A $C^1$ function on an interval with zero derivative is constant; openness alone does not connect distinct components.
 
@@ -138,30 +138,8 @@ any particular force law and no empirical content is asserted.
 
 ## Remarks
 
-- **The shape of the hypothesis.** Condition (i) is infinitesimal
-  translation invariance and needs no convexity or connectedness of $Q$.
-  It is equivalent to finite invariance along every segment contained in $Q$.
-  Comparing admissible endpoints across an excluded segment additionally
-  requires the component constants of clause 1 to agree. This qualification
-  cannot be omitted: on two disjoint balls with centres on the translation
-  axis, a potential equal to $0$ on one and $1$ on the other has zero
-  directional derivative everywhere but fails endpoint invariance.
-  The momentum conservation and sharpness clauses retain their full scope
-  under the differential hypothesis on arbitrary open $Q$. For a
-  pair-presented translation-invariant potential that hypothesis holds
-  identically; the Noether route uses the potential presentation and
-  $d\equiv0$, while [[pthm-cm03-momentum-balance]] uses antisymmetric pair
-  forces, and neither route implies the other's hypotheses.
+- **The shape of the hypothesis.** Condition (i) is infinitesimal translation invariance and needs no convexity or connectedness of $Q$. It is equivalent to finite invariance along every segment contained in $Q$. Comparing admissible endpoints across an excluded segment additionally requires the component constants of clause 1 to agree. This qualification cannot be omitted: on two disjoint balls with centres on the translation axis, a potential equal to $0$ on one and $1$ on the other has zero directional derivative everywhere but fails endpoint invariance. The momentum conservation and sharpness clauses retain their full scope under the differential hypothesis on arbitrary open $Q$. For a pair-presented translation-invariant potential that hypothesis holds identically; the Noether route uses the potential presentation and $d\equiv0$, while [[pthm-cm03-momentum-balance]] uses antisymmetric pair forces, and neither route implies the other's hypotheses.
 
-- **Frame dependence of the charge.** The conserved quantity is the component
-  of the total momentum in the fixed inertial frame, with the generator frozen
-  at the vector $a$; under a change of inertial frame the description of the
-  model changes and the charge transforms with the transformation of $P$ and of
-  the transformed generator, so the conservation statement is frame-relative
-  in the sense that it is proved in one inertial frame. No relativistic
-  interpretation of the charge is intended.
+- **Frame dependence of the charge.** The conserved quantity is the component of the total momentum in the fixed inertial frame, with the generator frozen at the vector $a$; under a change of inertial frame the description of the model changes and the charge transforms with the transformation of $P$ and of the transformed generator, so the conservation statement is frame-relative in the sense that it is proved in one inertial frame. No relativistic interpretation of the charge is intended.
 
-- **Empirical status.** The statement identifies a conserved quantity of the
-  model under an explicit symmetry hypothesis of the declared potential; it is
-  a conditional deduction within the model and carries no measurement, no
-  claim that any actual force law is translation invariant, and no converse.
+- **Empirical status.** The statement identifies a conserved quantity of the model under an explicit symmetry hypothesis of the declared potential; it is a conditional deduction within the model and carries no measurement, no claim that any actual force law is translation invariant, and no converse.

@@ -10,8 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-flat-minkowski-model-and-inertial-charts, lem-gr-flat-inertial-cone-criterion-and-sums, def-time-orientation-and-future-causal-sets, def-gr-causal-curves-and-reachability, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-spacelike-hypersurfaces-and-cauchy-sets, def-embedded-submanifold-and-slice-chart, def-causal-classification-of-lorentz-vectors, thm-gr-minkowski-cauchy-and-global-hyperbolicity, lem-gr-flat-time-monotonicity-and-lipschitz-graphs, cor-heine-borel-in-the-product-topology, def-compact-space, thm-euclidean-space-complete]
+deps: [def-dependent-choice, def-countable-choice, def-gr-flat-minkowski-model-and-inertial-charts, lem-gr-flat-inertial-cone-criterion-and-sums, def-time-orientation-and-future-causal-sets, def-gr-causal-curves-and-reachability, def-gr-causal-conditions-and-global-hyperbolicity, def-gr-spacelike-hypersurfaces-and-cauchy-sets, def-embedded-submanifold-and-slice-chart, def-causal-classification-of-lorentz-vectors, thm-gr-minkowski-cauchy-and-global-hyperbolicity, lem-gr-flat-time-monotonicity-and-lipschitz-graphs, cor-heine-borel-in-the-product-topology, def-compact-space, thm-euclidean-space-complete]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   def-gr-flat-minkowski-model-and-inertial-charts: mathematical-premise
   lem-gr-flat-inertial-cone-criterion-and-sums: mathematical-premise
   def-time-orientation-and-future-causal-sets: mathematical-premise
@@ -36,6 +38,10 @@ verification:
 ---
 
 ## Example
+
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the general absolutely continuous causal-curve
+conclusions used here.
 
 Let $(A,\eta,N)$ be the flat model of
 [[def-gr-flat-minkowski-model-and-inertial-charts]], written $A=\mathbb R^4$,
@@ -66,7 +72,7 @@ $$V_\varepsilon(p)=\Bigl\{q:\ |z(q)-z(p)|_{\mathrm e}<\varepsilon-\bigl|x^0(q)-x
 **(iv)** For $o:=0\in A$ and $q:=Te_0$, $T>0$, the causal diamond is
 $$J^+(o)\cap J^-(Te_0)=\bigl\{r:\ |z(r)|_{\mathrm e}\le x^0(r)\le T-|z(r)|_{\mathrm e}\bigr\},$$
 a closed bounded subset of $\mathbb R^4$, hence compact; its $t$-sections are
-closed balls of radius $\min(t,T-t)$.
+closed balls of radius $\min(t,T-t)$ for $0\le t\le T$, and are empty otherwise.
 
 **(v)** The domain of dependence of each $\Sigma_c$ is all of $A$:
 $D^+(\Sigma_c)\supseteq\{t\ge c\}$, $D^-(\Sigma_c)\supseteq\{t\le c\}$ and
@@ -105,7 +111,7 @@ $D(\Sigma_c)=A$ ([[def-gr-spacelike-hypersurfaces-and-cauchy-sets]] clause
 
 2.3 (The domain of dependence is everything.) Let $p\in A$ with $t(p)\ge c$, and let $\gamma:I\to A$ be any past-inextendible causal curve through $p$. I claim $\inf\,(t\circ\gamma)(I)=-\infty$. Otherwise put $m:=\inf\,(t\circ\gamma)(I)>-\infty$. Since $t\circ\gamma$ is increasing, it tends to $m$ as the parameter tends to $\inf I$. For every $\varepsilon>0$ choose a parameter $a\in I$ with $m\le t(\gamma(a))<m+\varepsilon$. For any $u,v\in I$ with $u,v\le a$, the Lipschitz bound [L2] gives $|z(\gamma(u))-z(\gamma(v))|_{\mathrm e}\le |t(\gamma(u))-t(\gamma(v))|<\varepsilon$. Thus the full spatial tail is Cauchy as the parameter tends to $\inf I$; by completeness [L8] it converges to some $z_\infty\in\mathbb R^3$. Since $t(\gamma(\cdot))\to m$, the full curve tail converges to $x^{-1}(m,z_\infty)\in A$, contradicting past-inextendibility by clause (d) of [[def-gr-causal-curves-and-reachability]]. Hence its time range is unbounded below. Since $t\circ\gamma$ is continuous and strictly increasing on the interval $I$ and attains $t(p)\ge c$ at the parameter of $p$, its image contains $(-\infty,t(p)]$, in particular $c$; so some parameter lies on $\Sigma_c$ and $p\in D^+(\Sigma_c)$. The case $t(p)\le c$ is the time reverse: every future-inextendible causal curve through $p$ has time range unbounded above and hence meets $\Sigma_c$, so $p\in D^-(\Sigma_c)$. Therefore $D^+(\Sigma_c)\cup D^-(\Sigma_c)=A$, which is (v). [step 1.1, given, L2, L7, L8]
 
-3.1 (Conclusion.) Parts (i)-(v) are steps 1.1, 1.2, 2.1, 2.2 and 2.3; this completes the example. ∎ [step 1.1, step 1.2, step 2.1, step 2.2, step 2.3]
+3.1 (Conclusion.) Parts (i)-(v) are steps 1.1, 1.2, 2.1, 2.2 and 2.3; this completes the example. [step 1.1, step 1.2, step 2.1, step 2.2, step 2.3] ∎
 
 ## Remarks
 

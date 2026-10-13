@@ -38,9 +38,9 @@ sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Sections 2.4 and 2.4.1, printed pages 23-26 (PDF pages 29-32): constants of motion, the time-translation case H = sum qdot_j p_j - L, and the Noether proof with the generator paired with the conjugate momentum"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, second edition (MIT Press, 2014/2015), Section 1.8.5: Noether's theorem for parametric coordinate/time transformations and the Noether integral, with the total-time-derivative gauge of Section 5.4.5 shifting momenta and Hamiltonians"
+    - title: "G. J. Sussman and J. Wisdom, Structure and Interpretation of Classical Mechanics, second edition (MIT Press, 2014/2015), Section 1.8.5: Noether's theorem for parametric coordinate transformations and the Noether integral, with the total-time-derivative gauge of Section 5.4.5 shifting momenta and Hamiltonians"
       url: "https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/9579/sicm_edition_2.zip"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-8 (PDF pages 26-27): the Hamiltonian function as the energy-type charge and its conservation when the Lagrangian has no explicit time dependence"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.3, chapter pages 7-10 (PDF pages 25-28): the Hamiltonian function as the energy-type charge and its conservation when the Lagrangian has no explicit time dependence"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
 verification:
   precheck: pass
@@ -99,7 +99,7 @@ a given model admits a symmetry datum, and no clause carries empirical content.
 
 **Given:** The model, the presentation $(U,d)$, the symmetry datum $(\tau,\xi,B)$, the motion $x:J\to Q$ and, in clause 4, the function $c$.
 
-[F1] Model data and chart ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart over every $[a,b]\times Q$ with $[a,b]\subseteq I_{0}$; $L=K-U$ with $K(v)=\frac12v\cdot\mathsf M v$, $L_{v}=\mathsf M v$, $L_{x}=-\nabla_{x}U$, $L_{t}=-U_{t}$; the force map is $F_{i}=-\nabla_{x_{i}}U+d_{i}$; and $U'=U+c$ presents the same force map with the same residual forces, with $L'=L-c$.
+[F1] Model data and chart ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart whenever $Q\ne\varnothing$ and $a<b$ with $[a,b]\subseteq I_{0}$, over $[a,b]\times Q$; $L=K-U$ with $K(v)=\frac12v\cdot\mathsf M v$, $L_{v}=\mathsf M v$, $L_{x}=-\nabla_{x}U$, $L_{t}=-U_{t}$; the force map is $F_{i}=-\nabla_{x_{i}}U+d_{i}$; and $U'=U+c$ presents the same force map with the same residual forces, with $L'=L-c$.
 
 [F2] Symmetry datum and charge ([[def-cm08-symmetry-of-the-mechanical-lagrangian]]): the maps $\tau,\xi,B$ are of class $C^{2}$ and satisfy the model Noether identity $L_{t}\tau+L_{x}\cdot\xi+L_{v}\cdot(D_{t}\xi-vD_{t}\tau)+L\,D_{t}\tau=D_{t}B$ on $O$, and the charge is the displayed function; at $\tau\equiv0$ the identity is the strict one and the charge is $(\mathsf M v)\cdot\xi-B$.
 
@@ -133,29 +133,8 @@ a given model admits a symmetry datum, and no clause carries empirical content.
 
 ## Remarks
 
-- **The three charges of the framework.** Clause 2 records that the general
-  identity contains the strict point-symmetry charge
-  $(\mathsf M v)\cdot\xi-B$ of [[pthm-cm08-point-noether]] and the energy
-  charge $-E$ of [[pthm-cm08-time-energy]] as special cases; the framework's
-  time-translation instance uses a parameter measured in seconds, so
-  $\tau\equiv1$ is dimensionless and $-E$ is action per second. The
-  conservation laws are therefore instances of one identity rather than
-  independent postulates. The Lorentz-type generator with both $\tau$ and
-  $\xi$ nonzero — for which the charge mixes position, time and momentum — is
-  treated as scope, not as a force law, and no such model is asserted here.
+- **The three charges of the framework.** Clause 2 records that the general identity contains the strict point-symmetry charge $(\mathsf M v)\cdot\xi-B$ of [[pthm-cm08-point-noether]] and the energy charge $-E$ of [[pthm-cm08-time-energy]] as special cases; the framework's time-translation instance uses a parameter measured in seconds, so $\tau\equiv1$ is dimensionless and $-E$ is action per second. The conservation laws are therefore instances of one identity rather than independent postulates. The Lorentz-type generator with both $\tau$ and $\xi$ nonzero — for which the charge mixes position, time and momentum — is treated as scope, not as a force law, and no such model is asserted here.
 
-- **Sign convention.** The convention is the one fixed by
-  [[def-cm08-symmetry-of-the-mechanical-lagrangian]]: $\xi$ generates the
-  configuration change $x\mapsto x+s\xi$ at fixed $t$ up to the time shift
-  $s\tau$. With the inverse-family convention of the SICM source the same
-  identity produces the negative of the charge; the identity itself and the
-  conservation statement are convention independent.
+- **Sign convention.** The convention is the one fixed by [[def-cm08-symmetry-of-the-mechanical-lagrangian]]: $\xi$ generates the configuration change $x\mapsto x+s\xi$ at fixed $t$ up to the time shift $s\tau$. Reversing the family parameter negates the generator, boundary function and charge together, preserving the identity and conservation statement. The printed rotation derivative in SICM Section 1.8.5 has the sign inconsistency identified in the symmetry definition; it is not used here.
 
-- **Conditional conservation and empirical status.** Clause 3 is the exact
-  bookkeeping for a presentation with residual forces: the residual force acts
-  against the total generator $\xi-x'\tau$, so a symmetry of the potential part
-  produces a conserved charge only when the residual force pairs to zero with
-  that generator along the motion. The identity of clause (a) of
-  [[def-cm08-symmetry-of-the-mechanical-lagrangian]] must be verified for the
-  actual declared $U$ and masses; the conservation statements are deductions
-  inside the model, not empirical laws, and no converse is asserted.
+- **Conditional conservation and empirical status.** Clause 3 is the exact bookkeeping for a presentation with residual forces: the residual force acts against the total generator $\xi-x'\tau$, so a symmetry of the potential part produces a conserved charge only when the residual force pairs to zero with that generator along the motion. The identity of clause (a) of [[def-cm08-symmetry-of-the-mechanical-lagrangian]] must be verified for the actual declared $U$ and masses; the conservation statements are deductions inside the model, not empirical laws, and no converse is asserted.

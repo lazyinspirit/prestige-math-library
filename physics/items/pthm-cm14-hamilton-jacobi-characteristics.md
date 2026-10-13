@@ -1,7 +1,7 @@
 ---
 id: pthm-cm14-hamilton-jacobi-characteristics
 kind: physics-theorem
-title: "A complete integral of the model's Hamilton-Jacobi equation produces the model's motions, its Jacobi constants and local canonical $(\\beta,\\alpha)$ labels"
+title: "A complete integral of the model's Hamilton-Jacobi equation produces chart Hamiltonian characteristics, Jacobi constants and local canonical $(\\beta,\\alpha)$ labels"
 status: draft
 origin: pipeline
 domain: physics
@@ -46,7 +46,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "The characteristics theorem of the Hamilton-Jacobi method for a declared hyperregular potential presentation of the framework's force branch: from a complete integral of the presentation's Hamilton-Jacobi equation in a fixed momentum chart, the characteristic curves of the equation solve the chart's Hamilton equations; on the potential branch they are motions of the model; the derivatives of the complete integral in the parameters are constant along them; a local converse solves the constants equation for the configuration; and the Jacobi data are local canonical coordinates of the presentation's two-form. The statement is a conditional deduction from the adopted force branch, the declared presentation and the cited mathematics; it is local in the time, configuration and parameter variables, assumes the nondegeneracy of the mixed derivative at the base point only, and asserts no global solution, no completeness and no empirical content."
+physical_scope: "The characteristics theorem of the Hamilton-Jacobi method for a declared hyperregular potential presentation of the framework's force branch: from a complete integral of the presentation's Hamilton-Jacobi equation in a fixed momentum chart, the characteristic curves of the equation solve the chart's Hamilton equations; when $d\\equiv0$, Cartesian characteristics are motions of the model and generalized-coordinate characteristics solve the substituted Lagrange equations; the derivatives of the complete integral in the parameters are constant along them; a local converse solves the constants equation for the configuration; and the Jacobi data are local canonical coordinates of the presentation's two-form. The statement is a conditional deduction from the adopted force branch, the declared presentation and the cited mathematics; it is local in the time, configuration and parameter variables, assumes the nondegeneracy of the mixed derivative at the base point only, and asserts no global solution, no completeness and no empirical content."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (University of Cambridge Part II Mathematical Tripos), Section 4.7, printed pages 121-126 (PDF pages 127-132): from a solution $W$ of the Hamilton-Jacobi equation the flow with $q$-dot $=H_p$ and $p=W_q$ satisfies the second Hamilton equation, and the constants carried by the family"

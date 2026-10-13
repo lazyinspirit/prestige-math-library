@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 4
-deps: [def-cm-central-force-trajectory, def-interval, def-derivative, def-limit-point-r, thm-algebra-of-derivatives, thm-real-power-continuity-and-derivatives, thm-chain-rule, thm-mean-value-inequality, def-ck-euclidean-maps-and-diffeomorphisms, thm-cm-scattering-turning-point-and-global-branches]
+deps: [def-cm-central-force-trajectory, def-interval, def-derivative, def-limit-point-r, thm-algebra-of-derivatives, thm-real-power-continuity-and-derivatives, thm-chain-rule, def-ck-euclidean-maps-and-diffeomorphisms, thm-cm-scattering-turning-point-and-global-branches]
 dependency_roles:
   def-cm-central-force-trajectory: mathematical-premise
   def-interval: mathematical-premise
@@ -15,13 +15,12 @@ dependency_roles:
   thm-algebra-of-derivatives: mathematical-premise
   thm-real-power-continuity-and-derivatives: mathematical-premise
   thm-chain-rule: mathematical-premise
-  thm-mean-value-inequality: mathematical-premise
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   thm-cm-scattering-turning-point-and-global-branches: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-generated
-  proof: ai-generated
+  proof: ai-altered
 generation:
   role: counterexample
 sources:
@@ -37,11 +36,11 @@ $\mu\,r''=-\kappa\,r/|r|^3$ ($\mu,\kappa>0$) on its maximal interval of
 definition is defined for all real times and satisfies $|r(t)|\ge c$ for some
 $c>0$.*
 
-The witness has zero angular momentum and reaches the excluded force centre;
-non-radial orbit results therefore cannot be applied to it. It also shows why
-the finite-range scattering theorem
-[[thm-cm-scattering-turning-point-and-global-branches]] assumes a simple
-turning point rather than mere boundedness from below.
+The witness has zero angular momentum and reaches the excluded force centre,
+so the non-radial positive results do not apply. Its inverse-square potential
+is singular and is not finite-range; this example does not establish the
+necessity of the simple-turning-point hypothesis in
+[[thm-cm-scattering-turning-point-and-global-branches]].
 
 ## Facts & Assumptions
 
@@ -51,7 +50,7 @@ turning point rather than mere boundedness from below.
 
 [L2] Power derivatives: for $t<1$, $\frac{\mathrm d}{\mathrm dt}(1-t)^{2/3}=-\frac23(1-t)^{-1/3}$ and $\frac{\mathrm d}{\mathrm dt}\bigl(-\frac23(1-t)^{-1/3}\bigr)=-\frac29(1-t)^{-4/3}$, by the real-power derivative and the chain rule ([[thm-real-power-continuity-and-derivatives]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[def-derivative]], [[def-limit-point-r]], [[def-interval]]).
 
-[L3] For $t<1$, $A^3(1-t)^2=\frac{9\kappa}{2\mu}(1-t)^2$ and, equivalently, $\frac{2\mu A}{9}=\frac{\kappa}{A^2}$: this is the defining relation of $A$, and it is an equality of positive real numbers ([[thm-mean-value-inequality]], [[def-interval]]).
+[L3] For $t<1$, $A^3(1-t)^2=\frac{9\kappa}{2\mu}(1-t)^2$ and, equivalently, $\frac{2\mu A}{9}=\frac{\kappa}{A^2}$: this is the defining relation of $A$, and it is an equality of positive real numbers (multiply $A^3=9\kappa/(2\mu)$ by $2\mu/(9A^2)$).
 
 ## Counterexample
 
@@ -61,4 +60,4 @@ turning point rather than mere boundedness from below.
 
 2.1 Failure of global existence: $\rho(t)=A(1-t)^{2/3}\to0$ as $t\uparrow1$, and $\rho$ is strictly positive and $C^2$ on $(-\infty,1)$. There is no solution of $\mu r''=-\kappa r/|r|^3$ on an interval containing $1$ whose restriction to $(-\infty,1)$ equals $r$: such a solution would be continuous at $1$ with $r(1)=\lim_{t\uparrow1}r(t)=0$, and the equation is undefined at the origin (the right-hand side contains $r/|r|^3$). Hence the maximal interval of $r$ is $(-\infty,1)$, not $\mathbb R$. [given, step 1.1, L1, algebra]
 
-3.1 Failure of the lower bound and conclusion: $\inf_{t<1}\rho(t)=0$, so there is no $c>0$ with $|r(t)|\ge c$ on the domain. Both clauses of the refuted statement fail, and the claim that every attractive inverse-square solution is a global, non-colliding conic is false. [step 1.1, step 2.1, algebra] ∎
+3.1 Failure of the lower bound: $\inf_{t<1}\rho(t)=0$, so there is no $c>0$ with $|r(t)|\ge c$ on the domain. Together with step 2.1, this refutes the stated universal claim. [step 1.1, step 2.1, algebra] ∎

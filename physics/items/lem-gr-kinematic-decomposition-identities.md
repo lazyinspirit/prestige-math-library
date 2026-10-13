@@ -10,8 +10,9 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-geodesic-congruence-and-kinematics, def-gr-observer-congruence-and-adapted-charts, def-gr-observer-and-rest-space, def-gr-smooth-lorentzian-objects, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-inverse-metric-and-musical-isomorphisms, def-gr-metric-selected-connection, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]
+deps: [lem-gr-observer-projection-decomposition, def-gr-geodesic-congruence-and-kinematics, def-gr-observer-congruence-and-adapted-charts, def-gr-observer-and-rest-space, def-gr-smooth-lorentzian-objects, thm-gr-nondegenerate-levi-civita-and-tensor-derivative, def-gr-inverse-metric-and-musical-isomorphisms, def-gr-metric-selected-connection, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]
 dependency_roles:
+  lem-gr-observer-projection-decomposition: mathematical-premise
   def-gr-geodesic-congruence-and-kinematics: mathematical-premise
   def-gr-observer-congruence-and-adapted-charts: mathematical-premise
   def-gr-observer-and-rest-space: mathematical-premise
@@ -63,7 +64,7 @@ vanishing exactly when $\sigma=0$ and the second exactly when $\omega=0$.
 
 [L3] Components and contractions are formed in any chart, and $g^{ab}$ is the inverse matrix of $g_{ab}$ with $g^{ac}g_{cb}=\delta^a_b$ ([[def-gr-inverse-metric-and-musical-isomorphisms]], [[def-gr-smooth-lorentzian-objects]]).
 
-[L4] On the rest space $n_q^{\perp}=\{v:g_q(n_q,v)=0\}$ the form $g_q$ is positive definite, and a finite-dimensional real inner product space has an orthonormal basis ([[def-gr-observer-and-rest-space]], [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]).
+[L4] On the rest space $n_q^{\perp}=\{v:g_q(n_q,v)=0\}$ the form $g_q$ is positive definite, and a finite-dimensional real inner product space has an orthonormal basis ([[lem-gr-observer-projection-decomposition]] claim 3, [[cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]]).
 
 [L5] For a smooth covariant $2$-tensor field $X$, $h^{ab}X_{ab}=h^{ab}X_{(ab)}$, since $h$ is symmetric ([[def-gr-smooth-lorentzian-objects]]).
 
@@ -73,9 +74,9 @@ vanishing exactly when $\sigma=0$ and the second exactly when $\omega=0$.
 
 1.1 (Rest-space character.) $n^aB_{ab}=n^a\nabla_bn_a=\tfrac12\nabla_b(g(n,n))=0$ by [L1] and the unit condition $g(n,n)=-1$ in [L2]. Also $B_{ab}n^b=n^b\nabla_bn_a=(\nabla_nn)_a=0$ by the geodesic condition [L2]. This proves (a). [given, L1, L2, algebra]
 
-2.1 (The rest-space metric field.) $h_{ab}n^b=g_{ab}n^b+n_an_bn^b=n_a+n_a(n^bn_b)=n_a-n_a=0$, since $n^bn_b=g(n,n)=-1$ [L2]. On $n^{\perp}$ the form $h$ agrees with $g$, hence is positive definite by [L4]. For the mixed identity, $h^{ab}h_{bc}=(g^{ab}+n^an^b)(g_{bc}+n_bn_c)=\delta^a_c+n^an_c+n^an_c-n^an_c=\delta^a_c+n^an_c$, where $g^{ab}n_b=n^a$, $g_{bc}n^b=n_c$ and $n^bn_b=-1$ were used [L3]. Contraction gives $h_{ab}h^{ba}=(g_{ab}+n_an_b)(g^{ba}+n^bn^a)=g_{ab}g^{ba}+g_{ab}n^bn^a+(n_an_b)g^{ba}+(n_an_b)(n^bn^a)=4+n^an_a+n_an^a+(n^an_a)^2=4-1-1+1=3$, alternatively from $h_{ab}h^{ba}=h_{ab}(g^{ba}+n^bn^a)=g_{ab}g^{ba}+n_an_bg^{ba}+h_{ab}n^bn^a=4-1+0=3$. This proves (b). [step 1.1, given, L2, L3, algebra]
+2.1 (The rest-space metric field.) $h_{ab}n^b=g_{ab}n^b+n_an_bn^b=n_a+n_a(n^bn_b)=n_a-n_a=0$, since $n^bn_b=g(n,n)=-1$ [L2]. On $n^{\perp}$ the form $h$ agrees with $g$, hence is positive definite by [L4]. For the mixed identity, $h^{ab}h_{bc}=(g^{ab}+n^an^b)(g_{bc}+n_bn_c)=\delta^a_c+n^an_c+n^an_c-n^an_c=\delta^a_c+n^an_c$, where $g^{ab}n_b=n^a$, $g_{bc}n^b=n_c$ and $n^bn_b=-1$ were used [L3]. Contraction gives $h_{ab}h^{ba}=(g_{ab}+n_an_b)(g^{ba}+n^bn^a)=g_{ab}g^{ba}+g_{ab}n^bn^a+(n_an_b)g^{ba}+(n_an_b)(n^bn^a)=4+n^an_a+n_an^a+(n^an_a)^2=4-1-1+1=3$, alternatively from $h_{ab}h^{ba}=h_{ab}(g^{ba}+n^bn^a)=g_{ab}g^{ba}+n_an_bg^{ba}+h_{ab}n^bn^a=4-1+0=3$. This proves (b). [step 1.1, given, L2, L3, L4, algebra]
 
-3.1 (Decomposition, symmetry and traces.) $B_{ab}=B_{(ab)}+B_{[ab]}$, and substituting the definitions of $\sigma$ and $\omega$ gives $B_{ab}=\tfrac13\theta h_{ab}+\sigma_{ab}+\omega_{ab}$. Symmetry of $\sigma$ and antisymmetry of $\omega$ are immediate from the symmetrized and antisymmetrized definitions, and $h^{ab}\sigma_{ab}=h^{ab}B_{(ab)}-\tfrac13\theta h^{ab}h_{ab}=h^{ab}B_{ab}-\theta=0$, using [L5], step 2.1 and $g^{ab}B_{ab}=\theta$. This proves (c). [step 2.1, given, L3, L5, algebra]
+3.1 (Decomposition, symmetry and traces.) $B_{ab}=B_{(ab)}+B_{[ab]}$, and substituting the definitions of $\sigma$ and $\omega$ gives $B_{ab}=\tfrac13\theta h_{ab}+\sigma_{ab}+\omega_{ab}$. Symmetry of $\sigma$ and antisymmetry of $\omega$ are immediate from the symmetrized and antisymmetrized definitions, and $h^{ab}\sigma_{ab}=h^{ab}B_{(ab)}-\tfrac13\theta h^{ab}h_{ab}=h^{ab}B_{ab}-\theta=0$, using [L5], step 2.1 and $h^{ab}B_{ab}=g^{ab}B_{ab}+n^an^bB_{ab}=\theta$ by step 1.1. Both $\sigma$ and $\omega$ annihilate $n$ in either slot because $B$ and $h$ do. This proves (c). [step 1.1, step 2.1, given, L3, L5, algebra]
 
 4.1 (Double contraction in a rest-space frame.) Fix a point $q\in U$ and let $M$ be the matrix of $B$ in a $g$-orthonormal basis $e_1,e_2,e_3$ of $n_q^{\perp}$, whose existence is [L4]. Since $B$ is rest-space in both slots by (a), $B_{ab}B^{ba}=\sum_{i,j}M_{ij}M_{ji}=\operatorname{tr}(M^2)$. Write $M=\tfrac13\theta I+S+A$ with $S$ the symmetric traceless and $A$ the antisymmetric part, so that $S$ and $A$ are the matrices of $\sigma$ and $\omega$ in this basis. By cyclicity of the trace, $\operatorname{tr}(SA)=\operatorname{tr}((SA)^{\mathsf T})=\operatorname{tr}(A^{\mathsf T}S^{\mathsf T})=-\operatorname{tr}(AS)=-\operatorname{tr}(SA)$, so $\operatorname{tr}(SA)=0$; similarly $\operatorname{tr}(S)=0$ and $\operatorname{tr}(A)=0$ kill the mixed terms with $I$, and $\operatorname{tr}(I^2)=3$. Hence $\operatorname{tr}(M^2)=\tfrac13\theta^2+\operatorname{tr}(S^2)+\operatorname{tr}(A^2)=\tfrac13\theta^2+\sum_{i,j}(S_{ij})^2-\sum_{i,j}(A_{ij})^2$, and in the orthonormal rest basis the two sums are $\sigma_{ab}\sigma^{ab}$ and $\omega_{ab}\omega^{ab}$. This proves the displayed identity of (d). [step 3.1, L4, algebra]
 

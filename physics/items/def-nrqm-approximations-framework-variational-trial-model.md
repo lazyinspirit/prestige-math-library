@@ -134,7 +134,12 @@ $\Lambda:=\inf\sigma_{\mathrm{ess}}(H)$, listed with multiplicity in
 nondecreasing order as $E_{1}\le E_{2}\le\cdots$, with the convention
 $E_{n}:=\Lambda$ once the list is exhausted, $\inf\varnothing=+\infty$. The
 definition asserts neither that $E_{0}$ is an eigenvalue, nor that any
-eigenvector exists, nor that $E_{0}=E_{1}$.
+eigenvector exists. The ladder convention does give $E_0=E_1$: the nonempty
+closed spectrum of the bounded-below operator contains its bottom; if the
+bottom is discrete, it is the first listed eigenvalue, and otherwise it lies
+in the essential spectrum, so $\Lambda=E_0$ and the empty below-threshold
+list is padded by $E_1=\Lambda$. This equality does not imply that the
+bottom is attained by an eigenvector.
 
 **(e) Scope.** Clauses (a)-(d) are a reading of the framework's state,
 observable and dynamics postulates together with the declared operator $H$;

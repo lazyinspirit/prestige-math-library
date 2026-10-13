@@ -25,7 +25,7 @@ sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.3, Eqs. (1.15) and (1.22)-(1.23), printed pages 6-8 (PDF pages 12-14): the centre of mass R = sum_i m_i r_i / M and the kinetic-energy decomposition T = (1/2) M Rdot^2 + (1/2) sum_i m_i rtilde_i^2"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 3.4, Eqs. (3.30)-(3.35), printed pages 40-42: the centre-of-mass and reduced-mass construction for two bodies"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 3.4, Eqs. (3.30)-(3.35), chapter pages 8-9 (PDF pages 40-41): the centre-of-mass and reduced-mass construction for two bodies"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
 verification:
   precheck: pass

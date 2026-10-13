@@ -19,7 +19,7 @@ deps:
     def-nrqm-state-geometry-pure-mixed-states-and-purity,
     lem-nrqm-photons-analyzer-projections-and-overlaps,
     pthm-nrqm-photons-fixed-mode-polarization-outcome-law,
-    def-countable-choice,
+    def-countable-choice, def-dependent-choice,
     def-axiom-of-choice
   ]
 dependency_roles:
@@ -35,6 +35,7 @@ dependency_roles:
   pthm-nrqm-photons-fixed-mode-polarization-outcome-law: physical-result
   def-countable-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -56,9 +57,9 @@ sources:
         remark that the transmitted fraction agrees with classical physics"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
     - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 3 'Linear
-        algebra: vector spaces and operators', Section 7 printed pages 24-28:
-        the polarisation-filter example of projections and measurement
-        probabilities in a two-dimensional complex vector space"
+        algebra: vector spaces and operators', Section 5 'Orthonormal basis and
+        orthogonal projectors': finite-dimensional orthogonal projection
+        formulas, ranges and eigenspaces"
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/04b0570b349\
         e84d74129eef504498472_MIT8_05F13_Chap_03.pdf"
 ---
@@ -73,8 +74,8 @@ postulate clause (i)
 the declared fixed-mode polarisation model
 [[def-nrqm-photons-framework-fixed-mode-polarization-model]] with polarisation
 space $V$, orthonormal basis $(e_{1},e_{2})$ and analyser projections
-$P_{\theta}$. Assume the Axioms of Countable Choice and of Choice
-([[def-countable-choice]], [[def-axiom-of-choice]]). Fix an angle
+$P_{\theta}$. Assume the Axioms of Countable Choice, Dependent Choice and Choice
+([[def-countable-choice]], [[def-dependent-choice]], [[def-axiom-of-choice]]). Fix an angle
 $\theta\in\mathbb R$. This example compares two declared models of the same
 analyser:
 
@@ -122,17 +123,18 @@ The example computes both ratios for the same declared data and compares them.
 
 1.2 [Classical ratio] Let $E\in V$, $E\ne0$. Applying [L1] with $E$ in place of $e_{1}$ gives $\|P_{\theta}E\|^{2}=\langle E,P_{\theta}E\rangle$; for the particular field datum $E=e_{1}$ this is $\|P_{\theta}e_{1}\|^{2}=\cos^{2}\theta$, and $I(e_{1})=\|e_{1}\|^{2}=1$ by [L1] and [L3]. Hence the declared transmitted intensity fraction is $$\frac{I(P_{\theta}e_{1})}{I(e_{1})}=\cos^{2}\theta .$$ [L1, L3, algebra]
 
-2.1 [Comparison] Steps 1.1 and 1.2 show that the quantised model's transmitted Born probability and the declared classical model's transmitted intensity fraction coincide at $\cos^{2}\theta$ for the same declared angle and the same declared alignment $e_{1}$: the number $\cos^{2}\theta$ is common to the two declared models. Since the models disagree about what a preparation and an outcome are -- a unit ray with a Born law in the first model, a complex amplitude with a declared intensity in the second -- the coincidence of this ratio is not evidence for field quantisation, and the declared classical model is not refuted by a measurement of this ratio. This completes the announced computation. [step 1.1, step 1.2, algebra] ∎
+2.1 [Comparison] Steps 1.1 and 1.2 show that the quantised model's transmitted Born probability and the declared classical model's transmitted intensity fraction coincide at $\cos^{2}\theta$ for the same declared angle and the same declared alignment $e_{1}$. This shared prediction does not distinguish these two models, and agreement with it alone does not establish field quantisation. An observation could still bear on a comparison with another specified model under a declared observation model; no observation or statistical comparison is supplied here. The declared classical model is not refuted by the shared prediction. This completes the announced computation. [step 1.1, step 1.2, algebra] ∎
 
 ## Remarks
 
 - **What is compared.** Only the two declared models on the declared
   two-dimensional space are compared. No claim is made that the elementary
   classical model reproduces the photon counting statistics or the
-  non-classical states of the radiation sector; the comparison of counting
-  statistics is the subject of
-  [[ex-nrqm-photons-single-mode-number-statistics-coherent-and-thermal]] and
-  [[texp-nrqm-photons-classical-field-and-quantized-detection-comparison]].
+  non-classical states of the radiation sector. Quantum count laws are computed in
+  [[ex-nrqm-photons-single-mode-number-statistics-coherent-and-thermal]];
+  [[texp-nrqm-photons-classical-field-and-quantized-detection-comparison]]
+  states the additional classical count law, preparation and detector declarations
+  required for a count-statistics comparison.
 - **Sources and status.** The coincidence of the classical transmitted
   fraction with the quantum transmitted probability is explicitly noted in the
   cited source; the classical model here is an elementary declared idealisation

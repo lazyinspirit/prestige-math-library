@@ -56,13 +56,14 @@ empirical_premises: []
 sources:
   references:
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
-        Chapter 5 printed pages 123-131 (PDF pages 135-143) and Section 9.1:
-        strong evolution equations with a common domain of the generators"
+        Section 5.1 printed pages 123-126 (PDF pages 135-138):
+        autonomous unitary evolution and Stone's theorem; the nonautonomous
+        common-domain construction is supplied by the local mathematics"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
     - title: "B. Zwiebach, MIT 8.05 Quantum Physics II (Fall 2013), Chapter 6 'Quantum
-        Dynamics', Section 4.3-4.5 printed pages 30-39 (PDF pages 30-39): the
-        forced harmonic oscillator, its translation operator and the classical
-        response of coherent states"
+        Dynamics', Section 4.3-4.5 printed pages 30-39 (PDF pages 30-39): free
+        coherent-state evolution and uncertainties; the forced common-domain
+        oscillator construction is supplied by the local mathematics"
       url: "https://ocw.mit.edu/courses/8-05-quantum-physics-ii-fall-2013/79a8091ef4f\
         18d8e3ff76a097e8db33c_MIT8_05F13_Chap_06.pdf"
 verification:
@@ -71,7 +72,7 @@ verification:
 
 ## Statement
 
-Adopt the framework data and the declared driven model of [[def-nrqm-driven-dynamics-framework-driven-model]] in the **common-domain class** of clause (b)(iii): $\mathfrak H$ is the model's state space ([[def-hilbert-space]]), $Y\subseteq\mathfrak H$ is a dense linear subspace that is itself a Hilbert space continuously embedded in $\mathfrak H$, $D(H(t))=Y$ for every $t\in I=[a,b]$, every $H(t)$ is self-adjoint as an operator on $\mathfrak H$ ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]]), and $t\mapsto H(t)$ is of class $C^{1}(I;\mathcal B(Y,\mathfrak H))$ ([[def-bounded-linear-operator]], [[def-operator-norm]]); put $L:=\sup_{t\in I}\|H'(t)\|_{\mathcal B(Y,\mathfrak H)}<\infty$ and $A(t):=H(t)/\hbar$. Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). Then:
+Adopt the framework data and the declared driven model of [[def-nrqm-driven-dynamics-framework-driven-model]] in the **common-domain class** of clause (b)(iii): $\mathfrak H$ is the model's state space ([[def-hilbert-space]]), $Y\subseteq\mathfrak H$ is a dense linear subspace that is itself a Hilbert space continuously embedded in $\mathfrak H$, $D(H(t))=Y$ for every $t\in I=[a,b]$, every $H(t)$ is self-adjoint as an operator on $\mathfrak H$ ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]]), and $t\mapsto H(t)$ is of class $C^{1}(I;\mathcal B(Y,\mathfrak H))$ ([[def-bounded-linear-operator]], [[def-operator-norm]]); put $A(t):=H(t)/\hbar$ and, when $a<b$, $L:=\sup_{t\in I}\|H'(t)\|_{\mathcal B(Y,\mathfrak H)}<\infty$; for $a=b$ set $L:=0$. Assume the Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). Then (all differential assertions below apply only when $a<b$, with one-sided derivatives at endpoints; for $a=b$ only $U(a,a)=I$ and the domain, norm and algebraic assertions are claimed):
 
 (a) *Well-posedness of the declared model.* There is a family $U(t,s)$, $a\le s\le t\le b$ on $I$, of unitary operators on $\mathfrak H$ with $U(s,s)=I$, the cocycle $U(t,r)=U(t,s)U(s,r)$, joint strong continuity in $(t,s)$, and:
 $$U(t,s)Y=Y,\qquad \|U(t,s)y\|_Y\le C_{I}\|y\|_Y\quad(y\in Y), \qquad i\hbar\,\partial_{t}U(t,s)y=H(t)U(t,s)y\quad(y\in Y),$$
@@ -102,9 +103,9 @@ read as the system's energy at time $t$, with $f(t)Q$ in joules for $f(t)$ in $\
 
 **Given:** the data of the Statement and [F1]-[F3].
 
-1.1 [Well-posedness] The generator family $A(t)=H(t)/\hbar$ has $D(A(t))=Y$ for every $t$, is self-adjoint on $H$ as a scalar multiple of $H(t)$, and belongs to $C^{1}(I;\mathcal B(Y,H))$ with $A'(t)=H'(t)/\hbar$ and $\sup_t\|A'(t)\|_{\mathcal B(Y,H)}=L/\hbar<\infty$; these are exactly the hypotheses of [F1] with $T=b-a$ and the time reparametrisation $t\mapsto t-a$, so [F1] supplies the family $U$ with all displayed properties and identifies it with the model's clause (c)(iii). For explicit dependence, put $K(t)=A(t)-i:Y\to\mathfrak H$, $M=\sup_t\|K(t)^{-1}\|_{\mathfrak H\to Y}$, $N=\sup_t\|K(t)\|_{Y\to\mathfrak H}$, and $L_A=L/\hbar$. The bounded inverse and local Neumann construction in [F1], shows $M,N<\infty$ on compact $I$, without a further hypothesis. Its frozen-product construction bounds the frozen products and limiting evolution in $Y$ by a uniform constant controlled by $MN e^{L_A M(b-a)}$, with the endpoint graph conversions described there. Thus the genuine family-dependent graph constants, rather than $I,L$ alone, control $C_I$. This is clause (a). [F1, F3, given]
+1.1 [Well-posedness] If $a=b$, set $U(a,a)=I$; the domain, norm and continuity assertions hold with $C_I=1$, and no derivative is asserted under the model's singleton convention. For $a<b$, the generator family $A(t)=H(t)/\hbar$ has $D(A(t))=Y$ for every $t$, is self-adjoint on $H$ as a scalar multiple of $H(t)$, and belongs to $C^{1}(I;\mathcal B(Y,H))$ with $A'(t)=H'(t)/\hbar$ and $\sup_t\|A'(t)\|_{\mathcal B(Y,H)}=L/\hbar<\infty$; these are exactly the hypotheses of [F1] with $T=b-a$ and the time reparametrisation $t\mapsto t-a$, so [F1] supplies the family $U$ with all displayed properties and identifies it with the model's clause (c)(iii). For explicit dependence, put $K(t)=A(t)-i:Y\to\mathfrak H$, $M=\sup_t\|K(t)^{-1}\|_{\mathfrak H\to Y}$, $N=\sup_t\|K(t)\|_{Y\to\mathfrak H}$, and $L_A=L/\hbar$. The bounded inverse and local Neumann construction in [F1], shows $M,N<\infty$ on compact $I$, without a further hypothesis. Its frozen-product construction bounds the frozen products and limiting evolution in $Y$ by a uniform constant controlled by $MN e^{L_A M(b-a)}$, with the endpoint graph conversions described there. Thus the genuine family-dependent graph constants, rather than $I,L$ alone, control $C_I$. This is clause (a). [F1, F3, given]
 
-2.1 [Reverse and adjoint equations] The second and third assertions of [F1] give $U(t,s)^{*}=U(s,t)$ and $i\hbar\partial_{s}U(t,s)y=-U(t,s)H(s)y$ for $y\in Y$ after multiplying by $\hbar$, together with the joint strong continuity of the domain maps in the graph norm of $Y$. This is clause (b). [step 1.1, F1, given]
+2.1 [Reverse and adjoint equations] For $a=b$, clause (b) reduces to the identity and continuity of $U(a,a)=I$. For $a<b$, the second and third assertions of [F1] give $U(t,s)^{*}=U(s,t)$ and $i\hbar\partial_{s}U(t,s)y=-U(t,s)H(s)y$ for $y\in Y$ after multiplying by $\hbar$, together with the joint strong continuity of the domain maps in the graph norm of $Y$. This is clause (b). [step 1.1, F1, given]
 
 2.2 [The driven oscillator is an instance] By [F2], $H(t)=H_{\mathrm{osc}}-f(t)Q$ is self-adjoint on the single domain $Y$ for every $t$ and the family is of class $C^{1}(I;\mathcal B(Y,L^{2}))$ with derivative $-f'(t)Q$; this is precisely the common-domain class hypothesis of the model's clause (b)(iii) with $\mathfrak H=L^{2}(\mathbb R,dx)$ and the declared reading of $H(t)$ as the energy by [F3], and the factor $f(t)Q$ carries the unit $\mathrm{J\,m^{-1}}\cdot\mathrm m=\mathrm J$ by [F3]. Applying clause (a) with $H(t)/\hbar$ gives the unique strong propagator with the strong equation on $D(H_{\mathrm{osc}})$ and domain invariance. This is clause (c). [step 1.1, F1, F2, F3, given, algebra]
 
@@ -113,4 +114,4 @@ read as the system's energy at time $t$, with $f(t)Q$ in joules for $f(t)$ in $\
 ## Remarks
 
 - **Why the common domain matters.** The class-(iii) hypothesis gives what the bounded-control class of the mild theorem does not: invariance of the domain $Y$ and a genuine strong Schroedinger equation on $Y$. The price is the stronger regularity assumption, $C^{1}$ in the graph norm rather than mere strong continuity of a bounded control.
-- **The oscillator is not a bounded control.** $Q$ is unbounded, so the driven oscillator is outside the bounded-control class; its admissibility is exactly the relative-bound statement of [F2], and the explicit propagator of the oscillator is a separate result used by the page's example.
+- **The unbounded position coupling and constant drives.** With the reference energy $H_0=H_{\mathrm{osc}}$, the perturbation $-f(t)Q$ is unbounded whenever $f(t)\ne0$, so general drives are treated here by the common-domain construction and relative bound of [F2]. A constant drive $f(t)\equiv f_0$ can instead be absorbed into the fixed self-adjoint energy $H_0=H_{\mathrm{osc}}-f_0Q$ on $Y$ by [F2], with bounded control $V(t)=0$; in particular $f_0=0$ gives the free oscillator. Thus the regularity classes need not be disjoint. The explicit oscillator propagator is a separate result used by the page's example.

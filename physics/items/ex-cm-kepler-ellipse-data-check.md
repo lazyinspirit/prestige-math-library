@@ -43,7 +43,8 @@ sources:
 
 ## Example
 
-Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]), as required by the conic, ellipse and period suppliers.
+Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]), as required by the ellipse-area and period suppliers;
+the conic-and-eccentricity theorem does not impose this hypothesis.
 
 Take the attractive Kepler data $\mu=\kappa=1$ and angular momentum magnitude
 $J=1$, and consider the negative-energy orbit with eccentricity $e=\frac12$.

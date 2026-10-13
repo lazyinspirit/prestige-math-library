@@ -16,6 +16,7 @@ deps:
     cor-inner-product-induces-a-norm,
     def-field,
     def-complex-numbers-and-arithmetic,
+    thm-complex-numbers-form-a-field,
     def-countable-choice
   ]
 dependency_roles:
@@ -27,6 +28,7 @@ dependency_roles:
   cor-inner-product-induces-a-norm: mathematical-premise
   def-field: mathematical-premise
   def-complex-numbers-and-arithmetic: mathematical-premise
+  thm-complex-numbers-form-a-field: mathematical-premise
   def-countable-choice: mathematical-premise
 proof_strategy: direct
 provenance:
@@ -69,7 +71,7 @@ Adopt the state postulate of the framework, and let $H\ne\{0\}$ be the Hilbert s
 
 [L3] **Rank-one operators at zero** ([[lem-nrqm-composites-rank-one-operator-calculus]], [[lem-nrqm-state-geometry-ray-to-rank-one-projection]]): $T_{0,v}x=\langle x,v\rangle 0=0$ for every $x$, so $T_{0,0}$ is the zero operator, and $\operatorname{tr}(T_{0,0})=\langle0,0\rangle=0$; a state has trace one by [L1].
 
-[L4] **The scalar field** ([[def-field]], [[def-complex-numbers-and-arithmetic]]): in $\mathbb C$ only nonzero elements have multiplicative inverses; the expression $0^{-1}$ and the quotient $0/0$ are not defined, and the formula for $\nu$ is a scalar multiplication by the inverse of the norm.
+[L4] **The scalar field** ([[def-field]], [[def-complex-numbers-and-arithmetic]], [[thm-complex-numbers-form-a-field]]): $\mathbb C$ is a field containing $\mathbb R$; in $\mathbb C$ only nonzero elements have multiplicative inverses; the expression $0^{-1}$ and the quotient $0/0$ are not defined, and the formula for $\nu$ is a scalar multiplication by the inverse of the norm.
 
 ## Counterexample
 
@@ -77,7 +79,7 @@ Adopt the state postulate of the framework, and let $H\ne\{0\}$ be the Hilbert s
 
 1.1 [No unit representative] By [L2], $\|0\|=0$ and $\|z\cdot0\|=|z|\,\|0\|=0$ for every scalar $z$, so no scalar multiple of $0$ has norm $1$; hence the set $\{z\cdot0:z\ne0\}=\{0\}$ contains no unit vector, and it is not a ray in the sense of [L2], which is defined only for nonzero generating vectors. [given, L1, L2, algebra]
 
-2.1 [Normalization is undefined] The normalization formula $\nu(\psi)=\|\psi\|^{-1}\psi$ uses the inverse of the scalar $\|\psi\|$; at $\psi=0$ this inverse would be $0^{-1}$, which does not exist in $\mathbb C$ by [L4], and the displayed "convention" $0/\|0\|=0$ is therefore not an instance of the definition but a separate stipulation. Even granting the stipulation its value, $\|0\|=0\ne1$ by [L2], so it does not produce a unit representative; the stipulation is self-defeating as a normalization rule. [given, step 1.1, L2, L4, algebra]
+2.1 [Normalization is undefined] The normalization formula $\nu(\psi)=\|\psi\|^{-1}\psi$ uses the inverse of the scalar $\|\psi\|$; at $\psi=0$ this inverse would be $0^{-1}$, which does not exist in the field $\mathbb C$ of [L4]: for every scalar $a$, distributivity gives $a0=a(0+0)=a0+a0$, hence $a0=0\ne1$, so $a$ cannot be an inverse of $0$. Thus the displayed "convention" $0/\|0\|=0$ is therefore not an instance of the definition but a separate stipulation. Even granting the stipulation its value, $\|0\|=0\ne1$ by [L2], so it does not produce a unit representative; the stipulation is self-defeating as a normalization rule. [given, step 1.1, L2, L4, algebra]
 
 2.2 [The zero operator is not a state] By [L3], $T_{0,0}$ is the zero operator with $\operatorname{tr}(T_{0,0})=0$; a density operator has trace one by [L1], so $0\notin D(H)$ and the zero operator is not a state of the model. Consequently the zero vector does not determine a state through the rank-one operator either. [given, step 1.1, L1, L3, algebra]
 

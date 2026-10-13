@@ -1,0 +1,68 @@
+{
+  "run": "physics-cm-qm-gr-79-2026-10-11",
+  "phase": "repeat",
+  "round": 2,
+  "unit": "25",
+  "input_sha256": "ec434e6f1c174e279aedf8248bf9fb97ba6768d0f2f157ec9c76518969b0bb9d",
+  "decisions": [
+    {
+      "id": "ex-cm09-triatomic-translation-zero-mode",
+      "model": "gpt-6.1-sol",
+      "context_sha256": "4ae8a10bb5e22208ff321b6f1cec2bfdfb9b9edb990e617b528a1bb587892514",
+      "outcome": "confirmed_nonfatal",
+      "reason": "F5 incorrectly included zero stiffness in a theorem requiring k>0, but F2 and verification step 2.2 already cite the correct affine classification in pthm-cm09-free-modes-and-degeneracy clauses 2 and 4. Corrected F5 to apply the oscillator theorem only with scalar mass 1, damping 0 and stiffness lambda_i>0, and attribute the zero case to F2.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ex-cm09-triatomic-translation-zero-mode",
+      "disposition": "repaired",
+      "post_sha256": "0fed1a4981cf486254617816da53811d8eebd55e49df95343b02c0b584d772aa",
+      "review_context_sha256": "61d7409687bf440cb4bdb9035d58a0f4b50727bfef970a62b097479c69bf274c",
+      "reason": "Verified the non-negative stiffness form, translation kernel, all three generalized eigenpairs and all six mass inner products. The free-mode theorem applies because M is positive definite and K symmetric; its clauses 2, 4 and 5 supply the affine translation, full modal family and growth. The positive oscillator theorem applies only at scalar mass 1, damping 0 and stiffness lambda_i>0; F5 now states this restriction and routes zero stiffness to F2. The two-mass check uses its admissible zero coupling with k>0, and omega_3 squared/omega_2 squared=1+2m/m_c>1. Repaired the contract step-2-2 truncation and spurious inputs under the shared lock. The Example, Verification, Remarks and physical_scope are byte-identical to the pre-edit carrier. Current m_c notation already resolves the digest concern. No independent review of this repair is claimed.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "created_items": [],
+  "downstream": [],
+  "ledger_updates": [
+    {
+      "ledger": "defect-ledger",
+      "id": "ex-cm09-triatomic-translation-zero-mode",
+      "classification": "confirmed_nonfatal",
+      "status": "resolved",
+      "affected_use": "items/ex-cm09-triatomic-translation-zero-mode.md Facts F5 and Verification step 2.2: the positive-stiffness oscillator theorem cannot supply the affine zero-stiffness case.",
+      "reason": "F2 already supplies the zero-stiffness case through pthm-cm09-free-modes-and-degeneracy clauses 2 and 4; corrected the redundant F5 attribution without changing the proved claim or public interface.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    },
+    {
+      "ledger": "defect-ledger",
+      "id": "ex-cm09-triatomic-translation-zero-mode",
+      "classification": "confirmed_nonfatal",
+      "status": "resolved",
+      "affected_use": "research/physics-cm-qm-gr-79-2026-10-11-batch-25.proof-contracts.json contracts.ex-cm09-triatomic-translation-zero-mode.derivations step-2-2: interval [0,infinity) was misparsed as a tag, truncating the claim and introducing spurious inputs.",
+      "reason": "Restored the entire existing step 2.2 claim and the actual terminal inputs F2, F5 and step 1.2; strict focused contract validation passes.",
+      "uncertain": false,
+      "source_urls": [],
+      "familiar": true
+    }
+  ],
+  "gate_resolutions": [],
+  "repair_notes": [
+    "Inspected current item, owning contract and examples-page interface; relevant local suppliers read include def-cm09-coupled-quadratic-model, pthm-cm09-free-modes-and-degeneracy, thm-cm-homogeneous-oscillator-solution-classification, prop-cm-oscillator-degenerate-and-repulsive-cases and prop-cm-two-mass-spring-modes. The degenerate proposition step 1.1 proves the affine family by applying zero-derivative constancy first to x prime and then to x-Bt. These are existing draft suppliers with actual proofs, not assumed source-text certifications.",
+    "Only F5 changed in the item. No dependency, Example, physical_scope, empirical qualification or Remarks changed; no new interface, item or downstream propagation. No potentially defective published consumer was discovered; no published-ledger update is proposed. No web source reading claimed.",
+    "Shared contract repair followed step5-shared-write-lock acquire/reread/edit/focused-check/release with owner step5-v2-repeat-r2-u25. Only the assigned step-2-2 derivation was repaired.",
+    "PASS exit 0: node tools/tsx-run.mjs tools/physics-support/precheck.mts items/ex-cm09-triatomic-translation-zero-mode.md (one checked, zero failing).",
+    "PASS exit 0: node tools/physics-support/rendercheck.mjs items/ex-cm09-triatomic-translation-zero-mode.md --json (one checked, no errors or warnings).",
+    "PASS exit 0 after final item edit: node tools/physics-support/proof-layout.mjs items/ex-cm09-triatomic-translation-zero-mode.md (one item, six steps, zero defects).",
+    "PASS exit 0 after final contract edit: node tools/physics-support/proof-contract.mjs research/physics-cm-qm-gr-79-2026-10-11-batch-25.proof-contracts.json --items ex-cm09-triatomic-translation-zero-mode --strict --json (assigned item checked, no errors or warnings).",
+    "Review-contexts completed immediately after item review and again after the contract repair; both outputs match the recorded post_sha256 and review_context_sha256. No intervening supplier edit required review refresh. No assigned gate diagnostics, unresolved mathematical obligations or additions remain; controller collection and any independent rejudgment remain controller duties."
+  ]
+}

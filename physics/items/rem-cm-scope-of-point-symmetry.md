@@ -29,8 +29,9 @@ verification:
 ## Remarks
 
 - **The symmetry is a property of the Lagrangian.** The identity of
-  [[def-cm-infinitesimal-point-symmetry]] involves both the kinetic part and the potential of
-  $\mathcal L$; a transformation that is a symmetry of the configuration space, of a chart or of a
+  [[def-cm-infinitesimal-point-symmetry]] is imposed on the chosen $\mathcal L$ through its
+  configuration and velocity gradients $\mathcal L_q$ and $\mathcal L_v$; no kinetic/potential
+  decomposition is assumed. A transformation that is a symmetry of the configuration space, of a chart or of a
   kinematic structure need not leave a chosen $\mathcal L$ invariant. The corollary
   [[cor-cm-noether-charges-for-translations-rotations-and-boosts]] exhibits the failure
   explicitly: for the confining potential $U(q)=\tfrac k2|q|^2$ the translation and boost

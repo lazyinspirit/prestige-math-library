@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 7
-deps: [post-cm10-rigid-material, post-cm01-frames, def-cm-rigid-placement-and-body-angular-velocity, def-cm-mass-distribution-and-inertia-matrix, def-cm-special-orthogonal-group, lem-cm-so3-is-a-matrix-group, lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold, lem-cm-rigid-labeling-stabilizer, lem-cm-adapted-charts-and-galilean-transformations, def-cm01-units, def-matrix-space, def-euclidean-inner-product]
+deps: [post-cm10-rigid-material, post-cm01-frames, def-cm-rigid-placement-and-body-angular-velocity, def-cm-mass-distribution-and-inertia-matrix, def-cm-special-orthogonal-group, lem-cm-so3-is-a-matrix-group, lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold, lem-cm-rigid-labeling-stabilizer, lem-cm-adapted-charts-and-galilean-transformations, def-cm01-units, def-matrix-space, def-euclidean-inner-product, thm-rational-points-and-boxes-in-rn, def-measure]
 dependency_roles:
   post-cm10-rigid-material: formulation-prerequisite
   post-cm01-frames: formulation-prerequisite
@@ -20,6 +20,8 @@ dependency_roles:
   def-cm01-units: formulation-prerequisite
   def-matrix-space: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
+  thm-rational-points-and-boxes-in-rn: mathematical-premise
+  def-measure: mathematical-premise
 provenance:
   statement: ai-altered
   proof: not-applicable
@@ -80,22 +82,41 @@ $R(t)\in O(3)$ preserves the Euclidean inner product
 material point of reference coordinate $\rho$ has **spatial position**
 $x(t,\rho)$ and **reference coordinates** $\rho$.
 
-**(c) Faithfulness for nondegenerate labelings.** Suppose the label set
-$S\subseteq\mathbb R^3$ contains the origin and two linearly independent
-material vectors, and let $(c,R)$ and $(\bar c,\bar R)$ be configurations with
-$c+R\rho=\bar c+\bar R\rho$ for every $\rho\in S$. Evaluating at the origin of
-$S$ gives $c=\bar c$; then $\bar R^{-1}R$ is an element of $SO(3)$ fixing every
-vector of $S$, so $\bar R^{-1}R=I_3$ by [[lem-cm-rigid-labeling-stabilizer]]
-and $R=\bar R$.
-Hence for a nondegenerate labeling the assignment
-$(c,R)\mapsto(x:=c+R\,\cdot)$ is injective on configurations, and the
-orientation and the centre-of-mass position are attributes of the placement
-rather than artefacts of the parametrization. For a labeling supported on a line through
-the origin, by contrast, the rotations about that line fix the labels and the
-placement determines $R$ only up to composition with them; such a labeling is
-called **degenerate** and its orientation contains data not visible in the
-placed material points. Both cases are configurations of the model; the
-distinction is recorded here because later items use it.
+**(c) Physical labels and faithfulness.** The **physical label set** is
+$S:=\operatorname{supp}\nu$, defined here as the complement of the union of
+all open $\nu$-null subsets of $\mathbb R^3$. Thus $\rho\in S$ exactly when
+every open neighbourhood of $\rho$ has positive mass. This is a closed set
+carrying all mass: the rational open boxes form a countable basis
+([[thm-rational-points-and-boxes-in-rn]], $n=3$), so its complement is the
+union of the countably many null basis boxes. Disjointifying this union and
+using countable additivity ([[def-measure]]) gives $\nu(\mathbb R^3\setminus S)=0$.
+In particular $S\neq\varnothing$ because $m>0$.
+
+If two configurations satisfy $c+R\rho=\bar c+\bar R\rho$ for every
+$\rho\in S$, integration against the centred measure gives $mc=m\bar c$,
+hence $c=\bar c$. Their exact orientation ambiguity is therefore
+$$\bar R^{-1}R\in\operatorname{Stab}_{SO(3)}(S):=\{H\in SO(3):H\rho=\rho\text{ for every }\rho\in S\},$$
+the pointwise stabilizer of [[lem-cm-rigid-labeling-stabilizer]]. Conversely,
+$c=\bar c$ and this stabilizer condition give equality of the placements on
+$S$ by multiplication. A **nondegenerate physical labeling** is one whose
+$S$ contains two linearly independent vectors; its stabilizer is $\{I_3\}$
+by that lemma, so the physical placement determines $(c,R)$ uniquely.
+The same injectivity conclusion holds for any auxiliary label set containing
+the origin and two independent vectors, by evaluation at the origin followed
+by the lemma, as in [[post-cm10-rigid-material]] clause (iii).
+
+A **degenerate physical labeling** has no two independent vectors. If
+$S$ contains a nonzero vector $u$, then $S\subseteq\mathbb Ru$, and its
+stabilizer is exactly $\{H\in SO(3):Hu=u\}$, the rotations fixing the line
+$\mathbb Ru$ pointwise; the orientation is determined only up to right
+composition with this subgroup. If $S$ contains no nonzero vector, then
+$S=\{0\}$ and its stabilizer is all of $SO(3)$. More generally a singleton
+support $\{q\}$ must have $q=0$, since centring gives $mq=0$.
+Thus a centred point mass has no distinguished orientation axis. These are
+all the degenerate cases: after choosing any nonzero $u\in S$, failure of
+independence forces every vector in $S$ to be a multiple of $u$.
+Configuration pairs remain model data in every case, including orientation
+data invisible in the placed physical labels.
 
 **(d) Description in another inertial frame.** Let a second inertial frame be
 related to the first by the transformation $t'=t+b$, $x'=Qx+ut+a$ of

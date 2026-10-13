@@ -1,7 +1,7 @@
 ---
 id: pthm-cm07-euler-lagrange-equations
 kind: physics-theorem
-title: "The Euler-Lagrange equation of the mechanical Lagrangian is the model's equation of motion, and the stationary-action criterion"
+title: "The stationary-action criterion and the potential-part Euler-Lagrange equation"
 status: draft
 origin: session
 domain: physics
@@ -23,7 +23,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "The Euler-Lagrange equation of the mechanical Lagrangian of a declared potential presentation: for a C^2 curve of the model on a fixed interval, stationarity of the action, the vanishing of the Euler-Lagrange expression and the pointwise equation mass-operator acceleration equals minus the potential gradient are equivalent. The equivalence identifies the variational critical-point condition with the model's equation of motion on the interval; it is conditional on the adopted force branch and the declared presentation, and it asserts no solution existence, no minimisation and no empirical content."
+physical_scope: "The Euler-Lagrange equation of the mechanical Lagrangian of a declared potential presentation: for a C^2 curve of the model on a fixed interval, stationarity of the action, the vanishing of the Euler-Lagrange expression and the pointwise equation mass-operator acceleration equals minus the potential gradient are equivalent. The equivalence identifies the variational critical-point condition with the potential-part equation on the interval, and with the full model equation when d is identically zero; it is conditional on the adopted force branch and the declared presentation, and it asserts no solution existence, no minimisation and no empirical content."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.1, printed pages 10-13 (PDF pages 16-19): stationarity of the action is equivalent to Lagrange's equations"
@@ -83,13 +83,6 @@ asserted.
 
 ## Remarks
 
-- **Residual forces are excluded here.** Condition 3 uses $-\nabla_{x}U$ only.
-  When $d\not\equiv0$ the model's full equation of motion is
-  $\mathsf M x''=F=-\nabla_{x}U+d$, and the additional term $d$ appears on the
-  right of condition 3; the variational reading of the full equation requires
-  generalized forces and is treated separately on this page.
+- **Residual forces are excluded here.** Condition 3 uses $-\nabla_{x}U$ only. When $d\not\equiv0$ the model's full equation of motion is $\mathsf M x''=F=-\nabla_{x}U+d$, and the additional term $d$ appears on the right of condition 3; the variational reading of the full equation requires generalized forces and is treated separately on this page.
 
-- **The equation is an identity of curves, not a solution statement.** The
-  equivalence is between three conditions on one given $C^{2}$ curve. Whether
-  such curves exist through given data, and how they relate to the maximal
-  motions of the force model, is the content of the following theorem.
+- **The equation is an identity of curves, not a solution statement.** The equivalence is between three conditions on one given $C^{2}$ curve. Whether such curves exist through given data, and how they relate to the maximal motions of the force model, is the content of the following theorem.

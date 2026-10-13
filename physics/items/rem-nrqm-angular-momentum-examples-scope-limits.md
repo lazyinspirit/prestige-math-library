@@ -46,8 +46,8 @@ of the uniform-field Zeeman operator on product vectors in $D(H_{0})$, its
 factorized flow on all product vectors, an explicitly labeled two-level
 truncation with its level splitting, and the explicit precession matrices;
   and [[texp-nrqm-angular-momentum-stern-gerlach-splitting]] derives, under an
-  explicitly hypothetical containment premise, the separation of the two
-  sector mean transverse momenta.
+  explicitly hypothetical containment premise, the change in the difference
+  of the two sector mean transverse momenta.
 
 - **Status.** All four items are conditional statements inside the model of
   [[def-nrqm-kinematics-framework-massive-spin-s-model]] with the readings of
@@ -63,10 +63,20 @@ truncation with its level splitting, and the explicit precession matrices;
   identification with uncertainty under
   [[post-nrqm-framework-preparation-and-apparatus]]; detector resolution,
   background, calibration, sampling and selection are not modeled here. The
-  item [[pthm-nrqm-angular-momentum-zeeman-precession]] and
-  [[pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]] supply the
-  general laws the examples specialize, and their qualifications carry over
-  to every example.
+  directional-probability example specializes
+  [[pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]], while the
+  Zeeman toy example specializes the uniform static-field result
+  [[pthm-nrqm-angular-momentum-zeeman-precession]], retaining its isolated
+  evolution and its separate truncation assumption. The gradient-field
+  thought experiment instead retains its own hypotheses from
+  [[texp-nrqm-angular-momentum-stern-gerlach-splitting]]: real bounded
+  $B_z\in C^1(\mathbb R)$ with bounded derivative, an initial unit vector
+  in $D(H_Z^2)$, a constant gradient on the declared interval and the
+  hypothetical containment premise throughout $[0,\tau]$; normalized
+  sector means require positive sector weights. It does not specialize the
+  uniform-field precession theorem. The orbital example retains its
+  harmonic-polynomial and normalization hypotheses. Each computation
+  inherits the qualifications of the suppliers it actually uses.
 
 - **What is deliberately absent.** No experiment item, no measured
   frequency, no measured gyromagnetic parameter, no source-backed

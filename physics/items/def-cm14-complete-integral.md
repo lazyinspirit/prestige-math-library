@@ -97,13 +97,17 @@ base point only, and the theorem below records its local consequences.
 
 ## Remarks
 
-- **The mixed derivative is the no-caustic hypothesis.** The condition
-  $\det S_{q\alpha}(t_{0},q_{0},\alpha_{0})\ne0$ is what lets the constants
-  $\beta$ be solved locally for $q$ and the parameters $\alpha$ be solved
-  locally for momenta; where it fails the family of characteristic curves
-  focuses and the labels degenerate. The companion page exhibits the
-  failure at the turning points of a one-dimensional family and at the
-  conjugate time of the harmonic model.
+- **The mixed derivative is the local-coordinate hypothesis.** The condition
+  $\det S_{q\alpha}(t_{0},q_{0},\alpha_{0})\ne0$ gives the local inverse
+  function theorem conclusions used by the characteristics theorem: the
+  momentum equation $p=S_q$ can be solved locally for $\alpha$, and the
+  constants equation $\beta=S_\alpha$ can be solved locally for $q$. If the
+  determinant vanishes, those local-coordinate conclusions are not supplied
+  by that theorem; a characteristic projection may develop a caustic. The
+  companion page verifies this degeneration for the harmonic model at its
+  conjugate times, where the displayed $S_{x\alpha}$ is unbounded and the
+  label-to-position derivative vanishes. Its Kepler example separately
+  treats simple turning points of a radial action integral.
 
 - **Finite-dimensional reading.** No topology of the parameter set beyond
   the open subset $A'\subseteq\mathbb R^{m}$ is used, and no choice

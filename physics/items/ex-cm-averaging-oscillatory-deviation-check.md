@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 3
-deps: [thm-cm-averaging-for-fast-periodic-oscillations, def-cm-averaging-data-and-averaged-field, cor-primitives-of-a-continuous-function, thm-sine-and-cosine-derivatives, def-pi-via-first-positive-cosine-zero, thm-cosine-has-a-smallest-positive-zero]
+deps: [thm-cm-averaging-for-fast-periodic-oscillations, def-cm-averaging-data-and-averaged-field, cor-primitives-of-a-continuous-function, thm-sine-and-cosine-derivatives, def-pi-via-first-positive-cosine-zero, thm-cosine-has-a-smallest-positive-zero, thm-sine-cosine-zero-sets-and-fundamental-period, thm-sine-cosine-signs-monotonicity-and-ranges]
 dependency_roles:
   thm-cm-averaging-for-fast-periodic-oscillations: mathematical-premise
   def-cm-averaging-data-and-averaged-field: mathematical-premise
@@ -14,6 +14,8 @@ dependency_roles:
   thm-sine-and-cosine-derivatives: mathematical-premise
   def-pi-via-first-positive-cosine-zero: mathematical-premise
   thm-cosine-has-a-smallest-positive-zero: mathematical-premise
+  thm-sine-cosine-zero-sets-and-fundamental-period: mathematical-premise
+  thm-sine-cosine-signs-monotonicity-and-ranges: mathematical-premise
 provenance:
   statement: ai-generated
   proof: ai-generated
@@ -46,16 +48,18 @@ The exact solution is $x(t)=\tfrac1{100}\sin t$, whose modulus is at most $\tfra
 
 **Given:** The data above and the scalar ODE $x'=\varepsilon\cos t$, $x(0)=0$.
 
-[L1] For this $f$, $\bar f(x)=\frac1{2\pi}\int_0^{2\pi}\cos s\,ds=0$ and $g(t,x)=\int_0^t\cos s\,ds=\sin t$ on $[0,2\pi]$, extended periodically; this is the construction of [[def-cm-averaging-data-and-averaged-field]], evaluated with the fundamental theorem for continuous integrands ([[cor-primitives-of-a-continuous-function]], [[thm-sine-and-cosine-derivatives]]). [given]
+[L1] For this $f$, $\bar f(x)=\frac1{2\pi}\int_0^{2\pi}\cos s\,ds=0$ and $g(t,x)=\int_0^t\cos s\,ds=\sin t$ on $[0,2\pi]$, extended periodically; this is the construction of [[def-cm-averaging-data-and-averaged-field]], evaluated with the fundamental theorem for continuous integrands ([[cor-primitives-of-a-continuous-function]], [[thm-sine-and-cosine-derivatives]]); the endpoint values $\sin0=\sin(2\pi)=0$ and periodicity used here are supplied by [L4]. [given]
 
 [L2] The averaging theorem ([[thm-cm-averaging-for-fast-periodic-oscillations]]): under its hypotheses with a solution $y:[0,A/\varepsilon]\to\overline B(x_0,R-\rho)$ of the averaged system and $\varepsilon K<\rho$, the solution $x$ of $x'=\varepsilon f(t,x)$, $x(0)=x_0$ exists on $[0,A/\varepsilon]$ and satisfies $\|x(t)-y(t)\|_2\le\varepsilon K$ there, with $K=e^{LA}[B+(LB+B_1M)A]$, $B=2MP$, $B_1=2LP$. [given]
 
 [L3] The definition $\pi=2\gamma$ and theorem $0<\gamma<2$ give $0<\pi<4$ ([[def-pi-via-first-positive-cosine-zero]], [[thm-cosine-has-a-smallest-positive-zero]]).
 
+[L4] Sine and cosine are $2\pi$-periodic, and $\sin(2\pi)=\sin0=0$ by their zero set ([[thm-sine-cosine-zero-sets-and-fundamental-period]]). Their ranges are $[-1,1]$ ([[thm-sine-cosine-signs-monotonicity-and-ranges]]); in particular $|\cos t|,|\sin t|\le1$. Their differentiability in [L1] gives continuity.
+
 ## Verification
 
 **Proof technique:** direct; evaluate the averaging data, check the hypotheses, and compare the bound with the exact solution.
 
-1.1 By [L1], $\bar f=0$ and $g(t,x)=\sin t$, so the averaged system is $y'=0$; the constant curve $y\equiv0$ is its solution with $y(0)=0$ on $[0,100]$, and $\|y(t)-0\|=0\le R-\rho=\tfrac12$. The constants are $M=1$, $L=0$, $B=4\pi$, $B_1=0$, $K=e^{0}[4\pi+0]=4\pi$, and with $\varepsilon=\tfrac1{100}$, [L3] gives $\varepsilon K=\tfrac{\pi}{25}<\tfrac4{25}<1/2=\rho$. [given, L1, L3, algebra]
+1.1 By [L4], the continuous field $f(t,x)=\cos t$ is $2\pi$-periodic and bounded by one; its state derivative is zero, so $M=1$ and $L=0$ meet the hypotheses on $O=\mathbb R$. By [L1], $\bar f=0$ and $g(t,x)=\sin t$, so the averaged system is $y'=0$; the constant curve $y\equiv0$ is its solution with $y(0)=0$ on $[0,100]$, and $\|y(t)-0\|=0\le R-\rho=\tfrac12$. The constants are $M=1$, $L=0$, $B=4\pi$, $B_1=0$, $K=e^{0}[4\pi+0]=4\pi$, and with $\varepsilon=\tfrac1{100}$, [L3] gives $\varepsilon K=\tfrac{\pi}{25}<\tfrac4{25}<1/2=\rho$. [given, L1, L3, L4, algebra]
 
-2.1 By [L2] the solution $x$ of $x'=\tfrac1{100}\cos t$, $x(0)=0$ exists on $[0,100]$ and satisfies $|x(t)|\le\tfrac{\pi}{25}$ there. Directly, the primitive $\sin t$ gives $x(t)=\tfrac1{100}\sin t$ by [L1], so $|x(t)|\le\tfrac1{100}$; the stated bound holds and is not attained. [step 1.1, L1, L2, algebra] ∎
+2.1 By [L2] the solution $x$ of $x'=\tfrac1{100}\cos t$, $x(0)=0$ exists on $[0,100]$ and satisfies $|x(t)|\le\tfrac{\pi}{25}$ there. Directly, the primitive $\sin t$ gives $x(t)=\tfrac1{100}\sin t$ by [L1], so $|x(t)|\le\tfrac1{100}$ by [L4]; the stated bound holds and is not attained. [step 1.1, L1, L2, L4, algebra] ∎

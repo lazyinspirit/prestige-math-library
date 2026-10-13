@@ -6,8 +6,9 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 2
-deps: [def-cm-legendre-map-in-a-time-dependent-chart, def-cm-time-dependent-lagrangian-and-action, thm-euclidean-inverse-function-theorem, thm-continuous-partial-derivatives-imply-total-differentiability, thm-chain-rule-for-total-derivatives, def-total-derivative-in-euclidean-space, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, def-ck-euclidean-maps-and-diffeomorphisms, def-ck-and-multi-index-notation-in-several-variables, def-linear-map, def-invertible-euclidean-linear-map, def-matrix-product-and-identity-matrix, def-c-one-map-and-local-inverse, cor-square-matrix-invertible-iff-determinant-is-a-unit]
+deps: [thm-rank-nullity, def-cm-legendre-map-in-a-time-dependent-chart, def-cm-time-dependent-lagrangian-and-action, thm-euclidean-inverse-function-theorem, thm-continuous-partial-derivatives-imply-total-differentiability, thm-chain-rule-for-total-derivatives, def-total-derivative-in-euclidean-space, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, def-ck-euclidean-maps-and-diffeomorphisms, def-ck-and-multi-index-notation-in-several-variables, def-linear-map, def-invertible-euclidean-linear-map, def-matrix-product-and-identity-matrix, def-c-one-map-and-local-inverse, cor-square-matrix-invertible-iff-determinant-is-a-unit]
 dependency_roles:
+  thm-rank-nullity: mathematical-premise
   def-cm-legendre-map-in-a-time-dependent-chart: mathematical-premise
   def-cm-time-dependent-lagrangian-and-action: mathematical-premise
   thm-euclidean-inverse-function-theorem: mathematical-premise
@@ -60,40 +61,19 @@ $$D\mathbb F_{\mathcal L}(t,q,v)(\tau,\delta q,\delta v) =\Bigl(\tau,\ \delta q,
 
 ## Facts & Assumptions
 
-**Given:** The open sets $J\subseteq\mathbb R$, $U\subseteq\mathbb R^n$, the $C^2$ Lagrangian
-$\mathcal L$, a point $(t_0,q_0,v_0)\in J\times U\times\mathbb R^n$, and the notation
-$\mathcal L_{vt},\mathcal L_{vq},\mathcal L_{vv}$ for the matrices of partial derivatives of
-$\mathcal L_v$ with respect to the three blocks ([[def-jacobian-matrix-and-gradient]],
-[[def-directional-and-partial-derivatives]], [[def-ck-and-multi-index-notation-in-several-variables]]).
+**Given:** The open sets $J\subseteq\mathbb R$, $U\subseteq\mathbb R^n$, the $C^2$ Lagrangian $\mathcal L$, a point $(t_0,q_0,v_0)\in J\times U\times\mathbb R^n$, and the notation $\mathcal L_{vt},\mathcal L_{vq},\mathcal L_{vv}$ for the matrices of partial derivatives of $\mathcal L_v$ with respect to the three blocks ([[def-jacobian-matrix-and-gradient]], [[def-directional-and-partial-derivatives]], [[def-ck-and-multi-index-notation-in-several-variables]]).
 
-[F1] $\mathcal L_v$ is of class $C^1$ because $\mathcal L$ is of class $C^2$
-([[def-ck-euclidean-maps-and-diffeomorphisms]]); hence $\mathcal L_v$ is totally differentiable
-everywhere with derivative the linear map given by its Jacobian matrix
-$\bigl(\mathcal L_{vt}\ \mathcal L_{vq}\ \mathcal L_{vv}\bigr)$, and that derivative depends
-continuously on the point ([[thm-continuous-partial-derivatives-imply-total-differentiability]],
-[[def-total-derivative-in-euclidean-space]]).
+[F1] $\mathcal L_v$ is of class $C^1$ because $\mathcal L$ is of class $C^2$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]); hence $\mathcal L_v$ is totally differentiable everywhere with derivative the linear map given by its Jacobian matrix $\bigl(\mathcal L_{vt}\ \mathcal L_{vq}\ \mathcal L_{vv}\bigr)$, and that derivative depends continuously on the point ([[thm-continuous-partial-derivatives-imply-total-differentiability]], [[def-total-derivative-in-euclidean-space]]).
 
-[F2] The chain rule for total derivatives ([[thm-chain-rule-for-total-derivatives]]) computes
-derivatives of composites; the derivative of the identity-like map
-$(t,q,v)\mapsto(t,q)$ is the projection $(\tau,\delta q,\delta v)\mapsto(\tau,\delta q)$, and
-scalar multiplication of a differentiable map by $1$ is the map itself.
+[F2] The chain rule for total derivatives ([[thm-chain-rule-for-total-derivatives]]) computes derivatives of composites; the derivative of the identity-like map $(t,q,v)\mapsto(t,q)$ is the projection $(\tau,\delta q,\delta v)\mapsto(\tau,\delta q)$, and scalar multiplication of a differentiable map by $1$ is the map itself.
 
-[F3] The Euclidean inverse function theorem ([[thm-euclidean-inverse-function-theorem]]): a
-$C^1$ map between open subsets of $\mathbb R^m$ whose derivative at a point is invertible has a
-local $C^1$ inverse there, in the sense of [[def-c-one-map-and-local-inverse]], with derivative
-$Dg(y)=Df(g(y))^{-1}$.
+[F3] The Euclidean inverse function theorem ([[thm-euclidean-inverse-function-theorem]]): a $C^1$ map between open subsets of $\mathbb R^m$ whose derivative at a point is invertible has a local $C^1$ inverse there, in the sense of [[def-c-one-map-and-local-inverse]], with derivative $Dg(y)=Df(g(y))^{-1}$.
 
-[F4] Linear algebra of block maps
-([[def-linear-map]], [[def-invertible-euclidean-linear-map]],
-[[def-matrix-product-and-identity-matrix]]): a linear map $L$ presented in blocks is injective iff
-its kernel is trivial, and on finite-dimensional spaces injectivity is equivalent to
-invertibility.
+[F4] Linear algebra of block maps ([[def-linear-map]], [[def-invertible-euclidean-linear-map]], [[def-matrix-product-and-identity-matrix]]): a linear map $L$ presented in blocks is injective iff its kernel is trivial, and on finite-dimensional spaces injectivity is equivalent to invertibility for endomorphisms: [[thm-rank-nullity]] gives full image dimension from a zero kernel, hence a bijection whose inverse is linear and two-sided.
 
 ## Proof
 
-**Proof technique:** direct; compute the block derivative, reduce invertibility to invertibility
-of the velocity Hessian by an explicit kernel computation, and apply the inverse function
-theorem.
+**Proof technique:** direct; compute the block derivative, reduce invertibility to invertibility of the velocity Hessian by an explicit kernel computation, and apply the inverse function theorem.
 
 1.1 By [F1] the map $\mathcal L_v$ is totally differentiable, and by [F2] the Legendre map $\mathbb F_{\mathcal L}(t,q,v)=(t,q,\mathcal L_v(t,q,v))$ is totally differentiable with the displayed action on $(\tau,\delta q,\delta v)$: the first two components reproduce $\tau$ and $\delta q$, and the third is the sum of the three block contributions. This proves clause 1. [F1, F2, algebra]
 
@@ -105,11 +85,6 @@ theorem.
 
 ## Remarks
 
-- The determinant criterion in clause 2 is the reason the single scalar condition
-  $\det\mathcal L_{vv}\ne0$ carries all the local invertibility information: the first two blocks
-  of the derivative are already the identity. No determinant of a larger block matrix is needed,
-  because the kernel computation of step 1.2 is performed directly.
+- The determinant criterion in clause 2 is the reason the single scalar condition $\det\mathcal L_{vv}\ne0$ carries all the local invertibility information: the first two blocks of the derivative are already the identity. No determinant of a larger block matrix is needed, because the kernel computation of step 1.2 is performed directly.
 
-- Invertibility of the derivative is local. It neither asserts that $\mathbb F_{\mathcal L}$ is
-  globally injective nor that it is surjective onto the momentum fibre; those global properties
-  are the hyperregularity hypothesis of [[def-cm-legendre-map-in-a-time-dependent-chart]].
+- Invertibility of the derivative is local. It neither asserts that $\mathbb F_{\mathcal L}$ is globally injective nor that it is surjective onto the momentum fibre; those global properties are the hyperregularity hypothesis of [[def-cm-legendre-map-in-a-time-dependent-chart]].

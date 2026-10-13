@@ -36,7 +36,7 @@ verification:
 ## Statement
 
 Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$
-([[def-countable-choice]]). Let $s\ge5$, let $A^\mu,B$ be a periodic symmetric
+([[def-countable-choice]]). Let $s\ge5$ be an integer, let $A^\mu,B$ be a periodic symmetric
 hyperbolic coefficient family on the open set $O\subseteq\mathbb R^m$
 ([[def-gr-periodic-symmetric-hyperbolic-system]]) and let $K\subseteq O$ be
 compact, and let $K'\subseteq O$ be compact with $K$ contained in the

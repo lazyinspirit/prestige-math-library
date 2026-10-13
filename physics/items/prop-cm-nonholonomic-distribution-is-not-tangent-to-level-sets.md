@@ -5,7 +5,7 @@ title: "The distribution $\\mathrm{span}\\{\\partial_x,\\partial_y+x\\partial_z\
 status: draft
 origin: pipeline
 domain: mathematics
-dependency_level: 1
+dependency_level: 2
 deps: [def-cm-nonholonomic-velocity-constraint-law, thm-clairaut-schwarz-mixed-partials, thm-algebra-of-derivatives, def-derivative, def-ck-euclidean-maps-and-diffeomorphisms, def-ck-and-multi-index-notation-in-several-variables, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, def-regular-critical-points-values-and-level-sets, def-tangent-space-to-a-regular-level-set]
 dependency_roles:
   def-cm-nonholonomic-velocity-constraint-law: mathematical-premise
@@ -44,36 +44,22 @@ then $DG=0$ on $O$. Consequently, if $G:O\to\mathbb R$ is $C^2$ and $DG(q)\ne0$ 
 $q\in O$ (so that every level set of $G$ is a regular level set with tangent space
 $\ker DG(q)$, [[def-regular-critical-points-values-and-level-sets]],
 [[def-tangent-space-to-a-regular-level-set]]), then the distribution
-$D(q)=\operatorname{span}\{A(q),B(q)\}$ of [[def-cm-nonholonomic-velocity-constraint-law]] is not
-equal to $\ker DG(q)$; that is, no such $G$ has level sets whose tangent planes are everywhere the
+$D(q)=\operatorname{span}\{A(q),B(q)\}$ of [[def-cm-nonholonomic-velocity-constraint-law]] cannot equal $\ker DG(q)$ for every $q\in O$; that is, no such $G$ has level sets whose tangent planes are everywhere the
 virtual displacements of the constraint $z'=xy'$.
 
 ## Facts & Assumptions
 
-**Given:** The open set $O$, a $C^2$ function $G:O\to\mathbb R$, and the two derivations
-$A=\partial_x$, $B=\partial_y+x\partial_z$.
+**Given:** The open set $O$, a $C^2$ function $G:O\to\mathbb R$, and the two derivations $A=\partial_x$, $B=\partial_y+x\partial_z$.
 
-[F1] Partial derivatives, the gradient and the Jacobian
-([[def-directional-and-partial-derivatives]], [[def-jacobian-matrix-and-gradient]],
-[[def-ck-and-multi-index-notation-in-several-variables]],
-[[def-ck-euclidean-maps-and-diffeomorphisms]]): $AG=\partial_xG$ and
-$BG=\partial_yG+x\partial_zG$ are the displayed $C^1$ functions, and $DG=(\partial_xG,\partial_yG,\partial_zG)$.
+[F1] Partial derivatives, the gradient and the Jacobian ([[def-directional-and-partial-derivatives]], [[def-jacobian-matrix-and-gradient]], [[def-ck-and-multi-index-notation-in-several-variables]], [[def-ck-euclidean-maps-and-diffeomorphisms]]): $AG=\partial_xG$ and $BG=\partial_yG+x\partial_zG$ are the displayed $C^1$ functions, and $DG=(\partial_xG,\partial_yG,\partial_zG)$.
 
-[F2] Equality of mixed partial derivatives for a $C^2$ function
-([[thm-clairaut-schwarz-mixed-partials]]):
-$\partial_x\partial_yG=\partial_y\partial_xG$ and
-$\partial_x\partial_zG=\partial_z\partial_xG$ on $O$.
+[F2] Equality of mixed partial derivatives for a $C^2$ function ([[thm-clairaut-schwarz-mixed-partials]]): $\partial_x\partial_yG=\partial_y\partial_xG$ and $\partial_x\partial_zG=\partial_z\partial_xG$ on $O$.
 
-[F3] One-variable calculus and the product rule
-([[thm-algebra-of-derivatives]], [[def-derivative]]): the composition of partial derivatives
-acts by the usual product rule, so
-$ABG=\partial_x\bigl(\partial_yG+x\partial_zG\bigr)=\partial_x\partial_yG+\partial_zG+x\partial_x\partial_zG$
-and $BAG=\partial_y\partial_xG+x\partial_z\partial_xG$.
+[F3] One-variable calculus and the product rule ([[thm-algebra-of-derivatives]], [[def-derivative]]): the composition of partial derivatives acts by the usual product rule, so $ABG=\partial_x\bigl(\partial_yG+x\partial_zG\bigr)=\partial_x\partial_yG+\partial_zG+x\partial_x\partial_zG$ and $BAG=\partial_y\partial_xG+x\partial_z\partial_xG$.
 
 ## Proof
 
-**Proof technique:** direct; bracket the two defining vector fields and use the equality of mixed
-partials.
+**Proof technique:** direct; bracket the two defining vector fields and use the equality of mixed partials.
 
 1.1 The hypotheses $AG=0$ and $BG=0$ on $O$ give, by the product rule and linearity of the derivations, $A(BG)-B(AG)=0-0=0$ on $O$; that is, $[A,B]G=0$ where $[A,B]G:=ABG-BAG$. [F1, F3, given, algebra]
 
@@ -85,14 +71,6 @@ partials.
 
 ## Remarks
 
-- The computation shows that the constraint distribution of $z'=xy'$ is not tangent to a
-  two-dimensional regular level foliation: steps 1.1-1.2 identify the bracket $[A,B]$ on $C^2$
-  functions as the derivation $\partial_z$, and the hypothesis that $A$ and $B$ annihilate a
-  defining function forces $\partial_zG=0$ and hence a vanishing gradient. The conclusion needed
-  by the classical-mechanics development is drawn directly, without invoking a converse of the
-  Frobenius theorem.
+- The computation shows that the constraint distribution of $z'=xy'$ is not tangent to a two-dimensional regular level foliation: steps 1.1-1.2 identify the bracket $[A,B]$ on $C^2$ functions as the derivation $\partial_z$, and the hypothesis that $A$ and $B$ annihilate a defining function forces $\partial_zG=0$ and hence a vanishing gradient. The conclusion needed by the classical-mechanics development is drawn directly, without invoking a converse of the Frobenius theorem.
 
-- The proposition is the precise sense in which $z'=xy'$ is a *non-holonomic* constraint: it is
-  not equivalent to $G(q)=\text{constant}$ for any $C^2$ function with nonvanishing differential.
-  Nothing is asserted about constraints that merely look similar or about kinematic mechanisms;
-  those belong to the consuming physical models.
+- The proposition is the precise sense in which $z'=xy'$ is a *non-holonomic* constraint: it is not equivalent to $G(q)=\text{constant}$ for any $C^2$ function with nonvanishing differential. Nothing is asserted about constraints that merely look similar or about kinematic mechanisms; those belong to the consuming physical models.

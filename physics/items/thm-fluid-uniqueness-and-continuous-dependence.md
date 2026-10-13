@@ -41,7 +41,7 @@ verification:
 $$\|w(t)\|_{L^2}\le e^{\Theta t}\|w(0)\|_{L^2}\qquad(0\le t\le T).$$
 3. **Continuous dependence in $H^{s-1}$.** There is a finite constant $K=K(s,B,T,\nu)$ such that
 $$\sup_{0\le t\le T}\|u(t)-v(t)\|_{H^{s-1}}\;\le\;K\,\|u_0-v_0\|_{L^2}^{1/s}.$$
-In particular the solution map $u_0\mapsto u$ is continuous from the bounded set $\{\|u_0\|_{H^s}\le B\}$ with the $L^2$-topology into $C([0,T],H^{s-1})$.
+In particular the solution map $u_0\mapsto u$ is continuous from the bounded set $\mathcal D_{s,B}:=\{u_0\in H^s_\sigma(\mathbb T^3;\mathbb R^3)\cap C^\infty(\mathbb T^3;\mathbb R^3):\|u_0\|_{H^s}\le B\}$ with its induced $L^2$-topology into $C([0,T],H^{s-1})$.
 
 ## Facts & Assumptions
 
@@ -76,9 +76,9 @@ In particular the solution map $u_0\mapsto u$ is continuous from the bounded set
 
 3.2 Uniqueness: if $u(0)=v(0)$ then $\|w(0)\|_{L^2}=0$, so $\|w(t)\|_{L^2}=0$ for all $t\le T$ by step 2.1; hence $w=0$ almost everywhere, and since $w$ is continuous, $w=0$ everywhere by [F6]; this is claim 1. [step 2.1, F6]
 
-4.1 Continuous dependence: by [F4] applied to $w(t)$ and by the bounds for both solutions in step 1.1, $\|w(t)\|_{H^{s-1}}\le\|w(t)\|_{L^2}^{1/s}\|w(t)\|_{H^s}^{(s-1)/s}\le\bigl(e^{\Theta T}\|w(0)\|_{L^2}\bigr)^{1/s}(4B)^{(s-1)/s}$. Taking the supremum over $t\in[0,T]$ gives claim 3 with $K:=e^{\Theta T/s}(4B)^{(s-1)/s}$ (using $\Theta\le6W_{s-1}B$ so that $K$ depends only on $s,B,T,\nu$ through $W_{s-1}$ and $C_s$; the viscosity enters only through $T$ and the solution bounds). [step 2.1, step 3.1, F3, F4]
+4.1 Continuous dependence: by [F4] applied to $w(t)$ and by the bounds for both solutions in step 1.1, $\|w(t)\|_{H^{s-1}}\le\|w(t)\|_{L^2}^{1/s}\|w(t)\|_{H^s}^{(s-1)/s}\le\bigl(e^{\Theta T}\|w(0)\|_{L^2}\bigr)^{1/s}(4B)^{(s-1)/s}$. Taking the supremum over $t\in[0,T]$ and using $\Theta\le6W_{s-1}B$ gives claim 3 with the uniform constant $K:=e^{6W_{s-1}BT/s}(4B)^{(s-1)/s}$, which is finite and independent of the data and $\nu$. [step 1.1, step 2.1, step 3.1, F3, F4]
 
-5.1 Claims 1-3 are established by steps 3.2, 2.1 and 4.1. [step 3.2, step 2.1, step 4.1] ∎
+5.1 Claims 1-3 are established by steps 3.2, 2.1 and 4.1. Existence and uniqueness give a well-defined solution map on $\mathcal D_{s,B}$, and step 4.1 makes its output distance tend to zero whenever its input $L^2$ distance tends to zero, proving the stated continuity. [given, step 3.2, step 2.1, step 4.1] ∎
 
 ## Remarks
 

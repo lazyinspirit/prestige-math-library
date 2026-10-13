@@ -7,7 +7,7 @@ title: "Smooth local continuity equation and its integrated forms"
 status: draft
 origin: pipeline
 dependency_level: 0
-deps: [thm-differentiation-under-the-integral-sign, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, thm-dominated-convergence, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, cor-mean-value-theorem, def-directional-and-partial-derivatives, def-laplacian-of-a-c2-function, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-unbounded-integral-against-a-pvm, def-complex-lp-and-euclidean-test-function-conventions, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice]
+deps: [thm-differentiation-under-the-integral-sign, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, thm-dominated-convergence, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, cor-mean-value-theorem, def-directional-and-partial-derivatives, def-laplacian-of-a-c2-function, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-unbounded-integral-against-a-pvm, def-complex-lp-and-euclidean-test-function-conventions, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-axiom-of-choice]
 dependency_roles:
   thm-differentiation-under-the-integral-sign: mathematical-premise
   thm-divergence-theorem-for-bounded-c-one-euclidean-domains: mathematical-premise
@@ -23,6 +23,7 @@ dependency_roles:
   def-complex-lp-and-euclidean-test-function-conventions: mathematical-premise
   def-l-p-space-as-a-quotient-by-null-functions: mathematical-premise
   def-countable-choice: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -72,7 +73,8 @@ then, for all $s,t\in I$ such that the closed interval joining $s$ and $t$
 is contained in $I$,
 $$\|\psi(\cdot,s)\|_{L^2(\mathbb R^3)}^2=\|\psi(\cdot,t)\|_{L^2(\mathbb R^3)}^2;$$
 
-(d) *norm conservation from unitary dynamics.* If $K$ is a self-adjoint
+(d) *norm conservation from unitary dynamics.* Assume additionally the Axiom
+of Choice ([[def-axiom-of-choice]]). If $K$ is a self-adjoint
 operator on a complex Hilbert space $\mathcal H$ and
 $\psi(t):=e^{-itK/\hbar}\psi_0$ for some $\psi_0\in\mathcal H$, then
 $\|\psi(t)\|=\|\psi_0\|$ for every $t\in\mathbb R$
@@ -86,13 +88,13 @@ interpretation of $|\psi|^2$ as a measured counting rate is asserted.
 
 **Given:** $\hbar,m>0$, open $\Omega\subseteq\mathbb R^3$, nonempty open time set $I$, continuous real $V$, a $C^2$ solution $\psi$ of the displayed equation with continuous $\partial_t\psi$, and the current $j$.
 
-[F1] Classical calculus rules: $\partial_t|\psi|^2=2\operatorname{Re}(\overline\psi\,\partial_t\psi)$ and $\partial_j|\psi|^2=2\operatorname{Re}(\overline\psi\,\partial_j\psi)$, and $\operatorname{div}j=\frac\hbar m\operatorname{Im}\bigl(|\nabla\psi|^2+\overline\psi\,\Delta\psi\bigr)=\frac\hbar m\operatorname{Im}(\overline\psi\Delta\psi)$ because $|\nabla\psi|^2$ is real ([[thm-algebra-of-derivatives]], [[thm-chain-rule-for-total-derivatives]], [[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]]).
+[F1] The real one-variable product and sum rules are supplied by [[thm-algebra-of-derivatives]]. Writing $\psi=u+iv$ with real $u,v$ and restricting to a time or spatial coordinate line gives $\partial_t|\psi|^2=\partial_t(u^2+v^2)=2u\partial_tu+2v\partial_tv=2\operatorname{Re}(\overline\psi\,\partial_t\psi)$ and likewise for $\partial_j|\psi|^2$. Also $j=\frac\hbar m(u\nabla v-v\nabla u)$; the real scalar-vector product rule of [[lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]] gives $\operatorname{div}j=\frac\hbar m(u\Delta v-v\Delta u)=\frac\hbar m\operatorname{Im}(\overline\psi\Delta\psi)$, since the two gradient inner products cancel.
 
 [F2] The conjugated equation: $\partial_t\psi=\frac i\hbar\bigl(\frac{\hbar^2}{2m}\Delta\psi-V\psi\bigr)$, since $V$ is real-valued.
 
 [F3] Divergence theorem: for a bounded $C^1$ domain $D$ and $F\in C^1(\overline D;\mathbb R^3)$, $\int_D\operatorname{div}F\,dx=\int_{\partial D}F\cdot n\,dS$ ([[thm-divergence-theorem-for-bounded-c-one-euclidean-domains]]).
 
-[F4] Differentiation under the integral sign: for $f:D\times I\to\mathbb C$ with $x\mapsto f(x,t)$ integrable for each $t$, $t\mapsto f(x,t)$ differentiable for a.e. $x$, and $|\partial_tf(x,t)|\le G(x)$ for an integrable $G$, the function $t\mapsto\int_Df(x,t)dx$ is differentiable with derivative $\int_D\partial_tf(x,t)dx$ ([[thm-differentiation-under-the-integral-sign]]).
+[F4] Differentiation under the integral sign on an open interval $J\subseteq\mathbb R$: if $f:D\times J\to\mathbb C$ has integrable spatial sections, differentiable time sections outside one measurable null set, measurable spatial sections of its time derivative, and $|\partial_tf(x,t)|\le G(x)$ outside one measurable null set for every $t\in J$, with one nonnegative $G\in L^1(D)$, then $t\mapsto\int_Df(x,t)dx$ is differentiable on $J$ with derivative $\int_D\partial_tf(x,t)dx$ ([[thm-differentiation-under-the-integral-sign]]).
 
 [F5] Dominated convergence, and the fact that an integral over $B_R$ of an $L^1$ class converges to the integral over $\mathbb R^3$ as $R\to\infty$ ([[thm-dominated-convergence]]).
 
@@ -104,7 +106,7 @@ interpretation of $|\psi|^2$ as a measured counting rate is asserted.
 
 1.1 [The pointwise identity] At a point $(x,t)\in\Omega\times I$, [F2] gives $\partial_t\psi=\frac i\hbar\bigl(\frac{\hbar^2}{2m}\Delta\psi-V\psi\bigr)$ and hence, by [F1], $\partial_t|\psi|^2=2\operatorname{Re}\bigl(\overline\psi\,\partial_t\psi\bigr)=2\operatorname{Re}\Bigl[\frac i\hbar\Bigl(\frac{\hbar^2}{2m}\overline\psi\Delta\psi-V|\psi|^2\Bigr)\Bigr]=\frac{\hbar}{m}\operatorname{Re}\bigl(i\,\overline\psi\Delta\psi\bigr)=-\frac\hbar m\operatorname{Im}\bigl(\overline\psi\Delta\psi\bigr)$, because the term $-\frac i\hbar V|\psi|^2$ is purely imaginary and $V$ is real. Comparing with [F1]'s expression for $\operatorname{div}j$ gives $\partial_t|\psi|^2+\operatorname{div}j=0$, which is (a). [given, F1, F2, algebra]
 
-2.1 [The integrated balance] Let $D$ be as in (b). Since $\partial_t|\psi|^2=-\operatorname{div}j$ is continuous on the compact set $\overline D\times[s,t]$ for every compact $[s,t]\subseteq I$, [F4] applies on the bounded domain $D$ with the constant majorant $\max_{\overline D\times[s,t]}|\operatorname{div}j|$: $t\mapsto\int_D|\psi|^2$ is differentiable on $I$ with derivative $-\int_D\operatorname{div}j(\cdot,t)$. By [F3] applied to the $C^1$ field $j(\cdot,t)$ on the bounded $C^1$ domain $D$, this equals $-\int_{\partial D}j(\cdot,t)\cdot n\,dS$. This is (b). [given, step 1.1, F3, F4, algebra]
+2.1 [The integrated balance] Let $D$ be as in (b). If $D=\varnothing$, then $\partial D=\varnothing$, both integrals are zero and (b) holds. Suppose $D\ne\varnothing$ and fix $t_0\in I$. Openness of $I$ gives $\varepsilon>0$ with $[t_0-\varepsilon,t_0+\varepsilon]\subseteq I$; put $J:=(t_0-\varepsilon,t_0+\varepsilon)$. By step 1.1, $\partial_t|\psi|^2=-\operatorname{div}j$, continuous on the nonempty compact set $\overline D\times[t_0-\varepsilon,t_0+\varepsilon]$, so $M:=\max_{\overline D\times[t_0-\varepsilon,t_0+\varepsilon]}|\operatorname{div}j|<\infty$. Each section $|\psi(\cdot,t)|^2$ is bounded on $\overline D$ and integrable on the bounded set $D$; its time derivative exists everywhere and has continuous, hence measurable, spatial sections. The fixed majorant $G(x):=M$ on $D$ is integrable and bounds the derivative for every $t\in J$, with no exceptional set. Thus [F4] applies to $D\times J$, giving differentiability at $t_0$ and derivative $-\int_D\operatorname{div}j(\cdot,t_0)$. By [F3] applied to the $C^1$ field $j(\cdot,t_0)$, this equals $-\int_{\partial D}j(\cdot,t_0)\cdot n\,dS$. Since $t_0$ was arbitrary, (b) holds on the possibly disconnected open set $I$. [given, step 1.1, F3, F4, algebra]
 
 3.1 [Global conservation] Assume (c), and let $s,t\in I$ with $s<t$ and $[s,t]\subseteq I$. For $R>0$ with $K_R:=\{x:|x|<R\}$ we have by step 2.1 applied to $D=K_R$ (for $R$ so large that $\overline{K_R}\subseteq\mathbb R^3$, which always holds) $\frac d{d\tau}\int_{K_R}|\psi|^2=-\int_{\partial K_R}j\cdot n\,dS$, so [F7] gives $\bigl|\int_{K_R}|\psi(x,t)|^2dx-\int_{K_R}|\psi(x,s)|^2dx\bigr|\le(t-s)\sup_{\tau\in[s,t]}\int_{\partial K_R}|j|\,dS$, and the right side tends to $0$ as $R\to\infty$ by the hypothesis on the flux. By [F5], $\int_{K_R}|\psi(\cdot,\tau)|^2\to\|\psi(\cdot,\tau)\|^2$ for $\tau=t$ and $\tau=s$, using $|\psi|^2\le g\in L^1$. Letting $R\to\infty$ in the inequality gives $\bigl|\|\psi(\cdot,t)\|^2-\|\psi(\cdot,s)\|^2\bigr|=0$. Thus the norms agree for every pair with the closed interval between them contained in $I$, proving (c). [given, step 2.1, F5, F7, algebra]
 

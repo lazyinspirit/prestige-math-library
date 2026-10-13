@@ -80,8 +80,8 @@ physical_scope: "A conditional consequence of the state, observable and
   the flow with U(t)*AU(t)=A) are equivalent, the outcome law of A is
   time-independent in every preparation, its mean and second moment are
   conserved whenever they exist, and a unitary symmetry of the dynamics commutes
-  with the flow, its being self-adjoint making its own outcome law
-  time-independent. The statement asserts no symmetry of any concrete model, no
+  with the flow and, when self-adjoint and assigned as a sharp observable with
+  dimensionless unit, has a time-independent outcome law. The statement asserts no symmetry of any concrete model, no
   definite value of a conserved observable, no apparatus realization, no
   equilibration statement and no empirical result, and uses the
   strong-commutation hypothesis rather than a formal commutator on a small
@@ -150,9 +150,9 @@ symmetry in the sense of clause (b) of
 [[def-nrqm-symmetries-framework-symmetry-groups-and-conservation]], that is
 $S\,D(H_{\mathrm{op}})=D(H_{\mathrm{op}})$ and
 $S\,H_{\mathrm{op}}=H_{\mathrm{op}}\,S$, then $S\,U(t)=U(t)\,S$ for every $t$;
-if in addition $S$ is self-adjoint, then the outcome law of the assigned sharp
-observable $(S,u_S)$ with its spectral coordinate unit is time-independent in
-every preparation.
+if in addition $S$ is self-adjoint and $(S,u_S)$ is assigned as a sharp
+observable of the system with declared dimensionless unit $u_S=1$, then its
+outcome law is time-independent in every preparation.
 
 (d) **Status and exclusions.** The statement is conditional on P1, P2 and P4
 and the cited mathematics. Its symmetry hypothesis is the strong commutation of
@@ -167,8 +167,8 @@ measurement record or empirical result is introduced.
 **Given:** The postulates P1, P2, P4 in the stated readings; the Axioms of
 Choice, Countable Choice and Dependent Choice; the assigned energy observable
 $(H_{\mathrm{op}},u_H)$, its PVM $E_H$ and flow $U(t)$; an assigned sharp
-observable $(A,u_A)$ with PVM $E_A$ and group $W(s)$; a unitary $S$ and a
-self-adjoint unitary $S$ in clause (c); a preparation $\rho$; a unit vector
+observable $(A,u_A)$ with PVM $E_A$ and group $W(s)$; a unitary symmetry $S$ in clause (c), and for its outcome-law assertion
+a self-adjoint $S$ assigned as $(S,1)$; a preparation $\rho$; a unit vector
 $\psi$; a Borel set $B$; real $s,t$.
 
 [F1] **Model readings.** $H_{\mathrm{op}}$ and $A$ are densely defined
@@ -227,7 +227,7 @@ families, and handle the discrete unitary symmetry by the generator comparison.
 
 3.1 [Conserved moments] Let $\psi\in D(A)$ be a unit vector. By [F4] the mean and second moment of the law of $A$ in $[\psi(0)]$ exist and equal $\langle A\psi,\psi\rangle$ and $\|A\psi\|^{2}$; since by step 2.1 the law itself is the same measure at every time, its moments are the same extended real numbers at every time, hence finite and time-independent with the displayed values. If the second moment is infinite at $t=0$, [F4] does not apply and no equality is claimed. This proves (b). [step 2.1, F4, given, algebra]
 
-3.2 [Self-adjoint symmetries have conserved laws] Let $S$ be unitary and self-adjoint with $SH_{\mathrm{op}}S^{*}=H_{\mathrm{op}}$. By step 2.2, $SU(t)=U(t)S$; multiplying on the left by $U(t)^{*}$ gives $U(t)^{*}SU(t)=S$, and conjugating this identity by the unitary $U(t)$ gives $U(t)SU(t)^{*}=S$ as well. Apply the flow identity of [F2] with $W:=U(t)^{*}$ and $K:=S$, at time parameter $s$: $e^{-isU(t)^{*}SU(t)/\hbar}=U(t)^{*}e^{-isS/\hbar}U(t)$; since $U(t)^{*}SU(t)=S$, the left side is $e^{-isS/\hbar}$, so $U(t)$ commutes with $e^{-isS/\hbar}$ for every $s$. Writing $W_{S}(s):=e^{-isS/\hbar}$, this says $W_{S}(s)U(t)=U(t)W_{S}(s)$ for all $s,t$, which is condition (i) for the pair $(S,H_{\mathrm{op}})$; by the equivalence of step 1.1 condition (ii) holds for that pair, and applying step 2.1 to the self-adjoint operator $S$ gives the time-independence of the law of $(S,u_S)$ in every preparation. This proves (c). [step 2.2, step 1.1, step 2.1, F2, F5, given, algebra]
+3.2 [Self-adjoint symmetries have conserved laws] Let $S$ be unitary and self-adjoint with $SH_{\mathrm{op}}S^{*}=H_{\mathrm{op}}$ and assigned sharp observable $(S,1)$. By step 2.2, $SU(t)=U(t)S$; multiplying on the left by $U(t)^{*}$ gives $U(t)^{*}SU(t)=S$, and conjugating this identity by the unitary $U(t)$ gives $U(t)SU(t)^{*}=S$ as well. Apply the flow identity of [F2] with $W:=U(t)^{*}$ and $K:=S$, at time parameter $s$: $e^{-isU(t)^{*}SU(t)/\hbar}=U(t)^{*}e^{-isS/\hbar}U(t)$; since $U(t)^{*}SU(t)=S$, the left side is $e^{-isS/\hbar}$, so $U(t)$ commutes with $e^{-isS/\hbar}$ for every $s$. Writing $W_{S}(s):=e^{-isS/\hbar}$, this says $W_{S}(s)U(t)=U(t)W_{S}(s)$ for all $s,t$, which is condition (i) for the pair $(S,H_{\mathrm{op}})$; by the equivalence of step 1.1 condition (ii) holds for that pair, and applying step 2.1 to the self-adjoint operator $S$ gives the time-independence of the law of $(S,u_S)$ in every preparation. This proves (c). [step 2.2, step 1.1, step 2.1, F2, F5, given, algebra]
 
 4.1 [Assembly and scope] Step 1.1 proves the equivalence, steps 2.1 and 3.1 prove (a) and (b), step 2.2 proves the first part of (c) and step 3.2 its second part; clause (d) records the hypotheses actually used (P1, P2, P4, strong commutation of flows or spectral measures) and the exclusions (no definite value, no unbounded converse, no concrete model or empirical claim). [step 1.1, step 2.1, step 3.1, step 2.2, step 3.2] ∎
 

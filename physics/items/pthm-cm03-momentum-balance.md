@@ -93,6 +93,6 @@ claimed.
 
 - **The hypothesis is the presentation, not the physics.** The cancellation $\sum_{i}\sum_{j\ne i}f_{ij}=0$ is a consequence of the declared antisymmetry of the model's pair maps; a force map for which no such presentation is declared has no momentum balance of this form. In particular, the framework does not claim that every interaction admits an antisymmetric pair presentation ([[post-cm02-interactions]] clause (i)).
 
-- **Open systems.** For a proper subsystem, forces to labels outside the declared set appear among the $F_{i}^{\mathrm{ext}}$ and need satisfy no antisymmetry; the subsystem's momentum is exchanged with the environment and clause 1 is then a balance, not a conservation statement. This is the open-system boundary recorded in [[rem-cm02-open-system-warning]].
+- **Open systems.** For a proper subsystem, forces to labels outside the declared set appear among the $F_{i}^{\mathrm{ext}}$ and need satisfy no antisymmetry; the subsystem's momentum may be exchanged with the environment. Clause 1 is a balance, and clause 2 gives conservation when the evaluated total external force vanishes. This is the open-system boundary recorded in [[rem-cm02-open-system-warning]].
 
 - **No centrality is used.** The balance of this item holds for velocity- and position-dependent antisymmetric pair forces alike; centrality is required only for the internal-torque statement of [[pthm-cm03-angular-momentum-balance]], and is sufficient but not necessary there.

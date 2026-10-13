@@ -39,7 +39,11 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]), as used by the transport and divergence theorems. Let $I\subseteq\mathbb R$ be a nonempty open interval, let $B\subseteq\mathbb R^3$ be a material region, let $\chi$ be a motion of $B$ on $I$ with spatial velocity $u$, let $J_0\subseteq I$ have compact closure in $I$, and let $U$ contain the swept region of $B$ over $\overline{J_0}$ ([[def-cm-continuum-motion]]).
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]), as used by the transport and divergence theorems. Let $I\subseteq\mathbb R$ be a nonempty open interval, let $B\subseteq\mathbb R^3$ be a material region, and let $\chi:I\times O\to\mathbb R^3$ be a motion of $B$ on $I$ with spatial velocity $u$. Write
+
+$$\mathcal D_\chi:=\{(t,x):t\in I,\ x\in\chi_t(O)\}$$
+
+for the open domain on which $u$ is defined ([[def-cm-continuum-motion]]). Let $J_0\subseteq I$ be an open interval with compact closure in $I$, and let $U\subseteq\mathcal D_\chi$ be open and contain the swept region of $B$ over $\overline{J_0}$.
 
 Let $\rho:U\to(0,\infty)$ and $\sigma:U\to M_3(\mathbb R)$ be $C^1$ and let $b:U\to\mathbb R^3$ be continuous. Define $g_i:=\sum_j\partial_j\sigma_{ij}$ and suppose, on $U$:
 

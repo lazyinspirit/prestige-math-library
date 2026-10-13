@@ -7,13 +7,17 @@ title: "WKB explicit error"
 status: draft
 origin: pipeline
 dependency_level: 1
-deps: [thm-nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation, def-derivative, def-continuity-real, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, def-bochner-integrable-function]
+deps: [thm-nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation, def-derivative, def-continuity-real, def-bochner-integrable-function, thm-continuous-implies-integrable, thm-ftc-first-part, thm-newton-leibniz-with-interior-derivative, thm-chain-rule, thm-complex-exponential-is-entire-with-derivative-itself]
 dependency_roles:
   thm-nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation: mathematical-premise
   def-derivative: mathematical-premise
   def-continuity-real: mathematical-premise
-  lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves: mathematical-premise
   def-bochner-integrable-function: mathematical-premise
+  thm-continuous-implies-integrable: mathematical-premise
+  thm-ftc-first-part: mathematical-premise
+  thm-newton-leibniz-with-interior-derivative: mathematical-premise
+  thm-chain-rule: mathematical-premise
+  thm-complex-exponential-is-entire-with-derivative-itself: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -52,13 +56,11 @@ point; it is an explicit finite-interval error bound of Gronwall type.
 
 ## Facts & Assumptions
 
-**Given:** the data of
-[[thm-nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation]], an
-exact solution $y\in C^2$, its coefficient curve $c\in C^1$, and $x\in[a,b]$.
+**Given:** the data of [[thm-nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation]], an exact solution $y\in C^2$, its coefficient curve $c\in C^1$, and $x\in[a,b]$.
 
-[F1] $c'=Bc$ with $B$ continuous and $\|B(s)\|_1=h|q(s)|/p(s)$; hence $c(x)-c(a)=\int_a^xB(s)c(s)\,ds$ and $\|c(x)-c(a)\|_1\le\int_a^x\|B(s)\|_1\|c(s)\|_1ds$ ([[thm-nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation]], [[lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves]]).
+[F1] $c'=Bc$ with $B$ continuous and $\|B(s)\|_1=h|q(s)|/p(s)$; hence $c(x)-c(a)=\int_a^xB(s)c(s)\,ds$ and $\|c(x)-c(a)\|_1\le\int_a^x\|B(s)\|_1\|c(s)\|_1ds$ ([[thm-nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation]]).
 
-[F2] Gronwall's inequality in integral form: if continuous $u\ge0$, $v\ge0$ satisfy $u(x)\le u(a)+\int_a^xv(s)u(s)ds$ then $u(x)\le u(a)\exp(\int_a^xv)$ ([[def-derivative]], [[def-continuity-real]]).
+[F2] Continuous scalar integrands on $[a,b]$ are Riemann integrable ([[thm-continuous-implies-integrable]]), their primitives have the integrand as derivative including endpoint derivatives ([[thm-ftc-first-part]]), and a $C^1$ function equals its initial value plus the integral of its derivative ([[thm-newton-leibniz-with-interior-derivative]]). The real chain rule is [[thm-chain-rule]], and $d(e^t)/dt=e^t$ is the real restriction of [[thm-complex-exponential-is-entire-with-derivative-itself]]. These license the integrating factor and its integral evaluation in step 1.1, which proves the needed Gronwall bound locally without citing a separate Gronwall theorem.
 
 [F3] $|w_\pm(x)|=p(x)^{-1/2}$, and for $c=(c_+,c_-)$ one has $|w_+c_++w_-c_-|\le p^{-1/2}\|c\|_1$ ([[thm-nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation]], algebra).
 

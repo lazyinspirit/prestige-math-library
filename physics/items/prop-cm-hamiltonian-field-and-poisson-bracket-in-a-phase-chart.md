@@ -73,7 +73,7 @@ $\nabla H=(H_{q^1},\dots,H_{q^n},H_{p_1},\dots,H_{p_n})$ for the Euclidean gradi
 
 1.2 Uniqueness: if $X,Y$ are $C^1$ fields with $\iota_X\omega_U=dH=\iota_Y\omega_U$, then $\iota_{X-Y}\omega_U=0$; by [F1] the map $v\mapsto\iota_v\omega_z$ is injective at every $z$, so $X-Y=0$ pointwise. [F1]
 
-2.1 Hamilton's equations and the bracket: an integral curve of $X_H$ solves $\dot z=X_H(z)$, which in coordinates is $\dot q^i=H_{p_i}$ and $\dot p_i=-H_{q^i}$, proving clause 2; and for $f,g\in C^2(U)$, [F3] and $X_f=J\nabla f$, $X_g=J\nabla g$ give $\{f,g\}=\omega_U(X_f,X_g)=(J\nabla f)^{\mathsf T}J(J\nabla g)=\nabla f^{\mathsf T}J^{\mathsf T}J^2\nabla g=\nabla f^{\mathsf T}J\nabla g$ by [F1], which is $\sum_i(f_{q^i}g_{p_i}-f_{p_i}g_{q^i})$. [F1, F3, step 1.1, algebra]
+2.1 Hamilton's equations and the bracket: an integral curve of $X_H$ solves $\dot z=X_H(z)$, which in coordinates is $\dot q^i=H_{p_i}$ and $\dot p_i=-H_{q^i}$, proving clause 2. For $f,g\in C^2(U)$, step 1.1 applied to each function and [F1] give $\omega_U(X_f,X_g)=(J\nabla f)^{\mathsf T}J(J\nabla g)=\nabla f^{\mathsf T}J^{\mathsf T}J^2\nabla g=\nabla f^{\mathsf T}J\nabla g$. The last expression is the coordinate bracket defined in [F3], and block multiplication expands it to $\sum_i(f_{q^i}g_{p_i}-f_{p_i}g_{q^i})$. Thus its equality with $\omega_U(X_f,X_g)$ is established directly, without assuming that equality for nonsmooth inputs. [F1, F3, step 1.1, algebra]
 
 3.1 Skew symmetry and regularity: swapping $f$ and $g$ in the coordinate formula negates every summand because $J^{\mathsf T}=-J$, so $\{f,g\}=-\{g,f\}$; the coordinate expression is a sum of products of $C^1$ partial derivatives, hence is $C^1$. [step 2.1, F1, algebra] ∎
 

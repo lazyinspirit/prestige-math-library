@@ -30,9 +30,14 @@ verification:
 ## Definition
 
 Fix body data $(B,O,I)$ and a motion $\chi$ of the model with current regions
-$\Omega_t=\chi_t(B)$, and let $U\subseteq\mathbb R\times\mathbb R^3$ be an open
-set containing the swept region over a compactly contained interval
-([[post-cm17-continuum-kinematic-model]], [[def-cm-continuum-motion]]). Let
+$\Omega_t=\chi_t(B)$ and $\mathcal U=\{(s,x):s\in I,\ x\in\chi_s(O)\}$.
+Let $U\subseteq\mathcal U$ be open and contain the swept closure
+$\{(s,x):s\in\overline{J_0},\ x\in\chi_s(\overline B)\}$, where $J_0$
+is an open interval with compact closure in $I$
+([[post-cm17-continuum-kinematic-model]], [[def-cm-continuum-motion]]).
+Use on $U$ the restriction of the positive $C^1$ density slot
+$\rho:\mathcal U\to(0,\infty)$ of [[def-cm17-continuum-body-and-units]],
+and denote that restriction again by $\rho$. Let
 $S^2=\{n\in\mathbb R^3:\|n\|_2=1\}$ be the unit sphere.
 
 A **traction field of the model** is a map
@@ -61,11 +66,12 @@ the traction across the surface with normal $e_j$.
 The isotropic matrix $-\lambda I_3$ with $\lambda\in\mathbb R$ represents the
 **normal** traction $t(n)=-\lambda n$: under the convention above, positive
 $\lambda$ is a compressive normal traction and $\lambda$ is called the
-**pressure** in this sign convention, while $\sigma_{11}=\sigma_{22}
-=\sigma_{33}=0$ and $\sigma_{12}=\sigma_{13}=\sigma_{23}=0$ describe a
-pressure-free state. The **body-force density** is a separate object: a
-continuous field $b$ with the dimension of acceleration, $[b]=\ell\tau^{-2}$,
-whose force per unit volume is $\rho b$. A traction field need not satisfy
+**pressure** in this sign convention. Within this isotropic family,
+$\lambda=0$ gives the zero stress matrix, a pressure-free unstressed state.
+The **body force per unit mass** is a separate object: a continuous
+field $b:U\to\mathbb R^3$ with the dimension of acceleration,
+$[b]=\ell\tau^{-2}$. The **body-force density per unit volume** is
+$\rho b:U\to\mathbb R^3$, of dimension $\mu\ell^{-2}\tau^{-2}$. A traction field need not satisfy
 $t(-n)=-t(n)$ and its representing matrix, when one exists, need not be
 symmetric; both properties are separate conditional conclusions.
 
@@ -87,5 +93,6 @@ symmetric; both properties are separate conditional conclusions.
 
 - **Sign convention.** The convention is the one of [[def-cm-traction-and-stress]]:
   $t(n)$ acts on the material on the side opposite to that towards which $n$ points. With this convention
-  a fluid at positive pressure $p$ has $\sigma=-pI_3$, so positive $p$ gives
-  compression in the direction $-n$.
+  a fluid whose total stress is assumed to lie in the isotropic family defined
+  above has $\sigma=-pI_3$, so positive $p$ gives compression in the direction
+  $-n$. Positive pressure alone does not impose this isotropic stress assumption.

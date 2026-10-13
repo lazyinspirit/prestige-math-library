@@ -1,7 +1,7 @@
 ---
 id: thm-cm-local-mass-balance
 kind: theorem
-title: "Local mass balance: conservation on every material subregion is equivalent to $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$"
+title: "Local mass balance: conservation on every material subregion implies $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$"
 status: draft
 origin: pipeline
 domain: mathematics
@@ -44,11 +44,11 @@ sources:
 
 ## Statement
 
-Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]), as used by the transport theorem. Let $I\subseteq\mathbb R$ be a nonempty open interval, let $B\subseteq\mathbb R^3$ be a material region, let $\chi$ be a motion of $B$ on $I$ ([[def-cm-continuum-motion]]) with spatial velocity $u$, let $J_0\subseteq I$ be an open interval with $\overline{J_0}\subseteq I$, and let $U\subseteq\mathbb R\times\mathbb R^3$ be an open set containing the swept region
+Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$ ([[def-countable-choice]]), as used by the transport theorem. Let $I\subseteq\mathbb R$ be a nonempty open interval, let $B\subseteq\mathbb R^3$ be a material region, let $\chi:I\times O\to\mathbb R^3$ be a motion of $B$ on $I$ with spatial velocity $u$ ([[def-cm-continuum-motion]]), and let $J_0\subseteq I$ be an open interval with $\overline{J_0}\subseteq I$. Define the swept region
 
 $$\Sigma:=\bigl\{(t,x):t\in\overline{J_0},\ x\in\chi_t(\overline B)\bigr\}.$$
 
-Let $\rho:U\to(0,\infty)$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]); call it a **density field**. A **material subregion** is a nonempty bounded open $B'\subseteq B$ with $\overline{B'}\subseteq B$ ([[def-cm-material-region-and-density]]); for such $B'$ the same $\chi$ is a motion of $B'$.
+Write $\mathcal D_\chi:=\{(t,x):t\in I,\ x\in\chi_t(O)\}$ for the open domain of the spatial velocity $u$ ([[def-cm-continuum-motion]]). Let $U\subseteq\mathcal D_\chi$ be open and contain the swept region $\Sigma$. Let $\rho:U\to(0,\infty)$ be of class $C^1$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]); call it a **density field**. A **material subregion** is a nonempty bounded open $B'\subseteq B$ with $\overline{B'}\subseteq B$ ([[def-cm-material-region-and-density]]); for such $B'$ the same $\chi$ is a motion of $B'$.
 
 **(i) Localization.** Assume for every material subregion $B'$ and every $t\in J_0$
 
@@ -90,6 +90,6 @@ for every $(t,x)\in J_0\times\chi_t(B)$, with the material derivative and diverg
 
 - Positivity of $\rho$ is part of the density reading and is not used by the implication (i); only $C^1$ regularity on $U$ and the conservation hypothesis enter. The converse also uses only the stated regularity.
 
-- The equivalence is conditional on the adopted conservation law (CM) or on the local equation; neither direction asserts that a physical density is conserved. Localization needs the full stated neighbourhood family: all small current balls suffice. Conservation on only one chosen region is insufficient.
+- The two implications are conditional on the adopted conservation law (CM) or on the local equation; neither direction asserts that a physical density is conserved. Localization needs the full stated neighbourhood family: all small current balls suffice. Conservation on only one chosen region is insufficient.
 
 - The statement is local in the current region: it concludes the equation at every point of $\chi_t(B)$ for $t\in J_0$, and says nothing on $\partial\chi_t(B)$ or at the endpoints of $I$, where the transport theorem is not asserted.

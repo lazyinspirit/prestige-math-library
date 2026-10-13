@@ -110,10 +110,12 @@ $\mu\ell^{2}\tau^{-1}\gamma_{a}^{-1}$. In the Cartesian chart all
 $\gamma_{a}=\ell$ and $[S]/\ell=\mu\ell\tau^{-1}$, the momentum dimension.
 
 **(d) Status.** The equation is attached to the declared datum: replacing
-the chart, the inverse Legendre branch or the potential representative
+the chart or the potential representative
 changes $H$ by the rules recorded in clause (d) of
 [[def-cm12-hamiltonian]] and hence changes the equation, and a solution
-family $S$ is a solution for that datum only. The item defines a class of
+family $S$ is a solution for that datum only. On each fixed hyperregular
+chart the inverse Legendre map is unique; it is not an independent branch
+choice. The item defines a class of
 functions; whether a given datum admits solutions, and how solutions
 produce curves of the model, is not asserted here. In particular no
 existence theorem, no global solution, no equation of motion for the model,

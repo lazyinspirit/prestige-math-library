@@ -1,7 +1,7 @@
 ---
 id: lem-fluid-energy-common-lifespan
 kind: lemma
-title: "The higher-order energy inequality and a common Galerkin lifespan $T=(2C_sY_0)^{-1}$ with $\\|u_N(t)\\|_{H^s}\\le2Y_0$"
+title: "The higher-order energy inequality and a common Galerkin lifespan with $\\|u_N(t)\\|_{H^s}\\le2Y_0$"
 status: draft
 origin: pipeline
 domain: mathematics
@@ -47,7 +47,7 @@ if $Y_0=0$ then $u_N\equiv0$ on $I$. In particular the same interval length $T$,
 
 **Given:** The Galerkin solution $u_N$ of [[lem-fluid-galerkin-coefficient-ivp]] (whose values are trigonometric polynomials, hence belong to every $H^m$), the operators $\Lambda^m$, $\partial_j$, $P$, $P_N$ and the weights of [[def-periodic-vector-sobolev-space-and-leray-projection]].
 
-[F1] $H^m$ is a real Hilbert space with inner product $\langle f,g\rangle=\sum_k\widehat f(k)\cdot\overline{\widehat g(k)}$, $\|f\|_{H^m}^2=\langle f,f\rangle$; $\Lambda^{2m}$ is self-adjoint and positive and $\Lambda^{2m}=\Lambda^m\Lambda^m$; $\|\partial_jv\|_{H^m}\le\|v\|_{H^{m+1}}$ ([[def-periodic-vector-sobolev-space-and-leray-projection]]).
+[F1] $H^m$ is a real Hilbert space with weighted inner product $\langle f,g\rangle_{H^m}=\sum_kw_k^{2m}\widehat f(k)\cdot\overline{\widehat g(k)}$ and $\|f\|_{H^m}^2=\langle f,f\rangle_{H^m}$. Bare $\langle f,g\rangle$ denotes the unweighted $L^2$ pairing, so for polynomials $\langle f,g\rangle_{H^m}=\langle f,\Lambda^{2m}g\rangle$; $\Lambda^{2m}$ is self-adjoint and positive and $\Lambda^{2m}=\Lambda^m\Lambda^m$; $\|\partial_jv\|_{H^m}\le\|v\|_{H^{m+1}}$ ([[def-periodic-vector-sobolev-space-and-leray-projection]]).
 
 [F2] $P$ and $P_N$ are self-adjoint orthogonal projections on $H^m$, norm nonincreasing, commuting with $\Delta$; $P_N$ is the identity on $X_N$ and $u_N'\in X_N$ ([[def-periodic-vector-sobolev-space-and-leray-projection]], [[lem-fluid-galerkin-coefficient-ivp]]).
 
@@ -62,15 +62,15 @@ if $Y_0=0$ then $u_N\equiv0$ on $I$. In particular the same interval length $T$,
 
 **Given:** The Galerkin solution $u_N$ and facts [F1]-[F5].
 
-1.1 Since $t\mapsto u_N(t)$ is differentiable in $H^m$ with derivative $u_N'(t)$ and the squared norm is the quadratic form $\|u_N\|^2_{H^m}=\langle u_N,u_N\rangle$, the derivative of $t\mapsto\|u_N(t)\|^2_{H^m}$ is $2\langle u_N',u_N\rangle$, and $\langle u_N',u_N\rangle=\langle -P_NP((u_N\cdot\nabla)u_N)+\nu\Delta u_N,u_N\rangle$. By [F2], $P_N$ is self-adjoint and the identity on $X_N\ni u_N$, and $P$ is self-adjoint with $P\Lambda^{2m}u_N=\Lambda^{2m}u_N$ (as $u_N$ is divergence-free); by [F1], $\langle\Delta u_N,u_N\rangle=-\|\nabla u_N\|^2_{H^m}$. Hence with $w:=\Lambda^mu_N$ one has the identity $\frac12\frac{d}{dt}\|u_N\|_{H^m}^2+\nu\|\nabla u_N\|_{H^m}^2=-\bigl\langle (u_N\cdot\nabla)u_N,\Lambda^{2m}u_N\bigr\rangle$. [F1, F2]
+1.1 Since $t\mapsto u_N(t)$ is differentiable in $H^m$ with derivative $u_N'(t)$ and the squared norm is the quadratic form $\|u_N\|^2_{H^m}=\langle u_N,u_N\rangle_{H^m}$, the derivative of $t\mapsto\|u_N(t)\|^2_{H^m}$ is $2\langle u_N',u_N\rangle_{H^m}$, and $\langle u_N',u_N\rangle_{H^m}=\langle -P_NP((u_N\cdot\nabla)u_N)+\nu\Delta u_N,u_N\rangle_{H^m}$. By [F2], $P_N$ is self-adjoint and the identity on $X_N\ni u_N$, and $P$ is self-adjoint with $P\Lambda^{2m}u_N=\Lambda^{2m}u_N$ (as $u_N$ is divergence-free); by [F1], $\langle\Delta u_N,u_N\rangle_{H^m}=-\|\nabla u_N\|^2_{H^m}$. Hence with $w:=\Lambda^mu_N$ one has the identity $\frac12\frac{d}{dt}\|u_N\|_{H^m}^2+\nu\|\nabla u_N\|_{H^m}^2=-\bigl\langle (u_N\cdot\nabla)u_N,\Lambda^{2m}u_N\bigr\rangle$. [F1, F2]
 
 2.1 By claim 3 and claim 2 of [F3], $\bigl|\bigl\langle (u_N\cdot\nabla)u_N,\Lambda^{2m}u_N\bigr\rangle\bigr|=\bigl|\bigl\langle[\Lambda^m,u_N\cdot\nabla]u_N,\Lambda^mu_N\bigr\rangle\bigr|\le C_m\|u_N\|_{H^m}\|u_N\|_{H^s}\|\Lambda^mu_N\|_{H^0}=C_m\|u_N\|_{H^s}\|u_N\|_{H^m}^2$. Inserting this into step 1.1 gives the energy inequality of claim 1 for every $m\ge s$, the case $m>5/2$ being the hypothesis of [F3] and $m\ge s>5/2$. [step 1.1, F3]
 
 3.1 Put $Z(t):=\|u_N(t)\|_{H^s}^2$ and $Y(t):=\|u_N(t)\|_{H^s}=Z(t)^{1/2}$. Step 2.1 with $m=s$ gives $\frac12Z'\le C_sZ^{3/2}$, that is $Z'\le2C_sZ^{3/2}$. For $\epsilon>0$ define $Y_\epsilon:=(Z+\epsilon^2)^{1/2}>0$; then $Y_\epsilon'=Z'/(2Y_\epsilon)\le C_sZ^{3/2}/Y_\epsilon\le C_sY_\epsilon{}^2$ because $Z\le Y_\epsilon^2$ and $Z^{3/2}\le Y_\epsilon^3$. [step 2.1, algebra]
 
-4.1 Since $(1/Y_\epsilon)'=-Y_\epsilon'/Y_\epsilon^2\ge-C_s$ on any interval where $Y_\epsilon$ is defined, the fundamental theorem [F5] and monotonicity of the integral give $\frac1{Y_\epsilon(t)}\ge\frac1{Y_\epsilon(0)}-C_st$ for $0\le t\le T_\epsilon$ as long as the right-hand side is positive; hence $Y_\epsilon(t)\le Y_\epsilon(0)\bigl(1-C_sY_\epsilon(0)t\bigr)^{-1}$ whenever the denominator is positive. [step 3.1, F5]
+4.1 Since $(1/Y_\epsilon)'=-Y_\epsilon'/Y_\epsilon^2\ge-C_s$ on any interval where $Y_\epsilon$ is defined, the fundamental theorem [F5] and monotonicity of the integral give $\frac1{Y_\epsilon(t)}\ge\frac1{Y_\epsilon(0)}-C_st$ for $t\in I$, $t\ge0$, as long as the right-hand side is positive; hence $Y_\epsilon(t)\le Y_\epsilon(0)\bigl(1-C_sY_\epsilon(0)t\bigr)^{-1}$ whenever the denominator is positive. [step 3.1, F5]
 
-5.1 Letting $\epsilon\downarrow0$ in step 4.1 (with $Y_\epsilon(0)\to\|P_Nu_0\|_{H^s}\le Y_0$ and $Y_\epsilon(t)\to Y(t)$; the function $y\mapsto y/(1-C_syt)$ is increasing while its denominator is positive) gives, for $0\le t<T_*=(C_sY_0)^{-1}$ (or for all $t\ge0$ if $Y_0=0$), the bound $Y(t)\le Y_0(1-C_sY_0t)^{-1}$. In particular, for the time $T$ of the statement with $Y_0>0$, the denominator at $t=T$ is $1/2$, so $Y(t)\le2Y_0$ for $0\le t\le T$; if $Y_0=0$ then $Y\equiv0$ on the whole maximal interval. [step 4.1, given]
+5.1 Letting $\epsilon\downarrow0$ in step 4.1 (with $Y_\epsilon(0)\to\|P_Nu_0\|_{H^s}\le Y_0$ and $Y_\epsilon(t)\to Y(t)$; the function $y\mapsto y/(1-C_syt)$ is increasing while its denominator is positive) gives, for $t\in I$ with $t\ge0$ and $C_sY_0t<1$, the bound $Y(t)\le Y_0(1-C_sY_0t)^{-1}$. In particular, for the time $T$ of the statement with $Y_0>0$, the denominator at $t=T$ is $1/2$, so $Y(t)\le2Y_0$ for $t\in I\cap[0,T]$; if $Y_0=0$, the zero field solves the IVP with the same initial datum, so IVP uniqueness gives $u_N\equiv0$ on the whole maximal interval. [step 4.1, given]
 
 6.1 The bound $\|u_N(t)\|_{H^s}\le2Y_0$ on $[0,T]$ precludes a finite maximal right endpoint $T_{\max}\le T$: by the blow-up alternative of [[lem-fluid-galerkin-coefficient-ivp]] (claim 3), $\|u_N(t)\|_{H^s}$ would have to tend to $+\infty$ as $t\uparrow T_{\max}$, contradicting the bound. Hence $T_{\max}>T$, that is, $[0,T]\subseteq I$; this proves claim 2. [step 5.1, given] ∎
 

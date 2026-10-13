@@ -5,9 +5,10 @@ title: "The velocity constraint $z'=xy'$: virtual displacements, the d'Alembert 
 status: draft
 origin: pipeline
 domain: mathematics
-dependency_level: 0
-deps: [def-ck-euclidean-maps-and-diffeomorphisms, def-vector-valued-derivative-and-integral, def-interval, def-euclidean-inner-product, def-darboux-integral, thm-continuous-implies-integrable, def-abs-value]
+dependency_level: 1
+deps: [def-cm-time-dependent-lagrangian-and-action, def-ck-euclidean-maps-and-diffeomorphisms, def-vector-valued-derivative-and-integral, def-interval, def-euclidean-inner-product, def-darboux-integral, thm-continuous-implies-integrable, def-abs-value]
 dependency_roles:
+  def-cm-time-dependent-lagrangian-and-action: mathematical-premise
   def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   def-vector-valued-derivative-and-integral: mathematical-premise
   def-interval: mathematical-premise
@@ -32,7 +33,7 @@ verification:
 
 Work in $\mathbb R^3$ with coordinates $(x,y,z)$ on configuration space and velocities
 $(x',y',z')$; inner products and norms are those of [[def-euclidean-inner-product]]. All intervals
-below are open intervals of $\mathbb R$ ([[def-interval]]), and a map on an interval is said to be
+used as motion domains below are open intervals of $\mathbb R$ ([[def-interval]]), and a map on such an interval is said to be
 $C^r$ when all its components are ([[def-ck-euclidean-maps-and-diffeomorphisms]]).
 
 **The constraint and its virtual displacements.** The **constraint law** is
@@ -81,14 +82,15 @@ well-defined real number ([[def-vector-valued-derivative-and-integral]],
 [[def-darboux-integral]], [[thm-continuous-implies-integrable]]). An **admissible pair
 variation** of a pair $(q,\eta)$ is a pair of $C^2$ maps $(\xi,\zeta)$ on $I_0$ with
 $\xi(a)=\xi(b)=0$, and the pair $(q,\eta)$ is a **vakonomic stationary pair** when the
-directionally one-sided derivative
+ordinary two-sided directional derivative
 
 $$\frac{d}{ds}\Big|_{s=0}\Phi(q+s\xi,\eta+s\zeta)$$
 
 exists and equals $0$ for every admissible pair variation $(\xi,\zeta)$ with
 $\xi(a)=\xi(b)=0$. A $C^2$ curve $q:I_0\to\mathbb R^3$ is a **vakonomic motion** of the
 constraint when there is a $C^2$ function $\eta$ on $I_0$ such that $(q,\eta)$ is a vakonomic
-stationary pair on some $[a,b]\subseteq I_0$ with $a<b$.
+stationary pair on every $[a,b]\subseteq I_0$ with $a<b$, using the same multiplier $\eta$
+throughout $I_0$. The functional and its endpoint conditions are taken on each such subinterval.
 
 **Scope.** Both laws are *prescriptions* for the same constraint, and the definition deliberately
 does not identify them: the d'Alembert law is a differential condition on the acceleration along

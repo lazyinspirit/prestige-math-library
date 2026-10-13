@@ -20,6 +20,7 @@ examples: []
 requires:
   - cm-math-verification
   - cm03-momentum-work-and-energy-balances
+  - sine-cosine-and-the-definition-of-pi
   - complex-power-series-and-analytic-functions
   - cm02-forces-initial-data-and-newtonian-flow
   - cm01-framework-quantities-and-geometry
@@ -75,7 +76,8 @@ bounds every strictly damped motion by its initial phase norm, proves the
 convergence to rest together with the velocity and the global asymptotic
 stability of the origin; and [[pthm-cm04-resonance-and-boundedness]] gives
 the steady sinusoidal response with its amplitude
-$|f_{0}|/\sqrt{(k-m\Omega^{2})^{2}+c^{2}\Omega^{2}}$ and amplitude maximum,
+$|f_{0}|/\sqrt{(k-m\Omega^{2})^{2}+c^{2}\Omega^{2}}$ and, when $f_{0}\ne0$
+and $c^{2}<2mk$, its unique maximum at a positive drive frequency,
 the reduction of every motion to the steady response plus a homogeneous
 motion, boundedness for $c>0$ with exponential approach to the steady
 response, boundedness at $c=0$ away from $\Omega=\sqrt{k/m}$, and the

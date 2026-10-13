@@ -23,8 +23,8 @@ proof_strategy: direct
 physical_scope: "A worked instance of the coupled quadratic model: the two-angle small-oscillation data M = m l^2 [[2,1],[1,1]], K = m g l diag(2,1) attributed to the linearisation of an equal-mass equal-length planar double pendulum, with its two modal data (the slower same-side mode of frequency sqrt((g/l)(2-sqrt2)) and the faster opposite-side mode of frequency sqrt((g/l)(2+sqrt2))), the general bounded modal motion and the pure-mode data. The example verifies the quadratic model on the declared matrices; it does not derive the pendulum Lagrangians, does not control the error of the linear approximation at finite amplitude and asserts no measured period."
 sources:
   references:
-    - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 2.6.1, Eqs. (2.130)-(2.132), printed pages 40-42 (PDF pages 46-48): the equal-arm double pendulum Lagrangian truncated to second order, the linearised equations and the two normal modes"
-      url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
+    - title: "D. Tong, Classical Dynamics, HTML Chapter 2, Section 2.6.1, Eqs. (2.155)-(2.157): the equal-arm double pendulum Lagrangian truncated to second order, the linearised equations and the two normal modes"
+      url: "https://davidtong.org/teaching/classical-dynamics/dynhtml/S2"
     - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Chapter 3, Sections 3.1-3.2, printed pages 52-59 (PDF pages 55-62): the quadratic natural Lagrangian about a minimum and the decoupled normal modes"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
 verification:
@@ -87,8 +87,9 @@ with values in the intrinsic subspace $N_{\lambda}$.
 
 [F3] Direct linear algebra ([[def-matrix-product-and-identity-matrix]],
 [[def-euclidean-inner-product]]): $M$-inner products, matrix products and
-square roots of positive definite $2\times2$ matrices are computed by the
-displayed formulas; the products below are direct computations.
+positive definiteness are checked by the displayed quadratic forms and
+products. The existence of the positive definite square root is supplied by
+[F1], not by these arithmetic definitions.
 
 [F4] Scalar oscillator calculus
 ([[thm-cm-homogeneous-oscillator-solution-classification]],
@@ -103,7 +104,7 @@ $A\cos(\omega t)+B\sin(\omega t)$ with $\omega=\sqrt{\lambda}$.
 eigenpairs by explicit multiplication, and read the motion and boundedness
 statements from the free-mode theorem.
 
-1.1 Positive definiteness: $M$ is symmetric with leading principal minors $2ml^{2}>0$ and $\det M=(2\cdot1-1^{2})m^{2}l^{4}=m^{2}l^{4}>0$, hence positive definite; $K$ is diagonal with positive diagonal entries, hence symmetric positive definite; so the model is oscillatory with both modal stiffnesses positive. [F1, F3, algebra]
+1.1 Positive definiteness: $M$ is symmetric and, for $w=(x,y)\ne0$, $w^{\mathsf T}Mw=ml^{2}(2x^{2}+2xy+y^{2})=ml^{2}(x^{2}+(x+y)^{2})>0$, since both squares can vanish only when $x=y=0$. Likewise $w^{\mathsf T}Kw=mgl(2x^{2}+y^{2})>0$, so $K$ is symmetric positive definite; hence both modal stiffnesses are positive and the model is oscillatory. [F1, F3, algebra]
 
 1.2 Eigenpairs: multiplying, $$Kw_{s}=mgl\begin{pmatrix}2\\ \sqrt2\end{pmatrix},\qquad Mw_{s}=ml^{2}\begin{pmatrix}2+\sqrt2\\ 1+\sqrt2\end{pmatrix},$$ and $2/(2+\sqrt2)=\sqrt2/(1+\sqrt2)=2-\sqrt2$, so $Kw_{s}=\frac{g}{l}(2-\sqrt2)Mw_{s}$; similarly $$Kw_{f}=mgl\begin{pmatrix}2\\-\sqrt2\end{pmatrix},\qquad Mw_{f}=ml^{2}\begin{pmatrix}2-\sqrt2\\ 1-\sqrt2\end{pmatrix},$$ and $2/(2-\sqrt2)=-\sqrt2/(1-\sqrt2)=2+\sqrt2$, so $Kw_{f}=\frac{g}{l}(2+\sqrt2)Mw_{f}$. The normalizations give $u_{s}^{\mathsf T}Mu_{s}=u_{f}^{\mathsf T}Mu_{f}=1$ and $u_{s}^{\mathsf T}Mu_{f}=0$, because $w_{s}^{\mathsf T}Mw_{s}=2ml^{2}\gamma_{f}$, $w_{f}^{\mathsf T}Mw_{f}=2ml^{2}\gamma_{s}$ and $w_{s}^{\mathsf T}Mw_{f}=ml^{2}(2-2)=0$; this proves clauses 1 and 2. [F1, F3, algebra]
 
@@ -126,7 +127,12 @@ move oppositely. The computation above verifies the frequencies and
 patterns; the physical reading is the interpretation of the model data.
 
 - **The linear model is not the pendulum.** The matrices are the
-second-order Taylor data of the pendulum potential and kinetic metric at
-the downward equilibrium; the exact pendulum is not a quadratic model, and
+coefficients of the second-order Taylor expansion of the full Lagrangian
+in displacement and velocity at the downward rest point: $M$ is the
+zeroth-order value of the kinetic metric at that equilibrium, whereas $K$
+is the Hessian of the potential. Derivatives of the kinetic metric multiply
+terms of total degree at least three in displacement and velocity, so they
+do not enter this quadratic Lagrangian. The exact pendulum is not a
+quadratic model, and
 the finite-time accuracy of the linear approximation is controlled only by
 [[pthm-cm09-linearization-error-bound]] on small data, not by this example.

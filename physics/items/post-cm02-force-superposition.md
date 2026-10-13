@@ -24,7 +24,7 @@ sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2 'Newtonian Mechanics: A Single Particle', printed pages 2-5 (PDF pages 8-11): the equation of motion F = dp/dt = m a in an inertial frame, with F a function of the position and velocity (and possibly time)"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter pages 3-4 (PDF pages 7-8): the force defined through the momentum derivative (Eq. 1.13), the explicit separate assumption that forces superpose as vectors, and the gravity law (1.15) introduced as an additional law"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 1.2, chapter pages 3-5 (PDF pages 7-9): the force defined through the momentum derivative (Eq. 1.13), the explicit separate assumption that forces superpose as vectors, and the gravity law (1.15) introduced as an additional law"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
     - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.2, printed pages 1-2 (PDF pages 4-5): Newton's second law in its two equivalent forms, as N second-order equations F_i = d(m_i rdot_i)/dt with data r_i(0) and rdot_i(0), and as 2N first-order equations"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
@@ -121,36 +121,47 @@ and superposing solutions is a separate question from superposing forces.
 (e_{1}',e_{2}',e_{3}')\bigr)$ be a second inertial frame related to the frame
 of (i) by the Galilean transformation
 
-$$t'=t+b,\qquad x'=Rx+vt+a_{0}$$
+$$t'=t+b,\qquad x_i'=Rx_i+\upsilon t+a_{0}\quad(i=1,\dots,N)$$
 
-with $b\in\mathbb R$, $a_{0},v\in\mathbb R^{3}$ and $R\in SO(3)$
+with $b\in\mathbb R$, $a_{0},\upsilon\in\mathbb R^{3}$ and $R\in SO(3)$
 ([[pthm-cm01-galilean-kinematics]] clause 1;
-[[def-cm-special-orthogonal-group]]). If $x:J\to Q$ is a family of motions of
-the labels in the first frame and $\eta(t'):=R\,x(t'-b)+v\,(t'-b)+a_{0}$ is
-the description of the same worldlines in the second frame, then by clause 2
-of that theorem $\eta$ is of class $C^{2}$ on $J+b$ and
-$\eta_{i}''(t')=R\,\ddot x_{i}(t'-b)$, so along the motion (iv) becomes
-
-$$m_{i}\,\eta_{i}''(t')=\bigl(R\,F\bigl(t'-b,\ x(t'-b),\ \dot x(t'-b)\bigr)\bigr)_{i}.$$
+[[def-cm-special-orthogonal-group]]); $\upsilon$ is the boost velocity
+denoted by $v$ in that theorem. Define the block-diagonal map
+$$R_{N}:=\operatorname{diag}(R,\dots,R):\mathbb R^{3N}\to\mathbb R^{3N}$$
+and the repeated tuples $\bar a_{0}:=(a_{0},\dots,a_{0})$ and
+$\bar\upsilon:=(\upsilon,\dots,\upsilon)$ in $(\mathbb R^{3})^{N}$. Thus
+$R_N x=(Rx_{1},\dots,Rx_{N})$, and the same componentwise rule applies to
+velocities and forces; since $R^{\mathsf T}R=I_{3}$,
+$R_N^{\mathsf T}R_N=I_{3N}$. If $x:J\to Q$ is a family of motions of the
+labels in the first frame, then the description of the same worldlines in the second
+frame is
+$$\eta(t'):=R_{N}x(t'-b)+\bar\upsilon(t'-b)+\bar a_{0}\qquad(t'\in J+b).$$
+By clause 2 of the cited theorem, each $\eta_i$ is $C^{2}$ and
+$\eta_i''(t')=R\ddot x_i(t'-b)$, so along the motion
+$$m_i\eta_i''(t')=R F_i\bigl(t'-b,x(t'-b),\dot x(t'-b)\bigr).$$
 
 Adopt: the same interaction, read in the second frame, is represented on the
-transferred data by the map
-
-$$F_{*}(t',y,w):=R\,F\Bigl(t'-b,\ R^{\mathsf T}\bigl(y-v(t'-b)-a_{0}\bigr),\ R^{\mathsf T}(w-v)\Bigr),$$
-
-whose domain is the image of $D$ under the affine bijection
-$(t',y,w)\mapsto\bigl(t'-b,\,R^{\mathsf T}(y-v(t'-b)-a_{0}),\,R^{\mathsf T}(w-v)\bigr)$;
-that domain is open, and $F_{*}$ is continuous and locally Lipschitz in its
-state variable because $F$ is and the transfer is an affine bijection with
-bounded inverse on compacta. The framework formulates the equation of motion
-in every inertial frame; a rule that does not transform by this law is a
-description tied to the frame in which it was written, and the framework
-attaches no kinematic covariance to it. When $Q=\mathbb R^{3N}$ — the case of
-the models of the companion page — the transferred domain is again a product
+transferred data by the force map below. Let $P$ be the inverse affine
+transfer from new-frame data to old-frame data,
+$$P(t',y,w):=\bigl(t'-b,\,R_N^{\mathsf T}(y-\bar\upsilon(t'-b)-\bar a_{0}),\,R_N^{\mathsf T}(w-\bar\upsilon)\bigr).$$
+Its preimage of the original domain is
+$$D_{*}:=P^{-1}(D)=\{(t',y,w):P(t',y,w)\in D\};$$
+it is open because $P$ is a homeomorphism and $D$ is open. Define
+$$F_{*}:D_{*}\to(\mathbb R^{3})^{N},\qquad F_{*}(t',y,w):=R_N F\Bigl(t'-b,\ R_N^{\mathsf T}\bigl(y-\bar\upsilon(t'-b)-\bar a_{0}\bigr),\ R_N^{\mathsf T}(w-\bar\upsilon)\Bigr).$$
+The map $F_{*}$ is continuous and locally Lipschitz in its state variable:
+the transfer and its inverse are affine, and at fixed time they act linearly
+on state differences; on compact time intervals their state Lipschitz
+constants are uniform, so precomposition preserves the stated regularity of
+$F$. The framework
+formulates the equation of motion in every inertial frame; a rule that does
+not transform by this law is a description tied to the frame in which it was
+written, and the framework attaches no kinematic covariance to it. When
+$Q=\mathbb R^{3N}$ — the case of the models of the companion page — the
+transferred domain is again a product
 $I_{0}'\times\mathbb R^{3N}\times\mathbb R^{3N}$ with $I_{0}'=I_{0}+b$, and
-$F_{*}$ is a force map in the sense of (iii); for a bounded $Q$ the
-transferred admissible position set may depend on $t'$, and the equation is
-then read on that transferred set.
+$F_{*}$ is a force map in the sense of (iii); for a proper open $Q$ the
+transferred position set $R_NQ+\bar\upsilon(t'-b)+\bar a_0$ may depend on
+$t'$, and the equation is then read on that transferred set.
 
 **(vii) What this branch excludes.** Impulsive forcing (a finite momentum
 transfer at an instant is not a force map); Coulomb sliding friction, whose

@@ -7,7 +7,7 @@ title: "Self-adjointness and the flow of a self-adjoint operator perturbed by a 
 status: draft
 origin: session
 dependency_level: 0
-deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-axiom-of-choice, def-bounded-linear-operator, def-countable-choice, def-hilbert-space, def-infinitesimal-generator-of-a-unitary-group, def-operator-norm, def-projection-valued-measure, def-self-adjoint-positive-unitary-and-normal-operator, def-strongly-continuous-one-parameter-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-composition-operator-norm-inequality, lem-neumann-series-and-small-perturbations-of-bounded-inverses, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, thm-bounded-borel-pvm-integral, thm-stone-one-parameter-unitary-groups]
+deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-axiom-of-choice, def-bounded-linear-operator, def-countable-choice, def-hilbert-space, def-infinitesimal-generator-of-a-unitary-group, def-operator-norm, def-projection-valued-measure, def-self-adjoint-positive-unitary-and-normal-operator, def-strongly-continuous-one-parameter-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-composition-operator-norm-inequality, lem-neumann-series-and-small-perturbations-of-bounded-inverses, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-stone-one-parameter-unitary-groups, thm-unbounded-borel-functional-calculus]
 dependency_roles:
   def-adjoint-of-a-densely-defined-unbounded-operator: mathematical-premise
   def-axiom-of-choice: mathematical-premise
@@ -24,7 +24,10 @@ dependency_roles:
   lem-neumann-series-and-small-perturbations-of-bounded-inverses: mathematical-premise
   lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group: mathematical-premise
   thm-bounded-borel-pvm-integral: mathematical-premise
+  thm-pvm-integral-is-a-star-homomorphism: mathematical-premise
+  thm-spectral-theorem-for-unbounded-self-adjoint-operators: mathematical-premise
   thm-stone-one-parameter-unitary-groups: mathematical-premise
+  thm-unbounded-borel-functional-calculus: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -73,48 +76,21 @@ $s\in\mathbb R$.
 
 ## Facts & Assumptions
 
-**Given:** the Axiom of Choice and the Axiom of Countable Choice; a nonzero
-complex Hilbert space $H$; a self-adjoint operator $A$; a bounded self-adjoint
-operator $B$ commuting with every $e^{isA}$; real $s,t,\lambda$; a unit vector
-or vector $x$.
+**Given:** the Axiom of Choice and the Axiom of Countable Choice; a nonzero complex Hilbert space $H$; a self-adjoint operator $A$; a bounded self-adjoint operator $B$ commuting with every $e^{isA}$; real $s,t,\lambda$; a unit vector or vector $x$.
 
-[F1] **Flow calculus.** For a self-adjoint $T$ with spectral
-projection-valued measure $E_T$ and $U_T(s):=e^{isT}$: $U_T$ is a strongly
-continuous one-parameter unitary group with $U_T(s)^{*}=U_T(-s)$,
-$U_T(s)D(T)=D(T)$ and $TU_T(s)=U_T(s)T$ on $D(T)$; the quotient
-$\frac1s(U_T(s)x-x)$ converges as $s\to0$ exactly for $x\in D(T)$, with limit
-$iTx$; and for every bounded Borel $f:\mathbb R\to\mathbb C$ one has
-$\|f(T)\|\le\sup|f|$ and $f(T)U_T(s)=U_T(s)f(T)$, where
-$f(T)=\int f\,dE_T$
-([[lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group]],
-[[thm-bounded-borel-pvm-integral]]).
+[F1] **Flow calculus.** For a self-adjoint $T$ with spectral projection-valued measure $E_T$ and $U_T(s):=e^{isT}$: $U_T$ is a strongly continuous one-parameter unitary group with $U_T(s)^{*}=U_T(-s)$, $U_T(s)D(T)=D(T)$ and $TU_T(s)=U_T(s)T$ on $D(T)$; the quotient $\frac1s(U_T(s)x-x)$ converges as $s\to0$ exactly for $x\in D(T)$, with limit $iTx$; and for every bounded Borel $f:\mathbb R\to\mathbb C$ one has $\|f(T)\|\le\sup|f|$ and $f(T)U_T(s)=U_T(s)f(T)$, where $f(T)=\int f\,dE_T$. The norm bound follows from the bounded PVM integral; the commutation follows because both factors are integrals against $E_T$ and the integral map is multiplicative, so $\Phi_{E_T}(f)\Phi_{E_T}(\lambda\mapsto e^{is\lambda}) =\Phi_{E_T}(f(\lambda)e^{is\lambda}) =\Phi_{E_T}(\lambda\mapsto e^{is\lambda})\Phi_{E_T}(f)$ ([[thm-bounded-borel-pvm-integral]], [[thm-pvm-integral-is-a-star-homomorphism]]). ([[lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group]], [[thm-bounded-borel-pvm-integral]]).
 
-[F2] **Resolvents.** For $\lambda\ne0$ the operator $A+i\lambda$ maps $D(A)$
-bijectively onto $H$, and its inverse $(A+i\lambda)^{-1}=\int(\mu+i\lambda)^{-1}dE_A(\mu)$
-is bounded with norm at most $1/|\lambda|$, by [F1] applied to
-$f(\mu)=(\mu+i\lambda)^{-1}$ (whose supremum is $1/|\lambda|$) together with
-the calculus identity $(A+i\lambda)(A+i\lambda)^{-1}=I$
-([[thm-bounded-borel-pvm-integral]]).
+[F2] **Resolvents.** For $\lambda\ne0$ put $r_{\lambda}(\mu):=(\mu+i\lambda)^{-1}$ and $R_{\lambda}:=\Phi_{E_A}(r_{\lambda})$. The bounded PVM integral gives $\|R_{\lambda}\|\le1/|\lambda|$. The spectral domain formula gives $\int\mu^{2}|r_{\lambda}(\mu)|^{2}\,dE_{A,x}(\mu)\le\|x\|^{2}$, so $R_{\lambda}x\in D(A)$ for every $x\in H$; the unbounded Borel calculus product rule then gives $(A+i\lambda)R_{\lambda}=\Phi_{E_A}(\mu r_{\lambda}+i\lambda r_{\lambda})=I$ on $H$. For $y\in D(A)$ the same product rule gives $R_{\lambda}(A+i\lambda)y=\Phi_{E_A}(r_{\lambda}(\mu+i\lambda))y=y$. Thus $R_{\lambda}=(A+i\lambda)^{-1}$ and $A+i\lambda:D(A)\to H$ is bijective. These claims use the spectral domain formula and bounded PVM norm bound ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[thm-bounded-borel-pvm-integral]]) and the unbounded Borel calculus ([[thm-unbounded-borel-functional-calculus]] clause 2).
 
-[F3] **Neumann series.** If $R\in\mathcal B(H)$ with $\|R\|<1$, then $I-R$ is
-invertible and $(I-R)^{-1}=\sum_{n\ge0}R^n$ in operator norm
-([[lem-neumann-series-and-small-perturbations-of-bounded-inverses]] clause 1,
-[[def-operator-norm]]).
+[F3] **Neumann series.** If $R\in\mathcal B(H)$ with $\|R\|<1$, then $I-R$ is invertible and $(I-R)^{-1}=\sum_{n\ge0}R^n$ in operator norm ([[lem-neumann-series-and-small-perturbations-of-bounded-inverses]] clause 1, [[def-operator-norm]]).
 
-[F4] **Stone uniqueness.** Two strongly continuous one-parameter unitary
-groups with the same infinitesimal generator agree at every time; equivalently
-$s\mapsto e^{isT}$ is determined by the self-adjoint $T$
-([[thm-stone-one-parameter-unitary-groups]],
-[[def-infinitesimal-generator-of-a-unitary-group]]).
+[F4] **Stone uniqueness.** Two strongly continuous one-parameter unitary groups with the same infinitesimal generator agree at every time; equivalently $s\mapsto e^{isT}$ is determined by the self-adjoint $T$ ([[thm-stone-one-parameter-unitary-groups]], [[def-infinitesimal-generator-of-a-unitary-group]]).
 
 [F5] For bounded operators $S,T$ between compatible normed spaces, their composition satisfies $\|ST\|\le\|S\|\,\|T\|$ ([[lem-composition-operator-norm-inequality]]).
 
 ## Proof
 
-**Proof technique:** direct; prove self-adjointness of $A+B$ by the Neumann
-series for the resolvent of $A$, differentiate the conjugation curve to obtain
-the commutation of the two flows, and identify the generator of the product
-group by comparing difference quotients, concluding with Stone's theorem.
+**Proof technique:** direct; prove self-adjointness of $A+B$ by the Neumann series for the resolvent of $A$, differentiate the conjugation curve to obtain the commutation of the two flows, and identify the generator of the product group by comparing difference quotients, concluding with Stone's theorem.
 
 **Given:** The data of the statement and [F1]-[F5].
 
@@ -140,13 +116,5 @@ group by comparing difference quotients, concluding with Stone's theorem.
 
 ## Remarks
 
-- **Why the hypothesis is a commutation with the flow.** The hypothesis
-  $Be^{isA}=e^{isA}B$ for all $s$ is a commutation of the bounded operator
-  with every element of the unitary group of $A$; it implies, but is not
-  assumed as, a formal commutator identity on a small domain, and it is the
-  exact form in which the model's internal matrices commute with the free
-  flow.
-- **Bounded perturbation.** Clause (a) is the standard self-adjointness of a
-  self-adjoint operator perturbed by a bounded self-adjoint operator; the flow
-  hypothesis is not needed for it, only for the product formula of (b) and the
-  generator statement of (c).
+- **Why the hypothesis is a commutation with the flow.** The hypothesis $Be^{isA}=e^{isA}B$ for all $s$ is a commutation of the bounded operator with every element of the unitary group of $A$; it implies, but is not assumed as, a formal commutator identity on a small domain, and it is the exact form in which the model's internal matrices commute with the free flow.
+- **Bounded perturbation.** Clause (a) is the standard self-adjointness of a self-adjoint operator perturbed by a bounded self-adjoint operator; the flow hypothesis is not needed for it, only for the product formula of (b) and the generator statement of (c).

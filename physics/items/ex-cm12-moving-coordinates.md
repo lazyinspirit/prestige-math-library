@@ -96,10 +96,11 @@ $L'(t,y,w):=L\bigl(t,X(t,y),\,X_{t}(t,y)+X_{q}(t,y)w\bigr)$. This $L'$ is a gene
    ([[def-cm02-newtonian-flow]]).
 4. along the solutions the Hamiltonian $H'$ is conserved — it has no explicit
    time dependence in the co-moving chart — while the model's mechanical
-   energy $E=K+U$ is **not**: on the first axis
-   $$H'=E-v_{0}p'_{1},\qquad E'(t)=-kv_{0}y_{1}(t),$$
-   so a solution with $v_{0}y_{1}(t)\neq0$ has $H'$ constant and $E$ strictly
-   monotone there; with data $y_{1}(0)=y_{0}$, $p'_{1}(0)=q$ and
+   energy $E=K+U$ obeys, on the first axis,
+   $$H'=E-v_{0}p'_{1},\qquad E'(t)=-kv_{0}y_{1}(t).$$
+   At any time when $v_{0}y_{1}(t)\neq0$, the energy derivative is nonzero;
+   in particular, the displayed solution has nonconstant $E$ when
+   $v_{0}y_{0}\neq0$. With data $y_{1}(0)=y_{0}$, $p'_{1}(0)=q$ and
    $\omega:=\sqrt{k/m}$ the explicit solution is
    $$y_{1}(t)=y_{0}\cos\omega t+\frac{q-mv_{0}}{m\omega}\sin\omega t,\qquad p'_{1}(t)=-m\omega y_{0}\sin\omega t+\bigl(q-mv_{0}\bigr)\cos\omega t+mv_{0}.$$
  
@@ -132,29 +133,16 @@ support is a prescribed external mechanism, and no measurement is reported.
 
 3.1 Differentiating the first form of $H'$ in step 2.1 gives $H'_{p'_{1}}=p'_{1}/m-v_{0}$, $H'_{y_{1}}=ky_{1}$ and, for $i=2,3$, $H'_{p'_{i}}=p'_{i}/m$, $H'_{y_{i}}=0$; hence Hamilton's equations are $\dot y_{1}=p'_{1}/m-v_{0}$, $\dot p'_{1}=-ky_{1}$ and $\dot y_{i}=p'_{i}/m$, $\dot p'_{i}=0$ for $i=2,3$; differentiating the first and substituting the second gives $m\ddot y_{1}=-ky_{1}$, and since $\dot x_{1}=\dot y_{1}+v_{0}=p'_{1}/m$ and $x_{1}-v_{0}t-c=y_{1}$, this is exactly the model's equation of step 1.1, so the induced curve is a motion. [F2, F3, F5, step 1.1, step 2.1, algebra]
 
-4.1 Along a motion $x$ one has $E=K+U=\tfrac12m\lvert\dot x\rvert^2+\tfrac12ky_1^2=\lvert p'\rvert^2/(2m)+\tfrac12ky_1^2$ and therefore $H'=E-v_{0}p'_{1}$; from [F4] applied to the present potential, $\partial_{t}U(t,x(t))=-kv_{0}(x_{1}(t)-v_{0}t-c)=-kv_{0}y_{1}(t)$, and $d\equiv0$, so $E'(t)=-kv_{0}y_{1}(t)$; the displayed identity is clause 4's first formula. [F4, step 2.1, step 3.1, algebra]
+4.1 Along a motion $x$ one has $E=K+U=\tfrac12m\lvert\dot x\rvert^2+\tfrac12ky_1^2=\lvert p'\rvert^2/(2m)+\tfrac12ky_1^2$ and therefore $H'=E-v_{0}p'_{1}$; from [F4] applied to the present potential, $\partial_{t}U(t,x(t))=-kv_{0}(x_{1}(t)-v_{0}t-c)=-kv_{0}y_{1}(t)$, and $d\equiv0$, so $E'(t)=-kv_{0}y_{1}(t)$. Thus $E'(t)\ne0$ whenever $v_{0}y_{1}(t)\ne0$; for the initial data in clause 4, $v_{0}y_{0}\ne0$ makes $E'(0)=-kv_{0}y_{0}\ne0$ and hence $E$ is not constant. [F4, step 2.1, step 3.1, given, algebra]
 
 4.2 The displayed curves satisfy $y_{1}(0)=y_{0}$ and $p'_{1}(0)=q$, and by [F5] their derivatives are $\dot y_{1}=-y_{0}\omega\sin\omega t+((q-mv_{0})/m)\cos\omega t$ and $\dot p'_{1}=-m\omega^{2}y_{0}\cos\omega t-\omega(q-mv_{0})\sin\omega t=-ky_{1}(t)$, using $\omega^{2}=k/m$; moreover $\dot y_{1}=p'_{1}/m-v_{0}$ and the other coordinates are free, so the displayed pair solves the Hamilton system of step 3.1 with the prescribed data. [F5, step 3.1, algebra]
 
 5.1 $H'$ has no explicit dependence on $t$ in the co-moving chart, and along solutions of step 3.1 its total derivative is $H'_{y_{1}}\dot y_{1}+H'_{p'_{1}}\dot p'_{1}=(ky_{1})(p'_{1}/m-v_{0})+(p'_{1}/m-v_{0})(-ky_{1})=0$; the remaining momentum terms have derivatives $(p'_i/m)\dot p'_i=0$ for $i=2,3$ by step 3.1; hence $H'$ is conserved while $E'=-kv_{0}y_{1}$ need not vanish. [step 3.1, step 4.1, algebra]
 
-6.1 Conclusion: clauses 1-4 are verified on the declared data; the co-moving chart is a time-dependent chart of the same model, its Hamiltonian is conserved and differs from the mechanical energy by $v_{0}p'_{1}$, and the energy balance of the model is the reported non-conservation. [step 1.1, step 2.1, step 3.1, step 4.1, step 5.1, step 4.2] ∎
+6.1 Conclusion: clauses 1-4 are verified on the declared data; the co-moving chart is a time-dependent chart of the same model, its Hamiltonian is conserved and differs from the mechanical energy by $v_{0}p'_{1}$, and the displayed solution has nonconstant mechanical energy when $v_{0}y_{0}\ne0$, exactly as the energy balance specifies. [step 1.1, step 2.1, step 3.1, step 4.1, step 5.1, step 4.2] ∎
 
 ## Remarks
 
-- **Chart change, not a constraint.** The co-moving coordinates are a
-  time-dependent coordinate map of the same configuration domain, covered by
-  the covariance theorem for rheonomic coordinate changes; they are not a
-  generalized-coordinate map [[def-cm07-generalized-coordinates-and-forces]]
-  of the constrained-configuration type, and no ideal reaction is involved.
-  The support's motion is prescribed external data of the potential, so its
-  energy exchange is not modeled here.
+- **Chart change, not a constraint.** The co-moving coordinates are a time-dependent coordinate map of the same configuration domain, covered by the covariance theorem for rheonomic coordinate changes; they are not a generalized-coordinate map [[def-cm07-generalized-coordinates-and-forces]] of the constrained-configuration type, and no ideal reaction is involved. The support's motion is prescribed external data of the potential, so its energy exchange is not modeled here.
  
-- **Two conserved quantities, one energy.** The co-moving Hamiltonian $H'$ is
-  conserved because the substituted Lagrangian has no explicit time
-  dependence in the moving chart, while the mechanical energy changes at the
-  rate of the explicit time dependence of the inertial potential. The two
-  quantities coincide only in the inertial chart, as [[pthm-cm12-energy-time]]
-  states; the identity $H'=E-v_{0}p'_{1}$ here is the model instance of the
-  momentum shift familiar from the moving-cart computation of Stewart's
-  Section 1.2.
+- **The Hamiltonian depends on the chart.** The co-moving Hamiltonian $H'$ is conserved because the substituted Lagrangian has no explicit time dependence in the moving chart, while the mechanical energy changes at the rate of the explicit time dependence of the inertial potential. The Hamiltonian agrees with the mechanical energy in the inertial chart and in time-independent generalized-coordinate charts; this time-dependent chart instead has $H'=E-v_{0}p'_{1}$, as [[pthm-cm12-energy-time]] states. This is the model instance of the momentum shift familiar from the moving-cart computation of Stewart's Section 1.2.

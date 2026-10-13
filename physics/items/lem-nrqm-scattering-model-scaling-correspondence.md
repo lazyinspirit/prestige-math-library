@@ -32,9 +32,9 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Chapter 7 Sections 7.2-7.3 printed pages 194-199 (PDF pages 206-211): the free Schroedinger operator, its Fourier multiplier form and its Sobolev domain"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Chapter 7 Sections 7.2-7.3 printed pages 167-170 (PDF pages 179-182): the free Schroedinger operator, its Fourier multiplier form and its Sobolev domain"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
-    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Chapter 3 Section 3.1 printed pages 99-111 (PDF pages 111-123): the spectral theorem, the functional calculus and the uniqueness of the projection valued measure"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Chapter 3 Section 3.1 printed pages 87-98 (PDF pages 99-110): the spectral theorem, the functional calculus and the uniqueness of the projection valued measure"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
 verification:
   precheck: pass
@@ -109,7 +109,7 @@ asserted.
 
 [F4] **The spectral theorem.** Every self-adjoint operator $T$ on a nonzero complex Hilbert space has a unique regular projection valued measure $E_{T}$ on the Borel $\sigma$-algebra of $\mathbb R$ with $D(T)=\{x:\int\lambda^{2}dE_{T,x}(\lambda)<\infty\}$ and $Tx=\int\lambda\,dE_{T}(\lambda)x$ for $x\in D(T)$; conversely, for a regular projection valued measure $F$ the operator $\int\lambda\,dF$ with that domain is self-adjoint with projection valued measure $F$ ([[thm-spectral-theorem-for-unbounded-self-adjoint-operators]], [[def-projection-valued-measure]]).
 
-[F5] **Bounded and unbounded projection valued integrals.** For a bounded measurable $g$ the operator $\Phi_{E}(g)$ satisfies $\langle\Phi_{E}(g)x,y\rangle=\int g\,dE_{x,y}$ and $\|\Phi_{E}(g)\|\le\|g\|_{\infty}$ ([[thm-bounded-borel-pvm-integral]] clauses 1, 2); for measurable $f$ the operator $f(E)$ has domain $D(f(E))=\{x:\int|f|^{2}dE_{x}<\infty\}$ and is the norm limit of the bounded integrals of the truncations $f\mathbf 1_{\{|f|\le n\}}$ ([[def-unbounded-integral-against-a-pvm]]). The same bounded integral also satisfies $\|\Phi_E(g)x\|^2=\int|g|^2dE_x$; bounded measurable $g_n$ with $|g_n|\le C|f|$ and $g_n\to f$ pointwise satisfy $g_n(E)x\to f(E)x$ for $x\in D(f(E))$ ([[lem-unbounded-pvm-integral-is-well-defined-and-closed]], final clause).
+[F5] **Bounded and unbounded projection valued integrals.** For a bounded measurable $g$ the operator $\Phi_{E}(g)$ satisfies $\langle\Phi_{E}(g)x,y\rangle=\int g\,dE_{x,y}$ and $\|\Phi_{E}(g)\|\le\|g\|_{\infty}$ ([[thm-bounded-borel-pvm-integral]] clauses 1, 2); for measurable $f$ the operator $f(E)$ has domain $D(f(E))=\{x:\int|f|^{2}dE_{x}<\infty\}$ and for each $x\in D(f(E))$ the vector $f(E)x$ is the Hilbert-space norm limit of the bounded truncation integrals applied to $x$, with truncations $f\mathbf 1_{\{|f|\le n\}}$ ([[def-unbounded-integral-against-a-pvm]]). The same bounded integral also satisfies $\|\Phi_E(g)x\|^2=\int|g|^2dE_x$; bounded measurable $g_n$ with $|g_n|\le C|f|$ and $g_n\to f$ pointwise satisfy $g_n(E)x\to f(E)x$ for $x\in D(f(E))$ ([[lem-unbounded-pvm-integral-is-well-defined-and-closed]], final clause).
 
 [F6] **The exponential as a projection valued integral.** For self-adjoint $T$ and $t\in\mathbb R$, $e^{itT}=\int e^{it\lambda}\,dE_{T}(\lambda)$ is a strongly continuous one-parameter unitary group with generator $iT$ ([[lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group]]); this is the bounded functional calculus of [[thm-unbounded-borel-functional-calculus]] applied to the bounded continuous functions $\lambda\mapsto e^{it\lambda}$.
 

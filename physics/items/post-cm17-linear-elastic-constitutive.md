@@ -19,7 +19,7 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "Adoption of the small-strain isotropic linear elastic constitutive branch: displacement field, linear strain, stress matrix lambda (tr e) I + 2 mu_s e with positive-definite moduli, and the elastic strain-energy density with its positivity. The postulate states the small-strain kinematic idealization, the constancy of the reference density and the validity limits (small strains relative to a stress-free reference state, isothermal, no plasticity, viscosity, damage or coupling); it asserts no measured modulus, no boundary condition and no dynamical claim."
+physical_scope: "Adoption of the small-strain isotropic linear elastic constitutive branch: displacement field, linear strain, stress matrix lambda (tr e) I + 2 mu_s e with positive-definite moduli, and the elastic strain-energy density with its positivity. The postulate states the small-strain kinematic idealization, the constancy of the reference density and the validity limits (small strains relative to a stress-free reference state, isothermal, no plasticity, viscosity, damage or coupling); it adopts the linear balance in reference coordinates and asserts no measured modulus, boundary condition or approximation error bound."
 sources:
   references:
     - title: "R. Abeyaratne, Continuum Mechanics, Volume II of Lecture Notes on the Mechanics of Solids (MIT, 1988, revised 2020), Section 11.2 and Problem 11.5 (linearized elasticity, isotropic stress-strain relations and the positive definite strain energy)"
@@ -32,24 +32,11 @@ verification:
 
 ## Postulate
 
-Adopt the following constitutive model for the small-displacement elastic
-branch of the continuum framework
-([[post-cm17-continuum-kinematic-model]],
-[[def-cm17-continuum-body-and-units]]).
+Adopt the following small-displacement elastic model on reference labels, with the body and unit conventions of [[def-cm17-continuum-body-and-units]].
 
-**(i) Small-displacement description.** There is a reference placement in
-which the body is stress free and homogeneous, and the motion of the model is
-described by a **displacement field** $\xi:I\times O\to\mathbb R^3$ of class
-$C^2$ through $x(t,X)=X+\xi(t,X)$ ([[def-ck-euclidean-maps-and-diffeomorphisms]]).
-The model retains only the first-order term in the displacement gradient in
-its strain measure: the **linear strain** is
-$e=\tfrac12(D\xi+D\xi^{\mathsf T})$, equivalently
-$e_{ij}=\tfrac12(\partial_j\xi_i+\partial_i\xi_j)$
-([[def-cm-linear-elastic-constitutive-law]]). The displacement gradients are
-assumed small in the sense of the model: the linear constitutive relation
-below is used as the first-order approximation of the material response about
-the stress-free reference state, and no quantitative strain threshold is
-asserted by this postulate.
+**(i) Reference-coordinate description.** Let $I\subseteq\mathbb R$ be a nonempty open time interval and $O\subseteq\mathbb R^3$ an open reference region. Model data include $\xi:I\times O\to\mathbb R^3$ of class $C^2$, the displacement from a homogeneous stress-free reference placement. All spatial derivatives below are with respect to $X\in O$. Write $v_{\mathrm{ref}}:=\partial_t\xi$ and $a_{\mathrm{ref}}:=\partial_t^2\xi$. The **linear strain** is $e=\tfrac12(D_X\xi+D_X\xi^{\mathsf T})$, with $e_{ij}=\tfrac12(\partial_j\xi_i+\partial_i\xi_j)$ ([[def-cm-linear-elastic-constitutive-law]]). The constitutive relation is used as the first-order approximation about the reference state for small displacement gradients; no quantitative strain threshold is asserted.
+
+If $\chi_t(X)=X+\xi(t,X)$ is additionally a positive-Jacobian diffeomorphism, it defines a finite motion; its spatial velocity obeys $u(t,\chi_t(X))=v_{\mathrm{ref}}(t,X)$, not an equality at the same numerical spatial and reference arguments. This additional finite-motion interpretation is not required for the linear field equations below.
 
 **(ii) Constitutive law.** The stress matrix of the branch is
 
@@ -67,13 +54,11 @@ $W(e)=\tfrac{\lambda}{2}(\operatorname{tr}e)^2+\mu_s\operatorname{tr}(e^2)$,
 and under the positivity hypotheses of (ii) it satisfies $W(e)\ge0$ with
 equality only for $e=0$ ([[lem-cm-isotropic-elastic-strain-energy-positivity]]).
 
-**(iv) Density and kinematics.** In this branch the density is the constant
-**reference density** $\rho_0>0$ of the homogeneous reference state; the
-material acceleration is the second time derivative of the displacement,
-$D_tu=\partial_t^2\xi$, and the spatial velocity is $u=\partial_t\xi$. These
-replacements are part of the small-displacement idealization of the branch,
-not consequences of the kinematic postulate
-([[def-cm-euclidean-spatial-calculus]]).
+**(iv) Reference density and adopted linear balance.** Fix a constant reference density $\rho_0>0$ and a continuous reference body-force-per-mass field $b_{\mathrm{ref}}:I\times O\to\mathbb R^3$. Adopt the linear momentum balance
+
+$$\rho_0\partial_t^2\xi=\rho_0b_{\mathrm{ref}}+\operatorname{div}_X\sigma,\qquad (\operatorname{div}_X\sigma)_i=\sum_{j=1}^3\partial_{X_j}\sigma_{ij}.$$
+
+The velocity, acceleration and density used here are reference fields. Constant $\rho_0$ is not an assertion of constant current density. For a finite motion with conserved mass that density instead satisfies $\rho(t,\chi_t(X))\det D_X\chi_t(X)=\rho_0$. The displayed linear balance is an adopted approximation model, not an exact change of variables in the finite-motion balances; no error bound for discarding higher-order terms is claimed.
 
 **(v) Validity, exclusions and status.** The branch is **not** adopted for:
 finite strains where the displacement gradient is not small; anisotropic

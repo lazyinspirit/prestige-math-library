@@ -31,8 +31,9 @@ equation $Y'=AY$ with $Y(t)=e^{tA}$.
 [[ex-cm-coupled-oscillator-modes]] computes the modes of two coupled equal
 masses, with frequencies $\sqrt{k/m}$ and $\sqrt{(k+2c)/m}$ and the free affine
 zero mode when $k=0$; [[ex-cm-planar-harmonic-oscillator-return-map]] computes
-the Poincaré map of the isotropic planar oscillator on the section $y=0$ as the
-reflection $P(x,0)=(-x,0)$.
+the local first-return map of the scalar harmonic oscillator near $(1,0)$
+on the section $y=0$ as the reflection $P(x,0)=(-x,0)$, with image near
+$(-1,0)$ and the stationary origin excluded.
 [[ex-cm-bilateral-shift-finite-checks]] evaluates the shift metric, a periodic
 point in a prescribed cylinder, a sensitivity witness and a mixing computation
 with the explicit threshold $N=2$. [[ex-cm-jordan-block-dichotomy-computed]]

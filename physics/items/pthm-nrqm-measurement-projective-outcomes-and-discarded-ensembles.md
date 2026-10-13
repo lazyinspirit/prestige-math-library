@@ -18,6 +18,8 @@ deps:
     def-nrqm-state-geometry-framework-state-space,
     def-nrqm-state-geometry-pure-mixed-states-and-purity,
     lem-nrqm-composites-density-and-scalar-spectral-probability,
+    lem-nrqm-state-geometry-density-set-convex-and-complete,
+    thm-trace-is-absolutely-convergent-and-basis-independent,
     lem-nrqm-composites-nuclear-bounded-cyclicity,
     lem-nrqm-composites-rank-one-operator-calculus,
     lem-nrqm-measurement-nonselective-luders-map,
@@ -36,6 +38,8 @@ dependency_roles:
   def-nrqm-state-geometry-framework-state-space: formulation-prerequisite
   def-nrqm-state-geometry-pure-mixed-states-and-purity: mathematical-premise
   lem-nrqm-composites-density-and-scalar-spectral-probability: mathematical-premise
+  lem-nrqm-state-geometry-density-set-convex-and-complete: mathematical-premise
+  thm-trace-is-absolutely-convergent-and-basis-independent: mathematical-premise
   lem-nrqm-composites-nuclear-bounded-cyclicity: mathematical-premise
   lem-nrqm-composites-rank-one-operator-calculus: mathematical-premise
   lem-nrqm-measurement-nonselective-luders-map: mathematical-premise
@@ -104,7 +108,7 @@ whereas for the coherent preparation $\operatorname{tr}(\rho(T_{u,v}+T_{v,u}))=2
 
 [F4] **Rank-one pairing.** $T_{u,v}x=\langle x,v\rangle u$ is trace class with $\operatorname{tr}(T_{u,v})=\langle u,v\rangle$, and $\operatorname{tr}(S T_{u,v})=\langle Su,v\rangle$ for trace-class $S$ ([[lem-nrqm-composites-rank-one-operator-calculus]] clause (b), [[lem-nrqm-composites-nuclear-bounded-cyclicity]] clause (b)).
 
-[F5] **States and mixtures.** A convex combination of states is a state; the trace is linear and trace-norm continuous ([[def-nrqm-state-geometry-pure-mixed-states-and-purity]], [[lem-nrqm-composites-density-and-scalar-spectral-probability]] clause (a)).
+[F5] **States and mixtures.** Under Countable Choice, finite convex combinations of states are states ([[lem-nrqm-state-geometry-density-set-convex-and-complete]] clause (a)); the trace is linear and $|\operatorname{tr}T|\le\|T\|_1$, hence trace-norm continuous ([[thm-trace-is-absolutely-convergent-and-basis-independent]] clause 4). The given state implies $H\ne\{0\}$, as required by the convexity supplier.
 
 ## Proof
 

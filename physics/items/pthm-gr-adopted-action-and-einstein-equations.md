@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 13
-physical_scope: "Smooth classical domain of the action formulation of the framework: an oriented time-oriented smooth Lorentzian four-manifold, a matter sector whose stress-energy tensor is represented by its action in the Hilbert convention (in particular the scalar-field sector) or prescribed and admissible, and compactly supported metric variations. Excludes quantum gravity, boundaries and junction terms, non-smooth or distributional sources, and constraint or propagation claims; no empirical statement and no existence claim for solutions. Every conclusion is a conditional consequence of the adopted action postulate and the mathematics of the framework."
+physical_scope: "Smooth classical domain of the action formulation of the framework: an oriented time-oriented smooth Lorentzian four-manifold, a matter sector whose stress-energy tensor is represented by its action in the Hilbert convention (the supplied scalar-field sector), and compactly supported metric variations. Excludes quantum gravity, boundaries and junction terms, non-smooth or distributional sources, and constraint or propagation claims; no empirical statement and no existence claim for solutions. Every conclusion is a conditional consequence of the adopted action postulate and the mathematics of the framework."
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -85,7 +85,8 @@ presentations are equivalent descriptions of one classical field law, and a
 model adopts exactly one of them. In the prescribed-$T$ sectors (dust and
 perfect fluid) the equation is adopted directly, as recorded in clause (iii)
 of [[post-gr-classical-gravitational-action]], and its consistency condition
-is derived separately on this page.
+is derived separately in `pthm-gr-einstein-consistency-and-energy-conditions`
+on the owning page `gr-einstein-and-matter`.
 
 ## Facts & Assumptions
 

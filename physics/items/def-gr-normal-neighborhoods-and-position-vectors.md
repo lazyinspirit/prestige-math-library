@@ -56,22 +56,28 @@ $C\subseteq M$ is **convex normal** when it is a normal neighborhood of each
 of its points; thus for every $q\in C$ there is an open star-shaped
 $C_q\subseteq\mathcal E_q$ with $\exp_q(C_q)=C$ and
 $\exp_q|_{C_q}$ a diffeomorphism onto $C$. It is **strictly convex normal**
-when every pair $q,q'\in\overline C$ is joined by exactly one affinely
+when it is convex normal and every pair $q,q'\in\overline C$ is joined by exactly one affinely
 parametrized geodesic segment $\gamma:[0,1]\to\overline C$ with
 $\gamma(0)=q$ and $\gamma(1)=q'$, and, if $q\ne q'$, its parameter interior
 $\gamma((0,1))$ lies in $C$. In the degenerate case $q=q'$, the required
 segment is the constant geodesic at $q$; no interior-containment condition
 is imposed on this degenerate segment when $q\in\partial C$.
 
-**(c) Position vector.** Let $C$ be convex normal, let $p,q\in C$ and let
-$x:[0,1]\to C$ be the unique geodesic with $x(0)=p$, $x(1)=q$ supplied by
-the definition of strict convexity outside the endpoints; equivalently
-$x(t)=\exp_p(t\,\exp_p^{-1}(q))$ for $t\in[0,1]$ and
-$v:=\exp_p^{-1}(q)\in T_pM$. The vector
+**(c) Position vector.** Fix a normal neighborhood $U=\exp_p(W)$ of $p$
+as in (a), with its chosen inverse $(\exp_p|_W)^{-1}$, and let $q\in U$.
+Put $v:=(\exp_p|_W)^{-1}(q)\in T_pM$. Since $W$ is star-shaped,
+$tv\in W$ for $0\le t\le1$, and
+$x(t):=\exp_p(tv)$ is the radial geodesic segment in $U$ from $p$ to $q$.
+The vector
 $$P(p,q):=\gamma_{p,v}'(1)=d(\exp_p)_{v}(v)\in T_qM$$
 is the **position vector of $q$ with respect to $p$**; here
 $\gamma_{p,v}$ is the maximal geodesic of
-[[thm-gr-local-geodesics-and-exponential-map]]. By the Gauss lemma of
+[[thm-gr-local-geodesics-and-exponential-map]]. The notation $P(p,q)$
+uses this chosen inverse branch; another normal neighborhood may select a
+different radial segment for the same endpoints. On a convex normal set
+$C$, use the inverse domains $C_p$ of (b) and the joining segment in $C$;
+on a strictly convex normal set this segment is unique by (b).
+By the Gauss lemma of
 [[thm-gr-lorentz-gauss-lemma-and-normal-maximum]]
 $g_q(P(p,q),P(p,q))=g_p(\exp_p^{-1}(q),\exp_p^{-1}(q))$.
 
@@ -83,7 +89,7 @@ $D_p^2(p)=0$, $D_p^2(q)<0$ exactly when $P(p,q)$ is timelike,
 $D_p^2(q)=0$ exactly when $P(p,q)$ is null or zero, and $D_p^2(q)>0$
 exactly when $P(p,q)$ is spacelike. On a convex normal $C$ we write
 $D^2:C\times C\to\mathbb R$, $D^2(p,q):=D_p^2(q)$, whenever the position
-vector is defined.
+vector is defined using these inverse domains.
 
 **(e) Scope.** These are definitions inside the smooth Lorentzian model;
 they assert no existence of convex normal sets (supplied separately by

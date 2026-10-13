@@ -57,16 +57,17 @@ status of its claims; it proves nothing by itself.
 
 - **Matter sectors.** The matter content is one of the sectors of clause (iii)
   of [[post-gr-classical-gravitational-action]]: the scalar-field model with a
-  supplied action and Hilbert tensor, or the dust and perfect-fluid models with
-  prescribed stress-energy tensor and matter equations. The stress-energy
+  supplied action and Hilbert tensor in the action presentation, or the dust
+  and perfect-fluid models with prescribed stress-energy tensor and matter
+  equations in the direct-equation presentation. The stress-energy
   tensor occupies the slot defined in [[def-gr-stress-energy-tensor-field]];
   its component reading in a $g$-orthonormal frame is in
   $\mathrm J\,\mathrm m^{-3}$, and the coupling satisfies
   $\kappa T\sim\mathrm m^{-2}$ with $\kappa=8\pi G_N/c^4$ in the conventions of
   [[def-gr-si-unit-and-coordinate-conventions]]. The equation of state of a
   fluid sector is a further assumption of that model; the energy conditions of
-  [[def-gr-energy-conditions]] are optional additional assumptions, never
-  consequences of the field law.
+  [[def-gr-energy-conditions]] are optional additional assumptions unless a particular matter model
+  implies them; the field equation alone does not universally force them.
 
 - **Smooth oriented branch.** The material assumes the smooth-branch
   restriction of [[post-gr-spacetime-and-classical-domain]] and

@@ -115,9 +115,12 @@ $$\Psi=\sum_{a,b}c_{ab}\,\kappa(e_{a}\otimes f_{b}),\qquad c_{ab}\in\mathbb C,$$
 converging in norm. A **product vector** is $\kappa(u\otimes v)$ for
 $u\in H$, $v\in K$, and a **product preparation** is a state of the form
 $T_{\Psi,\Psi}$ with $\Psi=\kappa(u\otimes v)$, $\|u\|=\|v\|=1$
-([[lem-nrqm-composites-hilbert-tensor-construction]]). General composite
-preparations are linear superpositions and mixtures of product preparations
-and need not factor; this is clause (iv) of P1.
+([[lem-nrqm-composites-hilbert-tensor-construction]]). Pure composite preparations are projectors $T_{\Psi,\Psi}$ for unit vectors
+$\Psi$ given by norm-convergent superpositions of product vectors as above.
+General composite preparations are density operators on the completed product,
+including statistical mixtures of pure composite preparations; these need not
+factor. Superposition acts on vectors, while mixing acts on density operators
+(P1 clauses (ii)-(iv)).
 
 **(c) Local readout of an assigned sharp observable.** Let $(A,u_{A})$ be an
 assigned sharp observable of subsystem $A$ with spectral projection valued
@@ -167,7 +170,7 @@ $\sum_{a,r}M_{a,r}^{*}M_{a,r}=I_{H}$. The **local extension** of the instrument
 to the declared composite is the family
 $$\bigl(M_{a,r}\otimes I_{K}\bigr)_{\substack{a\in A\\r\in R_{a}}}$$
 together with the outcome effects $\sum_{r}(M_{a,r}\otimes I_{K})^{*}(M_{a,r}\otimes I_{K})=\bigl(\sum_{r}M_{a,r}^{*}M_{a,r}\bigr)\otimes I_{K}$
-and the conditional updates
+and the conditional updates, defined only for outcomes with $p_a>0$,
 $$\rho\longmapsto\frac{1}{p_{a}}\sum_{r}(M_{a,r}\otimes I_{K})\,\rho\,(M_{a,r}\otimes I_{K})^{*},\qquad p_{a}=\operatorname{tr}\bigl(\rho\,F_{a}^{\mathrm{loc}}\bigr).$$
 It is normalized: every finite partial sum of
 $\sum_{a,r}(M_{a,r}\otimes I_{K})^{*}(M_{a,r}\otimes I_{K})$ equals

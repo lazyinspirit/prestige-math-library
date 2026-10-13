@@ -98,7 +98,13 @@ is part of the model data fixed in [[post-cm10-rigid-material]].
 $$\bigl\{c(t)+s\,\omega_{\mathrm s}(t):s\in\mathbb R\bigr\}$$
 is the **instantaneous rotation axis** of the motion at time $t$: it is the
 set of spatial points whose material velocity equals $c'(t)$, as follows from
-$\omega_{\mathrm s}\times(\omega_{\mathrm s}s)=0$. The velocity field is
+$\omega_{\mathrm s}\times(\omega_{\mathrm s}s)=0$. Conversely, write
+$w=\omega_{\mathrm s}(t)$ and $z=p-c(t)$. If $w\times z=0$, choose a
+coordinate $i$ with $w_i\neq0$; the cross-product coordinate equations
+([[lem-cm-skew-matrix-cross-product-correspondence]] clause 1) give
+$w_i z_j=w_j z_i$ for every $j$, hence $z=(z_i/w_i)w$.
+This proves that the zero relative-velocity set is exactly the displayed
+line. The velocity field is
 constant on lines parallel to $\omega_{\mathrm s}(t)$ and rotates about this
 axis; if also $c'(t)=0$ at that instant, every point of the axis is
 instantaneously at rest and the motion is an instantaneous rotation about it.

@@ -7,7 +7,7 @@ title: "Countable Kraus normalization and trace-norm convergence"
 status: draft
 origin: pipeline
 dependency_level: 2
-deps: [lem-nuclear-series-characterizes-trace-norm, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-rank-one-operator-calculus, thm-spectral-theorem-for-compact-self-adjoint-operators, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-class-iff-product-of-two-hilbert-schmidt-operators, thm-trace-is-absolutely-convergent-and-basis-independent, def-hilbert-space, def-countable-choice]
+deps: [lem-nuclear-series-characterizes-trace-norm, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-rank-one-operator-calculus, thm-spectral-theorem-for-compact-self-adjoint-operators, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-class-iff-product-of-two-hilbert-schmidt-operators, thm-trace-is-absolutely-convergent-and-basis-independent, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-space, def-countable-choice]
 dependency_roles:
   lem-nuclear-series-characterizes-trace-norm: mathematical-premise
   lem-nrqm-composites-nuclear-bounded-cyclicity: mathematical-premise
@@ -18,6 +18,7 @@ dependency_roles:
   thm-trace-class-is-a-two-sided-banach-operator-ideal: mathematical-premise
   thm-trace-class-iff-product-of-two-hilbert-schmidt-operators: mathematical-premise
   thm-trace-is-absolutely-convergent-and-basis-independent: mathematical-premise
+  def-self-adjoint-positive-unitary-and-normal-operator: mathematical-premise
   def-hilbert-space: mathematical-premise
   def-countable-choice: mathematical-premise
 proof_strategy: direct
@@ -42,7 +43,7 @@ Then:
 
 (a) $\sum_{a\ge1}\|M_ax\|^2=\|x\|^2$ for every $x\in H$;
 
-(b) for every positive trace-class $\rho$ the series $\sum_{a\ge1}M_a\rho M_a^*$ converges in trace norm to a positive trace-class operator $\Phi(\rho)$ with $\operatorname{tr}\Phi(\rho)=\operatorname{tr}\rho$;
+(b) for every self-adjoint positive trace-class $\rho$ (positivity as in [[def-self-adjoint-positive-unitary-and-normal-operator]]) the series $\sum_{a\ge1}M_a\rho M_a^*$ converges in trace norm to a self-adjoint positive trace-class operator $\Phi(\rho)$ with $\operatorname{tr}\Phi(\rho)=\operatorname{tr}\rho$;
 
 (c) $\Phi$ extends uniquely to a linear positive map $\Phi:\mathcal S_1(H)\to\mathcal S_1(H)$ with $\operatorname{tr}\Phi(\rho)=\operatorname{tr}\rho$ for all trace-class $\rho$ and $\|\Phi(\rho)\|_1\le\|\rho\|_1$ for self-adjoint $\rho$; it maps density operators to density operators. No claim is made that every positive trace-preserving map has such a family.
 
@@ -54,9 +55,9 @@ Then:
 
 [F2] $\operatorname{tr}(M_a\rho M_a^*)=\operatorname{tr}(M_a^*M_a\rho)$; $T_{x,z}B=T_{x,B^*z}$; $T$ is trace class exactly when it is a nuclear series; trace class is a complete two-sided ideal; the trace is linear, continuous for $\|\cdot\|_1$ and $\operatorname{tr}T=\sum_j\operatorname{tr}T_{w_j,z_j}$ for nuclear representations ([[lem-nrqm-composites-nuclear-bounded-cyclicity]], [[lem-nrqm-composites-rank-one-operator-calculus]], [[thm-trace-class-is-a-two-sided-banach-operator-ideal]], [[thm-trace-is-absolutely-convergent-and-basis-independent]]).
 
-[F3] A positive trace-class operator has the spectral expansion $\rho=\sum_nw_nT_{u_n,u_n}$ with orthonormal $u_n$, $w_n\ge0$ and $\operatorname{tr}\rho=\sum_nw_n$; conversely such sums (with $\sum w_n<\infty$) are positive trace class ([[lem-nrqm-composites-density-and-scalar-spectral-probability]]).
+[F3] A self-adjoint positive trace-class operator with positive trace becomes a density operator after dividing by its trace and has the spectral expansion $\rho=\sum_nw_nT_{u_n,u_n}$ with orthonormal $u_n$, $w_n\ge0$ and $\operatorname{tr}\rho=\sum_nw_n$; a zero-trace self-adjoint positive trace-class operator is zero. Conversely such sums (with $\sum w_n<\infty$) are self-adjoint positive trace class ([[lem-nrqm-composites-density-and-scalar-spectral-probability]], [[thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues]], [[def-self-adjoint-positive-unitary-and-normal-operator]]).
 
-[F4] A self-adjoint compact operator has an expansion $\sum_\lambda\lambda P_\lambda$ and $\operatorname{tr}(\pm T^\pm)=\sum_{\pm\lambda>0}|\lambda|$; for a positive trace-class operator $S$, $\|S\|_1=\operatorname{tr}S$; every trace-class operator is a product of two Hilbert-Schmidt operators ([[thm-spectral-theorem-for-compact-self-adjoint-operators]], [[thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues]], [[thm-trace-class-is-a-two-sided-banach-operator-ideal]], [[thm-trace-class-iff-product-of-two-hilbert-schmidt-operators]]).
+[F4] A self-adjoint compact operator has an expansion $\sum_\lambda\lambda P_\lambda$ and $\operatorname{tr}(T^\pm)=\sum_{\pm\lambda>0}|\lambda|$; for a positive trace-class operator $S$, $\|S\|_1=\operatorname{tr}S$ ([[thm-spectral-theorem-for-compact-self-adjoint-operators]], [[thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues]], [[thm-trace-class-is-a-two-sided-banach-operator-ideal]], [[thm-trace-class-iff-product-of-two-hilbert-schmidt-operators]]).
 
 ## Proof
 

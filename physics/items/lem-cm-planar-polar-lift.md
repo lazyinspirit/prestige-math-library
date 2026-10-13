@@ -6,11 +6,10 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 0
-deps: [def-interval, def-derivative, def-ck-euclidean-maps-and-diffeomorphisms, def-continuity-real, thm-derivative-of-an-inverse, thm-chain-rule, thm-algebra-of-derivatives, thm-algebra-of-continuous-functions, thm-sine-and-cosine-derivatives, thm-sine-and-cosine-parametrize-the-unit-circle, cor-trigonometric-parity-and-pythagorean-identity, cor-primitives-of-a-continuous-function, cor-zero-derivative-implies-constant]
+deps: [def-interval, def-derivative, def-continuity-real, thm-derivative-of-an-inverse, thm-chain-rule, thm-algebra-of-derivatives, thm-algebra-of-continuous-functions, thm-sine-and-cosine-derivatives, thm-sine-and-cosine-parametrize-the-unit-circle, cor-trigonometric-parity-and-pythagorean-identity, cor-primitives-of-a-continuous-function, cor-zero-derivative-implies-constant]
 dependency_roles:
   def-interval: mathematical-premise
   def-derivative: mathematical-premise
-  def-ck-euclidean-maps-and-diffeomorphisms: mathematical-premise
   def-continuity-real: mathematical-premise
   thm-derivative-of-an-inverse: mathematical-premise
   thm-chain-rule: mathematical-premise
@@ -37,8 +36,11 @@ sources:
 
 Let $I\subseteq\mathbb R$ be an interval with at least two points
 ([[def-interval]]), let $t_0\in I$, and let $\rho,\sigma:I\to\mathbb R$ be twice
-differentiable ([[def-ck-euclidean-maps-and-diffeomorphisms]]) with
-$(\rho(t),\sigma(t))\ne(0,0)$ for every $t\in I$. Put
+differentiable with
+$(\rho(t),\sigma(t))\ne(0,0)$ for every $t\in I$. Here twice differentiable
+means that $f$ and its derivative $f\prime:I\to\mathbb R$ are differentiable
+at every point of $I$ in the domain-relative sense of [[def-derivative]];
+$f\prime\prime=(f\prime)\prime$, including one-sided limits at included endpoints. Put
 
 $$r(t):=\sqrt{\rho(t)^2+\sigma(t)^2}>0\qquad(t\in I).$$
 
@@ -69,11 +71,11 @@ $$\vartheta'(t)=\frac{\rho(t)\sigma'(t)-\sigma(t)\rho'(t)}{r(t)^2}\qquad(t\in I)
 
 **Proof technique:** direct.
 
-1.1 By [L1] the function $r$ is twice differentiable with $r'=(\rho\rho'+\sigma\sigma')/r$; since $\rho,\sigma$ are twice differentiable and $r>0$, the quotient is again differentiable with continuous derivative, so $r$ is of class $C^1$ with $C^1$ derivative, that is, twice differentiable throughout. [given, L1, algebra]
+1.1 By [L1], $r$ is differentiable with $r'=(\rho\rho'+\sigma\sigma')/r$. Since $\rho,\sigma$ are twice differentiable and $r>0$, this quotient is differentiable by the product and quotient rules; hence $r$ is twice differentiable. [given, L1, algebra]
 
 1.2 The vector $(\rho(t_0)/r(t_0),\sigma(t_0)/r(t_0))$ satisfies $(\rho/r)^2+(\sigma/r)^2=1$ by the definition of $r$, so by [L3] there is a real $\theta_0$ with $\cos\theta_0=\rho(t_0)/r(t_0)$ and $\sin\theta_0=\sigma(t_0)/r(t_0)$. [given, L3, choose]
 
-2.1 Define $g:I\to\mathbb R$ by $g:=(\rho\sigma'-\sigma\rho')/r^2$. The numerator is continuous and $r^2>0$ is continuous, so $g$ is continuous on $I$ by [L4]; hence by [L4] the function $$\theta(t):=\theta_0+\int_{t_0}^t g(s)\,ds$$ is differentiable on $I$ with $\theta'=g$. Moreover $g$ is $C^1$: $\rho\sigma'-\sigma\rho'$ is $C^1$ (products of $C^1$ functions) and $1/r^2$ is $C^1$ (quotient of $C^1$ functions with nonvanishing denominator), so the product is $C^1$ by the algebra of derivatives; therefore $\theta$ is twice differentiable with $\theta'=g$. [given, step 1.1, step 1.2, L2, L4, construct]
+2.1 Define $g:I\to\mathbb R$ by $g:=(\rho\sigma'-\sigma\rho')/r^2$. The numerator is continuous and $r^2>0$ is continuous, so $g$ is continuous on $I$ by [L4]; hence by [L4] the function $$\theta(t):=\theta_0+\int_{t_0}^t g(s)\,ds$$ is differentiable on $I$ with $\theta'=g$. Moreover $g$ is differentiable by the product and quotient rules, since $\rho,\sigma$ are twice differentiable and $r^2>0$; therefore $\theta$ is twice differentiable with $\theta'=g$. [given, step 1.1, step 1.2, L2, L4, construct]
 
 2.2 Define $A:=\rho\cos\theta+\sigma\sin\theta$ and $B:=\sigma\cos\theta-\rho\sin\theta$ on $I$. Evaluating at $t_0$ with the choice of $\theta_0$ and [L3] gives $A(t_0)=\rho(t_0)^2/r(t_0)+\sigma(t_0)^2/r(t_0)=r(t_0)$ and $B(t_0)=\sigma(t_0)\rho(t_0)/r(t_0)-\rho(t_0)\sigma(t_0)/r(t_0)=0$. [given, step 1.2, L3, algebra]
 

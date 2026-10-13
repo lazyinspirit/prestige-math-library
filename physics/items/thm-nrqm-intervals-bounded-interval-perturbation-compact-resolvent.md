@@ -38,7 +38,7 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 4.2 pp. 117-121 and Section 9.1 pp. 181-186 (Kato-Rellich, compact resolvents, min-max bounds for interval Schrodinger operators)"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Sections 6.1 and 6.2 (bounded perturbation and compact operator background) and Section 9.2, Theorem 9.10 p. 192 (separated discrete spectrum); exact min-max suppliers and the interval proof are given locally"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
     - title: "Haim Brezis, Functional Analysis, Sobolev Spaces and Partial Differential Equations (Springer Universitext 2011), Section 6.4 pp. 165-169 and Section 8.6 pp. 231-233 (compact self-adjoint operators and Dirichlet eigenvalues)"
       url: "https://www.math.toronto.edu/almut/Brezis.pdf"

@@ -1,0 +1,1149 @@
+[
+  {
+    "order": 233,
+    "id": "gr-framework-and-geometry",
+    "kind": "A",
+    "category": "general-relativity",
+    "library": "physics",
+    "title": "Framework And Geometry",
+    "companion": "gr-framework-and-geometry-examples",
+    "requires": [
+      "countability-and-uncountability",
+      "dual-spaces-bilinear-forms-and-inertia",
+      "linear-independence-bases-and-dimension",
+      "rn-as-a-normed-space",
+      "the-inverse-function-theorem-completed",
+      "the-total-derivative",
+      "vector-fields-flows-and-lie-derivatives",
+      "connectedness",
+      "inner-product-spaces-and-orthogonality",
+      "matrices-and-the-matrix-of-a-linear-map",
+      "smooth-manifolds-and-smooth-maps",
+      "tangent-cotangent-and-the-differential",
+      "the-determinant-of-a-linear-operator",
+      "topological-spaces-and-continuity",
+      "connections-levi-civita-and-parallel-transport",
+      "sr-spacetime-primitives",
+      "monotone-sequences-and-cauchy-completeness",
+      "the-logarithm-and-general-powers",
+      "properties-of-the-integral-and-the-working-ftc",
+      "geodesics-the-exponential-map-completeness-and-hopf-rinow",
+      "riemann-curvature-and-riemannian-submanifolds"
+    ],
+    "items": [
+      {
+        "id": "def-gr-smooth-covariant-two-tensor-field",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Smooth covariant 2-tensor fields on a smooth manifold",
+        "statement": "Let $M$ be a smooth $n$-manifold ([[def-smooth-manifold]]), with smooth atlas\n$\\mathcal A$ and maximal smooth atlas $[\\mathcal A]$\n([[def-smooth-atlas]], [[def-smoothly-compatible-charts]]). For $p\\in M$ the\ntangent space $T_pM$ is the real vector space of derivations at $p$\n([[def-derivation-at-a-point-and-tangent-space]]), and the cotangent space is its\nalgebraic dual $T_p^*M:=(T_pM)^*$\n([[def-cotangent-space-and-cotangent-bundle-as-a-disjoint-union]]).\n\nA **covariant $2$-tensor at $p$** is a bilinear map\n$A_p:T_pM\\times T_pM\\to\\mathbb R$. It is **symmetric** when\n$A_p(v,w)=A_p(w,v)$ for all $v,w\\in T_pM$, and **nondegenerate** when the only\n$v\\in T_pM$ with $A_p(v,w)=0$ for all $w\\in T_pM$ is $v=0$.\n\nA **smooth covariant $2$-tensor field on $M$** is a family $A=(A_p)_{p\\in M}$\nassigning to each $p$ a covariant $2$-tensor $A_p$ at $p$, such that for every\nchart $(U,x)$ of the maximal smooth atlas $[\\mathcal A]$ the **component\nfunctions**\n\n$$A_{ab}(q):=A_q\\!\\left(\\frac{\\partial}{\\partial x^a}\\Big|_q,\\ \\frac{\\partial}{\\partial x^b}\\Big|_q\\right),\\qquad q\\in U,$$\n\nare $C^\\infty$ on $U$. Here $\\partial/\\partial x^a|_q$ is the coordinate\nderivation at $q$ ([[def-derivation-at-a-point-and-tangent-space]],\n[[thm-coordinate-derivations-form-a-basis-of-the-tangent-space]]), the index\nranges over the label set $I_n=\\{1,\\dots,n\\}$ (or the relabelled set\n$I_4=\\{0,1,2,3\\}$ when $n=4$), and smoothness of the real-valued functions\n$A_{ab}$ on the open set $U\\subseteq M$ is the notion of\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]] applied to $M$ and\n$\\mathbb R$.\n\nFor a coordinate tuple $z\\in x(U)$ define the **coordinate representative**\n$A^x_{ab}(z):=A_{ab}(x^{-1}(z))$. When the argument is a coordinate tuple,\n$A_{ab}(z)$ abbreviates this representative in the named chart; when it is a\npoint of $M$, it denotes the component function on the chart domain. Thus\n$A_{ab}(x(y^{-1}(u)))$ in a change-of-coordinates formula means\n$A^x_{ab}((x\\circ y^{-1})(u))$, never evaluation of a function on $M$ at a\ntuple. For $n=4$, $x^a$ and $\\partial_a$ mean the original coordinate and\nderivation labelled $a+1$, respectively; this relabels every slot and sum.\nThe label $0$ alone gives no coordinate vector a causal character.\n\nBecause the coordinate derivations at $q$ form a basis of $T_qM$\n([[thm-coordinate-derivations-form-a-basis-of-the-tangent-space]]), specifying\n$A$ is the same as specifying the matrix of component functions in each chart;\n[[lem-gr-covariant-two-tensor-transformation-law]] proves that the smoothness\nrequirement is independent of the chart used, so that the condition may be\nchecked on any smooth atlas of $M$, and derives the transformation law relating\ncomponents in two overlapping charts.\n\nThe field is **symmetric** when $A_p$ is symmetric for every $p\\in M$, which in\na chart is the identity $A_{ab}=A_{ba}$ of component functions; it is\n**nondegenerate** when $A_p$ is nondegenerate for every $p$, which in a chart is\nthe nonvanishing at every point of the polynomial function\n$\\det(A_{ab})$ of the components. The **matrix** of $A$ in a chart means the\nmatrix $\\bigl(A_{ab}(q)\\bigr)$ of its component functions at $q$.\n\n**Convention.** In the four-dimensional case $n=4$ used in this library, indices\nare $a,b,c,d=0,1,2,3$ with $0$ the time-coordinate label when such a coordinate is chosen, and we write\n$A_{ab}$ for the components. A covariant $2$-tensor field is also called a\n**$(0,2)$ tensor field**.",
+        "strategy": "Define smooth (0,2) tensor fields by chart components over the maximal atlas, after fixing tangent spaces as derivations and declaring the symmetry and nondegeneracy reading; the chart-independence of the definition and the transformation law are proved in the companion lemma, so the definition is chart-independent rather than merely chart-wise.",
+        "deps": [
+          "def-smooth-manifold",
+          "def-smooth-atlas",
+          "def-smoothly-compatible-charts",
+          "def-derivation-at-a-point-and-tangent-space",
+          "def-cotangent-space-and-cotangent-bundle-as-a-disjoint-union",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds"
+        ],
+        "dependency_roles": {
+          "def-smooth-manifold": "mathematical-premise",
+          "def-smooth-atlas": "mathematical-premise",
+          "def-smoothly-compatible-charts": "mathematical-premise",
+          "def-derivation-at-a-point-and-tangent-space": "mathematical-premise",
+          "def-cotangent-space-and-cotangent-bundle-as-a-disjoint-union": "mathematical-premise",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space": "mathematical-premise",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [
+          "lem-gr-covariant-two-tensor-transformation-law"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 2, 'the metric again' and the tensor transformation law, printed pp. 47-51 (PDF pp. 54-58)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), sections 1.7-1.8 on tensors and tensor fields, printed pp. 16-21 (PDF pp. 17-22)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "J. M. Lee, Introduction to Smooth Manifolds, 2nd ed., Ch. 12 (tensor fields on manifolds)",
+              "url": "https://julianchaidez.net/materials/reu/lee_smooth_manifolds.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 2.3.3 on tensors and tensor fields, printed pp. 72-75 (PDF pp. 79-82)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 0
+      },
+      {
+        "id": "lem-gr-covariant-two-tensor-transformation-law",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Chart independence and the transformation law of a smooth covariant 2-tensor field",
+        "statement": "Let $M$ be a smooth $n$-manifold and let $A=(A_p)_{p\\in M}$ be a family\nassigning to each $p$ a covariant $2$-tensor at $p$\n([[def-gr-smooth-covariant-two-tensor-field]]). Suppose that the component\nfunctions of $A$ are $C^\\infty$ in the charts of one smooth atlas of $M$. Let\n$(U,x)$ and $(V,y)$ be overlapping smooth charts of the maximal smooth atlas and\nlet $A_{cd}$ and $A'_{ab}$ denote their coordinate representatives in the\ncharts $x$ and $y$ as specified in [[def-gr-smooth-covariant-two-tensor-field]].\nFor $q\\in U\\cap V$ put $u=y(q)$ and write $x(u):=(x\\circ y^{-1})(u)$. Then\n\n$$A'_{ab}(u) = \\sum_{c,d\\in I_n}\\frac{\\partial x^c}{\\partial y^a}(u)\\,\\frac{\\partial x^d}{\\partial y^b}(u)\\,A_{cd}\\bigl(x(u)\\bigr),$$\n\nwhere $\\partial x^c/\\partial y^a$ are the entries of the total derivative\n$D(x\\circ y^{-1})(u)$; $I_n$ is the label set of the supplier,\nso in dimension four the sum runs from $0$ through $3$. In particular $A$ is a smooth covariant $2$-tensor field\non $M$: its components are $C^\\infty$ in every chart of the maximal smooth\natlas.",
+        "strategy": "Direct computation: the chain rule expresses the coordinate derivations of one chart in the other, bilinearity of each A_p converts the change of frame into the displayed double-sum law, and smoothness of the transition and its Jacobian plus closure of C^\u221e maps under products give chart-independence of smoothness.",
+        "deps": [
+          "def-gr-smooth-covariant-two-tensor-field",
+          "def-smoothly-compatible-charts",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "lem-coordinate-derivations-are-well-defined-derivations",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-covariant-two-tensor-field": "mathematical-premise",
+          "def-smoothly-compatible-charts": "mathematical-premise",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds": "mathematical-premise",
+          "lem-coordinate-derivations-are-well-defined-derivations": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), the metric transformation law (2.35), printed p. 50 (PDF p. 57)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), sections 1.6-1.8 on abstract index notation and tensor fields, printed pp. 15-21 (PDF pp. 16-22)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 2.3.3, printed pp. 72-75 (PDF pp. 79-82)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-gr-smooth-lorentzian-objects",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Smooth time-oriented Lorentzian four-manifolds: the geometric objects of the model",
+        "statement": "Let $M$ be a smooth four-manifold without boundary, so that $M$ is Hausdorff\nand second countable and carries a maximal smooth atlas\n([[def-smooth-manifold]]). Let $g$ be a smooth covariant $2$-tensor field on $M$\nin the sense of [[def-gr-smooth-covariant-two-tensor-field]]. Then $g$ assigns\nto every $p\\in M$ a bilinear form $g_p:T_pM\\times T_pM\\to\\mathbb R$\n([[def-derivation-at-a-point-and-tangent-space]]).\n\n**(a) Lorentzian metric.** The field $g$ is a **Lorentzian metric of signature\n$(-,+,+,+)$** on $M$ when it is symmetric and nondegenerate, and at every\n$p\\in M$ the pair $(T_pM,g_p)$ is a Lorentz vector space of signature\n$(-,+,+,+)$ in the sense of [[def-lorentz-form-and-inertia]]: that is, $g_p$ has\ninertia $(3,1,0)$, so that some \u2014 equivalently every \u2014 basis of $T_pM$ in which\nthe matrix of $g_p$ is diagonal has exactly one negative and three positive\ndiagonal entries. The pair $(M,g)$ is a **smooth Lorentzian four-manifold** (or\nLorentzian manifold of signature $(-,+,+,+)$). In a smooth chart $(U,x)$ the\n**components** of $g$ are the $C^\\infty$ functions\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ of\n[[def-gr-smooth-covariant-two-tensor-field]], and $g_{ab}=g_{ba}$ by symmetry.\nWe use indices $a,b,c,d=0,1,2,3$ and the Einstein summation convention, with\ncomponents in a chart written as lower-case indexed symbols and equations\nbetween indexed fields understood basis-independently. These conventions are\nfixed once for this library and the physical reading of the symbols is recorded\nwith the framework postulates, separately from this mathematical definition.\n\n**(b) Pointwise causal structure.** For every $p\\in M$ the vocabulary of\n[[def-causal-classification-of-lorentz-vectors]] applies to the Lorentz vector\nspace $(T_pM,g_p)$: a tangent vector $v\\in T_pM$ is **timelike** when\n$g_p(v,v)<0$, **null** when $v\\neq0$ and $g_p(v,v)=0$, **spacelike** when\n$g_p(v,v)>0$, and **causal** when it is timelike or null. Every nonzero\n$v\\in T_pM$ has exactly one causal character. The **timelike set**\n$T_p:=\\{v\\in T_pM:g_p(v,v)<0\\}$ has exactly two connected components, each\nnonempty, open, convex and path-connected; each $g_p$-orthonormal basis\n$e_0,e_1,e_2,e_3$ of $T_pM$ satisfies $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$\nfor some ordering, so in particular nonzero orthonormal vectors exist at every\npoint ([[lem-lorentz-form-has-orthonormal-basis]],\n[[lem-timelike-cone-has-two-convex-components]]).\n\n**(c) Time orientation.** A **time orientation** of $(M,g)$, also called a\n**choice of future cone**, is a smooth vector field $N$ on $M$\n([[def-smooth-vector-field-as-a-tangent-bundle-section]], whose tangent-bundle\nsmooth structure uses the axiom $\\mathrm{AC}_\\omega$ of\n[[def-countable-choice]]; this is the only use of that axiom in this\ndefinition) such that\n\n$$g_p(N_p,N_p)<0\\qquad\\text{for every }p\\in M .$$\n\nThe function $p\\mapsto g_p(N_p,N_p)$ is $C^\\infty$ because $g$ is a smooth\ncovariant $2$-tensor field and $N$ a smooth field, so the condition is a\npointwise strict inequality between a smooth function and $0$; since\n$g_p(N_p,N_p)<0$ implies $N_p\\neq0$, a time orientation is nowhere vanishing.\nA **time-oriented smooth Lorentzian four-manifold** is a triple $(M,g,N)$\nconsisting of a smooth Lorentzian four-manifold and a time orientation $N$.\n\nGiven a time orientation $N$ and $p\\in M$, the vector $N_p$ is timelike, and we\n**define** a nonzero causal vector $v\\in T_pM$ to be **future-directed** when\n$g_p(v,N_p)<0$ and **past-directed** when $g_p(v,N_p)>0$. The classification of\nnonzero causal vectors into exactly these two classes, and its agreement with\nthe two components of the timelike set (the future component is the component\n$C_p^+$ containing $N_p$, and the future causal vectors form\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$), is proved in\n[[lem-gr-future-causal-classification-by-a-timelike-field]]; in particular no\nnonzero causal $v$ satisfies $g_p(v,N_p)=0$, so the definition is exhaustive and\nmutually exclusive. Replacing $N$ by $-N$ reverses every future/past label, and\ntwo time orientations $N,N'$ determine the same future-directed causal vectors\nat every point where $g_p(N_p,N'_p)<0$, while they determine opposite ones\nwhere $g_p(N_p,N'_p)>0$, by\n[[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]; that lemma\nalso shows the sign of $p\\mapsto g_p(N_p,N'_p)$ is constant on every connected\ncomponent of $M$.\n\n**(d) The inverse metric.** Because $g_p$ is nondegenerate, it induces at each\n$p$ an isomorphism $\\flat_p:T_pM\\to T_p^*M$, $v\\mapsto g_p(v,\\cdot)$, and an\ninverse metric $g_p^{-1}$ on the dual space; the inverse metric, the musical\nisomorphisms and the components $g^{ab}$ are defined separately on this page,\nwhere the smoothness of those components is also proved. Neither construction\nuses any choice principle beyond the one already recorded in (c).\n\n\n**(e) Smooth timelike curves and their scalar normalization.** Before using\nthese quantities in the physical conventions, fix a positive real scaling\nparameter $c$ (with no physical meaning or dimension in this mathematical\nitem). A **smooth future timelike curve** is a smooth map $\\gamma:I\\to M$\nfrom a nonempty open real interval $I$ ([[def-interval]],\n[[def-c-r-and-smooth-maps-between-smooth-manifolds]]) whose velocity derivation\n$\\gamma'(s)\\in T_{\\gamma(s)}M$\n([[def-velocity-derivation-of-a-smooth-curve]]) satisfies\n$g(\\gamma',\\gamma')<0$ and $g(\\gamma',N)<0$ at every $s\\in I$.\nIn a chart its components are $d(x^a\\circ\\gamma)/ds$, $a=0,1,2,3$.\nFor a supplied base point $s_0\\in I$ and additive constant $\\tau_0\\in\\mathbb R$\ndefine\n\n$$h(s):=\\sqrt{-g_{\\gamma(s)}(\\gamma'(s),\\gamma'(s))},\\qquad \\tau(s):=\\tau_0+\\frac1c\\int_{s_0}^{s}h(r)\\,dr,\\qquad U(s):=\\frac{c\\gamma'(s)}{h(s)}.$$\n\nThe integral is oriented when $s<s_0$. The function $\\tau$ is called\n**proper time** for this scaling and $U$ the **four-velocity** of the smooth\ncurve; its increment times $c$ is the Lorentzian length. The well-definedness\nproof below shows $\\tau'>0$, that $\\tau:I\\to\\tau(I)$ is a smooth\ndiffeomorphism, and that $U$ is the velocity of $\\gamma\\circ\\tau^{-1}$.\nThus $g(U,U)=-c^2$ and $U$ is future timelike. This introduces the smooth\ncase before any physical unit reading; the later worldline definition extends\nit to its stated $C^k$, endpoint and piecewise-$C^1$ classes. It asserts no\nclock coupling, motion law or physical value of $c$.\n\n**Convention and scope.** The physical reading of a smooth time-oriented\nLorentzian four-manifold as a classical spacetime model, and the domain in which\nthat reading is adopted, are recorded in the framework postulate\n`post-gr-spacetime-and-classical-domain`; the words spacetime and event carry no\nmathematical content beyond this definition, and this item asserts no claim\nabout nature. The dimension $4$ and the absence of boundary are part of the\ndata; nothing in the definition assumes that $M$ is nonempty or connected, and\nno completeness, extendibility or maximality property of $(M,g)$ is asserted.",
+        "strategy": "Keep the full Lorentzian geometry and time orientation; prove arbitrary-basis topology independence locally and supply the complete smooth proper-time/four-velocity construction before physical unit readings.",
+        "deps": [
+          "def-gr-smooth-covariant-two-tensor-field",
+          "def-smooth-manifold",
+          "def-derivation-at-a-point-and-tangent-space",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-countable-choice",
+          "def-lorentz-form-and-inertia",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-time-orientation-and-future-causal-sets",
+          "lem-timelike-cone-has-two-convex-components",
+          "lem-lorentz-form-has-orthonormal-basis",
+          "def-interval",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds",
+          "def-velocity-derivation-of-a-smooth-curve",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space",
+          "thm-real-power-continuity-and-derivatives",
+          "cor-primitives-of-a-continuous-function",
+          "cor-mean-value-theorem",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition",
+          "thm-intermediate-value"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-covariant-two-tensor-field": "mathematical-premise",
+          "def-smooth-manifold": "mathematical-premise",
+          "def-derivation-at-a-point-and-tangent-space": "mathematical-premise",
+          "def-smooth-vector-field-as-a-tangent-bundle-section": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-lorentz-form-and-inertia": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise",
+          "lem-lorentz-form-has-orthonormal-basis": "mathematical-premise",
+          "def-interval": "mathematical-premise",
+          "def-c-r-and-smooth-maps-between-smooth-manifolds": "mathematical-premise",
+          "def-velocity-derivation-of-a-smooth-curve": "mathematical-premise",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space": "mathematical-premise",
+          "thm-real-power-continuity-and-derivatives": "mathematical-premise",
+          "cor-primitives-of-a-continuous-function": "mathematical-premise",
+          "cor-mean-value-theorem": "mathematical-premise",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "thm-ck-euclidean-maps-closed-under-algebra-and-composition": "mathematical-premise",
+          "thm-intermediate-value": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "justified_by": [
+          "lem-gr-future-causal-classification-by-a-timelike-field",
+          "lem-gr-timelike-fields-define-equal-or-opposite-future-cones"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 2 'the metric again' and 'canonical form of the metric', printed pp. 47-50 (PDF pp. 54-57)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), sections 2.1-2.2 printed pp. 25-28 (PDF pp. 26-29); Conventions, PDF p. 1",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), sections 3.1.2-3.1.3 printed pp. 93-95 (PDF pp. 100-102)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 1,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-gr-inverse-metric-and-musical-isomorphisms",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "The inverse metric, musical isomorphisms and index raising",
+        "statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$p\\in M$ ([[def-gr-smooth-lorentzian-objects]]). The cotangent space $T_p^*M$ is\nthe algebraic dual of $T_pM$ ([[def-algebraic-dual-and-linear-functional]]).\n\n**Musical isomorphisms.** Define the **flat map**\n\n$$\\flat_p:T_pM\\longrightarrow T_p^*M,\\qquad \\flat_p(v):=g_p(v,\\cdot),$$\n\nso that $\\flat_p(v)(w)=g_p(v,w)$; it is $\\mathbb R$-linear by bilinearity of\n$g_p$. Its kernel is $\\{v:g_p(v,w)=0\\text{ for all }w\\}=\\{0\\}$ because $g_p$ is\nnondegenerate, and $\\dim_{\\mathbb R}T_pM=\\dim_{\\mathbb R}T_p^*M=4$ since the\ncoordinate derivations of a chart form a basis of $T_pM$\n([[thm-coordinate-derivations-form-a-basis-of-the-tangent-space]]); hence\n$\\flat_p$ is a linear isomorphism and has an inverse\n$\\sharp_p:T_p^*M\\to T_pM$.\n\n**Inverse metric.** The **inverse metric** at $p$ is the symmetric bilinear form\n\n$$g_p^{-1}:T_p^*M\\times T_p^*M\\longrightarrow\\mathbb R,\\qquad g_p^{-1}(\\alpha,\\beta):=g_p(\\sharp_p\\alpha,\\sharp_p\\beta).$$\n\nIt is symmetric because $g_p$ is, and it is nondegenerate: if\n$g_p^{-1}(\\alpha,\\beta)=0$ for all $\\beta$, then $g_p(\\sharp_p\\alpha,\\cdot)=0$,\nso $\\sharp_p\\alpha=0$ and hence $\\alpha=0$.\n\n**Components in a chart.** Let $(U,x)$ be a smooth chart and\n$g_{ab}(q)=g_q(\\partial_a|_q,\\partial_b|_q)$ the components of $g$; let\n$dx^a|_q$ be the differential of the coordinate function $x^a$ at $q$\n([[def-differential-of-a-smooth-map]]), so that\n$dx^a|_q(\\partial_b|_q)=\\partial_b|_q(x^a)=\\delta^a{}_b$. Define the components\nof the inverse metric in this chart by\n\n$$g^{ab}(q):=g_q^{-1}\\bigl(dx^a|_q,\\,dx^b|_q\\bigr),\\qquad q\\in U,$$\n\nso that $\\sharp_q(dx^a|_q)=\\sum_bg^{ab}(q)\\,\\partial_b|_q$; equivalently\n$(g^{ab}(q))$ is the inverse matrix of $(g_{ab}(q))$ at every $q$, that is\n\n$$g^{ac}(q)\\,g_{cb}(q)=\\delta^a{}_b,\\qquad g_{ac}(q)g^{cb}(q)=\\delta_a{}^b,$$\n\nbecause $g_q(\\sharp_qdx^a|_q,\\partial_c|_q)=dx^a|_q(\\partial_c|_q)=\\delta^a{}_c$\nand also $g_q(\\sharp_qdx^a|_q,\\partial_c|_q)=\\sum_bg^{ab}(q)g_{bc}(q)$. In\nparticular $g^{ab}=g^{ba}$. The components $g^{ab}$ depend smoothly on $q$;\nthis is proved in [[lem-gr-inverse-metric-is-smooth]].\n\n**Raising, lowering and metric trace.** Let $A$ be a smooth symmetric covariant\n$2$-tensor field on an open set $V\\subseteq M$\n([[def-gr-smooth-covariant-two-tensor-field]]). At each $p\\in V$ define the\nendomorphism\n\n$$A^\\sharp_p:T_pM\\to T_pM,\\qquad A^\\sharp_p(v):=\\sharp_p\\bigl(A_p(v,\\cdot)\\bigr),$$\n\ncharacterized by $g_p(A^\\sharp_p(v),w)=A_p(v,w)$ for all $w\\in T_pM$; it is\nself-adjoint for $g_p$ because $A_p$ is symmetric. Its **metric trace** is\n\n$$\\operatorname{tr}_g(A)(p):=\\operatorname{tr}\\bigl(A^\\sharp_p\\bigr)$$\n\nwith the trace of an endomorphism as in [[def-trace-of-an-endomorphism]]. In a\nchart the raised, mixed and doubly raised components are\n\n$$A^{ab}:=g^{ac}g^{bd}A_{cd},\\qquad A^a{}_b:=g^{ac}A_{cb},\\qquad\\text{and}\\qquad \\operatorname{tr}_g(A)=g^{ab}A_{ab},$$\n\nthe last identity obtained by evaluating in a $g_p$-orthonormal basis\n$(e_0,e_1,e_2,e_3)$, where $g_p(e_a,e_b)=\\operatorname{diag}(-1,1,1,1)_{ab}$ by\n[[lem-timelike-cone-has-two-convex-components]] so that\n$g^{ab}A_{ab}=\\sum_a g^{aa}A_{aa}=-A(e_0,e_0)+A(e_1,e_1)+A(e_2,e_2)+A(e_3,e_3)$,\nwhich is the trace of the endomorphism $v\\mapsto\\sharp_p(A_p(v,\\cdot))$ in that\nbasis. All these operations are pointwise and depend only on $g$, $A$ and the\nduality pairing, not on a chart.\n\n**Conventions.** Raising and lowering apply to one index at a time and preserve\nindex order; $A_{ab}$, $A^a{}_b$ and $A^{ab}$ denote the same tensor $A$ with\nindices positioned by $g$. The musical isomorphisms and the inverse metric are\ndefined for every smooth Lorentzian four-manifold of this library; no choice\nprinciple is used in this definition, every ingredient being pointwise linear\nalgebra over $\\mathbb R$ together with the pointwise nondegeneracy of $g_p$.",
+        "strategy": "Pointwise linear algebra of a nondegenerate form: the flat map is an isomorphism by trivial kernel and equal dimensions, the inverse metric is its transport to the dual space, and components, index positions and the metric trace are fixed by the matrix identity g^{ac}g_{cb}=delta^a_b; smoothness of the components is deferred to the companion lemma.",
+        "deps": [
+          "def-gr-smooth-lorentzian-objects",
+          "def-gr-smooth-covariant-two-tensor-field",
+          "def-algebraic-dual-and-linear-functional",
+          "def-differential-of-a-smooth-map",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space",
+          "def-trace-of-an-endomorphism",
+          "lem-timelike-cone-has-two-convex-components"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-gr-smooth-covariant-two-tensor-field": "mathematical-premise",
+          "def-algebraic-dual-and-linear-functional": "mathematical-premise",
+          "def-differential-of-a-smooth-map": "mathematical-premise",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space": "mathematical-premise",
+          "def-trace-of-an-endomorphism": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [
+          "lem-gr-inverse-metric-is-smooth"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 2.1 on the inverse metric and the isomorphism between vectors and covectors, printed pp. 25-27 (PDF pp. 26-28)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 2, the inverse metric and index manipulation, printed pp. 47-48 (PDF pp. 54-55)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 3.1.3 on the metric as an isomorphism between vectors and covectors, printed pp. 94-96 (PDF pp. 101-103)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-gr-inverse-metric-is-smooth",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Smoothness and transformation of the inverse-metric components",
+        "statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$g_p^{-1}$ and $g^{ab}$ be the inverse metric and its chart components as in\n[[def-gr-inverse-metric-and-musical-isomorphisms]]. Then:\n\n1. For every smooth chart $(U,x)$ the component functions $g^{ab}:U\\to\\mathbb R$\n   are $C^\\infty$ on $U$.\n2. For overlapping smooth charts $(U,x)$, $(V,y)$ the components satisfy the\n   contravariant transformation law\n\n$$g'^{ab}(u)=\\sum_{c,d=0}^{3}\\frac{\\partial y^a}{\\partial x^c}\\bigl(x(u)\\bigr)\\, \\frac{\\partial y^b}{\\partial x^d}\\bigl(x(u)\\bigr)\\,g^{cd}\\bigl(x(u)\\bigr),\\qquad u\\in y(U\\cap V),$$\n\nwhere every component evaluated at a coordinate tuple is its coordinate\nrepresentative, as in [[def-gr-smooth-covariant-two-tensor-field]],\n$x(u)$ denotes $(x\\circ y^{-1})(u)$, and $\\partial y^a/\\partial x^c$ are\nthe entries of $D(y\\circ x^{-1})$.\n\n3. Consequently the pointwise bilinear forms $g_p^{-1}$ on $T_p^*M$ are\n   presented by component functions that are smooth in every chart and glue by\n   the contravariant law; the inverse metric is a well-defined smooth component\n   family determined by $g$ alone.",
+        "strategy": "Direct: the component matrix is smooth with nowhere-zero determinant, so its inverse is smooth by the adjugate formula for matrix inversion; the transformation law is obtained by inverting the covariant law G' = J^T G J and identifying J^{-1} with the Jacobian of the reverse transition by the chain rule.",
+        "deps": [
+          "def-gr-inverse-metric-and-musical-isomorphisms",
+          "def-gr-smooth-covariant-two-tensor-field",
+          "lem-gr-covariant-two-tensor-transformation-law",
+          "lem-matrix-inversion-preserves-ck-regularity",
+          "cor-inverse-matrix-by-adjugate",
+          "thm-chain-rule-for-total-derivatives",
+          "def-total-derivative-in-euclidean-space",
+          "def-smoothly-compatible-charts"
+        ],
+        "dependency_roles": {
+          "def-gr-inverse-metric-and-musical-isomorphisms": "mathematical-premise",
+          "def-gr-smooth-covariant-two-tensor-field": "mathematical-premise",
+          "lem-gr-covariant-two-tensor-transformation-law": "mathematical-premise",
+          "lem-matrix-inversion-preserves-ck-regularity": "mathematical-premise",
+          "cor-inverse-matrix-by-adjugate": "mathematical-premise",
+          "thm-chain-rule-for-total-derivatives": "mathematical-premise",
+          "def-total-derivative-in-euclidean-space": "mathematical-premise",
+          "def-smoothly-compatible-charts": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 2.1 on the inverse metric, printed pp. 25-26 (PDF pp. 26-27)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), the transformation law of the metric (2.35), printed p. 50 (PDF p. 57)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 3.1.3, printed pp. 94-96 (PDF pp. 101-103)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 3,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-gr-metric-selected-connection",
+        "kind": "definition",
+        "domain": "mathematics",
+        "title": "Metric compatibility, torsion freedom and the metric-selected connection class",
+        "statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) and let $\\nabla$ be an affine connection\non $M$ ([[def-affine-connection-on-a-smooth-manifold]]). Smooth vector fields\nare smooth sections of the tangent bundle\n([[def-smooth-vector-field-as-a-tangent-bundle-section]]); as there, their use\nrests on the canonical smooth structure of $TM$, which assumes the axiom\n$\\mathrm{AC}_\\omega$ of [[def-countable-choice]]. This is the only use of that\naxiom in this definition.\n\n**(a) Metric compatibility.** The connection $\\nabla$ is **$g$-compatible**, or\n**compatible with the metric** $g$, when for all smooth vector fields $X,Y,Z$ on\n$M$ the identity of smooth functions\n\n$$X\\bigl(g(Y,Z)\\bigr)=g(\\nabla_XY,Z)+g(Y,\\nabla_XZ)$$\n\nholds on $M$. Here $g(Y,Z)$ is the smooth function $p\\mapsto g_p(Y_p,Z_p)$ and\n$X$ acts on functions as a derivation; the identity uses only the action of\n$\\nabla$ on vector fields and requires no extension of $\\nabla$ to tensor\nfields. When such an extension is available, this identity is the statement\n$\\nabla_Xg=0$, and the compatibility of $\\nabla$ with the inverse metric\n$g^{-1}$ follows; neither statement is part of this definition.\n\n**(b) Torsion freedom.** The **torsion** of $\\nabla$ is the tangent-valued\n$2$-tensor $T(X,Y)=\\nabla_XY-\\nabla_YX-[X,Y]$ of\n[[def-torsion-tensor-of-an-affine-connection]], with bracket as in\n[[def-lie-bracket-of-smooth-vector-fields]]. The connection is **torsion-free**\nwhen $T(X,Y)=0$ for all smooth $X,Y$, that is, when\n$\\nabla_XY-\\nabla_YX=[X,Y]$ identically.\n\n**(c) Metric-selected connections.** A **metric-selected connection** for\n$(M,g)$ is an affine connection on $M$ that is both torsion-free and\n$g$-compatible. Equivalently, it is an element of the class\n\n$$\\operatorname{LC}(M,g):=\\{\\nabla:\\nabla\\text{ is an affine connection on }M,\\ \\nabla\\text{ is torsion-free and }g\\text{-compatible}\\}.$$\n\nThe name records that the pair of conditions selects the connection out of all\naffine connections; it is the pair of conditions imposed on the connection that\nconventional general relativity uses, and the connection so selected is called\nthe **Levi\u2013Civita connection** of $g$.\n\n\n**(d) Intrinsic construction before physical use.** For smooth local vector\nfields define the Koszul expression\n\n$$K(X,Y,Z):=Xg(Y,Z)+Yg(Z,X)-Zg(X,Y)+g([X,Y],Z)+g([Z,X],Y)-g([Y,Z],X).$$\n\nDefine $\\nabla^g_XY$ by $2g(\\nabla^g_XY,Z)=K(X,Y,Z)$ for every smooth local\n$Z$. The proof below establishes existence, smoothness, the affine-connection\nrules, metric compatibility, torsion freedom and uniqueness; it uses symmetry\nand nondegeneracy, not positive definiteness. Thus $\\operatorname{LC}(M,g)$\nhas this unique element, called the **Levi\u2013Civita connection** of $g$. The later\nnondegenerate-metric theorem retains its fuller tensor-derivative statement.\nIts Christoffel symbols in any chart are defined by\n$\\nabla^g_{\\partial_b}\\partial_c=\\Gamma^a{}_{bc}\\partial_a$\n([[def-christoffel-symbols-of-an-affine-connection]]) and obey\n\n$$\\Gamma^a{}_{bc}=\\tfrac12 g^{ad}(\\partial_bg_{dc}+\\partial_cg_{bd}-\\partial_dg_{bc}),\\qquad a,b,c,d=0,1,2,3.$$\n\n**(e) Basic curvature and contractions.** The **curvature** of this connection\nis the operator of [[def-curvature-of-an-affine-connection]], with the fixed\nsign convention\n\n$$R^g(X,Y)Z:=\\nabla^g_X\\nabla^g_YZ-\\nabla^g_Y\\nabla^g_XZ-\\nabla^g_{[X,Y]}Z.$$\n\nThe general affine-connection theorem\n[[thm-curvature-is-a-type-one-three-tensor]] proves that it depends pointwise\nonly on $X,Y,Z$ and is a smooth tensor. Define its chart components by\n$R^g(\\partial_c,\\partial_d)\\partial_b=R^a{}_{bcd}\\partial_a$.\nDefine the **Ricci tensor** and **scalar curvature** pointwise by\n\n$$\\operatorname{Ric}_p(v,w):=\\operatorname{tr}(z\\mapsto R^g_p(z,w)v),\\qquad S(p):=\\operatorname{tr}(\\sharp_p\\circ\\operatorname{Ric}^{\\flat}_p),\\qquad \\operatorname{Ric}^{\\flat}_p(v):=\\operatorname{Ric}_p(v,\\cdot).$$\n\nHere $\\sharp$ is the inverse metric isomorphism and traces are the\nbasis-independent trace of [[def-trace-of-an-endomorphism]]. Equivalently,\n$\\operatorname{Ric}_{bd}=\\sum_aR^a{}_{bad}$ and\n$S=\\sum_{b,d}g^{bd}\\operatorname{Ric}_{bd}$, all sums from $0$ through $3$.\nThese are well-defined smooth fields by finite contraction of the smooth\ncomponents of $R^g$ and $g^{-1}$; basis independence follows from the trace\nand the intrinsic maps just defined. No symmetry identity or field equation\nis assumed here. Lowering the curvature output gives\n$R_{abcd}=g_{ae}R^e{}_{bcd}$, so the definitions agree with the full later\ncurvature item, which proves the remaining symmetries and coordinate formulas.",
+        "strategy": "Define the two selecting conditions, completely construct their unique common solution by the nondegenerate Koszul argument, and define basic affine curvature, Ricci and scalar contractions using exact general mathematical suppliers.",
+        "deps": [
+          "def-gr-smooth-lorentzian-objects",
+          "def-affine-connection-on-a-smooth-manifold",
+          "def-torsion-tensor-of-an-affine-connection",
+          "def-lie-bracket-of-smooth-vector-fields",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-countable-choice",
+          "def-gr-inverse-metric-and-musical-isomorphisms",
+          "lem-gr-inverse-metric-is-smooth",
+          "def-christoffel-symbols-of-an-affine-connection",
+          "prop-leibniz-rules-for-the-lie-bracket-with-function-multiples",
+          "prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space",
+          "def-curvature-of-an-affine-connection",
+          "thm-curvature-is-a-type-one-three-tensor",
+          "def-trace-of-an-endomorphism",
+          "prop-coordinate-vector-fields-commute"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-affine-connection-on-a-smooth-manifold": "mathematical-premise",
+          "def-torsion-tensor-of-an-affine-connection": "mathematical-premise",
+          "def-lie-bracket-of-smooth-vector-fields": "mathematical-premise",
+          "def-smooth-vector-field-as-a-tangent-bundle-section": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise",
+          "def-gr-inverse-metric-and-musical-isomorphisms": "mathematical-premise",
+          "lem-gr-inverse-metric-is-smooth": "mathematical-premise",
+          "def-christoffel-symbols-of-an-affine-connection": "mathematical-premise",
+          "prop-leibniz-rules-for-the-lie-bracket-with-function-multiples": "mathematical-premise",
+          "prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components": "mathematical-premise",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space": "mathematical-premise",
+          "def-curvature-of-an-affine-connection": "mathematical-premise",
+          "thm-curvature-is-a-type-one-three-tensor": "mathematical-premise",
+          "def-trace-of-an-endomorphism": "mathematical-premise",
+          "prop-coordinate-vector-fields-commute": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 3 'covariant derivatives and connections', torsion (3.16) and metric compatibility, printed pp. 58-61 (PDF pp. 65-68)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), sections 3.1-3.2, printed pp. 31-37 (PDF pp. 32-38); postulate 1, PDF p. 68",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 3.2 on connections and curvature, printed pp. 100-107 (PDF pp. 107-114)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-gr-si-unit-and-coordinate-conventions",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "SI unit and coordinate conventions of the classical gravitational framework",
+        "statement": "This item fixes the unit and coordinate readings of the explicitly defined\nLorentzian objects, smooth-curve proper time and four-velocity of\n[[def-gr-smooth-lorentzian-objects]], the tensor fields of\n[[def-gr-smooth-covariant-two-tensor-field]], and the constructed connection,\ncurvature, Ricci and scalar fields of [[def-gr-metric-selected-connection]].\nIt states conventions, not a physical law or a measurement.\n\n**(a) Constants and tensor slot.** Adopt $c>0$ with SI dimension\n$\\mathrm m\\,\\mathrm s^{-1}$, $G_N>0$ with dimension\n$\\mathrm m^3\\,\\mathrm{kg}^{-1}\\,\\mathrm s^{-2}$, and a signed parameter\n$\\Lambda$ with dimension $\\mathrm m^{-2}$. No numerical value is asserted.\nDefine $\\kappa:=8\\pi G_N/c^4$, of dimension\n$\\mathrm m^{-1}\\,\\mathrm{kg}^{-1}\\,\\mathrm s^2$.\nFor a smooth symmetric covariant two-tensor $T$ adopt the convention that its\ncomponents $T_{AB}=T(e_A,e_B)$ in an ordered $g$-orthonormal basis are energy\nper volume, $\\mathrm J\\,\\mathrm m^{-3}=\\mathrm{kg}\\,\\mathrm m^{-1}\\mathrm s^{-2}$.\nThis is a tensor slot and unit convention; interpreting a particular $T$ as\nmatter is a subsequent definition. Therefore $\\kappa T_{AB}$ has dimension\n$\\mathrm m^{-2}$. No positivity, conservation or matter realization is assumed.\n\n**(b) Coordinates and dimensions.** In a length-coordinate chart,\n$x^0=ct$ and all four coordinates have units $\\mathrm m$; $g_{ab}$ are\ndimensionless and the quadratic line element $ds^2=g_{ab}dx^adx^b$ has units\n$\\mathrm m^2$. The Christoffel symbols defined by\n$\\nabla^g_{\\partial_b}\\partial_c=\\Gamma^a{}_{bc}\\partial_a$\n([[def-christoffel-symbols-of-an-affine-connection]]) have units\n$\\mathrm m^{-1}$: the constructed formula differentiates dimensionless\n$g_{ab}$ once with respect to a length coordinate. Curvature components have\nunits $\\mathrm m^{-2}$ since the curvature operator differentiates the\nconnection once more and includes products of two connection coefficients;\nso do $\\operatorname{Ric}_{ab}$ and scalar curvature $S$ in these coordinates.\nIn a time-coordinate chart $x^0=t$ has units $\\mathrm s$, and $g_{00}$ has\nunits $\\mathrm m^2\\,\\mathrm s^{-2}$; mixed, spatial, angular or other chart\ncomponents have the dimensions obtained by the coordinate Jacobians. A single\ncomponent has no universal dimension in a general chart. Orthonormal-frame\nreadings use the normalized geometric basis, with its length normalization.\n\n**(c) Curves and invariant readings.** For the smooth future timelike curve\nand positive scaling parameter of [[def-gr-smooth-lorentzian-objects]] (e),\nread $c$ as in (a) and\n$\\tau(s)=\\tau_0+c^{-1}\\int_{s_0}^{s}\\sqrt{-g(\\gamma',\\gamma')}\\,dr$\nas a proper-time parameter in seconds. Its four-velocity $U=d\\gamma/d\\tau$\nhas length-coordinate and normalized orthonormal components in\n$\\mathrm m\\,\\mathrm s^{-1}$; in a time-coordinate chart $U^0=dt/d\\tau$\nis dimensionless and other component dimensions follow the coordinates.\nLorentzian length $c\\,\\Delta\\tau$ is in metres. The tensors $R^g$,\n$\\operatorname{Ric}$ and the scalar $S$ have the orthonormal readings\n$\\mathrm m^{-2}$, whereas the lowered curvature components in a mixed chart\nhave the units required by the metric and coordinate slots.\n\n**(d) Future observer readings and SI restoration.** Let $n$ be a future\nunit timelike vector, $g(n,n)=-1$ and $g(n,N)<0$. Define\n$\\rho_n:=T(n,n)$, $j_n:=-\\sharp(T(n,\\cdot))$ and its spatial part\n$\\phi_n:=j_n-\\rho_n n$; indeed $g(j_n,n)=-\\rho_n$, so\n$g(\\phi_n,n)=0$. In a $g$-orthonormal basis with $e_0=n$, set\n$\\phi^i=-T(e_0,e_i)=T^{0i}$ for $i=1,2,3$. The **SI energy flux** vector\nand **SI momentum density** covector are, respectively,\n\n$$q_n:=c\\phi_n,\\qquad p_n:=\\phi_n^{\\flat}/c,\\qquad q_n^i=-cT_{0i},\\qquad (p_n)_i=-T_{0i}/c.$$\n\nThus $\\rho_n$ and each $\\phi^i$ have units $\\mathrm J\\,\\mathrm m^{-3}$;\n$q_n^i$ has units $\\mathrm W\\,\\mathrm m^{-2}$ and $(p_n)_i$ has units\n$\\mathrm{kg}\\,\\mathrm m^{-2}\\mathrm s^{-1}$. Stress components $T_{ij}$ have\nunits $\\mathrm J\\,\\mathrm m^{-3}=\\mathrm{Pa}$. Tensor components retain the\ncommon energy-density units; the factors of $c$ convert their mixed readings\nto different SI quantities. Future-directedness and the signs here are part\nof the convention, not positivity assumptions on $T$.\n\n**(e) Natural units.** Setting $c=1$, or additionally $G_N=1$, abbreviates\nthese dimensionful conventions. Restore the factors displayed above before\ncomparison with SI quantities; in particular the same spatial tensor component\ncorresponds to energy flux multiplied by $c$ and momentum density divided by\n$c$. In a chart whose coordinates $x^0,x^1,x^2,x^3$ are all lengths and whose\nmetric components are $\\operatorname{diag}(-1,1,1,1)$, a nonzero null tangent\nvector $v=(v^0,\\mathbf v)$, null as in clause (b) of\n[[def-gr-smooth-lorentzian-objects]], satisfies\n$\\|\\mathbf v\\|_2:=\\sqrt{(v^1)^2+(v^2)^2+(v^3)^2}=|v^0|$. Since $v\\ne0$, this\nimplies $v^0\\ne0$, so $\\|\\mathbf v\\|_2/|v^0|=1$. This is a coordinate identity\nfor the null condition, not a postulate about light propagation, and it does\nnot change the physical constant $c$.",
+        "strategy": "A conventions item: fix the dimensions of c, G_N, Lambda and kappa, the two standard coordinate readings (x^0 = ct metres versus x^0 = t seconds), the invariant dimensional readings, and the rule that natural-unit expressions must have the constants restored; it asserts no measured value and adopts no law.",
+        "deps": [
+          "def-gr-smooth-lorentzian-objects",
+          "def-gr-smooth-covariant-two-tensor-field",
+          "def-gr-inverse-metric-and-musical-isomorphisms",
+          "def-gr-metric-selected-connection",
+          "def-christoffel-symbols-of-an-affine-connection"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-lorentzian-objects": "formulation-prerequisite",
+          "def-gr-smooth-covariant-two-tensor-field": "formulation-prerequisite",
+          "def-gr-inverse-metric-and-musical-isomorphisms": "mathematical-premise",
+          "def-gr-metric-selected-connection": "mathematical-premise",
+          "def-christoffel-symbols-of-an-affine-connection": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Conventions for writing the smooth Lorentzian geometry of this framework with SI dimensions: conversion constant c, Newton constant G_N, cosmological parameter Lambda, coordinates, components and invariants. The conventions fix dimensions and unit restoration only; they assert no measured value, adopt no field law, and make no claim about nature.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), Conventions, PDF p. 1 (c = 1; abstract indices; signature (-+++))",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), equations (1.5)-(1.6) with x^0 = ct and c = 1, printed pp. 4-5 (PDF pp. 11-12)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), natural units and the dimensions of G, printed p. 144 (PDF p. 151)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5
+      },
+      {
+        "id": "lem-gr-future-causal-classification-by-a-timelike-field",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Classification of future and past causal vectors by a timelike field",
+        "statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$p\\in M$ ([[def-gr-smooth-lorentzian-objects]]). Write\n$N_p^{\\perp}=\\{v\\in T_pM:g_p(v,N_p)=0\\}$\n([[def-lorentz-orthogonality-and-orthogonal-complement]]) and let $T_p$ be the\ntimelike set, with components $C_p^+$ (the one containing $N_p$) and $C_p^-$,\nand with future and past causality as fixed in\n[[def-time-orientation-and-future-causal-sets]] and\n[[def-gr-smooth-lorentzian-objects]]. Then:\n\n1. $N_p^{\\perp}$ is a $3$-dimensional linear subspace of $T_pM$, and $g_p$ is\n   positive definite on it; equivalently, every nonzero $v\\in T_pM$ with\n   $g_p(v,N_p)=0$ is spacelike.\n2. $g_p(v,N_p)\\neq0$ for every nonzero causal $v\\in T_pM$.\n3. $C_p^+=\\{v\\in T_pM:g_p(v,v)<0\\text{ and }g_p(v,N_p)<0\\}$, and\n   $C_p^-=\\{v\\in T_pM:g_p(v,v)<0\\text{ and }g_p(v,N_p)>0\\}$.\n4. A nonzero $v\\in T_pM$ is causal and future-directed if and only if\n   $v\\in\\operatorname{cl}(C_p^+)$, and causal and past-directed if and only if\n   $v\\in\\operatorname{cl}(C_p^-)$. Consequently\n   $\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$ is exactly the set of\n   future-directed causal vectors and $\\operatorname{cl}(C_p^-)\\setminus\\{0\\}$\n   exactly the set of past-directed causal vectors,\n   $\\operatorname{cl}(C_p^+)\\cap\\operatorname{cl}(C_p^-)=\\{0\\}$, and every\n   nonzero causal vector is exactly one of future-directed and past-directed.",
+        "strategy": "Direct computation in an orthonormal basis chosen with positive time component for N: Cauchy\u2013Schwarz bounds the spatial pairing, so no nonzero causal vector is orthogonal to N; the component descriptions of the timelike cone then identify the future component with the sign condition g(v,N)<0, and an explicit perturbation exhibits null boundary vectors in the closure; the past side is the mirror computation.",
+        "deps": [
+          "def-gr-smooth-lorentzian-objects",
+          "lem-lorentz-form-has-orthonormal-basis",
+          "lem-timelike-cone-has-two-convex-components",
+          "def-causal-classification-of-lorentz-vectors",
+          "def-time-orientation-and-future-causal-sets",
+          "def-lorentz-orthogonality-and-orthogonal-complement",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space",
+          "def-euclidean-inner-product",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "lem-lorentz-form-has-orthonormal-basis": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise",
+          "def-causal-classification-of-lorentz-vectors": "mathematical-premise",
+          "def-time-orientation-and-future-causal-sets": "mathematical-premise",
+          "def-lorentz-orthogonality-and-orthogonal-complement": "mathematical-premise",
+          "thm-unique-coordinates-with-respect-to-an-ordered-basis": "mathematical-premise",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space": "mathematical-premise",
+          "def-euclidean-inner-product": "mathematical-premise",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 2.2 and the exercise on orthogonal vectors, printed pp. 26-27 (PDF pp. 27-28)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 4.5.7 and the orthogonality step in the scalar-field weak energy condition, printed pp. 194-195 (PDF pp. 201-202)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 1 on past and future light cones, printed pp. 5-9 (PDF pp. 12-16)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "lem-gr-connection-conditions-in-chart-components",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Torsion freedom and metric compatibility in chart components",
+        "statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]), let $\\nabla$ be an affine connection on\n$M$ ([[def-affine-connection-on-a-smooth-manifold]]) and let $(U,x)$ be a\nsmooth chart, with Christoffel symbols $\\nabla_{\\partial_b}\\partial_c=\\sum_a\n\\Gamma^a{}_{bc}\\partial_a$ ([[def-christoffel-symbols-of-an-affine-connection]])\nand metric components $g_{ab}=g(\\partial_a,\\partial_b)$. Then:\n\n1. $\\nabla$ is torsion-free ([[def-torsion-tensor-of-an-affine-connection]])\n   if and only if $\\Gamma^a{}_{bc}=\\Gamma^a{}_{cb}$ for all $a,b,c$ in every\n   smooth chart.\n2. $\\nabla$ is $g$-compatible ([[def-gr-metric-selected-connection]]) if and\n   only if, in every smooth chart,\n\n$$\\partial_ag_{bc}=\\sum_{d=0}^{3}\\bigl(\\Gamma^d{}_{ab}g_{dc}+\\Gamma^d{}_{ac}g_{bd}\\bigr) \\qquad(a,b,c=0,1,2,3).$$\n\nThus $\\nabla$ is metric-selected for $(M,g)$ if and only if both displayed\nconditions hold in every smooth chart.",
+        "strategy": "Two local computations: torsion on coordinate pairs is the antisymmetric part of the Christoffel symbols by vanishing of coordinate brackets, and C^\u221e-bilinearity reduces the general torsion to coordinate pairs; metric compatibility evaluated on coordinate fields gives the displayed identity in one direction, and expanding arbitrary smooth fields in the coordinate frame in the other direction reduces the Leibniz identity to the same component equation.",
+        "deps": [
+          "def-gr-metric-selected-connection",
+          "def-gr-smooth-lorentzian-objects",
+          "def-christoffel-symbols-of-an-affine-connection",
+          "def-affine-connection-on-a-smooth-manifold",
+          "def-torsion-tensor-of-an-affine-connection",
+          "lem-torsion-is-c-infinity-bilinear-and-skew-symmetric",
+          "prop-coordinate-vector-fields-commute",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space",
+          "def-gr-smooth-covariant-two-tensor-field",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-gr-metric-selected-connection": "mathematical-premise",
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-christoffel-symbols-of-an-affine-connection": "mathematical-premise",
+          "def-affine-connection-on-a-smooth-manifold": "mathematical-premise",
+          "def-torsion-tensor-of-an-affine-connection": "mathematical-premise",
+          "lem-torsion-is-c-infinity-bilinear-and-skew-symmetric": "mathematical-premise",
+          "prop-coordinate-vector-fields-commute": "mathematical-premise",
+          "thm-coordinate-derivations-form-a-basis-of-the-tangent-space": "mathematical-premise",
+          "def-gr-smooth-covariant-two-tensor-field": "mathematical-premise",
+          "def-smooth-vector-field-as-a-tangent-bundle-section": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), the torsion (3.16) and the derivation of the Christoffel formula (3.19)-(3.21), printed pp. 59-60 (PDF pp. 66-67)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), equations (3.23)-(3.33) in section 3.2, printed pp. 36-37 (PDF pp. 37-38)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 3.2, printed pp. 100-107 (PDF pp. 107-114)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 5,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-gr-stress-energy-tensor-field",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "Stress-energy tensor field of a model",
+        "statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold and let\n$U\\subseteq M$ be a nonempty open subset, the **matter domain** of the model,\ncarrying the restricted smooth structure of\n[[prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure]].\n\nA **stress-energy tensor field** on $U$ for the model is a smooth symmetric\ncovariant $2$-tensor field $T$ on $U$ in the sense of\n[[def-gr-smooth-covariant-two-tensor-field]]: at every $p\\in U$, $T_p$ is a\nsymmetric bilinear form $T_p:T_pM\\times T_pM\\to\\mathbb R$ varying smoothly with\n$p$, with component functions $T_{ab}=T(\\partial_a,\\partial_b)$ in every smooth\nchart of $U$. No nondegeneracy of $T_p$ is required or implied; in particular\n$T_p$ may have radical, as it does for a dust model whose stress-energy form\nvanishes on a hyperplane.\n\n**Unit and observer reading.** At a point choose a $g_p$-orthonormal ordered\nbasis $(e_0,e_1,e_2,e_3)$ with $e_0$ future-directed, meaning\n$g(e_0,N)<0$, and $g(e_A,e_B)=\\operatorname{diag}(-1,1,1,1)_{AB}$.\nSuch a basis is obtained from an orthonormal basis by reversing its timelike\nmember if necessary. Write $T_{AB}=T(e_A,e_B)$ and $n=e_0$.\nEvery $T_{AB}$ has the energy-density reading\n$\\mathrm J\\,\\mathrm m^{-3}$ of [[def-gr-si-unit-and-coordinate-conventions]].\nThe energy density for this observer is $\\rho_n=T_{00}$; the spatial component\n$\\phi^i=-T_{0i}=T^{0i}$ gives the SI energy-flux component\n$q_n^i=c\\phi^i$ in $\\mathrm W\\,\\mathrm m^{-2}$ and the SI momentum-density\ncomponent $(p_n)_i=\\phi^i/c$ in\n$\\mathrm{kg}\\,\\mathrm m^{-2}\\mathrm s^{-1}$. The stress is $T_{ij}$ in\n$\\mathrm{Pa}=\\mathrm J\\,\\mathrm m^{-3}$, $i,j=1,2,3$.\nThus the off-diagonal tensor entries themselves have energy-density units;\ntheir flux and momentum readings require the stated sign and $c$ factors.\nThese names and readings interpret a prescribed tensor and a prescribed\nfuture observer, and assert no actual measurement. Different future\northonormal frames generally give different components, related by the\ncorresponding Lorentz change of basis.\n\n**Relation to the matter model.** This item defines the slot that a matter\nmodel fills. The identity of $T$ for a given model \u2014 its expression in terms of\nthe model's fields and its equation of motion \u2014 comes from that model and is\nnot part of this definition; for a model derived from an action, $T$ is the\nHilbert stress-energy tensor of that action, while a model that prescribes $T$\nby hand is a separate source model subject to the consistency conditions of the\nadopted gravitational field law. Nothing here asserts that a prescribed smooth\nsymmetric $T$ is realized by any matter model, that $T$ is conserved, or that\n$T$ satisfies any positivity condition; conservation and the energy conditions\nare separate statements, the latter defined separately in this framework.\n\n**Scope limitations.** The definition is confined to the smooth branch: a\nmatter distribution whose density fails to be smooth across a surface, a\ndistributional point source, or a source supported on a hypersurface is not a\nstress-energy tensor field of this definition, and such configurations require\nadditional distributional or junction mathematics not supplied here. The\nmatter domain $U$ is an idealization of the region occupied by matter; the\nmodel may also include matter sources described on all of $M$ or on a union of\nseveral such domains.",
+        "strategy": "Define the stress-energy slot of a model: a smooth symmetric covariant 2-tensor field on an open matter domain with the orthonormal-frame unit reading in J m^-3; explicitly permit degeneracy, place the identification of T for any matter branch outside the definition, and exclude distributional and lower-dimensional sources from the smooth branch.",
+        "deps": [
+          "def-gr-smooth-lorentzian-objects",
+          "def-gr-smooth-covariant-two-tensor-field",
+          "def-gr-si-unit-and-coordinate-conventions",
+          "prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure",
+          "lem-timelike-cone-has-two-convex-components"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-gr-smooth-covariant-two-tensor-field": "mathematical-premise",
+          "def-gr-si-unit-and-coordinate-conventions": "formulation-prerequisite",
+          "prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "The tensor slot for the matter content of a classical smooth gravitational model: a smooth symmetric covariant 2-tensor field on the model's matter domain, with the framework's unit reading. The item defines the object and its units only; which field configuration realizes it, and whether it satisfies any positivity or conservation identity, is a separate matter assumption.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), postulate 3 and the energy-momentum tensor examples, PDF p. 68 and printed p. 61 (PDF p. 62)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), 'the energy-momentum tensor again', printed pp. 116-118 (PDF pp. 123-125)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 4.5 on the energy-momentum tensor of matter, printed pp. 189-193 (PDF pp. 196-200)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "def-gr-energy-conditions",
+        "kind": "definition",
+        "domain": "physics",
+        "title": "The pointwise energy conditions WEC, NEC, DEC and SEC",
+        "statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, let\n$T$ be a stress-energy tensor field on its matter domain\n$U\\subseteq M$ ([[def-gr-stress-energy-tensor-field]]), and let $\\sharp_p$ and\n$\\operatorname{tr}_g$ be the musical isomorphism and the metric trace of\n[[def-gr-inverse-metric-and-musical-isomorphisms]]. For $p\\in U$ and\n$v\\in T_pM$ write $T_p(v,\\cdot)\\in T_p^*M$ for the covector\n$w\\mapsto T_p(v,w)$, and recall that, by\n[[lem-gr-future-causal-classification-by-a-timelike-field]], a vector\n$w\\in T_pM$ lies in $\\operatorname{cl}(C_p^+)$ exactly when $w=0$ or $w$ is\nfuture-directed and causal, where $C_p^+$ is the component of the timelike set\ncontaining $N_p$.\n\nThe model **satisfies at $p$**:\n\n- the **weak energy condition (WEC)** when $T_p(v,v)\\ge0$ for every timelike\n  $v\\in T_pM$;\n- the **null energy condition (NEC)** when $T_p(v,v)\\ge0$ for every null\n  $v\\in T_pM$;\n- the **dominant energy condition (DEC)** when\n  $-\\sharp_p\\bigl(T_p(v,\\cdot)\\bigr)\\in\\operatorname{cl}(C_p^+)$ for every\n  future-directed timelike $v\\in T_pM$;\n- the **strong energy condition (SEC)** when\n  $\\bigl(T_p-\\tfrac12\\operatorname{tr}_g(T)(p)\\,g_p\\bigr)(v,v)\\ge0$ for every\n  timelike $v\\in T_pM$, that is, when\n  $T_p(v,v)-\\tfrac12\\operatorname{tr}_g(T)(p)\\,g_p(v,v)\\ge0$.\n\nThe model **satisfies the condition** (on $U$) when the corresponding\ninequality holds at every $p\\in U$.\n\nEach is a pointwise condition on the pair $(g_p,T_p)$ alone, evaluated on\ntimelike or null vectors as displayed; the expressions use only the metric\npairing $g_p$, its inverse pairing on covectors, and the endomorphism\n$T^\\sharp_p:v\\mapsto\\sharp_p(T_p(v,\\cdot))$ of\n[[def-gr-inverse-metric-and-musical-isomorphisms]], whose trace is\n$\\operatorname{tr}_g(T)(p)$. The\ntimelike and null vector sets are those of the Lorentz vector space\n$(T_pM,g_p)$ ([[def-gr-smooth-lorentzian-objects]]).",
+        "strategy": "Define all four pointwise model conditions and completely prove DEC\u21d2WEC\u21d2NEC and SEC\u21d2NEC by future-cone pairing and timelike limits without adopting any condition automatically.",
+        "deps": [
+          "def-gr-stress-energy-tensor-field",
+          "def-gr-smooth-lorentzian-objects",
+          "def-gr-inverse-metric-and-musical-isomorphisms",
+          "lem-gr-future-causal-classification-by-a-timelike-field",
+          "lem-timelike-cone-has-two-convex-components",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces"
+        ],
+        "dependency_roles": {
+          "def-gr-stress-energy-tensor-field": "formulation-prerequisite",
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-gr-inverse-metric-and-musical-isomorphisms": "mathematical-premise",
+          "lem-gr-future-causal-classification-by-a-timelike-field": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise",
+          "thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": "Pointwise inequalities that a model may adopt for its stress-energy tensor: weak, null, dominant and strong energy conditions, stated for the smooth tensor fields of this framework. They are additional assumptions available to a model; no condition is automatic, the actual pointwise implications are proved here, and their measured relevance is a separate empirical question.",
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), the Weak Energy Condition (4.72) and the remarks on stronger conditions, printed p. 117 (PDF p. 124)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 4.5.7 'Energy Conditions', printed pp. 194-198 (PDF pp. 201-205)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            },
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), postulate 3 on the symmetry and conservation of T_ab, PDF p. 68",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-gr-timelike-fields-define-equal-or-opposite-future-cones",
+        "kind": "lemma",
+        "domain": "mathematics",
+        "title": "Two time orientations agree or are opposite on each connected set",
+        "statement": "Let $(M,g)$ be a smooth Lorentzian four-manifold and let $N,N'$ be two smooth\ntimelike vector fields on $M$, so that both $(M,g,N)$ and $(M,g,N')$ are\ntime-oriented ([[def-gr-smooth-lorentzian-objects]]). Put\n$f(p):=g_p(N_p,N'_p)$ for $p\\in M$, and for each $p$ let $C_p^+(N)$ and\n$C_p^+(N')$ be the components of the timelike set of $T_pM$ containing $N_p$\nand $N'_p$. Then:\n\n1. $f:M\\to\\mathbb R$ is $C^\\infty$ and $f(p)\\neq0$ for every $p\\in M$.\n2. On every nonempty connected subset $C\\subseteq M$ the function $f$ has\n   constant sign: either $f<0$ throughout $C$ or $f>0$ throughout $C$.\n3. If $f<0$ on a nonempty connected subset $C$, then\n   $C_p^+(N')=C_p^+(N)$ and the future-directed causal vectors of $N'$ agree\n   with those of $N$ at every $p\\in C$; if $f>0$ on $C$, then\n   $C_p^+(N')=C_p^-(N)$ and the future-directed causal vectors of $N'$ are\n   exactly the past-directed causal vectors of $N$ at every $p\\in C$.\n4. In particular $N$ and $-N$ define opposite future cones at every point.",
+        "strategy": "Direct: the pairing f = g(N,N') is smooth with nowhere-zero values, hence of constant sign on connected sets by the separation characterisation of connectedness; the sign decides whether N' lies in the future or the past cone of N, and the two-component structure converts that into equality or opposition of the future cones.",
+        "deps": [
+          "def-gr-smooth-lorentzian-objects",
+          "lem-gr-future-causal-classification-by-a-timelike-field",
+          "lem-timelike-cone-has-two-convex-components",
+          "def-gr-smooth-covariant-two-tensor-field",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-induced-tangent-bundle-chart",
+          "prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components",
+          "def-connected-space",
+          "def-continuous-map-top",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "lem-gr-future-causal-classification-by-a-timelike-field": "mathematical-premise",
+          "lem-timelike-cone-has-two-convex-components": "mathematical-premise",
+          "def-gr-smooth-covariant-two-tensor-field": "mathematical-premise",
+          "def-smooth-vector-field-as-a-tangent-bundle-section": "mathematical-premise",
+          "def-induced-tangent-bundle-chart": "mathematical-premise",
+          "prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components": "mathematical-premise",
+          "def-connected-space": "mathematical-premise",
+          "def-continuous-map-top": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 2.2 on the two disconnected sets of causal vectors, printed pp. 26-28 (PDF pp. 27-29)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 3.1.3 on past and future light cones varying smoothly, printed p. 94 (PDF p. 101)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 1 on future and past light cones, printed p. 6 (PDF p. 13)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "post-gr-spacetime-and-classical-domain",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted spacetime model and classical domain of the gravitational framework",
+        "statement": "Adopt as physical assumptions of the classical gravitational framework the\nfollowing statements.\n\n**(i) Spacetime model.** The spacetime of a model of the framework is a\ntime-oriented smooth Lorentzian four-manifold $(M,g,N)$ as in\n[[def-gr-smooth-lorentzian-objects]]: a smooth four-manifold $M$ without\nboundary, a Lorentzian metric $g$ of signature $(-,+,+,+)$ on $M$\n([[def-smooth-manifold]]), and a time orientation $N$. Its points represent\nidealized physical events; the vector $N$ fixes which causal directions are\nfuture-directed. At each event $p\\in M$, every nonzero tangent vector $v\\in T_pM$ is\nclassified by the sign of $g_p(v,v)$ as in\n[[def-gr-smooth-lorentzian-objects]], and each nonzero causal vector is\nfuture- or past-directed according to the sign of $g_p(v,N_p)$. The zero\nvector is neither timelike, null, spacelike nor causal. This is a\npointwise rule and does not require choosing a curve through $p$. The metric\n$g$ is the gravitational field of the model: it is the object that the field\nlaw of the framework constrains, and the curvature $R^g$ of the uniquely constructed torsion-free\n$g$-compatible connection $\\nabla^g$ of\n[[def-gr-metric-selected-connection]] is the model's representation of\ngravity. That supplier defines $R^g(X,Y)Z=\\nabla^g_X\\nabla^g_YZ-\\nabla^g_Y\\nabla^g_XZ-\\nabla^g_{[X,Y]}Z$\nand proves the connection exists; this clause adds no independent connection\nfield. The rules by which ideal clocks, test bodies and\nlight rays couple to $g$ are adopted separately as physical assumptions of the\nframework.\n\n**(ii) Classical domain.** Geometry and matter are treated as classical\ncontinuum fields: the model describes macroscopic configurations of matter and\na classical metric, with no quantum description of either. The framework makes\nno claim that a real spacetime is exactly such a manifold, that matter is\nexactly a classical continuum, or that the smooth description applies to\narbitrarily small scales or arbitrarily strong fields; those are domain\nlimitations of the model family, not consequences of it.\n\n**(iii) Unity of the model.** A model of the framework is specified by its\ngeometry $(M,g,N)$ together with its matter content and the field law adopted\nfor it; the geometry alone selects no matter configuration and no dynamics\n(the matter assumptions are\nadopted separately, in the companion postulate on matter content). Physical\nparameters enter through\nthe unit conventions of [[def-gr-si-unit-and-coordinate-conventions]]; no\nnumerical value of a constant is asserted here.\n\n**(iv) Smooth-branch restriction.** The fields of a model are defined on an\nopen domain of $M$; the metric is $C^\\infty$ on all of $M$ and $M$ has no\nboundary. Configurations in which a field fails to be smooth on a nonempty open\nset, in which matter is concentrated on a lower-dimensional set in a way that\nproduces a distributional stress-energy tensor, or in which $M$ carries a\nboundary, are outside the stated smooth domain of the framework and require\nmathematics not supplied by these postulates.\n\n**(v) Status.** These are adopted assumptions. They are not derived from the\nmathematics of manifolds, from any symmetry principle, or from experiment; the\nequivalence principle and covariance arguments motivate but do not prove them.\nTesting the framework means comparing predictions computed from a fully\nspecified model \u2014 geometry, matter content and field law \u2014 with observations,\nand agreement is evidence about the model, not a proof of these postulates.",
+        "strategy": "A postulate, not a theorem: it adopts the smooth time-oriented Lorentzian four-manifold as the classical arena, with its continuum, smooth-branch, boundaryless and four-dimensional restrictions and its status as adopted rather than deduced; no dynamics, no parameter value and no empirical claim are asserted.",
+        "deps": [
+          "def-gr-smooth-lorentzian-objects",
+          "def-smooth-manifold",
+          "def-gr-si-unit-and-coordinate-conventions",
+          "def-gr-metric-selected-connection"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-lorentzian-objects": "formulation-prerequisite",
+          "def-smooth-manifold": "mathematical-premise",
+          "def-gr-si-unit-and-coordinate-conventions": "formulation-prerequisite",
+          "def-gr-metric-selected-connection": "formulation-prerequisite"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Adoption of the smooth time-oriented Lorentzian four-manifold of the framework as the spacetime of a classical model, with the framework's classical continuum domain and its smooth-branch and four-dimensional restrictions. Excludes quantum-gravity and quantum-field regimes, weak-regularity or singular regions, distributional sources, boundaries, and dimensions other than four. Adoption is a model assumption, not a derived or empirical result.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 6.4 'Postulates of General Relativity', postulate 1 (spacetime is a 4d Lorentzian manifold), PDF p. 68",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), Ch. 4 'physics in curved spacetime', printed pp. 97-99 (PDF pp. 104-106)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), sections 3.1.2-3.1.3 and 4.1 on Lorentzian manifolds and the matter-geometry relation, printed pp. 93-96 and 149-153 (PDF pp. 100-103 and 156-160)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "post-gr-field-and-matter-assumptions",
+        "kind": "postulate",
+        "domain": "physics",
+        "title": "Adopted matter-content assumptions: fields, equations, stress-energy and energy conditions",
+        "statement": "Adopt as physical assumptions of the classical gravitational framework, in\naddition to [[post-gr-spacetime-and-classical-domain]], the following statements\nabout the matter content of a model.\n\n**(i) Matter content is model input.** A model of the framework specifies its\nnongravitational fields or matter and their explicit equations of motion and\ncouplings. The geometric data $(M,g,N)$ of\n[[def-gr-smooth-lorentzian-objects]] and covariance of the model's equations\nunder relabelling of events do not select those fields, equations or couplings.\nHere covariance means that, on overlapping smooth charts, the component\ntransformations specified for the model's fields carry solutions of the\nequations in one chart to solutions of the same equations in the other.\nDifferent matter specifications over the same geometry are different models of\nthe framework, and no dynamical selection principle is asserted.\n\n**(ii) Smooth matter and its stress-energy tensor.** The matter of a model on\nits matter domain is represented by smooth fields on an open domain\n$U\\subseteq M$, and the model's stress-energy tensor is the smooth symmetric\ncovariant $2$-tensor field $T$ on $U$ of\n[[def-gr-stress-energy-tensor-field]], with the unit reading recorded there.\nThe relation of $T$ to the matter fields is part of the model: a model derived\nfrom an action defines $T$ as the Hilbert stress-energy tensor of that action,\nwhile a model that prescribes $T$ directly is a separate source model.\n\n**(iii) Consistency with the field law.** Where a model prescribes $T$\nindependently of matter fields, the prescription is admissible only if it meets\nthe consistency conditions imposed by the gravitational field law adopted for\nthe model, stated where that law is stated. If a model specifies a real-valued\naction functional on its admissible metric and matter configurations, the\naction, its dependence on those fields, its stated symmetries, and the matter\nequations obtained from it are part of the model. Any conservation identity\nused for $T$ when those equations hold must be established from that model's\naction, symmetries, equations, and regularity hypotheses; it is not assumed\nfor an arbitrary action or arbitrary smooth symmetric $T$.\n\n**(iv) Energy conditions are optional additional assumptions.** A model may\nadopt any of the pointwise inequalities of [[def-gr-energy-conditions]] as\nfurther assumptions on its stress-energy tensor. The general framework\npostulates impose none automatically. A particular matter model may imply one\nor more of them; any such implication must be established from that model's\nequations and hypotheses. Each model records which conditions, if any, it\nadopts, and a model that adopts none is not thereby excluded.\n\n**(v) Scope and exclusions.** Idealizations such as unmodeled self-force,\nfinite-size and tidal corrections, dispersion, dissipation, and quantum effects\nare outside the framework unless the model's explicit equations include them;\nmatter concentrated in a distributional or lower-dimensional source, and\nmatter configurations whose fields fail to be smooth on the model domain, are\noutside the stated smooth branch and require additional mathematics. The\nadoption of a matter model is not a claim that it describes nature.",
+        "strategy": "A postulate, not a theorem: it records that matter fields, their equations and couplings, and the stress-energy tensor are model input; that prescribed stress-energy is admissible only under the consistency conditions of the adopted field law; that energy conditions are optional; and that distributional sources and unmodelled corrections lie outside the smooth branch.",
+        "deps": [
+          "post-gr-spacetime-and-classical-domain",
+          "def-gr-stress-energy-tensor-field",
+          "def-gr-energy-conditions",
+          "def-gr-smooth-lorentzian-objects"
+        ],
+        "dependency_roles": {
+          "post-gr-spacetime-and-classical-domain": "formulation-prerequisite",
+          "def-gr-stress-energy-tensor-field": "formulation-prerequisite",
+          "def-gr-energy-conditions": "formulation-prerequisite",
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Matter-content assumptions of a classical smooth gravitational model: the nongravitational fields and their explicit equations and couplings are model input; matter is represented by smooth fields whose stress-energy tensor occupies the slot of the stress-energy definition; consistency with the adopted field law and optional energy conditions. Excludes quantum matter, distributional or lower-dimensional sources in the smooth branch, unmodeled self-force, finite-size and tidal corrections, dispersion and dissipation, and any claim that a particular matter model describes nature.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 6.4, postulate 3 (energy, momentum and stresses of matter described by a symmetric conserved tensor), PDF p. 68",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), 'the energy-momentum tensor again' and the Weak Energy Condition, printed pp. 116-117 (PDF pp. 123-124)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), sections 4.5 and 4.5.7, printed pp. 189-198 (PDF pp. 196-205)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 8
+      },
+      {
+        "id": "rem-gr-primitive-and-derived-status",
+        "kind": "remark",
+        "domain": "physics",
+        "title": "Primitive, adopted and derived status of the objects of the framework page",
+        "statement": "This remark records the status of the notions introduced on the\nframework-and-geometry page. It is bookkeeping: it asserts no physical law and\nno empirical claim, and every mathematical statement it repeats is proved in\nthe item cited.\n\n**Primitive mathematical structure of a model.** The triple $(M,g,N)$ of\n[[def-gr-smooth-lorentzian-objects]]: the smooth boundaryless four-manifold\n$M$ with its smooth structure, the Lorentzian metric $g$ of signature\n$(-,+,+,+)$, and the time orientation $N$, a smooth nowhere-zero timelike\nvector field. These are the primitive geometric data; the definition names no\nequation that $g$ must satisfy.\n\n**Adopted physical assumptions on this page.** The reading of $(M,g,N)$ as the\nspacetime of a classical continuum model, with the stated smooth-branch and\nfour-dimensional restrictions, is the postulate\n[[post-gr-spacetime-and-classical-domain]]; the statement that a model's\nnongravitational matter content, its equations and its stress-energy tensor are\nmodel input, together with the optional adoption of energy conditions, is the\npostulate [[post-gr-field-and-matter-assumptions]]. The unit and coordinate\nconventions of [[def-gr-si-unit-and-coordinate-conventions]] are part of the\nformulation; they fix dimensions and contain no measured value. The\nstress-energy slot [[def-gr-stress-energy-tensor-field]] and the energy-condition\ninequalities [[def-gr-energy-conditions]] are formulation-level definitions\navailable to a model; a model that uses an energy condition adopts it as an\nextra assumption.\n\n**Derived (constructed, not adopted) on this page.** The inverse metric, the\nmusical isomorphisms $\\flat_p,\\sharp_p$, the raised and lowered component\nconventions and the metric trace\n([[def-gr-inverse-metric-and-musical-isomorphisms]]), with the smoothness and\ntransformation law of the inverse-metric components\n([[lem-gr-inverse-metric-is-smooth]]); the pointwise causal classification of\ntangent vectors; the future/past classification of nonzero causal vectors by\n$N$, the identification of the future-directed causal vectors with\n$\\operatorname{cl}(C_p^+)\\setminus\\{0\\}$, and the fact that every nonzero\ncausal vector has nonzero pairing with the specified time-orientation vector\n$N_p$\n([[lem-gr-future-causal-classification-by-a-timelike-field]]); the agreement or\nopposition of two time orientations on connected sets\n([[lem-gr-timelike-fields-define-equal-or-opposite-future-cones]]); the\ncomponent form of torsion freedom and metric compatibility\n([[lem-gr-connection-conditions-in-chart-components]]). These are mathematical\nconstructions and theorems from the primitive structure; they carry no\nempirical content.\n\n**Early constructions and richer continuation.** The metric-selected class\nof [[def-gr-metric-selected-connection]] is defined by its two conditions and\nits unique member is constructed by the complete local nondegenerate Koszul\nproof; curvature and its Ricci and scalar contractions are then defined from\nthat connection. The smooth-case proper-time and four-velocity constructions\nof [[def-gr-smooth-lorentzian-objects]] use a supplied smooth future timelike\ncurve and mathematical parameter $c>0$, before their physical unit reading.\nThe later pages retain their fuller worldline regularity classes, geodesic\nand tensor-derivative constructions, and curvature symmetries. No motion law\nor clock coupling follows from these mathematical constructions.\n\n**Explicitly not claimed on this page.** No field law, no matter branch or\nmatter equation, no conservation identity for $T$, no field-equation\nconsistency condition, no clock, test-body or light-ray coupling, no empirical statement.\nThose are adopted or proved on later pages of the framework, each with its own\nhypotheses.\n\n**Time-orientation caveat.** Existence of the smooth timelike field $N$ is\nadopted as part of the model data. It is an additional global condition: this\npage does not prove that every smooth Lorentzian four-manifold carries a smooth\nnowhere-zero timelike vector field, and the framework restricts to models for\nwhich one is specified. Where a physical or mathematical development needs\ntime orientability, it states that hypothesis explicitly.",
+        "strategy": "A status remark: it repeats, without proof obligations, the primitive, adopted, derived and not-claimed classification of the page's objects, and records the time-orientability caveat that existence of the smooth timelike field is adopted model data rather than a theorem of this page.",
+        "deps": [
+          "def-gr-smooth-lorentzian-objects",
+          "def-gr-inverse-metric-and-musical-isomorphisms",
+          "lem-gr-inverse-metric-is-smooth",
+          "lem-gr-future-causal-classification-by-a-timelike-field",
+          "lem-gr-timelike-fields-define-equal-or-opposite-future-cones",
+          "def-gr-metric-selected-connection",
+          "lem-gr-connection-conditions-in-chart-components",
+          "def-gr-si-unit-and-coordinate-conventions",
+          "def-gr-stress-energy-tensor-field",
+          "def-gr-energy-conditions",
+          "post-gr-spacetime-and-classical-domain",
+          "post-gr-field-and-matter-assumptions"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-gr-inverse-metric-and-musical-isomorphisms": "mathematical-premise",
+          "lem-gr-inverse-metric-is-smooth": "mathematical-premise",
+          "lem-gr-future-causal-classification-by-a-timelike-field": "mathematical-premise",
+          "lem-gr-timelike-fields-define-equal-or-opposite-future-cones": "mathematical-premise",
+          "def-gr-metric-selected-connection": "mathematical-premise",
+          "lem-gr-connection-conditions-in-chart-components": "mathematical-premise",
+          "def-gr-si-unit-and-coordinate-conventions": "formulation-prerequisite",
+          "def-gr-stress-energy-tensor-field": "formulation-prerequisite",
+          "def-gr-energy-conditions": "formulation-prerequisite",
+          "post-gr-spacetime-and-classical-domain": "physical-assumption",
+          "post-gr-field-and-matter-assumptions": "physical-assumption"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "physical_scope": "Status audit of the framework-and-geometry page: which objects are primitive model data, which statements are adopted postulates, which are constructed, and which are explicitly not claimed here. Bookkeeping only; it asserts no physical law, no empirical claim and no mathematical result beyond the items it cites.",
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 6.4 postulates and the Levi-Civita connection, PDF pp. 67-68",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), 'the metric again' and 'structures on manifolds': metric and connection as distinct structures, printed pp. 47-48 and 60-61 (PDF pp. 54-55 and 67-68)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "dependency_level": 9
+      }
+    ]
+  },
+  {
+    "order": 234,
+    "id": "gr-framework-and-geometry-examples",
+    "kind": "B",
+    "category": "general-relativity",
+    "library": "physics",
+    "title": "Framework And Geometry \u2014 Examples",
+    "companion": "gr-framework-and-geometry",
+    "requires": [
+      "gr-framework-and-geometry",
+      "geodesics-the-exponential-map-completeness-and-hopf-rinow"
+    ],
+    "items": [
+      {
+        "id": "ex-gr-minkowski-chart-as-a-lorentzian-manifold",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "The constant Minkowski metric as a smooth time-oriented Lorentzian manifold",
+        "statement": "Let $M:=\\mathbb R^4$ with its standard smooth structure, for which the identity\nmap $x=(x^0,x^1,x^2,x^3)$ is a global smooth chart\n([[ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds]]). Define the\nfamily $A=(A_p)_{p\\in M}$ by declaring its components in this chart to be the\nconstants\n\n$$A_{ab}:=\\operatorname{diag}(-1,1,1,1)_{ab},\\qquad\\text{that is}\\qquad A_p(v,w)=-v^0w^0+v^1w^1+v^2w^2+v^3w^3$$\n\nfor $v=\\sum_av^a\\partial_a|_p$, $w=\\sum_aw^a\\partial_a|_p$. Then $(M,A)$ is a\nsmooth Lorentzian four-manifold in the sense of\n[[def-gr-smooth-lorentzian-objects]]; the field\n$N:=\\partial/\\partial x^0$ is a time orientation, so $(M,A,N)$ is a\ntime-oriented smooth Lorentzian four-manifold; and at every $p$ the\nfuture-directed causal vectors are exactly the nonzero $v$ with\n$v^0\\ge\\lvert v_{\\mathrm{vec}}\\rvert=( (v^1)^2+(v^2)^2+(v^3)^2 )^{1/2}$. In\nparticular $v_{(1)}:=(1,0,0,0)$ is future timelike, $v_{(2)}:=(1,1,0,0)$ is\nfuture null and $v_{(3)}:=(0,1,0,0)$ is spacelike.",
+        "strategy": "Direct evaluation: constant components give smoothness, symmetry, determinant -1 and inertia (3,1,0); the constant field partial_0 is timelike; the future cone follows from the sign of the pairing with partial_0; the sample vectors are classified by their values v^0 and |v_vec|.",
+        "deps": [
+          "def-gr-smooth-lorentzian-objects",
+          "def-gr-smooth-covariant-two-tensor-field",
+          "lem-gr-covariant-two-tensor-transformation-law",
+          "lem-gr-future-causal-classification-by-a-timelike-field",
+          "lem-lorentz-form-has-orthonormal-basis",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components",
+          "def-lorentz-form-and-inertia",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-gr-smooth-covariant-two-tensor-field": "mathematical-premise",
+          "lem-gr-covariant-two-tensor-transformation-law": "mathematical-premise",
+          "lem-gr-future-causal-classification-by-a-timelike-field": "mathematical-premise",
+          "lem-lorentz-form-has-orthonormal-basis": "mathematical-premise",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds": "mathematical-premise",
+          "def-smooth-vector-field-as-a-tangent-bundle-section": "mathematical-premise",
+          "prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components": "mathematical-premise",
+          "def-lorentz-form-and-inertia": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), example 2, the Minkowski metric eta = -(dx0)^2+(dx1)^2+(dx2)^2+(dx3)^2, printed p. 26 (PDF p. 27)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 3.1.2 with the Minkowski metric diag(-1,+1,+1,+1), printed pp. 93-94 (PDF pp. 100-101)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            },
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), the canonical form of the metric, printed pp. 49-50 (PDF pp. 56-57)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            }
+          ]
+        },
+        "dependency_level": 3
+      },
+      {
+        "id": "ex-gr-spherical-coordinates-flat-metric-components",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Flat metric components in a spherical coordinate chart",
+        "statement": "Let $(M,A)$ be the flat Lorentzian four-manifold of\n[[ex-gr-minkowski-chart-as-a-lorentzian-manifold]], with global identity chart\n$x=(x^0,x^1,x^2,x^3)$. Let\n\n$$W:=\\mathbb R\\times(0,\\infty)\\times(0,\\pi)\\times(0,2\\pi)\\subseteq\\mathbb R^4,\\qquad \\Phi(u)=\\bigl(u^0,\\ u^1\\sin u^2\\cos u^3,\\ u^1\\sin u^2\\sin u^3,\\ u^1\\cos u^2\\bigr),$$\n\nwritten $u=(t,r,\\vartheta,\\varphi)$. Then $\\Phi:W\\to\\mathbb R^4$ is a smooth\ninjection with $\\det D\\Phi(u)=r^2\\sin\\vartheta\\neq0$ on $W$; its image\n$\\Phi(W)$ is open, and $y:=\\Phi^{-1}:\\Phi(W)\\to W$ is a smooth chart on $M$\nwhose transition with the identity chart is $\\Phi$. In this chart the\ncomponents of $A$ are\n\n$$A'_{ab}=\\operatorname{diag}\\!\\left(-1,\\ 1,\\ r^2,\\ r^2\\sin^2\\vartheta\\right)_{ab},$$\n\nso $A'_{00}=-1$, $A'_{11}=1$, $A'_{22}=r^2$, $A'_{33}=r^2\\sin^2\\vartheta$ and the\noff-diagonal components vanish. In particular the component functions are\nsmooth on $W$, $\\det(A'_{ab})=-r^4\\sin^2\\vartheta<0$ on $W$, and the\ndiagonal signs exhibit inertia $(3,1,0)$; the metric is Lorentzian as read in\nthe spherical chart, and the components are non-constant although the same\nmetric has constant components in the identity chart.",
+        "strategy": "Direct computation: the map Phi is shown injective with nonsingular differential, so it is a chart transition by the inverse function theorem; the transformation law evaluated on the Jacobian columns gives diag(-1,1,r^2,r^2 sin^2 theta), with off-diagonal terms vanishing by the pairwise orthogonality of the spherical coordinate derivatives.",
+        "deps": [
+          "ex-gr-minkowski-chart-as-a-lorentzian-manifold",
+          "def-gr-smooth-lorentzian-objects",
+          "def-gr-smooth-covariant-two-tensor-field",
+          "lem-gr-covariant-two-tensor-transformation-law",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds"
+        ],
+        "dependency_roles": {
+          "ex-gr-minkowski-chart-as-a-lorentzian-manifold": "mathematical-premise",
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-gr-smooth-covariant-two-tensor-field": "mathematical-premise",
+          "lem-gr-covariant-two-tensor-transformation-law": "mathematical-premise",
+          "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space": "mathematical-premise",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), the metric in spherical coordinates, printed pp. 48-49 (PDF pp. 55-56)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), the round metric on S^2 in polar coordinates (2.7), printed p. 26 (PDF p. 27)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), the metric in polar coordinates, printed pp. 96-98 (PDF pp. 103-105)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4,
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-gr-flat-connection-is-metric-selected",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "The coordinate connection of the flat chart is metric-selected",
+        "statement": "Let $(M,A)$ be the flat Lorentzian four-manifold of\n[[ex-gr-minkowski-chart-as-a-lorentzian-manifold]] with the global chart\n$x=(x^0,x^1,x^2,x^3)$, and write $X=\\sum_aX^a\\partial_a$,\n$Y=\\sum_bY^b\\partial_b$ for smooth vector fields. Define\n\n$$\\nabla_XY:=\\sum_bX(Y^b)\\,\\partial_b .$$\n\nThen $\\nabla$ is an affine connection on $M$; its Christoffel symbols in the\nglobal chart all vanish; and $\\nabla$ is a metric-selected connection for\n$(M,A)$ in the sense of [[def-gr-metric-selected-connection]], that is, it is\ntorsion-free and $A$-compatible. This exhibits a nonempty\n$\\operatorname{LC}(M,A)$; the example claims no uniqueness of the element.",
+        "strategy": "Direct computation: the operator nabla_X Y = sum_b X(Y^b) partial_b is verified to satisfy the connection axioms; its Christoffel symbols vanish; and the chart criteria for torsion freedom and metric compatibility are verified from the vanishing symbols and constant metric components.",
+        "deps": [
+          "ex-gr-minkowski-chart-as-a-lorentzian-manifold",
+          "def-gr-metric-selected-connection",
+          "lem-gr-connection-conditions-in-chart-components",
+          "def-affine-connection-on-a-smooth-manifold",
+          "def-christoffel-symbols-of-an-affine-connection",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "ex-gr-minkowski-chart-as-a-lorentzian-manifold": "mathematical-premise",
+          "def-gr-metric-selected-connection": "mathematical-premise",
+          "lem-gr-connection-conditions-in-chart-components": "mathematical-premise",
+          "def-affine-connection-on-a-smooth-manifold": "mathematical-premise",
+          "def-christoffel-symbols-of-an-affine-connection": "mathematical-premise",
+          "def-smooth-vector-field-as-a-tangent-bundle-section": "mathematical-premise",
+          "prop-smoothness-of-a-vector-field-is-equivalent-to-smooth-coordinate-components": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), the Christoffel connection in flat space and the polar-coordinate example (3.22)-(3.24), printed pp. 60-61 (PDF pp. 67-68)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), the vanishing components of the Levi-Civita connection in Cartesian coordinates, exercise after (1.35), printed p. 20 (PDF p. 21)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), Christoffel symbols in flat space, printed p. 104 (PDF p. 111)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cex-gr-torsion-free-does-not-imply-metric-compatible",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "A torsion-free connection that is not metric-compatible",
+        "statement": "Statement refuted: \"every torsion-free affine connection on the flat\nLorentzian four-manifold $(M,A)$ of\n[[ex-gr-minkowski-chart-as-a-lorentzian-manifold]] is compatible with the\nmetric $A$\" ([[def-gr-metric-selected-connection]]).",
+        "strategy": "Explicit witness: the connection with Gamma^0_{01} = Gamma^0_{10} = 1 and all other coefficients zero is verified to be an affine connection with symmetric coefficients, hence torsion-free, while the compatibility identity fails at every point because the left side is 0 and the right side is -2.",
+        "deps": [
+          "ex-gr-flat-connection-is-metric-selected",
+          "ex-gr-minkowski-chart-as-a-lorentzian-manifold",
+          "def-gr-metric-selected-connection",
+          "lem-gr-connection-conditions-in-chart-components",
+          "def-affine-connection-on-a-smooth-manifold",
+          "def-christoffel-symbols-of-an-affine-connection"
+        ],
+        "dependency_roles": {
+          "ex-gr-flat-connection-is-metric-selected": "mathematical-premise",
+          "ex-gr-minkowski-chart-as-a-lorentzian-manifold": "mathematical-premise",
+          "def-gr-metric-selected-connection": "mathematical-premise",
+          "lem-gr-connection-conditions-in-chart-components": "mathematical-premise",
+          "def-affine-connection-on-a-smooth-manifold": "mathematical-premise",
+          "def-christoffel-symbols-of-an-affine-connection": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), torsion (3.16) and metric compatibility as independent requirements, printed pp. 59-60 (PDF pp. 66-67)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 3.2, both conditions imposed independently in the Levi-Civita theorem, printed pp. 36-37 (PDF pp. 37-38)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 3.2, printed pp. 100-107 (PDF pp. 107-114)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 7
+      },
+      {
+        "id": "ex-gr-unit-conventions-for-two-time-coordinates",
+        "kind": "example",
+        "domain": "physics",
+        "title": "Component units of the flat metric in length and time coordinates",
+        "statement": "Let $(M,A)$ be the flat Lorentzian four-manifold of\n[[ex-gr-minkowski-chart-as-a-lorentzian-manifold]], whose global chart\n$x=(x^0,x^1,x^2,x^3)$ is read as **length coordinates** $x^0=ct$,\n$(x^1,x^2,x^3)=(x,y,z)$ in metres, with components\n$A_{ab}=\\operatorname{diag}(-1,1,1,1)_{ab}$, all dimensionless. Introduce the\n**time coordinates** $u=(t,x,y,z)$, so that the coordinate change from $u$ to\n$x$ is $x^0=cu^0$, $x^i=u^i$. Then in the chart $u$ the same field $A$ has\ncomponents\n\n$$A'_{ab}=\\operatorname{diag}(-c^2,1,1,1)_{ab},$$\n\nthe component $A'_{00}$ carries dimension $\\mathrm m^2\\,\\mathrm s^{-2}$, the\ncomponents $A'_{ij}$ for $i,j\\ge1$ are dimensionless, and the line element\n$ds^2=A'_{ab}du^adu^b$ again has dimension $\\mathrm m^2$. Thus the same metric\nhas components of different dimensions in the two charts, while its invariant\nreadings are unchanged; this verifies part (b) of\n[[def-gr-si-unit-and-coordinate-conventions]].",
+        "strategy": "Direct computation: the Jacobian of the change from x^0 = ct to x^0 = t is diagonal with entry c, so the time-time component changes to -c^2 with dimension m^2 s^-2 while ds^2 retains dimension m^2; the example asserts no numerical value of c.",
+        "deps": [
+          "def-gr-si-unit-and-coordinate-conventions",
+          "ex-gr-minkowski-chart-as-a-lorentzian-manifold",
+          "lem-gr-covariant-two-tensor-transformation-law",
+          "def-gr-smooth-covariant-two-tensor-field"
+        ],
+        "dependency_roles": {
+          "def-gr-si-unit-and-coordinate-conventions": "formulation-prerequisite",
+          "ex-gr-minkowski-chart-as-a-lorentzian-manifold": "mathematical-premise",
+          "lem-gr-covariant-two-tensor-transformation-law": "mathematical-premise",
+          "def-gr-smooth-covariant-two-tensor-field": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "physical_scope": "Unit bookkeeping for the flat model metric under the change of time coordinate from x^0 = ct to x^0 = t: the metric components change from diag(-1,1,1,1) to diag(-c^2,1,1,1) and the component dimensions change accordingly, while the line element ds^2 retains dimension m^2. Illustrates the SI conventions; asserts no measured value of c and no dynamics.",
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), equations (1.5)-(1.6) with x^0 = ct and c = 1, and the remark that 1 second equals 3 x 10^8 metres in these units, printed pp. 4-5 (PDF pp. 11-12)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), Conventions: units with c = 1, PDF p. 1",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), natural units and dimensions of constants, printed p. 144 (PDF p. 151)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 6
+      },
+      {
+        "id": "cex-gr-symmetric-nondegenerate-field-need-not-be-lorentzian",
+        "kind": "counterexample",
+        "domain": "mathematics",
+        "title": "A smooth symmetric nondegenerate 2-tensor field of inertia (2,2,0)",
+        "statement": "Statement refuted: \"every smooth symmetric nondegenerate covariant $2$-tensor\nfield on a smooth four-manifold is a Lorentzian metric, so that\n$g_p$ has inertia $(3,1,0)$ at every point\"\n([[def-gr-smooth-covariant-two-tensor-field]],\n[[def-gr-smooth-lorentzian-objects]]).",
+        "strategy": "Explicit witness: the constant field diag(1,1,-1,-1) on R^4 is smooth, symmetric and nondegenerate with determinant 1, but its inertia is (2,2,0) by inspection of the diagonal form, so it fails the Lorentzian signature condition; the Riemannian witness diag(1,1,1,1) is recorded alongside.",
+        "deps": [
+          "def-gr-smooth-covariant-two-tensor-field",
+          "def-gr-smooth-lorentzian-objects",
+          "def-lorentz-form-and-inertia",
+          "def-definiteness-inertia-and-signature-data-over-the-reals",
+          "cor-real-symmetric-bilinear-forms-are-classified-by-inertia",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-covariant-two-tensor-field": "mathematical-premise",
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "def-lorentz-form-and-inertia": "mathematical-premise",
+          "def-definiteness-inertia-and-signature-data-over-the-reals": "mathematical-premise",
+          "cor-real-symmetric-bilinear-forms-are-classified-by-inertia": "mathematical-premise",
+          "ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), the canonical form (2.34) and the distinction between Lorentzian and indefinite metrics, printed p. 49 (PDF p. 56)",
+              "url": "https://arxiv.org/pdf/gr-qc/9712019"
+            },
+            {
+              "title": "K. Conrad, Bilinear Forms (orthogonality, radicals, inertia)",
+              "url": "https://kconrad.math.uconn.edu/blurbs/linmultialg/bilinearform.pdf"
+            }
+          ]
+        },
+        "dependency_level": 2
+      },
+      {
+        "id": "ex-gr-reversing-the-timelike-field-reverses-future",
+        "kind": "example",
+        "domain": "mathematics",
+        "title": "Reversing the time orientation reverses the future cone",
+        "statement": "Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold\n([[def-gr-smooth-lorentzian-objects]]) and put $N':=-N$. Then $(M,g,N')$ is\nagain a time-oriented smooth Lorentzian four-manifold, and at every $p\\in M$\nthe future-directed causal vectors of $N'$ are exactly the past-directed causal\nvectors of $N$; equivalently $C_p^+(N')=C_p^-(N)$. In the flat model of\n[[ex-gr-minkowski-chart-as-a-lorentzian-manifold]] with $N=\\partial_0$, the\nvector $\\partial_0$ is future-directed for $N$ and past-directed for $-N$.",
+        "strategy": "Direct: -N is smooth and timelike, so it is a time orientation; the pairing g(N,-N) = -g(N,N) is positive everywhere, which by the two-orientation lemma means the future cones are opposite; the flat-model evaluation on partial_0 exhibits a future vector of N that is past for -N.",
+        "deps": [
+          "def-gr-smooth-lorentzian-objects",
+          "lem-gr-timelike-fields-define-equal-or-opposite-future-cones",
+          "lem-gr-future-causal-classification-by-a-timelike-field",
+          "ex-gr-minkowski-chart-as-a-lorentzian-manifold",
+          "def-smooth-vector-field-as-a-tangent-bundle-section",
+          "def-countable-choice"
+        ],
+        "dependency_roles": {
+          "def-gr-smooth-lorentzian-objects": "mathematical-premise",
+          "lem-gr-timelike-fields-define-equal-or-opposite-future-cones": "mathematical-premise",
+          "lem-gr-future-causal-classification-by-a-timelike-field": "mathematical-premise",
+          "ex-gr-minkowski-chart-as-a-lorentzian-manifold": "mathematical-premise",
+          "def-smooth-vector-field-as-a-tangent-bundle-section": "mathematical-premise",
+          "def-countable-choice": "mathematical-premise"
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "H. S. Reall, Part III General Relativity (Cambridge, October 12, 2022 revision), section 2.2: causal vectors at a point fall into two disconnected sets, printed pp. 26-27 (PDF pp. 27-28)",
+              "url": "https://web.archive.org/web/20230323191108id_/https://www.damtp.cam.ac.uk/user/hsr1000/part3_gr_lectures.pdf"
+            },
+            {
+              "title": "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 3.1.3: past-directed and future-directed light cones, printed p. 94 (PDF p. 101)",
+              "url": "https://web.archive.org/web/2023id_/https://www.damtp.cam.ac.uk/user/tong/gr/gr.pdf"
+            }
+          ]
+        },
+        "dependency_level": 4
+      }
+    ]
+  }
+]

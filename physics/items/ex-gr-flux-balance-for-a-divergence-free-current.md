@@ -1,7 +1,7 @@
 ---
 id: ex-gr-flux-balance-for-a-divergence-free-current
 kind: example
-title: "A divergence-free current with nonzero side flux: J=x^1 d_2 in flat space"
+title: "A divergence-free current with nonzero face-flux density: J=x^1∂_2 in flat space"
 status: draft
 origin: session
 domain: mathematics
@@ -87,4 +87,4 @@ Then:
 
 ## Remarks
 
-- **Reading.** The example isolates the content of the side-flux hypothesis: the balance identity of the theorem is not the statement that a divergence-free current has zero flux through every face, but that the slice fluxes differ exactly by the side flux. The two faces normal to $\partial_2$ of a symmetric box have opposite normal signs, so their contributions cancel; in a region whose corresponding faces are not congruent the net side flux need not vanish, and the same pointwise densities exhibit this.
+- **Reading.** The example isolates the pointwise flux density: a divergence-free current can have nonzero density through faces normal to $\partial_2$. The flux-balance theorem concerns integrals over oriented chains and states exactly how the slice fluxes differ by the side flux; whether a whole side-chain flux vanishes depends on that chain and its orientation.

@@ -21,6 +21,9 @@ requires:
   - cm-math-geometry
   - cm-math-rigid
   - cm-math-balances
+  - the-topology-of-euclidean-space
+  - measures-and-their-basic-properties
+  - rank-theorems-and-embedded-submanifolds
 ---
 
 This page opens the rigid-material branch of the framework. The postulate
@@ -41,7 +44,9 @@ in $\mathbb R^3\times SO(3)$, a six-dimensional smooth configuration space
 whose orientation factor is the compact three-dimensional matrix group
 $SO(3)$; for a nondegenerate labeling the placement determines $(c,R)$
 uniquely, so the parametrization does not overcount, while a labeling
-supported on a line determines $R$ only up to rotations about it. The
+with nonzero support on a line determines $R$ only up to rotations fixing
+that line pointwise; for singleton support $\{0\}$ every rotation fixes the
+labels and no orientation axis is distinguished. The
 description of the same motion in a second inertial frame is fixed there and
 its transformation laws are proved in [[pthm-cm10-frame-covariance]].
 [[def-cm10-angular-velocity]] defines the body angular velocity $\omega$ by

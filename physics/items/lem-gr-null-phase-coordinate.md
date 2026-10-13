@@ -8,7 +8,7 @@ domain: mathematics
 dependency_level: 10
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 proof_strategy: direct
 deps: [def-gr-plane-wave-perturbation, def-gr-flat-linearized-perturbation, def-gr-minkowski-model-and-inertial-chart, def-gr-smooth-covariant-two-tensor-field, def-causal-classification-of-lorentz-vectors, thm-chain-rule, thm-algebra-of-derivatives, def-derivative, def-c-r-and-smooth-maps-between-smooth-manifolds, def-gr-tensor-fields-and-components, def-euclidean-inner-product]
 dependency_roles:
@@ -37,7 +37,7 @@ verification:
 
 Let $(M,g,N)=(\mathbb R^4,\eta,\partial_0)$ be the flat model with its
 inertial chart $x$ ([[def-gr-minkowski-model-and-inertial-chart]]) and let
-$u(x):=x^0-x^3$, $n:=du$, be the phase coordinate and wave covector of
+$u(x):=x^0-x^3$, $n:=du$, be the phase coordinate and its differential of
 [[def-gr-plane-wave-perturbation]] clause (a); let $\Box$ be the flat
 d'Alembertian of [[def-gr-flat-linearized-perturbation]] clause (c). Then:
 
@@ -46,8 +46,10 @@ spatial part has Euclidean norm $1$; the vector field
 $T:=\partial_0+\partial_3$ is nonzero, null and future-directed, and
 $\eta(T,\cdot)=-n$, so $n(T)=0$ and the wave covector
 $k=\omega\,\eta(T,\cdot)$ of [[def-gr-plane-wave-perturbation]] clause (a)
-is the metric dual of the future-directed null vector $\omega T$, with
-components $k_a=\omega(-1,0,0,1)$ and $k^a=\omega(1,0,0,1)$.
+is the metric dual of $\omega T$, with components
+$k_a=\omega(-1,0,0,1)$ and $k^a=\omega(1,0,0,1)$. For $\omega>0$ this
+vector is future null, for $\omega<0$ it is past null, and for $\omega=0$
+it is zero and hence not null.
 
 **(b)** For every $f\in C^\infty(\mathbb R)$ the function
 $\varphi:=f\circ u$ is smooth on $\mathbb R^4$, and $T\varphi=0$ and
@@ -83,9 +85,9 @@ or physical-time interpretation is asserted in this lemma.
 
 **Proof technique:** direct; differentiate the explicit coordinate functions.
 
-1.1 (The covector and the transport field.) By [F2], $n_a=\partial_au$ has components $(1,0,0,-1)$. Hence $\eta^{ab}n_an_b=\eta^{00}n_0n_0+\eta^{33}n_3n_3=(-1)(1)^2+(1)(-1)^2=0$ and $n\ne0$; the spatial part $(n_1,n_2,n_3)=(0,0,-1)$ has Euclidean norm $\sqrt{0+0+1}=1$ by [F3]. For $T=\partial_0+\partial_3$ we have $\eta(T,T)=-1+1=0$, $T\ne0$, and $T$ is future-directed because its first component is $1>0$ and it is a limit of future timelike vectors, e.g. $T=\lim_{\delta\downarrow0}(\partial_0+\delta\partial_2+\partial_3)$ with $\eta(\partial_0+\delta\partial_2+\partial_3,\partial_0+\delta\partial_2+\partial_3)=-1+\delta^2<0$ and negative pairing with the time orientation $\partial_0$ ([[def-causal-classification-of-lorentz-vectors]]). The metric dual of $T$ has components $\eta_{ab}T^b=\eta_{a0}+\eta_{a3}=(-1,0,0,1)$, which are minus the components of $n$; hence $\eta(T,\cdot)=-n$ and $n(T)=0$. This proves (a). [F2, F3, algebra]
+1.1 (The covector and the transport field.) By [F2], $n_a=\partial_au$ has components $(1,0,0,-1)$, so $n\ne0$ and $\eta^{ab}n_an_b=-1+1=0$; its spatial part has Euclidean norm $1$ by [F3]. The vector $T=\partial_0+\partial_3$ is nonzero with $\eta(T,T)=0$ and $\eta(T,N)=-1<0$, hence future null by [[def-gr-minkowski-model-and-inertial-chart]] clause (c). Its metric dual is $(-1,0,0,1)=-n$, so $n(T)=0$. Multiplication by $\omega$ gives the stated components of $k$ and $k^\sharp=\omega T$. For $\omega\ne0$, $\eta(\omega T,\omega T)=0$ and $\eta(\omega T,N)=-\omega$, proving the future/past alternatives; for $\omega=0$ the vector is zero, excluded from the null class by [[def-causal-classification-of-lorentz-vectors]]. This proves (a). [F2, F3, algebra]
 
-2.1 (Profiles are transported and flat-harmonic.) Fix $x$. By [F1], $\partial_a\varphi(x)=f'(u(x))\,\partial_au(x)$, so by step 1.1, $T\varphi(x)=\partial_0\varphi(x)+\partial_3\varphi(x)=f'(u(x))(1+(-1))=0$. For the d'Alembertian, [F1] applied to $f'$ gives $\partial_0^2\varphi=f''(u(x))$ and $\partial_3^2\varphi=f''(u(x))\partial_3u^2=f''(u(x))$, while $\partial_1\varphi=\partial_2\varphi=0$; hence $\Box\varphi(x)=-f''(u(x))+f''(u(x))=0$ by [F2]. This proves (b). [F1, F2, step 1.1, algebra]
+2.1 (Profiles are transported and flat-harmonic.) Fix $x$. By [F1], $\partial_a\varphi(x)=f'(u(x))\,\partial_au(x)$, so by step 1.1, $T\varphi(x)=\partial_0\varphi(x)+\partial_3\varphi(x)=f'(u(x))(1+(-1))=0$. For the d'Alembertian, [F1] applied to $f'$ gives $\partial_0^2\varphi=f''(u(x))$ and $\partial_3^2\varphi=f''(u(x))(\partial_3u)^2=f''(u(x))$, since $\partial_3^2u=0$, while $\partial_1\varphi=\partial_2\varphi=0$; hence $\Box\varphi(x)=-f''(u(x))+f''(u(x))=0$ by [F2]. This proves (b). [F1, F2, step 1.1, algebra]
 
 2.2 (Planar perturbations.) For each fixed pair $(a,b)$, the component $h_{ab}$ is the composition of the smooth function $u$ with the smooth function $F_{ab}$; hence $h$ has smooth components in the inertial chart and, by the transformation law for covariant two-tensors in the one available chart [F3], defines a smooth symmetric field. Applying [F1] to each component gives $\partial_ch_{ab}=F'_{ab}(u)\,\partial_cu=F'_{ab}(u)n_c$; applying the same computation to the derivative profile $F'_{ab}$ gives $\partial_c\partial_dh_{ab}=F''_{ab}(u)n_cn_d$, so $\Box h_{ab}=F''_{ab}(u)\eta^{cd}n_cn_d=F''_{ab}(u)(n^dn_d)=0$ by step 1.1. For the same reason $(\partial_0+\partial_3)h_{ab}=F'_{ab}(u)(1-1)=0$. If the profile is TT, then the components $h_{a0}$ and $h_{a3}$ vanish for every $a$, and $\eta^{ab}h_{ab}=F_{11}+F_{22}=0$; for the divergence, the TT condition gives $F'_{a0}=F'_{a3}=0$, and with $n_1=n_2=0$, $n_0=1$, $n_3=-1$ the sum $\eta^{bc}\partial_bh_{ac}=\eta^{00}F'_{a0}n_0+\eta^{33}F'_{a3}n_3=-F'_{a0}-F'_{a3}$ vanishes. This proves (c). [F1, F2, F3, step 1.1, algebra]
 
@@ -95,6 +97,6 @@ or physical-time interpretation is asserted in this lemma.
 
 ## Remarks
 
-- **Terminology.** The statement that $T$ is not proportional to the wave vector in (a) records that the wave covector and the transport (null) direction are distinct null directions; the profile is constant along the transport direction and the wave covector annihilates that direction, as required of a phase function of a plane wave.
+- **Terminology.** The wave covector is $k=-\omega n$, and its metric-dual vector is $\omega T$. For $\omega\ne0$ this vector spans the transport line; the covector annihilates $T$ because that line is null. A covector and a vector have different types, so no claim of distinct vector directions follows from their different component signs.
 
 - **Scope.** The lemma is a statement about the flat model and the fixed inertial chart. A change of inertial chart mixes the roles of the coordinate directions, and a general null wave covector is treated in the gauge-decomposition lemma of this page; no claim about curved backgrounds is made.

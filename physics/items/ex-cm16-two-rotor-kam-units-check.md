@@ -1,7 +1,7 @@
 ---
 id: ex-cm16-two-rotor-kam-units-check
 kind: example
-title: "Unit restoration and calibration of the two-rotor KAM statement: the scaling identities at $\\mathcal I=E_0=1$, the physical angular frequencies, the exclusion of rational frequency labels, and the equal-rescaling invariance"
+title: "Unit restoration and scale checks for the two-rotor KAM statement: the scaling identities at $\\mathcal I=E_0=1$, the physical angular frequencies, the exclusion of rational frequency labels, and the equal-rescaling invariance"
 status: draft
 origin: session
 domain: physics
@@ -80,15 +80,6 @@ condition unchanged, while rescaling $J_0$ by $\lambda$.
 
 ## Remarks
 
-- **What this check does not do.** It verifies dimensions, the scaling
-  correspondence and the exclusion of rational labels; it does not evaluate the
-  KAM constant $c$, does not certify any particular pair $(\alpha,\varepsilon)$
-  and does not assert that any laboratory rotor realizes the model. Those would
-  require the numerical computation of the theorem's constant and a separate
-  apparatus model.
+- **What this check does not do.** It verifies dimensions, the scaling correspondence and the exclusion of rational labels; it does not evaluate the KAM constant $c$, does not certify any particular pair $(\alpha,\varepsilon)$ and does not assert that any laboratory rotor realizes the model. Those would require the numerical computation of the theorem's constant and a separate apparatus model.
 
-- **Why rational labels are worth recording.** The frequency cube is full of
-  rational labels, so the positive-measure conclusion of
-  [[pthm-cm16-two-rotor-kam]] concerns an open-ended irrational set; the check
-  makes the Diophantine condition concrete by exhibiting the exact obstruction
-  for rational labels.
+- **Why rational labels are worth recording.** The frequency cube is full of rational labels, so the positive-measure conclusion of [[pthm-cm16-two-rotor-kam]] concerns an open-ended irrational set; the check makes the Diophantine condition concrete by exhibiting the exact obstruction for rational labels.

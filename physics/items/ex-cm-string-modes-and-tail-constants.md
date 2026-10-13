@@ -42,13 +42,13 @@ Let $L>0$, $c>0$ and define the odd $2L$-periodic $C^\infty$ datum
 
 $$F(x):=\sin\Bigl(\frac{\pi x}{L}\Bigr),\qquad G(x):=\frac{c\pi}{L}\sin\Bigl(\frac{\pi x}{L}\Bigr).$$
 
-Then the sine coefficients of [the definition] are $b_1(F)=1$ and $b_n(F)=0$ for $n\ge2$, and $b_1(G)=c\pi/L$, $b_n(G)=0$ for $n\ge2$; the series solution of the string theorem is the finite expression
+Then the sine coefficients of [[def-cm-sine-coefficients-of-periodic-functions]] are $b_1(F)=1$ and $b_n(F)=0$ for $n\ge2$, and $b_1(G)=c\pi/L$, $b_n(G)=0$ for $n\ge2$; the series solution of the string theorem is the finite expression
 
 $$u(t,x)=\bigl[\cos(\omega_1t)+\sin(\omega_1t)\bigr]\sin\Bigl(\frac{\pi x}{L}\Bigr),\qquad \omega_1=\frac{c\pi}{L},$$
 
-which solves $u_{tt}=c^2u_{xx}$ with $u(0,\cdot)=F$, $u_t(0,\cdot)=G$ and $u(t,0)=u(t,L)=0$; its tail beyond the first mode vanishes, and the numerical bound of the string theorem at these data is
+which solves $u_{tt}=c^2u_{xx}$ with $u(0,\cdot)=F$, $u_t(0,\cdot)=G$ and $u(t,0)=u(t,L)=0$; its tail beyond the first mode vanishes. For each $N\ge1$ define the matching partial sum $u_N(t,x):=\sum_{n=1}^N[a_n\cos(\omega_nt)+d_n\sin(\omega_nt)]\sin(n\pi x/L)$, where $a_n=b_n(F)$, $d_n=b_n(G)/\omega_n$ and $\omega_n=cn\pi/L$. The numerical bound of the string theorem at these data is
 
-$$|u(t,x)-u_1(t,x)|\le 8\,(N+1)^{-4}\qquad(N\ge2),$$
+$$|u(t,x)-u_N(t,x)|\le 8\,(N+1)^{-4}\qquad(N\ge1),$$
 
 so the general bound is valid but far from sharp on this datum.
 

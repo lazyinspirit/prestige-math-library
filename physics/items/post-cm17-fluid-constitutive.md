@@ -88,14 +88,21 @@ balance.
 $p:(0,\infty)\to\mathbb R$ and a $C^1$ potential $V$ with the conservative
 body force $b=-\nabla V$. The branch's stress field is
 $\sigma=-p(\rho)I_3$, where $\rho$ is the model density field of
-[[def-cm17-density-and-mass]]. Its **enthalpy** is the function
-$h(r)=\int_{\rho_{\mathrm r}}^r p'(s)s^{-1}\,ds$, with a fixed model reference density $\rho_{\mathrm r}>0$ of the same density dimension as $r$, characterised by
-$h'(\rho)=p'(\rho)/\rho$
-([[def-cm-fluid-constitutive-models]]).
+[[def-cm17-density-and-mass]]. Its **enthalpy function** is
+$h:(0,\infty)\to\mathbb R$ defined by
+$h(r)=\int_{\rho_{\mathrm r}}^r p'(s)s^{-1}\,ds$, with a fixed model reference
+density $\rho_{\mathrm r}>0$ of the same dimension as $r$. It is characterized
+by $h'(r)=p'(r)/r$ and has dimension $[h]=[p]/[\rho]=\ell^2\tau^{-2}$, energy
+per unit mass; the spatial enthalpy field is $x\mapsto h(\rho(t,x))$
+([[def-cm-fluid-constitutive-models]], [[def-cm17-continuum-body-and-units]]).
 
-**(c) Periodic-cell idealization and scale conventions.** Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]) for the normalized product measure and Fourier/Sobolev machinery of this clause; the pointwise stress laws of (a), (a0) and (b) do not use this premise. Fix a cell side length $L_*>0$ and velocity scale $U_*>0$ as model data with dimensions $\ell$ and $\ell\tau^{-1}$, and let $T_*=L_*/U_*$ be the time scale. The physical spatial cell is $(\mathbb R/L_*\mathbb Z)^3$, with physical volume $L_*^3$; it describes a spatially periodic ideal medium, not a material boundary or a measured wall law. Write $\tau=t/T_*$ and $y=x/L_*\in\mathbb T^3$, using an optional fixed time origin. For physical velocity $u_{\mathrm{phys}}$, pressure $P_{\mathrm m}$ and density $\rho$, define dimensionless fields and viscosity by
+**(c) Periodic-cell idealization and scale conventions.** This clause applies
+only to the constant-density incompressible branches (a) and (a0), with
+constant $\rho>0$ and constant $\eta\ge0$; in (a0), set $\eta=0$.
+It makes no incompressible reduction or pressure-gauge assertion for the
+variable-density barotropic branch (b). Assume $\mathrm{AC}_\omega$ ([[def-countable-choice]]) for the normalized product measure and Fourier/Sobolev machinery of this clause; the pointwise stress laws of (a), (a0) and (b) do not use this premise. Fix a cell side length $L_*>0$ and velocity scale $U_*>0$ as model data with dimensions $\ell$ and $\ell\tau^{-1}$, and let $T_*=L_*/U_*$ be the time scale. The physical spatial cell is $(\mathbb R/L_*\mathbb Z)^3$, with physical volume $L_*^3$; it describes a spatially periodic ideal medium, not a material boundary or a measured wall law. Write $\tau=t/T_*$ and $y=x/L_*\in\mathbb T^3$, using an optional fixed time origin. For physical velocity $u_{\mathrm{phys}}$, pressure $P_{\mathrm m}$ and density $\rho$, define dimensionless fields and viscosity by
 $$U(\tau,y)=\frac{u_{\mathrm{phys}}(T_*\tau,L_*y)}{U_*},\qquad \Pi(\tau,y)=\frac{P_{\mathrm m}(T_*\tau,L_*y)}{\rho U_*^2},\qquad \nu_*:=\frac{\eta}{\rho U_*L_*}.$$
-The inviscid branch has $\eta=0$ and $\nu_*=0$. The normalized unit-torus measure and $H^s$ norms of [[def-periodic-vector-sobolev-space-and-leray-projection]] apply to $U$, not to an unscaled dimensionful velocity. In the absence of body force the physical equation scales exactly to
+The inviscid incompressible branch (a0) has $\eta=0$ and $\nu_*=0$. The normalized unit-torus measure and $H^s$ norms of [[def-periodic-vector-sobolev-space-and-leray-projection]] apply to $U$, not to an unscaled dimensionful velocity. In the absence of body force the physical equation scales exactly to
 $$\partial_\tau U+(U\cdot\nabla_y)U=-\nabla_y\Pi+\nu_*\Delta_yU,\qquad \operatorname{div}_yU=0.$$
 A dimensionless lifespan $T$ is a physical lifespan $T_*T$, and $P_{\mathrm m}=\rho U_*^2\Pi$. Pressure has zero spatial mean as the chosen gauge. The periodic geometry and the scales are adopted model data, not observed boundary behavior or measured parameters. A change of inertial frame carries the cell lattice to $R(L_*\mathbb Z^3)$; the unit-torus identification is made in the correspondingly rotated cell coordinates, rather than silently keeping a fixed lattice under an arbitrary rotation.
 

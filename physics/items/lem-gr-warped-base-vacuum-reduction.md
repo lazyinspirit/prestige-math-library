@@ -10,12 +10,14 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [lem-gr-warped-spherical-christoffel-and-ricci, def-gr-curvature-tensor-and-derived-tensors, def-gr-killing-field, thm-gr-killing-and-on-shell-matter-identities, def-derivative, thm-chain-rule, thm-algebra-of-derivatives, def-invertible-matrix-and-general-linear-group, prop-coordinate-vector-fields-commute, def-countable-choice, def-rational-power, def-interval, def-c-r-and-smooth-maps-between-smooth-manifolds, def-natural-logarithm, thm-logarithm-derivative-and-integral]
+deps: [lem-gr-warped-spherical-christoffel-and-ricci, def-gr-curvature-tensor-and-derived-tensors, def-derivative, thm-chain-rule, thm-algebra-of-derivatives, def-invertible-matrix-and-general-linear-group, prop-coordinate-vector-fields-commute, def-countable-choice, def-rational-power, def-interval, def-c-r-and-smooth-maps-between-smooth-manifolds, def-natural-logarithm, thm-logarithm-derivative-and-integral, def-lie-derivative-of-a-tensor-field, prop-coordinate-formula-for-the-lie-derivative-of-a-covariant-tensor, thm-zero-derivative-on-connected-open-euclidean-set-iff-constant, thm-real-power-continuity-and-derivatives]
 dependency_roles:
+  thm-real-power-continuity-and-derivatives: mathematical-premise
+  thm-zero-derivative-on-connected-open-euclidean-set-iff-constant: mathematical-premise
+  prop-coordinate-formula-for-the-lie-derivative-of-a-covariant-tensor: mathematical-premise
+  def-lie-derivative-of-a-tensor-field: mathematical-premise
   lem-gr-warped-spherical-christoffel-and-ricci: mathematical-premise
   def-gr-curvature-tensor-and-derived-tensors: mathematical-premise
-  def-gr-killing-field: mathematical-premise
-  thm-gr-killing-and-on-shell-matter-identities: mathematical-premise
   def-derivative: mathematical-premise
   thm-chain-rule: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
@@ -62,6 +64,15 @@ and the **volume-form field** by
 
 $$K_A:=\sum_B\varepsilon_{AB}\,\partial^Br,\qquad \partial^Br:=\sum_Cq^{BC}\partial_Cr,\qquad K^A:=\sum_Bq^{AB}K_B .$$
 
+For a smooth base vector field $\xi=\xi^A\partial_A$, define a **Killing
+field of $q$** to mean $\mathcal L_\xi q=0$, with Lie derivative defined
+by $\mathcal L_\xi q=(d/dt)|_{t=0}\Phi_t^*q$ for the local flow $\Phi_t$
+([[def-lie-derivative-of-a-tensor-field]]). Its coordinate components are
+$$(\mathcal L_\xi q)_{AB}=\xi^C\partial_Cq_{AB}+q_{CB}\partial_A\xi^C+q_{AC}\partial_B\xi^C$$
+by [[prop-coordinate-formula-for-the-lie-derivative-of-a-covariant-tensor]].
+Here $\nabla_A\xi_B:=\partial_A(q_{BC}\xi^C)-\Gamma^C{}_{AB}\xi_C$
+and the base gradient is $\nabla r=(q^{AB}\partial_Br)\partial_A$.
+
 Then:
 
 **(a) Pure trace in two dimensions.**
@@ -80,7 +91,7 @@ $$r(1-z)=s,\qquad\text{that is,}\qquad z=1-\frac{s}{r}\qquad\text{on }V .$$
 **(d) The extra Killing field.** $K(r)=0$, $\sum_A K^A\partial_Ar=0$,
 $\sum_{A,B}K^Aq_{AB}K^B=-z$, the field is nonzero at every point,
 $\nabla_AK_B+\nabla_BK_A=0$ for the base connection $\Gamma^A{}_{BC}$ (so $K$
-is a Killing field of $q$ in the sense of [[def-gr-killing-field]]), and the
+is a Killing field of $q$ in the local definition above), and the
 fields $K$ and $\nabla r$ are pointwise linearly independent: the equalities
 $\sum_A K^A\partial_Ar=0$, $\sum_{A,B}K^Aq_{AB}K^B=-z$ and
 $\sum_{A,B}\partial_Ar\,q^{AB}\partial_Br=z\ne0$ show that neither field
@@ -106,11 +117,15 @@ to be connected as well.
 
 [L2] For an invertible $2\times2$ matrix $q$ with inverse $q^{-1}$, Cramer's rule gives $q^{00}=q_{11}/D_q$, $q^{11}=q_{00}/D_q$ and $q^{01}=q^{10}=-q_{01}/D_q$, and $q^{00}q^{11}-(q^{01})^2=1/D_q$ and $D_q<0$ ([[def-invertible-matrix-and-general-linear-group]], algebra).
 
-[L3] The exterior derivative of a smooth function is the covector of its partial derivatives; the chain, product and quotient rules hold, and a smooth function on a connected open set with all partial derivatives zero is constant ([[def-derivative]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[def-c-r-and-smooth-maps-between-smooth-manifolds]], [[def-interval]]).
+[L3] The exterior derivative of a smooth function is the covector of its partial derivatives; the chain, product and quotient rules hold, and a smooth function on a connected nonempty open Euclidean set whose differential is zero is constant ([[thm-zero-derivative-on-connected-open-euclidean-set-iff-constant]], with $m=2$, $q=1$; [[def-derivative]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]], [[def-c-r-and-smooth-maps-between-smooth-manifolds]], [[def-interval]]).
 
-[L4] A smooth field $\xi$ is a Killing field of the base metric precisely when $\nabla_A\xi_B+\nabla_B\xi_A=0$, where $\xi_B=q_{BC}\xi^C$ ([[def-gr-killing-field]], [[thm-gr-killing-and-on-shell-matter-identities]] clause (a)).
+[L4] The base Killing definition is $\mathcal L_\xi q=0$; its coordinate
+Lie-derivative formula is the one in the Statement, valid in every dimension
+([[def-lie-derivative-of-a-tensor-field]],
+[[prop-coordinate-formula-for-the-lie-derivative-of-a-covariant-tensor]]).
+Step 4.2 proves its equivalence with the symmetrized base derivative using [L1].
 
-[L5] The square root $\sqrt{-D_q}>0$ is smooth because $D_q<0$ and $D_q$ is smooth, and $\partial_C\log(-D_q)=\sum_{A,B}q^{AB}\partial_Cq_{AB}=2\sum_D\Gamma^D{}_{CD}$ ([[def-rational-power]], [[thm-chain-rule]], [[def-derivative]], [[def-countable-choice]]).
+[L5] The square root $\sqrt{-D_q}>0$ is smooth because $D_q<0$ and $D_q$ is smooth, and $\partial_C\log(-D_q)=\sum_{A,B}q^{AB}\partial_Cq_{AB}=2\sum_D\Gamma^D{}_{CD}$ ([[def-rational-power]], [[thm-chain-rule]], [[def-derivative]], [[thm-real-power-continuity-and-derivatives]], [[thm-logarithm-derivative-and-integral]], [[def-countable-choice]]).
 
 ## Proof
 
@@ -132,7 +147,7 @@ Differentiate $z=\sum_{A,B}q^{AB}\partial_Ar\,\partial_Br$ and substitute this i
 $$\partial_Cz=2\sum_{A,B}q^{AB}\partial_Ar\bigl(\partial_C\partial_Br-\sum_D\Gamma^D{}_{CB}\partial_Dr\bigr)=2\sum_{A,B}q^{AB}\partial_Ar\operatorname{Hess}_{CB}r.$$
 By step 3.1, $\operatorname{Hess}_{CB}r=\tfrac12\Delta_qr\,q_{CB}$, so $\partial_Cz=\Delta_qr\,\partial_Cr=\tfrac{1-z}{r}\partial_Cr$. Hence $\partial_C(r(1-z))=(1-z)\partial_Cr-r\partial_Cz=0$ for $C=0,1$; since $V$ is connected and open and $r(1-z)$ is smooth, [L3] makes it constant, and writing this constant as $s$ gives $z=1-s/r$ because $r>0$. This proves (c). [step 3.1, L1, L2, L3, algebra]
 
-4.2 (The Killing field.) By step 1.2, $\nabla_C\varepsilon_{AB}=0$, so $\nabla_CK_A=\sum_B\varepsilon_{AB}q^{BD}\operatorname{Hess}_{CD}r$; with $\operatorname{Hess}=\tfrac12\Delta_qr\,q$ of step 3.1 this is $\tfrac12\Delta_qr\,\varepsilon_{AC}$, and adding $\nabla_AK_C=\tfrac12\Delta_qr\,\varepsilon_{CA}$ gives zero by antisymmetry of $\varepsilon$. Thus $K$ is a Killing field in the sense of [L4]. Put $w^A:=\partial^Ar$. From $K^A=q^{AC}\varepsilon_{CB}w^B$ we have $K(r)=K^A\partial_Ar=w^C\varepsilon_{CB}w^B=0$, since $w^Cw^B$ is symmetric and $\varepsilon_{CB}$ antisymmetric. Also $K\ne0$ because $q(K,K)=-z\ne0$. The components $K^0=-\partial_1r/\lambda$, $K^1=\partial_0r/\lambda$ follow from the definition of $K_A$, Cramer's rule [L2] and $\lambda^2=-D_q$; direct substitution gives $q(K,K)=\lambda^{-2}(q_{00}(\partial_1r)^2-2q_{01}\partial_0r\partial_1r+q_{11}(\partial_0r)^2)=\lambda^{-2}D_qz=-z$. Since $z\ne0$, $\nabla r\ne0$; a linear relation $aK+b\nabla r=0$ would give $0=q(K,aK+b\nabla r)=a(-z)$ and $0=q(\nabla r,aK+b\nabla r)=bz$, hence $a=b=0$. This proves (d) and (e). [step 1.2, step 3.1, L2, L4, algebra]
+4.2 (The Killing field.) By step 1.2, $\nabla_C\varepsilon_{AB}=0$, so $\nabla_CK_A=\sum_B\varepsilon_{AB}q^{BD}\operatorname{Hess}_{CD}r$; with $\operatorname{Hess}=\tfrac12\Delta_qr\,q$ of step 3.1 this is $\tfrac12\Delta_qr\,\varepsilon_{AC}$, and adding $\nabla_AK_C=\tfrac12\Delta_qr\,\varepsilon_{CA}$ gives zero by antisymmetry of $\varepsilon$. For any smooth $\xi$, expanding the locally defined covariant derivatives gives $\nabla_A\xi_B+\nabla_B\xi_A=q_{BC}\partial_A\xi^C+q_{AC}\partial_B\xi^C+\xi^C(\partial_Aq_{BC}+\partial_Bq_{AC}-2\Gamma^D{}_{AB}q_{DC})$. The compatibility identity in [L1] and lower-index symmetry of $\Gamma$ reduce the parenthesis to $\partial_Cq_{AB}$. This is exactly $(\mathcal L_\xi q)_{AB}$ in [L4]. Applying it to $K$ proves $\mathcal L_Kq=0$, so $K$ is a Killing field under the stated two-dimensional definition. Put $w^A:=\partial^Ar$. From $K^A=q^{AC}\varepsilon_{CB}w^B$ we have $K(r)=K^A\partial_Ar=w^C\varepsilon_{CB}w^B=0$, since $w^Cw^B$ is symmetric and $\varepsilon_{CB}$ antisymmetric. Also $K\ne0$ because $q(K,K)=-z\ne0$. The components $K^0=-\partial_1r/\lambda$, $K^1=\partial_0r/\lambda$ follow from the definition of $K_A$, Cramer's rule [L2] and $\lambda^2=-D_q$; direct substitution gives $q(K,K)=\lambda^{-2}(q_{00}(\partial_1r)^2-2q_{01}\partial_0r\partial_1r+q_{11}(\partial_0r)^2)=\lambda^{-2}D_qz=-z$. Since $z\ne0$, $\nabla r\ne0$; a linear relation $aK+b\nabla r=0$ would give $0=q(K,aK+b\nabla r)=a(-z)$ and $0=q(\nabla r,aK+b\nabla r)=bz$, hence $a=b=0$. This proves (d) and (e). [step 1.2, step 3.1, L2, L4, algebra]
 
 5.1 (Conclusion.) Step 1.1 supplies the pair antisymmetries, step 2.1 the pure trace (a), step 3.1 the reduction (b), step 4.1 the constancy (c), and step 4.2 the Killing field with its properties (d)-(e); clause (f) records the exact hypotheses, in particular that only the two displayed components of the four-dimensional vacuum equations, the positivity of $r$ and $z\ne0$ were used, and that the constant $s$ is produced on the connected set $V$. [step 1.1, step 2.1, step 3.1, step 4.1, step 4.2, given] ∎
 

@@ -15,6 +15,8 @@ items:
   - thm-nrqm-oscillator-multidimensional-oscillator-completeness
 requires:
   - qm-math-composites
+  - fourier-transform-convolution-and-approximate-identities
+  - schwartz-space-and-the-plancherel-theorem
   - complex-lp-spaces-and-test-function-conventions
   - distributions-test-functions-and-differentiation
   - series-and-nonnegative-tests
@@ -51,12 +53,12 @@ $R(\lambda,A)x=\sum_n(\lambda-\lambda_n)^{-1}\langle x,e_n\rangle e_n$ with
 norm $(\inf_n|\lambda-\lambda_n|)^{-1}$ outside the closure.
 
 The Hermite layer is the analytic heart of the page.
-[[thm-nrqm-oscillator-hermite-recurrence]] defines $g_0=\pi^{-1/4}e^{-y^2/2}$,
+[[thm-nrqm-oscillator-hermite-recurrence]] equips $L^2(\mathbb R,dy)$ with its complex Hilbert-space pairing and defines $g_0=\pi^{-1/4}e^{-y^2/2}$,
 the polynomial-Gaussian space $P$, the operators
 $a=(Y+\partial_y)/\sqrt2$, $a^\dagger=(Y-\partial_y)/\sqrt2$ and the vectors
 $g_n=(a^\dagger)^ng_0/\sqrt{n!}$; it proves the adjoint pairing on $P$, the
 commutator $[a,a^\dagger]=I$, the ladder relations
-$ag_n=\sqrt n\,g_{n-1}$, $a^\dagger g_n=\sqrt{n+1}g_{n+1}$, the Rodrigues
+$ag_n=\sqrt n\,g_{n-1}$, $a^\dagger g_n=\sqrt{n+1}g_{n+1}$ (with the convention $g_{-1}=0$ at $n=0$), the Rodrigues
 polynomials $H_n$ with $g_n=H_ng_0/\sqrt{2^nn!}$ and the recurrences
 $H_n'=2nH_{n-1}$, $H_{n+1}=2yH_n-2nH_{n-1}$. Orthonormality is
 [[thm-nrqm-oscillator-hermite-orthogonality]], which also records the

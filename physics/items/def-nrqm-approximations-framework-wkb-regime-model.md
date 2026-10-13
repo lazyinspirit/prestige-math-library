@@ -61,8 +61,8 @@ sources:
       url: "https://farside.ph.utexas.edu/teaching/qmech/qmech.pdf"
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
         Section 9.7 printed pages 214-220 (PDF pages 226-232): the spectra and
-        asymptotic behaviour of one-dimensional Schrodinger operators, one
-        turning point and the transmission setup"
+        relative bounds and spectra of one-dimensional Schrodinger operators
+        (background only; no Airy connection or barrier-transmission theorem)"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
 verification:
   precheck: n/a
@@ -122,14 +122,15 @@ for the set of **turning points**. A point $\xi_{0}\in\tau$ is **simple** when
 $W'(\xi_{0})\ne0$. An open interval $J$ is an **allowed interval** when
 $W(\xi)-\lambda<0$ on $J$ (the dimensionless kinetic energy $-(W-\lambda)$ is
 positive there), a **forbidden interval** when $W(\xi)-\lambda>0$ on
-$J$. On an allowed interval the model uses the local wavenumber
+$J$. On an allowed interval the model uses the positive scaled momentum
 $$p(\xi):=\sqrt{\lambda-W(\xi)}>0$$
-and the WKB phase $\theta(\xi):=\int_{\xi_{\mathrm{ref}}}^{\xi}p(s)\,ds$ with a
-declared base point; on a forbidden interval the model uses
-$\kappa(\xi):=\sqrt{W(\xi)-\lambda}>0$. The **WKB exponent** of a forbidden
+with local wavenumber $k_h(\xi):=p(\xi)/h$ in the coordinate $\xi$
+and WKB phase $\theta_h(\xi):=h^{-1}\int_{\xi_{\mathrm{ref}}}^{\xi}p(s)\,ds$
+with a declared base point; on a forbidden interval the model uses
+$\kappa(\xi):=\sqrt{W(\xi)-\lambda}>0$. The **dimensionless forbidden action** of a forbidden
 interval $[\xi_{a},\xi_{b}]$ is
 $$S:=\int_{\xi_{a}}^{\xi_{b}}\sqrt{W(\xi)-\lambda}\,d\xi =\frac{h}{\hbar}\int_{x_{a}}^{x_{b}}\sqrt{2m(V(x)-E)}\,dx,$$
-equivalently $S/h$ is the physical action in units of $\hbar$. For a
+The **WKB exponent** is $S/h$, the physical action in units of $\hbar$. For a
 barrier whose endpoints are simple turning points, the strict-sign hypothesis
 of clause (b)(i) fails at those endpoints; apply that clause on
 $[\xi_a+\delta,\xi_b-\delta]$ and let $\delta\downarrow0$. Both integrands

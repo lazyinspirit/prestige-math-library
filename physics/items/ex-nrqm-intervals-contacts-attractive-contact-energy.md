@@ -23,9 +23,9 @@ provenance:
   proof: ai-altered
 sources:
   references:
-    - title: "Sarang Gopalakrishnan, Self-Adjointness and the Renormalization of Singular Potentials (Amherst College honors thesis, 2006), Chapter 1 pp. 15-32 (explicit bound state of the one-dimensional attractive delta interaction)"
+    - title: "Sarang Gopalakrishnan, Self-Adjointness and the Renormalization of Singular Potentials (2006), Section 1.2 pp. 16-18 and Section 8.2.5 pp. 129-130 (one-dimensional derivative jump, attractive bound-state calculation and extension background; rigorous operator and resolvent proofs are supplied locally)"
       url: "https://math.ucr.edu/home/baez/gopalkrishnan.pdf"
-    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009, Section 9.2 pp. 187-193 (point-interaction eigenvalues)"
+    - title: "G. Teschl, Mathematical Methods in Quantum Mechanics (2009), Section 2.6, Lemma 2.29 pp. 83-84 (differences of extension resolvents; point-interface results are proved locally)"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
 ---
 
@@ -49,7 +49,7 @@ single negative eigenvalue $-\alpha^2/4$ with normalized eigenvector
 $\sqrt{-\alpha/2}\,e^{\alpha|x|/2}$, and for $\alpha\ge0$ there is none
 ([[thm-nrqm-intervals-delta-unique-bound-state]]);
 
-(c) with the scaling of part (c) of
+(c) if $\alpha<0$, with the scaling of part (c) of
 [[thm-nrqm-intervals-delta-unique-bound-state]], if one assigns positive
 constants $\hbar,m$ and sets $H:=(\hbar^2/2m)A_\alpha$ and
 $g:=\hbar^2\alpha/(2m)$, then the bound energy is $-mg^2/(2\hbar^2)$; for the

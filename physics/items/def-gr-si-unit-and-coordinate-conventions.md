@@ -103,5 +103,11 @@ of the convention, not positivity assumptions on $T$.
 these dimensionful conventions. Restore the factors displayed above before
 comparison with SI quantities; in particular the same spatial tensor component
 corresponds to energy flux multiplied by $c$ and momentum density divided by
-$c$. A length-coordinate null ray obeys $|d\mathbf x/dx^0|=1$ in an inertial
-flat chart; this coordinate relation does not change the physical constant.
+$c$. In a chart whose coordinates $x^0,x^1,x^2,x^3$ are all lengths and whose
+metric components are $\operatorname{diag}(-1,1,1,1)$, a nonzero null tangent
+vector $v=(v^0,\mathbf v)$, null as in clause (b) of
+[[def-gr-smooth-lorentzian-objects]], satisfies
+$\|\mathbf v\|_2:=\sqrt{(v^1)^2+(v^2)^2+(v^3)^2}=|v^0|$. Since $v\ne0$, this
+implies $v^0\ne0$, so $\|\mathbf v\|_2/|v^0|=1$. This is a coordinate identity
+for the null condition, not a postulate about light propagation, and it does
+not change the physical constant $c$.

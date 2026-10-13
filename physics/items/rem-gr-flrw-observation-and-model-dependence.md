@@ -37,7 +37,7 @@ This note records what the items of this page do and do not establish, and how
 a comparison with reported observations would have to be made. It proves
 nothing and reports no measurement.
 
-- **Everything on the page is conditional on the adopted model.** The
+- **Physical predictions on the page are conditional on the adopted model.** The
   geometry, the matter sector and the equation of state are adopted in
   [[post-gr-flrw-homogeneous-cosmological-model]]; the field law is adopted in
   the framework. The reduction [[pthm-gr-flrw-field-equations-reduction]]
@@ -46,7 +46,11 @@ nothing and reports no measurement.
   [[pthm-gr-flrw-power-law-solutions]] and
   [[pthm-gr-flrw-de-sitter-solutions]] verify particular data against those
   equations. The redshift relation [[pthm-gr-flrw-cosmological-redshift]] is a
-  consequence of the model metric and the light-ray rule alone. No item on
+  consequence of the model metric and the light-ray rule for future
+  affinely parametrized null rays, together with the comoving observer
+  $n=c^{-1}\partial_t$, the observer-energy definition $E=-c\,g(V,n)$ for
+  the ray tangent $V$, and the redshift definition $1+z=E_E/E_R$ stated
+  in that theorem. No item on
   this page asserts that the universe is homogeneous, isotropic, flat, dust-
   or radiation-dominated, vacuum-dominated or described by any particular
   value of the parameters.
@@ -98,8 +102,9 @@ nothing and reports no measurement.
   definitions of the measured quantities, report the observations with their
   uncertainties and limitations, and separate the reported statistical
   inference from the model prediction, exactly as required for experiment
-  items of the framework. Until such items exist, every statement on this
-  page remains a conditional model result, and the cosmological
+  items of the framework. Until such items exist, the model predictions on
+  this page remain conditional on the adopted model, and the cosmological
   interpretation of any observed redshift, distance or temperature pattern is
   a modelling and inference question, not a consequence of the mathematics
-  proved here.
+  proved here. This scope note itself is a methodological summary, not a
+  model-derived result.

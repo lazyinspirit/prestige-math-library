@@ -10,7 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-schwarzschild-exterior-model, lem-gr-schwarzschild-metric-properties, lem-gr-schwarzschild-ricci-and-einstein-tensors, lem-gr-schwarzschild-static-congruence-and-clock-rates, lem-gr-schwarzschild-circular-orbits-and-photon-sphere, lem-gr-schwarzschild-isotropic-coordinate-form, def-gr-stationary-weak-field-data, def-gr-newtonian-comparison-model-and-identification, post-gr-spacetime-and-classical-domain, post-gr-field-and-matter-assumptions, post-gr-einstein-field-law, post-gr-ideal-clocks-and-free-fall, pthm-gr-einstein-consistency-and-energy-conditions, def-gr-stress-energy-tensor-field, def-gr-si-unit-and-coordinate-conventions, def-gr-smooth-lorentzian-objects, def-gr-observer-congruence-and-adapted-charts, def-gr-timelike-worldline-and-proper-time, lem-gr-proper-time-reparametrization-and-four-velocity, def-derivative, thm-chain-rule, def-rational-power]
+deps: [def-gr-schwarzschild-exterior-model, lem-gr-schwarzschild-metric-properties, lem-gr-schwarzschild-ricci-and-einstein-tensors, lem-gr-schwarzschild-static-congruence-and-clock-rates, lem-gr-schwarzschild-circular-orbits-and-photon-sphere, lem-gr-schwarzschild-isotropic-coordinate-form, def-gr-stationary-weak-field-data, def-gr-newtonian-comparison-model-and-identification, post-gr-spacetime-and-classical-domain, post-gr-field-and-matter-assumptions, post-gr-einstein-field-law, post-gr-ideal-clocks-and-free-fall, def-gr-stress-energy-tensor-field, def-gr-si-unit-and-coordinate-conventions, def-gr-smooth-lorentzian-objects, def-gr-observer-congruence-and-adapted-charts, def-gr-timelike-worldline-and-proper-time, lem-gr-proper-time-reparametrization-and-four-velocity, def-derivative, thm-chain-rule, def-rational-power]
 dependency_roles:
   def-gr-schwarzschild-exterior-model: mathematical-premise
   lem-gr-schwarzschild-metric-properties: mathematical-premise
@@ -24,7 +24,6 @@ dependency_roles:
   post-gr-field-and-matter-assumptions: physical-assumption
   post-gr-einstein-field-law: physical-assumption
   post-gr-ideal-clocks-and-free-fall: physical-assumption
-  pthm-gr-einstein-consistency-and-energy-conditions: physical-result
   def-gr-stress-energy-tensor-field: formulation-prerequisite
   def-gr-si-unit-and-coordinate-conventions: formulation-prerequisite
   def-gr-smooth-lorentzian-objects: mathematical-premise
@@ -34,7 +33,7 @@ dependency_roles:
   def-derivative: mathematical-premise
   thm-chain-rule: mathematical-premise
   def-rational-power: mathematical-premise
-physical_scope: "Conditional model deduction inside the classical gravitational framework with the field law in its direct-equation presentation: the Schwarzschild exterior datum of mass parameter m_* > 0 with the vacuum stress-energy prescription T = 0 and zero cosmological parameter is a model of the framework satisfying the adopted field law; its ideal static clocks read the proper times of the static congruence, and the parameter enters the model through the Schwarzschild radius, the circular-orbit angular velocity and the leading far-field coefficient. Excludes: any claim that the model or its vacuum content is realized in nature, any empirical comparison (no observation, apparatus, calibration or uncertainty), non-vacuum matter, nonzero Lambda, the interior and horizon region (which belongs to the extension and Kruskal items of the page), distributional sources, and quantum effects. All conclusions are conditional on the adopted postulates."
+physical_scope: "Conditional model deduction inside the classical gravitational framework with the field law in its direct-equation presentation: the Schwarzschild exterior datum of mass parameter m_* > 0 with the vacuum stress-energy prescription T = 0 and zero cosmological parameter is a model of the framework satisfying the adopted field law; its ideal static clocks read the proper times of the static congruence, and the parameter enters the model through the Schwarzschild radius, the round-sphere angular speed of circular geodesics and the leading far-field coefficient. Excludes: any claim that the model or its vacuum content is realized in nature, any empirical comparison (no observation, apparatus, calibration or uncertainty), non-vacuum matter, nonzero Lambda, the interior and horizon region (which belongs to the extension and Kruskal items of the page), distributional sources, and quantum effects. All conclusions are conditional on the adopted postulates."
 sources:
   references:
     - title: "D. Tong, General Relativity (Cambridge Part III Mathematical Tripos, Michaelmas 2019), section 6.1: the Schwarzschild metric (6.1) as the solution for the exterior of a spherically symmetric mass, its independence of the time coordinate and the identification of the parameter M, printed pp. 232-233 (PDF pp. 239-240)"
@@ -70,10 +69,9 @@ specified; they assert nothing about nature.
 postulate, $T=0$ is a smooth symmetric stress-energy tensor field on the
 matter domain $M$ in the sense of [[def-gr-stress-energy-tensor-field]], the
 prescription is admissible, and the adopted field law
-$G_{ab}+\Lambda g_{ab}=\kappa T_{ab}$ holds identically on $M$; in the
-notation of [[pthm-gr-einstein-consistency-and-energy-conditions]] clause (d)
-this datum is a vacuum solution of the field law, here read as a model of the
-framework. The model is not locally flat: its curvature tensor is nowhere
+$G_{ab}+\Lambda g_{ab}=\kappa T_{ab}$ holds identically on $M$. A **vacuum solution with zero cosmological parameter** here means
+precisely a datum satisfying that equation with $T=0$ and $\Lambda=0$;
+this datum is such a solution, read as a model of the framework. The model is not locally flat: its curvature tensor is nowhere
 zero, while its Ricci tensor and Einstein tensor vanish identically
 ([[lem-gr-schwarzschild-ricci-and-einstein-tensors]] clause (d)).
 
@@ -87,7 +85,7 @@ between two events whose coordinate times differ by $\Delta t$ is
 $$\Delta\tau=\sqrt{f(r_0)}\,\Delta t=\sqrt{1-\frac{s}{r_0}}\;\Delta t,$$
 
 so two static clocks at radii $r_1,r_2$ compared over the same coordinate
-interval satisfy $\Delta\tau_1/\Delta\tau_2=\sqrt{f(r_1)/f(r_2)}$. The static
+interval with $\Delta t\ne0$ satisfy $\Delta\tau_1/\Delta\tau_2=\sqrt{f(r_1)/f(r_2)}$. The static
 worldlines are not geodesics: their acceleration is
 $a=\frac{s}{2r^2}\partial_r\ne0$, so the model assigns them to accelerated
 (constrained) bodies and not to freely falling ones.
@@ -98,10 +96,18 @@ the mass parameter of the model in kilograms
 ([[def-gr-si-unit-and-coordinate-conventions]] clause (a),
 [[def-gr-schwarzschild-exterior-model]] clause (a)):
 
-1. Circular timelike geodesics with $r_0>\frac{3s}{2}$ have coordinate angular
-   velocity satisfying $\bigl(d\varphi/dt\bigr)^2=\dfrac{G_Nm_*}{r_0^3}$
-   ([[lem-gr-schwarzschild-circular-orbits-and-photon-sphere]] clause (a)),
-   the Kepler-like law in which $m_*$ plays the role of the central mass;
+1. Let $\gamma:I\to M$ be a smooth future timelike geodesic, parametrized
+   by proper time $\tau$ on an interval with nonempty interior, with
+   $r\circ\gamma\equiv r_0>\frac{3s}{2}$. Put $\sigma:=\iota\circ\gamma:I\to S^2$
+   and $t:=(x^0\circ\gamma)/c$. Its **angular speed with respect to $t$** is
+   $\Omega:=\sqrt{\gamma_{S^2}(d\sigma/dt,d\sigma/dt)}$, where
+   $d\sigma/dt:=\sigma'(\tau)/t'(\tau)$ and $t'(\tau)>0$ by future
+   timelikeness. It has units $\mathrm s^{-1}$ and satisfies
+   $\Omega^2=G_Nm_*/r_0^3$ in every angular orientation. For an equatorial
+   curve, $\vartheta=\pi/2$ and $\Omega^2=(d\varphi/dt)^2$ in local polar
+   charts ([[lem-gr-schwarzschild-circular-orbits-and-photon-sphere]]
+   clause (a) and proof step 2.2). This is the Kepler-like law in which
+   $m_*$ plays the role of the central mass;
 2. in the isotropic chart of
    [[lem-gr-schwarzschild-isotropic-coordinate-form]], with
    $a=s/(4\rho)$, the exact identity
@@ -140,11 +146,11 @@ the cited postulates.
 
 [L1] The Schwarzschild exterior datum $(M,g,N)$ is a smooth time-oriented Lorentzian four-manifold of signature $(-,+,+,+)$, with $f=1-s/r>0$ on $r>s$; its Ricci tensor, scalar curvature and Einstein tensor vanish identically, and its curvature tensor is nowhere zero ([[lem-gr-schwarzschild-metric-properties]], [[lem-gr-schwarzschild-ricci-and-einstein-tensors]] clauses (c)-(d)).
 
-[L2] The static congruence $n=f^{-1/2}\partial_0$ is a future-directed unit timelike smooth field whose integral curves are the curves of constant $(r,\vartheta,\varphi)$; along such a curve the proper-time increment over a coordinate increment $\Delta x^0$ is $\Delta\tau=\sqrt{f(r_0)}\,\Delta x^0/c=\sqrt{f(r_0)}\,\Delta t$, its acceleration is $a=\frac{s}{2r^2}\partial_r\ne0$, and the ratio of proper-time increments of two static observers over a common coordinate interval is $\sqrt{f(r_1)/f(r_2)}$ ([[lem-gr-schwarzschild-static-congruence-and-clock-rates]] clauses (a)-(e), [[def-gr-observer-congruence-and-adapted-charts]], [[def-gr-timelike-worldline-and-proper-time]]).
+[L2] The static congruence $n=f^{-1/2}\partial_0$ is a future-directed unit timelike smooth field whose integral curves are the curves of constant $(r,\vartheta,\varphi)$; along such a curve the proper-time increment over a coordinate increment $\Delta x^0$ is $\Delta\tau=\sqrt{f(r_0)}\,\Delta x^0/c=\sqrt{f(r_0)}\,\Delta t$, its acceleration is $a=\frac{s}{2r^2}\partial_r\ne0$, and the ratio of proper-time increments of two static observers over a common nonzero coordinate interval is $\sqrt{f(r_1)/f(r_2)}$ ([[lem-gr-schwarzschild-static-congruence-and-clock-rates]] clauses (a)-(e), [[def-gr-observer-congruence-and-adapted-charts]], [[def-gr-timelike-worldline-and-proper-time]]).
 
-[L3] The circular-orbit law is $(d\varphi/dt)^2=G_Nm_*/r_0^3$ for $r_0>3s/2$. In the isotropic chart, $g_{00}=-(1-a)^2/(1+a)^2$ with $a=s/(4\rho)$, so direct algebra gives $g_{00}+1=4a/(1+a)^2=+s/\rho+O(\rho^{-2})$. The weak-field metric convention is $g_{00}=-(1+2\Phi/c^2)$ to first order, and the comparison dictionary identifies its potential with the Newtonian comparison potential; choosing $\Phi_N(\rho)=-G_Nm_*/\rho$ gives $-2\Phi_N/c^2=+s/\rho$ ([[lem-gr-schwarzschild-circular-orbits-and-photon-sphere]] clause (a), [[lem-gr-schwarzschild-isotropic-coordinate-form]] clause (b), [[def-gr-stationary-weak-field-data]], [[def-gr-newtonian-comparison-model-and-identification]], [[def-derivative]], [[thm-chain-rule]], [[def-rational-power]]).
+[L3] For a constant-radius future timelike geodesic, the radial equation gives $\gamma_{S^2}(\sigma',\sigma')=\frac{f'(r_0)}{2r_0}((x^0\circ\gamma)')^2$ in every sphere chart, including pole charts ([[lem-gr-schwarzschild-circular-orbits-and-photon-sphere]] proof step 2.2); its equatorial longitude law is $(d\varphi/dt)^2=G_Nm_*/r_0^3$ (that supplier's clause (a)). In the isotropic chart, $g_{00}=-(1-a)^2/(1+a)^2$ with $a=s/(4\rho)$, so direct algebra gives $g_{00}+1=4a/(1+a)^2=+s/\rho+O(\rho^{-2})$. The weak-field metric convention is $g_{00}=-(1+2\Phi/c^2)$ to first order, and the comparison dictionary identifies its potential with the Newtonian comparison potential; choosing $\Phi_N(\rho)=-G_Nm_*/\rho$ gives $-2\Phi_N/c^2=+s/\rho$ ([[lem-gr-schwarzschild-isotropic-coordinate-form]] clause (b), [[def-gr-stationary-weak-field-data]], [[def-gr-newtonian-comparison-model-and-identification]], [[def-derivative]], [[thm-chain-rule]], [[def-rational-power]]).
 
-[L4] For the flat metric with $T=0$ and $\Lambda=0$ the field law holds, and $T=0$ satisfies the consistency condition $\nabla^aT_{ab}=0$; a datum with vanishing Einstein tensor, $T=0$ and $\Lambda=0$ satisfies the field law identically ([[pthm-gr-einstein-consistency-and-energy-conditions]] clauses (a) and (d)).
+[L4] By direct substitution in [A2], any datum with $G=0$, $T=0$ and $\Lambda=0$ satisfies $G+\Lambda g=0=\kappa T$. The covariant derivative of the zero tensor is zero, so this prescription also satisfies $\nabla^aT_{ab}=0$. This is a local algebraic deduction from [[post-gr-einstein-field-law]] clause (i), not an application of its flat example.
 
 ## Proof
 
@@ -152,9 +158,9 @@ the cited postulates.
 
 1.1 (The model and its field law.) By [L1] and [[def-gr-schwarzschild-exterior-model]] the datum is a smooth time-oriented Lorentzian four-manifold without boundary, so it satisfies the spacetime postulate by [A1]; $T=0$ is a smooth symmetric covariant $2$-tensor field on the matter domain $M$. By [L1], $G_{ab}\equiv0$; with $\Lambda=0$ and $T=0$, $G_{ab}+\Lambda g_{ab}=0=\kappa T_{ab}$ holds identically and $\nabla^aT_{ab}=0$ trivially, so the prescription is admissible by [A1] and satisfies the field law by [A2], which is the vacuum solution of [L4]. That the model is not locally flat is [L1]. This proves (a). [A1, A2, L1, L4, given, algebra]
 
-1.2 (Static clock readings.) By [L2] the integral curves of $n$ are the constant-radius worldlines and are smooth future timelike curves; by [A3] the model assigns to an ideal clock carried along each of them the reading equal to the proper time, and [L2] gives the increment $\Delta\tau=\sqrt{f(r_0)}\Delta t$ and the ratio $\sqrt{f(r_1)/f(r_2)}$ for two radii. Since [L2] also gives $a=\frac{s}{2r^2}\partial_r\ne0$, the static worldlines are not geodesics, so by [A3] the model does not assign them to freely falling test bodies. This proves (b). [A3, L2, algebra]
+1.2 (Static clock readings.) By [L2] the integral curves of $n$ are the constant-radius worldlines and are smooth future timelike curves; by [A3] the model assigns to an ideal clock carried along each of them the reading equal to the proper time, and [L2] gives the increment $\Delta\tau=\sqrt{f(r_0)}\Delta t$ and, for a common $\Delta t\ne0$, the ratio $\sqrt{f(r_1)/f(r_2)}$ for two radii; the denominator is nonzero since $f(r_2)>0$. Since [L2] also gives $a=\frac{s}{2r^2}\partial_r\ne0$, the static worldlines are not geodesics, so by [A3] the model does not assign them to freely falling test bodies. This proves (b). [A3, L2, algebra]
 
-1.3 (The mass parameter.) By [[def-gr-schwarzschild-exterior-model]] clause (a) the parameter $m_*$ determines the datum only through $s=2G_Nm_*/c^2$ and the unit conventions; by [L3] the coordinate angular velocity of a circular timelike geodesic of the datum at radius $r_0>\frac{3s}{2}$ satisfies $(d\varphi/dt)^2=G_Nm_*/r_0^3$. For the isotropic chart, the exact coefficient in [L3] gives
+1.3 (The mass parameter.) By [[def-gr-schwarzschild-exterior-model]] clauses (a) and (c), the parameter $m_*$ enters the associated geometry through $s=2G_Nm_*/c^2$. For a circular geodesic $\gamma$ as in (c)(1), future timelikeness gives $g(\gamma',N)=-f(r_0)(x^0\circ\gamma)'<0$, hence $t'=(x^0\circ\gamma)'/c>0$. Dividing the radial identity of [L3] by $(t')^2$ gives $\Omega^2=c^2f'(r_0)/(2r_0)=c^2s/(2r_0^3)=G_Nm_*/r_0^3$. This identity uses the round metric and is independent of the angular chart; at the equator its polar expression is $(d\varphi/dt)^2$. For the isotropic chart, the exact coefficient in [L3] gives
 $$g_{00}+1=\frac{4a}{(1+a)^2}=4a+O(a^2)=+\frac{s}{\rho}+O(\rho^{-2})=+\frac{2G_Nm_*}{c^2\rho}+O(\rho^{-2}),\qquad a=\frac{s}{4\rho},$$
 as $\rho\to\infty$ with fixed $s$, by the exact identity $(1+a)^{-2}=1+O(a)$. The weak-field convention and comparison dictionary in [L3] identify the leading coefficient as $-2\Phi_N/c^2$ for $\Phi_N(\rho)=-G_Nm_*/\rho$. The framework's unit conventions of [[def-gr-si-unit-and-coordinate-conventions]] read $m_*$ in kilograms, and these are the model's own occurrences of the parameter; no numerical value, source model or observation enters. This proves (c). [L3, algebra]
 

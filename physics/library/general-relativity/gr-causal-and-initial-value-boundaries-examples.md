@@ -42,6 +42,8 @@ space is missed by an inextendible causal curve, so spacelike is not Cauchy.
 [[cex-gr-achronal-set-need-not-be-acausal]] separates the two set conditions
 with two null-related events: achronal but not acausal.
 
-All six items are mathematics: complete conditional computations and
+The general causal-curve conclusions use the Countable Choice and Dependent
+Choice premises recorded in their suppliers and consuming items. All six
+items are mathematics: conditional computations and
 counterexamples inside the explicitly displayed models. None reports a
 measurement, and none asserts anything about nature.

@@ -30,5 +30,6 @@ interval of them — are consistent with the illustrative record.
 Neither item asserts a measurement, an apparatus, a calibration, a sampling
 model or any empirical conclusion about the model or about a postulate. Every
 number is a declared illustrative value; the model itself is a hypothetical
-configuration satisfying the framework's postulates, and no field-law or
+flat vacuum de Sitter solution with $\Lambda=3H^2/c^2$, whose field-law
+consistency is established conditionally in the first example. No
 source-observation claim is made.

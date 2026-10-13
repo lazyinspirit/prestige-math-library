@@ -25,7 +25,7 @@ dependency_roles:
 provenance:
   statement: ai-altered
   proof: not-applicable
-physical_scope: "Adoption of the heavy symmetric top branch of the rigid-material model: a reference mass distribution whose body inertia matrix is diag(A_c,A_c,C_c) about a declared symmetry axis, a material point held fixed at the origin of the inertial frame (the pivot, on the symmetry axis at distance d from the centre of mass, so that the centre of mass is constrained to the circle of radius d about the pivot), an ideal pivot mechanism contributing no torque about the pivot in the framework's sense of a frictionless hinge, a uniform gravitational field of magnitude g directed along $-e_3$, and the adopted balance of angular momentum about the pivot. The branch excludes friction and driving torques at the pivot, rolling and sliding contacts, non-axisymmetric bodies and non-uniform fields, and asserts no measured value and no claim that a concrete top or gyroscope realises it."
+physical_scope: "Adoption of the heavy symmetric top branch of the rigid-material model: a reference mass distribution whose body inertia matrix is diag(A_c,A_c,C_c) about a declared symmetry axis, a material point held fixed at the origin of the inertial frame (the pivot, on the symmetry axis at distance d from the centre of mass, so that the centre of mass lies on the sphere of radius d about the pivot), an ideal pivot mechanism contributing no torque about the pivot in the framework's sense of a frictionless hinge, a uniform gravitational field of magnitude g directed along $-e_3$, and the adopted balance of angular momentum about the pivot. The branch excludes friction and driving torques at the pivot, rolling and sliding contacts, non-axisymmetric bodies and non-uniform fields, and asserts no measured value and no claim that a concrete top or gyroscope realises it."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Sections 3.5-3.6, Eqs. (3.54)-(3.70), printed pages 62-70 (PDF pages 68-76): Euler angles, the Lagrangian of the symmetric heavy top, its cyclic momenta and reduced energy"
@@ -72,9 +72,9 @@ $\rho_{p}:=-d\,e_{3}$ is the **pivot material point**; it lies on the
 symmetry axis at distance $d$ from the centre of mass. The motions of the
 branch are those satisfying
 $$c(t)+R(t)\rho_{p}=0\qquad(t\in I_{0}),$$
-that is $c(t)=d\,R(t)e_{3}$: the pivot material point is held fixed at the
-origin of the inertial frame for the whole time window, and the centre of
-mass is constrained to the circle of radius $d$ about the origin. The
+    that is $c(t)=d\,R(t)e_{3}$: the pivot material point is held fixed at the
+    origin of the inertial frame for the whole time window, and the centre of
+    mass lies on the sphere of radius $d$ about the origin. The
 constraint is maintained by a mechanism (a bearing, a hinge or a fine
 support) whose force system is **ideal** in the sense adopted for
 frictionless hinges in [[post-cm06-ideal-reaction-law]] clause (iii) together

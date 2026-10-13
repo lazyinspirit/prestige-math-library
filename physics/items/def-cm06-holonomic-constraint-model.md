@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 9
-deps: [post-cm02-force-superposition, post-cm01-frames, def-cm01-configuration, def-cm01-velocity-acceleration, def-cm01-units, def-cm-holonomic-constraint-and-ideal-reactions, thm-a-regular-level-set-is-an-embedded-submanifold, def-regular-and-critical-points-and-values, def-embedded-submanifold-and-slice-chart, cor-matrix-rank-nullity, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-vector-valued-derivative-and-integral, thm-chain-rule-for-total-derivatives, def-interval]
+deps: [post-cm02-force-superposition, post-cm01-frames, def-cm01-configuration, def-cm01-velocity-acceleration, def-cm01-units, def-cm-holonomic-constraint-and-ideal-reactions, thm-parametrized-implicit-function-theorem-with-higher-regularity, thm-a-regular-level-set-is-an-embedded-submanifold, def-regular-and-critical-points-and-values, def-embedded-submanifold-and-slice-chart, cor-matrix-rank-nullity, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-vector-valued-derivative-and-integral, thm-chain-rule-for-total-derivatives, def-interval]
 dependency_roles:
   post-cm02-force-superposition: physical-assumption
   post-cm01-frames: formulation-prerequisite
@@ -14,6 +14,7 @@ dependency_roles:
   def-cm01-velocity-acceleration: formulation-prerequisite
   def-cm01-units: formulation-prerequisite
   def-cm-holonomic-constraint-and-ideal-reactions: mathematical-premise
+  thm-parametrized-implicit-function-theorem-with-higher-regularity: mathematical-premise
   thm-a-regular-level-set-is-an-embedded-submanifold: mathematical-premise
   def-regular-and-critical-points-and-values: mathematical-premise
   def-embedded-submanifold-and-slice-chart: mathematical-premise
@@ -80,14 +81,34 @@ subject to the two hypotheses
    $k$.
 
 For $t\in\mathbb R$ write $\Sigma_{t}:=\{x\in\mathbb R^{3N}:(t,x)\in\Sigma\}$
-for the **instantaneous constraint locus**. If $\Sigma_{t}\neq\varnothing$,
-then $x\mapsto G(t,x)$ has the regular value $0$ with nonempty fibre
-$\Sigma_{t}$ in the sense of [[def-regular-and-critical-points-and-values]]
-(on the open set $\{x:(t,x)\in O\}$), so by
-[[thm-a-regular-level-set-is-an-embedded-submanifold]] the set $\Sigma_{t}$ is
-an embedded submanifold of $\mathbb R^{3N}$ of dimension $3N-k$
-([[def-embedded-submanifold-and-slice-chart]]); when $k=3N-1$ the
-instantaneous locus is locally a curve, and the number
+for the **instantaneous constraint locus**. Here a **$C^{2}$ embedded
+submanifold of dimension $d$** in $\mathbb R^{n}$ means a subset $S$, with
+its inherited topology, such that each $p\in S$ has an open neighbourhood
+$U\subseteq\mathbb R^{n}$ and a $C^{2}$ diffeomorphism
+$h:U\to W$ onto an open $W\subseteq\mathbb R^{n}$ satisfying
+$h(S\cap U)=W\cap(\mathbb R^{d}\times\{0\})$; both $h$ and its inverse
+are $C^{2}$ in the sense of [[def-ck-euclidean-maps-and-diffeomorphisms]].
+This is the finite-regularity slice convention used for these loci;
+[[def-embedded-submanifold-and-slice-chart]] instead requires smooth charts.
+
+Each nonempty $\Sigma_t$ is a $C^{2}$ embedded submanifold of dimension
+$3N-k$. Indeed, at any $p\in\Sigma_t$ choose $k$ spatial columns of
+$D_xG(t,p)$ giving an invertible minor, and permute coordinates as
+$x=(u,v)\in\mathbb R^{3N-k}\times\mathbb R^k$. The fixed-time map
+$H(u,v):=G(t,(u,v))$ is $C^2$ on the open slice of $O$, vanishes at $p$,
+and has invertible $D_vH(p)$. Apply
+[[thm-parametrized-implicit-function-theorem-with-higher-regularity]] with
+regularity order $2$ and no parameter block: on open neighbourhoods
+$P\times Q$ of $p$, its zero set is exactly $v=\varphi(u)$ for a
+$C^2$ map $\varphi:P\to Q$. The map
+$h(u,v)=(u,v-\varphi(u))$ is a $C^2$ diffeomorphism onto the open set
+$W=\{(u,w):u\in P,\ w+\varphi(u)\in Q\}$, with inverse
+$(u,w)\mapsto(u,w+\varphi(u))$, and sends that graph to
+$W\cap(\mathbb R^{3N-k}\times\{0\})$. This proves the claimed local
+slice property. If $G$ is smooth, the smooth regular-value terminology of
+[[def-regular-and-critical-points-and-values]] and the smooth conclusion of
+[[thm-a-regular-level-set-is-an-embedded-submanifold]] also apply.
+When $k=3N-1$ the instantaneous locus is locally a $C^2$ curve, and the number
 $$\dim\Sigma_{t}=3N-k$$
 is the **instantaneous degrees of freedom** of the constrained branch. The
 set $V(t,x):=\ker D_{x}G(t,x)\subseteq\mathbb R^{3N}$ has dimension $3N-k$ by
@@ -162,17 +183,22 @@ vanishes identically on the open set of times $\{t:(t,x)\in O\}$; this is the
 form in which the classification is used by the balance theorems of this page.
 
 The identity is a consequence of time-independence and **not** a criterion for
-it. The presentation $G(t,x):=(x_{1}-t)^{2}$ on
-$O=\mathbb R\times\mathbb R^{3N}$ has the moving zero set $\{x_{1}=t\}$ while
-$G_{t}(t,x)=-2(x_{1}-t)$ vanishes at every point of that set; this presentation
+it. Write $s(x):=(x_{1})_{1}\in\mathbb R$ for the first Cartesian
+component of particle $1$, of length dimension $\ell$, and fix a nonzero
+speed $u$ of dimension $\ell\tau^{-1}$. The scalar presentation
+$G(t,x):=(s(x)-ut)^{2}$, of dimension $\ell^{2}$, on
+$O=\mathbb R\times\mathbb R^{3N}$ has the moving zero set $\{s(x)=ut\}$ while
+$G_{t}(t,x)=-2u(s(x)-ut)$ vanishes at every point of that set; this presentation
 violates the rank hypothesis, but the identity can also hold for a
 rank-regular presentation: on
-$O=\bigl((0,1)\cup(2,3)\bigr)\times\mathbb R^{3N}$ the $C^{2}$ map equal to
-$x_{1}$ on $(0,1)\times\mathbb R^{3N}$ and to $1$ on
-$(2,3)\times\mathbb R^{3N}$ has the rank-$1$ zero set
-$\Sigma=(0,1)\times\{x\in\mathbb R^{3N}:x_{1}=0\}$ with $G_{t}=0$ on $\Sigma$,
+$O=\bigl((0,T_{*})\cup(2T_{*},3T_{*})\bigr)\times\mathbb R^{3N}$,
+with $T_{*}>0$ of time dimension, the scalar $C^{2}$ map equal to
+$s(x)$ on $(0,T_{*})\times\mathbb R^{3N}$ and to a fixed
+$L_{*}>0$ of length dimension on $(2T_{*},3T_{*})\times\mathbb R^{3N}$
+has dimension $\ell$ and the rank-$1$ zero set
+$\Sigma=(0,T_{*})\times\{x\in\mathbb R^{3N}:s(x)=0\}$ with $G_{t}=0$ on $\Sigma$,
 yet $\Sigma$ is not of the form $\{(t,x)\in O:x\in N\}$ for any $N$: the point
-$(1/2,0)\in\Sigma$ would force $0\in N$, and then $(5/2,0)\in O$ would lie in
+$(T_{*}/2,0)\in\Sigma$ would force $0\in N$, and then $(5T_{*}/2,0)\in O$ would lie in
 $\Sigma$. Hence the classification is a property of the locus, and the
 identity is used only in the direction proved above.
 

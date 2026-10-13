@@ -5,7 +5,7 @@ title: "A flat time-oriented Lorentzian four-manifold with a closed timelike cur
 status: draft
 origin: session
 domain: mathematics
-dependency_level: 13
+dependency_level: 12
 provenance:
   statement: ai-altered
   proof: ai-generated
@@ -47,10 +47,10 @@ chronological, that is, contains no closed future timelike curve"
 
 1.1 (The witness is a future timelike curve.) By [L1] $\gamma$ is a smooth mapping into $M$ with velocity $\gamma'(s)=dq_{o+se_0}(\partial_0)$; the local isometry identity gives $g(\gamma',\gamma')=\eta(\partial_0,\partial_0)=-1<0$ and $g(\gamma',N)=\eta(\partial_0,\partial_0)=-1<0$, so every tangent is future unit timelike and $\gamma$ is a future timelike curve in the class of [[def-gr-causal-curves-and-reachability]]. [given, L1]
 
-1.2 (The witness is closed and nonconstant on one period.) By [L1]
+2.1 (The witness is closed and nonconstant on one period.) By [L1]
 $\gamma(s+L)=q(o+se_0+Le_0)=q(o+se_0)=\gamma(s)$ because $Le_0\in\Lambda$. It is nonconstant on $[0,L]$: if $\gamma(s)=\gamma(0)$ for some $0<s<L$, then $se_0\in\Lambda$, so $s=nL$ for some nonzero integer $n$, which is impossible for $0<s<L$. Hence $\gamma|_{[0,L]}$ is a nonconstant future timelike curve with equal endpoints. [step 1.1, given, L1]
 
-2.1 (Conclusion.) By step 1.2 and [L2] the model $(M,g,N)$ is not chronological: it contains a closed future timelike curve. Since $M$ is flat and time-oriented by [L1], this refutes the displayed statement. It also shows that a model with a closed timelike curve is not causal, and by [[thm-gr-flat-cylinder-closed-timelike-and-no-cauchy-set]] clause (d) it admits no Cauchy set at all. ∎ [step 1.2, given, L1, L2]
+3.1 (Conclusion.) By step 2.1 and [L2] the model $(M,g,N)$ is not chronological: it contains a closed future timelike curve. Since $M$ is flat and time-oriented by [L1], this refutes the displayed statement. It also shows that a model with a closed timelike curve is not causal, and by [[thm-gr-flat-cylinder-closed-timelike-and-no-cauchy-set]] clause (d) it admits no Cauchy set at all. [step 2.1, given, L1, L2] ∎
 
 ## Remarks
 

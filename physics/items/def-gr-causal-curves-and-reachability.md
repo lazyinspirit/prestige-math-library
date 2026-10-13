@@ -44,16 +44,23 @@ take values in $M$; the physical reading of the model is not part of this
 definition.
 
 **(a) The curve class.** Let $I\subseteq\mathbb R$ be an interval with nonempty
-interior ([[def-interval]]) and let $\gamma:I\to M$ be a map. A **chart
-representative** of $\gamma$ is the map $x\circ\gamma$ of a smooth chart
-$(U,x)$ of $M$ ([[def-smooth-manifold]],
+interior ([[def-interval]]) and let $\gamma:I\to M$ be a continuous map,
+where $I$ has its relative topology. A **chart representative** on a parameter
+neighborhood $J\subseteq I$ is $x\circ\gamma|_J$, where $(U,x)$ is a smooth
+chart and $\gamma(J)\subseteq U$ ([[def-smooth-manifold]],
 [[def-c-r-and-smooth-maps-between-smooth-manifolds]]). The map $\gamma$ is
-**locally absolutely continuous** when for every compact subinterval
+**locally absolutely continuous** when for each $t\in I$ there are
+$\delta>0$ and a chart $(U,x)$ such that
+$\gamma(I\cap(t-\delta,t+\delta))\subseteq U$ and every coordinate of
+$x\circ\gamma$ is absolutely continuous on every compact subinterval of
+$I\cap(t-\delta,t+\delta)$ in the sense of
+[[def-absolutely-continuous-function]]. This includes one-sided neighborhoods
+at included endpoints. Equivalently, for every compact subinterval
 $[a,b]\subseteq I$ and every chart $(U,x)$ with
-$\gamma([a,b])\subseteq U$, the component map $x\circ\gamma$ is absolutely
-continuous on $[a,b]$ in the sense of [[def-absolutely-continuous-function]].
-This class does not depend on the chart or on the smooth atlas; that is proved
-in [[lem-gr-causal-curve-calculus]] clause (a).
+$\gamma([a,b])\subseteq U$, the coordinates of $x\circ\gamma$ are
+absolutely continuous on $[a,b]$. The equivalence and independence of the
+chart and smooth atlas are proved in [[lem-gr-causal-curve-calculus]]
+clause (a); continuity is part of both formulations.
 
 **(b) Velocity and causal curves.** Let $\gamma$ be locally absolutely
 continuous and let $t$ be an interior point of $I$ at which some — equivalently
@@ -73,8 +80,9 @@ chronological) is defined in the same way with "future causal" replaced by
 "future timelike". Past-directed versions are defined with $g_p(v,N_p)>0$.
 Since a future causal nonzero vector is nonzero by definition, the velocity is
 required to be nonzero at almost every parameter value; in particular no
-nondegenerate subinterval of $I$ can be mapped to a single point
-([[lem-gr-causal-curve-calculus]] clause (c)).
+nondegenerate subinterval of $I$ can be mapped to a single point: a
+constant chart representative has derivative zero everywhere in its interior,
+contradicting the full-measure nonzero-velocity requirement.
 
 **(c) Reachability.** For events $p,q\in M$ define:
 
@@ -89,7 +97,7 @@ The **causal future** and **chronological future** of a subset $S\subseteq M$
 are
 $$J^+(S):=\bigcup_{p\in S}J^+(p),\qquad I^+(S):=\bigcup_{p\in S}I^+(p),$$
 where $J^+(p):=\{q\in M:p\le q\}$ and $I^+(p):=\{q\in M:p\ll q\}$; past
-versions are $J^-(S):=\{p:\exists q\in S,\ p\in J^+(q)\}$ and
+versions are $J^-(S):=\{p:\exists q\in S,\ q\in J^+(p)\}$ and
 $I^-(S):=\{p:\exists q\in S,\ p\ll q\}$. By the displayed definition
 $p\in J^+(p)$ for every $p$. Whether $p\in I^+(p)$ is a property of the
 model, not a convention: $p\ll p$ holds exactly when there are $a<b$ and a

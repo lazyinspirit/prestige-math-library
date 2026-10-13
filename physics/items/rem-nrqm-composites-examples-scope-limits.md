@@ -10,6 +10,8 @@ origin: session
 dependency_level: 16
 deps:
   [
+    def-axiom-of-choice,
+    def-countable-choice,
     def-nrqm-composites-marker-model-and-fringe-visibility,
     def-nrqm-composites-separable-and-entangled-states,
     def-nrqm-observables-framework-observable-and-outcome-law,
@@ -20,6 +22,8 @@ deps:
     texp-nrqm-composites-singlet-correlations
   ]
 dependency_roles:
+  def-axiom-of-choice: formulation-prerequisite
+  def-countable-choice: formulation-prerequisite
   def-nrqm-composites-marker-model-and-fringe-visibility: formulation-prerequisite
   def-nrqm-composites-separable-and-entangled-states: formulation-prerequisite
   def-nrqm-observables-framework-observable-and-outcome-law: formulation-prerequisite
@@ -63,7 +67,10 @@ verification:
   and the comparison of
   [[ex-nrqm-composites-improper-versus-proper-mixtures]] between the singlet's
   reduced preparation and a fair random mixture of factor preparations that
-  assigns the same density operator.
+  assigns the same density operator. These computations retain the choice
+  hypotheses stated by their suppliers, Countable Choice and (where a cited
+  spectral PVM construction requires it) Choice
+  ([[def-countable-choice]], [[def-axiom-of-choice]]).
 - **What the page does not contain.** No experiment, no reported count, no
   calibration, no efficiency, no sampling model, no statistical test and no
   measured correlation appears on the page; no item is a report of an observed

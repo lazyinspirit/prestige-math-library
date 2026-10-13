@@ -116,12 +116,5 @@ separate model assignment outside this lemma.
 
 ## Remarks
 
-- **Choice hypotheses.** Both cited suppliers (the multiplication spectral
-  measure and the PVM-integral lemma) are stated with the Axioms of Countable
-  and Dependent Choice; the Axiom of Choice enters only through those citations
-  and is carried explicitly. The nullity computations use Countable Choice.
-- **What fails for sharp modes.** Step 1.2 says that the sharp-mode idealisation
-  of the radiation model is not a state vector of the sector: a normalisable
-  one-photon vector never has an exact frequency or an exact momentum component.
-  The plane-wave labels $k$ are parameters of the spectral representation, not
-  normalisable states.
+- **Choice hypotheses.** The real-multiplier and multiplication spectral-measure suppliers assume Countable Choice and the Axiom of Choice; the unbounded-PVM- integral supplier assumes Countable Choice. The item carries Countable Choice and Choice. The cited suppliers do not require Dependent Choice, and the nullity computations use Countable Choice.
+- **What fails for sharp modes.** Step 1.2 says that the sharp-mode idealisation of the radiation model is not a state vector of the sector: a normalisable one-photon vector never has an exact frequency or an exact momentum component. The plane-wave labels $k$ are parameters of the spectral representation, not normalisable states.

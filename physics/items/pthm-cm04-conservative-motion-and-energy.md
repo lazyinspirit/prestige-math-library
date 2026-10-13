@@ -1,7 +1,7 @@
 ---
 id: pthm-cm04-conservative-motion-and-energy
 kind: physics-theorem
-title: "Existence, uniqueness and conservation of energy for a one-dimensional conservative model: phase curves lie in energy level sets and the velocity is determined by the position"
+title: "Existence, uniqueness and conservation of energy for a one-dimensional conservative model: phase curves lie in energy level sets and the velocity is determined by the position and energy up to sign"
 status: draft
 origin: session
 domain: physics
@@ -30,7 +30,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "The basic dynamical content of a conservative one-dimensional model: every datum has exactly one maximal motion; the mechanical energy k x-dot^2/2 + U(x) (written m x-dot^2/2 + U(x)) is constant along every motion; a motion of initial energy E_0 keeps its position in the sublevel set {U <= E_0}, and where U is strictly below E_0 its velocity is one of the two square-root values determined by the position; every non-turning phase point of the motion lies on the energy level set of E_0; and the constant motions are exactly the rest motions at equilibria. The result is a conditional deduction from the declared potential presentation; it asserts no periodicity, no boundedness of the motion, no asymptotic behaviour and no measured value."
+physical_scope: "The basic dynamical content of a conservative one-dimensional model: every datum has exactly one maximal motion; the mechanical energy m x-dot^2/2 + U(x) is constant along every motion; a motion of initial energy E_0 keeps its position in the sublevel set {U <= E_0}, and where U is strictly below E_0 its velocity is one of the two square-root values determined by the position and E_0; every non-turning phase point of the motion lies on the energy level set of E_0; and the constant motions are exactly the rest motions at equilibria. The result is a conditional deduction from the declared potential presentation; it asserts no periodicity, no boundedness of the motion, no asymptotic behaviour and no measured value."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Section 1.2.4, Example 1, printed page 5 (PDF page 11): the simple harmonic oscillator has F(x) = -k x from the potential V = k x^2/2 and its energy E = m xdot^2/2 + k x^2/2 is conserved"
@@ -127,8 +127,8 @@ with derivative $U'(x(t))\,x'(t)$.
 zero derivative at every interior point is constant
 ([[cor-zero-derivative-implies-constant]], [[def-interval]]).
 
-[L6] Square roots: for $a\ge0$ the equation $y^{2}=a$ has exactly the two
-solutions $y=\pm\sqrt a$ ([[thm-of-square-roots]]).
+[L6] Square roots: for $a\ge0$ all solutions of $y^{2}=a$ are
+$y=\pm\sqrt a$, and those two values are distinct exactly when $a>0$ ([[thm-of-square-roots]]).
 
 ## Proof
 

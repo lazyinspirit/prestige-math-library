@@ -49,9 +49,7 @@ single-vertex emission coefficient $\gamma_{b}(t)$ of
 [[pthm-nrqm-light-matter-first-order-emission-and-absorption-coefficients]]
 clause (a). Assume the Axioms of Countable Choice and of Choice
 ([[def-countable-choice]], [[def-axiom-of-choice]]) and the density hypothesis:
-$\nu_{b}=J_{b}\lambda$ for some $J_{b}\in L^{1}(\lambda)$ with $J_{b}=0$
-$\lambda$-almost everywhere on $\mathbb R\setminus(0,\Lambda]$, continuous at
-$\Delta$. Then:
+$\nu_b=J_b\lambda$ for a declared Lebesgue-measurable representative $J_b:\mathbb R\to[0,\infty)$ of an $L^1(\lambda)$ class, with $J_b=0$ $\lambda$-almost everywhere on $\mathbb R\setminus(0,\Lambda]$, continuous at $\Delta$. All point values below refer to this representative; continuity means that for every $\epsilon>0$ there is $\delta>0$ such that $|J_b(E)-J_b(\Delta)|<\epsilon$ whenever $|E-\Delta|<\delta$. Two representatives of the same class that are continuous at $\Delta$ have the same value there: otherwise continuity of their difference gives a nonzero difference throughout a neighborhood of positive measure, contradicting equality almost everywhere. Then:
 
 (a) (resonant limit) if $0<\Delta<\Lambda$ and $J_{b}(\Delta)>0$, then
 $$\lim_{t\to\infty}\frac{\gamma_{b}(t)}{t} =\frac{2\pi\eta_{0}^{2}}{\hbar}\,J_{b}(\Delta);$$
@@ -83,7 +81,7 @@ decay constant.
 
 [F1] **Coefficient identity.** For every $t>0$, $\gamma_{b}(t)=\eta_{0}^{2}t\int_{\mathbb R}K_{t}(E-\Delta)d\nu_{b}(E)$, and $\|A_{b}(\cdot,t)\|_{\mathfrak h}^{2}=\gamma_{b}(t)$ ([[pthm-nrqm-light-matter-first-order-emission-and-absorption-coefficients]] clause (a), [[lem-nrqm-light-matter-first-order-photon-energy-law]] clause (a)).
 
-[F2] **Golden-rule limit.** For $A_{b}$ and $\nu_{b}$ as in the model, if $\nu_{b}=J_{b}\lambda$ with $J_{b}\in L^{1}(\lambda)$, $J_{b}=0$ $\lambda$-a.e. on $\mathbb R\setminus(0,\Lambda]$ and $J_{b}$ continuous at $\Delta$, then $\lim_{t\to\infty}\frac{1}{t}\|A_{b}(\cdot,t)\|_{\mathfrak h}^{2}=\frac{2\pi\eta_{0}^{2}}{\hbar}J_{b}(\Delta)$ when $0<\Delta<\Lambda$, and the same limit equals $0$ when $\Delta>\Lambda$; the boundary case $\Delta=\Lambda$ is excluded ([[thm-nrqm-fock-and-equilibrium-golden-rule-coefficient-approximate-identity]] clause (iii)).
+[F2] **Golden-rule limit.** For $A_{b}$ and $\nu_{b}$ as in the model, if $\nu_{b}=J_{b}\lambda$ with $J_b:\mathbb R\to[0,\infty)$ the declared measurable integrable representative, $J_{b}=0$ $\lambda$-a.e. on $\mathbb R\setminus(0,\Lambda]$ and $J_{b}$ continuous at $\Delta$, then $\lim_{t\to\infty}\frac{1}{t}\|A_{b}(\cdot,t)\|_{\mathfrak h}^{2}=\frac{2\pi\eta_{0}^{2}}{\hbar}J_{b}(\Delta)$ when $0<\Delta<\Lambda$, and the same limit equals $0$ when $\Delta>\Lambda$; the boundary case $\Delta=\Lambda$ is excluded ([[thm-nrqm-fock-and-equilibrium-golden-rule-coefficient-approximate-identity]] clause (iii)).
 
 [F3] **Density and units.** A measure with density $J_{b}$ is given by $\nu_{b}(B)=\int_{B}J_{b}\,d\lambda$; energies and times are read in joules and seconds as in [[def-nrqm-framework-quantities-and-units]], and the interaction convention of [[def-nrqm-light-matter-framework-finite-level-coupled-model]] clause (c) fixes the units of $\eta_{0}$ and of the $g_{j}$ ([[def-measure-with-density]], [[def-l-p-space-as-a-quotient-by-null-functions]]).
 

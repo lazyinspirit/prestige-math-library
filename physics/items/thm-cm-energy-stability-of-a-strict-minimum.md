@@ -6,7 +6,7 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 2
-deps: [def-cm-mechanical-vector-field-and-energy-in-a-chart, lem-cm-energy-conservation-for-the-mechanical-system, def-cm-equilibrium-and-lyapunov-stability, thm-cm-compact-continuation-for-locally-lipschitz-odes, def-locally-lipschitz-in-the-state-variable, lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets, thm-existence-and-uniqueness-of-a-maximal-ode-solution, def-maximal-ode-solution, cor-inverse-matrix-by-adjugate, thm-continuous-partial-derivatives-imply-total-differentiability, def-metric-ball, thm-heine-borel-rn, thm-extreme-value-metric, thm-additivity-over-subintervals, def-euclidean-inner-product, thm-intermediate-value]
+deps: [def-cm-mechanical-vector-field-and-energy-in-a-chart, lem-cm-energy-conservation-for-the-mechanical-system, def-cm-equilibrium-and-lyapunov-stability, thm-cm-compact-continuation-for-locally-lipschitz-odes, def-locally-lipschitz-in-the-state-variable, lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets, thm-existence-and-uniqueness-of-a-maximal-ode-solution, def-maximal-ode-solution, cor-inverse-matrix-by-adjugate, thm-continuous-partial-derivatives-imply-total-differentiability, def-metric-ball, thm-heine-borel-rn, thm-extreme-value-metric, thm-additivity-over-subintervals, def-euclidean-inner-product, thm-intermediate-value, thm-cauchy-schwarz-and-the-euclidean-norm]
 dependency_roles:
   def-cm-mechanical-vector-field-and-energy-in-a-chart: mathematical-premise
   lem-cm-energy-conservation-for-the-mechanical-system: mathematical-premise
@@ -24,6 +24,7 @@ dependency_roles:
   thm-additivity-over-subintervals: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
   thm-intermediate-value: mathematical-premise
+  thm-cauchy-schwarz-and-the-euclidean-norm: mathematical-premise
 provenance:
   statement: ai-altered
   proof: ai-altered
@@ -60,7 +61,7 @@ No asymptotic stability is asserted.
 
 [F3] Compact continuation: an autonomous solution trapped in a compact subset of the open state domain near a finite endpoint extends past that endpoint ([[thm-cm-compact-continuation-for-locally-lipschitz-odes]]).
 
-[F4] Compactness and extrema: closed bounded subsets of $\mathbb R^{2n}$ are compact ([[thm-heine-borel-rn]]) and a continuous real function on a nonempty compact set attains a minimum ([[thm-extreme-value-metric]]); the Euclidean norm is a norm, so the triangle inequality and the reverse triangle inequality hold ([[def-euclidean-inner-product]]).
+[F4] Compactness and extrema: closed bounded subsets of $\mathbb R^{2n}$ are compact ([[thm-heine-borel-rn]]) and a continuous real function on a nonempty compact set attains a minimum ([[thm-extreme-value-metric]]); the Euclidean norm is a norm, so the triangle inequality and the reverse triangle inequality hold ([[def-euclidean-inner-product]], [[thm-cauchy-schwarz-and-the-euclidean-norm]]); the reverse inequality follows by applying the triangle inequality in both orders.
 
 ## Proof
 
@@ -78,6 +79,6 @@ No asymptotic stability is asserted.
 
 ## Remarks
 
-- The proof uses exact energy conservation, so it can certify stability but not attraction: a conservative system whose energy is constant cannot have the equilibrium asymptotically stable (the level sets are invariant). The theorem therefore makes no asymptotic-stability claim, in contrast with [[thm-cm-exponential-stability-by-a-lyapunov-quadratic-form]], which requires dissipation or a strict Lyapunov decrease.
+- The proof uses exact energy conservation to establish stability, but it does not prove attraction. In this strict-minimum setting, nearby non-equilibrium initial data have energy greater than $E(q_0,0)$; conservation therefore prevents their solutions from converging to $(q_0,0)$. The theorem makes no asymptotic-stability claim, in contrast with [[thm-cm-exponential-stability-by-a-lyapunov-quadratic-form]], which uses a strict Lyapunov decrease.
 
 - Neither strict positivity of the Hessian nor a Taylor expansion is used: a degenerate strict minimum such as $U(q)=\|q\|_2^4$ is covered. The strictness hypothesis on the ball is essential for the positivity of $E-E_0$ on the sphere; a non-strict minimum with a flat direction, such as $U\equiv\mathrm{const}$ near $q_0$, would give $E-E_0=0$ at points of the sphere with $v=0$ and the argument would not apply.

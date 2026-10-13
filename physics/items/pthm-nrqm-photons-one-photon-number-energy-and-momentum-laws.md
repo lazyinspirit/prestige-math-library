@@ -24,7 +24,7 @@ deps:
     thm-spectral-theorem-for-unbounded-self-adjoint-operators,
     thm-monotone-convergence-for-the-integral,
     lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues,
-    def-countable-choice,
+    def-countable-choice, def-dependent-choice,
     def-axiom-of-choice
   ]
 dependency_roles:
@@ -46,6 +46,7 @@ dependency_roles:
   lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues: mathematical-premise
   def-countable-choice: mathematical-premise
   def-axiom-of-choice: mathematical-premise
+  def-dependent-choice: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -89,9 +90,11 @@ the radiation sector definition
 [[def-nrqm-photons-framework-radiation-sector-and-quantum-assignments]], in
 the state vocabulary of [[def-nrqm-state-geometry-framework-state-space]] and
 the observable vocabulary of
-[[def-nrqm-observables-framework-observable-and-outcome-law]]. Assume the
-Axioms of Countable Choice and of Choice, the choice hypotheses of the cited
-operator and spectral items ([[def-countable-choice]], [[def-axiom-of-choice]]).
+[[def-nrqm-observables-framework-observable-and-outcome-law]]. Assume Countable
+Choice, Dependent Choice and Choice ([[def-countable-choice]],
+[[def-dependent-choice]], [[def-axiom-of-choice]]), including the hypotheses
+inherited from the radiation postulate and the cited operator and spectral
+items.
 Let $f\in\mathfrak h$ be a unit one-photon wave-packet vector. Under the
 $d^{3}k$ normalization of clause (b) of
 [[def-nrqm-photons-framework-radiation-sector-and-quantum-assignments]], its
@@ -173,14 +176,5 @@ This is proved locally in [[thm-nrqm-fock-and-equilibrium-transverse-continuum-f
 
 ## Remarks
 
-- **Reading the mean.** The energy mean $\hbar c\int|k|\|f\|^{2}$ is the
-  first moment of the transverse momentum density weighted by $\hbar c$; it is
-  a preparation mean of the model, not a measured energy. It exists whenever
-  $\int|k|\|f\|^{2}d^{3}k<\infty$, which is weaker than
-  $f\in D(\varepsilon_{\mathfrak h})$; on that operator domain it also equals
-  $\langle\varepsilon_{\mathfrak h}f,f\rangle$.
-- **Why "photon energy $\hbar\omega$" remains meaningful.** For a model
-  preparation concentrated near a wavevector $k_{0}$, the energy law is
-  concentrated near $\hbar c|k_{0}|$ in the sense of the push-forward measure;
-  the item claims no limit statement and no localisation, and the exact value
-  is never attained by a normalisable vector.
+- **Reading the mean.** The energy mean $\hbar c\int|k|\|f\|^{2}$ is the first moment of the transverse momentum density weighted by $\hbar c$; it is a preparation mean of the model, not a measured energy. It exists whenever $\int|k|\|f\|^{2}d^{3}k<\infty$, which is weaker than $f\in D(\varepsilon_{\mathfrak h})$; on that operator domain it also equals $\langle\varepsilon_{\mathfrak h}f,f\rangle$.
+- **Why "photon energy $\hbar\omega$" remains meaningful.** For a model preparation concentrated near a wavevector $k_{0}$, the energy law is concentrated near $\hbar c|k_{0}|$ in the sense of the push-forward measure; the item claims no limit statement and no localisation, and the exact value is never attained by a normalisable vector.

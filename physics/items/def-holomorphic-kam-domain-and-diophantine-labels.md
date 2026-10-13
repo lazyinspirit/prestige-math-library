@@ -6,10 +6,11 @@ status: draft
 origin: pipeline
 domain: mathematics
 dependency_level: 3
-deps: [def-separately-holomorphic-function, thm-power-series-expansion-in-several-complex-variables, def-real-analytic-germ-in-several-variables, def-balls-and-polydiscs-in-complex-euclidean-space, rem-complex-euclidean-space-dictionary, def-complex-differentiability-holomorphic-and-entire, def-quotient-topology, def-product-topology, def-continuous-map-top, def-integers, def-metric-ball, def-metric-topology, def-ck-euclidean-maps-and-diffeomorphisms, def-directional-and-partial-derivatives, def-jacobian-matrix-and-gradient, def-cm-phase-domain-and-standard-symplectic-two-form, prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart, def-sections-and-iterated-riemann-integrals, thm-riemann-fubini-on-product-rectangles, def-countable-choice]
+deps: [def-separately-holomorphic-function, thm-power-series-expansion-in-several-complex-variables, thm-power-series-define-holomorphic-functions-in-several-variables, def-real-analytic-germ-in-several-variables, def-balls-and-polydiscs-in-complex-euclidean-space, rem-complex-euclidean-space-dictionary, def-complex-differentiability-holomorphic-and-entire, def-quotient-topology, def-product-topology, def-continuous-map-top, def-integers, def-metric-ball, def-metric-topology, def-ck-euclidean-maps-and-diffeomorphisms, def-directional-and-partial-derivatives, def-jacobian-matrix-and-gradient, def-cm-phase-domain-and-standard-symplectic-two-form, prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart, def-sections-and-iterated-riemann-integrals, thm-riemann-fubini-on-product-rectangles, def-countable-choice]
 dependency_roles:
   def-separately-holomorphic-function: mathematical-premise
   thm-power-series-expansion-in-several-complex-variables: mathematical-premise
+  thm-power-series-define-holomorphic-functions-in-several-variables: mathematical-premise
   def-real-analytic-germ-in-several-variables: mathematical-premise
   def-balls-and-polydiscs-in-complex-euclidean-space: mathematical-premise
   rem-complex-euclidean-space-dictionary: mathematical-premise
@@ -45,7 +46,10 @@ verification:
 
 Throughout, fix an integer $n\ge1$. The space $\mathbb R^n$ is read through
 [[rem-complex-euclidean-space-dictionary]] and $\mathbb C^n$ carries the polydisc
-geometry of [[def-balls-and-polydiscs-in-complex-euclidean-space]]. All norms
+geometry of [[def-balls-and-polydiscs-in-complex-euclidean-space]]. We relabel
+the suppliers' coordinates indexed by $0,\ldots,m-1$ as $z_i:=z(i-1)$ for
+$1\le i\le m$; every coordinate tuple and derivative below uses this relabelling.
+All norms
 below are supremum norms: for $z\in\mathbb C^m$,
 
 $$|z|_\infty:=\max_{1\le i\le m}|z_i|,\qquad |z|_1:=\sum_{i=1}^m|z_i| .$$
@@ -94,7 +98,7 @@ $$D_{r,s,h}(\Omega):=B_r\times S_s\times O_h(\Omega)\subseteq\mathbb C^{2n}\time
 and $D_{r,s}(\Omega):=B_r\times S_s$. In the KAM construction the parameter set
 is a **frequency label set** $\Omega_\alpha\subseteq\mathbb R^n$ (defined below)
 and the relevant parameter neighbourhoods are $O_h(\Omega_\alpha)$; the
-temperature of a step is measured by the three widths $r,s,h$ and an angular
+scale of a step is measured by the three widths $r,s,h$ and an angular
 margin $\sigma>0$.
 
 **Holomorphic data and norms.** A function $g:D_{r,s,h}(\Omega)\to\mathbb C$
@@ -106,14 +110,31 @@ holomorphic in each of the $2n+n$ complex variables
 every point by an absolutely convergent power series in the $(I,\vartheta,\nu)$
 variables. The **sup-norms** are
 
-$$|g|_{r,s}:=|g|_{r,s,0}:=\sup_{D_{r,s}(\Omega)}|g|,\qquad |g|_{r,s,h}:=|g|_{r,s,h}(\Omega):=\sup_{D_{r,s,h}(\Omega)}|g|\in[0,+\infty].$$
+$$|g|_{r,s}:=\sup_{B_r\times S_s}|g|,\qquad |g|_{r,s,h}:=|g|_{r,s,h}(\Omega):=\sup_{D_{r,s,h}(\Omega)}|g|\in[0,+\infty].$$
+
+The first norm applies to a function of $(I,\vartheta)$ alone; the second
+applies to a function of $(I,\vartheta,\nu)$ on its declared product domain.
+They are distinct notations: $O_0(\Omega)=\varnothing$, so the three-width
+norm at $h=0$ is $0$, not the phase-only norm.
+
+A phase function $g:B_r\times S_s\to\mathbb C$ is **$2\pi$-periodic in the
+angles** if $g(I,\vartheta+2\pi k)=g(I,\vartheta)$ for every
+$I\in B_r$, $\vartheta\in S_s$ and $k\in\mathbb Z^n$. For a parameter-dependent
+function on $D_{r,s,h}(\Omega)$ this means
+$g(I,\vartheta+2\pi k,\nu)=g(I,\vartheta,\nu)$ for every point
+$(I,\vartheta,\nu)$ of that domain and every $k\in\mathbb Z^n$.
+Real angular translations preserve $S_s$, so these equalities are defined on
+the entire declared domain.
 
 Where no parameter occurs we write $g\in\mathcal H_{r,s}$ if $g$ is holomorphic
-on $D_{r,s}(\Omega)$ for some fixed open $\Omega$ and $|g|_{r,s}<+\infty$; and
-$g\in\mathcal H_{r,s,h}$ if $g$ is holomorphic on $D_{r,s,h}(\Omega)$ with
-$|g|_{r,s,h}<+\infty$. Functions of $\vartheta$ alone are read through the
-$2\pi$-periodicity of the $\vartheta$-variables, so that all integrals and
-norms below are well defined on $\mathbb T^n$.
+on $B_r\times S_s$, $2\pi$-periodic in the angles and $|g|_{r,s}<+\infty$; and
+$g\in\mathcal H_{r,s,h}$ if $g$ is holomorphic on $D_{r,s,h}(\Omega)$,
+$2\pi$-periodic in the angles and $|g|_{r,s,h}<+\infty$. Functions of
+$\vartheta$ alone use the same periodicity condition with $I$ omitted.
+Thus at fixed non-angle variables the restriction to real angles factors
+through $\mathbb T^n$; the strip norms are suprema over complex angular
+representatives and the integrals below are integrals of the descended
+real-angle functions.
 
 **Fourier coefficients, mean and cutoff.** Let $g\in\mathcal H_{r,s}$. For
 $k\in\mathbb Z^n$ and $I\in B_r$ the **Fourier coefficient** is the iterated
@@ -152,58 +173,108 @@ The parameter neighbourhoods used below are $O_h(\Omega_{\alpha,\tau})$.
 
 **Hamiltonians, canonical form and Poisson bracket.** A **Hamiltonian datum**
 on $D_{r,s,h}(\Omega)$ is a holomorphic $H:D_{r,s,h}(\Omega)\to\mathbb C$ which
-is real-valued on real points; more generally we consider families
+is $2\pi$-periodic in the angles and real-valued on real points; in particular
+we consider families
 $H(I,\vartheta;\nu)=e(\nu)+\nu\cdot I+P(I,\vartheta,\nu)$ where $e$ is
 holomorphic on $O_h(\Omega)$ and real on real points, and
-$P\in\mathcal H_{r,s,h}$ is real on real points. Pair the coordinates as
+$P\in\mathcal H_{r,s,h}$ is real on real points. On the real phase slice pair the coordinates as
 $q=\vartheta$, $p=I$ in the phase-domain notation of
-[[def-cm-phase-domain-and-standard-symplectic-two-form]]; the **standard
-two-form** in these coordinates is
+[[def-cm-phase-domain-and-standard-symplectic-two-form]]. On the complex phase
+domain $B_r\times S_s$, identify phase tangent vectors in angle-first order
+with $v=(v_\vartheta,v_I)\in\mathbb C^{2n}$, and define the **standard complex
+two-form** to be the constant alternating complex bilinear form
 
-$$\omega=\sum_{i=1}^n d\vartheta_i\wedge dI_i,$$
+$$\omega=\sum_{i=1}^n d\vartheta_i\wedge dI_i,\qquad \omega(v,w):=\sum_{i=1}^n\bigl((v_\vartheta)_i(w_I)_i-(v_I)_i(w_\vartheta)_i\bigr).$$
 
-and the **Hamiltonian vector field** of a $C^1$ Hamiltonian $H$ is, by
-[[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]] with
-$(q,p)=(\vartheta,I)$,
+Here $d\vartheta_i(v)=(v_\vartheta)_i$, $dI_i(v)=(v_I)_i$, and the wedge denotes
+the alternating product displayed above. No complex conjugation occurs.
+Fix any parameter $\lambda\in O_h(\Omega)$, real or complex. All derivatives
+of $H(\,\cdot\,;\lambda)$ below are complex derivatives in the phase variables
+alone. The power-series coefficient bounds of
+[[thm-power-series-expansion-in-several-complex-variables]] meet the hypotheses
+of [[thm-power-series-define-holomorphic-functions-in-several-variables]], so
+these derivatives exist, are holomorphic, and give the complex linear phase
+differential
 
-$$X_H=(H_I,-H_\vartheta),\qquad \theta'=H_I,\quad I'=-H_\vartheta\ \ \text{(Hamilton's equations)},$$
+$$d_{\mathrm{ph}}H(v):=H_\vartheta\cdot v_\vartheta+H_I\cdot v_I.$$
 
-characterised by $\iota_{X_H}\omega=dH$; the **Poisson bracket** is
+The **Hamiltonian vector field** is the holomorphic phase map
 
-$$\{f,g\}=f_\vartheta\cdot g_I-f_I\cdot g_\vartheta,\qquad \{f,g\}=\nabla f^{\mathsf T}J\nabla g\ \ \text{in the notation of that item}.$$
+$$X_H=(H_I,-H_\vartheta)\quad\text{in }(\vartheta,I)\text{ order},\qquad \theta'=H_I,\quad I'=-H_\vartheta\ \ \text{(Hamilton's equations)},$$
+
+These are the component equations for a $C^1$ curve
+$\gamma:J\to S_s\times B_r$ on a nonempty open real interval $J$, in angle-first
+order, with $\gamma'(t)=X_H(\gamma(t);\lambda)$ for every $t\in J$;
+such a curve is called an **integral curve** at fixed parameter $\lambda$.
+It is characterised by $\iota_{X_H}\omega=d_{\mathrm{ph}}H$, meaning
+$\omega(X_H,v)=d_{\mathrm{ph}}H(v)$ for every phase vector $v$: substitution
+gives $H_I\cdot v_I+H_\vartheta\cdot v_\vartheta$, and comparison of the
+coefficients of $v_I,v_\vartheta$ determines $X_H$ uniquely.
+For holomorphic phase functions $f,g$ on the same domain, with parameters
+held fixed, define their **Poisson bracket** by
+
+$$\{f,g\}:=\omega(X_f,X_g)=f_\vartheta\cdot g_I-f_I\cdot g_\vartheta=\nabla_{\mathrm{ph}}f^{\mathsf T}J\nabla_{\mathrm{ph}}g,$$
+
+where $\nabla_{\mathrm{ph}}f=(f_\vartheta,f_I)$ and
+$J=\begin{pmatrix}0&I_n\\-I_n&0\end{pmatrix}$ in angle-first order. The
+equalities follow by substitution into the displayed bilinear form.
+For real $\lambda$, the real-valued restriction of a Hamiltonian datum to
+$(B_r\cap\mathbb R^n)\times\mathbb R^n$ is smooth by the same power-series
+suppliers, hence satisfies the real $C^2$ hypotheses of
+[[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]]. That
+supplier identifies the restricted field with its real Hamiltonian field.
+Holomorphic $f,g$ that are real on real points likewise have smooth real
+restrictions, to which that supplier's bracket formula applies.
+More generally, for $C^1$ functions $H,f,g:U\to\mathbb R$ on an open real
+phase domain $U$ we use the same
+coordinate formulas with real partial derivatives: they define continuous
+fields and brackets, and the same coefficient comparison gives
+$\iota_{X_H}\omega=dH$ without invoking the $C^2$ supplier.
 
 In particular $\{f,e+\nu\cdot I\}=\nu\cdot f_\vartheta$ for every
-$C^1$ function $f$.
+holomorphic phase function $f$, and for every real $C^1$ phase function $f$
+when $e,\nu$ and the phase variables are real.
 
 **Angular parametrisations and Lagrangian images.** Fix a Hamiltonian datum
-$H$. An **angular parametrisation** is a map $\psi=(\psi_I,\psi_\vartheta)$
+$H$. For parameter-dependent data, fix a value $\lambda\in O_h(\Omega)$
+and use $H$ below for the phase function $(I,\vartheta)\mapsto H(I,\vartheta;\lambda)$;
+its vector field differentiates only the phase variables. An **angular parametrisation** is a map $\psi=(\psi_I,\psi_\vartheta)$
 with $\psi_I:\mathbb R^n\to\mathbb C^n$ $2\pi$-periodic and
 $\psi_\vartheta:\mathbb R^n\to\mathbb C^n$ satisfying
 $\psi_\vartheta(\vartheta+2\pi k)=\psi_\vartheta(\vartheta)+2\pi k$ for all
-$k\in\mathbb Z^n$, so that
-$\pi\circ\psi_\vartheta=\pi\circ(\psi_\vartheta\big|_{\mathbb R^n})$ descends to
-$\mathbb T^n$; it is **holomorphic on the strip $S_s$** when both components
+$k\in\mathbb Z^n$. Define the complex angular quotient
+$\mathbb T^n_{\mathbb C}:=\mathbb C^n/(2\pi\mathbb Z)^n$ by the relation
+$z\sim z'$ if $z-z'\in(2\pi\mathbb Z)^n$, with its quotient
+topology and projection $\pi_{\mathbb C}:\mathbb C^n\to\mathbb T^n_{\mathbb C}$.
+Then $\vartheta\mapsto(\psi_I(\vartheta),\pi_{\mathbb C}(\psi_\vartheta(\vartheta)))$
+is periodic and induces a map
+$\widehat\psi:\mathbb T^n\to\mathbb C^n\times\mathbb T^n_{\mathbb C}$.
+When both components are real-valued this instead induces
+$\widehat\psi:\mathbb T^n\to\mathbb R^n\times\mathbb T^n$ using $\pi$ on
+the angular component. The parametrisation is **holomorphic on the strip $S_s$** when both components
 extend holomorphically to $S_s$, and **real analytic** when in addition
 $\psi(\mathbb R^n)\subseteq\mathbb R^{2n}$ and the components are real analytic
-in the real variables. It is **faithful** if
+in the real variables. In the action-first order of $\psi$, the same field is
+$X_H=(-H_\vartheta,H_I)$. It is **faithful** if
 $\psi(\vartheta)=\psi(\vartheta')$ implies
-$\vartheta-\vartheta'\in(2\pi\mathbb Z)^n$, and an **immersion** if
+$\vartheta-\vartheta'\in(2\pi\mathbb Z)^n$, and an **immersion** if it is $C^1$ and
 $D\psi(\vartheta)$ has rank $n$ for every $\vartheta\in\mathbb R^n$; a tuple
 that is both is an **embedded torus parametrisation**. Its image is
-**Lagrangian** (with respect to $\omega$) if
+**Lagrangian** (with respect to $\omega$) if $\psi$ is $C^1$ and
 $\psi^*\omega=\sum_{i=1}^n d(\psi_\vartheta)_i\wedge d(\psi_I)_i=0$ as a
 two-form on the parameter space of the representative, and **invariant with
-frequency $\nu$** if
+frequency $\nu$** if $\psi$ is $C^1$, lies in the domain of $X_H$, and
 
 $$X_H(\psi(\vartheta))=\sum_{j=1}^n\nu_j\,\partial_{\vartheta_j}\psi(\vartheta) \qquad\text{for all real }\vartheta .$$
 
 ## Remarks
 
 - **Conventions.** The torus is the $2\pi$-periodic one, so $e^{ik\cdot\vartheta}$
-  is $2\pi$-periodic; the symplectic form, Hamiltonian field and bracket are
-  exactly the $\vartheta,I$ coordinate model of
+  is $2\pi$-periodic; the real restrictions of the symplectic form, Hamiltonian
+  field and bracket are exactly the $\vartheta,I$ coordinate model of
   [[def-cm-phase-domain-and-standard-symplectic-two-form]] and
-  [[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]]. The
+  [[prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart]] for real
+  $C^2$ data. The complex bilinear extension is defined and checked above. The
   dimension hypothesis $n\ge2$ used by the KAM theorems below is imposed there,
   not here.
 - **Axiom of Countable Choice.** The measure-theoretic frequency-set estimates in this batch use the Axiom of Countable Choice; analytic suppliers are used with their exact stated hypotheses, and no extra choice is required for the determined Newton iteration. The assumption is carried by the positive-measure theorem and its consumers ([[def-countable-choice]]).

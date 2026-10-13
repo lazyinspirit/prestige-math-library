@@ -1,7 +1,7 @@
 ---
 id: ex-gr-schwarzschild-isotropic-weak-field-comparison
 kind: example
-title: "Explicit isotropic-to-areal conversion and the second-order coefficient mismatch of the Schwarzschild exterior"
+title: "Explicit isotropic-to-areal conversion and the second-order scalar-coefficient comparison of the Schwarzschild exterior"
 status: draft
 origin: session
 domain: mathematics
@@ -10,8 +10,9 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [def-gr-schwarzschild-exterior-model, lem-gr-schwarzschild-isotropic-coordinate-form, lem-gr-schwarzschild-metric-properties, def-derivative, thm-algebra-of-derivatives, def-rational-power, thm-real-power-continuity-and-derivatives, def-interval]
+deps: [def-gr-schwarzschild-exterior-model, lem-gr-schwarzschild-isotropic-coordinate-form, lem-gr-schwarzschild-metric-properties, def-derivative, thm-algebra-of-derivatives, def-rational-power, thm-real-power-continuity-and-derivatives, def-interval, thm-chain-rule]
 dependency_roles:
+  thm-chain-rule: mathematical-premise
   def-gr-schwarzschild-exterior-model: mathematical-premise
   lem-gr-schwarzschild-isotropic-coordinate-form: mathematical-premise
   lem-gr-schwarzschild-metric-properties: mathematical-premise
@@ -46,7 +47,9 @@ be the isotropic-to-areal radius map of
 $\rho_0:(s,\infty)\to(s/4,\infty)$ be its inverse, so that the isotropic
 coefficient of the spatial metric is the function
 $\rho\mapsto(1+s/(4\rho))^{4}$ and the areal coefficient is
-$r\mapsto(1-s/r)^{-1}$. Then the following explicit identities hold.
+$r\mapsto(1-s/r)^{-1}$. The two displayed functions are coefficients in different radial bases.
+The following scalar-function comparisons do not identify their tensor
+components after a change of basis; that transformation is included in clause 5.
 
 1. **Exact form and positivity.**
    $R(\rho)=\rho+\frac{s}{2}+\frac{s^{2}}{16\rho}$ and
@@ -58,11 +61,11 @@ $r\mapsto(1-s/r)^{-1}$. Then the following explicit identities hold.
    The areal coefficient satisfies, exactly for $r>s$,
    $$(1-s/r)^{-1}=1+\frac{s}{r}+\frac{(s/r)^{2}}{1-s/r},$$
    so its expansion is $1+\frac{s}{r}+\frac{s^{2}}{r^{2}}+O\!\left(\frac{s^3}{r^3}\right)$.
-3. **Isotropic coefficient after conversion.**
+3. **Isotropic coefficient after argument substitution.**
    With $\rho=\rho_0(r)$ one has
    $\frac{s}{4\rho_0(r)}=\frac{s}{4r}+\frac{s^{2}}{8r^{2}}+O(s^{3}/r^{3})$ and
    $$\Bigl(1+\frac{s}{4\rho_0(r)}\Bigr)^{4}=1+\frac{s}{r}+\frac{7}{8}\frac{s^{2}}{r^{2}}+O\!\left(\frac{s^3}{r^3}\right).$$
-   Hence the two coefficients agree through first order and differ at second
+   Hence these scalar functions agree through first order and differ at second
    order by $\frac{1}{8}\frac{s^{2}}{r^{2}}$.
 4. **Failure of the unconverted comparison.** Evaluating the isotropic
    coefficient at $\rho=r$ instead of at $\rho=\rho_0(r)$ gives
@@ -72,6 +75,15 @@ $r\mapsto(1-s/r)^{-1}$. Then the following explicit identities hold.
    leading Newtonian-type term is unaffected, but the comparison of
    coefficients in the unchanged chart is already wrong at relative order
    $(s/r)^{2}$.
+
+5. **Radial tensor transformation.** Put $a(r)=s/(4\rho_0(r))$.
+   Differentiating $R(\rho_0(r))=r$ gives
+   $\rho_0'(r)=(1-a(r)^2)^{-1}$. Consequently the radial coefficient in the
+   areal basis is exactly
+   $$g_{rr}=(1+a(r))^4\bigl(\rho_0'(r)\bigr)^2=(1-s/r)^{-1}.$$
+   Moreover $(\rho_0')^2=1+s^2/(8r^2)+O(s^3/r^3)$, so this coefficient is
+   $1+s/r+s^2/r^2+O(s^3/r^3)$: the apparent $1/8$ discrepancy of clause 3
+   disappears when the basis is transformed.
 
 ## Facts & Assumptions
 
@@ -85,6 +97,11 @@ $r\mapsto(1-s/r)^{-1}$. Then the following explicit identities hold.
 ([[lem-gr-schwarzschild-isotropic-coordinate-form]] clause (b), [[lem-gr-schwarzschild-metric-properties]] clause (a), [[def-gr-schwarzschild-exterior-model]] clause (c)).
 
 [L4] The identity $(1+x)^{4}=1+4x+6x^{2}+4x^{3}+x^{4}$ holds for every real $x$; on $(s,\infty)$ one has $r>s$ so $s/r\in(0,1)$ and $r\ge s$, and the interval $(s,\infty)$ is nonempty ([[thm-algebra-of-derivatives]], [[def-interval]], [[def-rational-power]]).
+
+[L5] The chain rule for differentiable functions on open real intervals gives
+$R'(\rho_0(r))\rho_0'(r)=1$ from $R\circ\rho_0=\mathrm{id}$
+([[thm-chain-rule]]); the radial term of the metric in [L3] is
+$(1+s/(4\rho))^4d\rho^2$, so $d\rho=\rho_0'(r)dr$ in the areal chart.
 
 ## Proof
 
@@ -105,8 +122,10 @@ All remainder estimates here are for fixed $s>0$ and $r/s\to\infty$. This proves
 
 2.1 (Isotropic coefficient after conversion.) By step 1.2, $\frac{s}{4\rho_0(r)}=\frac{s}{4r}+\frac{s^{2}}{8r^{2}}+O(s^{3}/r^{3})$, so with $x:=\frac{s}{4\rho_0(r)}$, [L4] gives $(1+x)^{4}=1+4x+6x^{2}+O(x^{3})$, hence $(1+x)^{4}=1+\frac{s}{r}+\frac{s^{2}}{2r^{2}}+\frac{6s^{2}}{16r^{2}}+O(s^{3}/r^{3}) =1+\frac{s}{r}+\frac{7}{8}\frac{s^{2}}{r^{2}}+O(s^{3}/r^{3})$. Combining with step 1.3, the two coefficients agree in their constant and $1/r$ terms and differ in their $1/r^{2}$ terms by $\frac{1}{8}\frac{s^{2}}{r^{2}}$; this is clause 3. [step 1.2, L3, L4, algebra]
 
-3.1 (Unconverted comparison.) Evaluating at $\rho=r$ gives $x=\frac{s}{4r}$ and by [L4] $(1+\frac{s}{4r})^{4}=1+\frac{s}{r}+\frac{6s^{2}}{16r^{2}}+O(s^{3}/r^{3}) =1+\frac{s}{r}+\frac{3}{8}\frac{s^{2}}{r^{2}}+O(s^{3}/r^{3})$; subtracting the areal expansion of step 1.3 termwise gives the mismatch $\bigl(1-\frac{3}{8}\bigr)\frac{s^{2}}{r^{2}}=\frac{5}{8}\frac{s^{2}}{r^{2}}$ at second order, while the constant and first-order terms continue to agree. This is clause 4. [step 1.3, L3, L4, algebra] ∎
+2.2 (Unconverted comparison.) Evaluating at $\rho=r$ gives $x=\frac{s}{4r}$ and by [L4] $(1+\frac{s}{4r})^{4}=1+\frac{s}{r}+\frac{6s^{2}}{16r^{2}}+O(s^{3}/r^{3}) =1+\frac{s}{r}+\frac{3}{8}\frac{s^{2}}{r^{2}}+O(s^{3}/r^{3})$; subtracting the areal expansion of step 1.3 termwise gives the mismatch $\bigl(1-\frac{3}{8}\bigr)\frac{s^{2}}{r^{2}}=\frac{5}{8}\frac{s^{2}}{r^{2}}$ at second order, while the constant and first-order terms continue to agree. This is clause 4 as a comparison of scalar coefficient functions, not a metric transformation. [step 1.3, L3, L4, algebra]
+
+3.1 (Transforming the radial basis.) By [L1] and [L5], $\rho_0'=1/(1-a^2)$ with $0<a<1$. Since $f(r)=(1-a)^2/(1+a)^2$ for $r=R(\rho_0(r))$, the transformed radial coefficient is $(1+a)^4/(1-a^2)^2=(1+a)^2/(1-a)^2=f(r)^{-1}$. Step 1.2 gives $a^2=s^2/(16r^2)+O(s^3/r^3)$; for $u=a^2$, the exact remainder identity $(1-u)^{-2}-1-2u=u^2(3-2u)/(1-u)^2$ gives $(\rho_0')^2=1+s^2/(8r^2)+O(s^3/r^3)$. Multiplication by the expansion of step 2.1 changes its second-order coefficient from $7/8$ to $7/8+1/8=1$, exactly as in step 1.3. This proves clause 5. [L1, L3, L5, step 1.2, step 1.3, step 2.1, algebra] ∎
 
 ## Remarks
 
-- **What the example checks.** The computation is exact finite algebra with remainder bounds as $r/s\to\infty$: after conversion, the second-order isotropic coefficient is $1/2+3/8=7/8$, where $1/2$ comes from the coordinate shift in $1/\rho_0$ and $3/8$ from the fourth-power expansion. The areal coefficient has second-order coefficient $1$, so their difference is $1/8$; the $O(s^2/r^3)$ remainder of $1/\rho_0$ contributes only at third order. No numerical value of $s$, no observed system and no measurement occurs.
+- **What the example checks.** The computation is exact finite algebra with remainder bounds as $r/s\to\infty$: after argument substitution alone, the second-order isotropic coefficient is $1/2+3/8=7/8$, where $1/2$ comes from the coordinate shift in $1/\rho_0$ and $3/8$ from the fourth-power expansion. The areal coefficient has second-order coefficient $1$, so their difference is $1/8$; the $O(s^2/r^3)$ remainder of $1/\rho_0$ contributes only at third order. The radial tensor coefficient additionally includes the squared Jacobian of clause 5 and agrees exactly with the areal coefficient. No numerical value of $s$, no observed system and no measurement occurs.

@@ -58,7 +58,7 @@ of $\mathbb R^3$ ([[lem-standard-basis-of-f-n]]).
 
 [L2] The cross product is bilinear and alternating and is orthogonal to both factors; and $|u\times v|^2=|u|^2|v|^2-\langle u,v\rangle^2$ ([[lem-cross-product-is-bilinear-alternating-and-orthogonal]], [[thm-cross-product-norm-is-the-two-vector-gram-determinant]], [[def-euclidean-inner-product]]).
 
-[L3] The standard basis is orthonormal: $\langle s_i,s_j\rangle=\delta_{ij}$, and every $x\in\mathbb R^n$ is $x=\sum_{j=1}^3\langle x,s_j\rangle s_j$ with $|x|^2=\sum_{j=1}^3\langle x,s_j\rangle^2$, by the coordinate definition of the Euclidean inner product and the standard basis ([[lem-standard-basis-of-f-n]], [[def-euclidean-inner-product]]).
+[L3] Relabel the standard basis indexed $0,1,2$ in the supplier as $s_1,s_2,s_3$. This basis is orthonormal: $\langle s_i,s_j\rangle=\delta_{ij}$, and every $x\in\mathbb R^3$ is $x=\sum_{j=1}^3\langle x,s_j\rangle s_j$ with $|x|^2=\sum_{j=1}^3\langle x,s_j\rangle^2$, by the coordinate definition of the Euclidean inner product and the standard basis ([[lem-standard-basis-of-f-n]], [[def-euclidean-inner-product]]).
 
 [L4] Bessel's inequality: for an orthonormal family $(f_1,\dots,f_m)$ in an inner product space ([[def-inner-product-space]], [[def-orthogonal-vectors-sets-and-orthonormal-bases]]) and every vector $x$, $\sum_{i=1}^m\langle x,f_i\rangle^2\le|x|^2$ ([[thm-bessel-inequality-for-an-arbitrary-orthonormal-family]]).
 

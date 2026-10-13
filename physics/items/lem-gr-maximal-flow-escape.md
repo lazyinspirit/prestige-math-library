@@ -10,7 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-generated
 proof_strategy: contradiction
-deps: [thm-unique-maximal-integral-curve-through-each-point, thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves, def-integral-curve-of-a-vector-field, def-smooth-vector-field-as-a-tangent-bundle-section, def-smooth-manifold, def-compact-space, thm-topological-manifolds-are-metrizable-and-paracompact, thm-metric-compactness-equivalences, def-countable-choice, def-dependent-choice]
+deps: [thm-unique-maximal-integral-curve-through-each-point, thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves, def-integral-curve-of-a-vector-field, def-smooth-vector-field-as-a-tangent-bundle-section, def-smooth-manifold, def-compact-space, thm-metric-compactness-equivalences, def-countable-choice, def-dependent-choice]
 dependency_roles:
   thm-unique-maximal-integral-curve-through-each-point: mathematical-premise
   thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves: mathematical-premise
@@ -18,7 +18,6 @@ dependency_roles:
   def-smooth-vector-field-as-a-tangent-bundle-section: mathematical-premise
   def-smooth-manifold: mathematical-premise
   def-compact-space: mathematical-premise
-  thm-topological-manifolds-are-metrizable-and-paracompact: mathematical-premise
   thm-metric-compactness-equivalences: mathematical-premise
   def-countable-choice: mathematical-premise
   def-dependent-choice: mathematical-premise
@@ -55,7 +54,7 @@ every $t\in(\alpha,s)$.
 
 [L2] Maximality: the maximal integral curve $\gamma$ has domain $(\alpha,\beta)$ equal to the union of the domains of all integral curves of $X$ through $p$; in particular no integral curve through $p$ is defined on an interval strictly containing $(\alpha,\beta)$ ([[thm-unique-maximal-integral-curve-through-each-point]], [[def-integral-curve-of-a-vector-field]]).
 
-[L3] Compactness and sequences: $M$ is Hausdorff and second countable, hence metrizable, and a subset of a metrizable space is compact in the topological sense exactly when it is sequentially compact ([[thm-topological-manifolds-are-metrizable-and-paracompact]], [[thm-metric-compactness-equivalences]], [[def-smooth-manifold]]).
+[L3] Every sequence in a compact subset $K$ of a Hausdorff manifold has a convergent subsequence. Indeed, the closures in $K$ of its tails are nonempty closed sets with the finite-intersection property, so compactness gives a point $q$ in their intersection. A chart at $q$ supplies the countable neighborhood basis of coordinate balls of radii tending to zero; recursively taking the least index beyond the preceding index whose term lies in that ball gives a subsequence converging to $q$. This proves the needed sequential compactness without invoking a global metrization theorem ([[def-compact-space]], [[def-smooth-manifold]]).
 
 ## Proof
 

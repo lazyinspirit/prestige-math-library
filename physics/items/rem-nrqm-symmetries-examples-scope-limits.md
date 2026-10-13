@@ -66,15 +66,26 @@ conserved sharp observables with the law, moment and generator statements of
 the modulus of the momentum representative is invariant in time almost
 everywhere.
 [[cex-nrqm-symmetries-nonconstant-potential-breaks-translation]] shows that
-this fails as soon as the potential is nonconstant in the relevant direction:
-for the bounded measurable indicator potential $1_{B(0,1)}$ no nonzero
-translation is a symmetry, because the shifted potential differs from the
-original on a set of positive measure, so the symmetry criterion of the
-translation theorem is not met.
-[[ex-nrqm-symmetries-parity-selection-rule]] derives, for a potential even
-almost everywhere, that every energy eigenspace is invariant under the parity
+translations need not remain symmetries for nonconstant potentials:
+for the bounded measurable potential energy $E_{*}1_{B(0,R)}$, with
+$E_{*}>0$ in J and $R=1\,\mathrm m$, no nonzero translation is a symmetry,
+because the shifted potential differs from the original on a set of positive
+measure, so the symmetry criterion of the translation theorem is not met.
+For a specified translation $a$, the criterion is exactly
+$V(\cdot-a)=V$ almost everywhere; nonconstancy in a direction alone does
+not exclude discrete translations along that direction.
+[[ex-nrqm-symmetries-parity-selection-rule]] derives, under its stated model
+and choice hypotheses for a real bounded measurable potential even almost
+everywhere, that every energy eigenspace is invariant under the parity
 action, that a nondegenerate eigenstate has definite parity, and that the
-position matrix element of two states of equal parity vanishes.
+position matrix element $\langle Q_j\psi,\psi'\rangle$ vanishes for unit vectors
+$\psi,\psi'\in H_s=L^2(\mathbb R^3;\mathbb C^{2s+1})$ of equal definite parity
+with $\psi\in D(Q_j)$, as in clause (c). Here $j\in\{1,2,3\}$,
+$Q_j\psi(x)=x_j\psi(x)$ on the maximal domain
+$D(Q_j)=\{f\in H_s:x_jf\in H_s\}$, and equal definite parity means
+$\Pi\psi=\sigma\psi$ and $\Pi\psi'=\sigma\psi'$ for a common
+$\sigma\in\{-1,1\}$, with $\Pi f(x)=f(-x)$. No position-domain condition is
+required on $\psi'$; evenness of the potential supplies none on $\psi$.
 [[ex-nrqm-symmetries-central-potential-rotation-invariance]] verifies the
 almost-everywhere rotational and parity invariance of a bounded radial
 potential and instantiates
@@ -113,7 +124,10 @@ eigenvalue, bound state, degeneracy, radial solution or spectral line, and its
 boundedness hypothesis excludes the Coulomb and other unbounded radial
 models. The parity example requires the evenness hypothesis and, for definite
 parity, the nondegeneracy of the eigenvalue; at a degenerate eigenvalue only
-the eigenspace invariance is asserted. No item of this page makes a claim about
+the eigenspace invariance is asserted for arbitrary eigenvectors. The
+equal-parity matrix-element identity separately requires the displayed
+$D(Q_j)$ condition and directly assumed parity signs; it requires neither
+an eigenvector hypothesis nor nondegeneracy. No item of this page makes a claim about
 antiunitary or time-reversal symmetries, about superselection, about spinorial
 rotations or the internal factor, or about relativistic and field-theoretic
 structures.

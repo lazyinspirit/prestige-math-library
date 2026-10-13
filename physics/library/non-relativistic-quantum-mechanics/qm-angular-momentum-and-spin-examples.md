@@ -40,8 +40,10 @@ explicitly labelled two-level truncation with gap $\Delta E=\hbar\omega$,
 and the precession matrices of the transverse means.
 [[texp-nrqm-angular-momentum-stern-gerlach-splitting]] is a conditional
 thought experiment: under the explicit hypothetical containment premise it
-derives the separation of the two spin-sector means in a linear field window
-and the conservation of the sector weights and of the total mean; it asserts
+derives the increment $\gamma\hbar G\tau$ in the difference of the two
+spin-sector mean transverse momenta when both weights are positive; this
+increment vanishes when $\gamma G=0$. It also derives conservation of the
+sector weights and, for equal sector weights, of the total transverse mean; it asserts
 no apparatus, no trajectory and no measured record.
 [[rem-nrqm-angular-momentum-examples-scope-limits]] records what these
 computations establish and the measurement and empirical questions they leave

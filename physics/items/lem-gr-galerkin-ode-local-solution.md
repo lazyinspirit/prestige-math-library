@@ -38,7 +38,7 @@ verification:
 ## Statement
 
 Assume the Axiom of Countable Choice $\mathrm{AC}_\omega$
-([[def-countable-choice]]). Let $s\ge5$, let $O\subseteq\mathbb R^m$ be open,
+([[def-countable-choice]]). Let $s\ge5$ be an integer, let $O\subseteq\mathbb R^m$ be open,
 let $A^\mu,B$ be a periodic symmetric hyperbolic coefficient family on $O$ over
 an open interval $I\ni0$ ([[def-gr-periodic-symmetric-hyperbolic-system]]), let
 $u_0\in H^s(\mathbb T^3_{2\pi};\mathbb R^m)$ take values in a compact
@@ -60,7 +60,7 @@ the solution extends beyond $T_*$;
 finite-dimensional coordinates of the initial data.
 
 ## Facts & Assumptions
-**Given:** Countable Choice, $s\ge5$, the coefficient family on $O$, the data $u_0$ with values in the compact $K$ and $\|u_0\|_{H^s}\le R$, and $N\ge0$ with admissible $P_Nu_0$.
+**Given:** Countable Choice, integer $s\ge5$, the coefficient family on $O$, the data $u_0$ with values in the compact $K$ and $\|u_0\|_{H^s}\le R$, and $N\ge0$ with admissible $P_Nu_0$.
 
 [L1] $X_N$ is a finite-dimensional real vector space of dimension $d_N=m|\Lambda_N|$, and $P_N$ is linear, self-adjoint, idempotent with range $X_N$ and commutes with all spatial derivatives ([[def-gr-galerkin-fourier-projection]], [[lem-gr-galerkin-projection-properties]]).
 

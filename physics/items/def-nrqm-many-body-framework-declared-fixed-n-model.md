@@ -21,6 +21,7 @@ deps:
     post-nrqm-framework-autonomous-dynamics,
     post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle,
     post-nrqm-framework-identical-particles-and-spin,
+    post-nrqm-framework-preparation-and-apparatus,
     thm-nrqm-fock-and-equilibrium-permutation-restricted-self-adjointness,
     thm-nrqm-fock-and-equilibrium-fixed-n-coulomb-self-adjointness,
     lem-nrqm-composites-euclidean-l2-product-unitary,
@@ -48,6 +49,7 @@ dependency_roles:
   post-nrqm-framework-autonomous-dynamics: physical-assumption
   post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle: physical-assumption
   post-nrqm-framework-identical-particles-and-spin: physical-assumption
+  post-nrqm-framework-preparation-and-apparatus: physical-assumption
   thm-nrqm-fock-and-equilibrium-permutation-restricted-self-adjointness: mathematical-premise
   thm-nrqm-fock-and-equilibrium-fixed-n-coulomb-self-adjointness: mathematical-premise
   lem-nrqm-composites-euclidean-l2-product-unitary: mathematical-premise
@@ -67,11 +69,15 @@ provenance:
   proof: not-applicable
 physical_scope: "The declared fixed-N many-body model of the framework: a
   declared species sector of P6, a declared one-particle energy operator
-  (spatial massive-model or finite-mode realization), a declared pair
+  (spatial massive-model or explicitly retained finite-mode realization), a declared pair
   interaction (bounded or Coulomb), the labelled energy operator and its
   self-adjoint restriction to the adopted symmetric or antisymmetric N-particle
-  sector, read as the model's assigned energy observable and generator of P4
-  evolution. The model is an adopted kinematic-dynamical input of the pair; it
+  sector, read on nonzero sectors as the model's assigned energy observable
+  and generator of P4 evolution; zero sectors are mathematical bookkeeping
+  with no preparation or physical observable assignment. Finite modes are
+  embedded in the full spatial spin space, while their energy and dynamics
+  are separately adopted effective inputs; full spatial kinematics and spin
+  rotations are not automatically assigned on the retained space. The model is an adopted kinematic-dynamical input of the pair; it
   asserts no stability of matter, no Hunziker-van Winter-Zhislin threshold
   statement, no thermodynamic limit, no thermalization and no identification
   with a laboratory sample, and every interaction constant is an empirical model
@@ -97,6 +103,8 @@ verification:
 
 ## Definition
 
+**Slot convention.** For $\ell\ge1$, $S_\ell$ acts on $\{0,\dots,\ell-1\}$ as in [[lem-nrqm-composites-permutation-sector-projections]]. On one-based tuple positions use $\widehat{\pi}(k):=1+\pi(k-1)$ for $1\le k\le\ell$. Conjugation by $k\mapsto k-1$ gives $\widehat{\pi\sigma}=\widehat{\pi}\circ\widehat{\sigma}$ and $\widehat{\pi^{-1}}=\widehat{\pi}^{-1}$; thus the supplier's tensor action becomes $U_\pi(v_1\otimes\cdots\otimes v_\ell)=v_{\widehat{\pi}^{-1}(1)}\otimes\cdots\otimes v_{\widehat{\pi}^{-1}(\ell)}$. The parameters of $U_\pi$ and $\operatorname{sgn}(\pi)$ remain canonical zero-based permutations.
+
 **(a) Adopted readings, units and choice hypotheses.** Adopt the state and
 composition postulate [[post-nrqm-framework-state-and-composition]] (P1), the
 observable and probability postulate
@@ -111,19 +119,30 @@ reading of [[def-nrqm-observables-framework-observable-and-outcome-law]], the
 evolution reading of [[def-nrqm-autonomous-dynamics-framework-evolution]] and
 the sector vocabulary of
 [[def-nrqm-identical-particles-framework-species-sectors-and-preparations]].
-Let a **declared species sector** with one-particle space $H$, mass $m>0$
+P5 and the massive spin-$s$ reading below apply to the full spatial space
+$H_s=L^2(\mathbb R^3;\mathbb C^{2s+1})$. In the finite-mode branch,
+clause (b)(ii) explicitly replaces P5's full-space state and Hamiltonian
+assignments (iii),(iv) by retained-space assignments: P1, P2 and P4 are
+read on that retained space, P6(i) gives its permutation sectors, and
+P6(ii) still specifies spin on $H_s$, with no automatic full spin
+representation on the retained space. This is an additional model
+idealization, not a consequence of P5.
+Let the species parameters mass $m>0$
 (kg), spin label $s\in\{0,\tfrac12,1,\dots\}$ and statistics choice
-$\sigma\in\{+,-\}$ be given as in that definition, in the massive spin-$s$
-one-particle reading of
-[[def-nrqm-kinematics-framework-massive-spin-s-model]]; fix an integer
+$\sigma\in\{+,-\}$ be given in the vocabulary of that definition and let
+$H$ be the one-particle space of the chosen branch below. Use the sector
+and preparation constructions of that definition (c)-(e) on $H$; fix an integer
 $N\ge1$ and let $\mathfrak H_N^\sigma=\operatorname{ran}P_\sigma^{(N)}\subseteq
 H^{\otimes N}$ be the declared $N$-particle sector. All quantities below are
 read in the SI conventions and units of
 [[def-nrqm-framework-quantities-and-units]] (energies in joules). Assume the
-Axiom of Countable Choice ([[def-countable-choice]]); the Axiom of Choice
-([[def-axiom-of-choice]]) is assumed only in the Coulomb realization of
-clause (d)(ii), where it is the choice hypothesis of the cited self-adjointness
-theorem.
+Axiom of Countable Choice ([[def-countable-choice]]) and the Axiom of Choice
+([[def-axiom-of-choice]]). AC is inherited from the adopted general spectral
+observable and evolution interfaces of P2 and P4 and the operator suppliers
+of P5; it is also required by the Coulomb realization in clause (d)(ii).
+The bounded spatial operator construction in clause (d)(i) itself uses only
+Countable Choice. Adopt [[post-nrqm-framework-preparation-and-apparatus]]
+(P7) for the qualified apparatus and parameter identifications below.
 
 **(b) Declared one-particle data.** The model declares a one-particle
 **energy operator** in one of the two following realizations.
@@ -142,9 +161,39 @@ $K$ of dimension $d\ge1$ with a declared orthonormal basis
 $(f_1,\dots,f_d)$ ([[def-hilbert-space]]) is declared together with a
 self-adjoint **one-particle operator** $h\in\mathcal B(K)$
 ([[def-bounded-linear-operator]], [[def-symmetric-self-adjoint-and-essentially-self-adjoint]]).
-Here the one-particle space of the species is $K$, and the assignment of the
-modes $f_j$ to a laboratory mode family is a tested identification under the
-preparation and apparatus postulate P7, not part of the definition.
+Also declare an orthonormal family $(g_1,\dots,g_d)$ in the full spatial
+spin space $H_s$ of [[def-nrqm-kinematics-framework-massive-spin-s-model]]
+clause (a). Define the **retained-mode isometry**, its adjoint, and its
+orthogonal projection by
+$$J:K\to H_s,\qquad J\Bigl(\sum_{j=1}^dc_jf_j\Bigr)=\sum_{j=1}^dc_jg_j,\qquad J^*\psi=\sum_{j=1}^d\langle\psi,g_j\rangle f_j,\qquad R:=JJ^*.$$
+Thus $J^*J=I_K$, $R^2=R=R^*$ and
+$\operatorname{ran}R=\operatorname{span}\{g_1,\dots,g_d\}$; inner products
+are linear in the first variable. Here $H=K$ is the effective one-particle
+space, and $\psi\in K$ represents the retained full-space vector $J\psi$.
+The tensor map $J_N:=J^{\otimes N}$ of
+[[lem-nrqm-composites-bounded-tensor-maps]] is an isometry and satisfies
+$J_NU_\pi^K=U_\pi^{H_s}J_N$: the two sides agree on elementary tensors
+by the slot convention and hence on the completion. The finite projection
+sums consequently give $J_NP_\sigma^{(N),K}=P_\sigma^{(N),H_s}J_N$.
+The retained sector is therefore isometrically embedded in the full
+species sector, preserving its statistics choice.
+
+The internal spin matrices and rotations of P6(ii) act on $H_s$.
+Their restrictions are assigned on $K$ only when they preserve
+$\operatorname{ran}J$; for example a full internal rotation action on $K$
+requires $(I\otimes D_s(A))\operatorname{ran}J=\operatorname{ran}J$ for
+every $A\in SU(2)$, with $D_s$ exactly as in P6(ii), and is then read as
+$J^*(I\otimes D_s(A))J$. No such invariance is imposed here, so $d$ need
+not be a multiple of $2s+1$: one retained spinor mode for $s=1/2$ is
+permitted without identifying $K$ with the full two-dimensional spin
+factor. P5's full-space position, momentum and commutation relations
+are not asserted on $K$. The finite operator $h$ and pair operator $W$
+of clause (c)(i) are independently adopted effective energy data; no
+compression of a spatial Hamiltonian, equality with its evolution,
+or approximation error bound is asserted. Identifying the retained modes
+and these energy data with a laboratory preparation is a tested
+identification with uncertainty under P7, not part of the mathematical
+embedding.
 
 **(c) Declared interaction.** The model declares a **pair interaction** in the
 matching realization.
@@ -153,7 +202,7 @@ matching realization.
 $W:\mathbb R^3\to\mathbb R$ be real, measurable, bounded with
 $W(-z)=W(z)$ for almost every $z$ and $\|W\|_\infty<\infty$. In the
 finite-mode realization let $W\in\mathcal B(K\widehat\otimes K)$ be
-self-adjoint with $U_{(12)}WU_{(12)}=W$, where $U_{(12)}$ is the exchange
+self-adjoint with $U_{(0\,1)}WU_{(0\,1)}=W$, where $U_{(0\,1)}$ is the exchange
 unitary of [[lem-nrqm-composites-permutation-sector-projections]] clause (a)
 in the tensor square $\widehat{K\otimes K}$ of
 [[lem-nrqm-composites-hilbert-tensor-construction]]. The interaction strength
@@ -179,7 +228,7 @@ It is self-adjoint on $\operatorname{ran}\mathcal P_\sigma=\Theta_N\mathfrak H_N
 $$T_C=-\frac{\hbar^2}{2m}\Delta_X+V_C(X),\qquad D(T_C)=H^2(\mathbb R^{3N};\mathbb C).$$
 By the source's clauses (b),(c), $T_C$ and its finite-component extension are self-adjoint on these exact domains and bounded below for all stated real $g,\kappa$. The real bounded multiplier $M_{V_b}$ has norm at most $N\|V_{\mathrm{ext}}^b\|_\infty$, hence relative bound zero with respect to $T_C$ and to its finite-component extension. The canonical [[thm-kato-rellich]] makes
 $$H_{\mathrm{lab}}=-\frac{\hbar^2}{2m}\Delta_X+V_C+V_b,\qquad D(H_{\mathrm{lab}})=H^2(\mathbb R^{3N};\mathbb C^M),$$
-self-adjoint on exactly this domain and bounded below; if the singular operator has lower bound $c_C$, the sum has lower bound $c_C-N\|V_{\mathrm{ext}}^b\|_\infty$. Equal masses, identical external slots and pair-independent signed coefficient $\kappa$ make the scalar operator invariant under spatial permutations. These permutations preserve $H^2$ by permuting the weak-derivative coordinates; the constant internal tensor permutations preserve the finite-component domain too. Consequently the combined projections $\mathcal P_\sigma=\Theta_NP_\sigma^{(N)}\Theta_N^{-1}$ reduce $H_{\mathrm{lab}}$, and [[lem-nrqm-many-body-finite-spin-product-identification]] (c) gives self-adjointness of its restriction on the exact domain $H^2\cap\operatorname{ran}\mathcal P_\sigma$. The declared sector energy is this restriction transported back by $\Theta_N^{-1}$ to $\mathfrak H_N^\sigma$, with the unique zero-space operator when that sector is zero. The AC assumption remains confined to this Coulomb realization as in clause (a).
+self-adjoint on exactly this domain and bounded below; if the singular operator has lower bound $c_C$, the sum has lower bound $c_C-N\|V_{\mathrm{ext}}^b\|_\infty$. Equal masses, identical external slots and pair-independent signed coefficient $\kappa$ make the scalar operator invariant under spatial permutations. These permutations preserve $H^2$ by permuting the weak-derivative coordinates; the constant internal tensor permutations preserve the finite-component domain too. Consequently the combined projections $\mathcal P_\sigma=\Theta_NP_\sigma^{(N)}\Theta_N^{-1}$ reduce $H_{\mathrm{lab}}$, and [[lem-nrqm-many-body-finite-spin-product-identification]] (c) gives self-adjointness of its restriction on the exact domain $H^2\cap\operatorname{ran}\mathcal P_\sigma$. The declared sector energy is this restriction transported back by $\Theta_N^{-1}$ to $\mathfrak H_N^\sigma$, with the unique zero-space operator when that sector is zero. This Coulomb construction uses AC in addition to the inherited framework choice hypotheses of clause (a).
 
 (iii) *Finite-mode case.* On $K^{\otimes N}$ put
 $$H_{\mathrm{lab}}:=\sum_{i=1}^N h^{(i)}+\sum_{1\le i<j\le N}W^{(ij)},$$
@@ -187,16 +236,16 @@ where $h^{(i)}$ is the slot operator of
 [[lem-nrqm-composites-bounded-tensor-maps]] (the identity on all factors but
 the $i$-th, $h$ on the $i$-th) and $W^{(ij)}$ is the transport of
 $W\in\mathcal B(K\widehat\otimes K)$ to the pair of slots $(i,j)$ by any
-permutation moving that pair to the first two slots; the symmetry
-$U_{(12)}WU_{(12)}=W$ makes the order of the pair immaterial and
+canonical permutation $\pi$ whose transported map $\widehat{\pi}$ moves that pair to the first two slots; the symmetry
+$U_{(0\,1)}WU_{(0\,1)}=W$ makes the order of the pair immaterial and
 $W\otimes I$ commutes with permutations fixing the first two slots, so the
 transported operator is independent of the permutation chosen. Then
 $H_{\mathrm{lab}}$ is bounded and self-adjoint,
 it commutes with every permutation unitary, and the model's sector energy
 operator is $H_N^\sigma:=H_{\mathrm{lab}}|_{\mathfrak H_N^\sigma}=P_\sigma^{(N)}H_{\mathrm{lab}}P_\sigma^{(N)}|_{\mathfrak H_N^\sigma}$.
 
-**(e) The model's energy reading and evolution.** In every realization the
-pair $(H_N^\sigma,\mathrm J)$ is declared to be the **assigned energy
+**(e) The model's energy reading and evolution.** In every realization with
+$\mathfrak H_N^\sigma\ne\{0\}$, the pair $(H_N^\sigma,\mathrm J)$ is declared to be the **assigned energy
 observable** of the $N$-particle sector in the sense of
 [[def-nrqm-observables-framework-observable-and-outcome-law]] clause (a): its
 outcome law in a declared sector preparation $\rho$ is the law
@@ -205,7 +254,11 @@ definition clause (b), and its spectral data are those of the self-adjoint
 operator constructed in clause (d). The **model evolution** is the unitary
 flow $U(t)=\exp(-itH_N^\sigma/\hbar)$ of
 [[def-nrqm-autonomous-dynamics-framework-evolution]] clause (b) with this
-generator. The identification of the operator with the energy of a concrete
+generator. If $\mathfrak H_N^\sigma=\{0\}$, clause (d) retains the unique
+zero-space operator only as mathematical bookkeeping: every operator on this
+space has trace zero, so there is no trace-one preparation, no assigned
+physical energy observable and no preparation evolution under P1-P4.
+The identification of the operator with the energy of a concrete
 sample, and the assignment of numerical masses, couplings and potentials to a
 laboratory species, are tested identifications with uncertainty under P7;
 they are not consequences of P1-P6.
@@ -216,14 +269,16 @@ $H_{\mathrm{lab}}=\sum_{i=1}^Nh^{(i)}$; in the spatial realization this is the
 case of the external potential summed over slots of the stated bounded or Coulomb realization.
 
 **(g) Scope.** The declared model is a kinematic and dynamical input of this
-pair: it fixes a state space, a sector, an energy operator and an evolution,
-and nothing else. It asserts no stability of matter, no Hunziker-van
+pair: on a nonzero sector it fixes a state space, a sector, an energy operator
+and an evolution; a zero sector carries only the mathematical convention of
+clause (e). It asserts no stability of matter, no Hunziker-van
 Winter-Zhislin threshold statement, no statement about excited threshold
 structure, no thermodynamic limit, no equilibration or thermalization, no
 measured energy and no identification of its parameters with a particular
 laboratory sample beyond the tested identifications of P7. The finite-mode
-realization is an idealization confining the one-particle content to $d$
-declared modes; the spatial realization is an idealization of an $N$-particle
+realization is the retained-space idealization of clause (b)(ii), with
+independently assigned finite energy data and no claimed accuracy relative
+to spatial evolution; the spatial realization is an idealization of an $N$-particle
 non-relativistic sample with the declared external field and pair interaction.
 
 ## Remarks

@@ -1,7 +1,7 @@
 ---
 id: lem-gr-coordinate-ball-geodesic-convexity
 kind: lemma
-title: "Convexity of the Euclidean radius function along geodesics: segments with endpoints in a small ball stay in the ball"
+title: "Convexity of the squared Euclidean radius along small contained geodesics: segments with endpoints in a small ball stay in the ball"
 status: draft
 origin: session
 domain: mathematics

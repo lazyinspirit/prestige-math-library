@@ -9,13 +9,13 @@ dependency_level: 4
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-gr-causal-curves-and-reachability, def-gr-smooth-lorentzian-objects, def-gr-inverse-metric-and-musical-isomorphisms, def-differential-of-a-smooth-map, def-continuity-real, def-compact-space, def-c-r-and-smooth-maps-between-smooth-manifolds]
+deps: [def-gr-causal-curves-and-reachability, def-gr-smooth-lorentzian-objects, def-gr-inverse-metric-and-musical-isomorphisms, def-differential-of-a-smooth-map, def-continuous-map-top, def-compact-space, def-c-r-and-smooth-maps-between-smooth-manifolds]
 dependency_roles:
   def-gr-causal-curves-and-reachability: mathematical-premise
   def-gr-smooth-lorentzian-objects: mathematical-premise
   def-gr-inverse-metric-and-musical-isomorphisms: mathematical-premise
   def-differential-of-a-smooth-map: mathematical-premise
-  def-continuity-real: mathematical-premise
+  def-continuous-map-top: mathematical-premise
   def-compact-space: mathematical-premise
   def-c-r-and-smooth-maps-between-smooth-manifolds: mathematical-premise
 sources:
@@ -59,7 +59,10 @@ $J^+(p)\cap J^-(q)$ is compact in the subspace topology
 ([[def-compact-space]]).
 
 **(d) Time functions.** A **time function** on $(M,g,N)$ is a function
-$u:M\to\mathbb R$ which is continuous ([[def-continuity-real]]) and satisfies
+$u:M\to\mathbb R$ which is continuous from the manifold topology to the usual topology of
+$\mathbb R$: for every $p\in M$ and every open neighborhood $W$ of $u(p)$
+there is an open neighborhood $V$ of $p$ with $u(V)\subseteq W$
+([[def-continuous-map-top]]). It also satisfies
 $u(\gamma(a))<u(\gamma(b))$ for every future causal curve
 $\gamma:[a,b]\to M$ with $a<b$ that is not constant on $[a,b]$.
 

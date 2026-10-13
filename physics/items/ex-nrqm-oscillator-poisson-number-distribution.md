@@ -6,7 +6,7 @@ domain: mathematics
 title: "Poisson number distribution"
 status: draft
 origin: pipeline
-dependency_level: 5
+dependency_level: 4
 deps: [thm-nrqm-oscillator-coherent-state-convergence, thm-nrqm-oscillator-hermite-orthogonality, lem-nrqm-oscillator-closed-ladder-domains, def-complex-exponential, lem-complex-exponential-series-converges-everywhere, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]
 dependency_roles:
   thm-nrqm-oscillator-coherent-state-convergence: mathematical-premise

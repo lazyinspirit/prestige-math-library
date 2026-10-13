@@ -34,8 +34,9 @@ Work in the standard model data of [[post-cm01-spacetime]]:
 $V=\mathbb R^{4}$ with coordinates $(x^{0},x^{1},x^{2},x^{3})$,
 $\tau(x^{0},x^{1},x^{2},x^{3})=x^{0}$, $K=\{0\}\times\mathbb R^{3}$, the
 standard inner product and orientation, $A=\mathbb R^{4}$; the first inertial
-frame is standard with $o=0$, $u=(1,0,0,0)$ and the standard basis, and the
-worldline of the Example is
+frame is standard with $o=0$, $u=(1,0,0,0)$ and the standard basis. Specify
+a one-particle model with label $i=1$ and any fixed mass $m_1>0$ in kilograms,
+and assign to that label in this frame the curve
 
 $$\gamma:\mathbb R\longrightarrow A,\qquad \gamma(t)=tu,$$
 
@@ -51,7 +52,7 @@ differs by $t'=t+b$.
 
 [L1] Adapted charts and coordinates: the standard chart $(o,u,(e_{1},e_{2},e_{3}))$ is adapted, and the adapted coordinates $(t,x)$ of the event $p=o+tu+\sum_{j}x_{j}e_{j}$ satisfy $t(p)=\tau(p-o)$ ([[def-cm-affine-time-space]]).
 
-[L2] Worldlines: a worldline described in an inertial frame is a curve of class $C^{2}$ whose parameter is the frame time, $\tau(\gamma(s)-o)=s$ for all $s$ in its interval ([[post-cm01-worldlines]]); inertial frames are the adapted charts ([[post-cm01-frames]]).
+[L2] Worldlines: each particle label with fixed positive mass is assigned a curve of class $C^{2}$ on a nondegenerate open interval whose parameter is the frame time, $\tau(\gamma(s)-o)=s$ for all $s$ in its interval; descriptions of the same label in a frame with $t'=t+b$ are $\gamma_b(t')=\gamma(t'-b)$ ([[post-cm01-worldlines]]). Inertial frames are the adapted charts ([[post-cm01-frames]]). Regularity and the parameter condition alone do not assign a curve to a particle label.
 
 [L3] Transformation between inertial frames: two adapted charts are related by $t'=t+b$ with $b\in\mathbb R$, and a curve with $t(\gamma(s))=s$ satisfies $t'(\gamma(s))=s+b$ ([[lem-cm-adapted-charts-and-galilean-transformations]], clause 1).
 
@@ -60,7 +61,7 @@ differs by $t'=t+b$.
 **Proof technique:** direct; evaluate the parameter condition on each explicit
 curve and solve the resulting affine equation.
 
-1.1 The standard chart is adapted and its coordinates are the standard ones: $o=0$, $u=(1,0,0,0)$ has $\tau(u)=1$, the standard basis is orthonormal and positively oriented, and for $p=(x^{0},x^{1},x^{2},x^{3})$ the expansion $p=o+x^{0}u+\sum_{j}x^{j}e_{j}$ exhibits the adapted coordinates as $t=x^{0}$, $x=(x^{1},x^{2},x^{3})$ by [L1]. Hence $\gamma(t)=tu$ has $F$-coordinates $(t,0,0,0)$ and satisfies $\tau(\gamma(s)-o)=s$; it is a worldline of the model by [L2]. [L1, L2, algebra]
+1.1 The standard chart is adapted and its coordinates are the standard ones: $o=0$, $u=(1,0,0,0)$ has $\tau(u)=1$, the standard basis is orthonormal and positively oriented, and for $p=(x^{0},x^{1},x^{2},x^{3})$ the expansion $p=o+x^{0}u+\sum_{j}x^{j}e_{j}$ exhibits the adapted coordinates as $t=x^{0}$, $x=(x^{1},x^{2},x^{3})$ by [L1]. The assigned curve $\gamma(t)=tu$ is $C^{\infty}$ on $\mathbb R$, has $F$-coordinates $(t,0,0,0)$ and satisfies $\tau(\gamma(s)-o)=s$. Thus its assignment to label $1$ with the specified fixed positive mass satisfies [L2]; worldline status uses that assignment, not the parameter condition alone. [given, L1, L2, algebra]
 
 2.1 The curve $\kappa(s)=2su$ has $\tau(\kappa(s)-o)=2s$, which differs from $s$ for every $s\ne0$, for instance at $s=1$ the value is $2$; therefore $\kappa$ **fails** the parameter condition and is not a worldline of the model, although it is of class $C^{\infty}$ and its image is the same time axis as that of $\gamma$; it is the reparametrization $\kappa(s)=\gamma(2s)$. The parameter condition is thus a genuine restriction, and the image of a curve does not determine whether it is a worldline. [step 1.1, L2, algebra]
 

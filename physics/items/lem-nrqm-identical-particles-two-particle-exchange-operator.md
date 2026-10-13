@@ -42,7 +42,7 @@ $H\widehat\otimes H$ be its completed tensor square with inclusion $\kappa$
 ([[lem-nrqm-composites-hilbert-tensor-construction]]), and for $n=2$ let
 $(U_\pi)_{\pi\in S_2}$ and the projections $P_\pm^{(2)}$ be those of
 [[lem-nrqm-composites-permutation-sector-projections]]. Write
-$\tau:=U_{(12)}$ for the **exchange operator**, so that
+$\tau:=U_{(0\,1)}$ for the **exchange operator**, so that
 $\tau\bigl(\kappa(u\otimes v)\bigr)=\kappa(v\otimes u)$ for $u,v\in H$; in the
 sequel the inclusion is suppressed and $u\otimes v$ denotes
 $\kappa(u\otimes v)$. Then:
@@ -74,7 +74,7 @@ the tensor square and both ranges are zero.
 
 [F1] **Tensor square.** $\kappa:H\odot H\to H\widehat\otimes H$ is a linear isometry with dense image, $\kappa(u\otimes v)$ is bilinear in $(u,v)$, $\|\kappa(u\otimes v)\|=\|u\|\,\|v\|$ and $\langle\kappa(u\otimes v),\kappa(u'\otimes v')\rangle=\langle u,u'\rangle\langle v,v'\rangle$ ([[lem-nrqm-composites-hilbert-tensor-construction]] clauses (a)-(d), [[def-real-and-complex-inner-product-space]]).
 
-[F2] **Permutation unitaries.** $U_{(12)}\in\mathcal B(H\widehat\otimes H)$ is the unique bounded operator with $U_{(12)}\kappa(u\otimes v)=\kappa(v\otimes u)$; it is unitary with $U_\pi U_\sigma=U_{\pi\sigma}$ and $U_\pi^{*}=U_{\pi^{-1}}$. For every $\pi\in S_2$, $U_\pi P_+^{(2)}=P_+^{(2)}U_\pi=P_+^{(2)}$ and $U_\pi P_-^{(2)}=P_-^{(2)}U_\pi=\operatorname{sgn}(\pi)P_-^{(2)}$. The orthogonal projections are $P_+^{(2)}=\frac12\sum_{\pi\in S_2}U_\pi$ and $P_-^{(2)}=\frac12\sum_{\pi\in S_2}\operatorname{sgn}(\pi)U_\pi$ ([[lem-nrqm-composites-permutation-sector-projections]] clauses (a)-(c), [[def-countable-choice]]).
+[F2] **Permutation unitaries.** $U_{(0\,1)}\in\mathcal B(H\widehat\otimes H)$ is the unique bounded operator with $U_{(0\,1)}\kappa(u\otimes v)=\kappa(v\otimes u)$; it is unitary with $U_\pi U_\sigma=U_{\pi\sigma}$ and $U_\pi^{*}=U_{\pi^{-1}}$. For every $\pi\in S_2$, $U_\pi P_+^{(2)}=P_+^{(2)}U_\pi=P_+^{(2)}$ and $U_\pi P_-^{(2)}=P_-^{(2)}U_\pi=\operatorname{sgn}(\pi)P_-^{(2)}$. The orthogonal projections are $P_+^{(2)}=\frac12\sum_{\pi\in S_2}U_\pi$ and $P_-^{(2)}=\frac12\sum_{\pi\in S_2}\operatorname{sgn}(\pi)U_\pi$ ([[lem-nrqm-composites-permutation-sector-projections]] clauses (a)-(c), [[def-countable-choice]]).
 
 [F3] **Orthogonal projections.** An orthogonal projection $P$ satisfies $P^2=P=P^{*}$, and its range is a closed subspace ([[def-hilbert-orthogonal-projection]], [[lem-orthogonal-projection-is-linear-self-adjoint-contractive]]).
 
@@ -82,9 +82,9 @@ the tensor square and both ranges are zero.
 
 ## Proof
 
-1.1 [The exchange operator is a self-adjoint involution] By [F2] with $\pi=\sigma=(12)$ one has $\tau^2=U_{(12)(12)}=U_e=I$, and $\tau^{*}=U_{(12)^{-1}}=U_{(12)}=\tau$; hence $\tau^{-1}=\tau=\tau^{*}$ and $\tau$ is an isometry, which is (a). [F2, F4, algebra]
+1.1 [The exchange operator is a self-adjoint involution] By [F2] with $\pi=\sigma=(0\,1)$ one has $\tau^2=U_{(0\,1)(0\,1)}=U_e=I$, and $\tau^{*}=U_{(0\,1)^{-1}}=U_{(0\,1)}=\tau$; hence $\tau^{-1}=\tau=\tau^{*}$ and $\tau$ is an isometry, which is (a). [F2, F4, algebra]
 
-1.2 [The projections in terms of the exchange operator] Since $S_2=\{e,(12)\}$ and $\operatorname{sgn}(e)=1$, $\operatorname{sgn}((12))=-1$, the formulas of [F2] give $P_+^{(2)}=\frac12(U_e+U_{(12)})=\frac12(I+\tau)$ and $P_-^{(2)}=\frac12(U_e-U_{(12)})=\frac12(I-\tau)$, which is the first assertion of (b). [F2, algebra]
+1.2 [The projections in terms of the exchange operator] Since $S_2=\{e,(0\,1)\}$ and $\operatorname{sgn}(e)=1$, $\operatorname{sgn}((0\,1))=-1$, the formulas of [F2] give $P_+^{(2)}=\frac12(U_e+U_{(0\,1)})=\frac12(I+\tau)$ and $P_-^{(2)}=\frac12(U_e-U_{(0\,1)})=\frac12(I-\tau)$, which is the first assertion of (b). [F2, algebra]
 
 2.1 [Eigenspaces as ranges] Let $x\in H\widehat\otimes H$. If $\tau x=x$, then $\frac12(I+\tau)x=x$, so $x\in\operatorname{ran}\frac12(I+\tau)$; conversely if $x=\frac12(I+\tau)y$ for some $y$, then $\tau x=\frac12(\tau y+\tau^2y)=\frac12(\tau y+y)=x$ by step 1.1. Hence the fixed space of $\tau$ is $\operatorname{ran}\frac12(I+\tau)=\operatorname{ran}P_+^{(2)}$ by step 1.2; the same substitution with $x=\frac12(I-\tau)y$ gives $\tau x=-x$, and conversely $\tau x=-x$ implies $x=\frac12(I-\tau)x$, so the $(-1)$-eigenspace is $\operatorname{ran}P_-^{(2)}$. This completes (b). [step 1.1, step 1.2, F3, algebra]
 

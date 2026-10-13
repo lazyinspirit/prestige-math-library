@@ -10,7 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [ex-gr-minkowski-chart-as-a-lorentzian-manifold, def-gr-smooth-lorentzian-objects, def-gr-smooth-covariant-two-tensor-field, lem-gr-covariant-two-tensor-transformation-law, lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space, ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds]
+deps: [ex-gr-minkowski-chart-as-a-lorentzian-manifold, def-gr-smooth-lorentzian-objects, def-gr-smooth-covariant-two-tensor-field, lem-gr-covariant-two-tensor-transformation-law, lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space, ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds, thm-sine-and-cosine-derivatives, thm-sine-cosine-signs-monotonicity-and-ranges, thm-sine-and-cosine-parametrize-the-unit-circle, thm-sine-cosine-zero-sets-and-fundamental-period, cor-trigonometric-parity-and-pythagorean-identity, thm-ck-euclidean-maps-closed-under-algebra-and-composition]
 dependency_roles:
   ex-gr-minkowski-chart-as-a-lorentzian-manifold: mathematical-premise
   def-gr-smooth-lorentzian-objects: mathematical-premise
@@ -18,6 +18,12 @@ dependency_roles:
   lem-gr-covariant-two-tensor-transformation-law: mathematical-premise
   lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space: mathematical-premise
   ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds: mathematical-premise
+  thm-sine-and-cosine-derivatives: mathematical-premise
+  thm-sine-cosine-signs-monotonicity-and-ranges: mathematical-premise
+  thm-sine-and-cosine-parametrize-the-unit-circle: mathematical-premise
+  thm-sine-cosine-zero-sets-and-fundamental-period: mathematical-premise
+  cor-trigonometric-parity-and-pythagorean-identity: mathematical-premise
+  thm-ck-euclidean-maps-closed-under-algebra-and-composition: mathematical-premise
 sources:
   references:
     - title: "S. M. Carroll, Lecture Notes on General Relativity, arXiv:gr-qc/9712019v1 (1997), the metric in spherical coordinates, printed pp. 48-49 (PDF pp. 55-56)"
@@ -63,16 +69,18 @@ metric has constant components in the identity chart.
 
 [L3] $\mathbb R^4$ with the identity chart is a smooth four-manifold, and open subsets carry the standard restricted smooth structure ([[ex-euclidean-spaces-and-open-subsets-as-smooth-manifolds]]); smooth charts of a smooth structure have smooth transition maps in both directions ([[def-gr-smooth-lorentzian-objects]]).
 
+[L4] Sine and cosine satisfy $\sin'=\cos$ and $\cos'=-\sin$, hence are $C^\infty$ by repeated differentiation ([[thm-sine-and-cosine-derivatives]]); their finite products and composites are smooth ([[thm-ck-euclidean-maps-closed-under-algebra-and-composition]]). Cosine is strictly decreasing on $[0,\pi]$ ([[thm-sine-cosine-signs-monotonicity-and-ranges]]), so its derivative is nonpositive there by taking limits of difference quotients. Thus $\sin\vartheta\ge0$ on $(0,\pi)$; since its zeros are exactly the integer multiples of $\pi$ ([[thm-sine-cosine-zero-sets-and-fundamental-period]]), $\sin\vartheta>0$ there. Also $\sin^2z+\cos^2z=1$ ([[cor-trigonometric-parity-and-pythagorean-identity]]), and $z\mapsto(\cos z,\sin z)$ is injective on $[0,2\pi)$ ([[thm-sine-and-cosine-parametrize-the-unit-circle]]).
+
 ## Verification
 
 **Proof technique:** direct.
 
-1.1 $\Phi$ is smooth on the open set $W$ as a tuple of polynomials and trigonometric functions, and its differential has the matrix with rows obtained by differentiating the four coordinate functions; a direct computation of the $4\times4$ determinant gives $\det D\Phi(u)=r^2\sin\vartheta$, which is nonzero on $W$ because $r>0$ and $0<\vartheta<\pi$. [given, algebra]
+1.1 $\Phi$ is smooth on the open set $W$ as a tuple of polynomials and trigonometric functions, and its differential has the matrix with rows obtained by differentiating the four coordinate functions; a direct computation of the $4\times4$ determinant gives $\det D\Phi(u)=r^2\sin\vartheta$, which is nonzero on $W$ because $r>0$ and $0<\vartheta<\pi$. [given, L4, algebra]
 
-1.2 $\Phi$ is injective on $W$: if $\Phi(u)=\Phi(u')$, then $(u^1)^2=(\Phi(u)^1)^2+(\Phi(u)^2)^2+(\Phi(u)^3)^2=(u'^1)^2$, so $u^1=u'^1>0$; then $u^1\cos u^2=\Phi(u)^3=u^1\cos u'^2$ gives $\cos u^2=\cos u'^2$ with $u^2,u'^2\in(0,\pi)$, hence $u^2=u'^2$; then $\sin u^2>0$ and the pair of first two spatial components gives $(\cos u^3,\sin u^3)=(\cos u'^3,\sin u'^3)$ with $u^3,u'^3\in(0,2\pi)$, hence $u^3=u'^3$; finally $u^0=u'^0$ from the first component. [given, algebra]
+1.2 $\Phi$ is injective on $W$: if $\Phi(u)=\Phi(u')$, then $(u^1)^2=(\Phi(u)^1)^2+(\Phi(u)^2)^2+(\Phi(u)^3)^2=(u'^1)^2$, so $u^1=u'^1>0$; then $u^1\cos u^2=\Phi(u)^3=u^1\cos u'^2$ gives $\cos u^2=\cos u'^2$ with $u^2,u'^2\in(0,\pi)$, hence $u^2=u'^2$; then $\sin u^2>0$ and the pair of first two spatial components gives $(\cos u^3,\sin u^3)=(\cos u'^3,\sin u'^3)$ with $u^3,u'^3\in(0,2\pi)$, hence $u^3=u'^3$; finally $u^0=u'^0$ from the first component. [given, L4, algebra]
 
-2.1 For every $u\in W$, step 1.1 and [L2] give an open neighbourhood $O_u\subseteq W$ such that $\Phi|_{O_u}$ has open image $V_u$ and a smooth local inverse. The image $\Phi(W)=\bigcup_{u\in W}V_u$ is open. By step 1.2, each local inverse equals the set-theoretic inverse $\Phi^{-1}$ on $V_u$, so these inverses agree on overlaps and give a smooth global $y=\Phi^{-1}$ on $\Phi(W)$. This argument uses all available local inverse neighbourhoods and makes no family of choices; by [L3] the map $y$ is a smooth chart on $\mathbb R^4$ whose transition with the identity chart, in the direction $x\circ y^{-1}$, is $\Phi$. [step 1.1, step 1.2, L2, L3]
+2.1 Let $z\in\Phi(W)$ and take a single $u\in W$ with $\Phi(u)=z$. Step 1.1 and [L2] supply open neighbourhoods $u\in O\subseteq W$ and $z\in V=\Phi(O)$ on which $\Phi|_O$ has a smooth inverse. In particular $z\in V\subseteq\Phi(W)$; since every image point has such an open neighbourhood, $\Phi(W)$ is open. By step 1.2, the inverse on this one $V$ equals the unique set-theoretic inverse $y=\Phi^{-1}$ restricted to $V$. Consequently $y$ is smooth near each image point, hence smooth on $\Phi(W)$, without selecting neighbourhoods simultaneously. It and its smooth inverse $\Phi$ form a homeomorphism with smooth transitions to the identity chart, so [L3] gives the asserted smooth chart. [step 1.1, step 1.2, L2, L3]
 
-3.1 Apply the transformation law [L1] with the chart $y$ and $x(u):=\Phi(u)$, so that $\frac{\partial x^c}{\partial y^a}(u)=D\Phi(u)^c{}_a$. The first column of $D\Phi$ is $(1,0,0,0)$, so $A'_{a0}=A'_{0a}=-1$ for $a=0$ and $0$ for $a\neq0$. The remaining columns are the partial derivatives of $(r\sin\vartheta\cos\varphi,\ r\sin\vartheta\sin\varphi,\ r\cos\vartheta)$ with respect to $r,\vartheta,\varphi$, whose squared Euclidean norms are $1$, $r^2$ and $r^2\sin^2\vartheta$, and whose pairwise Euclidean inner products are $0$; since $A_{cd}=\operatorname{diag}(-1,1,1,1)$ and the spatial indices carry the positive signs, the transformation law gives $A'_{11}=1$, $A'_{22}=r^2$, $A'_{33}=r^2\sin^2\vartheta$ and $A'_{ab}=0$ for the remaining off-diagonal pairs. [step 2.1, L1, algebra]
+3.1 Apply the transformation law [L1] with the chart $y$ and $x(u):=\Phi(u)$, so that $\frac{\partial x^c}{\partial y^a}(u)=D\Phi(u)^c{}_a$. The first column of $D\Phi$ is $(1,0,0,0)$, so $A'_{a0}=A'_{0a}=-1$ for $a=0$ and $0$ for $a\neq0$. The remaining columns are the partial derivatives of $(r\sin\vartheta\cos\varphi,\ r\sin\vartheta\sin\varphi,\ r\cos\vartheta)$ with respect to $r,\vartheta,\varphi$, whose squared Euclidean norms are $1$, $r^2$ and $r^2\sin^2\vartheta$, and whose pairwise Euclidean inner products are $0$; since $A_{cd}=\operatorname{diag}(-1,1,1,1)$ and the spatial indices carry the positive signs, the transformation law gives $A'_{11}=1$, $A'_{22}=r^2$, $A'_{33}=r^2\sin^2\vartheta$ and $A'_{ab}=0$ for the remaining off-diagonal pairs. [step 2.1, L1, L4, algebra]
 
-4.1 The component functions of step 3.1 are smooth on $W$, so by [L1] the transformed family is a smooth covariant $2$-tensor field on $\Phi(W)$; its component matrix has determinant $-r^4\sin^2\vartheta\neq0$ on $W$ and diagonal entries of both signs, with exactly one negative entry, so the form has inertia $(3,1,0)$ and the chart expression defines a Lorentzian metric on this chart domain. This shows that a chart change without a change of the field produces non-constant components and that the Lorentzian character is preserved by the transformation law of [L1]. [step 3.1, L1, given] ∎
+4.1 The component functions of step 3.1 are smooth on $W$, so by [L1] the transformed family is a smooth covariant $2$-tensor field on $\Phi(W)$; its component matrix has determinant $-r^4\sin^2\vartheta\neq0$ on $W$ and diagonal entries of both signs, with exactly one negative entry, so the form has inertia $(3,1,0)$ and the chart expression defines a Lorentzian metric on this chart domain. This shows that a chart change without a change of the field produces non-constant components and that the Lorentzian character is preserved by the transformation law of [L1]. [step 3.1, L1, L4, given] ∎

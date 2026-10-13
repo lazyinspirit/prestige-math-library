@@ -75,10 +75,12 @@ sources:
         boundary conditions, eigenfunctions and quantized energies"
       url: "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
-        Sections 9.1, 9.2 and 9.7, printed pages 181-195 and 214-220 (PDF pages
-        193-207 and 226-232): Sturm-Liouville operators, separated self-adjoint
-        boundary conditions (Theorem 9.6) and Sturm oscillation with the nodal
-        count (Theorems 9.39-9.40); PDF page = printed page + 12"
+        Sections 9.1-9.2, printed pages 181-195 (PDF pages 193-207):
+        Sturm-Liouville operators and separated self-adjoint boundary
+        conditions (Theorem 9.6); Section 9.7, printed pages 214-220 (PDF
+        pages 226-232): one-dimensional line operators, Sturm comparison and
+        the full-line nodal count below the essential spectrum (Theorem 9.40
+        has line-domain hypotheses); PDF page = printed page + 12"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
     - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 5.1,
         printed pages 75-79 (PDF pages 83-87): the square potential well, its
@@ -101,7 +103,9 @@ through the declared interval models
 [[def-nrqm-potentials-interval-and-delta-models]] with $0<L<\infty$,
 $m>0$, $\hbar>0$, and assume the Axiom of Countable Choice and the Axiom of
 Choice ([[def-countable-choice]], [[def-axiom-of-choice]]). For a real
-$V\in C([0,L];\mathbb R)$ put $\tilde V:=(2m/\hbar^{2})V$, so that the assigned
+$V\in C([0,L];\mathbb R)$ write
+$\|V\|_{\infty}:=\max_{x\in[0,L]}|V(x)|$ and put
+$\tilde V:=(2m/\hbar^{2})V$, so that the assigned
 energy operators of the definition satisfy
 $H_{D,V}=(\hbar^{2}/2m)(A_{D}+M_{\tilde V})$ and
 $H_{\alpha\beta,V}=(\hbar^{2}/2m)A_{\alpha\beta,\tilde V}$. Then:
@@ -117,10 +121,11 @@ eigenspace is one-dimensional, so the list is strict,
 $\mathcal E_{1}<\mathcal E_{2}<\cdots$, and the eigenvector belonging to
 $\mathcal E_{n}$ has exactly $n-1$ zeros in $(0,L)$. The min-max comparison
 $$\Bigl|\mathcal E_{n}-\frac{\hbar^{2}\pi^{2}n^{2}}{2mL^{2}}\Bigr| \le\|V\|_{\infty}\qquad(n\ge1)$$
-holds. If $V=0$, the eigenpairs of $H_{D,0}$ are exactly the pairs
+holds. If $V=0$, a complete orthonormal family of eigenpairs of $H_{D,0}$ is
 $\bigl(\frac{\hbar^{2}\pi^{2}n^{2}}{2mL^{2}},\,e_{n}\bigr)$ with
 $e_{n}(x)=\sqrt{2/L}\,\sin(n\pi x/L)$, $n\ge1$, a complete orthonormal family of
-$L^{2}(0,L;\mathbb C)$.
+$L^{2}(0,L;\mathbb C)$. Every eigenvector at the displayed energy is a
+nonzero scalar multiple of the corresponding $e_n$.
 
 (b) *Robin interval model.* For real $\alpha,\beta$ (the declared boundary
 parameters in $\mathrm{m^{-1}}$), $(H_{\alpha\beta,V},\mathrm J)$ is an
@@ -179,13 +184,5 @@ claimed.
 
 ## Remarks
 
-- **Where the boundary conditions enter.** The Dirichlet and Robin conditions
-  are declared data of the interval models; the mathematics of this theorem
-  begins with the operators $A_{D}+M_{\tilde V}$ and
-  $A_{\alpha\beta,\tilde V}$ on their displayed domains, so the theorem
-  transfers no property of the line model to the interval models and proves no
-  limiting relation between Dirichlet and Robin conditions.
-- **The min-max bound is a comparison, not a measurement.** It bounds the
-  Dirichlet energies of the perturbed box by the free box energies with an
-  additive constant $\|V\|_{\infty}$; the bound is stated for the energies in
-  joules and involves no data.
+- **Where the boundary conditions enter.** The Dirichlet and Robin conditions are declared data of the interval models; the mathematics of this theorem begins with the operators $A_{D}+M_{\tilde V}$ and $A_{\alpha\beta,\tilde V}$ on their displayed domains, so the theorem transfers no property of the line model to the interval models and proves no limiting relation between Dirichlet and Robin conditions.
+- **The min-max bound is a comparison, not a measurement.** It bounds the Dirichlet energies of the perturbed box by the free box energies with an additive constant $\|V\|_{\infty}$; the bound is stated for the energies in joules and involves no data.

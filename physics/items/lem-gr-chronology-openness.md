@@ -10,8 +10,10 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-deps: [lem-gr-convex-normal-causality, thm-gr-convex-normal-neighborhoods, thm-gr-normal-neighborhood-causal-cone, lem-gr-causal-curve-calculus, def-gr-causal-curves-and-reachability, def-gr-future-and-past-sets, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, def-continuity-real, def-interval, def-c-r-and-smooth-maps-between-smooth-manifolds]
+deps: [def-dependent-choice, def-countable-choice, lem-gr-convex-normal-causality, thm-gr-convex-normal-neighborhoods, thm-gr-normal-neighborhood-causal-cone, lem-gr-causal-curve-calculus, def-gr-causal-curves-and-reachability, def-gr-future-and-past-sets, def-gr-smooth-lorentzian-objects, def-gr-metric-selected-connection, def-continuity-real, def-interval, def-c-r-and-smooth-maps-between-smooth-manifolds]
 dependency_roles:
+  def-dependent-choice: mathematical-premise
+  def-countable-choice: mathematical-premise
   lem-gr-convex-normal-causality: mathematical-premise
   thm-gr-convex-normal-neighborhoods: mathematical-premise
   thm-gr-normal-neighborhood-causal-cone: mathematical-premise
@@ -34,6 +36,10 @@ verification:
 ---
 
 ## Statement
+
+Assume Countable Choice and Dependent Choice ([[def-countable-choice]],
+[[def-dependent-choice]]) for the absolutely continuous causal-curve
+calculus and the supplied causal results used below.
 
 Let $(M,g,N)$ be a time-oriented smooth Lorentzian four-manifold, with the
 relations $\ll$, $\le$ and the sets $I^\pm$, $J^\pm$ of
@@ -60,7 +66,7 @@ $q\in\overline P$, then $I^-(q)\subseteq P$.
 
 [L2] If $\gamma:[a,b]\to M$ is a future timelike curve and $a\le s<t\le b$, then $\gamma|_{[s,t]}$ is a future timelike curve, because the set of parameters at which the velocity exists and is future timelike is of full measure and restricts to a set of full measure in $[s,t]$; also $\gamma(s)\ll\gamma(t)$ ([[def-gr-causal-curves-and-reachability]] clause (b) and clause (c)).
 
-[L3] Concatenation and transitivity: a finite concatenation of future timelike curves is a future timelike curve, and from $x\ll z$ and $z\ll y$ it follows that $x\ll y$; more generally $x\ll z$ and $z\le y$ imply $x\ll y$ ([[lem-gr-causal-curve-calculus]] clauses (d) and (f)).
+[L3] Concatenation and transitivity: a finite concatenation of future timelike curves is a future timelike curve, and from $x\ll z$ and $z\ll y$ it follows that $x\ll y$ ([[lem-gr-causal-curve-calculus]] clauses (d) and (f)).
 
 [L4] A future set $F$ satisfies $I^+(F)\subseteq F$, and then also $I^+(q)\subseteq I^+(F)\subseteq F$ for any $q\in F$ ([[def-gr-future-and-past-sets]] clause (a)); a past set satisfies $I^-(P)\subseteq P$.
 
@@ -72,7 +78,7 @@ $q\in\overline P$, then $I^-(q)\subseteq P$.
 
 2.1 (Openness of the chronological relation.) Let $x\ll y$ and choose a future timelike curve $\gamma$ from $x$ to $y$; pick $t_0\in(0,1)$ and put $z:=\gamma(t_0)$, so that $x\ll z\ll y$ by [L2] and [L3]. By step 1.1 the sets $I^-(z)=\{a:a\ll z\}$ and $I^+(z)$ are open, and $I^-(z)\times I^+(z)$ is an open neighborhood of $(x,y)$ in $M\times M$; every $(a,b)$ in it satisfies $a\ll z\ll b$, hence $a\ll b$ by [L3]. This proves (b). [step 1.1, L3, given]
 
-3.1 (Future sets are closed under the chronological future of their closure.) Let $F$ be a future set and $q\in\overline F$; fix a sequence $q_k\in F$ with $q_k\to q$. Let $r\in I^+(q)$, so that $(q,r)$ is in the open set of step 2.1. For $k$ large, $(q_k,r)$ also lies in that set, that is $q_k\ll r$; then $r\in I^+(q_k)\subseteq I^+(F)\subseteq F$ by [L4]. Hence $I^+(q)\subseteq F$; the past statement is the time reverse. [step 2.1, L4, given]
+3.1 (Future sets are closed under the chronological future of their closure.) Let $F$ be a future set and $q\in\overline F$. Let $r\in I^+(q)$. By step 2.1, the set $I^-(r)$ is an open neighborhood of $q$, so it meets $F$; choose one $f\in F\cap I^-(r)$. Then $f\ll r$, and $r\in I^+(f)\subseteq I^+(F)\subseteq F$ by [L4]. Hence $I^+(q)\subseteq F$; the past statement is the time reverse. No sequence of chosen points is needed. [step 2.1, L4, given]
 
 4.1 (Conclusion.) Step 1.1 proves (a), step 2.1 proves (b) and step 3.1 proves (c). [step 1.1, step 2.1, step 3.1] ∎
 

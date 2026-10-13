@@ -7,7 +7,7 @@ title: "Separable partial trace and its basic properties"
 status: draft
 origin: pipeline
 dependency_level: 2
-deps: [thm-cauchy-schwarz-in-an-inner-product-space, thm-separable-hilbert-space-has-a-countable-orthonormal-basis, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-rank-one-operator-calculus, lem-nuclear-series-characterizes-trace-norm, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-is-absolutely-convergent-and-basis-independent, def-trace-class-operator, def-hilbert-space, def-operator-norm, def-countable-choice]
+deps: [thm-cauchy-schwarz-in-an-inner-product-space, thm-separable-hilbert-space-has-a-countable-orthonormal-basis, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-rank-one-operator-calculus, lem-nuclear-series-characterizes-trace-norm, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-is-absolutely-convergent-and-basis-independent, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, def-trace-class-operator, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-space, def-operator-norm, def-countable-choice]
 dependency_roles:
   thm-cauchy-schwarz-in-an-inner-product-space: mathematical-premise
   thm-separable-hilbert-space-has-a-countable-orthonormal-basis: mathematical-premise
@@ -19,7 +19,9 @@ dependency_roles:
   lem-nuclear-series-characterizes-trace-norm: mathematical-premise
   thm-trace-class-is-a-two-sided-banach-operator-ideal: mathematical-premise
   thm-trace-is-absolutely-convergent-and-basis-independent: mathematical-premise
+  thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues: mathematical-premise
   def-trace-class-operator: mathematical-premise
+  def-self-adjoint-positive-unitary-and-normal-operator: mathematical-premise
   def-hilbert-space: mathematical-premise
   def-operator-norm: mathematical-premise
   def-countable-choice: mathematical-premise
@@ -45,7 +47,7 @@ $$\operatorname{tr}\bigl((\operatorname{Tr}_KT)A\bigr)=\operatorname{tr}\bigl(T(
 
 for every trace-class $T$ and every $A\in\mathcal B(H)$; it satisfies $\|\operatorname{Tr}_KT\|_1\le\|T\|_1$ and is independent of any chosen orthonormal basis of $K$.
 
-(b) $\operatorname{Tr}_K$ is positive (positive operators map to positive operators), trace preserving ($\operatorname{tr}\operatorname{Tr}_KT=\operatorname{tr}T$), and it maps density operators to density operators ([[lem-nrqm-composites-density-and-scalar-spectral-probability]]).
+(b) $\operatorname{Tr}_K$ maps self-adjoint positive trace-class operators to self-adjoint positive trace-class operators (positivity in the bounded-operator sense of [[def-self-adjoint-positive-unitary-and-normal-operator]]), is trace preserving ($\operatorname{tr}\operatorname{Tr}_KT=\operatorname{tr}T$), and maps density operators to density operators ([[lem-nrqm-composites-density-and-scalar-spectral-probability]]).
 
 (c) On rank-one operators, $\operatorname{Tr}_KT_{u\otimes v,u'\otimes v'}=\langle v,v'\rangle_K\,T_{u,u'}$.
 
@@ -71,6 +73,6 @@ The analogous map $\operatorname{Tr}_H$ satisfies $\operatorname{tr}((\operatorn
 
 3.1 [Extension to trace class] For a nuclear representation $T=\sum_jT_{w_j,z_j}$, define $\operatorname{Tr}_KT:=\sum_jQ(w_j,z_j)$. Step 2.1 and [F2] give trace-norm convergence and the bound $\|\operatorname{Tr}_KT\|_1\le\inf\sum_j\|w_j\|\|z_j\|=\|T\|_1$. The defining trace pairing follows by summing that of step 2.1, using trace-norm continuity and $\|A\otimes I\|\le\|A\|$. If two nuclear representations are used, both images have the same pairings against every bounded $A$, and their difference vanishes by [F3]. Thus the definition is independent of representation. The same uniqueness proves linearity, since the sum and scalar multiple of images satisfy the pairing for the sum and scalar multiple of inputs. This proves (a) and the elementary formula (c). [step 2.1, F1, F2, F3, F4, algebra]
 
-4.1 [Positivity and trace preservation] Step 2.1 gives $Q(w,w)=\sum_bT_{w_b,w_b}\ge0$, since $\langle T_{w_b,w_b}x,x\rangle=|\langle x,w_b\rangle|^2\ge0$ and trace-norm convergence implies operator-norm convergence. Every positive trace-class input has a positive spectral rank-one expansion by [[lem-nrqm-composites-density-and-scalar-spectral-probability]]; the same proof applies when its trace is not one, by scaling when nonzero, and the zero input is immediate. The bounded map of step 3.1 carries its partial sums to positive sums of these $Q(w,w)$ and thus carries its limit to a positive operator. Taking $A=I_H$ in the defining pairing gives $\operatorname{tr}\operatorname{Tr}_KT=\operatorname{tr}T$. Hence density operators map to density operators. [step 2.1, step 3.1, F1, F2, algebra]
+4.1 [Positivity and trace preservation] Step 2.1 gives $Q(w,w)=\sum_bT_{w_b,w_b}$, which is self-adjoint positive since $\langle T_{w_b,w_b}x,x\rangle=|\langle x,w_b\rangle|^2\ge0$ and trace-norm convergence implies operator-norm convergence. Every self-adjoint positive trace-class input of positive trace becomes a density operator after division by its trace, so it has the positive spectral rank-one expansion of [[lem-nrqm-composites-density-and-scalar-spectral-probability]]; a zero-trace self-adjoint positive trace-class input is zero by [[thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues]]. The bounded map of step 3.1 carries the partial sums of this expansion to positive sums of the corresponding $Q(w,w)$ and hence carries its limit to a self-adjoint positive operator. Taking $A=I_H$ in the defining pairing gives $\operatorname{tr}\operatorname{Tr}_KT=\operatorname{tr}T$. Hence density operators map to density operators. [step 2.1, step 3.1, F1, F2, algebra]
 
 5.1 [Uniqueness] If two linear maps $\operatorname{Tr}_K,\operatorname{Tr}_K'$ satisfy the defining identity for all $T$ and $A$, then for fixed $T$ the difference $S=\operatorname{Tr}_KT-\operatorname{Tr}_K'T$ satisfies $\operatorname{tr}(SA)=0$ for all bounded $A$, so $S=0$ by [F3]. Hence the map is unique and, in particular, independent of any basis; the symmetrically defined $\operatorname{Tr}_H$ has the stated identity. [step 3.1, F3] ∎

@@ -105,7 +105,10 @@ the spacetime $I\times\Sigma$. In particular:
 **(b)** On $I$ the density scales as
 $\varepsilon(t)=C\,a(t)^{-3(1+w)}$ with the positive constant
 $C=A^{3(1+w)}\dfrac{3c^2q^2}{8\pi G_Nt_*^2}$, and the continuity
-equation (C) holds.
+equation (C) holds. In the adopted SI convention, $w$ and $q$ are
+dimensionless and $C$ has units $\mathrm J\,\mathrm m^{3w}$, since
+$\varepsilon$ has units $\mathrm J\,\mathrm m^{-3}$ and $a$ has units
+$\mathrm m$ ([[def-gr-si-unit-and-coordinate-conventions]]).
 
 The theorem asserts no uniqueness of solutions of the reduced system for the
 stated equation of state, no extension of the solutions beyond the displayed
@@ -137,15 +140,6 @@ interval, and no value of $A,t_*,t_0$ or of the constants.
 
 ## Remarks
 
-- **What the solutions are and are not.** The theorem verifies a family of
-  exact solutions of the flat, $\Lambda=0$ barotropic branch; it does not claim
-  that these are the only solutions with the stated equation of state, and it
-  makes no statement about the behaviour of the scale factor as
-  $t\downarrow t_0$, about spacetime singularities, about the physical
-  interpretation of the coordinates, or about any observation.
+- **What the solutions are and are not.** The theorem verifies a family of exact solutions of the flat, $\Lambda=0$ barotropic branch; it does not claim that these are the only solutions with the stated equation of state, and it makes no statement about the behaviour of the scale factor as $t\downarrow t_0$, about spacetime singularities, about the physical interpretation of the coordinates, or about any observation.
 
-- **Values of the constants.** $A$, $t_*$ and $t_0$ are arbitrary model data;
-  the density at a reference time determines the combination $C$, and the
-  expansion rate at a reference time determines $t-t_0$ there. No numerical
-  value of $H$, of a density or of an age is asserted; any such value would be
-  an empirical premise requiring a source-backed measurement.
+- **Values of the constants.** $A$, $t_*$ and $t_0$ are arbitrary model data; the density at a reference time determines the combination $C$, and the expansion rate at a reference time determines $t-t_0$ there. No numerical value of $H$, of a density or of an age is asserted; any such value would be an empirical premise requiring a source-backed measurement.

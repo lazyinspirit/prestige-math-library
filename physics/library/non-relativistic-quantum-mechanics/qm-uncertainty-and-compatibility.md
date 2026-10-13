@@ -34,12 +34,12 @@ preparation variance and spread is fixed by
 [[def-nrqm-uncertainty-preparation-spread]]: for an assigned observable
 $(A,u_{A})$ and a preparation $\rho$, $\Delta_{\rho}A$ is the standard
 deviation of the outcome law of P2, defined only under the stated moment
-hypotheses and read in the declared unit. The mathematical core is
-[[lem-nrqm-uncertainty-schrodinger-robertson-anticommutator-bound]], which
-proves the weak Robertson bound for unit vectors in both domains, the
-Robertson bound on the product domains and the anticommutator refinement with
-its equality clause. [[pthm-nrqm-uncertainty-robertson-relation]] reads that
-bound as a conditional statement about two assigned observables, and
+hypotheses and read in the declared unit. The weak-domain bound is supplied by
+[[lem-nrqm-composites-weak-form-robertson-uncertainty]]. On the product
+domains, [[lem-nrqm-uncertainty-schrodinger-robertson-anticommutator-bound]]
+proves the Robertson bound and the anticommutator refinement with its equality
+clause. [[pthm-nrqm-uncertainty-robertson-relation]] reads these bounds as a
+conditional statement about two assigned observables, and
 [[pthm-nrqm-uncertainty-position-momentum-relation]] proves the model's
 position-momentum relation $\Delta Q_{j}\Delta P_{j}\ge\hbar/2$ on the full
 maximal domain of the pair, with the exact imaginary part $-\hbar/2$ of the

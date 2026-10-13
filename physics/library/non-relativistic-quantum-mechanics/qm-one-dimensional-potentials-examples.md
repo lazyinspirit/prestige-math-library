@@ -37,5 +37,6 @@ potential, the attainment of the min-max bound and the positive gaps
 [[rem-nrqm-potentials-examples-scope-limits]] records the combined scope: the
 comparisons are exact internal checks of the cited theorems at declared
 parameter values, not simulations, not measurements and not statistical
-inference; no decimal of this page is claimed beyond a bracket of an exact
-rational proven in its verification.
+inference. The displayed decimals are rational bracket endpoints or exact
+terminating decimal expansions of rational values, justified in the
+verifications.

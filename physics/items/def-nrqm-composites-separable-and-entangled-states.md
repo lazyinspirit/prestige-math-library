@@ -83,10 +83,8 @@ The set $\operatorname{conv}\mathcal P$ consists exactly of the finite sums
 $\sum_{j=1}^{n}w_{j}T_{\Psi_{j},\Psi_{j}}$ with $n\ge1$, weights $w_{j}\ge0$,
 $\sum_{j}w_{j}=1$ and unit product vectors $\Psi_{j}$: such sums are convex
 combinations of density operators and hence density operators
-([[lem-nrqm-state-geometry-density-set-convex-and-complete]] clause (a);
-the finite-dimensional case of that clause is the
-[[lem-nrqm-composites-density-and-scalar-spectral-probability]] expansion
-applied to orthogonal pure states).
+([[lem-nrqm-state-geometry-density-set-convex-and-complete]] clause (a)),
+without any orthogonality requirement on the product vectors.
 Every element of $\operatorname{conv}\mathcal P$ is a density operator, and
 $\mathcal S(H,K)$ is a convex subset of $D(H\widehat\otimes K)$: if $\rho,\sigma$
 are limits of convex combinations $\rho_{n}\to\rho$, $\sigma_{n}\to\sigma$ and
@@ -126,7 +124,7 @@ and is part of the definition.
   diagonal. The product of the unit spheres of $H$ and $K$ is a closed
   bounded subset of $\mathbb R^{2h+2k}$, hence compact by
   [[thm-heine-borel-rn]]. The map $(u,v)\mapsto\kappa(u\otimes v)$ is
-  continuous by the tensor norm formula, and $q\mapsto T_{q,q}$ is
+  continuous: bilinearity and the tensor norm formula give $\|\kappa(u\otimes v)-\kappa(u'\otimes v')\|\le\|u-u'\|\,\|v\|+\|u'\|\,\|v-v'\|$. The map $q\mapsto T_{q,q}$ is
   trace-norm continuous by
   [[lem-nrqm-composites-rank-one-operator-calculus]] clause (f).
   Therefore $\mathcal P$ is compact by
@@ -145,8 +143,14 @@ and is part of the definition.
   image of $\mathcal P^{d+1}\times\Delta_d$ under the continuous map
   $((P_i),(w_i))\mapsto\sum_iw_iP_i$, where
   $\Delta_d=\{(w_1,\ldots,w_{d+1}):w_i\ge0,\ \sum_iw_i=1\}$.
-  In finite coordinates $\mathcal P$ is closed and bounded because it is
-  compact; the simplex $\Delta_d$ is also closed and bounded. Therefore
+  The trace-norm and Euclidean coordinate topologies on $W$ agree. In an
+  orthonormal basis $(g_i)_{i=1}^{N}$ of $L$, write
+  $T=\sum_{i,j}t_{ij}T_{g_i,g_j}$ and use the Euclidean coordinate norm
+  $\|T\|_{2}:=(\sum_{i,j}|t_{ij}|^{2})^{1/2}$. Each coordinate satisfies
+  $|t_{ij}|=|\langle Tg_j,g_i\rangle|\le\|T\|\le\|T\|_{1}$; conversely,
+  $\|T\|_{1}\le\sum_{i,j}|t_{ij}|\,\|T_{g_i,g_j}\|_{1}=\sum_{i,j}|t_{ij}|\le N\|T\|_{2}$, since the matrix units have trace norm one by [[lem-nrqm-composites-rank-one-operator-calculus]] and there are $N^{2}$ coordinates. Thus $\|T\|_{2}\le N\|T\|_{1}$ and $\|T\|_{1}\le N\|T\|_{2}$, proving equality of the topologies. Hence in finite coordinates $\mathcal P$ is
+  closed and bounded because it is compact; the simplex $\Delta_d$ is also
+  closed and bounded. Therefore
   $\mathcal P^{d+1}\times\Delta_d$ is closed and bounded in a Euclidean
   space, hence compact by [[thm-heine-borel-rn]]. Its image is
   compact and therefore closed in the trace-norm space. Finally,

@@ -76,56 +76,25 @@ $$\Bigl(m+\frac{I}{a^2}\Bigr)x''=f,\qquad x''=\frac{fa^2}{I+ma^2},\qquad \theta'
 
 ## Facts & Assumptions
 
-**Given:** The constants $a,m,I>0$ and $f\in\mathbb R$, the constraint
-$\mathcal G(x,\theta)=x-a\theta$, the matrix $M=\mathrm{diag}(m,I)$, the force $\Phi=(f,0)$, and an
-open interval $J$ ([[def-interval]]) carrying a $C^2$ curve $q=(x,\theta)$.
+**Given:** The constants $a,m,I>0$ and $f\in\mathbb R$, the constraint $\mathcal G(x,\theta)=x-a\theta$, the matrix $M=\mathrm{diag}(m,I)$, the force $\Phi=(f,0)$, and an open interval $J$ ([[def-interval]]) carrying a $C^2$ curve $q=(x,\theta)$.
 
-[F1] Constraint data ([[def-ck-euclidean-maps-and-diffeomorphisms]],
-[[def-jacobian-matrix-and-gradient]], [[def-euclidean-submersions-and-immersions]]):
-$\mathcal G$ is $C^\infty$ on $\mathbb R^2$ with gradient
-$\mathcal G_q=(1,-a)$; since $1\ne0$, $\mathcal G_q$ has rank $1$ and is surjective onto
-$\mathbb R$; and $M$ is symmetric positive definite with inverse
-$\mathrm{diag}(m^{-1},I^{-1})$, while $\Phi$ is a constant $C^1$ field
-([[def-matrix-product-and-identity-matrix]]).
+[F1] Constraint data ([[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-jacobian-matrix-and-gradient]], [[def-euclidean-submersions-and-immersions]]): $\mathcal G$ is $C^\infty$ on $\mathbb R^2$ with gradient $\mathcal G_q=(1,-a)$; since $1\ne0$, $\mathcal G_q$ has rank $1$ and is surjective onto $\mathbb R$; and $M$ is symmetric positive definite with inverse $\mathrm{diag}(m^{-1},I^{-1})$, while $\Phi$ is a constant $C^1$ field ([[def-matrix-product-and-identity-matrix]]).
 
-[F2] The ideal-constraint model ([[def-cm-holonomic-constraint-and-ideal-reactions]]): a $C^2$
-curve $q$ with $\mathcal G(q(t))=0$ and permitted velocity $\mathcal G_q(q(t))q'(t)=0$ is an
-ideal-constraint motion of $(\mathcal G,M,\Phi)$ when there is a continuous
-$\lambda:J\to\mathbb R$ with $Mq''=\Phi+\mathcal G_q^{\mathsf T}\lambda$; for every such motion
-the reaction $R:=Mq''-\Phi=\mathcal G_q^{\mathsf T}\lambda$ satisfies the d'Alembert condition
-$R\cdot\delta=0$ for every $\delta\in\ker\mathcal G_q$.
+[F2] The ideal-constraint model ([[def-cm-holonomic-constraint-and-ideal-reactions]]): a $C^2$ curve $q$ with $\mathcal G(q(t))=0$ and permitted velocity $\mathcal G_q(q(t))q'(t)=0$ is an ideal-constraint motion of $(\mathcal G,M,\Phi)$ when there is a continuous $\lambda:J\to\mathbb R$ with $Mq''=\Phi+\mathcal G_q^{\mathsf T}\lambda$; for every such motion the reaction $R:=Mq''-\Phi=\mathcal G_q^{\mathsf T}\lambda$ satisfies the d'Alembert condition $R\cdot\delta=0$ for every $\delta\in\ker\mathcal G_q$.
 
-[F3] Kernel and virtual displacements ([[def-linear-map]],
-[[def-euclidean-inner-product]]): $\delta\in\ker\mathcal G_q$ means $\delta_x-a\delta_\theta=0$,
-i.e. $\delta=(a\delta_\theta,\delta_\theta)=\delta_\theta(a,1)$; thus the kernel is the line
-spanned by $(a,1)$ and is one-dimensional.
+[F3] Kernel and virtual displacements ([[def-linear-map]], [[def-euclidean-inner-product]]): $\delta\in\ker\mathcal G_q$ means $\delta_x-a\delta_\theta=0$, i.e. $\delta=(a\delta_\theta,\delta_\theta)=\delta_\theta(a,1)$; thus the kernel is the line spanned by $(a,1)$ and is one-dimensional.
 
-[F4] Differentiation of the constraint: for a $C^2$ curve $q=(x,\theta)$ the function
-$t\mapsto x(t)-a\theta(t)$ is $C^2$ with second derivative $x''-a\theta''$
-([[thm-algebra-of-derivatives]], [[def-vector-valued-derivative-and-integral]]); equivalently
-$G_qq''+\mathcal G_{qq}[q',q']=x''-a\theta''$ by the chain rule
-([[thm-chain-rule-for-total-derivatives]]).
+[F4] Differentiation of the constraint: for a $C^2$ curve $q=(x,\theta)$ the function $t\mapsto x(t)-a\theta(t)$ is $C^2$ with second derivative $x''-a\theta''$ ([[thm-algebra-of-derivatives]], [[def-vector-valued-derivative-and-integral]]); equivalently $G_qq''+\mathcal G_{qq}[q',q']=x''-a\theta''$ by the chain rule ([[thm-chain-rule-for-total-derivatives]]).
 
-[F5] If a differentiable function on an interval has identically vanishing derivative, it is
-constant ([[cor-zero-derivative-implies-constant]], [[def-interval]]).
+[F5] If a differentiable function on an interval has identically vanishing derivative, it is constant ([[cor-zero-derivative-implies-constant]], [[def-interval]]).
 
-[F6] The multiplier lemma ([[lem-cm-constraint-multipliers-and-accelerations]]): the matrix
-$C:=\mathcal G_qM^{-1}\mathcal G_q^{\mathsf T}$ is symmetric positive definite and invertible
-([[def-transpose-of-a-matrix]], [[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]]),
-and a vector $R$ orthogonal to $\ker\mathcal G_q$ is $R=\mathcal G_q^{\mathsf T}\lambda$ for a
-unique $\lambda$, namely $\lambda=C^{-1}\mathcal G_qM^{-1}R$.
+[F6] The multiplier lemma ([[lem-cm-constraint-multipliers-and-accelerations]]): the matrix $C:=\mathcal G_qM^{-1}\mathcal G_q^{\mathsf T}$ is symmetric positive definite and invertible ([[def-transpose-of-a-matrix]], [[def-matrix-product-and-identity-matrix]], [[def-euclidean-inner-product]]), and a vector $R$ orthogonal to $\ker\mathcal G_q$ is $R=\mathcal G_q^{\mathsf T}\lambda$ for a unique $\lambda$, namely $\lambda=C^{-1}\mathcal G_qM^{-1}R$.
 
-[F7] The chart proposition ([[prop-cm-ideal-holonomic-system-in-a-time-dependent-chart]]): with
-the present time-independent data it defines
-$\Lambda=-C^{-1}\bigl[\mathcal G_qM^{-1}\Phi+\mathcal G_{tt}+2\mathcal G_{tq}[v]+\mathcal G_{qq}[v,v]\bigr]$
-and states that the ideal-constraint motion with permitted velocity satisfies
-$Mq''=\Phi+\mathcal G_q^{\mathsf T}\Lambda$; here all time derivatives of $\mathcal G$ vanish.
+[F7] The chart proposition ([[prop-cm-ideal-holonomic-system-in-a-time-dependent-chart]]): with the present time-independent data it defines $\Lambda=-C^{-1}\bigl[\mathcal G_qM^{-1}\Phi+\mathcal G_{tt}+2\mathcal G_{tq}[v]+\mathcal G_{qq}[v,v]\bigr]$ and states that the ideal-constraint motion with permitted velocity satisfies $Mq''=\Phi+\mathcal G_q^{\mathsf T}\Lambda$; here all time derivatives of $\mathcal G$ vanish.
 
 ## Verification
 
-**Proof technique:** direct; compute the kernel, project the ideal equation onto the virtual
-displacement, differentiate the constraint twice and solve the resulting linear system, then
-check the multiplier against the proposition and exhibit the motion.
+**Proof technique:** direct; compute the kernel, project the ideal equation onto the virtual displacement, differentiate the constraint twice and solve the resulting linear system, then check the multiplier against the proposition and exhibit the motion.
 
 1.1 By [F1], $\mathcal G$ is $C^\infty$ with $\mathcal G_q=(1,-a)$ of rank one; the virtual displacements are the kernel of [F3], the line $\mathbb R(a,1)$; the velocity constraint $x'-a\theta'=0$ is exactly $\mathcal G_qq'=0$. This is the first assertion of part 1. [F1, F3, algebra]
 
@@ -135,7 +104,7 @@ check the multiplier against the proposition and exhibit the motion.
 
 1.4 Since $\mathcal G(q(t))=x(t)-a\theta(t)$ is identically zero and both $x$ and $\theta$ are $C^2$, its second derivative vanishes; by [F4] this second derivative is $x''-a\theta''$, so $x''=a\theta''$. This is the second relation of part 2. [F4, algebra]
 
-2.1 Substituting $x''=a\theta''$ of step 1.4 into the identity $(mx''-f)a+I\theta''=0$ of step 1.3 gives $(ma^2+I)\theta''=af$, hence $\theta''=\dfrac{af}{I+ma^2}$ and $x''=a\theta''=\dfrac{fa^2}{I+ma^2}$; dividing the first relation by $a^2$ and adding $mx''$ gives $\bigl(m+\frac{I}{a^2}\bigr)x''=f$. This is the chain of formulas of part 2. [step 1.3, step 1.4, algebra]
+2.1 Substituting $x''=a\theta''$ of step 1.4 into the identity $(mx''-f)a+I\theta''=0$ of step 1.3 gives $(ma^2+I)\theta''=af$, hence $\theta''=\dfrac{af}{I+ma^2}$ and $x''=a\theta''=\dfrac{fa^2}{I+ma^2}$; substituting $\theta''=x''/a$ into $(ma^2+I)\theta''=af$ and dividing by $a$ gives $\bigl(m+\frac{I}{a^2}\bigr)x''=f$. This is the chain of formulas of part 2. [step 1.3, step 1.4, algebra]
 
 3.1 Multiplier: from $Mq''=\Phi+\mathcal G_q^{\mathsf T}\lambda$ in components, $mx''=f+\lambda$ and $I\theta''=-a\lambda$; by step 2.1, $\lambda=mx''-f=\dfrac{mfa^2}{I+ma^2}-f=-\dfrac{fI}{I+ma^2}$, and then $-a\lambda=\dfrac{afI}{I+ma^2}=I\theta''$ reproduces the second component. The uniqueness of $\lambda$ is [F6], applied to $R=Mq''-\Phi$, which is orthogonal to the kernel by [F2]; thus $\lambda$ is the unique multiplier of the motion and $|\lambda|=|f|I/(I+ma^2)\le|f|$, with equality when $f=0$ and strict inequality when $f\ne0$, since $0<I/(I+ma^2)<1$. This is the first assertion of part 3. [F2, F6, step 2.1, algebra]
 
@@ -149,20 +118,8 @@ check the multiplier against the proposition and exhibit the motion.
 
 ## Remarks
 
-- The model is the ideal planar no-slip law with an adopted kinetic matrix; the multiplier
-  $\lambda$ computed in part 3, i.e. the component of the reaction
-  $\mathcal G_q^{\mathsf T}\lambda=(\lambda,-a\lambda)$, is the force the model requires
-  along the line of rolling. Whether a real contact can supply that force (sufficient static
-  friction in the contact, no deformation or rolling resistance) is an empirical condition on the
-  apparatus, not a consequence of this mathematical development; when it fails, the no-slip
-  constraint itself is not a valid model and the present equations do not apply.
+- The model is the ideal planar no-slip law with an adopted kinetic matrix; the multiplier $\lambda$ computed in part 3, i.e. the component of the reaction $\mathcal G_q^{\mathsf T}\lambda=(\lambda,-a\lambda)$, is the force the model requires along the line of rolling. Whether a real contact can supply that force (sufficient static friction in the contact, no deformation or rolling resistance) is an empirical condition on the apparatus, not a consequence of this mathematical development; when it fails, the no-slip constraint itself is not a valid model and the present equations do not apply.
 
-- The reduction to a single holonomic constraint uses that the disk rolls in a straight line with
-  fixed vertical plane; the general three-dimensional rolling problem has velocity-dependent
-  constraints that are not integrable in the same way, and no acceleration formula of the present
-  form is asserted for it. The precise planar case is exactly the one identified in Section 5.7
-  of the cited textbook.
+- The reduction to a single holonomic constraint uses that the disk rolls in a straight line with fixed vertical plane; the general three-dimensional rolling problem has velocity-dependent constraints that are not integrable in the same way, and no acceleration formula of the present form is asserted for it. The precise planar case is exactly the one identified in Section 5.7 of the cited textbook.
 
-- The multiplier is the model's constraint force and is not a measured quantity; only the reaction
-  $\mathcal G_q^{\mathsf T}\lambda=(\lambda,-a\lambda)$ enters the equations, in agreement with
-  the general scope note of [[def-cm-holonomic-constraint-and-ideal-reactions]].
+- The multiplier is the model's constraint force and is not a measured quantity; only the reaction $\mathcal G_q^{\mathsf T}\lambda=(\lambda,-a\lambda)$ enters the equations, in agreement with the general scope note of [[def-cm-holonomic-constraint-and-ideal-reactions]].

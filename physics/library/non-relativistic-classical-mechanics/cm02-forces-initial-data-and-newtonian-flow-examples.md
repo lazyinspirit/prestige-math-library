@@ -25,7 +25,7 @@ standing regularity hypotheses of [[post-cm02-force-superposition]] clause
 ([[ex-cm02-force-model-regularity-checks]]): the uniform-field map is constant
 with Lipschitz constant $0$, the drag map is affine with constant $c$, and the
 inverse-square map $-k\,x/\lvert x\rvert^{3}$ is locally Lipschitz on every
-collision-free annulus with the explicit constant
+source-excluding annulus with the explicit constant
 $k(r^{-3}+3R^{3}r^{-6})$ and has no continuous extension to the excluded
 center, so that the existence, uniqueness and continuation theorems apply to
 each model on its stated domain.
@@ -42,7 +42,8 @@ the exponential decay.
 
 The counterexamples probe the hypotheses. Continuity of the force map alone
 does not give unique motions: for the unit-mass model with
-$F(x)=m\sqrt{\lvert x_{1}\rvert}\,e_{1}$ two distinct $C^{2}$ motions pass
+$F(x)=\lambda\sqrt{\lvert x_{1}\rvert/\ell_*}\,e_{1}$, where
+$[\lambda]=\mu\ell\tau^{-2}$ and $[\ell_*]=\ell$, two distinct $C^{2}$ motions pass
 through the rest datum, and the map fails exactly the state-local-Lipschitz
 clause of the force postulate
 ([[cex-cm02-nonunique-flow-for-a-continuous-force]]). All-time existence is
@@ -51,5 +52,5 @@ explicit radial motion $r(t)=r_{0}(1-t/T)^{2/3}$ reaches the excluded center
 at the finite time $T$ with unbounded speed, so its maximal interval is
 $(-\infty,T)$
 ([[cex-cm02-singular-collision-finite-time]]); this exhibits the escape
-alternative of [[pthm-cm02-continuation]] and confirms that the collision
+alternative of [[pthm-cm02-continuation]] and confirms that the external-source singularity
 exclusion of the configuration domain is essential to the model's hypotheses.

@@ -35,7 +35,11 @@ Let $n\ge1$, let $U\subseteq\mathbb R^n$ be open and let $F:U\to\mathbb R^n$ be 
 
 $$\operatorname{dist}(z,S):=\inf\{\,\|z-s\|_2:s\in S\,\}\qquad(z\in\mathbb R^n),$$
 
-the infimum of a nonempty set of nonnegative reals that is bounded below, computed for the Euclidean norm of [[def-euclidean-inner-product]]. The map $z\mapsto\operatorname{dist}(z,S)$ is nonnegative and vanishes exactly on the closure of $S$. When $S=\{z_*\}$ is a singleton, $\operatorname{dist}(z,S)=\|z-z_*\|_2$.
+the infimum of a nonempty set of nonnegative reals that is bounded below, computed for the Euclidean norm of [[def-euclidean-inner-product]]. Define the Euclidean closure of $S$ by
+
+$$\overline S:=\{z\in\mathbb R^n:\text{for every }\varepsilon>0\text{ there is }s\in S\text{ with }\|z-s\|_2<\varepsilon\}.$$
+
+The map $z\mapsto\operatorname{dist}(z,S)$ is nonnegative and vanishes exactly on $\overline S$: by the defining property of the infimum, $\operatorname{dist}(z,S)=0$ exactly when every positive-radius Euclidean ball about $z$ meets $S$. When $S=\{z_*\}$ is a singleton, $\operatorname{dist}(z,S)=\|z-z_*\|_2$.
 
 **Orbital stability.** Let $S\subseteq U$ be nonempty and forward invariant. Then $S$ is **orbitally stable** when for every $\varepsilon>0$ there is $\delta>0$ such that every maximal solution $z$ with $\operatorname{dist}(z(0),S)<\delta$ is defined for all $t\ge0$ and satisfies
 
@@ -51,7 +55,7 @@ The equilibrium $z_*$ is **linearly stable** when every maximal solution $y$ of 
 
 ## Remarks
 
-- Orbital stability of $S$ is a statement about the set $S$, not about any chosen point of it: it controls the distance of a whole solution to $S$ and does not assert that a solution starting near one point of $S$ stays near that point. Lyapunov stability of an equilibrium is the special case $S=\{z_*\}$; orbital stability of a limit cycle is the case in which $S$ is the image of a nonconstant periodic solution ([[def-cm-hyperbolic-equilibrium-and-limit-cycles]]).
+- Orbital stability of $S$ is a statement about the set $S$, not about any chosen point of it: it controls the distance of a whole solution to $S$ and does not assert that a solution starting near one point of $S$ stays near that point. Lyapunov stability of an equilibrium is the special case $S=\{z_*\}$; orbital stability of a limit cycle concerns its periodic image $S$ ([[def-cm-hyperbolic-equilibrium-and-limit-cycles]]) when that image is forward invariant in the sense of the Definition. Under the arbitrary-$F$ hypotheses here, a periodic solution alone does not ensure that every maximal solution through its image remains there; forward invariance must be established separately.
 
 - Linear stability is a property of the linear system alone. It is not equivalent to Lyapunov stability of $z_*$ for the nonlinear system; linearization transfers stability only under additional spectral hypotheses, which this definition does not supply.
 

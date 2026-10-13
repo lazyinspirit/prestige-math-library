@@ -89,6 +89,8 @@ verification:
 
 ## Statement
 
+**Slot convention.** For $\ell\ge1$, $S_\ell$ acts on $\{0,\dots,\ell-1\}$ as in [[lem-nrqm-composites-permutation-sector-projections]]. On one-based tuple positions use $\widehat{\pi}(k):=1+\pi(k-1)$ for $1\le k\le\ell$. Conjugation by $k\mapsto k-1$ gives $\widehat{\pi\sigma}=\widehat{\pi}\circ\widehat{\sigma}$ and $\widehat{\pi^{-1}}=\widehat{\pi}^{-1}$; thus the supplier's tensor action becomes $U_\pi(v_1\otimes\cdots\otimes v_\ell)=v_{\widehat{\pi}^{-1}(1)}\otimes\cdots\otimes v_{\widehat{\pi}^{-1}(\ell)}$. The parameters of $U_\pi$ and $\operatorname{sgn}(\pi)$ remain canonical zero-based permutations.
+
 Adopt the state and composition postulate P1
 ([[post-nrqm-framework-state-and-composition]]), the observable and
 probability postulate P2 ([[post-nrqm-framework-observable-and-probability]])
@@ -117,13 +119,8 @@ of [[def-nrqm-observables-framework-observable-and-outcome-law]] clause (a);
 the outcome law of $(A_O,u_O)$ in $\rho$ exists and equals
 $$m_\rho(A_O)=N\operatorname{tr}\bigl(\gamma_\rho\,O\bigr);$$
 
-(c) *product-type preparations*: if $u_1,\dots,u_N\in K$ are pairwise
-orthonormal and $\rho=T_{\Psi,\Psi}$ with $\Psi:=S(u_1,\dots,u_N)$ the Slater
-vector of [[thm-nrqm-fock-and-equilibrium-slater-direct-and-exchange-calculation]]
-clause (a) for $\sigma=-$, or $\Psi:=\sqrt{N!}\,P_+^{(N)}(u_1\otimes\cdots\otimes u_N)$
-for $\sigma=+$ (both unit vectors of the sector), then
-$\gamma_\rho=N^{-1}\sum_{j=1}^NT_{u_j,u_j}$ and
-$$m_\rho(A_O)=\sum_{j=1}^N\langle Ou_j,u_j\rangle;$$
+(c) *product-type preparations*: let $u_1,\dots,u_N\in K$ be pairwise orthonormal. For $\sigma=-$ and $N\ge2$, let $\Psi:=S(u_1,\dots,u_N)$ be the Slater vector of [[thm-nrqm-fock-and-equilibrium-slater-direct-and-exchange-calculation]] clause (a); for $\sigma=-$ and $N=1$, put $S(u_1):=u_1$ and $\Psi:=u_1$. For $\sigma=+$, put $\Psi:=\sqrt{N!}\,P_+^{(N)}(u_1\otimes\cdots\otimes u_N)$. In either case $\Psi$ is a unit vector of the sector. For $\rho:=T_{\Psi,\Psi}$ one has $\gamma_\rho=N^{-1}\sum_{j=1}^NT_{u_j,u_j}$ and
+$$m_\rho(A_O)=\sum_{j=1}^N\langle Ou_j,u_j\rangle.$$
 
 (d) *scope*: the theorem is conditional on the adopted sector of P6, on the
 declared finite-mode idealization and on the declared preparation; it asserts
@@ -142,7 +139,7 @@ is exact within the model.
 
 [F3] **Observable reading and moments.** An assigned sharp observable $(A,u_A)$ has outcome law $\mu^A_\rho(B)=\operatorname{tr}(\rho E_A(B))$; for a bounded self-adjoint $A$ and every preparation $\rho$ the mean exists and equals $\operatorname{tr}(\rho A)$, and for a pure preparation of a unit vector $\psi$ it equals $\langle A\psi,\psi\rangle$ ([[def-nrqm-observables-framework-observable-and-outcome-law]] clauses (a), (b), [[pthm-nrqm-observables-preparation-moments]] clauses (a), (d), [[prop-trace-is-linear]], [[thm-cyclicity-of-the-trace]]).
 
-[F4] **Slater and symmetric product vectors.** For pairwise orthonormal $u_1,\dots,u_N$ the Slater vector $S(u_1,\dots,u_N)=N!^{-1/2}\sum_{\sigma\in S_N}\operatorname{sgn}(\sigma)u_{\sigma(1)}\otimes\cdots\otimes u_{\sigma(N)}$ has norm one and equals $\sqrt{N!}\,P_-^{(N)}(u_1\otimes\cdots\otimes u_N)$ ([[thm-nrqm-fock-and-equilibrium-slater-direct-and-exchange-calculation]] clauses (a), (b)); setting $x:=u_1\otimes\cdots\otimes u_N$, orthonormality gives $\langle P_+^{(N)}x,x\rangle=\frac1{N!}\sum_{\sigma\in S_N}\langle U_\sigma x,x\rangle=\frac1{N!}\langle x,x\rangle=\frac1{N!}$, so $\Psi:=\sqrt{N!}\,P_+^{(N)}x$ is a unit vector of the symmetric sector with $P_+^{(N)}\Psi=\Psi$ ([[lem-nrqm-composites-permutation-sector-projections]] clauses (b), (c), [[lem-nrqm-composites-hilbert-tensor-construction]]).
+[F4] **Slater and symmetric product vectors.** For $N\ge2$ and pairwise orthonormal $u_1,\dots,u_N$ the Slater vector $S(u_1,\dots,u_N)=N!^{-1/2}\sum_{\sigma\in S_N}\operatorname{sgn}(\sigma)u_{\widehat{\sigma}(1)}\otimes\cdots\otimes u_{\widehat{\sigma}(N)}$ has norm one and equals $\sqrt{N!}\,P_-^{(N)}(u_1\otimes\cdots\otimes u_N)$ ([[thm-nrqm-fock-and-equilibrium-slater-direct-and-exchange-calculation]] clauses (a), (b)). For $N=1$, $S(u_1):=u_1$ and $P_\pm^{(1)}=I$ give the same norm and projection identities directly. Setting $x:=u_1\otimes\cdots\otimes u_N$, orthonormality gives $\langle P_+^{(N)}x,x\rangle=\frac1{N!}\sum_{\sigma\in S_N}\langle U_\sigma x,x\rangle=\frac1{N!}\langle x,x\rangle=\frac1{N!}$, so $\Psi:=\sqrt{N!}\,P_+^{(N)}x$ is a unit vector of the symmetric sector with $P_+^{(N)}\Psi=\Psi$ ([[lem-nrqm-composites-permutation-sector-projections]] clauses (b), (c), [[lem-nrqm-composites-hilbert-tensor-construction]]).
 
 [F5] **Rank-one pairing.** $T_{u,v}x=\langle x,v\rangle u$ is bounded with $\operatorname{tr}(T_{u,v})=\langle u,v\rangle$ and $T_{u,v}^*=T_{v,u}$; the map $(u,v)\mapsto T_{u,v}$ is linear in $u$ and conjugate-linear in $v$ ([[lem-nrqm-composites-rank-one-operator-calculus]] clauses (a), (b), (c)).
 
@@ -154,7 +151,7 @@ is exact within the model.
 
 1.1 [The readout is a bounded self-adjoint sector observable] By [F2] each slot operator is bounded with $\|O^{(i)}\|\le\|O\|$, so $\Sigma(O)$ is bounded with $\|\Sigma(O)\|\le N\|O\|$; since $O=O^*$, [F2] gives $O^{(i)*}=O^{(i)}$ for every $i$ and $\Sigma(O)^*=\Sigma(O)$. By [F2] $\Sigma(O)$ commutes with $P_\sigma^{(N)}$, hence preserves $\mathfrak H_N^\sigma$ and its orthogonal complement, and the restriction $A_O=\Sigma(O)|_{\mathfrak H_N^\sigma}$ is a bounded self-adjoint operator on the sector space; with the unit $u_O$ the pair $(A_O,u_O)$ is therefore an assigned sharp observable in the sense of [F3]. [F2, F3, def. bounded, algebra]
 
-1.2 [Reduced preparation of product-type states] Let $u_1,\dots,u_N$ be pairwise orthonormal, put $x:=u_1\otimes\cdots\otimes u_N$ and let $\Psi$ be the unit vector of clause (c) for $\sigma=-$ or $\sigma=+$; both satisfy $P_\sigma^{(N)}\Psi=\Psi$ by [F4], and both equal $\sqrt{N!}\,P_\sigma^{(N)}x$. Since $\Sigma(O)$ commutes with $P_\sigma^{(N)}$ and $P_\sigma^{(N)}$ is self-adjoint, $\langle\Sigma(O)\Psi,\Psi\rangle=N!\langle\Sigma(O)P_\sigma^{(N)}x,P_\sigma^{(N)}x\rangle=N!\langle P_\sigma^{(N)}\Sigma(O)P_\sigma^{(N)}x,x\rangle=N!\cdot\frac1{N!}\sum_{\tau\in S_N}\operatorname{sgn}_\sigma(\tau)\langle\Sigma(O)U_\tau x,x\rangle$, with $\operatorname{sgn}_+=1$ and $\operatorname{sgn}_-=\operatorname{sgn}$. For fixed $\tau$, $\langle\Sigma(O)U_\tau x,x\rangle=\sum_{i=1}^N\langle Ou_{\tau^{-1}(i)},u_i\rangle\prod_{k\ne i}\langle u_{\tau^{-1}(k)},u_k\rangle$ by [F1] and the elementary-tensor pairing, and orthonormality makes every factor $\delta_{\tau^{-1}(k),k}$ vanish unless $\tau=\mathrm{id}$; hence only the identity permutation contributes and $\langle\Sigma(O)\Psi,\Psi\rangle=\sum_{i=1}^N\langle Ou_i,u_i\rangle$. [F1, F2, F4, algebra]
+1.2 [Reduced preparation of product-type states] Let $u_1,\dots,u_N$ be pairwise orthonormal, put $x:=u_1\otimes\cdots\otimes u_N$ and let $\Psi$ be the unit vector of clause (c) for $\sigma=-$ or $\sigma=+$; both satisfy $P_\sigma^{(N)}\Psi=\Psi$ by [F4], and both equal $\sqrt{N!}\,P_\sigma^{(N)}x$. Since $\Sigma(O)$ commutes with $P_\sigma^{(N)}$ and $P_\sigma^{(N)}$ is self-adjoint, $\langle\Sigma(O)\Psi,\Psi\rangle=N!\langle\Sigma(O)P_\sigma^{(N)}x,P_\sigma^{(N)}x\rangle=N!\langle P_\sigma^{(N)}\Sigma(O)P_\sigma^{(N)}x,x\rangle=N!\cdot\frac1{N!}\sum_{\tau\in S_N}\operatorname{sgn}_\sigma(\tau)\langle\Sigma(O)U_\tau x,x\rangle$, with $\operatorname{sgn}_+=1$ and $\operatorname{sgn}_-=\operatorname{sgn}$. For fixed $\tau$, $\langle\Sigma(O)U_\tau x,x\rangle=\sum_{i=1}^N\langle Ou_{\widehat{\tau}^{-1}(i)},u_i\rangle\prod_{k\ne i}\langle u_{\widehat{\tau}^{-1}(k)},u_k\rangle$ by [F1] and the elementary-tensor pairing, and orthonormality makes every factor $\delta_{\widehat{\tau}^{-1}(k),k}$ vanish unless $\tau=\mathrm{id}$; hence only the identity permutation contributes and $\langle\Sigma(O)\Psi,\Psi\rangle=\sum_{i=1}^N\langle Ou_i,u_i\rangle$. [F1, F2, F4, algebra]
 
 2.1 [The mean law] Let $\rho$ be a declared sector preparation with zero extension $\widetilde\rho$ and let $A_O$ be the readout of step 1.1. Since $A_O$ is bounded, [F3] gives $m_\rho(A_O)=\operatorname{tr}(\rho A_O)$, and by steps 1.1 and [F2], $\operatorname{tr}(\rho A_O)=\operatorname{tr}(\widetilde\rho\,\Sigma(O))=N\operatorname{tr}(\gamma_\rho O)$. This proves (a) and (b). [F2, F3, step 1.1, algebra]
 

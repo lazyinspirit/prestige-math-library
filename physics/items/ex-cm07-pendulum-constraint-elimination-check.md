@@ -6,7 +6,7 @@ status: draft
 origin: session
 domain: physics
 dependency_level: 15
-deps: [pthm-cm07-lagrangian-reduction-of-ideal-constraints, def-cm07-generalized-coordinates-and-forces, def-cm06-holonomic-constraint-model, post-cm06-ideal-reaction-law, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-units, def-ck-euclidean-maps-and-diffeomorphisms, def-euclidean-submersions-and-immersions, cor-matrix-rank-nullity, thm-sine-and-cosine-derivatives, def-sine-and-cosine-by-power-series, cor-trigonometric-parity-and-pythagorean-identity, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, def-euclidean-inner-product, def-matrix-product-and-identity-matrix, def-transpose-of-a-matrix, def-vector-valued-derivative-and-integral, def-jacobian-matrix-and-gradient, def-interval]
+deps: [pthm-cm07-lagrangian-reduction-of-ideal-constraints, def-cm07-generalized-coordinates-and-forces, def-cm06-holonomic-constraint-model, post-cm06-ideal-reaction-law, def-cm03-potential-and-mechanical-energy, post-cm02-force-superposition, def-cm01-configuration, def-cm01-units, def-ck-euclidean-maps-and-diffeomorphisms, def-euclidean-submersions-and-immersions, cor-matrix-rank-nullity, thm-sine-and-cosine-derivatives, def-sine-and-cosine-by-power-series, cor-differentiable-implies-continuous, thm-induction-principle, cor-trigonometric-parity-and-pythagorean-identity, thm-intermediate-value, cor-pi-is-the-first-positive-sine-zero, thm-quarter-turn-values-and-shift-formulas, thm-sine-cosine-zero-sets-and-fundamental-period, lem-of-square-positive, def-abs-value, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, def-euclidean-inner-product, def-matrix-product-and-identity-matrix, def-transpose-of-a-matrix, def-vector-valued-derivative-and-integral, def-jacobian-matrix-and-gradient, def-interval]
 dependency_roles:
   pthm-cm07-lagrangian-reduction-of-ideal-constraints: physical-result
   def-cm07-generalized-coordinates-and-forces: formulation-prerequisite
@@ -21,7 +21,15 @@ dependency_roles:
   cor-matrix-rank-nullity: mathematical-premise
   thm-sine-and-cosine-derivatives: mathematical-premise
   def-sine-and-cosine-by-power-series: mathematical-premise
+  cor-differentiable-implies-continuous: mathematical-premise
+  thm-induction-principle: mathematical-premise
   cor-trigonometric-parity-and-pythagorean-identity: mathematical-premise
+  thm-intermediate-value: mathematical-premise
+  cor-pi-is-the-first-positive-sine-zero: mathematical-premise
+  thm-quarter-turn-values-and-shift-formulas: mathematical-premise
+  thm-sine-cosine-zero-sets-and-fundamental-period: mathematical-premise
+  lem-of-square-positive: mathematical-premise
+  def-abs-value: mathematical-premise
   thm-chain-rule-for-total-derivatives: mathematical-premise
   thm-algebra-of-derivatives: mathematical-premise
   def-euclidean-inner-product: mathematical-premise
@@ -76,8 +84,9 @@ potential $\widetilde U(\theta)=-mgl\cos\theta$ and substituted Lagrangian
 $$\widetilde L(\theta,\dot\theta)=\tfrac12ml^{2}\dot\theta^{2}+mgl\cos\theta,$$
 the following hold:
 
-1. for every $C^{2}$ curve $\theta:J\to\mathbb R$ with
-   $x:=X\circ\theta$, the curve $\theta$ solves the Lagrange equation
+1. for every interval $J\subseteq I_{0}=\mathbb R$ with nonempty interior and
+   every $C^{2}$ curve $\theta:J\to\mathbb R$ with $x:=X\circ\theta$, the
+   curve $\theta$ solves the Lagrange equation
    $\Lambda(\widetilde L)(\theta)=0$, i.e.
    $$ml^{2}\theta''+mgl\sin\theta=0,$$
    if and only if $x$ is a constrained motion with ideal reaction;
@@ -89,8 +98,8 @@ the following hold:
    annihilates the virtual displacements, and has a unique multiplier;
 3. in particular the reduced pendulum equation
    $\theta''=-(g/l)\sin\theta$ is exactly the Lagrange equation of
-   $\widetilde L$, and every solution of it, with $x=X\circ\theta$, is an
-   ideal constrained motion of the model.
+   $\widetilde L$, and every $C^{2}$ solution of it on such an interval $J$,
+   with $x=X\circ\theta$, is an ideal constrained motion of the model.
 
 ## Facts & Assumptions
 
@@ -100,13 +109,15 @@ the following hold:
 
 [F2] The datum and its locus ([[def-cm06-holonomic-constraint-model]], [[post-cm06-ideal-reaction-law]], [[cor-matrix-rank-nullity]], [[def-euclidean-submersions-and-immersions]], [[def-jacobian-matrix-and-gradient]]): $g_{c}$ is smooth with $D_{x}g_{c}(x,y,z)=\begin{pmatrix}2x&2y&0\\ 0&0&1\end{pmatrix}$ of rank $2$ on $\mathcal C$ (the last row is independent; on $x^{2}+y^{2}=l^{2}$ not both $2x,2y$ vanish), its component dimensions are $\ell^{2}$ and $\ell$, the locus is nonempty and time-independent, and the virtual displacements at $X(\theta)$ are $\ker D_{x}g_{c}=\mathbb R(\cos\theta,\sin\theta,0)$.
 
-[F3] The parametrization and its derivatives ([[def-cm07-generalized-coordinates-and-forces]], [[thm-sine-and-cosine-derivatives]], [[def-sine-and-cosine-by-power-series]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[def-matrix-product-and-identity-matrix]], [[def-transpose-of-a-matrix]], [[def-euclidean-inner-product]], [[def-vector-valued-derivative-and-integral]]): $X$ is $C^{\infty}$ with $DX(\theta)=\bigl(l\cos\theta,\ l\sin\theta,\ 0\bigr),\qquad \mathsf G(\theta)=DX(\theta)^{\mathsf T}(mI_{3})DX(\theta)=ml^{2},$ $\widetilde U(\theta)=U(X(\theta))=-mgl\cos\theta$, and $X(\mathbb R)=\mathcal C\cap Q$; the tangent vector $e_{\theta}=(\cos\theta,\sin\theta,0)$ is orthonormal to the radial direction $e_{r}=(\sin\theta,-\cos\theta,0)=\frac1l X(\theta)$.
+[F3] The parametrization and its derivatives ([[def-cm07-generalized-coordinates-and-forces]], [[thm-sine-and-cosine-derivatives]], [[def-sine-and-cosine-by-power-series]], [[cor-differentiable-implies-continuous]], [[thm-induction-principle]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[def-matrix-product-and-identity-matrix]], [[def-transpose-of-a-matrix]], [[def-euclidean-inner-product]], [[def-vector-valued-derivative-and-integral]]): repeated differentiation cycles through $\pm\sin$ and $\pm\cos$; induction shows all iterated derivatives of $X$ exist and are continuous, so $X$ is $C^{\infty}$. Also $DX(\theta)=\bigl(l\cos\theta,\ l\sin\theta,\ 0\bigr)$, $\mathsf G(\theta)=DX(\theta)^{\mathsf T}(mI_{3})DX(\theta)=ml^{2}$, and $\widetilde U(\theta)=U(X(\theta))=-mgl\cos\theta$; the displayed vectors $e_{\theta}=(\cos\theta,\sin\theta,0)$ and $e_{r}=(\sin\theta,-\cos\theta,0)=X(\theta)/l$ are orthonormal.
+
+[F4] The angle coverage and period ([[thm-sine-and-cosine-derivatives]], [[cor-differentiable-implies-continuous]], [[thm-intermediate-value]], [[cor-pi-is-the-first-positive-sine-zero]], [[thm-quarter-turn-values-and-shift-formulas]], [[cor-trigonometric-parity-and-pythagorean-identity]], [[thm-sine-cosine-zero-sets-and-fundamental-period]], [[lem-of-square-positive]], [[def-abs-value]]): cosine is continuous on $[0,\pi]$, with $\cos0=1$ and $\cos\pi=-1$, and sine is nonnegative there. For $u^{2}+v^{2}=1$, $v^{2}\ge0$ gives $u^{2}\le1$, hence $u\in[-1,1]$; the intermediate value theorem gives $\theta_{0}\in[0,\pi]$ with $\cos\theta_{0}=u$. The Pythagorean identity and sine's sign give $\sin\theta_{0}=|v|$; use $\theta=\theta_{0}$ for $v\ge0$ and $\theta=-\theta_{0}$ for $v<0$, with parity, to obtain $(\cos\theta,\sin\theta)=(u,v)$. Sine and cosine have period $2\pi$.
 
 ## Verification
 
 **Proof technique:** direct; verify the hypotheses of the reduction theorem on the pendulum datum, compute the substituted Lagrangian and its Lagrange equation, and evaluate the reaction and multiplier.
 
-1.1 Hypotheses of the reduction theorem: $g_{c}$ is smooth and $D_{x}g_{c}$ has rank $2$ on $\mathcal C$ by [F2], so $(O,2,g_{c})$ is a regular holonomic-constraint datum with nonempty locus, and it is scleronomic with $\mathcal C=\{(x,y,z):x^{2}+y^{2}=l^{2},z=0\}$. The map $X$ is smooth with $DX(\theta)=(l\cos\theta,l\sin\theta,0)$ injective for all $\theta$ (its norm is $l>0$), and $X(\mathbb R)=\{(l\sin\theta,-l\cos\theta,0):\theta\in\mathbb R\}=\mathcal C\cap Q$; moreover $(t,X(\theta))\in O$ for all $t,\theta$. Thus $X$ is a global-coverage parametrization, with repeated angle representatives allowed, and $r=3N-k=1$; the presentation $(U,d)=(mgy,0)$ has no residual forces. [F2, F3, given, algebra]
+1.1 Hypotheses of the reduction theorem: $g_{c}$ is smooth and $D_{x}g_{c}$ has rank $2$ on $\mathcal C$ by [F2], so $(O,2,g_{c})$ is a regular holonomic-constraint datum with nonempty locus, and it is scleronomic with $\mathcal C=\{(x,y,z):x^{2}+y^{2}=l^{2},z=0\}$. The map $X$ is $C^{3}$ by [F3], with $DX(\theta)=(l\cos\theta,l\sin\theta,0)$ injective for all $\theta$ because its norm is $l>0$. For any $(x,y,0)\in\mathcal C$, put $u=-y/l$ and $v=x/l$; then $u^{2}+v^{2}=1$, so [F4] gives $\theta$ with $\sin\theta=v$ and $\cos\theta=u$, hence $X(\theta)=(x,y,0)$. Conversely every $X(\theta)$ lies in $\mathcal C$ by the Pythagorean identity, so $X(\mathbb R)=\mathcal C\cap Q$. The period statement in [F4] gives $X(\theta+2\pi)=X(\theta)$ with distinct inputs, so the map is periodic and not one-to-one. Moreover $(t,X(\theta))\in O$ for all $t,\theta$. Thus $X$ is a global-coverage parametrization with repeated angle representatives allowed, and $r=3N-k=1$; the presentation $(U,d)=(mgy,0)$ has no residual forces. [F2, F3, F4, given, algebra]
 
 1.2 Substituted Lagrangian and Lagrange equation: by [F3], $\mathsf G(\theta)=ml^{2}$ and $\widetilde U(\theta)=-mgl\cos\theta$, so $\widetilde L=\frac12ml^{2}\dot\theta^{2}+mgl\cos\theta$ and $\Lambda(\widetilde L)(\theta)=\frac{d}{dt}\bigl(ml^{2}\theta'\bigr)-\frac{\partial\widetilde L}{\partial\theta}=ml^{2}\theta''+mgl\sin\theta .$ The Lagrange equation $\Lambda(\widetilde L)(\theta)=0$ is therefore $ml^{2}\theta''+mgl\sin\theta=0$, equivalent to $\theta''=-(g/l)\sin\theta$ because $ml^{2}>0$. [F3, algebra]
 

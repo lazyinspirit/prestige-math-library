@@ -123,20 +123,20 @@ $F(\mathfrak h)$. The **declared finite-level cutoff dipole model** is the pair
 of the Hilbert space $\mathbb C^{d}\otimes F(\mathfrak h)$
 ([[def-hilbert-space]]) and the operator
 $$H_{\mathrm{LM}}:=H_{a}\otimes I+I\otimes H_{f}+\eta_{0}\sum_{j=1}^{J}D_j^{\mathrm{ch}}\otimes\phi(g_j), \qquad D(H_{\mathrm{LM}}):=\mathbb C^{d}\otimes D(H_{f}).$$
-By [[thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound]] clause (c),
+For $d\ge1$, by [[thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound]] clause (c),
 read with the Hermitian matrices $H_{a}$, $D_1^{\mathrm{ch}},\dots,D_J^{\mathrm{ch}}$ and the
 coupling $\eta_{0}$ (its $d$ is the present $d$), the operator
 $H_{\mathrm{LM}}$ is self-adjoint on the displayed domain and bounded below
 ([[def-symmetric-self-adjoint-and-essentially-self-adjoint]],
-[[def-bounded-linear-operator]]). The model declares $H_{\mathrm{LM}}$ its
+[[def-bounded-linear-operator]]). If $d=0$, both the tensor-product Hilbert space and the displayed domain are $\{0\}$; $H_{\mathrm{LM}}$ is the unique operator on that space. Its adjoint is the same operator, and $\langle H_{\mathrm{LM}}0,0\rangle=0$, so it is self-adjoint and bounded below without invoking the positive-dimensional supplier. This degenerate case has no levels, level pairs or normalized preparations. For $d\ge1$, the model declares $H_{\mathrm{LM}}$ its
 **energy observable**, in the reading of
 [[def-nrqm-observables-framework-observable-and-outcome-law]], with energies,
 mode energies and the coupling read in joules.
 
 **(e) The model's evolution and states.** The model's evolution is the
 autonomous unitary family $U(t):=e^{-itH_{\mathrm{LM}}/\hbar}$, $t\in\mathbb R$,
-in the reading of clause (iv) of P4 and of
-[[def-nrqm-autonomous-dynamics-framework-evolution]]; a preparation $\rho$ of
+in the reading of clause (ii) of P4 and of
+[[def-nrqm-autonomous-dynamics-framework-evolution]]; for $d\ge1$, a preparation $\rho$ of
 the model is a state of $\mathbb C^{d}\otimes F(\mathfrak h)$ in the sense of
 [[def-nrqm-state-geometry-framework-state-space]], with
 $\rho(t):=U(t)\rho U(t)^{*}$, and the outcome law of an assigned sharp

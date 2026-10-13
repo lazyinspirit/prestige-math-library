@@ -33,14 +33,14 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
-physical_scope: "The Galilean boost charge of the force model with a declared potential presentation in one inertial frame: with dimensionless a and a velocity-valued family parameter, the time-dependent symmetry datum (tau, xi, B) = (0, t a, a . M x) satisfies the model's Noether identity exactly when the differential translation condition sum_i a . grad_i U = 0 holds; in the global potential branch the boost charge a . (t P - M X) is then constant, the component a of the centre of mass moves uniformly, and the boosted curves t -> x(t) + s t a of motions are again motions; for an arbitrary presentation the exact rate of the charge is the time times the component a of the total force, while nonconservation from a nonzero translation derivative is asserted in the global potential branch. The charge has dimension mass times length (action per velocity), and its rate has momentum dimensions. The theorem is conditional on the adopted force branch, the declared potential and the absence of residual forces in the conservation clauses; it asserts no boost invariance of any particular force law and carries no empirical content."
+physical_scope: "The Galilean boost charge of the force model with a declared potential presentation in one inertial frame: with dimensionless a and a velocity-valued family parameter, the time-dependent triple (tau, xi, B) = (0, t a, a . M x) satisfies the model's Noether identity exactly when the differential translation condition sum_i a . grad_i U = 0 holds; in the global potential branch the boost charge a . (t P - M X) is then constant, the component a of the centre of mass moves uniformly, and admissible boosted curves t -> x(t) + s t a are again motions precisely under the endpoint-gradient agreement in Statement clause 4; for an arbitrary presentation the exact rate of the charge is the time times the component a of the total force, while nonconservation from a nonzero translation derivative is asserted in the global potential branch. The charge has dimension mass times length (action per velocity), and its rate has momentum dimensions. The theorem is conditional on the adopted force branch, the declared potential and the absence of residual forces in the conservation clauses; it asserts no boost invariance of any particular force law and carries no empirical content."
 sources:
   references:
     - title: "D. Tong, Classical Dynamics (Cambridge lecture notes, January 2015 printing), Sections 1.2 and 2.4.1, printed pages 2-5 and 24-26 (PDF pages 8-11 and 30-32): the Galilean group of an inertial frame, the boost x -> x + vt, and the space-translation example of Noether's theorem"
       url: "https://www.davidtong.org/pdfs/teaching/classical-dynamics/clas.pdf"
     - title: "I. Stewart, Advanced Classical Mechanics (MIT 8.09/8.309 Fall 2014 course text), Section 1.3, printed pages 12-13 (PDF pages 15-16): conservation of the centre-of-mass momentum and the uniform motion of the centre of mass for systems whose potential is independent of the centre-of-mass coordinate"
       url: "https://ocw.mit.edu/courses/8-09-classical-mechanics-iii-fall-2014/d9bac33f6c60b304dc0398e99b327102_MIT8_09F14_full.pdf"
-    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.4, chapter page 9 (PDF page 28): conservation of a generalized momentum conjugate to a cyclic coordinate, with the centre-of-mass reading in Section 3.1"
+    - title: "K. K. Likharev, Essential Graduate Physics, Part CM: Classical Mechanics (title page last edited September 1, 2026), Section 2.4, chapter pages 10-11 (PDF pages 28-29): conservation of a generalized momentum conjugate to a cyclic coordinate, with the centre-of-mass reading in Section 3.1"
       url: "https://essentialgraduatephysics.org/Files/CM%20merged.pdf"
 verification:
   precheck: pass
@@ -54,24 +54,28 @@ masses $m_{1},\dots,m_{N}>0$, open configuration domain $Q\subseteq\mathbb R^{3N
 time window $I_{0}$, mass operator $\mathsf M$ and $U$ of
 [[def-cm03-potential-and-mechanical-energy]]. For this boost family take the
 parameter $s$ to have units of velocity and take $a\in\mathbb R^{3}$ to be
-dimensionless; then $st a$ is a displacement, $\xi^{a}=t(a,\dots,a)$ has
-units of time, and $B^{a}$ and $K_{a}$ have units $\mathrm{kg\,m}$, equal to
+dimensionless; then $st a$ is a displacement, $\xi^{a}=t\mathbf a$ with
+$\mathbf a:=(a,\dots,a)\in\mathbb R^{3N}$ has units of time, and $B^{a}$ and
+$K_{a}$ have units $\mathrm{kg\,m}$, equal to
 action per unit velocity. Fix a nonzero vector
 $a\in\mathbb R^{3}$ and consider the maps
 
-$$\xi^{a}(t,x):=t\,\bigl(a,\dots,a\bigr)\in\mathbb R^{3N},\qquad B^{a}(t,x):=\bigl\langle a,\mathsf M x\bigr\rangle=\sum_{i}m_{i}\,a\cdot x_{i},$$
+$$\xi^{a}(t,x):=t\mathbf a,\qquad B^{a}(t,x):=a\cdot\sum_{i}m_{i}x_{i},$$
 
-so that $(\tau,\xi,B)\equiv(0,\xi^{a},B^{a})$ is a datum of
-[[def-cm08-symmetry-of-the-mechanical-lagrangian]]. Write
-$P(t):=\sum_{i}m_{i}x_{i}'(t)$ for the total momentum and $X$ for the centre
-of mass of [[def-cm03-centre-of-mass-and-momenta]], with
-$\mathsf M X=\sum_{i}m_{i}x_{i}$, and define the **boost charge**
+These maps, together with $\tau\equiv0$, form a $C^{2}$ triple on
+$I_{0}\times Q$. It is a symmetry datum in the sense of
+[[def-cm08-symmetry-of-the-mechanical-lagrangian]] exactly when it satisfies
+the Noether identity, as characterised in clause 1 below. Write
+$P(t):=\sum_{i}m_{i}x_{i}'(t)$ for the total momentum and $X(t)$ for the
+centre of mass of [[def-cm03-centre-of-mass-and-momenta]], where the scalar
+total mass is $M:=\sum_i m_i$ and $M X(t)=\sum_i m_i x_i(t)$; thus
+along a motion $B^{a}(t,x(t))=M\,a\cdot X(t)$. Define the **boost charge**
 
-$$K_{a}(t):=a\cdot\bigl(t\,P(t)-\mathsf M X(t)\bigr)=t\,\bigl(a\cdot P(t)\bigr)-\sum_{i}m_{i}\,a\cdot x_{i}(t).$$
+$$K_{a}(t):=a\cdot\bigl(t\,P(t)-M X(t)\bigr)=t\,\bigl(a\cdot P(t)\bigr)-\sum_{i}m_{i}\,a\cdot x_{i}(t).$$
 
 Then:
 
-1. **(the identity).** The datum $(0,\xi^{a},B^{a})$ satisfies the model's
+1. **(the identity).** The triple $(0,\xi^{a},B^{a})$ satisfies the model's
    Noether identity on $O$ if and only if the translation-invariance condition
    $\sum_{i}a\cdot\nabla_{x_{i}}U(t,x)=0$ for all $(t,x)\in I_{0}\times Q$
    of clause 1 of [[pthm-cm08-translation]] holds.
@@ -80,12 +84,11 @@ Then:
    ([[def-cm02-newtonian-flow]]), the function $t\mapsto K_{a}(t)$ is constant
    on $J$.
 3. **(uniform centre-of-mass motion).** Under the hypotheses of clause 2, the
-   function $t\mapsto a\cdot\mathsf M X(t)$ is affine on $J$ with slope
+   function $t\mapsto M\,a\cdot X(t)$ is affine on $J$ with slope
    $a\cdot P$.
 4. **(boosted motions).** Under the hypotheses of clause 2, let $x:J\to Q$
-   be a motion and $s\in\mathbb R$ satisfy $x(t)+st\xi^a_1\in Q$ for every
-   $t\in J$, where $\xi^a_1=(a,\dots,a)$. Then
-   $\widetilde x(t):=x(t)+st\xi^a_1$ is a motion if and only if
+   be a motion and $s\in\mathbb R$ satisfy $x(t)+st\mathbf a\in Q$ for every
+   $t\in J$. Then $\widetilde x(t):=x(t)+st\mathbf a$ is a motion if and only if
    $\nabla_xU(t,\widetilde x(t))=\nabla_xU(t,x(t))$ for every $t\in J$.
    This equality, and hence the boosted-motion conclusion, follows if
    each segment between $x(t)$ and $\widetilde x(t)$ is contained in $Q$,
@@ -112,69 +115,44 @@ empirical content is asserted.
 
 ## Facts & Assumptions
 
-**Given:** The model, the presentation $(U,d)$, the vector $a$, the datum $(0,\xi^{a},B^{a})$, and the motions and states occurring in the clauses.
+**Given:** The model, the presentation $(U,d)$, the vector $a$, the triple $(0,\xi^{a},B^{a})$, and the motions and states occurring in the clauses.
 
-[F1] Model data and chart ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart over every $[a',b']\times Q$ with $[a',b']\subseteq I_{0}$; $L=K-U$ with $L_{x}=-\nabla_{x}U$, $L_{v}=\mathsf M v$; $F_{i}=-\nabla_{x_{i}}U+d_{i}$; and $U$ is $C^{2}$ so that the map $(t,x)\mapsto\sum_{i}a\cdot\nabla_{x_{i}}U(t,x)$ is continuous ([[def-continuity-real]], [[def-jacobian-matrix-and-gradient]]).
+[F1] Model data and chart ([[def-cm07-action-and-mechanical-lagrangian]], [[def-cm03-potential-and-mechanical-energy]], [[def-cm-time-dependent-lagrangian-and-action]], [[def-cm01-configuration]]): $O=I_{0}\times Q\times\mathbb R^{3N}$ is open and $(O,L)$ is a time-dependent Lagrangian chart whenever $Q\ne\varnothing$ and $a'<b'$ with $[a',b']\subseteq I_{0}$, over $[a',b']\times Q$; $L=K-U$ with $L_{x}=-\nabla_{x}U$, $L_{v}=\mathsf M v$; $F_{i}=-\nabla_{x_{i}}U+d_{i}$; and $U$ is $C^{2}$ so that the map $(t,x)\mapsto\sum_{i}a\cdot\nabla_{x_{i}}U(t,x)$ is continuous ([[def-continuity-real]], [[def-jacobian-matrix-and-gradient]]).
 
-[F2] The model's symmetry vocabulary ([[def-cm08-symmetry-of-the-mechanical-lagrangian]]): a datum $(\tau,\xi,B)$ satisfies the model identity when $L_{t}\tau+L_{x}\cdot\xi+L_{v}\cdot(D_{t}\xi-vD_{t}\tau)+L\,D_{t}\tau=D_{t}B$ on $O$, with charge $(\mathsf M v)\cdot\xi-E\tau-B$ and $E=K+U$; for $\tau\equiv0$ the identity is $L_{x}\cdot\xi+L_{v}\cdot D_{t}\xi=D_{t}B$ and the charge is $(\mathsf M v)\cdot\xi-B$.
+[F2] The model's symmetry vocabulary ([[def-cm08-symmetry-of-the-mechanical-lagrangian]]): a $C^2$ triple $(\tau,\xi,B)$ is a symmetry datum exactly when $L_{t}\tau+L_{x}\cdot\xi+L_{v}\cdot(D_{t}\xi-vD_{t}\tau)+L\,D_{t}\tau=D_{t}B$ on $O$, with charge $(\mathsf M v)\cdot\xi-E\tau-B$ and $E=K+U$; for $\tau\equiv0$ the identity is $L_{x}\cdot\xi+L_{v}\cdot D_{t}\xi=D_{t}B$ and the charge is $(\mathsf M v)\cdot\xi-B$.
 
 [F3] The general Noether theorem of the model ([[pthm-cm08-general-noether]] clause 1): a symmetry datum satisfying the model identity with $d\equiv0$ has constant charge along every motion.
 
 [F4] The translation statement ([[pthm-cm08-translation]] clauses 1 and 3): the differential condition is equivalent to potential invariance along admissible segments; invariance across excluded segments also requires agreement of the interval-component constants. Under the differential condition with $d\equiv0$, $a\cdot P$ is constant along every motion.
 
-[F5] Momentum, centre of mass and motions ([[def-cm03-centre-of-mass-and-momenta]], [[def-cm02-newtonian-flow]], [[post-cm02-force-superposition]]): $P=\sum_{i}m_{i}x_{i}'=\mathsf M x'$, $\mathsf M X=\sum_{i}m_{i}x_{i}$ with total mass $M=\sum_{i}m_{i}$, so $(\mathsf M X)'=\mathsf M x'$; along a motion $\mathsf M x''=F$, and through every initial datum there is exactly one maximal motion with open maximal interval containing the initial time.
+[F5] Momentum, centre of mass and motions ([[def-cm03-centre-of-mass-and-momenta]], [[def-cm02-newtonian-flow]], [[post-cm02-force-superposition]]): $P=\sum_{i}m_{i}x_{i}'$, $M=\sum_{i}m_i$ is the scalar total mass and $M X=\sum_{i}m_{i}x_{i}$, so $M X'=P$; along a motion $\mathsf M x''=F$ and $P'=F_{\mathrm{tot}}:=\sum_i F_i$, and through every initial datum there is exactly one maximal motion with open maximal interval containing the initial time.
 
-[F6] Calculus ([[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[def-vector-valued-derivative-and-integral]], [[def-euclidean-inner-product]], [[def-interval]], [[cor-zero-derivative-implies-constant]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-directional-and-partial-derivatives]]): sums, scalar multiples and pairings differentiate by the usual rules; a $C^1$ function on an interval is constant exactly when its derivative vanishes. For $C^2$ $U$, differentiating the vanishing directional derivative gives $\nabla_x(\xi^a_1\cdot\nabla_xU)=0$, so the spatial gradient is constant along every translation segment contained in $Q$. Global finite invariance likewise gives equality of the endpoint gradients by differentiating its identity on an open neighbourhood of the two admissible endpoints.
+[F6] Calculus ([[thm-chain-rule-for-total-derivatives]], [[thm-algebra-of-derivatives]], [[def-vector-valued-derivative-and-integral]], [[def-euclidean-inner-product]], [[def-interval]], [[cor-zero-derivative-implies-constant]], [[def-ck-euclidean-maps-and-diffeomorphisms]], [[def-directional-and-partial-derivatives]]): sums, scalar multiples and pairings differentiate by the usual rules; a $C^1$ function on an interval is constant exactly when its derivative vanishes. For $C^2$ $U$, differentiating the vanishing directional derivative gives $\nabla_x(\mathbf a\cdot\nabla_xU)=0$, so the spatial gradient is constant along every translation segment contained in $Q$. Global finite invariance likewise gives equality of the endpoint gradients by differentiating its identity on an open neighbourhood of the two admissible endpoints.
 
 [F7] Parameter units ([[def-cm01-units]], [[def-cm08-symmetry-of-the-mechanical-lagrangian]]): $[s]=\ell\tau^{-1}$ and $[a]=1$, so $[K_a]=\mu\ell$ and $[K_a']=\mu\ell\tau^{-1}$, as also follows from $K_a'=t\,a\cdot F_{\mathrm{tot}}$.
 
 ## Proof
 
-**Proof technique:** direct; evaluate the model identity at the boost datum and reduce its validity to the translation condition by continuity in time, transfer conservation through the model's general Noether theorem, verify the boosted curves, and compute the charge rate from the equation of motion.
+**Proof technique:** direct; evaluate the model identity at the boost triple and reduce its validity to the translation condition by continuity in time, transfer conservation through the model's general Noether theorem, verify the boosted curves, and compute the charge rate from the equation of motion.
 
-1.1 Clause 1, evaluation of the identity: for the datum $(0,\xi^{a},B^{a})$ one has $D_{t}\xi^{a}=(a,\dots,a)$, $L_{x}\cdot\xi^{a}=-t\sum_{i}a\cdot\nabla_{x_{i}}U(t,x)$ and $L_{v}\cdot D_{t}\xi^{a}=\sum_{i}m_{i}a\cdot v_{i}=D_{t}B^{a}$, since $D_{t}B^{a}=0+\sum_{i}m_{i}a\cdot v_{i}$; hence the two sides of the strict identity are $t\,g(t,x)$ apart, with $g(t,x):=\sum_{i}a\cdot\nabla_{x_{i}}U(t,x)$, and the identity holds on $O$ if and only if $t\,g(t,x)=0$ for all $(t,x)\in I_{0}\times Q$. Since $g$ is continuous and $I_{0}$ contains points $t\ne0$, this holds if and only if $g(t,x)=0$ for every $t\ne0$ in $I_{0}$ and every $x\in Q$; and if $0\in I_{0}$ then continuity of $g$ at $(0,x)$ forces $g(0,x)=0$ for every $x\in Q$. Hence the identity is equivalent to $g\equiv0$ on $I_{0}\times Q$, which is the translation-invariance condition of [F4]. [F1, F2, F4, F6, algebra]
+1.1 Clause 1, evaluation of the identity: for the triple $(0,\xi^{a},B^{a})$ one has $D_{t}\xi^{a}=(a,\dots,a)$, $L_{x}\cdot\xi^{a}=-t\sum_{i}a\cdot\nabla_{x_{i}}U(t,x)$ and $L_{v}\cdot D_{t}\xi^{a}=\sum_{i}m_{i}a\cdot v_{i}=D_{t}B^{a}$, since $D_{t}B^{a}=0+\sum_{i}m_{i}a\cdot v_{i}$; hence the two sides of the strict identity are $t\,g(t,x)$ apart, with $g(t,x):=\sum_{i}a\cdot\nabla_{x_{i}}U(t,x)$, and the identity holds on $O$ if and only if $t\,g(t,x)=0$ for all $(t,x)\in I_{0}\times Q$. Since $g$ is continuous and $I_{0}$ contains points $t\ne0$, this holds if and only if $g(t,x)=0$ for every $t\ne0$ in $I_{0}$ and every $x\in Q$; and if $0\in I_{0}$ then continuity of $g$ at $(0,x)$ forces $g(0,x)=0$ for every $x\in Q$. Hence the identity is equivalent to $g\equiv0$ on $I_{0}\times Q$, which is the translation-invariance condition of [F4]. [F1, F2, F4, F6, algebra]
 
-1.2 Clause 5, the rate: along a motion, $t\mapsto K_{a}(t)=t(a\cdot P(t))-a\cdot\mathsf M X(t)$ is $C^{1}$ by [F5] and [F6], and differentiating gives $$K_{a}'=a\cdot P+t\,\bigl(a\cdot P\bigr)'-a\cdot\bigl(\mathsf M X\bigr)'=a\cdot P+t\,a\cdot\mathsf M x''-a\cdot\mathsf M x'=t\,a\cdot F_{\mathrm{tot}},$$ because $P=\mathsf M x'$, $(\mathsf M X)'=\mathsf M x'$ and $\mathsf M x''=F$ along the motion with $F_{\mathrm{tot}}=\sum_{i}F_{i}(t,x,x')$. In the case $d\equiv0$ one has $F_{i}(t,x,x')=-\nabla_{x_{i}}U(t,x)$, so $K_{a}'=-t\,g(t,x(t))$ and, $K_{a}$ being $C^{1}$ on the interval $J$, it is constant exactly when $t\,g(t,x(t))$ vanishes identically on $J$; if $g$ is not identically zero on $I_{0}\times Q$, continuity of $g$ supplies a point $(t_{0},x_{0})$ with $t_{0}\ne0$ and $g(t_{0},x_{0})\ne0$ (a point with $g\ne0$ at time $0$ has a neighbourhood on which $g\ne0$, and $I_{0}$ contains times $\ne0$), and the maximal motion through $(t_{0},x_{0},0)$ has $K_{a}'(t_{0})=-t_{0}g(t_{0},x_{0})\ne0$, so $K_{a}$ is not constant on its interval. [F1, F5, F6, algebra]
+1.2 Clause 5, the rate: along a motion, $t\mapsto K_{a}(t)=t(a\cdot P(t))-M\,a\cdot X(t)$ is $C^{1}$ by [F5] and [F6], and differentiating gives $$K_{a}'=a\cdot P+t\,a\cdot P'-M\,a\cdot X'=a\cdot P+t\,a\cdot F_{\mathrm{tot}}-a\cdot P=t\,a\cdot F_{\mathrm{tot}},$$ because $M X'=P$ and $P'=F_{\mathrm{tot}}=\sum_{i}F_{i}(t,x,x')$ along the motion. In the case $d\equiv0$ one has $F_{i}(t,x,x')=-\nabla_{x_{i}}U(t,x)$, so $K_{a}'=-t\,g(t,x(t))$ and, $K_{a}$ being $C^{1}$ on the interval $J$, it is constant exactly when $t\,g(t,x(t))$ vanishes identically on $J$; if $g$ is not identically zero on $I_{0}\times Q$, continuity of $g$ supplies a point $(t_{0},x_{0})$ with $t_{0}\ne0$ and $g(t_{0},x_{0})\ne0$ (a point with $g\ne0$ at time $0$ has a neighbourhood on which $g\ne0$, and $I_{0}$ contains times $\ne0$), and the maximal motion through $(t_{0},x_{0},0)$ has $K_{a}'(t_{0})=-t_{0}g(t_{0},x_{0})\ne0$, so $K_{a}$ is not constant on its interval. [F1, F5, F6, algebra]
 
-1.3 Clause 4, boosted motions: with $d\equiv0$, the curve $\widetilde x=x+st\xi^a_1$ is $C^2$, takes values in $Q$ by hypothesis and satisfies $\widetilde x''=x''$. Its motion equation $\mathsf M\widetilde x''=-\nabla_xU(t,\widetilde x)$ is therefore equivalent to $\nabla_xU(t,\widetilde x)=\nabla_xU(t,x)$, since $x$ is a motion. If every joining segment lies in $Q$, the derivative along that segment of $\nabla_xU$ is $\nabla_x(\xi^a_1\cdot\nabla_xU)=0$ by the differential hypothesis and [F6], giving the equality. Alternatively, under global finite invariance, for fixed $t$ and shift $st\xi^a_1$ both endpoints have an open neighbourhood on which $U(t,y+st\xi^a_1)=U(t,y)$; differentiation with respect to $y$ gives the same gradient equality. Thus both stated sufficient routes produce a boosted motion, and the exact criterion holds without either extra route. [F1, F4, F5, F6, algebra]
+1.3 Clause 4, boosted motions: with $d\equiv0$, the curve $\widetilde x=x+st\mathbf a$ is $C^2$, takes values in $Q$ by hypothesis and satisfies $\widetilde x''=x''$. Its motion equation $\mathsf M\widetilde x''=-\nabla_xU(t,\widetilde x)$ is therefore equivalent to $\nabla_xU(t,\widetilde x)=\nabla_xU(t,x)$, since $x$ is a motion. If every joining segment lies in $Q$, the derivative along that segment of $\nabla_xU$ is $\nabla_x(\mathbf a\cdot\nabla_xU)=0$ by the differential hypothesis and [F6], giving the equality. Alternatively, under global finite invariance, for fixed $t$ and shift $st\mathbf a$ both endpoints have an open neighbourhood on which $U(t,y+st\mathbf a)=U(t,y)$; differentiation with respect to $y$ gives the same gradient equality. Thus both stated sufficient routes produce a boosted motion, and the exact criterion holds without either extra route. [F1, F4, F5, F6, algebra]
 
-2.1 Clause 2, conservation: by step 1.1 and the hypothesis, the datum $(0,\xi^{a},B^{a})$ satisfies the model identity on $O$, so with $d\equiv0$ clause 1 of [F3] gives that its charge is constant along every motion; by [F2] that charge is $(\mathsf M x'(t))\cdot t\xi^{a}_1-\bigl(K(x'(t))+U(t,x(t))\bigr)\cdot0-B^{a}(t,x(t))=t\,(a\cdot P(t))-\sum_{i}m_{i}a\cdot x_{i}(t)=K_{a}(t)$. [F2, F3, step 1.1]
+2.1 Clause 2, conservation: by step 1.1 and the hypothesis, the datum $(0,\xi^{a},B^{a})$ satisfies the model identity on $O$, so with $d\equiv0$ clause 1 of [F3] gives that its charge is constant along every motion; by [F2] that charge is $(\mathsf M x'(t))\cdot t\mathbf a-\bigl(K(x'(t))+U(t,x(t))\bigr)\cdot0-B^{a}(t,x(t))=t\,(a\cdot P(t))-M\,a\cdot X(t)=K_{a}(t)$. [F2, F3, step 1.1]
 
 2.2 Clause 5, the non-constancy statement: by step 1.2, in the case $d\equiv0$ a point $(t_{0},x_{0})$ with $t_{0}\ne0$ and $g(t_{0},x_{0})\ne0$ yields a maximal motion with $K_{a}'(t_{0})=-t_{0}g(t_{0},x_{0})\ne0$, and by [F6] a function constant on the interval $J_{\max}$ would have vanishing derivative at $t_{0}$. [F6, step 1.2]
 
-3.1 Clause 3: by step 2.1 the function $t\mapsto K_{a}(t)=t(a\cdot P(t))-a\cdot\mathsf M X(t)$ is constant on $J$, and by [F4] the slope $a\cdot P$ is constant on $J$; hence $a\cdot\mathsf M X(t)=t(a\cdot P)-K_{a}$ is affine in $t$ with slope $a\cdot P$ on $J$. [F4, step 2.1, algebra]
+3.1 Clause 3: by step 2.1 the function $t\mapsto K_{a}(t)=t(a\cdot P(t))-M\,a\cdot X(t)$ is constant on $J$, and by [F4] the slope $a\cdot P$ is constant on $J$; hence $M\,a\cdot X(t)=t(a\cdot P)-K_{a}$ is affine in $t$ with slope $a\cdot P$ on $J$. [F4, step 2.1, algebra]
 
 4.1 Clause 1 is step 1.1, clause 2 is step 2.1, clause 3 is step 3.1, clause 4 is step 1.3, and the two statements of clause 5 are step 1.2 and step 2.2; the charge is conserved exactly under the potential invariance that conserves the momentum component, and no boost invariance of any particular force law and no empirical claim is asserted. By [F7], $[K_a]=\mu\ell$ and $[K_a\prime]=\mu\ell\tau^{-1}$, the charge and rate dimensions for a velocity-valued boost parameter. [step 1.1, step 1.2, step 1.3, step 2.1, step 2.2, step 3.1, F7] ∎
 
 ## Remarks
 
-- **Kinematics versus model symmetry.** Every model of the framework is
-  described in every inertial frame, and the Galilean transformation of the
-  description is available whatever the force law
-  ([[post-cm02-force-superposition]] clause (vi)); the boost charge, by
-  contrast, is conserved in the global potential branch when the differential
-  translation condition of [[pthm-cm08-translation]] holds for its generator.
-  For the one-label confining
-  oscillator $U=\tfrac{k}{2}\lvert x\rvert^2$, $k>0$ with units
-  $\mu\tau^{-2}$, the global translation condition fails for every nonzero
-  direction $a$ (evaluate it at a nonzero position parallel to $a$). At
-  positions with $a\cdot x\ne0$ the directional derivative is nonzero, and in
-  the global potential branch the centre of mass oscillates rather than moves
-  uniformly. This is the precise boundary of the boost
-  statement: it is a property of the model's Lagrangian, not of Galilean
-  kinematics.
+- **Kinematics versus model symmetry.** Every model of the framework is described in every inertial frame, and the Galilean transformation of the description is available whatever the force law ([[post-cm02-force-superposition]] clause (vi)); the boost charge, by contrast, is conserved in the global potential branch when the differential translation condition of [[pthm-cm08-translation]] holds for its generator. For the one-label confining oscillator $U=\tfrac{k}{2}\lvert x\rvert^2$, $k>0$ with units $\mu\tau^{-2}$, the global translation condition fails for every nonzero direction $a$ (evaluate it at a nonzero position parallel to $a$). At positions with $a\cdot x\ne0$ the directional derivative is nonzero, and in the global potential branch the centre of mass oscillates rather than moves uniformly. This is the precise boundary of the boost statement: it is a property of the model's Lagrangian, not of Galilean kinematics.
 
-- **Relation to the momentum clause.** Clauses 1 and 2 show that for the
-  global potential branch the boost charge adds no independent conservation
-  hypothesis beyond the differential translation condition already required by
-  [[pthm-cm08-translation]]: the two charges $a\cdot P$ and $K_{a}$ stand or
-  fall together, and clause 3 says that the content of the boost charge is the
-  uniform motion of the component $a$ of the centre of mass. With residual
-  forces the rate formula of clause 5 replaces conservation, and the charge
-  fails to be conserved along every motion on which the component $a$ of the
-  total force does not vanish identically.
+- **Relation to the momentum clause.** Clauses 1 and 2 show that for the global potential branch the boost charge adds no independent conservation hypothesis beyond the differential translation condition already required by [[pthm-cm08-translation]]: the two charges $a\cdot P$ and $K_{a}$ stand or fall together, and clause 3 says that the content of the boost charge is the uniform motion of the component $a$ of the centre of mass. With residual forces the rate formula of clause 5 replaces conservation, and the charge fails to be conserved along every motion on which the component $a$ of the total force does not vanish identically.
 
-- **Empirical status.** All statements are deductions inside the model under
-  the declared hypotheses; the phrase "boost" names the transformation
-  $x_{i}\mapsto x_{i}+s t a$ of the description, not any measurement, and no
-  claim is made that a physical force law is boost invariant.
+- **Empirical status.** All statements are deductions inside the model under the declared hypotheses; the phrase "boost" names the transformation $x_{i}\mapsto x_{i}+s t a$ of the description, not any measurement, and no claim is made that a physical force law is boost invariant.

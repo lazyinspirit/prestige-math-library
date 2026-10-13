@@ -49,7 +49,7 @@ Then:
 
 [L1] The cross product has coordinates $(u\times v)_1=u_2v_3-u_3v_2$, $(u\times v)_2=u_3v_1-u_1v_3$, $(u\times v)_3=u_1v_2-u_2v_1$ in the standard basis, and satisfies $\langle u\times v,w\rangle=\det[u\ v\ w]$, where $[u\ v\ w]$ is the matrix with these three vectors as columns; moreover $u\times v$ is orthogonal to $u$ and to $v$ [[def-cross-product-in-r3]], [[lem-cross-product-is-bilinear-alternating-and-orthogonal]].
 
-[L2] $M_3(\mathbb R)$ has entrywise sum, $(AB)_{ij}=\sum_{k=0}^{2}A_{ik}B_{kj}$ for the product, and $(A^{\mathsf T})_{ij}=A_{ji}$ for the transpose; the transpose is involutive and reverses products [[def-matrix-space]], [[def-matrix-product-and-identity-matrix]], [[def-transpose-of-a-matrix]], [[prop-transpose-laws]].
+[L2] Use the owning page's one-based labels: $u_j:=u(j-1)$, $M_{ij}:=M(i-1,j-1)$, and $e_j$ is the standard unit vector at the actual index $j-1$, for $i,j\in\{1,2,3\}$. Relabelling the supplier's product formula gives $(AB)_{ij}=\sum_{k=1}^{3}A_{ik}B_{kj}=\sum_{r=0}^{2}A(i-1,r)B(r,j-1)$. Sums are entrywise and $(A^{\mathsf T})_{ij}=A_{ji}$; the transpose is involutive and reverses products [[def-matrix-space]], [[def-matrix-product-and-identity-matrix]], [[def-transpose-of-a-matrix]], [[prop-transpose-laws]], [[lem-standard-basis-of-f-n]].
 
 [L3] The determinant is multiplicative, $\det(AB)=\det A\det B$, and $\det I_3=1$ [[thm-determinant-multiplicative]], [[def-matrix-product-and-identity-matrix]].
 

@@ -30,7 +30,7 @@ physical_scope: "A scope audit of the worked checks of this companion page: what
 sources:
   references:
     - title: "G. Teschl, Mathematical Methods in Quantum Mechanics, 1st edition 2009,
-        Section 3.3, printed pages 92-95 (PDF pages 104-107): probabilities from
+        Section 3.1, printed pages 92-95 (PDF pages 104-107): probabilities from
         a projection-valued measure, for comparison with the type checks of this
         page"
       url: "https://www.mat.univie.ac.at/~gerald/ftp/book-schroe/schroe.pdf"
@@ -47,7 +47,7 @@ This companion page contains worked checks of the framework's conventions and re
 
 **Dimension bookkeeping.** [[ex-nrqm-framework-dimension-bookkeeping]] verifies that the quantities and displayed laws of the framework are dimensionally consistent under the conventions of [[def-nrqm-framework-quantities-and-units]]: coordinates, wave function, position and momentum acts, the canonical commutator, the kinetic and potential terms, the Schroedinger equation, the probability current and the boost phase. The check is bookkeeping inside the conventions: it contains no measured value and tests no physical equation against data.
 
-**Type checks.** [[ex-nrqm-framework-quantity-type-checks]] verifies the mathematical types of the adopted objects on explicit finite-dimensional data: a pure preparation as a unit ray and as a rank-one density operator, a mixture of two orthogonal pure preparations as a density operator that is not pure, the action of a local observable on a product state, and the outcome law of a finite-spectrum observable as a probability measure rather than a number. These are internal consistency checks of the postulates; they establish no laboratory fact.
+**Type checks.** [[ex-nrqm-framework-quantity-type-checks]] verifies the mathematical types of the adopted objects on explicit finite-dimensional data: a pure preparation as a unit ray and as a rank-one density operator, a mixture of two orthogonal pure preparations as a density operator that is not pure, the action of a local observable on a product state, and the outcome law of a finite-spectrum observable as a probability measure on its possible values rather than a single deterministic outcome. These are internal consistency checks of the postulates; they establish no laboratory fact.
 
 **Counterexample: the specified mass-zero limit.** [[cex-nrqm-framework-zero-mass-has-no-self-adjoint-limit]] refutes the specific assertion of a self-adjoint strong action limit on every Schwartz state together with finite limiting frequency at each fixed nonzero wave number: one explicit normalized compactly supported smooth state has diverging kinetic-operator norm, and each fixed normalized operator-domain state with nonzero momentum second moment has divergent kinetic expectation. Its model root-mean-square speed depends on mass and is not held fixed during this limit. The argument does not decide other notions of convergence or exclude independently specified massless models; the radiation extension is a separately adopted model.
 

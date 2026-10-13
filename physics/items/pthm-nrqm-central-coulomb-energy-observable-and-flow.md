@@ -75,7 +75,7 @@ $D(H_{\kappa})=H^{2}(\mathbb R^{3};\mathbb C)$, acts by
 $H_{\kappa}f=-\frac{\hbar^{2}}{2m}\Delta_{w}f-\kappa f/|\cdot|$, and
 $$\sigma_{\mathrm{ess}}(H_{\kappa})=[0,+\infty);$$
 every point of $\sigma(H_{\kappa})\cap(-\infty,0)$ is an eigenvalue of finite
-multiplicity, isolated in $\mathbb R$, and the set of negative eigenvalues is
+multiplicity, isolated in $\sigma(H_{\kappa})$, and the set of negative eigenvalues is
 at most countable;
 
 (b) *Flow.* The family $U(t):=\exp(-itH_{\kappa}/\hbar)$ is the model's
@@ -121,7 +121,7 @@ empirical result.
 
 [F1] **The model's operator.** $H_{\kappa}=(\hbar^{2}/2m)C_{\gamma}$ with $\gamma=2m\kappa/\hbar^{2}$ and $C_{\gamma}=-\Delta-\gamma/|\cdot|$ on $D(C_{\gamma})=H^{2}(\mathbb R^{3};\mathbb C)$; $H_{\kappa}$ is self-adjoint on that domain and acts by $H_{\kappa}f=-\frac{\hbar^{2}}{2m}\Delta_{w}f-\kappa f/|\cdot|$; the domain $H^{2}$ is a dense subspace of $L^{2}(\mathbb R^{3};\mathbb C)$ ([[def-nrqm-central-framework-coulomb-and-hydrogen-model]] clause (b), [[lem-nrqm-central-free-operator-differential-identification]], [[cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn]], [[def-sobolev-space-wkp-and-its-norm]]).
 
-[F2] **Spectrum of the unscaled operator.** $C_{\gamma}$ is bounded below, $\sigma_{\mathrm{ess}}(C_{\gamma})=[0,+\infty)$, every point of $\sigma(C_{\gamma})\cap(-\infty,0)$ is an eigenvalue of $C_{\gamma}$ of finite multiplicity isolated in $\mathbb R$, and the set of such eigenvalues is at most countable ([[thm-nrqm-coulomb-essential-spectrum]] clauses (a), (b), [[thm-nrqm-coulomb-infinitesimal-kinetic-bound]] clause (c)).
+[F2] **Spectrum of the unscaled operator.** $C_{\gamma}$ is bounded below, $\sigma_{\mathrm{ess}}(C_{\gamma})=[0,+\infty)$, every point of $\sigma(C_{\gamma})\cap(-\infty,0)$ is an eigenvalue of $C_{\gamma}$ of finite multiplicity isolated in $\sigma(C_{\gamma})$, and the set of such eigenvalues is at most countable ([[thm-nrqm-coulomb-essential-spectrum]] clauses (a), (b), [[thm-nrqm-coulomb-infinitesimal-kinetic-bound]] clause (c)).
 
 [F3] **Positive scaling of self-adjoint operators.** For $c_{0}>0$ and a densely defined self-adjoint $A$, the operator $c_{0}A$ with domain $D(A)$ is self-adjoint, $\rho(c_{0}A)=c_{0}\rho(A)$ and $\sigma(c_{0}A)=c_{0}\sigma(A)$; for a general $z\in\mathbb C$ one has $z\in\rho(c_{0}A)$ if and only if $z/c_{0}\in\rho(A)$ ([[lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators]] clauses (a), (b)).
 
@@ -137,7 +137,7 @@ empirical result.
 
 **Given:** The data of the statement and [F1]-[F6].
 
-1.1 [Energy observable and spectrum] By [F1], $H_{\kappa}$ is self-adjoint on the dense domain $H^{2}(\mathbb R^{3};\mathbb C)$; with the declared unit joule the pair $(H_{\kappa},\mathrm J)$ is an assigned sharp observable in the sense of [F4]. Write $c_{0}:=\hbar^{2}/2m>0$, so that $H_{\kappa}=c_{0}C_{\gamma}$. By [F3] applied to $A=C_{\gamma}$, $c_{0}A$ is self-adjoint and $\sigma(c_{0}A)=c_{0}\sigma(A)$, whence $\sigma_{\mathrm{ess}}(H_{\kappa})=c_{0}\sigma_{\mathrm{ess}}(C_{\gamma})=c_{0}[0,+\infty)=[0,+\infty)$. A point $\lambda\in\sigma(H_{\kappa})\cap(-\infty,0)$ has $\lambda/c_{0}\in\sigma(C_{\gamma})\cap(-\infty,0)$, so by [F2] it is an eigenvalue of $C_{\gamma}$ of finite multiplicity isolated in $\mathbb R$; by clause (d) of [F3] the eigenspaces correspond exactly under the scaling, so $\lambda$ is an eigenvalue of $H_{\kappa}$ of the same finite multiplicity, isolated because $c_{0}$ is a homeomorphism of $\mathbb R$, and the set of such $\lambda$ is at most countable as the image of an at-most-countable set. Boundedness below is [F2] together with the scaling, and the action formula is [F1]. This proves (a). [given, F1, F2, F3, F4, algebra]
+1.1 [Energy observable and spectrum] By [F1], $H_{\kappa}$ is self-adjoint on the dense domain $H^{2}(\mathbb R^{3};\mathbb C)$; with the declared unit joule the pair $(H_{\kappa},\mathrm J)$ is an assigned sharp observable in the sense of [F4]. Write $c_{0}:=\hbar^{2}/2m>0$, so that $H_{\kappa}=c_{0}C_{\gamma}$. By [F3] applied to $A=C_{\gamma}$, $c_{0}A$ is self-adjoint and $\sigma(c_{0}A)=c_{0}\sigma(A)$, whence $\sigma_{\mathrm{ess}}(H_{\kappa})=c_{0}\sigma_{\mathrm{ess}}(C_{\gamma})=c_{0}[0,+\infty)=[0,+\infty)$. A point $\lambda\in\sigma(H_{\kappa})\cap(-\infty,0)$ has $\lambda/c_{0}\in\sigma(C_{\gamma})\cap(-\infty,0)$, so by [F2] it is an eigenvalue of $C_{\gamma}$ of finite multiplicity isolated in $\sigma(C_{\gamma})$; by clause (d) of [F3] the eigenspaces correspond exactly under the scaling, so $\lambda$ is an eigenvalue of $H_{\kappa}$ of the same finite multiplicity, isolated in $\sigma(H_{\kappa})$ because multiplication by $c_{0}$ is a homeomorphism from $\sigma(C_{\gamma})$ to $\sigma(H_{\kappa})$, and the set of such $\lambda$ is at most countable as the image of an at-most-countable set. Boundedness below is [F2] together with the scaling, and the action formula is [F1]. This proves (a). [given, F1, F2, F3, F4, algebra]
 
 2.1 [Flow] By (a) and [F5] the family $U(t)=\exp(-itH_{\kappa}/\hbar)$ is a strongly continuous one-parameter unitary group; the Schroedinger equation holds in the norm-differentiable sense exactly for $\psi(0)\in D(H_{\kappa})$; density preparations evolve as $\rho(t)=U(t)\rho(0)U(t)^{*}$. This is (b). [step 1.1, F5]
 

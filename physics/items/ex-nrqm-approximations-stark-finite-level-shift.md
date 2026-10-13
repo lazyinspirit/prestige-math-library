@@ -4,7 +4,7 @@ aliases: [ nrqm-approximations-stark-finite-level-shift ]
 kind: example
 domain: physics
 title: "A finite-level static Stark model: vanishing first-order shift, exact
-  quadratic splitting and a finite check of the remainder bound"
+  splitting with leading quadratic shift and a finite check of the remainder bound"
 status: draft
 origin: session
 dependency_level: 15
@@ -59,7 +59,7 @@ physical_scope: "A conditional finite-level computation in the declared two-body
   compressed two-state Stark family built from the model's 1s-like and 2p-like
   relative states, the vanishing diagonal dipole matrix elements by the angular
   selection rule, the exact closed-form eigenvalues of the two-state family, the
-  vanishing first-order and the exact second-order coefficient of the page's
+  vanishing first-order shift and the exact second derivative at zero from the page's
   non-degenerate theorem, and a finite numeric check of the cubic remainder
   bound. The example identifies no laboratory atom, asserts no measured Stark
   shift or polarizability value, and states no transition or lifetime; the
@@ -129,7 +129,7 @@ $0\le\mathcal E<\Delta/(8D_{\rm rel})$, with $\Delta$ playing the role of the ga
 (c) the page's perturbation theorem applies with nondegenerate label
 $E_{1}$ (gap $\Delta$), and gives the vanishing first-order shift
 $$E'(0)=0$$
-and the exact second-order coefficient
+and the exact second derivative at zero
 $$E''(0)=-\frac{2D_{\rm rel}^{2}(1\ \mathrm{V\,m^{-1}})^{2}}{\Delta},$$
 equivalently the quadratic Stark shift
 $$F_{-}(\mathcal E)=E_{1}-\frac{D_{\rm rel}^{2}\mathcal E^{2}}{\Delta} +O(\mathcal E^{4});$$
@@ -182,7 +182,7 @@ rule allows $l'=l+1$, $m'=m+0$.
 
 [L3] **The model's theorem.** Under the model's hypotheses with a simple
 label, for every real $|\lambda|<R=g/(8v)$ the followed label is the unique
-spectral value in $|z-E|=g/2$, and the coefficients and remainder bound of
+spectral value in $|z-E|<g/2$, and the coefficients and remainder bound of
 [[pthm-nrqm-approximations-nondegenerate-perturbation-expansion]] hold
 ([[pthm-nrqm-approximations-nondegenerate-perturbation-expansion]],
 [[def-nrqm-approximations-framework-perturbed-family-model]]).
@@ -201,7 +201,7 @@ closed form with the second-order truncation at the test coupling.
 
 1.1 [The compressed matrices and their nonzero entry] Write $a=a_{\mu}$. From [L5], $\|u_{10}\|_{2}^{2}=4a^{-3}2!/(2/a)^{3}=1$ and $\|u_{21}\|_{2}^{2}=(24a^{5})^{-1}4!/(1/a)^{5}=1$; the explicit Kummer solutions therefore give the normalized bound states with the stated labels. For their positive real representatives, $\int_{S^{2}}Y_{10}\Omega_{3}Y_{00}\,d\sigma=(\sqrt3/(4\pi))2\pi\int_{-1}^{1}t^{2}dt=1/\sqrt3$. Their radial dipole integral is $\int_{0}^{\infty}r u_{21}u_{10}\,dr=(1/\sqrt6)a^{-4}4!/(3/(2a))^{5}=256a/(81\sqrt6)>0$. The absolutely convergent factorization [L2] yields $\langle\psi_{210},Q_{3}\psi_{100}\rangle=128\sqrt2 a/243>0$. Since $D_{3}=-qQ_{3}$, its matrix element is $-128\sqrt2 q a/243$ before rephasing. Set $\psi_{1}=\psi_{100}$ and $\psi_{2}=-\psi_{210}$ to obtain the positive off-diagonal value $D_{\rm rel}=128\sqrt2 q a/243$ without changing energies, labels or normalization. By [L2], bound states lie in all coordinate domains; all diagonal entries vanish by degree selection, and the off-diagonal $Q_{\pm}$ entries vanish by weight selection. Thus $D^{W}_{1}=D^{W}_{2}=0$ and $D^{W}_{3}=D_{\rm rel}\sigma_{1}$ with $D_{\rm rel}>0$, proving (a). [L1, L2, L5, given, algebra]
 
-1.2 [The two-state family] In the orthonormal basis $(\psi_{1},\psi_{2})$ one has $\Pi_{W}H_{\kappa}|_{W}=\operatorname{diag}(E_{1},E_{2})$ by [L1] and orthogonality of distinct eigenstates; with $v:=D_{\rm rel}(1\ \mathrm{V\, m^{-1}})$ in joules one has $V=-v\sigma_{1}$ and $$H_{S}=\begin{pmatrix}E_{1}&-v\lambda\\-v\lambda&E_{2}\end{pmatrix}.$$ Since $\sigma_{1}$ is Hermitian with $\|\sigma_{1}\|=1$, $V$ is bounded self-adjoint with norm $v$; the exact eigenvalues of a matrix $\begin{pmatrix}a&w\\w&b\end{pmatrix}$ with real $w$ are $\frac{a+b}{2}\pm\sqrt{(\frac{a-b}{2})^{2}+w^{2}}$, verified by the same direct eigenvector computation as in the two-level example of this page with $g:=\Delta$, $w:=-v\lambda$; substituting $a=E_{1},b=E_{2}$ gives clause (b). [L1, given, algebra]
+1.2 [The two-state family] In the orthonormal basis $(\psi_{1},\psi_{2})$ one has $\Pi_{W}H_{\kappa}|_{W}=\operatorname{diag}(E_{1},E_{2})$ by [L1] and orthogonality of distinct eigenstates; with $v:=D_{\rm rel}(1\ \mathrm{V\, m^{-1}})$ in joules one has $V=-v\sigma_{1}$ and $$H_{S}=\begin{pmatrix}E_{1}&-v\lambda\\-v\lambda&E_{2}\end{pmatrix}.$$ Since $\sigma_{1}$ is Hermitian with $\|\sigma_{1}\|=1$, $V$ is bounded self-adjoint with norm $v$; the exact eigenvalues of a matrix $\begin{pmatrix}a&w\\w&b\end{pmatrix}$ with real $w$ are $\frac{a+b}{2}\pm\sqrt{(\frac{a-b}{2})^{2}+w^{2}}$, because its characteristic polynomial is $(a-z)(b-z)-w^2$; here $a\ne b$, so the two displayed roots are distinct, each has a nonzero kernel vector, and their eigenvectors are independent and span the two-dimensional space; substituting $a=E_{1},b=E_{2}$ gives clause (b). [L1, given, algebra]
 
 2.1 [Coefficients] The label $E=E_{1}$ is simple with gap $\Delta$ (the second level is $E_{2}=E_{1}+\Delta$ and there are no further levels in the two-dimensional model); the perturbation $V$ is bounded self-adjoint with norm $v$; hence [L3] applies for $|\lambda|v<\Delta/8$. Since $V$ has vanishing diagonal, $E'(0)=\langle V\psi_{1},\psi_{1}\rangle=0$. The reduced inverse on $Q_{0}W=\mathbb C\psi_{2}$ is $S=\Delta^{-1}|\psi_{2}\rangle\langle\psi_{2}|$, so $SV\psi_{1}=-(v/\Delta)\psi_{2}$ and $VSV\psi_{1}=(v^{2}/\Delta)\psi_{1}$, giving $E''(0)=-2v^{2}/\Delta$; substituting $v=D_{\rm rel}(1\ \mathrm{V\,m^{-1}})$ and expanding the closed form of clause (b) by [L4] gives the displayed quadratic Stark shift. This is clause (c). [L3, L4, step 1.2, algebra]
 

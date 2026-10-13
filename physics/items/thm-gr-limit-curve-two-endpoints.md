@@ -77,9 +77,7 @@ verification:
 
 Assume the Axioms of Countable Choice and Dependent Choice
 ([[def-countable-choice]], [[def-dependent-choice]]). Let $(M,g,N)$ be a
-time-oriented smooth Lorentzian four-manifold and let $h$ be the auxiliary
-metric of [[thm-gr-auxiliary-complete-riemannian-metric]], so that
-$(M,d_h)$ is complete and closed $d_h$-bounded sets are compact. Let
+time-oriented smooth Lorentzian four-manifold and let $h$ denote the complete conformally rescaled metric $h\prime$ constructed in [[thm-gr-auxiliary-complete-riemannian-metric]] clause (b). All distances here are within a connected component; each component is complete and its closed $d_h$-bounded sets are compact by clauses (c) and (d). Endpoint convergence puts the joining curves in the component of $x$ for all sufficiently large $k$, since components of a manifold are open. Let
 $$\alpha_k:[0,b_k]\to M,\qquad 0<b_k<\infty,$$
 be future causal curves ([[def-gr-causal-curves-and-reachability]])
 parametrized by $h$-arclength, $\ell_h(\alpha_k|_{[s,t]})=t-s$ for
@@ -87,16 +85,18 @@ $0\le s\le t\le b_k$, with $\alpha_k(0)\to x\in M$ and
 $\alpha_k(b_k)\to z\in M$. Passing to a subsequence, let
 $b:=\lim_kb_k\in[0,\infty]$. Then:
 
-**(i) Bounded case.** If $b<\infty$, there is a subsequence and a future causal
-curve $\alpha:[0,b]\to M$ with $\alpha(0)=x$, $\alpha(b)=z$ and
+**(i) Bounded case.** If $0<b<\infty$, there is a subsequence and a future
+causal curve $\alpha:[0,b]\to M$ with $\alpha(0)=x$, $\alpha(b)=z$ and
 $d_h(\alpha(s),\alpha(t))\le t-s$ for $s\le t$, such that the subsequence
 converges to $\alpha$ uniformly in $d_h$ on $[0,b]$ after the following
 common-domain reparametrization when $b>0$:
 $$\widetilde\alpha_k(t):=\alpha_k\!\left(\frac{b_k}{b}t\right),\qquad 0\le t\le b.$$
 Thus $\widetilde\alpha_k(0)=\alpha_k(0)$ and
 $\widetilde\alpha_k(b)=\alpha_k(b_k)$. If $b=0$, then $x=z$ and the curves
-converge to the constant curve at $x$ uniformly on their varying domains in
-the sense that $\sup_{0\le t\le b_k}d_h(\alpha_k(t),x)\to0$.
+converge to the constant map at $x$ uniformly on their varying domains in
+the sense that $\sup_{0\le t\le b_k}d_h(\alpha_k(t),x)\to0$. The constant
+map is the continuous limit, not a future causal curve in the nonzero-velocity
+curve class.
 
 **(ii) Unbounded case.** If $b=\infty$, there are a future-inextendible future
 causal curve $\alpha^+:[0,\infty)\to M$ with $\alpha^+(0)=x$ and a
@@ -104,13 +104,12 @@ past-inextendible future causal curve $\alpha^-:(-\infty,0]\to M$ with
 $\alpha^-(0)=z$, such that a subsequence converges to $\alpha^+$ uniformly on
 every compact subinterval of $[0,\infty)$ and to $\alpha^-$ uniformly on every
 compact subinterval of $(-\infty,0]$ (where $\alpha^-$ is the limit of the
-curves $s\mapsto\alpha_k(b_k+s)$, $s\le0$, for large $k$). Moreover for all
-$t_+\ge0$ and $t_-\le0$ there are parameters $u_k\le v_k$ with
-$u_k\to\alpha^+(t_+)$ and $v_k\to\alpha^-(t_-)$; in particular
-$(\alpha^+(t_+),\alpha^-(t_-))$ lies in the closure of the causal relation in
-the strong sense of [[def-gr-causal-curves-and-reachability]] clause (c):
-there exist sequences $u_j\le v_j$ with $u_j\to\alpha^+(t_+)$ and
-$v_j\to\alpha^-(t_-)$.
+curves $s\mapsto\alpha_k(b_k+s)$, $s\le0$, for large $k$). Moreover, for all
+$t_+\ge0$ and $t_-\le0$ there are event pairs $u_k,v_k\in M$ with
+$u_k\le v_k$, $u_k\to\alpha^+(t_+)$ and $v_k\to\alpha^-(t_-)$. Thus
+$(\alpha^+(t_+),\alpha^-(t_-))$ lies in the sequential closure of the causal
+relation, meaning precisely that it is a limit of pairs in the relation
+$\le$.
 
 **(iii) Coincident endpoints.** If $x=z$, then in case (i) with $b>0$ the
 curve $\alpha$ is a nonconstant closed future causal curve through $x$
@@ -135,7 +134,7 @@ $b=\infty$ is excluded.
 
 [L3] Concatenation of two future causal curves at a common endpoint is a future causal curve; a curve that is both future- and past-inextendible is inextendible ([[lem-gr-causal-curve-calculus]] clause (d), [[def-gr-causal-curves-and-reachability]] clause (d), [[lem-gr-causal-curve-conventions]] clause (d)).
 
-[L4] $d_h$ is a metric inducing the manifold topology; for every locally absolutely continuous $\beta$ and $s<t$, $d_h(\beta(s),\beta(t))\le\ell_h(\beta|_{[s,t]})$. In particular, $h$-arclength parametrization gives the upper bound $d_h(\beta(s),\beta(t))\le t-s$, not equality in general ([[def-riemannian-distance-on-a-connected-manifold]], [[thm-riemannian-distance-is-a-metric]], [[thm-the-riemannian-distance-topology-is-the-manifold-topology]]).
+[L4] On each connected component $d_h$ is a complete metric with compact closed bounded balls by [[thm-gr-auxiliary-complete-riemannian-metric]] clauses (c) and (d), inducing the manifold topology; for every locally absolutely continuous $\beta$ and $s<t$, $d_h(\beta(s),\beta(t))\le\ell_h(\beta|_{[s,t]})$. In particular, $h$-arclength parametrization gives the upper bound $d_h(\beta(s),\beta(t))\le t-s$, not equality in general ([[def-riemannian-distance-on-a-connected-manifold]], [[thm-riemannian-distance-is-a-metric]], [[thm-the-riemannian-distance-topology-is-the-manifold-topology]]).
 
 [L5] In a strongly causal spacetime, causal curves with image in the compact set $K$ have $h$-length at most $L(K)$, and $h$-arclength-parametrized curves with image in $K$ have domain length at most $L(K)$ ([[lem-gr-strong-causality-compact-length-bound]]).
 
@@ -147,94 +146,23 @@ $b=\infty$ is excluded.
 
 **Proof technique:** case-analysis.
 
-1.1 (Common-domain reparametrization in the bounded positive case.) Suppose [L4, L6, given, construct]
-$0<b<\infty$. Define
-$$\widetilde\alpha_k(t):=\alpha_k\!\left(\frac{b_k}{b}t\right),\qquad 0\le t\le b.$$
-Since $b_k/b\to1$, after discarding finitely many terms these curves are
-2-Lipschitz for $d_h$: the arclength parametrization gives
-$$d_h(\widetilde\alpha_k(s),\widetilde\alpha_k(t)) \le\ell_h(\widetilde\alpha_k|_{[s,t]}) =\frac{b_k}{b}|t-s|\le2|t-s|.$$
-Their initial points converge to $x$, and their images lie in one closed
-$h$-ball about $x$ of radius $2b+1$, which is compact by [L4]. Applying [L6]
-gives a subsequence converging uniformly on $[0,b]$ to a 2-Lipschitz map
-$\alpha$. The sharper inequality
-$$d_h(\widetilde\alpha_k(s),\widetilde\alpha_k(t)) \le\frac{b_k}{b}|t-s|$$
-and $b_k/b\to1$ imply $d_h(\alpha(s),\alpha(t))\le|t-s|$. Uniform
-convergence at the endpoints gives $\alpha(0)=x$ and $\alpha(b)=z$. [L4, L6, given, construct]
+1.1 (Common-domain reparametrization in the bounded positive case.) Suppose $0<b<\infty$. Define $\widetilde\alpha_k(t):=\alpha_k\!\left(\frac{b_k}{b}t\right),\qquad 0\le t\le b.$ Since $b_k/b\to1$, after discarding finitely many terms these curves are 2-Lipschitz for $d_h$: the arclength parametrization gives $d_h(\widetilde\alpha_k(s),\widetilde\alpha_k(t)) \le\ell_h(\widetilde\alpha_k|_{[s,t]}) =\frac{b_k}{b}|t-s|\le2|t-s|.$ Their initial points converge to $x$, and their images lie in one closed $h$-ball about $x$ of radius $2b+1$, which is compact by [L4]. Applying [L6] gives a subsequence converging uniformly on $[0,b]$ to a 2-Lipschitz map $\alpha$. The sharper inequality $d_h(\widetilde\alpha_k(s),\widetilde\alpha_k(t)) \le\frac{b_k}{b}|t-s|$ and $b_k/b\to1$ imply $d_h(\alpha(s),\alpha(t))\le|t-s|$. Uniform convergence at the endpoints gives $\alpha(0)=x$ and $\alpha(b)=z$. [L4, L6, given, construct]
 
-1.2 (The limit is future causal.) Let $[s,t]$ be a parameter interval such [L1, L4, L6, L7, given]
-that $\alpha([s,t])$ lies in a strictly convex normal set $C$. Since this
-image is compact and $C$ is open, uniform convergence implies
-$\widetilde\alpha_k([s,t])\subset C$ for all sufficiently large $k$. By
-[[lem-gr-causal-curve-conventions]] clause (a), each approximating causal
-subarc has a future-causal position vector
-$$w_k=\exp_{\widetilde\alpha_k(s)}^{-1} (\widetilde\alpha_k(t)).$$
-Smoothness of the two-point inverse on $C\times C$ gives
-$w_k\to w=\exp_{\alpha(s)}^{-1}(\alpha(t))$; closedness of the future cone
-gives that $w$ is future causal or zero. Thus $\alpha$ is geodesically
-connectible. It is locally Lipschitz in charts by its $d_h$-Lipschitz bound
-and [L7], hence locally absolutely continuous.
-At almost every differentiability parameter $t<b$, choose a relatively
-compact adapted chart $U$ around $\alpha(t)$ and $h_0>0$ so
-$\alpha([t,t+h])\subset U$ for $0<h\le h_0$. For all sufficiently large
-$k$ the approximating arcs also lie in $U$ and have $h$-length
-$(b_k/b)h$. By [L7],
-$$\frac{b_k}{b}h\le C\bigl(x^0(\widetilde\alpha_k(t+h)) -x^0(\widetilde\alpha_k(t))\bigr)$$
-for a chart constant $C$. Passing to the limit and using $b_k/b\to1$ gives
-$$x^0(\alpha(t+h))-x^0(\alpha(t))\ge h/C.$$
-At differentiability points this yields
-$(x^0\circ\alpha)'(t)\ge1/C>0$. For small $h>0$ the position vector
-$\exp_{\alpha(t)}^{-1}(\alpha(t+h))$ is future causal or zero by the
-preceding connectibility argument; divided by $h$ it tends in coordinates to
-$\alpha'(t)$, because the differential of the second-variable inverse at
-the diagonal is the identity ([[lem-gr-joint-exponential-diffeomorphism]]
-clauses (b),(c)). The future cone is closed and $\alpha'$ has positive time
-component, so $\alpha'(t)$ is nonzero future causal almost everywhere. This
-proves $\alpha$ is a future causal curve and is not constant on any
-nondegenerate interval. [L1, L4, L6, L7, given]
+1.2 (The limit is future causal.) Let $[s,t]$ be a parameter interval such that $\alpha([s,t])$ lies in a strictly convex normal set $C$. Since this image is compact and $C$ is open, uniform convergence implies $\widetilde\alpha_k([s,t])\subset C$ for all sufficiently large $k$. By [[lem-gr-causal-curve-conventions]] clause (a), each approximating causal subarc has a future-causal position vector $w_k=\exp_{\widetilde\alpha_k(s)}^{-1} (\widetilde\alpha_k(t)).$ Smoothness of the two-point inverse on $C\times C$ gives $w_k\to w=\exp_{\alpha(s)}^{-1}(\alpha(t))$; closedness of the future cone gives that $w$ is future causal or zero. Thus $\alpha$ is geodesically connectible. It is locally Lipschitz in charts by its $d_h$-Lipschitz bound and [L7], hence locally absolutely continuous. At almost every differentiability parameter $t<b$, choose a relatively compact adapted chart $U$ around $\alpha(t)$ and $h_0>0$ so $\alpha([t,t+h])\subset U$ for $0<h\le h_0$. For all sufficiently large $k$ the approximating arcs also lie in $U$ and have $h$-length $(b_k/b)h$. By [L7], $\frac{b_k}{b}h\le C\bigl(x^0(\widetilde\alpha_k(t+h)) -x^0(\widetilde\alpha_k(t))\bigr)$ for a chart constant $C$. Passing to the limit and using $b_k/b\to1$ gives $x^0(\alpha(t+h))-x^0(\alpha(t))\ge h/C.$ At differentiability points this yields $(x^0\circ\alpha)'(t)\ge1/C>0$. For small $h>0$ the position vector $\exp_{\alpha(t)}^{-1}(\alpha(t+h))$ is future causal or zero by the preceding connectibility argument; divided by $h$ it tends in coordinates to $\alpha'(t)$, because the differential of the second-variable inverse at the diagonal is the identity ([[lem-gr-joint-exponential-diffeomorphism]] clauses (b),(c)). The future cone is closed and $\alpha'$ has positive time component, so $\alpha'(t)$ is nonzero future causal almost everywhere. This proves $\alpha$ is a future causal curve and is not constant on any nondegenerate interval. [L1, L4, L6, L7, given]
 
-1.3 (The future tail in the unbounded case.) Suppose $b=\infty$. For each [L1, given, choose]
-fixed $T>0$, $[0,T]$ is contained in $[0,b_k]$ for all large $k$. Applying
-clause (b) of [L1] by diagonal extraction over integer $T$ gives a
-subsequence converging uniformly on every compact subinterval of
-$[0,\infty)$ to a future-inextendible future causal curve
-$\alpha^+:[0,\infty)\to M$ with $\alpha^+(0)=x$. [L1, given, choose]
+1.3 (The future tail in the unbounded case.) Suppose $b=\infty$. For each fixed $T>0$, $[0,T]$ is contained in $[0,b_k]$ for all large $k$. Applying clause (b) of [L1] by diagonal extraction over integer $T$ gives a subsequence converging uniformly on every compact subinterval of $[0,\infty)$ to a future-inextendible future causal curve $\alpha^+:[0,\infty)\to M$ with $\alpha^+(0)=x$. [L1, given, choose]
 
-1.4 (The past tail in the unbounded case.) Define [L1, given, choose]
-$\delta_k(s):=\alpha_k(b_k+s)$ on $[-b_k,0]$. For each fixed $T>0$,
-$[-T,0]$ lies in $[-b_k,0]$ for all large $k$. Apply the time-reversed
-half-line result of [L1] and diagonalize to obtain a past-inextendible future
-causal curve $\alpha^-:(-\infty,0]\to M$ with $\alpha^-(0)=z$, such that
-$\delta_k$ converges uniformly to $\alpha^-$ on compact subintervals. A
-nested subsequence retains both tail limits. [L1, given, choose]
+1.4 (The past tail in the unbounded case.) Define $\delta_k(s):=\alpha_k(b_k+s)$ on $[-b_k,0]$. For each fixed $T>0$, $[-T,0]$ lies in $[-b_k,0]$ for all large $k$. Apply the time-reversed half-line result of [L1] and diagonalize to obtain a past-inextendible future causal curve $\alpha^-:(-\infty,0]\to M$ with $\alpha^-(0)=z$, such that $\delta_k$ converges uniformly to $\alpha^-$ on compact subintervals. A nested subsequence retains both tail limits. [L1, given, choose]
 
-1.5 (The zero-length case.) If $b=0$, then [L4, given, algebra]
-$$d_h(x,z)\le d_h(x,\alpha_k(0)) +d_h(\alpha_k(0),\alpha_k(b_k)) +d_h(\alpha_k(b_k),z)\le o(1)+b_k+o(1),$$
-so $x=z$. For every $t\in[0,b_k]$,
-$$d_h(\alpha_k(t),x)\le d_h(\alpha_k(0),x)+t\le o(1)+b_k.$$
-Hence the curves converge uniformly on their varying domains to the constant
-curve at $x$. [L4, given, algebra]
+1.5 (The zero-length case.) If $b=0$, then $d_h(x,z)\le d_h(x,\alpha_k(0)) +d_h(\alpha_k(0),\alpha_k(b_k)) +d_h(\alpha_k(b_k),z)\le o(1)+b_k+o(1),$ so $x=z$. For every $t\in[0,b_k]$, $d_h(\alpha_k(t),x)\le d_h(\alpha_k(0),x)+t\le o(1)+b_k.$ Hence the curves converge uniformly on their varying domains to the constant curve at $x$. [L4, given, algebra]
 
-1.6 (Imprisonment.) If the spacetime is strongly causal and all images lie [L5, given, algebra]
-in a compact $K$, [L5] gives $b_k\le L(K)$ for every $k$. Taking limits
-yields $b\le L(K)<\infty$, excluding the unbounded case. [L5, given, algebra]
+1.6 (Imprisonment.) If the spacetime is strongly causal and all images lie in a compact $K$, [L5] gives $b_k\le L(K)$ for every $k$. Taking limits yields $b\le L(K)<\infty$, excluding the unbounded case. [L5, given, algebra]
 
-2.1 (The closure relation.) Fix $t_+\ge0$ and $t_-\le0$. For all [step 1.3, step 1.4, L2, given]
-sufficiently large $k$, $t_+\le b_k+t_-$, so by [L2],
-$$\alpha_k(t_+)\le\alpha_k(b_k+t_-)=\delta_k(t_-).$$
-The uniform-on-compact limits in steps 1.3-1.4 give endpoints converging
-respectively to $\alpha^+(t_+)$ and $\alpha^-(t_-)$. This is the stated
-sequential closure relation. [step 1.3, step 1.4, L2, given]
+2.1 (The closure relation.) Fix $t_+\ge0$ and $t_-\le0$. For all sufficiently large $k$, $t_+\le b_k+t_-$, so by [L2], $\alpha_k(t_+)\le\alpha_k(b_k+t_-)=\delta_k(t_-).$ The uniform-on-compact limits in steps 1.3-1.4 give endpoints converging respectively to $\alpha^+(t_+)$ and $\alpha^-(t_-)$. This is the stated sequential closure relation. [step 1.3, step 1.4, L2, given]
 
-2.2 (Coincident endpoints.) If $x=z$ and $0<b<\infty$, step 1.2 gives a [step 1.1, step 1.2, step 1.3, step 1.4, L3, given]
-future causal curve $\alpha$ from $x$ to $x$ which is nonconstant on every
-nondegenerate interval. If $x=z$ and $b=\infty$, concatenate $\alpha^-$ and
-$\alpha^+$ at their common endpoint $x$. The concatenation is future causal
-by [L3], and is past- and future-inextendible because its respective tails
-are; hence it is inextendible. [step 1.1, step 1.2, step 1.3, step 1.4, L3, given]
+2.2 (Coincident endpoints.) If $x=z$ and $0<b<\infty$, step 1.2 gives a future causal curve $\alpha$ from $x$ to $x$ which is nonconstant on every nondegenerate interval. If $x=z$ and $b=\infty$, concatenate $\alpha^-$ and $\alpha^+$ at their common endpoint $x$. The concatenation is future causal by [L3], and is past- and future-inextendible because its respective tails are; hence it is inextendible. [step 1.1, step 1.2, step 1.3, step 1.4, L3, given]
 
-3.1 (Conclusion.) Clause (i) for $b>0$ is steps 1.1-1.2 and for $b=0$ is [step 1.1, step 1.2, step 1.3, step 1.4, step 2.1, step 1.5, step 1.6, step 2.2]
-step 1.5; clause (ii) is steps 1.3, 1.4 and 2.1; clause (iii) is step 2.2; and
-clause (iv) is step 1.6. [step 1.1, step 1.2, step 1.3, step 1.4, step 2.1, step 1.5, step 1.6, step 2.2] ∎
+3.1 (Conclusion.) Clause (i) for $b>0$ is steps 1.1-1.2 and for $b=0$ is step 1.5; clause (ii) is steps 1.3, 1.4 and 2.1; clause (iii) is step 2.2; and clause (iv) is step 1.6. [step 1.1, step 1.2, step 1.3, step 1.4, step 2.1, step 1.5, step 1.6, step 2.2] ∎
 
 ## Remarks
 

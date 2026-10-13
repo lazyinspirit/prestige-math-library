@@ -7,7 +7,7 @@ title: "A declared finite phase-averaging model reproduces the which-path law fo
 status: draft
 origin: session
 dependency_level: 11
-deps: [def-nrqm-interference-two-path-preparation-and-detection-model, pthm-nrqm-interference-coherent-and-mixture-detection-laws, post-nrqm-framework-preparation-and-apparatus, cor-sum-of-roots-of-unity, thm-complex-nth-roots-and-roots-of-unity, def-complex-exponential, def-countable-choice]
+deps: [def-nrqm-interference-two-path-preparation-and-detection-model, pthm-nrqm-interference-coherent-and-mixture-detection-laws, post-nrqm-framework-preparation-and-apparatus, cor-sum-of-roots-of-unity, thm-complex-nth-roots-and-roots-of-unity, def-complex-exponential, def-countable-choice, def-axiom-of-choice]
 dependency_roles:
   def-nrqm-interference-two-path-preparation-and-detection-model: formulation-prerequisite
   pthm-nrqm-interference-coherent-and-mixture-detection-laws: physical-result
@@ -16,6 +16,7 @@ dependency_roles:
   thm-complex-nth-roots-and-roots-of-unity: mathematical-premise
   def-complex-exponential: mathematical-premise
   def-countable-choice: mathematical-premise
+  def-axiom-of-choice: mathematical-premise
 proof_strategy: direct
 provenance:
   statement: ai-altered
@@ -23,9 +24,9 @@ provenance:
 physical_scope: "An exact computation in the declared two-path preparation model of the pair for a declared statistical ensemble of preparations whose relative phase is uniformly distributed over the finitely many n-th roots of unity, in the case of orthogonal path components: the averaged bin law equals the which-path law with the norm weights, and the cross term averages to zero bin by bin. The example is a conditional computation in the declared model; it asserts no decoherence mechanism, no environmental model, no detector response, no counts and no empirical result, and it does not cover the continuous uniform phase distribution."
 sources:
   references:
-    - title: "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 1.3, printed pages 14-18 (PDF pages 17-21): interference and the loss of the cross term under phase averaging"
+    - title: "D. Tong, Quantum Mechanics (author-hosted lecture set), Section 1.3, printed pages 14-18 (PDF pages 17-21): two-slit cross terms and loss of interference under which-path monitoring; background, not a derivation of this finite phase ensemble"
       url: "https://davidtong.org/pdfs/teaching/quantum-mechanics/qm.pdf"
-    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Section 1.4 printed page 15 (PDF page 23): coherent versus incoherent preparation and the vanishing of the cross term"
+    - title: "J. Binney and D. Skinner, The Physics of Quantum Mechanics, Sections 1.2-1.2.1, printed pages 5-7 (PDF pages 13-15): alternative-route cross terms and coarse spatial averaging; background, not averaging of the preparation phase"
       url: "https://www-thphys.physics.ox.ac.uk/people/JamesBinney/qb.pdf"
 verification:
   precheck: pass
@@ -39,7 +40,9 @@ components $\psi_{1},\psi_{2}\ne0$ satisfying
 $\langle\psi_{1},\psi_{2}\rangle=0$ (orthogonal components), and the coherent
 and which-path detection laws
 [[pthm-nrqm-interference-coherent-and-mixture-detection-laws]]. Assume the
-Axiom of Countable Choice ([[def-countable-choice]]). Fix an integer $n\ge2$
+Axiom of Countable Choice and the Axiom of Choice ([[def-countable-choice]],
+[[def-axiom-of-choice]]), as required by the preparation and detection-law
+suppliers. Fix an integer $n\ge2$
 and declare the **finite phase-averaging model**: the relative phase takes the
 $n$ values
 $$\varphi_{k}:=\frac{2\pi k}{n}\qquad(k=0,1,\dots,n-1)$$
@@ -69,7 +72,7 @@ require its own integral model.
 
 ## Verification
 
-**Given:** The declared model data with $\psi_{1},\psi_{2}\ne0$, $\langle\psi_{1},\psi_{2}\rangle=0$; an integer $n\ge2$ with phases $\varphi_{k}=2\pi k/n$; a Borel set $B\subseteq\mathbb R^{3}$; $N=\|\psi_{1}\|^{2}+\|\psi_{2}\|^{2}$ and $w_{*}=\|\psi_{1}\|^{2}/N$; the Axiom of Countable Choice.
+**Given:** The declared model data with $\psi_{1},\psi_{2}\ne0$, $\langle\psi_{1},\psi_{2}\rangle=0$; an integer $n\ge2$ with phases $\varphi_{k}=2\pi k/n$; a Borel set $B\subseteq\mathbb R^{3}$; $N=\|\psi_{1}\|^{2}+\|\psi_{2}\|^{2}$ and $w_{*}=\|\psi_{1}\|^{2}/N$; the Axiom of Countable Choice and the Axiom of Choice.
 
 [L1] The coherent and which-path laws are $\mu^{G}_{\rho_{\mathrm{coh}}(\varphi)}(B)=\|\psi_{1}+e^{i\varphi}\psi_{2}\|^{-2}\int_{B}\|\psi_{1}+e^{i\varphi}\psi_{2}\|^{2}dx$ and $\mu^{G}_{\rho_{\mathrm{mix}}(w)}(B)=w\|\psi_{1}\|^{-2}\int_{B}\|\psi_{1}\|^{2}dx+(1-w)\|\psi_{2}\|^{-2}\int_{B}\|\psi_{2}\|^{2}dx$, and the coherent numerator expands as $\int_{B}(\|\psi_{1}\|^{2}+\|\psi_{2}\|^{2})dx+2\operatorname{Re}(e^{-i\varphi}\int_{B}\langle\psi_{1},\psi_{2}\rangle dx)$ ([[pthm-nrqm-interference-coherent-and-mixture-detection-laws]] clauses (a) and (b), [[def-nrqm-interference-two-path-preparation-and-detection-model]] clauses (c)-(e)).
 
@@ -87,6 +90,12 @@ require its own integral model.
 
 ## Remarks
 
+- **Source scope.** Tong supplies the two-slit cross term and discusses
+  which-path monitoring; Binney and Skinner discuss alternative-route
+  amplitudes and spatial averaging over unresolved fringes. Neither cited
+  passage specifies this finite random-phase ensemble. Its hypotheses are
+  declared locally, and its averaged law is proved here using the detection
+  laws and the sum of roots of unity.
 - **The averaging is not a dynamics.** Nothing here evolves the state or removes
   coherence dynamically; the computation concerns a declared ensemble of
   preparations whose relative phase is randomized over a finite set. A

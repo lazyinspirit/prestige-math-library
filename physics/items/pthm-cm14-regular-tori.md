@@ -123,8 +123,9 @@ presentation $(U,d)$ and mechanical Lagrangian $L=K-U$ of
 [[def-cm07-action-and-mechanical-lagrangian]], with the momentum charts and
 two-form datum of [[def-cm13-two-form]], the Hamiltonian fields of
 [[def-cm13-hamiltonian-field]] and the branch Hamiltonian $H$ of
-[[def-cm12-hamiltonian]]; by clause 1 of
-[[pthm-cm13-two-form-is-symplectic]] each momentum phase domain is a
+[[def-cm12-hamiltonian]]; by clauses 1–2 of
+[[pthm-cm13-two-form-is-symplectic]] (clause 1 for Cartesian domains and
+clause 2 for generalized-coordinate domains), each momentum phase domain is a
 symplectic manifold for the presentation's two-form $\omega$
 ([[def-symplectic-form-and-symplectic-manifold]]). Let $W_{0}\subseteq W$
 be a nonempty open phase domain of dimension $2n$ and let
