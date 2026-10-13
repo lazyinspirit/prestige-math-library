@@ -138,6 +138,10 @@ per-item judge sweep uses GPT-6 Luna/max.
 Source and empirical qualifications survive regeneration. Step 4's read-only
 batch digests use `RUN-batch-N-step5-context.json`; a digest from another batch
 cannot cover the inventory, and retries target only failing batches.
+Cross-batch page alerts route to the page's owning group, like page concerns.
+Published supplier alerts remain in the original digest as read-only context;
+they do not acquire run ownership or authorize repairs to imported mathematics.
+Unknown targets and alerts about the sender's own batch still fail the digest gate.
 
 Step 5 retains the round-based adjudication/repair engine, supplier-before-consumer
 maintenance, frozen frontier guards and its complete gate battery. The additional

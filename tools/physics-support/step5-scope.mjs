@@ -246,7 +246,8 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
     }
     for (const raw of digest.alerts ?? []) {
       if (isPublishedItem(REPO, raw.item)) continue;
-      const owner = index.itemOwner.get(raw.item)?.group;
+      const ownerRecord = index.itemOwner.get(raw.item) ?? index.pageOwner.get(raw.item);
+      const owner = ownerRecord?.group;
       const alert = {
         version: 1,
         source: 'step4-read',
@@ -261,7 +262,7 @@ function collectAlerts(groups, index, { includeConcerns = true } = {}) {
       alert.alert_id = step5AlertId(alert);
       if (!groupLabels.has(from)) problems.push(`${alert.alert_id}: unknown source group ${from}`);
       if (!owner) problems.push(`${alert.alert_id}: item ${alert.item} belongs to no run group`);
-      if (index.itemOwner.get(raw.item)?.batch === fromBatch) problems.push(`${alert.alert_id}: source batch owns ${alert.item}; this belongs in concerns`);
+      if (ownerRecord?.batch === fromBatch) problems.push(`${alert.alert_id}: source batch owns ${alert.item}; this belongs in concerns`);
       if (!alert.finding.trim()) problems.push(`${alert.alert_id}: finding is empty`);
       alerts.push(alert);
     }
@@ -657,7 +658,10 @@ if (mode === 'digests') {
     // defect it should have kept in `concerns` and adjudicated itself, and
     // delivering it would send the batch its own finding back.
     for (const a of d.alerts ?? []) {
-      const owner = index.itemOwner.get(a.item);
+      // Published suppliers stay read-only context, just as in collectAlerts.
+      // Keep their findings in the original digest; do not assign run ownership.
+      if (isPublishedItem(REPO, a.item)) continue;
+      const owner = index.itemOwner.get(a.item) ?? index.pageOwner.get(a.item);
       if (!owner) bad.push(`batch ${g.label}: alert names \`${a.item}\`, which belongs to no batch in this run`);
       else if (owner.group === g.label) bad.push(`batch ${g.label}: alert names \`${a.item}\`, which it owns — that is a concern, not an alert`);
     }
