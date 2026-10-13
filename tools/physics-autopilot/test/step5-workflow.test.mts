@@ -414,7 +414,7 @@ test('proof-only initial and gate repairs create no downstream assignments and s
       const before=reviewContextHashes(f.root,['thm-frontier-consumer'])['thm-frontier-consumer'];
       item(f.root,'thm-item-0','## Statement\nUnchanged result.\n## Proof\nRepaired proof.', ['thm-item-1']);
       assert.deepEqual(reviewContextHashes(f.root,['thm-frontier-consumer'])['thm-frontier-consumer'],before);
-      reports(f.root,pack,{},['thm-frontier-consumer']);
+      reports(f.root,pack,{},phase==='initial'?['thm-frontier-consumer']:[]);
       if(phase==='initial'){
         const owners=prepareImpact(f.root,run,'impact-initial',1);
         assert.deepEqual(Object.values(owners.assignments).flat(),[]);
@@ -764,5 +764,62 @@ test('Sol rejudges changed frontier items and current context; complete repeat e
     assert.throws(()=>checkWorkflow(f.root,run,{contextHasher:shifted}),/stale.*context/);
     assert.throws(()=>judge(f.root,run,2,{contextHasher:shifted,runSweep}),/context changed before Sol/);
     judge(f.root,run,2,{contextHasher:contexts,runSweep});assert.equal(calls.length,1);
+  }finally{f.cleanup();}
+});
+
+
+test('explicit unassigned gate referrals survive proof-only collection and enter native continuations without implicit or outside consumers',()=>{
+  const f=fixture();try{
+    const target='thm-item-1',second='thm-item-3',outside='thm-published-referral';
+    item(f.root,'thm-item-0','## Statement\nUnchanged result.\n## Proof\nBroken proof tags.');
+    item(f.root,'thm-frontier-consumer','Unchanged direct consumer.',[target]);
+    item(f.root,'thm-item-2','Unchanged indirect consumer.',['thm-frontier-consumer']);
+    item(f.root,outside,'Unchanged published consumer.',[target],true);
+    const ledger=join(f.root,'research',`${run}-judge.jsonl`);
+    writeFileSync(ledger,readFileSync(ledger,'utf8').trim().split('\n').map(line=>JSON.stringify({...JSON.parse(line),model:MODELS.sol61.id})).join('\n')+'\n');
+    initialize(f.root,run);
+    const pack=prepareImpact(f.root,run,'gate',1,{failures:[
+      {id:'depcheck',ok:false,output:`SyntaxError: items/${target}.md: unknown YAML escape sequence at line 49`},
+      {id:'finite-smoke',ok:false,output:'FAIL [thm-item-0] invalid proof tags'},
+    ]});
+    assert.deepEqual(Object.values(pack.assignments).flat(),['thm-item-0']);
+    item(f.root,'thm-item-0','## Statement\nUnchanged result.\n## Proof\nRepaired proof tags.');
+    reports(f.root,pack);
+    const ownerPath=workerReport(f.root,run,'gate',1,'1'),owner=JSON.parse(readFileSync(ownerPath,'utf8'));
+    owner.downstream=[target,outside];
+    owner.repair_notes={diagnostic_scope:{'0':`The failed YAML carrier ${target} is outside this lane's assignment; refer it for a fresh native repair.`}};
+    json(ownerPath,owner);
+    const collected=collect(f.root,run,'gate',1,{deferImpactClosure:true});
+    assert.deepEqual(collected.restated,[]);assert.deepEqual(collected.statement_events,[]);
+    assert.deepEqual(collected.downstream,[target,outside]);
+    const historicalPaths=[join(workflowDir(f.root,run),'gate-1.json'),join(workflowDir(f.root,run),'gate-1-collected.json'),
+      ...pack.units.map((unit:string)=>workerReport(f.root,run,'gate',1,unit))];
+    const historicalBytes=new Map(historicalPaths.map(path=>[path,readFileSync(path,'utf8')]));
+    const first=advanceImpact(f.root,run,'gate',1);
+    assert.equal(first.complete,false);assert.equal(first.pack.phase,'gate-pass-2');
+    assert.deepEqual(Object.values(first.pack.assignments).flat(),[target]);
+    assert.deepEqual(first.pack.seeds,[]);assert.deepEqual(first.pack.impacts,[]);assert.deepEqual(first.pack.consumer_maintenance,[]);
+    assert.equal(Object.values(first.pack.assignments).flat().includes('thm-frontier-consumer'),false);
+    assert.equal(Object.values(first.pack.assignments).flat().includes('thm-item-2'),false);
+    assert.equal(Object.values(first.pack.assignments).flat().includes(outside),false);
+    assert.deepEqual(advanceImpact(f.root,run,'gate',1).pack,first.pack);
+    reports(f.root,first.pack);
+    const referralPath=workerReport(f.root,run,first.pack.phase,1,'1'),referral=JSON.parse(readFileSync(referralPath,'utf8'));
+    referral.downstream=[second];json(referralPath,referral);
+    const secondCollection=collect(f.root,run,first.pack.phase,1,{deferImpactClosure:true});
+    assert.deepEqual(secondCollection.restated,[]);assert.deepEqual(secondCollection.downstream,[second]);
+    assert.equal(first.pack.basePhase,'gate');
+    const next=advanceImpact(f.root,run,'gate',1);
+    assert.equal(next.complete,false);assert.equal(next.pack.phase,'gate-pass-3');
+    assert.deepEqual(Object.values(next.pack.assignments).flat(),[second]);
+    reports(f.root,next.pack);assert.equal(advanceImpact(f.root,run,'gate',1).complete,true);
+    const closed=JSON.parse(readFileSync(join(workflowDir(f.root,run),'gate-1-closed.json'),'utf8'));
+    assert.deepEqual(closed.reviews.map((row:any)=>row.id).sort(),['thm-item-0',target,second].sort());
+    for(const [path,bytes] of historicalBytes)assert.equal(readFileSync(path,'utf8'),bytes,path);
+    for(const active of [pack,first.pack,next.pack])for(const unit of active.units){
+      const dispatch=JSON.parse(readFileSync(join(f.root,'research',`${run}-dispatch`,`alpha-repair-${workerLabel(active.phase,1,unit)}.result.json`),'utf8'));
+      assert.equal(dispatch.model,MODELS.sol61.id);assert.equal(dispatch.provider_effort,'high');
+    }
+    assert.equal(maintenanceStatus(f.root,run).packs.length,0);
   }finally{f.cleanup();}
 });

@@ -519,7 +519,9 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   receipt.restated=restatedIds(pack,diff(pack.before,current),statementHashes(root));
   const afterStatements=statementHashes(root);
   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
-  if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length)receipt.downstream=[];
+  // Gate workers may explicitly refer a failed, unassigned frontier carrier.
+  // Retain that inventory for native review without inventing interface seeds.
+  if(pack.before_statements&&!receipt.restated.length&&!pack.seeds?.length&&pack.phase!=='gate'&&pack.basePhase!=='gate')receipt.downstream=[];
   const frontier=gateFrontier(root,run);
   const direct=discoverDownstream({items:readLibraryItems(root),repairedIds:receipt.restated});
   const required=direct.filter(row=>frontier.has(row.id));

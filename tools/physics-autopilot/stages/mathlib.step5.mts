@@ -1,5 +1,6 @@
 // Explicit Step 5 repair rounds. Every mathematical writer drains before the
 // one controller certification; only the engine routes or launches judgments.
+// Explicit remaining gate referrals must survive collection without interface changes.
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';

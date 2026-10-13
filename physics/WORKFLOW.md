@@ -259,6 +259,15 @@ consumed predecessor owner-gate history. That gate must cover the complete
 frozen/current manifest item selection, contain passing formatting and metadata
 records, and bind the exact current contract and item bytes. Unknown files,
 reports, snapshots and unlicensed or stale metadata still fail verification.
+Gate repair workers may explicitly refer an actual failed, unassigned draft
+frontier carrier through their report's `downstream` inventory. Collection
+retains those referrals in `gate` and its native continuations even when the
+completed repairs changed only proofs or metadata. The existing native owner
+continuation assigns an unreviewed referral before closure. This creates no
+interface seeds or automatic consumer traversal; published/outside carriers
+remain excluded from gate assignments. Ordinary impact waves still suppress
+proof-only downstream propagation.
+
 Check-based native evidence uses direct structured rows in named `checks`,
 `local_checks`, `focused_checks`, `verification_checks` or `validation`
 containers, at report top level or in a `repair_notes` object/direct object
