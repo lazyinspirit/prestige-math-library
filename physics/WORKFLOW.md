@@ -153,6 +153,45 @@ consumes the actual rejudge verdicts. The
 judgment/adjudication rounds continue until the latest round's unique confirmed
 fatal original-frontier items are strictly below 2% of the immutable original
 inventory. Exactly 2% requires another round; unresolved defects still block closure.
+
+An outside repair authorized by the root owner can enter only deferred
+`impact-initial`/`impact-repeat` owner collection, including their continuation
+passes. Place an explicit grant in `research/RUN-step5-v2/owner-repair-handoffs.json`:
+
+```json
+{
+  "version": 1,
+  "run": "RUN",
+  "authorizing_owner": "/root",
+  "repairs": [{
+    "id": "ITEM",
+    "owner": "outside-repair-owner",
+    "phase": "impact-initial-pass-3",
+    "round": 1,
+    "before_sha256": "PACK_BEFORE_CONTENT_SHA256",
+    "after_sha256": "CURRENT_GUARD_CONTENT_SHA256",
+    "receipt": {"path": "research/RUN-owner-repairs/receipt.json", "sha256": "RAW_SHA256"}
+  }]
+}
+```
+
+The target must be unassigned in that exact pack and belong to its frozen original
+frontier. Intake binds the receipt's run, subject, author, repaired validation
+status, preserved before bytes, current content and raw hashes, and actual scoped
+exit-zero validation evidence. Its `writer_handoff` must attest `absent: true`
+with a positive writer `pid`, `overlap: false`, and exact hash-bound owner task
+files in `pass3_assignments`. All receipt/support paths must remain within the
+run's local research files. Receipts must explicitly set `independent_review`,
+`native_transition`, and `recertification` to false. Protected reports and other
+bound supporting evidence remain unchanged. The registry becomes immutable bound
+evidence after collection; repeated collection verifies those files again.
+
+Collection records `external_owner_repairs` separately and preserves the actual
+current `post` carrier. It grants external authorship only: continuation assigns
+the changed carrier for a fresh native owner review before closure or
+certification. It cannot satisfy adjudication, strict collection, or a gate;
+unknown changes and mismatched or stale grants still fail the existing checks.
+
 The additional
 `proof-contract-coverage` mechanical check still requires a contract for each
 actual proof-bearing carrier. No new substantive review gate is added. Step 6

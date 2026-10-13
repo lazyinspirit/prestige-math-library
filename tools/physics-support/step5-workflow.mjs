@@ -17,6 +17,7 @@ import { FATAL_TYPES } from './step5-adjudication-compat.mjs';
 import { restatedIds, statementHash } from './step5-statement.mjs';
 import { syncMaintenance, maintenanceStatus, prepareMaintenance, collectMaintenance } from './consumer-maintenance.mjs';
 import { orderedItems, runPages } from './item-dependency-levels.mjs';
+import { ownerRepairHandoffs, ownerHandoffPhase } from './step5-owner-repair-handoffs.mjs';
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -429,20 +430,30 @@ export function validateReports(pack,reports,now,{root=null}={}) {
 
 export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   const collectedPath=join(workflowDir(root,run),`${phase}-${round}-collected.json`);
-  if(existsSync(collectedPath)){const prior=read(collectedPath);verifyEvidence(prior.evidence);syncMaintenance(root,run,prior.statement_events??[]);return prior;}
+  if(existsSync(collectedPath)){
+    const prior=read(collectedPath);
+    if(prior.external_owner_repairs?.length)requireValue(deferImpactClosure&&ownerHandoffPhase(phase),'external owner repairs require deferred impact collection');
+    verifyEvidence(prior.evidence);syncMaintenance(root,run,prior.statement_events??[]);return prior;
+  }
   const pack=readPack(root,run,phase,round);
+  requireValue(pack.run===run&&pack.phase===phase&&pack.round===round,'collection pack identity mismatch');
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
   const current=hashes(root),reported={...current};
+  let external={repairs:[],evidence:{}};
   if(deferImpactClosure) {
     requireValue(!pack.rejected,'only owner waves can defer impact closure');
     // Archive the carriers workers actually reviewed. Later edits are queued
     // for another owner pass instead of invalidating already completed work.
     const assigned=new Set(Object.values(pack.assignments).flat());
     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
+    if(ownerHandoffPhase(phase))external=ownerRepairHandoffs(root,workflowDir(root,run),pack,current);
+    // Root licenses only the external author. The actual current carrier is
+    // retained in receipt.post and must receive a fresh native owner review.
+    for(const repair of external.repairs)reported[repair.id]=pack.before[repair.id];
   }
   const result=validateReports(pack,reports,reported,{root});
   if(result.errors.length)throw Error(result.errors.join('\n'));
-  const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
+  const evidence={...(pack.input_evidence??{}),...external.evidence,[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
   verifyEvidence(evidence);
   const creationAuthors=new Map();
   for(const unit of pack.units) {
@@ -489,6 +500,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
   }
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
+  if(external.repairs.length)receipt.external_owner_repairs=external.repairs;
   receipt.restated=restatedIds(pack,diff(pack.before,current),statementHashes(root));
   const afterStatements=statementHashes(root);
   receipt.statement_events=receipt.restated.filter(id=>pack.before_statements?.[id]||!pack.before[id]).map(id=>({id,before_statement_sha256:pack.before_statements?.[id]??statementHash(''),after_statement_sha256:afterStatements[id]}));
@@ -584,7 +596,8 @@ export function advanceImpact(root,run,phase,round) {
   const returned=maintenance.frontier_events.filter(row=>maintenanceRestatements.has(row.id)).map(row=>row.consumer_id);
   const scope=impactTargets(root,run,phase,items,rawSeeds,[...completed.flatMap(receipt=>receipt.downstream??[]),...returned]);
   const {seeds,impacts}=scope;
-  const required=new Set([...Object.values(base.assignments).flat(),...scope.targets,...changed]);
+  const required=new Set([...Object.values(base.assignments).flat(),...scope.targets,...changed,
+    ...completed.flatMap(receipt=>(receipt.external_owner_repairs??[]).map(row=>row.id))]);
   const reviews=new Map(completed.flatMap(receipt=>receipt.reviews).map(row=>[row.id,row]));
   // An adjudicator's source review remains valid unless an owner changes it.
   // It is used only for closure accounting, never counted as an owner repair.
