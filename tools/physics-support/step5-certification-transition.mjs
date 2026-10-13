@@ -10,6 +10,30 @@ const read = path => JSON.parse(readFileSync(path, 'utf8'));
 const check = (ok, message) => { if (!ok) throw Error(`Step 5 certification transition: ${message}`); };
 const checkPassed = row => row?.verdict === 'pass' && typeof row.evidence === 'string' && row.evidence.trim();
 
+// Native reports retain several bounded check containers. Narrative strings
+// never become evidence; only direct structured check rows are normalized.
+const record = value => value && typeof value === 'object' && !Array.isArray(value);
+function nativeContractChecks(report) {
+  const notes = Array.isArray(report.repair_notes) ? report.repair_notes.filter(record)
+    : record(report.repair_notes) ? [report.repair_notes] : [];
+  return [report, ...notes].flatMap(container => ['checks', 'local_checks', 'focused_checks', 'verification_checks', 'validation'].flatMap(key => {
+    const rows = container[key];
+    return Array.isArray(rows) ? rows.filter(record) : record(rows)
+      ? 'command' in rows ? [rows] : Object.values(rows).filter(record) : [];
+  }));
+}
+function checkedContractSubjects(row, root, file, batch, owned) {
+  if (row.exit_code !== 0 || row.batch !== undefined && String(row.batch) !== batch
+    || row.errors !== undefined && (!Array.isArray(row.errors) || row.errors.length)) return [];
+  const argv = typeof row.command === 'string' ? row.command.trim().split(/\s+/)
+    : Array.isArray(row.command) && row.command.every(token => typeof token === 'string') ? row.command : [];
+  const itemsIndex = argv.indexOf('--items'), scope = itemsIndex >= 0 ? argv[itemsIndex + 1]?.split(',') : null;
+  const matches = argv.some(token => resolve(root, token) === resolve(root, 'tools/physics-support/proof-contract.mjs'))
+    && argv.some(token => resolve(root, token) === file) && argv.includes('--strict')
+    && Boolean(scope?.length) && scope.every(id => owned.some(item => item.id === id));
+  return matches ? scope : [];
+}
+
 export function certificationEvidenceTransition(root, run, phase, round, prior, source, closed) {
   const evidence = {}, transitions = [];
   if (!prior) return { evidence, transitions };
@@ -77,17 +101,18 @@ export function certificationEvidenceTransition(root, run, phase, round, prior, 
       const assigned = new Set((pack.assignments[report.unit] ?? []).map(row => typeof row === 'string' ? row : row.id));
       const owned = (report.reviews ?? []).filter(row => assigned.has(row.id) && owners.get(row.id) === batch && reviews.has(row.id));
       if (!owned.length) continue;
-      const declares = (report.contract_repairs ?? []).some(row => owned.some(item => item.id === row.id) && resolve(root, row.path ?? row.contract ?? '') === file)
-        || (report.repair_notes?.checks ?? []).some(row => row.exit_code === 0 && typeof row.command === 'string'
-          && row.command.includes(`research/${name}`) && owned.some(item => row.command.includes(item.id)));
-      if (!declares) continue;
+      const declared = (Array.isArray(report.contract_repairs) ? report.contract_repairs : []).filter(row => record(row)
+        && owned.some(item => item.id === row.id) && typeof (row.path ?? row.contract) === 'string' && resolve(root, row.path ?? row.contract) === file).map(row => row.id);
+      const checked = nativeContractChecks(report).flatMap(row => checkedContractSubjects(row, root, file, batch, owned));
+      const nativeSubjects = [...new Set([...declared, ...checked])];
+      if (!nativeSubjects.length) continue;
       const role = report.phase === 'repeat' ? 'alpha-adjudicate' : 'alpha-repair';
       const dispatchPath = join(root, 'research', `${run}-dispatch`, `${role}-step5-v2-${report.phase}-r${round}-u${report.unit}.result.json`);
       const worker = read(dispatchPath);
       check((currentEvidence[dispatchPath] ?? currentEvidence[relative(root, dispatchPath)]) === hash(readFileSync(dispatchPath, 'utf8'))
         && worker.ok === true && worker.run === run && worker.role === role && worker.label === `step5-v2-${report.phase}-r${round}-u${report.unit}`
         && worker.model === MODELS.sol61.id && worker.provider_effort === 'high', 'repair lacks bound native worker authority');
-      basis.push({ path: reportPath, sha256: sha, subjects: owned.map(row => row.id) });
+      basis.push({ path: reportPath, sha256: sha, subjects: nativeSubjects });
     }
     check(basis.length > 0, `contract change lacks native owning repair/review: ${path}`);
     evidence[path] = after;

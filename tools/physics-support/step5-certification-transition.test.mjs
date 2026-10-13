@@ -94,3 +94,59 @@ for (const [name, change, error] of [
   assert.throws(f.certify, error); assert.equal(readFileSync(join(f.dir, 'certification.json'), 'utf8'), priorBytes);
   assert.equal(existsSync(join(f.dir, 'certification-impact-repeat-1.json')), false);
 });
+
+function currentNativeValidationShape(f) {
+  delete f.report.contract_repairs;
+  const validation = { batch: '1', command: `node tools/physics-support/proof-contract.mjs research/${f.run}-batch-1.proof-contracts.json --strict --items ${f.ids[0]} --json`, exit_code: 0, errors: [], warnings: [] };
+  // Same bounded containers and record types as impact-repeat-r2-u2:
+  // repair_notes strings, metadata_repairs records, and a later validation object.
+  f.report.repair_notes = [
+    'Assigned carriers remain unchanged; only owning citation metadata was repaired.',
+    { metadata_repairs: [{ batch: '1', id: f.ids[0], fact: 'F1', source: 'def-supplier' }], check: 'Reread under the shared metadata lock.' },
+    { completion: 'All assigned consumer uses examined.', validation: [validation] },
+  ];
+  return validation;
+}
+
+test('current native repair_notes array validation provides exact owned contract subjects without accepting prose', t => {
+  const f = fixture(t); currentNativeValidationShape(f); f.rebindNative();
+  const originalPrior = readFileSync(f.priorPath, 'utf8'), originalReport = readFileSync(f.reportPath, 'utf8');
+  const cert = f.certify(), basis = cert.evidence_transitions[0].native_reports;
+  assert.equal(basis.length, 1); assert.deepEqual(basis[0].subjects, [f.ids[0]]);
+  assert.equal(readFileSync(f.priorPath, 'utf8'), originalPrior); assert.equal(readFileSync(f.reportPath, 'utf8'), originalReport);
+});
+
+for (const [field, shape] of [
+  ['checks', row => [row]], ['local_checks', row => ({ contracts: row })],
+  ['focused_checks', row => [{ ...row, command: row.command.split(' ') }]], ['verification_checks', row => [row]],
+]) test(`native top-level ${field} retains typed scoped validator evidence`, t => {
+  const f = fixture(t), row = currentNativeValidationShape(f); delete f.report.repair_notes; f.report[field] = shape(row); f.rebindNative();
+  assert.deepEqual(f.certify().evidence_transitions[0].native_reports[0].subjects, [f.ids[0]]);
+});
+
+for (const [name, change] of [
+  ['failed broad check', row => { row.exit_code = 1; }],
+  ['nonempty errors', row => { row.errors = ['unresolved contract error']; }],
+  ['malformed errors', row => { row.errors = 'none'; }],
+  ['wrong batch', row => { row.batch = '2'; }],
+  ['wrong path token', row => { row.command = row.command.replace('.proof-contracts.json', '.proof-contracts.json.backup'); }],
+  ['wrong validator', row => { row.command = row.command.replace('/proof-contract.mjs', '/proof-contract-coverage.mjs'); }],
+  ['unowned scope', (row, f) => { row.command = row.command.replace(f.ids[0], f.ids[1]); }],
+  ['substring scope', (row, f) => { row.command = row.command.replace(f.ids[0], `${f.ids[0]}-extra`); }],
+  ['mixed unassigned scope', (row, f) => { row.command = row.command.replace(f.ids[0], f.ids.join(',')); }],
+  ['missing explicit scope', (row, f) => { row.command = row.command.replace(` --items ${f.ids[0]}`, ''); }],
+  ['missing strict mode', row => { row.command = row.command.replace(' --strict', ''); }],
+  ['malformed command', row => { row.command = ['node', { path: 'proof-contract.mjs' }]; }],
+  ['prose-only validation', (row, f) => { f.report.repair_notes.at(-1).validation = [row.command]; }],
+  ['arbitrary nested validation', (row, f) => { f.report.repair_notes.at(-1).payload = { validation: [row] }; delete f.report.repair_notes.at(-1).validation; }],
+  ['metadata records without validation', (_row, f) => { delete f.report.repair_notes.at(-1).validation; }],
+]) test(`current native validation rejects ${name}`, t => {
+  const f = fixture(t), row = currentNativeValidationShape(f); change(row, f); f.rebindNative();
+  assert.throws(f.certify, /lacks native owning repair\/review/);
+  assert.equal(existsSync(join(f.dir, 'certification-impact-repeat-1.json')), false);
+});
+
+test('bound current native validation cannot be changed after collection', t => {
+  const f = fixture(t); const row = currentNativeValidationShape(f); f.rebindNative(); row.command += ' edited'; f.save(f.reportPath, f.report);
+  assert.throws(f.certify, /evidence changed/);
+});

@@ -259,6 +259,14 @@ consumed predecessor owner-gate history. That gate must cover the complete
 frozen/current manifest item selection, contain passing formatting and metadata
 records, and bind the exact current contract and item bytes. Unknown files,
 reports, snapshots and unlicensed or stale metadata still fail verification.
+Check-based native evidence uses direct structured rows in named `checks`,
+`local_checks`, `focused_checks`, `verification_checks` or `validation`
+containers, at report top level or in a `repair_notes` object/direct object
+array entry. The strict contract validator and contract path must match exact
+command tokens; every explicit scoped ID must have an assigned, reviewed native
+owner in that batch. Failed checks, malformed records and narrative notes grant
+no authority. The transition records only the explicitly declared or validated
+subjects.
 The new certificate binds the immutable prior certificate and consumed gate
 history, records `evidence_transitions` with the unchanged old hash, current hash
 and native report basis, and uses the current contract hash. It never edits or
