@@ -40,7 +40,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
     ...(!adjudication?{
       unitPrerequisites:(ctx:any,u:string)=>{const units=ownerUnits(ctx,phase,id),i=units.indexOf(u),start=Math.floor(i/3)*3;return start>0?units.slice(start-3,start):[];},
       onProgress:({ctx,executor,stage}:any)=>{
-        // Deferred collection preserves authorized outside repairs and queues their fresh native review.
+        // Deferred collection and bound pre-gate repair requests queue fresh native reviews.
         if([...executor.inflight.values()].some((d:any)=>d.meta.stage===id)||executor.hasAdoptedWork(stage))return;
         const complete=executor.unitsComplete(stage,ctx);
         if(ownerUnits(ctx,phase,id).every((u:string)=>complete.has(u)))advanceImpact(ctx.repo,ctx.run,phase,round(ctx,id));

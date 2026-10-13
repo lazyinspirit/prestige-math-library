@@ -18,6 +18,7 @@ import { restatedIds, statementHash } from './step5-statement.mjs';
 import { syncMaintenance, maintenanceStatus, prepareMaintenance, collectMaintenance } from './consumer-maintenance.mjs';
 import { orderedItems, runPages } from './item-dependency-levels.mjs';
 import { ownerRepairHandoffs, ownerHandoffPhase } from './step5-owner-repair-handoffs.mjs';
+import { ownerFormatRepair } from './step5-owner-format-repair.mjs';
 
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
@@ -299,6 +300,8 @@ function writeTasks(root,pack,mode) {
     const task=report.replace(/\.json$/,'.task.md');
     const gateInput=task.replace(/\.task\.md$/,'.gate-diagnostics.json');
     if(pack.gateRoutingVersion===1)frozen(gateInput,(pack.gateAssignments??{})[unit]??[]);
+    const formatInput=task.replace(/\.task\.md$/,'.format-diagnostics.json');
+    if(pack.format_repair)frozen(formatInput,pack.failures.filter(row=>pack.assignments[unit].includes(row.item_id)));
     if(existsSync(task)) continue;
     const assigned=pack.assignments[unit];
     const batchDigest=join(root,'research',`${pack.run}-batch-${unit}-step5-context.json`);
@@ -310,7 +313,7 @@ function writeTasks(root,pack,mode) {
       `Write only your assigned frontier item files, their necessary owning contracts/metadata, and ${report}.`,
       'Do not rewrite other reports, certificates, workflow code, or baselines. Do not launch judges.',
       'SCOPE: repair only assigned draft frontier items. Published repairs have no item gate, rejudge or adjudication obligation; record their findings separately. Outside consumers are handled by consumer maintenance. Record affected uses without turning them into frontier blockers.',
-      pack.phase==='gate'||pack.basePhase==='gate'?'Step 5.9 permits no new items.':'You may create, fully author, and register a new item only to meet a genuine unsatisfied prerequisite of an assigned repair; explain its exact consuming proof step. No unrelated additions.',
+      pack.format_repair?'This mechanical formatting continuation permits no new items or changes to claims, proof arguments, public interfaces, physical scope or empirical qualifications.':pack.phase==='gate'||pack.basePhase==='gate'?'Step 5.9 permits no new items.':'You may create, fully author, and register a new item only to meet a genuine unsatisfied prerequisite of an assigned repair; explain its exact consuming proof step. No unrelated additions.',
       'Optional supporting_evidence is reserved for {"research/path/to/file": "64-character SHA-256 of exact file bytes"}. Put narrative evidence, check summaries and repair explanations in repair_notes, not supporting_evidence. Do not use invented paths or hashes.',
       mode==='adjudicate'
         ? 'Use logical validity as ground truth. Never pretend to understand something you do not; escalate any uncertainty and potentially defective published consumers to the owner. Consult authoritative sources when uncertain, check their hypotheses and reasoning, and check for errors in sources.'
@@ -325,6 +328,7 @@ function writeTasks(root,pack,mode) {
       mode==='adjudicate' ? `Assigned item order: ${[...new Set(assigned.map(row=>row.id))].map(id=>`${pack.dependency_levels?.[id]??'?'}:${id}`).join(', ')||'(none)'}.` : '',
       mode==='adjudicate' ? 'Include canonical defect-ledger and published-ledger proposed updates in your report as ledger_updates. The controller merges shared adjudication evidence; do not edit shared ledgers concurrently. No claims of source reading you did not perform.' :
         'All three owner lanes run in parallel with disjoint item ownership. Follow the shared metadata lock protocol before necessary shared edits; reread under lock and release promptly. Reconcile assigned frontier ledger evidence, preserve outside findings as separate maintenance proposals, and never turn them into frontier repair or gate obligations. Do not write judge verdicts or shared adjudication JSONL. Record unresolved in-scope obligations honestly.',
+      pack.format_repair ? `ROOT AUTHORIZATION: repair the actual canonical-phase formatting failures for your assigned items mechanically. Read ${formatInput} for the exact hash-bound precheck results and proposals. Read the root request ${pack.format_repair.request.path} and its hash-bound proposal/diagnosis files; locate your item rows, individual proposed files, unapplied patches and metadata mappings. These are proposals, not applied repairs or reviews. Preserve every proof argument and public claim/interface; do not replace a proof wholesale from precheck output. Make only the necessary phase/step labels, matching cross-references and owning proof-contract derivation-ID changes. Reconcile only your assigned owning contracts under the shared metadata lock. Run scoped normative precheck (must pass without a proposed repair), proof-layout and applicable contract validators; record genuine command/results evidence in your report. Perform and return your own current native reviews after the repair, preserving existing reports and hashes. This is pre-gate formatting repair, not a gate finding, gate waiver, certification, new-item authorization or judge-budget override.` : '',
       pack.ledger_updates?.length ? `Adjudicator ledger proposals requiring reconciliation:\n${JSON.stringify(pack.ledger_updates,null,2)}` : '',
       'For gate repair, also return gate_resolutions:[{index,reason,uncertain:false,source_urls:[],familiar:true}] for every diagnostic assigned to your unit, even when it names no item. Diagnose and repair its metadata or tool failure; an empty item assignment does not excuse a gate failure.',
       'Empty assignments return empty arrays. For every changed public interface (including physical scope and empirical qualifications), put every direct dependency/reference consumer in downstream, including consumers whose examined uses remain sound and consumers already covered by an assigned review. The array is an examination inventory, not a list of items to edit. Record each exact affected use and disposition in the report; proof-only intermediate repairs do not restart propagation. For a consumer absent from the dependency/reference graph, include downstream_uses:{ID:"exact affected mathematical use, at least 40 characters"}. Outside consumers go to separate maintenance.',
@@ -356,6 +360,7 @@ export function validateReports(pack,reports,now,{root=null}={}) {
     if(!Array.isArray(report.reviews)||!Array.isArray(report.decisions)||!Array.isArray(report.created_items)||!Array.isArray(report.downstream)){errors.push(`malformed report arrays ${unit}`);continue;}
     const assigned=new Set(pack.assignments[unit].map(r=>typeof r==='string'?r:r.id)),creations=new Set();
     for(const row of report.created_items){
+      if(pack.format_repair)errors.push(`formatting continuation cannot author item ${row?.id}`);
       if(pack.phase==='gate'||pack.basePhase==='gate')errors.push(`Step 5.9 cannot author out-of-frontier item ${row?.id}`);
       if(!row||!creationId.test(row.id??'')||creations.has(row.id)||creatorById.has(row.id)||pack.before[row.id]
         ||Object.hasOwn(pack.before_aliases??{},row.id)||!evidenceText(row)||!Array.isArray(row.consumers)||!row.consumers.length
@@ -387,6 +392,10 @@ export function validateReports(pack,reports,now,{root=null}={}) {
   }
   if(reports.length!==pack.units.length)errors.push('unexpected or duplicate reports');
   const changed=diff(pack.before,now);
+  if(pack.format_repair&&root){
+    const statements=statementHashes(root);
+    for(const id of diff(pack.before_statements,statements))errors.push(`formatting continuation changed public interface ${id}`);
+  }
   for(const id of changed) {
     if(pack.repair_scope==='frontier'&&!pack.frontier_ids?.includes(id)&&pack.before[id])errors.push(`out-of-frontier consumer cannot be repaired by Step 5: ${id}`);
     const created=creatorById.get(id),review=reviews.find(r=>r.id===id&&r.disposition===(created?'authored':'repaired'));
@@ -458,6 +467,11 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   const creationAuthors=new Map();
   for(const unit of pack.units) {
     const p=workerReport(root,run,phase,round,unit); evidence[p]=digest(readFileSync(p,'utf8'));
+    if(pack.format_repair){
+      const diagnosticPath=p.replace(/\.json$/,'.format-diagnostics.json');
+      requireValue(existsSync(diagnosticPath)&&JSON.stringify(read(diagnosticPath))===JSON.stringify(pack.failures.filter(row=>pack.assignments[unit].includes(row.item_id))),`format diagnostic input changed: ${unit}`);
+      evidence[diagnosticPath]=digest(readFileSync(diagnosticPath,'utf8'));
+    }
     if(pack.gateRoutingVersion===1){
       const diagnosticPath=p.replace(/\.json$/,'.gate-diagnostics.json');
       requireValue(existsSync(diagnosticPath)&&JSON.stringify(read(diagnosticPath))===JSON.stringify(pack.gateAssignments[unit]),`gate diagnostic input changed: ${unit}`);
@@ -487,7 +501,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     const dispatch=join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(phase,round,unit)}.result.json`);
     const receipt=read(dispatch);
     const sol61Run=sol61Step5Run(root,run);
-    const expected=sol61Run
+    const expected=pack.format_repair||sol61Run
       ? [[MODELS.sol61.id,'high']]
       : role==='alpha-adjudicate'
         ? pack.judge_model===MODELS.luna.id?[[MODELS.astra.id,'medium']]:[[MODELS.astra.id,'medium'],[MODELS.sol.id,'xhigh']]
@@ -529,6 +543,15 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
 }
 
 export const impactProgressPath=(root,run,phase,round)=>join(workflowDir(root,run),`${phase}-${round}-progress.json`);
+export function impactClosedPath(root,run,phase,round,progress=null) {
+  progress??=read(impactProgressPath(root,run,phase,round));
+  const dir=workflowDir(root,run),ref=progress.closed_receipt;
+  if(!ref)return join(dir,`${phase}-${round}-closed.json`);
+  requireValue(resolve(ref.path,'..')===resolve(dir)&&new RegExp(`^${phase}-${round}-closed(?:-[0-9]+)?\\.json$`).test(basename(ref.path)), 'invalid owner closure pointer');
+  requireValue(existsSync(ref.path)&&digest(readFileSync(ref.path,'utf8'))===ref.sha256,'owner closure receipt changed');
+  return ref.path;
+}
+
 export function impactPasses(root,run,phase,round) {
   const path=impactProgressPath(root,run,phase,round);
   return existsSync(path)?read(path).passes:[phase];
@@ -564,7 +587,27 @@ export function advanceImpact(root,run,phase,round) {
   progress.work_order??=progress.passes.map(pass=>({kind:'frontier',phase:pass}));
   for(const row of progress.superseded??[])verifyEvidence(row.evidence);
   verifyEvidence(progress.maintenance_evidence);
-  if(progress.complete)return {complete:true,phase,round,passes:progress.passes};
+  for(const repair of progress.format_repairs??[])verifyEvidence(repair.evidence);
+  if(progress.complete){
+    const closedPath=impactClosedPath(root,run,phase,round,progress);
+    if(existsSync(closedPath))verifyEvidence(read(closedPath).evidence);
+    if(!existsSync(join(workflowDir(root,run),'owner-format-repair-request.json')))return {complete:true,phase,round,passes:progress.passes};
+    const current=hashes(root),frontier=gateFrontier(root,run);
+    const request=ownerFormatRepair(root,run,phase,round,progress,current,frontier,closedPath);
+    if(!request)return {complete:true,phase,round,passes:progress.passes};
+    const nextPhase=nextImpactPhase(phase,progress),identity=libraryIdentity(root);
+    const assignments={'1':[],'2':[],'3':[]},{order,cycles}=orderImpacts(identity.items,request.subjects);
+    order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
+    const pack={version:2,run,phase:nextPhase,basePhase:phase,round,repair_scope:'frontier',frontier_ids:[...frontier].sort(),units:['1','2','3'],assignments,
+      before:current,before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
+      seeds:[],impacts:[],cycles,failures:request.failures,gateAssignments:{},ledger_updates:[],input_evidence:request.evidence,
+      review_contexts:reviewContextHashes(root,request.subjects),format_repair:{request:request.request,payload:request.payload,gate_request:request.gate_request}};
+    frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
+    progress.format_repairs??=[];
+    progress.format_repairs.push({request:request.request,evidence:request.evidence,phase:nextPhase,subjects:request.subjects});
+    progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;progress.complete=false;
+    atomic(path,progress);return {complete:false,pack,passes:progress.passes};
+  }
   if(progress.activeMaintenance){
     const pack=maintenancePack(root,run,progress.activeMaintenance);
     if(pack.lanes.some(lane=>!existsSync(join(root,lane.report))))return {complete:false,maintenance:pack};
@@ -622,7 +665,9 @@ export function advanceImpact(root,run,phase,round) {
     const {order,cycles}=orderImpacts(items,pending);
     order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
     const identity=libraryIdentity(root);
-    const pack={version:2,run,phase:nextPhase,basePhase:phase,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,round,units:['1','2','3'],assignments,before:current,before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[])};
+    const formatPack=progress.format_repairs?.length?readPack(root,run,progress.format_repairs.at(-1).phase,round):null;
+    const pack={version:2,run,phase:nextPhase,basePhase:phase,repair_scope:'frontier',frontier_ids:[...scope.frontier].sort(),consumer_maintenance:scope.maintenance,round,units:['1','2','3'],assignments,before:current,before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds,impacts,cycles,failures:formatPack?.failures??null,gateAssignments:{},ledger_updates:completed.flatMap(receipt=>receipt.ledger_updates??[]),
+      ...(formatPack?{format_repair:formatPack.format_repair,input_evidence:formatPack.input_evidence,review_contexts:reviewContextHashes(root,pending)}:{})};
     frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
     progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;atomic(path,progress);
     return {complete:false,pack,passes:progress.passes};
@@ -633,11 +678,13 @@ export function advanceImpact(root,run,phase,round) {
     if(!progress.work_order.some(row=>row.kind==='maintenance'&&row.id===outside.pack.id))progress.work_order.push({kind:'maintenance',id:outside.pack.id});
     atomic(path,progress);return {complete:false,maintenance:outside.pack,passes:progress.passes};
   }
-  const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{});
+  const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{},...(progress.format_repairs??[]).map(row=>row.evidence));
   for(const pass of progress.passes){const p=join(workflowDir(root,run),`${pass}-${round}-collected.json`);evidence[p]=digest(readFileSync(p,'utf8'));}
   for(const collection of maintenance.collections.filter(row=>maintenanceIds.has(row.pack)))evidence[join(root,collection.path)]=collection.sha256;
   const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,restated:seeds,post:current,evidence,downstream:scope.targets,consumer_maintenance:scope.maintenance,maintenance_packs:[...maintenanceIds],ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
-  frozen(join(workflowDir(root,run),`${phase}-${round}-closed.json`),receipt);
+  const closedPath=join(workflowDir(root,run),`${phase}-${round}-closed${progress.format_repairs?.length?`-${progress.format_repairs.length+1}`:''}.json`);
+  frozen(closedPath,receipt);
+  progress.closed_receipt={path:closedPath,sha256:digest(readFileSync(closedPath,'utf8'))};
   progress.complete=true;atomic(path,progress);
   return {complete:true,phase,round,passes:progress.passes};
 }
@@ -737,7 +784,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   }
   const advanced=advanceImpact(root,run,phase,round);
   requireValue(advanced.complete,'owner impact repair continuation must finish before certification');
-  const dir=workflowDir(root,run), result=read(join(dir,`${phase}-${round}-closed.json`));
+  const dir=workflowDir(root,run), closedPath=impactClosedPath(root,run,phase,round),result=read(closedPath);
   verifyEvidence(result.evidence);
   const source=phase==='impact-initial'?'initial':'repeat';
   const prior=verifyCertification(root,run);
@@ -767,7 +814,8 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   for(const id of ids)requireValue(contexts.has(id),`missing certification context: ${id}`);
   if(JSON.stringify(rawBefore)!==JSON.stringify(rawHashes(root)))throw Error('item writer overlapped certification');
   const evidence={...(prior?.evidence??{}),...(sourceResult?.evidence??{}),...result.evidence};
-  for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-closed.json`,`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
+  evidence[closedPath]=digest(readFileSync(closedPath,'utf8'));
+  for(const name of ['frontier.json','baseline.json','step4-verdicts.json',`${phase}-${round}-progress.json`,...(phase==='gate'?[]:[`${source}-${round}-collected.json`])]){const p=join(dir,name);evidence[p]=digest(readFileSync(p,'utf8'));}
   const items=ids.map(id=>({id,...contexts.get(id),guard_sha256:current[id],reason:reviewed.get(id)?.reason??priorItems.get(id)?.reason}));
   const creationRows=[...(prior?.creations??[]),...(sourceResult?.created_items??[]),...(result.created_items??[])],creationById=new Map();
   for(const row of creationRows){const old=creationById.get(row.id);if(old&&JSON.stringify(old)!==JSON.stringify(row))throw Error(`conflicting creation provenance: ${row.id}`);creationById.set(row.id,row);}

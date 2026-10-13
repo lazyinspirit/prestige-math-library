@@ -192,6 +192,56 @@ the changed carrier for a fresh native owner review before closure or
 certification. It cannot satisfy adjudication, strict collection, or a gate;
 unknown changes and mismatched or stale grants still fail the existing checks.
 
+A completed `impact-initial` or `impact-repeat` owner wave may reopen for an
+actual failed formatting precheck at its drained pre-gate join, before that
+wave is certified. The root owner advertises an immutable request through
+`research/RUN-step5-v2/owner-format-repair-request.json`:
+
+```json
+{
+  "version": 1,
+  "run": "RUN",
+  "request": {
+    "path": "research/RUN-step5-v2/owner-format-repair-REQUESTID.json",
+    "sha256": "RAW_REQUEST_SHA256"
+  }
+}
+```
+
+The immutable request contains `version: 1`, `run`, `reviewer: "/root"`,
+`phase` (`impact-initial` or `impact-repeat`), `round`, the current unconsumed
+owner-gate `attempt` and `snapshotSha256`, `precheck: {path, sha256}`, and
+`subjects: [ID, ...]`. Optional `proposal` is one `{path, sha256}` reference
+or an array of references to unapplied diagnosis, patch and metadata evidence.
+Every evidence path is relative to the physics workspace and lies inside
+`research/RUN-*`; use hashes of exact file bytes. The advertisement may specify
+`state_dir: ".physics-autopilot/RUN"` (the default).
+
+Native `onProgress` drains inflight and adopted workers before `advanceImpact`
+consumes this request. Intake checks current run/stage, writer and shared-lock
+absence, no existing wave certificate, the exact unconsumed gate snapshot and
+all its current input hashes. The precheck must cover that complete item
+selection exactly once, have actual failures with diagnostics, and name exactly
+those failed subjects in the frozen draft frontier. It appends a normal native
+three-lane continuation with current before/context hashes and bound failure
+and proposal evidence. Workers retain `gpt-6.1-sol-high`, make only mechanical
+canonical phase/step/reference and owning contract derivation-ID repairs,
+preserve proof arguments and public interfaces, run scoped validators, and
+return genuine current native reviews. New items and public-interface changes
+are rejected. Existing required reviews still must match current context at
+closure; stale reviews are never rehashed into acceptance.
+
+Prior packs, reports, collections and the original `PHASE-ROUND-closed.json`
+remain immutable. New closures use `PHASE-ROUND-closed-2.json` (then `-3`, etc.);
+mutable progress holds a hash-bound `closed_receipt: {path, sha256}` pointer.
+Certification reads that pointer, with the original filename as the legacy
+fallback, and binds the complete preserved evidence. Consumed request evidence
+stays bound in progress; replay resumes the same continuation without appending
+another pass. This route never consumes or waives a gate, edits source on the
+owner's behalf, reopens a certified wave, authorizes Step 5.9 reopening, or changes
+the terminal paid-judge budget. After repair the ordinary fresh formatting and
+metadata recertification and full native gate battery remain required.
+
 Physics precheck presents each numbered Markdown paragraph as a complete step
 to the normative application checker: single newlines within that paragraph
 become spaces in checker input, retaining all mathematics, citations and tags.
