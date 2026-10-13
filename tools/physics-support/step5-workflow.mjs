@@ -803,7 +803,7 @@ export function checkWorkflow(root,run,options={}) {
   requireValue(['impact-repeat','gate'].includes(cert.phase)&&Number.isInteger(cert.latest_adjudication_round),'Step 5 has not completed its Sol judgment/adjudication cycle');
   const thresholdPath=join(workflowDir(root,run),`threshold-${cert.latest_adjudication_round}.json`);
   requireValue(cert.evidence[thresholdPath]&&existsSync(thresholdPath),'missing bound fatal threshold');
-  const threshold=read(thresholdPath);requireValue(threshold.belowThreshold===true&&threshold.errors?.length===0&&threshold.fatalCount*20<threshold.originalCount,'Step 5 fatal threshold not reached');
+  const threshold=read(thresholdPath);requireValue(threshold.belowThreshold===true&&threshold.errors?.length===0&&threshold.fatalCount*50<threshold.originalCount,'Step 5 fatal threshold not reached (must be strictly below 2%)');
   return cert;
 }
 

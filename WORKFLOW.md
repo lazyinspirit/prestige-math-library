@@ -204,7 +204,11 @@ batch digests use `RUN-batch-N-step5-context.json`; a digest from another batch
 cannot cover the inventory, and retries target only failing batches.
 
 Step 5 retains the round-based adjudication/repair engine, supplier-before-consumer
-maintenance, frozen frontier guards and its complete gate battery. The additional
+maintenance, frozen frontier guards and its complete gate battery. The
+judgment/adjudication rounds continue until the latest round's unique confirmed
+fatal original-frontier items are strictly below 2% of the immutable original
+inventory. Exactly 2% requires another round; unresolved defects still block closure.
+The additional
 `proof-contract-coverage` mechanical check still requires a contract for each
 actual proof-bearing carrier. No new substantive review gate is added. Step 6
 performs mechanical contract closure and emits `step6-` owner-report artifacts;

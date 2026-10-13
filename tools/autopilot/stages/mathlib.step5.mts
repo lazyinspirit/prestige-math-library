@@ -89,8 +89,10 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
     if(outcome!=='passed')return null;
     const p=join(workflowDir(ctx.repo,ctx.run),`threshold-${round(ctx,'5.7-certify')}.json`);
     const threshold=JSON.parse(readFileSync(p,'utf8'));
-    if(threshold.errors?.length||typeof threshold.belowThreshold!=='boolean')throw Error('invalid fatal threshold evidence');
-    return threshold.belowThreshold?null:{next:'5.4-rejudge'};
+    if(threshold.errors?.length||typeof threshold.belowThreshold!=='boolean'
+      ||!Number.isSafeInteger(threshold.fatalCount)||threshold.fatalCount<0
+      ||!Number.isSafeInteger(threshold.originalCount)||threshold.originalCount<1)throw Error('invalid fatal threshold evidence');
+    return threshold.belowThreshold&&threshold.fatalCount*50<threshold.originalCount?null:{next:'5.4-rejudge'};
   };
   const battery=(ctx:any)=>{
     const gates=[

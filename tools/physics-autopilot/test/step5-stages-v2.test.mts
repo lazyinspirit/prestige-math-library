@@ -105,11 +105,15 @@ test('outside maintenance has separate tasks and waits between parallel frontier
 test('5.7 repeats only on a complete above-threshold report; gate failures preserve the repair loop',()=>{
   const f=fixture();try {
     const path=join(f.repo,'research/demo-step5-v2/threshold-1.json');
-    writeFileSync(path,JSON.stringify({belowThreshold:false,errors:[]}));
+    writeFileSync(path,JSON.stringify({belowThreshold:false,fatalCount:2,originalCount:100,errors:[]}));
     assert.deepEqual(f.stage('5.7-certify').route({ctx:f.ctx,outcome:'passed'}),{next:'5.4-rejudge'});
-    writeFileSync(path,JSON.stringify({belowThreshold:true,errors:[]}));
+    writeFileSync(path,JSON.stringify({belowThreshold:true,fatalCount:1,originalCount:100,errors:[]}));
     assert.equal(f.stage('5.7-certify').route({ctx:f.ctx,outcome:'passed'}),null);
-    writeFileSync(path,JSON.stringify({belowThreshold:true,errors:['missing adjudication']}));
+    for(const fatalCount of [2,3]){
+      writeFileSync(path,JSON.stringify({belowThreshold:true,fatalCount,originalCount:100,errors:[]}));
+      assert.deepEqual(f.stage('5.7-certify').route({ctx:f.ctx,outcome:'passed'}),{next:'5.4-rejudge'});
+    }
+    writeFileSync(path,JSON.stringify({belowThreshold:true,fatalCount:1,originalCount:100,errors:['missing adjudication']}));
     assert.throws(()=>f.stage('5.7-certify').route({ctx:f.ctx,outcome:'passed'}),/invalid fatal/);
     assert.deepEqual(f.stage('5.8-gate').route({outcome:'failed'}),{next:'5.9-repair'});
     assert.deepEqual(f.stage('5.8-gate').route({outcome:'passed'}),{next:'5-freeze'});

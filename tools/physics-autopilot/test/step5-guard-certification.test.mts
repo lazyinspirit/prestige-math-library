@@ -10,7 +10,7 @@ import { freezeFrontier } from '../../physics-support/step5-rounds.mjs';
 import { digest } from '../../physics-support/step5-workflow.mjs';
 
 const repo = join(import.meta.dirname, '..', '..', '..');
-const text = (id: string, body: string) => `---\nid: ${id}\ntitle: Demo\nstatus: published\ndeps: []\n---\n\n${body}\n`;
+const text = (id: string, body: string) => `---\nid: ${id}\ntitle: Demo\nstatus: ${id === 'published-consumer' ? 'published' : 'draft'}\ndeps: []\n---\n\n${body}\n`;
 function fixture() {
   const root = mkdtempSync(join(tmpdir(), 'step5-central-guard-'));
   const dir = join(root, 'research', 'demo-step5-v2');
@@ -51,7 +51,7 @@ function fixture() {
   return { root, dir, write, cert, guard };
 }
 
-test('centralized guard licenses the published frontier item and excludes the outside consumer', () => {
+test('centralized guard licenses the draft frontier item and excludes the published outside consumer', () => {
   const fx = fixture(), result = fx.guard();
   assert.equal(result.status, 0, result.stdout + result.stderr);
   const output = JSON.parse(result.stdout);
@@ -149,6 +149,18 @@ test('v2 evidence loss fails closed and cannot invoke the legacy licence fallbac
   let result = fx.guard(); assert.equal(result.status, 1); assert.match(result.stdout, /certification missing/);
   fx.write(join(fx.dir, 'certification.json'), fx.cert); unlinkSync(join(fx.dir, 'frontier.json'));
   result = fx.guard(); assert.equal(result.status, 1); assert.match(result.stdout, /frontier.json/);
+});
+
+test('final closure rejects a bound old five-percent passing flag at or above two percent', () => {
+  const fx = fixture(), threshold = join(fx.dir, 'threshold-1.json');
+  for (const fatalCount of [2, 3]) {
+    fx.write(threshold, { round: 1, originalCount: 100, fatalIds: [], fatalCount, belowThreshold: true, errors: [] });
+    fx.write(join(fx.dir, 'certification.json'), { ...fx.cert,
+      evidence: { ...fx.cert.evidence, [threshold]: digest(readFileSync(threshold, 'utf8')) } });
+    const result = fx.guard();
+    assert.equal(result.status, 1);
+    assert.match(result.stdout, /strictly below 2%/);
+  }
 });
 
 test('final closure requires a bound threshold and fresh supplier contexts', () => {

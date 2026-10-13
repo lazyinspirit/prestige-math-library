@@ -146,7 +146,7 @@ export function assessFatalThreshold({ frontier, round, expectedIds, decisions }
     if (row.decision === 'confirmed-fatal' && original.has(id)) fatalIds.push(id);
   }
   for (const id of latest.keys()) if (!expected.includes(id)) errors.push(`unexpected adjudication: ${id}`);
-  return { round, originalCount: frontier.ids.length, fatalIds: unique(fatalIds), fatalCount: fatalIds.length, belowThreshold: errors.length === 0 && fatalIds.length * 20 < frontier.ids.length, errors };
+  return { round, originalCount: frontier.ids.length, fatalIds: unique(fatalIds), fatalCount: fatalIds.length, belowThreshold: errors.length === 0 && fatalIds.length * 50 < frontier.ids.length, errors };
 }
 
 /** All receipts are collected first. Certification is a single stable barrier,
