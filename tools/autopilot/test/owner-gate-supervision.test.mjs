@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { holdBeforeBattery, consumePermission, recertify } from '../../owner-gate-supervision.mjs';
+import { holdBeforeBattery, consumePermission, recertify, recertificationArchiveDir } from '../../owner-gate-supervision.mjs';
 
 function fixture(t, stageId = '1-drift') {
   const repo = mkdtempSync(join(tmpdir(), 'math-owner-gate-'));
@@ -56,4 +56,13 @@ test('incomplete work stays dispatchable; authored gates reject empty inventory'
   f.executor.stageStatus = () => ({ unitsDone: true, gatesPassed: false });
   holdBeforeBattery(f);
   assert.throws(() => recertify(f.ctx, { resolveEscalations: true }), /empty scaffold inventory/);
+});
+
+test('control files and final recertification cannot dirty the committed report tree', t => {
+  const f = fixture(t);
+  holdBeforeBattery(f);
+  assert.equal(JSON.parse(readFileSync(join(f.ctx.stateDir, 'owner-gate-request.json'))).group, '1-drift');
+  assert.equal(recertificationArchiveDir(f.ctx, { stages: ['1-drift'] }),
+    join(f.ctx.repo, 'research', `${f.ctx.run}-dispatch`));
+  assert.equal(recertificationArchiveDir(f.ctx, { stages: ['6-close-v2'] }), f.ctx.stateDir);
 });

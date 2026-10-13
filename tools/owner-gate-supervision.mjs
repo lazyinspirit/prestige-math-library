@@ -1,5 +1,5 @@
 // An owner-controlled pause before native batteries. No reviews or gates are waived.
-import { existsSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, readdirSync, mkdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { createHash, randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
@@ -11,8 +11,16 @@ import { splitFrontmatter } from './step6-lib.mjs';
 
 const digest = value => createHash('sha256').update(value).digest('hex');
 const read = file => existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')) : null;
-const requestPath = ctx => join(ctx.repo, 'research', `${ctx.run}-owner-gate-request.json`);
-const permissionPath = ctx => join(ctx.repo, 'research', `${ctx.run}-owner-gate-permission.json`);
+const runtime = ctx => ctx.stateDir ?? ctx.config?.stateDir ?? join(ctx.repo, '.autopilot', ctx.run);
+const requestPath = ctx => join(runtime(ctx), 'owner-gate-request.json');
+const permissionPath = ctx => join(runtime(ctx), 'owner-gate-permission.json');
+
+export function recertificationArchiveDir(ctx, request) {
+  // Reporter integrity deliberately excludes native dispatch evidence. The
+  // final post-commit check must not itself create uncommitted source files.
+  return request.stages.includes('6-close-v2') ? runtime(ctx)
+    : ctx.dispatchDir ?? ctx.config?.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
+}
 
 export function frontierInputs(ctx) {
   const snapshot = loadStep3(ctx.repo, ctx.run);
@@ -113,7 +121,9 @@ export function recertify(ctx, { resolveEscalations = false } = {}) {
     mathematical_review: false, escalations_resolved_by_supervisor: true,
     fingerprint: after.fingerprint, guards: after.guards, rows,
     formatting: layout.map(item => ({ file: item.file, errors: item.errors.length })), consumed_at: null };
-  const archive = join(ctx.repo, 'research', `${ctx.run}-owner-gate-recertification-${randomUUID()}.json`);
+  const archiveDir = recertificationArchiveDir(ctx, request);
+  mkdirSync(archiveDir, { recursive: true });
+  const archive = join(archiveDir, `owner-gate-recertification-${randomUUID()}.json`);
   writeFileSync(archive, JSON.stringify(receipt, null, 2) + '\n', { flag: 'wx' });
   writeFileSync(permissionPath(ctx), JSON.stringify({ ...receipt, receipt: relative(ctx.repo, archive) }, null, 2) + '\n');
   return { receipt: relative(ctx.repo, archive), subjects: rows.length, mode: receipt.mode };

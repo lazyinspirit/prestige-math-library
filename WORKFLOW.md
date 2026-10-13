@@ -352,6 +352,11 @@ a fresh pass; no review verdict, certification history or gate is waived.
 Drift planning boundaries record page metadata only because content does not
 yet exist; authored boundaries reject empty inventories. This optional wrapper
 does not affect other runs or change their worker prompts.
+Gate-control files live in the run's runtime state directory. Immutable pass
+receipts live with native dispatch evidence, which the report-integrity snapshot
+excludes. The final pass after the closeout commit stays in runtime state so
+the check does not create uncommitted source files; every final native gate
+still runs over the committed carriers.
 
 Outside Codex supervisors follow CLAUDE.md: resolve escalations before gates and
 perform a fresh dependency-ordered formatting/metadata-only pass immediately
