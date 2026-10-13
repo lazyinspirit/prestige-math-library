@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { writeProofLayout } from './proof-layout.mjs';
+import { freezeFrontier } from './step5-rounds.mjs';
 
 const tool = fileURLToPath(new URL('./step6-report.mjs', import.meta.url));
 const original = {
@@ -118,4 +119,68 @@ test('malformed historical rows remain errors even after a valid repaired succes
     assert.notEqual(built.status, 0);
     assert.match(built.stderr, /defect ledger validation failed/);
   }
+});
+
+function freeze(f, run = 'demo', ids = ['thm-a']) {
+  mkdirSync(join(f.root, 'research/demo-step5-v2'), { recursive: true });
+  writeFileSync(join(f.root, 'research/demo-step5-v2/frontier.json'), JSON.stringify(freezeFrontier({ run, batches: [{ id: '1', items: ids }] })));
+  writeFileSync(join(f.root, 'items/thm-original.md'), '---\nid: thm-original\nstatus: published\n---\nOriginal read-only source.\n');
+  writeProofLayout('demo', f.root);
+}
+
+test('frozen-scope evidence retains outside OPEN originals and renders their actual disposition', t => {
+  const f = fixture(t);
+  freeze(f);
+  f.setRows([{ ...original, subject: 'thm-original' }]);
+  const before = readFileSync(f.ledger);
+  const built = f.run('evidence');
+  assert.equal(built.status, 0, built.stderr);
+  const e = f.evidence();
+  assert.equal(e.defects.fatal[0].disposition, 'open');
+  assert.equal(e.defects.outsideOpenFindings[0].disposition, 'open');
+  assert.equal(e.defects.outsideOpenFindings[0].acceptance, 'excluded-not-passed');
+  assert.ok(e.input_sha256['research/demo-step5-v2/frontier.json']);
+  assert.ok(e.input_sha256['items/thm-original.md']);
+  assert.equal(f.run('check-evidence').status, 0);
+  writeFileSync(join(f.root, 'research/demo-step6-report.response.json'), JSON.stringify({
+    version: 2, readiness_verdict: 'publishable-pending-owner-approval',
+    executive_summary: 'Owned consumers use a complete local alternative; original maintenance remains open.',
+    caveats: [], owner_reading_priorities: [], recommendations: [],
+  }));
+  const rendered = f.run('render');
+  assert.equal(rendered.status, 0, rendered.stderr);
+  const report = readFileSync(join(f.root, 'research/demo-step6-report.md'), 'utf8');
+  assert.match(report, /Outside original maintenance: 1 OPEN finding.*not passed or repaired/);
+  assert.match(report, /demo-original.*thm-original.*\| open \| active/);
+  assert.deepEqual(readFileSync(f.ledger), before);
+});
+
+test('scoped evidence rejects owned fatal/nonfatal, unknown, page and invalid outside rows', t => {
+  const f = fixture(t);
+  freeze(f);
+  for (const changes of [{}, { severity: 'nonfatal' }, { subject: 'thm-unknown' }, { subject: 'page-context' },
+    { subject: 'thm-original', severity: 'invalid' }]) {
+    f.setRows([{ ...original, ...changes }]);
+    const built = f.run('evidence');
+    assert.notEqual(built.status, 0);
+    assert.match(built.stderr, /open active row|defect ledger validation failed/);
+  }
+});
+
+test('scope validation rejects wrong-run frontiers and current scope additions remain owned', t => {
+  const f = fixture(t);
+  freeze(f, 'wrong-run');
+  f.setRows([{ ...original, subject: 'thm-original' }]);
+  assert.match(f.run('evidence').stderr, /wrong run frontier/);
+  freeze(f, 'demo', ['thm-historical']);
+  f.setRows([original]);
+  assert.match(f.run('evidence').stderr, /open active row/);
+});
+
+test('known outside OPEN maintenance remains blocking for legacy evidence without frontier', t => {
+  const f = fixture(t);
+  writeFileSync(join(f.root, 'items/thm-original.md'), '---\nid: thm-original\nstatus: published\n---\n');
+  writeProofLayout('demo', f.root);
+  f.setRows([{ ...original, subject: 'thm-original' }]);
+  assert.match(f.run('evidence').stderr, /open active row/);
 });

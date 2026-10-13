@@ -19,6 +19,7 @@ import { TERMINAL_REJUDGE_ROUNDS } from './step5-terminal-resolution.mjs';
 import { verifyProofLayout, proofLayoutPath } from './proof-layout-receipt.mjs';
 import { activeOwnershipRows } from '../defect-ledger-ownership.mjs';
 import { protectedEntryHash } from './step6-lib.mjs';
+import { validateFrontier } from './step5-rounds.mjs';
 
 const LEDGER_TOOL = fileURLToPath(new URL('./defect-ledger.mjs', import.meta.url));
 
@@ -138,7 +139,25 @@ function buildEvidence() {
   const ownershipErrors = [];
   const active = new Set(activeOwnershipRows(defects, ownershipErrors));
   if (ownershipErrors.length) die(`defect ledger ownership invalid: ${ownershipErrors.join('; ')}`);
-  const blockers = [...active].filter(row => ['open', 'unknown'].includes(row.disposition));
+  const frontierPath = join(research, `${run}-step5-v2/frontier.json`);
+  const outsideOpenFindings = [];
+  if (existsSync(frontierPath)) {
+    const frontier = validateFrontier(readJson(frontierPath));
+    if (frontier.run !== run) die('wrong run frontier');
+    paths.frontier = frontierPath;
+    const owned = new Set([...frontier.ids, ...activeItems]);
+    const known = new Set(readdirSync(join(root, 'items')).filter(name => name.endsWith('.md')).map(name => name.slice(0, -3)));
+    for (const row of active) {
+      // Only known outside item maintenance is context. Unknown/page/global
+      // subjects and incomplete records must still block mechanical closeout.
+      if (row.disposition === 'open' && known.has(row.subject) && !owned.has(row.subject)) {
+        outsideOpenFindings.push({ ...row, scope_status: 'outside-owned-frontier', acceptance: 'excluded-not-passed' });
+        paths[`outside_item:${row.subject}`] = join(root, 'items', `${row.subject}.md`);
+      }
+    }
+  }
+  const excludedOpenIds = new Set(outsideOpenFindings.map(row => row.defect_id));
+  const blockers = [...active].filter(row => ['open', 'unknown'].includes(row.disposition) && !excludedOpenIds.has(row.defect_id));
   if (blockers.length) die(`defect ledger contains an incomplete or open active row: ${blockers
     .map(row => `${row.defect_id} (${row.subject}): ${row.disposition}`).join('; ')}`);
   const successors = new Map();
@@ -247,6 +266,7 @@ function buildEvidence() {
       workflow_owned_blockers: 0,
     },
     defects: {
+      outsideOpenFindings,
       total_rows: defects.length,
       active_rows: active.size,
       historical_rows: defects.length - active.size,
@@ -280,7 +300,7 @@ function buildEvidence() {
 if (command === 'evidence') {
   const evidence = buildEvidence();
   writeFileSync(value('--out') || evidencePath, `${JSON.stringify(evidence, null, 2)}\n`);
-  console.log(`step6-evidence: ${evidence.build.pages} pages, ${evidence.build.items} items, ${evidence.defects.fatal_count} fatal defect row(s), closed`);
+  console.log(`step6-evidence: ${evidence.build.pages} pages, ${evidence.build.items} items, ${evidence.defects.fatal_count} fatal defect row(s), owned closure complete; ${evidence.defects.outsideOpenFindings.length} outside OPEN finding(s), excluded, not passed`);
   process.exit(0);
 }
 
@@ -381,6 +401,7 @@ lines.push('',
   '## Fatal mathematical defects — exhaustive ledger table', '',
   `The run recorded ${evidence.defects.fatal_count} fatal defect row(s). Every row is reproduced below from the defect ledger.`, '',
   `Current ownership: ${evidence.defects.active_fatal_count ?? evidence.defects.fatal_count} active fatal row(s); ${evidence.defects.historical_fatal_count ?? 0} superseded historical fatal row(s).`, '',
+  `Outside original maintenance: ${(evidence.defects.outsideOpenFindings ?? []).length} OPEN finding(s), excluded from owned closure, not passed or repaired${(evidence.defects.outsideOpenFindings ?? []).length ? ` (${evidence.defects.outsideOpenFindings.map(row => `${row.defect_id}: ${row.subject}`).join('; ')})` : ''}.`, '',
   '| Defect | Item / subject | Class | Subclass | Location | Disposition | Ownership | Caught at |',
   '|---|---|---|---|---|---|---|---|');
 for (const row of evidence.defects.fatal) {

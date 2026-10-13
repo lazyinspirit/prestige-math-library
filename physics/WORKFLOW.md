@@ -295,6 +295,16 @@ performs mechanical contract closure and emits `step6-` owner-report artifacts;
 its readiness and closeout commit remain evidence-bound. Publishing/pushing are
 owner actions, separate from this build.
 
+Step-6 terminal defect-ledger gates use the run's frozen Step-5 frontier when
+present. Outside item findings remain recorded with their actual dispositions
+and are reported as excluded, not passed; original mathematical maintenance
+stays OPEN. Every ledger row still undergoes structural and ownership validation,
+and unknown/page/global subjects and all owned open rows remain blocking.
+Historical runs without that frontier retain the strict all-run terminal check.
+Step-6 evidence also retains outside OPEN findings explicitly and reproduces
+their actual dispositions in the exhaustive fatal table. Current manifest
+subjects remain owned even if they were added after the frozen frontier.
+
 ## Run controls and cutover
 
 Use `node tools/tsx-run.mjs tools/physics-autopilot/bin/autopilot.mts` with the ordinary

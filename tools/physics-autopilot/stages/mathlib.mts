@@ -971,16 +971,23 @@ export const authoredContentGates = (ctx: any) => [
  *  rows whenever a 3a report exists (the clause that stops the ledger being a
  *  mirror of the adjudication file), and open rows agreeing with the closure
  *  receipt (two blockers once lived only in markdown). */
-const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['node', 'tools/physics-support/defect-ledger.mjs', 'check',
+const ledgerGate = (ctx, { terminal = false } = {}) => {
+  const frontier = `research/${ctx.run}-step5-v2/frontier.json`;
+  // Imported/original maintenance remains open outside the owned frontier.
+  // Legacy runs without a frozen frontier retain the strict all-run check.
+  const scoped = terminal && existsSync(R(ctx, frontier));
+  return gate('defect-ledger', ['node', 'tools/physics-support/defect-ledger.mjs', 'check',
   '--run', ctx.run,
   '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
   '--reader-decisions', `research/${ctx.run}-step5-alert-decisions.jsonl`,
   '--closure', `research/${ctx.run}-judge-closure.json`,
-  // The terminal stage may not end with any open row; closeout tolerates a
-  // nonfatal one deliberately left open (Step 5 owns repair closure).
-  ...(terminal ? ['--no-open'] : [])], {
+  // No owned open row, including nonfatal ones, may survive closeout.
+  ...(terminal ? ['--no-open'] : []),
+  ...(scoped ? ['--frontier', frontier] : [])], {
+  ...(scoped ? { ownerReviewInputs: [frontier] } : {}),
   liveness: { pattern: /(\d+) defect row\(s\) checked/.source, min: 1, unit: 'defect rows' },
 });
+};
 
 /**
  * Judge closure — the predicate that says whether the mathematics is signed off.
