@@ -2,7 +2,7 @@
 id: lem-nrqm-framework-ccr-on-the-schwartz-core
 kind: lemma
 title: "Canonical commutation relations of position and momentum on the Schwartz core"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 1

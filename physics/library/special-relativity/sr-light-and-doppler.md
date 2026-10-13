@@ -1,7 +1,7 @@
 ---
 page: sr-light-and-doppler
 title: 'Light and Doppler'
-status: draft
+status: published
 library: physics
 items: [lem-sr-metric-duality-on-lorentz-vector-space,
         def-sr-affine-phase-and-wave-covector,

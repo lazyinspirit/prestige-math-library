@@ -4,7 +4,7 @@ aliases: [ nrqm-many-body-scope-and-empirical-status ]
 kind: remark
 domain: physics
 title: "Scope and empirical status of the many-body and equilibrium models"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 14
 deps:

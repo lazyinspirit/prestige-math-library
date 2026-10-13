@@ -2,7 +2,7 @@
 id: cex-gr-point-normal-chart-does-not-make-second-derivatives-vanish
 kind: counterexample
 title: "A chart with the point-normal first-order form whose second metric derivatives do not vanish"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

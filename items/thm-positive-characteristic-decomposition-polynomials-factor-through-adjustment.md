@@ -2,7 +2,7 @@
 id: thm-positive-characteristic-decomposition-polynomials-factor-through-adjustment
 kind: theorem
 title: "Positive-characteristic decomposition polynomials factor through adjustment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 45

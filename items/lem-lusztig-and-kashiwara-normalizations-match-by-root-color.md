@@ -2,7 +2,7 @@
 id: lem-lusztig-and-kashiwara-normalizations-match-by-root-color
 kind: lemma
 title: "The Lusztig–Kashiwara form, parameter and coproduct dictionary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

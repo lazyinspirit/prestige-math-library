@@ -4,7 +4,7 @@ aliases: [nrqm-composites-local-trace-preserving-no-signalling]
 kind: lemma
 domain: mathematics
 title: "Local trace-preserving Kraus maps do not change the opposite reduced state"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-separable-partial-trace, lem-nrqm-composites-countable-kraus-normalization, lem-nrqm-composites-finite-ancilla-complete-positivity, thm-trace-is-absolutely-convergent-and-basis-independent, thm-trace-class-is-a-two-sided-banach-operator-ideal, def-self-adjoint-positive-unitary-and-normal-operator, def-countable-choice, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-hilbert-tensor-construction]

@@ -1,7 +1,7 @@
 ---
 page: sr-lorentz-transformations
 title: "Lorentz Transformations"
-status: draft
+status: published
 library: physics
 items: [def-lorentz-map-and-lorentz-group,
         def-lorentz-boost,

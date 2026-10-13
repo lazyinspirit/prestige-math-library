@@ -2,7 +2,7 @@
 id: thm-deformed-hard-lefschetz-for-b-x-b-s
 kind: theorem
 title: "Hard Lefschetz for the deformed operator on B_x B_s, in the three cases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

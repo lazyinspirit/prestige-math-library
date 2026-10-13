@@ -2,7 +2,7 @@
 id: lem-em-fundamental-variation-lemma
 kind: lemma
 title: "The fundamental lemma of the calculus of variations for continuous coefficients"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

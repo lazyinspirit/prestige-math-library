@@ -2,7 +2,7 @@
 id: rem-cm18-primary-report-contract
 kind: remark
 title: "Contract for a future reported experiment of the framework: source, setup, calibration, procedure, sampling, observations, uncertainty and interpretation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps: [def-cm18-observable-model, def-cm18-calibration, def-cm18-sampling-model, def-cm-statistical-test-and-size, def-cm-likelihood-function, def-cm-confidence-set-and-coverage, rem-cm-inference-and-uncertainty-scope]

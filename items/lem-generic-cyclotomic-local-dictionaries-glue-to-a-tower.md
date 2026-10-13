@@ -2,7 +2,7 @@
 id: lem-generic-cyclotomic-local-dictionaries-glue-to-a-tower
 kind: lemma
 title: Generic cyclotomic local dictionaries glue to a tower
-status: draft
+status: published
 origin: session
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

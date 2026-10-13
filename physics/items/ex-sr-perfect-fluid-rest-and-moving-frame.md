@@ -2,7 +2,7 @@
 id: ex-sr-perfect-fluid-rest-and-moving-frame
 kind: example
 title: "Perfect fluid components in its rest frame and in a moving frame"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [lem-sr-perfect-fluid-conservation-equations, lem-sr-observer-stress-energy-decomposition, def-lorentz-boost, thm-sr-tensor-and-current-transformation, thm-sr-proper-time-and-observer-decomposition, def-lorentz-form-and-inertia, def-inertial-frame-and-inertial-chart, def-rational-power, def-sr-affine-minkowski-model, lem-boost-is-proper-orthochronous-with-inverse]

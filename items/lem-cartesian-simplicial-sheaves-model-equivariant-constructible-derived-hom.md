@@ -2,7 +2,7 @@
 id: lem-cartesian-simplicial-sheaves-model-equivariant-constructible-derived-hom
 kind: lemma
 title: "Cartesian simplicial sheaves model actual equivariant derived Hom"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 16

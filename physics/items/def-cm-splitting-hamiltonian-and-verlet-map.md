@@ -2,7 +2,7 @@
 id: def-cm-splitting-hamiltonian-and-verlet-map
 kind: definition
 title: The splitting Hamiltonian $H=A+B$, the drift and kick maps, and the velocity-Verlet map
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

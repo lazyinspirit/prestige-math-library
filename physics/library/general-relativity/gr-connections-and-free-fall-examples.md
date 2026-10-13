@@ -4,7 +4,7 @@ requires:
   - gr-framework-and-geometry
 page: gr-connections-and-free-fall-examples
 title: "Connections And Free Fall — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

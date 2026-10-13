@@ -1,7 +1,7 @@
 ---
 page: em-expanded-analysis-prerequisites-examples
 title: Em Expanded Analysis Prerequisites — Examples
-status: draft
+status: published
 items: []
 examples: [ex-em-outgoing-dtn-and-pec-zero-mode-boundaries]
 ---

@@ -1,7 +1,7 @@
 ---
 page: em-energy-momentum-and-angular-balance
 title: "Energy momentum angular balance"
-status: draft
+status: published
 items: [def-em-vacuum-energy-flux,
         def-em-vacuum-stress-momentum,
         pthm-em-poynting-balance,

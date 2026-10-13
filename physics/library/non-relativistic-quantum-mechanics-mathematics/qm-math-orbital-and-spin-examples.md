@@ -1,7 +1,7 @@
 ---
 page: qm-math-orbital-and-spin-examples
 title: Qm Math Orbital And Spin — Examples
-status: draft
+status: published
 items: []
 requires:
   - qm-math-orbital-and-spin

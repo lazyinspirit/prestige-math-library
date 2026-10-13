@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-coulomb-essential-spectrum]
 kind: theorem
 domain: mathematics
 title: "Coulomb essential spectrum"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-coulomb-relative-compactness, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, thm-weyl-essential-spectrum-invariance, def-relative-compactness-with-respect-to-an-operator, def-compact-linear-operator, lem-compositions-with-a-compact-operator-are-compact, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, def-projection-valued-measure, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, thm-self-adjoint-resolvent-estimate, lem-weak-derivatives-are-polynomial-fourier-multipliers, def-countable-choice, def-axiom-of-choice]

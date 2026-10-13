@@ -1,7 +1,7 @@
 ---
 page: qm-many-body-and-equilibrium-models-examples
 title: Qm Many Body And Equilibrium Models — Examples
-status: draft
+status: published
 library: physics
 items:
   - ex-nrqm-many-body-two-site-bond-thermal-ensemble

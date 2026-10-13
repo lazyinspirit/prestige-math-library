@@ -3,7 +3,7 @@ id: thm-sr-fermi-walker-and-rigid-observer-examples
 kind: theorem
 domain: mathematics
 title: "Fermi-Walker transport preserves the metric, and explicit rigid and non-rigid observer congruences"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

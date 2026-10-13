@@ -2,7 +2,7 @@
 id: lem-gr-causal-curve-calculus
 kind: lemma
 title: "Chart independence, concatenation, reparametrization and transitivity for causal curves"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

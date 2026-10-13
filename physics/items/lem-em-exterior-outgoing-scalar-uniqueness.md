@@ -2,7 +2,7 @@
 id: lem-em-exterior-outgoing-scalar-uniqueness
 kind: lemma
 title: Uniqueness of the outgoing exterior scalar Helmholtz solution with Dirichlet data
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

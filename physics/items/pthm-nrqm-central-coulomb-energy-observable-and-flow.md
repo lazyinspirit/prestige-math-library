@@ -4,7 +4,7 @@ aliases: [nrqm-central-coulomb-energy-observable-and-flow]
 kind: physics-theorem
 domain: physics
 title: "The one-centre Coulomb model: energy observable, flow, stationary states and spectral support"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps: [def-nrqm-central-framework-coulomb-and-hydrogen-model, def-nrqm-central-framework-central-potential-model, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, def-nrqm-framework-quantities-and-units, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-autonomous-dynamics-framework-evolution, pthm-nrqm-autonomous-dynamics-stationary-states-and-energy-conservation, pthm-nrqm-kinematics-spin-s-outcome-laws, def-nrqm-state-geometry-framework-state-space, thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-coulomb-essential-spectrum, lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators, lem-nrqm-central-free-operator-differential-identification, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, def-sobolev-space-wkp-and-its-norm, def-countable-choice, def-axiom-of-choice]

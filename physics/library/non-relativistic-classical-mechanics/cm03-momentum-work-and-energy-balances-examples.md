@@ -1,7 +1,7 @@
 ---
 page: cm03-momentum-work-and-energy-balances-examples
 title: "Momentum, work and energy balances — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: cex-cm16-positive-growth-is-not-chaos
 kind: counterexample
 title: "A positive Lyapunov exponent at a hyperbolic equilibrium does not produce a chaotic invariant set of the time-one map: the three-dimensional repulsive model has rate $1$ and no compact invariant set with more than one point"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

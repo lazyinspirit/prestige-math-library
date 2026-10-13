@@ -5,7 +5,7 @@ aliases:
 kind: example
 domain: mathematics
 title: Gap-closing failure
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

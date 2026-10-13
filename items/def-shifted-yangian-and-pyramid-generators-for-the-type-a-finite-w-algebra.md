@@ -2,7 +2,7 @@
 id: def-shifted-yangian-and-pyramid-generators-for-the-type-a-finite-w-algebra
 kind: definition
 title: "The shifted Yangian and the pyramid generators of the type-A finite W-algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

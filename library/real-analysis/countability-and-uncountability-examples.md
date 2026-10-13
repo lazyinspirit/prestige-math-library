@@ -1,7 +1,7 @@
 ---
 page: countability-and-uncountability-examples
 title: "Countability and the Uncountability of R: Examples and Counterexamples"
-status: draft
+status: published
 requires: [countability-and-uncountability, roots-and-rational-powers]
 items: []
 examples: [ex-integers-are-countably-infinite,

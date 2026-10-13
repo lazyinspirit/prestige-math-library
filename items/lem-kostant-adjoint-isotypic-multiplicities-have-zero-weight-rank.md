@@ -2,7 +2,7 @@
 id: lem-kostant-adjoint-isotypic-multiplicities-have-zero-weight-rank
 kind: lemma
 title: Adjoint isotypic modules have the zero-weight rank
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

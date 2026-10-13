@@ -2,7 +2,7 @@
 id: def-nrqm-photons-framework-fixed-mode-polarization-model
 kind: definition
 title: "The fixed-mode polarisation model of the framework"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 11

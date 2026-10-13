@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The common-domain driven model: strong propagator with domain
   invariance, and the driven oscillator as its declared instance"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

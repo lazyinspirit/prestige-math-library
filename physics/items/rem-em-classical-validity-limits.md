@@ -2,7 +2,7 @@
 id: rem-em-classical-validity-limits
 kind: remark
 title: "Classical material, point-source and mechanical regimes and the quantum exclusions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

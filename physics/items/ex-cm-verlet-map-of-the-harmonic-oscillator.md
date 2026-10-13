@@ -2,7 +2,7 @@
 id: ex-cm-verlet-map-of-the-harmonic-oscillator
 kind: example
 title: 'Oscillator Verlet: a preserved quadratic form and bounded original-energy oscillation'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

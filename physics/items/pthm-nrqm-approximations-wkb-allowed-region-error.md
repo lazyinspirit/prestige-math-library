@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "WKB approximation on an allowed interval of the declared regime model:
   explicit Gronwall error bound away from turning points"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

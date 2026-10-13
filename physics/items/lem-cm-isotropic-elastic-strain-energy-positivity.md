@@ -2,7 +2,7 @@
 id: lem-cm-isotropic-elastic-strain-energy-positivity
 kind: lemma
 title: "The isotropic elastic strain energy is $\\mu|e_0|_F^2+(\\lambda/2+\\mu/3)(\\operatorname{tr}e)^2$, hence positive definite under $\\mu>0$, $\\lambda+2\\mu/3>0$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

@@ -5,7 +5,7 @@ title: "A declared-data Rutherford check: $\\alpha=1$, $\\theta=\\pi/2$,
   $(\\mathrm d\\sigma/\\mathrm d\\Omega)=4\\times10^{-24}\\,\\mathrm{m^2}$, the
   band values $\\pi b(\\theta_1)^2$ and the growth of the truncated total as
   $\\theta_1\\downarrow0$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

@@ -2,7 +2,7 @@
 id: ex-inverting-kl-multiplicities-to-obtain-simple-characters
 kind: example
 title: "Inverting Kazhdan–Lusztig multiplicities to obtain simple characters"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

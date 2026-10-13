@@ -4,7 +4,7 @@ aliases: [nrqm-central-free-operator-differential-identification]
 kind: lemma
 domain: mathematics
 title: "The three-dimensional free Schr\u00f6dinger operator as the weak Laplacian on its Sobolev domain"
-status: draft
+status: published
 origin: session
 dependency_level: 1
 deps: [thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, thm-plancherel, def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, def-countable-choice, def-axiom-of-choice]

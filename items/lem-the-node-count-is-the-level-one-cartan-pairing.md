@@ -2,7 +2,7 @@
 id: lem-the-node-count-is-the-level-one-cartan-pairing
 kind: lemma
 title: "The addable-minus-removable node count is the level-one Cartan pairing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 14

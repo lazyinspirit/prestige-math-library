@@ -10,7 +10,7 @@ requires:
   - gr-tensors-and-observers
 page: gr-flat-and-newtonian-bridges-examples
 title: "Flat And Newtonian Bridges — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

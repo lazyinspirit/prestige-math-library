@@ -2,7 +2,7 @@
 id: lem-rational-cohomology-scalar-comparison-for-compact-smooth-manifolds
 kind: lemma
 title: "Rational cohomology scalar comparison on compact smooth manifolds"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps:

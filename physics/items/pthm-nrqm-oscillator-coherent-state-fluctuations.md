@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Fluctuations of the oscillator coherent states and the position-momentum
   relation of the model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

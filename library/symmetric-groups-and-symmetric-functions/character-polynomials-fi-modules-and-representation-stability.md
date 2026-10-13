@@ -1,7 +1,7 @@
 ---
 page: character-polynomials-fi-modules-and-representation-stability
 title: "Character Polynomials, FI-Modules, and Representation Stability"
-status: draft
+status: published
 requires:
   - frobenius-characteristic-and-the-symmetric-group-character-dictionary
   - outer-products-skew-specht-modules-and-littlewood-richardson

@@ -3,7 +3,7 @@ id: ex-nrqm-state-geometry-fixed-mode-two-level-states
 kind: example
 domain: physics
 title: "Pure and mixed states of a fixed two-level internal space"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps:

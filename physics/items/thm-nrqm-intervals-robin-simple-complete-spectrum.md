@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-robin-simple-complete-spectrum]
 kind: theorem
 domain: mathematics
 title: "Simple complete spectrum of the separated Robin realisation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, thm-nrqm-intervals-separated-robin-green-resolvent, thm-nrqm-intervals-regular-ivp-parameter-series, thm-nrqm-intervals-sine-on-completeness, lem-nrqm-intervals-compact-resolvent-eigenbasis, lem-nrqm-intervals-integration-by-parts, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-dimension, def-linear-basis, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-hilbert-space, def-countable-choice, def-axiom-of-choice, def-adjoint-of-a-densely-defined-unbounded-operator, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, thm-orthogonal-decomposition-by-a-closed-subspace]

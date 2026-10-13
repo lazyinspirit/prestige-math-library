@@ -2,7 +2,7 @@
 id: thm-cm-kepler-ellipse-geometry
 kind: theorem
 title: "The subcritical Kepler conic is an ellipse with semiaxes $a=p/(1-e^2)$, $b=a\\sqrt{1-e^2}$, focus at the origin and area $\\pi ab$; its area is also $\\tfrac12\\int_0^{2\\pi}\\varrho^2$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

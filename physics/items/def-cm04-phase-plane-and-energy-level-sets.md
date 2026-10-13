@@ -2,7 +2,7 @@
 id: def-cm04-phase-plane-and-energy-level-sets
 kind: definition
 title: "The phase plane of a one-dimensional model: phase curves, the energy function and its level sets, and turning points"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

@@ -2,7 +2,7 @@
 id: ex-the-kl-multiplicity-matrix-for-the-sl-three-principal-block
 kind: example
 title: "The Kazhdan–Lusztig multiplicity matrix for the sl_3 principal block"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

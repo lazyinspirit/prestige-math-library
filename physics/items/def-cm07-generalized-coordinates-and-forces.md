@@ -2,7 +2,7 @@
 id: def-cm07-generalized-coordinates-and-forces
 kind: definition
 title: "Generalized-coordinate maps of the model, the substituted Lagrangian, the kinetic metric and generalized forces"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

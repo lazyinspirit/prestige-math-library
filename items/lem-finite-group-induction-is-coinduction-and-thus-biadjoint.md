@@ -2,7 +2,7 @@
 id: lem-finite-group-induction-is-coinduction-and-thus-biadjoint
 kind: lemma
 title: "Finite-group induction is coinduction, hence biadjoint to restriction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

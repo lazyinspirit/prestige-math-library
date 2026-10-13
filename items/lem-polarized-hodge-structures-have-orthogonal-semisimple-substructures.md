@@ -2,7 +2,7 @@
 id: lem-polarized-hodge-structures-have-orthogonal-semisimple-substructures
 kind: lemma
 title: "Polarized rational Hodge structures split orthogonally"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

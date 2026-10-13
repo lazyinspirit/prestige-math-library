@@ -1,7 +1,7 @@
 ---
 page: em-boundary-and-spectral-prerequisites-examples
 title: Em Boundary And Spectral Prerequisites — Examples
-status: draft
+status: published
 items: []
 examples: [ex-em-boundary-and-spectral-prerequisites-hypothesis-boundaries]
 ---

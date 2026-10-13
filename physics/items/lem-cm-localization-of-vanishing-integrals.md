@@ -2,7 +2,7 @@
 id: lem-cm-localization-of-vanishing-integrals
 kind: lemma
 title: "Localization: a continuous function whose integrals vanish over a neighbourhood-basis family is identically zero"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

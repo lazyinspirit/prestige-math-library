@@ -2,7 +2,7 @@
 id: cor-cyclotomic-hecke-blocks-inherit-a-nontrivial-z-grading
 kind: corollary
 title: "Cyclotomic Hecke blocks inherit $\\mathbb Z$-gradings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 32

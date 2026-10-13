@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The linearly driven two-level model: rotating-wave approximation with an
   explicit finite-time error contract and the averaged Rabi populations"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

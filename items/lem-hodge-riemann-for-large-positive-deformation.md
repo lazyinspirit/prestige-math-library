@@ -2,7 +2,7 @@
 id: lem-hodge-riemann-for-large-positive-deformation
 kind: lemma
 title: "Hodge-Riemann relations hold for large positive deformation, and the deformation principle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

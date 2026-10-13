@@ -2,7 +2,7 @@
 id: ex-cm07-total-derivative-gauge-check
 kind: example
 title: "A total-derivative Lagrangian on explicit data: the endpoint term and the unchanged equations"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

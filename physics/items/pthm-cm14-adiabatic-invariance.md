@@ -4,7 +4,7 @@ kind: physics-theorem
 title: "Adiabatic invariance of the action of a slowly varying one-frequency
   model: an order-$\\varepsilon$ drift bound on the $O(1/\\varepsilon)$ time
   scale"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 27

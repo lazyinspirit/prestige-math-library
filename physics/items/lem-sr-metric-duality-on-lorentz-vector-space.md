@@ -2,7 +2,7 @@
 id: lem-sr-metric-duality-on-lorentz-vector-space
 kind: lemma
 title: 'The metric pairing is a linear bijection to the dual, and the raised covector in an orthonormal frame'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-lorentz-form-and-inertia, def-algebraic-dual-and-linear-functional,

@@ -2,7 +2,7 @@
 id: lem-the-negative-half-is-separated-by-iterated-skew-derivations
 kind: lemma
 title: "Separation of the negative half by iterated skew derivations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

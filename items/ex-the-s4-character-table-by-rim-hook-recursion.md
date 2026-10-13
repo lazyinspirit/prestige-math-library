@@ -2,7 +2,7 @@
 id: ex-the-s4-character-table-by-rim-hook-recursion
 kind: example
 title: "The S_4 character table by rim-hook recursion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

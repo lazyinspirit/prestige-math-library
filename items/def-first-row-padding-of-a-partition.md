@@ -2,7 +2,7 @@
 id: def-first-row-padding-of-a-partition
 kind: definition
 title: First-row padding of a partition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

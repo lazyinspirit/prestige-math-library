@@ -2,7 +2,7 @@
 id: prop-schur-functor-compares-first-level-branching-with-hecke-restriction
 kind: proposition
 title: "The Schur functor compares first-level branching with Hecke restriction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: post-cm02-interactions
 kind: postulate
 title: "Restricted interaction models: pair decompositions, antisymmetry and centrality options, potential forces and the gravitational branch"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

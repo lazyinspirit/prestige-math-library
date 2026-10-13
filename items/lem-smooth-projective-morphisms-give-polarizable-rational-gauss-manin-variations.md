@@ -2,7 +2,7 @@
 id: lem-smooth-projective-morphisms-give-polarizable-rational-gauss-manin-variations
 kind: lemma
 title: "Geometric Gauss-Manin Hodge variations and integral lattices"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

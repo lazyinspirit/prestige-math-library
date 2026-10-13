@@ -2,7 +2,7 @@
 id: lem-algebraic-open-inclusion-surjects-on-fundamental-groups
 kind: lemma
 title: "Algebraic open inclusions surject on fundamental groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: lem-frequency-reparametrization-by-contraction
 kind: lemma
 title: "Elimination of the frequency shift by a holomorphic contraction retraction"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: ex-em-apparatus-model-ambiguity
 kind: example
 title: "A discrepancy can test auxiliaries as well as field assumptions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

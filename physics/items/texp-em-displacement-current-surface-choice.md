@@ -3,7 +3,7 @@ id: texp-em-displacement-current-surface-choice
 kind: thought-experiment
 title: "Total current flux is surface independent; the conduction-only flux need not be"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 17
 deps: [pthm-em-integral-maxwell,

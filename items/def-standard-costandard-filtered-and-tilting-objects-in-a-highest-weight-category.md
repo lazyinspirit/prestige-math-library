@@ -2,7 +2,7 @@
 id: def-standard-costandard-filtered-and-tilting-objects-in-a-highest-weight-category
 kind: definition
 title: "Standard- and costandard-filtered objects and tilting objects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

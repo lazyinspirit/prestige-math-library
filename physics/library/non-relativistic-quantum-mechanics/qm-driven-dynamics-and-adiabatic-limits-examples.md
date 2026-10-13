@@ -1,7 +1,7 @@
 ---
 page: qm-driven-dynamics-and-adiabatic-limits-examples
 title: Qm Driven Dynamics And Adiabatic Limits — Examples
-status: draft
+status: published
 library: physics
 items:
   - ex-nrqm-driven-dynamics-circular-drive-exact-populations

@@ -3,7 +3,7 @@ id: "ex-em-wire-force-coupling"
 kind: "example"
 domain: physics
 title: "Force per unit length between two declared ideal parallel wires"
-status: draft
+status: published
 origin: session
 dependency_level: 21
 deps: ["def-em-steady-current-regime", "pthm-em-magnetic-loop-force-torque", "def-cross-product-in-r3", "thm-multidimensional-integral-properties", "def-countable-choice", "post-em-ideal-magnetostatic-models", "ex-em-infinite-wire-and-solenoid"]

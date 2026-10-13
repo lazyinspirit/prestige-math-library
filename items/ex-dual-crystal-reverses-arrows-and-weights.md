@@ -2,7 +2,7 @@
 id: ex-dual-crystal-reverses-arrows-and-weights
 kind: example
 title: "Dual crystals reverse arrows and weights: two small computations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

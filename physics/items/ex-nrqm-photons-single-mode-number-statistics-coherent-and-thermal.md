@@ -3,7 +3,7 @@ id: ex-nrqm-photons-single-mode-number-statistics-coherent-and-thermal
 kind: example
 title: "Number statistics of a single declared mode: sharp, Poisson and
   geometric preparations"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 14

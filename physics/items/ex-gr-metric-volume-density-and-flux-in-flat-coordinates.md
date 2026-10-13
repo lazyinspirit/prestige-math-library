@@ -2,7 +2,7 @@
 id: ex-gr-metric-volume-density-and-flux-in-flat-coordinates
 kind: example
 title: "Metric density, volume form and current flux of the flat metric in the identity chart"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

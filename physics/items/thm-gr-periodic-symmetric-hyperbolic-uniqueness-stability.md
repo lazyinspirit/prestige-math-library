@@ -3,7 +3,7 @@ id: thm-gr-periodic-symmetric-hyperbolic-uniqueness-stability
 kind: theorem
 title: "Uniqueness of classical solutions and continuous dependence in H^{s-1}
   for periodic symmetric hyperbolic systems"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

@@ -1,7 +1,7 @@
 ---
 page: em-retarded-point-prerequisites
 title: Complete retarded point fields
-status: draft
+status: published
 items: [thm-em-retarded-root-and-fields]
 examples: []
 ---

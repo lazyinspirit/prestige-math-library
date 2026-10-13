@@ -2,7 +2,7 @@
 id: def-kashiwara-lattices-lambda-and-infinity
 kind: definition
 title: "The Kashiwara lattices $\\mathcal L(\\lambda)$ and $\\mathcal L(\\infty)$ and their generating sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

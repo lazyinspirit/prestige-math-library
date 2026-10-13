@@ -5,7 +5,7 @@ kind: experiment
 domain: physics
 title: "Reported controlled double-slit electron diffraction with
   single-electron detection (Bach, Pope, Liou and Batelaan)"
-status: draft
+status: published
 origin: session
 dependency_level: 9
 deps: [ post-nrqm-framework-preparation-and-apparatus ]

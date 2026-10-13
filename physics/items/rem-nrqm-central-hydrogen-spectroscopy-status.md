@@ -4,7 +4,7 @@ aliases: [nrqm-central-hydrogen-spectroscopy-status]
 kind: remark
 domain: physics
 title: "Empirical status of the hydrogen spectrum on this pair: pending spectroscopy evidence and the limits of the model's spectral statements"
-status: draft
+status: published
 origin: session
 dependency_level: 17
 deps: [def-nrqm-central-framework-coulomb-and-hydrogen-model, pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy, pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum, post-nrqm-framework-preparation-and-apparatus, post-nrqm-framework-state-and-composition, def-nrqm-framework-quantities-and-units]

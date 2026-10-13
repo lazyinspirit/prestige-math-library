@@ -2,7 +2,7 @@
 id: lem-em-period-average
 kind: lemma
 title: "Period averages of products of real parts of complex exponentials"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

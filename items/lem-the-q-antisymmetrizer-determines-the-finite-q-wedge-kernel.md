@@ -2,7 +2,7 @@
 id: lem-the-q-antisymmetrizer-determines-the-finite-q-wedge-kernel
 kind: lemma
 title: "The q-antisymmetrizer splits the tensor power and its kernel is the sum of the Hecke kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

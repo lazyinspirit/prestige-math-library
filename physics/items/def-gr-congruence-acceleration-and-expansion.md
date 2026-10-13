@@ -2,7 +2,7 @@
 id: def-gr-congruence-acceleration-and-expansion
 kind: definition
 title: "Acceleration, expansion and the along-congruence derivative of an observer congruence"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

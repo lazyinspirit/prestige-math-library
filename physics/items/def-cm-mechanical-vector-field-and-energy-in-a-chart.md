@@ -2,7 +2,7 @@
 id: def-cm-mechanical-vector-field-and-energy-in-a-chart
 kind: definition
 title: "The mechanical first-order field, Lagrangian and energy of a configuration-dependent kinetic metric in a chart"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

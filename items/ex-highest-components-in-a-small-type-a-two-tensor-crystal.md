@@ -2,7 +2,7 @@
 id: ex-highest-components-in-a-small-type-a-two-tensor-crystal
 kind: example
 title: "Highest components in the $A_2$ tensor crystal $B(\\lambda_1)\\otimes B(\\lambda_1)$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

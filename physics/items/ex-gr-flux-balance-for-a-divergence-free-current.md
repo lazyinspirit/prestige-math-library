@@ -2,7 +2,7 @@
 id: ex-gr-flux-balance-for-a-divergence-free-current
 kind: example
 title: "A divergence-free current with nonzero face-flux density: J=x^1∂_2 in flat space"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

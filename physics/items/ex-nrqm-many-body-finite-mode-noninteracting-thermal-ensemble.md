@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Finite-mode non-interacting thermal ensembles: two fermions in three
   modes and two bosons in two modes"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

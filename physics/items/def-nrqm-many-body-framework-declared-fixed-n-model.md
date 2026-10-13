@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared fixed-N many-body model: species sector, one-particle data,
   interaction and the sector energy observable"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

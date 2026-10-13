@@ -4,7 +4,7 @@ aliases: [nrqm-many-body-two-level-thermal-formulas]
 kind: lemma
 domain: mathematics
 title: "Closed formulas for the two-level canonical weights, mean energy, entropy and free energy"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [thm-nrqm-fock-and-equilibrium-finite-gibbs-free-energy-minimum, lem-nrqm-composites-rank-one-operator-calculus, thm-cyclicity-of-the-trace, prop-trace-is-linear, cor-exponential-reciprocal-and-positivity, thm-exponential-addition-formula, thm-exponential-is-strictly-increasing, def-natural-logarithm, thm-natural-logarithm-laws, def-hilbert-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-trace-class-operator, def-countable-choice]

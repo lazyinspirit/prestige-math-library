@@ -2,7 +2,7 @@
 id: lem-em-harmonic-forcing-periodic-response
 kind: lemma
 title: "Periodic responses of $\\ddot z=\\operatorname{Re}(we^{-i\\omega t})$ and the affine classification of all solutions"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

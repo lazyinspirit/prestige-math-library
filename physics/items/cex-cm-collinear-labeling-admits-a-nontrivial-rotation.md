@@ -2,7 +2,7 @@
 id: cex-cm-collinear-labeling-admits-a-nontrivial-rotation
 kind: counterexample
 title: "A collinear labeling admits a nontrivial rotation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

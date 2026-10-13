@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-stimulated-dipole-drive-transitions]
 kind: physics-theorem
 domain: physics
 title: "Stimulated dipole-drive transitions of the finite-level model: first-order amplitudes, equal emission and absorption coefficients, and the exact two-level identification"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 16
 deps: [def-nrqm-light-matter-framework-dipole-drive-and-long-wavelength, def-nrqm-light-matter-framework-finite-level-coupled-model, pthm-nrqm-driven-dynamics-first-order-transition-amplitude, pthm-nrqm-driven-dynamics-circular-drive-exact-rabi, pthm-nrqm-driven-dynamics-linear-drive-rotating-wave-error, def-nrqm-driven-dynamics-framework-driven-model, prop-nrqm-orbital-and-spin-finite-spin-matrices, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-preparation-and-apparatus, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-nrqm-framework-quantities-and-units, def-hilbert-space, def-inner-product-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-bounded-linear-operator, def-operator-norm, def-countable-choice, def-axiom-of-choice]

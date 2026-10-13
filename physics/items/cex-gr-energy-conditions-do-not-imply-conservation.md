@@ -2,7 +2,7 @@
 id: cex-gr-energy-conditions-do-not-imply-conservation
 kind: counterexample
 title: "The weak energy condition does not imply conservation of a prescribed stress-energy tensor"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

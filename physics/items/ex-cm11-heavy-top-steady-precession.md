@@ -2,7 +2,7 @@
 id: ex-cm11-heavy-top-steady-precession
 kind: example
 title: "A steady precession of the heavy symmetric top checked on explicit data: the pivot balance, the two conserved momenta and the reduced energy"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

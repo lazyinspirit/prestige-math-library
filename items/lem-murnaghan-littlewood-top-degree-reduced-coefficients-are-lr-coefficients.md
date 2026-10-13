@@ -2,7 +2,7 @@
 id: lem-murnaghan-littlewood-top-degree-reduced-coefficients-are-lr-coefficients
 kind: lemma
 title: "Murnaghan–Littlewood: top-degree reduced coefficients are Littlewood–Richardson coefficients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 12

@@ -1,7 +1,7 @@
 ---
 page: kashiwara-operators-and-crystal-lattices
 title: "Kashiwara Operators and Crystal Lattices"
-status: draft
+status: published
 requires: [divided-powers-integral-forms-and-quantum-highest-weights]
 items: [def-the-local-ring-at-q-zero,
         thm-unique-kashiwara-i-string-decomposition,

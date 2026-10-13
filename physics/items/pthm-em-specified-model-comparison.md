@@ -2,7 +2,7 @@
 id: pthm-em-specified-model-comparison
 kind: physics-theorem
 title: "Conditional predictions and qualified experimental comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

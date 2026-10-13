@@ -2,7 +2,7 @@
 id: def-minimal-complexes-and-perverse-truncations-in-the-type-a-soergel-category
 kind: definition
 title: "Minimal complexes and the perverse truncations in the real type-A Soergel category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

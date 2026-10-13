@@ -2,7 +2,7 @@
 id: thm-cm-rigid-kinetic-energy-and-angular-momentum
 kind: theorem
 title: "Kinetic energy and angular momentum of a rigid placement: $K=\\tfrac12m\\lVert c'\\rVert_2^2+\\tfrac12\\omega^{\\mathsf T}I\\omega$ and $L_c=RI\\omega$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

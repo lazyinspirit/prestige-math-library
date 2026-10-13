@@ -1,7 +1,7 @@
 ---
 page: projective-hodge-polarization-foundations-examples
 title: "Projective Hodge Polarization Foundations Examples"
-status: draft
+status: published
 items: []
 examples:
 - ex-primitive-one-forms-on-a-hermitian-two-plane

@@ -2,7 +2,7 @@
 id: lem-gr-weak-field-geodesic-acceleration
 kind: lemma
 title: "Coordinate-time acceleration of weak-field geodesics: the Newtonian leading term with uniform error"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

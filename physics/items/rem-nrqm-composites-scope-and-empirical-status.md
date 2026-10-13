@@ -5,7 +5,7 @@ kind: remark
 domain: physics
 title: "Scope and empirical status of the composites page: adopted readings,
   derived results, and deferred content"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

@@ -3,7 +3,7 @@ id: pthm-nrqm-photons-fixed-mode-number-and-energy-statistics
 kind: physics-theorem
 title: "Number and energy statistics of a declared mode: number states, coherent
   states and the continuum thermal limitation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 13

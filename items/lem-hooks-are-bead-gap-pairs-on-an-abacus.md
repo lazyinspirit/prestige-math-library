@@ -2,7 +2,7 @@
 id: lem-hooks-are-bead-gap-pairs-on-an-abacus
 kind: lemma
 title: "Hooks are bead-gap pairs on the abacus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

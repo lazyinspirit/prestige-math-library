@@ -2,7 +2,7 @@
 id: thm-compact-kahler-hodge-decomposition-via-elliptic-harmonic-forms
 kind: theorem
 title: "Compact Kähler Hodge decomposition from elliptic harmonic forms"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

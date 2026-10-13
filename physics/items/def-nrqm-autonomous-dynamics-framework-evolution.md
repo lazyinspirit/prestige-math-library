@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "Assigned energy observable, unitary flow and the two pictures of
   autonomous evolution"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps:

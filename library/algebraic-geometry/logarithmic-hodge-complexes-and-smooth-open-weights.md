@@ -1,7 +1,7 @@
 ---
 page: logarithmic-hodge-complexes-and-smooth-open-weights
 title: "Logarithmic Hodge Complexes And Smooth Open Weights"
-status: draft
+status: published
 requires:
   - analytic-constructible-sheaf-foundations
   - chow-groups-intersection-products-and-grothendieck-riemann-roch

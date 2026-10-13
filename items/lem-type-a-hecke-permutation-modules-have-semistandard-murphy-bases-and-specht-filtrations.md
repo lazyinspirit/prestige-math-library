@@ -2,7 +2,7 @@
 id: lem-type-a-hecke-permutation-modules-have-semistandard-murphy-bases-and-specht-filtrations
 kind: lemma
 title: "Type-A Hecke permutation modules: semistandard Murphy bases and Specht filtrations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

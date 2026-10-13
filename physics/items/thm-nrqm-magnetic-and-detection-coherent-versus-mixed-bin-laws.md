@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-coherent-versus-mixed-bin-laws]
 kind: theorem
 domain: mathematics
 title: "Coherent and incoherent two-path bin laws and the marker overlap"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [cor-cauchy-schwarz-inequality-for-l-two, lem-nrqm-composites-marker-overlap-contraction, lem-nrqm-composites-chsh-and-finite-sampling-law, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, thm-monotone-convergence-for-the-integral, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-measure, def-probability-measure, def-hilbert-space, def-countable-choice]

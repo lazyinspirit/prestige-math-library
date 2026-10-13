@@ -2,7 +2,7 @@
 id: pthm-em-general-wave-ivp
 kind: physics-theorem
 title: "Constrained smooth vacuum Maxwell initial-value theory, finite-energy conservation and finite propagation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 19

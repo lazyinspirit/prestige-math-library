@@ -2,7 +2,7 @@
 id: def-cm-averaging-data-and-averaged-field
 kind: definition
 title: "Periodic averaging data: the average field, the oscillatory part and the periodic deviation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

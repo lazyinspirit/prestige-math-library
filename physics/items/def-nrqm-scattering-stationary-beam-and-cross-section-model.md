@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared stationary elastic beam model: incident plane wave,
   scattered wave, current readings and differential and total cross sections"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

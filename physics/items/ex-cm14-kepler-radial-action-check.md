@@ -4,7 +4,7 @@ kind: example
 title: "The gravitational two-body model on an elliptic orbit: two simple
   turning points of the effective potential and $J_{\\mathrm
   a}'(E)=T/(2\\pi)=\\sqrt{\\mu/\\kappa}\\,a^{3/2}$"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 27

@@ -5,7 +5,7 @@ kind: thought-experiment
 domain: physics
 title: "The singlet arrangement: directional sign tables, CHSH value 2 sqrt 2
   and the failure of local-response models at violating settings"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

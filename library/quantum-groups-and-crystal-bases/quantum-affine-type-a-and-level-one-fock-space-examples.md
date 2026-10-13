@@ -1,7 +1,7 @@
 ---
 page: quantum-affine-type-a-and-level-one-fock-space-examples
 title: "Quantum Affine Type A and Level-One Fock Space — Examples"
-status: draft
+status: published
 requires: [quantum-affine-type-a-and-level-one-fock-space]
 items: []
 examples: [ex-level-one-fock-node-actions-for-partitions-up-to-three,

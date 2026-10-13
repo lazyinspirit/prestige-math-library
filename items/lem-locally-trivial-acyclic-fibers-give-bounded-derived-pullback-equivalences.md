@@ -2,7 +2,7 @@
 id: lem-locally-trivial-acyclic-fibers-give-bounded-derived-pullback-equivalences
 kind: lemma
 title: "Acyclic product fibers stabilize bounded constructible pullback Hom"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 14

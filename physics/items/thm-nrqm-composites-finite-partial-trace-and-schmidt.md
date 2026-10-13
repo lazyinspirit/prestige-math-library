@@ -4,7 +4,7 @@ aliases: [nrqm-composites-finite-partial-trace-and-schmidt]
 kind: theorem
 domain: mathematics
 title: "Finite partial trace, Schmidt decomposition and finite no-signalling"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-density-and-scalar-spectral-probability, thm-trace-of-ab-equals-trace-of-ba, def-trace-of-an-endomorphism, def-coordinate-column-and-matrix-of-a-linear-map, thm-singular-value-decomposition, thm-complex-spectral-theorem-for-normal-endomorphisms, thm-spectral-resolution-and-polynomial-spectral-projections, def-self-adjoint-and-normal-endomorphism, def-non-negative-and-positive-operator, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases]

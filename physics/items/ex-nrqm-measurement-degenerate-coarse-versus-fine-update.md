@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Coarse and fine declared measurements of a degenerate subspace: the
   Lueders update is not eigenvector selection"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

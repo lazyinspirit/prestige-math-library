@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-framework-finite-level-coupled-model]
 kind: definition
 domain: physics
 title: "The declared finite-level matter model and its cutoff dipole coupling to the transverse radiation sector"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 14
 deps: [post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-identical-particles-and-spin, post-nrqm-photons-radiation-extension-and-transverse-mode-assignment, post-nrqm-approximations-static-finite-level-dipole-coupling, def-nrqm-framework-quantities-and-units, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-photons-framework-radiation-sector-and-quantum-assignments, def-nrqm-identical-particles-framework-species-sectors-and-preparations, thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound, thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian, thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-fock-sector-projections, thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains, def-hilbert-space, def-bounded-linear-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-inner-product-space, def-countable-choice, def-axiom-of-choice, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-hilbert-orthogonal-projection, def-nrqm-autonomous-dynamics-framework-evolution]

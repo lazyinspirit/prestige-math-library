@@ -2,7 +2,7 @@
 id: lem-gr-proper-time-reparametrization-and-four-velocity
 kind: lemma
 title: "Proper time is well defined and reparametrization invariant; the four-velocity is its proper-time tangent"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

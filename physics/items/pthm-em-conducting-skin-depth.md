@@ -2,7 +2,7 @@
 id: pthm-em-conducting-skin-depth
 kind: physics-theorem
 title: "Conducting-medium propagation: the exact attenuation constant, the skin depth and its good- and poor-conductor regimes"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 19

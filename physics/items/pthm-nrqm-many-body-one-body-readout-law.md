@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The one-body readout law: sector means of summed bounded one-particle
   quantities and their reduced forms"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

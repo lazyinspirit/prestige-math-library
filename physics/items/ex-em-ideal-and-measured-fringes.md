@@ -2,7 +2,7 @@
 id: ex-em-ideal-and-measured-fringes
 kind: example
 title: "An ideal electric-field zero and a declared detector-bin response"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

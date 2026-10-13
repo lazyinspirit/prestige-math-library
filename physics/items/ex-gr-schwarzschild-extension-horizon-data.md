@@ -2,7 +2,7 @@
 id: ex-gr-schwarzschild-extension-horizon-data
 kind: example
 title: "Explicit metric, orientation and curvature data of the advanced-chart extension at the horizon r = s"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 15

@@ -2,7 +2,7 @@
 id: def-tensor-product-of-crystals
 kind: definition
 title: "The tensor product crystal $B_1\\otimes B_2$ and its two-case convention"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

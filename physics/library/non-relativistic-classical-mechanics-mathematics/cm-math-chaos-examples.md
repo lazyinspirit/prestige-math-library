@@ -1,7 +1,7 @@
 ---
 page: cm-math-chaos-examples
 title: Cm Math Chaos — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-chaos-contraction-and-coded-fixed-sequence-checks

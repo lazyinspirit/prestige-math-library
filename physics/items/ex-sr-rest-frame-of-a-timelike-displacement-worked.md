@@ -2,7 +2,7 @@
 id: ex-sr-rest-frame-of-a-timelike-displacement-worked
 kind: example
 title: "Worked rest frame of the future timelike displacement (5,3,0,0)"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

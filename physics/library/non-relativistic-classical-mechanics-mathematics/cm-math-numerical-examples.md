@@ -1,7 +1,7 @@
 ---
 page: cm-math-numerical-examples
 title: 'Verlet: worked examples'
-status: draft
+status: published
 library: mathematics
 items:
   - ex-cm-verlet-map-of-the-harmonic-oscillator

@@ -2,7 +2,7 @@
 id: ex-level-one-charge-zero-crystal-through-rank-four-at-e-three
 kind: example
 title: "The charge-zero level-one crystal through rank four at e = 3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

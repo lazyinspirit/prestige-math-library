@@ -2,7 +2,7 @@
 id: lem-gr-compact-past-above-cauchy-set
 kind: lemma
 title: "The causal past of a point truncated by the causal future of the initial Cauchy surface is compact"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 27

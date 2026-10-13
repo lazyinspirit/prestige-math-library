@@ -2,7 +2,7 @@
 id: thm-cm-finite-time-linearization-error-bound
 kind: theorem
 title: "Finite-time linearization error bound: quadratic remainder, exponential growth bound and the variation-of-constants estimate"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

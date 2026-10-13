@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-finite-gapped-adiabatic-estimate]
 kind: theorem
 domain: mathematics
 title: "Finite gapped adiabatic estimate"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-cauchy-integral-formula-circle, def-self-adjoint-and-normal-endomorphism, def-operator-norm, def-bounded-linear-operator, def-hilbert-space, def-countable-choice]

@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The canonical preparation as the unique free-energy minimiser of the
   declared finite-sector model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

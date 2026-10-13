@@ -2,7 +2,7 @@
 id: post-em-stationary-action-model
 kind: postulate
 title: "Adopt stationary Maxwell action as alternative physical formulation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

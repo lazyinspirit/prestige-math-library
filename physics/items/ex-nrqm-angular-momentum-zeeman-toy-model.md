@@ -4,7 +4,7 @@ aliases: [nrqm-angular-momentum-zeeman-toy-model]
 kind: example
 domain: physics
 title: "The two-level Zeeman toy model: sector energies, level splitting and spin precession"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps: [def-axiom-of-choice, def-countable-choice, def-inner-product-space, def-nrqm-angular-momentum-framework-angular-momentum-observables, def-nrqm-autonomous-dynamics-framework-evolution, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-operator-norm, lem-exponential-series-of-a-bounded-operator, post-nrqm-angular-momentum-magnetic-moment-coupling, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-observable-and-probability, post-nrqm-framework-preparation-and-apparatus, post-nrqm-framework-state-and-composition, prop-nrqm-orbital-and-spin-finite-spin-matrices, pthm-nrqm-angular-momentum-zeeman-precession]

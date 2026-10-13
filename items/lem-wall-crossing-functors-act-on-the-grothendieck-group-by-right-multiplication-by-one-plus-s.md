@@ -2,7 +2,7 @@
 id: lem-wall-crossing-functors-act-on-the-grothendieck-group-by-right-multiplication-by-one-plus-s
 kind: lemma
 title: The wall-crossing action on the Grothendieck group is multiplication by 1+s
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

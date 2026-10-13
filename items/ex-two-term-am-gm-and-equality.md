@@ -2,7 +2,7 @@
 id: ex-two-term-am-gm-and-equality
 kind: example
 title: "The two-term AM-GM inequality, its equality case, and $x + x^{-1} \\ge 2$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

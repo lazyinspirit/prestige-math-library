@@ -2,7 +2,7 @@
 id: lem-em-vacuum-region-of-conductors-is-a-bounded-smooth-domain
 kind: lemma
 title: "The vacuum region around compact smooth conductors is a bounded smooth domain"
-status: draft
+status: published
 origin: session
 dependency_level: 1
 domain: mathematics

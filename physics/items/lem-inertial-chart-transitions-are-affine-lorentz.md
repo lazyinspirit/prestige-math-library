@@ -2,7 +2,7 @@
 id: lem-inertial-chart-transitions-are-affine-lorentz
 kind: lemma
 title: Inertial charts are related by proper orthochronous affine Lorentz maps, and every such map is a chart transition
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

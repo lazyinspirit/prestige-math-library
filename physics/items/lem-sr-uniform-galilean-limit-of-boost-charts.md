@@ -3,7 +3,7 @@ id: lem-sr-uniform-galilean-limit-of-boost-charts
 kind: lemma
 domain: mathematics
 title: 'Uniform Galilean limit of the boost charts on bounded regions, and its failure on the whole chart domain'
-status: draft
+status: published
 origin: session
 dependency_level: 9
 deps: [def-sr-galilean-limiting-charts, lem-sr-uniform-low-speed-taylor-remainder, thm-cauchy-schwarz-finite, lem-of-triangle-inequality, def-abs-value, lem-of-abs-value, def-spatial-euclidean-structure-of-an-inertial-frame, def-rational-power, cor-triangle-inequality-for-inner-product-norm, lem-rational-power-monotone, lem-rational-power-laws, lem-of-inverse-positive, thm-of-square-roots]

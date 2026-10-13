@@ -2,7 +2,7 @@
 id: cex-gr-half-trace-subtraction-on-the-rest-space
 kind: counterexample
 title: "The half-trace subtraction with the rank-three spatial projector is not trace-free"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

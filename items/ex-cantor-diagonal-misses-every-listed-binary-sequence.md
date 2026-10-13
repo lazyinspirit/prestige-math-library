@@ -2,7 +2,7 @@
 id: ex-cantor-diagonal-misses-every-listed-binary-sequence
 kind: example
 title: "Cantor diagonal construction misses every prescribed list of binary sequences"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

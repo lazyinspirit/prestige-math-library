@@ -2,7 +2,7 @@
 id: pthm-cm04-harmonic-motion
 kind: physics-theorem
 title: "The motions of the harmonic model are the sinusoids $A\\cos(\\omega(t-t_0))+B\\sin(\\omega(t-t_0))$: amplitude and phase, the least period, the conserved energy $kR^2/2$ and the elliptical phase curves"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

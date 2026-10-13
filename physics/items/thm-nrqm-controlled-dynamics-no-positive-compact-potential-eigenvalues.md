@@ -4,7 +4,7 @@ aliases: [ nrqm-controlled-dynamics-no-positive-compact-potential-eigenvalues ]
 kind: theorem
 domain: mathematics
 title: "No positive compact-potential eigenvalues"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps:

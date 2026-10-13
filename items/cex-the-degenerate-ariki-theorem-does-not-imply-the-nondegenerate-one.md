@@ -2,7 +2,7 @@
 id: cex-the-degenerate-ariki-theorem-does-not-imply-the-nondegenerate-one
 kind: counterexample
 title: "The generic Hecke algebra comparison does not extend to every parameter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 44

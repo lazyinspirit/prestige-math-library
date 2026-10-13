@@ -2,7 +2,7 @@
 id: def-good-and-cogood-nodes-by-residue-signature-reduction
 kind: definition
 title: "Good and cogood nodes by residue-signature reduction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

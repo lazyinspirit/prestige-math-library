@@ -2,7 +2,7 @@
 id: ex-the-rank-two-bott-samelson-bimodule-and-its-character-decomposition
 kind: example
 title: "The rank-two Bott-Samelson bimodule B_sB_t: character, decomposition and the braid relation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

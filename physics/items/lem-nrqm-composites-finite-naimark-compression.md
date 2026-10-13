@@ -4,7 +4,7 @@ aliases: [nrqm-composites-finite-naimark-compression]
 kind: lemma
 domain: mathematics
 title: "Finite Naimark compression: a finite POVM as a compression of a PVM"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-finite-effects-and-instruments, thm-continuous-functional-calculus-for-bounded-self-adjoint-operators, def-borel-functional-calculus-for-a-bounded-normal-operator, def-hilbert-orthogonal-projection, lem-orthogonal-projection-is-linear-self-adjoint-contractive, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

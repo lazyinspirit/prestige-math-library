@@ -2,7 +2,7 @@
 id: thm-cm-burgers-characteristics-and-gradient-blowup
 kind: theorem
 title: "The method of characteristics for $u_t+uu_x=0$ and the finite blow-up time of the gradient"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

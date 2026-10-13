@@ -2,7 +2,7 @@
 id: rem-no-general-positive-combinatorial-rule-for-kronecker-coefficients-is-known
 kind: remark
 title: No general positive combinatorial rule for Kronecker coefficients is known
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

@@ -4,7 +4,7 @@ aliases: [ nrqm-kinematics-scope-and-empirical-status ]
 kind: remark
 domain: physics
 title: "Scope and empirical status of the massive-particle kinematics items"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

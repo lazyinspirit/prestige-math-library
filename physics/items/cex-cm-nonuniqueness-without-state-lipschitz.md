@@ -3,7 +3,7 @@ id: cex-cm-nonuniqueness-without-state-lipschitz
 kind: counterexample
 title: "Continuity alone does not give uniqueness: $x'=\\sqrt{|x|}$ through the
   origin"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

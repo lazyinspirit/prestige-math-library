@@ -2,7 +2,7 @@
 id: prop-weight-zero-symmetric-group-blocks-are-defect-zero
 kind: proposition
 title: "Weight-zero symmetric-group blocks are defect zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

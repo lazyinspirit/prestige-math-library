@@ -2,7 +2,7 @@
 id: pthm-cm03-energy-balance
 kind: physics-theorem
 title: "Mechanical energy balance for a potential presentation: $E'=\\partial_tU$ plus the residual power, conservation for a static potential with no residual forces, and the integrated work form"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

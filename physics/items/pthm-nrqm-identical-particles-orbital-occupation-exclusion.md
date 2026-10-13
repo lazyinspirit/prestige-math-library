@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Pauli exclusion in the declared finite-mode occupation readout, with the
   bosonic contrast"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

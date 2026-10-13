@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Orbital angular momentum eigenfunctions: the low spherical harmonics of
   the massive model"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

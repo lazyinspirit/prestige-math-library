@@ -2,7 +2,7 @@
 id: lem-fluid-energy-common-lifespan
 kind: lemma
 title: "The higher-order energy inequality and a common Galerkin lifespan with $\\|u_N(t)\\|_{H^s}\\le2Y_0$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

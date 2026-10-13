@@ -2,7 +2,7 @@
 id: ex-cm-chaos-finite-word-homoclinic-code-checks
 kind: example
 title: "The single-flip code at $a=100$: a nonperiodic coded orbit converging to the fixed point at both ends"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 8

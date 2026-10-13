@@ -2,7 +2,7 @@
 id: cor-cm-hamiltonian-flow-preserves-phase-volume
 kind: corollary
 title: "A Hamiltonian local flow on a phase domain preserves Lebesgue measure on its flow domain"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

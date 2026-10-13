@@ -2,7 +2,7 @@
 id: thm-cm-compact-continuation-for-locally-lipschitz-odes
 kind: theorem
 title: "Compact continuation for locally Lipschitz ODEs: a solution whose graph stays in a compact subset of the domain near a finite endpoint extends past it"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

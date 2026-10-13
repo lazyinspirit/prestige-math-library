@@ -4,7 +4,7 @@ kind: physics-theorem
 title: "Linearization of the torque-free spin of the rigid-material model at a
   principal-axis spin: the oscillatory/exponential dichotomy and linear
   stability"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

@@ -2,7 +2,7 @@
 id: lem-schur-specialization-coproduct-and-plethysm-identities
 kind: lemma
 title: "Schur functions on sums and products of alphabets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-sr-orthogonal-complement-of-a-timelike-vector
 kind: example
 title: "Worked orthogonal complement of a timelike displacement is positive definite"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

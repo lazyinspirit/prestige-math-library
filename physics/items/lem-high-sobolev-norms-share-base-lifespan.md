@@ -2,7 +2,7 @@
 id: lem-high-sobolev-norms-share-base-lifespan
 kind: lemma
 title: "Finite initial higher Sobolev norms give uniform Galerkin bounds on the common base interval"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

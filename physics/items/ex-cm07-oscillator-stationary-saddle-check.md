@@ -2,7 +2,7 @@
 id: ex-cm07-oscillator-stationary-saddle-check
 kind: example
 title: "The harmonic oscillator on a long interval: the stationary curve is neither a local minimum nor a local maximum"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

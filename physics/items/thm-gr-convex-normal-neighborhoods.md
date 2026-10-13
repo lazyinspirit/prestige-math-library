@@ -2,7 +2,7 @@
 id: thm-gr-convex-normal-neighborhoods
 kind: theorem
 title: "Existence of strictly convex normal neighborhoods: small coordinate balls are normal neighborhoods of each of their points"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

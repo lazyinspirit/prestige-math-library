@@ -2,7 +2,7 @@
 id: ex-an-explicit-well-ordering-of-the-integers
 kind: example
 title: "An explicit well-ordering of the integers: $0\\prec1\\prec-1\\prec2\\prec-2\\prec\\cdots$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

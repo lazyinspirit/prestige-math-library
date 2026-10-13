@@ -2,7 +2,7 @@
 id: pthm-em-covariant-stress-energy
 kind: physics-theorem
 title: "The covariant field stress-energy tensor and its balance law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

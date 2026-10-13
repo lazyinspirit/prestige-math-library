@@ -2,7 +2,7 @@
 id: cex-sum-of-divergent-sequences-converges
 kind: counterexample
 title: "The sum of two divergent sequences can converge: $k + (-k)$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

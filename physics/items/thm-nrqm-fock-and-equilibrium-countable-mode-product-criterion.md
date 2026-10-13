@@ -4,7 +4,7 @@ aliases: [ nrqm-fock-and-equilibrium-countable-mode-product-criterion ]
 kind: theorem
 domain: mathematics
 title: "Countable-mode product criterion"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps:

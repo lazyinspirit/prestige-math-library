@@ -2,7 +2,7 @@
 id: lem-hh-type-a-tensor-operator-is-a-hecke-symmetry
 kind: lemma
 title: "The ordered-basis operator is a Hecke symmetry"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 1

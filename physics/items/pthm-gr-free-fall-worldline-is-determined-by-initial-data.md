@@ -2,7 +2,7 @@
 id: pthm-gr-free-fall-worldline-is-determined-by-initial-data
 kind: physics-theorem
 title: "The free-fall worldline of an ideal test body is determined by its initial event and four-velocity"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

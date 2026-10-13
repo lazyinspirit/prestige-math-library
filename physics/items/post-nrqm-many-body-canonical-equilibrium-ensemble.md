@@ -5,7 +5,7 @@ kind: postulate
 domain: physics
 title: "The canonical equilibrium-ensemble assumption: the Gibbs preparation of
   a declared model at assigned temperature"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

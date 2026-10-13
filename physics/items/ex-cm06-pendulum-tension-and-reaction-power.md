@@ -2,7 +2,7 @@
 id: ex-cm06-pendulum-tension-and-reaction-power
 kind: example
 title: "The planar pendulum as an ideal holonomic model: the multiplier, the tension and the vanishing reaction power of a scleronomic constraint"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

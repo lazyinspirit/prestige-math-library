@@ -1,7 +1,7 @@
 ---
 page: kronecker-coefficients-and-internal-products
 title: "Kronecker Coefficients and Internal Products"
-status: draft
+status: published
 requires:
   - frobenius-characteristic-and-the-symmetric-group-character-dictionary
   - specht-modules-and-the-irreducibles-of-the-symmetric-group

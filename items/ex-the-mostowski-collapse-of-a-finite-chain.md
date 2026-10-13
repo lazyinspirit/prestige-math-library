@@ -2,7 +2,7 @@
 id: ex-the-mostowski-collapse-of-a-finite-chain
 kind: example
 title: "The Mostowski collapse of a finite chain computes its order type"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

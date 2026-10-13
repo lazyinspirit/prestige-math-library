@@ -2,7 +2,7 @@
 id: post-cm04-linear-damping-model
 kind: postulate
 title: "The damped oscillator model: a harmonic restoring force with a phenomenological linear drag $-c\\dot x$, $c\\ge0$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

@@ -2,7 +2,7 @@
 id: ex-subsequences-of-a-null-sequence
 kind: example
 title: "Even and odd subsequences of $1/(k+1)$ converge to $0$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -4,7 +4,7 @@ kind: physics-theorem
 title: "The Hamiltonian evolution of a potential presentation preserves the
   two-form, the bracket and the determinant on its actual time-slice domains,
   also when the Hamiltonian depends on time"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 21

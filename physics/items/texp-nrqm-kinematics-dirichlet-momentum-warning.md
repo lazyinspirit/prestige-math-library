@@ -5,7 +5,7 @@ kind: thought-experiment
 domain: physics
 title: "A confined model with Dirichlet walls: the naive interval momentum is
   not a sharp observable"
-status: draft
+status: published
 origin: session
 dependency_level: 8
 deps:

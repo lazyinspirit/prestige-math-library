@@ -2,7 +2,7 @@
 id: pthm-cm08-time-energy
 kind: physics-theorem
 title: "Time translation and the mechanical energy of the model: conservation in the autonomous global potential branch and the sharp failure for a time-dependent potential"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-delta-unique-bound-state]
 kind: theorem
 domain: mathematics
 title: "The unique negative eigenvalue of the attractive delta interface operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-weak-derivative-ac-representative, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, thm-nrqm-intervals-delta-interface-operator, thm-derivative-of-exponential, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

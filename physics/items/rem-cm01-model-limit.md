@@ -2,7 +2,7 @@
 id: rem-cm01-model-limit
 kind: remark
 title: "Status audit and model limits of the framework page: primitive data, adopted assumptions, derived objects and what is not claimed"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

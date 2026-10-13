@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-example-repeated-orbital-fermion-exclusion]
 kind: example
 domain: mathematics
 title: "Repeated-orbital fermion exclusion"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [thm-nrqm-fock-and-equilibrium-slater-direct-and-exchange-calculation, thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-composites-permutation-sector-projections, lem-nrqm-composites-hilbert-tensor-construction, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

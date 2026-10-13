@@ -1,7 +1,7 @@
 ---
 page: murnaghan-stability-via-fi-modules
 title: "Murnaghan Stability via FI-Modules"
-status: draft
+status: published
 items: [def-lambda-ring-specializations-and-the-sigma-series,
         def-iterated-schur-coefficients,
         def-first-row-padding-completion-and-the-stabilization-operator,

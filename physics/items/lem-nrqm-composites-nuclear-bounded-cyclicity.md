@@ -4,7 +4,7 @@ aliases: [nrqm-composites-nuclear-bounded-cyclicity]
 kind: lemma
 domain: mathematics
 title: "Nuclear bounded cyclicity for trace-class operators"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [thm-hilbert-adjoint-properties, def-trace-class-operator, lem-nrqm-composites-rank-one-operator-calculus, lem-nuclear-series-characterizes-trace-norm, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-is-absolutely-convergent-and-basis-independent, def-hilbert-space-adjoint, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-countable-choice]

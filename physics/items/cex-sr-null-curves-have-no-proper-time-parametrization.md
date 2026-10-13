@@ -2,7 +2,7 @@
 id: cex-sr-null-curves-have-no-proper-time-parametrization
 kind: counterexample
 title: "Counterexample: a future null curve has no proper-time parametrization"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 9

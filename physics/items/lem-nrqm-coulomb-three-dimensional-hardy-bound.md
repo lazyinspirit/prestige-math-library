@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-three-dimensional-hardy-bound]
 kind: lemma
 domain: mathematics
 title: "Three-dimensional Hardy bound"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [lem-schwartz-cutoffs-from-the-standard-smooth-step, def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, cor-cauchy-schwarz-inequality-for-l-two, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-divergence-theorem-for-bounded-piecewise-c-one-domains, cor-vector-forms-of-the-divergence-theorem, thm-dominated-convergence, thm-complex-lp-completeness-and-almost-everywhere-subsequences, def-countable-choice]

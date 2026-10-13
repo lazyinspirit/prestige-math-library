@@ -5,7 +5,7 @@ title: "Repulsive Coulomb scattering in the model class: global non-colliding
   motion, the deflection map $\\theta=2\\arctan(\\kappa/(2Eb))$, the Rutherford
   density $(\\kappa/4E)^2\\csc^4(\\theta/2)$, finite angular cutoffs and the
   divergent ideal total"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

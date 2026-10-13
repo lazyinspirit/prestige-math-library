@@ -4,7 +4,7 @@ aliases: [nrqm-approximations-examples-scope-limits]
 kind: remark
 domain: physics
 title: "What the controlled-approximations examples establish and what they do not"
-status: draft
+status: published
 origin: session
 dependency_level: 16
 deps: [ex-nrqm-approximations-two-level-finite-gap-correction, ex-nrqm-approximations-stark-finite-level-shift, ex-nrqm-approximations-zeeman-multiplet-splitting, ex-nrqm-approximations-smooth-barrier-tunnelling-limits, pthm-nrqm-approximations-nondegenerate-perturbation-expansion, pthm-nrqm-approximations-degenerate-first-order-splitting, pthm-nrqm-approximations-barrier-transmission-asymptotics, post-nrqm-approximations-static-finite-level-dipole-coupling, rem-nrqm-approximations-scope-and-empirical-status]

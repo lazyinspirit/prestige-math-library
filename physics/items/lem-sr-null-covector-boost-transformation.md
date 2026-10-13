@@ -2,7 +2,7 @@
 id: lem-sr-null-covector-boost-transformation
 kind: lemma
 title: 'Boost transformation of a future null wave covector and of its frame data'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-affine-phase-and-wave-covector,

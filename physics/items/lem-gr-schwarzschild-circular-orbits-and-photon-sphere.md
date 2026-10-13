@@ -3,7 +3,7 @@ id: lem-gr-schwarzschild-circular-orbits-and-photon-sphere
 kind: lemma
 title: "Circular timelike geodesics, their radial-potential stability threshold,
   and the photon sphere at r = 3s/2"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

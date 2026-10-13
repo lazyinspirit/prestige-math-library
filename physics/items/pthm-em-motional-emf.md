@@ -3,7 +3,7 @@ id: pthm-em-motional-emf
 kind: physics-theorem
 title: "Motional emf for a moving material circuit: emf = -flux derivative"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 19
 proof_strategy: direct

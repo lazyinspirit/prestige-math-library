@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-weighted-angular-completeness]
 kind: theorem
 domain: mathematics
 title: "Weighted angular completeness"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [thm-nrqm-orbital-and-spin-legendre-rodrigues-equation, thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-real-stone-weierstrass-general, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-factorial-and-falling-factorial, lem-derivative-of-a-power, def-natural-numbers, def-countable-choice]

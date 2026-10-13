@@ -3,7 +3,7 @@ id: lem-em-zero-boundary-coercivity
 kind: lemma
 domain: mathematics
 title: "The gradient norm dominates the H-one norm on zero-boundary Sobolev space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

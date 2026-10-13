@@ -2,7 +2,7 @@
 id: pthm-cm06-rheonomic-power
 title: "Reaction work and mechanical-energy balance for ideal holonomic constraints: vanishing power for scleronomic constraints and the rheonomic work term"
 kind: physics-theorem
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

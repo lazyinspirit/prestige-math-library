@@ -2,7 +2,7 @@
 id: def-nrqm-framework-inertial-frames
 kind: definition
 title: "Inertial frames of the framework and the class of frame changes"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 5

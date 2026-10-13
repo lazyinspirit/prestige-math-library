@@ -2,7 +2,7 @@
 id: thm-gr-minkowski-cauchy-and-global-hyperbolicity
 kind: theorem
 title: "The flat model is globally hyperbolic and its inertial level sets are Cauchy hypersurfaces"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

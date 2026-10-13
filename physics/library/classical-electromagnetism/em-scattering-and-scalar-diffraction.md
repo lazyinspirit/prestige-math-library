@@ -1,7 +1,7 @@
 ---
 page: em-scattering-and-scalar-diffraction
 title: "Vector PEC scattering, dipole limits and controlled scalar diffraction"
-status: draft
+status: published
 items: [def-em-monochromatic-source-free-phasors,
         lem-em-phasor-real-part-calculus-and-equivalence,
         lem-em-harmonic-forcing-periodic-response,

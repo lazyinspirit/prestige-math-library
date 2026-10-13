@@ -4,7 +4,7 @@ aliases: [ nrqm-coulomb-two-body-reduced-mass ]
 kind: theorem
 domain: mathematics
 title: "Two-body reduced mass"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

@@ -2,7 +2,7 @@
 id: pthm-em-material-stationary-jumps
 kind: physics-theorem
 title: "Stationary macroscopic interface jump conditions for D, B, E and H"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 16

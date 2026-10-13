@@ -2,7 +2,7 @@
 id: def-stable-unstable-cones-and-line-slopes
 kind: definition
 title: "Stable and unstable cones, invariant line slopes, stable and unstable sets, and transverse homoclinic points of the quadratic family"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

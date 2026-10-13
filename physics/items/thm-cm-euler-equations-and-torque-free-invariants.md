@@ -4,7 +4,7 @@ kind: theorem
 title: "Euler's equations $I\\omega'+\\omega\\times I\\omega=R^{\\mathsf
   T}\\tau$ under an adopted torque balance, and the torque-free invariants and
   principal-axis equations"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

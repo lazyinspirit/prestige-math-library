@@ -6,7 +6,7 @@ domain: mathematics
 title: "The first-order emitted-photon energy law: factorised kernel,
   normalisation, concentration at the transition energy and positivity on
   positive-measure windows"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps:

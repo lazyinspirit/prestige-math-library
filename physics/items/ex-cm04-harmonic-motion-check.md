@@ -2,7 +2,7 @@
 id: ex-cm04-harmonic-motion-check
 kind: example
 title: "A harmonic model on explicit data: the sinusoid, its least period, the conserved energy and the phase ellipse checked at $m=1$, $k=4$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

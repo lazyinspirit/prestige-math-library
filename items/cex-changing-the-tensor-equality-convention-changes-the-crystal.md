@@ -2,7 +2,7 @@
 id: cex-changing-the-tensor-equality-convention-changes-the-crystal
 kind: counterexample
 title: "Changing the equality case in the tensor rule breaks the partial-inverse axiom"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

@@ -2,7 +2,7 @@
 id: lem-sr-connecting-field-stretching
 kind: lemma
 title: "The material metric of a congruence: evolution of rest separations and preservation of the internal metric under Born rigidity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 13

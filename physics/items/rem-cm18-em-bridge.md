@@ -2,7 +2,7 @@
 id: rem-cm18-em-bridge
 kind: remark
 title: "The electromagnetic bridge: what a charged-particle coupling must add to the framework, what the force branch then yields, and what is not imported"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps: [def-cm18-observable-model, def-cm01-units, post-cm01-worldlines, post-cm02-force-superposition, post-cm02-interactions, def-cm02-newtonian-flow, pthm-cm02-ivp, pthm-cm02-continuation, rem-cm02-open-system-warning, def-cm03-centre-of-mass-and-momenta, pthm-cm03-frame-transformations, rem-cm03-conservation-scope]

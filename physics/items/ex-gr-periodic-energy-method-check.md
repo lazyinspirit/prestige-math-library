@@ -2,7 +2,7 @@
 id: ex-gr-periodic-energy-method-check
 kind: example
 title: "Worked E0 check: constant-coefficient transport on the three-torus, explicit solution and conserved energy"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

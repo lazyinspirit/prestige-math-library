@@ -2,7 +2,7 @@
 id: def-lorentz-form-and-inertia
 kind: definition
 title: "Lorentz forms of inertia (3,1,0) on a 4-dimensional real vector space"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

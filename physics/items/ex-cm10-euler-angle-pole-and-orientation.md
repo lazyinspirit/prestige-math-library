@@ -2,7 +2,7 @@
 id: ex-cm10-euler-angle-pole-and-orientation
 kind: example
 title: "The Euler-angle pole: a degenerate parametrization of $SO(3)$ while the physical orientation remains regular"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

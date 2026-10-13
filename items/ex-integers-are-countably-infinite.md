@@ -2,7 +2,7 @@
 id: ex-integers-are-countably-infinite
 kind: example
 title: "The integers are countably infinite: $\\mathbb{Z} \\approx \\mathbb{N}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

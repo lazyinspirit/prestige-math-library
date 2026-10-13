@@ -4,7 +4,7 @@ kind: physics-theorem
 domain: physics
 dependency_level: 17
 title: "Uniform Coulomb dipole expansion of a compactly supported charge density with an explicit remainder"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

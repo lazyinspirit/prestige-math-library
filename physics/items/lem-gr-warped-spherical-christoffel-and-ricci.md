@@ -2,7 +2,7 @@
 id: lem-gr-warped-spherical-christoffel-and-ricci
 kind: lemma
 title: "The warped product of a two-dimensional Lorentzian base with a round sphere: Christoffel symbols and Ricci tensor"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

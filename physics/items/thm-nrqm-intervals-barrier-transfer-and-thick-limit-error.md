@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-barrier-transfer-and-thick-limit-error]
 kind: theorem
 domain: mathematics
 title: "Rectangular barrier: transmission coefficients and the thick-barrier error"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-complex-trigonometric-and-hyperbolic-functions, def-complex-exponential, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-complex-exponential-addition-and-real-extension, cor-complex-trigonometric-and-hyperbolic-addition-formulas, cor-complex-trigonometric-and-hyperbolic-derivatives, thm-derivative-of-exponential, thm-termwise-differentiation-of-complex-power-series, def-continuity-real, def-derivative, def-countable-choice]

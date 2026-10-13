@@ -2,7 +2,7 @@
 id: ex-cm09-double-pendulum-linear-modes
 kind: example
 title: "The equal-arm double pendulum in the linear approximation: the slow same-side mode, the fast opposite-side mode and the bounded modal motions"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

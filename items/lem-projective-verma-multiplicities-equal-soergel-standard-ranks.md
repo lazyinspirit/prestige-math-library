@@ -2,7 +2,7 @@
 id: lem-projective-verma-multiplicities-equal-soergel-standard-ranks
 kind: lemma
 title: "Projective Verma multiplicities equal Soergel standard ranks"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

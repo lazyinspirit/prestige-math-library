@@ -1,7 +1,7 @@
 ---
 page: cm09-coupled-oscillations-and-approximation-examples
 title: "Coupled oscillations and approximation — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

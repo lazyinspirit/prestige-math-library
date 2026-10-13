@@ -1,7 +1,7 @@
 ---
 page: em-magnetostatics-in-vacuum
 title: "Magnetostatics in vacuum"
-status: draft
+status: published
 library: physics
 items: [lem-em-ideal-cylindrical-sheet-field, lem-em-ideal-line-current-field, lem-em-newtonian-kernel-curl-identity, def-em-steady-current-regime, post-em-ideal-magnetostatic-models, def-em-magnetic-moment, pthm-em-magnetostatic-vector-potential, pthm-em-biot-savart, pthm-em-magnetic-dipole-field, pthm-em-magnetic-loop-force-torque]
 examples: []

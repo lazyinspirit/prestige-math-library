@@ -2,7 +2,7 @@
 id: cex-cm-radial-kepler-collision
 kind: counterexample
 title: "A zero-angular-momentum Kepler trajectory reaches the force centre in finite time, refuting unconditional global existence"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

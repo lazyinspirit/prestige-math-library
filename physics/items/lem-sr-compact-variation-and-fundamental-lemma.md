@@ -2,7 +2,7 @@
 id: lem-sr-compact-variation-and-fundamental-lemma
 kind: lemma
 title: "Compact-support variation: the fundamental lemma, integration by parts and differentiation under the integral sign"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [lem-euclidean-bump-for-a-compact-set-inside-an-open-set, thm-multidimensional-integral-properties, thm-continuous-on-a-rectangle-is-riemann-integrable, def-multidimensional-darboux-integral, thm-jordan-content-and-indicator-integrability, thm-riemann-fubini-on-product-rectangles, thm-ftc-second-part, thm-algebra-of-derivatives, thm-differentiation-under-the-integral-sign-on-a-compact-rectangle, thm-heine-cantor-metric, def-support-and-compactly-supported-riemann-integral-in-rn, lem-compactly-supported-riemann-integral-is-well-defined, def-directional-and-partial-derivatives, def-inertial-frame-and-inertial-chart, def-sr-affine-minkowski-model, lem-algebra-of-continuous-real-maps-on-a-space, thm-heine-borel-rn]

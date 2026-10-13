@@ -2,7 +2,7 @@
 id: thm-quasi-r-tensor-bars-on-finite-products-of-based-integrable-modules
 kind: theorem
 title: "Tensor bars on finite products of based integrable modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

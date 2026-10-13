@@ -3,7 +3,7 @@ id: pthm-gr-flrw-power-law-solutions
 kind: physics-theorem
 title: "The flat barotropic power-law solutions of the homogeneous cosmological
   field equations"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

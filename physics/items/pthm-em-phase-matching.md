@@ -2,7 +2,7 @@
 id: pthm-em-phase-matching
 kind: physics-theorem
 title: "Phase matching at a plane interface: common tangential wavevector and frequency, the reflection law and Snell's law"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 19

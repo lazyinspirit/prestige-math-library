@@ -2,7 +2,7 @@
 id: cex-sr-transverse-doppler-is-not-unshifted
 kind: counterexample
 title: 'Counterexample: a transverse wave configuration need not have zero Doppler shift'
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: 'Counterexample to a universal transverse-Doppler claim within the ideal plane-wave model of flat classical special-relativistic spacetime at relative speed (3/5)c. Conditional on the model; no measurement, statistical inference or empirical falsification.'

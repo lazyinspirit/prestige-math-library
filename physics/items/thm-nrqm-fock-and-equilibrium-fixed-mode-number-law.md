@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-fixed-mode-number-law]
 kind: theorem
 domain: mathematics
 title: "Fixed-mode number law"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-fock-sector-projections, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains, thm-nrqm-fock-and-equilibrium-number-operator-domain, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, def-complex-exponential, lem-complex-exponential-series-converges-everywhere, thm-ratio-test, def-hilbert-space, def-countable-choice, thm-complex-exponential-addition-and-real-extension]

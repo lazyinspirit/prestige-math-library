@@ -2,7 +2,7 @@
 id: def-cm18-calibration
 kind: definition
 title: "Calibration of a mechanical apparatus against the primitive standards of the framework: reference inputs, deviations, rules and calibrated prediction maps"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps: [def-cm18-observable-model, def-cm-calibration-rule, def-cm01-units, post-cm01-spacetime, post-cm01-worldlines, def-random-element-and-real-random-variable]

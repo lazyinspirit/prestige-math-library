@@ -2,7 +2,7 @@
 id: rem-cm07-scope-and-singular-warnings
 kind: remark
 title: "Scope of the stationary-action formulation: no minimisation, regular mechanical Lagrangians, no general velocity-constraint equivalence and empirical status"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

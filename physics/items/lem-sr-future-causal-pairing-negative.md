@@ -2,7 +2,7 @@
 id: lem-sr-future-causal-pairing-negative
 kind: lemma
 title: 'A future timelike vector pairs negatively with every nonzero future causal vector'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-lorentz-form-and-inertia, def-causal-classification-of-lorentz-vectors,

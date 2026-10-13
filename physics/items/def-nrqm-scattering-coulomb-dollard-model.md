@@ -4,7 +4,7 @@ aliases: [nrqm-scattering-coulomb-dollard-model]
 kind: definition
 domain: physics
 title: "The declared long-range Coulomb model and its Dollard-modified free comparison"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps: [def-nrqm-scattering-framework-short-range-model, def-nrqm-central-framework-coulomb-and-hydrogen-model, pthm-nrqm-central-coulomb-energy-observable-and-flow, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-identical-particles-and-spin, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-autonomous-dynamics-framework-evolution, lem-nrqm-central-free-operator-differential-identification, thm-bounded-borel-pvm-integral, thm-unbounded-borel-functional-calculus, def-countable-choice, def-axiom-of-choice]

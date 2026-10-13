@@ -2,7 +2,7 @@
 id: thm-gr-conjugacy-and-local-timelike-maximum
 kind: theorem
 title: "Conjugacy, the exponential differential and the local proper-time maximum before the first conjugate instant"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

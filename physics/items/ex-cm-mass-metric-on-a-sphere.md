@@ -2,7 +2,7 @@
 id: ex-cm-mass-metric-on-a-sphere
 kind: example
 title: "The mass metric of a particle constrained to the unit sphere in spherical coordinates"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

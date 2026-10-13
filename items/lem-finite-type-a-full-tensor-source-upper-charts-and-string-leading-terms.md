@@ -2,7 +2,7 @@
 id: lem-finite-type-a-full-tensor-source-upper-charts-and-string-leading-terms
 kind: lemma
 title: "Full finite type-A tensor source upper charts and string leading terms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 proof_strategy: direct

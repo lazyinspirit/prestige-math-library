@@ -2,7 +2,7 @@
 id: ex-cm-parallel-axis-two-point-masses
 kind: example
 title: "Parallel-axis theorem checked on two equal point masses on the third axis"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

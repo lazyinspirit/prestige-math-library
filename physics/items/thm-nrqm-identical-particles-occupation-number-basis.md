@@ -4,7 +4,7 @@ aliases: [nrqm-identical-particles-occupation-number-basis]
 kind: theorem
 domain: mathematics
 title: "Slater and symmetric occupation-number bases of the finite-dimensional permutation sectors"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, def-determinant-of-a-square-matrix, def-binomial-coefficient, thm-binomial-closed-formula, thm-stars-and-bars, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-hilbert-space, def-hilbert-space-adjoint, def-bounded-linear-operator, def-countable-choice]

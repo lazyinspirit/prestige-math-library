@@ -2,7 +2,7 @@
 id: thm-relative-hard-lefschetz-and-perverse-splitting-for-projective-algebraic-maps
 kind: theorem
 title: "Relative hard Lefschetz and perverse splitting for compact projective algebraic maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 24

@@ -2,7 +2,7 @@
 id: lem-wall-crossing-functors-act-on-standard-modules-by-the-two-step-extension
 kind: lemma
 title: Wall-crossing acts on standard modules by a two-step extension
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

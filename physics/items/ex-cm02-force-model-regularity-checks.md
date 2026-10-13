@@ -2,7 +2,7 @@
 id: ex-cm02-force-model-regularity-checks
 kind: example
 title: "Standing regularity of the page's force models checked: uniform field, linear drag and the inverse-square model on its singularity-excluded domain"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

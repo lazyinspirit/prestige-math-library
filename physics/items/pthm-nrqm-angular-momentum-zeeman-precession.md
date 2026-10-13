@@ -4,7 +4,7 @@ aliases: [nrqm-angular-momentum-zeeman-precession]
 kind: physics-theorem
 domain: physics
 title: "Spin precession and the Zeeman splitting in a uniform magnetic field: Larmor angular frequency and the conservation of one component"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps: [def-axiom-of-choice, def-bounded-linear-operator, def-countable-choice, def-nrqm-angular-momentum-framework-angular-momentum-observables, def-nrqm-autonomous-dynamics-framework-evolution, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-nrqm-symmetries-framework-symmetry-groups-and-conservation, def-operator-norm, def-strongly-continuous-one-parameter-unitary-group, def-trace-class-operator, lem-exponential-series-of-a-bounded-operator, lem-nrqm-angular-momentum-product-flow-generator, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-kinematics-componentwise-position-and-momentum, lem-nrqm-observables-moments-and-variance, post-nrqm-angular-momentum-magnetic-moment-coupling, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-observable-and-probability, post-nrqm-framework-state-and-composition, prop-nrqm-orbital-and-spin-finite-spin-matrices, pthm-nrqm-symmetries-generator-conservation, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, thm-nrqm-magnetic-and-detection-conserved-spectral-probability-laws]

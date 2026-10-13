@@ -2,7 +2,7 @@
 id: lem-tangent-space-of-affine-minkowski-space-is-v
 kind: lemma
 title: "The tangent space of the affine Minkowski model at any event is canonically V"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

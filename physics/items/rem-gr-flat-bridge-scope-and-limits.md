@@ -2,7 +2,7 @@
 id: rem-gr-flat-bridge-scope-and-limits
 kind: remark
 title: "Scope and empirical status of the flat and Newtonian bridge page"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

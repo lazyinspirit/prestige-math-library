@@ -2,7 +2,7 @@
 id: pthm-em-pec-monochromatic-exterior-scattering
 kind: physics-theorem
 title: "Monochromatic vector scattering by a smooth PEC obstacle: phasor Maxwell fields, the PEC trace condition and outgoing-correction uniqueness"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

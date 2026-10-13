@@ -2,7 +2,7 @@
 id: def-the-fock-convention-dictionary-for-finite-type-a-quantum-modules
 kind: definition
 title: "The Fock-space convention dictionary for finite type-A quantum modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

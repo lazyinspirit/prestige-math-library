@@ -2,7 +2,7 @@
 id: def-gr-minkowski-model-and-inertial-chart
 kind: definition
 title: "The flat model spacetime: the Minkowski metric on R^4 and its inertial chart"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

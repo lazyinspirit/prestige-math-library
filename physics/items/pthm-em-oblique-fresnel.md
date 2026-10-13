@@ -2,7 +2,7 @@
 id: pthm-em-oblique-fresnel
 kind: physics-theorem
 title: "Oblique-incidence TE and TM Fresnel amplitudes, the flux budget, Brewster's angle and total internal reflection"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 20

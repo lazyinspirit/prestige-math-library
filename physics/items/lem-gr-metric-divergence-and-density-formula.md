@@ -2,7 +2,7 @@
 id: lem-gr-metric-divergence-and-density-formula
 kind: lemma
 title: "The derivative of the metric density and the chart formula for the divergence of a vector field"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

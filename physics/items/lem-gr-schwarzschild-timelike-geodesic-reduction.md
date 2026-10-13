@@ -2,7 +2,7 @@
 id: lem-gr-schwarzschild-timelike-geodesic-reduction
 kind: lemma
 title: "Conserved quantities and equatorial radial reduction of timelike geodesics of the Schwarzschild exterior model"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

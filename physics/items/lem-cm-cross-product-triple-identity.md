@@ -2,7 +2,7 @@
 id: lem-cm-cross-product-triple-identity
 kind: lemma
 title: "The vector triple product identity $u\\times(v\\times w)=\\langle u,w\\rangle v-\\langle u,v\\rangle w$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: rem-cm12-singular-models
 kind: remark
 title: "Scope of the Legendre transformation: singular velocity Hessians, regular versus hyperregular presentations, and the excluded constraint theory"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

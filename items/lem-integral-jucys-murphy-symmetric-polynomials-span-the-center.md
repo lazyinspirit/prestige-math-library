@@ -2,7 +2,7 @@
 id: lem-integral-jucys-murphy-symmetric-polynomials-span-the-center
 kind: lemma
 title: "Integral symmetric Jucys–Murphy polynomials span the center"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

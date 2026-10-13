@@ -2,7 +2,7 @@
 id: lem-vanishing-compactly-supported-h1-on-opens-implies-c-soft
 kind: lemma
 title: "Vanishing compactly supported first cohomology on opens characterises c-softness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

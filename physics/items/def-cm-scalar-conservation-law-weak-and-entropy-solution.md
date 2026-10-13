@@ -2,7 +2,7 @@
 id: def-cm-scalar-conservation-law-weak-and-entropy-solution
 kind: definition
 title: "Weak and entropy solutions of the scalar conservation law $u_t+(u^2/2)_x=0$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: pthm-sr-local-stress-energy-conservation
 kind: physics-theorem
 title: "Local conservation of the adopted matter stress-energy tensors"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "Flat affine Minkowski spacetime in every inertial chart, under the adopted scalar-field, dust and perfect-fluid model equations of [[post-sr-matter-models-and-evolution]]. The theorem is a conditional deduction from those adopted equations: it asserts no interaction, force law, cross section, measurement or empirical fact, makes no claim for arbitrary prescribed symmetric tensors, and its conclusions inherit the scope and qualifications of the postulate."

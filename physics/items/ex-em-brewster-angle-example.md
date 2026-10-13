@@ -2,7 +2,7 @@
 id: ex-em-brewster-angle-example
 kind: example
 title: "The Brewster angle at an equal-permeability interface and the surviving $s$-reflection"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 21

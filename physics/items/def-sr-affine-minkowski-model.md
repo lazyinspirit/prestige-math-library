@@ -2,7 +2,7 @@
 id: def-sr-affine-minkowski-model
 kind: definition
 title: "Oriented time-oriented affine Minkowski space (the spacetime primitives)"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

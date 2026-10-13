@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared interval models with Dirichlet and Robin boundary
   conditions, and the declared zero-range (delta) model"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

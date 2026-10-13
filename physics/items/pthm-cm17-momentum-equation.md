@@ -2,7 +2,7 @@
 id: pthm-cm17-momentum-equation
 kind: physics-theorem
 title: "The momentum equation of the continuum model: local form rho D_t u = rho b + div sigma"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

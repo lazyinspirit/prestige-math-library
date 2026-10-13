@@ -2,7 +2,7 @@
 id: lem-cm-cauchy-formula-and-power-series-on-polydiscs
 kind: lemma
 title: Iterated Cauchy formula, power-series expansion and Cauchy estimates for functions continuous and separately holomorphic on a polydisc
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

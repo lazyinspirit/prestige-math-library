@@ -1,7 +1,7 @@
 ---
 page: em-waveguides-and-cavities
 title: "Waveguides and cavities"
-status: draft
+status: published
 items: [lem-em-separated-phasor-calculus,
         lem-em-transverse-vector-identities,
         lem-em-rectangle-mode-profile-identities,

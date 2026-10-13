@@ -2,7 +2,7 @@
 id: pthm-cm12-energy-time
 kind: physics-theorem
 title: "The mechanical Hamiltonian is the model's energy in the inertial chart, its balance is the energy balance, and the substituted-chart Hamiltonian is the energy of time-independent coordinates"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

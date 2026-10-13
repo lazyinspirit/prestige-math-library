@@ -2,7 +2,7 @@
 id: ex-gr-radial-focusing-in-flat-minkowski
 kind: example
 title: "Sharp radial focusing in flat Minkowski space: equality in the Raychaudhuri bound without a singularity"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

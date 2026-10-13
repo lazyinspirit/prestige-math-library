@@ -2,7 +2,7 @@
 id: ex-the-affine-a-one-double-edge-serre-cancellation-on-partitions
 kind: example
 title: "The double-edge Serre cancellation in affine $A_1$ on partitions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

@@ -2,7 +2,7 @@
 id: def-cm-quaternion-rotation-map-and-cover
 kind: definition
 title: "The quaternion rotation map $\\rho$: conjugation on the imaginary quaternions, the unit sphere $S^3$, and quaternion lifts"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

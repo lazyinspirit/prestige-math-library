@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "A radial bounded potential: rotational and parity symmetry and
   conservation of the rotation generators"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

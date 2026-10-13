@@ -3,7 +3,7 @@ id: lem-gr-contained-geodesic-velocity-bound
 kind: lemma
 title: "Speed bounds along geodesics in a chart, and small initial velocity of
   every geodesic segment contained in a small ball"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

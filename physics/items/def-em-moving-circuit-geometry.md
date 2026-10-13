@@ -3,7 +3,7 @@ id: def-em-moving-circuit-geometry
 kind: definition
 title: "C2 moving material circuit: swept patch, single-valued material velocity, flux and electromotive force"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 18
 deps:

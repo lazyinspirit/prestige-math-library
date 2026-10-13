@@ -2,7 +2,7 @@
 id: lem-gr-kruskal-model-properties
 kind: lemma
 title: "Kruskal model properties: smooth radial function, Lorentzian metric, four-region isometries, vacuum and Kretschmann scalar"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 15

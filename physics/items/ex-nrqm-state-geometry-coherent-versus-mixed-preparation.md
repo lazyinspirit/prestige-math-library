@@ -4,7 +4,7 @@ kind: example
 domain: physics
 title: "A coherent two-level preparation and the equal statistical mixture are
   different states"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps:

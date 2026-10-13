@@ -2,7 +2,7 @@
 id: thm-proper-hypercovers-compute-constructible-derived-cohomology
 kind: theorem
 title: "Proper hypercovers compute constructible derived cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

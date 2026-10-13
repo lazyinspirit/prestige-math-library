@@ -2,7 +2,7 @@
 id: ex-em-causal-wave-kernel-prerequisites-explicit-checks
 kind: example
 title: "Explicit checks of the causal wave kernel, the gauge conventions and the static retarded limit"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [lem-em-point-retarded-potential-and-fields, lem-em-gauge-wave-reachability, lem-em-retarded-wave-kernel, def-em-potential-gauge-and-field-conventions, def-countable-choice, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-divergence-and-curl-of-a-c1-vector-field, def-laplacian-of-a-c2-function, def-euclidean-inner-product, thm-algebra-of-derivatives, thm-the-curl-of-a-gradient-vanishes, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, thm-polar-coordinates-formula-for-lebesgue-measure, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, lem-euclidean-balls-have-positive-finite-lebesgue-measure, thm-heine-borel-rn, lem-test-function-cutoffs-and-euclidean-localization, lem-em-global-retarded-root, prop-order-and-scalar-rules-for-the-nonnegative-integral]

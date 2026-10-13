@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-diagonal-eigenspaces]
 kind: lemma
 domain: mathematics
 title: "Eigenspaces of the diagonal operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-hilbert-space, def-countable-choice]

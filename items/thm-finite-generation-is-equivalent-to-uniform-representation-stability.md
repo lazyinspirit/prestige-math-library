@@ -2,7 +2,7 @@
 id: thm-finite-generation-is-equivalent-to-uniform-representation-stability
 kind: theorem
 title: "Finite generation is equivalent to uniform representation stability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

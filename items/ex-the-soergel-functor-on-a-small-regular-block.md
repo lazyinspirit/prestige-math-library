@@ -2,7 +2,7 @@
 id: ex-the-soergel-functor-on-a-small-regular-block
 kind: example
 title: The Soergel functor on the small regular sl_2 block
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 13

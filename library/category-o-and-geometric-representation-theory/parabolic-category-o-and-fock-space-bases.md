@@ -1,7 +1,7 @@
 ---
 page: parabolic-category-o-and-fock-space-bases
 title: "Parabolic Category O and Fock-Space Bases"
-status: draft
+status: published
 requires: [singular-and-parabolic-kazhdan-lusztig-theory,
             balanced-triples-and-global-crystal-bases,
             grothendieck-groups-and-graded-cartan-pairings,

@@ -3,7 +3,7 @@ id: ex-nrqm-photons-malus-and-jones-analyzer-ratios
 kind: example
 title: "Malus and Jones ratios of the declared analyser: the same cos^2 from the
   Born law and from a classical transverse amplitude"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 13

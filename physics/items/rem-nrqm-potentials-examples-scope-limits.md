@@ -4,7 +4,7 @@ aliases: [ nrqm-potentials-examples-scope-limits ]
 kind: remark
 domain: physics
 title: "What the one-dimensional potentials examples establish"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

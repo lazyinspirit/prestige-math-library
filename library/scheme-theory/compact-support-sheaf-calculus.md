@@ -1,7 +1,7 @@
 ---
 page: compact-support-sheaf-calculus
 title: "Compact Support Sheaf Calculus"
-status: draft
+status: published
 requires:
   - cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes
   - compactness

@@ -1,7 +1,7 @@
 ---
 page: projective-functors-and-the-soergel-functor-in-category-o
 title: "Projective Functors and the Soergel Functor in Category O"
-status: draft
+status: published
 requires:
   - soergel-intersection-forms-and-hodge-theory
   - category-o-finiteness-duality-and-blocks

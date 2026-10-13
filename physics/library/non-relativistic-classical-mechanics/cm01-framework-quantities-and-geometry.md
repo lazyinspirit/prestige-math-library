@@ -1,7 +1,7 @@
 ---
 page: cm01-framework-quantities-and-geometry
 title: "Framework, quantities and geometry"
-status: draft
+status: published
 library: physics
 items:
   - post-cm01-spacetime

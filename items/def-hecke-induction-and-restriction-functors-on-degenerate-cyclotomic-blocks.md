@@ -2,7 +2,7 @@
 id: def-hecke-induction-and-restriction-functors-on-degenerate-cyclotomic-blocks
 kind: definition
 title: "Hecke induction and restriction functors on degenerate cyclotomic blocks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 35

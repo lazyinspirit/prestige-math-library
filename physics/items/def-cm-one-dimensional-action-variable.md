@@ -2,7 +2,7 @@
 id: def-cm-one-dimensional-action-variable
 kind: definition
 title: "The one-dimensional action variable of a family of two-turning-point energy levels"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

@@ -4,7 +4,7 @@ aliases: [nrqm-interference-ideal-flat-two-path-screen-distribution]
 kind: example
 domain: physics
 title: "An ideal flat two-path distribution: exact coherent and which-path bin laws"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps: [def-nrqm-interference-two-path-preparation-and-detection-model, pthm-nrqm-interference-coherent-and-mixture-detection-laws, post-nrqm-framework-observable-and-probability, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-lebesgue-measure-of-a-box-of-every-kind, def-integral-of-a-nonnegative-simple-function, cor-additivity-of-the-nonnegative-lebesgue-integral, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-axiom-of-choice, thm-borel-products-of-euclidean-spaces-are-euclidean-borel, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, thm-rational-box-generators-of-the-borel-sigma-algebra-on-rn, thm-measure-uniqueness-on-a-sigma-finite-pi-system, cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure]

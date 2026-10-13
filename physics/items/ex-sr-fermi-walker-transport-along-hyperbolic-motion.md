@@ -3,7 +3,7 @@ id: ex-sr-fermi-walker-transport-along-hyperbolic-motion
 kind: example
 domain: mathematics
 title: "Worked Fermi-Walker transport along uniformly accelerated hyperbolic motion"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

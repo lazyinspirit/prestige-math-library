@@ -4,7 +4,7 @@ aliases: [nrqm-observables-l2-multiplication-spectral-measure]
 kind: lemma
 domain: mathematics
 title: "Spectral measure of a real L2 multiplication operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [cor-second-countable-lch-locally-finite-borel-measures-are-regular, def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-projection-valued-measure, def-regular-borel-measure-on-an-lch-space, def-unbounded-integral-against-a-pvm, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, lem-nrqm-observables-spectral-support-and-outcome-law, lem-scalar-and-complex-measures-from-a-pvm, lem-unbounded-pvm-integral-is-well-defined-and-closed, thm-bounded-borel-pvm-integral, thm-cauchy-schwarz-in-an-inner-product-space, thm-dominated-convergence, thm-spectral-theorem-for-unbounded-self-adjoint-operators]

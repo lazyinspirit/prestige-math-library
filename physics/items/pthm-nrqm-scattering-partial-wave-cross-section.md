@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Partial-wave expansion, unit-modulus channel factors and the phase-shift
   cross-section series"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

@@ -4,7 +4,7 @@ aliases: [nrqm-symmetries-rotation-generators-on-schwartz-classes]
 kind: lemma
 domain: mathematics
 title: "Coordinate-rotation generators on the Schwartz classes and their commutators"
-status: draft
+status: published
 origin: session
 dependency_level: 6
 deps: [def-axiom-of-choice, def-countable-choice, def-cross-product-in-r3, def-cm-special-orthogonal-group,

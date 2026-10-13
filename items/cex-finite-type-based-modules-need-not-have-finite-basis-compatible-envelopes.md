@@ -2,7 +2,7 @@
 id: cex-finite-type-based-modules-need-not-have-finite-basis-compatible-envelopes
 kind: counterexample
 title: "An integrable based module can have no finite based envelope of a raw basis vector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

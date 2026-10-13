@@ -2,7 +2,7 @@
 id: lem-cyclotomic-klr-block-satisfies-the-hecke-relations
 kind: lemma
 title: "The cyclotomic KLR block satisfies the Hecke relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 14

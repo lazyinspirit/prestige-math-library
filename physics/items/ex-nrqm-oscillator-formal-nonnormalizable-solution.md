@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-example-formal-nonnormalizable-solution]
 kind: example
 domain: mathematics
 title: "Formal nonnormalizable solution"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, thm-ftc-first-part, thm-ftc-second-part, thm-additivity-over-subintervals, def-oriented-integral, thm-algebra-of-derivatives, thm-chain-rule, thm-derivative-of-exponential, thm-exponential-is-strictly-increasing, cor-exponential-reciprocal-and-positivity, thm-complex-exponential-addition-and-real-extension, def-complex-exponential, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-nonnegative-lebesgue-integral, def-integral-of-a-nonnegative-simple-function, prop-the-nonnegative-integral-agrees-with-the-simple-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-lebesgue-measure-of-a-box-of-every-kind, def-countable-choice]

@@ -2,7 +2,7 @@
 id: def-degenerate-affine-hecke-algebra
 kind: definition
 title: "The degenerate affine Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

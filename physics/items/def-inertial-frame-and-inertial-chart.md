@@ -2,7 +2,7 @@
 id: def-inertial-frame-and-inertial-chart
 kind: definition
 title: "Inertial frames and inertial charts of the affine Minkowski model"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

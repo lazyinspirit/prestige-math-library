@@ -2,7 +2,7 @@
 id: lem-finite-word-deviations-give-homoclinic-orbits
 kind: lemma
 title: "Constant codes give the fixed points, and finite nonconstant word codes give homoclinic orbits converging to a fixed point at both ends"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 7

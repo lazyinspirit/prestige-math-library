@@ -2,7 +2,7 @@
 id: thm-gr-periodic-symmetric-hyperbolic-existence
 kind: theorem
 title: "Local existence of Sobolev and classical solutions of a periodic symmetric hyperbolic system, uniform on bounded H^s data"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

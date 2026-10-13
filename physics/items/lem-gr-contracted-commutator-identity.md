@@ -2,7 +2,7 @@
 id: lem-gr-contracted-commutator-identity
 kind: lemma
 title: "The commutator of covariant derivatives on a vector field and its contracted component identity"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

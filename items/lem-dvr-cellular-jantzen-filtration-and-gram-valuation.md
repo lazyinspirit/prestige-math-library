@@ -2,7 +2,7 @@
 id: lem-dvr-cellular-jantzen-filtration-and-gram-valuation
 kind: lemma
 title: "DVR cellular Jantzen filtration and exact Gram valuation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

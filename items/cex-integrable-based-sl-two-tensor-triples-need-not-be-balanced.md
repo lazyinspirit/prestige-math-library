@@ -2,7 +2,7 @@
 id: cex-integrable-based-sl-two-tensor-triples-need-not-be-balanced
 kind: counterexample
 title: "Integrable based sl-two tensor triples need not be balanced"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

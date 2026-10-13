@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 title: "Fixed-particle-number occupation bases and the countable-mode partition
   criterion"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

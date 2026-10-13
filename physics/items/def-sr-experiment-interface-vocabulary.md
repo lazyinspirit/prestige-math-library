@@ -3,7 +3,7 @@ id: def-sr-experiment-interface-vocabulary
 kind: definition
 domain: physics
 title: "Operational model, data, calibration and uncertainty vocabulary of the experiment interface"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 deps:

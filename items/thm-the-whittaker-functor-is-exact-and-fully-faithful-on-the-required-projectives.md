@@ -2,7 +2,7 @@
 id: thm-the-whittaker-functor-is-exact-and-fully-faithful-on-the-required-projectives
 kind: theorem
 title: "The Whittaker functor is exact and fully faithful on the required projectives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 32

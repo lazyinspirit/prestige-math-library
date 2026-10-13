@@ -2,7 +2,7 @@
 id: rem-gr-local-and-global-energy-scope-and-deferrals
 kind: remark
 title: "Scope and status of the local-and-global-energy page: what is defined, what is conditional, and what is deferred"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

@@ -3,7 +3,7 @@ id: ex-sr-low-speed-expansion-at-beta-one-fifth
 kind: example
 domain: physics
 title: 'Worked low-speed correspondence at $|w|=c/5$'
-status: draft
+status: published
 origin: session
 dependency_level: 17
 deps: [pthm-sr-newtonian-p-e-correspondence, lem-sr-uniform-low-speed-expansion-of-observer-quantities, lem-sr-uniform-low-speed-taylor-remainder, lem-sr-energy-momentum-observer-identities, thm-sr-proper-time-and-observer-decomposition, def-sr-newtonian-comparison-quantities, def-rational-power, lem-rational-power-laws]

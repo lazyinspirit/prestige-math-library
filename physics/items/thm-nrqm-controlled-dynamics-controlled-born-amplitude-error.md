@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-controlled-born-amplitude-error]
 kind: theorem
 domain: mathematics
 title: "Controlled Born amplitude error"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps: [cor-cauchy-schwarz-inequality-for-l-two, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-polar-coordinates-formula-for-lebesgue-measure, thm-nrqm-controlled-dynamics-stationary-outgoing-integral-and-flux, thm-nrqm-controlled-dynamics-outgoing-fredholm-invertibility, lem-nrqm-coulomb-ltwo-kernel-operators-bounded-and-compact, def-operator-norm, def-bounded-linear-operator, def-hilbert-space, def-countable-choice]

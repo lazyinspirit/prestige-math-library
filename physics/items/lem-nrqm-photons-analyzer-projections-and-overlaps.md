@@ -2,7 +2,7 @@
 id: lem-nrqm-photons-analyzer-projections-and-overlaps
 kind: lemma
 title: "Analyzer projections of a two-dimensional polarisation space and their overlaps"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

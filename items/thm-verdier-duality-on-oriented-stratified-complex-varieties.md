@@ -2,7 +2,7 @@
 id: thm-verdier-duality-on-oriented-stratified-complex-varieties
 kind: theorem
 title: Constructible Verdier duality and complex orientation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 16

@@ -4,7 +4,7 @@ aliases: [nrqm-symmetries-parity-action]
 kind: lemma
 domain: mathematics
 title: "The spatial parity action on the component-valued wave-function space"
-status: draft
+status: published
 origin: session
 dependency_level: 5
 deps: [cor-inner-product-induces-a-norm, def-axiom-of-choice, def-countable-choice,

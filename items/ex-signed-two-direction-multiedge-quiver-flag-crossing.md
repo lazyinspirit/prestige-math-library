@@ -2,7 +2,7 @@
 id: ex-signed-two-direction-multiedge-quiver-flag-crossing
 kind: example
 title: "Signed two-direction multiedge quiver-flag crossing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 30

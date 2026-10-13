@@ -2,7 +2,7 @@
 id: pthm-cm17-linear-elastic-equation-of-motion
 kind: physics-theorem
 title: "The displacement equation of the linear elastic branch: rho_0 partial_t^2 xi = rho_0 b + mu_s Laplacian xi + (lambda + mu_s) grad div xi"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

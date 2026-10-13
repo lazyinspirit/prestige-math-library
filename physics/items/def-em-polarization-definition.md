@@ -2,7 +2,7 @@
 id: def-em-polarization-definition
 kind: definition
 title: "Polarization of a transverse plane wave: linear, circular and elliptical traces, and handedness"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 16

@@ -2,7 +2,7 @@
 id: lem-cm-cosine-sine-orthogonality-and-odd-extension
 kind: lemma
 title: "Sine orthogonality on a half period and the full-period integrals of odd $2L$-periodic functions"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

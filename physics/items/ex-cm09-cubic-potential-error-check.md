@@ -2,7 +2,7 @@
 id: ex-cm09-cubic-potential-error-check
 kind: example
 title: "A cubic-potential chart system: the exact quadratic remainder, the explicit error constants and a checked finite-time bound"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

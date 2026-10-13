@@ -1,7 +1,7 @@
 ---
 page: em-electrostatic-multipoles-examples
 title: "Electrostatic multipoles — Examples"
-status: draft
+status: published
 examples: [ex-em-quadrupole-symmetry, ex-em-two-charge-dipole]
 ---
 

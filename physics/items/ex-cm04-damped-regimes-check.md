@@ -2,7 +2,7 @@
 id: ex-cm04-damped-regimes-check
 kind: example
 title: "The three damping regimes on explicit data: underdamped, critical and overdamped motions at $m=k=1$ and $c=1,2,5$, with their decay bounds"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

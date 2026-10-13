@@ -2,7 +2,7 @@
 id: lem-gr-warped-base-vacuum-reduction
 kind: lemma
 title: "Two-dimensional base identities for the warped spherical metric: pure-trace Ricci, the vacuum reduction and the extra Killing field"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

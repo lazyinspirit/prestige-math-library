@@ -2,7 +2,7 @@
 id: lem-complex-specht-modules-are-self-dual
 kind: lemma
 title: Complex Specht modules are self-dual with real-valued characters
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

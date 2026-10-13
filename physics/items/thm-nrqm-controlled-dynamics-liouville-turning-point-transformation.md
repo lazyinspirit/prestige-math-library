@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-liouville-turning-point-transformation]
 kind: theorem
 domain: mathematics
 title: "Liouville turning-point transformation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-derivative, def-continuity-real, thm-chain-rule, thm-heine-borel-rn, thm-extreme-value-metric, thm-dominated-convergence, thm-continuous-implies-integrable, thm-ftc-first-part, thm-newton-leibniz-with-interior-derivative]

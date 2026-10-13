@@ -2,7 +2,7 @@
 id: pthm-sr-null-wave-doppler-and-aberration
 kind: physics-theorem
 title: 'Doppler shift and aberration for an ideal plane wave between inertial descriptions'
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: 'Conditional Doppler-shift and aberration predictions of the ideal plane-wave model of flat classical special-relativistic spacetime, for inertial descriptions related by a passive boost and for ideal observers with subluminal coordinate velocity. Excludes quantum photons, media and dispersion, intensity and polarization, real sources and detectors, accelerating observers, gravitation, and every measurement, statistical or empirical claim; the idealizations of the adopted postulates travel to all consumers.'

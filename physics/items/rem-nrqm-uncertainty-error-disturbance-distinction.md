@@ -5,7 +5,7 @@ kind: remark
 domain: physics
 title: "Preparation spread, apparatus resolution and disturbance are different
   objects"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

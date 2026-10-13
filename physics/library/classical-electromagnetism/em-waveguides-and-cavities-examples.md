@@ -1,7 +1,7 @@
 ---
 page: em-waveguides-and-cavities-examples
 title: "Waveguides and cavities — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-em-te-ten-example,
            ex-em-rectangular-cavity-example,

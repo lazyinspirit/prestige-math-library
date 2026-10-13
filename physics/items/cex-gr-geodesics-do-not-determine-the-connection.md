@@ -2,7 +2,7 @@
 id: cex-gr-geodesics-do-not-determine-the-connection
 kind: counterexample
 title: "Torsion-free connections with the same geodesic images need not coincide"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

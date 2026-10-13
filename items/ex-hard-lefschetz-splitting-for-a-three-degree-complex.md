@@ -2,7 +2,7 @@
 id: ex-hard-lefschetz-splitting-for-a-three-degree-complex
 kind: example
 title: "Hard Lefschetz splitting for a three-degree complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

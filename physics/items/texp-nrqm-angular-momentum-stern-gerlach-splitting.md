@@ -4,7 +4,7 @@ aliases: [nrqm-angular-momentum-stern-gerlach-splitting]
 kind: thought-experiment
 domain: physics
 title: "The idealized Stern-Gerlach splitting: transverse momentum separation of the two spin sectors under a window hypothesis"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps: [def-axiom-of-choice, def-countable-choice, def-nrqm-angular-momentum-framework-angular-momentum-observables, def-nrqm-autonomous-dynamics-framework-evolution, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, post-nrqm-angular-momentum-magnetic-moment-coupling, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-observable-and-probability, post-nrqm-framework-preparation-and-apparatus, post-nrqm-framework-state-and-composition, prop-nrqm-orbital-and-spin-finite-spin-matrices, pthm-nrqm-angular-momentum-stern-gerlach-conditional-force]

@@ -3,7 +3,7 @@ id: lem-em-helmholtz-boundary-representation
 kind: lemma
 domain: mathematics
 title: "Exact Helmholtz boundary representation with actual traces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 2

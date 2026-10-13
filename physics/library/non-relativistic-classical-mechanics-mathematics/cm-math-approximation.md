@@ -1,7 +1,7 @@
 ---
 page: cm-math-approximation
 title: Cm Math Approximation
-status: draft
+status: published
 items:
   - def-cm-oscillator-model-and-phase-system
   - def-cm-averaging-data-and-averaged-field

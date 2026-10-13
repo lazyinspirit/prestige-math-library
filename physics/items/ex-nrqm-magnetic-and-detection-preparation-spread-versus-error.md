@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-example-preparation-spread-versus-error]
 kind: example
 domain: mathematics
 title: "Gaussian preparation spread and an independent additive reading error"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [thm-nrqm-magnetic-and-detection-maximal-domain-position-and-momentum-uncertainty, thm-nrqm-magnetic-and-detection-covariance-refined-uncertainty, def-nrqm-magnetic-and-detection-position-and-momentum-operators, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, thm-gaussian-integral, thm-exponential-beats-every-polynomial, thm-differentiation-under-the-integral-sign, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, thm-algebra-of-derivatives, thm-derivative-of-exponential, def-complex-exponential, thm-dominated-convergence, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-axiom-of-choice]

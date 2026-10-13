@@ -5,7 +5,7 @@ kind: counterexample
 domain: mathematics
 title: "No bounded operators satisfy the canonical commutation relation with a
   nonzero commutator"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps:

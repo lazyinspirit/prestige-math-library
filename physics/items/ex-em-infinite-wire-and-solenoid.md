@@ -3,7 +3,7 @@ id: "ex-em-infinite-wire-and-solenoid"
 kind: "example"
 domain: physics
 title: "Declared ideal infinite wire and cylindrical current sheet: explicit fields and their distributional equations"
-status: draft
+status: published
 origin: session
 dependency_level: 19
 deps: ["def-em-steady-current-regime", "lem-em-ideal-line-current-field", "lem-em-ideal-cylindrical-sheet-field", "def-cross-product-in-r3", "def-divergence-and-curl-of-a-c1-vector-field", "def-riemann-integral-over-a-jordan-set", "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths", "def-surface-integral-on-a-compact-c-one-hypersurface", "thm-continuous-functions-on-compact-jordan-sets-are-integrable", "def-countable-choice", "post-em-ideal-magnetostatic-models"]

@@ -1,7 +1,7 @@
 ---
 page: cm12-legendre-transformation-and-hamiltonian-mechanics
 title: "Legendre transformation and Hamiltonian mechanics"
-status: draft
+status: published
 library: physics
 items:
   - def-cm12-cotangent-momentum

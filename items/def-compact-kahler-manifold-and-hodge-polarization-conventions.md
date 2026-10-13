@@ -2,7 +2,7 @@
 id: def-compact-kahler-manifold-and-hodge-polarization-conventions
 kind: definition
 title: "Compact Kähler and rational Hodge polarization conventions"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

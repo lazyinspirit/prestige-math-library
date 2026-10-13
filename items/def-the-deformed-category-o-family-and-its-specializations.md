@@ -2,7 +2,7 @@
 id: def-the-deformed-category-o-family-and-its-specializations
 kind: definition
 title: The deformed category O family over the Cartan symmetric algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

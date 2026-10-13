@@ -1,7 +1,7 @@
 ---
 page: quiver-full-flag-projective-semisimplicity
 title: "Quiver Full Flag Projective Semisimplicity"
-status: draft
+status: published
 items: [lem-quiver-full-flag-incidence-has-a-smooth-projective-compactification,
         cor-quiver-full-flag-pushforwards-are-semisimple-in-characteristic-zero]
 requires:

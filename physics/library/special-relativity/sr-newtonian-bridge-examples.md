@@ -1,7 +1,7 @@
 ---
 page: sr-newtonian-bridge-examples
 title: "Newtonian Bridge — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-sr-low-speed-expansion-at-beta-one-fifth,
            ex-sr-uniform-galilean-chart-bound-worked,

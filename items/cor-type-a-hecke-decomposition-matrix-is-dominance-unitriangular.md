@@ -2,7 +2,7 @@
 id: cor-type-a-hecke-decomposition-matrix-is-dominance-unitriangular
 kind: corollary
 title: "The type-A Hecke decomposition matrix is dominance unitriangular"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

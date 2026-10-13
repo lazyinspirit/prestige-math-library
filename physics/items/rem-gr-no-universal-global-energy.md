@@ -2,7 +2,7 @@
 id: rem-gr-no-universal-global-energy
 kind: remark
 title: "Absence of a universal global energy: observer dependence, no local gravitational energy, and deferred asymptotic masses"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

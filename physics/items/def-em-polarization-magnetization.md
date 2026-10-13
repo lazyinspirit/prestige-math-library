@@ -2,7 +2,7 @@
 id: def-em-polarization-magnetization
 kind: definition
 title: "Polarization, magnetization, bound and free sources, and the fields D and H"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 14

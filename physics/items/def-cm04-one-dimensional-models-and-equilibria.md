@@ -2,7 +2,7 @@
 id: def-cm04-one-dimensional-models-and-equilibria
 kind: definition
 title: "The one-dimensional force models: data, motions, phase system, potential presentation, energy and equilibria"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

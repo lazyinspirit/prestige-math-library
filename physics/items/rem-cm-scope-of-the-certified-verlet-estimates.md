@@ -2,7 +2,7 @@
 id: rem-cm-scope-of-the-certified-verlet-estimates
 kind: remark
 title: 'Scope of the certified velocity-Verlet estimates: exact arithmetic, compact tubes, roundoff, and absent all-time claims'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 18

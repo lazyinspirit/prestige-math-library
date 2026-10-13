@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-example-gauge-phase-units]
 kind: example
 domain: mathematics
 title: "Gauge phase periodicity, a linear gauge, and the dimension vector of q chi over hbar"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [thm-nrqm-magnetic-and-detection-gauge-h2-domain-preservation, thm-nrqm-magnetic-and-detection-bounded-coefficient-magnetic-operator, def-nrqm-magnetic-and-detection-magnetic-schrodinger-operator, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, def-nrqm-magnetic-and-detection-position-and-momentum-operators, thm-spectral-theorem-for-unbounded-self-adjoint-operators, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-unbounded-integral-against-a-pvm, def-complex-exponential, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-kernel-and-fibres-of-complex-exponential, thm-derivative-of-exponential, def-sobolev-space-wkp-and-its-norm, def-countable-choice, def-axiom-of-choice]

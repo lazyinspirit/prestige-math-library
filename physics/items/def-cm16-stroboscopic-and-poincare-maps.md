@@ -2,7 +2,7 @@
 id: def-cm16-stroboscopic-and-poincare-maps
 kind: definition
 title: "The stroboscopic map of a periodic model and the Poincare return map of a transversal section: domains, iterates, fixed points and the local C1 diffeomorphism property"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

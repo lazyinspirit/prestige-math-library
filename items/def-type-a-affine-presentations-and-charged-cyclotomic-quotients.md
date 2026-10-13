@@ -2,7 +2,7 @@
 id: def-type-a-affine-presentations-and-charged-cyclotomic-quotients
 kind: definition
 title: "Affine type-A presentations and charged cyclotomic quotients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

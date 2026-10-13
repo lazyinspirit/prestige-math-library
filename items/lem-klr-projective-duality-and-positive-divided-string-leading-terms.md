@@ -2,7 +2,7 @@
 id: lem-klr-projective-duality-and-positive-divided-string-leading-terms
 kind: lemma
 title: "Self-dual KLR projectives have positive first-block divided-string leading terms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

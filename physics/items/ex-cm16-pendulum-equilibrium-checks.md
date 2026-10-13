@@ -2,7 +2,7 @@
 id: ex-cm16-pendulum-equilibrium-checks
 kind: example
 title: "The ideal pendulum on declared data: strict minimum and Lyapunov stability at the downward equilibrium, negative Hessian and instability at the upward equilibrium, the exact linearised eigenvalues and oscillation frequency, and failure of attraction"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

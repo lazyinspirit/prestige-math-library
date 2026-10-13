@@ -2,7 +2,7 @@
 id: thm-simples-projectives-and-tiltings-map-to-the-three-distinguished-fock-bases
 kind: theorem
 title: "Simples, projectives and tiltings map to the three distinguished Fock bases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 30

@@ -2,7 +2,7 @@
 id: thm-gr-harmonic-constraint-propagation
 kind: theorem
 title: "Propagation of the harmonic gauge and of the Einstein constraints: a constrained reduced solution is an Einstein solution"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

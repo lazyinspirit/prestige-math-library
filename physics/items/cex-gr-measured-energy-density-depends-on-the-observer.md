@@ -2,7 +2,7 @@
 id: cex-gr-measured-energy-density-depends-on-the-observer
 kind: counterexample
 title: "The measured energy density of a fixed tensor depends on the observer congruence"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

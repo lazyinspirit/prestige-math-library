@@ -2,7 +2,7 @@
 id: lem-relative-smooth-triangulations-can-be-fitted-while-preserving-a-bundle-projection
 kind: lemma
 title: "Finite smooth fitting with exact bundle projection and protected regions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

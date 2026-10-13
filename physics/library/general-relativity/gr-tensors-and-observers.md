@@ -6,7 +6,7 @@ requires:
   - the-exterior-derivative-and-cartan-calculus
 page: gr-tensors-and-observers
 title: "Tensors And Observers"
-status: draft
+status: published
 library: physics
 items:
   - lem-gr-tensor-bundle-coordinate-construction

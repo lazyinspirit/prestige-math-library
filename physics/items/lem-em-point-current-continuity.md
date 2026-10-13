@@ -2,7 +2,7 @@
 id: lem-em-point-current-continuity
 kind: lemma
 title: "Point-support spacetime densities: distributions, continuity equation and endpoint fluxes"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

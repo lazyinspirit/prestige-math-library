@@ -2,7 +2,7 @@
 id: thm-positive-rouquier-complexes-are-delta-split
 kind: theorem
 title: "Positive Rouquier complexes are Delta-split"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

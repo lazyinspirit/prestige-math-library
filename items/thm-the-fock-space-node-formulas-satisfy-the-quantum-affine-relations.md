@@ -2,7 +2,7 @@
 id: thm-the-fock-space-node-formulas-satisfy-the-quantum-affine-relations
 kind: theorem
 title: "The Fock space node formulas satisfy the quantum affine relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

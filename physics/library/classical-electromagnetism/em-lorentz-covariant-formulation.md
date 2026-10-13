@@ -1,7 +1,7 @@
 ---
 page: em-lorentz-covariant-formulation
 title: "Lorentz covariant formulation"
-status: draft
+status: published
 items: [pthm-em-tensor-maxwell-equivalence,
         pthm-em-lorentz-field-transform,
         pthm-em-observer-field-and-doppler,

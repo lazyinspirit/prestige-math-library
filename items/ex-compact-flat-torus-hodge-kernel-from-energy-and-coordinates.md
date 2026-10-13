@@ -2,7 +2,7 @@
 id: ex-compact-flat-torus-hodge-kernel-from-energy-and-coordinates
 kind: example
 title: "Flat torus harmonic forms are constant-coefficient forms"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps: [def-axiom-of-choice, thm-hodge-laplacian-kernel-represents-de-rham-and-dolbeault-cohomology, prop-flat-torus-model-geometry, def-smooth-differential-k-form, def-interior-product-of-a-form-by-a-vector-field, thm-heine-borel-rn, cor-repeated-riemann-integrals-on-rectangles, thm-newton-leibniz-with-interior-derivative]

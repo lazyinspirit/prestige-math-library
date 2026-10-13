@@ -2,7 +2,7 @@
 id: def-projective-functors-on-a-regular-integral-category-o-block
 kind: definition
 title: Projective functors on a regular integral block
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

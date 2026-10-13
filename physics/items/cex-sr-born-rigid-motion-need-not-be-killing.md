@@ -3,7 +3,7 @@ id: cex-sr-born-rigid-motion-need-not-be-killing
 kind: counterexample
 domain: mathematics
 title: "Counterexample: a Born-rigid congruence need not be a Killing congruence"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

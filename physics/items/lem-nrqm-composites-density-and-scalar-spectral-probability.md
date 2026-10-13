@@ -4,7 +4,7 @@ aliases: [nrqm-composites-density-and-scalar-spectral-probability]
 kind: lemma
 domain: mathematics
 title: "Density operators and scalar spectral probability"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-trace-class-operator, def-trace-of-a-trace-class-operator, lem-nrqm-composites-rank-one-operator-calculus, lem-nuclear-series-characterizes-trace-norm, thm-spectral-theorem-for-compact-self-adjoint-operators, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-is-absolutely-convergent-and-basis-independent, def-self-adjoint-positive-unitary-and-normal-operator, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, thm-bounded-borel-pvm-integral, def-unbounded-integral-against-a-pvm, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, def-measure, def-probability-measure, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

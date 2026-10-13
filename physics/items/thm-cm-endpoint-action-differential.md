@@ -2,7 +2,7 @@
 id: thm-cm-endpoint-action-differential
 kind: theorem
 title: "The endpoint action function of a smooth family of extremals has differential $dW=p\\,dq-H\\,dt$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

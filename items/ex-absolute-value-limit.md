@@ -2,7 +2,7 @@
 id: ex-absolute-value-limit
 kind: example
 title: "The absolute value of the limit, and the limit of the absolute value"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

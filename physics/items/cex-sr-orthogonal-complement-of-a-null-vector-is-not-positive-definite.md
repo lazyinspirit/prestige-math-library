@@ -2,7 +2,7 @@
 id: cex-sr-orthogonal-complement-of-a-null-vector-is-not-positive-definite
 kind: counterexample
 title: "The orthogonal complement of a null vector need not be positive definite"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

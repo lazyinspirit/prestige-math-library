@@ -2,7 +2,7 @@
 id: pthm-cm04-damped-decay-and-stability
 kind: physics-theorem
 title: "Strictly damped oscillator: explicit decay bounds, convergence to rest and asymptotic stability of the origin"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

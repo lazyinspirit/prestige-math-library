@@ -2,7 +2,7 @@
 id: cex-gr-conservation-does-not-imply-nonnegative-measured-energy-density
 kind: counterexample
 title: "A divergence-free symmetric tensor with negative measured energy density"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

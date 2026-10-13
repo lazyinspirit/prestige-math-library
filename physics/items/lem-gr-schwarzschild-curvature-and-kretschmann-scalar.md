@@ -2,7 +2,7 @@
 id: lem-gr-schwarzschild-curvature-and-kretschmann-scalar
 kind: lemma
 title: "Orthonormal-frame curvature components and the Kretschmann scalar 12s^2/r^6 of the Schwarzschild exterior metric"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

@@ -4,7 +4,7 @@ kind: physics-theorem
 domain: physics
 dependency_level: 18
 title: "External force and torque of prescribed charge data in a Lipschitz external field"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

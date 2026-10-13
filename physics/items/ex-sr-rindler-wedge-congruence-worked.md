@@ -3,7 +3,7 @@ id: ex-sr-rindler-wedge-congruence-worked
 kind: example
 domain: mathematics
 title: "Worked Rindler wedge congruence: chart, metric, acceleration, rigidity and non-coordinate frame"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

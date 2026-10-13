@@ -2,7 +2,7 @@
 id: pthm-cm04-resonance-and-boundedness
 kind: physics-theorem
 title: "The driven oscillator: steady response and amplitude profile, bounded damped and off-resonant motions, and unbounded undamped resonance"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

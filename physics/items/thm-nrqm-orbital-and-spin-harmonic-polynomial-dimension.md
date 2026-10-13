@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-harmonic-polynomial-dimension]
 kind: theorem
 domain: mathematics
 title: "Harmonic polynomial dimension"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [thm-nrqm-orbital-and-spin-legendre-rodrigues-equation, thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-nrqm-orbital-and-spin-sphere-onb, def-homogeneous-polynomial-and-homogeneous-ideal, def-monomials-multidegree-and-total-degree, def-laplacian-of-a-c2-function, def-directional-and-partial-derivatives, thm-algebra-of-derivatives, thm-chain-rule, thm-stars-and-bars, def-dimension, def-linear-map, def-linear-subspace, def-linear-basis, def-inner-product-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-orthogonality-and-orthogonal-complement, def-self-adjoint-and-normal-endomorphism, cor-inner-product-induces-a-norm, thm-nrqm-oscillator-multidimensional-oscillator-completeness, thm-nrqm-oscillator-oscillator-scaling-and-exact-realization, thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, def-factorial-and-falling-factorial, def-natural-numbers, def-finite-sum-in-a-commutative-monoid, def-countable-choice, thm-nrqm-orbital-and-spin-sphere-laplacian-diagonal-domain, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, thm-sine-and-cosine-derivatives, thm-chain-rule-for-total-derivatives, thm-euclidean-inverse-function-theorem]

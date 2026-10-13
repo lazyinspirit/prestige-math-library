@@ -2,7 +2,7 @@
 id: def-equivariant-borel-moore-homology-and-correspondence-convolution
 kind: definition
 title: "Equivariant Borel–Moore homology and oriented correspondence convolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

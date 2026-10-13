@@ -2,7 +2,7 @@
 id: ex-cm-flow-derivative-of-the-isotropic-oscillator
 kind: example
 title: "The isotropic oscillator: the explicit flow, $Y^{\\mathsf T}JY=J$ and $\\det Y=1$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

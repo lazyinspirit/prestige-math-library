@@ -2,7 +2,7 @@
 id: def-support-of-a-sheaf-section
 kind: definition
 title: "Support of a section of a sheaf"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

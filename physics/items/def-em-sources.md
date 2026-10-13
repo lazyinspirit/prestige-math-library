@@ -2,7 +2,7 @@
 id: def-em-sources
 kind: definition
 title: "Charge parameter, frame charge and current densities, volume charge and flux, and the four-current"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-em-lab-geometry, def-em-si-conventions, def-oriented-unit-normal-and-flux-of-a-surface-patch, def-riemann-integral-over-a-jordan-set, thm-sr-tensor-and-current-transformation, thm-sr-proper-time-and-observer-decomposition, def-countable-choice, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, thm-continuous-functions-on-compact-jordan-sets-are-integrable, lem-riemann-lebesgue-comparison-for-distribution-test-integrands, thm-extreme-value-metric, thm-continuous-preimages-of-borel-sets-are-borel, thm-borel-sets-are-lebesgue-measurable, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets, prop-closure-properties-of-measurable-functions-used-by-the-integral, prop-order-and-scalar-rules-for-the-nonnegative-integral, prop-the-nonnegative-integral-agrees-with-the-simple-integral]

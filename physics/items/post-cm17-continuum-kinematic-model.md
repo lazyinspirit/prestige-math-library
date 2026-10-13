@@ -2,7 +2,7 @@
 id: post-cm17-continuum-kinematic-model
 kind: postulate
 title: "Adopted continuum kinematic model: body data, smooth motions as families of label worldlines, the continuum idealization and frame covariance"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

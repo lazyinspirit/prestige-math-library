@@ -2,7 +2,7 @@
 id: def-cm-legendre-map-in-a-time-dependent-chart
 kind: definition
 title: "The Legendre map of a time-dependent Lagrangian: regularity and hyperregularity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

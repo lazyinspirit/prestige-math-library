@@ -4,7 +4,7 @@ aliases: [nrqm-interference-uniform-phase-averaging]
 kind: example
 domain: physics
 title: "A declared finite phase-averaging model reproduces the which-path law for orthogonal components"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps: [def-nrqm-interference-two-path-preparation-and-detection-model, pthm-nrqm-interference-coherent-and-mixture-detection-laws, post-nrqm-framework-preparation-and-apparatus, cor-sum-of-roots-of-unity, thm-complex-nth-roots-and-roots-of-unity, def-complex-exponential, def-countable-choice, def-axiom-of-choice]

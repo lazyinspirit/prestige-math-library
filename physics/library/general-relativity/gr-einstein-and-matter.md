@@ -8,7 +8,7 @@ requires:
   - gr-tensors-and-observers
 page: gr-einstein-and-matter
 title: "Einstein And Matter"
-status: draft
+status: published
 library: physics
 items:
   - def-gr-metric-volume-form-and-current-flux

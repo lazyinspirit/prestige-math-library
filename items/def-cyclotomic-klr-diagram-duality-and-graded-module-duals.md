@@ -2,7 +2,7 @@
 id: def-cyclotomic-klr-diagram-duality-and-graded-module-duals
 kind: definition
 title: "Cyclotomic diagram duality and graded module duals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

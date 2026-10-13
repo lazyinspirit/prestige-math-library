@@ -2,7 +2,7 @@
 id: ex-five-algebraic-proofs-of-bernoulli-and-rational-forms
 kind: example
 title: "Five finite proofs of Bernoulli, with rational exponents and the quadratic refinement"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

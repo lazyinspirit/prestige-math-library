@@ -2,7 +2,7 @@
 id: def-gr-dust-reduction-variables-and-gauge
 kind: definition
 title: "Dust reduction variables: signature flip, frame, connection, kinematics, comoving-parallel gauge and unknowns"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

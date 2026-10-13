@@ -2,7 +2,7 @@
 id: ex-cm-bilateral-shift-finite-checks
 kind: example
 title: "Explicit mixing, periodic and sensitivity checks in the bilateral shift"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

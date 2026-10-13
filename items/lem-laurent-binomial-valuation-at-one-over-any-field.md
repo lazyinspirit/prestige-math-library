@@ -2,7 +2,7 @@
 id: lem-laurent-binomial-valuation-at-one-over-any-field
 kind: lemma
 title: "Laurent binomial valuation at one over any field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

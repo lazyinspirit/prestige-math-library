@@ -1,7 +1,7 @@
 ---
 page: projective-functors-and-the-soergel-functor-in-category-o-examples
 title: "Projective Functors and the Soergel Functor in Category O — Examples"
-status: draft
+status: published
 requires:
   - projective-functors-and-the-soergel-functor-in-category-o
 items: []

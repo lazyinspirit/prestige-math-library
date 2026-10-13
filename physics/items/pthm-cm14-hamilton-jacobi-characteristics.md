@@ -2,7 +2,7 @@
 id: pthm-cm14-hamilton-jacobi-characteristics
 kind: physics-theorem
 title: "A complete integral of the model's Hamilton-Jacobi equation produces chart Hamiltonian characteristics, Jacobi constants and local canonical $(\\beta,\\alpha)$ labels"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 21

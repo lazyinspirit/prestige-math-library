@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Finite square well: an exactly solvable bound state and exact
   bound-state counts"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

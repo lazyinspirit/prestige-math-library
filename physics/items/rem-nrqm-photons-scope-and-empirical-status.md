@@ -2,7 +2,7 @@
 id: rem-nrqm-photons-scope-and-empirical-status
 kind: remark
 title: "Scope and empirical status of the photons and radiation modes page"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 14

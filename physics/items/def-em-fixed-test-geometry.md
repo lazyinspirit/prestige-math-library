@@ -3,7 +3,7 @@ id: def-em-fixed-test-geometry
 kind: definition
 title: "Fixed volume and patch test geometries, outward normals and induced orientations"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps: [def-em-lab-geometry,

@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound]
 kind: theorem
 domain: mathematics
 title: "Cutoff dipole relative bound"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps: [thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains, thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian, thm-nrqm-fock-and-equilibrium-bounded-fixed-n-operator, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, lem-nrqm-composites-euclidean-l2-product-unitary, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, cor-cauchy-schwarz-inequality-for-l-two, thm-cauchy-schwarz-in-an-inner-product-space, thm-kato-rellich, def-relative-boundedness-with-respect-to-an-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-countable-choice, def-axiom-of-choice]

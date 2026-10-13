@@ -2,7 +2,7 @@
 id: op-periodic-three-dimensional-navier-stokes-global-regularity
 kind: open-problem
 title: "Global smoothness of periodic three-dimensional Navier–Stokes solutions"
-status: draft
+status: published
 origin: session
 provenance:
   statement: ai-altered

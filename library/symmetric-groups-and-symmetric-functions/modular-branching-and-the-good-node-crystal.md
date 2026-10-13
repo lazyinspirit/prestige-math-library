@@ -1,7 +1,7 @@
 ---
 page: modular-branching-and-the-good-node-crystal
 title: "Modular Branching and the Good-Node Crystal"
-status: draft
+status: published
 requires: [integral-specht-modules-and-modular-simple-modules,
            cores-quotients-and-blocks-of-symmetric-groups,
            type-a-hecke-specht-modules-and-cellular-bases,

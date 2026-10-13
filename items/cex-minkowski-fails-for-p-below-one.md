@@ -2,7 +2,7 @@
 id: cex-minkowski-fails-for-p-below-one
 kind: counterexample
 title: "Minkowski fails for $p = 1/2$: the hypothesis $p \\ge 1$ is load-bearing"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

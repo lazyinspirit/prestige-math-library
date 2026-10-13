@@ -2,7 +2,7 @@
 id: lem-oriented-minimal-parabolic-klr-normal-forms-and-cyclotomic-cap-ideal-intersection
 kind: lemma
 title: "Oriented minimal-parabolic normal forms and the cyclotomic cap ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 8

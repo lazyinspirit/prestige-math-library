@@ -2,7 +2,7 @@
 id: lem-smooth-projective-modification-preserves-open-cohomology-images
 kind: lemma
 title: "Modification preserves open cohomology images"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

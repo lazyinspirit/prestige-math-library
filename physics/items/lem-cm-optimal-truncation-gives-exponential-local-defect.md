@@ -2,7 +2,7 @@
 id: lem-cm-optimal-truncation-gives-exponential-local-defect
 kind: lemma
 title: Optimal finite truncation gives an exponential local splitting defect
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 14

@@ -1,7 +1,7 @@
 ---
 page: qm-interference-and-local-detection-examples
 title: "Qm Interference And Local Detection — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

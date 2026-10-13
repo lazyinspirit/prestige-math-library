@@ -2,7 +2,7 @@
 id: thm-gr-second-bianchi-and-divergence-free-einstein
 kind: theorem
 title: "The second Bianchi identity and the vanishing divergence of the Einstein tensor"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

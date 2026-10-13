@@ -2,7 +2,7 @@
 id: prop-core-quotient-size-and-weight-formula
 kind: proposition
 title: "The core-quotient size formula defines the weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

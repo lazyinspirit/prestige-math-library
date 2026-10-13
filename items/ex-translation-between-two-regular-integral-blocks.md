@@ -2,7 +2,7 @@
 id: ex-translation-between-two-regular-integral-blocks
 kind: example
 title: "Translation between two regular integral blocks"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -1,7 +1,7 @@
 ---
 page: murnaghan-stability-via-fi-modules-examples
 title: "Murnaghan Stability via FI-Modules — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-murnaghan-stability-for-alpha-beta-two,
            cex-a-global-product-threshold-is-not-a-per-triple-sharpness-claim]

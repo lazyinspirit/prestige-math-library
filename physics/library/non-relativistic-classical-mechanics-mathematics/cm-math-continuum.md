@@ -1,7 +1,7 @@
 ---
 page: cm-math-continuum
 title: Cm Math Continuum
-status: draft
+status: published
 items:
   - def-cm-euclidean-spatial-calculus
   - def-cm-continuum-motion

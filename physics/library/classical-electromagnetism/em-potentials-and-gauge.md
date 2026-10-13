@@ -1,7 +1,7 @@
 ---
 page: em-potentials-and-gauge
 title: "Potentials and gauge"
-status: draft
+status: published
 items: [pthm-em-spacetime-potentials, def-em-gauge-transformation,
         pthm-em-gauge-invariance, pthm-em-lorenz-gauge-wave-form,
         pthm-em-gauge-reachability]

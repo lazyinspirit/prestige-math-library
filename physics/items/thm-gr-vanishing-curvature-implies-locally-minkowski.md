@@ -2,7 +2,7 @@
 id: thm-gr-vanishing-curvature-implies-locally-minkowski
 kind: theorem
 title: "Vanishing curvature on a normal neighborhood is a local isometry to Minkowski space"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

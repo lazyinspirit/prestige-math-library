@@ -2,7 +2,7 @@
 id: lem-integer-color-degenerate-hecke-klr-local-inverse-tables
 kind: lemma
 title: "Integer-color degenerate Hecke–KLR local inverse tables"
-status: draft
+status: published
 origin: session
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

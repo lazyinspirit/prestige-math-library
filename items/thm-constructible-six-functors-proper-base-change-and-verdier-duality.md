@@ -2,7 +2,7 @@
 id: thm-constructible-six-functors-proper-base-change-and-verdier-duality
 kind: theorem
 title: "Constructible six functors, proper base change and normalized equivariant duality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

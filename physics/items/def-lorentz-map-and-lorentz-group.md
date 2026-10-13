@@ -2,7 +2,7 @@
 id: def-lorentz-map-and-lorentz-group
 kind: definition
 title: Linear and affine Lorentz maps, and the Lorentz group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

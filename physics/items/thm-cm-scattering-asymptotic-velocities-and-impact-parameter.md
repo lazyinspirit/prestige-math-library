@@ -2,7 +2,7 @@
 id: thm-cm-scattering-asymptotic-velocities-and-impact-parameter
 kind: theorem
 title: "Existence of the asymptotic velocities and the impact-parameter identity $J=\\mu b|v_-|$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

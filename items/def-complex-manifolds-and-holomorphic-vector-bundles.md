@@ -2,7 +2,7 @@
 id: def-complex-manifolds-and-holomorphic-vector-bundles
 kind: definition
 title: "Complex manifolds, holomorphic vector bundles and Hermitian metrics"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

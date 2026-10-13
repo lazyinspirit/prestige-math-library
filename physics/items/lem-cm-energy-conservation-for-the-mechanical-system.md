@@ -2,7 +2,7 @@
 id: lem-cm-energy-conservation-for-the-mechanical-system
 kind: lemma
 title: "Energy is conserved along solutions of the mechanical system with a configuration-dependent kinetic metric"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

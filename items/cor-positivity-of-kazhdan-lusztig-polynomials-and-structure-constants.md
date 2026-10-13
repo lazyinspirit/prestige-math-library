@@ -2,7 +2,7 @@
 id: cor-positivity-of-kazhdan-lusztig-polynomials-and-structure-constants
 kind: corollary
 title: "Positivity of Kazhdan-Lusztig polynomials, mu-coefficients and structure constants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 13

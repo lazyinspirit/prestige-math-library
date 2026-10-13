@@ -2,7 +2,7 @@
 id: def-proper-continuous-map
 kind: definition
 title: Proper continuous maps of topological spaces
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

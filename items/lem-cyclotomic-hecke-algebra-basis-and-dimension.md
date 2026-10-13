@@ -2,7 +2,7 @@
 id: lem-cyclotomic-hecke-algebra-basis-and-dimension
 kind: lemma
 title: "Basis and dimension of the cyclotomic Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 16

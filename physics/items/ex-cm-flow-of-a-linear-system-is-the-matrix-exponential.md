@@ -2,7 +2,7 @@
 id: ex-cm-flow-of-a-linear-system-is-the-matrix-exponential
 kind: example
 title: "The flow and variational equation of a linear system: Phi(t,a)=e^{tA}a"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

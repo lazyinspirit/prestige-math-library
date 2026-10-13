@@ -2,7 +2,7 @@
 id: def-gr-dust-electric-magnetic-weyl-variables-and-schouten
 kind: definition
 title: "Schouten tensor, prescribed curvature, electric-magnetic Weyl variables and the reconstruction formula in the dust reduction"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

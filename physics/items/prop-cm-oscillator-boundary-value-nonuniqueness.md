@@ -2,7 +2,7 @@
 id: prop-cm-oscillator-boundary-value-nonuniqueness
 kind: proposition
 title: "The undamped oscillator: Dirichlet non-uniqueness at $T=n\\pi/\\omega$ despite unique initial-value solutions"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

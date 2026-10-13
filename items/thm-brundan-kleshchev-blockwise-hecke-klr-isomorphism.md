@@ -2,7 +2,7 @@
 id: thm-brundan-kleshchev-blockwise-hecke-klr-isomorphism
 kind: theorem
 title: "The Brundan–Kleshchev blockwise Hecke–KLR isomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 31

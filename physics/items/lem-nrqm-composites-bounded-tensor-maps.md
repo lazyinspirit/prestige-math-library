@@ -4,7 +4,7 @@ aliases: [nrqm-composites-bounded-tensor-maps]
 kind: lemma
 domain: mathematics
 title: "Bounded tensor maps: extension, norm estimate, adjoint and commutation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [lem-nrqm-composites-hilbert-tensor-construction, thm-extension-of-a-bounded-map-from-a-dense-subspace, def-bounded-linear-operator, def-operator-norm, def-hilbert-space-adjoint, thm-hilbert-adjoint-properties, def-countable-choice]

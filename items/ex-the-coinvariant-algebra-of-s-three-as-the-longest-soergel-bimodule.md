@@ -2,7 +2,7 @@
 id: ex-the-coinvariant-algebra-of-s-three-as-the-longest-soergel-bimodule
 kind: example
 title: "The coinvariant algebra of S_3 as the Soergel bimodule of the longest element"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

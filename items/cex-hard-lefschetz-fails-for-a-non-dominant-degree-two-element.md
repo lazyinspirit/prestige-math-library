@@ -2,7 +2,7 @@
 id: cex-hard-lefschetz-fails-for-a-non-dominant-degree-two-element
 kind: counterexample
 title: "Hard Lefschetz fails for a non-dominant degree-two element: the rank-one case"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

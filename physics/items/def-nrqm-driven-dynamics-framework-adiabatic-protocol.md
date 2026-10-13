@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared adiabatic protocol model: slow parameter, followed spectral
   subspace, uniform gap and leakage probability"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

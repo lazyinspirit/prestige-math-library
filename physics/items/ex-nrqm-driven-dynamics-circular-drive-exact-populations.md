@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Worked Rabi populations of the circularly driven two-level model:
   quarter-inversion, pi-pulse and detuned checks"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

@@ -2,7 +2,7 @@
 id: lem-cartan-projection-constructs-the-quantum-verma-contravariant-form
 kind: lemma
 title: "Cartan projection constructs the Verma contravariant form and identifies its radical"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

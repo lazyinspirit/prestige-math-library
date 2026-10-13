@@ -2,7 +2,7 @@
 id: lem-sr-hyperbolic-motion-worldline
 kind: lemma
 title: "The uniformly accelerated worldline: hyperbolic motion, constant four-acceleration magnitude, and identification as a Rindler flow line"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 15

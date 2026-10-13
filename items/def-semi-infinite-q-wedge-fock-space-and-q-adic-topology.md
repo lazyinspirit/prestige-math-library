@@ -2,7 +2,7 @@
 id: def-semi-infinite-q-wedge-fock-space-and-q-adic-topology
 kind: definition
 title: "The semi-infinite q-wedge Fock space and its q-adic topology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

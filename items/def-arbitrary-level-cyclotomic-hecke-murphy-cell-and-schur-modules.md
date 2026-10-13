@@ -2,7 +2,7 @@
 id: def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules
 kind: definition
 title: "Arbitrary-level cyclotomic Hecke, Murphy cell and multipartition Schur modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

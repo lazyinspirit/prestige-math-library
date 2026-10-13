@@ -2,7 +2,7 @@
 id: ex-explicit-enumeration-of-the-rationals
 kind: example
 title: "An explicit enumeration of the rationals, with repetitions and then without them"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

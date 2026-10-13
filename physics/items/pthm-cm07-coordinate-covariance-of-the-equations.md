@@ -2,7 +2,7 @@
 id: pthm-cm07-coordinate-covariance-of-the-equations
 kind: physics-theorem
 title: "Time-dependent coordinate maps transform the potential-part equation into the substituted Euler-Lagrange equation"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

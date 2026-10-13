@@ -2,7 +2,7 @@
 id: thm-cm-action-variable-derivative
 kind: theorem
 title: "The action variable of a two-simple-turning-point family is $C^1$ with derivative $T(E)/(2\\pi)$, the period quadrature over $2\\pi$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

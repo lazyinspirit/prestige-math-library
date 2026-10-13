@@ -2,7 +2,7 @@
 id: lem-close-map-first-component-has-uniform-inverse
 kind: lemma
 title: "A $C^2$ map $C^1$-close to $F$ has a unique inverse branch for its first component, with $O(\\varepsilon)$ derivative bounds"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

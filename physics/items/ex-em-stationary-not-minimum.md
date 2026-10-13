@@ -2,7 +2,7 @@
 id: ex-em-stationary-not-minimum
 kind: example
 title: "Stationary functional need not be a minimum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

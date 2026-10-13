@@ -2,7 +2,7 @@
 id: cex-the-same-number-of-removable-p-hooks-does-not-replace-the-core-test
 kind: counterexample
 title: "Equal removable-hook counts do not replace the core test"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

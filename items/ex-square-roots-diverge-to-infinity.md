@@ -2,7 +2,7 @@
 id: ex-square-roots-diverge-to-infinity
 kind: example
 title: "The square roots $\\sqrt{k}$ diverge to $+\\infty$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: thm-cm-kepler-conic-and-eccentricity
 kind: theorem
 title: "The Kepler orbit equation is a conic: $u=c(1+e\\cos(\\varphi-\\theta_0))$ with $E=(\\mu\\kappa^2/2J^2)(e^2-1)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

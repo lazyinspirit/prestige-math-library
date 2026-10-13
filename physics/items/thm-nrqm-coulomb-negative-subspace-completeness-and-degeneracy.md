@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-negative-subspace-completeness-and-degeneracy]
 kind: theorem
 domain: mathematics
 title: "Negative-subspace completeness and degeneracy"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps: [def-symmetric-self-adjoint-and-essentially-self-adjoint, thm-nrqm-coulomb-laguerre-bound-energy-exhaustion, thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-coulomb-essential-spectrum, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-coulomb-kummer-recurrence-and-termination, def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-projection-valued-measure, lem-eigenspaces-of-a-self-adjoint-operator-are-orthogonal, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-inner-product-space, cor-cauchy-schwarz-inequality-for-l-two, def-countable-choice, def-axiom-of-choice]

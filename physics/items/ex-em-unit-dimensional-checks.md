@@ -2,7 +2,7 @@
 id: ex-em-unit-dimensional-checks
 kind: example
 title: "Dimensional check of every Maxwell and Lorentz term in SI units"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-divergence-and-curl-of-a-c1-vector-field, def-em-si-conventions, post-em-lorentz-coupling, post-em-vacuum-maxwell]

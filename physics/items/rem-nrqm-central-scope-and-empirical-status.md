@@ -4,7 +4,7 @@ aliases: [nrqm-central-scope-and-empirical-status]
 kind: remark
 domain: physics
 title: "Scope and empirical status of the central-potential and hydrogen page"
-status: draft
+status: published
 origin: session
 dependency_level: 17
 deps: [def-nrqm-central-framework-central-potential-model, def-nrqm-central-framework-coulomb-and-hydrogen-model, pthm-nrqm-central-spherical-reduction-of-smooth-states, pthm-nrqm-central-coulomb-energy-observable-and-flow, pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy, pthm-nrqm-central-coulomb-bound-state-radial-distributions, pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum, post-nrqm-framework-preparation-and-apparatus, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle]

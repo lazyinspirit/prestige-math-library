@@ -2,7 +2,7 @@
 id: def-gr-hilbert-stress-energy-tensor
 kind: definition
 title: "The Hilbert stress-energy tensor of a metric-dependent action"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

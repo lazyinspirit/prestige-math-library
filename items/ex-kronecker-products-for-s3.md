@@ -2,7 +2,7 @@
 id: ex-kronecker-products-for-s3
 kind: example
 title: The complete internal product table for S_3
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

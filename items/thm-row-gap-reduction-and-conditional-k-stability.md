@@ -2,7 +2,7 @@
 id: thm-row-gap-reduction-and-conditional-k-stability
 kind: theorem
 title: Row-gap reduction and conditional k-stability of Kronecker coefficients
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

@@ -5,7 +5,7 @@ aliases:
 kind: example
 domain: mathematics
 title: Long-time RWA limitation
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

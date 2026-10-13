@@ -5,7 +5,7 @@ kind: remark
 domain: physics
 title: "Scope of the composites examples page: what the singlet, marker and
   mixture computations establish"
-status: draft
+status: published
 origin: session
 dependency_level: 16
 deps:

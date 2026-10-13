@@ -2,7 +2,7 @@
 id: lem-gr-energy-momentum-current-divergence
 kind: lemma
 title: "Divergence of the measured energy-momentum current and the finite-chain balance identity"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

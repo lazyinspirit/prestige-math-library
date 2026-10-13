@@ -2,7 +2,7 @@
 id: ex-cm17-channel-flow-and-no-slip-check
 kind: example
 title: "Poiseuille and Couette channel flows of the viscous branch: explicit profiles, flux and wall data"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

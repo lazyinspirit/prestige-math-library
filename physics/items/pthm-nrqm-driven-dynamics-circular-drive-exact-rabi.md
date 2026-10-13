@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The circularly driven two-level model: exact rotating-frame reduction,
   Rabi populations, resonance and inversion times"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

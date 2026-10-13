@@ -2,7 +2,7 @@
 id: prop-cm-nonholonomic-distribution-is-not-tangent-to-level-sets
 kind: proposition
 title: "The distribution $\\mathrm{span}\\{\\partial_x,\\partial_y+x\\partial_z\\}$ is not tangent to any regular level sets"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

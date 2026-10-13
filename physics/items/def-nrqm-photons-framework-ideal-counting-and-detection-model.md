@@ -3,7 +3,7 @@ id: def-nrqm-photons-framework-ideal-counting-and-detection-model
 kind: definition
 title: "The declared ideal counting, energy-window and analyser detection models
   of the radiation sector"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 12

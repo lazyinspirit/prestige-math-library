@@ -2,7 +2,7 @@
 id: def-cm18-observable-model
 kind: definition
 title: "Operational observable model of the force branch: parameters, preparations, observation times, readout, units and additive error"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps: [post-cm01-frames, post-cm01-worldlines, def-cm01-configuration, def-cm01-units, post-cm02-force-superposition, def-cm02-newtonian-flow, pthm-cm02-ivp, def-cm-measurement-model, def-probability-measure, def-random-element-and-real-random-variable]

@@ -1,7 +1,7 @@
 ---
 page: affine-perverse-vanishing-and-universal-hyperplanes
 title: "Affine Perverse Vanishing And Universal Hyperplanes"
-status: draft
+status: published
 items: [lem-affine-algebraic-whitney-strata-admit-finite-critical-strongly-plurisubharmonic-distance-exhaustions,
         lem-complex-stratified-morse-data-have-tangential-normal-product-and-link-description,
         lem-noncharacteristic-complex-stratified-pullback-is-perverse-exact,

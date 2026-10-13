@@ -2,7 +2,7 @@
 id: def-local-intersection-form-for-a-soergel-summand
 kind: definition
 title: "The local intersection form on Hom(B_y, B_x B_s)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

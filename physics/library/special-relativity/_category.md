@@ -1,7 +1,7 @@
 ---
 name: special-relativity
 title: Special Relativity
-status: draft
+status: published
 library: physics
 ---
 

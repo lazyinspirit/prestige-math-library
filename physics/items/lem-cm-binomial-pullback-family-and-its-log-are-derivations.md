@@ -2,7 +2,7 @@
 id: lem-cm-binomial-pullback-family-and-its-log-are-derivations
 kind: lemma
 title: The binomial family of the splitting pullback is multiplicative and bracket-preserving, and its logarithm is a derivation
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 10

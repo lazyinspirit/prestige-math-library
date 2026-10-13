@@ -4,7 +4,7 @@ aliases: [nrqm-scattering-scope-and-empirical-status]
 kind: remark
 domain: physics
 title: "Scope and empirical status of the three-dimensional scattering page"
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps: [def-nrqm-scattering-framework-short-range-model, def-nrqm-scattering-stationary-beam-and-cross-section-model, def-nrqm-scattering-coulomb-dollard-model, def-nrqm-scattering-single-channel-resonance-model, pthm-nrqm-scattering-wave-operator-existence-and-free-continuity, pthm-nrqm-scattering-compact-support-asymptotic-completeness, pthm-nrqm-scattering-stationary-wave-amplitude-and-flux, pthm-nrqm-scattering-controlled-born-approximation, pthm-nrqm-scattering-resolvent-tail-asymptotic-completeness, pthm-nrqm-scattering-partial-wave-cross-section, pthm-nrqm-scattering-stationary-dynamical-identification, pthm-nrqm-scattering-single-channel-resonance-cross-section]

@@ -2,7 +2,7 @@
 id: thm-triangular-fixed-tabloid-reconstruction-of-the-character-table
 kind: theorem
 title: "Fixed-tabloid reconstruction of the character table (Fox–Mullineux)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

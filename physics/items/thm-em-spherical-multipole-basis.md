@@ -2,7 +2,7 @@
 id: thm-em-spherical-multipole-basis
 kind: theorem
 title: Exterior spherical multipole expansion and the ball boundary series
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

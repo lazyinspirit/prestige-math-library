@@ -2,7 +2,7 @@
 id: ex-divided-powers-and-lusztig-form-in-quantized-sl-two
 kind: example
 title: "Divided powers and the Lusztig form in quantized sl2"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

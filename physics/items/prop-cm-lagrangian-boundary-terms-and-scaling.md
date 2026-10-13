@@ -2,7 +2,7 @@
 id: prop-cm-lagrangian-boundary-terms-and-scaling
 kind: proposition
 title: "Adding a total time derivative and rescaling a Lagrangian: the Euler-Lagrange expression and the stationary curves"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

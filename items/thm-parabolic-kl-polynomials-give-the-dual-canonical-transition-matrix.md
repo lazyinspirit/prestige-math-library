@@ -2,7 +2,7 @@
 id: thm-parabolic-kl-polynomials-give-the-dual-canonical-transition-matrix
 kind: theorem
 title: "Parabolic Kazhdan-Lusztig polynomials give the dual-canonical transition matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 23

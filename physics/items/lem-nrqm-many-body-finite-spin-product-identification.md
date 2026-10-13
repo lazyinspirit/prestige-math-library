@@ -3,7 +3,7 @@ id: lem-nrqm-many-body-finite-spin-product-identification
 kind: lemma
 domain: mathematics
 title: "Finite spin components of an N-fold spatial tensor product"
-status: draft
+status: published
 origin: session
 dependency_level: 4
 deps: [def-sobolev-space-wkp-and-its-norm, lem-nrqm-composites-euclidean-l2-product-unitary, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-permutation-sector-projections, lem-nrqm-kinematics-component-valued-wavefunction-identifications, thm-nrqm-fock-and-equilibrium-permutation-restricted-self-adjointness, def-countable-choice]

@@ -1,7 +1,7 @@
 ---
 page: cm07-stationary-action-and-lagrangian-dynamics
 title: "Stationary action and Lagrangian dynamics"
-status: draft
+status: published
 library: physics
 items:
   - def-cm07-action-and-mechanical-lagrangian

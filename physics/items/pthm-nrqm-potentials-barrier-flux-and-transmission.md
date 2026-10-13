@@ -4,7 +4,7 @@ aliases: [ nrqm-potentials-barrier-flux-and-transmission ]
 kind: physics-theorem
 domain: physics
 title: "Rectangular barrier: scattering solution, flux balance and transmission"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

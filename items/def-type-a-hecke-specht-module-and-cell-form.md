@@ -2,7 +2,7 @@
 id: def-type-a-hecke-specht-module-and-cell-form
 kind: definition
 title: "The type-A Hecke Specht module and its cell form"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

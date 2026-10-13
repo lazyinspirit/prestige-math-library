@@ -1,7 +1,7 @@
 ---
 name: classical-electromagnetism-mathematics
 title: Classical Electromagnetism — Mathematics
-status: draft
+status: published
 library: mathematics
 ---
 

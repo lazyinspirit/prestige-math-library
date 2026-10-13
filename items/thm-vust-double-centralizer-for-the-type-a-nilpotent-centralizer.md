@@ -2,7 +2,7 @@
 id: thm-vust-double-centralizer-for-the-type-a-nilpotent-centralizer
 kind: theorem
 title: "Vust's graded double centralizer for the type-A nilpotent centralizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

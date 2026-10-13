@@ -2,7 +2,7 @@
 id: def-em-fields
 kind: definition
 title: "The electric and magnetic fields as fixed-time spatial vector fields"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-determinant-of-a-square-matrix, def-transpose-of-a-matrix, def-matrix-product-and-identity-matrix, def-ck-euclidean-maps-and-diffeomorphisms, def-em-lab-geometry, def-em-si-conventions]

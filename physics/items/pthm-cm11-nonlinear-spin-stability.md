@@ -2,7 +2,7 @@
 id: pthm-cm11-nonlinear-spin-stability
 kind: physics-theorem
 title: "Nonlinear stability of the torque-free spin of the rigid-material model about an extreme principal axis, and instability about the intermediate axis, with an explicit escape time and the orientation caveat"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

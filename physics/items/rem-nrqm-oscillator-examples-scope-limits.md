@@ -4,7 +4,7 @@ aliases: [ nrqm-oscillator-examples-scope-limits ]
 kind: remark
 domain: physics
 title: "What the worked oscillator examples establish"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 15
 deps:

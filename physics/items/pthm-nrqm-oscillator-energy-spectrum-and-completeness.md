@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The energy observable of the oscillator model: spectrum, eigenbasis and
   outcome law"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

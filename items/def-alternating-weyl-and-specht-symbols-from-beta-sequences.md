@@ -2,7 +2,7 @@
 id: def-alternating-weyl-and-specht-symbols-from-beta-sequences
 kind: definition
 title: "Virtual Weyl and Specht symbols attached to beta sequences"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

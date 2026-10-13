@@ -2,7 +2,7 @@
 id: lem-ultra-tight-multisets-admit-column-potentials
 kind: lemma
 title: "Ultra-tight multisets admit integer column potentials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

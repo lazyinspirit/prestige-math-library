@@ -8,7 +8,7 @@ requires:
 page: gr-gr15-exact-checked-sbierski-smooth-mghd-proof-with-complete-local-prerequisites-and-quotient-second-countability-examples
 title: "Gr15 Exact Checked Sbierski Smooth Mghd Proof With Complete Local
   Prerequisites And Quotient Second Countability — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: thm-ordinary-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes
 kind: theorem
 title: Ordinary middle perverse t structure, recollement and intersection complexes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

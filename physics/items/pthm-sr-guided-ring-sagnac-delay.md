@@ -2,7 +2,7 @@
 id: pthm-sr-guided-ring-sagnac-delay
 kind: physics-theorem
 title: "The guided-ring Sagnac delay: return times and receiver proper-time difference for counter-propagating guided signals on a rotating ring"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 15

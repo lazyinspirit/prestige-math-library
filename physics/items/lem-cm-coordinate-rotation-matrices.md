@@ -2,7 +2,7 @@
 id: lem-cm-coordinate-rotation-matrices
 kind: lemma
 title: "The coordinate rotation matrices $R_z(a)$ and $R_y(a)$: values in $SO(3)$, composition law, and derivatives"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

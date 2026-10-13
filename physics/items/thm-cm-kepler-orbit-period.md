@@ -2,7 +2,7 @@
 id: thm-cm-kepler-orbit-period
 kind: theorem
 title: "Completeness and periodicity of the negative-energy Kepler orbit, with $T=2\\pi\\mu ab/J$ and $T^2=4\\pi^2\\mu a^3/\\kappa$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

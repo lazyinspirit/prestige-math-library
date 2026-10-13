@@ -2,7 +2,7 @@
 id: cex-gr-achronal-set-need-not-be-acausal
 kind: counterexample
 title: "An achronal set that is not acausal: two null-related points"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

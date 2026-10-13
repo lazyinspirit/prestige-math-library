@@ -2,7 +2,7 @@
 id: pthm-cm03-work-energy
 kind: physics-theorem
 title: "Power of the total force and the work-energy theorem: $K'=\\mathcal P$ and $K(t_1)-K(t_0)=W([t_0,t_1])$ along a motion"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

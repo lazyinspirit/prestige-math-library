@@ -2,7 +2,7 @@
 id: lem-gr-finite-smooth-volume-density
 kind: lemma
 title: "Existence of a positive smooth volume density of total mass one on a smooth Lorentzian four-manifold"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

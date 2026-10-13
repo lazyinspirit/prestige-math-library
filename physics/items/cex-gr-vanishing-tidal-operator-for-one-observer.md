@@ -2,7 +2,7 @@
 id: cex-gr-vanishing-tidal-operator-for-one-observer
 kind: counterexample
 title: "A nonzero algebraic curvature tensor whose tidal operator vanishes for one timelike direction"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

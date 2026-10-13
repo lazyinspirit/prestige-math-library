@@ -2,7 +2,7 @@
 id: def-singular-integral-category-o-block-and-stabilizer
 kind: definition
 title: "The singular integral block and its dot stabilizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

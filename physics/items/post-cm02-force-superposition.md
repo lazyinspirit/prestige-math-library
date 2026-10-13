@@ -2,7 +2,7 @@
 id: post-cm02-force-superposition
 kind: postulate
 title: "Adopted force model: force maps, the equation of motion, additive composition of force contributions and frame covariance"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

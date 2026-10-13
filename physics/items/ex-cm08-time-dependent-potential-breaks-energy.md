@@ -2,7 +2,7 @@
 id: ex-cm08-time-dependent-potential-breaks-energy
 kind: example
 title: "A one-label model with a time-dependent potential: the time-translation identity fails and the mechanical energy changes at the rate of the explicit time dependence"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

@@ -2,7 +2,7 @@
 id: def-cm-topologically-mixing-dense-periodic-and-sensitive-maps
 kind: definition
 title: "Topological mixing, dense periodic points, sensitive dependence, and the stated chaos list"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

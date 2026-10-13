@@ -6,7 +6,7 @@ domain: physics
 title: "First-order transition amplitudes for a bounded control: Dyson
   remainder, the sinusoidal drive with its co- and counter-rotating parts, and
   the outcome-probability error"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

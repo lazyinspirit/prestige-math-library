@@ -2,7 +2,7 @@
 id: lem-hh-colored-permutation-rsk-and-tableau-square-count
 kind: lemma
 title: "Colored RSK and the multipartition square count"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 1

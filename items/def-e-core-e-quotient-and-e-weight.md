@@ -2,7 +2,7 @@
 id: def-e-core-e-quotient-and-e-weight
 kind: definition
 title: "The e-core, the e-quotient, and the e-weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: ex-sr-null-legs-compose-to-a-timelike-displacement
 kind: example
 title: "Two nonparallel future null legs compose to a future timelike displacement"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

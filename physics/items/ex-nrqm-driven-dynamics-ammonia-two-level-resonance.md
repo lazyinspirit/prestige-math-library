@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "The two-level inversion model in an oscillating field: resonance,
   averaged Rabi inversion and its error contract"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

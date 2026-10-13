@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-multidimensional-oscillator-completeness]
 kind: theorem
 domain: mathematics
 title: "Multidimensional oscillator completeness"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma, thm-nrqm-oscillator-diagonal-spectrum, thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, thm-nrqm-oscillator-hermite-completeness, thm-nrqm-oscillator-oscillator-scaling-and-exact-realization, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-euclidean-l2-product-unitary, thm-stars-and-bars, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-hilbert-space, def-countable-choice]

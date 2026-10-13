@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-coherent-state-convergence]
 kind: theorem
 domain: mathematics
 title: "Coherent-state convergence"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-complex-exponential-addition-and-real-extension, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, cor-exponential-reciprocal-and-positivity, thm-exponential-is-strictly-increasing, thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, thm-nrqm-oscillator-hermite-completeness, lem-nrqm-oscillator-closed-ladder-domains, def-complex-exponential, lem-complex-exponential-series-converges-everywhere, thm-geometric-series, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]

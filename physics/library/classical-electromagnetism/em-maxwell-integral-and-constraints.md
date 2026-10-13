@@ -1,7 +1,7 @@
 ---
 page: em-maxwell-integral-and-constraints
 title: "Integral Maxwell and constraints"
-status: draft
+status: published
 items: [lem-em-coordinate-cell-localization,
         lem-em-surface-density-localization,
         def-em-fixed-test-geometry,

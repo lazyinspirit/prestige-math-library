@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "Reduced preparations of a declared composite: the subsystem states of
   the framework"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

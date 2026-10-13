@@ -2,7 +2,7 @@
 id: ex-gr-schwarzschild-circular-orbit-thresholds-explicit
 kind: example
 title: "Explicit circular-orbit data of the Schwarzschild exterior at the ISCO radius 3s and the photon-sphere radius 3s/2"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

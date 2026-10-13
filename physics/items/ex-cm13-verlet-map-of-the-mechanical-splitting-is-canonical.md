@@ -2,7 +2,7 @@
 id: ex-cm13-verlet-map-of-the-mechanical-splitting-is-canonical
 kind: example
 title: "The velocity-Verlet step of the model's mechanical splitting is a canonical map of the presentation: exact flows of the drift and kick, unit determinant, and the oscillator check"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 21

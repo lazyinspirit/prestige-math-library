@@ -2,7 +2,7 @@
 id: thm-gr-tt-plane-wave-solutions
 kind: theorem
 title: "TT plane waves with arbitrary bounded profiles solve the linearized vacuum equations, are in harmonic gauge, and give Lorentzian small-amplitude metrics with a quadratic Einstein-tensor residual"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

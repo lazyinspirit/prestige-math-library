@@ -2,7 +2,7 @@
 id: def-cm-continuum-motion
 kind: definition
 title: "Continuum motions, spatial velocity, material acceleration and swept regions"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

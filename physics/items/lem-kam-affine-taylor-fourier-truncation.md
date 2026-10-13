@@ -2,7 +2,7 @@
 id: lem-kam-affine-taylor-fourier-truncation
 kind: lemma
 title: "Affine Taylor splitting in the actions and conservative Fourier truncation of a small perturbation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

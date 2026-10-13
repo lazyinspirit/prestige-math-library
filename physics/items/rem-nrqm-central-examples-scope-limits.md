@@ -4,7 +4,7 @@ aliases: [nrqm-central-examples-scope-limits]
 kind: remark
 domain: physics
 title: "Scope of the central-potential and hydrogen examples page"
-status: draft
+status: published
 origin: session
 dependency_level: 18
 deps: [ex-nrqm-central-hydrogen-bound-energy-units-and-reduced-mass, ex-nrqm-central-hydrogen-radial-distributions-and-moments, rem-nrqm-central-hydrogen-spectroscopy-status, def-nrqm-central-framework-coulomb-and-hydrogen-model, pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy, post-nrqm-framework-preparation-and-apparatus]

@@ -4,7 +4,7 @@ aliases: [ nrqm-oscillator-example-ladder-norms ]
 kind: example
 domain: physics
 title: "Ladder norms and excitation statistics of the oscillator eigenstates"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

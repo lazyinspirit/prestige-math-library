@@ -2,7 +2,7 @@
 id: lem-cyclotomic-hecke-polynomial-spectra-and-central-content-sectors
 kind: lemma
 title: "Polynomial spectra and central content sectors of finite cyclotomic Hecke algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

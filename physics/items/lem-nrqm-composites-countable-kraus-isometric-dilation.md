@@ -4,7 +4,7 @@ aliases: [nrqm-composites-countable-kraus-isometric-dilation]
 kind: lemma
 domain: mathematics
 title: "Countable Kraus isometric dilation and partial-trace recovery"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-finite-effects-and-instruments, lem-nrqm-composites-countable-kraus-normalization, lem-nrqm-composites-separable-partial-trace, lem-nrqm-composites-nuclear-bounded-cyclicity, thm-parseval-equivalences-for-a-complete-orthonormal-family, lem-weak-and-strong-additivity-of-orthogonal-projections, def-hilbert-orthogonal-projection, def-hilbert-space, def-countable-choice, lem-nrqm-composites-rank-one-operator-calculus]

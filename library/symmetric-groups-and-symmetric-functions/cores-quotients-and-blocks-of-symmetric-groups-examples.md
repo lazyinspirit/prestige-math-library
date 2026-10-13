@@ -1,7 +1,7 @@
 ---
 page: cores-quotients-and-blocks-of-symmetric-groups-examples
 title: "Cores, Quotients, and Blocks of Symmetric Groups — Examples"
-status: draft
+status: published
 requires:
   - cores-quotients-and-blocks-of-symmetric-groups
 items: []

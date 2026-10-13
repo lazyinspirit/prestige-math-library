@@ -2,7 +2,7 @@
 id: rem-cm09-zero-modes-degeneracy-and-scope
 kind: remark
 title: "Scope of the coupled quadratic model: zero modes, degenerate eigenspaces, unstable quadratic directions and the limits of the approximation statements"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

@@ -2,7 +2,7 @@
 id: pthm-cm05-kepler-period
 kind: physics-theorem
 title: "Kepler's third law for the gravitational two-label model: the relative period is $T=2\\pi\\mu ab/J=2\\pi\\sqrt{\\mu/\\kappa}\\,a^{3/2}$, so $T^2=4\\pi^2a^3/(G_{\\mathrm N}M)$ under the mass identification, and both labels are periodic relative to the centre of mass"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

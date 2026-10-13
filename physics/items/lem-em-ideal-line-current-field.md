@@ -3,7 +3,7 @@ id: "lem-em-ideal-line-current-field"
 kind: "lemma"
 title: 'The azimuthal line field $\rho^{-1}e_\varphi$: local integrability and distributional curl on the axis'
 domain: mathematics
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: ["def-borel-sigma-algebra", "def-borel-and-lebesgue-measurable-function-on-rn", "def-bounded-piecewise-c-one-euclidean-domain", "def-cross-product-in-r3", "def-divergence-and-curl-of-a-c1-vector-field", "def-distribution", "def-distributional-derivative", "def-integral-over-a-measurable-set", "def-regular-distribution-from-a-locally-integrable-function", "thm-locally-integrable-functions-embed-in-distributions", "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths", "def-surface-integral-on-a-compact-c-one-hypersurface", "def-test-function-space-d-of-an-open-set", "thm-algebra-of-derivatives", "thm-divergence-theorem-for-bounded-piecewise-c-one-domains", "thm-dominated-convergence", "thm-heine-cantor-metric", "thm-polar-coordinates-formula-for-lebesgue-measure", "thm-tonelli-theorem-for-sigma-finite-product-spaces", "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets", "cor-continuous-functions-are-borel-measurable", "prop-countable-subsets-of-rn-are-lebesgue-null", "def-countable-choice", "thm-linearity-of-the-lebesgue-integral-on-l-one"]

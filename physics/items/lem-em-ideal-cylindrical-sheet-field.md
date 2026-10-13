@@ -3,7 +3,7 @@ id: "lem-em-ideal-cylindrical-sheet-field"
 kind: "lemma"
 title: 'The piecewise constant cylinder field $e_3\mathbf 1_{\{\rho<a\}}$: distributional curl on the cylinder'
 domain: mathematics
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: ["def-bounded-piecewise-c-one-euclidean-domain", "def-cross-product-in-r3", "def-divergence-and-curl-of-a-c1-vector-field", "def-distribution", "def-distributional-derivative", "def-regular-distribution-from-a-locally-integrable-function", "def-surface-integral-on-a-compact-c-one-hypersurface", "def-test-function-space-d-of-an-open-set", "thm-tonelli-theorem-for-sigma-finite-product-spaces", "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets", "prop-countable-subsets-of-rn-are-lebesgue-null", "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets", "thm-divergence-theorem-for-bounded-piecewise-c-one-domains", "thm-locally-integrable-functions-embed-in-distributions", "def-countable-choice", "thm-lebesgue-measure-is-a-complete-measure"]

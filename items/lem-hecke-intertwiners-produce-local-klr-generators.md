@@ -2,7 +2,7 @@
 id: lem-hecke-intertwiners-produce-local-klr-generators
 kind: lemma
 title: "Hecke intertwiners produce the local KLR generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 14

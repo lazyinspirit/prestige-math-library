@@ -2,7 +2,7 @@
 id: cex-sr-kinetic-energy-is-observer-dependent
 kind: counterexample
 title: "Kinetic energy depends on the observer even though the invariant mass does not"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

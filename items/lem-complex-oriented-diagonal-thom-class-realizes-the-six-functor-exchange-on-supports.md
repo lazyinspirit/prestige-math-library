@@ -2,7 +2,7 @@
 id: lem-complex-oriented-diagonal-thom-class-realizes-the-six-functor-exchange-on-supports
 kind: lemma
 title: "Complex-oriented diagonal Thom classes realize exceptional exchange on supports"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

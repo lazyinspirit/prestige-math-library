@@ -2,7 +2,7 @@
 id: def-em-electromagnetic-tensor
 kind: definition
 title: "The electromagnetic two-form, its observer decomposition and the four-current"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-ck-tensor-field-on-minkowski-space, def-cross-product-in-r3, def-directional-and-partial-derivatives, def-em-fields, def-em-lab-geometry, def-em-si-conventions, def-em-sources, def-inertial-frame-and-inertial-chart, def-oriented-minkowski-volume-form, def-sr-affine-minkowski-model, lem-em-antisymmetric-tensor-contraction, thm-sr-antisymmetric-observer-decomposition, lem-sr-compact-variation-and-fundamental-lemma, thm-clairaut-schwarz-mixed-partials, def-divergence-and-curl-of-a-c1-vector-field]

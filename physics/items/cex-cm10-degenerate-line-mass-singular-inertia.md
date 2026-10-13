@@ -2,7 +2,7 @@
 id: cex-cm10-degenerate-line-mass-singular-inertia
 kind: counterexample
 title: "A rigid-material model of two point masses on a line: the inertia matrix can be singular, and rotation about the line is invisible to the rotational term"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

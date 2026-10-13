@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared driven model: prescribed time-dependent energy families,
   propagator evolution and the two-level drive models"
-status: draft
+status: published
 origin: session
 dependency_level: 9
 deps:

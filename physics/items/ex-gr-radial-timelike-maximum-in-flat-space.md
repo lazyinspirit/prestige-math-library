@@ -2,7 +2,7 @@
 id: ex-gr-radial-timelike-maximum-in-flat-space
 kind: example
 title: "The radial proper-time maximum checked on an explicit family of wiggly curves in flat space"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

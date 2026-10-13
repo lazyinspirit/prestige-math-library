@@ -3,7 +3,7 @@ id: post-nrqm-framework-state-and-composition
 kind: postulate
 title: "State and composition postulate P1: Hilbert spaces, preparations and
   composite systems"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 5

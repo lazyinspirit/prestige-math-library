@@ -1,7 +1,7 @@
 ---
 page: mixed-hodge-structures-and-strictness
 title: "Mixed Hodge Structures And Strictness"
-status: draft
+status: published
 requires:
   - double-complexes-exact-couples-and-convergence
   - linear-independence-bases-and-dimension

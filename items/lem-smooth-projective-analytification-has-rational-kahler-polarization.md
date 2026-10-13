@@ -2,7 +2,7 @@
 id: lem-smooth-projective-analytification-has-rational-kahler-polarization
 kind: lemma
 title: "Smooth projective analytifications have rational Kähler forms"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps:

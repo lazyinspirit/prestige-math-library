@@ -2,7 +2,7 @@
 id: def-cm12-cotangent-momentum
 kind: definition
 title: "The momentum of a potential presentation: the fibre derivative of the mechanical Lagrangian, the Cartesian momentum Mv and generalized momenta"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

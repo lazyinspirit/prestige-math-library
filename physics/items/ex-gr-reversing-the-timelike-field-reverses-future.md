@@ -2,7 +2,7 @@
 id: ex-gr-reversing-the-timelike-field-reverses-future
 kind: example
 title: "Reversing the time orientation reverses the future cone"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

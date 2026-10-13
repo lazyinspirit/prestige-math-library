@@ -2,7 +2,7 @@
 id: pthm-cm09-averaging-for-weak-damping
 kind: physics-theorem
 title: "Averaging for a weakly damped oscillator: the rotating-frame amplitude, the averaged exponential energy decay and the order-$\\varepsilon$ bound on the $O(1/\\varepsilon)$ time scale"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

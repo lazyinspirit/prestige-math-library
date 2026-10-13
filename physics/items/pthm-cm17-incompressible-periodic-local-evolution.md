@@ -2,7 +2,7 @@
 id: pthm-cm17-incompressible-periodic-local-evolution
 kind: physics-theorem
 title: "Local existence, uniqueness and pressure reconstruction for the incompressible fluid model on the periodic cell"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

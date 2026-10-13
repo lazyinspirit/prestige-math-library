@@ -2,7 +2,7 @@
 id: lem-local-q-one-deformation-proves-integrable-highest-weight-universality
 kind: lemma
 title: "Local q=1 deformation proves integrable highest weight universality"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

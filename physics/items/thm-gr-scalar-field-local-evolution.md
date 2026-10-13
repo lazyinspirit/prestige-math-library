@@ -2,7 +2,7 @@
 id: thm-gr-scalar-field-local-evolution
 kind: theorem
 title: "Local Einstein-scalar evolution: smooth constrained data admit a local development, unique up to a data-fixing isometry"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 25

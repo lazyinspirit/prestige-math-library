@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-resolvent-tail-short-range-completeness]
 kind: theorem
 domain: mathematics
 title: "Resolvent-tail short-range completeness"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [thm-riesz-representation-for-hilbert-space, thm-polar-coordinates-formula-for-lebesgue-measure, lem-nrqm-coulomb-ltwo-kernel-operators-bounded-and-compact, lem-nrqm-controlled-dynamics-cc-separable-spectral-calculus, thm-nrqm-controlled-dynamics-mellin-incoming-and-outgoing-propagation, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, thm-plancherel, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-dominated-convergence, thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn, thm-riemann-lebesgue, thm-orthogonal-decomposition-by-a-closed-subspace, def-countable-choice, def-hilbert-space, def-operator-norm, def-bounded-linear-operator, def-compact-linear-operator]

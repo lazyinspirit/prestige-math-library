@@ -1,7 +1,7 @@
 ---
 page: em-retarded-point-prerequisites-examples
 title: Complete retarded point fields — Examples
-status: draft
+status: published
 items: []
 examples: [ex-em-wave-equation-prerequisites-hypothesis-boundaries]
 ---

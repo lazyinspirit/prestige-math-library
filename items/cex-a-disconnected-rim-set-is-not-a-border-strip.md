@@ -2,7 +2,7 @@
 id: cex-a-disconnected-rim-set-is-not-a-border-strip
 kind: counterexample
 title: "A disconnected removable rim set is not a border strip"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

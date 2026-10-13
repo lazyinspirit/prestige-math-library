@@ -2,7 +2,7 @@
 id: def-sr-collision-datum-and-conservation
 kind: definition
 title: "Collision data and four-momentum conservation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

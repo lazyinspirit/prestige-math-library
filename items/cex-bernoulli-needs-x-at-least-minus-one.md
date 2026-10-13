@@ -2,7 +2,7 @@
 id: cex-bernoulli-needs-x-at-least-minus-one
 kind: counterexample
 title: "Bernoulli fails for $x < -1$: $x = -4$, $n = 3$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

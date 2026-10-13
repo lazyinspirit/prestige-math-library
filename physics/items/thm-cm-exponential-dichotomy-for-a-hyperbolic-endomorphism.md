@@ -3,7 +3,7 @@ id: thm-cm-exponential-dichotomy-for-a-hyperbolic-endomorphism
 kind: theorem
 title: "Exponential dichotomy for a hyperbolic endomorphism: invariant stable
   and unstable subspaces with exponential estimates"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

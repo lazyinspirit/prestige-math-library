@@ -2,7 +2,7 @@
 id: lem-gr-parallel-transport-and-geodesic-speed
 kind: lemma
 title: "Covariant differentiation along curves: metric pairing, parallel transport and geodesic speed"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

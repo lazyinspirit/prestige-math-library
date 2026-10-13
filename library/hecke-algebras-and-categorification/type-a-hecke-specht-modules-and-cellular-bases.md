@@ -1,7 +1,7 @@
 ---
 page: type-a-hecke-specht-modules-and-cellular-bases
 title: "Type-A Hecke Specht Modules and Cellular Bases"
-status: draft
+status: published
 requires: [principal-series-representations-of-gl-n-over-a-finite-field,
            integral-specht-modules-and-modular-simple-modules,
            jucys-murphy-elements-and-seminormal-forms,

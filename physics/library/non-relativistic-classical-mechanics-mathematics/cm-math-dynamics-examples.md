@@ -1,7 +1,7 @@
 ---
 page: cm-math-dynamics-examples
 title: Cm Math Dynamics — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-flow-of-a-linear-system-is-the-matrix-exponential

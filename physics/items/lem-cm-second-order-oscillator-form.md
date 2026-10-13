@@ -2,7 +2,7 @@
 id: lem-cm-second-order-oscillator-form
 kind: lemma
 title: "Solutions of $v''+\\omega^2v=0$ are exactly the functions $A\\cos(\\omega(t-t_0))+B\\sin(\\omega(t-t_0))$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

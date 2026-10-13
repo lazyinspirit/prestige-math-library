@@ -2,7 +2,7 @@
 id: def-upper-global-basis-by-the-contravariant-form
 kind: definition
 title: "The upper (form-dual) global basis and the required perfectness of the integral pairing"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

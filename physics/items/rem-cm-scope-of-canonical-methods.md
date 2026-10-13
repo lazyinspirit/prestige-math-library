@@ -2,7 +2,7 @@
 id: rem-cm-scope-of-canonical-methods
 kind: remark
 title: "Scope of the canonical-methods items: locality and topology of generating functions, caustics, and the E7 claims delivered by published root items"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 7

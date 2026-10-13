@@ -2,7 +2,7 @@
 id: thm-existence-bar-invariance-and-uniqueness-of-the-lower-global-basis
 kind: theorem
 title: "Bar invariance, congruence and uniqueness of the lower global basis"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

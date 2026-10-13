@@ -2,7 +2,7 @@
 id: thm-nondegenerate-local-intersection-forms-detect-the-next-soergel-character
 kind: theorem
 title: "Non-degeneracy of the local intersection forms detects Soergel's conjecture one step higher"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

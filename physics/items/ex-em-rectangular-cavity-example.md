@@ -3,7 +3,7 @@ id: ex-em-rectangular-cavity-example
 kind: example
 domain: physics
 title: "A rectangular-cavity standing mode at resonance: explicit fields and the PEC end-cap check"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 deps: [def-em-guide-cavity-geometry, def-divergence-and-curl-of-a-c1-vector-field, lem-em-rectangle-mode-profile-identities, lem-em-transverse-vector-identities, pthm-em-rectangular-mode-candidates]

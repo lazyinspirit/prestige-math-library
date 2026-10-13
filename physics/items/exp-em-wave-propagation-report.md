@@ -2,7 +2,7 @@
 id: exp-em-wave-propagation-report
 kind: experiment
 title: "Hertz's 1888 finite-velocity tests: sparks, wire nodes and qualitative interference"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

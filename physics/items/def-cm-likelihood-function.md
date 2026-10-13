@@ -2,7 +2,7 @@
 id: def-cm-likelihood-function
 kind: definition
 title: "Likelihood functions for a dominated parametric family"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-borel-sigma-algebra, def-borel-sigma-algebra-on-the-extended-real-line, def-extended-reals, def-measurable-function-between-measurable-spaces, def-measurable-space, def-measure, def-measure-with-density, def-nonnegative-lebesgue-integral]

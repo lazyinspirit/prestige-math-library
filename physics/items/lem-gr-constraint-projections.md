@@ -2,7 +2,7 @@
 id: lem-gr-constraint-projections
 kind: lemma
 title: "The normal and normal-tangential projections of the field equation are the constraint equations"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

@@ -2,7 +2,7 @@
 id: lem-finite-support-regularization-of-quantum-label-weight-modules
 kind: lemma
 title: "Finite-support regularization of quantum label-weight modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

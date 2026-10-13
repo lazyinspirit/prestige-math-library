@@ -2,7 +2,7 @@
 id: prop-gr-dust-and-perfect-fluid-conservation-equations
 kind: proposition
 title: "Divergence-free dust is exactly the dust system, and divergence-free perfect fluid is exactly the fluid equations"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

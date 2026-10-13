@@ -2,7 +2,7 @@
 id: ex-cm-chaos-slope-transform-fixed-point-checks
 kind: example
 title: "The constant-code slope transform at $a=100$: the invariant slope of $h\\mapsto1/(2r_+-h)$ and the cone constants"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

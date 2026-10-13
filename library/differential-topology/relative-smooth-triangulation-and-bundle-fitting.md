@@ -1,7 +1,7 @@
 ---
 page: relative-smooth-triangulation-and-bundle-fitting
 title: "Relative smooth triangulation and bundle fitting"
-status: draft
+status: published
 items: [def-relative-smooth-triangulation-and-projection-preserving-fitting,
         lem-piecewise-smooth-embeddings-are-stable-under-fine-c-one-approximation,
         lem-relative-shape-controlled-secants-approximate-smooth-simplex-maps,

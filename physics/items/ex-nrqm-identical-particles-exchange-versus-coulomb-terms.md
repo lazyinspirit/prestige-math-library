@@ -4,7 +4,7 @@ aliases: [nrqm-identical-particles-exchange-versus-coulomb-terms]
 kind: example
 domain: physics
 title: "Exchange versus direct Coulomb terms: the pair-energy split of the two-orbital spin-half model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps: [lem-nrqm-composites-euclidean-l2-product-unitary, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-coulomb-three-dimensional-hardy-bound, cor-cauchy-schwarz-inequality-for-l-two, thm-gaussian-integral, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, lem-complex-translation-and-approximate-identity-interfaces, texp-nrqm-identical-particles-two-fermion-spatial-spin-symmetry, def-nrqm-identical-particles-framework-species-sectors-and-preparations, thm-nrqm-identical-particles-two-factor-symmetry-decomposition, lem-nrqm-identical-particles-two-particle-exchange-operator, thm-nrqm-fock-and-equilibrium-slater-direct-and-exchange-calculation, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, lem-nrqm-composites-hilbert-tensor-construction, def-sobolev-space-wkp-and-its-norm, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-nrqm-state-geometry-framework-state-space, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

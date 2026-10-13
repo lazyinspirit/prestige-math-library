@@ -2,7 +2,7 @@
 id: post-sr-ideal-clocks-and-light
 kind: postulate
 title: "Adopted ideal-clock and ideal-vacuum-light interpretation"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

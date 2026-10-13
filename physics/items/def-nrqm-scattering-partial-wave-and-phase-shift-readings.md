@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The model's partial-wave and phase-shift vocabulary for a declared
   central potential"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

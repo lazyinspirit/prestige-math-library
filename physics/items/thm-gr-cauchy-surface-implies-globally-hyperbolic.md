@@ -2,7 +2,7 @@
 id: thm-gr-cauchy-surface-implies-globally-hyperbolic
 kind: theorem
 title: "The existence of a Cauchy set implies strong causality and compact causal diamonds"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 22

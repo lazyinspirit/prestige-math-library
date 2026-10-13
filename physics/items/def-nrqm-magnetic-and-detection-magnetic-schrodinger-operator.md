@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-magnetic-schrodinger-operator]
 kind: definition
 domain: mathematics
 title: "Bounded-coefficient magnetic Schrodinger operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-nrqm-magnetic-and-detection-position-and-momentum-operators, lem-nrqm-magnetic-and-detection-weak-product-rule, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, def-countable-choice, def-axiom-of-choice]

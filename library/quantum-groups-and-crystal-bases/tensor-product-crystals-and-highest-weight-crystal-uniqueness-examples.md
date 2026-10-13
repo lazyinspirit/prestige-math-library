@@ -1,7 +1,7 @@
 ---
 page: tensor-product-crystals-and-highest-weight-crystal-uniqueness-examples
 title: "Tensor-Product Crystals and Highest-Weight Crystal Uniqueness — Examples"
-status: draft
+status: published
 requires: [tensor-product-crystals-and-highest-weight-crystal-uniqueness]
 items: []
 examples: [cex-changing-the-tensor-equality-convention-changes-the-crystal,

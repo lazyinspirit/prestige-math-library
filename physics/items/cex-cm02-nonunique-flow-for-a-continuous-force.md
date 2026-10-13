@@ -2,7 +2,7 @@
 id: cex-cm02-nonunique-flow-for-a-continuous-force
 kind: counterexample
 title: "Continuity of the force map alone does not give unique motions: two distinct Newtonian motions through one datum for $F=\\lambda\\sqrt{|x_1|/\\ell_*}\\,e_1$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

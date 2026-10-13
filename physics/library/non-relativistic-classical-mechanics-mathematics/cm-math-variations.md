@@ -1,7 +1,7 @@
 ---
 page: cm-math-variations
 title: Cm Math Variations
-status: draft
+status: published
 items:
   - cex-cm-dalembert-and-vakonomic-evolutions-differ
   - cor-cm-noether-charges-for-translations-rotations-and-boosts

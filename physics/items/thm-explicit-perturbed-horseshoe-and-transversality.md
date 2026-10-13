@@ -2,7 +2,7 @@
 id: thm-explicit-perturbed-horseshoe-and-transversality
 kind: theorem
 title: "Explicit persistence under the stated forward and conjugated-inverse bounds: coded chaos, hyperbolic fixed points and transverse homoclinic points"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

@@ -4,7 +4,7 @@ aliases: [nrqm-composites-joint-pvm-construction]
 kind: theorem
 domain: mathematics
 title: "Joint PVM construction for strongly commuting regular projection-valued measures"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

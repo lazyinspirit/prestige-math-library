@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-stationary-dynamical-sector-identification]
 kind: theorem
 domain: mathematics
 title: "Stationary and dynamical scattering in the full energy-angular representation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps: [thm-nrqm-controlled-dynamics-compact-scattering-defects, lem-nrqm-controlled-dynamics-cc-separable-spectral-calculus, thm-nrqm-controlled-dynamics-compact-support-asymptotic-completeness, thm-nrqm-controlled-dynamics-outgoing-fredholm-invertibility, thm-nrqm-controlled-dynamics-stationary-outgoing-integral-and-flux, thm-nrqm-controlled-dynamics-no-positive-compact-potential-eigenvalues, thm-nrqm-orbital-and-spin-sphere-onb, thm-nrqm-orbital-and-spin-legendre-rodrigues-equation, thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-plancherel, def-projection-valued-measure, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-sobolev-space-wkp-and-its-norm, def-countable-choice]

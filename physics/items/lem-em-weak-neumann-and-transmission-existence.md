@@ -3,7 +3,7 @@ id: lem-em-weak-neumann-and-transmission-existence
 kind: lemma
 domain: mathematics
 title: "Weak Neumann and transmission existence with interface charges"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 3

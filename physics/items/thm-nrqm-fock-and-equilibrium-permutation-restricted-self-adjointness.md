@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-permutation-restricted-self-adjointness]
 kind: theorem
 domain: mathematics
 title: "Permutation-restricted self-adjointness"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [thm-nrqm-fock-and-equilibrium-bounded-fixed-n-operator, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, lem-nrqm-composites-euclidean-l2-product-unitary, thm-self-adjointness-range-criterion, def-finite-symmetric-group-and-permutation-notation, thm-sign-is-a-homomorphism, def-hilbert-space, def-bounded-linear-operator, def-hilbert-space-adjoint, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-countable-choice, def-axiom-of-choice]

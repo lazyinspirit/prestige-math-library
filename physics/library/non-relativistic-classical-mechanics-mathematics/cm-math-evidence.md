@@ -1,7 +1,7 @@
 ---
 page: cm-math-evidence
 title: Cm Math Evidence
-status: draft
+status: published
 library: mathematics
 items:
   - def-cm-measurement-model

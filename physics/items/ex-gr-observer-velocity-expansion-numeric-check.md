@@ -2,7 +2,7 @@
 id: ex-gr-observer-velocity-expansion-numeric-check
 kind: example
 title: "An exact observer-relative energy and momentum computation at relative speed c/2, with the expansion bounds of the low-velocity lemma checked by exact rational comparison"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

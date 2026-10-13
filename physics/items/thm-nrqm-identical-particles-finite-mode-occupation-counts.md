@@ -4,7 +4,7 @@ aliases: [nrqm-identical-particles-finite-mode-occupation-counts]
 kind: theorem
 domain: mathematics
 title: "Finite-mode occupation configurations: fermionic exclusion counts, bosonic counts and truncated dimensions"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [thm-nrqm-identical-particles-occupation-number-basis, lem-nrqm-composites-permutation-sector-projections, def-binomial-coefficient, thm-binomial-closed-formula, thm-stars-and-bars, thm-pascals-rule, cor-binomial-theorem-consequences, def-hilbert-space, def-countable-choice]

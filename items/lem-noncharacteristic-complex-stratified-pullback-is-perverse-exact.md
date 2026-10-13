@@ -2,7 +2,7 @@
 id: lem-noncharacteristic-complex-stratified-pullback-is-perverse-exact
 kind: lemma
 title: "Smooth and noncharacteristic complex pullbacks are perverse-exact"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

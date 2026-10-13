@@ -2,7 +2,7 @@
 id: lem-cm-continuous-dependence-on-initial-data
 kind: lemma
 title: "Continuous and Lipschitz dependence on the initial condition on a Picard-Lindelof cylinder"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

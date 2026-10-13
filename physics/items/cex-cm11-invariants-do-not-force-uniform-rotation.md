@@ -2,7 +2,7 @@
 id: cex-cm11-invariants-do-not-force-uniform-rotation
 kind: counterexample
 title: "A torque-free motion of a symmetric rigid-material model with constant angular momentum and energy whose body angular velocity is not constant: the invariants do not force a uniform rotation"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

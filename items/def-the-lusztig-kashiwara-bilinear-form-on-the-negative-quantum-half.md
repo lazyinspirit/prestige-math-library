@@ -2,7 +2,7 @@
 id: def-the-lusztig-kashiwara-bilinear-form-on-the-negative-quantum-half
 kind: definition
 title: "The Lusztig-Kashiwara bilinear form on the negative half: the recursion"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

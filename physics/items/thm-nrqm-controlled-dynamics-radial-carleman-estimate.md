@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-radial-carleman-estimate]
 kind: theorem
 domain: mathematics
 title: "Radial Carleman estimate"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-orbital-and-spin-sphere-onb, thm-nrqm-orbital-and-spin-sphere-laplacian-diagonal-domain, thm-plancherel, def-sobolev-space-wkp-and-its-norm, lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set, def-hilbert-space, def-countable-choice]

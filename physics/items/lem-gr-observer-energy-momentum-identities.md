@@ -2,7 +2,7 @@
 id: lem-gr-observer-energy-momentum-identities
 kind: lemma
 title: "Positivity, relative-velocity identities and the mass shell of observer-relative energy and momentum"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

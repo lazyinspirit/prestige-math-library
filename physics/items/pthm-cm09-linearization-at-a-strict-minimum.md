@@ -2,7 +2,7 @@
 id: pthm-cm09-linearization-at-a-strict-minimum
 kind: physics-theorem
 title: "Small oscillations at a strict minimum: the linearized model, its normal modes and the Lyapunov stability of the nonlinear equilibrium"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

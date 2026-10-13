@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-airy-envelopes-and-asymptotic-coefficients]
 kind: theorem
 domain: mathematics
 title: "Airy envelopes and asymptotic coefficients"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [thm-nrqm-controlled-dynamics-airy-contour-and-fresnel-normalization, lem-nrqm-composites-complex-gaussian-continuation, thm-dominated-convergence, def-complex-differentiability-holomorphic-and-entire, def-countable-choice]

@@ -3,7 +3,7 @@ id: ex-em-experiment-analysis-prerequisites-hypothesis-boundaries
 kind: example
 domain: mathematics
 title: "Sharpness of the bounded-error uncertainty bound for a linear prediction, and failure once the response lower bound is dropped"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 2

@@ -4,7 +4,7 @@ kind: definition
 title: "Scattering data of the central model class: the scattering motion, the
   impact parameter, the asymptotic directions, the deflection conventions and
   the uniform-incident preparation"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

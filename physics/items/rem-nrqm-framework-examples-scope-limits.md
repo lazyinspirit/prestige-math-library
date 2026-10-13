@@ -2,7 +2,7 @@
 id: rem-nrqm-framework-examples-scope-limits
 kind: remark
 title: "What the example and counterexample checks of this companion page establish"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: def-type-a-q-schur-algebra-and-weyl-modules
 kind: definition
 title: "The type-A q-Schur algebra and its Weyl modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

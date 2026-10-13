@@ -2,7 +2,7 @@
 id: lem-relative-shape-controlled-secants-approximate-smooth-simplex-maps
 kind: lemma
 title: "Shape-controlled secants and relative piecewise smooth extension"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

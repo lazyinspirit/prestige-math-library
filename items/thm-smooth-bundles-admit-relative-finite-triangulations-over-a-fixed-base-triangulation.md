@@ -2,7 +2,7 @@
 id: thm-smooth-bundles-admit-relative-finite-triangulations-over-a-fixed-base-triangulation
 kind: theorem
 title: "Finite smooth bundle triangulation over a fixed base, relative to a supplied collar diagram"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

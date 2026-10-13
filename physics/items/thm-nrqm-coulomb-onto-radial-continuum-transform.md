@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-onto-radial-continuum-transform]
 kind: theorem
 domain: mathematics
 title: "Onto radial continuum transform"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, thm-orthogonal-decomposition-by-a-closed-subspace, thm-self-adjoint-resolvent-estimate, thm-tonelli-and-fubini-for-completed-product-measures, thm-plancherel, thm-nrqm-coulomb-continuum-spectral-density, thm-nrqm-coulomb-laguerre-bound-energy-exhaustion, thm-nrqm-coulomb-jost-volterra-solution, thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-coulomb-essential-spectrum, def-projection-valued-measure, def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, thm-extension-of-a-bounded-map-from-a-dense-subspace, thm-dominated-convergence, cor-cauchy-schwarz-inequality-for-l-two, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-countable-choice, def-axiom-of-choice]

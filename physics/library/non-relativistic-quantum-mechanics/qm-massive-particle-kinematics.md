@@ -1,7 +1,7 @@
 ---
 page: qm-massive-particle-kinematics
 title: "Qm Massive Particle Kinematics"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators

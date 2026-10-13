@@ -2,7 +2,7 @@
 id: def-gr-dust-matter-model
 kind: definition
 title: "The dust matter model: rest density, four-velocity, stress-energy and dust system"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

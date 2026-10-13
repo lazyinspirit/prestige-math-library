@@ -2,7 +2,7 @@
 id: lem-the-lusztig-integral-form-is-stable-under-bar-and-contravariant-duality
 kind: lemma
 title: "The bar involution and the contravariant anti-involution preserve $U_A$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

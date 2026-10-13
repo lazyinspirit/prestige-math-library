@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-hermite-completeness]
 kind: theorem
 domain: mathematics
 title: "Hermite completeness"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-fourier-transform-on-l-one-of-rn, cor-uniqueness-of-the-l-one-fourier-transform, thm-dominated-convergence, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-complex-exponential, lem-complex-exponential-series-converges-everywhere, thm-nonnegative-series-bounded-partial-sums, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, def-countable-choice]

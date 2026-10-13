@@ -2,7 +2,7 @@
 id: def-c-soft-sheaf
 kind: definition
 title: "c-soft sheaves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

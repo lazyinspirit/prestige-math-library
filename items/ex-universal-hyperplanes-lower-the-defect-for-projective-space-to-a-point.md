@@ -2,7 +2,7 @@
 id: ex-universal-hyperplanes-lower-the-defect-for-projective-space-to-a-point
 kind: example
 title: "Universal hyperplanes lower the defect for projective space to a point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

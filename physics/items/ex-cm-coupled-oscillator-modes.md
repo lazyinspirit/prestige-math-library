@@ -2,7 +2,7 @@
 id: ex-cm-coupled-oscillator-modes
 kind: example
 title: "Two coupled equal masses: mode frequencies sqrt(k/m) and sqrt((k+2c)/m), and the free zero mode when k=0"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

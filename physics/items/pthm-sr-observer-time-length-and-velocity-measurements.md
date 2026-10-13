@@ -3,7 +3,7 @@ id: pthm-sr-observer-time-length-and-velocity-measurements
 kind: physics-theorem
 domain: physics
 title: "Time dilation, length contraction, simultaneity and velocity transformation for inertial observers"
-status: draft
+status: published
 origin: pipeline
 physical_scope: >-
   Ideal clock, rod and signal measurements between inertial observers in flat

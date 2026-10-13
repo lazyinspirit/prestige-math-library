@@ -2,7 +2,7 @@
 id: ex-comparing-rational-powers
 kind: example
 title: "Comparing rational powers: $2^{1/3} < 2^{1/2} < 3^{1/3}$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

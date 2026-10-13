@@ -2,7 +2,7 @@
 id: ex-constructible-six-operations-on-a-point-and-an-open-closed-line
 kind: example
 title: "Point operations and the open closed constructible line"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

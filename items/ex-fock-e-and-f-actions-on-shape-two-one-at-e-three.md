@@ -2,7 +2,7 @@
 id: ex-fock-e-and-f-actions-on-shape-two-one-at-e-three
 kind: example
 title: "The Fock E- and F-actions on the shape (2,1) at e = 3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

@@ -2,7 +2,7 @@
 id: cor-cm-finite-time-breakdown-requires-escape
 kind: corollary
 title: "A non-extendable solution leaves every compact subset of the domain near its finite endpoint; an autonomous solution trapped in a compact subset of its state domain cannot break down there"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

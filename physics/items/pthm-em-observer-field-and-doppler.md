@@ -2,7 +2,7 @@
 id: pthm-em-observer-field-and-doppler
 kind: physics-theorem
 title: "Observer field split and exact classical wave Doppler reading"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

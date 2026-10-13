@@ -3,7 +3,7 @@ id: def-em-weak-sources
 kind: definition
 title: "Distributional Maxwell equations with point and stationary-sheet sources"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 14
 deps: [def-em-lab-geometry,

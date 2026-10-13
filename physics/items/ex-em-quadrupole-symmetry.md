@@ -4,7 +4,7 @@ kind: example
 domain: physics
 dependency_level: 18
 title: "Four stationary point charges with vanishing total charge and dipole moment and traceless quadrupole diag(6qa^2,-6qa^2,0)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

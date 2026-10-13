@@ -2,7 +2,7 @@
 id: def-gr-galerkin-fourier-projection
 kind: definition
 title: "Fourier modes on the periodic three-torus and the Galerkin projection P_N"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

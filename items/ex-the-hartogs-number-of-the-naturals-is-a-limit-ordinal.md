@@ -2,7 +2,7 @@
 id: ex-the-hartogs-number-of-the-naturals-is-a-limit-ordinal
 kind: example
 title: "The Hartogs number of $\\omega$ is a limit ordinal above $\\omega$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

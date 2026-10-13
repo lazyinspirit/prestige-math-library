@@ -2,7 +2,7 @@
 id: rem-gr-local-flatness-versus-global-flatness
 kind: remark
 title: "Local flatness at a point, vanishing curvature and global Minkowski geometry are three different statements"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 15

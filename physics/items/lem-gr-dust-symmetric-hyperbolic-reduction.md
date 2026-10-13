@@ -2,7 +2,7 @@
 id: lem-gr-dust-symmetric-hyperbolic-reduction
 kind: lemma
 title: "The symmetric-tensor curl symbol is skew-adjoint with norm at most the wave number, giving positivity of the dust principal block"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

@@ -2,7 +2,7 @@
 id: cex-cm16-stability-does-not-imply-attraction
 kind: counterexample
 title: "Lyapunov stability does not imply attraction: the harmonic model is stable at its equilibrium while every nonzero datum keeps its distance and never converges"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

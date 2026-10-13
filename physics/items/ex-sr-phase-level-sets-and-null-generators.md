@@ -2,7 +2,7 @@
 id: ex-sr-phase-level-sets-and-null-generators
 kind: example
 title: 'Worked geometry of the phase level sets of a future null wave covector'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-affine-phase-and-wave-covector,

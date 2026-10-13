@@ -2,7 +2,7 @@
 id: lem-cyclotomic-projective-covers-and-dualities-descend-through-the-quotient
 kind: lemma
 title: "Cyclotomic projective covers and dualities descend through the quotient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 16

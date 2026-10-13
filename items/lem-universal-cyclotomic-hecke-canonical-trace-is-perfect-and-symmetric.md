@@ -2,7 +2,7 @@
 id: lem-universal-cyclotomic-hecke-canonical-trace-is-perfect-and-symmetric
 kind: lemma
 title: "The universal cyclotomic Hecke canonical trace is perfect and symmetric"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

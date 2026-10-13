@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Tsirelson bound for every declared spin correlation arrangement of the
   framework"
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps:

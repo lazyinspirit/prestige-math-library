@@ -1,7 +1,7 @@
 ---
 page: parabolic-category-o-and-fock-space-bases-examples
 title: "Parabolic Category O and Fock-Space Bases — Examples"
-status: draft
+status: published
 requires: [parabolic-category-o-and-fock-space-bases]
 items: []
 examples: [ex-four-fock-bases-in-a-small-two-factor-tensor-space,

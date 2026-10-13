@@ -1,7 +1,7 @@
 ---
 page: cm-math-fluid
 title: Cm Math Fluid
-status: draft
+status: published
 items:
   - def-periodic-vector-sobolev-space-and-leray-projection
   - lem-cm-lattice-shell-count-and-weight-sums

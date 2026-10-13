@@ -2,7 +2,7 @@
 id: ex-cm13-point-transformation-generating-function-and-projection
 kind: example
 title: "The point transformation of the model: the chart transition $(q,\\pi)\\mapsto(X(q),DX(q)^{-\\mathsf T}\\pi)$ is generated in the second kind, has a nowhere invertible $(q,Q)$-projection, and is contrasted with the momentum shift"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 24

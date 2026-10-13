@@ -2,7 +2,7 @@
 id: lem-finite-type-a-tensor-hecke-bars-and-complementary-coefficient-charts
 kind: lemma
 title: "Finite type-A tensor Hecke bars and complementary coefficient charts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 proof_strategy: direct

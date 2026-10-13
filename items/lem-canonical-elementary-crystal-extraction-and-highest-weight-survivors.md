@@ -2,7 +2,7 @@
 id: lem-canonical-elementary-crystal-extraction-and-highest-weight-survivors
 kind: lemma
 title: "Canonical elementary crystal extraction and highest-weight survivors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

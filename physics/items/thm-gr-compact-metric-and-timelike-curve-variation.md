@@ -2,7 +2,7 @@
 id: thm-gr-compact-metric-and-timelike-curve-variation
 kind: theorem
 title: "First variation of the Einstein-Hilbert density under compactly supported metric variations, and of the timelike length functional"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

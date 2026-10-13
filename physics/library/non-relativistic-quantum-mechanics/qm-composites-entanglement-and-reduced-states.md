@@ -1,7 +1,7 @@
 ---
 page: qm-composites-entanglement-and-reduced-states
 title: Qm Composites Entanglement And Reduced States
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-composites-local-pvm-tensor-extension

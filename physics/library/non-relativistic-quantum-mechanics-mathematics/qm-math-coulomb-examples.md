@@ -1,7 +1,7 @@
 ---
 page: qm-math-coulomb-examples
 title: Qm Math Coulomb — Examples
-status: draft
+status: published
 items: []
 requires:
   - qm-math-coulomb

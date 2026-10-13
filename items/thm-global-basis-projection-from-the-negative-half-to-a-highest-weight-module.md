@@ -2,7 +2,7 @@
 id: thm-global-basis-projection-from-the-negative-half-to-a-highest-weight-module
 kind: theorem
 title: "The based quotient: projection of the lower global basis to a highest weight module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

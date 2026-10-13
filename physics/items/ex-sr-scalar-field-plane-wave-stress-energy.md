@@ -2,7 +2,7 @@
 id: ex-sr-scalar-field-plane-wave-stress-energy
 kind: example
 title: "Null plane-wave scalar field and its conserved stress-energy tensor"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [lem-sr-scalar-field-euler-lagrange, lem-sr-scalar-field-hilbert-stress-energy, lem-sr-scalar-field-stress-divergence-identity, def-ck-tensor-field-on-minkowski-space, def-directional-and-partial-derivatives, thm-chain-rule-for-total-derivatives, def-lorentz-form-and-inertia, def-causal-classification-of-lorentz-vectors, def-time-orientation-and-future-causal-sets, def-sr-affine-minkowski-model]

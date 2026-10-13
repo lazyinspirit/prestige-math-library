@@ -1,7 +1,7 @@
 ---
 page: proper-cohomological-descent-and-constructible-hypercovers-examples
 title: "Proper Cohomological Descent And Constructible Hypercovers — Examples"
-status: draft
+status: published
 requires: [proper-cohomological-descent-and-constructible-hypercovers, relative-homology-excision-and-mayer-vietoris, singular-cohomology-and-coefficient-theorems]
 examples: [ex-proper-cech-descent-does-not-require-acyclic-fibers, ex-hypercover-total-degree-uses-only-a-finite-matching-truncation]
 items: []

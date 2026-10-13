@@ -3,7 +3,7 @@ id: pthm-em-dipole-radiation
 kind: physics-theorem
 title: "Controlled electric-dipole far field and retarded-time radiated power of a compact smooth source"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 20
 deps: [pthm-em-retarded-potentials, thm-em-radiation-asymptotic-flux, post-em-radiation-selection, def-em-sources, def-em-electric-moments, def-em-vacuum-energy-flux, pthm-em-poynting-balance, lem-em-sphere-zonal-moments, def-em-lab-geometry, def-em-si-conventions, def-em-fields, cor-mean-value-theorem, thm-integral-triangle-inequality, lem-em-parameter-integrals, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, def-countable-choice, lem-cross-product-is-bilinear-alternating-and-orthogonal, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-cauchy-schwarz-finite, def-euclidean-inner-product, thm-heine-cantor-metric, thm-extreme-value-metric]

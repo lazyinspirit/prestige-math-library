@@ -2,7 +2,7 @@
 id: lem-positive-characteristic-specht-head-and-cyclotomic-crystal-labels-agree
 kind: lemma
 title: "Positive-characteristic Specht head and cyclotomic crystal labels agree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 43

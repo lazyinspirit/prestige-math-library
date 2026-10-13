@@ -2,7 +2,7 @@
 id: thm-klr-projective-grothendieck-group-satisfies-the-negative-quantum-serre-relations
 kind: theorem
 title: "The KLR Grothendieck ring satisfies the divided-power quantum Serre relations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

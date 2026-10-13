@@ -2,7 +2,7 @@
 id: ex-projective-perverse-decomposition-for-projective-space-to-a-point
 kind: example
 title: "Perverse decomposition of projective space over a point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 26

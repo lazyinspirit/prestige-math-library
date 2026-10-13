@@ -1,7 +1,7 @@
 ---
 page: em-wave-equation-prerequisites-examples
 title: Em Wave Equation Prerequisites — Examples
-status: draft
+status: published
 items: []
 examples: [ex-em-wave-equation-prerequisites-source-and-support-boundaries]
 ---

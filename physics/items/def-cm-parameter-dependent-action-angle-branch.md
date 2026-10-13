@@ -2,7 +2,7 @@
 id: def-cm-parameter-dependent-action-angle-branch
 kind: definition
 title: "A one-frequency parameter-dependent action-angle branch, its transformed Hamiltonian and its drift generator"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

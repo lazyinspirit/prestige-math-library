@@ -2,7 +2,7 @@
 id: ex-em-two-beam-fringes
 kind: example
 title: "Ideal deterministic two-wave interference and its fringe geometry"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 21

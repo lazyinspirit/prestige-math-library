@@ -2,7 +2,7 @@
 id: ex-a-block-idempotent-corner-outside-the-stable-range
 kind: example
 title: "A block idempotent corner outside the stable range"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 36

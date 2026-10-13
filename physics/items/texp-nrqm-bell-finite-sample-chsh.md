@@ -4,7 +4,7 @@ aliases: [nrqm-bell-finite-sample-chsh]
 kind: thought-experiment
 domain: physics
 title: "Finite samples of a declared arrangement: the CHSH estimator, its concentration and the limits of a finite-sample verdict"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps: [def-nrqm-bell-declared-spin-arrangement, def-nrqm-bell-binary-correlation-models, post-nrqm-framework-preparation-and-apparatus, def-probability-measure, def-random-element-and-real-random-variable, def-independence-of-finite-random-variables, def-moments-variance-and-covariance, cor-chebyshev-inequality-for-random-variables, cor-variance-adds-for-pairwise-independent-random-variables, cor-expectation-linearity-monotonicity-and-modulus-bound, def-expectation-of-a-nonnegative-or-integrable-random-variable, lem-nrqm-composites-chsh-and-finite-sampling-law, def-finite-sum]

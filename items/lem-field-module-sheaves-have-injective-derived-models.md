@@ -2,7 +2,7 @@
 id: lem-field-module-sheaves-have-injective-derived-models
 kind: lemma
 title: "Analytic field sheaves have injective derived models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

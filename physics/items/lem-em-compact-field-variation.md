@@ -2,7 +2,7 @@
 id: lem-em-compact-field-variation
 kind: lemma
 title: "Compact variations of the quadratic field functional: first variation and the coefficient equation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

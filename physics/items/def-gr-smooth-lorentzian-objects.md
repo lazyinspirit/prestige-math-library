@@ -2,7 +2,7 @@
 id: def-gr-smooth-lorentzian-objects
 kind: definition
 title: "Smooth time-oriented Lorentzian four-manifolds: the geometric objects of the model"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-compatible-refinement-for-tuple-indexed-coverings
 kind: lemma
 title: "A refinement compatible with tuple-indexed coverings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

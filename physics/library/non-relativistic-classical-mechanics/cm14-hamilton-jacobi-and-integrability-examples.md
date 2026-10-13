@@ -1,7 +1,7 @@
 ---
 page: cm14-hamilton-jacobi-and-integrability-examples
 title: "Hamilton–Jacobi and integrability — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

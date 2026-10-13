@@ -2,7 +2,7 @@
 id: thm-q-schur-weyl-weight-space-gram-determinant-hook-product
 kind: theorem
 title: "The q-Schur Weyl weight-space Gram determinant is a hook product"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

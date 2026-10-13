@@ -4,7 +4,7 @@ aliases: [ nrqm-controlled-dynamics-compact-scattering-defects ]
 kind: theorem
 domain: mathematics
 title: "Compact scattering defects and the zero-energy obstruction"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

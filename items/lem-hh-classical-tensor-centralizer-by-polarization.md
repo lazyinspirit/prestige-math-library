@@ -2,7 +2,7 @@
 id: lem-hh-classical-tensor-centralizer-by-polarization
 kind: lemma
 title: "Classical tensor centralizer from polarization and Newton identities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 0

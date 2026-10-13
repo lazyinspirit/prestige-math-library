@@ -2,7 +2,7 @@
 id: ex-cm13-determinant-tests-for-linear-canonical-maps
 kind: example
 title: "Determinant tests on explicit linear maps: $\\det A=1$ is equivalent to canonicity in dimension two, and strictly weaker in dimension four (the volume-preserving shear)"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

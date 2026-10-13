@@ -32,7 +32,7 @@ requires:
   - gr-connections-and-free-fall
 page: gr-gr13-convex-normal-neighborhoods
 title: "Gr13 Convex Normal Neighborhoods"
-status: draft
+status: published
 library: physics
 items:
   - lem-gr-maximal-flow-escape

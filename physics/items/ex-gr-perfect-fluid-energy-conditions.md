@@ -2,7 +2,7 @@
 id: ex-gr-perfect-fluid-energy-conditions
 kind: example
 title: "Energy-condition verdicts for dust, radiation and the cosmological effective fluid"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

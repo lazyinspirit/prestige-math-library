@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-dipole-selection-rules]
 kind: physics-theorem
 domain: physics
 title: "Electric-dipole selection rules of the declared hydrogenic finite-level model: necessary angular conditions and the parity (Laporte) consequence"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 15
 deps: [post-nrqm-approximations-static-finite-level-dipole-coupling, def-nrqm-light-matter-framework-finite-level-coupled-model, def-nrqm-central-framework-coulomb-and-hydrogen-model, pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy, thm-nrqm-coulomb-atomic-dipole-matrix-element-domain, thm-nrqm-orbital-and-spin-harmonic-polynomial-dimension, thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-nrqm-orbital-and-spin-sphere-laplacian-diagonal-domain, def-monomials-multidegree-and-total-degree, def-homogeneous-polynomial-and-homogeneous-ideal, def-laplacian-of-a-c2-function, def-directional-and-partial-derivatives, thm-algebra-of-derivatives, thm-sine-and-cosine-derivatives, post-nrqm-framework-state-and-composition, def-nrqm-framework-quantities-and-units, def-nrqm-observables-framework-observable-and-outcome-law, def-hilbert-orthogonal-projection, def-inner-product-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-axiom-of-choice, thm-lebesgue-measure-under-dilations-and-reflections]

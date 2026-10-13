@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Permutation invariance of sector preparations and the
   indistinguishability of relabelled readouts"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

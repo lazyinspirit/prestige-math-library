@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "An absorbing two-outcome instrument: amplitude suppression and a branch
   without an outgoing polarization state"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

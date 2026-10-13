@@ -2,7 +2,7 @@
 id: ex-gr-minkowski-chart-as-a-lorentzian-manifold
 kind: example
 title: "The constant Minkowski metric as a smooth time-oriented Lorentzian manifold"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

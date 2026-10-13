@@ -4,7 +4,7 @@ kind: example
 title: "Elastic reflection from a fixed sphere: the branch
   $b=a\\cos(\\theta/2)$, the uniform density $a^2/4$ and the total $\\pi a^2$ of
   a contact model"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

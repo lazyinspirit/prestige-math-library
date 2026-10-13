@@ -2,7 +2,7 @@
 id: thm-hh-hecke-symmetry-tensor-power-action
 kind: theorem
 title: "The ordered-basis symmetry gives the normalized Hecke tensor action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-gr-observer-relative-energy-and-momentum
 kind: definition
 title: "Observer-relative energy, spatial momentum and rest mass of a tangent vector"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

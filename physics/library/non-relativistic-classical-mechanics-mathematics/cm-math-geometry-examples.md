@@ -1,7 +1,7 @@
 ---
 page: cm-math-geometry-examples
 title: Cm Math Geometry — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-galilean-boost-coordinate-change

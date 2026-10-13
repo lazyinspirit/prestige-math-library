@@ -2,7 +2,7 @@
 id: lem-gr-galerkin-energy-inequality
 kind: lemma
 title: "Equivalence of the weighted Galerkin energy with the H^s norm and its Gronwall inequality"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

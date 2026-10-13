@@ -2,7 +2,7 @@
 id: pthm-cm09-forced-modal-response
 kind: physics-theorem
 title: "The forced coupled quadratic model: modal responses, resonance, and boundedness for positive definite stiffness off resonance"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

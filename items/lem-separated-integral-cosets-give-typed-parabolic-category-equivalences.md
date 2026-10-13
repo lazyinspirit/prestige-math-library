@@ -2,7 +2,7 @@
 id: lem-separated-integral-cosets-give-typed-parabolic-category-equivalences
 kind: lemma
 title: "Separated integral cosets give typed parabolic category equivalences"
-status: draft
+status: published
 origin: session
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 23

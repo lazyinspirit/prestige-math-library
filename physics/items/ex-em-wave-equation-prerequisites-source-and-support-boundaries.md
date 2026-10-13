@@ -2,7 +2,7 @@
 id: ex-em-wave-equation-prerequisites-source-and-support-boundaries
 kind: example
 title: "Worked checks of the wave Cauchy formula: source non-compactness, support propagation and linear growth"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals, thm-continuous-on-a-rectangle-is-riemann-integrable, thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets, cor-energy-uniqueness-for-the-wave-cauchy-problem, def-ck-euclidean-maps-and-diffeomorphisms, def-countable-choice, def-euclidean-inner-product, def-laplacian-of-a-c2-function, def-wave-energy-and-energy-flux, lem-em-spherical-mean-wave-identity, lem-euclidean-chart-measure-agrees-with-polar-surface-measure, lem-first-moment-of-the-unit-sphere-vanishes, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-algebra-of-derivatives, thm-em-wave-cauchy-kirchhoff, thm-lebesgue-measure-of-a-box-of-every-kind, thm-newton-leibniz-with-interior-derivative, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-wave-duhamel-principle, thm-cauchy-schwarz-and-the-euclidean-norm]

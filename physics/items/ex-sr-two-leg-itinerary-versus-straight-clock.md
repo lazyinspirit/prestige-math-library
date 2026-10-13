@@ -2,7 +2,7 @@
 id: ex-sr-two-leg-itinerary-versus-straight-clock
 kind: example
 title: "Worked two-leg itinerary against the straight clock at speed 3c/5"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

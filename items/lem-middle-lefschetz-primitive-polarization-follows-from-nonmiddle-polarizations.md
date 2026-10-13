@@ -2,7 +2,7 @@
 id: lem-middle-lefschetz-primitive-polarization-follows-from-nonmiddle-polarizations
 kind: lemma
 title: "The middle primitive polarization follows from the nonmiddle forms and a Kähler limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 14

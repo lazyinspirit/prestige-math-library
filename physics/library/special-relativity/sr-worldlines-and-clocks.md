@@ -1,7 +1,7 @@
 ---
 page: sr-worldlines-and-clocks
 title: "Worldlines And Clocks"
-status: draft
+status: published
 library: physics
 items:
   - def-sr-regular-causal-curve-and-worldline

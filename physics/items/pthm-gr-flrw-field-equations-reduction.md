@@ -2,7 +2,7 @@
 id: pthm-gr-flrw-field-equations-reduction
 kind: physics-theorem
 title: "Reduction of the field equations of the homogeneous cosmological model to the Friedmann and acceleration equations, with derived continuity"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

@@ -4,7 +4,7 @@ aliases: [nrqm-interference-examples-scope-limits]
 kind: remark
 domain: physics
 title: "What the worked items and the reported experiment of the examples page establish"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps: [ex-nrqm-interference-ideal-flat-two-path-screen-distribution, ex-nrqm-interference-uniform-phase-averaging, exp-nrqm-interference-bach-electron-double-slit, pthm-nrqm-interference-coherent-and-mixture-detection-laws, texp-nrqm-interference-finite-sample-fringe-failure]

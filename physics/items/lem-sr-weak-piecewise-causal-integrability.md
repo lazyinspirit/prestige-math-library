@@ -2,7 +2,7 @@
 id: lem-sr-weak-piecewise-causal-integrability
 kind: lemma
 title: "Improper integrability and endpoint increments of weak piecewise future causal curves"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 8

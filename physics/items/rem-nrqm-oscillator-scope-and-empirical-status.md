@@ -4,7 +4,7 @@ aliases: [ nrqm-oscillator-scope-and-empirical-status ]
 kind: remark
 domain: physics
 title: "Scope and empirical status of the oscillator page"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 14
 deps:

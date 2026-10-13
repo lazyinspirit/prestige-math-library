@@ -4,7 +4,7 @@ aliases: [nrqm-composites-hilbert-tensor-construction]
 kind: lemma
 domain: mathematics
 title: "Hilbert tensor construction: inner product, completion and product bases"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-tensor-product-of-modules-by-generators-and-relations, thm-completion-of-an-inner-product-space-is-hilbert, def-completion-of-a-normed-space, def-real-and-complex-inner-product-space, def-hilbert-space, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-orthogonality-and-orthogonal-complement, cor-inner-product-induces-a-norm, def-countable-choice]

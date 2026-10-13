@@ -1,7 +1,7 @@
 ---
 page: sr-spacetime-primitives
 title: "Spacetime Primitives"
-status: draft
+status: published
 library: physics
 items: [def-affine-space-and-displacement,
         def-lorentz-form-and-inertia,

@@ -2,7 +2,7 @@
 id: thm-crystal-basis-of-the-negative-half
 kind: theorem
 title: "The crystal basis $\\mathcal B(\\infty)$ of the negative half"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

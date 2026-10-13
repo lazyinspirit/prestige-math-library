@@ -2,7 +2,7 @@
 id: def-cm-second-variation-of-the-action
 kind: definition
 title: "The fixed-endpoint second variation of a time-dependent action at a curve"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

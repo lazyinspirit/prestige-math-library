@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-golden-rule-coefficient-approximate-identity
 kind: theorem
 domain: mathematics
 title: "Golden-rule coefficient approximate identity"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps: [cor-primitives-of-a-continuous-function, thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound, thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian, thm-plancherel, def-fourier-transform-on-l-one-of-rn, thm-l-one-l-two-agreement-of-fourier-transform, thm-lebesgue-measure-of-a-box-of-every-kind, cor-c-one-change-of-variables-for-l-one-functions, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-sine-and-cosine-derivatives, def-measure-with-density, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, thm-monotone-convergence-for-the-integral, cor-additivity-of-the-nonnegative-lebesgue-integral, thm-linearity-of-the-lebesgue-integral-on-l-one, def-integrable-real-and-complex-functions-and-their-integrals, thm-cauchy-schwarz-in-an-inner-product-space, def-l-p-space-as-a-quotient-by-null-functions, def-continuity-real, def-limits-at-infinity, def-countable-choice, def-axiom-of-choice]

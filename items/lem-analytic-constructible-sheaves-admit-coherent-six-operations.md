@@ -2,7 +2,7 @@
 id: lem-analytic-constructible-sheaves-admit-coherent-six-operations
 kind: lemma
 title: Actual analytic constructible sheaves admit coherent six operations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

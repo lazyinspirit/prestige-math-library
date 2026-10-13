@@ -2,7 +2,7 @@
 id: ex-lower-and-upper-global-bases-in-a-small-highest-weight-module
 kind: example
 title: "Lower and upper global bases in a small highest weight module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: ex-cm-rotating-frame-identity
 kind: example
 title: "The rotating-frame acceleration identity for a uniform rotation about an axis"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-em-waveguide-spectral-completeness
 kind: theorem
 title: Spectral completeness of the declared PEC waveguide and cavity classes
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

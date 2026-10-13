@@ -4,7 +4,7 @@ aliases: [ nrqm-potentials-box-spectrum-and-nodes ]
 kind: example
 domain: physics
 title: "The Dirichlet box: exact spectrum, nodes, constant shift and gaps"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

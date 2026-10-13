@@ -3,7 +3,7 @@ id: lem-nrqm-state-geometry-density-set-convex-and-complete
 kind: lemma
 domain: mathematics
 title: "The state space is convex, closed under countable mixtures, and complete in the trace norm"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-nrqm-state-geometry-pure-mixed-states-and-purity, lem-nrqm-composites-density-and-scalar-spectral-probability, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-is-absolutely-convergent-and-basis-independent, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, thm-hilbert-adjoint-properties, thm-cauchy-schwarz-in-an-inner-product-space, def-self-adjoint-positive-unitary-and-normal-operator, def-series-and-absolute-convergence-in-a-normed-space, def-banach-space, def-metric-convergence, thm-complete-subspace-iff-closed, def-complete-metric-space, lem-restriction-of-scalars, def-subfield, def-countable-choice]

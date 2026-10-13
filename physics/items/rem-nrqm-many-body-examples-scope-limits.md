@@ -5,7 +5,7 @@ kind: remark
 dependency_level: 15
 domain: physics
 title: "What the companion examples and the thought experiment establish"
-status: draft
+status: published
 origin: pipeline
 deps:
   [

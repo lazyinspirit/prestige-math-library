@@ -3,7 +3,7 @@ id: pthm-cm10-frame-covariance
 kind: physics-theorem
 title: "Behaviour of the rigid-material configuration, angular velocity, inertia
   data and inertial quantities under a change of inertial frame"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

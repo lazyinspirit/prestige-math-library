@@ -2,7 +2,7 @@
 id: lem-gr-rational-diagonal-extraction
 kind: lemma
 title: "Locally uniform extraction for X_1-bounded, X_0-Lipschitz families with compact X_1-bounded subsequences"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

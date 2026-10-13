@@ -3,7 +3,7 @@ id: lem-nrqm-approximations-finite-rank-gapped-cluster-projection
 kind: lemma
 domain: mathematics
 title: "Finite-rank gapped spectral cluster under a bounded perturbation"
-status: draft
+status: published
 origin: session
 dependency_level: 2
 deps: [def-countable-choice, def-hilbert-space, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-bounded-linear-operator, def-operator-norm, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-projection-valued-measure, lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus, cor-finite-dimensional-inner-product-spaces-have-orthonormal-bases, thm-circle-integrals-of-integer-monomials, thm-cauchy-integral-formula-circle]

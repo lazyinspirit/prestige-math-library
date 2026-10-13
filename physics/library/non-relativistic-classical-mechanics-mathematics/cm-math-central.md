@@ -1,7 +1,7 @@
 ---
 page: cm-math-central
 title: Cm Math Central
-status: draft
+status: published
 items:
   - def-cm-central-force-trajectory
   - lem-cm-planar-polar-lift

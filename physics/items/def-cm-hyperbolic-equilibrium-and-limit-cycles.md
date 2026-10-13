@@ -2,7 +2,7 @@
 id: def-cm-hyperbolic-equilibrium-and-limit-cycles
 kind: definition
 title: "Hyperbolic equilibria, hyperbolic fixed points, periodic orbits, limit cycles and homoclinic trajectories"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

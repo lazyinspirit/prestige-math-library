@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-momentum-operators-self-adjoint]
 kind: lemma
 domain: mathematics
 title: "Self-adjointness, Fourier representation and translation identities of position and momentum"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-nrqm-magnetic-and-detection-position-and-momentum-operators, thm-algebra-of-derivatives, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, thm-plancherel, def-fourier-transform-on-l-one-of-rn, lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-complex-translation-and-approximate-identity-interfaces, thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

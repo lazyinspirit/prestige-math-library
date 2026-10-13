@@ -4,7 +4,7 @@ aliases: [nrqm-composites-local-pvm-tensor-extension]
 kind: lemma
 domain: mathematics
 title: "Local PVM extension: tensoring a projection-valued measure with the identity"
-status: draft
+status: published
 origin: session
 dependency_level: 2
 deps: [def-borel-sigma-algebra, def-compact-space, def-countable-choice, def-hilbert-orthogonal-projection, def-hilbert-space, def-locally-compact-space, def-measurable-space, def-operator-norm, def-projection-valued-measure, def-radon-measure-on-an-lch-space, def-regular-borel-measure-on-an-lch-space, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-hilbert-tensor-construction, thm-bounded-borel-pvm-integral]

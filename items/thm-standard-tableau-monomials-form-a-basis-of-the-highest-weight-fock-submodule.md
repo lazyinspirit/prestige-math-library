@@ -2,7 +2,7 @@
 id: thm-standard-tableau-monomials-form-a-basis-of-the-highest-weight-fock-submodule
 kind: theorem
 title: "Standard tableau monomials form a basis of the highest weight Fock submodule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

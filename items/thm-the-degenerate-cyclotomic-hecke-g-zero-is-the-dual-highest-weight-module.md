@@ -2,7 +2,7 @@
 id: thm-the-degenerate-cyclotomic-hecke-g-zero-is-the-dual-highest-weight-module
 kind: theorem
 title: "The degenerate cyclotomic Hecke $G_0$ is the dual highest weight module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 39

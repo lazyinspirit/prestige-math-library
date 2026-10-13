@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared variational trial reading: assigned energy observable, form
   domain, trial value, bottom and gap"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

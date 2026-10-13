@@ -3,7 +3,7 @@ id: lem-em-rectangle-mode-profile-identities
 kind: lemma
 domain: mathematics
 title: "The separated sine and cosine rectangle profiles: eigen-identities, boundary traces, orthogonality and Dirichlet integrals"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-directional-and-partial-derivatives, def-laplacian-of-a-c2-function, def-multidimensional-rectangle-and-volume, thm-continuous-on-a-rectangle-is-riemann-integrable, thm-riemann-fubini-on-product-rectangles, thm-ftc-second-part, thm-sine-and-cosine-derivatives, thm-sine-and-cosine-addition-formulas, thm-algebra-of-derivatives, thm-sine-cosine-zero-sets-and-fundamental-period, thm-quarter-turn-values-and-shift-formulas, thm-chain-rule-for-total-derivatives]

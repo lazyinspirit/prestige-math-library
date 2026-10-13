@@ -2,7 +2,7 @@
 id: def-cm-material-region-and-density
 kind: definition
 title: "Material regions, densities and their mass"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

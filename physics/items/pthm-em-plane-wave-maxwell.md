@@ -2,7 +2,7 @@
 id: pthm-em-plane-wave-maxwell
 kind: physics-theorem
 title: "Dispersion, transversality and the two polarization conditions for plane-wave solutions"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 15

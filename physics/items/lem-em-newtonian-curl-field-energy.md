@@ -3,7 +3,7 @@ id: lem-em-newtonian-curl-field-energy
 kind: lemma
 title: "Curl-field energy identity for Newtonian potentials of divergence-free compact currents"
 domain: mathematics
-status: draft
+status: published
 origin: session
 dependency_level: 1
 proof_strategy: direct

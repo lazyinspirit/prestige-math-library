@@ -1,7 +1,7 @@
 ---
 page: sr-accelerated-observers-examples
 title: "Accelerated Observers — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

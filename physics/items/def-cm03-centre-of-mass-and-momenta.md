@@ -2,7 +2,7 @@
 id: def-cm03-centre-of-mass-and-momenta
 kind: definition
 title: "Total mass, total momentum, centre of mass, angular momentum, torque, kinetic energy, power and work of a particle model in an inertial frame"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

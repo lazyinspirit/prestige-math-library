@@ -2,7 +2,7 @@
 id: lem-symmetric-polynomial-centers-have-primitive-split-content-idempotents
 kind: lemma
 title: "Symmetric polynomial centers have primitive split content idempotents"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

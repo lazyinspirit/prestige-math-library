@@ -2,7 +2,7 @@
 id: thm-algebraic-whitney-strata-have-controlled-local-conical-neighborhoods
 kind: theorem
 title: "Algebraic Whitney strata have controlled local conical neighborhoods"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

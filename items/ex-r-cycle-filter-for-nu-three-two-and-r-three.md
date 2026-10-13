@@ -2,7 +2,7 @@
 id: ex-r-cycle-filter-for-nu-three-two-and-r-three
 kind: example
 title: "The 3-cycle filter for ν=(3,2) on S_8"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

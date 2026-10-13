@@ -2,7 +2,7 @@
 id: lem-gr-periodic-fourier-differentiation-and-norm-equivalence
 kind: lemma
 title: "Periodic Fourier differentiation identity and equivalence of the derivative and Fourier-weight Sobolev norms"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 1

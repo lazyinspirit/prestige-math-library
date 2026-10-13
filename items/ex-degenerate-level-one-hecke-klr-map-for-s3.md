@@ -2,7 +2,7 @@
 id: ex-degenerate-level-one-hecke-klr-map-for-s3
 kind: example
 title: "The degenerate level-one Hecke–KLR map for S_3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 31

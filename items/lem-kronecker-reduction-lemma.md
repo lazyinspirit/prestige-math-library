@@ -2,7 +2,7 @@
 id: lem-kronecker-reduction-lemma
 kind: lemma
 title: The Kronecker reduction lemma of Pak and Panova
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

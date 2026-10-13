@@ -2,7 +2,7 @@
 id: ex-the-one-point-extension-of-a-well-order
 kind: example
 title: "The one-point extension of a well-order, and $\\omega$ with a new top element"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

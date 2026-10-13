@@ -4,7 +4,7 @@ aliases: [nrqm-approximations-static-finite-level-dipole-coupling]
 kind: postulate
 domain: physics
 title: "Static finite-level electric-dipole coupling: compressed dipole of the declared two-body Coulomb model in a uniform field"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps: [def-nrqm-central-framework-coulomb-and-hydrogen-model, thm-nrqm-coulomb-atomic-dipole-matrix-element-domain, def-nrqm-framework-quantities-and-units, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-autonomous-dynamics-framework-evolution, def-countable-choice, def-axiom-of-choice]

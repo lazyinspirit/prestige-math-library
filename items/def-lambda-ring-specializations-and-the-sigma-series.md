@@ -2,7 +2,7 @@
 id: def-lambda-ring-specializations-and-the-sigma-series
 kind: definition
 title: "Specializations of symmetric functions and the series $\\sigma$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

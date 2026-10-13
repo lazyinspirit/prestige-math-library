@@ -3,7 +3,7 @@ id: thm-cm-stability-of-extreme-principal-axes
 kind: theorem
 title: "Lyapunov stability of spin about the largest and smallest principal axes
   of the torque-free top"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

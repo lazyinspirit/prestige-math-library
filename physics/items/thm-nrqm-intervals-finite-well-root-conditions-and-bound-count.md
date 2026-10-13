@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-finite-well-root-conditions-and-bound-coun
 kind: theorem
 domain: mathematics
 title: "Finite square well: root conditions, simplicity and the bound-state count"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-weak-derivative-ac-representative, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, thm-nrqm-intervals-regular-ivp-parameter-series, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, def-complex-exponential, cor-complex-trigonometric-and-hyperbolic-addition-formulas, cor-complex-trigonometric-and-hyperbolic-derivatives, thm-derivative-of-exponential, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-hilbert-space, def-countable-choice, def-axiom-of-choice, lem-nrqm-intervals-integration-by-parts]

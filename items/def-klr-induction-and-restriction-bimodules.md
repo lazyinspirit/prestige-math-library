@@ -2,7 +2,7 @@
 id: def-klr-induction-and-restriction-bimodules
 kind: definition
 title: "Induction and restriction bimodules for KLR algebras"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -4,7 +4,7 @@ aliases: [nrqm-central-coulomb-bound-state-radial-distributions]
 kind: physics-theorem
 domain: physics
 title: "The one-centre Coulomb model: position and radial distributions of the bound states, with the ground-state density and its scales"
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps: [def-nrqm-central-framework-coulomb-and-hydrogen-model, pthm-nrqm-central-coulomb-energy-observable-and-flow, pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, def-nrqm-framework-quantities-and-units, def-nrqm-observables-framework-observable-and-outcome-law, pthm-nrqm-kinematics-spin-s-outcome-laws, def-nrqm-state-geometry-framework-state-space, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-coulomb-kummer-recurrence-and-termination, thm-nrqm-coulomb-laguerre-bound-energy-exhaustion, thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy, thm-nrqm-coulomb-ground-radial-probability-and-units, thm-nrqm-orbital-and-spin-sphere-onb, thm-polar-coordinates-formula-for-lebesgue-measure, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-polar-surface-measure-on-the-unit-sphere, def-countable-choice, def-axiom-of-choice]

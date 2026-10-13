@@ -3,7 +3,7 @@ id: ex-cm-kepler-ellipse-data-check
 kind: example
 title: "An exact Kepler ellipse check: $e=1/2$, $J=1$, $\\mu=\\kappa=1$ give
   $a=4/3$, $b=2\\sqrt3/3$, $E=-3/8$ and $T^2=256\\pi^2/27$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 7

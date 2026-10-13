@@ -4,7 +4,7 @@ kind: remark
 title: "Numerical error in a prediction pipeline: certified velocity-Verlet
   bounds, additive per-step error, the analytic long-time branch, and the
   separation from model error"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps:

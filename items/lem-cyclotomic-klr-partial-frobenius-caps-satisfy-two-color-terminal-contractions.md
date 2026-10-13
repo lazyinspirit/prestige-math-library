@@ -2,7 +2,7 @@
 id: lem-cyclotomic-klr-partial-frobenius-caps-satisfy-two-color-terminal-contractions
 kind: lemma
 title: "Actual partial Frobenius caps satisfy all two-color terminal contractions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 deps: [def-cyclotomic-klr-quotient-at-a-dominant-weight,

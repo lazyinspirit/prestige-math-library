@@ -2,7 +2,7 @@
 id: cor-graded-specht-classes-form-a-basis-of-the-module-grothendieck-group
 kind: corollary
 title: "The restricted graded Specht classes form a basis of the module Grothendieck group"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 39

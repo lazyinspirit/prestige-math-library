@@ -2,7 +2,7 @@
 id: ex-em-skin-depth-approximation-example
 kind: example
 title: "Numerical check of the good-conductor skin-depth bounds and the $\\sigma=0$ exclusion"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 20

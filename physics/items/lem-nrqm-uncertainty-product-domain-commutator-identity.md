@@ -4,7 +4,7 @@ aliases: [nrqm-uncertainty-product-domain-commutator-identity]
 kind: lemma
 domain: mathematics
 title: "The position-momentum commutator identity on the product domain"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-schwartz-space-and-its-seminorms, def-weak-derivative-of-a-locally-integrable-function, lem-nrqm-kinematics-ccr-and-internal-factor-commutation, lem-nrqm-kinematics-componentwise-position-and-momentum, lem-weak-leibniz-rule-with-a-smooth-factor, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]

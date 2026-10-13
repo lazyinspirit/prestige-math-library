@@ -1,7 +1,7 @@
 ---
 page: em-material-response-examples
 title: "Material response and stationary interfaces — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

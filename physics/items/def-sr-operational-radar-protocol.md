@@ -3,7 +3,7 @@ id: def-sr-operational-radar-protocol
 kind: definition
 domain: physics
 title: "The operational radar protocol of an ideal observer"
-status: draft
+status: published
 origin: pipeline
 physical_scope: >-
   The radar protocol is defined for a future timelike worldline of the affine

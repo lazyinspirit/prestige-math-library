@@ -1,7 +1,7 @@
 ---
 page: qm-one-dimensional-potentials
 title: "Qm One Dimensional Potentials"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-potentials-one-dimensional-flux-identity

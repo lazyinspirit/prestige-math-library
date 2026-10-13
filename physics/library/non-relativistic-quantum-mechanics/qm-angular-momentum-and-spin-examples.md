@@ -1,7 +1,7 @@
 ---
 page: qm-angular-momentum-and-spin-examples
 title: "Qm Angular Momentum And Spin — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

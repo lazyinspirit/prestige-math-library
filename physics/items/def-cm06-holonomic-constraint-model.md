@@ -2,7 +2,7 @@
 id: def-cm06-holonomic-constraint-model
 kind: definition
 title: "Holonomic-constraint models of the force branch: constraint data, the constrained equation, virtual displacements and the scleronomic/rheonomic distinction"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

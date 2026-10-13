@@ -4,7 +4,7 @@ aliases: [nrqm-driven-dynamics-two-level-rotating-frame]
 kind: lemma
 domain: mathematics
 title: "The two-level rotating frame: conjugation identities, the transformed families and invariance of the level populations"
-status: draft
+status: published
 origin: session
 dependency_level: 1
 deps: [prop-nrqm-orbital-and-spin-finite-spin-matrices, thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness, thm-algebra-of-derivatives, thm-sine-and-cosine-derivatives, thm-sine-and-cosine-addition-formulas, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, def-inner-product-space, def-derivative, def-countable-choice]

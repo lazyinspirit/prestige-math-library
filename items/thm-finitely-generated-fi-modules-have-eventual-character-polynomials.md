@@ -2,7 +2,7 @@
 id: thm-finitely-generated-fi-modules-have-eventual-character-polynomials
 kind: theorem
 title: "Finitely generated FI-modules have eventual character polynomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

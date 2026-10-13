@@ -2,7 +2,7 @@
 id: thm-conormal-node-composition-multiplicities-under-residue-induction
 kind: theorem
 title: "Conormal-node composition multiplicities under residue induction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

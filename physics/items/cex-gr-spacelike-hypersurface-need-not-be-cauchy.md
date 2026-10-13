@@ -2,7 +2,7 @@
 id: cex-gr-spacelike-hypersurface-need-not-be-cauchy
 kind: counterexample
 title: "A spacelike hypersurface of a globally hyperbolic model that is not a Cauchy hypersurface"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

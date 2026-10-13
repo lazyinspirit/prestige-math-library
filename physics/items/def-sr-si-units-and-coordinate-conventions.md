@@ -2,7 +2,7 @@
 id: def-sr-si-units-and-coordinate-conventions
 kind: definition
 title: "SI units and coordinate conventions of the special-relativity framework"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 5

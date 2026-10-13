@@ -2,7 +2,7 @@
 id: ex-one-color-quiver-full-flags-need-not-be-semismall
 kind: example
 title: "One-color quiver full flags need not be semismall"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

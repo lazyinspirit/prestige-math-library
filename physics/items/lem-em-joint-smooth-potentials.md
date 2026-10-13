@@ -2,7 +2,7 @@
 id: lem-em-joint-smooth-potentials
 kind: lemma
 title: "Joint regularity of the radial vector and scalar potentials on a star-shaped domain"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

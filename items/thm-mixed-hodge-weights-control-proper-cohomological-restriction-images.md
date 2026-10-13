@@ -2,7 +2,7 @@
 id: thm-mixed-hodge-weights-control-proper-cohomological-restriction-images
 kind: theorem
 title: "Weights control restriction images into proper varieties"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 22

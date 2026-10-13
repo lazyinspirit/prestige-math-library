@@ -2,7 +2,7 @@
 id: lem-gr-maximal-common-development
 kind: lemma
 title: "Existence and uniqueness of the maximal common development of two developments"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 31

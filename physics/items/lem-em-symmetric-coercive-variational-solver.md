@@ -3,7 +3,7 @@ id: lem-em-symmetric-coercive-variational-solver
 kind: lemma
 domain: mathematics
 title: "Unique solution of a symmetric coercive variational problem on a Hilbert space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

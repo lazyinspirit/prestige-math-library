@@ -4,7 +4,7 @@ aliases: [ nrqm-magnetic-and-detection-example-finite-dark-bin-probability ]
 kind: example
 domain: mathematics
 title: "A dark bin of positive length has positive coherent probability"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps:

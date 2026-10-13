@@ -2,7 +2,7 @@
 id: thm-grand-loop-existence-of-highest-weight-crystal-bases
 kind: theorem
 title: "The grand loop: existence of the highest weight crystal bases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

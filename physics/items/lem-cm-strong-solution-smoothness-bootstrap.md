@@ -2,7 +2,7 @@
 id: lem-cm-strong-solution-smoothness-bootstrap
 kind: lemma
 title: "A strong solution of the projected periodic equation with all Sobolev norms continuous in time is $C^\\infty$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

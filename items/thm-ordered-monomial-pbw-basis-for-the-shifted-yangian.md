@@ -2,7 +2,7 @@
 id: thm-ordered-monomial-pbw-basis-for-the-shifted-yangian
 kind: theorem
 title: "Ordered monomial PBW basis for the shifted Yangian"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

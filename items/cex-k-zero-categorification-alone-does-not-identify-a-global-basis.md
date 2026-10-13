@@ -2,7 +2,7 @@
 id: cex-k-zero-categorification-alone-does-not-identify-a-global-basis
 kind: counterexample
 title: "Word projectives need not give lower global basis vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

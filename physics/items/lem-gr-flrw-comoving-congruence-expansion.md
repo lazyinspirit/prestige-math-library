@@ -2,7 +2,7 @@
 id: lem-gr-flrw-comoving-congruence-expansion
 kind: lemma
 title: "The comoving congruence is geodesic; its expansion is three Hubble parameters per unit conversion constant"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

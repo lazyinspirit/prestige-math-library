@@ -2,7 +2,7 @@
 id: def-cm-rigid-placement-and-body-angular-velocity
 kind: definition
 title: "Rigid placements, body and spatial angular velocity, and material velocities"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-gr-flrw-friedmann-system
 kind: definition
 title: "The Friedmann, acceleration and continuity equations of an FLRW model datum"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

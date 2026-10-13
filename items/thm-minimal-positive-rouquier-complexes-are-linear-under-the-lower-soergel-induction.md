@@ -2,7 +2,7 @@
 id: thm-minimal-positive-rouquier-complexes-are-linear-under-the-lower-soergel-induction
 kind: theorem
 title: "Minimal positive Rouquier complexes are linear under the lower Soergel induction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

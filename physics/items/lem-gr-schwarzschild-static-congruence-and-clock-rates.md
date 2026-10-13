@@ -2,7 +2,7 @@
 id: lem-gr-schwarzschild-static-congruence-and-clock-rates
 kind: lemma
 title: "The static observer congruence of the Schwarzschild exterior model: unit field, integral curves, acceleration and clock-rate ratios"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

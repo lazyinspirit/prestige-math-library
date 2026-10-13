@@ -2,7 +2,7 @@
 id: cor-type-a-hecke-specht-modules-are-in-the-same-block-iff-their-labels-have-the-same-e-core
 kind: corollary
 title: "Type-A Hecke Specht modules are in the same block iff their labels have the same e-core"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 16

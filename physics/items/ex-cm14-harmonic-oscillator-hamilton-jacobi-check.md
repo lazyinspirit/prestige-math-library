@@ -2,7 +2,7 @@
 id: ex-cm14-harmonic-oscillator-hamilton-jacobi-check
 kind: example
 title: "The harmonic model worked through: an explicit complete integral, its characteristic motion, and the action-angle chart with $I=\\oint p\\,dx$ and period-one frequency $1/T$"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 27

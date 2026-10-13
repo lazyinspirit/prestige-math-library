@@ -2,7 +2,7 @@
 id: lem-arbitrary-level-cyclotomic-murphy-jm-action-is-content-triangular
 kind: lemma
 title: "Arbitrary-level Murphy Jucys–Murphy action is content triangular"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

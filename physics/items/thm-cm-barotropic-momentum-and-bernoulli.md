@@ -3,7 +3,7 @@ id: thm-cm-barotropic-momentum-and-bernoulli
 kind: theorem
 title: "Barotropic inviscid momentum in gradient form, Bernoulli along
   streamlines and the irrotational constant"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

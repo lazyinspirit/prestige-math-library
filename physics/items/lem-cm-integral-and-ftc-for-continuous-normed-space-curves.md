@@ -2,7 +2,7 @@
 id: lem-cm-integral-and-ftc-for-continuous-normed-space-curves
 kind: lemma
 title: "Riemann integration of continuous curves in a complete normed space, with the fundamental theorem of calculus and coefficient functionals"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

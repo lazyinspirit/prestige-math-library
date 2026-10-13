@@ -2,7 +2,7 @@
 id: lem-fi-coinvariant-functors-detect-vanishing-in-bounded-weight
 kind: lemma
 title: "Coinvariants detect vanishing of subquotients of bounded weight, and padded irreducibles stabilise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

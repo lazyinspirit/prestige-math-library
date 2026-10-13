@@ -2,7 +2,7 @@
 id: cex-quotient-rule-needs-a-nonzero-limit
 kind: counterexample
 title: "The quotient rule needs a nonzero limit in the denominator: $1\\big/(k+1)^{-1} = k+1$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

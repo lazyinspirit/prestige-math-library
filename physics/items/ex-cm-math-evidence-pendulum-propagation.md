@@ -2,7 +2,7 @@
 id: ex-cm-math-evidence-pendulum-propagation
 kind: example
 title: "Symbolic two-input propagation of a period–length model"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

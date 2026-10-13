@@ -6,7 +6,7 @@ domain: physics
 title: "The one-centre Coulomb model: bound energies, n^2-degeneracy,
   completeness of the bound states in the negative spectral subspace and the
   continuum"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

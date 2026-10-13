@@ -2,7 +2,7 @@
 id: cex-sr-rindler-radar-distance-is-not-symmetric
 kind: counterexample
 title: "Rindler radar distance between two coaxial observers is not symmetric under interchange"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

@@ -3,7 +3,7 @@ id: lem-em-smooth-newtonian-upgrade
 kind: lemma
 domain: mathematics
 title: "Newtonian potential of smooth compact data is smooth and solves the Poisson equation pointwise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

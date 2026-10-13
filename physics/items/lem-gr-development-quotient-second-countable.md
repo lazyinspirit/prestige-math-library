@@ -2,7 +2,7 @@
 id: lem-gr-development-quotient-second-countable
 kind: lemma
 title: "An explicit rational-exponential basis for the universal development quotient"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 39

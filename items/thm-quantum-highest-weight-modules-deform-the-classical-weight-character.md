@@ -2,7 +2,7 @@
 id: thm-quantum-highest-weight-modules-deform-the-classical-weight-character
 kind: theorem
 title: "Finitely generated free integral weight lattices and deformation of the classical weight character"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

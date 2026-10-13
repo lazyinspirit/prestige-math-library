@@ -2,7 +2,7 @@
 id: ex-cm07-free-particle-straight-lines
 kind: example
 title: "The free particle: the unique stationary curve between fixed endpoints is the straight uniform motion, and it minimises the action"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

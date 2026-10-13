@@ -4,7 +4,7 @@ aliases: [ nrqm-orbital-and-spin-tensor-spin-composition ]
 kind: theorem
 domain: mathematics
 title: "Tensor spin composition"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

@@ -2,7 +2,7 @@
 id: prop-cm-pendulum-small-angle-linearization-bound
 kind: proposition
 title: "The pendulum field near the downward equilibrium: bounded force derivative, cubic remainder and the finite-time small-angle error bound"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

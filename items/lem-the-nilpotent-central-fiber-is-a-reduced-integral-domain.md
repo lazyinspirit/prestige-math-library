@@ -2,7 +2,7 @@
 id: lem-the-nilpotent-central-fiber-is-a-reduced-integral-domain
 kind: lemma
 title: The nilpotent central fiber is reduced and integral
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

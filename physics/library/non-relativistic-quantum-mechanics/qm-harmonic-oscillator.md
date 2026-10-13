@@ -1,7 +1,7 @@
 ---
 page: qm-harmonic-oscillator
 title: "Qm Harmonic Oscillator"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-oscillator-diagonal-eigenspaces

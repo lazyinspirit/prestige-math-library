@@ -2,7 +2,7 @@
 id: lem-the-parabolic-hecke-modules-have-standard-bases-actions-and-compatible-bars
 kind: lemma
 title: "Standard bases, right actions and bar involutions on the parabolic Hecke modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

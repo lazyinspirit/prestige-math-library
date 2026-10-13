@@ -2,7 +2,7 @@
 id: def-cm01-velocity-acceleration
 kind: definition
 title: "Coordinate velocity and acceleration of a worldline in an inertial frame, and the spatial velocity and acceleration vectors"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

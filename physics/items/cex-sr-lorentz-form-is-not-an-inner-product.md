@@ -2,7 +2,7 @@
 id: cex-sr-lorentz-form-is-not-an-inner-product
 kind: counterexample
 title: "The Lorentz form is not an inner product"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

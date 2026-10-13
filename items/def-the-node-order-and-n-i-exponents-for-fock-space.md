@@ -2,7 +2,7 @@
 id: def-the-node-order-and-n-i-exponents-for-fock-space
 kind: definition
 title: "The node order and the signed exponents $N_i^l$ and $N_i^r$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 15

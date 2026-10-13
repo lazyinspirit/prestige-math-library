@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-integration-by-parts]
 kind: lemma
 domain: mathematics
 title: "Integration by parts and the endpoint-vanishing space on intervals"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-weak-derivative-ac-representative, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, thm-integration-by-parts-for-absolutely-continuous-functions, lem-the-product-of-two-absolutely-continuous-functions-is-absolutely-continuous, lem-complex-translation-and-approximate-identity-interfaces, def-the-standard-smooth-step-function, lem-classical-derivatives-are-weak-derivatives, thm-dominated-convergence, def-countable-choice, def-axiom-of-choice, def-dependent-choice]

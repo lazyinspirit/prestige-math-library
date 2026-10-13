@@ -2,7 +2,7 @@
 id: lem-cm-log-coefficients-are-symplectic-fields-with-hamiltonian-primitives
 kind: lemma
 title: Each coefficient field $X_j$ of the modified logarithm is a holomorphic symplectic field with a global holomorphic primitive $H_j$ on the star-shaped domain, and $X_1=X_{\tilde A+\tilde B}$
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 12

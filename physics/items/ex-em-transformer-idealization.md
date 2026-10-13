@@ -3,7 +3,7 @@ id: ex-em-transformer-idealization
 kind: example
 title: "Two-circuit mutual inductance, the perfect-linkage bound and ideal-transformer limitations"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 21
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: def-nrqm-framework-classical-apparatus-trajectories
 kind: definition
 title: "Classical apparatus and preparation trajectories of the framework"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

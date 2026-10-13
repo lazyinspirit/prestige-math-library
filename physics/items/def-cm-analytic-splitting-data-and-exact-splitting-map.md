@@ -2,7 +2,7 @@
 id: def-cm-analytic-splitting-data-and-exact-splitting-map
 kind: definition
 title: Analytic splitting data with uniform holomorphic neighbourhood, and the exact symmetric splitting map $\Psi_h$
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

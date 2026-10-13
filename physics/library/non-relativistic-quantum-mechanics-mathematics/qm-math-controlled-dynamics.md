@@ -1,7 +1,7 @@
 ---
 page: qm-math-controlled-dynamics
 title: Qm Math Controlled Dynamics
-status: draft
+status: published
 items:
   - lem-nrqm-controlled-dynamics-cc-separable-spectral-calculus
   - lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus

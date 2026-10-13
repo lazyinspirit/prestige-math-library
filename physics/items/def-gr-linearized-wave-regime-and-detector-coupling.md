@@ -2,7 +2,7 @@
 id: def-gr-linearized-wave-regime-and-detector-coupling
 kind: definition
 title: "The linearized-wave approximation regime and an ideal two-body detector with a prescribed finite arm path"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

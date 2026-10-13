@@ -1,7 +1,7 @@
 ---
 page: signed-quiver-flag-convolution-and-klr-ext-realization
 title: "Signed Quiver Flag Convolution And Klr Ext Realization"
-status: draft
+status: published
 items: [def-quiver-full-flag-incidence-varieties-and-geometric-klr-generators,
         thm-quiver-flag-relative-position-strata-give-a-faithful-geometric-pbw-basis,
         thm-quiver-flag-convolution-generators-satisfy-the-signed-klr-relations,

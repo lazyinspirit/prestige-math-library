@@ -3,7 +3,7 @@ id: rem-nrqm-state-geometry-examples-scope-limits
 kind: remark
 domain: physics
 title: "What the worked checks of the companion page establish"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps:

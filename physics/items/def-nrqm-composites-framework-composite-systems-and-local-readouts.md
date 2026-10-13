@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "Composite systems of the framework: product bases, local readouts, local
   effects and local instruments"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

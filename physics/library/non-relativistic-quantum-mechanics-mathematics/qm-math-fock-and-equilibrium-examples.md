@@ -1,7 +1,7 @@
 ---
 page: qm-math-fock-and-equilibrium-examples
 title: Qm Math Fock And Equilibrium — Examples
-status: draft
+status: published
 items: []
 requires:
   - qm-math-fock-and-equilibrium

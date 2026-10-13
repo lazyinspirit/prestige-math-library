@@ -4,7 +4,7 @@ aliases: [ nrqm-identical-particles-scope-and-empirical-status ]
 kind: remark
 domain: physics
 title: "Scope and empirical status of the identical-particles page"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

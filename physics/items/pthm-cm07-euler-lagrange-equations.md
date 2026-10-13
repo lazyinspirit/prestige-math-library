@@ -2,7 +2,7 @@
 id: pthm-cm07-euler-lagrange-equations
 kind: physics-theorem
 title: "The stationary-action criterion and the potential-part Euler-Lagrange equation"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

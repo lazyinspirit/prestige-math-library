@@ -1,7 +1,7 @@
 ---
 page: cm-math-chaos
 title: Cm Math Chaos
-status: draft
+status: published
 items:
   - def-bilateral-symbol-and-bounded-sequence-space
   - lem-bounded-bilateral-sequence-ball-is-complete

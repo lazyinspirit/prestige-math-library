@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-gauge-h2-domain-preservation]
 kind: theorem
 domain: mathematics
 title: "Gauge multiplication preserves H2 and transports the magnetic momentum"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-nrqm-magnetic-and-detection-magnetic-schrodinger-operator, def-nrqm-magnetic-and-detection-position-and-momentum-operators, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, lem-nrqm-magnetic-and-detection-weak-product-rule, lem-classical-derivatives-are-weak-derivatives, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, thm-complex-exponential-is-entire-with-derivative-itself, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, cor-mean-value-theorem, def-complex-exponential, def-sobolev-space-wkp-and-its-norm, thm-dominated-convergence, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

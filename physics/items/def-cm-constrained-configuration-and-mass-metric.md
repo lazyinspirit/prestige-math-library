@@ -2,7 +2,7 @@
 id: def-cm-constrained-configuration-and-mass-metric
 kind: definition
 title: "Constrained configurations, the mass matrix and the mass metric"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

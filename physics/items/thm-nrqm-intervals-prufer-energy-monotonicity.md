@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-prufer-energy-monotonicity]
 kind: theorem
 domain: mathematics
 title: "Prufer angle for the interval equation and strict monotonicity in the energy"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [thm-nrqm-intervals-regular-ivp-parameter-series, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, thm-dominated-convergence, thm-continuous-implies-integrable, thm-gronwall-integral-inequality, def-countable-choice]

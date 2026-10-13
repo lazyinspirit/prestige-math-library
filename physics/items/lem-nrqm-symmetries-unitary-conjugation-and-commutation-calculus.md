@@ -4,7 +4,7 @@ aliases: [nrqm-symmetries-unitary-conjugation-and-commutation-calculus]
 kind: lemma
 domain: mathematics
 title: "Unitary conjugation, generator transport and strong commutation of self-adjoint observables"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [def-axiom-of-choice, def-bounded-linear-operator, def-countable-choice, def-dependent-choice,

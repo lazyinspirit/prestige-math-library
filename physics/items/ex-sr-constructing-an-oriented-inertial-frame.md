@@ -2,7 +2,7 @@
 id: ex-sr-constructing-an-oriented-inertial-frame
 kind: example
 title: "Worked construction of a future-oriented inertial frame from an arbitrary orthonormal basis"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

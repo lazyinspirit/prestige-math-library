@@ -2,7 +2,7 @@
 id: lem-em-interface-derivatives
 kind: lemma
 title: "Distributional divergence and curl across a stationary interface"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

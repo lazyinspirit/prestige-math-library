@@ -2,7 +2,7 @@
 id: thm-compactly-supported-derived-pushforward-has-exceptional-inverse-image-adjoint
 kind: theorem
 title: Exceptional inverse image as the adjoint of derived proper-support image
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 14

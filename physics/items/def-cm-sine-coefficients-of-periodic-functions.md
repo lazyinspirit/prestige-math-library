@@ -2,7 +2,7 @@
 id: def-cm-sine-coefficients-of-periodic-functions
 kind: definition
 title: "Sine coefficients, sine series and the odd periodic extension"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

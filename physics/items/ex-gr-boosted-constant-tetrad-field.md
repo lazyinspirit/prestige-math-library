@@ -2,7 +2,7 @@
 id: ex-gr-boosted-constant-tetrad-field
 kind: example
 title: "A constant boosted tetrad field on flat spacetime and an adapted chart"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

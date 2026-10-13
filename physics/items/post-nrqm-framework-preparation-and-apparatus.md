@@ -3,7 +3,7 @@ id: post-nrqm-framework-preparation-and-apparatus
 kind: postulate
 title: "Preparation and apparatus postulate P7: declared preparations, isolation
   and sampling assumptions"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

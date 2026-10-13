@@ -3,7 +3,7 @@ id: def-sr-galilean-limiting-charts
 kind: definition
 domain: mathematics
 title: 'Galilean limiting chart maps and bounded chart regions'
-status: draft
+status: published
 origin: session
 dependency_level: 8
 deps: [def-sr-affine-minkowski-model, def-lorentz-boost, def-inertial-frame-and-inertial-chart, def-spatial-euclidean-structure-of-an-inertial-frame, def-rational-power, lem-boost-is-proper-orthochronous-with-inverse]

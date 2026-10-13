@@ -2,7 +2,7 @@
 id: def-cm-holonomic-constraint-and-ideal-reactions
 kind: definition
 title: "A regular holonomic constraint, its virtual displacements and the ideal-reaction law"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

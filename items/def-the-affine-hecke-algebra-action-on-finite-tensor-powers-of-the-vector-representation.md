@@ -2,7 +2,7 @@
 id: def-the-affine-hecke-algebra-action-on-finite-tensor-powers-of-the-vector-representation
 kind: definition
 title: "The affine Hecke algebra and its commuting action on tensor powers of the vector representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

@@ -4,7 +4,7 @@ aliases: [nrqm-uncertainty-commutator-zero-on-a-core-is-not-spectral-compatibili
 kind: counterexample
 domain: mathematics
 title: "A commutator vanishing on a dense invariant domain does not imply strong spectral commutation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-axiom-of-choice, def-complex-exponential, def-countable-choice, def-hilbert-space, def-hilbert-orthogonal-projection, def-nrqm-intervals-hilbert-sobolev-spaces, def-nrqm-uncertainty-strong-spectral-commutation, def-projection-valued-measure, lem-nrqm-intervals-integration-by-parts, lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues, lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set, thm-complex-exponential-is-entire-with-derivative-itself, thm-nrqm-intervals-twisted-periodic-momentum-domain, cor-primitives-of-a-continuous-function, thm-spectral-theorem-for-unbounded-self-adjoint-operators]

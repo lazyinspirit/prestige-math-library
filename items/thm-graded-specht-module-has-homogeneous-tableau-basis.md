@@ -2,7 +2,7 @@
 id: thm-graded-specht-module-has-homogeneous-tableau-basis
 kind: theorem
 title: "The graded Specht module has a homogeneous tableau basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 37

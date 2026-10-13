@@ -2,7 +2,7 @@
 id: def-lorentz-orthogonality-and-orthogonal-complement
 kind: definition
 title: "eta-orthogonality and orthogonal complements in a Lorentz vector space"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

@@ -4,7 +4,7 @@ aliases: [nrqm-composites-complex-gaussian-continuation]
 kind: lemma
 domain: mathematics
 title: "Complex Gaussian continuation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, thm-dominated-convergence, def-complex-differentiability-holomorphic-and-entire, def-complex-domain, def-complex-logarithms-principal-logarithm-and-complex-powers, cor-principal-logarithm-is-holomorphic-on-the-slit-plane, thm-chain-rule-for-complex-derivatives, thm-complex-exponential-is-entire-with-derivative-itself, thm-identity-theorem-holomorphic-functions, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, def-improper-integral-at-infinity, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, def-countable-choice]

@@ -2,7 +2,7 @@
 id: ex-cm-pendulum-linearization-bound-check
 kind: example
 title: "Finite-time linearization bound for the planar pendulum with explicit constants"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

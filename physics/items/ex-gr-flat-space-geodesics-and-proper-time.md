@@ -2,7 +2,7 @@
 id: ex-gr-flat-space-geodesics-and-proper-time
 kind: example
 title: "Geodesics, proper time and parallel transport of the flat model"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

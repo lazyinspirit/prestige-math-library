@@ -6,7 +6,7 @@ requires:
   - gr-tensors-and-observers
 page: gr-curvature-and-tides-examples
 title: "Curvature And Tides — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

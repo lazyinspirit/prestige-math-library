@@ -1,7 +1,7 @@
 ---
 page: cm10-rigid-body-configuration-and-inertia
 title: "Rigid-body configuration and inertia"
-status: draft
+status: published
 library: physics
 items:
   - post-cm10-rigid-material

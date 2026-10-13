@@ -2,7 +2,7 @@
 id: cex-weighted-am-gm-needs-normalized-nonnegative-weights
 kind: counterexample
 title: "Weighted AM-GM needs nonnegative weights summing to $1$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

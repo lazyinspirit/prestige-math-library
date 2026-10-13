@@ -2,7 +2,7 @@
 id: lem-compact-support-calculus-of-extension-by-zero-and-closed-pushforward
 kind: lemma
 title: "Compact-support calculus along open and closed embeddings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

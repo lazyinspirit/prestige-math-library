@@ -2,7 +2,7 @@
 id: thm-gr-reduced-einstein-local-existence
 kind: theorem
 title: "Local existence for the reduced Einstein equation from Cauchy data on a spacelike slice"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

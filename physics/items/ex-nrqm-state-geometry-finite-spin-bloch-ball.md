@@ -3,7 +3,7 @@ id: ex-nrqm-state-geometry-finite-spin-bloch-ball
 kind: example
 domain: physics
 title: "The state space of a two-level finite-spin system is the Bloch ball"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps:

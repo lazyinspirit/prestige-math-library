@@ -2,7 +2,7 @@
 id: lem-whitney-normal-tubes-have-submersive-radius-and-bounded-stratumwise-lifts
 kind: lemma
 title: "Whitney normal tubes have submersive radius and bounded stratumwise lifts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

@@ -4,7 +4,7 @@ aliases: [nrqm-interference-scope-and-deferred-content]
 kind: remark
 domain: physics
 title: "What the two-path detection page establishes, assumes and defers"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps: [def-nrqm-interference-two-path-preparation-and-detection-model, def-nrqm-interference-recorded-detector-and-sampling-model, pthm-nrqm-interference-coherent-and-mixture-detection-laws, pthm-nrqm-interference-recorded-bin-laws-loss-and-conditioning, pthm-nrqm-interference-continuity-and-local-probability-balance, texp-nrqm-interference-finite-sample-fringe-failure]

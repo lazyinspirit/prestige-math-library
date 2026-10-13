@@ -74,7 +74,7 @@ requires:
   - weak-derivatives-and-sobolev-spaces
 page: gr-gr14-full-high-regularity-symmetric-hyperbolic-proof
 title: "Gr14 Full High Regularity Symmetric Hyperbolic Proof"
-status: draft
+status: published
 library: physics
 items:
   - def-gr-periodic-torus-and-sobolev-spaces

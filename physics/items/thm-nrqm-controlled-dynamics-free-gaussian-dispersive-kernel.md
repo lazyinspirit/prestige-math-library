@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-free-gaussian-dispersive-kernel]
 kind: theorem
 domain: mathematics
 title: "Free Gaussian dispersive kernel"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, lem-nrqm-composites-complex-gaussian-continuation, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, thm-plancherel, def-fourier-transform-on-l-one-of-rn, thm-dominated-convergence, lem-schwartz-space-is-dense-in-l-two, def-schwartz-space-and-its-seminorms, def-hilbert-space, def-countable-choice, def-complex-logarithms-principal-logarithm-and-complex-powers, thm-identity-theorem-holomorphic-functions, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-tonelli-theorem-for-sigma-finite-product-spaces]

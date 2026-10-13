@@ -2,7 +2,7 @@
 id: lem-truncated-homological-equation-with-conservative-loss
 kind: lemma
 title: "The linear homological equation $\\nu\\cdot\\partial_\\vartheta u=v$ on a Diophantine label set, with uniform parameter bounds and conservative loss"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-cyclotomic-schur-weight-gram-valuations-equal-signed-rim-hook-kostka-sums
 kind: lemma
 title: "Cyclotomic Schur weight Gram valuations equal signed rim-hook Kostka sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 24

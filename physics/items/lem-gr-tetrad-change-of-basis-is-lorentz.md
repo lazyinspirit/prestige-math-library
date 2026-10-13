@@ -2,7 +2,7 @@
 id: lem-gr-tetrad-change-of-basis-is-lorentz
 kind: lemma
 title: "The change between two future-directed tetrads is a Lorentz matrix"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

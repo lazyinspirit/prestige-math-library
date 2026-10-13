@@ -2,7 +2,7 @@
 id: def-gr-observation-and-analysis-architecture
 kind: definition
 title: "Model configurations, interface readouts, operational models, data records and the analysis vocabulary of the experiment interface"
-status: draft
+status: published
 origin: session
 domain: physics
 physical_scope: "Formulation vocabulary inside the classical gravitational framework: it names model configurations built from the framework's own objects (Lorentzian four-manifolds, metric-selected connections, worldlines with proper time, observers and congruences, future null geodesics, charts, ideal two-body detectors and declared parameters), the readouts assigned to those configurations (frequency ratio and redshift, radar round-trip proper time, deflection angle, azimuthal increment and perihelion advance, arrival times, strain), operational models with a declared interpretation obligation, hard-bound data records, calibration declarations and declared uncertainty bounds, and the separation of comparison claims from all of these. It asserts no measurement, no apparatus behaviour, no sampling law, no statistical inference, no value of any physical constant, and no in-framework prediction for the propagation-delay, deflection, perihelion-advance or arrival-time slots, which are recorded as future-report destinations."

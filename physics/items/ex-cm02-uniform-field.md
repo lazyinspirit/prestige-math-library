@@ -2,7 +2,7 @@
 id: ex-cm02-uniform-field
 kind: example
 title: "The uniform-force model: explicit global motion of a label under a constant declared field, with uniqueness, dimensions and frame covariance"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

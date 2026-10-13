@@ -2,7 +2,7 @@
 id: thm-gr-nondegenerate-levi-civita-and-tensor-derivative
 kind: theorem
 title: "Existence and uniqueness of the metric-selected connection of a nondegenerate metric, and its extension to tensor fields"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

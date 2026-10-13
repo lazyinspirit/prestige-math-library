@@ -2,7 +2,7 @@
 id: post-cm06-ideal-reaction-law
 kind: postulate
 title: "Adopted ideal-reaction law for holonomic constraints: the d'Alembert condition, its scope and its limits"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

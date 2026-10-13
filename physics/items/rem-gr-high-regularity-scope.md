@@ -2,7 +2,7 @@
 id: rem-gr-high-regularity-scope
 kind: remark
 title: "Scope and status of the Gr14 high-regularity symmetric hyperbolic material"
-status: draft
+status: published
 origin: session
 dependency_level: 28
 domain: physics

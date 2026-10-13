@@ -2,7 +2,7 @@
 id: def-gr-plane-wave-perturbation
 kind: definition
 title: "Plane-wave perturbations of the flat linearization: planar profiles, wave covectors, amplitudes, TT form and the linearized field equations"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

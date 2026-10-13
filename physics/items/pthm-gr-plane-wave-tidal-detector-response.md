@@ -2,7 +2,7 @@
 id: pthm-gr-plane-wave-tidal-detector-response
 kind: physics-theorem
 title: "Response of ideal test bodies and of the ideal two-body detector to a TT plane wave: free-fall worldlines, first-order relative acceleration and strain"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

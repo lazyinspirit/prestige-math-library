@@ -2,7 +2,7 @@
 id: thm-sr-proper-orthochronous-lorentz-algebra
 kind: theorem
 title: "The proper orthochronous Lorentz group: boosts, rotations, unique factorization and invariants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

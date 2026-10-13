@@ -2,7 +2,7 @@
 id: lem-nilpotent-orbit-equivariant-tensor-covariants-extend-and-polarize
 kind: lemma
 title: "Nilpotent-orbit tensor covariants extend and polarize"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

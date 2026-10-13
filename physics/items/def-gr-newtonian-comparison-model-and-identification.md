@@ -2,7 +2,7 @@
 id: def-gr-newtonian-comparison-model-and-identification
 kind: definition
 title: "The Newtonian comparison model and the weak-field correspondence identification"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: ex-gr-jacobi-fields-in-flat-space
 kind: example
 title: "Jacobi fields in flat space are affine, and no geodesic has conjugate instants"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

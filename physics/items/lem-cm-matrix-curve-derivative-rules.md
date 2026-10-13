@@ -2,7 +2,7 @@
 id: lem-cm-matrix-curve-derivative-rules
 kind: lemma
 title: "Derivative rules for differentiable matrix-valued curves, and skewness of $R^{\\mathsf T}R'$ for a curve in $SO(3)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

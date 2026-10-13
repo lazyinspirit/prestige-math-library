@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "Entropy, the Boltzmann constant and the free-energy functional of the
   declared finite-sector model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

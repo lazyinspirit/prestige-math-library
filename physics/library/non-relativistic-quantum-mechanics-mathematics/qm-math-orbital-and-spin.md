@@ -1,7 +1,7 @@
 ---
 page: qm-math-orbital-and-spin
 title: Qm Math Orbital And Spin
-status: draft
+status: published
 items:
   - prop-nrqm-orbital-and-spin-finite-spin-matrices
   - thm-nrqm-orbital-and-spin-symmetric-power-su2-representation

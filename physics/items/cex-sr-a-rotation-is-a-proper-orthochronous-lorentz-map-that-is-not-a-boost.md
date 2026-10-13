@@ -2,7 +2,7 @@
 id: cex-sr-a-rotation-is-a-proper-orthochronous-lorentz-map-that-is-not-a-boost
 kind: counterexample
 title: "Counterexample: a spatial rotation is a proper orthochronous Lorentz map that is not a boost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

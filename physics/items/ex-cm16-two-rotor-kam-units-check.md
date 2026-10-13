@@ -2,7 +2,7 @@
 id: ex-cm16-two-rotor-kam-units-check
 kind: example
 title: "Unit restoration and scale checks for the two-rotor KAM statement: the scaling identities at $\\mathcal I=E_0=1$, the physical angular frequencies, the exclusion of rational frequency labels, and the equal-rescaling invariance"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

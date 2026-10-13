@@ -2,7 +2,7 @@
 id: def-cm14-complete-integral
 kind: definition
 title: "A complete integral of the model's Hamilton-Jacobi equation: nondegenerate mixed derivative, momentum map and Jacobi constants"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 20

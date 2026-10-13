@@ -2,7 +2,7 @@
 id: cex-gr-symmetric-nondegenerate-field-need-not-be-lorentzian
 kind: counterexample
 title: "A smooth symmetric nondegenerate 2-tensor field of inertia (2,2,0)"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

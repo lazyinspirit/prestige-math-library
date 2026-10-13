@@ -3,7 +3,7 @@ id: lem-em-global-retarded-root
 kind: lemma
 domain: mathematics
 title: "Global existence, uniqueness and differentiability of the retarded root"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

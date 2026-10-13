@@ -2,7 +2,7 @@
 id: pthm-em-causal-dispersive-response
 kind: physics-theorem
 title: "Specified causal material response: transfer function, dispersion relations and the passivity condition"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

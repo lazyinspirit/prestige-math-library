@@ -2,7 +2,7 @@
 id: ex-opposite-parabolic-ringel-duality-on-a-finite-ideal
 kind: example
 title: "Opposite-parabolic Ringel duality on a finite ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 31

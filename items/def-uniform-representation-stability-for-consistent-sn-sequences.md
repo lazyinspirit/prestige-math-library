@@ -2,7 +2,7 @@
 id: def-uniform-representation-stability-for-consistent-sn-sequences
 kind: definition
 title: "Uniform representation stability for consistent sequences of $S_n$-modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

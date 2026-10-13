@@ -2,7 +2,7 @@
 id: lem-gr-observer-relative-velocity-expansions
 kind: lemma
 title: "Low-velocity expansions of observer energy and momentum with uniform error bounds"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

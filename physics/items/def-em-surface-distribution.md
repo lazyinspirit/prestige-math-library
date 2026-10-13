@@ -2,7 +2,7 @@
 id: def-em-surface-distribution
 kind: definition
 title: "Surface distributions and interfacial jumps"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-distribution, def-test-function-space-d-of-an-open-set, def-fixed-support-test-function-frechet-space, thm-local-finite-order-characterization-of-distributions, def-regular-distribution-from-a-locally-integrable-function, def-surface-integral-on-a-compact-c-one-hypersurface, lem-surface-integral-is-independent-of-c-one-boundary-charts, def-bounded-c-one-domain-boundary-charts-and-outward-normal, def-oriented-unit-normal-and-flux-of-a-surface-patch, def-bounded-piecewise-c-one-euclidean-domain, def-embedded-submanifold-and-slice-chart, def-codimension-and-hypersurface, def-ck-euclidean-maps-and-diffeomorphisms, thm-graph-of-continuous-function-on-a-compact-set-has-content-zero, lem-c-one-images-of-content-zero-compact-sets-have-content-zero, def-null-and-content-zero-in-rn, lem-null-sets-in-rn-closed-under-subsets-and-countable-unions, lem-compact-null-iff-content-zero-in-rn, def-countable-choice]

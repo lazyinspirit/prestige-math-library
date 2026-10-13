@@ -2,7 +2,7 @@
 id: def-fi-coinvariant-functors-and-transition-maps
 kind: definition
 title: "The coinvariant functors $\\Phi_a$ and the transition maps $T$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-gr-future-and-past-sets
 kind: definition
 title: "Future sets, past sets, achronal boundaries and their elementary properties"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

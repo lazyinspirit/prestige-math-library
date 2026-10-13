@@ -2,7 +2,7 @@
 id: def-quantum-verma-module-and-simple-highest-weight-quotient
 kind: definition
 title: "Quantum Verma modules $M(\\lambda)$, highest weight vectors, and the simple highest weight quotient $L(\\lambda)$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

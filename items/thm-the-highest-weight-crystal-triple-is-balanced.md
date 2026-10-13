@@ -2,7 +2,7 @@
 id: thm-the-highest-weight-crystal-triple-is-balanced
 kind: theorem
 title: "The highest weight and negative half integral crystal triples are balanced"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

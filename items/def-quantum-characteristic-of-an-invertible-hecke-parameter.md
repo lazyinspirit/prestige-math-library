@@ -2,7 +2,7 @@
 id: def-quantum-characteristic-of-an-invertible-hecke-parameter
 kind: definition
 title: "The quantum characteristic of an invertible Hecke parameter"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

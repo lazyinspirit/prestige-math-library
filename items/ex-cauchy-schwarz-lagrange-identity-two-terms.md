@@ -2,7 +2,7 @@
 id: ex-cauchy-schwarz-lagrange-identity-two-terms
 kind: example
 title: "The two-term Lagrange identity and Cauchy-Schwarz"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

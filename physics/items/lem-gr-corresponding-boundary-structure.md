@@ -2,7 +2,7 @@
 id: lem-gr-corresponding-boundary-structure
 kind: lemma
 title: "Structure of corresponding boundary points: achronality of the future boundary, equality of pasts, and uniqueness"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 30

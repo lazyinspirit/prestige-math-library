@@ -7,7 +7,7 @@ aliases:
 kind: counterexample
 domain: physics
 title: "A superposition of distinct energy eigenrays need not be stationary"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

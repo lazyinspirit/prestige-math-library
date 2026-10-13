@@ -2,7 +2,7 @@
 id: cex-null-times-unbounded-need-not-be-null
 kind: counterexample
 title: "A null sequence times an unbounded sequence need not be null: $(k+1)^{-1}\\cdot(k+1) = 1$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

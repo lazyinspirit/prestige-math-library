@@ -2,7 +2,7 @@
 id: lem-finite-cellular-nonzero-form-heads-purity-and-shared-factor-linkage
 kind: lemma
 title: "Nonzero-form cellular heads, cell purity and shared-factor linkage"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-bicosimplicial-derived-total-complex-agrees-with-diagonal-totalization
 kind: lemma
 title: "Bicosimplicial total complexes agree with diagonal totalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

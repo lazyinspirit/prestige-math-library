@@ -2,7 +2,7 @@
 id: cex-gr-first-order-vacuum-is-not-exact-vacuum
 kind: counterexample
 title: "A first-order vacuum family whose exact metric has nonzero Ricci tensor at order epsilon^2: a harmonic diagonal perturbation with phi = x^1"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

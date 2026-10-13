@@ -3,7 +3,7 @@ id: lem-em-outgoing-spherical-hankel-dtn-bounds
 kind: lemma
 domain: mathematics
 title: "Spherical Hankel functions: explicit solutions, constant Wronskian and exact Dirichlet-to-Neumann bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

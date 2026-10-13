@@ -4,7 +4,7 @@ aliases: [nrqm-angular-momentum-orbital-eigenstates-and-quantum-numbers]
 kind: physics-theorem
 domain: physics
 title: "Orbital angular momentum eigenstates of the massive model: spherical harmonics, the l,m quantum numbers and the Casimir value"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps: [def-axiom-of-choice, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-hilbert-space, def-inner-product-space, def-l-p-space-as-a-quotient-by-null-functions, def-nrqm-angular-momentum-framework-angular-momentum-observables, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-schwartz-space-and-its-seminorms, lem-nrqm-angular-momentum-orbital-casimir-identity, lem-nrqm-kinematics-componentwise-position-and-momentum, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, lem-nrqm-symmetries-rotation-generators-on-schwartz-classes, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-observable-and-probability, post-nrqm-framework-state-and-composition, thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-nrqm-orbital-and-spin-harmonic-polynomial-dimension, thm-nrqm-orbital-and-spin-orbital-self-adjoint-generators, thm-nrqm-orbital-and-spin-sphere-laplacian-diagonal-domain, thm-nrqm-orbital-and-spin-sphere-onb, thm-polar-coordinates-formula-for-lebesgue-measure]

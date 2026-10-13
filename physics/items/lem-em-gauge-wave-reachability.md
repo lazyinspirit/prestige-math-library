@@ -2,7 +2,7 @@
 id: lem-em-gauge-wave-reachability
 kind: lemma
 title: "Gauge reachability of Lorenz gauge by the free-space wave solution, with field invariance"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [thm-em-wave-cauchy-kirchhoff, def-em-potential-gauge-and-field-conventions, def-countable-choice, def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-divergence-and-curl-of-a-c1-vector-field, def-laplacian-of-a-c2-function, def-wave-equation-cauchy-data-and-wave-speed, def-directional-and-partial-derivatives, thm-the-curl-of-a-gradient-vanishes, thm-clairaut-schwarz-mixed-partials, thm-algebra-of-derivatives, thm-algebra-of-total-derivatives, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules]

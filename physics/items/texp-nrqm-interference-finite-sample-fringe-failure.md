@@ -4,7 +4,7 @@ aliases: [nrqm-interference-finite-sample-fringe-failure]
 kind: thought-experiment
 domain: physics
 title: "A finite sample can fail a criterion that rejects a positive-probability sequence"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps: [def-nrqm-interference-two-path-preparation-and-detection-model, def-nrqm-interference-recorded-detector-and-sampling-model, pthm-nrqm-interference-coherent-and-mixture-detection-laws, pthm-nrqm-interference-recorded-bin-laws-loss-and-conditioning, post-nrqm-framework-preparation-and-apparatus, def-bernoulli-and-binomial-random-variables, def-independence-of-finite-random-variables, def-expectation-of-a-nonnegative-or-integrable-random-variable, cor-expectation-linearity-monotonicity-and-modulus-bound, def-moments-variance-and-covariance, cor-variance-adds-for-pairwise-independent-random-variables, cor-chebyshev-inequality-for-random-variables, def-countable-choice]

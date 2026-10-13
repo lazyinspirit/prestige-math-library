@@ -2,7 +2,7 @@
 id: lem-cyclotomic-hecke-intertwiners-and-local-power-series
 kind: lemma
 title: "Cyclotomic Hecke intertwiners and local power series"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 13

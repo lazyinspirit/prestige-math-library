@@ -1,7 +1,7 @@
 ---
 page: compact-laplace-type-operators-and-hodge-representatives-examples
 title: "Compact Hodge analysis: examples"
-status: draft
+status: published
 items: []
 examples: [ex-compact-flat-torus-hodge-kernel-from-energy-and-coordinates]
 ---

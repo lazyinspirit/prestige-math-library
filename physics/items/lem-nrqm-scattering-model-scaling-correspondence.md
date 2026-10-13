@@ -4,7 +4,7 @@ aliases: [nrqm-scattering-model-scaling-correspondence]
 kind: lemma
 domain: mathematics
 title: "Unit, time and spectral correspondence between the physical scattering operators and the nondimensional Laplacian"
-status: draft
+status: published
 origin: session
 dependency_level: 4
 deps: [thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, lem-nrqm-central-free-operator-differential-identification, lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-bounded-borel-pvm-integral, def-unbounded-integral-against-a-pvm, def-projection-valued-measure, thm-unbounded-borel-functional-calculus, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-hilbert-space, def-bounded-linear-operator, def-sobolev-space-wkp-and-its-norm, def-countable-choice, def-axiom-of-choice, lem-unbounded-pvm-integral-is-well-defined-and-closed, thm-monotone-convergence-for-the-integral, thm-lebesgue-measure-under-dilations-and-reflections]

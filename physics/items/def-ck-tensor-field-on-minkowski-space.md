@@ -2,7 +2,7 @@
 id: def-ck-tensor-field-on-minkowski-space
 kind: definition
 title: C^k tensor fields on affine Minkowski space and their inertial components
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

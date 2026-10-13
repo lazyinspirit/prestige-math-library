@@ -2,7 +2,7 @@
 id: pthm-cm16-two-rotor-kam
 kind: physics-theorem
 title: "The two-rotor model: a positive-measure family of invariant Lagrangian tori with Diophantine frequencies for sufficiently small coupling, with the explicit units and the stated scope"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

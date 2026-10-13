@@ -2,7 +2,7 @@
 id: ex-compact-support-and-softness-on-a-finite-discrete-space
 kind: example
 title: "Compact support and softness on a finite discrete space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

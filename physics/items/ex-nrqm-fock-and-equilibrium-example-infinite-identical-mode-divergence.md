@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-example-infinite-identical-mode-divergence]
 kind: example
 domain: mathematics
 title: "Infinite identical-mode divergence"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps: [thm-nrqm-fock-and-equilibrium-countable-mode-product-criterion, thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace, lem-nth-term-test, thm-logarithm-derivative-and-integral, thm-monotonicity-of-the-integral, def-natural-logarithm, def-series-and-absolute-convergence-in-a-normed-space, def-complex-exponential, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-axiom-of-choice, thm-natural-logarithm-laws]

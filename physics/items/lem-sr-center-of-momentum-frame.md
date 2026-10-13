@@ -2,7 +2,7 @@
 id: lem-sr-center-of-momentum-frame
 kind: lemma
 title: "Center-of-momentum frames of a future timelike four-momentum and their unique time vector"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

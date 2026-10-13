@@ -4,7 +4,7 @@ kind: physics-theorem
 title: Scalar potential and the Poisson equation in a star-shaped electrostatic region
 domain: physics
 physical_scope: "Classical electrostatics in vacuum in a star-shaped spatial region $\\Omega$ of a named inertial frame: a static, curl-free $C^1$ electric field with a continuous fixed-time charge density in the pure electrostatic regime, for which the electrostatic potential exists as a $C^2$ function with $E=-\\nabla\\varphi$ and satisfies the Poisson equation $-\\Delta\\varphi=\\rho/\\varepsilon_0$, uniquely up to an additive constant. The region is star-shaped (no general topology), no boundary data or decay normalization is included, and no empirical claim, dynamical stability claim or material model is asserted."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-em-electrostatic-regime", "def-em-fields", "def-em-sources", "def-em-si-conventions", "def-star-shaped-open-subset-of-rn", "def-closed-and-exact-c1-vector-fields", "cor-curl-vanishes-exactly-when-a-field-is-closed", "thm-poincare-lemma-for-star-shaped-domains", "def-laplacian-of-a-c2-function", "def-divergence-and-curl-of-a-c1-vector-field", "def-directional-and-partial-derivatives", "def-ck-euclidean-maps-and-diffeomorphisms", "def-euclidean-inner-product", "cor-potentials-differ-by-a-componentwise-constant", "def-piecewise-c1-path-connected-conservative-and-path-independent", "thm-algebra-of-derivatives"]

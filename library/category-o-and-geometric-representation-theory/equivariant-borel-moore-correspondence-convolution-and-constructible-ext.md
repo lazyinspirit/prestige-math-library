@@ -1,7 +1,7 @@
 ---
 page: equivariant-borel-moore-correspondence-convolution-and-constructible-ext
 title: "Equivariant Borel–Moore Correspondence Convolution and Constructible Ext"
-status: draft
+status: published
 requires: [analytic-derived-six-operations-and-duality,
            chern-and-pontryagin-classes-by-splitting-and-complexification,
            equivariant-constructible-perverse-foundations,

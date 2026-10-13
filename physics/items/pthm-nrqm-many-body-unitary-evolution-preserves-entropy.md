@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Unitary evolution preserves entropy and cannot produce the canonical
   preparation from a different one"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

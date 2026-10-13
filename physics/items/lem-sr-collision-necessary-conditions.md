@@ -2,7 +2,7 @@
 id: lem-sr-collision-necessary-conditions
 kind: lemma
 title: "Invariant mass, center-of-momentum frame and necessary conditions for conserving collision data"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

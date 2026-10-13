@@ -2,7 +2,7 @@
 id: thm-smooth-fixed-mass-mechanical-horseshoe
 kind: theorem
 title: "A smooth periodic one-degree-of-freedom oscillator with polynomial pulse forcing has stroboscopic chaos and a transverse homoclinic point"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

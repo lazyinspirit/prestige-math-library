@@ -1,7 +1,7 @@
 ---
 page: projective-hodge-polarization-foundations
 title: "Projective Hodge Polarization Foundations"
-status: draft
+status: published
 items:
 - lem-smooth-projective-analytification-has-rational-kahler-polarization
 - thm-kahler-identities-give-lefschetz-sl-two-and-hard-lefschetz

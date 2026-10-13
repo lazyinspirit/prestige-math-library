@@ -2,7 +2,7 @@
 id: lem-crystal-lattice-polarizations-are-perfect-at-q-zero
 kind: lemma
 title: "Crystal lattice polarizations are perfect at $q=0$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

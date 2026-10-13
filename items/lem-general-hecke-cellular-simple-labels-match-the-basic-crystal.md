@@ -2,7 +2,7 @@
 id: lem-general-hecke-cellular-simple-labels-match-the-basic-crystal
 kind: lemma
 title: "General Hecke cellular simple labels match the basic crystal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

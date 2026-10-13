@@ -2,7 +2,7 @@
 id: ex-degenerate-affine-hecke-relations-on-two-tensor-factors
 kind: example
 title: "The degenerate affine Hecke relations on two tensor factors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

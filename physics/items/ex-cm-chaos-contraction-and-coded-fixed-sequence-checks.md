@@ -2,7 +2,7 @@
 id: ex-cm-chaos-contraction-and-coded-fixed-sequence-checks
 kind: example
 title: "Explicit constants at $a=100$: the contraction factor, the fixed points $r_\\pm$ and the constant-code solutions"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

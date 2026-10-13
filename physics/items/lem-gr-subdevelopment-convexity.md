@@ -2,7 +2,7 @@
 id: lem-gr-subdevelopment-convexity
 kind: lemma
 title: "A development sharing the initial Cauchy surface with a larger development is causally convex in it"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 28

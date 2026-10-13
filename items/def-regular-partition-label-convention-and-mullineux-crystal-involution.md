@@ -2,7 +2,7 @@
 id: def-regular-partition-label-convention-and-mullineux-crystal-involution
 kind: definition
 title: "The regular-partition label convention and the Mullineux crystal involution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

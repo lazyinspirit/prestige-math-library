@@ -4,7 +4,7 @@ aliases: [nrqm-composites-example-nonunique-mixed-ensemble]
 kind: example
 domain: mathematics
 title: "Nonunique mixed ensemble"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-rank-one-operator-calculus]

@@ -2,7 +2,7 @@
 id: def-cm10-inertia-tensor
 kind: definition
 title: "Inertia matrix, spatial inertia tensor, inertia tensor about a point and moment of inertia about an axis of a rigid-material model"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: thm-exact-global-stabilization-threshold-for-a-fixed-kronecker-product
 kind: theorem
 title: "The exact global stabilization threshold for a fixed Kronecker product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 13

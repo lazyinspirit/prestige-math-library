@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Spin spectra and outcome laws of the massive spin-s model: directional
   components, the Casimir law and the spin-half probabilities"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

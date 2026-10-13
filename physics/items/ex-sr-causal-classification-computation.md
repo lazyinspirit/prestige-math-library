@@ -2,7 +2,7 @@
 id: ex-sr-causal-classification-computation
 kind: example
 title: "Worked causal classification of explicit displacements"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

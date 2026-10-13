@@ -4,7 +4,7 @@ aliases: [nrqm-angular-momentum-spin-half-directional-probabilities]
 kind: example
 domain: physics
 title: "Spin-half outcome probabilities along an arbitrary direction: the Bloch parametrization and worked cases"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps: [def-axiom-of-choice, def-countable-choice, def-inner-product-space, def-nrqm-angular-momentum-framework-angular-momentum-observables, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-observable-and-probability, post-nrqm-framework-state-and-composition, prop-nrqm-orbital-and-spin-finite-spin-matrices, pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]

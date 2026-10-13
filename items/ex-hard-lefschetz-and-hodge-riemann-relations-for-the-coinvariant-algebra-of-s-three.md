@@ -2,7 +2,7 @@
 id: ex-hard-lefschetz-and-hodge-riemann-relations-for-the-coinvariant-algebra-of-s-three
 kind: example
 title: "Hard Lefschetz and the Hodge-Riemann signs for the coinvariant algebra of S_3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

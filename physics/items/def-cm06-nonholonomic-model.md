@@ -2,7 +2,7 @@
 id: def-cm06-nonholonomic-model
 kind: definition
 title: "Velocity-constraint (nonholonomic) models of the force branch: constant-rank constraint laws, the d'Alembert reaction and holonomic equivalence"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

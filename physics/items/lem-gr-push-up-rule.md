@@ -2,7 +2,7 @@
 id: lem-gr-push-up-rule
 kind: lemma
 title: "The push-up rule: p << q and q <= r imply p << r, together with the timelike-piece criterion"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 20

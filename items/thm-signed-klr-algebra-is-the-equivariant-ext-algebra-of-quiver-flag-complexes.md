@@ -2,7 +2,7 @@
 id: thm-signed-klr-algebra-is-the-equivariant-ext-algebra-of-quiver-flag-complexes
 kind: theorem
 title: "Signed KLR algebra is the equivariant Ext algebra of quiver-flag complexes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 30

@@ -2,7 +2,7 @@
 id: def-higher-level-wedge-tensor-fock-module
 kind: definition
 title: "The higher-level wedge-tensor Fock module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

@@ -1,7 +1,7 @@
 ---
 page: em-primitives-and-postulates-examples
 title: "Primitives and postulates — Examples"
-status: draft
+status: published
 examples: [ex-em-smooth-and-point-source-types, ex-em-unit-dimensional-checks]
 ---
 

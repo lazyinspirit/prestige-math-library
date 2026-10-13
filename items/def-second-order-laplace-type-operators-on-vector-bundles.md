@@ -2,7 +2,7 @@
 id: def-second-order-laplace-type-operators-on-vector-bundles
 kind: definition
 title: "Second-order Laplace-type operators on metric vector bundles"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

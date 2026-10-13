@@ -2,7 +2,7 @@
 id: def-em-lab-geometry
 kind: definition
 title: "Laboratory geometry: a restricted inertial chart, its spatial slices and fixed-time fields"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-ck-euclidean-maps-and-diffeomorphisms, def-directional-and-partial-derivatives, def-euclidean-inner-product, def-interval, def-inertial-frame-and-inertial-chart, def-spatial-euclidean-structure-of-an-inertial-frame, def-sr-affine-minkowski-model, def-vector-space, lem-standard-basis-of-f-n, post-sr-inertial-covariance]

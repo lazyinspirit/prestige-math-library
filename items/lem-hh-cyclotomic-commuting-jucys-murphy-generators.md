@@ -2,7 +2,7 @@
 id: lem-hh-cyclotomic-commuting-jucys-murphy-generators
 kind: lemma
 title: "Cyclotomic Jucys–Murphy generators and their transport relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 1

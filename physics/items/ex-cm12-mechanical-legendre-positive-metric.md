@@ -2,7 +2,7 @@
 id: ex-cm12-mechanical-legendre-positive-metric
 kind: example
 title: "Positive kinetic metric: the fibre map $p = \\mathsf Mv$, the Hamiltonian and Hamilton's equations on explicit one- and two-label data"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

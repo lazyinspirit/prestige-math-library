@@ -2,7 +2,7 @@
 id: pthm-cm05-conic
 kind: physics-theorem
 title: "The inverse-square gravitational relative trajectory has the Kepler polar form: $\\rho=p/(1+e\\cos(\\theta-\\theta_0))$, $E=(\\mu\\kappa^2/2J^2)(e^2-1)$, elliptic completeness and barycentric scaled ellipses"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

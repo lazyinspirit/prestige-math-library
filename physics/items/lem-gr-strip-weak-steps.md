@@ -2,7 +2,7 @@
 id: lem-gr-strip-weak-steps
 kind: lemma
 title: "Strip functions: every inner strip carries a smooth function with past timelike gradient, constant below and above the outer levels"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 28

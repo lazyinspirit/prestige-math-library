@@ -1,7 +1,7 @@
 ---
 page: em-action-and-variational-formulation-examples
 title: "Alternative action formulation — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-em-stationary-not-minimum,
            ex-em-compact-variation-example]

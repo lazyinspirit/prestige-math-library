@@ -2,7 +2,7 @@
 id: lem-boost-rotation-factorization
 kind: lemma
 title: Unique boost-rotation factorization of proper orthochronous Lorentz maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

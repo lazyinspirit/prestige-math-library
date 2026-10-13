@@ -3,7 +3,7 @@ id: pthm-em-lienard-wiechert
 kind: physics-theorem
 title: "Retarded point fields off the worldline: Lienard-Wiechert potentials, the velocity/acceleration split and the uniform far-zone remainder"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 20
 deps: [def-em-retarded-point-geometry, pthm-em-retarded-potentials, lem-em-point-retarded-potential-and-fields, thm-em-retarded-root-and-fields, post-em-radiation-selection, def-em-weak-sources, def-em-potential-gauge-and-field-conventions, def-em-fields, def-em-sources, def-em-relativistic-worldlines-frames, def-em-lab-geometry, def-em-si-conventions, def-euclidean-inner-product, def-countable-choice, thm-em-retarded-point-distributional-maxwell, post-em-distributional-vacuum-maxwell, pthm-em-poynting-balance]

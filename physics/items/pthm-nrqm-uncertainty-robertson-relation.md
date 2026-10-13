@@ -4,7 +4,7 @@ aliases: [ nrqm-uncertainty-robertson-relation ]
 kind: physics-theorem
 domain: physics
 title: "The Robertson relation for preparation spreads of assigned sharp observables"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

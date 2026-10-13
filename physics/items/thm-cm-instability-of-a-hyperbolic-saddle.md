@@ -2,7 +2,7 @@
 id: thm-cm-instability-of-a-hyperbolic-saddle
 kind: theorem
 title: "A hyperbolic equilibrium whose linearisation has an eigenvalue with positive real part is unstable"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

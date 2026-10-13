@@ -2,7 +2,7 @@
 id: lem-sr-proper-time-reparametrization-invariance
 kind: lemma
 title: "Length-integral invariance under monotone C^1 maps and proper-time invariance under regular increasing maps"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 9

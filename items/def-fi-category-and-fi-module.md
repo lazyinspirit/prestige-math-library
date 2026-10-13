@@ -2,7 +2,7 @@
 id: def-fi-category-and-fi-module
 kind: definition
 title: "The category FI and FI-modules over a commutative ring"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: prop-cm-oscillator-degenerate-and-repulsive-cases
 kind: proposition
 title: "The degenerate and repulsive oscillator: solutions for k=0 and the explicit growing solution for k<0"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

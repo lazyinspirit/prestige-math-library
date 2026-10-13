@@ -2,7 +2,7 @@
 id: lem-gr-constant-curvature-three-manifold-ricci
 kind: lemma
 title: "Constant-curvature three-manifolds: equivalence of constant sectional curvature, the tensor identity and the Ricci condition"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

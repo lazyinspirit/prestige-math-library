@@ -2,7 +2,7 @@
 id: thm-cm-work-energy-balance
 kind: theorem
 title: "Work-energy balance $\\frac{d}{dt}\\bigl(K+U(t,x(t))\\bigr)=\\partial_tU(t,x(t))+\\sum_i\\langle d_i(t),x_i'(t)\\rangle$ for forces $m_ix_i''=-\\nabla_{x_i}U+d_i$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

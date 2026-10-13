@@ -2,7 +2,7 @@
 id: lem-right-descent-soergel-bimodules-descend-to-simple-invariants-under-the-character-hypothesis
 kind: lemma
 title: "Right-descent Soergel bimodules descend to simple invariants under the character hypothesis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

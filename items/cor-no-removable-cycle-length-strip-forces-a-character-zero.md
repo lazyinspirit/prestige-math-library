@@ -2,7 +2,7 @@
 id: cor-no-removable-cycle-length-strip-forces-a-character-zero
 kind: corollary
 title: "A missing removable strip of the cycle length forces a zero character value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

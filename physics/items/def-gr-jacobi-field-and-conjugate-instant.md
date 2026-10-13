@@ -2,7 +2,7 @@
 id: def-gr-jacobi-field-and-conjugate-instant
 kind: definition
 title: "Jacobi fields, geodesic variations and conjugate instants along a geodesic"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

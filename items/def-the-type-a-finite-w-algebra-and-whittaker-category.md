@@ -2,7 +2,7 @@
 id: def-the-type-a-finite-w-algebra-and-whittaker-category
 kind: definition
 title: "The type-A finite W-algebra and the Whittaker category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

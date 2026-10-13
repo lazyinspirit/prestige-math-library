@@ -2,7 +2,7 @@
 id: ex-gr-levi-civita-connection-of-a-conformal-metric
 kind: example
 title: "The metric-selected connection of a conformal metric, verified by the defining identities"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

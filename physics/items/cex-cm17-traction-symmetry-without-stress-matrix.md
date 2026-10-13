@@ -2,7 +2,7 @@
 id: cex-cm17-traction-symmetry-without-stress-matrix
 kind: counterexample
 title: "FALSE: the reversed-normal convention alone makes a continuous traction field a stress matrix. The field t(n)=|n_1|n refutes it"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 1

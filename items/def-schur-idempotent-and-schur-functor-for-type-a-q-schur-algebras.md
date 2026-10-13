@@ -2,7 +2,7 @@
 id: def-schur-idempotent-and-schur-functor-for-type-a-q-schur-algebras
 kind: definition
 title: "The Schur idempotent and the Schur functor for type-A q-Schur algebras"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: cex-spherical-and-antispherical-normalizations-give-different-polynomials
 kind: counterexample
 title: "Spherical and antispherical normalizations give different polynomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-gr-first-variation-of-proper-time
 kind: lemma
 title: "First variation of the length of a timelike curve: stationarity is the geodesic equation"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: def-cm06-moving-frame
 kind: definition
 title: "Moving spatial charts of an inertial frame: rotating and translating coordinates, angular velocity and inertial terms"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 7

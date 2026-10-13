@@ -2,7 +2,7 @@
 id: thm-cm-point-symmetry-charge-is-conserved
 kind: theorem
 title: "The charge of an infinitesimal point symmetry is constant along Euler-Lagrange solutions"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

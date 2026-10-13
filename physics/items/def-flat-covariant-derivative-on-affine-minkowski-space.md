@@ -3,7 +3,7 @@ id: def-flat-covariant-derivative-on-affine-minkowski-space
 kind: definition
 domain: mathematics
 title: "The flat covariant derivative on affine Minkowski space and fields along curves"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

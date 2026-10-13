@@ -2,7 +2,7 @@
 id: lem-cm-strict-minimum-has-positive-semidefinite-hessian
 kind: lemma
 title: "A C² local minimum has vanishing gradient and positive semidefinite Hessian"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

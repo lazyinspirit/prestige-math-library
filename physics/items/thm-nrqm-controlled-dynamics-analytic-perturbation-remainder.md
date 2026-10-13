@@ -5,7 +5,7 @@ aliases:
 kind: theorem
 domain: mathematics
 title: Analytic perturbation remainder
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

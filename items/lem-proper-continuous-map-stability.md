@@ -2,7 +2,7 @@
 id: lem-proper-continuous-map-stability
 kind: lemma
 title: Basic stability of proper continuous maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-wall-crossing-under-the-soergel-functor-is-tensoring-with-the-coinvariant-soergel-bimodule
 kind: theorem
 title: Wall-crossing under the Soergel functor is tensoring with the coinvariant bimodule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

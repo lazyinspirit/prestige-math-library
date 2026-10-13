@@ -1,7 +1,7 @@
 ---
 page: em-experiment-analysis-prerequisites
 title: Em Experiment Analysis Prerequisites
-status: draft
+status: published
 items: [thm-em-uncertainty-analysis]
 examples: []
 ---

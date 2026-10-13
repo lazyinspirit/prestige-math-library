@@ -2,7 +2,7 @@
 id: cex-cellularity-does-not-make-every-cell-module-simple
 kind: counterexample
 title: "Cellularity does not make every cell module simple"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

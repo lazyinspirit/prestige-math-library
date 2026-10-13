@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-kummer-recurrence-and-termination]
 kind: theorem
 domain: mathematics
 title: "Kummer recurrence and termination"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps: [lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-intervals-regular-ivp-parameter-series, def-derivative, def-continuity-real, thm-derivative-of-exponential, def-complex-exponential, def-binomial-coefficient, thm-binomial-closed-formula, def-factorial-and-falling-factorial, def-finite-sum-in-a-commutative-monoid, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, def-sobolev-space-wkp-and-its-norm, thm-plancherel, lem-weak-derivatives-are-polynomial-fourier-multipliers, def-countable-choice, def-axiom-of-choice]

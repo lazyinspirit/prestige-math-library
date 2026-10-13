@@ -1,7 +1,7 @@
 ---
 page: cm-math-canonical
 title: Cm Math Canonical
-status: draft
+status: published
 items:
   - def-cm-phase-domain-and-standard-symplectic-two-form
   - def-cm-finite-regularity-canonical-calculus

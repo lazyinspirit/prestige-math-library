@@ -2,7 +2,7 @@
 id: cex-a-set-of-ordinals-that-is-not-transitive
 kind: counterexample
 title: "A set of ordinals that is not an ordinal: $\\{0,1,\\omega\\}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

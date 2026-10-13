@@ -2,7 +2,7 @@
 id: def-lusztig-divided-power-integral-form
 kind: definition
 title: "The Lusztig divided-power integral form $U_A$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

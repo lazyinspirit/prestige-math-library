@@ -2,7 +2,7 @@
 id: cex-am-gm-needs-nonnegative-terms
 kind: counterexample
 title: "AM-GM fails for negative entries: $(-1,-4)$ has geometric mean $2$ and arithmetic mean $-5/2$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

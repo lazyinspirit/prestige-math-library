@@ -2,7 +2,7 @@
 id: thm-dj-bridge-murphy-cell-is-the-same-shape-specht-dual
 kind: theorem
 title: "Murphy cells are the same-shape contragredient Specht duals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

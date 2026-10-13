@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-angular-radial-unitary-reduction]
 kind: theorem
 domain: mathematics
 title: "Angular radial unitary reduction"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [thm-nrqm-orbital-and-spin-sphere-onb, thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-nrqm-orbital-and-spin-sphere-laplacian-diagonal-domain, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, def-polar-surface-measure-on-the-unit-sphere, thm-polar-coordinates-formula-for-lebesgue-measure, cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure, thm-completion-measurable-functions-have-base-measurable-representatives, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-tonelli-and-fubini-for-completed-product-measures, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-dominated-convergence, def-laplacian-of-a-c2-function, def-directional-and-partial-derivatives, thm-chain-rule-for-total-derivatives, thm-total-derivative-computes-directional-and-partial-derivatives, thm-ck-euclidean-maps-closed-under-algebra-and-composition, def-ck-euclidean-maps-and-diffeomorphisms, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, cor-cauchy-schwarz-inequality-for-l-two, thm-divergence-theorem-for-bounded-piecewise-c-one-domains, thm-ftc-second-part, def-countable-choice]

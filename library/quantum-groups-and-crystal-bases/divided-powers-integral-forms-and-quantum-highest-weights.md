@@ -1,7 +1,7 @@
 ---
 page: divided-powers-integral-forms-and-quantum-highest-weights
 title: Divided Powers, Integral Forms, and Quantum Highest Weights
-status: draft
+status: published
 requires:
 - quantized-enveloping-algebras-and-quantum-serre-relations
 - integrable-highest-weight-kac-moody-modules

@@ -2,7 +2,7 @@
 id: lem-compact-semialgebraic-families-admit-compatible-finite-triangulations
 kind: lemma
 title: "Compact controlled Whitney spaces admit compatible finite triangulations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

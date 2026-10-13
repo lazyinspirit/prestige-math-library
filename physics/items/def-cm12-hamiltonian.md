@@ -2,7 +2,7 @@
 id: def-cm12-hamiltonian
 kind: definition
 title: "The Hamiltonian of a hyperregular potential presentation: the Legendre transform of the mechanical Lagrangian, its domain and its dimensions"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

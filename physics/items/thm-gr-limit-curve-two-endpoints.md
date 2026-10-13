@@ -3,7 +3,7 @@ id: thm-gr-limit-curve-two-endpoints
 kind: theorem
 title: "Two-endpoint limit curve theorem: bounded lengths give joining limits,
   unbounded lengths give two inextendible tails with the closure relation"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 21

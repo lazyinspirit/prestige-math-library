@@ -2,7 +2,7 @@
 id: thm-the-empty-component-is-the-highest-weight-crystal-b-lambda-zero
 kind: theorem
 title: "The empty component is the highest weight crystal $B(\\Lambda_0)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

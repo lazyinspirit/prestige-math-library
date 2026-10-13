@@ -3,7 +3,7 @@ id: lem-gr-smooth-composition-and-commutator-estimates
 kind: lemma
 title: "Smooth composition, difference, coefficient product and commutator
   estimates on bounded H^s data"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

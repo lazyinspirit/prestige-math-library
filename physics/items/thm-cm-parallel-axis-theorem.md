@@ -2,7 +2,7 @@
 id: thm-cm-parallel-axis-theorem
 kind: theorem
 title: "Parallel-axis theorem: the inertia tensor about a displaced point of a centred mass distribution"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

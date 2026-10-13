@@ -2,7 +2,7 @@
 id: ex-hecke-jucys-murphy-elements-through-rank-four
 kind: example
 title: "The Hecke Jucys-Murphy elements through rank four"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -1,7 +1,7 @@
 ---
 page: qm-observables-and-born-probabilities
 title: "Qm Observables And Born Probabilities"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-observables-spectral-measure-atoms-and-eigenvalues

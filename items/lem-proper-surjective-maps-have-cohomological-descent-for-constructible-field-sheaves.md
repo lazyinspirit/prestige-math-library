@@ -2,7 +2,7 @@
 id: lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves
 kind: lemma
 title: "Proper surjections have cohomological descent for constructible field sheaves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

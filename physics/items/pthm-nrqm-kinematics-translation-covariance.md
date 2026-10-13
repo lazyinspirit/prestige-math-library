@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Translation covariance of the massive spin-s kinematics and of its
   bounded-potential dynamics"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

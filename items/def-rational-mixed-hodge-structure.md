@@ -2,7 +2,7 @@
 id: def-rational-mixed-hodge-structure
 kind: definition
 title: "Rational mixed Hodge structures"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

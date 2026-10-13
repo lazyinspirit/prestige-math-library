@@ -2,7 +2,7 @@
 id: lem-smooth-complex-pullback-is-exact-for-the-middle-perverse-t-structure
 kind: lemma
 title: Shifted smooth complex pullback is exact for the middle perverse t structure
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

@@ -2,7 +2,7 @@
 id: ex-em-parallel-plate-capacitor
 kind: example
 title: "The ideal infinite parallel-plate capacitor"
-status: draft
+status: published
 origin: session
 dependency_level: 21
 domain: physics

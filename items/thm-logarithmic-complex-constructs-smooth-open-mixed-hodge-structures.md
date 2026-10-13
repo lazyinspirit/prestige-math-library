@@ -2,7 +2,7 @@
 id: thm-logarithmic-complex-constructs-smooth-open-mixed-hodge-structures
 kind: theorem
 title: "Logarithmic construction of smooth-open mixed Hodge structures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 12

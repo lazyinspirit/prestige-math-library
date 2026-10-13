@@ -3,7 +3,7 @@ id: lem-em-integrable-causal-dispersion
 kind: lemma
 domain: mathematics
 title: "Dispersion relations for an absolutely continuous integrable causal kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

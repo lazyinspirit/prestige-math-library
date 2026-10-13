@@ -2,7 +2,7 @@
 id: def-gr-killing-field
 kind: definition
 title: "Killing fields of a Lorentzian metric"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

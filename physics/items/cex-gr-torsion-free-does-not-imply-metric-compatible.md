@@ -2,7 +2,7 @@
 id: cex-gr-torsion-free-does-not-imply-metric-compatible
 kind: counterexample
 title: "A torsion-free connection that is not metric-compatible"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

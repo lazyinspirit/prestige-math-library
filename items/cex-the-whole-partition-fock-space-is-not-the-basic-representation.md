@@ -2,7 +2,7 @@
 id: cex-the-whole-partition-fock-space-is-not-the-basic-representation
 kind: counterexample
 title: "The whole partition Fock space is not the basic representation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 22

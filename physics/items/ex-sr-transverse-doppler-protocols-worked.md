@@ -2,7 +2,7 @@
 id: ex-sr-transverse-doppler-protocols-worked
 kind: example
 title: 'Worked transverse Doppler protocols at beta = 3/5'
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: 'Worked comparison of the two transverse Doppler protocols of the ideal plane-wave model at relative speed (3/5)c: gamma in the frame where the wave is transverse to the motion and 1/gamma in the frame where it is transverse in the observer frame. Conditional on the model; no measurement, statistical inference or empirical claim.'

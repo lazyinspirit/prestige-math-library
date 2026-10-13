@@ -3,7 +3,7 @@ id: rem-sr-primary-report-research-queue
 kind: remark
 domain: physics
 title: "Primary-report research queue for the special-relativity framework"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 deps:

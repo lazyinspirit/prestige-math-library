@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "A finite-level static Stark model: vanishing first-order shift, exact
   splitting with leading quadratic shift and a finite check of the remainder bound"
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps:

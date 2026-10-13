@@ -2,7 +2,7 @@
 id: lem-crystal-operators-commute-with-highest-weight-projection-modulo-q
 kind: lemma
 title: "Projection from $\\mathcal L(\\infty)$ to $\\mathcal L(\\lambda)$ and its compatibility with the Kashiwara operators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

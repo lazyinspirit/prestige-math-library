@@ -2,7 +2,7 @@
 id: lem-integer-cyclic-presentation-descends-the-simple-head-generator-line
 kind: lemma
 title: "An integer cyclic presentation descends the simple-head generator line"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-gr-perfect-fluid-matter-model
 kind: definition
 title: "The perfect-fluid matter model: rest energy density, pressure, four-velocity and stress-energy"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

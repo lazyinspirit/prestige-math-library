@@ -2,7 +2,7 @@
 id: lem-cm-quaternion-lift-of-a-prescribed-body-angular-velocity
 kind: lemma
 title: "The quaternion lift of a prescribed continuous angular velocity: $q'=\\tfrac12 q\\,\\varphi(\\omega(t))$ keeps $S^3$ invariant, its rotation path has body angular velocity $\\omega$, and the initial value problem has a unique solution on the whole interval"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

@@ -3,7 +3,7 @@ id: lem-em-distributional-gradient-smooth-off-a-point
 kind: lemma
 title: The distributional gradient of a locally integrable function smooth off one point
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-countable-choice", "def-locally-integrable-function-on-r-n", "def-regular-distribution-from-a-locally-integrable-function", "thm-locally-integrable-functions-embed-in-distributions", "def-distributional-derivative", "def-test-function-space-d-of-an-open-set", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null", "cor-integral-over-a-null-set-vanishes", "thm-the-lebesgue-integral-respects-almost-everywhere-equality", "def-ck-euclidean-maps-and-diffeomorphisms", "def-measure-null-set-and-almost-everywhere", "prop-closure-properties-of-measurable-functions-used-by-the-integral", "def-integral-over-a-measurable-set", "def-integrable-real-and-complex-functions-and-their-integrals", "prop-order-and-scalar-rules-for-the-nonnegative-integral", "def-metric-ball", "thm-borel-products-of-euclidean-spaces-are-euclidean-borel", "thm-euclidean-lebesgue-measure-is-the-completion-of-the-product-of-lebesgue-measures", "thm-tonelli-and-fubini-for-completed-product-measures", "def-linear-map", "def-euclidean-inner-product", "def-linear-isometry-and-orthogonal-or-unitary-operator", "cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus", "cor-c-one-change-of-variables-for-l-one-functions", "thm-integration-by-parts", "thm-continuous-implies-integrable", "lem-riemann-lebesgue-comparison-for-distribution-test-integrands", "def-directional-and-partial-derivatives"]

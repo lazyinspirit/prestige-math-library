@@ -1,7 +1,7 @@
 ---
 page: em-electrostatics-in-vacuum
 title: "Electrostatics in vacuum"
-status: draft
+status: published
 library: physics
 items: [lem-em-newtonian-far-field-gradient, lem-em-distributional-gradient-smooth-off-a-point, lem-em-euclidean-balls-and-annuli-are-bounded-c-one-domains, def-em-electrostatic-regime, pthm-em-electrostatic-potential, pthm-em-coulomb-solution, pthm-em-electrostatic-work, pthm-em-electrostatic-field-energy, pthm-em-point-self-energy-divergence]
 examples: []

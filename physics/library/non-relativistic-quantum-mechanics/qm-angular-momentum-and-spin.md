@@ -1,7 +1,7 @@
 ---
 page: qm-angular-momentum-and-spin
 title: "Qm Angular Momentum And Spin"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-angular-momentum-product-flow-generator

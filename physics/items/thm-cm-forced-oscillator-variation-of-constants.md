@@ -2,7 +2,7 @@
 id: thm-cm-forced-oscillator-variation-of-constants
 kind: theorem
 title: "The forced oscillator with $k\\ge0$: unique global solution and the convolution (Green's function) formula"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

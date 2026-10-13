@@ -1,7 +1,7 @@
 ---
 page: em-wave-interfaces-and-conductors
 title: "Wave interfaces and conductors"
-status: draft
+status: published
 library: physics
 items:
   - lem-em-exponential-character-open-set-independence

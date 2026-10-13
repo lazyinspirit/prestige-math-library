@@ -4,7 +4,7 @@ kind: physics-theorem
 title: "Torque-free motion of the rigid-material model: conservation of the
   angular momentum about the centre of mass, the energy-momentum invariants, the
   principal-axis equations and global existence of the spin dynamics"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

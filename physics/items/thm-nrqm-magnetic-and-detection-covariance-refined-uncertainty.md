@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-covariance-refined-uncertainty]
 kind: theorem
 domain: mathematics
 title: "Covariance-refined preparation uncertainty without operator products"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [lem-nrqm-composites-weak-form-robertson-uncertainty, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-inner-product-space, def-hilbert-space, def-countable-choice]

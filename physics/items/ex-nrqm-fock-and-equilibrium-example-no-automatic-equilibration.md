@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-example-no-automatic-equilibration]
 kind: example
 domain: mathematics
 title: "No automatic equilibration"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps: [thm-nrqm-fock-and-equilibrium-single-mode-thermal-trace, thm-nrqm-fock-and-equilibrium-fixed-mode-number-law, thm-nrqm-fock-and-equilibrium-number-operator-domain, thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, def-projection-valued-measure, def-unbounded-integral-against-a-pvm, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-bounded-linear-operator, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-sine-and-cosine-derivatives, def-limits-at-infinity, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

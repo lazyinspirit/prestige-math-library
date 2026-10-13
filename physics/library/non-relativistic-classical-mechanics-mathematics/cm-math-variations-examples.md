@@ -1,7 +1,7 @@
 ---
 page: cm-math-variations-examples
 title: Cm Math Variations — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-stationary-path-need-not-be-a-local-minimum

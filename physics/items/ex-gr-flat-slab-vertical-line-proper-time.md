@@ -2,7 +2,7 @@
 id: ex-gr-flat-slab-vertical-line-proper-time
 kind: example
 title: "Worked vertical geodesics of the open flat slab: affine parameter, limit point and proper time"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

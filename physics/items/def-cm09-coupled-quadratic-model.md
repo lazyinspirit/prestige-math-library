@@ -2,7 +2,7 @@
 id: def-cm09-coupled-quadratic-model
 kind: definition
 title: "The coupled quadratic oscillator model: mass metric, stiffness, generalized force, modal vocabulary and the small-oscillation model at a mechanical equilibrium"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

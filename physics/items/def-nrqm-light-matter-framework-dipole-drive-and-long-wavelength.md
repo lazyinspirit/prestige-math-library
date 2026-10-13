@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-framework-dipole-drive-and-long-wavelength]
 kind: definition
 domain: physics
 title: "The declared prescribed dipole-drive model and its long-wavelength regime"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 15
 deps: [post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-approximations-static-finite-level-dipole-coupling, def-nrqm-framework-quantities-and-units, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-driven-dynamics-framework-driven-model, thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-inner-product-space, def-countable-choice, def-axiom-of-choice, def-nrqm-light-matter-framework-finite-level-coupled-model]

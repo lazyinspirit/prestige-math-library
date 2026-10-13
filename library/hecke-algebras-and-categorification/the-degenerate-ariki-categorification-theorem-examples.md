@@ -1,7 +1,7 @@
 ---
 page: the-degenerate-ariki-categorification-theorem-examples
 title: "The Degenerate Ariki Categorification Theorem — Examples"
-status: draft
+status: published
 requires: [the-degenerate-ariki-categorification-theorem]
 items: []
 examples: [ex-degenerate-ariki-decomposition-numbers-in-small-rank,

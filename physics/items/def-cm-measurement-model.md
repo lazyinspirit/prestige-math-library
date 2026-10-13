@@ -2,7 +2,7 @@
 id: def-cm-measurement-model
 kind: definition
 title: "Measurement models and additive-error observation models"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-borel-sigma-algebra, def-ck-euclidean-maps-and-diffeomorphisms, def-measurable-function-between-measurable-spaces, def-probability-measure, def-random-element-and-real-random-variable, def-total-derivative-in-euclidean-space, thm-continuous-preimages-of-borel-sets-are-borel]

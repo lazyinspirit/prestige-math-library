@@ -2,7 +2,7 @@
 id: ex-gr-observer-relative-velocity-of-a-boost
 kind: example
 title: "The relative-velocity decomposition of a boost, checked in an explicit tetrad"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-cyclotomic-polynomial-flag-comparison-has-the-prescribed-second-mate-inverse
 kind: lemma
 title: "The polynomial flag comparison has the prescribed second-mate inverse"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 6

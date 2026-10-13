@@ -2,7 +2,7 @@
 id: def-gr-periodic-torus-and-sobolev-spaces
 kind: definition
 title: "The 2 pi-periodic three-torus, its normalized measure, test functions and the Sobolev spaces H^s"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

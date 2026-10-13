@@ -2,7 +2,7 @@
 id: lem-integral-quantum-highest-weight-modules-identify-with-normalized-q-schur-weyl-cells
 kind: lemma
 title: "Integral quantum highest modules are the normalized q-Schur Weyl cells"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

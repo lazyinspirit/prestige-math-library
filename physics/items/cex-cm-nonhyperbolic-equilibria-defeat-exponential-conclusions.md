@@ -2,7 +2,7 @@
 id: cex-cm-nonhyperbolic-equilibria-defeat-exponential-conclusions
 kind: counterexample
 title: "A non-hyperbolic equilibrium with no positive eigenvalue can still be unstable: x'=x^3"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

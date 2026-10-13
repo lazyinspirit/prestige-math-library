@@ -1,7 +1,7 @@
 ---
 page: qm-uncertainty-and-compatibility-examples
 title: "Qm Uncertainty And Compatibility — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

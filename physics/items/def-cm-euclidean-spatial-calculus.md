@@ -2,7 +2,7 @@
 id: def-cm-euclidean-spatial-calculus
 kind: definition
 title: "Euclidean spatial calculus: gradient, divergence and material derivative"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

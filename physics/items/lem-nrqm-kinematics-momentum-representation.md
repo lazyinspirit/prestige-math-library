@@ -4,7 +4,7 @@ aliases: [nrqm-kinematics-momentum-representation]
 kind: lemma
 domain: mathematics
 title: "The momentum representation of the componentwise kinematics"
-status: draft
+status: published
 origin: session
 dependency_level: 4
 deps: [cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space, def-axiom-of-choice, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-fourier-transform-on-l-one-of-rn, def-schwartz-space-and-its-seminorms, def-weak-derivative-of-a-locally-integrable-function, lem-nrqm-composites-momentum-fourier-jacobian, lem-nrqm-kinematics-component-valued-wavefunction-identifications, lem-nrqm-kinematics-componentwise-position-and-momentum, lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, thm-differentiation-under-the-integral-sign, thm-extension-of-a-bounded-map-from-a-dense-subspace, thm-linear-change-of-variables-for-lebesgue-measure, thm-plancherel, thm-tonelli-theorem-for-sigma-finite-product-spaces]

@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-compact-resolvent-eigenbasis]
 kind: lemma
 domain: mathematics
 title: "Self-adjoint operators with compact resolvent: eigenbasis and discrete spectrum"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma, thm-nrqm-oscillator-diagonal-spectrum, thm-spectral-theorem-for-compact-self-adjoint-operators, cor-orthonormal-eigenbasis-for-a-compact-self-adjoint-operator, lem-compositions-with-a-compact-operator-are-compact, thm-countable-union-of-countable, cor-every-spanning-set-contains-a-basis, cor-finite-dimensional-subspaces-are-closed, def-dimension, def-linear-basis, def-countable, def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, def-compact-linear-operator, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-unbounded-linear-operator-domain-and-graph, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-hilbert-space, def-bounded-linear-operator, def-countable-choice, def-axiom-of-choice]

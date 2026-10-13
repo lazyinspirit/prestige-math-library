@@ -2,7 +2,7 @@
 id: def-cm-modified-log-coefficients-and-truncations
 kind: definition
 title: The truncated binomial family $T_h^{s,N}$, the truncated logarithm $L_N(h)$, its coefficient fields $X_j$ and the truncations $X^{[N]}$
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 9

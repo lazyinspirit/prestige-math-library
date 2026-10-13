@@ -4,7 +4,7 @@ aliases: [nrqm-central-hydrogen-radial-distributions-and-moments]
 kind: example
 domain: physics
 title: "Low-lying radial distributions of the Coulomb model: normalisations, moments and the failure of cross-l orthogonality of reduced functions"
-status: draft
+status: published
 origin: session
 dependency_level: 16
 deps: [def-nrqm-central-framework-coulomb-and-hydrogen-model, pthm-nrqm-central-coulomb-bound-state-radial-distributions, pthm-nrqm-kinematics-spin-s-outcome-laws, lem-nrqm-central-exponential-moments, thm-nrqm-coulomb-kummer-recurrence-and-termination, def-nrqm-framework-quantities-and-units, def-countable-choice]

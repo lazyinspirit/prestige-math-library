@@ -1,7 +1,7 @@
 ---
 page: equivariant-borel-moore-correspondence-convolution-and-constructible-ext-examples
 title: "Equivariant Borel–Moore Correspondence Convolution and Constructible Ext — Examples"
-status: draft
+status: published
 requires: [equivariant-borel-moore-correspondence-convolution-and-constructible-ext]
 items: []
 examples: [ex-unequal-dimensional-proper-pushforwards-have-the-summed-dimension-ext-bm-shift,

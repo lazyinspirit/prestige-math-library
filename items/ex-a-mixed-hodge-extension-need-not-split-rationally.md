@@ -2,7 +2,7 @@
 id: ex-a-mixed-hodge-extension-need-not-split-rationally
 kind: example
 title: "A mixed Hodge extension without a rational splitting"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

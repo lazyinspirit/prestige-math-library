@@ -2,7 +2,7 @@
 id: lem-em-continuous-localization
 kind: lemma
 title: "Localization: vanishing integrals or fluxes force a continuous function to vanish"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-tableau-domination-order-garnir-tableaux-and-bricks
 kind: definition
 title: "The domination order on tableaux, Garnir tableaux and bricks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

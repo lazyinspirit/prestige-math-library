@@ -2,7 +2,7 @@
 id: def-causal-classification-of-lorentz-vectors
 kind: definition
 title: "Timelike, null, spacelike and causal vectors of a Lorentz vector space"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 1

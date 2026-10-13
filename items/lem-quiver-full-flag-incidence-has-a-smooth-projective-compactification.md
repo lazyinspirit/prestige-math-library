@@ -2,7 +2,7 @@
 id: lem-quiver-full-flag-incidence-has-a-smooth-projective-compactification
 kind: lemma
 title: "Quiver full-flag incidence has a smooth projective compactification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

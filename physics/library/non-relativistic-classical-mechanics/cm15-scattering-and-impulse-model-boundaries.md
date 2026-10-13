@@ -1,7 +1,7 @@
 ---
 page: cm15-scattering-and-impulse-model-boundaries
 title: "Scattering and impulse model boundaries"
-status: draft
+status: published
 library: physics
 items:
   - def-cm15-asymptotic-data

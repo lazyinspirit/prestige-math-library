@@ -3,7 +3,7 @@ id: cex-sr-uniform-low-speed-remainder-fails-near-light-speed
 kind: counterexample
 domain: mathematics
 title: 'Counterexample: no speed-independent uniform low-speed remainder for the kinetic energy'
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps: [lem-sr-uniform-low-speed-taylor-remainder, lem-sr-energy-momentum-observer-identities, thm-sr-proper-time-and-observer-decomposition, def-sr-observed-energy-momentum-and-kinetic-energy, def-sr-affine-minkowski-model, def-lorentz-form-and-inertia, def-causal-classification-of-lorentz-vectors, def-rational-power, def-abs-value, lem-of-abs-value, thm-of-archimedean, def-time-orientation-and-future-causal-sets, thm-path-connected-implies-connected]

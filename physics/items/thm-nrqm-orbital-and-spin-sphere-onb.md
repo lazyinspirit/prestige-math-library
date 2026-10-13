@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-sphere-onb]
 kind: theorem
 domain: mathematics
 title: "Sphere ONB"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-nrqm-orbital-and-spin-weighted-angular-completeness, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, def-polar-surface-measure-on-the-unit-sphere, lem-trigonometric-characters-are-orthonormal, cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions, lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, cor-cauchy-schwarz-inequality-for-l-two, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-complex-exponential, def-countable-choice]

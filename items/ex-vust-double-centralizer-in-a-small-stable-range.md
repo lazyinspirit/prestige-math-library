@@ -2,7 +2,7 @@
 id: ex-vust-double-centralizer-in-a-small-stable-range
 kind: example
 title: "Vust's double centralizer in a small stable range"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 33

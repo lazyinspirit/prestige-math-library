@@ -2,7 +2,7 @@
 id: thm-cm-linearized-torque-free-euler-equations
 kind: theorem
 title: "Linearization of the torque-free Euler system at a principal-axis spin, and the oscillatory/exponential dichotomy"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

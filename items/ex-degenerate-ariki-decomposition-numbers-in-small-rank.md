@@ -2,7 +2,7 @@
 id: ex-degenerate-ariki-decomposition-numbers-in-small-rank
 kind: example
 title: "Degenerate Ariki decomposition numbers in small rank"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 43

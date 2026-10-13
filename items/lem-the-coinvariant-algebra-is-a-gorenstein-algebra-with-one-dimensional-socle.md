@@ -2,7 +2,7 @@
 id: lem-the-coinvariant-algebra-is-a-gorenstein-algebra-with-one-dimensional-socle
 kind: lemma
 title: The coinvariant algebra is a complete intersection with one-dimensional socle
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

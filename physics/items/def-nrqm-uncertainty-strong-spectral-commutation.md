@@ -4,7 +4,7 @@ aliases: [nrqm-uncertainty-strong-spectral-commutation]
 kind: definition
 domain: mathematics
 title: "Strong spectral commutation of self-adjoint operators"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-axiom-of-choice, def-borel-sigma-algebra, def-countable-choice, def-hilbert-space, def-projection-valued-measure, def-self-adjoint-positive-unitary-and-normal-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, thm-spectral-theorem-for-unbounded-self-adjoint-operators]

@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The declared two-body Coulomb model: reduced-mass decomposition,
   relative levels as thresholds and the absence of stationary total states"
-status: draft
+status: published
 origin: session
 dependency_level: 16
 deps:

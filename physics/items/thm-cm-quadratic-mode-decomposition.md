@@ -2,7 +2,7 @@
 id: thm-cm-quadratic-mode-decomposition
 kind: theorem
 title: "Decoupling of the constant-coefficient quadratic system $Mq''+Kq=0$ into normal modes, with the zero-mode and energy identities"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

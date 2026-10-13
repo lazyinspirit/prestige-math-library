@@ -1,7 +1,7 @@
 ---
 page: cm16-stability-perturbations-and-chaos-examples
 title: "Stability, perturbations and chaos — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

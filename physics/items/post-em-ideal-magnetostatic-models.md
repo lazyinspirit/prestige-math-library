@@ -3,7 +3,7 @@ id: "post-em-ideal-magnetostatic-models"
 kind: "postulate"
 title: "Physical adoption of the declared ideal magnetostatic loop, line and cylindrical-sheet models"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 18
 deps: ["def-em-steady-current-regime", "def-em-lab-geometry", "def-em-si-conventions", "def-countable-choice"]

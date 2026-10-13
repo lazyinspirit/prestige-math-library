@@ -3,7 +3,7 @@ id: lem-em-rectangular-transverse-mode-completeness
 kind: lemma
 domain: mathematics
 title: "The sine and cosine systems are complete orthogonal systems of L^2 on an interval and on a rectangle"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [cor-c-one-change-of-variables-for-l-one-functions, cor-cauchy-schwarz-inequality-for-l-two, def-countable-choice, def-l-p-space-as-a-quotient-by-null-functions, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-hilbert-space-fourier-expansion, thm-linear-change-of-variables-for-lebesgue-measure, thm-trigonometric-system-is-complete-in-l-two-of-the-torus, lem-em-rectangle-mode-profile-identities, thm-sine-and-cosine-addition-formulas, thm-sine-and-cosine-derivatives, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, thm-ftc-second-part, thm-continuous-implies-integrable, thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, cor-trigonometric-parity-and-pythagorean-identity, def-the-one-dimensional-torus-and-normalized-haar-integral]

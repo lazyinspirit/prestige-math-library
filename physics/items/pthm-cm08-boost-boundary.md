@@ -2,7 +2,7 @@
 id: pthm-cm08-boost-boundary
 kind: physics-theorem
 title: "The Galilean boost charge of the model: exact condition, uniform centre-of-mass motion, the induced motions and the boundary of the conservation law"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

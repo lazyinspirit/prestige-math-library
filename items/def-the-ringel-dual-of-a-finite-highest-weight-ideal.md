@@ -2,7 +2,7 @@
 id: def-the-ringel-dual-of-a-finite-highest-weight-ideal
 kind: definition
 title: "The Ringel dual of a finite highest weight ideal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 28

@@ -4,7 +4,7 @@ aliases: [nrqm-bell-binary-correlation-models]
 kind: definition
 domain: mathematics
 title: "Binary correlation models: setting-indexed tables of two-valued outcome laws, marginals and the CHSH functional"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [def-finite-probability-space-and-event, def-finite-sum]

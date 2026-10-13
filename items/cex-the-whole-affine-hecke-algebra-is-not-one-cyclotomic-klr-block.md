@@ -2,7 +2,7 @@
 id: cex-the-whole-affine-hecke-algebra-is-not-one-cyclotomic-klr-block
 kind: counterexample
 title: "At positive rank the whole affine Hecke algebra is not one cyclotomic KLR block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 32

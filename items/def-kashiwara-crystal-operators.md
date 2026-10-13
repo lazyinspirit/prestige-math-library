@@ -2,7 +2,7 @@
 id: def-kashiwara-crystal-operators
 kind: definition
 title: "The Kashiwara operators $\\tilde e_i$ and $\\tilde f_i$ of an integrable module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

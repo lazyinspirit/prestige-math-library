@@ -2,7 +2,7 @@
 id: ex-four-fock-bases-in-a-small-two-factor-tensor-space
 kind: example
 title: "The four Fock bases in a small two-factor tensor space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 25

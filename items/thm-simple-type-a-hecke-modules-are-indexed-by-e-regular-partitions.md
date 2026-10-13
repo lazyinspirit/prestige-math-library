@@ -2,7 +2,7 @@
 id: thm-simple-type-a-hecke-modules-are-indexed-by-e-regular-partitions
 kind: theorem
 title: "The simple type-A Hecke modules are indexed by e-regular partitions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

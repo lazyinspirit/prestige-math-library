@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared one-body reduced operator and the one-body readout of a
   sector preparation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

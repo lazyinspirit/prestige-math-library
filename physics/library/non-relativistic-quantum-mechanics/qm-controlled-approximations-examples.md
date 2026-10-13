@@ -1,7 +1,7 @@
 ---
 page: qm-controlled-approximations-examples
 title: Qm Controlled Approximations — Examples
-status: draft
+status: published
 library: physics
 items:
   - ex-nrqm-approximations-two-level-finite-gap-correction

@@ -2,7 +2,7 @@
 id: lem-cm07-immersion-euler-lagrange-transport
 kind: lemma
 title: "Transport of the Euler-Lagrange expression under a C^3 map: E of the substituted Lagrangian is the Jacobian-transpose multiple of E of the ambient Lagrangian"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

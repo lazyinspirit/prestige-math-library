@@ -2,7 +2,7 @@
 id: def-cm-nonholonomic-velocity-constraint-law
 kind: definition
 title: "The velocity constraint $z'=xy'$: virtual displacements, the d'Alembert law and the vakonomic law"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

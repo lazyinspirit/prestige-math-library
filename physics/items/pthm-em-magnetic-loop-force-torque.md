@@ -3,7 +3,7 @@ id: "pthm-em-magnetic-loop-force-torque"
 kind: "physics-theorem"
 title: "Force and torque on a declared ideal thin-wire loop in a prescribed external field"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 20
 deps: ["def-em-steady-current-regime", "def-em-magnetic-moment", "post-em-lorentz-coupling", "post-em-vacuum-maxwell", "pthm-em-magnetostatic-vector-potential", "pthm-em-biot-savart", "def-ck-euclidean-maps-and-diffeomorphisms", "def-cross-product-in-r3", "def-divergence-and-curl-of-a-c1-vector-field", "def-euclidean-inner-product", "def-riemann-integral-over-a-jordan-set", "thm-continuous-functions-on-compact-jordan-sets-are-integrable", "thm-multidimensional-integral-properties", "def-distributional-derivative", "thm-chain-rule-for-total-derivatives", "thm-ftc-second-part", "def-dirac-delta-and-its-derivatives", "def-countable-choice", thm-heine-borel-rn, thm-extreme-value-metric, thm-cauchy-schwarz-and-the-euclidean-norm]

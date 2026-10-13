@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The Lueders update on a degenerate eigenspace preserves intra-eigenspace
   coherence"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

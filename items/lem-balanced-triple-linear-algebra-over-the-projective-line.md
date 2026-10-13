@@ -2,7 +2,7 @@
 id: lem-balanced-triple-linear-algebra-over-the-projective-line
 kind: lemma
 title: "The balanced-triple linear algebra over $\\mathbb P^1$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -1,7 +1,7 @@
 ---
 name: non-relativistic-quantum-mechanics-mathematics
 title: Non-relativistic Quantum Mechanics — Mathematics
-status: draft
+status: published
 library: mathematics
 ---
 

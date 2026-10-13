@@ -2,7 +2,7 @@
 id: ex-cyclotomic-klr-quotients-in-ranks-zero-one-and-two
 kind: example
 title: "Cyclotomic KLR quotients in ranks zero, one and two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

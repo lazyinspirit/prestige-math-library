@@ -2,7 +2,7 @@
 id: lem-sr-scalar-field-stress-divergence-identity
 kind: lemma
 title: "Divergence identity for the scalar-field stress-energy tensor"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [lem-sr-scalar-field-hilbert-stress-energy, lem-sr-scalar-field-euler-lagrange, def-sr-stress-energy-tensor-and-force-density, def-directional-and-partial-derivatives, thm-young-mixed-partial-theorem, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, def-lorentz-form-and-inertia, def-sr-affine-minkowski-model, def-ck-tensor-field-on-minkowski-space]

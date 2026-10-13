@@ -2,7 +2,7 @@
 id: pthm-cm12-mechanical-hyperregularity
 kind: physics-theorem
 title: "Every potential presentation is hyperregular in its charts, with inverse branch $v = \\mathsf M^{-1}p$ (or $G(q)^{-1}p$) and the explicit kinetic-plus-potential Hamiltonian"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

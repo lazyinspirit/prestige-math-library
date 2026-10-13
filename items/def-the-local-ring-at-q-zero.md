@@ -2,7 +2,7 @@
 id: def-the-local-ring-at-q-zero
 kind: definition
 title: "The local ring $A_0$ of rational functions regular at $q=0$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

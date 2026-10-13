@@ -2,7 +2,7 @@
 id: rem-cm06-dalembert-vakonomic-distinction
 kind: remark
 title: "The d'Alembert and vakonomic prescriptions are different models: what is proved, what is adopted, and which questions are open"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

@@ -1,7 +1,7 @@
 ---
 page: signed-quiver-flag-convolution-and-klr-ext-realization-examples
 title: "Signed Quiver Flag Convolution And Klr Ext Realization Examples"
-status: draft
+status: published
 items: []
 examples: [ex-equal-color-quiver-flag-correspondence-is-nilhecke,
            ex-signed-two-direction-multiedge-quiver-flag-crossing]

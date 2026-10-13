@@ -2,7 +2,7 @@
 id: ex-projective-versus-simple-grothendieck-classes-in-a-small-block
 kind: example
 title: "Projective and simple Grothendieck classes in a small non-semisimple block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 41

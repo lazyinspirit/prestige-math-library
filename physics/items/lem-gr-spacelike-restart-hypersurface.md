@@ -2,7 +2,7 @@
 id: lem-gr-spacelike-restart-hypersurface
 kind: lemma
 title: "The spacelike restart surface at an exposed boundary point: maximizers on the boundary, the level hypersurface and its radial tube"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 34

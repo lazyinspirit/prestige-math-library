@@ -2,7 +2,7 @@
 id: ex-gr-flat-metric-in-cylindrical-coordinates
 kind: example
 title: "A flat metric with nowhere-zero Christoffel coefficients: flat space in cylindrical coordinates"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

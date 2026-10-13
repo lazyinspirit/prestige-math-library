@@ -2,7 +2,7 @@
 id: post-em-lorentz-coupling
 kind: postulate
 title: "The Lorentz coupling: external force on a test charge and the continuum force and power densities"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-cross-product-in-r3, def-em-electromagnetic-tensor, def-em-fields, def-em-relativistic-worldlines-frames, def-em-sources, lem-em-antisymmetric-tensor-contraction, post-em-minkowski-physical-model, post-sr-massive-particle-dynamics, pthm-sr-momentum-and-four-force, thm-sr-proper-time-and-observer-decomposition]

@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-conserved-spectral-probability-laws]
 kind: theorem
 domain: mathematics
 title: "Conserved spectral probability laws for commuting observables and stationary eigenrays"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-rank-one-operator-calculus, thm-spectral-theorem-for-unbounded-self-adjoint-operators, lem-unbounded-pvm-integral-is-well-defined-and-closed, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, lem-scalar-and-complex-measures-from-a-pvm, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-projection-valued-measure, def-unbounded-integral-against-a-pvm, def-self-adjoint-positive-unitary-and-normal-operator, def-trace-class-operator, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

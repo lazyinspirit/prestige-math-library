@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-twisted-periodic-momentum-domain]
 kind: theorem
 domain: mathematics
 title: "The twisted-periodic momentum operator on an interval"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-integration-by-parts, thm-nrqm-intervals-sine-on-completeness, lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma, thm-nrqm-oscillator-diagonal-spectrum, thm-trigonometric-system-is-complete-in-l-two-of-the-torus, def-the-one-dimensional-torus-and-normalized-haar-integral, def-fourier-coefficients-and-trigonometric-polynomials, cor-one-dimensional-change-of-variables-with-absolute-derivative, thm-linear-change-of-variables-for-lebesgue-measure, thm-monotone-convergence-for-the-integral, cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure, thm-completion-measurable-functions-have-base-measurable-representatives, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-complex-exponential-addition-and-real-extension, thm-sine-cosine-zero-sets-and-fundamental-period, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-self-adjointness-range-criterion, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-densely-defined-closed-and-closable-operator, def-complex-exponential, thm-termwise-differentiation-of-complex-power-series, lem-classical-derivatives-are-weak-derivatives, def-countable-choice, def-axiom-of-choice]

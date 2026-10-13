@@ -2,7 +2,7 @@
 id: thm-arbitrary-level-cyclotomic-hecke-murphy-basis-is-cellular
 kind: theorem
 title: "The arbitrary-level cyclotomic Hecke Murphy basis is cellular"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-ground-radial-probability-and-units]
 kind: theorem
 domain: mathematics
 title: "Ground radial probability and units"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps: [thm-nrqm-coulomb-continuum-spectral-density, thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy, thm-nrqm-coulomb-laguerre-bound-energy-exhaustion, thm-nrqm-coulomb-kummer-recurrence-and-termination, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-orbital-and-spin-sphere-onb, thm-polar-coordinates-formula-for-lebesgue-measure, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, thm-ftc-second-part, thm-derivative-of-exponential, thm-algebra-of-derivatives, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

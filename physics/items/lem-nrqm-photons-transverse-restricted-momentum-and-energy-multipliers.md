@@ -2,7 +2,7 @@
 id: lem-nrqm-photons-transverse-restricted-momentum-and-energy-multipliers
 kind: lemma
 title: "Restricted momentum and energy multipliers of the transverse one-photon space"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

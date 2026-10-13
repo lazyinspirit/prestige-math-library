@@ -2,7 +2,7 @@
 id: def-em-moving-patch
 kind: definition
 title: "Moving parametrized surface patches and their flux"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-type-i-type-ii-and-elementary-green-regions, def-positive-orientation-for-elementary-region-boundaries, def-admissible-regular-parametrized-surface-patch, def-oriented-unit-normal-and-flux-of-a-surface-patch, def-cross-product-in-r3, def-euclidean-inner-product, def-ck-euclidean-maps-and-diffeomorphisms, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, thm-continuous-functions-on-compact-jordan-sets-are-integrable, cor-jordan-content-finite-additivity, thm-jordan-boundary-criterion, lem-null-sets-in-rn-closed-under-subsets-and-countable-unions, lem-compact-null-iff-content-zero-in-rn]

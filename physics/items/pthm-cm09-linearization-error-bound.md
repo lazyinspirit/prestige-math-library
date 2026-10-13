@@ -2,7 +2,7 @@
 id: pthm-cm09-linearization-error-bound
 kind: physics-theorem
 title: "Finite-time error control for the small-oscillation approximation: the quadratic remainder of the mechanical field and the variation-of-constants bound"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

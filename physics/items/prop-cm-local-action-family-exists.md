@@ -2,7 +2,7 @@
 id: prop-cm-local-action-family-exists
 kind: proposition
 title: "A smooth local family of extremals with prescribed endpoint exists when the endpoint momentum map has invertible derivative"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

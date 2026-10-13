@@ -2,7 +2,7 @@
 id: thm-gr-local-geometric-uniqueness
 kind: theorem
 title: "Local geometric uniqueness for a fixed covariant Einstein-matter model with complete data"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

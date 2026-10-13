@@ -3,7 +3,7 @@ id: post-cm17-momentum-balance
 kind: postulate
 title: "Adopted balance principles of the continuum model: force and couple-free
   torque balance on every admissible region"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

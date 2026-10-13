@@ -2,7 +2,7 @@
 id: def-the-whittaker-functor-from-the-relevant-parabolic-o-summand
 kind: definition
 title: "The Whittaker functor from the relevant parabolic category-O summand"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 31

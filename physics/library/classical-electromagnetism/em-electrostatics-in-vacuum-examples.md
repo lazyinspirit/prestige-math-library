@@ -1,7 +1,7 @@
 ---
 page: em-electrostatics-in-vacuum-examples
 title: "Electrostatics in vacuum — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples: [ex-em-infinite-line-normalization, ex-em-uniform-ball-coulomb]

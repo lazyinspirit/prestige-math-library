@@ -2,7 +2,7 @@
 id: lem-controlled-stratified-submersions-have-continuous-local-trivializations
 kind: lemma
 title: "Controlled stratified submersions have continuous local trivializations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

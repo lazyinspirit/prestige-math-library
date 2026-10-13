@@ -5,7 +5,7 @@ kind: thought-experiment
 domain: physics
 title: "A site-localised preparation of the two-site bond model never becomes
   canonical, and its readouts need not take their thermal means"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 14
 deps:

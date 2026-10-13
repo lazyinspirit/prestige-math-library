@@ -2,7 +2,7 @@
 id: lem-complex-algebraic-boundary-points-admit-normalized-curve-arcs
 kind: lemma
 title: "Complex algebraic boundary points admit normalized curve arcs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

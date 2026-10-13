@@ -2,7 +2,7 @@
 id: thm-cm-variable-mass-momentum-balance
 kind: theorem
 title: "Variable-mass momentum balance: from $m'=r_{\\rm in}-r_{\\rm out}$ and $(mv)'=F+r_{\\rm in}w_{\\rm in}-r_{\\rm out}w_{\\rm out}$ to $mv'=F+r_{\\rm in}(w_{\\rm in}-v)-r_{\\rm out}(w_{\\rm out}-v)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

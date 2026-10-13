@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Declared countable instruments: normalization, discarded ensembles and
   the repeatability criterion"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

@@ -2,7 +2,7 @@
 id: ex-cm18-uniform-motion-sampling-check
 kind: example
 title: "Repeated observation of a uniform motion: prediction map, adopted IID sampling hypotheses and the resulting sample-mean bound on declared data"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps: [def-cm18-observable-model, def-cm18-sampling-model, def-cm02-newtonian-flow, post-cm02-force-superposition, def-cm01-velocity-acceleration, def-cm01-units, lem-cm-finite-iid-sample-mean-bound, def-moments-variance-and-covariance, lem-variance-and-covariance-identities-for-random-variables]

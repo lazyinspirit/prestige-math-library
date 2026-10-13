@@ -4,7 +4,7 @@ aliases: [nrqm-scattering-examples-scope-limits]
 kind: remark
 domain: physics
 title: "Scope of the scattering examples page"
-status: draft
+status: published
 origin: session
 dependency_level: 16
 deps: [ex-nrqm-scattering-square-well-s-wave-phase-shift, ex-nrqm-scattering-single-channel-resonance-cross-section, ex-nrqm-scattering-born-uniform-ball-amplitude, ex-nrqm-scattering-long-range-tail-and-coulomb-warning, def-nrqm-scattering-framework-short-range-model]

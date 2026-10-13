@@ -3,7 +3,7 @@ id: ex-em-tem-topology-example
 kind: example
 domain: physics
 title: "TEM modes of a coaxial guide and the single-conductor obstruction for harmonic transverse potentials"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 18
 deps: [cor-closed-exact-and-conservative-equivalence-on-star-shaped-domains, def-divergence-and-curl-of-a-c1-vector-field, def-em-guide-cavity-geometry, def-laplacian-of-a-c2-function, def-star-shaped-open-subset-of-rn, lem-em-separated-phasor-calculus, lem-em-transverse-vector-identities, post-em-material-closure, pthm-em-macroscopic-maxwell, pthm-em-restricted-material-energy, thm-chain-rule-for-total-derivatives, thm-logarithm-derivative-and-integral, thm-polar-coordinates-formula-for-lebesgue-measure, thm-of-square-roots, cor-uniqueness-for-the-classical-dirichlet-problem, def-countable-choice, thm-ftc-second-part, cor-c-one-change-of-variables-for-l-one-functions, prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null, thm-plane-harmonic-functions-are-smooth-and-real-analytic, def-cross-product-in-r3, lem-cross-product-is-bilinear-alternating-and-orthogonal, thm-clairaut-schwarz-mixed-partials]

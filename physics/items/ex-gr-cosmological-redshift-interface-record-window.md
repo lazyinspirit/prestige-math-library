@@ -2,7 +2,7 @@
 id: ex-gr-cosmological-redshift-interface-record-window
 kind: example
 title: "Worked instance of the interface vocabulary on the cosmological redshift slot: an explicit de Sitter ray family, an operational model and the exact window of an illustrative bounded record"
-status: draft
+status: published
 origin: session
 domain: physics
 physical_scope: "Worked instance inside the classical gravitational framework: it instantiates the model-configuration, readout and operational-model clauses of the experiment interface on the framework's cosmological redshift prediction for the flat vacuum de Sitter solution with $a(t)=A\\exp(H(t-t_0))$ and $\\Lambda=3H^2/c^2$, using the explicit future null geodesic family of the example's verification and an explicitly illustrative one-point record. It asserts no measurement, no apparatus, no calibration correctness, no sampling model, no statistical inference and no empirical support or refutation of the model or of any postulate; every numerical value in the record is declared illustrative, and the model is adopted only as a hypothetical solution of the framework's postulates."

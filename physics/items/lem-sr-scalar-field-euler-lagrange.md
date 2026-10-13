@@ -2,7 +2,7 @@
 id: lem-sr-scalar-field-euler-lagrange
 kind: lemma
 title: "First variation of the scalar-field action and the Euler-Lagrange equation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [lem-sr-compact-variation-and-fundamental-lemma, def-ck-tensor-field-on-minkowski-space, def-sr-affine-minkowski-model, def-lorentz-form-and-inertia, def-directional-and-partial-derivatives, def-inertial-frame-and-inertial-chart, thm-total-derivative-computes-directional-and-partial-derivatives, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, lem-algebra-of-continuous-real-maps-on-a-space, def-continuous-map-top, thm-continuity-characterisations-top]

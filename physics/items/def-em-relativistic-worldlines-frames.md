@@ -2,7 +2,7 @@
 id: def-em-relativistic-worldlines-frames
 kind: definition
 title: "Worldlines, four-velocity, chart readings and the frame/observer distinction"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-em-lab-geometry, def-em-si-conventions, def-inertial-frame-and-inertial-chart, def-sr-affine-minkowski-model, def-sr-four-velocity-and-four-acceleration, def-sr-proper-time, def-sr-regular-causal-curve-and-worldline, post-em-minkowski-physical-model, thm-sr-proper-time-and-observer-decomposition]

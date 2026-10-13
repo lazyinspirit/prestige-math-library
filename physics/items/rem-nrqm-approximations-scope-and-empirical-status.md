@@ -4,7 +4,7 @@ aliases: [nrqm-approximations-scope-and-empirical-status]
 kind: remark
 domain: physics
 title: "What the controlled-approximations page adopts, proves and does not claim: gaps, branch populations, turning points and the static-Stark limitation"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps: [def-nrqm-approximations-framework-variational-trial-model, def-nrqm-approximations-framework-perturbed-family-model, def-nrqm-approximations-framework-wkb-regime-model, pthm-nrqm-approximations-variational-bounds-and-min-max, pthm-nrqm-approximations-nondegenerate-perturbation-expansion, pthm-nrqm-approximations-degenerate-first-order-splitting, pthm-nrqm-approximations-wkb-allowed-region-error, pthm-nrqm-approximations-turning-point-connection, pthm-nrqm-approximations-barrier-transmission-asymptotics, post-nrqm-approximations-static-finite-level-dipole-coupling, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-preparation-and-apparatus]

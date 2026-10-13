@@ -2,7 +2,7 @@
 id: pthm-sr-rindler-horizons-and-radar
 kind: physics-theorem
 title: "The Rindler chart: causal horizons of a uniformly accelerated observer and the restrictions of radar time and distance"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 16

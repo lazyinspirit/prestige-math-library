@@ -4,7 +4,7 @@ aliases: [ nrqm-measurement-framework-declared-measurements-and-instruments ]
 kind: definition
 domain: physics
 title: "Declared ideal measurements and instruments of the framework"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps:

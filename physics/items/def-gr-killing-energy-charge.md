@@ -2,7 +2,7 @@
 id: def-gr-killing-energy-charge
 kind: definition
 title: "The timelike Killing current and the charge of a three-chain"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

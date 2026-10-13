@@ -2,7 +2,7 @@
 id: ex-em-boosted-fields-example
 kind: example
 title: "Boosted uniform electric field and the mixed magnetic field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

@@ -2,7 +2,7 @@
 id: pthm-cm16-energy-stability-and-instability
 kind: physics-theorem
 title: "Energy stability and instability of the mechanical model at an equilibrium: the strict minimum is Lyapunov stable, a negative Hessian eigenvalue gives linear instability, a negative definite potential Hessian gives nonlinear instability, and exact energy conservation rules out attraction"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

@@ -2,7 +2,7 @@
 id: ex-cm-regular-lagrangians-need-not-be-hyperregular
 kind: example
 title: "Regular versus hyperregular: the bounded-gradient Lagrangian $\\sqrt{1+v^2}$ and the degenerate zero Lagrangian"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

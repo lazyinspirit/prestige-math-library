@@ -2,7 +2,7 @@
 id: lem-sr-reverse-cauchy-schwarz-for-future-timelike-vectors
 kind: lemma
 title: "The reversed Cauchy-Schwarz inequality for future timelike vectors"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 proof_strategy: direct

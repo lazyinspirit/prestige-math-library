@@ -2,7 +2,7 @@
 id: thm-sr-future-cone-and-flat-domain-of-dependence
 kind: theorem
 title: "Future causal reachability, absence of causal loops, time monotonicity and the straight-worldline proper-time maximum"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

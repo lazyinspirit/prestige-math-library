@@ -4,7 +4,7 @@ aliases: [nrqm-angular-momentum-product-flow-generator]
 kind: lemma
 domain: mathematics
 title: "Self-adjointness and the flow of a self-adjoint operator perturbed by a bounded operator commuting with its flow"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-axiom-of-choice, def-bounded-linear-operator, def-countable-choice, def-hilbert-space, def-infinitesimal-generator-of-a-unitary-group, def-operator-norm, def-projection-valued-measure, def-self-adjoint-positive-unitary-and-normal-operator, def-strongly-continuous-one-parameter-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-composition-operator-norm-inequality, lem-neumann-series-and-small-perturbations-of-bounded-inverses, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-stone-one-parameter-unitary-groups, thm-unbounded-borel-functional-calculus]

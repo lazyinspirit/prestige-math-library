@@ -3,7 +3,7 @@ id: lem-nrqm-photons-transverse-fock-total-momentum
 kind: lemma
 domain: mathematics
 title: "Total momentum multipliers on transverse symmetric Fock sectors"
-status: draft
+status: published
 origin: session
 dependency_level: 5
 deps:

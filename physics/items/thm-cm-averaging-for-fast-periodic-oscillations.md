@@ -2,7 +2,7 @@
 id: thm-cm-averaging-for-fast-periodic-oscillations
 kind: theorem
 title: "Averaging for fast periodic oscillations: order-$\\varepsilon$ agreement on the $O(1/\\varepsilon)$ time scale"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

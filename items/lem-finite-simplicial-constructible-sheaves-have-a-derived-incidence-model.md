@@ -2,7 +2,7 @@
 id: lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model
 kind: lemma
 title: "Finite simplicial constructible sheaves have an actual derived incidence model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

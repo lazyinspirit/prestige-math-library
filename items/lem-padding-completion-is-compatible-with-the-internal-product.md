@@ -2,7 +2,7 @@
 id: lem-padding-completion-is-compatible-with-the-internal-product
 kind: lemma
 title: "The Jacobi–Trudi completion is compatible with the internal product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

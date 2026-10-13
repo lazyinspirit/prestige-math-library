@@ -2,7 +2,7 @@
 id: lem-reduction-of-characteristic-zero-simple-modules-modulo-p
 kind: lemma
 title: "Reduction of characteristic-zero simple modules modulo p"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 42

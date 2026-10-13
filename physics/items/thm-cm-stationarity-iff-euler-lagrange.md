@@ -2,7 +2,7 @@
 id: thm-cm-stationarity-iff-euler-lagrange
 kind: theorem
 title: "Stationarity of the time-dependent action is equivalent to the vanishing of the Euler-Lagrange expression"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

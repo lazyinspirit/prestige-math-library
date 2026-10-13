@@ -2,7 +2,7 @@
 id: lem-divided-power-and-toral-quantum-binomial-reordering-identities
 kind: lemma
 title: "Divided-power multiplication, toral binomials and the $E_i^{(a)}F_i^{(b)}$ reordering identity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

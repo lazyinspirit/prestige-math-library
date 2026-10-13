@@ -2,7 +2,7 @@
 id: lem-integral-crystal-residues-of-the-negative-half-represent-the-crystal-basis
 kind: lemma
 title: "Integral residues of the negative half: freeness, the crystal basis and the form characterization"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

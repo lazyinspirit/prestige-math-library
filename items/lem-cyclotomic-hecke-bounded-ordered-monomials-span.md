@@ -2,7 +2,7 @@
 id: lem-cyclotomic-hecke-bounded-ordered-monomials-span
 kind: lemma
 title: "Bounded ordered monomials span the cyclotomic Hecke quotients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

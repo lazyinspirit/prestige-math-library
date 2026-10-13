@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-graph-domain-ehrenfest-and-timescale]
 kind: theorem
 domain: mathematics
 title: "Graph-domain Ehrenfest identities and the conditional timescale bound"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-nrqm-composites-weak-form-robertson-uncertainty, thm-nrqm-magnetic-and-detection-covariance-refined-uncertainty, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-densely-defined-closed-and-closable-operator, def-unbounded-linear-operator-domain-and-graph, def-inner-product-space, def-hilbert-space, def-countable-choice]

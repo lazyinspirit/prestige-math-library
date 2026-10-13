@@ -2,7 +2,7 @@
 id: thm-proper-varieties-admit-smooth-projective-hyperresolutions
 kind: theorem
 title: "Smooth projective proper hyperresolutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

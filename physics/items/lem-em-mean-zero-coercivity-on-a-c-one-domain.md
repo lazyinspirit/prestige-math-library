@@ -3,7 +3,7 @@ id: lem-em-mean-zero-coercivity-on-a-c-one-domain
 kind: lemma
 domain: mathematics
 title: "Mean-zero Poincare inequality on a bounded connected $C^1$ domain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

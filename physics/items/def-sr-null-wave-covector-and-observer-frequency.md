@@ -2,7 +2,7 @@
 id: def-sr-null-wave-covector-and-observer-frequency
 kind: definition
 title: 'Null wave covectors, frame frequency data and the observer frequency of an ideal plane wave'
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: 'Ideal wave vocabulary in flat classical special-relativistic spacetime: the angular frequency, linear frequency, wave vector, wavelength and propagation direction attached to a future null wave covector in an inertial frame, and the observer-frequency sign convention omega_n = -c k(n) = -k(U_o) for an ideal observer. Conditional on the model''s SI conventions; excludes quantum photon and energy identifications, media and dispersion, amplitude and intensity, sources and detectors, real apparatus, and every measurement or empirical claim.'

@@ -2,7 +2,7 @@
 id: def-dual-canonical-canonical-and-quasi-canonical-fock-bases
 kind: definition
 title: "The dual-canonical, canonical and quasi-canonical Fock bases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

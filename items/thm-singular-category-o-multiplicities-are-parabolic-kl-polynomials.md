@@ -2,7 +2,7 @@
 id: thm-singular-category-o-multiplicities-are-parabolic-kl-polynomials
 kind: theorem
 title: "Singular category O multiplicities are parabolic Kazhdan–Lusztig values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

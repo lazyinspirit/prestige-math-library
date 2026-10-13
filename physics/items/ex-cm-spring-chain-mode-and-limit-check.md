@@ -2,7 +2,7 @@
 id: ex-cm-spring-chain-mode-and-limit-check
 kind: example
 title: "A four-node cyclic chain mode with $a=c=1$: exact ODE check, dispersion value $\\omega^2=2$, and the continuum error bound"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

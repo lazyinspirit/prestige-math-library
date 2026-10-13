@@ -1,7 +1,7 @@
 ---
 name: classical-electromagnetism
 title: Classical Electromagnetism
-status: draft
+status: published
 library: physics
 ---
 

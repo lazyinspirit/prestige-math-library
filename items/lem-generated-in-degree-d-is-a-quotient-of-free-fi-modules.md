@@ -2,7 +2,7 @@
 id: lem-generated-in-degree-d-is-a-quotient-of-free-fi-modules
 kind: lemma
 title: "Generation in bounded degree presents an FI-module as a quotient of free FI-modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

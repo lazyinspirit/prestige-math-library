@@ -2,7 +2,7 @@
 id: prop-cm-time-dependent-generating-function
 kind: proposition
 title: "A time-dependent generating function produces canonical time slices and shifts the Hamiltonian by $S_t$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

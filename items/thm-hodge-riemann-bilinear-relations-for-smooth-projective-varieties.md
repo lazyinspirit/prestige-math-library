@@ -2,7 +2,7 @@
 id: thm-hodge-riemann-bilinear-relations-for-smooth-projective-varieties
 kind: theorem
 title: "Hodge–Riemann bilinear relations for smooth projective varieties"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

@@ -1,7 +1,7 @@
 ---
 page: sr-forces-and-continuum
 title: "Forces and Continuum"
-status: draft
+status: published
 items: [def-sr-stress-energy-tensor-and-force-density,
         lem-sr-observer-stress-energy-decomposition,
         lem-sr-compact-variation-and-fundamental-lemma,

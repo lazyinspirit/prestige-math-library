@@ -2,7 +2,7 @@
 id: rem-general-type-a-decomposition-numbers-remain-unsolved
 kind: remark
 title: "General type-A decomposition numbers remain unsolved"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

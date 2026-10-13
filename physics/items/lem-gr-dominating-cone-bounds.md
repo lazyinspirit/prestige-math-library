@@ -2,7 +2,7 @@
 id: lem-gr-dominating-cone-bounds
 kind: lemma
 title: "Causal cone domination in adapted charts and Lipschitz-graph bounds for causal curves"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

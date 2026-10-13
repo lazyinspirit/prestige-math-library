@@ -2,7 +2,7 @@
 id: thm-cyclotomic-klr-module-g-zero-is-the-dual-integral-highest-weight-module
 kind: theorem
 title: "The cyclotomic module $G_0$ is the restricted dual integral highest-weight module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

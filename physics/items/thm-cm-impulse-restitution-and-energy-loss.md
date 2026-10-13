@@ -2,7 +2,7 @@
 id: thm-cm-impulse-restitution-and-energy-loss
 kind: theorem
 title: "Isolated reciprocal impulse with full-vector restitution: momentum jumps $\\pm J$, conservation of total momentum, the restitution solution and the kinetic-energy change $-\\frac{1-e^2}{2}\\mu\\lVert v_2^--v_1^-\\rVert_2^2$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

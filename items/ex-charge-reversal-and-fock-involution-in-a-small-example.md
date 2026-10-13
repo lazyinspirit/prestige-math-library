@@ -2,7 +2,7 @@
 id: ex-charge-reversal-and-fock-involution-in-a-small-example
 kind: example
 title: "Charge reversal and the Fock involution in a small example"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 44

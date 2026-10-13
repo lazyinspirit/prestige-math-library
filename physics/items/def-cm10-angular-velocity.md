@@ -2,7 +2,7 @@
 id: def-cm10-angular-velocity
 kind: definition
 title: "Body and spatial angular velocity of a rigid-material motion, and the material velocity field"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

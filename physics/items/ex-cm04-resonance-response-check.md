@@ -2,7 +2,7 @@
 id: ex-cm04-resonance-response-check
 kind: example
 title: "A driven oscillator on explicit data: the steady response, its amplitude maximum and a worked transient at $m=k=1$, $f_0=1$, $c=0.2$, $\\Omega=1$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 20

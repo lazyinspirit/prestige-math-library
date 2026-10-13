@@ -2,7 +2,7 @@
 id: ex-sr-perfectly-inelastic-collision-rest-mass
 kind: example
 title: "A conserving two-into-one collision datum and the non-uniqueness of its final state"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

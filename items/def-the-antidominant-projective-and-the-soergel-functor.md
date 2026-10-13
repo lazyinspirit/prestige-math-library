@@ -2,7 +2,7 @@
 id: def-the-antidominant-projective-and-the-soergel-functor
 kind: definition
 title: The antidominant projective and the Soergel functor
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

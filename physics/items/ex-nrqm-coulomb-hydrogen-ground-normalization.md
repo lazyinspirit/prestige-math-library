@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-example-hydrogen-ground-normalization]
 kind: example
 domain: mathematics
 title: "Hydrogen ground normalization"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [thm-plancherel, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, lem-weak-derivatives-are-polynomial-fourier-multipliers, lem-nrqm-coulomb-three-dimensional-hardy-bound, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, cor-vector-forms-of-the-divergence-theorem, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-dominated-convergence, thm-orthogonal-decomposition-by-a-closed-subspace, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-sobolev-space-wkp-and-its-norm, thm-nrqm-orbital-and-spin-sphere-onb, thm-polar-coordinates-formula-for-lebesgue-measure, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, thm-ftc-second-part, thm-derivative-of-exponential, thm-algebra-of-derivatives, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, def-hilbert-space, def-countable-choice]

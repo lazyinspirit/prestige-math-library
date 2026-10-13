@@ -2,7 +2,7 @@
 id: ex-gr-nonaffine-geodesic-parametrization
 kind: example
 title: "A geodesic image with a non-affine parameter, and the equation of a pregeodesic"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

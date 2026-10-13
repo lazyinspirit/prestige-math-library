@@ -1,7 +1,7 @@
 ---
 page: cm-math-verification-examples
 title: Cm Math Verification — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-oscillator-saddle-second-variation-checks

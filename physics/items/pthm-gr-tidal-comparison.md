@@ -2,7 +2,7 @@
 id: pthm-gr-tidal-comparison
 kind: physics-theorem
 title: "Free-fall congruences, tidal (curvature) relative acceleration and the flat comparison"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

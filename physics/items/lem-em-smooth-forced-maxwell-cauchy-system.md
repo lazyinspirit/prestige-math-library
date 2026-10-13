@@ -2,7 +2,7 @@
 id: lem-em-smooth-forced-maxwell-cauchy-system
 kind: lemma
 title: "The smooth forced Maxwell Cauchy system on a slab: existence, uniqueness, Gauss constraints and the cone of dependence"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [cor-zero-derivative-implies-constant, thm-em-wave-cauchy-kirchhoff, def-countable-choice, def-ck-euclidean-maps-and-diffeomorphisms, def-divergence-and-curl-of-a-c1-vector-field, def-laplacian-of-a-c2-function, def-wave-equation-cauchy-data-and-wave-speed, def-forward-and-backward-wave-cones-domain-of-dependence-and-influence, def-jacobian-matrix-and-gradient, def-directional-and-partial-derivatives, thm-the-curl-of-a-gradient-vanishes, thm-the-divergence-of-a-curl-vanishes, cor-the-curl-of-a-curl-of-a-c2-field, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, thm-clairaut-schwarz-mixed-partials, thm-algebra-of-derivatives, thm-algebra-of-total-derivatives]

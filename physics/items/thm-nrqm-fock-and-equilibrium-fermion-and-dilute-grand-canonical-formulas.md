@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-fermion-and-dilute-grand-canonical-formulas]
 kind: theorem
 domain: mathematics
 title: "Fermion and dilute grand-canonical formulas"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [thm-tonelli-for-nonnegative-double-series, lem-nrqm-composites-density-and-scalar-spectral-probability, def-trace-class-operator, def-trace-of-a-trace-class-operator, thm-trace-is-absolutely-convergent-and-basis-independent, thm-geometric-series, def-natural-logarithm, thm-logarithm-derivative-and-integral, thm-monotonicity-of-the-integral, def-hilbert-space, def-bounded-linear-operator, def-countable-choice, thm-natural-logarithm-laws, thm-complex-exponential-addition-and-real-extension, thm-monotone-convergence]

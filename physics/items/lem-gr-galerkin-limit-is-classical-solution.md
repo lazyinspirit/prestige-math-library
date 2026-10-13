@@ -2,7 +2,7 @@
 id: lem-gr-galerkin-limit-is-classical-solution
 kind: lemma
 title: "A limit of Galerkin solutions is a Sobolev and then a classical solution of the symmetric hyperbolic system"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

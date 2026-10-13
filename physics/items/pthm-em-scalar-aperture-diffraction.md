@@ -2,7 +2,7 @@
 id: pthm-em-scalar-aperture-diffraction
 kind: physics-theorem
 title: "Controlled Fraunhofer and Fresnel estimates for the scalar aperture model, with intensity-error transfer"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 18

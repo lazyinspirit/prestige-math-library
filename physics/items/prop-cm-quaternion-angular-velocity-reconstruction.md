@@ -2,7 +2,7 @@
 id: prop-cm-quaternion-angular-velocity-reconstruction
 kind: proposition
 title: "Angular-velocity reconstruction from a unit-quaternion path: for $C^1$ $q:I\\to S^3$ the body angular velocity of $\\rho\\circ q$ is $\\omega=2\\varphi^{-1}(q^{-1}q')$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

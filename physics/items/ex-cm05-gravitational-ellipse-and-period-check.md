@@ -2,7 +2,7 @@
 id: ex-cm05-gravitational-ellipse-and-period-check
 kind: example
 title: "An elliptic gravitational relative orbit checked on declared model data: $p=10^{6}\\,$m, $e=3/5$, $a=25\\cdot10^{6}/16\\,$m, $b=5\\cdot10^{6}/4\\,$m, $E=-3.2\\cdot10^{17}\\,$J and $T=125\\pi\\cdot10^{9}/32\\,$s, with $T^{2}=4\\pi^{2}a^{3}/(G_{\\mathrm N}M)$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

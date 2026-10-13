@@ -2,7 +2,7 @@
 id: lem-jantzen-layer-dimensions-equal-the-gram-determinant-valuation
 kind: lemma
 title: "Jantzen layer dimensions sum to the Gram determinant valuation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

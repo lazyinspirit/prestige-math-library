@@ -2,7 +2,7 @@
 id: thm-higher-level-wedge-tensor-fock-module-has-the-column-monomial-basis
 kind: theorem
 title: "The column monomial basis of the higher-level Fock module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

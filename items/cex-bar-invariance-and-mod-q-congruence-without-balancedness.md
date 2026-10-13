@@ -2,7 +2,7 @@
 id: cex-bar-invariance-and-mod-q-congruence-without-balancedness
 kind: counterexample
 title: "Bar invariance and the congruence modulo $q$ do not imply balancedness"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

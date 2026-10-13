@@ -2,7 +2,7 @@
 id: rem-gr-chart-tetrad-congruence-and-observer-distinctions
 kind: remark
 title: "Charts, frames, tetrads, congruences and observers are distinct objects"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

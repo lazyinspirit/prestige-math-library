@@ -2,7 +2,7 @@
 id: thm-henon-coded-invariant-set-is-conjugate-to-shift
 kind: theorem
 title: "The quadratic map $F(x,y)=(y,y^2-a-x)$ has a compact coded invariant set conjugate to the two-sign shift, with chaos under $\\mathrm{AC}_\\omega$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-cm-inertia-matrix-properties
 kind: lemma
 title: "Symmetry, the quadratic identity $\\omega^{\\mathsf T}I\\omega=\\int\\lVert\\omega\\times\\rho\\rVert_2^2\\,d\\nu$, and the positive-definiteness criterion for the inertia matrix"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

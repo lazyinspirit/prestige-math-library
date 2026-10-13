@@ -2,7 +2,7 @@
 id: lem-hh-finite-semisimple-matrix-double-commutant
 kind: lemma
 title: "Finite semisimple matrix density and the double commutant over Q"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 0

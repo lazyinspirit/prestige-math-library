@@ -1,7 +1,7 @@
 ---
 page: qm-massive-particle-kinematics-examples
 title: "Qm Massive Particle Kinematics — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

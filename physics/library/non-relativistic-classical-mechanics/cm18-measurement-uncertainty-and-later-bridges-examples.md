@@ -1,7 +1,7 @@
 ---
 page: cm18-measurement-uncertainty-and-later-bridges-examples
 title: "Measurement, uncertainty and later bridges — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

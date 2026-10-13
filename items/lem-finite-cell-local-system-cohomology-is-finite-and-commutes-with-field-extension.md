@@ -2,7 +2,7 @@
 id: lem-finite-cell-local-system-cohomology-is-finite-and-commutes-with-field-extension
 kind: lemma
 title: "Finite cell local system cohomology is finite and commutes with field extension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

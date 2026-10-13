@@ -2,7 +2,7 @@
 id: cex-sr-divergence-free-stress-energy-with-varying-slice-momentum
 kind: counterexample
 title: "Divergence-free stress-energy with a nonconserved slice integral"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [thm-sr-stress-balance-and-finite-flux, def-sr-stress-energy-tensor-and-force-density, def-inertial-frame-and-inertial-chart, def-directional-and-partial-derivatives, def-lorentz-form-and-inertia, def-sr-affine-minkowski-model]

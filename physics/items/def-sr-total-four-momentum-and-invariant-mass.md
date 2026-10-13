@@ -2,7 +2,7 @@
 id: def-sr-total-four-momentum-and-invariant-mass
 kind: definition
 title: "Total four-momentum, invariant mass and center-of-momentum frame of a finite system"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

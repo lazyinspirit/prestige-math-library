@@ -3,7 +3,7 @@ id: lem-em-finitely-subtracted-analytic-dispersion
 kind: lemma
 domain: mathematics
 title: "Dispersion relations for a finitely subtracted analytic response"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 1

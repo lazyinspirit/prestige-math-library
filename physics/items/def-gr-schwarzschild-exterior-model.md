@@ -2,7 +2,7 @@
 id: def-gr-schwarzschild-exterior-model
 kind: definition
 title: "The Schwarzschild exterior model datum: domain, metric, mass parameter and time orientation"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

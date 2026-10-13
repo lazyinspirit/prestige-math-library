@@ -1,7 +1,7 @@
 ---
 page: tensor-product-crystals-and-highest-weight-crystal-uniqueness
 title: "Tensor-Product Crystals and Highest-Weight Crystal Uniqueness"
-status: draft
+status: published
 requires: [kashiwara-operators-and-crystal-lattices, tensor-products-of-modules]
 items: [lem-tensor-products-of-integrable-weight-modules-are-integrable,
         def-tensor-product-of-crystals,

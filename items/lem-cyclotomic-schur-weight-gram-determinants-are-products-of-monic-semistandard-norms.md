@@ -2,7 +2,7 @@
 id: lem-cyclotomic-schur-weight-gram-determinants-are-products-of-monic-semistandard-norms
 kind: lemma
 title: "Cyclotomic Schur weight Gram determinants are products of monic semistandard norms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 23

@@ -4,7 +4,7 @@ kind: lemma
 title: "The rescaled pulse endpoint map converges to the kick
   $K(q,p)=(q,p+q^2-a)$ in $C^1$, and the period map is smooth, symplectic and
   $C^1$-close to $F$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

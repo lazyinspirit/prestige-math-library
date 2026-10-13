@@ -2,7 +2,7 @@
 id: rem-cm03-conservation-scope
 kind: remark
 title: "Status audit and scope of the balance page: conditional conservation, open systems, frames, potential normalization and empirical boundaries"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

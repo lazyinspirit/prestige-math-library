@@ -2,7 +2,7 @@
 id: rem-nrqm-framework-primitive-and-derived-status
 kind: remark
 title: "Primitive, adopted and derived quantities of the framework"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

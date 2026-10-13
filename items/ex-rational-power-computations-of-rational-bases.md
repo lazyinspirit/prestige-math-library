@@ -2,7 +2,7 @@
 id: ex-rational-power-computations-of-rational-bases
 kind: example
 title: "Rational powers of rational bases computed from the definition"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

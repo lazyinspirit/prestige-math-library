@@ -2,7 +2,7 @@
 id: rem-gr-einstein-matter-scope-and-conventions
 kind: remark
 title: "Scope and conventions of the Einstein-and-matter page: presentations, matter sectors and open obligations"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

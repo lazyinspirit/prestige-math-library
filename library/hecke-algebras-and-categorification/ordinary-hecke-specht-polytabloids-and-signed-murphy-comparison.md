@@ -1,7 +1,7 @@
 ---
 page: ordinary-hecke-specht-polytabloids-and-signed-murphy-comparison
 title: "Ordinary Hecke Specht Polytabloids and Signed Murphy Comparison"
-status: draft
+status: published
 requires: [principal-series-representations-of-gl-n-over-a-finite-field,
            young-diagrams-tableaux-and-permutation-modules,
            integral-specht-modules-and-modular-simple-modules,

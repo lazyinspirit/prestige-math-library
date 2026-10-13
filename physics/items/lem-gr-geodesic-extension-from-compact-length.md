@@ -2,7 +2,7 @@
 id: lem-gr-geodesic-extension-from-compact-length
 kind: lemma
 title: "Affine extension of geodesics confined to a compact set with finite auxiliary length, and the logarithmic speed bound"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

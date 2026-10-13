@@ -2,7 +2,7 @@
 id: def-cm-local-flow-of-an-autonomous-system
 kind: definition
 title: "The local flow of an autonomous first-order system"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

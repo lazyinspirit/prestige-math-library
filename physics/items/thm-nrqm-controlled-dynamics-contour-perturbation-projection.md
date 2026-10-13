@@ -5,7 +5,7 @@ aliases:
 kind: theorem
 domain: mathematics
 title: Contour perturbation projection
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

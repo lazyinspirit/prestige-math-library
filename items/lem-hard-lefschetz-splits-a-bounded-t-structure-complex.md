@@ -2,7 +2,7 @@
 id: lem-hard-lefschetz-splits-a-bounded-t-structure-complex
 kind: lemma
 title: "Hard Lefschetz splits a bounded t-structure complex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

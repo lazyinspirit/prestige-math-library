@@ -2,7 +2,7 @@
 id: lem-gr-strong-causality-escape-sequence
 kind: lemma
 title: "Failure of strong causality yields causal curves escaping one fixed neighbourhood with endpoints accumulating at the point"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

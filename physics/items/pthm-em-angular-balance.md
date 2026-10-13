@@ -4,7 +4,7 @@ kind: physics-theorem
 title: "Orbital field angular momentum and torque balance"
 domain: physics
 physical_scope: "The conditional orbital angular momentum balance of the classical vacuum electromagnetic field about the fixed origin of the laboratory chart: the local identity linking the time derivative of the orbital angular momentum density and the divergence of its flux tensor to the torque density, and its fixed-volume form with the boundary angular flux retained, deduced from the momentum balance of the same framework. The density is orbital only; no spin or intrinsic angular momentum of matter is defined or claimed, and no empirical claim is made."
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 proof_strategy: direct

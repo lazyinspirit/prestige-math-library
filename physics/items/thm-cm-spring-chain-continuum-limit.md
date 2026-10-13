@@ -2,7 +2,7 @@
 id: thm-cm-spring-chain-continuum-limit
 kind: theorem
 title: "Finite-time continuum limit of the cyclic spring chain: uniform $O(a^{3/2})$ nodal and uniform interpolation convergence"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

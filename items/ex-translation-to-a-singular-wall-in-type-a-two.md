@@ -2,7 +2,7 @@
 id: ex-translation-to-a-singular-wall-in-type-a-two
 kind: example
 title: "Translation to a singular wall in type A_2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

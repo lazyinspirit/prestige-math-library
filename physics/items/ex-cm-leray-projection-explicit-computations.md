@@ -2,7 +2,7 @@
 id: ex-cm-leray-projection-explicit-computations
 kind: example
 title: "Explicit Leray projection computations on $\\mathbb T^3$: gradients, a mixed field, and a divergence-free mode"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

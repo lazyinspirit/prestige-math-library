@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Tunnelling asymptotic limits: the smooth-barrier semiclassical limit and
   the exact rectangular prefactor comparison"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

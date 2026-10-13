@@ -2,7 +2,7 @@
 id: ex-cm-stroboscopic-map-of-the-plane-oscillator
 kind: example
 title: "The stroboscopic map of the plane oscillator"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

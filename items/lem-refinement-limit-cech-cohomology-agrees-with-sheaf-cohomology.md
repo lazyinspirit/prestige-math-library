@@ -2,7 +2,7 @@
 id: lem-refinement-limit-cech-cohomology-agrees-with-sheaf-cohomology
 kind: lemma
 title: "Refinement-limit Cech cohomology computes sheaf cohomology on compact Hausdorff spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

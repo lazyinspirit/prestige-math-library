@@ -1,7 +1,7 @@
 ---
 page: analytic-derived-six-operations-and-duality
 title: "Analytic Derived Six Operations And Duality"
-status: draft
+status: published
 items: [       def-proper-continuous-map,
        lem-proper-continuous-map-stability,
        def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces,

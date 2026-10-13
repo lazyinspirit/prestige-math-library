@@ -2,7 +2,7 @@
 id: ex-cm-inertia-tensors-of-point-masses
 kind: example
 title: "Finite point-mass inertia matrices computed and checked against the positivity criterion"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

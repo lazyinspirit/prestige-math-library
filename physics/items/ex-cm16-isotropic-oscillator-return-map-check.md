@@ -2,7 +2,7 @@
 id: ex-cm16-isotropic-oscillator-return-map-check
 kind: example
 title: "The three-dimensional isotropic oscillator: the stroboscopic map at half period is minus the identity, every state is periodic, the periodic points are dense, and the map is neither mixing nor sensitive"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

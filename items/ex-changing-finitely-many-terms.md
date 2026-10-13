@@ -2,7 +2,7 @@
 id: ex-changing-finitely-many-terms
 kind: example
 title: "Changing the first hundred terms leaves convergence to $0$ and boundedness intact"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

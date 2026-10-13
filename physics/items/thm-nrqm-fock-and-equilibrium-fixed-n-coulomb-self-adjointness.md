@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-fixed-n-coulomb-self-adjointness]
 kind: theorem
 domain: mathematics
 title: "Fixed-N Coulomb self-adjointness"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [thm-complex-lp-completeness-and-almost-everywhere-subsequences, thm-fatou-lemma, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-nrqm-fock-and-equilibrium-bounded-fixed-n-operator, thm-nrqm-fock-and-equilibrium-permutation-restricted-self-adjointness, lem-nrqm-coulomb-three-dimensional-hardy-bound, lem-nrqm-composites-euclidean-l2-product-unitary, cor-lebesgue-measure-is-invariant-under-orthogonal-linear-maps, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-dominated-convergence, thm-plancherel, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, def-sobolev-space-wkp-and-its-norm, thm-kato-rellich, def-relative-boundedness-with-respect-to-an-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-weak-derivative-of-a-locally-integrable-function, def-l-p-space-as-a-quotient-by-null-functions, def-hilbert-space, cor-cauchy-schwarz-inequality-for-l-two, def-countable-choice, def-axiom-of-choice]

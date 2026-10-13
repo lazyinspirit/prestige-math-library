@@ -1,7 +1,7 @@
 ---
 page: cm02-forces-initial-data-and-newtonian-flow
 title: "Forces, initial data and Newtonian flow"
-status: draft
+status: published
 library: physics
 items:
   - post-cm02-force-superposition

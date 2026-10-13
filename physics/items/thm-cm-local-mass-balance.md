@@ -2,7 +2,7 @@
 id: thm-cm-local-mass-balance
 kind: theorem
 title: "Local mass balance: conservation on every material subregion implies $\\partial_t\\rho+\\operatorname{div}(\\rho u)=0$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-gr-smooth-covariant-two-tensor-field
 kind: definition
 title: "Smooth covariant 2-tensor fields on a smooth manifold"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

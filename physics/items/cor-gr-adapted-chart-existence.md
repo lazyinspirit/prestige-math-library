@@ -2,7 +2,7 @@
 id: cor-gr-adapted-chart-existence
 kind: corollary
 title: "Every congruence admits a local adapted chart"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

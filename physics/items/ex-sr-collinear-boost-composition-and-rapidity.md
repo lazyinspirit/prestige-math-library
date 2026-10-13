@@ -2,7 +2,7 @@
 id: ex-sr-collinear-boost-composition-and-rapidity
 kind: example
 title: "Worked collinear composition and rapidity addition at beta = 3/5"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

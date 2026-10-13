@@ -2,7 +2,7 @@
 id: thm-sobolev-compactness-and-elliptic-estimates-give-fredholm-hodge-decomposition
 kind: theorem
 title: "Compact Laplace-type operators: smooth kernel, closed range and Green inverse"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps: [def-axiom-of-choice, thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity, thm-orthogonal-decomposition-by-a-closed-subspace, def-hilbert-orthogonal-projection, def-orthogonality-and-orthogonal-complement]

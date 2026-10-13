@@ -2,7 +2,7 @@
 id: lem-type-a-kazhdan-lusztig-basis-has-elementary-triangular-bar-properties
 kind: lemma
 title: "The type-A Kazhdan–Lusztig basis has elementary triangular bar properties"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 4

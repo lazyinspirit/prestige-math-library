@@ -2,7 +2,7 @@
 id: thm-simple-verma-composition-multiplicities-are-kazhdan-lusztig-values
 kind: theorem
 title: "Simple Verma composition multiplicities are Kazhdan–Lusztig values"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

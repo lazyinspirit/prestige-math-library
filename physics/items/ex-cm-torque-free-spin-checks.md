@@ -2,7 +2,7 @@
 id: ex-cm-torque-free-spin-checks
 kind: example
 title: "Finite checks of the torque-free spin results: stability certificates, an escape-time bound, and the linearized dichotomy"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 7

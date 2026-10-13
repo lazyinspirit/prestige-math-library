@@ -2,7 +2,7 @@
 id: def-cm-special-orthogonal-group
 kind: definition
 title: "The orthogonal group $O(3)$ and the rotation group $SO(3)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

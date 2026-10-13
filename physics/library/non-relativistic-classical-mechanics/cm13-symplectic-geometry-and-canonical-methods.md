@@ -1,7 +1,7 @@
 ---
 page: cm13-symplectic-geometry-and-canonical-methods
 title: "Symplectic geometry and canonical methods"
-status: draft
+status: published
 library: physics
 items:
   - def-cm13-two-form

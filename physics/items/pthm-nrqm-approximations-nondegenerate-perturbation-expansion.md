@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Nondegenerate stationary perturbation of a simple gapped label: first-
   and second-order coefficients and an explicit cubic remainder"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

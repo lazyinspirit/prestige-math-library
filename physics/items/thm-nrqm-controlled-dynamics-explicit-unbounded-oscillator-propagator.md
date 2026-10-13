@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-explicit-unbounded-oscillator-propagator]
 kind: theorem
 domain: mathematics
 title: "Explicit unbounded oscillator propagator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [thm-nrqm-controlled-dynamics-driven-oscillator-common-domain, thm-nrqm-oscillator-oscillator-scaling-and-exact-realization, lem-nrqm-oscillator-closed-ladder-domains, thm-parseval-equivalences-for-a-complete-orthonormal-family, lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-plancherel, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, thm-dominated-convergence, lem-complex-exponential-series-converges-everywhere, thm-complex-exponential-is-entire-with-derivative-itself, thm-geometric-series, def-complex-exponential, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-countable-choice]

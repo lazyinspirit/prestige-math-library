@@ -6,7 +6,7 @@ kind: example
 domain: physics
 title: 'Improper and proper mixtures with the same reduced preparation: the
   singlet marginal versus a fair random mixture'
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps:

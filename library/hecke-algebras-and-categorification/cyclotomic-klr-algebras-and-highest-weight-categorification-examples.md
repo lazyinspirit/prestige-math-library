@@ -1,7 +1,7 @@
 ---
 page: cyclotomic-klr-algebras-and-highest-weight-categorification-examples
 title: "Cyclotomic KLR Algebras and Highest-Weight Categorification — Examples"
-status: draft
+status: published
 requires: [cyclotomic-klr-algebras-and-highest-weight-categorification]
 items: []
 examples: [       ex-cyclotomic-klr-quotients-in-ranks-zero-one-and-two,

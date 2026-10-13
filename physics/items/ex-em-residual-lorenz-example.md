@@ -3,7 +3,7 @@ id: ex-em-residual-lorenz-example
 kind: example
 title: "A homogeneous-wave gauge generator changes Lorenz potentials without changing their fields"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 18
 deps: [pthm-em-lorenz-gauge-wave-form, pthm-em-gauge-invariance, def-em-gauge-transformation, def-em-potential-gauge-and-field-conventions, def-em-complex-plane-wave, def-laplacian-of-a-c2-function, def-wave-equation-cauchy-data-and-wave-speed, def-euclidean-inner-product, thm-sine-and-cosine-derivatives, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, def-directional-and-partial-derivatives, def-ck-euclidean-maps-and-diffeomorphisms, thm-eulers-formula]

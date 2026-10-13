@@ -2,7 +2,7 @@
 id: thm-fixed-part-for-geometric-polarizable-variations-on-smooth-algebraic-bases
 kind: theorem
 title: "The fixed part of a geometric Hodge variation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

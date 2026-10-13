@@ -3,7 +3,7 @@ id: pthm-gr-flrw-cosmological-redshift
 kind: physics-theorem
 title: "Cosmological redshift: the observer-energy ratio of a null geodesic
   between comoving observers is the inverse scale-factor ratio"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

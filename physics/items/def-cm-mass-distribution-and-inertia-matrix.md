@@ -2,7 +2,7 @@
 id: def-cm-mass-distribution-and-inertia-matrix
 kind: definition
 title: "Mass distributions on $\\mathbb R^3$: total mass, first moment and inertia matrix"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

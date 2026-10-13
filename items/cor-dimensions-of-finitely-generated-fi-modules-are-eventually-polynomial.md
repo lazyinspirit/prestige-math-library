@@ -2,7 +2,7 @@
 id: cor-dimensions-of-finitely-generated-fi-modules-are-eventually-polynomial
 kind: corollary
 title: "Dimensions of finitely generated FI-modules are eventually polynomial"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

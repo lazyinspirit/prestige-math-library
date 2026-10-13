@@ -1,7 +1,7 @@
 ---
 page: qm-measurement-and-instruments-examples
 title: "Qm Measurement And Instruments — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

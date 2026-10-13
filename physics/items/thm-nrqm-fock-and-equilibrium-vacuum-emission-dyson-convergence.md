@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-vacuum-emission-dyson-convergence]
 kind: theorem
 domain: mathematics
 title: "Vacuum emission Dyson convergence"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps: [thm-complex-spectral-theorem-for-normal-endomorphisms, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, lem-nrqm-composites-euclidean-l2-product-unitary, lem-linearity-of-the-bochner-integral, thm-dominated-convergence, thm-cauchy-schwarz-in-an-inner-product-space, thm-choice-implies-dependent-implies-countable-choice, thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound, thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains, thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, thm-bochner-integrability-criterion, lem-bochner-integral-norm-inequality, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

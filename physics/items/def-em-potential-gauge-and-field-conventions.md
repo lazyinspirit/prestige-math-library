@@ -2,7 +2,7 @@
 id: def-em-potential-gauge-and-field-conventions
 kind: definition
 title: "Scalar-vector potential pairs, gauge transformation, Lorenz divergence and the wave expression"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-ck-euclidean-maps-and-diffeomorphisms, def-jacobian-matrix-and-gradient, def-divergence-and-curl-of-a-c1-vector-field, def-laplacian-of-a-c2-function, def-wave-equation-cauchy-data-and-wave-speed, def-directional-and-partial-derivatives]

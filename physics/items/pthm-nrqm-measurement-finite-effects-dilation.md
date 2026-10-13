@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "A declared finite effect family is realised by a dilated ideal
   projective measurement"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

@@ -4,7 +4,7 @@ aliases: [nrqm-central-hydrogen-bound-energy-units-and-reduced-mass]
 kind: example
 domain: physics
 title: "Bound-energy parametrisations of the Coulomb model: exact identities, units and the reduced-mass factor"
-status: draft
+status: published
 origin: session
 dependency_level: 17
 deps: [def-nrqm-central-framework-coulomb-and-hydrogen-model, pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy, pthm-nrqm-central-two-body-reduced-threshold-and-total-momentum, def-nrqm-framework-quantities-and-units, pthm-nrqm-kinematics-spin-s-outcome-laws, post-nrqm-framework-preparation-and-apparatus, thm-nrqm-coulomb-ground-radial-probability-and-units, def-countable-choice, def-axiom-of-choice]

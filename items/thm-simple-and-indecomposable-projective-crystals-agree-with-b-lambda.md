@@ -2,7 +2,7 @@
 id: thm-simple-and-indecomposable-projective-crystals-agree-with-b-lambda
 kind: theorem
 title: "Simple and indecomposable-projective crystals agree with $B(\\Lambda)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

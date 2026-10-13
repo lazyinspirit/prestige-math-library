@@ -2,7 +2,7 @@
 id: ex-gr-conjugate-instant-on-a-round-sphere-factor
 kind: example
 title: "An equator geodesic of the round-sphere factor: conjugate instant at distance pi with multiplicity one"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

@@ -2,7 +2,7 @@
 id: thm-minimal-positive-rouquier-complexes-carry-the-induced-hodge-riemann-signs
 kind: theorem
 title: "Minimal positive Rouquier complexes carry the induced Hodge-Riemann signs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: ex-q-schaper-for-shape-three-two-at-e-two
 kind: example
 title: "The q-Schaper calculation for (3,2) at e = 2"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

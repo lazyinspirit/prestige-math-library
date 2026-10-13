@@ -2,7 +2,7 @@
 id: def-blocks-of-a-finite-dimensional-algebra-by-primitive-central-idempotents
 kind: definition
 title: "Blocks of a finite-dimensional algebra via primitive central idempotents"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

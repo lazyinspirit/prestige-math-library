@@ -2,7 +2,7 @@
 id: ex-cm03-two-body-hooke-model-check
 kind: example
 title: "A two-body Hooke model with an exact circular relative motion: momentum, kinetic splitting, moving-origin angular momentum, energy conservation and the kinetic boost law checked on explicit data"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

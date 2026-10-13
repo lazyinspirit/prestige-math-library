@@ -4,7 +4,7 @@ kind: example
 title: "Explicit escape from the intermediate-axis spin of the model with
   inertia diag(1,2,3): the constants, the perturbed invariant level, and the
   escape-time bound"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

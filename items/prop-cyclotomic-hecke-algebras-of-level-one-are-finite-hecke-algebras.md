@@ -2,7 +2,7 @@
 id: prop-cyclotomic-hecke-algebras-of-level-one-are-finite-hecke-algebras
 kind: proposition
 title: "Cyclotomic Hecke algebras of level one are finite Hecke algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

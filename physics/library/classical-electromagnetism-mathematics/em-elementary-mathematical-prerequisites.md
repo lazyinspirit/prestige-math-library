@@ -1,7 +1,7 @@
 ---
 page: em-elementary-mathematical-prerequisites
 title: Em Elementary Mathematical Prerequisites
-status: draft
+status: published
 items: [def-em-complex-plane-wave, def-em-moving-patch, def-em-surface-distribution, lem-em-continuous-localization, lem-em-coulomb-dipole-remainder, lem-em-parameter-integrals, lem-em-point-current-continuity, lem-em-quadratic-stress-identity, lem-em-interface-derivatives, lem-em-joint-smooth-potentials, lem-em-moving-flux, lem-em-period-average, lem-em-interface-wave-linear-system]
 examples: []
 ---

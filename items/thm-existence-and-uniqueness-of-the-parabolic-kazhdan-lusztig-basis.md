@@ -2,7 +2,7 @@
 id: thm-existence-and-uniqueness-of-the-parabolic-kazhdan-lusztig-basis
 kind: theorem
 title: "Existence and uniqueness of the parabolic Kazhdan–Lusztig bases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

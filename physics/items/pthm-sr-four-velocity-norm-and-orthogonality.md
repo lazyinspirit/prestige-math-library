@@ -2,7 +2,7 @@
 id: pthm-sr-four-velocity-norm-and-orthogonality
 kind: physics-theorem
 title: "Four-velocity norm and four-acceleration orthogonality for the model's clocks"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 12

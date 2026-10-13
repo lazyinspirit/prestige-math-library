@@ -3,7 +3,7 @@ id: rem-cm15-model-boundaries
 kind: remark
 title: "Scope of the scattering and impulse items: model boundaries, branch and
   cutoff qualifications, and the claims deliberately not made"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

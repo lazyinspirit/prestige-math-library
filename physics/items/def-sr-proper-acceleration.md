@@ -2,7 +2,7 @@
 id: def-sr-proper-acceleration
 kind: definition
 title: "Proper acceleration of a massive worldline and its agreement with the acceleration of an observer congruence"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 13

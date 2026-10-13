@@ -2,7 +2,7 @@
 id: lem-cm-fejer-completeness-for-continuous-periodic-functions
 kind: lemma
 title: "Fejer completeness: a continuous one-periodic function with all integrals against the characters vanishing is zero"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

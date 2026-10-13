@@ -3,7 +3,7 @@ id: rem-sr-newtonian-bridge-limits-and-failures
 kind: remark
 domain: physics
 title: 'Limits of the Newtonian bridge: speed-dependent error constants, the excluded massless case, and bounded chart regions'
-status: draft
+status: published
 origin: session
 dependency_level: 17
 deps: [pthm-sr-newtonian-p-e-correspondence, lem-sr-uniform-low-speed-expansion-of-observer-quantities, lem-sr-energy-momentum-observer-identities, post-sr-ideal-massless-particle-momentum, def-sr-observed-energy-momentum-and-kinetic-energy, def-sr-newtonian-comparison-quantities, lem-sr-uniform-galilean-limit-of-boost-charts, thm-sr-proper-time-and-observer-decomposition, def-rational-power, thm-of-archimedean, def-time-orientation-and-future-causal-sets, thm-path-connected-implies-connected]

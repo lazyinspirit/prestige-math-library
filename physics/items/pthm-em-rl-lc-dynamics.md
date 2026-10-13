@@ -3,7 +3,7 @@ id: pthm-em-rl-lc-dynamics
 kind: physics-theorem
 title: "Restricted RL decay and LC oscillation under the adopted circuit model"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 21
 proof_strategy: direct

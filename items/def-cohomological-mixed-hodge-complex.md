@@ -2,7 +2,7 @@
 id: def-cohomological-mixed-hodge-complex
 kind: definition
 title: "Cohomological mixed Hodge complexes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

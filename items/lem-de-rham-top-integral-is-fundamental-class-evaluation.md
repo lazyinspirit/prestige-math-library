@@ -2,7 +2,7 @@
 id: lem-de-rham-top-integral-is-fundamental-class-evaluation
 kind: lemma
 title: "Top de Rham integration equals fundamental-class evaluation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps:

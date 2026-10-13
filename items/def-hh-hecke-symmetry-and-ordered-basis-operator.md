@@ -2,7 +2,7 @@
 id: def-hh-hecke-symmetry-and-ordered-basis-operator
 kind: definition
 title: "The ordered-basis Hecke operator and its normalization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 0

@@ -1,7 +1,7 @@
 ---
 page: em-empirical-tests-and-scope-examples
 title: "Empirical tests and limitations — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

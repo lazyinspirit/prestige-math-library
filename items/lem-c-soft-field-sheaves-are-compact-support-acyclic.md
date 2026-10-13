@@ -2,7 +2,7 @@
 id: lem-c-soft-field-sheaves-are-compact-support-acyclic
 kind: lemma
 title: "Compact-support acyclicity of c-soft sheaves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

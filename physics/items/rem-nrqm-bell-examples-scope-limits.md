@@ -5,7 +5,7 @@ kind: remark
 domain: physics
 title: "Scope of the examples page: conditional computations, no experiment, and
   the deferred Bell-test destination"
-status: draft
+status: published
 origin: session
 dependency_level: 16
 deps:

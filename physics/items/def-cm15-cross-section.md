@@ -4,7 +4,7 @@ kind: definition
 title: "The differential and truncated total cross-sections of a deflection
   branch: densities, units, branch sums and the empirical qualifications of the
   uniform-incident reading"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

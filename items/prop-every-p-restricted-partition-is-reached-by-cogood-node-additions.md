@@ -2,7 +2,7 @@
 id: prop-every-p-restricted-partition-is-reached-by-cogood-node-additions
 kind: proposition
 title: "Every $p$-restricted partition is reached from the empty partition by cogood additions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

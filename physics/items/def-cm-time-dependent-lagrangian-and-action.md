@@ -2,7 +2,7 @@
 id: def-cm-time-dependent-lagrangian-and-action
 kind: definition
 title: "A time-dependent Lagrangian chart, its action functional and its fixed-endpoint first variations"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

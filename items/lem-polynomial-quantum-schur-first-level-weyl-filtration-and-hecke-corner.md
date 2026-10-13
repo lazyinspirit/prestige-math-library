@@ -2,7 +2,7 @@
 id: lem-polynomial-quantum-schur-first-level-weyl-filtration-and-hecke-corner
 kind: lemma
 title: "Polynomial quantum Schur first levels: Weyl filtration and the actual Hecke corner"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

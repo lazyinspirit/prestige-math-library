@@ -2,7 +2,7 @@
 id: pthm-cm03-centre-of-mass-and-kinetic-splitting
 kind: physics-theorem
 title: "Total momentum equals total mass times centre-of-mass velocity, and the kinetic energy splits into centre-of-mass and relative parts (two-body reduced mass)"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

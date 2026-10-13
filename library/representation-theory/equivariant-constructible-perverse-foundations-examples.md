@@ -1,7 +1,7 @@
 ---
 page: equivariant-constructible-perverse-foundations-examples
 title: "Equivariant Constructible Perverse Foundations Examples"
-status: draft
+status: published
 items: []
 examples: [ex-equivariant-constructible-ext-on-a-point-is-degreewise-finite-not-total-finite]
 requires:

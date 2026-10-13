@@ -3,7 +3,7 @@ id: post-em-radiation-selection
 kind: postulate
 title: "Adopted retarded solution selection: the physical branch carries no incoming free field"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 18
 deps: [pthm-em-lorenz-gauge-wave-form, def-em-potential-gauge-and-field-conventions, post-em-vacuum-maxwell, def-em-si-conventions, def-em-lab-geometry, post-em-distributional-vacuum-maxwell, def-em-weak-sources, def-countable-choice]

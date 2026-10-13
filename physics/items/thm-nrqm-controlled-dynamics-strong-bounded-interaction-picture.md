@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-strong-bounded-interaction-picture]
 kind: theorem
 domain: mathematics
 title: "Strong bounded interaction picture"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [thm-nrqm-controlled-dynamics-common-domain-nonautonomous-evolution, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, lem-bochner-integral-norm-inequality, thm-bochner-integrability-criterion, def-countable-choice]

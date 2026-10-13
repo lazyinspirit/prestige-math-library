@@ -2,7 +2,7 @@
 id: ex-rationals-in-an-interval
 kind: example
 title: "The rationals in an interval are countably infinite while the interval is uncountable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

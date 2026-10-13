@@ -2,7 +2,7 @@
 id: lem-fluid-galerkin-coefficient-ivp
 kind: lemma
 title: "The Galerkin coefficient system: finite-dimensional invariance, local Lipschitz property, and the unique maximal approximation on the torus"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

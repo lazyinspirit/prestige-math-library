@@ -2,7 +2,7 @@
 id: def-oriented-minkowski-volume-form
 kind: definition
 title: "The oriented volume form epsilon and the permutation symbols of an inertial frame"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

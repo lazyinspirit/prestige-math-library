@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The interaction picture of the declared driven model: readings, the
   interaction propagator and picture equivalence of outcome laws"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

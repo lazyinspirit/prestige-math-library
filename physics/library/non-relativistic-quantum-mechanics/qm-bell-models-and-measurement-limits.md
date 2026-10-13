@@ -1,7 +1,7 @@
 ---
 page: qm-bell-models-and-measurement-limits
 title: Qm Bell Models And Measurement Limits
-status: draft
+status: published
 library: physics
 items:
   - def-nrqm-bell-binary-correlation-models

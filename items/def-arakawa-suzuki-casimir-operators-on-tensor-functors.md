@@ -2,7 +2,7 @@
 id: def-arakawa-suzuki-casimir-operators-on-tensor-functors
 kind: definition
 title: "Arakawa-Suzuki Casimir operators on tensor functors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

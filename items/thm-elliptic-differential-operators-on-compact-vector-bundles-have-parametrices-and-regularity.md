@@ -2,7 +2,7 @@
 id: thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity
 kind: theorem
 title: "Compact Laplace-type bundle operators: regularity and shifted parametrices"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps: [def-second-order-laplace-type-operators-on-vector-bundles, thm-chain-rule-for-total-derivatives, cor-c-one-change-of-variables-for-l-one-functions, thm-young-inequality-real-exponents, thm-holder-inequality-for-integrals, def-axiom-of-choice, thm-choice-implies-dependent-implies-countable-choice, thm-smooth-partitions-of-unity-exist-on-manifolds, lem-cutoff-difference-quotient-commutator-estimate, lem-w-one-two-is-a-hilbert-space, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, def-hk-and-hk-zero-notation, def-sobolev-space-wkp-and-its-norm, thm-interior-h-two-regularity-for-divergence-form-equations, lem-interpolation-absorbs-lower-order-sobolev-terms-in-elliptic-estimates, thm-rellich-compactness-from-w-one-p-to-lp-on-an-extension-domain, thm-higher-order-sobolev-embedding, thm-extension-theorem-for-bounded-smooth-domains, thm-lax-milgram]

@@ -2,7 +2,7 @@
 id: def-gr-periodic-symmetric-hyperbolic-system
 kind: definition
 title: "Periodic first-order symmetric hyperbolic systems: coefficients, admissible values, data classes and solutions"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

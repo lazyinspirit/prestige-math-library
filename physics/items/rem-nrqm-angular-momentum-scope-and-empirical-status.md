@@ -4,7 +4,7 @@ aliases: [ nrqm-angular-momentum-scope-and-empirical-status ]
 kind: remark
 domain: physics
 title: "What the angular momentum and spin page adopts, proves and does not claim"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

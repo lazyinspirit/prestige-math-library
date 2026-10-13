@@ -4,7 +4,7 @@ aliases: [nrqm-composites-chsh-and-finite-sampling-law]
 kind: lemma
 domain: mathematics
 title: "The CHSH bound and the finite-sampling law for independent trials"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

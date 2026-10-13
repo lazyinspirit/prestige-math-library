@@ -2,7 +2,7 @@
 id: ex-sr-boost-rotation-factorization-worked
 kind: example
 title: "Worked boost-rotation factorization of a composition of two perpendicular boosts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

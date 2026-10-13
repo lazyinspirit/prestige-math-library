@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-example-dirichlet-momentum-failure]
 kind: example
 domain: mathematics
 title: "Dirichlet momentum failure"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-weak-derivative-ac-representative, lem-nrqm-intervals-integration-by-parts, thm-nrqm-intervals-sine-on-completeness, thm-nrqm-intervals-twisted-periodic-momentum-domain, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-hilbert-space, def-complex-exponential, def-countable-choice, def-axiom-of-choice]

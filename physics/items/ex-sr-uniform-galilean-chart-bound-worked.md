@@ -3,7 +3,7 @@ id: ex-sr-uniform-galilean-chart-bound-worked
 kind: example
 domain: mathematics
 title: 'Worked uniform Galilean chart bound on a bounded region'
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps: [lem-sr-uniform-galilean-limit-of-boost-charts, def-sr-galilean-limiting-charts, def-rational-power, lem-rational-power-laws, thm-of-square-roots, lem-rational-power-monotone, def-ordered-field]

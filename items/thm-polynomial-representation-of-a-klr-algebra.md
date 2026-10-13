@@ -2,7 +2,7 @@
 id: thm-polynomial-representation-of-a-klr-algebra
 kind: theorem
 title: "Faithful polynomial representation of a KLR algebra"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: ex-projective-simple-cartan-pairing-in-a-small-cyclotomic-block
 kind: example
 title: "The projective-simple Cartan pairing in a small cyclotomic block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

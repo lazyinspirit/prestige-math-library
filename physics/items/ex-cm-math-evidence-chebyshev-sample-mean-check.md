@@ -2,7 +2,7 @@
 id: ex-cm-math-evidence-chebyshev-sample-mean-check
 kind: example
 title: "Finite check of the IID sample-mean variance and Chebyshev bound"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-expectation-on-a-finite-probability-space, def-finite-probability-space-and-event, def-identically-distributed-and-iid-random-variables, def-independence-of-finite-random-variables, def-moments-variance-and-covariance, def-uniform-finite-probability-space, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]

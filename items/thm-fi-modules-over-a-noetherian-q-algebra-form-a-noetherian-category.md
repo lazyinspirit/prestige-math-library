@@ -2,7 +2,7 @@
 id: thm-fi-modules-over-a-noetherian-q-algebra-form-a-noetherian-category
 kind: theorem
 title: "FI-modules over a Noetherian $\\mathbb Q$-algebra form a Noetherian category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

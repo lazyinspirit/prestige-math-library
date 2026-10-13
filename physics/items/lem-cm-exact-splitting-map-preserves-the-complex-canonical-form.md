@@ -2,7 +2,7 @@
 id: lem-cm-exact-splitting-map-preserves-the-complex-canonical-form
 kind: lemma
 title: Hamiltonian flows and the exact splitting map preserve the complexified canonical form and the Poisson bracket
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 7

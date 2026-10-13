@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-position-and-momentum-operators]
 kind: definition
 domain: mathematics
 title: "Position and momentum operators on Euclidean L2"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, lem-weak-derivatives-are-unique-almost-everywhere, def-complex-lp-and-euclidean-test-function-conventions, def-l-p-space-as-a-quotient-by-null-functions, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-hilbert-space, def-countable-choice, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn]

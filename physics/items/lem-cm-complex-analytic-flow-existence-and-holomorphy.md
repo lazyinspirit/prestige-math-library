@@ -2,7 +2,7 @@
 id: lem-cm-complex-analytic-flow-existence-and-holomorphy
 kind: lemma
 title: 'The flow of a bounded holomorphic field on a polydisc: existence in complex time, displacement bound, holomorphy, and the composition law'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

@@ -3,7 +3,7 @@ id: lem-gr-kruskal-causal-escape-and-trapping
 kind: lemma
 title: "The causal cone, the escape horizon and decreasing areal radius in the
   Kruskal model"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 16

@@ -2,7 +2,7 @@
 id: lem-em-spherical-mean-family-smoothness
 kind: lemma
 title: "Joint smoothness of the spherical-mean family of a smooth spacetime function"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [cor-mean-value-theorem, def-ck-and-multi-index-notation-in-several-variables, def-ck-euclidean-maps-and-diffeomorphisms, def-countable-choice, def-euclidean-inner-product, def-jacobian-matrix-and-gradient, def-surface-integral-on-a-compact-c-one-hypersurface, lem-em-parameter-integrals, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-algebra-of-derivatives, thm-cauchy-schwarz-and-the-euclidean-norm, thm-chain-rule-for-total-derivatives, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-continuous-partial-derivatives-imply-total-differentiability, thm-extreme-value-metric, thm-heine-borel-rn, thm-total-derivative-computes-directional-and-partial-derivatives]

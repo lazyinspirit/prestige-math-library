@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Local readout laws and reduced preparations: the subsystem state
   determines, and is determined by, the local statistics"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

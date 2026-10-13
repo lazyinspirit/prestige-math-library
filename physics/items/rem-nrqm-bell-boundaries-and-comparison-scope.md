@@ -5,7 +5,7 @@ kind: remark
 domain: physics
 title: "Measurement-model boundaries of the singlet-local comparison: what the
   no-go excludes and what it does not"
-status: draft
+status: published
 origin: session
 dependency_level: 16
 deps:

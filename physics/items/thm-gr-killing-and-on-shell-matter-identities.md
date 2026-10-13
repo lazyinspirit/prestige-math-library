@@ -2,7 +2,7 @@
 id: thm-gr-killing-and-on-shell-matter-identities
 kind: theorem
 title: "Killing fields and conserved currents, and on-shell conservation of the Hilbert stress-energy tensor"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

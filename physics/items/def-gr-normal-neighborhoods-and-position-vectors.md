@@ -2,7 +2,7 @@
 id: def-gr-normal-neighborhoods-and-position-vectors
 kind: definition
 title: "Normal neighborhoods, convex normal sets, the position vector and the squared-displacement function"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

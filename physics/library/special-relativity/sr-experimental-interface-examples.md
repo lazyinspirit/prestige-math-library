@@ -1,7 +1,7 @@
 ---
 page: sr-experimental-interface-examples
 title: "Experimental Interface — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

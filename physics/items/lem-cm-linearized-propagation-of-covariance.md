@@ -2,7 +2,7 @@
 id: lem-cm-linearized-propagation-of-covariance
 kind: lemma
 title: "The covariance of the linearization is $A\\Sigma A^{\\mathsf T}$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [cor-expectation-linearity-monotonicity-and-modulus-bound, def-cm-covariance-matrix-of-a-random-vector, def-jacobian-matrix-and-gradient, def-matrix-space, def-measurable-function-between-measurable-spaces, def-random-element-and-real-random-variable, def-total-derivative-in-euclidean-space, lem-variance-and-covariance-identities-for-random-variables, prop-closure-properties-of-measurable-functions-used-by-the-integral, thm-cauchy-schwarz-in-an-inner-product-space, thm-continuous-preimages-of-borel-sets-are-borel, thm-coordinatewise-measurability-into-r-n, thm-matrix-multiplication-laws]

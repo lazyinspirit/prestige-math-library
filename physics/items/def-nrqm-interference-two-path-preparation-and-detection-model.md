@@ -4,7 +4,7 @@ aliases: [nrqm-interference-two-path-preparation-and-detection-model]
 kind: definition
 domain: physics
 title: "The declared two-path preparation model and its ideal detection bins"
-status: draft
+status: published
 origin: session
 dependency_level: 9
 deps: [post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-preparation-and-apparatus, def-nrqm-framework-quantities-and-units, def-l-p-space-as-a-quotient-by-null-functions, def-hilbert-space, def-real-and-complex-inner-product-space, def-trace-class-operator, def-trace-of-a-trace-class-operator, def-self-adjoint-positive-unitary-and-normal-operator, thm-trace-is-absolutely-convergent-and-basis-independent, thm-trace-class-is-a-two-sided-banach-operator-ideal, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-bounded-linear-operator, thm-cauchy-schwarz-in-an-inner-product-space, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, def-unbounded-integral-against-a-pvm, thm-bounded-borel-pvm-integral, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, cor-second-countable-lch-locally-finite-borel-measures-are-regular, def-regular-borel-measure-on-an-lch-space, thm-borel-products-of-euclidean-spaces-are-euclidean-borel, lem-finite-measure-uniqueness-on-a-pi-system, def-countable-choice, def-axiom-of-choice]

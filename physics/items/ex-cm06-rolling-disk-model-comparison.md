@@ -2,7 +2,7 @@
 id: ex-cm06-rolling-disk-model-comparison
 kind: example
 title: "Rolling as distinct models: the planar ideal no-slip disk against frictionless sliding, and the contact capability condition"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

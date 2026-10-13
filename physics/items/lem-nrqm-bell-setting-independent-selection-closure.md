@@ -4,7 +4,7 @@ aliases: [nrqm-bell-setting-independent-selection-closure]
 kind: lemma
 domain: mathematics
 title: "Conditioning on a setting-independent selection preserves local-response representability and the CHSH bound"
-status: draft
+status: published
 origin: session
 dependency_level: 3
 deps: [def-nrqm-bell-binary-correlation-models, def-nrqm-bell-local-response-representation, thm-nrqm-bell-local-representations-satisfy-chsh, def-probability-measure, def-measure, def-expectation-of-a-nonnegative-or-integrable-random-variable, cor-expectation-of-an-indicator-is-probability, prop-indicator-function-is-measurable-iff-its-set-is-measurable, cor-expectation-linearity-monotonicity-and-modulus-bound, thm-nonnegative-measurable-functions-admit-increasing-simple-approximations, thm-monotone-convergence-for-the-integral, def-integral-of-a-nonnegative-simple-function, def-finite-sum]

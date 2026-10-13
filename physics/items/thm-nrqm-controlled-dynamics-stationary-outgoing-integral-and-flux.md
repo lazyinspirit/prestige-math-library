@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-stationary-outgoing-integral-and-flux]
 kind: theorem
 domain: mathematics
 title: "Stationary outgoing integral and flux"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps: [thm-nrqm-controlled-dynamics-outgoing-fredholm-invertibility, thm-interior-h-two-regularity-for-divergence-form-equations, def-sobolev-space-wkp-and-its-norm, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-countable-choice]

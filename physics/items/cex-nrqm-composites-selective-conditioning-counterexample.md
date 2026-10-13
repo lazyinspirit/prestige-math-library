@@ -4,7 +4,7 @@ aliases: [nrqm-composites-example-selective-conditioning-counterexample]
 kind: counterexample
 domain: mathematics
 title: "Selective-conditioning counterexample"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-density-and-scalar-spectral-probability, thm-nrqm-composites-finite-partial-trace-and-schmidt, lem-nrqm-composites-local-trace-preserving-no-signalling]

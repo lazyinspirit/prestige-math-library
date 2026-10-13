@@ -2,7 +2,7 @@
 id: prop-cm-oscillator-amplitude-maximum
 kind: proposition
 title: "The amplitude of the sinusoidally forced damped oscillator: location and value of its maximum"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

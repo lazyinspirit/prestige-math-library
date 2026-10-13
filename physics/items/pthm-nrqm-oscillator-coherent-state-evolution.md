@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Evolution of the oscillator coherent states: classical mean motion and
   stationary fluctuations"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

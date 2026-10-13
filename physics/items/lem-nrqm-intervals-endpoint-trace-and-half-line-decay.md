@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-endpoint-trace-and-half-line-decay]
 kind: lemma
 domain: mathematics
 title: "Endpoint trace bound and decay of H1 functions"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-weak-derivative-ac-representative, thm-holder-inequality-for-integrals, prop-indefinite-integral-of-an-integrable-function-is-countably-additive, def-countable-choice, def-axiom-of-choice]

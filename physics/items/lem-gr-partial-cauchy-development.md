@@ -2,7 +2,7 @@
 id: lem-gr-partial-cauchy-development
 kind: lemma
 title: "The causal domain of dependence of a partial Cauchy hypersurface is an open causally convex manifold on which the hypersurface is Cauchy"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 21

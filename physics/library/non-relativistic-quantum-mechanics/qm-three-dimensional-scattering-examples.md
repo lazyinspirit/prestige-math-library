@@ -1,7 +1,7 @@
 ---
 page: qm-three-dimensional-scattering-examples
 title: "Qm Three Dimensional Scattering — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

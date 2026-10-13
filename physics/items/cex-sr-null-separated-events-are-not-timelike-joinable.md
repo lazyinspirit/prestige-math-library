@@ -2,7 +2,7 @@
 id: cex-sr-null-separated-events-are-not-timelike-joinable
 kind: counterexample
 title: "Counterexample: a causally related pair of events need not be joinable by a future timelike worldline"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

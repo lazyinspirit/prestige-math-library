@@ -2,7 +2,7 @@
 id: prop-specht-constituents-of-an-fi-module-have-bounded-first-row
 kind: proposition
 title: "A stability degree bounds the first row of every padding tail"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

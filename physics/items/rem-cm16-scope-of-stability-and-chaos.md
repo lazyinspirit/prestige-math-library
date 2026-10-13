@@ -2,7 +2,7 @@
 id: rem-cm16-scope-of-stability-and-chaos
 kind: remark
 title: "Scope of the stability, perturbation and chaos statements: conditional model deductions, the limits of finite-time and numerical evidence, and the empirical qualifications"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 24

@@ -2,7 +2,7 @@
 id: thm-local-smooth-periodic-euler-viscous-solution
 kind: theorem
 title: "Local smooth solutions of the periodic incompressible Euler and constant-viscosity equations on $\\mathbb T^3$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 7

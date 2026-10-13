@@ -6,7 +6,7 @@ requires:
   - gr-tensors-and-observers
 page: gr-linearized-waves-examples
 title: "Linearized Waves — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

@@ -3,7 +3,7 @@ id: pthm-sr-radar-synchronization-of-inertial-observers
 kind: physics-theorem
 domain: physics
 title: "Radar synchronization of an inertial observer reproduces its inertial chart"
-status: draft
+status: published
 origin: pipeline
 physical_scope: >-
   The statement is conditional on the adopted ideal-clock and ideal-light

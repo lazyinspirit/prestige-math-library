@@ -2,7 +2,7 @@
 id: lem-gr-congruence-acceleration-and-expansion-properties
 kind: lemma
 title: "Spatiality and curve identity of the acceleration, the divergence form of the expansion, and the along-congruence derivative"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

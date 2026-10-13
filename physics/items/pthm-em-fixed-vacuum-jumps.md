@@ -3,7 +3,7 @@ id: pthm-em-fixed-vacuum-jumps
 kind: physics-theorem
 title: "Stationary vacuum interface jumps and the absence of magnetic sheet sources"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 16
 deps: [post-em-distributional-vacuum-maxwell,

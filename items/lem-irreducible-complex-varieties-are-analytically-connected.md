@@ -2,7 +2,7 @@
 id: lem-irreducible-complex-varieties-are-analytically-connected
 kind: lemma
 title: "Irreducible complex varieties are analytically connected"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 1

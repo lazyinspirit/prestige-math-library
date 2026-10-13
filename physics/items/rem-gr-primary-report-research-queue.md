@@ -2,7 +2,7 @@
 id: rem-gr-primary-report-research-queue
 kind: remark
 title: "Primary-report research queue for the gravitational framework: redshift, propagation delay, light deflection, perihelion advance, binary timing and interferometric strain"
-status: draft
+status: published
 origin: session
 domain: physics
 physical_scope: "Scope-and-queue record for the empirical layer of the classical gravitational framework, stated in the vocabulary of the experiment interface. It names six families of published primary reports to retrieve and read, together with the in-framework prediction content each comparison would still require, and it records that the primary-report and analysis layer (research label M20) is unsupplied and that no experiment item and no measured value occurs in this batch. It asserts no measurement, no dataset, no uncertainty value, no comparison result, no deviation, no empirical support for any postulate and no precision of any physical constant."

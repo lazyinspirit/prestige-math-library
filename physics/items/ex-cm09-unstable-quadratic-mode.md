@@ -3,7 +3,7 @@ id: ex-cm09-unstable-quadratic-mode
 kind: example
 title: "The inverted pendulum about its upward equilibrium: the negative modal
   stiffness, the exponential quadratic mode and the nonlinear instability"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

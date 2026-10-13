@@ -2,7 +2,7 @@
 id: thm-degenerate-specht-decomposition-numbers-are-canonical-basis-coefficients-at-one
 kind: theorem
 title: "Degenerate Specht decomposition numbers are canonical basis coefficients at one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 42

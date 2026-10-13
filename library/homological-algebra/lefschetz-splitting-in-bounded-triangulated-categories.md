@@ -1,7 +1,7 @@
 ---
 page: lefschetz-splitting-in-bounded-triangulated-categories
 title: "Lefschetz Splitting In Bounded Triangulated Categories"
-status: draft
+status: published
 items: [def-truncation-functors-and-cohomology-of-a-t-structure,
         lem-truncation-triangles-are-essentially-unique-and-functorial,
         lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude,

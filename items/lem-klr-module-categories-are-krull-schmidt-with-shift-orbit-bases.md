@@ -2,7 +2,7 @@
 id: lem-klr-module-categories-are-krull-schmidt-with-shift-orbit-bases
 kind: lemma
 title: "Graded Krull-Schmidt and shift-orbit bases for finitely generated KLR modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-gr-flat-model-connection-curvature-and-geodesics
 kind: lemma
 title: "The flat model: vanishing connection and curvature, translation Killing fields and straight geodesics"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

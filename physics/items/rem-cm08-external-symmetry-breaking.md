@@ -2,7 +2,7 @@
 id: rem-cm08-external-symmetry-breaking
 kind: remark
 title: "Scope of the symmetry-conservation statements: force laws that break kinematic symmetries, residual forces, moving coordinates and the empirical boundary"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

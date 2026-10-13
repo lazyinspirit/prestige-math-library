@@ -2,7 +2,7 @@
 id: lem-wall-crossing-compositions-produce-the-projective-with-the-top-standard-label
 kind: lemma
 title: Wall-crossing compositions produce the projective with the top standard label
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

@@ -3,7 +3,7 @@ id: def-sr-observer-congruence-and-kinematics
 kind: definition
 domain: mathematics
 title: "Kinematics of an observer congruence: acceleration, expansion, shear, vorticity and Born rigidity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

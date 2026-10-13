@@ -2,7 +2,7 @@
 id: rem-cm-scope-of-energy-stability-and-quadratic-modes
 kind: remark
 title: "Scope of the quadratic-mode and energy-stability results: exact quadratic model versus linearisation approximation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

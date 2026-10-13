@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-dirichlet-nodal-theorem]
 kind: theorem
 domain: mathematics
 title: "Dirichlet eigenvalues, simplicity and the nodal theorem on an interval"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-weak-derivative-ac-representative, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, thm-nrqm-intervals-regular-ivp-parameter-series, thm-nrqm-intervals-prufer-energy-monotonicity, thm-sine-and-cosine-derivatives, thm-sine-cosine-zero-sets-and-fundamental-period, thm-gronwall-integral-inequality, thm-intermediate-value, thm-continuous-implies-integrable, def-countable-choice, def-axiom-of-choice]

@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "S-wave phase shift of a declared spherical square well, with its
   low-energy limit and hard-sphere comparison"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

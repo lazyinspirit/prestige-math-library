@@ -2,7 +2,7 @@
 id: thm-em-elliptic-boundary-existence
 kind: theorem
 title: Weak and classical solvability of the elliptic boundary problems with Dirichlet, Neumann and transmission data
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

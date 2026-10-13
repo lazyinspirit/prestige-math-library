@@ -2,7 +2,7 @@
 id: thm-klr-categorification-of-the-negative-quantum-half
 kind: theorem
 title: "The KLR category categorifies the negative quantum half"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

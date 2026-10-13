@@ -2,7 +2,7 @@
 id: lem-cm-verlet-local-truncation-error-is-cubic
 kind: lemma
 title: 'The velocity-Verlet step matches the exact flow through order two: local truncation error $O(h^3)$ on a convex tube'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

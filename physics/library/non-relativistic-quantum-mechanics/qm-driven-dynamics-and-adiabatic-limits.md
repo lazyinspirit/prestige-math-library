@@ -1,7 +1,7 @@
 ---
 page: qm-driven-dynamics-and-adiabatic-limits
 title: Qm Driven Dynamics And Adiabatic Limits
-status: draft
+status: published
 library: physics
 items:
   - def-nrqm-driven-dynamics-framework-driven-model

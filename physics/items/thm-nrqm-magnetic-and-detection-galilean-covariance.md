@@ -4,7 +4,7 @@ aliases: [ nrqm-magnetic-and-detection-galilean-covariance ]
 kind: theorem
 domain: mathematics
 title: "Galilean boost covariance of the Schrodinger model with bounded potential"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

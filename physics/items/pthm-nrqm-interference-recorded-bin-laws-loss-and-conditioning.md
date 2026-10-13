@@ -4,7 +4,7 @@ aliases: [nrqm-interference-recorded-bin-laws-loss-and-conditioning]
 kind: physics-theorem
 domain: physics
 title: "Recorded bin laws, loss and conditioning of the declared two-path detector"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps: [def-nrqm-interference-two-path-preparation-and-detection-model, def-nrqm-interference-recorded-detector-and-sampling-model, pthm-nrqm-interference-coherent-and-mixture-detection-laws, post-nrqm-framework-observable-and-probability, def-trace-class-operator, def-trace-of-a-trace-class-operator, def-hilbert-space-adjoint, def-real-and-complex-inner-product-space, cor-cauchy-schwarz-inequality-for-l-two, thm-trace-is-absolutely-convergent-and-basis-independent, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-positive-square-root, def-probability-measure, def-measure, def-countable-choice, def-axiom-of-choice]

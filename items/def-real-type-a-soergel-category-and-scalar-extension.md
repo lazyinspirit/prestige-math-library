@@ -2,7 +2,7 @@
 id: def-real-type-a-soergel-category-and-scalar-extension
 kind: definition
 title: "The real type-A Soergel category by scalar extension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

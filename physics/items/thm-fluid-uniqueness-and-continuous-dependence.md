@@ -2,7 +2,7 @@
 id: thm-fluid-uniqueness-and-continuous-dependence
 kind: theorem
 title: "Uniqueness of smooth periodic solutions and continuous dependence in $H^{s-1}$ on the common local interval"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 8

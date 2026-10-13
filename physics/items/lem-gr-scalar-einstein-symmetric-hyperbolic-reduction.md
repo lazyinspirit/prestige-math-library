@@ -2,7 +2,7 @@
 id: lem-gr-scalar-einstein-symmetric-hyperbolic-reduction
 kind: lemma
 title: "Symmetric hyperbolic reduction of the Einstein-scalar system and on-shell conservation"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

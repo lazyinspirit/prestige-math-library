@@ -7,7 +7,7 @@ requires:
   - gr-tensors-and-observers
 page: gr-local-and-global-energy-examples
 title: "Local And Global Energy — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

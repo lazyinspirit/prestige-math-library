@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-dyson-truncation-bound]
 kind: lemma
 domain: mathematics
 title: "Dyson truncation bound"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [lem-linearity-of-the-bochner-integral, thm-nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, lem-bochner-integral-norm-inequality, thm-bochner-integrability-criterion, def-countable-choice]

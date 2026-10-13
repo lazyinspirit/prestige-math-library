@@ -2,7 +2,7 @@
 id: lem-general-hecke-residue-branching-endpoints-from-normalized-schur-cells
 kind: lemma
 title: "General Hecke residue branching endpoints from normalized Schur cells"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

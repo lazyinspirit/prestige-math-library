@@ -3,7 +3,7 @@ id: def-nrqm-state-geometry-pure-mixed-states-and-purity
 kind: definition
 domain: mathematics
 title: "The state space: density operators, pure and mixed states, and purity"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-nrqm-state-geometry-state-vectors-and-rays, lem-nrqm-state-geometry-ray-to-rank-one-projection, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-rank-one-operator-calculus, def-trace-class-operator, def-trace-of-a-trace-class-operator, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-space-adjoint, thm-trace-class-is-a-two-sided-banach-operator-ideal, def-countable-choice]

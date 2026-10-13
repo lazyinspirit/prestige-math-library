@@ -2,7 +2,7 @@
 id: post-em-electrostatic-conductor-model
 kind: postulate
 title: "The ideal electrostatic conductor model"
-status: draft
+status: published
 origin: session
 dependency_level: 16
 domain: physics

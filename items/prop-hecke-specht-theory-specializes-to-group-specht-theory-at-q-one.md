@@ -2,7 +2,7 @@
 id: prop-hecke-specht-theory-specializes-to-group-specht-theory-at-q-one
 kind: proposition
 title: "Hecke Specht theory specialises to group Specht theory at q = 1"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

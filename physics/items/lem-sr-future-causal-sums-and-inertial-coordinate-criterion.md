@@ -2,7 +2,7 @@
 id: lem-sr-future-causal-sums-and-inertial-coordinate-criterion
 kind: lemma
 title: "The closed future cone in inertial coordinates: description, finite sums, and the coordinate criterion for causal reachability"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

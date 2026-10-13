@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Definite parity of nondegenerate eigenstates and the
   position-matrix-element selection rule"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

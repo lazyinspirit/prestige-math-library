@@ -2,7 +2,7 @@
 id: lem-gr-tt-screen-projector
 kind: lemma
 title: "The screen and spatial projectors are orthogonal projections of rank two and three, and the TT projection is the orthogonal projection onto the two-dimensional transverse-traceless space"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

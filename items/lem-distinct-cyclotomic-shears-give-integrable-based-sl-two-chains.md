@@ -2,7 +2,7 @@
 id: lem-distinct-cyclotomic-shears-give-integrable-based-sl-two-chains
 kind: lemma
 title: "Distinct cyclotomic shears give integrable based quantum sl-two chains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

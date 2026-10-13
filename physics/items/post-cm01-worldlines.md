@@ -2,7 +2,7 @@
 id: post-cm01-worldlines
 kind: postulate
 title: "Particle labels, worldlines, the frame-time parameter condition and fixed inertial masses"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 5

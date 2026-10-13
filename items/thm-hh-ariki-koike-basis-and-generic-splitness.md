@@ -2,7 +2,7 @@
 id: thm-hh-ariki-koike-basis-and-generic-splitness
 kind: theorem
 title: "The Ariki–Koike PBW basis and generic splitness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 3

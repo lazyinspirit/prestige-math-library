@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The bounded-control driven model: mild propagator, interaction-picture
   evolution and equivalence of the two readings"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

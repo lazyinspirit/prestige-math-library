@@ -2,7 +2,7 @@
 id: pthm-cm13-hamiltonian-field-integrates-the-model-equations
 kind: physics-theorem
 title: "Cartesian model motions on the potential branch and declared generalized-coordinate Lagrange equations integrate their Hamiltonian fields; the forced Cartesian field is Hamiltonian exactly when the residual force has a velocity-independent potential"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 20

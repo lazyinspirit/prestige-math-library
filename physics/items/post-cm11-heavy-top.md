@@ -2,7 +2,7 @@
 id: post-cm11-heavy-top
 kind: postulate
 title: "Adoption of the heavy symmetric top branch: axisymmetric rigid material, a fixed pivot material point, a uniform gravitational field and the balance of angular momentum about the pivot"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

@@ -1,7 +1,7 @@
 ---
 page: complex-algebraic-stratified-topology-examples
 title: "Complex Algebraic Stratified Topology Examples"
-status: draft
+status: published
 items: []
 examples: [ex-a-noncompact-algebraic-line-needs-a-deleted-boundary-triangulation]
 requires:

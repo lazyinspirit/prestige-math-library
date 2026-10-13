@@ -1,7 +1,7 @@
 ---
 page: cm15-scattering-and-impulse-model-boundaries-examples
 title: "Scattering and impulse model boundaries — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

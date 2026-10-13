@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Gauge covariance of the prescribed-coupling model: unitary equivalence,
   the symmetry criterion and the transported propagator"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

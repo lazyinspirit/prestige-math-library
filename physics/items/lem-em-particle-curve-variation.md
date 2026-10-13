@@ -3,7 +3,7 @@ id: lem-em-particle-curve-variation
 kind: lemma
 domain: mathematics
 title: "Fixed-endpoint variation of the relativistic particle functional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 12

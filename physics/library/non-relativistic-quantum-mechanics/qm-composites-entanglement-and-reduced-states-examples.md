@@ -1,7 +1,7 @@
 ---
 page: qm-composites-entanglement-and-reduced-states-examples
 title: "Qm Composites Entanglement And Reduced States — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

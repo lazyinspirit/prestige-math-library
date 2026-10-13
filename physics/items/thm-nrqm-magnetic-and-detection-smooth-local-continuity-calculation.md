@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-smooth-local-continuity-calculation]
 kind: theorem
 domain: mathematics
 title: "Smooth local continuity equation and its integrated forms"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-differentiation-under-the-integral-sign, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, thm-dominated-convergence, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, cor-mean-value-theorem, def-directional-and-partial-derivatives, def-laplacian-of-a-c2-function, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-unbounded-integral-against-a-pvm, def-complex-lp-and-euclidean-test-function-conventions, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-axiom-of-choice]

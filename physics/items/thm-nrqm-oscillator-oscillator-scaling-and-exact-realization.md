@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-oscillator-scaling-and-exact-realization]
 kind: theorem
 domain: mathematics
 title: "Oscillator scaling and exact realization"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma, thm-nrqm-oscillator-diagonal-spectrum, thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, thm-nrqm-oscillator-hermite-completeness, cor-c-one-change-of-variables-for-l-one-functions, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-test-function-space-d-of-an-open-set, cor-cauchy-schwarz-inequality-for-l-two, thm-chain-rule, thm-algebra-of-derivatives, thm-ftc-second-part, def-hilbert-space, def-countable-choice]

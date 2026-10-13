@@ -2,7 +2,7 @@
 id: def-level-one-partition-fock-space-and-node-residues
 kind: definition
 title: "The level-one partition Fock space and node residues"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 13

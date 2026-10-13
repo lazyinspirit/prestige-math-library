@@ -2,7 +2,7 @@
 id: lem-formal-adjoints-of-differential-operators-exist-and-are-unique
 kind: lemma
 title: "Formal adjoints of differential operators on metric vector bundles"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

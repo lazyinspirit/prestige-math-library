@@ -2,7 +2,7 @@
 id: ex-sr-four-velocity-and-acceleration-of-a-circular-worldline
 kind: example
 title: "Worked example: four-velocity and four-acceleration of uniform circular motion"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 12

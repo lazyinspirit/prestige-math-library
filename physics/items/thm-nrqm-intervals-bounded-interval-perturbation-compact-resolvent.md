@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-bounded-interval-perturbation-compact-reso
 kind: theorem
 domain: mathematics
 title: "Bounded perturbations of the interval Dirichlet Laplacian"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-integration-by-parts, thm-nrqm-intervals-dirichlet-diagonal-domain-identification, lem-nrqm-intervals-compact-resolvent-eigenbasis, cor-independent-set-is-no-larger-than-a-finite-spanning-set, def-dimension, def-linear-basis, thm-kato-rellich, def-relative-boundedness-with-respect-to-an-operator, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, lem-compositions-with-a-compact-operator-are-compact, thm-min-max-principle-below-essential-spectrum, lem-spectral-form-domain-and-core-of-a-semibounded-operator, def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-hilbert-space, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-compact-linear-operator, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-countable-choice, def-axiom-of-choice]

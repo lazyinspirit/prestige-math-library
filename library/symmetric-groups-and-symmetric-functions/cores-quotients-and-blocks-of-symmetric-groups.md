@@ -1,7 +1,7 @@
 ---
 page: cores-quotients-and-blocks-of-symmetric-groups
 title: "Cores, Quotients, and Blocks of Symmetric Groups"
-status: draft
+status: published
 requires:
   - integral-specht-modules-and-modular-simple-modules
   - type-a-hecke-specht-modules-and-cellular-bases

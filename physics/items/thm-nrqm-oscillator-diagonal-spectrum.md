@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-diagonal-spectrum]
 kind: theorem
 domain: mathematics
 title: "Diagonal spectrum"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma, def-resolvent-of-a-closed-operator, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-hilbert-space, def-countable-choice]

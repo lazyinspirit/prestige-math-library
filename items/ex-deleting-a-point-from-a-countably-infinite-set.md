@@ -2,7 +2,7 @@
 id: ex-deleting-a-point-from-a-countably-infinite-set
 kind: example
 title: "Deleting one point of a countably infinite set leaves a set equinumerous with it"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

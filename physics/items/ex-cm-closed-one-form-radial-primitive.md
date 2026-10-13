@@ -2,7 +2,7 @@
 id: ex-cm-closed-one-form-radial-primitive
 kind: example
 title: "A closed field on a star-shaped domain with its radial primitive computed"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

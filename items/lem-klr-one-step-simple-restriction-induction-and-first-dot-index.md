@@ -2,7 +2,7 @@
 id: lem-klr-one-step-simple-restriction-induction-and-first-dot-index
 kind: lemma
 title: "One-step simple restriction and induction, and the first-dot index"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

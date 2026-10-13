@@ -2,7 +2,7 @@
 id: lem-dj-bridge-sign-automorphism-and-star-dual
 kind: lemma
 title: "The Hecke sign automorphism, pullback and contragredient dual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

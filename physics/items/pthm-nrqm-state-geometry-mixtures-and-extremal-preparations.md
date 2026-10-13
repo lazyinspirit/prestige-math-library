@@ -4,7 +4,7 @@ kind: physics-theorem
 domain: physics
 title: "Statistical mixtures, spectral decompositions and the extremal role of
   pure preparations"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps:

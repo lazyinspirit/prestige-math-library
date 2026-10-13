@@ -2,7 +2,7 @@
 id: thm-gr-flat-linearized-curvature-and-gauge
 kind: theorem
 title: "First-order curvature of a flat linearized family, gauge transformations and the quadratic remainder"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

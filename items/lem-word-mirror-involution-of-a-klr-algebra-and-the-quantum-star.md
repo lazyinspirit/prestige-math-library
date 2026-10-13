@@ -2,7 +2,7 @@
 id: lem-word-mirror-involution-of-a-klr-algebra-and-the-quantum-star
 kind: lemma
 title: "The word-mirror involution of a KLR algebra and the quantum star"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

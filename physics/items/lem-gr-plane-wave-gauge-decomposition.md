@@ -2,7 +2,7 @@
 id: lem-gr-plane-wave-gauge-decomposition
 kind: lemma
 title: "Harmonic-gauge plane-wave amplitudes split uniquely into a pure plane-wave gauge part and a transverse-traceless representative, with a two-dimensional space of polarizations"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

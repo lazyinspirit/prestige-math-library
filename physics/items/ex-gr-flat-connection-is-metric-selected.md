@@ -2,7 +2,7 @@
 id: ex-gr-flat-connection-is-metric-selected
 kind: example
 title: "The coordinate connection of the flat chart is metric-selected"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

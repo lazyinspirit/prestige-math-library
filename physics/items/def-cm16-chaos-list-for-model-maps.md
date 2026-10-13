@@ -2,7 +2,7 @@
 id: def-cm16-chaos-list-for-model-maps
 kind: definition
 title: "Chaos in the stated sense for maps of the model: topological mixing, dense periodic points and sensitive dependence, as one precise list among several"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

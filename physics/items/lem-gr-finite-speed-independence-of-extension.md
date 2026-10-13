@@ -2,7 +2,7 @@
 id: lem-gr-finite-speed-independence-of-extension
 kind: lemma
 title: "Finite speed of propagation for linear symmetric hyperbolic systems: cone domination and independence of the extension"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

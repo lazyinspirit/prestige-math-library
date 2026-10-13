@@ -2,7 +2,7 @@
 id: ex-dj-bridge-singular-two-tableau-shape
 kind: example
 title: "The two-tableau pairing at a singular parameter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

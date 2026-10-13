@@ -1,7 +1,7 @@
 ---
 page: em-electrostatic-boundaries-and-conductors
 title: "Electrostatic boundaries and conductors"
-status: draft
+status: published
 library: physics
 items: [lem-em-boundary-of-a-bounded-smooth-domain-is-a-compact-embedded-hypersurface, lem-em-vacuum-region-of-conductors-is-a-bounded-smooth-domain, lem-em-half-space-harmonic-uniqueness-with-decay, post-em-electrostatic-conductor-model, pthm-em-conductor-surface-charge, pthm-em-electrostatic-bvp-uniqueness, pthm-em-electrostatic-bvp-existence, pthm-em-image-method-certificate, pthm-em-capacitance-energy]
 examples: []

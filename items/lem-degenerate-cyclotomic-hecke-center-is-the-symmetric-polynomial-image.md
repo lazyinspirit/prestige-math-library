@@ -2,7 +2,7 @@
 id: lem-degenerate-cyclotomic-hecke-center-is-the-symmetric-polynomial-image
 kind: lemma
 title: "The degenerate cyclotomic Hecke center is the symmetric polynomial image"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

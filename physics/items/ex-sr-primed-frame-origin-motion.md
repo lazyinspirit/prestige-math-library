@@ -2,7 +2,7 @@
 id: ex-sr-primed-frame-origin-motion
 kind: example
 title: Worked motion of the primed frame's origin under a passive boost
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

@@ -2,7 +2,7 @@
 id: thm-the-highest-weight-crystal-b-lambda-exists
 kind: theorem
 title: "The canonical crystal $B(\\lambda)$ is a highest weight crystal of highest weight $\\lambda$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

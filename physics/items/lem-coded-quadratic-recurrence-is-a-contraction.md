@@ -2,7 +2,7 @@
 id: lem-coded-quadratic-recurrence-is-a-contraction
 kind: lemma
 title: "The square-root recurrence $T_s(x)_n = s_n\\sqrt{a+x_{n-1}+x_{n+1}}$ is a contraction of $B_R$ with a unique coded solution"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

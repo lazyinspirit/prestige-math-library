@@ -2,7 +2,7 @@
 id: def-affine-space-and-displacement
 kind: definition
 title: "Affine spaces over a real vector space and displacement vectors"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

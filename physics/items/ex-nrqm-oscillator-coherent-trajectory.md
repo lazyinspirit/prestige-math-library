@@ -4,7 +4,7 @@ aliases: [ nrqm-oscillator-example-coherent-trajectory ]
 kind: example
 domain: physics
 title: "A coherent-state trajectory: period, phase-space ellipse and constant spreads"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 14
 deps:

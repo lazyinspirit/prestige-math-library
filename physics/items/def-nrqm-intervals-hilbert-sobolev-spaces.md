@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-hilbert-sobolev-spaces]
 kind: definition
 domain: mathematics
 title: "One-dimensional Sobolev spaces on intervals"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-weak-derivative-of-a-locally-integrable-function, def-locally-integrable-function-as-a-regular-distribution, def-complex-lp-and-euclidean-test-function-conventions, def-l-p-space-as-a-quotient-by-null-functions, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-hilbert-space, def-countable-choice]

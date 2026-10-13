@@ -2,7 +2,7 @@
 id: lem-the-fock-pairing-matches-projective-simple-and-standard-costandard-pairings
 kind: lemma
 title: "The Fock pairing matches the projective-simple and standard-costandard pairings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 29

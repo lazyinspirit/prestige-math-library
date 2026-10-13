@@ -3,7 +3,7 @@ id: cex-nrqm-state-geometry-zero-vector-is-not-a-preparation
 kind: counterexample
 domain: physics
 title: "The zero vector determines no pure preparation and no state"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps:

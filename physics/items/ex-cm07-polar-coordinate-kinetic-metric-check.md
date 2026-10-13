@@ -2,7 +2,7 @@
 id: ex-cm07-polar-coordinate-kinetic-metric-check
 kind: example
 title: "Cylindrical coordinates for one label: the kinetic metric m diag(1, r^2, 1) and the coordinate form of the model's equation"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

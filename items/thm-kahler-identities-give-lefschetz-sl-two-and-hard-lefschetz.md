@@ -2,7 +2,7 @@
 id: thm-kahler-identities-give-lefschetz-sl-two-and-hard-lefschetz
 kind: theorem
 title: "Kähler identities give Lefschetz sl-two and hard Lefschetz"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

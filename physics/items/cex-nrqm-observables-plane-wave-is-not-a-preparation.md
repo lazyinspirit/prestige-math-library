@@ -5,7 +5,7 @@ kind: counterexample
 domain: physics
 title: "The plane wave and the point-localized delta are not preparations of the
   model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

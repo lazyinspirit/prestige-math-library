@@ -2,7 +2,7 @@
 id: lem-cm-uniform-second-order-remainder-bound
 kind: lemma
 title: "A uniform Hessian bound controls the second-order Taylor remainder"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-ck-euclidean-maps-and-diffeomorphisms, def-convex-subset-of-euclidean-space, def-euclidean-inner-product, def-euclidean-linear-map, def-hessian-and-euclidean-critical-point, def-jacobian-matrix-and-gradient, def-matrix-space, def-multivariable-taylor-polynomial, def-operator-norm-on-a-finite-dimensional-inner-product-space, thm-cauchy-schwarz-in-an-inner-product-space, thm-clairaut-schwarz-mixed-partials, thm-multivariable-taylor-formula-with-lagrange-remainder, thm-operator-norm-is-the-largest-singular-value]

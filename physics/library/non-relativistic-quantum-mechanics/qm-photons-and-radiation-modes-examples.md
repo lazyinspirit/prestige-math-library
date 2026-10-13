@@ -1,7 +1,7 @@
 ---
 page: qm-photons-and-radiation-modes-examples
 title: "Qm Photons And Radiation Modes — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

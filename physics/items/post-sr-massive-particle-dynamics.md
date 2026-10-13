@@ -2,7 +2,7 @@
 id: post-sr-massive-particle-dynamics
 kind: postulate
 title: "Adopted massive-particle momentum, observer measurement and isolated-collision conservation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "Classical massive point particles with positive constant invariant mass in flat Minkowski spacetime, with ideal clocks, ideal light signals and SI conventions. The model identifies E_n, q_n, T_n with observer measurements and adopts four-momentum balance for isolated collisions, including ideal massless legs as defined by the separate massless postulate. The single-particle equation applies only to massive C2 worldlines. Excludes internal structure, spin, radiation reaction, variable-mass dynamics, gravity, continuum matter, quantum and statistical effects, and empirical reports; a force law and interaction mechanism are separate premises."

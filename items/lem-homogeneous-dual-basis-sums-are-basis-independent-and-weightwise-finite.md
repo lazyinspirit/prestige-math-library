@@ -2,7 +2,7 @@
 id: lem-homogeneous-dual-basis-sums-are-basis-independent-and-weightwise-finite
 kind: lemma
 title: "Homogeneous dual-basis sums: basis independence and weightwise finiteness"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The Schroedinger-picture flow: unitarity, domain invariance and the
   domain-qualified equation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps:

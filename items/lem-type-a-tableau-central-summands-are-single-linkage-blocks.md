@@ -2,7 +2,7 @@
 id: lem-type-a-tableau-central-summands-are-single-linkage-blocks
 kind: lemma
 title: "Type-A tableau central summands are single linkage blocks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

@@ -2,7 +2,7 @@
 id: thm-gr-local-geometric-development
 kind: theorem
 title: "Local geometric development for a fixed covariant Einstein-matter model with complete constrained data"
-status: draft
+status: published
 origin: session
 domain: mathematics
 provenance:

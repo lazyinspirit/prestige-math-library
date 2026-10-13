@@ -2,7 +2,7 @@
 id: def-gr-metric-volume-form-and-current-flux
 kind: definition
 title: "The metric volume form, current flux through 3-faces and finite-chain charges"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

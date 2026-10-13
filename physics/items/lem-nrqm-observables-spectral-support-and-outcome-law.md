@@ -4,7 +4,7 @@ aliases: [nrqm-observables-spectral-support-and-outcome-law]
 kind: lemma
 domain: mathematics
 title: "Support of the spectral measure, the spectrum and the values of the scalar law"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-projection-valued-measure, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-q-and-irrationals-dense-r, lem-scalar-and-complex-measures-from-a-pvm, thm-rationals-countable, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus]

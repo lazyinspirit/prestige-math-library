@@ -2,7 +2,7 @@
 id: thm-middle-perverse-t-structure-glues-and-has-simple-intersection-complexes
 kind: theorem
 title: "Middle perverse t structure glues and has simple intersection complexes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 22

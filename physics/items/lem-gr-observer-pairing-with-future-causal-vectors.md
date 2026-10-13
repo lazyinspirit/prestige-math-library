@@ -2,7 +2,7 @@
 id: lem-gr-observer-pairing-with-future-causal-vectors
 kind: lemma
 title: "Pairing of an observer with future causal vectors"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

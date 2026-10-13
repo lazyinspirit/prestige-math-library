@@ -2,7 +2,7 @@
 id: def-hh-multipartitions-standard-tableaux-and-generic-contents
 kind: definition
 title: "Multipartitions, standard multitableaux, and generic contents"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 0

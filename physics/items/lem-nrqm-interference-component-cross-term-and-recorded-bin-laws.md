@@ -4,7 +4,7 @@ aliases: [nrqm-interference-component-cross-term-and-recorded-bin-laws]
 kind: lemma
 domain: mathematics
 title: "Component amplitudes, coherent and incoherent bin laws, and recorded detector weights"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, cor-cauchy-schwarz-inequality-for-l-two, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-monotone-convergence-for-the-integral, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-measure, def-probability-measure, def-countable-choice]

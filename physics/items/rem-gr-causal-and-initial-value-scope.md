@@ -2,7 +2,7 @@
 id: rem-gr-causal-and-initial-value-scope
 kind: remark
 title: "Scope and status of the causal and initial-value material: model conditions, predictions and deferred theorems"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

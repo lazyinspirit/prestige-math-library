@@ -3,7 +3,7 @@ id: cex-cm14-free-particle-noncompact-fibre
 kind: counterexample
 title: "A free label: a nonempty regular common level set of a completely
   integrable datum that is noncompact and has no period lattice"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 27

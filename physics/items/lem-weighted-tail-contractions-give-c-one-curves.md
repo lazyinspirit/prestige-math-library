@@ -2,7 +2,7 @@
 id: lem-weighted-tail-contractions-give-c-one-curves
 kind: lemma
 title: "Weighted half-tail contractions for $q_n=M_{s_n}(q_{n-1},q_{n+1})$ give a unique $C^1$ curve with tangent slope bounded by $c/(1-q)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

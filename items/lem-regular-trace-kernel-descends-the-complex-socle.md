@@ -2,7 +2,7 @@
 id: lem-regular-trace-kernel-descends-the-complex-socle
 kind: lemma
 title: "Rational descent of a complex monodromy socle"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

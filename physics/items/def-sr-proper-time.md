@@ -2,7 +2,7 @@
 id: def-sr-proper-time
 kind: definition
 title: "Proper time along a future timelike worldline"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 8

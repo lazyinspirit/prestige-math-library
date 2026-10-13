@@ -1,7 +1,7 @@
 ---
 page: qm-math-magnetic-and-detection
 title: Qm Math Magnetic And Detection
-status: draft
+status: published
 items:
   - def-nrqm-magnetic-and-detection-position-and-momentum-operators
   - lem-nrqm-magnetic-and-detection-weak-product-rule

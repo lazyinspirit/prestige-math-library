@@ -2,7 +2,7 @@
 id: def-regular-integral-dot-orbit-labelling-convention
 kind: definition
 title: "The regular integral dot-orbit labelling convention"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

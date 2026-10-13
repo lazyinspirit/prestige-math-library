@@ -3,7 +3,7 @@ id: exp-sr-stored-lithium-ion-doppler-time-dilation-2014
 kind: experiment
 domain: physics
 title: "Reported stored-lithium-ion Ives-Stilwell Doppler experiment at 0.338c (2014)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 deps:

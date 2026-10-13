@@ -2,7 +2,7 @@
 id: lem-sr-endpoint-displacement-of-a-future-timelike-worldline
 kind: lemma
 title: "The displacement of a future timelike worldline is future timelike"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 proof_strategy: direct

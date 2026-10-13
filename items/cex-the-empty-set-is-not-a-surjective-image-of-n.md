@@ -2,7 +2,7 @@
 id: cex-the-empty-set-is-not-a-surjective-image-of-n
 kind: counterexample
 title: "The empty set is at most countable but no function from $\\mathbb{N}$ is onto it"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

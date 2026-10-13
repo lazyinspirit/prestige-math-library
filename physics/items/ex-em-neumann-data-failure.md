@@ -2,7 +2,7 @@
 id: ex-em-neumann-data-failure
 kind: example
 title: "Incompatible total flux forbids a solution"
-status: draft
+status: published
 origin: session
 dependency_level: 19
 domain: physics

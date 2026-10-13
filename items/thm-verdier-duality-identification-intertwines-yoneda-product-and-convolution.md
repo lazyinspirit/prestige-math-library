@@ -2,7 +2,7 @@
 id: thm-verdier-duality-identification-intertwines-yoneda-product-and-convolution
 kind: theorem
 title: "Verdier-duality identification intertwines Yoneda product and oriented convolution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 25

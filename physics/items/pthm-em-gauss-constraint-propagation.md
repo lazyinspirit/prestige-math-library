@@ -3,7 +3,7 @@ id: pthm-em-gauss-constraint-propagation
 kind: physics-theorem
 title: "Propagation of the Gauss constraints, persistent defects and the full-Maxwell corollary"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 17
 deps: [post-em-vacuum-maxwell,

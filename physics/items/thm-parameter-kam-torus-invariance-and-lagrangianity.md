@@ -2,7 +2,7 @@
 id: thm-parameter-kam-torus-invariance-and-lagrangianity
 kind: theorem
 title: "The parameter KAM limit: invariant quasi-periodic motion with frequency $\\nu$ and Lagrangian images"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 9

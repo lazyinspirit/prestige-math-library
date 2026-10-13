@@ -2,7 +2,7 @@
 id: ex-sr-affine-chart-transition
 kind: example
 title: "Worked affine transition between two inertial charts"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

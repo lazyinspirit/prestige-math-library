@@ -3,7 +3,7 @@ id: ex-sr-velocity-transformation-worked
 kind: example
 domain: mathematics
 title: "Worked velocity transformation: collinear, transverse and null cases"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

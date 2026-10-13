@@ -2,7 +2,7 @@
 id: def-sr-observed-energy-momentum-and-kinetic-energy
 kind: definition
 title: "Observer energy, spatial momentum, invariant mass, rest energy and kinetic energy of a four-momentum"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

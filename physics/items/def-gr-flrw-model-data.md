@@ -3,7 +3,7 @@ id: def-gr-flrw-model-data
 kind: definition
 title: "FLRW model data: warped product metric, cosmic time, comoving
   congruence, scale factor and Hubble parameter"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

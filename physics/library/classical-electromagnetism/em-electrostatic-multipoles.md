@@ -1,7 +1,7 @@
 ---
 page: em-electrostatic-multipoles
 title: "Electrostatic multipoles"
-status: draft
+status: published
 items: [def-em-electric-moments, pthm-em-moment-origin-change,
         pthm-em-electric-dipole-expansion, pthm-em-electric-dipole-torque,
         pthm-em-electric-general-multipoles]

@@ -2,7 +2,7 @@
 id: ex-sr-one-plus-one-boost-matrix
 kind: example
 title: "Worked 1+1 boost matrix: metric, determinant, inverse and interval invariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

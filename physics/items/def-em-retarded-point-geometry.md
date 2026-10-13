@@ -3,7 +3,7 @@ id: def-em-retarded-point-geometry
 kind: definition
 title: "Uniformly subluminal prescribed worldline, retarded root and retarded geometric data off the worldline"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 deps: [def-em-lab-geometry, def-em-si-conventions, def-em-relativistic-worldlines-frames, post-em-radiation-selection, lem-em-global-retarded-root, def-ck-euclidean-maps-and-diffeomorphisms, def-euclidean-inner-product, def-em-sources]

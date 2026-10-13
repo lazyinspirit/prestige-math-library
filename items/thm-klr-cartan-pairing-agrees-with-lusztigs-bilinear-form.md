@@ -2,7 +2,7 @@
 id: thm-klr-cartan-pairing-agrees-with-lusztigs-bilinear-form
 kind: theorem
 title: "The KLR Cartan pairing is the Lusztig-normalized half form"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

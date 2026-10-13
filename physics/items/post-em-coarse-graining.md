@@ -2,7 +2,7 @@
 id: post-em-coarse-graining
 kind: postulate
 title: "Declared averaging kernel, macroscopic scale assumptions and averaged fields"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 13

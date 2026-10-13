@@ -1,7 +1,7 @@
 ---
 page: lefschetz-splitting-in-bounded-triangulated-categories-examples
 title: "Lefschetz Splitting In Bounded Triangulated Categories Examples"
-status: draft
+status: published
 items: []
 examples: [ex-hard-lefschetz-splitting-for-a-three-degree-complex]
 requires:

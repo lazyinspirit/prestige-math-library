@@ -2,7 +2,7 @@
 id: lem-gr-universal-development
 kind: lemma
 title: "Existence of a universal development: the quotient of the set-sized family of canonical developments along pairwise maximal common developments"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 37

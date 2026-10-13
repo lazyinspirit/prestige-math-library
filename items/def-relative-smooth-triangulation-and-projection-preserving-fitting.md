@@ -2,7 +2,7 @@
 id: def-relative-smooth-triangulation-and-projection-preserving-fitting
 kind: definition
 title: "Relative smooth triangulations, strong approximation and bundle fitting"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

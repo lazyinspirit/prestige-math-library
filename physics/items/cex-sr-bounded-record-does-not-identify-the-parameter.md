@@ -3,7 +3,7 @@ id: cex-sr-bounded-record-does-not-identify-the-parameter
 kind: counterexample
 domain: physics
 title: "Counterexample: a bounded one-point record need not determine the parameter of an operational model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 deps:

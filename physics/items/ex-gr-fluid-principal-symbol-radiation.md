@@ -2,7 +2,7 @@
 id: ex-gr-fluid-principal-symbol-radiation
 kind: example
 title: "Worked fluid symbol: eigenvalues of the principal matrix for the radiation equation of state at an explicit timelike covector"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 15

@@ -2,7 +2,7 @@
 id: lem-morphisms-of-mixed-hodge-structures-are-strict
 kind: lemma
 title: "Strictness of mixed Hodge morphisms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

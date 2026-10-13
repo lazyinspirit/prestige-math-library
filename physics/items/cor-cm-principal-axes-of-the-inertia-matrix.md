@@ -2,7 +2,7 @@
 id: cor-cm-principal-axes-of-the-inertia-matrix
 kind: corollary
 title: "Principal axes and principal moments of the inertia matrix, and positivity in the nondegenerate case"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

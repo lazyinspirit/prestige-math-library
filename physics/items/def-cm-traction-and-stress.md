@@ -2,7 +2,7 @@
 id: def-cm-traction-and-stress
 kind: definition
 title: "Traction fields and stress matrices representing them"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

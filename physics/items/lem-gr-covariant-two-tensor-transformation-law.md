@@ -2,7 +2,7 @@
 id: lem-gr-covariant-two-tensor-transformation-law
 kind: lemma
 title: "Chart independence and the transformation law of a smooth covariant 2-tensor field"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 1

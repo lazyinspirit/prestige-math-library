@@ -2,7 +2,7 @@
 id: lem-product-general-linear-stiefel-approximations-stabilize-bounded-constructible-hom
 kind: lemma
 title: "General linear Stiefel approximations stabilize bounded constructible Hom"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 15

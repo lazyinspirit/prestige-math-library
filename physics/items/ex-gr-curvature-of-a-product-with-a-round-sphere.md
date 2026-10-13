@@ -2,7 +2,7 @@
 id: ex-gr-curvature-of-a-product-with-a-round-sphere
 kind: example
 title: "Curvature, Ricci, scalar and Einstein tensors of a metric with a round two-sphere factor"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

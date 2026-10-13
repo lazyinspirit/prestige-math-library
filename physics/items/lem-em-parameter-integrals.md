@@ -2,7 +2,7 @@
 id: lem-em-parameter-integrals
 kind: lemma
 title: "Differentiation under the integral sign over a compact measurable set and over a compact $C^1$ surface"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

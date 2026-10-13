@@ -2,7 +2,7 @@
 id: lem-gr-killing-congruence-kinematics-and-energy-current
 kind: lemma
 title: "Kinematics of a timelike Killing congruence and conservation of the redshift-weighted energy current"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

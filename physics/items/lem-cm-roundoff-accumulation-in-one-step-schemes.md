@@ -2,7 +2,7 @@
 id: lem-cm-roundoff-accumulation-in-one-step-schemes
 kind: lemma
 title: 'Additive per-step errors in a Lipschitzian one-step scheme accumulate geometrically: $\eta((1+Lh)^n-1)/(Lh)$'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

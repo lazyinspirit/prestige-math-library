@@ -2,7 +2,7 @@
 id: ex-em-constant-field-trajectory
 kind: example
 title: "Exact trajectory in a uniform electric field and the failure of the unscoped Newtonian extrapolation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

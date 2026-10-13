@@ -2,7 +2,7 @@
 id: ex-gr-flat-slab-explicit-splitting
 kind: example
 title: "Worked flat slab: a rational temporal function with Cauchy levels, complete flow and orthogonal product"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 30

@@ -2,7 +2,7 @@
 id: pthm-em-macroscopic-maxwell
 kind: physics-theorem
 title: "The macroscopic Maxwell equations in terms of D, H and the free sources"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 15

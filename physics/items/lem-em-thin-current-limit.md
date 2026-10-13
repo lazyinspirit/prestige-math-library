@@ -3,7 +3,7 @@ id: lem-em-thin-current-limit
 kind: lemma
 domain: mathematics
 title: "Thin closed current: divergence-free distribution and convergence of its mollified Biot-Savart fields"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

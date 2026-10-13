@@ -2,7 +2,7 @@
 id: ex-holder-at-three-halves-conjugate-exponents
 kind: example
 title: "Hölder at the conjugate pair $p = 3$, $q = 3/2$: an exact equality instance and a strict instance"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

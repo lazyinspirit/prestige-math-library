@@ -1,7 +1,7 @@
 ---
 page: balanced-triples-and-global-crystal-bases-examples
 title: "Balanced Triples and Global Crystal Bases — Examples"
-status: draft
+status: published
 requires: [balanced-triples-and-global-crystal-bases]
 items: [       cex-finite-type-based-modules-need-not-have-finite-basis-compatible-envelopes,
        cex-integrable-based-sl-two-tensor-triples-need-not-be-balanced]

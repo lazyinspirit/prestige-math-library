@@ -2,7 +2,7 @@
 id: lem-gr-weak-field-christoffel-bounds
 kind: lemma
 title: "Uniform Christoffel-symbol bounds for stationary weak-field data"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

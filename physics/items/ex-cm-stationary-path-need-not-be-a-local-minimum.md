@@ -2,7 +2,7 @@
 id: ex-cm-stationary-path-need-not-be-a-local-minimum
 kind: example
 title: "A stationary path that is not a local minimum: the quadratic model $\\mathcal L=\\tfrac12(v^2-4q^2)$ on $[0,\\pi]$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

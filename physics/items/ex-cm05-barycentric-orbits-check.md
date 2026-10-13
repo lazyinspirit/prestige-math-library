@@ -2,7 +2,7 @@
 id: ex-cm05-barycentric-orbits-check
 kind: example
 title: "Barycentric orbits of two unequal masses on declared model data: $p_1=(m_2/M)p$, $p_2=(m_1/M)p$, semiaxes in the ratio $3:1$ and areal rates in the ratio $9:1$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

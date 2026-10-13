@@ -2,7 +2,7 @@
 id: def-gr-wave-screen-and-tt-projection
 kind: definition
 title: "The wave screen of an observer and propagation direction, and the transverse-traceless projection of a symmetric two-tensor"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

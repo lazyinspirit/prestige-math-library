@@ -2,7 +2,7 @@
 id: ex-cm-euler-angle-and-heavy-top-checks
 kind: example
 title: "Finite checks of the Euler-angle parametrization, the angular-velocity formula and a steady precession of the heavy top"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

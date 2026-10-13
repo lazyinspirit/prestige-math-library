@@ -2,7 +2,7 @@
 id: prop-cm-hamiltonian-branch-identities
 kind: proposition
 title: "The Hamiltonian on an inverse Legendre branch: differential, equivalence with the Euler-Lagrange equation, and the energy identity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

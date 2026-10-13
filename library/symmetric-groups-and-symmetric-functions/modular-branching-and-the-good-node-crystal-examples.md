@@ -1,7 +1,7 @@
 ---
 page: modular-branching-and-the-good-node-crystal-examples
 title: "Modular Branching and the Good-Node Crystal — Examples"
-status: draft
+status: published
 requires: [modular-branching-and-the-good-node-crystal]
 items: []
 examples: [ex-good-node-path-from-empty-to-a-p-restricted-partition,

@@ -1,7 +1,7 @@
 ---
 page: em-experiment-analysis-prerequisites-examples
 title: Em Experiment Analysis Prerequisites — Examples
-status: draft
+status: published
 items: []
 examples: [ex-em-experiment-analysis-prerequisites-hypothesis-boundaries]
 ---

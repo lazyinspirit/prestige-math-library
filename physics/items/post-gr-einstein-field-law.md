@@ -2,7 +2,7 @@
 id: post-gr-einstein-field-law
 kind: postulate
 title: "Adopted Einstein field equation in the direct-equation presentation"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

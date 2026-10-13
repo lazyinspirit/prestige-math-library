@@ -2,7 +2,7 @@
 id: lem-analytic-six-operation-support-and-trace-calculus
 kind: lemma
 title: Support localization, base change, projection and trace calculus
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 15

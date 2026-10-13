@@ -1,7 +1,7 @@
 ---
 page: qm-math-oscillator-examples
 title: Qm Math Oscillator — Examples
-status: draft
+status: published
 items: []
 requires:
   - qm-math-oscillator

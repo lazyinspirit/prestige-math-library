@@ -3,7 +3,7 @@ id: lem-gr-dust-initial-data-and-tilted-initialization
 kind: lemma
 title: "Dust initial data: curvature and connection from (h,K), and the tilted
   constrained initialization of the Bianchi residuals"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 22

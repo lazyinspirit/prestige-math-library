@@ -2,7 +2,7 @@
 id: post-sr-free-trajectories-and-clock-hypothesis
 kind: postulate
 title: "Adopted free trajectories of massive particles and the clock hypothesis"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 11

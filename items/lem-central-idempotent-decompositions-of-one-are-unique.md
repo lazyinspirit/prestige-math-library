@@ -2,7 +2,7 @@
 id: lem-central-idempotent-decompositions-of-one-are-unique
 kind: lemma
 title: "Decompositions of the identity into primitive central idempotents are unique"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: lem-cm-symmetric-log-parity-removes-odd-coefficients
 kind: lemma
 title: Symmetry of the splitting map forces $X_j=0$ for every even $j$, so the first possible modified-energy correction is of order $h^2$
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 13

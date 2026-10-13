@@ -2,7 +2,7 @@
 id: lem-gr-constant-component-chart-flatness
 kind: lemma
 title: "A chart with constant metric components has vanishing metric-selected Christoffel symbols and curvature"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

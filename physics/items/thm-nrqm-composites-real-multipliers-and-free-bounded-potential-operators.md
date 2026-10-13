@@ -4,7 +4,7 @@ aliases: [nrqm-composites-real-multipliers-and-free-bounded-potential-operators]
 kind: theorem
 domain: mathematics
 title: "Real multiplication operators and free plus bounded-potential Schrödinger operators"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-lebesgue-measure-and-the-lebesgue-sigma-algebra, thm-riesz-fischer-completeness-of-l-p, thm-dominated-convergence, thm-plancherel, def-fourier-transform-on-l-one-of-rn, lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, def-sobolev-space-wkp-and-its-norm, thm-kato-rellich, def-relative-boundedness-with-respect-to-an-operator, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-schwartz-space-and-its-seminorms, def-countable-choice, def-axiom-of-choice]

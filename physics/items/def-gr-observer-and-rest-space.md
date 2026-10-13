@@ -2,7 +2,7 @@
 id: def-gr-observer-and-rest-space
 kind: definition
 title: "Observers, rest spaces and the spatial projection at an event"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

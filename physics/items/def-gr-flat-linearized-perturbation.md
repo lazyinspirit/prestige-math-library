@@ -2,7 +2,7 @@
 id: def-gr-flat-linearized-perturbation
 kind: definition
 title: "Flat linearized perturbations: families, trace reversal, gauge transformation and harmonic gauge"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

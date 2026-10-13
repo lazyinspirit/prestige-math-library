@@ -2,7 +2,7 @@
 id: def-quantum-weight-module-and-integrability
 kind: definition
 title: "Quantum weight modules, weights in $P$, and integrability"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

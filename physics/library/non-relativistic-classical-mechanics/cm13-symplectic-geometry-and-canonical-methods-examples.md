@@ -1,7 +1,7 @@
 ---
 page: cm13-symplectic-geometry-and-canonical-methods-examples
 title: "Symplectic geometry and canonical methods — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: def-cm-statistical-test-and-size
 kind: definition
 title: "Statistical tests, rejection regions, power functions and size"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-complete-ordered-field, def-measurable-space, def-probability-measure, def-sigma-algebra]

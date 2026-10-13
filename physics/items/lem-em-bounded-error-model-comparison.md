@@ -3,7 +3,7 @@ id: lem-em-bounded-error-model-comparison
 kind: lemma
 domain: mathematics
 title: "Bounded-error model comparison: a derivative lower bound confines compatible parameters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

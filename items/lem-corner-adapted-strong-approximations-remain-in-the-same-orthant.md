@@ -2,7 +2,7 @@
 id: lem-corner-adapted-strong-approximations-remain-in-the-same-orthant
 kind: lemma
 title: "Corner-adapted strong approximations preserve orthant sides"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

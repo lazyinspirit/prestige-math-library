@@ -2,7 +2,7 @@
 id: lem-cyclotomic-klr-word-traces-assemble-a-perfect-symmetric-form
 kind: lemma
 title: "Cyclotomic word traces assemble a perfect symmetric form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 deps: [def-cyclotomic-klr-quotient-at-a-dominant-weight,

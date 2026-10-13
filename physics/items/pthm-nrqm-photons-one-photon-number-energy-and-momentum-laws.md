@@ -2,7 +2,7 @@
 id: pthm-nrqm-photons-one-photon-number-energy-and-momentum-laws
 kind: physics-theorem
 title: "Number, energy and momentum laws of a one-photon preparation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 12

@@ -2,7 +2,7 @@
 id: pthm-cm05-relative-reduction
 kind: physics-theorem
 title: "Two-body reduction of a static central pair-potential model: the relative coordinate is a central-force trajectory for the reduced mass, the centre of mass moves uniformly, and the reconstruction is a bijection"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

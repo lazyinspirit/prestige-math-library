@@ -5,7 +5,7 @@ title: "Finite-range central scattering in the model class: the scattering
   motion on all of time, the asymptotic velocities and impact parameter
   $b=J/\\sqrt{2\\mu E}$, the advance $\\Delta$ with principal deflection $\\arccos(\\cos(\\pi-2\\Delta))$,
   and the cross-section of a deflection branch"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

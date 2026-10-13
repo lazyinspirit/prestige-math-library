@@ -2,7 +2,7 @@
 id: def-holomorphic-kam-domain-and-diophantine-labels
 kind: definition
 title: "Analytic KAM data: angular tori, action-angle neighbourhoods, Fourier cutoffs and Diophantine frequency labels"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-coherent-evolution-and-variance]
 kind: theorem
 domain: mathematics
 title: "Coherent evolution and variance"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [thm-nrqm-oscillator-oscillator-scaling-and-exact-realization, lem-nrqm-oscillator-closed-ladder-domains, thm-nrqm-oscillator-coherent-state-convergence, thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-oscillator-hermite-orthogonality, lem-real-ltwo-multipliers-and-unitary-transport, lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, thm-plancherel, thm-complex-exponential-is-entire-with-derivative-itself, def-adjoint-of-a-densely-defined-unbounded-operator, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-hilbert-space, def-complex-exponential, def-countable-choice, thm-ftc-second-part, thm-chain-rule]

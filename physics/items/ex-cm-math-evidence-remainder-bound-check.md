@@ -2,7 +2,7 @@
 id: ex-cm-math-evidence-remainder-bound-check
 kind: example
 title: "Equality and strictness in the uniform second-order remainder bound"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-convex-subset-of-euclidean-space, def-hessian-and-euclidean-critical-point, def-jacobian-matrix-and-gradient, def-operator-norm-on-a-finite-dimensional-inner-product-space, lem-cm-uniform-second-order-remainder-bound, lem-derivative-of-a-power]

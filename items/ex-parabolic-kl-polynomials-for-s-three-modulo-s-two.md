@@ -2,7 +2,7 @@
 id: ex-parabolic-kl-polynomials-for-s-three-modulo-s-two
 kind: example
 title: "Parabolic Kazhdan–Lusztig polynomials for S_3 modulo S_2"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

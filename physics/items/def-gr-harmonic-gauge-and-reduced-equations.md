@@ -2,7 +2,7 @@
 id: def-gr-harmonic-gauge-and-reduced-equations
 kind: definition
 title: "The harmonic gauge vector, the reduced Einstein equation and the Einstein residual"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

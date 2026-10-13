@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Separated smooth-barrier tunnelling: the declared transmission
   coefficient is exp(-2S/h) up to explicit small-h and barrier-thickness errors"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

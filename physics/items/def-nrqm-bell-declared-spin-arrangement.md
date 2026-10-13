@@ -4,7 +4,7 @@ aliases: [nrqm-bell-declared-spin-arrangement]
 kind: definition
 domain: physics
 title: "Declared spin correlation arrangement of the framework: two spin-half factors, four directions, joint sign tables and local-response models"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps: [def-nrqm-bell-binary-correlation-models, def-nrqm-bell-local-response-representation, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-ideal-conditional-measurement, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-preparation-and-apparatus, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-composites-framework-composite-systems-and-local-readouts, def-nrqm-measurement-framework-declared-measurements-and-instruments, def-nrqm-angular-momentum-framework-angular-momentum-observables, prop-nrqm-orbital-and-spin-finite-spin-matrices, lem-nrqm-composites-local-pvm-tensor-extension, lem-nrqm-composites-bounded-tensor-maps, pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws]

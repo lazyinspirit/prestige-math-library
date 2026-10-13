@@ -2,7 +2,7 @@
 id: thm-compact-smooth-manifolds-with-corners-admit-relative-finite-triangulations
 kind: theorem
 title: "Finite smooth triangulation of compact corners, relative to admissible boundary data"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

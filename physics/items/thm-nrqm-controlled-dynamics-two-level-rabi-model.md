@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-two-level-rabi-model]
 kind: theorem
 domain: mathematics
 title: "Two-level Rabi model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [prop-nrqm-orbital-and-spin-finite-spin-matrices, def-bounded-linear-operator, def-operator-norm, def-hilbert-space]

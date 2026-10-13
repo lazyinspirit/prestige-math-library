@@ -5,7 +5,7 @@ kind: postulate
 domain: physics
 title: "Effective magnetic-moment coupling of the finite-spin model:
   gyromagnetic parameter, magnetic moment and Zeeman energy operator"
-status: draft
+status: published
 origin: session
 dependency_level: 9
 deps:

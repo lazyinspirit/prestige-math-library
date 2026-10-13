@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-closed-semibounded-forms]
 kind: definition
 domain: mathematics
 title: "Closed semibounded symmetric forms and their associated operators"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-hilbert-space, def-inner-product-space, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]

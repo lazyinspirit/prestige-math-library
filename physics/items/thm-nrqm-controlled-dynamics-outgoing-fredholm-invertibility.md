@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-outgoing-fredholm-invertibility]
 kind: theorem
 domain: mathematics
 title: "Outgoing Fredholm invertibility"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps: [thm-nrqm-controlled-dynamics-no-positive-compact-potential-eigenvalues, thm-nrqm-controlled-dynamics-bounded-potential-weak-ucp, lem-nrqm-coulomb-ltwo-kernel-operators-bounded-and-compact, thm-interior-h-two-regularity-for-divergence-form-equations, thm-plancherel, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-sobolev-space-wkp-and-its-norm, def-hilbert-space, def-countable-choice]

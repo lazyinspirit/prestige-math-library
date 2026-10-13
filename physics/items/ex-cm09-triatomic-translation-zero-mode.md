@@ -2,7 +2,7 @@
 id: ex-cm09-triatomic-translation-zero-mode
 kind: example
 title: "A linear triatomic chain: the translation zero mode, the antisymmetric stretch and the symmetric stretch, with the corrected frequency comparison"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

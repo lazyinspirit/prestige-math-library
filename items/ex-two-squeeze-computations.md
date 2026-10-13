@@ -2,7 +2,7 @@
 id: ex-two-squeeze-computations
 kind: example
 title: "Two squeeze computations: $1/((k+1)\\sqrt{k+1}) \\to 0$ and $(k+(-1)^k)/(k+1) \\to 1$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

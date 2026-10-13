@@ -2,7 +2,7 @@
 id: ex-cm09-degenerate-oscillator-subspace
 kind: example
 title: "A doubly degenerate quadratic model: every direction is a mode, the modal basis is not intrinsic, and coupling splits the double frequency"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

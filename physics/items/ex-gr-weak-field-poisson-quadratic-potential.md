@@ -3,7 +3,7 @@ id: ex-gr-weak-field-poisson-quadratic-potential
 kind: example
 title: "Explicit stationary weak-field data with a dimensionless quadratic
   potential: exact Poisson source and the first-order Einstein coefficient"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

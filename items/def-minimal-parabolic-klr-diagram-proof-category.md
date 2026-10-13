@@ -2,7 +2,7 @@
 id: def-minimal-parabolic-klr-diagram-proof-category
 kind: definition
 title: "The minimal-parabolic KLR diagram proof category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

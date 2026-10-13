@@ -13,7 +13,7 @@ requires:
   - gr-curvature-and-tides
 page: gr-causal-and-initial-value-boundaries
 title: "Causal And Initial Value Boundaries"
-status: draft
+status: published
 library: physics
 items:
   - def-gr-causal-curves-and-reachability

@@ -1,7 +1,7 @@
 ---
 page: rim-hooks-and-the-murnaghan-nakayama-rule-examples
 title: "Rim Hooks and the Murnaghan–Nakayama Rule — Examples"
-status: draft
+status: published
 requires:
   - rim-hooks-and-the-murnaghan-nakayama-rule
 items: []

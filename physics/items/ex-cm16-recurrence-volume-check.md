@@ -2,7 +2,7 @@
 id: ex-cm16-recurrence-volume-check
 kind: example
 title: "A trapped one-label model: the compact energy sublevel of the radial quartic potential is invariant with finite phase volume, so the recurrence theorem applies, while the free model's energy sublevels are unbounded and the hypothesis fails"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 24

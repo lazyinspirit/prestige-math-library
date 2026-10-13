@@ -1,7 +1,7 @@
 ---
 page: compact-kahler-hodge-foundations-examples
 title: "Compact Kahler Hodge Foundations Examples"
-status: draft
+status: published
 items: []
 examples:
 - ex-hodge-and-polarization-of-a-point

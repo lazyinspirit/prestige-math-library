@@ -1,7 +1,7 @@
 ---
 page: em-empirical-tests-and-scope
 title: "Empirical tests and limitations"
-status: draft
+status: published
 library: physics
 items:
   - def-em-experiment-record-contract

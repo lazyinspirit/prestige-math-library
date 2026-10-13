@@ -3,7 +3,7 @@ id: "pthm-em-biot-savart"
 kind: "physics-theorem"
 title: "Biot-Savart representation for a compact smooth conserved current and its declared thin-loop limit"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 19
 deps: ["def-em-steady-current-regime", "def-em-si-conventions", "pthm-em-magnetostatic-vector-potential", "lem-em-newtonian-kernel-curl-identity", "lem-em-thin-current-limit", "def-cross-product-in-r3", "thm-integral-triangle-inequality", "def-integral-over-a-measurable-set", "def-countable-choice", "post-em-ideal-magnetostatic-models"]

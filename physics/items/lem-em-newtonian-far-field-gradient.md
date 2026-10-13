@@ -3,7 +3,7 @@ id: lem-em-newtonian-far-field-gradient
 kind: lemma
 title: The far-field gradient of a compactly supported Newtonian potential
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-laplace-fundamental-solution-with-positive-minus-laplacian-sign", "def-newtonian-potential", "thm-differentiation-under-the-integral-sign", "def-directional-and-partial-derivatives", "def-jacobian-matrix-and-gradient", "def-metric-ball", "def-euclidean-inner-product", "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric", "def-integral-over-a-measurable-set", "def-integrable-real-and-complex-functions-and-their-integrals", "prop-order-and-scalar-rules-for-the-nonnegative-integral", "cor-continuous-functions-are-borel-measurable", "def-measure-null-set-and-almost-everywhere", "def-ck-euclidean-maps-and-diffeomorphisms", "thm-real-power-continuity-and-derivatives", "thm-algebra-of-derivatives", "thm-chain-rule-for-total-derivatives", "def-countable-choice", "thm-dominated-convergence", "thm-continuous-partial-derivatives-imply-total-differentiability", "thm-the-lebesgue-integral-respects-almost-everywhere-equality", "thm-metric-continuity-characterisations", "prop-closure-properties-of-measurable-functions-used-by-the-integral"]

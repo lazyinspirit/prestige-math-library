@@ -2,7 +2,7 @@
 id: thm-proper-pushforward-ext-is-equivariant-borel-moore-homology-of-the-fiber-product
 kind: theorem
 title: "Proper-pushforward Ext is equivariant Borel–Moore homology of the fiber product"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 24

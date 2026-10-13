@@ -2,7 +2,7 @@
 id: ex-cm-elastic-plane-wave-speeds-and-energy
 kind: example
 title: "A longitudinal plane wave in the isotropic elastic model: dispersion check and strain energy at explicit parameters"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

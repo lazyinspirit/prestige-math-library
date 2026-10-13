@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-unbounded-gapped-atomic-adiabatic-estimate]
 kind: theorem
 domain: mathematics
 title: "Unbounded gapped atomic adiabatic estimate"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [lem-nrqm-controlled-dynamics-cc-separable-spectral-calculus, thm-plancherel, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, cor-vector-forms-of-the-divergence-theorem, cor-cauchy-schwarz-inequality-for-l-two, thm-dominated-convergence, thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn, thm-cauchy-integral-formula-circle, thm-nrqm-controlled-dynamics-common-domain-nonautonomous-evolution, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-sobolev-space-wkp-and-its-norm, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-countable-choice]

@@ -2,7 +2,7 @@
 id: thm-indecomposable-projective-functors-are-indexed-by-the-weyl-group
 kind: theorem
 title: Indecomposable projective functors are indexed by the Weyl group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

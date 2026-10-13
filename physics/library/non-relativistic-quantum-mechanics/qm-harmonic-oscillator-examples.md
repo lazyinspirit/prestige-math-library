@@ -1,7 +1,7 @@
 ---
 page: qm-harmonic-oscillator-examples
 title: "Qm Harmonic Oscillator — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

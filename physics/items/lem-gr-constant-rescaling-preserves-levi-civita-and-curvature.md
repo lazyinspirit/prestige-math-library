@@ -3,7 +3,7 @@ id: lem-gr-constant-rescaling-preserves-levi-civita-and-curvature
 kind: lemma
 title: "Constant metric rescaling preserves the connection and Ricci tensor and
   inversely scales scalar and sectional curvature"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

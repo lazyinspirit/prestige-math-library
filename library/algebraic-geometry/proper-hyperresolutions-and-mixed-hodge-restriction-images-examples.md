@@ -1,7 +1,7 @@
 ---
 page: proper-hyperresolutions-and-mixed-hodge-restriction-images-examples
 title: "Proper Hyperresolutions And Mixed Hodge Restriction Images Examples"
-status: draft
+status: published
 items: []
 examples:
 - ex-a-nodal-projective-curve-has-a-weight-zero-cohomology-class

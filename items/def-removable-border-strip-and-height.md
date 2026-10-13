@@ -2,7 +2,7 @@
 id: def-removable-border-strip-and-height
 kind: definition
 title: "Removable border strips and their height"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

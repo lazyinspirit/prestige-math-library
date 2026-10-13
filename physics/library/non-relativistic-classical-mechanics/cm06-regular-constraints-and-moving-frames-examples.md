@@ -1,7 +1,7 @@
 ---
 page: cm06-regular-constraints-and-moving-frames-examples
 title: "Regular constraints and moving frames — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

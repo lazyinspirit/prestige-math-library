@@ -2,7 +2,7 @@
 id: def-cm17-traction-and-stress
 kind: definition
 title: "Traction fields and stress matrices of the continuum model, with units and sign conventions"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

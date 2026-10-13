@@ -2,7 +2,7 @@
 id: thm-gr-timelike-raychaudhuri-and-local-focusing
 kind: theorem
 title: "The Raychaudhuri equation for a geodesic congruence and finite-time focusing"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

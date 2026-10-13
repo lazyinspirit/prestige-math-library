@@ -2,7 +2,7 @@
 id: ex-a-rational-expression-limit
 kind: example
 title: "A rational expression in $k$: $(2(k+1)+3)/(5(k+1)+1) \\to 2/5$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: lem-generation-degree-bounds-surjectivity-degree-and-weight
 kind: lemma
 title: "Bounded generation degree bounds surjectivity degree and weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

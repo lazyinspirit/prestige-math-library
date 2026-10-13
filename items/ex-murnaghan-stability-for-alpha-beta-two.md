@@ -2,7 +2,7 @@
 id: ex-murnaghan-stability-for-alpha-beta-two
 kind: example
 title: "Murnaghan stability for $\\alpha=\\beta=(2)$, ranks 4 to 9"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 14

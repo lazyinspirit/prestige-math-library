@@ -2,7 +2,7 @@
 id: post-cm11-torque-balance
 kind: postulate
 title: "Adoption of the external-torque branch of the rigid-material model: declared torque data and the balance of angular momentum about the centre of mass"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

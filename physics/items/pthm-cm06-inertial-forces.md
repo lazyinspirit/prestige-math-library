@@ -2,7 +2,7 @@
 id: pthm-cm06-inertial-forces
 kind: physics-theorem
 title: "The equation of motion in a moving chart: inertial terms, inertial forces, and when it restricts to an inertial chart"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

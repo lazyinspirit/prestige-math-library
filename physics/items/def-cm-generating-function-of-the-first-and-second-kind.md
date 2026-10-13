@@ -2,7 +2,7 @@
 id: def-cm-generating-function-of-the-first-and-second-kind
 kind: definition
 title: "Generating functions of the first and second kind for a local canonical map"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

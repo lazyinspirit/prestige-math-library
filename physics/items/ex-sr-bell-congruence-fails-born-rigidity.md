@@ -3,7 +3,7 @@ id: ex-sr-bell-congruence-fails-born-rigidity
 kind: example
 domain: mathematics
 title: "Worked Bell-type translated congruence: constant launch-frame separation without Born rigidity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

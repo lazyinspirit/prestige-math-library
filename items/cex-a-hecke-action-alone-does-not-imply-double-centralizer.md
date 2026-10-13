@@ -2,7 +2,7 @@
 id: cex-a-hecke-action-alone-does-not-imply-double-centralizer
 kind: counterexample
 title: "A Hecke action alone does not imply a double centralizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 33

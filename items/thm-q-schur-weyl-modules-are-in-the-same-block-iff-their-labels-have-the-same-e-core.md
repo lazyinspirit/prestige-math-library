@@ -2,7 +2,7 @@
 id: thm-q-schur-weyl-modules-are-in-the-same-block-iff-their-labels-have-the-same-e-core
 kind: theorem
 title: "q-Schur Weyl modules are in the same block iff their labels have the same e-core"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 15

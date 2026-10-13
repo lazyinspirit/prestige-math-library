@@ -4,7 +4,7 @@ kind: theorem
 title: "Local causality in a convex normal ball: causal reachability is the
   exponential cone, the Lorentzian length is bounded by the displacement radius,
   and null endpoints force the null geodesic"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 16

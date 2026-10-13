@@ -2,7 +2,7 @@
 id: lem-string-ideal-decomposition-of-the-integral-lattices
 kind: lemma
 title: "Integrality of the string decomposition and the divided-power string ideals"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

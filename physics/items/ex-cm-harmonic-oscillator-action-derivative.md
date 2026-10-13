@@ -2,7 +2,7 @@
 id: ex-cm-harmonic-oscillator-action-derivative
 kind: example
 title: "The harmonic oscillator action variable $J_{\\mathrm a}(E)=E/\\omega$ and $J_{\\mathrm a}'(E)=T/(2\\pi)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

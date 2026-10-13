@@ -4,7 +4,7 @@ aliases: [ nrqm-symmetries-translation-invariance-and-momentum-conservation ]
 kind: physics-theorem
 domain: physics
 title: "Translation invariance of bounded potentials and conservation of momentum"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

@@ -1,7 +1,7 @@
 ---
 page: qm-bell-models-and-measurement-limits-examples
 title: "Qm Bell Models And Measurement Limits — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

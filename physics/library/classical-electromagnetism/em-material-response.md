@@ -1,7 +1,7 @@
 ---
 page: em-material-response
 title: "Material response and stationary interfaces"
-status: draft
+status: published
 library: physics
 items:
   - post-em-coarse-graining

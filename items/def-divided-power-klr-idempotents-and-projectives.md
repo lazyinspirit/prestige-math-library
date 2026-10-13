@@ -2,7 +2,7 @@
 id: def-divided-power-klr-idempotents-and-projectives
 kind: definition
 title: "Nil-Hecke idempotents and divided-power KLR projectives"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

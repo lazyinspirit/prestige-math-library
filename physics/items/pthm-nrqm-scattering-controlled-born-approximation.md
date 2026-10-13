@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The controlled Born reading: operator-norm condition, uniform amplitude
   error and coupling scaling"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

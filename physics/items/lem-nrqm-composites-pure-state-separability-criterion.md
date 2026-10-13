@@ -4,7 +4,7 @@ kind: lemma
 domain: mathematics
 title: 'Pure-state separability is equivalent to being a product: a Schmidt overlap
   witness'
-status: draft
+status: published
 origin: session
 dependency_level: 4
 deps:

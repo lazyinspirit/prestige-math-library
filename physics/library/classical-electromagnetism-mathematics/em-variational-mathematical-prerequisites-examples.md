@@ -1,7 +1,7 @@
 ---
 page: em-variational-mathematical-prerequisites-examples
 title: Em Variational Mathematical Prerequisites — Examples
-status: draft
+status: published
 items: []
 examples: [ex-em-variational-mathematical-prerequisites-hypothesis-boundaries]
 ---

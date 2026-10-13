@@ -2,7 +2,7 @@
 id: def-gr-curvature-tensor-and-derived-tensors
 kind: definition
 title: "The Riemann curvature operator and the derived Ricci, scalar and Einstein tensors"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

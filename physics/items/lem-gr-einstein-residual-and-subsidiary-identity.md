@@ -2,7 +2,7 @@
 id: lem-gr-einstein-residual-and-subsidiary-identity
 kind: lemma
 title: "The Einstein residual through the gauge vector, and the subsidiary wave equation satisfied by the gauge vector"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

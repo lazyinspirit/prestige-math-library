@@ -2,7 +2,7 @@
 id: pthm-em-dipole-scattering-cross-section
 kind: physics-theorem
 title: "Differential and total cross sections of the ideal harmonic dipole in a plane wave, with actual-source fidelity bounds"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 22

@@ -2,7 +2,7 @@
 id: lem-gr-galerkin-ode-local-solution
 kind: lemma
 title: "The Galerkin system is a smooth finite-dimensional ODE: local existence, smooth dependence and the continuation criterion"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

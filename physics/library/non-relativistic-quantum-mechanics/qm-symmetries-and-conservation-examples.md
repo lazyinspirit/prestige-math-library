@@ -1,7 +1,7 @@
 ---
 page: qm-symmetries-and-conservation-examples
 title: "Qm Symmetries And Conservation — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

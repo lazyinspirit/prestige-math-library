@@ -4,7 +4,7 @@ aliases: [nrqm-composites-countable-kraus-normalization]
 kind: lemma
 domain: mathematics
 title: "Countable Kraus normalization and trace-norm convergence"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-nuclear-series-characterizes-trace-norm, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-rank-one-operator-calculus, thm-spectral-theorem-for-compact-self-adjoint-operators, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-class-iff-product-of-two-hilbert-schmidt-operators, thm-trace-is-absolutely-convergent-and-basis-independent, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-space, def-countable-choice]

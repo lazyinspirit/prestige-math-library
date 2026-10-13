@@ -2,7 +2,7 @@
 id: lem-gr-periodic-sobolev-completeness
 kind: lemma
 title: "Completeness of the periodic Sobolev spaces H^s(T^3_{2 pi}; R^N)"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

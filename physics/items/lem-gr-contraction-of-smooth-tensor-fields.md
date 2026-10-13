@@ -2,7 +2,7 @@
 id: lem-gr-contraction-of-smooth-tensor-fields
 kind: lemma
 title: "Contraction of a smooth tensor field is a smooth tensor field"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

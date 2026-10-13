@@ -2,7 +2,7 @@
 id: lem-kam-parameter-sequences-satisfy-all-step-hypotheses
 kind: lemma
 title: "The KAM parameter sequence: every step satisfies the smallness, truncation, parameter and contraction hypotheses"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 7

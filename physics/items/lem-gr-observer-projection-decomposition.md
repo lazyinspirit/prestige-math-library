@@ -2,7 +2,7 @@
 id: lem-gr-observer-projection-decomposition
 kind: lemma
 title: "The observer rest-space decomposition and the spatial projection"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

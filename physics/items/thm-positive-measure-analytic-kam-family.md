@@ -2,7 +2,7 @@
 id: thm-positive-measure-analytic-kam-family
 kind: theorem
 title: "Positive-measure families of invariant Lagrangian tori for nondegenerate real analytic Hamiltonians: persistence for $\\varepsilon\\le c\\alpha^2$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 11

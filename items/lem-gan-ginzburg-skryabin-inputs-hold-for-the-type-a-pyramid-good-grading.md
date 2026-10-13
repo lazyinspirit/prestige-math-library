@@ -2,7 +2,7 @@
 id: lem-gan-ginzburg-skryabin-inputs-hold-for-the-type-a-pyramid-good-grading
 kind: lemma
 title: "Gan-Ginzburg and Skryabin inputs for the type-A pyramid good grading"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: lem-gr-flat-inertial-cone-criterion-and-sums
 kind: lemma
 title: "The causal cones of the flat model in inertial coordinates, and closure of the future cone under sums"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

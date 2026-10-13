@@ -2,7 +2,7 @@
 id: post-gr-flrw-homogeneous-cosmological-model
 kind: postulate
 title: "Adopted homogeneous and isotropic cosmological model with a comoving perfect fluid"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

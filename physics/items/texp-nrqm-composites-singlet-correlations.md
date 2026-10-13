@@ -5,7 +5,7 @@ kind: thought-experiment
 domain: physics
 title: "The spin singlet of two declared spin-half factors: directional
   correlations, perfect anti-correlation and setting-independent marginals"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

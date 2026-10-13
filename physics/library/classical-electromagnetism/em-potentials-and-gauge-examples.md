@@ -1,7 +1,7 @@
 ---
 page: em-potentials-and-gauge-examples
 title: "Potentials and gauge — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-em-topological-potential-obstructions, ex-em-pure-gauge-fields,
            ex-em-residual-lorenz-example]

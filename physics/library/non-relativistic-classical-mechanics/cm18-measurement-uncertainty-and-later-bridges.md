@@ -1,7 +1,7 @@
 ---
 page: cm18-measurement-uncertainty-and-later-bridges
 title: "Measurement, uncertainty and later bridges"
-status: draft
+status: published
 library: physics
 items:
   - def-cm18-observable-model

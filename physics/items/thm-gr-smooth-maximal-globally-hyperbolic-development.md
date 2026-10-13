@@ -2,7 +2,7 @@
 id: thm-gr-smooth-maximal-globally-hyperbolic-development
 kind: theorem
 title: "Existence and uniqueness of the smooth maximal globally hyperbolic development of constrained initial data in the selected matter sectors"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 40

@@ -3,7 +3,7 @@ id: def-em-guide-cavity-geometry
 kind: definition
 domain: physics
 title: "Rectangular PEC guide and cavity geometry, the zero-normal-B reflection class, and axis-relative TE/TM/TEM"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 17
 deps: [def-bounded-c-k-domain-and-boundary-charts, def-ck-euclidean-maps-and-diffeomorphisms, def-complex-conjugate-real-imaginary-part-and-modulus, def-em-fields, def-em-lab-geometry, def-em-si-conventions, pthm-em-material-stationary-jumps, def-directional-and-partial-derivatives, def-divergence-and-curl-of-a-c1-vector-field, def-laplacian-of-a-c2-function]

@@ -2,7 +2,7 @@
 id: pthm-cm06-multiplier-balance
 kind: physics-theorem
 title: "Ideal holonomic constraints determine the reaction: multiplier form, explicit acceleration, unique constrained motions and the reaction-power identity"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

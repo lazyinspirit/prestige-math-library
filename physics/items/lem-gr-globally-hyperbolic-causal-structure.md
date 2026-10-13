@@ -2,7 +2,7 @@
 id: lem-gr-globally-hyperbolic-causal-structure
 kind: lemma
 title: "In a globally hyperbolic manifold the causal relation is closed and truncated causal cones over compact sets are compact"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 22

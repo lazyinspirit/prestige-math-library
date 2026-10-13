@@ -1,7 +1,7 @@
 ---
 page: cyclotomic-klr-algebras-and-highest-weight-categorification
 title: "Cyclotomic KLR Algebras and Highest-Weight Categorification"
-status: draft
+status: published
 requires: [balanced-triples-and-global-crystal-bases, klr-algebras-induction-and-quantum-serre-categorification, grothendieck-groups-and-graded-cartan-pairings, quantum-affine-type-a-and-level-one-fock-space]
 items: [       def-cyclotomic-klr-quotient-at-a-dominant-weight,
        def-minimal-parabolic-klr-diagram-proof-category,

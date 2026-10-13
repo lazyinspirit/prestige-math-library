@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-finite-gibbs-free-energy-minimum]
 kind: theorem
 domain: mathematics
 title: "Finite Gibbs free-energy minimum"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-nrqm-composites-density-and-scalar-spectral-probability, thm-complex-spectral-theorem-for-normal-endomorphisms, def-trace-class-operator, def-trace-of-a-trace-class-operator, thm-trace-is-absolutely-convergent-and-basis-independent, thm-logarithm-derivative-and-integral, thm-monotonicity-of-the-integral, def-natural-logarithm, def-hilbert-space, def-countable-choice, thm-natural-logarithm-laws]

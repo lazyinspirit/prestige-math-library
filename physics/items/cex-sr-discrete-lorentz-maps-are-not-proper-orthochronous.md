@@ -2,7 +2,7 @@
 id: cex-sr-discrete-lorentz-maps-are-not-proper-orthochronous
 kind: counterexample
 title: The parity and time-reversal maps are Lorentz maps that are not proper, and det = 1 does not imply orthochrony
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

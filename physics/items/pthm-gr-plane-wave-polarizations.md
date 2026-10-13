@@ -2,7 +2,7 @@
 id: pthm-gr-plane-wave-polarizations
 kind: physics-theorem
 title: "Plane-wave polarizations of the linearized vacuum model: two phase coefficients for each of two polarization types"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

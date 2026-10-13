@@ -2,7 +2,7 @@
 id: lem-hh-cyclotomic-straightening-spanning
 kind: lemma
 title: "Integral cyclotomic straightening and bounded PBW spanning"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 2

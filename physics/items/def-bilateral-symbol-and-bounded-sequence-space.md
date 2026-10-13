@@ -2,7 +2,7 @@
 id: def-bilateral-symbol-and-bounded-sequence-space
 kind: definition
 title: "The two-sign bilateral shift space, its coding map, and the ball of bounded bilateral real sequences"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

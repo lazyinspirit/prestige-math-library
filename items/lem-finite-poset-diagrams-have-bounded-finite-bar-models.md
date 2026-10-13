@@ -2,7 +2,7 @@
 id: lem-finite-poset-diagrams-have-bounded-finite-bar-models
 kind: lemma
 title: "Finite poset diagrams have bounded finite bar models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

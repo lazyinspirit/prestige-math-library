@@ -2,7 +2,7 @@
 id: cex-cm-math-evidence-propagation-is-not-exact-for-nonlinear-maps
 kind: counterexample
 title: "The propagated covariance is not the exact covariance of a nonlinear observation map"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [cor-cm-linearization-error-bounds, def-cm-covariance-matrix-of-a-random-vector, def-expectation-on-a-finite-probability-space, def-finite-probability-space-and-event, def-moments-variance-and-covariance, lem-cm-linearized-propagation-of-covariance, lem-derivative-of-a-power, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]

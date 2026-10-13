@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-free-line-resolvent]
 kind: lemma
 domain: mathematics
 title: "The free-line resolvent kernel and its inverse operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-integration-by-parts, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, lem-complex-translation-and-approximate-identity-interfaces, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-complex-exponential, thm-termwise-differentiation-of-complex-power-series, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

@@ -2,7 +2,7 @@
 id: ex-em-evanescent-flux-example
 kind: example
 title: "Total internal reflection: decaying transmitted field, vanishing normal flux and the reflection phase"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 21

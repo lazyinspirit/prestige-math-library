@@ -2,7 +2,7 @@
 id: lem-hecke-trace-bilinear-form-and-its-values-on-the-kazhdan-lusztig-basis
 kind: lemma
 title: "The Hecke trace form, its values on the Kazhdan-Lusztig basis, and the standard pairing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

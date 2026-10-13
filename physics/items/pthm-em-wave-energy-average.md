@@ -2,7 +2,7 @@
 id: pthm-em-wave-energy-average
 kind: physics-theorem
 title: "Period-averaged energy density, Poynting vector and momentum flux of a plane wave"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 19

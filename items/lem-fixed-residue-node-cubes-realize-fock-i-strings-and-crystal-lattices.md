@@ -2,7 +2,7 @@
 id: lem-fixed-residue-node-cubes-realize-fock-i-strings-and-crystal-lattices
 kind: lemma
 title: "Fixed-residue node cubes realize the actual Fock strings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 16

@@ -1,7 +1,7 @@
 ---
 page: cm11-rigid-body-dynamics-and-stability
 title: "Rigid-body dynamics and stability"
-status: draft
+status: published
 library: physics
 items:
   - post-cm11-torque-balance

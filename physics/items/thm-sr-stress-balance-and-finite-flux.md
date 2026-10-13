@@ -2,7 +2,7 @@
 id: thm-sr-stress-balance-and-finite-flux
 kind: theorem
 title: "Finite-box stress balance and the flux form of conservation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-stress-energy-tensor-and-force-density, thm-riemann-fubini-on-product-rectangles, cor-repeated-riemann-integrals-on-rectangles, thm-ftc-second-part, thm-multidimensional-integral-properties, thm-continuous-on-a-rectangle-is-riemann-integrable, def-multidimensional-darboux-integral, thm-extreme-value-metric, def-ck-tensor-field-on-minkowski-space, def-sr-affine-minkowski-model, def-inertial-frame-and-inertial-chart]

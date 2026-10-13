@@ -2,7 +2,7 @@
 id: prop-qg8-categorification-transports-across-the-hecke-klr-bridge
 kind: proposition
 title: "The QG-8 categorification transports across the blockwise Hecke-KLR bridge"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 36

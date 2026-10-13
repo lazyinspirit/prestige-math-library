@@ -3,7 +3,7 @@ id: texp-nrqm-photons-classical-field-and-quantized-detection-comparison
 kind: thought-experiment
 title: "A two-bin comparison of a declared classical field model and the
   quantised model: identical normalised laws do not discriminate"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 14

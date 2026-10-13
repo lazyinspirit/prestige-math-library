@@ -3,7 +3,7 @@ id: ex-em-nonconserved-switched-charge
 kind: example
 title: "A switched point charge with no current violates the weak continuity compatibility"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 17
 deps: [pthm-em-charge-continuity,

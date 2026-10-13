@@ -4,7 +4,7 @@ kind: example
 title: "A hypothetical small-angle pendulum estimate of a gravitational
   parameter: linearized propagation and a bounded nonlinearity remainder on
   declared data"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps:

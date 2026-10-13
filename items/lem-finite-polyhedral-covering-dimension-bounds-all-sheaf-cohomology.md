@@ -2,7 +2,7 @@
 id: lem-finite-polyhedral-covering-dimension-bounds-all-sheaf-cohomology
 kind: lemma
 title: "A polyhedral dimension bound for every sheaf"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

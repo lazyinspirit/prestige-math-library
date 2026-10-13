@@ -2,7 +2,7 @@
 id: lem-gr-schwarzschild-ricci-and-einstein-tensors
 kind: lemma
 title: "Curvature components and the vanishing of the Ricci and Einstein tensors of the Schwarzschild exterior metric"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

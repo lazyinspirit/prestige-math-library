@@ -2,7 +2,7 @@
 id: pthm-sr-momentum-and-four-force
 kind: physics-theorem
 title: "Energy, momentum, invariant mass and four-force of relativistic particles, and necessary collision thresholds"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "Massive particles with constant positive mass and ideal massless particles described by future null four-momenta in flat Minkowski spacetime with ideal clocks and SI conventions; measured energy, momentum and kinetic energy are the model quantities E_n, q_n, T_n; isolated collisions obey the adopted four-momentum balance at one event, and the stated thresholds are necessary kinematic conditions only. The variable-mass clause is a mathematical derivative identity, not an adopted variable-mass dynamics. Excludes internal structure, spin, radiation reaction, force laws and interaction mechanisms (a separate premise), continuum matter, gravity, quantum and statistical descriptions, and every empirical claim, measurement value or precision statement."

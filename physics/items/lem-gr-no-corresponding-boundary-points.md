@@ -2,7 +2,7 @@
 id: lem-gr-no-corresponding-boundary-points
 kind: lemma
 title: "A maximal common development has no corresponding boundary points: the spacelike restart produces a strictly larger common development"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 35

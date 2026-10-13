@@ -2,7 +2,7 @@
 id: ex-gr-dust-conservation-in-flat-space
 kind: example
 title: "Dust in flat space: a conserved homogeneous model and a nonconserved time-dependent density"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

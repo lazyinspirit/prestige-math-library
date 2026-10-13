@@ -2,7 +2,7 @@
 id: cor-quiver-full-flag-pushforwards-are-semisimple-in-characteristic-zero
 kind: corollary
 title: "Full quiver-flag pushforwards are semisimple in characteristic zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 26

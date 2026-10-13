@@ -2,7 +2,7 @@
 id: lem-cm-positive-definite-matrix-square-roots
 kind: lemma
 title: "Positive definite symmetric matrices have positive definite square roots, and the congruence M^{-1/2} K M^{-1/2} preserves symmetry and positivity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

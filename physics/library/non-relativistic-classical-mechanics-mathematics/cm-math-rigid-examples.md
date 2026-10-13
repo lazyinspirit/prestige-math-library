@@ -1,7 +1,7 @@
 ---
 page: cm-math-rigid-examples
 title: Cm Math Rigid — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-inertia-tensors-of-point-masses

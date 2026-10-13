@@ -2,7 +2,7 @@
 id: pthm-cm12-local-legendre
 kind: physics-theorem
 title: "The velocity Hessian of the mechanical Lagrangian and the local invertibility of its Legendre map in every chart of the model"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

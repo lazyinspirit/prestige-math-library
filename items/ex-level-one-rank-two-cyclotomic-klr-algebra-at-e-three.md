@@ -2,7 +2,7 @@
 id: ex-level-one-rank-two-cyclotomic-klr-algebra-at-e-three
 kind: example
 title: "The level-one rank-two cyclotomic KLR algebra at e=3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 31

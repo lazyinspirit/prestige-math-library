@@ -3,7 +3,7 @@ id: lem-sr-uniform-low-speed-taylor-remainder
 kind: lemma
 domain: mathematics
 title: 'The uniform second-order Taylor remainder of $z\mapsto(1-z)^{-1/2}$ on $[0,z_0]$'
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [cor-taylor-remainder-bound, thm-real-power-continuity-and-derivatives, thm-real-power-agrees-with-rational-exponent, def-rational-power, thm-chain-rule, thm-algebra-of-derivatives, lem-derivative-of-a-power, lem-rational-power-monotone, lem-rational-power-laws, lem-of-inverse-positive, def-abs-value, lem-of-abs-value, lem-of-triangle-inequality, thm-of-archimedean]

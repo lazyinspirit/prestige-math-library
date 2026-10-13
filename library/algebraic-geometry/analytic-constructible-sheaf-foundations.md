@@ -1,7 +1,7 @@
 ---
 page: analytic-constructible-sheaf-foundations
 title: "Analytic Constructible Sheaf Foundations"
-status: draft
+status: published
 items: [def-analytic-topology-and-finite-smooth-algebraic-stratifications,
         def-locally-constant-sheaf-of-finite-rank,
         def-algebraically-constructible-complex-of-analytic-field-sheaves,

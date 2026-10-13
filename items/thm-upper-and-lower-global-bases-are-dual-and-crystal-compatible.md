@@ -2,7 +2,7 @@
 id: thm-upper-and-lower-global-bases-are-dual-and-crystal-compatible
 kind: theorem
 title: "Upper and lower global bases are dual and crystal compatible"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

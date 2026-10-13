@@ -2,7 +2,7 @@
 id: lem-dj-bridge-integral-murphy-and-polytabloid-straightening
 kind: lemma
 title: "Integral polytabloid straightening for the comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

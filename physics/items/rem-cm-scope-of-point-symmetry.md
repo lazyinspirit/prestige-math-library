@@ -2,7 +2,7 @@
 id: rem-cm-scope-of-point-symmetry
 kind: remark
 title: "Scope of point symmetries: symmetries belong to the Lagrangian, not to the configuration space, and time translation is the energy case"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

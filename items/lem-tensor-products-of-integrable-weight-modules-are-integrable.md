@@ -2,7 +2,7 @@
 id: lem-tensor-products-of-integrable-weight-modules-are-integrable
 kind: lemma
 title: "Tensor products of integrable weight modules and of their crystal lattices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

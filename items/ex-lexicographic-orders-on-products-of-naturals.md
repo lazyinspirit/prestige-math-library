@@ -2,7 +2,7 @@
 id: ex-lexicographic-orders-on-products-of-naturals
 kind: example
 title: "Lexicographic orders: $\\{0,1\\}\\times\\mathbb{N}$ and $\\mathbb{N}\\times\\mathbb{N}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

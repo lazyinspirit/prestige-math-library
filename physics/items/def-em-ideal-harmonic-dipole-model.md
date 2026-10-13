@@ -2,7 +2,7 @@
 id: def-em-ideal-harmonic-dipole-model
 kind: definition
 title: "The ideal harmonic electric-dipole radiation model and its adopted status"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 21

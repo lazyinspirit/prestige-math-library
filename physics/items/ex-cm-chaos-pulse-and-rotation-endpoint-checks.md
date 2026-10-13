@@ -4,7 +4,7 @@ kind: example
 title: "The $\\delta=0$ endpoint computation: the free rotation
   $(q,p)\\mapsto(p,-q)$, the kick $(q,p)\\mapsto(q,p+q^2-a)$ and $K\\circ
   R_0=F$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

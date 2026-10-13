@@ -3,7 +3,7 @@ id: ex-em-no-retarded-root-example
 kind: example
 title: "A smooth pointwise subluminal curve with no retarded root at an event"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 20
 deps: [def-em-retarded-point-geometry, lem-em-global-retarded-root, def-ck-euclidean-maps-and-diffeomorphisms, def-vector-valued-derivative-and-integral, thm-of-square-roots, lem-of-square-monotone, def-abs-value, def-euclidean-inner-product, thm-real-power-continuity-and-derivatives, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives]

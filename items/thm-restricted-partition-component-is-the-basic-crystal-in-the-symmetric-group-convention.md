@@ -2,7 +2,7 @@
 id: thm-restricted-partition-component-is-the-basic-crystal-in-the-symmetric-group-convention
 kind: theorem
 title: "The restricted-partition component is the basic crystal in the symmetric-group convention"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

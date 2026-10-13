@@ -2,7 +2,7 @@
 id: lem-em-boost-preserves-metric
 kind: lemma
 title: "The explicit Lorentz boost preserves $\\eta$, has determinant $1$ and preserves the future cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

@@ -1,7 +1,7 @@
 ---
 page: quiver-full-flag-projective-semisimplicity-examples
 title: "Quiver Full Flag Projective Semisimplicity Examples"
-status: draft
+status: published
 items: []
 examples: [ex-one-color-quiver-full-flags-need-not-be-semismall,
            ex-two-vertex-multiple-arrow-incidence-compactifications]

@@ -3,7 +3,7 @@ id: ex-cm17-uniform-expansion-transport-check
 kind: example
 title: "Worked check of the transport identity and the continuity equation on a
   uniform expansion"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

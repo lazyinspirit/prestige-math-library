@@ -2,7 +2,7 @@
 id: pthm-cm17-elastic-plane-wave-speeds
 kind: physics-theorem
 title: "Plane elastic waves in the adopted model: the dispersion condition and the longitudinal and transverse speeds"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

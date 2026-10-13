@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-common-domain-nonautonomous-evolution]
 kind: theorem
 domain: mathematics
 title: "Common-domain nonautonomous evolution"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-orthogonal-decomposition-by-a-closed-subspace, thm-self-adjoint-resolvent-estimate, def-bounded-linear-operator, def-operator-norm, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-hilbert-space, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, def-countable-choice]

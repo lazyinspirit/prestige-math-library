@@ -2,7 +2,7 @@
 id: pthm-cm13-bracket-identities
 kind: physics-theorem
 title: "The bracket of a potential presentation is bilinear, skew, a derivation in each slot, satisfies the Jacobi identity, and reproduces the fundamental brackets and the Hamiltonian field"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 21

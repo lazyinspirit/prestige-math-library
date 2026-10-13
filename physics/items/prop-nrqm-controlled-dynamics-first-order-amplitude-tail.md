@@ -5,7 +5,7 @@ aliases:
 kind: proposition
 domain: mathematics
 title: First-order amplitude tail
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

@@ -2,7 +2,7 @@
 id: thm-category-o-translation-intertwines-residue-induction-and-restriction
 kind: theorem
 title: "Category-O translation intertwines residue induction and restriction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 38

@@ -2,7 +2,7 @@
 id: lem-gr-development-pair-gluing
 kind: lemma
 title: "Gluing two developments along their maximal common development: the quotient is a development containing both"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 36

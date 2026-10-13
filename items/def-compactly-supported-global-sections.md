@@ -2,7 +2,7 @@
 id: def-compactly-supported-global-sections
 kind: definition
 title: "Compactly supported global sections and their right derived functors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

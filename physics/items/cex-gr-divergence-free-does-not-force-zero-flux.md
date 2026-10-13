@@ -2,7 +2,7 @@
 id: cex-gr-divergence-free-does-not-force-zero-flux
 kind: counterexample
 title: "A divergence-free current with nonzero flux through a timelike 3-simplex"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: def-sr-proper-time-derivative-and-four-force
 kind: definition
 title: "Proper-time derivative of a vector field along a worldline and the four-force notation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

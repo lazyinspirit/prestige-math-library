@@ -2,7 +2,7 @@
 id: cex-gr-tetrad-field-need-not-be-a-coordinate-frame
 kind: counterexample
 title: "A tetrad field that is not the coordinate frame of any chart"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

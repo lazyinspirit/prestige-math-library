@@ -2,7 +2,7 @@
 id: def-cm-iid-sampling-model
 kind: definition
 title: "Repeated-observation sampling models with IID and finite-variance hypotheses"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-identically-distributed-and-iid-random-variables, def-moments-variance-and-covariance, def-probability-measure, def-random-element-and-real-random-variable]

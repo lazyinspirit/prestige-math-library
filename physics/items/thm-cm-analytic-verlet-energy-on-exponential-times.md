@@ -2,7 +2,7 @@
 id: thm-cm-analytic-verlet-energy-on-exponential-times
 kind: theorem
 title: Analytic Verlet retains order-two energy accuracy on exponential times
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 16

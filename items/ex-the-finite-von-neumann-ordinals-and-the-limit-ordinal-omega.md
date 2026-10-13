@@ -2,7 +2,7 @@
 id: ex-the-finite-von-neumann-ordinals-and-the-limit-ordinal-omega
 kind: example
 title: "The finite von Neumann ordinals, and $\\omega$ as the least limit ordinal"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

@@ -1,7 +1,7 @@
 ---
 page: kronecker-coefficients-and-internal-products-examples
 title: "Kronecker Coefficients and Internal Products — Examples"
-status: draft
+status: published
 requires:
   - kronecker-coefficients-and-internal-products
 items: []

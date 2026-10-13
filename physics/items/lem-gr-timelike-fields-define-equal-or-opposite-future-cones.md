@@ -2,7 +2,7 @@
 id: lem-gr-timelike-fields-define-equal-or-opposite-future-cones
 kind: lemma
 title: "Two time orientations agree or are opposite on each connected set"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

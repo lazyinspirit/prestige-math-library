@@ -2,7 +2,7 @@
 id: thm-crystal-bases-of-integrable-modules-decompose-into-highest-weight-crystals
 kind: theorem
 title: "Uniqueness: crystal bases of integrable modules decompose into highest weight crystals"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

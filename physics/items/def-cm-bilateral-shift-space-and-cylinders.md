@@ -2,7 +2,7 @@
 id: def-cm-bilateral-shift-space-and-cylinders
 kind: definition
 title: "The bilateral two-symbol shift space, its metric, its shift map and its cylinder sets"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

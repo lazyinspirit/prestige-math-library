@@ -6,7 +6,7 @@ requires:
   - gr-tensors-and-observers
 page: gr-causal-and-initial-value-boundaries-examples
 title: "Causal And Initial Value Boundaries — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

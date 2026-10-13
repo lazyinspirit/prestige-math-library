@@ -2,7 +2,7 @@
 id: cex-the-lexicographic-order-on-integer-pairs-is-not-a-well-order
 kind: counterexample
 title: "The lexicographic order on $\\mathbb{Z}\\times\\mathbb{Z}$ is not a well-order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

@@ -4,7 +4,7 @@ aliases: [nrqm-interference-recorded-detector-and-sampling-model]
 kind: definition
 domain: physics
 title: "The declared recorded detector and sampling model of the two-path arrangement"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps: [def-nrqm-interference-two-path-preparation-and-detection-model, post-nrqm-framework-observable-and-probability, post-nrqm-framework-preparation-and-apparatus, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-framework-quantities-and-units, def-non-negative-and-positive-operator, def-bounded-linear-operator, def-hilbert-space-adjoint, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-probability-measure, def-independence-of-finite-random-variables, def-countable-choice]

@@ -2,7 +2,7 @@
 id: ex-good-node-crystal-component-for-equals-three
 kind: example
 title: "The good-node crystal component of the empty partition for $e=3$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

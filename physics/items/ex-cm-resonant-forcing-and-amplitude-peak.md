@@ -2,7 +2,7 @@
 id: ex-cm-resonant-forcing-and-amplitude-peak
 kind: example
 title: "Resonant forcing at $\\Omega=\\omega_0$ and the two regimes of the amplitude maximum"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

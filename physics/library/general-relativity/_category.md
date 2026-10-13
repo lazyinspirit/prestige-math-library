@@ -1,7 +1,7 @@
 ---
 name: general-relativity
 title: General Relativity
-status: draft
+status: published
 library: physics
 ---
 

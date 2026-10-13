@@ -4,7 +4,7 @@ kind: theorem
 title: "One-dimensional substitution on a deflection branch: the outgoing
   angular measure has density $b|\\mathrm db/\\mathrm d\\theta|$, hence
   cross-section density $b|\\mathrm db/\\mathrm d\\theta|/\\sin\\theta$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

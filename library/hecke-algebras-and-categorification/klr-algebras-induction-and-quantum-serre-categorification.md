@@ -1,7 +1,7 @@
 ---
 page: klr-algebras-induction-and-quantum-serre-categorification
 title: "KLR Algebras, Induction, and Quantum-Serre Categorification"
-status: draft
+status: published
 requires: [quantized-enveloping-algebras-and-quantum-serre-relations, divided-powers-integral-forms-and-quantum-highest-weights, balanced-triples-and-global-crystal-bases, graded-bimodules-and-tensor-functors, grothendieck-groups-and-graded-cartan-pairings, signed-quiver-flag-convolution-and-klr-ext-realization, quiver-full-flag-projective-semisimplicity]
 items: [def-quiver-hecke-klr-algebra-for-a-symmetrizable-cartan-datum, def-klr-grading-and-diagrammatic-composition, thm-polynomial-representation-of-a-klr-algebra, thm-klr-pbw-basis-theorem, def-klr-induction-and-restriction-bimodules, thm-klr-induction-and-restriction-are-biadjoint-and-preserve-projectives, def-divided-power-klr-idempotents-and-projectives, lem-klr-module-categories-are-krull-schmidt-with-shift-orbit-bases, lem-klr-maximal-tail-restriction-and-induction-have-a-unique-simple-head, thm-klr-projective-grothendieck-group-satisfies-the-negative-quantum-serre-relations, def-the-klr-cartan-pairing, thm-klr-cartan-pairing-agrees-with-lusztigs-bilinear-form, thm-klr-categorification-of-the-negative-quantum-half, lem-klr-projective-duality-and-positive-divided-string-leading-terms, thm-self-dual-indecomposable-klr-projectives-give-the-negative-half-lower-global-basis]
 examples: []

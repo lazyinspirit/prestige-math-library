@@ -2,7 +2,7 @@
 id: cex-transfinite-induction-fails-when-the-minimum-is-exempted
 kind: counterexample
 title: "Transfinite induction fails if the least element is exempted from the hypothesis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

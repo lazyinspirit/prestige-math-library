@@ -2,7 +2,7 @@
 id: pthm-cm13-observable-evolution
 kind: physics-theorem
 title: "Evolution of phase functions along the model's Hamiltonian solutions: $df/dt=\\partial_t f+\\{f,H\\}$, the first-integral criterion, and the closed bracket algebra of autonomous first integrals"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 22

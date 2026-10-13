@@ -2,7 +2,7 @@
 id: ex-the-class-map-and-wall-crossing-action-on-the-grothendieck-group-in-rank-two
 kind: example
 title: The class map and the wall-crossing action in rank two
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

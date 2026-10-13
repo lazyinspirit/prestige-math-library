@@ -2,7 +2,7 @@
 id: ex-quantum-verma-and-simple-modules-for-sl-two
 kind: example
 title: "Quantum Verma and simple modules for sl2"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

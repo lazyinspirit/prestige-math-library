@@ -1,7 +1,7 @@
 ---
 page: em-energy-momentum-and-angular-balance-examples
 title: "Energy momentum angular balance — Examples"
-status: draft
+status: published
 examples: [ex-em-vacuum-energy-flow-example]
 ---
 

@@ -4,7 +4,7 @@ aliases: [ nrqm-kinematics-spin-s-outcome-laws ]
 kind: physics-theorem
 domain: physics
 title: "Position and momentum outcome laws of the massive spin-s model"
-status: draft
+status: published
 origin: session
 dependency_level: 9
 deps:

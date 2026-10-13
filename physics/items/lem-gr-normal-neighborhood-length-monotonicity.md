@@ -2,7 +2,7 @@
 id: lem-gr-normal-neighborhood-length-monotonicity
 kind: lemma
 title: "Length monotonicity of the squared displacement: once a future causal curve in a normal neighborhood has a future timelike position vector, the displacement radius grows at least as fast as the accumulated Lorentzian length"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

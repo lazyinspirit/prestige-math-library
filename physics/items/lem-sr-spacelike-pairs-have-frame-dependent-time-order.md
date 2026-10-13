@@ -2,7 +2,7 @@
 id: lem-sr-spacelike-pairs-have-frame-dependent-time-order
 kind: lemma
 title: "Spacelike-separated events: the spacelike coordinate inequality in every inertial chart, and an explicit family of inertial frames realizing every time-order sign"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

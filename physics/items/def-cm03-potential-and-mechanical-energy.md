@@ -2,7 +2,7 @@
 id: def-cm03-potential-and-mechanical-energy
 kind: definition
 title: "Potential presentations of a force model, potential and mechanical energy, closed versus exact force fields, local potentials and equipotential level sets"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

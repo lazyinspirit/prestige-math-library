@@ -2,7 +2,7 @@
 id: def-cm17-density-and-mass
 kind: definition
 title: "The density field of the continuum model and the mass of a material subregion"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

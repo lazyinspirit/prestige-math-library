@@ -2,7 +2,7 @@
 id: lem-lorentz-map-preserves-metric-and-causal-structure
 kind: lemma
 title: Lorentz maps are isomorphisms of determinant ±1 that preserve causal character and permute the cones; the Lorentz sets are groups
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

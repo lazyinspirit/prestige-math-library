@@ -2,7 +2,7 @@
 id: ex-gr-boost-congruence-energy-balance-in-flat-space
 kind: example
 title: "A boost-Killing congruence in flat space: acceleration source and conservation of the redshift-weighted energy current"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

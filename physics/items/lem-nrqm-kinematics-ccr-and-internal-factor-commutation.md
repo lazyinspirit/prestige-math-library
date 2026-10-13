@@ -4,7 +4,7 @@ aliases: [nrqm-kinematics-ccr-and-internal-factor-commutation]
 kind: lemma
 domain: mathematics
 title: "Canonical commutation relations on the component-valued core and commutation with the internal factor"
-status: draft
+status: published
 origin: session
 dependency_level: 4
 deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-axiom-of-choice, def-bounded-linear-operator, def-countable-choice, def-hilbert-space-adjoint, def-operator-norm, def-projection-valued-measure, def-schwartz-space-and-its-seminorms, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-weak-derivative-of-a-locally-integrable-function, lem-classical-derivatives-are-weak-derivatives, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-kinematics-component-valued-wavefunction-identifications, lem-nrqm-kinematics-componentwise-position-and-momentum, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, lem-nrqm-observables-l2-multiplication-spectral-measure, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, thm-dominated-convergence, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-tonelli-theorem-for-sigma-finite-product-spaces]

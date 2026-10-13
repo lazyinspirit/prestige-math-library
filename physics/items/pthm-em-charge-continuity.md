@@ -3,7 +3,7 @@ id: pthm-em-charge-continuity
 kind: physics-theorem
 title: "Charge continuity as a compatibility condition of the vacuum Maxwell equations"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 16
 deps: [post-em-vacuum-maxwell,

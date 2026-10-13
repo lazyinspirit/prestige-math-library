@@ -3,7 +3,7 @@ id: pthm-em-lienard-emitted-power
 kind: physics-theorem
 title: "Relativistic emitted power of a prescribed point charge at a general emission event"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 22
 deps: [pthm-em-lienard-wiechert, def-em-retarded-point-geometry, thm-em-retarded-root-and-fields, lem-em-sphere-zonal-moments, pthm-em-poynting-balance, def-em-vacuum-energy-flux, thm-sr-proper-time-and-observer-decomposition, def-em-fields, def-em-si-conventions, lem-cross-product-is-bilinear-alternating-and-orthogonal, thm-integral-triangle-inequality, thm-dominated-convergence, thm-ftc-second-part, lem-derivative-of-a-power, thm-real-power-continuity-and-derivatives, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, def-euclidean-inner-product, def-countable-choice, def-cross-product-in-r3, def-em-lab-geometry, lem-euclidean-chart-measure-agrees-with-polar-surface-measure, pthm-em-larmor-nonrelativistic, prop-order-and-scalar-rules-for-the-nonnegative-integral]

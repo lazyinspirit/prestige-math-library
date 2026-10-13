@@ -2,7 +2,7 @@
 id: cex-gr-sobolev-embedding-needs-s-minus-m-above-three-halves
 kind: counterexample
 title: "The H^1 to C^0 bound fails at s minus m equal to one: dyadic shells have an unbounded C^0/H^1 ratio"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

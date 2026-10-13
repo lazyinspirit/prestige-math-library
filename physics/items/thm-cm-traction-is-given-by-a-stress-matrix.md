@@ -2,7 +2,7 @@
 id: thm-cm-traction-is-given-by-a-stress-matrix
 kind: theorem
 title: "A continuous traction field balanced on every piecewise $C^1$ region is given by a continuous stress matrix, and $t(-n)=-t(n)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

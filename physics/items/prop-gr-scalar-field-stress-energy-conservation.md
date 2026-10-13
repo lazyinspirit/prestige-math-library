@@ -2,7 +2,7 @@
 id: prop-gr-scalar-field-stress-energy-conservation
 kind: proposition
 title: "First variation, Hilbert tensor and conservation of the scalar-field model"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

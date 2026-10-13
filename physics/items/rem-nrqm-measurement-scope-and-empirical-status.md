@@ -4,7 +4,7 @@ aliases: [ nrqm-measurement-scope-and-empirical-status ]
 kind: remark
 domain: physics
 title: "Scope and empirical status of the measurement-and-instruments page"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

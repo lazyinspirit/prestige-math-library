@@ -2,7 +2,7 @@
 id: ex-a-small-parabolic-category-o-character-formula
 kind: example
 title: "A small parabolic category O character formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

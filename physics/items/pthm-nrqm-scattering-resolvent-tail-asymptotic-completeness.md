@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Asymptotic completeness for the resolvent-tail short-range class, with
   the decaying-tail example and the explicit exclusion of the Coulomb tail"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

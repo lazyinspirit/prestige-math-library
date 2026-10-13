@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared short-range scattering model: state space, potential
   classes, assigned energy observables, asymptotic vocabulary and units"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

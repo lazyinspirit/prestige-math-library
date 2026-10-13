@@ -2,7 +2,7 @@
 id: lem-generic-cyclotomic-type-a-support-is-bounded-by-rank
 kind: lemma
 title: Generic cyclotomic type-A support is bounded by rank
-status: draft
+status: published
 origin: session
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

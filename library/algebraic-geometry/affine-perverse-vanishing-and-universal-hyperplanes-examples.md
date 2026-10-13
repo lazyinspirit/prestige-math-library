@@ -1,7 +1,7 @@
 ---
 page: affine-perverse-vanishing-and-universal-hyperplanes-examples
 title: "Affine Perverse Vanishing And Universal Hyperplanes Examples"
-status: draft
+status: published
 items: []
 examples: [ex-universal-hyperplanes-lower-the-defect-for-projective-space-to-a-point]
 requires:

@@ -2,7 +2,7 @@
 id: ex-em-rectangular-aperture
 kind: example
 title: "Uniform rectangular aperture: the sinc-squared Fraunhofer pattern and its exact zeros and maxima"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 19

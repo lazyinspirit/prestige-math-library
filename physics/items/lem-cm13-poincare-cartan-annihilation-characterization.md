@@ -2,7 +2,7 @@
 id: lem-cm13-poincare-cartan-annihilation-characterization
 kind: lemma
 title: "A curve solves Hamilton's equations if and only if its velocity annihilates $d(p\\cdot dq-H\\,dt)$, with the three coordinate components computed"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

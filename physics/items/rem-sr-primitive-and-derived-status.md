@@ -2,7 +2,7 @@
 id: rem-sr-primitive-and-derived-status
 kind: remark
 title: "Primitive and derived notions of the spacetime-primitives page"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 7

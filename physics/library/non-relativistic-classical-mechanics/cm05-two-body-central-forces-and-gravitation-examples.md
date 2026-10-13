@@ -1,7 +1,7 @@
 ---
 page: cm05-two-body-central-forces-and-gravitation-examples
 title: "Two-body, central forces and gravitation — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

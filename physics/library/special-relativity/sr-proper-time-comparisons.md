@@ -1,7 +1,7 @@
 ---
 page: sr-proper-time-comparisons
 title: "Proper Time Comparisons"
-status: draft
+status: published
 library: physics
 items:
   - def-sr-inertial-and-piecewise-inertial-worldline

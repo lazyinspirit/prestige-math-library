@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-coulomb-relative-compactness]
 kind: theorem
 domain: mathematics
 title: "Coulomb relative compactness"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-nrqm-coulomb-three-dimensional-hardy-bound, thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, def-relative-compactness-with-respect-to-an-operator, def-relative-boundedness-with-respect-to-an-operator, def-compact-linear-operator, def-nrqm-coulomb-ltwo-kernel-operators, lem-nrqm-coulomb-ltwo-kernel-operators-bounded-and-compact, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, thm-self-adjoint-resolvent-estimate, thm-plancherel, def-fourier-transform-on-l-one-of-rn, cor-schwartz-convolution-and-product-transform-laws, def-schwartz-space-and-its-seminorms, lem-schwartz-space-is-dense-in-l-two, thm-norm-limit-of-compact-operators-is-compact, thm-tonelli-theorem-for-sigma-finite-product-spaces, cor-cauchy-schwarz-inequality-for-l-two, thm-dominated-convergence, lem-compositions-with-a-compact-operator-are-compact, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-axiom-of-choice]

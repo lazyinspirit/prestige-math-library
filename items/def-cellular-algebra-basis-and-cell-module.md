@@ -2,7 +2,7 @@
 id: def-cellular-algebra-basis-and-cell-module
 kind: definition
 title: "Cellular bases and cell modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

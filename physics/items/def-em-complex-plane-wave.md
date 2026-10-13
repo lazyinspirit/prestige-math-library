@@ -2,7 +2,7 @@
 id: def-em-complex-plane-wave
 kind: definition
 title: "Complex plane-wave fields: real parts of complex exponentials"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-complex-exponential, def-complex-conjugate-real-imaginary-part-and-modulus, def-complex-numbers-and-arithmetic, def-euclidean-inner-product, def-ck-euclidean-maps-and-diffeomorphisms, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, thm-complex-exponential-is-entire-with-derivative-itself]

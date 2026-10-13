@@ -3,7 +3,7 @@ id: lem-nrqm-controlled-dynamics-cc-arbitrary-hilbert-spectral-calculus
 kind: lemma
 domain: mathematics
 title: "CC spectral calculus on an arbitrary complex Hilbert space by compatible vector-local Cayley subspaces"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [lem-nrqm-controlled-dynamics-cc-separable-spectral-calculus, thm-self-adjoint-resolvent-estimate, thm-orthogonal-decomposition-by-a-closed-subspace, def-countable-choice, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-hilbert-space]

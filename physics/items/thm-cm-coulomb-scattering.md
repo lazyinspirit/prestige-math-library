@@ -4,7 +4,7 @@ kind: theorem
 title: "Repulsive Coulomb scattering: the unique outer turning point, global
   non-colliding motion, the asymptotic impact distance and
   $\\Delta=\\pi/2-\\arctan(\\kappa/(2Eb))$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

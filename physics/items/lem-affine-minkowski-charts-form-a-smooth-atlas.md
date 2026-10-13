@@ -2,7 +2,7 @@
 id: lem-affine-minkowski-charts-form-a-smooth-atlas
 kind: lemma
 title: "The affine atlas makes the Minkowski model a smooth 4-manifold diffeomorphic to R^4"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: ex-cm-ideal-pendulum-equation-and-stability
 kind: example
 title: "The ideal planar pendulum: equation of motion, conserved energy, Lyapunov stability and the frequency $\\sqrt{g/l}$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

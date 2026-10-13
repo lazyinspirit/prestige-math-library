@@ -2,7 +2,7 @@
 id: ex-fi-permutation-module-has-character-x-one
 kind: example
 title: "The permutation FI-module has character polynomial $X_1$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

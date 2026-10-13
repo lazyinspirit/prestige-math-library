@@ -2,7 +2,7 @@
 id: cex-cm03-centrality-is-not-necessary-for-angular-momentum-conservation
 kind: counterexample
 title: "Non-central antisymmetric pair forces with vanishing internal torque sum: the centrality clause is not necessary for angular-momentum conservation"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

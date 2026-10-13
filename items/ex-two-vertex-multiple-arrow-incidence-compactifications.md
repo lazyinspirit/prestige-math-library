@@ -2,7 +2,7 @@
 id: ex-two-vertex-multiple-arrow-incidence-compactifications
 kind: example
 title: "Multiple-arrow incidence compactifications in dimension one at each vertex"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

@@ -4,7 +4,7 @@ aliases: [ nrqm-scattering-single-channel-resonance-cross-section ]
 kind: physics-theorem
 domain: physics
 title: "The resonance model's phase-shift law, unitarity and channel cross section"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

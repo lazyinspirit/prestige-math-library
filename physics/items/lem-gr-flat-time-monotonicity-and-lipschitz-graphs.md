@@ -2,7 +2,7 @@
 id: lem-gr-flat-time-monotonicity-and-lipschitz-graphs
 kind: lemma
 title: "Monotonicity of inertial time and the Lipschitz graph property for causal curves in the flat model"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

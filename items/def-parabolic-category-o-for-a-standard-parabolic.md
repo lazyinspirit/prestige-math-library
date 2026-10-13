@@ -2,7 +2,7 @@
 id: def-parabolic-category-o-for-a-standard-parabolic
 kind: definition
 title: "Parabolic category O for a standard parabolic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

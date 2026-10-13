@@ -2,7 +2,7 @@
 id: lem-cm-second-variation-formula
 kind: lemma
 title: "The second variation of a time-dependent action: twice differentiability of the fixed-endpoint family and the Hessian integral formula"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

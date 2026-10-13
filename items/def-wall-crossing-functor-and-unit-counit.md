@@ -2,7 +2,7 @@
 id: def-wall-crossing-functor-and-unit-counit
 kind: definition
 title: The wall-crossing functor and its unit and counit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

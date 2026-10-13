@@ -2,7 +2,7 @@
 id: ex-balanced-triple-for-the-two-dimensional-quantum-sl-two-module
 kind: example
 title: "The balanced triple and global basis for the two-dimensional $U_q(\\mathfrak{sl}_2)$-module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

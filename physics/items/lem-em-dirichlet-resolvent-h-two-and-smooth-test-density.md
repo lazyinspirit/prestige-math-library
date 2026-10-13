@@ -3,7 +3,7 @@ id: lem-em-dirichlet-resolvent-h-two-and-smooth-test-density
 kind: lemma
 domain: mathematics
 title: "The L-two Dirichlet resolvent and smooth zero-boundary test density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 1

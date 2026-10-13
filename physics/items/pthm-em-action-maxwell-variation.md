@@ -2,7 +2,7 @@
 id: pthm-em-action-maxwell-variation
 kind: physics-theorem
 title: "Action stationarity implies the inhomogeneous Maxwell equations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

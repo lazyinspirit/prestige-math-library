@@ -2,7 +2,7 @@
 id: cex-soergel-character-grading-alone-does-not-prove-category-o-koszulity
 kind: counterexample
 title: "The Soergel character grading alone does not prove category-O Koszulity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

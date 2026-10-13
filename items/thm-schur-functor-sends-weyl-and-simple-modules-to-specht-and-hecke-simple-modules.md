@@ -2,7 +2,7 @@
 id: thm-schur-functor-sends-weyl-and-simple-modules-to-specht-and-hecke-simple-modules
 kind: theorem
 title: "The Schur functor sends Weyl and simple modules to Specht and Hecke simple modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -1,7 +1,7 @@
 ---
 page: analytic-constructible-sheaf-foundations-examples
 title: "Analytic Constructible Sheaf Foundations Examples"
-status: draft
+status: published
 items: []
 examples: [ex-constructible-six-operations-on-a-point-and-an-open-closed-line]
 requires:

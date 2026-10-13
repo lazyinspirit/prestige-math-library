@@ -2,7 +2,7 @@
 id: lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions
 kind: lemma
 title: Derived tensor–Hom and inverse/direct image for field sheaves
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: lem-finite-real-coefficient-lists-have-at-most-degree-many-roots
 kind: lemma
 title: "A real coefficient list of degree d has at most d real roots"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

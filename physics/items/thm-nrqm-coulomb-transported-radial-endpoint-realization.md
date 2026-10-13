@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-transported-radial-endpoint-realization]
 kind: theorem
 domain: mathematics
 title: "Transported radial endpoint realization"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [thm-orthogonal-decomposition-by-a-closed-subspace, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-coulomb-infinitesimal-kinetic-bound, lem-nrqm-coulomb-three-dimensional-hardy-bound, thm-nrqm-orbital-and-spin-sphere-onb, thm-nrqm-orbital-and-spin-sphere-laplacian-diagonal-domain, def-nrqm-coulomb-closed-semibounded-forms, lem-spectral-form-domain-and-core-of-a-semibounded-operator, thm-riesz-representation-for-hilbert-space, thm-self-adjointness-range-criterion, def-densely-defined-closed-and-closable-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-relative-boundedness-with-respect-to-an-operator, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-sobolev-space-wkp-and-its-norm, thm-plancherel, lem-weak-derivatives-are-polynomial-fourier-multipliers, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives, thm-polar-coordinates-formula-for-lebesgue-measure, thm-divergence-theorem-for-bounded-piecewise-c-one-domains, cor-vector-forms-of-the-divergence-theorem, cor-cauchy-schwarz-inequality-for-l-two, thm-dominated-convergence, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-countable-choice, def-axiom-of-choice]

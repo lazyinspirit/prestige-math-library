@@ -3,7 +3,7 @@ id: thm-gr-periodic-symmetric-hyperbolic-smooth-persistence
 kind: theorem
 title: "Smooth data give smooth solutions of a periodic symmetric hyperbolic
   system on the existence interval"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

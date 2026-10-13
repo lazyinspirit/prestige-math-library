@@ -4,7 +4,7 @@ aliases: [ nrqm-potentials-finite-well-bound-states ]
 kind: physics-theorem
 domain: physics
 title: "Finite square well: bound-state conditions, simplicity and count"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

@@ -2,7 +2,7 @@
 id: lem-tensoring-with-b-s-preserves-hodge-riemann-signs
 kind: lemma
 title: "Tensoring a direct sum of Hodge-Riemann bimodules with B_s preserves the signs"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: def-injectivity-surjectivity-and-stability-degree-of-an-fi-module
 kind: definition
 title: "Injectivity, surjectivity and stability degree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

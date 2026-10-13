@@ -2,7 +2,7 @@
 id: pthm-em-tensor-maxwell-equivalence
 kind: physics-theorem
 title: "Tensor Maxwell equations equal the four laboratory Maxwell equations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

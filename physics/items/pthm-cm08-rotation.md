@@ -2,7 +2,7 @@
 id: pthm-cm08-rotation
 kind: physics-theorem
 title: "Rotation symmetry of the model's Lagrangian and conservation of angular momentum about the origin"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

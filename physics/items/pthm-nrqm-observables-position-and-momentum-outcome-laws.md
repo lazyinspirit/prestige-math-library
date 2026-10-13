@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Position and momentum outcome laws and the Born density of the massive
   particle model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps:

@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Local instruments and no-signalling: operations on one factor do not
   change the other factor's local statistics"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

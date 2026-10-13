@@ -2,7 +2,7 @@
 id: def-integral-parabolic-category-o-block-for-higher-level-schur-weyl-duality
 kind: definition
 title: "The integral parabolic category-O blocks for higher-level Schur-Weyl duality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 22

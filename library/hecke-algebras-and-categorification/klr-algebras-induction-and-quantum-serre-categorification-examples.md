@@ -1,7 +1,7 @@
 ---
 page: klr-algebras-induction-and-quantum-serre-categorification-examples
 title: "KLR Algebras, Induction, and Quantum-Serre Categorification — Examples"
-status: draft
+status: published
 requires: [klr-algebras-induction-and-quantum-serre-categorification]
 items: []
 examples: [ex-klr-algebras-in-root-degrees-alpha-i-and-two-alpha-i, ex-the-two-vertex-klr-polynomial-representation, ex-the-double-edge-klr-braid-correction, ex-a-nil-hecke-divided-power-projective, cex-degenerate-q-ij-polynomials-destroy-the-faithful-basis-route]

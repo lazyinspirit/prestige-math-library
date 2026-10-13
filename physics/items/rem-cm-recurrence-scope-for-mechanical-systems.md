@@ -2,7 +2,7 @@
 id: rem-cm-recurrence-scope-for-mechanical-systems
 kind: remark
 title: "Scope of Poincaré recurrence for mechanical systems: finite invariant volume and complete return maps"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

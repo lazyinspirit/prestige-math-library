@@ -2,7 +2,7 @@
 id: ex-cm09-two-mass-spring-modes
 kind: example
 title: "Two coupled masses on a line: the in-phase and anti-phase normal modes, their frequencies, mode-energies and the zero-stiffness translation mode"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

@@ -4,7 +4,7 @@ kind: example
 domain: physics
 dependency_level: 18
 title: "Exact two-charge dipole potential, its moments and the explicit far-field remainder"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

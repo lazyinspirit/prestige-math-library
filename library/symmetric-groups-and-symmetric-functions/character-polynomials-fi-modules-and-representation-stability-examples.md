@@ -1,7 +1,7 @@
 ---
 page: character-polynomials-fi-modules-and-representation-stability-examples
 title: "Character Polynomials, FI-Modules, and Representation Stability — Examples"
-status: draft
+status: published
 requires:
   - character-polynomials-fi-modules-and-representation-stability
 items: []

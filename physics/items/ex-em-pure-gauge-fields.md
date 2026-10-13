@@ -3,7 +3,7 @@ id: ex-em-pure-gauge-fields
 kind: example
 title: "Nonzero pure-gauge potentials representing the zero field pair"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 17
 deps: [pthm-em-gauge-invariance, def-em-gauge-transformation, def-em-potential-gauge-and-field-conventions, def-em-fields, lem-em-joint-smooth-potentials, thm-the-curl-of-a-gradient-vanishes, def-divergence-and-curl-of-a-c1-vector-field, thm-algebra-of-total-derivatives, def-ck-euclidean-maps-and-diffeomorphisms, def-directional-and-partial-derivatives, def-interval]

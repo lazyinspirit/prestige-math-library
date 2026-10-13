@@ -2,7 +2,7 @@
 id: prop-cm-ideal-holonomic-system-in-a-time-dependent-chart
 kind: proposition
 title: "The ideal holonomic system in a possibly time-dependent chart: explicit acceleration, constraint preservation, local existence and reaction power"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

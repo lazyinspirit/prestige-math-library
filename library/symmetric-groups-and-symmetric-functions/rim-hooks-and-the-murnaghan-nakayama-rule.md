@@ -1,7 +1,7 @@
 ---
 page: rim-hooks-and-the-murnaghan-nakayama-rule
 title: "Rim Hooks and the Murnaghan–Nakayama Rule"
-status: draft
+status: published
 requires:
   - frobenius-characteristic-and-the-symmetric-group-character-dictionary
   - outer-products-skew-specht-modules-and-littlewood-richardson

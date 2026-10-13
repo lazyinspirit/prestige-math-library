@@ -2,7 +2,7 @@
 id: ex-three-core-of-four-three-two-one
 kind: example
 title: "The three-core of (4,3,2,1) by two removal orders"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

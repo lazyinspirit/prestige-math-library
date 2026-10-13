@@ -2,7 +2,7 @@
 id: pthm-cm04-damped-motion
 kind: physics-theorem
 title: "Classification of the motions of the damped oscillator by the discriminant, and nonincreasing energy $E'=-c\\,x'^{2}$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

@@ -1,7 +1,7 @@
 ---
 page: sr-worldlines-and-clocks-examples
 title: "Worldlines And Clocks — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

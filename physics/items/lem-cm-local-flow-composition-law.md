@@ -2,7 +2,7 @@
 id: lem-cm-local-flow-composition-law
 kind: lemma
 title: "The local flow is a partial one-parameter group: identity, composition and inverse-time laws"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

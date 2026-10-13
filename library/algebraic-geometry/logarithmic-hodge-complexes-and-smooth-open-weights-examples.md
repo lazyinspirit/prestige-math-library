@@ -1,7 +1,7 @@
 ---
 page: logarithmic-hodge-complexes-and-smooth-open-weights-examples
 title: "Logarithmic Hodge Complexes And Smooth Open Weights: Examples"
-status: draft
+status: published
 requires:
   - logarithmic-hodge-complexes-and-smooth-open-weights
   - relative-homology-excision-and-mayer-vietoris

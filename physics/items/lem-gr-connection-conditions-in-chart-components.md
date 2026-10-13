@@ -2,7 +2,7 @@
 id: lem-gr-connection-conditions-in-chart-components
 kind: lemma
 title: "Torsion freedom and metric compatibility in chart components"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

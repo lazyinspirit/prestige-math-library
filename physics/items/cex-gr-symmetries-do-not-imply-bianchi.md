@@ -2,7 +2,7 @@
 id: cex-gr-symmetries-do-not-imply-bianchi
 kind: counterexample
 title: "The exchange symmetries of a curvature-like tensor do not imply the first Bianchi identity"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

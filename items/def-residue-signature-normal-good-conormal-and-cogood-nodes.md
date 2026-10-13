@@ -2,7 +2,7 @@
 id: def-residue-signature-normal-good-conormal-and-cogood-nodes
 kind: definition
 title: "Residue signatures, normal, good, conormal and cogood nodes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

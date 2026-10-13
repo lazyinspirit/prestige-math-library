@@ -2,7 +2,7 @@
 id: thm-cyclotomic-klr-sl-two-categorical-commutator
 kind: theorem
 title: "The categorical $\\mathfrak{sl}_2$ commutator for cyclotomic KLR functors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

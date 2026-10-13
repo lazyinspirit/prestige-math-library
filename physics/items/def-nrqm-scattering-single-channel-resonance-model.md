@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared single-channel resonance model: pole-shaped channel factor
   and its cross-section reading"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

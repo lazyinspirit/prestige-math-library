@@ -2,7 +2,7 @@
 id: ex-cm10-equilateral-triangle-rotational-inertia
 kind: example
 title: "An equilateral-triangle rigid-material model: inertia matrix, principal axes, rotational term and the threefold-symmetry check"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

@@ -4,7 +4,7 @@ kind: theorem
 title: "The Rutherford deflection map, its inverse, the cross-section density
   $(\\kappa/4E)^2\\csc^4(\\theta/2)$ and the divergence of the total
   cross-section"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

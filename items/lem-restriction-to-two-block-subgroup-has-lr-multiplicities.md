@@ -2,7 +2,7 @@
 id: lem-restriction-to-two-block-subgroup-has-lr-multiplicities
 kind: lemma
 title: "Restriction to the two-block Young subgroup has LR multiplicities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

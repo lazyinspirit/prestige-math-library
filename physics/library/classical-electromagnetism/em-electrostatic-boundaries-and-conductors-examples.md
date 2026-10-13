@@ -1,7 +1,7 @@
 ---
 page: em-electrostatic-boundaries-and-conductors-examples
 title: "Electrostatic boundaries and conductors — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples: [ex-em-grounded-plane-image-force, ex-em-parallel-plate-capacitor, ex-em-neumann-data-failure]

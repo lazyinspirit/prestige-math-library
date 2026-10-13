@@ -2,7 +2,7 @@
 id: lem-sr-energy-momentum-observer-identities
 kind: lemma
 title: "Positivity, mass shell and kinetic energy of the observer quantities of a four-momentum"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

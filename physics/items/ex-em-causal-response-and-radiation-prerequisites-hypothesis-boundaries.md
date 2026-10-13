@@ -2,7 +2,7 @@
 id: ex-em-causal-response-and-radiation-prerequisites-hypothesis-boundaries
 kind: example
 title: "Hypothesis boundaries: a causal response without passivity, and the fixed-retarded-time flux limit"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

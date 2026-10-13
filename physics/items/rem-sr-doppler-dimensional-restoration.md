@@ -2,7 +2,7 @@
 id: rem-sr-doppler-dimensional-restoration
 kind: remark
 title: 'Units, coordinate conventions and c restoration for the wave and Doppler formulas'
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: 'Units and c-restoration conventions for the ideal plane-wave model of flat classical special-relativistic spacetime and its Doppler and aberration formulas. A conventions statement; it asserts no empirical content and excludes quantum energy identifications, amplitudes, intensities and measurement claims.'

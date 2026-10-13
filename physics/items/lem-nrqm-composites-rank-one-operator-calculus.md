@@ -3,7 +3,7 @@ id: lem-nrqm-composites-rank-one-operator-calculus
 kind: lemma
 domain: mathematics
 title: "Rank-one operator calculus"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-trace-class-operator, lem-finite-rank-operators-are-compact, lem-nuclear-series-characterizes-trace-norm, thm-trace-is-absolutely-convergent-and-basis-independent, thm-trace-class-is-a-two-sided-banach-operator-ideal, def-operator-norm, def-bounded-linear-operator, def-hilbert-space-adjoint, def-real-and-complex-inner-product-space, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-space, def-countable-choice]

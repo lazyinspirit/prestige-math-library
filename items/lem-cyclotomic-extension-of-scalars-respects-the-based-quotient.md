@@ -2,7 +2,7 @@
 id: lem-cyclotomic-extension-of-scalars-respects-the-based-quotient
 kind: lemma
 title: "Cyclotomic extension of scalars respects the based quotient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 32

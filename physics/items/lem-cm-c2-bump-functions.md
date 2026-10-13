@@ -2,7 +2,7 @@
 id: lem-cm-c2-bump-functions
 kind: lemma
 title: "Explicit twice differentiable bumps detect nonzero values of continuous functions"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

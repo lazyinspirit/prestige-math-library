@@ -1,7 +1,7 @@
 ---
 page: singular-and-parabolic-kazhdan-lusztig-theory-examples
 title: "Singular and Parabolic Kazhdan–Lusztig Theory — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-parabolic-kl-polynomials-for-s-three-modulo-s-two, cex-spherical-and-antispherical-normalizations-give-different-polynomials, ex-translation-to-a-singular-wall-in-type-a-two, ex-a-small-parabolic-category-o-character-formula]
 ---

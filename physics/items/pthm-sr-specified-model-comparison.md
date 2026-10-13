@@ -3,7 +3,7 @@ id: pthm-sr-specified-model-comparison
 kind: physics-theorem
 domain: physics
 title: "Specified-model comparison with calibrated bounds and reported uncertainty scales"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 deps:

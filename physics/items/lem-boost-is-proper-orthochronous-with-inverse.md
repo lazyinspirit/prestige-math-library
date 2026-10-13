@@ -2,7 +2,7 @@
 id: lem-boost-is-proper-orthochronous-with-inverse
 kind: lemma
 title: The passive boost is a proper orthochronous Lorentz map with inverse B(-beta)
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

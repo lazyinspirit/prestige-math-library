@@ -2,7 +2,7 @@
 id: def-finite-complex-algebraic-whitney-stratification-and-control-data
 kind: definition
 title: "Finite complex algebraic Whitney stratification and control data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

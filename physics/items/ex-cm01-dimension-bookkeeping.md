@@ -2,7 +2,7 @@
 id: ex-cm01-dimension-bookkeeping
 kind: example
 title: "Dimension bookkeeping for the quantities and frame parameters of the framework page"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

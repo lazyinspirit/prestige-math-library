@@ -4,7 +4,7 @@ aliases: [nrqm-composites-compatible-luders-repeatability]
 kind: lemma
 domain: mathematics
 title: "Compatible Lüders repeatability"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [thm-nrqm-composites-joint-pvm-construction, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-nuclear-bounded-cyclicity, thm-trace-is-absolutely-convergent-and-basis-independent, def-hilbert-orthogonal-projection, def-countable-choice]

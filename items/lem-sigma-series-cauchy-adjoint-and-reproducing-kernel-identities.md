@@ -2,7 +2,7 @@
 id: lem-sigma-series-cauchy-adjoint-and-reproducing-kernel-identities
 kind: lemma
 title: "The series $\\sigma$: product formula, Cauchy identity, adjunction and reproducing kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

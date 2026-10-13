@@ -2,7 +2,7 @@
 id: def-cm-finite-time-tangent-growth-rate-and-lyapunov-exponent
 kind: definition
 title: "Finite-time tangent growth rates and Lyapunov exponents of a C¹ flow"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

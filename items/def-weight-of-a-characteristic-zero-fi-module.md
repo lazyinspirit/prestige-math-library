@@ -2,7 +2,7 @@
 id: def-weight-of-a-characteristic-zero-fi-module
 kind: definition
 title: "Weight of an FI-module over a field of characteristic zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

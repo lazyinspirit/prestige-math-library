@@ -24,7 +24,7 @@ requires:
   - smooth-partitions-of-unity-and-exhaustions
 page: gr-framework-and-geometry
 title: "Framework And Geometry"
-status: draft
+status: published
 library: physics
 items:
   - def-gr-smooth-covariant-two-tensor-field

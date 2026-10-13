@@ -2,7 +2,7 @@
 id: ex-the-wall-crossing-functor-on-verma-modules-in-rank-one
 kind: example
 title: The wall-crossing functor on Verma modules in rank one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

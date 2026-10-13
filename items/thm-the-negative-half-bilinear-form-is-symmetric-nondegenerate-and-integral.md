@@ -2,7 +2,7 @@
 id: thm-the-negative-half-bilinear-form-is-symmetric-nondegenerate-and-integral
 kind: theorem
 title: "The negative-half bilinear form is symmetric, nondegenerate and integral"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

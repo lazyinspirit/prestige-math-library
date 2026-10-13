@@ -2,7 +2,7 @@
 id: lem-gr-schwarzschild-extension-chart
 kind: lemma
 title: "Smooth horizon-crossing extension of the Schwarzschild exterior metric in the advanced chart"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

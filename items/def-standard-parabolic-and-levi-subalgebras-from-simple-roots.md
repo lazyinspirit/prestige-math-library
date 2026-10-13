@@ -2,7 +2,7 @@
 id: def-standard-parabolic-and-levi-subalgebras-from-simple-roots
 kind: definition
 title: "Standard parabolic and Levi subalgebras from a subset of simple roots"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

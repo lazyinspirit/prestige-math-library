@@ -2,7 +2,7 @@
 id: def-graded-adjustment-polynomials-in-positive-characteristic
 kind: definition
 title: "The graded adjustment polynomials in positive characteristic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 44

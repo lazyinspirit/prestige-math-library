@@ -3,7 +3,7 @@ id: lem-sr-fermi-walker-transport-existence-and-uniqueness
 kind: lemma
 domain: mathematics
 title: "Existence, uniqueness and linearity of Fermi-Walker transport"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: pthm-cm03-frame-transformations
 kind: physics-theorem
 title: "Transformation of the state quantities under a change of inertial frame: centre of mass, total momentum, kinetic energy, angular momentum, torque, power, work and mechanical energy"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

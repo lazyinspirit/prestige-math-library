@@ -3,7 +3,7 @@ id: lem-nrqm-state-geometry-extreme-points-of-the-state-space
 kind: lemma
 domain: mathematics
 title: "The extreme points of the state space are exactly the pure states"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [lem-nrqm-state-geometry-density-set-convex-and-complete, lem-nrqm-state-geometry-purity-criterion, lem-nrqm-state-geometry-ray-to-rank-one-projection, def-nrqm-state-geometry-pure-mixed-states-and-purity, lem-nrqm-composites-density-and-scalar-spectral-probability, thm-spectral-theorem-for-compact-self-adjoint-operators, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-cauchy-schwarz-in-an-inner-product-space, def-operator-norm, def-hilbert-orthogonal-projection, def-self-adjoint-positive-unitary-and-normal-operator, lem-restriction-of-scalars, def-countable-choice]

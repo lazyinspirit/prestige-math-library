@@ -2,7 +2,7 @@
 id: thm-cm-homogeneous-oscillator-solution-classification
 kind: theorem
 title: "The homogeneous damped oscillator: solution classification by the discriminant and uniqueness for initial data"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

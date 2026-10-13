@@ -2,7 +2,7 @@
 id: ex-the-padded-family-for-lambda-two-one-begins-at-rank-five
 kind: example
 title: "The padded family $V((2,1))$ begins at rank five, with weight three and stability degree two"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

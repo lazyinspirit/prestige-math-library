@@ -2,7 +2,7 @@
 id: def-hecke-jucys-murphy-elements-and-q-contents
 kind: definition
 title: "Hecke Jucys-Murphy elements and q-contents"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

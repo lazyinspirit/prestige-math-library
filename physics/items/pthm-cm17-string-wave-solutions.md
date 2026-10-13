@@ -2,7 +2,7 @@
 id: pthm-cm17-string-wave-solutions
 kind: physics-theorem
 title: "The string model: d'Alembert solutions, fixed-end modes and uniqueness for the adopted one-dimensional continuum"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

@@ -3,7 +3,7 @@ id: lem-em-spherical-harmonic-basis-and-addition
 kind: lemma
 domain: mathematics
 title: "Spherical harmonics: orthogonal decomposition, complete basis and addition theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 1

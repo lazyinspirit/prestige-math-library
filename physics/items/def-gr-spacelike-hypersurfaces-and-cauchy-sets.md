@@ -2,7 +2,7 @@
 id: def-gr-spacelike-hypersurfaces-and-cauchy-sets
 kind: definition
 title: "Spacelike hypersurfaces, acausal sets, Cauchy sets, domains of dependence and Cauchy horizons"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

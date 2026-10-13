@@ -2,7 +2,7 @@
 id: ex-good-node-path-from-empty-to-a-p-restricted-partition
 kind: example
 title: "A full cogood-addition path from the empty partition to (3,1,1) at p = 3"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: def-derived-operations-on-analytic-sheaves-over-locally-compact-spaces
 kind: definition
 title: Derived operations on analytic field sheaves
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 13

@@ -2,7 +2,7 @@
 id: cor-cm-noether-charges-for-translations-rotations-and-boosts
 kind: corollary
 title: "Conserved charges for translation, rotation and boost symmetries of a mechanical Lagrangian"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

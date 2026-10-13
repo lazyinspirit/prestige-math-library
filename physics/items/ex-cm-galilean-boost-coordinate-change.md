@@ -2,7 +2,7 @@
 id: ex-cm-galilean-boost-coordinate-change
 kind: example
 title: "Worked change of adapted chart with a rotation, a boost and a spatial shift"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

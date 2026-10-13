@@ -2,7 +2,7 @@
 id: thm-indecomposable-tiltings-exist-and-are-classified-in-parabolic-category-o
 kind: theorem
 title: "Indecomposable tilting objects exist and are classified in parabolic category O"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 27

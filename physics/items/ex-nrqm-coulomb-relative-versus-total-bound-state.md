@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-example-relative-versus-total-bound-state]
 kind: example
 domain: mathematics
 title: "Relative versus total bound state"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps: [thm-nrqm-coulomb-two-body-reduced-mass, thm-nrqm-coulomb-laguerre-bound-energy-exhaustion, thm-nrqm-coulomb-transported-radial-endpoint-realization, lem-nrqm-composites-euclidean-l2-product-unitary, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, cor-cauchy-schwarz-inequality-for-l-two, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, thm-plancherel, lem-weak-derivatives-are-polynomial-fourier-multipliers, def-countable-choice, def-axiom-of-choice]

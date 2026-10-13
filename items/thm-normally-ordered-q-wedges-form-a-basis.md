@@ -2,7 +2,7 @@
 id: thm-normally-ordered-q-wedges-form-a-basis
 kind: theorem
 title: "Normally ordered q-wedges form a basis for every finite wedge length"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

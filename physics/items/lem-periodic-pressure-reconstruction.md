@@ -2,7 +2,7 @@
 id: lem-periodic-pressure-reconstruction
 kind: lemma
 title: "Reconstruction of the periodic pressure from the velocity: $\\nabla p=-(I-P)((u\\cdot\\nabla)u)$ and $\\Delta p=-\\sum_{i,j}\\partial_i\\partial_j(u_iu_j)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

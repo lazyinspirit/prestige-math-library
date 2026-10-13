@@ -2,7 +2,7 @@
 id: lem-bounded-bilateral-sequence-ball-is-complete
 kind: lemma
 title: "The bounded functions on a set form a complete metric space in the supremum metric, and the coding map of the two-sign shift space is an isometry"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

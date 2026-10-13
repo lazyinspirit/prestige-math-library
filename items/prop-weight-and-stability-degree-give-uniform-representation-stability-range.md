@@ -2,7 +2,7 @@
 id: prop-weight-and-stability-degree-give-uniform-representation-stability-range
 kind: proposition
 title: "Weight and stability degree give a uniform representation-stability range"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

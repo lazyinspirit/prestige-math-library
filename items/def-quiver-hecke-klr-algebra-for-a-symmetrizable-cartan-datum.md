@@ -2,7 +2,7 @@
 id: def-quiver-hecke-klr-algebra-for-a-symmetrizable-cartan-datum
 kind: definition
 title: "The quiver Hecke (KLR) algebra of a symmetrizable Cartan datum"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

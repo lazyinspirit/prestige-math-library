@@ -2,7 +2,7 @@
 id: lem-graded-algebra-isomorphism-transports-the-graded-module-category
 kind: lemma
 title: "A graded algebra isomorphism transports the graded module category, its Grothendieck groups and its dualities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 35

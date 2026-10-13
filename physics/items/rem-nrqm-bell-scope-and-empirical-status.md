@@ -5,7 +5,7 @@ kind: remark
 domain: physics
 title: "Scope and empirical status of the Bell-models page: conditional model
   results and the deferred experiment destination"
-status: draft
+status: published
 origin: session
 dependency_level: 17
 deps:

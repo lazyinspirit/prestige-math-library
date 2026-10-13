@@ -4,7 +4,7 @@ aliases: [ nrqm-potentials-scope-and-idealizations ]
 kind: remark
 domain: physics
 title: "What the one-dimensional potentials page establishes, assumes and defers"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

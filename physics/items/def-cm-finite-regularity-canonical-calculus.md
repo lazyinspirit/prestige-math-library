@@ -3,7 +3,7 @@ id: def-cm-finite-regularity-canonical-calculus
 kind: definition
 title: "Finite-regularity differential forms, Hamiltonian fields and canonical
   maps in phase charts"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

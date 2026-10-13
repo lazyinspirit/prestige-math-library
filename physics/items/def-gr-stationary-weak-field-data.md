@@ -2,7 +2,7 @@
 id: def-gr-stationary-weak-field-data
 kind: definition
 title: "Stationary weak-field data: the diagonal ansatz, its bounds, stationarity and the Einstein-family condition"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

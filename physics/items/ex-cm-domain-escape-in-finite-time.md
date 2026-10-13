@@ -2,7 +2,7 @@
 id: ex-cm-domain-escape-in-finite-time
 kind: example
 title: "A bounded field whose solution leaves the domain in finite time: $x'=v$, $v'=0$ on $(0,\\infty)\\times(-2,2)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

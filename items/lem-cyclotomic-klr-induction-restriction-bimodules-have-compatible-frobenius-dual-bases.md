@@ -2,7 +2,7 @@
 id: lem-cyclotomic-klr-induction-restriction-bimodules-have-compatible-frobenius-dual-bases
 kind: lemma
 title: "Cyclotomic induction and restriction have compatible Frobenius dual bases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 deps: [def-cyclotomic-klr-quotient-at-a-dominant-weight,

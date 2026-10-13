@@ -2,7 +2,7 @@
 id: rem-cm05-collision-scope
 kind: remark
 title: "Scope of the two-body and central-force page: collision and radial exclusions, point-particle and finite-size limits, the empirical parameters and their uncertainty, and the conditional status of the orbit statements"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

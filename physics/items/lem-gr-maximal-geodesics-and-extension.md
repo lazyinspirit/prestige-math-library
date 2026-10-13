@@ -2,7 +2,7 @@
 id: lem-gr-maximal-geodesics-and-extension
 kind: lemma
 title: "Convergent causal ends are extendible, maximal geodesics have no limit, and Cauchy sets are acausal"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

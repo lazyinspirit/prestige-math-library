@@ -2,7 +2,7 @@
 id: ex-kashiwara-strings-in-the-three-dimensional-sl-two-module
 kind: example
 title: "Kashiwara strings in the three-dimensional $\\mathfrak{sl}_2$-module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

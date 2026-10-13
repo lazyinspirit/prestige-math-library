@@ -3,7 +3,7 @@ id: "ex-em-circular-loop-axis-field"
 kind: "example"
 domain: physics
 title: "Axis field of the declared ideal circular thin loop"
-status: draft
+status: published
 origin: session
 dependency_level: 20
 deps: ["def-em-steady-current-regime", "def-em-magnetic-moment", "pthm-em-biot-savart", "lem-em-thin-current-limit", "def-cross-product-in-r3", "def-riemann-integral-over-a-jordan-set", "thm-continuous-functions-on-compact-jordan-sets-are-integrable", "def-countable-choice", "post-em-ideal-magnetostatic-models", thm-sine-and-cosine-derivatives, thm-sine-cosine-zero-sets-and-fundamental-period, thm-chain-rule-for-total-derivatives, thm-ftc-second-part, thm-substitution]

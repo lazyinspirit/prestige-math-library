@@ -2,7 +2,7 @@
 id: lem-lorentz-form-has-orthonormal-basis
 kind: lemma
 title: "Every Lorentz form admits an ordered basis with matrix diag(-1,1,1,1)"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 1

@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Worked Bell angles: the singlet against the EPR product mixture at the
   same directions"
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps:

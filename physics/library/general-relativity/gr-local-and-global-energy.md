@@ -7,7 +7,7 @@ requires:
   - gr-curvature-and-tides
 page: gr-local-and-global-energy
 title: "Local And Global Energy"
-status: draft
+status: published
 library: physics
 items:
   - def-gr-observer-energy-momentum-current

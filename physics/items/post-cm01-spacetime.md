@@ -2,7 +2,7 @@
 id: post-cm01-spacetime
 kind: postulate
 title: "Adopted Newtonian spacetime structure: absolute time, Euclidean spatial slices and their smooth structure"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 3

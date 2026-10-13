@@ -2,7 +2,7 @@
 id: def-sr-causal-reachability-in-affine-minkowski-space
 kind: definition
 title: "Causal reachability, causal futures and pasts, causal diamonds, and reachability by future causal paths in affine Minkowski space"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

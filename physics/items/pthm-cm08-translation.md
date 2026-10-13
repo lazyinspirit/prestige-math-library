@@ -2,7 +2,7 @@
 id: pthm-cm08-translation
 kind: physics-theorem
 title: "Translation symmetry of the model's Lagrangian and conservation of total momentum: exact hypothesis, conservation and its sharpness"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

@@ -2,7 +2,7 @@
 id: lem-fourier-lattice-sobolev-embedding
 kind: lemma
 title: "Sobolev embedding on the torus: $H^\\sigma\\subseteq C^j$ for $\\sigma>j+3/2$, with continuous representatives"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

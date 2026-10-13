@@ -2,7 +2,7 @@
 id: prop-global-bases-specialize-to-integral-weight-bases
 kind: proposition
 title: "Specialization of the global bases and the root-of-unity boundary"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

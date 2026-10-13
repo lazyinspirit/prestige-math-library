@@ -6,7 +6,7 @@ requires:
   - gr-framework-and-geometry
 page: gr-spherical-vacuum-model-examples
 title: "Spherical Vacuum Model — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

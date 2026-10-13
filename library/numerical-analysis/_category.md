@@ -1,7 +1,7 @@
 ---
 name: numerical-analysis
 title: Numerical analysis
-status: draft
+status: published
 ---
 
 Numerical analysis studies how mathematical problems are represented, approximated, and computed, and how error moves through those steps. Its core questions include what a floating-point answer means, when a residual controls the solution, how discretization error depends on stability and regularity, and which assumptions make an iteration converge. The subject connects direct and iterative linear algebra with interpolation, quadrature, ordinary differential equations, partial differential equations, finite elements, spectral methods, and randomized computation.

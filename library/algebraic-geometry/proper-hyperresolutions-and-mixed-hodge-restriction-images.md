@@ -1,7 +1,7 @@
 ---
 page: proper-hyperresolutions-and-mixed-hodge-restriction-images
 title: "Proper Hyperresolutions And Mixed Hodge Restriction Images"
-status: draft
+status: published
 items:
 - def-split-augmented-simplicial-objects-and-matching-objects
 - lem-blowups-of-projective-schemes-are-projective

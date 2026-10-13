@@ -2,7 +2,7 @@
 id: cex-direct-q-one-substitution-in-quantum-denominators
 kind: counterexample
 title: "Direct q=1 substitution in quantum denominators"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: ex-cm09-forced-resonant-mode-check
 kind: example
 title: "A drive along the in-phase pattern of the two-mass chain: resonance exactly at that mode's frequency and a bounded steady response off resonance"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

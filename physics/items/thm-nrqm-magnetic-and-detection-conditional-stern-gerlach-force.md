@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-conditional-stern-gerlach-force]
 kind: theorem
 domain: mathematics
 title: "Conditional Stern-Gerlach force for a spin-coupled bounded field model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, thm-tonelli-theorem-for-sigma-finite-product-spaces, prop-nrqm-orbital-and-spin-finite-spin-matrices, thm-nrqm-magnetic-and-detection-conserved-spectral-probability-laws, thm-nrqm-magnetic-and-detection-graph-domain-ehrenfest-and-timescale, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, def-nrqm-magnetic-and-detection-position-and-momentum-operators, lem-schwartz-cutoffs-from-the-standard-smooth-step, lem-weak-product-rule-for-bounded-sobolev-functions, lem-sobolev-integration-by-parts-for-dual-exponents, lem-weak-leibniz-rule-with-a-smooth-factor, thm-plancherel, def-fourier-transform-on-l-one-of-rn, thm-dominated-convergence, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-hilbert-space, def-inner-product-space, def-countable-choice, def-axiom-of-choice]

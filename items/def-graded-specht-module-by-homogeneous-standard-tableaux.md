@@ -2,7 +2,7 @@
 id: def-graded-specht-module-by-homogeneous-standard-tableaux
 kind: definition
 title: "The graded Specht module by homogeneous standard tableaux"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 34

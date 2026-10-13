@@ -2,7 +2,7 @@
 id: cex-sr-reverse-cauchy-schwarz-fails-outside-the-cone-pair
 kind: counterexample
 title: "Counterexample: the reversed Cauchy-Schwarz inequality fails outside same-orientation timelike pairs"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 proof_strategy: direct

@@ -5,7 +5,7 @@ kind: lemma
 domain: mathematics
 title: "The orbital Casimir identity: the restrictions of the orbital generators
   to the degree-l blocks are spin-l models"
-status: draft
+status: published
 origin: session
 dependency_level: 8
 deps:

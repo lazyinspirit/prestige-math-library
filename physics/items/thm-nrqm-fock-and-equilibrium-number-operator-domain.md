@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-number-operator-domain]
 kind: theorem
 domain: mathematics
 title: "Number operator domain"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-fock-sector-projections, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, lem-nrqm-composites-permutation-sector-projections, def-hilbert-space, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-unbounded-linear-operator-domain-and-graph, def-bounded-linear-operator, thm-cauchy-schwarz-in-an-inner-product-space, def-countable-choice]

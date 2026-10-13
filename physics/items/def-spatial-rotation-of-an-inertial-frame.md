@@ -2,7 +2,7 @@
 id: def-spatial-rotation-of-an-inertial-frame
 kind: definition
 title: Spatial rotations of an inertial frame
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

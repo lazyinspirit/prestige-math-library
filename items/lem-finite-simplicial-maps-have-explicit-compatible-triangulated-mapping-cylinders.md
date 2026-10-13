@@ -2,7 +2,7 @@
 id: lem-finite-simplicial-maps-have-explicit-compatible-triangulated-mapping-cylinders
 kind: lemma
 title: "Finite simplicial maps have explicit compatible triangulated mapping cylinders"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

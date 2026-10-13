@@ -4,7 +4,7 @@ kind: example
 domain: physics
 title: "The declared single-channel resonance: Lorentzian factor, half-height
   points and resonance-value cross section"
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps:

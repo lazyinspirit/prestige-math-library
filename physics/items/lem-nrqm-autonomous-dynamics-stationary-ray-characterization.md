@@ -4,7 +4,7 @@ aliases: [nrqm-autonomous-dynamics-stationary-ray-characterization]
 kind: lemma
 domain: mathematics
 title: "Stationary rays of a self-adjoint flow are exactly the eigenrays"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [cor-finite-dimensional-subspaces-are-closed, def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-inner-product-space, def-projection-valued-measure, def-strongly-continuous-one-parameter-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-unbounded-integral-against-a-pvm, lem-closed-subspace-of-a-banach-space-is-banach, lem-nrqm-autonomous-dynamics-flow-calculus, lem-unbounded-pvm-integral-is-well-defined-and-closed, thm-bounded-borel-pvm-integral, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-stone-one-parameter-unitary-groups, thm-unbounded-borel-functional-calculus]

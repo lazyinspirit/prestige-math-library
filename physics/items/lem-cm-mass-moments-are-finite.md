@@ -2,7 +2,7 @@
 id: lem-cm-mass-moments-are-finite
 kind: lemma
 title: "Finiteness of the moments of a bounded finite Borel measure on $\\mathbb R^3$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

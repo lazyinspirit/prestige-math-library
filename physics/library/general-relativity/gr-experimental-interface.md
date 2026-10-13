@@ -9,7 +9,7 @@ requires:
   - gr-tensors-and-observers
 page: gr-experimental-interface
 title: "Experimental Interface"
-status: draft
+status: published
 library: physics
 items:
   - def-gr-observation-and-analysis-architecture

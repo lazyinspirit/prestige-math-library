@@ -2,7 +2,7 @@
 id: thm-higher-level-schur-weyl-endomorphism-isomorphism
 kind: theorem
 title: "The higher-level Schur-Weyl endomorphism isomorphism"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 35

@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-example-spin-singlet-chsh]
 kind: example
 domain: mathematics
 title: "Spin singlet CHSH"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [prop-nrqm-orbital-and-spin-finite-spin-matrices, thm-nrqm-orbital-and-spin-tsirelson-bound, lem-nrqm-composites-hilbert-tensor-construction, def-matrix-product-and-identity-matrix, def-linear-map, def-inner-product-space, def-hilbert-space, cor-inner-product-induces-a-norm, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-euclidean-inner-product, def-countable-choice]

@@ -2,7 +2,7 @@
 id: ex-cm-jordan-block-dichotomy-computed
 kind: example
 title: "Computed dichotomy constants for a Jordan block and for a diagonal sink-source"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

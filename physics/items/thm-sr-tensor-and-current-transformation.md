@@ -2,7 +2,7 @@
 id: thm-sr-tensor-and-current-transformation
 kind: theorem
 title: Transformation of tensor, covector, derivative and current components under affine Lorentz maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

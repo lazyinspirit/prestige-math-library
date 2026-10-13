@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-scope-and-empirical-status]
 kind: remark
 domain: physics
 title: "Scope and empirical status of the light-matter and spectral-transitions page"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 18
 deps: [def-nrqm-light-matter-framework-finite-level-coupled-model, def-nrqm-light-matter-framework-dipole-drive-and-long-wavelength, def-nrqm-light-matter-framework-spectral-transition-and-detection, lem-nrqm-light-matter-first-order-photon-energy-law, pthm-nrqm-light-matter-first-order-emission-and-absorption-coefficients, pthm-nrqm-light-matter-golden-rule-limit-and-rate-reading, pthm-nrqm-light-matter-stimulated-dipole-drive-transitions, pthm-nrqm-light-matter-dipole-selection-rules, post-nrqm-light-matter-vacuum-preparation-and-emission-assumption, post-nrqm-photons-radiation-extension-and-transverse-mode-assignment, post-nrqm-framework-preparation-and-apparatus, post-nrqm-framework-observable-and-probability, def-nrqm-photons-framework-ideal-counting-and-detection-model, def-nrqm-framework-quantities-and-units]

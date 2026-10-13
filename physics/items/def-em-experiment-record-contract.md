@@ -2,7 +2,7 @@
 id: def-em-experiment-record-contract
 kind: definition
 title: "Report-backed operational evidence with uncertainty"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

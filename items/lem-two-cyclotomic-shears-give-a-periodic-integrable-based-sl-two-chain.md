@@ -2,7 +2,7 @@
 id: lem-two-cyclotomic-shears-give-a-periodic-integrable-based-sl-two-chain
 kind: lemma
 title: "Two cyclotomic shears give a periodic integrable based quantum sl-two chain"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

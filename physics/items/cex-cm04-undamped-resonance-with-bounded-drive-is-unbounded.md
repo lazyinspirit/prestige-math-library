@@ -2,7 +2,7 @@
 id: cex-cm04-undamped-resonance-with-bounded-drive-is-unbounded
 kind: counterexample
 title: "A bounded sinusoidal drive with unbounded motions: the undamped driven oscillator at $\\Omega=\\omega_0$ refutes the unqualified boundedness claim"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 20

@@ -2,7 +2,7 @@
 id: thm-gr-density-divergence-and-finite-chain-flux
 kind: theorem
 title: "Divergence, Stokes flux balance and the non-null face formula for a Lorentzian current"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

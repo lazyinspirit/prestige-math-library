@@ -1,7 +1,7 @@
 ---
 page: projective-perverse-hard-lefschetz-and-decomposition
 title: "Projective Perverse Hard Lefschetz And Decomposition"
-status: draft
+status: published
 items: [lem-perverse-closed-support-splitting-is-equivalent-to-costalk-stalk-isomorphism,
         lem-middle-lefschetz-primitive-polarization-follows-from-nonmiddle-polarizations,
         lem-projective-hodge-perverse-package-closes-under-defect-and-image-dimension-induction,

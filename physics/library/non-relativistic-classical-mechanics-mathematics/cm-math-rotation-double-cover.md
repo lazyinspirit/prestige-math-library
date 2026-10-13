@@ -1,7 +1,7 @@
 ---
 page: cm-math-rotation-double-cover
 title: Rotation Double Cover
-status: draft
+status: published
 items:
   - def-cm-quaternion-rotation-map-and-cover
   - lem-cm-quaternion-product-rule-and-conjugation-formula

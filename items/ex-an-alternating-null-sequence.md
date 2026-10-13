@@ -2,7 +2,7 @@
 id: ex-an-alternating-null-sequence
 kind: example
 title: "The alternating sequence $(-1)^k/(k+1)$ converges to $0$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

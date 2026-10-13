@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-vacuum-preparation-and-emission-assumption]
 kind: postulate
 domain: physics
 title: "The vacuum-preparation and quantized-field assumption for spontaneous emission in the cutoff dipole model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 16
 deps: [def-nrqm-light-matter-framework-finite-level-coupled-model, def-nrqm-light-matter-framework-spectral-transition-and-detection, post-nrqm-photons-radiation-extension-and-transverse-mode-assignment, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-preparation-and-apparatus, post-nrqm-approximations-static-finite-level-dipole-coupling, def-nrqm-photons-framework-radiation-sector-and-quantum-assignments, def-nrqm-photons-framework-ideal-counting-and-detection-model, def-nrqm-state-geometry-framework-state-space, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-framework-quantities-and-units, def-inner-product-space, def-countable-choice, def-axiom-of-choice, def-nrqm-light-matter-framework-dipole-drive-and-long-wavelength]

@@ -2,7 +2,7 @@
 id: ex-cm02-drag-terminal-velocity
 kind: example
 title: "Motion under linear drag and a constant applied force: explicit global solution and approach to the terminal velocity"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

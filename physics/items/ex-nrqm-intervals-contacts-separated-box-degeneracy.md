@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-example-separated-box-degeneracy]
 kind: example
 domain: mathematics
 title: "Separated-box degeneracy"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [thm-nrqm-intervals-robin-simple-complete-spectrum, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-nrqm-intervals-hilbert-sobolev-spaces, thm-nrqm-intervals-sine-on-completeness, lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-tonelli-and-fubini-for-completed-product-measures, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

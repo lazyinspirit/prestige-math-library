@@ -2,7 +2,7 @@
 id: thm-analytic-sheaf-six-operations-have-coherent-base-change-projection-and-trace
 kind: theorem
 title: Coherent six operations on analytic constructible field sheaves
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

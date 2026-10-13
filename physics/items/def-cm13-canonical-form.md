@@ -2,7 +2,7 @@
 id: def-cm13-canonical-form
 kind: definition
 title: "Canonical coordinates and the canonical form of the two-form for a potential presentation: the coordinate expression $\\omega=\\sum_{a=1}^{m} d\\theta^a\\wedge d\\theta^{m+a}$ with $m$ the chart's half-dimension, and the model's own momentum charts"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

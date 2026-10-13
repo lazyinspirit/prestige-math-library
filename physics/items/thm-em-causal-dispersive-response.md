@@ -2,7 +2,7 @@
 id: thm-em-causal-dispersive-response
 kind: theorem
 title: "Causal convolution response, transfer function and dispersion relations"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

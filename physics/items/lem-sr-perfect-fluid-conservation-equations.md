@@ -2,7 +2,7 @@
 id: lem-sr-perfect-fluid-conservation-equations
 kind: lemma
 title: "Perfect-fluid divergence identity and its equivalence with the energy-balance and Euler equations"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [thm-sr-proper-time-and-observer-decomposition, def-ck-tensor-field-on-minkowski-space, def-flat-covariant-derivative-on-affine-minkowski-space, def-sr-observer-congruence-and-kinematics, def-directional-and-partial-derivatives, thm-algebra-of-derivatives, def-lorentz-form-and-inertia, def-sr-affine-minkowski-model, def-sr-stress-energy-tensor-and-force-density]

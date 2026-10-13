@@ -2,7 +2,7 @@
 id: lem-gr-cauchy-set-topology-and-graph
 kind: lemma
 title: "Cauchy sets are closed, split the manifold into past, set and future, and are locally Lipschitz graphs"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 20

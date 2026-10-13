@@ -2,7 +2,7 @@
 id: ex-cm-string-modes-and-tail-constants
 kind: example
 title: "The first sine mode with matched velocity data: exact solution and the numerical tail bound $8(N+1)^{-4}$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

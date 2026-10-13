@@ -3,7 +3,7 @@ id: ex-gr-kruskal-cone-and-radial-values
 kind: example
 title: "Explicit causal-cone and radial-derivative checks in the Kruskal model
   at the horizon for s = 1 m"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 17

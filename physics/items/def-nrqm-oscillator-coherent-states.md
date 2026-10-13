@@ -4,7 +4,7 @@ aliases: [ nrqm-oscillator-coherent-states ]
 kind: definition
 domain: physics
 title: "The coherent states of the oscillator model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

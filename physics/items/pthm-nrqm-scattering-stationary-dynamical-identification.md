@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Identification of the model's scattering operator with the on-shell
   stationary operator, and the central per-channel form"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

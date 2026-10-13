@@ -3,7 +3,7 @@ id: ex-em-te-ten-example
 kind: example
 domain: physics
 title: "The TE10 candidate of a lossless rectangular guide: explicit fields, cutoff and propagating branch"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 deps: [def-em-guide-cavity-geometry, def-em-si-conventions, pthm-em-rectangular-mode-candidates, lem-em-rectangle-mode-profile-identities]

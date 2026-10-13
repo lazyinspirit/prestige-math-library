@@ -2,7 +2,7 @@
 id: lem-three-dimensional-radial-carleman-integer-weight
 kind: lemma
 title: Three-dimensional radial Carleman inequality with integer weight
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-gr-locally-finite-shell-sum
 kind: lemma
 title: "Weak steps: locally finite sums of cone bumps give a smooth step around each Cauchy level with past timelike gradient near the level"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 27

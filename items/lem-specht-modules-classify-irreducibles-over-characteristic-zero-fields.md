@@ -2,7 +2,7 @@
 id: lem-specht-modules-classify-irreducibles-over-characteristic-zero-fields
 kind: lemma
 title: "Specht modules classify the irreducibles over every field of characteristic zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

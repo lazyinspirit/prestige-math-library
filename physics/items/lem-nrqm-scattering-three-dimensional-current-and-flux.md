@@ -4,7 +4,7 @@ aliases: [nrqm-scattering-three-dimensional-current-and-flux]
 kind: lemma
 domain: mathematics
 title: "The three-dimensional continuity identity, the vanishing stationary divergence and the incident and outgoing current readings"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [def-directional-and-partial-derivatives, def-jacobian-matrix-and-gradient, def-divergence-and-curl-of-a-c1-vector-field, def-ck-euclidean-maps-and-diffeomorphisms, thm-algebra-of-total-derivatives, thm-chain-rule-for-total-derivatives, thm-total-derivative-computes-directional-and-partial-derivatives, thm-algebra-of-derivatives, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, def-interval, def-countable-choice]

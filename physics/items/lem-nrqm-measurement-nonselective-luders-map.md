@@ -4,7 +4,7 @@ aliases: [nrqm-measurement-nonselective-luders-map]
 kind: lemma
 domain: mathematics
 title: "The non-selective Lueders map and the discarded-outcome ensemble"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-countable-choice, def-hilbert-orthogonal-projection, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-trace-class-operator, def-trace-of-a-trace-class-operator, lem-nrqm-composites-countable-kraus-normalization, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-rank-one-operator-calculus, lem-nrqm-measurement-selective-luders-update, thm-trace-class-is-a-two-sided-banach-operator-ideal]

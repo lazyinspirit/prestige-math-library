@@ -2,7 +2,7 @@
 id: ex-cm-two-to-one-preimages-and-homomorphism-check
 kind: example
 title: "Finite checks of the cover: the half-turn rotations $\\rho(\\pm i),\\rho(\\pm j),\\rho(\\pm k)$, the identity $\\rho(i)\\rho(j)=\\rho(ij)$, and the exact preimages of $\\rho(k)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: def-integral-form-of-the-cyclotomic-hecke-klr-block
 kind: definition
 title: "The integral form of the cyclotomic Hecke-KLR block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 34

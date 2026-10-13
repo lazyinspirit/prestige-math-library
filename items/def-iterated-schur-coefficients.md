@@ -2,7 +2,7 @@
 id: def-iterated-schur-coefficients
 kind: definition
 title: "Threefold Schur coefficients $c^\\delta_{a,b,c}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

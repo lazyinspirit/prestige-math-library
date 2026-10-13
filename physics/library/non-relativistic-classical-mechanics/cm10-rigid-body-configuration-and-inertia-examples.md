@@ -1,7 +1,7 @@
 ---
 page: cm10-rigid-body-configuration-and-inertia-examples
 title: "Rigid-body configuration and inertia — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

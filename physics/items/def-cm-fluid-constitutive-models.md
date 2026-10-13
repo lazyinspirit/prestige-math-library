@@ -2,7 +2,7 @@
 id: def-cm-fluid-constitutive-models
 kind: definition
 title: "Incompressible Newtonian and barotropic inviscid fluid constitutive models"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

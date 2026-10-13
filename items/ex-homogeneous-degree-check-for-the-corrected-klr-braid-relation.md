@@ -2,7 +2,7 @@
 id: ex-homogeneous-degree-check-for-the-corrected-klr-braid-relation
 kind: example
 title: "Homogeneous degree check for the corrected KLR braid relation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 14

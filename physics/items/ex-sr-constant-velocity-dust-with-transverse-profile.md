@@ -2,7 +2,7 @@
 id: ex-sr-constant-velocity-dust-with-transverse-profile
 kind: example
 title: "A dust solution with constant velocity and transverse density profile"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [lem-sr-dust-conservation-equivalence, thm-sr-stress-balance-and-finite-flux, def-sr-stress-energy-tensor-and-force-density, def-directional-and-partial-derivatives, def-rational-power, thm-real-power-continuity-and-derivatives, def-inertial-frame-and-inertial-chart, def-lorentz-form-and-inertia, def-sr-affine-minkowski-model]

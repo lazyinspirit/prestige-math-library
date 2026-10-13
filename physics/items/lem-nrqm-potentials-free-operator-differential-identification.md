@@ -4,7 +4,7 @@ aliases: [nrqm-potentials-free-operator-differential-identification]
 kind: lemma
 domain: mathematics
 title: "The one-dimensional free Schr\"odinger operator as the weak second-derivative operator"
-status: draft
+status: published
 origin: session
 dependency_level: 1
 deps: [thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, lem-weak-derivatives-are-polynomial-fourier-multipliers, def-sobolev-space-wkp-and-its-norm, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, thm-plancherel, def-weak-derivative-of-a-locally-integrable-function, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-countable-choice, def-axiom-of-choice]

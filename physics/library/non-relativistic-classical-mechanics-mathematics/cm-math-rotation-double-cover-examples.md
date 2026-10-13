@@ -1,7 +1,7 @@
 ---
 page: cm-math-rotation-double-cover-examples
 title: Rotation Double Cover — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-constant-angular-velocity-quaternion-lift

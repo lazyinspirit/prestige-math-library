@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The declared central-potential model: spherical reduction of smooth
   compactly supported radial states"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

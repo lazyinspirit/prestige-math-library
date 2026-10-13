@@ -2,7 +2,7 @@
 id: ex-sr-proper-time-reparametrization
 kind: example
 title: "Worked example: invariance of elapsed proper time under a cubic reparametrization"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 10

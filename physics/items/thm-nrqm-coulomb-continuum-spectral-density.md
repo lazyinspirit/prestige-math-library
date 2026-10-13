@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-coulomb-continuum-spectral-density]
 kind: theorem
 domain: mathematics
 title: "Coulomb continuum spectral density"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps: [thm-nrqm-coulomb-jost-volterra-solution, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-coulomb-laguerre-bound-energy-exhaustion, thm-nrqm-coulomb-essential-spectrum, thm-nrqm-coulomb-angular-radial-unitary-reduction, lem-nrqm-coulomb-three-dimensional-hardy-bound, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, def-projection-valued-measure, def-discrete-and-essential-spectrum-of-a-self-adjoint-operator, lem-compositions-with-a-compact-operator-are-compact, thm-self-adjoint-resolvent-estimate, thm-dominated-convergence, thm-tonelli-and-fubini-for-completed-product-measures, thm-complex-lp-completeness-and-almost-everywhere-subsequences, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, cor-cauchy-schwarz-inequality-for-l-two, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-countable-choice, def-axiom-of-choice]

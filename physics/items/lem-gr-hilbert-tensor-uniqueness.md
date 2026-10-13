@@ -2,7 +2,7 @@
 id: lem-gr-hilbert-tensor-uniqueness
 kind: lemma
 title: "Uniqueness of the Hilbert stress-energy tensor"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

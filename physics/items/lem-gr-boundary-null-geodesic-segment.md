@@ -3,7 +3,7 @@ id: lem-gr-boundary-null-geodesic-segment
 kind: lemma
 title: "An exposed boundary point: the last boundary point of a boundary null
   geodesic has no other boundary point in its past"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 32

@@ -1,7 +1,7 @@
 ---
 page: em-vacuum-waves-and-polarization-examples
 title: "Vacuum waves and polarization — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-em-polarization-examples,
            ex-em-plane-wave-infinite-energy,

@@ -2,7 +2,7 @@
 id: lem-facet-tensor-weight-exclusion
 kind: lemma
 title: "The facet tensor-weight exclusion lemma"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

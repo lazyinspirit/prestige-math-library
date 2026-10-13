@@ -3,7 +3,7 @@ id: lem-em-magnetic-dipole-remainder
 kind: lemma
 domain: mathematics
 title: "Magnetic dipole expansion with an explicit uniform remainder"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 1

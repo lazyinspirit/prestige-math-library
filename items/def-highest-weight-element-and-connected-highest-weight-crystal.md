@@ -2,7 +2,7 @@
 id: def-highest-weight-element-and-connected-highest-weight-crystal
 kind: definition
 title: "Highest weight elements, lowering-generated sets and highest weight crystals"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

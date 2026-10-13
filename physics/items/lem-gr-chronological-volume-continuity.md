@@ -2,7 +2,7 @@
 id: lem-gr-chronological-volume-continuity
 kind: lemma
 title: "Continuity and strict monotonicity of the chronological volume functions in a globally hyperbolic manifold"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 23

@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-bounded-coefficient-magnetic-operator]
 kind: theorem
 domain: mathematics
 title: "Self-adjointness of the bounded-coefficient magnetic Schrodinger operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-nrqm-magnetic-and-detection-magnetic-schrodinger-operator, def-nrqm-magnetic-and-detection-position-and-momentum-operators, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, lem-nrqm-magnetic-and-detection-weak-product-rule, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, thm-kato-rellich, def-relative-boundedness-with-respect-to-an-operator, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, thm-plancherel, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, def-sobolev-space-wkp-and-its-norm, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

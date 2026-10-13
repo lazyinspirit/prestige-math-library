@@ -2,7 +2,7 @@
 id: ex-sr-bell-congruence-rest-separation-worked
 kind: example
 title: "Bell congruence worked: internal material length gamma(t)L and constant chart separation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 15

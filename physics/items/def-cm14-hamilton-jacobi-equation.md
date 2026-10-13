@@ -2,7 +2,7 @@
 id: def-cm14-hamilton-jacobi-equation
 kind: definition
 title: "The Hamilton-Jacobi equation of a declared potential presentation: the class of action-dimension functions $S$ with $S_t+H(t,q,S_q)=0$ in one momentum chart"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 19

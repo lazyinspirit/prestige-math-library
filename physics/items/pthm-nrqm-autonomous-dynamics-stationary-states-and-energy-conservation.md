@@ -4,7 +4,7 @@ aliases: [ nrqm-autonomous-dynamics-stationary-states-and-energy-conservation ]
 kind: physics-theorem
 domain: physics
 title: "Energy conservation, conserved sharp observables and the stationary eigenrays"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

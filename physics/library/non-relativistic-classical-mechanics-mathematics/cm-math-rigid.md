@@ -1,7 +1,7 @@
 ---
 page: cm-math-rigid
 title: Cm Math Rigid
-status: draft
+status: published
 items:
   - lem-cm-matrix-curve-derivative-rules
   - lem-cm-skew-matrix-cross-product-correspondence

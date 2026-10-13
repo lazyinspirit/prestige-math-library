@@ -2,7 +2,7 @@
 id: lem-kahler-commutators-and-laplacian-type-preservation
 kind: lemma
 title: "Kähler commutators and preservation of harmonic types"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps:

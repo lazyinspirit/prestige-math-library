@@ -2,7 +2,7 @@
 id: rem-cm18-galilean-regime
 kind: remark
 title: "The Galilean regime of the framework: frame-relative protocols, the absence of an intrinsic slow-motion parameter, and the empirical status of a validity claim"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps: [def-cm18-observable-model, post-cm01-spacetime, post-cm01-frames, pthm-cm01-galilean-kinematics, rem-cm01-model-limit, def-cm01-units, post-cm02-force-superposition, pthm-cm02-ivp]

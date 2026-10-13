@@ -2,7 +2,7 @@
 id: def-periodic-vector-sobolev-space-and-leray-projection
 kind: definition
 title: "Periodic vector Sobolev spaces on the three-torus, the weight family, and the Leray projection"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

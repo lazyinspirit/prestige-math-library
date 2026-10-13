@@ -2,7 +2,7 @@
 id: thm-soergels-character-conjecture
 kind: theorem
 title: "Soergel's character conjecture for type A"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 12

@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The Heisenberg picture: equivalent predictions and the domain-qualified
   equation of motion"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

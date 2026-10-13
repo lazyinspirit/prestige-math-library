@@ -5,7 +5,7 @@ title: "Smooth finite-range free scattering refutes global strict decrease; as a
   separate contact comparison, an attractive refracting shell with index $3/2$
   has $\\theta(b)=2(\\arcsin(b/a)-\\arcsin(2b/(3a)))$ strictly increasing, with
   a jump down to $0$ at grazing incidence"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

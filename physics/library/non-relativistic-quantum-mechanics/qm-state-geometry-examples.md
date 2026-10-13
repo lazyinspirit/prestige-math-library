@@ -1,7 +1,7 @@
 ---
 page: qm-state-geometry-examples
 title: "Qm State Geometry — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

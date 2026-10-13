@@ -1,7 +1,7 @@
 ---
 page: em-wave-equation-prerequisites
 title: Em Wave Equation Prerequisites
-status: draft
+status: published
 items: [lem-em-spherical-mean-family-smoothness, thm-em-wave-cauchy-kirchhoff]
 examples: []
 ---

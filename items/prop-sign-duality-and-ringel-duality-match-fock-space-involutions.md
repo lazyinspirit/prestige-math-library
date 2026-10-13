@@ -2,7 +2,7 @@
 id: prop-sign-duality-and-ringel-duality-match-fock-space-involutions
 kind: proposition
 title: "Sign duality and Ringel duality match the Fock-space involutions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 43

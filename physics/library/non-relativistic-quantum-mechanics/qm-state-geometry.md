@@ -1,7 +1,7 @@
 ---
 page: qm-state-geometry
 title: "Qm State Geometry"
-status: draft
+status: published
 library: physics
 items:
   - def-nrqm-state-geometry-state-vectors-and-rays

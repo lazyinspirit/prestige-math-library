@@ -2,7 +2,7 @@
 id: ex-cm08-uniform-field-breaks-translation-and-boost
 kind: example
 title: "The uniform-force model: translation and boost charges fail across the field while the energy survives, with exact rates and a numerical instance"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

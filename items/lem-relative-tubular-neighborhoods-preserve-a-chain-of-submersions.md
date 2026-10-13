@@ -2,7 +2,7 @@
 id: lem-relative-tubular-neighborhoods-preserve-a-chain-of-submersions
 kind: lemma
 title: "Relative tubular neighborhoods preserve a chain of submersions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

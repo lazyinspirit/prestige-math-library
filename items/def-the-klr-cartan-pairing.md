@@ -2,7 +2,7 @@
 id: def-the-klr-cartan-pairing
 kind: definition
 title: "The KLR Cartan (graded Hom) pairing on the projective Grothendieck group"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

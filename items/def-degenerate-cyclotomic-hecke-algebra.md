@@ -2,7 +2,7 @@
 id: def-degenerate-cyclotomic-hecke-algebra
 kind: definition
 title: "The degenerate cyclotomic Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

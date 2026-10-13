@@ -2,7 +2,7 @@
 id: cor-hook-divisibility-defect-zero-vanishing-criterion
 kind: corollary
 title: "The hook-divisibility vanishing criterion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

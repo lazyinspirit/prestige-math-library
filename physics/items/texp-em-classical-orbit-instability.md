@@ -3,7 +3,7 @@ id: texp-em-classical-orbit-instability
 kind: thought-experiment
 title: "Conditional radius loss of a prescribed slowly orbiting charge in a reduced quasistatic model"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 22
 deps: [pthm-em-larmor-nonrelativistic, post-em-lorentz-coupling, def-em-lab-geometry, def-em-si-conventions, thm-ftc-second-part, lem-derivative-of-a-power, thm-real-power-continuity-and-derivatives, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, def-interval, def-countable-choice]

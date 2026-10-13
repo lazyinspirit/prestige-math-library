@@ -2,7 +2,7 @@
 id: lem-mixed-relations-and-local-nilpotence-give-an-integrable-quantum-action
 kind: lemma
 title: "Mixed relations, local nilpotence and weights give the integrable quantum action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

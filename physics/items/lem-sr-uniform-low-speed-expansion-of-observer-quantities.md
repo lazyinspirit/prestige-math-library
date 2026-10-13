@@ -3,7 +3,7 @@ id: lem-sr-uniform-low-speed-expansion-of-observer-quantities
 kind: lemma
 domain: mathematics
 title: 'Uniform low-speed expansion of the observer energy, momentum and kinetic energy of a massive four-momentum'
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps: [lem-sr-uniform-low-speed-taylor-remainder, lem-sr-energy-momentum-observer-identities, thm-sr-proper-time-and-observer-decomposition, def-sr-observed-energy-momentum-and-kinetic-energy, def-sr-affine-minkowski-model, def-rational-power, def-integer-power, def-abs-value, lem-of-abs-value]

@@ -1,7 +1,7 @@
 ---
 page: relative-smooth-triangulation-and-bundle-fitting-examples
 title: "Relative smooth triangulation and bundle fitting \u2014 examples"
-status: draft
+status: published
 items: []
 examples: [ex-a-trivial-smooth-bundle-has-a-projection-preserving-product-triangulation]
 ---

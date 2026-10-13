@@ -3,7 +3,7 @@ id: pthm-em-inductor-energy
 kind: physics-theorem
 title: "Restricted inductor energy LI^2/2 and its identification with the frozen magnetic field energy"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 20
 proof_strategy: direct

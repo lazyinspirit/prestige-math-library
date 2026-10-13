@@ -2,7 +2,7 @@
 id: prop-verma-flag-multiplicities-are-standard-filtration-ranks-under-v
 kind: proposition
 title: Verma-flag multiplicities are standard-filtration ranks under V
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 12

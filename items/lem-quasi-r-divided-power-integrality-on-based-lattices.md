@@ -2,7 +2,7 @@
 id: lem-quasi-r-divided-power-integrality-on-based-lattices
 kind: lemma
 title: "Divided-power integrality of the quasi-$R$ action on based lattices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

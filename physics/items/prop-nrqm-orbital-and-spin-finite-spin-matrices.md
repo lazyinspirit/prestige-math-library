@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-finite-spin-matrices]
 kind: proposition
 domain: mathematics
 title: "Finite spin matrices"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-inner-product-space, def-linear-map, def-linear-basis, def-linear-combination-and-span, def-adjoint-of-a-linear-map-between-inner-product-spaces, def-self-adjoint-and-normal-endomorphism, def-complex-numbers-and-arithmetic, lem-complex-conjugation-and-modulus-laws, def-natural-numbers]

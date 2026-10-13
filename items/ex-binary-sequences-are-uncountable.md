@@ -2,7 +2,7 @@
 id: ex-binary-sequences-are-uncountable
 kind: example
 title: "The set of binary sequences is equinumerous with $\\mathcal{P}(\\mathbb{N})$, hence uncountable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

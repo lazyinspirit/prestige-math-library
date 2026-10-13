@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-separated-robin-green-resolvent]
 kind: theorem
 domain: mathematics
 title: "Green resolvent for separated Robin boundary conditions"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-weak-derivative-ac-representative, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, lem-nrqm-intervals-integration-by-parts, thm-nrqm-intervals-sine-on-completeness, thm-nrqm-intervals-regular-ivp-parameter-series, thm-self-adjointness-range-criterion, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, lem-compositions-with-a-compact-operator-are-compact, cor-compact-domain-maps-are-uniformly-continuous, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-compact-linear-operator, def-bounded-linear-operator, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

@@ -2,7 +2,7 @@
 id: def-algebraically-constructible-complex-of-analytic-field-sheaves
 kind: definition
 title: "Algebraically constructible complexes of analytic field sheaves"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

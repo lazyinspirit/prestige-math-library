@@ -1,7 +1,7 @@
 ---
 page: projective-perverse-hard-lefschetz-and-decomposition-examples
 title: "Projective Perverse Hard Lefschetz And Decomposition Examples"
-status: draft
+status: published
 items: []
 examples: [ex-projective-perverse-decomposition-for-projective-space-to-a-point]
 requires:

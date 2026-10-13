@@ -2,7 +2,7 @@
 id: cex-sr-noncollinear-boosts-do-not-commute
 kind: counterexample
 title: "Counterexample: noncollinear boosts do not commute"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

@@ -2,7 +2,7 @@
 id: ex-gr-flat-restart-level-set
 kind: example
 title: "The spacelike restart level set of the time separation from a point in Minkowski spacetime"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 24

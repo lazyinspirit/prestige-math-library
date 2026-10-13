@@ -4,7 +4,7 @@ aliases: [nrqm-composites-separable-partial-trace]
 kind: lemma
 domain: mathematics
 title: "Separable partial trace and its basic properties"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [thm-cauchy-schwarz-in-an-inner-product-space, thm-separable-hilbert-space-has-a-countable-orthonormal-basis, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-rank-one-operator-calculus, lem-nuclear-series-characterizes-trace-norm, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-is-absolutely-convergent-and-basis-independent, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, def-trace-class-operator, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-space, def-operator-norm, def-countable-choice]

@@ -3,7 +3,7 @@ id: lem-cm-piecewise-c1-jump-derivative
 kind: lemma
 title: "The distributional derivative of a piecewise $C^1$ function with a jump:
   $(u_p)'=u_{p'_{\\mathrm{reg}}}+[p]\\,\\delta_{t_*}$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

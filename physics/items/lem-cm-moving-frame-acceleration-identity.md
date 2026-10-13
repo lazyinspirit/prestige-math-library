@@ -2,7 +2,7 @@
 id: lem-cm-moving-frame-acceleration-identity
 kind: lemma
 title: "Angular velocity of a moving frame and the rotating-frame acceleration identity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

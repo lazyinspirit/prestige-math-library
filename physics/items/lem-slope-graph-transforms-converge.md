@@ -2,7 +2,7 @@
 id: lem-slope-graph-transforms-converge
 kind: lemma
 title: "Cone invariance and expansion, and convergence of the slope graph transforms to unique invariant stable and unstable line fields"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

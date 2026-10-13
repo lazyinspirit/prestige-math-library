@@ -2,7 +2,7 @@
 id: ex-cm01-worldline-parameter-condition
 kind: example
 title: "The frame-time parameter condition of a worldline: failure under rescaling and behaviour under time shifts"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

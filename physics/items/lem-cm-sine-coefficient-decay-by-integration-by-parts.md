@@ -2,7 +2,7 @@
 id: lem-cm-sine-coefficient-decay-by-integration-by-parts
 kind: lemma
 title: "Repeated integration by parts gives $|b_n(F)|\\le 2L^5M_5/(\\pi^5n^5)$ for odd $2L$-periodic $C^5$ functions and $|b_n(G)|\\le 2L^4M_4/(\\pi^4n^4)$ for $C^4$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-delta-rank-one-resolvent]
 kind: theorem
 domain: mathematics
 title: "Rank-one resolvent formula for the delta interface operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, thm-nrqm-intervals-delta-interface-operator, lem-nrqm-intervals-free-line-resolvent, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, lem-nrqm-intervals-integration-by-parts, lem-nrqm-intervals-weak-derivative-ac-representative, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-bounded-linear-operator, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

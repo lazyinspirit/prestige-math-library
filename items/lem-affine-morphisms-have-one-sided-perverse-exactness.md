@@ -2,7 +2,7 @@
 id: lem-affine-morphisms-have-one-sided-perverse-exactness
 kind: lemma
 title: "Affine morphisms have one-sided perverse exactness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

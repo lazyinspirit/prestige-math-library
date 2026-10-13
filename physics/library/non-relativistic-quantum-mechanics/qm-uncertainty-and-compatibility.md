@@ -1,7 +1,7 @@
 ---
 page: qm-uncertainty-and-compatibility
 title: "Qm Uncertainty And Compatibility"
-status: draft
+status: published
 library: physics
 items:
   - def-nrqm-uncertainty-strong-spectral-commutation

@@ -2,7 +2,7 @@
 id: rem-the-crystal-identification-does-not-elementarily-identify-cellular-simple-labels
 kind: remark
 title: "The crystal identification does not elementarily identify the cellular simple labels"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -5,7 +5,7 @@ kind: postulate
 domain: physics
 title: "Prescribed external electromagnetic coupling P5a: the minimal-coupling
   model and its gauge transformations"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

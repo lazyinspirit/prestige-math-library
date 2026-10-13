@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-slater-direct-and-exchange-calculation]
 kind: theorem
 domain: mathematics
 title: "Slater direct and exchange calculation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-nrqm-fock-and-equilibrium-fixed-n-coulomb-self-adjointness, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, lem-nrqm-composites-euclidean-l2-product-unitary, lem-nrqm-coulomb-three-dimensional-hardy-bound, cor-cauchy-schwarz-inequality-for-l-two, thm-plancherel, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, thm-gaussian-integral, thm-tonelli-theorem-for-sigma-finite-product-spaces, def-sobolev-space-wkp-and-its-norm, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

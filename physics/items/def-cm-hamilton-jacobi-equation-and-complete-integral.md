@@ -2,7 +2,7 @@
 id: def-cm-hamilton-jacobi-equation-and-complete-integral
 kind: definition
 title: "The Hamilton-Jacobi equation and a complete integral of it"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

@@ -1,7 +1,7 @@
 ---
 page: cm06-regular-constraints-and-moving-frames
 title: "Regular constraints and moving frames"
-status: draft
+status: published
 library: physics
 items:
   - def-cm06-holonomic-constraint-model

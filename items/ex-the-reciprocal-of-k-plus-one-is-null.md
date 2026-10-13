@@ -2,7 +2,7 @@
 id: ex-the-reciprocal-of-k-plus-one-is-null
 kind: example
 title: "The sequence $1/(k+1)$ converges to $0$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

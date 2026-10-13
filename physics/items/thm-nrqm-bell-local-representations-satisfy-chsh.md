@@ -4,7 +4,7 @@ aliases: [nrqm-bell-local-representations-satisfy-chsh]
 kind: theorem
 domain: mathematics
 title: "The CHSH bound for every binary correlation model admitting a local-response representation"
-status: draft
+status: published
 origin: session
 dependency_level: 2
 deps: [def-nrqm-bell-binary-correlation-models, def-nrqm-bell-local-response-representation, cor-expectation-linearity-monotonicity-and-modulus-bound, def-expectation-of-a-nonnegative-or-integrable-random-variable, def-finite-sum, def-measurable-function-between-measurable-spaces]

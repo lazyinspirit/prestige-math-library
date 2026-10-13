@@ -2,7 +2,7 @@
 id: def-cm17-continuum-body-and-units
 kind: definition
 title: "Continuum body data, the fixed inertial frame and the dimensions of the fields"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: thm-cyclotomic-schur-jantzen-sum-formula-from-rim-hook-valuations
 kind: theorem
 title: "Cyclotomic Schur Jantzen sum formula from rim-hook valuations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 25

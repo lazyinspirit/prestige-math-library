@@ -2,7 +2,7 @@
 id: prop-reduced-kronecker-support-satisfies-size-triangle-inequalities
 kind: proposition
 title: "The support of the reduced Kronecker coefficients satisfies the size triangle inequalities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 12

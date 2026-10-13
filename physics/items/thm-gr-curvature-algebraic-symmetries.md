@@ -2,7 +2,7 @@
 id: thm-gr-curvature-algebraic-symmetries
 kind: theorem
 title: "The algebraic symmetries of the curvature tensor and the symmetry of the Ricci and Einstein tensors"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

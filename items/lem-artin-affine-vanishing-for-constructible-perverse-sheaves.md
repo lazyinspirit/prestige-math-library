@@ -2,7 +2,7 @@
 id: lem-artin-affine-vanishing-for-constructible-perverse-sheaves
 kind: lemma
 title: "Artin vanishing on complex affine varieties"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

@@ -2,7 +2,7 @@
 id: lem-rational-and-real-type-a-soergel-characters-and-indecomposable-labels-agree
 kind: lemma
 title: "Indecomposable labels, characters and filtration ranks agree after real scalar extension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

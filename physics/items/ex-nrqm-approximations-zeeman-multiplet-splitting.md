@@ -4,7 +4,7 @@ aliases: [nrqm-approximations-zeeman-multiplet-splitting]
 kind: example
 domain: physics
 title: "A spin-one multiplet in a uniform field: the exact Zeeman spectrum and degenerate first-order check"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps: [post-nrqm-angular-momentum-magnetic-moment-coupling, def-nrqm-kinematics-framework-massive-spin-s-model, pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws, prop-nrqm-orbital-and-spin-finite-spin-matrices, def-nrqm-approximations-framework-perturbed-family-model, pthm-nrqm-approximations-degenerate-first-order-splitting, def-nrqm-framework-quantities-and-units, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-identical-particles-and-spin, def-nrqm-observables-framework-observable-and-outcome-law, def-countable-choice, def-axiom-of-choice]

@@ -2,7 +2,7 @@
 id: ex-exterior-square-of-the-fi-permutation-module
 kind: example
 title: "The exterior square of the permutation FI-module has character polynomial $\\binom{X_1}{2}-X_2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

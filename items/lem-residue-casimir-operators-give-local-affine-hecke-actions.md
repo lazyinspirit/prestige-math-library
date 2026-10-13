@@ -2,7 +2,7 @@
 id: lem-residue-casimir-operators-give-local-affine-hecke-actions
 kind: lemma
 title: "Residue Casimir operators and local affine-Hecke actions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 24

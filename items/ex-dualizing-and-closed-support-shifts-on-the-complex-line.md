@@ -2,7 +2,7 @@
 id: ex-dualizing-and-closed-support-shifts-on-the-complex-line
 kind: example
 title: Dualizing and support shifts on the complex line
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

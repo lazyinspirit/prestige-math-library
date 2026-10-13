@@ -2,7 +2,7 @@
 id: lem-smooth-quasiprojective-varieties-admit-snc-projective-compactifications
 kind: lemma
 title: "SNC projective compactifications of smooth quasiprojective varieties"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

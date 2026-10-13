@@ -1,7 +1,7 @@
 ---
 page: em-wave-interfaces-and-conductors-examples
 title: "Wave interfaces and conductors — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

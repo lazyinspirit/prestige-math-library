@@ -2,7 +2,7 @@
 id: lem-gr-lipschitz-family-limit-subsequence
 kind: lemma
 title: "A pointwise convergent subsequence of a uniformly Lipschitz family into a compact metric space converges uniformly on compact subintervals"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

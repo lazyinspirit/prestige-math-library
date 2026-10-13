@@ -2,7 +2,7 @@
 id: def-cm-infinitesimal-point-symmetry
 kind: definition
 title: "Infinitesimal point symmetry of a time-dependent Lagrangian and its conserved charge"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

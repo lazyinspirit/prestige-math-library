@@ -2,7 +2,7 @@
 id: cex-cm15-restitution-above-one-increases-energy
 kind: counterexample
 title: "A coefficient of restitution above $1$ manufactures kinetic energy: $e=2$ on $m_1=m_2=1\\,\\mathrm{kg}$ with velocities $\\pm1\\,\\mathrm{m\\,s^{-1}}$ raises the kinetic energy by $3\\,\\mathrm{J}$ while the configuration is unchanged"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

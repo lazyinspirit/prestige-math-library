@@ -2,7 +2,7 @@
 id: rem-sr-verbal-postulate-reconstruction-obligations
 kind: remark
 title: Verbal-postulate reconstruction obligations not discharged by this framework
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

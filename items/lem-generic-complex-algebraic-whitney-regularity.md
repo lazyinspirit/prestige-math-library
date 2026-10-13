@@ -2,7 +2,7 @@
 id: lem-generic-complex-algebraic-whitney-regularity
 kind: lemma
 title: "Generic complex algebraic Whitney regularity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

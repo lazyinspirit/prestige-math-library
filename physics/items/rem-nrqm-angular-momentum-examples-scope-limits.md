@@ -4,7 +4,7 @@ aliases: [nrqm-angular-momentum-examples-scope-limits]
 kind: remark
 domain: physics
 title: "What the angular momentum examples establish and what they do not"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps: [def-nrqm-angular-momentum-framework-angular-momentum-observables, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, ex-nrqm-angular-momentum-l-eigenfunctions, ex-nrqm-angular-momentum-spin-half-directional-probabilities, ex-nrqm-angular-momentum-zeeman-toy-model, post-nrqm-framework-preparation-and-apparatus, pthm-nrqm-angular-momentum-spin-spectra-and-outcome-laws, pthm-nrqm-angular-momentum-zeeman-precession, texp-nrqm-angular-momentum-stern-gerlach-splitting]

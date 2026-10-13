@@ -2,7 +2,7 @@
 id: thm-cm-center-of-mass-and-kinetic-splitting
 kind: theorem
 title: "Centre of mass, the identity $\\sum_i m_i\\rho_i=0$, and the splitting of the kinetic sum $\\sum_i m_i\\lVert x_i'\\rVert_2^2$ into centre-of-mass and relative parts (with the two-body reduced-mass case)"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

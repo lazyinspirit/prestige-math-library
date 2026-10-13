@@ -2,7 +2,7 @@
 id: ex-cm14-oscillator-caustic-check
 kind: example
 title: "The conjugate time of the harmonic model: the complete integral's mixed derivative is unbounded and the characteristic family refocuses at $\\omega t\\in\\pi\\mathbb Z$"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 22

@@ -2,7 +2,7 @@
 id: def-gr-scalar-field-matter-model
 kind: definition
 title: "The scalar-field matter model of the classical gravitational framework"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

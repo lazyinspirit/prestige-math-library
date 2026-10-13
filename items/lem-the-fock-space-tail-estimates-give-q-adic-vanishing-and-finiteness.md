@@ -2,7 +2,7 @@
 id: lem-the-fock-space-tail-estimates-give-q-adic-vanishing-and-finiteness
 kind: lemma
 title: "Tail estimates: q-adic vanishing against the vacuum and finiteness of the weight strings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

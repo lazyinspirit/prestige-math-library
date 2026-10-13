@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Rotational and parity invariance of bounded-potential models: symmetries
   and conservation of angular momentum and parity laws"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

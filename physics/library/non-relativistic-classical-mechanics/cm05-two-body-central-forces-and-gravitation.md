@@ -1,7 +1,7 @@
 ---
 page: cm05-two-body-central-forces-and-gravitation
 title: "Two-body, central forces and gravitation"
-status: draft
+status: published
 library: physics
 items:
   - lem-cm05-radial-potential-gradient

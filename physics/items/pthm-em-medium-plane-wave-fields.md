@@ -2,7 +2,7 @@
 id: pthm-em-medium-plane-wave-fields
 kind: physics-theorem
 title: "Plane-wave fields in a homogeneous Ohmic medium: amplitude conditions, dispersion, averaged flux and the evanescent branch"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 18

@@ -2,7 +2,7 @@
 id: def-balanced-triple-and-globalization-map
 kind: definition
 title: "Balanced triples over the two charts of $\\mathbb P^1$ and the globalization map"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

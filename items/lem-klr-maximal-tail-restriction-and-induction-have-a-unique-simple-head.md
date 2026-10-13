@@ -2,7 +2,7 @@
 id: lem-klr-maximal-tail-restriction-and-induction-have-a-unique-simple-head
 kind: lemma
 title: "Maximal KLR tails give a unique induction head and absolute simple modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

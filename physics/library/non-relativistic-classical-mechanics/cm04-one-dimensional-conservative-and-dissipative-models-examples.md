@@ -1,7 +1,7 @@
 ---
 page: cm04-one-dimensional-conservative-and-dissipative-models-examples
 title: "One-dimensional conservative and dissipative models — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

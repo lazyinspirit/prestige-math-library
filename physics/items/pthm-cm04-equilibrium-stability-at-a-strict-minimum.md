@@ -2,7 +2,7 @@
 id: pthm-cm04-equilibrium-stability-at-a-strict-minimum
 kind: physics-theorem
 title: "A strict local minimum of the potential is a Lyapunov stable equilibrium of the conservative one-dimensional model, and its linearisation is an oscillator-type model"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

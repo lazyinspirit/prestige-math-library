@@ -2,7 +2,7 @@
 id: thm-murnaghan-expansion-for-all-admissible-ranks
 kind: theorem
 title: "The Murnaghan expansion at every admissible rank"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

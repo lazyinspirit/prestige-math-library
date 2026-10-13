@@ -2,7 +2,7 @@
 id: def-cyclotomic-hecke-central-content-sector-notation
 kind: definition
 title: "Central content sectors of the cyclotomic Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

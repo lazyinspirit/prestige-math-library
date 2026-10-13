@@ -1,7 +1,7 @@
 ---
 page: equivariant-constructible-perverse-foundations
 title: "Equivariant Constructible Perverse Foundations"
-status: draft
+status: published
 items: [def-equivariant-constructible-derived-category-for-complex-algebraic-varieties,
         lem-locally-trivial-acyclic-fibers-give-bounded-derived-pullback-equivalences,
         lem-general-linear-stiefel-frame-spaces-have-the-cohomology-gap,

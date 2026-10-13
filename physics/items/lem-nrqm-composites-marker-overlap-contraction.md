@@ -4,7 +4,7 @@ aliases: [nrqm-composites-marker-overlap-contraction]
 kind: lemma
 domain: mathematics
 title: "Marker overlap contraction of the two-path cross term"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-complex-lp-completeness-density-and-inner-product, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-separable-partial-trace, lem-nrqm-composites-nuclear-bounded-cyclicity, def-l-p-space-as-a-quotient-by-null-functions, cor-cauchy-schwarz-inequality-for-l-two, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-hilbert-space, def-countable-choice]

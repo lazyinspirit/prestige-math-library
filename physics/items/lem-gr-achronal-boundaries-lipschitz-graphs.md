@@ -2,7 +2,7 @@
 id: lem-gr-achronal-boundaries-lipschitz-graphs
 kind: lemma
 title: "Achronal boundaries are locally Lipschitz graphs, topological hypersurfaces and null for smooth volume densities"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 20

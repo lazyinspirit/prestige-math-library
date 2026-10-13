@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The slowly varying one-centre Coulomb source: verified uniform gap of
   the n-th level and the 1/T leakage estimate"
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps:

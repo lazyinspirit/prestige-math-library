@@ -1,7 +1,7 @@
 ---
 page: sr-observer-measurements-examples
 title: "Observer Measurements — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

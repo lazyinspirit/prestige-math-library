@@ -2,7 +2,7 @@
 id: lem-gr-conjugacy-via-the-exponential-map
 kind: lemma
 title: "The differential of the exponential map and conjugacy along a geodesic"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

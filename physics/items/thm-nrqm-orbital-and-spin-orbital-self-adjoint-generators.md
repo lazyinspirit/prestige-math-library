@@ -4,7 +4,7 @@ aliases: [ nrqm-orbital-and-spin-orbital-self-adjoint-generators ]
 kind: theorem
 domain: mathematics
 title: "Orbital self-adjoint generators"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps:

@@ -2,7 +2,7 @@
 id: def-cm-orbital-and-linear-stability
 kind: definition
 title: "Invariant sets, orbital stability of an invariant set, and linear stability of an equilibrium"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: ex-successive-root-differences
 kind: example
 title: "The successive differences $\\sqrt{k+1} - \\sqrt{k}$ converge to $0$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

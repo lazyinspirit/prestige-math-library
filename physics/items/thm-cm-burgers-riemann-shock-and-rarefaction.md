@@ -3,7 +3,7 @@ id: thm-cm-burgers-riemann-shock-and-rarefaction
 kind: theorem
 title: "Riemann shock and rarefaction waves for $u_t+(u^2/2)_x=0$ are weak
   solutions, and the shock is an entropy solution"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

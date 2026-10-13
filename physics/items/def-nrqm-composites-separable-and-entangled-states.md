@@ -5,7 +5,7 @@ aliases:
 kind: definition
 domain: mathematics
 title: Product vectors, separable states and entangled states of a two-factor composite
-status: draft
+status: published
 origin: session
 dependency_level: 5
 deps:

@@ -2,7 +2,7 @@
 id: lem-gr-development-quotient-dense-set
 kind: lemma
 title: "A countable dense subset of the universal development by rational timelike exponential steps from a dense subset of the initial surface"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 38

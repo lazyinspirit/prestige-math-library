@@ -2,7 +2,7 @@
 id: ex-em-elementary-mathematical-prerequisites-hypothesis-boundaries
 kind: example
 title: "Explicit hypothesis and convention check for the moving-patch flux"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

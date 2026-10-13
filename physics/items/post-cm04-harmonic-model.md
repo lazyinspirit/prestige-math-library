@@ -2,7 +2,7 @@
 id: post-cm04-harmonic-model
 kind: postulate
 title: "The harmonic (linear restoring) model: a declared linear force law with parameter $k>0$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

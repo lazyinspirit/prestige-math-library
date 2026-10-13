@@ -1,7 +1,7 @@
 ---
 page: ordinary-hecke-specht-polytabloids-and-signed-murphy-comparison-examples
 title: "Ordinary Hecke Specht Polytabloids and Signed Murphy Comparison — Examples"
-status: draft
+status: published
 requires: [ordinary-hecke-specht-polytabloids-and-signed-murphy-comparison]
 items: []
 examples: [cex-dj-bridge-untwisted-conjugation-changes-the-module,

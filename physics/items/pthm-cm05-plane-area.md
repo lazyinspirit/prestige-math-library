@@ -2,7 +2,7 @@
 id: pthm-cm05-plane-area
 kind: physics-theorem
 title: "Planarity of the reduced orbit and the area law: the areal-velocity vector is the constant $j/(2\\mu)$, the swept-area rate is $J/(2\\mu)$, and both labels sweep equal areas in equal times about the centre of mass"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

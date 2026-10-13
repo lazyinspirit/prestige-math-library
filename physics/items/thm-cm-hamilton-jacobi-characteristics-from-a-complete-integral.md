@@ -2,7 +2,7 @@
 id: thm-cm-hamilton-jacobi-characteristics-from-a-complete-integral
 kind: theorem
 title: "A complete integral produces Hamilton characteristics, the Jacobi constants, a local converse and canonical $(\\beta,\\alpha)$ labels"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

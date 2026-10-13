@@ -2,7 +2,7 @@
 id: cex-specializing-v-to-one-forgets-graded-decomposition-information
 kind: counterexample
 title: "Specializing the grading variable to one forgets graded decomposition information"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 42

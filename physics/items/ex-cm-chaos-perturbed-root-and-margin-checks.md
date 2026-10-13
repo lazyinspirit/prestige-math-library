@@ -2,7 +2,7 @@
 id: ex-cm-chaos-perturbed-root-and-margin-checks
 kind: example
 title: "Explicit root margins at $a=100$: endpoint signs $25$ and $43$, and $d=2/13$ for $\\eta=1$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

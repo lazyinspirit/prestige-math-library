@@ -2,7 +2,7 @@
 id: lem-cm-body-angular-velocity-of-a-rotation-path
 kind: lemma
 title: "The body angular velocity of a $C^1$ rotation path: $\\Omega=R^{\\mathsf T}R'$ is skew, $\\Omega z=\\omega\\times z$ determines a unique continuous $\\omega$, and $R'=R\\Omega$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

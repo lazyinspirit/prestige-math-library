@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-golden-rule-limit-and-rate-reading]
 kind: physics-theorem
 domain: physics
 title: "The golden-rule limit of the single-vertex emission coefficient and its reading as a model rate coefficient"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 17
 deps: [pthm-nrqm-light-matter-first-order-emission-and-absorption-coefficients, def-nrqm-light-matter-framework-finite-level-coupled-model, def-nrqm-light-matter-framework-spectral-transition-and-detection, lem-nrqm-light-matter-first-order-photon-energy-law, thm-nrqm-fock-and-equilibrium-golden-rule-coefficient-approximate-identity, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-preparation-and-apparatus, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-framework-quantities-and-units, def-measure-with-density, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-axiom-of-choice]

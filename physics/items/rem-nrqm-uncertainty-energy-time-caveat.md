@@ -4,7 +4,7 @@ aliases: [ nrqm-uncertainty-energy-time-caveat ]
 kind: remark
 domain: physics
 title: "Time is not an observable of the framework: the conditional timescale bound"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

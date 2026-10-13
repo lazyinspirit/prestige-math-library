@@ -2,7 +2,7 @@
 id: def-good-node-and-cogood-node-crystal-operators
 kind: definition
 title: "Good-node deletion and cogood-node addition operators"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

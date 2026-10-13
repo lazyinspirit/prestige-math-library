@@ -2,7 +2,7 @@
 id: def-e-valued-dolbeault-operators-and-ltwo-structure
 kind: definition
 title: "E-valued Dolbeault operators and their L2 structure"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps:

@@ -2,7 +2,7 @@
 id: post-cm05-central-model
 kind: postulate
 title: "Adopted central-force model class: static central pair potentials, the reduced one-label problem, the fixed-centre idealization, reading conventions and exclusions"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

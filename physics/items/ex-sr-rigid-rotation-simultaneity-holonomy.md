@@ -3,7 +3,7 @@ id: ex-sr-rigid-rotation-simultaneity-holonomy
 kind: example
 domain: mathematics
 title: "Worked rigid rotation: rest-space holonomy around the ring and failure of ring synchronization"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

@@ -2,7 +2,7 @@
 id: lem-cm-lattice-shell-count-and-weight-sums
 kind: lemma
 title: "Lattice ball and shell counts and weight sums on the frequency lattice"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

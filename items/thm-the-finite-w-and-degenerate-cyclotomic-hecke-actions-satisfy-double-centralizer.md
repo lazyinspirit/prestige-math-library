@@ -2,7 +2,7 @@
 id: thm-the-finite-w-and-degenerate-cyclotomic-hecke-actions-satisfy-double-centralizer
 kind: theorem
 title: "The finite W and degenerate cyclotomic Hecke actions satisfy a double centralizer"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 32

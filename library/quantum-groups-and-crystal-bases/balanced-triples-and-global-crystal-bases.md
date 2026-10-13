@@ -1,7 +1,7 @@
 ---
 page: balanced-triples-and-global-crystal-bases
 title: "Balanced Triples and Global Crystal Bases"
-status: draft
+status: published
 requires: [divided-powers-integral-forms-and-quantum-highest-weights, kashiwara-operators-and-crystal-lattices, tensor-product-crystals-and-highest-weight-crystal-uniqueness]
 items: [       lem-lusztig-and-kashiwara-normalizations-match-by-root-color,
        def-the-bar-lattice-and-integral-lattice-of-a-based-module,

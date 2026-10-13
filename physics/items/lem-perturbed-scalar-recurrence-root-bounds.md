@@ -3,7 +3,7 @@ id: lem-perturbed-scalar-recurrence-root-bounds
 kind: lemma
 title: "Root bounds and $C^1$ dependence for the perturbed scalar recurrence
   $v^2-a-u-w+e(u,v,w)=0$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

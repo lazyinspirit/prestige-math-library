@@ -4,7 +4,7 @@ aliases: [ nrqm-oscillator-example-ground-state-gaussian ]
 kind: example
 domain: physics
 title: "The Gaussian ground state: position and momentum laws and the saturated bound"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

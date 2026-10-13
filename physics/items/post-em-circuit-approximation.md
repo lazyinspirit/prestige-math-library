@@ -3,7 +3,7 @@ id: post-em-circuit-approximation
 kind: postulate
 title: "Lumped circuit approximation: branch data, terminal laws and the declared quasistatic regime"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 18
 deps:

@@ -2,7 +2,7 @@
 id: thm-cyclotomic-schur-standards-and-schur-functor-control-block-linkage
 kind: theorem
 title: "Cyclotomic Schur standards and corner functor control block linkage"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

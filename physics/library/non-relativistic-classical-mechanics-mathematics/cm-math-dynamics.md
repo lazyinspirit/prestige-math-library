@@ -1,7 +1,7 @@
 ---
 page: cm-math-dynamics
 title: Cm Math Dynamics
-status: draft
+status: published
 items:
   - def-cm-local-flow-of-an-autonomous-system
   - lem-cm-local-flow-composition-law

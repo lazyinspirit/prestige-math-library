@@ -2,7 +2,7 @@
 id: lem-rapidity-parametrization-of-collinear-boosts
 kind: lemma
 title: Rapidity parametrization of collinear boosts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

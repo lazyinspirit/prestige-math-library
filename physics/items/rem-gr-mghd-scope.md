@@ -2,7 +2,7 @@
 id: rem-gr-mghd-scope
 kind: remark
 title: "Scope and empirical qualifications of the maximal globally hyperbolic development: model content, idealisations, and no observational claims"
-status: draft
+status: published
 origin: session
 domain: physics
 physical_scope: "Conditional classical general relativity for smooth globally hyperbolic developments of a fixed admissible covariant coupled matter model with compatible complete Cauchy data and the stated analytic and geometric hypotheses. This remark records the existing mathematical choice premises, regularity, idealisations and empirical limits; it reports no measurement or claim about the observed universe."

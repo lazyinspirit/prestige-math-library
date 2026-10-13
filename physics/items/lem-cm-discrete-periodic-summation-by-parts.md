@@ -2,7 +2,7 @@
 id: lem-cm-discrete-periodic-summation-by-parts
 kind: lemma
 title: "Discrete periodic summation by parts, the scaled Cauchy-Schwarz inequality, and the discrete energy identity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

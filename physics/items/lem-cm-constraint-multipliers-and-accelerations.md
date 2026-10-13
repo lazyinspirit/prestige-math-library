@@ -2,7 +2,7 @@
 id: lem-cm-constraint-multipliers-and-accelerations
 kind: lemma
 title: "Reactions annihilating the virtual displacements are transpose multiples, with a positive definite multiplier matrix"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

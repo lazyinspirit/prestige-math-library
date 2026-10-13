@@ -2,7 +2,7 @@
 id: cor-socle-of-uncoloured-modular-restriction-is-the-sum-over-good-residues
 kind: corollary
 title: "The socle of an uncoloured modular restriction is the multiplicity-free sum over the good residues"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

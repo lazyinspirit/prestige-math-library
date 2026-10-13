@@ -2,7 +2,7 @@
 id: thm-the-highest-weight-fock-submodule-has-the-qg-global-bases
 kind: theorem
 title: "The highest weight Fock submodule carries the quantum-group global bases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 24

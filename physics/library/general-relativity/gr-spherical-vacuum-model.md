@@ -11,7 +11,7 @@ requires:
   - gr-einstein-and-matter
 page: gr-spherical-vacuum-model
 title: "Spherical Vacuum Model"
-status: draft
+status: published
 library: physics
 items:
   - def-gr-schwarzschild-exterior-model

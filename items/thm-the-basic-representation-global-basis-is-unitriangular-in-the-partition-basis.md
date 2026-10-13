@@ -2,7 +2,7 @@
 id: thm-the-basic-representation-global-basis-is-unitriangular-in-the-partition-basis
 kind: theorem
 title: "The basic representation global basis is unitriangular in the partition basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

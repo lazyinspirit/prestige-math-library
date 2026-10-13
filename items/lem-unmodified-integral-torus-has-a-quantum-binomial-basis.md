@@ -2,7 +2,7 @@
 id: lem-unmodified-integral-torus-has-a-quantum-binomial-basis
 kind: lemma
 title: "The unmodified integral torus has a quantum-binomial basis"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

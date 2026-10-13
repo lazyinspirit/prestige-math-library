@@ -2,7 +2,7 @@
 id: lem-sr-phase-rate-along-worldline
 kind: lemma
 title: 'The phase rate along a worldline is the wave covector evaluated on the four-velocity'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-affine-phase-and-wave-covector,

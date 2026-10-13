@@ -1,7 +1,7 @@
 ---
 page: qm-math-composites-examples
 title: Qm Math Composites — Examples
-status: draft
+status: published
 items: []
 requires:
   - qm-math-composites

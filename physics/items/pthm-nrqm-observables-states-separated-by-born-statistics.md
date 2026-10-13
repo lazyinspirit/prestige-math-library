@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Distinct preparations are separated by the statistics of a bounded sharp
   observable"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps:

@@ -2,7 +2,7 @@
 id: def-klr-grading-and-diagrammatic-composition
 kind: definition
 title: "The KLR grading and the diagrammatic multiplication"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: lem-rational-local-quantum-halves-and-torus-specialize-at-q-one
 kind: lemma
 title: "Rational-local quantum halves and torus specialize at q=1"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

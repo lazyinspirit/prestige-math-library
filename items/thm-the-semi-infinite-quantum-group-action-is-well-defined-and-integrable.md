@@ -2,7 +2,7 @@
 id: thm-the-semi-infinite-quantum-group-action-is-well-defined-and-integrable
 kind: theorem
 title: "The semi-infinite action on the Fock space is well defined and the Fock space is an integrable $U_q(\\widehat{\\mathfrak{sl}}_e)$-module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

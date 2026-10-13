@@ -2,7 +2,7 @@
 id: thm-indecomposable-projectives-correspond-to-indecomposable-soergel-modules
 kind: theorem
 title: Indecomposable projectives correspond to indecomposable Soergel modules
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

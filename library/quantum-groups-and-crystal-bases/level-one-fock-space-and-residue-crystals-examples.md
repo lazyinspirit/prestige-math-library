@@ -1,7 +1,7 @@
 ---
 page: level-one-fock-space-and-residue-crystals-examples
 title: "Level-One Fock Space and Residue Crystals — Examples"
-status: draft
+status: published
 requires: [level-one-fock-space-and-residue-crystals]
 items: []
 examples: [ex-fock-e-and-f-actions-on-shape-two-one-at-e-three,

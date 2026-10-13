@@ -2,7 +2,7 @@
 id: def-degenerate-cyclotomic-hecke-tower-and-residue-functors
 kind: definition
 title: "The degenerate cyclotomic Hecke tower and its residue functors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 36

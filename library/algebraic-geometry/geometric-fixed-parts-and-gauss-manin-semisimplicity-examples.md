@@ -1,7 +1,7 @@
 ---
 page: geometric-fixed-parts-and-gauss-manin-semisimplicity-examples
 title: "Geometric Fixed Parts And Gauss Manin Semisimplicity Examples"
-status: draft
+status: published
 items: []
 examples: [ex-cyclic-etale-covers-give-geometric-semisimple-weight-zero-monodromy]
 requires:

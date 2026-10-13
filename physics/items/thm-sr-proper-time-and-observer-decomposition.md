@@ -2,7 +2,7 @@
 id: thm-sr-proper-time-and-observer-decomposition
 kind: theorem
 title: "Norms of four-velocity and four-acceleration, and the observer rest-space decomposition"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 11

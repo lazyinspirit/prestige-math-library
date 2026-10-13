@@ -2,7 +2,7 @@
 id: def-cm07-action-and-mechanical-lagrangian
 kind: definition
 title: "The action functional of a force model with a potential presentation: the mechanical Lagrangian, its chart instance and its dimensions"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

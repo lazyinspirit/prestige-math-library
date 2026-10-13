@@ -2,7 +2,7 @@
 id: cex-gr-flrw-static-matter-not-a-flat-solution
 kind: counterexample
 title: "A static flat matter datum satisfying the spatial-component and continuity equations but not the Friedmann equation"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

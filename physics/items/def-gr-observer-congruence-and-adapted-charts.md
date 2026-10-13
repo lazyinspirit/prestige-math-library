@@ -2,7 +2,7 @@
 id: def-gr-observer-congruence-and-adapted-charts
 kind: definition
 title: "Observer congruences, their observer curves and adapted charts"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

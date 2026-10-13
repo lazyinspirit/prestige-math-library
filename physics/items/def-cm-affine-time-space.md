@@ -2,7 +2,7 @@
 id: def-cm-affine-time-space
 kind: definition
 title: "Affine time space with Euclidean simultaneous slices and adapted charts"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

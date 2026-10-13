@@ -2,7 +2,7 @@
 id: prop-cm-hamiltonian-field-and-poisson-bracket-in-a-phase-chart
 kind: proposition
 title: "The Hamiltonian field of a $C^2$ function on a phase domain is $J\\nabla H$, and the Poisson bracket is $\\sum_i(\\partial_{q^i}f\\,\\partial_{p_i}g-\\partial_{p_i}f\\,\\partial_{q^i}g)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

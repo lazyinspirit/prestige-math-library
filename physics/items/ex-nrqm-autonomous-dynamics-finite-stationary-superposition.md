@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "A finite superposition of energy eigenrays: exact phases, laws and
   return times"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

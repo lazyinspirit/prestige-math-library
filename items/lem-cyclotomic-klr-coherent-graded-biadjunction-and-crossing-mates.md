@@ -2,7 +2,7 @@
 id: lem-cyclotomic-klr-coherent-graded-biadjunction-and-crossing-mates
 kind: lemma
 title: "Coherent graded biadjunction and the crossing mates"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

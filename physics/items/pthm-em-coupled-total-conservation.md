@@ -4,7 +4,7 @@ kind: physics-theorem
 title: "Closed-system energy, momentum and angular balance conditional on a matter model"
 domain: physics
 physical_scope: "The conditional total balances obtained by adding explicitly assumed matter balance equations to the vacuum field balances of the same framework: local zero-source identities for total energy, momentum and orbital angular momentum and their fixed-volume boundary-flux forms. The matter balances are additional assumptions about a specified matter model, not consequences of the Maxwell postulates; no closed system, no conservation without flux conditions and no empirical claim is asserted."
-status: draft
+status: published
 origin: pipeline
 dependency_level: 20
 proof_strategy: direct

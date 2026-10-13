@@ -2,7 +2,7 @@
 id: ex-a-nodal-projective-curve-has-a-weight-zero-cohomology-class
 kind: example
 title: "A proper singular curve with weight-zero cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 22

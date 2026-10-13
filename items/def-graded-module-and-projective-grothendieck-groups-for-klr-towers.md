@@ -2,7 +2,7 @@
 id: def-graded-module-and-projective-grothendieck-groups-for-klr-towers
 kind: definition
 title: "Graded module and projective Grothendieck groups of the KLR and Hecke towers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 33

@@ -2,7 +2,7 @@
 id: ex-a-trivial-smooth-bundle-has-a-projection-preserving-product-triangulation
 kind: example
 title: "Projection-preserving product triangulation of a trivial smooth bundle"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

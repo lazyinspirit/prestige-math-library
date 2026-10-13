@@ -2,7 +2,7 @@
 id: lem-tame-transport-commutator
 kind: lemma
 title: "The transport term is orthogonal to itself and the tame commutator estimate $\\|[\\Lambda^m,u\\cdot\\nabla]u\\|_{L^2}\\le C_m\\|u\\|_{H^m}\\|u\\|_{H^s}$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

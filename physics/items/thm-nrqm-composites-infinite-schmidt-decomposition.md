@@ -4,7 +4,7 @@ aliases: [nrqm-composites-infinite-schmidt-decomposition]
 kind: theorem
 domain: mathematics
 title: "Infinite Schmidt decomposition and the pure product criterion"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [thm-cauchy-schwarz-in-an-inner-product-space, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, thm-hilbert-adjoint-properties, thm-norm-limit-of-compact-operators-is-compact, lem-finite-rank-operators-are-compact, thm-separable-hilbert-space-has-a-countable-orthonormal-basis, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-rank-one-operator-calculus, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-separable-partial-trace, lem-nrqm-composites-density-and-scalar-spectral-probability, thm-spectral-theorem-for-compact-self-adjoint-operators, def-compact-linear-operator, thm-parseval-equivalences-for-a-complete-orthonormal-family, thm-bessel-inequality-for-an-arbitrary-orthonormal-family, def-hilbert-space, def-countable-choice]

@@ -2,7 +2,7 @@
 id: def-deformed-tensor-space-for-the-type-a-finite-w-algebra
 kind: definition
 title: "The deformed tensor space for the type-A finite W-algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

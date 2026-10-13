@@ -2,7 +2,7 @@
 id: lem-the-lefschetz-operator-factors-through-deleted-bott-samelsons
 kind: lemma
 title: "The Lefschetz operator factors through deleted Bott-Samelson subwords, with positive rescalings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: thm-the-parabolic-o-grothendieck-group-is-the-integral-fock-module
 kind: theorem
 title: "The parabolic category-O Grothendieck group is the integral Fock module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 28

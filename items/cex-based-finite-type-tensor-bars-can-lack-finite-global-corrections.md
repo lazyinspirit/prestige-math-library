@@ -2,7 +2,7 @@
 id: cex-based-finite-type-tensor-bars-can-lack-finite-global-corrections
 kind: counterexample
 title: "Finite-type based tensor bars can lack finite global corrections"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

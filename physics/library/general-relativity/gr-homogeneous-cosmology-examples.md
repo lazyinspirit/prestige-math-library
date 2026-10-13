@@ -6,7 +6,7 @@ requires:
   - gr-tensors-and-observers
 page: gr-homogeneous-cosmology-examples
 title: "Homogeneous Cosmology — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

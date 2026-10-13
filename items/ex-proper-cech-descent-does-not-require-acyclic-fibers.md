@@ -2,7 +2,7 @@
 id: ex-proper-cech-descent-does-not-require-acyclic-fibers
 kind: example
 title: "Proper Cech descent does not require acyclic fibers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

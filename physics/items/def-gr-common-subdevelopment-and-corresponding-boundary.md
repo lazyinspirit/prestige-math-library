@@ -3,7 +3,7 @@ id: def-gr-common-subdevelopment-and-corresponding-boundary
 kind: definition
 title: "Common subdevelopments, maximal common developments and corresponding
   boundary points"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 27

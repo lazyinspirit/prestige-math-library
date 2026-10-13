@@ -3,7 +3,7 @@ id: def-nrqm-photons-framework-radiation-sector-and-quantum-assignments
 kind: definition
 title: "The radiation sector of the framework: modes and the number, energy and
   momentum assignments"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 11

@@ -3,7 +3,7 @@ id: ex-nrqm-framework-quantity-type-checks
 kind: example
 title: "Type checks: rays, density operators, mixtures, local quantities and
   outcome laws"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 7

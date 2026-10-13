@@ -2,7 +2,7 @@
 id: ex-sr-causal-classification-of-explicit-displacements
 kind: example
 title: "Worked coordinate criteria: four displacements classified by the future-cone inequalities"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

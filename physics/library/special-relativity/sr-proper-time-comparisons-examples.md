@@ -1,7 +1,7 @@
 ---
 page: sr-proper-time-comparisons-examples
 title: "Proper Time Comparisons — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

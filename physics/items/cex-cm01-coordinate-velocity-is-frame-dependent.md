@@ -2,7 +2,7 @@
 id: cex-cm01-coordinate-velocity-is-frame-dependent
 kind: counterexample
 title: "Coordinate velocity is not an inertial-frame-independent quantity"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

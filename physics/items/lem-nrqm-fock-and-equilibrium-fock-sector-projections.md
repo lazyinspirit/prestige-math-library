@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-fock-sector-projections]
 kind: lemma
 domain: mathematics
 title: "Fock sector projections"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-composites-permutation-sector-projections, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-hilbert-orthogonal-projection, lem-orthogonal-projection-is-linear-self-adjoint-contractive, def-hilbert-space-adjoint, def-dense-top, def-countable-choice]

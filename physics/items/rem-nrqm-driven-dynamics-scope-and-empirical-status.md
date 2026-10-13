@@ -4,7 +4,7 @@ aliases: [nrqm-driven-dynamics-scope-and-empirical-status]
 kind: remark
 domain: physics
 title: "Scope and empirical status of the page: what is adopted, what is proved, and what is excluded"
-status: draft
+status: published
 origin: session
 dependency_level: 16
 deps: [def-nrqm-driven-dynamics-framework-driven-model, def-nrqm-driven-dynamics-framework-interaction-picture, def-nrqm-driven-dynamics-framework-adiabatic-protocol, pthm-nrqm-driven-dynamics-bounded-norm-propagator, pthm-nrqm-driven-dynamics-mild-propagator-and-pictures, pthm-nrqm-driven-dynamics-first-order-transition-amplitude, pthm-nrqm-driven-dynamics-common-domain-propagator, pthm-nrqm-driven-dynamics-circular-drive-exact-rabi, pthm-nrqm-driven-dynamics-linear-drive-rotating-wave-error, pthm-nrqm-driven-dynamics-finite-adiabatic-leakage, pthm-nrqm-driven-dynamics-coulomb-adiabatic-leakage, post-nrqm-framework-preparation-and-apparatus, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics]

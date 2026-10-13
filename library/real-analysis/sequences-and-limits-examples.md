@@ -1,7 +1,7 @@
 ---
 page: sequences-and-limits-examples
 title: "Sequences and Limits: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-the-reciprocal-of-k-plus-one-is-null,
            ex-a-rational-expression-limit,

@@ -3,7 +3,7 @@ id: lem-em-rectangular-pec-energy-completeness
 kind: lemma
 domain: mathematics
 title: "Rectangular PEC reflection class: Fourier completeness, weak solutions and energy conservation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

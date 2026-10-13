@@ -4,7 +4,7 @@ aliases: [nrqm-composites-euclidean-l2-product-unitary]
 kind: lemma
 domain: mathematics
 title: "Euclidean L² product unitary: L²(R^a)⊗̂L²(R^b) ≅ L²(R^{a+b})"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

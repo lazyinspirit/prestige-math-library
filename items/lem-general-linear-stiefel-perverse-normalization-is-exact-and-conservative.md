@@ -2,7 +2,7 @@
 id: lem-general-linear-stiefel-perverse-normalization-is-exact-and-conservative
 kind: lemma
 title: "General linear Stiefel perverse normalization is exact and conservative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

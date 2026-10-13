@@ -3,7 +3,7 @@ id: pthm-em-integral-maxwell
 kind: physics-theorem
 title: "The integral form of the vacuum Maxwell equations and its equivalence with the smooth differential form"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 14
 deps: [post-em-vacuum-maxwell,

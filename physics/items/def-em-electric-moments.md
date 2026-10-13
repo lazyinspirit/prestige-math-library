@@ -4,7 +4,7 @@ kind: definition
 domain: physics
 dependency_level: 16
 title: "Total charge, dipole moment, Cartesian moments and traceless quadrupole of a static charge distribution"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

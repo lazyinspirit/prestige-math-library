@@ -2,7 +2,7 @@
 id: lem-sr-null-covector-frame-data
 kind: lemma
 title: 'Frame data of a future null wave covector: the unique pair $(\varpi,s)$ with $|s|=1$'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-affine-phase-and-wave-covector,

@@ -1,7 +1,7 @@
 ---
 page: cm-math-numerical
 title: Symplectic Verlet and analytic backward error
-status: draft
+status: published
 library: mathematics
 items:
   - lem-cm-roundoff-accumulation-in-one-step-schemes

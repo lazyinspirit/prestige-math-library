@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-dollard-channel-completeness]
 kind: theorem
 domain: mathematics
 title: "Dollard channel completeness"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn, thm-nrqm-coulomb-angular-radial-unitary-reduction, lem-nrqm-controlled-dynamics-cc-separable-spectral-calculus, thm-nrqm-controlled-dynamics-dollard-integrable-remainder, thm-nrqm-orbital-and-spin-sphere-onb, def-projection-valued-measure, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-countable-choice, thm-orthogonal-decomposition-by-a-closed-subspace, thm-self-adjoint-resolvent-estimate, thm-riesz-representation-for-hilbert-space, thm-nrqm-intervals-regular-ivp-parameter-series, thm-nrqm-orbital-and-spin-sphere-laplacian-diagonal-domain, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, thm-plancherel, thm-dominated-convergence, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, cor-cauchy-schwarz-inequality-for-l-two, def-sobolev-space-wkp-and-its-norm, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, lem-weak-derivatives-are-polynomial-fourier-multipliers, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-fatou-lemma, lem-schwartz-cutoffs-from-the-standard-smooth-step, cor-vector-forms-of-the-divergence-theorem]

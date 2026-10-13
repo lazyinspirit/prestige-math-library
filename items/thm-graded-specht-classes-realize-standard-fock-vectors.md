@@ -2,7 +2,7 @@
 id: thm-graded-specht-classes-realize-standard-fock-vectors
 kind: theorem
 title: "Graded Specht classes realize the standard Fock vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 38

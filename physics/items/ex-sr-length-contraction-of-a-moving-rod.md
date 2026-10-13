@@ -3,7 +3,7 @@ id: ex-sr-length-contraction-of-a-moving-rod
 kind: example
 domain: mathematics
 title: "Worked length contraction of a rod of rest length 5 at speed 3c/5"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-entropy-divergence-example]
 kind: example
 domain: mathematics
 title: "Entropy-divergence example"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-cauchy-condensation, thm-p-series-real-exponents, def-natural-logarithm, thm-logarithm-derivative-and-integral, thm-monotonicity-of-the-integral, def-series-and-absolute-convergence-in-a-normed-space, thm-natural-logarithm-laws]

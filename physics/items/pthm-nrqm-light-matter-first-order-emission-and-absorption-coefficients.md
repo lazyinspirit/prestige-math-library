@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-first-order-emission-and-absorption-coefficients]
 kind: physics-theorem
 domain: physics
 title: "First-order emission and absorption amplitudes of the cutoff dipole model, and the exact model probability of the one-photon level-b projection up to the Dyson tail"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 16
 deps: [def-nrqm-light-matter-framework-finite-level-coupled-model, def-nrqm-light-matter-framework-spectral-transition-and-detection, lem-nrqm-light-matter-first-order-photon-energy-law, thm-nrqm-fock-and-equilibrium-vacuum-emission-dyson-convergence, thm-nrqm-fock-and-equilibrium-cutoff-dipole-relative-bound, thm-nrqm-fock-and-equilibrium-golden-rule-coefficient-approximate-identity, thm-nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian, thm-nrqm-fock-and-equilibrium-closed-adjoint-sector-domains, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-ideal-conditional-measurement, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-measurement-framework-declared-measurements-and-instruments, def-nrqm-framework-quantities-and-units, def-hilbert-space, def-inner-product-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-operator-norm, def-bounded-linear-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-countable-choice, def-axiom-of-choice, post-nrqm-framework-preparation-and-apparatus, lem-nrqm-fock-and-equilibrium-fock-sector-projections]

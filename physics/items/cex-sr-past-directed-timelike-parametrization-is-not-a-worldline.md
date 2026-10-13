@@ -2,7 +2,7 @@
 id: cex-sr-past-directed-timelike-parametrization-is-not-a-worldline
 kind: counterexample
 title: "Counterexample: a past-directed parametrization of a timelike line is not a worldline"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 9

@@ -3,7 +3,7 @@ id: "def-em-magnetic-moment"
 kind: "definition"
 title: "The magnetic dipole moment of a compact conserved current and of the declared ideal thin loop"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 18
 deps: ["def-em-steady-current-regime", "def-em-si-conventions", "def-cross-product-in-r3", "def-riemann-integral-over-a-jordan-set", "thm-continuous-functions-on-compact-jordan-sets-are-integrable", "thm-multidimensional-integral-properties"]

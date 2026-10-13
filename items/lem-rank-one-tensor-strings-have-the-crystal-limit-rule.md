@@ -2,7 +2,7 @@
 id: lem-rank-one-tensor-strings-have-the-crystal-limit-rule
 kind: lemma
 title: "Rank-one tensor strings and their crystal limit rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

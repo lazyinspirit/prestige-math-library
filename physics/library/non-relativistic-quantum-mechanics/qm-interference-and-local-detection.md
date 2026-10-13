@@ -1,7 +1,7 @@
 ---
 page: qm-interference-and-local-detection
 title: "Qm Interference And Local Detection"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-interference-component-cross-term-and-recorded-bin-laws

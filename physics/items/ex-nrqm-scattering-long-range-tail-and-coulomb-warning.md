@@ -4,7 +4,7 @@ aliases: [nrqm-scattering-long-range-tail-and-coulomb-warning]
 kind: example
 domain: physics
 title: "A Yukawa tail satisfies the resolvent-tail class while the Coulomb limit does not"
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps: [def-nrqm-scattering-framework-short-range-model, pthm-nrqm-scattering-resolvent-tail-asymptotic-completeness, def-nrqm-scattering-coulomb-dollard-model, def-nrqm-framework-quantities-and-units, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, def-nrqm-observables-framework-observable-and-outcome-law, def-real-exponential-function-and-e, thm-exponential-beats-every-polynomial, def-countable-choice, def-axiom-of-choice, thm-polar-coordinates-formula-for-lebesgue-measure, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates]

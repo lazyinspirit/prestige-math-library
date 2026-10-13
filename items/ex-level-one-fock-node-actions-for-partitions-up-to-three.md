@@ -2,7 +2,7 @@
 id: ex-level-one-fock-node-actions-for-partitions-up-to-three
 kind: example
 title: "Node actions for partitions of size at most three"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

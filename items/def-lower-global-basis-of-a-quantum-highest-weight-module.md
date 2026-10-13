@@ -2,7 +2,7 @@
 id: def-lower-global-basis-of-a-quantum-highest-weight-module
 kind: definition
 title: "The lower global basis of $U_q^-$ and of a highest weight module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: def-gr-local-frame-and-tetrad-fields
 kind: definition
 title: "Local frame fields, coordinate frames and tetrad fields"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

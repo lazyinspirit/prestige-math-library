@@ -3,7 +3,7 @@ id: lem-em-newtonian-linkage-symmetry
 kind: lemma
 title: "Symmetry and Fubini representation of the Newtonian linkage pairing"
 domain: mathematics
-status: draft
+status: published
 origin: session
 dependency_level: 0
 proof_strategy: direct

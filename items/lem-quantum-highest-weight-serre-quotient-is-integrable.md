@@ -2,7 +2,7 @@
 id: lem-quantum-highest-weight-serre-quotient-is-integrable
 kind: lemma
 title: "The dominant quantum Serre quotient is nonzero and integrable"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

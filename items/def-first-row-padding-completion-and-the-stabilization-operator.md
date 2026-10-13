@@ -2,7 +2,7 @@
 id: def-first-row-padding-completion-and-the-stabilization-operator
 kind: definition
 title: "The Jacobi–Trudi completion $s_\\mu$, the operators $U_n$ and $V$, and $\\operatorname{stab}(\\alpha,\\beta)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

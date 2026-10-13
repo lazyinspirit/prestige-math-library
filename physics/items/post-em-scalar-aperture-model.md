@@ -2,7 +2,7 @@
 id: post-em-scalar-aperture-model
 kind: postulate
 title: "The adopted scalar aperture-diffraction model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

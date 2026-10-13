@@ -2,7 +2,7 @@
 id: def-murphy-elements-and-murphy-tableau-elements
 kind: definition
 title: "Murphy elements and Murphy tableau elements"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-mellin-incoming-and-outgoing-propagation]
 kind: theorem
 domain: mathematics
 title: "Mellin incoming and outgoing propagation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-plancherel, def-projection-valued-measure, def-schwartz-space-and-its-seminorms, def-hilbert-space, def-countable-choice]

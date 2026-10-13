@@ -2,7 +2,7 @@
 id: lem-cm-bilateral-shift-metric-and-sequential-compactness
 kind: lemma
 title: "The bilateral shift metric is a metric, cylinders are its basic balls, and the shift space is sequentially compact"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

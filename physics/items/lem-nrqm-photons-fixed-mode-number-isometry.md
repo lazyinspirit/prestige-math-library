@@ -2,7 +2,7 @@
 id: lem-nrqm-photons-fixed-mode-number-isometry
 kind: lemma
 title: "The fixed-mode isometry of Fock space and the transfer of number and ladder operators"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 8

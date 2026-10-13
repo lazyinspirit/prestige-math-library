@@ -2,7 +2,7 @@
 id: lem-the-vacuum-projective-is-a-highest-weight-generator
 kind: lemma
 title: "The vacuum projective is a highest-weight generator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

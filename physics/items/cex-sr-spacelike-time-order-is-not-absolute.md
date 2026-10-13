@@ -2,7 +2,7 @@
 id: cex-sr-spacelike-time-order-is-not-absolute
 kind: counterexample
 title: "Counterexample: the temporal order of a spacelike-separated pair is not the same in every inertial frame"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

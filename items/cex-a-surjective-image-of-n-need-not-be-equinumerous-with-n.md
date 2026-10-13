@@ -2,7 +2,7 @@
 id: cex-a-surjective-image-of-n-need-not-be-equinumerous-with-n
 kind: counterexample
 title: "A nonempty surjective image of $\\mathbb{N}$ need not be equinumerous with $\\mathbb{N}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

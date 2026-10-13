@@ -2,7 +2,7 @@
 id: cex-cm05-external-force-breaks-relative-reduction
 kind: counterexample
 title: "External forces break the two-body reduction: a two-label model with a static central pair potential and external forces $\\pm\\gamma$ has $\\mu r''=\\gamma\\ne0$, although its total external force vanishes"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

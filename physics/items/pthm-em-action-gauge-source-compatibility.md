@@ -2,7 +2,7 @@
 id: pthm-em-action-gauge-source-compatibility
 kind: physics-theorem
 title: "Compact gauge variation is boundary-free for conserved source"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

@@ -2,7 +2,7 @@
 id: pthm-gr-adopted-action-and-einstein-equations
 kind: physics-theorem
 title: "Stationarity of the adopted total action is equivalent to the Einstein equation with the framework's coupling"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

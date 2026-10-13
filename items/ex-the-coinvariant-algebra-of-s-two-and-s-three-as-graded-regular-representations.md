@@ -2,7 +2,7 @@
 id: ex-the-coinvariant-algebra-of-s-two-and-s-three-as-graded-regular-representations
 kind: example
 title: The coinvariant algebra of S_2 and S_3 as graded regular representations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

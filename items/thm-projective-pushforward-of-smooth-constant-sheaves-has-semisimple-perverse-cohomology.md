@@ -2,7 +2,7 @@
 id: thm-projective-pushforward-of-smooth-constant-sheaves-has-semisimple-perverse-cohomology
 kind: theorem
 title: "Compact smooth projective pushforwards have semisimple perverse cohomology in characteristic zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 25

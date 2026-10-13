@@ -2,7 +2,7 @@
 id: def-cyclotomic-klr-quotient-at-a-dominant-weight
 kind: definition
 title: "The cyclotomic KLR quotient at a dominant integral weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: rem-gr-curvature-tidal-scope-and-conventions
 kind: remark
 title: "Conventions, units and scope for curvature and tidal quantities"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

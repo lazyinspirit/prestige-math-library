@@ -2,7 +2,7 @@
 id: pthm-em-conductor-surface-charge
 kind: physics-theorem
 title: "Surface charge and normal field on an ideal conductor"
-status: draft
+status: published
 origin: session
 dependency_level: 17
 domain: physics

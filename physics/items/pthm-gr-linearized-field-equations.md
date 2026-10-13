@@ -2,7 +2,7 @@
 id: pthm-gr-linearized-field-equations
 kind: physics-theorem
 title: "Linearized field equations as the first-order consequence of the adopted field law, with the harmonic-gauge wave reduction and the quadratic residual control"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

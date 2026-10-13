@@ -2,7 +2,7 @@
 id: texp-sr-superluminal-relay-antitelephone
 kind: thought-experiment
 title: "The conditional superluminal relay: a one-relay signal chain received in the strict past of its emission"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 provenance:

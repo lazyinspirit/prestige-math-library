@@ -2,7 +2,7 @@
 id: ex-sr-null-covector-frame-data-worked
 kind: example
 title: 'Worked frame data of a future null wave covector and its boost'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [lem-sr-null-covector-frame-data,

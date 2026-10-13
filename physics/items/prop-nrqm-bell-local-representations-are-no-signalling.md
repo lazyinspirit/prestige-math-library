@@ -4,7 +4,7 @@ aliases: [nrqm-bell-local-representations-are-no-signalling]
 kind: proposition
 domain: mathematics
 title: "Local-response representability implies setting-independent marginals"
-status: draft
+status: published
 origin: session
 dependency_level: 2
 deps: [def-nrqm-bell-binary-correlation-models, def-nrqm-bell-local-response-representation, cor-expectation-linearity-monotonicity-and-modulus-bound, def-expectation-of-a-nonnegative-or-integrable-random-variable, def-finite-sum]

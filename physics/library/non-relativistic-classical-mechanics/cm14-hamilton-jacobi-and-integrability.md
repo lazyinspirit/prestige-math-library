@@ -1,7 +1,7 @@
 ---
 page: cm14-hamilton-jacobi-and-integrability
 title: "Hamilton–Jacobi and integrability"
-status: draft
+status: published
 library: physics
 items:
   - def-cm14-hamilton-jacobi-equation

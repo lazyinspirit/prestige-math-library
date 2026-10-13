@@ -1,7 +1,7 @@
 ---
 page: qm-symmetries-and-conservation
 title: "Qm Symmetries And Conservation"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-symmetries-unitary-conjugation-and-commutation-calculus

@@ -1,7 +1,7 @@
 ---
 page: sr-causality-and-signals
 title: "Causality And Signals"
-status: draft
+status: published
 library: physics
 items: [def-sr-causal-reachability-in-affine-minkowski-space,
         lem-sr-spacelike-pairs-have-frame-dependent-time-order,

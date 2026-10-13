@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-sphere-laplacian-diagonal-domain]
 kind: theorem
 domain: mathematics
 title: "Sphere Laplacian diagonal domain"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-nrqm-orbital-and-spin-sphere-onb, lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma, thm-algebra-of-derivatives, thm-chain-rule, thm-sine-and-cosine-derivatives, thm-complex-exponential-is-entire-with-derivative-itself, def-directional-and-partial-derivatives, def-hilbert-space, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-inner-product-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, cor-inner-product-induces-a-norm, def-countable-choice]

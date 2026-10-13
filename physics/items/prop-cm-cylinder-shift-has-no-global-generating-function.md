@@ -2,7 +2,7 @@
 id: prop-cm-cylinder-shift-has-no-global-generating-function
 kind: proposition
 title: "The symplectic shift of the cylinder changes $\\lambda$ by the closed, non-exact form $a\\,d\\theta$ and has no global generating function"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

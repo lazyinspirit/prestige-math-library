@@ -2,7 +2,7 @@
 id: lem-finite-simplicial-open-stars-have-explicit-conical-product-charts
 kind: lemma
 title: "Finite simplicial open stars have explicit conical product charts"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

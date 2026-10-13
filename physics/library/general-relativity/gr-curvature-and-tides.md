@@ -6,7 +6,7 @@ requires:
   - gr-tensors-and-observers
 page: gr-curvature-and-tides
 title: "Curvature And Tides"
-status: draft
+status: published
 library: physics
 items:
   - def-gr-curvature-tensor-and-derived-tensors

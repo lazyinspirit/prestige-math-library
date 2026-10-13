@@ -2,7 +2,7 @@
 id: thm-gr-smooth-cauchy-temporal-splitting
 kind: theorem
 title: "Smooth Cauchy temporal splitting: a global temporal function with Cauchy levels and an orthogonal complete flow"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 29

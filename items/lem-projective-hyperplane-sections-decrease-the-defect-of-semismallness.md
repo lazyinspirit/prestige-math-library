@@ -2,7 +2,7 @@
 id: lem-projective-hyperplane-sections-decrease-the-defect-of-semismallness
 kind: lemma
 title: "General projective hyperplanes decrease the defect of semismallness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

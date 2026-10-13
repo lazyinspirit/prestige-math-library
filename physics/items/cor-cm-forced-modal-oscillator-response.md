@@ -2,7 +2,7 @@
 id: cor-cm-forced-modal-oscillator-response
 kind: corollary
 title: "Forced quadratic system $Mq''+Kq=\\varphi(t)$: decoupled forced modes and the convolution solution"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

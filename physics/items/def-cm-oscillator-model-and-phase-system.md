@@ -2,7 +2,7 @@
 id: def-cm-oscillator-model-and-phase-system
 kind: definition
 title: "The damped driven oscillator model: second-order equation, phase-plane system and characteristic data"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

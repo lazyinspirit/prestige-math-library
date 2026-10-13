@@ -2,7 +2,7 @@
 id: lem-sr-piecewise-proper-time-reparametrization-invariance
 kind: lemma
 title: "Proper time is invariant under regular increasing weak piecewise changes of parameter"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 10

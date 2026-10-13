@@ -2,7 +2,7 @@
 id: thm-cm-bilateral-shift-mixing-dense-periodic-and-sensitive
 kind: theorem
 title: "The bilateral two-symbol shift is continuous, topologically mixing, has dense periodic points and is sensitive; it is chaotic in the stated sense"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

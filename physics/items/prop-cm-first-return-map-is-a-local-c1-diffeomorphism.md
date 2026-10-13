@@ -2,7 +2,7 @@
 id: prop-cm-first-return-map-is-a-local-c1-diffeomorphism
 kind: proposition
 title: "A transversal return of a C¹ flow yields a local C¹ Poincaré map, with inverse given by the reversed crossing"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

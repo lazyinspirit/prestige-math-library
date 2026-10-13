@@ -1,7 +1,7 @@
 ---
 page: cm-math-approximation-examples
 title: Cm Math Approximation — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-oscillator-cases-computed

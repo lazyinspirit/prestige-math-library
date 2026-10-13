@@ -2,7 +2,7 @@
 id: ex-gr-linearized-curvature-of-the-diagonal-perturbation
 kind: example
 title: "First-order curvature of the diagonal perturbation h_00 = -2 phi, h_ij = -2 phi delta_ij for the explicit potential phi = |x|^2/2"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

@@ -2,7 +2,7 @@
 id: lem-projective-hodge-perverse-package-closes-under-defect-and-image-dimension-induction
 kind: lemma
 title: "Simultaneous projective Lefschetz, Hodge and perverse induction step"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 23

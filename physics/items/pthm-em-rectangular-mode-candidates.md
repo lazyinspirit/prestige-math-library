@@ -3,7 +3,7 @@ id: pthm-em-rectangular-mode-candidates
 kind: physics-theorem
 domain: physics
 title: "The separated TE and TM candidate modes of the lossless rectangular PEC guide: exact verification, index restrictions and cutoff"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 18
 deps: [def-complex-conjugate-real-imaginary-part-and-modulus, def-complex-numbers-and-arithmetic, def-directional-and-partial-derivatives, def-divergence-and-curl-of-a-c1-vector-field, def-em-fields, def-em-guide-cavity-geometry, def-em-lab-geometry, def-em-si-conventions, lem-em-rectangle-mode-profile-identities, lem-em-separated-phasor-calculus, lem-em-transverse-vector-identities, post-em-material-closure, pthm-em-macroscopic-maxwell, def-em-polarization-magnetization, thm-of-square-roots, thm-sine-and-cosine-derivatives, thm-derivative-of-exponential, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity]

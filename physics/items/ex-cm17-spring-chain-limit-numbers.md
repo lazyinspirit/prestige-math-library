@@ -2,7 +2,7 @@
 id: ex-cm17-spring-chain-limit-numbers
 kind: example
 title: "Chain versus string on the normalized standing wave: exact discrete error, the N=100 bounds, and physical circumference 2π m"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

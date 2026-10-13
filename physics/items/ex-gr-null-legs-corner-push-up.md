@@ -2,7 +2,7 @@
 id: ex-gr-null-legs-corner-push-up
 kind: example
 title: "Worked null corner: two non-parallel null legs compose to a timelike displacement and push up to strict chronology"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 21

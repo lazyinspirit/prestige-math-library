@@ -5,7 +5,7 @@ aliases:
 kind: theorem
 domain: mathematics
 title: Cook domain criterion
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

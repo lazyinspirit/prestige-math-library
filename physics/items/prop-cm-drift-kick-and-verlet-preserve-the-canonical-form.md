@@ -2,7 +2,7 @@
 id: prop-cm-drift-kick-and-verlet-preserve-the-canonical-form
 kind: proposition
 title: 'The drift, kick and velocity-Verlet maps are canonical: $(DC)^{\mathsf T}J\,DC=J$ and $C^*\omega=\omega$'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

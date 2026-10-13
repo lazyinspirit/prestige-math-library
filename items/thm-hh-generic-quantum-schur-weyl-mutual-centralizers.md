@@ -2,7 +2,7 @@
 id: thm-hh-generic-quantum-schur-weyl-mutual-centralizers
 kind: theorem
 title: "Generic quantum Schur–Weyl mutual centralizers over Q(q)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 4

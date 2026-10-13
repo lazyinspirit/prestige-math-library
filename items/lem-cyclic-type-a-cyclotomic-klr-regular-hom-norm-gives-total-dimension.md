@@ -2,7 +2,7 @@
 id: lem-cyclic-type-a-cyclotomic-klr-regular-hom-norm-gives-total-dimension
 kind: lemma
 title: "Cyclic type-A KLR regular Hom norm gives the total dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

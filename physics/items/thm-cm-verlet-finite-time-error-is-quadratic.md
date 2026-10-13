@@ -3,7 +3,7 @@ id: thm-cm-verlet-finite-time-error-is-quadratic
 kind: theorem
 title: 'Finite-time global error of the velocity-Verlet method: $\lVert
   z_n-\Phi_{nh}(z_0)\rVert\le C(e^{LT}-1)h^2/L$'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

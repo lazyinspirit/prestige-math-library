@@ -2,7 +2,7 @@
 id: thm-klr-induction-and-restriction-are-biadjoint-and-preserve-projectives
 kind: theorem
 title: "Generic KLR induction and restriction adjunctions preserve projectives"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

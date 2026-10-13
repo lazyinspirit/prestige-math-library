@@ -2,7 +2,7 @@
 id: ex-a-nil-hecke-divided-power-projective
 kind: example
 title: "The nil-Hecke divided-power projective in rank two"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

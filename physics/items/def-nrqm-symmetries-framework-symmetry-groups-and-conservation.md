@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "Symmetries of the declared dynamics, unitary symmetry groups and
   conserved sharp observables"
-status: draft
+status: published
 origin: session
 dependency_level: 9
 deps:

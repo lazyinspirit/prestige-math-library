@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-atomic-dipole-matrix-element-domain]
 kind: theorem
 domain: mathematics
 title: "Atomic dipole matrix-element domain"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps: [thm-algebra-of-derivatives, thm-derivative-of-exponential, thm-ftc-second-part, thm-dominated-convergence, thm-tonelli-and-fubini-for-completed-product-measures, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-polar-coordinates-formula-for-lebesgue-measure, thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy, thm-nrqm-coulomb-kummer-recurrence-and-termination, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-orbital-and-spin-dipole-angular-selection-rules, thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-nrqm-oscillator-oscillator-scaling-and-exact-realization, thm-nrqm-oscillator-hermite-recurrence, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-inner-product-space, cor-cauchy-schwarz-inequality-for-l-two, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-countable-choice, def-axiom-of-choice]

@@ -2,7 +2,7 @@
 id: lem-em-exterior-vector-helmholtz-mixed-boundary-existence
 kind: lemma
 title: Existence and uniqueness for the exterior vector Helmholtz problem with prescribed tangential trace and outgoing radiation
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

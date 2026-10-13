@@ -4,7 +4,7 @@ aliases: [ nrqm-fock-and-equilibrium-transverse-continuum-free-fock-hamiltonian 
 kind: theorem
 domain: mathematics
 title: "Transverse continuum free Fock Hamiltonian"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps:

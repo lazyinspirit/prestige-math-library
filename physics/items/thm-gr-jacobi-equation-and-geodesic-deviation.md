@@ -2,7 +2,7 @@
 id: thm-gr-jacobi-equation-and-geodesic-deviation
 kind: theorem
 title: "The Jacobi equation, geodesic deviation and the initial-value theory of Jacobi fields"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

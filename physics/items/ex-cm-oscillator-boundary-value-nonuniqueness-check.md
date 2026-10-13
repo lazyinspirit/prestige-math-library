@@ -2,7 +2,7 @@
 id: ex-cm-oscillator-boundary-value-nonuniqueness-check
 kind: example
 title: "Two distinct oscillator solutions with the same zero endpoints at $T=\\pi$, and their common action value"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: cex-cm-dalembert-and-vakonomic-evolutions-differ
 kind: counterexample
 title: "The d'Alembert and vakonomic motions of $z'=xy'$ differ from the same initial data"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

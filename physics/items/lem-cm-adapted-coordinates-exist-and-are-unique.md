@@ -2,7 +2,7 @@
 id: lem-cm-adapted-coordinates-exist-and-are-unique
 kind: lemma
 title: "Existence and uniqueness of adapted coordinates, and the affine structure of simultaneous slices"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

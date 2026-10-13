@@ -2,7 +2,7 @@
 id: prop-translation-identifies-regular-integral-blocks
 kind: proposition
 title: "Translation identifies the regular integral blocks"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

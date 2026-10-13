@@ -2,7 +2,7 @@
 id: pthm-cm12-hamilton-equivalence
 kind: physics-theorem
 title: "Hamilton's equations of the mechanical presentation are equivalent to the model's equation of motion, with residual forces as momentum sources and the coordinate form on every chart"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

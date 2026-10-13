@@ -3,7 +3,7 @@ id: lem-em-convergent-legendre-kernel
 kind: lemma
 domain: mathematics
 title: "Legendre polynomials from a convergent zonal kernel: generating function and exterior expansion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-klr-two-color-jump-formula-and-strict-elementary-embeddings
 kind: lemma
 title: "The two-colour jump formula and strict elementary embeddings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

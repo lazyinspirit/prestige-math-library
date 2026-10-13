@@ -3,7 +3,7 @@ id: pthm-cm11-euler-equations
 kind: physics-theorem
 title: "Euler's equations with torque for the rigid-material model, the
   rotational power identity, the torque-free reduction and frame covariance"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

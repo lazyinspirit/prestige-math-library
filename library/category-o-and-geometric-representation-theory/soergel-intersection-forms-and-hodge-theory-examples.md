@@ -1,7 +1,7 @@
 ---
 page: soergel-intersection-forms-and-hodge-theory-examples
 title: "Soergel Intersection Forms and Hodge Theory — Examples"
-status: draft
+status: published
 requires: [soergel-intersection-forms-and-hodge-theory]
 items: [ex-the-rank-two-bott-samelson-bimodule-and-its-character-decomposition, ex-the-coinvariant-algebra-of-s-three-as-the-longest-soergel-bimodule, cex-hard-lefschetz-fails-for-a-non-dominant-degree-two-element, ex-the-rank-one-soergel-bimodule-its-intersection-form-and-hard-lefschetz, ex-hard-lefschetz-and-hodge-riemann-relations-for-the-coinvariant-algebra-of-s-three]
 examples: []

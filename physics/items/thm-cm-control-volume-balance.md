@@ -2,7 +2,7 @@
 id: thm-cm-control-volume-balance
 kind: theorem
 title: "Control-volume balance: mass and momentum rates for a moving non-material region"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

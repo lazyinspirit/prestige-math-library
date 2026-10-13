@@ -2,7 +2,7 @@
 id: ex-weighted-am-gm-with-rational-weights
 kind: example
 title: "A weighted AM-GM computation: $8^{2/3}\\,1^{1/3} \\le \\frac{2}{3}\\cdot 8 + \\frac{1}{3}\\cdot 1$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

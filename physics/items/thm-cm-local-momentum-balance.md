@@ -2,7 +2,7 @@
 id: thm-cm-local-momentum-balance
 kind: theorem
 title: "Local momentum balance: $\\rho D_tu=\\rho b+\\operatorname{div}\\sigma$ from the integral balance on admissible material subregions"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-regular-ivp-parameter-series]
 kind: theorem
 domain: mathematics
 title: "Regular interval IVP: existence, a priori bound and entire spectral-parameter dependence"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-banach-fixed-point, thm-gronwall-integral-inequality, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, thm-tonelli-and-fubini-for-completed-product-measures, thm-continuous-implies-integrable, def-banach-space, def-countable-choice]

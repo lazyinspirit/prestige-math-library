@@ -2,7 +2,7 @@
 id: thm-sr-affine-isometry-classification
 kind: theorem
 title: C^2 eta-preserving maps of affine Minkowski space are affine Lorentz maps
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

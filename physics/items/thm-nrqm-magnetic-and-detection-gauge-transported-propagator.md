@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-gauge-transported-propagator]
 kind: theorem
 domain: mathematics
 title: "Gauge transported propagator for the bounded-coefficient magnetic operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-nrqm-magnetic-and-detection-magnetic-schrodinger-operator, thm-nrqm-magnetic-and-detection-bounded-coefficient-magnetic-operator, thm-nrqm-magnetic-and-detection-gauge-h2-domain-preservation, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, def-unbounded-integral-against-a-pvm, def-sobolev-space-wkp-and-its-norm, thm-dominated-convergence, def-hilbert-space, def-countable-choice, def-axiom-of-choice, cor-mean-value-theorem]

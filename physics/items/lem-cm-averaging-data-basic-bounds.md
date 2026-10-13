@@ -2,7 +2,7 @@
 id: lem-cm-averaging-data-basic-bounds
 kind: lemma
 title: "Elementary bounds for the periodic average, the deviation and its time derivative"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

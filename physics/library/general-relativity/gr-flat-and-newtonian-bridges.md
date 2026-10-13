@@ -12,7 +12,7 @@ requires:
   - gr-curvature-and-tides
 page: gr-flat-and-newtonian-bridges
 title: "Flat And Newtonian Bridges"
-status: draft
+status: published
 library: physics
 items:
   - def-gr-minkowski-model-and-inertial-chart

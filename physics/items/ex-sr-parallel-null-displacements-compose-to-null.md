@@ -2,7 +2,7 @@
 id: ex-sr-parallel-null-displacements-compose-to-null
 kind: example
 title: "Parallel future null displacements compose to a future null displacement"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

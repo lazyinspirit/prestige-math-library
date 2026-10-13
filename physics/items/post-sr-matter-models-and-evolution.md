@@ -2,7 +2,7 @@
 id: post-sr-matter-models-and-evolution
 kind: postulate
 title: "Adopted continuum matter models, evolution equations and observer readings"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "Flat affine Minkowski spacetime with the SI conventions of the framework, in one inertial chart; matter described only by the adopted scalar-field, dust and perfect-fluid models, their additive total tensor and the adopted observer readings. The postulate contains no gravity, no electromagnetic coupling, no force law, no equation of state, no microscopic derivation, no claim that these models exhaust physical matter, and no empirical premise; it asserts no conservation of the tensors."

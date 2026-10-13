@@ -2,7 +2,7 @@
 id: ex-cm07-nonholonomic-unrestricted-action-fails
 kind: example
 title: "The unrestricted action principle fails for the normalized nonholonomic relation $z_s = x y_s$: the d'Alembert motion is not vakonomic"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

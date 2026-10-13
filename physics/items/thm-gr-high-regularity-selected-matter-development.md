@@ -2,7 +2,7 @@
 id: thm-gr-high-regularity-selected-matter-development
 kind: theorem
 title: "High-regularity local developments for the selected matter sectors: vacuum with Lambda, scalar, strict barotropic fluid and geodesic dust"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 26

@@ -2,7 +2,7 @@
 id: def-cyclic-affine-type-a-cartan-datum
 kind: definition
 title: "The cyclic affine type A Cartan datum and its residues"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

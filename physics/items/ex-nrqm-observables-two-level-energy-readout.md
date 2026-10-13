@@ -4,7 +4,7 @@ aliases: [ nrqm-observables-two-level-energy-readout ]
 kind: example
 domain: physics
 title: "An exact two-level energy readout and its moments"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

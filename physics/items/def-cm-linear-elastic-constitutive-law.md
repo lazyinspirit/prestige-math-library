@@ -2,7 +2,7 @@
 id: def-cm-linear-elastic-constitutive-law
 kind: definition
 title: "The small-strain isotropic linear elastic constitutive law and its strain energy"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: sr-energy-momentum-examples
 title: "Energy Momentum — Examples"
-status: draft
+status: published
 library: physics
 items: [ex-sr-four-momentum-at-beta-three-fifths, ex-sr-four-momentum-boost-to-rest, ex-sr-equal-mass-head-on-collision-mass, ex-sr-perfectly-inelastic-collision-rest-mass, ex-sr-null-pair-invariant-mass, ex-sr-stationary-target-threshold, cex-sr-massless-momentum-not-mu-at-zero-mass, cex-sr-kinetic-energy-is-observer-dependent]
 examples: []

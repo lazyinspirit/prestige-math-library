@@ -3,7 +3,7 @@ id: post-nrqm-framework-observable-and-probability
 kind: postulate
 title: "Observable and probability postulate P2: self-adjoint observables,
   spectral probability and finite unsharp outcomes"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

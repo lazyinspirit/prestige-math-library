@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "The two-site bond model: exact canonical weights, mean energy, entropy
   and free energy of one particle on two sites"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

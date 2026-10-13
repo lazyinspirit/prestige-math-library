@@ -2,7 +2,7 @@
 id: lem-generic-nondegenerate-local-inverse-tables
 kind: lemma
 title: "Generic nondegenerate local inverse tables on integer colors"
-status: draft
+status: published
 origin: session
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

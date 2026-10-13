@@ -2,7 +2,7 @@
 id: thm-cm-central-force-polar-reduction
 kind: theorem
 title: "Polar reduction of a non-radial central-force trajectory: $\\rho^2\\theta'=J/\\mu$, the effective-potential equation and energy conservation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

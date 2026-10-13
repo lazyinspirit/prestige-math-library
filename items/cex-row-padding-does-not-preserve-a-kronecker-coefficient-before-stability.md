@@ -2,7 +2,7 @@
 id: cex-row-padding-does-not-preserve-a-kronecker-coefficient-before-stability
 kind: counterexample
 title: Row padding need not preserve a Kronecker coefficient before stability
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

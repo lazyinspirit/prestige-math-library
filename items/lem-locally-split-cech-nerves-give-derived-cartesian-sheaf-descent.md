@@ -2,7 +2,7 @@
 id: lem-locally-split-cech-nerves-give-derived-cartesian-sheaf-descent
 kind: lemma
 title: "Locally split Cech nerves give actual derived Cartesian sheaf descent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

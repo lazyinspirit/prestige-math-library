@@ -2,7 +2,7 @@
 id: pthm-em-particle-action-coupling
 kind: physics-theorem
 title: "Relativistic prescribed-field particle action yields the Lorentz force"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

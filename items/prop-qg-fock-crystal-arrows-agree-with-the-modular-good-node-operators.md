@@ -2,7 +2,7 @@
 id: prop-qg-fock-crystal-arrows-agree-with-the-modular-good-node-operators
 kind: proposition
 title: "The QG Fock-crystal arrows are the modular good-node operators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

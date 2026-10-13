@@ -4,7 +4,7 @@ aliases: [nrqm-composites-general-trace-class-instrument-and-effect-duality]
 kind: lemma
 domain: mathematics
 title: "Abstract trace-class instruments: effects and Heisenberg duality"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-rank-one-operator-calculus, thm-trace-is-absolutely-convergent-and-basis-independent, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, thm-riesz-representation-for-hilbert-space, def-hilbert-space, def-self-adjoint-positive-unitary-and-normal-operator, def-countable-choice]

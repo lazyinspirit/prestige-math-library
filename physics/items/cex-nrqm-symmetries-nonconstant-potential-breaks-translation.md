@@ -4,7 +4,7 @@ aliases: [ nrqm-symmetries-nonconstant-potential-breaks-translation ]
 kind: counterexample
 domain: physics
 title: "A bounded nonconstant potential with no nontrivial translational symmetry"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

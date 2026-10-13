@@ -2,7 +2,7 @@
 id: rem-gr-schwarzschild-horizon-and-singularity
 kind: remark
 title: "Horizon versus singularity in the Schwarzschild model: a chart breakdown, a smooth null surface and a curvature obstruction"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

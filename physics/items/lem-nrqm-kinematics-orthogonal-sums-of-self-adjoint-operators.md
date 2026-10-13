@@ -4,7 +4,7 @@ aliases: [nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators]
 kind: lemma
 domain: mathematics
 title: "Finite orthogonal sums of self-adjoint operators and of bounded operators"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-bounded-linear-operator, def-countable-choice, def-hilbert-space, def-hilbert-space-adjoint, def-operator-norm, def-symmetric-self-adjoint-and-essentially-self-adjoint]

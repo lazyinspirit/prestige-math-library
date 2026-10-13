@@ -4,7 +4,7 @@ aliases: [ nrqm-uncertainty-position-momentum-incompatible ]
 kind: physics-theorem
 domain: physics
 title: "Position and momentum of the massive model have no joint sharp observable"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

@@ -2,7 +2,7 @@
 id: thm-brion-formula-for-reduced-kronecker-coefficients
 kind: theorem
 title: "Brion's formula for the reduced Kronecker coefficients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

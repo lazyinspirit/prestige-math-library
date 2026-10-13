@@ -2,7 +2,7 @@
 id: exp-em-inverse-square-report
 kind: experiment
 title: "Cavendish's enclosed-globe inverse-square nulls with a sensitivity control"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

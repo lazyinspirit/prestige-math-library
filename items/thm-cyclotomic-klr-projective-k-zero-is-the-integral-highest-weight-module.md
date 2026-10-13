@@ -2,7 +2,7 @@
 id: thm-cyclotomic-klr-projective-k-zero-is-the-integral-highest-weight-module
 kind: theorem
 title: "The cyclotomic projective $K_0$ is the integral highest-weight module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

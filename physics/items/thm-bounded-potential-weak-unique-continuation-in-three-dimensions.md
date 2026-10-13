@@ -2,7 +2,7 @@
 id: thm-bounded-potential-weak-unique-continuation-in-three-dimensions
 kind: theorem
 title: Weak unique continuation for bounded potentials in three dimensions
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

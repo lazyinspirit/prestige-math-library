@@ -1,7 +1,7 @@
 ---
 page: the-kazhdan-lusztig-character-and-multiplicity-theorem
 title: "The Kazhdan–Lusztig Character and Multiplicity Theorem"
-status: draft
+status: published
 items: [def-regular-integral-dot-orbit-labelling-convention, lem-projective-verma-multiplicities-equal-soergel-standard-ranks, thm-projective-verma-multiplicities-are-kazhdan-lusztig-values-at-one, thm-simple-verma-composition-multiplicities-are-kazhdan-lusztig-values, thm-the-kazhdan-lusztig-character-formula-in-regular-integral-category-o, prop-translation-identifies-regular-integral-blocks, rem-the-full-ext-version-requires-the-koszul-grading-of-category-o]
 examples: []
 ---

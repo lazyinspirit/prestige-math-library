@@ -2,7 +2,7 @@
 id: def-gr-observer-energy-momentum-current
 kind: definition
 title: "The observer split of a symmetric two-tensor: energy density, energy-momentum current, flux and stress"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

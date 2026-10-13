@@ -2,7 +2,7 @@
 id: lem-characteristic-zero-scalar-extension-preserves-geometric-local-system-semisimplicity
 kind: lemma
 title: "Characteristic-zero scalar extension of geometric semisimplicity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

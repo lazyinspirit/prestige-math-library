@@ -2,7 +2,7 @@
 id: lem-deligne-splitting-of-a-mixed-hodge-structure
 kind: lemma
 title: "The Deligne splitting of a mixed Hodge structure"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

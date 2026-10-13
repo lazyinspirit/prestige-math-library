@@ -2,7 +2,7 @@
 id: lem-gr-dust-weyl-reconstruction-from-electric-magnetic
 kind: lemma
 title: "Reconstruction of a Weyl tensor from its electric and magnetic parts: symmetries, trace-freeness and recovery"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

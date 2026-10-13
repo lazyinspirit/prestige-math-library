@@ -2,7 +2,7 @@
 id: ex-klr-algebras-in-root-degrees-alpha-i-and-two-alpha-i
 kind: example
 title: "The KLR algebras in root degrees $\\alpha_i$ and $2\\alpha_i$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

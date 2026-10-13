@@ -2,7 +2,7 @@
 id: cex-wall-crossing-functors-do-not-commute
 kind: counterexample
 title: Wall-crossing functors do not commute
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

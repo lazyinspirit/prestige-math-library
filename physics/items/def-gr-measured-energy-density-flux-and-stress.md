@@ -2,7 +2,7 @@
 id: def-gr-measured-energy-density-flux-and-stress
 kind: definition
 title: "Physical reading of the observer split: measured energy density, energy flux and momentum density, and measured stress"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 7

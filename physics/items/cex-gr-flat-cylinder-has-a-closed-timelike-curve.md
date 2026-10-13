@@ -2,7 +2,7 @@
 id: cex-gr-flat-cylinder-has-a-closed-timelike-curve
 kind: counterexample
 title: "A flat time-oriented Lorentzian four-manifold with a closed timelike curve"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

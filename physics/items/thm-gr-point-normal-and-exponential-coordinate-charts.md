@@ -2,7 +2,7 @@
 id: thm-gr-point-normal-and-exponential-coordinate-charts
 kind: theorem
 title: "Point-normal and exponential coordinate charts of the metric-selected connection"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

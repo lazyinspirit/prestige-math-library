@@ -1,7 +1,7 @@
 ---
 page: sr-lorentz-transformations-examples
 title: "Lorentz Transformations — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

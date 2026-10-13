@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation]
 kind: theorem
 domain: mathematics
 title: "Allowed-region WKB coefficient equation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-derivative, def-continuity-real, thm-chain-rule]

@@ -2,7 +2,7 @@
 id: lem-indecomposable-type-a-soergel-bimodules-are-classified-by-top-support
 kind: lemma
 title: "Indecomposable type-A Soergel bimodules are classified by their normalized top support"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 1

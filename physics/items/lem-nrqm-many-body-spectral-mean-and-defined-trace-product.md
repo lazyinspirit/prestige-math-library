@@ -3,7 +3,7 @@ id: lem-nrqm-many-body-spectral-mean-and-defined-trace-product
 kind: lemma
 domain: mathematics
 title: "Spectral first moments and trace products with a density operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [thm-zorn, thm-parseval-equivalences-for-a-complete-orthonormal-family, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, cor-cauchy-schwarz-inequality-for-l-two, def-countable-choice, def-axiom-of-choice, def-hilbert-space, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-nuclear-bounded-cyclicity, thm-trace-is-absolutely-convergent-and-basis-independent, lem-nuclear-series-characterizes-trace-norm, thm-bounded-borel-pvm-integral, thm-monotone-convergence-for-the-integral, thm-dominated-convergence, thm-hilbert-space-fourier-expansion]

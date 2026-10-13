@@ -2,7 +2,7 @@
 id: ex-em-plane-wave-infinite-energy
 kind: example
 title: "A nonzero whole-space plane wave has infinite total energy"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 20

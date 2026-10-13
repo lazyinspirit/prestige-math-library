@@ -2,7 +2,7 @@
 id: lem-hh-quantum-and-hecke-tensor-actions-commute
 kind: lemma
 title: "The quantum and Hecke tensor actions commute"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 2

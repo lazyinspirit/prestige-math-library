@@ -2,7 +2,7 @@
 id: def-gr-geodesic-congruence-and-kinematics
 kind: definition
 title: "Geodesic congruences and their expansion, shear and vorticity"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

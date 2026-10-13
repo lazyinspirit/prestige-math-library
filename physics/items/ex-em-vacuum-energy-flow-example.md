@@ -4,7 +4,7 @@ kind: example
 title: "Energy flow in crossed external fields with finite-volume accounting"
 domain: physics
 physical_scope: "An ideal source-free plane-wave configuration of the classical vacuum framework on all of R^3 x R: its verification against the four smooth-branch Maxwell equations, its exact energy density and Poynting vector, the pointwise energy balance, and the finite-box energy accounting with outward face fluxes. The configuration is an exact solution of the adopted equations with no source and no empirical realization; no finite whole-space energy or empirical realization is claimed."
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: lem-gr-schwarzschild-christoffel-symbols
 kind: lemma
 title: "Christoffel symbols of the Schwarzschild exterior metric in product charts"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

@@ -2,7 +2,7 @@
 id: lem-gr-galerkin-second-time-derivative-bound
 kind: lemma
 title: "Uniform H^{s-2} Lipschitz bound for the time derivative of a Galerkin solution"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

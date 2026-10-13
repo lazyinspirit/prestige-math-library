@@ -2,7 +2,7 @@
 id: pthm-cm07-newton-equivalence
 kind: physics-theorem
 title: "Stationary curves of the mechanical action are exactly the restrictions of the model's motions (global potential branch)"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

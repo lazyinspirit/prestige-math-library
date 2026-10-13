@@ -2,7 +2,7 @@
 id: def-em-minkowski-affine-space
 kind: definition
 title: "The Minkowski affine four-space: the form $\\eta$, causal cones, frames and Lorentz maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

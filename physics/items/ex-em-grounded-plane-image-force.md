@@ -2,7 +2,7 @@
 id: ex-em-grounded-plane-image-force
 kind: example
 title: "Force on a held charge above a grounded plane in the image model"
-status: draft
+status: published
 origin: session
 dependency_level: 18
 domain: physics

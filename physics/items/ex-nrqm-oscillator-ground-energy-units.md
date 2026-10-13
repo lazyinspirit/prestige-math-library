@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-example-ground-energy-units]
 kind: example
 domain: mathematics
 title: "Ground energy units"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [thm-nrqm-oscillator-oscillator-scaling-and-exact-realization, thm-nrqm-oscillator-multidimensional-oscillator-completeness, thm-nrqm-oscillator-hermite-recurrence, thm-algebra-of-derivatives, thm-chain-rule, def-complex-exponential, thm-derivative-of-exponential, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice]

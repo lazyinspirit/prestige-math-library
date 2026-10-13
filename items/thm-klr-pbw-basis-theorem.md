@@ -2,7 +2,7 @@
 id: thm-klr-pbw-basis-theorem
 kind: theorem
 title: "The PBW (monomial) basis theorem for KLR algebras"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

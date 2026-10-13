@@ -2,7 +2,7 @@
 id: thm-cm-stress-matrix-is-symmetric
 kind: theorem
 title: "Angular-momentum balance without couples forces the stress matrix to be symmetric"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

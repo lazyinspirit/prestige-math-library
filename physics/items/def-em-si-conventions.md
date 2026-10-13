@@ -2,7 +2,7 @@
 id: def-em-si-conventions
 kind: definition
 title: "Framework-local SI units, the vacuum constants and the exact/measured status of their values"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-em-lab-geometry]

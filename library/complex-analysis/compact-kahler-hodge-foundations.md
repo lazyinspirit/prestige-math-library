@@ -1,7 +1,7 @@
 ---
 page: compact-kahler-hodge-foundations
 title: "Compact Kahler Hodge Foundations"
-status: draft
+status: published
 items:
 - def-compact-kahler-manifold-and-hodge-polarization-conventions
 - lem-rational-cohomology-scalar-comparison-for-compact-smooth-manifolds

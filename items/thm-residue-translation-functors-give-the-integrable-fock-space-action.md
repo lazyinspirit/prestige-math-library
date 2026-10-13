@@ -2,7 +2,7 @@
 id: thm-residue-translation-functors-give-the-integrable-fock-space-action
 kind: theorem
 title: "The residue translation functors give the integrable Fock-space action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 26

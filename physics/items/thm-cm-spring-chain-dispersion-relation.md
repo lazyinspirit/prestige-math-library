@@ -2,7 +2,7 @@
 id: thm-cm-spring-chain-dispersion-relation
 kind: theorem
 title: "Exact dispersion relation $\\omega^2=(4c^2/a^2)\\sin^2(\\kappa a/2)$ for the cyclic chain and its continuum error bound"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

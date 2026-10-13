@@ -2,7 +2,7 @@
 id: ex-sr-dust-stress-energy-under-a-boost
 kind: example
 title: "Dust stress-energy in a boosted inertial frame"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-stress-energy-tensor-and-force-density, lem-sr-dust-conservation-equivalence, thm-sr-tensor-and-current-transformation, def-lorentz-boost, lem-boost-is-proper-orthochronous-with-inverse, def-lorentz-form-and-inertia, def-inertial-frame-and-inertial-chart, def-rational-power, def-sr-affine-minkowski-model]

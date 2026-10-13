@@ -2,7 +2,7 @@
 id: lem-cm-mass-metric-positivity
 kind: lemma
 title: "The mass metric is symmetric, positive semidefinite, and positive definite exactly when the configuration differential is injective"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

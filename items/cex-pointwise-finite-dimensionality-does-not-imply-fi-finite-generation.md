@@ -2,7 +2,7 @@
 id: cex-pointwise-finite-dimensionality-does-not-imply-fi-finite-generation
 kind: counterexample
 title: "A pointwise one-dimensional FI-module that is not finitely generated"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

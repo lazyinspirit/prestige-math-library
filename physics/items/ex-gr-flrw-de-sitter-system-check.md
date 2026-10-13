@@ -2,7 +2,7 @@
 id: ex-gr-flrw-de-sitter-system-check
 kind: example
 title: "Direct check of the flat vacuum data with a cosmological parameter against the Friedmann-system equations"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: texp-sr-piecewise-inertial-twin-reunion
 kind: thought-experiment
 title: "The piecewise inertial twin reunion: conditional differential aging"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "The idealized twin-reunion scenario of the flat classical special-relativity model: two ideal clocks set to zero at their common departure event, one inertial and one on a two-leg piecewise inertial history with an instantaneous ideal turn, compared at their common reunion event. Conditional on the named postulates (ideal clocks with no acceleration-dependent term, prescribed histories, flat spacetime, fixed c); the turn idealizes a finite-duration turnaround. Excludes real clocks and apparatus, gravity, quantum effects, and every measurement or statistical claim."

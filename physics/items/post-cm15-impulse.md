@@ -2,7 +2,7 @@
 id: post-cm15-impulse
 kind: postulate
 title: "Adopted impact and open-mass extensions of the force branch: the isolated reciprocal impulse model, the collinear restitution contact law and the open-body material accounting"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

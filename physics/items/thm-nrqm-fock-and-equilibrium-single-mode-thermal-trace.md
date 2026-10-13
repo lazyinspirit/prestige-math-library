@@ -4,7 +4,7 @@ aliases: [ nrqm-fock-and-equilibrium-single-mode-thermal-trace ]
 kind: theorem
 domain: mathematics
 title: "Single-mode thermal trace"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps:

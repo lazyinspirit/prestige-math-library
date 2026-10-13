@@ -2,7 +2,7 @@
 id: def-gr-inverse-metric-and-musical-isomorphisms
 kind: definition
 title: "The inverse metric, musical isomorphisms and index raising"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-gr-time-separation-maximizers
 kind: lemma
 title: "Time separation in a globally hyperbolic manifold: finiteness, existence of maximizing geodesics and the radial formula on causally convex normal regions"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 23

@@ -2,7 +2,7 @@
 id: post-gr-field-and-matter-assumptions
 kind: postulate
 title: "Adopted matter-content assumptions: fields, equations, stress-energy and energy conditions"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

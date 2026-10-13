@@ -2,7 +2,7 @@
 id: def-gr-timelike-worldline-and-proper-time
 kind: definition
 title: "Timelike worldlines, proper time, length and four-velocity on a Lorentzian four-manifold"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

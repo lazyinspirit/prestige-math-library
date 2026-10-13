@@ -2,7 +2,7 @@
 id: lem-general-linear-stiefel-frame-spaces-have-the-cohomology-gap
 kind: lemma
 title: "General linear frame spaces have the Stiefel cohomology gap"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

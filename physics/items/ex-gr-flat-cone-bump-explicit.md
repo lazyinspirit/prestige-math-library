@@ -3,7 +3,7 @@ id: ex-gr-flat-cone-bump-explicit
 kind: example
 title: "Worked flat-model cone bump: the exponential cone function and its
   past-timelike gradient in inertial coordinates"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 27

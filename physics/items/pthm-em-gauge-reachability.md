@@ -3,7 +3,7 @@ id: pthm-em-gauge-reachability
 kind: physics-theorem
 title: "Gauge reachability: Lorenz gauge on the all-space slab and Coulomb gauge on a bounded smooth domain, with residual freedom"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 18
 deps: [pthm-em-lorenz-gauge-wave-form, def-em-gauge-transformation, pthm-em-gauge-invariance, pthm-em-spacetime-potentials, lem-em-gauge-wave-reachability, thm-em-elliptic-boundary-existence, lem-em-joint-smooth-potentials, lem-em-zero-boundary-coercivity, thm-higher-order-boundary-regularity-for-dirichlet-problems, thm-higher-order-sobolev-embedding, def-axiom-of-choice, def-countable-choice, def-bounded-c-k-domain-and-boundary-charts, def-sobolev-space-wkp-and-its-norm, def-em-potential-gauge-and-field-conventions, def-em-fields, def-star-shaped-open-subset-of-rn, def-interval, def-laplacian-of-a-c2-function, def-ck-euclidean-maps-and-diffeomorphisms, def-directional-and-partial-derivatives, thm-clairaut-schwarz-mixed-partials, thm-algebra-of-derivatives, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, thm-chain-rule-for-total-derivatives, cor-zero-derivative-implies-constant, cor-primitives-of-a-continuous-function, def-oriented-integral, cor-first-green-identity-on-a-bounded-c-one-domain, lem-em-parameter-dependent-smooth-poisson-boundary-solvers, lem-em-parameter-integrals, thm-lebesgue-measure-of-a-box-of-every-kind, prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets]

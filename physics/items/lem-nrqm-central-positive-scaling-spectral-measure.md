@@ -4,7 +4,7 @@ aliases: [nrqm-central-positive-scaling-spectral-measure]
 kind: lemma
 domain: mathematics
 title: "Positive scaling of a self-adjoint operator: the spectral projection-valued measure transforms by the preimage of the scaling map"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-projection-valued-measure, def-unbounded-integral-against-a-pvm, lem-unbounded-pvm-integral-is-well-defined-and-closed, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, lem-scalar-and-complex-measures-from-a-pvm, thm-monotone-convergence-for-the-integral, cor-rn-is-locally-compact-and-sigma-compact, def-regular-borel-measure-on-an-lch-space, def-radon-measure-on-an-lch-space, thm-compactness-under-continuous-maps, cor-continuous-functions-are-borel-measurable, thm-algebra-of-continuous-functions, def-homeomorphism-and-open-maps, def-countable-choice, def-axiom-of-choice]

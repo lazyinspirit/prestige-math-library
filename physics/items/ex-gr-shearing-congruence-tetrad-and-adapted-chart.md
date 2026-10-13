@@ -2,7 +2,7 @@
 id: ex-gr-shearing-congruence-tetrad-and-adapted-chart
 kind: example
 title: "A shearing observer congruence on flat spacetime: tetrad, adapted chart and non-coordinate frame"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

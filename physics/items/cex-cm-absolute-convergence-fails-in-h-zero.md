@@ -2,7 +2,7 @@
 id: cex-cm-absolute-convergence-fails-in-h-zero
 kind: counterexample
 title: "FALSE: every $L^2$ field on $\\mathbb T^3$ has absolutely convergent Fourier coefficients. An explicit $H^0$ family with $\\sum_k|\\widehat u(k)|=\\infty$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

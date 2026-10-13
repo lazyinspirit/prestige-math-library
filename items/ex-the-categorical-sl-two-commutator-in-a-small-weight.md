@@ -2,7 +2,7 @@
 id: ex-the-categorical-sl-two-commutator-in-a-small-weight
 kind: example
 title: "The categorical $\\mathfrak{sl}_2$ commutator in a small cyclotomic weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

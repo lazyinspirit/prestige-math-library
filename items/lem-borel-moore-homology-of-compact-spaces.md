@@ -2,7 +2,7 @@
 id: lem-borel-moore-homology-of-compact-spaces
 kind: lemma
 title: "Borel-Moore and ordinary homology agree for compact spaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

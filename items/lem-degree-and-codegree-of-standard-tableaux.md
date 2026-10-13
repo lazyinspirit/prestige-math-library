@@ -2,7 +2,7 @@
 id: lem-degree-and-codegree-of-standard-tableaux
 kind: lemma
 title: "Degree and codegree of standard tableaux"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 35

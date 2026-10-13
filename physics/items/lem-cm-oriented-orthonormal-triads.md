@@ -2,7 +2,7 @@
 id: lem-cm-oriented-orthonormal-triads
 kind: lemma
 title: "Oriented orthonormal triads in $\\mathbb R^3$: existence over any unit vector, and the orthonormal expansion with no fourth orthogonal direction"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

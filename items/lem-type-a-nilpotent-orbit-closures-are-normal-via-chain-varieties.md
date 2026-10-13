@@ -2,7 +2,7 @@
 id: lem-type-a-nilpotent-orbit-closures-are-normal-via-chain-varieties
 kind: lemma
 title: "Type-A nilpotent orbit closures are normal via chain varieties"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

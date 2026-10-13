@@ -2,7 +2,7 @@
 id: def-finite-q-wedge-space-and-normal-ordering-relations
 kind: definition
 title: "The finite q-wedge space and the normal-ordering relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

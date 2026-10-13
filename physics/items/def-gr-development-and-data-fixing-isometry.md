@@ -2,7 +2,7 @@
 id: def-gr-development-and-data-fixing-isometry
 kind: definition
 title: "Smooth developments of constrained initial data, data-fixing isometries, development embeddings and maximality"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 26

@@ -1,7 +1,7 @@
 ---
 page: qm-photons-and-radiation-modes
 title: "Qm Photons And Radiation Modes"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-photons-analyzer-projections-and-overlaps

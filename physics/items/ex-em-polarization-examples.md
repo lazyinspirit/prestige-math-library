@@ -2,7 +2,7 @@
 id: ex-em-polarization-examples
 kind: example
 title: "Linear, circular and elliptical amplitude choices"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

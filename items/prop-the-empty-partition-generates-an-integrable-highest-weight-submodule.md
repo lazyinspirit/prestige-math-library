@@ -2,7 +2,7 @@
 id: prop-the-empty-partition-generates-an-integrable-highest-weight-submodule
 kind: proposition
 title: "The empty partition generates an integrable highest weight submodule of highest weight $\\Lambda_0$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

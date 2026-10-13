@@ -2,7 +2,7 @@
 id: lem-q-schur-central-hecke-jm-scalars-give-residue-separation
 kind: lemma
 title: "Central Hecke Jucys–Murphy scalars separate q-Schur residue contents"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

@@ -2,7 +2,7 @@
 id: lem-the-drinfeld-hopf-pairing-is-nondegenerate-in-each-root-degree
 kind: lemma
 title: "The Drinfeld pairing is nondegenerate in each root degree and matches the shuffle pairing"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

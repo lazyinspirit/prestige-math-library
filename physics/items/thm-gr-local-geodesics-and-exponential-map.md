@@ -2,7 +2,7 @@
 id: thm-gr-local-geodesics-and-exponential-map
 kind: theorem
 title: "The geodesic initial-value problem and the exponential map of the metric-selected connection"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

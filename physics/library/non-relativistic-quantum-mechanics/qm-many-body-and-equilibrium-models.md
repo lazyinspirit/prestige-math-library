@@ -1,7 +1,7 @@
 ---
 page: qm-many-body-and-equilibrium-models
 title: Qm Many Body And Equilibrium Models
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-many-body-one-body-reduction-trace-law

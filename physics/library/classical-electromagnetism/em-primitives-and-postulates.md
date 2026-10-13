@@ -1,7 +1,7 @@
 ---
 page: em-primitives-and-postulates
 title: "Primitives and postulates"
-status: draft
+status: published
 items: [def-em-lab-geometry, def-em-si-conventions, def-em-fields,
         post-em-minkowski-physical-model, def-em-relativistic-worldlines-frames,
         def-em-sources, def-em-electromagnetic-tensor, post-em-vacuum-maxwell,

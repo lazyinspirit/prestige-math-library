@@ -2,7 +2,7 @@
 id: lem-gr-lorentzian-perturbations-remain-lorentzian
 kind: lemma
 title: "Lorentzian metrics are stable under small compactly supported symmetric perturbations"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

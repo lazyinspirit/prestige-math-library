@@ -2,7 +2,7 @@
 id: thm-cogood-node-gives-the-simple-socle-and-head-of-residue-induction
 kind: theorem
 title: "The cogood node gives the simple socle and head of the residue induction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

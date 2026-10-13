@@ -2,7 +2,7 @@
 id: lem-character-value-on-a-full-cycle-is-supported-on-hooks
 kind: lemma
 title: "The value of an irreducible character on a full cycle is supported on hooks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

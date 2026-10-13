@@ -3,7 +3,7 @@ id: lem-em-surface-density-localization
 kind: lemma
 title: "Surface densities with vanishing test pairings vanish"
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-surface-integral-on-a-compact-c-one-hypersurface,

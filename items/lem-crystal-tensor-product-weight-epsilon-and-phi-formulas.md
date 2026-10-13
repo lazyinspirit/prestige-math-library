@@ -2,7 +2,7 @@
 id: lem-crystal-tensor-product-weight-epsilon-and-phi-formulas
 kind: lemma
 title: "The weight, $\\varepsilon_i$ and $\\varphi_i$ formulas for the tensor product crystal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

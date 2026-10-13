@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The massive spin-s particle model of the framework: state space,
   operators, units and frame readings"
-status: draft
+status: published
 origin: session
 dependency_level: 8
 deps:

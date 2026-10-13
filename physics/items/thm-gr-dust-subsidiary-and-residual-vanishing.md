@@ -3,7 +3,7 @@ id: thm-gr-dust-subsidiary-and-residual-vanishing
 kind: theorem
 title: "Subsidiary system of the dust reduction: Cartan identities, closed
   homogeneous residual system and vanishing of the residuals"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 21

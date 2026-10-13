@@ -2,7 +2,7 @@
 id: ex-cm13-isotropic-oscillator-flow-symplectic-and-volume-checks
 kind: example
 title: "The isotropic oscillator of the model: explicit solution, the determinant and matrix tests on each two-dimensional block, and the area and energy checks"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 23

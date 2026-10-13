@@ -1,7 +1,7 @@
 ---
 page: qm-math-intervals-and-contacts
 title: Qm Math Intervals And Contacts
-status: draft
+status: published
 items:
   - def-nrqm-intervals-hilbert-sobolev-spaces
   - lem-nrqm-intervals-weak-derivative-ac-representative

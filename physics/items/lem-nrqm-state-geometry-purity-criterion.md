@@ -3,7 +3,7 @@ id: lem-nrqm-state-geometry-purity-criterion
 kind: lemma
 domain: mathematics
 title: "Purity, spectral weights and the criterion for a pure state"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-nrqm-state-geometry-pure-mixed-states-and-purity, lem-nrqm-state-geometry-ray-to-rank-one-projection, lem-nrqm-composites-density-and-scalar-spectral-probability, thm-spectral-theorem-for-compact-self-adjoint-operators, thm-trace-of-a-positive-operator-is-the-sum-of-its-eigenvalues, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-hilbert-adjoint-properties, thm-hilbert-space-fourier-expansion, thm-cauchy-schwarz-in-an-inner-product-space, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-self-adjoint-positive-unitary-and-normal-operator, def-trace-class-operator, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-countable-choice]

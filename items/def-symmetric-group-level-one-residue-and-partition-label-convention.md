@@ -2,7 +2,7 @@
 id: def-symmetric-group-level-one-residue-and-partition-label-convention
 kind: definition
 title: "The symmetric-group level-one residue and partition-label convention"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 14

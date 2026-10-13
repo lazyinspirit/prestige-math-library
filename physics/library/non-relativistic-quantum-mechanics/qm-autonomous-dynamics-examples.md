@@ -1,7 +1,7 @@
 ---
 page: qm-autonomous-dynamics-examples
 title: "Qm Autonomous Dynamics — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

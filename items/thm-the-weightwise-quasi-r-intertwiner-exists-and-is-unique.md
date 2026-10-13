@@ -2,7 +2,7 @@
 id: thm-the-weightwise-quasi-r-intertwiner-exists-and-is-unique
 kind: theorem
 title: "Existence and uniqueness of the weightwise quasi-$R$ intertwiner"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

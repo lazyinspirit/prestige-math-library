@@ -2,7 +2,7 @@
 id: lem-gr-inverse-metric-is-smooth
 kind: lemma
 title: "Smoothness and transformation of the inverse-metric components"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

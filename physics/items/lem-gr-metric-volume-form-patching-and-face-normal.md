@@ -2,7 +2,7 @@
 id: lem-gr-metric-volume-form-patching-and-face-normal
 kind: lemma
 title: "Chart independence of the metric volume form, its value on orthonormal frames, and the unit normal and density of a non-null hyperplane"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

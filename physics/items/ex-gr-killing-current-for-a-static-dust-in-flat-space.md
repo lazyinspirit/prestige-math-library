@@ -2,7 +2,7 @@
 id: ex-gr-killing-current-for-a-static-dust-in-flat-space
 kind: example
 title: "The Killing current of a static dust congruence in flat space"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

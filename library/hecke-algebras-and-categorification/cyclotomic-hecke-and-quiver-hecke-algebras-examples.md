@@ -1,7 +1,7 @@
 ---
 page: cyclotomic-hecke-and-quiver-hecke-algebras-examples
 title: "Cyclotomic Hecke and Quiver Hecke Algebras — Examples"
-status: draft
+status: published
 requires: [cyclotomic-hecke-and-quiver-hecke-algebras]
 examples: [
         ex-homogeneous-degree-check-for-the-corrected-klr-braid-relation,

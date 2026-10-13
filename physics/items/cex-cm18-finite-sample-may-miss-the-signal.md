@@ -3,7 +3,7 @@ id: cex-cm18-finite-sample-may-miss-the-signal
 kind: counterexample
 title: "A finite sample can miss a predicted outcome with positive probability:
   an elementary product-model counterexample"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps:

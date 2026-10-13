@@ -2,7 +2,7 @@
 id: texp-em-radiation-pressure-example
 kind: thought-experiment
 title: "Ideal absorber and ideal reflector momentum transfer (radiation pressure)"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 20

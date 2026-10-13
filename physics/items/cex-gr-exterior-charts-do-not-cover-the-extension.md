@@ -2,7 +2,7 @@
 id: cex-gr-exterior-charts-do-not-cover-the-extension
 kind: counterexample
 title: "The exterior Schwarzschild charts do not cover the horizon-crossing extension: the regular horizon point (v, r) = (0, s)"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 15

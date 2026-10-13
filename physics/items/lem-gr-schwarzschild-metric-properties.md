@@ -2,7 +2,7 @@
 id: lem-gr-schwarzschild-metric-properties
 kind: lemma
 title: "The Schwarzschild exterior datum is a smooth time-oriented Lorentzian four-manifold"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

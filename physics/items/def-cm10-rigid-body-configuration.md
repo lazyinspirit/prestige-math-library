@@ -2,7 +2,7 @@
 id: def-cm10-rigid-body-configuration
 kind: definition
 title: "Configuration, configuration space and orientation of a rigid-material model in an inertial frame"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 7

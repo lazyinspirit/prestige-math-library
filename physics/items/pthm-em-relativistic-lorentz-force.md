@@ -2,7 +2,7 @@
 id: pthm-em-relativistic-lorentz-force
 kind: physics-theorem
 title: "The four-force equation reproduces the coordinate Lorentz force and power"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

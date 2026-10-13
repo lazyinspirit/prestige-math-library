@@ -2,7 +2,7 @@
 id: thm-projective-verma-multiplicities-are-kazhdan-lusztig-values-at-one
 kind: theorem
 title: "Projective Verma multiplicities are Kazhdan–Lusztig values at one"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

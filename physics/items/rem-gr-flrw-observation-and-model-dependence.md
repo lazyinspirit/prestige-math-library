@@ -2,7 +2,7 @@
 id: rem-gr-flrw-observation-and-model-dependence
 kind: remark
 title: "Scope and empirical status of the homogeneous cosmological model: model predictions, reported observations and statistical inference are distinct"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

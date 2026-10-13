@@ -1,7 +1,7 @@
 ---
 page: em-lorentz-covariant-formulation-examples
 title: "Lorentz covariant formulation — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-em-boosted-fields-example, ex-em-constant-field-trajectory]
 ---

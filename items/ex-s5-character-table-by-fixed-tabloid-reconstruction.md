@@ -2,7 +2,7 @@
 id: ex-s5-character-table-by-fixed-tabloid-reconstruction
 kind: example
 title: "The S_5 character table by fixed-tabloid reconstruction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

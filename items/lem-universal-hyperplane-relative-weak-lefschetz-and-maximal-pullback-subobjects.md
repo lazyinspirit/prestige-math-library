@@ -2,7 +2,7 @@
 id: lem-universal-hyperplane-relative-weak-lefschetz-and-maximal-pullback-subobjects
 kind: lemma
 title: "Universal hyperplanes give relative weak Lefschetz and maximal pullback subobjects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 22

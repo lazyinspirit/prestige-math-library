@@ -2,7 +2,7 @@
 id: lem-cm-so3-is-a-matrix-group
 kind: lemma
 title: "$SO(3)$ is a subgroup of the general linear group, with $R^{-1}=R^{\\mathsf T}$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared WKB regime model: nondimensionalised line equation, turning
   points, phase integrals and the declared barrier transmission reading"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

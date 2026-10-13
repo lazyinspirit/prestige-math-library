@@ -2,7 +2,7 @@
 id: ex-cm15-impact-check
 kind: example
 title: "A declared-data impact check: $m_1=2\\,\\mathrm{kg}$, $m_2=6\\,\\mathrm{kg}$, $v_1^-=3\\,\\mathrm{m\\,s^{-1}}$, $v_2^-=-1\\,\\mathrm{m\\,s^{-1}}$, with elastic, semi-elastic and sticking outcomes"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

@@ -2,7 +2,7 @@
 id: cor-cm-variation-of-constants-for-linear-systems
 kind: corollary
 title: "Variation of constants for $z'=Az+b(t)$ via the matrix exponential"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

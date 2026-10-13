@@ -2,7 +2,7 @@
 id: thm-parabolic-kazhdan-lusztig-polynomials-are-alternating-sums-of-ordinary-ones
 kind: theorem
 title: "Parabolic Kazhdan–Lusztig polynomials are alternating sums of ordinary ones"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: level-one-fock-space-and-residue-crystals
 title: "Level-One Fock Space and Residue Crystals"
-status: draft
+status: published
 requires: [modular-branching-and-the-good-node-crystal, quantum-affine-type-a-and-level-one-fock-space]
 items: [       def-symmetric-group-level-one-residue-and-partition-label-convention,
        lem-level-one-node-order-and-conjugation-dictionary,

@@ -2,7 +2,7 @@
 id: def-cm-complex-phase-domains-and-holomorphic-maps
 kind: definition
 title: Complex phase domains, holomorphic maps on $\mathbb C^m$, and the complexified canonical form and bracket
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

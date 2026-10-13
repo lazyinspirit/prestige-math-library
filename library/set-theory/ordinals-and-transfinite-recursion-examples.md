@@ -1,7 +1,7 @@
 ---
 page: ordinals-and-transfinite-recursion-examples
 title: "Ordinals and Transfinite Recursion: Examples and Counterexamples"
-status: draft
+status: published
 requires: [ordinals-and-transfinite-recursion]
 items: []
 examples: [ex-the-finite-von-neumann-ordinals-and-the-limit-ordinal-omega,

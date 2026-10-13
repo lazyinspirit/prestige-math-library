@@ -2,7 +2,7 @@
 id: pthm-cm14-action-angle
 kind: physics-theorem
 title: "Action-angle coordinates of a completely integrable presentation: period-one angles, action coordinates, $H=h(I)$ and linear motion on the tori"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 26

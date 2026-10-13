@@ -2,7 +2,7 @@
 id: lem-diophantine-resonance-slab-measure
 kind: lemma
 title: "Small-divisor slabs and the positive measure of the Diophantine set: the resonance covering has measure $O(\\alpha)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

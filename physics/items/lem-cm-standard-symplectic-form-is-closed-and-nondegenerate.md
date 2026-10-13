@@ -2,7 +2,7 @@
 id: lem-cm-standard-symplectic-form-is-closed-and-nondegenerate
 kind: lemma
 title: "The standard two-form of a phase domain is closed and nondegenerate, with contraction $\\iota_v\\omega=\\sum_i a_i\\,dp_i-\\sum_i b_i\\,dq^i$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

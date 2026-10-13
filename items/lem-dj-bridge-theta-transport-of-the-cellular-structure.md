@@ -2,7 +2,7 @@
 id: lem-dj-bridge-theta-transport-of-the-cellular-structure
 kind: lemma
 title: "Theta transports the Murphy cellular structure to the signed cell modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

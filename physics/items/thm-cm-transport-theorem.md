@@ -2,7 +2,7 @@
 id: thm-cm-transport-theorem
 kind: theorem
 title: "The transport theorem for a $C^2$ family of diffeomorphisms: $\\frac{d}{dt}\\int_{\\psi_t(B)}f=\\int_{\\psi_t(B)}(\\partial_tf+\\operatorname{div}(fw))$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

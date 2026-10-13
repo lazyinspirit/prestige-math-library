@@ -1,7 +1,7 @@
 ---
 page: cm-math-balances-examples
 title: Cm Math Balances — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-balances-impulse-and-rocket-checks

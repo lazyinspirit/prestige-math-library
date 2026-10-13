@@ -2,7 +2,7 @@
 id: ex-gr-unit-conventions-for-two-time-coordinates
 kind: example
 title: "Component units of the flat metric in length and time coordinates"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

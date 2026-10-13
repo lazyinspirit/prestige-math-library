@@ -1,7 +1,7 @@
 ---
 page: em-variational-mathematical-prerequisites
 title: Em Variational Mathematical Prerequisites
-status: draft
+status: published
 items: [lem-em-fundamental-variation-lemma, lem-em-compact-field-variation]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: def-cm-equilibrium-and-lyapunov-stability
 kind: definition
 title: "Equilibria, Lyapunov stability and asymptotic stability of an autonomous first-order system"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

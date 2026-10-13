@@ -2,7 +2,7 @@
 id: lem-kam-composed-map-and-derivative-convergence
 kind: lemma
 title: "Convergence of the composed KAM transformations, with derivative and frequency-Lipschitz bounds"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 8

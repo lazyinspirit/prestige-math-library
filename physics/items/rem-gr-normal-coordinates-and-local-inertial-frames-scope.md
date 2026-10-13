@@ -2,7 +2,7 @@
 id: rem-gr-normal-coordinates-and-local-inertial-frames-scope
 kind: remark
 title: "Scope of normal coordinates and of the local-inertial-frame reading"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

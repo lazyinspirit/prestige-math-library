@@ -1,7 +1,7 @@
 ---
 page: the-kazhdan-lusztig-character-and-multiplicity-theorem-examples
 title: "The Kazhdan–Lusztig Character and Multiplicity Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [cex-soergel-character-grading-alone-does-not-prove-category-o-koszulity, ex-the-kl-multiplicity-matrix-for-the-sl-three-principal-block, ex-inverting-kl-multiplicities-to-obtain-simple-characters, ex-translation-between-two-regular-integral-blocks]
 ---

@@ -2,7 +2,7 @@
 id: ex-sr-four-momentum-at-beta-three-fifths
 kind: example
 title: "Four-momentum and kinetic energy at speed three-fifths c"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

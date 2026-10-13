@@ -2,7 +2,7 @@
 id: lem-cyclotomic-semistandard-row-type-sums-give-permutation-module-bases
 kind: lemma
 title: "Cyclotomic semistandard row-type sums give permutation-module bases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

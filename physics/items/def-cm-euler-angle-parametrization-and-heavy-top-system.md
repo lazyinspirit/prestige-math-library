@@ -2,7 +2,7 @@
 id: def-cm-euler-angle-parametrization-and-heavy-top-system
 kind: definition
 title: "The Euler-angle parametrization and the heavy symmetric top system"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

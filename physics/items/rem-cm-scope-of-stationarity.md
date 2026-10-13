@@ -2,7 +2,7 @@
 id: rem-cm-scope-of-stationarity
 kind: remark
 title: "Scope of stationarity: stationary is not minimum, and no second-variation theory is developed here"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: rem-gr-linearized-wave-scope-and-deferred
 kind: remark
 title: "Scope, status and deferred material of the linearized-waves page: what the model predicts, what is idealization and what is not covered"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

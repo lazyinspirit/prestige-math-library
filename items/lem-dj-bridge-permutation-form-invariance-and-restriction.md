@@ -2,7 +2,7 @@
 id: lem-dj-bridge-permutation-form-invariance-and-restriction
 kind: lemma
 title: "The permutation form is H-contravariant and restricts to the DJ form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: pthm-cm11-top-reduction
 kind: physics-theorem
 title: "Reduction of the heavy symmetric top branch: pivotal angular momentum, Euler-angle equations, the two conserved momenta and the one-dimensional $\\theta$ equation"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

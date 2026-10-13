@@ -2,7 +2,7 @@
 id: ex-cm03-driven-mechanical-energy-balance
 kind: example
 title: "A driven one-dimensional model with a time-dependent potential and a residual force: the mechanical-energy balance, the integrated work form and the normalization ambiguity computed on explicit data"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

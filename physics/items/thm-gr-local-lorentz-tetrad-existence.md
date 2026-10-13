@@ -2,7 +2,7 @@
 id: thm-gr-local-lorentz-tetrad-existence
 kind: theorem
 title: "Existence of a smooth future-directed tetrad field near every event"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

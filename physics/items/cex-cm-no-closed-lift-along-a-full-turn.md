@@ -2,7 +2,7 @@
 id: cex-cm-no-closed-lift-along-a-full-turn
 kind: counterexample
 title: "A closed rotation loop with no closed lift: the full turn about an axis lifts from $1$ to $-1$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

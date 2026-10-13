@@ -2,7 +2,7 @@
 id: ex-projection-from-b-infinity-to-a-highest-weight-crystal
 kind: example
 title: "The projection from $B(\\infty)$ to a highest weight crystal for $\\mathfrak{sl}_2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

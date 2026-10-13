@@ -2,7 +2,7 @@
 id: def-cm13-canonical-map
 kind: definition
 title: "Canonical maps of a potential presentation: pullback-preserving immersions and the equal-dimensional determinant and field-transport tests"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 20

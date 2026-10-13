@@ -2,7 +2,7 @@
 id: rem-cm10-orientation-charts
 kind: remark
 title: "The global orientation and its charts: Euler angles, the quaternion double cover and singularities of parametrizations"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

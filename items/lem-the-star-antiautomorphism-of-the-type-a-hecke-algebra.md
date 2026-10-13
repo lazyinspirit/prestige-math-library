@@ -2,7 +2,7 @@
 id: lem-the-star-antiautomorphism-of-the-type-a-hecke-algebra
 kind: lemma
 title: "The star anti-automorphism of the type-A Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

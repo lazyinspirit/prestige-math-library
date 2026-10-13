@@ -2,7 +2,7 @@
 id: prop-kronecker-coefficient-is-a-three-character-inner-product
 kind: proposition
 title: The Kronecker coefficient is a three-character inner product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

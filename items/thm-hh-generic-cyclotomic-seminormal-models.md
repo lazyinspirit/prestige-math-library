@@ -2,7 +2,7 @@
 id: thm-hh-generic-cyclotomic-seminormal-models
 kind: theorem
 title: "Generic seminormal models for cyclotomic Hecke algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 1

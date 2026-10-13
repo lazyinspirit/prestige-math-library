@@ -4,7 +4,7 @@ aliases: [nrqm-autonomous-dynamics-heisenberg-flow]
 kind: lemma
 domain: mathematics
 title: "Heisenberg flow of a bounded operator: conjugates, covariance and the equation of motion"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-axiom-of-choice, def-bounded-linear-operator, def-countable-choice, def-hilbert-space, def-hilbert-space-adjoint, def-operator-norm, def-projection-valued-measure, def-self-adjoint-positive-unitary-and-normal-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-unbounded-integral-against-a-pvm, lem-nrqm-autonomous-dynamics-flow-calculus, thm-bounded-borel-pvm-integral, thm-hilbert-adjoint-properties, thm-pvm-integral-is-a-star-homomorphism, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus]

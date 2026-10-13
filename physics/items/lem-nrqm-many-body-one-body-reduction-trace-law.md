@@ -4,7 +4,7 @@ aliases: [nrqm-many-body-one-body-reduction-trace-law]
 kind: lemma
 domain: mathematics
 title: "The one-body reduction trace law of the finite-mode permutation sectors"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-permutation-sector-projections, thm-nrqm-composites-finite-partial-trace-and-schmidt, lem-nrqm-composites-density-and-scalar-spectral-probability, cor-finite-iterated-tensor-products-represent-multilinear-maps, thm-cyclicity-of-the-trace, prop-trace-is-linear, thm-extension-of-a-bounded-map-from-a-dense-subspace, def-linear-isometry-and-orthogonal-or-unitary-operator, def-trace-class-operator, def-trace-of-a-trace-class-operator, def-trace-of-an-endomorphism, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-countable-choice, lem-nrqm-composites-rank-one-operator-calculus]

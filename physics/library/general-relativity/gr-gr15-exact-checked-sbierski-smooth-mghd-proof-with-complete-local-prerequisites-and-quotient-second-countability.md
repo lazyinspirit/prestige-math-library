@@ -10,7 +10,7 @@ requires:
 - gr-connections-and-free-fall
 page: gr-gr15-exact-checked-sbierski-smooth-mghd-proof-with-complete-local-prerequisites-and-quotient-second-countability
 title: Gr15 Exact Checked Sbierski Smooth Mghd Proof With Complete Local Prerequisites And Quotient Second Countability
-status: draft
+status: published
 library: physics
 items:
 - def-gr-development-and-data-fixing-isometry

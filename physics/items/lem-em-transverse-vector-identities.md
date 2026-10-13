@@ -3,7 +3,7 @@ id: lem-em-transverse-vector-identities
 kind: lemma
 domain: mathematics
 title: "Transverse vector-calculus identities for the splitting $\\mathbb R^3=\\mathbb R^2\\oplus\\mathbb R e_z$"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-cross-product-in-r3, def-divergence-and-curl-of-a-c1-vector-field, def-directional-and-partial-derivatives, def-euclidean-inner-product, def-laplacian-of-a-c2-function, lem-cross-product-is-bilinear-alternating-and-orthogonal, thm-algebra-of-derivatives, thm-clairaut-schwarz-mixed-partials]

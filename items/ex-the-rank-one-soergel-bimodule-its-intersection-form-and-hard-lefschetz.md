@@ -2,7 +2,7 @@
 id: ex-the-rank-one-soergel-bimodule-its-intersection-form-and-hard-lefschetz
 kind: example
 title: "The rank-one Soergel bimodule: trace form, reduced module and hard Lefschetz"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

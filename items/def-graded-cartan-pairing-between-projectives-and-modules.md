@@ -2,7 +2,7 @@
 id: def-graded-cartan-pairing-between-projectives-and-modules
 kind: definition
 title: "The graded Cartan pairing between projective and module classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 34

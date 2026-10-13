@@ -2,7 +2,7 @@
 id: def-sr-piecewise-proper-time
 kind: definition
 title: "Total proper time of a piecewise C^1 future timelike worldline"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 9

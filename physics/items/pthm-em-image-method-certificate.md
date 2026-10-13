@@ -2,7 +2,7 @@
 id: pthm-em-image-method-certificate
 kind: physics-theorem
 title: "The image-method certificate for a point charge above a grounded plane"
-status: draft
+status: published
 origin: session
 dependency_level: 17
 domain: physics

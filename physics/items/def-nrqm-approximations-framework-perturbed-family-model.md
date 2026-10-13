@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared perturbed-family model: bounded self-adjoint perturbation,
   isolated gapped label and followed spectral cluster"
-status: draft
+status: published
 origin: session
 dependency_level: 9
 deps:

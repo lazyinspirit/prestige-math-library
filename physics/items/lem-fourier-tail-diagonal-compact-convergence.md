@@ -2,7 +2,7 @@
 id: lem-fourier-tail-diagonal-compact-convergence
 kind: lemma
 title: "Diagonal extraction of a converging Fourier subsequence from high-norm bounds and the tail estimate"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

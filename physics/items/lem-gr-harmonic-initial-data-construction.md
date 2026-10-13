@@ -2,7 +2,7 @@
 id: lem-gr-harmonic-initial-data-construction
 kind: lemma
 title: "Harmonic initial data from geometric data: prescribing the metric jet of a spacelike slice in a time-independent background"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

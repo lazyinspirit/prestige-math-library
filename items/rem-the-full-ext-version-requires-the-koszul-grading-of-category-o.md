@@ -2,7 +2,7 @@
 id: rem-the-full-ext-version-requires-the-koszul-grading-of-category-o
 kind: remark
 title: "The full Ext version requires the Koszul grading of category O"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -3,7 +3,7 @@ id: pthm-em-open-rectangular-guide-completeness
 kind: physics-theorem
 domain: physics
 title: "Complete longitudinal Fourier energy evolution in a rectangular PEC guide"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 deps: [post-em-material-closure, pthm-em-macroscopic-maxwell, pthm-em-restricted-material-energy, def-em-guide-cavity-geometry, def-countable-choice, def-distributional-derivative, def-euclidean-inner-product, cor-globally-lipschitz-odes-have-global-solutions, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, thm-ftc-first-part, thm-ftc-second-part, thm-continuous-implies-integrable, thm-distributional-differentiation-is-continuous-and-commutes, thm-a-distribution-with-zero-derivatives-on-a-connected-open-set-is-constant, thm-of-square-roots, thm-sine-and-cosine-derivatives, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, lem-complex-conjugation-and-modulus-laws, thm-dominated-convergence, pthm-em-uniform-ohmic-modal-decay, lem-em-rectangular-pec-energy-completeness, lem-em-rectangular-transverse-mode-completeness, thm-hilbert-space-fourier-expansion, thm-plancherel, thm-l-two-fourier-inversion, thm-fourier-transform-maps-schwartz-space-continuously-to-itself, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-continuous-dependence-of-odes-on-initial-data-and-parameters, cor-cauchy-schwarz-inequality-for-l-two, lem-complex-lp-completeness-density-and-inner-product, def-cross-product-in-r3, lem-cross-product-is-bilinear-alternating-and-orthogonal, def-divergence-and-curl-of-a-c1-vector-field, lem-schwartz-cutoffs-from-the-standard-smooth-step]

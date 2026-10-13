@@ -1,7 +1,7 @@
 ---
 page: qm-math-magnetic-and-detection-examples
 title: Qm Math Magnetic And Detection — Examples
-status: draft
+status: published
 items: []
 requires:
   - qm-math-magnetic-and-detection

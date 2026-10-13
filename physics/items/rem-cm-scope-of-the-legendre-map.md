@@ -2,7 +2,7 @@
 id: rem-cm-scope-of-the-legendre-map
 kind: remark
 title: "Scope of the Legendre map: regular versus hyperregular, the meaning of the covector datum, and the limits of the branch description"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

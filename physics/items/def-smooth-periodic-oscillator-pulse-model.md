@@ -3,7 +3,7 @@ id: def-smooth-periodic-oscillator-pulse-model
 kind: definition
 title: "The smooth $P$-periodic pulsed oscillator: the normalized pulse, its
   Hamiltonian and its stroboscopic (period) map"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

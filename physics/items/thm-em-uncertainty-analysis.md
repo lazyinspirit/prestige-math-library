@@ -3,7 +3,7 @@ id: thm-em-uncertainty-analysis
 kind: theorem
 domain: mathematics
 title: "Uncertainty analysis: bounded-error data confine the parameter of a $C^1$ prediction along a declared unit direction in $\\mathbb R^n$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 1

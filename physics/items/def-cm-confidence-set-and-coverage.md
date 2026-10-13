@@ -2,7 +2,7 @@
 id: def-cm-confidence-set-and-coverage
 kind: definition
 title: "Confidence sets and their coverage level"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-complete-ordered-field, def-infimum, def-measurable-space, def-probability-measure, def-sigma-algebra, lem-sup-unique, thm-infimum-property]

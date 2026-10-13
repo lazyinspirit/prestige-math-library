@@ -2,7 +2,7 @@
 id: def-kronecker-coefficient-and-internal-tensor-product
 kind: definition
 title: Kronecker coefficients and the internal tensor product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

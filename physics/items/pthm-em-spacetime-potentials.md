@@ -3,7 +3,7 @@ id: pthm-em-spacetime-potentials
 kind: physics-theorem
 title: "Smooth scalar and vector potentials on a star-shaped space-time region"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 14
 deps: [lem-em-joint-smooth-potentials, post-em-vacuum-maxwell, def-em-potential-gauge-and-field-conventions, def-em-fields, def-star-shaped-open-subset-of-rn, def-interval, def-ck-euclidean-maps-and-diffeomorphisms, def-divergence-and-curl-of-a-c1-vector-field, def-directional-and-partial-derivatives, thm-clairaut-schwarz-mixed-partials, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, thm-algebra-of-derivatives, thm-the-divergence-of-a-curl-vanishes, thm-the-curl-of-a-gradient-vanishes]

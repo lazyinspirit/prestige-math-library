@@ -2,7 +2,7 @@
 id: ex-equivariant-constructible-ext-on-a-point-is-degreewise-finite-not-total-finite
 kind: example
 title: "Equivariant Ext of a point is degreewise finite and not total finite"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 24

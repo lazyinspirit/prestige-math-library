@@ -3,7 +3,7 @@ id: lem-gr-cone-bump-functions
 kind: lemma
 title: "Cone bumps: for every point of a Cauchy level there is a smooth bump
   with past timelike gradient on its positive region below that level"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 26

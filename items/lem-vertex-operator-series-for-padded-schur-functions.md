@@ -2,7 +2,7 @@
 id: lem-vertex-operator-series-for-padded-schur-functions
 kind: lemma
 title: "Vertex-operator generating series for the padded Schur functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

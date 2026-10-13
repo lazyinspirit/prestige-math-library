@@ -3,7 +3,7 @@ id: lem-em-pec-cavity-eigenfield-boundary-regularity
 kind: lemma
 domain: mathematics
 title: "Smooth boundary regularity of PEC cavity eigenfields in the declared graph completion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 3

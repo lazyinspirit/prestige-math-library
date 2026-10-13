@@ -2,7 +2,7 @@
 id: lem-gr-convex-normal-causality
 kind: lemma
 title: "Pointwise local causality: closed cones, openness of the local chronological future, no local closed causal curves, corner smoothing and closedness of the local causal relation"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 18

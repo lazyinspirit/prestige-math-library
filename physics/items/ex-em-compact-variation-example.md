@@ -2,7 +2,7 @@
 id: ex-em-compact-variation-example
 kind: example
 title: "A compact test variation and gauge-source sign check"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

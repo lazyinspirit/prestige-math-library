@@ -2,7 +2,7 @@
 id: pthm-cm10-principal-axes
 kind: physics-theorem
 title: "Principal axes and principal moments of the inertia data of a rigid-material model, axis moments and extremal values"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

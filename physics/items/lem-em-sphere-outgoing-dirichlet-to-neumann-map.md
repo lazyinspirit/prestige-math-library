@@ -3,7 +3,7 @@ id: lem-em-sphere-outgoing-dirichlet-to-neumann-map
 kind: lemma
 domain: mathematics
 title: "Outgoing spherical trace and Dirichlet-to-Neumann map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 3

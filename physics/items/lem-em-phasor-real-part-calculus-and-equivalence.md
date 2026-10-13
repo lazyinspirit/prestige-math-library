@@ -2,7 +2,7 @@
 id: lem-em-phasor-real-part-calculus-and-equivalence
 kind: lemma
 title: "Real parts of $e^{-i\\omega t}$ phasors: calculus, injectivity and equivalence with the real Helmholtz-Maxwell system"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-weak-derivative-ac-representative]
 kind: lemma
 domain: mathematics
 title: "Absolutely continuous representative of an L2 function with L2 weak derivative"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [thm-integral-triangle-inequality, def-nrqm-intervals-hilbert-sobolev-spaces, cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives, thm-holder-inequality-for-integrals, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, def-axiom-of-choice, def-countable-choice]

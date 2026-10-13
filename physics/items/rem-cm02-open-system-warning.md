@@ -2,7 +2,7 @@
 id: rem-cm02-open-system-warning
 kind: remark
 title: "Status audit and model boundaries of the force page: open systems, frame selection, breakdown and empirical scope"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

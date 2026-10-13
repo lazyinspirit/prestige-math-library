@@ -2,7 +2,7 @@
 id: ex-dj-bridge-row-and-column-shapes-at-rank-three
 kind: example
 title: "The row and column Specht conventions in rank three"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

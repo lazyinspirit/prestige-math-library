@@ -2,7 +2,7 @@
 id: lem-gr-position-vector-differential
 kind: lemma
 title: "The differential of the squared-displacement function and the position vector of the reversed geodesic"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

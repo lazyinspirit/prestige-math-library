@@ -3,7 +3,7 @@ id: def-em-gauge-transformation
 kind: definition
 title: "Potential representations, gauge transformations and the Lorenz and Coulomb conditions"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 15
 deps: [def-em-potential-gauge-and-field-conventions, def-em-lab-geometry, def-em-fields, def-em-si-conventions, pthm-em-spacetime-potentials, lem-em-joint-smooth-potentials, def-ck-euclidean-maps-and-diffeomorphisms, def-directional-and-partial-derivatives, def-divergence-and-curl-of-a-c1-vector-field, thm-algebra-of-derivatives]

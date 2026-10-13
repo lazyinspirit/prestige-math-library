@@ -4,7 +4,7 @@ aliases: [ nrqm-uncertainty-preparation-spread ]
 kind: definition
 domain: physics
 title: "Preparation variance and spread of an assigned sharp observable"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

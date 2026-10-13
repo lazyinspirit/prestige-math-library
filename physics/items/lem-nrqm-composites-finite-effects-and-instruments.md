@@ -5,7 +5,7 @@ kind: lemma
 domain: mathematics
 title: "Finite effects and instruments: normalization and non-determination of
   the update"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps:

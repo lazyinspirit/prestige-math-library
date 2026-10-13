@@ -2,7 +2,7 @@
 id: post-sr-ideal-massless-particle-momentum
 kind: postulate
 title: "Adopted momentum model for an ideal massless particle"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "Ideal classical massless point particles in flat Minkowski spacetime, modelled by a nonzero future null four-momentum whose energy and momentum are identified with the observer quantities, and whose scale is fixed by a measured energy. Excludes four-velocities, proper time and rest frames for the particle, any massive limit m -> 0, the identification with light or classical waves, quantum properties, and every interaction, decay, production or empirical claim."

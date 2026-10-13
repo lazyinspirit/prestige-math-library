@@ -2,7 +2,7 @@
 id: def-gr-flat-minkowski-model-and-inertial-charts
 kind: definition
 title: "The flat model: Minkowski space R^4, its standard Lorentz form, inertial charts and cone sets"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

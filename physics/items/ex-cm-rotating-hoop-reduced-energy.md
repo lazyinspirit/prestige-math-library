@@ -2,7 +2,7 @@
 id: ex-cm-rotating-hoop-reduced-energy
 kind: example
 title: "The rotating hoop: reduced Lagrangian, the equation $\\theta''=\\Omega^2\\sin\\theta\\cos\\theta-(g/a)\\sin\\theta$, and the reduced energy versus the inertial mechanical energy"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

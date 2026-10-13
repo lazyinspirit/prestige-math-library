@@ -2,7 +2,7 @@
 id: thm-gr-auxiliary-complete-riemannian-metric
 kind: theorem
 title: "The auxiliary Riemannian metric h=g+2n-flat tensor n-flat is complete after a proper-exhaustion conformal factor, and its closed bounded sets are compact"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

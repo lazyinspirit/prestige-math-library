@@ -2,7 +2,7 @@
 id: ex-cm01-two-particle-rigid-rod-configuration
 kind: example
 title: "Configuration domains of two labeled particles: collision exclusion and a rigid rod as a regular holonomic constraint"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 7

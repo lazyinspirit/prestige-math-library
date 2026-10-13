@@ -2,7 +2,7 @@
 id: post-cm01-frames
 kind: postulate
 title: "Inertial frames, stationary observers and the adopted Galilean transformations between frames"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 4

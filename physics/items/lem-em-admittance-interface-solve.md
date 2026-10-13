@@ -2,7 +2,7 @@
 id: lem-em-admittance-interface-solve
 kind: lemma
 title: "The two-equation interface admittance system: solution formulas and the normal-flux identity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

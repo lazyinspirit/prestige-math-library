@@ -2,7 +2,7 @@
 id: cex-the-full-fock-space-is-not-automatically-the-irreducible-basic-module
 kind: counterexample
 title: "The full Fock space is not automatically the irreducible basic module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 22

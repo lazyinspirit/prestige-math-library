@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Free-mode statistics at low occupation: exact dilute identities, a
   finite arithmetic check and two convergence examples"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 14
 deps:

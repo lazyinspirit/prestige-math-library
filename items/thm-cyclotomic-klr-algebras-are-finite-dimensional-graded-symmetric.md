@@ -2,7 +2,7 @@
 id: thm-cyclotomic-klr-algebras-are-finite-dimensional-graded-symmetric
 kind: theorem
 title: "Cyclotomic KLR blocks are finite-dimensional graded symmetric algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

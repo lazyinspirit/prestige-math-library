@@ -1,7 +1,7 @@
 ---
 name: non-relativistic-classical-mechanics-mathematics
 title: Non-relativistic Classical Mechanics — Mathematics
-status: draft
+status: published
 library: mathematics
 ---
 

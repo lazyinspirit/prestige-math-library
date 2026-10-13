@@ -2,7 +2,7 @@
 id: thm-lusztig-canonical-and-kashiwara-global-bases-agree-in-symmetric-type
 kind: theorem
 title: "Lusztig's canonical basis and Kashiwara's lower global basis agree in symmetric finite ADE type"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

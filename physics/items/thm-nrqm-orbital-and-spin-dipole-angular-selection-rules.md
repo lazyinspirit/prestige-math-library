@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-dipole-angular-selection-rules]
 kind: theorem
 domain: mathematics
 title: "Dipole angular selection rules"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps: [thm-nrqm-orbital-and-spin-harmonic-polynomial-dimension, thm-nrqm-orbital-and-spin-sphere-laplacian-diagonal-domain, thm-nrqm-orbital-and-spin-orbital-self-adjoint-generators, thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-nrqm-orbital-and-spin-sphere-onb, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, def-homogeneous-polynomial-and-homogeneous-ideal, def-monomials-multidegree-and-total-degree, def-laplacian-of-a-c2-function, def-directional-and-partial-derivatives, def-ck-euclidean-maps-and-diffeomorphisms, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, thm-total-derivative-computes-directional-and-partial-derivatives, def-self-adjoint-and-normal-endomorphism, def-orthogonality-and-orthogonal-complement, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-hilbert-space, def-inner-product-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-complex-exponential, def-sine-and-cosine-by-power-series, def-linear-map, def-linear-subspace, def-countable-choice]

@@ -2,7 +2,7 @@
 id: thm-gr-barotropic-fluid-local-evolution
 kind: theorem
 title: "Local evolution for a strict barotropic perfect fluid: smooth constrained data admit a development, unique up to a data-fixing isometry"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 25

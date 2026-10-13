@@ -2,7 +2,7 @@
 id: ex-sr-observer-split-worked
 kind: example
 title: "Worked example: splitting a four-velocity in an observer's rest frame"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 12

@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Worked rotating-wave error budget for the linearly driven two-level
   model: dimensionless instantiation and averaged Rabi check"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-cook-isometry-and-intertwining]
 kind: theorem
 domain: mathematics
 title: "Cook isometry and intertwining"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [thm-nrqm-controlled-dynamics-cook-domain-criterion, def-infinitesimal-generator-of-a-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-hilbert-space, def-countable-choice]

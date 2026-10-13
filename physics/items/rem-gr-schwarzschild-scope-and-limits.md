@@ -2,7 +2,7 @@
 id: rem-gr-schwarzschild-scope-and-limits
 kind: remark
 title: "Scope and status of the spherical vacuum model page"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 18

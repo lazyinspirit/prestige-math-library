@@ -1,7 +1,7 @@
 ---
 page: qm-light-matter-and-spectral-transitions-examples
 title: "Qm Light Matter And Spectral Transitions — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

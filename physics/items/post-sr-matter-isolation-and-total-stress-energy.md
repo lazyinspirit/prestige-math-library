@@ -2,7 +2,7 @@
 id: post-sr-matter-isolation-and-total-stress-energy
 kind: postulate
 title: "Isolation and the total stress-energy tensor"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "Flat affine Minkowski spacetime in one inertial chart; the total stress-energy tensor of a bounded system, including every constituent that carries energy-momentum; the isolation premise concerns a finite closed box and length-coordinate interval with vanishing side flux. The postulate is an idealisation of an isolated bounded system: it makes no apparatus, statistical or empirical claim, adopts no limiting procedure at spatial infinity and asserts nothing about partial tensors or unmodelled matter."

@@ -1,7 +1,7 @@
 ---
 page: em-causal-wave-kernel-prerequisites-examples
 title: Causal kernels, gauge and point fields after wave existence — Examples
-status: draft
+status: published
 items: []
 examples: [ex-em-causal-wave-kernel-prerequisites-explicit-checks]
 ---

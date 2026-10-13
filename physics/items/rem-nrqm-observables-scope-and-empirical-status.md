@@ -5,7 +5,7 @@ kind: remark
 domain: physics
 title: "What the observable and Born-probability page adopts, proves and does
   not claim"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

@@ -2,7 +2,7 @@
 id: lem-cm-stroboscopic-iterate-identity
 kind: lemma
 title: "Iterates of the stroboscopic map, and equilibria as fixed points"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

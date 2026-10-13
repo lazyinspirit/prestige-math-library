@@ -2,7 +2,7 @@
 id: thm-integrable-quantum-highest-weight-module-exists-and-is-unique
 kind: theorem
 title: "The integrable quantum highest weight module exists and is unique"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

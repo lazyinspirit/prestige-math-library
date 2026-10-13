@@ -2,7 +2,7 @@
 id: lem-gr-data-fixing-immersion-is-embedding
 kind: lemma
 title: "A data-fixing isometric immersion of developments is injective, hence a development embedding; uniqueness of data-fixing embeddings"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 30

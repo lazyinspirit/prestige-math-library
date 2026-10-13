@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-coulomb-infinitesimal-kinetic-bound]
 kind: theorem
 domain: mathematics
 title: "Coulomb infinitesimal kinetic bound"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [lem-nrqm-coulomb-three-dimensional-hardy-bound, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, thm-kato-rellich, def-relative-boundedness-with-respect-to-an-operator, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-sobolev-space-wkp-and-its-norm, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, thm-plancherel, lem-weak-derivatives-are-polynomial-fourier-multipliers, cor-cauchy-schwarz-inequality-for-l-two, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-axiom-of-choice]

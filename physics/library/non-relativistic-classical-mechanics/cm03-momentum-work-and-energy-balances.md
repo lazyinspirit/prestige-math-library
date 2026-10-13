@@ -1,7 +1,7 @@
 ---
 page: cm03-momentum-work-and-energy-balances
 title: "Momentum, work and energy balances"
-status: draft
+status: published
 library: physics
 items:
   - def-cm03-centre-of-mass-and-momenta

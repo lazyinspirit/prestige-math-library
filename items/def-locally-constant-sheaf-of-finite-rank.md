@@ -2,7 +2,7 @@
 id: def-locally-constant-sheaf-of-finite-rank
 kind: definition
 title: "Locally constant sheaves of finite rank"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

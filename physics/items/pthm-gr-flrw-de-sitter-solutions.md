@@ -2,7 +2,7 @@
 id: pthm-gr-flrw-de-sitter-solutions
 kind: physics-theorem
 title: "An expanding flat vacuum solution for positive cosmological parameter and non-existence for negative parameter"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

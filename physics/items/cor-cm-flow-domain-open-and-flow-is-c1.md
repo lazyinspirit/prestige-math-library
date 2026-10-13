@@ -2,7 +2,7 @@
 id: cor-cm-flow-domain-open-and-flow-is-c1
 kind: corollary
 title: "The flow domain of a C¹ autonomous field is open and the flow is C¹ on it"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

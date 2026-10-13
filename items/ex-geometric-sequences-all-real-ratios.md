@@ -2,7 +2,7 @@
 id: ex-geometric-sequences-all-real-ratios
 kind: example
 title: "Geometric sequences: the complete classification for every real ratio"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -1,7 +1,7 @@
 ---
 page: cm-math-evidence-examples
 title: Cm Math Evidence — Examples
-status: draft
+status: published
 library: mathematics
 items: []
 examples:

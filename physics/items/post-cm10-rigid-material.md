@@ -2,7 +2,7 @@
 id: post-cm10-rigid-material
 kind: postulate
 title: "Adoption of the rigid-material model branch: reference mass distribution, rigid placements, orientation and scope"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

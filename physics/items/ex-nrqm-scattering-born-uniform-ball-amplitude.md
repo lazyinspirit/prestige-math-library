@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Born amplitude of a declared uniform ball potential with an explicit
   weak-coupling condition"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

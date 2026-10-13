@@ -2,7 +2,7 @@
 id: cor-cm-action-angle-radian-scaling
 kind: corollary
 title: "Period-one to radian action-angle rescaling: $\\theta^{\\mathrm{rad}}=2\\pi\\theta$ and $I^{\\mathrm{rad}}=I/(2\\pi)$ preserve $\\omega$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

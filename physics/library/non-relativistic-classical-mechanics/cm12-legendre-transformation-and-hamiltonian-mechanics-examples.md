@@ -1,7 +1,7 @@
 ---
 page: cm12-legendre-transformation-and-hamiltonian-mechanics-examples
 title: "Legendre transformation and Hamiltonian mechanics — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

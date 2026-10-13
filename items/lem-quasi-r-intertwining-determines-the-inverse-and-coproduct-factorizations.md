@@ -2,7 +2,7 @@
 id: lem-quasi-r-intertwining-determines-the-inverse-and-coproduct-factorizations
 kind: lemma
 title: "The quasi-$R$ intertwiner determines its inverse and the coproduct factorizations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

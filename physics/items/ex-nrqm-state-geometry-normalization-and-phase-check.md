@@ -3,7 +3,7 @@ id: ex-nrqm-state-geometry-normalization-and-phase-check
 kind: example
 domain: mathematics
 title: "A two-dimensional normalization and phase computation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-nrqm-state-geometry-state-vectors-and-rays, lem-nrqm-state-geometry-normalization-and-phase-classes, lem-nrqm-state-geometry-ray-to-rank-one-projection, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-inner-product-space, def-hilbert-space, cor-inner-product-induces-a-norm, def-complex-numbers-and-arithmetic, lem-complex-conjugation-and-modulus-laws, cor-finite-dimensional-normed-spaces-are-banach, def-countable-choice]

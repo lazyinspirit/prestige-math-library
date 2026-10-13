@@ -3,7 +3,7 @@ id: lem-sr-closed-one-form-primitive-on-simply-connected-open-sets
 kind: lemma
 domain: mathematics
 title: "A closed 1-form on a simply connected open subset of the affine model has a primitive"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

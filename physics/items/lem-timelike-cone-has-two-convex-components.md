@@ -2,7 +2,7 @@
 id: lem-timelike-cone-has-two-convex-components
 kind: lemma
 title: "The timelike set has exactly two convex components, described in orthonormal coordinates"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

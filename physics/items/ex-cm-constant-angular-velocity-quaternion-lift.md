@@ -2,7 +2,7 @@
 id: ex-cm-constant-angular-velocity-quaternion-lift
 kind: example
 title: "Constant angular velocity: the lift $q(t)=\\cos(\\omega_0t/2)+\\varphi(\\hat n)\\sin(\\omega_0t/2)$ is the rotation about $\\hat n$ through $\\omega_0t$, and a full turn lifts to the antipode"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

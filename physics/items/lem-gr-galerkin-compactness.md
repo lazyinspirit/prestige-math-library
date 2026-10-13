@@ -2,7 +2,7 @@
 id: lem-gr-galerkin-compactness
 kind: lemma
 title: "Compactness of H^r-bounded families in H^{r-1} and locally uniform H^{s-1} subsequences of Galerkin solutions"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

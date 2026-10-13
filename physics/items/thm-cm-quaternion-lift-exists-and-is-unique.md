@@ -2,7 +2,7 @@
 id: thm-cm-quaternion-lift-exists-and-is-unique
 kind: theorem
 title: "Existence, uniqueness and sign ambiguity of the quaternion lift of a $C^1$ rotation path"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

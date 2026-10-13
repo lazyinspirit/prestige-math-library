@@ -2,7 +2,7 @@
 id: lem-gr-past-corresponding-boundary-restart
 kind: lemma
 title: Past corresponding-boundary exposure and a spacelike restart in the original time orientation
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 32

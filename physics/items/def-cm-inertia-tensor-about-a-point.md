@@ -2,7 +2,7 @@
 id: def-cm-inertia-tensor-about-a-point
 kind: definition
 title: "The inertia tensor of a finite bounded Borel measure about any point of $\\mathbb R^3$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

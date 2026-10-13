@@ -4,7 +4,7 @@ aliases: [nrqm-bell-singlet-pairings]
 kind: lemma
 domain: mathematics
 title: "Singlet pairings: the joint laws of the two spin-half factors along two directions"
-status: draft
+status: published
 origin: session
 dependency_level: 2
 deps: [prop-nrqm-orbital-and-spin-finite-spin-matrices, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-bounded-tensor-maps, def-inner-product-space, def-hilbert-space, def-real-and-complex-inner-product-space, cor-inner-product-induces-a-norm, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-linear-map, def-matrix-product-and-identity-matrix, def-countable-choice]

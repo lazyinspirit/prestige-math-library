@@ -1,7 +1,7 @@
 ---
 page: em-vacuum-waves-and-polarization
 title: "Vacuum waves and polarization"
-status: draft
+status: published
 items: [def-em-plane-wave-definition,
         pthm-em-vacuum-wave-equation,
         pthm-em-plane-wave-maxwell,

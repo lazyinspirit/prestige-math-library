@@ -2,7 +2,7 @@
 id: thm-self-dual-simple-cyclotomic-klr-modules-give-the-upper-global-basis
 kind: theorem
 title: "Self-dual simple cyclotomic modules give the upper global basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 34

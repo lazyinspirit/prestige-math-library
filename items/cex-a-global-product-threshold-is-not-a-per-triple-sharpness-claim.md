@@ -2,7 +2,7 @@
 id: cex-a-global-product-threshold-is-not-a-per-triple-sharpness-claim
 kind: counterexample
 title: "A global product threshold is not a per-coefficient sharpness claim"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 15

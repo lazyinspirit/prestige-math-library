@@ -2,7 +2,7 @@
 id: ex-cm12-moving-coordinates
 kind: example
 title: "Moving coordinates: the substituted Hamiltonian of a spring on a uniformly moving support, its conservation and the non-conservation of the mechanical energy"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 20

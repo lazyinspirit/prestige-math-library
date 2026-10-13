@@ -2,7 +2,7 @@
 id: def-cm16-flow-equilibria-and-invariant-sets
 kind: definition
 title: "The model vocabulary of stability and chaos: the associated flow of a declared force model, equilibria, periodic and homoclinic orbits, and invariant sets"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

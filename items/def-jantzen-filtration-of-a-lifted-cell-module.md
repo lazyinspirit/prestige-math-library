@@ -2,7 +2,7 @@
 id: def-jantzen-filtration-of-a-lifted-cell-module
 kind: definition
 title: "The Jantzen filtration of a lifted cell module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

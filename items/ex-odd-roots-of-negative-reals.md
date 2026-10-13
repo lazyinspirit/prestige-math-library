@@ -2,7 +2,7 @@
 id: ex-odd-roots-of-negative-reals
 kind: example
 title: "Odd powers are bijections of $\\mathbb{R}$: $x^{3} = -8$ has the unique solution $x = -2$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

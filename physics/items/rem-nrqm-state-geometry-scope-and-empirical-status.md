@@ -4,7 +4,7 @@ kind: remark
 domain: physics
 title: "Scope audit of the state-geometry page: what is mathematics, what is
   adopted, and what is deferred"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps:

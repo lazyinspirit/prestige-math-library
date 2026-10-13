@@ -10,7 +10,7 @@ requires:
   - gr-connections-and-free-fall
 page: gr-linearized-waves
 title: "Linearized Waves"
-status: draft
+status: published
 library: physics
 items:
   - def-gr-plane-wave-perturbation

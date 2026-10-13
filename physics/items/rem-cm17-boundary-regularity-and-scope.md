@@ -2,7 +2,7 @@
 id: rem-cm17-boundary-regularity-and-scope
 kind: remark
 title: "Boundary data, regularity limits and open scopes of the continuum page, and the model-versus-nature reading"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

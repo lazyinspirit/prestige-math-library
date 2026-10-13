@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-hilbert-direct-sum-construction]
 kind: theorem
 domain: mathematics
 title: "Hilbert direct-sum construction"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, def-hilbert-space, def-real-and-complex-inner-product-space, def-completion-of-a-normed-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-separable-space, def-dense-top, thm-cauchy-schwarz-in-an-inner-product-space, def-series-and-absolute-convergence-in-a-normed-space, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-densely-defined-closed-and-closable-operator, def-unbounded-linear-operator-domain-and-graph, def-bounded-linear-operator, def-countable-choice]

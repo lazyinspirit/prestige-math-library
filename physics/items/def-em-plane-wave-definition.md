@@ -2,7 +2,7 @@
 id: def-em-plane-wave-definition
 kind: definition
 title: "Real plane-wave fields encoded by complex amplitudes"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 9

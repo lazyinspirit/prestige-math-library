@@ -2,7 +2,7 @@
 id: lem-gr-local-cauchy-neighborhood
 kind: lemma
 title: "Local Cauchy neighborhoods in a conically bounded product chart"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 23

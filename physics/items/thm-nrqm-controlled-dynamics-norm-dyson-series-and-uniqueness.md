@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-norm-dyson-series-and-uniqueness]
 kind: theorem
 domain: mathematics
 title: "Norm Dyson series and uniqueness"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-riesz-representation-for-hilbert-space, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, lem-linearity-of-the-bochner-integral, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-bochner-integral-norm-inequality, thm-bochner-integrability-criterion, def-countable-choice]

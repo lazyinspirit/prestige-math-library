@@ -2,7 +2,7 @@
 id: lem-volume-form-is-independent-of-the-oriented-frame
 kind: lemma
 title: "The oriented volume form is independent of the positively oriented inertial frame"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

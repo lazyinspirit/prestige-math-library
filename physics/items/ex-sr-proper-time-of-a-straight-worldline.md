@@ -2,7 +2,7 @@
 id: ex-sr-proper-time-of-a-straight-worldline
 kind: example
 title: "Worked example: proper time and four-velocity of a straight worldline at beta = 3/5"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 12

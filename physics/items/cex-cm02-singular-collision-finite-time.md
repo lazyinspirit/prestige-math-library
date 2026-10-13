@@ -2,7 +2,7 @@
 id: cex-cm02-singular-collision-finite-time
 kind: counterexample
 title: "An external-source singularity reached in finite time: the inverse-square external model has a motion whose maximal interval is bounded above"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

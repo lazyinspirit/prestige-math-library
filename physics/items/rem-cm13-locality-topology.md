@@ -2,7 +2,7 @@
 id: rem-cm13-locality-topology
 kind: remark
 title: "Scope of the symplectic and canonical methods for a potential presentation: locality of generating functions, projections and determinant tests, absent global claims, and empirical status"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 24

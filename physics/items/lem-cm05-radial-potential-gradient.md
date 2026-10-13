@@ -2,7 +2,7 @@
 id: lem-cm05-radial-potential-gradient
 kind: lemma
 title: "The radial composite $x\\mapsto u(\\lvert x\\rvert)$ on an annulus: $C^k$ regularity and $\\nabla\\bigl(u\\circ\\lvert\\cdot\\rvert\\bigr)(x)=u'(\\lvert x\\rvert)\\,x/\\lvert x\\rvert$"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

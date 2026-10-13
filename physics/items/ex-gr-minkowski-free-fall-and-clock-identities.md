@@ -2,7 +2,7 @@
 id: ex-gr-minkowski-free-fall-and-clock-identities
 kind: example
 title: "Straight timelike geodesics of the flat model: constant coordinate velocity, four-velocity and the clock-reading identity"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

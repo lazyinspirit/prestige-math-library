@@ -2,7 +2,7 @@
 id: lem-gr-isometric-immersion-rigidity
 kind: lemma
 title: "Rigidity of isometric immersions of a connected Lorentzian manifold, and agreement of data-fixing embeddings on overlaps"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 29

@@ -1,7 +1,7 @@
 ---
 page: em-induction-and-circuit-limits-examples
 title: "Induction and circuit approximations — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples: [texp-em-sliding-bar-emf, ex-em-transformer-idealization,

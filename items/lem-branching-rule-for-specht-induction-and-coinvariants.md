@@ -2,7 +2,7 @@
 id: lem-branching-rule-for-specht-induction-and-coinvariants
 kind: lemma
 title: "Branching rule for Specht modules: adding or removing boxes in distinct columns"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

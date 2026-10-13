@@ -2,7 +2,7 @@
 id: lem-em-moving-flux
 kind: lemma
 title: "Transport of flux through a moving patch"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

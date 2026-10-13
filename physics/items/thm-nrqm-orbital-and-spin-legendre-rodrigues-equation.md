@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-legendre-rodrigues-equation]
 kind: theorem
 domain: mathematics
 title: "Legendre Rodrigues equation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-derivative, lem-derivative-of-a-power, thm-algebra-of-derivatives, thm-general-leibniz-rule, thm-binomial-theorem-over-a-commutative-ring, def-polynomial-ring-over-a-commutative-ring, def-polynomial-degree-leading-coefficient-and-monic, def-polynomial-evaluation-and-root, def-factorial-and-falling-factorial, def-binomial-coefficient, thm-binomial-closed-formula, def-natural-numbers, def-finite-sum-in-a-commutative-monoid]

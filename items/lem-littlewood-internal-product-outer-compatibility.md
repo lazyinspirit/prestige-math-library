@@ -2,7 +2,7 @@
 id: lem-littlewood-internal-product-outer-compatibility
 kind: lemma
 title: Littlewood's identity - the internal product against an outer product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

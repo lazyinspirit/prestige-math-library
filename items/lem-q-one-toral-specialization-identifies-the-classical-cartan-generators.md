@@ -2,7 +2,7 @@
 id: lem-q-one-toral-specialization-identifies-the-classical-cartan-generators
 kind: lemma
 title: "The q=1 toral specialization identifies the classical Cartan generators"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

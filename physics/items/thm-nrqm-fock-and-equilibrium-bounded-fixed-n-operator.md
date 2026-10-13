@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-bounded-fixed-n-operator]
 kind: theorem
 domain: mathematics
 title: "Bounded fixed-N operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, thm-plancherel, def-fourier-transform-on-l-one-of-rn, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, def-sobolev-space-wkp-and-its-norm, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-kato-rellich, def-relative-boundedness-with-respect-to-an-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-densely-defined-closed-and-closable-operator, def-hilbert-space, def-bounded-linear-operator, def-countable-choice, def-axiom-of-choice]

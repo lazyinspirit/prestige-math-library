@@ -2,7 +2,7 @@
 id: def-sr-regular-causal-curve-and-worldline
 kind: definition
 title: "Curves, regular causal curves and future timelike worldlines in affine Minkowski space"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 7

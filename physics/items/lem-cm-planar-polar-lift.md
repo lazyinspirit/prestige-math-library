@@ -2,7 +2,7 @@
 id: lem-cm-planar-polar-lift
 kind: lemma
 title: "Local polar coordinates for a curve with nonvanishing position in the plane: a differentiable angle function with prescribed derivative"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

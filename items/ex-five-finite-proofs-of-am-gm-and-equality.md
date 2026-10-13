@@ -2,7 +2,7 @@
 id: ex-five-finite-proofs-of-am-gm-and-equality
 kind: example
 title: "Five finite AM-GM proofs, with the same sharp equality case"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

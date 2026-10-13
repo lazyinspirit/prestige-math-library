@@ -2,7 +2,7 @@
 id: ex-complement-of-a-countable-set-of-reals-is-uncountable
 kind: example
 title: "The complement of an at most countable set of reals is uncountable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

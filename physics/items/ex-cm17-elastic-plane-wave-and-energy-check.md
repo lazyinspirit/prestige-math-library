@@ -2,7 +2,7 @@
 id: ex-cm17-elastic-plane-wave-and-energy-check
 kind: example
 title: "A longitudinal plane wave in the linear elastic branch: stress, equation of motion and strain energy computed"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

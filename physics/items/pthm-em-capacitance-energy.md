@@ -2,7 +2,7 @@
 id: pthm-em-capacitance-energy
 kind: physics-theorem
 title: "Capacitance and energy for specified linear conductor geometry"
-status: draft
+status: published
 origin: session
 dependency_level: 20
 domain: physics

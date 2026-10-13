@@ -2,7 +2,7 @@
 id: cex-sr-past-directed-itinerary-attains-the-endpoint-bound
 kind: counterexample
 title: "Counterexample: attainment of the endpoint bound does not force the future time orientation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 proof_strategy: direct

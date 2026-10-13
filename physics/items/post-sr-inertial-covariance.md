@@ -2,7 +2,7 @@
 id: post-sr-inertial-covariance
 kind: postulate
 title: "Adopted inertial covariance of the model equations"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 4

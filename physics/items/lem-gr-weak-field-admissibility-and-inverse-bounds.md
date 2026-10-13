@@ -2,7 +2,7 @@
 id: lem-gr-weak-field-admissibility-and-inverse-bounds
 kind: lemma
 title: "Stationarity, timelikeness and uniform inverse-metric bounds for stationary weak-field data"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

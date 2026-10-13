@@ -2,7 +2,7 @@
 id: post-cm04-sinusoidal-drive-model
 kind: postulate
 title: "The sinusoidally driven oscillator model: a prescribed external force $f_0\\cos(\\Omega t)$ added to the damped oscillator"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

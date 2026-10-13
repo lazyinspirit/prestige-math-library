@@ -5,7 +5,7 @@ aliases:
 kind: example
 domain: mathematics
 title: Continuum contribution in perturbation
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

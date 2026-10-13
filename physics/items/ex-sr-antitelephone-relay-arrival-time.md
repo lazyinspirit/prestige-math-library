@@ -2,7 +2,7 @@
 id: ex-sr-antitelephone-relay-arrival-time
 kind: example
 title: "Worked relay arithmetic at $u=2c$ and $v=(9/10)c$: arrival at $t=-50/(121c)$ seconds"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

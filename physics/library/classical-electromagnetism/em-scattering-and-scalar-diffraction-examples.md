@@ -1,7 +1,7 @@
 ---
 page: em-scattering-and-scalar-diffraction-examples
 title: "Vector PEC scattering, dipole limits and controlled scalar diffraction — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-em-rectangular-aperture]
 ---

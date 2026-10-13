@@ -2,7 +2,7 @@
 id: lem-type-a-modular-root-interval-essential-subset-basis-and-count
 kind: lemma
 title: "An integral essential-subset basis and count for type-A root intervals"
-status: draft
+status: published
 origin: session
 provenance:
   statement: literature-derived

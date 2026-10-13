@@ -2,7 +2,7 @@
 id: thm-cm-adiabatic-invariant-drift-bound
 kind: theorem
 title: "Adiabatic action drift bound: order-$\\varepsilon$ change of the action on the $O(1/\\varepsilon)$ time scale"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

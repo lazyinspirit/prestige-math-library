@@ -2,7 +2,7 @@
 id: pthm-cm08-general-noether
 kind: physics-theorem
 title: "The general Noether theorem of the model: point transformations with time reparametrisation, the charge $p\\cdot\\xi-E\\tau-B$, its residual-force rate and its potential gauge"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

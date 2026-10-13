@@ -1,7 +1,7 @@
 ---
 page: sr-accelerated-observers
 title: "Accelerated Observers"
-status: draft
+status: published
 library: physics
 items: [def-sr-proper-acceleration,
         lem-sr-connecting-field-stretching,

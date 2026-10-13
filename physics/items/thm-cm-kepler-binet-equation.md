@@ -2,7 +2,7 @@
 id: thm-cm-kepler-binet-equation
 kind: theorem
 title: "Binet's equation for the attractive inverse-square field: $\\mathrm d^2u/\\mathrm d\\varphi^2+u=\\mu\\kappa/J^2$ for $u=1/\\rho$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

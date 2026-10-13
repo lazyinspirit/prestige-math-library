@@ -2,7 +2,7 @@
 id: def-cm13-poisson
 kind: definition
 title: "The Poisson bracket of phase functions of a potential presentation: $\\{f,g\\}=\\omega(X_f,X_g)$ and the coordinate formula in each canonical chart"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 20

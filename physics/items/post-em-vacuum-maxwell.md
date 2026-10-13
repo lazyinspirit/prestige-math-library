@@ -2,7 +2,7 @@
 id: post-em-vacuum-maxwell
 kind: postulate
 title: "The microscopic vacuum Maxwell equations: smooth and weak branches"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-directional-and-partial-derivatives, def-distribution, def-distributional-derivative, def-divergence-and-curl-of-a-c1-vector-field, def-em-fields, def-em-lab-geometry, def-em-si-conventions, def-em-sources, def-regular-distribution-from-a-locally-integrable-function, def-test-function-space-d-of-an-open-set, thm-locally-integrable-functions-embed-in-distributions]

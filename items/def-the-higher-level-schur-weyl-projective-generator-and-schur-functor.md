@@ -2,7 +2,7 @@
 id: def-the-higher-level-schur-weyl-projective-generator-and-schur-functor
 kind: definition
 title: "The higher-level Schur-Weyl projective generator and Schur functor"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 33

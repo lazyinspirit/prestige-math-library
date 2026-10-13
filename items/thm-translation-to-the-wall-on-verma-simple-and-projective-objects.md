@@ -2,7 +2,7 @@
 id: thm-translation-to-the-wall-on-verma-simple-and-projective-objects
 kind: theorem
 title: "Translation to the wall on Verma, simple and projective objects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

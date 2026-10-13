@@ -2,7 +2,7 @@
 id: lem-em-proper-time-reparametrization
 kind: lemma
 title: "Proper time along a $C^1$ future timelike curve: strictly increasing reparametrization with $\\eta(U,U)=-c^2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

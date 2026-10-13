@@ -2,7 +2,7 @@
 id: pthm-gr-smooth-maximal-development
 kind: physics-theorem
 title: "Conditional model deduction: the adopted field law and matter model yield a maximal globally hyperbolic development of constraint-satisfying initial data"
-status: draft
+status: published
 origin: session
 domain: physics
 physical_scope: "Conditional smooth classical Einstein-matter Cauchy problem for one fixed admissible covariant coupled model with complete constrained data, actual local and spacelike restart hypotheses, and Countable/Dependent Choice. Includes vacuum, scalar, strict fluid and nonnegative tilted dust with independent zero-density velocity; no empirical conclusion or geodesic-completeness claim."

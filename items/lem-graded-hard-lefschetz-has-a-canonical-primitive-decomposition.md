@@ -2,7 +2,7 @@
 id: lem-graded-hard-lefschetz-has-a-canonical-primitive-decomposition
 kind: lemma
 title: "Graded hard Lefschetz has a canonical primitive decomposition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

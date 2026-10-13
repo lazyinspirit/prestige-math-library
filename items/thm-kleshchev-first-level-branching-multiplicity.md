@@ -2,7 +2,7 @@
 id: thm-kleshchev-first-level-branching-multiplicity
 kind: theorem
 title: "Kleshchev's first-level branching multiplicity"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

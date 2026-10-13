@@ -2,7 +2,7 @@
 id: prop-cm-canonical-map-tests-and-hamiltonian-transport
 kind: proposition
 title: "A $C^1$ map between phase domains preserves the standard two-form iff $DC^{\\mathsf T}J\\,DC=J$, and a canonical diffeomorphism carries $X_{H\\circ C}$ to $X_H$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

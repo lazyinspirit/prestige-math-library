@@ -2,7 +2,7 @@
 id: ex-the-two-vertex-klr-polynomial-representation
 kind: example
 title: "The two-vertex KLR polynomial representation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

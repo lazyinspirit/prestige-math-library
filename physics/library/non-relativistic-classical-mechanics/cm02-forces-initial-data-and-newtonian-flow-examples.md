@@ -1,7 +1,7 @@
 ---
 page: cm02-forces-initial-data-and-newtonian-flow-examples
 title: "Forces, initial data and Newtonian flow — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

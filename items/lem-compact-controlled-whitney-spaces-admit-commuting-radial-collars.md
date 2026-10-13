@@ -2,7 +2,7 @@
 id: lem-compact-controlled-whitney-spaces-admit-commuting-radial-collars
 kind: lemma
 title: "Compact controlled Whitney spaces admit commuting radial collars"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

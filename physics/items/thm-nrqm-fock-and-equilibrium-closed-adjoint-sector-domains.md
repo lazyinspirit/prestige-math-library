@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-closed-adjoint-sector-domains]
 kind: theorem
 domain: mathematics
 title: "Closed adjoint sector domains"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-fock-sector-projections, lem-nrqm-fock-and-equilibrium-creation-contraction-bounds, lem-nrqm-composites-hilbert-tensor-construction, def-hilbert-space, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-densely-defined-closed-and-closable-operator, def-unbounded-linear-operator-domain-and-graph, def-bounded-linear-operator, thm-cauchy-schwarz-in-an-inner-product-space, def-countable-choice]

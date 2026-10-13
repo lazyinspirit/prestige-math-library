@@ -2,7 +2,7 @@
 id: pthm-cm17-transport-and-material-derivative
 kind: physics-theorem
 title: "The transport identity and the material derivative along label worldlines for the adopted continuum model"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

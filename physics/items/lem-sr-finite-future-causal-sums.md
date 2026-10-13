@@ -2,7 +2,7 @@
 id: lem-sr-finite-future-causal-sums
 kind: lemma
 title: "Finite sums of future causal vectors and additivity of observer energy and momentum"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

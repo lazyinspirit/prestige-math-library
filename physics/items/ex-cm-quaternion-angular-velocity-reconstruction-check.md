@@ -4,7 +4,7 @@ kind: example
 title: "A non-axis-constant check of the reconstruction formula: for
   $q=(\\cos\\tfrac t2+\\varphi(e_1)\\sin\\tfrac t2)(\\cos\\tfrac
   t2+\\varphi(e_2)\\sin\\tfrac t2)$ one gets $\\omega(t)=(\\cos t,1,\\sin t)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

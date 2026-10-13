@@ -1,7 +1,7 @@
 ---
 page: arakawa-suzuki-functors-and-higher-level-schur-weyl-duality
 title: "Arakawa–Suzuki Functors and Higher-Level Schur–Weyl Duality"
-status: draft
+status: published
 requires: [parabolic-category-o-and-fock-space-bases,
             tensor-products-of-modules,
             graded-bimodules-and-tensor-functors]

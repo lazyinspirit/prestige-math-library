@@ -2,7 +2,7 @@
 id: def-level-one-global-basis-transition-polynomials-in-the-symmetric-group-convention
 kind: definition
 title: "Level-one global-basis transition polynomials in the symmetric-group convention"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 22

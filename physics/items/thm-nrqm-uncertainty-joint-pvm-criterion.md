@@ -4,7 +4,7 @@ aliases: [nrqm-uncertainty-joint-pvm-criterion]
 kind: theorem
 domain: mathematics
 title: "Strong spectral commutation, joint projection-valued measures and bounded Borel calculus"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-axiom-of-choice, def-borel-sigma-algebra, def-countable-choice, def-hilbert-space, def-measurable-rectangle, def-projection-valued-measure, def-self-adjoint-positive-unitary-and-normal-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-nrqm-uncertainty-strong-spectral-commutation, lem-nrqm-uncertainty-bounded-borel-calculus-of-commuting-operators, lem-scalar-and-complex-measures-from-a-pvm, thm-bounded-borel-pvm-integral, thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact, thm-nrqm-composites-joint-pvm-construction, thm-pvm-integral-is-a-star-homomorphism, thm-spectral-theorem-for-unbounded-self-adjoint-operators]

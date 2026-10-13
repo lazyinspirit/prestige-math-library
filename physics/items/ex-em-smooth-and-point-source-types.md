@@ -2,7 +2,7 @@
 id: ex-em-smooth-and-point-source-types
 kind: example
 title: "Smooth and point-source constructions: distinct for nonzero charge, both zero at zero charge"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-countable-choice, def-dirac-delta-and-its-derivatives, def-distribution, def-em-fields, def-em-sources, def-measure-null-set-and-almost-everywhere, def-regular-distribution-from-a-locally-integrable-function, def-riemann-integral-over-a-jordan-set, def-test-function-space-d-of-an-open-set, lem-em-point-current-continuity, lem-test-function-cutoffs-and-euclidean-localization, post-em-vacuum-maxwell, prop-countable-subsets-of-rn-are-lebesgue-null, thm-finite-and-countable-subadditivity-of-measures, thm-locally-integrable-functions-embed-in-distributions, def-integral-over-a-measurable-set, def-integrable-real-and-complex-functions-and-their-integrals, thm-linearity-of-the-lebesgue-integral-on-l-one, lem-riemann-lebesgue-comparison-for-distribution-test-integrands]

@@ -1,7 +1,7 @@
 ---
 page: cm07-stationary-action-and-lagrangian-dynamics-examples
 title: "Stationary action and Lagrangian dynamics — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

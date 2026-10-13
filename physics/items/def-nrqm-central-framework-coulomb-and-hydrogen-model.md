@@ -4,7 +4,7 @@ aliases: [nrqm-central-framework-coulomb-and-hydrogen-model]
 kind: definition
 domain: physics
 title: "The declared Coulomb and two-body hydrogen model: one-centre operator, relative problem, reduced mass and scope exclusions"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps: [def-nrqm-central-framework-central-potential-model, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-preparation-and-apparatus, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, lem-nrqm-central-free-operator-differential-identification, thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-kummer-recurrence-and-termination, thm-nrqm-coulomb-two-body-reduced-mass, lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-euclidean-l2-product-unitary, def-l-p-space-as-a-quotient-by-null-functions, def-weak-derivative-of-a-locally-integrable-function, def-countable-choice, def-axiom-of-choice]

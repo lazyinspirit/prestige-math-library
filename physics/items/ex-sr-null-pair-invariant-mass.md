@@ -2,7 +2,7 @@
 id: ex-sr-null-pair-invariant-mass
 kind: example
 title: "Collective mass of a pair of oppositely directed massless momenta"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

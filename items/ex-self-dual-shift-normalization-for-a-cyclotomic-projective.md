@@ -2,7 +2,7 @@
 id: ex-self-dual-shift-normalization-for-a-cyclotomic-projective
 kind: example
 title: "Self-dual shift normalization for a cyclotomic projective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

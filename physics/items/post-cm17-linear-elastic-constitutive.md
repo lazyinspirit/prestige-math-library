@@ -2,7 +2,7 @@
 id: post-cm17-linear-elastic-constitutive
 kind: postulate
 title: "Adopted isotropic linear elastic constitutive model with its small-strain regime and strain energy"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

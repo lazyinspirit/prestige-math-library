@@ -2,7 +2,7 @@
 id: ex-real-algebraic-numbers-are-countably-infinite
 kind: example
 title: "Real algebraic numbers are countably infinite, without choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

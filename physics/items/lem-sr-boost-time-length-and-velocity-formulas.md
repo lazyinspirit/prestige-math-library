@@ -3,7 +3,7 @@ id: lem-sr-boost-time-length-and-velocity-formulas
 kind: lemma
 domain: mathematics
 title: "Coordinate formulas of a boost: clock rates, rod lengths, simultaneity and velocity transformation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

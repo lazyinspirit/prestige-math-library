@@ -2,7 +2,7 @@
 id: ex-incidence-model-of-a-closed-interval
 kind: example
 title: "Incidence cochains of a closed interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 12

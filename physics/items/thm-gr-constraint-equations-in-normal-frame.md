@@ -2,7 +2,7 @@
 id: thm-gr-constraint-equations-in-normal-frame
 kind: theorem
 title: "Gauss-Codazzi decomposition in Gaussian normal coordinates and the constraint equations in terms of the induced metric and second fundamental form"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

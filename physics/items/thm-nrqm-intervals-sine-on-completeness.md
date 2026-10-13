@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-sine-on-completeness]
 kind: theorem
 domain: mathematics
 title: "Completeness of the Dirichlet sine system on an interval"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, thm-trigonometric-system-is-complete-in-l-two-of-the-torus, lem-trigonometric-characters-are-orthonormal, def-fourier-coefficients-and-trigonometric-polynomials, def-the-one-dimensional-torus-and-normalized-haar-integral, thm-parseval-equivalences-for-a-complete-orthonormal-family, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-sine-and-cosine-addition-formulas, thm-sine-and-cosine-derivatives, thm-ftc-second-part, thm-quarter-turn-values-and-shift-formulas, thm-linear-change-of-variables-for-lebesgue-measure, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, thm-monotone-convergence-for-the-integral, cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure, thm-completion-measurable-functions-have-base-measurable-representatives, def-countable-choice, def-axiom-of-choice]

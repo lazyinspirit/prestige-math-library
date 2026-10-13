@@ -2,7 +2,7 @@
 id: ex-cm-oscillator-saddle-second-variation-checks
 kind: example
 title: "An explicit saddle of the oscillator action at $T=2\\pi$: the two variations $\\sin(t/2)$ and $\\sin(3t/2)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

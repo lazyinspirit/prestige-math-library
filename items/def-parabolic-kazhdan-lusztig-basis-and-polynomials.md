@@ -2,7 +2,7 @@
 id: def-parabolic-kazhdan-lusztig-basis-and-polynomials
 kind: definition
 title: "The parabolic Kazhdan–Lusztig bases and polynomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

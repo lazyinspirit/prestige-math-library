@@ -2,7 +2,7 @@
 id: lem-em-exponential-character-open-set-independence
 kind: lemma
 title: "Distinct exponential characters are linearly independent on a nonempty open set, and the real-part grouping rule"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

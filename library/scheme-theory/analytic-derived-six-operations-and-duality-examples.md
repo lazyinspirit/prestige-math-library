@@ -1,7 +1,7 @@
 ---
 page: analytic-derived-six-operations-and-duality-examples
 title: "Analytic Derived Six Operations And Duality Examples"
-status: draft
+status: published
 items: []
 examples: [ex-dualizing-and-closed-support-shifts-on-the-complex-line]
 requires:

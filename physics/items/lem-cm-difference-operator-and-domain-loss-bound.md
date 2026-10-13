@@ -2,7 +2,7 @@
 id: lem-cm-difference-operator-and-domain-loss-bound
 kind: lemma
 title: The difference operator $\Delta_h=\Psi_h^*-\mathrm{id}$ loses a controlled domain margin and is bounded by $C_dM|h|/b$
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 8

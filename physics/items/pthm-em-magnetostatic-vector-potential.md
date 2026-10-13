@@ -3,7 +3,7 @@ id: "pthm-em-magnetostatic-vector-potential"
 kind: "physics-theorem"
 title: "Coulomb-gauge Newtonian vector potential for a compact smooth conserved current"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 18
 deps: ["def-em-steady-current-regime", "def-em-si-conventions", "post-em-vacuum-maxwell", "lem-em-smooth-newtonian-upgrade", "def-divergence-and-curl-of-a-c1-vector-field", "def-directional-and-partial-derivatives", "def-laplacian-of-a-c2-function", "thm-the-divergence-of-a-curl-vanishes", "cor-the-curl-of-a-curl-of-a-c2-field", "def-countable-choice"]

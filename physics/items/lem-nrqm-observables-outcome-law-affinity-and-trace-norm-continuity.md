@@ -4,7 +4,7 @@ aliases: [nrqm-observables-outcome-law-affinity-and-trace-norm-continuity]
 kind: lemma
 domain: mathematics
 title: "Affinity and trace-norm continuity of the scalar spectral law"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-countable-choice, def-hilbert-space, def-projection-valued-measure, def-trace-class-operator, def-trace-of-a-trace-class-operator, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-state-geometry-density-set-convex-and-complete, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-is-absolutely-convergent-and-basis-independent]

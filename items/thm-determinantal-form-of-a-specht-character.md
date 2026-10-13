@@ -2,7 +2,7 @@
 id: thm-determinantal-form-of-a-specht-character
 kind: theorem
 title: "The determinantal form of a Specht character"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

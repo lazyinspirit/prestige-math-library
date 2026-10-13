@@ -2,7 +2,7 @@
 id: cex-nrqm-framework-mean-position-can-fail-to-exist
 kind: counterexample
 title: "The mean position of a normalized state need not exist"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 7

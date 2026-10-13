@@ -2,7 +2,7 @@
 id: def-hh-type-a-quantum-tensor-action-for-centralizers
 kind: definition
 title: "The type-A quantum algebra and its tensor-action formulas"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 0

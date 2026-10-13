@@ -1,7 +1,7 @@
 ---
 page: em-causal-response-and-radiation-prerequisites
 title: Em Causal Response And Radiation Prerequisites
-status: draft
+status: published
 items: [thm-em-causal-dispersive-response, thm-em-radiation-asymptotic-flux]
 examples: []
 ---

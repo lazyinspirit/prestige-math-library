@@ -2,7 +2,7 @@
 id: def-regular-integral-category-o-block-and-its-antidominant-weight
 kind: definition
 title: The regular integral block and its antidominant weight
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

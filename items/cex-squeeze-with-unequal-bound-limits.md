@@ -2,7 +2,7 @@
 id: cex-squeeze-with-unequal-bound-limits
 kind: counterexample
 title: "The squeeze theorem needs the two bounds to share their limit"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

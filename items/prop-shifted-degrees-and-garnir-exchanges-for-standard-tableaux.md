@@ -2,7 +2,7 @@
 id: prop-shifted-degrees-and-garnir-exchanges-for-standard-tableaux
 kind: proposition
 title: "Shifted degrees and Garnir exchanges for standard tableaux"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 36

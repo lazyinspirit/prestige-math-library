@@ -2,7 +2,7 @@
 id: lem-cm-legendre-map-local-invertibility
 kind: lemma
 title: "Nonsingular velocity Hessian is equivalent to invertibility of the Legendre derivative, hence gives a local C^1 inverse"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

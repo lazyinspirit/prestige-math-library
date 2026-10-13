@@ -1,7 +1,7 @@
 ---
 page: mixed-hodge-structures-and-strictness-examples
 title: "Mixed Hodge Structures And Strictness: Examples"
-status: draft
+status: published
 requires:
   - mixed-hodge-structures-and-strictness
 items: []

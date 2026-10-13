@@ -2,7 +2,7 @@
 id: ex-cm-rolling-disk-acceleration
 kind: example
 title: "The planar rolling disk: the holonomic constraint $x-a\\theta=\\mathrm{const}$ and the acceleration $f/(m+I/a^{2})$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

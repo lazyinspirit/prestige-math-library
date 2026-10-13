@@ -2,7 +2,7 @@
 id: lem-i-string-components-of-a-crystal-lattice
 kind: lemma
 title: "The $i$-string components of a lattice vector and the single surviving component modulo $q$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

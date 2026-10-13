@@ -2,7 +2,7 @@
 id: prop-cm-mechanical-chart-lagrangian-is-hyperregular
 kind: proposition
 title: "A mechanical chart Lagrangian with positive definite kinetic matrix is hyperregular, with the explicit kinetic-plus-potential Hamiltonian"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

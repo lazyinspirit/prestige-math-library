@@ -2,7 +2,7 @@
 id: thm-endomorphisms-of-the-antidominant-projective-are-the-coinvariant-algebra
 kind: theorem
 title: The endomorphisms of the antidominant projective form the coinvariant algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

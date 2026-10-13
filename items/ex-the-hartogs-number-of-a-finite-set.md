@@ -2,7 +2,7 @@
 id: ex-the-hartogs-number-of-a-finite-set
 kind: example
 title: "The Hartogs number of an $n$-element set is $n^{+}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

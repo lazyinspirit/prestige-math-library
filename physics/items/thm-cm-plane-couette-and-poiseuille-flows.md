@@ -2,7 +2,7 @@
 id: thm-cm-plane-couette-and-poiseuille-flows
 kind: theorem
 title: "Exact plane Poiseuille and Couette flows of the incompressible Newtonian model, with flux and ansatz uniqueness"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

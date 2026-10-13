@@ -2,7 +2,7 @@
 id: ex-crystal-graph-of-b-two-lambda-one
 kind: example
 title: "The crystal graph of the quantum symmetric square of the standard $A_2$-module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

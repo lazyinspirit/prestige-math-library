@@ -2,7 +2,7 @@
 id: lem-complex-algebraic-morphisms-admit-compatible-finite-smooth-stratifications
 kind: lemma
 title: "Complex algebraic morphisms admit compatible finite smooth stratifications"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-gr-future-causal-classification-by-a-timelike-field
 kind: lemma
 title: "Classification of future and past causal vectors by a timelike field"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

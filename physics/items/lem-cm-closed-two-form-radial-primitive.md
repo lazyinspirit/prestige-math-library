@@ -2,7 +2,7 @@
 id: lem-cm-closed-two-form-radial-primitive
 kind: lemma
 title: "A closed smooth two-form on a star-shaped domain has the radial primitive $\\alpha_x(v)=\\int_0^1 t\\,\\tau_{tx}(x,v)\\,dt$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

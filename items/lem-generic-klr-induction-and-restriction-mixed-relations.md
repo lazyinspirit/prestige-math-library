@@ -2,7 +2,7 @@
 id: lem-generic-klr-induction-and-restriction-mixed-relations
 kind: lemma
 title: "Generic KLR induction and restriction: mixed relations and the opposite-end exact sequence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

@@ -2,7 +2,7 @@
 id: lem-gr-observer-energy-momentum-decomposition
 kind: lemma
 title: "The orthogonal observer decomposition of a symmetric two-tensor and its uniqueness"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

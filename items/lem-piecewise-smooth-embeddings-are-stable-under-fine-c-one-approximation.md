@@ -2,7 +2,7 @@
 id: lem-piecewise-smooth-embeddings-are-stable-under-fine-c-one-approximation
 kind: lemma
 title: "Whole-star smooth embeddings are stable under strong piecewise $C^1$ approximation"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

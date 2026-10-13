@@ -4,7 +4,7 @@ aliases: [nrqm-composites-weak-form-robertson-uncertainty]
 kind: lemma
 domain: mathematics
 title: "Weak-form Robertson uncertainty on a common domain"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-schwartz-space-and-its-seminorms, thm-algebra-of-derivatives, thm-integration-by-parts, cor-primitives-of-a-continuous-function, def-improper-integral-at-infinity, def-hilbert-space, def-countable-choice]

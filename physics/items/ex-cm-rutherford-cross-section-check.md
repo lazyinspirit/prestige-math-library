@@ -3,7 +3,7 @@ id: ex-cm-rutherford-cross-section-check
 kind: example
 title: "An exact Rutherford check: $\\kappa=E=1$, $b=1$ give
   $\\theta=2\\arctan\\frac12$ and $\\mathrm d\\sigma/\\mathrm d\\Omega=25/16$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

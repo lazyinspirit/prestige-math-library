@@ -2,7 +2,7 @@
 id: def-nondegenerate-root-of-unity-level-one-hecke-regime
 kind: definition
 title: "The nondegenerate root-of-unity level-one Hecke regime"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 33

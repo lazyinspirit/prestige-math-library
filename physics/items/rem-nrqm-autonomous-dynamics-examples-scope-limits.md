@@ -4,7 +4,7 @@ aliases: [ nrqm-autonomous-dynamics-examples-scope-limits ]
 kind: remark
 domain: physics
 title: "What the worked items of the companion page establish"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

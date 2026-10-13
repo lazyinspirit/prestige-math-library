@@ -3,7 +3,7 @@ id: post-nrqm-framework-autonomous-dynamics
 kind: postulate
 title: "Autonomous dynamics postulate P4: self-adjoint generators and unitary
   evolution"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

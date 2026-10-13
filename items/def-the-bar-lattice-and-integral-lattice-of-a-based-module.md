@@ -2,7 +2,7 @@
 id: def-the-bar-lattice-and-integral-lattice-of-a-based-module
 kind: definition
 title: "The bar lattice and the divided-power integral lattice of a based module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -2,7 +2,7 @@
 id: def-drinfeld-hopf-pairing-between-positive-and-negative-quantum-halves
 kind: definition
 title: "The Drinfeld pairing between the positive and negative quantum halves"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Marker overlap contracts the cross term: the detection law and the
   visibility bound of an overlap-normalized marked model"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

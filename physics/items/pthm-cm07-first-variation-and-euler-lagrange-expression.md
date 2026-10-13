@@ -2,7 +2,7 @@
 id: pthm-cm07-first-variation-and-euler-lagrange-expression
 kind: physics-theorem
 title: "The first variation of the mechanical action and the Euler-Lagrange expression in model terms"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

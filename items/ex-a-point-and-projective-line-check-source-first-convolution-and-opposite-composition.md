@@ -2,7 +2,7 @@
 id: ex-a-point-and-projective-line-check-source-first-convolution-and-opposite-composition
 kind: example
 title: "A point and projective-line check of source-first convolution and opposite composition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 26

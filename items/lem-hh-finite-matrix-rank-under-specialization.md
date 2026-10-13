@@ -2,7 +2,7 @@
 id: lem-hh-finite-matrix-rank-under-specialization
 kind: lemma
 title: "Finite matrix rank bounds under regular specialization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-truncation-triangles-are-essentially-unique-and-functorial
 kind: lemma
 title: "Truncation triangles are essentially unique and give adjoint truncation functors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

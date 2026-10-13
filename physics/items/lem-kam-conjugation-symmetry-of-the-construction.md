@@ -2,7 +2,7 @@
 id: lem-kam-conjugation-symmetry-of-the-construction
 kind: lemma
 title: "Conjugation symmetry of the KAM construction: real perturbations produce real tori"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: ex-gr-plane-wave-regauge-to-tt
 kind: example
 title: "Regauging an explicit harmonic-gauge plane-wave amplitude to transverse-traceless form"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

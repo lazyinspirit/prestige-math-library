@@ -1,7 +1,7 @@
 ---
 page: kashiwara-operators-and-crystal-lattices-examples
 title: "Kashiwara Operators and Crystal Lattices — Examples"
-status: draft
+status: published
 requires: [kashiwara-operators-and-crystal-lattices]
 items: []
 examples: [cex-an-a-zero-lattice-without-a-crystal-basis,

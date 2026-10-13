@@ -2,7 +2,7 @@
 id: ex-cm08-pair-potential-charges-check
 kind: example
 title: "A two-label pair-potential model: translation, rotation, boost and energy charges verified on the model class and on an explicit rigid-rotation motion"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

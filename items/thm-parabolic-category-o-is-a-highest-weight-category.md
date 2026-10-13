@@ -2,7 +2,7 @@
 id: thm-parabolic-category-o-is-a-highest-weight-category
 kind: theorem
 title: "Parabolic category O is a highest weight category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

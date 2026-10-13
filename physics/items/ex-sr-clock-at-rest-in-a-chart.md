@@ -2,7 +2,7 @@
 id: ex-sr-clock-at-rest-in-a-chart
 kind: example
 title: "Worked example: the clock at rest in an inertial chart"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 12

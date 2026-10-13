@@ -4,7 +4,7 @@ aliases: [nrqm-observables-states-separated-by-bounded-projections]
 kind: lemma
 domain: mathematics
 title: "Distinct density operators are separated by the law of a bounded rank-one projection"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-axiom-of-choice, def-countable-choice, def-hilbert-orthogonal-projection, def-hilbert-space, lem-norm-of-a-self-adjoint-operator-from-its-quadratic-form, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-rank-one-operator-calculus, lem-nrqm-state-geometry-ray-to-rank-one-projection, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-trace-class-is-a-two-sided-banach-operator-ideal, thm-trace-is-absolutely-convergent-and-basis-independent]

@@ -2,7 +2,7 @@
 id: pthm-cm07-boundary-terms-and-gauge
 kind: physics-theorem
 title: "Total-derivative Lagrangians, the potential representative and scaling: invariant stationary curves with endpoint terms"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

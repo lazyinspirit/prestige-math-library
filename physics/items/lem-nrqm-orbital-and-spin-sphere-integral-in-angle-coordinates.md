@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates]
 kind: lemma
 domain: mathematics
 title: "Sphere integrals in angle coordinates"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-polar-surface-measure-on-the-unit-sphere, thm-polar-coordinates-formula-for-lebesgue-measure, lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness, thm-euclidean-inverse-function-theorem, thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, thm-monotone-convergence-for-the-integral, thm-jordan-fubini-by-sections, def-c-one-map-and-local-inverse, def-jacobian-determinant-of-a-c-one-map, def-total-derivative-in-euclidean-space, thm-total-differentiability-gives-a-local-linear-bound-and-continuity, thm-sine-and-cosine-derivatives, thm-sine-and-cosine-addition-formulas, thm-sine-cosine-signs-monotonicity-and-ranges, thm-sine-and-cosine-parametrize-the-unit-circle, cor-trigonometric-parity-and-pythagorean-identity, thm-ftc-second-part, def-borel-sigma-algebra, thm-continuous-preimages-of-borel-sets-are-borel, def-measure, def-countable-choice]

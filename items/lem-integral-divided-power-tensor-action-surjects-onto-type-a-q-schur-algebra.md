@@ -2,7 +2,7 @@
 id: lem-integral-divided-power-tensor-action-surjects-onto-type-a-q-schur-algebra
 kind: lemma
 title: "Integral divided-power tensor actions generate the type-A q-Schur algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

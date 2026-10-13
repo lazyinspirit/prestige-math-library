@@ -1,7 +1,7 @@
 ---
 page: qm-measurement-and-instruments
 title: "Qm Measurement And Instruments"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-measurement-selective-luders-update

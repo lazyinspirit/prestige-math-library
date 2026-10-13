@@ -1,7 +1,7 @@
 ---
 page: qm-light-matter-and-spectral-transitions
 title: "Qm Light Matter And Spectral Transitions"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-light-matter-first-order-photon-energy-law

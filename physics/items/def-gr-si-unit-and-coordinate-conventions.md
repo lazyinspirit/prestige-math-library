@@ -2,7 +2,7 @@
 id: def-gr-si-unit-and-coordinate-conventions
 kind: definition
 title: "SI unit and coordinate conventions of the classical gravitational framework"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 5

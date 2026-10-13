@@ -2,7 +2,7 @@
 id: ex-normal-and-good-nodes-for-a-large-partition
 kind: example
 title: "Normal and good nodes for the partition (6,4,4,3,2)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

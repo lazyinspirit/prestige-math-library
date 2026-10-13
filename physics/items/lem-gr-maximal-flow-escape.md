@@ -2,7 +2,7 @@
 id: lem-gr-maximal-flow-escape
 kind: lemma
 title: "Escape lemma for manifold flows: a finite maximal time forces the integral curve to leave every compact set"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-gr-basic-limit-curve
 kind: lemma
 title: "Basic limit curve lemma: arclength-parametrized causal curves have causal limit curves on compact parameter intervals and future-inextendible limits on half-lines"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 20

@@ -2,7 +2,7 @@
 id: ex-em-outgoing-dtn-and-pec-zero-mode-boundaries
 kind: example
 title: "Outgoing DtN coefficient at degree zero and the explicit PEC topology zero mode"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-axiom-of-choice, lem-em-outgoing-spherical-hankel-dtn-bounds, lem-em-smooth-pec-cavity-spectral-closure, thm-the-curl-of-a-gradient-vanishes, lem-laplace-fundamental-solution-is-harmonic-off-its-pole, thm-algebra-of-derivatives, thm-complex-exponential-is-entire-with-derivative-itself]

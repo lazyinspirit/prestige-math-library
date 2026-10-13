@@ -2,7 +2,7 @@
 id: lem-gr-compact-variation-coefficient-vanishing
 kind: lemma
 title: "A continuous symmetric coefficient orthogonal to every compactly supported variation vanishes"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

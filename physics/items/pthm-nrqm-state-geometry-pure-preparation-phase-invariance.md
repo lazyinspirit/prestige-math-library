@@ -4,7 +4,7 @@ kind: physics-theorem
 domain: physics
 title: "Pure preparations are well defined by their rays, and phase factors do
   not change their states"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps:

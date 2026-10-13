@@ -2,7 +2,7 @@
 id: pthm-cm16-recurrence-for-finite-volume-models
 kind: physics-theorem
 title: "Poincare recurrence for the model's Hamiltonian flow on a bounded invariant set of finite phase volume: almost every state of any Borel subset returns to it infinitely often"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 23

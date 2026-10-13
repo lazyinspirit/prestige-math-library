@@ -2,7 +2,7 @@
 id: lem-dj-bridge-murphy-cellular-basis-and-cell-form
 kind: lemma
 title: "The Murphy cellular basis, the cell law and the Murphy form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

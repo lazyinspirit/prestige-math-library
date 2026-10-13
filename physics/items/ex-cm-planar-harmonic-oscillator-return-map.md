@@ -2,7 +2,7 @@
 id: ex-cm-planar-harmonic-oscillator-return-map
 kind: example
 title: "The local first-return map of a scalar harmonic oscillator near (1,0) is the reflection x->-x"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

@@ -5,7 +5,7 @@ kind: lemma
 domain: mathematics
 title: "Positive scalar multiples of self-adjoint operators: domains,
   resolvents, spectra and eigenbases"
-status: draft
+status: published
 origin: session
 dependency_level: 3
 deps:

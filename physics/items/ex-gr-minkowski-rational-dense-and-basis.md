@@ -2,7 +2,7 @@
 id: ex-gr-minkowski-rational-dense-and-basis
 kind: example
 title: "The rational timelike exponential set and the rational exponential basis in the flat vacuum development"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 42

@@ -2,7 +2,7 @@
 id: lem-the-q-wedge-relations-coincide-with-the-type-a-energy-braiding-kernel
 kind: lemma
 title: "The q-wedge relations coincide with the type-A energy braiding kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

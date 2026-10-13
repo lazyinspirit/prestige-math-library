@@ -2,7 +2,7 @@
 id: def-em-field-action-definition
 kind: definition
 title: "Smooth finite-region Maxwell action, compact variations and the fixed-endpoint particle functional"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

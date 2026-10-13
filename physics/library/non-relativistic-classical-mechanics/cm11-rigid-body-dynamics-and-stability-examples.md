@@ -1,7 +1,7 @@
 ---
 page: cm11-rigid-body-dynamics-and-stability-examples
 title: "Rigid-body dynamics and stability — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

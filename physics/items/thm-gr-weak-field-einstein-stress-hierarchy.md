@@ -3,7 +3,7 @@ id: thm-gr-weak-field-einstein-stress-hierarchy
 kind: theorem
 title: "The weak-field Einstein hierarchy: linearized Einstein tensor, stress
   components and the Poisson equation"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

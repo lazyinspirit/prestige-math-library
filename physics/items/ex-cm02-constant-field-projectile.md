@@ -2,7 +2,7 @@
 id: ex-cm02-constant-field-projectile
 kind: example
 title: "Projectile motion in the constant-field model: planar parabolic trajectory, flight time and level range for stated model data"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

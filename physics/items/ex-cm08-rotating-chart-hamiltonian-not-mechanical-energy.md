@@ -2,7 +2,7 @@
 id: ex-cm08-rotating-chart-hamiltonian-not-mechanical-energy
 kind: example
 title: "An oscillator observed in a uniformly rotating chart: the conserved chart Hamiltonian is not the inertial mechanical energy"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

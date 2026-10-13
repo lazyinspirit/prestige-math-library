@@ -2,7 +2,7 @@
 id: lem-locally-contractible-metric-spaces-have-singular-constant-sheaf-cohomology
 kind: lemma
 title: "Locally contractible metric spaces have singular constant sheaf cohomology"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

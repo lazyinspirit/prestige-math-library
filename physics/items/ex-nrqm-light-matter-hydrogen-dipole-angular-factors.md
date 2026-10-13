@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-hydrogen-dipole-angular-factors]
 kind: example
 domain: physics
 title: "Explicit dipole angular factors of the hydrogenic model: the allowed 1s-to-2p entry, the forbidden 1s-to-2s entry and the oscillator contrast"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 16
 deps: [pthm-nrqm-light-matter-dipole-selection-rules, thm-nrqm-orbital-and-spin-associated-polynomial-normalization, thm-nrqm-orbital-and-spin-legendre-rodrigues-equation, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, thm-nrqm-coulomb-atomic-dipole-matrix-element-domain, pthm-nrqm-central-coulomb-bound-spectrum-and-degeneracy, post-nrqm-approximations-static-finite-level-dipole-coupling, def-nrqm-light-matter-framework-finite-level-coupled-model, post-nrqm-framework-state-and-composition, def-nrqm-framework-quantities-and-units, def-inner-product-space, def-l-p-space-as-a-quotient-by-null-functions, def-polar-surface-measure-on-the-unit-sphere, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-complex-exponential, def-sine-and-cosine-by-power-series, def-countable-choice, def-axiom-of-choice]

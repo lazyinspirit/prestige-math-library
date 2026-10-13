@@ -1,7 +1,7 @@
 ---
 page: cm-math-central-examples
 title: Cm Math Central — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-harmonic-oscillator-action-derivative

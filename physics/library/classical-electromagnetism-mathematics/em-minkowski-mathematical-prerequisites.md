@@ -1,7 +1,7 @@
 ---
 page: em-minkowski-mathematical-prerequisites
 title: Em Minkowski Mathematical Prerequisites
-status: draft
+status: published
 items: [def-em-minkowski-affine-space,
         lem-em-boost-preserves-metric,
         lem-em-proper-time-reparametrization,

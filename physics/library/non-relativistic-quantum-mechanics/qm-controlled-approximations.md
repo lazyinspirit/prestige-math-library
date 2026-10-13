@@ -1,7 +1,7 @@
 ---
 page: qm-controlled-approximations
 title: Qm Controlled Approximations
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-approximations-scaled-line-model-correspondence

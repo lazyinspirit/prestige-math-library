@@ -2,7 +2,7 @@
 id: ex-cm-plane-wave-and-shear-exact-solutions
 kind: example
 title: "Exact transverse plane waves, the sheared single mode, and the Taylor-Green vortex in the periodic models"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

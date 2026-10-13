@@ -1,7 +1,7 @@
 ---
 page: cyclotomic-hecke-and-quiver-hecke-algebras
 title: "Cyclotomic Hecke and Quiver Hecke Algebras"
-status: draft
+status: published
 requires: [type-a-hecke-specht-modules-and-cellular-bases, quantum-affine-type-a-and-level-one-fock-space, klr-algebras-induction-and-quantum-serre-categorification, cyclotomic-klr-algebras-and-highest-weight-categorification, cores-quotients-and-blocks-of-symmetric-groups]
 items: [       def-arbitrary-level-cyclotomic-hecke-murphy-cell-and-schur-modules,
        lem-laurent-binomial-valuation-at-one-over-any-field,

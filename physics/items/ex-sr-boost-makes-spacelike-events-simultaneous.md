@@ -2,7 +2,7 @@
 id: ex-sr-boost-makes-spacelike-events-simultaneous
 kind: example
 title: "Worked boost family on the spacelike pair $(11,13,0,0)$: simultaneity at $b=11/13$ and both time orders"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

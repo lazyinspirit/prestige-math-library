@@ -2,7 +2,7 @@
 id: thm-gr-observer-relative-velocity-decomposition
 kind: theorem
 title: "Relative velocity decomposition of a future unit timelike vector"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

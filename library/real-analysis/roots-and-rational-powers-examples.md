@@ -1,7 +1,7 @@
 ---
 page: roots-and-rational-powers-examples
 title: "Roots, Rational Powers, and Classical Inequalities: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [cex-bernoulli-needs-x-at-least-minus-one,
            ex-cauchy-schwarz-lagrange-identity-two-terms,

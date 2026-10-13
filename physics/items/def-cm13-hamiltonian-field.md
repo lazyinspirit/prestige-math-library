@@ -2,7 +2,7 @@
 id: def-cm13-hamiltonian-field
 kind: definition
 title: "The Hamiltonian field of a phase function for a potential presentation: the unique field $X_f$ with $\\iota_{X_f}\\omega=df$, and $X_H=(H_p,-H_x)$ for the branch Hamiltonian"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

@@ -2,7 +2,7 @@
 id: lem-gr-causal-curve-initial-cone-step
 kind: lemma
 title: "Future causal position vectors along a curve in a convex normal set"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 15

@@ -2,7 +2,7 @@
 id: thm-gr-local-birkhoff-warped-product
 kind: theorem
 title: "Local Birkhoff theorem: a vacuum warped product with a round sphere factor is locally Schwarzschild with an extra Killing field"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

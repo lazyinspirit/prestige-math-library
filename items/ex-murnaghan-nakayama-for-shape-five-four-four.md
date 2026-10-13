@@ -2,7 +2,7 @@
 id: ex-murnaghan-nakayama-for-shape-five-four-four
 kind: example
 title: "Murnaghan–Nakayama values of the character of (5,4,4)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

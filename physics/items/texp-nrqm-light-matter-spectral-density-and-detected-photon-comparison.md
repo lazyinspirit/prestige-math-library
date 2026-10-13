@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-spectral-density-and-detected-photon-comparison]
 kind: thought-experiment
 domain: physics
 title: "Two declared cutoff-dipole models with equal transition-energy density: the rate coefficient does not discriminate them, the formal photon-energy laws differ, with a detected-law reading at nonzero coupling"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 18
 deps: [lem-nrqm-light-matter-first-order-photon-energy-law, pthm-nrqm-light-matter-golden-rule-limit-and-rate-reading, pthm-nrqm-light-matter-first-order-emission-and-absorption-coefficients, def-nrqm-light-matter-framework-finite-level-coupled-model, def-nrqm-light-matter-framework-spectral-transition-and-detection, def-nrqm-photons-framework-ideal-counting-and-detection-model, post-nrqm-framework-preparation-and-apparatus, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-framework-quantities-and-units, def-measure-with-density, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice, def-axiom-of-choice, cor-lebesgue-outer-measure-is-regular-with-borel-measurable-hulls]

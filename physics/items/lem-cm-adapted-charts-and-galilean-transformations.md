@@ -2,7 +2,7 @@
 id: lem-cm-adapted-charts-and-galilean-transformations
 kind: lemma
 title: "Transformation between adapted charts and its kinematic consequences"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

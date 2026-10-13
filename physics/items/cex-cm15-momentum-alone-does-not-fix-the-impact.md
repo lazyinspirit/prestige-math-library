@@ -2,7 +2,7 @@
 id: cex-cm15-momentum-alone-does-not-fix-the-impact
 kind: counterexample
 title: "Reciprocal impulses do not determine a collinear impact: the same incoming data admit the sticking outcome $v^+=0$ and the elastic outcome $(v_1^+,v_2^+)=(-3,1)\\,\\mathrm{m\\,s^{-1}}$ with different impulses and energies"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

@@ -4,7 +4,7 @@ aliases: [nrqm-uncertainty-schrodinger-robertson-anticommutator-bound]
 kind: lemma
 domain: mathematics
 title: "The Schroedinger-Robertson bound in anticommutator form and the Robertson bound on product domains"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-bounded-linear-operator, def-countable-choice, def-hilbert-space, def-inner-product-space, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-nrqm-composites-weak-form-robertson-uncertainty, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, thm-nrqm-magnetic-and-detection-covariance-refined-uncertainty]

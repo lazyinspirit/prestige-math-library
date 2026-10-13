@@ -2,7 +2,7 @@
 id: lem-the-parabolic-semi-regular-duality-and-reverse-column-label-map
 kind: lemma
 title: "Parabolic semi-regular duality and the reverse-column label map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

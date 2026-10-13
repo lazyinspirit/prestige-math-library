@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma]
 kind: lemma
 domain: mathematics
 title: "Diagonal adjoint and graph-core lemma"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-unbounded-linear-operator-domain-and-graph, def-densely-defined-closed-and-closable-operator, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-unbounded-adjoint-is-well-defined-and-closed, thm-closable-iff-adjoint-domain-is-dense, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-hilbert-space, def-countable-choice]

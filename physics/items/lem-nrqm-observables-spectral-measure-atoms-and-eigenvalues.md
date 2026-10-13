@@ -4,7 +4,7 @@ aliases: [nrqm-observables-spectral-measure-atoms-and-eigenvalues]
 kind: lemma
 domain: mathematics
 title: "Atoms of the spectral measure and eigenvalues of a self-adjoint operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-axiom-of-choice, def-countable-choice, def-eigenvalue-eigenvector-eigenspace-and-spectrum, def-hilbert-orthogonal-projection, def-hilbert-space, def-projection-valued-measure, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-orthogonal-projection-is-linear-self-adjoint-contractive, lem-scalar-and-complex-measures-from-a-pvm, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus]

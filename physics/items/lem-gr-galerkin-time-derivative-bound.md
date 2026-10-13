@@ -2,7 +2,7 @@
 id: lem-gr-galerkin-time-derivative-bound
 kind: lemma
 title: "Uniform time-derivative bounds for Galerkin solutions in every H^j, j at most s minus one"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

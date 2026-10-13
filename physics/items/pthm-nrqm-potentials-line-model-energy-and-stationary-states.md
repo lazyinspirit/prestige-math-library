@@ -4,7 +4,7 @@ aliases: [ nrqm-potentials-line-model-energy-and-stationary-states ]
 kind: physics-theorem
 domain: physics
 title: "The line model's energy observable, flow and stationary states"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

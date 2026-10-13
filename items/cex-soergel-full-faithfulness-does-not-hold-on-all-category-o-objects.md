@@ -2,7 +2,7 @@
 id: cex-soergel-full-faithfulness-does-not-hold-on-all-category-o-objects
 kind: counterexample
 title: The Soergel functor is not fully faithful on all category-O objects
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

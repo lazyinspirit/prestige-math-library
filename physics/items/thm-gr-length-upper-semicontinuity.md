@@ -2,7 +2,7 @@
 id: thm-gr-length-upper-semicontinuity
 kind: theorem
 title: "Lorentzian length as a refined sum of local separations, and upper semicontinuity of the length under uniform convergence"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 17

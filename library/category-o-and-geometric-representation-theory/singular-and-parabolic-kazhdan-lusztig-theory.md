@@ -1,7 +1,7 @@
 ---
 page: singular-and-parabolic-kazhdan-lusztig-theory
 title: "Singular and Parabolic Kazhdan–Lusztig Theory"
-status: draft
+status: published
 items: [def-parabolic-hecke-module-and-antispherical-standard-basis, lem-the-parabolic-hecke-modules-have-standard-bases-actions-and-compatible-bars, thm-existence-and-uniqueness-of-the-parabolic-kazhdan-lusztig-basis, def-parabolic-kazhdan-lusztig-basis-and-polynomials, thm-parabolic-kazhdan-lusztig-polynomials-are-alternating-sums-of-ordinary-ones, def-singular-integral-category-o-block-and-stabilizer, lem-facet-tensor-weight-exclusion, thm-translation-to-the-wall-on-verma-simple-and-projective-objects, thm-singular-category-o-multiplicities-are-parabolic-kl-polynomials, def-standard-parabolic-and-levi-subalgebras-from-simple-roots, def-parabolic-category-o-for-a-standard-parabolic, thm-parabolic-category-o-is-a-highest-weight-category, thm-parabolic-category-o-multiplicities-are-parabolic-kl-polynomials, thm-parabolic-kazhdan-lusztig-character-formula]
 examples: []
 ---

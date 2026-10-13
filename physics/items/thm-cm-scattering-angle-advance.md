@@ -2,7 +2,7 @@
 id: thm-cm-scattering-angle-advance
 kind: theorem
 title: "The scattering angle advance $\\Delta$ and the deflection relation: the total polar advance is $2\\Delta$ and the velocity directions make the cosine $\\cos(\\pi-2\\Delta)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

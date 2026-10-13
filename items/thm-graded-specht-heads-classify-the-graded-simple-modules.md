@@ -2,7 +2,7 @@
 id: thm-graded-specht-heads-classify-the-graded-simple-modules
 kind: theorem
 title: "Graded Specht heads classify the graded simple modules"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 41

@@ -2,7 +2,7 @@
 id: lem-cm-second-difference-remainder-bound
 kind: lemma
 title: "The centered second difference differs from the second derivative by at most $Ma^2/12$ when $|u''''|\\le M$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

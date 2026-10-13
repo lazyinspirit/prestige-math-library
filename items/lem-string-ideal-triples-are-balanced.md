@@ -2,7 +2,7 @@
 id: lem-string-ideal-triples-are-balanced
 kind: lemma
 title: "The string-ideal triples are balanced: the induction step (Kashiwara 7.4.1 / JKK 10.4)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

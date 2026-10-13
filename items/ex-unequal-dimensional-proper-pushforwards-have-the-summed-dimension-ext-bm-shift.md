@@ -2,7 +2,7 @@
 id: ex-unequal-dimensional-proper-pushforwards-have-the-summed-dimension-ext-bm-shift
 kind: example
 title: "Unequal-dimensional proper pushforwards carry the summed-dimension Ext/Borel–Moore degree"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 25

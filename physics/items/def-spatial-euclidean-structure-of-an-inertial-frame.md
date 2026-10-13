@@ -2,7 +2,7 @@
 id: def-spatial-euclidean-structure-of-an-inertial-frame
 kind: definition
 title: "The Euclidean spatial structure and cross product of an inertial frame"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

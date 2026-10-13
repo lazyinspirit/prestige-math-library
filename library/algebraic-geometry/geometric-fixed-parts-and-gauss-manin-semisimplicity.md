@@ -1,7 +1,7 @@
 ---
 page: geometric-fixed-parts-and-gauss-manin-semisimplicity
 title: "Geometric Fixed Parts And Gauss Manin Semisimplicity"
-status: draft
+status: published
 items: [def-geometric-polarizable-hodge-variation,
         lem-regular-trace-kernel-descends-the-complex-socle,
         lem-characteristic-zero-scalar-extension-preserves-geometric-local-system-semisimplicity,

@@ -2,7 +2,7 @@
 id: lem-hh-classical-and-generic-tensor-double-centralizer-suppliers
 kind: lemma
 title: "Classical commutants bound the two generic tensor images"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 3

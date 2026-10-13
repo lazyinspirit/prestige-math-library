@@ -2,7 +2,7 @@
 id: pthm-em-classical-interference
 kind: physics-theorem
 title: "Superposition intensity and the coherent interference cross term"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 20

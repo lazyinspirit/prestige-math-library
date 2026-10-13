@@ -2,7 +2,7 @@
 id: thm-quiver-flag-convolution-generators-satisfy-the-signed-klr-relations
 kind: theorem
 title: "Quiver-flag convolution generators satisfy the signed KLR relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 29

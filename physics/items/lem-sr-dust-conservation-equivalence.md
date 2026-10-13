@@ -2,7 +2,7 @@
 id: lem-sr-dust-conservation-equivalence
 kind: lemma
 title: "Dust: conservation of rho n tensor n is equivalent to continuity and inertial flow"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [thm-sr-proper-time-and-observer-decomposition, def-ck-tensor-field-on-minkowski-space, def-flat-covariant-derivative-on-affine-minkowski-space, def-directional-and-partial-derivatives, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, def-lorentz-form-and-inertia, def-sr-affine-minkowski-model, cor-zero-derivative-implies-constant]

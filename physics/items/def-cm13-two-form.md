@@ -2,7 +2,7 @@
 id: def-cm13-two-form
 kind: definition
 title: "The canonical one-form and the two-form of a potential presentation: $\\lambda=p\\cdot dx$ on the Cartesian momentum phase chart and the induced forms on each generalized-coordinate chart"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

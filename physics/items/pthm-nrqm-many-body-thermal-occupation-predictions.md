@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Thermal occupation means of the declared free-mode models: Bose and
   Fermi factors, product convergence and dilute remainders"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

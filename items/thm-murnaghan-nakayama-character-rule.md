@@ -2,7 +2,7 @@
 id: thm-murnaghan-nakayama-character-rule
 kind: theorem
 title: "The Murnaghan–Nakayama character rule"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

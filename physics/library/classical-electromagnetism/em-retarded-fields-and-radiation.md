@@ -1,7 +1,7 @@
 ---
 page: em-retarded-fields-and-radiation
 title: "Retarded fields and radiation"
-status: draft
+status: published
 items: [post-em-radiation-selection, def-em-retarded-point-geometry,
         lem-em-sphere-zonal-moments, pthm-em-retarded-potentials,
         pthm-em-dipole-radiation, pthm-em-lienard-wiechert,

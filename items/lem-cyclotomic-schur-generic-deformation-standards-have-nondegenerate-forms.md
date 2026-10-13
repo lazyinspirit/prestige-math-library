@@ -2,7 +2,7 @@
 id: lem-cyclotomic-schur-generic-deformation-standards-have-nondegenerate-forms
 kind: lemma
 title: "Generic cyclotomic Schur deformation standards have nondegenerate forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 22

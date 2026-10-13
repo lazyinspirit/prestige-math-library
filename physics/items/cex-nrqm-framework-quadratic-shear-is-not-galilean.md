@@ -2,7 +2,7 @@
 id: cex-nrqm-framework-quadratic-shear-is-not-galilean
 kind: counterexample
 title: "A smooth time-dependent translation chart need not be an inertial frame"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

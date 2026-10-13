@@ -4,7 +4,7 @@ kind: physics-theorem
 title: "A smooth periodically forced one-label Cartesian model with a transverse
   homoclinic horseshoe: the physical stroboscopic map has a compact invariant
   set conjugate to the shift, chaotic in the stated sense"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

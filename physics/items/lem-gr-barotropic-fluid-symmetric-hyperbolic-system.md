@@ -2,7 +2,7 @@
 id: lem-gr-barotropic-fluid-symmetric-hyperbolic-system
 kind: lemma
 title: "The barotropic fluid equations in enthalpy form are symmetric hyperbolic with positive principal symbol"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

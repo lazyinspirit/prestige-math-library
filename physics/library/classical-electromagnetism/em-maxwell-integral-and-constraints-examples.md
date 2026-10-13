@@ -1,7 +1,7 @@
 ---
 page: em-maxwell-integral-and-constraints-examples
 title: "Integral Maxwell and constraints — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-em-nonconserved-switched-charge,
            texp-em-displacement-current-surface-choice]

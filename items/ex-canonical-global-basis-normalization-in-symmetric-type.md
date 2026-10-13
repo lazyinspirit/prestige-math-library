@@ -2,7 +2,7 @@
 id: ex-canonical-global-basis-normalization-in-symmetric-type
 kind: example
 title: "Matching the canonical and lower global normalizations in rank one and $A_2$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

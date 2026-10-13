@@ -2,7 +2,7 @@
 id: lem-alternating-hook-induction-cancels-disconnected-rim-removals
 kind: lemma
 title: "Alternating hook induction cancels disconnected rim removals"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

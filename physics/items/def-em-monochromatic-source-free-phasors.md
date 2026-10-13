@@ -2,7 +2,7 @@
 id: def-em-monochromatic-source-free-phasors
 kind: definition
 title: "Frequency-$\\omega$ source-free vacuum phasor pairs and their real-field encoding"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 9

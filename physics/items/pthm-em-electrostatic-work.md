@@ -4,7 +4,7 @@ kind: physics-theorem
 title: Work of the electrostatic force equals charge times the potential drop and is path independent
 domain: physics
 physical_scope: "The work done by the electric force of a prescribed static external field on a test charge of constant parameter $q$ carried along a prescribed piecewise $C^1$ path in a star-shaped pure electrostatic region: the work equals $q$ times the potential drop, depends only on the endpoints, vanishes on closed paths and is unchanged by the additive constant of the potential. No equation of motion, radiative loss, work on sources or empirical claim is included."
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["pthm-em-electrostatic-potential", "post-em-lorentz-coupling", "def-em-electrostatic-regime", "def-em-fields", "def-em-sources", "def-em-si-conventions", "def-em-lab-geometry", "thm-gradient-theorem-for-line-integrals", "def-scalar-and-vector-line-integrals-along-piecewise-c1-paths", "cor-potentials-differ-by-a-componentwise-constant", "def-ck-euclidean-maps-and-diffeomorphisms", "def-interval", "def-directional-and-partial-derivatives", "def-euclidean-inner-product", "thm-algebra-of-derivatives", "def-star-shaped-open-subset-of-rn", "def-em-electromagnetic-tensor", "lem-sr-four-force-and-work-energy-identities"]

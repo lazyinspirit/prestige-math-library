@@ -4,7 +4,7 @@ aliases: [nrqm-autonomous-dynamics-flow-calculus]
 kind: lemma
 domain: mathematics
 title: "Flow calculus of a self-adjoint generator: commutation, invariance and differentiability"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-infinitesimal-generator-of-a-unitary-group, def-projection-valued-measure, def-strongly-continuous-one-parameter-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-unbounded-integral-against-a-pvm, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus]

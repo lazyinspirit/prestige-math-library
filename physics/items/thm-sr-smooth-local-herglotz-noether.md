@@ -3,7 +3,7 @@ id: thm-sr-smooth-local-herglotz-noether
 kind: theorem
 domain: mathematics
 title: "The smooth local Herglotz-Noether classification of Born-rigid motions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

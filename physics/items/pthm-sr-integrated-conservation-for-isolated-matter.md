@@ -2,7 +2,7 @@
 id: pthm-sr-integrated-conservation-for-isolated-matter
 kind: physics-theorem
 title: "Integrated conservation of the isolated total slice four-momentum"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "Flat affine Minkowski spacetime in one inertial chart; the total stress-energy tensor of a system subject to the isolation premise on a finite box and length-coordinate interval, with vanishing side flux. The slice integrals are chart-component integrals of a finite box; the theorem asserts no transformation law for them, no noncompact, asymptotic or gravitational-energy statement, and no measurement; the reading of the integrals as four-momentum is the model's interpretation."

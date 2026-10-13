@@ -4,7 +4,7 @@ aliases: [ nrqm-uncertainty-gaussian-minimum-spread ]
 kind: example
 domain: physics
 title: "The Gaussian family attains the position-momentum bound in the massive model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

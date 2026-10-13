@@ -2,7 +2,7 @@
 id: def-cm16-finite-time-growth-rates
 kind: definition
 title: "Finite-time tangent growth rates and Lyapunov exponents of the model's flow: the rate per unit time of a transported deviation, with its existence convention and its limits"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

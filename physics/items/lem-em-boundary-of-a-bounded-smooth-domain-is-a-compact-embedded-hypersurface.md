@@ -2,7 +2,7 @@
 id: lem-em-boundary-of-a-bounded-smooth-domain-is-a-compact-embedded-hypersurface
 kind: lemma
 title: "The boundary of a bounded smooth domain is a compact embedded hypersurface"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 domain: mathematics

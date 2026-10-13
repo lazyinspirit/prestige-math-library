@@ -2,7 +2,7 @@
 id: thm-murphy-tableau-elements-form-a-cellular-basis
 kind: theorem
 title: "The Murphy tableau elements form a cellular basis"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

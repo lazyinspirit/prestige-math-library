@@ -2,7 +2,7 @@
 id: ex-sr-stationary-target-threshold
 kind: example
 title: "Threshold energy for a projectile on a stationary target"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

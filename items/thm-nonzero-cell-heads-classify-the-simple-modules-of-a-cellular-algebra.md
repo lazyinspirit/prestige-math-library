@@ -2,7 +2,7 @@
 id: thm-nonzero-cell-heads-classify-the-simple-modules-of-a-cellular-algebra
 kind: theorem
 title: "Nonzero cell heads classify the simple modules of a cellular algebra"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

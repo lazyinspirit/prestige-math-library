@@ -2,7 +2,7 @@
 id: def-the-level-one-vector-representation-its-affinization-and-energy-function
 kind: definition
 title: "The level-zero vector representation, its affinization and the level-one crystal energy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

@@ -3,7 +3,7 @@ id: pthm-cm14-regular-tori
 kind: physics-theorem
 title: "Compact connected regular fibres of a completely integrable datum of the
   presentation are Lagrangian tori with a full period lattice"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 25

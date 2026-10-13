@@ -2,7 +2,7 @@
 id: ex-residue-translation-on-small-parabolic-o-standards
 kind: example
 title: "Residue translation on small parabolic category-O standards"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 27

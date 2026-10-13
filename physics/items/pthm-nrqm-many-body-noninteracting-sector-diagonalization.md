@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Diagonalisation of the non-interacting finite-mode sector: occupation
   eigenvalues, partition sum and ground energy"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

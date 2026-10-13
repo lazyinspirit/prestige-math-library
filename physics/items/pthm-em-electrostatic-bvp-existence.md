@@ -2,7 +2,7 @@
 id: pthm-em-electrostatic-bvp-existence
 kind: physics-theorem
 title: "Existence and regularity for the electrostatic boundary value problem"
-status: draft
+status: published
 origin: session
 dependency_level: 18
 domain: physics

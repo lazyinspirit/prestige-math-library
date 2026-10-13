@@ -2,7 +2,7 @@
 id: pthm-gr-schwarzschild-vacuum-model
 kind: physics-theorem
 title: "The Schwarzschild exterior vacuum model: field law, static clock readings and the mass parameter"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

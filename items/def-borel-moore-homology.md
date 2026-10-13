@@ -2,7 +2,7 @@
 id: def-borel-moore-homology
 kind: definition
 title: "Borel-Moore homology by locally finite chains"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

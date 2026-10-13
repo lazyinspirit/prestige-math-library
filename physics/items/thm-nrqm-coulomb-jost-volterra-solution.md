@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-coulomb-jost-volterra-solution]
 kind: theorem
 domain: mathematics
 title: "Coulomb Jost Volterra solution"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps: [thm-morera-triangle-theorem, cor-locally-uniformly-convergent-holomorphic-series, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-kummer-recurrence-and-termination, thm-nrqm-coulomb-infinitesimal-kinetic-bound, lem-nrqm-coulomb-three-dimensional-hardy-bound, thm-nrqm-intervals-regular-ivp-parameter-series, thm-gronwall-integral-inequality, thm-banach-fixed-point, thm-tonelli-and-fubini-for-completed-product-measures, def-complex-exponential, thm-derivative-of-exponential, cor-complex-trigonometric-and-hyperbolic-derivatives, thm-algebra-of-derivatives, def-derivative, def-continuity-real, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, cor-cauchy-schwarz-inequality-for-l-two, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-axiom-of-choice]

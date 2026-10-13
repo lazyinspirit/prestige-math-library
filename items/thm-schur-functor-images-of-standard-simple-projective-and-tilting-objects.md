@@ -2,7 +2,7 @@
 id: thm-schur-functor-images-of-standard-simple-projective-and-tilting-objects
 kind: theorem
 title: "Schur functor images of standard, simple, projective and tilting objects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 38

@@ -3,7 +3,7 @@ id: rem-em-radiation-reaction-limits
 kind: remark
 title: "Self-force, runaways and finite-size regularizations are not supplied by this page"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 23
 deps: [pthm-em-point-self-energy-divergence, pthm-em-coulomb-solution, def-em-weak-sources, pthm-em-larmor-nonrelativistic, pthm-em-lienard-emitted-power, def-countable-choice, post-em-distributional-vacuum-maxwell, thm-distributional-differentiation-is-continuous-and-commutes, thm-extreme-value-metric, lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound, thm-riemann-fubini-on-product-rectangles, lem-riemann-lebesgue-comparison-for-distribution-test-integrands, thm-monotonicity-of-the-integral]

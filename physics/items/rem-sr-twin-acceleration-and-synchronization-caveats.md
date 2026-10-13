@@ -2,7 +2,7 @@
 id: rem-sr-twin-acceleration-and-synchronization-caveats
 kind: remark
 title: "Acceleration is not an aging term, and the twin comparison is not symmetric: scope caveats"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "Interpretation and delimitation of the proper-time comparison in the flat classical special-relativity model: the absence of an acceleration term in the ideal clock hypothesis, the geometric asymmetry of the two histories, and the simultaneity bookkeeping of the traveler's two momentary inertial rest frames. Conditional on the named postulates; excludes real-clock error models, apparatus, gravity and quantum effects, and asserts no measured outcome."

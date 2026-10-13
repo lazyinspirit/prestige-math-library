@@ -4,7 +4,7 @@ aliases: [ nrqm-measurement-serial-stern-gerlach-filters ]
 kind: example
 domain: physics
 title: "Serial ideal Stern-Gerlach filters: a two-level model computation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

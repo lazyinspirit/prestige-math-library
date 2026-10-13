@@ -2,7 +2,7 @@
 id: thm-self-dual-indecomposable-klr-projectives-give-the-negative-half-lower-global-basis
 kind: theorem
 title: "Self-dual indecomposable KLR projectives give the lower global basis (symmetric type)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

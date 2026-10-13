@@ -4,7 +4,7 @@ aliases: [ nrqm-observables-examples-scope-limits ]
 kind: remark
 domain: physics
 title: "What the worked readouts of the companion page establish"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

@@ -4,7 +4,7 @@ aliases: [nrqm-composites-continuous-measurable-kraus-instrument]
 kind: lemma
 domain: mathematics
 title: "Continuous measurable Kraus instruments: isometry, POVM and trace-norm integration"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-measure-null-set-and-almost-everywhere, cor-cauchy-schwarz-inequality-for-l-two, thm-minkowski-inequality-for-integrals, thm-monotone-convergence-for-the-integral, thm-tonelli-theorem-for-sigma-finite-product-spaces, thm-cauchy-schwarz-in-an-inner-product-space, thm-trace-is-absolutely-convergent-and-basis-independent, lem-nuclear-series-characterizes-trace-norm, lem-nrqm-composites-general-trace-class-instrument-and-effect-duality, lem-nrqm-composites-separable-partial-trace, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-nrqm-composites-nuclear-bounded-cyclicity, def-bochner-integrable-function, lem-bochner-integral-norm-inequality, thm-bochner-integrability-criterion, thm-bochner-dominated-convergence, def-strongly-measurable-banach-valued-function, def-trace-class-operator, def-self-adjoint-positive-unitary-and-normal-operator, def-l-p-space-as-a-quotient-by-null-functions, thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces, lem-nrqm-composites-rank-one-operator-calculus, thm-trace-class-is-a-two-sided-banach-operator-ideal, def-countable-choice, lem-nrqm-composites-hilbert-tensor-construction]

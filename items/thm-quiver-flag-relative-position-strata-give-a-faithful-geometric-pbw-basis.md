@@ -2,7 +2,7 @@
 id: thm-quiver-flag-relative-position-strata-give-a-faithful-geometric-pbw-basis
 kind: theorem
 title: "Relative-position incidence strata give a faithful geometric PBW basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 28

@@ -2,7 +2,7 @@
 id: lem-gr-spacelike-hypersurface-normal-and-second-fundamental-form
 kind: lemma
 title: "The future unit normal, induced metric and second fundamental form of a spacelike hypersurface"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

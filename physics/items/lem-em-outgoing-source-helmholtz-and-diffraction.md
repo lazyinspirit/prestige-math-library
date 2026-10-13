@@ -3,7 +3,7 @@ id: lem-em-outgoing-source-helmholtz-and-diffraction
 kind: lemma
 domain: mathematics
 title: "Outgoing source Helmholtz field: fundamental solution, Fraunhofer and Fresnel error terms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

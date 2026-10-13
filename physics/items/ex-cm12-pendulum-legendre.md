@@ -2,7 +2,7 @@
 id: ex-cm12-pendulum-legendre
 title: "The planar pendulum in Hamiltonian form: kinetic metric $ml^{2}$, substituted Hamiltonian $p^{2}/(2ml^{2}) - mgl\\cos\\theta$ and the reduced equation"
 kind: example
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 20

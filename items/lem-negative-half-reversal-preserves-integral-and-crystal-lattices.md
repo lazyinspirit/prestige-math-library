@@ -2,7 +2,7 @@
 id: lem-negative-half-reversal-preserves-integral-and-crystal-lattices
 kind: lemma
 title: "Reversal preserves the negative-half integral and crystal lattices"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

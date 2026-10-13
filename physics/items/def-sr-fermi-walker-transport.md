@@ -3,7 +3,7 @@ id: def-sr-fermi-walker-transport
 kind: definition
 domain: mathematics
 title: "Fermi-Walker transport along a timelike worldline"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: post-cm05-gravity
 kind: postulate
 title: "Adopted two-label gravitational model: the inverse-square pair potential with coupling parameters, the empirical mass identification, and the measured value and uncertainty of the Newtonian constant"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

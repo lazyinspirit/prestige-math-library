@@ -2,7 +2,7 @@
 id: def-nrqm-framework-newtonian-spacetime
 kind: definition
 title: "The Newtonian spacetime arena of the framework"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 3

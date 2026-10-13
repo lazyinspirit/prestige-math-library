@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "A two-cell marked model: the fringe visibility equals the marker overlap
   exactly"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

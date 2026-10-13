@@ -1,7 +1,7 @@
 ---
 page: cm-math-continuum-examples
 title: Cm Math Continuum — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-transport-of-a-translating-uniform-flow

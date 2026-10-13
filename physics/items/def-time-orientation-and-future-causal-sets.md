@@ -2,7 +2,7 @@
 id: def-time-orientation-and-future-causal-sets
 kind: definition
 title: "Time orientation, future and past timelike/null/causal vectors, and the closed cones"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

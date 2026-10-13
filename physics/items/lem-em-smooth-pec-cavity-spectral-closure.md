@@ -3,7 +3,7 @@ id: lem-em-smooth-pec-cavity-spectral-closure
 kind: lemma
 domain: mathematics
 title: "Spectral completeness of the curl form in a smooth PEC cavity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 2

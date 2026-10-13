@@ -4,7 +4,7 @@ aliases: [ nrqm-observables-position-bin-probabilities ]
 kind: example
 domain: physics
 title: "Position-bin probabilities of a Gaussian packet"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps:

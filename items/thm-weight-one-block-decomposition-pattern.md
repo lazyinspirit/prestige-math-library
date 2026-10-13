@@ -2,7 +2,7 @@
 id: thm-weight-one-block-decomposition-pattern
 kind: theorem
 title: "The weight-one block decomposition pattern"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 15

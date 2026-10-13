@@ -4,7 +4,7 @@ aliases: [nrqm-angular-momentum-framework-angular-momentum-observables]
 kind: definition
 domain: physics
 title: "Orbital, spin and total angular momentum of the massive spin-s model: assigned sharp observables, units and readings"
-status: draft
+status: published
 origin: session
 dependency_level: 9
 deps: [def-axiom-of-choice, def-countable-choice, def-dependent-choice, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-self-adjoint-positive-unitary-and-normal-operator, def-strongly-continuous-one-parameter-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, lem-nrqm-angular-momentum-product-flow-generator, lem-nrqm-angular-momentum-su2-lift-of-the-rotation-action, lem-nrqm-angular-momentum-orbital-casimir-identity, lem-nrqm-kinematics-componentwise-position-and-momentum, lem-nrqm-symmetries-rotation-generators-on-schwartz-classes, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-observable-and-probability, post-nrqm-framework-state-and-composition, prop-nrqm-orbital-and-spin-finite-spin-matrices, thm-bounded-borel-pvm-integral, thm-nrqm-orbital-and-spin-sphere-onb, thm-nrqm-orbital-and-spin-orbital-self-adjoint-generators]

@@ -3,7 +3,7 @@ id: ex-em-dipole-antenna-example
 kind: example
 title: "Harmonic dipole pattern and period-averaged power in the exact dipole law"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 21
 deps: [pthm-em-dipole-radiation, lem-em-sphere-zonal-moments, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-ftc-second-part, def-em-electric-moments, def-em-si-conventions, def-euclidean-inner-product, def-cross-product-in-r3, thm-algebra-of-derivatives, def-countable-choice, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, lem-test-function-cutoffs-and-euclidean-localization, thm-integration-by-parts, pthm-em-retarded-potentials, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, thm-sine-and-cosine-addition-formulas, thm-sine-cosine-zero-sets-and-fundamental-period, thm-sine-cosine-signs-monotonicity-and-ranges, thm-quarter-turn-values-and-shift-formulas, thm-integral-triangle-inequality, prop-order-and-scalar-rules-for-the-nonnegative-integral, lem-em-parameter-integrals, cor-c-one-change-of-variables-for-l-one-functions]

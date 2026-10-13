@@ -2,7 +2,7 @@
 id: cex-gr-negative-sound-speed-derivative-breaks-evolution
 kind: counterexample
 title: "A negative pressure derivative defeats fixed-Sobolev evolution: exponentially growing Fourier modes of the linearized barotropic fluid"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

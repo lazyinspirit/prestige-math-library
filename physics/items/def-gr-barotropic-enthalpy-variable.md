@@ -2,7 +2,7 @@
 id: def-gr-barotropic-enthalpy-variable
 kind: definition
 title: "The barotropic enthalpy variable r(epsilon): definition, strict monotonicity and the symmetric form of the fluid equations"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

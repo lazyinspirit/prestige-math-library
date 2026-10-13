@@ -3,7 +3,7 @@ id: lem-em-smooth-domain-elliptic-regularity
 kind: lemma
 domain: mathematics
 title: "Classical smoothness of weak Poisson solutions on smooth domains and across smooth interfaces"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 4

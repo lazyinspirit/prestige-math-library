@@ -3,7 +3,7 @@ id: def-sr-chart-tetrad-and-congruence-distinction
 kind: definition
 domain: mathematics
 title: "Charts, tetrads, observer congruences and adapted charts in affine Minkowski space"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

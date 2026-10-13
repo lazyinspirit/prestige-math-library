@@ -2,7 +2,7 @@
 id: def-gr-dust-torsion-and-curvature-residuals
 kind: definition
 title: "Tentative coframe, Cartan torsion and curvature, and the curvature residual of the dust reduction"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

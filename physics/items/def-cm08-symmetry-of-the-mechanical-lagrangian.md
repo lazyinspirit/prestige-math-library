@@ -2,7 +2,7 @@
 id: def-cm08-symmetry-of-the-mechanical-lagrangian
 kind: definition
 title: "Continuous symmetries of the mechanical Lagrangian of a potential presentation: symmetry data, the Noether identity, the charge and its dimensions"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

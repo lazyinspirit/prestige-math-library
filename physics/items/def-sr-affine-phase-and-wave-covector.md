@@ -2,7 +2,7 @@
 id: def-sr-affine-phase-and-wave-covector
 kind: definition
 title: 'Affine phase functions and wave covectors on affine Minkowski space'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-affine-minkowski-model, def-affine-space-and-displacement,

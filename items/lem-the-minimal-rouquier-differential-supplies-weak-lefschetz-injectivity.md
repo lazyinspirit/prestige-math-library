@@ -2,7 +2,7 @@
 id: lem-the-minimal-rouquier-differential-supplies-weak-lefschetz-injectivity
 kind: lemma
 title: "The minimal Rouquier differential supplies the injectivity input of the weak-Lefschetz substitute"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

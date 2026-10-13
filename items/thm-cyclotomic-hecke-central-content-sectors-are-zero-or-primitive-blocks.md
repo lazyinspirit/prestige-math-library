@@ -2,7 +2,7 @@
 id: thm-cyclotomic-hecke-central-content-sectors-are-zero-or-primitive-blocks
 kind: theorem
 title: "Central content sectors are zero or primitive cyclotomic Hecke blocks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 29

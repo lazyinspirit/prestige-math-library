@@ -2,7 +2,7 @@
 id: thm-cm-forced-oscillator-sinusoidal-response
 kind: theorem
 title: "Sinusoidal forcing: the steady response, its amplitude and phase, and resonance at $\\Omega=\\sqrt{k/m}$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

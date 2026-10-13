@@ -2,7 +2,7 @@
 id: thm-self-dual-indecomposable-cyclotomic-klr-projectives-give-the-lower-global-basis
 kind: theorem
 title: "Self-dual indecomposable cyclotomic projectives give the lower global basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 33

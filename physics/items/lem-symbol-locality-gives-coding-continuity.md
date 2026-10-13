@@ -2,7 +2,7 @@
 id: lem-symbol-locality-gives-coding-continuity
 kind: lemma
 title: "Finite symbol windows determine the code: locality of the iterates, coding continuity and injectivity of $h(\\sigma)=(x_{-1}(\\sigma),x_0(\\sigma))$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

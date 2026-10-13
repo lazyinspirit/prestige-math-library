@@ -2,7 +2,7 @@
 id: def-parabolic-hecke-module-and-antispherical-standard-basis
 kind: definition
 title: "The parabolic Hecke module and the antispherical standard basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

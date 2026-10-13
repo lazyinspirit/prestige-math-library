@@ -3,7 +3,7 @@ id: lem-em-coordinate-cell-localization
 kind: lemma
 title: "Localization of a continuous function by axis-parallel cube integrals"
 domain: mathematics
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [def-metric-continuity,

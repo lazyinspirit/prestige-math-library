@@ -2,7 +2,7 @@
 id: lem-complex-stratified-morse-data-have-tangential-normal-product-and-link-description
 kind: lemma
 title: "Complex stratified Morse data, constructible transport and complex links"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

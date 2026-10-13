@@ -2,7 +2,7 @@
 id: def-nrqm-framework-galilei-transformations
 kind: definition
 title: "The Galilean transformations of the coordinate space"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 1

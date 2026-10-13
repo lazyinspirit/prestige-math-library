@@ -3,7 +3,7 @@ id: post-cm17-fluid-constitutive
 kind: postulate
 title: "Adopted fluid constitutive branches: incompressible Newtonian,
   barotropic inviscid, and the periodic-cell idealization"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

@@ -2,7 +2,7 @@
 id: def-gr-causal-conditions-and-global-hyperbolicity
 kind: definition
 title: "Chronology, causality, strong causality, global hyperbolicity and time functions"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

@@ -4,7 +4,7 @@ aliases: [nrqm-central-exponential-moments]
 kind: lemma
 domain: mathematics
 title: "Moments of the exponential law on the half-line"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [def-real-gamma-function-by-the-euler-integral, cor-real-gamma-positive-integer-values, lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness, def-countable-choice]

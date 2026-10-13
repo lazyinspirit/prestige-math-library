@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-examples-scope-limits]
 kind: remark
 domain: physics
 title: "Scope of the light-matter and spectral-transitions examples page"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 deps: [ex-nrqm-light-matter-two-level-dipole-drive-check, ex-nrqm-light-matter-hydrogen-dipole-angular-factors, texp-nrqm-light-matter-spectral-density-and-detected-photon-comparison, pthm-nrqm-light-matter-stimulated-dipole-drive-transitions, pthm-nrqm-light-matter-dipole-selection-rules, pthm-nrqm-light-matter-golden-rule-limit-and-rate-reading, lem-nrqm-light-matter-first-order-photon-energy-law, def-nrqm-light-matter-framework-finite-level-coupled-model, def-nrqm-light-matter-framework-spectral-transition-and-detection, post-nrqm-framework-preparation-and-apparatus, post-nrqm-framework-observable-and-probability, def-nrqm-photons-framework-ideal-counting-and-detection-model]

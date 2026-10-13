@@ -3,7 +3,7 @@ id: lem-nrqm-state-geometry-normalization-and-phase-classes
 kind: lemma
 domain: mathematics
 title: "Normalization, ray equivalence and the phase orbits of the unit sphere"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-nrqm-state-geometry-state-vectors-and-rays, cor-inner-product-induces-a-norm, def-real-and-complex-inner-product-space, lem-complex-conjugation-and-modulus-laws]

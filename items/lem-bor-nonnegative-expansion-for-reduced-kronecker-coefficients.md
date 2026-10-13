@@ -2,7 +2,7 @@
 id: lem-bor-nonnegative-expansion-for-reduced-kronecker-coefficients
 kind: lemma
 title: "The nonnegative expansion of a reduced Kronecker coefficient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

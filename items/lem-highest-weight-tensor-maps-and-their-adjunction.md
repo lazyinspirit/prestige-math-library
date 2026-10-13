@@ -2,7 +2,7 @@
 id: lem-highest-weight-tensor-maps-and-their-adjunction
 kind: lemma
 title: "Highest weight tensor maps, their adjunction and the retraction $S_{\\lambda,\\mu}$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

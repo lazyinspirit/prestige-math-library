@@ -2,7 +2,7 @@
 id: cex-gr-flat-slab-coordinate-time-flow-incomplete
 kind: counterexample
 title: "Counterexample: on the flat slab the coordinate time has Cauchy levels but an incomplete gradient flow"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 30

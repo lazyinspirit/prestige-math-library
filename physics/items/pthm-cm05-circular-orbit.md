@@ -2,7 +2,7 @@
 id: pthm-cm05-circular-orbit
 kind: physics-theorem
 title: "Circular relative orbits of the central model: the critical-point criterion $u'(r_0)=J^2/(\\mu r_0^3)$, uniform rotation of both labels about the centre of mass, and the linearised radial frequency"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

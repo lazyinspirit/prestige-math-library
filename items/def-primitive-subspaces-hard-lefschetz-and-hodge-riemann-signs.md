@@ -2,7 +2,7 @@
 id: def-primitive-subspaces-hard-lefschetz-and-hodge-riemann-signs
 kind: definition
 title: "Primitive subspaces, hard Lefschetz and the Hodge-Riemann signs: the dictionary of hypotheses S, hL and HR"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

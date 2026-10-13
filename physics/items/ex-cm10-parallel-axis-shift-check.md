@@ -2,7 +2,7 @@
 id: ex-cm10-parallel-axis-shift-check
 kind: example
 title: "Parallel-axis check for the equilateral-triangle model: inertia tensor about a vertex computed two ways"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

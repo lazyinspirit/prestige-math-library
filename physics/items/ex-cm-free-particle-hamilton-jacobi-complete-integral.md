@@ -2,7 +2,7 @@
 id: ex-cm-free-particle-hamilton-jacobi-complete-integral
 kind: example
 title: "The free particle: the complete integral $S=q\\alpha-t\\alpha^2/(2m)$, its characteristics and its canonical labels"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

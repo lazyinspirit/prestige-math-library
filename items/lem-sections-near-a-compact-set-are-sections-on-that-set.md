@@ -2,7 +2,7 @@
 id: lem-sections-near-a-compact-set-are-sections-on-that-set
 kind: lemma
 title: "Sections on a compact set extend to a neighbourhood"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

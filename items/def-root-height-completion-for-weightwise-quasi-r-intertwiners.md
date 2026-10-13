@@ -2,7 +2,7 @@
 id: def-root-height-completion-for-weightwise-quasi-r-intertwiners
 kind: definition
 title: "The root-height completion for weightwise quasi-$R$ intertwiners"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

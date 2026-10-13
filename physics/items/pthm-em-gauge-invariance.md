@@ -3,7 +3,7 @@ id: pthm-em-gauge-invariance
 kind: physics-theorem
 title: "Gauge invariance of the electric and magnetic fields"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 16
 deps: [def-em-gauge-transformation, def-em-potential-gauge-and-field-conventions, def-em-fields, lem-em-joint-smooth-potentials, thm-the-curl-of-a-gradient-vanishes, thm-clairaut-schwarz-mixed-partials, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, thm-algebra-of-total-derivatives, def-ck-euclidean-maps-and-diffeomorphisms, def-directional-and-partial-derivatives, def-interval]

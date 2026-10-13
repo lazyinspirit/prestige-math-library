@@ -2,7 +2,7 @@
 id: ex-cyclic-etale-covers-give-geometric-semisimple-weight-zero-monodromy
 kind: example
 title: "A cyclic geometric weight-zero monodromy system"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

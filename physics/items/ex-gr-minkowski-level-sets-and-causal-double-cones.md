@@ -2,7 +2,7 @@
 id: ex-gr-minkowski-level-sets-and-causal-double-cones
 kind: example
 title: "Worked Minkowski slice: Cauchy level sets, causal double cones and the compact diamond"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

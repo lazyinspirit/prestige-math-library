@@ -2,7 +2,7 @@
 id: ex-hypercover-total-degree-uses-only-a-finite-matching-truncation
 kind: example
 title: "Hypercover total degree uses only a finite matching truncation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

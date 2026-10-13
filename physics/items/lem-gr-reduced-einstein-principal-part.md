@@ -2,7 +2,7 @@
 id: lem-gr-reduced-einstein-principal-part
 kind: lemma
 title: "Principal part of the reduced Einstein operator and its first-order symmetric hyperbolic reduction"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

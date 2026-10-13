@@ -2,7 +2,7 @@
 id: lem-gr-flrw-ricci-and-einstein-tensors
 kind: lemma
 title: "Ricci, scalar and Einstein tensors of the FLRW metric in product charts"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

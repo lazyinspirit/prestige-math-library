@@ -3,7 +3,7 @@ id: "pthm-em-magnetic-dipole-field"
 kind: "physics-theorem"
 title: "Far-field dipole expansion of a compact conserved current with a uniform explicit remainder"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 19
 deps: ["def-em-steady-current-regime", "def-em-magnetic-moment", "pthm-em-magnetostatic-vector-potential", "lem-em-magnetic-dipole-remainder", "def-cross-product-in-r3", "def-countable-choice", "lem-riemann-lebesgue-comparison-for-distribution-test-integrands"]

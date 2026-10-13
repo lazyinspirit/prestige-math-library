@@ -1,7 +1,7 @@
 ---
 page: compact-laplace-type-operators-and-hodge-representatives
 title: "Compact Laplace-type operators and harmonic representatives"
-status: draft
+status: published
 items: [def-complex-manifolds-and-holomorphic-vector-bundles, def-second-order-laplace-type-operators-on-vector-bundles, lem-formal-adjoints-of-differential-operators-exist-and-are-unique, def-e-valued-dolbeault-operators-and-ltwo-structure, thm-elliptic-differential-operators-on-compact-vector-bundles-have-parametrices-and-regularity, thm-sobolev-compactness-and-elliptic-estimates-give-fredholm-hodge-decomposition, thm-hodge-laplacian-kernel-represents-de-rham-and-dolbeault-cohomology]
 examples: []
 ---

@@ -4,7 +4,7 @@ requires:
   - gr-framework-and-geometry
 page: gr-tensors-and-observers-examples
 title: "Tensors And Observers — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

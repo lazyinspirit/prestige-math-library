@@ -4,7 +4,7 @@ kind: definition
 title: "Vacuum electromagnetic energy density and energy flux (the Poynting vector)"
 domain: physics
 physical_scope: "The electromagnetic energy density and the Poynting vector of the classical vacuum framework as pointwise functions of the fixed-time fields on a named laboratory region, in SI units, with the explicit exclusions: no distributional products in the weak branch, no value at a point of singular source support, no additivity under decompositions of the fields, and no covariant identification. The item defines quantities only; the physical interpretation as an energy density and an energy flux density belongs to the energy-balance theorem of the same page, and no field equation and no empirical claim is made here."
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 proof_strategy: direct

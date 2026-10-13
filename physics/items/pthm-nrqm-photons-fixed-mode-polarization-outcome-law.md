@@ -3,7 +3,7 @@ id: pthm-nrqm-photons-fixed-mode-polarization-outcome-law
 kind: physics-theorem
 title: "The analyser outcome law of the fixed-mode polarisation model: Born
   probabilities and the Malus ratio"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 12

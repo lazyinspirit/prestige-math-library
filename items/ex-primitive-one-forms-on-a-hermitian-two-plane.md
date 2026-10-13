@@ -2,7 +2,7 @@
 id: ex-primitive-one-forms-on-a-hermitian-two-plane
 kind: example
 title: "Primitive one-forms and the Weil star sign"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps:

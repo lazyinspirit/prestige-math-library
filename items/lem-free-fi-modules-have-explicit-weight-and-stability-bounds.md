@@ -2,7 +2,7 @@
 id: lem-free-fi-modules-have-explicit-weight-and-stability-bounds
 kind: lemma
 title: "Free FI-modules have computable stability degree and weight"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

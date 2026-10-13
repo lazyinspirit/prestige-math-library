@@ -2,7 +2,7 @@
 id: def-cm-calibration-rule
 kind: definition
 title: "Calibration data and calibration rules"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-euclidean-inner-product, def-cm-measurement-model, def-random-element-and-real-random-variable]

@@ -2,7 +2,7 @@
 id: ex-a-weight-one-block-decomposition-matrix
 kind: example
 title: "The complete weight-one decomposition matrix for S3 at p=3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

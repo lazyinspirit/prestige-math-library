@@ -2,7 +2,7 @@
 id: thm-separated-hecke-residues-give-seminormal-idempotents-and-bases
 kind: theorem
 title: "Separated Hecke residues give seminormal idempotents and bases"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

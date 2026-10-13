@@ -4,7 +4,7 @@ aliases: [nrqm-potentials-one-dimensional-flux-identity]
 kind: lemma
 domain: mathematics
 title: "The one-dimensional continuity identity and the constant flux of stationary solutions"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [def-complex-conjugate-real-imaginary-part-and-modulus, thm-complex-numbers-are-the-real-coordinate-plane, thm-algebra-of-derivatives, thm-algebra-of-continuous-functions, cor-zero-derivative-implies-constant, def-derivative, def-continuity-real, def-interval, def-countable-choice]

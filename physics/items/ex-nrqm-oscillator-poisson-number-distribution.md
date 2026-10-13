@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-example-poisson-number-distribution]
 kind: example
 domain: mathematics
 title: "Poisson number distribution"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [thm-nrqm-oscillator-coherent-state-convergence, thm-nrqm-oscillator-hermite-orthogonality, lem-nrqm-oscillator-closed-ladder-domains, def-complex-exponential, lem-complex-exponential-series-converges-everywhere, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice]

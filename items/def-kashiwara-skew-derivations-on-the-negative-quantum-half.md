@@ -2,7 +2,7 @@
 id: def-kashiwara-skew-derivations-on-the-negative-quantum-half
 kind: definition
 title: "Kashiwara's skew derivations $e_i'$ and $e_i''$ on the negative half"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

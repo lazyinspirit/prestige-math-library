@@ -2,7 +2,7 @@
 id: ex-cm-transport-of-a-translating-uniform-flow
 kind: example
 title: "Transport of a translating rigid region: the rate integral vanishes for a travelling profile"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

@@ -3,7 +3,7 @@ id: def-sr-simultaneity-slice-and-rest-distance
 kind: definition
 domain: mathematics
 title: "Simultaneity slices and rest distance relative to a future unit timelike vector"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

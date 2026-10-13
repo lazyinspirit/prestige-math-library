@@ -2,7 +2,7 @@
 id: post-gr-classical-gravitational-action
 kind: postulate
 title: "Adopted classical gravitational action and variational field law"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

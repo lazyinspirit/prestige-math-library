@@ -2,7 +2,7 @@
 id: lem-blowups-of-projective-schemes-are-projective
 kind: lemma
 title: "Blowups of integral projective complex schemes are projective"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

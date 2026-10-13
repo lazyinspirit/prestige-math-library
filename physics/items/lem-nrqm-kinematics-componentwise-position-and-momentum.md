@@ -4,7 +4,7 @@ aliases: [nrqm-kinematics-componentwise-position-and-momentum]
 kind: lemma
 domain: mathematics
 title: "Componentwise position and momentum operators on the component-valued wave-function space"
-status: draft
+status: published
 origin: session
 dependency_level: 3
 deps: [def-axiom-of-choice, def-countable-choice, def-fourier-transform-on-l-one-of-rn, def-hilbert-space, def-infinitesimal-generator-of-a-unitary-group, def-nrqm-magnetic-and-detection-position-and-momentum-operators, def-schwartz-space-and-its-seminorms, def-sobolev-space-wkp-and-its-norm, def-strongly-continuous-one-parameter-unitary-group, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-weak-derivative-of-a-locally-integrable-function, lem-classical-derivatives-are-weak-derivatives, lem-complex-translation-and-approximate-identity-interfaces, lem-nrqm-composites-momentum-fourier-jacobian, lem-nrqm-kinematics-component-valued-wavefunction-identifications, lem-nrqm-kinematics-orthogonal-sums-of-self-adjoint-operators, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, lem-self-adjoint-operator-generates-a-strongly-continuous-unitary-group, thm-complex-exponential-is-entire-with-derivative-itself, thm-dominated-convergence, thm-plancherel, thm-stone-one-parameter-unitary-groups, lem-weak-derivatives-are-polynomial-fourier-multipliers]

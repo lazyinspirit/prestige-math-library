@@ -1,7 +1,7 @@
 ---
 page: cm-math-canonical-examples
 title: Cm Math Canonical — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-cm-free-particle-hamilton-jacobi-complete-integral

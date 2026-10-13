@@ -2,7 +2,7 @@
 id: def-quiver-full-flag-incidence-varieties-and-geometric-klr-generators
 kind: definition
 title: "Quiver full-flag incidence varieties and signed geometric KLR generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 27

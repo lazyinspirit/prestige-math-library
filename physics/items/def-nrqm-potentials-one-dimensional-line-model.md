@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared one-dimensional line model: state space, Hamiltonian, bound
   states and generalized stationary solutions"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

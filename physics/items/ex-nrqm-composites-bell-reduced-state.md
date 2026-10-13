@@ -4,7 +4,7 @@ aliases: [nrqm-composites-example-bell-reduced-state]
 kind: example
 domain: mathematics
 title: "Bell reduced state"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-nrqm-composites-hilbert-tensor-construction, thm-nrqm-composites-finite-partial-trace-and-schmidt, lem-nrqm-composites-rank-one-operator-calculus]

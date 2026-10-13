@@ -2,7 +2,7 @@
 id: thm-good-node-gives-the-simple-socle-and-head-of-residue-restriction
 kind: theorem
 title: "The good node gives the simple socle and head of the residue restriction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

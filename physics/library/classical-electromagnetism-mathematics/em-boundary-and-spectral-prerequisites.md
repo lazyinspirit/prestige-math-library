@@ -1,7 +1,7 @@
 ---
 page: em-boundary-and-spectral-prerequisites
 title: Em Boundary And Spectral Prerequisites
-status: draft
+status: published
 items: [lem-three-dimensional-radial-carleman-integer-weight, thm-bounded-potential-weak-unique-continuation-in-three-dimensions, thm-em-spherical-multipole-basis, lem-em-exterior-outgoing-scalar-uniqueness, lem-em-exterior-vector-helmholtz-mixed-boundary-existence, thm-em-elliptic-boundary-existence, thm-em-waveguide-spectral-completeness]
 examples: []
 ---

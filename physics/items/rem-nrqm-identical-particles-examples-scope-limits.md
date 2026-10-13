@@ -4,7 +4,7 @@ aliases: [nrqm-identical-particles-examples-scope-limits]
 kind: remark
 domain: physics
 title: "Scope of the identical-particles examples page"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps: [texp-nrqm-identical-particles-two-fermion-spatial-spin-symmetry, ex-nrqm-identical-particles-exchange-versus-coulomb-terms, def-nrqm-identical-particles-framework-species-sectors-and-preparations, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-preparation-and-apparatus]

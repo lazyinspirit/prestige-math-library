@@ -2,7 +2,7 @@
 id: pthm-cm08-moving-chart-energy-function
 kind: physics-theorem
 title: "The energy function of a moving chart: exact difference from the inertial mechanical energy and conservation along the chart solutions"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

@@ -4,7 +4,7 @@ aliases: [nrqm-symmetries-free-flow-multiplier-form]
 kind: lemma
 domain: mathematics
 title: "The free flow as a unimodular multiplier in the momentum representation"
-status: draft
+status: published
 origin: session
 dependency_level: 5
 deps: [def-axiom-of-choice, def-complex-exponential, def-countable-choice, def-hilbert-space,

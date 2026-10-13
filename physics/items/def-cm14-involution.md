@@ -2,7 +2,7 @@
 id: def-cm14-involution
 kind: definition
 title: "First integrals of the model's Hamiltonian and families in involution: the bracket criterion and differential independence"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 23

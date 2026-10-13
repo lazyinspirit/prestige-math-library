@@ -2,7 +2,7 @@
 id: lem-polynomial-quantum-highest-vectors-satisfy-all-divided-power-relations
 kind: lemma
 title: "Polynomial quantum highest vectors satisfy every divided-power highest relation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

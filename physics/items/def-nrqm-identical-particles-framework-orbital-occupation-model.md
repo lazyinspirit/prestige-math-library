@@ -4,7 +4,7 @@ aliases: [ nrqm-identical-particles-framework-orbital-occupation-model ]
 kind: definition
 domain: physics
 title: "The declared finite-mode model and its occupation readouts"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

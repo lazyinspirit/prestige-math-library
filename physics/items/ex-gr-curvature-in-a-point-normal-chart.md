@@ -2,7 +2,7 @@
 id: ex-gr-curvature-in-a-point-normal-chart
 kind: example
 title: "Curvature survives a first-order normal chart: an explicit metric, its normal form and its deviation field"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

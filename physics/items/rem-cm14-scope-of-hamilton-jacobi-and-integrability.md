@@ -2,7 +2,7 @@
 id: rem-cm14-scope-of-hamilton-jacobi-and-integrability
 kind: remark
 title: "Scope of the Hamilton-Jacobi and integrability statements: locality, the fibre hypotheses, global obstructions and the frequency conventions"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 28

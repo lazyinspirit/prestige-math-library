@@ -2,7 +2,7 @@
 id: thm-highest-weight-components-in-a-tensor-product-crystal
 kind: theorem
 title: "Highest weight components in a tensor product crystal"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -1,7 +1,7 @@
 ---
 page: the-degenerate-ariki-categorification-theorem
 title: "The Degenerate Ariki Categorification Theorem"
-status: draft
+status: published
 requires: [arakawa-suzuki-functors-and-higher-level-schur-weyl-duality, grothendieck-groups-and-graded-cartan-pairings]
 items: [def-degenerate-cyclotomic-hecke-tower-and-residue-functors,
         thm-the-degenerate-cyclotomic-hecke-g-zero-is-the-dual-highest-weight-module,

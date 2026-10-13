@@ -2,7 +2,7 @@
 id: ex-cm-linear-shear-generating-function
 kind: example
 title: "The linear shear: the second-kind generating function $S(q,P)=qP+\\lambda q^2/2$ and the matrix test"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

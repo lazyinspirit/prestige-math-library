@@ -2,7 +2,7 @@
 id: lem-minimal-parabolic-polynomial-flag-model-realizes-the-graded-diagram-relations
 kind: lemma
 title: "The minimal-parabolic polynomial flag model realizes the graded diagram relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

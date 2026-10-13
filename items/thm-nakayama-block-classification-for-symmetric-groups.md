@@ -2,7 +2,7 @@
 id: thm-nakayama-block-classification-for-symmetric-groups
 kind: theorem
 title: "Nakayama block classification for symmetric groups"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

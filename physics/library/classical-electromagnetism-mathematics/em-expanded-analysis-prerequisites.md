@@ -1,7 +1,7 @@
 ---
 page: em-expanded-analysis-prerequisites
 title: Em Expanded Analysis Prerequisites
-status: draft
+status: published
 items: [lem-em-bounded-error-model-comparison, lem-em-convergent-legendre-kernel, lem-em-global-retarded-root, lem-em-integrable-causal-dispersion, lem-em-mean-zero-coercivity-on-a-c-one-domain, lem-em-outgoing-spherical-hankel-dtn-bounds, lem-em-rectangular-pec-energy-completeness, lem-em-smooth-newtonian-upgrade, lem-em-symmetric-coercive-variational-solver, lem-em-thin-current-limit, lem-em-zero-boundary-coercivity, lem-em-dirichlet-resolvent-h-two-and-smooth-test-density, lem-em-finitely-subtracted-analytic-dispersion, lem-em-lift-specified-dirichlet-existence, lem-em-magnetic-dipole-remainder, lem-em-outgoing-source-helmholtz-and-diffraction, lem-em-spherical-harmonic-basis-and-addition, lem-em-spherical-mean-wave-identity, lem-em-ball-poisson-series-boundary-convergence, lem-em-helmholtz-boundary-representation, lem-em-particle-curve-variation, lem-em-prescribed-fractional-dirichlet-existence, lem-em-sphere-outgoing-dirichlet-to-neumann-map, lem-em-weak-neumann-and-transmission-existence, lem-em-parameter-preserving-smooth-extension-on-a-smooth-domain, lem-em-parameter-dependent-smooth-poisson-boundary-solvers, lem-em-smooth-domain-elliptic-regularity, lem-em-smooth-pec-cavity-spectral-closure, lem-em-pec-cavity-eigenfield-boundary-regularity]
 examples: []
 ---

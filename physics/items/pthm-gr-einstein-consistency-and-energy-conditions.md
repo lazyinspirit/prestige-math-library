@@ -2,7 +2,7 @@
 id: pthm-gr-einstein-consistency-and-energy-conditions
 kind: physics-theorem
 title: "Consistency conditions of the adopted field law: conservation, trace, parameter variation and the energy conditions of a perfect fluid"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

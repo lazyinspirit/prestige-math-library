@@ -2,7 +2,7 @@
 id: thm-em-radiation-asymptotic-flux
 kind: theorem
 title: "Uniform far-zone asymptotics and retarded-time flux limit for compact conserved smooth sources"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

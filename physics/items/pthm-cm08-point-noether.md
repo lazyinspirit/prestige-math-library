@@ -2,7 +2,7 @@
 id: pthm-cm08-point-noether
 kind: physics-theorem
 title: "The point Noether theorem of the model: conservation of the charge of a strict symmetry, and the residual-force rate"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

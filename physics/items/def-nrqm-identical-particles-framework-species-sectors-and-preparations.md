@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "Declared species sectors and their preparations: the framework's reading
   of P6"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps:

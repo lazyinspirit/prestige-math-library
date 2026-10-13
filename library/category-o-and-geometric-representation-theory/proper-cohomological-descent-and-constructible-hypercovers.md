@@ -1,7 +1,7 @@
 ---
 page: proper-cohomological-descent-and-constructible-hypercovers
 title: "Proper Cohomological Descent And Constructible Hypercovers"
-status: draft
+status: published
 requires: [algebraic-spaces-stacks-and-derived-algebraic-geometry-foundations, analytic-derived-six-operations-and-duality, constructible-incidence-and-cochain-models, double-complexes-exact-couples-and-convergence, equivariant-constructible-perverse-foundations, relations-functions-and-quotients, spectral-sequences]
 items: [lem-bicosimplicial-derived-total-complex-agrees-with-diagonal-totalization, lem-proper-surjective-maps-have-cohomological-descent-for-constructible-field-sheaves, thm-proper-hypercovers-compute-constructible-derived-cohomology]
 examples: []

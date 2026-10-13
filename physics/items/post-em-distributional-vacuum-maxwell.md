@@ -3,7 +3,7 @@ id: post-em-distributional-vacuum-maxwell
 kind: postulate
 title: "Distributional vacuum Maxwell equations for the declared point and stationary-sheet sources"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 15
 deps: [def-em-weak-sources,

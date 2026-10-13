@@ -1,7 +1,7 @@
 ---
 page: compact-support-sheaf-calculus-examples
 title: "Compact Support Sheaf Calculus — Examples"
-status: draft
+status: published
 requires:
   - compact-support-sheaf-calculus
 items: []

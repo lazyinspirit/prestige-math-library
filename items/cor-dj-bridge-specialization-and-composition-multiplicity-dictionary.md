@@ -2,7 +2,7 @@
 id: cor-dj-bridge-specialization-and-composition-multiplicity-dictionary
 kind: corollary
 title: "Polytabloid specialization and the exact signed multiplicity dictionary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: ex-gr-flrw-redshift-conservation-check
 kind: example
 title: "An explicit null geodesic in an exponentially expanding flat FLRW datum: constant aV^t and the observer-energy ratio"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

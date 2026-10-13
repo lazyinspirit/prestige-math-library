@@ -2,7 +2,7 @@
 id: thm-cm-momentum-and-angular-momentum-balance
 kind: theorem
 title: "Total momentum and total angular momentum balances for a finite system with antisymmetric pair forces; pairwise central forces make the internal torque vanish"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: thm-hodge-riemann-for-indecomposable-soergel-bimodules
 kind: theorem
 title: "Simultaneous induction: Soergel's conjecture, hard Lefschetz and the Hodge-Riemann relations hold for all elements"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 11

@@ -6,7 +6,7 @@ kind: definition
 domain: physics
 title: 'Declared marked two-component model: path components, marker states,
   phase family, detection weights and fringe visibility'
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

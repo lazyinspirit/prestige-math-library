@@ -2,7 +2,7 @@
 id: prop-cm-linearization-of-the-mechanical-system-at-an-equilibrium
 kind: proposition
 title: "Linearisation of the mechanical system at an equilibrium: M(q_0) xi'' + D²U(q_0) xi = 0, and the small-oscillation quadratic model"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

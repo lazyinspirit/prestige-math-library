@@ -2,7 +2,7 @@
 id: lem-divided-power-half-has-integral-skew-string-coefficients
 kind: lemma
 title: "Integral skew-string coefficients on the divided-power negative half"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

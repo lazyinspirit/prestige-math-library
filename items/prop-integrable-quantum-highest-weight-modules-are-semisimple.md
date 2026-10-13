@@ -2,7 +2,7 @@
 id: prop-integrable-quantum-highest-weight-modules-are-semisimple
 kind: proposition
 title: "Integrable bounded-above quantum modules with finite-dimensional weight spaces are direct sums of simple highest weight modules"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

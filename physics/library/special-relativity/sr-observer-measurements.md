@@ -1,7 +1,7 @@
 ---
 page: sr-observer-measurements
 title: "Observer Measurements"
-status: draft
+status: published
 library: physics
 items:
   - def-sr-chart-tetrad-and-congruence-distinction

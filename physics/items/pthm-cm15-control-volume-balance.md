@@ -2,7 +2,7 @@
 id: pthm-cm15-control-volume-balance
 kind: physics-theorem
 title: "The finite-regularity open-flow model: moving-control-region mass and momentum balances, their material and fixed special cases, and the inlet/outlet decomposition reproducing the open-body and rocket laws"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

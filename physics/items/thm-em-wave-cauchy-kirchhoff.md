@@ -2,7 +2,7 @@
 id: thm-em-wave-cauchy-kirchhoff
 kind: theorem
 title: "The three-dimensional wave Cauchy problem: Kirchhoff representation, uniqueness, domain of dependence and compact support"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals, thm-continuous-on-a-rectangle-is-riemann-integrable, def-ck-euclidean-maps-and-diffeomorphisms, def-countable-choice, def-euclidean-inner-product, def-forward-and-backward-wave-cones-domain-of-dependence-and-influence, def-laplacian-of-a-c2-function, def-surface-integral-on-a-compact-c-one-hypersurface, def-wave-equation-cauchy-data-and-wave-speed, lem-derivative-of-an-integral-with-moving-endpoints, lem-em-parameter-integrals, lem-em-spherical-mean-family-smoothness, lem-em-spherical-mean-wave-identity, lem-euclidean-chart-measure-agrees-with-polar-surface-measure, lem-first-moment-of-the-unit-sphere-vanishes, thm-algebra-of-derivatives, thm-cauchy-schwarz-and-the-euclidean-norm, thm-chain-rule-for-total-derivatives, thm-ck-euclidean-maps-closed-under-algebra-and-composition, thm-clairaut-schwarz-mixed-partials, thm-heine-cantor-metric, thm-integral-triangle-inequality, thm-linearity-of-the-lebesgue-integral-on-l-one, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-lebesgue-measure-of-a-box-of-every-kind, thm-continuous-partial-derivatives-imply-total-differentiability, thm-domain-of-dependence-and-local-uniqueness, thm-extreme-value-metric, thm-heine-borel-rn]

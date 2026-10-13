@@ -1,7 +1,7 @@
 ---
 page: cm09-coupled-oscillations-and-approximation
 title: "Coupled oscillations and approximation"
-status: draft
+status: published
 library: physics
 items:
   - def-cm09-coupled-quadratic-model

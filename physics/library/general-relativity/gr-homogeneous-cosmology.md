@@ -18,7 +18,7 @@ requires:
   - gr-curvature-and-tides
 page: gr-homogeneous-cosmology
 title: "Homogeneous Cosmology"
-status: draft
+status: published
 library: physics
 items:
   - lem-gr-constant-rescaling-preserves-levi-civita-and-curvature

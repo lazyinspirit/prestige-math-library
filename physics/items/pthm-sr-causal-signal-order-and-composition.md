@@ -2,7 +2,7 @@
 id: pthm-sr-causal-signal-order-and-composition
 kind: physics-theorem
 title: "Signals in the model: receipt in the future cone, relay composition, absence of closed signal loops, and frame independence of the causal signal condition"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 provenance:

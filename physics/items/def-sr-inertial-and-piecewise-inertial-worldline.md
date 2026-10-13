@@ -2,7 +2,7 @@
 id: def-sr-inertial-and-piecewise-inertial-worldline
 kind: definition
 title: "Inertial and piecewise inertial worldlines of the affine Minkowski model"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-affine-minkowski-model, def-sr-regular-causal-curve-and-worldline, def-causal-classification-of-lorentz-vectors, def-time-orientation-and-future-causal-sets, def-inertial-frame-and-inertial-chart, def-vector-valued-derivative-and-integral, def-interval, thm-unique-coordinates-with-respect-to-an-ordered-basis, def-affine-space-and-displacement, lem-affine-minkowski-charts-form-a-smooth-atlas]

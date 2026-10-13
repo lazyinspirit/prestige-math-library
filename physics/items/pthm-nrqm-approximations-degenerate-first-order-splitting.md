@@ -6,7 +6,7 @@ domain: physics
 title: "Degenerate stationary perturbation: the perturbed eigenvalues stay
   within 4 lambda^2 v^2/g of the first-order shifts, and no branch relaxation is
   asserted"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

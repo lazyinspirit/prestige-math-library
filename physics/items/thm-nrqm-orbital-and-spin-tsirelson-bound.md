@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-tsirelson-bound]
 kind: theorem
 domain: mathematics
 title: "Tsirelson bound"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [prop-nrqm-orbital-and-spin-finite-spin-matrices, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-chsh-and-finite-sampling-law, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-hilbert-space-adjoint, thm-hilbert-adjoint-properties, def-inner-product-space, cor-inner-product-induces-a-norm, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-countable-choice, def-self-adjoint-positive-unitary-and-normal-operator]

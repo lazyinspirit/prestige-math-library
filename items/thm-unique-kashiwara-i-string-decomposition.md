@@ -2,7 +2,7 @@
 id: thm-unique-kashiwara-i-string-decomposition
 kind: theorem
 title: "Uniqueness of the $i$-string decomposition of an integrable module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

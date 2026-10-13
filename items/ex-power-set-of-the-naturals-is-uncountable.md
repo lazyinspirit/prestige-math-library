@@ -2,7 +2,7 @@
 id: ex-power-set-of-the-naturals-is-uncountable
 kind: example
 title: "$\\mathcal{P}(\\mathbb{N})$ is uncountable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

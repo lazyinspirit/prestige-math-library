@@ -2,7 +2,7 @@
 id: ex-em-boundary-and-spectral-prerequisites-hypothesis-boundaries
 kind: example
 title: Explicit mathematical hypothesis/convention examples
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 7

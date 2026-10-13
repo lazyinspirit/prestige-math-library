@@ -3,7 +3,7 @@ id: ex-sr-time-dilation-at-beta-three-fifths
 kind: example
 domain: mathematics
 title: "Worked time dilation at speed 3c/5"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

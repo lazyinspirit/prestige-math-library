@@ -2,7 +2,7 @@
 id: lem-cm-modified-energy-differs-by-order-two
 kind: lemma
 title: The optimal modified Hamiltonian differs from the original by order two
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 15

@@ -3,7 +3,7 @@ id: lem-gr-periodic-sobolev-algebra
 kind: lemma
 title: "The periodic Sobolev space H^k of the three-torus is a Banach algebra
   for k at least four"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

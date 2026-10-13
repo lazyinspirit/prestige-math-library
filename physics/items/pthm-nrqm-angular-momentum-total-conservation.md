@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Conservation of total angular momentum for a spin-independent
   rotation-invariant bounded-potential dynamics"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

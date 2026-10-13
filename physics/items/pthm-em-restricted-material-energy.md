@@ -2,7 +2,7 @@
 id: pthm-em-restricted-material-energy
 kind: physics-theorem
 title: "Energy balance and Ohmic dissipation for the constant nondispersive linear model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

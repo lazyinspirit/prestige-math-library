@@ -2,7 +2,7 @@
 id: prop-fi-module-realizing-one-padded-irreducible-family
 kind: proposition
 title: "Each padded irreducible family is realised by a finitely generated FI-module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

@@ -4,7 +4,7 @@ aliases: [nrqm-bell-local-response-representation]
 kind: definition
 domain: mathematics
 title: "Local-response representations of a binary correlation model: one setting-independent specification space and per-station response laws"
-status: draft
+status: published
 origin: session
 dependency_level: 1
 deps: [def-nrqm-bell-binary-correlation-models, def-probability-measure, def-measure-space, def-measurable-function-between-measurable-spaces, def-expectation-of-a-nonnegative-or-integrable-random-variable, def-random-element-and-real-random-variable]

@@ -3,7 +3,7 @@ id: thm-cm-instability-of-the-intermediate-axis
 kind: theorem
 title: "Instability of spin about the intermediate principal axis of the
   torque-free top"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

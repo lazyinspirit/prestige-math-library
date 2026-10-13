@@ -2,7 +2,7 @@
 id: lem-gr-galerkin-projection-properties
 kind: lemma
 title: "The Galerkin projection is self-adjoint, commutes with derivatives, is a contraction in every H^r, converges to the identity and has the sharp Fourier-tail bound"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

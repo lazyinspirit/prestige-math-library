@@ -2,7 +2,7 @@
 id: lem-sr-four-momentum-in-inertial-frame
 kind: lemma
 title: "Four-momentum components, energy-velocity relation and passive boost transformation in an inertial frame"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

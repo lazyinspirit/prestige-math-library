@@ -2,7 +2,7 @@
 id: post-gr-spacetime-and-classical-domain
 kind: postulate
 title: "Adopted spacetime model and classical domain of the gravitational framework"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

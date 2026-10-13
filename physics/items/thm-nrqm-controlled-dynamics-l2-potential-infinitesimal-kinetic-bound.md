@@ -5,7 +5,7 @@ aliases:
 kind: theorem
 domain: mathematics
 title: L^2 potential infinitesimal kinetic bound
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

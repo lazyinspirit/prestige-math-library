@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-dirichlet-diagonal-domain-identification]
 kind: theorem
 domain: mathematics
 title: "Identification of the Dirichlet Laplacian with the sine diagonal operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, thm-nrqm-intervals-sine-on-completeness, lem-nrqm-intervals-integration-by-parts, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma, thm-nrqm-oscillator-diagonal-spectrum, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, thm-parseval-equivalences-for-a-complete-orthonormal-family, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

@@ -3,7 +3,7 @@ id: ex-cm17-periodic-shear-exact-solution-check
 kind: example
 title: "Periodic shear fields: an exact steady Euler solution, failure for the
   viscous branch, and the classification of steady periodic shears"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

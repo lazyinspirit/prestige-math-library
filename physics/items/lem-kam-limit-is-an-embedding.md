@@ -2,7 +2,7 @@
 id: lem-kam-limit-is-an-embedding
 kind: lemma
 title: "The KAM limit parametrisation is an embedding of the torus: injectivity modulo $2\\pi$, rank-$n$ differential and Lipschitz inverse"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 10

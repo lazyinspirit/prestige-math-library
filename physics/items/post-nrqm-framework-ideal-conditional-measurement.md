@@ -3,7 +3,7 @@ id: post-nrqm-framework-ideal-conditional-measurement
 kind: postulate
 title: "Ideal conditional measurement postulate P3: the projective Lueders
   update and discarded outcomes"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 7

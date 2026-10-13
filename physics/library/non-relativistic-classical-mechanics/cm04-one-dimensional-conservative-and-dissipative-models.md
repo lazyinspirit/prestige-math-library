@@ -1,7 +1,7 @@
 ---
 page: cm04-one-dimensional-conservative-and-dissipative-models
 title: "One-dimensional conservative and dissipative models"
-status: draft
+status: published
 library: physics
 items:
   - def-cm04-one-dimensional-models-and-equilibria

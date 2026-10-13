@@ -1,7 +1,7 @@
 ---
 page: type-a-hecke-specht-modules-and-cellular-bases-examples
 title: "Type-A Hecke Specht Modules and Cellular Bases — Examples"
-status: draft
+status: published
 requires: [type-a-hecke-specht-modules-and-cellular-bases]
 items: []
 examples: [ex-hecke-jucys-murphy-elements-through-rank-four,

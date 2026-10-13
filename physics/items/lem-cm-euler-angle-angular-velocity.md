@@ -2,7 +2,7 @@
 id: lem-cm-euler-angle-angular-velocity
 kind: lemma
 title: "Angular velocity in Euler angles: $\\omega_3=\\psi'+\\varphi'\\cos\\theta$ and $\\omega_1^2+\\omega_2^2=\\theta'^2+\\varphi'^2\\sin^2\\theta$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

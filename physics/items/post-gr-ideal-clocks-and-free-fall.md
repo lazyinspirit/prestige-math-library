@@ -2,7 +2,7 @@
 id: post-gr-ideal-clocks-and-free-fall
 kind: postulate
 title: "Adopted clock, free-fall and light-ray assumptions of the classical gravitational framework"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

@@ -2,7 +2,7 @@
 id: def-crystal-graph-epsilon-phi-and-weight
 kind: definition
 title: "The crystal graph, $\\varepsilon_i$, $\\varphi_i$ and the weight function"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

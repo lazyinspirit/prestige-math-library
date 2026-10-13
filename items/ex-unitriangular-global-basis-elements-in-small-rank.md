@@ -2,7 +2,7 @@
 id: ex-unitriangular-global-basis-elements-in-small-rank
 kind: example
 title: "Unitriangular global basis elements at small rank"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 22

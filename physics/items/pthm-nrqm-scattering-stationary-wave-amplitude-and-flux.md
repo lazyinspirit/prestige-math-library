@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The model's stationary scattering wave, its outgoing amplitude and the
   differential and total cross-section readings"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

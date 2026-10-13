@@ -2,7 +2,7 @@
 id: lem-affine-algebraic-whitney-strata-admit-finite-critical-strongly-plurisubharmonic-distance-exhaustions
 kind: lemma
 title: "Affine algebraic Whitney strata admit distance exhaustions with finitely many stratified Morse points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

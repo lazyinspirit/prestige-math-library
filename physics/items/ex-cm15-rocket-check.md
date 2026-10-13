@@ -2,7 +2,7 @@
 id: ex-cm15-rocket-check
 kind: example
 title: "A declared rocket check: initial mass $3\\,\\mathrm{kg}$, loss rate $1\\,\\mathrm{kg\\,s^{-1}}$ and relative exhaust speed $2\\,\\mathrm{m\\,s^{-1}}$ give $v=u_e\\ln(m_0/m)n$ and show that $(mv)'=F$ fails"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

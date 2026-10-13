@@ -4,7 +4,7 @@ aliases: [ nrqm-potentials-delta-point-interaction-bound-state ]
 kind: physics-theorem
 domain: physics
 title: "The zero-range (delta) model: self-adjointness and the unique attractive bound-state preparation"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

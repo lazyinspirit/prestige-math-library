@@ -2,7 +2,7 @@
 id: rem-cm-inference-and-uncertainty-scope
 kind: remark
 title: "Scope of the sampling, propagation and inference interfaces"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

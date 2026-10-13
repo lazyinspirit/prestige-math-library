@@ -2,7 +2,7 @@
 id: ex-gr-observer-energy-of-a-boosted-test-body
 kind: example
 title: "Observer energy, spatial momentum and mass shell of a boosted test body"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

@@ -4,7 +4,7 @@ aliases: [ nrqm-uncertainty-examples-scope-limits ]
 kind: remark
 domain: physics
 title: "What the examples companion records and what it does not"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 14
 deps:

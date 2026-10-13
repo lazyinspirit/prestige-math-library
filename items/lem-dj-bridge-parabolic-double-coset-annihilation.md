@@ -2,7 +2,7 @@
 id: lem-dj-bridge-parabolic-double-coset-annihilation
 kind: lemma
 title: "Row symmetrizers and signed column symmetrizers vanish outside dominance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

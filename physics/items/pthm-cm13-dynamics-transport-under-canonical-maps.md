@@ -2,7 +2,7 @@
 id: pthm-cm13-dynamics-transport-under-canonical-maps
 kind: physics-theorem
 title: "Equal-dimensional canonical transformations of a potential presentation conjugate Hamiltonian fields and transport systems and brackets"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 22

@@ -3,7 +3,7 @@ id: thm-cm-heavy-top-reduction
 kind: theorem
 title: "Reduction of the heavy symmetric top system: conserved momenta,
   one-dimensional $\\theta$ equation and conserved reduced energy"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

@@ -3,7 +3,7 @@ id: ex-gr-killing-energy-charge-of-a-static-dust
 kind: example
 title: "The Killing energy of a static dust in flat space and its conservation
   across slices"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

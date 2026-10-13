@@ -2,7 +2,7 @@
 id: lem-gr-chronology-openness
 kind: lemma
 title: "Openness of the chronological future and past, openness of the chronological relation, and closure of future and past sets"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 19

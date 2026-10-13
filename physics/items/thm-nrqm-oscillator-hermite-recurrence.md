@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-hermite-recurrence]
 kind: theorem
 domain: mathematics
 title: "Hermite recurrence"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, cor-cauchy-schwarz-inequality-for-l-two, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line, def-complex-exponential, lem-complex-exponential-series-converges-everywhere, thm-derivative-of-exponential, thm-exponential-is-strictly-increasing, cor-exponential-reciprocal-and-positivity, thm-complex-exponential-addition-and-real-extension, thm-chain-rule, thm-algebra-of-derivatives, thm-ftc-second-part, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, def-countable-choice, thm-lebesgue-measure-under-dilations-and-reflections]

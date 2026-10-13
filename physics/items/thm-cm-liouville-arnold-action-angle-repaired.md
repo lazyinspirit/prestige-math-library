@@ -2,7 +2,7 @@
 id: thm-cm-liouville-arnold-action-angle-repaired
 kind: theorem
 title: "Action-angle coordinates on a saturated proper submersion neighbourhood of a compact connected regular fibre, with the two-form primitive supplied locally"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

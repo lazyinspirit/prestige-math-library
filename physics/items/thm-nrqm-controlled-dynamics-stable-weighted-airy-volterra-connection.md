@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-stable-weighted-airy-volterra-connection]
 kind: theorem
 domain: mathematics
 title: "Stable weighted Airy Volterra connection"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [thm-nrqm-controlled-dynamics-liouville-turning-point-transformation, thm-nrqm-controlled-dynamics-airy-envelopes-and-asymptotic-coefficients, thm-nrqm-controlled-dynamics-airy-contour-and-fresnel-normalization, lem-fundamental-theorem-of-calculus-for-banach-valued-continuous-curves, def-bochner-integrable-function, def-countable-choice]

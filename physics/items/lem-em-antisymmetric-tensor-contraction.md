@@ -2,7 +2,7 @@
 id: lem-em-antisymmetric-tensor-contraction
 kind: lemma
 title: "Antisymmetric contractions vanish and $mU'=q\\Phi(U)$ preserves $\\eta(U,U)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

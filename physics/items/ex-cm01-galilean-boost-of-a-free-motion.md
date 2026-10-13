@@ -2,7 +2,7 @@
 id: ex-cm01-galilean-boost-of-a-free-motion
 kind: example
 title: "A worked Galilean boost: the same uniform motion in two inertial frames"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

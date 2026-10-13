@@ -2,7 +2,7 @@
 id: ex-cm18-frame-change-of-an-observation-model
 kind: example
 title: "Frame change of a declared protocol: how the prediction map and an additive error transform between two inertial frames"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps: [def-cm18-observable-model, pthm-cm01-galilean-kinematics, post-cm01-frames, def-cm-covariance-matrix-of-a-random-vector, lem-cm-linearized-propagation-of-covariance, def-cm01-units, def-random-element-and-real-random-variable, def-measurable-function-between-measurable-spaces, thm-continuous-preimages-of-borel-sets-are-borel, cor-expectation-linearity-monotonicity-and-modulus-bound]

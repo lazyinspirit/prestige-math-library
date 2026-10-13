@@ -2,7 +2,7 @@
 id: thm-crystal-basis-tensor-product-rule
 kind: theorem
 title: "The crystal basis of a tensor product and the two-case operator rule"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

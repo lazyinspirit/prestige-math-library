@@ -4,7 +4,7 @@ aliases: [nrqm-uncertainty-bounded-borel-calculus-of-commuting-operators]
 kind: lemma
 domain: mathematics
 title: "Bounded Borel calculus of strongly commuting self-adjoint operators"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-adjoint-of-a-densely-defined-unbounded-operator, def-axiom-of-choice, def-borel-sigma-algebra, def-bounded-linear-operator, def-countable-choice, def-hilbert-space, def-operator-norm, def-projection-valued-measure, def-self-adjoint-positive-unitary-and-normal-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-nrqm-uncertainty-strong-spectral-commutation, thm-bounded-borel-pvm-integral, thm-pvm-integral-is-a-star-homomorphism, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, lem-scalar-and-complex-measures-from-a-pvm, thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact, cor-rn-is-locally-compact-and-sigma-compact, thm-metric-hausdorff-separation, lem-open-subsets-of-r-are-countable-unions-of-rational-intervals, thm-heine-borel-r, thm-monotone-convergence-for-the-integral]

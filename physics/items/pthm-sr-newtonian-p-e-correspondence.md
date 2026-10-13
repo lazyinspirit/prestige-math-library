@@ -3,7 +3,7 @@ id: pthm-sr-newtonian-p-e-correspondence
 kind: physics-theorem
 domain: physics
 title: 'Specified low-speed momentum-energy correspondence between the relativistic measured quantities and the Newtonian comparison quantities'
-status: draft
+status: published
 origin: session
 dependency_level: 16
 deps: [post-sr-massive-particle-dynamics, def-sr-newtonian-comparison-quantities, def-sr-si-units-and-coordinate-conventions, def-sr-regular-causal-curve-and-worldline, def-sr-observed-energy-momentum-and-kinetic-energy, lem-sr-energy-momentum-observer-identities, thm-sr-proper-time-and-observer-decomposition, lem-sr-four-momentum-in-inertial-frame, lem-sr-uniform-low-speed-expansion-of-observer-quantities, lem-sr-uniform-low-speed-taylor-remainder, def-inertial-frame-and-inertial-chart, def-spatial-euclidean-structure-of-an-inertial-frame, def-sr-affine-minkowski-model]

@@ -2,7 +2,7 @@
 id: ex-cm-pendulum-linearization-error-check
 kind: example
 title: "The pendulum linearisation bound at $g=l=1$: exact error bound for the data $\\delta=1/100$, $T=1$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

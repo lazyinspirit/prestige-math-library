@@ -2,7 +2,7 @@
 id: lem-gr-quotient-by-isometric-free-proper-action
 kind: lemma
 title: "Quotients of Lorentzian manifolds by free proper isometric discrete actions"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

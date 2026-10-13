@@ -2,7 +2,7 @@
 id: ex-cm16-pulse-horseshoe-data-check
 kind: example
 title: "The pulsed horseshoe on declared data: $a=100$, the radicand box $[74,126]$, the contraction factor $1/\\sqrt{74}$, the limiting quadratic fixed points $1\\pm\\sqrt{101}$, and the physical bounds of the coded states at $\\ell_0=1\\,\\mathrm m$, $m=1\\,\\mathrm{kg}$, $\\omega_0=2\\pi\\,\\mathrm{s^{-1}}$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

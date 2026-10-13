@@ -1,7 +1,7 @@
 ---
 page: cm08-symmetry-noether-and-conditional-conservation-examples
 title: "Symmetry, Noether and conditional conservation — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

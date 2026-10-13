@@ -2,7 +2,7 @@
 id: lem-gr-temporal-functions-and-time-functions
 kind: lemma
 title: "Temporal functions are time functions, and time functions forbid closed causal curves"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

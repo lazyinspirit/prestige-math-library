@@ -2,7 +2,7 @@
 id: pthm-cm03-momentum-balance
 kind: physics-theorem
 title: "Total momentum balance and centre-of-mass equation for a model with antisymmetric pair forces"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

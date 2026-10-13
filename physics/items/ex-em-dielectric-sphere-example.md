@@ -2,7 +2,7 @@
 id: ex-em-dielectric-sphere-example
 kind: example
 title: "Uniform-field dielectric sphere: candidate solution and its class"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

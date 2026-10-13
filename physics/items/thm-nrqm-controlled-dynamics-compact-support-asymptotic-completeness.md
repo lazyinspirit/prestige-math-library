@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-compact-support-asymptotic-completeness]
 kind: theorem
 domain: mathematics
 title: "Compact-support asymptotic completeness"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [thm-riesz-representation-for-hilbert-space, lem-nrqm-controlled-dynamics-cc-separable-spectral-calculus, thm-plancherel, thm-polar-coordinates-formula-for-lebesgue-measure, thm-nrqm-controlled-dynamics-compact-scattering-defects, thm-nrqm-controlled-dynamics-mellin-incoming-and-outgoing-propagation, thm-riemann-lebesgue, thm-norm-limit-of-compact-operators-is-compact, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-hilbert-space, def-countable-choice]

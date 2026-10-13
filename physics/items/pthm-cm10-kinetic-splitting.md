@@ -2,7 +2,7 @@
 id: pthm-cm10-kinetic-splitting
 kind: physics-theorem
 title: "Total momentum, kinetic-energy splitting and centre-of-mass angular momentum of a rigid-material motion"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

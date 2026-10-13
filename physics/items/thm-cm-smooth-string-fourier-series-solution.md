@@ -2,7 +2,7 @@
 id: thm-cm-smooth-string-fourier-series-solution
 kind: theorem
 title: "The classical $C^2$ fixed-end string: the sine series solves the wave equation with the given data, uniquely, with an explicit tail bound"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

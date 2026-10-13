@@ -3,7 +3,7 @@ id: lem-em-separated-phasor-calculus
 kind: lemma
 domain: mathematics
 title: "Calculus of separated phasor fields: real-part derivative identities and amplitude injectivity"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-ck-euclidean-maps-and-diffeomorphisms, def-complex-conjugate-real-imaginary-part-and-modulus, def-complex-numbers-and-arithmetic, def-directional-and-partial-derivatives, def-divergence-and-curl-of-a-c1-vector-field, def-complex-exponential, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, thm-complex-exponential-is-entire-with-derivative-itself, thm-complex-numbers-form-a-field, thm-sine-cosine-zero-sets-and-fundamental-period, thm-sine-and-cosine-addition-formulas, cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, thm-derivative-of-exponential, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, cor-exponential-reciprocal-and-positivity]

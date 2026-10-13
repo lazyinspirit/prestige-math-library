@@ -4,7 +4,7 @@ aliases: [ nrqm-oscillator-framework-quadratic-potential-model ]
 kind: definition
 domain: physics
 title: "The quadratic-potential oscillator model of the framework"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps:

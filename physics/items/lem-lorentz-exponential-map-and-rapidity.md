@@ -2,7 +2,7 @@
 id: lem-lorentz-exponential-map-and-rapidity
 kind: lemma
 title: "The Lorentz exponential: exp(sK) is proper orthochronous, and boosts are exponentials of generators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

@@ -2,7 +2,7 @@
 id: thm-soergels-struktursatz-full-faithfulness-on-projectives
 kind: theorem
 title: "Soergel's Struktursatz: the functor V is fully faithful on projectives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

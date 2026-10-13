@@ -3,7 +3,7 @@ id: ex-nrqm-state-geometry-nonunique-preparation-ensembles
 kind: example
 domain: physics
 title: "One two-level state from two different preparation ensembles"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps:

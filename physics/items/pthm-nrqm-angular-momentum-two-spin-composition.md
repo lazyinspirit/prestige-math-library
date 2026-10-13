@@ -4,7 +4,7 @@ aliases: [nrqm-angular-momentum-two-spin-composition]
 kind: physics-theorem
 domain: physics
 title: "Composition of two spin labels: total spin operators, the Clebsch-Gordan block decomposition and the spin-half singlet"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps: [def-axiom-of-choice, def-countable-choice, def-dimension, def-hilbert-space, def-inner-product-space, def-linear-subspace, def-nrqm-angular-momentum-framework-angular-momentum-observables, def-nrqm-framework-quantities-and-units, def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-state-geometry-framework-state-space, def-orthogonality-and-orthogonal-complement, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-self-adjoint-positive-unitary-and-normal-operator, lem-nrqm-composites-hilbert-tensor-construction, post-nrqm-framework-identical-particles-and-spin, post-nrqm-framework-state-and-composition, prop-nrqm-orbital-and-spin-finite-spin-matrices, thm-nrqm-orbital-and-spin-tensor-spin-composition]

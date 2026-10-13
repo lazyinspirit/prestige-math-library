@@ -2,7 +2,7 @@
 id: lem-normalized-type-a-soergel-bimodules-are-self-dual-and-have-length-degree-bounds
 kind: lemma
 title: "Normalized type-A Soergel bimodules are self-dual and have length degree bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 2

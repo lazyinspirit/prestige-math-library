@@ -2,7 +2,7 @@
 id: ex-a-level-two-cyclotomic-polynomial-from-highest-weight-filtration
 kind: example
 title: "A level-two cyclotomic polynomial from the highest-weight filtration"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

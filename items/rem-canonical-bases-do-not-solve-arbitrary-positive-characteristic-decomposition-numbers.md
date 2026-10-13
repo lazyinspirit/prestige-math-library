@@ -2,7 +2,7 @@
 id: rem-canonical-bases-do-not-solve-arbitrary-positive-characteristic-decomposition-numbers
 kind: remark
 title: "Canonical bases do not solve arbitrary positive-characteristic decomposition numbers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 46

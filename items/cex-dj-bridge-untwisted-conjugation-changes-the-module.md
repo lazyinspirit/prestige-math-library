@@ -2,7 +2,7 @@
 id: cex-dj-bridge-untwisted-conjugation-changes-the-module
 kind: counterexample
 title: "Untwisted conjugation changes the module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

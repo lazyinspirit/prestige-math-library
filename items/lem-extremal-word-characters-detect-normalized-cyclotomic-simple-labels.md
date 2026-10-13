@@ -2,7 +2,7 @@
 id: lem-extremal-word-characters-detect-normalized-cyclotomic-simple-labels
 kind: lemma
 title: "Extremal word characters detect normalized cyclotomic simple labels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 21

@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Precession of a two-level preparation: exact phases, probabilities and a
   Bloch-vector rotation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

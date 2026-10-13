@@ -2,7 +2,7 @@
 id: def-finite-generation-and-generation-degree-of-an-fi-module
 kind: definition
 title: "Span, finite generation and generation degree of an FI-module"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

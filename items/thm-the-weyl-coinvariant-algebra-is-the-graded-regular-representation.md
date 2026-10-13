@@ -2,7 +2,7 @@
 id: thm-the-weyl-coinvariant-algebra-is-the-graded-regular-representation
 kind: theorem
 title: The coinvariant algebra is the graded regular representation of W
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

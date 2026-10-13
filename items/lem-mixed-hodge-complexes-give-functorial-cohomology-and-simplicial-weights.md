@@ -2,7 +2,7 @@
 id: lem-mixed-hodge-complexes-give-functorial-cohomology-and-simplicial-weights
 kind: lemma
 title: "Mixed Hodge complex cohomology and simplicial weights"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

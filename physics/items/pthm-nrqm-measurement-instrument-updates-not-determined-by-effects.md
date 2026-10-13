@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Outcome effects do not determine the conditional update, and general
   instruments need not be repeatable"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

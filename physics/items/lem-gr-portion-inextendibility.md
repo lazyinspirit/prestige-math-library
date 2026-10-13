@@ -2,7 +2,7 @@
 id: lem-gr-portion-inextendibility
 kind: lemma
 title: "A maximal connected portion of an inextendible causal curve inside an open subset is inextendible there"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

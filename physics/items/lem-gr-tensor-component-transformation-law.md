@@ -2,7 +2,7 @@
 id: lem-gr-tensor-component-transformation-law
 kind: lemma
 title: "The component transformation law of a smooth tensor field"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

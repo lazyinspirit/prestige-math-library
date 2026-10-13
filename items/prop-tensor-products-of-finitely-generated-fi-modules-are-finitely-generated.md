@@ -2,7 +2,7 @@
 id: prop-tensor-products-of-finitely-generated-fi-modules-are-finitely-generated
 kind: proposition
 title: "Tensor products of finitely generated FI-modules are finitely generated"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

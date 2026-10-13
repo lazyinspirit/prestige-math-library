@@ -2,7 +2,7 @@
 id: lem-em-interface-wave-linear-system
 kind: lemma
 title: "The two-equation interface system at normal incidence"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-laguerre-bound-energy-exhaustion]
 kind: theorem
 domain: mathematics
 title: "Laguerre bound energy exhaustion"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps: [thm-nrqm-coulomb-kummer-recurrence-and-termination, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-essential-spectrum, thm-nrqm-coulomb-infinitesimal-kinetic-bound, thm-nrqm-intervals-regular-ivp-parameter-series, def-continuity-real, def-l-p-space-as-a-quotient-by-null-functions, cor-cauchy-schwarz-inequality-for-l-two, def-countable-choice, def-axiom-of-choice, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus, def-projection-valued-measure]

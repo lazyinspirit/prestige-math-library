@@ -2,7 +2,7 @@
 id: rem-gr-primitive-and-derived-status
 kind: remark
 title: "Primitive, adopted and derived status of the objects of the framework page"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

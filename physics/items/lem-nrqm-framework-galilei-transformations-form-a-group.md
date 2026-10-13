@@ -2,7 +2,7 @@
 id: lem-nrqm-framework-galilei-transformations-form-a-group
 kind: lemma
 title: "The Galilean transformations form a group of bijections of the coordinate space"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

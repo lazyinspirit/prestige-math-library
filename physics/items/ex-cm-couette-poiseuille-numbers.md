@@ -2,7 +2,7 @@
 id: ex-cm-couette-poiseuille-numbers
 kind: example
 title: "Numerical checks for channel flows: $h=\\eta=1$, $G=12$ gives flux $1$ and centre speed $3/2$, and $V=2$ gives shear $2$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

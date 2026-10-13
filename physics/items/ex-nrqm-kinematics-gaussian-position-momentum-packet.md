@@ -4,7 +4,7 @@ aliases: [ nrqm-kinematics-gaussian-position-momentum-packet ]
 kind: example
 domain: physics
 title: "The Gaussian position and momentum packet of the massive model"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

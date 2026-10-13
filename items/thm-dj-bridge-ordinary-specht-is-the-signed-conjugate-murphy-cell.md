@@ -2,7 +2,7 @@
 id: thm-dj-bridge-ordinary-specht-is-the-signed-conjugate-murphy-cell
 kind: theorem
 title: "Ordinary Specht modules are the signed conjugate Murphy cells"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

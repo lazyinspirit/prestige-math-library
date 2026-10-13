@@ -1,7 +1,7 @@
 ---
 page: ariki-categorification-and-graded-decomposition-numbers-examples
 title: "Ariki Categorification and Graded Decomposition Numbers — Examples"
-status: draft
+status: published
 requires: [ariki-categorification-and-graded-decomposition-numbers]
 items: []
 examples: [ex-projective-versus-simple-grothendieck-classes-in-a-small-block,

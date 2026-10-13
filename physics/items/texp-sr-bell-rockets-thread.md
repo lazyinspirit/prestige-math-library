@@ -2,7 +2,7 @@
 id: texp-sr-bell-rockets-thread
 kind: thought-experiment
 title: "Bell's rockets and thread: constant chart separation and the criterion for longitudinal expansion of the translated congruence"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 15

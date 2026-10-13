@@ -2,7 +2,7 @@
 id: prop-base-change-freeness-and-specialization-in-the-deformed-family
 kind: proposition
 title: Base change, freeness and specialization in the deformed family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

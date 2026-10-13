@@ -2,7 +2,7 @@
 id: lem-hh-quantum-presentation-and-tensor-action-descent
 kind: lemma
 title: "The type-A quantum presentation descends to its coproduct tensor action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 1

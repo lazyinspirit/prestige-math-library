@@ -2,7 +2,7 @@
 id: lem-gr-reciprocal-ratio-window
 kind: lemma
 title: "The reciprocal ratio map $a\\mapsto a_*/a$: strict decrease, inverse, and the exact preimages of points and closed intervals"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

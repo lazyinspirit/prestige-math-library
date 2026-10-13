@@ -2,7 +2,7 @@
 id: ex-tensor-crystal-b-one-tensor-b-one-for-sl-two
 kind: example
 title: "The tensor crystal $B(1)\\otimes B(1)$ for $\\mathfrak{sl}_2$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

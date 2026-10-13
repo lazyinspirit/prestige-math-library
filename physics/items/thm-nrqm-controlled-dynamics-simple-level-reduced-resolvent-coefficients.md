@@ -5,7 +5,7 @@ aliases:
 kind: theorem
 domain: mathematics
 title: Simple-level reduced-resolvent coefficients
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:

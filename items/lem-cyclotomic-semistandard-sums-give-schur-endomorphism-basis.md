@@ -2,7 +2,7 @@
 id: lem-cyclotomic-semistandard-sums-give-schur-endomorphism-basis
 kind: lemma
 title: "Cyclotomic semistandard sums give the actual Schur endomorphism basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

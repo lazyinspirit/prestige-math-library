@@ -2,7 +2,7 @@
 id: lem-cm-truncated-log-coefficient-bounds
 kind: lemma
 title: 'Bounds for the truncated logarithm: $\lvert L_N(h)z_i/h\rvert\le8M/3$ and $\lvert X_j\rvert\le(8M/3)(C_0Mj/\rho)^{j-1}$'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 11

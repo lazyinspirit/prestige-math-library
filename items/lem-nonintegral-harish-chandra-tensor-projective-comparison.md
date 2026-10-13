@@ -2,7 +2,7 @@
 id: lem-nonintegral-harish-chandra-tensor-projective-comparison
 kind: lemma
 title: "The regular coset-dominant Harish–Chandra tensor comparison"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

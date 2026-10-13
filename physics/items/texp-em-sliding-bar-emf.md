@@ -3,7 +3,7 @@ id: texp-em-sliding-bar-emf
 kind: thought-experiment
 title: "Sliding-bar sliding-contact model: segmentwise emf, force integral and power balance"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 19
 proof_strategy: direct

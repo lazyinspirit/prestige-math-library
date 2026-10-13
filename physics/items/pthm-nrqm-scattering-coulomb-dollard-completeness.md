@@ -4,7 +4,7 @@ aliases: [nrqm-scattering-coulomb-dollard-completeness]
 kind: physics-theorem
 domain: physics
 title: "Completeness of the Dollard-modified wave operators for the declared Coulomb model"
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps: [def-nrqm-scattering-coulomb-dollard-model, def-nrqm-scattering-framework-short-range-model, lem-nrqm-scattering-model-scaling-correspondence, thm-nrqm-controlled-dynamics-dollard-integrable-remainder, thm-nrqm-controlled-dynamics-dollard-channel-completeness, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-bounded-borel-pvm-integral, thm-unbounded-borel-functional-calculus, lem-nrqm-potentials-positive-scaling-of-self-adjoint-operators, pthm-nrqm-central-coulomb-energy-observable-and-flow, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, def-nrqm-framework-quantities-and-units, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-autonomous-dynamics-framework-evolution, def-countable-choice, def-axiom-of-choice]

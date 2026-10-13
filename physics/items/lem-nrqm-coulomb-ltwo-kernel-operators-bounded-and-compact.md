@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-ltwo-kernel-operators-bounded-and-compact]
 kind: lemma
 domain: mathematics
 title: "L^2 kernel operators are bounded and compact"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [def-nrqm-coulomb-ltwo-kernel-operators, cor-cauchy-schwarz-inequality-for-l-two, thm-tonelli-and-fubini-for-completed-product-measures, thm-rational-box-step-functions-form-a-countable-dense-subset-of-l-p-of-rn, lem-finite-rank-operators-are-compact, thm-norm-limit-of-compact-operators-is-compact, def-compact-linear-operator, def-bounded-linear-operator, def-operator-norm, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-hilbert-space, def-countable-choice]

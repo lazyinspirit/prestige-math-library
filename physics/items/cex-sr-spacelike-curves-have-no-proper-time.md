@@ -2,7 +2,7 @@
 id: cex-sr-spacelike-curves-have-no-proper-time
 kind: counterexample
 title: "Counterexample: the proper-time integrand of a spacelike curve is not real"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 9

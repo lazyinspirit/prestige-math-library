@@ -2,7 +2,7 @@
 id: rem-cm-scope-of-complete-integrability-and-action-angle
 kind: remark
 title: "Scope of the action-angle and complete-integrability items: hypotheses, choice, singular and noncompact fibres, and the published proof gap"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

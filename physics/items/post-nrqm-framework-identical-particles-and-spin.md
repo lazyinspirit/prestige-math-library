@@ -3,7 +3,7 @@ id: post-nrqm-framework-identical-particles-and-spin
 kind: postulate
 title: "Identical-particle and spin assignments P6: permutation sectors and
   finite-spin representations"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

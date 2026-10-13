@@ -2,7 +2,7 @@
 id: ex-gr-scaled-newtonian-harmonic-trajectory
 kind: example
 title: "The scaled Newtonian comparison system for the quadratic potential: explicit harmonic solutions, a compact convex containing ball and the hypotheses of the scaled trajectory theorem"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

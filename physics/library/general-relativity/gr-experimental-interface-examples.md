@@ -7,7 +7,7 @@ requires:
   - gr-connections-and-free-fall
 page: gr-experimental-interface-examples
 title: "Experimental Interface — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

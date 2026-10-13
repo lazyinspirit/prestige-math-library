@@ -1,7 +1,7 @@
 ---
 page: qm-one-dimensional-potentials-examples
 title: "Qm One Dimensional Potentials — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

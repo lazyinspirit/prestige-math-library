@@ -2,7 +2,7 @@
 id: cex-sr-massless-momentum-not-mu-at-zero-mass
 kind: counterexample
 title: "A massless four-momentum is not obtained from the massive formula at m = 0"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

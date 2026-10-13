@@ -1,7 +1,7 @@
 ---
 page: cm08-symmetry-noether-and-conditional-conservation
 title: "Symmetry, Noether and conditional conservation"
-status: draft
+status: published
 library: physics
 items:
   - def-cm08-symmetry-of-the-mechanical-lagrangian

@@ -2,7 +2,7 @@
 id: ex-sr-box-flux-balance-worked
 kind: example
 title: "The box balance identity checked on an explicit stress-energy field"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [thm-sr-stress-balance-and-finite-flux, def-sr-stress-energy-tensor-and-force-density, def-inertial-frame-and-inertial-chart, def-directional-and-partial-derivatives, def-lorentz-form-and-inertia, def-sr-affine-minkowski-model, thm-riemann-fubini-on-product-rectangles, def-multidimensional-darboux-integral]

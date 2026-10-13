@@ -2,7 +2,7 @@
 id: def-cm-covariance-matrix-of-a-random-vector
 kind: definition
 title: "Mean vector and covariance matrix of a square-integrable random vector"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [cor-additivity-of-the-nonnegative-lebesgue-integral, cor-chebyshev-inequality-for-random-variables, cor-expectation-linearity-monotonicity-and-modulus-bound, def-euclidean-inner-product, def-jacobian-matrix-and-gradient, def-matrix-space, def-measure-null-set-and-almost-everywhere, def-moments-variance-and-covariance, def-probability-measure, def-random-element-and-real-random-variable, lem-variance-and-covariance-identities-for-random-variables, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-continuous-preimages-of-borel-sets-are-borel, thm-the-lebesgue-integral-respects-almost-everywhere-equality]

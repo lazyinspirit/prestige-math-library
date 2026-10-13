@@ -2,7 +2,7 @@
 id: lem-fixed-component-core-multipartitions-are-cyclotomic-jantzen-connected
 kind: lemma
 title: "Multipartitions with fixed component cores are cyclotomic Jantzen-connected"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 27

@@ -2,7 +2,7 @@
 id: cex-the-collapsing-recursion-has-no-solution-on-the-integers
 kind: counterexample
 title: "The collapsing recursion has no solution on $(\\mathbb{Z},<)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

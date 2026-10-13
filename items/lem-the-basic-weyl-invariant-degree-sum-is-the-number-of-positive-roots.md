@@ -2,7 +2,7 @@
 id: lem-the-basic-weyl-invariant-degree-sum-is-the-number-of-positive-roots
 kind: lemma
 title: The sum of basic Weyl invariant degrees minus one counts positive roots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

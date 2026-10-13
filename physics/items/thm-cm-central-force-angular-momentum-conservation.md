@@ -2,7 +2,7 @@
 id: thm-cm-central-force-angular-momentum-conservation
 kind: theorem
 title: "Conservation of the angular momentum vector along a central-force trajectory and its orthogonality to position and velocity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-hard-lefschetz-implies-primitive-decomposition
 kind: lemma
 title: "Hard Lefschetz gives the primitive decomposition, orthogonality and the signature formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

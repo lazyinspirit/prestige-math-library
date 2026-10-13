@@ -2,7 +2,7 @@
 id: lem-cell-form-is-associative-and-its-radical-is-a-submodule
 kind: lemma
 title: "The cell form is associative and its radical is a submodule"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

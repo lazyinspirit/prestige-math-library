@@ -5,7 +5,7 @@ kind: thought-experiment
 domain: physics
 title: "Spin one half: spread identity, incompatible component outcomes and
   saturated Robertson bounds"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

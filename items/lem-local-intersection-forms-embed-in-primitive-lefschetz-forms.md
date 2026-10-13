@@ -2,7 +2,7 @@
 id: lem-local-intersection-forms-embed-in-primitive-lefschetz-forms
 kind: lemma
 title: "Embedding theorem: local intersection forms are isometric to primitive Lefschetz forms"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

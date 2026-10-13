@@ -2,7 +2,7 @@
 id: cor-cellular-decomposition-matrices-are-dominance-unitriangular
 kind: corollary
 title: "Cellular decomposition matrices are unitriangular for the cell order"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: def-geometric-polarizable-hodge-variation
 kind: definition
 title: "Geometric polarizable Hodge variations on algebraic bases"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

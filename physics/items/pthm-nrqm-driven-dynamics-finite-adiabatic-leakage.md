@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Finite-dimensional gapped protocol: the 1/T leakage estimate, the
   intertwining propagator and the Born leakage probability"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

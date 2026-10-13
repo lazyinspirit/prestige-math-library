@@ -2,7 +2,7 @@
 id: thm-cm-point-noether-identity-with-time-reparametrization
 kind: theorem
 title: "Noether identity for point transformations with time reparametrisation: the conserved charge $p\\cdot\\xi-E\\tau-B$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

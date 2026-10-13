@@ -2,7 +2,7 @@
 id: lem-the-parabolic-highest-weight-truncation-factors-through-the-cyclotomic-quotient
 kind: lemma
 title: "The parabolic highest-weight truncation factors through the cyclotomic quotient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

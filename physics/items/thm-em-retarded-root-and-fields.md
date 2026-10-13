@@ -2,7 +2,7 @@
 id: thm-em-retarded-root-and-fields
 kind: theorem
 title: "Complete retarded point fields: unique retarded root, the delta substitution with denominator $1-n\\cdot\\beta$, Liénard–Wiechert potentials and fields, and a uniform far-zone remainder"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

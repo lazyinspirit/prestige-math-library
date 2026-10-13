@@ -2,7 +2,7 @@
 id: lem-em-coulomb-dipole-remainder
 kind: lemma
 title: "Monopole-dipole expansion with an explicit remainder for compactly supported $L^1$ densities"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

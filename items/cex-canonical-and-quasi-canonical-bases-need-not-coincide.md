@@ -2,7 +2,7 @@
 id: cex-canonical-and-quasi-canonical-bases-need-not-coincide
 kind: counterexample
 title: "The canonical and quasi-canonical bases need not coincide"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 26

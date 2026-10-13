@@ -2,7 +2,7 @@
 id: ex-gr-perfect-fluid-energy-equation-from-the-local-balance
 kind: example
 title: "The perfect-fluid energy equation recovered from the local energy balance"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

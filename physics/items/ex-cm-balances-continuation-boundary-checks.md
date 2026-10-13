@@ -2,7 +2,7 @@
 id: ex-cm-balances-continuation-boundary-checks
 kind: example
 title: "Breakdown versus trapping: the blow-up of $x'=x^2$ and the global trapped solution of $x'=-x^2$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

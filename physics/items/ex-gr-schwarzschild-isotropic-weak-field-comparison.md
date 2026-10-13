@@ -2,7 +2,7 @@
 id: ex-gr-schwarzschild-isotropic-weak-field-comparison
 kind: example
 title: "Explicit isotropic-to-areal conversion and the second-order scalar-coefficient comparison of the Schwarzschild exterior"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

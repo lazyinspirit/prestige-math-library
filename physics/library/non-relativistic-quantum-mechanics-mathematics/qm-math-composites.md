@@ -1,7 +1,7 @@
 ---
 page: qm-math-composites
 title: Qm Math Composites
-status: draft
+status: published
 items:
   - lem-nrqm-composites-hilbert-tensor-construction
   - lem-nrqm-composites-rank-one-operator-calculus

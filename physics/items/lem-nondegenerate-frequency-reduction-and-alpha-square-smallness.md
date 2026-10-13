@@ -2,7 +2,7 @@
 id: lem-nondegenerate-frequency-reduction-and-alpha-square-smallness
 kind: lemma
 title: "Nondegenerate frequency reduction: translating the action variable by the inverse frequency map and the $\\varepsilon\\le c\\alpha^2$ smallness"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 10

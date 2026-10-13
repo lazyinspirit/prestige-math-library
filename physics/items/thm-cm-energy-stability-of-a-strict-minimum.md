@@ -2,7 +2,7 @@
 id: thm-cm-energy-stability-of-a-strict-minimum
 kind: theorem
 title: "A strict local minimum of the potential gives a Lyapunov stable equilibrium of the mechanical system, by energy conservation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: rem-gr-convex-normal-neighborhoods-scope
 kind: remark
 title: "Scope and status of the convex-normal, volume-time and temporal-splitting material"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 30

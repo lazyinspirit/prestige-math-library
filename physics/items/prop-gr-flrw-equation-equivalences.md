@@ -2,7 +2,7 @@
 id: prop-gr-flrw-equation-equivalences
 kind: proposition
 title: "Equivalence of the Friedmann and acceleration systems, and the derivation of acceleration from Friedmann and continuity where the Hubble parameter does not vanish"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

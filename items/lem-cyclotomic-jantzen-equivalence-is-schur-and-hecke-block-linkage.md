@@ -2,7 +2,7 @@
 id: lem-cyclotomic-jantzen-equivalence-is-schur-and-hecke-block-linkage
 kind: lemma
 title: "Cyclotomic Jantzen equivalence is Schur and Hecke block linkage"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 26

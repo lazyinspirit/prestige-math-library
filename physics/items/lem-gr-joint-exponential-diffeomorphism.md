@@ -2,7 +2,7 @@
 id: lem-gr-joint-exponential-diffeomorphism
 kind: lemma
 title: "The joint exponential map: smoothness, invertible differential at the diagonal, and the small-velocity two-point inverse"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

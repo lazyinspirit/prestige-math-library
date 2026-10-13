@@ -4,7 +4,7 @@ aliases: [nrqm-approximations-scaled-line-model-correspondence]
 kind: lemma
 domain: mathematics
 title: "Nondimensionalisation of the one-dimensional stationary equation and of the WKB exponent"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [def-derivative, thm-chain-rule, cor-one-dimensional-change-of-variables-with-absolute-derivative]

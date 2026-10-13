@@ -2,7 +2,7 @@
 id: lem-semistandard-weight-dimensions-detect-virtual-weyl-classes
 kind: lemma
 title: "Semistandard weight dimensions detect virtual Weyl classes"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -4,7 +4,7 @@ aliases: [nrqm-kinematics-plane-wave-generalized-eigenfunction]
 kind: example
 domain: mathematics
 title: "The plane wave as a generalized momentum eigenfunctional"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [cor-complex-exponential-cartesian-form-modulus-and-eulers-identity, cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space, def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-fourier-transform-on-l-one-of-rn, def-schwartz-space-and-its-seminorms, lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set, lem-weak-derivatives-are-polynomial-fourier-multipliers, thm-cauchy-schwarz-in-an-inner-product-space, thm-monotone-convergence-for-the-integral, thm-plancherel, thm-tonelli-theorem-for-sigma-finite-product-spaces]

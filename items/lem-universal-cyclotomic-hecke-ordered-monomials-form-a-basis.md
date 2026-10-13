@@ -2,7 +2,7 @@
 id: lem-universal-cyclotomic-hecke-ordered-monomials-form-a-basis
 kind: lemma
 title: "Universal cyclotomic Hecke ordered monomials form a basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 16

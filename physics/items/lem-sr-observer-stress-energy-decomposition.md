@@ -2,7 +2,7 @@
 id: lem-sr-observer-stress-energy-decomposition
 kind: lemma
 title: "Observer decomposition of a symmetric stress-energy tensor"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-stress-energy-tensor-and-force-density, thm-sr-proper-time-and-observer-decomposition, def-ck-tensor-field-on-minkowski-space, def-lorentz-form-and-inertia, def-sr-affine-minkowski-model]

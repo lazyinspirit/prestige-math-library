@@ -2,7 +2,7 @@
 id: ex-cm-quaternion-lift-of-a-varying-rate-about-a-fixed-axis
 kind: example
 title: "A time-varying rate about a fixed axis: $q(t)=q_0\\bigl(\\cos((\\theta(t)-\\theta(0))/2)+\\varphi(\\hat n)\\sin((\\theta(t)-\\theta(0))/2)\\bigr)$ solves the lift equation with $\\omega(t)=\\theta'(t)\\hat n$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

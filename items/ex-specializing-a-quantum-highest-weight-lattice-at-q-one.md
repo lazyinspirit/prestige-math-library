@@ -2,7 +2,7 @@
 id: ex-specializing-a-quantum-highest-weight-lattice-at-q-one
 kind: example
 title: "Specializing a quantum highest weight lattice at q=1"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

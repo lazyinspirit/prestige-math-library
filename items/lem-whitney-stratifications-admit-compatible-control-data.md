@@ -2,7 +2,7 @@
 id: lem-whitney-stratifications-admit-compatible-control-data
 kind: lemma
 title: "Whitney stratifications admit compatible control data"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

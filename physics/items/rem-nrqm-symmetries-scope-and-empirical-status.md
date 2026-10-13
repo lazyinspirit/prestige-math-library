@@ -4,7 +4,7 @@ aliases: [ nrqm-symmetries-scope-and-empirical-status ]
 kind: remark
 domain: physics
 title: "Scope and empirical status of the symmetry and conservation items"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

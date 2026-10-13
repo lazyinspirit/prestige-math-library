@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Interval models: discrete spectra, complete eigenbases, min-max bounds
   and nodal counts"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

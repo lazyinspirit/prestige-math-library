@@ -2,7 +2,7 @@
 id: ex-cm-uniform-force-and-linear-drag
 kind: example
 title: "Constant forcing: free fall and the approach to terminal velocity under linear drag"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

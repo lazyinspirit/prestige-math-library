@@ -2,7 +2,7 @@
 id: pthm-sr-same-endpoint-clock-comparison
 kind: physics-theorem
 title: "Same-endpoint clock comparison: the inertial clock ages most"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "Ideal clocks and prescribed histories in the flat classical special-relativity model: the reading of an ideal clock between two fixed endpoint events along a piecewise C^1 future timelike worldline, compared with the reading along the straight inertial worldline between the same events. Conditional on the named postulates (ideal clocks with no acceleration-dependent term, prescribed histories, flat spacetime, fixed c). Excludes real clocks and apparatus, calibration and resolution effects, gravity, quantum phenomena, and any empirical or statistical claim."

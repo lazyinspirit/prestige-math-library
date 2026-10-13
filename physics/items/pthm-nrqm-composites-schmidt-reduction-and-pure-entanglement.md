@@ -6,7 +6,7 @@ kind: physics-theorem
 domain: physics
 title: Schmidt reduction of a pure composite preparation, purity of the
   subsystems, and the product criterion
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

@@ -2,7 +2,7 @@
 id: ex-sr-rindler-radar-distance-worked
 kind: example
 title: "Rindler radar distances worked: reflectors at twice and at half the observer's radius"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

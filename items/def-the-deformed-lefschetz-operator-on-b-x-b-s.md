@@ -2,7 +2,7 @@
 id: def-the-deformed-lefschetz-operator-on-b-x-b-s
 kind: definition
 title: "The deformed Lefschetz operator L_zeta on B_x B_s"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

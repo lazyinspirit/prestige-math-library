@@ -2,7 +2,7 @@
 id: lem-cauchy-fourier-and-lattice-shell-bounds
 kind: lemma
 title: "Fourier decay, Cauchy derivative bounds, lattice shell counts and the exponential small-divisor sums on action-angle neighbourhoods"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

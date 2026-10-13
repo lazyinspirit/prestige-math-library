@@ -2,7 +2,7 @@
 id: def-cm16-stability-and-hyperbolicity-concepts
 kind: definition
 title: "Stability vocabulary of the model: Lyapunov, asymptotic and orbital stability, linear stability of equilibria and map fixed points, and hyperbolicity of equilibria and fixed points"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

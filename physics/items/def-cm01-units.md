@@ -2,7 +2,7 @@
 id: def-cm01-units
 kind: definition
 title: "Dimensions and SI unit conventions of the non-relativistic classical mechanics framework"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 1

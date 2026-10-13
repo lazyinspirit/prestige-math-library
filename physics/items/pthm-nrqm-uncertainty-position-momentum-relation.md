@@ -4,7 +4,7 @@ aliases: [ nrqm-uncertainty-position-momentum-relation ]
 kind: physics-theorem
 domain: physics
 title: "The position-momentum preparation relation of the massive spin-s model"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

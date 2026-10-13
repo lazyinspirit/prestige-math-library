@@ -2,7 +2,7 @@
 id: ex-sr-static-tension-stress-balance
 kind: example
 title: "A locally conserved static uniaxial stress: tension must be constant along the stressed direction"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-stress-energy-tensor-and-force-density, def-inertial-frame-and-inertial-chart, def-directional-and-partial-derivatives, def-lorentz-form-and-inertia, def-sr-affine-minkowski-model, cor-zero-derivative-implies-constant]

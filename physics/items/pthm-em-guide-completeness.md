@@ -3,7 +3,7 @@ id: pthm-em-guide-completeness
 kind: physics-theorem
 domain: physics
 title: "Complete mode expansions of the declared guide and cavity classes: transverse profile completeness, the rectangular reflection class and the smooth PEC cavity eigenbasis"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 20
 deps: [def-axiom-of-choice, def-countable-choice, def-distributional-derivative, def-divergence-and-curl-of-a-c1-vector-field, def-em-fields, def-em-guide-cavity-geometry, lem-em-rectangle-mode-profile-identities, lem-em-rectangular-transverse-mode-completeness, post-em-material-closure, pthm-em-macroscopic-maxwell, pthm-em-rectangular-mode-candidates, pthm-em-restricted-material-energy, thm-em-waveguide-spectral-completeness, lem-em-rectangular-pec-energy-completeness, lem-em-smooth-pec-cavity-spectral-closure, thm-euclidean-tubular-neighbourhood-theorem, def-the-standard-smooth-step-function, cor-cauchy-schwarz-inequality-for-l-two, pthm-em-uniform-ohmic-modal-decay, pthm-em-open-rectangular-guide-completeness, thm-hilbert-space-fourier-expansion, lem-l-two-with-the-integral-pairing-is-a-hilbert-space]

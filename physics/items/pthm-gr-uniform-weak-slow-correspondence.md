@@ -3,7 +3,7 @@ id: pthm-gr-uniform-weak-slow-correspondence
 kind: physics-theorem
 title: "The controlled weak-field slow-motion correspondence with the Newtonian
   comparison model"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

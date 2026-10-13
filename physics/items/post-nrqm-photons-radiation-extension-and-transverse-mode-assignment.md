@@ -2,7 +2,7 @@
 id: post-nrqm-photons-radiation-extension-and-transverse-mode-assignment
 kind: postulate
 title: "Radiation extension of the framework: transverse mode and photon assignments"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 10

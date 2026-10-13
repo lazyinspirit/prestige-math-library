@@ -2,7 +2,7 @@
 id: thm-hecke-jucys-murphy-action-is-dominance-triangular
 kind: theorem
 title: "The Hecke Jucys-Murphy action is dominance triangular"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

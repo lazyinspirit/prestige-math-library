@@ -3,7 +3,7 @@ id: thm-sr-local-congruence-adapted-charts-and-frobenius
 kind: theorem
 domain: mathematics
 title: "Local flow boxes, adapted charts and the Frobenius criterion for rest distributions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

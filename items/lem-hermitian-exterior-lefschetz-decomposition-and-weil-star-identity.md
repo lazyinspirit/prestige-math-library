@@ -2,7 +2,7 @@
 id: lem-hermitian-exterior-lefschetz-decomposition-and-weil-star-identity
 kind: lemma
 title: "Hermitian exterior Lefschetz decomposition and Weil star identity"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:

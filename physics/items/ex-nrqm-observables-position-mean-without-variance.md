@@ -4,7 +4,7 @@ aliases: [ nrqm-observables-position-mean-without-variance ]
 kind: example
 domain: physics
 title: "A preparation with finite mean position and infinite variance"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

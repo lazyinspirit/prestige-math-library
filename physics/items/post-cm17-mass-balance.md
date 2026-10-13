@@ -3,7 +3,7 @@ id: post-cm17-mass-balance
 kind: postulate
 title: "Adopted mass balance: the mass of every material subregion is constant
   in time"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

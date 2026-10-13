@@ -2,7 +2,7 @@
 id: cex-rational-power-laws-need-positive-base
 kind: counterexample
 title: "The iterated rational-power law fails without a positive base: $\\big((-3)^{2}\\big)^{1/2} = 3 \\ne -3$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

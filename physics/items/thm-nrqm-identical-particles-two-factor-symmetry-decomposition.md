@@ -4,7 +4,7 @@ aliases: [nrqm-identical-particles-two-factor-symmetry-decomposition]
 kind: theorem
 domain: mathematics
 title: "Regrouping two factors: the symmetry decomposition of a two-particle sector over an orbital and an internal factor"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [lem-nrqm-identical-particles-two-particle-exchange-operator, thm-nrqm-identical-particles-occupation-number-basis, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-permutation-sector-projections, cor-finite-iterated-tensor-products-represent-multilinear-maps, cor-tensor-products-of-finite-free-modules-and-dimension, cor-finite-dimensional-subspaces-are-closed, def-hilbert-space, def-bounded-linear-operator, def-operator-norm, def-hilbert-orthogonal-projection, def-countable-choice]

@@ -4,7 +4,7 @@ aliases: [nrqm-identical-particles-two-particle-exchange-operator]
 kind: lemma
 domain: mathematics
 title: "The two-particle exchange operator and the symmetric and antisymmetric combinations"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, def-countable-choice, def-hilbert-orthogonal-projection, lem-orthogonal-projection-is-linear-self-adjoint-contractive, def-hilbert-space, def-real-and-complex-inner-product-space, def-bounded-linear-operator, def-hilbert-space-adjoint, def-operator-norm]

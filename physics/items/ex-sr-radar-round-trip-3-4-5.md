@@ -4,7 +4,7 @@ kind: example
 domain: physics
 title: "Worked radar round trip: emission, reflection and reception at exact rational parameters"
 physical_scope: "Exact SI radar assignments for an inertial observer in complete vacuum under the ideal-clock and ideal-light assumptions of the radar protocol, with available ideal instantaneous reflectors and a clock calibrated to zero at the chart origin. Coordinates and rest distances have unit metre, T and proper/radar time have unit second, and c has unit metre per second. No finite-apparatus, material-medium, empirical-measurement or uncertainty claim is made."
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

@@ -2,7 +2,7 @@
 id: def-invariant-intersection-form-on-a-bott-samelson-bimodule
 kind: definition
 title: "The trace, the invariant intersection form on Bott-Samelson bimodules and its reduction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

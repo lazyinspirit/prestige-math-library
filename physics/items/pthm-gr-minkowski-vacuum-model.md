@@ -2,7 +2,7 @@
 id: pthm-gr-minkowski-vacuum-model
 kind: physics-theorem
 title: "The Minkowski vacuum model with Lambda = 0: field law, free-fall kinematics and clock readings"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

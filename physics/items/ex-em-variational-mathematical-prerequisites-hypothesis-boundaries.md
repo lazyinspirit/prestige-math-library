@@ -2,7 +2,7 @@
 id: ex-em-variational-mathematical-prerequisites-hypothesis-boundaries
 kind: example
 title: "Hypothesis and convention boundaries for the variational prerequisites"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

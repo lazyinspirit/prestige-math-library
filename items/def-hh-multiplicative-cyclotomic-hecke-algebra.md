@@ -2,7 +2,7 @@
 id: def-hh-multiplicative-cyclotomic-hecke-algebra
 kind: definition
 title: "The multiplicative cyclotomic Hecke algebra"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 dependency_level: 0

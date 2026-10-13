@@ -1,7 +1,7 @@
 ---
 page: qm-autonomous-dynamics
 title: "Qm Autonomous Dynamics"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-autonomous-dynamics-flow-calculus

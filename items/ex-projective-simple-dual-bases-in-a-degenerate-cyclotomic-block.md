@@ -2,7 +2,7 @@
 id: ex-projective-simple-dual-bases-in-a-degenerate-cyclotomic-block
 kind: example
 title: "Projective and simple dual bases in a degenerate cyclotomic block"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 42

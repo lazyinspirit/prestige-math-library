@@ -2,7 +2,7 @@
 id: def-affine-and-cyclotomic-type-a-hecke-algebras
 kind: definition
 title: "Affine and cyclotomic type-A Hecke algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 12

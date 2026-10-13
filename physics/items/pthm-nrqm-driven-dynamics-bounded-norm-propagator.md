@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The bounded norm-continuous driven model: unique unitary propagator,
   Dyson truncation budget and outcome-law error"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

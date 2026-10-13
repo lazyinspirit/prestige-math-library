@@ -4,7 +4,7 @@ aliases: [ nrqm-interference-coherent-and-mixture-detection-laws ]
 kind: physics-theorem
 domain: physics
 title: "Coherent and which-path detection laws of the declared two-path model"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

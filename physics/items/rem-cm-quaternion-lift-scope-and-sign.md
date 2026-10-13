@@ -2,7 +2,7 @@
 id: rem-cm-quaternion-lift-scope-and-sign
 kind: remark
 title: "Scope of the quaternion lift: the global sign ambiguity, closed loops, and the absence of a physical spin claim"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

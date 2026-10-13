@@ -2,7 +2,7 @@
 id: prop-dual-crystal-and-reversal-conventions
 kind: proposition
 title: "The dual crystal: reversed arrows, negated weights and swapped $\\varepsilon/\\varphi$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

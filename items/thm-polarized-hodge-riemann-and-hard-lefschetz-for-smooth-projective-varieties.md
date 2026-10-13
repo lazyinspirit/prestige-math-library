@@ -2,7 +2,7 @@
 id: thm-polarized-hodge-riemann-and-hard-lefschetz-for-smooth-projective-varieties
 kind: theorem
 title: "Polarized Hodge and hard Lefschetz package for smooth projective varieties"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

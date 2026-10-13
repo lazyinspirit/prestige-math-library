@@ -2,7 +2,7 @@
 id: pthm-cm15-impact-balance
 kind: physics-theorem
 title: "Consequences of the adopted impact and open-mass models: continuity of total momentum, the smooth-force exclusion, the restitution solution with $\\Delta K=-\\frac{1-e^2}{2}\\mu\\lVert v_2^--v_1^-\\rVert_2^2$, and the open-body and rocket laws"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

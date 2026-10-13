@@ -1,7 +1,7 @@
 ---
 page: sr-experimental-interface
 title: "Experimental Interface"
-status: draft
+status: published
 library: physics
 items:
   - def-sr-experiment-interface-vocabulary

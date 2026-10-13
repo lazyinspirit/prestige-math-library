@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-maximal-domain-position-and-momentum-uncer
 kind: theorem
 domain: mathematics
 title: "Position-momentum uncertainty on the maximal domains of the line"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-nrqm-magnetic-and-detection-position-and-momentum-operators, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, thm-nrqm-magnetic-and-detection-covariance-refined-uncertainty, cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, lem-weak-product-rule-for-bounded-sobolev-functions, lem-weak-leibniz-rule-with-a-smooth-factor, lem-schwartz-cutoffs-from-the-standard-smooth-step, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, thm-dominated-convergence, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

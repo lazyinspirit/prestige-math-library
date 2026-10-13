@@ -2,7 +2,7 @@
 id: ex-sr-volume-form-component-signs
 kind: example
 title: "Worked component signs of the oriented volume form"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 7

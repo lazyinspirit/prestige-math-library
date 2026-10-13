@@ -2,7 +2,7 @@
 id: ex-sr-reverse-cauchy-schwarz-and-equality
 kind: example
 title: "Worked reverse Cauchy-Schwarz and reverse triangle inequalities"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

@@ -2,7 +2,7 @@
 id: cex-gr-shearing-congruence-rest-spaces-not-integrable
 kind: counterexample
 title: "A congruence whose rest spaces are not tangent to any local hypersurfaces"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

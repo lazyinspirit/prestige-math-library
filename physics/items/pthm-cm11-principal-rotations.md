@@ -2,7 +2,7 @@
 id: pthm-cm11-principal-rotations
 kind: physics-theorem
 title: "Principal-axis uniform rotations of the torque-free rigid-material model: existence, a fixed spatial direction, the invariants, and the converse classification"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

@@ -4,7 +4,7 @@ requires:
   - gr-einstein-and-matter
 page: gr-gr14-full-high-regularity-symmetric-hyperbolic-proof-examples
 title: "Gr14 Full High Regularity Symmetric Hyperbolic Proof — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

@@ -2,7 +2,7 @@
 id: pthm-cm01-galilean-kinematics
 kind: physics-theorem
 title: "Galilean transformation of worldlines: velocity and acceleration laws, frame-independence of zero coordinate acceleration, and the group of frame changes"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 7

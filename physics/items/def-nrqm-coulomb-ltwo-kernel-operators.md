@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-ltwo-kernel-operators]
 kind: definition
 domain: mathematics
 title: "L^2 kernel operators and Hilbert-Schmidt operators on R^3"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, def-hilbert-space, def-countable-choice, thm-tonelli-and-fubini-for-completed-product-measures]

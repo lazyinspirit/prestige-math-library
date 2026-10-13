@@ -2,7 +2,7 @@
 id: ex-cm16-linearization-and-growth-checks
 kind: example
 title: "Two declared linear models worked through: the harmonic flow has zero finite-time growth in every direction, while the repulsive linear model has exact rates $\\pm1$ and the positive Lyapunov exponent $1$ at its equilibrium"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

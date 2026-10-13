@@ -4,7 +4,7 @@ aliases: [ nrqm-orbital-and-spin-symmetric-power-su2-representation ]
 kind: theorem
 domain: mathematics
 title: "Symmetric-power SU2 representation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

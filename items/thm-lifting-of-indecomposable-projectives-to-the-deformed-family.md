@@ -2,7 +2,7 @@
 id: thm-lifting-of-indecomposable-projectives-to-the-deformed-family
 kind: theorem
 title: Lifting of indecomposable projectives to the deformed family
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

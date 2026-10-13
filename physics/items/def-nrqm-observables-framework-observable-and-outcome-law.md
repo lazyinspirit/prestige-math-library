@@ -4,7 +4,7 @@ aliases: [ nrqm-observables-framework-observable-and-outcome-law ]
 kind: definition
 domain: physics
 title: "Assigned sharp observables and the outcome law of the framework"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps:

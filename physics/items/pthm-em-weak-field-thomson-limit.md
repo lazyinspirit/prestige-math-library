@@ -2,7 +2,7 @@
 id: pthm-em-weak-field-thomson-limit
 kind: physics-theorem
 title: "Controlled weak-field first variation of the relativistic force law and the leading Thomson-model cross section"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 23

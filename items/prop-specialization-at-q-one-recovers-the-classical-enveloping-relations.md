@@ -2,7 +2,7 @@
 id: prop-specialization-at-q-one-recovers-the-classical-enveloping-relations
 kind: proposition
 title: "Specialization at q=1 recovers the classical enveloping relations"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

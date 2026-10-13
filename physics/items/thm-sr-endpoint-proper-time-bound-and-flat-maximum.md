@@ -2,7 +2,7 @@
 id: thm-sr-endpoint-proper-time-bound-and-flat-maximum
 kind: theorem
 title: "The endpoint bound for proper time and the maximality of the straight worldline in affine Minkowski space"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 proof_strategy: direct

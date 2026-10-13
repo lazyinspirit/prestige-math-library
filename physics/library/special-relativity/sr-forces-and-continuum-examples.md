@@ -1,7 +1,7 @@
 ---
 page: sr-forces-and-continuum-examples
 title: "Forces and Continuum — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-sr-dust-stress-energy-under-a-boost,
         ex-sr-perfect-fluid-rest-and-moving-frame,

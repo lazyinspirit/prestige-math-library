@@ -2,7 +2,7 @@
 id: ex-gr-null-gradient-scalar-field-conservation
 kind: example
 title: "A scalar field with null-or-zero gradient in flat space: equation of motion and conservation"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

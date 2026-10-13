@@ -2,7 +2,7 @@
 id: lem-cm-finite-iid-sample-mean-bound
 kind: lemma
 title: Finite IID sample-mean variance and Chebyshev bound
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

@@ -2,7 +2,7 @@
 id: ex-gr-translating-dust-measured-energy-and-balance
 kind: example
 title: "A translating dust in flat space: measured energy density, flux and the local balance"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

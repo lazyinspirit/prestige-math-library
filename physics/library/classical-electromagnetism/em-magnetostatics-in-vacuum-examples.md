@@ -1,7 +1,7 @@
 ---
 page: em-magnetostatics-in-vacuum-examples
 title: "Magnetostatics in vacuum — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples: [ex-em-circular-loop-axis-field, ex-em-infinite-wire-and-solenoid, ex-em-wire-force-coupling]

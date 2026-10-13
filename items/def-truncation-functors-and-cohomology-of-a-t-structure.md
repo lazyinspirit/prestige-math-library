@@ -2,7 +2,7 @@
 id: def-truncation-functors-and-cohomology-of-a-t-structure
 kind: definition
 title: "Truncation functors, t-cohomology, amplitude and bounded t-structures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

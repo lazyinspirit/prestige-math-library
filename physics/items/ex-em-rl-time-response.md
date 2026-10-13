@@ -3,7 +3,7 @@ id: ex-em-rl-time-response
 kind: example
 title: "Exponential RL response under a constant terminal voltage"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 22
 proof_strategy: direct

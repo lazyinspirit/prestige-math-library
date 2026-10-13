@@ -2,7 +2,7 @@
 id: lem-cm-separate-roundoff-energy-accumulation
 kind: lemma
 title: Bounded per-step state perturbations add a separate linear energy term
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 17

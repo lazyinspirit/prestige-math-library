@@ -3,7 +3,7 @@ id: ex-cm-adiabatic-drift-check
 kind: example
 title: "An exactly solvable adiabatic branch: $K=I+\\varepsilon I\\cos\\theta$
   and comparison with the drift bound"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

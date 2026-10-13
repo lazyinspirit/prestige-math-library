@@ -1,7 +1,7 @@
 ---
 page: qm-identical-particles-and-exclusion
 title: "Qm Identical Particles And Exclusion"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-identical-particles-two-particle-exchange-operator

@@ -4,7 +4,7 @@ kind: definition
 title: "Momentum density, Maxwell stress, momentum flux and orbital angular density in vacuum"
 domain: physics
 physical_scope: "The mechanical quantities quadratic in the vacuum electromagnetic fields: momentum density, Maxwell stress tensor, momentum flux and the origin-relative orbital angular momentum density and its flux tensor, as pointwise functions on the named laboratory region in SI units. The item fixes objects and index and origin conventions only; it asserts no balance identity, no covariant identification, no value at a point of singular source support and no distributional product for locally integrable fields."
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 proof_strategy: direct

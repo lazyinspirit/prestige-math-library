@@ -2,7 +2,7 @@
 id: def-cm-stroboscopic-map
 kind: definition
 title: "The stroboscopic (time-$P$) map of a $P$-periodic first-order system"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

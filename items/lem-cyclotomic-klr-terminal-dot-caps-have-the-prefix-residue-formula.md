@@ -2,7 +2,7 @@
 id: lem-cyclotomic-klr-terminal-dot-caps-have-the-prefix-residue-formula
 kind: lemma
 title: "Actual terminal dot caps have a prefix residue formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 deps: [def-cyclotomic-klr-quotient-at-a-dominant-weight,

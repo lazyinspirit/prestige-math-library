@@ -2,7 +2,7 @@
 id: thm-cyclotomic-multipartitions-of-fixed-content-are-jantzen-connected
 kind: theorem
 title: "Cyclotomic multipartitions have equal residue content exactly when Jantzen-connected"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 28

@@ -1,7 +1,7 @@
 ---
 page: em-elementary-mathematical-prerequisites-examples
 title: Em Elementary Mathematical Prerequisites — Examples
-status: draft
+status: published
 items: []
 examples: [ex-em-elementary-mathematical-prerequisites-hypothesis-boundaries]
 ---

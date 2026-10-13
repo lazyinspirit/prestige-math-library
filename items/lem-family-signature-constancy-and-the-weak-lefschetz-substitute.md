@@ -2,7 +2,7 @@
 id: lem-family-signature-constancy-and-the-weak-lefschetz-substitute
 kind: lemma
 title: "Signature constancy in a Lefschetz family, the L-stable subspace lemma and the weak-Lefschetz substitute"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

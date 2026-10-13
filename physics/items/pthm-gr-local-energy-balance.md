@@ -2,7 +2,7 @@
 id: pthm-gr-local-energy-balance
 kind: physics-theorem
 title: "Local energy balance of the measured current and conservation of the Killing charge in stationary models"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

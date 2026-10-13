@@ -2,7 +2,7 @@
 id: lem-discrete-young-and-sobolev-product
 kind: lemma
 title: "Discrete Young inequality, the Sobolev product bound, and the transport product bound on the torus"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

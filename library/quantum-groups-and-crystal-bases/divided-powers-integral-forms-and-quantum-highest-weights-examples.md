@@ -1,7 +1,7 @@
 ---
 page: divided-powers-integral-forms-and-quantum-highest-weights-examples
 title: Divided Powers, Integral Forms, and Quantum Highest Weights — Examples
-status: draft
+status: published
 requires:
 - divided-powers-integral-forms-and-quantum-highest-weights
 items:

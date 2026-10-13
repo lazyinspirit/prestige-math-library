@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-associated-polynomial-normalization]
 kind: theorem
 domain: mathematics
 title: "Associated Legendre function normalization"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [thm-nrqm-orbital-and-spin-legendre-rodrigues-equation, lem-nrqm-orbital-and-spin-sphere-integral-in-angle-coordinates, def-polar-surface-measure-on-the-unit-sphere, thm-general-leibniz-rule, thm-algebra-of-derivatives, thm-chain-rule, thm-ftc-second-part, lem-trigonometric-characters-are-orthonormal, thm-continuous-implies-integrable, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, cor-cauchy-schwarz-inequality-for-l-two, def-complex-exponential, def-factorial-and-falling-factorial, def-natural-numbers, lem-complex-conjugation-and-modulus-laws, def-inner-product-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, cor-inner-product-induces-a-norm, cor-mean-value-theorem, def-countable-choice]

@@ -2,7 +2,7 @@
 id: cex-cm03-closed-force-field-without-a-global-potential
 kind: counterexample
 title: "A closed model force field on an annular domain without a global potential energy: force-generating potentials exist only locally"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

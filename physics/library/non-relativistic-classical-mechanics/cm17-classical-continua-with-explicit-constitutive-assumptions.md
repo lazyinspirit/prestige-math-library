@@ -1,7 +1,7 @@
 ---
 page: cm17-classical-continua-with-explicit-constitutive-assumptions
 title: "Classical continua with explicit constitutive assumptions"
-status: draft
+status: published
 library: physics
 items:
   - def-cm17-continuum-body-and-units

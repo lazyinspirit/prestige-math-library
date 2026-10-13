@@ -3,7 +3,7 @@ id: lem-gr-null-position-vector-forces-null-velocity
 kind: lemma
 title: "A causal curve in a convex normal ball whose position vector is null at
   one time has null velocity almost everywhere up to that time"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 17

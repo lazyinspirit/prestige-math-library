@@ -2,7 +2,7 @@
 id: pthm-cm17-continuity-equation
 kind: physics-theorem
 title: "The continuity equation of the continuum model: local form of mass balance, the material form, and the incompressibility reading"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

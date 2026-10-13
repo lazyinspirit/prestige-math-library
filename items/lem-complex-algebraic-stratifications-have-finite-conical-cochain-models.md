@@ -2,7 +2,7 @@
 id: lem-complex-algebraic-stratifications-have-finite-conical-cochain-models
 kind: lemma
 title: Complex algebraic constructible complexes have finite conical cochain models
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 13

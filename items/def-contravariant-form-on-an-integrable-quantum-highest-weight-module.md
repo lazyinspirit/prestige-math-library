@@ -2,7 +2,7 @@
 id: def-contravariant-form-on-an-integrable-quantum-highest-weight-module
 kind: definition
 title: "The contravariant form on an integrable highest weight module"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

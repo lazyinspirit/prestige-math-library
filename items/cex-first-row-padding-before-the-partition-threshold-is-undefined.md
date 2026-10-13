@@ -2,7 +2,7 @@
 id: cex-first-row-padding-before-the-partition-threshold-is-undefined
 kind: counterexample
 title: First-row padding below the threshold is undefined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-perverse-closed-support-splitting-is-equivalent-to-costalk-stalk-isomorphism
 kind: lemma
 title: "Closed-support splitting of a perverse sheaf is detected by its costalk-to-stalk map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

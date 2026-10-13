@@ -2,7 +2,7 @@
 id: pthm-cm17-stress-matrix-and-symmetry
 kind: physics-theorem
 title: "Existence, uniqueness and symmetry of the stress matrix from the adopted balance principles"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

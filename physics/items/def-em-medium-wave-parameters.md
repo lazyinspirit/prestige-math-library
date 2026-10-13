@@ -2,7 +2,7 @@
 id: def-em-medium-wave-parameters
 kind: definition
 title: "Homogeneous isotropic medium parameters: phase speed, impedance, refractive index, complex propagation constant and skin depth"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

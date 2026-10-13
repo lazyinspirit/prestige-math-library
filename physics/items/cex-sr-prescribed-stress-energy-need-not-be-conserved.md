@@ -2,7 +2,7 @@
 id: cex-sr-prescribed-stress-energy-need-not-be-conserved
 kind: counterexample
 title: "A prescribed covariant stress-energy tensor need not be conserved"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-stress-energy-tensor-and-force-density, def-lorentz-form-and-inertia, def-ck-tensor-field-on-minkowski-space, def-directional-and-partial-derivatives, thm-algebra-of-derivatives, def-sr-affine-minkowski-model, def-inertial-frame-and-inertial-chart, thm-sr-tensor-and-current-transformation, thm-continuous-partial-derivatives-imply-total-differentiability, thm-zero-derivative-on-connected-open-euclidean-set-iff-constant]

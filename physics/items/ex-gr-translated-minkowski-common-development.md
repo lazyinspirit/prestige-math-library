@@ -2,7 +2,7 @@
 id: ex-gr-translated-minkowski-common-development
 kind: example
 title: "Maximal common development and gluing of the flat vacuum data with its translate"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 42

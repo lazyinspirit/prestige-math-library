@@ -1,7 +1,7 @@
 ---
 page: qm-math-coulomb
 title: Qm Math Coulomb
-status: draft
+status: published
 items:
   - def-nrqm-coulomb-ltwo-kernel-operators
   - lem-nrqm-coulomb-ltwo-kernel-operators-bounded-and-compact

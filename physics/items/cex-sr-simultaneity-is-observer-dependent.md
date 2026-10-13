@@ -3,7 +3,7 @@ id: cex-sr-simultaneity-is-observer-dependent
 kind: counterexample
 domain: mathematics
 title: "Counterexample: simultaneity is relative to the observer vector"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-generated

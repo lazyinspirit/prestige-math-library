@@ -2,7 +2,7 @@
 id: ex-gr-minkowski-maximal-development
 kind: example
 title: "The maximal development of the flat vacuum data is Minkowski spacetime"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 41

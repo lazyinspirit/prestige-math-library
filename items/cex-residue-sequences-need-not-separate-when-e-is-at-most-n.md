@@ -2,7 +2,7 @@
 id: cex-residue-sequences-need-not-separate-when-e-is-at-most-n
 kind: counterexample
 title: "Residue sequences need not separate when e is at most n"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: cex-degenerate-q-ij-polynomials-destroy-the-faithful-basis-route
 kind: counterexample
 title: "Degenerate parameters $Q_{ij}$ destroy the faithful polynomial-representation route"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

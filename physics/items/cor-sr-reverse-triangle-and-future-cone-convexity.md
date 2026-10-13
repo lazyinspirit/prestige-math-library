@@ -2,7 +2,7 @@
 id: cor-sr-reverse-triangle-and-future-cone-convexity
 kind: corollary
 title: "The reversed triangle inequality and convexity of the future timelike cone"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 proof_strategy: direct

@@ -1,7 +1,7 @@
 ---
 page: sr-energy-momentum
 title: "Energy Momentum"
-status: draft
+status: published
 library: physics
 items: [def-sr-observed-energy-momentum-and-kinetic-energy, lem-sr-energy-momentum-observer-identities, lem-sr-four-momentum-in-inertial-frame, def-sr-proper-time-derivative-and-four-force, lem-sr-four-force-and-work-energy-identities, def-sr-total-four-momentum-and-invariant-mass, lem-sr-finite-future-causal-sums, lem-sr-center-of-momentum-frame, def-sr-collision-datum-and-conservation, lem-sr-collision-necessary-conditions, post-sr-massive-particle-dynamics, post-sr-ideal-massless-particle-momentum, pthm-sr-momentum-and-four-force]
 examples: []

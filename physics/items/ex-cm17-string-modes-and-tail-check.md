@@ -2,7 +2,7 @@
 id: ex-cm17-string-modes-and-tail-check
 kind: example
 title: "Two-mode fixed-end string: exact solution, d'Alembert cross-check and the O(N^{-4}) tail bound at N=1"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

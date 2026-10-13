@@ -2,7 +2,7 @@
 id: def-analytic-topology-and-finite-smooth-algebraic-stratifications
 kind: definition
 title: "Analytic topology and finite smooth algebraic stratifications of complex varieties"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

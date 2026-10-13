@@ -2,7 +2,7 @@
 id: prop-cm-flow-derivative-satisfies-the-canonical-matrix-identity
 kind: proposition
 title: "The derivative of the Hamiltonian flow satisfies $Y^{\\mathsf T}JY=J$ and $\\det Y=1$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

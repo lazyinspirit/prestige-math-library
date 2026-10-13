@@ -2,7 +2,7 @@
 id: lem-t-cohomology-is-additive-shift-compatible-and-detects-amplitude
 kind: lemma
 title: "t-cohomology is functorial, additive, shift-compatible and detects amplitude"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

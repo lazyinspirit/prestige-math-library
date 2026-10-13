@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-two-turn-barrier-tunnelling-error]
 kind: theorem
 domain: mathematics
 title: "Two-turn barrier tunnelling error"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 4
 deps: [thm-nrqm-controlled-dynamics-stable-weighted-airy-volterra-connection, thm-nrqm-controlled-dynamics-liouville-turning-point-transformation, thm-nrqm-controlled-dynamics-wkb-explicit-error, thm-nrqm-controlled-dynamics-airy-envelopes-and-asymptotic-coefficients, def-bochner-integrable-function, def-countable-choice]

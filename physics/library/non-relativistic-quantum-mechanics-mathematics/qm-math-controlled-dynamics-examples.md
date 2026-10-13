@@ -1,7 +1,7 @@
 ---
 page: qm-math-controlled-dynamics-examples
 title: Qm Math Controlled Dynamics — Examples
-status: draft
+status: published
 items: []
 requires:
   - qm-math-controlled-dynamics

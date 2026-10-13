@@ -4,7 +4,7 @@ kind: physics-theorem
 title: 'Generating functions for a potential presentation: first- and
   second-kind data generate canonical maps locally, the local converse under an
   invertible projection, and the time-dependent Hamiltonian $K=H+\partial_tS$'
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 23

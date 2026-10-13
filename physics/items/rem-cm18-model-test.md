@@ -2,7 +2,7 @@
 id: rem-cm18-model-test
 kind: remark
 title: "Model testing for the force branch: what a test specifies, what rejection and retention establish, and what is not claimed"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps: [def-cm-statistical-test-and-size, def-cm-confidence-set-and-coverage, def-cm-likelihood-function, def-cm18-observable-model, def-cm18-calibration, def-cm18-sampling-model, rem-cm-inference-and-uncertainty-scope, post-cm02-force-superposition, pthm-cm02-ivp]

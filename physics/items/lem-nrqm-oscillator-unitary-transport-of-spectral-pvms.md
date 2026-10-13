@@ -4,7 +4,7 @@ aliases: [nrqm-oscillator-unitary-transport-of-spectral-pvms]
 kind: lemma
 domain: mathematics
 title: "Transport of spectral projection-valued measures along isometric bijections"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [def-resolvent-and-spectrum-of-a-closed-unbounded-operator, def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-inner-product-space, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-adjoint-of-a-densely-defined-unbounded-operator, def-projection-valued-measure, lem-scalar-and-complex-measures-from-a-pvm, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-unbounded-integral-against-a-pvm, lem-nrqm-observables-spectral-support-and-outcome-law, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces]

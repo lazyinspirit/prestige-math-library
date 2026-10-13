@@ -2,7 +2,7 @@
 id: lem-the-harmonic-complement-of-the-coinvariant-algebra
 kind: lemma
 title: The harmonic complement of the coinvariant algebra
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

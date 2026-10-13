@@ -4,7 +4,7 @@ aliases: [ nrqm-measurement-examples-scope-limits ]
 kind: remark
 domain: physics
 title: "What the worked instruments of the companion page establish"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 12
 deps:

@@ -2,7 +2,7 @@
 id: post-em-minkowski-physical-model
 kind: postulate
 title: "Adopted Minkowski physical model of the electromagnetic framework"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-em-lab-geometry, def-em-minkowski-affine-space, def-em-si-conventions, def-inertial-frame-and-inertial-chart, post-sr-ideal-clocks-and-light, post-sr-inertial-covariance]

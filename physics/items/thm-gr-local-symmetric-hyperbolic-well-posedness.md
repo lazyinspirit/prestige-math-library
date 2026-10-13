@@ -2,7 +2,7 @@
 id: thm-gr-local-symmetric-hyperbolic-well-posedness
 kind: theorem
 title: "Local well-posedness and finite-speed independence of the extension for symmetric hyperbolic systems on a coordinate neighbourhood"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

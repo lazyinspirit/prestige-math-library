@@ -2,7 +2,7 @@
 id: pthm-cm13-two-form-is-symplectic
 kind: physics-theorem
 title: "The two-form of a potential presentation is closed and nondegenerate, and each generalized-coordinate momentum chart carries the same symplectic structure: $\\Phi_X^*\\lambda=\\sum P_a\\,dq^a$ and $\\Phi_X^*\\omega=\\sum dq^a\\wedge dP_a$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

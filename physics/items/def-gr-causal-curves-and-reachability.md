@@ -2,7 +2,7 @@
 id: def-gr-causal-curves-and-reachability
 kind: definition
 title: "Causal curves, chronological and causal reachability, and inextendibility"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

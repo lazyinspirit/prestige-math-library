@@ -2,7 +2,7 @@
 id: def-sr-stress-energy-tensor-and-force-density
 kind: definition
 title: "Stress-energy tensor, force density and local balance on flat spacetime"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-affine-minkowski-model, def-ck-tensor-field-on-minkowski-space, thm-sr-tensor-and-current-transformation, def-directional-and-partial-derivatives, def-lorentz-form-and-inertia, def-inertial-frame-and-inertial-chart]

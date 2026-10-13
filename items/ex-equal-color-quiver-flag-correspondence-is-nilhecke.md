@@ -2,7 +2,7 @@
 id: ex-equal-color-quiver-flag-correspondence-is-nilhecke
 kind: example
 title: "Equal-color quiver-flag correspondence is nilHecke"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 30

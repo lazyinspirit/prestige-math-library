@@ -2,7 +2,7 @@
 id: ex-young-inequality-instances
 kind: example
 title: "Young's inequality at $p = q = 2$ and at $p = 3$, $q = 3/2$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

@@ -4,7 +4,7 @@ aliases: [ nrqm-measurement-three-polarizer-chain ]
 kind: example
 domain: physics
 title: "Three ideal analysers in series: the quarter-intensity model computation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

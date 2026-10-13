@@ -4,7 +4,7 @@ aliases: [nrqm-scattering-long-range-and-threshold-limits]
 kind: remark
 domain: physics
 title: "Long-range, threshold and model-scope limits of the scattering page"
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps: [def-nrqm-scattering-framework-short-range-model, def-nrqm-scattering-coulomb-dollard-model, pthm-nrqm-scattering-resolvent-tail-asymptotic-completeness, pthm-nrqm-scattering-compact-support-asymptotic-completeness, thm-nrqm-controlled-dynamics-compact-scattering-defects, thm-nrqm-controlled-dynamics-resolvent-tail-short-range-completeness]

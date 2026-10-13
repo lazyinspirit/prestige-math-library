@@ -4,7 +4,7 @@ aliases: [nrqm-kinematics-component-valued-wavefunction-identifications]
 kind: lemma
 domain: mathematics
 title: "Unitary identifications of the component-valued wave-function space"
-status: draft
+status: published
 origin: session
 dependency_level: 2
 deps: [def-complex-lp-and-euclidean-test-function-conventions, def-countable-choice, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-magnetic-and-detection-momentum-operators-self-adjoint, thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces, thm-extension-of-a-bounded-map-from-a-dense-subspace, thm-tonelli-theorem-for-sigma-finite-product-spaces]

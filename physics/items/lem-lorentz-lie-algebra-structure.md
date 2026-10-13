@@ -2,7 +2,7 @@
 id: lem-lorentz-lie-algebra-structure
 kind: lemma
 title: The Lie algebra of eta-antisymmetric endomorphisms, its generators and commutators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

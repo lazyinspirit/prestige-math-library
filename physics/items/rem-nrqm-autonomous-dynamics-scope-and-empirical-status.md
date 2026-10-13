@@ -4,7 +4,7 @@ aliases: [ nrqm-autonomous-dynamics-scope-and-empirical-status ]
 kind: remark
 domain: physics
 title: "What the autonomous-dynamics page adopts, proves and does not claim"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

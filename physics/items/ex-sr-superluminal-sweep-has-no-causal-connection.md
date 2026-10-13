@@ -2,7 +2,7 @@
 id: ex-sr-superluminal-sweep-has-no-causal-connection
 kind: example
 title: "A prearranged sweep with superluminal coordinate speed: successive events are spacelike separated and can be made simultaneous"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

@@ -3,7 +3,7 @@ id: def-sr-newtonian-comparison-quantities
 kind: definition
 domain: physics
 title: 'Newtonian comparison momentum and kinetic energy in a named inertial frame'
-status: draft
+status: published
 origin: session
 dependency_level: 6
 deps: [def-sr-affine-minkowski-model, def-sr-si-units-and-coordinate-conventions, def-inertial-frame-and-inertial-chart, def-spatial-euclidean-structure-of-an-inertial-frame, def-vector-valued-derivative-and-integral, def-interval, def-integer-power, def-vector-space]

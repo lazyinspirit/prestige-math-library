@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Existence of the model's wave operators, isometry and intertwining, and
   the purely absolutely continuous free spectrum"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

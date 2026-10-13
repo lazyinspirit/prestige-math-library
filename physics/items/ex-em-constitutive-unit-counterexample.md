@@ -2,7 +2,7 @@
 id: ex-em-constitutive-unit-counterexample
 kind: example
 title: "Matching units does not determine the permittivity or the response law"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

@@ -2,7 +2,7 @@
 id: thm-degenerate-ariki-categorification
 kind: theorem
 title: "The degenerate Ariki categorification theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 41

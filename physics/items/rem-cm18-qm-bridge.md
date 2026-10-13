@@ -2,7 +2,7 @@
 id: rem-cm18-qm-bridge
 kind: remark
 title: "The quantum bridge: a separate framework and requirements for a specified quantization and semiclassical correspondence result"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps: [def-cm18-observable-model, post-cm01-spacetime, post-cm01-frames, post-cm01-worldlines, rem-cm01-model-limit, post-cm02-force-superposition, def-cm02-newtonian-flow, pthm-cm02-ivp, rem-cm-inference-and-uncertainty-scope]

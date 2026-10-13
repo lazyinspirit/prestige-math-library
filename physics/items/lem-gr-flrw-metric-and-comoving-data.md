@@ -4,7 +4,7 @@ kind: lemma
 title: "The FLRW metric is smooth Lorentzian; the comoving field is unit
   timelike and cosmic time parametrizes comoving curves by proper time; the slices carry the scaled
   spatial metric"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

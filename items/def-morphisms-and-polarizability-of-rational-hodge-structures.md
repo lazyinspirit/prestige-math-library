@@ -2,7 +2,7 @@
 id: def-morphisms-and-polarizability-of-rational-hodge-structures
 kind: definition
 title: "Morphisms, polarizability and simplicity of rational Hodge structures"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps:

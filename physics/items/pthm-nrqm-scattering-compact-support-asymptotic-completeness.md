@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Asymptotic completeness and the unitary scattering operator for real
   bounded compactly supported potentials"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

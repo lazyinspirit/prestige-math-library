@@ -4,7 +4,7 @@ kind: physics-theorem
 domain: physics
 dependency_level: 18
 title: "Convergent all-order spherical multipole expansion with monopole, dipole and quadrupole terms"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

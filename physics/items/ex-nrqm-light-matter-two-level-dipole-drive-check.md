@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-two-level-dipole-drive-check]
 kind: example
 domain: physics
 title: "A two-level dipole-drive model: identification, resonant first-order coefficient and its comparison with the exact Rabi probability"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 17
 deps: [pthm-nrqm-light-matter-stimulated-dipole-drive-transitions, def-nrqm-light-matter-framework-dipole-drive-and-long-wavelength, def-nrqm-light-matter-framework-finite-level-coupled-model, pthm-nrqm-driven-dynamics-linear-drive-rotating-wave-error, pthm-nrqm-driven-dynamics-circular-drive-exact-rabi, def-nrqm-driven-dynamics-framework-driven-model, prop-nrqm-orbital-and-spin-finite-spin-matrices, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-framework-quantities-and-units, def-hilbert-space, def-inner-product-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-countable-choice, def-axiom-of-choice, post-nrqm-framework-preparation-and-apparatus, def-nrqm-central-framework-coulomb-and-hydrogen-model, post-nrqm-approximations-static-finite-level-dipole-coupling, lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization, thm-polar-coordinates-formula-for-lebesgue-measure, lem-complex-integration-by-parts-on-intervals-and-decaying-lines, lem-classical-derivatives-are-weak-derivatives, thm-tonelli-theorem-for-sigma-finite-product-spaces]

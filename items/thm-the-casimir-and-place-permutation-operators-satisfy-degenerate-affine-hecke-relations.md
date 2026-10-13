@@ -2,7 +2,7 @@
 id: thm-the-casimir-and-place-permutation-operators-satisfy-degenerate-affine-hecke-relations
 kind: theorem
 title: "The Casimir and place-permutation operators satisfy the degenerate affine Hecke relations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

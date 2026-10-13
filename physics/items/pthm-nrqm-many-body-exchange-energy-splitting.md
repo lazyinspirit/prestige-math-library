@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Direct and exchange contributions to a two-fermion mean energy and the
   repulsive-Coulomb ordering"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

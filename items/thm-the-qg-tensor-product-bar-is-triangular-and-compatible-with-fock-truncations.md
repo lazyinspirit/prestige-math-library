@@ -2,7 +2,7 @@
 id: thm-the-qg-tensor-product-bar-is-triangular-and-compatible-with-fock-truncations
 kind: theorem
 title: "The tensor-product bar on the Fock module and its truncation compatibility"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

@@ -3,7 +3,7 @@ id: pthm-em-larmor-nonrelativistic
 kind: physics-theorem
 title: "Instantaneous-rest Larmor power and uniform low-speed comparison for a prescribed point charge"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 21
 deps: [pthm-em-lienard-wiechert, def-em-retarded-point-geometry, post-em-radiation-selection, lem-em-sphere-zonal-moments, def-em-vacuum-energy-flux, pthm-em-poynting-balance, thm-em-retarded-root-and-fields, lem-cross-product-is-bilinear-alternating-and-orthogonal, thm-integral-triangle-inequality, thm-dominated-convergence, def-em-fields, def-em-si-conventions, def-euclidean-inner-product, def-countable-choice, def-cross-product-in-r3, def-em-lab-geometry, lem-euclidean-chart-measure-agrees-with-polar-surface-measure, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-ftc-second-part, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, thm-real-power-continuity-and-derivatives, lem-derivative-of-a-power, cor-mean-value-theorem, cor-trigonometric-parity-and-pythagorean-identity, thm-sine-cosine-signs-monotonicity-and-ranges, thm-quarter-turn-values-and-shift-formulas, thm-sine-cosine-zero-sets-and-fundamental-period, thm-cauchy-schwarz-finite, thm-intermediate-value]

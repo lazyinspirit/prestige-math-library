@@ -2,7 +2,7 @@
 id: thm-skryabins-equivalence-for-the-type-a-whittaker-pair
 kind: theorem
 title: "Skryabin's equivalence for the type-A Whittaker pair"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

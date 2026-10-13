@@ -2,7 +2,7 @@
 id: pthm-em-normal-fresnel
 kind: physics-theorem
 title: "Normal-incidence amplitudes and the flux budget, with the Ohmic transmitting medium"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 20

@@ -2,7 +2,7 @@
 id: def-dj-bridge-row-column-permutation-modules-and-polytabloids
 kind: definition
 title: "Hecke row permutation modules and ordinary Dipper-James polytabloids"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

@@ -3,7 +3,7 @@ id: ex-gr-sinusoidal-tt-plane-wave
 kind: example
 title: "An explicit sinusoidal TT plane wave: harmonic gauge, linearized vacuum
   equations, curvature components and detector strain"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

@@ -2,7 +2,7 @@
 id: rem-local-versus-known-open-global-fluid-scope
 kind: remark
 title: "Scope of the local periodic result: what is proved and what is not"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 9

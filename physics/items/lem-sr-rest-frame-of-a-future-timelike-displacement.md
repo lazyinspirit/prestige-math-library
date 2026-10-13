@@ -2,7 +2,7 @@
 id: lem-sr-rest-frame-of-a-future-timelike-displacement
 kind: lemma
 title: "Existence of an inertial frame whose time axis is a prescribed future timelike direction"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 proof_strategy: direct

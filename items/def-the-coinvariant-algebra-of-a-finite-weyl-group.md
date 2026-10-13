@@ -2,7 +2,7 @@
 id: def-the-coinvariant-algebra-of-a-finite-weyl-group
 kind: definition
 title: The coinvariant algebra of a finite Weyl group
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

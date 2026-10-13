@@ -2,7 +2,7 @@
 id: ex-a-noncompact-algebraic-line-needs-a-deleted-boundary-triangulation
 kind: example
 title: "A noncompact algebraic line needs a deleted boundary triangulation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

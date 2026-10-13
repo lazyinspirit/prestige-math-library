@@ -4,7 +4,7 @@ aliases: [nrqm-light-matter-framework-spectral-transition-and-detection]
 kind: definition
 domain: physics
 title: "Spectral-transition readings of the coupled model: dipole coefficients, the single-vertex photon density and ideal energy-window detection"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 15
 deps: [def-nrqm-light-matter-framework-finite-level-coupled-model, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-ideal-conditional-measurement, post-nrqm-framework-preparation-and-apparatus, def-nrqm-framework-quantities-and-units, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-nrqm-observables-framework-observable-and-outcome-law, def-nrqm-photons-framework-radiation-sector-and-quantum-assignments, def-nrqm-photons-framework-ideal-counting-and-detection-model, def-nrqm-measurement-framework-declared-measurements-and-instruments, thm-nrqm-fock-and-equilibrium-golden-rule-coefficient-approximate-identity, def-inner-product-space, def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis, def-countable-choice, def-axiom-of-choice, lem-nrqm-light-matter-first-order-photon-energy-law]

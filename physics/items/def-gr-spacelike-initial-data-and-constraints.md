@@ -2,7 +2,7 @@
 id: def-gr-spacelike-initial-data-and-constraints
 kind: definition
 title: "Spacelike initial data, the constraint equations, developments and maximal developments"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

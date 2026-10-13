@@ -2,7 +2,7 @@
 id: lem-cm-derivative-of-pairings-of-curves
 kind: lemma
 title: "Differentiation of sums, scalar multiples, inner products, cross products and squared norms of differentiable curves in $\\mathbb R^3$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

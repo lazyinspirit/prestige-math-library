@@ -2,7 +2,7 @@
 id: lem-rational-garnir-annihilator-lines-present-the-specified-specht-generator
 kind: lemma
 title: "Rational Garnir annihilator lines present the specified Specht generator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 38

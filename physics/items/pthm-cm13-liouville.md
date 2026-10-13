@@ -2,7 +2,7 @@
 id: pthm-cm13-liouville
 kind: physics-theorem
 title: "Liouville's theorem for a potential presentation: the phase-volume form $\\omega^{3N}/(3N)!$ and the Lebesgue measure in each canonical chart are preserved by the Hamiltonian evolution on its actual domains"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 22

@@ -2,7 +2,7 @@
 id: lem-gr-normal-index-form-factorization
 kind: lemma
 title: "The normal index form before the first conjugate instant is positive definite"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

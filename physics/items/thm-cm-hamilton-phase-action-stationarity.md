@@ -2,7 +2,7 @@
 id: thm-cm-hamilton-phase-action-stationarity
 kind: theorem
 title: "Stationarity of the phase-space action is equivalent to Hamilton's equations, and hyperregular elimination recovers the Lagrangian action"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

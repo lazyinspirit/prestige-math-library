@@ -2,7 +2,7 @@
 id: pthm-cm03-angular-momentum-balance
 kind: physics-theorem
 title: "Angular momentum balance about a fixed or moving reference point, the internal torque sum, and the centrality case"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "A two-level finite-gap model: exact eigenvalues, the second-order
   correction and a finite check of the cubic remainder bound"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

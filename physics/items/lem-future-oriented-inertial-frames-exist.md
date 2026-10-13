@@ -2,7 +2,7 @@
 id: lem-future-oriented-inertial-frames-exist
 kind: lemma
 title: "Existence of future-oriented inertial frames at every event"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

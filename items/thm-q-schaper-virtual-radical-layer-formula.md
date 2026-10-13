@@ -2,7 +2,7 @@
 id: thm-q-schaper-virtual-radical-layer-formula
 kind: theorem
 title: "The q-Schaper virtual radical-layer formula"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

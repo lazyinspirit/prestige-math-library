@@ -1,7 +1,7 @@
 ---
 page: em-action-and-variational-formulation
 title: "Alternative action formulation"
-status: draft
+status: published
 items: [def-em-field-action-definition,
         post-em-stationary-action-model,
         pthm-em-action-maxwell-variation,

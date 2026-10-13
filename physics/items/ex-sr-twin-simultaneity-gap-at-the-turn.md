@@ -2,7 +2,7 @@
 id: ex-sr-twin-simultaneity-gap-at-the-turn
 kind: example
 title: "Worked simultaneity gap of the traveler's two momentary rest frames at the turn"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

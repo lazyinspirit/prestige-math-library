@@ -2,7 +2,7 @@
 id: cex-cm-sine-tail-bound-fails-for-rough-data
 kind: counterexample
 title: "FALSE: the $O(N^{-4})$ sine-tail bound holds for every continuous odd periodic function. A $C^1$ datum with coefficients $n^{-3}$ refutes it"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

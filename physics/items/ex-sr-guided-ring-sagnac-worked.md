@@ -2,7 +2,7 @@
 id: ex-sr-guided-ring-sagnac-worked
 kind: example
 title: "Guided-ring Sagnac delay worked at angular velocity Omega R = 3c/5"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 16

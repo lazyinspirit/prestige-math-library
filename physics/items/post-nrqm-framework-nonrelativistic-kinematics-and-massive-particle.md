@@ -3,7 +3,7 @@ id: post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle
 kind: postulate
 title: "Kinematics and massive-particle model postulate P5: Newtonian frames and
   one-particle operators"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 7

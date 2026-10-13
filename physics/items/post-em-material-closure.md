@@ -2,7 +2,7 @@
 id: post-em-material-closure
 kind: postulate
 title: "Declared material-closure branches: linear nondispersive Ohmic response and the causal memory branch"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 16

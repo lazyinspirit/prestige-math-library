@@ -2,7 +2,7 @@
 id: ex-cm05-parabolic-and-hyperbolic-branch-check
 kind: example
 title: "The parabolic and hyperbolic branches on declared model data: $E=0$ with $e=1$ and periapsis $p/2$, and $E=1.5\\cdot10^{18}\\,$J with $e=2$, periapsis $p/3$ and angular domain $\\lvert\\theta-\\theta_0\\rvert<2\\pi/3$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

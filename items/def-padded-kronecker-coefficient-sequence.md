@@ -2,7 +2,7 @@
 id: def-padded-kronecker-coefficient-sequence
 kind: definition
 title: Padded Kronecker coefficient sequences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

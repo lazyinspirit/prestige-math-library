@@ -2,7 +2,7 @@
 id: prop-cm-coordinate-covariance-of-the-euler-lagrange-expression
 kind: proposition
 title: "Coordinate covariance of the Euler-Lagrange expression under time-dependent point transformations"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

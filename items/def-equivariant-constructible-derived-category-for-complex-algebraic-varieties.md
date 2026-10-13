@@ -2,7 +2,7 @@
 id: def-equivariant-constructible-derived-category-for-complex-algebraic-varieties
 kind: definition
 title: "Equivariant constructible derived category of complex varieties"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 10

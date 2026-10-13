@@ -2,7 +2,7 @@
 id: rem-cm-verification-scope-and-limits
 kind: remark
 title: "Scope and limits of the verification items on this page"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

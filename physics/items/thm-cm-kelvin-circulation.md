@@ -2,7 +2,7 @@
 id: thm-cm-kelvin-circulation
 kind: theorem
 title: "Kelvin circulation: the circulation around a $C^1$ material loop is constant in the barotropic inviscid model"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 5

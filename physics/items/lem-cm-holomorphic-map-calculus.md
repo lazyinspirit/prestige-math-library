@@ -2,7 +2,7 @@
 id: lem-cm-holomorphic-map-calculus
 kind: lemma
 title: 'Calculus of holomorphic maps: chain rule, Wirtinger derivatives, coefficient extraction in one variable, and locally uniform limits'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: pthm-em-vacuum-wave-equation
 kind: physics-theorem
 title: "Source-free vacuum Maxwell fields satisfy the wave equation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 14

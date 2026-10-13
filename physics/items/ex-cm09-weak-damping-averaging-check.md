@@ -2,7 +2,7 @@
 id: ex-cm09-weak-damping-averaging-check
 kind: example
 title: "An explicit weakly damped oscillator: the averaging constants and the energy-decay bound over five thousand seconds (about 796 undamped periods)"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

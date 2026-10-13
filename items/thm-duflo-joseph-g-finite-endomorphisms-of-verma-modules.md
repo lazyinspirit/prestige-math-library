@@ -2,7 +2,7 @@
 id: thm-duflo-joseph-g-finite-endomorphisms-of-verma-modules
 kind: theorem
 title: Duflo–Joseph g-finite endomorphisms of every Verma module
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-sr-equal-mass-head-on-collision-mass
 kind: example
 title: "Two equal masses in head-on motion: system mass exceeds the sum of the masses"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

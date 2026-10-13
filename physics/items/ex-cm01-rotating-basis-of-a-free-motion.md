@@ -2,7 +2,7 @@
 id: ex-cm01-rotating-basis-of-a-free-motion
 kind: example
 title: "A rotating spatial basis is not an inertial frame: nonzero coordinate acceleration of a uniform motion"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

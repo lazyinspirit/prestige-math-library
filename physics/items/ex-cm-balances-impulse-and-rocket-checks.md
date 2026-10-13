@@ -2,7 +2,7 @@
 id: ex-cm-balances-impulse-and-rocket-checks
 kind: example
 title: "Worked impulse and restitution computations and a variable-mass rocket check"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

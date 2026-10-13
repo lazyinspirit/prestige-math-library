@@ -2,7 +2,7 @@
 id: pthm-cm16-variational-equation-and-linearization
 kind: physics-theorem
 title: "Linearisation along a motion of the mechanical model: the flow derivative solves the variational equation, with Lipschitz dependence, the constant-metric second-order form, and the conditional finite-time error bound of the linear approximation"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

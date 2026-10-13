@@ -2,7 +2,7 @@
 id: ex-murphy-cellular-basis-for-h3
 kind: example
 title: "The Murphy cellular basis of H(S_3)"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

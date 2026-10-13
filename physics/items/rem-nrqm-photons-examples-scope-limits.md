@@ -2,7 +2,7 @@
 id: rem-nrqm-photons-examples-scope-limits
 kind: remark
 title: "Scope of the photons and radiation modes examples page"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 15

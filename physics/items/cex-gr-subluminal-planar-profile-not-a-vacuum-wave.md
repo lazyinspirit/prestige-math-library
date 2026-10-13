@@ -2,7 +2,7 @@
 id: cex-gr-subluminal-planar-profile-not-a-vacuum-wave
 kind: counterexample
 title: "A transverse-traceless planar profile travelling slower than light fails the linearized vacuum equations"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 13

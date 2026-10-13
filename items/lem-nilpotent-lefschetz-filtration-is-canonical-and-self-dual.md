@@ -2,7 +2,7 @@
 id: lem-nilpotent-lefschetz-filtration-is-canonical-and-self-dual
 kind: lemma
 title: "The nilpotent Lefschetz filtration is canonical and self-dual"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

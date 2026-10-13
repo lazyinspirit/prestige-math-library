@@ -1,7 +1,7 @@
 ---
 page: cm-math-verification
 title: Cm Math Verification
-status: draft
+status: published
 items:
   - def-cm-second-variation-of-the-action
   - lem-cm-second-variation-formula

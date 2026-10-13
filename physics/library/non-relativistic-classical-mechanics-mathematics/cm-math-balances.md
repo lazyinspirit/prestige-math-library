@@ -1,7 +1,7 @@
 ---
 page: cm-math-balances
 title: Cm Math Balances
-status: draft
+status: published
 items:
   - lem-cm-derivative-of-pairings-of-curves
   - thm-cm-center-of-mass-and-kinetic-splitting

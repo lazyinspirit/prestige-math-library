@@ -2,7 +2,7 @@
 id: post-cm02-drag
 kind: postulate
 title: "The linear drag model: a phenomenological velocity-proportional resistance with a declared coefficient"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

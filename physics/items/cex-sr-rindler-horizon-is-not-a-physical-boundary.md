@@ -2,7 +2,7 @@
 id: cex-sr-rindler-horizon-is-not-a-physical-boundary
 kind: counterexample
 title: "The Rindler causal horizon is not a boundary or singularity of spacetime"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

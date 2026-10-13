@@ -2,7 +2,7 @@
 id: lem-sr-scalar-field-hilbert-stress-energy
 kind: lemma
 title: "The Hilbert stress-energy tensor of the scalar-field action on flat spacetime"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [lem-sr-scalar-field-euler-lagrange, lem-sr-compact-variation-and-fundamental-lemma, def-sr-stress-energy-tensor-and-force-density, def-ck-tensor-field-on-minkowski-space, def-sr-affine-minkowski-model, def-lorentz-form-and-inertia, def-determinant-of-a-square-matrix, thm-leibniz-determinant-is-alternating-multilinear-and-normalized, cor-determinant-of-an-inverse, cor-inverse-matrix-by-adjugate, thm-adjugate-identity-over-a-commutative-ring, def-matrix-minors-cofactors-and-adjugate, thm-ring-matrix-arithmetic-laws, thm-chain-rule-for-total-derivatives, thm-algebra-of-derivatives, lem-algebra-of-continuous-real-maps-on-a-space, def-continuous-map-top, thm-continuity-characterisations-top, def-rational-power, thm-real-power-continuity-and-derivatives, def-directional-and-partial-derivatives, thm-total-derivative-computes-directional-and-partial-derivatives]

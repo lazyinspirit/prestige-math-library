@@ -2,7 +2,7 @@
 id: lem-gr-tensor-bundle-coordinate-construction
 kind: lemma
 title: "The tensor bundle on a smooth four-manifold from coordinate evaluations"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

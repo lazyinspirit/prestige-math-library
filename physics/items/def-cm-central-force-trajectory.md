@@ -2,7 +2,7 @@
 id: def-cm-central-force-trajectory
 kind: definition
 title: "Central-force trajectories: the central-force equation, angular momentum, energy and the effective potential"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-cm-cyclic-spring-chain
 kind: definition
 title: "The cyclic spring chain, its discrete energy, and the finite-regularity periodic comparison class"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

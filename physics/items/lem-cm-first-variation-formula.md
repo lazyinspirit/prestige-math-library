@@ -2,7 +2,7 @@
 id: lem-cm-first-variation-formula
 kind: lemma
 title: "The first variation of a time-dependent action on a finite interval: admissibility, the integral formula and continuity of the Euler-Lagrange coefficient"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

@@ -3,7 +3,7 @@ id: cex-gr-bounded-redshift-record-does-not-identify-the-parameter
 kind: counterexample
 domain: physics
 title: "Counterexample: a bounded one-point record of the cosmological redshift slot does not determine the emitter scale factor"
-status: draft
+status: published
 origin: session
 physical_scope: "Conceptual counterexample inside the classical gravitational framework: it shows that a declared one-point record with positive declared uncertainty for the cosmological redshift readout of the worked interface instance is consistent with two distinct parameters of the same operational model, so such a record does not determine the parameter uniquely. The numbers are declared illustrative values of the worked instance; the item asserts no measurement, no apparatus, no sampling model, no statistical inference and no empirical conclusion about any model or postulate."
 provenance:

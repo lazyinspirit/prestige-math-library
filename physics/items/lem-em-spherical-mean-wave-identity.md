@@ -3,7 +3,7 @@ id: lem-em-spherical-mean-wave-identity
 kind: lemma
 domain: mathematics
 title: "The spherical mean identity behind the wave equation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 1

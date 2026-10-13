@@ -2,7 +2,7 @@
 id: lem-cm-skew-matrix-cross-product-correspondence
 kind: lemma
 title: "The skew-matrix/cross-product correspondence $[\\omega]_\\times z=\\omega\\times z$ and its conjugation law $R[\\omega]_\\times R^{\\mathsf T}=[R\\omega]_\\times$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

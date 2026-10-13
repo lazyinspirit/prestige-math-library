@@ -1,7 +1,7 @@
 ---
 page: quantum-affine-type-a-and-level-one-fock-space
 title: "Quantum Affine Type A and Level-One Fock Space"
-status: draft
+status: published
 requires: [tensor-product-crystals-and-highest-weight-crystal-uniqueness,
            balanced-triples-and-global-crystal-bases,
            young-diagrams-tableaux-and-permutation-modules]

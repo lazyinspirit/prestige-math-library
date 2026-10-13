@@ -3,7 +3,7 @@ id: cex-nrqm-framework-zero-mass-has-no-self-adjoint-limit
 kind: counterexample
 title: "The massive free-particle family has no strong zero-mass limit on
   Schwartz states"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

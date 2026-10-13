@@ -4,7 +4,7 @@ aliases: [nrqm-composites-exact-free-gaussian-propagation]
 kind: lemma
 domain: mathematics
 title: "Exact free Gaussian propagation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

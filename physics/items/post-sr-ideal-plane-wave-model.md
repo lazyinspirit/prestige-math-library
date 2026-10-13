@@ -2,7 +2,7 @@
 id: post-sr-ideal-plane-wave-model
 kind: postulate
 title: 'Adopted ideal plane-wave and frequency-reading model'
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: 'Ideal monochromatic vacuum plane waves and ideal observers in the flat classical special-relativity model: the phase model with future null wave covector, the identification of wave fronts and ideal rays, and the phase-per-proper-time frequency reading by an ideal observer. Adopted assumptions, not deductions and not empirical findings; excludes quantum, medium, dispersion, source, detector, intensity, polarization, gravity and real-apparatus effects; empirical tests are reserved to the framework''s experimental work.'

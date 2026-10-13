@@ -2,7 +2,7 @@
 id: ex-sr-aberration-worked-beta-three-fifths
 kind: example
 title: 'Worked aberration and Doppler shift at beta = 3/5 and cos theta = 4/5'
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: 'Worked numerical aberration and Doppler computation of the ideal plane-wave model at relative speed (3/5)c and source angle cosine 4/5. Conditional on the model; no measurement, statistical inference or empirical claim.'

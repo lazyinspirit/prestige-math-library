@@ -2,7 +2,7 @@
 id: rem-block-weight-is-not-the-same-as-numerical-defect
 kind: remark
 title: "Block weight is not the same as numerical defect"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 19

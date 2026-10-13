@@ -2,7 +2,7 @@
 id: def-residue-sequence-idempotents-and-cyclotomic-hecke-blocks
 kind: definition
 title: "Residue-sequence idempotents and cyclotomic Hecke blocks"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 30

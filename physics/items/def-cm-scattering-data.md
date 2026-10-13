@@ -3,7 +3,7 @@ id: def-cm-scattering-data
 kind: definition
 title: "Scattering data: the incident flux measure, the solid-angle element,
   deflection branches and the cross-section density"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

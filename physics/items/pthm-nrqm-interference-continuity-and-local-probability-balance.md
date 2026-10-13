@@ -4,7 +4,7 @@ aliases: [nrqm-interference-continuity-and-local-probability-balance]
 kind: physics-theorem
 domain: physics
 title: "Continuity equation and local balance for the massive-model position density"
-status: draft
+status: published
 origin: session
 dependency_level: 9
 deps: [def-nrqm-kinematics-framework-massive-spin-s-model, def-nrqm-autonomous-dynamics-framework-evolution, post-nrqm-framework-state-and-composition, post-nrqm-framework-observable-and-probability, post-nrqm-framework-autonomous-dynamics, post-nrqm-framework-nonrelativistic-kinematics-and-massive-particle, post-nrqm-framework-identical-particles-and-spin, def-nrqm-framework-quantities-and-units, def-laplacian-of-a-c2-function, def-jacobian-matrix-and-gradient, def-divergence-and-curl-of-a-c1-vector-field, thm-algebra-of-derivatives, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, thm-differentiation-under-the-integral-sign, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, cor-mean-value-theorem, cor-differentiable-implies-continuous, thm-heine-borel-rn, thm-monotone-convergence-for-the-integral, def-countable-choice, def-axiom-of-choice]

@@ -2,7 +2,7 @@
 id: thm-cm-smooth-dependence-and-the-variational-equation
 kind: theorem
 title: "C¹ dependence of an autonomous flow on the initial condition, and the variational equation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

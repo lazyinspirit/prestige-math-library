@@ -2,7 +2,7 @@
 id: lem-gr-causal-curve-conventions
 kind: lemma
 title: "Equivalence of the absolutely-continuous and continuous causal conventions, and one-sided inextendible extensions"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 19

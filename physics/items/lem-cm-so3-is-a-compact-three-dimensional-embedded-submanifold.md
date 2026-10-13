@@ -2,7 +2,7 @@
 id: lem-cm-so3-is-a-compact-three-dimensional-embedded-submanifold
 kind: lemma
 title: "$SO(3)$ is a compact three-dimensional embedded submanifold of $M_3(\\mathbb R)$, with tangent space the matrices $R\\Omega$ for skew $\\Omega$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: pthm-cm16-hyperbolic-linearization
 kind: physics-theorem
 title: "Hyperbolic linearisation of an equilibrium of the model: exponential dichotomy of the linearised flow, local exponential asymptotic stability in the stable case, and instability in the saddle case"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 12

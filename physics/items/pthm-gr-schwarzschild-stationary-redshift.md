@@ -2,7 +2,7 @@
 id: pthm-gr-schwarzschild-stationary-redshift
 kind: physics-theorem
 title: "Restricted redshift prediction of the Schwarzschild vacuum model: the observer-energy ratio between static observers"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

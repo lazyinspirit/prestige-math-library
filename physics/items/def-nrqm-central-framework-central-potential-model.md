@@ -5,7 +5,7 @@ kind: definition
 domain: physics
 title: "The declared central-potential model: state space, assigned energy
   operator, spherical reading and bound-state vocabulary"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

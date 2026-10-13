@@ -2,7 +2,7 @@
 id: cor-kronecker-coefficients-are-nonnegative-integers-and-s3-symmetric
 kind: corollary
 title: Kronecker coefficients are nonnegative integers with full S_3 and conjugation symmetries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

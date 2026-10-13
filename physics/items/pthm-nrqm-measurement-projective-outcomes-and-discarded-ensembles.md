@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Consequences of a declared ideal sharp measurement: repeatability and
   discarded ensembles"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

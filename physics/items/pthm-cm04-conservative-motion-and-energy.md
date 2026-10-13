@@ -2,7 +2,7 @@
 id: pthm-cm04-conservative-motion-and-energy
 kind: physics-theorem
 title: "Existence, uniqueness and conservation of energy for a one-dimensional conservative model: phase curves lie in energy level sets and the velocity is determined by the position and energy up to sign"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

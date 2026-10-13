@@ -4,7 +4,7 @@ aliases: [nrqm-driven-dynamics-examples-scope-limits]
 kind: remark
 domain: physics
 title: "What the examples check, what they do not contain, and the empirical status of the companion page"
-status: draft
+status: published
 origin: session
 deps: [ex-nrqm-driven-dynamics-circular-drive-exact-populations, ex-nrqm-driven-dynamics-linear-drive-rotating-wave-budget, ex-nrqm-driven-dynamics-ammonia-two-level-resonance, ex-nrqm-driven-dynamics-driven-oscillator-coherent-response, pthm-nrqm-driven-dynamics-circular-drive-exact-rabi, pthm-nrqm-driven-dynamics-linear-drive-rotating-wave-error, pthm-nrqm-driven-dynamics-common-domain-propagator, rem-nrqm-driven-dynamics-scope-and-empirical-status, post-nrqm-framework-preparation-and-apparatus]
 dependency_roles:

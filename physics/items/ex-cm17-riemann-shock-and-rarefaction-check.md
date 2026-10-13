@@ -3,7 +3,7 @@ id: ex-cm17-riemann-shock-and-rarefaction-check
 kind: example
 title: "A Riemann shock and a rarefaction of the scalar model: explicit weak
   solutions, entropy coefficients and initial trace"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

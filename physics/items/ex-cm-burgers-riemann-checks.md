@@ -3,7 +3,7 @@ id: ex-cm-burgers-riemann-checks
 kind: example
 title: "Riemann data $u_L=3$, $u_R=1$: shock speed and entropy coefficients, and
   a rarefaction check"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

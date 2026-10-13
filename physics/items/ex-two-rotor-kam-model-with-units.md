@@ -2,7 +2,7 @@
 id: ex-two-rotor-kam-model-with-units
 kind: example
 title: "A two-rotor model with units: dimensionless normalisation, Diophantine measure and the conditional KAM family"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 12

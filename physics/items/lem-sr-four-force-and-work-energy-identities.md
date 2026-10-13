@@ -2,7 +2,7 @@
 id: lem-sr-four-force-and-work-energy-identities
 kind: lemma
 title: "Four-force identities and the work-energy relation in an inertial frame"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

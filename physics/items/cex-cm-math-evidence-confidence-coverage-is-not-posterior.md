@@ -2,7 +2,7 @@
 id: cex-cm-math-evidence-confidence-coverage-is-not-posterior
 kind: counterexample
 title: "Coverage level is not the posterior probability of the realized confidence set"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-cm-confidence-set-and-coverage, def-conditional-probability, def-finite-probability-space-and-event, def-measure, def-probability-measure, def-sigma-algebra, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]

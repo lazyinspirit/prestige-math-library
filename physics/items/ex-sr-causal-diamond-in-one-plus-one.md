@@ -2,7 +2,7 @@
 id: ex-sr-causal-diamond-in-one-plus-one
 kind: example
 title: "Worked four-dimensional causal diamond and the boost-invariant area of its planar section"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 provenance:

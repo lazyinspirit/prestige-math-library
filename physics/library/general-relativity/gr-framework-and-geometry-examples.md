@@ -7,7 +7,7 @@ requires:
   - the-inverse-function-theorem-completed
 page: gr-framework-and-geometry-examples
 title: "Framework And Geometry — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

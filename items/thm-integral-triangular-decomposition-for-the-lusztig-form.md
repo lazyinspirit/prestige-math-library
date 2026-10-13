@@ -2,7 +2,7 @@
 id: thm-integral-triangular-decomposition-for-the-lusztig-form
 kind: theorem
 title: "Integral triangular decomposition and freeness of the Lusztig form"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

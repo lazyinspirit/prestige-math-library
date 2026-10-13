@@ -2,7 +2,7 @@
 id: thm-cyclotomic-klr-functors-define-an-integrable-quantum-action-on-k-zero-and-g-zero
 kind: theorem
 title: "Cyclotomic KLR functors define an integrable quantum action on $K_0$ and $G_0$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 17

@@ -2,7 +2,7 @@
 id: lem-gr-periodic-sobolev-embedding
 kind: lemma
 title: "Periodic Sobolev embedding: H^s on the three-torus controls C^m when s minus m exceeds three halves"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 2

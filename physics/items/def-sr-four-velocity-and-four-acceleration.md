@@ -2,7 +2,7 @@
 id: def-sr-four-velocity-and-four-acceleration
 kind: definition
 title: "Four-velocity and four-acceleration of a future timelike worldline"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 10

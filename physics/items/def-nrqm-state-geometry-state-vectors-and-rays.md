@@ -3,7 +3,7 @@ id: def-nrqm-state-geometry-state-vectors-and-rays
 kind: definition
 domain: mathematics
 title: "State vectors, unit vectors, rays, normalization and phases of a Hilbert space"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-hilbert-space, def-real-and-complex-inner-product-space, def-inner-product-norm, cor-inner-product-induces-a-norm, def-complex-numbers-and-arithmetic, lem-complex-conjugation-and-modulus-laws]

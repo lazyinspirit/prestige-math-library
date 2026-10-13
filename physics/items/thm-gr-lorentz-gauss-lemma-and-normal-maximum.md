@@ -2,7 +2,7 @@
 id: thm-gr-lorentz-gauss-lemma-and-normal-maximum
 kind: theorem
 title: "The Lorentzian Gauss lemma and the radial maximum of proper time"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

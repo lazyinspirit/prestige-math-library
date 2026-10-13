@@ -2,7 +2,7 @@
 id: lem-gr-intersection-of-developments
 kind: lemma
 title: "The intersection of two developments of the same data sharing the initial Cauchy surface is again a development"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 29

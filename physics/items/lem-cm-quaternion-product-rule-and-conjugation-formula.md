@@ -2,7 +2,7 @@
 id: lem-cm-quaternion-product-rule-and-conjugation-formula
 kind: lemma
 title: "The product rule for quaternion and matrix curves, multiplicativity of the quaternion norm, and the conjugation formula $q\\,\\varphi(v)\\,\\bar q=\\varphi\\bigl((a^{2}-\\|u\\|^{2})v+2\\langle u,v\\rangle u+2a\\,(u\\times v)\\bigr)$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

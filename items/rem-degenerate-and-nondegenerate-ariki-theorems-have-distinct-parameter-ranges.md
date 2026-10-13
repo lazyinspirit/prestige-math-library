@@ -2,7 +2,7 @@
 id: rem-degenerate-and-nondegenerate-ariki-theorems-have-distinct-parameter-ranges
 kind: remark
 title: "The degenerate and nondegenerate Ariki theorems have distinct parameter ranges"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 43

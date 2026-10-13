@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Galilean boost covariance of the free massive spin-s model and the
   moving-frame reading"
-status: draft
+status: published
 origin: session
 dependency_level: 11
 deps:

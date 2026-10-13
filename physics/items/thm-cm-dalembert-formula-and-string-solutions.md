@@ -2,7 +2,7 @@
 id: thm-cm-dalembert-formula-and-string-solutions
 kind: theorem
 title: "d'Alembert's formula solves the wave equation, is the unique $C^2$ solution, and the fixed-end sine modes solve it exactly"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

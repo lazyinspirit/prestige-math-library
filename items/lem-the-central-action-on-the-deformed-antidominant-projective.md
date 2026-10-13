@@ -2,7 +2,7 @@
 id: lem-the-central-action-on-the-deformed-antidominant-projective
 kind: lemma
 title: The central action on the deformed antidominant projective
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 7

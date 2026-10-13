@@ -1,7 +1,7 @@
 ---
 page: qm-central-potentials-and-hydrogen
 title: Qm Central Potentials And Hydrogen
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-central-exponential-moments

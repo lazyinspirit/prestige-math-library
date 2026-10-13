@@ -2,7 +2,7 @@
 id: ex-sr-four-momentum-boost-to-rest
 kind: example
 title: "A passive boost that brings a moving particle to rest"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

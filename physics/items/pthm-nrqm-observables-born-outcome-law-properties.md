@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "The Born outcome law: probability measure, mixtures, atoms and spectral
   support"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 8
 deps:

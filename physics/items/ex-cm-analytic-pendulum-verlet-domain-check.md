@@ -2,7 +2,7 @@
 id: ex-cm-analytic-pendulum-verlet-domain-check
 kind: example
 title: 'Analytic pendulum: checking the complex bounds and compact-iterate hypothesis'
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 18

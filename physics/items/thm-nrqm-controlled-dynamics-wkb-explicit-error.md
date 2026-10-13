@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-wkb-explicit-error]
 kind: theorem
 domain: mathematics
 title: "WKB explicit error"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [thm-nrqm-controlled-dynamics-allowed-region-wkb-coefficient-equation, def-derivative, def-continuity-real, def-bochner-integrable-function, thm-continuous-implies-integrable, thm-ftc-first-part, thm-newton-leibniz-with-interior-derivative, thm-chain-rule, thm-complex-exponential-is-entire-with-derivative-itself]

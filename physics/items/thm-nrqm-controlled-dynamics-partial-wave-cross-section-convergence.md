@@ -4,7 +4,7 @@ aliases: [ nrqm-controlled-dynamics-partial-wave-cross-section-convergence ]
 kind: theorem
 domain: mathematics
 title: "Partial-wave cross-section convergence"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

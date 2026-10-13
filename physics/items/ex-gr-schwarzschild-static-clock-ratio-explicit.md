@@ -2,7 +2,7 @@
 id: ex-gr-schwarzschild-static-clock-ratio-explicit
 kind: example
 title: "Explicit static clock-rate ratios of the Schwarzschild exterior at r = 2s and r = 4s"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

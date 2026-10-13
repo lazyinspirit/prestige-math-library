@@ -2,7 +2,7 @@
 id: ex-cm11-free-top-checks
 kind: example
 title: "Two explicit free-rotation models checked: principal-axis spins, a non-uniform symmetric-top motion with its invariants, and the linearized frequencies of an asymmetric top"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 17

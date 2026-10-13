@@ -1,7 +1,7 @@
 ---
 page: qm-observables-and-born-probabilities-examples
 title: "Qm Observables And Born Probabilities — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

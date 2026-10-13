@@ -2,7 +2,7 @@
 id: prop-r-cycle-virtual-character-filter
 kind: proposition
 title: "The $r$-cycle virtual character filter"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

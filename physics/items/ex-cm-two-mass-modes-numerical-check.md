@@ -2,7 +2,7 @@
 id: ex-cm-two-mass-modes-numerical-check
 kind: example
 title: "Two-mass spring eigenmodes at explicit parameters: eigenrelations, a mode solution, and the zero-frequency case"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

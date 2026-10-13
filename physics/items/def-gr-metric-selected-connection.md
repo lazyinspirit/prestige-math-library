@@ -2,7 +2,7 @@
 id: def-gr-metric-selected-connection
 kind: definition
 title: "Metric compatibility, torsion freedom and the metric-selected connection class"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

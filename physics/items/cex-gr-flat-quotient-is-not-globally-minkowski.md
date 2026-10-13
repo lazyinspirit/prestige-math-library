@@ -2,7 +2,7 @@
 id: cex-gr-flat-quotient-is-not-globally-minkowski
 kind: counterexample
 title: "A flat Lorentzian four-manifold that is not isometric to Minkowski space: the rolled-up flat model R^4 / Z by a timelike translation"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 15

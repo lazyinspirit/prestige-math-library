@@ -2,7 +2,7 @@
 id: lem-charged-core-height-matrices-have-content-preserving-descent-and-minimal-switch-connectivity
 kind: lemma
 title: "Charged core height matrices: hub-preserving descent and minimal switch connectivity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: ex-cm12-regular-not-surjective
 kind: example
 title: "Regular but not hyperregular: the Lagrangian $e^{v}$, its branch $H(p)=p\\ln p-p$ on $p>0$ and the absent inverse at nonpositive momenta"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

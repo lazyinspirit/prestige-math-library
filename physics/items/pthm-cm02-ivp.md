@@ -2,7 +2,7 @@
 id: pthm-cm02-ivp
 kind: physics-theorem
 title: "Local existence and uniqueness for the Newtonian initial-value problem, with the quantitative Picard-Lindelöf cylinder"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 10

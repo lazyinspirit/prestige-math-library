@@ -2,7 +2,7 @@
 id: ex-cm04-pendulum-small-angle-check
 kind: example
 title: "The pendulum angle chart: stability, linearized equation, finite-time bound and quadratic-energy check"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

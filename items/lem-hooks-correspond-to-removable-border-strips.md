@@ -2,7 +2,7 @@
 id: lem-hooks-correspond-to-removable-border-strips
 kind: lemma
 title: "Hooks of a partition correspond bijectively to removable border strips"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

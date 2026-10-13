@@ -4,7 +4,7 @@ aliases: [nrqm-magnetic-and-detection-weak-product-rule]
 kind: lemma
 domain: mathematics
 title: "Weak product rule for a bounded coefficient with bounded weak derivative"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps: [def-sobolev-space-wkp-and-its-norm, def-weak-derivative-of-a-locally-integrable-function, lem-weak-derivatives-are-unique-almost-everywhere, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, lem-classical-derivatives-are-weak-derivatives, thm-algebra-of-derivatives, def-l-p-space-as-a-quotient-by-null-functions, def-countable-choice]

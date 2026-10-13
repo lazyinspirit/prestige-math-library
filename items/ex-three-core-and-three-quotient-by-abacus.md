@@ -2,7 +2,7 @@
 id: ex-three-core-and-three-quotient-by-abacus
 kind: example
 title: "The three-core and three-quotient of (6,5,2,1^3) by abacus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

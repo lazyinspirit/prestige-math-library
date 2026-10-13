@@ -2,7 +2,7 @@
 id: ex-cm15-control-volume-check
 kind: example
 title: "A declared smooth open flow: the uniform scaling $\\rho=\\rho_0e^{-3\\alpha t}$, $u=\\alpha x$ satisfies the control-volume identities on fixed and material regions, and elbow port data illustrate the inlet/outlet decomposition"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

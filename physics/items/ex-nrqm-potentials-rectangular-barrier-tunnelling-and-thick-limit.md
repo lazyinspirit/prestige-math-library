@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "Tunnelling through a rectangular barrier: an exactly solvable scaling
   and its thick-barrier comparison"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

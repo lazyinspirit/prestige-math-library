@@ -3,7 +3,7 @@ id: lem-sr-radar-midpoint-for-inertial-observer
 kind: lemma
 domain: mathematics
 title: "The radar round trip of an inertial observer halves at the midpoint of the reception interval"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

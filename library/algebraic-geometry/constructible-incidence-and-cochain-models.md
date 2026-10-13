@@ -1,7 +1,7 @@
 ---
 page: constructible-incidence-and-cochain-models
 title: "Constructible Incidence And Cochain Models"
-status: draft
+status: published
 items: [       lem-bounded-analytic-field-sheaves-have-derived-tensor-hom-and-pullback-pushforward-adjunctions,
        lem-finite-simplicial-constructible-sheaves-have-a-derived-incidence-model,
        lem-complex-algebraic-boundary-points-admit-normalized-curve-arcs,

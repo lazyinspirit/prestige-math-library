@@ -2,7 +2,7 @@
 id: thm-the-loop-filtration-on-the-type-a-finite-w-algebra-has-associated-graded-u-of-g-e
 kind: theorem
 title: "The loop filtration on the type-A finite W-algebra has associated graded U(g^e)"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

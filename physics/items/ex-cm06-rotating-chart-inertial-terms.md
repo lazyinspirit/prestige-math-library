@@ -2,7 +2,7 @@
 id: ex-cm06-rotating-chart-inertial-terms
 kind: example
 title: "All four inertial terms checked on explicit data, and the exact return to an inertial chart"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

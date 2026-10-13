@@ -4,7 +4,7 @@ aliases: [nrqm-uncertainty-approximation-by-product-domain-vectors]
 kind: lemma
 domain: mathematics
 title: "Approximation of Q-P graph-domain vectors by product-domain vectors"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-schwartz-space-and-its-seminorms, lem-nrqm-kinematics-componentwise-position-and-momentum, lem-nrqm-uncertainty-product-domain-commutator-identity, lem-schwartz-cutoffs-from-the-standard-smooth-step, lem-weak-leibniz-rule-with-a-smooth-factor, thm-dominated-convergence]

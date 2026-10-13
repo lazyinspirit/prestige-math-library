@@ -2,7 +2,7 @@
 id: pthm-cm07-lagrangian-reduction-of-ideal-constraints
 kind: physics-theorem
 title: "Ideal scleronomic holonomic constraints: the substituted Lagrange equations are equivalent to the constrained model equation"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

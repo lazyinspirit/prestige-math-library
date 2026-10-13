@@ -1,7 +1,7 @@
 ---
 page: em-retarded-fields-and-radiation-examples
 title: "Retarded fields and radiation — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-em-no-retarded-root-example, ex-em-dipole-antenna-example,
            texp-em-classical-orbit-instability]

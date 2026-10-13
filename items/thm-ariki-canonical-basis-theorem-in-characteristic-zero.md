@@ -2,7 +2,7 @@
 id: thm-ariki-canonical-basis-theorem-in-characteristic-zero
 kind: theorem
 title: "Ariki's canonical basis theorem in characteristic zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 39

@@ -1,7 +1,7 @@
 ---
 page: qm-central-potentials-and-hydrogen-examples
 title: "Qm Central Potentials And Hydrogen — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

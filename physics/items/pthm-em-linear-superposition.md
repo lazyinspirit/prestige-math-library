@@ -2,7 +2,7 @@
 id: pthm-em-linear-superposition
 kind: physics-theorem
 title: "Superposition for prescribed Maxwell fields and sources"
-status: draft
+status: published
 origin: session
 domain: physics
 deps: [def-distribution, def-distributional-derivative, def-divergence-and-curl-of-a-c1-vector-field, def-directional-and-partial-derivatives, def-em-fields, def-em-lab-geometry, def-em-si-conventions, def-em-sources, post-em-vacuum-maxwell, thm-algebra-of-derivatives, thm-componentwise-limits-and-continuity, thm-linearity-of-the-lebesgue-integral-on-l-one, def-regular-distribution-from-a-locally-integrable-function]

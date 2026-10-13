@@ -4,7 +4,7 @@ kind: physics-theorem
 domain: physics
 dependency_level: 17
 title: "Origin shift of the source moments: Q, the dipole p - Qb, the Cartesian expansion and the traceless quadrupole"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

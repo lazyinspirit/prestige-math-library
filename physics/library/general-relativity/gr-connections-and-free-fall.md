@@ -18,7 +18,7 @@ requires:
   - the-fundamental-theorems-of-calculus
 page: gr-connections-and-free-fall
 title: "Connections And Free Fall"
-status: draft
+status: published
 library: physics
 items:
   - def-gr-timelike-worldline-and-proper-time

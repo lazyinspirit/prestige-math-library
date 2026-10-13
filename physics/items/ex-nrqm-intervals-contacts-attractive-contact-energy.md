@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-example-attractive-contact-energy]
 kind: example
 domain: mathematics
 title: "Attractive contact energy"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 7
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-weak-derivative-ac-representative, thm-nrqm-intervals-delta-interface-operator, thm-nrqm-intervals-delta-unique-bound-state, def-complex-exponential, thm-derivative-of-exponential, def-countable-choice, def-axiom-of-choice]

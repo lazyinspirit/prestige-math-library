@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Airy connection across a single simple turning point of the declared
   regime model, with envelope error control"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

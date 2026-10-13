@@ -2,7 +2,7 @@
 id: thm-gr-tt-plane-wave-curvature
 kind: theorem
 title: "First-order curvature of the flat linearization and of TT plane waves, its gauge invariance and its contraction to the linearized Ricci tensor"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

@@ -2,7 +2,7 @@
 id: thm-normal-node-composition-multiplicities-under-residue-restriction
 kind: theorem
 title: "Normal-node composition multiplicities under residue restriction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

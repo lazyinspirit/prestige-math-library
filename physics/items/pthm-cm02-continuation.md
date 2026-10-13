@@ -2,7 +2,7 @@
 id: pthm-cm02-continuation
 kind: physics-theorem
 title: "Maximal Newtonian motions and the compact-continuation criterion: finite-time breakdown requires escape from every compact subset of the time-state domain"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

@@ -5,7 +5,7 @@ aliases:
 kind: theorem
 domain: mathematics
 title: Rotating-wave finite-time error
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps:

@@ -2,7 +2,7 @@
 id: cex-cm14-harmonic-model-critical-fibre
 kind: counterexample
 title: "The zero-energy level of the harmonic model: a compact connected common level set of a completely integrable datum that is a point, not a torus"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 26

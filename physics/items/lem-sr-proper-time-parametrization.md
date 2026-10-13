@@ -2,7 +2,7 @@
 id: lem-sr-proper-time-parametrization
 kind: lemma
 title: "The proper-time function is a strictly increasing C^1 parametrization with C^1 inverse"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 9

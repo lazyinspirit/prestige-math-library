@@ -2,7 +2,7 @@
 id: thm-e-core-is-independent-of-the-rim-hook-removal-order
 kind: theorem
 title: "The e-core is independent of the rim hook removal order"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

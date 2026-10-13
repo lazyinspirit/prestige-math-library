@@ -2,7 +2,7 @@
 id: def-cm-phase-domain-and-standard-symplectic-two-form
 kind: definition
 title: "A phase domain, its canonical one-form and its standard symplectic two-form"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

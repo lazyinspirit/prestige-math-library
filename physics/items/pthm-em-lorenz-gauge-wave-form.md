@@ -3,7 +3,7 @@ id: pthm-em-lorenz-gauge-wave-form
 kind: physics-theorem
 title: "Maxwell's equations in potential form: the Lorenz divergence, the decoupled wave equations and residual generators"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 17
 deps: [pthm-em-spacetime-potentials, def-em-gauge-transformation, pthm-em-gauge-invariance, post-em-vacuum-maxwell, def-em-potential-gauge-and-field-conventions, def-em-fields, def-em-sources, lem-em-joint-smooth-potentials, cor-the-curl-of-a-curl-of-a-c2-field, def-laplacian-of-a-c2-function, thm-clairaut-schwarz-mixed-partials, thm-algebra-of-derivatives, lem-divergence-and-curl-are-linear-and-obey-the-scalar-product-rules, thm-the-divergence-of-a-curl-vanishes, thm-the-curl-of-a-gradient-vanishes, def-directional-and-partial-derivatives, def-ck-euclidean-maps-and-diffeomorphisms, def-interval]

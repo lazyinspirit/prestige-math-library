@@ -2,7 +2,7 @@
 id: def-gr-energy-conditions
 kind: definition
 title: "The pointwise energy conditions WEC, NEC, DEC and SEC"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 7

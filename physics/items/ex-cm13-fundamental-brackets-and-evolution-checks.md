@@ -2,7 +2,7 @@
 id: ex-cm13-fundamental-brackets-and-evolution-checks
 kind: example
 title: "Fundamental brackets and Bracket evolution on explicit one-label data: $\\{x^a,H\\}=p_a/m$, $\\{p_a,H\\}=-U_{x^a}$, and the oscillator check"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 23

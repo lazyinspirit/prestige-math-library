@@ -2,7 +2,7 @@
 id: lem-cm-convolution-differentiation
 kind: lemma
 title: "Differentiation of a variable-limit convolution integral with a C-one matrix kernel"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

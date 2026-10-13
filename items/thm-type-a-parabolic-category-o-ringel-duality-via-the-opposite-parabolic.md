@@ -2,7 +2,7 @@
 id: thm-type-a-parabolic-category-o-ringel-duality-via-the-opposite-parabolic
 kind: theorem
 title: "Type-A parabolic category-O Ringel duality via the opposite parabolic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 29

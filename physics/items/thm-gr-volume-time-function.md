@@ -2,7 +2,7 @@
 id: thm-gr-volume-time-function
 kind: theorem
 title: "The Geroch volume function: a continuous strictly increasing time function whose levels are Cauchy sets"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 24

@@ -2,7 +2,7 @@
 id: lem-gr-schwarzschild-isotropic-coordinate-form
 kind: lemma
 title: "The isotropic coordinate form of the Schwarzschild exterior metric and the isothermal radius shift"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

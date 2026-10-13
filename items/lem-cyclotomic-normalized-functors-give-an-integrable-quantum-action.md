@@ -2,7 +2,7 @@
 id: lem-cyclotomic-normalized-functors-give-an-integrable-quantum-action
 kind: lemma
 title: "Normalized cyclotomic functors give an integrable quantum action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

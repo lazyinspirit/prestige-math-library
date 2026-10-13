@@ -2,7 +2,7 @@
 id: lem-gr-algebraic-curvature-vanishing-criterion
 kind: lemma
 title: "A curvature tensor vanishes if the tidal operator vanishes for every timelike direction"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

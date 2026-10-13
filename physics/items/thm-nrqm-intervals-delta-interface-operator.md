@@ -4,7 +4,7 @@ aliases: [nrqm-intervals-and-contacts-delta-interface-operator]
 kind: theorem
 domain: mathematics
 title: "The one-dimensional delta interface operator"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [def-nrqm-intervals-hilbert-sobolev-spaces, lem-nrqm-intervals-weak-derivative-ac-representative, lem-nrqm-intervals-endpoint-trace-and-half-line-decay, lem-nrqm-intervals-integration-by-parts, lem-nrqm-intervals-free-line-resolvent, thm-nrqm-composites-real-multipliers-and-free-bounded-potential-operators, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-self-adjointness-range-criterion, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-densely-defined-closed-and-closable-operator, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

@@ -2,7 +2,7 @@
 id: thm-gr-flat-slab-incomplete-geodesic-and-cauchy-slice
 kind: theorem
 title: "The open flat slab: an incomplete timelike geodesic, a Cauchy slice and global hyperbolicity"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

@@ -2,7 +2,7 @@
 id: rem-cm04-linear-model-scope
 kind: remark
 title: "Scope and limits of the one-dimensional conservative and dissipative models: declared class, approximation status, empirical parameters and open extensions"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 20

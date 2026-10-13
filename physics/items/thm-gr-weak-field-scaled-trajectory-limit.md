@@ -2,7 +2,7 @@
 id: thm-gr-weak-field-scaled-trajectory-limit
 kind: theorem
 title: "Scaled trajectory limit: weak-field geodesics converge to the Newtonian system, with rate O(epsilon) for identical initial data"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

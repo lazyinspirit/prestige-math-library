@@ -3,7 +3,7 @@ id: lem-em-parameter-preserving-smooth-extension-on-a-smooth-domain
 kind: lemma
 domain: mathematics
 title: "A fixed smooth-domain extension that preserves smooth parameters"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 dependency_level: 0

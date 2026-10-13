@@ -2,7 +2,7 @@
 id: ex-cm06-bead-on-a-rotating-wire
 kind: example
 title: "A bead on a uniformly rotating straight wire: the rheonomic ideal constraint, its reaction, and the work it performs"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 13

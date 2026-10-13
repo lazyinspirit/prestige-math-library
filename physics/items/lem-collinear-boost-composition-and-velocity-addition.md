@@ -2,7 +2,7 @@
 id: lem-collinear-boost-composition-and-velocity-addition
 kind: lemma
 title: Collinear boost composition and the relativistic velocity-addition law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

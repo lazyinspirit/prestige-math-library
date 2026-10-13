@@ -2,7 +2,7 @@
 id: def-cm02-newtonian-flow
 kind: definition
 title: "The associated first-order system, motions, maximal motions and the Newtonian flow of a force model"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

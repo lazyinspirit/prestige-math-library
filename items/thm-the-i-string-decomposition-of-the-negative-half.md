@@ -2,7 +2,7 @@
 id: thm-the-i-string-decomposition-of-the-negative-half
 kind: theorem
 title: "The $i$-string decomposition of the negative half"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

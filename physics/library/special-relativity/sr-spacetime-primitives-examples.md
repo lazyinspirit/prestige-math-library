@@ -1,7 +1,7 @@
 ---
 page: sr-spacetime-primitives-examples
 title: "Spacetime Primitives — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

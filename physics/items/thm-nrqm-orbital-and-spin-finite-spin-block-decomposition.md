@@ -4,7 +4,7 @@ aliases: [nrqm-orbital-and-spin-finite-spin-block-decomposition]
 kind: theorem
 domain: mathematics
 title: "Finite spin-block decomposition"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [prop-nrqm-orbital-and-spin-finite-spin-matrices, def-inner-product-space, def-linear-map, def-linear-subspace, def-adjoint-of-a-linear-map-between-inner-product-spaces, def-self-adjoint-and-normal-endomorphism, thm-complex-spectral-theorem-for-normal-endomorphisms, def-orthogonality-and-orthogonal-complement, def-dimension, def-natural-numbers, def-finite-sum-in-a-commutative-monoid, cor-inner-product-induces-a-norm]

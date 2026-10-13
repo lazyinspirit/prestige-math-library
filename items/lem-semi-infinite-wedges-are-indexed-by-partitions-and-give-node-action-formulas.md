@@ -2,7 +2,7 @@
 id: lem-semi-infinite-wedges-are-indexed-by-partitions-and-give-node-action-formulas
 kind: lemma
 title: "Semi-infinite wedges are indexed by partitions and the action gives the node formulas"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 12

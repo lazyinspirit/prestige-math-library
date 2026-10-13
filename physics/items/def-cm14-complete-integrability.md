@@ -2,7 +2,7 @@
 id: def-cm14-complete-integrability
 kind: definition
 title: "Completely integrable data of a declared presentation: $n$ smooth phase functions with $F_1=H$, pairwise in involution and independent on the regular locus"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 24

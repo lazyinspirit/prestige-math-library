@@ -2,7 +2,7 @@
 id: pthm-cm05-effective-potential
 kind: physics-theorem
 title: "Reduction of the central problem to the effective one-dimensional potential: $\\mu\\rho''=-(U^{\\mathrm{eff}}_J)'(\\rho)$, the energy identity, and the converse reconstruction of the planar trajectory from the radial data"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

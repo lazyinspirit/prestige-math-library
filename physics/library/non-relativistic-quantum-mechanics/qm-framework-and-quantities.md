@@ -1,7 +1,7 @@
 ---
 page: qm-framework-and-quantities
 title: "Qm Framework And Quantities"
-status: draft
+status: published
 library: physics
 items:
   - def-nrqm-framework-newtonian-spacetime

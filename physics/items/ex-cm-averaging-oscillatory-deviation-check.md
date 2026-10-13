@@ -2,7 +2,7 @@
 id: ex-cm-averaging-oscillatory-deviation-check
 kind: example
 title: "Averaging estimate on $[0,100]$ for the scalar equation $x'=\\varepsilon\\cos t$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

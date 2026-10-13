@@ -4,7 +4,7 @@ aliases: [nrqm-coulomb-example-no-full-discrete-eigenbasis]
 kind: example
 domain: mathematics
 title: "No full discrete eigenbasis"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps: [thm-nrqm-coulomb-continuum-spectral-density, thm-nrqm-coulomb-negative-subspace-completeness-and-degeneracy, thm-nrqm-coulomb-jost-volterra-solution, thm-nrqm-coulomb-transported-radial-endpoint-realization, thm-nrqm-coulomb-angular-radial-unitary-reduction, thm-nrqm-coulomb-essential-spectrum, def-projection-valued-measure, thm-spectral-theorem-for-unbounded-self-adjoint-operators, def-continuity-real, def-l-p-space-as-a-quotient-by-null-functions, def-complex-lp-and-euclidean-test-function-conventions, cor-cauchy-schwarz-inequality-for-l-two, def-hilbert-space, def-countable-choice, def-axiom-of-choice]

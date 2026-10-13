@@ -2,7 +2,7 @@
 id: thm-equivariant-constructible-ext-is-degreewise-finite-and-compatible-with-characteristic-zero-scalars
 kind: theorem
 title: "Equivariant constructible Ext is degreewise finite and compatible with characteristic zero scalars"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 23

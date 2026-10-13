@@ -2,7 +2,7 @@
 id: lem-standard-fock-vectors-expand-in-the-upper-global-basis
 kind: lemma
 title: "Standard Fock vectors expand in the upper global basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 23

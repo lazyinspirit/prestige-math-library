@@ -3,7 +3,7 @@ id: pthm-gr-schwarzschild-circular-orbit-predictions
 kind: physics-theorem
 title: "Restricted geodesic predictions of the Schwarzschild vacuum model:
   circular free-fall orbits, the stability threshold and the photon sphere"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

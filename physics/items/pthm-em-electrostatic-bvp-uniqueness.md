@@ -2,7 +2,7 @@
 id: pthm-em-electrostatic-bvp-uniqueness
 kind: physics-theorem
 title: "Uniqueness and flux compatibility for the electrostatic boundary value problem"
-status: draft
+status: published
 origin: session
 dependency_level: 17
 domain: physics

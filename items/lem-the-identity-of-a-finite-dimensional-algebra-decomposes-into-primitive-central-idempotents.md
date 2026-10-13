@@ -2,7 +2,7 @@
 id: lem-the-identity-of-a-finite-dimensional-algebra-decomposes-into-primitive-central-idempotents
 kind: lemma
 title: "The identity of a finite-dimensional algebra decomposes into primitive central idempotents"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

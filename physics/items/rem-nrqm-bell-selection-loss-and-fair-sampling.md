@@ -5,7 +5,7 @@ kind: remark
 domain: physics
 title: "Selection and loss: the precise hypothesis under which the CHSH bound
   transfers to recorded pairs"
-status: draft
+status: published
 origin: session
 dependency_level: 15
 deps:

@@ -2,7 +2,7 @@
 id: ex-sr-four-current-boost
 kind: example
 title: "Worked current boost law and coordinate versus rest density"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

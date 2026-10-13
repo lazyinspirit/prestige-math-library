@@ -2,7 +2,7 @@
 id: lem-em-quadratic-stress-identity
 kind: lemma
 title: "The quadratic stress identity and the local angular-balance identity"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

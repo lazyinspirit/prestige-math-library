@@ -2,7 +2,7 @@
 id: thm-constructible-sheaves-admit-finite-stratified-triangulations-and-finite-local-cohomology
 kind: theorem
 title: "Algebraically constructible sheaves have finite compatible stratified and local cochain models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 12

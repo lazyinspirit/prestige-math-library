@@ -2,7 +2,7 @@
 id: lem-gr-compact-future-cone-intersections
 kind: lemma
 title: "Truncated causal cones J^+(K) cap J^-(S_b) over compact sets and Cauchy levels are compact"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 25

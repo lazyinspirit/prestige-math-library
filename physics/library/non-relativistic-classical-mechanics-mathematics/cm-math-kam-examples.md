@@ -1,7 +1,7 @@
 ---
 page: cm-math-kam-examples
 title: Cm Math Kam — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-two-rotor-kam-model-with-units

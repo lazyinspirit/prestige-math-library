@@ -2,7 +2,7 @@
 id: lem-integrable-rank-one-actions-force-the-quantum-serre-relations
 kind: lemma
 title: "Integrable rank-one actions force the quantum Serre sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

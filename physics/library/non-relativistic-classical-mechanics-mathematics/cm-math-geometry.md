@@ -1,7 +1,7 @@
 ---
 page: cm-math-geometry
 title: Cm Math Geometry
-status: draft
+status: published
 items:
   - def-cm-equilibrium-and-lyapunov-stability
   - def-cm-orbital-and-linear-stability

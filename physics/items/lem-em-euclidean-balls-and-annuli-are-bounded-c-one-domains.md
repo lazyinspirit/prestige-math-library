@@ -3,7 +3,7 @@ id: lem-em-euclidean-balls-and-annuli-are-bounded-c-one-domains
 kind: lemma
 title: Euclidean balls, annuli and spheres as bounded smooth domains and hypersurfaces
 domain: mathematics
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-bounded-c-one-domain-boundary-charts-and-outward-normal", "def-surface-integral-on-a-compact-c-one-hypersurface", "thm-metric-continuity-characterisations", "def-metric-topology", "def-metric-continuity", "def-metric-ball", "def-euclidean-inner-product", "lem-every-norm-on-rn-is-continuous-for-the-euclidean-metric", "thm-heine-borel-rn", "def-metric-compactness", "thm-real-power-continuity-and-derivatives", "lem-derivative-of-a-power", "thm-chain-rule-for-total-derivatives", "thm-algebra-of-derivatives", "thm-continuous-partial-derivatives-imply-total-differentiability", "def-total-derivative-in-euclidean-space", "def-ck-euclidean-maps-and-diffeomorphisms", "def-metric-interior-closure-boundary", "def-countable-choice", "def-bounded-piecewise-c-one-euclidean-domain", "cor-first-green-identity-on-a-bounded-c-one-domain", "thm-divergence-theorem-for-bounded-c-one-euclidean-domains", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null", "lem-surface-integral-is-independent-of-c-one-boundary-charts", "prop-order-and-scalar-rules-for-the-nonnegative-integral", "thm-borel-products-of-euclidean-spaces-are-euclidean-borel", "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets"]

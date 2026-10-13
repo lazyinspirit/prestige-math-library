@@ -1,7 +1,7 @@
 ---
 page: ariki-categorification-and-graded-decomposition-numbers
 title: "Ariki Categorification and Graded Decomposition Numbers"
-status: draft
+status: published
 requires: [level-one-fock-space-and-residue-crystals,
            cyclotomic-hecke-and-quiver-hecke-algebras,
            quantum-affine-type-a-and-level-one-fock-space,

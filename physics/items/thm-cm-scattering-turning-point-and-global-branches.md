@@ -2,7 +2,7 @@
 id: thm-cm-scattering-turning-point-and-global-branches
 kind: theorem
 title: "Finite-range scattering: the simple outer turning point, the two global branches and the free tails"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

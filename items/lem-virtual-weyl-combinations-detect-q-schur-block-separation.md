@@ -2,7 +2,7 @@
 id: lem-virtual-weyl-combinations-detect-q-schur-block-separation
 kind: lemma
 title: "Virtual Weyl combinations detect q-Schur block separation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

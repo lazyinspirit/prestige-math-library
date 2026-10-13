@@ -1,7 +1,7 @@
 ---
 page: cm17-classical-continua-with-explicit-constitutive-assumptions-examples
 title: "Classical continua with explicit constitutive assumptions — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

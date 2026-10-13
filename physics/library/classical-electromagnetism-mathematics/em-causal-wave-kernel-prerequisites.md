@@ -1,7 +1,7 @@
 ---
 page: em-causal-wave-kernel-prerequisites
 title: Causal kernels, gauge and point fields after wave existence
-status: draft
+status: published
 items: [def-em-potential-gauge-and-field-conventions, lem-em-gauge-wave-reachability, lem-em-retarded-wave-kernel, lem-em-smooth-forced-maxwell-cauchy-system, lem-em-point-retarded-potential-and-fields, thm-em-retarded-point-distributional-maxwell]
 examples: []
 ---

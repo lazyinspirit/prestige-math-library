@@ -2,7 +2,7 @@
 id: def-gr-kruskal-model-data
 kind: definition
 title: "The Kruskal model datum: domain, implicit radial function, metric and time orientation"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

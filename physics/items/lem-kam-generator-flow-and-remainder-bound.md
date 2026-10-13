@@ -2,7 +2,7 @@
 id: lem-kam-generator-flow-and-remainder-bound
 kind: lemma
 title: "One KAM step: the affine generator, its canonical time-one flow, and the quadratic remainder bound"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 6

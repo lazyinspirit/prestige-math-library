@@ -2,7 +2,7 @@
 id: lem-the-local-affine-hecke-socle-argument-for-residue-translations
 kind: lemma
 title: "The local affine-Hecke socle argument for residue translations"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 25

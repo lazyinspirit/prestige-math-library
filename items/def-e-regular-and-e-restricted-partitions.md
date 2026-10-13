@@ -2,7 +2,7 @@
 id: def-e-regular-and-e-restricted-partitions
 kind: definition
 title: "e-regular and e-restricted partitions"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -6,7 +6,7 @@ requires:
   - gr-framework-and-geometry
 page: gr-gr13-convex-normal-neighborhoods-examples
 title: "Gr13 Convex Normal Neighborhoods — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

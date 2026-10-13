@@ -1,7 +1,7 @@
 ---
 page: em-minkowski-mathematical-prerequisites-examples
 title: Em Minkowski Mathematical Prerequisites — Examples
-status: draft
+status: published
 items: []
 examples: [ex-em-minkowski-mathematical-prerequisites-hypothesis-boundaries]
 ---

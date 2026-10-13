@@ -2,7 +2,7 @@
 id: ex-gr-tt-screen-projection-computation
 kind: example
 title: "Explicit screen projection of a symmetric spatial tensor: projection, transverse-traceless part, amplitudes and idempotence"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 8

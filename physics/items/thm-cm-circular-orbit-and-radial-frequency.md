@@ -2,7 +2,7 @@
 id: thm-cm-circular-orbit-and-radial-frequency
 kind: theorem
 title: "Circular orbits of a non-radial central-force trajectory: the critical-point condition and the squared frequency of the linearised radial equation"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 3

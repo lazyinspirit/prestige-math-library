@@ -2,7 +2,7 @@
 id: ex-cm-oscillator-cases-computed
 kind: example
 title: "Five worked initial value problems for the homogeneous oscillator across the discriminant, degenerate and repulsive cases"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

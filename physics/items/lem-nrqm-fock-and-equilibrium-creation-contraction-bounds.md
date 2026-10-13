@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-creation-contraction-bounds]
 kind: lemma
 domain: mathematics
 title: "Creation contraction bounds"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 5
 deps: [thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction, lem-nrqm-fock-and-equilibrium-fock-sector-projections, lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-permutation-sector-projections, thm-riesz-representation-for-hilbert-space, thm-cauchy-schwarz-in-an-inner-product-space, def-hilbert-space, def-real-and-complex-inner-product-space, def-bounded-linear-operator, def-operator-norm, def-countable-choice]

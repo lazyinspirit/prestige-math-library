@@ -2,7 +2,7 @@
 id: def-cm12-regularity
 kind: definition
 title: "Velocity-regular potential presentations: the velocity Hessian of the mechanical Lagrangian, regular states and regular charts"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 14

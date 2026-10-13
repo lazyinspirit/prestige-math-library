@@ -4,7 +4,7 @@ aliases: [nrqm-observables-moments-and-variance]
 kind: lemma
 domain: mathematics
 title: "Mean, second moment and variance of the scalar spectral law"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-unbounded-integral-against-a-pvm, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-axiom-of-choice, def-countable-choice, def-hilbert-space, def-projection-valued-measure, def-self-adjoint-positive-unitary-and-normal-operator, lem-nrqm-composites-density-and-scalar-spectral-probability, lem-scalar-and-complex-measures-from-a-pvm, thm-dominated-convergence, thm-monotone-convergence-for-the-integral, thm-spectral-theorem-for-unbounded-self-adjoint-operators, thm-unbounded-borel-functional-calculus]

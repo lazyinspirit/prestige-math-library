@@ -2,7 +2,7 @@
 id: ex-cm05-circular-orbit-frequency-check
 kind: example
 title: "A gravitational circular relative orbit checked on declared model data: $r_0=2\\cdot10^{6}\\,$m, $\\mu r_0\\omega^2=u'(r_0)=3\\cdot10^{12}\\,$N, $E=-3\\cdot10^{18}\\,$J and $\\omega_{\\rm lin}=\\omega=10^{-9}\\,$s$^{-1}$"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 16

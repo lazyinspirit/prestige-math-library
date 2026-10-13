@@ -4,7 +4,7 @@ aliases: [nrqm-composites-permutation-sector-projections]
 kind: lemma
 domain: mathematics
 title: "Permutation sector projections on the n-fold tensor power"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-bounded-tensor-maps, def-finite-symmetric-group-and-permutation-notation, thm-sign-is-a-homomorphism, def-alternating-group, cor-sign-is-the-unique-nontrivial-homomorphism-to-signs, cor-finite-iterated-tensor-products-represent-multilinear-maps, def-countable-choice]

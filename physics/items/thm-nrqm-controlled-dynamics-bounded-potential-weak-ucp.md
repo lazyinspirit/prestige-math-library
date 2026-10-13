@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-bounded-potential-weak-ucp]
 kind: theorem
 domain: mathematics
 title: "Bounded-potential weak UCP"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps: [thm-nrqm-controlled-dynamics-radial-carleman-estimate, def-sobolev-space-wkp-and-its-norm, lem-smooth-compactly-supported-functions-are-dense-in-ltwo-of-an-open-set, def-hilbert-space, def-countable-choice]

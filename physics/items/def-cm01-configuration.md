@@ -2,7 +2,7 @@
 id: def-cm01-configuration
 kind: definition
 title: "Configuration domain of $N$ labeled particles: open admissible sets, regular holonomic constraints and the mass operator"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

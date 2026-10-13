@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Conservation of a symmetry generator: commuting flows, energy
   compatibility and conserved outcome laws"
-status: draft
+status: published
 origin: session
 dependency_level: 10
 deps:

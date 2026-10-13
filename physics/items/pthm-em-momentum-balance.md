@@ -4,7 +4,7 @@ kind: physics-theorem
 title: "Local and fixed-volume momentum balance for smooth sources"
 domain: physics
 physical_scope: "The conditional momentum balance of the classical vacuum electromagnetic field: the local identity linking the time derivative of the momentum density and the divergence of the momentum flux tensor to the adopted continuum force density, and its fixed-volume traction form with the boundary stress retained, deduced from the smooth branch of the adopted vacuum Maxwell equations and the adopted continuum coupling. The statement is conditional on those adopted postulates, excludes the weak branch, singular source support and non-integrable products, and includes no self-force, radiation reaction or monopole term. No empirical claim is made."
-status: draft
+status: published
 origin: pipeline
 dependency_level: 18
 proof_strategy: direct

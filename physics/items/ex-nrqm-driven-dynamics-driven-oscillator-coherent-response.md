@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "The driven oscillator: exact classical response of a coherent
   preparation and stationary fluctuations"
-status: draft
+status: published
 origin: session
 dependency_level: 14
 deps:

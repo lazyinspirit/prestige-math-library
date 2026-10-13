@@ -1,7 +1,7 @@
 ---
 page: qm-math-oscillator
 title: Qm Math Oscillator
-status: draft
+status: published
 items:
   - lem-nrqm-oscillator-diagonal-adjoint-and-graph-core-lemma
   - thm-nrqm-oscillator-diagonal-spectrum

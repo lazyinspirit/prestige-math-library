@@ -2,7 +2,7 @@
 id: prop-cm-two-mass-spring-modes
 kind: proposition
 title: "Two equal masses with two outer springs and a coupling spring: eigenmodes, decoupling and the explicit normal frequencies"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

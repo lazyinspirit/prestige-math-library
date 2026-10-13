@@ -3,7 +3,7 @@ id: ex-sr-operational-record-arithmetic-worked
 kind: example
 domain: physics
 title: "Worked instance of the operational vocabulary: an illustrative bounded record for the longitudinal Doppler ratio and its parameter window"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 deps:

@@ -2,7 +2,7 @@
 id: lem-gr-exposed-boundary-point
 kind: lemma
 title: "The exposed boundary point controls the complement: J^-(q) cap U^c cap J^+(Sigma) is confined to a prescribed neighbourhood"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 33

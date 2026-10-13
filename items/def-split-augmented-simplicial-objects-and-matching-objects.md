@@ -2,7 +2,7 @@
 id: def-split-augmented-simplicial-objects-and-matching-objects
 kind: definition
 title: "Split augmented simplicial schemes and matching objects"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 0

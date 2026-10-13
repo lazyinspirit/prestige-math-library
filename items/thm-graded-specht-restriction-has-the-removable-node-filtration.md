@@ -2,7 +2,7 @@
 id: thm-graded-specht-restriction-has-the-removable-node-filtration
 kind: theorem
 title: "Graded Specht restriction has the removable-node filtration"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 38

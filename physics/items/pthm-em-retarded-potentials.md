@@ -3,7 +3,7 @@ id: pthm-em-retarded-potentials
 kind: physics-theorem
 title: "Retarded potentials, Lorenz gauge and Maxwell fields of a compactly supported conserved smooth source"
 domain: physics
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 deps: [post-em-radiation-selection, pthm-em-charge-continuity, lem-em-retarded-wave-kernel, thm-em-wave-cauchy-kirchhoff, pthm-em-lorenz-gauge-wave-form, post-em-vacuum-maxwell, def-em-sources, def-em-potential-gauge-and-field-conventions, def-em-fields, def-em-lab-geometry, def-em-si-conventions, lem-em-parameter-integrals, thm-divergence-theorem-for-bounded-c-one-euclidean-domains, cor-c-one-change-of-variables-for-l-one-functions, thm-differentiation-under-the-integral-sign, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-polar-coordinates-formula-for-lebesgue-measure, def-ck-euclidean-maps-and-diffeomorphisms, def-countable-choice]

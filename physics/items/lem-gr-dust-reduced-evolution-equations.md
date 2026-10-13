@@ -2,7 +2,7 @@
 id: lem-gr-dust-reduced-evolution-equations
 kind: lemma
 title: "The reduced dust evolution equations: Weyl system, trace preservation, transport equations and symmetric hyperbolicity"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 14

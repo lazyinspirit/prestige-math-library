@@ -2,7 +2,7 @@
 id: thm-gr-flat-cylinder-closed-timelike-and-no-cauchy-set
 kind: theorem
 title: "The flat cylinder model: closed timelike curves, total viciousness and no Cauchy set"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 11

@@ -2,7 +2,7 @@
 id: def-integral-residue-lattices-of-the-negative-half-and-highest-weight-modules
 kind: definition
 title: "The integral residue lattices $L_A(\\infty)$ and $L_A(\\lambda)$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

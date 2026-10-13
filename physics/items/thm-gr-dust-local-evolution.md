@@ -2,7 +2,7 @@
 id: thm-gr-dust-local-evolution
 kind: theorem
 title: "Local Einstein-dust evolution: smooth constrained data with prescribed velocity admit a smooth local development, unique up to a data-fixing isometry"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 24

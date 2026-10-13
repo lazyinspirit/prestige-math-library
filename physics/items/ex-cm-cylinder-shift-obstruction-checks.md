@@ -2,7 +2,7 @@
 id: ex-cm-cylinder-shift-obstruction-checks
 kind: example
 title: "The unit cylinder shift: explicit local generating function, loop integral and global failure"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 7

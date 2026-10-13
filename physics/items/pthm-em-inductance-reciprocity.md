@@ -3,7 +3,7 @@ id: pthm-em-inductance-reciprocity
 kind: physics-theorem
 title: "Reciprocal linkage coefficients and magnetic energy of smooth compact conserved currents"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 19
 proof_strategy: direct

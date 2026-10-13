@@ -2,7 +2,7 @@
 id: lem-level-one-node-order-and-conjugation-dictionary
 kind: lemma
 title: "Residue-node reading orders and the conjugation dictionary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

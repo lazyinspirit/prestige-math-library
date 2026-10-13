@@ -2,7 +2,7 @@
 id: def-internal-product-on-symmetric-functions
 kind: definition
 title: The internal (Kronecker) product on symmetric functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

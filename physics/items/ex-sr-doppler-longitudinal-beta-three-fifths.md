@@ -2,7 +2,7 @@
 id: ex-sr-doppler-longitudinal-beta-three-fifths
 kind: example
 title: 'Worked longitudinal Doppler shift at beta = 3/5'
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: 'Worked longitudinal Doppler computation of the ideal plane-wave model at relative speed (3/5)c in the two propagation directions along the boost axis. Conditional on the model; no measurement, statistical inference or empirical claim.'

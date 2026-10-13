@@ -2,7 +2,7 @@
 id: cor-cm-reduced-dalembert-and-generalized-forces
 kind: corollary
 title: "Reduced d'Alembert equation for an immersion: generalized forces and the quadratic correction"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

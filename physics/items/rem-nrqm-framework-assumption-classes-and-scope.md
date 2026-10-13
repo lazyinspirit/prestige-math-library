@@ -3,7 +3,7 @@ id: rem-nrqm-framework-assumption-classes-and-scope
 kind: remark
 title: "Assumption classes and scope of the framework: P1-P7, the extension
   postulates and what is excluded"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

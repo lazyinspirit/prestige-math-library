@@ -2,7 +2,7 @@
 id: post-sr-causal-signal-propagation
 kind: postulate
 title: "The causal signal restriction of the model"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 provenance:

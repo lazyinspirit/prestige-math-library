@@ -4,7 +4,7 @@ aliases: [ nrqm-observables-preparation-moments ]
 kind: physics-theorem
 domain: physics
 title: "Mean, second moment and variance of an assigned observable in a preparation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 9
 deps:

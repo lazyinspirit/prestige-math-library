@@ -2,7 +2,7 @@
 id: thm-gr-flat-wave-equation-duhamel-and-harmonic-gauge
 kind: theorem
 title: "All-space smooth wave equation with zero data, and harmonic gauge on flat space"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 12

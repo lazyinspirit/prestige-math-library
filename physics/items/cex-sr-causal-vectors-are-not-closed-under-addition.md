@@ -2,7 +2,7 @@
 id: cex-sr-causal-vectors-are-not-closed-under-addition
 kind: counterexample
 title: "The causal vectors of a Lorentz vector space are not closed under addition"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

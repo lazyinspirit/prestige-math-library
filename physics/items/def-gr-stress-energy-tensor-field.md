@@ -2,7 +2,7 @@
 id: def-gr-stress-energy-tensor-field
 kind: definition
 title: "Stress-energy tensor field of a model"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 6

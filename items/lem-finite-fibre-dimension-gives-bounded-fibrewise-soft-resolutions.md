@@ -2,7 +2,7 @@
 id: lem-finite-fibre-dimension-gives-bounded-fibrewise-soft-resolutions
 kind: lemma
 title: "Bounded fibrewise-soft resolutions from a uniform all-sheaf dimension bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 12

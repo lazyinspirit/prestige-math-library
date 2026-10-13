@@ -2,7 +2,7 @@
 id: ex-cm12-shifted-momentum
 kind: example
 title: "Shifted momentum from a total-derivative modification: $p' = p + F_x$, $H' = H - F_t$ and unchanged motion on explicit data"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 19

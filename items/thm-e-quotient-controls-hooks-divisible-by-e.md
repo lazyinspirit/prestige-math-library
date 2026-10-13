@@ -2,7 +2,7 @@
 id: thm-e-quotient-controls-hooks-divisible-by-e
 kind: theorem
 title: "The e-quotient controls the hooks of e-divisible length"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

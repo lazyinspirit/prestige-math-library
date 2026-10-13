@@ -2,7 +2,7 @@
 id: rem-sr-continuum-force-and-conservation-scope
 kind: remark
 title: "The two force carriers and the scope of continuum conservation"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 physical_scope: "Flat affine Minkowski spacetime; scope remarks on the force vocabulary, the conditional character of the conservation statements and the exclusions of the continuum framework. No gravity, electromagnetic coupling, equation of state, energy condition, angular-momentum theorem or empirical premise is asserted anywhere on this page."

@@ -2,7 +2,7 @@
 id: thm-smooth-projective-gauss-manin-local-systems-are-semisimple
 kind: theorem
 title: "Semisimplicity of geometric Gauss-Manin local systems"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 20

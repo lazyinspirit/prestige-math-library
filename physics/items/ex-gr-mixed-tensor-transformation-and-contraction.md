@@ -2,7 +2,7 @@
 id: ex-gr-mixed-tensor-transformation-and-contraction
 kind: example
 title: "A mixed tensor field: components in two charts and the invariance of its trace"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-invariant-forms-on-soergel-bimodules-are-unique-up-to-scalar-and-nondegenerate
 kind: lemma
 title: "Invariant forms on an indecomposable Soergel bimodule are unique up to scalar, non-degenerate, and agree with the restricted Bott-Samelson form"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

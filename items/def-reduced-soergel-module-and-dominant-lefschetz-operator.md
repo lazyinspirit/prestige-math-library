@@ -2,7 +2,7 @@
 id: def-reduced-soergel-module-and-dominant-lefschetz-operator
 kind: definition
 title: "The reduced Soergel module and the dominant Lefschetz operator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

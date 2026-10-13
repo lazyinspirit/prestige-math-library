@@ -4,7 +4,7 @@ aliases: [nrqm-fock-and-equilibrium-variational-ground-gap-overlap]
 kind: theorem
 domain: mathematics
 title: "Variational ground gap overlap"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [lem-nrqm-composites-density-and-scalar-spectral-probability, thm-spectral-theorem-for-unbounded-self-adjoint-operators, lem-scalar-and-complex-measures-from-a-pvm, def-projection-valued-measure, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-hilbert-space, def-axiom-of-choice, def-countable-choice]

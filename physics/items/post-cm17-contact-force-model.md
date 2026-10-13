@@ -2,7 +2,7 @@
 id: post-cm17-contact-force-model
 kind: postulate
 title: "Adopted force model of the continuum branch: continuous body forces and Cauchy contact tractions"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 11

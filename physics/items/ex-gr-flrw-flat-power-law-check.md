@@ -3,7 +3,7 @@ id: ex-gr-flrw-flat-power-law-check
 kind: example
 title: "Direct check of the flat power-law data against the Friedmann-system
   equations"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

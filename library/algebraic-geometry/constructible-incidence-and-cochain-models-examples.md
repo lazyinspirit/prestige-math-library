@@ -1,7 +1,7 @@
 ---
 page: constructible-incidence-and-cochain-models-examples
 title: "Constructible Incidence And Cochain Models Examples"
-status: draft
+status: published
 items: []
 examples: [ex-incidence-model-of-a-closed-interval]
 requires:

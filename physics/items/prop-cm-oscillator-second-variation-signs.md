@@ -2,7 +2,7 @@
 id: prop-cm-oscillator-second-variation-signs
 kind: proposition
 title: "Second variation of the oscillator action on a finite interval: both signs for $T>\\pi/\\omega$ and the value at $T=\\pi/\\omega$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 4

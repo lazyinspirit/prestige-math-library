@@ -4,7 +4,7 @@ kind: definition
 domain: physics
 title: "The state space of the framework: preparations, pure rays and density
   operators"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 6
 deps:

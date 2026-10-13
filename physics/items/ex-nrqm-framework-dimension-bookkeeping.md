@@ -2,7 +2,7 @@
 id: ex-nrqm-framework-dimension-bookkeeping
 kind: example
 title: "Dimension bookkeeping for the quantities and laws of the framework"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 8

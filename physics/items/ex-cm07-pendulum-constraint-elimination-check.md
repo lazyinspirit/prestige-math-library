@@ -2,7 +2,7 @@
 id: ex-cm07-pendulum-constraint-elimination-check
 kind: example
 title: "The planar pendulum by constraint elimination: kinetic metric, Lagrange equation and the ideal reaction recovered"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

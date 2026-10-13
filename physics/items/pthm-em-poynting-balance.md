@@ -4,7 +4,7 @@ kind: physics-theorem
 title: "Local and fixed-volume electromagnetic energy balance"
 domain: physics
 physical_scope: "The conditional energy balance of the classical vacuum electromagnetic field: the local identity linking the time derivative of the energy density and the divergence of the Poynting vector to the work density J.E, and its fixed-volume form with the boundary energy flux retained, both deduced from the smooth branch of the adopted vacuum Maxwell equations and the adopted continuum coupling. The statement is conditional on those adopted postulates, excludes the weak branch, singular source support and non-integrable products, and asserts no conservation without the boundary term. No empirical claim is made."
-status: draft
+status: published
 origin: pipeline
 dependency_level: 18
 proof_strategy: direct

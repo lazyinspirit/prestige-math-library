@@ -2,7 +2,7 @@
 id: thm-the-kazhdan-lusztig-character-formula-in-regular-integral-category-o
 kind: theorem
 title: "The Kazhdan–Lusztig character formula in regular integral category O"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

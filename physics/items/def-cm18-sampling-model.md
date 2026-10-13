@@ -2,7 +2,7 @@
 id: def-cm18-sampling-model
 kind: definition
 title: "Repeated-observation protocols of the force branch: adopted IID and second-moment sampling hypotheses and the sample mean"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 deps: [def-cm18-observable-model, def-cm-iid-sampling-model, def-identically-distributed-and-iid-random-variables, def-moments-variance-and-covariance, def-probability-measure, def-random-element-and-real-random-variable, rem-cm-inference-and-uncertainty-scope, lem-cm-finite-iid-sample-mean-bound]

@@ -2,7 +2,7 @@
 id: ex-hodge-and-polarization-of-a-point
 kind: example
 title: "Hodge decomposition and polarization of a point"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps:

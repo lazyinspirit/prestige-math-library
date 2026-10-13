@@ -2,7 +2,7 @@
 id: lem-gr-positive-definite-symmetric-matrix-bounds
 kind: lemma
 title: "Uniform quadratic-form bounds for positive definite symmetric matrices and smoothness of the inverse"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 0

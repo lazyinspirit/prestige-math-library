@@ -2,7 +2,7 @@
 id: lem-the-level-one-vector-representation-has-a-perfect-crystal-with-lower-global-basis
 kind: lemma
 title: "The vector representation has a perfect crystal of level one and a lower global basis"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

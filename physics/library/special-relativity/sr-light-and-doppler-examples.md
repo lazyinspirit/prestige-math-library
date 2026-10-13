@@ -1,7 +1,7 @@
 ---
 page: sr-light-and-doppler-examples
 title: 'Light and Doppler — Examples'
-status: draft
+status: published
 library: physics
 items: [ex-sr-doppler-longitudinal-beta-three-fifths,
         ex-sr-transverse-doppler-protocols-worked,

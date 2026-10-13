@@ -2,7 +2,7 @@
 id: thm-cm-exponential-stability-by-a-lyapunov-quadratic-form
 kind: theorem
 title: "An equilibrium whose linearisation has all eigenvalues in the open left half-plane is locally exponentially stable"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

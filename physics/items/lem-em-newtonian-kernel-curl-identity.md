@@ -3,7 +3,7 @@ id: "lem-em-newtonian-kernel-curl-identity"
 kind: "lemma"
 title: "Divergence and curl of the Newtonian potential of a smooth compact vector field"
 domain: mathematics
-status: draft
+status: published
 origin: session
 dependency_level: 1
 deps: ["def-bounded-piecewise-c-one-euclidean-domain", "def-ck-euclidean-maps-and-diffeomorphisms", "def-cross-product-in-r3", "def-directional-and-partial-derivatives", "def-divergence-and-curl-of-a-c1-vector-field", "def-euclidean-inner-product", "def-integral-over-a-measurable-set", "def-integrable-real-and-complex-functions-and-their-integrals", "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign", "def-newtonian-potential", "def-surface-integral-on-a-compact-c-one-hypersurface", "lem-em-smooth-newtonian-upgrade", "lem-euclidean-chart-measure-agrees-with-polar-surface-measure", "thm-algebra-of-derivatives", "thm-divergence-theorem-for-bounded-piecewise-c-one-domains", "thm-dominated-convergence", "thm-integral-triangle-inequality", "thm-linearity-of-the-lebesgue-integral-on-l-one", "thm-polar-coordinates-formula-for-lebesgue-measure", "def-countable-choice", "prop-order-and-scalar-rules-for-the-nonnegative-integral"]

@@ -2,7 +2,7 @@
 id: thm-higher-level-schur-weyl-double-centralizer
 kind: theorem
 title: "The higher-level Schur-Weyl double centralizer and Schur quotient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 36

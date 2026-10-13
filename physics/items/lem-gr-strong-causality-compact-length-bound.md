@@ -2,7 +2,7 @@
 id: lem-gr-strong-causality-compact-length-bound
 kind: lemma
 title: "Strong causality bounds the auxiliary length of causal curves contained in a compact set"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 6

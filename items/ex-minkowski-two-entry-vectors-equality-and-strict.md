@@ -2,7 +2,7 @@
 id: ex-minkowski-two-entry-vectors-equality-and-strict
 kind: example
 title: "Minkowski for two-entry vectors: equality and strict cases"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

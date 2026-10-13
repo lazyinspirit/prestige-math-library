@@ -2,7 +2,7 @@
 id: cex-an-a-zero-lattice-without-a-crystal-basis
 kind: counterexample
 title: "A free $A_0$-lattice generating the module that is not a crystal lattice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 provenance:

@@ -5,7 +5,7 @@ requires:
   - gr-connections-and-free-fall
 page: gr-einstein-and-matter-examples
 title: "Einstein And Matter — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

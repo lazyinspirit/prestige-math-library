@@ -2,7 +2,7 @@
 id: lem-cyclotomic-klr-dot-annihilators-and-finite-root-strings
 kind: lemma
 title: "Cyclotomic dot annihilators, finite-dimensional blocks, and finite root strings"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

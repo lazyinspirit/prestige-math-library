@@ -2,7 +2,7 @@
 id: thm-gr-curvature-tensoriality-and-coordinate-formula
 kind: theorem
 title: "Tensoriality of the curvature, its coordinate formula and its point-normal metric formula"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

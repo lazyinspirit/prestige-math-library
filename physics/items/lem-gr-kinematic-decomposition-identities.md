@@ -2,7 +2,7 @@
 id: lem-gr-kinematic-decomposition-identities
 kind: lemma
 title: "Rest-space character of the kinematic fields and the double contraction of B"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 9

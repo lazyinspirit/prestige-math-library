@@ -2,7 +2,7 @@
 id: def-cm12-hyperregularity
 kind: definition
 title: "Hyperregular potential presentations and their inverse Legendre branches in the model's charts"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

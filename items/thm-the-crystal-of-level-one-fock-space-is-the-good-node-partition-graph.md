@@ -2,7 +2,7 @@
 id: thm-the-crystal-of-level-one-fock-space-is-the-good-node-partition-graph
 kind: theorem
 title: "The crystal of the level-one Fock space is the good-node partition graph"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 18

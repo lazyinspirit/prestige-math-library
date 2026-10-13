@@ -2,7 +2,7 @@
 id: def-type-a-cyclotomic-specialization-of-the-qg-klr-algebras
 kind: definition
 title: "The type-A cyclotomic specialization of the QG-KLR algebras"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 13

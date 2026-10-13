@@ -4,7 +4,7 @@ aliases: [nrqm-identical-particles-two-fermion-spatial-spin-symmetry]
 kind: thought-experiment
 domain: physics
 title: "The two spin-half fermion sector: the spin-singlet and spin-triplet parts and their orbital symmetry"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 11
 deps: [def-nrqm-identical-particles-framework-species-sectors-and-preparations, def-nrqm-identical-particles-framework-orbital-occupation-model, thm-nrqm-identical-particles-two-factor-symmetry-decomposition, lem-nrqm-identical-particles-two-particle-exchange-operator, thm-nrqm-identical-particles-occupation-number-basis, pthm-nrqm-angular-momentum-two-spin-composition, post-nrqm-framework-state-and-composition, post-nrqm-framework-identical-particles-and-spin, def-nrqm-state-geometry-framework-state-space, def-nrqm-state-geometry-pure-mixed-states-and-purity, def-hilbert-space, def-countable-choice]

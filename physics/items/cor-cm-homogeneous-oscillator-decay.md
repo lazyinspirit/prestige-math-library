@@ -2,7 +2,7 @@
 id: cor-cm-homogeneous-oscillator-decay
 kind: corollary
 title: "Strictly damped homogeneous oscillator with $k>0$: every solution tends to zero"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

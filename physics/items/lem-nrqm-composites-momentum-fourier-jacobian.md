@@ -4,7 +4,7 @@ aliases: [nrqm-composites-momentum-fourier-jacobian]
 kind: lemma
 domain: mathematics
 title: "Momentum Fourier Jacobian: the unitary momentum representation"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 0
 deps:

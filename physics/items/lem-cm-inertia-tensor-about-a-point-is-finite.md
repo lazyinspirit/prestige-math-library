@@ -2,7 +2,7 @@
 id: lem-cm-inertia-tensor-about-a-point-is-finite
 kind: lemma
 title: "Finiteness and a uniform bound for the entries of the inertia tensor about an arbitrary point"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-graded-decomposition-numbers-equal-canonical-basis-coefficients-in-characteristic-zero
 kind: theorem
 title: "Graded decomposition numbers equal canonical-basis coefficients in characteristic zero"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 40

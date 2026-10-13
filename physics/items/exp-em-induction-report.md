@@ -2,7 +2,7 @@
 id: exp-em-induction-report
 kind: experiment
 title: "Faraday's 1831 induction experiments: reported transients and the iron-ring apparatus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: physics

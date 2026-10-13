@@ -2,7 +2,7 @@
 id: def-generalized-jm-primary-idempotents-and-residue-summand-functors
 kind: definition
 title: "Generalized Jucys-Murphy primary idempotents and the residue-summand functors $E_i$, $F_i$"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: literature-derived

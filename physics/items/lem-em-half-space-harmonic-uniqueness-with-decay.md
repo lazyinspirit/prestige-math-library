@@ -2,7 +2,7 @@
 id: lem-em-half-space-harmonic-uniqueness-with-decay
 kind: lemma
 title: "Uniqueness for harmonic functions on a punctured half-space with zero trace, decaying at the pole and at infinity"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 domain: mathematics

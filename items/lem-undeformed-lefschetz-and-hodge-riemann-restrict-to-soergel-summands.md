@@ -2,7 +2,7 @@
 id: lem-undeformed-lefschetz-and-hodge-riemann-restrict-to-soergel-summands
 kind: lemma
 title: "Undeformed Lefschetz and Hodge-Riemann restrict to the next Soergel summand"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 8

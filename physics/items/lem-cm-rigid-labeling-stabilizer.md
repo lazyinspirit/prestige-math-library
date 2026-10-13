@@ -2,7 +2,7 @@
 id: lem-cm-rigid-labeling-stabilizer
 kind: lemma
 title: "A labeling containing two independent vectors has trivial $SO(3)$-stabilizer"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 1

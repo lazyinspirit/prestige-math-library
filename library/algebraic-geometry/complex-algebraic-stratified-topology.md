@@ -1,7 +1,7 @@
 ---
 page: complex-algebraic-stratified-topology
 title: "Complex Algebraic Stratified Topology"
-status: draft
+status: published
 items: [       def-finite-complex-algebraic-whitney-stratification-and-control-data,
        lem-generic-complex-algebraic-whitney-regularity,
        thm-complex-algebraic-varieties-and-maps-admit-compatible-finite-stratifications,

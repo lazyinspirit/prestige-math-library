@@ -2,7 +2,7 @@
 id: ex-the-double-edge-klr-braid-correction
 kind: example
 title: "The double-edge $(e=2)$ KLR braid correction"
-status: draft
+status: published
 origin: pipeline
 provenance:
   statement: ai-altered

@@ -2,7 +2,7 @@
 id: lem-dj-bridge-row-permutation-module-standard-action
 kind: lemma
 title: "The row permutation module: distinguished basis and Hecke action"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 1

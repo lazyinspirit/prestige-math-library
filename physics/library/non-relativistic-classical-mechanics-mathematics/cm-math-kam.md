@@ -1,7 +1,7 @@
 ---
 page: cm-math-kam
 title: Cm Math Kam
-status: draft
+status: published
 items:
   - def-holomorphic-kam-domain-and-diophantine-labels
   - lem-cauchy-fourier-and-lattice-shell-bounds

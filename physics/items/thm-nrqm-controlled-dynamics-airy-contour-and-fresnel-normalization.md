@@ -4,7 +4,7 @@ aliases: [nrqm-controlled-dynamics-airy-contour-and-fresnel-normalization]
 kind: theorem
 domain: mathematics
 title: "Airy contour and Fresnel normalization"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 1
 deps: [lem-nrqm-composites-complex-gaussian-continuation, thm-plancherel, thm-fourier-inversion-on-schwartz-space, def-complex-differentiability-holomorphic-and-entire, def-complex-logarithms-principal-logarithm-and-complex-powers, def-schwartz-space-and-its-seminorms, def-countable-choice]

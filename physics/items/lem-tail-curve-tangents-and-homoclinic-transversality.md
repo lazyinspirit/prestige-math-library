@@ -2,7 +2,7 @@
 id: lem-tail-curve-tangents-and-homoclinic-transversality
 kind: lemma
 title: "The coded curves are genuine $C^1$ stable and unstable curves of $F$, with transverse intersection at every finite-word homoclinic point"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 8

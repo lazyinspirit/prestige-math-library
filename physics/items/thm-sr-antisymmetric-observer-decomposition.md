@@ -2,7 +2,7 @@
 id: thm-sr-antisymmetric-observer-decomposition
 kind: theorem
 title: "Hodge decomposition of an alternating two-form for an observer, invariants and the optional field identification"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps: [def-sr-affine-minkowski-model, def-oriented-minkowski-volume-form, def-alternating-k-linear-map, def-bilinear-symmetric-skew-and-alternating-forms, def-lorentz-form-and-inertia, lem-lorentz-form-has-orthonormal-basis, def-lorentz-orthogonality-and-orthogonal-complement, def-causal-classification-of-lorentz-vectors, def-time-orientation-and-future-causal-sets, thm-sr-proper-time-and-observer-decomposition, thm-sr-tensor-and-current-transformation, lem-boost-rotation-factorization, def-lorentz-boost, lem-boost-is-proper-orthochronous-with-inverse, def-lorentz-map-and-lorentz-group, def-spatial-euclidean-structure-of-an-inertial-frame, def-euclidean-inner-product, def-algebraic-dual-and-linear-functional, def-type-r-s-tensor-on-a-finite-dimensional-vector-space, def-linear-map, thm-gram-schmidt-orthonormalisation, def-cross-product-in-r3]

@@ -4,7 +4,7 @@ aliases: [ nrqm-symmetries-examples-scope-limits ]
 kind: remark
 domain: physics
 title: "What the worked items of the symmetry companion page establish"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

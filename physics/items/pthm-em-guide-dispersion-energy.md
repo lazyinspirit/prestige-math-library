@@ -3,7 +3,7 @@ id: pthm-em-guide-dispersion-energy
 kind: physics-theorem
 domain: physics
 title: "The propagating candidate branch: cutoff, phase and group speeds, cross-section energy and flux, and energy transport at the group velocity"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 19
 deps: [def-complex-conjugate-real-imaginary-part-and-modulus, def-cross-product-in-r3, def-em-guide-cavity-geometry, def-em-si-conventions, def-euclidean-inner-product, lem-cross-product-is-bilinear-alternating-and-orthogonal, lem-em-period-average, lem-em-rectangle-mode-profile-identities, pthm-em-rectangular-mode-candidates, pthm-em-restricted-material-energy, thm-algebra-of-derivatives, thm-chain-rule-for-total-derivatives, lem-em-transverse-vector-identities, thm-of-square-roots, def-derivative, thm-algebra-of-function-limits]

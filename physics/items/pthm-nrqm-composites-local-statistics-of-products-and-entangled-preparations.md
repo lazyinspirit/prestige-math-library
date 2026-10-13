@@ -5,7 +5,7 @@ kind: physics-theorem
 domain: physics
 title: "Factorization of local statistics for product preparations, and its
   failure for non-product pure preparations"
-status: draft
+status: published
 origin: session
 dependency_level: 13
 deps:

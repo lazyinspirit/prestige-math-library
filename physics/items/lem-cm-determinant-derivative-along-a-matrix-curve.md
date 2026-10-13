@@ -2,7 +2,7 @@
 id: lem-cm-determinant-derivative-along-a-matrix-curve
 kind: lemma
 title: "The derivative of the determinant along an invertible C¹ matrix curve: $(\\det A)'=\\det A\\;\\operatorname{tr}(A^{-1}A')$"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

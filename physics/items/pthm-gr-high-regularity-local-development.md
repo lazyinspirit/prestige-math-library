@@ -2,7 +2,7 @@
 id: pthm-gr-high-regularity-local-development
 kind: physics-theorem
 title: "Local Cauchy development of the adopted Einstein field law for smooth constrained data in the selected matter sectors"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 27

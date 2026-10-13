@@ -3,7 +3,7 @@ id: "def-em-steady-current-regime"
 kind: "definition"
 title: "The steady-current (magnetostatic) regime, the compact smooth current class and the declared ideal noncompact models"
 domain: physics
-status: draft
+status: published
 origin: session
 dependency_level: 17
 deps: ["def-em-lab-geometry", "def-em-fields", "def-em-sources", "def-em-si-conventions", "def-em-weak-sources", "post-em-vacuum-maxwell", "pthm-em-charge-continuity", "def-ck-euclidean-maps-and-diffeomorphisms", "def-divergence-and-curl-of-a-c1-vector-field", "def-distribution", "def-distributional-derivative", "def-test-function-space-d-of-an-open-set", "def-surface-integral-on-a-compact-c-one-hypersurface", "def-cross-product-in-r3", "def-regular-distribution-from-a-locally-integrable-function", "thm-locally-integrable-functions-embed-in-distributions", "thm-multidimensional-integral-properties", "def-countable-choice", "def-directional-and-partial-derivatives"]

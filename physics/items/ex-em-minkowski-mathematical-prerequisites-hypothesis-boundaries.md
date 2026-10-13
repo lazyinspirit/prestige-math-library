@@ -2,7 +2,7 @@
 id: ex-em-minkowski-mathematical-prerequisites-hypothesis-boundaries
 kind: example
 title: "Explicit mathematical hypothesis/convention examples"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

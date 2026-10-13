@@ -4,7 +4,7 @@ aliases: [ nrqm-uncertainty-compatible-sharp-observables-and-joint-law ]
 kind: physics-theorem
 domain: physics
 title: "Compatible sharp observables, their joint law and the ideal joint instrument"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps:

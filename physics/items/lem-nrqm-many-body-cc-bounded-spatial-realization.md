@@ -3,7 +3,7 @@ id: lem-nrqm-many-body-cc-bounded-spatial-realization
 kind: lemma
 domain: mathematics
 title: "CC realization of the bounded spatial operator on a finite-component H² domain"
-status: draft
+status: published
 origin: session
 dependency_level: 0
 deps: [def-countable-choice, def-hilbert-space, def-l-p-space-as-a-quotient-by-null-functions, def-sobolev-space-wkp-and-its-norm, def-adjoint-of-a-densely-defined-unbounded-operator, def-symmetric-self-adjoint-and-essentially-self-adjoint, def-fourier-transform-on-l-one-of-rn, thm-plancherel, thm-fourier-characterisation-of-integer-order-hilbert-sobolev-spaces, lem-weak-derivatives-are-polynomial-fourier-multipliers, cor-compactly-supported-smooth-functions-are-dense-in-wkp-of-rn, thm-dominated-convergence]

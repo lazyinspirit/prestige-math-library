@@ -2,7 +2,7 @@
 id: thm-complex-algebraic-varieties-and-maps-admit-compatible-finite-stratifications
 kind: theorem
 title: "Complex algebraic varieties and maps admit compatible finite stratifications"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 3

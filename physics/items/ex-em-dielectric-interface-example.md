@@ -2,7 +2,7 @@
 id: ex-em-dielectric-interface-example
 kind: example
 title: "Planar dielectric interface with prescribed free surface charge"
-status: draft
+status: published
 origin: pipeline
 domain: physics
 dependency_level: 17

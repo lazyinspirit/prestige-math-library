@@ -2,7 +2,7 @@
 id: def-nrqm-framework-quantities-and-units
 kind: definition
 title: "Dimensions, SI unit conventions and quantity types of the framework"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 4

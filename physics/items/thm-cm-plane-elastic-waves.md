@@ -2,7 +2,7 @@
 id: thm-cm-plane-elastic-waves
 kind: theorem
 title: "Exact plane-wave solutions of the isotropic linear elastic model, with longitudinal and transverse speeds"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 2

@@ -4,7 +4,7 @@ kind: physics-theorem
 title: "The free coupled quadratic model: global existence, the complete modal
   classification, mode energies, intrinsic degenerate mode subspaces,
   boundedness and the unstable direction"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 15

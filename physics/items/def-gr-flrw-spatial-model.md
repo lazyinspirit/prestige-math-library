@@ -2,7 +2,7 @@
 id: def-gr-flrw-spatial-model
 kind: definition
 title: "The constant-curvature spatial model of a homogeneous cosmology"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 1

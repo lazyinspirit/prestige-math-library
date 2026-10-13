@@ -2,7 +2,7 @@
 id: lem-radical-minimal-complexes-and-perverse-filtrations-in-the-soergel-category
 kind: lemma
 title: "Radical quotients, minimal complexes and perverse filtrations in the Soergel category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 6

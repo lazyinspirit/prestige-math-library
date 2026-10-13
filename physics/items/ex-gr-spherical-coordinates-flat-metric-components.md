@@ -2,7 +2,7 @@
 id: ex-gr-spherical-coordinates-flat-metric-components
 kind: example
 title: "Flat metric components in a spherical coordinate chart"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

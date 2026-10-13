@@ -1,7 +1,7 @@
 ---
 page: qm-three-dimensional-scattering
 title: "Qm Three Dimensional Scattering"
-status: draft
+status: published
 library: physics
 items:
   - lem-nrqm-scattering-model-scaling-correspondence

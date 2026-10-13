@@ -4,7 +4,7 @@ aliases: [nrqm-composites-finite-ancilla-complete-positivity]
 kind: lemma
 domain: mathematics
 title: "Finite-ancilla complete positivity of countable Kraus maps"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 3
 deps: [lem-nrqm-composites-hilbert-tensor-construction, lem-nrqm-composites-bounded-tensor-maps, lem-nrqm-composites-nuclear-bounded-cyclicity, lem-nrqm-composites-countable-kraus-normalization, lem-nrqm-composites-density-and-scalar-spectral-probability, thm-trace-class-is-a-two-sided-banach-operator-ideal, def-trace-class-operator, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-space, def-countable-choice]

@@ -2,7 +2,7 @@
 id: pthm-cm17-chain-limit-of-the-string-model
 kind: physics-theorem
 title: "The continuum string model as the proved limit of the mass-spring chain, with explicit convergence and dispersion error"
-status: draft
+status: published
 origin: session
 domain: physics
 dependency_level: 9

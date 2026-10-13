@@ -1,7 +1,7 @@
 ---
 page: qm-math-fock-and-equilibrium
 title: Qm Math Fock And Equilibrium
-status: draft
+status: published
 items:
   - thm-nrqm-fock-and-equilibrium-hilbert-direct-sum-construction
   - lem-nrqm-fock-and-equilibrium-fock-sector-projections

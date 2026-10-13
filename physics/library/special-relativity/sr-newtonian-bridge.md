@@ -1,7 +1,7 @@
 ---
 page: sr-newtonian-bridge
 title: "Newtonian Bridge"
-status: draft
+status: published
 items: [def-sr-newtonian-comparison-quantities,
         lem-sr-uniform-low-speed-taylor-remainder,
         lem-sr-uniform-low-speed-expansion-of-observer-quantities,

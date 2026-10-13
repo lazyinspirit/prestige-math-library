@@ -2,7 +2,7 @@
 id: lem-gr-null-phase-coordinate
 kind: lemma
 title: "The phase coordinate u = x^0 - x^3 is null and profile functions are flat-harmonic and constant along its transport curves"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 10

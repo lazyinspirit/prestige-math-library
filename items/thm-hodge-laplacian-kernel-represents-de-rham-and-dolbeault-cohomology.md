@@ -2,7 +2,7 @@
 id: thm-hodge-laplacian-kernel-represents-de-rham-and-dolbeault-cohomology
 kind: theorem
 title: "Harmonic representatives for compact de Rham and Dolbeault complexes"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 10
 deps: [def-axiom-of-choice, thm-sobolev-compactness-and-elliptic-estimates-give-fredholm-hodge-decomposition, lem-formal-adjoints-of-differential-operators-exist-and-are-unique, def-second-order-laplace-type-operators-on-vector-bundles, def-complex-manifolds-and-holomorphic-vector-bundles, def-e-valued-dolbeault-operators-and-ltwo-structure, def-smooth-manifold, def-smooth-differential-k-form, def-smooth-section-local-section-and-support, def-riemannian-metric-and-riemannian-manifold, prop-riemannian-metrics-induce-metrics-on-dual-tensor-and-exterior-bundles, def-riemannian-volume-density, def-integral-of-a-compactly-supported-smooth-density, def-density-bundle-and-smooth-density, thm-local-coordinate-formula-for-the-exterior-derivative, thm-the-exterior-derivative-squares-to-zero, def-de-rham-cohomology, def-bigraded-complex-differential-forms, thm-d-dbar-decomposition-and-identities, lem-l-two-with-the-integral-pairing-is-a-hilbert-space, thm-gram-schmidt-orthonormalisation]

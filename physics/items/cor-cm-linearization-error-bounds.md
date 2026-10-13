@@ -2,7 +2,7 @@
 id: cor-cm-linearization-error-bounds
 kind: corollary
 title: "Mean, mean-square and covariance bounds for second-order linearization error"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 deps:

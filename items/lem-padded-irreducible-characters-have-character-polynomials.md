@@ -2,7 +2,7 @@
 id: lem-padded-irreducible-characters-have-character-polynomials
 kind: lemma
 title: "Padded irreducible characters are eventually given by character polynomials"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 2

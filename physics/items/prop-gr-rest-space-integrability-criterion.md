@@ -2,7 +2,7 @@
 id: prop-gr-rest-space-integrability-criterion
 kind: proposition
 title: "Smoothness of the rest-space family and its Frobenius integrability criterion"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 4

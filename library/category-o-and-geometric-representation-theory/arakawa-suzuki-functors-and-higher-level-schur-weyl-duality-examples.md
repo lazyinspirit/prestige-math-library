@@ -1,7 +1,7 @@
 ---
 page: arakawa-suzuki-functors-and-higher-level-schur-weyl-duality-examples
 title: "Arakawa–Suzuki Functors and Higher-Level Schur–Weyl Duality — Examples"
-status: draft
+status: published
 requires: [arakawa-suzuki-functors-and-higher-level-schur-weyl-duality]
 items: []
 examples: [ex-degenerate-affine-hecke-relations-on-two-tensor-factors,

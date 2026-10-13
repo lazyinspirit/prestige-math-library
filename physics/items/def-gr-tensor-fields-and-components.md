@@ -2,7 +2,7 @@
 id: def-gr-tensor-fields-and-components
 kind: definition
 title: "Tensor fields of type (r,s) on a Lorentzian four-manifold and their components"
-status: draft
+status: published
 origin: session
 domain: mathematics
 dependency_level: 3

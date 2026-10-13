@@ -2,7 +2,7 @@
 id: def-stable-range-and-block-idempotent-for-higher-level-schur-weyl-duality
 kind: definition
 title: "Stable range and block idempotent corner for higher-level Schur-Weyl duality"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 34

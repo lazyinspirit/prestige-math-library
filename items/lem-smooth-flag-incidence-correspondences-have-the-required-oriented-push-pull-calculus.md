@@ -2,7 +2,7 @@
 id: lem-smooth-flag-incidence-correspondences-have-the-required-oriented-push-pull-calculus
 kind: lemma
 title: "Stable-flag incidence spaces admit the oriented proper correspondence calculus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 26

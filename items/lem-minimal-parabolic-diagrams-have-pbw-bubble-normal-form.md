@@ -2,7 +2,7 @@
 id: lem-minimal-parabolic-diagrams-have-pbw-bubble-normal-form
 kind: lemma
 title: "PBW and bubble normal form in the minimal-parabolic diagram category"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 9

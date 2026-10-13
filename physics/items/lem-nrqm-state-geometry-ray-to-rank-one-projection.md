@@ -3,7 +3,7 @@ id: lem-nrqm-state-geometry-ray-to-rank-one-projection
 kind: lemma
 domain: mathematics
 title: "Rays, unit vectors and rank-one Hilbert projections"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 2
 deps: [def-nrqm-state-geometry-state-vectors-and-rays, lem-nrqm-state-geometry-normalization-and-phase-classes, lem-nrqm-composites-rank-one-operator-calculus, def-self-adjoint-positive-unitary-and-normal-operator, def-hilbert-orthogonal-projection, cor-finite-dimensional-subspaces-are-closed, def-normed-subspace, def-linear-combination-and-span, cor-inner-product-induces-a-norm, def-real-and-complex-inner-product-space]

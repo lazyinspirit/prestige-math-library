@@ -2,7 +2,7 @@
 id: lem-periodic-cyclotomic-shear-tensor-corrections-escape-every-finite-cut
 kind: lemma
 title: "Periodic cyclotomic shear tensor corrections escape every finite cut"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28-six-step
 provenance:

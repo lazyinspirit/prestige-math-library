@@ -1,7 +1,7 @@
 ---
 page: cm16-stability-perturbations-and-chaos
 title: "Stability, perturbations and chaos"
-status: draft
+status: published
 library: physics
 items:
   - def-cm16-flow-equilibria-and-invariant-sets

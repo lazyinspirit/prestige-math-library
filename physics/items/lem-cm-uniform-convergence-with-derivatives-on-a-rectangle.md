@@ -2,7 +2,7 @@
 id: lem-cm-uniform-convergence-with-derivatives-on-a-rectangle
 kind: lemma
 title: "Uniform convergence of a $C^2$ sequence with its first and second derivatives on a rectangle passes $C^2$ regularity and termwise differentiation to the limit"
-status: draft
+status: published
 origin: pipeline
 domain: mathematics
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: cex-the-shift-is-a-nonidentity-order-automorphism
 kind: counterexample
 title: "The shift $x\\mapsto x+1$ is a nonidentity order automorphism of $(\\mathbb{Z},<)$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 4

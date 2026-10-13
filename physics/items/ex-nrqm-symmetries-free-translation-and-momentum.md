@@ -5,7 +5,7 @@ kind: example
 domain: physics
 title: "The free model: translation symmetries and conserved momentum in the
   momentum representation"
-status: draft
+status: published
 origin: session
 dependency_level: 12
 deps:

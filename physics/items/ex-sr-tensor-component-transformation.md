@@ -2,7 +2,7 @@
 id: ex-sr-tensor-component-transformation
 kind: example
 title: "Worked covector and vector component transformation under a beta = 3/5 boost"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: physics-em-sr-40-2026-10-08
 domain: mathematics

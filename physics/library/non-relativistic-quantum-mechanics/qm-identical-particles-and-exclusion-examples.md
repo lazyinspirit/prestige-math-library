@@ -1,7 +1,7 @@
 ---
 page: qm-identical-particles-and-exclusion-examples
 title: "Qm Identical Particles And Exclusion — Examples"
-status: draft
+status: published
 library: physics
 items: []
 examples:

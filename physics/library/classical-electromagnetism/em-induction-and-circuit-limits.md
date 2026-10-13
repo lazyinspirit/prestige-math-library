@@ -1,7 +1,7 @@
 ---
 page: em-induction-and-circuit-limits
 title: "Induction and circuit approximations"
-status: draft
+status: published
 library: physics
 items: [lem-em-newtonian-linkage-symmetry, lem-em-newtonian-curl-field-energy,
         def-em-moving-circuit-geometry, post-em-circuit-approximation,

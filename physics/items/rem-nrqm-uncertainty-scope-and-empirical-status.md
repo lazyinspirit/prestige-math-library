@@ -4,7 +4,7 @@ aliases: [ nrqm-uncertainty-scope-and-empirical-status ]
 kind: remark
 domain: physics
 title: "What the uncertainty and compatibility page adopts, proves and does not claim"
-status: draft
+status: published
 origin: pipeline
 dependency_level: 13
 deps:

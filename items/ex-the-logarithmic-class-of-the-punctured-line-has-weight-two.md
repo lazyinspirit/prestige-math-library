@@ -2,7 +2,7 @@
 id: ex-the-logarithmic-class-of-the-punctured-line-has-weight-two
 kind: example
 title: "The punctured line has a weight-two logarithmic class"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: frontier-44-special-representation-examples-28
 dependency_level: 13
