@@ -191,7 +191,7 @@ function fixture() {
   writeFileSync(join(root,'research',`${run}-judge.jsonl`),ids.map((id,i)=>JSON.stringify({id,model:MODELS.sol.id,context_sha256:h,item_sha256:contexts(root,[id]).get(id).item_sha256,keep:i!==0})).join('\n')+'\n');
   return {root,ids,cleanup:()=>rmSync(root,{recursive:true,force:true})};
 }
-test('Luna Step-4 verdicts route only to Astra-medium Step-5 adjudicators',()=>{
+test('historical Luna/Astra Step-5 evidence retains its authorized identity',()=>{
   const f=fixture();try{
     const ledger=join(f.root,'research',`${run}-judge.jsonl`);
     for(const id of f.ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.luna.id,
@@ -208,6 +208,42 @@ test('Luna Step-4 verdicts route only to Astra-medium Step-5 adjudicators',()=>{
     assert.doesNotThrow(()=>collect(f.root,run,'initial',1));
   }finally{f.cleanup();}
 });
+test('native Sol 6.1 high workers after Luna judgments select Sol 6.1 rejudgment and repeated adjudication',()=>{
+  const f=fixture();try{
+    const ledger=join(f.root,'research',`${run}-judge.jsonl`);
+    for(const id of f.ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.luna.id,
+      ...contexts(f.root,[id]).get(id),keep:id!==f.ids[0]})+'\n');
+    const pack=prepareAdjudication(f.root,run,'initial',1);
+    assert.equal(pack.judge_model,MODELS.luna.id);
+    item(f.root,'thm-item-0','Repaired root proof.');
+    reports(f.root,pack,{},['thm-frontier-consumer']);
+    const nativeReceipts=(assignment:any,effort='high')=>{
+      const role=assignment.rejected?'alpha-adjudicate':'alpha-repair';
+      for(const unit of assignment.units){
+        const path=join(f.root,'research',`${run}-dispatch`,`${role}-${workerLabel(assignment.phase,assignment.round,unit)}.result.json`);
+        const receipt=JSON.parse(readFileSync(path,'utf8'));
+        json(path,{...receipt,model:MODELS.sol61.id,provider_effort:effort});
+      }
+    };
+    nativeReceipts(pack,'medium');
+    assert.throws(()=>collect(f.root,run,'initial',1),/authorized identity/);
+    nativeReceipts(pack);
+    assert.doesNotThrow(()=>collect(f.root,run,'initial',1));
+    const owners=prepareImpact(f.root,run,'impact-initial',1);
+    reports(f.root,owners);nativeReceipts(owners);
+    assert.equal(advanceImpact(f.root,run,'impact-initial',1).complete,true);
+    certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
+    const receipt=judge(f.root,run,1,{contextHasher:contexts,runSweep:({ids,ledger}:any)=>{
+      for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol61.id,
+        ...contexts(f.root,[id]).get(id),keep:true})+'\n');
+      return {status:0};
+    }});
+    assert.ok(receipt.verdicts.length>0);
+    assert.ok(receipt.verdicts.every((row:any)=>row.model===MODELS.sol61.id));
+    assert.equal(prepareAdjudication(f.root,run,'repeat',1).judge_model,MODELS.sol61.id);
+  }finally{f.cleanup();}
+});
+
 test('Sol 6.1 Step-4 verdicts require Sol 6.1 high Step-5 adjudicators',()=>{
   const f=fixture();try{
     const ledger=join(f.root,'research',`${run}-judge.jsonl`);
@@ -332,7 +368,7 @@ test('policy: separate published repairs are excluded from Sol rejudgment and re
   const f=completedPublishedRepair(false);try{
     certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
     const calls:string[][]=[];
-    const runSweep=({ids,ledger}:any)=>{calls.push(ids);for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol.id,...contexts(f.root,[id]).get(id),keep:true})+'\n');return {status:0};};
+    const runSweep=({ids,ledger}:any)=>{calls.push(ids);for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol61.id,...contexts(f.root,[id]).get(id),keep:true})+'\n');return {status:0};};
     judge(f.root,run,1,{contextHasher:contexts,runSweep});
     assert.equal(calls.flat().includes('thm-published-outside'),false);
     json(join(workflowDir(f.root,run),'judge-2.json'),{verdicts:[{id:'thm-published-outside',model:MODELS.sol.id,...contexts(f.root,['thm-published-outside']).get('thm-published-outside'),keep:false}]});
@@ -423,7 +459,7 @@ test('initialization freezes real batch shape and initial reports bind exact rej
 
 test('an adjudicator may author a registered load-bearing prerequisite before owner closure and certification',()=>{
   const f=fixture();try{
-    writeAuditorCreatedBaseline(f.root,run,7);
+    writeAuditorCreatedBaseline(f.root,run,5);
     const pack=prepareAdjudication(f.root,run,'initial',1),created='lem-created-prerequisite';
     item(f.root,created,'A complete proof of the missing prerequisite.',[],false,'lemma');registerCreated(f.root,created,'lemma');
     item(f.root,f.ids[0],'Repaired proof using the new prerequisite.',[created]);
@@ -435,14 +471,14 @@ test('an adjudicator may author a registered load-bearing prerequisite before ow
     const owners=prepareImpact(f.root,run,'impact-initial',1);assert.ok(Object.values(owners.assignments).flat().includes(f.ids[0]));
     reports(f.root,owners);const cert=certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
     assert.ok(cert.items.some((row:any)=>row.id===created));assert.equal(cert.creations[0].id,created);
-    assert.deepEqual(certifyAuditorCreatedItems(f.root,run,7).items.map((row:any)=>row.id),[created]);
+    assert.deepEqual(certifyAuditorCreatedItems(f.root,run,5).items.map((row:any)=>row.id),[created]);
     assert.equal(JSON.parse(readFileSync(join(workflowDir(f.root,run),'frontier.json'),'utf8')).ids.length,22);
   }finally{f.cleanup();}
 });
 
 test('an owner may author a missing definition without adding it to Sol rejudge scope',()=>{
   const f=fixture();try{
-    writeAuditorCreatedBaseline(f.root,run,7);
+    writeAuditorCreatedBaseline(f.root,run,5);
     const pack=initial(f.root,f.ids),created='def-created-prerequisite';
     item(f.root,created,'The exact missing definition used below.',[],false,'definition');registerCreated(f.root,created,'definition');
     item(f.root,'thm-frontier-consumer','Repaired published proof using the definition.',[f.ids[0],created],false);
@@ -452,9 +488,9 @@ test('an owner may author a missing definition without adding it to Sol rejudge 
     report.created_items=[{id:created,kind:'definition',home_page:'page',batch:'1',consumers:['thm-frontier-consumer'],...evidence}];
     report.reviews.push({id:created,disposition:'authored',...reviewContextHashes(f.root,[created])[created],...evidence});json(path,report);
     const cert=certify(f.root,run,'impact-initial',1,{contextHasher:contexts});assert.ok(cert.creations.some((row:any)=>row.id===created));
-    assert.deepEqual(certifyAuditorCreatedItems(f.root,run,7).items.map((row:any)=>row.id),[created]);
+    assert.deepEqual(certifyAuditorCreatedItems(f.root,run,5).items.map((row:any)=>row.id),[created]);
     const judged=judge(f.root,run,1,{contextHasher:contexts,runSweep:({ids,ledger}:any)=>{
-      for(const id of ids){const current=contexts(f.root,[id]).get(id);appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol.id,...current,keep:true})+'\n');}
+      for(const id of ids){const current=contexts(f.root,[id]).get(id);appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol61.id,...current,keep:true})+'\n');}
       return {status:0};
     }});
     assert.equal(judged.items.includes(created),false);
@@ -698,7 +734,7 @@ test('missing paid verdict and a metadata writer during central hashing fail clo
       const pack=initial(f.root,f.ids);reports(f.root,pack);
       if(mode==='missing-verdict'){
         certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
-        assert.throws(()=>judge(f.root,run,1,{contextHasher:contexts,runSweep:()=>({status:0})}),/missing current gpt-6-sol verdict/);
+        assert.throws(()=>judge(f.root,run,1,{contextHasher:contexts,runSweep:()=>({status:0})}),/missing current gpt-6\.1-sol verdict/);
         assert.equal(existsSync(join(workflowDir(f.root,run),'judge-1.json')),false);
       }else{
         const contextHasher=(root:string,ids:string[])=>{
@@ -718,7 +754,7 @@ test('Sol rejudges changed frontier items and current context; complete repeat e
     const pack=initial(f.root,f.ids);item(f.root,'thm-frontier-consumer','Updated published proof.',['thm-item-0'],false);reports(f.root,pack);
     certify(f.root,run,'impact-initial',1,{contextHasher:contexts});
     const calls:string[][]=[];
-    const runSweep=({ids,ledger}:any)=>{calls.push(ids);for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol.id,...contexts(f.root,[id]).get(id),keep:true})+'\n');return {status:0};};
+    const runSweep=({ids,ledger}:any)=>{calls.push(ids);for(const id of ids)appendFileSync(ledger,JSON.stringify({id,model:MODELS.sol61.id,...contexts(f.root,[id]).get(id),keep:true})+'\n');return {status:0};};
     judge(f.root,run,1,{contextHasher:contexts,runSweep});assert.deepEqual(calls[0],['thm-frontier-consumer','thm-item-0']);
     const repeat=prepareAdjudication(f.root,run,'repeat',1);assert.equal(repeat.rejected.length,0);reports(f.root,repeat);
     const impact=prepareImpact(f.root,run,'impact-repeat',1);reports(f.root,impact);

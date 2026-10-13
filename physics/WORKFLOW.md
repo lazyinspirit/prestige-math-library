@@ -145,6 +145,11 @@ Unknown targets and alerts about the sender's own batch still fail the digest ga
 
 Step 5 retains the round-based adjudication/repair engine, supplier-before-consumer
 maintenance, frozen frontier guards and its complete gate battery. The
+native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
+Collection binds its genuine dispatch receipts while retaining historical lane
+identities for older evidence. Step 5 rejudgment always uses GPT-6.1 Sol at high
+reasoning effort, independent of the Step-4 judge model. Repeated adjudication
+consumes the actual rejudge verdicts. The
 judgment/adjudication rounds continue until the latest round's unique confirmed
 fatal original-frontier items are strictly below 2% of the immutable original
 inventory. Exactly 2% requires another round; unresolved defects still block closure.

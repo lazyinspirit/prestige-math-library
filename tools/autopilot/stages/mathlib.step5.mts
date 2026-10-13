@@ -128,7 +128,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
       plan:(ctx:any)=>[{role:'tool',label:'step5-v2-init',covers:['all'],job:'bookkeeping-mechanical',argv:tool(ctx,'init','initial',1)}],
       gatesWaived:'Initialization freezes the original frontier and Step 4 evidence; every later round validates these immutable inputs.'},
     workerStage('5.1-adjudicate','initial',true),workerStage('5.2-impact','impact-initial',false),certifyStage('5.3-certify','impact-initial'),
-    {id:'5.4-rejudge',label:'5.4 Sol 6.1 high judges repaired items',units:()=>['all'],pattern:pattern('judge','5.4-rejudge'),concurrency:1,maxAttempts:1,
+    {id:'5.4-rejudge',label:'5.4 Sol 6.1 high judges repaired items',modelProfile:SOL61_HIGH,units:()=>['all'],pattern:pattern('judge','5.4-rejudge'),concurrency:1,maxAttempts:1,
       artifacts:(ctx:any)=>relative(ctx.repo,join(workflowDir(ctx.repo,ctx.run),`judge-${round(ctx,'5.4-rejudge')}.json`)),
       plan:(ctx:any)=>[{role:'tool',label:`step5-v2-judge-r${round(ctx,'5.4-rejudge')}-all`,covers:['all'],job:'judgement',timeout:43200,
         argv:tool(ctx,'judge','repeat',round(ctx,'5.4-rejudge'))}],

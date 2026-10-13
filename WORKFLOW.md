@@ -208,6 +208,8 @@ maintenance, frozen frontier guards and its complete gate battery. The
 judgment/adjudication rounds continue until the latest round's unique confirmed
 fatal original-frontier items are strictly below 2% of the immutable original
 inventory. Exactly 2% requires another round; unresolved defects still block closure.
+Step 5 rejudgment uses GPT-6.1 Sol at high reasoning effort, independent of the
+Step-4 judge model. Repeated adjudication consumes the actual rejudge verdicts.
 The additional
 `proof-contract-coverage` mechanical check still requires a contract for each
 actual proof-bearing carrier. No new substantive review gate is added. Step 6

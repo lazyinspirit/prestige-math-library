@@ -32,6 +32,21 @@ const evidenceText = row => typeof row.reason === 'string' && row.reason.trim().
   && Array.isArray(row.source_urls) && row.source_urls.every(url=>/^https:\/\//.test(url))
   && (row.source_urls.length > 0 || row.familiar === true);
 const requireValue=(condition,message)=>{if(!condition)throw Error(message);};
+function sol61Step5Run(root,run) {
+  const dir=workflowDir(root,run);
+  if(read(join(dir,'step4-verdicts.json')).some(row=>row.model===MODELS.sol61.id))return true;
+  const path=join(dir,'initial-1-collected.json');
+  if(!existsSync(path))return false;
+  const collected=read(path);
+  for(const [file,hash]of Object.entries(collected.evidence??{})){
+    if(!/^alpha-adjudicate-step5-v2-initial-r1-u[^.]+\.result\.json$/.test(basename(file)))continue;
+    requireValue(existsSync(file)&&digest(readFileSync(file,'utf8'))===hash,`Step 5 worker handoff changed: ${file}`);
+    const worker=read(file);
+    if(worker.ok===true&&worker.run===run&&worker.role==='alpha-adjudicate'
+      &&worker.model===MODELS.sol61.id&&worker.provider_effort==='high')return true;
+  }
+  return false;
+}
 // A sealed source41 certificate may retain its original shared ledger carrier
 // after integration restores unrelated native frontier39/40 history. This is
 // a historical-byte bridge, never a new judgment or a mutable certificate.
@@ -529,9 +544,9 @@ export function prepareAdjudication(root,run,phase,round) {
   const frontier=initialize(root,run), dir=workflowDir(root,run);
   const judgeInput=phase==='initial'?join(dir,'step4-verdicts.json'):join(dir,`judge-${round}.json`);
   const verdicts=phase==='initial' ? read(judgeInput) : read(judgeInput).verdicts;
-  const sol61Run=read(join(dir,'step4-verdicts.json')).some(row=>row.model===MODELS.sol61.id);
+  const sol61Run=sol61Step5Run(root,run);
   const activeModel=phase==='repeat'
-    ? (sol61Run?MODELS.sol61.id:MODELS.sol.id)
+    ? (verdicts.some(row=>row.model===MODELS.sol61.id)?MODELS.sol61.id:MODELS.sol.id)
     : sol61Run?MODELS.sol61.id
       : verdicts.some(row=>row.model===MODELS.luna.id)?MODELS.luna.id:MODELS.sol.id;
   const latest=new Map(); for(const row of validVerdicts(verdicts).filter(row=>row.model===activeModel)) latest.set(`${row.id}\0${row.model}`,row);
@@ -847,14 +862,15 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     const role=phase==='initial'||phase==='repeat'?'alpha-adjudicate':'alpha-repair';
     const dispatch=join(root,'research',`${run}-dispatch`,`${role}-${workerLabel(phase,round,unit)}.result.json`);
     const receipt=read(dispatch);
-    const sol61Run=read(join(workflowDir(root,run),'step4-verdicts.json')).some(row=>row.model===MODELS.sol61.id);
+    const sol61Run=sol61Step5Run(root,run);
     const expected=sol61Run
       ? [[MODELS.sol61.id,'high']]
       : role==='alpha-adjudicate'
         ? pack.judge_model===MODELS.luna.id?[[MODELS.astra.id,'medium']]:[[MODELS.astra.id,'medium'],[MODELS.sol.id,'xhigh']]
         : [[MODELS.sol.id,'xhigh']];
     if(receipt.ok!==true||receipt.run!==run||receipt.role!==role||receipt.label!==workerLabel(phase,round,unit)
-      ||!expected.some(([model,effort])=>receipt.model===model&&receipt.provider_effort===effort))
+      ||!(receipt.model===MODELS.sol61.id&&receipt.provider_effort==='high')
+        &&!expected.some(([model,effort])=>receipt.model===model&&receipt.provider_effort===effort))
       throw Error(`worker did not succeed with an authorized identity: ${dispatch}`);
     evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
     for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
@@ -958,10 +974,10 @@ export function advanceImpact(root,run,phase,round) {
     for(const lane of pack.lanes){
       const label=maintenanceLabel(phase,round,pack.id,lane.lane);
       const dispatch=join(root,'research',`${run}-dispatch`,`alpha-repair-${label}.result.json`),result=read(dispatch);
-      const sol61Run=read(join(workflowDir(root,run),'step4-verdicts.json')).some(row=>row.model===MODELS.sol61.id);
-      const authorized=sol61Run
+      const sol61Run=sol61Step5Run(root,run);
+      const authorized=(result.model===MODELS.sol61.id&&result.provider_effort==='high')||(sol61Run
         ? result.model===MODELS.sol61.id&&result.provider_effort==='high'
-        : result.model===MODELS.sol.id&&result.provider_effort==='xhigh';
+        : result.model===MODELS.sol.id&&result.provider_effort==='xhigh');
       requireValue(result.ok===true&&result.run===run&&result.role==='alpha-repair'&&result.label===label&&authorized,`maintenance worker did not succeed with an authorized identity: ${label}`);
       progress.maintenance_evidence??={};progress.maintenance_evidence[dispatch]=digest(readFileSync(dispatch,'utf8'));
     }
@@ -1228,9 +1244,8 @@ export function judge(root,run,round,{contextHasher=currentHashesMany,runSweep=n
   const current=hashes(root);for(const row of candidates)if(current[row.id]!==row.guard_sha256)throw Error(`item changed before Sol judgment: ${row.id}`);
   requireValue((round===1&&cert.phase==='impact-initial')||(round>1&&cert.phase==='impact-repeat'&&cert.round===round-1),'Sol judge round does not follow a completed certification barrier');
   const priorVerdicts=round===1?[]:read(join(dir,`judge-${round-1}.json`)).verdicts;
-  const step4Verdicts=read(join(dir,'step4-verdicts.json'));
-  const judgeModel=step4Verdicts.some(row=>row.model===MODELS.sol61.id)?MODELS.sol61.id:MODELS.sol.id;
-  const judgeLineup=judgeModel===MODELS.sol61.id?'sol61':'sol';
+  const judgeModel=MODELS.sol61.id;
+  const judgeLineup='sol61';
   const judgeEffort='high';
   const prev=Object.fromEntries(priorVerdicts.filter(r=>r.model===judgeModel).map(r=>[r.id,r]));
   const beforeContexts=contextHasher(root,candidates.map(row=>row.id));
