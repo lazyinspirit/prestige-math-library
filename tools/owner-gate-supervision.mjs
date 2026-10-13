@@ -16,7 +16,13 @@ const permissionPath = ctx => join(ctx.repo, 'research', `${ctx.run}-owner-gate-
 
 export function frontierInputs(ctx) {
   const snapshot = loadStep3(ctx.repo, ctx.run);
-  const files = new Set([join(ctx.repo, 'research', 'plan-spec.json')]);
+  const files = new Set([join(ctx.repo, 'research', 'plan-spec.json'),
+    join(ctx.repo, 'research', `${ctx.run}-scope-ledger.json`),
+    join(ctx.repo, 'research', `${ctx.run}-owner-authoring-direction.md`)]);
+  const planningScopePath = join(ctx.repo, 'research', `${ctx.run}-planning-scope.json`);
+  files.add(planningScopePath);
+  const planningScope = read(planningScopePath);
+  if (planningScope?.source) files.add(join(ctx.repo, planningScope.source));
   for (const name of readdirSync(join(ctx.repo, 'research'))) {
     if (name.startsWith(`${ctx.run}-batch-`) && /\.(pages|coverage|proof-contracts)\.json$/.test(name))
       files.add(join(ctx.repo, 'research', name));
