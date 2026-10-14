@@ -168,9 +168,12 @@ export interface Stage {
   /** Units sharing output files. Ready subsets may advance independently, but
    * no subset may dispatch while another member has a live writer here. */
   exclusiveCohort?: (ctx: Ctx, u: Unit) => Unit[];
-  /** Direct prerequisites owed by this same stage. A unit cannot dispatch
-   * until every transitive prerequisite is artifact-complete and stable. */
+  /** Direct prerequisites owed by this same stage. By default a unit cannot
+   * dispatch until all transitive suppliers are artifact-complete and stable. */
   unitPrerequisites?: (ctx: Ctx, u: Unit) => Unit[];
+  /** Initial dispatch may use the DAG only for priority. Completion, repair
+   * and review still require actual stable suppliers; default is complete. */
+  unitPrerequisitePolicy?: 'complete' | 'priority';
   /** A temporary per-unit hold. The unit remains owed, and its consumers stay
    * blocked, while other eligible units can use available dispatch slots. */
   unitEligible?: (ctx: Ctx, u: Unit) => boolean;

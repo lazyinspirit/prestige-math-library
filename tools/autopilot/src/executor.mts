@@ -567,13 +567,15 @@ export class Executor {
 
   /** Apply a stage's own dependency DAG to candidate units.
    *
-   * Every transitive supplier must have successful coverage, all declared
+   * Normally every transitive supplier must have successful coverage, all declared
    * artifacts, and no live (or about-to-start) writer. The last condition also
    * includes an exclusive cohort because a sibling writing a shared manifest
    * makes the supplier bytes unstable. Building and validating the whole graph
-   * here prevents a cycle from degrading into a silent no-work tick. */
+   * here prevents a cycle from degrading into a silent no-work tick. Initial
+   * priority authoring opts out of supplier completion, preserving graph,
+   * eligibility and exclusive-writer checks. Repair callers retain the default. */
   unitReadiness(stage: Stage, ctx: Ctx, candidates: Unit[], active = new Set<Unit>(),
-    writes = new Set<Unit>(), cohortWrites = writes): {
+    writes = new Set<Unit>(), cohortWrites = writes, requireComplete = true): {
       ready: Unit[]; problem: string | null; deferred?: boolean;
     } {
     try {
@@ -620,7 +622,7 @@ export class Executor {
         if (problem) return { ready: [], problem };
       }
 
-      const done = this.unitsComplete(stage, ctx);
+      const done = requireComplete ? this.unitsComplete(stage, ctx) : new Set<Unit>();
       const activeUnits = new Set([...active].map(String));
       const writeUnits = new Set([...writes].map(String));
       const cohortWriteUnits = new Set([...cohortWrites].map(String));
@@ -643,7 +645,7 @@ export class Executor {
               const id = String(other);
               return id !== candidate && (activeUnits.has(id) || cohortWriteUnits.has(id));
             })) return false;
-          return [...(transitive.get(candidate) ?? [])].every(dep => stable(dep, candidate));
+          return !requireComplete || [...(transitive.get(candidate) ?? [])].every(dep => stable(dep, candidate));
         // Fill every slot from ready work, preferring earlier dependency levels
         // without waiting for unrelated pairs in those levels to finish.
         }).sort((a, b) => (levels.get(String(a)) ?? 0) - (levels.get(String(b)) ?? 0)),
@@ -1056,7 +1058,7 @@ export class Executor {
    * member. Duplicate labels are duplicate dispatch identities: allowing both
    * would make the second silently lose the start() race and share evidence
    * paths with the first. */
-  startMany(stage: Stage, plans: Plan[]): boolean {
+  startMany(stage: Stage, plans: Plan[], { initialDispatch = false } = {}): boolean {
     if (!plans.length) return true;
     const labelCounts = new Map<string, number>();
     for (const plan of plans) labelCounts.set(plan.label, (labelCounts.get(plan.label) ?? 0) + 1);
@@ -1097,12 +1099,13 @@ export class Executor {
       readyPlans = plans.filter(plan => (plan.covers ?? []).every(unit => ready.has(String(unit))));
       this.retireUnitPrerequisiteBlocker(stage);
     } else if (stage.unitPrerequisites) {
+      const requireComplete = !initialDispatch || stage.unitPrerequisitePolicy !== 'priority';
       const active = new Set<Unit>([...this.inflight.values()]
         .filter((row: any) => row.meta.stage === stage.id)
         .flatMap((row: any) => row.meta.covers.map(String)));
       for (const unit of this.adoptedUnits(stage)) active.add(String(unit));
       const writes = new Set<Unit>(plans.flatMap(plan => (plan.covers ?? []).map(String)));
-      const graph = this.unitReadiness(stage, this.ctx(), [], active, writes, new Set());
+      const graph = this.unitReadiness(stage, this.ctx(), [], active, writes, new Set(), requireComplete);
       if (graph.problem) {
         this.recordUnitPrerequisiteBlocker(stage, graph.problem);
         return false;
@@ -1112,7 +1115,7 @@ export class Executor {
       readyPlans = [];
       for (const plan of plans) {
         const covered = (plan.covers ?? []).map(String);
-        const readiness = this.unitReadiness(stage, this.ctx(), covered, active, writes, acceptedWrites);
+        const readiness = this.unitReadiness(stage, this.ctx(), covered, active, writes, acceptedWrites, requireComplete);
         if (readiness.problem) {
           this.recordUnitPrerequisiteBlocker(stage, readiness.problem);
           return false;
@@ -1683,7 +1686,8 @@ export class Executor {
     // Apply same-stage dependency readiness to the full pending list before
     // slot slicing. Otherwise blocked units at the head can starve a ready
     // supplier or an independent branch later in the list.
-    const prerequisiteReadiness = this.unitReadiness(stage, ctx, need, runningUnits);
+    const prerequisiteReadiness = this.unitReadiness(stage, ctx, need, runningUnits,
+      new Set(), new Set(), stage.unitPrerequisitePolicy !== 'priority');
     if (prerequisiteReadiness.problem) {
       this.recordUnitPrerequisiteBlocker(stage, prerequisiteReadiness.problem);
       this.reporter.report(this.snapshot(), { force: true });
@@ -1783,7 +1787,7 @@ export class Executor {
       // role/schema/task defect must stop the fleet with zero model calls; if
       // validation lived only inside start(), an earlier valid sibling could
       // already be running when a later plan exposed the shared defect.
-      if (!this.startMany(stage, plans)) {
+      if (!this.startMany(stage, plans, { initialDispatch: true })) {
         this.reporter.report(this.snapshot(), { force: true });
         return 'blocked';
       }

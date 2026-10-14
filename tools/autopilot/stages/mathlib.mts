@@ -1096,6 +1096,7 @@ export const stages = [
       : undefined,
     units: (ctx: any) => batches(ctx),
     unitPrerequisites: (ctx: any, unit: string) => prerequisiteBatches(ctx.repo, ctx.run, unit),
+    unitPrerequisitePolicy: 'priority',
     artifacts: (ctx: any, unit: string) => [...scaffoldArtifacts(ctx, unit), ...authorArtifacts(ctx, unit)],
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
     // `beta-fix-batch-3.result.json`, which belongs to a different stage.
@@ -1105,8 +1106,8 @@ export const stages = [
     plan: (ctx, pending) => {
       if (ctx.doctor) return pending.map(u => ({role:'beta',label:`batch-${u}`,job:'scaffolding',covers:[u],
         brief:'briefs/beta-scaffold.md',task:[`research/${ctx.run}-beta-${u}.task.md`,`research/${ctx.run}-beta-batch.task.md`],timeout:14400}));
-      // Fresh scheduling metadata before every construction dispatch. Readiness
-      // still requires successful suppliers, finished carriers and drained writers.
+      // Fresh priority metadata before every construction dispatch. Cross-batch
+      // suppliers may still be in flight; acceptance requires their real bodies.
       const levels = writeBatchDependencyLevels(ctx.repo, ctx.run);
       const levelFor = (u: string) => levels.batches.find((row: any) => row.batch === String(u))?.dependency_level ?? Infinity;
       return [...pending].sort((a, b) => levelFor(a) - levelFor(b) || Number(a) - Number(b)).map((u: any) => {
@@ -1120,6 +1121,7 @@ export const stages = [
           `Batch ${u}: dependency_level ${row.dependency_level}; prerequisite batches: ${row.requires.join(', ') || 'none'}.`,
           `Current scheduling input: ${levels.input_sha256}.`,
           'Determine item inventories, logical deps and item dependency_level labels in the scaffold manifest before writing carriers. Author suppliers before consumers in ascending item level.',
+          'Continue authoring this pair even if another pair has not supplied a prerequisite yet. Use the controlling plan and declared interfaces to draft independent definitions, arguments and examples; record exact unresolved supplier IDs and required hypotheses. Do not wait, poll or edit another pair. Verify actual supplier bodies before claiming readiness; never invent supplier excerpts or approval.',
           ...sources.flatMap(source => ['', `<!-- Source: ${source} -->`, readFileSync(R(ctx, source), 'utf8')]),
         ].join('\n'));
         return { role: 'beta', label: `batch-${u}`, job: 'scaffolding', covers: [u],

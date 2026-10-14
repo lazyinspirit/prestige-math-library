@@ -64,6 +64,10 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
         P(s.id, `\`${name}\` must be a function (ctx, unit) => units`);
       }
     }
+    if (s.unitPrerequisitePolicy !== undefined && !['complete', 'priority'].includes(s.unitPrerequisitePolicy))
+      P(s.id, '`unitPrerequisitePolicy` must be complete or priority');
+    if (s.unitPrerequisitePolicy === 'priority' && typeof s.unitPrerequisites !== 'function')
+      P(s.id, '`priority` requires a unit prerequisite graph');
     if (typeof s.units === 'function' && typeof s.unitPrerequisites === 'function') {
       try {
         const units = s.units(ctx).map(String);

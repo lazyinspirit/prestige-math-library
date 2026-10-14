@@ -278,6 +278,74 @@ test('same-stage dependencies filter before slot slicing and inspect transitive 
     [['supplier'], ['independent']]);
 });
 
+test('authoring priority fills 30 slots across levels and refills without waiting for suppliers', async () => {
+  const fx = fixture();
+  // Deliberately enumerate consumers first: ordering must happen BEFORE slicing.
+  const groups = [Array.from({ length: 7 }, (_, i) => String(27 + i)),
+    Array.from({ length: 6 }, (_, i) => String(21 + i)),
+    Array.from({ length: 8 }, (_, i) => String(13 + i)),
+    Array.from({ length: 12 }, (_, i) => String(1 + i))];
+  const dependencies = new Map(groups.flatMap((group, level) =>
+    group.map(unit => [unit, level ? [groups[level - 1][0]] : []] as const)));
+  const stage: any = {
+    id: 'author', label: 'author', units: () => [...groups].reverse().flat(),
+    pattern: /^worker-/, concurrency: 30,
+    artifacts: (_ctx: any, unit: string) => `artifact-${unit}.json`,
+    unitPrerequisites: (_ctx: any, unit: string) => dependencies.get(unit),
+    unitPrerequisitePolicy: 'priority',
+    plan: (_ctx: any, pending: string[]) => pending.map(unit => ({
+      role: 'worker', label: `author-${unit}`, job: 'authoring', covers: [unit],
+    })),
+    gatesWaived: 'The test verifies dispatch capacity, not content acceptance.',
+  };
+  const ex = makeExecutor(fx, [stage], { hang: true, globalConcurrency: 30 });
+  assert.equal(await ex.dispatchStage(stage, ex.ctx()), 'ok');
+  const started = () => inflightAt(ex, 'author').flatMap((row: any) => row.meta.covers);
+  assert.deepEqual(started(), [...groups.slice(0, 3).flat(), ...groups[3].slice(0, 9)]);
+  assert.equal(ex.unitsComplete(stage, ex.ctx()).size, 0, 'dispatch is not acceptance');
+
+  // A fourth-level author finishes while ALL its suppliers remain live.
+  ex.inflight.delete('author:author-1');
+  cover(fx, 'worker', 'author-1', ['1']);
+  assert.equal(await ex.dispatchStage(stage, ex.ctx()), 'ok');
+  assert.equal(started().length, 30);
+  assert.ok(started().includes('10'), 'the next fourth-level pair fills the slot');
+  assert.ok(started().includes('27'), 'the first-level supplier is still live');
+  assert.equal(started().includes('11'), false, 'global capacity remains enforced');
+  assert.deepEqual(ex.unitReadiness(stage, ex.ctx(), ['11']).ready, [],
+    'repair/readiness callers still require completed suppliers by default');
+  assert.equal(ex.startMany(stage, [{ role: 'worker', label: 'repair-11',
+    job: 'authoring', covers: ['11'] }]), true);
+  assert.equal(started().includes('11'), false, 'repair fan-out keeps supplier completion guards');
+});
+
+test('mathematics selects authoring priority while retaining completion artifacts and gates', async () => {
+  const { stages } = await import('../stages/mathlib.mts');
+  const author = stages.find(stage => stage.id === '1-scaffold')!;
+  assert.equal(author.unitPrerequisitePolicy, 'priority');
+  assert.equal(typeof author.unitPrerequisites, 'function');
+  assert.equal(typeof author.artifacts, 'function');
+  assert.equal(typeof author.gates, 'function');
+  assert.equal(author.gatesWaived, undefined);
+  assert.equal(stages.some(stage => stage.id !== '1-scaffold'
+    && stage.unitPrerequisitePolicy === 'priority'), false);
+});
+
+test('authoring priority still rejects cycles', async () => {
+  const fx = fixture();
+  const stage: any = {
+    id: 'author', label: 'author', units: () => ['a', 'b'], pattern: /^worker-/,
+    unitPrerequisitePolicy: 'priority',
+    unitPrerequisites: (_ctx: any, unit: string) => unit === 'a' ? ['b'] : ['a'],
+    plan: () => { throw Error('a cyclic graph must not dispatch'); },
+    gatesWaived: 'The test verifies graph rejection.',
+  };
+  const ex = makeExecutor(fx, [stage], { hang: true });
+  assert.equal(await ex.dispatchStage(stage, ex.ctx()), 'blocked');
+  assert.equal(ex.inflight.size, 0);
+  assert.match(ex.state.data.blockers[0].message, /cycle/);
+});
+
 test('same-stage consumer waits for a missing artifact and a live or adopted supplier repair', async () => {
   for (const mode of ['missing-artifact', 'live', 'adopted']) {
     const fx = fixture();
