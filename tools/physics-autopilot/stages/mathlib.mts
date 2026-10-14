@@ -26,7 +26,6 @@ import { isPublishedItem } from '../../physics-support/published-repair-policy.m
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
 import { MAX_RUN_BATCHES, MAX_GROUPS } from '../src/capacity.mjs';
 import { alphabeticLabel } from '../../alpha-group-assignment.mjs';
-import { computeRunBatchDependencyLevels, writeBatchDependencyLevels } from '../../physics-support/batch-dependency-levels.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { batchInput, loopState, collectBatch, accepted, loopPattern, batchPlans, engineRepairEligible, repairCohort } from '../../physics-support/batch-scope-review.mjs';
 import { holdStep1 } from './step1-hold.mts';
@@ -54,6 +53,13 @@ const SOL61_MEDIUM = MODEL_PROFILE_NAMES.sol61Medium;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
+// Reload the scheduling loader with this stage in an already-live controller.
+const BATCH_LEVELS_URL = new URL('../../physics-support/batch-dependency-levels.mjs', import.meta.url);
+const BATCH_LEVELS_STAT = statSync(BATCH_LEVELS_URL);
+const { readSchedulingBatchDependencyLevels, writeBatchDependencyLevels } = await import(
+  `${BATCH_LEVELS_URL.href}?v=${BATCH_LEVELS_STAT.mtimeMs}:${BATCH_LEVELS_STAT.size}`
+);
+
 /** Batch numbers, read from disk rather than configured.
  *  A run's batch count is a property of its planning output, and anything that
  *  restates it in a second place will eventually disagree with it. */
@@ -68,11 +74,12 @@ export function batches(ctx: any): string[] {
 }
 
 /** Dependency levels prioritize the entire pending queue before slot slicing.
- * Missing cross-pair carriers do not delay initial authoring. The graph remains
- * validated, and complete readiness is checked by the drained Step-1 gates. */
+ * Draft manifests and carrier YAML are mutable while authors run, so queue
+ * priority uses the last valid full graph. Current dependencies and complete
+ * readiness are checked strictly by the drained Step-1 join and gates. */
 export function authoringBatches(ctx: any): string[] {
   if (ctx.doctor) return batches(ctx);
-  return computeRunBatchDependencyLevels(ctx.repo, ctx.run).batches.map(row => row.batch);
+  return readSchedulingBatchDependencyLevels(ctx.repo, ctx.run).batches.map(row => row.batch);
 }
 
 /** Required local scaffold output, independent of cross-pair supplier readiness.
@@ -1024,7 +1031,7 @@ export const stages = [
         writeBatchDependencyLevels(ctx.repo, ctx.run);
     },
     plan: (ctx, pending) => {
-      const levels = ctx.doctor ? null : writeBatchDependencyLevels(ctx.repo, ctx.run);
+      const levels = ctx.doctor ? null : readSchedulingBatchDependencyLevels(ctx.repo, ctx.run);
       const levelByBatch = new Map(levels?.batches.map(row => [row.batch, row.dependency_level]) ?? []);
       return [...pending].sort((a, b) => (levelByBatch.get(a) ?? 0) - (levelByBatch.get(b) ?? 0))
         .map((u: any) => ({

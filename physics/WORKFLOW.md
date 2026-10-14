@@ -48,9 +48,12 @@ As soon as a worker finishes, the engine starts the next pending pair without
 waiting for the rest of its level.
 
 Batch levels are computed mechanically during planning, recomputed after drift
-materialization and before construction dispatches, and recorded in
-`research/RUN-batch-dependency-levels.json`. The engine checks the current graph,
-including declared carrier dependencies, to determine that priority. No
+materialization and at the drained construction join, and recorded in
+`research/RUN-batch-dependency-levels.json`. Queue refill and status use that last
+valid full graph while authors edit draft manifests and carrier YAML. The loader
+validates its DAG, levels and complete current manifest batch scope without
+parsing in-flight drafts. The drained join and gates strictly recompute and check
+the current graph, including declared carrier dependencies. No
 cross-pair prerequisite-completion barrier applies to initial authoring. A missing
 supplier retains its exact planned interface and honest proof-status obligation;
 authors complete the consuming argument conditionally and continue their remaining
