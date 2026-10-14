@@ -24,6 +24,15 @@ its own agent or workflow stage. The pre-authoring snapshot runs before Step 1
 construction. Initial item and page authoring happens entirely in Step 1;
 later stages retain their substantive review, repair and finalization duties.
 
+The Step-1 `content-policy-scaffold` gate retains its gate identity and joins
+all current run manifests in authored-carrier mode, without `--manifest-only`.
+It checks the completed items' provenance, source references and generated-claim
+containment, together with manifest capacity and duplicate-ID checks. The
+separate `manifest-deps` gate still requires explicit manifest dependency arrays.
+Future-mint checks belong before authoring; existing Step-1 carriers do not need
+the later canonical-plan transcription to qualify for authored-item validation.
+Subsequent `content-policy-items` gates recheck the current authored carriers.
+
 ## Construction and escalation
 
 Step 1 keeps existing drift/source recovery, readiness, scope, page-capacity and

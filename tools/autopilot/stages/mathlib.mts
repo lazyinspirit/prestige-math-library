@@ -295,12 +295,11 @@ const coverageGates = (ctx, { requireDestination = false } = {}) => batches(ctx)
     liveness: { pattern: /(\d+)\s+harvested/.source, min: 1, unit: 'harvested results' },
   }));
 
-/** Scaffold policy is a whole-level join. `content-policy --manifest-only`
- *  still enforces the two-pair capacity separately for every manifest, but it
- *  must see every in-flight manifest at once so a legal dependency on an
- *  earlier page in another batch resolves as planned content. Running one
- *  invocation per batch misclassifies that edge as missing until step 3 has
- *  authored the target, creating a deadlock before the splice. */
+/** Step 1 policy is a whole-frontier join over completed authoring manifests.
+ *  Keep explicit manifest dependencies and per-manifest capacity checks, then
+ *  read the actual carriers for provenance, sources and containment. The
+ *  pre-authoring `--manifest-only` mint checks do not apply here: Step 1 has
+ *  already authored these IDs, before Step 2 transcribes the canonical plan. */
 const manifestDepsGate = (ctx) => gate('manifest-deps', ['node', 'tools/manifest-deps.mjs',
   ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)], {
   liveness: { pattern: /manifest-deps: (\d+) item/.source, min: 1, unit: 'planned items' },
@@ -309,20 +308,16 @@ const manifestDepsGate = (ctx) => gate('manifest-deps', ['node', 'tools/manifest
 const policyGates = (ctx) => [
   manifestDepsGate(ctx),
   gate('content-policy-scaffold', ['node', 'tools/content-policy.mjs',
-    '--manifest-only',
     ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)], {
     liveness: { pattern: /(\d+)\s+scoped item/.source, min: 1, unit: 'scoped items' },
   }),
 ];
 
-/** Item mode — the other half of content-policy, and the only enforcement of
- *  applied-iota notation, provenance ENUM validity (level-coverage checks
- *  presence only), reader-visible source URLs, generated-claim containment and
- *  the external_dependency record. `--manifest-only` guards all of that behind
- *  `if (!manifestOnly)`, so a pipeline that only ever passes the flag performs
- *  none of it — which is what this engine did until 2026-08-16. Scope comes
- *  from the manifests, so the legacy corpus is not retro-flagged; runs only
- *  after step 3, when the item files exist. */
+/** Recheck authored-carrier policy after subsequent review/repair. Step 1
+ *  already checks applied-iota notation, provenance enums, reader-visible
+ *  source URLs, generated-claim containment and retired external records.
+ *  Scope remains the complete current manifests; outside suppliers are
+ *  dependency context rather than unrelated policy-audit subjects. */
 const policyItemGate = (ctx) => gate('content-policy-items', ['node', 'tools/content-policy.mjs',
   ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`)], {
   liveness: { pattern: /(\d+)\s+scoped item/.source, min: 1, unit: 'scoped items' },
