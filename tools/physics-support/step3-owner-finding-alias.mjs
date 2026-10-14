@@ -23,8 +23,12 @@ export function ownerReviewedFindingAlias(root, run, group, prior, decision, tar
       && row.primary_obligation === prior?.obligation && row.alias_obligation === decision.obligation);
     if (entries.length !== 1) return false;
     const entry = entries[0];
-    const { batch: primaryBatch, route: _primaryRoute, ...primary } = prior.target ?? {};
-    const { batch: aliasBatch, route: _aliasRoute, ...alias } = target ?? {};
+    const { batch: storedPrimaryBatch, route: _primaryRoute, ...primary } = prior.target ?? {};
+    const { batch: storedAliasBatch, route: _aliasRoute, ...alias } = target ?? {};
+    // Routed findings omit batch; their immutable obligation carries it.
+    const primaryBatch = storedPrimaryBatch ?? /^reader:(\d+):\d+$/.exec(prior.obligation)?.[1];
+    const aliasBatch = storedAliasBatch ?? /^refuter:(\d+):\d+$/.exec(decision.obligation)?.[1];
+    if (!primaryBatch || !aliasBatch) return false;
     if (primaryBatch !== aliasBatch || !['reader', 'flagged'].includes(prior.route)
       || !['reader', 'flagged'].includes(decision.route) || prior.verdict !== decision.verdict
       || entry.subject !== primary.id || entry.subject !== alias.id
