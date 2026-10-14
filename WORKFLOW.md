@@ -274,6 +274,11 @@ performs mechanical contract closure and emits `step6-` owner-report artifacts;
 its readiness and closeout commit remain evidence-bound. Publishing/pushing are
 owner actions, separate from this build.
 
+Readiness and closeout treat both `ENOENT` and `ENOTDIR` as an absent path:
+a regular file cannot contain child evidence files. Readiness follows existing
+local references; required owned carriers still fail when absent or nonregular,
+and other filesystem errors remain fatal.
+
 Closeout may close an unchanged published prerequisite ownership claim through
 `research/RUN-published-noop-closure.json` (`unchanged-published-ownership-closure`,
 version 1). This separate owner-authorized receipt binds the exact claim ledger,

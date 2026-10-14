@@ -128,7 +128,7 @@ function fileState(root, path) {
   if (!stat.isFile()) throw Error('closeout: unsupported working-tree entry ' + path);
   return { path, kind: 'file', mode, sha256: sha256(readFileSync(full)) };
 }
-const lstatExists = path => { try { lstatSync(path); return true; } catch (error) { if (error.code === 'ENOENT') return false; throw error; } };
+const lstatExists = path => { try { lstatSync(path); return true; } catch (error) { if (['ENOENT', 'ENOTDIR'].includes(error.code)) return false; throw error; } };
 
 function workingEntries(root, run, owns) {
   const rows = [];

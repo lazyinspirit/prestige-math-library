@@ -66,7 +66,7 @@ function protectedTreeReceipt(scope) {
     const path = join(root, file);
     // lstat includes dangling links; links are sealed, never traversed.
     try { if (!lstatSync(path).isDirectory()) files.add(file); }
-    catch (error) { if (error.code !== 'ENOENT') throw error; }
+    catch (error) { if (!['ENOENT', 'ENOTDIR'].includes(error.code)) throw error; }
   };
   const scalar = (fm, key) => fm.match(new RegExp(`^${key}:\\s*([^\\n]+?)\\s*$`, 'm'))?.[1]?.replace(/^['"]|['"]$/g, '');
   const itemIndex = new Map();
