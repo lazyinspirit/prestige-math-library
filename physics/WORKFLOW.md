@@ -179,6 +179,8 @@ cannot cover the inventory, and retries target only failing batches.
 Cross-batch page alerts route to the page's owning group, like page concerns.
 Published supplier alerts remain in the original digest as read-only context;
 they do not acquire run ownership or authorize repairs to imported mathematics.
+This also applies to published pages identified by their actual library
+frontmatter; unknown, draft, or ambiguous page targets still fail routing.
 Unknown targets and alerts about the sender's own batch still fail the digest gate.
 
 Step 5 retains the round-based adjudication/repair engine, supplier-before-consumer
