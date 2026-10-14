@@ -189,7 +189,17 @@ optional run-local `RUN-owner-step5-support-index.json` points native workers to
 outside proposals and genuine prior focused checks as read-only evidence.
 It grants no source ownership, review authority, or transition permission;
 workers verify current arguments and bind only immutable evidence actually used.
+Versioned root-published `RUN-owner-step5-support-supplement-*.json` supplies
+later evidence without modifying indexes already used by workers.
 The native Sol 6.1 high worker identity is independent of the Step-4 judge lineup.
+Shared metadata patches use the guarded command
+`node tools/physics-support/step5-shared-write-lock.mjs run --owner DISPATCH_LABEL -- COMMAND ARGS...`.
+It acquires the lock before launching the command, launches nothing and exits 2
+when busy, propagates the child exit status, and releases the lock after a child
+completion or failure. Reread owning files and make only scoped changes within
+the command; research and disjoint item authoring stay outside it. Existing
+manual acquire/release callers remain supported and must stop shared writes
+when acquisition fails.
 Collection binds its genuine dispatch receipts while retaining historical lane
 identities for older evidence. Native Step-5 sweeps use `--strict-context`:
 a resumed verdict must match both the current judge-form item hash and its

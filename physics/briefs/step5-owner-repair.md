@@ -29,6 +29,15 @@ ownership or native review authority. Verify current affected arguments, credit
 genuine reused evidence, and record your own current reviews and context hashes.
 Bind immutable evidence actually used through `supporting_evidence`; never claim
 another agent's retrieval or stale review as your own.
+Also read root-published `research/<run>-owner-step5-support-supplement-*.json`
+when present; earlier indexes remain immutable.
+
+Run each shared metadata patch through
+`node tools/physics-support/step5-shared-write-lock.mjs run --owner DISPATCH_LABEL -- node research/RUN-scoped-metadata-update.mjs`.
+The scoped script must reread current owning files before surgical changes and
+checks. A busy lock exits 2 and runs no patch. Continue disjoint item work and
+retry; never make a separate shared write after failed acquisition. Keep this
+command short, with research and item authoring outside the critical section.
 
 **Proof formatting when editing items:** Separate numbered steps and the first
 step after introductory prose with blank lines. Keep each complete step in one
