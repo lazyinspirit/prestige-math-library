@@ -521,7 +521,10 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
   const collectedPath=join(workflowDir(root,run),`${phase}-${round}-collected.json`);
   if(existsSync(collectedPath)){
     const prior=read(collectedPath);
-    if(prior.external_owner_repairs?.length)requireValue(deferImpactClosure&&ownerHandoffPhase(phase),'external owner repairs require deferred impact collection');
+    if(prior.external_owner_repairs?.length){
+      requireValue(ownerHandoffPhase(phase),'external owner repairs require deferred impact collection');
+      if(!deferImpactClosure)return verifyClosedOwnerCollection(root,run,phase,round,collectedPath,prior);
+    }
     verifyEvidence(prior.evidence);syncMaintenance(root,run,prior.statement_events??[]);return prior;
   }
   const pack=readPack(root,run,phase,round);
@@ -673,6 +676,61 @@ export function impactClosedPath(root,run,phase,round,progress=null) {
   requireValue(resolve(ref.path,'..')===resolve(dir)&&new RegExp(`^${phase}-${round}-closed(?:-[0-9]+)?\\.json$`).test(basename(ref.path)), 'invalid owner closure pointer');
   requireValue(existsSync(ref.path)&&digest(readFileSync(ref.path,'utf8'))===ref.sha256,'owner closure receipt changed');
   return ref.path;
+}
+
+// Rechecking a completed wave verifies its historical deferred intake; it never
+// re-adopts an outside author's carrier or substitutes for fresh native review.
+function verifyClosedOwnerCollection(root,run,phase,round,collectedPath,prior) {
+  const basePhase=phase.match(/^(impact-(?:initial|repeat))(?:-pass-[1-9][0-9]*)?$/)?.[1];
+  requireValue(basePhase&&prior.run===run&&prior.phase===phase&&prior.round===round,
+    'invalid historical external owner collection');
+  const progressPath=impactProgressPath(root,run,basePhase,round);
+  requireValue(existsSync(progressPath),'external owner repairs require deferred impact collection until native closure');
+  const progress=read(progressPath),passes=progress.passes;
+  requireValue(progress.version===2&&progress.run===run&&progress.phase===basePhase&&progress.round===round
+    &&progress.complete===true&&!progress.activeMaintenance&&progress.closed_receipt
+    &&Array.isArray(passes)&&new Set(passes).size===passes.length&&passes.includes(phase)
+    &&passes.every(pass=>ownerHandoffPhase(pass)&&(pass===basePhase||pass.startsWith(basePhase+'-pass-')))
+    &&progress.activePhase===passes.at(-1),'external owner repair wave lacks complete native closure');
+  const closedPath=impactClosedPath(root,run,basePhase,round,progress),closed=read(closedPath);
+  requireValue(closed.run===run&&closed.phase===basePhase&&closed.round===round
+    &&Array.isArray(closed.errors)&&closed.errors.length===0
+    &&closed.evidence?.[collectedPath]===createHash('sha256').update(readFileSync(collectedPath)).digest('hex')
+    &&Object.entries(prior.evidence??{}).every(([path,hash])=>closed.evidence[path]===hash),
+    'native closure does not bind the original deferred collection');
+  verifyEvidence(closed.evidence);
+  const frontier=gateFrontier(root,run),current={};
+  for(const id of frontier){
+    current[id]=itemHashGuard(readFileSync(join(root,'items',id+'.md'),'utf8'));
+    requireValue(current[id]===closed.post?.[id],'source changed after external owner native closure: '+id);
+  }
+  const items=readLibraryItems(root),contexts=reviewContexts(items);
+  let legacyCurrent=null;
+  const later=passes.slice(passes.indexOf(phase)+1).map(pass=>{
+    const path=join(workflowDir(root,run),pass+'-'+round+'-collected.json');
+    requireValue(closed.evidence[path],'native closure omits a completed continuation');
+    const receipt=read(path),packFile=packPath(root,run,pass,round),pack=readPack(root,run,pass,round);
+    const packHash=closed.evidence[packFile];
+    requireValue(receipt.run===run&&receipt.phase===pass&&receipt.round===round
+      &&pack.run===run&&pack.phase===pass&&pack.round===round,'wrong completed continuation identity');
+    requireValue(/^[a-f0-9]{64}$/.test(packHash??'')&&receipt.evidence?.[packFile]===packHash
+      &&createHash('sha256').update(readFileSync(packFile)).digest('hex')===packHash,
+      'native closure does not bind the actual continuation pack');
+    return {receipt,pack};
+  });
+  for(const repair of prior.external_owner_repairs){
+    const review=closed.reviews?.find(row=>row.id===repair.id);
+    requireValue(repair.phase===phase&&repair.round===round&&frontier.has(repair.id)
+      &&review&&['repaired','unaffected'].includes(review.disposition)
+      &&review.post_sha256===closed.post?.[repair.id]&&evidenceText(review)
+      &&/^[a-f0-9]{64}$/.test(review.review_context_sha256??'')
+      &&(review.review_context_sha256===contexts.hash(repair.id,current)
+        ||contexts.matches(review,legacyCurrent??=hashes(root,items),closed.post))
+      &&later.some(({receipt,pack})=>Object.values(pack.assignments).some(ids=>ids.includes(repair.id))
+        &&receipt.reviews?.some(row=>JSON.stringify(row)===JSON.stringify(review))),
+      'external owner repair lacks fresh completed native review: '+repair.id);
+  }
+  return closed;
 }
 
 export function impactPasses(root,run,phase,round) {

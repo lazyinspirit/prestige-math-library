@@ -317,6 +317,14 @@ current `post` carrier. It grants external authorship only: continuation assigns
 the changed carrier for a fresh native owner review before closure or
 certification. It cannot satisfy adjudication, strict collection, or a gate;
 unknown changes and mismatched or stale grants still fail the existing checks.
+A normal collection gate may verify an existing deferred receipt only after the
+same native wave is complete. It checks the bound closure, the original receipt
+and all preserved evidence, current frontier carriers against the closed snapshot,
+and fresh later native reviews of every outside repair, including their current
+supplier interfaces. Current-context checks cover only those repaired items;
+legacy context verification remains supported. This read-only path
+returns the closed current wave; it neither re-adopts historical outside carrier
+guards nor changes the first-adoption deferred-collection requirement.
 
 A completed `impact-initial` or `impact-repeat` owner wave may reopen for an
 actual failed formatting precheck at its drained pre-gate join, before that
