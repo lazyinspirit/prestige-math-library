@@ -1467,6 +1467,17 @@ export class Executor {
     }
     this._barrierFor = undefined;
 
+    // Step 2 collects completed native reports in onProgress. A worker that
+    // finishes later in this tick has not had that collection opportunity yet.
+    // Keep only this boundary's units for one in-memory stalemate grace pass;
+    // coverage, artifacts, gates and the next tick's collection remain strict.
+    const scopeCollectionBoundaryActive = new Set<Unit>([...this.inflight.values()]
+      .filter((d: any) => d.meta.stage === '2-scope-review')
+      .flatMap((d: any) => d.meta.covers.map(String)));
+    const scopeCollectionStage = group.find(member => member.id === '2-scope-review');
+    if (scopeCollectionStage) for (const unit of this.adoptedUnits(scopeCollectionStage))
+      scopeCollectionBoundaryActive.add(String(unit));
+
     for (const member of group) {
       if (this.state.data.stages[member.id]?.skipped) continue;
       try { await member.onProgress?.({ ctx, executor: this, stage: member }); }
@@ -1567,6 +1578,7 @@ export class Executor {
           .flatMap((d: any) => (d.meta.covers ?? []).map(String)));
         for (const unit of this.adoptedUnits(s)) active.add(String(unit));
         let missing = owed.filter((u: string) => cov.has(u) && !complete.has(u) && !active.has(u)
+          && !(s.id === '2-scope-review' && scopeCollectionBoundaryActive.has(u))
           && !(s.exclusiveCohort?.(ctx, u) ?? []).some((other) => active.has(String(other))));
         const readiness = this.unitReadiness(s, ctx, missing, active);
         if (readiness.problem) {

@@ -147,6 +147,13 @@ cycles; they are not additional engine review/local-repair rounds. Resolved owne
 escalations receive direct acceptance without an engine re-review or counter reset.
 The owner controls the battery and advancement to Step 3.
 
+A Step-2 native worker that finishes after the tick's `onProgress` collection
+boundary receives one same-tick grace from synthetic artifact-stalemate detection.
+The next tick collects its genuine result and still detects any persistent
+missing acceptance derivative. This grace is bounded to an in-memory set of
+units active at that boundary; it records no coverage, changes no counters or
+receipts, and does not affect acceptance, gates, existing holds or other stages.
+
 The engine writes `research/RUN-step2-owner-pass.json` before the owner pause.
 If remaining local work resumes, it drains and produces
 `RUN-step2-owner-battery-ready.json`, pausing again before the battery. Neither
