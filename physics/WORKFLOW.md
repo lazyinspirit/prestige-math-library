@@ -239,6 +239,21 @@ findings count in the round's unique original-frontier fatal-item inventory;
 they never become fabricated original judge tuples. This continuation grants
 no outside source-write permission and does not waive ordinary gate checks.
 
+When an actual initial/repeat collection gate reports a missing original-frontier
+downstream inventory, root may complete the routing metadata through
+`research/RUN-step5-v2/owner-downstream-inventory.json` with `version:1`, `run`,
+and `supplement:{path,sha256}`. Its immutable `downstream-inventory-ID.json`
+binds the phase/round, `reviewer:"/root"`, `authority:"routing-only"`,
+`scientific_review:false`, `source_edit_authority:false`, diagnosis, actual
+failed gate evidence, and additions. The diagnosis binds the original pack,
+every original report, all restated interface guards, and exact missing edges.
+Collection independently requires the additions to equal the complete current
+missing direct-edge set, with current source/consumer guards and drained writers.
+It preserves all reports, decisions and reviews, records `inventory_completion`,
+and then applies the ordinary completeness check. Routing adds no reviews,
+scientific acceptance, source-write permission, or invented interface event;
+the native impact owners still examine the assigned affected uses.
+
 An outside repair authorized by the root owner can enter only deferred
 `impact-initial`/`impact-repeat` owner collection, including their continuation
 passes. Place an explicit grant in `research/RUN-step5-v2/owner-repair-handoffs.json`:

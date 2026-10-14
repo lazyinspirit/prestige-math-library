@@ -27,6 +27,11 @@ const { correctionPhase, correctionProgressPath, correctionRequest, assertCorrec
   INHERITED_REPAIR_URL.href+'?v='+INHERITED_REPAIR_STAT.mtimeMs+':'+INHERITED_REPAIR_STAT.size
 );
 
+// Resolve the current routing helper even in a hot-loaded controller.
+const INVENTORY_URL=new URL('./step5-downstream-inventory.mjs',import.meta.url);
+const INVENTORY_STAT=statSync(INVENTORY_URL);
+const { ownerDownstreamInventory }=await import(INVENTORY_URL.href+'?v='+INVENTORY_STAT.mtimeMs+':'+INVENTORY_STAT.size);
+
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
 const lines = path => existsSync(path) ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map(JSON.parse) : [];
@@ -624,6 +629,16 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
   if(receipt.statement_events.length)for(const id of discoveries)requireValue(typeof uses[id]==='string'&&uses[id].trim().length>=40,`missing exact downstream use for outside consumer: ${id}`);
   if(discoveries.length)for(const event of receipt.statement_events)Object.assign(event,{consumer_ids:discoveries,discovery_evidence:Object.fromEntries(discoveries.map(id=>[id,uses[id]]))});
   receipt.inventory_missing=required.filter(row=>!receipt.downstream.includes(row.id)).map(row=>row.id);
+  if(!deferImpactClosure&&receipt.inventory_missing.length){
+    const completion=ownerDownstreamInventory(root,run,phase,round,{pack,restated:receipt.restated,required,
+      missing:required.filter(row=>receipt.inventory_missing.includes(row.id)),reported:receipt.downstream,
+      current,statements:afterStatements,frontier});
+    if(completion){
+      receipt.downstream=[...new Set([...receipt.downstream,...completion.ids])];
+      Object.assign(receipt.evidence,completion.evidence);receipt.inventory_completion=completion.attribution;
+      receipt.inventory_missing=required.filter(row=>!receipt.downstream.includes(row.id)).map(row=>row.id);
+    }
+  }
   if(!deferImpactClosure)for(const id of receipt.inventory_missing)requireValue(false,`missing downstream inventory: ${id}`);
   // Merge compatibility evidence once, bound to the actual frozen rejection.
   // Never invent a judge verdict or re-label adjudication as an independent pass.
