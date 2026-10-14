@@ -29,8 +29,12 @@ function schedulingList(fm,key,subject){
     }
   }
   if(!selected.length)return [];
-  const value=yaml().parse(selected.join('\n'))?.[key];
-  assert(Array.isArray(value)&&value.every(id=>typeof id==='string'&&id.trim()&& !/\s/.test(id)),`${subject}: ${key} must be an ID array`);
+  const parsed=yaml().parse(selected.join('\n'))?.[key];
+  // Published legacy aliases may contain spaces; only dependency IDs are
+  // constrained to ID spelling. Preserve null alias lists as absent aliases.
+  const value=key==='aliases'?(parsed??[]):parsed;
+  assert(Array.isArray(value)&&value.every(id=>typeof id==='string'&&id.trim()
+    &&(key==='aliases'|| !/\s/.test(id))),`${subject}: ${key} must be ${key==='aliases'?'a string':'an ID'} array`);
   return value;
 }
 function readScopeItems(root,{constructionScheduling=false}={}){
