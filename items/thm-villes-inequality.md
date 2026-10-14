@@ -2,7 +2,7 @@
 id: thm-villes-inequality
 kind: theorem
 title: Ville's inequality for nonnegative test supermartingales
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-zero-covariance-multivariate-trimmed-mean-exact
 kind: lemma
 title: "Exact recovery by the multivariate trimmed mean at zero covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

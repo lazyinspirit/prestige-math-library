@@ -7,7 +7,7 @@ verification:
 id: ex-discrete-neyman-pearson-randomized-boundary
 kind: example
 title: "Randomize at a discrete likelihood-ratio boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 9

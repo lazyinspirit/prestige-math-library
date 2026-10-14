@@ -2,7 +2,7 @@
 id: lem-huber-covariance-contamination-modulus-lower-bound
 kind: lemma
 title: The Huber covariance contamination modulus has a quadratic lower bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

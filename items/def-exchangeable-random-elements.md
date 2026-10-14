@@ -2,7 +2,7 @@
 id: def-exchangeable-random-elements
 kind: definition
 title: "Exchangeable random elements"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

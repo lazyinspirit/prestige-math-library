@@ -2,7 +2,7 @@
 id: def-unbiased-estimator-and-umvu
 kind: definition
 title: "Unbiased estimators and UMVU estimators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

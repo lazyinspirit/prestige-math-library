@@ -2,7 +2,7 @@
 id: cex-excess-tail-functional-does-not-bound-trimmed-mean
 kind: counterexample
 title: "The excess-tail functional cannot upper-bound the trimmed mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

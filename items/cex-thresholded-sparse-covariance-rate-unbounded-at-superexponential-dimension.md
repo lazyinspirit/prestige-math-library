@@ -2,7 +2,7 @@
 id: cex-thresholded-sparse-covariance-rate-unbounded-at-superexponential-dimension
 kind: counterexample
 title: "The stated sparse-covariance minimax rate is unbounded for super-exponential dimension"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

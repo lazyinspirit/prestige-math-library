@@ -1,7 +1,7 @@
 ---
 page: sparse-high-dimensional-estimation-and-covariance
 title: Sparse Estimation and Covariance
-status: draft
+status: published
 items:
 - def-gaussian-sequence-sparse-means-model
 - def-subgaussian-fixed-design-regression-model

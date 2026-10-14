@@ -2,7 +2,7 @@
 id: def-loss-function-and-risk
 kind: definition
 title: Loss functions and risk
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

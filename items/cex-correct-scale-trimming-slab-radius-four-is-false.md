@@ -2,7 +2,7 @@
 id: cex-correct-scale-trimming-slab-radius-four-is-false
 kind: counterexample
 title: "The four-Q0 trimming slab radius is false"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

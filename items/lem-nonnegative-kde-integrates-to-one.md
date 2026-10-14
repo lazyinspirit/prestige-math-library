@@ -2,7 +2,7 @@
 id: lem-nonnegative-kde-integrates-to-one
 kind: lemma
 title: "A nonnegative normalized kernel estimate integrates to one"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

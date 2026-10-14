@@ -2,7 +2,7 @@
 id: def-pathwise-differentiable-functional
 kind: definition
 title: Pathwise differentiability and parameter influence curves
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

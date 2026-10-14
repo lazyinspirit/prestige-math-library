@@ -2,7 +2,7 @@
 id: ex-boundary-score-cone-and-linear-tangent-space
 kind: example
 title: A boundary score cone differs from its tangent space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

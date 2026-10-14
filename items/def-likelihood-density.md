@@ -2,7 +2,7 @@
 id: def-likelihood-density
 kind: definition
 title: "Likelihood densities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

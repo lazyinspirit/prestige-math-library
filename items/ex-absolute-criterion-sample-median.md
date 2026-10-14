@@ -2,7 +2,7 @@
 id: ex-absolute-criterion-sample-median
 kind: example
 title: "Sample medians as absolute-criterion M-estimators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

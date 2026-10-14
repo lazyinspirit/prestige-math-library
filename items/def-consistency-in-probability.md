@@ -2,7 +2,7 @@
 id: def-consistency-in-probability
 kind: definition
 title: "Pointwise consistency in probability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: nonparametric-density-estimation-and-kernels
 title: "Density Estimation"
-status: draft
+status: published
 items:
   - def-density-target-and-kernel-density-estimator
   - lem-kde-evaluation-is-a-measurable-statistic

@@ -2,7 +2,7 @@
 id: lem-common-support-likelihood-ratio-is-measurable
 kind: lemma
 title: "The common-support likelihood ratio is measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

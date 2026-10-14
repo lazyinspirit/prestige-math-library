@@ -2,7 +2,7 @@
 id: def-asymptotically-linear-estimator-and-influence-function
 kind: definition
 title: Asymptotically linear estimators and influence functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

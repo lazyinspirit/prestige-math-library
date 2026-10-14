@@ -2,7 +2,7 @@
 id: lem-randomized-threshold-has-exact-level
 kind: lemma
 title: A randomized threshold attains every test size
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

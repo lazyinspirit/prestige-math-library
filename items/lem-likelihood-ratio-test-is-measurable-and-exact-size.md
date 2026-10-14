@@ -2,7 +2,7 @@
 id: lem-likelihood-ratio-test-is-measurable-and-exact-size
 kind: lemma
 title: "The likelihood-ratio rule is a measurable test of exact size"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

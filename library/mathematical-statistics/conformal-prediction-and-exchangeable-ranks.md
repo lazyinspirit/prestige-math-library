@@ -1,7 +1,7 @@
 ---
 page: conformal-prediction-and-exchangeable-ranks
 title: "Conformal Prediction and Exchangeable Ranks"
-status: draft
+status: published
 items:
   - lem-coordinate-maps-and-permutations-are-measurable-on-finite-products
   - lem-regular-conditional-kernels-push-forward-under-measurable-random-maps

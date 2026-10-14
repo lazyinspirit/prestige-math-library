@@ -2,7 +2,7 @@
 id: def-covariance-matrix-of-a-random-vector
 kind: definition
 title: Covariance matrix of a finite-dimensional random vector
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

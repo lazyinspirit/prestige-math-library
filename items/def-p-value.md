@@ -2,7 +2,7 @@
 id: def-p-value
 kind: definition
 title: "Valid p-values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

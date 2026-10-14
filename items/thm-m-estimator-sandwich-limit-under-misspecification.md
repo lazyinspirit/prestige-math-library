@@ -2,7 +2,7 @@
 id: thm-m-estimator-sandwich-limit-under-misspecification
 kind: theorem
 title: "Misspecified M-estimator sandwich limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

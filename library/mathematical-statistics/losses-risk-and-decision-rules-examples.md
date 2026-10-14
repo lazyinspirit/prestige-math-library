@@ -1,7 +1,7 @@
 ---
 page: losses-risk-and-decision-rules-examples
 title: "Loss, Risk and Decision Theory — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-squared-error-risk-for-bernoulli-observation

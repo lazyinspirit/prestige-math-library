@@ -2,7 +2,7 @@
 id: lem-lasso-objective-has-minimizer
 kind: lemma
 title: "The Lasso objective has a nonempty compact convex minimizer set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

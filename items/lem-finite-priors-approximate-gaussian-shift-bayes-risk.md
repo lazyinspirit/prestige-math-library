@@ -2,7 +2,7 @@
 id: lem-finite-priors-approximate-gaussian-shift-bayes-risk
 kind: lemma
 title: Finite priors approximate Gaussian-shift Bayes values
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

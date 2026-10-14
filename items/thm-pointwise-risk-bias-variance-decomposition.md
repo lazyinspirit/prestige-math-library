@@ -2,7 +2,7 @@
 id: thm-pointwise-risk-bias-variance-decomposition
 kind: theorem
 title: Pointwise risk is variance plus squared bias
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

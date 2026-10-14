@@ -2,7 +2,7 @@
 id: thm-absolute-rademacher-contraction
 kind: theorem
 title: "Absolute-value Rademacher contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

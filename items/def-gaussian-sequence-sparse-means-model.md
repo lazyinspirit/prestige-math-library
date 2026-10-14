@@ -2,7 +2,7 @@
 id: def-gaussian-sequence-sparse-means-model
 kind: definition
 title: "Gaussian sequence model with sparse means"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

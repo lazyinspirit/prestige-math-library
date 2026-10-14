@@ -2,7 +2,7 @@
 id: def-anytime-valid-p-value-process
 kind: definition
 title: Anytime-valid p-value processes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

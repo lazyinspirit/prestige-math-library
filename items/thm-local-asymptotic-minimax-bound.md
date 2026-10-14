@@ -2,7 +2,7 @@
 id: thm-local-asymptotic-minimax-bound
 kind: theorem
 title: Local asymptotic minimax bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

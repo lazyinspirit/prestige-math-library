@@ -2,7 +2,7 @@
 id: thm-multivariate-trimmed-mean-under-replacement
 kind: theorem
 title: "Multivariate trimmed-mean bound under sample replacement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

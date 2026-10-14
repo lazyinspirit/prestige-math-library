@@ -1,7 +1,7 @@
 ---
 page: nonparametric-regression-and-smoothing-examples
 title: "Regression Estimation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-local-linear-reproduces-affine-regression

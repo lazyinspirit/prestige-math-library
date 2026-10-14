@@ -2,7 +2,7 @@
 id: def-local-polynomial-estimator
 kind: definition
 title: Local-polynomial estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

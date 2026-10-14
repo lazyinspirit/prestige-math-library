@@ -2,7 +2,7 @@
 id: cex-univariate-clean-quantile-count-exponent-is-false
 kind: counterexample
 title: "The claimed univariate clean-quantile count exponent is too strong"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

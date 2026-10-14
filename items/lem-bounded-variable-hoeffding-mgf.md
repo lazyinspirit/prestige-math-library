@@ -2,7 +2,7 @@
 id: lem-bounded-variable-hoeffding-mgf
 kind: lemma
 title: "The Hoeffding MGF bound for a variable in a unit interval"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

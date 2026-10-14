@@ -2,7 +2,7 @@
 id: thm-hoeffding-independent-bounded-sums
 kind: theorem
 title: "Hoeffding inequality for independent bounded sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

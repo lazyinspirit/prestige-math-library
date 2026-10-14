@@ -2,7 +2,7 @@
 id: ex-fixed-design-regression-contrast-and-f-test
 kind: example
 title: "A fixed-design slope contrast and nested-model F statistic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

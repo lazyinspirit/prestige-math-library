@@ -2,7 +2,7 @@
 id: def-regression-target-version
 kind: definition
 title: Regression target and chosen version
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

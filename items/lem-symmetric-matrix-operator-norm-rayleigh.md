@@ -2,7 +2,7 @@
 id: lem-symmetric-matrix-operator-norm-rayleigh
 kind: lemma
 title: "A symmetric matrix operator norm is its largest absolute Rayleigh quotient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-lasso-prediction-and-l1-error-under-incoherence
 kind: theorem
 title: "Lasso prediction and coefficient bounds under incoherence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

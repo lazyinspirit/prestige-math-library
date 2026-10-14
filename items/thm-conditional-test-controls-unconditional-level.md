@@ -2,7 +2,7 @@
 id: thm-conditional-test-controls-unconditional-level
 kind: theorem
 title: "Conditional level implies unconditional level"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

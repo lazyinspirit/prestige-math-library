@@ -1,7 +1,7 @@
 ---
 page: hilbert-valued-clt-for-weakly-dependent-functional-time-series-examples
 title: Hilbert-Valued CLT for Functional Time Series — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-nonsummable-physical-dependence-linear-process

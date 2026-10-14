@@ -2,7 +2,7 @@
 id: lem-huber-covariance-ambient-action-tail-lower-bound
 kind: lemma
 title: Huber covariance modulus lower bound for unrestricted matrix-valued actions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

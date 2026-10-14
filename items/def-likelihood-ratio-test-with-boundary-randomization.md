@@ -2,7 +2,7 @@
 id: def-likelihood-ratio-test-with-boundary-randomization
 kind: definition
 title: "Likelihood-ratio tests with boundary randomization"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

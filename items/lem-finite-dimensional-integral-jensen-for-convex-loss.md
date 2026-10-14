@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-integral-jensen-for-convex-loss
 kind: lemma
 title: Integral Jensen inequality for finite-dimensional convex losses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

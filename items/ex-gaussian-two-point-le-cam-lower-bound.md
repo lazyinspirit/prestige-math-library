@@ -2,7 +2,7 @@
 id: ex-gaussian-two-point-le-cam-lower-bound
 kind: example
 title: "A Gaussian two-point lower bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

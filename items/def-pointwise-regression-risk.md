@@ -2,7 +2,7 @@
 id: def-pointwise-regression-risk
 kind: definition
 title: Pointwise squared-error risk for regression
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

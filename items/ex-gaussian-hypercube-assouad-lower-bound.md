@@ -2,7 +2,7 @@
 id: ex-gaussian-hypercube-assouad-lower-bound
 kind: example
 title: "A dense Gaussian mean lower bound by Assouad’s method"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

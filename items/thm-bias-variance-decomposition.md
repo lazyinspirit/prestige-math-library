@@ -2,7 +2,7 @@
 id: thm-bias-variance-decomposition
 kind: theorem
 title: "Bias–variance decomposition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

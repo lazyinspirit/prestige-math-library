@@ -1,7 +1,7 @@
 ---
 page: local-asymptotic-normality-contiguity-and-efficiency
 title: "LAN, Contiguity and Efficiency"
-status: draft
+status: published
 items:
   - def-contiguous-sequences-of-measures
   - lem-boundary-of-convex-set-is-lebesgue-null

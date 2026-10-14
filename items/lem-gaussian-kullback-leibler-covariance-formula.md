@@ -2,7 +2,7 @@
 id: lem-gaussian-kullback-leibler-covariance-formula
 kind: lemma
 title: Kullback–Leibler divergence between nondegenerate centered Gaussian laws
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

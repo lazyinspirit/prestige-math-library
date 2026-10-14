@@ -2,7 +2,7 @@
 id: cex-noncontiguous-binary-sequences
 kind: counterexample
 title: Binary laws with a rare event are not contiguous
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

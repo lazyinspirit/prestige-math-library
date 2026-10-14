@@ -2,7 +2,7 @@
 id: def-parameter-measurable-statistical-model-as-markov-kernel
 kind: definition
 title: "Parameter-measurable statistical models as kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

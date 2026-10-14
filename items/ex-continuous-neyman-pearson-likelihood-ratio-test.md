@@ -7,7 +7,7 @@ verification:
 id: ex-continuous-neyman-pearson-likelihood-ratio-test
 kind: example
 title: "A continuous likelihood-ratio test"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 9

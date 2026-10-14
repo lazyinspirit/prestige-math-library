@@ -1,7 +1,7 @@
 ---
 page: decision-theoretic-upper-bounds-and-oracle-risk-examples
 title: "Decision-Theoretic Upper Bounds — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-collinear-design-coefficient-risk-unidentifiable

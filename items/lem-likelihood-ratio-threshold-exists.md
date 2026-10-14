@@ -2,7 +2,7 @@
 id: lem-likelihood-ratio-threshold-exists
 kind: lemma
 title: "A likelihood-ratio threshold with boundary randomization exists"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

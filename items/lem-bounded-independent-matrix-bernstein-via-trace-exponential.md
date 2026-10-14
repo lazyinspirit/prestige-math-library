@@ -2,7 +2,7 @@
 id: lem-bounded-independent-matrix-bernstein-via-trace-exponential
 kind: lemma
 title: Bounded independent matrix Bernstein bound from the trace exponential
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

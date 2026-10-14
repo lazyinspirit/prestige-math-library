@@ -2,7 +2,7 @@
 id: ex-mean-gross-error-path-has-unbounded-sensitivity
 kind: example
 title: "The mean has an unbounded directional derivative supremum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

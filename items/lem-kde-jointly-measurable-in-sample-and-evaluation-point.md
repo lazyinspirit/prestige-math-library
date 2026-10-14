@@ -2,7 +2,7 @@
 id: lem-kde-jointly-measurable-in-sample-and-evaluation-point
 kind: lemma
 title: "The KDE is jointly measurable in sample and evaluation point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

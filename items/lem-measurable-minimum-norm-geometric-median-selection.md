@@ -2,7 +2,7 @@
 id: lem-measurable-minimum-norm-geometric-median-selection
 kind: lemma
 title: "Measurable minimum-norm geometric-median selection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: robust-covariance-and-high-dimensional-stability-examples
 title: Robust Covariance and Sparse Robust Estimation — Examples
-status: draft
+status: published
 items: []
 examples:
 - cex-matrix-variance-does-not-dominate-trace-covariance-product

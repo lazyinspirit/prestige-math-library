@@ -2,7 +2,7 @@
 id: lem-long-run-covariance-is-trace-class
 kind: lemma
 title: Long-run covariance of an L2-m-approximable shift is trace class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

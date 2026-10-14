@@ -2,7 +2,7 @@
 id: lem-finite-covariance-matrix-basic-properties
 kind: lemma
 title: "Basic finite covariance matrix identities for robust mean bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

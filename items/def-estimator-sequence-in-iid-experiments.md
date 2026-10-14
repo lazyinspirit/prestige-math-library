@@ -2,7 +2,7 @@
 id: def-estimator-sequence-in-iid-experiments
 kind: definition
 title: "Estimator sequences in IID experiments"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

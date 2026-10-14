@@ -2,7 +2,7 @@
 id: def-series-spline-least-squares
 kind: definition
 title: Series least squares with a spline basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

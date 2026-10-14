@@ -2,7 +2,7 @@
 id: thm-score-mean-zero-and-information-identity
 kind: theorem
 title: "Mean-zero score and the information identity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

@@ -2,7 +2,7 @@
 id: ex-split-conformal-conservative-ties
 kind: example
 title: "Split conformal coverage can be conservative when scores tie"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

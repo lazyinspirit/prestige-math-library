@@ -2,7 +2,7 @@
 id: ex-sample-covariance-rank-deficiency-when-p-exceeds-n
 kind: example
 title: "Sample covariance is singular when dimension exceeds sample size"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-sparse-hamming-packing
 kind: lemma
 title: "A sparse Hamming packing for every $1\\le k\\le d/2$"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

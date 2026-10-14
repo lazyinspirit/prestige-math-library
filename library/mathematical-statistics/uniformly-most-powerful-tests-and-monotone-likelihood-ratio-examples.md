@@ -1,7 +1,7 @@
 ---
 page: uniformly-most-powerful-tests-and-monotone-likelihood-ratio-examples
 title: "UMP Tests — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-binomial-one-sided-ump-test

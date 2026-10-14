@@ -2,7 +2,7 @@
 id: ex-bernoulli-huber-modulus-and-identical-mixtures
 kind: example
 title: "Exact Bernoulli Huber modulus and indistinguishable mixtures"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

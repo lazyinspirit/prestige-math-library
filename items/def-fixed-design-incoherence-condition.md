@@ -2,7 +2,7 @@
 id: def-fixed-design-incoherence-condition
 kind: definition
 title: "Fixed-design incoherence condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

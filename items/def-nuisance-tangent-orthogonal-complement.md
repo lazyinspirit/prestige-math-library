@@ -2,7 +2,7 @@
 id: def-nuisance-tangent-orthogonal-complement
 kind: definition
 title: Orthogonal complement of a nuisance tangent space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 9

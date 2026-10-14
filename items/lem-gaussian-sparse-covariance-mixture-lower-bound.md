@@ -2,7 +2,7 @@
 id: lem-gaussian-sparse-covariance-mixture-lower-bound
 kind: lemma
 title: "Gaussian mixture lower bound for weakly sparse covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

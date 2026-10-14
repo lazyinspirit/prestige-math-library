@@ -2,7 +2,7 @@
 id: thm-assouad-hypercube
 kind: theorem
 title: "Assouad lower bound for a squared-error hypercube"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

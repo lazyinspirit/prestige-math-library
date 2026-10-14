@@ -2,7 +2,7 @@
 id: def-conformal-nonconformity-score-and-rank-pvalue
 kind: definition
 title: "Conformal scores and rank p-values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

@@ -1,7 +1,7 @@
 ---
 page: complete-sufficiency-exponential-families-and-basu
 title: "Sufficiency, Completeness and Exponential Families"
-status: draft
+status: published
 items:
   - lem-uniqueness-of-a-multivariate-exponential-transform
   - def-likelihood-ratio-equivalence-on-common-discrete-support

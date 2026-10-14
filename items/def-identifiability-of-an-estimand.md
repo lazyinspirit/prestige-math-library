@@ -2,7 +2,7 @@
 id: def-identifiability-of-an-estimand
 kind: definition
 title: "Identifiability of an estimand"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

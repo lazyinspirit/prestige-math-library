@@ -2,7 +2,7 @@
 id: ex-identifiable-bernoulli-model-and-estimand
 kind: example
 title: "Identifiable Bernoulli model and parameter target"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

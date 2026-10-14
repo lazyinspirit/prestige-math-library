@@ -2,7 +2,7 @@
 id: cex-uniform-moving-support-invalidates-naive-cramer-rao-bound
 kind: counterexample
 title: "Uniform moving support invalidates the naive score bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

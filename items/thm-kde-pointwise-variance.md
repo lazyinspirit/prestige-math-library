@@ -2,7 +2,7 @@
 id: thm-kde-pointwise-variance
 kind: theorem
 title: "Pointwise variance of the KDE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

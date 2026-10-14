@@ -2,7 +2,7 @@
 id: thm-natural-cubic-smoothing-spline-exists-uniquely
 kind: theorem
 title: Existence, uniqueness, and spline reduction for cubic smoothing
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

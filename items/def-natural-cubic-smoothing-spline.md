@@ -2,7 +2,7 @@
 id: def-natural-cubic-smoothing-spline
 kind: definition
 title: Natural cubic smoothing spline
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

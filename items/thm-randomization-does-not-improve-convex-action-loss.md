@@ -2,7 +2,7 @@
 id: thm-randomization-does-not-improve-convex-action-loss
 kind: theorem
 title: Randomization does not improve convex action loss
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

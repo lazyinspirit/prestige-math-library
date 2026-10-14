@@ -1,7 +1,7 @@
 ---
 page: sequential-testing-and-anytime-valid-inference
 title: Sequential Validity and Ville's Inequality
-status: draft
+status: published
 items:
   - def-nonnegative-test-supermartingale
   - thm-villes-inequality

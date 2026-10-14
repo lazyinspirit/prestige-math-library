@@ -2,7 +2,7 @@
 id: lem-finite-multiset-randomized-rank-is-uniform
 kind: lemma
 title: "Tied upper ranks on a finite multiset"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

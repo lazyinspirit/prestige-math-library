@@ -2,7 +2,7 @@
 id: thm-regular-mle-asymptotic-linearity-and-normality
 kind: theorem
 title: Asymptotic linearity and normality of a regular MLE
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

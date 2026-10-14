@@ -2,7 +2,7 @@
 id: lem-common-law-forces-two-point-tail-loss-bound
 kind: lemma
 title: "A common data law forces a two-point tail-loss bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-epsilon-net-controls-symmetric-operator-norm
 kind: lemma
 title: "A sphere net controls the operator norm of a symmetric matrix"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

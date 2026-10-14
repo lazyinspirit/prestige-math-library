@@ -1,7 +1,7 @@
 ---
 page: sequential-testing-and-anytime-valid-inference-examples
 title: Sequential Validity and Ville's Inequality — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-likelihood-ratio-test-supermartingale

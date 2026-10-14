@@ -2,7 +2,7 @@
 id: lem-variance-sensitive-bounded-empirical-process-concentration
 kind: lemma
 title: "A variance-sensitive bound for bounded empirical suprema"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

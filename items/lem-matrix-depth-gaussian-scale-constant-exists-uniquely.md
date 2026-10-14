@@ -2,7 +2,7 @@
 id: lem-matrix-depth-gaussian-scale-constant-exists-uniquely
 kind: lemma
 title: The Gaussian matrix-depth scale constant exists uniquely
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

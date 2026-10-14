@@ -2,7 +2,7 @@
 id: ex-natural-cubic-interpolants-on-two-and-three-knots
 kind: example
 title: Natural cubic interpolation with two and three knots
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

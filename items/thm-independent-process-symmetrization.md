@@ -2,7 +2,7 @@
 id: thm-independent-process-symmetrization
 kind: theorem
 title: "Independent-process symmetrization for convex moments"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

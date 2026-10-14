@@ -2,7 +2,7 @@
 id: def-l2-m-approximable-causal-bernoulli-shift
 kind: definition
 title: L2-m-approximable causal Bernoulli shifts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

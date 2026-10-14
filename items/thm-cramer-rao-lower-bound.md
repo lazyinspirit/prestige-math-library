@@ -2,7 +2,7 @@
 id: thm-cramer-rao-lower-bound
 kind: theorem
 title: "Scalar Cramér–Rao lower bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

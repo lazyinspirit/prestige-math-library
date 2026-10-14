@@ -2,7 +2,7 @@
 id: ex-rao-blackwell-bernoulli-observation
 kind: example
 title: "Rao–Blackwellizing one Bernoulli observation by the sample sum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

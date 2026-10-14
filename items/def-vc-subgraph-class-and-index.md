@@ -2,7 +2,7 @@
 id: def-vc-subgraph-class-and-index
 kind: definition
 title: "VC-subgraph classes, envelopes, and the first-unshattered index"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-finite-sample-replacement-breakdown
 kind: definition
 title: Finite-sample replacement breakdown
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

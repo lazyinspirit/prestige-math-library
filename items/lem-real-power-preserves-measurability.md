@@ -2,7 +2,7 @@
 id: lem-real-power-preserves-measurability
 kind: lemma
 title: "Positive real powers preserve measurability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

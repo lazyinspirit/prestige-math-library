@@ -2,7 +2,7 @@
 id: lem-independent-centered-hilbert-elements-have-zero-expected-inner-product
 kind: lemma
 title: Independent centered Hilbert-valued elements have zero expected inner product
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

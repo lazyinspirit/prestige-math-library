@@ -2,7 +2,7 @@
 id: thm-centered-subgaussian-sample-covariance-bound
 kind: theorem
 title: "Dense sample covariance concentration for sub-Gaussian vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

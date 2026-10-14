@@ -2,7 +2,7 @@
 id: thm-ump-nonexistence-witness
 kind: theorem
 title: A two-sided normal alternative need not have a UMP test
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

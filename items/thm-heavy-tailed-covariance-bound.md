@@ -2,7 +2,7 @@
 id: thm-heavy-tailed-covariance-bound
 kind: theorem
 title: Adaptive truncated covariance has a finite matrix-variance operator bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

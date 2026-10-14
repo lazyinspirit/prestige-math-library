@@ -2,7 +2,7 @@
 id: lem-projection-slab-uniform-deviation
 kind: lemma
 title: Uniform deviation for squared-projection slabs
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

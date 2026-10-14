@@ -2,7 +2,7 @@
 id: lem-compact-uniform-lan-posterior-approximation
 kind: lemma
 title: Compact-uniform LAN approximates compact-prior posteriors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

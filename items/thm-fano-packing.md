@@ -2,7 +2,7 @@
 id: thm-fano-packing
 kind: theorem
 title: "Fano’s packing bound with a reference-distribution KL bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

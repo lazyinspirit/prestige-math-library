@@ -2,7 +2,7 @@
 id: def-matrix-depth-covariance-estimator
 kind: definition
 title: Matrix depth and covariance estimators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

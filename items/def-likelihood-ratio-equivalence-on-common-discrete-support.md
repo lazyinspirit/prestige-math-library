@@ -2,7 +2,7 @@
 id: def-likelihood-ratio-equivalence-on-common-discrete-support
 kind: definition
 title: "Likelihood-ratio equivalence on common discrete support"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

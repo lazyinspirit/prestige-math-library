@@ -2,7 +2,7 @@
 id: def-sample-covariance-and-operator-norm-loss
 kind: definition
 title: "Sample covariance estimators and squared operator loss"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

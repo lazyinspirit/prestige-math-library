@@ -2,7 +2,7 @@
 id: thm-conditional-randomized-p-uniformity
 kind: theorem
 title: "Randomized conditional p-values are uniform"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

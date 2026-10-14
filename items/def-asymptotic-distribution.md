@@ -2,7 +2,7 @@
 id: def-asymptotic-distribution
 kind: definition
 title: "Asymptotic distribution"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

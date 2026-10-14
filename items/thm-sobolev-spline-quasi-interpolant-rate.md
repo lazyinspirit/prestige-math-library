@@ -2,7 +2,7 @@
 id: thm-sobolev-spline-quasi-interpolant-rate
 kind: theorem
 title: Sobolev approximation by local spline quasi-interpolants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

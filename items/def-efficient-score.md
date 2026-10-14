@@ -2,7 +2,7 @@
 id: def-efficient-score
 kind: definition
 title: Efficient score and efficient information
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 9

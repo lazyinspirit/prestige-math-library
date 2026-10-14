@@ -2,7 +2,7 @@
 id: lem-qmd-score-centered-and-finite-information
 kind: lemma
 title: A QMD score is centered and has finite information
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: thm-hilbert-valued-clt-for-l2-m-approximable-bernoulli-shifts
 kind: theorem
 title: Hilbert-valued CLT for L2-m-approximable Bernoulli shifts
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

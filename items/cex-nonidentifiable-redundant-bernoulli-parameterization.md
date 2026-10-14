@@ -2,7 +2,7 @@
 id: cex-nonidentifiable-redundant-bernoulli-parameterization
 kind: counterexample
 title: "A redundant Bernoulli parameterization has a nonidentifiable coordinate"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

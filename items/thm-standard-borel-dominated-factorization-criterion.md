@@ -2,7 +2,7 @@
 id: thm-standard-borel-dominated-factorization-criterion
 kind: theorem
 title: "Standard Borel dominated factorization criterion"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

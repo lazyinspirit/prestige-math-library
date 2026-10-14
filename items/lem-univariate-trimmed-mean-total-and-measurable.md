@@ -2,7 +2,7 @@
 id: lem-univariate-trimmed-mean-total-and-measurable
 kind: lemma
 title: "The split-sample univariate trimmed mean is total and Borel measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

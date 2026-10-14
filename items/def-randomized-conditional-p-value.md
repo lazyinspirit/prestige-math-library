@@ -2,7 +2,7 @@
 id: def-randomized-conditional-p-value
 kind: definition
 title: "Randomized conditional upper-tail p-values"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

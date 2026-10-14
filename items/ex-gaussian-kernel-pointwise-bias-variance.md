@@ -2,7 +2,7 @@
 id: ex-gaussian-kernel-pointwise-bias-variance
 kind: example
 title: "Gaussian-kernel moments and pointwise constants"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

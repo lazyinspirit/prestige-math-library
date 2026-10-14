@@ -2,7 +2,7 @@
 id: thm-gc-by-bracketing-entropy
 kind: theorem
 title: Glivenko–Cantelli theorem by bracketing entropy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

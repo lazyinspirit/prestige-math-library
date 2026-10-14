@@ -2,7 +2,7 @@
 id: thm-finite-group-randomization-validity
 kind: theorem
 title: "Finite-group orbit-rank validity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

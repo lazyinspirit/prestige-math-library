@@ -2,7 +2,7 @@
 id: cex-local-linear-finite-sample-expectation-undefined
 kind: counterexample
 title: Local-linear estimator can lack a finite-sample expectation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

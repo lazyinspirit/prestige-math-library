@@ -2,7 +2,7 @@
 id: def-subgaussian-variable-and-vector
 kind: definition
 title: "Sub-Gaussian variables and vectors, and sub-exponential variables"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

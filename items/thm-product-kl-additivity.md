@@ -2,7 +2,7 @@
 id: thm-product-kl-additivity
 kind: theorem
 title: "Additivity of KL divergence for finite product laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

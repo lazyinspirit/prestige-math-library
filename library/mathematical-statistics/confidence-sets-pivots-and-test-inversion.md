@@ -1,7 +1,7 @@
 ---
 page: confidence-sets-pivots-and-test-inversion
 title: "Confidence Sets and Inversion"
-status: draft
+status: published
 items:
   - def-confidence-set-and-coverage
   - def-pivot

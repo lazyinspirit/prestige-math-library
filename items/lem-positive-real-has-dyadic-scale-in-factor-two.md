@@ -2,7 +2,7 @@
 id: lem-positive-real-has-dyadic-scale-in-factor-two
 kind: lemma
 title: "Every positive real lies below a dyadic scale less than twice as large"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: def-randomized-procedure-as-a-markov-kernel
 kind: definition
 title: "Randomized procedures as probability kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

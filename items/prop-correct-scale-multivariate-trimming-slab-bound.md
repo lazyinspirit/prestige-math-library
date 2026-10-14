@@ -2,7 +2,7 @@
 id: prop-correct-scale-multivariate-trimming-slab-bound
 kind: proposition
 title: "Correct-scale slab bound for multivariate trimming"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

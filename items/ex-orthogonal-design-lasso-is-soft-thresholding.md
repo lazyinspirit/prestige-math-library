@@ -2,7 +2,7 @@
 id: ex-orthogonal-design-lasso-is-soft-thresholding
 kind: example
 title: "The orthogonal-design Lasso is coordinatewise soft thresholding"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

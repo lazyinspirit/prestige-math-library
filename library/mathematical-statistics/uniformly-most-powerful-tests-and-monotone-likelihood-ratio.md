@@ -1,7 +1,7 @@
 ---
 page: uniformly-most-powerful-tests-and-monotone-likelihood-ratio
 title: "UMP Tests"
-status: draft
+status: published
 items:
   - lem-randomized-threshold-has-exact-level
   - def-monotone-likelihood-ratio-family

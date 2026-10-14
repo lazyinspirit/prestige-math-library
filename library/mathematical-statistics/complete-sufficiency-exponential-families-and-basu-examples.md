@@ -1,7 +1,7 @@
 ---
 page: complete-sufficiency-exponential-families-and-basu-examples
 title: "Sufficiency, Completeness and Exponential Families — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-countable-mixture-dominates-bernoulli-scale-family

@@ -2,7 +2,7 @@
 id: lem-coordinate-maps-and-permutations-are-measurable-on-finite-products
 kind: lemma
 title: "Coordinate maps and permutations are measurable on finite products"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

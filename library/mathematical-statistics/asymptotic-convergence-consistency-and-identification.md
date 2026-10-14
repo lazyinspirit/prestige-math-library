@@ -1,7 +1,7 @@
 ---
 page: asymptotic-convergence-consistency-and-identification
 title: "Consistency and Limiting Distributions"
-status: draft
+status: published
 items:
   - def-op-and-little-op-stochastic-bounds
   - def-asymptotic-distribution

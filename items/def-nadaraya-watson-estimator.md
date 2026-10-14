@@ -2,7 +2,7 @@
 id: def-nadaraya-watson-estimator
 kind: definition
 title: Nadaraya–Watson estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

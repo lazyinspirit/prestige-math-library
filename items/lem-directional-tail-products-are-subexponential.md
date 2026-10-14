@@ -2,7 +2,7 @@
 id: lem-directional-tail-products-are-subexponential
 kind: lemma
 title: "Products of variables with Gaussian tails are sub-exponential"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

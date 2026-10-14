@@ -2,7 +2,7 @@
 id: thm-full-rank-exponential-family-sufficiency
 kind: theorem
 title: "The canonical statistic of an exponential family is sufficient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

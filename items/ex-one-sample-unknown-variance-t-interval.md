@@ -2,7 +2,7 @@
 id: ex-one-sample-unknown-variance-t-interval
 kind: example
 title: "An exact unknown-variance t interval for a four-point sample"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

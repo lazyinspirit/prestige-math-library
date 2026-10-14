@@ -2,7 +2,7 @@
 id: thm-one-sided-coordinate-rademacher-contraction
 kind: theorem
 title: "One-sided coordinate Rademacher contraction"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

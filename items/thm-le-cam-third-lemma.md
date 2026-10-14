@@ -2,7 +2,7 @@
 id: thm-le-cam-third-lemma
 kind: theorem
 title: Le Cam's third lemma for a Gaussian likelihood-ratio limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

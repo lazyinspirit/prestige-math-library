@@ -2,7 +2,7 @@
 id: ex-zero-one-loss-randomization-minimax
 kind: example
 title: Randomization lowers worst-case risk under zero-one loss
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

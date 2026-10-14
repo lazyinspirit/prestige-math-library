@@ -2,7 +2,7 @@
 id: thm-general-regular-estimator-convolution-bound
 kind: theorem
 title: Convolution bound for general regular estimators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 9

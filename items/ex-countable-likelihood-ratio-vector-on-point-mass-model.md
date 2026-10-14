@@ -2,7 +2,7 @@
 id: ex-countable-likelihood-ratio-vector-on-point-mass-model
 kind: example
 title: "Likelihood-ratio vector for a point-mass model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

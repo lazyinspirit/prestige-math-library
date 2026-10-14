@@ -2,7 +2,7 @@
 id: cex-process-valid-under-one-null-but-not-composite-null
 kind: counterexample
 title: Validity under one null law does not give a composite-null test supermartingale
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

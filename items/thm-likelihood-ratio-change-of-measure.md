@@ -2,7 +2,7 @@
 id: thm-likelihood-ratio-change-of-measure
 kind: theorem
 title: "Likelihood-ratio change of measure"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

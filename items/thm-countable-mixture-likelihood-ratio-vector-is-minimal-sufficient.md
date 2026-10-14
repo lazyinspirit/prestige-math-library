@@ -2,7 +2,7 @@
 id: thm-countable-mixture-likelihood-ratio-vector-is-minimal-sufficient
 kind: theorem
 title: "A countable mixture likelihood-ratio vector is minimal sufficient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

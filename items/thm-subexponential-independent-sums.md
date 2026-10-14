@@ -2,7 +2,7 @@
 id: thm-subexponential-independent-sums
 kind: theorem
 title: "Sub-exponential concentration for independent sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

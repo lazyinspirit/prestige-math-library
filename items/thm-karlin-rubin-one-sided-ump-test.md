@@ -2,7 +2,7 @@
 id: thm-karlin-rubin-one-sided-ump-test
 kind: theorem
 title: The Karlin–Rubin theorem for one-sided tests
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

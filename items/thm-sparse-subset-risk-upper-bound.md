@@ -2,7 +2,7 @@
 id: thm-sparse-subset-risk-upper-bound
 kind: theorem
 title: "Sparse constrained least-squares risk bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

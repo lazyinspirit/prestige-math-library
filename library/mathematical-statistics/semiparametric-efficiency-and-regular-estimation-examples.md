@@ -1,7 +1,7 @@
 ---
 page: semiparametric-efficiency-and-regular-estimation-examples
 title: Semiparametric Efficiency — Examples
-status: draft
+status: published
 items: []
 examples:
   - cex-finite-mean-functional-without-l2-influence-curve

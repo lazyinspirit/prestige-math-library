@@ -2,7 +2,7 @@
 id: lem-local-linear-normalized-moment-matrix-converges-in-probability
 kind: lemma
 title: Local-linear moment matrix converges to a positive-definite limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

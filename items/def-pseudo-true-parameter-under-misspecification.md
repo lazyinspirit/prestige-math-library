@@ -2,7 +2,7 @@
 id: def-pseudo-true-parameter-under-misspecification
 kind: definition
 title: "Pseudo-true parameter under misspecification"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

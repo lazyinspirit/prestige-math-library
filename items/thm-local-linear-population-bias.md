@@ -2,7 +2,7 @@
 id: thm-local-linear-population-bias
 kind: theorem
 title: Pointwise population bias of local-linear regression
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

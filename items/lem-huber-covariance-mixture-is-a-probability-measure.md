@@ -2,7 +2,7 @@
 id: lem-huber-covariance-mixture-is-a-probability-measure
 kind: lemma
 title: The Gaussian Huber covariance mixture is a probability law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

@@ -2,7 +2,7 @@
 id: lem-covariance-median-pilot-exact-block-budget
 kind: lemma
 title: "Exact block budget for the covariance geometric-median pilot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

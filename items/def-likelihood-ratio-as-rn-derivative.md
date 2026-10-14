@@ -2,7 +2,7 @@
 id: def-likelihood-ratio-as-rn-derivative
 kind: definition
 title: "Likelihood ratio as a Radon–Nikodym derivative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

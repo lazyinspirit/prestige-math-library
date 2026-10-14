@@ -2,7 +2,7 @@
 id: thm-brunn-minkowski-for-compact-convex-sets
 kind: theorem
 title: Brunn–Minkowski inequality for compact convex sets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: delta-method-and-asymptotic-normality-examples
 title: "Delta Method and Asymptotic Normality — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-log-transformation-delta-method

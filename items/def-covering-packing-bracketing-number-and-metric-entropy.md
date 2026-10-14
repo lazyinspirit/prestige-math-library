@@ -2,7 +2,7 @@
 id: def-covering-packing-bracketing-number-and-metric-entropy
 kind: definition
 title: "Covering, packing, bracketing numbers, and metric entropy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

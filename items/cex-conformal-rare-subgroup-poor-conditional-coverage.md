@@ -2,7 +2,7 @@
 id: cex-conformal-rare-subgroup-poor-conditional-coverage
 kind: counterexample
 title: "Marginal split coverage need not give rare-subgroup coverage"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

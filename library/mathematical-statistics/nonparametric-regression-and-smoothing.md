@@ -1,7 +1,7 @@
 ---
 page: nonparametric-regression-and-smoothing
 title: "Regression Estimation"
-status: draft
+status: published
 items:
   - def-regression-target-version
   - lem-local-linear-normalized-moment-matrix-converges-in-probability

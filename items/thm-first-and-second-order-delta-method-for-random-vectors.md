@@ -2,7 +2,7 @@
 id: thm-first-and-second-order-delta-method-for-random-vectors
 kind: theorem
 title: "First- and second-order delta method for random vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

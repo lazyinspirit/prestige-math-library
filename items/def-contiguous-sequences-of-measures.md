@@ -2,7 +2,7 @@
 id: def-contiguous-sequences-of-measures
 kind: definition
 title: Contiguous sequences of probability measures
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

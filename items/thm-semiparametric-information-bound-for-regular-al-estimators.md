@@ -2,7 +2,7 @@
 id: thm-semiparametric-information-bound-for-regular-al-estimators
 kind: theorem
 title: Semiparametric information bound for regular asymptotically linear estimators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 9

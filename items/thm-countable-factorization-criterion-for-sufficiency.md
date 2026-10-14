@@ -2,7 +2,7 @@
 id: thm-countable-factorization-criterion-for-sufficiency
 kind: theorem
 title: "Countable factorization criterion for sufficiency"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

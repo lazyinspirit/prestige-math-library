@@ -2,7 +2,7 @@
 id: lem-geometric-median-majority-radius-bound
 kind: lemma
 title: "A geometric median is close when a strict majority is close"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

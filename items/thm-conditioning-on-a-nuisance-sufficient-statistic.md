@@ -2,7 +2,7 @@
 id: thm-conditioning-on-a-nuisance-sufficient-statistic
 kind: theorem
 title: "Sufficiency makes the conditional rejection probability nuisance-free"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

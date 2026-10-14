@@ -1,7 +1,7 @@
 ---
 page: asymptotic-convergence-consistency-and-identification-examples
 title: "Consistency and Limiting Distributions — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-degenerate-asymptotic-distribution-with-rare-outliers

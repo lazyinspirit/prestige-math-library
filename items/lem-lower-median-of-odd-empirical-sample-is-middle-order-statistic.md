@@ -2,7 +2,7 @@
 id: lem-lower-median-of-odd-empirical-sample-is-middle-order-statistic
 kind: lemma
 title: The lower median of an odd empirical sample is its middle order statistic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

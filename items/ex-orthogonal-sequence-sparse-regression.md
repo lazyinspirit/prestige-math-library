@@ -2,7 +2,7 @@
 id: ex-orthogonal-sequence-sparse-regression
 kind: example
 title: "Constrained least squares in a two-coordinate orthogonal sequence model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

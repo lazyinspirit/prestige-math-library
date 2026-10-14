@@ -2,7 +2,7 @@
 id: ex-binomial-tail-test-inversion
 kind: example
 title: Binomial upper confidence limit by lower-tail test inversion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

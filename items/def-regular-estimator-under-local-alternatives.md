@@ -2,7 +2,7 @@
 id: def-regular-estimator-under-local-alternatives
 kind: definition
 title: Regular estimator under local alternatives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

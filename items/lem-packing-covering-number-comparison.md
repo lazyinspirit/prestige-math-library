@@ -2,7 +2,7 @@
 id: lem-packing-covering-number-comparison
 kind: lemma
 title: "Packing and covering numbers with explicit radius conventions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

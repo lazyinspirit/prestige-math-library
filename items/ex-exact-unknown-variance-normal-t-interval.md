@@ -2,7 +2,7 @@
 id: ex-exact-unknown-variance-normal-t-interval
 kind: example
 title: Exact unknown-variance normal t interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

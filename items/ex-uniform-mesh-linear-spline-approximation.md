@@ -2,7 +2,7 @@
 id: ex-uniform-mesh-linear-spline-approximation
 kind: example
 title: Uniform-mesh linear spline approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

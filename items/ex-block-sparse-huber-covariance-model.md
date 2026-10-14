@@ -2,7 +2,7 @@
 id: ex-block-sparse-huber-covariance-model
 kind: example
 title: A covariance matrix with one correlated block
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

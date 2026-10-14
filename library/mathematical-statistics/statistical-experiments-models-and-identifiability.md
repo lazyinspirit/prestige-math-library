@@ -1,7 +1,7 @@
 ---
 page: statistical-experiments-models-and-identifiability
 title: "Statistical Experiments, Models and Identifiability"
-status: draft
+status: published
 items:
   - def-statistical-experiment
   - def-parametric-statistical-model

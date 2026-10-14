@@ -2,7 +2,7 @@
 id: ex-normal-sample-mean-residual-independent-by-basu
 kind: example
 title: "Normal sample mean and residuals are independent"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

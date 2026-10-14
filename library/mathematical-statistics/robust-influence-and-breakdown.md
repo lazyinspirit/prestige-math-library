@@ -1,7 +1,7 @@
 ---
 page: robust-influence-and-breakdown
 title: Influence and Breakdown
-status: draft
+status: published
 items:
   - def-finite-sample-replacement-breakdown
   - def-lower-median-functional

@@ -2,7 +2,7 @@
 id: ex-bounded-sample-mean-under-replacement
 kind: example
 title: "Bounded sample-mean change under replacements and a common corrupted sample"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

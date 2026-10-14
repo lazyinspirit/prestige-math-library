@@ -2,7 +2,7 @@
 id: cex-collinear-design-coefficient-risk-unidentifiable
 kind: counterexample
 title: "Collinear columns identify a fitted mean, not its coefficients"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

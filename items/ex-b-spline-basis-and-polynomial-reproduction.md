@@ -2,7 +2,7 @@
 id: ex-b-spline-basis-and-polynomial-reproduction
 kind: example
 title: A quadratic Bernstein B-spline basis
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

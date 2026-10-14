@@ -2,7 +2,7 @@
 id: def-bounded-spectrum-covariance-class
 kind: definition
 title: Bounded-spectrum covariance class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

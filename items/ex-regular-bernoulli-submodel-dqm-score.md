@@ -2,7 +2,7 @@
 id: ex-regular-bernoulli-submodel-dqm-score
 kind: example
 title: A regular Bernoulli submodel and its score
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

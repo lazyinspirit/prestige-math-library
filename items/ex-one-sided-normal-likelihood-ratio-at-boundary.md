@@ -2,7 +2,7 @@
 id: ex-one-sided-normal-likelihood-ratio-at-boundary
 kind: example
 title: "A one-sided normal likelihood ratio at the boundary"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

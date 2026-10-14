@@ -1,7 +1,7 @@
 ---
 page: m-and-z-estimation-and-uniform-laws-examples
 title: "M- and Z-Estimators — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-quadratic-criterion-sample-mean

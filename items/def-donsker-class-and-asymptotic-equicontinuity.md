@@ -2,7 +2,7 @@
 id: def-donsker-class-and-asymptotic-equicontinuity
 kind: definition
 title: Donsker classes and asymptotic equicontinuity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

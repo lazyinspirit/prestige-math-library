@@ -2,7 +2,7 @@
 id: ex-full-conformal-candidate-ranking
 kind: example
 title: "Full conformal ranks a candidate in an augmented sample"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

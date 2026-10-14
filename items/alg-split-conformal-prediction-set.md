@@ -2,7 +2,7 @@
 id: alg-split-conformal-prediction-set
 kind: algorithm
 title: "Split conformal prediction set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

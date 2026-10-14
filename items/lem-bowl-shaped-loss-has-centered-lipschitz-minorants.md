@@ -2,7 +2,7 @@
 id: lem-bowl-shaped-loss-has-centered-lipschitz-minorants
 kind: lemma
 title: Bounded bowl-shaped losses have Gaussian-centered Lipschitz minorants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

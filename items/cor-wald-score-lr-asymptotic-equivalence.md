@@ -2,7 +2,7 @@
 id: cor-wald-score-lr-asymptotic-equivalence
 kind: corollary
 title: First-order equivalence of Wald, score, and likelihood-ratio statistics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

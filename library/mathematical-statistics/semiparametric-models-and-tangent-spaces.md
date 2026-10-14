@@ -1,7 +1,7 @@
 ---
 page: semiparametric-models-and-tangent-spaces
 title: Semiparametric Models and Tangent Spaces
-status: draft
+status: published
 items:
   - def-mean-zero-square-integrable-space
   - def-dqm-submodel-through-a-law

@@ -2,7 +2,7 @@
 id: ex-normal-mean-exact-likelihood-calibration
 kind: example
 title: Known-variance normal mean and exact likelihood calibration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

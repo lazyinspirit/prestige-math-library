@@ -1,7 +1,7 @@
 ---
 page: conformal-prediction-and-exchangeable-ranks-examples
 title: "Conformal Prediction and Exchangeable Ranks — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-split-conformal-conservative-ties

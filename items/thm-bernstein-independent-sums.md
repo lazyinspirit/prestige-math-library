@@ -2,7 +2,7 @@
 id: thm-bernstein-independent-sums
 kind: theorem
 title: "Bernstein inequality for bounded independent sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: thm-huber-contamination-modulus-lower-bound
 kind: theorem
 title: "Huber contamination modulus lower bound for tail risk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: cex-nonmeasurable-rule-is-not-a-statistic-or-test
 kind: counterexample
 title: "A nonmeasurable rule is not a statistic or test"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

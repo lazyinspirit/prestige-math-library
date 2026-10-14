@@ -2,7 +2,7 @@
 id: thm-identifiability-iff-constant-on-equivalence-classes
 kind: theorem
 title: "Identifiability is constancy on observational classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

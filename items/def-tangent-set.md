@@ -2,7 +2,7 @@
 id: def-tangent-set
 kind: definition
 title: Tangent set of a statistical model at a law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

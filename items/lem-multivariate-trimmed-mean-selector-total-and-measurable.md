@@ -2,7 +2,7 @@
 id: lem-multivariate-trimmed-mean-selector-total-and-measurable
 kind: lemma
 title: "Totality and measurability of the repaired multivariate trimmed-mean selector"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

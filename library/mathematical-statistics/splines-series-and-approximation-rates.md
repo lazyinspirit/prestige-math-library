@@ -1,7 +1,7 @@
 ---
 page: splines-series-and-approximation-rates
 title: Splines and Series Methods
-status: draft
+status: published
 items:
   - def-b-spline-space-and-basis
   - def-natural-cubic-spline

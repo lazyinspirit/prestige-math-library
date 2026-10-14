@@ -2,7 +2,7 @@
 id: ex-normal-location-under-wrong-variance
 kind: example
 title: "Normal location fitted under the wrong variance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

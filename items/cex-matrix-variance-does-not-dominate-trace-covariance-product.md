@@ -2,7 +2,7 @@
 id: cex-matrix-variance-does-not-dominate-trace-covariance-product
 kind: counterexample
 title: Matrix variance need not dominate trace covariance times operator norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

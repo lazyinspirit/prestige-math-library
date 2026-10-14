@@ -2,7 +2,7 @@
 id: thm-influence-function-for-m-location-estimator
 kind: theorem
 title: Influence function for a regular M-location functional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 10

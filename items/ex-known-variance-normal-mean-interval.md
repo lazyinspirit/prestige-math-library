@@ -2,7 +2,7 @@
 id: ex-known-variance-normal-mean-interval
 kind: example
 title: Known-variance normal mean interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

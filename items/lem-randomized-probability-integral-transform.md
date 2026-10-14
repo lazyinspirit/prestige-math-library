@@ -2,7 +2,7 @@
 id: lem-randomized-probability-integral-transform
 kind: lemma
 title: "Randomizing across CDF jumps gives a uniform variable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

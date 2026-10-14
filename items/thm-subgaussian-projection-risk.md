@@ -2,7 +2,7 @@
 id: thm-subgaussian-projection-risk
 kind: theorem
 title: "Sub-Gaussian projection risk bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

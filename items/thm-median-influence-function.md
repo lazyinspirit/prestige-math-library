@@ -2,7 +2,7 @@
 id: thm-median-influence-function
 kind: theorem
 title: Influence function and sensitivity of the median
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 11

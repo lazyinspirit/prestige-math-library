@@ -2,7 +2,7 @@
 id: ex-sparse-gaussian-sequence-fano-lower-bound
 kind: example
 title: "A sparse Gaussian sequence lower bound by Fano’s method"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

@@ -1,7 +1,7 @@
 ---
 page: fisher-information-and-finite-sample-information-bounds-examples
 title: "Scores and Information Bounds — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-bernoulli-score-fisher-information-and-cramer-rao-attainment,
            ex-normal-location-score-information-and-cramer-rao-attainment,

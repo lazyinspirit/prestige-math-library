@@ -2,7 +2,7 @@
 id: ex-finite-class-m-estimator-consistency
 kind: example
 title: "A finite-class M-estimator and its uniform law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

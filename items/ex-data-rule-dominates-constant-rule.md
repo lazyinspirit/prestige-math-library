@@ -2,7 +2,7 @@
 id: ex-data-rule-dominates-constant-rule
 kind: example
 title: A data-dependent rule dominates a constant rule
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: ex-binomial-one-sided-ump-test
 kind: example
 title: A randomized UMP test for a binomial model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

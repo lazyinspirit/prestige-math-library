@@ -2,7 +2,7 @@
 id: cex-half-replacement-prevents-covariance-only-mean-recovery
 kind: counterexample
 title: "Half-sample replacement prevents covariance-only mean recovery"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: thm-kde-pointwise-second-order-bias
 kind: theorem
 title: "Pointwise second-order bias of the KDE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

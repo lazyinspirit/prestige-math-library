@@ -2,7 +2,7 @@
 id: lem-products-of-subgaussian-coordinates-are-subexponential
 kind: lemma
 title: "Products of sub-Gaussian coordinates are sub-exponential"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

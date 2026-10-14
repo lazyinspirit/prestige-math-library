@@ -1,7 +1,7 @@
 ---
 page: likelihood-asymptotics-wald-score-and-likelihood-ratio
 title: "Likelihood Theory and Classical Calibration"
-status: draft
+status: published
 items:
   - def-qmd-path
   - lem-parametric-qmd-score-has-mean-zero

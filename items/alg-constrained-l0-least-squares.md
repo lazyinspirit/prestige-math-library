@@ -2,7 +2,7 @@
 id: alg-constrained-l0-least-squares
 kind: algorithm
 title: "Constrained support-search least squares"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: def-conditional-test-given-statistic
 kind: definition
 title: "Conditional tests given a statistic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

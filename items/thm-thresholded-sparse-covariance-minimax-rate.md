@@ -2,7 +2,7 @@
 id: thm-thresholded-sparse-covariance-minimax-rate
 kind: theorem
 title: "Capped thresholded minimax rate for weak-lq sparse covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

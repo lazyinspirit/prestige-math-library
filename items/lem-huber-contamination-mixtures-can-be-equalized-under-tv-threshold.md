@@ -2,7 +2,7 @@
 id: lem-huber-contamination-mixtures-can-be-equalized-under-tv-threshold
 kind: lemma
 title: "TV-close laws have identical Huber mixtures at the contamination threshold"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

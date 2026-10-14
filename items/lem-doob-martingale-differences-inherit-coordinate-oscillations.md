@@ -2,7 +2,7 @@
 id: lem-doob-martingale-differences-inherit-coordinate-oscillations
 kind: lemma
 title: "Doob differences inherit coordinate oscillation widths"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: cex-boundary-null-has-nonstandard-lr-limit
 kind: counterexample
 title: A boundary null has a nonstandard likelihood-ratio limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

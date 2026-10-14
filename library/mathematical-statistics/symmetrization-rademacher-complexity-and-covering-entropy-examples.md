@@ -1,7 +1,7 @@
 ---
 page: symmetrization-rademacher-complexity-and-covering-entropy-examples
 title: Empirical-Process Complexity — Examples
-status: draft
+status: published
 items:
   - cex-uncountable-class-has-nonmeasurable-empirical-supremum
   - cex-vc-entropy-exponent-cannot-be-uniform-in-r

@@ -2,7 +2,7 @@
 id: lem-gaussian-centering-for-bounded-symmetric-quasiconvex-loss
 kind: lemma
 title: A centered Gaussian minimizes bounded symmetric quasi-convex loss
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

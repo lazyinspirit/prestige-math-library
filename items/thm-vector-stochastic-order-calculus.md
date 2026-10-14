@@ -2,7 +2,7 @@
 id: thm-vector-stochastic-order-calculus
 kind: theorem
 title: "Finite-dimensional stochastic-order calculus and tightness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

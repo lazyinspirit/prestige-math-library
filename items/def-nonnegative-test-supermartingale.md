@@ -2,7 +2,7 @@
 id: def-nonnegative-test-supermartingale
 kind: definition
 title: Nonnegative test supermartingales
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

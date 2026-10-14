@@ -2,7 +2,7 @@
 id: thm-influence-curve-representers
 kind: theorem
 title: Influence-curve representers form an affine orthogonal-complement class
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

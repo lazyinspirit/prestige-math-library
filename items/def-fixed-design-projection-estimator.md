@@ -2,7 +2,7 @@
 id: def-fixed-design-projection-estimator
 kind: definition
 title: "Fixed-design least squares as orthogonal projection"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

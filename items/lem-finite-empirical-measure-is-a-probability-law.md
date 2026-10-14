@@ -2,7 +2,7 @@
 id: lem-finite-empirical-measure-is-a-probability-law
 kind: lemma
 title: A finite empirical measure is a probability law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

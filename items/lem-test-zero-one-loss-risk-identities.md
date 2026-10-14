@@ -2,7 +2,7 @@
 id: lem-test-zero-one-loss-risk-identities
 kind: lemma
 title: "Binary zero-one loss risks are the testing error probabilities"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

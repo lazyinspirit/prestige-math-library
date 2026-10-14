@@ -2,7 +2,7 @@
 id: lem-conditional-kernel-tail-and-atom-evaluations-are-measurable
 kind: lemma
 title: "Conditional-kernel tail and atom evaluations are measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

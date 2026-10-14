@@ -7,7 +7,7 @@ verification:
 id: cex-uniform-null-p-value-is-anti-conservative
 kind: counterexample
 title: "A measurable [0,1]-valued statistic need not be a valid p-value"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

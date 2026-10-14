@@ -2,7 +2,7 @@
 id: thm-gaussian-projection-risk
 kind: theorem
 title: "Exact squared-error risk of an isotropic projection fit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

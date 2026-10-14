@@ -2,7 +2,7 @@
 id: ex-training-risk-versus-test-risk
 kind: example
 title: "Zero training residual and positive test error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

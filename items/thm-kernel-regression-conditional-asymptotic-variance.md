@@ -2,7 +2,7 @@
 id: thm-kernel-regression-conditional-asymptotic-variance
 kind: theorem
 title: Conditional asymptotic variance of Nadaraya–Watson and local-linear estimators
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

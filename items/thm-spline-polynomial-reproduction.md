@@ -2,7 +2,7 @@
 id: thm-spline-polynomial-reproduction
 kind: theorem
 title: B-spline basis properties and polynomial reproduction
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-clean-block-sparse-gaussian-covariance-minimax-lower-bound
 kind: lemma
 title: Clean block-sparse Gaussian covariance has squared operator lower rate s log(ep/s) over n
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

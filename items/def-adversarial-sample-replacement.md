@@ -2,7 +2,7 @@
 id: def-adversarial-sample-replacement
 kind: definition
 title: "Adversarial sample replacement"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

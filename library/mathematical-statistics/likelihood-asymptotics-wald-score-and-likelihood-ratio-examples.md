@@ -1,7 +1,7 @@
 ---
 page: likelihood-asymptotics-wald-score-and-likelihood-ratio-examples
 title: "Likelihood Theory and Classical Calibration — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-normal-mean-exact-likelihood-calibration

@@ -2,7 +2,7 @@
 id: ex-log-transformation-delta-method
 kind: example
 title: "A logarithmic transformation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

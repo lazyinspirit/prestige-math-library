@@ -2,7 +2,7 @@
 id: thm-z-estimator-consistency
 kind: theorem
 title: "Consistency of Z-estimators under a uniform law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

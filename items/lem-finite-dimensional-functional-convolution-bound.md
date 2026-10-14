@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-functional-convolution-bound
 kind: lemma
 title: Finite-dimensional LAN convolution bound for differentiable functionals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

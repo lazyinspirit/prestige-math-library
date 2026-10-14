@@ -2,7 +2,7 @@
 id: thm-qmd-implies-lan-for-iid
 kind: theorem
 title: Quadratic-mean differentiability implies iid LAN
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

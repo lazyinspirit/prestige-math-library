@@ -1,7 +1,7 @@
 ---
 page: fisher-information-and-finite-sample-information-bounds
 title: "Scores and Information Bounds"
-status: draft
+status: published
 items: [def-score-and-fisher-information,
         thm-score-mean-zero-and-information-identity,
         thm-cramer-rao-lower-bound,

@@ -2,7 +2,7 @@
 id: def-exponential-family
 kind: definition
 title: "Exponential families and full rank"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

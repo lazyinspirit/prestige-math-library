@@ -2,7 +2,7 @@
 id: cex-continuity-alone-does-not-give-delta-method
 kind: counterexample
 title: "Continuity alone does not give a delta-method limit"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

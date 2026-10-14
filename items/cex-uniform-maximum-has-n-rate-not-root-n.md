@@ -2,7 +2,7 @@
 id: cex-uniform-maximum-has-n-rate-not-root-n
 kind: counterexample
 title: "The uniform endpoint MLE has rate n, not square-root n"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

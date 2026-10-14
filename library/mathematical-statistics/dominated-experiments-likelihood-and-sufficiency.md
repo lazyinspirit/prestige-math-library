@@ -1,7 +1,7 @@
 ---
 page: dominated-experiments-likelihood-and-sufficiency
 title: "Domination and Likelihood Ratios"
-status: draft
+status: published
 items:
   - lem-positive-lebesgue-components-of-a-positive-measure
   - lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative

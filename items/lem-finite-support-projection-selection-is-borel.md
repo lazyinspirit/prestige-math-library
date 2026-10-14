@@ -2,7 +2,7 @@
 id: lem-finite-support-projection-selection-is-borel
 kind: lemma
 title: "Finite tie-broken projection searches are Borel measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

@@ -1,7 +1,7 @@
 ---
 page: minimax-lower-bounds-and-information-theoretic-methods
 title: "Minimax Lower Bounds"
-status: draft
+status: published
 items:
   - lem-sparse-hamming-packing
   - def-kullback-leibler-divergence

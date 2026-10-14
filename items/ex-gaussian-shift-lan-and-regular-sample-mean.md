@@ -2,7 +2,7 @@
 id: ex-gaussian-shift-lan-and-regular-sample-mean
 kind: example
 title: Gaussian shift LAN and the regular sample mean
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

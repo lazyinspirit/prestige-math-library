@@ -2,7 +2,7 @@
 id: thm-iid-sample-mean-consistency
 kind: theorem
 title: "Consistency of the IID sample mean under a finite first moment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

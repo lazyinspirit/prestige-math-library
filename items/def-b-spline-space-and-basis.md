@@ -2,7 +2,7 @@
 id: def-b-spline-space-and-basis
 kind: definition
 title: B-spline spaces and knot conventions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

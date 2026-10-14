@@ -2,7 +2,7 @@
 id: thm-gaussian-sparse-sequence-minimax-lower-bound
 kind: theorem
 title: "Gaussian sparse-sequence minimax lower bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

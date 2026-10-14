@@ -2,7 +2,7 @@
 id: lem-qmd-normalized-product-likelihood-expansion
 kind: lemma
 title: Normalized product likelihood expansion under QMD
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

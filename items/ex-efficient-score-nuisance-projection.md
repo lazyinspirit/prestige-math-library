@@ -7,7 +7,7 @@ verification:
 id: ex-efficient-score-nuisance-projection
 kind: example
 title: A finite nuisance-score projection
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 11

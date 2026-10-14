@@ -1,7 +1,7 @@
 ---
 page: hilbert-valued-clt-for-weakly-dependent-functional-time-series
 title: Hilbert-Valued CLT for Functional Time Series
-status: draft
+status: published
 items:
   - def-l2-m-approximable-causal-bernoulli-shift
   - lem-finite-dependent-vector-clt

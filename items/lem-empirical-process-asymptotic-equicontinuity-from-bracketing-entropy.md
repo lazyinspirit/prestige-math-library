@@ -2,7 +2,7 @@
 id: lem-empirical-process-asymptotic-equicontinuity-from-bracketing-entropy
 kind: lemma
 title: Bracketing entropy implies empirical-process asymptotic equicontinuity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

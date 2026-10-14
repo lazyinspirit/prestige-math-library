@@ -1,7 +1,7 @@
 ---
 page: chaining-uniform-laws-and-empirical-process-limits-examples
 title: "Chaining and Uniform Limits — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-pointwise-strong-laws-do-not-imply-uniform-law

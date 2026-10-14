@@ -2,7 +2,7 @@
 id: def-risk-domination-and-admissibility
 kind: definition
 title: Risk domination and admissibility
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

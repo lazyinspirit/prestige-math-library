@@ -2,7 +2,7 @@
 id: thm-multivariate-cramer-rao-bound
 kind: theorem
 title: "Multivariate Cramér–Rao bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

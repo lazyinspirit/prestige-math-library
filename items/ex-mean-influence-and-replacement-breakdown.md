@@ -2,7 +2,7 @@
 id: ex-mean-influence-and-replacement-breakdown
 kind: example
 title: The mean has unbounded influence and 1/n breakdown
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 11

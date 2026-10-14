@@ -2,7 +2,7 @@
 id: ex-two-sided-normal-alternatives-have-opposed-most-powerful-tests
 kind: example
 title: Opposed most powerful tests for two normal alternatives
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

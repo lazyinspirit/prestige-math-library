@@ -2,7 +2,7 @@
 id: lem-measurable-matrix-depth-maximizer-selection
 kind: lemma
 title: Measurable selection of a matrix-depth maximizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

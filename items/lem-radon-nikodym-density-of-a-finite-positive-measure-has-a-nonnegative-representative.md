@@ -2,7 +2,7 @@
 id: lem-radon-nikodym-density-of-a-finite-positive-measure-has-a-nonnegative-representative
 kind: lemma
 title: "A sigma-finite positive measure has a nonnegative Radon–Nikodym density version"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

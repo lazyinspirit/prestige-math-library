@@ -2,7 +2,7 @@
 id: thm-wald-score-likelihood-ratio-asymptotic-chi-square
 kind: theorem
 title: Wald, score, and likelihood-ratio asymptotic chi-square calibration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: lem-quadratic-likelihood-optimization-is-fisher-distance
 kind: lemma
 title: "Quadratic likelihood optimization is squared Fisher distance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: def-contamination-modulus
 kind: definition
 title: "Huber contamination modulus"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

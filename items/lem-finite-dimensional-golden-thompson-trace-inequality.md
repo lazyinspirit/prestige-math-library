@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-golden-thompson-trace-inequality
 kind: lemma
 title: Finite-dimensional Golden–Thompson trace inequality
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

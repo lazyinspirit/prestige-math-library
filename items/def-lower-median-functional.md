@@ -2,7 +2,7 @@
 id: def-lower-median-functional
 kind: definition
 title: The lower median of a real probability law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

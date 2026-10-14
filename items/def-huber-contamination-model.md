@@ -2,7 +2,7 @@
 id: def-huber-contamination-model
 kind: definition
 title: "Huber contamination model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

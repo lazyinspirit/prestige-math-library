@@ -2,7 +2,7 @@
 id: ex-bernoulli-count-is-minimal-sufficient
 kind: example
 title: "The Bernoulli count is minimal sufficient"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

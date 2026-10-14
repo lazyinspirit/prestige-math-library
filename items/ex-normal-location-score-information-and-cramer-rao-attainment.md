@@ -2,7 +2,7 @@
 id: ex-normal-location-score-information-and-cramer-rao-attainment
 kind: example
 title: "Normal location score, information, and attainment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: def-bayes-and-minimax-risk
 kind: definition
 title: Bayes risk and minimax risk
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

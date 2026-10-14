@@ -7,7 +7,7 @@ verification:
 id: ex-geometrically-summable-bernoulli-shift
 kind: example
 title: A geometrically summable Bernoulli shift
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

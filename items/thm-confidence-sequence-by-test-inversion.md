@@ -2,7 +2,7 @@
 id: thm-confidence-sequence-by-test-inversion
 kind: theorem
 title: Confidence sequences by test-supermartingale inversion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

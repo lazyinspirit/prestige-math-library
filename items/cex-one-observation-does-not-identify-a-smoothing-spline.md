@@ -2,7 +2,7 @@
 id: cex-one-observation-does-not-identify-a-smoothing-spline
 kind: counterexample
 title: One observation does not determine a natural cubic smoothing fit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

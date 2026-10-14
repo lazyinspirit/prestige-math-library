@@ -1,7 +1,7 @@
 ---
 page: confidence-sets-pivots-and-test-inversion-examples
 title: "Confidence Sets and Inversion — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-discrete-pivot-inversion-is-conservative

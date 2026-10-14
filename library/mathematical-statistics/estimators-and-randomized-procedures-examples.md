@@ -1,7 +1,7 @@
 ---
 page: "estimators-and-randomized-procedures-examples"
 title: "Estimators and Randomized Procedures — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-deterministic-statistic-as-dirac-kernel

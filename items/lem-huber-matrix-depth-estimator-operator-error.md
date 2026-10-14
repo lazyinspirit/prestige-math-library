@@ -2,7 +2,7 @@
 id: lem-huber-matrix-depth-estimator-operator-error
 kind: lemma
 title: Operator error bound for the Gaussian Huber matrix-depth estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

@@ -2,7 +2,7 @@
 id: thm-discrete-likelihood-ratio-classes-are-minimal-sufficient
 kind: theorem
 title: "Likelihood-ratio classes are minimal sufficient on a common discrete support"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

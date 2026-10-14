@@ -2,7 +2,7 @@
 id: def-gross-error-sensitivity
 kind: definition
 title: Gross-error sensitivity of a functional
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 10

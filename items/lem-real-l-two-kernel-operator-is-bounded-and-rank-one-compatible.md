@@ -2,7 +2,7 @@
 id: lem-real-l-two-kernel-operator-is-bounded-and-rank-one-compatible
 kind: lemma
 title: Real L2 kernels define bounded operators and represent rank-one tensors
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

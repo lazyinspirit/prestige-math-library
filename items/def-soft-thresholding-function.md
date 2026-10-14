@@ -2,7 +2,7 @@
 id: def-soft-thresholding-function
 kind: definition
 title: "Soft-thresholding map"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

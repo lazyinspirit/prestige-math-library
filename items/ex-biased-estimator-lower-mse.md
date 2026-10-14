@@ -2,7 +2,7 @@
 id: ex-biased-estimator-lower-mse
 kind: example
 title: "A biased estimator can have lower MSE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

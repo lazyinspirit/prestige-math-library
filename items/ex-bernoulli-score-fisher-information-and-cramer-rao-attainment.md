@@ -2,7 +2,7 @@
 id: ex-bernoulli-score-fisher-information-and-cramer-rao-attainment
 kind: example
 title: "Bernoulli score, information, and attainment of the scalar bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

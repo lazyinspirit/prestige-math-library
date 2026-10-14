@@ -2,7 +2,7 @@
 id: cex-arbitrary-dominator-factorization-fails
 kind: counterexample
 title: "An external dominating law need not be a valid sufficiency reference"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

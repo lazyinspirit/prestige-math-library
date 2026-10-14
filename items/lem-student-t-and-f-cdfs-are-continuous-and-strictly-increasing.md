@@ -2,7 +2,7 @@
 id: lem-student-t-and-f-cdfs-are-continuous-and-strictly-increasing
 kind: lemma
 title: "Student t and Fisher F CDFs are continuous and strictly increasing on their supports"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

@@ -7,7 +7,7 @@ verification:
 id: ex-finite-dependent-functional-moving-average
 kind: example
 title: Finite-dependent functional moving average
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

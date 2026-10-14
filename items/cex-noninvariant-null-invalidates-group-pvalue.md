@@ -2,7 +2,7 @@
 id: cex-noninvariant-null-invalidates-group-pvalue
 kind: counterexample
 title: "Without null invariance a group-rank p-value can be anti-conservative"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

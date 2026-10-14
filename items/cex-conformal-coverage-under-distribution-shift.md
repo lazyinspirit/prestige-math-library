@@ -2,7 +2,7 @@
 id: cex-conformal-coverage-under-distribution-shift
 kind: counterexample
 title: "Exchangeability failure can destroy split coverage"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

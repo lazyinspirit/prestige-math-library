@@ -1,7 +1,7 @@
 ---
 page: sparse-high-dimensional-estimation-and-covariance-examples
 title: Sparse Estimation and Covariance — Examples
-status: draft
+status: published
 items: []
 examples:
 - ex-orthogonal-design-lasso-is-soft-thresholding

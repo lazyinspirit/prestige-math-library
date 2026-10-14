@@ -1,7 +1,7 @@
 ---
 page: contamination-models-and-robust-risk-examples
 title: "Contamination and Robust Risk — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-mean-gross-error-path-has-unbounded-sensitivity

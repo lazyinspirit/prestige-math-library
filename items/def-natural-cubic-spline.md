@@ -2,7 +2,7 @@
 id: def-natural-cubic-spline
 kind: definition
 title: Natural cubic splines
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

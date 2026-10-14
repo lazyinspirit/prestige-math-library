@@ -1,7 +1,7 @@
 ---
 page: delta-method-and-asymptotic-normality
 title: "Delta Method and Asymptotic Normality"
-status: draft
+status: published
 items:
   - thm-first-and-second-order-delta-method-for-random-vectors
   - thm-z-estimator-asymptotic-linearity-and-normality

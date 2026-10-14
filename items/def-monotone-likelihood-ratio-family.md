@@ -2,7 +2,7 @@
 id: def-monotone-likelihood-ratio-family
 kind: definition
 title: Families with a monotone likelihood ratio
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

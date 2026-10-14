@@ -2,7 +2,7 @@
 id: ex-clean-heavy-tailed-finite-matrix-variance
 kind: example
 title: A polynomial-tail law with finite matrix variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

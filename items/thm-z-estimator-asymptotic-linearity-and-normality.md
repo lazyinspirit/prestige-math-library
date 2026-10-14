@@ -2,7 +2,7 @@
 id: thm-z-estimator-asymptotic-linearity-and-normality
 kind: theorem
 title: "Asymptotic linearity and normality of iid Z-estimators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

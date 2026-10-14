@@ -2,7 +2,7 @@
 id: lem-finite-grid-interval-discrepancy
 kind: lemma
 title: "A finite uniform grid approximates interval length"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

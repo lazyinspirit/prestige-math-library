@@ -2,7 +2,7 @@
 id: lem-incoherence-implies-restricted-eigenvalue
 kind: lemma
 title: "The stated incoherence bound implies the Lasso restricted eigenvalue condition"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

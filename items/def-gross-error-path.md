@@ -2,7 +2,7 @@
 id: def-gross-error-path
 kind: definition
 title: "Gross-error contamination path"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

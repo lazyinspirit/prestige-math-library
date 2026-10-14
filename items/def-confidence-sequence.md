@@ -2,7 +2,7 @@
 id: def-confidence-sequence
 kind: definition
 title: Confidence sequences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

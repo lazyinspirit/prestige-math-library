@@ -2,7 +2,7 @@
 id: lem-isotropic-gaussian-noise-is-subgaussian
 kind: lemma
 title: "Isotropic Gaussian noise has the matching sub-Gaussian proxy"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

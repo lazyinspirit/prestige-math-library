@@ -2,7 +2,7 @@
 id: cex-pointwise-strong-laws-do-not-imply-uniform-law
 kind: counterexample
 title: Pointwise strong laws need not give a uniform law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

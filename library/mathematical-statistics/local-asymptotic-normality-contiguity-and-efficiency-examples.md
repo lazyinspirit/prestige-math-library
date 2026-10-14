@@ -1,7 +1,7 @@
 ---
 page: local-asymptotic-normality-contiguity-and-efficiency-examples
 title: "LAN, Contiguity and Efficiency — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-gaussian-shift-lan-and-regular-sample-mean

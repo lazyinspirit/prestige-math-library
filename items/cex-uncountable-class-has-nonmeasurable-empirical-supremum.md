@@ -2,7 +2,7 @@
 id: cex-uncountable-class-has-nonmeasurable-empirical-supremum
 kind: counterexample
 title: "An uncountable class can have a nonmeasurable empirical supremum"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

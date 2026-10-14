@@ -2,7 +2,7 @@
 id: lem-positive-df-chi-square-has-density-and-regular-cdf
 kind: lemma
 title: "Positive-degree chi-square laws have a positive density and regular CDF"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

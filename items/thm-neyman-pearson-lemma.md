@@ -2,7 +2,7 @@
 id: thm-neyman-pearson-lemma
 kind: theorem
 title: "Neyman–Pearson lemma with singular alternative mass"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

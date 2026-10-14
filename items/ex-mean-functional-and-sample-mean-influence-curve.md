@@ -2,7 +2,7 @@
 id: ex-mean-functional-and-sample-mean-influence-curve
 kind: example
 title: Mean functional and the sample-mean influence function
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 9

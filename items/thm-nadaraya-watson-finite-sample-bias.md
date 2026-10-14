@@ -2,7 +2,7 @@
 id: thm-nadaraya-watson-finite-sample-bias
 kind: theorem
 title: Finite-sample mean bias of the Nadaraya–Watson estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

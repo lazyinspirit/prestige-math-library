@@ -2,7 +2,7 @@
 id: thm-likelihood-ratio-limit-for-local-cones-in-a-qmd-model
 kind: theorem
 title: "Likelihood-ratio limit for local cones in a QMD model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

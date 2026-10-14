@@ -2,7 +2,7 @@
 id: cex-finite-variance-does-not-imply-subgaussian-tail
 kind: counterexample
 title: "Finite variance does not imply a sub-Gaussian tail"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

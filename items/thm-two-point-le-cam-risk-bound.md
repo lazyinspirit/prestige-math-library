@@ -2,7 +2,7 @@
 id: thm-two-point-le-cam-risk-bound
 kind: theorem
 title: "Two-point Le Cam lower bound for squared-error risk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

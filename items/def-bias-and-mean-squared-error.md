@@ -2,7 +2,7 @@
 id: def-bias-and-mean-squared-error
 kind: definition
 title: "Bias and mean squared error"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

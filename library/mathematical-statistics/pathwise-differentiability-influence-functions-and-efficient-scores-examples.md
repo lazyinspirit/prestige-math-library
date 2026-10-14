@@ -1,7 +1,7 @@
 ---
 page: pathwise-differentiability-influence-functions-and-efficient-scores-examples
 title: Influence Functions and Efficient Scores — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-pathwise-derivative-not-continuous-in-tangent-norm

@@ -2,7 +2,7 @@
 id: lem-vc-set-covering-entropy
 kind: lemma
 title: "Logarithmic L-r covering bound for VC classes of sets"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

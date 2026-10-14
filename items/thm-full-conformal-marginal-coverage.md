@@ -2,7 +2,7 @@
 id: thm-full-conformal-marginal-coverage
 kind: theorem
 title: "Full conformal marginal coverage"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

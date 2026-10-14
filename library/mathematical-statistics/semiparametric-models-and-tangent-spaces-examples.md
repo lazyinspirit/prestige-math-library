@@ -1,7 +1,7 @@
 ---
 page: semiparametric-models-and-tangent-spaces-examples
 title: Semiparametric Models and Tangent Spaces — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-bounded-scores-generate-unrestricted-tangent-space

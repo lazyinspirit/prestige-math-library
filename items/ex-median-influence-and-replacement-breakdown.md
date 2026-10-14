@@ -2,7 +2,7 @@
 id: ex-median-influence-and-replacement-breakdown
 kind: example
 title: A smooth median has bounded influence and about one-half breakdown
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 12

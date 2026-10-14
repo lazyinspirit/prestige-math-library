@@ -2,7 +2,7 @@
 id: ex-bernoulli-sample-mean-consistency
 kind: example
 title: "The Bernoulli sample mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

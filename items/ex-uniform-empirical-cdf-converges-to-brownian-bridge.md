@@ -2,7 +2,7 @@
 id: ex-uniform-empirical-cdf-converges-to-brownian-bridge
 kind: example
 title: The uniform empirical CDF converges to a Brownian bridge
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

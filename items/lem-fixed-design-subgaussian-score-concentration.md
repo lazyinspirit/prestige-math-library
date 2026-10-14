@@ -2,7 +2,7 @@
 id: lem-fixed-design-subgaussian-score-concentration
 kind: lemma
 title: "Sub-Gaussian score bound under fixed-design incoherence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

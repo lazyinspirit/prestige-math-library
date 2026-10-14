@@ -2,7 +2,7 @@
 id: lem-finite-prior-lan-bayes-envelope-convergence
 kind: lemma
 title: Finite-prior Bayes envelopes converge under pointwise LAN
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: def-empirical-process-and-rademacher-process
 kind: definition
 title: "Empirical, centered, and Rademacher processes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

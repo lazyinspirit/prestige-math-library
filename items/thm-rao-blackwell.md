@@ -2,7 +2,7 @@
 id: thm-rao-blackwell
 kind: theorem
 title: "Rao–Blackwell theorem for scalar finite-variance estimators"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

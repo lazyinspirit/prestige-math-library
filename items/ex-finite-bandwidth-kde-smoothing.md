@@ -2,7 +2,7 @@
 id: ex-finite-bandwidth-kde-smoothing
 kind: example
 title: "Finite-bandwidth Gaussian smoothing"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

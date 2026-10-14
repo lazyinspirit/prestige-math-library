@@ -2,7 +2,7 @@
 id: thm-orthogonal-transform-preserves-standard-normal-product-law
 kind: theorem
 title: "Orthogonal transformations preserve the standard normal product law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

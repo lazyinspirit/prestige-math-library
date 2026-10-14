@@ -2,7 +2,7 @@
 id: lem-mlr-orders-randomized-thresholds
 kind: lemma
 title: MLR orders the power of randomized thresholds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

@@ -2,7 +2,7 @@
 id: alg-multivariate-trimmed-mean
 kind: algorithm
 title: "Adaptive multivariate trimmed mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

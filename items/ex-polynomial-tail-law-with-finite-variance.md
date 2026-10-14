@@ -2,7 +2,7 @@
 id: ex-polynomial-tail-law-with-finite-variance
 kind: example
 title: A polynomial-tail law with finite variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

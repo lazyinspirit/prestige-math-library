@@ -2,7 +2,7 @@
 id: lem-positive-lebesgue-components-of-a-positive-measure
 kind: lemma
 title: "Lebesgue components of a positive finite measure are positive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

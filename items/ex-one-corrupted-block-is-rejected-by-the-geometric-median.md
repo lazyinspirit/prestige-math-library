@@ -2,7 +2,7 @@
 id: ex-one-corrupted-block-is-rejected-by-the-geometric-median
 kind: example
 title: One corrupted block is rejected by the geometric median
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

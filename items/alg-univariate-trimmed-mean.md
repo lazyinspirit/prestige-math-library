@@ -2,7 +2,7 @@
 id: alg-univariate-trimmed-mean
 kind: algorithm
 title: "Split-sample univariate winsorized trimmed mean"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

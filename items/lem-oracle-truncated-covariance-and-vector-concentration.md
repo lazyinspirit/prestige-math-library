@@ -2,7 +2,7 @@
 id: lem-oracle-truncated-covariance-and-vector-concentration
 kind: lemma
 title: Oracle-truncated covariance and vector concentration under finite matrix variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

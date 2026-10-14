@@ -2,7 +2,7 @@
 id: thm-lasso-basic-inequality
 kind: theorem
 title: "Lasso basic inequality and cone constraint"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

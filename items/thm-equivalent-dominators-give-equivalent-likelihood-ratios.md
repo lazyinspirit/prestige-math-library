@@ -2,7 +2,7 @@
 id: thm-equivalent-dominators-give-equivalent-likelihood-ratios
 kind: theorem
 title: "Equivalent dominating measures give equivalent likelihood ratios"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

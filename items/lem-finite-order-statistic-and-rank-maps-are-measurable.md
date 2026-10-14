@@ -2,7 +2,7 @@
 id: lem-finite-order-statistic-and-rank-maps-are-measurable
 kind: lemma
 title: "Finite order statistics and rank maps are measurable"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

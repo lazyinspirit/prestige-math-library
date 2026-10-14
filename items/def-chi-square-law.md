@@ -2,7 +2,7 @@
 id: def-chi-square-law
 kind: definition
 title: "Chi-square laws, including zero degrees"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

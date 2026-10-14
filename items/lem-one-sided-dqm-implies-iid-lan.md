@@ -2,7 +2,7 @@
 id: lem-one-sided-dqm-implies-iid-lan
 kind: lemma
 title: A one-sided DQM path yields an iid LAN proxy
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

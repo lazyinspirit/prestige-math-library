@@ -2,7 +2,7 @@
 id: ex-gaussian-maximum-concentration
 kind: example
 title: "A Gaussian maximum without independence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: lem-weak-lq-thresholded-covariance-row-sum
 kind: lemma
 title: "Weak-lq thresholding error from an entrywise deviation event"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

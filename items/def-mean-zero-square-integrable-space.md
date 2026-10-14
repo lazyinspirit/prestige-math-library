@@ -2,7 +2,7 @@
 id: def-mean-zero-square-integrable-space
 kind: definition
 title: Mean-zero square-integrable functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

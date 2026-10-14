@@ -2,7 +2,7 @@
 id: lem-weak-lq-thresholded-covariance-expected-risk
 kind: lemma
 title: "Expected squared operator error of thresholded sparse covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

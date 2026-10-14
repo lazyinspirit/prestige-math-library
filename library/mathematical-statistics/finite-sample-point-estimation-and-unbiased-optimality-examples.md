@@ -1,7 +1,7 @@
 ---
 page: finite-sample-point-estimation-and-unbiased-optimality-examples
 title: "Finite-Sample Point Estimation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-binomial-sample-proportion

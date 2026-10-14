@@ -2,7 +2,7 @@
 id: cex-nadaraya-watson-design-gradient-and-boundary-bias
 kind: counterexample
 title: Nadaraya–Watson bias from design gradients and boundaries
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

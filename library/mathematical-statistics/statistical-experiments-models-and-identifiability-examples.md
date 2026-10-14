@@ -1,7 +1,7 @@
 ---
 page: statistical-experiments-models-and-identifiability-examples
 title: "Statistical Experiments, Models and Identifiability — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-identifiable-bernoulli-model-and-estimand

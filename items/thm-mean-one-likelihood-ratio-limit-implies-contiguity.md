@@ -2,7 +2,7 @@
 id: thm-mean-one-likelihood-ratio-limit-implies-contiguity
 kind: theorem
 title: A mean-one likelihood-ratio limit implies contiguity
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

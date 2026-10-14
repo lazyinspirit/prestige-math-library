@@ -1,7 +1,7 @@
 ---
 page: decision-theoretic-upper-bounds-and-oracle-risk
 title: "Decision-Theoretic Upper Bounds"
-status: draft
+status: published
 items:
   - def-fixed-design-projection-estimator
   - lem-binomial-support-count-bound

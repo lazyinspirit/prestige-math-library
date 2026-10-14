@@ -2,7 +2,7 @@
 id: def-student-t-and-f-laws
 kind: definition
 title: "Student t and Fisher F laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

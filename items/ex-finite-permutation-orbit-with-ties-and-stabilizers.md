@@ -2,7 +2,7 @@
 id: ex-finite-permutation-orbit-with-ties-and-stabilizers
 kind: example
 title: "A permutation orbit with tied ranks and nontrivial stabilizers"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

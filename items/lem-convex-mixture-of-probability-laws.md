@@ -2,7 +2,7 @@
 id: lem-convex-mixture-of-probability-laws
 kind: lemma
 title: "A convex mixture of probability laws is a probability law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

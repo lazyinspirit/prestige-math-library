@@ -7,7 +7,7 @@ verification:
 id: ex-degenerate-asymptotic-distribution-with-rare-outliers
 kind: example
 title: "A degenerate weak limit with persistent expectation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-multivariate-mean-rate-given-correct-scale-event
 kind: lemma
 title: "The multivariate trimmed-mean rate follows from a correct-scale slab event"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

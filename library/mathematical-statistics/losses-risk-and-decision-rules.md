@@ -1,7 +1,7 @@
 ---
 page: losses-risk-and-decision-rules
 title: "Loss, Risk and Decision Theory"
-status: draft
+status: published
 items:
   - lem-finite-dimensional-integral-jensen-for-convex-loss
   - lem-prior-and-model-kernel-define-joint-law

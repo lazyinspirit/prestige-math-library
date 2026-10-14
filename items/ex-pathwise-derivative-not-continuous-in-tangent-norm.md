@@ -7,7 +7,7 @@ verification:
 id: ex-pathwise-derivative-not-continuous-in-tangent-norm
 kind: example
 title: A mean derivative that is not continuous in the tangent norm
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 9

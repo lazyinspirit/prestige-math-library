@@ -2,7 +2,7 @@
 id: def-contamination-robust-risk
 kind: definition
 title: "Contamination-robust expected risk and tail risk"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

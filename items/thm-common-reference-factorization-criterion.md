@@ -2,7 +2,7 @@
 id: thm-common-reference-factorization-criterion
 kind: theorem
 title: "Common-reference factorization criterion for sufficiency"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

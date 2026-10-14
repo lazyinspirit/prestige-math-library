@@ -2,7 +2,7 @@
 id: thm-finite-variance-geometric-median-mean-bound
 kind: theorem
 title: "Finite-variance Hilbert mean bound for geometric medians of means"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

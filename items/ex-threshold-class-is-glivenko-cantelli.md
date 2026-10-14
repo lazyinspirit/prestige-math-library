@@ -2,7 +2,7 @@
 id: ex-threshold-class-is-glivenko-cantelli
 kind: example
 title: The uniform threshold class is Glivenko–Cantelli
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

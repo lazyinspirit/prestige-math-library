@@ -2,7 +2,7 @@
 id: def-test-size-and-power
 kind: definition
 title: "Test size and power"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

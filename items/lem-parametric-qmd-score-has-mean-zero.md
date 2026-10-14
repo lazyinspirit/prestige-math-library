@@ -2,7 +2,7 @@
 id: lem-parametric-qmd-score-has-mean-zero
 kind: lemma
 title: A finite-dimensional QMD score has mean zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

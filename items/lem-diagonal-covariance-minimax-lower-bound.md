@@ -2,7 +2,7 @@
 id: lem-diagonal-covariance-minimax-lower-bound
 kind: lemma
 title: "Diagonal covariance lower bound with bounded-risk saturation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

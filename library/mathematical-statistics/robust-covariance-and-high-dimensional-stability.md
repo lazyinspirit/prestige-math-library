@@ -1,7 +1,7 @@
 ---
 page: robust-covariance-and-high-dimensional-stability
 title: Robust Covariance and Sparse Robust Estimation
-status: draft
+status: published
 items:
 - def-covariance-matrix-of-a-random-vector
 - lem-finite-dimensional-golden-thompson-trace-inequality

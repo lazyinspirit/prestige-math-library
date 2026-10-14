@@ -2,7 +2,7 @@
 id: def-fisher-information-metric-distance
 kind: definition
 title: "Fisher-information metric distance to a set"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

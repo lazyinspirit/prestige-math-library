@@ -1,7 +1,7 @@
 ---
 page: robust-mean-estimation-under-heavy-tails-examples
 title: "Robust Means under Heavy Tails — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-one-corrupted-block-is-rejected-by-the-geometric-median

@@ -2,7 +2,7 @@
 id: thm-pivot-inversion-exact-coverage
 kind: theorem
 title: Coverage from pivot inversion and exact calibration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

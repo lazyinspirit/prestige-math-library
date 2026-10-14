@@ -2,7 +2,7 @@
 id: lem-epsilon-net-of-unit-sphere-has-cardinality-bound
 kind: lemma
 title: "Finite epsilon nets of the Euclidean sphere"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

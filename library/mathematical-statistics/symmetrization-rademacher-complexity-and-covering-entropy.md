@@ -1,7 +1,7 @@
 ---
 page: symmetrization-rademacher-complexity-and-covering-entropy
 title: "Empirical-Process Complexity"
-status: draft
+status: published
 items:
   - def-empirical-process-and-rademacher-process
   - def-vc-class-of-sets-and-index

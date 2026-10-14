@@ -2,7 +2,7 @@
 id: thm-normal-mean-residual-independence-and-exact-t-pivot
 kind: theorem
 title: "Normal sample mean and residual are independent, giving the exact t pivot"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

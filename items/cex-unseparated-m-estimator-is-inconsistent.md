@@ -2,7 +2,7 @@
 id: cex-unseparated-m-estimator-is-inconsistent
 kind: counterexample
 title: "An exact M-estimator can fail without population separation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

@@ -1,7 +1,7 @@
 ---
 page: nonparametric-density-estimation-and-kernels-examples
 title: "Density Estimation — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-gaussian-kernel-pointwise-bias-variance

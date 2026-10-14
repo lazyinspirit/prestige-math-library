@@ -2,7 +2,7 @@
 id: lem-matrix-variance-intrinsic-dimension-at-least-one
 kind: lemma
 title: The covariance matrix variance ratio is at least one
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

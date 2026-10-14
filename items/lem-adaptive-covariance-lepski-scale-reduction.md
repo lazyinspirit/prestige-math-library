@@ -2,7 +2,7 @@
 id: lem-adaptive-covariance-lepski-scale-reduction
 kind: lemma
 title: Lepski scale selection transfers fixed-scale covariance bounds
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

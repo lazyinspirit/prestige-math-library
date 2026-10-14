@@ -2,7 +2,7 @@
 id: thm-kde-global-mise-upper-rate
 kind: theorem
 title: "Global MISE upper bound for the KDE"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

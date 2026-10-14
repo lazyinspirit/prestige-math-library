@@ -1,7 +1,7 @@
 ---
 page: "finite-sample-tests-neyman-pearson-and-valid-p-values-examples"
 title: "Tests, Neyman–Pearson and Valid P-values — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-uniform-null-p-value-is-anti-conservative

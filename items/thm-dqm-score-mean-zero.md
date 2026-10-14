@@ -2,7 +2,7 @@
 id: thm-dqm-score-mean-zero
 kind: theorem
 title: A DQM score has mean zero and is unique
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

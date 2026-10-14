@@ -2,7 +2,7 @@
 id: lem-permutation-equivariant-score-map-preserves-exchangeability
 kind: lemma
 title: "Permutation-equivariant scores preserve exchangeability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

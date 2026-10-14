@@ -2,7 +2,7 @@
 id: alg-bic-penalized-least-squares
 kind: algorithm
 title: "Penalized support-search least squares"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

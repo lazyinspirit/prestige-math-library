@@ -1,7 +1,7 @@
 ---
 page: dominated-experiments-likelihood-and-sufficiency-examples
 title: "Domination and Likelihood Ratios — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-bernoulli-likelihood-ratio-and-change-of-measure

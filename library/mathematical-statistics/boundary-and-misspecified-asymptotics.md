@@ -1,7 +1,7 @@
 ---
 page: boundary-and-misspecified-asymptotics
 title: "Nonregular and Misspecified Limits"
-status: draft
+status: published
 items:
   - def-pseudo-true-parameter-under-misspecification
   - thm-m-estimator-sandwich-limit-under-misspecification

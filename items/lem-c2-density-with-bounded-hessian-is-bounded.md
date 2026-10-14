@@ -2,7 +2,7 @@
 id: lem-c2-density-with-bounded-hessian-is-bounded
 kind: lemma
 title: "An integrable C² density with bounded Hessian is bounded"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

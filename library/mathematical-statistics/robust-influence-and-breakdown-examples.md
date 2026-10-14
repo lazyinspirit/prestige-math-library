@@ -1,7 +1,7 @@
 ---
 page: robust-influence-and-breakdown-examples
 title: Influence and Breakdown — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-mean-influence-and-replacement-breakdown

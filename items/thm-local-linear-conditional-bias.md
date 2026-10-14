@@ -2,7 +2,7 @@
 id: thm-local-linear-conditional-bias
 kind: theorem
 title: Conditional-on-design bias of the empirical local-linear estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

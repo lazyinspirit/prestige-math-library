@@ -2,7 +2,7 @@
 id: thm-test-inversion-coverage
 kind: theorem
 title: Coverage from test inversion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

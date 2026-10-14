@@ -1,7 +1,7 @@
 ---
 page: gaussian-orthogonal-decomposition-and-quadratic-forms
 title: "Gaussian Orthogonal Decomposition and Quadratic Forms"
-status: draft
+status: published
 items:
   - thm-orthogonal-transform-preserves-standard-normal-product-law
   - def-chi-square-law

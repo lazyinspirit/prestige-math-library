@@ -2,7 +2,7 @@
 id: lem-prior-and-model-kernel-define-joint-law
 kind: lemma
 title: A prior and model kernel define a joint law
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

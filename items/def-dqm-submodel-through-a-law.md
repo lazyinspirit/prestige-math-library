@@ -2,7 +2,7 @@
 id: def-dqm-submodel-through-a-law
 kind: definition
 title: A dominated differentiable-in-quadratic-mean submodel
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

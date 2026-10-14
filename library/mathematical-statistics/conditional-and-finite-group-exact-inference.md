@@ -1,7 +1,7 @@
 ---
 page: conditional-and-finite-group-exact-inference
 title: "Conditional and Finite-Group Exact Inference"
-status: draft
+status: published
 items:
   - lem-conditional-kernel-tail-and-atom-evaluations-are-measurable
   - lem-randomized-probability-integral-transform

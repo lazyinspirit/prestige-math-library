@@ -2,7 +2,7 @@
 id: lem-dirac-integral-evaluation
 kind: lemma
 title: "Integration against a Dirac measure evaluates at its point"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

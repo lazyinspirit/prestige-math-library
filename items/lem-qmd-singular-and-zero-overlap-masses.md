@@ -2,7 +2,7 @@
 id: lem-qmd-singular-and-zero-overlap-masses
 kind: lemma
 title: QMD controls singular and zero-overlap masses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

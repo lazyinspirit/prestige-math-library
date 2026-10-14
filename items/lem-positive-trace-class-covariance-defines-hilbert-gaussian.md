@@ -2,7 +2,7 @@
 id: lem-positive-trace-class-covariance-defines-hilbert-gaussian
 kind: lemma
 title: Positive trace-class covariance defines a Hilbert Gaussian
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-projection-is-linear-and-contractive
 kind: lemma
 title: "Finite-dimensional orthogonal projections are linear and contractive"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

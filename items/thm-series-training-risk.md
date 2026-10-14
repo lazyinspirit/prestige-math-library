@@ -2,7 +2,7 @@
 id: thm-series-training-risk
 kind: theorem
 title: Expected empirical training risk for spline series least squares
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

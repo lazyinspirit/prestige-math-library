@@ -2,7 +2,7 @@
 id: lem-uniqueness-of-a-multivariate-exponential-transform
 kind: lemma
 title: "Uniqueness of a multivariate exponential transform"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

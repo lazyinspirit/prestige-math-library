@@ -2,7 +2,7 @@
 id: ex-finite-class-rademacher-and-uniform-deviation
 kind: example
 title: "A two-function class on a Bernoulli sample"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

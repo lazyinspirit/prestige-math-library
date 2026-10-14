@@ -2,7 +2,7 @@
 id: lem-fixed-scale-truncated-covariance-deviation
 kind: lemma
 title: Fixed-scale matrix-truncated covariance deviation under finite matrix variance
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

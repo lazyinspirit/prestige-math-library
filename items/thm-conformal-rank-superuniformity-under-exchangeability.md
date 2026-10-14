@@ -2,7 +2,7 @@
 id: thm-conformal-rank-superuniformity-under-exchangeability
 kind: theorem
 title: "Conformal rank superuniformity under exchangeability"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

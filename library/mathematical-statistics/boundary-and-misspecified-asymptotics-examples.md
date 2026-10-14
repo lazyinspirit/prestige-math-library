@@ -1,7 +1,7 @@
 ---
 page: boundary-and-misspecified-asymptotics-examples
 title: "Nonregular and Misspecified Limits — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-uniform-endpoint-mle

@@ -2,7 +2,7 @@
 id: def-density-target-and-kernel-density-estimator
 kind: definition
 title: "Density targets and the kernel density estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

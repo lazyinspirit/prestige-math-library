@@ -2,7 +2,7 @@
 id: thm-thresholded-sparse-covariance-high-probability-bound
 kind: theorem
 title: "High-probability operator error for thresholded weak-lq covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

@@ -2,7 +2,7 @@
 id: cex-vc-entropy-exponent-cannot-be-uniform-in-r
 kind: counterexample
 title: "Finite thresholds rule out an r-independent VC covering bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

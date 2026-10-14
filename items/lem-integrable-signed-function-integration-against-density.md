@@ -2,7 +2,7 @@
 id: lem-integrable-signed-function-integration-against-density
 kind: lemma
 title: "Bounded signed integrals obey the density formula"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

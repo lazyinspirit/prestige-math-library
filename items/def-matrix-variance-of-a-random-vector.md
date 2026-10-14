@@ -2,7 +2,7 @@
 id: def-matrix-variance-of-a-random-vector
 kind: definition
 title: Matrix variance for covariance estimation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

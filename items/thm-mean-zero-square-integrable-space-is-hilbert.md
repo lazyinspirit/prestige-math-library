@@ -2,7 +2,7 @@
 id: thm-mean-zero-square-integrable-space-is-hilbert
 kind: theorem
 title: The mean-zero L² space is a Hilbert space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

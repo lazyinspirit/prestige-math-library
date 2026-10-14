@@ -2,7 +2,7 @@
 id: ex-dense-huber-covariance-model
 kind: example
 title: Dense Gaussian Huber covariance model
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

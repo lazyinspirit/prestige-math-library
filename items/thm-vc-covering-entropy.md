@@ -2,7 +2,7 @@
 id: thm-vc-covering-entropy
 kind: theorem
 title: "VC-subgraph covering entropy with its finite-r logarithmic bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

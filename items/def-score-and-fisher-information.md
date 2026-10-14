@@ -2,7 +2,7 @@
 id: def-score-and-fisher-information
 kind: definition
 title: "Score and Fisher information"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

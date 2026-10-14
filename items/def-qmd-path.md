@@ -2,7 +2,7 @@
 id: def-qmd-path
 kind: definition
 title: Quadratic-mean differentiability at a parameter
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

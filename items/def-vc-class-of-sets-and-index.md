@@ -2,7 +2,7 @@
 id: def-vc-class-of-sets-and-index
 kind: definition
 title: "Shattering, VC dimension, and first-unshattered index for set classes"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

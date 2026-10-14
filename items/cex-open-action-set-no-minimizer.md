@@ -2,7 +2,7 @@
 id: cex-open-action-set-no-minimizer
 kind: counterexample
 title: An open action set need not contain a posterior-risk minimizer
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

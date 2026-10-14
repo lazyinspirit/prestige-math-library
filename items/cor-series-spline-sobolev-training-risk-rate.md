@@ -2,7 +2,7 @@
 id: cor-series-spline-sobolev-training-risk-rate
 kind: corollary
 title: Sobolev rate for spline-series training risk
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

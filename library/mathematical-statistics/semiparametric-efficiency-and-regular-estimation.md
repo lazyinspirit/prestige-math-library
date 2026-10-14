@@ -1,7 +1,7 @@
 ---
 page: semiparametric-efficiency-and-regular-estimation
 title: Semiparametric Efficiency
-status: draft
+status: published
 items:
   - thm-asymptotic-linearity-implies-normality
   - lem-finite-dimensional-functional-convolution-bound

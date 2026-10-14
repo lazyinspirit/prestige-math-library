@@ -1,7 +1,7 @@
 ---
 page: contamination-models-and-robust-risk
 title: "Contamination and Robust Risk"
-status: draft
+status: published
 items:
   - lem-convex-mixture-of-probability-laws
   - lem-common-law-forces-two-point-tail-loss-bound

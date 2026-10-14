@@ -2,7 +2,7 @@
 id: thm-empirical-risk-oracle-bound
 kind: theorem
 title: Empirical-risk oracle bound under uniform deviation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

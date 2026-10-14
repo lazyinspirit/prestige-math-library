@@ -2,7 +2,7 @@
 id: lem-scaled-gaussian-covariance-has-depth-at-least-half
 kind: lemma
 title: The scaled Gaussian covariance has matrix depth at least one half
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

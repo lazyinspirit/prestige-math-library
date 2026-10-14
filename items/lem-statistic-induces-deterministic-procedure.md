@@ -2,7 +2,7 @@
 id: lem-statistic-induces-deterministic-procedure
 kind: lemma
 title: "A statistic induces a deterministic probability kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

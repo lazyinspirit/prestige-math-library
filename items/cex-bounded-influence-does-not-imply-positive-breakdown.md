@@ -2,7 +2,7 @@
 id: cex-bounded-influence-does-not-imply-positive-breakdown
 kind: counterexample
 title: Bounded influence can coexist with vanishing replacement breakdown
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 12

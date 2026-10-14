@@ -2,7 +2,7 @@
 id: lem-finite-second-moment-covariance-matrix-is-well-defined
 kind: lemma
 title: A finite second moment defines a positive semidefinite covariance matrix
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

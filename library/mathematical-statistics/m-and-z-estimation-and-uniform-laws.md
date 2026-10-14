@@ -1,7 +1,7 @@
 ---
 page: m-and-z-estimation-and-uniform-laws
 title: "M- and Z-Estimators"
-status: draft
+status: published
 items:
   - def-m-estimator
   - def-z-estimator

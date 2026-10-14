@@ -2,7 +2,7 @@
 id: cex-collinear-design-fails-re-and-incoherence
 kind: counterexample
 title: "A collinear design defeats a sparsity-only coefficient guarantee"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

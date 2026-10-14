@@ -2,7 +2,7 @@
 id: def-local-spline-quasi-interpolant
 kind: definition
 title: Bounded local spline quasi-interpolants
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

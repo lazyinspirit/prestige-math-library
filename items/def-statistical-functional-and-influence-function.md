@@ -2,7 +2,7 @@
 id: def-statistical-functional-and-influence-function
 kind: definition
 title: Statistical functionals and gross-error influence functions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 9

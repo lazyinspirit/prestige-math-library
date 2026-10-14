@@ -2,7 +2,7 @@
 id: thm-bic-fitted-risk-bound
 kind: theorem
 title: "BIC fitted-value risk bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

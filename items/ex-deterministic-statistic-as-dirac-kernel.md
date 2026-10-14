@@ -2,7 +2,7 @@
 id: ex-deterministic-statistic-as-dirac-kernel
 kind: example
 title: "A deterministic statistic is a Dirac kernel"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

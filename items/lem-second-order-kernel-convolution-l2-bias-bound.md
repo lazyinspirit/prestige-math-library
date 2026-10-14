@@ -2,7 +2,7 @@
 id: lem-second-order-kernel-convolution-l2-bias-bound
 kind: lemma
 title: "Second-order kernel convolution has an L² bias bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

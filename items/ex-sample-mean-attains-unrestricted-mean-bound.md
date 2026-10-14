@@ -2,7 +2,7 @@
 id: ex-sample-mean-attains-unrestricted-mean-bound
 kind: example
 title: The sample mean attains the unrestricted mean bound
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 10

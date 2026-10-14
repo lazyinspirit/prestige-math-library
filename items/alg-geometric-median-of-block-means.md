@@ -2,7 +2,7 @@
 id: alg-geometric-median-of-block-means
 kind: algorithm
 title: "Geometric median of block means"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

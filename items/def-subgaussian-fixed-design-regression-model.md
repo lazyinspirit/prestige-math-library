@@ -2,7 +2,7 @@
 id: def-subgaussian-fixed-design-regression-model
 kind: definition
 title: "Fixed-design regression with sub-Gaussian noise"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

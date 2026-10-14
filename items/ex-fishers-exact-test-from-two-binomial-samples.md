@@ -2,7 +2,7 @@
 id: ex-fishers-exact-test-from-two-binomial-samples
 kind: example
 title: "Fisher's exact test from two Bernoulli samples"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

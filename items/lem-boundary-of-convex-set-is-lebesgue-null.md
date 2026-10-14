@@ -2,7 +2,7 @@
 id: lem-boundary-of-convex-set-is-lebesgue-null
 kind: lemma
 title: The boundary of a convex set is Lebesgue null
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

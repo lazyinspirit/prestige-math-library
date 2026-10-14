@@ -2,7 +2,7 @@
 id: thm-efficient-score-canonical-gradient
 kind: theorem
 title: Efficient score gives the canonical gradient
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 10

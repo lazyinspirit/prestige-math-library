@@ -2,7 +2,7 @@
 id: def-weak-lq-sparse-covariance-class
 kind: definition
 title: "Weak-lq covariance class with directional sub-Gaussian tails"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

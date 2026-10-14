@@ -2,7 +2,7 @@
 id: thm-weak-lq-sample-covariance-entrywise-deviation
 kind: theorem
 title: "Entrywise deviation for sample-centered covariance under directional Gaussian tails"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

@@ -2,7 +2,7 @@
 id: ex-uniform-maximum-pivot-confidence-interval
 kind: example
 title: Uniform maximum pivot interval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

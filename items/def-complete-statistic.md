@@ -2,7 +2,7 @@
 id: def-complete-statistic
 kind: definition
 title: "Complete statistics"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

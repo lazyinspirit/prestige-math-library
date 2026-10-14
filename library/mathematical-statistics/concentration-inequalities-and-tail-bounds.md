@@ -1,7 +1,7 @@
 ---
 page: concentration-inequalities-and-tail-bounds
 title: "Concentration"
-status: draft
+status: published
 items:
   - def-subgaussian-variable-and-vector
   - thm-hoeffding-independent-bounded-sums

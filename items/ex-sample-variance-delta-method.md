@@ -2,7 +2,7 @@
 id: ex-sample-variance-delta-method
 kind: example
 title: "Sample variance from a multivariate delta method"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

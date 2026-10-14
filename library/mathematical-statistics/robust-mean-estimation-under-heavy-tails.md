@@ -1,7 +1,7 @@
 ---
 page: robust-mean-estimation-under-heavy-tails
 title: "Robust Means under Heavy Tails"
-status: draft
+status: published
 items:
   - lem-variance-sensitive-bounded-empirical-process-concentration
   - alg-geometric-median-of-block-means

@@ -1,7 +1,7 @@
 ---
 page: "estimators-and-randomized-procedures"
 title: "Estimators and Randomized Procedures"
-status: draft
+status: published
 items:
   - def-randomized-procedure-as-a-markov-kernel
   - lem-procedure-action-law-is-measurable

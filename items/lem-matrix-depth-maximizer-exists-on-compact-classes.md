@@ -2,7 +2,7 @@
 id: lem-matrix-depth-maximizer-exists-on-compact-classes
 kind: lemma
 title: A matrix-depth maximizer exists on the bounded covariance classes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

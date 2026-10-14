@@ -2,7 +2,7 @@
 id: def-kullback-leibler-divergence
 kind: definition
 title: "Kullback–Leibler divergence"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

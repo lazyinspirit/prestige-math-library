@@ -7,7 +7,7 @@ verification:
 id: cex-terminal-weak-limit-does-not-imply-path-weak-limit
 kind: counterexample
 title: A terminal weak limit does not imply a path-space weak limit
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

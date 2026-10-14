@@ -2,7 +2,7 @@
 id: def-parametric-statistical-model
 kind: definition
 title: "Parametric statistical models"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

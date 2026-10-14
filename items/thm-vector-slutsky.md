@@ -2,7 +2,7 @@
 id: thm-vector-slutsky
 kind: theorem
 title: "Vector Slutsky theorem"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

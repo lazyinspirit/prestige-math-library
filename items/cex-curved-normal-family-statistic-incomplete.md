@@ -2,7 +2,7 @@
 id: cex-curved-normal-family-statistic-incomplete
 kind: counterexample
 title: "A curved normal family can make a sufficient statistic incomplete"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

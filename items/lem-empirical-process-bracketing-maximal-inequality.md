@@ -2,7 +2,7 @@
 id: lem-empirical-process-bracketing-maximal-inequality
 kind: lemma
 title: Bracketing maximal inequality for the empirical process
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

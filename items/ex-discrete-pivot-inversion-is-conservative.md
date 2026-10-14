@@ -2,7 +2,7 @@
 id: ex-discrete-pivot-inversion-is-conservative
 kind: example
 title: A discrete pivot can give conservative coverage
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

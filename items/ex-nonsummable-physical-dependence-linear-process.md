@@ -7,7 +7,7 @@ verification:
 id: ex-nonsummable-physical-dependence-linear-process
 kind: example
 title: A square-integrable linear shift with nonsummable physical dependence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

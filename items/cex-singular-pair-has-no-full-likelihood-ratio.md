@@ -2,7 +2,7 @@
 id: cex-singular-pair-has-no-full-likelihood-ratio
 kind: counterexample
 title: "A singular pair has no full likelihood ratio"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

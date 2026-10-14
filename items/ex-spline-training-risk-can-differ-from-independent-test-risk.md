@@ -2,7 +2,7 @@
 id: ex-spline-training-risk-can-differ-from-independent-test-risk
 kind: example
 title: Training risk and independent test risk are different quantities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

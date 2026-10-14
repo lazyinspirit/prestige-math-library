@@ -1,7 +1,7 @@
 ---
 page: pathwise-differentiability-influence-functions-and-efficient-scores
 title: Influence Functions and Efficient Scores
-status: draft
+status: published
 items:
   - thm-influence-curve-representers
   - def-asymptotically-linear-estimator-and-influence-function

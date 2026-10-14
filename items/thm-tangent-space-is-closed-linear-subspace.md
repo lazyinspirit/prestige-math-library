@@ -2,7 +2,7 @@
 id: thm-tangent-space-is-closed-linear-subspace
 kind: theorem
 title: A tangent space is a closed linear subspace
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

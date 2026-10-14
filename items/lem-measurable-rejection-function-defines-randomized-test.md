@@ -2,7 +2,7 @@
 id: lem-measurable-rejection-function-defines-randomized-test
 kind: lemma
 title: "Every measurable rejection function defines a randomized test"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

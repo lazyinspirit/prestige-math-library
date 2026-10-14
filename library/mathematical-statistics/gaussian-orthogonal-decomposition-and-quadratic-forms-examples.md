@@ -1,7 +1,7 @@
 ---
 page: gaussian-orthogonal-decomposition-and-quadratic-forms-examples
 title: "Gaussian Orthogonal Decomposition and Quadratic Forms — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-one-sample-unknown-variance-t-interval

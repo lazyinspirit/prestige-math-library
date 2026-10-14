@@ -2,7 +2,7 @@
 id: thm-huber-covariance-upper-and-lower-risk
 kind: theorem
 title: "Dense Gaussian Huber covariance: high-probability upper and capped lower bounds"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

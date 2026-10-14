@@ -2,7 +2,7 @@
 id: lem-adaptive-truncated-covariance-estimator-is-total
 kind: lemma
 title: The adaptive truncated covariance procedure is well-defined on its declared domain
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

@@ -2,7 +2,7 @@
 id: def-huber-covariance-model
 kind: definition
 title: Gaussian Huber contamination model for covariance estimation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

@@ -2,7 +2,7 @@
 id: ex-likelihood-ratio-test-supermartingale
 kind: example
 title: A finite-horizon likelihood-ratio test supermartingale
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

@@ -2,7 +2,7 @@
 id: lem-clean-dense-gaussian-covariance-minimax-lower-bound
 kind: lemma
 title: Clean Gaussian covariance has a capped squared operator lower rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

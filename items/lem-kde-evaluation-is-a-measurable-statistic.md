@@ -2,7 +2,7 @@
 id: lem-kde-evaluation-is-a-measurable-statistic
 kind: lemma
 title: "Each fixed-point KDE evaluation is a statistic"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

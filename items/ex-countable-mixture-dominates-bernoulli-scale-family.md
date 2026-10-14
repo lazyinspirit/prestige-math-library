@@ -2,7 +2,7 @@
 id: ex-countable-mixture-dominates-bernoulli-scale-family
 kind: example
 title: "Two endpoint laws dominate the Bernoulli scale family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

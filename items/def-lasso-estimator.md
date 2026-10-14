@@ -2,7 +2,7 @@
 id: def-lasso-estimator
 kind: definition
 title: "Lasso estimator for fixed design"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

@@ -2,7 +2,7 @@
 id: lem-regular-conditional-kernels-push-forward-under-measurable-random-maps
 kind: lemma
 title: "Regular conditional kernels push forward under measurable random maps"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

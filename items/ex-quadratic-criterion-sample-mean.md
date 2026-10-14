@@ -2,7 +2,7 @@
 id: ex-quadratic-criterion-sample-mean
 kind: example
 title: "The sample mean as a quadratic M-estimator"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

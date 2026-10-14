@@ -2,7 +2,7 @@
 id: thm-bayes-rule-minimizes-prior-risk
 kind: theorem
 title: A posterior-risk minimizer minimizes prior risk
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

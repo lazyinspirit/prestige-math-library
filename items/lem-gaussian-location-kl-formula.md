@@ -2,7 +2,7 @@
 id: lem-gaussian-location-kl-formula
 kind: lemma
 title: "KL divergence between equal-variance Gaussian location laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

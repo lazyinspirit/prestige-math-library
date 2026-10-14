@@ -2,7 +2,7 @@
 id: def-tangent-space
 kind: definition
 title: Closed tangent space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

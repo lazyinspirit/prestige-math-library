@@ -1,7 +1,7 @@
 ---
 page: minimax-lower-bounds-and-information-theoretic-methods-examples
 title: "Minimax Lower Bounds — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-gaussian-two-point-le-cam-lower-bound

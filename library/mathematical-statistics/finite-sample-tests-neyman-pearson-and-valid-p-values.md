@@ -1,7 +1,7 @@
 ---
 page: "finite-sample-tests-neyman-pearson-and-valid-p-values"
 title: "Tests, Neyman–Pearson and Valid P-values"
-status: draft
+status: published
 items:
   - lem-integrable-signed-function-integration-against-density
   - lem-likelihood-ratio-threshold-exists

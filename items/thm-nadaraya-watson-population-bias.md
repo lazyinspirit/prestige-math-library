@@ -2,7 +2,7 @@
 id: thm-nadaraya-watson-population-bias
 kind: theorem
 title: Pointwise population bias of the Nadaraya–Watson smoother
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

@@ -1,7 +1,7 @@
 ---
 page: concentration-inequalities-and-tail-bounds-examples
 title: "Concentration — Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-rademacher-sum-concentration

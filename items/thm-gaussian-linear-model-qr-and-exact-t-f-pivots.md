@@ -2,7 +2,7 @@
 id: thm-gaussian-linear-model-qr-and-exact-t-f-pivots
 kind: theorem
 title: "QR decomposition gives exact t and F pivots in the fixed Gaussian linear model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

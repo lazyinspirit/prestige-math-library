@@ -7,7 +7,7 @@ verification:
 id: cex-finite-mean-functional-without-l2-influence-curve
 kind: counterexample
 title: A finite-mean functional without a square-integrable influence curve
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 9

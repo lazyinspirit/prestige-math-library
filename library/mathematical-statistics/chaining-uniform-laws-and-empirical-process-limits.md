@@ -1,7 +1,7 @@
 ---
 page: chaining-uniform-laws-and-empirical-process-limits
 title: "Chaining and Uniform Limits"
-status: draft
+status: published
 items:
   - def-glivenko-cantelli-class
   - thm-empirical-risk-oracle-bound

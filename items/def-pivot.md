@@ -2,7 +2,7 @@
 id: def-pivot
 kind: definition
 title: Pivotal quantities
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

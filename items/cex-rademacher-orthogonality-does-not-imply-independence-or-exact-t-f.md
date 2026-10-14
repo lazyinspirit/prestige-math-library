@@ -2,7 +2,7 @@
 id: cex-rademacher-orthogonality-does-not-imply-independence-or-exact-t-f
 kind: counterexample
 title: "Rademacher errors show orthogonality alone gives neither independence nor exact t and F laws"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

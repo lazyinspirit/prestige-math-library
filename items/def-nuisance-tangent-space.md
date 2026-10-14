@@ -2,7 +2,7 @@
 id: def-nuisance-tangent-space
 kind: definition
 title: Nuisance tangent space
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 8

@@ -2,7 +2,7 @@
 id: def-mutual-information-for-finite-hypothesis-testing
 kind: definition
 title: "Mutual information for a finite uniform hypothesis experiment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 4

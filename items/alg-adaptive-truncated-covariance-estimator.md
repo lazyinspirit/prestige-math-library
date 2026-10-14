@@ -2,7 +2,7 @@
 id: alg-adaptive-truncated-covariance-estimator
 kind: algorithm
 title: Adaptive truncated covariance estimator
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 deps:

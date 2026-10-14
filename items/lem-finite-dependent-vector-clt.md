@@ -2,7 +2,7 @@
 id: lem-finite-dependent-vector-clt
 kind: lemma
 title: Finite-dependent vector central limit theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

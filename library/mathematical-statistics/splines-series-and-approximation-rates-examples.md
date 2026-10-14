@@ -1,7 +1,7 @@
 ---
 page: splines-series-and-approximation-rates-examples
 title: Splines and Series Methods — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-b-spline-basis-and-polynomial-reproduction

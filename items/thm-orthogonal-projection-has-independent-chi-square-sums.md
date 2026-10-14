@@ -2,7 +2,7 @@
 id: thm-orthogonal-projection-has-independent-chi-square-sums
 kind: theorem
 title: "Orthogonal projections split a standard Gaussian into independent chi-square sums"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

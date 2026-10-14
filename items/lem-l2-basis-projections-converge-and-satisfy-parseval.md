@@ -2,7 +2,7 @@
 id: lem-l2-basis-projections-converge-and-satisfy-parseval
 kind: lemma
 title: Complete orthonormal bases give norm-convergent projections and Parseval
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

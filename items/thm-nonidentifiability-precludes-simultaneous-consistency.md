@@ -2,7 +2,7 @@
 id: thm-nonidentifiability-precludes-simultaneous-consistency
 kind: theorem
 title: "Nonidentifiability precludes simultaneous consistency"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

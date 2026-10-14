@@ -2,7 +2,7 @@
 id: lem-procedure-action-law-is-measurable
 kind: lemma
 title: "A randomized procedure has a measurable action law"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 2

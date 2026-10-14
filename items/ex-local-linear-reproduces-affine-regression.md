@@ -2,7 +2,7 @@
 id: ex-local-linear-reproduces-affine-regression
 kind: example
 title: Local-linear regression reproduces affine responses
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 5

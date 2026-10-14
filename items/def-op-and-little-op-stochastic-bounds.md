@@ -2,7 +2,7 @@
 id: def-op-and-little-op-stochastic-bounds
 kind: definition
 title: "Stochastic order and convergence notation for finite-dimensional random vectors"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

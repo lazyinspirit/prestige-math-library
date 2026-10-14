@@ -2,7 +2,7 @@
 id: thm-p-value-superuniformity
 kind: theorem
 title: "Valid p-values yield level tests for nonempty disjoint alternatives"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 6

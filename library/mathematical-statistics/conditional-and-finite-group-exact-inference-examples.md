@@ -1,7 +1,7 @@
 ---
 page: conditional-and-finite-group-exact-inference-examples
 title: "Conditional and Finite-Group Exact Inference — Examples"
-status: draft
+status: published
 items: []
 examples:
   - cex-noninvariant-null-invalidates-group-pvalue

@@ -2,7 +2,7 @@
 id: def-restricted-eigenvalue-condition
 kind: definition
 title: "Restricted eigenvalue condition on the Lasso cone"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 0

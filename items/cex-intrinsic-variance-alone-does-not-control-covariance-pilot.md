@@ -2,7 +2,7 @@
 id: cex-intrinsic-variance-alone-does-not-control-covariance-pilot
 kind: counterexample
 title: "Intrinsic matrix variance alone does not control pilot-centered covariance truncation"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

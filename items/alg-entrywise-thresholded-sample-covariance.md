@@ -2,7 +2,7 @@
 id: alg-entrywise-thresholded-sample-covariance
 kind: algorithm
 title: "Entrywise-thresholded sample covariance"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 1

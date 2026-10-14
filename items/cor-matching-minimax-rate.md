@@ -2,7 +2,7 @@
 id: cor-matching-minimax-rate
 kind: corollary
 title: "Matching minimax rate in a Gaussian orthogonal sequence model"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 7

@@ -1,7 +1,7 @@
 ---
 page: finite-sample-point-estimation-and-unbiased-optimality
 title: "Finite-Sample Point Estimation"
-status: draft
+status: published
 items:
   - lem-dirac-integral-evaluation
   - lem-statistic-induces-deterministic-procedure

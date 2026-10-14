@@ -2,7 +2,7 @@
 id: thm-countable-mixture-dominates-sigmafinite-dominated-family
 kind: theorem
 title: "A countable mixture dominates a sigma-finite dominated family"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3

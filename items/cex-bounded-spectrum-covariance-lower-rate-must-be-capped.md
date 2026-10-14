@@ -7,7 +7,7 @@ verification:
 id: cex-bounded-spectrum-covariance-lower-rate-must-be-capped
 kind: counterexample
 title: A bounded covariance class forces a capped lower rate
-status: draft
+status: published
 origin: pipeline
 pipeline_run: mathematical-statistics-foundations-37
 dependency_level: 3
