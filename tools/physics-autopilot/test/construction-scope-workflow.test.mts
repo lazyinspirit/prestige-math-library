@@ -10,7 +10,8 @@ import { batchInput, batchPlan, collectBatch, loopState, loopDir, accepted, loop
 import { stages, workflowRevision } from '../stages/mathlib.mts';
 import { MODEL_PROFILE_NAMES } from '../../physics-support/models.mjs';
 import { assertCognitive } from '../src/roles.mts';
-import { recordStep1 } from '../../physics-support/step1-decisions.mjs';
+import { recordStep1, checkStep1 } from '../../physics-support/step1-decisions.mjs';
+import { loadStep3 } from '../../physics-support/frontier-snapshot.mjs';
 import { State, statePath } from '../src/state.mts';
 import { Reporter } from '../src/reporter.mts';
 import { Executor } from '../src/executor.mts';
@@ -113,9 +114,15 @@ test('owner resolution CLI accepts a genuine hold through the workspace tools sy
   assert.equal(batchPlan(f.ctx,'1'),null);
 });
 function scaffoldComplete(f:any,batch:string) {
-  const stage:any=stages.find(s=>s.id==='1-scaffold');
-  // The executor creates a fresh context on successive status/readiness calls.
-  return !stage.artifacts({...f.ctx},batch).some((path:string)=>path.endsWith('.scaffold-incomplete'));
+  // Supplier readiness is now enforced at the full Step-1 gate, independently
+  // of initial-authoring scheduling and durable local output accounting.
+  try {
+    const snapshot=loadStep3(f.repo,'demo');
+    const pages=snapshot.pages.filter(page=>page.batch===batch);
+    const pageIds=new Set(pages.map(page=>page.id));
+    const itemIds=new Set(pages.flatMap(page=>page.items.map(item=>item.id)));
+    return !checkStep1(snapshot).work.some(row=>itemIds.has(row.item)||pageIds.has(row.page));
+  } catch { return false; }
 }
 
 test('scaffold readiness across fresh contexts invalidates changed suppliers and receipt decisions',t=>{

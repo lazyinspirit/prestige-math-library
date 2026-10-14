@@ -40,14 +40,25 @@ must escalate significant unmet prerequisites directly to the owner, giving the
 smallest missing supplier, consuming claims/steps and affected consumers.
 Scaffolding agents fully author all assigned items, pages and proof contracts;
 a proof strategy or successful process alone is not a completed carrier.
-Readiness records bind the finished carriers. Supplier batches release their
-consumers only after nonempty authored inventories and current readiness exist.
+Readiness records bind the finished carriers. Initial authoring fills every
+available worker slot, up to the shared cap of 30, taking lower dependency levels
+first across the complete pending queue. Levels are priorities, not completion
+barriers: authors start and continue even when another pair's supplier is missing.
+As soon as a worker finishes, the engine starts the next pending pair without
+waiting for the rest of its level.
 
 Batch levels are computed mechanically during planning, recomputed after drift
 materialization and before construction dispatches, and recorded in
 `research/RUN-batch-dependency-levels.json`. The engine checks the current graph,
-including declared carrier dependencies, and waits for completed, current supplier
-content before releasing consumers. This adds no agent stage.
+including declared carrier dependencies, to determine that priority. No
+cross-pair prerequisite-completion barrier applies to initial authoring. A missing
+supplier retains its exact planned interface and honest proof-status obligation;
+authors complete the consuming argument conditionally and continue their remaining
+work. They keep explicit unresolved readiness records, never invent supplier
+acceptance or duplicate another pair's ownership. Completion accounting requires
+local authored carriers, inventories, contracts, coverage and readiness records.
+The complete, drained Step-1 gate battery still requires current supplier content,
+resolved readiness and correct dependency levels before review. This adds no stage.
 
 Item `dependency_level` is determined before writing item/page carriers, recorded
 and independently checked in Step 1: zero
