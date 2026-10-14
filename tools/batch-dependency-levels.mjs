@@ -57,7 +57,8 @@ export function computeRunBatchDependencyLevels(root, run) {
       && (item.deps ?? []).every(id => typeof id === 'string' && id), `${item.id}: deps must name items`);
   }
   const batches = [...new Set(snapshot.pages.map(page => page.batch))].sort(compare);
-  const graph = batches.map(batch => ({ batch, requires: prerequisiteBatches(root, run, batch) }));
+  const pass = { scopeSnapshot: snapshot };
+  const graph = batches.map(batch => ({ batch, requires: prerequisiteBatches(root, run, batch, pass) }));
   const rows = computeBatchDependencyLevels(graph);
   const manifests = batches.map(batch => [batch,
     readFileSync(join(root, 'research', `${run}-batch-${batch}.pages.json`), 'utf8')]);

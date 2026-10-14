@@ -1086,13 +1086,16 @@ export class Executor {
     // prevents a supplier repair and its consumer repair from launching in the
     // same wave even if an old success receipt still exists for the supplier.
     let readyPlans = plans;
-    if (stage.id === '2-scope-review' && plans.every(plan => plan.role === 'scope-reviewer')) {
-      // Read-only scope reviewers share one current dependency check. They
-      // do not create imminent writes requiring a separate graph per plan.
+    const parallelAuthoring = initialDispatch && stage.unitPrerequisitePolicy === 'priority'
+      && !stage.exclusiveCohort;
+    if (parallelAuthoring || stage.id === '2-scope-review' && plans.every(plan => plan.role === 'scope-reviewer')) {
+      // Read-only reviewers and priority authors with disjoint outputs share
+      // one current graph check, rather than rebuilding it for every slot.
       const active = new Set<Unit>([...this.inflight.values()]
         .filter(row => row.meta.stage === stage.id).flatMap(row => row.meta.covers.map(String)));
       for (const unit of this.adoptedUnits(stage)) active.add(String(unit));
-      const readiness = this.unitReadiness(stage, this.ctx(), plans.flatMap(plan => (plan.covers ?? []).map(String)), active);
+      const readiness = this.unitReadiness(stage, this.ctx(), plans.flatMap(plan => (plan.covers ?? []).map(String)),
+        active, new Set(), new Set(), !parallelAuthoring);
       if (readiness.problem) { this.recordUnitPrerequisiteBlocker(stage, readiness.problem); return false; }
       if (readiness.deferred) return true;
       const ready = new Set(readiness.ready.map(String));

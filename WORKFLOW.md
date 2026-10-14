@@ -33,8 +33,9 @@ must escalate significant unmet prerequisites directly to the owner, giving the
 smallest missing supplier, consuming claims/steps and affected consumers.
 Scaffolding agents fully author all assigned items, pages and proof contracts;
 a proof strategy or successful process alone is not a completed carrier.
-Readiness records bind the finished carriers. Supplier batches release their
-consumers only after nonempty authored inventories and current readiness exist.
+Readiness records bind the finished carriers. Cross-pair supplier completion
+does not hold initial author dispatch; nonempty authored inventories and current
+readiness remain required for acceptance.
 
 Construction readiness retains its snapshot and receipt-stamped decisions across
 fresh controller contexts belonging to the same configuration and frontier.
@@ -45,6 +46,8 @@ and readiness decisions. Failed input scans discard partial cached inputs and
 keep the scaffold incomplete. Scheduling caches never certify changed inputs.
 
 Planning and the existing drift-apply join write `research/RUN-batch-dependency-levels.json` before construction. Before each Step 1 dispatch the engine recomputes this artifact from current page requirements and manifest/carrier logical dependencies, rejects batch cycles, and includes the batch level and suppliers in the worker task. Batch level is zero without in-run suppliers, otherwise one plus their maximum level. Initial mathematics authoring uses `unitPrerequisitePolicy: 'priority'`: sort all pending pairs by dependency level before selecting slots, without waiting for cross-pair suppliers to finish. Fill the configured stage, role and global capacity, then refill immediately on worker completion; retain adoption and exclusive-writer guards. For 7, 6, 8 and 12 pairs in successive levels with 30 slots, start all 21 pairs in the first three levels and 9 in the fourth, then admit the next fourth-level pair whenever a slot opens. Authors continue independent work against declared interfaces and record unresolved supplier checks honestly; they cannot claim readiness or quote absent supplier bodies. Actual authored-carrier/readiness requirements, full gates, review and supplier-before-consumer repair remain mandatory. Other stages retain the default completion policy. External suppliers remain context.
+
+Each dispatch pass shares a fresh manifest/alias snapshot across its dependency graph. Priority authors with disjoint outputs receive one fan-out graph check rather than one full graph rebuild per slot. Snapshots are confined to the current pass; subsequent dispatches read current inputs again.
 
 Item inventories and logical dependencies are determined in scaffold manifests before item carriers are written; authors compute labels there and construct carriers in ascending item level. Item `dependency_level` is recorded and independently checked in Step 1: zero
 without in-run logical suppliers, otherwise one plus the maximum supplier level.

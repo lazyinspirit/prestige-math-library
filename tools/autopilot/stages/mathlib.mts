@@ -1095,7 +1095,7 @@ export const stages = [
       ? MODEL_PROFILE_NAMES.lunaMax
       : undefined,
     units: (ctx: any) => batches(ctx),
-    unitPrerequisites: (ctx: any, unit: string) => prerequisiteBatches(ctx.repo, ctx.run, unit),
+    unitPrerequisites: (ctx: any, unit: string) => prerequisiteBatches(ctx.repo, ctx.run, unit, ctx),
     unitPrerequisitePolicy: 'priority',
     artifacts: (ctx: any, unit: string) => [...scaffoldArtifacts(ctx, unit), ...authorArtifacts(ctx, unit)],
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
