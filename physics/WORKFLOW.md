@@ -201,7 +201,11 @@ the command; research and disjoint item authoring stay outside it. Existing
 manual acquire/release callers remain supported and must stop shared writes
 when acquisition fails.
 Collection binds its genuine dispatch receipts while retaining historical lane
-identities for older evidence. Native Step-5 sweeps use `--strict-context`:
+identities for older evidence. Evidence file SHA-256 guards compare exact raw
+bytes, including binary sources; collection and guarded impact recovery never
+decode files before checking those guards. A genuine byte mismatch still blocks
+collection or recovery without rewriting protected evidence.
+Native Step-5 sweeps use `--strict-context`:
 a resumed verdict must match both the current judge-form item hash and its
 current frozen prompt context. A changed supplier context requires a fresh
 verdict even if this item's own bytes are unchanged; exact current verdicts
