@@ -368,6 +368,13 @@ original supplier owner's same-issue classification, reviewed pre-repair archive
 final source excerpts and scientific release. This reconciles one canonical
 defect's ownership; it grants no source acceptance or gate exemption.
 
+For a reader/refuter pair with identical observed source bytes but distinct
+contract carriers, `same-source-distinct-carrier` aliases additionally bind both
+original observation hashes, locations and severity, the authentic observed raw
+archive, and the frozen scope. The original scientific owner must explicitly
+classify the same underlying issue. Both reports and observations remain intact;
+ordinary ledger ownership and current-content checks still apply.
+
 Proof-contract inputs treat a bare decimal as a step reference only when that
 number identifies an actual proof step. Explicit `step p.q` references are
 checked even when the named step is missing.

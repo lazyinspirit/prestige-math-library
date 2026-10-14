@@ -37,6 +37,7 @@ export function ownerReviewedFindingAlias(root, run, group, prior, decision, tar
       || entry.primary_defect !== primary.defect || entry.alias_defect !== alias.defect
       || entry.primary_finding_sha256 !== hashValue(primary) || entry.alias_finding_sha256 !== hashValue(alias)) return false;
     const locationAlias = entry.kind === 'location-only-unbound-reader';
+    const distinctCarrierAlias = entry.kind === 'same-source-distinct-carrier';
     if (locationAlias) {
       if (prior.route !== 'reader' || decision.route !== 'flagged'
         || primary.defect !== alias.defect || primary.severity !== alias.severity
@@ -47,6 +48,18 @@ export function ownerReviewedFindingAlias(root, run, group, prior, decision, tar
         || prior.owner_resolution.length < 40
         || !/^[a-f0-9]{64}$/.test(alias.observed_sha256 ?? '')
         || !/^[a-f0-9]{64}$/.test(alias.observed_source?.item_sha256 ?? '')) return false;
+    } else if (distinctCarrierAlias) {
+      if (prior.route !== 'reader' || decision.route !== 'flagged'
+        || primary.severity !== alias.severity
+        || !/^[a-f0-9]{64}$/.test(primary.observed_sha256 ?? '')
+        || !/^[a-f0-9]{64}$/.test(alias.observed_sha256 ?? '')
+        || primary.observed_sha256 === alias.observed_sha256
+        || !/^[a-f0-9]{64}$/.test(primary.observed_source?.item_sha256 ?? '')
+        || primary.observed_source.item_sha256 !== alias.observed_source?.item_sha256
+        || primary.observed_source.snapshot !== alias.observed_source.snapshot
+        || primary.location !== entry.primary_location || alias.location !== entry.alias_location
+        || primary.observed_sha256 !== entry.primary_observed_sha256
+        || alias.observed_sha256 !== entry.alias_observed_sha256) return false;
     } else if (primary.defect === alias.defect
       || !/^[a-f0-9]{64}$/.test(primary.observed_sha256 ?? '') || primary.observed_sha256 !== alias.observed_sha256
       || primary.observed_source?.item_sha256 !== alias.observed_source?.item_sha256
@@ -82,6 +95,22 @@ export function ownerReviewedFindingAlias(root, run, group, prior, decision, tar
       || owner.original_labels_preserved?.[decision.obligation] !== alias.defect
       || typeof owner.rationale !== 'string' || owner.rationale.length < 80
       || owner.canonical_defect_id !== entry.original_defect_id) return false;
+    if (distinctCarrierAlias) {
+      for (const [record, finding, obligation] of [[owner.primary, primary, prior.obligation], [owner.alias, alias, decision.obligation]]) {
+        if (record?.obligation !== obligation || record.observed_sha256 !== finding.observed_sha256
+          || record.observed_source_item_sha256 !== finding.observed_source.item_sha256
+          || record.location !== finding.location || record.severity !== finding.severity) return false;
+      }
+      const observed = entry.observed_raw_archive;
+      bound(observed);
+      if (observed.sha256 !== primary.observed_source.item_sha256
+        || observed.path !== owner.observed_raw_archive?.path
+        || observed.sha256 !== owner.observed_raw_archive?.sha256) return false;
+      const scopeGuard = entry.frozen_scope_guard;
+      if (scopeGuard?.path !== `research/${run}-step3-scope-${primaryBatch}.json`) return false;
+      const scope = JSON.parse(bound(scopeGuard));
+      if (scope.run !== run || String(scope.batch) !== String(primaryBatch)) return false;
+    }
     const guards = entry.frozen_file_guards;
     if (!Array.isArray(guards) || guards.length !== 2
       || !guards.some(g => g.path === `research/${run}-reader-findings-${primaryBatch}.json`)
