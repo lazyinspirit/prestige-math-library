@@ -32,6 +32,12 @@ const INVENTORY_URL=new URL('./step5-downstream-inventory.mjs',import.meta.url);
 const INVENTORY_STAT=statSync(INVENTORY_URL);
 const { ownerDownstreamInventory }=await import(INVENTORY_URL.href+'?v='+INVENTORY_STAT.mtimeMs+':'+INVENTORY_STAT.size);
 
+const SCIENTIFIC_REPAIR_URL=new URL('./step5-scientific-repair.mjs',import.meta.url);
+const SCIENTIFIC_REPAIR_STAT=statSync(SCIENTIFIC_REPAIR_URL);
+const { ownerScientificRepair, scientificRepairCompletion }=await import(
+  SCIENTIFIC_REPAIR_URL.href+'?v='+SCIENTIFIC_REPAIR_STAT.mtimeMs+':'+SCIENTIFIC_REPAIR_STAT.size
+);
+
 export const digest = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 const read = path => JSON.parse(readFileSync(path, 'utf8'));
 const lines = path => existsSync(path) ? readFileSync(path, 'utf8').split(/\r?\n/).filter(Boolean).map(JSON.parse) : [];
@@ -40,7 +46,7 @@ export const packPath = (root, run, phase, round) => join(workflowDir(root, run)
 const atomic = (path, value) => { mkdirSync(resolve(path, '..'), {recursive:true}); const tmp = `${path}.${process.pid}.tmp`; writeFileSync(tmp, JSON.stringify(value,null,2)+'\n'); renameSync(tmp,path); };
 const frozen = (path, value) => { if (existsSync(path)) { if (JSON.stringify(read(path)) !== JSON.stringify(value)) throw Error(`immutable evidence conflict: ${path}`); } else atomic(path,value); };
 const key = row => `${row.id}\0${row.model}\0${row.context_sha256}`;
-const hashes = root => Object.fromEntries(readLibraryItems(root).map(row => [row.id,itemHashGuard(readFileSync(join(root,'items',`${row.id}.md`),'utf8'))]));
+const hashes = (root,items=readLibraryItems(root)) => Object.fromEntries(items.map(row => [row.id,itemHashGuard(readFileSync(join(root,'items',`${row.id}.md`),'utf8'))]));
 const statementHashes = root => Object.fromEntries(readLibraryItems(root).map(row => [row.id,row.statement_sha256]));
 const diff = (a,b) => [...new Set([...Object.keys(a),...Object.keys(b)])].filter(id=>a[id]!==b[id]).sort();
 const evidenceText = row => typeof row.reason === 'string' && row.reason.trim().length >= 40 && row.uncertain === false
@@ -521,7 +527,8 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
   const pack=readPack(root,run,phase,round);
   requireValue(pack.run===run&&pack.phase===phase&&pack.round===round,'collection pack identity mismatch');
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
-  const current=hashes(root),reported={...current};
+  const collectionItems=pack.scientific_repair?readLibraryItems(root):null;
+  const current=hashes(root,collectionItems??undefined),reported={...current};
   let external={repairs:[],evidence:{}};
   if(deferImpactClosure) {
     requireValue(!pack.rejected,'only owner waves can defer impact closure');
@@ -553,6 +560,9 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
     }
   }
   if(result.errors.length)throw Error(result.errors.join('\n'));
+  const scientificContexts=collectionItems?reviewContexts(collectionItems):null;
+  const scientificCompletion=scientificRepairCompletion(pack,reports,current,
+    row=>scientificContexts.matches(row,current));
   const evidence={...(pack.input_evidence??{}),...external.evidence,[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
   verifyEvidence(evidence);
   const creationAuthors=new Map();
@@ -606,6 +616,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false,correctio
   }
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
   if(external.repairs.length)receipt.external_owner_repairs=external.repairs;
+  if(scientificCompletion)receipt.scientific_repair_completion=scientificCompletion;
   if(correction){
     const correctionPath=join(workflowDir(root,run),correctionPhase(phase)+'-'+round+'-collected.json');
     Object.assign(receipt.evidence,correction.evidence,{[correctionPath]:digest(readFileSync(correctionPath,'utf8'))});
@@ -692,6 +703,40 @@ export function assertImpactProgress(packs,pending,current) {
 /** Called only after all three dispatches for the active pass have drained.
  * Completed evidence is immutable. Only missing or stale downstream reviews
  * enter the next three-owner pass; certification has not begun at this point. */
+function queueScientificRepair(root,run,phase,round,path,progress,request,current,items,frontier,pending) {
+  const nextPhase=nextImpactPhase(phase,progress),pair=new Set(request.subjects);
+  const {order,cycles}=orderImpacts(items,pending.filter(id=>!pair.has(id)));
+  const assignments={'1':[...request.subjects],'2':[],'3':[]};
+  order.forEach((id,index)=>assignments[index<Math.ceil(order.length/2)?'2':'3'].push(id));
+  const identity=libraryIdentity(root);
+  const pack={version:2,run,phase:nextPhase,basePhase:phase,round,repair_scope:'frontier',frontier_ids:[...frontier].sort(),
+    units:['1','2','3'],assignments,before:current,before_statements:Object.fromEntries(items.map(row=>[row.id,row.statement_sha256])),
+    before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),seeds:[],impacts:[],cycles,
+    failures:null,gateAssignments:{},ledger_updates:[],input_evidence:request.evidence,
+    scientific_repair:{request:request.request,payload:request.payload}};
+  frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
+  const task=workerReport(root,run,nextPhase,round,'1').replace(/\.json$/,'.task.md');
+  const instructions=[
+    '',
+    '# Root scientific repair, native owner 1 only',
+    'Root request: '+request.request.path+'. Root finding: '+request.payload.root_finding.defect_id+'.',
+    'Repair the coupled scientific pair in this order: '+request.subjects.join(', ')+'. Other lanes own only ordinary pending-context targets.',
+    'This is scientific source authoring and review, separate from formatting repair or outside handoff. Preserve all original completed packs/reports and sound existing indexing corrections. Restore the richest sound approved scope from the actual arguments; private proposals are evidence, not proof authority.',
+    'Both requested sources must receive necessary repairs and genuine current native repaired reviews. After the final coupled edits, examine their interface effects and bind both final review contexts; never refresh stale hashes without that examination.',
+    'Return root_finding_resolutions:[{defect_id:'+request.payload.root_finding.defect_id+',status:fixed,subjects:'+JSON.stringify(request.subjects)+',reason,uncertain:false,source_urls:[],familiar:true}]. Propose the corresponding canonical root-defect update in ledger_updates; the root owns adoption of that ledger proposal.',
+    'Do not invent a judge tuple, independent acceptance, canonical closure or certificate. If the requested rich scope is not proved, report uncertainty and leave the finding unresolved. Units 2 and 3 do not own this root-finding resolution.',
+    'Bind all additional nested scientific evidence actually read in supporting_evidence. Carry every necessary downstream affected-use referral in the ordinary report.',
+    ''
+  ].join('\n');
+  writeFileSync(task,readFileSync(task,'utf8')+instructions);
+  progress.scientific_repairs??=[];
+  progress.scientific_repairs.push({request:request.request,evidence:request.evidence,phase:nextPhase,
+    subjects:request.subjects,root_finding:request.payload.root_finding.defect_id,status:'pending'});
+  progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});
+  progress.activePhase=nextPhase;progress.complete=false;atomic(path,progress);
+  return {complete:false,pack,passes:progress.passes};
+}
+
 export function advanceImpact(root,run,phase,round) {
   requireValue(['impact-initial','impact-repeat','gate'].includes(phase),'invalid base owner phase');
   const path=impactProgressPath(root,run,phase,round);
@@ -700,25 +745,37 @@ export function advanceImpact(root,run,phase,round) {
   for(const row of progress.superseded??[])verifyEvidence(row.evidence);
   verifyEvidence(progress.maintenance_evidence);
   for(const repair of progress.format_repairs??[])verifyEvidence(repair.evidence);
+  for(const repair of progress.scientific_repairs??[])verifyEvidence(repair.evidence);
+  let scientificRequest=null;
   if(progress.complete){
     const closedPath=impactClosedPath(root,run,phase,round,progress);
-    if(existsSync(closedPath))verifyEvidence(read(closedPath).evidence);
-    if(!existsSync(join(workflowDir(root,run),'owner-format-repair-request.json')))return {complete:true,phase,round,passes:progress.passes};
-    const current=hashes(root),frontier=gateFrontier(root,run);
-    const request=ownerFormatRepair(root,run,phase,round,progress,current,frontier,closedPath);
-    if(!request)return {complete:true,phase,round,passes:progress.passes};
-    const nextPhase=nextImpactPhase(phase,progress),identity=libraryIdentity(root);
-    const assignments={'1':[],'2':[],'3':[]},{order,cycles}=orderImpacts(identity.items,request.subjects);
-    order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
-    const pack={version:2,run,phase:nextPhase,basePhase:phase,round,repair_scope:'frontier',frontier_ids:[...frontier].sort(),units:['1','2','3'],assignments,
-      before:current,before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
-      seeds:[],impacts:[],cycles,failures:request.failures,gateAssignments:{},ledger_updates:[],input_evidence:request.evidence,
-      review_contexts:reviewContextHashes(root,request.subjects),format_repair:{request:request.request,payload:request.payload,gate_request:request.gate_request}};
-    frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
-    progress.format_repairs??=[];
-    progress.format_repairs.push({request:request.request,evidence:request.evidence,phase:nextPhase,subjects:request.subjects});
-    progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;progress.complete=false;
-    atomic(path,progress);return {complete:false,pack,passes:progress.passes};
+    const closed=existsSync(closedPath)?read(closedPath):null;
+    if(closed)verifyEvidence(closed.evidence);
+    if(existsSync(join(workflowDir(root,run),'owner-scientific-repair-request.json'))){
+      const current=hashes(root),items=readLibraryItems(root),frontier=gateFrontier(root,run);
+      requireValue(closed&&[...frontier].every(id=>current[id]===closed.post?.[id]),
+        'frontier content changed after closure; reconcile authorship before scientific reopening');
+      scientificRequest=ownerScientificRepair(root,run,phase,round,progress,current,items,frontier);
+    }
+    if(scientificRequest)progress.complete=false;
+    else {
+      if(!existsSync(join(workflowDir(root,run),'owner-format-repair-request.json')))return {complete:true,phase,round,passes:progress.passes};
+      const current=hashes(root),frontier=gateFrontier(root,run);
+      const request=ownerFormatRepair(root,run,phase,round,progress,current,frontier,closedPath);
+      if(!request)return {complete:true,phase,round,passes:progress.passes};
+      const nextPhase=nextImpactPhase(phase,progress),identity=libraryIdentity(root);
+      const assignments={'1':[],'2':[],'3':[]},{order,cycles}=orderImpacts(identity.items,request.subjects);
+      order.forEach((id,index)=>assignments[String(Math.min(2,Math.floor(index/Math.max(1,Math.ceil(order.length/3))))+1)].push(id));
+      const pack={version:2,run,phase:nextPhase,basePhase:phase,round,repair_scope:'frontier',frontier_ids:[...frontier].sort(),units:['1','2','3'],assignments,
+        before:current,before_statements:statementHashes(root),before_aliases:Object.fromEntries(identity.aliases),home_pages:manifestHomes(root,run),
+        seeds:[],impacts:[],cycles,failures:request.failures,gateAssignments:{},ledger_updates:[],input_evidence:request.evidence,
+        review_contexts:reviewContextHashes(root,request.subjects),format_repair:{request:request.request,payload:request.payload,gate_request:request.gate_request}};
+      frozen(packPath(root,run,nextPhase,round),pack);writeTasks(root,pack,'repair');
+      progress.format_repairs??=[];
+      progress.format_repairs.push({request:request.request,evidence:request.evidence,phase:nextPhase,subjects:request.subjects});
+      progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;progress.complete=false;
+      atomic(path,progress);return {complete:false,pack,passes:progress.passes};
+    }
   }
   if(progress.activeMaintenance){
     const pack=maintenancePack(root,run,progress.activeMaintenance);
@@ -744,6 +801,17 @@ export function advanceImpact(root,run,phase,round) {
   const completed=progress.passes.map(pass=>read(join(workflowDir(root,run),`${pass}-${round}-collected.json`)));
   for(const receipt of completed)verifyEvidence(receipt.evidence);
   const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root),items=readLibraryItems(root);
+  for(const repair of progress.scientific_repairs??[])if(repair.status==='pending'&&repair.phase===active.phase){
+    const receipt=completed.find(row=>row.phase===active.phase);
+    const completionContexts=reviewContexts(items);
+    const completion=scientificRepairCompletion(active,active.units.map(unit=>read(workerReport(root,run,active.phase,round,unit))),
+      current,row=>completionContexts.matches(row,current));
+    requireValue(completion&&receipt.scientific_repair_completion?.request.sha256===repair.request.sha256,
+      'scientific repair lacks genuine current completion');
+    const receiptPath=join(workflowDir(root,run),active.phase+'-'+round+'-collected.json');
+    repair.status='consumed';repair.completion={path:receiptPath,sha256:digest(readFileSync(receiptPath,'utf8'))};
+    atomic(path,progress);
+  }
   const maintenance=maintenanceStatus(root,run),maintenanceIds=new Set(progress.work_order.filter(row=>row.kind==='maintenance').map(row=>row.id));
   const maintenanceChanges=maintenance.completed_changes.filter(row=>maintenanceIds.has(row.pack));
   const changed=diff(base.before,current),rawSeeds=[...new Set([...(base.seeds??[]),...completed.flatMap(receipt=>receipt.restated??receipt.changed),...maintenanceChanges.filter(row=>row.before_statement_sha256!==row.after_statement_sha256).map(row=>row.id)])];
@@ -770,6 +838,8 @@ export function advanceImpact(root,run,phase,round) {
   const contexts=reviewContexts(items);
   const snapshots=new Map([sourceReceipt,...completed].filter(Boolean).flatMap(receipt=>receipt.reviews.map(row=>[row.id,receipt.post])));
   const pending=[...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id))).sort();
+  scientificRequest??=ownerScientificRepair(root,run,phase,round,progress,current,items,scope.frontier);
+  if(scientificRequest)return queueScientificRepair(root,run,phase,round,path,progress,scientificRequest,current,items,scope.frontier,pending);
   if(pending.length) {
     assertImpactProgress(progress.passes.map(pass=>readPack(root,run,pass,round)),pending,current);
     const nextPhase=nextImpactPhase(phase,progress);
@@ -784,17 +854,20 @@ export function advanceImpact(root,run,phase,round) {
     progress.passes.push(nextPhase);progress.work_order.push({kind:'frontier',phase:nextPhase});progress.activePhase=nextPhase;atomic(path,progress);
     return {complete:false,pack,passes:progress.passes};
   }
+  requireValue((progress.scientific_repairs??[]).every(row=>row.status==='consumed'),
+    'root scientific repair still lacks completed native resolution');
   const outside=prepareMaintenance(root,run);
   if(!outside.complete){
     progress.activeMaintenance=outside.pack.id;
     if(!progress.work_order.some(row=>row.kind==='maintenance'&&row.id===outside.pack.id))progress.work_order.push({kind:'maintenance',id:outside.pack.id});
     atomic(path,progress);return {complete:false,maintenance:outside.pack,passes:progress.passes};
   }
-  const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{},...(progress.format_repairs??[]).map(row=>row.evidence));
+  const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{},...(progress.format_repairs??[]).map(row=>row.evidence),...(progress.scientific_repairs??[]).map(row=>row.evidence));
   for(const pass of progress.passes){const p=join(workflowDir(root,run),`${pass}-${round}-collected.json`);evidence[p]=digest(readFileSync(p,'utf8'));}
   for(const collection of maintenance.collections.filter(row=>maintenanceIds.has(row.pack)))evidence[join(root,collection.path)]=collection.sha256;
   const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,restated:seeds,post:current,evidence,downstream:scope.targets,consumer_maintenance:scope.maintenance,maintenance_packs:[...maintenanceIds],ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
-  const closedPath=join(workflowDir(root,run),`${phase}-${round}-closed${progress.format_repairs?.length?`-${progress.format_repairs.length+1}`:''}.json`);
+  const reopenedCount=(progress.format_repairs?.length??0)+(progress.scientific_repairs?.length??0);
+  const closedPath=join(workflowDir(root,run),phase+'-'+round+'-closed'+(reopenedCount?'-'+(reopenedCount+1):'')+'.json');
   frozen(closedPath,receipt);
   progress.closed_receipt={path:closedPath,sha256:digest(readFileSync(closedPath,'utf8'))};
   progress.complete=true;atomic(path,progress);

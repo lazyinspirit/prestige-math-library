@@ -44,6 +44,17 @@ only the separate correction report required by the generated task. An honest
 rejection or uncertainty blocks collection; never claim retrospective permission,
 independent review of your own edits, or a gate waiver.
 
+When the generated task assigns a root scientific repair, repair its exact
+coupled supplier and consumer in the stated order under the same ownership.
+Preserve sound existing repairs and restore the richest proved approved scope.
+Private candidates are unapplied scientific evidence; understand and verify the
+actual arguments, merge only necessary changes into the current carriers, and
+check affected uses. After the final coupled edits, return both fresh current
+repaired reviews and the task's explicit `root_finding_resolutions` row. Other
+lanes retain only their own ordinary pending work. Report unresolved mathematics
+honestly; do not claim canonical ledger closure, independent acceptance,
+certification, or retrospective permission for any earlier write.
+
 Run each shared metadata patch through
 `node tools/physics-support/step5-shared-write-lock.mjs run --owner DISPATCH_LABEL -- node research/RUN-scoped-metadata-update.mjs`.
 The scoped script must reread current owning files before surgical changes and

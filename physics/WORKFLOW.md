@@ -254,6 +254,28 @@ and then applies the ordinary completeness check. Routing adds no reviews,
 scientific acceptance, source-write permission, or invented interface event;
 the native impact owners still examine the assigned affected uses.
 
+A confirmed open scientific finding may require a coupled supplier and consumer
+repair that the current owner wave did not provide. Root may advertise an
+immutable `owner-scientific-repair-ID.json` through
+`research/RUN-step5-v2/owner-scientific-repair-request.json` with
+`version:1`, `run`, and `request:{path,sha256}`. The request binds the base
+impact phase/round, root reviewer, exact supplier/consumer subjects, the unique
+current unsuperseded OPEN canonical finding, an authenticated completed native
+outcome, genuine current before carriers and content/raw/interface guards,
+and actual scientific evidence and unapplied proposals.
+At the drained join, the engine queues a native continuation with that pair
+exclusively assigned to owner 1, supplier first. Other genuine pending-context
+work continues in parallel on owners 2 and 3. The two sources must actually
+change and receive fresh current native repaired reviews; owner 1 must return
+an explicit `root_finding_resolutions` row. Collection validates this before
+saving an immutable receipt. The request remains pending until validated native
+completion; root still owns canonical ledger closure and certification. No
+formatting flag, outside author grant, fabricated stale context or original
+judge tuple substitutes for that work. An uncertified closed wave can reopen
+only while every original-frontier content guard still equals its preserved
+closed receipt; unlicensed post-close writes require separate reconciliation.
+Original reports, closures and request evidence remain immutable.
+
 An outside repair authorized by the root owner can enter only deferred
 `impact-initial`/`impact-repeat` owner collection, including their continuation
 passes. Place an explicit grant in `research/RUN-step5-v2/owner-repair-handoffs.json`:
