@@ -234,7 +234,35 @@ judgment/adjudication rounds continue until the latest round's unique confirmed
 fatal original-frontier items are strictly below 2% of the immutable original
 inventory. Exactly 2% requires another round; unresolved defects still block closure.
 Step 5 rejudgment uses GPT-6.1 Sol at high reasoning effort, independent of the
-Step-4 judge model. Repeated adjudication consumes the actual rejudge verdicts.
+Step-4 judge model.
+Step-5 final judge closure retains the genuine frozen Step-4 Luna verdicts for
+original-frontier items whose guard text is unchanged from the native baseline.
+Changed items require current Sol evidence, subject to the existing current
+central-certification policy. A selective closure joins the complete immutable
+frontier, hash-bound baseline and original native verdict inventory; it never
+accepts arbitrary models, invents verdicts or drops subjects. All normal item/context
+currency and exact rejection-adjudication checks continue to apply.
+Repeated adjudication consumes the actual rejudge verdicts.
+Terminal judge stamps and mechanical coverage use the same per-item policy and
+stamp the actual judging model. A guarded native `record-operational-supplement`
+may reconcile a coverage-only diagnostic from an incorrect lineup descriptor.
+Creation requires the exact paused native repair stage and drained successful
+workers; it binds their unchanged reports, assignment, diagnostics, original
+frontier/baseline/verdict inventory, prior certificate and creation state.
+Collection rechecks genuine current original verdicts and keeps diagnostic-only
+carrier observations separate from new mathematical reviews and certification.
+It cannot substitute for a source repair, missing history or another gate defect.
+If native collection cached its derivatives before that supplement, the guarded
+`recover-operational-derived` command preserves the original collected, closed
+and certification artifacts and records hash-bound immutable variants. Only the
+normal mutable current-certificate pointer changes; certification starts from
+the authenticated prior certificate and genuine native reviews, while unchanged
+operational observations retain their original verdict coverage. Effective native
+lookups validate that projection before using the corrected variants.
+The owner-supervised wrapper forwards its reload version to the native stage
+table and applies the owner hold before progress bookkeeping, so paused work
+cannot cache derived collections before an authorized reconciliation.
+
 The additional
 `proof-contract-coverage` mechanical check still requires a contract for each
 actual proof-bearing carrier. No new substantive review gate is added. Step 6

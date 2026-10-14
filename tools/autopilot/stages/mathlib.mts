@@ -987,9 +987,10 @@ const ledgerGate = (ctx, { terminal = false } = {}) => gate('defect-ledger', ['n
  *            that; an unadjudicated rejection and an open fatal are NOT allowed.
  *   after  — no allowances at all.
  */
-const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeLineup = 'sol61', excludePublished = true } = {}) =>
+const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false, judgeLineup = 'sol61', excludePublished = true, selectiveStep5 = false } = {}) =>
   gate('judge-closure', ['env', `JUDGE_LINEUP=${judgeLineup}`, 'node', 'tools/level-coverage.mjs',
     '--judge-only', '--verify-current-context',
+    ...(selectiveStep5 ? ['--step5-run', ctx.run] : []),
     ...(excludePublished ? ['--exclude-published'] : []),
     '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
     '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
@@ -1013,6 +1014,7 @@ const levelCoverageGate = (ctx) => gate('level-coverage', ['env', 'JUDGE_LINEUP=
   '--terminal-resolutions', terminalResolutionsPath(ctx),
   '--mechanical',
   '--verify-current-context',
+  '--step5-run', ctx.run,
   ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`),
 ], {
   liveness: { pattern: /level-coverage: (\d+) item/.source, min: 1, unit: 'items' },
@@ -1438,7 +1440,7 @@ export const stages = [
     // could immediately supersede.  `9-readiness-v2` owns the first full
     // final-text validation, and the read-only report integrity receipt lets
     // `6-close-v2` safely reuse it on an unchanged protected tree.
-    gates: (ctx) => [closureGate(ctx), ledgerGate(ctx, { terminal: true })],
+    gates: (ctx) => [closureGate(ctx, { selectiveStep5: true }), ledgerGate(ctx, { terminal: true })],
     // THE CONTRACT-REWORK LOOP (owner directive, 2026-08-17). `--no-open`
     // red on a contract-quality row with an owning batch — the rr-005 shape —
     // used to be a dead end: its recorded remedy is "the owning Beta rewrites
@@ -1527,7 +1529,7 @@ export const stages = [
     pattern: resultPattern('tool', 'pathway-sync-v2'), concurrency: 1,
     plan: (ctx) => [{ role: 'tool', label: 'pathway-sync-v2', job: 'bookkeeping-mechanical',
       covers: ['all'], argv: ['node', 'tools/pathway-sync.mjs', '--run', ctx.run] }],
-    gates: (ctx) => [frontierItemGate(ctx, 'pathcheck', 'pathcheck'), closureGate(ctx)],
+    gates: (ctx) => [frontierItemGate(ctx, 'pathcheck', 'pathcheck'), closureGate(ctx, { selectiveStep5: true })],
   },
   {
     id: '6-pathway-seed-v2', label: 'pathway prose obligations', units: () => ['all'],
@@ -1549,7 +1551,7 @@ export const stages = [
       task: [`research/${ctx.run}-alpha-pathway.task.md`, 'briefs/tasks/alpha-pathway.md'], timeout: 10800 }],
     gates: (ctx) => [
       gate('pathway-closure', ['node', 'tools/pathway-closure.mjs', 'check', '--run', ctx.run]),
-      frontierItemGate(ctx, 'pathcheck', 'pathcheck'), frontierItemGate(ctx, 'prosecheck', 'prosecheck'), closureGate(ctx),
+      frontierItemGate(ctx, 'pathcheck', 'pathcheck'), frontierItemGate(ctx, 'prosecheck', 'prosecheck'), closureGate(ctx, { selectiveStep5: true }),
     ],
   },
   {
@@ -1558,16 +1560,16 @@ export const stages = [
     pattern: resultPattern('tool', 'judge-stamps-v2'), concurrency: 1,
     plan: (ctx) => [{ role: 'tool', label: 'judge-stamps-v2', job: 'bookkeeping-mechanical', covers: ['all'],
       argv: ['node', 'tools/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
-        '--exclude-published',
+        '--exclude-published', '--step5-run', ctx.run,
         '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
         '--terminal-resolutions', terminalResolutionsPath(ctx),
         ...auditorCertificationArgs(ctx),
         '--apply', '--report', `research/${ctx.run}-judge-stamps.json`] }],
     gates: (ctx) => [gate('judge-stamps', ['node', 'tools/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
-      '--exclude-published',
+      '--exclude-published', '--step5-run', ctx.run,
       '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
       '--terminal-resolutions', terminalResolutionsPath(ctx), ...auditorCertificationArgs(ctx), '--verify'], {
-      liveness: { pattern: /judge-stamps: (\d+) item\(s\) in scope/.source, min: 1, unit: 'items in scope' } }), closureGate(ctx)],
+      liveness: { pattern: /judge-stamps: (\d+) item\(s\) in scope/.source, min: 1, unit: 'items in scope' } }), closureGate(ctx, { selectiveStep5: true })],
   },
   {
     id: '6-readiness-v2', label: 'structured publication readiness', units: () => ['all'],

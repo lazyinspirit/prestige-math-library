@@ -27,6 +27,7 @@ import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { itemHashJudge } from './item-hash.mjs';
 import { frontmatterList } from './frontmatter-list.mjs';
 import { loadStep5ClosureCertification, currentStep5Certification } from './step5-certification-consumer.mjs';
+import { step5JudgePolicy } from './step5-judge-policy.mjs';
 import { adjudicationTypeResolver } from './step5-adjudication-compat.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 import { parseFrontmatter, nested } from './content-policy-lib.mjs';
@@ -72,10 +73,11 @@ const allowUnadjudicated = argv.includes('--allow-unadjudicated');
 // stage's input, not step 5's failure. Allowed only there; by the rejudge gate
 // and every gate after it, an item with no current configured-model set is a hole.
 const allowPendingRejudge = argv.includes('--allow-pending-rejudge');
+const selectiveStep5Run = option('--step5-run');
 const outPath = option('--out');
 const batchFiles = argv.filter((arg, index) => {
   if (arg.startsWith('--')) return false;
-  return !['--run', '--contracts', '--judge-ledger', '--context-hash-cache', '--judge-adjudications', '--terminal-resolutions', '--auditor-certifications', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template', '--out'].includes(argv[index - 1]);
+  return !['--step5-run', '--run', '--contracts', '--judge-ledger', '--context-hash-cache', '--judge-adjudications', '--terminal-resolutions', '--auditor-certifications', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template', '--out'].includes(argv[index - 1]);
 });
 if (!batchFiles.length) usage();
 if (judgeOnly) {
@@ -364,13 +366,19 @@ if (spineReceiptPath) {
 }
 
 if (!judgePath && receiptPath) error('judge-ledger-missing', '--judge-ledger is required when validating an audit receipt');
+let selectiveJudgePolicy = null;
+if (selectiveStep5Run) {
+  if (!(judgeOnly || mechanical) || !verifyCurrent || lineupName !== 'sol61') error('step5-judge-policy-invalid', 'selective policy requires current judge-only or mechanical Sol closure');
+  else try { selectiveJudgePolicy = step5JudgePolicy(REPO, selectiveStep5Run, judgeScope, resolvePath(judgePath)); }
+  catch (cause) { error('step5-judge-policy-invalid', cause.message); }
+}
 const verdicts = new Map(); // id -> context hash -> model -> latest usable verdict
 if (judgePath && existsSync(resolvePath(judgePath))) {
   for (const line of readFileSync(resolvePath(judgePath), 'utf8').split(/\r?\n/)) {
     if (!line.trim()) continue;
     let record;
     try { record = JSON.parse(line); } catch { continue; }
-    if (!judgeScope.includes(record?.id) || !JUDGES.includes(record?.model) || typeof record?.context_sha256 !== 'string') continue;
+    if (!judgeScope.includes(record?.id) || !(selectiveJudgePolicy?.models ?? JUDGES).includes(record?.model) || typeof record?.context_sha256 !== 'string') continue;
     if (record.keep !== true && record.keep !== false) continue;
     if (!verdicts.has(record.id)) verdicts.set(record.id, new Map());
     const byContext = verdicts.get(record.id);
@@ -509,6 +517,9 @@ let step5Certificate = null;
 try { step5Certificate = loadStep5ClosureCertification(REPO, option('--run'), judgePath ?? ''); }
 catch (cause) { error('step5-certification-invalid', cause.message); }
 for (const id of judgePath ? judgeScope : []) {
+  const itemText = readFileSync(join(REPO, 'items', `${id}.md`), 'utf8');
+  const requiredJudges = selectiveJudgePolicy?.requiredModels(id, itemText) ?? JUDGES;
+  if (selectiveStep5Run && !selectiveJudgePolicy) continue;
   // An invalid certification is a certification hold, not a paid self-review
   // target. Keep closure false without manufacturing coverage or judge work.
   if (auditorCertificationBlocked) continue;
@@ -543,16 +554,16 @@ for (const id of judgePath ? judgeScope : []) {
     if (!verifyCurrent) return true;
     // Every lane's verdict must be current — clause (a) via the group's shared
     // context hash, or clause (b) via that lane's own item hash.
-    return JUDGES.every((model) => {
+    return requiredJudges.every((model) => {
       const row = byModel.get(model);
-      return verdictIsCurrent(
+      return (!selectiveJudgePolicy || selectiveJudgePolicy.eligible(id, row, itemText)) && verdictIsCurrent(
         { context_sha256: hash, item_sha256: row?.item_sha256 },
         { context: current, item: currentItem },
       );
     });
   };
   const eligible = [...contexts.entries()].filter((entry) =>
-    coversCurrent(entry) && JUDGES.every((model) => entry[1].has(model)));
+    coversCurrent(entry) && requiredJudges.every((model) => entry[1].has(model)));
   const terminal = terminalParsed.latest.get(id);
   if (terminal) {
     if (!verifyCurrent) {
@@ -600,19 +611,19 @@ for (const id of judgePath ? judgeScope : []) {
   }
   if (!eligible.length) {
     needsRejudge.push(id);
-    (allowPendingRejudge ? warn : error)('judge-coverage-missing', `${id}: no complete verdict set from ${JUDGES.join('/')} ${verifyCurrent ? 'for the current frozen context, and none cast against the item\'s current text' : ''}`.trim(), id);
+    (allowPendingRejudge ? warn : error)('judge-coverage-missing', `${id}: no complete verdict set from ${requiredJudges.join('/')} ${verifyCurrent ? 'for the current frozen context, and none cast against the item\'s current text' : ''}`.trim(), id);
     continue;
   }
-  eligible.sort((a, b) => Math.max(...JUDGES.map((m) => String(a[1].get(m).at ?? ''))) < Math.max(...JUDGES.map((m) => String(b[1].get(m).at ?? ''))) ? 1 : -1);
+  eligible.sort((a, b) => Math.max(...requiredJudges.map((m) => String(a[1].get(m).at ?? ''))) < Math.max(...requiredJudges.map((m) => String(b[1].get(m).at ?? ''))) ? 1 : -1);
   const [hash, byModel] = eligible[0];
-  const models = Object.fromEntries(JUDGES.map((model) => [model, byModel.get(model).keep]));
+  const models = Object.fromEntries(requiredJudges.map((model) => [model, byModel.get(model).keep]));
   // A judge run is coverage, not unchecked clearance. Each current rejection
   // must either be independently classified by Alpha as nonfatal/false-positive
   // or be repaired and rejudged.  Confirmed fatal and unadjudicated rejections
   // remain hard stops; this preserves the fatal-error gate while honoring the
   // workflow's explicit <30-second nonfatal-gap policy.
-  if (!JUDGES.every((model) => models[model] === true)) {
-    for (const model of JUDGES.filter((candidate) => models[candidate] === false)) {
+  if (!requiredJudges.every((model) => models[model] === true)) {
+    for (const model of requiredJudges.filter((candidate) => models[candidate] === false)) {
       if (!judgeAdjudicationsPath) {
         error('judge-adjudication-missing', `${id}: current ${model} rejection needs --judge-adjudications and an exact Alpha outcome`, id);
         continue;

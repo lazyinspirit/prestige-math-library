@@ -1,5 +1,6 @@
 // Explicit Step 5 repair rounds. Every mathematical writer drains before the
 // one controller certification; only the engine routes or launches judgments.
+// Guarded native operational projections preserve original cached evidence.
 import { existsSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
@@ -103,7 +104,7 @@ export function step5Stages({ gate, repoWide, contractGates, ledgerGate, closure
       '--run', ctx.run, '--contracts', `research/${ctx.run}-proof-contracts.json`]),
     // Published maintenance and auditor additions are outside the immutable
     // original frontier; their maintenance evidence remains separately owned and validated.
-    closureGate(ctx,{judgeLineup:'sol61'}),ledgerGate(ctx),
+    closureGate(ctx,{judgeLineup:'sol61',selectiveStep5:true}),ledgerGate(ctx),
     ];
     // Doctor inspects future command descriptors before 7-scope creates the
     // frontier. Actual execution always scopes the complete battery.

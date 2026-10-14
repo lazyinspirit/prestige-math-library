@@ -11,6 +11,7 @@ import { isPublishedItem } from './published-repair-policy.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { currentHashesMany } from './step5-terminal-resolution.mjs';
 import { MODELS } from './models.mjs';
+import { verdictIsCurrent } from './judge-currency.mjs';
 import { gateDiagnostics } from './step5-gate-diagnostics.mjs';
 import { FATAL_TYPES } from './step5-adjudication-compat.mjs';
 import { restatedIds, statementHash } from './step5-statement.mjs';
@@ -709,10 +710,128 @@ function loadOwnerSupplement(root,pack,reports,current,items) {
   return {...row,ids,evidence,path,[ownerSupplementSeal]:true};
 }
 
-export function validateReports(pack,reports,now,{root=null,ownerSupplement=null}={}) {
+
+// This is an operational correction to a bad judge-lineup diagnostic, not a
+// mathematical owner review or new judge coverage. Native reports stay intact.
+const operationalSupplementSeal=Symbol('validated-operational-owner-supplement');
+export const operationalSupplementPath=(root,run,phase,round)=>join(workflowDir(root,run),`${phase}-${round}-owner-operational-supplement.json`);
+function operationalSubjects(pack) {
+  const all=Object.values(pack.gateAssignments??{}).flat();
+  const diagnostics=all.filter(row=>row.id==='judge-closure');
+  requireValue(pack.phase==='gate'&&pack.gateRoutingVersion===1&&!pack.rejected&&diagnostics.length===pack.units.length,
+    'operational supplement only applies to a native gate owner pack');
+  const indices=new Set(diagnostics.map(row=>row.index));
+  requireValue(indices.size===1,'ambiguous operational diagnostic index');
+  const ids=[...new Set(diagnostics.flatMap(row=>row.subjects))].sort();
+  for(const row of diagnostics){
+    const document=JSON.parse(row.failure.output);
+    requireValue(Array.isArray(document.errors)&&document.errors.length>0
+      &&document.errors.every(error=>error.code==='judge-coverage-missing'&&ids.includes(error.id)),
+      'operational supplement cannot close another diagnostic type');
+    requireValue(JSON.stringify([...new Set(document.errors.map(error=>error.id))].sort())===JSON.stringify(ids),
+      'operational diagnostic subject inventory is not exact');
+  }
+  requireValue(all.filter(row=>row.id!=='judge-closure').every(row=>row.subjects.every(id=>!ids.includes(id))),
+    'operational subjects overlap a genuine source/contract/risk diagnostic');
+  return {ids,index:[...indices][0]};
+}
+function verifyOperationalCoverage(root,run,ids,current) {
+  const dir=workflowDir(root,run),baseline=read(join(dir,'baseline.json'));
+  const original=read(join(dir,'step4-verdicts.json')),ledger=lines(join(root,'research',`${run}-judge.jsonl`));
+  const adjudications=lines(join(root,'research',`${run}-judge-adjudications.jsonl`));
+  const contexts=currentHashesMany(root,ids),covered=[];
+  for(const id of ids){
+    requireValue(current[id]===baseline[id],`operational carry is no longer unchanged: ${id}`);
+    const now=contexts.get(id);
+    const rows=original.filter(row=>row.id===id&&row.model===MODELS.luna.id&&typeof row.keep==='boolean'
+      &&ledger.some(actual=>digest(actual)===digest(row))
+      &&verdictIsCurrent(row,{context:now?.context_sha256,item:now?.item_sha256}));
+    const row=rows.find(row=>row.keep===true||adjudications.some(answer=>key(answer)===key(row)
+      &&answer.item_sha256===row.item_sha256&&['confirmed_nonfatal','false_positive'].includes(answer.outcome)));
+    requireValue(row,`operational carry lacks a genuine current Luna verdict/disposition: ${id}`);
+    covered.push({id,model:row.model,original_verdict_sha256:digest(row),item_sha256:row.item_sha256,
+      context_sha256:row.context_sha256,coverage_basis:'existing-frozen-native-verdict',mathematical_review:false});
+  }
+  return covered;
+}
+function operationalBindings(root,pack,reports,certificate) {
+  const dir=workflowDir(root,pack.run),bindings={};
+  const bind=path=>{bindings[path]=digest(readFileSync(path,'utf8'));};
+  bind(packPath(root,pack.run,pack.phase,pack.round));
+  for(const name of ['frontier.json','baseline.json','step4-verdicts.json']){
+    const path=join(dir,name);requireValue(certificate.evidence?.[path],`certificate lacks native frozen binding ${path}`);bind(path);
+  }
+  const frozenCertificate=effectiveWorkflowArtifact(root,pack.run,join(dir,`certification-${certificate.phase}-${certificate.round}.json`));
+  requireValue(JSON.stringify(read(frozenCertificate))===JSON.stringify(certificate),'current certificate has no exact immutable archive');bind(frozenCertificate);
+  for(const unit of pack.units){
+    const report=workerReport(root,pack.run,pack.phase,pack.round,unit);bind(report);bind(report.replace(/\.json$/,'.gate-diagnostics.json'));
+    const path=join(root,'research',`${pack.run}-dispatch`,`alpha-repair-${workerLabel(pack.phase,pack.round,unit)}.result.json`);
+    const result=read(path);requireValue(result.ok===true&&result.run===pack.run&&result.role==='alpha-repair'
+      &&result.label===workerLabel(pack.phase,pack.round,unit)&&result.model===MODELS.sol61.id&&result.provider_effort==='high',
+      'operational supplement requires genuine completed native owner dispatches');bind(path);
+  }
+  return bindings;
+}
+export function recordOperationalSupplement(root,run,phase,round,authorizationPath) {
+  const statePath=join(root,'.autopilot',run,'state.json'),state=read(statePath),auth=read(authorizationPath);
+  const requestPath=join(root,'.autopilot',run,'owner-gate-request.json'),request=read(requestPath);
+  const pack=readPack(root,run,phase,round),reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
+  const {ids,index}=operationalSubjects(pack);
+  requireValue(state.run===run&&state.stage==='5.9-repair'&&state.paused===true
+    &&Object.values(state.dispatches??{}).every(row=>!row.startedAt||Boolean(row.endedAt)),
+    'operational receipt creation requires paused exact native stage and drained writers');
+  requireValue(auth.version===1&&auth.run===run&&auth.phase===phase&&auth.round===round
+    &&auth.authorized_by==='owner'&&auth.pack_sha256===digest(pack)&&auth.diagnostic_index===index
+    &&request.run===run&&request.stages?.includes('5.9-repair')&&auth.owner_gate_request_id===request.id
+    &&auth.mathematical_review===false&&auth.native_coverage_adopted===false
+    &&typeof auth.reason==='string'&&auth.reason.trim().length>=80
+    &&JSON.stringify(auth.subjects)===JSON.stringify(ids),'invalid exact operational owner authorization');
+  const certificate=verifyCertification(root,run,{allowMissing:false}),current=hashes(root);
+  const bindings=operationalBindings(root,pack,reports,certificate);
+  const coverage=verifyOperationalCoverage(root,run,ids,current);
+  for(const id of ids)requireValue(current[id]===pack.before[id],'operational carry changed after original assignment');
+  const dir=workflowDir(root,run),snapshot=join(dir,`${phase}-${round}-owner-operational-creation-state.json`);
+  frozen(snapshot,state);bindings[snapshot]=digest(readFileSync(snapshot,'utf8'));
+  const requestSnapshot=join(dir,`${phase}-${round}-owner-operational-creation-request.json`);
+  frozen(requestSnapshot,request);bindings[requestSnapshot]=digest(readFileSync(requestSnapshot,'utf8'));
+  bindings[authorizationPath]=digest(readFileSync(authorizationPath,'utf8'));
+  const row={version:1,kind:'step5-owner-operational-supplement',run,phase,round,authorized_by:'owner',
+    recorded_by:'step5-workflow-native',recorded_at:new Date().toISOString(),pack_sha256:digest(pack),
+    diagnostic_index:index,subjects:ids,reason:auth.reason,mathematical_review:false,native_coverage_adopted:false,
+    creation_snapshot:snapshot,creation_request:requestSnapshot,owner_gate_request_id:request.id,bindings,coverage};
+  const path=operationalSupplementPath(root,run,phase,round);frozen(path,row);return {path,subjects:ids.length,mathematical_review:false};
+}
+function loadOperationalSupplement(root,pack,reports,current) {
+  const path=operationalSupplementPath(root,pack.run,pack.phase,pack.round);if(!existsSync(path))return null;
+  const row=read(path),{ids,index}=operationalSubjects(pack),snapshot=read(row.creation_snapshot),request=read(row.creation_request);
+  requireValue(row.version===1&&row.kind==='step5-owner-operational-supplement'&&row.run===pack.run
+    &&row.phase===pack.phase&&row.round===pack.round&&row.authorized_by==='owner'
+    &&row.recorded_by==='step5-workflow-native'&&row.pack_sha256===digest(pack)&&row.diagnostic_index===index
+    &&row.mathematical_review===false&&row.native_coverage_adopted===false
+    &&JSON.stringify(row.subjects)===JSON.stringify(ids)&&snapshot.run===pack.run
+    &&snapshot.stage==='5.9-repair'&&snapshot.paused===true
+    &&request.run===pack.run&&request.stages?.includes('5.9-repair')&&request.id===row.owner_gate_request_id
+    &&Object.values(snapshot.dispatches??{}).every(value=>!value.startedAt||Boolean(value.endedAt)),
+    'invalid operational receipt or creation snapshot');
+  verifyEvidence(row.bindings);
+  const coverage=verifyOperationalCoverage(root,pack.run,ids,current);
+  requireValue(JSON.stringify(coverage)===JSON.stringify(row.coverage),'operational coverage binding changed');
+  for(const id of ids){
+    const unit=pack.units.find(unit=>pack.assignments[unit].includes(id));
+    const observations=reports.find(report=>String(report.unit)===String(unit))?.reviews?.filter(value=>value.id===id);
+    requireValue(observations?.length===1&&observations[0].disposition==='unaffected'
+      &&observations[0].post_sha256===current[id]&&current[id]===pack.before[id],
+      'operational supplement cannot replace missing history or a real source edit');
+  }
+  return {...row,ids:new Set(ids),path,evidence:{...row.bindings,[path]:digest(readFileSync(path,'utf8'))},[operationalSupplementSeal]:true};
+}
+
+export function validateReports(pack,reports,now,{root=null,ownerSupplement=null,operationalSupplement=null}={}) {
   const errors=[],decisions=[],reviews=[],createdItems=[],creatorById=new Map();
   requireValue(!ownerSupplement||(root&&ownerSupplement[ownerSupplementSeal]===true
     &&ownerSupplement.pack_sha256===digest(pack)),'owner supplement must pass native guarded loading');
+  requireValue(!operationalSupplement||(root&&operationalSupplement[operationalSupplementSeal]===true
+    &&operationalSupplement.pack_sha256===digest(pack)),'unvalidated operational supplement');
   const ownerReviews=new Map((ownerSupplement?.reviews??[]).map(row=>[row.id,row]));
   const ownerDecisions=new Map((ownerSupplement?.decisions??[]).map(row=>[key(row),row]));
   for(const unit of pack.units) {
@@ -735,7 +854,8 @@ export function validateReports(pack,reports,now,{root=null,ownerSupplement=null
     for(const row of (report.reviews??[]).filter(row=>!ownerReviews.has(row.id))) {
       const dispositions=creations.has(row.id)?['authored']:['repaired','unaffected'];
       if(!ids.has(row.id)||seen.has(row.id)||!evidenceText(row)||!dispositions.includes(row.disposition)||row.post_sha256!==now[row.id]||!/^[a-f0-9]{64}$/.test(row.review_context_sha256??'')) errors.push(`invalid review ${unit}/${row.id}`);
-      seen.add(row.id);reviews.push(row);
+      seen.add(row.id);
+      if(!operationalSupplement?.ids.has(row.id))reviews.push(row);
     }
     for(const id of ids)if(!seen.has(id)&&!ownerReviews.has(id))errors.push(`missing review ${unit}/${id}`);
     const expected=new Map((pack.rejected?pack.assignments[unit]:[]).map(row=>[key(row),row])),decided=new Set();
@@ -798,6 +918,124 @@ export function validateReports(pack,reports,now,{root=null,ownerSupplement=null
   return {errors,decisions,reviews,changed,created_items:createdItems};
 }
 
+
+// Recover cached derivatives created before an operational supplement existed.
+// Originals remain immutable; only the designed live certificate pointer moves.
+function effectiveWorkflowArtifact(root,run,path) {
+  const name=basename(path),match=/^(?:gate-(\d+)-(?:collected|closed)|certification-gate-(\d+))\.json$/.exec(name);
+  if(!match)return path;
+  const round=Number(match[1]??match[2]),dir=workflowDir(root,run);
+  const marker=join(dir,`gate-${round}-operational-derived-projection.json`);
+  if(!existsSync(marker))return path;
+  const projection=read(marker);
+  requireValue(projection.version===1&&projection.kind==='native-operational-derived-artifact-projection'
+    &&projection.run===run&&projection.phase==='gate'&&projection.round===round
+    &&projection.recorded_by==='step5-workflow-native'&&projection.mathematical_review===false,
+    'invalid operational derived projection');
+  verifyEvidence(projection.evidence,{root,run});
+  const entry=projection.variants?.find(row=>row.original_path===path);
+  requireValue(entry&&entry.variant_path===path.replace(/\.json$/,'-operational.json')
+    &&digest(readFileSync(path,'utf8'))===entry.original_sha256
+    &&digest(readFileSync(entry.variant_path,'utf8'))===entry.variant_sha256,
+    'operational projection does not bind the exact original and immutable variant');
+  return entry.variant_path;
+}
+export function recoverOperationalDerived(root,run,round,authorizationPath) {
+  const dir=workflowDir(root,run),phase='gate',auth=read(authorizationPath);
+  const state=read(join(root,'.autopilot',run,'state.json'));
+  const request=read(join(root,'.autopilot',run,'owner-gate-request.json'));
+  requireValue(state.run===run&&state.stage==='5.10-gate'&&state.paused===true
+    &&Object.values(state.dispatches??{}).every(row=>!row.startedAt||Boolean(row.endedAt)),
+    'derived recovery requires the exact paused native terminal battery and drained writers');
+  const pack=readPack(root,run,phase,round),current=hashes(root),items=readLibraryItems(root);
+  const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
+  const operational=loadOperationalSupplement(root,pack,reports,current);
+  requireValue(operational&&auth.version===1&&auth.run===run&&auth.phase===phase&&auth.round===round
+    &&auth.authorized_by==='owner'&&auth.owner_gate_request_id===request.id&&request.run===run
+    &&request.stages?.includes('5.10-gate')&&auth.pack_sha256===digest(pack)
+    &&auth.mathematical_review===false&&auth.native_coverage_adopted===false
+    &&typeof auth.reason==='string'&&auth.reason.trim().length>=80,'invalid exact native derived-recovery authorization');
+  const normalCollected=join(dir,`gate-${round}-collected.json`),normalClosed=join(dir,`gate-${round}-closed.json`);
+  const normalCertificate=join(dir,`certification-gate-${round}.json`);
+  const originals=[normalCollected,normalClosed,normalCertificate];
+  requireValue(originals.every(path=>auth.originals?.[path]===digest(readFileSync(path,'utf8'))),
+    'owner authorization does not bind the exact cached derivatives');
+  const oldCollected=read(normalCollected),oldClosed=read(normalClosed),oldCertificate=read(normalCertificate);
+  for(const row of [oldCollected,oldClosed,oldCertificate])requireValue(row.run===run&&row.phase===phase&&row.round===round,
+    'cached derivative identity changed');
+  const {sha256:oldSha,...oldPayload}=oldCertificate;requireValue(oldSha===digest(oldPayload),'cached certificate payload changed');
+  requireValue(!oldCollected.operational_resolution&&!oldClosed.operational_carries,
+    'native recovery is only for derivatives predating the supplement');
+  const validated=validateReports(pack,reports,current,{root,operationalSupplement:operational});
+  requireValue(validated.errors.length===0,validated.errors.join('\n'));
+  const observed=reports.flatMap(report=>report.reviews).filter(row=>operational.ids.has(row.id));
+  const genuine=validated.reviews;
+  requireValue(genuine.length===3&&oldCollected.reviews.length===genuine.length+observed.length
+    &&oldClosed.reviews.length===oldCollected.reviews.length
+    &&genuine.every(row=>oldCollected.reviews.some(old=>digest(old)===digest(row)))
+    &&oldClosed.reviews.every(row=>oldCollected.reviews.some(old=>digest(old)===digest(row))),
+    'cached collection does not preserve the exact genuine/native operational observations');
+  const changed=diff(pack.before,current).filter(id=>gateFrontier(root,run).has(id));
+  requireValue(JSON.stringify(changed)===JSON.stringify(validated.changed)
+    &&JSON.stringify(changed)===JSON.stringify(oldCollected.changed)
+    &&changed.every(id=>genuine.some(row=>row.id===id&&row.disposition==='repaired')),
+    'real source edits lost native licensing during recovery');
+  const contextsOfReviews=reviewContexts(items);
+  for(const review of genuine)requireValue(contextsOfReviews.matches(review,current),`stale genuine native review: ${review.id}`);
+  verifyEvidence(oldCollected.evidence,{root,run});verifyEvidence(oldClosed.evidence,{root,run});
+  const priorPaths=Object.keys(operational.bindings).filter(path=>/\/certification-impact-repeat-[1-9]\d*\.json$/.test(path));
+  requireValue(priorPaths.length===1,'operational supplement must bind one exact good prior certificate');
+  const prior=read(priorPaths[0]),{sha256:priorSha,...priorPayload}=prior;
+  requireValue(priorSha===digest(priorPayload)&&prior.run===run&&prior.phase==='impact-repeat',
+    'invalid frozen prior certificate');verifyEvidence(prior.evidence,{root,run});
+  const creationState=join(dir,`gate-${round}-operational-recovery-creation-state.json`);
+  const creationRequest=join(dir,`gate-${round}-operational-recovery-creation-request.json`);
+  frozen(creationState,state);frozen(creationRequest,request);
+  const evidence={...prior.evidence,...oldCollected.evidence,...oldClosed.evidence,...operational.evidence};
+  for(const path of [...originals,creationState,creationRequest,authorizationPath])evidence[path]=digest(readFileSync(path,'utf8'));
+  const resolution={path:operational.path,subjects:[...operational.ids],reason:operational.reason,
+    mathematical_review:false,native_coverage_adopted:false};
+  const collectedPath=normalCollected.replace(/\.json$/,'-operational.json');
+  const collected={...oldCollected,reviews:genuine,evidence:{...evidence},operational_resolution:resolution,
+    operational_observations:observed,derived_projection:{kind:'operational-only-cached-derivative-correction',original:normalCollected}};
+  frozen(collectedPath,collected);evidence[collectedPath]=digest(readFileSync(collectedPath,'utf8'));
+  const closedPath=normalClosed.replace(/\.json$/,'-operational.json');
+  const closed={...oldClosed,reviews:genuine,evidence:{...evidence},operational_carries:[...operational.ids],
+    operational_resolutions:[resolution],derived_projection:{kind:'operational-only-cached-derivative-correction',original:normalClosed}};
+  frozen(closedPath,closed);evidence[closedPath]=digest(readFileSync(closedPath,'utf8'));
+  // Seed from the authenticated 118-item certificate, never the erroneous
+  // 486-item cached certificate; only genuine native reviews can add/update rows.
+  const byId=new Map(prior.items.map(row=>[row.id,row])),reviewed=new Map(genuine.map(row=>[row.id,row]));
+  const ids=[...new Set([...byId.keys(),...reviewed.keys()])].sort(),contexts=currentHashesMany(root,ids);
+  const certificateItems=ids.map(id=>{
+    const now=contexts.get(id),review=reviewed.get(id),before=byId.get(id);
+    requireValue(now&&current[id],`missing current certificate carrier: ${id}`);
+    if(!review)requireValue(before.guard_sha256===current[id]&&before.item_sha256===now.item_sha256
+      &&before.context_sha256===now.context_sha256,`prior genuine certification is no longer current: ${id}`);
+    return review?{id,...now,guard_sha256:current[id],reason:review.reason}:before;
+  });
+  const baseline=read(join(dir,'baseline.json')),frontier=gateFrontier(root,run);
+  const totalChanged=diff(baseline,current).filter(id=>frontier.has(id));
+  requireValue(totalChanged.every(id=>ids.includes(id)),'recovery would lose actual changed-item certification');
+  const payload={version:2,run,phase,round,at:new Date().toISOString(),items:certificateItems,
+    creations:prior.creations,evidence:{...evidence},changed:totalChanged,latest_adjudication_round:prior.latest_adjudication_round,
+    operational_recovery:{supplement:operational.path,original_certificate:normalCertificate,
+      prior_certificate:priorPaths[0],reason:auth.reason,mathematical_review:false,native_coverage_adopted:false}};
+  const certificate={...payload,sha256:digest(payload)},certificatePath=normalCertificate.replace(/\.json$/,'-operational.json');
+  frozen(certificatePath,certificate);evidence[certificatePath]=digest(readFileSync(certificatePath,'utf8'));
+  const variants=[...originals].map(path=>({original_path:path,original_sha256:digest(readFileSync(path,'utf8')),
+    variant_path:path.replace(/\.json$/,'-operational.json'),variant_sha256:digest(readFileSync(path.replace(/\.json$/,'-operational.json'),'utf8'))}));
+  const projection={version:1,kind:'native-operational-derived-artifact-projection',run,phase,round,
+    recorded_by:'step5-workflow-native',recorded_at:new Date().toISOString(),mathematical_review:false,
+    native_coverage_adopted:false,reason:auth.reason,variants,evidence};
+  frozen(join(dir,`gate-${round}-operational-derived-projection.json`),projection);
+  // This pointer is explicitly mutable by the ordinary native certification
+  // protocol. All historical normal and variant receipts remain at their paths.
+  atomic(join(dir,'certification.json'),certificate);
+  return {items:certificateItems.length,genuine_reviews:genuine.length,operational_observations:observed.length,
+    changed:totalChanged.length,mathematical_review:false};
+}
+
 export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   // The controller joins all owner passes before this gate. Their individual
   // collections are historical snapshots; later assigned repairs may replace
@@ -806,7 +1044,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     &&existsSync(impactProgressPath(root,run,phase,round))
     &&read(impactProgressPath(root,run,phase,round)).complete)
     return verifyCompletedImpact(root,run,phase,round);
-  const collectedPath=join(workflowDir(root,run),`${phase}-${round}-collected.json`);
+  const collectedPath=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${phase}-${round}-collected.json`));
   if(existsSync(collectedPath)){
     const prior=read(collectedPath);verifyEvidence(prior.evidence,{root,run});
     if(!deferImpactClosure){
@@ -819,6 +1057,7 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
   const reports=pack.units.map(unit=>read(workerReport(root,run,phase,round,unit)));
   const current=hashes(root),reported={...current},items=readLibraryItems(root);
   const ownerSupplement=loadOwnerSupplement(root,pack,reports,current,items);
+  const operationalSupplement=loadOperationalSupplement(root,pack,reports,current);
   if(deferImpactClosure) {
     requireValue(!pack.rejected,'only owner waves can defer impact closure');
     // Archive the carriers workers actually reviewed. Later edits are queued
@@ -826,10 +1065,10 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     const assigned=new Set(Object.values(pack.assignments).flat());
     for(const row of reports.flatMap(report=>report.reviews??[]))if(assigned.has(row.id)&&/^[a-f0-9]{64}$/.test(row.post_sha256??''))reported[row.id]=row.post_sha256;
   }
-  const result=validateReports(pack,reports,reported,{root,ownerSupplement});
+  const result=validateReports(pack,reports,reported,{root,ownerSupplement,operationalSupplement});
   if(result.errors.length)throw Error(result.errors.join('\n'));
   const evidence={...(pack.input_evidence??{}),[packPath(root,run,phase,round)]:digest(readFileSync(packPath(root,run,phase,round),'utf8'))};
-  Object.assign(evidence,ownerSupplement?.evidence??{});
+  Object.assign(evidence,ownerSupplement?.evidence??{},operationalSupplement?.evidence??{});
   verifyEvidence(evidence);
   const creationAuthors=new Map();
   for(const unit of pack.units) {
@@ -876,6 +1115,11 @@ export function collect(root,run,phase,round,{deferImpactClosure=false}={}) {
     for(const row of reports.find(value=>String(value.unit)===unit)?.created_items??[])creationAuthors.set(row.id,basename(dispatch));
   }
   const receipt={...result,created_items:result.created_items.map(row=>({...row,author_result:creationAuthors.get(row.id)})),version:2,run,phase,round,evidence,post:hashes(root),downstream:[...new Set(reports.flatMap(row=>row.downstream))],ledger_updates:reports.flatMap(row=>row.ledger_updates??[])};
+  if(operationalSupplement){
+    receipt.operational_resolution={path:operationalSupplement.path,subjects:[...operationalSupplement.ids],
+      reason:operationalSupplement.reason,mathematical_review:false,native_coverage_adopted:false};
+    receipt.operational_observations=reports.flatMap(report=>report.reviews).filter(row=>operationalSupplement.ids.has(row.id));
+  }
   if(ownerSupplement){
     receipt.owner_supplement=ownerSupplement.path;
     receipt.native_reviews=reports.flatMap(report=>report.reviews).filter(row=>ownerSupplement.ids.has(row.id));
@@ -989,7 +1233,7 @@ export function advanceImpact(root,run,phase,round) {
   const active=readPack(root,run,progress.activePhase,round);
   if(active.units.some(unit=>!existsSync(workerReport(root,run,active.phase,round,unit))))return {complete:false,pack:active,passes:progress.passes};
   collect(root,run,active.phase,round,{deferImpactClosure:true});
-  const completed=progress.passes.map(pass=>read(join(workflowDir(root,run),`${pass}-${round}-collected.json`)));
+  const completed=progress.passes.map(pass=>read(effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${pass}-${round}-collected.json`))));
   for(const receipt of completed)verifyEvidence(receipt.evidence,{root,run});
   const base=readPack(root,run,progress.repairBasePhase??phase,round),current=hashes(root),items=readLibraryItems(root);
   const maintenance=maintenanceStatus(root,run),maintenanceIds=new Set(progress.work_order.filter(row=>row.kind==='maintenance').map(row=>row.id));
@@ -1017,6 +1261,9 @@ export function advanceImpact(root,run,phase,round) {
   for(const id of required)if(!allowed.has(id))required.delete(id);
   const contexts=reviewContexts(items);
   const snapshots=new Map([sourceReceipt,...completed].filter(Boolean).flatMap(receipt=>receipt.reviews.map(row=>[row.id,receipt.post])));
+  const operationalIds=[...new Set(completed.flatMap(receipt=>receipt.operational_resolution?.subjects??[]))]
+    .filter(id=>!scope.targets.includes(id)&&!changed.includes(id));
+  if(operationalIds.length){verifyOperationalCoverage(root,run,operationalIds,current);for(const id of operationalIds)required.delete(id);}
   const pending=[...required].filter(id=>!contexts.matches(reviews.get(id)??sourceReviews.get(id),current,snapshots.get(id))).sort();
   if(pending.length) {
     assertImpactProgress(progress.passes.map(pass=>readPack(root,run,pass,round)),pending,current,{items});
@@ -1037,9 +1284,11 @@ export function advanceImpact(root,run,phase,round) {
     atomic(path,progress);return {complete:false,maintenance:outside.pack,passes:progress.passes};
   }
   const evidence=Object.assign({},...completed.map(receipt=>receipt.evidence),progress.maintenance_evidence??{});
-  for(const pass of progress.passes){const p=join(workflowDir(root,run),`${pass}-${round}-collected.json`);evidence[p]=digest(readFileSync(p,'utf8'));}
+  for(const pass of progress.passes){const p=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`${pass}-${round}-collected.json`));evidence[p]=digest(readFileSync(p,'utf8'));}
   for(const collection of maintenance.collections.filter(row=>maintenanceIds.has(row.pack)))evidence[join(root,collection.path)]=collection.sha256;
   const receipt={version:2,run,phase,round,errors:[],decisions:[],reviews:[...reviews.values()],created_items:completed.flatMap(row=>row.created_items??[]),changed,restated:seeds,post:current,evidence,downstream:scope.targets,consumer_maintenance:scope.maintenance,maintenance_packs:[...maintenanceIds],ledger_updates:completed.flatMap(row=>row.ledger_updates??[])};
+  receipt.operational_carries=operationalIds;
+  receipt.operational_resolutions=completed.filter(row=>row.operational_resolution).map(row=>row.operational_resolution);
   frozen(join(workflowDir(root,run),`${phase}-${round}-closed.json`),receipt);
   progress.complete=true;atomic(path,progress);
   return {complete:true,phase,round,passes:progress.passes};
@@ -1051,12 +1300,12 @@ export function verifyCompletedImpact(root,run,phase,round) {
   requireValue(progress.run===run&&progress.phase===phase&&progress.round===round
     &&progress.complete===true&&Array.isArray(progress.passes)&&progress.passes.length>0,
     'owner impact continuation is not complete');
-  const dir=workflowDir(root,run),result=read(join(dir,`${phase}-${round}-closed.json`));
+  const dir=workflowDir(root,run),result=read(effectiveWorkflowArtifact(root,run,join(dir,`${phase}-${round}-closed.json`)));
   requireValue(result.run===run&&result.phase===phase&&result.round===round
     &&Array.isArray(result.errors)&&result.errors.length===0,'invalid completed owner collection');
   verifyEvidence(result.evidence,{root,run});
   const passes=progress.passes.map(pass=>{
-    const path=join(dir,`${pass}-${round}-collected.json`);
+    const path=effectiveWorkflowArtifact(root,run,join(dir,`${pass}-${round}-collected.json`));
     requireValue(result.evidence[path]===digest(readFileSync(path,'utf8')),
       `completed owner collection does not bind pass: ${pass}`);
     const receipt=read(path);verifyEvidence(receipt.evidence,{root,run});return receipt;
@@ -1075,6 +1324,10 @@ export function verifyCompletedImpact(root,run,phase,round) {
   const scope=impactTargets(root,run,phase,items,result.restated??base.seeds??[],result.downstream??[]);
   const required=new Set([...progress.passes.flatMap(pass=>Object.values(readPack(root,run,pass,round).assignments).flat()),
     ...scope.targets,...result.changed,...(sourceReceipt?.reviews??[]).map(row=>row.id)]);
+  const authorizedOperational=new Set(passes.flatMap(receipt=>receipt.operational_resolution?.subjects??[]));
+  requireValue((result.operational_carries??[]).every(id=>authorizedOperational.has(id)),'unbound operational carry');
+  const operationalIds=(result.operational_carries??[]).filter(id=>!scope.targets.includes(id)&&!result.changed.includes(id));
+  if(operationalIds.length){verifyOperationalCoverage(root,run,operationalIds,current);for(const id of operationalIds)required.delete(id);}
   const contexts=reviewContexts(items);
   for(const id of required)if(frontier.has(id))requireValue(contexts.matches(reviews.get(id),current,snapshots.get(id)),
     `completed owner collection lacks current review: ${id}`);
@@ -1165,7 +1418,7 @@ export function verifyCertification(root,run,{allowMissing=true}={}) {
 }
 
 export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={}) {
-  const savedPath=join(workflowDir(root,run),`certification-${phase}-${round}.json`);
+  const savedPath=effectiveWorkflowArtifact(root,run,join(workflowDir(root,run),`certification-${phase}-${round}.json`));
   if(existsSync(savedPath)) {
     const saved=read(savedPath),{sha256,...payload}=saved;requireValue(sha256===digest(payload),'completed certification payload changed');verifyEvidence(saved.evidence,{root,run});
     const frontier=gateFrontier(root,run),scoped=saved.items.filter(row=>frontier.has(row.id));
@@ -1176,7 +1429,7 @@ export function certify(root,run,phase,round,{contextHasher=currentHashesMany}={
   }
   const advanced=advanceImpact(root,run,phase,round);
   requireValue(advanced.complete,'owner impact repair continuation must finish before certification');
-  const dir=workflowDir(root,run), result=read(join(dir,`${phase}-${round}-closed.json`));
+  const dir=workflowDir(root,run), result=read(effectiveWorkflowArtifact(root,run,join(dir,`${phase}-${round}-closed.json`)));
   verifyEvidence(result.evidence,{root,run});
   const source=phase==='impact-initial'?'initial':'repeat';
   const prior=verifyCertification(root,run);
@@ -1293,6 +1546,8 @@ function main() {
     console.log(JSON.stringify(reviewContextHashes(root,ids),null,2));return;
   }
   switch(args[0]) {
+    case 'recover-operational-derived':result=recoverOperationalDerived(root,run,round,opt('--authorization'));break;
+    case 'record-operational-supplement':result=recordOperationalSupplement(root,run,phase,round,opt('--authorization'));break;
     case 'init':result=initialize(root,run);break;
     case 'prepare':result=['initial','repeat'].includes(phase)?prepareAdjudication(root,run,phase,round):prepareImpact(root,run,phase,round,{failures:opt('--failures')?read(opt('--failures')):null});break;
     case 'collect':result=collect(root,run,phase,round);break;
@@ -1304,6 +1559,7 @@ function main() {
     case 'check':result=checkWorkflow(root,run);break;
     default:throw Error('expected init|prepare|collect|close-empty-adjudication|advance-impact|certify|judge|verify-wave|check');
   }
+  if(['record-operational-supplement','recover-operational-derived'].includes(args[0])){console.log(JSON.stringify(result));return;}
   if(args[0]==='close-empty-adjudication'){
     console.log(`step5-workflow close-empty-adjudication: mechanical zero-work closure for ${phase}/${round}/${result.unit}; no mathematical review`);return;
   }

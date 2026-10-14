@@ -64,6 +64,7 @@ import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { loadStep5ClosureCertification, currentStep5Certification, stripStep5JudgeStamp } from './step5-certification-consumer.mjs';
 import { isPublishedItem } from './published-repair-policy.mjs';
 import { parseFrontmatter } from './content-policy-lib.mjs';
+import { step5JudgePolicy } from './step5-judge-policy.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
@@ -74,13 +75,15 @@ const targetedReceiptPath = value('--audit-targeted-rejudges');
 const terminalResolutionsPath = value('--terminal-resolutions');
 const auditorCertificationsArg = value('--auditor-certifications');
 const reportPath = value('--report');
+const selectiveStep5Run = value('--step5-run');
 const apply = argv.includes('--apply');
 const verify = argv.includes('--verify');
 const excludePublished = argv.includes('--exclude-published');
 const ordinaryScopes = [manifestsArg, itemsArg, targetedReceiptPath].filter(Boolean);
 if (!ledgerPath || ordinaryScopes.length !== 1
-  || (verify && (apply || targetedReceiptPath))) {
-  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --items <item-a,item-b> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--terminal-resolutions <step5.jsonl>] [--auditor-certifications <step5.json>] [--verify] [--apply] [--report <out.json>]');
+  || (verify && (apply || targetedReceiptPath))
+  || (selectiveStep5Run && (!manifestsArg || itemsArg || targetedReceiptPath))) {
+  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --items <item-a,item-b> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--terminal-resolutions <step5.jsonl>] [--auditor-certifications <step5.json>] [--step5-run <run>] [--verify] [--apply] [--report <out.json>]');
   process.exit(2);
 }
 
@@ -137,13 +140,13 @@ const ids = excludePublished ? scopedIds.filter((id) => !isPublishedItem(process
 
 const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
 let step5Certificate;
-try { step5Certificate = loadStep5ClosureCertification(process.cwd(), value('--run'), ledgerPath); }
+try { step5Certificate = loadStep5ClosureCertification(process.cwd(), value('--run') || selectiveStep5Run, ledgerPath); }
 catch (cause) { console.error(`apply-judge-stamps: ${cause.message}`); process.exit(2); }
 const auditorRows = new Map();
 {
   let loaded;
   try { loaded = loadAuditorCreatedCertifications(auditorCertificationsArg.split(',')
-    .map(entry => entry.trim()).filter(Boolean), { root: process.cwd(), run: value('--run'), steps: [5] }); }
+    .map(entry => entry.trim()).filter(Boolean), { root: process.cwd(), run: value('--run') || selectiveStep5Run, steps: [5] }); }
   catch (cause) { console.error(`apply-judge-stamps: ${cause.message}`); process.exit(2); }
   for (const row of loaded) {
     const prior = auditorRows.get(row.id);
@@ -166,10 +169,22 @@ if (!expected) {
 // coverage (CLAUDE.md §"Skeptical judge"). Stamp from the lineup's own
 // configured models and ignore every other model's rows; a configured model the
 // ledger never wrote at all is still a hard error, since then nothing here judged anything.
-const models = [...expected];
+let selectiveJudgePolicy = null;
+if (selectiveStep5Run) {
+  if (lineupName !== 'sol61') {
+    console.error('apply-judge-stamps: selective Step-5 policy requires the Sol closure lineup');
+    process.exit(2);
+  }
+  try { selectiveJudgePolicy = step5JudgePolicy(process.cwd(), selectiveStep5Run, ids, ledgerPath); }
+  catch (cause) { console.error(`apply-judge-stamps: ${cause.message}`); process.exit(2); }
+}
+// This is the selectable lane pool, never the models stamped for one item.
+const models = selectiveJudgePolicy?.models ?? [...expected];
 const ledgerLanes = new Set(rows.map((r) => r.model));
 const absent = models.filter((m) => !ledgerLanes.has(m));
-if (absent.length) {
+// Selective required lanes are checked per item below, after genuine central
+// certification skips. An unused Sol lane is not a missing item verdict.
+if (absent.length && !selectiveJudgePolicy) {
   console.error(`${ledgerPath} carries no rows for the ${lineupName} lane(s): ${absent.join(', ')}`);
   process.exit(2);
 }
@@ -199,8 +214,8 @@ const contextHash = (id) => {
 // precheck legitimately have no `verification:` mapping at all; create that
 // mapping immediately before `sources:` instead of silently skipping a licensed
 // pass. Frontmatter only; the mathematical body is never touched.
-const writeBlock = (text, block) => {
-  const inlineJudge = `judge: {model: "${models.join(' + ')}", verdict: pass, date: ${today}}`;
+const writeBlock = (text, block, stampModels) => {
+  const inlineJudge = `judge: {model: "${stampModels.join(' + ')}", verdict: pass, date: ${today}}`;
   // Flow-style YAML is common in older authored items. Keep its original
   // bytes and append the stamp inside the same mapping; a second top-level
   // `verification` key makes the renderer drop the item. The second pattern
@@ -234,6 +249,7 @@ const result = {
   at: today,
   ledger: ledgerPath,
   lanes: models,
+  selective_step5_run: selectiveStep5Run || null,
   mode: targetedReceiptPath ? 'published-audit-targeted-rejudge' : (verify ? 'verify' : 'current-context'),
   targeted_rejudge_receipt: targetedReceiptPath || null,
   stamped: [],
@@ -245,12 +261,12 @@ const result = {
 // WHEN, not WHAT, so a verify run the day after the apply must not demand a
 // rewrite.
 const judgeBlockRe = /^ {2}judge:\n(?: {4}.*\n)*/m;
-const hasCurrentPassBlock = (text) => {
+const hasCurrentPassBlock = (text, stampModels) => {
   const m = text.match(judgeBlockRe);
-  if (Boolean(m) && m[0].includes(`model: "${models.join(' + ')}"`) && m[0].includes('verdict: pass')) return true;
+  if (Boolean(m) && m[0].includes(`model: "${stampModels.join(' + ')}"`) && m[0].includes('verdict: pass')) return true;
   const inline = text.match(/^verification:\s*\{[^\n]*judge:\s*\{([^{}\n]*)\}[^\n]*\}\s*$/m);
   return Boolean(inline)
-    && inline[1].includes(`model: "${models.join(' + ')}"`)
+    && inline[1].includes(`model: "${stampModels.join(' + ')}"`)
     && inline[1].includes('verdict: pass');
 };
 const problems = [];
@@ -369,14 +385,16 @@ for (const id of ids) {
     });
   // Grouped by context hash, as the gate does, so every configured verdict comes
   // from one judging of one pair rather than being assembled across contexts.
+  const itemModels = selectiveJudgePolicy?.requiredModels(id, text) ?? models;
   const groups = new Map();
   for (const r of rows) {
-    if (r.id !== id || !models.includes(r.model) || typeof r.keep !== 'boolean') continue;
+    if (r.id !== id || !itemModels.includes(r.model) || typeof r.keep !== 'boolean'
+      || (selectiveJudgePolicy && !selectiveJudgePolicy.eligible(id, r, text))) continue;
     if (!groups.has(r.context_sha256)) groups.set(r.context_sha256, new Map());
     groups.get(r.context_sha256).set(r.model, r);   // later row wins, as before
   }
   const eligible = [...groups.entries()].filter(([hash, byModel]) =>
-    models.every((model) => byModel.has(model)
+    itemModels.every((model) => byModel.has(model)
       && isCurrent({ context_sha256: hash, item_sha256: byModel.get(model).item_sha256 })));
   if (!eligible.length) {
     if (staleTerminal
@@ -386,11 +404,11 @@ for (const id of ids) {
       continue;
     }
     const seen = [...groups.values()].flatMap((byModel) => [...byModel.keys()]);
-    result.skipped.push({ id, reason: 'no-current-verdict', models: models.filter((m) => !seen.includes(m)) });
+    result.skipped.push({ id, reason: 'no-current-verdict', models: itemModels.filter((m) => !seen.includes(m)) });
     problems.push(`${id}: no current configured-judge verdict — at closure this is a currency defect, not a normal case`);
     continue;
   }
-  const verdicts = models.map((model) => ({ model, row: eligible[eligible.length - 1][1].get(model) }));
+  const verdicts = itemModels.map((model) => ({ model, row: eligible[eligible.length - 1][1].get(model) }));
   const rejecting = verdicts.filter((v) => v.row.keep === false).map((v) => v.model);
   if (rejecting.length) {
     // A rejection adjudicated nonfatal closes the LEDGER row, never the
@@ -405,19 +423,19 @@ for (const id of ids) {
   }
 
   if (verify) {
-    const missing = !hasCurrentPassBlock(text);
+    const missing = !hasCurrentPassBlock(text, itemModels);
     if (missing) problems.push(`${id}: the ledger licenses a judge pass the frontmatter does not carry`);
-    result.stamped.push({ id, changed: missing });
+    result.stamped.push({ id, models: itemModels, changed: missing });
     continue;
   }
   const auditEvidence = target
     ? `    scope: published-audit-targeted\n    context_sha256: ${target.context_sha256}\n    item_sha256: ${target.item_sha256}\n`
     : '';
-  const block = `  judge:\n    model: "${models.join(' + ')}"\n    verdict: pass\n    date: ${today}\n${auditEvidence}`;
-  const next = writeBlock(text, block);
+  const block = `  judge:\n    model: "${itemModels.join(' + ')}"\n    verdict: pass\n    date: ${today}\n${auditEvidence}`;
+  const next = writeBlock(text, block, itemModels);
   if (next === null) { result.skipped.push({ id, reason: 'no-verification-anchor' }); continue; }
   if (next !== text && apply) writeFileSync(file, next);
-  result.stamped.push({ id, changed: next !== text });
+  result.stamped.push({ id, models: itemModels, changed: next !== text });
 }
 
 const byReason = {};

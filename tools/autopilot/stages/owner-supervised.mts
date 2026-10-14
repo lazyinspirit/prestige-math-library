@@ -1,5 +1,11 @@
 // Optional run-local owner boundary; native stages and all their gates remain intact.
-import { stagesForRun as nativeStages, workflowRevision } from './mathlib.mts';
+import { statSync } from 'node:fs';
+const nativeURL = new URL('./mathlib.mts', import.meta.url);
+const reloadVersion = new URL(import.meta.url).searchParams.get('v')
+  ?? String(statSync(nativeURL).mtimeMs);
+const { stagesForRun: nativeStages, workflowRevision } = await import(
+  nativeURL.href + '?v=' + encodeURIComponent(reloadVersion)
+);
 import { holdBeforeBattery, consumePermission } from '../../owner-gate-supervision.mjs';
 
 export { workflowRevision };
@@ -8,6 +14,8 @@ export function stagesForRun(ctx: any) {
     const stage = { ...source };
     const progress = source.onProgress;
     stage.onProgress = async (args: any) => {
+      holdBeforeBattery(args);
+      if (args.executor.state.paused) return;
       await progress?.(args);
       holdBeforeBattery(args);
     };
