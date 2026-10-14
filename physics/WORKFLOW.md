@@ -5,6 +5,12 @@ approved build checklist is [research/workflow-rebuild-plan.md](research/workflo
 this workflow. Physics and its sibling engine have separate revisions,
 worker prompts, supporting tools, content and run state.
 
+The physics gate-liveness precheck selects explicit item paths from the current
+run's A/B manifests, including definitions and other items without proof
+contracts. Missing, empty or ambiguous manifests leave the probe unavailable;
+they never trigger a whole-library precheck. The ordinary liveness failure for
+missing probe inputs still applies.
+
 ## Six-step workflow
 
 | Step | Work | Agents and handoff |
