@@ -45,7 +45,7 @@ export function batchDependencyLevelsPath(root, run) {
 }
 
 /** Recompute from current manifests and actual logical carrier dependencies. */
-export function computeRunBatchDependencyLevels(root, run) {
+export function computeRunBatchDependencyLevels(root, run, {constructionScheduling=false}={}) {
   const snapshot = loadStep3(root, run), homes = new Map();
   for (const page of snapshot.pages) {
     assert(typeof page.id === 'string' && page.id && !homes.has(page.id),
@@ -58,15 +58,15 @@ export function computeRunBatchDependencyLevels(root, run) {
   }
   const batches = [...new Set(snapshot.pages.map(page => page.batch))].sort(compare);
   const pass = { scopeSnapshot: snapshot };
-  const graph = batches.map(batch => ({ batch, requires: prerequisiteBatches(root, run, batch, pass) }));
+  const graph = batches.map(batch => ({ batch, requires: prerequisiteBatches(root, run, batch, pass,{constructionScheduling}) }));
   const rows = computeBatchDependencyLevels(graph);
   const manifests = batches.map(batch => [batch,
     readFileSync(join(root, 'research', `${run}-batch-${batch}.pages.json`), 'utf8')]);
   return { version: 1, run, input_sha256: digest({ manifests, graph }), batches: rows };
 }
 
-export function writeBatchDependencyLevels(root, run) {
-  const current = computeRunBatchDependencyLevels(root, run), path = batchDependencyLevelsPath(root, run);
+export function writeBatchDependencyLevels(root, run, options={}) {
+  const current = computeRunBatchDependencyLevels(root, run, options), path = batchDependencyLevelsPath(root, run);
   const temp = `${path}.${process.pid}.tmp`;
   writeFileSync(temp, JSON.stringify(current, null, 2) + '\n');
   renameSync(temp, path);

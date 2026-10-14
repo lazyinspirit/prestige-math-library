@@ -14,11 +14,30 @@ export const loopDir=(root,run,batch)=>join(root,'research',`${safe(run)}-scope-
 const label=(batch,phase,round)=>`scope-${phase}-${batch}-${round}`;
 const reportPath=(root,run,batch,phase,round)=>join(loopDir(root,run,batch),`${phase}-${round}.json`);
 function snapshot(ctx){return ctx.scopeSnapshot??=loadStep3(ctx.repo,ctx.run);}
-function readScopeItems(root){
+// Initial-author scheduling reads only the actual graph fields while other
+// writers may have invalid unrelated metadata. Parse each entire selected YAML
+// field with the renderer parser: never turn malformed deps/aliases into [].
+function schedulingList(fm,key,subject){
+  const lines=fm.split(/\r?\n/), selected=[];
+  const header=new RegExp(`^(?:${key}|"${key}"|'${key}')[ \\t]*:`);
+  for(let i=0;i<lines.length;i++)if(header.test(lines[i])){
+    selected.push(lines[i]);
+    while(i+1<lines.length){
+      const next=lines[i+1];
+      if(/^[^\s#-][^\n]*:/.test(next))break;
+      selected.push(next);i++;
+    }
+  }
+  if(!selected.length)return [];
+  const value=yaml().parse(selected.join('\n'))?.[key];
+  assert(Array.isArray(value)&&value.every(id=>typeof id==='string'&&id.trim()&& !/\s/.test(id)),`${subject}: ${key} must be an ID array`);
+  return value;
+}
+function readScopeItems(root,{constructionScheduling=false}={}){
   return readdirSync(join(root,'items')).filter(name=>name.endsWith('.md')).map(name=>{
     const text=readFileSync(join(root,'items',name),'utf8'), fm=text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1]??'';
     const deps=[...new Set(['deps','justified_by','forward_refs'].flatMap(key=>frontmatterList(fm,key)))];
-    return {id:name.slice(0,-3),deps,references:[...text.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)].map(m=>m[1]),aliases:frontmatterList(fm,'aliases')};
+    return {id:name.slice(0,-3),deps,references:[...text.matchAll(/\[\[([^\]|#]+)(?:[^\]]*)\]\]/g)].map(m=>m[1]),aliases:constructionScheduling?schedulingList(fm,'aliases',name):frontmatterList(fm,'aliases')};
   });
 }
 function publicInterface(text){
@@ -45,7 +64,7 @@ export function loopPattern(ctx,batches){
   return labels.length?new RegExp(`^(?:${labels.join('|')})\\.result\\.json$`):/^(?!)$/;
 }
 /** Actual item and page prerequisites; never infer order from batch numbers. */
-export function prerequisiteBatches(root, run, batch, pass=null) {
+export function prerequisiteBatches(root, run, batch, pass=null, {constructionScheduling=false}={}) {
   const snapshot = pass ? (pass.scopeSnapshot??=loadStep3(root,run)) : loadStep3(root,run), home = new Map(snapshot.pages.map(page => [page.id, page.batch]));
   const out = new Set(), deps = new Set();
   for (const page of snapshot.pages.filter(page => page.batch === String(batch))) {
@@ -53,8 +72,12 @@ export function prerequisiteBatches(root, run, batch, pass=null) {
     for (const item of page.items ?? []) {
       const path=join(root,'items',`${item.id}.md`);
       const text=existsSync(path)?readFileSync(path,'utf8'):'';
-      const fm=yaml().parse(text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1]??'')??{};
-      for (const id of [...(item.deps??[]),...(fm.deps??[])]) deps.add(id);
+      const raw=text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1];
+      if(constructionScheduling&&text)assert(raw!==undefined,`${item.id}: incomplete source frontmatter during scheduling`);
+      const sourceDeps=constructionScheduling?schedulingList(raw??'','deps',item.id):(yaml().parse(raw??'')??{}).deps??[];
+      assert(Array.isArray(item.deps??[])&&(item.deps??[]).every(id=>typeof id==='string'&&id.trim()),`${item.id}: manifest deps must be an ID array`);
+      assert(Array.isArray(sourceDeps)&&sourceDeps.every(id=>typeof id==='string'&&id.trim()),`${item.id}: source deps must be an ID array`);
+      for (const id of [...(item.deps??[]),...sourceDeps]) deps.add(id);
     }
   }
   // Most construction inventories are empty, and canonical dependencies already
@@ -63,7 +86,9 @@ export function prerequisiteBatches(root, run, batch, pass=null) {
     && !existsSync(join(root, 'items', `${id}.md`))));
   const aliases = new Map();
   if (unresolved.size) {
-    const library = pass ? (pass.scopeLibrary??=readScopeItems(root)) : readScopeItems(root);
+    const library = pass ? (constructionScheduling
+      ? (pass.scopeSchedulingLibrary??=readScopeItems(root,{constructionScheduling:true}))
+      : (pass.scopeLibrary??=readScopeItems(root))) : readScopeItems(root,{constructionScheduling});
     const canonical = new Set(library.map(item => item.id));
     for (const item of library) for (const alias of item.aliases ?? [])
       if (unresolved.has(alias) && !canonical.has(alias)) {

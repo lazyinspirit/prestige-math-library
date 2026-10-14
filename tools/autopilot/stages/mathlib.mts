@@ -1092,7 +1092,7 @@ export const stages = [
       ? MODEL_PROFILE_NAMES.lunaMax
       : undefined,
     units: (ctx: any) => batches(ctx),
-    unitPrerequisites: (ctx: any, unit: string) => prerequisiteBatches(ctx.repo, ctx.run, unit, ctx),
+    unitPrerequisites: (ctx: any, unit: string) => prerequisiteBatches(ctx.repo, ctx.run, unit, ctx, {constructionScheduling:true}),
     unitPrerequisitePolicy: 'priority',
     artifacts: (ctx: any, unit: string) => [...scaffoldArtifacts(ctx, unit), ...authorArtifacts(ctx, unit)],
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
@@ -1105,7 +1105,7 @@ export const stages = [
         brief:'briefs/beta-scaffold.md',task:[`research/${ctx.run}-beta-${u}.task.md`,`research/${ctx.run}-beta-batch.task.md`],timeout:14400}));
       // Fresh priority metadata before every construction dispatch. Cross-batch
       // suppliers may still be in flight; acceptance requires their real bodies.
-      const levels = writeBatchDependencyLevels(ctx.repo, ctx.run);
+      const levels = writeBatchDependencyLevels(ctx.repo, ctx.run, {constructionScheduling:true});
       const levelFor = (u: string) => levels.batches.find((row: any) => row.batch === String(u))?.dependency_level ?? Infinity;
       return [...pending].sort((a, b) => levelFor(a) - levelFor(b) || Number(a) - Number(b)).map((u: any) => {
         const row = levels.batches.find((row: any) => row.batch === String(u));

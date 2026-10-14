@@ -73,6 +73,16 @@ Planning and the existing drift-apply join write `research/RUN-batch-dependency-
 
 Each dispatch pass shares a fresh manifest/alias snapshot across its dependency graph. Priority authors with disjoint outputs receive one fan-out graph check rather than one full graph rebuild per slot. Snapshots are confined to the current pass; subsequent dispatches read current inputs again.
 
+Initial priority-author scheduling parses complete actual source `deps` fields
+and any needed alias fields with the renderer's YAML parser, together with all
+current manifests. Unrelated metadata being written by another author does not
+block slot refill. Malformed or duplicate dependency/alias fields, incomplete
+existing source frontmatter, invalid manifests, ambiguous ownership and cycles
+still fail closed; no batch or actual dependency is dropped. This narrow graph
+projection records scheduling metadata only. Post-drain level recomputation,
+ordinary level commands, readiness, reviews and every gate retain strict whole
+frontmatter parsing and check the actual current carriers.
+
 Item inventories and logical dependencies are determined in scaffold manifests before item carriers are written; authors compute labels there and construct carriers in ascending item level. Item `dependency_level` is recorded and independently checked in Step 1: zero
 without in-run logical suppliers, otherwise one plus the maximum supplier level.
 External suppliers remain context. No rebatching or additional review stage is introduced. Logical dependencies must agree between authored bodies and
